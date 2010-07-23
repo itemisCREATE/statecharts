@@ -1,0 +1,32 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Damos Scripting
+Bundle-Vendor: Damos Project
+Bundle-Version: 0.2.0.qualifier
+Bundle-SymbolicName: org.eclipselabs.damos.scripting;singleton:=true
+Eclipse-RegisterBuddy: org.eclipse.xtext.log4j
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.xtext,
+ com.ibm.icu;resolution:=optional,
+ org.apache.commons.logging;resolution:=optional,
+ org.eclipse.emf.codegen.ecore;resolution:=optional,
+ org.eclipse.emf.mwe.utils;resolution:=optional,
+ org.eclipse.emf.mwe.core;resolution:=optional,
+ org.eclipse.xtext.generator;resolution:=optional,
+ org.eclipse.xtext.xtend;resolution:=optional,
+ org.eclipse.xtext.util,
+ org.eclipse.emf.ecore;visibility:=reexport,
+ org.eclipse.emf.common,
+ org.antlr.runtime,
+ org.eclipselabs.damos.typesystem
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: org.eclipselabs.damos.scripting,
+ org.eclipselabs.damos.scripting.mscript,
+ org.eclipselabs.damos.scripting.mscript.impl,
+ org.eclipselabs.damos.scripting.mscript.util,
+ org.eclipselabs.damos.scripting.parseTreeConstruction,
+ org.eclipselabs.damos.scripting.parser.antlr,
+ org.eclipselabs.damos.scripting.services,
+ org.eclipselabs.damos.scripting.validation,
+ org.eclipselabs.damos.scripting.parser.antlr.internal
+Import-Package: org.apache.log4j

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipselabs.damos.scripting/src-gen"
+    editDirectory="/org.eclipselabs.damos.scripting.edit/src" editorDirectory="/org.eclipselabs.damos.scripting.editor/src"
+    modelPluginID="org.eclipselabs.damos.scripting" forceOverwrite="true" modelName="Mscript"
+    updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipselabs.damos.scripting.edit"
+    editorPluginID="org.eclipselabs.damos.scripting.editor">
+  <genPackages prefix="Mscript" basePackage="org.eclipselabs.damos.scripting" disposableProviderFactory="true"
+      ecorePackage="Mscript.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Mscript.ecore#//RelationalOperator">
+      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//RelationalOperator/LessThan"/>
+      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//RelationalOperator/LessThanOrEqualTo"/>
+      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//RelationalOperator/GreaterThan"/>
+      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//RelationalOperator/GreaterThanOrEqualTo"/>
+      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//RelationalOperator/EqualTo"/>
+      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//RelationalOperator/NotEqualTo"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Mscript.ecore#//AddSubtractOperator">
+      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//AddSubtractOperator/Add"/>
+      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//AddSubtractOperator/Subtract"/>
+      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//AddSubtractOperator/ElementWiseAdd"/>
+      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//AddSubtractOperator/ElementWiseSubtract"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Mscript.ecore#//MultiplyDivideOperator">
+      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//MultiplyDivideOperator/Multiply"/>
+      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//MultiplyDivideOperator/Divide"/>
+      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//MultiplyDivideOperator/ElementWiseMultiply"/>
+      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//MultiplyDivideOperator/ElementWiseDivide"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Mscript.ecore#//PowerOperator">
+      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//PowerOperator/Power"/>
+      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//PowerOperator/ElementWisePower"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Mscript.ecore#//BooleanKind">
+      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//BooleanKind/False"/>
+      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//BooleanKind/True"/>
+    </genEnums>
+    <genClasses ecoreClass="Mscript.ecore#//Model"/>
+    <genClasses ecoreClass="Mscript.ecore#//Mscript">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//Mscript/packages"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//PackageAS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//PackageAS/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//PackageAS/packagedElements"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//PackageableElementAS"/>
+    <genClasses ecoreClass="Mscript.ecore#//EnumerationAS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//EnumerationAS/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//EnumerationAS/literals"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//EnumerationLiteralAS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//EnumerationLiteralAS/name"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//Expression"/>
+    <genClasses ecoreClass="Mscript.ecore#//ConditionalExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ConditionalExpression/cases"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ConditionalExpression/elseExpression"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//ConditionalExpressionCase">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ConditionalExpressionCase/conditionExpression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ConditionalExpressionCase/thenExpression"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//Literal"/>
+    <genClasses ecoreClass="Mscript.ecore#//NumericalLiteral">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//NumericalLiteral/unit"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//RealLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//RealLiteral/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//IntegerLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//IntegerLiteral/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//BooleanLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//BooleanLiteral/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//StringLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//StringLiteral/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//FunctionCall">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//FunctionCall/argumentList"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//NamedFunctionCall">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//NamedFunctionCall/name"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//Name">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//Name/global"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//Name/identifiers"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//KeywordFunctionCall">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//KeywordFunctionCall/name"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//FunctionArgumentList">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//FunctionArgumentList/arguments"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//FunctionArgumentList/namedArguments"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//NamedArgument">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//NamedArgument/identifier"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//NamedArgument/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//ComponentReference">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//ComponentReference/global"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ComponentReference/segments"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//ComponentReferenceSegment">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//ComponentReferenceSegment/identifier"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ComponentReferenceSegment/subscriptList"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//ArraySubscriptList">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ArraySubscriptList/subscripts"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//Subscript"/>
+    <genClasses ecoreClass="Mscript.ecore#//ColonSubscript"/>
+    <genClasses ecoreClass="Mscript.ecore#//ExpressionSubscript">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ExpressionSubscript/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//ArrayConcatenationOperator">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ArrayConcatenationOperator/expressionLists"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//ArrayConstructionOperator">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ArrayConstructionOperator/argumentList"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//ExpressionList">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ExpressionList/expressions"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//ParenthesizedExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ParenthesizedExpression/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//BeginExpression"/>
+    <genClasses ecoreClass="Mscript.ecore#//EndExpression"/>
+    <genClasses ecoreClass="Mscript.ecore#//UnitExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//UnitExpression/numerator"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//UnitExpression/denominator"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//UnitExpressionNumerator">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//UnitExpressionNumerator/one"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//UnitExpressionNumerator/factors"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//UnitExpressionDenominator">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//UnitExpressionDenominator/factors"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//UnitExpressionFactor">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//UnitExpressionFactor/operand"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//UnitExpressionFactor/exponent"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//UnitExpressionExponent">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//UnitExpressionExponent/negative"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//UnitExpressionExponent/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//RangeExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//RangeExpression/expressions"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//LogicalOrExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//LogicalOrExpression/operands"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//LogicalAndExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//LogicalAndExpression/operands"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//LogicalNotExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//LogicalNotExpression/operand"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//RelationalExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//RelationalExpression/operands"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//RelationalExpression/operators"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//AddSubtractExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//AddSubtractExpression/operands"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//AddSubtractExpression/operators"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//MultiplyDivideExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//MultiplyDivideExpression/operands"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//MultiplyDivideExpression/operators"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//PowerExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//PowerExpression/operands"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//PowerExpression/operator"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//PowerExpression/exponent"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//UnaryMinusExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//UnaryMinusExpression/operand"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

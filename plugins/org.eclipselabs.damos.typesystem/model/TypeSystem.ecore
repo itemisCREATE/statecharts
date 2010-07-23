@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="typesystem"
+    nsURI="http://www.eclipselabs.org/damos/TypeSystem/1.0.0" nsPrefix="typesystem">
+  <eClassifiers xsi:type="ecore:EClass" name="Type" abstract="true" eSuperTypes="#//PackageableElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PackageableElement" abstract="true"
+      eSuperTypes="#//NamedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="qualifiedName" ordered="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" changeable="false"
+        volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="namespace" ordered="false"
+        eType="#//Namespace" changeable="false" volatile="true" transient="true" derived="true"
+        eOpposite="#//Namespace/ownedMembers">
+      <eAnnotations source="union"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Namespace" abstract="true" eSuperTypes="#//NamedElement">
+    <eOperations name="getMember" ordered="false" lowerBound="1" eType="#//NamedElement">
+      <eParameters name="name" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="members" ordered="false"
+        upperBound="-1" eType="#//NamedElement" changeable="false" volatile="true"
+        transient="true" derived="true">
+      <eAnnotations source="union"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedMembers" ordered="false"
+        upperBound="-1" eType="#//NamedElement" changeable="false" volatile="true"
+        transient="true" derived="true" eOpposite="#//NamedElement/namespace">
+      <eAnnotations source="subsets" references="#//Namespace/members"/>
+      <eAnnotations source="union"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ArrayType" eSuperTypes="#//DataType">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elementType" ordered="false"
+        lowerBound="1" eType="#//DataType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dimensions" ordered="false"
+        upperBound="-1" eType="#//ArrayDimension" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dimensionality" ordered="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        changeable="false" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rowSize" ordered="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        changeable="false" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="columnSize" ordered="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        changeable="false" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dimensional" ordered="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        changeable="false" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="multidimensional" ordered="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        changeable="false" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="vector" ordered="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        changeable="false" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="matrix" ordered="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        changeable="false" volatile="true" transient="true" derived="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataType" abstract="true" eSuperTypes="#//Type">
+    <eOperations name="evaluate" ordered="false" lowerBound="1" eType="#//DataType">
+      <eParameters name="operator" ordered="false" lowerBound="1" eType="#//OperatorKind"/>
+      <eParameters name="other" ordered="false" eType="#//DataType"/>
+    </eOperations>
+    <eOperations name="isAssignableFrom" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="other" ordered="false" lowerBound="1" eType="#//DataType"/>
+    </eOperations>
+    <eOperations name="convertTo" ordered="false" lowerBound="1" eType="#//DataType">
+      <eParameters name="other" ordered="false" lowerBound="1" eType="#//DataType"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="OperatorKind"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ArrayDimension">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fromIndex" ordered="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="toIndex" ordered="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="size" ordered="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" changeable="false"
+        volatile="true" transient="true" derived="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PrimitiveType" abstract="true" eSuperTypes="#//DataType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RealType" eSuperTypes="#//NumericalType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NumericalType" abstract="true" eSuperTypes="#//PrimitiveType">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="unit" ordered="false" eType="#//Unit"
+        unsettable="true" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Unit">
+    <eOperations name="getFactor" ordered="false" eType="#//UnitFactor">
+      <eParameters name="symbol" ordered="false" lowerBound="1" eType="#//UnitSymbol"/>
+    </eOperations>
+    <eOperations name="multiply" ordered="false" lowerBound="1" eType="#//Unit">
+      <eParameters name="other" ordered="false" lowerBound="1" eType="#//Unit"/>
+    </eOperations>
+    <eOperations name="divide" ordered="false" lowerBound="1" eType="#//Unit">
+      <eParameters name="other" ordered="false" lowerBound="1" eType="#//Unit"/>
+    </eOperations>
+    <eOperations name="power" ordered="false" lowerBound="1" eType="#//Unit">
+      <eParameters name="exponent" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="factors" ordered="false"
+        upperBound="-1" eType="#//UnitFactor" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="scale" ordered="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="0"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UnitFactor">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="symbol" ordered="false"
+        lowerBound="1" eType="#//UnitSymbol"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="exponent" ordered="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="UnitSymbol">
+    <eLiterals name="Meter" literal="m"/>
+    <eLiterals name="Kilogram" value="1" literal="kg"/>
+    <eLiterals name="Second" value="2" literal="s"/>
+    <eLiterals name="Ampere" value="3" literal="A"/>
+    <eLiterals name="Kelvin" value="4" literal="K"/>
+    <eLiterals name="Mole" value="5" literal="mol"/>
+    <eLiterals name="Candela" value="6" literal="cd"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IntegerType" eSuperTypes="#//NumericalType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BooleanType" eSuperTypes="#//PrimitiveType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StringType" eSuperTypes="#//PrimitiveType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Enumeration" eSuperTypes="#//Namespace #//DataType">
+    <eOperations name="getLiteral" ordered="false" eType="#//EnumerationLiteral">
+      <eParameters name="name" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="literals" upperBound="-1"
+        eType="#//EnumerationLiteral" containment="true" eOpposite="#//EnumerationLiteral/enumeration">
+      <eAnnotations source="subsets" references="#//Namespace/ownedMembers"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EnumerationLiteral" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="enumeration" ordered="false"
+        lowerBound="1" eType="#//Enumeration" eOpposite="#//Enumeration/literals">
+      <eAnnotations source="subsets" references="#//NamedElement/namespace"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InvalidDataType" eSuperTypes="#//DataType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TypeSystem">
+    <eOperations name="getElement" ordered="false" lowerBound="1" eType="#//NamedElement">
+      <eParameters name="qualifiedName" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="topLevelElements" ordered="false"
+        upperBound="-1" eType="#//NamedElement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Package" eSuperTypes="#//Namespace #//PackageableElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="packagedElements" ordered="false"
+        upperBound="-1" eType="#//PackageableElement" containment="true">
+      <eAnnotations source="subsets" references="#//Namespace/ownedMembers"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+</ecore:EPackage>

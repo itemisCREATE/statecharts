@@ -1,0 +1,243 @@
+grammar org.eclipselabs.damos.scripting.Mscript
+hidden(WS, ML_COMMENT, SL_COMMENT)
+
+generate mscript "http://www.eclipselabs.org/damos/Mscript/1.0.0"
+
+import 'http://www.eclipse.org/emf/2002/Ecore' as ecore
+
+// TODO: Suffix rules and enums with 'AS'
+ 
+Model :
+	Expression;
+
+Mscript :
+	(packages+=PackageAS)*;
+	
+PackageAS :
+	'package' name=Name '{'
+		(packagedElements+=PackageableElementAS)*
+	'}';
+
+PackageableElementAS :
+	PackageAS | EnumerationAS;
+	
+EnumerationAS :
+	'enumeration' name=IDENT '{'
+		(literals+=EnumerationLiteralAS (',' literals+=EnumerationLiteralAS)*)?
+	'}';
+	
+EnumerationLiteralAS :
+	name=IDENT;
+	
+/*
+ * Expressions
+ */
+	
+Expression :
+	ConditionalExpression | RangeExpression;
+
+ConditionalExpression :
+	'if' cases+=ConditionalExpressionCase ('elseif' cases+=ConditionalExpressionCase)* 'else' elseExpression=Expression;
+	
+ConditionalExpressionCase:
+	conditionExpression=Expression 'then' thenExpression=Expression;
+
+RangeExpression returns Expression :
+	LogicalOrExpression ({RangeExpression.expressions+=current} ':' expressions+=LogicalOrExpression (':' expressions+=LogicalOrExpression)?)?;
+
+LogicalOrExpression returns Expression :
+	LogicalAndExpression ({LogicalOrExpression.operands+=current} ('or' operands+=LogicalAndExpression)+)?;
+	
+LogicalAndExpression returns Expression :
+	LogicalNotExpression ({LogicalAndExpression.operands+=current} ('and' operands+=LogicalNotExpression)+)?;
+
+LogicalNotExpression returns Expression :
+	RelationalExpression | {LogicalNotExpression} 'not' operand=RelationalExpression;
+
+RelationalExpression returns Expression :
+	AddSubtractExpression ({RelationalExpression.operands+=current} (operators+=RelationalOperator operands+=AddSubtractExpression)+)?;
+
+enum RelationalOperator :
+	LessThan='<' |
+	LessThanOrEqualTo='<=' |
+	GreaterThan='>' |
+	GreaterThanOrEqualTo='>=' |
+	EqualTo='==' |
+	NotEqualTo='<>';
+
+AddSubtractExpression returns Expression :
+	MultiplyDivideExpression ({AddSubtractExpression.operands+=current} (operators+=AddSubtractOperator operands+=MultiplyDivideExpression)+)?;
+
+enum AddSubtractOperator :
+	Add='+' |
+	Subtract='-' |
+	ElementWiseAdd='.+' |
+	ElementWiseSubtract='.-';
+
+MultiplyDivideExpression returns Expression :
+	PowerExpression ({MultiplyDivideExpression.operands+=current} (operators+=MultiplyDivideOperator operands+=PowerExpression)+)?;
+
+enum MultiplyDivideOperator :
+	Multiply='*' |
+	Divide='/' |
+	ElementWiseMultiply='.*' |
+	ElementWiseDivide='./';
+	
+PowerExpression returns Expression :
+	UnaryMinusExpression ({PowerExpression.operands+=current} operator=PowerOperator exponent=UnaryMinusExpression)?;
+
+enum PowerOperator :
+	Power='^' |
+	ElementWisePower='.^';
+	
+UnaryMinusExpression returns Expression :
+	PrimaryExpression | {UnaryMinusExpression} '-' operand=PrimaryExpression;
+
+PrimaryExpression returns Expression :
+	Literal |
+	FunctionCall |
+	ComponentReference |
+	ParenthesizedExpression |
+	ArrayConcatenationOperator |
+	ArrayConstructionOperator |
+	BeginExpression |
+	EndExpression;
+
+Literal :
+	NumericalLiteral | BooleanLiteral | StringLiteral;
+	
+NumericalLiteral :
+	RealLiteral | IntegerLiteral;
+	
+RealLiteral :
+	value=REAL ('(' unit=UnitExpression ')')?;
+	
+IntegerLiteral :
+	value=INTEGER ('(' unit=UnitExpression ')')?;
+
+BooleanLiteral :
+	value=BooleanKind;
+
+enum BooleanKind :
+	False='false' | True='true';
+	
+StringLiteral :
+	value=STRING;
+	
+FunctionCall :
+	NamedFunctionCall | KeywordFunctionCall;
+
+NamedFunctionCall :
+	name=Name '(' (argumentList=FunctionArgumentList)? ')';
+
+Name :
+	(global?='::')? identifiers+=IDENT ('::' identifiers+=IDENT)*;
+
+KeywordFunctionCall :
+	name=('der'|'initial') '(' (argumentList=FunctionArgumentList)? ')';
+
+FunctionArgumentList :
+	arguments+=Expression ((',' arguments+=Expression)* (',' namedArguments+=NamedArgument)* /*| 'for' forIndexList=ForIndexList*/) |
+	namedArguments+=NamedArgument (',' namedArguments+=NamedArgument)*;
+
+NamedArgument :
+	identifier=IDENT '=' expression=Expression;
+
+ComponentReference :
+	(global?='.')? segments+=ComponentReferenceSegment ('.' segments+=ComponentReferenceSegment)*;
+
+ComponentReferenceSegment :
+	identifier=IDENT (subscriptList=ArraySubscriptList)?;
+
+ArraySubscriptList :
+	'[' subscripts+=Subscript (',' subscripts+=Subscript)* ']';
+
+Subscript :
+	ColonSubscript | ExpressionSubscript;
+
+ColonSubscript :
+	{ColonSubscript} ':';
+
+ExpressionSubscript :
+	expression=Expression;
+	
+ArrayConcatenationOperator :
+	'[' expressionLists+=ExpressionList (';' expressionLists+=ExpressionList)* ']';
+	
+ArrayConstructionOperator :
+	'{' argumentList=FunctionArgumentList '}';
+
+ExpressionList :
+	expressions+=Expression (',' expressions+=Expression)*;
+
+ParenthesizedExpression :
+//	'(' expressionList=OutputExpressionList ')';
+	'(' expression=Expression ')';
+
+//OutputExpressionList :
+//	expressions+=FirstOutputExpression (expressions+=RightOutputExpression)*;
+//
+//FirstOutputExpression returns Expression :
+//	{EmptyExpression} | Expression;
+//
+//RightOutputExpression returns Expression :
+//	',' {EmptyExpression} | ',' Expression;
+
+BeginExpression :
+	{BeginExpression} 'begin';
+
+EndExpression :
+	{EndExpression} 'end';
+	
+//ForIndexList :
+//	indices+=ForIndex (',' indices+=ForIndex)*;
+//	
+//ForIndex :
+//	identifier=IDENT ('in' inExpression=Expression)?;
+
+/*
+ * Unit expressions
+ */
+	
+UnitExpression :
+	numerator=UnitExpressionNumerator ('/' denominator=UnitExpressionDenominator)?;
+
+UnitExpressionNumerator :
+	one=INTEGER /* must be '1' */ | factors+=UnitExpressionFactor ('*' factors+=UnitExpressionFactor)*;
+
+UnitExpressionDenominator :
+	factors+=UnitExpressionFactor | '(' factors+=UnitExpressionFactor ('*' factors+=UnitExpressionFactor)* ')';
+
+UnitExpressionFactor :
+	operand=IDENT ('^' exponent=UnitExpressionExponent)?;
+
+UnitExpressionExponent :
+	(negative?='-')? value=INTEGER;
+
+/*
+ * Terminals
+ */
+ 
+terminal IDENT :
+	('_' | 'a'..'z' | 'A'..'Z') ('0'..'9' | '_' | 'a'..'z' | 'A'..'Z')*;
+
+terminal STRING : 
+	'"' (!('\\' | '"') | '\\' ("'" | '"' | '?' | '\\' | 'a' | 'b' | 'f' | 'n' | 'r' | 't' | 'v'))* '"';
+
+terminal REAL returns ecore::EDouble :
+	('0'..'9')+ '.' ('0'..'9')* (('e' | 'E') ('+'|'-')? ('0'..'9')+)?;
+
+terminal INTEGER returns ecore::ELong :
+	('0'..'9')+;
+
+terminal ML_COMMENT :
+	'/*' -> '*/';
+
+terminal SL_COMMENT :
+	'//' !('\n'|'\r')* ('\r'? '\n')?;
+
+terminal WS :
+	(' '|'\t'|'\r'|'\n')+;
+
+terminal ANY_OTHER :
+	.;
