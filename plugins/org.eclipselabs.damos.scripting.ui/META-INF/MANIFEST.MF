@@ -1,0 +1,20 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Damos Scripting UI
+Bundle-Vendor: Damos Project
+Bundle-Version: 0.2.0.qualifier
+Bundle-SymbolicName: org.eclipselabs.damos.scripting.ui;singleton:=true
+Eclipse-RegisterBuddy: org.eclipse.xtext.log4j
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipselabs.damos.scripting;visibility:=reexport,
+ org.eclipse.xtext.ui,
+ org.eclipse.ui.editors;bundle-version="3.5.0",
+ org.eclipse.ui.ide;bundle-version="3.5.0",
+ org.eclipse.ui,
+ org.antlr.runtime,
+ org.eclipse.xtext.ui.shared
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: org.eclipselabs.damos.scripting.ui.contentassist.antlr,
+ org.eclipselabs.damos.scripting.ui.contentassist
+Bundle-Activator: org.eclipselabs.damos.scripting.ui.internal.MscriptActivator
+Import-Package: org.apache.log4j
