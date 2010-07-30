@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: org.yakindu.sct.model.statechart
+Bundle-SymbolicName: org.yakindu.sct.model.statechart
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: YAKINDU
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
