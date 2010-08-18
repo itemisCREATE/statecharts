@@ -31,35 +31,35 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	public class MscriptElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Mscript");
 		private final Assignment cPackagesAssignment = (Assignment)rule.eContents().get(1);
-		private final RuleCall cPackagesPackageASParserRuleCall_0 = (RuleCall)cPackagesAssignment.eContents().get(0);
+		private final RuleCall cPackagesPackageDefinitionParserRuleCall_0 = (RuleCall)cPackagesAssignment.eContents().get(0);
 		
 		//Mscript:
-		//	packages+=PackageAS*;
+		//	packages+=PackageDefinition*;
 		public ParserRule getRule() { return rule; }
 
-		//packages+=PackageAS*
+		//packages+=PackageDefinition*
 		public Assignment getPackagesAssignment() { return cPackagesAssignment; }
 
-		//PackageAS
-		public RuleCall getPackagesPackageASParserRuleCall_0() { return cPackagesPackageASParserRuleCall_0; }
+		//PackageDefinition
+		public RuleCall getPackagesPackageDefinitionParserRuleCall_0() { return cPackagesPackageDefinitionParserRuleCall_0; }
 	}
 
-	public class PackageASElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "PackageAS");
+	public class PackageDefinitionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "PackageDefinition");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cPackageKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameNameParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cPackagedElementsAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cPackagedElementsPackageableElementASParserRuleCall_3_0 = (RuleCall)cPackagedElementsAssignment_3.eContents().get(0);
+		private final Assignment cElementsAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cElementsPackageDefinitionElementParserRuleCall_3_0 = (RuleCall)cElementsAssignment_3.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
-		//PackageAS:
-		//	"package" name=Name "{" packagedElements+=PackageableElementAS* "}";
+		//PackageDefinition:
+		//	"package" name=Name "{" elements+=PackageDefinitionElement* "}";
 		public ParserRule getRule() { return rule; }
 
-		//"package" name=Name "{" packagedElements+=PackageableElementAS* "}"
+		//"package" name=Name "{" elements+=PackageDefinitionElement* "}"
 		public Group getGroup() { return cGroup; }
 
 		//"package"
@@ -74,38 +74,38 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
 
-		//packagedElements+=PackageableElementAS*
-		public Assignment getPackagedElementsAssignment_3() { return cPackagedElementsAssignment_3; }
+		//elements+=PackageDefinitionElement*
+		public Assignment getElementsAssignment_3() { return cElementsAssignment_3; }
 
-		//PackageableElementAS
-		public RuleCall getPackagedElementsPackageableElementASParserRuleCall_3_0() { return cPackagedElementsPackageableElementASParserRuleCall_3_0; }
+		//PackageDefinitionElement
+		public RuleCall getElementsPackageDefinitionElementParserRuleCall_3_0() { return cElementsPackageDefinitionElementParserRuleCall_3_0; }
 
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
 	}
 
-	public class PackageableElementASElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "PackageableElementAS");
+	public class PackageDefinitionElementElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "PackageDefinitionElement");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cPackageASParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cEnumerationASParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cPackageDefinitionParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cEnumerationDefinitionParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		//PackageableElementAS:
-		//	PackageAS | EnumerationAS;
+		//PackageDefinitionElement:
+		//	PackageDefinition | EnumerationDefinition;
 		public ParserRule getRule() { return rule; }
 
-		//PackageAS | EnumerationAS
+		//PackageDefinition | EnumerationDefinition
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//PackageAS
-		public RuleCall getPackageASParserRuleCall_0() { return cPackageASParserRuleCall_0; }
+		//PackageDefinition
+		public RuleCall getPackageDefinitionParserRuleCall_0() { return cPackageDefinitionParserRuleCall_0; }
 
-		//EnumerationAS
-		public RuleCall getEnumerationASParserRuleCall_1() { return cEnumerationASParserRuleCall_1; }
+		//EnumerationDefinition
+		public RuleCall getEnumerationDefinitionParserRuleCall_1() { return cEnumerationDefinitionParserRuleCall_1; }
 	}
 
-	public class EnumerationASElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EnumerationAS");
+	public class EnumerationDefinitionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EnumerationDefinition");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cEnumerationKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -113,18 +113,19 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
 		private final Assignment cLiteralsAssignment_3_0 = (Assignment)cGroup_3.eContents().get(0);
-		private final RuleCall cLiteralsEnumerationLiteralASParserRuleCall_3_0_0 = (RuleCall)cLiteralsAssignment_3_0.eContents().get(0);
+		private final RuleCall cLiteralsEnumerationLiteralDefinitionParserRuleCall_3_0_0 = (RuleCall)cLiteralsAssignment_3_0.eContents().get(0);
 		private final Group cGroup_3_1 = (Group)cGroup_3.eContents().get(1);
 		private final Keyword cCommaKeyword_3_1_0 = (Keyword)cGroup_3_1.eContents().get(0);
 		private final Assignment cLiteralsAssignment_3_1_1 = (Assignment)cGroup_3_1.eContents().get(1);
-		private final RuleCall cLiteralsEnumerationLiteralASParserRuleCall_3_1_1_0 = (RuleCall)cLiteralsAssignment_3_1_1.eContents().get(0);
+		private final RuleCall cLiteralsEnumerationLiteralDefinitionParserRuleCall_3_1_1_0 = (RuleCall)cLiteralsAssignment_3_1_1.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
-		//EnumerationAS:
-		//	"enumeration" name=IDENT "{" (literals+=EnumerationLiteralAS ("," literals+=EnumerationLiteralAS)*)? "}";
+		//EnumerationDefinition:
+		//	"enumeration" name=IDENT "{" (literals+=EnumerationLiteralDefinition ("," literals+=EnumerationLiteralDefinition)*)?
+		//	"}";
 		public ParserRule getRule() { return rule; }
 
-		//"enumeration" name=IDENT "{" (literals+=EnumerationLiteralAS ("," literals+=EnumerationLiteralAS)*)? "}"
+		//"enumeration" name=IDENT "{" (literals+=EnumerationLiteralDefinition ("," literals+=EnumerationLiteralDefinition)*)? "}"
 		public Group getGroup() { return cGroup; }
 
 		//"enumeration"
@@ -139,37 +140,37 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
 
-		//(literals+=EnumerationLiteralAS ("," literals+=EnumerationLiteralAS)*)?
+		//(literals+=EnumerationLiteralDefinition ("," literals+=EnumerationLiteralDefinition)*)?
 		public Group getGroup_3() { return cGroup_3; }
 
-		//literals+=EnumerationLiteralAS
+		//literals+=EnumerationLiteralDefinition
 		public Assignment getLiteralsAssignment_3_0() { return cLiteralsAssignment_3_0; }
 
-		//EnumerationLiteralAS
-		public RuleCall getLiteralsEnumerationLiteralASParserRuleCall_3_0_0() { return cLiteralsEnumerationLiteralASParserRuleCall_3_0_0; }
+		//EnumerationLiteralDefinition
+		public RuleCall getLiteralsEnumerationLiteralDefinitionParserRuleCall_3_0_0() { return cLiteralsEnumerationLiteralDefinitionParserRuleCall_3_0_0; }
 
-		//("," literals+=EnumerationLiteralAS)*
+		//("," literals+=EnumerationLiteralDefinition)*
 		public Group getGroup_3_1() { return cGroup_3_1; }
 
 		//","
 		public Keyword getCommaKeyword_3_1_0() { return cCommaKeyword_3_1_0; }
 
-		//literals+=EnumerationLiteralAS
+		//literals+=EnumerationLiteralDefinition
 		public Assignment getLiteralsAssignment_3_1_1() { return cLiteralsAssignment_3_1_1; }
 
-		//EnumerationLiteralAS
-		public RuleCall getLiteralsEnumerationLiteralASParserRuleCall_3_1_1_0() { return cLiteralsEnumerationLiteralASParserRuleCall_3_1_1_0; }
+		//EnumerationLiteralDefinition
+		public RuleCall getLiteralsEnumerationLiteralDefinitionParserRuleCall_3_1_1_0() { return cLiteralsEnumerationLiteralDefinitionParserRuleCall_3_1_1_0; }
 
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
 	}
 
-	public class EnumerationLiteralASElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EnumerationLiteralAS");
+	public class EnumerationLiteralDefinitionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EnumerationLiteralDefinition");
 		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cNameIDENTTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
 		
-		//EnumerationLiteralAS:
+		//EnumerationLiteralDefinition:
 		//	name=IDENT;
 		public ParserRule getRule() { return rule; }
 
@@ -1915,10 +1916,10 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	
 	private ModelElements pModel;
 	private MscriptElements pMscript;
-	private PackageASElements pPackageAS;
-	private PackageableElementASElements pPackageableElementAS;
-	private EnumerationASElements pEnumerationAS;
-	private EnumerationLiteralASElements pEnumerationLiteralAS;
+	private PackageDefinitionElements pPackageDefinition;
+	private PackageDefinitionElementElements pPackageDefinitionElement;
+	private EnumerationDefinitionElements pEnumerationDefinition;
+	private EnumerationLiteralDefinitionElements pEnumerationLiteralDefinition;
 	private ExpressionElements pExpression;
 	private ConditionalExpressionElements pConditionalExpression;
 	private ConditionalExpressionCaseElements pConditionalExpressionCase;
@@ -1999,7 +2000,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Mscript:
-	//	packages+=PackageAS*;
+	//	packages+=PackageDefinition*;
 	public MscriptElements getMscriptAccess() {
 		return (pMscript != null) ? pMscript : (pMscript = new MscriptElements());
 	}
@@ -2008,44 +2009,45 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		return getMscriptAccess().getRule();
 	}
 
-	//PackageAS:
-	//	"package" name=Name "{" packagedElements+=PackageableElementAS* "}";
-	public PackageASElements getPackageASAccess() {
-		return (pPackageAS != null) ? pPackageAS : (pPackageAS = new PackageASElements());
+	//PackageDefinition:
+	//	"package" name=Name "{" elements+=PackageDefinitionElement* "}";
+	public PackageDefinitionElements getPackageDefinitionAccess() {
+		return (pPackageDefinition != null) ? pPackageDefinition : (pPackageDefinition = new PackageDefinitionElements());
 	}
 	
-	public ParserRule getPackageASRule() {
-		return getPackageASAccess().getRule();
+	public ParserRule getPackageDefinitionRule() {
+		return getPackageDefinitionAccess().getRule();
 	}
 
-	//PackageableElementAS:
-	//	PackageAS | EnumerationAS;
-	public PackageableElementASElements getPackageableElementASAccess() {
-		return (pPackageableElementAS != null) ? pPackageableElementAS : (pPackageableElementAS = new PackageableElementASElements());
+	//PackageDefinitionElement:
+	//	PackageDefinition | EnumerationDefinition;
+	public PackageDefinitionElementElements getPackageDefinitionElementAccess() {
+		return (pPackageDefinitionElement != null) ? pPackageDefinitionElement : (pPackageDefinitionElement = new PackageDefinitionElementElements());
 	}
 	
-	public ParserRule getPackageableElementASRule() {
-		return getPackageableElementASAccess().getRule();
+	public ParserRule getPackageDefinitionElementRule() {
+		return getPackageDefinitionElementAccess().getRule();
 	}
 
-	//EnumerationAS:
-	//	"enumeration" name=IDENT "{" (literals+=EnumerationLiteralAS ("," literals+=EnumerationLiteralAS)*)? "}";
-	public EnumerationASElements getEnumerationASAccess() {
-		return (pEnumerationAS != null) ? pEnumerationAS : (pEnumerationAS = new EnumerationASElements());
+	//EnumerationDefinition:
+	//	"enumeration" name=IDENT "{" (literals+=EnumerationLiteralDefinition ("," literals+=EnumerationLiteralDefinition)*)?
+	//	"}";
+	public EnumerationDefinitionElements getEnumerationDefinitionAccess() {
+		return (pEnumerationDefinition != null) ? pEnumerationDefinition : (pEnumerationDefinition = new EnumerationDefinitionElements());
 	}
 	
-	public ParserRule getEnumerationASRule() {
-		return getEnumerationASAccess().getRule();
+	public ParserRule getEnumerationDefinitionRule() {
+		return getEnumerationDefinitionAccess().getRule();
 	}
 
-	//EnumerationLiteralAS:
+	//EnumerationLiteralDefinition:
 	//	name=IDENT;
-	public EnumerationLiteralASElements getEnumerationLiteralASAccess() {
-		return (pEnumerationLiteralAS != null) ? pEnumerationLiteralAS : (pEnumerationLiteralAS = new EnumerationLiteralASElements());
+	public EnumerationLiteralDefinitionElements getEnumerationLiteralDefinitionAccess() {
+		return (pEnumerationLiteralDefinition != null) ? pEnumerationLiteralDefinition : (pEnumerationLiteralDefinition = new EnumerationLiteralDefinitionElements());
 	}
 	
-	public ParserRule getEnumerationLiteralASRule() {
-		return getEnumerationLiteralASAccess().getRule();
+	public ParserRule getEnumerationLiteralDefinitionRule() {
+		return getEnumerationLiteralDefinitionAccess().getRule();
 	}
 
 	/// *

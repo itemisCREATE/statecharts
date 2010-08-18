@@ -44,40 +44,40 @@ public interface MscriptFactory extends EFactory
   Mscript createMscript();
 
   /**
-   * Returns a new object of class '<em>Package AS</em>'.
+   * Returns a new object of class '<em>Package Definition</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Package AS</em>'.
+   * @return a new object of class '<em>Package Definition</em>'.
    * @generated
    */
-  PackageAS createPackageAS();
+  PackageDefinition createPackageDefinition();
 
   /**
-   * Returns a new object of class '<em>Packageable Element AS</em>'.
+   * Returns a new object of class '<em>Package Definition Element</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Packageable Element AS</em>'.
+   * @return a new object of class '<em>Package Definition Element</em>'.
    * @generated
    */
-  PackageableElementAS createPackageableElementAS();
+  PackageDefinitionElement createPackageDefinitionElement();
 
   /**
-   * Returns a new object of class '<em>Enumeration AS</em>'.
+   * Returns a new object of class '<em>Enumeration Definition</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Enumeration AS</em>'.
+   * @return a new object of class '<em>Enumeration Definition</em>'.
    * @generated
    */
-  EnumerationAS createEnumerationAS();
+  EnumerationDefinition createEnumerationDefinition();
 
   /**
-   * Returns a new object of class '<em>Enumeration Literal AS</em>'.
+   * Returns a new object of class '<em>Enumeration Literal Definition</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Enumeration Literal AS</em>'.
+   * @return a new object of class '<em>Enumeration Literal Definition</em>'.
    * @generated
    */
-  EnumerationLiteralAS createEnumerationLiteralAS();
+  EnumerationLiteralDefinition createEnumerationLiteralDefinition();
 
   /**
    * Returns a new object of class '<em>Expression</em>'.

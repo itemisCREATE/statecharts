@@ -109,33 +109,33 @@ public class MscriptSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case MscriptPackage.PACKAGE_AS:
+      case MscriptPackage.PACKAGE_DEFINITION:
       {
-        PackageAS packageAS = (PackageAS)theEObject;
-        T result = casePackageAS(packageAS);
-        if (result == null) result = casePackageableElementAS(packageAS);
+        PackageDefinition packageDefinition = (PackageDefinition)theEObject;
+        T result = casePackageDefinition(packageDefinition);
+        if (result == null) result = casePackageDefinitionElement(packageDefinition);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case MscriptPackage.PACKAGEABLE_ELEMENT_AS:
+      case MscriptPackage.PACKAGE_DEFINITION_ELEMENT:
       {
-        PackageableElementAS packageableElementAS = (PackageableElementAS)theEObject;
-        T result = casePackageableElementAS(packageableElementAS);
+        PackageDefinitionElement packageDefinitionElement = (PackageDefinitionElement)theEObject;
+        T result = casePackageDefinitionElement(packageDefinitionElement);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case MscriptPackage.ENUMERATION_AS:
+      case MscriptPackage.ENUMERATION_DEFINITION:
       {
-        EnumerationAS enumerationAS = (EnumerationAS)theEObject;
-        T result = caseEnumerationAS(enumerationAS);
-        if (result == null) result = casePackageableElementAS(enumerationAS);
+        EnumerationDefinition enumerationDefinition = (EnumerationDefinition)theEObject;
+        T result = caseEnumerationDefinition(enumerationDefinition);
+        if (result == null) result = casePackageDefinitionElement(enumerationDefinition);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case MscriptPackage.ENUMERATION_LITERAL_AS:
+      case MscriptPackage.ENUMERATION_LITERAL_DEFINITION:
       {
-        EnumerationLiteralAS enumerationLiteralAS = (EnumerationLiteralAS)theEObject;
-        T result = caseEnumerationLiteralAS(enumerationLiteralAS);
+        EnumerationLiteralDefinition enumerationLiteralDefinition = (EnumerationLiteralDefinition)theEObject;
+        T result = caseEnumerationLiteralDefinition(enumerationLiteralDefinition);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -525,65 +525,65 @@ public class MscriptSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Package AS</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Package Definition</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Package AS</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Package Definition</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T casePackageAS(PackageAS object)
+  public T casePackageDefinition(PackageDefinition object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Packageable Element AS</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Package Definition Element</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Packageable Element AS</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Package Definition Element</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T casePackageableElementAS(PackageableElementAS object)
+  public T casePackageDefinitionElement(PackageDefinitionElement object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Enumeration AS</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Enumeration Definition</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Enumeration AS</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Enumeration Definition</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseEnumerationAS(EnumerationAS object)
+  public T caseEnumerationDefinition(EnumerationDefinition object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Enumeration Literal AS</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Enumeration Literal Definition</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Enumeration Literal AS</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Enumeration Literal Definition</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseEnumerationLiteralAS(EnumerationLiteralAS object)
+  public T caseEnumerationLiteralDefinition(EnumerationLiteralDefinition object)
   {
     return null;
   }

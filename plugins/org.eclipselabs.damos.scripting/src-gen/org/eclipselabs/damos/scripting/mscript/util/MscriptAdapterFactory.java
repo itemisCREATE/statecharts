@@ -88,24 +88,24 @@ public class MscriptAdapterFactory extends AdapterFactoryImpl
         return createMscriptAdapter();
       }
       @Override
-      public Adapter casePackageAS(PackageAS object)
+      public Adapter casePackageDefinition(PackageDefinition object)
       {
-        return createPackageASAdapter();
+        return createPackageDefinitionAdapter();
       }
       @Override
-      public Adapter casePackageableElementAS(PackageableElementAS object)
+      public Adapter casePackageDefinitionElement(PackageDefinitionElement object)
       {
-        return createPackageableElementASAdapter();
+        return createPackageDefinitionElementAdapter();
       }
       @Override
-      public Adapter caseEnumerationAS(EnumerationAS object)
+      public Adapter caseEnumerationDefinition(EnumerationDefinition object)
       {
-        return createEnumerationASAdapter();
+        return createEnumerationDefinitionAdapter();
       }
       @Override
-      public Adapter caseEnumerationLiteralAS(EnumerationLiteralAS object)
+      public Adapter caseEnumerationLiteralDefinition(EnumerationLiteralDefinition object)
       {
-        return createEnumerationLiteralASAdapter();
+        return createEnumerationLiteralDefinitionAdapter();
       }
       @Override
       public Adapter caseExpression(Expression object)
@@ -365,61 +365,61 @@ public class MscriptAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.damos.scripting.mscript.PackageAS <em>Package AS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.damos.scripting.mscript.PackageDefinition <em>Package Definition</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipselabs.damos.scripting.mscript.PackageAS
+   * @see org.eclipselabs.damos.scripting.mscript.PackageDefinition
    * @generated
    */
-  public Adapter createPackageASAdapter()
+  public Adapter createPackageDefinitionAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.damos.scripting.mscript.PackageableElementAS <em>Packageable Element AS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.damos.scripting.mscript.PackageDefinitionElement <em>Package Definition Element</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipselabs.damos.scripting.mscript.PackageableElementAS
+   * @see org.eclipselabs.damos.scripting.mscript.PackageDefinitionElement
    * @generated
    */
-  public Adapter createPackageableElementASAdapter()
+  public Adapter createPackageDefinitionElementAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.damos.scripting.mscript.EnumerationAS <em>Enumeration AS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.damos.scripting.mscript.EnumerationDefinition <em>Enumeration Definition</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipselabs.damos.scripting.mscript.EnumerationAS
+   * @see org.eclipselabs.damos.scripting.mscript.EnumerationDefinition
    * @generated
    */
-  public Adapter createEnumerationASAdapter()
+  public Adapter createEnumerationDefinitionAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.damos.scripting.mscript.EnumerationLiteralAS <em>Enumeration Literal AS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.damos.scripting.mscript.EnumerationLiteralDefinition <em>Enumeration Literal Definition</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipselabs.damos.scripting.mscript.EnumerationLiteralAS
+   * @see org.eclipselabs.damos.scripting.mscript.EnumerationLiteralDefinition
    * @generated
    */
-  public Adapter createEnumerationLiteralASAdapter()
+  public Adapter createEnumerationLiteralDefinitionAdapter()
   {
     return null;
   }

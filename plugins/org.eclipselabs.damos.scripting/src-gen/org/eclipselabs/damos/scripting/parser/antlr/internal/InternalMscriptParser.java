@@ -153,25 +153,25 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
     // $ANTLR end ruleModel
 
 
-    // $ANTLR start entryRulePackageAS
-    // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:112:1: entryRulePackageAS returns [EObject current=null] : iv_rulePackageAS= rulePackageAS EOF ;
-    public final EObject entryRulePackageAS() throws RecognitionException {
+    // $ANTLR start entryRulePackageDefinition
+    // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:112:1: entryRulePackageDefinition returns [EObject current=null] : iv_rulePackageDefinition= rulePackageDefinition EOF ;
+    public final EObject entryRulePackageDefinition() throws RecognitionException {
         EObject current = null;
 
-        EObject iv_rulePackageAS = null;
+        EObject iv_rulePackageDefinition = null;
 
 
         try {
-            // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:113:2: (iv_rulePackageAS= rulePackageAS EOF )
-            // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:114:2: iv_rulePackageAS= rulePackageAS EOF
+            // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:113:2: (iv_rulePackageDefinition= rulePackageDefinition EOF )
+            // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:114:2: iv_rulePackageDefinition= rulePackageDefinition EOF
             {
-             currentNode = createCompositeNode(grammarAccess.getPackageASRule(), currentNode); 
-            pushFollow(FOLLOW_rulePackageAS_in_entryRulePackageAS167);
-            iv_rulePackageAS=rulePackageAS();
+             currentNode = createCompositeNode(grammarAccess.getPackageDefinitionRule(), currentNode); 
+            pushFollow(FOLLOW_rulePackageDefinition_in_entryRulePackageDefinition167);
+            iv_rulePackageDefinition=rulePackageDefinition();
             _fsp--;
 
-             current =iv_rulePackageAS; 
-            match(input,EOF,FOLLOW_EOF_in_entryRulePackageAS177); 
+             current =iv_rulePackageDefinition; 
+            match(input,EOF,FOLLOW_EOF_in_entryRulePackageDefinition177); 
 
             }
 
@@ -185,31 +185,31 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end entryRulePackageAS
+    // $ANTLR end entryRulePackageDefinition
 
 
-    // $ANTLR start rulePackageAS
-    // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:121:1: rulePackageAS returns [EObject current=null] : ( 'package' ( (lv_name_1_0= ruleName ) ) '{' ( (lv_packagedElements_3_0= rulePackageableElementAS ) )* '}' ) ;
-    public final EObject rulePackageAS() throws RecognitionException {
+    // $ANTLR start rulePackageDefinition
+    // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:121:1: rulePackageDefinition returns [EObject current=null] : ( 'package' ( (lv_name_1_0= ruleName ) ) '{' ( (lv_elements_3_0= rulePackageDefinitionElement ) )* '}' ) ;
+    public final EObject rulePackageDefinition() throws RecognitionException {
         EObject current = null;
 
         EObject lv_name_1_0 = null;
 
-        EObject lv_packagedElements_3_0 = null;
+        EObject lv_elements_3_0 = null;
 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:126:6: ( ( 'package' ( (lv_name_1_0= ruleName ) ) '{' ( (lv_packagedElements_3_0= rulePackageableElementAS ) )* '}' ) )
-            // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:127:1: ( 'package' ( (lv_name_1_0= ruleName ) ) '{' ( (lv_packagedElements_3_0= rulePackageableElementAS ) )* '}' )
+            // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:126:6: ( ( 'package' ( (lv_name_1_0= ruleName ) ) '{' ( (lv_elements_3_0= rulePackageDefinitionElement ) )* '}' ) )
+            // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:127:1: ( 'package' ( (lv_name_1_0= ruleName ) ) '{' ( (lv_elements_3_0= rulePackageDefinitionElement ) )* '}' )
             {
-            // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:127:1: ( 'package' ( (lv_name_1_0= ruleName ) ) '{' ( (lv_packagedElements_3_0= rulePackageableElementAS ) )* '}' )
-            // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:127:3: 'package' ( (lv_name_1_0= ruleName ) ) '{' ( (lv_packagedElements_3_0= rulePackageableElementAS ) )* '}'
+            // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:127:1: ( 'package' ( (lv_name_1_0= ruleName ) ) '{' ( (lv_elements_3_0= rulePackageDefinitionElement ) )* '}' )
+            // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:127:3: 'package' ( (lv_name_1_0= ruleName ) ) '{' ( (lv_elements_3_0= rulePackageDefinitionElement ) )* '}'
             {
-            match(input,12,FOLLOW_12_in_rulePackageAS212); 
+            match(input,12,FOLLOW_12_in_rulePackageDefinition212); 
 
-                    createLeafNode(grammarAccess.getPackageASAccess().getPackageKeyword_0(), null); 
+                    createLeafNode(grammarAccess.getPackageDefinitionAccess().getPackageKeyword_0(), null); 
                 
             // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:131:1: ( (lv_name_1_0= ruleName ) )
             // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:132:1: (lv_name_1_0= ruleName )
@@ -218,15 +218,15 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
             // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:133:3: lv_name_1_0= ruleName
             {
              
-            	        currentNode=createCompositeNode(grammarAccess.getPackageASAccess().getNameNameParserRuleCall_1_0(), currentNode); 
+            	        currentNode=createCompositeNode(grammarAccess.getPackageDefinitionAccess().getNameNameParserRuleCall_1_0(), currentNode); 
             	    
-            pushFollow(FOLLOW_ruleName_in_rulePackageAS233);
+            pushFollow(FOLLOW_ruleName_in_rulePackageDefinition233);
             lv_name_1_0=ruleName();
             _fsp--;
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.getPackageASRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getPackageDefinitionRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        try {
@@ -247,11 +247,11 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
             }
 
-            match(input,13,FOLLOW_13_in_rulePackageAS243); 
+            match(input,13,FOLLOW_13_in_rulePackageDefinition243); 
 
-                    createLeafNode(grammarAccess.getPackageASAccess().getLeftCurlyBracketKeyword_2(), null); 
+                    createLeafNode(grammarAccess.getPackageDefinitionAccess().getLeftCurlyBracketKeyword_2(), null); 
                 
-            // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:159:1: ( (lv_packagedElements_3_0= rulePackageableElementAS ) )*
+            // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:159:1: ( (lv_elements_3_0= rulePackageDefinitionElement ) )*
             loop1:
             do {
                 int alt1=2;
@@ -264,29 +264,29 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:160:1: (lv_packagedElements_3_0= rulePackageableElementAS )
+            	    // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:160:1: (lv_elements_3_0= rulePackageDefinitionElement )
             	    {
-            	    // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:160:1: (lv_packagedElements_3_0= rulePackageableElementAS )
-            	    // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:161:3: lv_packagedElements_3_0= rulePackageableElementAS
+            	    // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:160:1: (lv_elements_3_0= rulePackageDefinitionElement )
+            	    // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:161:3: lv_elements_3_0= rulePackageDefinitionElement
             	    {
             	     
-            	    	        currentNode=createCompositeNode(grammarAccess.getPackageASAccess().getPackagedElementsPackageableElementASParserRuleCall_3_0(), currentNode); 
+            	    	        currentNode=createCompositeNode(grammarAccess.getPackageDefinitionAccess().getElementsPackageDefinitionElementParserRuleCall_3_0(), currentNode); 
             	    	    
-            	    pushFollow(FOLLOW_rulePackageableElementAS_in_rulePackageAS264);
-            	    lv_packagedElements_3_0=rulePackageableElementAS();
+            	    pushFollow(FOLLOW_rulePackageDefinitionElement_in_rulePackageDefinition264);
+            	    lv_elements_3_0=rulePackageDefinitionElement();
             	    _fsp--;
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.getPackageASRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getPackageDefinitionRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        try {
             	    	       		add(
             	    	       			current, 
-            	    	       			"packagedElements",
-            	    	        		lv_packagedElements_3_0, 
-            	    	        		"PackageableElementAS", 
+            	    	       			"elements",
+            	    	        		lv_elements_3_0, 
+            	    	        		"PackageDefinitionElement", 
             	    	        		currentNode);
             	    	        } catch (ValueConverterException vce) {
             	    				handleValueConverterException(vce);
@@ -305,9 +305,9 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            match(input,14,FOLLOW_14_in_rulePackageAS275); 
+            match(input,14,FOLLOW_14_in_rulePackageDefinition275); 
 
-                    createLeafNode(grammarAccess.getPackageASAccess().getRightCurlyBracketKeyword_4(), null); 
+                    createLeafNode(grammarAccess.getPackageDefinitionAccess().getRightCurlyBracketKeyword_4(), null); 
                 
 
             }
@@ -328,28 +328,28 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end rulePackageAS
+    // $ANTLR end rulePackageDefinition
 
 
-    // $ANTLR start entryRulePackageableElementAS
-    // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:195:1: entryRulePackageableElementAS returns [EObject current=null] : iv_rulePackageableElementAS= rulePackageableElementAS EOF ;
-    public final EObject entryRulePackageableElementAS() throws RecognitionException {
+    // $ANTLR start entryRulePackageDefinitionElement
+    // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:195:1: entryRulePackageDefinitionElement returns [EObject current=null] : iv_rulePackageDefinitionElement= rulePackageDefinitionElement EOF ;
+    public final EObject entryRulePackageDefinitionElement() throws RecognitionException {
         EObject current = null;
 
-        EObject iv_rulePackageableElementAS = null;
+        EObject iv_rulePackageDefinitionElement = null;
 
 
         try {
-            // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:196:2: (iv_rulePackageableElementAS= rulePackageableElementAS EOF )
-            // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:197:2: iv_rulePackageableElementAS= rulePackageableElementAS EOF
+            // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:196:2: (iv_rulePackageDefinitionElement= rulePackageDefinitionElement EOF )
+            // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:197:2: iv_rulePackageDefinitionElement= rulePackageDefinitionElement EOF
             {
-             currentNode = createCompositeNode(grammarAccess.getPackageableElementASRule(), currentNode); 
-            pushFollow(FOLLOW_rulePackageableElementAS_in_entryRulePackageableElementAS311);
-            iv_rulePackageableElementAS=rulePackageableElementAS();
+             currentNode = createCompositeNode(grammarAccess.getPackageDefinitionElementRule(), currentNode); 
+            pushFollow(FOLLOW_rulePackageDefinitionElement_in_entryRulePackageDefinitionElement311);
+            iv_rulePackageDefinitionElement=rulePackageDefinitionElement();
             _fsp--;
 
-             current =iv_rulePackageableElementAS; 
-            match(input,EOF,FOLLOW_EOF_in_entryRulePackageableElementAS321); 
+             current =iv_rulePackageDefinitionElement; 
+            match(input,EOF,FOLLOW_EOF_in_entryRulePackageDefinitionElement321); 
 
             }
 
@@ -363,26 +363,26 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end entryRulePackageableElementAS
+    // $ANTLR end entryRulePackageDefinitionElement
 
 
-    // $ANTLR start rulePackageableElementAS
-    // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:204:1: rulePackageableElementAS returns [EObject current=null] : (this_PackageAS_0= rulePackageAS | this_EnumerationAS_1= ruleEnumerationAS ) ;
-    public final EObject rulePackageableElementAS() throws RecognitionException {
+    // $ANTLR start rulePackageDefinitionElement
+    // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:204:1: rulePackageDefinitionElement returns [EObject current=null] : (this_PackageDefinition_0= rulePackageDefinition | this_EnumerationDefinition_1= ruleEnumerationDefinition ) ;
+    public final EObject rulePackageDefinitionElement() throws RecognitionException {
         EObject current = null;
 
-        EObject this_PackageAS_0 = null;
+        EObject this_PackageDefinition_0 = null;
 
-        EObject this_EnumerationAS_1 = null;
+        EObject this_EnumerationDefinition_1 = null;
 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:209:6: ( (this_PackageAS_0= rulePackageAS | this_EnumerationAS_1= ruleEnumerationAS ) )
-            // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:210:1: (this_PackageAS_0= rulePackageAS | this_EnumerationAS_1= ruleEnumerationAS )
+            // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:209:6: ( (this_PackageDefinition_0= rulePackageDefinition | this_EnumerationDefinition_1= ruleEnumerationDefinition ) )
+            // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:210:1: (this_PackageDefinition_0= rulePackageDefinition | this_EnumerationDefinition_1= ruleEnumerationDefinition )
             {
-            // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:210:1: (this_PackageAS_0= rulePackageAS | this_EnumerationAS_1= ruleEnumerationAS )
+            // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:210:1: (this_PackageDefinition_0= rulePackageDefinition | this_EnumerationDefinition_1= ruleEnumerationDefinition )
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -394,40 +394,40 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("210:1: (this_PackageAS_0= rulePackageAS | this_EnumerationAS_1= ruleEnumerationAS )", 2, 0, input);
+                    new NoViableAltException("210:1: (this_PackageDefinition_0= rulePackageDefinition | this_EnumerationDefinition_1= ruleEnumerationDefinition )", 2, 0, input);
 
                 throw nvae;
             }
             switch (alt2) {
                 case 1 :
-                    // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:211:5: this_PackageAS_0= rulePackageAS
+                    // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:211:5: this_PackageDefinition_0= rulePackageDefinition
                     {
                      
-                            currentNode=createCompositeNode(grammarAccess.getPackageableElementASAccess().getPackageASParserRuleCall_0(), currentNode); 
+                            currentNode=createCompositeNode(grammarAccess.getPackageDefinitionElementAccess().getPackageDefinitionParserRuleCall_0(), currentNode); 
                         
-                    pushFollow(FOLLOW_rulePackageAS_in_rulePackageableElementAS368);
-                    this_PackageAS_0=rulePackageAS();
+                    pushFollow(FOLLOW_rulePackageDefinition_in_rulePackageDefinitionElement368);
+                    this_PackageDefinition_0=rulePackageDefinition();
                     _fsp--;
 
                      
-                            current = this_PackageAS_0; 
+                            current = this_PackageDefinition_0; 
                             currentNode = currentNode.getParent();
                         
 
                     }
                     break;
                 case 2 :
-                    // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:221:5: this_EnumerationAS_1= ruleEnumerationAS
+                    // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:221:5: this_EnumerationDefinition_1= ruleEnumerationDefinition
                     {
                      
-                            currentNode=createCompositeNode(grammarAccess.getPackageableElementASAccess().getEnumerationASParserRuleCall_1(), currentNode); 
+                            currentNode=createCompositeNode(grammarAccess.getPackageDefinitionElementAccess().getEnumerationDefinitionParserRuleCall_1(), currentNode); 
                         
-                    pushFollow(FOLLOW_ruleEnumerationAS_in_rulePackageableElementAS395);
-                    this_EnumerationAS_1=ruleEnumerationAS();
+                    pushFollow(FOLLOW_ruleEnumerationDefinition_in_rulePackageDefinitionElement395);
+                    this_EnumerationDefinition_1=ruleEnumerationDefinition();
                     _fsp--;
 
                      
-                            current = this_EnumerationAS_1; 
+                            current = this_EnumerationDefinition_1; 
                             currentNode = currentNode.getParent();
                         
 
@@ -452,28 +452,28 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end rulePackageableElementAS
+    // $ANTLR end rulePackageDefinitionElement
 
 
-    // $ANTLR start entryRuleEnumerationAS
-    // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:237:1: entryRuleEnumerationAS returns [EObject current=null] : iv_ruleEnumerationAS= ruleEnumerationAS EOF ;
-    public final EObject entryRuleEnumerationAS() throws RecognitionException {
+    // $ANTLR start entryRuleEnumerationDefinition
+    // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:237:1: entryRuleEnumerationDefinition returns [EObject current=null] : iv_ruleEnumerationDefinition= ruleEnumerationDefinition EOF ;
+    public final EObject entryRuleEnumerationDefinition() throws RecognitionException {
         EObject current = null;
 
-        EObject iv_ruleEnumerationAS = null;
+        EObject iv_ruleEnumerationDefinition = null;
 
 
         try {
-            // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:238:2: (iv_ruleEnumerationAS= ruleEnumerationAS EOF )
-            // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:239:2: iv_ruleEnumerationAS= ruleEnumerationAS EOF
+            // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:238:2: (iv_ruleEnumerationDefinition= ruleEnumerationDefinition EOF )
+            // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:239:2: iv_ruleEnumerationDefinition= ruleEnumerationDefinition EOF
             {
-             currentNode = createCompositeNode(grammarAccess.getEnumerationASRule(), currentNode); 
-            pushFollow(FOLLOW_ruleEnumerationAS_in_entryRuleEnumerationAS430);
-            iv_ruleEnumerationAS=ruleEnumerationAS();
+             currentNode = createCompositeNode(grammarAccess.getEnumerationDefinitionRule(), currentNode); 
+            pushFollow(FOLLOW_ruleEnumerationDefinition_in_entryRuleEnumerationDefinition430);
+            iv_ruleEnumerationDefinition=ruleEnumerationDefinition();
             _fsp--;
 
-             current =iv_ruleEnumerationAS; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleEnumerationAS440); 
+             current =iv_ruleEnumerationDefinition; 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleEnumerationDefinition440); 
 
             }
 
@@ -487,12 +487,12 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end entryRuleEnumerationAS
+    // $ANTLR end entryRuleEnumerationDefinition
 
 
-    // $ANTLR start ruleEnumerationAS
-    // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:246:1: ruleEnumerationAS returns [EObject current=null] : ( 'enumeration' ( (lv_name_1_0= RULE_IDENT ) ) '{' ( ( (lv_literals_3_0= ruleEnumerationLiteralAS ) ) ( ',' ( (lv_literals_5_0= ruleEnumerationLiteralAS ) ) )* )? '}' ) ;
-    public final EObject ruleEnumerationAS() throws RecognitionException {
+    // $ANTLR start ruleEnumerationDefinition
+    // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:246:1: ruleEnumerationDefinition returns [EObject current=null] : ( 'enumeration' ( (lv_name_1_0= RULE_IDENT ) ) '{' ( ( (lv_literals_3_0= ruleEnumerationLiteralDefinition ) ) ( ',' ( (lv_literals_5_0= ruleEnumerationLiteralDefinition ) ) )* )? '}' ) ;
+    public final EObject ruleEnumerationDefinition() throws RecognitionException {
         EObject current = null;
 
         Token lv_name_1_0=null;
@@ -504,15 +504,15 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:251:6: ( ( 'enumeration' ( (lv_name_1_0= RULE_IDENT ) ) '{' ( ( (lv_literals_3_0= ruleEnumerationLiteralAS ) ) ( ',' ( (lv_literals_5_0= ruleEnumerationLiteralAS ) ) )* )? '}' ) )
-            // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:252:1: ( 'enumeration' ( (lv_name_1_0= RULE_IDENT ) ) '{' ( ( (lv_literals_3_0= ruleEnumerationLiteralAS ) ) ( ',' ( (lv_literals_5_0= ruleEnumerationLiteralAS ) ) )* )? '}' )
+            // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:251:6: ( ( 'enumeration' ( (lv_name_1_0= RULE_IDENT ) ) '{' ( ( (lv_literals_3_0= ruleEnumerationLiteralDefinition ) ) ( ',' ( (lv_literals_5_0= ruleEnumerationLiteralDefinition ) ) )* )? '}' ) )
+            // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:252:1: ( 'enumeration' ( (lv_name_1_0= RULE_IDENT ) ) '{' ( ( (lv_literals_3_0= ruleEnumerationLiteralDefinition ) ) ( ',' ( (lv_literals_5_0= ruleEnumerationLiteralDefinition ) ) )* )? '}' )
             {
-            // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:252:1: ( 'enumeration' ( (lv_name_1_0= RULE_IDENT ) ) '{' ( ( (lv_literals_3_0= ruleEnumerationLiteralAS ) ) ( ',' ( (lv_literals_5_0= ruleEnumerationLiteralAS ) ) )* )? '}' )
-            // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:252:3: 'enumeration' ( (lv_name_1_0= RULE_IDENT ) ) '{' ( ( (lv_literals_3_0= ruleEnumerationLiteralAS ) ) ( ',' ( (lv_literals_5_0= ruleEnumerationLiteralAS ) ) )* )? '}'
+            // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:252:1: ( 'enumeration' ( (lv_name_1_0= RULE_IDENT ) ) '{' ( ( (lv_literals_3_0= ruleEnumerationLiteralDefinition ) ) ( ',' ( (lv_literals_5_0= ruleEnumerationLiteralDefinition ) ) )* )? '}' )
+            // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:252:3: 'enumeration' ( (lv_name_1_0= RULE_IDENT ) ) '{' ( ( (lv_literals_3_0= ruleEnumerationLiteralDefinition ) ) ( ',' ( (lv_literals_5_0= ruleEnumerationLiteralDefinition ) ) )* )? '}'
             {
-            match(input,15,FOLLOW_15_in_ruleEnumerationAS475); 
+            match(input,15,FOLLOW_15_in_ruleEnumerationDefinition475); 
 
-                    createLeafNode(grammarAccess.getEnumerationASAccess().getEnumerationKeyword_0(), null); 
+                    createLeafNode(grammarAccess.getEnumerationDefinitionAccess().getEnumerationKeyword_0(), null); 
                 
             // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:256:1: ( (lv_name_1_0= RULE_IDENT ) )
             // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:257:1: (lv_name_1_0= RULE_IDENT )
@@ -521,13 +521,13 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
             // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:258:3: lv_name_1_0= RULE_IDENT
             {
             lv_name_1_0=(Token)input.LT(1);
-            match(input,RULE_IDENT,FOLLOW_RULE_IDENT_in_ruleEnumerationAS492); 
+            match(input,RULE_IDENT,FOLLOW_RULE_IDENT_in_ruleEnumerationDefinition492); 
 
-            			createLeafNode(grammarAccess.getEnumerationASAccess().getNameIDENTTerminalRuleCall_1_0(), "name"); 
+            			createLeafNode(grammarAccess.getEnumerationDefinitionAccess().getNameIDENTTerminalRuleCall_1_0(), "name"); 
             		
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.getEnumerationASRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getEnumerationDefinitionRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        try {
@@ -547,11 +547,11 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
             }
 
-            match(input,13,FOLLOW_13_in_ruleEnumerationAS507); 
+            match(input,13,FOLLOW_13_in_ruleEnumerationDefinition507); 
 
-                    createLeafNode(grammarAccess.getEnumerationASAccess().getLeftCurlyBracketKeyword_2(), null); 
+                    createLeafNode(grammarAccess.getEnumerationDefinitionAccess().getLeftCurlyBracketKeyword_2(), null); 
                 
-            // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:284:1: ( ( (lv_literals_3_0= ruleEnumerationLiteralAS ) ) ( ',' ( (lv_literals_5_0= ruleEnumerationLiteralAS ) ) )* )?
+            // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:284:1: ( ( (lv_literals_3_0= ruleEnumerationLiteralDefinition ) ) ( ',' ( (lv_literals_5_0= ruleEnumerationLiteralDefinition ) ) )* )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -560,24 +560,24 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
             }
             switch (alt4) {
                 case 1 :
-                    // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:284:2: ( (lv_literals_3_0= ruleEnumerationLiteralAS ) ) ( ',' ( (lv_literals_5_0= ruleEnumerationLiteralAS ) ) )*
+                    // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:284:2: ( (lv_literals_3_0= ruleEnumerationLiteralDefinition ) ) ( ',' ( (lv_literals_5_0= ruleEnumerationLiteralDefinition ) ) )*
                     {
-                    // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:284:2: ( (lv_literals_3_0= ruleEnumerationLiteralAS ) )
-                    // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:285:1: (lv_literals_3_0= ruleEnumerationLiteralAS )
+                    // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:284:2: ( (lv_literals_3_0= ruleEnumerationLiteralDefinition ) )
+                    // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:285:1: (lv_literals_3_0= ruleEnumerationLiteralDefinition )
                     {
-                    // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:285:1: (lv_literals_3_0= ruleEnumerationLiteralAS )
-                    // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:286:3: lv_literals_3_0= ruleEnumerationLiteralAS
+                    // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:285:1: (lv_literals_3_0= ruleEnumerationLiteralDefinition )
+                    // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:286:3: lv_literals_3_0= ruleEnumerationLiteralDefinition
                     {
                      
-                    	        currentNode=createCompositeNode(grammarAccess.getEnumerationASAccess().getLiteralsEnumerationLiteralASParserRuleCall_3_0_0(), currentNode); 
+                    	        currentNode=createCompositeNode(grammarAccess.getEnumerationDefinitionAccess().getLiteralsEnumerationLiteralDefinitionParserRuleCall_3_0_0(), currentNode); 
                     	    
-                    pushFollow(FOLLOW_ruleEnumerationLiteralAS_in_ruleEnumerationAS529);
-                    lv_literals_3_0=ruleEnumerationLiteralAS();
+                    pushFollow(FOLLOW_ruleEnumerationLiteralDefinition_in_ruleEnumerationDefinition529);
+                    lv_literals_3_0=ruleEnumerationLiteralDefinition();
                     _fsp--;
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.getEnumerationASRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getEnumerationDefinitionRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        try {
@@ -585,7 +585,7 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
                     	       			current, 
                     	       			"literals",
                     	        		lv_literals_3_0, 
-                    	        		"EnumerationLiteralAS", 
+                    	        		"EnumerationLiteralDefinition", 
                     	        		currentNode);
                     	        } catch (ValueConverterException vce) {
                     				handleValueConverterException(vce);
@@ -598,7 +598,7 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:308:2: ( ',' ( (lv_literals_5_0= ruleEnumerationLiteralAS ) ) )*
+                    // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:308:2: ( ',' ( (lv_literals_5_0= ruleEnumerationLiteralDefinition ) ) )*
                     loop3:
                     do {
                         int alt3=2;
@@ -611,28 +611,28 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
                         switch (alt3) {
                     	case 1 :
-                    	    // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:308:4: ',' ( (lv_literals_5_0= ruleEnumerationLiteralAS ) )
+                    	    // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:308:4: ',' ( (lv_literals_5_0= ruleEnumerationLiteralDefinition ) )
                     	    {
-                    	    match(input,16,FOLLOW_16_in_ruleEnumerationAS540); 
+                    	    match(input,16,FOLLOW_16_in_ruleEnumerationDefinition540); 
 
-                    	            createLeafNode(grammarAccess.getEnumerationASAccess().getCommaKeyword_3_1_0(), null); 
+                    	            createLeafNode(grammarAccess.getEnumerationDefinitionAccess().getCommaKeyword_3_1_0(), null); 
                     	        
-                    	    // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:312:1: ( (lv_literals_5_0= ruleEnumerationLiteralAS ) )
-                    	    // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:313:1: (lv_literals_5_0= ruleEnumerationLiteralAS )
+                    	    // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:312:1: ( (lv_literals_5_0= ruleEnumerationLiteralDefinition ) )
+                    	    // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:313:1: (lv_literals_5_0= ruleEnumerationLiteralDefinition )
                     	    {
-                    	    // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:313:1: (lv_literals_5_0= ruleEnumerationLiteralAS )
-                    	    // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:314:3: lv_literals_5_0= ruleEnumerationLiteralAS
+                    	    // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:313:1: (lv_literals_5_0= ruleEnumerationLiteralDefinition )
+                    	    // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:314:3: lv_literals_5_0= ruleEnumerationLiteralDefinition
                     	    {
                     	     
-                    	    	        currentNode=createCompositeNode(grammarAccess.getEnumerationASAccess().getLiteralsEnumerationLiteralASParserRuleCall_3_1_1_0(), currentNode); 
+                    	    	        currentNode=createCompositeNode(grammarAccess.getEnumerationDefinitionAccess().getLiteralsEnumerationLiteralDefinitionParserRuleCall_3_1_1_0(), currentNode); 
                     	    	    
-                    	    pushFollow(FOLLOW_ruleEnumerationLiteralAS_in_ruleEnumerationAS561);
-                    	    lv_literals_5_0=ruleEnumerationLiteralAS();
+                    	    pushFollow(FOLLOW_ruleEnumerationLiteralDefinition_in_ruleEnumerationDefinition561);
+                    	    lv_literals_5_0=ruleEnumerationLiteralDefinition();
                     	    _fsp--;
 
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.getEnumerationASRule().getType().getClassifier());
+                    	    	            current = factory.create(grammarAccess.getEnumerationDefinitionRule().getType().getClassifier());
                     	    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	    	        }
                     	    	        try {
@@ -640,7 +640,7 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
                     	    	       			current, 
                     	    	       			"literals",
                     	    	        		lv_literals_5_0, 
-                    	    	        		"EnumerationLiteralAS", 
+                    	    	        		"EnumerationLiteralDefinition", 
                     	    	        		currentNode);
                     	    	        } catch (ValueConverterException vce) {
                     	    				handleValueConverterException(vce);
@@ -668,9 +668,9 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
             }
 
-            match(input,14,FOLLOW_14_in_ruleEnumerationAS575); 
+            match(input,14,FOLLOW_14_in_ruleEnumerationDefinition575); 
 
-                    createLeafNode(grammarAccess.getEnumerationASAccess().getRightCurlyBracketKeyword_4(), null); 
+                    createLeafNode(grammarAccess.getEnumerationDefinitionAccess().getRightCurlyBracketKeyword_4(), null); 
                 
 
             }
@@ -691,28 +691,28 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end ruleEnumerationAS
+    // $ANTLR end ruleEnumerationDefinition
 
 
-    // $ANTLR start entryRuleEnumerationLiteralAS
-    // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:348:1: entryRuleEnumerationLiteralAS returns [EObject current=null] : iv_ruleEnumerationLiteralAS= ruleEnumerationLiteralAS EOF ;
-    public final EObject entryRuleEnumerationLiteralAS() throws RecognitionException {
+    // $ANTLR start entryRuleEnumerationLiteralDefinition
+    // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:348:1: entryRuleEnumerationLiteralDefinition returns [EObject current=null] : iv_ruleEnumerationLiteralDefinition= ruleEnumerationLiteralDefinition EOF ;
+    public final EObject entryRuleEnumerationLiteralDefinition() throws RecognitionException {
         EObject current = null;
 
-        EObject iv_ruleEnumerationLiteralAS = null;
+        EObject iv_ruleEnumerationLiteralDefinition = null;
 
 
         try {
-            // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:349:2: (iv_ruleEnumerationLiteralAS= ruleEnumerationLiteralAS EOF )
-            // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:350:2: iv_ruleEnumerationLiteralAS= ruleEnumerationLiteralAS EOF
+            // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:349:2: (iv_ruleEnumerationLiteralDefinition= ruleEnumerationLiteralDefinition EOF )
+            // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:350:2: iv_ruleEnumerationLiteralDefinition= ruleEnumerationLiteralDefinition EOF
             {
-             currentNode = createCompositeNode(grammarAccess.getEnumerationLiteralASRule(), currentNode); 
-            pushFollow(FOLLOW_ruleEnumerationLiteralAS_in_entryRuleEnumerationLiteralAS611);
-            iv_ruleEnumerationLiteralAS=ruleEnumerationLiteralAS();
+             currentNode = createCompositeNode(grammarAccess.getEnumerationLiteralDefinitionRule(), currentNode); 
+            pushFollow(FOLLOW_ruleEnumerationLiteralDefinition_in_entryRuleEnumerationLiteralDefinition611);
+            iv_ruleEnumerationLiteralDefinition=ruleEnumerationLiteralDefinition();
             _fsp--;
 
-             current =iv_ruleEnumerationLiteralAS; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleEnumerationLiteralAS621); 
+             current =iv_ruleEnumerationLiteralDefinition; 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleEnumerationLiteralDefinition621); 
 
             }
 
@@ -726,12 +726,12 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end entryRuleEnumerationLiteralAS
+    // $ANTLR end entryRuleEnumerationLiteralDefinition
 
 
-    // $ANTLR start ruleEnumerationLiteralAS
-    // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:357:1: ruleEnumerationLiteralAS returns [EObject current=null] : ( (lv_name_0_0= RULE_IDENT ) ) ;
-    public final EObject ruleEnumerationLiteralAS() throws RecognitionException {
+    // $ANTLR start ruleEnumerationLiteralDefinition
+    // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:357:1: ruleEnumerationLiteralDefinition returns [EObject current=null] : ( (lv_name_0_0= RULE_IDENT ) ) ;
+    public final EObject ruleEnumerationLiteralDefinition() throws RecognitionException {
         EObject current = null;
 
         Token lv_name_0_0=null;
@@ -749,13 +749,13 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
             // ../org.eclipselabs.damos.scripting/src-gen/org/eclipselabs/damos/scripting/parser/antlr/internal/InternalMscript.g:365:3: lv_name_0_0= RULE_IDENT
             {
             lv_name_0_0=(Token)input.LT(1);
-            match(input,RULE_IDENT,FOLLOW_RULE_IDENT_in_ruleEnumerationLiteralAS662); 
+            match(input,RULE_IDENT,FOLLOW_RULE_IDENT_in_ruleEnumerationLiteralDefinition662); 
 
-            			createLeafNode(grammarAccess.getEnumerationLiteralASAccess().getNameIDENTTerminalRuleCall_0(), "name"); 
+            			createLeafNode(grammarAccess.getEnumerationLiteralDefinitionAccess().getNameIDENTTerminalRuleCall_0(), "name"); 
             		
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.getEnumerationLiteralASRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getEnumerationLiteralDefinitionRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        try {
@@ -791,7 +791,7 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end ruleEnumerationLiteralAS
+    // $ANTLR end ruleEnumerationLiteralDefinition
 
 
     // $ANTLR start entryRuleExpression
@@ -8766,29 +8766,29 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_ruleModel_in_entryRuleModel75 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleModel85 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleExpression_in_ruleModel131 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePackageAS_in_entryRulePackageAS167 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRulePackageAS177 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_12_in_rulePackageAS212 = new BitSet(new long[]{0x0000000010000010L});
-    public static final BitSet FOLLOW_ruleName_in_rulePackageAS233 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_rulePackageAS243 = new BitSet(new long[]{0x000000000000D000L});
-    public static final BitSet FOLLOW_rulePackageableElementAS_in_rulePackageAS264 = new BitSet(new long[]{0x000000000000D000L});
-    public static final BitSet FOLLOW_14_in_rulePackageAS275 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePackageableElementAS_in_entryRulePackageableElementAS311 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRulePackageableElementAS321 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePackageAS_in_rulePackageableElementAS368 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEnumerationAS_in_rulePackageableElementAS395 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEnumerationAS_in_entryRuleEnumerationAS430 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleEnumerationAS440 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_15_in_ruleEnumerationAS475 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_IDENT_in_ruleEnumerationAS492 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_ruleEnumerationAS507 = new BitSet(new long[]{0x0000000000004010L});
-    public static final BitSet FOLLOW_ruleEnumerationLiteralAS_in_ruleEnumerationAS529 = new BitSet(new long[]{0x0000000000014000L});
-    public static final BitSet FOLLOW_16_in_ruleEnumerationAS540 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleEnumerationLiteralAS_in_ruleEnumerationAS561 = new BitSet(new long[]{0x0000000000014000L});
-    public static final BitSet FOLLOW_14_in_ruleEnumerationAS575 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEnumerationLiteralAS_in_entryRuleEnumerationLiteralAS611 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleEnumerationLiteralAS621 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_IDENT_in_ruleEnumerationLiteralAS662 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePackageDefinition_in_entryRulePackageDefinition167 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRulePackageDefinition177 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_12_in_rulePackageDefinition212 = new BitSet(new long[]{0x0000000010000010L});
+    public static final BitSet FOLLOW_ruleName_in_rulePackageDefinition233 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_rulePackageDefinition243 = new BitSet(new long[]{0x000000000000D000L});
+    public static final BitSet FOLLOW_rulePackageDefinitionElement_in_rulePackageDefinition264 = new BitSet(new long[]{0x000000000000D000L});
+    public static final BitSet FOLLOW_14_in_rulePackageDefinition275 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePackageDefinitionElement_in_entryRulePackageDefinitionElement311 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRulePackageDefinitionElement321 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePackageDefinition_in_rulePackageDefinitionElement368 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEnumerationDefinition_in_rulePackageDefinitionElement395 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEnumerationDefinition_in_entryRuleEnumerationDefinition430 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleEnumerationDefinition440 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_15_in_ruleEnumerationDefinition475 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_IDENT_in_ruleEnumerationDefinition492 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_ruleEnumerationDefinition507 = new BitSet(new long[]{0x0000000000004010L});
+    public static final BitSet FOLLOW_ruleEnumerationLiteralDefinition_in_ruleEnumerationDefinition529 = new BitSet(new long[]{0x0000000000014000L});
+    public static final BitSet FOLLOW_16_in_ruleEnumerationDefinition540 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleEnumerationLiteralDefinition_in_ruleEnumerationDefinition561 = new BitSet(new long[]{0x0000000000014000L});
+    public static final BitSet FOLLOW_14_in_ruleEnumerationDefinition575 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEnumerationLiteralDefinition_in_entryRuleEnumerationLiteralDefinition611 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleEnumerationLiteralDefinition621 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_IDENT_in_ruleEnumerationLiteralDefinition662 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleExpression_in_entryRuleExpression702 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleExpression712 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleConditionalExpression_in_ruleExpression759 = new BitSet(new long[]{0x0000000000000002L});

@@ -37,7 +37,7 @@ public class MscriptParser extends AbstractContentAssistParser {
 			nameMappings = new HashMap<AbstractElement, String>() {
 				private static final long serialVersionUID = 1L;
 				{
-					put(grammarAccess.getPackageableElementASAccess().getAlternatives(), "rule__PackageableElementAS__Alternatives");
+					put(grammarAccess.getPackageDefinitionElementAccess().getAlternatives(), "rule__PackageDefinitionElement__Alternatives");
 					put(grammarAccess.getExpressionAccess().getAlternatives(), "rule__Expression__Alternatives");
 					put(grammarAccess.getLogicalNotExpressionAccess().getAlternatives(), "rule__LogicalNotExpression__Alternatives");
 					put(grammarAccess.getUnaryMinusExpressionAccess().getAlternatives(), "rule__UnaryMinusExpression__Alternatives");
@@ -55,10 +55,10 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getMultiplyDivideOperatorAccess().getAlternatives(), "rule__MultiplyDivideOperator__Alternatives");
 					put(grammarAccess.getPowerOperatorAccess().getAlternatives(), "rule__PowerOperator__Alternatives");
 					put(grammarAccess.getBooleanKindAccess().getAlternatives(), "rule__BooleanKind__Alternatives");
-					put(grammarAccess.getPackageASAccess().getGroup(), "rule__PackageAS__Group__0");
-					put(grammarAccess.getEnumerationASAccess().getGroup(), "rule__EnumerationAS__Group__0");
-					put(grammarAccess.getEnumerationASAccess().getGroup_3(), "rule__EnumerationAS__Group_3__0");
-					put(grammarAccess.getEnumerationASAccess().getGroup_3_1(), "rule__EnumerationAS__Group_3_1__0");
+					put(grammarAccess.getPackageDefinitionAccess().getGroup(), "rule__PackageDefinition__Group__0");
+					put(grammarAccess.getEnumerationDefinitionAccess().getGroup(), "rule__EnumerationDefinition__Group__0");
+					put(grammarAccess.getEnumerationDefinitionAccess().getGroup_3(), "rule__EnumerationDefinition__Group_3__0");
+					put(grammarAccess.getEnumerationDefinitionAccess().getGroup_3_1(), "rule__EnumerationDefinition__Group_3_1__0");
 					put(grammarAccess.getConditionalExpressionAccess().getGroup(), "rule__ConditionalExpression__Group__0");
 					put(grammarAccess.getConditionalExpressionAccess().getGroup_2(), "rule__ConditionalExpression__Group_2__0");
 					put(grammarAccess.getConditionalExpressionCaseAccess().getGroup(), "rule__ConditionalExpressionCase__Group__0");
@@ -123,12 +123,12 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getUnitExpressionFactorAccess().getGroup_1(), "rule__UnitExpressionFactor__Group_1__0");
 					put(grammarAccess.getUnitExpressionExponentAccess().getGroup(), "rule__UnitExpressionExponent__Group__0");
 					put(grammarAccess.getMscriptAccess().getPackagesAssignment(), "rule__Mscript__PackagesAssignment");
-					put(grammarAccess.getPackageASAccess().getNameAssignment_1(), "rule__PackageAS__NameAssignment_1");
-					put(grammarAccess.getPackageASAccess().getPackagedElementsAssignment_3(), "rule__PackageAS__PackagedElementsAssignment_3");
-					put(grammarAccess.getEnumerationASAccess().getNameAssignment_1(), "rule__EnumerationAS__NameAssignment_1");
-					put(grammarAccess.getEnumerationASAccess().getLiteralsAssignment_3_0(), "rule__EnumerationAS__LiteralsAssignment_3_0");
-					put(grammarAccess.getEnumerationASAccess().getLiteralsAssignment_3_1_1(), "rule__EnumerationAS__LiteralsAssignment_3_1_1");
-					put(grammarAccess.getEnumerationLiteralASAccess().getNameAssignment(), "rule__EnumerationLiteralAS__NameAssignment");
+					put(grammarAccess.getPackageDefinitionAccess().getNameAssignment_1(), "rule__PackageDefinition__NameAssignment_1");
+					put(grammarAccess.getPackageDefinitionAccess().getElementsAssignment_3(), "rule__PackageDefinition__ElementsAssignment_3");
+					put(grammarAccess.getEnumerationDefinitionAccess().getNameAssignment_1(), "rule__EnumerationDefinition__NameAssignment_1");
+					put(grammarAccess.getEnumerationDefinitionAccess().getLiteralsAssignment_3_0(), "rule__EnumerationDefinition__LiteralsAssignment_3_0");
+					put(grammarAccess.getEnumerationDefinitionAccess().getLiteralsAssignment_3_1_1(), "rule__EnumerationDefinition__LiteralsAssignment_3_1_1");
+					put(grammarAccess.getEnumerationLiteralDefinitionAccess().getNameAssignment(), "rule__EnumerationLiteralDefinition__NameAssignment");
 					put(grammarAccess.getConditionalExpressionAccess().getCasesAssignment_1(), "rule__ConditionalExpression__CasesAssignment_1");
 					put(grammarAccess.getConditionalExpressionAccess().getCasesAssignment_2_1(), "rule__ConditionalExpression__CasesAssignment_2_1");
 					put(grammarAccess.getConditionalExpressionAccess().getElseExpressionAssignment_4(), "rule__ConditionalExpression__ElseExpressionAssignment_4");

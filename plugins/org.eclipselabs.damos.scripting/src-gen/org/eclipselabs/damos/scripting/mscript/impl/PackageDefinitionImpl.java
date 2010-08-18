@@ -22,24 +22,24 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipselabs.damos.scripting.mscript.MscriptPackage;
 import org.eclipselabs.damos.scripting.mscript.Name;
-import org.eclipselabs.damos.scripting.mscript.PackageAS;
-import org.eclipselabs.damos.scripting.mscript.PackageableElementAS;
+import org.eclipselabs.damos.scripting.mscript.PackageDefinition;
+import org.eclipselabs.damos.scripting.mscript.PackageDefinitionElement;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Package AS</b></em>'.
+ * An implementation of the model object '<em><b>Package Definition</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.damos.scripting.mscript.impl.PackageASImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipselabs.damos.scripting.mscript.impl.PackageASImpl#getPackagedElements <em>Packaged Elements</em>}</li>
+ *   <li>{@link org.eclipselabs.damos.scripting.mscript.impl.PackageDefinitionImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipselabs.damos.scripting.mscript.impl.PackageDefinitionImpl#getElements <em>Elements</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class PackageASImpl extends PackageableElementASImpl implements PackageAS
+public class PackageDefinitionImpl extends PackageDefinitionElementImpl implements PackageDefinition
 {
   /**
    * The cached value of the '{@link #getName() <em>Name</em>}' containment reference.
@@ -52,21 +52,21 @@ public class PackageASImpl extends PackageableElementASImpl implements PackageAS
   protected Name name;
 
   /**
-   * The cached value of the '{@link #getPackagedElements() <em>Packaged Elements</em>}' containment reference list.
+   * The cached value of the '{@link #getElements() <em>Elements</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getPackagedElements()
+   * @see #getElements()
    * @generated
    * @ordered
    */
-  protected EList<PackageableElementAS> packagedElements;
+  protected EList<PackageDefinitionElement> elements;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected PackageASImpl()
+  protected PackageDefinitionImpl()
   {
     super();
   }
@@ -79,7 +79,7 @@ public class PackageASImpl extends PackageableElementASImpl implements PackageAS
   @Override
   protected EClass eStaticClass()
   {
-    return MscriptPackage.Literals.PACKAGE_AS;
+    return MscriptPackage.Literals.PACKAGE_DEFINITION;
   }
 
   /**
@@ -103,7 +103,7 @@ public class PackageASImpl extends PackageableElementASImpl implements PackageAS
     name = newName;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MscriptPackage.PACKAGE_AS__NAME, oldName, newName);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MscriptPackage.PACKAGE_DEFINITION__NAME, oldName, newName);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -120,14 +120,14 @@ public class PackageASImpl extends PackageableElementASImpl implements PackageAS
     {
       NotificationChain msgs = null;
       if (name != null)
-        msgs = ((InternalEObject)name).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MscriptPackage.PACKAGE_AS__NAME, null, msgs);
+        msgs = ((InternalEObject)name).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MscriptPackage.PACKAGE_DEFINITION__NAME, null, msgs);
       if (newName != null)
-        msgs = ((InternalEObject)newName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MscriptPackage.PACKAGE_AS__NAME, null, msgs);
+        msgs = ((InternalEObject)newName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MscriptPackage.PACKAGE_DEFINITION__NAME, null, msgs);
       msgs = basicSetName(newName, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, MscriptPackage.PACKAGE_AS__NAME, newName, newName));
+      eNotify(new ENotificationImpl(this, Notification.SET, MscriptPackage.PACKAGE_DEFINITION__NAME, newName, newName));
   }
 
   /**
@@ -135,13 +135,13 @@ public class PackageASImpl extends PackageableElementASImpl implements PackageAS
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<PackageableElementAS> getPackagedElements()
+  public EList<PackageDefinitionElement> getElements()
   {
-    if (packagedElements == null)
+    if (elements == null)
     {
-      packagedElements = new EObjectContainmentEList<PackageableElementAS>(PackageableElementAS.class, this, MscriptPackage.PACKAGE_AS__PACKAGED_ELEMENTS);
+      elements = new EObjectContainmentEList<PackageDefinitionElement>(PackageDefinitionElement.class, this, MscriptPackage.PACKAGE_DEFINITION__ELEMENTS);
     }
-    return packagedElements;
+    return elements;
   }
 
   /**
@@ -154,10 +154,10 @@ public class PackageASImpl extends PackageableElementASImpl implements PackageAS
   {
     switch (featureID)
     {
-      case MscriptPackage.PACKAGE_AS__NAME:
+      case MscriptPackage.PACKAGE_DEFINITION__NAME:
         return basicSetName(null, msgs);
-      case MscriptPackage.PACKAGE_AS__PACKAGED_ELEMENTS:
-        return ((InternalEList<?>)getPackagedElements()).basicRemove(otherEnd, msgs);
+      case MscriptPackage.PACKAGE_DEFINITION__ELEMENTS:
+        return ((InternalEList<?>)getElements()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -172,10 +172,10 @@ public class PackageASImpl extends PackageableElementASImpl implements PackageAS
   {
     switch (featureID)
     {
-      case MscriptPackage.PACKAGE_AS__NAME:
+      case MscriptPackage.PACKAGE_DEFINITION__NAME:
         return getName();
-      case MscriptPackage.PACKAGE_AS__PACKAGED_ELEMENTS:
-        return getPackagedElements();
+      case MscriptPackage.PACKAGE_DEFINITION__ELEMENTS:
+        return getElements();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -191,12 +191,12 @@ public class PackageASImpl extends PackageableElementASImpl implements PackageAS
   {
     switch (featureID)
     {
-      case MscriptPackage.PACKAGE_AS__NAME:
+      case MscriptPackage.PACKAGE_DEFINITION__NAME:
         setName((Name)newValue);
         return;
-      case MscriptPackage.PACKAGE_AS__PACKAGED_ELEMENTS:
-        getPackagedElements().clear();
-        getPackagedElements().addAll((Collection<? extends PackageableElementAS>)newValue);
+      case MscriptPackage.PACKAGE_DEFINITION__ELEMENTS:
+        getElements().clear();
+        getElements().addAll((Collection<? extends PackageDefinitionElement>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -212,11 +212,11 @@ public class PackageASImpl extends PackageableElementASImpl implements PackageAS
   {
     switch (featureID)
     {
-      case MscriptPackage.PACKAGE_AS__NAME:
+      case MscriptPackage.PACKAGE_DEFINITION__NAME:
         setName((Name)null);
         return;
-      case MscriptPackage.PACKAGE_AS__PACKAGED_ELEMENTS:
-        getPackagedElements().clear();
+      case MscriptPackage.PACKAGE_DEFINITION__ELEMENTS:
+        getElements().clear();
         return;
     }
     super.eUnset(featureID);
@@ -232,12 +232,12 @@ public class PackageASImpl extends PackageableElementASImpl implements PackageAS
   {
     switch (featureID)
     {
-      case MscriptPackage.PACKAGE_AS__NAME:
+      case MscriptPackage.PACKAGE_DEFINITION__NAME:
         return name != null;
-      case MscriptPackage.PACKAGE_AS__PACKAGED_ELEMENTS:
-        return packagedElements != null && !packagedElements.isEmpty();
+      case MscriptPackage.PACKAGE_DEFINITION__ELEMENTS:
+        return elements != null && !elements.isEmpty();
     }
     return super.eIsSet(featureID);
   }
 
-} //PackageASImpl
+} //PackageDefinitionImpl

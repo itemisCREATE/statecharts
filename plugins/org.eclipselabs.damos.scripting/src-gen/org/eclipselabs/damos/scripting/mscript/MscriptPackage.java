@@ -108,33 +108,33 @@ public interface MscriptPackage extends EPackage
   int MSCRIPT_FEATURE_COUNT = 1;
 
   /**
-   * The meta object id for the '{@link org.eclipselabs.damos.scripting.mscript.impl.PackageableElementASImpl <em>Packageable Element AS</em>}' class.
+   * The meta object id for the '{@link org.eclipselabs.damos.scripting.mscript.impl.PackageDefinitionElementImpl <em>Package Definition Element</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.eclipselabs.damos.scripting.mscript.impl.PackageableElementASImpl
-   * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getPackageableElementAS()
+   * @see org.eclipselabs.damos.scripting.mscript.impl.PackageDefinitionElementImpl
+   * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getPackageDefinitionElement()
    * @generated
    */
-  int PACKAGEABLE_ELEMENT_AS = 3;
+  int PACKAGE_DEFINITION_ELEMENT = 3;
 
   /**
-   * The number of structural features of the '<em>Packageable Element AS</em>' class.
+   * The number of structural features of the '<em>Package Definition Element</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int PACKAGEABLE_ELEMENT_AS_FEATURE_COUNT = 0;
+  int PACKAGE_DEFINITION_ELEMENT_FEATURE_COUNT = 0;
 
   /**
-   * The meta object id for the '{@link org.eclipselabs.damos.scripting.mscript.impl.PackageASImpl <em>Package AS</em>}' class.
+   * The meta object id for the '{@link org.eclipselabs.damos.scripting.mscript.impl.PackageDefinitionImpl <em>Package Definition</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.eclipselabs.damos.scripting.mscript.impl.PackageASImpl
-   * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getPackageAS()
+   * @see org.eclipselabs.damos.scripting.mscript.impl.PackageDefinitionImpl
+   * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getPackageDefinition()
    * @generated
    */
-  int PACKAGE_AS = 2;
+  int PACKAGE_DEFINITION = 2;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' containment reference.
@@ -143,35 +143,35 @@ public interface MscriptPackage extends EPackage
    * @generated
    * @ordered
    */
-  int PACKAGE_AS__NAME = PACKAGEABLE_ELEMENT_AS_FEATURE_COUNT + 0;
+  int PACKAGE_DEFINITION__NAME = PACKAGE_DEFINITION_ELEMENT_FEATURE_COUNT + 0;
 
   /**
-   * The feature id for the '<em><b>Packaged Elements</b></em>' containment reference list.
+   * The feature id for the '<em><b>Elements</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int PACKAGE_AS__PACKAGED_ELEMENTS = PACKAGEABLE_ELEMENT_AS_FEATURE_COUNT + 1;
+  int PACKAGE_DEFINITION__ELEMENTS = PACKAGE_DEFINITION_ELEMENT_FEATURE_COUNT + 1;
 
   /**
-   * The number of structural features of the '<em>Package AS</em>' class.
+   * The number of structural features of the '<em>Package Definition</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int PACKAGE_AS_FEATURE_COUNT = PACKAGEABLE_ELEMENT_AS_FEATURE_COUNT + 2;
+  int PACKAGE_DEFINITION_FEATURE_COUNT = PACKAGE_DEFINITION_ELEMENT_FEATURE_COUNT + 2;
 
   /**
-   * The meta object id for the '{@link org.eclipselabs.damos.scripting.mscript.impl.EnumerationASImpl <em>Enumeration AS</em>}' class.
+   * The meta object id for the '{@link org.eclipselabs.damos.scripting.mscript.impl.EnumerationDefinitionImpl <em>Enumeration Definition</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.eclipselabs.damos.scripting.mscript.impl.EnumerationASImpl
-   * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getEnumerationAS()
+   * @see org.eclipselabs.damos.scripting.mscript.impl.EnumerationDefinitionImpl
+   * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getEnumerationDefinition()
    * @generated
    */
-  int ENUMERATION_AS = 4;
+  int ENUMERATION_DEFINITION = 4;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -180,7 +180,7 @@ public interface MscriptPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ENUMERATION_AS__NAME = PACKAGEABLE_ELEMENT_AS_FEATURE_COUNT + 0;
+  int ENUMERATION_DEFINITION__NAME = PACKAGE_DEFINITION_ELEMENT_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Literals</b></em>' containment reference list.
@@ -189,26 +189,26 @@ public interface MscriptPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ENUMERATION_AS__LITERALS = PACKAGEABLE_ELEMENT_AS_FEATURE_COUNT + 1;
+  int ENUMERATION_DEFINITION__LITERALS = PACKAGE_DEFINITION_ELEMENT_FEATURE_COUNT + 1;
 
   /**
-   * The number of structural features of the '<em>Enumeration AS</em>' class.
+   * The number of structural features of the '<em>Enumeration Definition</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ENUMERATION_AS_FEATURE_COUNT = PACKAGEABLE_ELEMENT_AS_FEATURE_COUNT + 2;
+  int ENUMERATION_DEFINITION_FEATURE_COUNT = PACKAGE_DEFINITION_ELEMENT_FEATURE_COUNT + 2;
 
   /**
-   * The meta object id for the '{@link org.eclipselabs.damos.scripting.mscript.impl.EnumerationLiteralASImpl <em>Enumeration Literal AS</em>}' class.
+   * The meta object id for the '{@link org.eclipselabs.damos.scripting.mscript.impl.EnumerationLiteralDefinitionImpl <em>Enumeration Literal Definition</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.eclipselabs.damos.scripting.mscript.impl.EnumerationLiteralASImpl
-   * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getEnumerationLiteralAS()
+   * @see org.eclipselabs.damos.scripting.mscript.impl.EnumerationLiteralDefinitionImpl
+   * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getEnumerationLiteralDefinition()
    * @generated
    */
-  int ENUMERATION_LITERAL_AS = 5;
+  int ENUMERATION_LITERAL_DEFINITION = 5;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -217,16 +217,16 @@ public interface MscriptPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ENUMERATION_LITERAL_AS__NAME = 0;
+  int ENUMERATION_LITERAL_DEFINITION__NAME = 0;
 
   /**
-   * The number of structural features of the '<em>Enumeration Literal AS</em>' class.
+   * The number of structural features of the '<em>Enumeration Literal Definition</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ENUMERATION_LITERAL_AS_FEATURE_COUNT = 1;
+  int ENUMERATION_LITERAL_DEFINITION_FEATURE_COUNT = 1;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.damos.scripting.mscript.impl.ExpressionImpl <em>Expression</em>}' class.
@@ -1585,99 +1585,99 @@ public interface MscriptPackage extends EPackage
   EReference getMscript_Packages();
 
   /**
-   * Returns the meta object for class '{@link org.eclipselabs.damos.scripting.mscript.PackageAS <em>Package AS</em>}'.
+   * Returns the meta object for class '{@link org.eclipselabs.damos.scripting.mscript.PackageDefinition <em>Package Definition</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Package AS</em>'.
-   * @see org.eclipselabs.damos.scripting.mscript.PackageAS
+   * @return the meta object for class '<em>Package Definition</em>'.
+   * @see org.eclipselabs.damos.scripting.mscript.PackageDefinition
    * @generated
    */
-  EClass getPackageAS();
+  EClass getPackageDefinition();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.eclipselabs.damos.scripting.mscript.PackageAS#getName <em>Name</em>}'.
+   * Returns the meta object for the containment reference '{@link org.eclipselabs.damos.scripting.mscript.PackageDefinition#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Name</em>'.
-   * @see org.eclipselabs.damos.scripting.mscript.PackageAS#getName()
-   * @see #getPackageAS()
+   * @see org.eclipselabs.damos.scripting.mscript.PackageDefinition#getName()
+   * @see #getPackageDefinition()
    * @generated
    */
-  EReference getPackageAS_Name();
+  EReference getPackageDefinition_Name();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipselabs.damos.scripting.mscript.PackageAS#getPackagedElements <em>Packaged Elements</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipselabs.damos.scripting.mscript.PackageDefinition#getElements <em>Elements</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Packaged Elements</em>'.
-   * @see org.eclipselabs.damos.scripting.mscript.PackageAS#getPackagedElements()
-   * @see #getPackageAS()
+   * @return the meta object for the containment reference list '<em>Elements</em>'.
+   * @see org.eclipselabs.damos.scripting.mscript.PackageDefinition#getElements()
+   * @see #getPackageDefinition()
    * @generated
    */
-  EReference getPackageAS_PackagedElements();
+  EReference getPackageDefinition_Elements();
 
   /**
-   * Returns the meta object for class '{@link org.eclipselabs.damos.scripting.mscript.PackageableElementAS <em>Packageable Element AS</em>}'.
+   * Returns the meta object for class '{@link org.eclipselabs.damos.scripting.mscript.PackageDefinitionElement <em>Package Definition Element</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Packageable Element AS</em>'.
-   * @see org.eclipselabs.damos.scripting.mscript.PackageableElementAS
+   * @return the meta object for class '<em>Package Definition Element</em>'.
+   * @see org.eclipselabs.damos.scripting.mscript.PackageDefinitionElement
    * @generated
    */
-  EClass getPackageableElementAS();
+  EClass getPackageDefinitionElement();
 
   /**
-   * Returns the meta object for class '{@link org.eclipselabs.damos.scripting.mscript.EnumerationAS <em>Enumeration AS</em>}'.
+   * Returns the meta object for class '{@link org.eclipselabs.damos.scripting.mscript.EnumerationDefinition <em>Enumeration Definition</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Enumeration AS</em>'.
-   * @see org.eclipselabs.damos.scripting.mscript.EnumerationAS
+   * @return the meta object for class '<em>Enumeration Definition</em>'.
+   * @see org.eclipselabs.damos.scripting.mscript.EnumerationDefinition
    * @generated
    */
-  EClass getEnumerationAS();
+  EClass getEnumerationDefinition();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipselabs.damos.scripting.mscript.EnumerationAS#getName <em>Name</em>}'.
+   * Returns the meta object for the attribute '{@link org.eclipselabs.damos.scripting.mscript.EnumerationDefinition#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.eclipselabs.damos.scripting.mscript.EnumerationAS#getName()
-   * @see #getEnumerationAS()
+   * @see org.eclipselabs.damos.scripting.mscript.EnumerationDefinition#getName()
+   * @see #getEnumerationDefinition()
    * @generated
    */
-  EAttribute getEnumerationAS_Name();
+  EAttribute getEnumerationDefinition_Name();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipselabs.damos.scripting.mscript.EnumerationAS#getLiterals <em>Literals</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipselabs.damos.scripting.mscript.EnumerationDefinition#getLiterals <em>Literals</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference list '<em>Literals</em>'.
-   * @see org.eclipselabs.damos.scripting.mscript.EnumerationAS#getLiterals()
-   * @see #getEnumerationAS()
+   * @see org.eclipselabs.damos.scripting.mscript.EnumerationDefinition#getLiterals()
+   * @see #getEnumerationDefinition()
    * @generated
    */
-  EReference getEnumerationAS_Literals();
+  EReference getEnumerationDefinition_Literals();
 
   /**
-   * Returns the meta object for class '{@link org.eclipselabs.damos.scripting.mscript.EnumerationLiteralAS <em>Enumeration Literal AS</em>}'.
+   * Returns the meta object for class '{@link org.eclipselabs.damos.scripting.mscript.EnumerationLiteralDefinition <em>Enumeration Literal Definition</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Enumeration Literal AS</em>'.
-   * @see org.eclipselabs.damos.scripting.mscript.EnumerationLiteralAS
+   * @return the meta object for class '<em>Enumeration Literal Definition</em>'.
+   * @see org.eclipselabs.damos.scripting.mscript.EnumerationLiteralDefinition
    * @generated
    */
-  EClass getEnumerationLiteralAS();
+  EClass getEnumerationLiteralDefinition();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipselabs.damos.scripting.mscript.EnumerationLiteralAS#getName <em>Name</em>}'.
+   * Returns the meta object for the attribute '{@link org.eclipselabs.damos.scripting.mscript.EnumerationLiteralDefinition#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.eclipselabs.damos.scripting.mscript.EnumerationLiteralAS#getName()
-   * @see #getEnumerationLiteralAS()
+   * @see org.eclipselabs.damos.scripting.mscript.EnumerationLiteralDefinition#getName()
+   * @see #getEnumerationLiteralDefinition()
    * @generated
    */
-  EAttribute getEnumerationLiteralAS_Name();
+  EAttribute getEnumerationLiteralDefinition_Name();
 
   /**
    * Returns the meta object for class '{@link org.eclipselabs.damos.scripting.mscript.Expression <em>Expression</em>}'.
@@ -2752,14 +2752,14 @@ public interface MscriptPackage extends EPackage
     EReference MSCRIPT__PACKAGES = eINSTANCE.getMscript_Packages();
 
     /**
-     * The meta object literal for the '{@link org.eclipselabs.damos.scripting.mscript.impl.PackageASImpl <em>Package AS</em>}' class.
+     * The meta object literal for the '{@link org.eclipselabs.damos.scripting.mscript.impl.PackageDefinitionImpl <em>Package Definition</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.eclipselabs.damos.scripting.mscript.impl.PackageASImpl
-     * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getPackageAS()
+     * @see org.eclipselabs.damos.scripting.mscript.impl.PackageDefinitionImpl
+     * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getPackageDefinition()
      * @generated
      */
-    EClass PACKAGE_AS = eINSTANCE.getPackageAS();
+    EClass PACKAGE_DEFINITION = eINSTANCE.getPackageDefinition();
 
     /**
      * The meta object literal for the '<em><b>Name</b></em>' containment reference feature.
@@ -2767,35 +2767,35 @@ public interface MscriptPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference PACKAGE_AS__NAME = eINSTANCE.getPackageAS_Name();
+    EReference PACKAGE_DEFINITION__NAME = eINSTANCE.getPackageDefinition_Name();
 
     /**
-     * The meta object literal for the '<em><b>Packaged Elements</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Elements</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference PACKAGE_AS__PACKAGED_ELEMENTS = eINSTANCE.getPackageAS_PackagedElements();
+    EReference PACKAGE_DEFINITION__ELEMENTS = eINSTANCE.getPackageDefinition_Elements();
 
     /**
-     * The meta object literal for the '{@link org.eclipselabs.damos.scripting.mscript.impl.PackageableElementASImpl <em>Packageable Element AS</em>}' class.
+     * The meta object literal for the '{@link org.eclipselabs.damos.scripting.mscript.impl.PackageDefinitionElementImpl <em>Package Definition Element</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.eclipselabs.damos.scripting.mscript.impl.PackageableElementASImpl
-     * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getPackageableElementAS()
+     * @see org.eclipselabs.damos.scripting.mscript.impl.PackageDefinitionElementImpl
+     * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getPackageDefinitionElement()
      * @generated
      */
-    EClass PACKAGEABLE_ELEMENT_AS = eINSTANCE.getPackageableElementAS();
+    EClass PACKAGE_DEFINITION_ELEMENT = eINSTANCE.getPackageDefinitionElement();
 
     /**
-     * The meta object literal for the '{@link org.eclipselabs.damos.scripting.mscript.impl.EnumerationASImpl <em>Enumeration AS</em>}' class.
+     * The meta object literal for the '{@link org.eclipselabs.damos.scripting.mscript.impl.EnumerationDefinitionImpl <em>Enumeration Definition</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.eclipselabs.damos.scripting.mscript.impl.EnumerationASImpl
-     * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getEnumerationAS()
+     * @see org.eclipselabs.damos.scripting.mscript.impl.EnumerationDefinitionImpl
+     * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getEnumerationDefinition()
      * @generated
      */
-    EClass ENUMERATION_AS = eINSTANCE.getEnumerationAS();
+    EClass ENUMERATION_DEFINITION = eINSTANCE.getEnumerationDefinition();
 
     /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -2803,7 +2803,7 @@ public interface MscriptPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute ENUMERATION_AS__NAME = eINSTANCE.getEnumerationAS_Name();
+    EAttribute ENUMERATION_DEFINITION__NAME = eINSTANCE.getEnumerationDefinition_Name();
 
     /**
      * The meta object literal for the '<em><b>Literals</b></em>' containment reference list feature.
@@ -2811,17 +2811,17 @@ public interface MscriptPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference ENUMERATION_AS__LITERALS = eINSTANCE.getEnumerationAS_Literals();
+    EReference ENUMERATION_DEFINITION__LITERALS = eINSTANCE.getEnumerationDefinition_Literals();
 
     /**
-     * The meta object literal for the '{@link org.eclipselabs.damos.scripting.mscript.impl.EnumerationLiteralASImpl <em>Enumeration Literal AS</em>}' class.
+     * The meta object literal for the '{@link org.eclipselabs.damos.scripting.mscript.impl.EnumerationLiteralDefinitionImpl <em>Enumeration Literal Definition</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.eclipselabs.damos.scripting.mscript.impl.EnumerationLiteralASImpl
-     * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getEnumerationLiteralAS()
+     * @see org.eclipselabs.damos.scripting.mscript.impl.EnumerationLiteralDefinitionImpl
+     * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getEnumerationLiteralDefinition()
      * @generated
      */
-    EClass ENUMERATION_LITERAL_AS = eINSTANCE.getEnumerationLiteralAS();
+    EClass ENUMERATION_LITERAL_DEFINITION = eINSTANCE.getEnumerationLiteralDefinition();
 
     /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -2829,7 +2829,7 @@ public interface MscriptPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute ENUMERATION_LITERAL_AS__NAME = eINSTANCE.getEnumerationLiteralAS_Name();
+    EAttribute ENUMERATION_LITERAL_DEFINITION__NAME = eINSTANCE.getEnumerationLiteralDefinition_Name();
 
     /**
      * The meta object literal for the '{@link org.eclipselabs.damos.scripting.mscript.impl.ExpressionImpl <em>Expression</em>}' class.

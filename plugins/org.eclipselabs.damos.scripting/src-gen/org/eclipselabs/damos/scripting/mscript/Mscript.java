@@ -29,7 +29,7 @@ public interface Mscript extends EObject
 {
   /**
    * Returns the value of the '<em><b>Packages</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipselabs.damos.scripting.mscript.PackageAS}.
+   * The list contents are of type {@link org.eclipselabs.damos.scripting.mscript.PackageDefinition}.
    * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Packages</em>' containment reference list isn't clear,
@@ -41,6 +41,6 @@ public interface Mscript extends EObject
    * @model containment="true"
    * @generated
    */
-  EList<PackageAS> getPackages();
+  EList<PackageDefinition> getPackages();
 
 } // Mscript

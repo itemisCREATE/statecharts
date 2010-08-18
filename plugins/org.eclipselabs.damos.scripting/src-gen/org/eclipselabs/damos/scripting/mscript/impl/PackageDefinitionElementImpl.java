@@ -10,25 +10,25 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipselabs.damos.scripting.mscript.MscriptPackage;
-import org.eclipselabs.damos.scripting.mscript.PackageableElementAS;
+import org.eclipselabs.damos.scripting.mscript.PackageDefinitionElement;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Packageable Element AS</b></em>'.
+ * An implementation of the model object '<em><b>Package Definition Element</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public class PackageableElementASImpl extends MinimalEObjectImpl.Container implements PackageableElementAS
+public class PackageDefinitionElementImpl extends MinimalEObjectImpl.Container implements PackageDefinitionElement
 {
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected PackageableElementASImpl()
+  protected PackageDefinitionElementImpl()
   {
     super();
   }
@@ -41,7 +41,7 @@ public class PackageableElementASImpl extends MinimalEObjectImpl.Container imple
   @Override
   protected EClass eStaticClass()
   {
-    return MscriptPackage.Literals.PACKAGEABLE_ELEMENT_AS;
+    return MscriptPackage.Literals.PACKAGE_DEFINITION_ELEMENT;
   }
 
-} //PackageableElementASImpl
+} //PackageDefinitionElementImpl

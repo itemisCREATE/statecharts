@@ -9,21 +9,21 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Enumeration Literal AS</b></em>'.
+ * A representation of the model object '<em><b>Enumeration Literal Definition</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipselabs.damos.scripting.mscript.EnumerationLiteralAS#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipselabs.damos.scripting.mscript.EnumerationLiteralDefinition#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipselabs.damos.scripting.mscript.MscriptPackage#getEnumerationLiteralAS()
+ * @see org.eclipselabs.damos.scripting.mscript.MscriptPackage#getEnumerationLiteralDefinition()
  * @model
  * @generated
  */
-public interface EnumerationLiteralAS extends EObject
+public interface EnumerationLiteralDefinition extends EObject
 {
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
@@ -35,14 +35,14 @@ public interface EnumerationLiteralAS extends EObject
    * <!-- end-user-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
-   * @see org.eclipselabs.damos.scripting.mscript.MscriptPackage#getEnumerationLiteralAS_Name()
+   * @see org.eclipselabs.damos.scripting.mscript.MscriptPackage#getEnumerationLiteralDefinition_Name()
    * @model
    * @generated
    */
   String getName();
 
   /**
-   * Sets the value of the '{@link org.eclipselabs.damos.scripting.mscript.EnumerationLiteralAS#getName <em>Name</em>}' attribute.
+   * Sets the value of the '{@link org.eclipselabs.damos.scripting.mscript.EnumerationLiteralDefinition#getName <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Name</em>' attribute.
@@ -51,4 +51,4 @@ public interface EnumerationLiteralAS extends EObject
    */
   void setName(String value);
 
-} // EnumerationLiteralAS
+} // EnumerationLiteralDefinition

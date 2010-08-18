@@ -70,10 +70,10 @@ public class MscriptFactoryImpl extends EFactoryImpl implements MscriptFactory
     {
       case MscriptPackage.MODEL: return createModel();
       case MscriptPackage.MSCRIPT: return createMscript();
-      case MscriptPackage.PACKAGE_AS: return createPackageAS();
-      case MscriptPackage.PACKAGEABLE_ELEMENT_AS: return createPackageableElementAS();
-      case MscriptPackage.ENUMERATION_AS: return createEnumerationAS();
-      case MscriptPackage.ENUMERATION_LITERAL_AS: return createEnumerationLiteralAS();
+      case MscriptPackage.PACKAGE_DEFINITION: return createPackageDefinition();
+      case MscriptPackage.PACKAGE_DEFINITION_ELEMENT: return createPackageDefinitionElement();
+      case MscriptPackage.ENUMERATION_DEFINITION: return createEnumerationDefinition();
+      case MscriptPackage.ENUMERATION_LITERAL_DEFINITION: return createEnumerationLiteralDefinition();
       case MscriptPackage.EXPRESSION: return createExpression();
       case MscriptPackage.CONDITIONAL_EXPRESSION: return createConditionalExpression();
       case MscriptPackage.CONDITIONAL_EXPRESSION_CASE: return createConditionalExpressionCase();
@@ -197,10 +197,10 @@ public class MscriptFactoryImpl extends EFactoryImpl implements MscriptFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public PackageAS createPackageAS()
+  public PackageDefinition createPackageDefinition()
   {
-    PackageASImpl packageAS = new PackageASImpl();
-    return packageAS;
+    PackageDefinitionImpl packageDefinition = new PackageDefinitionImpl();
+    return packageDefinition;
   }
 
   /**
@@ -208,10 +208,10 @@ public class MscriptFactoryImpl extends EFactoryImpl implements MscriptFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public PackageableElementAS createPackageableElementAS()
+  public PackageDefinitionElement createPackageDefinitionElement()
   {
-    PackageableElementASImpl packageableElementAS = new PackageableElementASImpl();
-    return packageableElementAS;
+    PackageDefinitionElementImpl packageDefinitionElement = new PackageDefinitionElementImpl();
+    return packageDefinitionElement;
   }
 
   /**
@@ -219,10 +219,10 @@ public class MscriptFactoryImpl extends EFactoryImpl implements MscriptFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public EnumerationAS createEnumerationAS()
+  public EnumerationDefinition createEnumerationDefinition()
   {
-    EnumerationASImpl enumerationAS = new EnumerationASImpl();
-    return enumerationAS;
+    EnumerationDefinitionImpl enumerationDefinition = new EnumerationDefinitionImpl();
+    return enumerationDefinition;
   }
 
   /**
@@ -230,10 +230,10 @@ public class MscriptFactoryImpl extends EFactoryImpl implements MscriptFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public EnumerationLiteralAS createEnumerationLiteralAS()
+  public EnumerationLiteralDefinition createEnumerationLiteralDefinition()
   {
-    EnumerationLiteralASImpl enumerationLiteralAS = new EnumerationLiteralASImpl();
-    return enumerationLiteralAS;
+    EnumerationLiteralDefinitionImpl enumerationLiteralDefinition = new EnumerationLiteralDefinitionImpl();
+    return enumerationLiteralDefinition;
   }
 
   /**

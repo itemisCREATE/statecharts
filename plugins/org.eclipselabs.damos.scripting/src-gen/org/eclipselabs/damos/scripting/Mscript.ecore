@@ -6,20 +6,20 @@
   <eClassifiers xsi:type="ecore:EClass" name="Model"/>
   <eClassifiers xsi:type="ecore:EClass" name="Mscript">
     <eStructuralFeatures xsi:type="ecore:EReference" name="packages" upperBound="-1"
-        eType="#//PackageAS" containment="true"/>
+        eType="#//PackageDefinition" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="PackageAS" eSuperTypes="#//PackageableElementAS">
+  <eClassifiers xsi:type="ecore:EClass" name="PackageDefinition" eSuperTypes="#//PackageDefinitionElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="#//Name" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="packagedElements" upperBound="-1"
-        eType="#//PackageableElementAS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
+        eType="#//PackageDefinitionElement" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="PackageableElementAS"/>
-  <eClassifiers xsi:type="ecore:EClass" name="EnumerationAS" eSuperTypes="#//PackageableElementAS">
+  <eClassifiers xsi:type="ecore:EClass" name="PackageDefinitionElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EnumerationDefinition" eSuperTypes="#//PackageDefinitionElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="literals" upperBound="-1"
-        eType="#//EnumerationLiteralAS" containment="true"/>
+        eType="#//EnumerationLiteralDefinition" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EnumerationLiteralAS">
+  <eClassifiers xsi:type="ecore:EClass" name="EnumerationLiteralDefinition">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Expression" eSuperTypes="#//Model"/>

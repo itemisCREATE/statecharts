@@ -27,8 +27,8 @@ import org.eclipselabs.damos.scripting.mscript.ComponentReferenceSegment;
 import org.eclipselabs.damos.scripting.mscript.ConditionalExpression;
 import org.eclipselabs.damos.scripting.mscript.ConditionalExpressionCase;
 import org.eclipselabs.damos.scripting.mscript.EndExpression;
-import org.eclipselabs.damos.scripting.mscript.EnumerationAS;
-import org.eclipselabs.damos.scripting.mscript.EnumerationLiteralAS;
+import org.eclipselabs.damos.scripting.mscript.EnumerationDefinition;
+import org.eclipselabs.damos.scripting.mscript.EnumerationLiteralDefinition;
 import org.eclipselabs.damos.scripting.mscript.Expression;
 import org.eclipselabs.damos.scripting.mscript.ExpressionList;
 import org.eclipselabs.damos.scripting.mscript.ExpressionSubscript;
@@ -50,8 +50,8 @@ import org.eclipselabs.damos.scripting.mscript.Name;
 import org.eclipselabs.damos.scripting.mscript.NamedArgument;
 import org.eclipselabs.damos.scripting.mscript.NamedFunctionCall;
 import org.eclipselabs.damos.scripting.mscript.NumericalLiteral;
-import org.eclipselabs.damos.scripting.mscript.PackageAS;
-import org.eclipselabs.damos.scripting.mscript.PackageableElementAS;
+import org.eclipselabs.damos.scripting.mscript.PackageDefinition;
+import org.eclipselabs.damos.scripting.mscript.PackageDefinitionElement;
 import org.eclipselabs.damos.scripting.mscript.ParenthesizedExpression;
 import org.eclipselabs.damos.scripting.mscript.PowerExpression;
 import org.eclipselabs.damos.scripting.mscript.PowerOperator;
@@ -95,28 +95,28 @@ public class MscriptPackageImpl extends EPackageImpl implements MscriptPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass packageASEClass = null;
+  private EClass packageDefinitionEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass packageableElementASEClass = null;
+  private EClass packageDefinitionElementEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass enumerationASEClass = null;
+  private EClass enumerationDefinitionEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass enumerationLiteralASEClass = null;
+  private EClass enumerationLiteralDefinitionEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -538,9 +538,9 @@ public class MscriptPackageImpl extends EPackageImpl implements MscriptPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getPackageAS()
+  public EClass getPackageDefinition()
   {
-    return packageASEClass;
+    return packageDefinitionEClass;
   }
 
   /**
@@ -548,9 +548,9 @@ public class MscriptPackageImpl extends EPackageImpl implements MscriptPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getPackageAS_Name()
+  public EReference getPackageDefinition_Name()
   {
-    return (EReference)packageASEClass.getEStructuralFeatures().get(0);
+    return (EReference)packageDefinitionEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -558,9 +558,9 @@ public class MscriptPackageImpl extends EPackageImpl implements MscriptPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getPackageAS_PackagedElements()
+  public EReference getPackageDefinition_Elements()
   {
-    return (EReference)packageASEClass.getEStructuralFeatures().get(1);
+    return (EReference)packageDefinitionEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -568,9 +568,9 @@ public class MscriptPackageImpl extends EPackageImpl implements MscriptPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getPackageableElementAS()
+  public EClass getPackageDefinitionElement()
   {
-    return packageableElementASEClass;
+    return packageDefinitionElementEClass;
   }
 
   /**
@@ -578,9 +578,9 @@ public class MscriptPackageImpl extends EPackageImpl implements MscriptPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getEnumerationAS()
+  public EClass getEnumerationDefinition()
   {
-    return enumerationASEClass;
+    return enumerationDefinitionEClass;
   }
 
   /**
@@ -588,9 +588,9 @@ public class MscriptPackageImpl extends EPackageImpl implements MscriptPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getEnumerationAS_Name()
+  public EAttribute getEnumerationDefinition_Name()
   {
-    return (EAttribute)enumerationASEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)enumerationDefinitionEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -598,9 +598,9 @@ public class MscriptPackageImpl extends EPackageImpl implements MscriptPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getEnumerationAS_Literals()
+  public EReference getEnumerationDefinition_Literals()
   {
-    return (EReference)enumerationASEClass.getEStructuralFeatures().get(1);
+    return (EReference)enumerationDefinitionEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -608,9 +608,9 @@ public class MscriptPackageImpl extends EPackageImpl implements MscriptPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getEnumerationLiteralAS()
+  public EClass getEnumerationLiteralDefinition()
   {
-    return enumerationLiteralASEClass;
+    return enumerationLiteralDefinitionEClass;
   }
 
   /**
@@ -618,9 +618,9 @@ public class MscriptPackageImpl extends EPackageImpl implements MscriptPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getEnumerationLiteralAS_Name()
+  public EAttribute getEnumerationLiteralDefinition_Name()
   {
-    return (EAttribute)enumerationLiteralASEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)enumerationLiteralDefinitionEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1628,18 +1628,18 @@ public class MscriptPackageImpl extends EPackageImpl implements MscriptPackage
     mscriptEClass = createEClass(MSCRIPT);
     createEReference(mscriptEClass, MSCRIPT__PACKAGES);
 
-    packageASEClass = createEClass(PACKAGE_AS);
-    createEReference(packageASEClass, PACKAGE_AS__NAME);
-    createEReference(packageASEClass, PACKAGE_AS__PACKAGED_ELEMENTS);
+    packageDefinitionEClass = createEClass(PACKAGE_DEFINITION);
+    createEReference(packageDefinitionEClass, PACKAGE_DEFINITION__NAME);
+    createEReference(packageDefinitionEClass, PACKAGE_DEFINITION__ELEMENTS);
 
-    packageableElementASEClass = createEClass(PACKAGEABLE_ELEMENT_AS);
+    packageDefinitionElementEClass = createEClass(PACKAGE_DEFINITION_ELEMENT);
 
-    enumerationASEClass = createEClass(ENUMERATION_AS);
-    createEAttribute(enumerationASEClass, ENUMERATION_AS__NAME);
-    createEReference(enumerationASEClass, ENUMERATION_AS__LITERALS);
+    enumerationDefinitionEClass = createEClass(ENUMERATION_DEFINITION);
+    createEAttribute(enumerationDefinitionEClass, ENUMERATION_DEFINITION__NAME);
+    createEReference(enumerationDefinitionEClass, ENUMERATION_DEFINITION__LITERALS);
 
-    enumerationLiteralASEClass = createEClass(ENUMERATION_LITERAL_AS);
-    createEAttribute(enumerationLiteralASEClass, ENUMERATION_LITERAL_AS__NAME);
+    enumerationLiteralDefinitionEClass = createEClass(ENUMERATION_LITERAL_DEFINITION);
+    createEAttribute(enumerationLiteralDefinitionEClass, ENUMERATION_LITERAL_DEFINITION__NAME);
 
     expressionEClass = createEClass(EXPRESSION);
 
@@ -1811,8 +1811,8 @@ public class MscriptPackageImpl extends EPackageImpl implements MscriptPackage
     // Set bounds for type parameters
 
     // Add supertypes to classes
-    packageASEClass.getESuperTypes().add(this.getPackageableElementAS());
-    enumerationASEClass.getESuperTypes().add(this.getPackageableElementAS());
+    packageDefinitionEClass.getESuperTypes().add(this.getPackageDefinitionElement());
+    enumerationDefinitionEClass.getESuperTypes().add(this.getPackageDefinitionElement());
     expressionEClass.getESuperTypes().add(this.getModel());
     conditionalExpressionEClass.getESuperTypes().add(this.getExpression());
     literalEClass.getESuperTypes().add(this.getExpression());
@@ -1846,20 +1846,20 @@ public class MscriptPackageImpl extends EPackageImpl implements MscriptPackage
     initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(mscriptEClass, Mscript.class, "Mscript", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getMscript_Packages(), this.getPackageAS(), null, "packages", null, 0, -1, Mscript.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getMscript_Packages(), this.getPackageDefinition(), null, "packages", null, 0, -1, Mscript.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(packageASEClass, PackageAS.class, "PackageAS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getPackageAS_Name(), this.getName_(), null, "name", null, 0, 1, PackageAS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getPackageAS_PackagedElements(), this.getPackageableElementAS(), null, "packagedElements", null, 0, -1, PackageAS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(packageDefinitionEClass, PackageDefinition.class, "PackageDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getPackageDefinition_Name(), this.getName_(), null, "name", null, 0, 1, PackageDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getPackageDefinition_Elements(), this.getPackageDefinitionElement(), null, "elements", null, 0, -1, PackageDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(packageableElementASEClass, PackageableElementAS.class, "PackageableElementAS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEClass(packageDefinitionElementEClass, PackageDefinitionElement.class, "PackageDefinitionElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-    initEClass(enumerationASEClass, EnumerationAS.class, "EnumerationAS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getEnumerationAS_Name(), ecorePackage.getEString(), "name", null, 0, 1, EnumerationAS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEnumerationAS_Literals(), this.getEnumerationLiteralAS(), null, "literals", null, 0, -1, EnumerationAS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(enumerationDefinitionEClass, EnumerationDefinition.class, "EnumerationDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getEnumerationDefinition_Name(), ecorePackage.getEString(), "name", null, 0, 1, EnumerationDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEnumerationDefinition_Literals(), this.getEnumerationLiteralDefinition(), null, "literals", null, 0, -1, EnumerationDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(enumerationLiteralASEClass, EnumerationLiteralAS.class, "EnumerationLiteralAS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getEnumerationLiteralAS_Name(), ecorePackage.getEString(), "name", null, 0, 1, EnumerationLiteralAS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(enumerationLiteralDefinitionEClass, EnumerationLiteralDefinition.class, "EnumerationLiteralDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getEnumerationLiteralDefinition_Name(), ecorePackage.getEString(), "name", null, 0, 1, EnumerationLiteralDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(expressionEClass, Expression.class, "Expression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

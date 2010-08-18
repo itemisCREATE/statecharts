@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipselabs.damos.scripting.mscript.Mscript;
 import org.eclipselabs.damos.scripting.mscript.MscriptPackage;
-import org.eclipselabs.damos.scripting.mscript.PackageAS;
+import org.eclipselabs.damos.scripting.mscript.PackageDefinition;
 
 /**
  * <!-- begin-user-doc -->
@@ -46,7 +46,7 @@ public class MscriptImpl extends MinimalEObjectImpl.Container implements Mscript
    * @generated
    * @ordered
    */
-  protected EList<PackageAS> packages;
+  protected EList<PackageDefinition> packages;
 
   /**
    * <!-- begin-user-doc -->
@@ -74,11 +74,11 @@ public class MscriptImpl extends MinimalEObjectImpl.Container implements Mscript
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<PackageAS> getPackages()
+  public EList<PackageDefinition> getPackages()
   {
     if (packages == null)
     {
-      packages = new EObjectContainmentEList<PackageAS>(PackageAS.class, this, MscriptPackage.MSCRIPT__PACKAGES);
+      packages = new EObjectContainmentEList<PackageDefinition>(PackageDefinition.class, this, MscriptPackage.MSCRIPT__PACKAGES);
     }
     return packages;
   }
@@ -128,7 +128,7 @@ public class MscriptImpl extends MinimalEObjectImpl.Container implements Mscript
     {
       case MscriptPackage.MSCRIPT__PACKAGES:
         getPackages().clear();
-        getPackages().addAll((Collection<? extends PackageAS>)newValue);
+        getPackages().addAll((Collection<? extends PackageDefinition>)newValue);
         return;
     }
     super.eSet(featureID, newValue);

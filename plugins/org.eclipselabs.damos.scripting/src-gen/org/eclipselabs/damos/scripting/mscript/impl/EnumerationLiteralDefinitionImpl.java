@@ -5,40 +5,30 @@
  */
 package org.eclipselabs.damos.scripting.mscript.impl;
 
-import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
-
-import org.eclipselabs.damos.scripting.mscript.EnumerationAS;
-import org.eclipselabs.damos.scripting.mscript.EnumerationLiteralAS;
+import org.eclipselabs.damos.scripting.mscript.EnumerationLiteralDefinition;
 import org.eclipselabs.damos.scripting.mscript.MscriptPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Enumeration AS</b></em>'.
+ * An implementation of the model object '<em><b>Enumeration Literal Definition</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.damos.scripting.mscript.impl.EnumerationASImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipselabs.damos.scripting.mscript.impl.EnumerationASImpl#getLiterals <em>Literals</em>}</li>
+ *   <li>{@link org.eclipselabs.damos.scripting.mscript.impl.EnumerationLiteralDefinitionImpl#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class EnumerationASImpl extends PackageableElementASImpl implements EnumerationAS
+public class EnumerationLiteralDefinitionImpl extends MinimalEObjectImpl.Container implements EnumerationLiteralDefinition
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -61,21 +51,11 @@ public class EnumerationASImpl extends PackageableElementASImpl implements Enume
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getLiterals() <em>Literals</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getLiterals()
-   * @generated
-   * @ordered
-   */
-  protected EList<EnumerationLiteralAS> literals;
-
-  /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected EnumerationASImpl()
+  protected EnumerationLiteralDefinitionImpl()
   {
     super();
   }
@@ -88,7 +68,7 @@ public class EnumerationASImpl extends PackageableElementASImpl implements Enume
   @Override
   protected EClass eStaticClass()
   {
-    return MscriptPackage.Literals.ENUMERATION_AS;
+    return MscriptPackage.Literals.ENUMERATION_LITERAL_DEFINITION;
   }
 
   /**
@@ -111,37 +91,7 @@ public class EnumerationASImpl extends PackageableElementASImpl implements Enume
     String oldName = name;
     name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, MscriptPackage.ENUMERATION_AS__NAME, oldName, name));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EList<EnumerationLiteralAS> getLiterals()
-  {
-    if (literals == null)
-    {
-      literals = new EObjectContainmentEList<EnumerationLiteralAS>(EnumerationLiteralAS.class, this, MscriptPackage.ENUMERATION_AS__LITERALS);
-    }
-    return literals;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-  {
-    switch (featureID)
-    {
-      case MscriptPackage.ENUMERATION_AS__LITERALS:
-        return ((InternalEList<?>)getLiterals()).basicRemove(otherEnd, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
+      eNotify(new ENotificationImpl(this, Notification.SET, MscriptPackage.ENUMERATION_LITERAL_DEFINITION__NAME, oldName, name));
   }
 
   /**
@@ -154,10 +104,8 @@ public class EnumerationASImpl extends PackageableElementASImpl implements Enume
   {
     switch (featureID)
     {
-      case MscriptPackage.ENUMERATION_AS__NAME:
+      case MscriptPackage.ENUMERATION_LITERAL_DEFINITION__NAME:
         return getName();
-      case MscriptPackage.ENUMERATION_AS__LITERALS:
-        return getLiterals();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -167,18 +115,13 @@ public class EnumerationASImpl extends PackageableElementASImpl implements Enume
    * <!-- end-user-doc -->
    * @generated
    */
-  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
     switch (featureID)
     {
-      case MscriptPackage.ENUMERATION_AS__NAME:
+      case MscriptPackage.ENUMERATION_LITERAL_DEFINITION__NAME:
         setName((String)newValue);
-        return;
-      case MscriptPackage.ENUMERATION_AS__LITERALS:
-        getLiterals().clear();
-        getLiterals().addAll((Collection<? extends EnumerationLiteralAS>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -194,11 +137,8 @@ public class EnumerationASImpl extends PackageableElementASImpl implements Enume
   {
     switch (featureID)
     {
-      case MscriptPackage.ENUMERATION_AS__NAME:
+      case MscriptPackage.ENUMERATION_LITERAL_DEFINITION__NAME:
         setName(NAME_EDEFAULT);
-        return;
-      case MscriptPackage.ENUMERATION_AS__LITERALS:
-        getLiterals().clear();
         return;
     }
     super.eUnset(featureID);
@@ -214,10 +154,8 @@ public class EnumerationASImpl extends PackageableElementASImpl implements Enume
   {
     switch (featureID)
     {
-      case MscriptPackage.ENUMERATION_AS__NAME:
+      case MscriptPackage.ENUMERATION_LITERAL_DEFINITION__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case MscriptPackage.ENUMERATION_AS__LITERALS:
-        return literals != null && !literals.isEmpty();
     }
     return super.eIsSet(featureID);
   }
@@ -239,4 +177,4 @@ public class EnumerationASImpl extends PackageableElementASImpl implements Enume
     return result.toString();
   }
 
-} //EnumerationASImpl
+} //EnumerationLiteralDefinitionImpl
