@@ -7,28 +7,26 @@ package org.eclipselabs.damos.scripting.mscript.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
-import org.eclipselabs.damos.scripting.mscript.Expression;
+import org.eclipselabs.damos.scripting.mscript.BooleanTypeSpecifier;
 import org.eclipselabs.damos.scripting.mscript.MscriptPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Expression</b></em>'.
+ * An implementation of the model object '<em><b>Boolean Type Specifier</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public class ExpressionImpl extends MinimalEObjectImpl.Container implements Expression
+public class BooleanTypeSpecifierImpl extends PrimitiveTypeSpecifierImpl implements BooleanTypeSpecifier
 {
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ExpressionImpl()
+  protected BooleanTypeSpecifierImpl()
   {
     super();
   }
@@ -41,7 +39,7 @@ public class ExpressionImpl extends MinimalEObjectImpl.Container implements Expr
   @Override
   protected EClass eStaticClass()
   {
-    return MscriptPackage.Literals.EXPRESSION;
+    return MscriptPackage.Literals.BOOLEAN_TYPE_SPECIFIER;
   }
 
-} //ExpressionImpl
+} //BooleanTypeSpecifierImpl

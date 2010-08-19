@@ -95,13 +95,6 @@ public class MscriptSwitch<T>
   {
     switch (classifierID)
     {
-      case MscriptPackage.MODEL:
-      {
-        Model model = (Model)theEObject;
-        T result = caseModel(model);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case MscriptPackage.MSCRIPT:
       {
         Mscript mscript = (Mscript)theEObject;
@@ -139,11 +132,80 @@ public class MscriptSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case MscriptPackage.DATA_TYPE_SPECIFIER:
+      {
+        DataTypeSpecifier dataTypeSpecifier = (DataTypeSpecifier)theEObject;
+        T result = caseDataTypeSpecifier(dataTypeSpecifier);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case MscriptPackage.PRIMITIVE_TYPE_SPECIFIER:
+      {
+        PrimitiveTypeSpecifier primitiveTypeSpecifier = (PrimitiveTypeSpecifier)theEObject;
+        T result = casePrimitiveTypeSpecifier(primitiveTypeSpecifier);
+        if (result == null) result = caseDataTypeSpecifier(primitiveTypeSpecifier);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case MscriptPackage.NUMERICAL_TYPE_SPECIFIER:
+      {
+        NumericalTypeSpecifier numericalTypeSpecifier = (NumericalTypeSpecifier)theEObject;
+        T result = caseNumericalTypeSpecifier(numericalTypeSpecifier);
+        if (result == null) result = casePrimitiveTypeSpecifier(numericalTypeSpecifier);
+        if (result == null) result = caseDataTypeSpecifier(numericalTypeSpecifier);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case MscriptPackage.REAL_TYPE_SPECIFIER:
+      {
+        RealTypeSpecifier realTypeSpecifier = (RealTypeSpecifier)theEObject;
+        T result = caseRealTypeSpecifier(realTypeSpecifier);
+        if (result == null) result = caseNumericalTypeSpecifier(realTypeSpecifier);
+        if (result == null) result = casePrimitiveTypeSpecifier(realTypeSpecifier);
+        if (result == null) result = caseDataTypeSpecifier(realTypeSpecifier);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case MscriptPackage.INTEGER_TYPE_SPECIFIER:
+      {
+        IntegerTypeSpecifier integerTypeSpecifier = (IntegerTypeSpecifier)theEObject;
+        T result = caseIntegerTypeSpecifier(integerTypeSpecifier);
+        if (result == null) result = caseNumericalTypeSpecifier(integerTypeSpecifier);
+        if (result == null) result = casePrimitiveTypeSpecifier(integerTypeSpecifier);
+        if (result == null) result = caseDataTypeSpecifier(integerTypeSpecifier);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case MscriptPackage.BOOLEAN_TYPE_SPECIFIER:
+      {
+        BooleanTypeSpecifier booleanTypeSpecifier = (BooleanTypeSpecifier)theEObject;
+        T result = caseBooleanTypeSpecifier(booleanTypeSpecifier);
+        if (result == null) result = casePrimitiveTypeSpecifier(booleanTypeSpecifier);
+        if (result == null) result = caseDataTypeSpecifier(booleanTypeSpecifier);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case MscriptPackage.STRING_TYPE_SPECIFIER:
+      {
+        StringTypeSpecifier stringTypeSpecifier = (StringTypeSpecifier)theEObject;
+        T result = caseStringTypeSpecifier(stringTypeSpecifier);
+        if (result == null) result = casePrimitiveTypeSpecifier(stringTypeSpecifier);
+        if (result == null) result = caseDataTypeSpecifier(stringTypeSpecifier);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case MscriptPackage.COMPLEX_TYPE_SPECIFIER:
+      {
+        ComplexTypeSpecifier complexTypeSpecifier = (ComplexTypeSpecifier)theEObject;
+        T result = caseComplexTypeSpecifier(complexTypeSpecifier);
+        if (result == null) result = caseDataTypeSpecifier(complexTypeSpecifier);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case MscriptPackage.EXPRESSION:
       {
         Expression expression = (Expression)theEObject;
         T result = caseExpression(expression);
-        if (result == null) result = caseModel(expression);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -152,7 +214,6 @@ public class MscriptSwitch<T>
         ConditionalExpression conditionalExpression = (ConditionalExpression)theEObject;
         T result = caseConditionalExpression(conditionalExpression);
         if (result == null) result = caseExpression(conditionalExpression);
-        if (result == null) result = caseModel(conditionalExpression);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -168,7 +229,6 @@ public class MscriptSwitch<T>
         Literal literal = (Literal)theEObject;
         T result = caseLiteral(literal);
         if (result == null) result = caseExpression(literal);
-        if (result == null) result = caseModel(literal);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -178,7 +238,6 @@ public class MscriptSwitch<T>
         T result = caseNumericalLiteral(numericalLiteral);
         if (result == null) result = caseLiteral(numericalLiteral);
         if (result == null) result = caseExpression(numericalLiteral);
-        if (result == null) result = caseModel(numericalLiteral);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -189,7 +248,6 @@ public class MscriptSwitch<T>
         if (result == null) result = caseNumericalLiteral(realLiteral);
         if (result == null) result = caseLiteral(realLiteral);
         if (result == null) result = caseExpression(realLiteral);
-        if (result == null) result = caseModel(realLiteral);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -200,7 +258,6 @@ public class MscriptSwitch<T>
         if (result == null) result = caseNumericalLiteral(integerLiteral);
         if (result == null) result = caseLiteral(integerLiteral);
         if (result == null) result = caseExpression(integerLiteral);
-        if (result == null) result = caseModel(integerLiteral);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -210,7 +267,6 @@ public class MscriptSwitch<T>
         T result = caseBooleanLiteral(booleanLiteral);
         if (result == null) result = caseLiteral(booleanLiteral);
         if (result == null) result = caseExpression(booleanLiteral);
-        if (result == null) result = caseModel(booleanLiteral);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -220,7 +276,6 @@ public class MscriptSwitch<T>
         T result = caseStringLiteral(stringLiteral);
         if (result == null) result = caseLiteral(stringLiteral);
         if (result == null) result = caseExpression(stringLiteral);
-        if (result == null) result = caseModel(stringLiteral);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -229,7 +284,6 @@ public class MscriptSwitch<T>
         FunctionCall functionCall = (FunctionCall)theEObject;
         T result = caseFunctionCall(functionCall);
         if (result == null) result = caseExpression(functionCall);
-        if (result == null) result = caseModel(functionCall);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -239,7 +293,6 @@ public class MscriptSwitch<T>
         T result = caseNamedFunctionCall(namedFunctionCall);
         if (result == null) result = caseFunctionCall(namedFunctionCall);
         if (result == null) result = caseExpression(namedFunctionCall);
-        if (result == null) result = caseModel(namedFunctionCall);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -256,7 +309,6 @@ public class MscriptSwitch<T>
         T result = caseKeywordFunctionCall(keywordFunctionCall);
         if (result == null) result = caseFunctionCall(keywordFunctionCall);
         if (result == null) result = caseExpression(keywordFunctionCall);
-        if (result == null) result = caseModel(keywordFunctionCall);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -279,7 +331,6 @@ public class MscriptSwitch<T>
         ComponentReference componentReference = (ComponentReference)theEObject;
         T result = caseComponentReference(componentReference);
         if (result == null) result = caseExpression(componentReference);
-        if (result == null) result = caseModel(componentReference);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -325,7 +376,6 @@ public class MscriptSwitch<T>
         ArrayConcatenationOperator arrayConcatenationOperator = (ArrayConcatenationOperator)theEObject;
         T result = caseArrayConcatenationOperator(arrayConcatenationOperator);
         if (result == null) result = caseExpression(arrayConcatenationOperator);
-        if (result == null) result = caseModel(arrayConcatenationOperator);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -334,7 +384,6 @@ public class MscriptSwitch<T>
         ArrayConstructionOperator arrayConstructionOperator = (ArrayConstructionOperator)theEObject;
         T result = caseArrayConstructionOperator(arrayConstructionOperator);
         if (result == null) result = caseExpression(arrayConstructionOperator);
-        if (result == null) result = caseModel(arrayConstructionOperator);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -350,7 +399,6 @@ public class MscriptSwitch<T>
         ParenthesizedExpression parenthesizedExpression = (ParenthesizedExpression)theEObject;
         T result = caseParenthesizedExpression(parenthesizedExpression);
         if (result == null) result = caseExpression(parenthesizedExpression);
-        if (result == null) result = caseModel(parenthesizedExpression);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -359,7 +407,6 @@ public class MscriptSwitch<T>
         BeginExpression beginExpression = (BeginExpression)theEObject;
         T result = caseBeginExpression(beginExpression);
         if (result == null) result = caseExpression(beginExpression);
-        if (result == null) result = caseModel(beginExpression);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -368,7 +415,6 @@ public class MscriptSwitch<T>
         EndExpression endExpression = (EndExpression)theEObject;
         T result = caseEndExpression(endExpression);
         if (result == null) result = caseExpression(endExpression);
-        if (result == null) result = caseModel(endExpression);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -412,7 +458,6 @@ public class MscriptSwitch<T>
         RangeExpression rangeExpression = (RangeExpression)theEObject;
         T result = caseRangeExpression(rangeExpression);
         if (result == null) result = caseExpression(rangeExpression);
-        if (result == null) result = caseModel(rangeExpression);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -421,7 +466,6 @@ public class MscriptSwitch<T>
         LogicalOrExpression logicalOrExpression = (LogicalOrExpression)theEObject;
         T result = caseLogicalOrExpression(logicalOrExpression);
         if (result == null) result = caseExpression(logicalOrExpression);
-        if (result == null) result = caseModel(logicalOrExpression);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -430,7 +474,6 @@ public class MscriptSwitch<T>
         LogicalAndExpression logicalAndExpression = (LogicalAndExpression)theEObject;
         T result = caseLogicalAndExpression(logicalAndExpression);
         if (result == null) result = caseExpression(logicalAndExpression);
-        if (result == null) result = caseModel(logicalAndExpression);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -439,7 +482,6 @@ public class MscriptSwitch<T>
         LogicalNotExpression logicalNotExpression = (LogicalNotExpression)theEObject;
         T result = caseLogicalNotExpression(logicalNotExpression);
         if (result == null) result = caseExpression(logicalNotExpression);
-        if (result == null) result = caseModel(logicalNotExpression);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -448,7 +490,6 @@ public class MscriptSwitch<T>
         RelationalExpression relationalExpression = (RelationalExpression)theEObject;
         T result = caseRelationalExpression(relationalExpression);
         if (result == null) result = caseExpression(relationalExpression);
-        if (result == null) result = caseModel(relationalExpression);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -457,7 +498,6 @@ public class MscriptSwitch<T>
         AddSubtractExpression addSubtractExpression = (AddSubtractExpression)theEObject;
         T result = caseAddSubtractExpression(addSubtractExpression);
         if (result == null) result = caseExpression(addSubtractExpression);
-        if (result == null) result = caseModel(addSubtractExpression);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -466,7 +506,6 @@ public class MscriptSwitch<T>
         MultiplyDivideExpression multiplyDivideExpression = (MultiplyDivideExpression)theEObject;
         T result = caseMultiplyDivideExpression(multiplyDivideExpression);
         if (result == null) result = caseExpression(multiplyDivideExpression);
-        if (result == null) result = caseModel(multiplyDivideExpression);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -475,7 +514,6 @@ public class MscriptSwitch<T>
         PowerExpression powerExpression = (PowerExpression)theEObject;
         T result = casePowerExpression(powerExpression);
         if (result == null) result = caseExpression(powerExpression);
-        if (result == null) result = caseModel(powerExpression);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -484,28 +522,11 @@ public class MscriptSwitch<T>
         UnaryMinusExpression unaryMinusExpression = (UnaryMinusExpression)theEObject;
         T result = caseUnaryMinusExpression(unaryMinusExpression);
         if (result == null) result = caseExpression(unaryMinusExpression);
-        if (result == null) result = caseModel(unaryMinusExpression);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
       default: return defaultCase(theEObject);
     }
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Model</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Model</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseModel(Model object)
-  {
-    return null;
   }
 
   /**
@@ -584,6 +605,134 @@ public class MscriptSwitch<T>
    * @generated
    */
   public T caseEnumerationLiteralDefinition(EnumerationLiteralDefinition object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Data Type Specifier</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Data Type Specifier</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseDataTypeSpecifier(DataTypeSpecifier object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Primitive Type Specifier</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Primitive Type Specifier</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T casePrimitiveTypeSpecifier(PrimitiveTypeSpecifier object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Numerical Type Specifier</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Numerical Type Specifier</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseNumericalTypeSpecifier(NumericalTypeSpecifier object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Real Type Specifier</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Real Type Specifier</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseRealTypeSpecifier(RealTypeSpecifier object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Integer Type Specifier</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Integer Type Specifier</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseIntegerTypeSpecifier(IntegerTypeSpecifier object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Boolean Type Specifier</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Boolean Type Specifier</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseBooleanTypeSpecifier(BooleanTypeSpecifier object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>String Type Specifier</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>String Type Specifier</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseStringTypeSpecifier(StringTypeSpecifier object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Complex Type Specifier</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Complex Type Specifier</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseComplexTypeSpecifier(ComplexTypeSpecifier object)
   {
     return null;
   }

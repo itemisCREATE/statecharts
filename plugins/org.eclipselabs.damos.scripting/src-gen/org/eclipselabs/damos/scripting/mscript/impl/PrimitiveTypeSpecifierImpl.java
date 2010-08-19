@@ -7,28 +7,26 @@ package org.eclipselabs.damos.scripting.mscript.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
-import org.eclipselabs.damos.scripting.mscript.Expression;
 import org.eclipselabs.damos.scripting.mscript.MscriptPackage;
+import org.eclipselabs.damos.scripting.mscript.PrimitiveTypeSpecifier;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Expression</b></em>'.
+ * An implementation of the model object '<em><b>Primitive Type Specifier</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public class ExpressionImpl extends MinimalEObjectImpl.Container implements Expression
+public class PrimitiveTypeSpecifierImpl extends DataTypeSpecifierImpl implements PrimitiveTypeSpecifier
 {
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ExpressionImpl()
+  protected PrimitiveTypeSpecifierImpl()
   {
     super();
   }
@@ -41,7 +39,7 @@ public class ExpressionImpl extends MinimalEObjectImpl.Container implements Expr
   @Override
   protected EClass eStaticClass()
   {
-    return MscriptPackage.Literals.EXPRESSION;
+    return MscriptPackage.Literals.PRIMITIVE_TYPE_SPECIFIER;
   }
 
-} //ExpressionImpl
+} //PrimitiveTypeSpecifierImpl

@@ -5,6 +5,7 @@
  */
 package org.eclipselabs.damos.scripting.mscript;
 
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -16,6 +17,6 @@ package org.eclipselabs.damos.scripting.mscript;
  * @model
  * @generated
  */
-public interface Expression extends Model
+public interface Expression extends EObject
 {
 } // Expression

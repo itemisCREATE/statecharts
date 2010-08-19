@@ -9,26 +9,26 @@ import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.eclipselabs.damos.scripting.mscript.Expression;
+import org.eclipselabs.damos.scripting.mscript.DataTypeSpecifier;
 import org.eclipselabs.damos.scripting.mscript.MscriptPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Expression</b></em>'.
+ * An implementation of the model object '<em><b>Data Type Specifier</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public class ExpressionImpl extends MinimalEObjectImpl.Container implements Expression
+public class DataTypeSpecifierImpl extends MinimalEObjectImpl.Container implements DataTypeSpecifier
 {
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ExpressionImpl()
+  protected DataTypeSpecifierImpl()
   {
     super();
   }
@@ -41,7 +41,7 @@ public class ExpressionImpl extends MinimalEObjectImpl.Container implements Expr
   @Override
   protected EClass eStaticClass()
   {
-    return MscriptPackage.Literals.EXPRESSION;
+    return MscriptPackage.Literals.DATA_TYPE_SPECIFIER;
   }
 
-} //ExpressionImpl
+} //DataTypeSpecifierImpl

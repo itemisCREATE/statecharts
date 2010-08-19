@@ -37,7 +37,6 @@
       <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//BooleanKind/False"/>
       <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//BooleanKind/True"/>
     </genEnums>
-    <genClasses ecoreClass="Mscript.ecore#//Model"/>
     <genClasses ecoreClass="Mscript.ecore#//Mscript">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//Mscript/packages"/>
     </genClasses>
@@ -52,6 +51,18 @@
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//EnumerationLiteralDefinition">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//EnumerationLiteralDefinition/name"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//DataTypeSpecifier"/>
+    <genClasses ecoreClass="Mscript.ecore#//PrimitiveTypeSpecifier"/>
+    <genClasses ecoreClass="Mscript.ecore#//NumericalTypeSpecifier">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//NumericalTypeSpecifier/unit"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//RealTypeSpecifier"/>
+    <genClasses ecoreClass="Mscript.ecore#//IntegerTypeSpecifier"/>
+    <genClasses ecoreClass="Mscript.ecore#//BooleanTypeSpecifier"/>
+    <genClasses ecoreClass="Mscript.ecore#//StringTypeSpecifier"/>
+    <genClasses ecoreClass="Mscript.ecore#//ComplexTypeSpecifier">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ComplexTypeSpecifier/name"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//Expression"/>
     <genClasses ecoreClass="Mscript.ecore#//ConditionalExpression">

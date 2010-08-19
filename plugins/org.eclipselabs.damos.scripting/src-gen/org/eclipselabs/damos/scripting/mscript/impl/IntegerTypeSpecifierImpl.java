@@ -7,28 +7,26 @@ package org.eclipselabs.damos.scripting.mscript.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
-import org.eclipselabs.damos.scripting.mscript.Expression;
+import org.eclipselabs.damos.scripting.mscript.IntegerTypeSpecifier;
 import org.eclipselabs.damos.scripting.mscript.MscriptPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Expression</b></em>'.
+ * An implementation of the model object '<em><b>Integer Type Specifier</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public class ExpressionImpl extends MinimalEObjectImpl.Container implements Expression
+public class IntegerTypeSpecifierImpl extends NumericalTypeSpecifierImpl implements IntegerTypeSpecifier
 {
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ExpressionImpl()
+  protected IntegerTypeSpecifierImpl()
   {
     super();
   }
@@ -41,7 +39,7 @@ public class ExpressionImpl extends MinimalEObjectImpl.Container implements Expr
   @Override
   protected EClass eStaticClass()
   {
-    return MscriptPackage.Literals.EXPRESSION;
+    return MscriptPackage.Literals.INTEGER_TYPE_SPECIFIER;
   }
 
-} //ExpressionImpl
+} //IntegerTypeSpecifierImpl

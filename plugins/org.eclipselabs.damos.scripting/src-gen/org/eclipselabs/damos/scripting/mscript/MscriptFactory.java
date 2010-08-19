@@ -26,15 +26,6 @@ public interface MscriptFactory extends EFactory
   MscriptFactory eINSTANCE = org.eclipselabs.damos.scripting.mscript.impl.MscriptFactoryImpl.init();
 
   /**
-   * Returns a new object of class '<em>Model</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Model</em>'.
-   * @generated
-   */
-  Model createModel();
-
-  /**
    * Returns a new object of class '<em>Mscript</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -78,6 +69,78 @@ public interface MscriptFactory extends EFactory
    * @generated
    */
   EnumerationLiteralDefinition createEnumerationLiteralDefinition();
+
+  /**
+   * Returns a new object of class '<em>Data Type Specifier</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Data Type Specifier</em>'.
+   * @generated
+   */
+  DataTypeSpecifier createDataTypeSpecifier();
+
+  /**
+   * Returns a new object of class '<em>Primitive Type Specifier</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Primitive Type Specifier</em>'.
+   * @generated
+   */
+  PrimitiveTypeSpecifier createPrimitiveTypeSpecifier();
+
+  /**
+   * Returns a new object of class '<em>Numerical Type Specifier</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Numerical Type Specifier</em>'.
+   * @generated
+   */
+  NumericalTypeSpecifier createNumericalTypeSpecifier();
+
+  /**
+   * Returns a new object of class '<em>Real Type Specifier</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Real Type Specifier</em>'.
+   * @generated
+   */
+  RealTypeSpecifier createRealTypeSpecifier();
+
+  /**
+   * Returns a new object of class '<em>Integer Type Specifier</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Integer Type Specifier</em>'.
+   * @generated
+   */
+  IntegerTypeSpecifier createIntegerTypeSpecifier();
+
+  /**
+   * Returns a new object of class '<em>Boolean Type Specifier</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Boolean Type Specifier</em>'.
+   * @generated
+   */
+  BooleanTypeSpecifier createBooleanTypeSpecifier();
+
+  /**
+   * Returns a new object of class '<em>String Type Specifier</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>String Type Specifier</em>'.
+   * @generated
+   */
+  StringTypeSpecifier createStringTypeSpecifier();
+
+  /**
+   * Returns a new object of class '<em>Complex Type Specifier</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Complex Type Specifier</em>'.
+   * @generated
+   */
+  ComplexTypeSpecifier createComplexTypeSpecifier();
 
   /**
    * Returns a new object of class '<em>Expression</em>'.

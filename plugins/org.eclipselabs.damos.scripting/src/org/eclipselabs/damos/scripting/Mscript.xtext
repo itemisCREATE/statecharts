@@ -5,9 +5,6 @@ generate mscript "http://www.eclipselabs.org/damos/Mscript/1.0.0"
 
 import 'http://www.eclipse.org/emf/2002/Ecore' as ecore
 
-Model :
-	Expression;
-
 Mscript :
 	(packages+=PackageDefinition)*;
 	
@@ -18,7 +15,11 @@ PackageDefinition :
 
 PackageDefinitionElement :
 	PackageDefinition | EnumerationDefinition;
-	
+
+/*
+ * Enumeration
+ */
+ 	
 EnumerationDefinition :
 	'enumeration' name=IDENT '{'
 		(literals+=EnumerationLiteralDefinition (',' literals+=EnumerationLiteralDefinition)*)?
@@ -26,6 +27,34 @@ EnumerationDefinition :
 	
 EnumerationLiteralDefinition :
 	name=IDENT;
+	
+/*
+ * Data type specifier
+ */
+ 
+DataTypeSpecifier :
+	PrimitiveTypeSpecifier | ComplexTypeSpecifier;
+	
+PrimitiveTypeSpecifier :
+	NumericalTypeSpecifier | BooleanTypeSpecifier | StringTypeSpecifier;
+	
+NumericalTypeSpecifier :
+	RealTypeSpecifier | IntegerTypeSpecifier;
+	
+RealTypeSpecifier :
+	{RealTypeSpecifier} 'Real' ('(' unit=UnitExpression ')')? /* ('[' dimensions ']')? */;
+	
+IntegerTypeSpecifier :
+	{IntegerTypeSpecifier} 'Integer' ('(' unit=UnitExpression ')')? /* ('[' dimensions ']')? */;
+	
+BooleanTypeSpecifier :
+	{BooleanTypeSpecifier} 'Boolean' /* ('[' dimensions ']')? */;
+	
+StringTypeSpecifier :
+	{StringTypeSpecifier} 'String' /* ('[' dimensions ']')? */;
+
+ComplexTypeSpecifier :
+	name=Name /* ('[' dimensions ']')? */;
 	
 /*
  * Expressions

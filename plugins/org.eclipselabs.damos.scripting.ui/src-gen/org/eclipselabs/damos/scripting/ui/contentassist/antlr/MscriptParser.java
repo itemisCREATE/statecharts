@@ -38,6 +38,9 @@ public class MscriptParser extends AbstractContentAssistParser {
 				private static final long serialVersionUID = 1L;
 				{
 					put(grammarAccess.getPackageDefinitionElementAccess().getAlternatives(), "rule__PackageDefinitionElement__Alternatives");
+					put(grammarAccess.getDataTypeSpecifierAccess().getAlternatives(), "rule__DataTypeSpecifier__Alternatives");
+					put(grammarAccess.getPrimitiveTypeSpecifierAccess().getAlternatives(), "rule__PrimitiveTypeSpecifier__Alternatives");
+					put(grammarAccess.getNumericalTypeSpecifierAccess().getAlternatives(), "rule__NumericalTypeSpecifier__Alternatives");
 					put(grammarAccess.getExpressionAccess().getAlternatives(), "rule__Expression__Alternatives");
 					put(grammarAccess.getLogicalNotExpressionAccess().getAlternatives(), "rule__LogicalNotExpression__Alternatives");
 					put(grammarAccess.getUnaryMinusExpressionAccess().getAlternatives(), "rule__UnaryMinusExpression__Alternatives");
@@ -59,6 +62,12 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getEnumerationDefinitionAccess().getGroup(), "rule__EnumerationDefinition__Group__0");
 					put(grammarAccess.getEnumerationDefinitionAccess().getGroup_3(), "rule__EnumerationDefinition__Group_3__0");
 					put(grammarAccess.getEnumerationDefinitionAccess().getGroup_3_1(), "rule__EnumerationDefinition__Group_3_1__0");
+					put(grammarAccess.getRealTypeSpecifierAccess().getGroup(), "rule__RealTypeSpecifier__Group__0");
+					put(grammarAccess.getRealTypeSpecifierAccess().getGroup_2(), "rule__RealTypeSpecifier__Group_2__0");
+					put(grammarAccess.getIntegerTypeSpecifierAccess().getGroup(), "rule__IntegerTypeSpecifier__Group__0");
+					put(grammarAccess.getIntegerTypeSpecifierAccess().getGroup_2(), "rule__IntegerTypeSpecifier__Group_2__0");
+					put(grammarAccess.getBooleanTypeSpecifierAccess().getGroup(), "rule__BooleanTypeSpecifier__Group__0");
+					put(grammarAccess.getStringTypeSpecifierAccess().getGroup(), "rule__StringTypeSpecifier__Group__0");
 					put(grammarAccess.getConditionalExpressionAccess().getGroup(), "rule__ConditionalExpression__Group__0");
 					put(grammarAccess.getConditionalExpressionAccess().getGroup_2(), "rule__ConditionalExpression__Group_2__0");
 					put(grammarAccess.getConditionalExpressionCaseAccess().getGroup(), "rule__ConditionalExpressionCase__Group__0");
@@ -129,6 +138,9 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getEnumerationDefinitionAccess().getLiteralsAssignment_3_0(), "rule__EnumerationDefinition__LiteralsAssignment_3_0");
 					put(grammarAccess.getEnumerationDefinitionAccess().getLiteralsAssignment_3_1_1(), "rule__EnumerationDefinition__LiteralsAssignment_3_1_1");
 					put(grammarAccess.getEnumerationLiteralDefinitionAccess().getNameAssignment(), "rule__EnumerationLiteralDefinition__NameAssignment");
+					put(grammarAccess.getRealTypeSpecifierAccess().getUnitAssignment_2_1(), "rule__RealTypeSpecifier__UnitAssignment_2_1");
+					put(grammarAccess.getIntegerTypeSpecifierAccess().getUnitAssignment_2_1(), "rule__IntegerTypeSpecifier__UnitAssignment_2_1");
+					put(grammarAccess.getComplexTypeSpecifierAccess().getNameAssignment(), "rule__ComplexTypeSpecifier__NameAssignment");
 					put(grammarAccess.getConditionalExpressionAccess().getCasesAssignment_1(), "rule__ConditionalExpression__CasesAssignment_1");
 					put(grammarAccess.getConditionalExpressionAccess().getCasesAssignment_2_1(), "rule__ConditionalExpression__CasesAssignment_2_1");
 					put(grammarAccess.getConditionalExpressionAccess().getElseExpressionAssignment_4(), "rule__ConditionalExpression__ElseExpressionAssignment_4");
@@ -204,7 +216,7 @@ public class MscriptParser extends AbstractContentAssistParser {
 	protected Collection<FollowElement> getFollowElements(AbstractInternalContentAssistParser parser) {
 		try {
 			org.eclipselabs.damos.scripting.ui.contentassist.antlr.internal.InternalMscriptParser typedParser = (org.eclipselabs.damos.scripting.ui.contentassist.antlr.internal.InternalMscriptParser) parser;
-			typedParser.entryRuleModel();
+			typedParser.entryRuleMscript();
 			return typedParser.getFollowElements();
 		} catch(RecognitionException ex) {
 			throw new RuntimeException(ex);

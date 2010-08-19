@@ -21,11 +21,14 @@ import org.eclipselabs.damos.scripting.mscript.ArraySubscriptList;
 import org.eclipselabs.damos.scripting.mscript.BeginExpression;
 import org.eclipselabs.damos.scripting.mscript.BooleanKind;
 import org.eclipselabs.damos.scripting.mscript.BooleanLiteral;
+import org.eclipselabs.damos.scripting.mscript.BooleanTypeSpecifier;
 import org.eclipselabs.damos.scripting.mscript.ColonSubscript;
+import org.eclipselabs.damos.scripting.mscript.ComplexTypeSpecifier;
 import org.eclipselabs.damos.scripting.mscript.ComponentReference;
 import org.eclipselabs.damos.scripting.mscript.ComponentReferenceSegment;
 import org.eclipselabs.damos.scripting.mscript.ConditionalExpression;
 import org.eclipselabs.damos.scripting.mscript.ConditionalExpressionCase;
+import org.eclipselabs.damos.scripting.mscript.DataTypeSpecifier;
 import org.eclipselabs.damos.scripting.mscript.EndExpression;
 import org.eclipselabs.damos.scripting.mscript.EnumerationDefinition;
 import org.eclipselabs.damos.scripting.mscript.EnumerationLiteralDefinition;
@@ -35,12 +38,12 @@ import org.eclipselabs.damos.scripting.mscript.ExpressionSubscript;
 import org.eclipselabs.damos.scripting.mscript.FunctionArgumentList;
 import org.eclipselabs.damos.scripting.mscript.FunctionCall;
 import org.eclipselabs.damos.scripting.mscript.IntegerLiteral;
+import org.eclipselabs.damos.scripting.mscript.IntegerTypeSpecifier;
 import org.eclipselabs.damos.scripting.mscript.KeywordFunctionCall;
 import org.eclipselabs.damos.scripting.mscript.Literal;
 import org.eclipselabs.damos.scripting.mscript.LogicalAndExpression;
 import org.eclipselabs.damos.scripting.mscript.LogicalNotExpression;
 import org.eclipselabs.damos.scripting.mscript.LogicalOrExpression;
-import org.eclipselabs.damos.scripting.mscript.Model;
 import org.eclipselabs.damos.scripting.mscript.Mscript;
 import org.eclipselabs.damos.scripting.mscript.MscriptFactory;
 import org.eclipselabs.damos.scripting.mscript.MscriptPackage;
@@ -50,16 +53,20 @@ import org.eclipselabs.damos.scripting.mscript.Name;
 import org.eclipselabs.damos.scripting.mscript.NamedArgument;
 import org.eclipselabs.damos.scripting.mscript.NamedFunctionCall;
 import org.eclipselabs.damos.scripting.mscript.NumericalLiteral;
+import org.eclipselabs.damos.scripting.mscript.NumericalTypeSpecifier;
 import org.eclipselabs.damos.scripting.mscript.PackageDefinition;
 import org.eclipselabs.damos.scripting.mscript.PackageDefinitionElement;
 import org.eclipselabs.damos.scripting.mscript.ParenthesizedExpression;
 import org.eclipselabs.damos.scripting.mscript.PowerExpression;
 import org.eclipselabs.damos.scripting.mscript.PowerOperator;
+import org.eclipselabs.damos.scripting.mscript.PrimitiveTypeSpecifier;
 import org.eclipselabs.damos.scripting.mscript.RangeExpression;
 import org.eclipselabs.damos.scripting.mscript.RealLiteral;
+import org.eclipselabs.damos.scripting.mscript.RealTypeSpecifier;
 import org.eclipselabs.damos.scripting.mscript.RelationalExpression;
 import org.eclipselabs.damos.scripting.mscript.RelationalOperator;
 import org.eclipselabs.damos.scripting.mscript.StringLiteral;
+import org.eclipselabs.damos.scripting.mscript.StringTypeSpecifier;
 import org.eclipselabs.damos.scripting.mscript.Subscript;
 import org.eclipselabs.damos.scripting.mscript.UnaryMinusExpression;
 import org.eclipselabs.damos.scripting.mscript.UnitExpression;
@@ -76,13 +83,6 @@ import org.eclipselabs.damos.scripting.mscript.UnitExpressionNumerator;
  */
 public class MscriptPackageImpl extends EPackageImpl implements MscriptPackage
 {
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass modelEClass = null;
-
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -117,6 +117,62 @@ public class MscriptPackageImpl extends EPackageImpl implements MscriptPackage
    * @generated
    */
   private EClass enumerationLiteralDefinitionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass dataTypeSpecifierEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass primitiveTypeSpecifierEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass numericalTypeSpecifierEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass realTypeSpecifierEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass integerTypeSpecifierEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass booleanTypeSpecifierEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass stringTypeSpecifierEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass complexTypeSpecifierEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -508,16 +564,6 @@ public class MscriptPackageImpl extends EPackageImpl implements MscriptPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getModel()
-  {
-    return modelEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EClass getMscript()
   {
     return mscriptEClass;
@@ -621,6 +667,106 @@ public class MscriptPackageImpl extends EPackageImpl implements MscriptPackage
   public EAttribute getEnumerationLiteralDefinition_Name()
   {
     return (EAttribute)enumerationLiteralDefinitionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getDataTypeSpecifier()
+  {
+    return dataTypeSpecifierEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getPrimitiveTypeSpecifier()
+  {
+    return primitiveTypeSpecifierEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getNumericalTypeSpecifier()
+  {
+    return numericalTypeSpecifierEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getNumericalTypeSpecifier_Unit()
+  {
+    return (EReference)numericalTypeSpecifierEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getRealTypeSpecifier()
+  {
+    return realTypeSpecifierEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getIntegerTypeSpecifier()
+  {
+    return integerTypeSpecifierEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getBooleanTypeSpecifier()
+  {
+    return booleanTypeSpecifierEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getStringTypeSpecifier()
+  {
+    return stringTypeSpecifierEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getComplexTypeSpecifier()
+  {
+    return complexTypeSpecifierEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getComplexTypeSpecifier_Name()
+  {
+    return (EReference)complexTypeSpecifierEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1623,8 +1769,6 @@ public class MscriptPackageImpl extends EPackageImpl implements MscriptPackage
     isCreated = true;
 
     // Create classes and their features
-    modelEClass = createEClass(MODEL);
-
     mscriptEClass = createEClass(MSCRIPT);
     createEReference(mscriptEClass, MSCRIPT__PACKAGES);
 
@@ -1640,6 +1784,24 @@ public class MscriptPackageImpl extends EPackageImpl implements MscriptPackage
 
     enumerationLiteralDefinitionEClass = createEClass(ENUMERATION_LITERAL_DEFINITION);
     createEAttribute(enumerationLiteralDefinitionEClass, ENUMERATION_LITERAL_DEFINITION__NAME);
+
+    dataTypeSpecifierEClass = createEClass(DATA_TYPE_SPECIFIER);
+
+    primitiveTypeSpecifierEClass = createEClass(PRIMITIVE_TYPE_SPECIFIER);
+
+    numericalTypeSpecifierEClass = createEClass(NUMERICAL_TYPE_SPECIFIER);
+    createEReference(numericalTypeSpecifierEClass, NUMERICAL_TYPE_SPECIFIER__UNIT);
+
+    realTypeSpecifierEClass = createEClass(REAL_TYPE_SPECIFIER);
+
+    integerTypeSpecifierEClass = createEClass(INTEGER_TYPE_SPECIFIER);
+
+    booleanTypeSpecifierEClass = createEClass(BOOLEAN_TYPE_SPECIFIER);
+
+    stringTypeSpecifierEClass = createEClass(STRING_TYPE_SPECIFIER);
+
+    complexTypeSpecifierEClass = createEClass(COMPLEX_TYPE_SPECIFIER);
+    createEReference(complexTypeSpecifierEClass, COMPLEX_TYPE_SPECIFIER__NAME);
 
     expressionEClass = createEClass(EXPRESSION);
 
@@ -1813,7 +1975,13 @@ public class MscriptPackageImpl extends EPackageImpl implements MscriptPackage
     // Add supertypes to classes
     packageDefinitionEClass.getESuperTypes().add(this.getPackageDefinitionElement());
     enumerationDefinitionEClass.getESuperTypes().add(this.getPackageDefinitionElement());
-    expressionEClass.getESuperTypes().add(this.getModel());
+    primitiveTypeSpecifierEClass.getESuperTypes().add(this.getDataTypeSpecifier());
+    numericalTypeSpecifierEClass.getESuperTypes().add(this.getPrimitiveTypeSpecifier());
+    realTypeSpecifierEClass.getESuperTypes().add(this.getNumericalTypeSpecifier());
+    integerTypeSpecifierEClass.getESuperTypes().add(this.getNumericalTypeSpecifier());
+    booleanTypeSpecifierEClass.getESuperTypes().add(this.getPrimitiveTypeSpecifier());
+    stringTypeSpecifierEClass.getESuperTypes().add(this.getPrimitiveTypeSpecifier());
+    complexTypeSpecifierEClass.getESuperTypes().add(this.getDataTypeSpecifier());
     conditionalExpressionEClass.getESuperTypes().add(this.getExpression());
     literalEClass.getESuperTypes().add(this.getExpression());
     numericalLiteralEClass.getESuperTypes().add(this.getLiteral());
@@ -1843,8 +2011,6 @@ public class MscriptPackageImpl extends EPackageImpl implements MscriptPackage
     unaryMinusExpressionEClass.getESuperTypes().add(this.getExpression());
 
     // Initialize classes and features; add operations and parameters
-    initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
     initEClass(mscriptEClass, Mscript.class, "Mscript", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getMscript_Packages(), this.getPackageDefinition(), null, "packages", null, 0, -1, Mscript.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1860,6 +2026,24 @@ public class MscriptPackageImpl extends EPackageImpl implements MscriptPackage
 
     initEClass(enumerationLiteralDefinitionEClass, EnumerationLiteralDefinition.class, "EnumerationLiteralDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEnumerationLiteralDefinition_Name(), ecorePackage.getEString(), "name", null, 0, 1, EnumerationLiteralDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(dataTypeSpecifierEClass, DataTypeSpecifier.class, "DataTypeSpecifier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(primitiveTypeSpecifierEClass, PrimitiveTypeSpecifier.class, "PrimitiveTypeSpecifier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(numericalTypeSpecifierEClass, NumericalTypeSpecifier.class, "NumericalTypeSpecifier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getNumericalTypeSpecifier_Unit(), this.getUnitExpression(), null, "unit", null, 0, 1, NumericalTypeSpecifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(realTypeSpecifierEClass, RealTypeSpecifier.class, "RealTypeSpecifier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(integerTypeSpecifierEClass, IntegerTypeSpecifier.class, "IntegerTypeSpecifier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(booleanTypeSpecifierEClass, BooleanTypeSpecifier.class, "BooleanTypeSpecifier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(stringTypeSpecifierEClass, StringTypeSpecifier.class, "StringTypeSpecifier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(complexTypeSpecifierEClass, ComplexTypeSpecifier.class, "ComplexTypeSpecifier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getComplexTypeSpecifier_Name(), this.getName_(), null, "name", null, 0, 1, ComplexTypeSpecifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(expressionEClass, Expression.class, "Expression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

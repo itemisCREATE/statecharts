@@ -78,11 +78,6 @@ public class MscriptAdapterFactory extends AdapterFactoryImpl
     new MscriptSwitch<Adapter>()
     {
       @Override
-      public Adapter caseModel(Model object)
-      {
-        return createModelAdapter();
-      }
-      @Override
       public Adapter caseMscript(Mscript object)
       {
         return createMscriptAdapter();
@@ -106,6 +101,46 @@ public class MscriptAdapterFactory extends AdapterFactoryImpl
       public Adapter caseEnumerationLiteralDefinition(EnumerationLiteralDefinition object)
       {
         return createEnumerationLiteralDefinitionAdapter();
+      }
+      @Override
+      public Adapter caseDataTypeSpecifier(DataTypeSpecifier object)
+      {
+        return createDataTypeSpecifierAdapter();
+      }
+      @Override
+      public Adapter casePrimitiveTypeSpecifier(PrimitiveTypeSpecifier object)
+      {
+        return createPrimitiveTypeSpecifierAdapter();
+      }
+      @Override
+      public Adapter caseNumericalTypeSpecifier(NumericalTypeSpecifier object)
+      {
+        return createNumericalTypeSpecifierAdapter();
+      }
+      @Override
+      public Adapter caseRealTypeSpecifier(RealTypeSpecifier object)
+      {
+        return createRealTypeSpecifierAdapter();
+      }
+      @Override
+      public Adapter caseIntegerTypeSpecifier(IntegerTypeSpecifier object)
+      {
+        return createIntegerTypeSpecifierAdapter();
+      }
+      @Override
+      public Adapter caseBooleanTypeSpecifier(BooleanTypeSpecifier object)
+      {
+        return createBooleanTypeSpecifierAdapter();
+      }
+      @Override
+      public Adapter caseStringTypeSpecifier(StringTypeSpecifier object)
+      {
+        return createStringTypeSpecifierAdapter();
+      }
+      @Override
+      public Adapter caseComplexTypeSpecifier(ComplexTypeSpecifier object)
+      {
+        return createComplexTypeSpecifierAdapter();
       }
       @Override
       public Adapter caseExpression(Expression object)
@@ -335,21 +370,6 @@ public class MscriptAdapterFactory extends AdapterFactoryImpl
 
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.damos.scripting.mscript.Model <em>Model</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipselabs.damos.scripting.mscript.Model
-   * @generated
-   */
-  public Adapter createModelAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link org.eclipselabs.damos.scripting.mscript.Mscript <em>Mscript</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -420,6 +440,126 @@ public class MscriptAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createEnumerationLiteralDefinitionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.damos.scripting.mscript.DataTypeSpecifier <em>Data Type Specifier</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipselabs.damos.scripting.mscript.DataTypeSpecifier
+   * @generated
+   */
+  public Adapter createDataTypeSpecifierAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.damos.scripting.mscript.PrimitiveTypeSpecifier <em>Primitive Type Specifier</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipselabs.damos.scripting.mscript.PrimitiveTypeSpecifier
+   * @generated
+   */
+  public Adapter createPrimitiveTypeSpecifierAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.damos.scripting.mscript.NumericalTypeSpecifier <em>Numerical Type Specifier</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipselabs.damos.scripting.mscript.NumericalTypeSpecifier
+   * @generated
+   */
+  public Adapter createNumericalTypeSpecifierAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.damos.scripting.mscript.RealTypeSpecifier <em>Real Type Specifier</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipselabs.damos.scripting.mscript.RealTypeSpecifier
+   * @generated
+   */
+  public Adapter createRealTypeSpecifierAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.damos.scripting.mscript.IntegerTypeSpecifier <em>Integer Type Specifier</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipselabs.damos.scripting.mscript.IntegerTypeSpecifier
+   * @generated
+   */
+  public Adapter createIntegerTypeSpecifierAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.damos.scripting.mscript.BooleanTypeSpecifier <em>Boolean Type Specifier</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipselabs.damos.scripting.mscript.BooleanTypeSpecifier
+   * @generated
+   */
+  public Adapter createBooleanTypeSpecifierAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.damos.scripting.mscript.StringTypeSpecifier <em>String Type Specifier</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipselabs.damos.scripting.mscript.StringTypeSpecifier
+   * @generated
+   */
+  public Adapter createStringTypeSpecifierAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.damos.scripting.mscript.ComplexTypeSpecifier <em>Complex Type Specifier</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipselabs.damos.scripting.mscript.ComplexTypeSpecifier
+   * @generated
+   */
+  public Adapter createComplexTypeSpecifierAdapter()
   {
     return null;
   }

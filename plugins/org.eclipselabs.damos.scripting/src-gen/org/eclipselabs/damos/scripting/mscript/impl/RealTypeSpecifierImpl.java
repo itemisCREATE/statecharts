@@ -7,28 +7,26 @@ package org.eclipselabs.damos.scripting.mscript.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
-import org.eclipselabs.damos.scripting.mscript.Model;
 import org.eclipselabs.damos.scripting.mscript.MscriptPackage;
+import org.eclipselabs.damos.scripting.mscript.RealTypeSpecifier;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Model</b></em>'.
+ * An implementation of the model object '<em><b>Real Type Specifier</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public class ModelImpl extends MinimalEObjectImpl.Container implements Model
+public class RealTypeSpecifierImpl extends NumericalTypeSpecifierImpl implements RealTypeSpecifier
 {
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ModelImpl()
+  protected RealTypeSpecifierImpl()
   {
     super();
   }
@@ -41,7 +39,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   @Override
   protected EClass eStaticClass()
   {
-    return MscriptPackage.Literals.MODEL;
+    return MscriptPackage.Literals.REAL_TYPE_SPECIFIER;
   }
 
-} //ModelImpl
+} //RealTypeSpecifierImpl

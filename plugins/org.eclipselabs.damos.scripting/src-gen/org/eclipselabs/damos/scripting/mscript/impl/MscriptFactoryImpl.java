@@ -68,12 +68,19 @@ public class MscriptFactoryImpl extends EFactoryImpl implements MscriptFactory
   {
     switch (eClass.getClassifierID())
     {
-      case MscriptPackage.MODEL: return createModel();
       case MscriptPackage.MSCRIPT: return createMscript();
       case MscriptPackage.PACKAGE_DEFINITION: return createPackageDefinition();
       case MscriptPackage.PACKAGE_DEFINITION_ELEMENT: return createPackageDefinitionElement();
       case MscriptPackage.ENUMERATION_DEFINITION: return createEnumerationDefinition();
       case MscriptPackage.ENUMERATION_LITERAL_DEFINITION: return createEnumerationLiteralDefinition();
+      case MscriptPackage.DATA_TYPE_SPECIFIER: return createDataTypeSpecifier();
+      case MscriptPackage.PRIMITIVE_TYPE_SPECIFIER: return createPrimitiveTypeSpecifier();
+      case MscriptPackage.NUMERICAL_TYPE_SPECIFIER: return createNumericalTypeSpecifier();
+      case MscriptPackage.REAL_TYPE_SPECIFIER: return createRealTypeSpecifier();
+      case MscriptPackage.INTEGER_TYPE_SPECIFIER: return createIntegerTypeSpecifier();
+      case MscriptPackage.BOOLEAN_TYPE_SPECIFIER: return createBooleanTypeSpecifier();
+      case MscriptPackage.STRING_TYPE_SPECIFIER: return createStringTypeSpecifier();
+      case MscriptPackage.COMPLEX_TYPE_SPECIFIER: return createComplexTypeSpecifier();
       case MscriptPackage.EXPRESSION: return createExpression();
       case MscriptPackage.CONDITIONAL_EXPRESSION: return createConditionalExpression();
       case MscriptPackage.CONDITIONAL_EXPRESSION_CASE: return createConditionalExpressionCase();
@@ -175,17 +182,6 @@ public class MscriptFactoryImpl extends EFactoryImpl implements MscriptFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public Model createModel()
-  {
-    ModelImpl model = new ModelImpl();
-    return model;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public Mscript createMscript()
   {
     MscriptImpl mscript = new MscriptImpl();
@@ -234,6 +230,94 @@ public class MscriptFactoryImpl extends EFactoryImpl implements MscriptFactory
   {
     EnumerationLiteralDefinitionImpl enumerationLiteralDefinition = new EnumerationLiteralDefinitionImpl();
     return enumerationLiteralDefinition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public DataTypeSpecifier createDataTypeSpecifier()
+  {
+    DataTypeSpecifierImpl dataTypeSpecifier = new DataTypeSpecifierImpl();
+    return dataTypeSpecifier;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public PrimitiveTypeSpecifier createPrimitiveTypeSpecifier()
+  {
+    PrimitiveTypeSpecifierImpl primitiveTypeSpecifier = new PrimitiveTypeSpecifierImpl();
+    return primitiveTypeSpecifier;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NumericalTypeSpecifier createNumericalTypeSpecifier()
+  {
+    NumericalTypeSpecifierImpl numericalTypeSpecifier = new NumericalTypeSpecifierImpl();
+    return numericalTypeSpecifier;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public RealTypeSpecifier createRealTypeSpecifier()
+  {
+    RealTypeSpecifierImpl realTypeSpecifier = new RealTypeSpecifierImpl();
+    return realTypeSpecifier;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public IntegerTypeSpecifier createIntegerTypeSpecifier()
+  {
+    IntegerTypeSpecifierImpl integerTypeSpecifier = new IntegerTypeSpecifierImpl();
+    return integerTypeSpecifier;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public BooleanTypeSpecifier createBooleanTypeSpecifier()
+  {
+    BooleanTypeSpecifierImpl booleanTypeSpecifier = new BooleanTypeSpecifierImpl();
+    return booleanTypeSpecifier;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public StringTypeSpecifier createStringTypeSpecifier()
+  {
+    StringTypeSpecifierImpl stringTypeSpecifier = new StringTypeSpecifierImpl();
+    return stringTypeSpecifier;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ComplexTypeSpecifier createComplexTypeSpecifier()
+  {
+    ComplexTypeSpecifierImpl complexTypeSpecifier = new ComplexTypeSpecifierImpl();
+    return complexTypeSpecifier;
   }
 
   /**

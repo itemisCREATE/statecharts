@@ -3,7 +3,6 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="mscript"
     nsURI="http://www.eclipselabs.org/damos/Mscript/1.0.0" nsPrefix="mscript">
-  <eClassifiers xsi:type="ecore:EClass" name="Model"/>
   <eClassifiers xsi:type="ecore:EClass" name="Mscript">
     <eStructuralFeatures xsi:type="ecore:EReference" name="packages" upperBound="-1"
         eType="#//PackageDefinition" containment="true"/>
@@ -22,7 +21,20 @@
   <eClassifiers xsi:type="ecore:EClass" name="EnumerationLiteralDefinition">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Expression" eSuperTypes="#//Model"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DataTypeSpecifier"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PrimitiveTypeSpecifier" eSuperTypes="#//DataTypeSpecifier"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NumericalTypeSpecifier" eSuperTypes="#//PrimitiveTypeSpecifier">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="unit" eType="#//UnitExpression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RealTypeSpecifier" eSuperTypes="#//NumericalTypeSpecifier"/>
+  <eClassifiers xsi:type="ecore:EClass" name="IntegerTypeSpecifier" eSuperTypes="#//NumericalTypeSpecifier"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BooleanTypeSpecifier" eSuperTypes="#//PrimitiveTypeSpecifier"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StringTypeSpecifier" eSuperTypes="#//PrimitiveTypeSpecifier"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ComplexTypeSpecifier" eSuperTypes="#//DataTypeSpecifier">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="#//Name" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Expression"/>
   <eClassifiers xsi:type="ecore:EClass" name="ConditionalExpression" eSuperTypes="#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="cases" upperBound="-1"
         eType="#//ConditionalExpressionCase" containment="true"/>
