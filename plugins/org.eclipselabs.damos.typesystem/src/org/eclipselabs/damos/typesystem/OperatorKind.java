@@ -22,7 +22,100 @@ import org.eclipse.emf.common.util.Enumerator;
  * @generated
  */
 public enum OperatorKind implements Enumerator {
+	/**
+	 * The '<em><b>Add</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #ADD_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	ADD(0, "Add", "Add"), /**
+	 * The '<em><b>Subtract</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #SUBTRACT_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	SUBTRACT(1, "Subtract", "Subtract"), /**
+	 * The '<em><b>Multiply</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #MULTIPLY_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	MULTIPLY(2, "Multiply", "Multiply"), /**
+	 * The '<em><b>Divide</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #DIVIDE_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	DIVIDE(3, "Divide", "Divide")
 	;
+
+	/**
+	 * The '<em><b>Add</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Add</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #ADD
+	 * @model name="Add"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ADD_VALUE = 0;
+
+/**
+	 * The '<em><b>Subtract</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Subtract</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #SUBTRACT
+	 * @model name="Subtract"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int SUBTRACT_VALUE = 1;
+
+/**
+	 * The '<em><b>Multiply</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Multiply</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #MULTIPLY
+	 * @model name="Multiply"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int MULTIPLY_VALUE = 2;
+
+/**
+	 * The '<em><b>Divide</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Divide</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #DIVIDE
+	 * @model name="Divide"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int DIVIDE_VALUE = 3;
 
 	/**
 	 * An array of all the '<em><b>Operator Kind</b></em>' enumerators.
@@ -32,6 +125,10 @@ public enum OperatorKind implements Enumerator {
 	 */
 	private static final OperatorKind[] VALUES_ARRAY =
 		new OperatorKind[] {
+			ADD,
+			SUBTRACT,
+			MULTIPLY,
+			DIVIDE,
 		};
 
 	/**
@@ -82,6 +179,10 @@ public enum OperatorKind implements Enumerator {
 	 */
 	public static OperatorKind get(int value) {
 		switch (value) {
+			case ADD_VALUE: return ADD;
+			case SUBTRACT_VALUE: return SUBTRACT;
+			case MULTIPLY_VALUE: return MULTIPLY;
+			case DIVIDE_VALUE: return DIVIDE;
 		}
 		return null;
 	}

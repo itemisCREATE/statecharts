@@ -49,7 +49,11 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_j4FoBXMeEd-9E7QZMDWyTg"/>
       <styles xmi:type="notation:CanonicalStyle" xmi:id="_j4FoBnMeEd-9E7QZMDWyTg"/>
     </children>
-    <children xmi:type="notation:BasicCompartment" xmi:id="_j4FoB3MeEd-9E7QZMDWyTg" type="7002">
+    <children xmi:type="notation:BasicCompartment" xmi:id="_j4FoB3MeEd-9E7QZMDWyTg" type="7002" collapsed="true">
+      <children xmi:type="notation:Node" xmi:id="_JNKL4KxVEd-ZZ_8ZIavFMA" type="3002">
+        <element xmi:type="uml:Operation" href="TypeSystem.uml#_JM3Q8KxVEd-ZZ_8ZIavFMA"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_JNKL4axVEd-ZZ_8ZIavFMA"/>
+      </children>
       <styles xmi:type="notation:TitleStyle" xmi:id="_j4FoCHMeEd-9E7QZMDWyTg" showTitle="true"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_j4FoCXMeEd-9E7QZMDWyTg"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_j4FoCnMeEd-9E7QZMDWyTg"/>
@@ -76,7 +80,11 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_s6O9-HMeEd-9E7QZMDWyTg"/>
       <styles xmi:type="notation:CanonicalStyle" xmi:id="_s6PlAHMeEd-9E7QZMDWyTg"/>
     </children>
-    <children xmi:type="notation:BasicCompartment" xmi:id="_s6PlAXMeEd-9E7QZMDWyTg" type="7002">
+    <children xmi:type="notation:BasicCompartment" xmi:id="_s6PlAXMeEd-9E7QZMDWyTg" type="7002" collapsed="true">
+      <children xmi:type="notation:Node" xmi:id="_LhC6EKxVEd-ZZ_8ZIavFMA" type="3002">
+        <element xmi:type="uml:Operation" href="TypeSystem.uml#_Lgti4KxVEd-ZZ_8ZIavFMA"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_LhC6EaxVEd-ZZ_8ZIavFMA"/>
+      </children>
       <styles xmi:type="notation:TitleStyle" xmi:id="_s6PlAnMeEd-9E7QZMDWyTg" showTitle="true"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_s6PlA3MeEd-9E7QZMDWyTg"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_s6PlBHMeEd-9E7QZMDWyTg"/>

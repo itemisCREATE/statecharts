@@ -8,6 +8,7 @@ package org.eclipselabs.damos.typesystem.internal.operations;
 
 import org.eclipselabs.damos.typesystem.DataType;
 import org.eclipselabs.damos.typesystem.OperatorKind;
+import org.eclipselabs.damos.typesystem.TypeSystemFactory;
 
 /**
  * <!-- begin-user-doc -->
@@ -38,12 +39,10 @@ public class DataTypeOperations {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public static  DataType evaluate(DataType dataType, OperatorKind operator, DataType other) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		return TypeSystemFactory.eINSTANCE.createInvalidDataType();
 	}
 
 	/**

@@ -937,6 +937,10 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 
 		// Initialize enums and add enum literals
 		initEEnum(operatorKindEEnum, OperatorKind.class, "OperatorKind");
+		addEEnumLiteral(operatorKindEEnum, OperatorKind.ADD);
+		addEEnumLiteral(operatorKindEEnum, OperatorKind.SUBTRACT);
+		addEEnumLiteral(operatorKindEEnum, OperatorKind.MULTIPLY);
+		addEEnumLiteral(operatorKindEEnum, OperatorKind.DIVIDE);
 
 		initEEnum(unitSymbolEEnum, UnitSymbol.class, "UnitSymbol");
 		addEEnumLiteral(unitSymbolEEnum, UnitSymbol.METER);
@@ -955,6 +959,8 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 		createUnionAnnotations();
 		// subsets
 		createSubsetsAnnotations();
+		// duplicates
+		createDuplicatesAnnotations();
 	}
 
 	/**
@@ -979,7 +985,7 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 		  (getNamespace_OwnedMembers(), 
 		   source, 
 		   new String[] {
-		   });			
+		   });					
 	}
 
 	/**
@@ -997,7 +1003,7 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 		   },
 		   new URI[] {
 			 URI.createURI(eNS_URI).appendFragment("//Namespace/members")
-		   });			
+		   });					
 		addAnnotation
 		  (getEnumeration_Literals(), 
 		   source, 
@@ -1022,6 +1028,26 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 		   new URI[] {
 			 URI.createURI(eNS_URI).appendFragment("//Namespace/ownedMembers")
 		   });
+	}
+
+	/**
+	 * Initializes the annotations for <b>duplicates</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createDuplicatesAnnotations() {
+		String source = "duplicates";						
+		addAnnotation
+		  (realTypeEClass, 
+		   source, 
+		   new String[] {
+		   });		
+		addAnnotation
+		  (integerTypeEClass, 
+		   source, 
+		   new String[] {
+		   });			
 	}
 
 } //TypeSystemPackageImpl

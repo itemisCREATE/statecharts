@@ -50,9 +50,25 @@
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_j3a5oHMeEd-9E7QZMDWyTg" name="RealType">
       <generalization xmi:id="_5pYYkHO3Ed-S94eRjnXSAQ" general="__s2cgHMrEd-9E7QZMDWyTg"/>
+      <ownedOperation xmi:id="_JM3Q8KxVEd-ZZ_8ZIavFMA" name="evaluate" redefinedOperation="_M2L2IH30Ed-EWvFDOLE-rQ">
+        <ownedParameter xmi:id="_J3p6YKxVEd-ZZ_8ZIavFMA" type="_FfGmwH3nEd-EWvFDOLE-rQ" direction="return"/>
+        <ownedParameter xmi:id="_J3qhcKxVEd-ZZ_8ZIavFMA" name="operator" type="_1MUB0H3zEd-EWvFDOLE-rQ"/>
+        <ownedParameter xmi:id="_J3qhcaxVEd-ZZ_8ZIavFMA" name="other" type="_FfGmwH3nEd-EWvFDOLE-rQ">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_J3qhcqxVEd-ZZ_8ZIavFMA" value="1"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_J3qhc6xVEd-ZZ_8ZIavFMA"/>
+        </ownedParameter>
+      </ownedOperation>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_s5vOsHMeEd-9E7QZMDWyTg" name="IntegerType">
       <generalization xmi:id="_6g2zIHO3Ed-S94eRjnXSAQ" general="__s2cgHMrEd-9E7QZMDWyTg"/>
+      <ownedOperation xmi:id="_Lgti4KxVEd-ZZ_8ZIavFMA" name="evaluate" redefinedOperation="_M2L2IH30Ed-EWvFDOLE-rQ">
+        <ownedParameter xmi:id="_MJQwoKxVEd-ZZ_8ZIavFMA" type="_FfGmwH3nEd-EWvFDOLE-rQ" direction="return"/>
+        <ownedParameter xmi:id="_MJQwoaxVEd-ZZ_8ZIavFMA" name="operator" type="_1MUB0H3zEd-EWvFDOLE-rQ"/>
+        <ownedParameter xmi:id="_MJRXsKxVEd-ZZ_8ZIavFMA" name="other" type="_FfGmwH3nEd-EWvFDOLE-rQ">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_MJRXsaxVEd-ZZ_8ZIavFMA" value="1"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_MJRXsqxVEd-ZZ_8ZIavFMA"/>
+        </ownedParameter>
+      </ownedOperation>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_u3XZAHMeEd-9E7QZMDWyTg" name="BooleanType">
       <generalization xmi:id="_7ClnMHO3Ed-S94eRjnXSAQ" general="_ckY6kHGiEd-Vr_LfGhknIQ"/>
@@ -174,7 +190,12 @@
         <ownedParameter xmi:id="_pH7fcX-fEd-8ibE6W-dHMQ" name="other" type="_FfGmwH3nEd-EWvFDOLE-rQ"/>
       </ownedOperation>
     </packagedElement>
-    <packagedElement xmi:type="uml:Enumeration" xmi:id="_1MUB0H3zEd-EWvFDOLE-rQ" name="OperatorKind"/>
+    <packagedElement xmi:type="uml:Enumeration" xmi:id="_1MUB0H3zEd-EWvFDOLE-rQ" name="OperatorKind">
+      <ownedLiteral xmi:id="_scrm8KxQEd-ZZ_8ZIavFMA" name="Add"/>
+      <ownedLiteral xmi:id="_tEktYKxQEd-ZZ_8ZIavFMA" name="Subtract"/>
+      <ownedLiteral xmi:id="_tpDTcKxQEd-ZZ_8ZIavFMA" name="Multiply"/>
+      <ownedLiteral xmi:id="_uSPaYKxQEd-ZZ_8ZIavFMA" name="Divide"/>
+    </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_s1LiUH30Ed-EWvFDOLE-rQ" name="InvalidDataType">
       <generalization xmi:id="_eY1_IH31Ed-EWvFDOLE-rQ" general="_FfGmwH3nEd-EWvFDOLE-rQ"/>
     </packagedElement>

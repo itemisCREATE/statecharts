@@ -6,6 +6,7 @@
  */
 package org.eclipselabs.damos.typesystem.internal.operations;
 
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipselabs.damos.typesystem.Unit;
 import org.eclipselabs.damos.typesystem.UnitFactor;
 import org.eclipselabs.damos.typesystem.UnitSymbol;
@@ -54,34 +55,56 @@ public class UnitOperations {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public static  Unit multiply(Unit unit, Unit other) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		Unit result = (Unit) EcoreUtil.copy(unit);
+		result.setScale(result.getScale() + other.getScale());
+		for (UnitFactor otherFactor : other.getFactors()) {
+			UnitFactor factor = result.getFactor(otherFactor.getSymbol());
+			if (factor != null) {
+				factor.setExponent(factor.getExponent() + otherFactor.getExponent());
+			} else {
+				factor = (UnitFactor) EcoreUtil.copy(otherFactor);
+				result.getFactors().add(factor);
+			}
+		}
+		return result;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public static  Unit divide(Unit unit, Unit other) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		Unit result = (Unit) EcoreUtil.copy(unit);
+		result.setScale(result.getScale() - other.getScale());
+		for (UnitFactor otherFactor : other.getFactors()) {
+			UnitFactor factor = result.getFactor(otherFactor.getSymbol());
+			if (factor != null) {
+				factor.setExponent(factor.getExponent() - otherFactor.getExponent());
+			} else {
+				factor = (UnitFactor) EcoreUtil.copy(otherFactor);
+				factor.setExponent(-factor.getExponent());
+				result.getFactors().add(factor);
+			}
+		}
+		return result;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public static  Unit power(Unit unit, int exponent) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		Unit result = (Unit) EcoreUtil.copy(unit);
+		result.setScale(result.getScale() * exponent);
+		for (UnitFactor factor : result.getFactors()) {
+			factor.setExponent(factor.getExponent() * exponent);
+		}
+		return result;
 	}
 
 } // UnitOperations
