@@ -6,8 +6,6 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.validation.Check;
-import org.eclipselabs.damos.scripting.evaluation.InvalidUnitExpressionOperandException;
-import org.eclipselabs.damos.scripting.evaluation.UnitNormalizer;
 import org.eclipselabs.damos.scripting.mscript.ArrayConstructionOperator;
 import org.eclipselabs.damos.scripting.mscript.ArraySubscriptList;
 import org.eclipselabs.damos.scripting.mscript.BeginExpression;
@@ -17,8 +15,6 @@ import org.eclipselabs.damos.scripting.mscript.KeywordFunctionCall;
 import org.eclipselabs.damos.scripting.mscript.MscriptPackage;
 import org.eclipselabs.damos.scripting.mscript.NamedFunctionCall;
 import org.eclipselabs.damos.scripting.mscript.Subscript;
-import org.eclipselabs.damos.scripting.mscript.UnitExpressionDenominator;
-import org.eclipselabs.damos.scripting.mscript.UnitExpressionFactor;
 import org.eclipselabs.damos.scripting.mscript.UnitExpressionNumerator;
 
 public class MscriptJavaValidator extends AbstractMscriptJavaValidator {
@@ -147,13 +143,13 @@ public class MscriptJavaValidator extends AbstractMscriptJavaValidator {
 		}
 	}
 	
-	@Check
-	public void checkUnitExpressionFactorIsValid(UnitExpressionFactor factor) {
-		try {
-			new UnitNormalizer().normalize(factor, factor.eContainer() instanceof UnitExpressionDenominator, null);
-		} catch (InvalidUnitExpressionOperandException e) {
-			error("Invalid unit operand '" + factor.getOperand()+ "'", MscriptPackage.UNIT_EXPRESSION_FACTOR__OPERAND);
-		}
-	}
+//	@Check
+//	public void checkUnitExpressionFactorIsValid(UnitExpressionFactor factor) {
+//		try {
+//			new UnitNormalizer().normalize(factor, factor.eContainer() instanceof UnitExpressionDenominator, null);
+//		} catch (InvalidUnitExpressionOperandException e) {
+//			error("Invalid unit operand '" + factor.getOperand()+ "'", MscriptPackage.UNIT_EXPRESSION_FACTOR__OPERAND);
+//		}
+//	}
 
 }
