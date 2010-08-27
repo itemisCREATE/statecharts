@@ -49,7 +49,7 @@ public class UnitOperations {
 				return factor;
 			}
 		}
-		return null;
+		throw new IllegalArgumentException();
 	}
 
 	/**
@@ -62,12 +62,7 @@ public class UnitOperations {
 		result.setScale(result.getScale() + other.getScale());
 		for (UnitFactor otherFactor : other.getFactors()) {
 			UnitFactor factor = result.getFactor(otherFactor.getSymbol());
-			if (factor != null) {
-				factor.setExponent(factor.getExponent() + otherFactor.getExponent());
-			} else {
-				factor = (UnitFactor) EcoreUtil.copy(otherFactor);
-				result.getFactors().add(factor);
-			}
+			factor.setExponent(factor.getExponent() + otherFactor.getExponent());
 		}
 		return result;
 	}
@@ -82,13 +77,7 @@ public class UnitOperations {
 		result.setScale(result.getScale() - other.getScale());
 		for (UnitFactor otherFactor : other.getFactors()) {
 			UnitFactor factor = result.getFactor(otherFactor.getSymbol());
-			if (factor != null) {
-				factor.setExponent(factor.getExponent() - otherFactor.getExponent());
-			} else {
-				factor = (UnitFactor) EcoreUtil.copy(otherFactor);
-				factor.setExponent(-factor.getExponent());
-				result.getFactors().add(factor);
-			}
+			factor.setExponent(factor.getExponent() - otherFactor.getExponent());
 		}
 		return result;
 	}
