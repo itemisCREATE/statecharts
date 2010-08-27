@@ -188,24 +188,9 @@ public class MscriptAdapterFactory extends AdapterFactoryImpl
         return createStringLiteralAdapter();
       }
       @Override
-      public Adapter caseFunctionCall(FunctionCall object)
-      {
-        return createFunctionCallAdapter();
-      }
-      @Override
-      public Adapter caseNamedFunctionCall(NamedFunctionCall object)
-      {
-        return createNamedFunctionCallAdapter();
-      }
-      @Override
       public Adapter caseName(Name object)
       {
         return createNameAdapter();
-      }
-      @Override
-      public Adapter caseKeywordFunctionCall(KeywordFunctionCall object)
-      {
-        return createKeywordFunctionCallAdapter();
       }
       @Override
       public Adapter caseFunctionArgumentList(FunctionArgumentList object)
@@ -218,19 +203,24 @@ public class MscriptAdapterFactory extends AdapterFactoryImpl
         return createNamedArgumentAdapter();
       }
       @Override
+      public Adapter caseSymbolReference(SymbolReference object)
+      {
+        return createSymbolReferenceAdapter();
+      }
+      @Override
       public Adapter caseComponentReference(ComponentReference object)
       {
         return createComponentReferenceAdapter();
       }
       @Override
-      public Adapter caseComponentReferenceSegment(ComponentReferenceSegment object)
+      public Adapter caseArrayReference(ArrayReference object)
       {
-        return createComponentReferenceSegmentAdapter();
+        return createArrayReferenceAdapter();
       }
       @Override
-      public Adapter caseArraySubscriptList(ArraySubscriptList object)
+      public Adapter caseMemberReference(MemberReference object)
       {
-        return createArraySubscriptListAdapter();
+        return createMemberReferenceAdapter();
       }
       @Override
       public Adapter caseSubscript(Subscript object)
@@ -700,36 +690,6 @@ public class MscriptAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.damos.scripting.mscript.FunctionCall <em>Function Call</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipselabs.damos.scripting.mscript.FunctionCall
-   * @generated
-   */
-  public Adapter createFunctionCallAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.damos.scripting.mscript.NamedFunctionCall <em>Named Function Call</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipselabs.damos.scripting.mscript.NamedFunctionCall
-   * @generated
-   */
-  public Adapter createNamedFunctionCallAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link org.eclipselabs.damos.scripting.mscript.Name <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -740,21 +700,6 @@ public class MscriptAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createNameAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.damos.scripting.mscript.KeywordFunctionCall <em>Keyword Function Call</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipselabs.damos.scripting.mscript.KeywordFunctionCall
-   * @generated
-   */
-  public Adapter createKeywordFunctionCallAdapter()
   {
     return null;
   }
@@ -790,6 +735,21 @@ public class MscriptAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.damos.scripting.mscript.SymbolReference <em>Symbol Reference</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipselabs.damos.scripting.mscript.SymbolReference
+   * @generated
+   */
+  public Adapter createSymbolReferenceAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.eclipselabs.damos.scripting.mscript.ComponentReference <em>Component Reference</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -805,31 +765,31 @@ public class MscriptAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.damos.scripting.mscript.ComponentReferenceSegment <em>Component Reference Segment</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.damos.scripting.mscript.ArrayReference <em>Array Reference</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipselabs.damos.scripting.mscript.ComponentReferenceSegment
+   * @see org.eclipselabs.damos.scripting.mscript.ArrayReference
    * @generated
    */
-  public Adapter createComponentReferenceSegmentAdapter()
+  public Adapter createArrayReferenceAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.damos.scripting.mscript.ArraySubscriptList <em>Array Subscript List</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.damos.scripting.mscript.MemberReference <em>Member Reference</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipselabs.damos.scripting.mscript.ArraySubscriptList
+   * @see org.eclipselabs.damos.scripting.mscript.MemberReference
    * @generated
    */
-  public Adapter createArraySubscriptListAdapter()
+  public Adapter createMemberReferenceAdapter()
   {
     return null;
   }

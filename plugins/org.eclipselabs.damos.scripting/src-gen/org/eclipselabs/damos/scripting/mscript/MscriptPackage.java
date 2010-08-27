@@ -668,71 +668,6 @@ public interface MscriptPackage extends EPackage
   int STRING_LITERAL_FEATURE_COUNT = LITERAL_FEATURE_COUNT + 1;
 
   /**
-   * The meta object id for the '{@link org.eclipselabs.damos.scripting.mscript.impl.FunctionCallImpl <em>Function Call</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipselabs.damos.scripting.mscript.impl.FunctionCallImpl
-   * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getFunctionCall()
-   * @generated
-   */
-  int FUNCTION_CALL = 22;
-
-  /**
-   * The feature id for the '<em><b>Argument List</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int FUNCTION_CALL__ARGUMENT_LIST = EXPRESSION_FEATURE_COUNT + 0;
-
-  /**
-   * The number of structural features of the '<em>Function Call</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int FUNCTION_CALL_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
-
-  /**
-   * The meta object id for the '{@link org.eclipselabs.damos.scripting.mscript.impl.NamedFunctionCallImpl <em>Named Function Call</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipselabs.damos.scripting.mscript.impl.NamedFunctionCallImpl
-   * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getNamedFunctionCall()
-   * @generated
-   */
-  int NAMED_FUNCTION_CALL = 23;
-
-  /**
-   * The feature id for the '<em><b>Argument List</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int NAMED_FUNCTION_CALL__ARGUMENT_LIST = FUNCTION_CALL__ARGUMENT_LIST;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int NAMED_FUNCTION_CALL__NAME = FUNCTION_CALL_FEATURE_COUNT + 0;
-
-  /**
-   * The number of structural features of the '<em>Named Function Call</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int NAMED_FUNCTION_CALL_FEATURE_COUNT = FUNCTION_CALL_FEATURE_COUNT + 1;
-
-  /**
    * The meta object id for the '{@link org.eclipselabs.damos.scripting.mscript.impl.NameImpl <em>Name</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -740,16 +675,7 @@ public interface MscriptPackage extends EPackage
    * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getName_()
    * @generated
    */
-  int NAME = 24;
-
-  /**
-   * The feature id for the '<em><b>Global</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int NAME__GLOBAL = 0;
+  int NAME = 22;
 
   /**
    * The feature id for the '<em><b>Identifiers</b></em>' attribute list.
@@ -758,7 +684,7 @@ public interface MscriptPackage extends EPackage
    * @generated
    * @ordered
    */
-  int NAME__IDENTIFIERS = 1;
+  int NAME__IDENTIFIERS = 0;
 
   /**
    * The number of structural features of the '<em>Name</em>' class.
@@ -767,44 +693,7 @@ public interface MscriptPackage extends EPackage
    * @generated
    * @ordered
    */
-  int NAME_FEATURE_COUNT = 2;
-
-  /**
-   * The meta object id for the '{@link org.eclipselabs.damos.scripting.mscript.impl.KeywordFunctionCallImpl <em>Keyword Function Call</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipselabs.damos.scripting.mscript.impl.KeywordFunctionCallImpl
-   * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getKeywordFunctionCall()
-   * @generated
-   */
-  int KEYWORD_FUNCTION_CALL = 25;
-
-  /**
-   * The feature id for the '<em><b>Argument List</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int KEYWORD_FUNCTION_CALL__ARGUMENT_LIST = FUNCTION_CALL__ARGUMENT_LIST;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int KEYWORD_FUNCTION_CALL__NAME = FUNCTION_CALL_FEATURE_COUNT + 0;
-
-  /**
-   * The number of structural features of the '<em>Keyword Function Call</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int KEYWORD_FUNCTION_CALL_FEATURE_COUNT = FUNCTION_CALL_FEATURE_COUNT + 1;
+  int NAME_FEATURE_COUNT = 1;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.damos.scripting.mscript.impl.FunctionArgumentListImpl <em>Function Argument List</em>}' class.
@@ -814,7 +703,7 @@ public interface MscriptPackage extends EPackage
    * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getFunctionArgumentList()
    * @generated
    */
-  int FUNCTION_ARGUMENT_LIST = 26;
+  int FUNCTION_ARGUMENT_LIST = 23;
 
   /**
    * The feature id for the '<em><b>Arguments</b></em>' containment reference list.
@@ -851,7 +740,7 @@ public interface MscriptPackage extends EPackage
    * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getNamedArgument()
    * @generated
    */
-  int NAMED_ARGUMENT = 27;
+  int NAMED_ARGUMENT = 24;
 
   /**
    * The feature id for the '<em><b>Identifier</b></em>' attribute.
@@ -881,14 +770,14 @@ public interface MscriptPackage extends EPackage
   int NAMED_ARGUMENT_FEATURE_COUNT = 2;
 
   /**
-   * The meta object id for the '{@link org.eclipselabs.damos.scripting.mscript.impl.ComponentReferenceImpl <em>Component Reference</em>}' class.
+   * The meta object id for the '{@link org.eclipselabs.damos.scripting.mscript.impl.SymbolReferenceImpl <em>Symbol Reference</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.eclipselabs.damos.scripting.mscript.impl.ComponentReferenceImpl
-   * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getComponentReference()
+   * @see org.eclipselabs.damos.scripting.mscript.impl.SymbolReferenceImpl
+   * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getSymbolReference()
    * @generated
    */
-  int COMPONENT_REFERENCE = 28;
+  int SYMBOL_REFERENCE = 25;
 
   /**
    * The feature id for the '<em><b>Global</b></em>' attribute.
@@ -897,16 +786,62 @@ public interface MscriptPackage extends EPackage
    * @generated
    * @ordered
    */
-  int COMPONENT_REFERENCE__GLOBAL = EXPRESSION_FEATURE_COUNT + 0;
+  int SYMBOL_REFERENCE__GLOBAL = EXPRESSION_FEATURE_COUNT + 0;
 
   /**
-   * The feature id for the '<em><b>Segments</b></em>' containment reference list.
+   * The feature id for the '<em><b>Name</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int COMPONENT_REFERENCE__SEGMENTS = EXPRESSION_FEATURE_COUNT + 1;
+  int SYMBOL_REFERENCE__NAME = EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Component References</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SYMBOL_REFERENCE__COMPONENT_REFERENCES = EXPRESSION_FEATURE_COUNT + 2;
+
+  /**
+   * The feature id for the '<em><b>Function Call</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SYMBOL_REFERENCE__FUNCTION_CALL = EXPRESSION_FEATURE_COUNT + 3;
+
+  /**
+   * The feature id for the '<em><b>Argument List</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SYMBOL_REFERENCE__ARGUMENT_LIST = EXPRESSION_FEATURE_COUNT + 4;
+
+  /**
+   * The number of structural features of the '<em>Symbol Reference</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SYMBOL_REFERENCE_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 5;
+
+  /**
+   * The meta object id for the '{@link org.eclipselabs.damos.scripting.mscript.impl.ComponentReferenceImpl <em>Component Reference</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipselabs.damos.scripting.mscript.impl.ComponentReferenceImpl
+   * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getComponentReference()
+   * @generated
+   */
+  int COMPONENT_REFERENCE = 26;
 
   /**
    * The number of structural features of the '<em>Component Reference</em>' class.
@@ -915,54 +850,17 @@ public interface MscriptPackage extends EPackage
    * @generated
    * @ordered
    */
-  int COMPONENT_REFERENCE_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
+  int COMPONENT_REFERENCE_FEATURE_COUNT = 0;
 
   /**
-   * The meta object id for the '{@link org.eclipselabs.damos.scripting.mscript.impl.ComponentReferenceSegmentImpl <em>Component Reference Segment</em>}' class.
+   * The meta object id for the '{@link org.eclipselabs.damos.scripting.mscript.impl.ArrayReferenceImpl <em>Array Reference</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.eclipselabs.damos.scripting.mscript.impl.ComponentReferenceSegmentImpl
-   * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getComponentReferenceSegment()
+   * @see org.eclipselabs.damos.scripting.mscript.impl.ArrayReferenceImpl
+   * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getArrayReference()
    * @generated
    */
-  int COMPONENT_REFERENCE_SEGMENT = 29;
-
-  /**
-   * The feature id for the '<em><b>Identifier</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int COMPONENT_REFERENCE_SEGMENT__IDENTIFIER = 0;
-
-  /**
-   * The feature id for the '<em><b>Subscript List</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int COMPONENT_REFERENCE_SEGMENT__SUBSCRIPT_LIST = 1;
-
-  /**
-   * The number of structural features of the '<em>Component Reference Segment</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int COMPONENT_REFERENCE_SEGMENT_FEATURE_COUNT = 2;
-
-  /**
-   * The meta object id for the '{@link org.eclipselabs.damos.scripting.mscript.impl.ArraySubscriptListImpl <em>Array Subscript List</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipselabs.damos.scripting.mscript.impl.ArraySubscriptListImpl
-   * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getArraySubscriptList()
-   * @generated
-   */
-  int ARRAY_SUBSCRIPT_LIST = 30;
+  int ARRAY_REFERENCE = 27;
 
   /**
    * The feature id for the '<em><b>Subscripts</b></em>' containment reference list.
@@ -971,16 +869,44 @@ public interface MscriptPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ARRAY_SUBSCRIPT_LIST__SUBSCRIPTS = 0;
+  int ARRAY_REFERENCE__SUBSCRIPTS = COMPONENT_REFERENCE_FEATURE_COUNT + 0;
 
   /**
-   * The number of structural features of the '<em>Array Subscript List</em>' class.
+   * The number of structural features of the '<em>Array Reference</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ARRAY_SUBSCRIPT_LIST_FEATURE_COUNT = 1;
+  int ARRAY_REFERENCE_FEATURE_COUNT = COMPONENT_REFERENCE_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipselabs.damos.scripting.mscript.impl.MemberReferenceImpl <em>Member Reference</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipselabs.damos.scripting.mscript.impl.MemberReferenceImpl
+   * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getMemberReference()
+   * @generated
+   */
+  int MEMBER_REFERENCE = 28;
+
+  /**
+   * The feature id for the '<em><b>Identifier</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MEMBER_REFERENCE__IDENTIFIER = COMPONENT_REFERENCE_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Member Reference</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MEMBER_REFERENCE_FEATURE_COUNT = COMPONENT_REFERENCE_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.damos.scripting.mscript.impl.SubscriptImpl <em>Subscript</em>}' class.
@@ -990,7 +916,7 @@ public interface MscriptPackage extends EPackage
    * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getSubscript()
    * @generated
    */
-  int SUBSCRIPT = 31;
+  int SUBSCRIPT = 29;
 
   /**
    * The number of structural features of the '<em>Subscript</em>' class.
@@ -1009,7 +935,7 @@ public interface MscriptPackage extends EPackage
    * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getColonSubscript()
    * @generated
    */
-  int COLON_SUBSCRIPT = 32;
+  int COLON_SUBSCRIPT = 30;
 
   /**
    * The number of structural features of the '<em>Colon Subscript</em>' class.
@@ -1028,7 +954,7 @@ public interface MscriptPackage extends EPackage
    * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getExpressionSubscript()
    * @generated
    */
-  int EXPRESSION_SUBSCRIPT = 33;
+  int EXPRESSION_SUBSCRIPT = 31;
 
   /**
    * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -1056,7 +982,7 @@ public interface MscriptPackage extends EPackage
    * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getArrayConcatenationOperator()
    * @generated
    */
-  int ARRAY_CONCATENATION_OPERATOR = 34;
+  int ARRAY_CONCATENATION_OPERATOR = 32;
 
   /**
    * The feature id for the '<em><b>Expression Lists</b></em>' containment reference list.
@@ -1084,7 +1010,7 @@ public interface MscriptPackage extends EPackage
    * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getArrayConstructionOperator()
    * @generated
    */
-  int ARRAY_CONSTRUCTION_OPERATOR = 35;
+  int ARRAY_CONSTRUCTION_OPERATOR = 33;
 
   /**
    * The feature id for the '<em><b>Argument List</b></em>' containment reference.
@@ -1112,7 +1038,7 @@ public interface MscriptPackage extends EPackage
    * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getExpressionList()
    * @generated
    */
-  int EXPRESSION_LIST = 36;
+  int EXPRESSION_LIST = 34;
 
   /**
    * The feature id for the '<em><b>Expressions</b></em>' containment reference list.
@@ -1140,7 +1066,7 @@ public interface MscriptPackage extends EPackage
    * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getParenthesizedExpression()
    * @generated
    */
-  int PARENTHESIZED_EXPRESSION = 37;
+  int PARENTHESIZED_EXPRESSION = 35;
 
   /**
    * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -1168,7 +1094,7 @@ public interface MscriptPackage extends EPackage
    * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getBeginExpression()
    * @generated
    */
-  int BEGIN_EXPRESSION = 38;
+  int BEGIN_EXPRESSION = 36;
 
   /**
    * The number of structural features of the '<em>Begin Expression</em>' class.
@@ -1187,7 +1113,7 @@ public interface MscriptPackage extends EPackage
    * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getEndExpression()
    * @generated
    */
-  int END_EXPRESSION = 39;
+  int END_EXPRESSION = 37;
 
   /**
    * The number of structural features of the '<em>End Expression</em>' class.
@@ -1206,7 +1132,7 @@ public interface MscriptPackage extends EPackage
    * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getUnitExpression()
    * @generated
    */
-  int UNIT_EXPRESSION = 40;
+  int UNIT_EXPRESSION = 38;
 
   /**
    * The feature id for the '<em><b>Numerator</b></em>' containment reference.
@@ -1243,7 +1169,7 @@ public interface MscriptPackage extends EPackage
    * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getUnitExpressionNumerator()
    * @generated
    */
-  int UNIT_EXPRESSION_NUMERATOR = 41;
+  int UNIT_EXPRESSION_NUMERATOR = 39;
 
   /**
    * The feature id for the '<em><b>One</b></em>' attribute.
@@ -1280,7 +1206,7 @@ public interface MscriptPackage extends EPackage
    * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getUnitExpressionDenominator()
    * @generated
    */
-  int UNIT_EXPRESSION_DENOMINATOR = 42;
+  int UNIT_EXPRESSION_DENOMINATOR = 40;
 
   /**
    * The feature id for the '<em><b>Factors</b></em>' containment reference list.
@@ -1308,7 +1234,7 @@ public interface MscriptPackage extends EPackage
    * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getUnitExpressionFactor()
    * @generated
    */
-  int UNIT_EXPRESSION_FACTOR = 43;
+  int UNIT_EXPRESSION_FACTOR = 41;
 
   /**
    * The feature id for the '<em><b>Operand</b></em>' attribute.
@@ -1345,7 +1271,7 @@ public interface MscriptPackage extends EPackage
    * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getUnitExpressionExponent()
    * @generated
    */
-  int UNIT_EXPRESSION_EXPONENT = 44;
+  int UNIT_EXPRESSION_EXPONENT = 42;
 
   /**
    * The feature id for the '<em><b>Negative</b></em>' attribute.
@@ -1382,7 +1308,7 @@ public interface MscriptPackage extends EPackage
    * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getRangeExpression()
    * @generated
    */
-  int RANGE_EXPRESSION = 45;
+  int RANGE_EXPRESSION = 43;
 
   /**
    * The feature id for the '<em><b>Expressions</b></em>' containment reference list.
@@ -1410,7 +1336,7 @@ public interface MscriptPackage extends EPackage
    * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getLogicalOrExpression()
    * @generated
    */
-  int LOGICAL_OR_EXPRESSION = 46;
+  int LOGICAL_OR_EXPRESSION = 44;
 
   /**
    * The feature id for the '<em><b>Operands</b></em>' containment reference list.
@@ -1438,7 +1364,7 @@ public interface MscriptPackage extends EPackage
    * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getLogicalAndExpression()
    * @generated
    */
-  int LOGICAL_AND_EXPRESSION = 47;
+  int LOGICAL_AND_EXPRESSION = 45;
 
   /**
    * The feature id for the '<em><b>Operands</b></em>' containment reference list.
@@ -1466,7 +1392,7 @@ public interface MscriptPackage extends EPackage
    * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getLogicalNotExpression()
    * @generated
    */
-  int LOGICAL_NOT_EXPRESSION = 48;
+  int LOGICAL_NOT_EXPRESSION = 46;
 
   /**
    * The feature id for the '<em><b>Operand</b></em>' containment reference.
@@ -1494,7 +1420,7 @@ public interface MscriptPackage extends EPackage
    * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getRelationalExpression()
    * @generated
    */
-  int RELATIONAL_EXPRESSION = 49;
+  int RELATIONAL_EXPRESSION = 47;
 
   /**
    * The feature id for the '<em><b>Operands</b></em>' containment reference list.
@@ -1531,7 +1457,7 @@ public interface MscriptPackage extends EPackage
    * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getAddSubtractExpression()
    * @generated
    */
-  int ADD_SUBTRACT_EXPRESSION = 50;
+  int ADD_SUBTRACT_EXPRESSION = 48;
 
   /**
    * The feature id for the '<em><b>Operands</b></em>' containment reference list.
@@ -1568,7 +1494,7 @@ public interface MscriptPackage extends EPackage
    * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getMultiplyDivideExpression()
    * @generated
    */
-  int MULTIPLY_DIVIDE_EXPRESSION = 51;
+  int MULTIPLY_DIVIDE_EXPRESSION = 49;
 
   /**
    * The feature id for the '<em><b>Operands</b></em>' containment reference list.
@@ -1605,7 +1531,7 @@ public interface MscriptPackage extends EPackage
    * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getPowerExpression()
    * @generated
    */
-  int POWER_EXPRESSION = 52;
+  int POWER_EXPRESSION = 50;
 
   /**
    * The feature id for the '<em><b>Operands</b></em>' containment reference list.
@@ -1651,7 +1577,7 @@ public interface MscriptPackage extends EPackage
    * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getUnaryMinusExpression()
    * @generated
    */
-  int UNARY_MINUS_EXPRESSION = 53;
+  int UNARY_MINUS_EXPRESSION = 51;
 
   /**
    * The feature id for the '<em><b>Operand</b></em>' containment reference.
@@ -1679,7 +1605,7 @@ public interface MscriptPackage extends EPackage
    * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getRelationalOperator()
    * @generated
    */
-  int RELATIONAL_OPERATOR = 54;
+  int RELATIONAL_OPERATOR = 52;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.damos.scripting.mscript.AddSubtractOperator <em>Add Subtract Operator</em>}' enum.
@@ -1689,7 +1615,7 @@ public interface MscriptPackage extends EPackage
    * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getAddSubtractOperator()
    * @generated
    */
-  int ADD_SUBTRACT_OPERATOR = 55;
+  int ADD_SUBTRACT_OPERATOR = 53;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.damos.scripting.mscript.MultiplyDivideOperator <em>Multiply Divide Operator</em>}' enum.
@@ -1699,7 +1625,7 @@ public interface MscriptPackage extends EPackage
    * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getMultiplyDivideOperator()
    * @generated
    */
-  int MULTIPLY_DIVIDE_OPERATOR = 56;
+  int MULTIPLY_DIVIDE_OPERATOR = 54;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.damos.scripting.mscript.PowerOperator <em>Power Operator</em>}' enum.
@@ -1709,7 +1635,7 @@ public interface MscriptPackage extends EPackage
    * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getPowerOperator()
    * @generated
    */
-  int POWER_OPERATOR = 57;
+  int POWER_OPERATOR = 55;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.damos.scripting.mscript.BooleanKind <em>Boolean Kind</em>}' enum.
@@ -1719,7 +1645,7 @@ public interface MscriptPackage extends EPackage
    * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getBooleanKind()
    * @generated
    */
-  int BOOLEAN_KIND = 58;
+  int BOOLEAN_KIND = 56;
 
 
   /**
@@ -2130,48 +2056,6 @@ public interface MscriptPackage extends EPackage
   EAttribute getStringLiteral_Value();
 
   /**
-   * Returns the meta object for class '{@link org.eclipselabs.damos.scripting.mscript.FunctionCall <em>Function Call</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Function Call</em>'.
-   * @see org.eclipselabs.damos.scripting.mscript.FunctionCall
-   * @generated
-   */
-  EClass getFunctionCall();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.eclipselabs.damos.scripting.mscript.FunctionCall#getArgumentList <em>Argument List</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Argument List</em>'.
-   * @see org.eclipselabs.damos.scripting.mscript.FunctionCall#getArgumentList()
-   * @see #getFunctionCall()
-   * @generated
-   */
-  EReference getFunctionCall_ArgumentList();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipselabs.damos.scripting.mscript.NamedFunctionCall <em>Named Function Call</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Named Function Call</em>'.
-   * @see org.eclipselabs.damos.scripting.mscript.NamedFunctionCall
-   * @generated
-   */
-  EClass getNamedFunctionCall();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.eclipselabs.damos.scripting.mscript.NamedFunctionCall#getName <em>Name</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Name</em>'.
-   * @see org.eclipselabs.damos.scripting.mscript.NamedFunctionCall#getName()
-   * @see #getNamedFunctionCall()
-   * @generated
-   */
-  EReference getNamedFunctionCall_Name();
-
-  /**
    * Returns the meta object for class '{@link org.eclipselabs.damos.scripting.mscript.Name <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2180,17 +2064,6 @@ public interface MscriptPackage extends EPackage
    * @generated
    */
   EClass getName_();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.eclipselabs.damos.scripting.mscript.Name#isGlobal <em>Global</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Global</em>'.
-   * @see org.eclipselabs.damos.scripting.mscript.Name#isGlobal()
-   * @see #getName_()
-   * @generated
-   */
-  EAttribute getName_Global();
 
   /**
    * Returns the meta object for the attribute list '{@link org.eclipselabs.damos.scripting.mscript.Name#getIdentifiers <em>Identifiers</em>}'.
@@ -2202,27 +2075,6 @@ public interface MscriptPackage extends EPackage
    * @generated
    */
   EAttribute getName_Identifiers();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipselabs.damos.scripting.mscript.KeywordFunctionCall <em>Keyword Function Call</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Keyword Function Call</em>'.
-   * @see org.eclipselabs.damos.scripting.mscript.KeywordFunctionCall
-   * @generated
-   */
-  EClass getKeywordFunctionCall();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.eclipselabs.damos.scripting.mscript.KeywordFunctionCall#getName <em>Name</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.eclipselabs.damos.scripting.mscript.KeywordFunctionCall#getName()
-   * @see #getKeywordFunctionCall()
-   * @generated
-   */
-  EAttribute getKeywordFunctionCall_Name();
 
   /**
    * Returns the meta object for class '{@link org.eclipselabs.damos.scripting.mscript.FunctionArgumentList <em>Function Argument List</em>}'.
@@ -2289,6 +2141,71 @@ public interface MscriptPackage extends EPackage
   EReference getNamedArgument_Expression();
 
   /**
+   * Returns the meta object for class '{@link org.eclipselabs.damos.scripting.mscript.SymbolReference <em>Symbol Reference</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Symbol Reference</em>'.
+   * @see org.eclipselabs.damos.scripting.mscript.SymbolReference
+   * @generated
+   */
+  EClass getSymbolReference();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipselabs.damos.scripting.mscript.SymbolReference#isGlobal <em>Global</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Global</em>'.
+   * @see org.eclipselabs.damos.scripting.mscript.SymbolReference#isGlobal()
+   * @see #getSymbolReference()
+   * @generated
+   */
+  EAttribute getSymbolReference_Global();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipselabs.damos.scripting.mscript.SymbolReference#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Name</em>'.
+   * @see org.eclipselabs.damos.scripting.mscript.SymbolReference#getName()
+   * @see #getSymbolReference()
+   * @generated
+   */
+  EReference getSymbolReference_Name();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipselabs.damos.scripting.mscript.SymbolReference#getComponentReferences <em>Component References</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Component References</em>'.
+   * @see org.eclipselabs.damos.scripting.mscript.SymbolReference#getComponentReferences()
+   * @see #getSymbolReference()
+   * @generated
+   */
+  EReference getSymbolReference_ComponentReferences();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipselabs.damos.scripting.mscript.SymbolReference#isFunctionCall <em>Function Call</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Function Call</em>'.
+   * @see org.eclipselabs.damos.scripting.mscript.SymbolReference#isFunctionCall()
+   * @see #getSymbolReference()
+   * @generated
+   */
+  EAttribute getSymbolReference_FunctionCall();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipselabs.damos.scripting.mscript.SymbolReference#getArgumentList <em>Argument List</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Argument List</em>'.
+   * @see org.eclipselabs.damos.scripting.mscript.SymbolReference#getArgumentList()
+   * @see #getSymbolReference()
+   * @generated
+   */
+  EReference getSymbolReference_ArgumentList();
+
+  /**
    * Returns the meta object for class '{@link org.eclipselabs.damos.scripting.mscript.ComponentReference <em>Component Reference</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2299,79 +2216,46 @@ public interface MscriptPackage extends EPackage
   EClass getComponentReference();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipselabs.damos.scripting.mscript.ComponentReference#isGlobal <em>Global</em>}'.
+   * Returns the meta object for class '{@link org.eclipselabs.damos.scripting.mscript.ArrayReference <em>Array Reference</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Global</em>'.
-   * @see org.eclipselabs.damos.scripting.mscript.ComponentReference#isGlobal()
-   * @see #getComponentReference()
+   * @return the meta object for class '<em>Array Reference</em>'.
+   * @see org.eclipselabs.damos.scripting.mscript.ArrayReference
    * @generated
    */
-  EAttribute getComponentReference_Global();
+  EClass getArrayReference();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipselabs.damos.scripting.mscript.ComponentReference#getSegments <em>Segments</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Segments</em>'.
-   * @see org.eclipselabs.damos.scripting.mscript.ComponentReference#getSegments()
-   * @see #getComponentReference()
-   * @generated
-   */
-  EReference getComponentReference_Segments();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipselabs.damos.scripting.mscript.ComponentReferenceSegment <em>Component Reference Segment</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Component Reference Segment</em>'.
-   * @see org.eclipselabs.damos.scripting.mscript.ComponentReferenceSegment
-   * @generated
-   */
-  EClass getComponentReferenceSegment();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.eclipselabs.damos.scripting.mscript.ComponentReferenceSegment#getIdentifier <em>Identifier</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Identifier</em>'.
-   * @see org.eclipselabs.damos.scripting.mscript.ComponentReferenceSegment#getIdentifier()
-   * @see #getComponentReferenceSegment()
-   * @generated
-   */
-  EAttribute getComponentReferenceSegment_Identifier();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.eclipselabs.damos.scripting.mscript.ComponentReferenceSegment#getSubscriptList <em>Subscript List</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Subscript List</em>'.
-   * @see org.eclipselabs.damos.scripting.mscript.ComponentReferenceSegment#getSubscriptList()
-   * @see #getComponentReferenceSegment()
-   * @generated
-   */
-  EReference getComponentReferenceSegment_SubscriptList();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipselabs.damos.scripting.mscript.ArraySubscriptList <em>Array Subscript List</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Array Subscript List</em>'.
-   * @see org.eclipselabs.damos.scripting.mscript.ArraySubscriptList
-   * @generated
-   */
-  EClass getArraySubscriptList();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.eclipselabs.damos.scripting.mscript.ArraySubscriptList#getSubscripts <em>Subscripts</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipselabs.damos.scripting.mscript.ArrayReference#getSubscripts <em>Subscripts</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference list '<em>Subscripts</em>'.
-   * @see org.eclipselabs.damos.scripting.mscript.ArraySubscriptList#getSubscripts()
-   * @see #getArraySubscriptList()
+   * @see org.eclipselabs.damos.scripting.mscript.ArrayReference#getSubscripts()
+   * @see #getArrayReference()
    * @generated
    */
-  EReference getArraySubscriptList_Subscripts();
+  EReference getArrayReference_Subscripts();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipselabs.damos.scripting.mscript.MemberReference <em>Member Reference</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Member Reference</em>'.
+   * @see org.eclipselabs.damos.scripting.mscript.MemberReference
+   * @generated
+   */
+  EClass getMemberReference();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipselabs.damos.scripting.mscript.MemberReference#getIdentifier <em>Identifier</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Identifier</em>'.
+   * @see org.eclipselabs.damos.scripting.mscript.MemberReference#getIdentifier()
+   * @see #getMemberReference()
+   * @generated
+   */
+  EAttribute getMemberReference_Identifier();
 
   /**
    * Returns the meta object for class '{@link org.eclipselabs.damos.scripting.mscript.Subscript <em>Subscript</em>}'.
@@ -3341,42 +3225,6 @@ public interface MscriptPackage extends EPackage
     EAttribute STRING_LITERAL__VALUE = eINSTANCE.getStringLiteral_Value();
 
     /**
-     * The meta object literal for the '{@link org.eclipselabs.damos.scripting.mscript.impl.FunctionCallImpl <em>Function Call</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipselabs.damos.scripting.mscript.impl.FunctionCallImpl
-     * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getFunctionCall()
-     * @generated
-     */
-    EClass FUNCTION_CALL = eINSTANCE.getFunctionCall();
-
-    /**
-     * The meta object literal for the '<em><b>Argument List</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference FUNCTION_CALL__ARGUMENT_LIST = eINSTANCE.getFunctionCall_ArgumentList();
-
-    /**
-     * The meta object literal for the '{@link org.eclipselabs.damos.scripting.mscript.impl.NamedFunctionCallImpl <em>Named Function Call</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipselabs.damos.scripting.mscript.impl.NamedFunctionCallImpl
-     * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getNamedFunctionCall()
-     * @generated
-     */
-    EClass NAMED_FUNCTION_CALL = eINSTANCE.getNamedFunctionCall();
-
-    /**
-     * The meta object literal for the '<em><b>Name</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference NAMED_FUNCTION_CALL__NAME = eINSTANCE.getNamedFunctionCall_Name();
-
-    /**
      * The meta object literal for the '{@link org.eclipselabs.damos.scripting.mscript.impl.NameImpl <em>Name</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -3387,38 +3235,12 @@ public interface MscriptPackage extends EPackage
     EClass NAME = eINSTANCE.getName_();
 
     /**
-     * The meta object literal for the '<em><b>Global</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute NAME__GLOBAL = eINSTANCE.getName_Global();
-
-    /**
      * The meta object literal for the '<em><b>Identifiers</b></em>' attribute list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
     EAttribute NAME__IDENTIFIERS = eINSTANCE.getName_Identifiers();
-
-    /**
-     * The meta object literal for the '{@link org.eclipselabs.damos.scripting.mscript.impl.KeywordFunctionCallImpl <em>Keyword Function Call</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipselabs.damos.scripting.mscript.impl.KeywordFunctionCallImpl
-     * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getKeywordFunctionCall()
-     * @generated
-     */
-    EClass KEYWORD_FUNCTION_CALL = eINSTANCE.getKeywordFunctionCall();
-
-    /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute KEYWORD_FUNCTION_CALL__NAME = eINSTANCE.getKeywordFunctionCall_Name();
 
     /**
      * The meta object literal for the '{@link org.eclipselabs.damos.scripting.mscript.impl.FunctionArgumentListImpl <em>Function Argument List</em>}' class.
@@ -3473,6 +3295,56 @@ public interface MscriptPackage extends EPackage
     EReference NAMED_ARGUMENT__EXPRESSION = eINSTANCE.getNamedArgument_Expression();
 
     /**
+     * The meta object literal for the '{@link org.eclipselabs.damos.scripting.mscript.impl.SymbolReferenceImpl <em>Symbol Reference</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipselabs.damos.scripting.mscript.impl.SymbolReferenceImpl
+     * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getSymbolReference()
+     * @generated
+     */
+    EClass SYMBOL_REFERENCE = eINSTANCE.getSymbolReference();
+
+    /**
+     * The meta object literal for the '<em><b>Global</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute SYMBOL_REFERENCE__GLOBAL = eINSTANCE.getSymbolReference_Global();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference SYMBOL_REFERENCE__NAME = eINSTANCE.getSymbolReference_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Component References</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference SYMBOL_REFERENCE__COMPONENT_REFERENCES = eINSTANCE.getSymbolReference_ComponentReferences();
+
+    /**
+     * The meta object literal for the '<em><b>Function Call</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute SYMBOL_REFERENCE__FUNCTION_CALL = eINSTANCE.getSymbolReference_FunctionCall();
+
+    /**
+     * The meta object literal for the '<em><b>Argument List</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference SYMBOL_REFERENCE__ARGUMENT_LIST = eINSTANCE.getSymbolReference_ArgumentList();
+
+    /**
      * The meta object literal for the '{@link org.eclipselabs.damos.scripting.mscript.impl.ComponentReferenceImpl <em>Component Reference</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -3483,56 +3355,14 @@ public interface MscriptPackage extends EPackage
     EClass COMPONENT_REFERENCE = eINSTANCE.getComponentReference();
 
     /**
-     * The meta object literal for the '<em><b>Global</b></em>' attribute feature.
+     * The meta object literal for the '{@link org.eclipselabs.damos.scripting.mscript.impl.ArrayReferenceImpl <em>Array Reference</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     * @see org.eclipselabs.damos.scripting.mscript.impl.ArrayReferenceImpl
+     * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getArrayReference()
      * @generated
      */
-    EAttribute COMPONENT_REFERENCE__GLOBAL = eINSTANCE.getComponentReference_Global();
-
-    /**
-     * The meta object literal for the '<em><b>Segments</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference COMPONENT_REFERENCE__SEGMENTS = eINSTANCE.getComponentReference_Segments();
-
-    /**
-     * The meta object literal for the '{@link org.eclipselabs.damos.scripting.mscript.impl.ComponentReferenceSegmentImpl <em>Component Reference Segment</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipselabs.damos.scripting.mscript.impl.ComponentReferenceSegmentImpl
-     * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getComponentReferenceSegment()
-     * @generated
-     */
-    EClass COMPONENT_REFERENCE_SEGMENT = eINSTANCE.getComponentReferenceSegment();
-
-    /**
-     * The meta object literal for the '<em><b>Identifier</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute COMPONENT_REFERENCE_SEGMENT__IDENTIFIER = eINSTANCE.getComponentReferenceSegment_Identifier();
-
-    /**
-     * The meta object literal for the '<em><b>Subscript List</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference COMPONENT_REFERENCE_SEGMENT__SUBSCRIPT_LIST = eINSTANCE.getComponentReferenceSegment_SubscriptList();
-
-    /**
-     * The meta object literal for the '{@link org.eclipselabs.damos.scripting.mscript.impl.ArraySubscriptListImpl <em>Array Subscript List</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipselabs.damos.scripting.mscript.impl.ArraySubscriptListImpl
-     * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getArraySubscriptList()
-     * @generated
-     */
-    EClass ARRAY_SUBSCRIPT_LIST = eINSTANCE.getArraySubscriptList();
+    EClass ARRAY_REFERENCE = eINSTANCE.getArrayReference();
 
     /**
      * The meta object literal for the '<em><b>Subscripts</b></em>' containment reference list feature.
@@ -3540,7 +3370,25 @@ public interface MscriptPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference ARRAY_SUBSCRIPT_LIST__SUBSCRIPTS = eINSTANCE.getArraySubscriptList_Subscripts();
+    EReference ARRAY_REFERENCE__SUBSCRIPTS = eINSTANCE.getArrayReference_Subscripts();
+
+    /**
+     * The meta object literal for the '{@link org.eclipselabs.damos.scripting.mscript.impl.MemberReferenceImpl <em>Member Reference</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipselabs.damos.scripting.mscript.impl.MemberReferenceImpl
+     * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getMemberReference()
+     * @generated
+     */
+    EClass MEMBER_REFERENCE = eINSTANCE.getMemberReference();
+
+    /**
+     * The meta object literal for the '<em><b>Identifier</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute MEMBER_REFERENCE__IDENTIFIER = eINSTANCE.getMemberReference_Identifier();
 
     /**
      * The meta object literal for the '{@link org.eclipselabs.damos.scripting.mscript.impl.SubscriptImpl <em>Subscript</em>}' class.

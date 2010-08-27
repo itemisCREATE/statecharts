@@ -279,36 +279,10 @@ public class MscriptSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case MscriptPackage.FUNCTION_CALL:
-      {
-        FunctionCall functionCall = (FunctionCall)theEObject;
-        T result = caseFunctionCall(functionCall);
-        if (result == null) result = caseExpression(functionCall);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case MscriptPackage.NAMED_FUNCTION_CALL:
-      {
-        NamedFunctionCall namedFunctionCall = (NamedFunctionCall)theEObject;
-        T result = caseNamedFunctionCall(namedFunctionCall);
-        if (result == null) result = caseFunctionCall(namedFunctionCall);
-        if (result == null) result = caseExpression(namedFunctionCall);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case MscriptPackage.NAME:
       {
         Name name = (Name)theEObject;
         T result = caseName(name);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case MscriptPackage.KEYWORD_FUNCTION_CALL:
-      {
-        KeywordFunctionCall keywordFunctionCall = (KeywordFunctionCall)theEObject;
-        T result = caseKeywordFunctionCall(keywordFunctionCall);
-        if (result == null) result = caseFunctionCall(keywordFunctionCall);
-        if (result == null) result = caseExpression(keywordFunctionCall);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -326,25 +300,34 @@ public class MscriptSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case MscriptPackage.SYMBOL_REFERENCE:
+      {
+        SymbolReference symbolReference = (SymbolReference)theEObject;
+        T result = caseSymbolReference(symbolReference);
+        if (result == null) result = caseExpression(symbolReference);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case MscriptPackage.COMPONENT_REFERENCE:
       {
         ComponentReference componentReference = (ComponentReference)theEObject;
         T result = caseComponentReference(componentReference);
-        if (result == null) result = caseExpression(componentReference);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case MscriptPackage.COMPONENT_REFERENCE_SEGMENT:
+      case MscriptPackage.ARRAY_REFERENCE:
       {
-        ComponentReferenceSegment componentReferenceSegment = (ComponentReferenceSegment)theEObject;
-        T result = caseComponentReferenceSegment(componentReferenceSegment);
+        ArrayReference arrayReference = (ArrayReference)theEObject;
+        T result = caseArrayReference(arrayReference);
+        if (result == null) result = caseComponentReference(arrayReference);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case MscriptPackage.ARRAY_SUBSCRIPT_LIST:
+      case MscriptPackage.MEMBER_REFERENCE:
       {
-        ArraySubscriptList arraySubscriptList = (ArraySubscriptList)theEObject;
-        T result = caseArraySubscriptList(arraySubscriptList);
+        MemberReference memberReference = (MemberReference)theEObject;
+        T result = caseMemberReference(memberReference);
+        if (result == null) result = caseComponentReference(memberReference);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -882,38 +865,6 @@ public class MscriptSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Function Call</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Function Call</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseFunctionCall(FunctionCall object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Named Function Call</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Named Function Call</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseNamedFunctionCall(NamedFunctionCall object)
-  {
-    return null;
-  }
-
-  /**
    * Returns the result of interpreting the object as an instance of '<em>Name</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -925,22 +876,6 @@ public class MscriptSwitch<T>
    * @generated
    */
   public T caseName(Name object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Keyword Function Call</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Keyword Function Call</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseKeywordFunctionCall(KeywordFunctionCall object)
   {
     return null;
   }
@@ -978,6 +913,22 @@ public class MscriptSwitch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>Symbol Reference</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Symbol Reference</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseSymbolReference(SymbolReference object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>Component Reference</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -994,33 +945,33 @@ public class MscriptSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Component Reference Segment</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Array Reference</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Component Reference Segment</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Array Reference</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseComponentReferenceSegment(ComponentReferenceSegment object)
+  public T caseArrayReference(ArrayReference object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Array Subscript List</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Member Reference</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Array Subscript List</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Member Reference</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseArraySubscriptList(ArraySubscriptList object)
+  public T caseMemberReference(MemberReference object)
   {
     return null;
   }

@@ -14,29 +14,27 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.eclipselabs.damos.scripting.mscript.ArraySubscriptList;
+import org.eclipselabs.damos.scripting.mscript.ArrayReference;
 import org.eclipselabs.damos.scripting.mscript.MscriptPackage;
 import org.eclipselabs.damos.scripting.mscript.Subscript;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Array Subscript List</b></em>'.
+ * An implementation of the model object '<em><b>Array Reference</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.damos.scripting.mscript.impl.ArraySubscriptListImpl#getSubscripts <em>Subscripts</em>}</li>
+ *   <li>{@link org.eclipselabs.damos.scripting.mscript.impl.ArrayReferenceImpl#getSubscripts <em>Subscripts</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ArraySubscriptListImpl extends MinimalEObjectImpl.Container implements ArraySubscriptList
+public class ArrayReferenceImpl extends ComponentReferenceImpl implements ArrayReference
 {
   /**
    * The cached value of the '{@link #getSubscripts() <em>Subscripts</em>}' containment reference list.
@@ -53,7 +51,7 @@ public class ArraySubscriptListImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ArraySubscriptListImpl()
+  protected ArrayReferenceImpl()
   {
     super();
   }
@@ -66,7 +64,7 @@ public class ArraySubscriptListImpl extends MinimalEObjectImpl.Container impleme
   @Override
   protected EClass eStaticClass()
   {
-    return MscriptPackage.Literals.ARRAY_SUBSCRIPT_LIST;
+    return MscriptPackage.Literals.ARRAY_REFERENCE;
   }
 
   /**
@@ -78,7 +76,7 @@ public class ArraySubscriptListImpl extends MinimalEObjectImpl.Container impleme
   {
     if (subscripts == null)
     {
-      subscripts = new EObjectContainmentEList<Subscript>(Subscript.class, this, MscriptPackage.ARRAY_SUBSCRIPT_LIST__SUBSCRIPTS);
+      subscripts = new EObjectContainmentEList<Subscript>(Subscript.class, this, MscriptPackage.ARRAY_REFERENCE__SUBSCRIPTS);
     }
     return subscripts;
   }
@@ -93,7 +91,7 @@ public class ArraySubscriptListImpl extends MinimalEObjectImpl.Container impleme
   {
     switch (featureID)
     {
-      case MscriptPackage.ARRAY_SUBSCRIPT_LIST__SUBSCRIPTS:
+      case MscriptPackage.ARRAY_REFERENCE__SUBSCRIPTS:
         return ((InternalEList<?>)getSubscripts()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -109,7 +107,7 @@ public class ArraySubscriptListImpl extends MinimalEObjectImpl.Container impleme
   {
     switch (featureID)
     {
-      case MscriptPackage.ARRAY_SUBSCRIPT_LIST__SUBSCRIPTS:
+      case MscriptPackage.ARRAY_REFERENCE__SUBSCRIPTS:
         return getSubscripts();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -126,7 +124,7 @@ public class ArraySubscriptListImpl extends MinimalEObjectImpl.Container impleme
   {
     switch (featureID)
     {
-      case MscriptPackage.ARRAY_SUBSCRIPT_LIST__SUBSCRIPTS:
+      case MscriptPackage.ARRAY_REFERENCE__SUBSCRIPTS:
         getSubscripts().clear();
         getSubscripts().addAll((Collection<? extends Subscript>)newValue);
         return;
@@ -144,7 +142,7 @@ public class ArraySubscriptListImpl extends MinimalEObjectImpl.Container impleme
   {
     switch (featureID)
     {
-      case MscriptPackage.ARRAY_SUBSCRIPT_LIST__SUBSCRIPTS:
+      case MscriptPackage.ARRAY_REFERENCE__SUBSCRIPTS:
         getSubscripts().clear();
         return;
     }
@@ -161,10 +159,10 @@ public class ArraySubscriptListImpl extends MinimalEObjectImpl.Container impleme
   {
     switch (featureID)
     {
-      case MscriptPackage.ARRAY_SUBSCRIPT_LIST__SUBSCRIPTS:
+      case MscriptPackage.ARRAY_REFERENCE__SUBSCRIPTS:
         return subscripts != null && !subscripts.isEmpty();
     }
     return super.eIsSet(featureID);
   }
 
-} //ArraySubscriptListImpl
+} //ArrayReferenceImpl

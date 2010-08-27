@@ -17,7 +17,7 @@ import org.eclipselabs.damos.scripting.mscript.AddSubtractExpression;
 import org.eclipselabs.damos.scripting.mscript.AddSubtractOperator;
 import org.eclipselabs.damos.scripting.mscript.ArrayConcatenationOperator;
 import org.eclipselabs.damos.scripting.mscript.ArrayConstructionOperator;
-import org.eclipselabs.damos.scripting.mscript.ArraySubscriptList;
+import org.eclipselabs.damos.scripting.mscript.ArrayReference;
 import org.eclipselabs.damos.scripting.mscript.BeginExpression;
 import org.eclipselabs.damos.scripting.mscript.BooleanKind;
 import org.eclipselabs.damos.scripting.mscript.BooleanLiteral;
@@ -25,7 +25,6 @@ import org.eclipselabs.damos.scripting.mscript.BooleanTypeSpecifier;
 import org.eclipselabs.damos.scripting.mscript.ColonSubscript;
 import org.eclipselabs.damos.scripting.mscript.ComplexTypeSpecifier;
 import org.eclipselabs.damos.scripting.mscript.ComponentReference;
-import org.eclipselabs.damos.scripting.mscript.ComponentReferenceSegment;
 import org.eclipselabs.damos.scripting.mscript.ConditionalExpression;
 import org.eclipselabs.damos.scripting.mscript.ConditionalExpressionCase;
 import org.eclipselabs.damos.scripting.mscript.DataTypeSpecifier;
@@ -36,14 +35,13 @@ import org.eclipselabs.damos.scripting.mscript.Expression;
 import org.eclipselabs.damos.scripting.mscript.ExpressionList;
 import org.eclipselabs.damos.scripting.mscript.ExpressionSubscript;
 import org.eclipselabs.damos.scripting.mscript.FunctionArgumentList;
-import org.eclipselabs.damos.scripting.mscript.FunctionCall;
 import org.eclipselabs.damos.scripting.mscript.IntegerLiteral;
 import org.eclipselabs.damos.scripting.mscript.IntegerTypeSpecifier;
-import org.eclipselabs.damos.scripting.mscript.KeywordFunctionCall;
 import org.eclipselabs.damos.scripting.mscript.Literal;
 import org.eclipselabs.damos.scripting.mscript.LogicalAndExpression;
 import org.eclipselabs.damos.scripting.mscript.LogicalNotExpression;
 import org.eclipselabs.damos.scripting.mscript.LogicalOrExpression;
+import org.eclipselabs.damos.scripting.mscript.MemberReference;
 import org.eclipselabs.damos.scripting.mscript.Mscript;
 import org.eclipselabs.damos.scripting.mscript.MscriptFactory;
 import org.eclipselabs.damos.scripting.mscript.MscriptPackage;
@@ -51,7 +49,6 @@ import org.eclipselabs.damos.scripting.mscript.MultiplyDivideExpression;
 import org.eclipselabs.damos.scripting.mscript.MultiplyDivideOperator;
 import org.eclipselabs.damos.scripting.mscript.Name;
 import org.eclipselabs.damos.scripting.mscript.NamedArgument;
-import org.eclipselabs.damos.scripting.mscript.NamedFunctionCall;
 import org.eclipselabs.damos.scripting.mscript.NumericalLiteral;
 import org.eclipselabs.damos.scripting.mscript.NumericalTypeSpecifier;
 import org.eclipselabs.damos.scripting.mscript.PackageDefinition;
@@ -68,6 +65,7 @@ import org.eclipselabs.damos.scripting.mscript.RelationalOperator;
 import org.eclipselabs.damos.scripting.mscript.StringLiteral;
 import org.eclipselabs.damos.scripting.mscript.StringTypeSpecifier;
 import org.eclipselabs.damos.scripting.mscript.Subscript;
+import org.eclipselabs.damos.scripting.mscript.SymbolReference;
 import org.eclipselabs.damos.scripting.mscript.UnaryMinusExpression;
 import org.eclipselabs.damos.scripting.mscript.UnitExpression;
 import org.eclipselabs.damos.scripting.mscript.UnitExpressionDenominator;
@@ -242,28 +240,7 @@ public class MscriptPackageImpl extends EPackageImpl implements MscriptPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass functionCallEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass namedFunctionCallEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   private EClass nameEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass keywordFunctionCallEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -284,6 +261,13 @@ public class MscriptPackageImpl extends EPackageImpl implements MscriptPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass symbolReferenceEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass componentReferenceEClass = null;
 
   /**
@@ -291,14 +275,14 @@ public class MscriptPackageImpl extends EPackageImpl implements MscriptPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass componentReferenceSegmentEClass = null;
+  private EClass arrayReferenceEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass arraySubscriptListEClass = null;
+  private EClass memberReferenceEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -954,46 +938,6 @@ public class MscriptPackageImpl extends EPackageImpl implements MscriptPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getFunctionCall()
-  {
-    return functionCallEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getFunctionCall_ArgumentList()
-  {
-    return (EReference)functionCallEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getNamedFunctionCall()
-  {
-    return namedFunctionCallEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getNamedFunctionCall_Name()
-  {
-    return (EReference)namedFunctionCallEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EClass getName_()
   {
     return nameEClass;
@@ -1004,39 +948,9 @@ public class MscriptPackageImpl extends EPackageImpl implements MscriptPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getName_Global()
-  {
-    return (EAttribute)nameEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EAttribute getName_Identifiers()
   {
-    return (EAttribute)nameEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getKeywordFunctionCall()
-  {
-    return keywordFunctionCallEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getKeywordFunctionCall_Name()
-  {
-    return (EAttribute)keywordFunctionCallEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)nameEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1104,6 +1018,66 @@ public class MscriptPackageImpl extends EPackageImpl implements MscriptPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getSymbolReference()
+  {
+    return symbolReferenceEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getSymbolReference_Global()
+  {
+    return (EAttribute)symbolReferenceEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getSymbolReference_Name()
+  {
+    return (EReference)symbolReferenceEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getSymbolReference_ComponentReferences()
+  {
+    return (EReference)symbolReferenceEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getSymbolReference_FunctionCall()
+  {
+    return (EAttribute)symbolReferenceEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getSymbolReference_ArgumentList()
+  {
+    return (EReference)symbolReferenceEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getComponentReference()
   {
     return componentReferenceEClass;
@@ -1114,9 +1088,9 @@ public class MscriptPackageImpl extends EPackageImpl implements MscriptPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getComponentReference_Global()
+  public EClass getArrayReference()
   {
-    return (EAttribute)componentReferenceEClass.getEStructuralFeatures().get(0);
+    return arrayReferenceEClass;
   }
 
   /**
@@ -1124,9 +1098,9 @@ public class MscriptPackageImpl extends EPackageImpl implements MscriptPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getComponentReference_Segments()
+  public EReference getArrayReference_Subscripts()
   {
-    return (EReference)componentReferenceEClass.getEStructuralFeatures().get(1);
+    return (EReference)arrayReferenceEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1134,9 +1108,9 @@ public class MscriptPackageImpl extends EPackageImpl implements MscriptPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getComponentReferenceSegment()
+  public EClass getMemberReference()
   {
-    return componentReferenceSegmentEClass;
+    return memberReferenceEClass;
   }
 
   /**
@@ -1144,39 +1118,9 @@ public class MscriptPackageImpl extends EPackageImpl implements MscriptPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getComponentReferenceSegment_Identifier()
+  public EAttribute getMemberReference_Identifier()
   {
-    return (EAttribute)componentReferenceSegmentEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getComponentReferenceSegment_SubscriptList()
-  {
-    return (EReference)componentReferenceSegmentEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getArraySubscriptList()
-  {
-    return arraySubscriptListEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getArraySubscriptList_Subscripts()
-  {
-    return (EReference)arraySubscriptListEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)memberReferenceEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1830,18 +1774,8 @@ public class MscriptPackageImpl extends EPackageImpl implements MscriptPackage
     stringLiteralEClass = createEClass(STRING_LITERAL);
     createEAttribute(stringLiteralEClass, STRING_LITERAL__VALUE);
 
-    functionCallEClass = createEClass(FUNCTION_CALL);
-    createEReference(functionCallEClass, FUNCTION_CALL__ARGUMENT_LIST);
-
-    namedFunctionCallEClass = createEClass(NAMED_FUNCTION_CALL);
-    createEReference(namedFunctionCallEClass, NAMED_FUNCTION_CALL__NAME);
-
     nameEClass = createEClass(NAME);
-    createEAttribute(nameEClass, NAME__GLOBAL);
     createEAttribute(nameEClass, NAME__IDENTIFIERS);
-
-    keywordFunctionCallEClass = createEClass(KEYWORD_FUNCTION_CALL);
-    createEAttribute(keywordFunctionCallEClass, KEYWORD_FUNCTION_CALL__NAME);
 
     functionArgumentListEClass = createEClass(FUNCTION_ARGUMENT_LIST);
     createEReference(functionArgumentListEClass, FUNCTION_ARGUMENT_LIST__ARGUMENTS);
@@ -1851,16 +1785,20 @@ public class MscriptPackageImpl extends EPackageImpl implements MscriptPackage
     createEAttribute(namedArgumentEClass, NAMED_ARGUMENT__IDENTIFIER);
     createEReference(namedArgumentEClass, NAMED_ARGUMENT__EXPRESSION);
 
+    symbolReferenceEClass = createEClass(SYMBOL_REFERENCE);
+    createEAttribute(symbolReferenceEClass, SYMBOL_REFERENCE__GLOBAL);
+    createEReference(symbolReferenceEClass, SYMBOL_REFERENCE__NAME);
+    createEReference(symbolReferenceEClass, SYMBOL_REFERENCE__COMPONENT_REFERENCES);
+    createEAttribute(symbolReferenceEClass, SYMBOL_REFERENCE__FUNCTION_CALL);
+    createEReference(symbolReferenceEClass, SYMBOL_REFERENCE__ARGUMENT_LIST);
+
     componentReferenceEClass = createEClass(COMPONENT_REFERENCE);
-    createEAttribute(componentReferenceEClass, COMPONENT_REFERENCE__GLOBAL);
-    createEReference(componentReferenceEClass, COMPONENT_REFERENCE__SEGMENTS);
 
-    componentReferenceSegmentEClass = createEClass(COMPONENT_REFERENCE_SEGMENT);
-    createEAttribute(componentReferenceSegmentEClass, COMPONENT_REFERENCE_SEGMENT__IDENTIFIER);
-    createEReference(componentReferenceSegmentEClass, COMPONENT_REFERENCE_SEGMENT__SUBSCRIPT_LIST);
+    arrayReferenceEClass = createEClass(ARRAY_REFERENCE);
+    createEReference(arrayReferenceEClass, ARRAY_REFERENCE__SUBSCRIPTS);
 
-    arraySubscriptListEClass = createEClass(ARRAY_SUBSCRIPT_LIST);
-    createEReference(arraySubscriptListEClass, ARRAY_SUBSCRIPT_LIST__SUBSCRIPTS);
+    memberReferenceEClass = createEClass(MEMBER_REFERENCE);
+    createEAttribute(memberReferenceEClass, MEMBER_REFERENCE__IDENTIFIER);
 
     subscriptEClass = createEClass(SUBSCRIPT);
 
@@ -1989,10 +1927,9 @@ public class MscriptPackageImpl extends EPackageImpl implements MscriptPackage
     integerLiteralEClass.getESuperTypes().add(this.getNumericalLiteral());
     booleanLiteralEClass.getESuperTypes().add(this.getLiteral());
     stringLiteralEClass.getESuperTypes().add(this.getLiteral());
-    functionCallEClass.getESuperTypes().add(this.getExpression());
-    namedFunctionCallEClass.getESuperTypes().add(this.getFunctionCall());
-    keywordFunctionCallEClass.getESuperTypes().add(this.getFunctionCall());
-    componentReferenceEClass.getESuperTypes().add(this.getExpression());
+    symbolReferenceEClass.getESuperTypes().add(this.getExpression());
+    arrayReferenceEClass.getESuperTypes().add(this.getComponentReference());
+    memberReferenceEClass.getESuperTypes().add(this.getComponentReference());
     colonSubscriptEClass.getESuperTypes().add(this.getSubscript());
     expressionSubscriptEClass.getESuperTypes().add(this.getSubscript());
     arrayConcatenationOperatorEClass.getESuperTypes().add(this.getExpression());
@@ -2072,18 +2009,8 @@ public class MscriptPackageImpl extends EPackageImpl implements MscriptPackage
     initEClass(stringLiteralEClass, StringLiteral.class, "StringLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getStringLiteral_Value(), ecorePackage.getEString(), "value", null, 0, 1, StringLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(functionCallEClass, FunctionCall.class, "FunctionCall", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getFunctionCall_ArgumentList(), this.getFunctionArgumentList(), null, "argumentList", null, 0, 1, FunctionCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(namedFunctionCallEClass, NamedFunctionCall.class, "NamedFunctionCall", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getNamedFunctionCall_Name(), this.getName_(), null, "name", null, 0, 1, NamedFunctionCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
     initEClass(nameEClass, Name.class, "Name", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getName_Global(), ecorePackage.getEBoolean(), "global", null, 0, 1, Name.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getName_Identifiers(), ecorePackage.getEString(), "identifiers", null, 0, -1, Name.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(keywordFunctionCallEClass, KeywordFunctionCall.class, "KeywordFunctionCall", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getKeywordFunctionCall_Name(), ecorePackage.getEString(), "name", null, 0, 1, KeywordFunctionCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(functionArgumentListEClass, FunctionArgumentList.class, "FunctionArgumentList", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getFunctionArgumentList_Arguments(), this.getExpression(), null, "arguments", null, 0, -1, FunctionArgumentList.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2093,16 +2020,20 @@ public class MscriptPackageImpl extends EPackageImpl implements MscriptPackage
     initEAttribute(getNamedArgument_Identifier(), ecorePackage.getEString(), "identifier", null, 0, 1, NamedArgument.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getNamedArgument_Expression(), this.getExpression(), null, "expression", null, 0, 1, NamedArgument.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+    initEClass(symbolReferenceEClass, SymbolReference.class, "SymbolReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getSymbolReference_Global(), ecorePackage.getEBoolean(), "global", null, 0, 1, SymbolReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getSymbolReference_Name(), this.getName_(), null, "name", null, 0, 1, SymbolReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getSymbolReference_ComponentReferences(), this.getComponentReference(), null, "componentReferences", null, 0, -1, SymbolReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getSymbolReference_FunctionCall(), ecorePackage.getEBoolean(), "functionCall", null, 0, 1, SymbolReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getSymbolReference_ArgumentList(), this.getFunctionArgumentList(), null, "argumentList", null, 0, 1, SymbolReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
     initEClass(componentReferenceEClass, ComponentReference.class, "ComponentReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getComponentReference_Global(), ecorePackage.getEBoolean(), "global", null, 0, 1, ComponentReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getComponentReference_Segments(), this.getComponentReferenceSegment(), null, "segments", null, 0, -1, ComponentReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(componentReferenceSegmentEClass, ComponentReferenceSegment.class, "ComponentReferenceSegment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getComponentReferenceSegment_Identifier(), ecorePackage.getEString(), "identifier", null, 0, 1, ComponentReferenceSegment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getComponentReferenceSegment_SubscriptList(), this.getArraySubscriptList(), null, "subscriptList", null, 0, 1, ComponentReferenceSegment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(arrayReferenceEClass, ArrayReference.class, "ArrayReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getArrayReference_Subscripts(), this.getSubscript(), null, "subscripts", null, 0, -1, ArrayReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(arraySubscriptListEClass, ArraySubscriptList.class, "ArraySubscriptList", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getArraySubscriptList_Subscripts(), this.getSubscript(), null, "subscripts", null, 0, -1, ArraySubscriptList.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(memberReferenceEClass, MemberReference.class, "MemberReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getMemberReference_Identifier(), ecorePackage.getEString(), "identifier", null, 0, 1, MemberReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(subscriptEClass, Subscript.class, "Subscript", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

@@ -122,8 +122,8 @@ UnaryMinusExpression returns Expression :
 
 PrimaryExpression returns Expression :
 	Literal |
-	FunctionCall |
-	ComponentReference |
+//	FunctionCall |
+	SymbolReference |
 	ParenthesizedExpression |
 	ArrayConcatenationOperator |
 	ArrayConstructionOperator |
@@ -151,17 +151,11 @@ enum BooleanKind :
 StringLiteral :
 	value=STRING;
 	
-FunctionCall :
-	NamedFunctionCall | KeywordFunctionCall;
-
-NamedFunctionCall :
-	name=Name '(' (argumentList=FunctionArgumentList)? ')';
+//FunctionCall :
+//	symbol=SymbolReference '(' (argumentList=FunctionArgumentList)? ')';
 
 Name :
-	(global?='::')? identifiers+=IDENT ('::' identifiers+=IDENT)*;
-
-KeywordFunctionCall :
-	name=('der'|'initial') '(' (argumentList=FunctionArgumentList)? ')';
+	identifiers+=IDENT ('::' identifiers+=IDENT)*;
 
 FunctionArgumentList :
 	arguments+=Expression ((',' arguments+=Expression)* (',' namedArguments+=NamedArgument)* /*| 'for' forIndexList=ForIndexList*/) |
@@ -170,15 +164,18 @@ FunctionArgumentList :
 NamedArgument :
 	identifier=IDENT '=' expression=Expression;
 
+SymbolReference :
+	(global?='::')? name=Name (componentReferences+=ComponentReference)* (functionCall?='(' (argumentList=FunctionArgumentList)? ')')?;
+	
 ComponentReference :
-	(global?='.')? segments+=ComponentReferenceSegment ('.' segments+=ComponentReferenceSegment)*;
+	ArrayReference |  MemberReference;
 
-ComponentReferenceSegment :
-	identifier=IDENT (subscriptList=ArraySubscriptList)?;
-
-ArraySubscriptList :
+ArrayReference :
 	'[' subscripts+=Subscript (',' subscripts+=Subscript)* ']';
-
+	
+MemberReference :
+	'.' identifier=IDENT;
+	
 Subscript :
 	ColonSubscript | ExpressionSubscript;
 

@@ -1,19 +1,15 @@
 package org.eclipselabs.damos.scripting.validation;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.validation.Check;
 import org.eclipselabs.damos.scripting.mscript.ArrayConstructionOperator;
-import org.eclipselabs.damos.scripting.mscript.ArraySubscriptList;
+import org.eclipselabs.damos.scripting.mscript.ArrayReference;
 import org.eclipselabs.damos.scripting.mscript.BeginExpression;
 import org.eclipselabs.damos.scripting.mscript.EndExpression;
-import org.eclipselabs.damos.scripting.mscript.FunctionCall;
-import org.eclipselabs.damos.scripting.mscript.KeywordFunctionCall;
 import org.eclipselabs.damos.scripting.mscript.MscriptPackage;
-import org.eclipselabs.damos.scripting.mscript.NamedFunctionCall;
 import org.eclipselabs.damos.scripting.mscript.Subscript;
 import org.eclipselabs.damos.scripting.mscript.UnitExpressionNumerator;
 
@@ -72,31 +68,31 @@ public class MscriptJavaValidator extends AbstractMscriptJavaValidator {
 		RESERVED_BUILTIN_FUNCTIONS.add("reinit");
 	}
 	
-	@Check
-	public void checkReservedBuiltinFunctionCallMustNotBeUsed(FunctionCall functionCall) {
-		String name = "";
-		if (functionCall instanceof NamedFunctionCall) {
-			NamedFunctionCall namedFunctionCall = (NamedFunctionCall) functionCall;
-			List<String> identifiers = namedFunctionCall.getName().getIdentifiers();
-			if (identifiers.size() == 1) {
-				name = identifiers.get(0);
-			} else if (identifiers.size() > 1) {
-				StringBuilder sb = new StringBuilder();
-				for (String identifier : identifiers) {
-					if (sb.length() > 0) {
-						sb.append(".");
-					}
-					sb.append(identifier);
-				}
-				name = sb.toString();
-			}
-		} else if (functionCall instanceof KeywordFunctionCall) {
-			name = ((KeywordFunctionCall) functionCall).getName();
-		}
-		if (RESERVED_BUILTIN_FUNCTIONS.contains(name)) {
-			error("Reserved operator '" + name + "()' must not be used", MscriptPackage.KEYWORD_FUNCTION_CALL);
-		}
-	}
+//	@Check
+//	public void checkReservedBuiltinFunctionCallMustNotBeUsed(SymbolReference functionCall) {
+//		String name = "";
+//		if (functionCall instanceof NamedFunctionCall) {
+//			NamedFunctionCall namedFunctionCall = (NamedFunctionCall) functionCall;
+//			List<String> identifiers = namedFunctionCall.getName().getIdentifiers();
+//			if (identifiers.size() == 1) {
+//				name = identifiers.get(0);
+//			} else if (identifiers.size() > 1) {
+//				StringBuilder sb = new StringBuilder();
+//				for (String identifier : identifiers) {
+//					if (sb.length() > 0) {
+//						sb.append(".");
+//					}
+//					sb.append(identifier);
+//				}
+//				name = sb.toString();
+//			}
+//		} else if (functionCall instanceof KeywordFunctionCall) {
+//			name = ((KeywordFunctionCall) functionCall).getName();
+//		}
+//		if (RESERVED_BUILTIN_FUNCTIONS.contains(name)) {
+//			error("Reserved operator '" + name + "()' must not be used", MscriptPackage.KEYWORD_FUNCTION_CALL);
+//		}
+//	}
 
 	@Check
 	public void checkBeginExpressionMustBeInsideArraySubscript(BeginExpression beginExpression) {
@@ -119,7 +115,7 @@ public class MscriptJavaValidator extends AbstractMscriptJavaValidator {
 			container = container.eContainer();
 		}
 		
-		return container instanceof Subscript && ((Subscript) container).eContainer() instanceof ArraySubscriptList;
+		return container instanceof Subscript && ((Subscript) container).eContainer() instanceof ArrayReference;
 	}
 
 //	@Check

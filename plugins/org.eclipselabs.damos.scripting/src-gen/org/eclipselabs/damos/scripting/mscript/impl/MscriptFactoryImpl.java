@@ -90,15 +90,13 @@ public class MscriptFactoryImpl extends EFactoryImpl implements MscriptFactory
       case MscriptPackage.INTEGER_LITERAL: return createIntegerLiteral();
       case MscriptPackage.BOOLEAN_LITERAL: return createBooleanLiteral();
       case MscriptPackage.STRING_LITERAL: return createStringLiteral();
-      case MscriptPackage.FUNCTION_CALL: return createFunctionCall();
-      case MscriptPackage.NAMED_FUNCTION_CALL: return createNamedFunctionCall();
       case MscriptPackage.NAME: return createName();
-      case MscriptPackage.KEYWORD_FUNCTION_CALL: return createKeywordFunctionCall();
       case MscriptPackage.FUNCTION_ARGUMENT_LIST: return createFunctionArgumentList();
       case MscriptPackage.NAMED_ARGUMENT: return createNamedArgument();
+      case MscriptPackage.SYMBOL_REFERENCE: return createSymbolReference();
       case MscriptPackage.COMPONENT_REFERENCE: return createComponentReference();
-      case MscriptPackage.COMPONENT_REFERENCE_SEGMENT: return createComponentReferenceSegment();
-      case MscriptPackage.ARRAY_SUBSCRIPT_LIST: return createArraySubscriptList();
+      case MscriptPackage.ARRAY_REFERENCE: return createArrayReference();
+      case MscriptPackage.MEMBER_REFERENCE: return createMemberReference();
       case MscriptPackage.SUBSCRIPT: return createSubscript();
       case MscriptPackage.COLON_SUBSCRIPT: return createColonSubscript();
       case MscriptPackage.EXPRESSION_SUBSCRIPT: return createExpressionSubscript();
@@ -424,43 +422,10 @@ public class MscriptFactoryImpl extends EFactoryImpl implements MscriptFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public FunctionCall createFunctionCall()
-  {
-    FunctionCallImpl functionCall = new FunctionCallImpl();
-    return functionCall;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NamedFunctionCall createNamedFunctionCall()
-  {
-    NamedFunctionCallImpl namedFunctionCall = new NamedFunctionCallImpl();
-    return namedFunctionCall;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public Name createName()
   {
     NameImpl name = new NameImpl();
     return name;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public KeywordFunctionCall createKeywordFunctionCall()
-  {
-    KeywordFunctionCallImpl keywordFunctionCall = new KeywordFunctionCallImpl();
-    return keywordFunctionCall;
   }
 
   /**
@@ -490,6 +455,17 @@ public class MscriptFactoryImpl extends EFactoryImpl implements MscriptFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  public SymbolReference createSymbolReference()
+  {
+    SymbolReferenceImpl symbolReference = new SymbolReferenceImpl();
+    return symbolReference;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public ComponentReference createComponentReference()
   {
     ComponentReferenceImpl componentReference = new ComponentReferenceImpl();
@@ -501,10 +477,10 @@ public class MscriptFactoryImpl extends EFactoryImpl implements MscriptFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public ComponentReferenceSegment createComponentReferenceSegment()
+  public ArrayReference createArrayReference()
   {
-    ComponentReferenceSegmentImpl componentReferenceSegment = new ComponentReferenceSegmentImpl();
-    return componentReferenceSegment;
+    ArrayReferenceImpl arrayReference = new ArrayReferenceImpl();
+    return arrayReference;
   }
 
   /**
@@ -512,10 +488,10 @@ public class MscriptFactoryImpl extends EFactoryImpl implements MscriptFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public ArraySubscriptList createArraySubscriptList()
+  public MemberReference createMemberReference()
   {
-    ArraySubscriptListImpl arraySubscriptList = new ArraySubscriptListImpl();
-    return arraySubscriptList;
+    MemberReferenceImpl memberReference = new MemberReferenceImpl();
+    return memberReference;
   }
 
   /**

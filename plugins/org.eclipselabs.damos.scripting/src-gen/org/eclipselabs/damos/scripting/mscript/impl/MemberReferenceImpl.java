@@ -11,50 +11,50 @@ import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.eclipselabs.damos.scripting.mscript.KeywordFunctionCall;
+import org.eclipselabs.damos.scripting.mscript.MemberReference;
 import org.eclipselabs.damos.scripting.mscript.MscriptPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Keyword Function Call</b></em>'.
+ * An implementation of the model object '<em><b>Member Reference</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.damos.scripting.mscript.impl.KeywordFunctionCallImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipselabs.damos.scripting.mscript.impl.MemberReferenceImpl#getIdentifier <em>Identifier</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class KeywordFunctionCallImpl extends FunctionCallImpl implements KeywordFunctionCall
+public class MemberReferenceImpl extends ComponentReferenceImpl implements MemberReference
 {
   /**
-   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+   * The default value of the '{@link #getIdentifier() <em>Identifier</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getName()
+   * @see #getIdentifier()
    * @generated
    * @ordered
    */
-  protected static final String NAME_EDEFAULT = null;
+  protected static final String IDENTIFIER_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+   * The cached value of the '{@link #getIdentifier() <em>Identifier</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getName()
+   * @see #getIdentifier()
    * @generated
    * @ordered
    */
-  protected String name = NAME_EDEFAULT;
+  protected String identifier = IDENTIFIER_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected KeywordFunctionCallImpl()
+  protected MemberReferenceImpl()
   {
     super();
   }
@@ -67,7 +67,7 @@ public class KeywordFunctionCallImpl extends FunctionCallImpl implements Keyword
   @Override
   protected EClass eStaticClass()
   {
-    return MscriptPackage.Literals.KEYWORD_FUNCTION_CALL;
+    return MscriptPackage.Literals.MEMBER_REFERENCE;
   }
 
   /**
@@ -75,9 +75,9 @@ public class KeywordFunctionCallImpl extends FunctionCallImpl implements Keyword
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName()
+  public String getIdentifier()
   {
-    return name;
+    return identifier;
   }
 
   /**
@@ -85,12 +85,12 @@ public class KeywordFunctionCallImpl extends FunctionCallImpl implements Keyword
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(String newName)
+  public void setIdentifier(String newIdentifier)
   {
-    String oldName = name;
-    name = newName;
+    String oldIdentifier = identifier;
+    identifier = newIdentifier;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, MscriptPackage.KEYWORD_FUNCTION_CALL__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, MscriptPackage.MEMBER_REFERENCE__IDENTIFIER, oldIdentifier, identifier));
   }
 
   /**
@@ -103,8 +103,8 @@ public class KeywordFunctionCallImpl extends FunctionCallImpl implements Keyword
   {
     switch (featureID)
     {
-      case MscriptPackage.KEYWORD_FUNCTION_CALL__NAME:
-        return getName();
+      case MscriptPackage.MEMBER_REFERENCE__IDENTIFIER:
+        return getIdentifier();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -119,8 +119,8 @@ public class KeywordFunctionCallImpl extends FunctionCallImpl implements Keyword
   {
     switch (featureID)
     {
-      case MscriptPackage.KEYWORD_FUNCTION_CALL__NAME:
-        setName((String)newValue);
+      case MscriptPackage.MEMBER_REFERENCE__IDENTIFIER:
+        setIdentifier((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -136,8 +136,8 @@ public class KeywordFunctionCallImpl extends FunctionCallImpl implements Keyword
   {
     switch (featureID)
     {
-      case MscriptPackage.KEYWORD_FUNCTION_CALL__NAME:
-        setName(NAME_EDEFAULT);
+      case MscriptPackage.MEMBER_REFERENCE__IDENTIFIER:
+        setIdentifier(IDENTIFIER_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -153,8 +153,8 @@ public class KeywordFunctionCallImpl extends FunctionCallImpl implements Keyword
   {
     switch (featureID)
     {
-      case MscriptPackage.KEYWORD_FUNCTION_CALL__NAME:
-        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case MscriptPackage.MEMBER_REFERENCE__IDENTIFIER:
+        return IDENTIFIER_EDEFAULT == null ? identifier != null : !IDENTIFIER_EDEFAULT.equals(identifier);
     }
     return super.eIsSet(featureID);
   }
@@ -170,10 +170,10 @@ public class KeywordFunctionCallImpl extends FunctionCallImpl implements Keyword
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (name: ");
-    result.append(name);
+    result.append(" (identifier: ");
+    result.append(identifier);
     result.append(')');
     return result.toString();
   }
 
-} //KeywordFunctionCallImpl
+} //MemberReferenceImpl

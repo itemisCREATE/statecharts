@@ -224,24 +224,6 @@ public interface MscriptFactory extends EFactory
   StringLiteral createStringLiteral();
 
   /**
-   * Returns a new object of class '<em>Function Call</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Function Call</em>'.
-   * @generated
-   */
-  FunctionCall createFunctionCall();
-
-  /**
-   * Returns a new object of class '<em>Named Function Call</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Named Function Call</em>'.
-   * @generated
-   */
-  NamedFunctionCall createNamedFunctionCall();
-
-  /**
    * Returns a new object of class '<em>Name</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -249,15 +231,6 @@ public interface MscriptFactory extends EFactory
    * @generated
    */
   Name createName();
-
-  /**
-   * Returns a new object of class '<em>Keyword Function Call</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Keyword Function Call</em>'.
-   * @generated
-   */
-  KeywordFunctionCall createKeywordFunctionCall();
 
   /**
    * Returns a new object of class '<em>Function Argument List</em>'.
@@ -278,6 +251,15 @@ public interface MscriptFactory extends EFactory
   NamedArgument createNamedArgument();
 
   /**
+   * Returns a new object of class '<em>Symbol Reference</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Symbol Reference</em>'.
+   * @generated
+   */
+  SymbolReference createSymbolReference();
+
+  /**
    * Returns a new object of class '<em>Component Reference</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -287,22 +269,22 @@ public interface MscriptFactory extends EFactory
   ComponentReference createComponentReference();
 
   /**
-   * Returns a new object of class '<em>Component Reference Segment</em>'.
+   * Returns a new object of class '<em>Array Reference</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Component Reference Segment</em>'.
+   * @return a new object of class '<em>Array Reference</em>'.
    * @generated
    */
-  ComponentReferenceSegment createComponentReferenceSegment();
+  ArrayReference createArrayReference();
 
   /**
-   * Returns a new object of class '<em>Array Subscript List</em>'.
+   * Returns a new object of class '<em>Member Reference</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Array Subscript List</em>'.
+   * @return a new object of class '<em>Member Reference</em>'.
    * @generated
    */
-  ArraySubscriptList createArraySubscriptList();
+  MemberReference createMemberReference();
 
   /**
    * Returns a new object of class '<em>Subscript</em>'.

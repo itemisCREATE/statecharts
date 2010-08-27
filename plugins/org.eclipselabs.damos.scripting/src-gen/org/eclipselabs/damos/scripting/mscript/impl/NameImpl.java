@@ -7,13 +7,10 @@ package org.eclipselabs.damos.scripting.mscript.impl;
 
 import java.util.Collection;
 
-import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EDataTypeEList;
@@ -28,7 +25,6 @@ import org.eclipselabs.damos.scripting.mscript.Name;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.damos.scripting.mscript.impl.NameImpl#isGlobal <em>Global</em>}</li>
  *   <li>{@link org.eclipselabs.damos.scripting.mscript.impl.NameImpl#getIdentifiers <em>Identifiers</em>}</li>
  * </ul>
  * </p>
@@ -37,26 +33,6 @@ import org.eclipselabs.damos.scripting.mscript.Name;
  */
 public class NameImpl extends MinimalEObjectImpl.Container implements Name
 {
-  /**
-   * The default value of the '{@link #isGlobal() <em>Global</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #isGlobal()
-   * @generated
-   * @ordered
-   */
-  protected static final boolean GLOBAL_EDEFAULT = false;
-
-  /**
-   * The cached value of the '{@link #isGlobal() <em>Global</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #isGlobal()
-   * @generated
-   * @ordered
-   */
-  protected boolean global = GLOBAL_EDEFAULT;
-
   /**
    * The cached value of the '{@link #getIdentifiers() <em>Identifiers</em>}' attribute list.
    * <!-- begin-user-doc -->
@@ -93,29 +69,6 @@ public class NameImpl extends MinimalEObjectImpl.Container implements Name
    * <!-- end-user-doc -->
    * @generated
    */
-  public boolean isGlobal()
-  {
-    return global;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setGlobal(boolean newGlobal)
-  {
-    boolean oldGlobal = global;
-    global = newGlobal;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, MscriptPackage.NAME__GLOBAL, oldGlobal, global));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EList<String> getIdentifiers()
   {
     if (identifiers == null)
@@ -135,8 +88,6 @@ public class NameImpl extends MinimalEObjectImpl.Container implements Name
   {
     switch (featureID)
     {
-      case MscriptPackage.NAME__GLOBAL:
-        return isGlobal();
       case MscriptPackage.NAME__IDENTIFIERS:
         return getIdentifiers();
     }
@@ -154,9 +105,6 @@ public class NameImpl extends MinimalEObjectImpl.Container implements Name
   {
     switch (featureID)
     {
-      case MscriptPackage.NAME__GLOBAL:
-        setGlobal((Boolean)newValue);
-        return;
       case MscriptPackage.NAME__IDENTIFIERS:
         getIdentifiers().clear();
         getIdentifiers().addAll((Collection<? extends String>)newValue);
@@ -175,9 +123,6 @@ public class NameImpl extends MinimalEObjectImpl.Container implements Name
   {
     switch (featureID)
     {
-      case MscriptPackage.NAME__GLOBAL:
-        setGlobal(GLOBAL_EDEFAULT);
-        return;
       case MscriptPackage.NAME__IDENTIFIERS:
         getIdentifiers().clear();
         return;
@@ -195,8 +140,6 @@ public class NameImpl extends MinimalEObjectImpl.Container implements Name
   {
     switch (featureID)
     {
-      case MscriptPackage.NAME__GLOBAL:
-        return global != GLOBAL_EDEFAULT;
       case MscriptPackage.NAME__IDENTIFIERS:
         return identifiers != null && !identifiers.isEmpty();
     }
@@ -214,9 +157,7 @@ public class NameImpl extends MinimalEObjectImpl.Container implements Name
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (global: ");
-    result.append(global);
-    result.append(", identifiers: ");
+    result.append(" (identifiers: ");
     result.append(identifiers);
     result.append(')');
     return result.toString();
