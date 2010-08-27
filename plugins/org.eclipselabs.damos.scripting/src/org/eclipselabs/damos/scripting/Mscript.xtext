@@ -122,11 +122,10 @@ UnaryMinusExpression returns Expression :
 
 PrimaryExpression returns Expression :
 	Literal |
-//	FunctionCall |
 	SymbolReference |
 	ParenthesizedExpression |
 	ArrayConcatenationOperator |
-	ArrayConstructionOperator |
+//	ArrayConstructionOperator |
 	BeginExpression |
 	EndExpression;
 
@@ -151,9 +150,6 @@ enum BooleanKind :
 StringLiteral :
 	value=STRING;
 	
-//FunctionCall :
-//	symbol=SymbolReference '(' (argumentList=FunctionArgumentList)? ')';
-
 Name :
 	identifiers+=IDENT ('::' identifiers+=IDENT)*;
 
@@ -188,9 +184,6 @@ ExpressionSubscript :
 ArrayConcatenationOperator :
 	'[' expressionLists+=ExpressionList (';' expressionLists+=ExpressionList)* ']';
 	
-ArrayConstructionOperator :
-	'{' argumentList=FunctionArgumentList '}';
-
 ExpressionList :
 	expressions+=Expression (',' expressions+=Expression)*;
 

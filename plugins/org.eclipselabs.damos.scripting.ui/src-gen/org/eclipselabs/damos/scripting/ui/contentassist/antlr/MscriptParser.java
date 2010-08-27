@@ -113,7 +113,6 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getColonSubscriptAccess().getGroup(), "rule__ColonSubscript__Group__0");
 					put(grammarAccess.getArrayConcatenationOperatorAccess().getGroup(), "rule__ArrayConcatenationOperator__Group__0");
 					put(grammarAccess.getArrayConcatenationOperatorAccess().getGroup_2(), "rule__ArrayConcatenationOperator__Group_2__0");
-					put(grammarAccess.getArrayConstructionOperatorAccess().getGroup(), "rule__ArrayConstructionOperator__Group__0");
 					put(grammarAccess.getExpressionListAccess().getGroup(), "rule__ExpressionList__Group__0");
 					put(grammarAccess.getExpressionListAccess().getGroup_1(), "rule__ExpressionList__Group_1__0");
 					put(grammarAccess.getParenthesizedExpressionAccess().getGroup(), "rule__ParenthesizedExpression__Group__0");
@@ -183,7 +182,6 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getExpressionSubscriptAccess().getExpressionAssignment(), "rule__ExpressionSubscript__ExpressionAssignment");
 					put(grammarAccess.getArrayConcatenationOperatorAccess().getExpressionListsAssignment_1(), "rule__ArrayConcatenationOperator__ExpressionListsAssignment_1");
 					put(grammarAccess.getArrayConcatenationOperatorAccess().getExpressionListsAssignment_2_1(), "rule__ArrayConcatenationOperator__ExpressionListsAssignment_2_1");
-					put(grammarAccess.getArrayConstructionOperatorAccess().getArgumentListAssignment_1(), "rule__ArrayConstructionOperator__ArgumentListAssignment_1");
 					put(grammarAccess.getExpressionListAccess().getExpressionsAssignment_0(), "rule__ExpressionList__ExpressionsAssignment_0");
 					put(grammarAccess.getExpressionListAccess().getExpressionsAssignment_1_1(), "rule__ExpressionList__ExpressionsAssignment_1_1");
 					put(grammarAccess.getParenthesizedExpressionAccess().getExpressionAssignment_1(), "rule__ParenthesizedExpression__ExpressionAssignment_1");

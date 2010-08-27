@@ -323,15 +323,6 @@ public interface MscriptFactory extends EFactory
   ArrayConcatenationOperator createArrayConcatenationOperator();
 
   /**
-   * Returns a new object of class '<em>Array Construction Operator</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Array Construction Operator</em>'.
-   * @generated
-   */
-  ArrayConstructionOperator createArrayConstructionOperator();
-
-  /**
    * Returns a new object of class '<em>Expression List</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

@@ -870,25 +870,21 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cSymbolReferenceParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cParenthesizedExpressionParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		private final RuleCall cArrayConcatenationOperatorParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
-		private final RuleCall cArrayConstructionOperatorParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
-		private final RuleCall cBeginExpressionParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
-		private final RuleCall cEndExpressionParserRuleCall_6 = (RuleCall)cAlternatives.eContents().get(6);
+		private final RuleCall cBeginExpressionParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
+		private final RuleCall cEndExpressionParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
 		
 		//PrimaryExpression returns Expression:
-		//	Literal | //	FunctionCall |
-		//	SymbolReference | ParenthesizedExpression | ArrayConcatenationOperator | ArrayConstructionOperator | BeginExpression |
-		//	EndExpression;
+		//	Literal | SymbolReference | ParenthesizedExpression | ArrayConcatenationOperator | //	ArrayConstructionOperator |
+		//	BeginExpression | EndExpression;
 		public ParserRule getRule() { return rule; }
 
-		//Literal | //	FunctionCall |
-		//SymbolReference | ParenthesizedExpression | ArrayConcatenationOperator | ArrayConstructionOperator | BeginExpression |
-		//EndExpression
+		//Literal | SymbolReference | ParenthesizedExpression | ArrayConcatenationOperator | //	ArrayConstructionOperator |
+		//BeginExpression | EndExpression
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//Literal
 		public RuleCall getLiteralParserRuleCall_0() { return cLiteralParserRuleCall_0; }
 
-		////	FunctionCall |
 		//SymbolReference
 		public RuleCall getSymbolReferenceParserRuleCall_1() { return cSymbolReferenceParserRuleCall_1; }
 
@@ -898,14 +894,12 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		//ArrayConcatenationOperator
 		public RuleCall getArrayConcatenationOperatorParserRuleCall_3() { return cArrayConcatenationOperatorParserRuleCall_3; }
 
-		//ArrayConstructionOperator
-		public RuleCall getArrayConstructionOperatorParserRuleCall_4() { return cArrayConstructionOperatorParserRuleCall_4; }
-
+		////	ArrayConstructionOperator |
 		//BeginExpression
-		public RuleCall getBeginExpressionParserRuleCall_5() { return cBeginExpressionParserRuleCall_5; }
+		public RuleCall getBeginExpressionParserRuleCall_4() { return cBeginExpressionParserRuleCall_4; }
 
 		//EndExpression
-		public RuleCall getEndExpressionParserRuleCall_6() { return cEndExpressionParserRuleCall_6; }
+		public RuleCall getEndExpressionParserRuleCall_5() { return cEndExpressionParserRuleCall_5; }
 	}
 
 	public class LiteralElements extends AbstractParserRuleElementFinder {
@@ -1074,8 +1068,6 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cIdentifiersAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
 		private final RuleCall cIdentifiersIDENTTerminalRuleCall_1_1_0 = (RuleCall)cIdentifiersAssignment_1_1.eContents().get(0);
 		
-		////FunctionCall :
-		////	symbol=SymbolReference '(' (argumentList=FunctionArgumentList)? ')';
 		//Name:
 		//	identifiers+=IDENT ("::" identifiers+=IDENT)*;
 		public ParserRule getRule() { return rule; }
@@ -1473,34 +1465,6 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 
 		//"]"
 		public Keyword getRightSquareBracketKeyword_3() { return cRightSquareBracketKeyword_3; }
-	}
-
-	public class ArrayConstructionOperatorElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ArrayConstructionOperator");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cLeftCurlyBracketKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cArgumentListAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cArgumentListFunctionArgumentListParserRuleCall_1_0 = (RuleCall)cArgumentListAssignment_1.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		
-		//ArrayConstructionOperator:
-		//	"{" argumentList=FunctionArgumentList "}";
-		public ParserRule getRule() { return rule; }
-
-		//"{" argumentList=FunctionArgumentList "}"
-		public Group getGroup() { return cGroup; }
-
-		//"{"
-		public Keyword getLeftCurlyBracketKeyword_0() { return cLeftCurlyBracketKeyword_0; }
-
-		//argumentList=FunctionArgumentList
-		public Assignment getArgumentListAssignment_1() { return cArgumentListAssignment_1; }
-
-		//FunctionArgumentList
-		public RuleCall getArgumentListFunctionArgumentListParserRuleCall_1_0() { return cArgumentListFunctionArgumentListParserRuleCall_1_0; }
-
-		//"}"
-		public Keyword getRightCurlyBracketKeyword_2() { return cRightCurlyBracketKeyword_2; }
 	}
 
 	public class ExpressionListElements extends AbstractParserRuleElementFinder {
@@ -2081,7 +2045,6 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	private ColonSubscriptElements pColonSubscript;
 	private ExpressionSubscriptElements pExpressionSubscript;
 	private ArrayConcatenationOperatorElements pArrayConcatenationOperator;
-	private ArrayConstructionOperatorElements pArrayConstructionOperator;
 	private ExpressionListElements pExpressionList;
 	private ParenthesizedExpressionElements pParenthesizedExpression;
 	private BeginExpressionElements pBeginExpression;
@@ -2415,9 +2378,8 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//PrimaryExpression returns Expression:
-	//	Literal | //	FunctionCall |
-	//	SymbolReference | ParenthesizedExpression | ArrayConcatenationOperator | ArrayConstructionOperator | BeginExpression |
-	//	EndExpression;
+	//	Literal | SymbolReference | ParenthesizedExpression | ArrayConcatenationOperator | //	ArrayConstructionOperator |
+	//	BeginExpression | EndExpression;
 	public PrimaryExpressionElements getPrimaryExpressionAccess() {
 		return (pPrimaryExpression != null) ? pPrimaryExpression : (pPrimaryExpression = new PrimaryExpressionElements());
 	}
@@ -2496,8 +2458,6 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		return getStringLiteralAccess().getRule();
 	}
 
-	////FunctionCall :
-	////	symbol=SymbolReference '(' (argumentList=FunctionArgumentList)? ')';
 	//Name:
 	//	identifiers+=IDENT ("::" identifiers+=IDENT)*;
 	public NameElements getNameAccess() {
@@ -2608,16 +2568,6 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getArrayConcatenationOperatorRule() {
 		return getArrayConcatenationOperatorAccess().getRule();
-	}
-
-	//ArrayConstructionOperator:
-	//	"{" argumentList=FunctionArgumentList "}";
-	public ArrayConstructionOperatorElements getArrayConstructionOperatorAccess() {
-		return (pArrayConstructionOperator != null) ? pArrayConstructionOperator : (pArrayConstructionOperator = new ArrayConstructionOperatorElements());
-	}
-	
-	public ParserRule getArrayConstructionOperatorRule() {
-		return getArrayConstructionOperatorAccess().getRule();
 	}
 
 	//ExpressionList:

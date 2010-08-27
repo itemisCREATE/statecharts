@@ -5,7 +5,6 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.validation.Check;
-import org.eclipselabs.damos.scripting.mscript.ArrayConstructionOperator;
 import org.eclipselabs.damos.scripting.mscript.ArrayReference;
 import org.eclipselabs.damos.scripting.mscript.BeginExpression;
 import org.eclipselabs.damos.scripting.mscript.EndExpression;
@@ -125,12 +124,12 @@ public class MscriptJavaValidator extends AbstractMscriptJavaValidator {
 //		}
 //	}
 	
-	@Check
-	public void checkArrayConstructionOperatorMustNotContainNamedArguments(ArrayConstructionOperator arrayConstructionOperator) {
-		if (!arrayConstructionOperator.getArgumentList().getNamedArguments().isEmpty()) {
-			error("Array construction operator must not contain named arguments", MscriptPackage.ARRAY_CONSTRUCTION_OPERATOR__ARGUMENT_LIST);
-		}
-	}
+//	@Check
+//	public void checkArrayConstructionOperatorMustNotContainNamedArguments(ArrayConstructionOperator arrayConstructionOperator) {
+//		if (!arrayConstructionOperator.getArgumentList().getNamedArguments().isEmpty()) {
+//			error("Array construction operator must not contain named arguments", MscriptPackage.ARRAY_CONSTRUCTION_OPERATOR__ARGUMENT_LIST);
+//		}
+//	}
 
 	@Check
 	public void checkUnitExpressionNumeratorMustConsistOfSymbolsOrOne(UnitExpressionNumerator numerator) {

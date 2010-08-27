@@ -101,7 +101,6 @@ public class MscriptFactoryImpl extends EFactoryImpl implements MscriptFactory
       case MscriptPackage.COLON_SUBSCRIPT: return createColonSubscript();
       case MscriptPackage.EXPRESSION_SUBSCRIPT: return createExpressionSubscript();
       case MscriptPackage.ARRAY_CONCATENATION_OPERATOR: return createArrayConcatenationOperator();
-      case MscriptPackage.ARRAY_CONSTRUCTION_OPERATOR: return createArrayConstructionOperator();
       case MscriptPackage.EXPRESSION_LIST: return createExpressionList();
       case MscriptPackage.PARENTHESIZED_EXPRESSION: return createParenthesizedExpression();
       case MscriptPackage.BEGIN_EXPRESSION: return createBeginExpression();
@@ -536,17 +535,6 @@ public class MscriptFactoryImpl extends EFactoryImpl implements MscriptFactory
   {
     ArrayConcatenationOperatorImpl arrayConcatenationOperator = new ArrayConcatenationOperatorImpl();
     return arrayConcatenationOperator;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ArrayConstructionOperator createArrayConstructionOperator()
-  {
-    ArrayConstructionOperatorImpl arrayConstructionOperator = new ArrayConstructionOperatorImpl();
-    return arrayConstructionOperator;
   }
 
   /**

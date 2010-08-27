@@ -122,9 +122,6 @@
     <genClasses ecoreClass="Mscript.ecore#//ArrayConcatenationOperator">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ArrayConcatenationOperator/expressionLists"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//ArrayConstructionOperator">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ArrayConstructionOperator/argumentList"/>
-    </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//ExpressionList">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ExpressionList/expressions"/>
     </genClasses>

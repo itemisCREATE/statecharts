@@ -134,10 +134,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="expressionLists" upperBound="-1"
         eType="#//ExpressionList" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ArrayConstructionOperator" eSuperTypes="#//Expression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="argumentList" eType="#//FunctionArgumentList"
-        containment="true"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExpressionList">
     <eStructuralFeatures xsi:type="ecore:EReference" name="expressions" upperBound="-1"
         eType="#//Expression" containment="true"/>

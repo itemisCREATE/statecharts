@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipselabs.damos.scripting.mscript.AddSubtractExpression;
 import org.eclipselabs.damos.scripting.mscript.AddSubtractOperator;
 import org.eclipselabs.damos.scripting.mscript.ArrayConcatenationOperator;
-import org.eclipselabs.damos.scripting.mscript.ArrayConstructionOperator;
 import org.eclipselabs.damos.scripting.mscript.ArrayReference;
 import org.eclipselabs.damos.scripting.mscript.BeginExpression;
 import org.eclipselabs.damos.scripting.mscript.BooleanKind;
@@ -311,13 +310,6 @@ public class MscriptPackageImpl extends EPackageImpl implements MscriptPackage
    * @generated
    */
   private EClass arrayConcatenationOperatorEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass arrayConstructionOperatorEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -1188,26 +1180,6 @@ public class MscriptPackageImpl extends EPackageImpl implements MscriptPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getArrayConstructionOperator()
-  {
-    return arrayConstructionOperatorEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getArrayConstructionOperator_ArgumentList()
-  {
-    return (EReference)arrayConstructionOperatorEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EClass getExpressionList()
   {
     return expressionListEClass;
@@ -1810,9 +1782,6 @@ public class MscriptPackageImpl extends EPackageImpl implements MscriptPackage
     arrayConcatenationOperatorEClass = createEClass(ARRAY_CONCATENATION_OPERATOR);
     createEReference(arrayConcatenationOperatorEClass, ARRAY_CONCATENATION_OPERATOR__EXPRESSION_LISTS);
 
-    arrayConstructionOperatorEClass = createEClass(ARRAY_CONSTRUCTION_OPERATOR);
-    createEReference(arrayConstructionOperatorEClass, ARRAY_CONSTRUCTION_OPERATOR__ARGUMENT_LIST);
-
     expressionListEClass = createEClass(EXPRESSION_LIST);
     createEReference(expressionListEClass, EXPRESSION_LIST__EXPRESSIONS);
 
@@ -1933,7 +1902,6 @@ public class MscriptPackageImpl extends EPackageImpl implements MscriptPackage
     colonSubscriptEClass.getESuperTypes().add(this.getSubscript());
     expressionSubscriptEClass.getESuperTypes().add(this.getSubscript());
     arrayConcatenationOperatorEClass.getESuperTypes().add(this.getExpression());
-    arrayConstructionOperatorEClass.getESuperTypes().add(this.getExpression());
     parenthesizedExpressionEClass.getESuperTypes().add(this.getExpression());
     beginExpressionEClass.getESuperTypes().add(this.getExpression());
     endExpressionEClass.getESuperTypes().add(this.getExpression());
@@ -2044,9 +2012,6 @@ public class MscriptPackageImpl extends EPackageImpl implements MscriptPackage
 
     initEClass(arrayConcatenationOperatorEClass, ArrayConcatenationOperator.class, "ArrayConcatenationOperator", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getArrayConcatenationOperator_ExpressionLists(), this.getExpressionList(), null, "expressionLists", null, 0, -1, ArrayConcatenationOperator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(arrayConstructionOperatorEClass, ArrayConstructionOperator.class, "ArrayConstructionOperator", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getArrayConstructionOperator_ArgumentList(), this.getFunctionArgumentList(), null, "argumentList", null, 0, 1, ArrayConstructionOperator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(expressionListEClass, ExpressionList.class, "ExpressionList", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getExpressionList_Expressions(), this.getExpression(), null, "expressions", null, 0, -1, ExpressionList.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

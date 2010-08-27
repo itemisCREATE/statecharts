@@ -362,14 +362,6 @@ public class MscriptSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case MscriptPackage.ARRAY_CONSTRUCTION_OPERATOR:
-      {
-        ArrayConstructionOperator arrayConstructionOperator = (ArrayConstructionOperator)theEObject;
-        T result = caseArrayConstructionOperator(arrayConstructionOperator);
-        if (result == null) result = caseExpression(arrayConstructionOperator);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case MscriptPackage.EXPRESSION_LIST:
       {
         ExpressionList expressionList = (ExpressionList)theEObject;
@@ -1036,22 +1028,6 @@ public class MscriptSwitch<T>
    * @generated
    */
   public T caseArrayConcatenationOperator(ArrayConcatenationOperator object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Array Construction Operator</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Array Construction Operator</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseArrayConstructionOperator(ArrayConstructionOperator object)
   {
     return null;
   }
