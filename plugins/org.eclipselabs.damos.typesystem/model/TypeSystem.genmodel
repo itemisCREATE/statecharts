@@ -151,5 +151,32 @@
       <genFeatures xsi:type="genmodel:GenFeature" property="None" children="true"
           createChild="true" ecoreFeature="ecore:EReference TypeSystem.ecore#//Package/packagedElements"/>
     </genClasses>
+    <genClasses xsi:type="genmodel:GenClass" ecoreClass="TypeSystem.ecore#//TensorType">
+      <genFeatures xsi:type="genmodel:GenFeature" property="None" children="true"
+          createChild="true" ecoreFeature="ecore:EReference TypeSystem.ecore#//TensorType/units"/>
+      <genOperations xsi:type="genmodel:GenOperation" ecoreOperation="TypeSystem.ecore#//TensorType/getUnit">
+        <genParameters xsi:type="genmodel:GenParameter" ecoreParameter="TypeSystem.ecore#//TensorType/getUnit/index"/>
+      </genOperations>
+      <genOperations xsi:type="genmodel:GenOperation" ecoreOperation="TypeSystem.ecore#//TensorType/getUnit.1">
+        <genParameters xsi:type="genmodel:GenParameter" ecoreParameter="TypeSystem.ecore#//TensorType/getUnit.1/row"/>
+        <genParameters xsi:type="genmodel:GenParameter" ecoreParameter="TypeSystem.ecore#//TensorType/getUnit.1/column"/>
+      </genOperations>
+      <genOperations xsi:type="genmodel:GenOperation" ecoreOperation="TypeSystem.ecore#//TensorType/getUnit.2">
+        <genParameters xsi:type="genmodel:GenParameter" ecoreParameter="TypeSystem.ecore#//TensorType/getUnit.2/indices"/>
+      </genOperations>
+      <genOperations xsi:type="genmodel:GenOperation" ecoreOperation="TypeSystem.ecore#//TensorType/setUnit">
+        <genParameters xsi:type="genmodel:GenParameter" ecoreParameter="TypeSystem.ecore#//TensorType/setUnit/index"/>
+        <genParameters xsi:type="genmodel:GenParameter" ecoreParameter="TypeSystem.ecore#//TensorType/setUnit/unit"/>
+      </genOperations>
+      <genOperations xsi:type="genmodel:GenOperation" ecoreOperation="TypeSystem.ecore#//TensorType/setUnit.1">
+        <genParameters xsi:type="genmodel:GenParameter" ecoreParameter="TypeSystem.ecore#//TensorType/setUnit.1/row"/>
+        <genParameters xsi:type="genmodel:GenParameter" ecoreParameter="TypeSystem.ecore#//TensorType/setUnit.1/column"/>
+        <genParameters xsi:type="genmodel:GenParameter" ecoreParameter="TypeSystem.ecore#//TensorType/setUnit.1/unit"/>
+      </genOperations>
+      <genOperations xsi:type="genmodel:GenOperation" ecoreOperation="TypeSystem.ecore#//TensorType/setUnit.2">
+        <genParameters xsi:type="genmodel:GenParameter" ecoreParameter="TypeSystem.ecore#//TensorType/setUnit.2/indices"/>
+        <genParameters xsi:type="genmodel:GenParameter" ecoreParameter="TypeSystem.ecore#//TensorType/setUnit.2/unit"/>
+      </genOperations>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

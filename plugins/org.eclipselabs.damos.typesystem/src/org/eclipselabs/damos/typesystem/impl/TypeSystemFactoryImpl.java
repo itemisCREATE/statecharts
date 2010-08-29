@@ -22,6 +22,7 @@ import org.eclipselabs.damos.typesystem.InvalidDataType;
 import org.eclipselabs.damos.typesystem.OperatorKind;
 import org.eclipselabs.damos.typesystem.RealType;
 import org.eclipselabs.damos.typesystem.StringType;
+import org.eclipselabs.damos.typesystem.TensorType;
 import org.eclipselabs.damos.typesystem.TypeSystem;
 import org.eclipselabs.damos.typesystem.TypeSystemFactory;
 import org.eclipselabs.damos.typesystem.TypeSystemPackage;
@@ -86,6 +87,7 @@ public class TypeSystemFactoryImpl extends EFactoryImpl implements TypeSystemFac
 			case TypeSystemPackage.INVALID_DATA_TYPE: return createInvalidDataType();
 			case TypeSystemPackage.TYPE_SYSTEM: return createTypeSystem();
 			case TypeSystemPackage.PACKAGE: return createPackage();
+			case TypeSystemPackage.TENSOR_TYPE: return createTensorType();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -253,6 +255,16 @@ public class TypeSystemFactoryImpl extends EFactoryImpl implements TypeSystemFac
 	public org.eclipselabs.damos.typesystem.Package createPackage() {
 		PackageImpl package_ = new PackageImpl();
 		return package_;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TensorType createTensorType() {
+		TensorTypeImpl tensorType = new TensorTypeImpl();
+		return tensorType;
 	}
 
 	/**

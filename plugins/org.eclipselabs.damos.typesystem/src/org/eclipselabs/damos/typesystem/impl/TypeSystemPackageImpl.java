@@ -30,6 +30,7 @@ import org.eclipselabs.damos.typesystem.PackageableElement;
 import org.eclipselabs.damos.typesystem.PrimitiveType;
 import org.eclipselabs.damos.typesystem.RealType;
 import org.eclipselabs.damos.typesystem.StringType;
+import org.eclipselabs.damos.typesystem.TensorType;
 import org.eclipselabs.damos.typesystem.Type;
 import org.eclipselabs.damos.typesystem.TypeSystem;
 import org.eclipselabs.damos.typesystem.TypeSystemFactory;
@@ -184,6 +185,13 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 	 * @generated
 	 */
 	private EClass packageEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass tensorTypeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -679,6 +687,24 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getTensorType() {
+		return tensorTypeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTensorType_Units() {
+		return (EReference)tensorTypeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getOperatorKind() {
 		return operatorKindEEnum;
 	}
@@ -786,6 +812,9 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 		packageEClass = createEClass(PACKAGE);
 		createEReference(packageEClass, PACKAGE__PACKAGED_ELEMENTS);
 
+		tensorTypeEClass = createEClass(TENSOR_TYPE);
+		createEReference(tensorTypeEClass, TENSOR_TYPE__UNITS);
+
 		// Create enums
 		operatorKindEEnum = createEEnum(OPERATOR_KIND);
 		unitSymbolEEnum = createEEnum(UNIT_SYMBOL);
@@ -836,6 +865,7 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 		invalidDataTypeEClass.getESuperTypes().add(this.getDataType());
 		packageEClass.getESuperTypes().add(this.getNamespace());
 		packageEClass.getESuperTypes().add(this.getPackageableElement());
+		tensorTypeEClass.getESuperTypes().add(this.getArrayType());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(typeEClass, Type.class, "Type", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -878,8 +908,8 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 		addEParameter(op, this.getDataType(), "other", 1, 1, IS_UNIQUE, !IS_ORDERED);
 
 		initEClass(arrayDimensionEClass, ArrayDimension.class, "ArrayDimension", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getArrayDimension_FromIndex(), ecorePackage.getEInt(), "fromIndex", null, 0, 1, ArrayDimension.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEAttribute(getArrayDimension_ToIndex(), ecorePackage.getEInt(), "toIndex", null, 0, 1, ArrayDimension.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getArrayDimension_FromIndex(), ecorePackage.getEInt(), "fromIndex", "1", 1, 1, ArrayDimension.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getArrayDimension_ToIndex(), ecorePackage.getEInt(), "toIndex", null, 1, 1, ArrayDimension.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEAttribute(getArrayDimension_Size(), ecorePackage.getEInt(), "size", null, 1, 1, ArrayDimension.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, !IS_ORDERED);
 
 		initEClass(primitiveTypeEClass, PrimitiveType.class, "PrimitiveType", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -935,6 +965,32 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 		initEClass(packageEClass, org.eclipselabs.damos.typesystem.Package.class, "Package", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPackage_PackagedElements(), this.getPackageableElement(), null, "packagedElements", null, 0, -1, org.eclipselabs.damos.typesystem.Package.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
+		initEClass(tensorTypeEClass, TensorType.class, "TensorType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTensorType_Units(), this.getUnit(), null, "units", null, 0, -1, TensorType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+
+		op = addEOperation(tensorTypeEClass, this.getUnit(), "getUnit", 1, 1, IS_UNIQUE, !IS_ORDERED);
+		addEParameter(op, ecorePackage.getEInt(), "index", 1, 1, IS_UNIQUE, !IS_ORDERED);
+
+		op = addEOperation(tensorTypeEClass, this.getUnit(), "getUnit", 1, 1, IS_UNIQUE, !IS_ORDERED);
+		addEParameter(op, ecorePackage.getEInt(), "row", 1, 1, IS_UNIQUE, !IS_ORDERED);
+		addEParameter(op, ecorePackage.getEInt(), "column", 1, 1, IS_UNIQUE, !IS_ORDERED);
+
+		op = addEOperation(tensorTypeEClass, this.getUnit(), "getUnit", 1, 1, IS_UNIQUE, !IS_ORDERED);
+		addEParameter(op, ecorePackage.getEInt(), "indices", 1, -1, IS_UNIQUE, !IS_ORDERED);
+
+		op = addEOperation(tensorTypeEClass, null, "setUnit", 1, 1, IS_UNIQUE, !IS_ORDERED);
+		addEParameter(op, ecorePackage.getEInt(), "index", 1, 1, IS_UNIQUE, !IS_ORDERED);
+		addEParameter(op, this.getUnit(), "unit", 1, 1, IS_UNIQUE, !IS_ORDERED);
+
+		op = addEOperation(tensorTypeEClass, null, "setUnit", 1, 1, IS_UNIQUE, !IS_ORDERED);
+		addEParameter(op, ecorePackage.getEInt(), "row", 1, 1, IS_UNIQUE, !IS_ORDERED);
+		addEParameter(op, ecorePackage.getEInt(), "column", 1, 1, IS_UNIQUE, !IS_ORDERED);
+		addEParameter(op, this.getUnit(), "unit", 1, 1, IS_UNIQUE, !IS_ORDERED);
+
+		op = addEOperation(tensorTypeEClass, null, "setUnit", 1, 1, IS_UNIQUE, !IS_ORDERED);
+		addEParameter(op, ecorePackage.getEInt(), "indices", 1, -1, IS_UNIQUE, !IS_ORDERED);
+		addEParameter(op, this.getUnit(), "unit", 1, 1, IS_UNIQUE, !IS_ORDERED);
+
 		// Initialize enums and add enum literals
 		initEEnum(operatorKindEEnum, OperatorKind.class, "OperatorKind");
 		addEEnumLiteral(operatorKindEEnum, OperatorKind.ADD);
@@ -985,7 +1041,7 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 		  (getNamespace_OwnedMembers(), 
 		   source, 
 		   new String[] {
-		   });					
+		   });						
 	}
 
 	/**
@@ -1027,7 +1083,7 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 		   },
 		   new URI[] {
 			 URI.createURI(eNS_URI).appendFragment("//Namespace/ownedMembers")
-		   });
+		   });	
 	}
 
 	/**
@@ -1047,7 +1103,12 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 		  (integerTypeEClass, 
 		   source, 
 		   new String[] {
-		   });			
+		   });					
+		addAnnotation
+		  (tensorTypeEClass, 
+		   source, 
+		   new String[] {
+		   });
 	}
 
 } //TypeSystemPackageImpl

@@ -81,9 +81,10 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ArrayDimension">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="fromIndex" ordered="false"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" unsettable="true"/>
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="1"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="toIndex" ordered="false"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" unsettable="true"/>
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="size" ordered="false" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" changeable="false"
         volatile="true" transient="true" derived="true"/>
@@ -177,5 +178,38 @@
         upperBound="-1" eType="#//PackageableElement" containment="true">
       <eAnnotations source="subsets" references="#//Namespace/ownedMembers"/>
     </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TensorType" eSuperTypes="#//ArrayType">
+    <eAnnotations source="duplicates">
+      <contents xsi:type="ecore:EReference" name="elementType" ordered="false" lowerBound="1"
+          eType="#//DataType">
+        <eAnnotations source="redefines" references="#//ArrayType/elementType"/>
+      </contents>
+    </eAnnotations>
+    <eOperations name="getUnit" ordered="false" lowerBound="1" eType="#//Unit">
+      <eParameters name="index" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="getUnit" ordered="false" lowerBound="1" eType="#//Unit">
+      <eParameters name="row" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="column" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="getUnit" ordered="false" lowerBound="1" eType="#//Unit">
+      <eParameters name="indices" ordered="false" lowerBound="1" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="setUnit" ordered="false" lowerBound="1">
+      <eParameters name="index" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="unit" ordered="false" lowerBound="1" eType="#//Unit"/>
+    </eOperations>
+    <eOperations name="setUnit" ordered="false" lowerBound="1">
+      <eParameters name="row" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="column" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="unit" ordered="false" lowerBound="1" eType="#//Unit"/>
+    </eOperations>
+    <eOperations name="setUnit" ordered="false" lowerBound="1">
+      <eParameters name="indices" ordered="false" lowerBound="1" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="unit" ordered="false" lowerBound="1" eType="#//Unit"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="units" ordered="false"
+        upperBound="-1" eType="#//Unit" unsettable="true" containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

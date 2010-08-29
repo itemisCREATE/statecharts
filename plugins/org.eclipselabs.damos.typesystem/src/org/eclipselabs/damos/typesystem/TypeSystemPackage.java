@@ -1134,6 +1134,142 @@ public interface TypeSystemPackage extends EPackage {
 	int PACKAGE_FEATURE_COUNT = NAMESPACE_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link org.eclipselabs.damos.typesystem.impl.TensorTypeImpl <em>Tensor Type</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipselabs.damos.typesystem.impl.TensorTypeImpl
+	 * @see org.eclipselabs.damos.typesystem.impl.TypeSystemPackageImpl#getTensorType()
+	 * @generated
+	 */
+	int TENSOR_TYPE = 20;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TENSOR_TYPE__NAME = ARRAY_TYPE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TENSOR_TYPE__QUALIFIED_NAME = ARRAY_TYPE__QUALIFIED_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TENSOR_TYPE__NAMESPACE = ARRAY_TYPE__NAMESPACE;
+
+	/**
+	 * The feature id for the '<em><b>Element Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TENSOR_TYPE__ELEMENT_TYPE = ARRAY_TYPE__ELEMENT_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Dimensions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TENSOR_TYPE__DIMENSIONS = ARRAY_TYPE__DIMENSIONS;
+
+	/**
+	 * The feature id for the '<em><b>Dimensionality</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TENSOR_TYPE__DIMENSIONALITY = ARRAY_TYPE__DIMENSIONALITY;
+
+	/**
+	 * The feature id for the '<em><b>Row Size</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TENSOR_TYPE__ROW_SIZE = ARRAY_TYPE__ROW_SIZE;
+
+	/**
+	 * The feature id for the '<em><b>Column Size</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TENSOR_TYPE__COLUMN_SIZE = ARRAY_TYPE__COLUMN_SIZE;
+
+	/**
+	 * The feature id for the '<em><b>Dimensional</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TENSOR_TYPE__DIMENSIONAL = ARRAY_TYPE__DIMENSIONAL;
+
+	/**
+	 * The feature id for the '<em><b>Multidimensional</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TENSOR_TYPE__MULTIDIMENSIONAL = ARRAY_TYPE__MULTIDIMENSIONAL;
+
+	/**
+	 * The feature id for the '<em><b>Vector</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TENSOR_TYPE__VECTOR = ARRAY_TYPE__VECTOR;
+
+	/**
+	 * The feature id for the '<em><b>Matrix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TENSOR_TYPE__MATRIX = ARRAY_TYPE__MATRIX;
+
+	/**
+	 * The feature id for the '<em><b>Units</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TENSOR_TYPE__UNITS = ARRAY_TYPE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Tensor Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TENSOR_TYPE_FEATURE_COUNT = ARRAY_TYPE_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link org.eclipselabs.damos.typesystem.OperatorKind <em>Operator Kind</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1141,7 +1277,7 @@ public interface TypeSystemPackage extends EPackage {
 	 * @see org.eclipselabs.damos.typesystem.impl.TypeSystemPackageImpl#getOperatorKind()
 	 * @generated
 	 */
-	int OPERATOR_KIND = 20;
+	int OPERATOR_KIND = 21;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.damos.typesystem.UnitSymbol <em>Unit Symbol</em>}' enum.
@@ -1151,7 +1287,7 @@ public interface TypeSystemPackage extends EPackage {
 	 * @see org.eclipselabs.damos.typesystem.impl.TypeSystemPackageImpl#getUnitSymbol()
 	 * @generated
 	 */
-	int UNIT_SYMBOL = 21;
+	int UNIT_SYMBOL = 22;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipselabs.damos.typesystem.Type <em>Type</em>}'.
@@ -1640,6 +1776,27 @@ public interface TypeSystemPackage extends EPackage {
 	EReference getPackage_PackagedElements();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipselabs.damos.typesystem.TensorType <em>Tensor Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Tensor Type</em>'.
+	 * @see org.eclipselabs.damos.typesystem.TensorType
+	 * @generated
+	 */
+	EClass getTensorType();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.damos.typesystem.TensorType#getUnits <em>Units</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Units</em>'.
+	 * @see org.eclipselabs.damos.typesystem.TensorType#getUnits()
+	 * @see #getTensorType()
+	 * @generated
+	 */
+	EReference getTensorType_Units();
+
+	/**
 	 * Returns the meta object for enum '{@link org.eclipselabs.damos.typesystem.OperatorKind <em>Operator Kind</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2088,6 +2245,24 @@ public interface TypeSystemPackage extends EPackage {
 		 * @generated
 		 */
 		EReference PACKAGE__PACKAGED_ELEMENTS = eINSTANCE.getPackage_PackagedElements();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipselabs.damos.typesystem.impl.TensorTypeImpl <em>Tensor Type</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipselabs.damos.typesystem.impl.TensorTypeImpl
+		 * @see org.eclipselabs.damos.typesystem.impl.TypeSystemPackageImpl#getTensorType()
+		 * @generated
+		 */
+		EClass TENSOR_TYPE = eINSTANCE.getTensorType();
+
+		/**
+		 * The meta object literal for the '<em><b>Units</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TENSOR_TYPE__UNITS = eINSTANCE.getTensorType_Units();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipselabs.damos.typesystem.OperatorKind <em>Operator Kind</em>}' enum.

@@ -25,6 +25,7 @@ import org.eclipselabs.damos.typesystem.PackageableElement;
 import org.eclipselabs.damos.typesystem.PrimitiveType;
 import org.eclipselabs.damos.typesystem.RealType;
 import org.eclipselabs.damos.typesystem.StringType;
+import org.eclipselabs.damos.typesystem.TensorType;
 import org.eclipselabs.damos.typesystem.Type;
 import org.eclipselabs.damos.typesystem.TypeSystem;
 import org.eclipselabs.damos.typesystem.TypeSystemPackage;
@@ -277,6 +278,17 @@ public class TypeSystemSwitch<T> {
 				if (result == null) result = caseNamespace(package_);
 				if (result == null) result = casePackageableElement(package_);
 				if (result == null) result = caseNamedElement(package_);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TypeSystemPackage.TENSOR_TYPE: {
+				TensorType tensorType = (TensorType)theEObject;
+				T result = caseTensorType(tensorType);
+				if (result == null) result = caseArrayType(tensorType);
+				if (result == null) result = caseDataType(tensorType);
+				if (result == null) result = caseType(tensorType);
+				if (result == null) result = casePackageableElement(tensorType);
+				if (result == null) result = caseNamedElement(tensorType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -581,6 +593,21 @@ public class TypeSystemSwitch<T> {
 	 * @generated
 	 */
 	public T casePackage(org.eclipselabs.damos.typesystem.Package object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Tensor Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Tensor Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTensorType(TensorType object) {
 		return null;
 	}
 

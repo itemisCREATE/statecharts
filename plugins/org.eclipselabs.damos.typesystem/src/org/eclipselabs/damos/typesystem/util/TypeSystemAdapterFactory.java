@@ -25,6 +25,7 @@ import org.eclipselabs.damos.typesystem.PackageableElement;
 import org.eclipselabs.damos.typesystem.PrimitiveType;
 import org.eclipselabs.damos.typesystem.RealType;
 import org.eclipselabs.damos.typesystem.StringType;
+import org.eclipselabs.damos.typesystem.TensorType;
 import org.eclipselabs.damos.typesystem.Type;
 import org.eclipselabs.damos.typesystem.TypeSystem;
 import org.eclipselabs.damos.typesystem.TypeSystemPackage;
@@ -166,6 +167,10 @@ public class TypeSystemAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter casePackage(org.eclipselabs.damos.typesystem.Package object) {
 				return createPackageAdapter();
+			}
+			@Override
+			public Adapter caseTensorType(TensorType object) {
+				return createTensorTypeAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -464,6 +469,20 @@ public class TypeSystemAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createPackageAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.damos.typesystem.TensorType <em>Tensor Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipselabs.damos.typesystem.TensorType
+	 * @generated
+	 */
+	public Adapter createTensorTypeAdapter() {
 		return null;
 	}
 

@@ -37,7 +37,7 @@ public class ArrayDimensionImpl extends EObjectImpl implements ArrayDimension {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int FROM_INDEX_EDEFAULT = 0;
+	protected static final int FROM_INDEX_EDEFAULT = 1;
 
 	/**
 	 * The cached value of the '{@link #getFromIndex() <em>From Index</em>}' attribute.
@@ -48,15 +48,6 @@ public class ArrayDimensionImpl extends EObjectImpl implements ArrayDimension {
 	 * @ordered
 	 */
 	protected int fromIndex = FROM_INDEX_EDEFAULT;
-
-	/**
-	 * This is true if the From Index attribute has been set.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean fromIndexESet;
 
 	/**
 	 * The default value of the '{@link #getToIndex() <em>To Index</em>}' attribute.
@@ -77,15 +68,6 @@ public class ArrayDimensionImpl extends EObjectImpl implements ArrayDimension {
 	 * @ordered
 	 */
 	protected int toIndex = TO_INDEX_EDEFAULT;
-
-	/**
-	 * This is true if the To Index attribute has been set.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean toIndexESet;
 
 	/**
 	 * The default value of the '{@link #getSize() <em>Size</em>}' attribute.
@@ -133,33 +115,8 @@ public class ArrayDimensionImpl extends EObjectImpl implements ArrayDimension {
 	public void setFromIndex(int newFromIndex) {
 		int oldFromIndex = fromIndex;
 		fromIndex = newFromIndex;
-		boolean oldFromIndexESet = fromIndexESet;
-		fromIndexESet = true;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypeSystemPackage.ARRAY_DIMENSION__FROM_INDEX, oldFromIndex, fromIndex, !oldFromIndexESet));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void unsetFromIndex() {
-		int oldFromIndex = fromIndex;
-		boolean oldFromIndexESet = fromIndexESet;
-		fromIndex = FROM_INDEX_EDEFAULT;
-		fromIndexESet = false;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.UNSET, TypeSystemPackage.ARRAY_DIMENSION__FROM_INDEX, oldFromIndex, FROM_INDEX_EDEFAULT, oldFromIndexESet));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isSetFromIndex() {
-		return fromIndexESet;
+			eNotify(new ENotificationImpl(this, Notification.SET, TypeSystemPackage.ARRAY_DIMENSION__FROM_INDEX, oldFromIndex, fromIndex));
 	}
 
 	/**
@@ -179,33 +136,8 @@ public class ArrayDimensionImpl extends EObjectImpl implements ArrayDimension {
 	public void setToIndex(int newToIndex) {
 		int oldToIndex = toIndex;
 		toIndex = newToIndex;
-		boolean oldToIndexESet = toIndexESet;
-		toIndexESet = true;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypeSystemPackage.ARRAY_DIMENSION__TO_INDEX, oldToIndex, toIndex, !oldToIndexESet));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void unsetToIndex() {
-		int oldToIndex = toIndex;
-		boolean oldToIndexESet = toIndexESet;
-		toIndex = TO_INDEX_EDEFAULT;
-		toIndexESet = false;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.UNSET, TypeSystemPackage.ARRAY_DIMENSION__TO_INDEX, oldToIndex, TO_INDEX_EDEFAULT, oldToIndexESet));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isSetToIndex() {
-		return toIndexESet;
+			eNotify(new ENotificationImpl(this, Notification.SET, TypeSystemPackage.ARRAY_DIMENSION__TO_INDEX, oldToIndex, toIndex));
 	}
 
 	/**
@@ -214,7 +146,7 @@ public class ArrayDimensionImpl extends EObjectImpl implements ArrayDimension {
 	 * @generated NOT
 	 */
 	public int getSize() {
-		return isSetFromIndex() && isSetToIndex() ? getToIndex() - getFromIndex() + 1 : -1;
+		return getToIndex() - getFromIndex() + 1;
 	}
 
 	/**
@@ -262,10 +194,10 @@ public class ArrayDimensionImpl extends EObjectImpl implements ArrayDimension {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case TypeSystemPackage.ARRAY_DIMENSION__FROM_INDEX:
-				unsetFromIndex();
+				setFromIndex(FROM_INDEX_EDEFAULT);
 				return;
 			case TypeSystemPackage.ARRAY_DIMENSION__TO_INDEX:
-				unsetToIndex();
+				setToIndex(TO_INDEX_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -280,9 +212,9 @@ public class ArrayDimensionImpl extends EObjectImpl implements ArrayDimension {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case TypeSystemPackage.ARRAY_DIMENSION__FROM_INDEX:
-				return isSetFromIndex();
+				return fromIndex != FROM_INDEX_EDEFAULT;
 			case TypeSystemPackage.ARRAY_DIMENSION__TO_INDEX:
-				return isSetToIndex();
+				return toIndex != TO_INDEX_EDEFAULT;
 			case TypeSystemPackage.ARRAY_DIMENSION__SIZE:
 				return getSize() != SIZE_EDEFAULT;
 		}
@@ -300,9 +232,9 @@ public class ArrayDimensionImpl extends EObjectImpl implements ArrayDimension {
 
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (fromIndex: ");
-		if (fromIndexESet) result.append(fromIndex); else result.append("<unset>");
+		result.append(fromIndex);
 		result.append(", toIndex: ");
-		if (toIndexESet) result.append(toIndex); else result.append("<unset>");
+		result.append(toIndex);
 		result.append(')');
 		return result.toString();
 	}
