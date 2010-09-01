@@ -97,9 +97,7 @@ AddSubtractExpression returns Expression :
 
 enum AddSubtractOperator :
 	Add='+' |
-	Subtract='-' |
-	ElementWiseAdd='.+' |
-	ElementWiseSubtract='.-';
+	Subtract='-';
 
 MultiplyDivideExpression returns Expression :
 	PowerExpression ({MultiplyDivideExpression.operands+=current} (operators+=MultiplyDivideOperator operands+=PowerExpression)+)?;
@@ -124,7 +122,7 @@ PrimaryExpression returns Expression :
 	Literal |
 	SymbolReference |
 	ParenthesizedExpression |
-	ArrayConcatenationOperator |
+	MatrixConstructionOperator |
 //	ArrayConstructionOperator |
 	BeginExpression |
 	EndExpression;
@@ -181,7 +179,7 @@ ColonSubscript :
 ExpressionSubscript :
 	expression=Expression;
 	
-ArrayConcatenationOperator :
+MatrixConstructionOperator :
 	'[' expressionLists+=ExpressionList (';' expressionLists+=ExpressionList)* ']';
 	
 ExpressionList :

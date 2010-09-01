@@ -102,4 +102,12 @@ public interface Unit extends EObject {
 	 */
 	Unit power(int exponent);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model required="true" ordered="false" otherRequired="true" otherOrdered="false" ignoreScaleRequired="true" ignoreScaleOrdered="false"
+	 * @generated
+	 */
+	boolean isSameAs(Unit other, boolean ignoreScale);
+
 } // Unit

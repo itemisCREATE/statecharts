@@ -354,11 +354,11 @@ public class MscriptSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case MscriptPackage.ARRAY_CONCATENATION_OPERATOR:
+      case MscriptPackage.MATRIX_CONSTRUCTION_OPERATOR:
       {
-        ArrayConcatenationOperator arrayConcatenationOperator = (ArrayConcatenationOperator)theEObject;
-        T result = caseArrayConcatenationOperator(arrayConcatenationOperator);
-        if (result == null) result = caseExpression(arrayConcatenationOperator);
+        MatrixConstructionOperator matrixConstructionOperator = (MatrixConstructionOperator)theEObject;
+        T result = caseMatrixConstructionOperator(matrixConstructionOperator);
+        if (result == null) result = caseExpression(matrixConstructionOperator);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -1017,17 +1017,17 @@ public class MscriptSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Array Concatenation Operator</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Matrix Construction Operator</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Array Concatenation Operator</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Matrix Construction Operator</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseArrayConcatenationOperator(ArrayConcatenationOperator object)
+  public T caseMatrixConstructionOperator(MatrixConstructionOperator object)
   {
     return null;
   }

@@ -238,9 +238,9 @@ public class MscriptAdapterFactory extends AdapterFactoryImpl
         return createExpressionSubscriptAdapter();
       }
       @Override
-      public Adapter caseArrayConcatenationOperator(ArrayConcatenationOperator object)
+      public Adapter caseMatrixConstructionOperator(MatrixConstructionOperator object)
       {
-        return createArrayConcatenationOperatorAdapter();
+        return createMatrixConstructionOperatorAdapter();
       }
       @Override
       public Adapter caseExpressionList(ExpressionList object)
@@ -835,16 +835,16 @@ public class MscriptAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.damos.scripting.mscript.ArrayConcatenationOperator <em>Array Concatenation Operator</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.damos.scripting.mscript.MatrixConstructionOperator <em>Matrix Construction Operator</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipselabs.damos.scripting.mscript.ArrayConcatenationOperator
+   * @see org.eclipselabs.damos.scripting.mscript.MatrixConstructionOperator
    * @generated
    */
-  public Adapter createArrayConcatenationOperatorAdapter()
+  public Adapter createMatrixConstructionOperatorAdapter()
   {
     return null;
   }

@@ -32,6 +32,8 @@
       <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/Subtract"/>
       <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/Multiply"/>
       <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/Divide"/>
+      <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/ElementWiseMultiply"/>
+      <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/ElementWiseDivide"/>
     </genEnums>
     <genEnums xsi:type="genmodel:GenEnum" typeSafeEnumCompatible="false" ecoreEnum="TypeSystem.ecore#//UnitSymbol">
       <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//UnitSymbol/Meter"/>
@@ -75,10 +77,6 @@
           ecoreFeature="ecore:EAttribute TypeSystem.ecore#//ArrayType/dimensional"/>
       <genFeatures xsi:type="genmodel:GenFeature" property="Readonly" createChild="false"
           ecoreFeature="ecore:EAttribute TypeSystem.ecore#//ArrayType/multidimensional"/>
-      <genFeatures xsi:type="genmodel:GenFeature" property="Readonly" createChild="false"
-          ecoreFeature="ecore:EAttribute TypeSystem.ecore#//ArrayType/vector"/>
-      <genFeatures xsi:type="genmodel:GenFeature" property="Readonly" createChild="false"
-          ecoreFeature="ecore:EAttribute TypeSystem.ecore#//ArrayType/matrix"/>
     </genClasses>
     <genClasses xsi:type="genmodel:GenClass" image="false" ecoreClass="TypeSystem.ecore#//DataType">
       <genOperations xsi:type="genmodel:GenOperation" ecoreOperation="TypeSystem.ecore#//DataType/evaluate">
@@ -120,6 +118,10 @@
       <genOperations xsi:type="genmodel:GenOperation" ecoreOperation="TypeSystem.ecore#//Unit/power">
         <genParameters xsi:type="genmodel:GenParameter" ecoreParameter="TypeSystem.ecore#//Unit/power/exponent"/>
       </genOperations>
+      <genOperations xsi:type="genmodel:GenOperation" ecoreOperation="TypeSystem.ecore#//Unit/isSameAs">
+        <genParameters xsi:type="genmodel:GenParameter" ecoreParameter="TypeSystem.ecore#//Unit/isSameAs/other"/>
+        <genParameters xsi:type="genmodel:GenParameter" ecoreParameter="TypeSystem.ecore#//Unit/isSameAs/ignoreScale"/>
+      </genOperations>
     </genClasses>
     <genClasses xsi:type="genmodel:GenClass" ecoreClass="TypeSystem.ecore#//UnitFactor">
       <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute TypeSystem.ecore#//UnitFactor/symbol"/>
@@ -152,31 +154,10 @@
           createChild="true" ecoreFeature="ecore:EReference TypeSystem.ecore#//Package/packagedElements"/>
     </genClasses>
     <genClasses xsi:type="genmodel:GenClass" ecoreClass="TypeSystem.ecore#//TensorType">
-      <genFeatures xsi:type="genmodel:GenFeature" property="None" children="true"
-          createChild="true" ecoreFeature="ecore:EReference TypeSystem.ecore#//TensorType/units"/>
-      <genOperations xsi:type="genmodel:GenOperation" ecoreOperation="TypeSystem.ecore#//TensorType/getUnit">
-        <genParameters xsi:type="genmodel:GenParameter" ecoreParameter="TypeSystem.ecore#//TensorType/getUnit/index"/>
-      </genOperations>
-      <genOperations xsi:type="genmodel:GenOperation" ecoreOperation="TypeSystem.ecore#//TensorType/getUnit.1">
-        <genParameters xsi:type="genmodel:GenParameter" ecoreParameter="TypeSystem.ecore#//TensorType/getUnit.1/row"/>
-        <genParameters xsi:type="genmodel:GenParameter" ecoreParameter="TypeSystem.ecore#//TensorType/getUnit.1/column"/>
-      </genOperations>
-      <genOperations xsi:type="genmodel:GenOperation" ecoreOperation="TypeSystem.ecore#//TensorType/getUnit.2">
-        <genParameters xsi:type="genmodel:GenParameter" ecoreParameter="TypeSystem.ecore#//TensorType/getUnit.2/indices"/>
-      </genOperations>
-      <genOperations xsi:type="genmodel:GenOperation" ecoreOperation="TypeSystem.ecore#//TensorType/setUnit">
-        <genParameters xsi:type="genmodel:GenParameter" ecoreParameter="TypeSystem.ecore#//TensorType/setUnit/index"/>
-        <genParameters xsi:type="genmodel:GenParameter" ecoreParameter="TypeSystem.ecore#//TensorType/setUnit/unit"/>
-      </genOperations>
-      <genOperations xsi:type="genmodel:GenOperation" ecoreOperation="TypeSystem.ecore#//TensorType/setUnit.1">
-        <genParameters xsi:type="genmodel:GenParameter" ecoreParameter="TypeSystem.ecore#//TensorType/setUnit.1/row"/>
-        <genParameters xsi:type="genmodel:GenParameter" ecoreParameter="TypeSystem.ecore#//TensorType/setUnit.1/column"/>
-        <genParameters xsi:type="genmodel:GenParameter" ecoreParameter="TypeSystem.ecore#//TensorType/setUnit.1/unit"/>
-      </genOperations>
-      <genOperations xsi:type="genmodel:GenOperation" ecoreOperation="TypeSystem.ecore#//TensorType/setUnit.2">
-        <genParameters xsi:type="genmodel:GenParameter" ecoreParameter="TypeSystem.ecore#//TensorType/setUnit.2/indices"/>
-        <genParameters xsi:type="genmodel:GenParameter" ecoreParameter="TypeSystem.ecore#//TensorType/setUnit.2/unit"/>
-      </genOperations>
+      <genFeatures xsi:type="genmodel:GenFeature" property="Readonly" createChild="false"
+          ecoreFeature="ecore:EAttribute TypeSystem.ecore#//TensorType/vector"/>
+      <genFeatures xsi:type="genmodel:GenFeature" property="Readonly" createChild="false"
+          ecoreFeature="ecore:EAttribute TypeSystem.ecore#//TensorType/matrix"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

@@ -17,24 +17,24 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.eclipselabs.damos.scripting.mscript.ArrayConcatenationOperator;
 import org.eclipselabs.damos.scripting.mscript.ExpressionList;
+import org.eclipselabs.damos.scripting.mscript.MatrixConstructionOperator;
 import org.eclipselabs.damos.scripting.mscript.MscriptPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Array Concatenation Operator</b></em>'.
+ * An implementation of the model object '<em><b>Matrix Construction Operator</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.damos.scripting.mscript.impl.ArrayConcatenationOperatorImpl#getExpressionLists <em>Expression Lists</em>}</li>
+ *   <li>{@link org.eclipselabs.damos.scripting.mscript.impl.MatrixConstructionOperatorImpl#getExpressionLists <em>Expression Lists</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ArrayConcatenationOperatorImpl extends ExpressionImpl implements ArrayConcatenationOperator
+public class MatrixConstructionOperatorImpl extends ExpressionImpl implements MatrixConstructionOperator
 {
   /**
    * The cached value of the '{@link #getExpressionLists() <em>Expression Lists</em>}' containment reference list.
@@ -51,7 +51,7 @@ public class ArrayConcatenationOperatorImpl extends ExpressionImpl implements Ar
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ArrayConcatenationOperatorImpl()
+  protected MatrixConstructionOperatorImpl()
   {
     super();
   }
@@ -64,7 +64,7 @@ public class ArrayConcatenationOperatorImpl extends ExpressionImpl implements Ar
   @Override
   protected EClass eStaticClass()
   {
-    return MscriptPackage.Literals.ARRAY_CONCATENATION_OPERATOR;
+    return MscriptPackage.Literals.MATRIX_CONSTRUCTION_OPERATOR;
   }
 
   /**
@@ -76,7 +76,7 @@ public class ArrayConcatenationOperatorImpl extends ExpressionImpl implements Ar
   {
     if (expressionLists == null)
     {
-      expressionLists = new EObjectContainmentEList<ExpressionList>(ExpressionList.class, this, MscriptPackage.ARRAY_CONCATENATION_OPERATOR__EXPRESSION_LISTS);
+      expressionLists = new EObjectContainmentEList<ExpressionList>(ExpressionList.class, this, MscriptPackage.MATRIX_CONSTRUCTION_OPERATOR__EXPRESSION_LISTS);
     }
     return expressionLists;
   }
@@ -91,7 +91,7 @@ public class ArrayConcatenationOperatorImpl extends ExpressionImpl implements Ar
   {
     switch (featureID)
     {
-      case MscriptPackage.ARRAY_CONCATENATION_OPERATOR__EXPRESSION_LISTS:
+      case MscriptPackage.MATRIX_CONSTRUCTION_OPERATOR__EXPRESSION_LISTS:
         return ((InternalEList<?>)getExpressionLists()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -107,7 +107,7 @@ public class ArrayConcatenationOperatorImpl extends ExpressionImpl implements Ar
   {
     switch (featureID)
     {
-      case MscriptPackage.ARRAY_CONCATENATION_OPERATOR__EXPRESSION_LISTS:
+      case MscriptPackage.MATRIX_CONSTRUCTION_OPERATOR__EXPRESSION_LISTS:
         return getExpressionLists();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -124,7 +124,7 @@ public class ArrayConcatenationOperatorImpl extends ExpressionImpl implements Ar
   {
     switch (featureID)
     {
-      case MscriptPackage.ARRAY_CONCATENATION_OPERATOR__EXPRESSION_LISTS:
+      case MscriptPackage.MATRIX_CONSTRUCTION_OPERATOR__EXPRESSION_LISTS:
         getExpressionLists().clear();
         getExpressionLists().addAll((Collection<? extends ExpressionList>)newValue);
         return;
@@ -142,7 +142,7 @@ public class ArrayConcatenationOperatorImpl extends ExpressionImpl implements Ar
   {
     switch (featureID)
     {
-      case MscriptPackage.ARRAY_CONCATENATION_OPERATOR__EXPRESSION_LISTS:
+      case MscriptPackage.MATRIX_CONSTRUCTION_OPERATOR__EXPRESSION_LISTS:
         getExpressionLists().clear();
         return;
     }
@@ -159,10 +159,10 @@ public class ArrayConcatenationOperatorImpl extends ExpressionImpl implements Ar
   {
     switch (featureID)
     {
-      case MscriptPackage.ARRAY_CONCATENATION_OPERATOR__EXPRESSION_LISTS:
+      case MscriptPackage.MATRIX_CONSTRUCTION_OPERATOR__EXPRESSION_LISTS:
         return expressionLists != null && !expressionLists.isEmpty();
     }
     return super.eIsSet(featureID);
   }
 
-} //ArrayConcatenationOperatorImpl
+} //MatrixConstructionOperatorImpl

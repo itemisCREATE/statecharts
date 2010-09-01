@@ -15,66 +15,64 @@ T16 : '==' ;
 T17 : '<>' ;
 T18 : '+' ;
 T19 : '-' ;
-T20 : '.+' ;
-T21 : '.-' ;
-T22 : '*' ;
-T23 : '/' ;
-T24 : '.*' ;
-T25 : './' ;
-T26 : '^' ;
-T27 : '.^' ;
-T28 : 'false' ;
-T29 : 'true' ;
-T30 : 'package' ;
-T31 : '{' ;
-T32 : '}' ;
-T33 : 'enumeration' ;
-T34 : ',' ;
-T35 : 'Real' ;
-T36 : '(' ;
-T37 : ')' ;
-T38 : 'Integer' ;
-T39 : 'Boolean' ;
-T40 : 'String' ;
-T41 : 'if' ;
-T42 : 'else' ;
-T43 : 'elseif' ;
-T44 : 'then' ;
-T45 : ':' ;
-T46 : 'or' ;
-T47 : 'and' ;
-T48 : 'not' ;
-T49 : '::' ;
-T50 : '=' ;
-T51 : '[' ;
-T52 : ']' ;
-T53 : '.' ;
-T54 : ';' ;
-T55 : 'begin' ;
-T56 : 'end' ;
+T20 : '*' ;
+T21 : '/' ;
+T22 : '.*' ;
+T23 : './' ;
+T24 : '^' ;
+T25 : '.^' ;
+T26 : 'false' ;
+T27 : 'true' ;
+T28 : 'package' ;
+T29 : '{' ;
+T30 : '}' ;
+T31 : 'enumeration' ;
+T32 : ',' ;
+T33 : 'Real' ;
+T34 : '(' ;
+T35 : ')' ;
+T36 : 'Integer' ;
+T37 : 'Boolean' ;
+T38 : 'String' ;
+T39 : 'if' ;
+T40 : 'else' ;
+T41 : 'elseif' ;
+T42 : 'then' ;
+T43 : ':' ;
+T44 : 'or' ;
+T45 : 'and' ;
+T46 : 'not' ;
+T47 : '::' ;
+T48 : '=' ;
+T49 : '[' ;
+T50 : ']' ;
+T51 : '.' ;
+T52 : ';' ;
+T53 : 'begin' ;
+T54 : 'end' ;
 
-// $ANTLR src "../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g" 8622
+// $ANTLR src "../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g" 8608
 RULE_IDENT : ('_'|'a'..'z'|'A'..'Z') ('0'..'9'|'_'|'a'..'z'|'A'..'Z')*;
 
-// $ANTLR src "../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g" 8624
+// $ANTLR src "../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g" 8610
 RULE_STRING : '"' (~(('\\'|'"'))|'\\' ('\''|'"'|'?'|'\\'|'a'|'b'|'f'|'n'|'r'|'t'|'v'))* '"';
 
-// $ANTLR src "../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g" 8626
+// $ANTLR src "../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g" 8612
 RULE_REAL : ('0'..'9')+ '.' ('0'..'9')* (('e'|'E') ('+'|'-')? ('0'..'9')+)?;
 
-// $ANTLR src "../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g" 8628
+// $ANTLR src "../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g" 8614
 RULE_INTEGER : ('0'..'9')+;
 
-// $ANTLR src "../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g" 8630
+// $ANTLR src "../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g" 8616
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
-// $ANTLR src "../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g" 8632
+// $ANTLR src "../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g" 8618
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 
-// $ANTLR src "../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g" 8634
+// $ANTLR src "../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g" 8620
 RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
-// $ANTLR src "../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g" 8636
+// $ANTLR src "../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g" 8622
 RULE_ANY_OTHER : .;
 
 

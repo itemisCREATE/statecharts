@@ -509,31 +509,13 @@ public interface TypeSystemPackage extends EPackage {
 	int ARRAY_TYPE__MULTIDIMENSIONAL = DATA_TYPE_FEATURE_COUNT + 6;
 
 	/**
-	 * The feature id for the '<em><b>Vector</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARRAY_TYPE__VECTOR = DATA_TYPE_FEATURE_COUNT + 7;
-
-	/**
-	 * The feature id for the '<em><b>Matrix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARRAY_TYPE__MATRIX = DATA_TYPE_FEATURE_COUNT + 8;
-
-	/**
 	 * The number of structural features of the '<em>Array Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ARRAY_TYPE_FEATURE_COUNT = DATA_TYPE_FEATURE_COUNT + 9;
+	int ARRAY_TYPE_FEATURE_COUNT = DATA_TYPE_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>From Index</b></em>' attribute.
@@ -1240,7 +1222,7 @@ public interface TypeSystemPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TENSOR_TYPE__VECTOR = ARRAY_TYPE__VECTOR;
+	int TENSOR_TYPE__VECTOR = ARRAY_TYPE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Matrix</b></em>' attribute.
@@ -1249,16 +1231,7 @@ public interface TypeSystemPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TENSOR_TYPE__MATRIX = ARRAY_TYPE__MATRIX;
-
-	/**
-	 * The feature id for the '<em><b>Units</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TENSOR_TYPE__UNITS = ARRAY_TYPE_FEATURE_COUNT + 0;
+	int TENSOR_TYPE__MATRIX = ARRAY_TYPE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Tensor Type</em>' class.
@@ -1267,7 +1240,7 @@ public interface TypeSystemPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TENSOR_TYPE_FEATURE_COUNT = ARRAY_TYPE_FEATURE_COUNT + 1;
+	int TENSOR_TYPE_FEATURE_COUNT = ARRAY_TYPE_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.damos.typesystem.OperatorKind <em>Operator Kind</em>}' enum.
@@ -1470,28 +1443,6 @@ public interface TypeSystemPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getArrayType_Multidimensional();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipselabs.damos.typesystem.ArrayType#isVector <em>Vector</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Vector</em>'.
-	 * @see org.eclipselabs.damos.typesystem.ArrayType#isVector()
-	 * @see #getArrayType()
-	 * @generated
-	 */
-	EAttribute getArrayType_Vector();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipselabs.damos.typesystem.ArrayType#isMatrix <em>Matrix</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Matrix</em>'.
-	 * @see org.eclipselabs.damos.typesystem.ArrayType#isMatrix()
-	 * @see #getArrayType()
-	 * @generated
-	 */
-	EAttribute getArrayType_Matrix();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipselabs.damos.typesystem.DataType <em>Data Type</em>}'.
@@ -1786,15 +1737,26 @@ public interface TypeSystemPackage extends EPackage {
 	EClass getTensorType();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.damos.typesystem.TensorType#getUnits <em>Units</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipselabs.damos.typesystem.TensorType#isVector <em>Vector</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Units</em>'.
-	 * @see org.eclipselabs.damos.typesystem.TensorType#getUnits()
+	 * @return the meta object for the attribute '<em>Vector</em>'.
+	 * @see org.eclipselabs.damos.typesystem.TensorType#isVector()
 	 * @see #getTensorType()
 	 * @generated
 	 */
-	EReference getTensorType_Units();
+	EAttribute getTensorType_Vector();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipselabs.damos.typesystem.TensorType#isMatrix <em>Matrix</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Matrix</em>'.
+	 * @see org.eclipselabs.damos.typesystem.TensorType#isMatrix()
+	 * @see #getTensorType()
+	 * @generated
+	 */
+	EAttribute getTensorType_Matrix();
 
 	/**
 	 * Returns the meta object for enum '{@link org.eclipselabs.damos.typesystem.OperatorKind <em>Operator Kind</em>}'.
@@ -1983,22 +1945,6 @@ public interface TypeSystemPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ARRAY_TYPE__MULTIDIMENSIONAL = eINSTANCE.getArrayType_Multidimensional();
-
-		/**
-		 * The meta object literal for the '<em><b>Vector</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ARRAY_TYPE__VECTOR = eINSTANCE.getArrayType_Vector();
-
-		/**
-		 * The meta object literal for the '<em><b>Matrix</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ARRAY_TYPE__MATRIX = eINSTANCE.getArrayType_Matrix();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipselabs.damos.typesystem.impl.DataTypeImpl <em>Data Type</em>}' class.
@@ -2257,12 +2203,20 @@ public interface TypeSystemPackage extends EPackage {
 		EClass TENSOR_TYPE = eINSTANCE.getTensorType();
 
 		/**
-		 * The meta object literal for the '<em><b>Units</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Vector</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TENSOR_TYPE__UNITS = eINSTANCE.getTensorType_Units();
+		EAttribute TENSOR_TYPE__VECTOR = eINSTANCE.getTensorType_Vector();
+
+		/**
+		 * The meta object literal for the '<em><b>Matrix</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TENSOR_TYPE__MATRIX = eINSTANCE.getTensorType_Matrix();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipselabs.damos.typesystem.OperatorKind <em>Operator Kind</em>}' enum.

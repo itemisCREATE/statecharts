@@ -15,7 +15,6 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import org.eclipselabs.damos.scripting.mscript.AddSubtractExpression;
 import org.eclipselabs.damos.scripting.mscript.AddSubtractOperator;
-import org.eclipselabs.damos.scripting.mscript.ArrayConcatenationOperator;
 import org.eclipselabs.damos.scripting.mscript.ArrayReference;
 import org.eclipselabs.damos.scripting.mscript.BeginExpression;
 import org.eclipselabs.damos.scripting.mscript.BooleanKind;
@@ -40,6 +39,7 @@ import org.eclipselabs.damos.scripting.mscript.Literal;
 import org.eclipselabs.damos.scripting.mscript.LogicalAndExpression;
 import org.eclipselabs.damos.scripting.mscript.LogicalNotExpression;
 import org.eclipselabs.damos.scripting.mscript.LogicalOrExpression;
+import org.eclipselabs.damos.scripting.mscript.MatrixConstructionOperator;
 import org.eclipselabs.damos.scripting.mscript.MemberReference;
 import org.eclipselabs.damos.scripting.mscript.Mscript;
 import org.eclipselabs.damos.scripting.mscript.MscriptFactory;
@@ -309,7 +309,7 @@ public class MscriptPackageImpl extends EPackageImpl implements MscriptPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass arrayConcatenationOperatorEClass = null;
+  private EClass matrixConstructionOperatorEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -1160,9 +1160,9 @@ public class MscriptPackageImpl extends EPackageImpl implements MscriptPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getArrayConcatenationOperator()
+  public EClass getMatrixConstructionOperator()
   {
-    return arrayConcatenationOperatorEClass;
+    return matrixConstructionOperatorEClass;
   }
 
   /**
@@ -1170,9 +1170,9 @@ public class MscriptPackageImpl extends EPackageImpl implements MscriptPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getArrayConcatenationOperator_ExpressionLists()
+  public EReference getMatrixConstructionOperator_ExpressionLists()
   {
-    return (EReference)arrayConcatenationOperatorEClass.getEStructuralFeatures().get(0);
+    return (EReference)matrixConstructionOperatorEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1779,8 +1779,8 @@ public class MscriptPackageImpl extends EPackageImpl implements MscriptPackage
     expressionSubscriptEClass = createEClass(EXPRESSION_SUBSCRIPT);
     createEReference(expressionSubscriptEClass, EXPRESSION_SUBSCRIPT__EXPRESSION);
 
-    arrayConcatenationOperatorEClass = createEClass(ARRAY_CONCATENATION_OPERATOR);
-    createEReference(arrayConcatenationOperatorEClass, ARRAY_CONCATENATION_OPERATOR__EXPRESSION_LISTS);
+    matrixConstructionOperatorEClass = createEClass(MATRIX_CONSTRUCTION_OPERATOR);
+    createEReference(matrixConstructionOperatorEClass, MATRIX_CONSTRUCTION_OPERATOR__EXPRESSION_LISTS);
 
     expressionListEClass = createEClass(EXPRESSION_LIST);
     createEReference(expressionListEClass, EXPRESSION_LIST__EXPRESSIONS);
@@ -1901,7 +1901,7 @@ public class MscriptPackageImpl extends EPackageImpl implements MscriptPackage
     memberReferenceEClass.getESuperTypes().add(this.getComponentReference());
     colonSubscriptEClass.getESuperTypes().add(this.getSubscript());
     expressionSubscriptEClass.getESuperTypes().add(this.getSubscript());
-    arrayConcatenationOperatorEClass.getESuperTypes().add(this.getExpression());
+    matrixConstructionOperatorEClass.getESuperTypes().add(this.getExpression());
     parenthesizedExpressionEClass.getESuperTypes().add(this.getExpression());
     beginExpressionEClass.getESuperTypes().add(this.getExpression());
     endExpressionEClass.getESuperTypes().add(this.getExpression());
@@ -2010,8 +2010,8 @@ public class MscriptPackageImpl extends EPackageImpl implements MscriptPackage
     initEClass(expressionSubscriptEClass, ExpressionSubscript.class, "ExpressionSubscript", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getExpressionSubscript_Expression(), this.getExpression(), null, "expression", null, 0, 1, ExpressionSubscript.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(arrayConcatenationOperatorEClass, ArrayConcatenationOperator.class, "ArrayConcatenationOperator", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getArrayConcatenationOperator_ExpressionLists(), this.getExpressionList(), null, "expressionLists", null, 0, -1, ArrayConcatenationOperator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(matrixConstructionOperatorEClass, MatrixConstructionOperator.class, "MatrixConstructionOperator", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getMatrixConstructionOperator_ExpressionLists(), this.getExpressionList(), null, "expressionLists", null, 0, -1, MatrixConstructionOperator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(expressionListEClass, ExpressionList.class, "ExpressionList", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getExpressionList_Expressions(), this.getExpression(), null, "expressions", null, 0, -1, ExpressionList.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2086,8 +2086,6 @@ public class MscriptPackageImpl extends EPackageImpl implements MscriptPackage
     initEEnum(addSubtractOperatorEEnum, AddSubtractOperator.class, "AddSubtractOperator");
     addEEnumLiteral(addSubtractOperatorEEnum, AddSubtractOperator.ADD);
     addEEnumLiteral(addSubtractOperatorEEnum, AddSubtractOperator.SUBTRACT);
-    addEEnumLiteral(addSubtractOperatorEEnum, AddSubtractOperator.ELEMENT_WISE_ADD);
-    addEEnumLiteral(addSubtractOperatorEEnum, AddSubtractOperator.ELEMENT_WISE_SUBTRACT);
 
     initEEnum(multiplyDivideOperatorEEnum, MultiplyDivideOperator.class, "MultiplyDivideOperator");
     addEEnumLiteral(multiplyDivideOperatorEEnum, MultiplyDivideOperator.MULTIPLY);

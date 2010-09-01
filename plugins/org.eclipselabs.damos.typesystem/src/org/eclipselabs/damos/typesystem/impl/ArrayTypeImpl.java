@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipselabs.damos.typesystem.ArrayDimension;
 import org.eclipselabs.damos.typesystem.ArrayType;
 import org.eclipselabs.damos.typesystem.DataType;
+import org.eclipselabs.damos.typesystem.NumericalType;
 import org.eclipselabs.damos.typesystem.TypeSystemPackage;
 
 /**
@@ -35,8 +36,6 @@ import org.eclipselabs.damos.typesystem.TypeSystemPackage;
  *   <li>{@link org.eclipselabs.damos.typesystem.impl.ArrayTypeImpl#getColumnSize <em>Column Size</em>}</li>
  *   <li>{@link org.eclipselabs.damos.typesystem.impl.ArrayTypeImpl#isDimensional <em>Dimensional</em>}</li>
  *   <li>{@link org.eclipselabs.damos.typesystem.impl.ArrayTypeImpl#isMultidimensional <em>Multidimensional</em>}</li>
- *   <li>{@link org.eclipselabs.damos.typesystem.impl.ArrayTypeImpl#isVector <em>Vector</em>}</li>
- *   <li>{@link org.eclipselabs.damos.typesystem.impl.ArrayTypeImpl#isMatrix <em>Matrix</em>}</li>
  * </ul>
  * </p>
  *
@@ -114,26 +113,6 @@ public class ArrayTypeImpl extends DataTypeImpl implements ArrayType {
 	protected static final boolean MULTIDIMENSIONAL_EDEFAULT = false;
 
 	/**
-	 * The default value of the '{@link #isVector() <em>Vector</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isVector()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean VECTOR_EDEFAULT = false;
-
-	/**
-	 * The default value of the '{@link #isMatrix() <em>Matrix</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isMatrix()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean MATRIX_EDEFAULT = false;
-
-	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -177,13 +156,20 @@ public class ArrayTypeImpl extends DataTypeImpl implements ArrayType {
 	public DataType basicGetElementType() {
 		return elementType;
 	}
+	
+	public void setElementType(DataType newElementType) {
+		if (newElementType instanceof NumericalType) {
+			throw new IllegalArgumentException("New element type must be NumericalType");
+		}
+		setElementTypeGen(newElementType);
+	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setElementType(DataType newElementType) {
+	public void setElementTypeGen(DataType newElementType) {
 		DataType oldElementType = elementType;
 		elementType = newElementType;
 		if (eNotificationRequired())
@@ -250,24 +236,6 @@ public class ArrayTypeImpl extends DataTypeImpl implements ArrayType {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public boolean isVector() {
-		return getDimensions().size() == 1;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public boolean isMatrix() {
-		return getDimensions().size() == 2;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -302,10 +270,6 @@ public class ArrayTypeImpl extends DataTypeImpl implements ArrayType {
 				return isDimensional();
 			case TypeSystemPackage.ARRAY_TYPE__MULTIDIMENSIONAL:
 				return isMultidimensional();
-			case TypeSystemPackage.ARRAY_TYPE__VECTOR:
-				return isVector();
-			case TypeSystemPackage.ARRAY_TYPE__MATRIX:
-				return isMatrix();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -370,10 +334,6 @@ public class ArrayTypeImpl extends DataTypeImpl implements ArrayType {
 				return isDimensional() != DIMENSIONAL_EDEFAULT;
 			case TypeSystemPackage.ARRAY_TYPE__MULTIDIMENSIONAL:
 				return isMultidimensional() != MULTIDIMENSIONAL_EDEFAULT;
-			case TypeSystemPackage.ARRAY_TYPE__VECTOR:
-				return isVector() != VECTOR_EDEFAULT;
-			case TypeSystemPackage.ARRAY_TYPE__MATRIX:
-				return isMatrix() != MATRIX_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}

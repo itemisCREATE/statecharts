@@ -9,21 +9,21 @@ import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Array Concatenation Operator</b></em>'.
+ * A representation of the model object '<em><b>Matrix Construction Operator</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipselabs.damos.scripting.mscript.ArrayConcatenationOperator#getExpressionLists <em>Expression Lists</em>}</li>
+ *   <li>{@link org.eclipselabs.damos.scripting.mscript.MatrixConstructionOperator#getExpressionLists <em>Expression Lists</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipselabs.damos.scripting.mscript.MscriptPackage#getArrayConcatenationOperator()
+ * @see org.eclipselabs.damos.scripting.mscript.MscriptPackage#getMatrixConstructionOperator()
  * @model
  * @generated
  */
-public interface ArrayConcatenationOperator extends Expression
+public interface MatrixConstructionOperator extends Expression
 {
   /**
    * Returns the value of the '<em><b>Expression Lists</b></em>' containment reference list.
@@ -35,10 +35,10 @@ public interface ArrayConcatenationOperator extends Expression
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Expression Lists</em>' containment reference list.
-   * @see org.eclipselabs.damos.scripting.mscript.MscriptPackage#getArrayConcatenationOperator_ExpressionLists()
+   * @see org.eclipselabs.damos.scripting.mscript.MscriptPackage#getMatrixConstructionOperator_ExpressionLists()
    * @model containment="true"
    * @generated
    */
   EList<ExpressionList> getExpressionLists();
 
-} // ArrayConcatenationOperator
+} // MatrixConstructionOperator

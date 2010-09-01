@@ -58,8 +58,6 @@
   <eClassifiers xsi:type="ecore:EEnum" name="AddSubtractOperator">
     <eLiterals name="Add" literal="+"/>
     <eLiterals name="Subtract" value="1" literal="-"/>
-    <eLiterals name="ElementWiseAdd" value="2" literal=".+"/>
-    <eLiterals name="ElementWiseSubtract" value="3" literal=".-"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="MultiplyDivideOperator">
     <eLiterals name="Multiply" literal="*"/>
@@ -130,7 +128,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//Expression"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ArrayConcatenationOperator" eSuperTypes="#//Expression">
+  <eClassifiers xsi:type="ecore:EClass" name="MatrixConstructionOperator" eSuperTypes="#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="expressionLists" upperBound="-1"
         eType="#//ExpressionList" containment="true"/>
   </eClassifiers>

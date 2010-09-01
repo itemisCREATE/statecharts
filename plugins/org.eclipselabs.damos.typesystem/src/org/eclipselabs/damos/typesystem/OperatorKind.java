@@ -54,8 +54,23 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	DIVIDE(3, "Divide", "Divide")
-	;
+	DIVIDE(3, "Divide", "Divide"), /**
+	 * The '<em><b>Element Wise Multiply</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #ELEMENT_WISE_MULTIPLY_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	ELEMENT_WISE_MULTIPLY(4, "ElementWiseMultiply", "ElementWiseMultiply"), /**
+	 * The '<em><b>Element Wise Divide</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #ELEMENT_WISE_DIVIDE_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	ELEMENT_WISE_DIVIDE(5, "ElementWiseDivide", "ElementWiseDivide");
 
 	/**
 	 * The '<em><b>Add</b></em>' literal value.
@@ -117,7 +132,37 @@ public enum OperatorKind implements Enumerator {
 	 */
 	public static final int DIVIDE_VALUE = 3;
 
-	/**
+/**
+	 * The '<em><b>Element Wise Multiply</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Element Wise Multiply</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #ELEMENT_WISE_MULTIPLY
+	 * @model name="ElementWiseMultiply"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ELEMENT_WISE_MULTIPLY_VALUE = 4;
+
+/**
+	 * The '<em><b>Element Wise Divide</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Element Wise Divide</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #ELEMENT_WISE_DIVIDE
+	 * @model name="ElementWiseDivide"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ELEMENT_WISE_DIVIDE_VALUE = 5;
+
+/**
 	 * An array of all the '<em><b>Operator Kind</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -129,6 +174,8 @@ public enum OperatorKind implements Enumerator {
 			SUBTRACT,
 			MULTIPLY,
 			DIVIDE,
+			ELEMENT_WISE_MULTIPLY,
+			ELEMENT_WISE_DIVIDE,
 		};
 
 	/**
@@ -183,6 +230,8 @@ public enum OperatorKind implements Enumerator {
 			case SUBTRACT_VALUE: return SUBTRACT;
 			case MULTIPLY_VALUE: return MULTIPLY;
 			case DIVIDE_VALUE: return DIVIDE;
+			case ELEMENT_WISE_MULTIPLY_VALUE: return ELEMENT_WISE_MULTIPLY;
+			case ELEMENT_WISE_DIVIDE_VALUE: return ELEMENT_WISE_DIVIDE;
 		}
 		return null;
 	}

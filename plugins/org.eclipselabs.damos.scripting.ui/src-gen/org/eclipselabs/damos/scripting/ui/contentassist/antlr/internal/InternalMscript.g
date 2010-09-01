@@ -1207,25 +1207,25 @@ finally {
 
 
 
-// Entry rule entryRuleArrayConcatenationOperator
-entryRuleArrayConcatenationOperator 
+// Entry rule entryRuleMatrixConstructionOperator
+entryRuleMatrixConstructionOperator 
 :
-{ before(grammarAccess.getArrayConcatenationOperatorRule()); }
-	 ruleArrayConcatenationOperator
-{ after(grammarAccess.getArrayConcatenationOperatorRule()); } 
+{ before(grammarAccess.getMatrixConstructionOperatorRule()); }
+	 ruleMatrixConstructionOperator
+{ after(grammarAccess.getMatrixConstructionOperatorRule()); } 
 	 EOF 
 ;
 
-// Rule ArrayConcatenationOperator
-ruleArrayConcatenationOperator
+// Rule MatrixConstructionOperator
+ruleMatrixConstructionOperator
     @init {
 		int stackSize = keepStackSize();
     }
 	:
 (
-{ before(grammarAccess.getArrayConcatenationOperatorAccess().getGroup()); }
-(rule__ArrayConcatenationOperator__Group__0)
-{ after(grammarAccess.getArrayConcatenationOperatorAccess().getGroup()); }
+{ before(grammarAccess.getMatrixConstructionOperatorAccess().getGroup()); }
+(rule__MatrixConstructionOperator__Group__0)
+{ after(grammarAccess.getMatrixConstructionOperatorAccess().getGroup()); }
 )
 
 ;
@@ -1746,9 +1746,9 @@ rule__PrimaryExpression__Alternatives
 )
 
     |(
-{ before(grammarAccess.getPrimaryExpressionAccess().getArrayConcatenationOperatorParserRuleCall_3()); }
-	ruleArrayConcatenationOperator
-{ after(grammarAccess.getPrimaryExpressionAccess().getArrayConcatenationOperatorParserRuleCall_3()); }
+{ before(grammarAccess.getPrimaryExpressionAccess().getMatrixConstructionOperatorParserRuleCall_3()); }
+	ruleMatrixConstructionOperator
+{ after(grammarAccess.getPrimaryExpressionAccess().getMatrixConstructionOperatorParserRuleCall_3()); }
 )
 
     |(
@@ -1997,20 +1997,6 @@ rule__AddSubtractOperator__Alternatives
 (	'-' 
 )
 { after(grammarAccess.getAddSubtractOperatorAccess().getSubtractEnumLiteralDeclaration_1()); }
-)
-
-    |(
-{ before(grammarAccess.getAddSubtractOperatorAccess().getElementWiseAddEnumLiteralDeclaration_2()); }
-(	'.+' 
-)
-{ after(grammarAccess.getAddSubtractOperatorAccess().getElementWiseAddEnumLiteralDeclaration_2()); }
-)
-
-    |(
-{ before(grammarAccess.getAddSubtractOperatorAccess().getElementWiseSubtractEnumLiteralDeclaration_3()); }
-(	'.-' 
-)
-{ after(grammarAccess.getAddSubtractOperatorAccess().getElementWiseSubtractEnumLiteralDeclaration_3()); }
 )
 
 ;
@@ -6380,29 +6366,29 @@ finally {
 
 
 
-rule__ArrayConcatenationOperator__Group__0
+rule__MatrixConstructionOperator__Group__0
     @init {
 		int stackSize = keepStackSize();
     }
 :
-	rule__ArrayConcatenationOperator__Group__0__Impl
-	rule__ArrayConcatenationOperator__Group__1
+	rule__MatrixConstructionOperator__Group__0__Impl
+	rule__MatrixConstructionOperator__Group__1
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ArrayConcatenationOperator__Group__0__Impl
+rule__MatrixConstructionOperator__Group__0__Impl
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getArrayConcatenationOperatorAccess().getLeftSquareBracketKeyword_0()); }
+{ before(grammarAccess.getMatrixConstructionOperatorAccess().getLeftSquareBracketKeyword_0()); }
 
 	'[' 
 
-{ after(grammarAccess.getArrayConcatenationOperatorAccess().getLeftSquareBracketKeyword_0()); }
+{ after(grammarAccess.getMatrixConstructionOperatorAccess().getLeftSquareBracketKeyword_0()); }
 )
 
 ;
@@ -6411,27 +6397,27 @@ finally {
 }
 
 
-rule__ArrayConcatenationOperator__Group__1
+rule__MatrixConstructionOperator__Group__1
     @init {
 		int stackSize = keepStackSize();
     }
 :
-	rule__ArrayConcatenationOperator__Group__1__Impl
-	rule__ArrayConcatenationOperator__Group__2
+	rule__MatrixConstructionOperator__Group__1__Impl
+	rule__MatrixConstructionOperator__Group__2
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ArrayConcatenationOperator__Group__1__Impl
+rule__MatrixConstructionOperator__Group__1__Impl
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getArrayConcatenationOperatorAccess().getExpressionListsAssignment_1()); }
-(rule__ArrayConcatenationOperator__ExpressionListsAssignment_1)
-{ after(grammarAccess.getArrayConcatenationOperatorAccess().getExpressionListsAssignment_1()); }
+{ before(grammarAccess.getMatrixConstructionOperatorAccess().getExpressionListsAssignment_1()); }
+(rule__MatrixConstructionOperator__ExpressionListsAssignment_1)
+{ after(grammarAccess.getMatrixConstructionOperatorAccess().getExpressionListsAssignment_1()); }
 )
 
 ;
@@ -6440,27 +6426,27 @@ finally {
 }
 
 
-rule__ArrayConcatenationOperator__Group__2
+rule__MatrixConstructionOperator__Group__2
     @init {
 		int stackSize = keepStackSize();
     }
 :
-	rule__ArrayConcatenationOperator__Group__2__Impl
-	rule__ArrayConcatenationOperator__Group__3
+	rule__MatrixConstructionOperator__Group__2__Impl
+	rule__MatrixConstructionOperator__Group__3
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ArrayConcatenationOperator__Group__2__Impl
+rule__MatrixConstructionOperator__Group__2__Impl
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getArrayConcatenationOperatorAccess().getGroup_2()); }
-(rule__ArrayConcatenationOperator__Group_2__0)*
-{ after(grammarAccess.getArrayConcatenationOperatorAccess().getGroup_2()); }
+{ before(grammarAccess.getMatrixConstructionOperatorAccess().getGroup_2()); }
+(rule__MatrixConstructionOperator__Group_2__0)*
+{ after(grammarAccess.getMatrixConstructionOperatorAccess().getGroup_2()); }
 )
 
 ;
@@ -6469,28 +6455,28 @@ finally {
 }
 
 
-rule__ArrayConcatenationOperator__Group__3
+rule__MatrixConstructionOperator__Group__3
     @init {
 		int stackSize = keepStackSize();
     }
 :
-	rule__ArrayConcatenationOperator__Group__3__Impl
+	rule__MatrixConstructionOperator__Group__3__Impl
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ArrayConcatenationOperator__Group__3__Impl
+rule__MatrixConstructionOperator__Group__3__Impl
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getArrayConcatenationOperatorAccess().getRightSquareBracketKeyword_3()); }
+{ before(grammarAccess.getMatrixConstructionOperatorAccess().getRightSquareBracketKeyword_3()); }
 
 	']' 
 
-{ after(grammarAccess.getArrayConcatenationOperatorAccess().getRightSquareBracketKeyword_3()); }
+{ after(grammarAccess.getMatrixConstructionOperatorAccess().getRightSquareBracketKeyword_3()); }
 )
 
 ;
@@ -6507,29 +6493,29 @@ finally {
 
 
 
-rule__ArrayConcatenationOperator__Group_2__0
+rule__MatrixConstructionOperator__Group_2__0
     @init {
 		int stackSize = keepStackSize();
     }
 :
-	rule__ArrayConcatenationOperator__Group_2__0__Impl
-	rule__ArrayConcatenationOperator__Group_2__1
+	rule__MatrixConstructionOperator__Group_2__0__Impl
+	rule__MatrixConstructionOperator__Group_2__1
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ArrayConcatenationOperator__Group_2__0__Impl
+rule__MatrixConstructionOperator__Group_2__0__Impl
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getArrayConcatenationOperatorAccess().getSemicolonKeyword_2_0()); }
+{ before(grammarAccess.getMatrixConstructionOperatorAccess().getSemicolonKeyword_2_0()); }
 
 	';' 
 
-{ after(grammarAccess.getArrayConcatenationOperatorAccess().getSemicolonKeyword_2_0()); }
+{ after(grammarAccess.getMatrixConstructionOperatorAccess().getSemicolonKeyword_2_0()); }
 )
 
 ;
@@ -6538,26 +6524,26 @@ finally {
 }
 
 
-rule__ArrayConcatenationOperator__Group_2__1
+rule__MatrixConstructionOperator__Group_2__1
     @init {
 		int stackSize = keepStackSize();
     }
 :
-	rule__ArrayConcatenationOperator__Group_2__1__Impl
+	rule__MatrixConstructionOperator__Group_2__1__Impl
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ArrayConcatenationOperator__Group_2__1__Impl
+rule__MatrixConstructionOperator__Group_2__1__Impl
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getArrayConcatenationOperatorAccess().getExpressionListsAssignment_2_1()); }
-(rule__ArrayConcatenationOperator__ExpressionListsAssignment_2_1)
-{ after(grammarAccess.getArrayConcatenationOperatorAccess().getExpressionListsAssignment_2_1()); }
+{ before(grammarAccess.getMatrixConstructionOperatorAccess().getExpressionListsAssignment_2_1()); }
+(rule__MatrixConstructionOperator__ExpressionListsAssignment_2_1)
+{ after(grammarAccess.getMatrixConstructionOperatorAccess().getExpressionListsAssignment_2_1()); }
 )
 
 ;
@@ -8355,14 +8341,14 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ArrayConcatenationOperator__ExpressionListsAssignment_1
+rule__MatrixConstructionOperator__ExpressionListsAssignment_1
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getArrayConcatenationOperatorAccess().getExpressionListsExpressionListParserRuleCall_1_0()); }
-	ruleExpressionList{ after(grammarAccess.getArrayConcatenationOperatorAccess().getExpressionListsExpressionListParserRuleCall_1_0()); }
+{ before(grammarAccess.getMatrixConstructionOperatorAccess().getExpressionListsExpressionListParserRuleCall_1_0()); }
+	ruleExpressionList{ after(grammarAccess.getMatrixConstructionOperatorAccess().getExpressionListsExpressionListParserRuleCall_1_0()); }
 )
 
 ;
@@ -8370,14 +8356,14 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ArrayConcatenationOperator__ExpressionListsAssignment_2_1
+rule__MatrixConstructionOperator__ExpressionListsAssignment_2_1
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getArrayConcatenationOperatorAccess().getExpressionListsExpressionListParserRuleCall_2_1_0()); }
-	ruleExpressionList{ after(grammarAccess.getArrayConcatenationOperatorAccess().getExpressionListsExpressionListParserRuleCall_2_1_0()); }
+{ before(grammarAccess.getMatrixConstructionOperatorAccess().getExpressionListsExpressionListParserRuleCall_2_1_0()); }
+	ruleExpressionList{ after(grammarAccess.getMatrixConstructionOperatorAccess().getExpressionListsExpressionListParserRuleCall_2_1_0()); }
 )
 
 ;

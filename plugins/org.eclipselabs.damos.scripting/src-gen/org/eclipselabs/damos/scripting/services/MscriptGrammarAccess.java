@@ -869,16 +869,16 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cLiteralParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cSymbolReferenceParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cParenthesizedExpressionParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
-		private final RuleCall cArrayConcatenationOperatorParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		private final RuleCall cMatrixConstructionOperatorParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		private final RuleCall cBeginExpressionParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
 		private final RuleCall cEndExpressionParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
 		
 		//PrimaryExpression returns Expression:
-		//	Literal | SymbolReference | ParenthesizedExpression | ArrayConcatenationOperator | //	ArrayConstructionOperator |
+		//	Literal | SymbolReference | ParenthesizedExpression | MatrixConstructionOperator | //	ArrayConstructionOperator |
 		//	BeginExpression | EndExpression;
 		public ParserRule getRule() { return rule; }
 
-		//Literal | SymbolReference | ParenthesizedExpression | ArrayConcatenationOperator | //	ArrayConstructionOperator |
+		//Literal | SymbolReference | ParenthesizedExpression | MatrixConstructionOperator | //	ArrayConstructionOperator |
 		//BeginExpression | EndExpression
 		public Alternatives getAlternatives() { return cAlternatives; }
 
@@ -891,8 +891,8 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		//ParenthesizedExpression
 		public RuleCall getParenthesizedExpressionParserRuleCall_2() { return cParenthesizedExpressionParserRuleCall_2; }
 
-		//ArrayConcatenationOperator
-		public RuleCall getArrayConcatenationOperatorParserRuleCall_3() { return cArrayConcatenationOperatorParserRuleCall_3; }
+		//MatrixConstructionOperator
+		public RuleCall getMatrixConstructionOperatorParserRuleCall_3() { return cMatrixConstructionOperatorParserRuleCall_3; }
 
 		////	ArrayConstructionOperator |
 		//BeginExpression
@@ -1423,8 +1423,8 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getExpressionExpressionParserRuleCall_0() { return cExpressionExpressionParserRuleCall_0; }
 	}
 
-	public class ArrayConcatenationOperatorElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ArrayConcatenationOperator");
+	public class MatrixConstructionOperatorElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "MatrixConstructionOperator");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cLeftSquareBracketKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cExpressionListsAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -1435,7 +1435,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cExpressionListsExpressionListParserRuleCall_2_1_0 = (RuleCall)cExpressionListsAssignment_2_1.eContents().get(0);
 		private final Keyword cRightSquareBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
-		//ArrayConcatenationOperator:
+		//MatrixConstructionOperator:
 		//	"[" expressionLists+=ExpressionList (";" expressionLists+=ExpressionList)* "]";
 		public ParserRule getRule() { return rule; }
 
@@ -1860,16 +1860,12 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cAddPlusSignKeyword_0_0 = (Keyword)cAddEnumLiteralDeclaration_0.eContents().get(0);
 		private final EnumLiteralDeclaration cSubtractEnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
 		private final Keyword cSubtractHyphenMinusKeyword_1_0 = (Keyword)cSubtractEnumLiteralDeclaration_1.eContents().get(0);
-		private final EnumLiteralDeclaration cElementWiseAddEnumLiteralDeclaration_2 = (EnumLiteralDeclaration)cAlternatives.eContents().get(2);
-		private final Keyword cElementWiseAddFullStopPlusSignKeyword_2_0 = (Keyword)cElementWiseAddEnumLiteralDeclaration_2.eContents().get(0);
-		private final EnumLiteralDeclaration cElementWiseSubtractEnumLiteralDeclaration_3 = (EnumLiteralDeclaration)cAlternatives.eContents().get(3);
-		private final Keyword cElementWiseSubtractFullStopHyphenMinusKeyword_3_0 = (Keyword)cElementWiseSubtractEnumLiteralDeclaration_3.eContents().get(0);
 		
 		//enum AddSubtractOperator:
-		//	Add="+" | Subtract="-" | ElementWiseAdd=".+" | ElementWiseSubtract=".-";
+		//	Add="+" | Subtract="-";
 		public EnumRule getRule() { return rule; }
 
-		//Add="+" | Subtract="-" | ElementWiseAdd=".+" | ElementWiseSubtract=".-"
+		//Add="+" | Subtract="-"
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//Add="+"
@@ -1883,18 +1879,6 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 
 		//"-"
 		public Keyword getSubtractHyphenMinusKeyword_1_0() { return cSubtractHyphenMinusKeyword_1_0; }
-
-		//ElementWiseAdd=".+"
-		public EnumLiteralDeclaration getElementWiseAddEnumLiteralDeclaration_2() { return cElementWiseAddEnumLiteralDeclaration_2; }
-
-		//".+"
-		public Keyword getElementWiseAddFullStopPlusSignKeyword_2_0() { return cElementWiseAddFullStopPlusSignKeyword_2_0; }
-
-		//ElementWiseSubtract=".-"
-		public EnumLiteralDeclaration getElementWiseSubtractEnumLiteralDeclaration_3() { return cElementWiseSubtractEnumLiteralDeclaration_3; }
-
-		//".-"
-		public Keyword getElementWiseSubtractFullStopHyphenMinusKeyword_3_0() { return cElementWiseSubtractFullStopHyphenMinusKeyword_3_0; }
 	}
 
 	public class MultiplyDivideOperatorElements extends AbstractEnumRuleElementFinder {
@@ -2044,7 +2028,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	private SubscriptElements pSubscript;
 	private ColonSubscriptElements pColonSubscript;
 	private ExpressionSubscriptElements pExpressionSubscript;
-	private ArrayConcatenationOperatorElements pArrayConcatenationOperator;
+	private MatrixConstructionOperatorElements pMatrixConstructionOperator;
 	private ExpressionListElements pExpressionList;
 	private ParenthesizedExpressionElements pParenthesizedExpression;
 	private BeginExpressionElements pBeginExpression;
@@ -2317,7 +2301,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//enum AddSubtractOperator:
-	//	Add="+" | Subtract="-" | ElementWiseAdd=".+" | ElementWiseSubtract=".-";
+	//	Add="+" | Subtract="-";
 	public AddSubtractOperatorElements getAddSubtractOperatorAccess() {
 		return (unknownRuleAddSubtractOperator != null) ? unknownRuleAddSubtractOperator : (unknownRuleAddSubtractOperator = new AddSubtractOperatorElements());
 	}
@@ -2378,7 +2362,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//PrimaryExpression returns Expression:
-	//	Literal | SymbolReference | ParenthesizedExpression | ArrayConcatenationOperator | //	ArrayConstructionOperator |
+	//	Literal | SymbolReference | ParenthesizedExpression | MatrixConstructionOperator | //	ArrayConstructionOperator |
 	//	BeginExpression | EndExpression;
 	public PrimaryExpressionElements getPrimaryExpressionAccess() {
 		return (pPrimaryExpression != null) ? pPrimaryExpression : (pPrimaryExpression = new PrimaryExpressionElements());
@@ -2560,14 +2544,14 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		return getExpressionSubscriptAccess().getRule();
 	}
 
-	//ArrayConcatenationOperator:
+	//MatrixConstructionOperator:
 	//	"[" expressionLists+=ExpressionList (";" expressionLists+=ExpressionList)* "]";
-	public ArrayConcatenationOperatorElements getArrayConcatenationOperatorAccess() {
-		return (pArrayConcatenationOperator != null) ? pArrayConcatenationOperator : (pArrayConcatenationOperator = new ArrayConcatenationOperatorElements());
+	public MatrixConstructionOperatorElements getMatrixConstructionOperatorAccess() {
+		return (pMatrixConstructionOperator != null) ? pMatrixConstructionOperator : (pMatrixConstructionOperator = new MatrixConstructionOperatorElements());
 	}
 	
-	public ParserRule getArrayConcatenationOperatorRule() {
-		return getArrayConcatenationOperatorAccess().getRule();
+	public ParserRule getMatrixConstructionOperatorRule() {
+		return getMatrixConstructionOperatorAccess().getRule();
 	}
 
 	//ExpressionList:

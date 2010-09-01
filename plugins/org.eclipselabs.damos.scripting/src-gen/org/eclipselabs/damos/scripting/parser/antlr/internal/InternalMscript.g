@@ -1819,11 +1819,11 @@ rulePrimaryExpression returns [EObject current=null]
 
     |
     { 
-        currentNode=createCompositeNode(grammarAccess.getPrimaryExpressionAccess().getArrayConcatenationOperatorParserRuleCall_3(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getPrimaryExpressionAccess().getMatrixConstructionOperatorParserRuleCall_3(), currentNode); 
     }
-    this_ArrayConcatenationOperator_3=ruleArrayConcatenationOperator
+    this_MatrixConstructionOperator_3=ruleMatrixConstructionOperator
     { 
-        $current = $this_ArrayConcatenationOperator_3.current; 
+        $current = $this_MatrixConstructionOperator_3.current; 
         currentNode = currentNode.getParent();
     }
 
@@ -2949,17 +2949,17 @@ ruleExpressionSubscript returns [EObject current=null]
 
 
 
-// Entry rule entryRuleArrayConcatenationOperator
-entryRuleArrayConcatenationOperator returns [EObject current=null] 
+// Entry rule entryRuleMatrixConstructionOperator
+entryRuleMatrixConstructionOperator returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getArrayConcatenationOperatorRule(), currentNode); }
-	 iv_ruleArrayConcatenationOperator=ruleArrayConcatenationOperator 
-	 { $current=$iv_ruleArrayConcatenationOperator.current; } 
+	{ currentNode = createCompositeNode(grammarAccess.getMatrixConstructionOperatorRule(), currentNode); }
+	 iv_ruleMatrixConstructionOperator=ruleMatrixConstructionOperator 
+	 { $current=$iv_ruleMatrixConstructionOperator.current; } 
 	 EOF 
 ;
 
-// Rule ArrayConcatenationOperator
-ruleArrayConcatenationOperator returns [EObject current=null] 
+// Rule MatrixConstructionOperator
+ruleMatrixConstructionOperator returns [EObject current=null] 
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
@@ -2967,16 +2967,16 @@ ruleArrayConcatenationOperator returns [EObject current=null]
     }:
 (	'[' 
     {
-        createLeafNode(grammarAccess.getArrayConcatenationOperatorAccess().getLeftSquareBracketKeyword_0(), null); 
+        createLeafNode(grammarAccess.getMatrixConstructionOperatorAccess().getLeftSquareBracketKeyword_0(), null); 
     }
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getArrayConcatenationOperatorAccess().getExpressionListsExpressionListParserRuleCall_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getMatrixConstructionOperatorAccess().getExpressionListsExpressionListParserRuleCall_1_0(), currentNode); 
 	    }
 		lv_expressionLists_1_0=ruleExpressionList		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getArrayConcatenationOperatorRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getMatrixConstructionOperatorRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        try {
@@ -2995,16 +2995,16 @@ ruleArrayConcatenationOperator returns [EObject current=null]
 )
 )(	';' 
     {
-        createLeafNode(grammarAccess.getArrayConcatenationOperatorAccess().getSemicolonKeyword_2_0(), null); 
+        createLeafNode(grammarAccess.getMatrixConstructionOperatorAccess().getSemicolonKeyword_2_0(), null); 
     }
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getArrayConcatenationOperatorAccess().getExpressionListsExpressionListParserRuleCall_2_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getMatrixConstructionOperatorAccess().getExpressionListsExpressionListParserRuleCall_2_1_0(), currentNode); 
 	    }
 		lv_expressionLists_3_0=ruleExpressionList		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getArrayConcatenationOperatorRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getMatrixConstructionOperatorRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        try {
@@ -3023,7 +3023,7 @@ ruleArrayConcatenationOperator returns [EObject current=null]
 )
 ))*	']' 
     {
-        createLeafNode(grammarAccess.getArrayConcatenationOperatorAccess().getRightSquareBracketKeyword_3(), null); 
+        createLeafNode(grammarAccess.getMatrixConstructionOperatorAccess().getRightSquareBracketKeyword_3(), null); 
     }
 )
 ;
@@ -3725,18 +3725,6 @@ ruleAddSubtractOperator returns [Enumerator current=null]
 	{
         $current = grammarAccess.getAddSubtractOperatorAccess().getSubtractEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
         createLeafNode(grammarAccess.getAddSubtractOperatorAccess().getSubtractEnumLiteralDeclaration_1(), null); 
-    }
-)
-    |(	'.+' 
-	{
-        $current = grammarAccess.getAddSubtractOperatorAccess().getElementWiseAddEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
-        createLeafNode(grammarAccess.getAddSubtractOperatorAccess().getElementWiseAddEnumLiteralDeclaration_2(), null); 
-    }
-)
-    |(	'.-' 
-	{
-        $current = grammarAccess.getAddSubtractOperatorAccess().getElementWiseSubtractEnumLiteralDeclaration_3().getEnumLiteral().getInstance();
-        createLeafNode(grammarAccess.getAddSubtractOperatorAccess().getElementWiseSubtractEnumLiteralDeclaration_3(), null); 
     }
 ));
 

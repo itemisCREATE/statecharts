@@ -20,8 +20,6 @@
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="Mscript.ecore#//AddSubtractOperator">
       <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//AddSubtractOperator/Add"/>
       <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//AddSubtractOperator/Subtract"/>
-      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//AddSubtractOperator/ElementWiseAdd"/>
-      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//AddSubtractOperator/ElementWiseSubtract"/>
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="Mscript.ecore#//MultiplyDivideOperator">
       <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//MultiplyDivideOperator/Multiply"/>
@@ -119,8 +117,8 @@
     <genClasses ecoreClass="Mscript.ecore#//ExpressionSubscript">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ExpressionSubscript/expression"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//ArrayConcatenationOperator">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ArrayConcatenationOperator/expressionLists"/>
+    <genClasses ecoreClass="Mscript.ecore#//MatrixConstructionOperator">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//MatrixConstructionOperator/expressionLists"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//ExpressionList">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ExpressionList/expressions"/>

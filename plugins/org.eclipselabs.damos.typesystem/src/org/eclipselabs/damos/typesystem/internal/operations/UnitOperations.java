@@ -6,7 +6,11 @@
  */
 package org.eclipselabs.damos.typesystem.internal.operations;
 
+import java.util.List;
+
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.EcoreUtil.EqualityHelper;
 import org.eclipselabs.damos.typesystem.Unit;
 import org.eclipselabs.damos.typesystem.UnitFactor;
 import org.eclipselabs.damos.typesystem.UnitSymbol;
@@ -23,6 +27,7 @@ import org.eclipselabs.damos.typesystem.UnitSymbol;
  *   <li>{@link org.eclipselabs.damos.typesystem.Unit#multiply(org.eclipselabs.damos.typesystem.Unit) <em>Multiply</em>}</li>
  *   <li>{@link org.eclipselabs.damos.typesystem.Unit#divide(org.eclipselabs.damos.typesystem.Unit) <em>Divide</em>}</li>
  *   <li>{@link org.eclipselabs.damos.typesystem.Unit#power(int) <em>Power</em>}</li>
+ *   <li>{@link org.eclipselabs.damos.typesystem.Unit#isSameAs(org.eclipselabs.damos.typesystem.Unit, boolean) <em>Is Same As</em>}</li>
  * </ul>
  * </p>
  *
@@ -94,6 +99,21 @@ public class UnitOperations {
 			factor.setExponent(factor.getExponent() * exponent);
 		}
 		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@SuppressWarnings("unchecked")
+	public static  boolean isSameAs(Unit unit, Unit other, boolean ignoreScale) {
+		if (ignoreScale) {
+			return new EqualityHelper().equals(
+					(List<EObject>) (List<?>) unit.getFactors(),
+					(List<EObject>) (List<?>) other.getFactors());
+		}
+		return EcoreUtil.equals(unit, other); 
 	}
 
 } // UnitOperations

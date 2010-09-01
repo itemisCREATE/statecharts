@@ -975,14 +975,14 @@ public interface MscriptPackage extends EPackage
   int EXPRESSION_SUBSCRIPT_FEATURE_COUNT = SUBSCRIPT_FEATURE_COUNT + 1;
 
   /**
-   * The meta object id for the '{@link org.eclipselabs.damos.scripting.mscript.impl.ArrayConcatenationOperatorImpl <em>Array Concatenation Operator</em>}' class.
+   * The meta object id for the '{@link org.eclipselabs.damos.scripting.mscript.impl.MatrixConstructionOperatorImpl <em>Matrix Construction Operator</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.eclipselabs.damos.scripting.mscript.impl.ArrayConcatenationOperatorImpl
-   * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getArrayConcatenationOperator()
+   * @see org.eclipselabs.damos.scripting.mscript.impl.MatrixConstructionOperatorImpl
+   * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getMatrixConstructionOperator()
    * @generated
    */
-  int ARRAY_CONCATENATION_OPERATOR = 32;
+  int MATRIX_CONSTRUCTION_OPERATOR = 32;
 
   /**
    * The feature id for the '<em><b>Expression Lists</b></em>' containment reference list.
@@ -991,16 +991,16 @@ public interface MscriptPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ARRAY_CONCATENATION_OPERATOR__EXPRESSION_LISTS = EXPRESSION_FEATURE_COUNT + 0;
+  int MATRIX_CONSTRUCTION_OPERATOR__EXPRESSION_LISTS = EXPRESSION_FEATURE_COUNT + 0;
 
   /**
-   * The number of structural features of the '<em>Array Concatenation Operator</em>' class.
+   * The number of structural features of the '<em>Matrix Construction Operator</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ARRAY_CONCATENATION_OPERATOR_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
+  int MATRIX_CONSTRUCTION_OPERATOR_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.damos.scripting.mscript.impl.ExpressionListImpl <em>Expression List</em>}' class.
@@ -2271,25 +2271,25 @@ public interface MscriptPackage extends EPackage
   EReference getExpressionSubscript_Expression();
 
   /**
-   * Returns the meta object for class '{@link org.eclipselabs.damos.scripting.mscript.ArrayConcatenationOperator <em>Array Concatenation Operator</em>}'.
+   * Returns the meta object for class '{@link org.eclipselabs.damos.scripting.mscript.MatrixConstructionOperator <em>Matrix Construction Operator</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Array Concatenation Operator</em>'.
-   * @see org.eclipselabs.damos.scripting.mscript.ArrayConcatenationOperator
+   * @return the meta object for class '<em>Matrix Construction Operator</em>'.
+   * @see org.eclipselabs.damos.scripting.mscript.MatrixConstructionOperator
    * @generated
    */
-  EClass getArrayConcatenationOperator();
+  EClass getMatrixConstructionOperator();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipselabs.damos.scripting.mscript.ArrayConcatenationOperator#getExpressionLists <em>Expression Lists</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipselabs.damos.scripting.mscript.MatrixConstructionOperator#getExpressionLists <em>Expression Lists</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference list '<em>Expression Lists</em>'.
-   * @see org.eclipselabs.damos.scripting.mscript.ArrayConcatenationOperator#getExpressionLists()
-   * @see #getArrayConcatenationOperator()
+   * @see org.eclipselabs.damos.scripting.mscript.MatrixConstructionOperator#getExpressionLists()
+   * @see #getMatrixConstructionOperator()
    * @generated
    */
-  EReference getArrayConcatenationOperator_ExpressionLists();
+  EReference getMatrixConstructionOperator_ExpressionLists();
 
   /**
    * Returns the meta object for class '{@link org.eclipselabs.damos.scripting.mscript.ExpressionList <em>Expression List</em>}'.
@@ -3380,14 +3380,14 @@ public interface MscriptPackage extends EPackage
     EReference EXPRESSION_SUBSCRIPT__EXPRESSION = eINSTANCE.getExpressionSubscript_Expression();
 
     /**
-     * The meta object literal for the '{@link org.eclipselabs.damos.scripting.mscript.impl.ArrayConcatenationOperatorImpl <em>Array Concatenation Operator</em>}' class.
+     * The meta object literal for the '{@link org.eclipselabs.damos.scripting.mscript.impl.MatrixConstructionOperatorImpl <em>Matrix Construction Operator</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.eclipselabs.damos.scripting.mscript.impl.ArrayConcatenationOperatorImpl
-     * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getArrayConcatenationOperator()
+     * @see org.eclipselabs.damos.scripting.mscript.impl.MatrixConstructionOperatorImpl
+     * @see org.eclipselabs.damos.scripting.mscript.impl.MscriptPackageImpl#getMatrixConstructionOperator()
      * @generated
      */
-    EClass ARRAY_CONCATENATION_OPERATOR = eINSTANCE.getArrayConcatenationOperator();
+    EClass MATRIX_CONSTRUCTION_OPERATOR = eINSTANCE.getMatrixConstructionOperator();
 
     /**
      * The meta object literal for the '<em><b>Expression Lists</b></em>' containment reference list feature.
@@ -3395,7 +3395,7 @@ public interface MscriptPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference ARRAY_CONCATENATION_OPERATOR__EXPRESSION_LISTS = eINSTANCE.getArrayConcatenationOperator_ExpressionLists();
+    EReference MATRIX_CONSTRUCTION_OPERATOR__EXPRESSION_LISTS = eINSTANCE.getMatrixConstructionOperator_ExpressionLists();
 
     /**
      * The meta object literal for the '{@link org.eclipselabs.damos.scripting.mscript.impl.ExpressionListImpl <em>Expression List</em>}' class.

@@ -6,26 +6,15 @@
  */
 package org.eclipselabs.damos.typesystem.impl;
 
-import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.eclipselabs.damos.typesystem.DataType;
+import org.eclipselabs.damos.typesystem.NumericalType;
+import org.eclipselabs.damos.typesystem.OperatorKind;
 import org.eclipselabs.damos.typesystem.TensorType;
 import org.eclipselabs.damos.typesystem.TypeSystemPackage;
-import org.eclipselabs.damos.typesystem.Unit;
-
 import org.eclipselabs.damos.typesystem.internal.operations.TensorTypeOperations;
 
 /**
@@ -35,7 +24,8 @@ import org.eclipselabs.damos.typesystem.internal.operations.TensorTypeOperations
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.damos.typesystem.impl.TensorTypeImpl#getUnits <em>Units</em>}</li>
+ *   <li>{@link org.eclipselabs.damos.typesystem.impl.TensorTypeImpl#isVector <em>Vector</em>}</li>
+ *   <li>{@link org.eclipselabs.damos.typesystem.impl.TensorTypeImpl#isMatrix <em>Matrix</em>}</li>
  *   <li>{@link org.eclipselabs.damos.typesystem.impl.TensorTypeImpl#getElementType <em>Element Type</em>}</li>
  * </ul>
  * </p>
@@ -44,14 +34,23 @@ import org.eclipselabs.damos.typesystem.internal.operations.TensorTypeOperations
  */
 public class TensorTypeImpl extends ArrayTypeImpl implements TensorType {
 	/**
-	 * The cached value of the '{@link #getUnits() <em>Units</em>}' containment reference list.
+	 * The default value of the '{@link #isVector() <em>Vector</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getUnits()
+	 * @see #isVector()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Unit> units;
+	protected static final boolean VECTOR_EDEFAULT = false;
+	/**
+	 * The default value of the '{@link #isMatrix() <em>Matrix</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isMatrix()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean MATRIX_EDEFAULT = false;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -75,40 +74,31 @@ public class TensorTypeImpl extends ArrayTypeImpl implements TensorType {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-	public EList<Unit> getUnits() {
-		if (units == null) {
-			units = new EObjectContainmentEList.Unsettable<Unit>(Unit.class, this, TypeSystemPackage.TENSOR_TYPE__UNITS);
-		}
-		return units;
+	public boolean isVector() {
+		return getDimensions().size() == 1;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-	public void unsetUnits() {
-		if (units != null) ((InternalEList.Unsettable<?>)units).unset();
+	public boolean isMatrix() {
+		return getDimensions().size() == 2;
 	}
 
+	public NumericalType getElementType() {
+		return (NumericalType) getElementTypeGen();
+	}
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isSetUnits() {
-		return units != null && ((InternalEList.Unsettable<?>)units).isSet();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public DataType getElementType() {
+	public DataType getElementTypeGen() {
 		if (elementType != null && elementType.eIsProxy()) {
 			InternalEObject oldElementType = (InternalEObject)elementType;
 			elementType = (DataType)eResolveProxy(oldElementType);
@@ -130,13 +120,20 @@ public class TensorTypeImpl extends ArrayTypeImpl implements TensorType {
 		return elementType;
 	}
 
+	public void setElementType(DataType newElementType) {
+		if (!(newElementType instanceof NumericalType)) {
+			throw new IllegalArgumentException("New element type must not be NumericalType");
+		}
+		setElementTypeGen(newElementType);
+	}
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public void setElementType(DataType newElementType) {
+	public void setElementTypeGen(DataType newElementType) {
 		DataType oldElementType = elementType;
 		elementType = newElementType;
 		if (eNotificationRequired())
@@ -157,67 +154,9 @@ public class TensorTypeImpl extends ArrayTypeImpl implements TensorType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Unit getUnit(int index) {
-		return TensorTypeOperations.getUnit(this, index);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Unit getUnit(int row, int column) {
-		return TensorTypeOperations.getUnit(this, row, column);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Unit getUnit(EList<Integer> indices) {
-		return TensorTypeOperations.getUnit(this, indices);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setUnit(int index, Unit unit) {
-		TensorTypeOperations.setUnit(this, index, unit);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setUnit(int row, int column, Unit unit) {
-		TensorTypeOperations.setUnit(this, row, column, unit);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setUnit(EList<Integer> indices, Unit unit) {
-		TensorTypeOperations.setUnit(this, indices, unit);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case TypeSystemPackage.TENSOR_TYPE__UNITS:
-				return ((InternalEList<?>)getUnits()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
+	public DataType evaluate(OperatorKind operator, DataType other) {
+		return TensorTypeOperations.evaluate(this, operator, other);
 	}
 
 	/**
@@ -228,42 +167,12 @@ public class TensorTypeImpl extends ArrayTypeImpl implements TensorType {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TypeSystemPackage.TENSOR_TYPE__UNITS:
-				return getUnits();
+			case TypeSystemPackage.TENSOR_TYPE__VECTOR:
+				return isVector();
+			case TypeSystemPackage.TENSOR_TYPE__MATRIX:
+				return isMatrix();
 		}
 		return super.eGet(featureID, resolve, coreType);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case TypeSystemPackage.TENSOR_TYPE__UNITS:
-				getUnits().clear();
-				getUnits().addAll((Collection<? extends Unit>)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void eUnset(int featureID) {
-		switch (featureID) {
-			case TypeSystemPackage.TENSOR_TYPE__UNITS:
-				unsetUnits();
-				return;
-		}
-		super.eUnset(featureID);
 	}
 
 	/**
@@ -274,8 +183,10 @@ public class TensorTypeImpl extends ArrayTypeImpl implements TensorType {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TypeSystemPackage.TENSOR_TYPE__UNITS:
-				return isSetUnits();
+			case TypeSystemPackage.TENSOR_TYPE__VECTOR:
+				return isVector() != VECTOR_EDEFAULT;
+			case TypeSystemPackage.TENSOR_TYPE__MATRIX:
+				return isMatrix() != MATRIX_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}

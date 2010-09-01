@@ -54,12 +54,6 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="multidimensional" ordered="false"
         lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         changeable="false" volatile="true" transient="true" derived="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="vector" ordered="false"
-        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        changeable="false" volatile="true" transient="true" derived="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="matrix" ordered="false"
-        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        changeable="false" volatile="true" transient="true" derived="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DataType" abstract="true" eSuperTypes="#//Type">
     <eOperations name="evaluate" ordered="false" lowerBound="1" eType="#//DataType">
@@ -78,6 +72,8 @@
     <eLiterals name="Subtract" value="1"/>
     <eLiterals name="Multiply" value="2"/>
     <eLiterals name="Divide" value="3"/>
+    <eLiterals name="ElementWiseMultiply" value="4"/>
+    <eLiterals name="ElementWiseDivide" value="5"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ArrayDimension">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="fromIndex" ordered="false"
@@ -116,6 +112,10 @@
     </eOperations>
     <eOperations name="power" ordered="false" lowerBound="1" eType="#//Unit">
       <eParameters name="exponent" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="isSameAs" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="other" ordered="false" lowerBound="1" eType="#//Unit"/>
+      <eParameters name="ignoreScale" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="factors" ordered="false"
         upperBound="-1" eType="#//UnitFactor" containment="true"/>
@@ -181,35 +181,22 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TensorType" eSuperTypes="#//ArrayType">
     <eAnnotations source="duplicates">
+      <contents xsi:type="ecore:EOperation" name="evaluate" ordered="false" lowerBound="1"
+          eType="#//DataType">
+        <eAnnotations source="redefines" references="#//DataType/evaluate"/>
+        <eParameters name="operator" ordered="false" lowerBound="1" eType="#//OperatorKind"/>
+        <eParameters name="other" ordered="false" eType="#//DataType"/>
+      </contents>
       <contents xsi:type="ecore:EReference" name="elementType" ordered="false" lowerBound="1"
           eType="#//DataType">
         <eAnnotations source="redefines" references="#//ArrayType/elementType"/>
       </contents>
     </eAnnotations>
-    <eOperations name="getUnit" ordered="false" lowerBound="1" eType="#//Unit">
-      <eParameters name="index" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    </eOperations>
-    <eOperations name="getUnit" ordered="false" lowerBound="1" eType="#//Unit">
-      <eParameters name="row" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="column" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    </eOperations>
-    <eOperations name="getUnit" ordered="false" lowerBound="1" eType="#//Unit">
-      <eParameters name="indices" ordered="false" lowerBound="1" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    </eOperations>
-    <eOperations name="setUnit" ordered="false" lowerBound="1">
-      <eParameters name="index" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="unit" ordered="false" lowerBound="1" eType="#//Unit"/>
-    </eOperations>
-    <eOperations name="setUnit" ordered="false" lowerBound="1">
-      <eParameters name="row" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="column" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="unit" ordered="false" lowerBound="1" eType="#//Unit"/>
-    </eOperations>
-    <eOperations name="setUnit" ordered="false" lowerBound="1">
-      <eParameters name="indices" ordered="false" lowerBound="1" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="unit" ordered="false" lowerBound="1" eType="#//Unit"/>
-    </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="units" ordered="false"
-        upperBound="-1" eType="#//Unit" unsettable="true" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="vector" ordered="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        changeable="false" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="matrix" ordered="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        changeable="false" volatile="true" transient="true" derived="true"/>
   </eClassifiers>
 </ecore:EPackage>

@@ -23,8 +23,6 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.eclipselabs.damos.typesystem.ArrayType#getColumnSize <em>Column Size</em>}</li>
  *   <li>{@link org.eclipselabs.damos.typesystem.ArrayType#isDimensional <em>Dimensional</em>}</li>
  *   <li>{@link org.eclipselabs.damos.typesystem.ArrayType#isMultidimensional <em>Multidimensional</em>}</li>
- *   <li>{@link org.eclipselabs.damos.typesystem.ArrayType#isVector <em>Vector</em>}</li>
- *   <li>{@link org.eclipselabs.damos.typesystem.ArrayType#isMatrix <em>Matrix</em>}</li>
  * </ul>
  * </p>
  *
@@ -149,35 +147,5 @@ public interface ArrayType extends DataType {
 	 * @generated
 	 */
 	boolean isMultidimensional();
-
-	/**
-	 * Returns the value of the '<em><b>Vector</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Vector</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Vector</em>' attribute.
-	 * @see org.eclipselabs.damos.typesystem.TypeSystemPackage#getArrayType_Vector()
-	 * @model required="true" transient="true" changeable="false" volatile="true" derived="true" ordered="false"
-	 * @generated
-	 */
-	boolean isVector();
-
-	/**
-	 * Returns the value of the '<em><b>Matrix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Matrix</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Matrix</em>' attribute.
-	 * @see org.eclipselabs.damos.typesystem.TypeSystemPackage#getArrayType_Matrix()
-	 * @model required="true" transient="true" changeable="false" volatile="true" derived="true" ordered="false"
-	 * @generated
-	 */
-	boolean isMatrix();
 
 } // ArrayType

@@ -314,13 +314,13 @@ public interface MscriptFactory extends EFactory
   ExpressionSubscript createExpressionSubscript();
 
   /**
-   * Returns a new object of class '<em>Array Concatenation Operator</em>'.
+   * Returns a new object of class '<em>Matrix Construction Operator</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Array Concatenation Operator</em>'.
+   * @return a new object of class '<em>Matrix Construction Operator</em>'.
    * @generated
    */
-  ArrayConcatenationOperator createArrayConcatenationOperator();
+  MatrixConstructionOperator createMatrixConstructionOperator();
 
   /**
    * Returns a new object of class '<em>Expression List</em>'.

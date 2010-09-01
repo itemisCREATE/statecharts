@@ -6,10 +6,14 @@
  */
 package org.eclipselabs.damos.typesystem.internal.operations;
 
-import org.eclipse.emf.common.util.BasicEList;
-import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipselabs.damos.typesystem.DataType;
+import org.eclipselabs.damos.typesystem.InvalidDataType;
+import org.eclipselabs.damos.typesystem.NumericalType;
+import org.eclipselabs.damos.typesystem.OperatorKind;
 import org.eclipselabs.damos.typesystem.TensorType;
-import org.eclipselabs.damos.typesystem.Unit;
+import org.eclipselabs.damos.typesystem.TypeSystemFactory;
+import org.eclipselabs.damos.typesystem.util.TypeSystemUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -19,12 +23,7 @@ import org.eclipselabs.damos.typesystem.Unit;
  * <p>
  * The following operations are supported:
  * <ul>
- *   <li>{@link org.eclipselabs.damos.typesystem.TensorType#getUnit(int) <em>Get Unit</em>}</li>
- *   <li>{@link org.eclipselabs.damos.typesystem.TensorType#getUnit(int, int) <em>Get Unit</em>}</li>
- *   <li>{@link org.eclipselabs.damos.typesystem.TensorType#getUnit(org.eclipse.emf.common.util.EList) <em>Get Unit</em>}</li>
- *   <li>{@link org.eclipselabs.damos.typesystem.TensorType#setUnit(int, org.eclipselabs.damos.typesystem.Unit) <em>Set Unit</em>}</li>
- *   <li>{@link org.eclipselabs.damos.typesystem.TensorType#setUnit(int, int, org.eclipselabs.damos.typesystem.Unit) <em>Set Unit</em>}</li>
- *   <li>{@link org.eclipselabs.damos.typesystem.TensorType#setUnit(org.eclipse.emf.common.util.EList, org.eclipselabs.damos.typesystem.Unit) <em>Set Unit</em>}</li>
+ *   <li>{@link org.eclipselabs.damos.typesystem.TensorType#evaluate(org.eclipselabs.damos.typesystem.OperatorKind, org.eclipselabs.damos.typesystem.DataType) <em>Evaluate</em>}</li>
  * </ul>
  * </p>
  *
@@ -45,71 +44,90 @@ public class TensorTypeOperations extends DataTypeOperations {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public static  Unit getUnit(TensorType tensorType, int index) {
-		EList<Integer> indices = new BasicEList<Integer>(1);
-		indices.add(index);
-		return getUnit(tensorType, indices);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public static  Unit getUnit(TensorType tensorType, int row, int column) {
-		EList<Integer> indices = new BasicEList<Integer>(2);
-		indices.add(row);
-		indices.add(column);
-		return getUnit(tensorType, indices);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public static  Unit getUnit(TensorType tensorType, EList<Integer> indices) {
-		return tensorType.getUnits().get(toLinearUnitIndex(tensorType, indices));
-	}
-	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public static  void setUnit(TensorType tensorType, int index, Unit unit) {
-		EList<Integer> indices = new BasicEList<Integer>(1);
-		indices.add(index);
-		setUnit(tensorType, indices, unit);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public static  void setUnit(TensorType tensorType, int row, int column, Unit unit) {
-		EList<Integer> indices = new BasicEList<Integer>(2);
-		indices.add(row);
-		indices.add(column);
-		setUnit(tensorType, indices, unit);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public static  void setUnit(TensorType tensorType, EList<Integer> indices, Unit unit) {
-		tensorType.getUnits().set(toLinearUnitIndex(tensorType, indices), unit);
-	}
-	
-	private static int toLinearUnitIndex(TensorType tensorType, EList<Integer> indices) {
-		int index = indices.get(0);
-		for (int i = 1; i < indices.size(); ++i) {
-			index = index * tensorType.getDimensions().get(i).getSize() + indices.get(i);
+	public static  DataType evaluate(TensorType tensorType, OperatorKind operator, DataType other) {
+		switch (operator) {
+		case ADD:
+			return evaluateElementWise(tensorType, operator, other);
+		case SUBTRACT:
+			return evaluateElementWise(tensorType, operator, other);
+		case MULTIPLY:
+			return evaluateMultiply(tensorType, other);
+		case DIVIDE:
+			return evaluateDivide(tensorType, other);
+		case ELEMENT_WISE_MULTIPLY:
+			return evaluateElementWise(tensorType, operator, other);
+		case ELEMENT_WISE_DIVIDE:
+			return evaluateElementWise(tensorType, operator, other);
 		}
-		return index;
+		return TypeSystemFactory.eINSTANCE.createInvalidDataType();
+	}
+	
+	private static DataType evaluateElementWise(TensorType tensorType, OperatorKind operator, DataType other) {
+		if (other instanceof NumericalType) {
+			if (operator == OperatorKind.ELEMENT_WISE_MULTIPLY || operator == OperatorKind.ELEMENT_WISE_DIVIDE) {
+				return evaluateElementWiseScalar(tensorType, operator, (NumericalType) other);
+			}
+		} else if (other instanceof TensorType) {
+			return evaluateElementWiseTensor(tensorType, operator, (TensorType) other);
+		}
+		return TypeSystemFactory.eINSTANCE.createInvalidDataType();
+	}
+	
+	private static DataType evaluateElementWiseScalar(TensorType tensorType, OperatorKind operator, NumericalType other) {
+		DataType elementType = tensorType.getElementType().evaluate(operator, other);
+		if (elementType instanceof InvalidDataType) {
+			return elementType;
+		}
+		TensorType result = (TensorType) EcoreUtil.copy(tensorType);
+		result.setElementType(elementType);
+		return result;
+	}
+
+	private static DataType evaluateElementWiseTensor(TensorType tensorType, OperatorKind operator, TensorType otherTensorType) {
+		if (TypeSystemUtil.equalArrayDimensions(tensorType, otherTensorType)) {
+			DataType elementType = tensorType.getElementType().evaluate(operator, otherTensorType.getElementType());
+			if (elementType instanceof InvalidDataType) {
+				return elementType;
+			}
+			TensorType result = (TensorType) EcoreUtil.copy(tensorType);
+			result.setElementType(elementType);
+			return result;
+		}
+		return TypeSystemFactory.eINSTANCE.createInvalidDataType();
+	}
+	
+	private static DataType evaluateMultiply(TensorType tensorType, DataType other) {
+		if (other instanceof NumericalType) {
+			return evaluateElementWiseScalar(tensorType, OperatorKind.MULTIPLY, (NumericalType) other);
+		}
+		if (!(other instanceof TensorType)) {
+			return TypeSystemFactory.eINSTANCE.createInvalidDataType();
+		}
+		TensorType otherTensorType = (TensorType) other;
+		if (!tensorType.isMatrix() || !otherTensorType.isMatrix()) {
+			return TypeSystemFactory.eINSTANCE.createInvalidDataType();
+		}
+		if (tensorType.getColumnSize() != otherTensorType.getRowSize()) {
+			return TypeSystemFactory.eINSTANCE.createInvalidDataType();
+		}
+		
+		DataType elementType = tensorType.getElementType().evaluate(OperatorKind.MULTIPLY, otherTensorType.getElementType());
+		if (elementType instanceof InvalidDataType) {
+			return elementType;
+		}
+
+		return TypeSystemUtil.createArrayType(
+				elementType,
+				tensorType.getRowSize(),
+				otherTensorType.getColumnSize());
+	}
+
+	private static DataType evaluateDivide(TensorType tensorType, DataType other) {
+		if (other instanceof NumericalType) {
+			return evaluateElementWiseScalar(tensorType, OperatorKind.DIVIDE, (NumericalType) other);
+		}
+		// TODO
+		return TypeSystemFactory.eINSTANCE.createInvalidDataType();
 	}
 
 } // TensorTypeOperations
