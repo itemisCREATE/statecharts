@@ -58,6 +58,8 @@ public class TensorTypeOperations extends DataTypeOperations {
 			return evaluateElementWise(tensorType, operator, other);
 		case ELEMENT_WISE_DIVIDE:
 			return evaluateElementWise(tensorType, operator, other);
+		case UNARY_MINUS:
+			return (TensorType) EcoreUtil.copy(tensorType);
 		}
 		return TypeSystemFactory.eINSTANCE.createInvalidDataType();
 	}

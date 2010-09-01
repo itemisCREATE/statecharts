@@ -70,7 +70,15 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	ELEMENT_WISE_DIVIDE(5, "ElementWiseDivide", "ElementWiseDivide");
+	ELEMENT_WISE_DIVIDE(5, "ElementWiseDivide", "ElementWiseDivide"), /**
+	 * The '<em><b>Unary Minus</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #UNARY_MINUS_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	UNARY_MINUS(6, "UnaryMinus", "UnaryMinus");
 
 	/**
 	 * The '<em><b>Add</b></em>' literal value.
@@ -163,6 +171,21 @@ public enum OperatorKind implements Enumerator {
 	public static final int ELEMENT_WISE_DIVIDE_VALUE = 5;
 
 /**
+	 * The '<em><b>Unary Minus</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Unary Minus</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #UNARY_MINUS
+	 * @model name="UnaryMinus"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int UNARY_MINUS_VALUE = 6;
+
+/**
 	 * An array of all the '<em><b>Operator Kind</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -176,6 +199,7 @@ public enum OperatorKind implements Enumerator {
 			DIVIDE,
 			ELEMENT_WISE_MULTIPLY,
 			ELEMENT_WISE_DIVIDE,
+			UNARY_MINUS,
 		};
 
 	/**
@@ -232,6 +256,7 @@ public enum OperatorKind implements Enumerator {
 			case DIVIDE_VALUE: return DIVIDE;
 			case ELEMENT_WISE_MULTIPLY_VALUE: return ELEMENT_WISE_MULTIPLY;
 			case ELEMENT_WISE_DIVIDE_VALUE: return ELEMENT_WISE_DIVIDE;
+			case UNARY_MINUS_VALUE: return UNARY_MINUS;
 		}
 		return null;
 	}

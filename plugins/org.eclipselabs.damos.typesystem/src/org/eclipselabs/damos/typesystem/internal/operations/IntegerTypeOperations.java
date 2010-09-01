@@ -44,6 +44,10 @@ public class IntegerTypeOperations extends DataTypeOperations {
 	 * @generated NOT
 	 */
 	public static  DataType evaluate(IntegerType integerType, OperatorKind operator, DataType other) {
+		if (operator == OperatorKind.UNARY_MINUS) {
+			return (IntegerType) EcoreUtil.copy(integerType);
+		}
+		
 		if (!(other instanceof NumericalType)) {
 			return TypeSystemFactory.eINSTANCE.createInvalidDataType();
 		}

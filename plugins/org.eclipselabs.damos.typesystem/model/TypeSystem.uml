@@ -201,6 +201,7 @@
       <ownedLiteral xmi:id="_uSPaYKxQEd-ZZ_8ZIavFMA" name="Divide"/>
       <ownedLiteral xmi:id="_0E2NkLQkEd-_7IrwlAwZ7g" name="ElementWiseMultiply"/>
       <ownedLiteral xmi:id="_8EaFILQkEd-_7IrwlAwZ7g" name="ElementWiseDivide"/>
+      <ownedLiteral xmi:id="_TKiIgLWsEd-vy7wpTNtOBw" name="UnaryMinus"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_s1LiUH30Ed-EWvFDOLE-rQ" name="InvalidDataType">
       <generalization xmi:id="_eY1_IH31Ed-EWvFDOLE-rQ" general="_FfGmwH3nEd-EWvFDOLE-rQ"/>

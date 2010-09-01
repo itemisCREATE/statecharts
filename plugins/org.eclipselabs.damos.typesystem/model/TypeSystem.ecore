@@ -74,6 +74,7 @@
     <eLiterals name="Divide" value="3"/>
     <eLiterals name="ElementWiseMultiply" value="4"/>
     <eLiterals name="ElementWiseDivide" value="5"/>
+    <eLiterals name="UnaryMinus" value="6"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ArrayDimension">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="fromIndex" ordered="false"

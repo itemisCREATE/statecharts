@@ -44,6 +44,10 @@ public class RealTypeOperations extends DataTypeOperations {
 	 * @generated NOT
 	 */
 	public static  DataType evaluate(RealType realType, OperatorKind operator, DataType other) {
+		if (operator == OperatorKind.UNARY_MINUS) {
+			return (RealType) EcoreUtil.copy(realType);
+		}
+		
 		if (!(other instanceof NumericalType)) {
 			return TypeSystemFactory.eINSTANCE.createInvalidDataType();
 		}

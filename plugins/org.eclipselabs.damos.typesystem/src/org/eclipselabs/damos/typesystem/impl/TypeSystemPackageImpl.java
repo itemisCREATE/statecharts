@@ -969,6 +969,7 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 		addEEnumLiteral(operatorKindEEnum, OperatorKind.DIVIDE);
 		addEEnumLiteral(operatorKindEEnum, OperatorKind.ELEMENT_WISE_MULTIPLY);
 		addEEnumLiteral(operatorKindEEnum, OperatorKind.ELEMENT_WISE_DIVIDE);
+		addEEnumLiteral(operatorKindEEnum, OperatorKind.UNARY_MINUS);
 
 		initEEnum(unitSymbolEEnum, UnitSymbol.class, "UnitSymbol");
 		addEEnumLiteral(unitSymbolEEnum, UnitSymbol.METER);
