@@ -10,9 +10,7 @@
     <type metamodel="//@metamodelDeclarations.0">
       <classifier xsi:type="ecore:EClass" href="http://www.eclipselabs.org/damos/Mscript/1.0.0#//Mscript"/>
     </type>
-    <alternatives xsi:type="xtext:Assignment" cardinality="*" feature="packages" operator="+=">
-      <terminal xsi:type="xtext:RuleCall" rule="//@rules.1"/>
-    </alternatives>
+    <alternatives xsi:type="xtext:RuleCall" rule="//@rules.5"/>
   </rules>
   <rules xsi:type="xtext:ParserRule" name="PackageDefinition">
     <type metamodel="//@metamodelDeclarations.0">

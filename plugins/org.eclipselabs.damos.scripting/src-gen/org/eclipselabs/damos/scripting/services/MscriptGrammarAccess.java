@@ -18,18 +18,16 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public class MscriptElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Mscript");
-		private final Assignment cPackagesAssignment = (Assignment)rule.eContents().get(1);
-		private final RuleCall cPackagesPackageDefinitionParserRuleCall_0 = (RuleCall)cPackagesAssignment.eContents().get(0);
+		private final RuleCall cDataTypeSpecifierParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
-		//Mscript:
-		//	packages+=PackageDefinition*;
+		//// Temporary
+		//Mscript: //	(packages+=PackageDefinition)*;
+		//	DataTypeSpecifier;
 		public ParserRule getRule() { return rule; }
 
-		//packages+=PackageDefinition*
-		public Assignment getPackagesAssignment() { return cPackagesAssignment; }
-
-		//PackageDefinition
-		public RuleCall getPackagesPackageDefinitionParserRuleCall_0() { return cPackagesPackageDefinitionParserRuleCall_0; }
+		////	(packages+=PackageDefinition)*;
+		//DataTypeSpecifier
+		public RuleCall getDataTypeSpecifierParserRuleCall() { return cDataTypeSpecifierParserRuleCall; }
 	}
 
 	public class PackageDefinitionElements extends AbstractParserRuleElementFinder {
@@ -2060,8 +2058,9 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	
 
 	
-	//Mscript:
-	//	packages+=PackageDefinition*;
+	//// Temporary
+	//Mscript: //	(packages+=PackageDefinition)*;
+	//	DataTypeSpecifier;
 	public MscriptElements getMscriptAccess() {
 		return (pMscript != null) ? pMscript : (pMscript = new MscriptElements());
 	}

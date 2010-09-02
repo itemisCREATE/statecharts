@@ -95,6 +95,11 @@
         <eParameters name="operator" ordered="false" lowerBound="1" eType="#//OperatorKind"/>
         <eParameters name="other" ordered="false" eType="#//DataType"/>
       </contents>
+      <contents xsi:type="ecore:EOperation" name="isAssignableFrom" ordered="false"
+          lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+        <eAnnotations source="redefines" references="#//DataType/isAssignableFrom"/>
+        <eParameters name="other" ordered="false" lowerBound="1" eType="#//DataType"/>
+      </contents>
     </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NumericalType" abstract="true" eSuperTypes="#//PrimitiveType">
@@ -147,10 +152,31 @@
         <eParameters name="operator" ordered="false" lowerBound="1" eType="#//OperatorKind"/>
         <eParameters name="other" ordered="false" eType="#//DataType"/>
       </contents>
+      <contents xsi:type="ecore:EOperation" name="isAssignableFrom" ordered="false"
+          lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+        <eAnnotations source="redefines" references="#//DataType/isAssignableFrom"/>
+        <eParameters name="other" ordered="false" lowerBound="1" eType="#//DataType"/>
+      </contents>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="BooleanType" eSuperTypes="#//PrimitiveType"/>
-  <eClassifiers xsi:type="ecore:EClass" name="StringType" eSuperTypes="#//PrimitiveType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BooleanType" eSuperTypes="#//PrimitiveType">
+    <eAnnotations source="duplicates">
+      <contents xsi:type="ecore:EOperation" name="isAssignableFrom" ordered="false"
+          lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+        <eAnnotations source="redefines" references="#//DataType/isAssignableFrom"/>
+        <eParameters name="other" ordered="false" lowerBound="1" eType="#//DataType"/>
+      </contents>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StringType" eSuperTypes="#//PrimitiveType">
+    <eAnnotations source="duplicates">
+      <contents xsi:type="ecore:EOperation" name="isAssignableFrom" ordered="false"
+          lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+        <eAnnotations source="redefines" references="#//DataType/isAssignableFrom"/>
+        <eParameters name="other" ordered="false" lowerBound="1" eType="#//DataType"/>
+      </contents>
+    </eAnnotations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Enumeration" eSuperTypes="#//Namespace #//DataType">
     <eOperations name="getLiteral" ordered="false" eType="#//EnumerationLiteral">
       <eParameters name="name" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

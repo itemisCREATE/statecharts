@@ -23,6 +23,7 @@ import org.eclipselabs.damos.typesystem.Unit;
  * The following operations are supported:
  * <ul>
  *   <li>{@link org.eclipselabs.damos.typesystem.IntegerType#evaluate(org.eclipselabs.damos.typesystem.OperatorKind, org.eclipselabs.damos.typesystem.DataType) <em>Evaluate</em>}</li>
+ *   <li>{@link org.eclipselabs.damos.typesystem.IntegerType#isAssignableFrom(org.eclipselabs.damos.typesystem.DataType) <em>Is Assignable From</em>}</li>
  * </ul>
  * </p>
  *
@@ -81,6 +82,19 @@ public class IntegerTypeOperations extends DataTypeOperations {
 		result.setUnit(unit);
 		
 		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public static  boolean isAssignableFrom(IntegerType integerType, DataType other) {
+		if (other instanceof IntegerType) {
+			IntegerType otherIntegerType = (IntegerType) other;
+			return integerType.getUnit().isSameAs(otherIntegerType.getUnit(), false);
+		}
+		return false;
 	}
 
 } // IntegerTypeOperations

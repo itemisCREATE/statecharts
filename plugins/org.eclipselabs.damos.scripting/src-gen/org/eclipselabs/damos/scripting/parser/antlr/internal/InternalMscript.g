@@ -90,31 +90,16 @@ ruleMscript returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(
-(
-		{ 
-	        currentNode=createCompositeNode(grammarAccess.getMscriptAccess().getPackagesPackageDefinitionParserRuleCall_0(), currentNode); 
-	    }
-		lv_packages_0_0=rulePackageDefinition		{
-	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getMscriptRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
-	        }
-	        try {
-	       		add(
-	       			$current, 
-	       			"packages",
-	        		lv_packages_0_0, 
-	        		"PackageDefinition", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
-	    }
 
-)
-)*
+    { 
+        currentNode=createCompositeNode(grammarAccess.getMscriptAccess().getDataTypeSpecifierParserRuleCall(), currentNode); 
+    }
+    this_DataTypeSpecifier_0=ruleDataTypeSpecifier
+    { 
+        $current = $this_DataTypeSpecifier_0.current; 
+        currentNode = currentNode.getParent();
+    }
+
 ;
 
 
@@ -401,6 +386,46 @@ ruleEnumerationLiteralDefinition returns [EObject current=null]
 ;
 
 
+
+
+
+// Entry rule entryRuleDataTypeSpecifier
+entryRuleDataTypeSpecifier returns [EObject current=null] 
+	:
+	{ currentNode = createCompositeNode(grammarAccess.getDataTypeSpecifierRule(), currentNode); }
+	 iv_ruleDataTypeSpecifier=ruleDataTypeSpecifier 
+	 { $current=$iv_ruleDataTypeSpecifier.current; } 
+	 EOF 
+;
+
+// Rule DataTypeSpecifier
+ruleDataTypeSpecifier returns [EObject current=null] 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+(
+    { 
+        currentNode=createCompositeNode(grammarAccess.getDataTypeSpecifierAccess().getPrimitiveTypeSpecifierParserRuleCall_0(), currentNode); 
+    }
+    this_PrimitiveTypeSpecifier_0=rulePrimitiveTypeSpecifier
+    { 
+        $current = $this_PrimitiveTypeSpecifier_0.current; 
+        currentNode = currentNode.getParent();
+    }
+
+    |
+    { 
+        currentNode=createCompositeNode(grammarAccess.getDataTypeSpecifierAccess().getComplexTypeSpecifierParserRuleCall_1(), currentNode); 
+    }
+    this_ComplexTypeSpecifier_1=ruleComplexTypeSpecifier
+    { 
+        $current = $this_ComplexTypeSpecifier_1.current; 
+        currentNode = currentNode.getParent();
+    }
+)
+;
 
 
 

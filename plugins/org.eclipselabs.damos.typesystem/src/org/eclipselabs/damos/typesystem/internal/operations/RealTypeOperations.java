@@ -23,6 +23,7 @@ import org.eclipselabs.damos.typesystem.Unit;
  * The following operations are supported:
  * <ul>
  *   <li>{@link org.eclipselabs.damos.typesystem.RealType#evaluate(org.eclipselabs.damos.typesystem.OperatorKind, org.eclipselabs.damos.typesystem.DataType) <em>Evaluate</em>}</li>
+ *   <li>{@link org.eclipselabs.damos.typesystem.RealType#isAssignableFrom(org.eclipselabs.damos.typesystem.DataType) <em>Is Assignable From</em>}</li>
  * </ul>
  * </p>
  *
@@ -76,6 +77,19 @@ public class RealTypeOperations extends DataTypeOperations {
 		result.setUnit(unit);
 		
 		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public static  boolean isAssignableFrom(RealType realType, DataType other) {
+		if (other instanceof NumericalType) {
+			NumericalType otherNumericalType = (NumericalType) other;
+			return realType.getUnit().isSameAs(otherNumericalType.getUnit(), false);
+		}
+		return false;
 	}
 
 } // RealTypeOperations

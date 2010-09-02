@@ -874,8 +874,8 @@ public class InternalMscriptLexer extends Lexer {
     public final void mRULE_IDENT() throws RecognitionException {
         try {
             int _type = RULE_IDENT;
-            // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8608:12: ( ( '_' | 'a' .. 'z' | 'A' .. 'Z' ) ( '0' .. '9' | '_' | 'a' .. 'z' | 'A' .. 'Z' )* )
-            // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8608:14: ( '_' | 'a' .. 'z' | 'A' .. 'Z' ) ( '0' .. '9' | '_' | 'a' .. 'z' | 'A' .. 'Z' )*
+            // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8640:12: ( ( '_' | 'a' .. 'z' | 'A' .. 'Z' ) ( '0' .. '9' | '_' | 'a' .. 'z' | 'A' .. 'Z' )* )
+            // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8640:14: ( '_' | 'a' .. 'z' | 'A' .. 'Z' ) ( '0' .. '9' | '_' | 'a' .. 'z' | 'A' .. 'Z' )*
             {
             if ( (input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
                 input.consume();
@@ -887,7 +887,7 @@ public class InternalMscriptLexer extends Lexer {
                 recover(mse);    throw mse;
             }
 
-            // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8608:38: ( '0' .. '9' | '_' | 'a' .. 'z' | 'A' .. 'Z' )*
+            // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8640:38: ( '0' .. '9' | '_' | 'a' .. 'z' | 'A' .. 'Z' )*
             loop1:
             do {
                 int alt1=2;
@@ -935,11 +935,11 @@ public class InternalMscriptLexer extends Lexer {
     public final void mRULE_STRING() throws RecognitionException {
         try {
             int _type = RULE_STRING;
-            // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8610:13: ( '\"' (~ ( ( '\\\\' | '\"' ) ) | '\\\\' ( '\\'' | '\"' | '?' | '\\\\' | 'a' | 'b' | 'f' | 'n' | 'r' | 't' | 'v' ) )* '\"' )
-            // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8610:15: '\"' (~ ( ( '\\\\' | '\"' ) ) | '\\\\' ( '\\'' | '\"' | '?' | '\\\\' | 'a' | 'b' | 'f' | 'n' | 'r' | 't' | 'v' ) )* '\"'
+            // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8642:13: ( '\"' (~ ( ( '\\\\' | '\"' ) ) | '\\\\' ( '\\'' | '\"' | '?' | '\\\\' | 'a' | 'b' | 'f' | 'n' | 'r' | 't' | 'v' ) )* '\"' )
+            // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8642:15: '\"' (~ ( ( '\\\\' | '\"' ) ) | '\\\\' ( '\\'' | '\"' | '?' | '\\\\' | 'a' | 'b' | 'f' | 'n' | 'r' | 't' | 'v' ) )* '\"'
             {
             match('\"'); 
-            // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8610:19: (~ ( ( '\\\\' | '\"' ) ) | '\\\\' ( '\\'' | '\"' | '?' | '\\\\' | 'a' | 'b' | 'f' | 'n' | 'r' | 't' | 'v' ) )*
+            // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8642:19: (~ ( ( '\\\\' | '\"' ) ) | '\\\\' ( '\\'' | '\"' | '?' | '\\\\' | 'a' | 'b' | 'f' | 'n' | 'r' | 't' | 'v' ) )*
             loop2:
             do {
                 int alt2=3;
@@ -955,7 +955,7 @@ public class InternalMscriptLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8610:20: ~ ( ( '\\\\' | '\"' ) )
+            	    // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8642:20: ~ ( ( '\\\\' | '\"' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFE') ) {
             	        input.consume();
@@ -971,7 +971,7 @@ public class InternalMscriptLexer extends Lexer {
             	    }
             	    break;
             	case 2 :
-            	    // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8610:34: '\\\\' ( '\\'' | '\"' | '?' | '\\\\' | 'a' | 'b' | 'f' | 'n' | 'r' | 't' | 'v' )
+            	    // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8642:34: '\\\\' ( '\\'' | '\"' | '?' | '\\\\' | 'a' | 'b' | 'f' | 'n' | 'r' | 't' | 'v' )
             	    {
             	    match('\\'); 
             	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='?'||input.LA(1)=='\\'||(input.LA(1)>='a' && input.LA(1)<='b')||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t'||input.LA(1)=='v' ) {
@@ -1008,10 +1008,10 @@ public class InternalMscriptLexer extends Lexer {
     public final void mRULE_REAL() throws RecognitionException {
         try {
             int _type = RULE_REAL;
-            // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8612:11: ( ( '0' .. '9' )+ '.' ( '0' .. '9' )* ( ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+ )? )
-            // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8612:13: ( '0' .. '9' )+ '.' ( '0' .. '9' )* ( ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+ )?
+            // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8644:11: ( ( '0' .. '9' )+ '.' ( '0' .. '9' )* ( ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+ )? )
+            // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8644:13: ( '0' .. '9' )+ '.' ( '0' .. '9' )* ( ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+ )?
             {
-            // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8612:13: ( '0' .. '9' )+
+            // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8644:13: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -1025,7 +1025,7 @@ public class InternalMscriptLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8612:14: '0' .. '9'
+            	    // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8644:14: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -1042,7 +1042,7 @@ public class InternalMscriptLexer extends Lexer {
             } while (true);
 
             match('.'); 
-            // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8612:29: ( '0' .. '9' )*
+            // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8644:29: ( '0' .. '9' )*
             loop4:
             do {
                 int alt4=2;
@@ -1055,7 +1055,7 @@ public class InternalMscriptLexer extends Lexer {
 
                 switch (alt4) {
             	case 1 :
-            	    // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8612:30: '0' .. '9'
+            	    // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8644:30: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -1067,7 +1067,7 @@ public class InternalMscriptLexer extends Lexer {
                 }
             } while (true);
 
-            // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8612:41: ( ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+ )?
+            // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8644:41: ( ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+ )?
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -1076,7 +1076,7 @@ public class InternalMscriptLexer extends Lexer {
             }
             switch (alt7) {
                 case 1 :
-                    // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8612:42: ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+
+                    // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8644:42: ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+
                     {
                     if ( input.LA(1)=='E'||input.LA(1)=='e' ) {
                         input.consume();
@@ -1088,7 +1088,7 @@ public class InternalMscriptLexer extends Lexer {
                         recover(mse);    throw mse;
                     }
 
-                    // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8612:52: ( '+' | '-' )?
+                    // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8644:52: ( '+' | '-' )?
                     int alt5=2;
                     int LA5_0 = input.LA(1);
 
@@ -1115,7 +1115,7 @@ public class InternalMscriptLexer extends Lexer {
 
                     }
 
-                    // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8612:63: ( '0' .. '9' )+
+                    // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8644:63: ( '0' .. '9' )+
                     int cnt6=0;
                     loop6:
                     do {
@@ -1129,7 +1129,7 @@ public class InternalMscriptLexer extends Lexer {
 
                         switch (alt6) {
                     	case 1 :
-                    	    // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8612:64: '0' .. '9'
+                    	    // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8644:64: '0' .. '9'
                     	    {
                     	    matchRange('0','9'); 
 
@@ -1165,10 +1165,10 @@ public class InternalMscriptLexer extends Lexer {
     public final void mRULE_INTEGER() throws RecognitionException {
         try {
             int _type = RULE_INTEGER;
-            // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8614:14: ( ( '0' .. '9' )+ )
-            // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8614:16: ( '0' .. '9' )+
+            // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8646:14: ( ( '0' .. '9' )+ )
+            // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8646:16: ( '0' .. '9' )+
             {
-            // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8614:16: ( '0' .. '9' )+
+            // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8646:16: ( '0' .. '9' )+
             int cnt8=0;
             loop8:
             do {
@@ -1182,7 +1182,7 @@ public class InternalMscriptLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8614:17: '0' .. '9'
+            	    // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8646:17: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -1212,12 +1212,12 @@ public class InternalMscriptLexer extends Lexer {
     public final void mRULE_ML_COMMENT() throws RecognitionException {
         try {
             int _type = RULE_ML_COMMENT;
-            // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8616:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8616:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8648:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8648:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8616:24: ( options {greedy=false; } : . )*
+            // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8648:24: ( options {greedy=false; } : . )*
             loop9:
             do {
                 int alt9=2;
@@ -1242,7 +1242,7 @@ public class InternalMscriptLexer extends Lexer {
 
                 switch (alt9) {
             	case 1 :
-            	    // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8616:52: .
+            	    // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8648:52: .
             	    {
             	    matchAny(); 
 
@@ -1270,12 +1270,12 @@ public class InternalMscriptLexer extends Lexer {
     public final void mRULE_SL_COMMENT() throws RecognitionException {
         try {
             int _type = RULE_SL_COMMENT;
-            // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8618:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8618:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8650:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8650:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8618:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8650:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop10:
             do {
                 int alt10=2;
@@ -1288,7 +1288,7 @@ public class InternalMscriptLexer extends Lexer {
 
                 switch (alt10) {
             	case 1 :
-            	    // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8618:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8650:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFE') ) {
             	        input.consume();
@@ -1309,7 +1309,7 @@ public class InternalMscriptLexer extends Lexer {
                 }
             } while (true);
 
-            // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8618:40: ( ( '\\r' )? '\\n' )?
+            // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8650:40: ( ( '\\r' )? '\\n' )?
             int alt12=2;
             int LA12_0 = input.LA(1);
 
@@ -1318,9 +1318,9 @@ public class InternalMscriptLexer extends Lexer {
             }
             switch (alt12) {
                 case 1 :
-                    // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8618:41: ( '\\r' )? '\\n'
+                    // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8650:41: ( '\\r' )? '\\n'
                     {
-                    // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8618:41: ( '\\r' )?
+                    // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8650:41: ( '\\r' )?
                     int alt11=2;
                     int LA11_0 = input.LA(1);
 
@@ -1329,7 +1329,7 @@ public class InternalMscriptLexer extends Lexer {
                     }
                     switch (alt11) {
                         case 1 :
-                            // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8618:41: '\\r'
+                            // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8650:41: '\\r'
                             {
                             match('\r'); 
 
@@ -1359,10 +1359,10 @@ public class InternalMscriptLexer extends Lexer {
     public final void mRULE_WS() throws RecognitionException {
         try {
             int _type = RULE_WS;
-            // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8620:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8620:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8652:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8652:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8620:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8652:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt13=0;
             loop13:
             do {
@@ -1415,8 +1415,8 @@ public class InternalMscriptLexer extends Lexer {
     public final void mRULE_ANY_OTHER() throws RecognitionException {
         try {
             int _type = RULE_ANY_OTHER;
-            // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8622:16: ( . )
-            // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8622:18: .
+            // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8654:16: ( . )
+            // ../org.eclipselabs.damos.scripting.ui/src-gen/org/eclipselabs/damos/scripting/ui/contentassist/antlr/internal/InternalMscript.g:8654:18: .
             {
             matchAny(); 
 

@@ -73,9 +73,9 @@ ruleMscript
     }
 	:
 (
-{ before(grammarAccess.getMscriptAccess().getPackagesAssignment()); }
-(rule__Mscript__PackagesAssignment)*
-{ after(grammarAccess.getMscriptAccess().getPackagesAssignment()); }
+{ before(grammarAccess.getMscriptAccess().getDataTypeSpecifierParserRuleCall()); }
+	ruleDataTypeSpecifier
+{ after(grammarAccess.getMscriptAccess().getDataTypeSpecifierParserRuleCall()); }
 )
 
 ;
@@ -196,6 +196,32 @@ finally {
 }
 
 
+
+// Entry rule entryRuleDataTypeSpecifier
+entryRuleDataTypeSpecifier 
+:
+{ before(grammarAccess.getDataTypeSpecifierRule()); }
+	 ruleDataTypeSpecifier
+{ after(grammarAccess.getDataTypeSpecifierRule()); } 
+	 EOF 
+;
+
+// Rule DataTypeSpecifier
+ruleDataTypeSpecifier
+    @init {
+		int stackSize = keepStackSize();
+    }
+	:
+(
+{ before(grammarAccess.getDataTypeSpecifierAccess().getAlternatives()); }
+(rule__DataTypeSpecifier__Alternatives)
+{ after(grammarAccess.getDataTypeSpecifierAccess().getAlternatives()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
 
 
 
@@ -1605,6 +1631,27 @@ finally {
 	restoreStackSize(stackSize);
 }
 
+rule__DataTypeSpecifier__Alternatives
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getDataTypeSpecifierAccess().getPrimitiveTypeSpecifierParserRuleCall_0()); }
+	rulePrimitiveTypeSpecifier
+{ after(grammarAccess.getDataTypeSpecifierAccess().getPrimitiveTypeSpecifierParserRuleCall_0()); }
+)
+
+    |(
+{ before(grammarAccess.getDataTypeSpecifierAccess().getComplexTypeSpecifierParserRuleCall_1()); }
+	ruleComplexTypeSpecifier
+{ after(grammarAccess.getDataTypeSpecifierAccess().getComplexTypeSpecifierParserRuleCall_1()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
 
 rule__PrimitiveTypeSpecifier__Alternatives
     @init {
@@ -7529,21 +7576,6 @@ finally {
 
 
 
-
-rule__Mscript__PackagesAssignment
-    @init {
-		int stackSize = keepStackSize();
-    }
-:
-(
-{ before(grammarAccess.getMscriptAccess().getPackagesPackageDefinitionParserRuleCall_0()); }
-	rulePackageDefinition{ after(grammarAccess.getMscriptAccess().getPackagesPackageDefinitionParserRuleCall_0()); }
-)
-
-;
-finally {
-	restoreStackSize(stackSize);
-}
 
 rule__PackageDefinition__NameAssignment_1
     @init {

@@ -7,8 +7,6 @@ package org.eclipselabs.damos.scripting.mscript.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipselabs.damos.scripting.mscript.DataTypeSpecifier;
 import org.eclipselabs.damos.scripting.mscript.MscriptPackage;
 
@@ -21,7 +19,7 @@ import org.eclipselabs.damos.scripting.mscript.MscriptPackage;
  *
  * @generated
  */
-public class DataTypeSpecifierImpl extends MinimalEObjectImpl.Container implements DataTypeSpecifier
+public class DataTypeSpecifierImpl extends MscriptImpl implements DataTypeSpecifier
 {
   /**
    * <!-- begin-user-doc -->

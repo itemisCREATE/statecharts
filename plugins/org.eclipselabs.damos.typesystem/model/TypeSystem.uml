@@ -52,6 +52,12 @@
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_J3qhc6xVEd-ZZ_8ZIavFMA"/>
         </ownedParameter>
       </ownedOperation>
+      <ownedOperation xmi:id="_aWQR0LZ8Ed-ivo-RjtdS8A" name="isAssignableFrom" redefinedOperation="_UEkroH5FEd-92N_8bTdFqA">
+        <ownedParameter xmi:id="_a7lMcLZ8Ed-ivo-RjtdS8A" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        </ownedParameter>
+        <ownedParameter xmi:id="_a7lMcbZ8Ed-ivo-RjtdS8A" name="other" type="_FfGmwH3nEd-EWvFDOLE-rQ"/>
+      </ownedOperation>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_s5vOsHMeEd-9E7QZMDWyTg" name="IntegerType">
       <generalization xmi:id="_6g2zIHO3Ed-S94eRjnXSAQ" general="__s2cgHMrEd-9E7QZMDWyTg"/>
@@ -63,12 +69,30 @@
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_MJRXsqxVEd-ZZ_8ZIavFMA"/>
         </ownedParameter>
       </ownedOperation>
+      <ownedOperation xmi:id="_cZKkwLZ8Ed-ivo-RjtdS8A" name="isAssignableFrom" redefinedOperation="_UEkroH5FEd-92N_8bTdFqA">
+        <ownedParameter xmi:id="_d1YEELZ8Ed-ivo-RjtdS8A" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        </ownedParameter>
+        <ownedParameter xmi:id="_d1YrILZ8Ed-ivo-RjtdS8A" name="other" type="_FfGmwH3nEd-EWvFDOLE-rQ"/>
+      </ownedOperation>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_u3XZAHMeEd-9E7QZMDWyTg" name="BooleanType">
       <generalization xmi:id="_7ClnMHO3Ed-S94eRjnXSAQ" general="_ckY6kHGiEd-Vr_LfGhknIQ"/>
+      <ownedOperation xmi:id="_eszbULZ8Ed-ivo-RjtdS8A" name="isAssignableFrom" redefinedOperation="_UEkroH5FEd-92N_8bTdFqA">
+        <ownedParameter xmi:id="_fMZhYLZ8Ed-ivo-RjtdS8A" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        </ownedParameter>
+        <ownedParameter xmi:id="_fMZhYbZ8Ed-ivo-RjtdS8A" name="other" type="_FfGmwH3nEd-EWvFDOLE-rQ"/>
+      </ownedOperation>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_zrKfMHMeEd-9E7QZMDWyTg" name="StringType">
       <generalization xmi:id="_8WuvoHO3Ed-S94eRjnXSAQ" general="_ckY6kHGiEd-Vr_LfGhknIQ"/>
+      <ownedOperation xmi:id="_gR5w4LZ8Ed-ivo-RjtdS8A" name="isAssignableFrom" redefinedOperation="_UEkroH5FEd-92N_8bTdFqA">
+        <ownedParameter xmi:id="_g1C6MLZ8Ed-ivo-RjtdS8A" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        </ownedParameter>
+        <ownedParameter xmi:id="_g1C6MbZ8Ed-ivo-RjtdS8A" name="other" type="_FfGmwH3nEd-EWvFDOLE-rQ"/>
+      </ownedOperation>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_AewtgHMfEd-9E7QZMDWyTg" name="Enumeration">
       <generalization xmi:id="_9AnaIHO3Ed-S94eRjnXSAQ" general="_FfGmwH3nEd-EWvFDOLE-rQ"/>

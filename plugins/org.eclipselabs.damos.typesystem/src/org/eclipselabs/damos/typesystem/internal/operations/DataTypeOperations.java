@@ -48,12 +48,10 @@ public class DataTypeOperations {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public static  boolean isAssignableFrom(DataType dataType, DataType other) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		return false;
 	}
 
 	/**

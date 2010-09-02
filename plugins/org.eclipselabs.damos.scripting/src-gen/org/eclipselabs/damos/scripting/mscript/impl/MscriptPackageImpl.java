@@ -550,16 +550,6 @@ public class MscriptPackageImpl extends EPackageImpl implements MscriptPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getMscript_Packages()
-  {
-    return (EReference)mscriptEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EClass getPackageDefinition()
   {
     return packageDefinitionEClass;
@@ -1686,7 +1676,6 @@ public class MscriptPackageImpl extends EPackageImpl implements MscriptPackage
 
     // Create classes and their features
     mscriptEClass = createEClass(MSCRIPT);
-    createEReference(mscriptEClass, MSCRIPT__PACKAGES);
 
     packageDefinitionEClass = createEClass(PACKAGE_DEFINITION);
     createEReference(packageDefinitionEClass, PACKAGE_DEFINITION__NAME);
@@ -1882,6 +1871,7 @@ public class MscriptPackageImpl extends EPackageImpl implements MscriptPackage
     // Add supertypes to classes
     packageDefinitionEClass.getESuperTypes().add(this.getPackageDefinitionElement());
     enumerationDefinitionEClass.getESuperTypes().add(this.getPackageDefinitionElement());
+    dataTypeSpecifierEClass.getESuperTypes().add(this.getMscript());
     primitiveTypeSpecifierEClass.getESuperTypes().add(this.getDataTypeSpecifier());
     numericalTypeSpecifierEClass.getESuperTypes().add(this.getPrimitiveTypeSpecifier());
     realTypeSpecifierEClass.getESuperTypes().add(this.getNumericalTypeSpecifier());
@@ -1917,7 +1907,6 @@ public class MscriptPackageImpl extends EPackageImpl implements MscriptPackage
 
     // Initialize classes and features; add operations and parameters
     initEClass(mscriptEClass, Mscript.class, "Mscript", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getMscript_Packages(), this.getPackageDefinition(), null, "packages", null, 0, -1, Mscript.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(packageDefinitionEClass, PackageDefinition.class, "PackageDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getPackageDefinition_Name(), this.getName_(), null, "name", null, 0, 1, PackageDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

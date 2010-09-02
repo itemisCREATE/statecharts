@@ -52,4 +52,14 @@ public class IntegerTypeImpl extends NumericalTypeImpl implements IntegerType {
 		return IntegerTypeOperations.evaluate(this, operator, other);
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isAssignableFrom(DataType other) {
+		return IntegerTypeOperations.isAssignableFrom(this, other);
+	}
+
 } //IntegerTypeImpl

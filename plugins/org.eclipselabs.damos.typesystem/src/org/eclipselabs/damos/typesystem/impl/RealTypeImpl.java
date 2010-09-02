@@ -52,4 +52,14 @@ public class RealTypeImpl extends NumericalTypeImpl implements RealType {
 		return RealTypeOperations.evaluate(this, operator, other);
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isAssignableFrom(DataType other) {
+		return RealTypeOperations.isAssignableFrom(this, other);
+	}
+
 } //RealTypeImpl

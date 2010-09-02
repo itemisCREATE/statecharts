@@ -35,9 +35,7 @@
       <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//BooleanKind/False"/>
       <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//BooleanKind/True"/>
     </genEnums>
-    <genClasses ecoreClass="Mscript.ecore#//Mscript">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//Mscript/packages"/>
-    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//Mscript"/>
     <genClasses ecoreClass="Mscript.ecore#//PackageDefinition">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//PackageDefinition/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//PackageDefinition/elements"/>

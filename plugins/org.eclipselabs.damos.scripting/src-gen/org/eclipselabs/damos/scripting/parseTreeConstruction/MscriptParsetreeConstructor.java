@@ -31,7 +31,7 @@ protected class ThisRootNode extends RootToken {
 	@Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Mscript_PackagesAssignment(this, this, 0, inst);
+			case 0: return new Mscript_DataTypeSpecifierParserRuleCall(this, this, 0, inst);
 			case 1: return new PackageDefinition_Group(this, this, 1, inst);
 			case 2: return new PackageDefinitionElement_Alternatives(this, this, 2, inst);
 			case 3: return new EnumerationDefinition_Group(this, this, 3, inst);
@@ -91,53 +91,49 @@ protected class ThisRootNode extends RootToken {
 
 /************ begin Rule Mscript ****************
  *
- * Mscript:
- * 	packages+=PackageDefinition*;
+ * // Temporary
+ * Mscript: //	(packages+=PackageDefinition)*;
+ * 	DataTypeSpecifier;
  *
  **/
 
-// packages+=PackageDefinition*
-protected class Mscript_PackagesAssignment extends AssignmentToken  {
+// //	(packages+=PackageDefinition)*;
+// DataTypeSpecifier
+protected class Mscript_DataTypeSpecifierParserRuleCall extends RuleCallToken {
 	
-	public Mscript_PackagesAssignment(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Mscript_DataTypeSpecifierParserRuleCall(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
-	public Assignment getGrammarElement() {
-		return grammarAccess.getMscriptAccess().getPackagesAssignment();
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getMscriptAccess().getDataTypeSpecifierParserRuleCall();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new PackageDefinition_Group(this, this, 0, inst);
+			case 0: return new DataTypeSpecifier_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
 	}
 
-    @Override	
+    @Override
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("packages",false)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("packages");
-		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
-			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getPackageDefinitionRule().getType().getClassifier())) {
-				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getMscriptAccess().getPackagesPackageDefinitionParserRuleCall_0(); 
-				consumed = obj;
-				return param;
-			}
-		}
-		return null;
+		if(getEObject().eClass() != grammarAccess.getBooleanTypeSpecifierAccess().getBooleanTypeSpecifierAction_0().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getComplexTypeSpecifierRule().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getIntegerTypeSpecifierAccess().getIntegerTypeSpecifierAction_0().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getRealTypeSpecifierAccess().getRealTypeSpecifierAction_0().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getStringTypeSpecifierAccess().getStringTypeSpecifierAction_0().getType().getClassifier())
+			return null;
+		if(checkForRecursion(DataTypeSpecifier_Alternatives.class, eObjectConsumer)) return null;
+		return eObjectConsumer;
 	}
-
+	
     @Override
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
-		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new Mscript_PackagesAssignment(lastRuleCallOrigin, next, actIndex, consumed);
-			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index - 1, consumed);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, inst);
 		}	
 	}	
 }

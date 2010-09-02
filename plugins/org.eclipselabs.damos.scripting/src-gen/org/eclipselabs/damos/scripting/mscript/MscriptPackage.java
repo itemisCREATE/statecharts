@@ -71,22 +71,13 @@ public interface MscriptPackage extends EPackage
   int MSCRIPT = 0;
 
   /**
-   * The feature id for the '<em><b>Packages</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int MSCRIPT__PACKAGES = 0;
-
-  /**
    * The number of structural features of the '<em>Mscript</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MSCRIPT_FEATURE_COUNT = 1;
+  int MSCRIPT_FEATURE_COUNT = 0;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.damos.scripting.mscript.impl.PackageDefinitionElementImpl <em>Package Definition Element</em>}' class.
@@ -226,7 +217,7 @@ public interface MscriptPackage extends EPackage
    * @generated
    * @ordered
    */
-  int DATA_TYPE_SPECIFIER_FEATURE_COUNT = 0;
+  int DATA_TYPE_SPECIFIER_FEATURE_COUNT = MSCRIPT_FEATURE_COUNT + 0;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.damos.scripting.mscript.impl.PrimitiveTypeSpecifierImpl <em>Primitive Type Specifier</em>}' class.
@@ -1631,17 +1622,6 @@ public interface MscriptPackage extends EPackage
   EClass getMscript();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipselabs.damos.scripting.mscript.Mscript#getPackages <em>Packages</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Packages</em>'.
-   * @see org.eclipselabs.damos.scripting.mscript.Mscript#getPackages()
-   * @see #getMscript()
-   * @generated
-   */
-  EReference getMscript_Packages();
-
-  /**
    * Returns the meta object for class '{@link org.eclipselabs.damos.scripting.mscript.PackageDefinition <em>Package Definition</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2828,14 +2808,6 @@ public interface MscriptPackage extends EPackage
      * @generated
      */
     EClass MSCRIPT = eINSTANCE.getMscript();
-
-    /**
-     * The meta object literal for the '<em><b>Packages</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference MSCRIPT__PACKAGES = eINSTANCE.getMscript_Packages();
 
     /**
      * The meta object literal for the '{@link org.eclipselabs.damos.scripting.mscript.impl.PackageDefinitionImpl <em>Package Definition</em>}' class.

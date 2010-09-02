@@ -136,6 +136,7 @@ public class MscriptSwitch<T>
       {
         DataTypeSpecifier dataTypeSpecifier = (DataTypeSpecifier)theEObject;
         T result = caseDataTypeSpecifier(dataTypeSpecifier);
+        if (result == null) result = caseMscript(dataTypeSpecifier);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -144,6 +145,7 @@ public class MscriptSwitch<T>
         PrimitiveTypeSpecifier primitiveTypeSpecifier = (PrimitiveTypeSpecifier)theEObject;
         T result = casePrimitiveTypeSpecifier(primitiveTypeSpecifier);
         if (result == null) result = caseDataTypeSpecifier(primitiveTypeSpecifier);
+        if (result == null) result = caseMscript(primitiveTypeSpecifier);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -153,6 +155,7 @@ public class MscriptSwitch<T>
         T result = caseNumericalTypeSpecifier(numericalTypeSpecifier);
         if (result == null) result = casePrimitiveTypeSpecifier(numericalTypeSpecifier);
         if (result == null) result = caseDataTypeSpecifier(numericalTypeSpecifier);
+        if (result == null) result = caseMscript(numericalTypeSpecifier);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -163,6 +166,7 @@ public class MscriptSwitch<T>
         if (result == null) result = caseNumericalTypeSpecifier(realTypeSpecifier);
         if (result == null) result = casePrimitiveTypeSpecifier(realTypeSpecifier);
         if (result == null) result = caseDataTypeSpecifier(realTypeSpecifier);
+        if (result == null) result = caseMscript(realTypeSpecifier);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -173,6 +177,7 @@ public class MscriptSwitch<T>
         if (result == null) result = caseNumericalTypeSpecifier(integerTypeSpecifier);
         if (result == null) result = casePrimitiveTypeSpecifier(integerTypeSpecifier);
         if (result == null) result = caseDataTypeSpecifier(integerTypeSpecifier);
+        if (result == null) result = caseMscript(integerTypeSpecifier);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -182,6 +187,7 @@ public class MscriptSwitch<T>
         T result = caseBooleanTypeSpecifier(booleanTypeSpecifier);
         if (result == null) result = casePrimitiveTypeSpecifier(booleanTypeSpecifier);
         if (result == null) result = caseDataTypeSpecifier(booleanTypeSpecifier);
+        if (result == null) result = caseMscript(booleanTypeSpecifier);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -191,6 +197,7 @@ public class MscriptSwitch<T>
         T result = caseStringTypeSpecifier(stringTypeSpecifier);
         if (result == null) result = casePrimitiveTypeSpecifier(stringTypeSpecifier);
         if (result == null) result = caseDataTypeSpecifier(stringTypeSpecifier);
+        if (result == null) result = caseMscript(stringTypeSpecifier);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -199,6 +206,7 @@ public class MscriptSwitch<T>
         ComplexTypeSpecifier complexTypeSpecifier = (ComplexTypeSpecifier)theEObject;
         T result = caseComplexTypeSpecifier(complexTypeSpecifier);
         if (result == null) result = caseDataTypeSpecifier(complexTypeSpecifier);
+        if (result == null) result = caseMscript(complexTypeSpecifier);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
