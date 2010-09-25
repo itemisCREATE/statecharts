@@ -14,10 +14,10 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.uml2.common.util.DerivedUnionEObjectEList;
 import org.eclipselabs.mscript.typesystem.NamedElement;
 import org.eclipselabs.mscript.typesystem.PackageableElement;
 import org.eclipselabs.mscript.typesystem.TypeSystemPackage;
+import org.eclipselabs.mscript.typesystem.internal.util.DerivedUnionEObjectEList;
 
 /**
  * <!-- begin-user-doc -->

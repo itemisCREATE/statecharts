@@ -14,7 +14,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.uml2.common.util.DerivedUnionEObjectEList;
 import org.eclipselabs.mscript.typesystem.DataType;
 import org.eclipselabs.mscript.typesystem.Enumeration;
 import org.eclipselabs.mscript.typesystem.EnumerationLiteral;
@@ -23,6 +22,7 @@ import org.eclipselabs.mscript.typesystem.OperatorKind;
 import org.eclipselabs.mscript.typesystem.TypeSystemPackage;
 import org.eclipselabs.mscript.typesystem.internal.operations.DataTypeOperations;
 import org.eclipselabs.mscript.typesystem.internal.operations.EnumerationOperations;
+import org.eclipselabs.mscript.typesystem.internal.util.DerivedUnionEObjectEList;
 
 /**
  * <!-- begin-user-doc -->

@@ -8,11 +8,11 @@ package org.eclipselabs.mscript.typesystem.impl;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.uml2.common.util.DerivedUnionEObjectEList;
 import org.eclipselabs.mscript.typesystem.NamedElement;
 import org.eclipselabs.mscript.typesystem.Namespace;
 import org.eclipselabs.mscript.typesystem.TypeSystemPackage;
 import org.eclipselabs.mscript.typesystem.internal.operations.NamespaceOperations;
+import org.eclipselabs.mscript.typesystem.internal.util.DerivedUnionEObjectEList;
 
 /**
  * <!-- begin-user-doc -->
