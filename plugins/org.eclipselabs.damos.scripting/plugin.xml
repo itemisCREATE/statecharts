@@ -5,8 +5,8 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
-       uri = "http://www.eclipselabs.org/damos/Mscript/1.0.0" 
-       class = "org.eclipselabs.damos.scripting.mscript.MscriptPackage"
+       uri = "http://www.eclipselabs.org/Mscript/1.0.0/AST" 
+       class = "org.eclipselabs.mscript.language.ast.AstPackage"
        genModel = "org/eclipselabs/damos/del/Mscript.genmodel" /> 
 	
   </extension>

@@ -329,7 +329,7 @@
       <appliedProfile href="pathmap://UML_PROFILES/Ecore.profile.uml#_0"/>
     </profileApplication>
   </uml:Package>
-  <Ecore:EPackage xmi:id="_EhQRsHGiEd-Vr_LfGhknIQ" base_Package="_BLG1QHGiEd-Vr_LfGhknIQ" packageName="typesystem" nsPrefix="typesystem" nsURI="http://www.eclipselabs.org/damos/TypeSystem/1.0.0" basePackage="org.eclipselabs.damos" prefix="TypeSystem"/>
+  <Ecore:EPackage xmi:id="_EhQRsHGiEd-Vr_LfGhknIQ" base_Package="_BLG1QHGiEd-Vr_LfGhknIQ" packageName="typesystem" nsPrefix="typesystem" nsURI="http://www.eclipselabs.org/mscript/TypeSystem/1.0.0" basePackage="org.eclipselabs.mscript" prefix="TypeSystem"/>
   <Ecore:EAttribute xmi:id="_KYV9QHIYEd-Vr8z_P2IBLw" isUnsettable="true"/>
   <Ecore:EAttribute xmi:id="_4L72MHIiEd-Vr8z_P2IBLw" isTransient="true" base_Property="_KRij8HITEd-Vr8z_P2IBLw"/>
   <Ecore:EAttribute xmi:id="_4rqfIHIiEd-Vr8z_P2IBLw" isTransient="true" base_Property="_tKL90HITEd-Vr8z_P2IBLw"/>

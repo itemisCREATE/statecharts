@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Damos Scripting
 Bundle-Vendor: Damos Project
 Bundle-Version: 0.2.0.qualifier
-Bundle-SymbolicName: org.eclipselabs.damos.scripting;singleton:=true
+Bundle-SymbolicName: org.eclipselabs.mscript.language;singleton:=true
 Eclipse-RegisterBuddy: org.eclipse.xtext.log4j
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext,
@@ -19,13 +19,13 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.emf.common,
  org.antlr.runtime
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Export-Package: org.eclipselabs.damos.scripting,
- org.eclipselabs.damos.scripting.mscript,
- org.eclipselabs.damos.scripting.mscript.impl,
- org.eclipselabs.damos.scripting.mscript.util,
- org.eclipselabs.damos.scripting.parseTreeConstruction,
- org.eclipselabs.damos.scripting.parser.antlr,
- org.eclipselabs.damos.scripting.services,
- org.eclipselabs.damos.scripting.validation,
- org.eclipselabs.damos.scripting.parser.antlr.internal
+Export-Package: org.eclipselabs.mscript.language,
+ org.eclipselabs.mscript.language.ast,
+ org.eclipselabs.mscript.language.ast.impl,
+ org.eclipselabs.mscript.language.ast.util,
+ org.eclipselabs.mscript.language.parseTreeConstruction,
+ org.eclipselabs.mscript.language.parser.antlr,
+ org.eclipselabs.mscript.language.parser.antlr.internal,
+ org.eclipselabs.mscript.language.services,
+ org.eclipselabs.mscript.language.validation
 Import-Package: org.apache.log4j

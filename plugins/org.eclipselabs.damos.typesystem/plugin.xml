@@ -13,7 +13,7 @@
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
             uri="http://www.eclipselabs.org/damos/TypeSystem/1.0.0"
-            class="org.eclipselabs.damos.typesystem.TypeSystemPackage"
+            class="org.eclipselabs.mscript.typesystem.TypeSystemPackage"
             genModel="model/TypeSystem.genmodel"/>
    </extension>
 

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <genmodel:GenModel xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:genmodel="http://www.eclipse.org/uml2/2.2.0/GenModel" modelDirectory="/org.eclipselabs.damos.typesystem/src"
-    modelPluginID="org.eclipselabs.damos.typesystem" modelName="TypeSystem" modelPluginClass="org.eclipselabs.damos.typesystem.TypeSystemPlugin"
-    editPluginClass="org.eclipselabs.damos.typesystem.edit.TypeSystemEditPlugin" editorPluginClass="org.eclipselabs.damos.typesystem.editor.TypeSystemEditorPlugin"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:genmodel="http://www.eclipse.org/uml2/2.2.0/GenModel" modelDirectory="/org.eclipselabs.mscript.typesystem/src"
+    modelPluginID="org.eclipselabs.mscript.typesystem" modelName="TypeSystem" modelPluginClass="org.eclipselabs.mscript.typesystem.TypeSystemPlugin"
+    editPluginClass="org.eclipselabs.mscript.typesystem.edit.TypeSystemEditPlugin"
+    editorPluginClass="org.eclipselabs.mscript.typesystem.editor.TypeSystemEditorPlugin"
     importerID="org.eclipse.uml2.uml.ecore.importer" complianceLevel="5.0" copyrightFields="false">
   <genAnnotations source="http://www.eclipse.org/emf/2002/GenModel/importer/org.eclipse.uml2.uml.ecore.importer">
     <details key="ECORE_TAGGED_VALUES" value="PROCESS"/>
@@ -24,9 +25,8 @@
     <details key="SUPER_CLASS_ORDER" value="PROCESS"/>
   </genAnnotations>
   <foreignModel>TypeSystem.uml</foreignModel>
-  <genPackages xsi:type="genmodel:GenPackage" prefix="TypeSystem" basePackage="org.eclipselabs.damos"
-      disposableProviderFactory="true" providerPackageSuffix="edit.provider" presentationPackageSuffix="editor.presentation"
-      ecorePackage="TypeSystem.ecore#/" operationsPackage="org.eclipselabs.damos.typesystem.internal.operations">
+  <genPackages xsi:type="genmodel:GenPackage" prefix="TypeSystem" basePackage="org.eclipselabs.mscript"
+      disposableProviderFactory="true" ecorePackage="TypeSystem.ecore#/" operationsPackage="org.eclipselabs.mscript.typesystem.internal.operations">
     <genEnums xsi:type="genmodel:GenEnum" typeSafeEnumCompatible="false" ecoreEnum="TypeSystem.ecore#//OperatorKind">
       <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/Add"/>
       <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/Subtract"/>
@@ -54,7 +54,7 @@
       <genFeatures xsi:type="genmodel:GenFeature" property="Readonly" notify="false"
           createChild="false" ecoreFeature="ecore:EReference TypeSystem.ecore#//NamedElement/namespace"/>
     </genClasses>
-    <genClasses xsi:type="genmodel:GenClass" ecoreClass="TypeSystem.ecore#//Namespace">
+    <genClasses xsi:type="genmodel:GenClass" image="false" ecoreClass="TypeSystem.ecore#//Namespace">
       <genFeatures xsi:type="genmodel:GenFeature" property="Readonly" notify="false"
           createChild="false" ecoreFeature="ecore:EReference TypeSystem.ecore#//Namespace/members"/>
       <genFeatures xsi:type="genmodel:GenFeature" property="Readonly" notify="false"

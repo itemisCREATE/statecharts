@@ -1,0 +1,100 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * $Id$
+ */
+package org.eclipselabs.mscript.typesystem.internal.operations;
+
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipselabs.mscript.typesystem.DataType;
+import org.eclipselabs.mscript.typesystem.IntegerType;
+import org.eclipselabs.mscript.typesystem.NumericalType;
+import org.eclipselabs.mscript.typesystem.OperatorKind;
+import org.eclipselabs.mscript.typesystem.TypeSystemFactory;
+import org.eclipselabs.mscript.typesystem.Unit;
+
+/**
+ * <!-- begin-user-doc -->
+ * A static utility class that provides operations related to '<em><b>Integer Type</b></em>' model objects.
+ * <!-- end-user-doc -->
+ *
+ * <p>
+ * The following operations are supported:
+ * <ul>
+ *   <li>{@link org.eclipselabs.mscript.typesystem.IntegerType#evaluate(org.eclipselabs.mscript.typesystem.OperatorKind, org.eclipselabs.mscript.typesystem.DataType) <em>Evaluate</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.typesystem.IntegerType#isAssignableFrom(org.eclipselabs.mscript.typesystem.DataType) <em>Is Assignable From</em>}</li>
+ * </ul>
+ * </p>
+ *
+ * @generated
+ */
+public class IntegerTypeOperations extends DataTypeOperations {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected IntegerTypeOperations() {
+		super();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public static  DataType evaluate(IntegerType integerType, OperatorKind operator, DataType other) {
+		if (operator == OperatorKind.UNARY_MINUS) {
+			return (IntegerType) EcoreUtil.copy(integerType);
+		}
+		
+		if (!(other instanceof NumericalType)) {
+			return TypeSystemFactory.eINSTANCE.createInvalidDataType();
+		}
+		NumericalType otherNumericalType = (NumericalType) other;
+
+		Unit unit;
+		switch (operator) {
+		case ADD:
+		case SUBTRACT:
+			if (!EcoreUtil.equals(integerType.getUnit(), otherNumericalType.getUnit())) {
+				return TypeSystemFactory.eINSTANCE.createInvalidDataType();
+			}
+			unit = (Unit) EcoreUtil.copy(integerType.getUnit());
+			break;
+		case MULTIPLY:
+			unit = integerType.getUnit().multiply(otherNumericalType.getUnit());
+			break;
+		case DIVIDE:
+			unit = integerType.getUnit().divide(otherNumericalType.getUnit());
+			break;
+		default:
+			return TypeSystemFactory.eINSTANCE.createInvalidDataType();
+		}
+		
+		NumericalType result;
+		if (otherNumericalType instanceof IntegerType && operator != OperatorKind.DIVIDE) {
+			result = TypeSystemFactory.eINSTANCE.createIntegerType();
+		} else {
+			result = TypeSystemFactory.eINSTANCE.createRealType();
+		}
+		result.setUnit(unit);
+		
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public static  boolean isAssignableFrom(IntegerType integerType, DataType other) {
+		if (other instanceof IntegerType) {
+			IntegerType otherIntegerType = (IntegerType) other;
+			return integerType.getUnit().isSameAs(otherIntegerType.getUnit(), false);
+		}
+		return false;
+	}
+
+} // IntegerTypeOperations

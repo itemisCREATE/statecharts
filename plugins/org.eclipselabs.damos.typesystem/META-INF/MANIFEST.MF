@@ -1,15 +1,15 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
-Bundle-SymbolicName: org.eclipselabs.damos.typesystem;singleton:=true
+Bundle-SymbolicName: org.eclipselabs.mscript.typesystem;singleton:=true
 Bundle-Version: 0.2.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Export-Package: org.eclipselabs.damos.typesystem,
- org.eclipselabs.damos.typesystem.impl,
- org.eclipselabs.damos.typesystem.util
+Export-Package: org.eclipselabs.mscript.typesystem,
+ org.eclipselabs.mscript.typesystem.impl,
+ org.eclipselabs.mscript.typesystem.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.uml2.common;bundle-version="1.5.0"
