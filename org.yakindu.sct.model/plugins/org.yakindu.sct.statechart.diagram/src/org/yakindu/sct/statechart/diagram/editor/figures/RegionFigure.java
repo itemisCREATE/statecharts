@@ -1,0 +1,83 @@
+/**
+ * Copyright (c) 2010 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * Contributors:
+ * 	committers of YAKINDU - initial API and implementation
+ * 
+ */
+package org.yakindu.sct.statechart.diagram.editor.figures;
+
+import org.eclipse.draw2d.GridData;
+import org.eclipse.draw2d.GridLayout;
+import org.eclipse.draw2d.LineBorder;
+import org.eclipse.draw2d.RectangleFigure;
+import org.eclipse.draw2d.RoundedRectangle;
+import org.eclipse.draw2d.XYLayout;
+import org.eclipse.draw2d.geometry.Dimension;
+import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
+import org.eclipse.gmf.runtime.draw2d.ui.mapmode.IMapMode;
+import org.yakindu.sct.statechart.diagram.editor.figures.utils.GridDataFactory;
+import org.yakindu.sct.statechart.diagram.utils.FontConstants;
+
+public class RegionFigure extends RoundedRectangle {
+
+	private WrappingLabel priorityLabel;
+
+	private RectangleFigure compartmentPane;
+
+	public RegionFigure(IMapMode mapMode) {
+		setLayoutManager(new XYLayout());
+
+		GridLayout layoutThis = new GridLayout();
+		layoutThis.numColumns = 1;
+		layoutThis.makeColumnsEqualWidth = true;
+		layoutThis.verticalSpacing = 2;
+		this.setLayoutManager(layoutThis);
+
+		this.setCornerDimensions(new Dimension(mapMode.DPtoLP(8), mapMode.DPtoLP(8)));
+		this.setLineWidth(mapMode.DPtoLP(1));
+		createContents();
+	}
+
+	private void createContents() {
+
+		RectangleFigure labelFigure = new RectangleFigure();
+		labelFigure.setOutline(false);
+		this.add(labelFigure, GridDataFactory.fillDefaults().align(GridData.CENTER, GridData.CENTER).grab(true, false)
+				.getData());
+		GridLayout layout = new GridLayout();
+		layout.verticalSpacing = 2;
+		layout.numColumns = 1;
+		layout.makeColumnsEqualWidth = true;
+		labelFigure.setLayoutManager(layout);
+
+		/** Priority Label **/
+		priorityLabel = new WrappingLabel();
+		priorityLabel.setFont(FontConstants.DEFAULT);
+		priorityLabel.setText("<priority>");
+		labelFigure.add(priorityLabel,
+				GridDataFactory.fillDefaults().align(GridData.CENTER, GridData.CENTER).grab(true, true).getData());
+
+		/** Compartment container **/
+		compartmentPane = new RectangleFigure();
+		compartmentPane.setOutline(false);
+		compartmentPane.setBorder(new LineBorder(1));
+		GridLayout compartmentLayout = new GridLayout();
+		compartmentLayout.numColumns = 1;
+		compartmentLayout.makeColumnsEqualWidth = true;
+		compartmentPane.setLayoutManager(compartmentLayout);
+		this.add(compartmentPane, GridDataFactory.fillDefaults().grab(true, true).getData());
+	}
+
+	public WrappingLabel getPriorityLabel() {
+		return priorityLabel;
+	}
+
+	public RectangleFigure getCompartmentPane() {
+		return compartmentPane;
+	}
+
+}
