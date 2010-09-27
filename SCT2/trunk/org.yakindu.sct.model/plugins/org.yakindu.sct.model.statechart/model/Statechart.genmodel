@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright (c) 2010 committers of YAKINDU and others.&#xD;&#xA;All rights reserved. This program and the accompanying materials&#xD;&#xA;are made available under the terms of the Eclipse Public License v1.0&#xD;&#xA;which accompanies this distribution, and is available at&#xD;&#xA;http://www.eclipse.org/legal/epl-v10.html&#xD;&#xA;Contributors:&#xD;&#xA;committers of YAKINDU - initial API and implementation"
+    modelDirectory="/org.yakindu.sct.model.statechart/src-gen" editDirectory="/org.yakindu.sct.model.statechart.edit/src-gen"
+    editorDirectory="/org.yakindu.sct.model.statechart.editor/src-gen" modelPluginID="org.yakindu.sct.model.statechart"
+    modelName="Statechart" importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0"
+    copyrightFields="false">
+  <foreignModel>statechart.ecore</foreignModel>
+  <genPackages prefix="Statechart" basePackage="org.yakindu.sct.model.statechart"
+      disposableProviderFactory="true" ecorePackage="statechart.ecore#/">
+    <genClasses ecoreClass="statechart.ecore#//Statechart">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference statechart.ecore#//Statechart/regions"/>
+    </genClasses>
+    <genClasses ecoreClass="statechart.ecore#//Region">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference statechart.ecore#//Region/vertices"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference statechart.ecore#//Region/transitions"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference statechart.ecore#//Region/statechart"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="statechart.ecore#//Vertex">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference statechart.ecore#//Vertex/incomingTransitions"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference statechart.ecore#//Vertex/outgoingTransitions"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference statechart.ecore#//Vertex/containingRegion"/>
+    </genClasses>
+    <genClasses ecoreClass="statechart.ecore#//Transition">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference statechart.ecore#//Transition/source"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference statechart.ecore#//Transition/region"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference statechart.ecore#//Transition/target"/>
+    </genClasses>
+    <genClasses ecoreClass="statechart.ecore#//State">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference statechart.ecore#//State/regions"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="statechart.ecore#//Pseudostate"/>
+    <genClasses ecoreClass="statechart.ecore#//FinalState"/>
+    <genClasses ecoreClass="statechart.ecore#//InitialState"/>
+    <genClasses image="false" ecoreClass="statechart.ecore#//HistoryState"/>
+    <genClasses ecoreClass="statechart.ecore#//DeepHistoryState"/>
+    <genClasses ecoreClass="statechart.ecore#//ShallowHistoryState"/>
+    <genClasses ecoreClass="statechart.ecore#//Fork"/>
+    <genClasses ecoreClass="statechart.ecore#//Join"/>
+    <genClasses ecoreClass="statechart.ecore#//Junction"/>
+    <genClasses ecoreClass="statechart.ecore#//Choice"/>
+  </genPackages>
+</genmodel:GenModel>
