@@ -78,9 +78,11 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
       case AstPackage.NUMERICAL_TYPE_SPECIFIER: return createNumericalTypeSpecifier();
       case AstPackage.REAL_TYPE_SPECIFIER: return createRealTypeSpecifier();
       case AstPackage.INTEGER_TYPE_SPECIFIER: return createIntegerTypeSpecifier();
+      case AstPackage.COMPLEX_TYPE_SPECIFIER: return createComplexTypeSpecifier();
+      case AstPackage.GAUSSIAN_TYPE_SPECIFIER: return createGaussianTypeSpecifier();
       case AstPackage.BOOLEAN_TYPE_SPECIFIER: return createBooleanTypeSpecifier();
       case AstPackage.STRING_TYPE_SPECIFIER: return createStringTypeSpecifier();
-      case AstPackage.COMPLEX_TYPE_SPECIFIER: return createComplexTypeSpecifier();
+      case AstPackage.NAMED_TYPE_SPECIFIER: return createNamedTypeSpecifier();
       case AstPackage.EXPRESSION: return createExpression();
       case AstPackage.CONDITIONAL_EXPRESSION: return createConditionalExpression();
       case AstPackage.CONDITIONAL_EXPRESSION_CASE: return createConditionalExpressionCase();
@@ -289,6 +291,28 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  public ComplexTypeSpecifier createComplexTypeSpecifier()
+  {
+    ComplexTypeSpecifierImpl complexTypeSpecifier = new ComplexTypeSpecifierImpl();
+    return complexTypeSpecifier;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public GaussianTypeSpecifier createGaussianTypeSpecifier()
+  {
+    GaussianTypeSpecifierImpl gaussianTypeSpecifier = new GaussianTypeSpecifierImpl();
+    return gaussianTypeSpecifier;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public BooleanTypeSpecifier createBooleanTypeSpecifier()
   {
     BooleanTypeSpecifierImpl booleanTypeSpecifier = new BooleanTypeSpecifierImpl();
@@ -311,10 +335,10 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public ComplexTypeSpecifier createComplexTypeSpecifier()
+  public NamedTypeSpecifier createNamedTypeSpecifier()
   {
-    ComplexTypeSpecifierImpl complexTypeSpecifier = new ComplexTypeSpecifierImpl();
-    return complexTypeSpecifier;
+    NamedTypeSpecifierImpl namedTypeSpecifier = new NamedTypeSpecifierImpl();
+    return namedTypeSpecifier;
   }
 
   /**

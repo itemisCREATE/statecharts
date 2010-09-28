@@ -417,11 +417,11 @@ ruleDataTypeSpecifier returns [EObject current=null]
 
     |
     { 
-        currentNode=createCompositeNode(grammarAccess.getDataTypeSpecifierAccess().getComplexTypeSpecifierParserRuleCall_1(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getDataTypeSpecifierAccess().getNamedTypeSpecifierParserRuleCall_1(), currentNode); 
     }
-    this_ComplexTypeSpecifier_1=ruleComplexTypeSpecifier
+    this_NamedTypeSpecifier_1=ruleNamedTypeSpecifier
     { 
-        $current = $this_ComplexTypeSpecifier_1.current; 
+        $current = $this_NamedTypeSpecifier_1.current; 
         currentNode = currentNode.getParent();
     }
 )
@@ -518,6 +518,26 @@ ruleNumericalTypeSpecifier returns [EObject current=null]
         $current = $this_IntegerTypeSpecifier_1.current; 
         currentNode = currentNode.getParent();
     }
+
+    |
+    { 
+        currentNode=createCompositeNode(grammarAccess.getNumericalTypeSpecifierAccess().getComplexTypeSpecifierParserRuleCall_2(), currentNode); 
+    }
+    this_ComplexTypeSpecifier_2=ruleComplexTypeSpecifier
+    { 
+        $current = $this_ComplexTypeSpecifier_2.current; 
+        currentNode = currentNode.getParent();
+    }
+
+    |
+    { 
+        currentNode=createCompositeNode(grammarAccess.getNumericalTypeSpecifierAccess().getGaussianTypeSpecifierParserRuleCall_3(), currentNode); 
+    }
+    this_GaussianTypeSpecifier_3=ruleGaussianTypeSpecifier
+    { 
+        $current = $this_GaussianTypeSpecifier_3.current; 
+        currentNode = currentNode.getParent();
+    }
 )
 ;
 
@@ -552,7 +572,7 @@ ruleRealTypeSpecifier returns [EObject current=null]
     currentNode = newNode; 
         associateNodeWithAstElement(currentNode, $current); 
     }
-)	'Real' 
+)	'real' 
     {
         createLeafNode(grammarAccess.getRealTypeSpecifierAccess().getRealKeyword_1(), null); 
     }
@@ -622,7 +642,7 @@ ruleIntegerTypeSpecifier returns [EObject current=null]
     currentNode = newNode; 
         associateNodeWithAstElement(currentNode, $current); 
     }
-)	'Integer' 
+)	'integer' 
     {
         createLeafNode(grammarAccess.getIntegerTypeSpecifierAccess().getIntegerKeyword_1(), null); 
     }
@@ -665,6 +685,146 @@ ruleIntegerTypeSpecifier returns [EObject current=null]
 
 
 
+// Entry rule entryRuleComplexTypeSpecifier
+entryRuleComplexTypeSpecifier returns [EObject current=null] 
+	:
+	{ currentNode = createCompositeNode(grammarAccess.getComplexTypeSpecifierRule(), currentNode); }
+	 iv_ruleComplexTypeSpecifier=ruleComplexTypeSpecifier 
+	 { $current=$iv_ruleComplexTypeSpecifier.current; } 
+	 EOF 
+;
+
+// Rule ComplexTypeSpecifier
+ruleComplexTypeSpecifier returns [EObject current=null] 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+((
+    { 
+        temp=factory.create(grammarAccess.getComplexTypeSpecifierAccess().getComplexTypeSpecifierAction_0().getType().getClassifier());
+        $current = temp; 
+        temp = null;
+        CompositeNode newNode = createCompositeNode(grammarAccess.getComplexTypeSpecifierAccess().getComplexTypeSpecifierAction_0(), currentNode.getParent());
+    newNode.getChildren().add(currentNode);
+    moveLookaheadInfo(currentNode, newNode);
+    currentNode = newNode; 
+        associateNodeWithAstElement(currentNode, $current); 
+    }
+)	'complex' 
+    {
+        createLeafNode(grammarAccess.getComplexTypeSpecifierAccess().getComplexKeyword_1(), null); 
+    }
+(	'(' 
+    {
+        createLeafNode(grammarAccess.getComplexTypeSpecifierAccess().getLeftParenthesisKeyword_2_0(), null); 
+    }
+(
+(
+		{ 
+	        currentNode=createCompositeNode(grammarAccess.getComplexTypeSpecifierAccess().getUnitUnitExpressionParserRuleCall_2_1_0(), currentNode); 
+	    }
+		lv_unit_3_0=ruleUnitExpression		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getComplexTypeSpecifierRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        try {
+	       		set(
+	       			$current, 
+	       			"unit",
+	        		lv_unit_3_0, 
+	        		"UnitExpression", 
+	        		currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+
+)
+)	')' 
+    {
+        createLeafNode(grammarAccess.getComplexTypeSpecifierAccess().getRightParenthesisKeyword_2_2(), null); 
+    }
+)?)
+;
+
+
+
+
+
+// Entry rule entryRuleGaussianTypeSpecifier
+entryRuleGaussianTypeSpecifier returns [EObject current=null] 
+	:
+	{ currentNode = createCompositeNode(grammarAccess.getGaussianTypeSpecifierRule(), currentNode); }
+	 iv_ruleGaussianTypeSpecifier=ruleGaussianTypeSpecifier 
+	 { $current=$iv_ruleGaussianTypeSpecifier.current; } 
+	 EOF 
+;
+
+// Rule GaussianTypeSpecifier
+ruleGaussianTypeSpecifier returns [EObject current=null] 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+((
+    { 
+        temp=factory.create(grammarAccess.getGaussianTypeSpecifierAccess().getGaussianTypeSpecifierAction_0().getType().getClassifier());
+        $current = temp; 
+        temp = null;
+        CompositeNode newNode = createCompositeNode(grammarAccess.getGaussianTypeSpecifierAccess().getGaussianTypeSpecifierAction_0(), currentNode.getParent());
+    newNode.getChildren().add(currentNode);
+    moveLookaheadInfo(currentNode, newNode);
+    currentNode = newNode; 
+        associateNodeWithAstElement(currentNode, $current); 
+    }
+)	'gaussian' 
+    {
+        createLeafNode(grammarAccess.getGaussianTypeSpecifierAccess().getGaussianKeyword_1(), null); 
+    }
+(	'(' 
+    {
+        createLeafNode(grammarAccess.getGaussianTypeSpecifierAccess().getLeftParenthesisKeyword_2_0(), null); 
+    }
+(
+(
+		{ 
+	        currentNode=createCompositeNode(grammarAccess.getGaussianTypeSpecifierAccess().getUnitUnitExpressionParserRuleCall_2_1_0(), currentNode); 
+	    }
+		lv_unit_3_0=ruleUnitExpression		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getGaussianTypeSpecifierRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        try {
+	       		set(
+	       			$current, 
+	       			"unit",
+	        		lv_unit_3_0, 
+	        		"UnitExpression", 
+	        		currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+
+)
+)	')' 
+    {
+        createLeafNode(grammarAccess.getGaussianTypeSpecifierAccess().getRightParenthesisKeyword_2_2(), null); 
+    }
+)?)
+;
+
+
+
+
+
 // Entry rule entryRuleBooleanTypeSpecifier
 entryRuleBooleanTypeSpecifier returns [EObject current=null] 
 	:
@@ -692,7 +852,7 @@ ruleBooleanTypeSpecifier returns [EObject current=null]
     currentNode = newNode; 
         associateNodeWithAstElement(currentNode, $current); 
     }
-)	'Boolean' 
+)	'boolean' 
     {
         createLeafNode(grammarAccess.getBooleanTypeSpecifierAccess().getBooleanKeyword_1(), null); 
     }
@@ -730,7 +890,7 @@ ruleStringTypeSpecifier returns [EObject current=null]
     currentNode = newNode; 
         associateNodeWithAstElement(currentNode, $current); 
     }
-)	'String' 
+)	'string' 
     {
         createLeafNode(grammarAccess.getStringTypeSpecifierAccess().getStringKeyword_1(), null); 
     }
@@ -741,17 +901,17 @@ ruleStringTypeSpecifier returns [EObject current=null]
 
 
 
-// Entry rule entryRuleComplexTypeSpecifier
-entryRuleComplexTypeSpecifier returns [EObject current=null] 
+// Entry rule entryRuleNamedTypeSpecifier
+entryRuleNamedTypeSpecifier returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getComplexTypeSpecifierRule(), currentNode); }
-	 iv_ruleComplexTypeSpecifier=ruleComplexTypeSpecifier 
-	 { $current=$iv_ruleComplexTypeSpecifier.current; } 
+	{ currentNode = createCompositeNode(grammarAccess.getNamedTypeSpecifierRule(), currentNode); }
+	 iv_ruleNamedTypeSpecifier=ruleNamedTypeSpecifier 
+	 { $current=$iv_ruleNamedTypeSpecifier.current; } 
 	 EOF 
 ;
 
-// Rule ComplexTypeSpecifier
-ruleComplexTypeSpecifier returns [EObject current=null] 
+// Rule NamedTypeSpecifier
+ruleNamedTypeSpecifier returns [EObject current=null] 
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
@@ -760,11 +920,11 @@ ruleComplexTypeSpecifier returns [EObject current=null]
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getComplexTypeSpecifierAccess().getNameNameParserRuleCall_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getNamedTypeSpecifierAccess().getNameNameParserRuleCall_0(), currentNode); 
 	    }
 		lv_name_0_0=ruleName		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getComplexTypeSpecifierRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getNamedTypeSpecifierRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        try {
@@ -2012,16 +2172,37 @@ ruleRealLiteral returns [EObject current=null]
 	    }
 
 )
-)(	'(' 
+)(
+(
+		lv_complex_1_0=	'j' 
     {
-        createLeafNode(grammarAccess.getRealLiteralAccess().getLeftParenthesisKeyword_1_0(), null); 
+        createLeafNode(grammarAccess.getRealLiteralAccess().getComplexJKeyword_1_0(), "complex"); 
+    }
+ 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getRealLiteralRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        try {
+	       		set($current, "complex", true, "j", lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
+)
+)?(	'(' 
+    {
+        createLeafNode(grammarAccess.getRealLiteralAccess().getLeftParenthesisKeyword_2_0(), null); 
     }
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getRealLiteralAccess().getUnitUnitExpressionParserRuleCall_1_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getRealLiteralAccess().getUnitUnitExpressionParserRuleCall_2_1_0(), currentNode); 
 	    }
-		lv_unit_2_0=ruleUnitExpression		{
+		lv_unit_3_0=ruleUnitExpression		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getRealLiteralRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -2030,7 +2211,7 @@ ruleRealLiteral returns [EObject current=null]
 	       		set(
 	       			$current, 
 	       			"unit",
-	        		lv_unit_2_0, 
+	        		lv_unit_3_0, 
 	        		"UnitExpression", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
@@ -2042,7 +2223,7 @@ ruleRealLiteral returns [EObject current=null]
 )
 )	')' 
     {
-        createLeafNode(grammarAccess.getRealLiteralAccess().getRightParenthesisKeyword_1_2(), null); 
+        createLeafNode(grammarAccess.getRealLiteralAccess().getRightParenthesisKeyword_2_2(), null); 
     }
 )?)
 ;
@@ -2091,16 +2272,37 @@ ruleIntegerLiteral returns [EObject current=null]
 	    }
 
 )
-)(	'(' 
+)(
+(
+		lv_complex_1_0=	'j' 
     {
-        createLeafNode(grammarAccess.getIntegerLiteralAccess().getLeftParenthesisKeyword_1_0(), null); 
+        createLeafNode(grammarAccess.getIntegerLiteralAccess().getComplexJKeyword_1_0(), "complex"); 
+    }
+ 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getIntegerLiteralRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        try {
+	       		set($current, "complex", true, "j", lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
+)
+)?(	'(' 
+    {
+        createLeafNode(grammarAccess.getIntegerLiteralAccess().getLeftParenthesisKeyword_2_0(), null); 
     }
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getIntegerLiteralAccess().getUnitUnitExpressionParserRuleCall_1_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getIntegerLiteralAccess().getUnitUnitExpressionParserRuleCall_2_1_0(), currentNode); 
 	    }
-		lv_unit_2_0=ruleUnitExpression		{
+		lv_unit_3_0=ruleUnitExpression		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getIntegerLiteralRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -2109,7 +2311,7 @@ ruleIntegerLiteral returns [EObject current=null]
 	       		set(
 	       			$current, 
 	       			"unit",
-	        		lv_unit_2_0, 
+	        		lv_unit_3_0, 
 	        		"UnitExpression", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
@@ -2121,7 +2323,7 @@ ruleIntegerLiteral returns [EObject current=null]
 )
 )	')' 
     {
-        createLeafNode(grammarAccess.getIntegerLiteralAccess().getRightParenthesisKeyword_1_2(), null); 
+        createLeafNode(grammarAccess.getIntegerLiteralAccess().getRightParenthesisKeyword_2_2(), null); 
     }
 )?)
 ;

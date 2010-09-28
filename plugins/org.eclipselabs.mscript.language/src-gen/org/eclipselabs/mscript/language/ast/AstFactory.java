@@ -116,6 +116,24 @@ public interface AstFactory extends EFactory
   IntegerTypeSpecifier createIntegerTypeSpecifier();
 
   /**
+   * Returns a new object of class '<em>Complex Type Specifier</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Complex Type Specifier</em>'.
+   * @generated
+   */
+  ComplexTypeSpecifier createComplexTypeSpecifier();
+
+  /**
+   * Returns a new object of class '<em>Gaussian Type Specifier</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Gaussian Type Specifier</em>'.
+   * @generated
+   */
+  GaussianTypeSpecifier createGaussianTypeSpecifier();
+
+  /**
    * Returns a new object of class '<em>Boolean Type Specifier</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -134,13 +152,13 @@ public interface AstFactory extends EFactory
   StringTypeSpecifier createStringTypeSpecifier();
 
   /**
-   * Returns a new object of class '<em>Complex Type Specifier</em>'.
+   * Returns a new object of class '<em>Named Type Specifier</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Complex Type Specifier</em>'.
+   * @return a new object of class '<em>Named Type Specifier</em>'.
    * @generated
    */
-  ComplexTypeSpecifier createComplexTypeSpecifier();
+  NamedTypeSpecifier createNamedTypeSpecifier();
 
   /**
    * Returns a new object of class '<em>Expression</em>'.

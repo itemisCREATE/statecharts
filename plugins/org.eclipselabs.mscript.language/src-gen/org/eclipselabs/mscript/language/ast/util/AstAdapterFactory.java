@@ -128,6 +128,16 @@ public class AstAdapterFactory extends AdapterFactoryImpl
         return createIntegerTypeSpecifierAdapter();
       }
       @Override
+      public Adapter caseComplexTypeSpecifier(ComplexTypeSpecifier object)
+      {
+        return createComplexTypeSpecifierAdapter();
+      }
+      @Override
+      public Adapter caseGaussianTypeSpecifier(GaussianTypeSpecifier object)
+      {
+        return createGaussianTypeSpecifierAdapter();
+      }
+      @Override
       public Adapter caseBooleanTypeSpecifier(BooleanTypeSpecifier object)
       {
         return createBooleanTypeSpecifierAdapter();
@@ -138,9 +148,9 @@ public class AstAdapterFactory extends AdapterFactoryImpl
         return createStringTypeSpecifierAdapter();
       }
       @Override
-      public Adapter caseComplexTypeSpecifier(ComplexTypeSpecifier object)
+      public Adapter caseNamedTypeSpecifier(NamedTypeSpecifier object)
       {
-        return createComplexTypeSpecifierAdapter();
+        return createNamedTypeSpecifierAdapter();
       }
       @Override
       public Adapter caseExpression(Expression object)
@@ -505,6 +515,36 @@ public class AstAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.ComplexTypeSpecifier <em>Complex Type Specifier</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipselabs.mscript.language.ast.ComplexTypeSpecifier
+   * @generated
+   */
+  public Adapter createComplexTypeSpecifierAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.GaussianTypeSpecifier <em>Gaussian Type Specifier</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipselabs.mscript.language.ast.GaussianTypeSpecifier
+   * @generated
+   */
+  public Adapter createGaussianTypeSpecifierAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.BooleanTypeSpecifier <em>Boolean Type Specifier</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -535,16 +575,16 @@ public class AstAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.ComplexTypeSpecifier <em>Complex Type Specifier</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.NamedTypeSpecifier <em>Named Type Specifier</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.ComplexTypeSpecifier
+   * @see org.eclipselabs.mscript.language.ast.NamedTypeSpecifier
    * @generated
    */
-  public Adapter createComplexTypeSpecifierAdapter()
+  public Adapter createNamedTypeSpecifierAdapter()
   {
     return null;
   }

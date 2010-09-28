@@ -26,9 +26,11 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RealTypeSpecifier" eSuperTypes="#//NumericalTypeSpecifier"/>
   <eClassifiers xsi:type="ecore:EClass" name="IntegerTypeSpecifier" eSuperTypes="#//NumericalTypeSpecifier"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ComplexTypeSpecifier" eSuperTypes="#//NumericalTypeSpecifier"/>
+  <eClassifiers xsi:type="ecore:EClass" name="GaussianTypeSpecifier" eSuperTypes="#//NumericalTypeSpecifier"/>
   <eClassifiers xsi:type="ecore:EClass" name="BooleanTypeSpecifier" eSuperTypes="#//PrimitiveTypeSpecifier"/>
   <eClassifiers xsi:type="ecore:EClass" name="StringTypeSpecifier" eSuperTypes="#//PrimitiveTypeSpecifier"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ComplexTypeSpecifier" eSuperTypes="#//DataTypeSpecifier">
+  <eClassifiers xsi:type="ecore:EClass" name="NamedTypeSpecifier" eSuperTypes="#//DataTypeSpecifier">
     <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="#//Name" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Expression"/>
@@ -68,6 +70,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Literal" eSuperTypes="#//Expression"/>
   <eClassifiers xsi:type="ecore:EClass" name="NumericalLiteral" eSuperTypes="#//Literal">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="complex" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="unit" eType="#//UnitExpression"
         containment="true"/>
   </eClassifiers>

@@ -65,6 +65,10 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getRealTypeSpecifierAccess().getGroup_2(), "rule__RealTypeSpecifier__Group_2__0");
 					put(grammarAccess.getIntegerTypeSpecifierAccess().getGroup(), "rule__IntegerTypeSpecifier__Group__0");
 					put(grammarAccess.getIntegerTypeSpecifierAccess().getGroup_2(), "rule__IntegerTypeSpecifier__Group_2__0");
+					put(grammarAccess.getComplexTypeSpecifierAccess().getGroup(), "rule__ComplexTypeSpecifier__Group__0");
+					put(grammarAccess.getComplexTypeSpecifierAccess().getGroup_2(), "rule__ComplexTypeSpecifier__Group_2__0");
+					put(grammarAccess.getGaussianTypeSpecifierAccess().getGroup(), "rule__GaussianTypeSpecifier__Group__0");
+					put(grammarAccess.getGaussianTypeSpecifierAccess().getGroup_2(), "rule__GaussianTypeSpecifier__Group_2__0");
 					put(grammarAccess.getBooleanTypeSpecifierAccess().getGroup(), "rule__BooleanTypeSpecifier__Group__0");
 					put(grammarAccess.getStringTypeSpecifierAccess().getGroup(), "rule__StringTypeSpecifier__Group__0");
 					put(grammarAccess.getConditionalExpressionAccess().getGroup(), "rule__ConditionalExpression__Group__0");
@@ -93,9 +97,9 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getPowerExpressionAccess().getGroup_1(), "rule__PowerExpression__Group_1__0");
 					put(grammarAccess.getUnaryMinusExpressionAccess().getGroup_1(), "rule__UnaryMinusExpression__Group_1__0");
 					put(grammarAccess.getRealLiteralAccess().getGroup(), "rule__RealLiteral__Group__0");
-					put(grammarAccess.getRealLiteralAccess().getGroup_1(), "rule__RealLiteral__Group_1__0");
+					put(grammarAccess.getRealLiteralAccess().getGroup_2(), "rule__RealLiteral__Group_2__0");
 					put(grammarAccess.getIntegerLiteralAccess().getGroup(), "rule__IntegerLiteral__Group__0");
-					put(grammarAccess.getIntegerLiteralAccess().getGroup_1(), "rule__IntegerLiteral__Group_1__0");
+					put(grammarAccess.getIntegerLiteralAccess().getGroup_2(), "rule__IntegerLiteral__Group_2__0");
 					put(grammarAccess.getNameAccess().getGroup(), "rule__Name__Group__0");
 					put(grammarAccess.getNameAccess().getGroup_1(), "rule__Name__Group_1__0");
 					put(grammarAccess.getFunctionArgumentListAccess().getGroup_0(), "rule__FunctionArgumentList__Group_0__0");
@@ -135,7 +139,9 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getEnumerationLiteralDefinitionAccess().getNameAssignment(), "rule__EnumerationLiteralDefinition__NameAssignment");
 					put(grammarAccess.getRealTypeSpecifierAccess().getUnitAssignment_2_1(), "rule__RealTypeSpecifier__UnitAssignment_2_1");
 					put(grammarAccess.getIntegerTypeSpecifierAccess().getUnitAssignment_2_1(), "rule__IntegerTypeSpecifier__UnitAssignment_2_1");
-					put(grammarAccess.getComplexTypeSpecifierAccess().getNameAssignment(), "rule__ComplexTypeSpecifier__NameAssignment");
+					put(grammarAccess.getComplexTypeSpecifierAccess().getUnitAssignment_2_1(), "rule__ComplexTypeSpecifier__UnitAssignment_2_1");
+					put(grammarAccess.getGaussianTypeSpecifierAccess().getUnitAssignment_2_1(), "rule__GaussianTypeSpecifier__UnitAssignment_2_1");
+					put(grammarAccess.getNamedTypeSpecifierAccess().getNameAssignment(), "rule__NamedTypeSpecifier__NameAssignment");
 					put(grammarAccess.getConditionalExpressionAccess().getCasesAssignment_1(), "rule__ConditionalExpression__CasesAssignment_1");
 					put(grammarAccess.getConditionalExpressionAccess().getCasesAssignment_2_1(), "rule__ConditionalExpression__CasesAssignment_2_1");
 					put(grammarAccess.getConditionalExpressionAccess().getElseExpressionAssignment_4(), "rule__ConditionalExpression__ElseExpressionAssignment_4");
@@ -156,9 +162,11 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getPowerExpressionAccess().getExponentAssignment_1_2(), "rule__PowerExpression__ExponentAssignment_1_2");
 					put(grammarAccess.getUnaryMinusExpressionAccess().getOperandAssignment_1_2(), "rule__UnaryMinusExpression__OperandAssignment_1_2");
 					put(grammarAccess.getRealLiteralAccess().getValueAssignment_0(), "rule__RealLiteral__ValueAssignment_0");
-					put(grammarAccess.getRealLiteralAccess().getUnitAssignment_1_1(), "rule__RealLiteral__UnitAssignment_1_1");
+					put(grammarAccess.getRealLiteralAccess().getComplexAssignment_1(), "rule__RealLiteral__ComplexAssignment_1");
+					put(grammarAccess.getRealLiteralAccess().getUnitAssignment_2_1(), "rule__RealLiteral__UnitAssignment_2_1");
 					put(grammarAccess.getIntegerLiteralAccess().getValueAssignment_0(), "rule__IntegerLiteral__ValueAssignment_0");
-					put(grammarAccess.getIntegerLiteralAccess().getUnitAssignment_1_1(), "rule__IntegerLiteral__UnitAssignment_1_1");
+					put(grammarAccess.getIntegerLiteralAccess().getComplexAssignment_1(), "rule__IntegerLiteral__ComplexAssignment_1");
+					put(grammarAccess.getIntegerLiteralAccess().getUnitAssignment_2_1(), "rule__IntegerLiteral__UnitAssignment_2_1");
 					put(grammarAccess.getBooleanLiteralAccess().getValueAssignment(), "rule__BooleanLiteral__ValueAssignment");
 					put(grammarAccess.getStringLiteralAccess().getValueAssignment(), "rule__StringLiteral__ValueAssignment");
 					put(grammarAccess.getNameAccess().getIdentifiersAssignment_0(), "rule__Name__IdentifiersAssignment_0");

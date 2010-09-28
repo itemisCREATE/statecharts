@@ -34,27 +34,33 @@ EnumerationLiteralDefinition :
  */
 
 DataTypeSpecifier :
-	PrimitiveTypeSpecifier | ComplexTypeSpecifier;
+	PrimitiveTypeSpecifier | NamedTypeSpecifier;
 	
 PrimitiveTypeSpecifier :
 	NumericalTypeSpecifier | BooleanTypeSpecifier | StringTypeSpecifier;
 	
 NumericalTypeSpecifier :
-	RealTypeSpecifier | IntegerTypeSpecifier;
+	RealTypeSpecifier | IntegerTypeSpecifier | ComplexTypeSpecifier | GaussianTypeSpecifier;
 	
 RealTypeSpecifier :
-	{RealTypeSpecifier} 'Real' ('(' unit=UnitExpression ')')? /* ('[' dimensions ']')? */;
+	{RealTypeSpecifier} 'real' ('(' unit=UnitExpression ')')? /* ('[' dimensions ']')? */;
 	
 IntegerTypeSpecifier :
-	{IntegerTypeSpecifier} 'Integer' ('(' unit=UnitExpression ')')? /* ('[' dimensions ']')? */;
+	{IntegerTypeSpecifier} 'integer' ('(' unit=UnitExpression ')')? /* ('[' dimensions ']')? */;
 	
+ComplexTypeSpecifier :
+	{ComplexTypeSpecifier} 'complex' ('(' unit=UnitExpression ')')? /* ('[' dimensions ']')? */;
+
+GaussianTypeSpecifier :
+	{GaussianTypeSpecifier} 'gaussian' ('(' unit=UnitExpression ')')? /* ('[' dimensions ']')? */;
+
 BooleanTypeSpecifier :
-	{BooleanTypeSpecifier} 'Boolean' /* ('[' dimensions ']')? */;
+	{BooleanTypeSpecifier} 'boolean' /* ('[' dimensions ']')? */;
 	
 StringTypeSpecifier :
-	{StringTypeSpecifier} 'String' /* ('[' dimensions ']')? */;
+	{StringTypeSpecifier} 'string' /* ('[' dimensions ']')? */;
 
-ComplexTypeSpecifier :
+NamedTypeSpecifier :
 	name=Name /* ('[' dimensions ']')? */;
 	
 /*
@@ -135,10 +141,10 @@ NumericalLiteral :
 	RealLiteral | IntegerLiteral;
 	
 RealLiteral :
-	value=REAL ('(' unit=UnitExpression ')')?;
+	value=REAL (complex?='j')? ('(' unit=UnitExpression ')')?;
 	
 IntegerLiteral :
-	value=INTEGER ('(' unit=UnitExpression ')')?;
+	value=INTEGER (complex?='j')? ('(' unit=UnitExpression ')')?;
 
 BooleanLiteral :
 	value=BooleanKind;

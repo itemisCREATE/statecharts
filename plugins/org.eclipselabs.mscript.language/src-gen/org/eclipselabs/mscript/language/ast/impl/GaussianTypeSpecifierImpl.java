@@ -8,25 +8,25 @@ package org.eclipselabs.mscript.language.ast.impl;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipselabs.mscript.language.ast.AstPackage;
-import org.eclipselabs.mscript.language.ast.ComplexTypeSpecifier;
+import org.eclipselabs.mscript.language.ast.GaussianTypeSpecifier;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Complex Type Specifier</b></em>'.
+ * An implementation of the model object '<em><b>Gaussian Type Specifier</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public class ComplexTypeSpecifierImpl extends NumericalTypeSpecifierImpl implements ComplexTypeSpecifier
+public class GaussianTypeSpecifierImpl extends NumericalTypeSpecifierImpl implements GaussianTypeSpecifier
 {
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ComplexTypeSpecifierImpl()
+  protected GaussianTypeSpecifierImpl()
   {
     super();
   }
@@ -39,7 +39,7 @@ public class ComplexTypeSpecifierImpl extends NumericalTypeSpecifierImpl impleme
   @Override
   protected EClass eStaticClass()
   {
-    return AstPackage.Literals.COMPLEX_TYPE_SPECIFIER;
+    return AstPackage.Literals.GAUSSIAN_TYPE_SPECIFIER;
   }
 
-} //ComplexTypeSpecifierImpl
+} //GaussianTypeSpecifierImpl

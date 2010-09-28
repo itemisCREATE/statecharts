@@ -181,6 +181,28 @@ public class AstSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case AstPackage.COMPLEX_TYPE_SPECIFIER:
+      {
+        ComplexTypeSpecifier complexTypeSpecifier = (ComplexTypeSpecifier)theEObject;
+        T result = caseComplexTypeSpecifier(complexTypeSpecifier);
+        if (result == null) result = caseNumericalTypeSpecifier(complexTypeSpecifier);
+        if (result == null) result = casePrimitiveTypeSpecifier(complexTypeSpecifier);
+        if (result == null) result = caseDataTypeSpecifier(complexTypeSpecifier);
+        if (result == null) result = caseMscript(complexTypeSpecifier);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AstPackage.GAUSSIAN_TYPE_SPECIFIER:
+      {
+        GaussianTypeSpecifier gaussianTypeSpecifier = (GaussianTypeSpecifier)theEObject;
+        T result = caseGaussianTypeSpecifier(gaussianTypeSpecifier);
+        if (result == null) result = caseNumericalTypeSpecifier(gaussianTypeSpecifier);
+        if (result == null) result = casePrimitiveTypeSpecifier(gaussianTypeSpecifier);
+        if (result == null) result = caseDataTypeSpecifier(gaussianTypeSpecifier);
+        if (result == null) result = caseMscript(gaussianTypeSpecifier);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case AstPackage.BOOLEAN_TYPE_SPECIFIER:
       {
         BooleanTypeSpecifier booleanTypeSpecifier = (BooleanTypeSpecifier)theEObject;
@@ -201,12 +223,12 @@ public class AstSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AstPackage.COMPLEX_TYPE_SPECIFIER:
+      case AstPackage.NAMED_TYPE_SPECIFIER:
       {
-        ComplexTypeSpecifier complexTypeSpecifier = (ComplexTypeSpecifier)theEObject;
-        T result = caseComplexTypeSpecifier(complexTypeSpecifier);
-        if (result == null) result = caseDataTypeSpecifier(complexTypeSpecifier);
-        if (result == null) result = caseMscript(complexTypeSpecifier);
+        NamedTypeSpecifier namedTypeSpecifier = (NamedTypeSpecifier)theEObject;
+        T result = caseNamedTypeSpecifier(namedTypeSpecifier);
+        if (result == null) result = caseDataTypeSpecifier(namedTypeSpecifier);
+        if (result == null) result = caseMscript(namedTypeSpecifier);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -673,6 +695,38 @@ public class AstSwitch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>Complex Type Specifier</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Complex Type Specifier</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseComplexTypeSpecifier(ComplexTypeSpecifier object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Gaussian Type Specifier</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Gaussian Type Specifier</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseGaussianTypeSpecifier(GaussianTypeSpecifier object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>Boolean Type Specifier</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -705,17 +759,17 @@ public class AstSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Complex Type Specifier</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Named Type Specifier</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Complex Type Specifier</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Named Type Specifier</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseComplexTypeSpecifier(ComplexTypeSpecifier object)
+  public T caseNamedTypeSpecifier(NamedTypeSpecifier object)
   {
     return null;
   }

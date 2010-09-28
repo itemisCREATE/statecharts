@@ -24,6 +24,7 @@ import org.eclipselabs.mscript.language.ast.UnitExpression;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.NumericalLiteralImpl#isComplex <em>Complex</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.NumericalLiteralImpl#getUnit <em>Unit</em>}</li>
  * </ul>
  * </p>
@@ -32,6 +33,26 @@ import org.eclipselabs.mscript.language.ast.UnitExpression;
  */
 public class NumericalLiteralImpl extends LiteralImpl implements NumericalLiteral
 {
+  /**
+   * The default value of the '{@link #isComplex() <em>Complex</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isComplex()
+   * @generated
+   * @ordered
+   */
+  protected static final boolean COMPLEX_EDEFAULT = false;
+
+  /**
+   * The cached value of the '{@link #isComplex() <em>Complex</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isComplex()
+   * @generated
+   * @ordered
+   */
+  protected boolean complex = COMPLEX_EDEFAULT;
+
   /**
    * The cached value of the '{@link #getUnit() <em>Unit</em>}' containment reference.
    * <!-- begin-user-doc -->
@@ -61,6 +82,29 @@ public class NumericalLiteralImpl extends LiteralImpl implements NumericalLitera
   protected EClass eStaticClass()
   {
     return AstPackage.Literals.NUMERICAL_LITERAL;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public boolean isComplex()
+  {
+    return complex;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setComplex(boolean newComplex)
+  {
+    boolean oldComplex = complex;
+    complex = newComplex;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.NUMERICAL_LITERAL__COMPLEX, oldComplex, complex));
   }
 
   /**
@@ -137,6 +181,8 @@ public class NumericalLiteralImpl extends LiteralImpl implements NumericalLitera
   {
     switch (featureID)
     {
+      case AstPackage.NUMERICAL_LITERAL__COMPLEX:
+        return isComplex();
       case AstPackage.NUMERICAL_LITERAL__UNIT:
         return getUnit();
     }
@@ -153,6 +199,9 @@ public class NumericalLiteralImpl extends LiteralImpl implements NumericalLitera
   {
     switch (featureID)
     {
+      case AstPackage.NUMERICAL_LITERAL__COMPLEX:
+        setComplex((Boolean)newValue);
+        return;
       case AstPackage.NUMERICAL_LITERAL__UNIT:
         setUnit((UnitExpression)newValue);
         return;
@@ -170,6 +219,9 @@ public class NumericalLiteralImpl extends LiteralImpl implements NumericalLitera
   {
     switch (featureID)
     {
+      case AstPackage.NUMERICAL_LITERAL__COMPLEX:
+        setComplex(COMPLEX_EDEFAULT);
+        return;
       case AstPackage.NUMERICAL_LITERAL__UNIT:
         setUnit((UnitExpression)null);
         return;
@@ -187,10 +239,29 @@ public class NumericalLiteralImpl extends LiteralImpl implements NumericalLitera
   {
     switch (featureID)
     {
+      case AstPackage.NUMERICAL_LITERAL__COMPLEX:
+        return complex != COMPLEX_EDEFAULT;
       case AstPackage.NUMERICAL_LITERAL__UNIT:
         return unit != null;
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (complex: ");
+    result.append(complex);
+    result.append(')');
+    return result.toString();
   }
 
 } //NumericalLiteralImpl

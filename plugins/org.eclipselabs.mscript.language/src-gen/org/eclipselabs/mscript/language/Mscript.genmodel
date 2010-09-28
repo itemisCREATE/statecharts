@@ -55,10 +55,12 @@
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//RealTypeSpecifier"/>
     <genClasses ecoreClass="Mscript.ecore#//IntegerTypeSpecifier"/>
+    <genClasses ecoreClass="Mscript.ecore#//ComplexTypeSpecifier"/>
+    <genClasses ecoreClass="Mscript.ecore#//GaussianTypeSpecifier"/>
     <genClasses ecoreClass="Mscript.ecore#//BooleanTypeSpecifier"/>
     <genClasses ecoreClass="Mscript.ecore#//StringTypeSpecifier"/>
-    <genClasses ecoreClass="Mscript.ecore#//ComplexTypeSpecifier">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ComplexTypeSpecifier/name"/>
+    <genClasses ecoreClass="Mscript.ecore#//NamedTypeSpecifier">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//NamedTypeSpecifier/name"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//Expression"/>
     <genClasses ecoreClass="Mscript.ecore#//ConditionalExpression">
@@ -71,6 +73,7 @@
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//Literal"/>
     <genClasses ecoreClass="Mscript.ecore#//NumericalLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//NumericalLiteral/complex"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//NumericalLiteral/unit"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//RealLiteral">

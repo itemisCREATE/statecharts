@@ -35,6 +35,7 @@ import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.ast.ExpressionList;
 import org.eclipselabs.mscript.language.ast.ExpressionSubscript;
 import org.eclipselabs.mscript.language.ast.FunctionArgumentList;
+import org.eclipselabs.mscript.language.ast.GaussianTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.IntegerLiteral;
 import org.eclipselabs.mscript.language.ast.IntegerTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.Literal;
@@ -48,6 +49,7 @@ import org.eclipselabs.mscript.language.ast.MultiplyDivideExpression;
 import org.eclipselabs.mscript.language.ast.MultiplyDivideOperator;
 import org.eclipselabs.mscript.language.ast.Name;
 import org.eclipselabs.mscript.language.ast.NamedArgument;
+import org.eclipselabs.mscript.language.ast.NamedTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.NumericalLiteral;
 import org.eclipselabs.mscript.language.ast.NumericalTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.PackageDefinition;
@@ -155,6 +157,20 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass complexTypeSpecifierEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass gaussianTypeSpecifierEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass booleanTypeSpecifierEClass = null;
 
   /**
@@ -169,7 +185,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass complexTypeSpecifierEClass = null;
+  private EClass namedTypeSpecifierEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -700,6 +716,26 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getComplexTypeSpecifier()
+  {
+    return complexTypeSpecifierEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getGaussianTypeSpecifier()
+  {
+    return gaussianTypeSpecifierEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getBooleanTypeSpecifier()
   {
     return booleanTypeSpecifierEClass;
@@ -720,9 +756,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getComplexTypeSpecifier()
+  public EClass getNamedTypeSpecifier()
   {
-    return complexTypeSpecifierEClass;
+    return namedTypeSpecifierEClass;
   }
 
   /**
@@ -730,9 +766,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getComplexTypeSpecifier_Name()
+  public EReference getNamedTypeSpecifier_Name()
   {
-    return (EReference)complexTypeSpecifierEClass.getEStructuralFeatures().get(0);
+    return (EReference)namedTypeSpecifierEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -830,9 +866,19 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getNumericalLiteral_Complex()
+  {
+    return (EAttribute)numericalLiteralEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EReference getNumericalLiteral_Unit()
   {
-    return (EReference)numericalLiteralEClass.getEStructuralFeatures().get(0);
+    return (EReference)numericalLiteralEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -1701,12 +1747,16 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
 
     integerTypeSpecifierEClass = createEClass(INTEGER_TYPE_SPECIFIER);
 
+    complexTypeSpecifierEClass = createEClass(COMPLEX_TYPE_SPECIFIER);
+
+    gaussianTypeSpecifierEClass = createEClass(GAUSSIAN_TYPE_SPECIFIER);
+
     booleanTypeSpecifierEClass = createEClass(BOOLEAN_TYPE_SPECIFIER);
 
     stringTypeSpecifierEClass = createEClass(STRING_TYPE_SPECIFIER);
 
-    complexTypeSpecifierEClass = createEClass(COMPLEX_TYPE_SPECIFIER);
-    createEReference(complexTypeSpecifierEClass, COMPLEX_TYPE_SPECIFIER__NAME);
+    namedTypeSpecifierEClass = createEClass(NAMED_TYPE_SPECIFIER);
+    createEReference(namedTypeSpecifierEClass, NAMED_TYPE_SPECIFIER__NAME);
 
     expressionEClass = createEClass(EXPRESSION);
 
@@ -1721,6 +1771,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     literalEClass = createEClass(LITERAL);
 
     numericalLiteralEClass = createEClass(NUMERICAL_LITERAL);
+    createEAttribute(numericalLiteralEClass, NUMERICAL_LITERAL__COMPLEX);
     createEReference(numericalLiteralEClass, NUMERICAL_LITERAL__UNIT);
 
     realLiteralEClass = createEClass(REAL_LITERAL);
@@ -1876,9 +1927,11 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     numericalTypeSpecifierEClass.getESuperTypes().add(this.getPrimitiveTypeSpecifier());
     realTypeSpecifierEClass.getESuperTypes().add(this.getNumericalTypeSpecifier());
     integerTypeSpecifierEClass.getESuperTypes().add(this.getNumericalTypeSpecifier());
+    complexTypeSpecifierEClass.getESuperTypes().add(this.getNumericalTypeSpecifier());
+    gaussianTypeSpecifierEClass.getESuperTypes().add(this.getNumericalTypeSpecifier());
     booleanTypeSpecifierEClass.getESuperTypes().add(this.getPrimitiveTypeSpecifier());
     stringTypeSpecifierEClass.getESuperTypes().add(this.getPrimitiveTypeSpecifier());
-    complexTypeSpecifierEClass.getESuperTypes().add(this.getDataTypeSpecifier());
+    namedTypeSpecifierEClass.getESuperTypes().add(this.getDataTypeSpecifier());
     conditionalExpressionEClass.getESuperTypes().add(this.getExpression());
     literalEClass.getESuperTypes().add(this.getExpression());
     numericalLiteralEClass.getESuperTypes().add(this.getLiteral());
@@ -1932,12 +1985,16 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
 
     initEClass(integerTypeSpecifierEClass, IntegerTypeSpecifier.class, "IntegerTypeSpecifier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
+    initEClass(complexTypeSpecifierEClass, ComplexTypeSpecifier.class, "ComplexTypeSpecifier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(gaussianTypeSpecifierEClass, GaussianTypeSpecifier.class, "GaussianTypeSpecifier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
     initEClass(booleanTypeSpecifierEClass, BooleanTypeSpecifier.class, "BooleanTypeSpecifier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(stringTypeSpecifierEClass, StringTypeSpecifier.class, "StringTypeSpecifier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-    initEClass(complexTypeSpecifierEClass, ComplexTypeSpecifier.class, "ComplexTypeSpecifier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getComplexTypeSpecifier_Name(), this.getName_(), null, "name", null, 0, 1, ComplexTypeSpecifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(namedTypeSpecifierEClass, NamedTypeSpecifier.class, "NamedTypeSpecifier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getNamedTypeSpecifier_Name(), this.getName_(), null, "name", null, 0, 1, NamedTypeSpecifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(expressionEClass, Expression.class, "Expression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1952,6 +2009,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     initEClass(literalEClass, Literal.class, "Literal", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(numericalLiteralEClass, NumericalLiteral.class, "NumericalLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getNumericalLiteral_Complex(), ecorePackage.getEBoolean(), "complex", null, 0, 1, NumericalLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getNumericalLiteral_Unit(), this.getUnitExpression(), null, "unit", null, 0, 1, NumericalLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(realLiteralEClass, RealLiteral.class, "RealLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
