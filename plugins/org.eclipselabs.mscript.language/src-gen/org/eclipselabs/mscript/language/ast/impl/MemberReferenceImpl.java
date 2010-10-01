@@ -21,7 +21,7 @@ import org.eclipselabs.mscript.language.ast.MemberReference;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.MemberReferenceImpl#getIdentifier <em>Identifier</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.MemberReferenceImpl#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -30,24 +30,24 @@ import org.eclipselabs.mscript.language.ast.MemberReference;
 public class MemberReferenceImpl extends ComponentReferenceImpl implements MemberReference
 {
   /**
-   * The default value of the '{@link #getIdentifier() <em>Identifier</em>}' attribute.
+   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getIdentifier()
+   * @see #getName()
    * @generated
    * @ordered
    */
-  protected static final String IDENTIFIER_EDEFAULT = null;
+  protected static final String NAME_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getIdentifier() <em>Identifier</em>}' attribute.
+   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getIdentifier()
+   * @see #getName()
    * @generated
    * @ordered
    */
-  protected String identifier = IDENTIFIER_EDEFAULT;
+  protected String name = NAME_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -75,9 +75,9 @@ public class MemberReferenceImpl extends ComponentReferenceImpl implements Membe
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getIdentifier()
+  public String getName()
   {
-    return identifier;
+    return name;
   }
 
   /**
@@ -85,12 +85,12 @@ public class MemberReferenceImpl extends ComponentReferenceImpl implements Membe
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setIdentifier(String newIdentifier)
+  public void setName(String newName)
   {
-    String oldIdentifier = identifier;
-    identifier = newIdentifier;
+    String oldName = name;
+    name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.MEMBER_REFERENCE__IDENTIFIER, oldIdentifier, identifier));
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.MEMBER_REFERENCE__NAME, oldName, name));
   }
 
   /**
@@ -103,8 +103,8 @@ public class MemberReferenceImpl extends ComponentReferenceImpl implements Membe
   {
     switch (featureID)
     {
-      case AstPackage.MEMBER_REFERENCE__IDENTIFIER:
-        return getIdentifier();
+      case AstPackage.MEMBER_REFERENCE__NAME:
+        return getName();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -119,8 +119,8 @@ public class MemberReferenceImpl extends ComponentReferenceImpl implements Membe
   {
     switch (featureID)
     {
-      case AstPackage.MEMBER_REFERENCE__IDENTIFIER:
-        setIdentifier((String)newValue);
+      case AstPackage.MEMBER_REFERENCE__NAME:
+        setName((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -136,8 +136,8 @@ public class MemberReferenceImpl extends ComponentReferenceImpl implements Membe
   {
     switch (featureID)
     {
-      case AstPackage.MEMBER_REFERENCE__IDENTIFIER:
-        setIdentifier(IDENTIFIER_EDEFAULT);
+      case AstPackage.MEMBER_REFERENCE__NAME:
+        setName(NAME_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -153,8 +153,8 @@ public class MemberReferenceImpl extends ComponentReferenceImpl implements Membe
   {
     switch (featureID)
     {
-      case AstPackage.MEMBER_REFERENCE__IDENTIFIER:
-        return IDENTIFIER_EDEFAULT == null ? identifier != null : !IDENTIFIER_EDEFAULT.equals(identifier);
+      case AstPackage.MEMBER_REFERENCE__NAME:
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
     }
     return super.eIsSet(featureID);
   }
@@ -170,8 +170,8 @@ public class MemberReferenceImpl extends ComponentReferenceImpl implements Membe
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (identifier: ");
-    result.append(identifier);
+    result.append(" (name: ");
+    result.append(name);
     result.append(')');
     return result.toString();
   }

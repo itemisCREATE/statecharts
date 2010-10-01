@@ -13,22 +13,22 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipselabs.mscript.language.ast.AstPackage;
-import org.eclipselabs.mscript.language.ast.EnumerationLiteralDefinition;
+import org.eclipselabs.mscript.language.ast.EnumerationLiteralDeclaration;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Enumeration Literal Definition</b></em>'.
+ * An implementation of the model object '<em><b>Enumeration Literal Declaration</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.EnumerationLiteralDefinitionImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.EnumerationLiteralDeclarationImpl#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class EnumerationLiteralDefinitionImpl extends MinimalEObjectImpl.Container implements EnumerationLiteralDefinition
+public class EnumerationLiteralDeclarationImpl extends MinimalEObjectImpl.Container implements EnumerationLiteralDeclaration
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -55,7 +55,7 @@ public class EnumerationLiteralDefinitionImpl extends MinimalEObjectImpl.Contain
    * <!-- end-user-doc -->
    * @generated
    */
-  protected EnumerationLiteralDefinitionImpl()
+  protected EnumerationLiteralDeclarationImpl()
   {
     super();
   }
@@ -68,7 +68,7 @@ public class EnumerationLiteralDefinitionImpl extends MinimalEObjectImpl.Contain
   @Override
   protected EClass eStaticClass()
   {
-    return AstPackage.Literals.ENUMERATION_LITERAL_DEFINITION;
+    return AstPackage.Literals.ENUMERATION_LITERAL_DECLARATION;
   }
 
   /**
@@ -91,7 +91,7 @@ public class EnumerationLiteralDefinitionImpl extends MinimalEObjectImpl.Contain
     String oldName = name;
     name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.ENUMERATION_LITERAL_DEFINITION__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.ENUMERATION_LITERAL_DECLARATION__NAME, oldName, name));
   }
 
   /**
@@ -104,7 +104,7 @@ public class EnumerationLiteralDefinitionImpl extends MinimalEObjectImpl.Contain
   {
     switch (featureID)
     {
-      case AstPackage.ENUMERATION_LITERAL_DEFINITION__NAME:
+      case AstPackage.ENUMERATION_LITERAL_DECLARATION__NAME:
         return getName();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -120,7 +120,7 @@ public class EnumerationLiteralDefinitionImpl extends MinimalEObjectImpl.Contain
   {
     switch (featureID)
     {
-      case AstPackage.ENUMERATION_LITERAL_DEFINITION__NAME:
+      case AstPackage.ENUMERATION_LITERAL_DECLARATION__NAME:
         setName((String)newValue);
         return;
     }
@@ -137,7 +137,7 @@ public class EnumerationLiteralDefinitionImpl extends MinimalEObjectImpl.Contain
   {
     switch (featureID)
     {
-      case AstPackage.ENUMERATION_LITERAL_DEFINITION__NAME:
+      case AstPackage.ENUMERATION_LITERAL_DECLARATION__NAME:
         setName(NAME_EDEFAULT);
         return;
     }
@@ -154,7 +154,7 @@ public class EnumerationLiteralDefinitionImpl extends MinimalEObjectImpl.Contain
   {
     switch (featureID)
     {
-      case AstPackage.ENUMERATION_LITERAL_DEFINITION__NAME:
+      case AstPackage.ENUMERATION_LITERAL_DECLARATION__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
     }
     return super.eIsSet(featureID);
@@ -177,4 +177,4 @@ public class EnumerationLiteralDefinitionImpl extends MinimalEObjectImpl.Contain
     return result.toString();
   }
 
-} //EnumerationLiteralDefinitionImpl
+} //EnumerationLiteralDeclarationImpl

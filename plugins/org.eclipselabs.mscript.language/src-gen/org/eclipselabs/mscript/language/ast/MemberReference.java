@@ -14,7 +14,7 @@ package org.eclipselabs.mscript.language.ast;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.MemberReference#getIdentifier <em>Identifier</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.MemberReference#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -25,29 +25,29 @@ package org.eclipselabs.mscript.language.ast;
 public interface MemberReference extends ComponentReference
 {
   /**
-   * Returns the value of the '<em><b>Identifier</b></em>' attribute.
+   * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Identifier</em>' attribute isn't clear,
+   * If the meaning of the '<em>Name</em>' attribute isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Identifier</em>' attribute.
-   * @see #setIdentifier(String)
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getMemberReference_Identifier()
+   * @return the value of the '<em>Name</em>' attribute.
+   * @see #setName(String)
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getMemberReference_Name()
    * @model
    * @generated
    */
-  String getIdentifier();
+  String getName();
 
   /**
-   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.MemberReference#getIdentifier <em>Identifier</em>}' attribute.
+   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.MemberReference#getName <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Identifier</em>' attribute.
-   * @see #getIdentifier()
+   * @param value the new value of the '<em>Name</em>' attribute.
+   * @see #getName()
    * @generated
    */
-  void setIdentifier(String value);
+  void setName(String value);
 
 } // MemberReference

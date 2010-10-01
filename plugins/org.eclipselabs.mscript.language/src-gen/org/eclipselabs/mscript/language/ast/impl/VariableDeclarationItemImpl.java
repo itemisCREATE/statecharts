@@ -16,60 +16,60 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.Expression;
-import org.eclipselabs.mscript.language.ast.NamedArgument;
+import org.eclipselabs.mscript.language.ast.VariableDeclarationItem;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Named Argument</b></em>'.
+ * An implementation of the model object '<em><b>Variable Declaration Item</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.NamedArgumentImpl#getIdentifier <em>Identifier</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.NamedArgumentImpl#getExpression <em>Expression</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.VariableDeclarationItemImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.VariableDeclarationItemImpl#getInitialValue <em>Initial Value</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class NamedArgumentImpl extends MinimalEObjectImpl.Container implements NamedArgument
+public class VariableDeclarationItemImpl extends MinimalEObjectImpl.Container implements VariableDeclarationItem
 {
   /**
-   * The default value of the '{@link #getIdentifier() <em>Identifier</em>}' attribute.
+   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getIdentifier()
+   * @see #getName()
    * @generated
    * @ordered
    */
-  protected static final String IDENTIFIER_EDEFAULT = null;
+  protected static final String NAME_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getIdentifier() <em>Identifier</em>}' attribute.
+   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getIdentifier()
+   * @see #getName()
    * @generated
    * @ordered
    */
-  protected String identifier = IDENTIFIER_EDEFAULT;
+  protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getExpression() <em>Expression</em>}' containment reference.
+   * The cached value of the '{@link #getInitialValue() <em>Initial Value</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getExpression()
+   * @see #getInitialValue()
    * @generated
    * @ordered
    */
-  protected Expression expression;
+  protected Expression initialValue;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected NamedArgumentImpl()
+  protected VariableDeclarationItemImpl()
   {
     super();
   }
@@ -82,7 +82,7 @@ public class NamedArgumentImpl extends MinimalEObjectImpl.Container implements N
   @Override
   protected EClass eStaticClass()
   {
-    return AstPackage.Literals.NAMED_ARGUMENT;
+    return AstPackage.Literals.VARIABLE_DECLARATION_ITEM;
   }
 
   /**
@@ -90,9 +90,9 @@ public class NamedArgumentImpl extends MinimalEObjectImpl.Container implements N
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getIdentifier()
+  public String getName()
   {
-    return identifier;
+    return name;
   }
 
   /**
@@ -100,12 +100,12 @@ public class NamedArgumentImpl extends MinimalEObjectImpl.Container implements N
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setIdentifier(String newIdentifier)
+  public void setName(String newName)
   {
-    String oldIdentifier = identifier;
-    identifier = newIdentifier;
+    String oldName = name;
+    name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.NAMED_ARGUMENT__IDENTIFIER, oldIdentifier, identifier));
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.VARIABLE_DECLARATION_ITEM__NAME, oldName, name));
   }
 
   /**
@@ -113,9 +113,9 @@ public class NamedArgumentImpl extends MinimalEObjectImpl.Container implements N
    * <!-- end-user-doc -->
    * @generated
    */
-  public Expression getExpression()
+  public Expression getInitialValue()
   {
-    return expression;
+    return initialValue;
   }
 
   /**
@@ -123,13 +123,13 @@ public class NamedArgumentImpl extends MinimalEObjectImpl.Container implements N
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetExpression(Expression newExpression, NotificationChain msgs)
+  public NotificationChain basicSetInitialValue(Expression newInitialValue, NotificationChain msgs)
   {
-    Expression oldExpression = expression;
-    expression = newExpression;
+    Expression oldInitialValue = initialValue;
+    initialValue = newInitialValue;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.NAMED_ARGUMENT__EXPRESSION, oldExpression, newExpression);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.VARIABLE_DECLARATION_ITEM__INITIAL_VALUE, oldInitialValue, newInitialValue);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -140,20 +140,20 @@ public class NamedArgumentImpl extends MinimalEObjectImpl.Container implements N
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setExpression(Expression newExpression)
+  public void setInitialValue(Expression newInitialValue)
   {
-    if (newExpression != expression)
+    if (newInitialValue != initialValue)
     {
       NotificationChain msgs = null;
-      if (expression != null)
-        msgs = ((InternalEObject)expression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.NAMED_ARGUMENT__EXPRESSION, null, msgs);
-      if (newExpression != null)
-        msgs = ((InternalEObject)newExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.NAMED_ARGUMENT__EXPRESSION, null, msgs);
-      msgs = basicSetExpression(newExpression, msgs);
+      if (initialValue != null)
+        msgs = ((InternalEObject)initialValue).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.VARIABLE_DECLARATION_ITEM__INITIAL_VALUE, null, msgs);
+      if (newInitialValue != null)
+        msgs = ((InternalEObject)newInitialValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.VARIABLE_DECLARATION_ITEM__INITIAL_VALUE, null, msgs);
+      msgs = basicSetInitialValue(newInitialValue, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.NAMED_ARGUMENT__EXPRESSION, newExpression, newExpression));
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.VARIABLE_DECLARATION_ITEM__INITIAL_VALUE, newInitialValue, newInitialValue));
   }
 
   /**
@@ -166,8 +166,8 @@ public class NamedArgumentImpl extends MinimalEObjectImpl.Container implements N
   {
     switch (featureID)
     {
-      case AstPackage.NAMED_ARGUMENT__EXPRESSION:
-        return basicSetExpression(null, msgs);
+      case AstPackage.VARIABLE_DECLARATION_ITEM__INITIAL_VALUE:
+        return basicSetInitialValue(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -182,10 +182,10 @@ public class NamedArgumentImpl extends MinimalEObjectImpl.Container implements N
   {
     switch (featureID)
     {
-      case AstPackage.NAMED_ARGUMENT__IDENTIFIER:
-        return getIdentifier();
-      case AstPackage.NAMED_ARGUMENT__EXPRESSION:
-        return getExpression();
+      case AstPackage.VARIABLE_DECLARATION_ITEM__NAME:
+        return getName();
+      case AstPackage.VARIABLE_DECLARATION_ITEM__INITIAL_VALUE:
+        return getInitialValue();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -200,11 +200,11 @@ public class NamedArgumentImpl extends MinimalEObjectImpl.Container implements N
   {
     switch (featureID)
     {
-      case AstPackage.NAMED_ARGUMENT__IDENTIFIER:
-        setIdentifier((String)newValue);
+      case AstPackage.VARIABLE_DECLARATION_ITEM__NAME:
+        setName((String)newValue);
         return;
-      case AstPackage.NAMED_ARGUMENT__EXPRESSION:
-        setExpression((Expression)newValue);
+      case AstPackage.VARIABLE_DECLARATION_ITEM__INITIAL_VALUE:
+        setInitialValue((Expression)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -220,11 +220,11 @@ public class NamedArgumentImpl extends MinimalEObjectImpl.Container implements N
   {
     switch (featureID)
     {
-      case AstPackage.NAMED_ARGUMENT__IDENTIFIER:
-        setIdentifier(IDENTIFIER_EDEFAULT);
+      case AstPackage.VARIABLE_DECLARATION_ITEM__NAME:
+        setName(NAME_EDEFAULT);
         return;
-      case AstPackage.NAMED_ARGUMENT__EXPRESSION:
-        setExpression((Expression)null);
+      case AstPackage.VARIABLE_DECLARATION_ITEM__INITIAL_VALUE:
+        setInitialValue((Expression)null);
         return;
     }
     super.eUnset(featureID);
@@ -240,10 +240,10 @@ public class NamedArgumentImpl extends MinimalEObjectImpl.Container implements N
   {
     switch (featureID)
     {
-      case AstPackage.NAMED_ARGUMENT__IDENTIFIER:
-        return IDENTIFIER_EDEFAULT == null ? identifier != null : !IDENTIFIER_EDEFAULT.equals(identifier);
-      case AstPackage.NAMED_ARGUMENT__EXPRESSION:
-        return expression != null;
+      case AstPackage.VARIABLE_DECLARATION_ITEM__NAME:
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case AstPackage.VARIABLE_DECLARATION_ITEM__INITIAL_VALUE:
+        return initialValue != null;
     }
     return super.eIsSet(featureID);
   }
@@ -259,10 +259,10 @@ public class NamedArgumentImpl extends MinimalEObjectImpl.Container implements N
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (identifier: ");
-    result.append(identifier);
+    result.append(" (name: ");
+    result.append(name);
     result.append(')');
     return result.toString();
   }
 
-} //NamedArgumentImpl
+} //VariableDeclarationItemImpl

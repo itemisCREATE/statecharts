@@ -14,8 +14,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipselabs.mscript.language.ast.AstPackage;
-import org.eclipselabs.mscript.language.ast.Name;
 import org.eclipselabs.mscript.language.ast.NamedTypeSpecifier;
+import org.eclipselabs.mscript.language.ast.QualifiedName;
 
 /**
  * <!-- begin-user-doc -->
@@ -40,7 +40,7 @@ public class NamedTypeSpecifierImpl extends DataTypeSpecifierImpl implements Nam
    * @generated
    * @ordered
    */
-  protected Name name;
+  protected QualifiedName name;
 
   /**
    * <!-- begin-user-doc -->
@@ -68,7 +68,7 @@ public class NamedTypeSpecifierImpl extends DataTypeSpecifierImpl implements Nam
    * <!-- end-user-doc -->
    * @generated
    */
-  public Name getName()
+  public QualifiedName getName()
   {
     return name;
   }
@@ -78,9 +78,9 @@ public class NamedTypeSpecifierImpl extends DataTypeSpecifierImpl implements Nam
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetName(Name newName, NotificationChain msgs)
+  public NotificationChain basicSetName(QualifiedName newName, NotificationChain msgs)
   {
-    Name oldName = name;
+    QualifiedName oldName = name;
     name = newName;
     if (eNotificationRequired())
     {
@@ -95,7 +95,7 @@ public class NamedTypeSpecifierImpl extends DataTypeSpecifierImpl implements Nam
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(Name newName)
+  public void setName(QualifiedName newName)
   {
     if (newName != name)
     {
@@ -154,7 +154,7 @@ public class NamedTypeSpecifierImpl extends DataTypeSpecifierImpl implements Nam
     switch (featureID)
     {
       case AstPackage.NAMED_TYPE_SPECIFIER__NAME:
-        setName((Name)newValue);
+        setName((QualifiedName)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -171,7 +171,7 @@ public class NamedTypeSpecifierImpl extends DataTypeSpecifierImpl implements Nam
     switch (featureID)
     {
       case AstPackage.NAMED_TYPE_SPECIFIER__NAME:
-        setName((Name)null);
+        setName((QualifiedName)null);
         return;
     }
     super.eUnset(featureID);

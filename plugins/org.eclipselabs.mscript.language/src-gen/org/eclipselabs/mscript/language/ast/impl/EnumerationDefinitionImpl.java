@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.EnumerationDefinition;
-import org.eclipselabs.mscript.language.ast.EnumerationLiteralDefinition;
+import org.eclipselabs.mscript.language.ast.EnumerationLiteralDeclaration;
 
 /**
  * <!-- begin-user-doc -->
@@ -68,7 +68,7 @@ public class EnumerationDefinitionImpl extends PackageDefinitionElementImpl impl
    * @generated
    * @ordered
    */
-  protected EList<EnumerationLiteralDefinition> literals;
+  protected EList<EnumerationLiteralDeclaration> literals;
 
   /**
    * <!-- begin-user-doc -->
@@ -119,11 +119,11 @@ public class EnumerationDefinitionImpl extends PackageDefinitionElementImpl impl
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<EnumerationLiteralDefinition> getLiterals()
+  public EList<EnumerationLiteralDeclaration> getLiterals()
   {
     if (literals == null)
     {
-      literals = new EObjectContainmentEList<EnumerationLiteralDefinition>(EnumerationLiteralDefinition.class, this, AstPackage.ENUMERATION_DEFINITION__LITERALS);
+      literals = new EObjectContainmentEList<EnumerationLiteralDeclaration>(EnumerationLiteralDeclaration.class, this, AstPackage.ENUMERATION_DEFINITION__LITERALS);
     }
     return literals;
   }
@@ -178,7 +178,7 @@ public class EnumerationDefinitionImpl extends PackageDefinitionElementImpl impl
         return;
       case AstPackage.ENUMERATION_DEFINITION__LITERALS:
         getLiterals().clear();
-        getLiterals().addAll((Collection<? extends EnumerationLiteralDefinition>)newValue);
+        getLiterals().addAll((Collection<? extends EnumerationLiteralDeclaration>)newValue);
         return;
     }
     super.eSet(featureID, newValue);

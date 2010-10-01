@@ -16,22 +16,22 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EDataTypeEList;
 
 import org.eclipselabs.mscript.language.ast.AstPackage;
-import org.eclipselabs.mscript.language.ast.Name;
+import org.eclipselabs.mscript.language.ast.QualifiedName;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Name</b></em>'.
+ * An implementation of the model object '<em><b>Qualified Name</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.NameImpl#getIdentifiers <em>Identifiers</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.QualifiedNameImpl#getIdentifiers <em>Identifiers</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class NameImpl extends MinimalEObjectImpl.Container implements Name
+public class QualifiedNameImpl extends MinimalEObjectImpl.Container implements QualifiedName
 {
   /**
    * The cached value of the '{@link #getIdentifiers() <em>Identifiers</em>}' attribute list.
@@ -48,7 +48,7 @@ public class NameImpl extends MinimalEObjectImpl.Container implements Name
    * <!-- end-user-doc -->
    * @generated
    */
-  protected NameImpl()
+  protected QualifiedNameImpl()
   {
     super();
   }
@@ -61,7 +61,7 @@ public class NameImpl extends MinimalEObjectImpl.Container implements Name
   @Override
   protected EClass eStaticClass()
   {
-    return AstPackage.Literals.NAME;
+    return AstPackage.Literals.QUALIFIED_NAME;
   }
 
   /**
@@ -73,7 +73,7 @@ public class NameImpl extends MinimalEObjectImpl.Container implements Name
   {
     if (identifiers == null)
     {
-      identifiers = new EDataTypeEList<String>(String.class, this, AstPackage.NAME__IDENTIFIERS);
+      identifiers = new EDataTypeEList<String>(String.class, this, AstPackage.QUALIFIED_NAME__IDENTIFIERS);
     }
     return identifiers;
   }
@@ -88,7 +88,7 @@ public class NameImpl extends MinimalEObjectImpl.Container implements Name
   {
     switch (featureID)
     {
-      case AstPackage.NAME__IDENTIFIERS:
+      case AstPackage.QUALIFIED_NAME__IDENTIFIERS:
         return getIdentifiers();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -105,7 +105,7 @@ public class NameImpl extends MinimalEObjectImpl.Container implements Name
   {
     switch (featureID)
     {
-      case AstPackage.NAME__IDENTIFIERS:
+      case AstPackage.QUALIFIED_NAME__IDENTIFIERS:
         getIdentifiers().clear();
         getIdentifiers().addAll((Collection<? extends String>)newValue);
         return;
@@ -123,7 +123,7 @@ public class NameImpl extends MinimalEObjectImpl.Container implements Name
   {
     switch (featureID)
     {
-      case AstPackage.NAME__IDENTIFIERS:
+      case AstPackage.QUALIFIED_NAME__IDENTIFIERS:
         getIdentifiers().clear();
         return;
     }
@@ -140,7 +140,7 @@ public class NameImpl extends MinimalEObjectImpl.Container implements Name
   {
     switch (featureID)
     {
-      case AstPackage.NAME__IDENTIFIERS:
+      case AstPackage.QUALIFIED_NAME__IDENTIFIERS:
         return identifiers != null && !identifiers.isEmpty();
     }
     return super.eIsSet(featureID);
@@ -163,4 +163,4 @@ public class NameImpl extends MinimalEObjectImpl.Container implements Name
     return result.toString();
   }
 
-} //NameImpl
+} //QualifiedNameImpl

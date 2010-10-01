@@ -54,7 +54,7 @@ public interface EnumerationDefinition extends PackageDefinitionElement
 
   /**
    * Returns the value of the '<em><b>Literals</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipselabs.mscript.language.ast.EnumerationLiteralDefinition}.
+   * The list contents are of type {@link org.eclipselabs.mscript.language.ast.EnumerationLiteralDeclaration}.
    * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Literals</em>' containment reference list isn't clear,
@@ -66,6 +66,6 @@ public interface EnumerationDefinition extends PackageDefinitionElement
    * @model containment="true"
    * @generated
    */
-  EList<EnumerationLiteralDefinition> getLiterals();
+  EList<EnumerationLiteralDeclaration> getLiterals();
 
 } // EnumerationDefinition

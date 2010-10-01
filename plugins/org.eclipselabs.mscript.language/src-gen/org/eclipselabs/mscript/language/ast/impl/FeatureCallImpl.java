@@ -22,28 +22,28 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.ComponentReference;
-import org.eclipselabs.mscript.language.ast.FunctionArgumentList;
-import org.eclipselabs.mscript.language.ast.Name;
-import org.eclipselabs.mscript.language.ast.SymbolReference;
+import org.eclipselabs.mscript.language.ast.Expression;
+import org.eclipselabs.mscript.language.ast.FeatureCall;
+import org.eclipselabs.mscript.language.ast.QualifiedName;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Symbol Reference</b></em>'.
+ * An implementation of the model object '<em><b>Feature Call</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.SymbolReferenceImpl#isGlobal <em>Global</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.SymbolReferenceImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.SymbolReferenceImpl#getComponentReferences <em>Component References</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.SymbolReferenceImpl#isFunctionCall <em>Function Call</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.SymbolReferenceImpl#getArgumentList <em>Argument List</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FeatureCallImpl#isGlobal <em>Global</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FeatureCallImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FeatureCallImpl#getComponentReferences <em>Component References</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FeatureCallImpl#isOperationCall <em>Operation Call</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FeatureCallImpl#getArguments <em>Arguments</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class SymbolReferenceImpl extends ExpressionImpl implements SymbolReference
+public class FeatureCallImpl extends ExpressionImpl implements FeatureCall
 {
   /**
    * The default value of the '{@link #isGlobal() <em>Global</em>}' attribute.
@@ -73,7 +73,7 @@ public class SymbolReferenceImpl extends ExpressionImpl implements SymbolReferen
    * @generated
    * @ordered
    */
-  protected Name name;
+  protected QualifiedName name;
 
   /**
    * The cached value of the '{@link #getComponentReferences() <em>Component References</em>}' containment reference list.
@@ -86,41 +86,41 @@ public class SymbolReferenceImpl extends ExpressionImpl implements SymbolReferen
   protected EList<ComponentReference> componentReferences;
 
   /**
-   * The default value of the '{@link #isFunctionCall() <em>Function Call</em>}' attribute.
+   * The default value of the '{@link #isOperationCall() <em>Operation Call</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #isFunctionCall()
+   * @see #isOperationCall()
    * @generated
    * @ordered
    */
-  protected static final boolean FUNCTION_CALL_EDEFAULT = false;
+  protected static final boolean OPERATION_CALL_EDEFAULT = false;
 
   /**
-   * The cached value of the '{@link #isFunctionCall() <em>Function Call</em>}' attribute.
+   * The cached value of the '{@link #isOperationCall() <em>Operation Call</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #isFunctionCall()
+   * @see #isOperationCall()
    * @generated
    * @ordered
    */
-  protected boolean functionCall = FUNCTION_CALL_EDEFAULT;
+  protected boolean operationCall = OPERATION_CALL_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getArgumentList() <em>Argument List</em>}' containment reference.
+   * The cached value of the '{@link #getArguments() <em>Arguments</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getArgumentList()
+   * @see #getArguments()
    * @generated
    * @ordered
    */
-  protected FunctionArgumentList argumentList;
+  protected EList<Expression> arguments;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected SymbolReferenceImpl()
+  protected FeatureCallImpl()
   {
     super();
   }
@@ -133,7 +133,7 @@ public class SymbolReferenceImpl extends ExpressionImpl implements SymbolReferen
   @Override
   protected EClass eStaticClass()
   {
-    return AstPackage.Literals.SYMBOL_REFERENCE;
+    return AstPackage.Literals.FEATURE_CALL;
   }
 
   /**
@@ -156,7 +156,7 @@ public class SymbolReferenceImpl extends ExpressionImpl implements SymbolReferen
     boolean oldGlobal = global;
     global = newGlobal;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.SYMBOL_REFERENCE__GLOBAL, oldGlobal, global));
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.FEATURE_CALL__GLOBAL, oldGlobal, global));
   }
 
   /**
@@ -164,7 +164,7 @@ public class SymbolReferenceImpl extends ExpressionImpl implements SymbolReferen
    * <!-- end-user-doc -->
    * @generated
    */
-  public Name getName()
+  public QualifiedName getName()
   {
     return name;
   }
@@ -174,13 +174,13 @@ public class SymbolReferenceImpl extends ExpressionImpl implements SymbolReferen
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetName(Name newName, NotificationChain msgs)
+  public NotificationChain basicSetName(QualifiedName newName, NotificationChain msgs)
   {
-    Name oldName = name;
+    QualifiedName oldName = name;
     name = newName;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.SYMBOL_REFERENCE__NAME, oldName, newName);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.FEATURE_CALL__NAME, oldName, newName);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -191,20 +191,20 @@ public class SymbolReferenceImpl extends ExpressionImpl implements SymbolReferen
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(Name newName)
+  public void setName(QualifiedName newName)
   {
     if (newName != name)
     {
       NotificationChain msgs = null;
       if (name != null)
-        msgs = ((InternalEObject)name).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.SYMBOL_REFERENCE__NAME, null, msgs);
+        msgs = ((InternalEObject)name).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.FEATURE_CALL__NAME, null, msgs);
       if (newName != null)
-        msgs = ((InternalEObject)newName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.SYMBOL_REFERENCE__NAME, null, msgs);
+        msgs = ((InternalEObject)newName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.FEATURE_CALL__NAME, null, msgs);
       msgs = basicSetName(newName, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.SYMBOL_REFERENCE__NAME, newName, newName));
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.FEATURE_CALL__NAME, newName, newName));
   }
 
   /**
@@ -216,7 +216,7 @@ public class SymbolReferenceImpl extends ExpressionImpl implements SymbolReferen
   {
     if (componentReferences == null)
     {
-      componentReferences = new EObjectContainmentEList<ComponentReference>(ComponentReference.class, this, AstPackage.SYMBOL_REFERENCE__COMPONENT_REFERENCES);
+      componentReferences = new EObjectContainmentEList<ComponentReference>(ComponentReference.class, this, AstPackage.FEATURE_CALL__COMPONENT_REFERENCES);
     }
     return componentReferences;
   }
@@ -226,9 +226,9 @@ public class SymbolReferenceImpl extends ExpressionImpl implements SymbolReferen
    * <!-- end-user-doc -->
    * @generated
    */
-  public boolean isFunctionCall()
+  public boolean isOperationCall()
   {
-    return functionCall;
+    return operationCall;
   }
 
   /**
@@ -236,12 +236,12 @@ public class SymbolReferenceImpl extends ExpressionImpl implements SymbolReferen
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setFunctionCall(boolean newFunctionCall)
+  public void setOperationCall(boolean newOperationCall)
   {
-    boolean oldFunctionCall = functionCall;
-    functionCall = newFunctionCall;
+    boolean oldOperationCall = operationCall;
+    operationCall = newOperationCall;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.SYMBOL_REFERENCE__FUNCTION_CALL, oldFunctionCall, functionCall));
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.FEATURE_CALL__OPERATION_CALL, oldOperationCall, operationCall));
   }
 
   /**
@@ -249,47 +249,13 @@ public class SymbolReferenceImpl extends ExpressionImpl implements SymbolReferen
    * <!-- end-user-doc -->
    * @generated
    */
-  public FunctionArgumentList getArgumentList()
+  public EList<Expression> getArguments()
   {
-    return argumentList;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetArgumentList(FunctionArgumentList newArgumentList, NotificationChain msgs)
-  {
-    FunctionArgumentList oldArgumentList = argumentList;
-    argumentList = newArgumentList;
-    if (eNotificationRequired())
+    if (arguments == null)
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.SYMBOL_REFERENCE__ARGUMENT_LIST, oldArgumentList, newArgumentList);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
+      arguments = new EObjectContainmentEList<Expression>(Expression.class, this, AstPackage.FEATURE_CALL__ARGUMENTS);
     }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setArgumentList(FunctionArgumentList newArgumentList)
-  {
-    if (newArgumentList != argumentList)
-    {
-      NotificationChain msgs = null;
-      if (argumentList != null)
-        msgs = ((InternalEObject)argumentList).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.SYMBOL_REFERENCE__ARGUMENT_LIST, null, msgs);
-      if (newArgumentList != null)
-        msgs = ((InternalEObject)newArgumentList).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.SYMBOL_REFERENCE__ARGUMENT_LIST, null, msgs);
-      msgs = basicSetArgumentList(newArgumentList, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.SYMBOL_REFERENCE__ARGUMENT_LIST, newArgumentList, newArgumentList));
+    return arguments;
   }
 
   /**
@@ -302,12 +268,12 @@ public class SymbolReferenceImpl extends ExpressionImpl implements SymbolReferen
   {
     switch (featureID)
     {
-      case AstPackage.SYMBOL_REFERENCE__NAME:
+      case AstPackage.FEATURE_CALL__NAME:
         return basicSetName(null, msgs);
-      case AstPackage.SYMBOL_REFERENCE__COMPONENT_REFERENCES:
+      case AstPackage.FEATURE_CALL__COMPONENT_REFERENCES:
         return ((InternalEList<?>)getComponentReferences()).basicRemove(otherEnd, msgs);
-      case AstPackage.SYMBOL_REFERENCE__ARGUMENT_LIST:
-        return basicSetArgumentList(null, msgs);
+      case AstPackage.FEATURE_CALL__ARGUMENTS:
+        return ((InternalEList<?>)getArguments()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -322,16 +288,16 @@ public class SymbolReferenceImpl extends ExpressionImpl implements SymbolReferen
   {
     switch (featureID)
     {
-      case AstPackage.SYMBOL_REFERENCE__GLOBAL:
+      case AstPackage.FEATURE_CALL__GLOBAL:
         return isGlobal();
-      case AstPackage.SYMBOL_REFERENCE__NAME:
+      case AstPackage.FEATURE_CALL__NAME:
         return getName();
-      case AstPackage.SYMBOL_REFERENCE__COMPONENT_REFERENCES:
+      case AstPackage.FEATURE_CALL__COMPONENT_REFERENCES:
         return getComponentReferences();
-      case AstPackage.SYMBOL_REFERENCE__FUNCTION_CALL:
-        return isFunctionCall();
-      case AstPackage.SYMBOL_REFERENCE__ARGUMENT_LIST:
-        return getArgumentList();
+      case AstPackage.FEATURE_CALL__OPERATION_CALL:
+        return isOperationCall();
+      case AstPackage.FEATURE_CALL__ARGUMENTS:
+        return getArguments();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -347,21 +313,22 @@ public class SymbolReferenceImpl extends ExpressionImpl implements SymbolReferen
   {
     switch (featureID)
     {
-      case AstPackage.SYMBOL_REFERENCE__GLOBAL:
+      case AstPackage.FEATURE_CALL__GLOBAL:
         setGlobal((Boolean)newValue);
         return;
-      case AstPackage.SYMBOL_REFERENCE__NAME:
-        setName((Name)newValue);
+      case AstPackage.FEATURE_CALL__NAME:
+        setName((QualifiedName)newValue);
         return;
-      case AstPackage.SYMBOL_REFERENCE__COMPONENT_REFERENCES:
+      case AstPackage.FEATURE_CALL__COMPONENT_REFERENCES:
         getComponentReferences().clear();
         getComponentReferences().addAll((Collection<? extends ComponentReference>)newValue);
         return;
-      case AstPackage.SYMBOL_REFERENCE__FUNCTION_CALL:
-        setFunctionCall((Boolean)newValue);
+      case AstPackage.FEATURE_CALL__OPERATION_CALL:
+        setOperationCall((Boolean)newValue);
         return;
-      case AstPackage.SYMBOL_REFERENCE__ARGUMENT_LIST:
-        setArgumentList((FunctionArgumentList)newValue);
+      case AstPackage.FEATURE_CALL__ARGUMENTS:
+        getArguments().clear();
+        getArguments().addAll((Collection<? extends Expression>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -377,20 +344,20 @@ public class SymbolReferenceImpl extends ExpressionImpl implements SymbolReferen
   {
     switch (featureID)
     {
-      case AstPackage.SYMBOL_REFERENCE__GLOBAL:
+      case AstPackage.FEATURE_CALL__GLOBAL:
         setGlobal(GLOBAL_EDEFAULT);
         return;
-      case AstPackage.SYMBOL_REFERENCE__NAME:
-        setName((Name)null);
+      case AstPackage.FEATURE_CALL__NAME:
+        setName((QualifiedName)null);
         return;
-      case AstPackage.SYMBOL_REFERENCE__COMPONENT_REFERENCES:
+      case AstPackage.FEATURE_CALL__COMPONENT_REFERENCES:
         getComponentReferences().clear();
         return;
-      case AstPackage.SYMBOL_REFERENCE__FUNCTION_CALL:
-        setFunctionCall(FUNCTION_CALL_EDEFAULT);
+      case AstPackage.FEATURE_CALL__OPERATION_CALL:
+        setOperationCall(OPERATION_CALL_EDEFAULT);
         return;
-      case AstPackage.SYMBOL_REFERENCE__ARGUMENT_LIST:
-        setArgumentList((FunctionArgumentList)null);
+      case AstPackage.FEATURE_CALL__ARGUMENTS:
+        getArguments().clear();
         return;
     }
     super.eUnset(featureID);
@@ -406,16 +373,16 @@ public class SymbolReferenceImpl extends ExpressionImpl implements SymbolReferen
   {
     switch (featureID)
     {
-      case AstPackage.SYMBOL_REFERENCE__GLOBAL:
+      case AstPackage.FEATURE_CALL__GLOBAL:
         return global != GLOBAL_EDEFAULT;
-      case AstPackage.SYMBOL_REFERENCE__NAME:
+      case AstPackage.FEATURE_CALL__NAME:
         return name != null;
-      case AstPackage.SYMBOL_REFERENCE__COMPONENT_REFERENCES:
+      case AstPackage.FEATURE_CALL__COMPONENT_REFERENCES:
         return componentReferences != null && !componentReferences.isEmpty();
-      case AstPackage.SYMBOL_REFERENCE__FUNCTION_CALL:
-        return functionCall != FUNCTION_CALL_EDEFAULT;
-      case AstPackage.SYMBOL_REFERENCE__ARGUMENT_LIST:
-        return argumentList != null;
+      case AstPackage.FEATURE_CALL__OPERATION_CALL:
+        return operationCall != OPERATION_CALL_EDEFAULT;
+      case AstPackage.FEATURE_CALL__ARGUMENTS:
+        return arguments != null && !arguments.isEmpty();
     }
     return super.eIsSet(featureID);
   }
@@ -433,10 +400,10 @@ public class SymbolReferenceImpl extends ExpressionImpl implements SymbolReferen
     StringBuffer result = new StringBuffer(super.toString());
     result.append(" (global: ");
     result.append(global);
-    result.append(", functionCall: ");
-    result.append(functionCall);
+    result.append(", operationCall: ");
+    result.append(operationCall);
     result.append(')');
     return result.toString();
   }
 
-} //SymbolReferenceImpl
+} //FeatureCallImpl

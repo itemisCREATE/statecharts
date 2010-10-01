@@ -14,46 +14,44 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipselabs.mscript.language.ast.AstPackage;
-import org.eclipselabs.mscript.language.ast.Mscript;
-import org.eclipselabs.mscript.language.ast.PackageDefinition;
+import org.eclipselabs.mscript.language.ast.Block;
+import org.eclipselabs.mscript.language.ast.Statement;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Mscript</b></em>'.
+ * An implementation of the model object '<em><b>Block</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.MscriptImpl#getPackages <em>Packages</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.BlockImpl#getStatements <em>Statements</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class MscriptImpl extends MinimalEObjectImpl.Container implements Mscript
+public class BlockImpl extends StatementImpl implements Block
 {
   /**
-   * The cached value of the '{@link #getPackages() <em>Packages</em>}' containment reference list.
+   * The cached value of the '{@link #getStatements() <em>Statements</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getPackages()
+   * @see #getStatements()
    * @generated
    * @ordered
    */
-  protected EList<PackageDefinition> packages;
+  protected EList<Statement> statements;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected MscriptImpl()
+  protected BlockImpl()
   {
     super();
   }
@@ -66,7 +64,7 @@ public class MscriptImpl extends MinimalEObjectImpl.Container implements Mscript
   @Override
   protected EClass eStaticClass()
   {
-    return AstPackage.Literals.MSCRIPT;
+    return AstPackage.Literals.BLOCK;
   }
 
   /**
@@ -74,13 +72,13 @@ public class MscriptImpl extends MinimalEObjectImpl.Container implements Mscript
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<PackageDefinition> getPackages()
+  public EList<Statement> getStatements()
   {
-    if (packages == null)
+    if (statements == null)
     {
-      packages = new EObjectContainmentEList<PackageDefinition>(PackageDefinition.class, this, AstPackage.MSCRIPT__PACKAGES);
+      statements = new EObjectContainmentEList<Statement>(Statement.class, this, AstPackage.BLOCK__STATEMENTS);
     }
-    return packages;
+    return statements;
   }
 
   /**
@@ -93,8 +91,8 @@ public class MscriptImpl extends MinimalEObjectImpl.Container implements Mscript
   {
     switch (featureID)
     {
-      case AstPackage.MSCRIPT__PACKAGES:
-        return ((InternalEList<?>)getPackages()).basicRemove(otherEnd, msgs);
+      case AstPackage.BLOCK__STATEMENTS:
+        return ((InternalEList<?>)getStatements()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -109,8 +107,8 @@ public class MscriptImpl extends MinimalEObjectImpl.Container implements Mscript
   {
     switch (featureID)
     {
-      case AstPackage.MSCRIPT__PACKAGES:
-        return getPackages();
+      case AstPackage.BLOCK__STATEMENTS:
+        return getStatements();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -126,9 +124,9 @@ public class MscriptImpl extends MinimalEObjectImpl.Container implements Mscript
   {
     switch (featureID)
     {
-      case AstPackage.MSCRIPT__PACKAGES:
-        getPackages().clear();
-        getPackages().addAll((Collection<? extends PackageDefinition>)newValue);
+      case AstPackage.BLOCK__STATEMENTS:
+        getStatements().clear();
+        getStatements().addAll((Collection<? extends Statement>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -144,8 +142,8 @@ public class MscriptImpl extends MinimalEObjectImpl.Container implements Mscript
   {
     switch (featureID)
     {
-      case AstPackage.MSCRIPT__PACKAGES:
-        getPackages().clear();
+      case AstPackage.BLOCK__STATEMENTS:
+        getStatements().clear();
         return;
     }
     super.eUnset(featureID);
@@ -161,10 +159,10 @@ public class MscriptImpl extends MinimalEObjectImpl.Container implements Mscript
   {
     switch (featureID)
     {
-      case AstPackage.MSCRIPT__PACKAGES:
-        return packages != null && !packages.isEmpty();
+      case AstPackage.BLOCK__STATEMENTS:
+        return statements != null && !statements.isEmpty();
     }
     return super.eIsSet(featureID);
   }
 
-} //MscriptImpl
+} //BlockImpl

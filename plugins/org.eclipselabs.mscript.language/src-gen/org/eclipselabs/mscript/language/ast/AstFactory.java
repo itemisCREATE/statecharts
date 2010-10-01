@@ -62,13 +62,103 @@ public interface AstFactory extends EFactory
   EnumerationDefinition createEnumerationDefinition();
 
   /**
-   * Returns a new object of class '<em>Enumeration Literal Definition</em>'.
+   * Returns a new object of class '<em>Enumeration Literal Declaration</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Enumeration Literal Definition</em>'.
+   * @return a new object of class '<em>Enumeration Literal Declaration</em>'.
    * @generated
    */
-  EnumerationLiteralDefinition createEnumerationLiteralDefinition();
+  EnumerationLiteralDeclaration createEnumerationLiteralDeclaration();
+
+  /**
+   * Returns a new object of class '<em>Function Definition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Function Definition</em>'.
+   * @generated
+   */
+  FunctionDefinition createFunctionDefinition();
+
+  /**
+   * Returns a new object of class '<em>Parameter Declaration</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Parameter Declaration</em>'.
+   * @generated
+   */
+  ParameterDeclaration createParameterDeclaration();
+
+  /**
+   * Returns a new object of class '<em>Statement</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Statement</em>'.
+   * @generated
+   */
+  Statement createStatement();
+
+  /**
+   * Returns a new object of class '<em>Block</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Block</em>'.
+   * @generated
+   */
+  Block createBlock();
+
+  /**
+   * Returns a new object of class '<em>Feature Call Statement</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Feature Call Statement</em>'.
+   * @generated
+   */
+  FeatureCallStatement createFeatureCallStatement();
+
+  /**
+   * Returns a new object of class '<em>If Statement</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>If Statement</em>'.
+   * @generated
+   */
+  IfStatement createIfStatement();
+
+  /**
+   * Returns a new object of class '<em>If Case</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>If Case</em>'.
+   * @generated
+   */
+  IfCase createIfCase();
+
+  /**
+   * Returns a new object of class '<em>While Statement</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>While Statement</em>'.
+   * @generated
+   */
+  WhileStatement createWhileStatement();
+
+  /**
+   * Returns a new object of class '<em>Variable Declaration</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Variable Declaration</em>'.
+   * @generated
+   */
+  VariableDeclaration createVariableDeclaration();
+
+  /**
+   * Returns a new object of class '<em>Variable Declaration Item</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Variable Declaration Item</em>'.
+   * @generated
+   */
+  VariableDeclarationItem createVariableDeclarationItem();
 
   /**
    * Returns a new object of class '<em>Data Type Specifier</em>'.
@@ -242,40 +332,22 @@ public interface AstFactory extends EFactory
   StringLiteral createStringLiteral();
 
   /**
-   * Returns a new object of class '<em>Name</em>'.
+   * Returns a new object of class '<em>Qualified Name</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Name</em>'.
+   * @return a new object of class '<em>Qualified Name</em>'.
    * @generated
    */
-  Name createName();
+  QualifiedName createQualifiedName();
 
   /**
-   * Returns a new object of class '<em>Function Argument List</em>'.
+   * Returns a new object of class '<em>Feature Call</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Function Argument List</em>'.
+   * @return a new object of class '<em>Feature Call</em>'.
    * @generated
    */
-  FunctionArgumentList createFunctionArgumentList();
-
-  /**
-   * Returns a new object of class '<em>Named Argument</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Named Argument</em>'.
-   * @generated
-   */
-  NamedArgument createNamedArgument();
-
-  /**
-   * Returns a new object of class '<em>Symbol Reference</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Symbol Reference</em>'.
-   * @generated
-   */
-  SymbolReference createSymbolReference();
+  FeatureCall createFeatureCall();
 
   /**
    * Returns a new object of class '<em>Component Reference</em>'.

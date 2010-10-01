@@ -11,21 +11,21 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Name</b></em>'.
+ * A representation of the model object '<em><b>Qualified Name</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.Name#getIdentifiers <em>Identifiers</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.QualifiedName#getIdentifiers <em>Identifiers</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipselabs.mscript.language.ast.AstPackage#getName_()
+ * @see org.eclipselabs.mscript.language.ast.AstPackage#getQualifiedName()
  * @model
  * @generated
  */
-public interface Name extends EObject
+public interface QualifiedName extends EObject
 {
   /**
    * Returns the value of the '<em><b>Identifiers</b></em>' attribute list.
@@ -37,10 +37,10 @@ public interface Name extends EObject
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Identifiers</em>' attribute list.
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getName_Identifiers()
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getQualifiedName_Identifiers()
    * @model unique="false"
    * @generated
    */
   EList<String> getIdentifiers();
 
-} // Name
+} // QualifiedName

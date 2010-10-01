@@ -21,9 +21,9 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipselabs.mscript.language.ast.AstPackage;
-import org.eclipselabs.mscript.language.ast.Name;
 import org.eclipselabs.mscript.language.ast.PackageDefinition;
 import org.eclipselabs.mscript.language.ast.PackageDefinitionElement;
+import org.eclipselabs.mscript.language.ast.QualifiedName;
 
 /**
  * <!-- begin-user-doc -->
@@ -49,7 +49,7 @@ public class PackageDefinitionImpl extends PackageDefinitionElementImpl implemen
    * @generated
    * @ordered
    */
-  protected Name name;
+  protected QualifiedName name;
 
   /**
    * The cached value of the '{@link #getElements() <em>Elements</em>}' containment reference list.
@@ -87,7 +87,7 @@ public class PackageDefinitionImpl extends PackageDefinitionElementImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public Name getName()
+  public QualifiedName getName()
   {
     return name;
   }
@@ -97,9 +97,9 @@ public class PackageDefinitionImpl extends PackageDefinitionElementImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetName(Name newName, NotificationChain msgs)
+  public NotificationChain basicSetName(QualifiedName newName, NotificationChain msgs)
   {
-    Name oldName = name;
+    QualifiedName oldName = name;
     name = newName;
     if (eNotificationRequired())
     {
@@ -114,7 +114,7 @@ public class PackageDefinitionImpl extends PackageDefinitionElementImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(Name newName)
+  public void setName(QualifiedName newName)
   {
     if (newName != name)
     {
@@ -192,7 +192,7 @@ public class PackageDefinitionImpl extends PackageDefinitionElementImpl implemen
     switch (featureID)
     {
       case AstPackage.PACKAGE_DEFINITION__NAME:
-        setName((Name)newValue);
+        setName((QualifiedName)newValue);
         return;
       case AstPackage.PACKAGE_DEFINITION__ELEMENTS:
         getElements().clear();
@@ -213,7 +213,7 @@ public class PackageDefinitionImpl extends PackageDefinitionElementImpl implemen
     switch (featureID)
     {
       case AstPackage.PACKAGE_DEFINITION__NAME:
-        setName((Name)null);
+        setName((QualifiedName)null);
         return;
       case AstPackage.PACKAGE_DEFINITION__ELEMENTS:
         getElements().clear();

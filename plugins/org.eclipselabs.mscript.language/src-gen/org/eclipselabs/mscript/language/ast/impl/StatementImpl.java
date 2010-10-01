@@ -10,25 +10,25 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipselabs.mscript.language.ast.AstPackage;
-import org.eclipselabs.mscript.language.ast.DataTypeSpecifier;
+import org.eclipselabs.mscript.language.ast.Statement;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Data Type Specifier</b></em>'.
+ * An implementation of the model object '<em><b>Statement</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public class DataTypeSpecifierImpl extends MinimalEObjectImpl.Container implements DataTypeSpecifier
+public class StatementImpl extends MinimalEObjectImpl.Container implements Statement
 {
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected DataTypeSpecifierImpl()
+  protected StatementImpl()
   {
     super();
   }
@@ -41,7 +41,7 @@ public class DataTypeSpecifierImpl extends MinimalEObjectImpl.Container implemen
   @Override
   protected EClass eStaticClass()
   {
-    return AstPackage.Literals.DATA_TYPE_SPECIFIER;
+    return AstPackage.Literals.STATEMENT;
   }
 
-} //DataTypeSpecifierImpl
+} //StatementImpl

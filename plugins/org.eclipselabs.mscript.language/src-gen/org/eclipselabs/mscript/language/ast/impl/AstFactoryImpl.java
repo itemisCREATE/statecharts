@@ -72,7 +72,17 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
       case AstPackage.PACKAGE_DEFINITION: return createPackageDefinition();
       case AstPackage.PACKAGE_DEFINITION_ELEMENT: return createPackageDefinitionElement();
       case AstPackage.ENUMERATION_DEFINITION: return createEnumerationDefinition();
-      case AstPackage.ENUMERATION_LITERAL_DEFINITION: return createEnumerationLiteralDefinition();
+      case AstPackage.ENUMERATION_LITERAL_DECLARATION: return createEnumerationLiteralDeclaration();
+      case AstPackage.FUNCTION_DEFINITION: return createFunctionDefinition();
+      case AstPackage.PARAMETER_DECLARATION: return createParameterDeclaration();
+      case AstPackage.STATEMENT: return createStatement();
+      case AstPackage.BLOCK: return createBlock();
+      case AstPackage.FEATURE_CALL_STATEMENT: return createFeatureCallStatement();
+      case AstPackage.IF_STATEMENT: return createIfStatement();
+      case AstPackage.IF_CASE: return createIfCase();
+      case AstPackage.WHILE_STATEMENT: return createWhileStatement();
+      case AstPackage.VARIABLE_DECLARATION: return createVariableDeclaration();
+      case AstPackage.VARIABLE_DECLARATION_ITEM: return createVariableDeclarationItem();
       case AstPackage.DATA_TYPE_SPECIFIER: return createDataTypeSpecifier();
       case AstPackage.PRIMITIVE_TYPE_SPECIFIER: return createPrimitiveTypeSpecifier();
       case AstPackage.NUMERICAL_TYPE_SPECIFIER: return createNumericalTypeSpecifier();
@@ -92,10 +102,8 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
       case AstPackage.INTEGER_LITERAL: return createIntegerLiteral();
       case AstPackage.BOOLEAN_LITERAL: return createBooleanLiteral();
       case AstPackage.STRING_LITERAL: return createStringLiteral();
-      case AstPackage.NAME: return createName();
-      case AstPackage.FUNCTION_ARGUMENT_LIST: return createFunctionArgumentList();
-      case AstPackage.NAMED_ARGUMENT: return createNamedArgument();
-      case AstPackage.SYMBOL_REFERENCE: return createSymbolReference();
+      case AstPackage.QUALIFIED_NAME: return createQualifiedName();
+      case AstPackage.FEATURE_CALL: return createFeatureCall();
       case AstPackage.COMPONENT_REFERENCE: return createComponentReference();
       case AstPackage.ARRAY_REFERENCE: return createArrayReference();
       case AstPackage.MEMBER_REFERENCE: return createMemberReference();
@@ -225,10 +233,120 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public EnumerationLiteralDefinition createEnumerationLiteralDefinition()
+  public EnumerationLiteralDeclaration createEnumerationLiteralDeclaration()
   {
-    EnumerationLiteralDefinitionImpl enumerationLiteralDefinition = new EnumerationLiteralDefinitionImpl();
-    return enumerationLiteralDefinition;
+    EnumerationLiteralDeclarationImpl enumerationLiteralDeclaration = new EnumerationLiteralDeclarationImpl();
+    return enumerationLiteralDeclaration;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public FunctionDefinition createFunctionDefinition()
+  {
+    FunctionDefinitionImpl functionDefinition = new FunctionDefinitionImpl();
+    return functionDefinition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ParameterDeclaration createParameterDeclaration()
+  {
+    ParameterDeclarationImpl parameterDeclaration = new ParameterDeclarationImpl();
+    return parameterDeclaration;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Statement createStatement()
+  {
+    StatementImpl statement = new StatementImpl();
+    return statement;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Block createBlock()
+  {
+    BlockImpl block = new BlockImpl();
+    return block;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public FeatureCallStatement createFeatureCallStatement()
+  {
+    FeatureCallStatementImpl featureCallStatement = new FeatureCallStatementImpl();
+    return featureCallStatement;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public IfStatement createIfStatement()
+  {
+    IfStatementImpl ifStatement = new IfStatementImpl();
+    return ifStatement;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public IfCase createIfCase()
+  {
+    IfCaseImpl ifCase = new IfCaseImpl();
+    return ifCase;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public WhileStatement createWhileStatement()
+  {
+    WhileStatementImpl whileStatement = new WhileStatementImpl();
+    return whileStatement;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public VariableDeclaration createVariableDeclaration()
+  {
+    VariableDeclarationImpl variableDeclaration = new VariableDeclarationImpl();
+    return variableDeclaration;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public VariableDeclarationItem createVariableDeclarationItem()
+  {
+    VariableDeclarationItemImpl variableDeclarationItem = new VariableDeclarationItemImpl();
+    return variableDeclarationItem;
   }
 
   /**
@@ -445,10 +563,10 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public Name createName()
+  public QualifiedName createQualifiedName()
   {
-    NameImpl name = new NameImpl();
-    return name;
+    QualifiedNameImpl qualifiedName = new QualifiedNameImpl();
+    return qualifiedName;
   }
 
   /**
@@ -456,32 +574,10 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public FunctionArgumentList createFunctionArgumentList()
+  public FeatureCall createFeatureCall()
   {
-    FunctionArgumentListImpl functionArgumentList = new FunctionArgumentListImpl();
-    return functionArgumentList;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NamedArgument createNamedArgument()
-  {
-    NamedArgumentImpl namedArgument = new NamedArgumentImpl();
-    return namedArgument;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public SymbolReference createSymbolReference()
-  {
-    SymbolReferenceImpl symbolReference = new SymbolReferenceImpl();
-    return symbolReference;
+    FeatureCallImpl featureCall = new FeatureCallImpl();
+    return featureCall;
   }
 
   /**

@@ -125,10 +125,87 @@ public class AstSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AstPackage.ENUMERATION_LITERAL_DEFINITION:
+      case AstPackage.ENUMERATION_LITERAL_DECLARATION:
       {
-        EnumerationLiteralDefinition enumerationLiteralDefinition = (EnumerationLiteralDefinition)theEObject;
-        T result = caseEnumerationLiteralDefinition(enumerationLiteralDefinition);
+        EnumerationLiteralDeclaration enumerationLiteralDeclaration = (EnumerationLiteralDeclaration)theEObject;
+        T result = caseEnumerationLiteralDeclaration(enumerationLiteralDeclaration);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AstPackage.FUNCTION_DEFINITION:
+      {
+        FunctionDefinition functionDefinition = (FunctionDefinition)theEObject;
+        T result = caseFunctionDefinition(functionDefinition);
+        if (result == null) result = casePackageDefinitionElement(functionDefinition);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AstPackage.PARAMETER_DECLARATION:
+      {
+        ParameterDeclaration parameterDeclaration = (ParameterDeclaration)theEObject;
+        T result = caseParameterDeclaration(parameterDeclaration);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AstPackage.STATEMENT:
+      {
+        Statement statement = (Statement)theEObject;
+        T result = caseStatement(statement);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AstPackage.BLOCK:
+      {
+        Block block = (Block)theEObject;
+        T result = caseBlock(block);
+        if (result == null) result = caseStatement(block);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AstPackage.FEATURE_CALL_STATEMENT:
+      {
+        FeatureCallStatement featureCallStatement = (FeatureCallStatement)theEObject;
+        T result = caseFeatureCallStatement(featureCallStatement);
+        if (result == null) result = caseStatement(featureCallStatement);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AstPackage.IF_STATEMENT:
+      {
+        IfStatement ifStatement = (IfStatement)theEObject;
+        T result = caseIfStatement(ifStatement);
+        if (result == null) result = caseStatement(ifStatement);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AstPackage.IF_CASE:
+      {
+        IfCase ifCase = (IfCase)theEObject;
+        T result = caseIfCase(ifCase);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AstPackage.WHILE_STATEMENT:
+      {
+        WhileStatement whileStatement = (WhileStatement)theEObject;
+        T result = caseWhileStatement(whileStatement);
+        if (result == null) result = caseStatement(whileStatement);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AstPackage.VARIABLE_DECLARATION:
+      {
+        VariableDeclaration variableDeclaration = (VariableDeclaration)theEObject;
+        T result = caseVariableDeclaration(variableDeclaration);
+        if (result == null) result = casePackageDefinitionElement(variableDeclaration);
+        if (result == null) result = caseStatement(variableDeclaration);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AstPackage.VARIABLE_DECLARATION_ITEM:
+      {
+        VariableDeclarationItem variableDeclarationItem = (VariableDeclarationItem)theEObject;
+        T result = caseVariableDeclarationItem(variableDeclarationItem);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -136,7 +213,6 @@ public class AstSwitch<T>
       {
         DataTypeSpecifier dataTypeSpecifier = (DataTypeSpecifier)theEObject;
         T result = caseDataTypeSpecifier(dataTypeSpecifier);
-        if (result == null) result = caseMscript(dataTypeSpecifier);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -145,7 +221,6 @@ public class AstSwitch<T>
         PrimitiveTypeSpecifier primitiveTypeSpecifier = (PrimitiveTypeSpecifier)theEObject;
         T result = casePrimitiveTypeSpecifier(primitiveTypeSpecifier);
         if (result == null) result = caseDataTypeSpecifier(primitiveTypeSpecifier);
-        if (result == null) result = caseMscript(primitiveTypeSpecifier);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -155,7 +230,6 @@ public class AstSwitch<T>
         T result = caseNumericalTypeSpecifier(numericalTypeSpecifier);
         if (result == null) result = casePrimitiveTypeSpecifier(numericalTypeSpecifier);
         if (result == null) result = caseDataTypeSpecifier(numericalTypeSpecifier);
-        if (result == null) result = caseMscript(numericalTypeSpecifier);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -166,7 +240,6 @@ public class AstSwitch<T>
         if (result == null) result = caseNumericalTypeSpecifier(realTypeSpecifier);
         if (result == null) result = casePrimitiveTypeSpecifier(realTypeSpecifier);
         if (result == null) result = caseDataTypeSpecifier(realTypeSpecifier);
-        if (result == null) result = caseMscript(realTypeSpecifier);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -177,7 +250,6 @@ public class AstSwitch<T>
         if (result == null) result = caseNumericalTypeSpecifier(integerTypeSpecifier);
         if (result == null) result = casePrimitiveTypeSpecifier(integerTypeSpecifier);
         if (result == null) result = caseDataTypeSpecifier(integerTypeSpecifier);
-        if (result == null) result = caseMscript(integerTypeSpecifier);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -188,7 +260,6 @@ public class AstSwitch<T>
         if (result == null) result = caseNumericalTypeSpecifier(complexTypeSpecifier);
         if (result == null) result = casePrimitiveTypeSpecifier(complexTypeSpecifier);
         if (result == null) result = caseDataTypeSpecifier(complexTypeSpecifier);
-        if (result == null) result = caseMscript(complexTypeSpecifier);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -199,7 +270,6 @@ public class AstSwitch<T>
         if (result == null) result = caseNumericalTypeSpecifier(gaussianTypeSpecifier);
         if (result == null) result = casePrimitiveTypeSpecifier(gaussianTypeSpecifier);
         if (result == null) result = caseDataTypeSpecifier(gaussianTypeSpecifier);
-        if (result == null) result = caseMscript(gaussianTypeSpecifier);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -209,7 +279,6 @@ public class AstSwitch<T>
         T result = caseBooleanTypeSpecifier(booleanTypeSpecifier);
         if (result == null) result = casePrimitiveTypeSpecifier(booleanTypeSpecifier);
         if (result == null) result = caseDataTypeSpecifier(booleanTypeSpecifier);
-        if (result == null) result = caseMscript(booleanTypeSpecifier);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -219,7 +288,6 @@ public class AstSwitch<T>
         T result = caseStringTypeSpecifier(stringTypeSpecifier);
         if (result == null) result = casePrimitiveTypeSpecifier(stringTypeSpecifier);
         if (result == null) result = caseDataTypeSpecifier(stringTypeSpecifier);
-        if (result == null) result = caseMscript(stringTypeSpecifier);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -228,7 +296,6 @@ public class AstSwitch<T>
         NamedTypeSpecifier namedTypeSpecifier = (NamedTypeSpecifier)theEObject;
         T result = caseNamedTypeSpecifier(namedTypeSpecifier);
         if (result == null) result = caseDataTypeSpecifier(namedTypeSpecifier);
-        if (result == null) result = caseMscript(namedTypeSpecifier);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -309,32 +376,18 @@ public class AstSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AstPackage.NAME:
+      case AstPackage.QUALIFIED_NAME:
       {
-        Name name = (Name)theEObject;
-        T result = caseName(name);
+        QualifiedName qualifiedName = (QualifiedName)theEObject;
+        T result = caseQualifiedName(qualifiedName);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AstPackage.FUNCTION_ARGUMENT_LIST:
+      case AstPackage.FEATURE_CALL:
       {
-        FunctionArgumentList functionArgumentList = (FunctionArgumentList)theEObject;
-        T result = caseFunctionArgumentList(functionArgumentList);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case AstPackage.NAMED_ARGUMENT:
-      {
-        NamedArgument namedArgument = (NamedArgument)theEObject;
-        T result = caseNamedArgument(namedArgument);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case AstPackage.SYMBOL_REFERENCE:
-      {
-        SymbolReference symbolReference = (SymbolReference)theEObject;
-        T result = caseSymbolReference(symbolReference);
-        if (result == null) result = caseExpression(symbolReference);
+        FeatureCall featureCall = (FeatureCall)theEObject;
+        T result = caseFeatureCall(featureCall);
+        if (result == null) result = caseExpression(featureCall);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -599,17 +652,177 @@ public class AstSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Enumeration Literal Definition</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Enumeration Literal Declaration</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Enumeration Literal Definition</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Enumeration Literal Declaration</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseEnumerationLiteralDefinition(EnumerationLiteralDefinition object)
+  public T caseEnumerationLiteralDeclaration(EnumerationLiteralDeclaration object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Function Definition</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Function Definition</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseFunctionDefinition(FunctionDefinition object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Parameter Declaration</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Parameter Declaration</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseParameterDeclaration(ParameterDeclaration object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Statement</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Statement</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseStatement(Statement object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Block</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Block</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseBlock(Block object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Feature Call Statement</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Feature Call Statement</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseFeatureCallStatement(FeatureCallStatement object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>If Statement</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>If Statement</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseIfStatement(IfStatement object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>If Case</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>If Case</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseIfCase(IfCase object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>While Statement</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>While Statement</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseWhileStatement(WhileStatement object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Variable Declaration</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Variable Declaration</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseVariableDeclaration(VariableDeclaration object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Variable Declaration Item</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Variable Declaration Item</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseVariableDeclarationItem(VariableDeclarationItem object)
   {
     return null;
   }
@@ -919,65 +1132,33 @@ public class AstSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Name</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Qualified Name</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Name</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Qualified Name</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseName(Name object)
+  public T caseQualifiedName(QualifiedName object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Function Argument List</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Feature Call</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Function Argument List</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Feature Call</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseFunctionArgumentList(FunctionArgumentList object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Named Argument</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Named Argument</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseNamedArgument(NamedArgument object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Symbol Reference</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Symbol Reference</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseSymbolReference(SymbolReference object)
+  public T caseFeatureCall(FeatureCall object)
   {
     return null;
   }
