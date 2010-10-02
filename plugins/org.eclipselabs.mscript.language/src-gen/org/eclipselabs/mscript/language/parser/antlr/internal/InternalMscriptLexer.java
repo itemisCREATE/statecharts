@@ -25,6 +25,7 @@ public class InternalMscriptLexer extends Lexer {
     public static final int T22=22;
     public static final int T21=21;
     public static final int T20=20;
+    public static final int T62=62;
     public static final int T38=38;
     public static final int RULE_REAL=5;
     public static final int T37=37;
@@ -34,12 +35,14 @@ public class InternalMscriptLexer extends Lexer {
     public static final int T36=36;
     public static final int T35=35;
     public static final int T30=30;
+    public static final int T61=61;
     public static final int T32=32;
+    public static final int T60=60;
     public static final int T31=31;
     public static final int T49=49;
     public static final int T48=48;
     public static final int T43=43;
-    public static final int Tokens=59;
+    public static final int Tokens=63;
     public static final int RULE_SL_COMMENT=9;
     public static final int T42=42;
     public static final int T41=41;
@@ -51,6 +54,7 @@ public class InternalMscriptLexer extends Lexer {
     public static final int T44=44;
     public static final int RULE_STRING=7;
     public static final int T50=50;
+    public static final int T59=59;
     public static final int T12=12;
     public static final int T13=13;
     public static final int T14=14;
@@ -134,10 +138,10 @@ public class InternalMscriptLexer extends Lexer {
     public final void mT15() throws RecognitionException {
         try {
             int _type = T15;
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:13:5: ( 'enumeration' )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:13:7: 'enumeration'
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:13:5: ( 'enum' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:13:7: 'enum'
             {
-            match("enumeration"); 
+            match("enum"); 
 
 
             }
@@ -207,10 +211,11 @@ public class InternalMscriptLexer extends Lexer {
     public final void mT19() throws RecognitionException {
         try {
             int _type = T19;
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:17:5: ( '=' )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:17:7: '='
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:17:5: ( 'ref' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:17:7: 'ref'
             {
-            match('='); 
+            match("ref"); 
+
 
             }
 
@@ -225,10 +230,10 @@ public class InternalMscriptLexer extends Lexer {
     public final void mT20() throws RecognitionException {
         try {
             int _type = T20;
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:18:5: ( ';' )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:18:7: ';'
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:18:5: ( '=' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:18:7: '='
             {
-            match(';'); 
+            match('='); 
 
             }
 
@@ -243,11 +248,10 @@ public class InternalMscriptLexer extends Lexer {
     public final void mT21() throws RecognitionException {
         try {
             int _type = T21;
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:19:5: ( 'if' )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:19:7: 'if'
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:19:5: ( ';' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:19:7: ';'
             {
-            match("if"); 
-
+            match(';'); 
 
             }
 
@@ -262,10 +266,10 @@ public class InternalMscriptLexer extends Lexer {
     public final void mT22() throws RecognitionException {
         try {
             int _type = T22;
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:20:5: ( 'elseif' )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:20:7: 'elseif'
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:20:5: ( 'if' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:20:7: 'if'
             {
-            match("elseif"); 
+            match("if"); 
 
 
             }
@@ -281,10 +285,10 @@ public class InternalMscriptLexer extends Lexer {
     public final void mT23() throws RecognitionException {
         try {
             int _type = T23;
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:21:5: ( 'else' )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:21:7: 'else'
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:21:5: ( 'elseif' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:21:7: 'elseif'
             {
-            match("else"); 
+            match("elseif"); 
 
 
             }
@@ -300,10 +304,10 @@ public class InternalMscriptLexer extends Lexer {
     public final void mT24() throws RecognitionException {
         try {
             int _type = T24;
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:22:5: ( 'while' )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:22:7: 'while'
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:22:5: ( 'else' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:22:7: 'else'
             {
-            match("while"); 
+            match("else"); 
 
 
             }
@@ -319,10 +323,10 @@ public class InternalMscriptLexer extends Lexer {
     public final void mT25() throws RecognitionException {
         try {
             int _type = T25;
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:23:5: ( 'real' )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:23:7: 'real'
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:23:5: ( 'while' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:23:7: 'while'
             {
-            match("real"); 
+            match("while"); 
 
 
             }
@@ -338,10 +342,10 @@ public class InternalMscriptLexer extends Lexer {
     public final void mT26() throws RecognitionException {
         try {
             int _type = T26;
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:24:5: ( 'integer' )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:24:7: 'integer'
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:24:5: ( 'do' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:24:7: 'do'
             {
-            match("integer"); 
+            match("do"); 
 
 
             }
@@ -357,10 +361,10 @@ public class InternalMscriptLexer extends Lexer {
     public final void mT27() throws RecognitionException {
         try {
             int _type = T27;
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:25:5: ( 'complex' )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:25:7: 'complex'
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:25:5: ( 'foreach' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:25:7: 'foreach'
             {
-            match("complex"); 
+            match("foreach"); 
 
 
             }
@@ -376,10 +380,10 @@ public class InternalMscriptLexer extends Lexer {
     public final void mT28() throws RecognitionException {
         try {
             int _type = T28;
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:26:5: ( 'gaussian' )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:26:7: 'gaussian'
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:26:5: ( 'in' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:26:7: 'in'
             {
-            match("gaussian"); 
+            match("in"); 
 
 
             }
@@ -395,10 +399,10 @@ public class InternalMscriptLexer extends Lexer {
     public final void mT29() throws RecognitionException {
         try {
             int _type = T29;
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:27:5: ( 'boolean' )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:27:7: 'boolean'
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:27:5: ( 'real' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:27:7: 'real'
             {
-            match("boolean"); 
+            match("real"); 
 
 
             }
@@ -414,10 +418,10 @@ public class InternalMscriptLexer extends Lexer {
     public final void mT30() throws RecognitionException {
         try {
             int _type = T30;
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:28:5: ( 'string' )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:28:7: 'string'
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:28:5: ( 'int' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:28:7: 'int'
             {
-            match("string"); 
+            match("int"); 
 
 
             }
@@ -433,10 +437,10 @@ public class InternalMscriptLexer extends Lexer {
     public final void mT31() throws RecognitionException {
         try {
             int _type = T31;
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:29:5: ( 'then' )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:29:7: 'then'
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:29:5: ( 'complex' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:29:7: 'complex'
             {
-            match("then"); 
+            match("complex"); 
 
 
             }
@@ -452,10 +456,11 @@ public class InternalMscriptLexer extends Lexer {
     public final void mT32() throws RecognitionException {
         try {
             int _type = T32;
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:30:5: ( ':' )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:30:7: ':'
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:30:5: ( 'gauss' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:30:7: 'gauss'
             {
-            match(':'); 
+            match("gauss"); 
+
 
             }
 
@@ -470,10 +475,10 @@ public class InternalMscriptLexer extends Lexer {
     public final void mT33() throws RecognitionException {
         try {
             int _type = T33;
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:31:5: ( 'or' )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:31:7: 'or'
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:31:5: ( 'bool' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:31:7: 'bool'
             {
-            match("or"); 
+            match("bool"); 
 
 
             }
@@ -489,10 +494,10 @@ public class InternalMscriptLexer extends Lexer {
     public final void mT34() throws RecognitionException {
         try {
             int _type = T34;
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:32:5: ( 'and' )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:32:7: 'and'
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:32:5: ( 'string' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:32:7: 'string'
             {
-            match("and"); 
+            match("string"); 
 
 
             }
@@ -508,10 +513,10 @@ public class InternalMscriptLexer extends Lexer {
     public final void mT35() throws RecognitionException {
         try {
             int _type = T35;
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:33:5: ( 'not' )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:33:7: 'not'
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:33:5: ( 'then' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:33:7: 'then'
             {
-            match("not"); 
+            match("then"); 
 
 
             }
@@ -527,10 +532,10 @@ public class InternalMscriptLexer extends Lexer {
     public final void mT36() throws RecognitionException {
         try {
             int _type = T36;
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:34:5: ( '-' )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:34:7: '-'
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:34:5: ( ':' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:34:7: ':'
             {
-            match('-'); 
+            match(':'); 
 
             }
 
@@ -545,10 +550,11 @@ public class InternalMscriptLexer extends Lexer {
     public final void mT37() throws RecognitionException {
         try {
             int _type = T37;
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:35:5: ( 'j' )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:35:7: 'j'
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:35:5: ( 'or' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:35:7: 'or'
             {
-            match('j'); 
+            match("or"); 
+
 
             }
 
@@ -563,10 +569,10 @@ public class InternalMscriptLexer extends Lexer {
     public final void mT38() throws RecognitionException {
         try {
             int _type = T38;
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:36:5: ( '::' )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:36:7: '::'
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:36:5: ( 'and' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:36:7: 'and'
             {
-            match("::"); 
+            match("and"); 
 
 
             }
@@ -582,10 +588,11 @@ public class InternalMscriptLexer extends Lexer {
     public final void mT39() throws RecognitionException {
         try {
             int _type = T39;
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:37:5: ( '[' )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:37:7: '['
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:37:5: ( 'not' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:37:7: 'not'
             {
-            match('['); 
+            match("not"); 
+
 
             }
 
@@ -600,10 +607,10 @@ public class InternalMscriptLexer extends Lexer {
     public final void mT40() throws RecognitionException {
         try {
             int _type = T40;
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:38:5: ( ']' )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:38:7: ']'
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:38:5: ( '-' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:38:7: '-'
             {
-            match(']'); 
+            match('-'); 
 
             }
 
@@ -618,10 +625,10 @@ public class InternalMscriptLexer extends Lexer {
     public final void mT41() throws RecognitionException {
         try {
             int _type = T41;
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:39:5: ( '.' )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:39:7: '.'
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:39:5: ( 'j' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:39:7: 'j'
             {
-            match('.'); 
+            match('j'); 
 
             }
 
@@ -636,10 +643,10 @@ public class InternalMscriptLexer extends Lexer {
     public final void mT42() throws RecognitionException {
         try {
             int _type = T42;
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:40:5: ( 'begin' )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:40:7: 'begin'
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:40:5: ( '::' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:40:7: '::'
             {
-            match("begin"); 
+            match("::"); 
 
 
             }
@@ -655,11 +662,10 @@ public class InternalMscriptLexer extends Lexer {
     public final void mT43() throws RecognitionException {
         try {
             int _type = T43;
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:41:5: ( 'end' )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:41:7: 'end'
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:41:5: ( '[' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:41:7: '['
             {
-            match("end"); 
-
+            match('['); 
 
             }
 
@@ -674,10 +680,10 @@ public class InternalMscriptLexer extends Lexer {
     public final void mT44() throws RecognitionException {
         try {
             int _type = T44;
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:42:5: ( '/' )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:42:7: '/'
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:42:5: ( ']' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:42:7: ']'
             {
-            match('/'); 
+            match(']'); 
 
             }
 
@@ -692,10 +698,10 @@ public class InternalMscriptLexer extends Lexer {
     public final void mT45() throws RecognitionException {
         try {
             int _type = T45;
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:43:5: ( '*' )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:43:7: '*'
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:43:5: ( '.' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:43:7: '.'
             {
-            match('*'); 
+            match('.'); 
 
             }
 
@@ -710,10 +716,11 @@ public class InternalMscriptLexer extends Lexer {
     public final void mT46() throws RecognitionException {
         try {
             int _type = T46;
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:44:5: ( '^' )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:44:7: '^'
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:44:5: ( 'begin' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:44:7: 'begin'
             {
-            match('^'); 
+            match("begin"); 
+
 
             }
 
@@ -728,10 +735,11 @@ public class InternalMscriptLexer extends Lexer {
     public final void mT47() throws RecognitionException {
         try {
             int _type = T47;
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:45:5: ( '<' )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:45:7: '<'
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:45:5: ( 'end' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:45:7: 'end'
             {
-            match('<'); 
+            match("end"); 
+
 
             }
 
@@ -746,11 +754,10 @@ public class InternalMscriptLexer extends Lexer {
     public final void mT48() throws RecognitionException {
         try {
             int _type = T48;
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:46:5: ( '<=' )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:46:7: '<='
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:46:5: ( '/' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:46:7: '/'
             {
-            match("<="); 
-
+            match('/'); 
 
             }
 
@@ -765,10 +772,10 @@ public class InternalMscriptLexer extends Lexer {
     public final void mT49() throws RecognitionException {
         try {
             int _type = T49;
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:47:5: ( '>' )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:47:7: '>'
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:47:5: ( '*' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:47:7: '*'
             {
-            match('>'); 
+            match('*'); 
 
             }
 
@@ -783,11 +790,10 @@ public class InternalMscriptLexer extends Lexer {
     public final void mT50() throws RecognitionException {
         try {
             int _type = T50;
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:48:5: ( '>=' )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:48:7: '>='
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:48:5: ( '^' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:48:7: '^'
             {
-            match(">="); 
-
+            match('^'); 
 
             }
 
@@ -802,11 +808,10 @@ public class InternalMscriptLexer extends Lexer {
     public final void mT51() throws RecognitionException {
         try {
             int _type = T51;
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:49:5: ( '==' )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:49:7: '=='
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:49:5: ( '<' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:49:7: '<'
             {
-            match("=="); 
-
+            match('<'); 
 
             }
 
@@ -821,10 +826,10 @@ public class InternalMscriptLexer extends Lexer {
     public final void mT52() throws RecognitionException {
         try {
             int _type = T52;
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:50:5: ( '<>' )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:50:7: '<>'
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:50:5: ( '<=' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:50:7: '<='
             {
-            match("<>"); 
+            match("<="); 
 
 
             }
@@ -840,10 +845,10 @@ public class InternalMscriptLexer extends Lexer {
     public final void mT53() throws RecognitionException {
         try {
             int _type = T53;
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:51:5: ( '+' )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:51:7: '+'
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:51:5: ( '>' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:51:7: '>'
             {
-            match('+'); 
+            match('>'); 
 
             }
 
@@ -858,10 +863,10 @@ public class InternalMscriptLexer extends Lexer {
     public final void mT54() throws RecognitionException {
         try {
             int _type = T54;
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:52:5: ( '.*' )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:52:7: '.*'
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:52:5: ( '>=' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:52:7: '>='
             {
-            match(".*"); 
+            match(">="); 
 
 
             }
@@ -877,10 +882,10 @@ public class InternalMscriptLexer extends Lexer {
     public final void mT55() throws RecognitionException {
         try {
             int _type = T55;
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:53:5: ( './' )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:53:7: './'
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:53:5: ( '==' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:53:7: '=='
             {
-            match("./"); 
+            match("=="); 
 
 
             }
@@ -896,10 +901,10 @@ public class InternalMscriptLexer extends Lexer {
     public final void mT56() throws RecognitionException {
         try {
             int _type = T56;
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:54:5: ( '.^' )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:54:7: '.^'
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:54:5: ( '<>' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:54:7: '<>'
             {
-            match(".^"); 
+            match("<>"); 
 
 
             }
@@ -915,11 +920,10 @@ public class InternalMscriptLexer extends Lexer {
     public final void mT57() throws RecognitionException {
         try {
             int _type = T57;
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:55:5: ( 'false' )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:55:7: 'false'
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:55:5: ( '+' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:55:7: '+'
             {
-            match("false"); 
-
+            match('+'); 
 
             }
 
@@ -934,10 +938,10 @@ public class InternalMscriptLexer extends Lexer {
     public final void mT58() throws RecognitionException {
         try {
             int _type = T58;
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:56:5: ( 'true' )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:56:7: 'true'
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:56:5: ( '.*' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:56:7: '.*'
             {
-            match("true"); 
+            match(".*"); 
 
 
             }
@@ -949,12 +953,88 @@ public class InternalMscriptLexer extends Lexer {
     }
     // $ANTLR end T58
 
+    // $ANTLR start T59
+    public final void mT59() throws RecognitionException {
+        try {
+            int _type = T59;
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:57:5: ( './' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:57:7: './'
+            {
+            match("./"); 
+
+
+            }
+
+            this.type = _type;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end T59
+
+    // $ANTLR start T60
+    public final void mT60() throws RecognitionException {
+        try {
+            int _type = T60;
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:58:5: ( '.^' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:58:7: '.^'
+            {
+            match(".^"); 
+
+
+            }
+
+            this.type = _type;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end T60
+
+    // $ANTLR start T61
+    public final void mT61() throws RecognitionException {
+        try {
+            int _type = T61;
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:59:5: ( 'false' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:59:7: 'false'
+            {
+            match("false"); 
+
+
+            }
+
+            this.type = _type;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end T61
+
+    // $ANTLR start T62
+    public final void mT62() throws RecognitionException {
+        try {
+            int _type = T62;
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:60:5: ( 'true' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:60:7: 'true'
+            {
+            match("true"); 
+
+
+            }
+
+            this.type = _type;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end T62
+
     // $ANTLR start RULE_ID
     public final void mRULE_ID() throws RecognitionException {
         try {
             int _type = RULE_ID;
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4758:9: ( ( '_' | 'a' .. 'z' | 'A' .. 'Z' ) ( '0' .. '9' | '_' | 'a' .. 'z' | 'A' .. 'Z' )* )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4758:11: ( '_' | 'a' .. 'z' | 'A' .. 'Z' ) ( '0' .. '9' | '_' | 'a' .. 'z' | 'A' .. 'Z' )*
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4985:9: ( ( '_' | 'a' .. 'z' | 'A' .. 'Z' ) ( '0' .. '9' | '_' | 'a' .. 'z' | 'A' .. 'Z' )* )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4985:11: ( '_' | 'a' .. 'z' | 'A' .. 'Z' ) ( '0' .. '9' | '_' | 'a' .. 'z' | 'A' .. 'Z' )*
             {
             if ( (input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
                 input.consume();
@@ -966,7 +1046,7 @@ public class InternalMscriptLexer extends Lexer {
                 recover(mse);    throw mse;
             }
 
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4758:35: ( '0' .. '9' | '_' | 'a' .. 'z' | 'A' .. 'Z' )*
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4985:35: ( '0' .. '9' | '_' | 'a' .. 'z' | 'A' .. 'Z' )*
             loop1:
             do {
                 int alt1=2;
@@ -1014,11 +1094,11 @@ public class InternalMscriptLexer extends Lexer {
     public final void mRULE_STRING() throws RecognitionException {
         try {
             int _type = RULE_STRING;
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4760:13: ( '\"' (~ ( ( '\\\\' | '\"' ) ) | '\\\\' ( '\\'' | '\"' | '?' | '\\\\' | 'a' | 'b' | 'f' | 'n' | 'r' | 't' | 'v' ) )* '\"' )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4760:15: '\"' (~ ( ( '\\\\' | '\"' ) ) | '\\\\' ( '\\'' | '\"' | '?' | '\\\\' | 'a' | 'b' | 'f' | 'n' | 'r' | 't' | 'v' ) )* '\"'
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4987:13: ( '\"' (~ ( ( '\\\\' | '\"' ) ) | '\\\\' ( '\\'' | '\"' | '?' | '\\\\' | 'a' | 'b' | 'f' | 'n' | 'r' | 't' | 'v' ) )* '\"' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4987:15: '\"' (~ ( ( '\\\\' | '\"' ) ) | '\\\\' ( '\\'' | '\"' | '?' | '\\\\' | 'a' | 'b' | 'f' | 'n' | 'r' | 't' | 'v' ) )* '\"'
             {
             match('\"'); 
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4760:19: (~ ( ( '\\\\' | '\"' ) ) | '\\\\' ( '\\'' | '\"' | '?' | '\\\\' | 'a' | 'b' | 'f' | 'n' | 'r' | 't' | 'v' ) )*
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4987:19: (~ ( ( '\\\\' | '\"' ) ) | '\\\\' ( '\\'' | '\"' | '?' | '\\\\' | 'a' | 'b' | 'f' | 'n' | 'r' | 't' | 'v' ) )*
             loop2:
             do {
                 int alt2=3;
@@ -1034,7 +1114,7 @@ public class InternalMscriptLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4760:20: ~ ( ( '\\\\' | '\"' ) )
+            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4987:20: ~ ( ( '\\\\' | '\"' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFE') ) {
             	        input.consume();
@@ -1050,7 +1130,7 @@ public class InternalMscriptLexer extends Lexer {
             	    }
             	    break;
             	case 2 :
-            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4760:34: '\\\\' ( '\\'' | '\"' | '?' | '\\\\' | 'a' | 'b' | 'f' | 'n' | 'r' | 't' | 'v' )
+            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4987:34: '\\\\' ( '\\'' | '\"' | '?' | '\\\\' | 'a' | 'b' | 'f' | 'n' | 'r' | 't' | 'v' )
             	    {
             	    match('\\'); 
             	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='?'||input.LA(1)=='\\'||(input.LA(1)>='a' && input.LA(1)<='b')||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t'||input.LA(1)=='v' ) {
@@ -1087,10 +1167,10 @@ public class InternalMscriptLexer extends Lexer {
     public final void mRULE_REAL() throws RecognitionException {
         try {
             int _type = RULE_REAL;
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4762:11: ( ( '0' .. '9' )+ '.' ( '0' .. '9' )* ( ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+ )? )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4762:13: ( '0' .. '9' )+ '.' ( '0' .. '9' )* ( ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+ )?
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4989:11: ( ( '0' .. '9' )+ '.' ( '0' .. '9' )* ( ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+ )? )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4989:13: ( '0' .. '9' )+ '.' ( '0' .. '9' )* ( ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+ )?
             {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4762:13: ( '0' .. '9' )+
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4989:13: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -1104,7 +1184,7 @@ public class InternalMscriptLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4762:14: '0' .. '9'
+            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4989:14: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -1121,7 +1201,7 @@ public class InternalMscriptLexer extends Lexer {
             } while (true);
 
             match('.'); 
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4762:29: ( '0' .. '9' )*
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4989:29: ( '0' .. '9' )*
             loop4:
             do {
                 int alt4=2;
@@ -1134,7 +1214,7 @@ public class InternalMscriptLexer extends Lexer {
 
                 switch (alt4) {
             	case 1 :
-            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4762:30: '0' .. '9'
+            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4989:30: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -1146,7 +1226,7 @@ public class InternalMscriptLexer extends Lexer {
                 }
             } while (true);
 
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4762:41: ( ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+ )?
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4989:41: ( ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+ )?
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -1155,7 +1235,7 @@ public class InternalMscriptLexer extends Lexer {
             }
             switch (alt7) {
                 case 1 :
-                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4762:42: ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+
+                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4989:42: ( 'e' | 'E' ) ( '+' | '-' )? ( '0' .. '9' )+
                     {
                     if ( input.LA(1)=='E'||input.LA(1)=='e' ) {
                         input.consume();
@@ -1167,7 +1247,7 @@ public class InternalMscriptLexer extends Lexer {
                         recover(mse);    throw mse;
                     }
 
-                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4762:52: ( '+' | '-' )?
+                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4989:52: ( '+' | '-' )?
                     int alt5=2;
                     int LA5_0 = input.LA(1);
 
@@ -1194,7 +1274,7 @@ public class InternalMscriptLexer extends Lexer {
 
                     }
 
-                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4762:63: ( '0' .. '9' )+
+                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4989:63: ( '0' .. '9' )+
                     int cnt6=0;
                     loop6:
                     do {
@@ -1208,7 +1288,7 @@ public class InternalMscriptLexer extends Lexer {
 
                         switch (alt6) {
                     	case 1 :
-                    	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4762:64: '0' .. '9'
+                    	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4989:64: '0' .. '9'
                     	    {
                     	    matchRange('0','9'); 
 
@@ -1244,10 +1324,10 @@ public class InternalMscriptLexer extends Lexer {
     public final void mRULE_INTEGER() throws RecognitionException {
         try {
             int _type = RULE_INTEGER;
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4764:14: ( ( '0' .. '9' )+ )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4764:16: ( '0' .. '9' )+
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4991:14: ( ( '0' .. '9' )+ )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4991:16: ( '0' .. '9' )+
             {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4764:16: ( '0' .. '9' )+
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4991:16: ( '0' .. '9' )+
             int cnt8=0;
             loop8:
             do {
@@ -1261,7 +1341,7 @@ public class InternalMscriptLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4764:17: '0' .. '9'
+            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4991:17: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -1291,12 +1371,12 @@ public class InternalMscriptLexer extends Lexer {
     public final void mRULE_ML_COMMENT() throws RecognitionException {
         try {
             int _type = RULE_ML_COMMENT;
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4766:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4766:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4993:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4993:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4766:24: ( options {greedy=false; } : . )*
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4993:24: ( options {greedy=false; } : . )*
             loop9:
             do {
                 int alt9=2;
@@ -1321,7 +1401,7 @@ public class InternalMscriptLexer extends Lexer {
 
                 switch (alt9) {
             	case 1 :
-            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4766:52: .
+            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4993:52: .
             	    {
             	    matchAny(); 
 
@@ -1349,12 +1429,12 @@ public class InternalMscriptLexer extends Lexer {
     public final void mRULE_SL_COMMENT() throws RecognitionException {
         try {
             int _type = RULE_SL_COMMENT;
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4768:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4768:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4995:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4995:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4768:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4995:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop10:
             do {
                 int alt10=2;
@@ -1367,7 +1447,7 @@ public class InternalMscriptLexer extends Lexer {
 
                 switch (alt10) {
             	case 1 :
-            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4768:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4995:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFE') ) {
             	        input.consume();
@@ -1388,7 +1468,7 @@ public class InternalMscriptLexer extends Lexer {
                 }
             } while (true);
 
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4768:40: ( ( '\\r' )? '\\n' )?
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4995:40: ( ( '\\r' )? '\\n' )?
             int alt12=2;
             int LA12_0 = input.LA(1);
 
@@ -1397,9 +1477,9 @@ public class InternalMscriptLexer extends Lexer {
             }
             switch (alt12) {
                 case 1 :
-                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4768:41: ( '\\r' )? '\\n'
+                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4995:41: ( '\\r' )? '\\n'
                     {
-                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4768:41: ( '\\r' )?
+                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4995:41: ( '\\r' )?
                     int alt11=2;
                     int LA11_0 = input.LA(1);
 
@@ -1408,7 +1488,7 @@ public class InternalMscriptLexer extends Lexer {
                     }
                     switch (alt11) {
                         case 1 :
-                            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4768:41: '\\r'
+                            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4995:41: '\\r'
                             {
                             match('\r'); 
 
@@ -1438,10 +1518,10 @@ public class InternalMscriptLexer extends Lexer {
     public final void mRULE_WS() throws RecognitionException {
         try {
             int _type = RULE_WS;
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4770:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4770:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4997:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4997:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4770:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4997:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt13=0;
             loop13:
             do {
@@ -1494,8 +1574,8 @@ public class InternalMscriptLexer extends Lexer {
     public final void mRULE_ANY_OTHER() throws RecognitionException {
         try {
             int _type = RULE_ANY_OTHER;
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4772:16: ( . )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4772:18: .
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4999:16: ( . )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4999:18: .
             {
             matchAny(); 
 
@@ -1509,8 +1589,8 @@ public class InternalMscriptLexer extends Lexer {
     // $ANTLR end RULE_ANY_OTHER
 
     public void mTokens() throws RecognitionException {
-        // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1:8: ( T12 | T13 | T14 | T15 | T16 | T17 | T18 | T19 | T20 | T21 | T22 | T23 | T24 | T25 | T26 | T27 | T28 | T29 | T30 | T31 | T32 | T33 | T34 | T35 | T36 | T37 | T38 | T39 | T40 | T41 | T42 | T43 | T44 | T45 | T46 | T47 | T48 | T49 | T50 | T51 | T52 | T53 | T54 | T55 | T56 | T57 | T58 | RULE_ID | RULE_STRING | RULE_REAL | RULE_INTEGER | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
-        int alt14=55;
+        // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1:8: ( T12 | T13 | T14 | T15 | T16 | T17 | T18 | T19 | T20 | T21 | T22 | T23 | T24 | T25 | T26 | T27 | T28 | T29 | T30 | T31 | T32 | T33 | T34 | T35 | T36 | T37 | T38 | T39 | T40 | T41 | T42 | T43 | T44 | T45 | T46 | T47 | T48 | T49 | T50 | T51 | T52 | T53 | T54 | T55 | T56 | T57 | T58 | T59 | T60 | T61 | T62 | RULE_ID | RULE_STRING | RULE_REAL | RULE_INTEGER | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
+        int alt14=59;
         alt14 = dfa14.predict(input);
         switch (alt14) {
             case 1 :
@@ -1843,56 +1923,84 @@ public class InternalMscriptLexer extends Lexer {
                 }
                 break;
             case 48 :
-                // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1:198: RULE_ID
+                // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1:198: T59
+                {
+                mT59(); 
+
+                }
+                break;
+            case 49 :
+                // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1:202: T60
+                {
+                mT60(); 
+
+                }
+                break;
+            case 50 :
+                // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1:206: T61
+                {
+                mT61(); 
+
+                }
+                break;
+            case 51 :
+                // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1:210: T62
+                {
+                mT62(); 
+
+                }
+                break;
+            case 52 :
+                // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1:214: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
-            case 49 :
-                // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1:206: RULE_STRING
+            case 53 :
+                // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1:222: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
-            case 50 :
-                // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1:218: RULE_REAL
+            case 54 :
+                // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1:234: RULE_REAL
                 {
                 mRULE_REAL(); 
 
                 }
                 break;
-            case 51 :
-                // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1:228: RULE_INTEGER
+            case 55 :
+                // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1:244: RULE_INTEGER
                 {
                 mRULE_INTEGER(); 
 
                 }
                 break;
-            case 52 :
-                // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1:241: RULE_ML_COMMENT
+            case 56 :
+                // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1:257: RULE_ML_COMMENT
                 {
                 mRULE_ML_COMMENT(); 
 
                 }
                 break;
-            case 53 :
-                // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1:257: RULE_SL_COMMENT
+            case 57 :
+                // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1:273: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
                 }
                 break;
-            case 54 :
-                // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1:273: RULE_WS
+            case 58 :
+                // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1:289: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
-            case 55 :
-                // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1:281: RULE_ANY_OTHER
+            case 59 :
+                // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1:297: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 
@@ -1906,236 +2014,230 @@ public class InternalMscriptLexer extends Lexer {
 
     protected DFA14 dfa14 = new DFA14(this);
     static final String DFA14_eotS =
-        "\1\uffff\1\50\2\uffff\1\50\3\uffff\1\61\1\uffff\10\50\1\77\3\50"+
-        "\1\uffff\1\104\2\uffff\1\112\1\115\2\uffff\1\122\1\124\1\uffff\1"+
-        "\50\1\uffff\1\46\1\130\2\uffff\1\50\3\uffff\2\50\6\uffff\1\140\12"+
-        "\50\2\uffff\1\153\2\50\23\uffff\1\50\3\uffff\1\130\1\uffff\1\50"+
-        "\1\160\2\50\1\uffff\12\50\1\uffff\1\175\1\176\2\50\1\uffff\1\50"+
-        "\1\u0083\2\50\1\u0086\5\50\1\u008c\1\u008d\2\uffff\4\50\1\uffff"+
-        "\1\50\1\u0093\1\uffff\3\50\1\u0097\1\50\2\uffff\1\u0099\2\50\1\u009c"+
-        "\1\50\1\uffff\3\50\1\uffff\1\u00a1\1\uffff\1\u00a2\1\50\1\uffff"+
-        "\1\u00a4\1\u00a5\1\50\1\u00a7\2\uffff\1\50\2\uffff\1\u00a9\1\uffff"+
-        "\1\50\1\uffff\1\50\1\u00ac\1\uffff";
+        "\1\uffff\1\51\2\uffff\1\51\3\uffff\1\51\1\63\1\uffff\11\51\1\103"+
+        "\3\51\1\uffff\1\110\2\uffff\1\116\1\121\2\uffff\1\126\1\130\2\uffff"+
+        "\1\47\1\135\2\uffff\1\51\3\uffff\2\51\3\uffff\1\51\3\uffff\1\145"+
+        "\1\147\1\51\1\151\11\51\2\uffff\1\163\2\51\25\uffff\1\135\2\uffff"+
+        "\2\51\1\170\1\51\1\172\1\51\1\uffff\1\174\1\uffff\1\51\1\uffff\11"+
+        "\51\1\uffff\1\u0087\1\u0088\1\51\1\u008a\1\uffff\1\u008c\1\uffff"+
+        "\1\u008d\1\uffff\5\51\1\u0093\2\51\1\u0096\1\u0097\2\uffff\1\51"+
+        "\1\uffff\1\51\2\uffff\1\u009a\1\51\1\u009c\1\51\1\u009e\1\uffff"+
+        "\1\u009f\1\51\2\uffff\1\51\1\u00a2\1\uffff\1\51\1\uffff\1\51\2\uffff"+
+        "\1\u00a5\1\u00a6\1\uffff\1\u00a7\1\u00a8\4\uffff";
     static final String DFA14_eofS =
-        "\u00ad\uffff";
+        "\u00a9\uffff";
     static final String DFA14_minS =
-        "\1\0\1\141\2\uffff\1\154\3\uffff\1\75\1\uffff\1\146\1\150\1\145"+
-        "\1\157\1\141\1\145\1\164\1\150\1\72\1\162\1\156\1\157\1\uffff\1"+
-        "\60\2\uffff\2\52\2\uffff\2\75\1\uffff\1\141\1\uffff\1\0\1\56\2\uffff"+
-        "\1\143\3\uffff\1\144\1\163\6\uffff\1\60\1\164\1\151\1\141\1\155"+
-        "\1\165\1\157\1\147\1\162\1\145\1\165\2\uffff\1\60\1\144\1\164\23"+
-        "\uffff\1\154\3\uffff\1\56\1\uffff\1\153\1\60\1\155\1\145\1\uffff"+
-        "\1\145\2\154\1\160\1\163\1\154\2\151\1\156\1\145\1\uffff\2\60\1"+
-        "\163\1\141\1\uffff\1\145\1\60\1\147\1\145\1\60\1\154\1\163\1\145"+
-        "\2\156\2\60\2\uffff\1\145\1\147\1\162\1\146\1\uffff\1\145\1\60\1"+
-        "\uffff\1\145\1\151\1\141\1\60\1\147\2\uffff\1\60\1\145\1\141\1\60"+
-        "\1\162\1\uffff\1\170\1\141\1\156\1\uffff\1\60\1\uffff\1\60\1\164"+
-        "\1\uffff\2\60\1\156\1\60\2\uffff\1\151\2\uffff\1\60\1\uffff\1\157"+
-        "\1\uffff\1\156\1\60\1\uffff";
+        "\1\0\1\141\2\uffff\1\154\3\uffff\1\145\1\75\1\uffff\1\146\1\150"+
+        "\1\157\1\141\1\157\1\141\1\145\1\164\1\150\1\72\1\162\1\156\1\157"+
+        "\1\uffff\1\60\2\uffff\2\52\2\uffff\2\75\2\uffff\1\0\1\56\2\uffff"+
+        "\1\143\3\uffff\1\144\1\163\3\uffff\1\141\3\uffff\2\60\1\151\1\60"+
+        "\1\162\1\154\1\155\1\165\1\157\1\147\1\162\1\145\1\165\2\uffff\1"+
+        "\60\1\144\1\164\25\uffff\1\56\2\uffff\1\153\1\155\1\60\1\145\1\60"+
+        "\1\154\1\uffff\1\60\1\uffff\1\154\1\uffff\1\145\1\163\1\160\1\163"+
+        "\1\154\2\151\1\156\1\145\1\uffff\2\60\1\141\1\60\1\uffff\1\60\1"+
+        "\uffff\1\60\1\uffff\1\145\1\141\1\145\1\154\1\163\1\60\2\156\2\60"+
+        "\2\uffff\1\147\1\uffff\1\146\2\uffff\1\60\1\143\1\60\1\145\1\60"+
+        "\1\uffff\1\60\1\147\2\uffff\1\145\1\60\1\uffff\1\150\1\uffff\1\170"+
+        "\2\uffff\2\60\1\uffff\2\60\4\uffff";
     static final String DFA14_maxS =
-        "\1\ufffe\1\141\2\uffff\1\156\3\uffff\1\75\1\uffff\1\156\1\150\1"+
-        "\145\1\157\1\141\1\157\1\164\1\162\1\72\1\162\1\156\1\157\1\uffff"+
-        "\1\172\2\uffff\1\136\1\57\2\uffff\1\76\1\75\1\uffff\1\141\1\uffff"+
-        "\1\ufffe\1\71\2\uffff\1\143\3\uffff\1\165\1\163\6\uffff\1\172\1"+
-        "\164\1\151\1\141\1\155\1\165\1\157\1\147\1\162\1\145\1\165\2\uffff"+
-        "\1\172\1\144\1\164\23\uffff\1\154\3\uffff\1\71\1\uffff\1\153\1\172"+
-        "\1\155\1\145\1\uffff\1\145\2\154\1\160\1\163\1\154\2\151\1\156\1"+
-        "\145\1\uffff\2\172\1\163\1\141\1\uffff\1\145\1\172\1\147\1\145\1"+
-        "\172\1\154\1\163\1\145\2\156\2\172\2\uffff\1\145\1\147\1\162\1\146"+
-        "\1\uffff\1\145\1\172\1\uffff\1\145\1\151\1\141\1\172\1\147\2\uffff"+
-        "\1\172\1\145\1\141\1\172\1\162\1\uffff\1\170\1\141\1\156\1\uffff"+
-        "\1\172\1\uffff\1\172\1\164\1\uffff\2\172\1\156\1\172\2\uffff\1\151"+
-        "\2\uffff\1\172\1\uffff\1\157\1\uffff\1\156\1\172\1\uffff";
+        "\1\ufffe\1\141\2\uffff\1\156\3\uffff\1\145\1\75\1\uffff\1\156\1"+
+        "\150\3\157\1\141\1\157\1\164\1\162\1\72\1\162\1\156\1\157\1\uffff"+
+        "\1\172\2\uffff\1\136\1\57\2\uffff\1\76\1\75\2\uffff\1\ufffe\1\71"+
+        "\2\uffff\1\143\3\uffff\1\165\1\163\3\uffff\1\146\3\uffff\2\172\1"+
+        "\151\1\172\1\162\1\154\1\155\1\165\1\157\1\147\1\162\1\145\1\165"+
+        "\2\uffff\1\172\1\144\1\164\25\uffff\1\71\2\uffff\1\153\1\155\1\172"+
+        "\1\145\1\172\1\154\1\uffff\1\172\1\uffff\1\154\1\uffff\1\145\1\163"+
+        "\1\160\1\163\1\154\2\151\1\156\1\145\1\uffff\2\172\1\141\1\172\1"+
+        "\uffff\1\172\1\uffff\1\172\1\uffff\1\145\1\141\1\145\1\154\1\163"+
+        "\1\172\2\156\2\172\2\uffff\1\147\1\uffff\1\146\2\uffff\1\172\1\143"+
+        "\1\172\1\145\1\172\1\uffff\1\172\1\147\2\uffff\1\145\1\172\1\uffff"+
+        "\1\150\1\uffff\1\170\2\uffff\2\172\1\uffff\2\172\4\uffff";
     static final String DFA14_acceptS =
-        "\2\uffff\1\2\1\3\1\uffff\1\5\1\6\1\7\1\uffff\1\11\14\uffff\1\31"+
-        "\1\uffff\1\34\1\35\2\uffff\1\42\1\43\2\uffff\1\52\1\uffff\1\60\2"+
-        "\uffff\1\66\1\67\1\uffff\1\60\1\2\1\3\2\uffff\1\5\1\6\1\7\1\50\1"+
-        "\10\1\11\13\uffff\1\33\1\25\3\uffff\1\31\1\32\1\34\1\35\1\55\1\54"+
-        "\1\53\1\36\1\65\1\64\1\41\1\42\1\43\1\51\1\45\1\44\1\47\1\46\1\52"+
-        "\1\uffff\1\61\1\63\1\62\1\uffff\1\66\4\uffff\1\12\12\uffff\1\26"+
-        "\4\uffff\1\40\14\uffff\1\27\1\30\4\uffff\1\14\2\uffff\1\16\5\uffff"+
-        "\1\24\1\57\5\uffff\1\15\3\uffff\1\37\1\uffff\1\56\2\uffff\1\13\4"+
-        "\uffff\1\23\1\1\1\uffff\1\17\1\20\1\uffff\1\22\1\uffff\1\21\2\uffff"+
-        "\1\4";
+        "\2\uffff\1\2\1\3\1\uffff\1\5\1\6\1\7\2\uffff\1\12\15\uffff\1\35"+
+        "\1\uffff\1\40\1\41\2\uffff\1\46\1\47\2\uffff\1\56\1\64\2\uffff\1"+
+        "\72\1\73\1\uffff\1\64\1\2\1\3\2\uffff\1\5\1\6\1\7\1\uffff\1\54\1"+
+        "\11\1\12\15\uffff\1\37\1\31\3\uffff\1\35\1\36\1\40\1\41\1\61\1\60"+
+        "\1\57\1\42\1\70\1\71\1\45\1\46\1\47\1\55\1\51\1\50\1\53\1\52\1\56"+
+        "\1\65\1\66\1\uffff\1\67\1\72\6\uffff\1\13\1\uffff\1\21\1\uffff\1"+
+        "\17\11\uffff\1\32\4\uffff\1\44\1\uffff\1\10\1\uffff\1\23\12\uffff"+
+        "\1\33\1\34\1\uffff\1\4\1\uffff\1\15\1\22\5\uffff\1\26\2\uffff\1"+
+        "\30\1\63\2\uffff\1\16\1\uffff\1\62\1\uffff\1\25\1\43\2\uffff\1\14"+
+        "\2\uffff\1\27\1\1\1\20\1\24";
     static final String DFA14_specialS =
-        "\u00ad\uffff}>";
+        "\u00a9\uffff}>";
     static final String[] DFA14_transitionS = {
-            "\11\46\2\45\2\46\1\45\22\46\1\45\1\46\1\43\5\46\1\6\1\7\1\34"+
-            "\1\40\1\5\1\26\1\32\1\33\12\44\1\22\1\11\1\36\1\10\1\37\2\46"+
-            "\32\42\1\30\1\46\1\31\1\35\1\42\1\46\1\24\1\17\1\15\1\42\1\4"+
-            "\1\41\1\16\1\42\1\12\1\27\3\42\1\25\1\23\1\1\1\42\1\14\1\20"+
-            "\1\21\2\42\1\13\3\42\1\2\1\46\1\3\uff81\46",
-            "\1\47",
+            "\11\47\2\46\2\47\1\46\22\47\1\46\1\47\1\44\5\47\1\6\1\7\1\36"+
+            "\1\42\1\5\1\30\1\34\1\35\12\45\1\24\1\12\1\40\1\11\1\41\2\47"+
+            "\32\43\1\32\1\47\1\33\1\37\1\43\1\47\1\26\1\21\1\17\1\15\1\4"+
+            "\1\16\1\20\1\43\1\13\1\31\3\43\1\27\1\25\1\1\1\43\1\10\1\22"+
+            "\1\23\2\43\1\14\3\43\1\2\1\47\1\3\uff81\47",
+            "\1\50",
             "",
             "",
-            "\1\54\1\uffff\1\53",
+            "\1\55\1\uffff\1\54",
             "",
             "",
             "",
-            "\1\60",
+            "\1\61",
+            "\1\62",
             "",
-            "\1\63\7\uffff\1\64",
-            "\1\65",
-            "\1\66",
+            "\1\65\7\uffff\1\66",
             "\1\67",
             "\1\70",
-            "\1\72\11\uffff\1\71",
+            "\1\72\15\uffff\1\71",
             "\1\73",
-            "\1\74\11\uffff\1\75",
-            "\1\76",
-            "\1\100",
-            "\1\101",
+            "\1\74",
+            "\1\76\11\uffff\1\75",
+            "\1\77",
+            "\1\100\11\uffff\1\101",
             "\1\102",
+            "\1\104",
+            "\1\105",
+            "\1\106",
             "",
-            "\12\50\7\uffff\32\50\4\uffff\1\50\1\uffff\32\50",
-            "",
-            "",
-            "\1\111\4\uffff\1\110\56\uffff\1\107",
-            "\1\114\4\uffff\1\113",
-            "",
-            "",
-            "\1\121\1\120",
-            "\1\123",
-            "",
-            "\1\126",
-            "",
-            "\uffff\127",
-            "\1\131\1\uffff\12\132",
+            "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\32\51",
             "",
             "",
-            "\1\134",
+            "\1\115\4\uffff\1\114\56\uffff\1\113",
+            "\1\117\4\uffff\1\120",
             "",
             "",
+            "\1\125\1\124",
+            "\1\127",
             "",
-            "\1\135\20\uffff\1\136",
+            "",
+            "\uffff\132",
+            "\1\133\1\uffff\12\134",
+            "",
+            "",
             "\1\137",
             "",
             "",
             "",
-            "",
-            "",
-            "",
-            "\12\50\7\uffff\32\50\4\uffff\1\50\1\uffff\32\50",
-            "\1\141",
+            "\1\141\20\uffff\1\140",
             "\1\142",
-            "\1\143",
-            "\1\144",
-            "\1\145",
-            "\1\146",
-            "\1\147",
+            "",
+            "",
+            "",
+            "\1\144\4\uffff\1\143",
+            "",
+            "",
+            "",
+            "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\32\51",
+            "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\23\51\1\146\6\51",
             "\1\150",
-            "\1\151",
+            "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\32\51",
             "\1\152",
-            "",
-            "",
-            "\12\50\7\uffff\32\50\4\uffff\1\50\1\uffff\32\50",
+            "\1\153",
             "\1\154",
             "\1\155",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
             "\1\156",
-            "",
-            "",
-            "",
-            "\1\131\1\uffff\12\132",
-            "",
             "\1\157",
-            "\12\50\7\uffff\32\50\4\uffff\1\50\1\uffff\32\50",
+            "\1\160",
             "\1\161",
             "\1\162",
             "",
-            "\1\163",
+            "",
+            "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\32\51",
             "\1\164",
             "\1\165",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "\1\133\1\uffff\12\134",
+            "",
+            "",
             "\1\166",
             "\1\167",
-            "\1\170",
+            "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\32\51",
             "\1\171",
-            "\1\172",
+            "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\32\51",
             "\1\173",
-            "\1\174",
             "",
-            "\12\50\7\uffff\32\50\4\uffff\1\50\1\uffff\32\50",
-            "\12\50\7\uffff\32\50\4\uffff\1\50\1\uffff\32\50",
+            "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\32\51",
+            "",
+            "\1\175",
+            "",
+            "\1\176",
             "\1\177",
             "\1\u0080",
-            "",
             "\1\u0081",
-            "\12\50\7\uffff\32\50\4\uffff\1\50\1\uffff\10\50\1\u0082\21\50",
+            "\1\u0082",
+            "\1\u0083",
             "\1\u0084",
             "\1\u0085",
-            "\12\50\7\uffff\32\50\4\uffff\1\50\1\uffff\32\50",
-            "\1\u0087",
-            "\1\u0088",
-            "\1\u0089",
-            "\1\u008a",
-            "\1\u008b",
-            "\12\50\7\uffff\32\50\4\uffff\1\50\1\uffff\32\50",
-            "\12\50\7\uffff\32\50\4\uffff\1\50\1\uffff\32\50",
+            "\1\u0086",
             "",
+            "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\32\51",
+            "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\32\51",
+            "\1\u0089",
+            "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\32\51",
+            "",
+            "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\10\51\1\u008b\21\51",
+            "",
+            "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\32\51",
             "",
             "\1\u008e",
             "\1\u008f",
             "\1\u0090",
             "\1\u0091",
-            "",
             "\1\u0092",
-            "\12\50\7\uffff\32\50\4\uffff\1\50\1\uffff\32\50",
-            "",
+            "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\32\51",
             "\1\u0094",
             "\1\u0095",
-            "\1\u0096",
-            "\12\50\7\uffff\32\50\4\uffff\1\50\1\uffff\32\50",
+            "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\32\51",
+            "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\32\51",
+            "",
+            "",
             "\1\u0098",
             "",
+            "\1\u0099",
             "",
-            "\12\50\7\uffff\32\50\4\uffff\1\50\1\uffff\32\50",
-            "\1\u009a",
+            "",
+            "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\32\51",
             "\1\u009b",
-            "\12\50\7\uffff\32\50\4\uffff\1\50\1\uffff\32\50",
+            "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\32\51",
             "\1\u009d",
+            "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\32\51",
             "",
-            "\1\u009e",
-            "\1\u009f",
+            "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\32\51",
             "\1\u00a0",
             "",
-            "\12\50\7\uffff\32\50\4\uffff\1\50\1\uffff\32\50",
             "",
-            "\12\50\7\uffff\32\50\4\uffff\1\50\1\uffff\32\50",
+            "\1\u00a1",
+            "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\32\51",
+            "",
             "\1\u00a3",
             "",
-            "\12\50\7\uffff\32\50\4\uffff\1\50\1\uffff\32\50",
-            "\12\50\7\uffff\32\50\4\uffff\1\50\1\uffff\32\50",
-            "\1\u00a6",
-            "\12\50\7\uffff\32\50\4\uffff\1\50\1\uffff\32\50",
+            "\1\u00a4",
             "",
             "",
-            "\1\u00a8",
+            "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\32\51",
+            "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\32\51",
+            "",
+            "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\32\51",
+            "\12\51\7\uffff\32\51\4\uffff\1\51\1\uffff\32\51",
             "",
             "",
-            "\12\50\7\uffff\32\50\4\uffff\1\50\1\uffff\32\50",
             "",
-            "\1\u00aa",
-            "",
-            "\1\u00ab",
-            "\12\50\7\uffff\32\50\4\uffff\1\50\1\uffff\32\50",
             ""
     };
 
@@ -2169,7 +2271,7 @@ public class InternalMscriptLexer extends Lexer {
             this.transition = DFA14_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( T12 | T13 | T14 | T15 | T16 | T17 | T18 | T19 | T20 | T21 | T22 | T23 | T24 | T25 | T26 | T27 | T28 | T29 | T30 | T31 | T32 | T33 | T34 | T35 | T36 | T37 | T38 | T39 | T40 | T41 | T42 | T43 | T44 | T45 | T46 | T47 | T48 | T49 | T50 | T51 | T52 | T53 | T54 | T55 | T56 | T57 | T58 | RULE_ID | RULE_STRING | RULE_REAL | RULE_INTEGER | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );";
+            return "1:1: Tokens : ( T12 | T13 | T14 | T15 | T16 | T17 | T18 | T19 | T20 | T21 | T22 | T23 | T24 | T25 | T26 | T27 | T28 | T29 | T30 | T31 | T32 | T33 | T34 | T35 | T36 | T37 | T38 | T39 | T40 | T41 | T42 | T43 | T44 | T45 | T46 | T47 | T48 | T49 | T50 | T51 | T52 | T53 | T54 | T55 | T56 | T57 | T58 | T59 | T60 | T61 | T62 | RULE_ID | RULE_STRING | RULE_REAL | RULE_INTEGER | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );";
         }
     }
  

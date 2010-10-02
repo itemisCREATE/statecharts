@@ -143,6 +143,24 @@ public interface AstFactory extends EFactory
   WhileStatement createWhileStatement();
 
   /**
+   * Returns a new object of class '<em>Do While Statement</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Do While Statement</em>'.
+   * @generated
+   */
+  DoWhileStatement createDoWhileStatement();
+
+  /**
+   * Returns a new object of class '<em>Foreach Statement</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Foreach Statement</em>'.
+   * @generated
+   */
+  ForeachStatement createForeachStatement();
+
+  /**
    * Returns a new object of class '<em>Variable Declaration</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.ParameterDeclaration#isReference <em>Reference</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.ParameterDeclaration#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.ParameterDeclaration#getName <em>Name</em>}</li>
  * </ul>
@@ -26,6 +27,32 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface ParameterDeclaration extends EObject
 {
+  /**
+   * Returns the value of the '<em><b>Reference</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Reference</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Reference</em>' attribute.
+   * @see #setReference(boolean)
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getParameterDeclaration_Reference()
+   * @model
+   * @generated
+   */
+  boolean isReference();
+
+  /**
+   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.ParameterDeclaration#isReference <em>Reference</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Reference</em>' attribute.
+   * @see #isReference()
+   * @generated
+   */
+  void setReference(boolean value);
+
   /**
    * Returns the value of the '<em><b>Type</b></em>' containment reference.
    * <!-- begin-user-doc -->

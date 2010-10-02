@@ -21,7 +21,7 @@ PackageDefinitionElement :
  */
  	
 EnumerationDefinition :
-	'enumeration' name=ID '{'
+	'enum' name=ID '{'
 		(literals+=EnumerationLiteralDeclaration (',' literals+=EnumerationLiteralDeclaration)*)?
 	'}';
 	
@@ -36,14 +36,20 @@ FunctionDefinition :
 	(returnType=DataTypeSpecifier)? name=ID '(' (parameters+=ParameterDeclaration (',' parameters+=ParameterDeclaration)*)? ')' body=Block;
 
 ParameterDeclaration :
-	type=DataTypeSpecifier name=ID;
-	
+	(reference?='ref')? type=DataTypeSpecifier name=ID;
+
 /*
  * Statement
  */
 
 Statement :
-	Block | FeatureCallStatement | IfStatement | WhileStatement | VariableDeclaration;
+	Block |
+	FeatureCallStatement |
+	IfStatement |
+	WhileStatement |
+	DoWhileStatement |
+	ForeachStatement |
+	VariableDeclaration;
 	
 Block :
 	{Block} '{' (statements+=Statement)* '}';
@@ -59,6 +65,12 @@ IfCase :
 	
 WhileStatement :
 	'while' predicate=Expression body=Block;
+	
+DoWhileStatement :
+	'do' body=Block 'while' predicate=Expression ';';
+
+ForeachStatement :
+	'foreach' elementName=ID 'in' collectionName=QualifiedName body=Block;
 
 VariableDeclaration :
 	type=DataTypeSpecifier items+=VariableDeclarationItem (',' items+=VariableDeclarationItem)* ';';
@@ -83,16 +95,16 @@ RealTypeSpecifier :
 	{RealTypeSpecifier} 'real' ('(' unit=UnitExpression ')')? /* ('[' dimensions ']')? */;
 	
 IntegerTypeSpecifier :
-	{IntegerTypeSpecifier} 'integer' ('(' unit=UnitExpression ')')? /* ('[' dimensions ']')? */;
+	{IntegerTypeSpecifier} 'int' ('(' unit=UnitExpression ')')? /* ('[' dimensions ']')? */;
 	
 ComplexTypeSpecifier :
 	{ComplexTypeSpecifier} 'complex' ('(' unit=UnitExpression ')')? /* ('[' dimensions ']')? */;
 
 GaussianTypeSpecifier :
-	{GaussianTypeSpecifier} 'gaussian' ('(' unit=UnitExpression ')')? /* ('[' dimensions ']')? */;
+	{GaussianTypeSpecifier} 'gauss' ('(' unit=UnitExpression ')')? /* ('[' dimensions ']')? */;
 
 BooleanTypeSpecifier :
-	{BooleanTypeSpecifier} 'boolean' /* ('[' dimensions ']')? */;
+	{BooleanTypeSpecifier} 'bool' /* ('[' dimensions ']')? */;
 	
 StringTypeSpecifier :
 	{StringTypeSpecifier} 'string' /* ('[' dimensions ']')? */;

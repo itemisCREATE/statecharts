@@ -81,6 +81,8 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
       case AstPackage.IF_STATEMENT: return createIfStatement();
       case AstPackage.IF_CASE: return createIfCase();
       case AstPackage.WHILE_STATEMENT: return createWhileStatement();
+      case AstPackage.DO_WHILE_STATEMENT: return createDoWhileStatement();
+      case AstPackage.FOREACH_STATEMENT: return createForeachStatement();
       case AstPackage.VARIABLE_DECLARATION: return createVariableDeclaration();
       case AstPackage.VARIABLE_DECLARATION_ITEM: return createVariableDeclarationItem();
       case AstPackage.DATA_TYPE_SPECIFIER: return createDataTypeSpecifier();
@@ -325,6 +327,28 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
   {
     WhileStatementImpl whileStatement = new WhileStatementImpl();
     return whileStatement;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public DoWhileStatement createDoWhileStatement()
+  {
+    DoWhileStatementImpl doWhileStatement = new DoWhileStatementImpl();
+    return doWhileStatement;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ForeachStatement createForeachStatement()
+  {
+    ForeachStatementImpl foreachStatement = new ForeachStatementImpl();
+    return foreachStatement;
   }
 
   /**

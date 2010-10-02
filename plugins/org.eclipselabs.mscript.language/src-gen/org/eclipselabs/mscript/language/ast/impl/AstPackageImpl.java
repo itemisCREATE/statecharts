@@ -29,6 +29,7 @@ import org.eclipselabs.mscript.language.ast.ComponentReference;
 import org.eclipselabs.mscript.language.ast.ConditionalExpression;
 import org.eclipselabs.mscript.language.ast.ConditionalExpressionCase;
 import org.eclipselabs.mscript.language.ast.DataTypeSpecifier;
+import org.eclipselabs.mscript.language.ast.DoWhileStatement;
 import org.eclipselabs.mscript.language.ast.EndExpression;
 import org.eclipselabs.mscript.language.ast.EnumerationDefinition;
 import org.eclipselabs.mscript.language.ast.EnumerationLiteralDeclaration;
@@ -37,6 +38,7 @@ import org.eclipselabs.mscript.language.ast.ExpressionList;
 import org.eclipselabs.mscript.language.ast.ExpressionSubscript;
 import org.eclipselabs.mscript.language.ast.FeatureCall;
 import org.eclipselabs.mscript.language.ast.FeatureCallStatement;
+import org.eclipselabs.mscript.language.ast.ForeachStatement;
 import org.eclipselabs.mscript.language.ast.FunctionDefinition;
 import org.eclipselabs.mscript.language.ast.GaussianTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.IfCase;
@@ -180,6 +182,20 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * @generated
    */
   private EClass whileStatementEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass doWhileStatementEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass foreachStatementEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -790,9 +806,19 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getParameterDeclaration_Reference()
+  {
+    return (EAttribute)parameterDeclarationEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EReference getParameterDeclaration_Type()
   {
-    return (EReference)parameterDeclarationEClass.getEStructuralFeatures().get(0);
+    return (EReference)parameterDeclarationEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -802,7 +828,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    */
   public EAttribute getParameterDeclaration_Name()
   {
-    return (EAttribute)parameterDeclarationEClass.getEStructuralFeatures().get(1);
+    return (EAttribute)parameterDeclarationEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -963,6 +989,76 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
   public EReference getWhileStatement_Body()
   {
     return (EReference)whileStatementEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getDoWhileStatement()
+  {
+    return doWhileStatementEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getDoWhileStatement_Body()
+  {
+    return (EReference)doWhileStatementEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getDoWhileStatement_Predicate()
+  {
+    return (EReference)doWhileStatementEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getForeachStatement()
+  {
+    return foreachStatementEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getForeachStatement_ElementName()
+  {
+    return (EAttribute)foreachStatementEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getForeachStatement_CollectionName()
+  {
+    return (EReference)foreachStatementEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getForeachStatement_Body()
+  {
+    return (EReference)foreachStatementEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -2058,6 +2154,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     createEReference(functionDefinitionEClass, FUNCTION_DEFINITION__BODY);
 
     parameterDeclarationEClass = createEClass(PARAMETER_DECLARATION);
+    createEAttribute(parameterDeclarationEClass, PARAMETER_DECLARATION__REFERENCE);
     createEReference(parameterDeclarationEClass, PARAMETER_DECLARATION__TYPE);
     createEAttribute(parameterDeclarationEClass, PARAMETER_DECLARATION__NAME);
 
@@ -2082,6 +2179,15 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     whileStatementEClass = createEClass(WHILE_STATEMENT);
     createEReference(whileStatementEClass, WHILE_STATEMENT__PREDICATE);
     createEReference(whileStatementEClass, WHILE_STATEMENT__BODY);
+
+    doWhileStatementEClass = createEClass(DO_WHILE_STATEMENT);
+    createEReference(doWhileStatementEClass, DO_WHILE_STATEMENT__BODY);
+    createEReference(doWhileStatementEClass, DO_WHILE_STATEMENT__PREDICATE);
+
+    foreachStatementEClass = createEClass(FOREACH_STATEMENT);
+    createEAttribute(foreachStatementEClass, FOREACH_STATEMENT__ELEMENT_NAME);
+    createEReference(foreachStatementEClass, FOREACH_STATEMENT__COLLECTION_NAME);
+    createEReference(foreachStatementEClass, FOREACH_STATEMENT__BODY);
 
     variableDeclarationEClass = createEClass(VARIABLE_DECLARATION);
     createEReference(variableDeclarationEClass, VARIABLE_DECLARATION__TYPE);
@@ -2274,6 +2380,8 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     featureCallStatementEClass.getESuperTypes().add(this.getStatement());
     ifStatementEClass.getESuperTypes().add(this.getStatement());
     whileStatementEClass.getESuperTypes().add(this.getStatement());
+    doWhileStatementEClass.getESuperTypes().add(this.getStatement());
+    foreachStatementEClass.getESuperTypes().add(this.getStatement());
     variableDeclarationEClass.getESuperTypes().add(this.getPackageDefinitionElement());
     variableDeclarationEClass.getESuperTypes().add(this.getStatement());
     primitiveTypeSpecifierEClass.getESuperTypes().add(this.getDataTypeSpecifier());
@@ -2335,6 +2443,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     initEReference(getFunctionDefinition_Body(), this.getBlock(), null, "body", null, 0, 1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(parameterDeclarationEClass, ParameterDeclaration.class, "ParameterDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getParameterDeclaration_Reference(), ecorePackage.getEBoolean(), "reference", null, 0, 1, ParameterDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getParameterDeclaration_Type(), this.getDataTypeSpecifier(), null, "type", null, 0, 1, ParameterDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getParameterDeclaration_Name(), ecorePackage.getEString(), "name", null, 0, 1, ParameterDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -2359,6 +2468,15 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     initEClass(whileStatementEClass, WhileStatement.class, "WhileStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getWhileStatement_Predicate(), this.getExpression(), null, "predicate", null, 0, 1, WhileStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getWhileStatement_Body(), this.getBlock(), null, "body", null, 0, 1, WhileStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(doWhileStatementEClass, DoWhileStatement.class, "DoWhileStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getDoWhileStatement_Body(), this.getBlock(), null, "body", null, 0, 1, DoWhileStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getDoWhileStatement_Predicate(), this.getExpression(), null, "predicate", null, 0, 1, DoWhileStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(foreachStatementEClass, ForeachStatement.class, "ForeachStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getForeachStatement_ElementName(), ecorePackage.getEString(), "elementName", null, 0, 1, ForeachStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getForeachStatement_CollectionName(), this.getQualifiedName(), null, "collectionName", null, 0, 1, ForeachStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getForeachStatement_Body(), this.getBlock(), null, "body", null, 0, 1, ForeachStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(variableDeclarationEClass, VariableDeclaration.class, "VariableDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getVariableDeclaration_Type(), this.getDataTypeSpecifier(), null, "type", null, 0, 1, VariableDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

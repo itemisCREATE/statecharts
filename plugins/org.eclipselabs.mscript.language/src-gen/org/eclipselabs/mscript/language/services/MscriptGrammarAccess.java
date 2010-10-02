@@ -103,7 +103,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	public class EnumerationDefinitionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EnumerationDefinition");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cEnumerationKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cEnumKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
@@ -119,15 +119,14 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		/// *
 		// * Enumeration
 		// * /EnumerationDefinition:
-		//	"enumeration" name=ID "{" (literals+=EnumerationLiteralDeclaration ("," literals+=EnumerationLiteralDeclaration)*)?
-		//	"}";
+		//	"enum" name=ID "{" (literals+=EnumerationLiteralDeclaration ("," literals+=EnumerationLiteralDeclaration)*)? "}";
 		public ParserRule getRule() { return rule; }
 
-		//"enumeration" name=ID "{" (literals+=EnumerationLiteralDeclaration ("," literals+=EnumerationLiteralDeclaration)*)? "}"
+		//"enum" name=ID "{" (literals+=EnumerationLiteralDeclaration ("," literals+=EnumerationLiteralDeclaration)*)? "}"
 		public Group getGroup() { return cGroup; }
 
-		//"enumeration"
-		public Keyword getEnumerationKeyword_0() { return cEnumerationKeyword_0; }
+		//"enum"
+		public Keyword getEnumKeyword_0() { return cEnumKeyword_0; }
 
 		//name=ID
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
@@ -258,29 +257,37 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	public class ParameterDeclarationElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ParameterDeclaration");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cTypeAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cTypeDataTypeSpecifierParserRuleCall_0_0 = (RuleCall)cTypeAssignment_0.eContents().get(0);
-		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Assignment cReferenceAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final Keyword cReferenceRefKeyword_0_0 = (Keyword)cReferenceAssignment_0.eContents().get(0);
+		private final Assignment cTypeAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cTypeDataTypeSpecifierParserRuleCall_1_0 = (RuleCall)cTypeAssignment_1.eContents().get(0);
+		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		
 		//ParameterDeclaration:
-		//	type=DataTypeSpecifier name=ID;
+		//	reference?="ref"? type=DataTypeSpecifier name=ID;
 		public ParserRule getRule() { return rule; }
 
-		//type=DataTypeSpecifier name=ID
+		//reference?="ref"? type=DataTypeSpecifier name=ID
 		public Group getGroup() { return cGroup; }
 
+		//reference?="ref"?
+		public Assignment getReferenceAssignment_0() { return cReferenceAssignment_0; }
+
+		//"ref"
+		public Keyword getReferenceRefKeyword_0_0() { return cReferenceRefKeyword_0_0; }
+
 		//type=DataTypeSpecifier
-		public Assignment getTypeAssignment_0() { return cTypeAssignment_0; }
+		public Assignment getTypeAssignment_1() { return cTypeAssignment_1; }
 
 		//DataTypeSpecifier
-		public RuleCall getTypeDataTypeSpecifierParserRuleCall_0_0() { return cTypeDataTypeSpecifierParserRuleCall_0_0; }
+		public RuleCall getTypeDataTypeSpecifierParserRuleCall_1_0() { return cTypeDataTypeSpecifierParserRuleCall_1_0; }
 
 		//name=ID
-		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
 
 		//ID
-		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 	}
 
 	public class StatementElements extends AbstractParserRuleElementFinder {
@@ -290,15 +297,18 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cFeatureCallStatementParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cIfStatementParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		private final RuleCall cWhileStatementParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
-		private final RuleCall cVariableDeclarationParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
+		private final RuleCall cDoWhileStatementParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
+		private final RuleCall cForeachStatementParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
+		private final RuleCall cVariableDeclarationParserRuleCall_6 = (RuleCall)cAlternatives.eContents().get(6);
 		
 		/// *
 		// * Statement
 		// * /Statement:
-		//	Block | FeatureCallStatement | IfStatement | WhileStatement | VariableDeclaration;
+		//	Block | FeatureCallStatement | IfStatement | WhileStatement | DoWhileStatement | ForeachStatement |
+		//	VariableDeclaration;
 		public ParserRule getRule() { return rule; }
 
-		//Block | FeatureCallStatement | IfStatement | WhileStatement | VariableDeclaration
+		//Block | FeatureCallStatement | IfStatement | WhileStatement | DoWhileStatement | ForeachStatement | VariableDeclaration
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//Block
@@ -313,8 +323,14 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		//WhileStatement
 		public RuleCall getWhileStatementParserRuleCall_3() { return cWhileStatementParserRuleCall_3; }
 
+		//DoWhileStatement
+		public RuleCall getDoWhileStatementParserRuleCall_4() { return cDoWhileStatementParserRuleCall_4; }
+
+		//ForeachStatement
+		public RuleCall getForeachStatementParserRuleCall_5() { return cForeachStatementParserRuleCall_5; }
+
 		//VariableDeclaration
-		public RuleCall getVariableDeclarationParserRuleCall_4() { return cVariableDeclarationParserRuleCall_4; }
+		public RuleCall getVariableDeclarationParserRuleCall_6() { return cVariableDeclarationParserRuleCall_6; }
 	}
 
 	public class BlockElements extends AbstractParserRuleElementFinder {
@@ -507,6 +523,90 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 
 		//Block
 		public RuleCall getBodyBlockParserRuleCall_2_0() { return cBodyBlockParserRuleCall_2_0; }
+	}
+
+	public class DoWhileStatementElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DoWhileStatement");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cDoKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cBodyAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cBodyBlockParserRuleCall_1_0 = (RuleCall)cBodyAssignment_1.eContents().get(0);
+		private final Keyword cWhileKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cPredicateAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cPredicateExpressionParserRuleCall_3_0 = (RuleCall)cPredicateAssignment_3.eContents().get(0);
+		private final Keyword cSemicolonKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		
+		//DoWhileStatement:
+		//	"do" body=Block "while" predicate=Expression ";";
+		public ParserRule getRule() { return rule; }
+
+		//"do" body=Block "while" predicate=Expression ";"
+		public Group getGroup() { return cGroup; }
+
+		//"do"
+		public Keyword getDoKeyword_0() { return cDoKeyword_0; }
+
+		//body=Block
+		public Assignment getBodyAssignment_1() { return cBodyAssignment_1; }
+
+		//Block
+		public RuleCall getBodyBlockParserRuleCall_1_0() { return cBodyBlockParserRuleCall_1_0; }
+
+		//"while"
+		public Keyword getWhileKeyword_2() { return cWhileKeyword_2; }
+
+		//predicate=Expression
+		public Assignment getPredicateAssignment_3() { return cPredicateAssignment_3; }
+
+		//Expression
+		public RuleCall getPredicateExpressionParserRuleCall_3_0() { return cPredicateExpressionParserRuleCall_3_0; }
+
+		//";"
+		public Keyword getSemicolonKeyword_4() { return cSemicolonKeyword_4; }
+	}
+
+	public class ForeachStatementElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ForeachStatement");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cForeachKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cElementNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cElementNameIDTerminalRuleCall_1_0 = (RuleCall)cElementNameAssignment_1.eContents().get(0);
+		private final Keyword cInKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cCollectionNameAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cCollectionNameQualifiedNameParserRuleCall_3_0 = (RuleCall)cCollectionNameAssignment_3.eContents().get(0);
+		private final Assignment cBodyAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cBodyBlockParserRuleCall_4_0 = (RuleCall)cBodyAssignment_4.eContents().get(0);
+		
+		//ForeachStatement:
+		//	"foreach" elementName=ID "in" collectionName=QualifiedName body=Block;
+		public ParserRule getRule() { return rule; }
+
+		//"foreach" elementName=ID "in" collectionName=QualifiedName body=Block
+		public Group getGroup() { return cGroup; }
+
+		//"foreach"
+		public Keyword getForeachKeyword_0() { return cForeachKeyword_0; }
+
+		//elementName=ID
+		public Assignment getElementNameAssignment_1() { return cElementNameAssignment_1; }
+
+		//ID
+		public RuleCall getElementNameIDTerminalRuleCall_1_0() { return cElementNameIDTerminalRuleCall_1_0; }
+
+		//"in"
+		public Keyword getInKeyword_2() { return cInKeyword_2; }
+
+		//collectionName=QualifiedName
+		public Assignment getCollectionNameAssignment_3() { return cCollectionNameAssignment_3; }
+
+		//QualifiedName
+		public RuleCall getCollectionNameQualifiedNameParserRuleCall_3_0() { return cCollectionNameQualifiedNameParserRuleCall_3_0; }
+
+		//body=Block
+		public Assignment getBodyAssignment_4() { return cBodyAssignment_4; }
+
+		//Block
+		public RuleCall getBodyBlockParserRuleCall_4_0() { return cBodyBlockParserRuleCall_4_0; }
 	}
 
 	public class VariableDeclarationElements extends AbstractParserRuleElementFinder {
@@ -711,7 +811,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "IntegerTypeSpecifier");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cIntegerTypeSpecifierAction_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cIntegerKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cIntKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
 		private final Keyword cLeftParenthesisKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
 		private final Assignment cUnitAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
@@ -719,17 +819,17 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightParenthesisKeyword_2_2 = (Keyword)cGroup_2.eContents().get(2);
 		
 		/// * ('[' dimensions ']')? * / IntegerTypeSpecifier:
-		//	{IntegerTypeSpecifier} "integer" ("(" unit=UnitExpression ")")?;
+		//	{IntegerTypeSpecifier} "int" ("(" unit=UnitExpression ")")?;
 		public ParserRule getRule() { return rule; }
 
-		//{IntegerTypeSpecifier} "integer" ("(" unit=UnitExpression ")")?
+		//{IntegerTypeSpecifier} "int" ("(" unit=UnitExpression ")")?
 		public Group getGroup() { return cGroup; }
 
 		//{IntegerTypeSpecifier}
 		public Action getIntegerTypeSpecifierAction_0() { return cIntegerTypeSpecifierAction_0; }
 
-		//"integer"
-		public Keyword getIntegerKeyword_1() { return cIntegerKeyword_1; }
+		//"int"
+		public Keyword getIntKeyword_1() { return cIntKeyword_1; }
 
 		//("(" unit=UnitExpression ")")?
 		public Group getGroup_2() { return cGroup_2; }
@@ -791,7 +891,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "GaussianTypeSpecifier");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cGaussianTypeSpecifierAction_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cGaussianKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cGaussKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
 		private final Keyword cLeftParenthesisKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
 		private final Assignment cUnitAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
@@ -799,17 +899,17 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightParenthesisKeyword_2_2 = (Keyword)cGroup_2.eContents().get(2);
 		
 		/// * ('[' dimensions ']')? * / GaussianTypeSpecifier:
-		//	{GaussianTypeSpecifier} "gaussian" ("(" unit=UnitExpression ")")?;
+		//	{GaussianTypeSpecifier} "gauss" ("(" unit=UnitExpression ")")?;
 		public ParserRule getRule() { return rule; }
 
-		//{GaussianTypeSpecifier} "gaussian" ("(" unit=UnitExpression ")")?
+		//{GaussianTypeSpecifier} "gauss" ("(" unit=UnitExpression ")")?
 		public Group getGroup() { return cGroup; }
 
 		//{GaussianTypeSpecifier}
 		public Action getGaussianTypeSpecifierAction_0() { return cGaussianTypeSpecifierAction_0; }
 
-		//"gaussian"
-		public Keyword getGaussianKeyword_1() { return cGaussianKeyword_1; }
+		//"gauss"
+		public Keyword getGaussKeyword_1() { return cGaussKeyword_1; }
 
 		//("(" unit=UnitExpression ")")?
 		public Group getGroup_2() { return cGroup_2; }
@@ -831,20 +931,20 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "BooleanTypeSpecifier");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cBooleanTypeSpecifierAction_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cBooleanKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cBoolKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
 		/// * ('[' dimensions ']')? * / BooleanTypeSpecifier:
-		//	{BooleanTypeSpecifier} "boolean";
+		//	{BooleanTypeSpecifier} "bool";
 		public ParserRule getRule() { return rule; }
 
-		//{BooleanTypeSpecifier} "boolean"
+		//{BooleanTypeSpecifier} "bool"
 		public Group getGroup() { return cGroup; }
 
 		//{BooleanTypeSpecifier}
 		public Action getBooleanTypeSpecifierAction_0() { return cBooleanTypeSpecifierAction_0; }
 
-		//"boolean"
-		public Keyword getBooleanKeyword_1() { return cBooleanKeyword_1; }
+		//"bool"
+		public Keyword getBoolKeyword_1() { return cBoolKeyword_1; }
 	}
 
 	public class StringTypeSpecifierElements extends AbstractParserRuleElementFinder {
@@ -2421,6 +2521,8 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	private IfStatementElements pIfStatement;
 	private IfCaseElements pIfCase;
 	private WhileStatementElements pWhileStatement;
+	private DoWhileStatementElements pDoWhileStatement;
+	private ForeachStatementElements pForeachStatement;
 	private VariableDeclarationElements pVariableDeclaration;
 	private VariableDeclarationItemElements pVariableDeclarationItem;
 	private DataTypeSpecifierElements pDataTypeSpecifier;
@@ -2530,8 +2632,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	/// *
 	// * Enumeration
 	// * /EnumerationDefinition:
-	//	"enumeration" name=ID "{" (literals+=EnumerationLiteralDeclaration ("," literals+=EnumerationLiteralDeclaration)*)?
-	//	"}";
+	//	"enum" name=ID "{" (literals+=EnumerationLiteralDeclaration ("," literals+=EnumerationLiteralDeclaration)*)? "}";
 	public EnumerationDefinitionElements getEnumerationDefinitionAccess() {
 		return (pEnumerationDefinition != null) ? pEnumerationDefinition : (pEnumerationDefinition = new EnumerationDefinitionElements());
 	}
@@ -2564,7 +2665,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ParameterDeclaration:
-	//	type=DataTypeSpecifier name=ID;
+	//	reference?="ref"? type=DataTypeSpecifier name=ID;
 	public ParameterDeclarationElements getParameterDeclarationAccess() {
 		return (pParameterDeclaration != null) ? pParameterDeclaration : (pParameterDeclaration = new ParameterDeclarationElements());
 	}
@@ -2576,7 +2677,8 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	/// *
 	// * Statement
 	// * /Statement:
-	//	Block | FeatureCallStatement | IfStatement | WhileStatement | VariableDeclaration;
+	//	Block | FeatureCallStatement | IfStatement | WhileStatement | DoWhileStatement | ForeachStatement |
+	//	VariableDeclaration;
 	public StatementElements getStatementAccess() {
 		return (pStatement != null) ? pStatement : (pStatement = new StatementElements());
 	}
@@ -2633,6 +2735,26 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getWhileStatementRule() {
 		return getWhileStatementAccess().getRule();
+	}
+
+	//DoWhileStatement:
+	//	"do" body=Block "while" predicate=Expression ";";
+	public DoWhileStatementElements getDoWhileStatementAccess() {
+		return (pDoWhileStatement != null) ? pDoWhileStatement : (pDoWhileStatement = new DoWhileStatementElements());
+	}
+	
+	public ParserRule getDoWhileStatementRule() {
+		return getDoWhileStatementAccess().getRule();
+	}
+
+	//ForeachStatement:
+	//	"foreach" elementName=ID "in" collectionName=QualifiedName body=Block;
+	public ForeachStatementElements getForeachStatementAccess() {
+		return (pForeachStatement != null) ? pForeachStatement : (pForeachStatement = new ForeachStatementElements());
+	}
+	
+	public ParserRule getForeachStatementRule() {
+		return getForeachStatementAccess().getRule();
 	}
 
 	//VariableDeclaration:
@@ -2698,7 +2820,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	/// * ('[' dimensions ']')? * / IntegerTypeSpecifier:
-	//	{IntegerTypeSpecifier} "integer" ("(" unit=UnitExpression ")")?;
+	//	{IntegerTypeSpecifier} "int" ("(" unit=UnitExpression ")")?;
 	public IntegerTypeSpecifierElements getIntegerTypeSpecifierAccess() {
 		return (pIntegerTypeSpecifier != null) ? pIntegerTypeSpecifier : (pIntegerTypeSpecifier = new IntegerTypeSpecifierElements());
 	}
@@ -2718,7 +2840,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	/// * ('[' dimensions ']')? * / GaussianTypeSpecifier:
-	//	{GaussianTypeSpecifier} "gaussian" ("(" unit=UnitExpression ")")?;
+	//	{GaussianTypeSpecifier} "gauss" ("(" unit=UnitExpression ")")?;
 	public GaussianTypeSpecifierElements getGaussianTypeSpecifierAccess() {
 		return (pGaussianTypeSpecifier != null) ? pGaussianTypeSpecifier : (pGaussianTypeSpecifier = new GaussianTypeSpecifierElements());
 	}
@@ -2728,7 +2850,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	/// * ('[' dimensions ']')? * / BooleanTypeSpecifier:
-	//	{BooleanTypeSpecifier} "boolean";
+	//	{BooleanTypeSpecifier} "bool";
 	public BooleanTypeSpecifierElements getBooleanTypeSpecifierAccess() {
 		return (pBooleanTypeSpecifier != null) ? pBooleanTypeSpecifier : (pBooleanTypeSpecifier = new BooleanTypeSpecifierElements());
 	}

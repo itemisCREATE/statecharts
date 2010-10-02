@@ -143,6 +143,16 @@ public class AstAdapterFactory extends AdapterFactoryImpl
         return createWhileStatementAdapter();
       }
       @Override
+      public Adapter caseDoWhileStatement(DoWhileStatement object)
+      {
+        return createDoWhileStatementAdapter();
+      }
+      @Override
+      public Adapter caseForeachStatement(ForeachStatement object)
+      {
+        return createForeachStatementAdapter();
+      }
+      @Override
       public Adapter caseVariableDeclaration(VariableDeclaration object)
       {
         return createVariableDeclarationAdapter();
@@ -595,6 +605,36 @@ public class AstAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createWhileStatementAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.DoWhileStatement <em>Do While Statement</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipselabs.mscript.language.ast.DoWhileStatement
+   * @generated
+   */
+  public Adapter createDoWhileStatementAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.ForeachStatement <em>Foreach Statement</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipselabs.mscript.language.ast.ForeachStatement
+   * @generated
+   */
+  public Adapter createForeachStatementAdapter()
   {
     return null;
   }

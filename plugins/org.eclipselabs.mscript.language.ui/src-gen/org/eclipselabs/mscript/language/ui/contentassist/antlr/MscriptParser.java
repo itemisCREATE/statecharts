@@ -73,6 +73,8 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getIfStatementAccess().getGroup_3(), "rule__IfStatement__Group_3__0");
 					put(grammarAccess.getIfCaseAccess().getGroup(), "rule__IfCase__Group__0");
 					put(grammarAccess.getWhileStatementAccess().getGroup(), "rule__WhileStatement__Group__0");
+					put(grammarAccess.getDoWhileStatementAccess().getGroup(), "rule__DoWhileStatement__Group__0");
+					put(grammarAccess.getForeachStatementAccess().getGroup(), "rule__ForeachStatement__Group__0");
 					put(grammarAccess.getVariableDeclarationAccess().getGroup(), "rule__VariableDeclaration__Group__0");
 					put(grammarAccess.getVariableDeclarationAccess().getGroup_2(), "rule__VariableDeclaration__Group_2__0");
 					put(grammarAccess.getVariableDeclarationItemAccess().getGroup(), "rule__VariableDeclarationItem__Group__0");
@@ -154,8 +156,9 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getFunctionDefinitionAccess().getParametersAssignment_3_0(), "rule__FunctionDefinition__ParametersAssignment_3_0");
 					put(grammarAccess.getFunctionDefinitionAccess().getParametersAssignment_3_1_1(), "rule__FunctionDefinition__ParametersAssignment_3_1_1");
 					put(grammarAccess.getFunctionDefinitionAccess().getBodyAssignment_5(), "rule__FunctionDefinition__BodyAssignment_5");
-					put(grammarAccess.getParameterDeclarationAccess().getTypeAssignment_0(), "rule__ParameterDeclaration__TypeAssignment_0");
-					put(grammarAccess.getParameterDeclarationAccess().getNameAssignment_1(), "rule__ParameterDeclaration__NameAssignment_1");
+					put(grammarAccess.getParameterDeclarationAccess().getReferenceAssignment_0(), "rule__ParameterDeclaration__ReferenceAssignment_0");
+					put(grammarAccess.getParameterDeclarationAccess().getTypeAssignment_1(), "rule__ParameterDeclaration__TypeAssignment_1");
+					put(grammarAccess.getParameterDeclarationAccess().getNameAssignment_2(), "rule__ParameterDeclaration__NameAssignment_2");
 					put(grammarAccess.getBlockAccess().getStatementsAssignment_2(), "rule__Block__StatementsAssignment_2");
 					put(grammarAccess.getFeatureCallStatementAccess().getFeatureCallAssignment_0(), "rule__FeatureCallStatement__FeatureCallAssignment_0");
 					put(grammarAccess.getFeatureCallStatementAccess().getAssignmentAssignment_1_0(), "rule__FeatureCallStatement__AssignmentAssignment_1_0");
@@ -167,6 +170,11 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getIfCaseAccess().getBodyAssignment_1(), "rule__IfCase__BodyAssignment_1");
 					put(grammarAccess.getWhileStatementAccess().getPredicateAssignment_1(), "rule__WhileStatement__PredicateAssignment_1");
 					put(grammarAccess.getWhileStatementAccess().getBodyAssignment_2(), "rule__WhileStatement__BodyAssignment_2");
+					put(grammarAccess.getDoWhileStatementAccess().getBodyAssignment_1(), "rule__DoWhileStatement__BodyAssignment_1");
+					put(grammarAccess.getDoWhileStatementAccess().getPredicateAssignment_3(), "rule__DoWhileStatement__PredicateAssignment_3");
+					put(grammarAccess.getForeachStatementAccess().getElementNameAssignment_1(), "rule__ForeachStatement__ElementNameAssignment_1");
+					put(grammarAccess.getForeachStatementAccess().getCollectionNameAssignment_3(), "rule__ForeachStatement__CollectionNameAssignment_3");
+					put(grammarAccess.getForeachStatementAccess().getBodyAssignment_4(), "rule__ForeachStatement__BodyAssignment_4");
 					put(grammarAccess.getVariableDeclarationAccess().getTypeAssignment_0(), "rule__VariableDeclaration__TypeAssignment_0");
 					put(grammarAccess.getVariableDeclarationAccess().getItemsAssignment_1(), "rule__VariableDeclaration__ItemsAssignment_1");
 					put(grammarAccess.getVariableDeclarationAccess().getItemsAssignment_2_1(), "rule__VariableDeclaration__ItemsAssignment_2_1");

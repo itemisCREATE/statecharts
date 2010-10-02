@@ -193,6 +193,22 @@ public class AstSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case AstPackage.DO_WHILE_STATEMENT:
+      {
+        DoWhileStatement doWhileStatement = (DoWhileStatement)theEObject;
+        T result = caseDoWhileStatement(doWhileStatement);
+        if (result == null) result = caseStatement(doWhileStatement);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AstPackage.FOREACH_STATEMENT:
+      {
+        ForeachStatement foreachStatement = (ForeachStatement)theEObject;
+        T result = caseForeachStatement(foreachStatement);
+        if (result == null) result = caseStatement(foreachStatement);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case AstPackage.VARIABLE_DECLARATION:
       {
         VariableDeclaration variableDeclaration = (VariableDeclaration)theEObject;
@@ -791,6 +807,38 @@ public class AstSwitch<T>
    * @generated
    */
   public T caseWhileStatement(WhileStatement object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Do While Statement</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Do While Statement</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseDoWhileStatement(DoWhileStatement object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Foreach Statement</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Foreach Statement</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseForeachStatement(ForeachStatement object)
   {
     return null;
   }

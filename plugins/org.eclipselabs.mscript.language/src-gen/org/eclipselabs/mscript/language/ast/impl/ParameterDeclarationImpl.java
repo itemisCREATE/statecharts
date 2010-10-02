@@ -25,6 +25,7 @@ import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.ParameterDeclarationImpl#isReference <em>Reference</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.ParameterDeclarationImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.ParameterDeclarationImpl#getName <em>Name</em>}</li>
  * </ul>
@@ -34,6 +35,26 @@ import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
  */
 public class ParameterDeclarationImpl extends MinimalEObjectImpl.Container implements ParameterDeclaration
 {
+  /**
+   * The default value of the '{@link #isReference() <em>Reference</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isReference()
+   * @generated
+   * @ordered
+   */
+  protected static final boolean REFERENCE_EDEFAULT = false;
+
+  /**
+   * The cached value of the '{@link #isReference() <em>Reference</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isReference()
+   * @generated
+   * @ordered
+   */
+  protected boolean reference = REFERENCE_EDEFAULT;
+
   /**
    * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
    * <!-- begin-user-doc -->
@@ -83,6 +104,29 @@ public class ParameterDeclarationImpl extends MinimalEObjectImpl.Container imple
   protected EClass eStaticClass()
   {
     return AstPackage.Literals.PARAMETER_DECLARATION;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public boolean isReference()
+  {
+    return reference;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setReference(boolean newReference)
+  {
+    boolean oldReference = reference;
+    reference = newReference;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.PARAMETER_DECLARATION__REFERENCE, oldReference, reference));
   }
 
   /**
@@ -182,6 +226,8 @@ public class ParameterDeclarationImpl extends MinimalEObjectImpl.Container imple
   {
     switch (featureID)
     {
+      case AstPackage.PARAMETER_DECLARATION__REFERENCE:
+        return isReference();
       case AstPackage.PARAMETER_DECLARATION__TYPE:
         return getType();
       case AstPackage.PARAMETER_DECLARATION__NAME:
@@ -200,6 +246,9 @@ public class ParameterDeclarationImpl extends MinimalEObjectImpl.Container imple
   {
     switch (featureID)
     {
+      case AstPackage.PARAMETER_DECLARATION__REFERENCE:
+        setReference((Boolean)newValue);
+        return;
       case AstPackage.PARAMETER_DECLARATION__TYPE:
         setType((DataTypeSpecifier)newValue);
         return;
@@ -220,6 +269,9 @@ public class ParameterDeclarationImpl extends MinimalEObjectImpl.Container imple
   {
     switch (featureID)
     {
+      case AstPackage.PARAMETER_DECLARATION__REFERENCE:
+        setReference(REFERENCE_EDEFAULT);
+        return;
       case AstPackage.PARAMETER_DECLARATION__TYPE:
         setType((DataTypeSpecifier)null);
         return;
@@ -240,6 +292,8 @@ public class ParameterDeclarationImpl extends MinimalEObjectImpl.Container imple
   {
     switch (featureID)
     {
+      case AstPackage.PARAMETER_DECLARATION__REFERENCE:
+        return reference != REFERENCE_EDEFAULT;
       case AstPackage.PARAMETER_DECLARATION__TYPE:
         return type != null;
       case AstPackage.PARAMETER_DECLARATION__NAME:
@@ -259,7 +313,9 @@ public class ParameterDeclarationImpl extends MinimalEObjectImpl.Container imple
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (name: ");
+    result.append(" (reference: ");
+    result.append(reference);
+    result.append(", name: ");
     result.append(name);
     result.append(')');
     return result.toString();
