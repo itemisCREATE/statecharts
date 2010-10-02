@@ -24,7 +24,7 @@ import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.ComponentReference;
 import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.ast.FeatureCall;
-import org.eclipselabs.mscript.language.ast.QualifiedName;
+import org.eclipselabs.mscript.language.ast.SymbolReference;
 
 /**
  * <!-- begin-user-doc -->
@@ -33,8 +33,7 @@ import org.eclipselabs.mscript.language.ast.QualifiedName;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FeatureCallImpl#isGlobal <em>Global</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FeatureCallImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FeatureCallImpl#getFeatureReference <em>Feature Reference</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FeatureCallImpl#getComponentReferences <em>Component References</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FeatureCallImpl#isOperationCall <em>Operation Call</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FeatureCallImpl#getArguments <em>Arguments</em>}</li>
@@ -46,34 +45,14 @@ import org.eclipselabs.mscript.language.ast.QualifiedName;
 public class FeatureCallImpl extends ExpressionImpl implements FeatureCall
 {
   /**
-   * The default value of the '{@link #isGlobal() <em>Global</em>}' attribute.
+   * The cached value of the '{@link #getFeatureReference() <em>Feature Reference</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #isGlobal()
+   * @see #getFeatureReference()
    * @generated
    * @ordered
    */
-  protected static final boolean GLOBAL_EDEFAULT = false;
-
-  /**
-   * The cached value of the '{@link #isGlobal() <em>Global</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #isGlobal()
-   * @generated
-   * @ordered
-   */
-  protected boolean global = GLOBAL_EDEFAULT;
-
-  /**
-   * The cached value of the '{@link #getName() <em>Name</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
-  protected QualifiedName name;
+  protected SymbolReference featureReference;
 
   /**
    * The cached value of the '{@link #getComponentReferences() <em>Component References</em>}' containment reference list.
@@ -141,9 +120,9 @@ public class FeatureCallImpl extends ExpressionImpl implements FeatureCall
    * <!-- end-user-doc -->
    * @generated
    */
-  public boolean isGlobal()
+  public SymbolReference getFeatureReference()
   {
-    return global;
+    return featureReference;
   }
 
   /**
@@ -151,36 +130,13 @@ public class FeatureCallImpl extends ExpressionImpl implements FeatureCall
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setGlobal(boolean newGlobal)
+  public NotificationChain basicSetFeatureReference(SymbolReference newFeatureReference, NotificationChain msgs)
   {
-    boolean oldGlobal = global;
-    global = newGlobal;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.FEATURE_CALL__GLOBAL, oldGlobal, global));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public QualifiedName getName()
-  {
-    return name;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetName(QualifiedName newName, NotificationChain msgs)
-  {
-    QualifiedName oldName = name;
-    name = newName;
+    SymbolReference oldFeatureReference = featureReference;
+    featureReference = newFeatureReference;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.FEATURE_CALL__NAME, oldName, newName);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.FEATURE_CALL__FEATURE_REFERENCE, oldFeatureReference, newFeatureReference);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -191,20 +147,20 @@ public class FeatureCallImpl extends ExpressionImpl implements FeatureCall
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(QualifiedName newName)
+  public void setFeatureReference(SymbolReference newFeatureReference)
   {
-    if (newName != name)
+    if (newFeatureReference != featureReference)
     {
       NotificationChain msgs = null;
-      if (name != null)
-        msgs = ((InternalEObject)name).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.FEATURE_CALL__NAME, null, msgs);
-      if (newName != null)
-        msgs = ((InternalEObject)newName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.FEATURE_CALL__NAME, null, msgs);
-      msgs = basicSetName(newName, msgs);
+      if (featureReference != null)
+        msgs = ((InternalEObject)featureReference).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.FEATURE_CALL__FEATURE_REFERENCE, null, msgs);
+      if (newFeatureReference != null)
+        msgs = ((InternalEObject)newFeatureReference).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.FEATURE_CALL__FEATURE_REFERENCE, null, msgs);
+      msgs = basicSetFeatureReference(newFeatureReference, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.FEATURE_CALL__NAME, newName, newName));
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.FEATURE_CALL__FEATURE_REFERENCE, newFeatureReference, newFeatureReference));
   }
 
   /**
@@ -268,8 +224,8 @@ public class FeatureCallImpl extends ExpressionImpl implements FeatureCall
   {
     switch (featureID)
     {
-      case AstPackage.FEATURE_CALL__NAME:
-        return basicSetName(null, msgs);
+      case AstPackage.FEATURE_CALL__FEATURE_REFERENCE:
+        return basicSetFeatureReference(null, msgs);
       case AstPackage.FEATURE_CALL__COMPONENT_REFERENCES:
         return ((InternalEList<?>)getComponentReferences()).basicRemove(otherEnd, msgs);
       case AstPackage.FEATURE_CALL__ARGUMENTS:
@@ -288,10 +244,8 @@ public class FeatureCallImpl extends ExpressionImpl implements FeatureCall
   {
     switch (featureID)
     {
-      case AstPackage.FEATURE_CALL__GLOBAL:
-        return isGlobal();
-      case AstPackage.FEATURE_CALL__NAME:
-        return getName();
+      case AstPackage.FEATURE_CALL__FEATURE_REFERENCE:
+        return getFeatureReference();
       case AstPackage.FEATURE_CALL__COMPONENT_REFERENCES:
         return getComponentReferences();
       case AstPackage.FEATURE_CALL__OPERATION_CALL:
@@ -313,11 +267,8 @@ public class FeatureCallImpl extends ExpressionImpl implements FeatureCall
   {
     switch (featureID)
     {
-      case AstPackage.FEATURE_CALL__GLOBAL:
-        setGlobal((Boolean)newValue);
-        return;
-      case AstPackage.FEATURE_CALL__NAME:
-        setName((QualifiedName)newValue);
+      case AstPackage.FEATURE_CALL__FEATURE_REFERENCE:
+        setFeatureReference((SymbolReference)newValue);
         return;
       case AstPackage.FEATURE_CALL__COMPONENT_REFERENCES:
         getComponentReferences().clear();
@@ -344,11 +295,8 @@ public class FeatureCallImpl extends ExpressionImpl implements FeatureCall
   {
     switch (featureID)
     {
-      case AstPackage.FEATURE_CALL__GLOBAL:
-        setGlobal(GLOBAL_EDEFAULT);
-        return;
-      case AstPackage.FEATURE_CALL__NAME:
-        setName((QualifiedName)null);
+      case AstPackage.FEATURE_CALL__FEATURE_REFERENCE:
+        setFeatureReference((SymbolReference)null);
         return;
       case AstPackage.FEATURE_CALL__COMPONENT_REFERENCES:
         getComponentReferences().clear();
@@ -373,10 +321,8 @@ public class FeatureCallImpl extends ExpressionImpl implements FeatureCall
   {
     switch (featureID)
     {
-      case AstPackage.FEATURE_CALL__GLOBAL:
-        return global != GLOBAL_EDEFAULT;
-      case AstPackage.FEATURE_CALL__NAME:
-        return name != null;
+      case AstPackage.FEATURE_CALL__FEATURE_REFERENCE:
+        return featureReference != null;
       case AstPackage.FEATURE_CALL__COMPONENT_REFERENCES:
         return componentReferences != null && !componentReferences.isEmpty();
       case AstPackage.FEATURE_CALL__OPERATION_CALL:
@@ -398,9 +344,7 @@ public class FeatureCallImpl extends ExpressionImpl implements FeatureCall
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (global: ");
-    result.append(global);
-    result.append(", operationCall: ");
+    result.append(" (operationCall: ");
     result.append(operationCall);
     result.append(')');
     return result.toString();

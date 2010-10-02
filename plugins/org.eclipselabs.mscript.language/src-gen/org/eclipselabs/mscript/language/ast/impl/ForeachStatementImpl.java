@@ -15,8 +15,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.Block;
+import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.ast.ForeachStatement;
-import org.eclipselabs.mscript.language.ast.QualifiedName;
 
 /**
  * <!-- begin-user-doc -->
@@ -26,7 +26,7 @@ import org.eclipselabs.mscript.language.ast.QualifiedName;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.ForeachStatementImpl#getElementName <em>Element Name</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.ForeachStatementImpl#getCollectionName <em>Collection Name</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.ForeachStatementImpl#getCollectionExpression <em>Collection Expression</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.ForeachStatementImpl#getBody <em>Body</em>}</li>
  * </ul>
  * </p>
@@ -56,14 +56,14 @@ public class ForeachStatementImpl extends StatementImpl implements ForeachStatem
   protected String elementName = ELEMENT_NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getCollectionName() <em>Collection Name</em>}' containment reference.
+   * The cached value of the '{@link #getCollectionExpression() <em>Collection Expression</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getCollectionName()
+   * @see #getCollectionExpression()
    * @generated
    * @ordered
    */
-  protected QualifiedName collectionName;
+  protected Expression collectionExpression;
 
   /**
    * The cached value of the '{@link #getBody() <em>Body</em>}' containment reference.
@@ -124,9 +124,9 @@ public class ForeachStatementImpl extends StatementImpl implements ForeachStatem
    * <!-- end-user-doc -->
    * @generated
    */
-  public QualifiedName getCollectionName()
+  public Expression getCollectionExpression()
   {
-    return collectionName;
+    return collectionExpression;
   }
 
   /**
@@ -134,13 +134,13 @@ public class ForeachStatementImpl extends StatementImpl implements ForeachStatem
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetCollectionName(QualifiedName newCollectionName, NotificationChain msgs)
+  public NotificationChain basicSetCollectionExpression(Expression newCollectionExpression, NotificationChain msgs)
   {
-    QualifiedName oldCollectionName = collectionName;
-    collectionName = newCollectionName;
+    Expression oldCollectionExpression = collectionExpression;
+    collectionExpression = newCollectionExpression;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.FOREACH_STATEMENT__COLLECTION_NAME, oldCollectionName, newCollectionName);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.FOREACH_STATEMENT__COLLECTION_EXPRESSION, oldCollectionExpression, newCollectionExpression);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -151,20 +151,20 @@ public class ForeachStatementImpl extends StatementImpl implements ForeachStatem
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setCollectionName(QualifiedName newCollectionName)
+  public void setCollectionExpression(Expression newCollectionExpression)
   {
-    if (newCollectionName != collectionName)
+    if (newCollectionExpression != collectionExpression)
     {
       NotificationChain msgs = null;
-      if (collectionName != null)
-        msgs = ((InternalEObject)collectionName).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.FOREACH_STATEMENT__COLLECTION_NAME, null, msgs);
-      if (newCollectionName != null)
-        msgs = ((InternalEObject)newCollectionName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.FOREACH_STATEMENT__COLLECTION_NAME, null, msgs);
-      msgs = basicSetCollectionName(newCollectionName, msgs);
+      if (collectionExpression != null)
+        msgs = ((InternalEObject)collectionExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.FOREACH_STATEMENT__COLLECTION_EXPRESSION, null, msgs);
+      if (newCollectionExpression != null)
+        msgs = ((InternalEObject)newCollectionExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.FOREACH_STATEMENT__COLLECTION_EXPRESSION, null, msgs);
+      msgs = basicSetCollectionExpression(newCollectionExpression, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.FOREACH_STATEMENT__COLLECTION_NAME, newCollectionName, newCollectionName));
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.FOREACH_STATEMENT__COLLECTION_EXPRESSION, newCollectionExpression, newCollectionExpression));
   }
 
   /**
@@ -225,8 +225,8 @@ public class ForeachStatementImpl extends StatementImpl implements ForeachStatem
   {
     switch (featureID)
     {
-      case AstPackage.FOREACH_STATEMENT__COLLECTION_NAME:
-        return basicSetCollectionName(null, msgs);
+      case AstPackage.FOREACH_STATEMENT__COLLECTION_EXPRESSION:
+        return basicSetCollectionExpression(null, msgs);
       case AstPackage.FOREACH_STATEMENT__BODY:
         return basicSetBody(null, msgs);
     }
@@ -245,8 +245,8 @@ public class ForeachStatementImpl extends StatementImpl implements ForeachStatem
     {
       case AstPackage.FOREACH_STATEMENT__ELEMENT_NAME:
         return getElementName();
-      case AstPackage.FOREACH_STATEMENT__COLLECTION_NAME:
-        return getCollectionName();
+      case AstPackage.FOREACH_STATEMENT__COLLECTION_EXPRESSION:
+        return getCollectionExpression();
       case AstPackage.FOREACH_STATEMENT__BODY:
         return getBody();
     }
@@ -266,8 +266,8 @@ public class ForeachStatementImpl extends StatementImpl implements ForeachStatem
       case AstPackage.FOREACH_STATEMENT__ELEMENT_NAME:
         setElementName((String)newValue);
         return;
-      case AstPackage.FOREACH_STATEMENT__COLLECTION_NAME:
-        setCollectionName((QualifiedName)newValue);
+      case AstPackage.FOREACH_STATEMENT__COLLECTION_EXPRESSION:
+        setCollectionExpression((Expression)newValue);
         return;
       case AstPackage.FOREACH_STATEMENT__BODY:
         setBody((Block)newValue);
@@ -289,8 +289,8 @@ public class ForeachStatementImpl extends StatementImpl implements ForeachStatem
       case AstPackage.FOREACH_STATEMENT__ELEMENT_NAME:
         setElementName(ELEMENT_NAME_EDEFAULT);
         return;
-      case AstPackage.FOREACH_STATEMENT__COLLECTION_NAME:
-        setCollectionName((QualifiedName)null);
+      case AstPackage.FOREACH_STATEMENT__COLLECTION_EXPRESSION:
+        setCollectionExpression((Expression)null);
         return;
       case AstPackage.FOREACH_STATEMENT__BODY:
         setBody((Block)null);
@@ -311,8 +311,8 @@ public class ForeachStatementImpl extends StatementImpl implements ForeachStatem
     {
       case AstPackage.FOREACH_STATEMENT__ELEMENT_NAME:
         return ELEMENT_NAME_EDEFAULT == null ? elementName != null : !ELEMENT_NAME_EDEFAULT.equals(elementName);
-      case AstPackage.FOREACH_STATEMENT__COLLECTION_NAME:
-        return collectionName != null;
+      case AstPackage.FOREACH_STATEMENT__COLLECTION_EXPRESSION:
+        return collectionExpression != null;
       case AstPackage.FOREACH_STATEMENT__BODY:
         return body != null;
     }

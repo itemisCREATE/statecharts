@@ -85,6 +85,7 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
       case AstPackage.FOREACH_STATEMENT: return createForeachStatement();
       case AstPackage.VARIABLE_DECLARATION: return createVariableDeclaration();
       case AstPackage.VARIABLE_DECLARATION_ITEM: return createVariableDeclarationItem();
+      case AstPackage.RETURN_STATEMENT: return createReturnStatement();
       case AstPackage.DATA_TYPE_SPECIFIER: return createDataTypeSpecifier();
       case AstPackage.PRIMITIVE_TYPE_SPECIFIER: return createPrimitiveTypeSpecifier();
       case AstPackage.NUMERICAL_TYPE_SPECIFIER: return createNumericalTypeSpecifier();
@@ -106,6 +107,7 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
       case AstPackage.STRING_LITERAL: return createStringLiteral();
       case AstPackage.QUALIFIED_NAME: return createQualifiedName();
       case AstPackage.FEATURE_CALL: return createFeatureCall();
+      case AstPackage.SYMBOL_REFERENCE: return createSymbolReference();
       case AstPackage.COMPONENT_REFERENCE: return createComponentReference();
       case AstPackage.ARRAY_REFERENCE: return createArrayReference();
       case AstPackage.MEMBER_REFERENCE: return createMemberReference();
@@ -378,6 +380,17 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  public ReturnStatement createReturnStatement()
+  {
+    ReturnStatementImpl returnStatement = new ReturnStatementImpl();
+    return returnStatement;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public DataTypeSpecifier createDataTypeSpecifier()
   {
     DataTypeSpecifierImpl dataTypeSpecifier = new DataTypeSpecifierImpl();
@@ -602,6 +615,17 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
   {
     FeatureCallImpl featureCall = new FeatureCallImpl();
     return featureCall;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public SymbolReference createSymbolReference()
+  {
+    SymbolReferenceImpl symbolReference = new SymbolReferenceImpl();
+    return symbolReference;
   }
 
   /**

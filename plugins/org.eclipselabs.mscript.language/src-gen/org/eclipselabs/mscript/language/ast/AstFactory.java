@@ -179,6 +179,15 @@ public interface AstFactory extends EFactory
   VariableDeclarationItem createVariableDeclarationItem();
 
   /**
+   * Returns a new object of class '<em>Return Statement</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Return Statement</em>'.
+   * @generated
+   */
+  ReturnStatement createReturnStatement();
+
+  /**
    * Returns a new object of class '<em>Data Type Specifier</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -366,6 +375,15 @@ public interface AstFactory extends EFactory
    * @generated
    */
   FeatureCall createFeatureCall();
+
+  /**
+   * Returns a new object of class '<em>Symbol Reference</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Symbol Reference</em>'.
+   * @generated
+   */
+  SymbolReference createSymbolReference();
 
   /**
    * Returns a new object of class '<em>Component Reference</em>'.

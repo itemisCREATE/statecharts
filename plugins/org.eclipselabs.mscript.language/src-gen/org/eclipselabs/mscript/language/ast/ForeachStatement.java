@@ -15,7 +15,7 @@ package org.eclipselabs.mscript.language.ast;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipselabs.mscript.language.ast.ForeachStatement#getElementName <em>Element Name</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.ForeachStatement#getCollectionName <em>Collection Name</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.ForeachStatement#getCollectionExpression <em>Collection Expression</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.ForeachStatement#getBody <em>Body</em>}</li>
  * </ul>
  * </p>
@@ -53,30 +53,30 @@ public interface ForeachStatement extends Statement
   void setElementName(String value);
 
   /**
-   * Returns the value of the '<em><b>Collection Name</b></em>' containment reference.
+   * Returns the value of the '<em><b>Collection Expression</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Collection Name</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Collection Expression</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Collection Name</em>' containment reference.
-   * @see #setCollectionName(QualifiedName)
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getForeachStatement_CollectionName()
+   * @return the value of the '<em>Collection Expression</em>' containment reference.
+   * @see #setCollectionExpression(Expression)
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getForeachStatement_CollectionExpression()
    * @model containment="true"
    * @generated
    */
-  QualifiedName getCollectionName();
+  Expression getCollectionExpression();
 
   /**
-   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.ForeachStatement#getCollectionName <em>Collection Name</em>}' containment reference.
+   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.ForeachStatement#getCollectionExpression <em>Collection Expression</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Collection Name</em>' containment reference.
-   * @see #getCollectionName()
+   * @param value the new value of the '<em>Collection Expression</em>' containment reference.
+   * @see #getCollectionExpression()
    * @generated
    */
-  void setCollectionName(QualifiedName value);
+  void setCollectionExpression(Expression value);
 
   /**
    * Returns the value of the '<em><b>Body</b></em>' containment reference.

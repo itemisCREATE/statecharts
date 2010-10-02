@@ -49,7 +49,8 @@ Statement :
 	WhileStatement |
 	DoWhileStatement |
 	ForeachStatement |
-	VariableDeclaration;
+	VariableDeclaration |
+	ReturnStatement;
 	
 Block :
 	{Block} '{' (statements+=Statement)* '}';
@@ -70,13 +71,16 @@ DoWhileStatement :
 	'do' body=Block 'while' predicate=Expression ';';
 
 ForeachStatement :
-	'foreach' elementName=ID 'in' collectionName=QualifiedName body=Block;
+	'foreach' elementName=ID 'in' collectionExpression=Expression body=Block;
 
 VariableDeclaration :
 	type=DataTypeSpecifier items+=VariableDeclarationItem (',' items+=VariableDeclarationItem)* ';';
 		
 VariableDeclarationItem :
 	name=ID ('=' initialValue=Expression)?;
+	
+ReturnStatement :
+	'return' value=Expression ';';
 
 /*
  * Data type specifier
@@ -110,7 +114,7 @@ StringTypeSpecifier :
 	{StringTypeSpecifier} 'string' /* ('[' dimensions ']')? */;
 
 NamedTypeSpecifier :
-	name=QualifiedName /* ('[' dimensions ']')? */;
+	typeReference=SymbolReference /* ('[' dimensions ']')? */;
 	
 /*
  * Expressions
@@ -214,7 +218,10 @@ QualifiedName :
 //	identifier=ID '=' expression=Expression;
 
 FeatureCall :
-	(global?='::')? name=QualifiedName (componentReferences+=ComponentReference)* (operationCall?='(' (arguments+=Expression (',' arguments+=Expression)*)? ')')?;
+	featureReference=SymbolReference (componentReferences+=ComponentReference)* (operationCall?='(' (arguments+=Expression (',' arguments+=Expression)*)? ')')?;
+
+SymbolReference :
+	(global?='::')? name=QualifiedName;
 	
 ComponentReference :
 	ArrayReference |  MemberReference;

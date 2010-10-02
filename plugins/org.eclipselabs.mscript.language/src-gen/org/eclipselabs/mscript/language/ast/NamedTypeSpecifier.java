@@ -14,7 +14,7 @@ package org.eclipselabs.mscript.language.ast;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.NamedTypeSpecifier#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.NamedTypeSpecifier#getTypeReference <em>Type Reference</em>}</li>
  * </ul>
  * </p>
  *
@@ -25,29 +25,29 @@ package org.eclipselabs.mscript.language.ast;
 public interface NamedTypeSpecifier extends DataTypeSpecifier
 {
   /**
-   * Returns the value of the '<em><b>Name</b></em>' containment reference.
+   * Returns the value of the '<em><b>Type Reference</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Name</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Type Reference</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Name</em>' containment reference.
-   * @see #setName(QualifiedName)
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getNamedTypeSpecifier_Name()
+   * @return the value of the '<em>Type Reference</em>' containment reference.
+   * @see #setTypeReference(SymbolReference)
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getNamedTypeSpecifier_TypeReference()
    * @model containment="true"
    * @generated
    */
-  QualifiedName getName();
+  SymbolReference getTypeReference();
 
   /**
-   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.NamedTypeSpecifier#getName <em>Name</em>}' containment reference.
+   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.NamedTypeSpecifier#getTypeReference <em>Type Reference</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Name</em>' containment reference.
-   * @see #getName()
+   * @param value the new value of the '<em>Type Reference</em>' containment reference.
+   * @see #getTypeReference()
    * @generated
    */
-  void setName(QualifiedName value);
+  void setTypeReference(SymbolReference value);
 
 } // NamedTypeSpecifier

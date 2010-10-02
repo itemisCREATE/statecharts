@@ -88,7 +88,7 @@
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//ForeachStatement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//ForeachStatement/elementName"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ForeachStatement/collectionName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ForeachStatement/collectionExpression"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ForeachStatement/body"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//VariableDeclaration">
@@ -98,6 +98,9 @@
     <genClasses ecoreClass="Mscript.ecore#//VariableDeclarationItem">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//VariableDeclarationItem/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//VariableDeclarationItem/initialValue"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//ReturnStatement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ReturnStatement/value"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//DataTypeSpecifier"/>
     <genClasses ecoreClass="Mscript.ecore#//PrimitiveTypeSpecifier"/>
@@ -111,7 +114,7 @@
     <genClasses ecoreClass="Mscript.ecore#//BooleanTypeSpecifier"/>
     <genClasses ecoreClass="Mscript.ecore#//StringTypeSpecifier"/>
     <genClasses ecoreClass="Mscript.ecore#//NamedTypeSpecifier">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//NamedTypeSpecifier/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//NamedTypeSpecifier/typeReference"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//Expression"/>
     <genClasses ecoreClass="Mscript.ecore#//ConditionalExpression">
@@ -143,11 +146,14 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//QualifiedName/identifiers"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//FeatureCall">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//FeatureCall/global"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//FeatureCall/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//FeatureCall/featureReference"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//FeatureCall/componentReferences"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//FeatureCall/operationCall"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//FeatureCall/arguments"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//SymbolReference">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//SymbolReference/global"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//SymbolReference/name"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//ComponentReference"/>
     <genClasses ecoreClass="Mscript.ecore#//ArrayReference">

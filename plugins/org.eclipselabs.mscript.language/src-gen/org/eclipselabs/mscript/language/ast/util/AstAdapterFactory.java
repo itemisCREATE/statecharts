@@ -163,6 +163,11 @@ public class AstAdapterFactory extends AdapterFactoryImpl
         return createVariableDeclarationItemAdapter();
       }
       @Override
+      public Adapter caseReturnStatement(ReturnStatement object)
+      {
+        return createReturnStatementAdapter();
+      }
+      @Override
       public Adapter caseDataTypeSpecifier(DataTypeSpecifier object)
       {
         return createDataTypeSpecifierAdapter();
@@ -266,6 +271,11 @@ public class AstAdapterFactory extends AdapterFactoryImpl
       public Adapter caseFeatureCall(FeatureCall object)
       {
         return createFeatureCallAdapter();
+      }
+      @Override
+      public Adapter caseSymbolReference(SymbolReference object)
+      {
+        return createSymbolReferenceAdapter();
       }
       @Override
       public Adapter caseComponentReference(ComponentReference object)
@@ -670,6 +680,21 @@ public class AstAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.ReturnStatement <em>Return Statement</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipselabs.mscript.language.ast.ReturnStatement
+   * @generated
+   */
+  public Adapter createReturnStatementAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.DataTypeSpecifier <em>Data Type Specifier</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -980,6 +1005,21 @@ public class AstAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createFeatureCallAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.SymbolReference <em>Symbol Reference</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipselabs.mscript.language.ast.SymbolReference
+   * @generated
+   */
+  public Adapter createSymbolReferenceAdapter()
   {
     return null;
   }

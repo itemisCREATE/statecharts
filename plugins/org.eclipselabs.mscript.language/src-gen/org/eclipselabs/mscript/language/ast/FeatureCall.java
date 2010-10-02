@@ -15,8 +15,7 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.FeatureCall#isGlobal <em>Global</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.FeatureCall#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.FeatureCall#getFeatureReference <em>Feature Reference</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.FeatureCall#getComponentReferences <em>Component References</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.FeatureCall#isOperationCall <em>Operation Call</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.FeatureCall#getArguments <em>Arguments</em>}</li>
@@ -30,56 +29,30 @@ import org.eclipse.emf.common.util.EList;
 public interface FeatureCall extends Expression
 {
   /**
-   * Returns the value of the '<em><b>Global</b></em>' attribute.
+   * Returns the value of the '<em><b>Feature Reference</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Global</em>' attribute isn't clear,
+   * If the meaning of the '<em>Feature Reference</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Global</em>' attribute.
-   * @see #setGlobal(boolean)
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getFeatureCall_Global()
-   * @model
-   * @generated
-   */
-  boolean isGlobal();
-
-  /**
-   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.FeatureCall#isGlobal <em>Global</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Global</em>' attribute.
-   * @see #isGlobal()
-   * @generated
-   */
-  void setGlobal(boolean value);
-
-  /**
-   * Returns the value of the '<em><b>Name</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Name</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Name</em>' containment reference.
-   * @see #setName(QualifiedName)
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getFeatureCall_Name()
+   * @return the value of the '<em>Feature Reference</em>' containment reference.
+   * @see #setFeatureReference(SymbolReference)
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getFeatureCall_FeatureReference()
    * @model containment="true"
    * @generated
    */
-  QualifiedName getName();
+  SymbolReference getFeatureReference();
 
   /**
-   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.FeatureCall#getName <em>Name</em>}' containment reference.
+   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.FeatureCall#getFeatureReference <em>Feature Reference</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Name</em>' containment reference.
-   * @see #getName()
+   * @param value the new value of the '<em>Feature Reference</em>' containment reference.
+   * @see #getFeatureReference()
    * @generated
    */
-  void setName(QualifiedName value);
+  void setFeatureReference(SymbolReference value);
 
   /**
    * Returns the value of the '<em><b>Component References</b></em>' containment reference list.

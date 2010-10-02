@@ -24,63 +24,64 @@ T25 : 'while' ;
 T26 : 'do' ;
 T27 : 'foreach' ;
 T28 : 'in' ;
-T29 : 'real' ;
-T30 : 'int' ;
-T31 : 'complex' ;
-T32 : 'gauss' ;
-T33 : 'bool' ;
-T34 : 'string' ;
-T35 : 'then' ;
-T36 : ':' ;
-T37 : 'or' ;
-T38 : 'and' ;
-T39 : 'not' ;
-T40 : '-' ;
-T41 : 'j' ;
-T42 : '::' ;
-T43 : '[' ;
-T44 : ']' ;
-T45 : '.' ;
-T46 : 'begin' ;
-T47 : 'end' ;
-T48 : '/' ;
-T49 : '*' ;
-T50 : '^' ;
-T51 : '<' ;
-T52 : '<=' ;
-T53 : '>' ;
-T54 : '>=' ;
-T55 : '==' ;
-T56 : '<>' ;
-T57 : '+' ;
-T58 : '.*' ;
-T59 : './' ;
-T60 : '.^' ;
-T61 : 'false' ;
-T62 : 'true' ;
+T29 : 'return' ;
+T30 : 'real' ;
+T31 : 'int' ;
+T32 : 'complex' ;
+T33 : 'gauss' ;
+T34 : 'bool' ;
+T35 : 'string' ;
+T36 : 'then' ;
+T37 : ':' ;
+T38 : 'or' ;
+T39 : 'and' ;
+T40 : 'not' ;
+T41 : '-' ;
+T42 : 'j' ;
+T43 : '::' ;
+T44 : '[' ;
+T45 : ']' ;
+T46 : '.' ;
+T47 : 'begin' ;
+T48 : 'end' ;
+T49 : '/' ;
+T50 : '*' ;
+T51 : '^' ;
+T52 : '<' ;
+T53 : '<=' ;
+T54 : '>' ;
+T55 : '>=' ;
+T56 : '==' ;
+T57 : '<>' ;
+T58 : '+' ;
+T59 : '.*' ;
+T60 : './' ;
+T61 : '.^' ;
+T62 : 'false' ;
+T63 : 'true' ;
 
-// $ANTLR src "../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g" 4985
+// $ANTLR src "../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g" 5097
 RULE_ID : ('_'|'a'..'z'|'A'..'Z') ('0'..'9'|'_'|'a'..'z'|'A'..'Z')*;
 
-// $ANTLR src "../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g" 4987
+// $ANTLR src "../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g" 5099
 RULE_STRING : '"' (~(('\\'|'"'))|'\\' ('\''|'"'|'?'|'\\'|'a'|'b'|'f'|'n'|'r'|'t'|'v'))* '"';
 
-// $ANTLR src "../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g" 4989
+// $ANTLR src "../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g" 5101
 RULE_REAL : ('0'..'9')+ '.' ('0'..'9')* (('e'|'E') ('+'|'-')? ('0'..'9')+)?;
 
-// $ANTLR src "../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g" 4991
+// $ANTLR src "../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g" 5103
 RULE_INTEGER : ('0'..'9')+;
 
-// $ANTLR src "../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g" 4993
+// $ANTLR src "../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g" 5105
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
-// $ANTLR src "../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g" 4995
+// $ANTLR src "../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g" 5107
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 
-// $ANTLR src "../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g" 4997
+// $ANTLR src "../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g" 5109
 RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
-// $ANTLR src "../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g" 4999
+// $ANTLR src "../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g" 5111
 RULE_ANY_OTHER : .;
 
 

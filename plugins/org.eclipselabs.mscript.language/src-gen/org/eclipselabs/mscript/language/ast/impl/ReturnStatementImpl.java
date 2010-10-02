@@ -14,40 +14,40 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipselabs.mscript.language.ast.AstPackage;
-import org.eclipselabs.mscript.language.ast.NamedTypeSpecifier;
-import org.eclipselabs.mscript.language.ast.SymbolReference;
+import org.eclipselabs.mscript.language.ast.Expression;
+import org.eclipselabs.mscript.language.ast.ReturnStatement;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Named Type Specifier</b></em>'.
+ * An implementation of the model object '<em><b>Return Statement</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.NamedTypeSpecifierImpl#getTypeReference <em>Type Reference</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.ReturnStatementImpl#getValue <em>Value</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class NamedTypeSpecifierImpl extends DataTypeSpecifierImpl implements NamedTypeSpecifier
+public class ReturnStatementImpl extends StatementImpl implements ReturnStatement
 {
   /**
-   * The cached value of the '{@link #getTypeReference() <em>Type Reference</em>}' containment reference.
+   * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getTypeReference()
+   * @see #getValue()
    * @generated
    * @ordered
    */
-  protected SymbolReference typeReference;
+  protected Expression value;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected NamedTypeSpecifierImpl()
+  protected ReturnStatementImpl()
   {
     super();
   }
@@ -60,7 +60,7 @@ public class NamedTypeSpecifierImpl extends DataTypeSpecifierImpl implements Nam
   @Override
   protected EClass eStaticClass()
   {
-    return AstPackage.Literals.NAMED_TYPE_SPECIFIER;
+    return AstPackage.Literals.RETURN_STATEMENT;
   }
 
   /**
@@ -68,9 +68,9 @@ public class NamedTypeSpecifierImpl extends DataTypeSpecifierImpl implements Nam
    * <!-- end-user-doc -->
    * @generated
    */
-  public SymbolReference getTypeReference()
+  public Expression getValue()
   {
-    return typeReference;
+    return value;
   }
 
   /**
@@ -78,13 +78,13 @@ public class NamedTypeSpecifierImpl extends DataTypeSpecifierImpl implements Nam
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetTypeReference(SymbolReference newTypeReference, NotificationChain msgs)
+  public NotificationChain basicSetValue(Expression newValue, NotificationChain msgs)
   {
-    SymbolReference oldTypeReference = typeReference;
-    typeReference = newTypeReference;
+    Expression oldValue = value;
+    value = newValue;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.NAMED_TYPE_SPECIFIER__TYPE_REFERENCE, oldTypeReference, newTypeReference);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.RETURN_STATEMENT__VALUE, oldValue, newValue);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -95,20 +95,20 @@ public class NamedTypeSpecifierImpl extends DataTypeSpecifierImpl implements Nam
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setTypeReference(SymbolReference newTypeReference)
+  public void setValue(Expression newValue)
   {
-    if (newTypeReference != typeReference)
+    if (newValue != value)
     {
       NotificationChain msgs = null;
-      if (typeReference != null)
-        msgs = ((InternalEObject)typeReference).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.NAMED_TYPE_SPECIFIER__TYPE_REFERENCE, null, msgs);
-      if (newTypeReference != null)
-        msgs = ((InternalEObject)newTypeReference).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.NAMED_TYPE_SPECIFIER__TYPE_REFERENCE, null, msgs);
-      msgs = basicSetTypeReference(newTypeReference, msgs);
+      if (value != null)
+        msgs = ((InternalEObject)value).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.RETURN_STATEMENT__VALUE, null, msgs);
+      if (newValue != null)
+        msgs = ((InternalEObject)newValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.RETURN_STATEMENT__VALUE, null, msgs);
+      msgs = basicSetValue(newValue, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.NAMED_TYPE_SPECIFIER__TYPE_REFERENCE, newTypeReference, newTypeReference));
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.RETURN_STATEMENT__VALUE, newValue, newValue));
   }
 
   /**
@@ -121,8 +121,8 @@ public class NamedTypeSpecifierImpl extends DataTypeSpecifierImpl implements Nam
   {
     switch (featureID)
     {
-      case AstPackage.NAMED_TYPE_SPECIFIER__TYPE_REFERENCE:
-        return basicSetTypeReference(null, msgs);
+      case AstPackage.RETURN_STATEMENT__VALUE:
+        return basicSetValue(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -137,8 +137,8 @@ public class NamedTypeSpecifierImpl extends DataTypeSpecifierImpl implements Nam
   {
     switch (featureID)
     {
-      case AstPackage.NAMED_TYPE_SPECIFIER__TYPE_REFERENCE:
-        return getTypeReference();
+      case AstPackage.RETURN_STATEMENT__VALUE:
+        return getValue();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -153,8 +153,8 @@ public class NamedTypeSpecifierImpl extends DataTypeSpecifierImpl implements Nam
   {
     switch (featureID)
     {
-      case AstPackage.NAMED_TYPE_SPECIFIER__TYPE_REFERENCE:
-        setTypeReference((SymbolReference)newValue);
+      case AstPackage.RETURN_STATEMENT__VALUE:
+        setValue((Expression)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -170,8 +170,8 @@ public class NamedTypeSpecifierImpl extends DataTypeSpecifierImpl implements Nam
   {
     switch (featureID)
     {
-      case AstPackage.NAMED_TYPE_SPECIFIER__TYPE_REFERENCE:
-        setTypeReference((SymbolReference)null);
+      case AstPackage.RETURN_STATEMENT__VALUE:
+        setValue((Expression)null);
         return;
     }
     super.eUnset(featureID);
@@ -187,10 +187,10 @@ public class NamedTypeSpecifierImpl extends DataTypeSpecifierImpl implements Nam
   {
     switch (featureID)
     {
-      case AstPackage.NAMED_TYPE_SPECIFIER__TYPE_REFERENCE:
-        return typeReference != null;
+      case AstPackage.RETURN_STATEMENT__VALUE:
+        return value != null;
     }
     return super.eIsSet(featureID);
   }
 
-} //NamedTypeSpecifierImpl
+} //ReturnStatementImpl

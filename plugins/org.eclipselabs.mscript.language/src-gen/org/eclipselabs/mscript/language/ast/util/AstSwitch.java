@@ -225,6 +225,14 @@ public class AstSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case AstPackage.RETURN_STATEMENT:
+      {
+        ReturnStatement returnStatement = (ReturnStatement)theEObject;
+        T result = caseReturnStatement(returnStatement);
+        if (result == null) result = caseStatement(returnStatement);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case AstPackage.DATA_TYPE_SPECIFIER:
       {
         DataTypeSpecifier dataTypeSpecifier = (DataTypeSpecifier)theEObject;
@@ -404,6 +412,13 @@ public class AstSwitch<T>
         FeatureCall featureCall = (FeatureCall)theEObject;
         T result = caseFeatureCall(featureCall);
         if (result == null) result = caseExpression(featureCall);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AstPackage.SYMBOL_REFERENCE:
+      {
+        SymbolReference symbolReference = (SymbolReference)theEObject;
+        T result = caseSymbolReference(symbolReference);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -876,6 +891,22 @@ public class AstSwitch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>Return Statement</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Return Statement</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseReturnStatement(ReturnStatement object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>Data Type Specifier</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -1207,6 +1238,22 @@ public class AstSwitch<T>
    * @generated
    */
   public T caseFeatureCall(FeatureCall object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Symbol Reference</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Symbol Reference</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseSymbolReference(SymbolReference object)
   {
     return null;
   }
