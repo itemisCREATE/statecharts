@@ -160,5 +160,14 @@
       <genFeatures xsi:type="genmodel:GenFeature" property="Readonly" createChild="false"
           ecoreFeature="ecore:EAttribute TypeSystem.ecore#//TensorType/matrix"/>
     </genClasses>
+    <genClasses xsi:type="genmodel:GenClass" ecoreClass="TypeSystem.ecore#//Record">
+      <genFeatures xsi:type="genmodel:GenFeature" property="None" children="true"
+          createChild="true" ecoreFeature="ecore:EReference TypeSystem.ecore#//Record/fields"/>
+    </genClasses>
+    <genClasses xsi:type="genmodel:GenClass" ecoreClass="TypeSystem.ecore#//RecordField">
+      <genFeatures xsi:type="genmodel:GenFeature" notify="false" createChild="false"
+          propertySortChoices="true" ecoreFeature="ecore:EReference TypeSystem.ecore#//RecordField/type"/>
+      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute TypeSystem.ecore#//RecordField/name"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

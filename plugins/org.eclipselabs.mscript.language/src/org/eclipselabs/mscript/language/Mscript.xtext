@@ -25,7 +25,7 @@ PackageDefinition :
 	'}';
 
 PackageDefinitionElement :
-	PackageDefinition | EnumerationDefinition | FunctionDefinition | VariableDeclaration;
+	PackageDefinition | EnumerationDefinition | RecordDefinition | FunctionDefinition | VariableDeclaration;
 
 /*
  * Enumeration
@@ -40,11 +40,26 @@ EnumerationLiteralDeclaration :
 	name=ID;
 
 /*
+ * Record
+ */
+
+RecordDefinition :
+	'record' name=ID '{'
+		(fields+=RecordFieldDeclaration)*
+	'}'; 
+
+RecordFieldDeclaration :
+	type=DataTypeSpecifier items+=RecordFieldDeclarationItem (',' items+=RecordFieldDeclarationItem)* ';';
+	
+RecordFieldDeclarationItem :
+	name=ID;
+
+/*
  * Function
  */
  
 FunctionDefinition :
-	(returnType=DataTypeSpecifier)? name=ID '(' (parameters+=ParameterDeclaration (',' parameters+=ParameterDeclaration)*)? ')' body=Block;
+	name=ID '(' (parameters+=ParameterDeclaration (',' parameters+=ParameterDeclaration)*)? ')' body=Block;
 
 ParameterDeclaration :
 	(reference?='ref')? type=DataTypeSpecifier name=ID;
@@ -55,6 +70,7 @@ ParameterDeclaration :
 
 Statement :
 	Block |
+	CheckStatement |
 	FeatureCallStatement |
 	IfStatement |
 	WhileStatement |
@@ -65,6 +81,9 @@ Statement :
 	
 Block :
 	{Block} '{' (statements+=Statement)* '}';
+
+CheckStatement :
+	'check' body=Block;
 
 FeatureCallStatement :
 	featureCall=FeatureCall (assignment?='=' expression=Expression)? ';';
@@ -85,7 +104,7 @@ ForeachStatement :
 	'foreach' elementName=ID 'in' collectionExpression=Expression body=Block;
 
 VariableDeclaration :
-	type=DataTypeSpecifier items+=VariableDeclarationItem (',' items+=VariableDeclarationItem)* ';';
+	type=ValueTypeSpecifier items+=VariableDeclarationItem (',' items+=VariableDeclarationItem)* ';';
 		
 VariableDeclarationItem :
 	name=ID ('=' initialValue=Expression)?;
@@ -97,6 +116,9 @@ ReturnStatement :
  * Data type specifier
  */
 
+ValueTypeSpecifier :
+	DataTypeSpecifier | UnitTypeSpecifier;
+	
 DataTypeSpecifier :
 	PrimitiveTypeSpecifier | NamedTypeSpecifier;
 	
@@ -123,6 +145,9 @@ BooleanTypeSpecifier :
 	
 StringTypeSpecifier :
 	{StringTypeSpecifier} 'string' /* ('[' dimensions ']')? */;
+	
+UnitTypeSpecifier :
+	{UnitTypeSpecifier} 'unit';
 
 NamedTypeSpecifier :
 	typeReference=SymbolReference /* ('[' dimensions ']')? */;
@@ -192,11 +217,11 @@ UnaryMinusExpression returns Expression :
 PrimaryExpression returns Expression :
 	Literal |
 	FeatureCall |
-	ParenthesizedExpression |
 	MatrixConstructionOperator |
-//	ArrayConstructionOperator |
+	UnitConstructionOperator |
 	BeginExpression |
-	EndExpression;
+	EndExpression |
+	ParenthesizedExpression;
 
 Literal :
 	NumericalLiteral | BooleanLiteral | StringLiteral;
@@ -205,10 +230,10 @@ NumericalLiteral :
 	RealLiteral | IntegerLiteral;
 	
 RealLiteral :
-	value=REAL (complex?='j')? ('(' unit=UnitExpression ')')?;
+	value=REAL (imaginary?='j')? ('(' unit=UnitExpression ')')?;
 	
 IntegerLiteral :
-	value=INTEGER (complex?='j')? ('(' unit=UnitExpression ')')?;
+	value=INTEGER (imaginary?='j')? ('(' unit=UnitExpression ')')?;
 
 BooleanLiteral :
 	value=BooleanKind;
@@ -257,6 +282,9 @@ MatrixConstructionOperator :
 	
 ExpressionList :
 	expressions+=Expression (',' expressions+=Expression)*;
+	
+UnitConstructionOperator :
+	'unit' '(' unitExpression=UnitExpression ')';
 
 ParenthesizedExpression :
 //	'(' expressionList=OutputExpressionList ')';
@@ -288,7 +316,7 @@ EndExpression :
  */
 	
 UnitExpression :
-	numerator=UnitExpressionNumerator ('/' denominator=UnitExpressionDenominator)?;
+	unspecified?='?' | 'eval' expression=Expression  | numerator=UnitExpressionNumerator ('/' denominator=UnitExpressionDenominator)?;
 
 UnitExpressionNumerator :
 	one=INTEGER /* must be '1' */ | factors+=UnitExpressionFactor ('*' factors+=UnitExpressionFactor)*;
@@ -301,7 +329,7 @@ UnitExpressionFactor :
 
 UnitExpressionExponent :
 	(negative?='-')? value=INTEGER;
-
+	
 /*
  * Terminals
  */

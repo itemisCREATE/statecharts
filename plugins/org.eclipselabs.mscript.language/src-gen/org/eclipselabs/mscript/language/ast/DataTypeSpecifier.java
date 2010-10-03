@@ -5,7 +5,6 @@
  */
 package org.eclipselabs.mscript.language.ast;
 
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -17,6 +16,6 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface DataTypeSpecifier extends EObject
+public interface DataTypeSpecifier extends ValueTypeSpecifier
 {
 } // DataTypeSpecifier

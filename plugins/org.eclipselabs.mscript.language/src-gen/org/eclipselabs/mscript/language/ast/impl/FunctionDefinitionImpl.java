@@ -22,7 +22,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.Block;
-import org.eclipselabs.mscript.language.ast.DataTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.FunctionDefinition;
 import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
 
@@ -33,7 +32,6 @@ import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl#getReturnType <em>Return Type</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl#getParameters <em>Parameters</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl#getBody <em>Body</em>}</li>
@@ -44,16 +42,6 @@ import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
  */
 public class FunctionDefinitionImpl extends PackageDefinitionElementImpl implements FunctionDefinition
 {
-  /**
-   * The cached value of the '{@link #getReturnType() <em>Return Type</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getReturnType()
-   * @generated
-   * @ordered
-   */
-  protected DataTypeSpecifier returnType;
-
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
@@ -113,54 +101,6 @@ public class FunctionDefinitionImpl extends PackageDefinitionElementImpl impleme
   protected EClass eStaticClass()
   {
     return AstPackage.Literals.FUNCTION_DEFINITION;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public DataTypeSpecifier getReturnType()
-  {
-    return returnType;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetReturnType(DataTypeSpecifier newReturnType, NotificationChain msgs)
-  {
-    DataTypeSpecifier oldReturnType = returnType;
-    returnType = newReturnType;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.FUNCTION_DEFINITION__RETURN_TYPE, oldReturnType, newReturnType);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setReturnType(DataTypeSpecifier newReturnType)
-  {
-    if (newReturnType != returnType)
-    {
-      NotificationChain msgs = null;
-      if (returnType != null)
-        msgs = ((InternalEObject)returnType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.FUNCTION_DEFINITION__RETURN_TYPE, null, msgs);
-      if (newReturnType != null)
-        msgs = ((InternalEObject)newReturnType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.FUNCTION_DEFINITION__RETURN_TYPE, null, msgs);
-      msgs = basicSetReturnType(newReturnType, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.FUNCTION_DEFINITION__RETURN_TYPE, newReturnType, newReturnType));
   }
 
   /**
@@ -258,8 +198,6 @@ public class FunctionDefinitionImpl extends PackageDefinitionElementImpl impleme
   {
     switch (featureID)
     {
-      case AstPackage.FUNCTION_DEFINITION__RETURN_TYPE:
-        return basicSetReturnType(null, msgs);
       case AstPackage.FUNCTION_DEFINITION__PARAMETERS:
         return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
       case AstPackage.FUNCTION_DEFINITION__BODY:
@@ -278,8 +216,6 @@ public class FunctionDefinitionImpl extends PackageDefinitionElementImpl impleme
   {
     switch (featureID)
     {
-      case AstPackage.FUNCTION_DEFINITION__RETURN_TYPE:
-        return getReturnType();
       case AstPackage.FUNCTION_DEFINITION__NAME:
         return getName();
       case AstPackage.FUNCTION_DEFINITION__PARAMETERS:
@@ -301,9 +237,6 @@ public class FunctionDefinitionImpl extends PackageDefinitionElementImpl impleme
   {
     switch (featureID)
     {
-      case AstPackage.FUNCTION_DEFINITION__RETURN_TYPE:
-        setReturnType((DataTypeSpecifier)newValue);
-        return;
       case AstPackage.FUNCTION_DEFINITION__NAME:
         setName((String)newValue);
         return;
@@ -328,9 +261,6 @@ public class FunctionDefinitionImpl extends PackageDefinitionElementImpl impleme
   {
     switch (featureID)
     {
-      case AstPackage.FUNCTION_DEFINITION__RETURN_TYPE:
-        setReturnType((DataTypeSpecifier)null);
-        return;
       case AstPackage.FUNCTION_DEFINITION__NAME:
         setName(NAME_EDEFAULT);
         return;
@@ -354,8 +284,6 @@ public class FunctionDefinitionImpl extends PackageDefinitionElementImpl impleme
   {
     switch (featureID)
     {
-      case AstPackage.FUNCTION_DEFINITION__RETURN_TYPE:
-        return returnType != null;
       case AstPackage.FUNCTION_DEFINITION__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case AstPackage.FUNCTION_DEFINITION__PARAMETERS:

@@ -103,6 +103,21 @@ public class AstAdapterFactory extends AdapterFactoryImpl
         return createEnumerationLiteralDeclarationAdapter();
       }
       @Override
+      public Adapter caseRecordDefinition(RecordDefinition object)
+      {
+        return createRecordDefinitionAdapter();
+      }
+      @Override
+      public Adapter caseRecordFieldDeclaration(RecordFieldDeclaration object)
+      {
+        return createRecordFieldDeclarationAdapter();
+      }
+      @Override
+      public Adapter caseRecordFieldDeclarationItem(RecordFieldDeclarationItem object)
+      {
+        return createRecordFieldDeclarationItemAdapter();
+      }
+      @Override
       public Adapter caseFunctionDefinition(FunctionDefinition object)
       {
         return createFunctionDefinitionAdapter();
@@ -121,6 +136,11 @@ public class AstAdapterFactory extends AdapterFactoryImpl
       public Adapter caseBlock(Block object)
       {
         return createBlockAdapter();
+      }
+      @Override
+      public Adapter caseCheckStatement(CheckStatement object)
+      {
+        return createCheckStatementAdapter();
       }
       @Override
       public Adapter caseFeatureCallStatement(FeatureCallStatement object)
@@ -168,6 +188,11 @@ public class AstAdapterFactory extends AdapterFactoryImpl
         return createReturnStatementAdapter();
       }
       @Override
+      public Adapter caseValueTypeSpecifier(ValueTypeSpecifier object)
+      {
+        return createValueTypeSpecifierAdapter();
+      }
+      @Override
       public Adapter caseDataTypeSpecifier(DataTypeSpecifier object)
       {
         return createDataTypeSpecifierAdapter();
@@ -211,6 +236,11 @@ public class AstAdapterFactory extends AdapterFactoryImpl
       public Adapter caseStringTypeSpecifier(StringTypeSpecifier object)
       {
         return createStringTypeSpecifierAdapter();
+      }
+      @Override
+      public Adapter caseUnitTypeSpecifier(UnitTypeSpecifier object)
+      {
+        return createUnitTypeSpecifierAdapter();
       }
       @Override
       public Adapter caseNamedTypeSpecifier(NamedTypeSpecifier object)
@@ -316,6 +346,11 @@ public class AstAdapterFactory extends AdapterFactoryImpl
       public Adapter caseExpressionList(ExpressionList object)
       {
         return createExpressionListAdapter();
+      }
+      @Override
+      public Adapter caseUnitConstructionOperator(UnitConstructionOperator object)
+      {
+        return createUnitConstructionOperatorAdapter();
       }
       @Override
       public Adapter caseParenthesizedExpression(ParenthesizedExpression object)
@@ -500,6 +535,51 @@ public class AstAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.RecordDefinition <em>Record Definition</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipselabs.mscript.language.ast.RecordDefinition
+   * @generated
+   */
+  public Adapter createRecordDefinitionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.RecordFieldDeclaration <em>Record Field Declaration</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipselabs.mscript.language.ast.RecordFieldDeclaration
+   * @generated
+   */
+  public Adapter createRecordFieldDeclarationAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.RecordFieldDeclarationItem <em>Record Field Declaration Item</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipselabs.mscript.language.ast.RecordFieldDeclarationItem
+   * @generated
+   */
+  public Adapter createRecordFieldDeclarationItemAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.FunctionDefinition <em>Function Definition</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -555,6 +635,21 @@ public class AstAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createBlockAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.CheckStatement <em>Check Statement</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipselabs.mscript.language.ast.CheckStatement
+   * @generated
+   */
+  public Adapter createCheckStatementAdapter()
   {
     return null;
   }
@@ -695,6 +790,21 @@ public class AstAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.ValueTypeSpecifier <em>Value Type Specifier</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipselabs.mscript.language.ast.ValueTypeSpecifier
+   * @generated
+   */
+  public Adapter createValueTypeSpecifierAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.DataTypeSpecifier <em>Data Type Specifier</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -825,6 +935,21 @@ public class AstAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createStringTypeSpecifierAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.UnitTypeSpecifier <em>Unit Type Specifier</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipselabs.mscript.language.ast.UnitTypeSpecifier
+   * @generated
+   */
+  public Adapter createUnitTypeSpecifierAdapter()
   {
     return null;
   }
@@ -1140,6 +1265,21 @@ public class AstAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createExpressionListAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.UnitConstructionOperator <em>Unit Construction Operator</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipselabs.mscript.language.ast.UnitConstructionOperator
+   * @generated
+   */
+  public Adapter createUnitConstructionOperatorAdapter()
   {
     return null;
   }

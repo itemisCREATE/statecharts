@@ -24,7 +24,7 @@ import org.eclipselabs.mscript.language.ast.UnitExpression;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.NumericalLiteralImpl#isComplex <em>Complex</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.NumericalLiteralImpl#isImaginary <em>Imaginary</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.NumericalLiteralImpl#getUnit <em>Unit</em>}</li>
  * </ul>
  * </p>
@@ -34,24 +34,24 @@ import org.eclipselabs.mscript.language.ast.UnitExpression;
 public class NumericalLiteralImpl extends LiteralImpl implements NumericalLiteral
 {
   /**
-   * The default value of the '{@link #isComplex() <em>Complex</em>}' attribute.
+   * The default value of the '{@link #isImaginary() <em>Imaginary</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #isComplex()
+   * @see #isImaginary()
    * @generated
    * @ordered
    */
-  protected static final boolean COMPLEX_EDEFAULT = false;
+  protected static final boolean IMAGINARY_EDEFAULT = false;
 
   /**
-   * The cached value of the '{@link #isComplex() <em>Complex</em>}' attribute.
+   * The cached value of the '{@link #isImaginary() <em>Imaginary</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #isComplex()
+   * @see #isImaginary()
    * @generated
    * @ordered
    */
-  protected boolean complex = COMPLEX_EDEFAULT;
+  protected boolean imaginary = IMAGINARY_EDEFAULT;
 
   /**
    * The cached value of the '{@link #getUnit() <em>Unit</em>}' containment reference.
@@ -89,9 +89,9 @@ public class NumericalLiteralImpl extends LiteralImpl implements NumericalLitera
    * <!-- end-user-doc -->
    * @generated
    */
-  public boolean isComplex()
+  public boolean isImaginary()
   {
-    return complex;
+    return imaginary;
   }
 
   /**
@@ -99,12 +99,12 @@ public class NumericalLiteralImpl extends LiteralImpl implements NumericalLitera
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setComplex(boolean newComplex)
+  public void setImaginary(boolean newImaginary)
   {
-    boolean oldComplex = complex;
-    complex = newComplex;
+    boolean oldImaginary = imaginary;
+    imaginary = newImaginary;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.NUMERICAL_LITERAL__COMPLEX, oldComplex, complex));
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.NUMERICAL_LITERAL__IMAGINARY, oldImaginary, imaginary));
   }
 
   /**
@@ -181,8 +181,8 @@ public class NumericalLiteralImpl extends LiteralImpl implements NumericalLitera
   {
     switch (featureID)
     {
-      case AstPackage.NUMERICAL_LITERAL__COMPLEX:
-        return isComplex();
+      case AstPackage.NUMERICAL_LITERAL__IMAGINARY:
+        return isImaginary();
       case AstPackage.NUMERICAL_LITERAL__UNIT:
         return getUnit();
     }
@@ -199,8 +199,8 @@ public class NumericalLiteralImpl extends LiteralImpl implements NumericalLitera
   {
     switch (featureID)
     {
-      case AstPackage.NUMERICAL_LITERAL__COMPLEX:
-        setComplex((Boolean)newValue);
+      case AstPackage.NUMERICAL_LITERAL__IMAGINARY:
+        setImaginary((Boolean)newValue);
         return;
       case AstPackage.NUMERICAL_LITERAL__UNIT:
         setUnit((UnitExpression)newValue);
@@ -219,8 +219,8 @@ public class NumericalLiteralImpl extends LiteralImpl implements NumericalLitera
   {
     switch (featureID)
     {
-      case AstPackage.NUMERICAL_LITERAL__COMPLEX:
-        setComplex(COMPLEX_EDEFAULT);
+      case AstPackage.NUMERICAL_LITERAL__IMAGINARY:
+        setImaginary(IMAGINARY_EDEFAULT);
         return;
       case AstPackage.NUMERICAL_LITERAL__UNIT:
         setUnit((UnitExpression)null);
@@ -239,8 +239,8 @@ public class NumericalLiteralImpl extends LiteralImpl implements NumericalLitera
   {
     switch (featureID)
     {
-      case AstPackage.NUMERICAL_LITERAL__COMPLEX:
-        return complex != COMPLEX_EDEFAULT;
+      case AstPackage.NUMERICAL_LITERAL__IMAGINARY:
+        return imaginary != IMAGINARY_EDEFAULT;
       case AstPackage.NUMERICAL_LITERAL__UNIT:
         return unit != null;
     }
@@ -258,8 +258,8 @@ public class NumericalLiteralImpl extends LiteralImpl implements NumericalLitera
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (complex: ");
-    result.append(complex);
+    result.append(" (imaginary: ");
+    result.append(imaginary);
     result.append(')');
     return result.toString();
   }

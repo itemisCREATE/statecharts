@@ -1243,6 +1243,98 @@ public interface TypeSystemPackage extends EPackage {
 	int TENSOR_TYPE_FEATURE_COUNT = ARRAY_TYPE_FEATURE_COUNT + 2;
 
 	/**
+	 * The meta object id for the '{@link org.eclipselabs.mscript.typesystem.impl.RecordImpl <em>Record</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipselabs.mscript.typesystem.impl.RecordImpl
+	 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemPackageImpl#getRecord()
+	 * @generated
+	 */
+	int RECORD = 21;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RECORD__NAME = DATA_TYPE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RECORD__QUALIFIED_NAME = DATA_TYPE__QUALIFIED_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RECORD__NAMESPACE = DATA_TYPE__NAMESPACE;
+
+	/**
+	 * The feature id for the '<em><b>Fields</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RECORD__FIELDS = DATA_TYPE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Record</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RECORD_FEATURE_COUNT = DATA_TYPE_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.eclipselabs.mscript.typesystem.impl.RecordFieldImpl <em>Record Field</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipselabs.mscript.typesystem.impl.RecordFieldImpl
+	 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemPackageImpl#getRecordField()
+	 * @generated
+	 */
+	int RECORD_FIELD = 22;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RECORD_FIELD__TYPE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RECORD_FIELD__NAME = 1;
+
+	/**
+	 * The number of structural features of the '<em>Record Field</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RECORD_FIELD_FEATURE_COUNT = 2;
+
+	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.typesystem.OperatorKind <em>Operator Kind</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1250,7 +1342,7 @@ public interface TypeSystemPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemPackageImpl#getOperatorKind()
 	 * @generated
 	 */
-	int OPERATOR_KIND = 21;
+	int OPERATOR_KIND = 23;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.typesystem.UnitSymbol <em>Unit Symbol</em>}' enum.
@@ -1260,7 +1352,7 @@ public interface TypeSystemPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemPackageImpl#getUnitSymbol()
 	 * @generated
 	 */
-	int UNIT_SYMBOL = 22;
+	int UNIT_SYMBOL = 24;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipselabs.mscript.typesystem.Type <em>Type</em>}'.
@@ -1759,6 +1851,59 @@ public interface TypeSystemPackage extends EPackage {
 	EAttribute getTensorType_Matrix();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipselabs.mscript.typesystem.Record <em>Record</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Record</em>'.
+	 * @see org.eclipselabs.mscript.typesystem.Record
+	 * @generated
+	 */
+	EClass getRecord();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.typesystem.Record#getFields <em>Fields</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Fields</em>'.
+	 * @see org.eclipselabs.mscript.typesystem.Record#getFields()
+	 * @see #getRecord()
+	 * @generated
+	 */
+	EReference getRecord_Fields();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipselabs.mscript.typesystem.RecordField <em>Record Field</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Record Field</em>'.
+	 * @see org.eclipselabs.mscript.typesystem.RecordField
+	 * @generated
+	 */
+	EClass getRecordField();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipselabs.mscript.typesystem.RecordField#getType <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Type</em>'.
+	 * @see org.eclipselabs.mscript.typesystem.RecordField#getType()
+	 * @see #getRecordField()
+	 * @generated
+	 */
+	EReference getRecordField_Type();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.typesystem.RecordField#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.eclipselabs.mscript.typesystem.RecordField#getName()
+	 * @see #getRecordField()
+	 * @generated
+	 */
+	EAttribute getRecordField_Name();
+
+	/**
 	 * Returns the meta object for enum '{@link org.eclipselabs.mscript.typesystem.OperatorKind <em>Operator Kind</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2217,6 +2362,50 @@ public interface TypeSystemPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute TENSOR_TYPE__MATRIX = eINSTANCE.getTensorType_Matrix();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipselabs.mscript.typesystem.impl.RecordImpl <em>Record</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipselabs.mscript.typesystem.impl.RecordImpl
+		 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemPackageImpl#getRecord()
+		 * @generated
+		 */
+		EClass RECORD = eINSTANCE.getRecord();
+
+		/**
+		 * The meta object literal for the '<em><b>Fields</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference RECORD__FIELDS = eINSTANCE.getRecord_Fields();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipselabs.mscript.typesystem.impl.RecordFieldImpl <em>Record Field</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipselabs.mscript.typesystem.impl.RecordFieldImpl
+		 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemPackageImpl#getRecordField()
+		 * @generated
+		 */
+		EClass RECORD_FIELD = eINSTANCE.getRecordField();
+
+		/**
+		 * The meta object literal for the '<em><b>Type</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference RECORD_FIELD__TYPE = eINSTANCE.getRecordField_Type();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute RECORD_FIELD__NAME = eINSTANCE.getRecordField_Name();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipselabs.mscript.typesystem.OperatorKind <em>Operator Kind</em>}' enum.

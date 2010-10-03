@@ -152,6 +152,24 @@ public interface TypeSystemFactory extends EFactory {
 	TensorType createTensorType();
 
 	/**
+	 * Returns a new object of class '<em>Record</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Record</em>'.
+	 * @generated
+	 */
+	Record createRecord();
+
+	/**
+	 * Returns a new object of class '<em>Record Field</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Record Field</em>'.
+	 * @generated
+	 */
+	RecordField createRecordField();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

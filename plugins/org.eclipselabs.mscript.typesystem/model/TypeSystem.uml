@@ -322,6 +322,28 @@
     <packagedElement xmi:type="uml:Association" xmi:id="_VX4zYLHnEd-9gfyiGzgI9g" memberEnd="_VX5acLHnEd-9gfyiGzgI9g _Hu3Y8LHnEd-9gfyiGzgI9g">
       <ownedEnd xmi:id="_VX5acLHnEd-9gfyiGzgI9g" type="_DP8MALHmEd-9gfyiGzgI9g" association="_VX4zYLHnEd-9gfyiGzgI9g"/>
     </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_3NshoM3-Ed-06tH_5Us_6Q" name="Record">
+      <generalization xmi:id="_jO6ScM4TEd-06tH_5Us_6Q" general="_FfGmwH3nEd-EWvFDOLE-rQ"/>
+      <ownedAttribute xmi:id="_k6hfsM4TEd-06tH_5Us_6Q" name="fields" type="_dn-fIM4TEd-06tH_5Us_6Q" isOrdered="true" aggregation="composite" association="_o8DbcM4TEd-06tH_5Us_6Q">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_D7yGYM4WEd-06tH_5Us_6Q" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_D70ioM4WEd-06tH_5Us_6Q" value="1"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_dn-fIM4TEd-06tH_5Us_6Q" name="RecordField">
+      <ownedAttribute xmi:id="_rLwNMM4TEd-06tH_5Us_6Q" name="type" type="_FfGmwH3nEd-EWvFDOLE-rQ" association="_nj8jkM4UEd-06tH_5Us_6Q"/>
+      <ownedAttribute xmi:id="_ySiCoM4TEd-06tH_5Us_6Q" name="name" aggregation="composite">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_o8DbcM4TEd-06tH_5Us_6Q" memberEnd="_o8ECgM4TEd-06tH_5Us_6Q _k6hfsM4TEd-06tH_5Us_6Q">
+      <ownedEnd xmi:id="_o8ECgM4TEd-06tH_5Us_6Q" type="_3NshoM3-Ed-06tH_5Us_6Q" association="_o8DbcM4TEd-06tH_5Us_6Q"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_nj8jkM4UEd-06tH_5Us_6Q" memberEnd="_nj9xsM4UEd-06tH_5Us_6Q _rLwNMM4TEd-06tH_5Us_6Q">
+      <ownedEnd xmi:id="_nj9xsM4UEd-06tH_5Us_6Q" type="_dn-fIM4TEd-06tH_5Us_6Q" association="_nj8jkM4UEd-06tH_5Us_6Q"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_MRUIwM4oEd-06tH_5Us_6Q" name="UnitType">
+      <generalization xmi:id="_S5QGEM4oEd-06tH_5Us_6Q" general="_WcuYwHGiEd-Vr_LfGhknIQ"/>
+    </packagedElement>
     <profileApplication xmi:id="_DbDeoHGiEd-Vr_LfGhknIQ">
       <eAnnotations xmi:id="_DbI-MHGiEd-Vr_LfGhknIQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
         <references xmi:type="ecore:EPackage" href="pathmap://UML_PROFILES/Ecore.profile.uml#_z1OFcHjqEdy8S4Cr8Rc_NA"/>

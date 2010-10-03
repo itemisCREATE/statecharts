@@ -15,7 +15,6 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getReturnType <em>Return Type</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getParameters <em>Parameters</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getBody <em>Body</em>}</li>
@@ -28,32 +27,6 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface FunctionDefinition extends PackageDefinitionElement
 {
-  /**
-   * Returns the value of the '<em><b>Return Type</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Return Type</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Return Type</em>' containment reference.
-   * @see #setReturnType(DataTypeSpecifier)
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getFunctionDefinition_ReturnType()
-   * @model containment="true"
-   * @generated
-   */
-  DataTypeSpecifier getReturnType();
-
-  /**
-   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getReturnType <em>Return Type</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Return Type</em>' containment reference.
-   * @see #getReturnType()
-   * @generated
-   */
-  void setReturnType(DataTypeSpecifier value);
-
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->

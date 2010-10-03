@@ -24,6 +24,8 @@ import org.eclipselabs.mscript.typesystem.NumericalType;
 import org.eclipselabs.mscript.typesystem.PackageableElement;
 import org.eclipselabs.mscript.typesystem.PrimitiveType;
 import org.eclipselabs.mscript.typesystem.RealType;
+import org.eclipselabs.mscript.typesystem.Record;
+import org.eclipselabs.mscript.typesystem.RecordField;
 import org.eclipselabs.mscript.typesystem.StringType;
 import org.eclipselabs.mscript.typesystem.TensorType;
 import org.eclipselabs.mscript.typesystem.Type;
@@ -289,6 +291,22 @@ public class TypeSystemSwitch<T> {
 				if (result == null) result = caseType(tensorType);
 				if (result == null) result = casePackageableElement(tensorType);
 				if (result == null) result = caseNamedElement(tensorType);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TypeSystemPackage.RECORD: {
+				Record record = (Record)theEObject;
+				T result = caseRecord(record);
+				if (result == null) result = caseDataType(record);
+				if (result == null) result = caseType(record);
+				if (result == null) result = casePackageableElement(record);
+				if (result == null) result = caseNamedElement(record);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TypeSystemPackage.RECORD_FIELD: {
+				RecordField recordField = (RecordField)theEObject;
+				T result = caseRecordField(recordField);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -608,6 +626,36 @@ public class TypeSystemSwitch<T> {
 	 * @generated
 	 */
 	public T caseTensorType(TensorType object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Record</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Record</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRecord(Record object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Record Field</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Record Field</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRecordField(RecordField object) {
 		return null;
 	}
 

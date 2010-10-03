@@ -73,10 +73,14 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
       case AstPackage.PACKAGE_DEFINITION_ELEMENT: return createPackageDefinitionElement();
       case AstPackage.ENUMERATION_DEFINITION: return createEnumerationDefinition();
       case AstPackage.ENUMERATION_LITERAL_DECLARATION: return createEnumerationLiteralDeclaration();
+      case AstPackage.RECORD_DEFINITION: return createRecordDefinition();
+      case AstPackage.RECORD_FIELD_DECLARATION: return createRecordFieldDeclaration();
+      case AstPackage.RECORD_FIELD_DECLARATION_ITEM: return createRecordFieldDeclarationItem();
       case AstPackage.FUNCTION_DEFINITION: return createFunctionDefinition();
       case AstPackage.PARAMETER_DECLARATION: return createParameterDeclaration();
       case AstPackage.STATEMENT: return createStatement();
       case AstPackage.BLOCK: return createBlock();
+      case AstPackage.CHECK_STATEMENT: return createCheckStatement();
       case AstPackage.FEATURE_CALL_STATEMENT: return createFeatureCallStatement();
       case AstPackage.IF_STATEMENT: return createIfStatement();
       case AstPackage.IF_CASE: return createIfCase();
@@ -86,6 +90,7 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
       case AstPackage.VARIABLE_DECLARATION: return createVariableDeclaration();
       case AstPackage.VARIABLE_DECLARATION_ITEM: return createVariableDeclarationItem();
       case AstPackage.RETURN_STATEMENT: return createReturnStatement();
+      case AstPackage.VALUE_TYPE_SPECIFIER: return createValueTypeSpecifier();
       case AstPackage.DATA_TYPE_SPECIFIER: return createDataTypeSpecifier();
       case AstPackage.PRIMITIVE_TYPE_SPECIFIER: return createPrimitiveTypeSpecifier();
       case AstPackage.NUMERICAL_TYPE_SPECIFIER: return createNumericalTypeSpecifier();
@@ -95,6 +100,7 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
       case AstPackage.GAUSSIAN_TYPE_SPECIFIER: return createGaussianTypeSpecifier();
       case AstPackage.BOOLEAN_TYPE_SPECIFIER: return createBooleanTypeSpecifier();
       case AstPackage.STRING_TYPE_SPECIFIER: return createStringTypeSpecifier();
+      case AstPackage.UNIT_TYPE_SPECIFIER: return createUnitTypeSpecifier();
       case AstPackage.NAMED_TYPE_SPECIFIER: return createNamedTypeSpecifier();
       case AstPackage.EXPRESSION: return createExpression();
       case AstPackage.CONDITIONAL_EXPRESSION: return createConditionalExpression();
@@ -116,6 +122,7 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
       case AstPackage.EXPRESSION_SUBSCRIPT: return createExpressionSubscript();
       case AstPackage.MATRIX_CONSTRUCTION_OPERATOR: return createMatrixConstructionOperator();
       case AstPackage.EXPRESSION_LIST: return createExpressionList();
+      case AstPackage.UNIT_CONSTRUCTION_OPERATOR: return createUnitConstructionOperator();
       case AstPackage.PARENTHESIZED_EXPRESSION: return createParenthesizedExpression();
       case AstPackage.BEGIN_EXPRESSION: return createBeginExpression();
       case AstPackage.END_EXPRESSION: return createEndExpression();
@@ -248,6 +255,39 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  public RecordDefinition createRecordDefinition()
+  {
+    RecordDefinitionImpl recordDefinition = new RecordDefinitionImpl();
+    return recordDefinition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public RecordFieldDeclaration createRecordFieldDeclaration()
+  {
+    RecordFieldDeclarationImpl recordFieldDeclaration = new RecordFieldDeclarationImpl();
+    return recordFieldDeclaration;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public RecordFieldDeclarationItem createRecordFieldDeclarationItem()
+  {
+    RecordFieldDeclarationItemImpl recordFieldDeclarationItem = new RecordFieldDeclarationItemImpl();
+    return recordFieldDeclarationItem;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public FunctionDefinition createFunctionDefinition()
   {
     FunctionDefinitionImpl functionDefinition = new FunctionDefinitionImpl();
@@ -285,6 +325,17 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
   {
     BlockImpl block = new BlockImpl();
     return block;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public CheckStatement createCheckStatement()
+  {
+    CheckStatementImpl checkStatement = new CheckStatementImpl();
+    return checkStatement;
   }
 
   /**
@@ -391,6 +442,17 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  public ValueTypeSpecifier createValueTypeSpecifier()
+  {
+    ValueTypeSpecifierImpl valueTypeSpecifier = new ValueTypeSpecifierImpl();
+    return valueTypeSpecifier;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public DataTypeSpecifier createDataTypeSpecifier()
   {
     DataTypeSpecifierImpl dataTypeSpecifier = new DataTypeSpecifierImpl();
@@ -483,6 +545,17 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
   {
     StringTypeSpecifierImpl stringTypeSpecifier = new StringTypeSpecifierImpl();
     return stringTypeSpecifier;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public UnitTypeSpecifier createUnitTypeSpecifier()
+  {
+    UnitTypeSpecifierImpl unitTypeSpecifier = new UnitTypeSpecifierImpl();
+    return unitTypeSpecifier;
   }
 
   /**
@@ -714,6 +787,17 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
   {
     ExpressionListImpl expressionList = new ExpressionListImpl();
     return expressionList;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public UnitConstructionOperator createUnitConstructionOperator()
+  {
+    UnitConstructionOperatorImpl unitConstructionOperator = new UnitConstructionOperatorImpl();
+    return unitConstructionOperator;
   }
 
   /**

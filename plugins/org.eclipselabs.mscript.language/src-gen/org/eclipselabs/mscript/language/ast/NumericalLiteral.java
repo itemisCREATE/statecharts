@@ -14,7 +14,7 @@ package org.eclipselabs.mscript.language.ast;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.NumericalLiteral#isComplex <em>Complex</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.NumericalLiteral#isImaginary <em>Imaginary</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.NumericalLiteral#getUnit <em>Unit</em>}</li>
  * </ul>
  * </p>
@@ -26,30 +26,30 @@ package org.eclipselabs.mscript.language.ast;
 public interface NumericalLiteral extends Literal
 {
   /**
-   * Returns the value of the '<em><b>Complex</b></em>' attribute.
+   * Returns the value of the '<em><b>Imaginary</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Complex</em>' attribute isn't clear,
+   * If the meaning of the '<em>Imaginary</em>' attribute isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Complex</em>' attribute.
-   * @see #setComplex(boolean)
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getNumericalLiteral_Complex()
+   * @return the value of the '<em>Imaginary</em>' attribute.
+   * @see #setImaginary(boolean)
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getNumericalLiteral_Imaginary()
    * @model
    * @generated
    */
-  boolean isComplex();
+  boolean isImaginary();
 
   /**
-   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.NumericalLiteral#isComplex <em>Complex</em>}' attribute.
+   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.NumericalLiteral#isImaginary <em>Imaginary</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Complex</em>' attribute.
-   * @see #isComplex()
+   * @param value the new value of the '<em>Imaginary</em>' attribute.
+   * @see #isImaginary()
    * @generated
    */
-  void setComplex(boolean value);
+  void setImaginary(boolean value);
 
   /**
    * Returns the value of the '<em><b>Unit</b></em>' containment reference.

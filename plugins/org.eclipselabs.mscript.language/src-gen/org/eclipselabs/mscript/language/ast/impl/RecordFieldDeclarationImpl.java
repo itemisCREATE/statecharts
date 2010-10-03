@@ -16,30 +16,31 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipselabs.mscript.language.ast.AstPackage;
-import org.eclipselabs.mscript.language.ast.ValueTypeSpecifier;
-import org.eclipselabs.mscript.language.ast.VariableDeclaration;
-import org.eclipselabs.mscript.language.ast.VariableDeclarationItem;
+import org.eclipselabs.mscript.language.ast.DataTypeSpecifier;
+import org.eclipselabs.mscript.language.ast.RecordFieldDeclaration;
+import org.eclipselabs.mscript.language.ast.RecordFieldDeclarationItem;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Variable Declaration</b></em>'.
+ * An implementation of the model object '<em><b>Record Field Declaration</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.VariableDeclarationImpl#getType <em>Type</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.VariableDeclarationImpl#getItems <em>Items</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.RecordFieldDeclarationImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.RecordFieldDeclarationImpl#getItems <em>Items</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class VariableDeclarationImpl extends PackageDefinitionElementImpl implements VariableDeclaration
+public class RecordFieldDeclarationImpl extends MinimalEObjectImpl.Container implements RecordFieldDeclaration
 {
   /**
    * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
@@ -49,7 +50,7 @@ public class VariableDeclarationImpl extends PackageDefinitionElementImpl implem
    * @generated
    * @ordered
    */
-  protected ValueTypeSpecifier type;
+  protected DataTypeSpecifier type;
 
   /**
    * The cached value of the '{@link #getItems() <em>Items</em>}' containment reference list.
@@ -59,14 +60,14 @@ public class VariableDeclarationImpl extends PackageDefinitionElementImpl implem
    * @generated
    * @ordered
    */
-  protected EList<VariableDeclarationItem> items;
+  protected EList<RecordFieldDeclarationItem> items;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected VariableDeclarationImpl()
+  protected RecordFieldDeclarationImpl()
   {
     super();
   }
@@ -79,7 +80,7 @@ public class VariableDeclarationImpl extends PackageDefinitionElementImpl implem
   @Override
   protected EClass eStaticClass()
   {
-    return AstPackage.Literals.VARIABLE_DECLARATION;
+    return AstPackage.Literals.RECORD_FIELD_DECLARATION;
   }
 
   /**
@@ -87,7 +88,7 @@ public class VariableDeclarationImpl extends PackageDefinitionElementImpl implem
    * <!-- end-user-doc -->
    * @generated
    */
-  public ValueTypeSpecifier getType()
+  public DataTypeSpecifier getType()
   {
     return type;
   }
@@ -97,13 +98,13 @@ public class VariableDeclarationImpl extends PackageDefinitionElementImpl implem
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetType(ValueTypeSpecifier newType, NotificationChain msgs)
+  public NotificationChain basicSetType(DataTypeSpecifier newType, NotificationChain msgs)
   {
-    ValueTypeSpecifier oldType = type;
+    DataTypeSpecifier oldType = type;
     type = newType;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.VARIABLE_DECLARATION__TYPE, oldType, newType);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.RECORD_FIELD_DECLARATION__TYPE, oldType, newType);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -114,20 +115,20 @@ public class VariableDeclarationImpl extends PackageDefinitionElementImpl implem
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setType(ValueTypeSpecifier newType)
+  public void setType(DataTypeSpecifier newType)
   {
     if (newType != type)
     {
       NotificationChain msgs = null;
       if (type != null)
-        msgs = ((InternalEObject)type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.VARIABLE_DECLARATION__TYPE, null, msgs);
+        msgs = ((InternalEObject)type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.RECORD_FIELD_DECLARATION__TYPE, null, msgs);
       if (newType != null)
-        msgs = ((InternalEObject)newType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.VARIABLE_DECLARATION__TYPE, null, msgs);
+        msgs = ((InternalEObject)newType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.RECORD_FIELD_DECLARATION__TYPE, null, msgs);
       msgs = basicSetType(newType, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.VARIABLE_DECLARATION__TYPE, newType, newType));
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.RECORD_FIELD_DECLARATION__TYPE, newType, newType));
   }
 
   /**
@@ -135,11 +136,11 @@ public class VariableDeclarationImpl extends PackageDefinitionElementImpl implem
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<VariableDeclarationItem> getItems()
+  public EList<RecordFieldDeclarationItem> getItems()
   {
     if (items == null)
     {
-      items = new EObjectContainmentEList<VariableDeclarationItem>(VariableDeclarationItem.class, this, AstPackage.VARIABLE_DECLARATION__ITEMS);
+      items = new EObjectContainmentEList<RecordFieldDeclarationItem>(RecordFieldDeclarationItem.class, this, AstPackage.RECORD_FIELD_DECLARATION__ITEMS);
     }
     return items;
   }
@@ -154,9 +155,9 @@ public class VariableDeclarationImpl extends PackageDefinitionElementImpl implem
   {
     switch (featureID)
     {
-      case AstPackage.VARIABLE_DECLARATION__TYPE:
+      case AstPackage.RECORD_FIELD_DECLARATION__TYPE:
         return basicSetType(null, msgs);
-      case AstPackage.VARIABLE_DECLARATION__ITEMS:
+      case AstPackage.RECORD_FIELD_DECLARATION__ITEMS:
         return ((InternalEList<?>)getItems()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -172,9 +173,9 @@ public class VariableDeclarationImpl extends PackageDefinitionElementImpl implem
   {
     switch (featureID)
     {
-      case AstPackage.VARIABLE_DECLARATION__TYPE:
+      case AstPackage.RECORD_FIELD_DECLARATION__TYPE:
         return getType();
-      case AstPackage.VARIABLE_DECLARATION__ITEMS:
+      case AstPackage.RECORD_FIELD_DECLARATION__ITEMS:
         return getItems();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -191,12 +192,12 @@ public class VariableDeclarationImpl extends PackageDefinitionElementImpl implem
   {
     switch (featureID)
     {
-      case AstPackage.VARIABLE_DECLARATION__TYPE:
-        setType((ValueTypeSpecifier)newValue);
+      case AstPackage.RECORD_FIELD_DECLARATION__TYPE:
+        setType((DataTypeSpecifier)newValue);
         return;
-      case AstPackage.VARIABLE_DECLARATION__ITEMS:
+      case AstPackage.RECORD_FIELD_DECLARATION__ITEMS:
         getItems().clear();
-        getItems().addAll((Collection<? extends VariableDeclarationItem>)newValue);
+        getItems().addAll((Collection<? extends RecordFieldDeclarationItem>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -212,10 +213,10 @@ public class VariableDeclarationImpl extends PackageDefinitionElementImpl implem
   {
     switch (featureID)
     {
-      case AstPackage.VARIABLE_DECLARATION__TYPE:
-        setType((ValueTypeSpecifier)null);
+      case AstPackage.RECORD_FIELD_DECLARATION__TYPE:
+        setType((DataTypeSpecifier)null);
         return;
-      case AstPackage.VARIABLE_DECLARATION__ITEMS:
+      case AstPackage.RECORD_FIELD_DECLARATION__ITEMS:
         getItems().clear();
         return;
     }
@@ -232,12 +233,12 @@ public class VariableDeclarationImpl extends PackageDefinitionElementImpl implem
   {
     switch (featureID)
     {
-      case AstPackage.VARIABLE_DECLARATION__TYPE:
+      case AstPackage.RECORD_FIELD_DECLARATION__TYPE:
         return type != null;
-      case AstPackage.VARIABLE_DECLARATION__ITEMS:
+      case AstPackage.RECORD_FIELD_DECLARATION__ITEMS:
         return items != null && !items.isEmpty();
     }
     return super.eIsSet(featureID);
   }
 
-} //VariableDeclarationImpl
+} //RecordFieldDeclarationImpl

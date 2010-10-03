@@ -21,6 +21,8 @@ import org.eclipselabs.mscript.typesystem.IntegerType;
 import org.eclipselabs.mscript.typesystem.InvalidDataType;
 import org.eclipselabs.mscript.typesystem.OperatorKind;
 import org.eclipselabs.mscript.typesystem.RealType;
+import org.eclipselabs.mscript.typesystem.Record;
+import org.eclipselabs.mscript.typesystem.RecordField;
 import org.eclipselabs.mscript.typesystem.StringType;
 import org.eclipselabs.mscript.typesystem.TensorType;
 import org.eclipselabs.mscript.typesystem.TypeSystem;
@@ -88,6 +90,8 @@ public class TypeSystemFactoryImpl extends EFactoryImpl implements TypeSystemFac
 			case TypeSystemPackage.TYPE_SYSTEM: return createTypeSystem();
 			case TypeSystemPackage.PACKAGE: return createPackage();
 			case TypeSystemPackage.TENSOR_TYPE: return createTensorType();
+			case TypeSystemPackage.RECORD: return createRecord();
+			case TypeSystemPackage.RECORD_FIELD: return createRecordField();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -265,6 +269,26 @@ public class TypeSystemFactoryImpl extends EFactoryImpl implements TypeSystemFac
 	public TensorType createTensorType() {
 		TensorTypeImpl tensorType = new TensorTypeImpl();
 		return tensorType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Record createRecord() {
+		RecordImpl record = new RecordImpl();
+		return record;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public RecordField createRecordField() {
+		RecordFieldImpl recordField = new RecordFieldImpl();
+		return recordField;
 	}
 
 	/**

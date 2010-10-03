@@ -71,6 +71,33 @@ public interface AstFactory extends EFactory
   EnumerationLiteralDeclaration createEnumerationLiteralDeclaration();
 
   /**
+   * Returns a new object of class '<em>Record Definition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Record Definition</em>'.
+   * @generated
+   */
+  RecordDefinition createRecordDefinition();
+
+  /**
+   * Returns a new object of class '<em>Record Field Declaration</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Record Field Declaration</em>'.
+   * @generated
+   */
+  RecordFieldDeclaration createRecordFieldDeclaration();
+
+  /**
+   * Returns a new object of class '<em>Record Field Declaration Item</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Record Field Declaration Item</em>'.
+   * @generated
+   */
+  RecordFieldDeclarationItem createRecordFieldDeclarationItem();
+
+  /**
    * Returns a new object of class '<em>Function Definition</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -105,6 +132,15 @@ public interface AstFactory extends EFactory
    * @generated
    */
   Block createBlock();
+
+  /**
+   * Returns a new object of class '<em>Check Statement</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Check Statement</em>'.
+   * @generated
+   */
+  CheckStatement createCheckStatement();
 
   /**
    * Returns a new object of class '<em>Feature Call Statement</em>'.
@@ -188,6 +224,15 @@ public interface AstFactory extends EFactory
   ReturnStatement createReturnStatement();
 
   /**
+   * Returns a new object of class '<em>Value Type Specifier</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Value Type Specifier</em>'.
+   * @generated
+   */
+  ValueTypeSpecifier createValueTypeSpecifier();
+
+  /**
    * Returns a new object of class '<em>Data Type Specifier</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -267,6 +312,15 @@ public interface AstFactory extends EFactory
    * @generated
    */
   StringTypeSpecifier createStringTypeSpecifier();
+
+  /**
+   * Returns a new object of class '<em>Unit Type Specifier</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Unit Type Specifier</em>'.
+   * @generated
+   */
+  UnitTypeSpecifier createUnitTypeSpecifier();
 
   /**
    * Returns a new object of class '<em>Named Type Specifier</em>'.
@@ -456,6 +510,15 @@ public interface AstFactory extends EFactory
    * @generated
    */
   ExpressionList createExpressionList();
+
+  /**
+   * Returns a new object of class '<em>Unit Construction Operator</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Unit Construction Operator</em>'.
+   * @generated
+   */
+  UnitConstructionOperator createUnitConstructionOperator();
 
   /**
    * Returns a new object of class '<em>Parenthesized Expression</em>'.

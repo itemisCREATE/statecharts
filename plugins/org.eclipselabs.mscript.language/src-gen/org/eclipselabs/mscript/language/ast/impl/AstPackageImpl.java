@@ -23,6 +23,7 @@ import org.eclipselabs.mscript.language.ast.Block;
 import org.eclipselabs.mscript.language.ast.BooleanKind;
 import org.eclipselabs.mscript.language.ast.BooleanLiteral;
 import org.eclipselabs.mscript.language.ast.BooleanTypeSpecifier;
+import org.eclipselabs.mscript.language.ast.CheckStatement;
 import org.eclipselabs.mscript.language.ast.ColonSubscript;
 import org.eclipselabs.mscript.language.ast.ComplexTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.ComponentReference;
@@ -68,6 +69,9 @@ import org.eclipselabs.mscript.language.ast.QualifiedName;
 import org.eclipselabs.mscript.language.ast.RangeExpression;
 import org.eclipselabs.mscript.language.ast.RealLiteral;
 import org.eclipselabs.mscript.language.ast.RealTypeSpecifier;
+import org.eclipselabs.mscript.language.ast.RecordDefinition;
+import org.eclipselabs.mscript.language.ast.RecordFieldDeclaration;
+import org.eclipselabs.mscript.language.ast.RecordFieldDeclarationItem;
 import org.eclipselabs.mscript.language.ast.RelationalExpression;
 import org.eclipselabs.mscript.language.ast.RelationalOperator;
 import org.eclipselabs.mscript.language.ast.ReturnStatement;
@@ -77,11 +81,14 @@ import org.eclipselabs.mscript.language.ast.StringTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.Subscript;
 import org.eclipselabs.mscript.language.ast.SymbolReference;
 import org.eclipselabs.mscript.language.ast.UnaryMinusExpression;
+import org.eclipselabs.mscript.language.ast.UnitConstructionOperator;
 import org.eclipselabs.mscript.language.ast.UnitExpression;
 import org.eclipselabs.mscript.language.ast.UnitExpressionDenominator;
 import org.eclipselabs.mscript.language.ast.UnitExpressionExponent;
 import org.eclipselabs.mscript.language.ast.UnitExpressionFactor;
 import org.eclipselabs.mscript.language.ast.UnitExpressionNumerator;
+import org.eclipselabs.mscript.language.ast.UnitTypeSpecifier;
+import org.eclipselabs.mscript.language.ast.ValueTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.VariableDeclaration;
 import org.eclipselabs.mscript.language.ast.VariableDeclarationItem;
 import org.eclipselabs.mscript.language.ast.WhileStatement;
@@ -134,6 +141,27 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass recordDefinitionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass recordFieldDeclarationEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass recordFieldDeclarationItemEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass functionDefinitionEClass = null;
 
   /**
@@ -156,6 +184,13 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * @generated
    */
   private EClass blockEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass checkStatementEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -225,6 +260,13 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass valueTypeSpecifierEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass dataTypeSpecifierEClass = null;
 
   /**
@@ -282,6 +324,13 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * @generated
    */
   private EClass stringTypeSpecifierEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass unitTypeSpecifierEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -429,6 +478,13 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * @generated
    */
   private EClass expressionListEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass unitConstructionOperatorEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -762,6 +818,86 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getRecordDefinition()
+  {
+    return recordDefinitionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getRecordDefinition_Name()
+  {
+    return (EAttribute)recordDefinitionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getRecordDefinition_Fields()
+  {
+    return (EReference)recordDefinitionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getRecordFieldDeclaration()
+  {
+    return recordFieldDeclarationEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getRecordFieldDeclaration_Type()
+  {
+    return (EReference)recordFieldDeclarationEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getRecordFieldDeclaration_Items()
+  {
+    return (EReference)recordFieldDeclarationEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getRecordFieldDeclarationItem()
+  {
+    return recordFieldDeclarationItemEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getRecordFieldDeclarationItem_Name()
+  {
+    return (EAttribute)recordFieldDeclarationItemEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getFunctionDefinition()
   {
     return functionDefinitionEClass;
@@ -772,19 +908,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getFunctionDefinition_ReturnType()
-  {
-    return (EReference)functionDefinitionEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EAttribute getFunctionDefinition_Name()
   {
-    return (EAttribute)functionDefinitionEClass.getEStructuralFeatures().get(1);
+    return (EAttribute)functionDefinitionEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -794,7 +920,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    */
   public EReference getFunctionDefinition_Parameters()
   {
-    return (EReference)functionDefinitionEClass.getEStructuralFeatures().get(2);
+    return (EReference)functionDefinitionEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -804,7 +930,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    */
   public EReference getFunctionDefinition_Body()
   {
-    return (EReference)functionDefinitionEClass.getEStructuralFeatures().get(3);
+    return (EReference)functionDefinitionEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -875,6 +1001,26 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
   public EReference getBlock_Statements()
   {
     return (EReference)blockEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getCheckStatement()
+  {
+    return checkStatementEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getCheckStatement_Body()
+  {
+    return (EReference)checkStatementEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1162,6 +1308,16 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getValueTypeSpecifier()
+  {
+    return valueTypeSpecifierEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getDataTypeSpecifier()
   {
     return dataTypeSpecifierEClass;
@@ -1255,6 +1411,16 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
   public EClass getStringTypeSpecifier()
   {
     return stringTypeSpecifierEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getUnitTypeSpecifier()
+  {
+    return unitTypeSpecifierEClass;
   }
 
   /**
@@ -1372,7 +1538,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getNumericalLiteral_Complex()
+  public EAttribute getNumericalLiteral_Imaginary()
   {
     return (EAttribute)numericalLiteralEClass.getEStructuralFeatures().get(0);
   }
@@ -1702,6 +1868,26 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getUnitConstructionOperator()
+  {
+    return unitConstructionOperatorEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getUnitConstructionOperator_UnitExpression()
+  {
+    return (EReference)unitConstructionOperatorEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getParenthesizedExpression()
   {
     return parenthesizedExpressionEClass;
@@ -1752,9 +1938,29 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getUnitExpression_Unspecified()
+  {
+    return (EAttribute)unitExpressionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getUnitExpression_Expression()
+  {
+    return (EReference)unitExpressionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EReference getUnitExpression_Numerator()
   {
-    return (EReference)unitExpressionEClass.getEStructuralFeatures().get(0);
+    return (EReference)unitExpressionEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -1764,7 +1970,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    */
   public EReference getUnitExpression_Denominator()
   {
-    return (EReference)unitExpressionEClass.getEStructuralFeatures().get(1);
+    return (EReference)unitExpressionEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -2203,8 +2409,18 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     enumerationLiteralDeclarationEClass = createEClass(ENUMERATION_LITERAL_DECLARATION);
     createEAttribute(enumerationLiteralDeclarationEClass, ENUMERATION_LITERAL_DECLARATION__NAME);
 
+    recordDefinitionEClass = createEClass(RECORD_DEFINITION);
+    createEAttribute(recordDefinitionEClass, RECORD_DEFINITION__NAME);
+    createEReference(recordDefinitionEClass, RECORD_DEFINITION__FIELDS);
+
+    recordFieldDeclarationEClass = createEClass(RECORD_FIELD_DECLARATION);
+    createEReference(recordFieldDeclarationEClass, RECORD_FIELD_DECLARATION__TYPE);
+    createEReference(recordFieldDeclarationEClass, RECORD_FIELD_DECLARATION__ITEMS);
+
+    recordFieldDeclarationItemEClass = createEClass(RECORD_FIELD_DECLARATION_ITEM);
+    createEAttribute(recordFieldDeclarationItemEClass, RECORD_FIELD_DECLARATION_ITEM__NAME);
+
     functionDefinitionEClass = createEClass(FUNCTION_DEFINITION);
-    createEReference(functionDefinitionEClass, FUNCTION_DEFINITION__RETURN_TYPE);
     createEAttribute(functionDefinitionEClass, FUNCTION_DEFINITION__NAME);
     createEReference(functionDefinitionEClass, FUNCTION_DEFINITION__PARAMETERS);
     createEReference(functionDefinitionEClass, FUNCTION_DEFINITION__BODY);
@@ -2218,6 +2434,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
 
     blockEClass = createEClass(BLOCK);
     createEReference(blockEClass, BLOCK__STATEMENTS);
+
+    checkStatementEClass = createEClass(CHECK_STATEMENT);
+    createEReference(checkStatementEClass, CHECK_STATEMENT__BODY);
 
     featureCallStatementEClass = createEClass(FEATURE_CALL_STATEMENT);
     createEReference(featureCallStatementEClass, FEATURE_CALL_STATEMENT__FEATURE_CALL);
@@ -2256,6 +2475,8 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     returnStatementEClass = createEClass(RETURN_STATEMENT);
     createEReference(returnStatementEClass, RETURN_STATEMENT__VALUE);
 
+    valueTypeSpecifierEClass = createEClass(VALUE_TYPE_SPECIFIER);
+
     dataTypeSpecifierEClass = createEClass(DATA_TYPE_SPECIFIER);
 
     primitiveTypeSpecifierEClass = createEClass(PRIMITIVE_TYPE_SPECIFIER);
@@ -2275,6 +2496,8 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
 
     stringTypeSpecifierEClass = createEClass(STRING_TYPE_SPECIFIER);
 
+    unitTypeSpecifierEClass = createEClass(UNIT_TYPE_SPECIFIER);
+
     namedTypeSpecifierEClass = createEClass(NAMED_TYPE_SPECIFIER);
     createEReference(namedTypeSpecifierEClass, NAMED_TYPE_SPECIFIER__TYPE_REFERENCE);
 
@@ -2291,7 +2514,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     literalEClass = createEClass(LITERAL);
 
     numericalLiteralEClass = createEClass(NUMERICAL_LITERAL);
-    createEAttribute(numericalLiteralEClass, NUMERICAL_LITERAL__COMPLEX);
+    createEAttribute(numericalLiteralEClass, NUMERICAL_LITERAL__IMAGINARY);
     createEReference(numericalLiteralEClass, NUMERICAL_LITERAL__UNIT);
 
     realLiteralEClass = createEClass(REAL_LITERAL);
@@ -2340,6 +2563,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     expressionListEClass = createEClass(EXPRESSION_LIST);
     createEReference(expressionListEClass, EXPRESSION_LIST__EXPRESSIONS);
 
+    unitConstructionOperatorEClass = createEClass(UNIT_CONSTRUCTION_OPERATOR);
+    createEReference(unitConstructionOperatorEClass, UNIT_CONSTRUCTION_OPERATOR__UNIT_EXPRESSION);
+
     parenthesizedExpressionEClass = createEClass(PARENTHESIZED_EXPRESSION);
     createEReference(parenthesizedExpressionEClass, PARENTHESIZED_EXPRESSION__EXPRESSION);
 
@@ -2348,6 +2574,8 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     endExpressionEClass = createEClass(END_EXPRESSION);
 
     unitExpressionEClass = createEClass(UNIT_EXPRESSION);
+    createEAttribute(unitExpressionEClass, UNIT_EXPRESSION__UNSPECIFIED);
+    createEReference(unitExpressionEClass, UNIT_EXPRESSION__EXPRESSION);
     createEReference(unitExpressionEClass, UNIT_EXPRESSION__NUMERATOR);
     createEReference(unitExpressionEClass, UNIT_EXPRESSION__DENOMINATOR);
 
@@ -2437,8 +2665,10 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     // Add supertypes to classes
     packageDefinitionEClass.getESuperTypes().add(this.getPackageDefinitionElement());
     enumerationDefinitionEClass.getESuperTypes().add(this.getPackageDefinitionElement());
+    recordDefinitionEClass.getESuperTypes().add(this.getPackageDefinitionElement());
     functionDefinitionEClass.getESuperTypes().add(this.getPackageDefinitionElement());
     blockEClass.getESuperTypes().add(this.getStatement());
+    checkStatementEClass.getESuperTypes().add(this.getStatement());
     featureCallStatementEClass.getESuperTypes().add(this.getStatement());
     ifStatementEClass.getESuperTypes().add(this.getStatement());
     whileStatementEClass.getESuperTypes().add(this.getStatement());
@@ -2447,6 +2677,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     variableDeclarationEClass.getESuperTypes().add(this.getPackageDefinitionElement());
     variableDeclarationEClass.getESuperTypes().add(this.getStatement());
     returnStatementEClass.getESuperTypes().add(this.getStatement());
+    dataTypeSpecifierEClass.getESuperTypes().add(this.getValueTypeSpecifier());
     primitiveTypeSpecifierEClass.getESuperTypes().add(this.getDataTypeSpecifier());
     numericalTypeSpecifierEClass.getESuperTypes().add(this.getPrimitiveTypeSpecifier());
     realTypeSpecifierEClass.getESuperTypes().add(this.getNumericalTypeSpecifier());
@@ -2455,6 +2686,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     gaussianTypeSpecifierEClass.getESuperTypes().add(this.getNumericalTypeSpecifier());
     booleanTypeSpecifierEClass.getESuperTypes().add(this.getPrimitiveTypeSpecifier());
     stringTypeSpecifierEClass.getESuperTypes().add(this.getPrimitiveTypeSpecifier());
+    unitTypeSpecifierEClass.getESuperTypes().add(this.getValueTypeSpecifier());
     namedTypeSpecifierEClass.getESuperTypes().add(this.getDataTypeSpecifier());
     conditionalExpressionEClass.getESuperTypes().add(this.getExpression());
     literalEClass.getESuperTypes().add(this.getExpression());
@@ -2469,6 +2701,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     colonSubscriptEClass.getESuperTypes().add(this.getSubscript());
     expressionSubscriptEClass.getESuperTypes().add(this.getSubscript());
     matrixConstructionOperatorEClass.getESuperTypes().add(this.getExpression());
+    unitConstructionOperatorEClass.getESuperTypes().add(this.getExpression());
     parenthesizedExpressionEClass.getESuperTypes().add(this.getExpression());
     beginExpressionEClass.getESuperTypes().add(this.getExpression());
     endExpressionEClass.getESuperTypes().add(this.getExpression());
@@ -2499,8 +2732,18 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     initEClass(enumerationLiteralDeclarationEClass, EnumerationLiteralDeclaration.class, "EnumerationLiteralDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEnumerationLiteralDeclaration_Name(), ecorePackage.getEString(), "name", null, 0, 1, EnumerationLiteralDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+    initEClass(recordDefinitionEClass, RecordDefinition.class, "RecordDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getRecordDefinition_Name(), ecorePackage.getEString(), "name", null, 0, 1, RecordDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getRecordDefinition_Fields(), this.getRecordFieldDeclaration(), null, "fields", null, 0, -1, RecordDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(recordFieldDeclarationEClass, RecordFieldDeclaration.class, "RecordFieldDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getRecordFieldDeclaration_Type(), this.getDataTypeSpecifier(), null, "type", null, 0, 1, RecordFieldDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getRecordFieldDeclaration_Items(), this.getRecordFieldDeclarationItem(), null, "items", null, 0, -1, RecordFieldDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(recordFieldDeclarationItemEClass, RecordFieldDeclarationItem.class, "RecordFieldDeclarationItem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getRecordFieldDeclarationItem_Name(), ecorePackage.getEString(), "name", null, 0, 1, RecordFieldDeclarationItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
     initEClass(functionDefinitionEClass, FunctionDefinition.class, "FunctionDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getFunctionDefinition_ReturnType(), this.getDataTypeSpecifier(), null, "returnType", null, 0, 1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getFunctionDefinition_Name(), ecorePackage.getEString(), "name", null, 0, 1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getFunctionDefinition_Parameters(), this.getParameterDeclaration(), null, "parameters", null, 0, -1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getFunctionDefinition_Body(), this.getBlock(), null, "body", null, 0, 1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2514,6 +2757,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
 
     initEClass(blockEClass, Block.class, "Block", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getBlock_Statements(), this.getStatement(), null, "statements", null, 0, -1, Block.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(checkStatementEClass, CheckStatement.class, "CheckStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getCheckStatement_Body(), this.getBlock(), null, "body", null, 0, 1, CheckStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(featureCallStatementEClass, FeatureCallStatement.class, "FeatureCallStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getFeatureCallStatement_FeatureCall(), this.getFeatureCall(), null, "featureCall", null, 0, 1, FeatureCallStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2542,7 +2788,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     initEReference(getForeachStatement_Body(), this.getBlock(), null, "body", null, 0, 1, ForeachStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(variableDeclarationEClass, VariableDeclaration.class, "VariableDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getVariableDeclaration_Type(), this.getDataTypeSpecifier(), null, "type", null, 0, 1, VariableDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getVariableDeclaration_Type(), this.getValueTypeSpecifier(), null, "type", null, 0, 1, VariableDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getVariableDeclaration_Items(), this.getVariableDeclarationItem(), null, "items", null, 0, -1, VariableDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(variableDeclarationItemEClass, VariableDeclarationItem.class, "VariableDeclarationItem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -2551,6 +2797,8 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
 
     initEClass(returnStatementEClass, ReturnStatement.class, "ReturnStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getReturnStatement_Value(), this.getExpression(), null, "value", null, 0, 1, ReturnStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(valueTypeSpecifierEClass, ValueTypeSpecifier.class, "ValueTypeSpecifier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(dataTypeSpecifierEClass, DataTypeSpecifier.class, "DataTypeSpecifier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -2571,6 +2819,8 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
 
     initEClass(stringTypeSpecifierEClass, StringTypeSpecifier.class, "StringTypeSpecifier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
+    initEClass(unitTypeSpecifierEClass, UnitTypeSpecifier.class, "UnitTypeSpecifier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
     initEClass(namedTypeSpecifierEClass, NamedTypeSpecifier.class, "NamedTypeSpecifier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getNamedTypeSpecifier_TypeReference(), this.getSymbolReference(), null, "typeReference", null, 0, 1, NamedTypeSpecifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -2587,7 +2837,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     initEClass(literalEClass, Literal.class, "Literal", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(numericalLiteralEClass, NumericalLiteral.class, "NumericalLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getNumericalLiteral_Complex(), ecorePackage.getEBoolean(), "complex", null, 0, 1, NumericalLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getNumericalLiteral_Imaginary(), ecorePackage.getEBoolean(), "imaginary", null, 0, 1, NumericalLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getNumericalLiteral_Unit(), this.getUnitExpression(), null, "unit", null, 0, 1, NumericalLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(realLiteralEClass, RealLiteral.class, "RealLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -2636,6 +2886,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     initEClass(expressionListEClass, ExpressionList.class, "ExpressionList", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getExpressionList_Expressions(), this.getExpression(), null, "expressions", null, 0, -1, ExpressionList.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+    initEClass(unitConstructionOperatorEClass, UnitConstructionOperator.class, "UnitConstructionOperator", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getUnitConstructionOperator_UnitExpression(), this.getUnitExpression(), null, "unitExpression", null, 0, 1, UnitConstructionOperator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
     initEClass(parenthesizedExpressionEClass, ParenthesizedExpression.class, "ParenthesizedExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getParenthesizedExpression_Expression(), this.getExpression(), null, "expression", null, 0, 1, ParenthesizedExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -2644,6 +2897,8 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     initEClass(endExpressionEClass, EndExpression.class, "EndExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(unitExpressionEClass, UnitExpression.class, "UnitExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getUnitExpression_Unspecified(), ecorePackage.getEBoolean(), "unspecified", null, 0, 1, UnitExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getUnitExpression_Expression(), this.getExpression(), null, "expression", null, 0, 1, UnitExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getUnitExpression_Numerator(), this.getUnitExpressionNumerator(), null, "numerator", null, 0, 1, UnitExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getUnitExpression_Denominator(), this.getUnitExpressionDenominator(), null, "denominator", null, 0, 1, UnitExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

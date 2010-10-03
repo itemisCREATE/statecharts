@@ -24,6 +24,8 @@ import org.eclipselabs.mscript.typesystem.NumericalType;
 import org.eclipselabs.mscript.typesystem.PackageableElement;
 import org.eclipselabs.mscript.typesystem.PrimitiveType;
 import org.eclipselabs.mscript.typesystem.RealType;
+import org.eclipselabs.mscript.typesystem.Record;
+import org.eclipselabs.mscript.typesystem.RecordField;
 import org.eclipselabs.mscript.typesystem.StringType;
 import org.eclipselabs.mscript.typesystem.TensorType;
 import org.eclipselabs.mscript.typesystem.Type;
@@ -171,6 +173,14 @@ public class TypeSystemAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseTensorType(TensorType object) {
 				return createTensorTypeAdapter();
+			}
+			@Override
+			public Adapter caseRecord(Record object) {
+				return createRecordAdapter();
+			}
+			@Override
+			public Adapter caseRecordField(RecordField object) {
+				return createRecordFieldAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -483,6 +493,34 @@ public class TypeSystemAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTensorTypeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.typesystem.Record <em>Record</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipselabs.mscript.typesystem.Record
+	 * @generated
+	 */
+	public Adapter createRecordAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.typesystem.RecordField <em>Record Field</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipselabs.mscript.typesystem.RecordField
+	 * @generated
+	 */
+	public Adapter createRecordFieldAdapter() {
 		return null;
 	}
 
