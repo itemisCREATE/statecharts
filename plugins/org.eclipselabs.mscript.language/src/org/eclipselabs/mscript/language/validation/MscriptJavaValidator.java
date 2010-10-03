@@ -5,13 +5,12 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.validation.Check;
-import org.eclipselabs.mscript.language.ast.ArrayReference;
+import org.eclipselabs.mscript.language.ast.ArrayElementReference;
+import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.BeginExpression;
 import org.eclipselabs.mscript.language.ast.EndExpression;
-import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.Subscript;
 import org.eclipselabs.mscript.language.ast.UnitExpressionNumerator;
-import org.eclipselabs.mscript.language.validation.AbstractMscriptJavaValidator;
 
 public class MscriptJavaValidator extends AbstractMscriptJavaValidator {
 
@@ -115,7 +114,7 @@ public class MscriptJavaValidator extends AbstractMscriptJavaValidator {
 			container = container.eContainer();
 		}
 		
-		return container instanceof Subscript && ((Subscript) container).eContainer() instanceof ArrayReference;
+		return container instanceof Subscript && ((Subscript) container).eContainer() instanceof ArrayElementReference;
 	}
 
 //	@Check

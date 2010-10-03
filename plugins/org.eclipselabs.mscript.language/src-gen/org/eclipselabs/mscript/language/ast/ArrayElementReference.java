@@ -9,21 +9,21 @@ import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Array Reference</b></em>'.
+ * A representation of the model object '<em><b>Array Element Reference</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.ArrayReference#getSubscripts <em>Subscripts</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.ArrayElementReference#getSubscripts <em>Subscripts</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipselabs.mscript.language.ast.AstPackage#getArrayReference()
+ * @see org.eclipselabs.mscript.language.ast.AstPackage#getArrayElementReference()
  * @model
  * @generated
  */
-public interface ArrayReference extends ComponentReference
+public interface ArrayElementReference extends FeatureCallPart
 {
   /**
    * Returns the value of the '<em><b>Subscripts</b></em>' containment reference list.
@@ -35,10 +35,10 @@ public interface ArrayReference extends ComponentReference
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Subscripts</em>' containment reference list.
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getArrayReference_Subscripts()
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getArrayElementReference_Subscripts()
    * @model containment="true"
    * @generated
    */
   EList<Subscript> getSubscripts();
 
-} // ArrayReference
+} // ArrayElementReference

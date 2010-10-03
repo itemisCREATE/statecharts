@@ -12,7 +12,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.QualifiedName;
@@ -32,7 +31,7 @@ import org.eclipselabs.mscript.language.ast.SymbolReference;
  *
  * @generated
  */
-public class SymbolReferenceImpl extends MinimalEObjectImpl.Container implements SymbolReference
+public class SymbolReferenceImpl extends ExpressionImpl implements SymbolReference
 {
   /**
    * The default value of the '{@link #isGlobal() <em>Global</em>}' attribute.

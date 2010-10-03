@@ -35,12 +35,12 @@ public interface FeatureCallStatement extends Statement
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Feature Call</em>' containment reference.
-   * @see #setFeatureCall(FeatureCall)
+   * @see #setFeatureCall(Expression)
    * @see org.eclipselabs.mscript.language.ast.AstPackage#getFeatureCallStatement_FeatureCall()
    * @model containment="true"
    * @generated
    */
-  FeatureCall getFeatureCall();
+  Expression getFeatureCall();
 
   /**
    * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.FeatureCallStatement#getFeatureCall <em>Feature Call</em>}' containment reference.
@@ -50,7 +50,7 @@ public interface FeatureCallStatement extends Statement
    * @see #getFeatureCall()
    * @generated
    */
-  void setFeatureCall(FeatureCall value);
+  void setFeatureCall(Expression value);
 
   /**
    * Returns the value of the '<em><b>Assignment</b></em>' attribute.

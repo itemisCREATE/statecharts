@@ -16,6 +16,6 @@ package org.eclipselabs.mscript.language.ast;
  * @model
  * @generated
  */
-public interface UnitTypeSpecifier extends ValueTypeSpecifier
+public interface UnitTypeSpecifier extends TypeSpecifier
 {
 } // UnitTypeSpecifier

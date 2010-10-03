@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipselabs.mscript.language.ast.AstPackage;
-import org.eclipselabs.mscript.language.ast.ValueTypeSpecifier;
+import org.eclipselabs.mscript.language.ast.TypeSpecifier;
 import org.eclipselabs.mscript.language.ast.VariableDeclaration;
 import org.eclipselabs.mscript.language.ast.VariableDeclarationItem;
 
@@ -32,6 +32,7 @@ import org.eclipselabs.mscript.language.ast.VariableDeclarationItem;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.VariableDeclarationImpl#isConstant <em>Constant</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.VariableDeclarationImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.VariableDeclarationImpl#getItems <em>Items</em>}</li>
  * </ul>
@@ -42,6 +43,26 @@ import org.eclipselabs.mscript.language.ast.VariableDeclarationItem;
 public class VariableDeclarationImpl extends PackageDefinitionElementImpl implements VariableDeclaration
 {
   /**
+   * The default value of the '{@link #isConstant() <em>Constant</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isConstant()
+   * @generated
+   * @ordered
+   */
+  protected static final boolean CONSTANT_EDEFAULT = false;
+
+  /**
+   * The cached value of the '{@link #isConstant() <em>Constant</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isConstant()
+   * @generated
+   * @ordered
+   */
+  protected boolean constant = CONSTANT_EDEFAULT;
+
+  /**
    * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -49,7 +70,7 @@ public class VariableDeclarationImpl extends PackageDefinitionElementImpl implem
    * @generated
    * @ordered
    */
-  protected ValueTypeSpecifier type;
+  protected TypeSpecifier type;
 
   /**
    * The cached value of the '{@link #getItems() <em>Items</em>}' containment reference list.
@@ -87,7 +108,30 @@ public class VariableDeclarationImpl extends PackageDefinitionElementImpl implem
    * <!-- end-user-doc -->
    * @generated
    */
-  public ValueTypeSpecifier getType()
+  public boolean isConstant()
+  {
+    return constant;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setConstant(boolean newConstant)
+  {
+    boolean oldConstant = constant;
+    constant = newConstant;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.VARIABLE_DECLARATION__CONSTANT, oldConstant, constant));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public TypeSpecifier getType()
   {
     return type;
   }
@@ -97,9 +141,9 @@ public class VariableDeclarationImpl extends PackageDefinitionElementImpl implem
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetType(ValueTypeSpecifier newType, NotificationChain msgs)
+  public NotificationChain basicSetType(TypeSpecifier newType, NotificationChain msgs)
   {
-    ValueTypeSpecifier oldType = type;
+    TypeSpecifier oldType = type;
     type = newType;
     if (eNotificationRequired())
     {
@@ -114,7 +158,7 @@ public class VariableDeclarationImpl extends PackageDefinitionElementImpl implem
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setType(ValueTypeSpecifier newType)
+  public void setType(TypeSpecifier newType)
   {
     if (newType != type)
     {
@@ -172,6 +216,8 @@ public class VariableDeclarationImpl extends PackageDefinitionElementImpl implem
   {
     switch (featureID)
     {
+      case AstPackage.VARIABLE_DECLARATION__CONSTANT:
+        return isConstant();
       case AstPackage.VARIABLE_DECLARATION__TYPE:
         return getType();
       case AstPackage.VARIABLE_DECLARATION__ITEMS:
@@ -191,8 +237,11 @@ public class VariableDeclarationImpl extends PackageDefinitionElementImpl implem
   {
     switch (featureID)
     {
+      case AstPackage.VARIABLE_DECLARATION__CONSTANT:
+        setConstant((Boolean)newValue);
+        return;
       case AstPackage.VARIABLE_DECLARATION__TYPE:
-        setType((ValueTypeSpecifier)newValue);
+        setType((TypeSpecifier)newValue);
         return;
       case AstPackage.VARIABLE_DECLARATION__ITEMS:
         getItems().clear();
@@ -212,8 +261,11 @@ public class VariableDeclarationImpl extends PackageDefinitionElementImpl implem
   {
     switch (featureID)
     {
+      case AstPackage.VARIABLE_DECLARATION__CONSTANT:
+        setConstant(CONSTANT_EDEFAULT);
+        return;
       case AstPackage.VARIABLE_DECLARATION__TYPE:
-        setType((ValueTypeSpecifier)null);
+        setType((TypeSpecifier)null);
         return;
       case AstPackage.VARIABLE_DECLARATION__ITEMS:
         getItems().clear();
@@ -232,12 +284,31 @@ public class VariableDeclarationImpl extends PackageDefinitionElementImpl implem
   {
     switch (featureID)
     {
+      case AstPackage.VARIABLE_DECLARATION__CONSTANT:
+        return constant != CONSTANT_EDEFAULT;
       case AstPackage.VARIABLE_DECLARATION__TYPE:
         return type != null;
       case AstPackage.VARIABLE_DECLARATION__ITEMS:
         return items != null && !items.isEmpty();
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (constant: ");
+    result.append(constant);
+    result.append(')');
+    return result.toString();
   }
 
 } //VariableDeclarationImpl

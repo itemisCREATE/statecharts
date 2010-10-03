@@ -90,7 +90,7 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
       case AstPackage.VARIABLE_DECLARATION: return createVariableDeclaration();
       case AstPackage.VARIABLE_DECLARATION_ITEM: return createVariableDeclarationItem();
       case AstPackage.RETURN_STATEMENT: return createReturnStatement();
-      case AstPackage.VALUE_TYPE_SPECIFIER: return createValueTypeSpecifier();
+      case AstPackage.TYPE_SPECIFIER: return createTypeSpecifier();
       case AstPackage.DATA_TYPE_SPECIFIER: return createDataTypeSpecifier();
       case AstPackage.PRIMITIVE_TYPE_SPECIFIER: return createPrimitiveTypeSpecifier();
       case AstPackage.NUMERICAL_TYPE_SPECIFIER: return createNumericalTypeSpecifier();
@@ -105,6 +105,10 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
       case AstPackage.EXPRESSION: return createExpression();
       case AstPackage.CONDITIONAL_EXPRESSION: return createConditionalExpression();
       case AstPackage.CONDITIONAL_EXPRESSION_CASE: return createConditionalExpressionCase();
+      case AstPackage.FEATURE_CALL_PART: return createFeatureCallPart();
+      case AstPackage.FEATURE_REFERENCE: return createFeatureReference();
+      case AstPackage.ARRAY_ELEMENT_REFERENCE: return createArrayElementReference();
+      case AstPackage.OPERATION_CALL: return createOperationCall();
       case AstPackage.LITERAL: return createLiteral();
       case AstPackage.NUMERICAL_LITERAL: return createNumericalLiteral();
       case AstPackage.REAL_LITERAL: return createRealLiteral();
@@ -112,11 +116,7 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
       case AstPackage.BOOLEAN_LITERAL: return createBooleanLiteral();
       case AstPackage.STRING_LITERAL: return createStringLiteral();
       case AstPackage.QUALIFIED_NAME: return createQualifiedName();
-      case AstPackage.FEATURE_CALL: return createFeatureCall();
       case AstPackage.SYMBOL_REFERENCE: return createSymbolReference();
-      case AstPackage.COMPONENT_REFERENCE: return createComponentReference();
-      case AstPackage.ARRAY_REFERENCE: return createArrayReference();
-      case AstPackage.MEMBER_REFERENCE: return createMemberReference();
       case AstPackage.SUBSCRIPT: return createSubscript();
       case AstPackage.COLON_SUBSCRIPT: return createColonSubscript();
       case AstPackage.EXPRESSION_SUBSCRIPT: return createExpressionSubscript();
@@ -140,6 +140,7 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
       case AstPackage.MULTIPLY_DIVIDE_EXPRESSION: return createMultiplyDivideExpression();
       case AstPackage.POWER_EXPRESSION: return createPowerExpression();
       case AstPackage.UNARY_MINUS_EXPRESSION: return createUnaryMinusExpression();
+      case AstPackage.FEATURE_CALL: return createFeatureCall();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -442,10 +443,10 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public ValueTypeSpecifier createValueTypeSpecifier()
+  public TypeSpecifier createTypeSpecifier()
   {
-    ValueTypeSpecifierImpl valueTypeSpecifier = new ValueTypeSpecifierImpl();
-    return valueTypeSpecifier;
+    TypeSpecifierImpl typeSpecifier = new TypeSpecifierImpl();
+    return typeSpecifier;
   }
 
   /**
@@ -607,6 +608,50 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  public FeatureCallPart createFeatureCallPart()
+  {
+    FeatureCallPartImpl featureCallPart = new FeatureCallPartImpl();
+    return featureCallPart;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public FeatureReference createFeatureReference()
+  {
+    FeatureReferenceImpl featureReference = new FeatureReferenceImpl();
+    return featureReference;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ArrayElementReference createArrayElementReference()
+  {
+    ArrayElementReferenceImpl arrayElementReference = new ArrayElementReferenceImpl();
+    return arrayElementReference;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public OperationCall createOperationCall()
+  {
+    OperationCallImpl operationCall = new OperationCallImpl();
+    return operationCall;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public Literal createLiteral()
   {
     LiteralImpl literal = new LiteralImpl();
@@ -684,54 +729,10 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public FeatureCall createFeatureCall()
-  {
-    FeatureCallImpl featureCall = new FeatureCallImpl();
-    return featureCall;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public SymbolReference createSymbolReference()
   {
     SymbolReferenceImpl symbolReference = new SymbolReferenceImpl();
     return symbolReference;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ComponentReference createComponentReference()
-  {
-    ComponentReferenceImpl componentReference = new ComponentReferenceImpl();
-    return componentReference;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ArrayReference createArrayReference()
-  {
-    ArrayReferenceImpl arrayReference = new ArrayReferenceImpl();
-    return arrayReference;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public MemberReference createMemberReference()
-  {
-    MemberReferenceImpl memberReference = new MemberReferenceImpl();
-    return memberReference;
   }
 
   /**
@@ -985,6 +986,17 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
   {
     UnaryMinusExpressionImpl unaryMinusExpression = new UnaryMinusExpressionImpl();
     return unaryMinusExpression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public FeatureCall createFeatureCall()
+  {
+    FeatureCallImpl featureCall = new FeatureCallImpl();
+    return featureCall;
   }
 
   /**

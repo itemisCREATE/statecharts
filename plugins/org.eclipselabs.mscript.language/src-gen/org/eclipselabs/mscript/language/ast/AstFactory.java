@@ -224,13 +224,13 @@ public interface AstFactory extends EFactory
   ReturnStatement createReturnStatement();
 
   /**
-   * Returns a new object of class '<em>Value Type Specifier</em>'.
+   * Returns a new object of class '<em>Type Specifier</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Value Type Specifier</em>'.
+   * @return a new object of class '<em>Type Specifier</em>'.
    * @generated
    */
-  ValueTypeSpecifier createValueTypeSpecifier();
+  TypeSpecifier createTypeSpecifier();
 
   /**
    * Returns a new object of class '<em>Data Type Specifier</em>'.
@@ -359,6 +359,42 @@ public interface AstFactory extends EFactory
   ConditionalExpressionCase createConditionalExpressionCase();
 
   /**
+   * Returns a new object of class '<em>Feature Call Part</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Feature Call Part</em>'.
+   * @generated
+   */
+  FeatureCallPart createFeatureCallPart();
+
+  /**
+   * Returns a new object of class '<em>Feature Reference</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Feature Reference</em>'.
+   * @generated
+   */
+  FeatureReference createFeatureReference();
+
+  /**
+   * Returns a new object of class '<em>Array Element Reference</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Array Element Reference</em>'.
+   * @generated
+   */
+  ArrayElementReference createArrayElementReference();
+
+  /**
+   * Returns a new object of class '<em>Operation Call</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Operation Call</em>'.
+   * @generated
+   */
+  OperationCall createOperationCall();
+
+  /**
    * Returns a new object of class '<em>Literal</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -422,15 +458,6 @@ public interface AstFactory extends EFactory
   QualifiedName createQualifiedName();
 
   /**
-   * Returns a new object of class '<em>Feature Call</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Feature Call</em>'.
-   * @generated
-   */
-  FeatureCall createFeatureCall();
-
-  /**
    * Returns a new object of class '<em>Symbol Reference</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -438,33 +465,6 @@ public interface AstFactory extends EFactory
    * @generated
    */
   SymbolReference createSymbolReference();
-
-  /**
-   * Returns a new object of class '<em>Component Reference</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Component Reference</em>'.
-   * @generated
-   */
-  ComponentReference createComponentReference();
-
-  /**
-   * Returns a new object of class '<em>Array Reference</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Array Reference</em>'.
-   * @generated
-   */
-  ArrayReference createArrayReference();
-
-  /**
-   * Returns a new object of class '<em>Member Reference</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Member Reference</em>'.
-   * @generated
-   */
-  MemberReference createMemberReference();
 
   /**
    * Returns a new object of class '<em>Subscript</em>'.
@@ -672,6 +672,15 @@ public interface AstFactory extends EFactory
    * @generated
    */
   UnaryMinusExpression createUnaryMinusExpression();
+
+  /**
+   * Returns a new object of class '<em>Feature Call</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Feature Call</em>'.
+   * @generated
+   */
+  FeatureCall createFeatureCall();
 
   /**
    * Returns the package supported by this factory.

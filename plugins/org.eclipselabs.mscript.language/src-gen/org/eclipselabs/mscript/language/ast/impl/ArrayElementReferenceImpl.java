@@ -17,24 +17,24 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.eclipselabs.mscript.language.ast.ArrayReference;
+import org.eclipselabs.mscript.language.ast.ArrayElementReference;
 import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.Subscript;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Array Reference</b></em>'.
+ * An implementation of the model object '<em><b>Array Element Reference</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.ArrayReferenceImpl#getSubscripts <em>Subscripts</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.ArrayElementReferenceImpl#getSubscripts <em>Subscripts</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ArrayReferenceImpl extends ComponentReferenceImpl implements ArrayReference
+public class ArrayElementReferenceImpl extends FeatureCallPartImpl implements ArrayElementReference
 {
   /**
    * The cached value of the '{@link #getSubscripts() <em>Subscripts</em>}' containment reference list.
@@ -51,7 +51,7 @@ public class ArrayReferenceImpl extends ComponentReferenceImpl implements ArrayR
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ArrayReferenceImpl()
+  protected ArrayElementReferenceImpl()
   {
     super();
   }
@@ -64,7 +64,7 @@ public class ArrayReferenceImpl extends ComponentReferenceImpl implements ArrayR
   @Override
   protected EClass eStaticClass()
   {
-    return AstPackage.Literals.ARRAY_REFERENCE;
+    return AstPackage.Literals.ARRAY_ELEMENT_REFERENCE;
   }
 
   /**
@@ -76,7 +76,7 @@ public class ArrayReferenceImpl extends ComponentReferenceImpl implements ArrayR
   {
     if (subscripts == null)
     {
-      subscripts = new EObjectContainmentEList<Subscript>(Subscript.class, this, AstPackage.ARRAY_REFERENCE__SUBSCRIPTS);
+      subscripts = new EObjectContainmentEList<Subscript>(Subscript.class, this, AstPackage.ARRAY_ELEMENT_REFERENCE__SUBSCRIPTS);
     }
     return subscripts;
   }
@@ -91,7 +91,7 @@ public class ArrayReferenceImpl extends ComponentReferenceImpl implements ArrayR
   {
     switch (featureID)
     {
-      case AstPackage.ARRAY_REFERENCE__SUBSCRIPTS:
+      case AstPackage.ARRAY_ELEMENT_REFERENCE__SUBSCRIPTS:
         return ((InternalEList<?>)getSubscripts()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -107,7 +107,7 @@ public class ArrayReferenceImpl extends ComponentReferenceImpl implements ArrayR
   {
     switch (featureID)
     {
-      case AstPackage.ARRAY_REFERENCE__SUBSCRIPTS:
+      case AstPackage.ARRAY_ELEMENT_REFERENCE__SUBSCRIPTS:
         return getSubscripts();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -124,7 +124,7 @@ public class ArrayReferenceImpl extends ComponentReferenceImpl implements ArrayR
   {
     switch (featureID)
     {
-      case AstPackage.ARRAY_REFERENCE__SUBSCRIPTS:
+      case AstPackage.ARRAY_ELEMENT_REFERENCE__SUBSCRIPTS:
         getSubscripts().clear();
         getSubscripts().addAll((Collection<? extends Subscript>)newValue);
         return;
@@ -142,7 +142,7 @@ public class ArrayReferenceImpl extends ComponentReferenceImpl implements ArrayR
   {
     switch (featureID)
     {
-      case AstPackage.ARRAY_REFERENCE__SUBSCRIPTS:
+      case AstPackage.ARRAY_ELEMENT_REFERENCE__SUBSCRIPTS:
         getSubscripts().clear();
         return;
     }
@@ -159,10 +159,10 @@ public class ArrayReferenceImpl extends ComponentReferenceImpl implements ArrayR
   {
     switch (featureID)
     {
-      case AstPackage.ARRAY_REFERENCE__SUBSCRIPTS:
+      case AstPackage.ARRAY_ELEMENT_REFERENCE__SUBSCRIPTS:
         return subscripts != null && !subscripts.isEmpty();
     }
     return super.eIsSet(featureID);
   }
 
-} //ArrayReferenceImpl
+} //ArrayElementReferenceImpl

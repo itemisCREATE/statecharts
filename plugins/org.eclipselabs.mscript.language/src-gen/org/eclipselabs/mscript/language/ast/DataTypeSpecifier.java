@@ -16,6 +16,6 @@ package org.eclipselabs.mscript.language.ast;
  * @model
  * @generated
  */
-public interface DataTypeSpecifier extends ValueTypeSpecifier
+public interface DataTypeSpecifier extends TypeSpecifier
 {
 } // DataTypeSpecifier

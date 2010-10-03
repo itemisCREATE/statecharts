@@ -19,7 +19,7 @@ import org.eclipselabs.mscript.language.ast.DataTypeSpecifier;
  *
  * @generated
  */
-public class DataTypeSpecifierImpl extends ValueTypeSpecifierImpl implements DataTypeSpecifier
+public class DataTypeSpecifierImpl extends TypeSpecifierImpl implements DataTypeSpecifier
 {
   /**
    * <!-- begin-user-doc -->

@@ -10,25 +10,25 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipselabs.mscript.language.ast.AstPackage;
-import org.eclipselabs.mscript.language.ast.ComponentReference;
+import org.eclipselabs.mscript.language.ast.FeatureCallPart;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Component Reference</b></em>'.
+ * An implementation of the model object '<em><b>Feature Call Part</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public class ComponentReferenceImpl extends MinimalEObjectImpl.Container implements ComponentReference
+public class FeatureCallPartImpl extends MinimalEObjectImpl.Container implements FeatureCallPart
 {
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ComponentReferenceImpl()
+  protected FeatureCallPartImpl()
   {
     super();
   }
@@ -41,7 +41,7 @@ public class ComponentReferenceImpl extends MinimalEObjectImpl.Container impleme
   @Override
   protected EClass eStaticClass()
   {
-    return AstPackage.Literals.COMPONENT_REFERENCE;
+    return AstPackage.Literals.FEATURE_CALL_PART;
   }
 
-} //ComponentReferenceImpl
+} //FeatureCallPartImpl

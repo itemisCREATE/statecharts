@@ -19,7 +19,7 @@ import org.eclipselabs.mscript.language.ast.UnitTypeSpecifier;
  *
  * @generated
  */
-public class UnitTypeSpecifierImpl extends ValueTypeSpecifierImpl implements UnitTypeSpecifier
+public class UnitTypeSpecifierImpl extends TypeSpecifierImpl implements UnitTypeSpecifier
 {
   /**
    * <!-- begin-user-doc -->

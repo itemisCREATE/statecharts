@@ -21,10 +21,9 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipselabs.mscript.language.ast.AstPackage;
-import org.eclipselabs.mscript.language.ast.ComponentReference;
 import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.ast.FeatureCall;
-import org.eclipselabs.mscript.language.ast.SymbolReference;
+import org.eclipselabs.mscript.language.ast.FeatureCallPart;
 
 /**
  * <!-- begin-user-doc -->
@@ -33,10 +32,8 @@ import org.eclipselabs.mscript.language.ast.SymbolReference;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FeatureCallImpl#getFeatureReference <em>Feature Reference</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FeatureCallImpl#getComponentReferences <em>Component References</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FeatureCallImpl#isOperationCall <em>Operation Call</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FeatureCallImpl#getArguments <em>Arguments</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FeatureCallImpl#getTarget <em>Target</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FeatureCallImpl#getParts <em>Parts</em>}</li>
  * </ul>
  * </p>
  *
@@ -45,54 +42,24 @@ import org.eclipselabs.mscript.language.ast.SymbolReference;
 public class FeatureCallImpl extends ExpressionImpl implements FeatureCall
 {
   /**
-   * The cached value of the '{@link #getFeatureReference() <em>Feature Reference</em>}' containment reference.
+   * The cached value of the '{@link #getTarget() <em>Target</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getFeatureReference()
+   * @see #getTarget()
    * @generated
    * @ordered
    */
-  protected SymbolReference featureReference;
+  protected Expression target;
 
   /**
-   * The cached value of the '{@link #getComponentReferences() <em>Component References</em>}' containment reference list.
+   * The cached value of the '{@link #getParts() <em>Parts</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getComponentReferences()
+   * @see #getParts()
    * @generated
    * @ordered
    */
-  protected EList<ComponentReference> componentReferences;
-
-  /**
-   * The default value of the '{@link #isOperationCall() <em>Operation Call</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #isOperationCall()
-   * @generated
-   * @ordered
-   */
-  protected static final boolean OPERATION_CALL_EDEFAULT = false;
-
-  /**
-   * The cached value of the '{@link #isOperationCall() <em>Operation Call</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #isOperationCall()
-   * @generated
-   * @ordered
-   */
-  protected boolean operationCall = OPERATION_CALL_EDEFAULT;
-
-  /**
-   * The cached value of the '{@link #getArguments() <em>Arguments</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getArguments()
-   * @generated
-   * @ordered
-   */
-  protected EList<Expression> arguments;
+  protected EList<FeatureCallPart> parts;
 
   /**
    * <!-- begin-user-doc -->
@@ -120,9 +87,9 @@ public class FeatureCallImpl extends ExpressionImpl implements FeatureCall
    * <!-- end-user-doc -->
    * @generated
    */
-  public SymbolReference getFeatureReference()
+  public Expression getTarget()
   {
-    return featureReference;
+    return target;
   }
 
   /**
@@ -130,13 +97,13 @@ public class FeatureCallImpl extends ExpressionImpl implements FeatureCall
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetFeatureReference(SymbolReference newFeatureReference, NotificationChain msgs)
+  public NotificationChain basicSetTarget(Expression newTarget, NotificationChain msgs)
   {
-    SymbolReference oldFeatureReference = featureReference;
-    featureReference = newFeatureReference;
+    Expression oldTarget = target;
+    target = newTarget;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.FEATURE_CALL__FEATURE_REFERENCE, oldFeatureReference, newFeatureReference);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.FEATURE_CALL__TARGET, oldTarget, newTarget);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -147,20 +114,20 @@ public class FeatureCallImpl extends ExpressionImpl implements FeatureCall
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setFeatureReference(SymbolReference newFeatureReference)
+  public void setTarget(Expression newTarget)
   {
-    if (newFeatureReference != featureReference)
+    if (newTarget != target)
     {
       NotificationChain msgs = null;
-      if (featureReference != null)
-        msgs = ((InternalEObject)featureReference).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.FEATURE_CALL__FEATURE_REFERENCE, null, msgs);
-      if (newFeatureReference != null)
-        msgs = ((InternalEObject)newFeatureReference).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.FEATURE_CALL__FEATURE_REFERENCE, null, msgs);
-      msgs = basicSetFeatureReference(newFeatureReference, msgs);
+      if (target != null)
+        msgs = ((InternalEObject)target).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.FEATURE_CALL__TARGET, null, msgs);
+      if (newTarget != null)
+        msgs = ((InternalEObject)newTarget).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.FEATURE_CALL__TARGET, null, msgs);
+      msgs = basicSetTarget(newTarget, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.FEATURE_CALL__FEATURE_REFERENCE, newFeatureReference, newFeatureReference));
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.FEATURE_CALL__TARGET, newTarget, newTarget));
   }
 
   /**
@@ -168,50 +135,13 @@ public class FeatureCallImpl extends ExpressionImpl implements FeatureCall
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<ComponentReference> getComponentReferences()
+  public EList<FeatureCallPart> getParts()
   {
-    if (componentReferences == null)
+    if (parts == null)
     {
-      componentReferences = new EObjectContainmentEList<ComponentReference>(ComponentReference.class, this, AstPackage.FEATURE_CALL__COMPONENT_REFERENCES);
+      parts = new EObjectContainmentEList<FeatureCallPart>(FeatureCallPart.class, this, AstPackage.FEATURE_CALL__PARTS);
     }
-    return componentReferences;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public boolean isOperationCall()
-  {
-    return operationCall;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setOperationCall(boolean newOperationCall)
-  {
-    boolean oldOperationCall = operationCall;
-    operationCall = newOperationCall;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.FEATURE_CALL__OPERATION_CALL, oldOperationCall, operationCall));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EList<Expression> getArguments()
-  {
-    if (arguments == null)
-    {
-      arguments = new EObjectContainmentEList<Expression>(Expression.class, this, AstPackage.FEATURE_CALL__ARGUMENTS);
-    }
-    return arguments;
+    return parts;
   }
 
   /**
@@ -224,12 +154,10 @@ public class FeatureCallImpl extends ExpressionImpl implements FeatureCall
   {
     switch (featureID)
     {
-      case AstPackage.FEATURE_CALL__FEATURE_REFERENCE:
-        return basicSetFeatureReference(null, msgs);
-      case AstPackage.FEATURE_CALL__COMPONENT_REFERENCES:
-        return ((InternalEList<?>)getComponentReferences()).basicRemove(otherEnd, msgs);
-      case AstPackage.FEATURE_CALL__ARGUMENTS:
-        return ((InternalEList<?>)getArguments()).basicRemove(otherEnd, msgs);
+      case AstPackage.FEATURE_CALL__TARGET:
+        return basicSetTarget(null, msgs);
+      case AstPackage.FEATURE_CALL__PARTS:
+        return ((InternalEList<?>)getParts()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -244,14 +172,10 @@ public class FeatureCallImpl extends ExpressionImpl implements FeatureCall
   {
     switch (featureID)
     {
-      case AstPackage.FEATURE_CALL__FEATURE_REFERENCE:
-        return getFeatureReference();
-      case AstPackage.FEATURE_CALL__COMPONENT_REFERENCES:
-        return getComponentReferences();
-      case AstPackage.FEATURE_CALL__OPERATION_CALL:
-        return isOperationCall();
-      case AstPackage.FEATURE_CALL__ARGUMENTS:
-        return getArguments();
+      case AstPackage.FEATURE_CALL__TARGET:
+        return getTarget();
+      case AstPackage.FEATURE_CALL__PARTS:
+        return getParts();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -267,19 +191,12 @@ public class FeatureCallImpl extends ExpressionImpl implements FeatureCall
   {
     switch (featureID)
     {
-      case AstPackage.FEATURE_CALL__FEATURE_REFERENCE:
-        setFeatureReference((SymbolReference)newValue);
+      case AstPackage.FEATURE_CALL__TARGET:
+        setTarget((Expression)newValue);
         return;
-      case AstPackage.FEATURE_CALL__COMPONENT_REFERENCES:
-        getComponentReferences().clear();
-        getComponentReferences().addAll((Collection<? extends ComponentReference>)newValue);
-        return;
-      case AstPackage.FEATURE_CALL__OPERATION_CALL:
-        setOperationCall((Boolean)newValue);
-        return;
-      case AstPackage.FEATURE_CALL__ARGUMENTS:
-        getArguments().clear();
-        getArguments().addAll((Collection<? extends Expression>)newValue);
+      case AstPackage.FEATURE_CALL__PARTS:
+        getParts().clear();
+        getParts().addAll((Collection<? extends FeatureCallPart>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -295,17 +212,11 @@ public class FeatureCallImpl extends ExpressionImpl implements FeatureCall
   {
     switch (featureID)
     {
-      case AstPackage.FEATURE_CALL__FEATURE_REFERENCE:
-        setFeatureReference((SymbolReference)null);
+      case AstPackage.FEATURE_CALL__TARGET:
+        setTarget((Expression)null);
         return;
-      case AstPackage.FEATURE_CALL__COMPONENT_REFERENCES:
-        getComponentReferences().clear();
-        return;
-      case AstPackage.FEATURE_CALL__OPERATION_CALL:
-        setOperationCall(OPERATION_CALL_EDEFAULT);
-        return;
-      case AstPackage.FEATURE_CALL__ARGUMENTS:
-        getArguments().clear();
+      case AstPackage.FEATURE_CALL__PARTS:
+        getParts().clear();
         return;
     }
     super.eUnset(featureID);
@@ -321,33 +232,12 @@ public class FeatureCallImpl extends ExpressionImpl implements FeatureCall
   {
     switch (featureID)
     {
-      case AstPackage.FEATURE_CALL__FEATURE_REFERENCE:
-        return featureReference != null;
-      case AstPackage.FEATURE_CALL__COMPONENT_REFERENCES:
-        return componentReferences != null && !componentReferences.isEmpty();
-      case AstPackage.FEATURE_CALL__OPERATION_CALL:
-        return operationCall != OPERATION_CALL_EDEFAULT;
-      case AstPackage.FEATURE_CALL__ARGUMENTS:
-        return arguments != null && !arguments.isEmpty();
+      case AstPackage.FEATURE_CALL__TARGET:
+        return target != null;
+      case AstPackage.FEATURE_CALL__PARTS:
+        return parts != null && !parts.isEmpty();
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (operationCall: ");
-    result.append(operationCall);
-    result.append(')');
-    return result.toString();
   }
 
 } //FeatureCallImpl

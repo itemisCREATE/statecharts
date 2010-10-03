@@ -15,7 +15,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.Expression;
-import org.eclipselabs.mscript.language.ast.FeatureCall;
 import org.eclipselabs.mscript.language.ast.FeatureCallStatement;
 
 /**
@@ -43,7 +42,7 @@ public class FeatureCallStatementImpl extends StatementImpl implements FeatureCa
    * @generated
    * @ordered
    */
-  protected FeatureCall featureCall;
+  protected Expression featureCall;
 
   /**
    * The default value of the '{@link #isAssignment() <em>Assignment</em>}' attribute.
@@ -101,7 +100,7 @@ public class FeatureCallStatementImpl extends StatementImpl implements FeatureCa
    * <!-- end-user-doc -->
    * @generated
    */
-  public FeatureCall getFeatureCall()
+  public Expression getFeatureCall()
   {
     return featureCall;
   }
@@ -111,9 +110,9 @@ public class FeatureCallStatementImpl extends StatementImpl implements FeatureCa
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetFeatureCall(FeatureCall newFeatureCall, NotificationChain msgs)
+  public NotificationChain basicSetFeatureCall(Expression newFeatureCall, NotificationChain msgs)
   {
-    FeatureCall oldFeatureCall = featureCall;
+    Expression oldFeatureCall = featureCall;
     featureCall = newFeatureCall;
     if (eNotificationRequired())
     {
@@ -128,7 +127,7 @@ public class FeatureCallStatementImpl extends StatementImpl implements FeatureCa
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setFeatureCall(FeatureCall newFeatureCall)
+  public void setFeatureCall(Expression newFeatureCall)
   {
     if (newFeatureCall != featureCall)
     {
@@ -264,7 +263,7 @@ public class FeatureCallStatementImpl extends StatementImpl implements FeatureCa
     switch (featureID)
     {
       case AstPackage.FEATURE_CALL_STATEMENT__FEATURE_CALL:
-        setFeatureCall((FeatureCall)newValue);
+        setFeatureCall((Expression)newValue);
         return;
       case AstPackage.FEATURE_CALL_STATEMENT__ASSIGNMENT:
         setAssignment((Boolean)newValue);
@@ -287,7 +286,7 @@ public class FeatureCallStatementImpl extends StatementImpl implements FeatureCa
     switch (featureID)
     {
       case AstPackage.FEATURE_CALL_STATEMENT__FEATURE_CALL:
-        setFeatureCall((FeatureCall)null);
+        setFeatureCall((Expression)null);
         return;
       case AstPackage.FEATURE_CALL_STATEMENT__ASSIGNMENT:
         setAssignment(ASSIGNMENT_EDEFAULT);

@@ -104,7 +104,7 @@ ForeachStatement :
 	'foreach' elementName=ID 'in' collectionExpression=Expression body=Block;
 
 VariableDeclaration :
-	type=ValueTypeSpecifier items+=VariableDeclarationItem (',' items+=VariableDeclarationItem)* ';';
+	(constant?='const')? type=TypeSpecifier items+=VariableDeclarationItem (',' items+=VariableDeclarationItem)* ';';
 		
 VariableDeclarationItem :
 	name=ID ('=' initialValue=Expression)?;
@@ -116,7 +116,7 @@ ReturnStatement :
  * Data type specifier
  */
 
-ValueTypeSpecifier :
+TypeSpecifier :
 	DataTypeSpecifier | UnitTypeSpecifier;
 	
 DataTypeSpecifier :
@@ -212,16 +212,33 @@ enum PowerOperator :
 	ElementWisePower='.^';
 	
 UnaryMinusExpression returns Expression :
-	PrimaryExpression | {UnaryMinusExpression} '-' operand=PrimaryExpression;
+	FeatureCall | {UnaryMinusExpression} '-' operand=FeatureCall;
+
+FeatureCall returns Expression :
+	PrimaryExpression | CallablePrimaryExpression ({FeatureCall.target=current} (parts+=FeatureCallPart)+)?;
+
+FeatureCallPart :
+	FeatureReference | ArrayElementReference | OperationCall;
+	
+FeatureReference :
+	'.' featureName=ID;
+	
+ArrayElementReference :
+	'[' subscripts+=Subscript (',' subscripts+=Subscript)* ']';
+
+OperationCall :
+	{OperationCall} '(' (arguments+=Expression (',' arguments+=Expression)*)? ')';
+
+CallablePrimaryExpression returns Expression :
+	MatrixConstructionOperator |
+	SymbolReference |
+	ParenthesizedExpression;
 
 PrimaryExpression returns Expression :
 	Literal |
-	FeatureCall |
-	MatrixConstructionOperator |
 	UnitConstructionOperator |
 	BeginExpression |
-	EndExpression |
-	ParenthesizedExpression;
+	EndExpression;
 
 Literal :
 	NumericalLiteral | BooleanLiteral | StringLiteral;
@@ -253,20 +270,8 @@ QualifiedName :
 //NamedArgument :
 //	identifier=ID '=' expression=Expression;
 
-FeatureCall :
-	featureReference=SymbolReference (componentReferences+=ComponentReference)* (operationCall?='(' (arguments+=Expression (',' arguments+=Expression)*)? ')')?;
-
 SymbolReference :
 	(global?='::')? name=QualifiedName;
-	
-ComponentReference :
-	ArrayReference |  MemberReference;
-
-ArrayReference :
-	'[' subscripts+=Subscript (',' subscripts+=Subscript)* ']';
-	
-MemberReference :
-	'.' name=ID;
 	
 Subscript :
 	ColonSubscript | ExpressionSubscript;

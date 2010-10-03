@@ -15,10 +15,8 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.FeatureCall#getFeatureReference <em>Feature Reference</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.FeatureCall#getComponentReferences <em>Component References</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.FeatureCall#isOperationCall <em>Operation Call</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.FeatureCall#getArguments <em>Arguments</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.FeatureCall#getTarget <em>Target</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.FeatureCall#getParts <em>Parts</em>}</li>
  * </ul>
  * </p>
  *
@@ -29,87 +27,45 @@ import org.eclipse.emf.common.util.EList;
 public interface FeatureCall extends Expression
 {
   /**
-   * Returns the value of the '<em><b>Feature Reference</b></em>' containment reference.
+   * Returns the value of the '<em><b>Target</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Feature Reference</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Target</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Feature Reference</em>' containment reference.
-   * @see #setFeatureReference(SymbolReference)
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getFeatureCall_FeatureReference()
+   * @return the value of the '<em>Target</em>' containment reference.
+   * @see #setTarget(Expression)
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getFeatureCall_Target()
    * @model containment="true"
    * @generated
    */
-  SymbolReference getFeatureReference();
+  Expression getTarget();
 
   /**
-   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.FeatureCall#getFeatureReference <em>Feature Reference</em>}' containment reference.
+   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.FeatureCall#getTarget <em>Target</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Feature Reference</em>' containment reference.
-   * @see #getFeatureReference()
+   * @param value the new value of the '<em>Target</em>' containment reference.
+   * @see #getTarget()
    * @generated
    */
-  void setFeatureReference(SymbolReference value);
+  void setTarget(Expression value);
 
   /**
-   * Returns the value of the '<em><b>Component References</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipselabs.mscript.language.ast.ComponentReference}.
+   * Returns the value of the '<em><b>Parts</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipselabs.mscript.language.ast.FeatureCallPart}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Component References</em>' containment reference list isn't clear,
+   * If the meaning of the '<em>Parts</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Component References</em>' containment reference list.
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getFeatureCall_ComponentReferences()
+   * @return the value of the '<em>Parts</em>' containment reference list.
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getFeatureCall_Parts()
    * @model containment="true"
    * @generated
    */
-  EList<ComponentReference> getComponentReferences();
-
-  /**
-   * Returns the value of the '<em><b>Operation Call</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Operation Call</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Operation Call</em>' attribute.
-   * @see #setOperationCall(boolean)
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getFeatureCall_OperationCall()
-   * @model
-   * @generated
-   */
-  boolean isOperationCall();
-
-  /**
-   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.FeatureCall#isOperationCall <em>Operation Call</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Operation Call</em>' attribute.
-   * @see #isOperationCall()
-   * @generated
-   */
-  void setOperationCall(boolean value);
-
-  /**
-   * Returns the value of the '<em><b>Arguments</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipselabs.mscript.language.ast.Expression}.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Arguments</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Arguments</em>' containment reference list.
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getFeatureCall_Arguments()
-   * @model containment="true"
-   * @generated
-   */
-  EList<Expression> getArguments();
+  EList<FeatureCallPart> getParts();
 
 } // FeatureCall

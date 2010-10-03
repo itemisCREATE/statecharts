@@ -10,25 +10,25 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipselabs.mscript.language.ast.AstPackage;
-import org.eclipselabs.mscript.language.ast.ValueTypeSpecifier;
+import org.eclipselabs.mscript.language.ast.TypeSpecifier;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Value Type Specifier</b></em>'.
+ * An implementation of the model object '<em><b>Type Specifier</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public class ValueTypeSpecifierImpl extends MinimalEObjectImpl.Container implements ValueTypeSpecifier
+public class TypeSpecifierImpl extends MinimalEObjectImpl.Container implements TypeSpecifier
 {
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ValueTypeSpecifierImpl()
+  protected TypeSpecifierImpl()
   {
     super();
   }
@@ -41,7 +41,7 @@ public class ValueTypeSpecifierImpl extends MinimalEObjectImpl.Container impleme
   @Override
   protected EClass eStaticClass()
   {
-    return AstPackage.Literals.VALUE_TYPE_SPECIFIER;
+    return AstPackage.Literals.TYPE_SPECIFIER;
   }
 
-} //ValueTypeSpecifierImpl
+} //TypeSpecifierImpl
