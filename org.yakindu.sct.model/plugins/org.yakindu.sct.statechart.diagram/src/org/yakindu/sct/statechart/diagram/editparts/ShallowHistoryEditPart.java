@@ -12,9 +12,11 @@ package org.yakindu.sct.statechart.diagram.editparts;
 
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.geometry.Dimension;
+import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.statechart.diagram.editor.figures.ShallowHistoryFigure;
 import org.yakindu.sct.statechart.diagram.editor.figures.utils.MapModeUtils;
+import org.yakindu.sct.statechart.diagram.policies.ChoiceSemanticEditPolicy;
 
 /**
  * 
@@ -26,6 +28,12 @@ public class ShallowHistoryEditPart extends FixedSizeShapeNodeEditPart {
 
 	public ShallowHistoryEditPart(View view) {
 		super(view);
+	}
+	
+	@Override
+	protected void createDefaultEditPolicies() {
+		super.createDefaultEditPolicies();
+		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE, new ChoiceSemanticEditPolicy());
 	}
 
 	@Override

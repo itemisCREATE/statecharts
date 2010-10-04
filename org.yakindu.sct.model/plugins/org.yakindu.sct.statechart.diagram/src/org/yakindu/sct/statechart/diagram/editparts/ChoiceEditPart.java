@@ -10,6 +10,9 @@
  */
 package org.yakindu.sct.statechart.diagram.editparts;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
@@ -45,4 +48,5 @@ public class ChoiceEditPart extends FixedSizeShapeNodeEditPart {
 	public IFigure getPrimaryShape() {
 		return new ChoiceFigure();
 	}
+	
 }

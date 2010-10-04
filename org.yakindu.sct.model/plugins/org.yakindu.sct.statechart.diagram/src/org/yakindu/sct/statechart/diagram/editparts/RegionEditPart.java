@@ -34,8 +34,6 @@ public class RegionEditPart extends ShapeNodeEditPart {
 	@Override
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
-		// installEditPolicy(EditPolicyRoles.CANONICAL_ROLE, new
-		// RegionCanonicalEditPolicy());
 	}
 
 	@Override
@@ -63,5 +61,7 @@ public class RegionEditPart extends ShapeNodeEditPart {
 			IFigure figure2 = ((RegionCompartmentEditPart) childEditPart).getFigure();
 			pane.add(figure2);
 		}
+		else
+			super.addChildVisual(childEditPart, index);
 	}
 }

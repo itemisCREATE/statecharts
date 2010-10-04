@@ -19,18 +19,16 @@ public class CreateTransitionCommand extends EditElementCommand {
 
 	private final Vertex target;
 
-	private final Region container;
 
 	public CreateTransitionCommand(CreateRelationshipRequest request) {
 		super(request.getLabel(), null, request);
 		this.source = (Vertex) request.getSource();
 		this.target = (Vertex) request.getTarget();
-		container = setContainer(source, target);
 	}
 
 	@Override
 	public boolean canExecute() {
-		if (source == null && target == null) {
+		if (source == null || target == null) {
 			return false;
 
 		}
@@ -47,7 +45,7 @@ public class CreateTransitionCommand extends EditElementCommand {
 		}
 
 		Transition transition = StatechartFactory.eINSTANCE.createTransition();
-		getContainer().getTransitions().add(transition);
+		getContainer(source,target).getTransitions().add(transition);
 		transition.setSource(source);
 		transition.setTarget(target);
 		((CreateElementRequest) getRequest()).setNewElement(transition);
@@ -56,13 +54,11 @@ public class CreateTransitionCommand extends EditElementCommand {
 
 	}
 
-	public Region getContainer() {
-		return container;
-	}
 
-	private static Region setContainer(Vertex source, Vertex target) {
+	private static Region getContainer(Vertex source, Vertex target) {
 		if (source == null || target == null)
 			return null;
+		System.out.println(source.getContainingRegion());
 		Assert.isTrue(source.getContainingRegion().equals(target.getContainingRegion()));
 		return source.getContainingRegion();
 	}

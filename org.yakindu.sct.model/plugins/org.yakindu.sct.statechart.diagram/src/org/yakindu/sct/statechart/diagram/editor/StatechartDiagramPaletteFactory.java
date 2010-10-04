@@ -32,7 +32,6 @@ public class StatechartDiagramPaletteFactory extends PaletteFactory.Adapter {
 		if (elementType == null)
 			throw new ProviderException("No Tool for toolId " + toolId + " found!");
 		if (toolId.equals("Transition")) {
-			System.out.println("Creating connection tool");
 			return new ConnectionCreationTool(elementType);
 		} else
 			return new CreationTool(elementType);
