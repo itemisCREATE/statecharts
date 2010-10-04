@@ -10,8 +10,14 @@
  */
 package org.yakindu.sct.statechart.diagram.editparts;
 
+import java.util.Collections;
+import java.util.List;
+
+import org.eclipse.gef.Request;
+import org.eclipse.gef.commands.Command;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
+import org.eclipse.gmf.runtime.diagram.ui.requests.CreateConnectionViewAndElementRequest;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.statechart.diagram.policies.StatechartCanonicalEditPolicy;
 
@@ -32,4 +38,13 @@ public class StatechartDiagramEditPart extends DiagramEditPart {
 		installEditPolicy(EditPolicyRoles.CANONICAL_ROLE, new StatechartCanonicalEditPolicy());
 		super.createDefaultEditPolicies();
 	}
+	
+	@Override
+	public Command getCommand(Request _request) {
+		if(_request instanceof CreateConnectionViewAndElementRequest)
+			return null;
+		System.out.println(_request);
+		return super.getCommand(_request);
+	}
+	
 }

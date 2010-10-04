@@ -18,7 +18,7 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.services.editpart.AbstractEditPartProvider;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.statechart.diagram.editor.StatechartDiagramEditor;
-import org.yakindu.sct.statechart.diagram.editparts.StatechartEditPart;
+import org.yakindu.sct.statechart.diagram.editparts.StatechartDiagramEditPart;
 
 /**
  * 
@@ -39,7 +39,7 @@ public class StatechartDiagramEditPartProvider extends AbstractEditPartProvider 
 
 	@SuppressWarnings("unchecked")
 	private void init() {
-		editParts.put(StatechartDiagramEditor.ID, StatechartEditPart.class);
+		editParts.put(StatechartDiagramEditor.ID, StatechartDiagramEditPart.class);
 		Field[] elements = ProviderConstants.class.getFields();
 		for (Field field : elements) {
 			String elementName = null;

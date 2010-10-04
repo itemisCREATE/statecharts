@@ -16,6 +16,7 @@ import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.diagram.ui.figures.ShapeCompartmentFigure;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.statechart.diagram.policies.CompartmentCreationEditPolicy;
+import org.yakindu.sct.statechart.diagram.policies.RegionCompartmentCanonicalEditPolicy;
 
 /**
  * 
@@ -33,6 +34,7 @@ public class RegionCompartmentEditPart extends ShapeCompartmentEditPart {
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
 		installEditPolicy(EditPolicyRoles.CREATION_ROLE, new CompartmentCreationEditPolicy());
+		installEditPolicy(EditPolicyRoles.CANONICAL_ROLE, new RegionCompartmentCanonicalEditPolicy());
 	}
 
 	@Override

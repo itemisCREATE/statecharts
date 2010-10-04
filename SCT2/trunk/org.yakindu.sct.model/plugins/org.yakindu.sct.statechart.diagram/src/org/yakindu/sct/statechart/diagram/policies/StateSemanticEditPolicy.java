@@ -32,4 +32,5 @@ public class StateSemanticEditPolicy extends SemanticEditPolicy {
 		}
 		return super.getSemanticCommand(request);
 	}
+	
 }

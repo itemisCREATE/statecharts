@@ -51,8 +51,6 @@ public class StateEditPart extends ShapeNodeEditPart {
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
 		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE, new StateSemanticEditPolicy());
-		// installEditPolicy(EditPolicyRoles.CANONICAL_ROLE, new
-		// StateCanonicalEditPolicy());
 		// We don't want to allow creation for parent editpart on a State
 		installEditPolicy(EditPolicyRoles.CREATION_ROLE, new CreationEditPolicy() {
 			@Override
