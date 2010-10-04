@@ -184,22 +184,6 @@ public class AstSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AstPackage.CHECK_STATEMENT:
-      {
-        CheckStatement checkStatement = (CheckStatement)theEObject;
-        T result = caseCheckStatement(checkStatement);
-        if (result == null) result = caseStatement(checkStatement);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case AstPackage.EXECUTE_STATEMENT:
-      {
-        ExecuteStatement executeStatement = (ExecuteStatement)theEObject;
-        T result = caseExecuteStatement(executeStatement);
-        if (result == null) result = caseStatement(executeStatement);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case AstPackage.FEATURE_CALL_STATEMENT:
       {
         FeatureCallStatement featureCallStatement = (FeatureCallStatement)theEObject;
@@ -253,6 +237,13 @@ public class AstSwitch<T>
         T result = caseVariableDeclaration(variableDeclaration);
         if (result == null) result = casePackageDefinitionElement(variableDeclaration);
         if (result == null) result = caseStatement(variableDeclaration);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AstPackage.VARIABLE_MODIFIER:
+      {
+        VariableModifier variableModifier = (VariableModifier)theEObject;
+        T result = caseVariableModifier(variableModifier);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -891,38 +882,6 @@ public class AstSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Check Statement</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Check Statement</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseCheckStatement(CheckStatement object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Execute Statement</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Execute Statement</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseExecuteStatement(ExecuteStatement object)
-  {
-    return null;
-  }
-
-  /**
    * Returns the result of interpreting the object as an instance of '<em>Feature Call Statement</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -1030,6 +989,22 @@ public class AstSwitch<T>
    * @generated
    */
   public T caseVariableDeclaration(VariableDeclaration object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Variable Modifier</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Variable Modifier</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseVariableModifier(VariableModifier object)
   {
     return null;
   }

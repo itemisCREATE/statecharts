@@ -80,8 +80,6 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
       case AstPackage.PARAMETER_DECLARATION: return createParameterDeclaration();
       case AstPackage.STATEMENT: return createStatement();
       case AstPackage.BLOCK: return createBlock();
-      case AstPackage.CHECK_STATEMENT: return createCheckStatement();
-      case AstPackage.EXECUTE_STATEMENT: return createExecuteStatement();
       case AstPackage.FEATURE_CALL_STATEMENT: return createFeatureCallStatement();
       case AstPackage.IF_STATEMENT: return createIfStatement();
       case AstPackage.IF_CASE: return createIfCase();
@@ -89,6 +87,7 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
       case AstPackage.DO_WHILE_STATEMENT: return createDoWhileStatement();
       case AstPackage.FOREACH_STATEMENT: return createForeachStatement();
       case AstPackage.VARIABLE_DECLARATION: return createVariableDeclaration();
+      case AstPackage.VARIABLE_MODIFIER: return createVariableModifier();
       case AstPackage.VARIABLE_DECLARATION_ITEM: return createVariableDeclarationItem();
       case AstPackage.RETURN_STATEMENT: return createReturnStatement();
       case AstPackage.TYPE_SPECIFIER: return createTypeSpecifier();
@@ -334,28 +333,6 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public CheckStatement createCheckStatement()
-  {
-    CheckStatementImpl checkStatement = new CheckStatementImpl();
-    return checkStatement;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ExecuteStatement createExecuteStatement()
-  {
-    ExecuteStatementImpl executeStatement = new ExecuteStatementImpl();
-    return executeStatement;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public FeatureCallStatement createFeatureCallStatement()
   {
     FeatureCallStatementImpl featureCallStatement = new FeatureCallStatementImpl();
@@ -426,6 +403,17 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
   {
     VariableDeclarationImpl variableDeclaration = new VariableDeclarationImpl();
     return variableDeclaration;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public VariableModifier createVariableModifier()
+  {
+    VariableModifierImpl variableModifier = new VariableModifierImpl();
+    return variableModifier;
   }
 
   /**

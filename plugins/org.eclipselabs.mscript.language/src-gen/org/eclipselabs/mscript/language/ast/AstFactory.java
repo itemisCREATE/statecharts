@@ -134,24 +134,6 @@ public interface AstFactory extends EFactory
   Block createBlock();
 
   /**
-   * Returns a new object of class '<em>Check Statement</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Check Statement</em>'.
-   * @generated
-   */
-  CheckStatement createCheckStatement();
-
-  /**
-   * Returns a new object of class '<em>Execute Statement</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Execute Statement</em>'.
-   * @generated
-   */
-  ExecuteStatement createExecuteStatement();
-
-  /**
    * Returns a new object of class '<em>Feature Call Statement</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -213,6 +195,15 @@ public interface AstFactory extends EFactory
    * @generated
    */
   VariableDeclaration createVariableDeclaration();
+
+  /**
+   * Returns a new object of class '<em>Variable Modifier</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Variable Modifier</em>'.
+   * @generated
+   */
+  VariableModifier createVariableModifier();
 
   /**
    * Returns a new object of class '<em>Variable Declaration Item</em>'.

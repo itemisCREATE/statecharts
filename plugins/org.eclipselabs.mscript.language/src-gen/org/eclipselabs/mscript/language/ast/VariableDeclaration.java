@@ -15,7 +15,7 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.VariableDeclaration#isConstant <em>Constant</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.VariableDeclaration#getModifier <em>Modifier</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.VariableDeclaration#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.VariableDeclaration#getItems <em>Items</em>}</li>
  * </ul>
@@ -28,30 +28,30 @@ import org.eclipse.emf.common.util.EList;
 public interface VariableDeclaration extends PackageDefinitionElement, Statement
 {
   /**
-   * Returns the value of the '<em><b>Constant</b></em>' attribute.
+   * Returns the value of the '<em><b>Modifier</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Constant</em>' attribute isn't clear,
+   * If the meaning of the '<em>Modifier</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Constant</em>' attribute.
-   * @see #setConstant(boolean)
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getVariableDeclaration_Constant()
-   * @model
+   * @return the value of the '<em>Modifier</em>' containment reference.
+   * @see #setModifier(VariableModifier)
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getVariableDeclaration_Modifier()
+   * @model containment="true"
    * @generated
    */
-  boolean isConstant();
+  VariableModifier getModifier();
 
   /**
-   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.VariableDeclaration#isConstant <em>Constant</em>}' attribute.
+   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.VariableDeclaration#getModifier <em>Modifier</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Constant</em>' attribute.
-   * @see #isConstant()
+   * @param value the new value of the '<em>Modifier</em>' containment reference.
+   * @see #getModifier()
    * @generated
    */
-  void setConstant(boolean value);
+  void setModifier(VariableModifier value);
 
   /**
    * Returns the value of the '<em><b>Type</b></em>' containment reference.

@@ -138,16 +138,6 @@ public class AstAdapterFactory extends AdapterFactoryImpl
         return createBlockAdapter();
       }
       @Override
-      public Adapter caseCheckStatement(CheckStatement object)
-      {
-        return createCheckStatementAdapter();
-      }
-      @Override
-      public Adapter caseExecuteStatement(ExecuteStatement object)
-      {
-        return createExecuteStatementAdapter();
-      }
-      @Override
       public Adapter caseFeatureCallStatement(FeatureCallStatement object)
       {
         return createFeatureCallStatementAdapter();
@@ -181,6 +171,11 @@ public class AstAdapterFactory extends AdapterFactoryImpl
       public Adapter caseVariableDeclaration(VariableDeclaration object)
       {
         return createVariableDeclarationAdapter();
+      }
+      @Override
+      public Adapter caseVariableModifier(VariableModifier object)
+      {
+        return createVariableModifierAdapter();
       }
       @Override
       public Adapter caseVariableDeclarationItem(VariableDeclarationItem object)
@@ -650,36 +645,6 @@ public class AstAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.CheckStatement <em>Check Statement</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.CheckStatement
-   * @generated
-   */
-  public Adapter createCheckStatementAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.ExecuteStatement <em>Execute Statement</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.ExecuteStatement
-   * @generated
-   */
-  public Adapter createExecuteStatementAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.FeatureCallStatement <em>Feature Call Statement</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -780,6 +745,21 @@ public class AstAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createVariableDeclarationAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.VariableModifier <em>Variable Modifier</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipselabs.mscript.language.ast.VariableModifier
+   * @generated
+   */
+  public Adapter createVariableModifierAdapter()
   {
     return null;
   }

@@ -59,10 +59,10 @@ RecordFieldDeclarationItem :
  */
  
 FunctionDefinition :
-	name=KeywordID '(' (parameters+=ParameterDeclaration (',' parameters+=ParameterDeclaration)*)? ')' body=Block;
+	(static?='static')? name=KeywordID '(' (parameters+=ParameterDeclaration (',' parameters+=ParameterDeclaration)*)? ')' body=Block;
 
 ParameterDeclaration :
-	(reference?='ref')? type=DataTypeSpecifier name=KeywordID;
+	(modifier=VariableModifier)? (reference?='ref')? type=TypeSpecifier name=KeywordID;
 
 /*
  * Statement
@@ -70,8 +70,6 @@ ParameterDeclaration :
 
 Statement :
 	Block |
-	CheckStatement |
-	ExecuteStatement |
 	FeatureCallStatement |
 	IfStatement |
 	WhileStatement |
@@ -82,12 +80,6 @@ Statement :
 	
 Block :
 	{Block} '{' (statements+=Statement)* '}';
-
-CheckStatement :
-	'check' body=Block;
-	
-ExecuteStatement :
-	'exec' body=Block;
 
 FeatureCallStatement :
 	featureCall=FeatureCall (assignment?='=' expression=Expression)? ';';
@@ -108,8 +100,11 @@ ForeachStatement :
 	'foreach' elementName=KeywordID 'in' collectionExpression=Expression body=Block;
 
 VariableDeclaration :
-	(constant?='const')? type=TypeSpecifier items+=VariableDeclarationItem (',' items+=VariableDeclarationItem)* ';';
-		
+	(modifier=VariableModifier)? type=TypeSpecifier items+=VariableDeclarationItem (',' items+=VariableDeclarationItem)* ';';
+
+VariableModifier :
+	Auto='auto' | Constant='const' | Static='static';
+			
 VariableDeclarationItem :
 	name=KeywordID ('=' initialValue=Expression)?;
 	

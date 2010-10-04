@@ -24,6 +24,7 @@ import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.TypeSpecifier;
 import org.eclipselabs.mscript.language.ast.VariableDeclaration;
 import org.eclipselabs.mscript.language.ast.VariableDeclarationItem;
+import org.eclipselabs.mscript.language.ast.VariableModifier;
 
 /**
  * <!-- begin-user-doc -->
@@ -32,7 +33,7 @@ import org.eclipselabs.mscript.language.ast.VariableDeclarationItem;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.VariableDeclarationImpl#isConstant <em>Constant</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.VariableDeclarationImpl#getModifier <em>Modifier</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.VariableDeclarationImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.VariableDeclarationImpl#getItems <em>Items</em>}</li>
  * </ul>
@@ -43,24 +44,14 @@ import org.eclipselabs.mscript.language.ast.VariableDeclarationItem;
 public class VariableDeclarationImpl extends PackageDefinitionElementImpl implements VariableDeclaration
 {
   /**
-   * The default value of the '{@link #isConstant() <em>Constant</em>}' attribute.
+   * The cached value of the '{@link #getModifier() <em>Modifier</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #isConstant()
+   * @see #getModifier()
    * @generated
    * @ordered
    */
-  protected static final boolean CONSTANT_EDEFAULT = false;
-
-  /**
-   * The cached value of the '{@link #isConstant() <em>Constant</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #isConstant()
-   * @generated
-   * @ordered
-   */
-  protected boolean constant = CONSTANT_EDEFAULT;
+  protected VariableModifier modifier;
 
   /**
    * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
@@ -108,9 +99,9 @@ public class VariableDeclarationImpl extends PackageDefinitionElementImpl implem
    * <!-- end-user-doc -->
    * @generated
    */
-  public boolean isConstant()
+  public VariableModifier getModifier()
   {
-    return constant;
+    return modifier;
   }
 
   /**
@@ -118,12 +109,37 @@ public class VariableDeclarationImpl extends PackageDefinitionElementImpl implem
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setConstant(boolean newConstant)
+  public NotificationChain basicSetModifier(VariableModifier newModifier, NotificationChain msgs)
   {
-    boolean oldConstant = constant;
-    constant = newConstant;
+    VariableModifier oldModifier = modifier;
+    modifier = newModifier;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.VARIABLE_DECLARATION__CONSTANT, oldConstant, constant));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.VARIABLE_DECLARATION__MODIFIER, oldModifier, newModifier);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setModifier(VariableModifier newModifier)
+  {
+    if (newModifier != modifier)
+    {
+      NotificationChain msgs = null;
+      if (modifier != null)
+        msgs = ((InternalEObject)modifier).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.VARIABLE_DECLARATION__MODIFIER, null, msgs);
+      if (newModifier != null)
+        msgs = ((InternalEObject)newModifier).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.VARIABLE_DECLARATION__MODIFIER, null, msgs);
+      msgs = basicSetModifier(newModifier, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.VARIABLE_DECLARATION__MODIFIER, newModifier, newModifier));
   }
 
   /**
@@ -198,6 +214,8 @@ public class VariableDeclarationImpl extends PackageDefinitionElementImpl implem
   {
     switch (featureID)
     {
+      case AstPackage.VARIABLE_DECLARATION__MODIFIER:
+        return basicSetModifier(null, msgs);
       case AstPackage.VARIABLE_DECLARATION__TYPE:
         return basicSetType(null, msgs);
       case AstPackage.VARIABLE_DECLARATION__ITEMS:
@@ -216,8 +234,8 @@ public class VariableDeclarationImpl extends PackageDefinitionElementImpl implem
   {
     switch (featureID)
     {
-      case AstPackage.VARIABLE_DECLARATION__CONSTANT:
-        return isConstant();
+      case AstPackage.VARIABLE_DECLARATION__MODIFIER:
+        return getModifier();
       case AstPackage.VARIABLE_DECLARATION__TYPE:
         return getType();
       case AstPackage.VARIABLE_DECLARATION__ITEMS:
@@ -237,8 +255,8 @@ public class VariableDeclarationImpl extends PackageDefinitionElementImpl implem
   {
     switch (featureID)
     {
-      case AstPackage.VARIABLE_DECLARATION__CONSTANT:
-        setConstant((Boolean)newValue);
+      case AstPackage.VARIABLE_DECLARATION__MODIFIER:
+        setModifier((VariableModifier)newValue);
         return;
       case AstPackage.VARIABLE_DECLARATION__TYPE:
         setType((TypeSpecifier)newValue);
@@ -261,8 +279,8 @@ public class VariableDeclarationImpl extends PackageDefinitionElementImpl implem
   {
     switch (featureID)
     {
-      case AstPackage.VARIABLE_DECLARATION__CONSTANT:
-        setConstant(CONSTANT_EDEFAULT);
+      case AstPackage.VARIABLE_DECLARATION__MODIFIER:
+        setModifier((VariableModifier)null);
         return;
       case AstPackage.VARIABLE_DECLARATION__TYPE:
         setType((TypeSpecifier)null);
@@ -284,31 +302,14 @@ public class VariableDeclarationImpl extends PackageDefinitionElementImpl implem
   {
     switch (featureID)
     {
-      case AstPackage.VARIABLE_DECLARATION__CONSTANT:
-        return constant != CONSTANT_EDEFAULT;
+      case AstPackage.VARIABLE_DECLARATION__MODIFIER:
+        return modifier != null;
       case AstPackage.VARIABLE_DECLARATION__TYPE:
         return type != null;
       case AstPackage.VARIABLE_DECLARATION__ITEMS:
         return items != null && !items.isEmpty();
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (constant: ");
-    result.append(constant);
-    result.append(')');
-    return result.toString();
   }
 
 } //VariableDeclarationImpl

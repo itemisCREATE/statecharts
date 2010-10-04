@@ -15,8 +15,9 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipselabs.mscript.language.ast.AstPackage;
-import org.eclipselabs.mscript.language.ast.DataTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
+import org.eclipselabs.mscript.language.ast.TypeSpecifier;
+import org.eclipselabs.mscript.language.ast.VariableModifier;
 
 /**
  * <!-- begin-user-doc -->
@@ -25,6 +26,7 @@ import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.ParameterDeclarationImpl#getModifier <em>Modifier</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.ParameterDeclarationImpl#isReference <em>Reference</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.ParameterDeclarationImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.ParameterDeclarationImpl#getName <em>Name</em>}</li>
@@ -35,6 +37,16 @@ import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
  */
 public class ParameterDeclarationImpl extends MinimalEObjectImpl.Container implements ParameterDeclaration
 {
+  /**
+   * The cached value of the '{@link #getModifier() <em>Modifier</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getModifier()
+   * @generated
+   * @ordered
+   */
+  protected VariableModifier modifier;
+
   /**
    * The default value of the '{@link #isReference() <em>Reference</em>}' attribute.
    * <!-- begin-user-doc -->
@@ -63,7 +75,7 @@ public class ParameterDeclarationImpl extends MinimalEObjectImpl.Container imple
    * @generated
    * @ordered
    */
-  protected DataTypeSpecifier type;
+  protected TypeSpecifier type;
 
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -111,6 +123,54 @@ public class ParameterDeclarationImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
+  public VariableModifier getModifier()
+  {
+    return modifier;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetModifier(VariableModifier newModifier, NotificationChain msgs)
+  {
+    VariableModifier oldModifier = modifier;
+    modifier = newModifier;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.PARAMETER_DECLARATION__MODIFIER, oldModifier, newModifier);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setModifier(VariableModifier newModifier)
+  {
+    if (newModifier != modifier)
+    {
+      NotificationChain msgs = null;
+      if (modifier != null)
+        msgs = ((InternalEObject)modifier).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.PARAMETER_DECLARATION__MODIFIER, null, msgs);
+      if (newModifier != null)
+        msgs = ((InternalEObject)newModifier).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.PARAMETER_DECLARATION__MODIFIER, null, msgs);
+      msgs = basicSetModifier(newModifier, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.PARAMETER_DECLARATION__MODIFIER, newModifier, newModifier));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public boolean isReference()
   {
     return reference;
@@ -134,7 +194,7 @@ public class ParameterDeclarationImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public DataTypeSpecifier getType()
+  public TypeSpecifier getType()
   {
     return type;
   }
@@ -144,9 +204,9 @@ public class ParameterDeclarationImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetType(DataTypeSpecifier newType, NotificationChain msgs)
+  public NotificationChain basicSetType(TypeSpecifier newType, NotificationChain msgs)
   {
-    DataTypeSpecifier oldType = type;
+    TypeSpecifier oldType = type;
     type = newType;
     if (eNotificationRequired())
     {
@@ -161,7 +221,7 @@ public class ParameterDeclarationImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setType(DataTypeSpecifier newType)
+  public void setType(TypeSpecifier newType)
   {
     if (newType != type)
     {
@@ -210,6 +270,8 @@ public class ParameterDeclarationImpl extends MinimalEObjectImpl.Container imple
   {
     switch (featureID)
     {
+      case AstPackage.PARAMETER_DECLARATION__MODIFIER:
+        return basicSetModifier(null, msgs);
       case AstPackage.PARAMETER_DECLARATION__TYPE:
         return basicSetType(null, msgs);
     }
@@ -226,6 +288,8 @@ public class ParameterDeclarationImpl extends MinimalEObjectImpl.Container imple
   {
     switch (featureID)
     {
+      case AstPackage.PARAMETER_DECLARATION__MODIFIER:
+        return getModifier();
       case AstPackage.PARAMETER_DECLARATION__REFERENCE:
         return isReference();
       case AstPackage.PARAMETER_DECLARATION__TYPE:
@@ -246,11 +310,14 @@ public class ParameterDeclarationImpl extends MinimalEObjectImpl.Container imple
   {
     switch (featureID)
     {
+      case AstPackage.PARAMETER_DECLARATION__MODIFIER:
+        setModifier((VariableModifier)newValue);
+        return;
       case AstPackage.PARAMETER_DECLARATION__REFERENCE:
         setReference((Boolean)newValue);
         return;
       case AstPackage.PARAMETER_DECLARATION__TYPE:
-        setType((DataTypeSpecifier)newValue);
+        setType((TypeSpecifier)newValue);
         return;
       case AstPackage.PARAMETER_DECLARATION__NAME:
         setName((String)newValue);
@@ -269,11 +336,14 @@ public class ParameterDeclarationImpl extends MinimalEObjectImpl.Container imple
   {
     switch (featureID)
     {
+      case AstPackage.PARAMETER_DECLARATION__MODIFIER:
+        setModifier((VariableModifier)null);
+        return;
       case AstPackage.PARAMETER_DECLARATION__REFERENCE:
         setReference(REFERENCE_EDEFAULT);
         return;
       case AstPackage.PARAMETER_DECLARATION__TYPE:
-        setType((DataTypeSpecifier)null);
+        setType((TypeSpecifier)null);
         return;
       case AstPackage.PARAMETER_DECLARATION__NAME:
         setName(NAME_EDEFAULT);
@@ -292,6 +362,8 @@ public class ParameterDeclarationImpl extends MinimalEObjectImpl.Container imple
   {
     switch (featureID)
     {
+      case AstPackage.PARAMETER_DECLARATION__MODIFIER:
+        return modifier != null;
       case AstPackage.PARAMETER_DECLARATION__REFERENCE:
         return reference != REFERENCE_EDEFAULT;
       case AstPackage.PARAMETER_DECLARATION__TYPE:

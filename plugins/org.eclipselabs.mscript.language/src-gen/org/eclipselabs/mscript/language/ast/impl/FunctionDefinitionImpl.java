@@ -32,6 +32,7 @@ import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl#isStatic <em>Static</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl#getParameters <em>Parameters</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl#getBody <em>Body</em>}</li>
@@ -42,6 +43,26 @@ import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
  */
 public class FunctionDefinitionImpl extends PackageDefinitionElementImpl implements FunctionDefinition
 {
+  /**
+   * The default value of the '{@link #isStatic() <em>Static</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isStatic()
+   * @generated
+   * @ordered
+   */
+  protected static final boolean STATIC_EDEFAULT = false;
+
+  /**
+   * The cached value of the '{@link #isStatic() <em>Static</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isStatic()
+   * @generated
+   * @ordered
+   */
+  protected boolean static_ = STATIC_EDEFAULT;
+
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
@@ -101,6 +122,29 @@ public class FunctionDefinitionImpl extends PackageDefinitionElementImpl impleme
   protected EClass eStaticClass()
   {
     return AstPackage.Literals.FUNCTION_DEFINITION;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public boolean isStatic()
+  {
+    return static_;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setStatic(boolean newStatic)
+  {
+    boolean oldStatic = static_;
+    static_ = newStatic;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.FUNCTION_DEFINITION__STATIC, oldStatic, static_));
   }
 
   /**
@@ -216,6 +260,8 @@ public class FunctionDefinitionImpl extends PackageDefinitionElementImpl impleme
   {
     switch (featureID)
     {
+      case AstPackage.FUNCTION_DEFINITION__STATIC:
+        return isStatic();
       case AstPackage.FUNCTION_DEFINITION__NAME:
         return getName();
       case AstPackage.FUNCTION_DEFINITION__PARAMETERS:
@@ -237,6 +283,9 @@ public class FunctionDefinitionImpl extends PackageDefinitionElementImpl impleme
   {
     switch (featureID)
     {
+      case AstPackage.FUNCTION_DEFINITION__STATIC:
+        setStatic((Boolean)newValue);
+        return;
       case AstPackage.FUNCTION_DEFINITION__NAME:
         setName((String)newValue);
         return;
@@ -261,6 +310,9 @@ public class FunctionDefinitionImpl extends PackageDefinitionElementImpl impleme
   {
     switch (featureID)
     {
+      case AstPackage.FUNCTION_DEFINITION__STATIC:
+        setStatic(STATIC_EDEFAULT);
+        return;
       case AstPackage.FUNCTION_DEFINITION__NAME:
         setName(NAME_EDEFAULT);
         return;
@@ -284,6 +336,8 @@ public class FunctionDefinitionImpl extends PackageDefinitionElementImpl impleme
   {
     switch (featureID)
     {
+      case AstPackage.FUNCTION_DEFINITION__STATIC:
+        return static_ != STATIC_EDEFAULT;
       case AstPackage.FUNCTION_DEFINITION__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case AstPackage.FUNCTION_DEFINITION__PARAMETERS:
@@ -305,7 +359,9 @@ public class FunctionDefinitionImpl extends PackageDefinitionElementImpl impleme
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (name: ");
+    result.append(" (static: ");
+    result.append(static_);
+    result.append(", name: ");
     result.append(name);
     result.append(')');
     return result.toString();

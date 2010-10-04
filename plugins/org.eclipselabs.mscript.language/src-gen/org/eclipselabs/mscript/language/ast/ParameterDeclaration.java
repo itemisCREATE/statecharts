@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.ParameterDeclaration#getModifier <em>Modifier</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.ParameterDeclaration#isReference <em>Reference</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.ParameterDeclaration#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.ParameterDeclaration#getName <em>Name</em>}</li>
@@ -27,6 +28,32 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface ParameterDeclaration extends EObject
 {
+  /**
+   * Returns the value of the '<em><b>Modifier</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Modifier</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Modifier</em>' containment reference.
+   * @see #setModifier(VariableModifier)
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getParameterDeclaration_Modifier()
+   * @model containment="true"
+   * @generated
+   */
+  VariableModifier getModifier();
+
+  /**
+   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.ParameterDeclaration#getModifier <em>Modifier</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Modifier</em>' containment reference.
+   * @see #getModifier()
+   * @generated
+   */
+  void setModifier(VariableModifier value);
+
   /**
    * Returns the value of the '<em><b>Reference</b></em>' attribute.
    * <!-- begin-user-doc -->
@@ -62,12 +89,12 @@ public interface ParameterDeclaration extends EObject
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Type</em>' containment reference.
-   * @see #setType(DataTypeSpecifier)
+   * @see #setType(TypeSpecifier)
    * @see org.eclipselabs.mscript.language.ast.AstPackage#getParameterDeclaration_Type()
    * @model containment="true"
    * @generated
    */
-  DataTypeSpecifier getType();
+  TypeSpecifier getType();
 
   /**
    * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.ParameterDeclaration#getType <em>Type</em>}' containment reference.
@@ -77,7 +104,7 @@ public interface ParameterDeclaration extends EObject
    * @see #getType()
    * @generated
    */
-  void setType(DataTypeSpecifier value);
+  void setType(TypeSpecifier value);
 
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
