@@ -32,19 +32,19 @@ PackageDefinitionElement :
  */
  	
 EnumerationDefinition :
-	'enum' name=ID '{'
+	'enum' name=KeywordID '{'
 		(literals+=EnumerationLiteralDeclaration (',' literals+=EnumerationLiteralDeclaration)*)?
 	'}';
 	
 EnumerationLiteralDeclaration :
-	name=ID;
+	name=KeywordID;
 
 /*
  * Record
  */
 
 RecordDefinition :
-	'record' name=ID '{'
+	'record' name=KeywordID '{'
 		(fields+=RecordFieldDeclaration)*
 	'}'; 
 
@@ -52,17 +52,17 @@ RecordFieldDeclaration :
 	type=DataTypeSpecifier items+=RecordFieldDeclarationItem (',' items+=RecordFieldDeclarationItem)* ';';
 	
 RecordFieldDeclarationItem :
-	name=ID;
+	name=KeywordID;
 
 /*
  * Function
  */
  
 FunctionDefinition :
-	name=ID '(' (parameters+=ParameterDeclaration (',' parameters+=ParameterDeclaration)*)? ')' body=Block;
+	name=KeywordID '(' (parameters+=ParameterDeclaration (',' parameters+=ParameterDeclaration)*)? ')' body=Block;
 
 ParameterDeclaration :
-	(reference?='ref')? type=DataTypeSpecifier name=ID;
+	(reference?='ref')? type=DataTypeSpecifier name=KeywordID;
 
 /*
  * Statement
@@ -71,6 +71,7 @@ ParameterDeclaration :
 Statement :
 	Block |
 	CheckStatement |
+	ExecuteStatement |
 	FeatureCallStatement |
 	IfStatement |
 	WhileStatement |
@@ -84,6 +85,9 @@ Block :
 
 CheckStatement :
 	'check' body=Block;
+	
+ExecuteStatement :
+	'exec' body=Block;
 
 FeatureCallStatement :
 	featureCall=FeatureCall (assignment?='=' expression=Expression)? ';';
@@ -101,13 +105,13 @@ DoWhileStatement :
 	'do' body=Block 'while' predicate=Expression ';';
 
 ForeachStatement :
-	'foreach' elementName=ID 'in' collectionExpression=Expression body=Block;
+	'foreach' elementName=KeywordID 'in' collectionExpression=Expression body=Block;
 
 VariableDeclaration :
 	(constant?='const')? type=TypeSpecifier items+=VariableDeclarationItem (',' items+=VariableDeclarationItem)* ';';
 		
 VariableDeclarationItem :
-	name=ID ('=' initialValue=Expression)?;
+	name=KeywordID ('=' initialValue=Expression)?;
 	
 ReturnStatement :
 	'return' value=Expression ';';
@@ -178,7 +182,7 @@ LogicalNotExpression returns Expression :
 	RelationalExpression | {LogicalNotExpression} 'not' operand=RelationalExpression;
 
 RelationalExpression returns Expression :
-	AddSubtractExpression ({RelationalExpression.operands+=current} (operators+=RelationalOperator operands+=AddSubtractExpression)+)?;
+	AddSubtractExpression ({RelationalExpression.leftOperand=current} (typeTest?='is' type=DataTypeSpecifier | operator=RelationalOperator rightOperand=AddSubtractExpression))?;
 
 enum RelationalOperator :
 	LessThan='<' |
@@ -205,7 +209,7 @@ enum MultiplyDivideOperator :
 	ElementWiseDivide='./';
 	
 PowerExpression returns Expression :
-	UnaryMinusExpression ({PowerExpression.operands+=current} operator=PowerOperator exponent=UnaryMinusExpression)?;
+	UnaryMinusExpression ({PowerExpression.operand=current} operator=PowerOperator exponent=UnaryMinusExpression)?;
 
 enum PowerOperator :
 	Power='^' |
@@ -221,7 +225,7 @@ FeatureCallPart :
 	FeatureReference | ArrayElementReference | OperationCall;
 	
 FeatureReference :
-	'.' featureName=ID;
+	'.' featureName=(ID | 'unit');
 	
 ArrayElementReference :
 	'[' subscripts+=Subscript (',' subscripts+=Subscript)* ']';
@@ -262,7 +266,7 @@ StringLiteral :
 	value=STRING;
 	
 QualifiedName :
-	identifiers+=ID ('::' identifiers+=ID)*;
+	identifiers+=KeywordID ('::' identifiers+=KeywordID)*;
 
 //	arguments+=Expression ((',' arguments+=Expression)* (',' namedArguments+=NamedArgument)* | 'for' forIndexList=ForIndexList) |
 //	namedArguments+=NamedArgument (',' namedArguments+=NamedArgument)*;
@@ -330,11 +334,18 @@ UnitExpressionDenominator :
 	factors+=UnitExpressionFactor | '(' factors+=UnitExpressionFactor ('*' factors+=UnitExpressionFactor)* ')';
 
 UnitExpressionFactor :
-	operand=ID ('^' exponent=UnitExpressionExponent)?;
+	operand=KeywordID ('^' exponent=UnitExpressionExponent)?;
 
 UnitExpressionExponent :
 	(negative?='-')? value=INTEGER;
+
+/*
+ * Keyword ID
+ */
 	
+KeywordID :
+	ID | 'j';
+
 /*
  * Terminals
  */

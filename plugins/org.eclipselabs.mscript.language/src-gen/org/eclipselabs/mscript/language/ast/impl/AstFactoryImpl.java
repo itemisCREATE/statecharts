@@ -81,6 +81,7 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
       case AstPackage.STATEMENT: return createStatement();
       case AstPackage.BLOCK: return createBlock();
       case AstPackage.CHECK_STATEMENT: return createCheckStatement();
+      case AstPackage.EXECUTE_STATEMENT: return createExecuteStatement();
       case AstPackage.FEATURE_CALL_STATEMENT: return createFeatureCallStatement();
       case AstPackage.IF_STATEMENT: return createIfStatement();
       case AstPackage.IF_CASE: return createIfCase();
@@ -337,6 +338,17 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
   {
     CheckStatementImpl checkStatement = new CheckStatementImpl();
     return checkStatement;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ExecuteStatement createExecuteStatement()
+  {
+    ExecuteStatementImpl executeStatement = new ExecuteStatementImpl();
+    return executeStatement;
   }
 
   /**

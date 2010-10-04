@@ -5,20 +5,16 @@
  */
 package org.eclipselabs.mscript.language.ast.impl;
 
-import java.util.Collection;
-
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.util.EDataTypeEList;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipselabs.mscript.language.ast.AstPackage;
+import org.eclipselabs.mscript.language.ast.DataTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.ast.RelationalExpression;
 import org.eclipselabs.mscript.language.ast.RelationalOperator;
@@ -30,8 +26,11 @@ import org.eclipselabs.mscript.language.ast.RelationalOperator;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.RelationalExpressionImpl#getOperands <em>Operands</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.RelationalExpressionImpl#getOperators <em>Operators</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.RelationalExpressionImpl#getLeftOperand <em>Left Operand</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.RelationalExpressionImpl#isTypeTest <em>Type Test</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.RelationalExpressionImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.RelationalExpressionImpl#getOperator <em>Operator</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.RelationalExpressionImpl#getRightOperand <em>Right Operand</em>}</li>
  * </ul>
  * </p>
  *
@@ -40,24 +39,74 @@ import org.eclipselabs.mscript.language.ast.RelationalOperator;
 public class RelationalExpressionImpl extends ExpressionImpl implements RelationalExpression
 {
   /**
-   * The cached value of the '{@link #getOperands() <em>Operands</em>}' containment reference list.
+   * The cached value of the '{@link #getLeftOperand() <em>Left Operand</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getOperands()
+   * @see #getLeftOperand()
    * @generated
    * @ordered
    */
-  protected EList<Expression> operands;
+  protected Expression leftOperand;
 
   /**
-   * The cached value of the '{@link #getOperators() <em>Operators</em>}' attribute list.
+   * The default value of the '{@link #isTypeTest() <em>Type Test</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getOperators()
+   * @see #isTypeTest()
    * @generated
    * @ordered
    */
-  protected EList<RelationalOperator> operators;
+  protected static final boolean TYPE_TEST_EDEFAULT = false;
+
+  /**
+   * The cached value of the '{@link #isTypeTest() <em>Type Test</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isTypeTest()
+   * @generated
+   * @ordered
+   */
+  protected boolean typeTest = TYPE_TEST_EDEFAULT;
+
+  /**
+   * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getType()
+   * @generated
+   * @ordered
+   */
+  protected DataTypeSpecifier type;
+
+  /**
+   * The default value of the '{@link #getOperator() <em>Operator</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getOperator()
+   * @generated
+   * @ordered
+   */
+  protected static final RelationalOperator OPERATOR_EDEFAULT = RelationalOperator.LESS_THAN;
+
+  /**
+   * The cached value of the '{@link #getOperator() <em>Operator</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getOperator()
+   * @generated
+   * @ordered
+   */
+  protected RelationalOperator operator = OPERATOR_EDEFAULT;
+
+  /**
+   * The cached value of the '{@link #getRightOperand() <em>Right Operand</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getRightOperand()
+   * @generated
+   * @ordered
+   */
+  protected Expression rightOperand;
 
   /**
    * <!-- begin-user-doc -->
@@ -85,13 +134,9 @@ public class RelationalExpressionImpl extends ExpressionImpl implements Relation
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Expression> getOperands()
+  public Expression getLeftOperand()
   {
-    if (operands == null)
-    {
-      operands = new EObjectContainmentEList<Expression>(Expression.class, this, AstPackage.RELATIONAL_EXPRESSION__OPERANDS);
-    }
-    return operands;
+    return leftOperand;
   }
 
   /**
@@ -99,13 +144,179 @@ public class RelationalExpressionImpl extends ExpressionImpl implements Relation
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<RelationalOperator> getOperators()
+  public NotificationChain basicSetLeftOperand(Expression newLeftOperand, NotificationChain msgs)
   {
-    if (operators == null)
+    Expression oldLeftOperand = leftOperand;
+    leftOperand = newLeftOperand;
+    if (eNotificationRequired())
     {
-      operators = new EDataTypeEList<RelationalOperator>(RelationalOperator.class, this, AstPackage.RELATIONAL_EXPRESSION__OPERATORS);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.RELATIONAL_EXPRESSION__LEFT_OPERAND, oldLeftOperand, newLeftOperand);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
     }
-    return operators;
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setLeftOperand(Expression newLeftOperand)
+  {
+    if (newLeftOperand != leftOperand)
+    {
+      NotificationChain msgs = null;
+      if (leftOperand != null)
+        msgs = ((InternalEObject)leftOperand).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.RELATIONAL_EXPRESSION__LEFT_OPERAND, null, msgs);
+      if (newLeftOperand != null)
+        msgs = ((InternalEObject)newLeftOperand).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.RELATIONAL_EXPRESSION__LEFT_OPERAND, null, msgs);
+      msgs = basicSetLeftOperand(newLeftOperand, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.RELATIONAL_EXPRESSION__LEFT_OPERAND, newLeftOperand, newLeftOperand));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public boolean isTypeTest()
+  {
+    return typeTest;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setTypeTest(boolean newTypeTest)
+  {
+    boolean oldTypeTest = typeTest;
+    typeTest = newTypeTest;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.RELATIONAL_EXPRESSION__TYPE_TEST, oldTypeTest, typeTest));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public DataTypeSpecifier getType()
+  {
+    return type;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetType(DataTypeSpecifier newType, NotificationChain msgs)
+  {
+    DataTypeSpecifier oldType = type;
+    type = newType;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.RELATIONAL_EXPRESSION__TYPE, oldType, newType);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setType(DataTypeSpecifier newType)
+  {
+    if (newType != type)
+    {
+      NotificationChain msgs = null;
+      if (type != null)
+        msgs = ((InternalEObject)type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.RELATIONAL_EXPRESSION__TYPE, null, msgs);
+      if (newType != null)
+        msgs = ((InternalEObject)newType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.RELATIONAL_EXPRESSION__TYPE, null, msgs);
+      msgs = basicSetType(newType, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.RELATIONAL_EXPRESSION__TYPE, newType, newType));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public RelationalOperator getOperator()
+  {
+    return operator;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setOperator(RelationalOperator newOperator)
+  {
+    RelationalOperator oldOperator = operator;
+    operator = newOperator == null ? OPERATOR_EDEFAULT : newOperator;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.RELATIONAL_EXPRESSION__OPERATOR, oldOperator, operator));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Expression getRightOperand()
+  {
+    return rightOperand;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetRightOperand(Expression newRightOperand, NotificationChain msgs)
+  {
+    Expression oldRightOperand = rightOperand;
+    rightOperand = newRightOperand;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.RELATIONAL_EXPRESSION__RIGHT_OPERAND, oldRightOperand, newRightOperand);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setRightOperand(Expression newRightOperand)
+  {
+    if (newRightOperand != rightOperand)
+    {
+      NotificationChain msgs = null;
+      if (rightOperand != null)
+        msgs = ((InternalEObject)rightOperand).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.RELATIONAL_EXPRESSION__RIGHT_OPERAND, null, msgs);
+      if (newRightOperand != null)
+        msgs = ((InternalEObject)newRightOperand).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.RELATIONAL_EXPRESSION__RIGHT_OPERAND, null, msgs);
+      msgs = basicSetRightOperand(newRightOperand, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.RELATIONAL_EXPRESSION__RIGHT_OPERAND, newRightOperand, newRightOperand));
   }
 
   /**
@@ -118,8 +329,12 @@ public class RelationalExpressionImpl extends ExpressionImpl implements Relation
   {
     switch (featureID)
     {
-      case AstPackage.RELATIONAL_EXPRESSION__OPERANDS:
-        return ((InternalEList<?>)getOperands()).basicRemove(otherEnd, msgs);
+      case AstPackage.RELATIONAL_EXPRESSION__LEFT_OPERAND:
+        return basicSetLeftOperand(null, msgs);
+      case AstPackage.RELATIONAL_EXPRESSION__TYPE:
+        return basicSetType(null, msgs);
+      case AstPackage.RELATIONAL_EXPRESSION__RIGHT_OPERAND:
+        return basicSetRightOperand(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -134,10 +349,16 @@ public class RelationalExpressionImpl extends ExpressionImpl implements Relation
   {
     switch (featureID)
     {
-      case AstPackage.RELATIONAL_EXPRESSION__OPERANDS:
-        return getOperands();
-      case AstPackage.RELATIONAL_EXPRESSION__OPERATORS:
-        return getOperators();
+      case AstPackage.RELATIONAL_EXPRESSION__LEFT_OPERAND:
+        return getLeftOperand();
+      case AstPackage.RELATIONAL_EXPRESSION__TYPE_TEST:
+        return isTypeTest();
+      case AstPackage.RELATIONAL_EXPRESSION__TYPE:
+        return getType();
+      case AstPackage.RELATIONAL_EXPRESSION__OPERATOR:
+        return getOperator();
+      case AstPackage.RELATIONAL_EXPRESSION__RIGHT_OPERAND:
+        return getRightOperand();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -147,19 +368,25 @@ public class RelationalExpressionImpl extends ExpressionImpl implements Relation
    * <!-- end-user-doc -->
    * @generated
    */
-  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
     switch (featureID)
     {
-      case AstPackage.RELATIONAL_EXPRESSION__OPERANDS:
-        getOperands().clear();
-        getOperands().addAll((Collection<? extends Expression>)newValue);
+      case AstPackage.RELATIONAL_EXPRESSION__LEFT_OPERAND:
+        setLeftOperand((Expression)newValue);
         return;
-      case AstPackage.RELATIONAL_EXPRESSION__OPERATORS:
-        getOperators().clear();
-        getOperators().addAll((Collection<? extends RelationalOperator>)newValue);
+      case AstPackage.RELATIONAL_EXPRESSION__TYPE_TEST:
+        setTypeTest((Boolean)newValue);
+        return;
+      case AstPackage.RELATIONAL_EXPRESSION__TYPE:
+        setType((DataTypeSpecifier)newValue);
+        return;
+      case AstPackage.RELATIONAL_EXPRESSION__OPERATOR:
+        setOperator((RelationalOperator)newValue);
+        return;
+      case AstPackage.RELATIONAL_EXPRESSION__RIGHT_OPERAND:
+        setRightOperand((Expression)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -175,11 +402,20 @@ public class RelationalExpressionImpl extends ExpressionImpl implements Relation
   {
     switch (featureID)
     {
-      case AstPackage.RELATIONAL_EXPRESSION__OPERANDS:
-        getOperands().clear();
+      case AstPackage.RELATIONAL_EXPRESSION__LEFT_OPERAND:
+        setLeftOperand((Expression)null);
         return;
-      case AstPackage.RELATIONAL_EXPRESSION__OPERATORS:
-        getOperators().clear();
+      case AstPackage.RELATIONAL_EXPRESSION__TYPE_TEST:
+        setTypeTest(TYPE_TEST_EDEFAULT);
+        return;
+      case AstPackage.RELATIONAL_EXPRESSION__TYPE:
+        setType((DataTypeSpecifier)null);
+        return;
+      case AstPackage.RELATIONAL_EXPRESSION__OPERATOR:
+        setOperator(OPERATOR_EDEFAULT);
+        return;
+      case AstPackage.RELATIONAL_EXPRESSION__RIGHT_OPERAND:
+        setRightOperand((Expression)null);
         return;
     }
     super.eUnset(featureID);
@@ -195,10 +431,16 @@ public class RelationalExpressionImpl extends ExpressionImpl implements Relation
   {
     switch (featureID)
     {
-      case AstPackage.RELATIONAL_EXPRESSION__OPERANDS:
-        return operands != null && !operands.isEmpty();
-      case AstPackage.RELATIONAL_EXPRESSION__OPERATORS:
-        return operators != null && !operators.isEmpty();
+      case AstPackage.RELATIONAL_EXPRESSION__LEFT_OPERAND:
+        return leftOperand != null;
+      case AstPackage.RELATIONAL_EXPRESSION__TYPE_TEST:
+        return typeTest != TYPE_TEST_EDEFAULT;
+      case AstPackage.RELATIONAL_EXPRESSION__TYPE:
+        return type != null;
+      case AstPackage.RELATIONAL_EXPRESSION__OPERATOR:
+        return operator != OPERATOR_EDEFAULT;
+      case AstPackage.RELATIONAL_EXPRESSION__RIGHT_OPERAND:
+        return rightOperand != null;
     }
     return super.eIsSet(featureID);
   }
@@ -214,8 +456,10 @@ public class RelationalExpressionImpl extends ExpressionImpl implements Relation
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (operators: ");
-    result.append(operators);
+    result.append(" (typeTest: ");
+    result.append(typeTest);
+    result.append(", operator: ");
+    result.append(operator);
     result.append(')');
     return result.toString();
   }

@@ -5,7 +5,6 @@
  */
 package org.eclipselabs.mscript.language.ast;
 
-import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -15,8 +14,11 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.RelationalExpression#getOperands <em>Operands</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.RelationalExpression#getOperators <em>Operators</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.RelationalExpression#getLeftOperand <em>Left Operand</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.RelationalExpression#isTypeTest <em>Type Test</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.RelationalExpression#getType <em>Type</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.RelationalExpression#getOperator <em>Operator</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.RelationalExpression#getRightOperand <em>Right Operand</em>}</li>
  * </ul>
  * </p>
  *
@@ -27,37 +29,136 @@ import org.eclipse.emf.common.util.EList;
 public interface RelationalExpression extends Expression
 {
   /**
-   * Returns the value of the '<em><b>Operands</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipselabs.mscript.language.ast.Expression}.
+   * Returns the value of the '<em><b>Left Operand</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Operands</em>' containment reference list isn't clear,
+   * If the meaning of the '<em>Left Operand</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Operands</em>' containment reference list.
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getRelationalExpression_Operands()
+   * @return the value of the '<em>Left Operand</em>' containment reference.
+   * @see #setLeftOperand(Expression)
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getRelationalExpression_LeftOperand()
    * @model containment="true"
    * @generated
    */
-  EList<Expression> getOperands();
+  Expression getLeftOperand();
 
   /**
-   * Returns the value of the '<em><b>Operators</b></em>' attribute list.
-   * The list contents are of type {@link org.eclipselabs.mscript.language.ast.RelationalOperator}.
-   * The literals are from the enumeration {@link org.eclipselabs.mscript.language.ast.RelationalOperator}.
+   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.RelationalExpression#getLeftOperand <em>Left Operand</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Left Operand</em>' containment reference.
+   * @see #getLeftOperand()
+   * @generated
+   */
+  void setLeftOperand(Expression value);
+
+  /**
+   * Returns the value of the '<em><b>Type Test</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Operators</em>' attribute list isn't clear,
+   * If the meaning of the '<em>Type Test</em>' attribute isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Operators</em>' attribute list.
-   * @see org.eclipselabs.mscript.language.ast.RelationalOperator
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getRelationalExpression_Operators()
-   * @model unique="false"
+   * @return the value of the '<em>Type Test</em>' attribute.
+   * @see #setTypeTest(boolean)
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getRelationalExpression_TypeTest()
+   * @model
    * @generated
    */
-  EList<RelationalOperator> getOperators();
+  boolean isTypeTest();
+
+  /**
+   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.RelationalExpression#isTypeTest <em>Type Test</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Type Test</em>' attribute.
+   * @see #isTypeTest()
+   * @generated
+   */
+  void setTypeTest(boolean value);
+
+  /**
+   * Returns the value of the '<em><b>Type</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Type</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Type</em>' containment reference.
+   * @see #setType(DataTypeSpecifier)
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getRelationalExpression_Type()
+   * @model containment="true"
+   * @generated
+   */
+  DataTypeSpecifier getType();
+
+  /**
+   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.RelationalExpression#getType <em>Type</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Type</em>' containment reference.
+   * @see #getType()
+   * @generated
+   */
+  void setType(DataTypeSpecifier value);
+
+  /**
+   * Returns the value of the '<em><b>Operator</b></em>' attribute.
+   * The literals are from the enumeration {@link org.eclipselabs.mscript.language.ast.RelationalOperator}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Operator</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Operator</em>' attribute.
+   * @see org.eclipselabs.mscript.language.ast.RelationalOperator
+   * @see #setOperator(RelationalOperator)
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getRelationalExpression_Operator()
+   * @model
+   * @generated
+   */
+  RelationalOperator getOperator();
+
+  /**
+   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.RelationalExpression#getOperator <em>Operator</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Operator</em>' attribute.
+   * @see org.eclipselabs.mscript.language.ast.RelationalOperator
+   * @see #getOperator()
+   * @generated
+   */
+  void setOperator(RelationalOperator value);
+
+  /**
+   * Returns the value of the '<em><b>Right Operand</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Right Operand</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Right Operand</em>' containment reference.
+   * @see #setRightOperand(Expression)
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getRelationalExpression_RightOperand()
+   * @model containment="true"
+   * @generated
+   */
+  Expression getRightOperand();
+
+  /**
+   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.RelationalExpression#getRightOperand <em>Right Operand</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Right Operand</em>' containment reference.
+   * @see #getRightOperand()
+   * @generated
+   */
+  void setRightOperand(Expression value);
 
 } // RelationalExpression

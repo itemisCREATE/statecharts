@@ -5,20 +5,13 @@
  */
 package org.eclipselabs.mscript.language.ast.impl;
 
-import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.Expression;
@@ -32,7 +25,7 @@ import org.eclipselabs.mscript.language.ast.PowerOperator;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.PowerExpressionImpl#getOperands <em>Operands</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.PowerExpressionImpl#getOperand <em>Operand</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.PowerExpressionImpl#getOperator <em>Operator</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.PowerExpressionImpl#getExponent <em>Exponent</em>}</li>
  * </ul>
@@ -43,14 +36,14 @@ import org.eclipselabs.mscript.language.ast.PowerOperator;
 public class PowerExpressionImpl extends ExpressionImpl implements PowerExpression
 {
   /**
-   * The cached value of the '{@link #getOperands() <em>Operands</em>}' containment reference list.
+   * The cached value of the '{@link #getOperand() <em>Operand</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getOperands()
+   * @see #getOperand()
    * @generated
    * @ordered
    */
-  protected EList<Expression> operands;
+  protected Expression operand;
 
   /**
    * The default value of the '{@link #getOperator() <em>Operator</em>}' attribute.
@@ -108,13 +101,47 @@ public class PowerExpressionImpl extends ExpressionImpl implements PowerExpressi
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Expression> getOperands()
+  public Expression getOperand()
   {
-    if (operands == null)
+    return operand;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetOperand(Expression newOperand, NotificationChain msgs)
+  {
+    Expression oldOperand = operand;
+    operand = newOperand;
+    if (eNotificationRequired())
     {
-      operands = new EObjectContainmentEList<Expression>(Expression.class, this, AstPackage.POWER_EXPRESSION__OPERANDS);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.POWER_EXPRESSION__OPERAND, oldOperand, newOperand);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
     }
-    return operands;
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setOperand(Expression newOperand)
+  {
+    if (newOperand != operand)
+    {
+      NotificationChain msgs = null;
+      if (operand != null)
+        msgs = ((InternalEObject)operand).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.POWER_EXPRESSION__OPERAND, null, msgs);
+      if (newOperand != null)
+        msgs = ((InternalEObject)newOperand).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.POWER_EXPRESSION__OPERAND, null, msgs);
+      msgs = basicSetOperand(newOperand, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.POWER_EXPRESSION__OPERAND, newOperand, newOperand));
   }
 
   /**
@@ -198,8 +225,8 @@ public class PowerExpressionImpl extends ExpressionImpl implements PowerExpressi
   {
     switch (featureID)
     {
-      case AstPackage.POWER_EXPRESSION__OPERANDS:
-        return ((InternalEList<?>)getOperands()).basicRemove(otherEnd, msgs);
+      case AstPackage.POWER_EXPRESSION__OPERAND:
+        return basicSetOperand(null, msgs);
       case AstPackage.POWER_EXPRESSION__EXPONENT:
         return basicSetExponent(null, msgs);
     }
@@ -216,8 +243,8 @@ public class PowerExpressionImpl extends ExpressionImpl implements PowerExpressi
   {
     switch (featureID)
     {
-      case AstPackage.POWER_EXPRESSION__OPERANDS:
-        return getOperands();
+      case AstPackage.POWER_EXPRESSION__OPERAND:
+        return getOperand();
       case AstPackage.POWER_EXPRESSION__OPERATOR:
         return getOperator();
       case AstPackage.POWER_EXPRESSION__EXPONENT:
@@ -231,15 +258,13 @@ public class PowerExpressionImpl extends ExpressionImpl implements PowerExpressi
    * <!-- end-user-doc -->
    * @generated
    */
-  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
     switch (featureID)
     {
-      case AstPackage.POWER_EXPRESSION__OPERANDS:
-        getOperands().clear();
-        getOperands().addAll((Collection<? extends Expression>)newValue);
+      case AstPackage.POWER_EXPRESSION__OPERAND:
+        setOperand((Expression)newValue);
         return;
       case AstPackage.POWER_EXPRESSION__OPERATOR:
         setOperator((PowerOperator)newValue);
@@ -261,8 +286,8 @@ public class PowerExpressionImpl extends ExpressionImpl implements PowerExpressi
   {
     switch (featureID)
     {
-      case AstPackage.POWER_EXPRESSION__OPERANDS:
-        getOperands().clear();
+      case AstPackage.POWER_EXPRESSION__OPERAND:
+        setOperand((Expression)null);
         return;
       case AstPackage.POWER_EXPRESSION__OPERATOR:
         setOperator(OPERATOR_EDEFAULT);
@@ -284,8 +309,8 @@ public class PowerExpressionImpl extends ExpressionImpl implements PowerExpressi
   {
     switch (featureID)
     {
-      case AstPackage.POWER_EXPRESSION__OPERANDS:
-        return operands != null && !operands.isEmpty();
+      case AstPackage.POWER_EXPRESSION__OPERAND:
+        return operand != null;
       case AstPackage.POWER_EXPRESSION__OPERATOR:
         return operator != OPERATOR_EDEFAULT;
       case AstPackage.POWER_EXPRESSION__EXPONENT:

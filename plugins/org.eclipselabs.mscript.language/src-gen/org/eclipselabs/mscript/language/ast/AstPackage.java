@@ -479,6 +479,34 @@ public interface AstPackage extends EPackage
   int CHECK_STATEMENT_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 1;
 
   /**
+   * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.ExecuteStatementImpl <em>Execute Statement</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipselabs.mscript.language.ast.impl.ExecuteStatementImpl
+   * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getExecuteStatement()
+   * @generated
+   */
+  int EXECUTE_STATEMENT = 13;
+
+  /**
+   * The feature id for the '<em><b>Body</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EXECUTE_STATEMENT__BODY = STATEMENT_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Execute Statement</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EXECUTE_STATEMENT_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 1;
+
+  /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.FeatureCallStatementImpl <em>Feature Call Statement</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -486,7 +514,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getFeatureCallStatement()
    * @generated
    */
-  int FEATURE_CALL_STATEMENT = 13;
+  int FEATURE_CALL_STATEMENT = 14;
 
   /**
    * The feature id for the '<em><b>Feature Call</b></em>' containment reference.
@@ -532,7 +560,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getIfStatement()
    * @generated
    */
-  int IF_STATEMENT = 14;
+  int IF_STATEMENT = 15;
 
   /**
    * The feature id for the '<em><b>Cases</b></em>' containment reference list.
@@ -569,7 +597,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getIfCase()
    * @generated
    */
-  int IF_CASE = 15;
+  int IF_CASE = 16;
 
   /**
    * The feature id for the '<em><b>Condition</b></em>' containment reference.
@@ -606,7 +634,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getWhileStatement()
    * @generated
    */
-  int WHILE_STATEMENT = 16;
+  int WHILE_STATEMENT = 17;
 
   /**
    * The feature id for the '<em><b>Predicate</b></em>' containment reference.
@@ -643,7 +671,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getDoWhileStatement()
    * @generated
    */
-  int DO_WHILE_STATEMENT = 17;
+  int DO_WHILE_STATEMENT = 18;
 
   /**
    * The feature id for the '<em><b>Body</b></em>' containment reference.
@@ -680,7 +708,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getForeachStatement()
    * @generated
    */
-  int FOREACH_STATEMENT = 18;
+  int FOREACH_STATEMENT = 19;
 
   /**
    * The feature id for the '<em><b>Element Name</b></em>' attribute.
@@ -726,7 +754,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getVariableDeclaration()
    * @generated
    */
-  int VARIABLE_DECLARATION = 19;
+  int VARIABLE_DECLARATION = 20;
 
   /**
    * The feature id for the '<em><b>Constant</b></em>' attribute.
@@ -772,7 +800,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getVariableDeclarationItem()
    * @generated
    */
-  int VARIABLE_DECLARATION_ITEM = 20;
+  int VARIABLE_DECLARATION_ITEM = 21;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -809,7 +837,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getReturnStatement()
    * @generated
    */
-  int RETURN_STATEMENT = 21;
+  int RETURN_STATEMENT = 22;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' containment reference.
@@ -837,7 +865,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getTypeSpecifier()
    * @generated
    */
-  int TYPE_SPECIFIER = 22;
+  int TYPE_SPECIFIER = 23;
 
   /**
    * The number of structural features of the '<em>Type Specifier</em>' class.
@@ -856,7 +884,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getDataTypeSpecifier()
    * @generated
    */
-  int DATA_TYPE_SPECIFIER = 23;
+  int DATA_TYPE_SPECIFIER = 24;
 
   /**
    * The number of structural features of the '<em>Data Type Specifier</em>' class.
@@ -875,7 +903,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getPrimitiveTypeSpecifier()
    * @generated
    */
-  int PRIMITIVE_TYPE_SPECIFIER = 24;
+  int PRIMITIVE_TYPE_SPECIFIER = 25;
 
   /**
    * The number of structural features of the '<em>Primitive Type Specifier</em>' class.
@@ -894,7 +922,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getNumericalTypeSpecifier()
    * @generated
    */
-  int NUMERICAL_TYPE_SPECIFIER = 25;
+  int NUMERICAL_TYPE_SPECIFIER = 26;
 
   /**
    * The feature id for the '<em><b>Unit</b></em>' containment reference.
@@ -922,7 +950,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getRealTypeSpecifier()
    * @generated
    */
-  int REAL_TYPE_SPECIFIER = 26;
+  int REAL_TYPE_SPECIFIER = 27;
 
   /**
    * The feature id for the '<em><b>Unit</b></em>' containment reference.
@@ -950,7 +978,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getIntegerTypeSpecifier()
    * @generated
    */
-  int INTEGER_TYPE_SPECIFIER = 27;
+  int INTEGER_TYPE_SPECIFIER = 28;
 
   /**
    * The feature id for the '<em><b>Unit</b></em>' containment reference.
@@ -978,7 +1006,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getComplexTypeSpecifier()
    * @generated
    */
-  int COMPLEX_TYPE_SPECIFIER = 28;
+  int COMPLEX_TYPE_SPECIFIER = 29;
 
   /**
    * The feature id for the '<em><b>Unit</b></em>' containment reference.
@@ -1006,7 +1034,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getGaussianTypeSpecifier()
    * @generated
    */
-  int GAUSSIAN_TYPE_SPECIFIER = 29;
+  int GAUSSIAN_TYPE_SPECIFIER = 30;
 
   /**
    * The feature id for the '<em><b>Unit</b></em>' containment reference.
@@ -1034,7 +1062,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getBooleanTypeSpecifier()
    * @generated
    */
-  int BOOLEAN_TYPE_SPECIFIER = 30;
+  int BOOLEAN_TYPE_SPECIFIER = 31;
 
   /**
    * The number of structural features of the '<em>Boolean Type Specifier</em>' class.
@@ -1053,7 +1081,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getStringTypeSpecifier()
    * @generated
    */
-  int STRING_TYPE_SPECIFIER = 31;
+  int STRING_TYPE_SPECIFIER = 32;
 
   /**
    * The number of structural features of the '<em>String Type Specifier</em>' class.
@@ -1072,7 +1100,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getUnitTypeSpecifier()
    * @generated
    */
-  int UNIT_TYPE_SPECIFIER = 32;
+  int UNIT_TYPE_SPECIFIER = 33;
 
   /**
    * The number of structural features of the '<em>Unit Type Specifier</em>' class.
@@ -1091,7 +1119,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getNamedTypeSpecifier()
    * @generated
    */
-  int NAMED_TYPE_SPECIFIER = 33;
+  int NAMED_TYPE_SPECIFIER = 34;
 
   /**
    * The feature id for the '<em><b>Type Reference</b></em>' containment reference.
@@ -1119,7 +1147,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getExpression()
    * @generated
    */
-  int EXPRESSION = 34;
+  int EXPRESSION = 35;
 
   /**
    * The number of structural features of the '<em>Expression</em>' class.
@@ -1138,7 +1166,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getConditionalExpression()
    * @generated
    */
-  int CONDITIONAL_EXPRESSION = 35;
+  int CONDITIONAL_EXPRESSION = 36;
 
   /**
    * The feature id for the '<em><b>Cases</b></em>' containment reference list.
@@ -1175,7 +1203,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getConditionalExpressionCase()
    * @generated
    */
-  int CONDITIONAL_EXPRESSION_CASE = 36;
+  int CONDITIONAL_EXPRESSION_CASE = 37;
 
   /**
    * The feature id for the '<em><b>Condition Expression</b></em>' containment reference.
@@ -1212,7 +1240,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getFeatureCallPart()
    * @generated
    */
-  int FEATURE_CALL_PART = 37;
+  int FEATURE_CALL_PART = 38;
 
   /**
    * The number of structural features of the '<em>Feature Call Part</em>' class.
@@ -1231,7 +1259,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getFeatureReference()
    * @generated
    */
-  int FEATURE_REFERENCE = 38;
+  int FEATURE_REFERENCE = 39;
 
   /**
    * The feature id for the '<em><b>Feature Name</b></em>' attribute.
@@ -1259,7 +1287,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getArrayElementReference()
    * @generated
    */
-  int ARRAY_ELEMENT_REFERENCE = 39;
+  int ARRAY_ELEMENT_REFERENCE = 40;
 
   /**
    * The feature id for the '<em><b>Subscripts</b></em>' containment reference list.
@@ -1287,7 +1315,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getOperationCall()
    * @generated
    */
-  int OPERATION_CALL = 40;
+  int OPERATION_CALL = 41;
 
   /**
    * The feature id for the '<em><b>Arguments</b></em>' containment reference list.
@@ -1315,7 +1343,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getLiteral()
    * @generated
    */
-  int LITERAL = 41;
+  int LITERAL = 42;
 
   /**
    * The number of structural features of the '<em>Literal</em>' class.
@@ -1334,7 +1362,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getNumericalLiteral()
    * @generated
    */
-  int NUMERICAL_LITERAL = 42;
+  int NUMERICAL_LITERAL = 43;
 
   /**
    * The feature id for the '<em><b>Imaginary</b></em>' attribute.
@@ -1371,7 +1399,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getRealLiteral()
    * @generated
    */
-  int REAL_LITERAL = 43;
+  int REAL_LITERAL = 44;
 
   /**
    * The feature id for the '<em><b>Imaginary</b></em>' attribute.
@@ -1417,7 +1445,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getIntegerLiteral()
    * @generated
    */
-  int INTEGER_LITERAL = 44;
+  int INTEGER_LITERAL = 45;
 
   /**
    * The feature id for the '<em><b>Imaginary</b></em>' attribute.
@@ -1463,7 +1491,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getBooleanLiteral()
    * @generated
    */
-  int BOOLEAN_LITERAL = 45;
+  int BOOLEAN_LITERAL = 46;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1491,7 +1519,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getStringLiteral()
    * @generated
    */
-  int STRING_LITERAL = 46;
+  int STRING_LITERAL = 47;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1519,7 +1547,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getQualifiedName()
    * @generated
    */
-  int QUALIFIED_NAME = 47;
+  int QUALIFIED_NAME = 48;
 
   /**
    * The feature id for the '<em><b>Identifiers</b></em>' attribute list.
@@ -1547,7 +1575,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getSymbolReference()
    * @generated
    */
-  int SYMBOL_REFERENCE = 48;
+  int SYMBOL_REFERENCE = 49;
 
   /**
    * The feature id for the '<em><b>Global</b></em>' attribute.
@@ -1584,7 +1612,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getSubscript()
    * @generated
    */
-  int SUBSCRIPT = 49;
+  int SUBSCRIPT = 50;
 
   /**
    * The number of structural features of the '<em>Subscript</em>' class.
@@ -1603,7 +1631,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getColonSubscript()
    * @generated
    */
-  int COLON_SUBSCRIPT = 50;
+  int COLON_SUBSCRIPT = 51;
 
   /**
    * The number of structural features of the '<em>Colon Subscript</em>' class.
@@ -1622,7 +1650,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getExpressionSubscript()
    * @generated
    */
-  int EXPRESSION_SUBSCRIPT = 51;
+  int EXPRESSION_SUBSCRIPT = 52;
 
   /**
    * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -1650,7 +1678,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getMatrixConstructionOperator()
    * @generated
    */
-  int MATRIX_CONSTRUCTION_OPERATOR = 52;
+  int MATRIX_CONSTRUCTION_OPERATOR = 53;
 
   /**
    * The feature id for the '<em><b>Expression Lists</b></em>' containment reference list.
@@ -1678,7 +1706,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getExpressionList()
    * @generated
    */
-  int EXPRESSION_LIST = 53;
+  int EXPRESSION_LIST = 54;
 
   /**
    * The feature id for the '<em><b>Expressions</b></em>' containment reference list.
@@ -1706,7 +1734,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getUnitConstructionOperator()
    * @generated
    */
-  int UNIT_CONSTRUCTION_OPERATOR = 54;
+  int UNIT_CONSTRUCTION_OPERATOR = 55;
 
   /**
    * The feature id for the '<em><b>Unit Expression</b></em>' containment reference.
@@ -1734,7 +1762,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getParenthesizedExpression()
    * @generated
    */
-  int PARENTHESIZED_EXPRESSION = 55;
+  int PARENTHESIZED_EXPRESSION = 56;
 
   /**
    * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -1762,7 +1790,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getBeginExpression()
    * @generated
    */
-  int BEGIN_EXPRESSION = 56;
+  int BEGIN_EXPRESSION = 57;
 
   /**
    * The number of structural features of the '<em>Begin Expression</em>' class.
@@ -1781,7 +1809,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getEndExpression()
    * @generated
    */
-  int END_EXPRESSION = 57;
+  int END_EXPRESSION = 58;
 
   /**
    * The number of structural features of the '<em>End Expression</em>' class.
@@ -1800,7 +1828,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getUnitExpression()
    * @generated
    */
-  int UNIT_EXPRESSION = 58;
+  int UNIT_EXPRESSION = 59;
 
   /**
    * The feature id for the '<em><b>Unspecified</b></em>' attribute.
@@ -1855,7 +1883,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getUnitExpressionNumerator()
    * @generated
    */
-  int UNIT_EXPRESSION_NUMERATOR = 59;
+  int UNIT_EXPRESSION_NUMERATOR = 60;
 
   /**
    * The feature id for the '<em><b>One</b></em>' attribute.
@@ -1892,7 +1920,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getUnitExpressionDenominator()
    * @generated
    */
-  int UNIT_EXPRESSION_DENOMINATOR = 60;
+  int UNIT_EXPRESSION_DENOMINATOR = 61;
 
   /**
    * The feature id for the '<em><b>Factors</b></em>' containment reference list.
@@ -1920,7 +1948,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getUnitExpressionFactor()
    * @generated
    */
-  int UNIT_EXPRESSION_FACTOR = 61;
+  int UNIT_EXPRESSION_FACTOR = 62;
 
   /**
    * The feature id for the '<em><b>Operand</b></em>' attribute.
@@ -1957,7 +1985,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getUnitExpressionExponent()
    * @generated
    */
-  int UNIT_EXPRESSION_EXPONENT = 62;
+  int UNIT_EXPRESSION_EXPONENT = 63;
 
   /**
    * The feature id for the '<em><b>Negative</b></em>' attribute.
@@ -1994,7 +2022,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getRangeExpression()
    * @generated
    */
-  int RANGE_EXPRESSION = 63;
+  int RANGE_EXPRESSION = 64;
 
   /**
    * The feature id for the '<em><b>Expressions</b></em>' containment reference list.
@@ -2022,7 +2050,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getLogicalOrExpression()
    * @generated
    */
-  int LOGICAL_OR_EXPRESSION = 64;
+  int LOGICAL_OR_EXPRESSION = 65;
 
   /**
    * The feature id for the '<em><b>Operands</b></em>' containment reference list.
@@ -2050,7 +2078,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getLogicalAndExpression()
    * @generated
    */
-  int LOGICAL_AND_EXPRESSION = 65;
+  int LOGICAL_AND_EXPRESSION = 66;
 
   /**
    * The feature id for the '<em><b>Operands</b></em>' containment reference list.
@@ -2078,7 +2106,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getLogicalNotExpression()
    * @generated
    */
-  int LOGICAL_NOT_EXPRESSION = 66;
+  int LOGICAL_NOT_EXPRESSION = 67;
 
   /**
    * The feature id for the '<em><b>Operand</b></em>' containment reference.
@@ -2106,25 +2134,52 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getRelationalExpression()
    * @generated
    */
-  int RELATIONAL_EXPRESSION = 67;
+  int RELATIONAL_EXPRESSION = 68;
 
   /**
-   * The feature id for the '<em><b>Operands</b></em>' containment reference list.
+   * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int RELATIONAL_EXPRESSION__OPERANDS = EXPRESSION_FEATURE_COUNT + 0;
+  int RELATIONAL_EXPRESSION__LEFT_OPERAND = EXPRESSION_FEATURE_COUNT + 0;
 
   /**
-   * The feature id for the '<em><b>Operators</b></em>' attribute list.
+   * The feature id for the '<em><b>Type Test</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int RELATIONAL_EXPRESSION__OPERATORS = EXPRESSION_FEATURE_COUNT + 1;
+  int RELATIONAL_EXPRESSION__TYPE_TEST = EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Type</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RELATIONAL_EXPRESSION__TYPE = EXPRESSION_FEATURE_COUNT + 2;
+
+  /**
+   * The feature id for the '<em><b>Operator</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RELATIONAL_EXPRESSION__OPERATOR = EXPRESSION_FEATURE_COUNT + 3;
+
+  /**
+   * The feature id for the '<em><b>Right Operand</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RELATIONAL_EXPRESSION__RIGHT_OPERAND = EXPRESSION_FEATURE_COUNT + 4;
 
   /**
    * The number of structural features of the '<em>Relational Expression</em>' class.
@@ -2133,7 +2188,7 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int RELATIONAL_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
+  int RELATIONAL_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 5;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.AddSubtractExpressionImpl <em>Add Subtract Expression</em>}' class.
@@ -2143,7 +2198,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getAddSubtractExpression()
    * @generated
    */
-  int ADD_SUBTRACT_EXPRESSION = 68;
+  int ADD_SUBTRACT_EXPRESSION = 69;
 
   /**
    * The feature id for the '<em><b>Operands</b></em>' containment reference list.
@@ -2180,7 +2235,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getMultiplyDivideExpression()
    * @generated
    */
-  int MULTIPLY_DIVIDE_EXPRESSION = 69;
+  int MULTIPLY_DIVIDE_EXPRESSION = 70;
 
   /**
    * The feature id for the '<em><b>Operands</b></em>' containment reference list.
@@ -2217,16 +2272,16 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getPowerExpression()
    * @generated
    */
-  int POWER_EXPRESSION = 70;
+  int POWER_EXPRESSION = 71;
 
   /**
-   * The feature id for the '<em><b>Operands</b></em>' containment reference list.
+   * The feature id for the '<em><b>Operand</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int POWER_EXPRESSION__OPERANDS = EXPRESSION_FEATURE_COUNT + 0;
+  int POWER_EXPRESSION__OPERAND = EXPRESSION_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Operator</b></em>' attribute.
@@ -2263,7 +2318,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getUnaryMinusExpression()
    * @generated
    */
-  int UNARY_MINUS_EXPRESSION = 71;
+  int UNARY_MINUS_EXPRESSION = 72;
 
   /**
    * The feature id for the '<em><b>Operand</b></em>' containment reference.
@@ -2291,7 +2346,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getFeatureCall()
    * @generated
    */
-  int FEATURE_CALL = 72;
+  int FEATURE_CALL = 73;
 
   /**
    * The feature id for the '<em><b>Target</b></em>' containment reference.
@@ -2328,7 +2383,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getRelationalOperator()
    * @generated
    */
-  int RELATIONAL_OPERATOR = 73;
+  int RELATIONAL_OPERATOR = 74;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.AddSubtractOperator <em>Add Subtract Operator</em>}' enum.
@@ -2338,7 +2393,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getAddSubtractOperator()
    * @generated
    */
-  int ADD_SUBTRACT_OPERATOR = 74;
+  int ADD_SUBTRACT_OPERATOR = 75;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.MultiplyDivideOperator <em>Multiply Divide Operator</em>}' enum.
@@ -2348,7 +2403,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getMultiplyDivideOperator()
    * @generated
    */
-  int MULTIPLY_DIVIDE_OPERATOR = 75;
+  int MULTIPLY_DIVIDE_OPERATOR = 76;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.PowerOperator <em>Power Operator</em>}' enum.
@@ -2358,7 +2413,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getPowerOperator()
    * @generated
    */
-  int POWER_OPERATOR = 76;
+  int POWER_OPERATOR = 77;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.BooleanKind <em>Boolean Kind</em>}' enum.
@@ -2368,7 +2423,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getBooleanKind()
    * @generated
    */
-  int BOOLEAN_KIND = 77;
+  int BOOLEAN_KIND = 78;
 
 
   /**
@@ -2709,6 +2764,27 @@ public interface AstPackage extends EPackage
    * @generated
    */
   EReference getCheckStatement_Body();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.ExecuteStatement <em>Execute Statement</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Execute Statement</em>'.
+   * @see org.eclipselabs.mscript.language.ast.ExecuteStatement
+   * @generated
+   */
+  EClass getExecuteStatement();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.ExecuteStatement#getBody <em>Body</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Body</em>'.
+   * @see org.eclipselabs.mscript.language.ast.ExecuteStatement#getBody()
+   * @see #getExecuteStatement()
+   * @generated
+   */
+  EReference getExecuteStatement_Body();
 
   /**
    * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.FeatureCallStatement <em>Feature Call Statement</em>}'.
@@ -3899,26 +3975,59 @@ public interface AstPackage extends EPackage
   EClass getRelationalExpression();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.ast.RelationalExpression#getOperands <em>Operands</em>}'.
+   * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.RelationalExpression#getLeftOperand <em>Left Operand</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Operands</em>'.
-   * @see org.eclipselabs.mscript.language.ast.RelationalExpression#getOperands()
+   * @return the meta object for the containment reference '<em>Left Operand</em>'.
+   * @see org.eclipselabs.mscript.language.ast.RelationalExpression#getLeftOperand()
    * @see #getRelationalExpression()
    * @generated
    */
-  EReference getRelationalExpression_Operands();
+  EReference getRelationalExpression_LeftOperand();
 
   /**
-   * Returns the meta object for the attribute list '{@link org.eclipselabs.mscript.language.ast.RelationalExpression#getOperators <em>Operators</em>}'.
+   * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.ast.RelationalExpression#isTypeTest <em>Type Test</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute list '<em>Operators</em>'.
-   * @see org.eclipselabs.mscript.language.ast.RelationalExpression#getOperators()
+   * @return the meta object for the attribute '<em>Type Test</em>'.
+   * @see org.eclipselabs.mscript.language.ast.RelationalExpression#isTypeTest()
    * @see #getRelationalExpression()
    * @generated
    */
-  EAttribute getRelationalExpression_Operators();
+  EAttribute getRelationalExpression_TypeTest();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.RelationalExpression#getType <em>Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Type</em>'.
+   * @see org.eclipselabs.mscript.language.ast.RelationalExpression#getType()
+   * @see #getRelationalExpression()
+   * @generated
+   */
+  EReference getRelationalExpression_Type();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.ast.RelationalExpression#getOperator <em>Operator</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Operator</em>'.
+   * @see org.eclipselabs.mscript.language.ast.RelationalExpression#getOperator()
+   * @see #getRelationalExpression()
+   * @generated
+   */
+  EAttribute getRelationalExpression_Operator();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.RelationalExpression#getRightOperand <em>Right Operand</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Right Operand</em>'.
+   * @see org.eclipselabs.mscript.language.ast.RelationalExpression#getRightOperand()
+   * @see #getRelationalExpression()
+   * @generated
+   */
+  EReference getRelationalExpression_RightOperand();
 
   /**
    * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.AddSubtractExpression <em>Add Subtract Expression</em>}'.
@@ -3995,15 +4104,15 @@ public interface AstPackage extends EPackage
   EClass getPowerExpression();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.ast.PowerExpression#getOperands <em>Operands</em>}'.
+   * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.PowerExpression#getOperand <em>Operand</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Operands</em>'.
-   * @see org.eclipselabs.mscript.language.ast.PowerExpression#getOperands()
+   * @return the meta object for the containment reference '<em>Operand</em>'.
+   * @see org.eclipselabs.mscript.language.ast.PowerExpression#getOperand()
    * @see #getPowerExpression()
    * @generated
    */
-  EReference getPowerExpression_Operands();
+  EReference getPowerExpression_Operand();
 
   /**
    * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.ast.PowerExpression#getOperator <em>Operator</em>}'.
@@ -4434,6 +4543,24 @@ public interface AstPackage extends EPackage
      * @generated
      */
     EReference CHECK_STATEMENT__BODY = eINSTANCE.getCheckStatement_Body();
+
+    /**
+     * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.ExecuteStatementImpl <em>Execute Statement</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipselabs.mscript.language.ast.impl.ExecuteStatementImpl
+     * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getExecuteStatement()
+     * @generated
+     */
+    EClass EXECUTE_STATEMENT = eINSTANCE.getExecuteStatement();
+
+    /**
+     * The meta object literal for the '<em><b>Body</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EXECUTE_STATEMENT__BODY = eINSTANCE.getExecuteStatement_Body();
 
     /**
      * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.FeatureCallStatementImpl <em>Feature Call Statement</em>}' class.
@@ -5450,20 +5577,44 @@ public interface AstPackage extends EPackage
     EClass RELATIONAL_EXPRESSION = eINSTANCE.getRelationalExpression();
 
     /**
-     * The meta object literal for the '<em><b>Operands</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Left Operand</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference RELATIONAL_EXPRESSION__OPERANDS = eINSTANCE.getRelationalExpression_Operands();
+    EReference RELATIONAL_EXPRESSION__LEFT_OPERAND = eINSTANCE.getRelationalExpression_LeftOperand();
 
     /**
-     * The meta object literal for the '<em><b>Operators</b></em>' attribute list feature.
+     * The meta object literal for the '<em><b>Type Test</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute RELATIONAL_EXPRESSION__OPERATORS = eINSTANCE.getRelationalExpression_Operators();
+    EAttribute RELATIONAL_EXPRESSION__TYPE_TEST = eINSTANCE.getRelationalExpression_TypeTest();
+
+    /**
+     * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference RELATIONAL_EXPRESSION__TYPE = eINSTANCE.getRelationalExpression_Type();
+
+    /**
+     * The meta object literal for the '<em><b>Operator</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute RELATIONAL_EXPRESSION__OPERATOR = eINSTANCE.getRelationalExpression_Operator();
+
+    /**
+     * The meta object literal for the '<em><b>Right Operand</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference RELATIONAL_EXPRESSION__RIGHT_OPERAND = eINSTANCE.getRelationalExpression_RightOperand();
 
     /**
      * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.AddSubtractExpressionImpl <em>Add Subtract Expression</em>}' class.
@@ -5528,12 +5679,12 @@ public interface AstPackage extends EPackage
     EClass POWER_EXPRESSION = eINSTANCE.getPowerExpression();
 
     /**
-     * The meta object literal for the '<em><b>Operands</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Operand</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference POWER_EXPRESSION__OPERANDS = eINSTANCE.getPowerExpression_Operands();
+    EReference POWER_EXPRESSION__OPERAND = eINSTANCE.getPowerExpression_Operand();
 
     /**
      * The meta object literal for the '<em><b>Operator</b></em>' attribute feature.

@@ -78,6 +78,9 @@
     <genClasses ecoreClass="Mscript.ecore#//CheckStatement">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//CheckStatement/body"/>
     </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//ExecuteStatement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ExecuteStatement/body"/>
+    </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//FeatureCallStatement">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//FeatureCallStatement/featureCall"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//FeatureCallStatement/assignment"/>
@@ -228,8 +231,11 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//LogicalNotExpression/operand"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//RelationalExpression">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//RelationalExpression/operands"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//RelationalExpression/operators"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//RelationalExpression/leftOperand"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//RelationalExpression/typeTest"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//RelationalExpression/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//RelationalExpression/operator"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//RelationalExpression/rightOperand"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//AddSubtractExpression">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//AddSubtractExpression/operands"/>
@@ -240,7 +246,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//MultiplyDivideExpression/operators"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//PowerExpression">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//PowerExpression/operands"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//PowerExpression/operand"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//PowerExpression/operator"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//PowerExpression/exponent"/>
     </genClasses>

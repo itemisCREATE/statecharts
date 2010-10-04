@@ -192,6 +192,14 @@ public class AstSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case AstPackage.EXECUTE_STATEMENT:
+      {
+        ExecuteStatement executeStatement = (ExecuteStatement)theEObject;
+        T result = caseExecuteStatement(executeStatement);
+        if (result == null) result = caseStatement(executeStatement);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case AstPackage.FEATURE_CALL_STATEMENT:
       {
         FeatureCallStatement featureCallStatement = (FeatureCallStatement)theEObject;
@@ -894,6 +902,22 @@ public class AstSwitch<T>
    * @generated
    */
   public T caseCheckStatement(CheckStatement object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Execute Statement</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Execute Statement</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseExecuteStatement(ExecuteStatement object)
   {
     return null;
   }

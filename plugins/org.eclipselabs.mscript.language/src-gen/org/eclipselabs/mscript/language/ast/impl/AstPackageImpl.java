@@ -33,6 +33,7 @@ import org.eclipselabs.mscript.language.ast.DoWhileStatement;
 import org.eclipselabs.mscript.language.ast.EndExpression;
 import org.eclipselabs.mscript.language.ast.EnumerationDefinition;
 import org.eclipselabs.mscript.language.ast.EnumerationLiteralDeclaration;
+import org.eclipselabs.mscript.language.ast.ExecuteStatement;
 import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.ast.ExpressionList;
 import org.eclipselabs.mscript.language.ast.ExpressionSubscript;
@@ -192,6 +193,13 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * @generated
    */
   private EClass checkStatementEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass executeStatementEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -1029,6 +1037,26 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
   public EReference getCheckStatement_Body()
   {
     return (EReference)checkStatementEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getExecuteStatement()
+  {
+    return executeStatementEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getExecuteStatement_Body()
+  {
+    return (EReference)executeStatementEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -2166,7 +2194,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getRelationalExpression_Operands()
+  public EReference getRelationalExpression_LeftOperand()
   {
     return (EReference)relationalExpressionEClass.getEStructuralFeatures().get(0);
   }
@@ -2176,9 +2204,39 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getRelationalExpression_Operators()
+  public EAttribute getRelationalExpression_TypeTest()
   {
     return (EAttribute)relationalExpressionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getRelationalExpression_Type()
+  {
+    return (EReference)relationalExpressionEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getRelationalExpression_Operator()
+  {
+    return (EAttribute)relationalExpressionEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getRelationalExpression_RightOperand()
+  {
+    return (EReference)relationalExpressionEClass.getEStructuralFeatures().get(4);
   }
 
   /**
@@ -2256,7 +2314,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getPowerExpression_Operands()
+  public EReference getPowerExpression_Operand()
   {
     return (EReference)powerExpressionEClass.getEStructuralFeatures().get(0);
   }
@@ -2456,6 +2514,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     checkStatementEClass = createEClass(CHECK_STATEMENT);
     createEReference(checkStatementEClass, CHECK_STATEMENT__BODY);
 
+    executeStatementEClass = createEClass(EXECUTE_STATEMENT);
+    createEReference(executeStatementEClass, EXECUTE_STATEMENT__BODY);
+
     featureCallStatementEClass = createEClass(FEATURE_CALL_STATEMENT);
     createEReference(featureCallStatementEClass, FEATURE_CALL_STATEMENT__FEATURE_CALL);
     createEAttribute(featureCallStatementEClass, FEATURE_CALL_STATEMENT__ASSIGNMENT);
@@ -2623,8 +2684,11 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     createEReference(logicalNotExpressionEClass, LOGICAL_NOT_EXPRESSION__OPERAND);
 
     relationalExpressionEClass = createEClass(RELATIONAL_EXPRESSION);
-    createEReference(relationalExpressionEClass, RELATIONAL_EXPRESSION__OPERANDS);
-    createEAttribute(relationalExpressionEClass, RELATIONAL_EXPRESSION__OPERATORS);
+    createEReference(relationalExpressionEClass, RELATIONAL_EXPRESSION__LEFT_OPERAND);
+    createEAttribute(relationalExpressionEClass, RELATIONAL_EXPRESSION__TYPE_TEST);
+    createEReference(relationalExpressionEClass, RELATIONAL_EXPRESSION__TYPE);
+    createEAttribute(relationalExpressionEClass, RELATIONAL_EXPRESSION__OPERATOR);
+    createEReference(relationalExpressionEClass, RELATIONAL_EXPRESSION__RIGHT_OPERAND);
 
     addSubtractExpressionEClass = createEClass(ADD_SUBTRACT_EXPRESSION);
     createEReference(addSubtractExpressionEClass, ADD_SUBTRACT_EXPRESSION__OPERANDS);
@@ -2635,7 +2699,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     createEAttribute(multiplyDivideExpressionEClass, MULTIPLY_DIVIDE_EXPRESSION__OPERATORS);
 
     powerExpressionEClass = createEClass(POWER_EXPRESSION);
-    createEReference(powerExpressionEClass, POWER_EXPRESSION__OPERANDS);
+    createEReference(powerExpressionEClass, POWER_EXPRESSION__OPERAND);
     createEAttribute(powerExpressionEClass, POWER_EXPRESSION__OPERATOR);
     createEReference(powerExpressionEClass, POWER_EXPRESSION__EXPONENT);
 
@@ -2689,6 +2753,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     functionDefinitionEClass.getESuperTypes().add(this.getPackageDefinitionElement());
     blockEClass.getESuperTypes().add(this.getStatement());
     checkStatementEClass.getESuperTypes().add(this.getStatement());
+    executeStatementEClass.getESuperTypes().add(this.getStatement());
     featureCallStatementEClass.getESuperTypes().add(this.getStatement());
     ifStatementEClass.getESuperTypes().add(this.getStatement());
     whileStatementEClass.getESuperTypes().add(this.getStatement());
@@ -2782,6 +2847,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
 
     initEClass(checkStatementEClass, CheckStatement.class, "CheckStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getCheckStatement_Body(), this.getBlock(), null, "body", null, 0, 1, CheckStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(executeStatementEClass, ExecuteStatement.class, "ExecuteStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getExecuteStatement_Body(), this.getBlock(), null, "body", null, 0, 1, ExecuteStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(featureCallStatementEClass, FeatureCallStatement.class, "FeatureCallStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getFeatureCallStatement_FeatureCall(), this.getExpression(), null, "featureCall", null, 0, 1, FeatureCallStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2950,8 +3018,11 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     initEReference(getLogicalNotExpression_Operand(), this.getExpression(), null, "operand", null, 0, 1, LogicalNotExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(relationalExpressionEClass, RelationalExpression.class, "RelationalExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getRelationalExpression_Operands(), this.getExpression(), null, "operands", null, 0, -1, RelationalExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getRelationalExpression_Operators(), this.getRelationalOperator(), "operators", null, 0, -1, RelationalExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getRelationalExpression_LeftOperand(), this.getExpression(), null, "leftOperand", null, 0, 1, RelationalExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getRelationalExpression_TypeTest(), ecorePackage.getEBoolean(), "typeTest", null, 0, 1, RelationalExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getRelationalExpression_Type(), this.getDataTypeSpecifier(), null, "type", null, 0, 1, RelationalExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getRelationalExpression_Operator(), this.getRelationalOperator(), "operator", null, 0, 1, RelationalExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getRelationalExpression_RightOperand(), this.getExpression(), null, "rightOperand", null, 0, 1, RelationalExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(addSubtractExpressionEClass, AddSubtractExpression.class, "AddSubtractExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getAddSubtractExpression_Operands(), this.getExpression(), null, "operands", null, 0, -1, AddSubtractExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2962,7 +3033,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     initEAttribute(getMultiplyDivideExpression_Operators(), this.getMultiplyDivideOperator(), "operators", null, 0, -1, MultiplyDivideExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(powerExpressionEClass, PowerExpression.class, "PowerExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getPowerExpression_Operands(), this.getExpression(), null, "operands", null, 0, -1, PowerExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getPowerExpression_Operand(), this.getExpression(), null, "operand", null, 0, 1, PowerExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getPowerExpression_Operator(), this.getPowerOperator(), "operator", null, 0, 1, PowerExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getPowerExpression_Exponent(), this.getExpression(), null, "exponent", null, 0, 1, PowerExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
