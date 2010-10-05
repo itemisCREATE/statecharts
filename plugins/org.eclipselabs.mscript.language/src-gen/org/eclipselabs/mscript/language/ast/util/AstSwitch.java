@@ -254,6 +254,15 @@ public class AstSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case AstPackage.TYPE_DEFINITION:
+      {
+        TypeDefinition typeDefinition = (TypeDefinition)theEObject;
+        T result = caseTypeDefinition(typeDefinition);
+        if (result == null) result = casePackageDefinitionElement(typeDefinition);
+        if (result == null) result = caseStatement(typeDefinition);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case AstPackage.RETURN_STATEMENT:
       {
         ReturnStatement returnStatement = (ReturnStatement)theEObject;
@@ -360,20 +369,27 @@ public class AstSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AstPackage.UNIT_TYPE_SPECIFIER:
-      {
-        UnitTypeSpecifier unitTypeSpecifier = (UnitTypeSpecifier)theEObject;
-        T result = caseUnitTypeSpecifier(unitTypeSpecifier);
-        if (result == null) result = caseTypeSpecifier(unitTypeSpecifier);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case AstPackage.NAMED_TYPE_SPECIFIER:
       {
         NamedTypeSpecifier namedTypeSpecifier = (NamedTypeSpecifier)theEObject;
         T result = caseNamedTypeSpecifier(namedTypeSpecifier);
         if (result == null) result = caseDataTypeSpecifier(namedTypeSpecifier);
         if (result == null) result = caseTypeSpecifier(namedTypeSpecifier);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AstPackage.ARRAY_DIMENSION_SPECIFICATION:
+      {
+        ArrayDimensionSpecification arrayDimensionSpecification = (ArrayDimensionSpecification)theEObject;
+        T result = caseArrayDimensionSpecification(arrayDimensionSpecification);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AstPackage.UNIT_TYPE_SPECIFIER:
+      {
+        UnitTypeSpecifier unitTypeSpecifier = (UnitTypeSpecifier)theEObject;
+        T result = caseUnitTypeSpecifier(unitTypeSpecifier);
+        if (result == null) result = caseTypeSpecifier(unitTypeSpecifier);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -1026,6 +1042,22 @@ public class AstSwitch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>Type Definition</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Type Definition</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseTypeDefinition(TypeDefinition object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>Return Statement</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -1202,22 +1234,6 @@ public class AstSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Unit Type Specifier</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Unit Type Specifier</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseUnitTypeSpecifier(UnitTypeSpecifier object)
-  {
-    return null;
-  }
-
-  /**
    * Returns the result of interpreting the object as an instance of '<em>Named Type Specifier</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -1229,6 +1245,38 @@ public class AstSwitch<T>
    * @generated
    */
   public T caseNamedTypeSpecifier(NamedTypeSpecifier object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Array Dimension Specification</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Array Dimension Specification</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseArrayDimensionSpecification(ArrayDimensionSpecification object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Unit Type Specifier</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Unit Type Specifier</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseUnitTypeSpecifier(UnitTypeSpecifier object)
   {
     return null;
   }

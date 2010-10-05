@@ -25,7 +25,12 @@ PackageDefinition :
 	'}';
 
 PackageDefinitionElement :
-	PackageDefinition | EnumerationDefinition | RecordDefinition | FunctionDefinition | VariableDeclaration;
+	PackageDefinition |
+	EnumerationDefinition |
+	RecordDefinition |
+	FunctionDefinition |
+	TypeDefinition |
+	VariableDeclaration;
 
 /*
  * Enumeration
@@ -75,6 +80,7 @@ Statement :
 	WhileStatement |
 	DoWhileStatement |
 	ForeachStatement |
+	TypeDefinition |
 	VariableDeclaration |
 	ReturnStatement;
 	
@@ -108,6 +114,9 @@ VariableModifier :
 VariableDeclarationItem :
 	name=KeywordID ('=' initialValue=Expression)?;
 	
+TypeDefinition :
+	'typedef' type=DataTypeSpecifier 'as' name=KeywordID ';';
+	
 ReturnStatement :
 	'return' value=Expression ';';
 
@@ -128,29 +137,32 @@ NumericalTypeSpecifier :
 	RealTypeSpecifier | IntegerTypeSpecifier | ComplexTypeSpecifier | GaussianTypeSpecifier;
 	
 RealTypeSpecifier :
-	{RealTypeSpecifier} 'real' ('(' unit=UnitExpression ')')? /* ('[' dimensions ']')? */;
+	{RealTypeSpecifier} 'real' ('(' unit=UnitExpression ')')? ('[' dimensions+=ArrayDimensionSpecification (',' dimensions+=ArrayDimensionSpecification)* ']')?;
 	
 IntegerTypeSpecifier :
-	{IntegerTypeSpecifier} 'int' ('(' unit=UnitExpression ')')? /* ('[' dimensions ']')? */;
+	{IntegerTypeSpecifier} 'int' ('(' unit=UnitExpression ')')? ('[' dimensions+=ArrayDimensionSpecification (',' dimensions+=ArrayDimensionSpecification)* ']')?;
 	
 ComplexTypeSpecifier :
-	{ComplexTypeSpecifier} 'complex' ('(' unit=UnitExpression ')')? /* ('[' dimensions ']')? */;
+	{ComplexTypeSpecifier} 'complex' ('(' unit=UnitExpression ')')? ('[' dimensions+=ArrayDimensionSpecification (',' dimensions+=ArrayDimensionSpecification)* ']')?;
 
 GaussianTypeSpecifier :
-	{GaussianTypeSpecifier} 'gauss' ('(' unit=UnitExpression ')')? /* ('[' dimensions ']')? */;
+	{GaussianTypeSpecifier} 'gauss' ('(' unit=UnitExpression ')')? ('[' dimensions+=ArrayDimensionSpecification (',' dimensions+=ArrayDimensionSpecification)* ']')?;
 
 BooleanTypeSpecifier :
-	{BooleanTypeSpecifier} 'bool' /* ('[' dimensions ']')? */;
+	{BooleanTypeSpecifier} 'bool' ('[' dimensions+=ArrayDimensionSpecification (',' dimensions+=ArrayDimensionSpecification)* ']')?;
 	
 StringTypeSpecifier :
-	{StringTypeSpecifier} 'string' /* ('[' dimensions ']')? */;
+	{StringTypeSpecifier} 'string' ('[' dimensions+=ArrayDimensionSpecification (',' dimensions+=ArrayDimensionSpecification)* ']')?;
+	
+NamedTypeSpecifier :
+	'type' typeReference=SymbolReference ('[' dimensions+=ArrayDimensionSpecification (',' dimensions+=ArrayDimensionSpecification)* ']')?;
+	
+ArrayDimensionSpecification :
+	unspecified?='?' | size=Expression ({ArrayDimensionSpecification.from=current} '..' to=Expression)?;
 	
 UnitTypeSpecifier :
 	{UnitTypeSpecifier} 'unit';
 
-NamedTypeSpecifier :
-	typeReference=SymbolReference /* ('[' dimensions ']')? */;
-	
 /*
  * Expressions
  */
@@ -165,7 +177,7 @@ ConditionalExpressionCase:
 	conditionExpression=Expression 'then' thenExpression=Expression;
 
 RangeExpression returns Expression :
-	LogicalOrExpression ({RangeExpression.expressions+=current} ':' expressions+=LogicalOrExpression (':' expressions+=LogicalOrExpression)?)?;
+	LogicalOrExpression ({RangeExpression.begin=current} ':' end=LogicalOrExpression ({RangeExpression.increment=current} ':' end=LogicalOrExpression)?)?;
 
 LogicalOrExpression returns Expression :
 	LogicalAndExpression ({LogicalOrExpression.operands+=current} ('or' operands+=LogicalAndExpression)+)?;

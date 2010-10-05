@@ -113,12 +113,20 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="initialValue" eType="#//Expression"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TypeDefinition" eSuperTypes="#//PackageDefinitionElement #//Statement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//DataTypeSpecifier"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ReturnStatement" eSuperTypes="#//Statement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Expression"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TypeSpecifier"/>
-  <eClassifiers xsi:type="ecore:EClass" name="DataTypeSpecifier" eSuperTypes="#//TypeSpecifier"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DataTypeSpecifier" eSuperTypes="#//TypeSpecifier">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dimensions" upperBound="-1"
+        eType="#//ArrayDimensionSpecification" containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PrimitiveTypeSpecifier" eSuperTypes="#//DataTypeSpecifier"/>
   <eClassifiers xsi:type="ecore:EClass" name="NumericalTypeSpecifier" eSuperTypes="#//PrimitiveTypeSpecifier">
     <eStructuralFeatures xsi:type="ecore:EReference" name="unit" eType="#//UnitExpression"
@@ -130,11 +138,20 @@
   <eClassifiers xsi:type="ecore:EClass" name="GaussianTypeSpecifier" eSuperTypes="#//NumericalTypeSpecifier"/>
   <eClassifiers xsi:type="ecore:EClass" name="BooleanTypeSpecifier" eSuperTypes="#//PrimitiveTypeSpecifier"/>
   <eClassifiers xsi:type="ecore:EClass" name="StringTypeSpecifier" eSuperTypes="#//PrimitiveTypeSpecifier"/>
-  <eClassifiers xsi:type="ecore:EClass" name="UnitTypeSpecifier" eSuperTypes="#//TypeSpecifier"/>
   <eClassifiers xsi:type="ecore:EClass" name="NamedTypeSpecifier" eSuperTypes="#//DataTypeSpecifier">
     <eStructuralFeatures xsi:type="ecore:EReference" name="typeReference" eType="#//SymbolReference"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ArrayDimensionSpecification">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="unspecified" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="size" eType="#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="from" eType="#//ArrayDimensionSpecification"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="to" eType="#//Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UnitTypeSpecifier" eSuperTypes="#//TypeSpecifier"/>
   <eClassifiers xsi:type="ecore:EClass" name="Expression"/>
   <eClassifiers xsi:type="ecore:EClass" name="ConditionalExpression" eSuperTypes="#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="cases" upperBound="-1"
@@ -265,8 +282,12 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RangeExpression" eSuperTypes="#//Expression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="expressions" upperBound="-1"
-        eType="#//Expression" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="begin" eType="#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="end" eType="#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="increment" eType="#//RangeExpression"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LogicalOrExpression" eSuperTypes="#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="operands" upperBound="-1"

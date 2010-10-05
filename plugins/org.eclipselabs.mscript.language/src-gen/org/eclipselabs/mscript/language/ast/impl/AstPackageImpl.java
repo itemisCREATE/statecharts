@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import org.eclipselabs.mscript.language.ast.AddSubtractExpression;
 import org.eclipselabs.mscript.language.ast.AddSubtractOperator;
+import org.eclipselabs.mscript.language.ast.ArrayDimensionSpecification;
 import org.eclipselabs.mscript.language.ast.ArrayElementReference;
 import org.eclipselabs.mscript.language.ast.AstFactory;
 import org.eclipselabs.mscript.language.ast.AstPackage;
@@ -80,6 +81,7 @@ import org.eclipselabs.mscript.language.ast.StringLiteral;
 import org.eclipselabs.mscript.language.ast.StringTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.Subscript;
 import org.eclipselabs.mscript.language.ast.SymbolReference;
+import org.eclipselabs.mscript.language.ast.TypeDefinition;
 import org.eclipselabs.mscript.language.ast.TypeSpecifier;
 import org.eclipselabs.mscript.language.ast.UnaryMinusExpression;
 import org.eclipselabs.mscript.language.ast.UnitConstructionOperator;
@@ -254,6 +256,13 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass typeDefinitionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass returnStatementEClass = null;
 
   /**
@@ -331,14 +340,21 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass unitTypeSpecifierEClass = null;
+  private EClass namedTypeSpecifierEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass namedTypeSpecifierEClass = null;
+  private EClass arrayDimensionSpecificationEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass unitTypeSpecifierEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -1346,6 +1362,36 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getTypeDefinition()
+  {
+    return typeDefinitionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getTypeDefinition_Type()
+  {
+    return (EReference)typeDefinitionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getTypeDefinition_Name()
+  {
+    return (EAttribute)typeDefinitionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getReturnStatement()
   {
     return returnStatementEClass;
@@ -1379,6 +1425,16 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
   public EClass getDataTypeSpecifier()
   {
     return dataTypeSpecifierEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getDataTypeSpecifier_Dimensions()
+  {
+    return (EReference)dataTypeSpecifierEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1476,16 +1532,6 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getUnitTypeSpecifier()
-  {
-    return unitTypeSpecifierEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EClass getNamedTypeSpecifier()
   {
     return namedTypeSpecifierEClass;
@@ -1499,6 +1545,66 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
   public EReference getNamedTypeSpecifier_TypeReference()
   {
     return (EReference)namedTypeSpecifierEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getArrayDimensionSpecification()
+  {
+    return arrayDimensionSpecificationEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getArrayDimensionSpecification_Unspecified()
+  {
+    return (EAttribute)arrayDimensionSpecificationEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getArrayDimensionSpecification_Size()
+  {
+    return (EReference)arrayDimensionSpecificationEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getArrayDimensionSpecification_From()
+  {
+    return (EReference)arrayDimensionSpecificationEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getArrayDimensionSpecification_To()
+  {
+    return (EReference)arrayDimensionSpecificationEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getUnitTypeSpecifier()
+  {
+    return unitTypeSpecifierEClass;
   }
 
   /**
@@ -2126,9 +2232,29 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getRangeExpression_Expressions()
+  public EReference getRangeExpression_Begin()
   {
     return (EReference)rangeExpressionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getRangeExpression_End()
+  {
+    return (EReference)rangeExpressionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getRangeExpression_Increment()
+  {
+    return (EReference)rangeExpressionEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -2565,12 +2691,17 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     createEAttribute(variableDeclarationItemEClass, VARIABLE_DECLARATION_ITEM__NAME);
     createEReference(variableDeclarationItemEClass, VARIABLE_DECLARATION_ITEM__INITIAL_VALUE);
 
+    typeDefinitionEClass = createEClass(TYPE_DEFINITION);
+    createEReference(typeDefinitionEClass, TYPE_DEFINITION__TYPE);
+    createEAttribute(typeDefinitionEClass, TYPE_DEFINITION__NAME);
+
     returnStatementEClass = createEClass(RETURN_STATEMENT);
     createEReference(returnStatementEClass, RETURN_STATEMENT__VALUE);
 
     typeSpecifierEClass = createEClass(TYPE_SPECIFIER);
 
     dataTypeSpecifierEClass = createEClass(DATA_TYPE_SPECIFIER);
+    createEReference(dataTypeSpecifierEClass, DATA_TYPE_SPECIFIER__DIMENSIONS);
 
     primitiveTypeSpecifierEClass = createEClass(PRIMITIVE_TYPE_SPECIFIER);
 
@@ -2589,10 +2720,16 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
 
     stringTypeSpecifierEClass = createEClass(STRING_TYPE_SPECIFIER);
 
-    unitTypeSpecifierEClass = createEClass(UNIT_TYPE_SPECIFIER);
-
     namedTypeSpecifierEClass = createEClass(NAMED_TYPE_SPECIFIER);
     createEReference(namedTypeSpecifierEClass, NAMED_TYPE_SPECIFIER__TYPE_REFERENCE);
+
+    arrayDimensionSpecificationEClass = createEClass(ARRAY_DIMENSION_SPECIFICATION);
+    createEAttribute(arrayDimensionSpecificationEClass, ARRAY_DIMENSION_SPECIFICATION__UNSPECIFIED);
+    createEReference(arrayDimensionSpecificationEClass, ARRAY_DIMENSION_SPECIFICATION__SIZE);
+    createEReference(arrayDimensionSpecificationEClass, ARRAY_DIMENSION_SPECIFICATION__FROM);
+    createEReference(arrayDimensionSpecificationEClass, ARRAY_DIMENSION_SPECIFICATION__TO);
+
+    unitTypeSpecifierEClass = createEClass(UNIT_TYPE_SPECIFIER);
 
     expressionEClass = createEClass(EXPRESSION);
 
@@ -2685,7 +2822,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     createEAttribute(unitExpressionExponentEClass, UNIT_EXPRESSION_EXPONENT__VALUE);
 
     rangeExpressionEClass = createEClass(RANGE_EXPRESSION);
-    createEReference(rangeExpressionEClass, RANGE_EXPRESSION__EXPRESSIONS);
+    createEReference(rangeExpressionEClass, RANGE_EXPRESSION__BEGIN);
+    createEReference(rangeExpressionEClass, RANGE_EXPRESSION__END);
+    createEReference(rangeExpressionEClass, RANGE_EXPRESSION__INCREMENT);
 
     logicalOrExpressionEClass = createEClass(LOGICAL_OR_EXPRESSION);
     createEReference(logicalOrExpressionEClass, LOGICAL_OR_EXPRESSION__OPERANDS);
@@ -2772,6 +2911,8 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     foreachStatementEClass.getESuperTypes().add(this.getStatement());
     variableDeclarationEClass.getESuperTypes().add(this.getPackageDefinitionElement());
     variableDeclarationEClass.getESuperTypes().add(this.getStatement());
+    typeDefinitionEClass.getESuperTypes().add(this.getPackageDefinitionElement());
+    typeDefinitionEClass.getESuperTypes().add(this.getStatement());
     returnStatementEClass.getESuperTypes().add(this.getStatement());
     dataTypeSpecifierEClass.getESuperTypes().add(this.getTypeSpecifier());
     primitiveTypeSpecifierEClass.getESuperTypes().add(this.getDataTypeSpecifier());
@@ -2782,8 +2923,8 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     gaussianTypeSpecifierEClass.getESuperTypes().add(this.getNumericalTypeSpecifier());
     booleanTypeSpecifierEClass.getESuperTypes().add(this.getPrimitiveTypeSpecifier());
     stringTypeSpecifierEClass.getESuperTypes().add(this.getPrimitiveTypeSpecifier());
-    unitTypeSpecifierEClass.getESuperTypes().add(this.getTypeSpecifier());
     namedTypeSpecifierEClass.getESuperTypes().add(this.getDataTypeSpecifier());
+    unitTypeSpecifierEClass.getESuperTypes().add(this.getTypeSpecifier());
     conditionalExpressionEClass.getESuperTypes().add(this.getExpression());
     featureReferenceEClass.getESuperTypes().add(this.getFeatureCallPart());
     arrayElementReferenceEClass.getESuperTypes().add(this.getFeatureCallPart());
@@ -2898,12 +3039,17 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     initEAttribute(getVariableDeclarationItem_Name(), ecorePackage.getEString(), "name", null, 0, 1, VariableDeclarationItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getVariableDeclarationItem_InitialValue(), this.getExpression(), null, "initialValue", null, 0, 1, VariableDeclarationItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+    initEClass(typeDefinitionEClass, TypeDefinition.class, "TypeDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getTypeDefinition_Type(), this.getDataTypeSpecifier(), null, "type", null, 0, 1, TypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getTypeDefinition_Name(), ecorePackage.getEString(), "name", null, 0, 1, TypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
     initEClass(returnStatementEClass, ReturnStatement.class, "ReturnStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getReturnStatement_Value(), this.getExpression(), null, "value", null, 0, 1, ReturnStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(typeSpecifierEClass, TypeSpecifier.class, "TypeSpecifier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(dataTypeSpecifierEClass, DataTypeSpecifier.class, "DataTypeSpecifier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getDataTypeSpecifier_Dimensions(), this.getArrayDimensionSpecification(), null, "dimensions", null, 0, -1, DataTypeSpecifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(primitiveTypeSpecifierEClass, PrimitiveTypeSpecifier.class, "PrimitiveTypeSpecifier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -2922,10 +3068,16 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
 
     initEClass(stringTypeSpecifierEClass, StringTypeSpecifier.class, "StringTypeSpecifier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-    initEClass(unitTypeSpecifierEClass, UnitTypeSpecifier.class, "UnitTypeSpecifier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
     initEClass(namedTypeSpecifierEClass, NamedTypeSpecifier.class, "NamedTypeSpecifier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getNamedTypeSpecifier_TypeReference(), this.getSymbolReference(), null, "typeReference", null, 0, 1, NamedTypeSpecifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(arrayDimensionSpecificationEClass, ArrayDimensionSpecification.class, "ArrayDimensionSpecification", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getArrayDimensionSpecification_Unspecified(), ecorePackage.getEBoolean(), "unspecified", null, 0, 1, ArrayDimensionSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getArrayDimensionSpecification_Size(), this.getExpression(), null, "size", null, 0, 1, ArrayDimensionSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getArrayDimensionSpecification_From(), this.getArrayDimensionSpecification(), null, "from", null, 0, 1, ArrayDimensionSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getArrayDimensionSpecification_To(), this.getExpression(), null, "to", null, 0, 1, ArrayDimensionSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(unitTypeSpecifierEClass, UnitTypeSpecifier.class, "UnitTypeSpecifier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(expressionEClass, Expression.class, "Expression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -3018,7 +3170,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     initEAttribute(getUnitExpressionExponent_Value(), ecorePackage.getELong(), "value", null, 0, 1, UnitExpressionExponent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(rangeExpressionEClass, RangeExpression.class, "RangeExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getRangeExpression_Expressions(), this.getExpression(), null, "expressions", null, 0, -1, RangeExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getRangeExpression_Begin(), this.getExpression(), null, "begin", null, 0, 1, RangeExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getRangeExpression_End(), this.getExpression(), null, "end", null, 0, 1, RangeExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getRangeExpression_Increment(), this.getRangeExpression(), null, "increment", null, 0, 1, RangeExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(logicalOrExpressionEClass, LogicalOrExpression.class, "LogicalOrExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getLogicalOrExpression_Operands(), this.getExpression(), null, "operands", null, 0, -1, LogicalOrExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

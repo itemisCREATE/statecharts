@@ -215,6 +215,15 @@ public interface AstFactory extends EFactory
   VariableDeclarationItem createVariableDeclarationItem();
 
   /**
+   * Returns a new object of class '<em>Type Definition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Type Definition</em>'.
+   * @generated
+   */
+  TypeDefinition createTypeDefinition();
+
+  /**
    * Returns a new object of class '<em>Return Statement</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -314,15 +323,6 @@ public interface AstFactory extends EFactory
   StringTypeSpecifier createStringTypeSpecifier();
 
   /**
-   * Returns a new object of class '<em>Unit Type Specifier</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Unit Type Specifier</em>'.
-   * @generated
-   */
-  UnitTypeSpecifier createUnitTypeSpecifier();
-
-  /**
    * Returns a new object of class '<em>Named Type Specifier</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -330,6 +330,24 @@ public interface AstFactory extends EFactory
    * @generated
    */
   NamedTypeSpecifier createNamedTypeSpecifier();
+
+  /**
+   * Returns a new object of class '<em>Array Dimension Specification</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Array Dimension Specification</em>'.
+   * @generated
+   */
+  ArrayDimensionSpecification createArrayDimensionSpecification();
+
+  /**
+   * Returns a new object of class '<em>Unit Type Specifier</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Unit Type Specifier</em>'.
+   * @generated
+   */
+  UnitTypeSpecifier createUnitTypeSpecifier();
 
   /**
    * Returns a new object of class '<em>Expression</em>'.

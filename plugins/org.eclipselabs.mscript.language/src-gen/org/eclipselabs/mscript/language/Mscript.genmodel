@@ -117,11 +117,17 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//VariableDeclarationItem/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//VariableDeclarationItem/initialValue"/>
     </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//TypeDefinition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//TypeDefinition/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//TypeDefinition/name"/>
+    </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//ReturnStatement">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ReturnStatement/value"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//TypeSpecifier"/>
-    <genClasses ecoreClass="Mscript.ecore#//DataTypeSpecifier"/>
+    <genClasses ecoreClass="Mscript.ecore#//DataTypeSpecifier">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//DataTypeSpecifier/dimensions"/>
+    </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//PrimitiveTypeSpecifier"/>
     <genClasses ecoreClass="Mscript.ecore#//NumericalTypeSpecifier">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//NumericalTypeSpecifier/unit"/>
@@ -132,10 +138,16 @@
     <genClasses ecoreClass="Mscript.ecore#//GaussianTypeSpecifier"/>
     <genClasses ecoreClass="Mscript.ecore#//BooleanTypeSpecifier"/>
     <genClasses ecoreClass="Mscript.ecore#//StringTypeSpecifier"/>
-    <genClasses ecoreClass="Mscript.ecore#//UnitTypeSpecifier"/>
     <genClasses ecoreClass="Mscript.ecore#//NamedTypeSpecifier">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//NamedTypeSpecifier/typeReference"/>
     </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//ArrayDimensionSpecification">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//ArrayDimensionSpecification/unspecified"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ArrayDimensionSpecification/size"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ArrayDimensionSpecification/from"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ArrayDimensionSpecification/to"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//UnitTypeSpecifier"/>
     <genClasses ecoreClass="Mscript.ecore#//Expression"/>
     <genClasses ecoreClass="Mscript.ecore#//ConditionalExpression">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ConditionalExpression/cases"/>
@@ -220,7 +232,9 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//UnitExpressionExponent/value"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//RangeExpression">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//RangeExpression/expressions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//RangeExpression/begin"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//RangeExpression/end"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//RangeExpression/increment"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//LogicalOrExpression">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//LogicalOrExpression/operands"/>

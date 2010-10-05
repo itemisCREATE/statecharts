@@ -89,6 +89,7 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
       case AstPackage.VARIABLE_DECLARATION: return createVariableDeclaration();
       case AstPackage.VARIABLE_MODIFIER: return createVariableModifier();
       case AstPackage.VARIABLE_DECLARATION_ITEM: return createVariableDeclarationItem();
+      case AstPackage.TYPE_DEFINITION: return createTypeDefinition();
       case AstPackage.RETURN_STATEMENT: return createReturnStatement();
       case AstPackage.TYPE_SPECIFIER: return createTypeSpecifier();
       case AstPackage.DATA_TYPE_SPECIFIER: return createDataTypeSpecifier();
@@ -100,8 +101,9 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
       case AstPackage.GAUSSIAN_TYPE_SPECIFIER: return createGaussianTypeSpecifier();
       case AstPackage.BOOLEAN_TYPE_SPECIFIER: return createBooleanTypeSpecifier();
       case AstPackage.STRING_TYPE_SPECIFIER: return createStringTypeSpecifier();
-      case AstPackage.UNIT_TYPE_SPECIFIER: return createUnitTypeSpecifier();
       case AstPackage.NAMED_TYPE_SPECIFIER: return createNamedTypeSpecifier();
+      case AstPackage.ARRAY_DIMENSION_SPECIFICATION: return createArrayDimensionSpecification();
+      case AstPackage.UNIT_TYPE_SPECIFIER: return createUnitTypeSpecifier();
       case AstPackage.EXPRESSION: return createExpression();
       case AstPackage.CONDITIONAL_EXPRESSION: return createConditionalExpression();
       case AstPackage.CONDITIONAL_EXPRESSION_CASE: return createConditionalExpressionCase();
@@ -432,6 +434,17 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  public TypeDefinition createTypeDefinition()
+  {
+    TypeDefinitionImpl typeDefinition = new TypeDefinitionImpl();
+    return typeDefinition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public ReturnStatement createReturnStatement()
   {
     ReturnStatementImpl returnStatement = new ReturnStatementImpl();
@@ -553,10 +566,10 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public UnitTypeSpecifier createUnitTypeSpecifier()
+  public NamedTypeSpecifier createNamedTypeSpecifier()
   {
-    UnitTypeSpecifierImpl unitTypeSpecifier = new UnitTypeSpecifierImpl();
-    return unitTypeSpecifier;
+    NamedTypeSpecifierImpl namedTypeSpecifier = new NamedTypeSpecifierImpl();
+    return namedTypeSpecifier;
   }
 
   /**
@@ -564,10 +577,21 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public NamedTypeSpecifier createNamedTypeSpecifier()
+  public ArrayDimensionSpecification createArrayDimensionSpecification()
   {
-    NamedTypeSpecifierImpl namedTypeSpecifier = new NamedTypeSpecifierImpl();
-    return namedTypeSpecifier;
+    ArrayDimensionSpecificationImpl arrayDimensionSpecification = new ArrayDimensionSpecificationImpl();
+    return arrayDimensionSpecification;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public UnitTypeSpecifier createUnitTypeSpecifier()
+  {
+    UnitTypeSpecifierImpl unitTypeSpecifier = new UnitTypeSpecifierImpl();
+    return unitTypeSpecifier;
   }
 
   /**
