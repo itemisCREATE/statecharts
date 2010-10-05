@@ -39,6 +39,7 @@ public class MscriptParser extends AbstractContentAssistParser {
 				{
 					put(grammarAccess.getPackageDefinitionElementAccess().getAlternatives(), "rule__PackageDefinitionElement__Alternatives");
 					put(grammarAccess.getStatementAccess().getAlternatives(), "rule__Statement__Alternatives");
+					put(grammarAccess.getVariableDeclarationAccess().getAlternatives_1(), "rule__VariableDeclaration__Alternatives_1");
 					put(grammarAccess.getVariableModifierAccess().getAlternatives(), "rule__VariableModifier__Alternatives");
 					put(grammarAccess.getTypeSpecifierAccess().getAlternatives(), "rule__TypeSpecifier__Alternatives");
 					put(grammarAccess.getDataTypeSpecifierAccess().getAlternatives(), "rule__DataTypeSpecifier__Alternatives");
@@ -88,6 +89,7 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getDoWhileStatementAccess().getGroup(), "rule__DoWhileStatement__Group__0");
 					put(grammarAccess.getForeachStatementAccess().getGroup(), "rule__ForeachStatement__Group__0");
 					put(grammarAccess.getVariableDeclarationAccess().getGroup(), "rule__VariableDeclaration__Group__0");
+					put(grammarAccess.getVariableDeclarationAccess().getGroup_1_2(), "rule__VariableDeclaration__Group_1_2__0");
 					put(grammarAccess.getVariableDeclarationAccess().getGroup_3(), "rule__VariableDeclaration__Group_3__0");
 					put(grammarAccess.getVariableDeclarationItemAccess().getGroup(), "rule__VariableDeclarationItem__Group__0");
 					put(grammarAccess.getVariableDeclarationItemAccess().getGroup_1(), "rule__VariableDeclarationItem__Group_1__0");
@@ -116,8 +118,8 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getStringTypeSpecifierAccess().getGroup_2(), "rule__StringTypeSpecifier__Group_2__0");
 					put(grammarAccess.getStringTypeSpecifierAccess().getGroup_2_2(), "rule__StringTypeSpecifier__Group_2_2__0");
 					put(grammarAccess.getNamedTypeSpecifierAccess().getGroup(), "rule__NamedTypeSpecifier__Group__0");
-					put(grammarAccess.getNamedTypeSpecifierAccess().getGroup_2(), "rule__NamedTypeSpecifier__Group_2__0");
-					put(grammarAccess.getNamedTypeSpecifierAccess().getGroup_2_2(), "rule__NamedTypeSpecifier__Group_2_2__0");
+					put(grammarAccess.getNamedTypeSpecifierAccess().getGroup_1(), "rule__NamedTypeSpecifier__Group_1__0");
+					put(grammarAccess.getNamedTypeSpecifierAccess().getGroup_1_2(), "rule__NamedTypeSpecifier__Group_1_2__0");
 					put(grammarAccess.getArrayDimensionSpecificationAccess().getGroup_1(), "rule__ArrayDimensionSpecification__Group_1__0");
 					put(grammarAccess.getArrayDimensionSpecificationAccess().getGroup_1_1(), "rule__ArrayDimensionSpecification__Group_1_1__0");
 					put(grammarAccess.getUnitTypeSpecifierAccess().getGroup(), "rule__UnitTypeSpecifier__Group__0");
@@ -218,7 +220,9 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getForeachStatementAccess().getCollectionExpressionAssignment_3(), "rule__ForeachStatement__CollectionExpressionAssignment_3");
 					put(grammarAccess.getForeachStatementAccess().getBodyAssignment_4(), "rule__ForeachStatement__BodyAssignment_4");
 					put(grammarAccess.getVariableDeclarationAccess().getModifierAssignment_0(), "rule__VariableDeclaration__ModifierAssignment_0");
-					put(grammarAccess.getVariableDeclarationAccess().getTypeAssignment_1(), "rule__VariableDeclaration__TypeAssignment_1");
+					put(grammarAccess.getVariableDeclarationAccess().getTypeAssignment_1_0(), "rule__VariableDeclaration__TypeAssignment_1_0");
+					put(grammarAccess.getVariableDeclarationAccess().getTypeAssignment_1_1(), "rule__VariableDeclaration__TypeAssignment_1_1");
+					put(grammarAccess.getVariableDeclarationAccess().getTypeAssignment_1_2_1(), "rule__VariableDeclaration__TypeAssignment_1_2_1");
 					put(grammarAccess.getVariableDeclarationAccess().getItemsAssignment_2(), "rule__VariableDeclaration__ItemsAssignment_2");
 					put(grammarAccess.getVariableDeclarationAccess().getItemsAssignment_3_1(), "rule__VariableDeclaration__ItemsAssignment_3_1");
 					put(grammarAccess.getVariableModifierAccess().getAutoAssignment_0(), "rule__VariableModifier__AutoAssignment_0");
@@ -226,8 +230,8 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getVariableModifierAccess().getStaticAssignment_2(), "rule__VariableModifier__StaticAssignment_2");
 					put(grammarAccess.getVariableDeclarationItemAccess().getNameAssignment_0(), "rule__VariableDeclarationItem__NameAssignment_0");
 					put(grammarAccess.getVariableDeclarationItemAccess().getInitialValueAssignment_1_1(), "rule__VariableDeclarationItem__InitialValueAssignment_1_1");
-					put(grammarAccess.getTypeDefinitionAccess().getTypeAssignment_1(), "rule__TypeDefinition__TypeAssignment_1");
-					put(grammarAccess.getTypeDefinitionAccess().getNameAssignment_3(), "rule__TypeDefinition__NameAssignment_3");
+					put(grammarAccess.getTypeDefinitionAccess().getNameAssignment_1(), "rule__TypeDefinition__NameAssignment_1");
+					put(grammarAccess.getTypeDefinitionAccess().getTypeAssignment_3(), "rule__TypeDefinition__TypeAssignment_3");
 					put(grammarAccess.getReturnStatementAccess().getValueAssignment_1(), "rule__ReturnStatement__ValueAssignment_1");
 					put(grammarAccess.getRealTypeSpecifierAccess().getUnitAssignment_2_1(), "rule__RealTypeSpecifier__UnitAssignment_2_1");
 					put(grammarAccess.getRealTypeSpecifierAccess().getDimensionsAssignment_3_1(), "rule__RealTypeSpecifier__DimensionsAssignment_3_1");
@@ -245,9 +249,9 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getBooleanTypeSpecifierAccess().getDimensionsAssignment_2_2_1(), "rule__BooleanTypeSpecifier__DimensionsAssignment_2_2_1");
 					put(grammarAccess.getStringTypeSpecifierAccess().getDimensionsAssignment_2_1(), "rule__StringTypeSpecifier__DimensionsAssignment_2_1");
 					put(grammarAccess.getStringTypeSpecifierAccess().getDimensionsAssignment_2_2_1(), "rule__StringTypeSpecifier__DimensionsAssignment_2_2_1");
-					put(grammarAccess.getNamedTypeSpecifierAccess().getTypeReferenceAssignment_1(), "rule__NamedTypeSpecifier__TypeReferenceAssignment_1");
-					put(grammarAccess.getNamedTypeSpecifierAccess().getDimensionsAssignment_2_1(), "rule__NamedTypeSpecifier__DimensionsAssignment_2_1");
-					put(grammarAccess.getNamedTypeSpecifierAccess().getDimensionsAssignment_2_2_1(), "rule__NamedTypeSpecifier__DimensionsAssignment_2_2_1");
+					put(grammarAccess.getNamedTypeSpecifierAccess().getTypeReferenceAssignment_0(), "rule__NamedTypeSpecifier__TypeReferenceAssignment_0");
+					put(grammarAccess.getNamedTypeSpecifierAccess().getDimensionsAssignment_1_1(), "rule__NamedTypeSpecifier__DimensionsAssignment_1_1");
+					put(grammarAccess.getNamedTypeSpecifierAccess().getDimensionsAssignment_1_2_1(), "rule__NamedTypeSpecifier__DimensionsAssignment_1_2_1");
 					put(grammarAccess.getArrayDimensionSpecificationAccess().getUnspecifiedAssignment_0(), "rule__ArrayDimensionSpecification__UnspecifiedAssignment_0");
 					put(grammarAccess.getArrayDimensionSpecificationAccess().getSizeAssignment_1_0(), "rule__ArrayDimensionSpecification__SizeAssignment_1_0");
 					put(grammarAccess.getArrayDimensionSpecificationAccess().getEndIndexAssignment_1_1_2(), "rule__ArrayDimensionSpecification__EndIndexAssignment_1_1_2");

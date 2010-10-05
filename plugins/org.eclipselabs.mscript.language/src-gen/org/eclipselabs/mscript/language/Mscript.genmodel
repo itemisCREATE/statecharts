@@ -117,8 +117,8 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//VariableDeclarationItem/initialValue"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//TypeDefinition">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//TypeDefinition/type"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//TypeDefinition/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//TypeDefinition/type"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//ReturnStatement">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ReturnStatement/value"/>

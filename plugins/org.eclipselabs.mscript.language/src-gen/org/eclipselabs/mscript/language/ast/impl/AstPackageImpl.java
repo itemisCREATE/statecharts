@@ -1362,9 +1362,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getTypeDefinition_Type()
+  public EAttribute getTypeDefinition_Name()
   {
-    return (EReference)typeDefinitionEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)typeDefinitionEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1372,9 +1372,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getTypeDefinition_Name()
+  public EReference getTypeDefinition_Type()
   {
-    return (EAttribute)typeDefinitionEClass.getEStructuralFeatures().get(1);
+    return (EReference)typeDefinitionEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -2731,8 +2731,8 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     createEReference(variableDeclarationItemEClass, VARIABLE_DECLARATION_ITEM__INITIAL_VALUE);
 
     typeDefinitionEClass = createEClass(TYPE_DEFINITION);
-    createEReference(typeDefinitionEClass, TYPE_DEFINITION__TYPE);
     createEAttribute(typeDefinitionEClass, TYPE_DEFINITION__NAME);
+    createEReference(typeDefinitionEClass, TYPE_DEFINITION__TYPE);
 
     returnStatementEClass = createEClass(RETURN_STATEMENT);
     createEReference(returnStatementEClass, RETURN_STATEMENT__VALUE);
@@ -3081,8 +3081,8 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     initEReference(getVariableDeclarationItem_InitialValue(), this.getExpression(), null, "initialValue", null, 0, 1, VariableDeclarationItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(typeDefinitionEClass, TypeDefinition.class, "TypeDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getTypeDefinition_Type(), this.getDataTypeSpecifier(), null, "type", null, 0, 1, TypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getTypeDefinition_Name(), ecorePackage.getEString(), "name", null, 0, 1, TypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getTypeDefinition_Type(), this.getPrimitiveTypeSpecifier(), null, "type", null, 0, 1, TypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(returnStatementEClass, ReturnStatement.class, "ReturnStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getReturnStatement_Value(), this.getExpression(), null, "value", null, 0, 1, ReturnStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

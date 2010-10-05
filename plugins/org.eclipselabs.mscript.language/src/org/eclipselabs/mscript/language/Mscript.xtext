@@ -106,7 +106,7 @@ ForeachStatement :
 	'foreach' elementName=KeywordID 'in' collectionExpression=Expression body=Block;
 
 VariableDeclaration :
-	(modifier=VariableModifier)? type=TypeSpecifier items+=VariableDeclarationItem (',' items+=VariableDeclarationItem)* ';';
+	(modifier=VariableModifier)? (type=PrimitiveTypeSpecifier | type=UnitTypeSpecifier | 'var' type=NamedTypeSpecifier) items+=VariableDeclarationItem (',' items+=VariableDeclarationItem)* ';';
 
 VariableModifier :
 	Auto='auto' | Constant='const' | Static='static';
@@ -115,7 +115,7 @@ VariableDeclarationItem :
 	name=KeywordID ('=' initialValue=Expression)?;
 	
 TypeDefinition :
-	'typedef' type=DataTypeSpecifier 'as' name=KeywordID ';';
+	'type' name=KeywordID '=' type=PrimitiveTypeSpecifier ';';
 	
 ReturnStatement :
 	'return' value=Expression ';';
@@ -155,7 +155,7 @@ StringTypeSpecifier :
 	{StringTypeSpecifier} 'string' ('[' dimensions+=ArrayDimensionSpecification (',' dimensions+=ArrayDimensionSpecification)* ']')?;
 	
 NamedTypeSpecifier :
-	'type' typeReference=SymbolReference ('[' dimensions+=ArrayDimensionSpecification (',' dimensions+=ArrayDimensionSpecification)* ']')?;
+	typeReference=SymbolReference ('[' dimensions+=ArrayDimensionSpecification (',' dimensions+=ArrayDimensionSpecification)* ']')?;
 	
 ArrayDimensionSpecification :
 	unspecified?='?' | size=Expression ({ArrayDimensionSpecification.beginIndex=current} '..' endIndex=Expression)?;
