@@ -144,8 +144,8 @@
     <genClasses ecoreClass="Mscript.ecore#//ArrayDimensionSpecification">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//ArrayDimensionSpecification/unspecified"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ArrayDimensionSpecification/size"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ArrayDimensionSpecification/from"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ArrayDimensionSpecification/to"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ArrayDimensionSpecification/beginIndex"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ArrayDimensionSpecification/endIndex"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//UnitTypeSpecifier"/>
     <genClasses ecoreClass="Mscript.ecore#//Expression"/>

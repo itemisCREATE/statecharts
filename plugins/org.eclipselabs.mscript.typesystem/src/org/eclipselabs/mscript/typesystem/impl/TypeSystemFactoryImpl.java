@@ -31,6 +31,7 @@ import org.eclipselabs.mscript.typesystem.TypeSystemPackage;
 import org.eclipselabs.mscript.typesystem.Unit;
 import org.eclipselabs.mscript.typesystem.UnitFactor;
 import org.eclipselabs.mscript.typesystem.UnitSymbol;
+import org.eclipselabs.mscript.typesystem.UnitType;
 
 /**
  * <!-- begin-user-doc -->
@@ -92,6 +93,7 @@ public class TypeSystemFactoryImpl extends EFactoryImpl implements TypeSystemFac
 			case TypeSystemPackage.TENSOR_TYPE: return createTensorType();
 			case TypeSystemPackage.RECORD: return createRecord();
 			case TypeSystemPackage.RECORD_FIELD: return createRecordField();
+			case TypeSystemPackage.UNIT_TYPE: return createUnitType();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -289,6 +291,16 @@ public class TypeSystemFactoryImpl extends EFactoryImpl implements TypeSystemFac
 	public RecordField createRecordField() {
 		RecordFieldImpl recordField = new RecordFieldImpl();
 		return recordField;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public UnitType createUnitType() {
+		UnitTypeImpl unitType = new UnitTypeImpl();
+		return unitType;
 	}
 
 	/**

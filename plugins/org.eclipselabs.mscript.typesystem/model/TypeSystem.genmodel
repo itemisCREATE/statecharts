@@ -92,8 +92,8 @@
       </genOperations>
     </genClasses>
     <genClasses xsi:type="genmodel:GenClass" ecoreClass="TypeSystem.ecore#//ArrayDimension">
-      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute TypeSystem.ecore#//ArrayDimension/fromIndex"/>
-      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute TypeSystem.ecore#//ArrayDimension/toIndex"/>
+      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute TypeSystem.ecore#//ArrayDimension/beginIndex"/>
+      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute TypeSystem.ecore#//ArrayDimension/endIndex"/>
       <genFeatures xsi:type="genmodel:GenFeature" property="Readonly" createChild="false"
           ecoreFeature="ecore:EAttribute TypeSystem.ecore#//ArrayDimension/size"/>
     </genClasses>
@@ -169,5 +169,6 @@
           propertySortChoices="true" ecoreFeature="ecore:EReference TypeSystem.ecore#//RecordField/type"/>
       <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute TypeSystem.ecore#//RecordField/name"/>
     </genClasses>
+    <genClasses xsi:type="genmodel:GenClass" ecoreClass="TypeSystem.ecore#//UnitType"/>
   </genPackages>
 </genmodel:GenModel>

@@ -1532,16 +1532,16 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cSizeAssignment_1_0 = (Assignment)cGroup_1.eContents().get(0);
 		private final RuleCall cSizeExpressionParserRuleCall_1_0_0 = (RuleCall)cSizeAssignment_1_0.eContents().get(0);
 		private final Group cGroup_1_1 = (Group)cGroup_1.eContents().get(1);
-		private final Action cArrayDimensionSpecificationFromAction_1_1_0 = (Action)cGroup_1_1.eContents().get(0);
+		private final Action cArrayDimensionSpecificationBeginIndexAction_1_1_0 = (Action)cGroup_1_1.eContents().get(0);
 		private final Keyword cFullStopFullStopKeyword_1_1_1 = (Keyword)cGroup_1_1.eContents().get(1);
-		private final Assignment cToAssignment_1_1_2 = (Assignment)cGroup_1_1.eContents().get(2);
-		private final RuleCall cToExpressionParserRuleCall_1_1_2_0 = (RuleCall)cToAssignment_1_1_2.eContents().get(0);
+		private final Assignment cEndIndexAssignment_1_1_2 = (Assignment)cGroup_1_1.eContents().get(2);
+		private final RuleCall cEndIndexExpressionParserRuleCall_1_1_2_0 = (RuleCall)cEndIndexAssignment_1_1_2.eContents().get(0);
 		
 		//ArrayDimensionSpecification:
-		//	unspecified?="?" | size=Expression ({ArrayDimensionSpecification.from=current} ".." to=Expression)?;
+		//	unspecified?="?" | size=Expression ({ArrayDimensionSpecification.beginIndex=current} ".." endIndex=Expression)?;
 		public ParserRule getRule() { return rule; }
 
-		//unspecified?="?" | size=Expression ({ArrayDimensionSpecification.from=current} ".." to=Expression)?
+		//unspecified?="?" | size=Expression ({ArrayDimensionSpecification.beginIndex=current} ".." endIndex=Expression)?
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//unspecified?="?"
@@ -1550,7 +1550,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		//"?"
 		public Keyword getUnspecifiedQuestionMarkKeyword_0_0() { return cUnspecifiedQuestionMarkKeyword_0_0; }
 
-		//size=Expression ({ArrayDimensionSpecification.from=current} ".." to=Expression)?
+		//size=Expression ({ArrayDimensionSpecification.beginIndex=current} ".." endIndex=Expression)?
 		public Group getGroup_1() { return cGroup_1; }
 
 		//size=Expression
@@ -1559,20 +1559,20 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		//Expression
 		public RuleCall getSizeExpressionParserRuleCall_1_0_0() { return cSizeExpressionParserRuleCall_1_0_0; }
 
-		//({ArrayDimensionSpecification.from=current} ".." to=Expression)?
+		//({ArrayDimensionSpecification.beginIndex=current} ".." endIndex=Expression)?
 		public Group getGroup_1_1() { return cGroup_1_1; }
 
-		//{ArrayDimensionSpecification.from=current}
-		public Action getArrayDimensionSpecificationFromAction_1_1_0() { return cArrayDimensionSpecificationFromAction_1_1_0; }
+		//{ArrayDimensionSpecification.beginIndex=current}
+		public Action getArrayDimensionSpecificationBeginIndexAction_1_1_0() { return cArrayDimensionSpecificationBeginIndexAction_1_1_0; }
 
 		//".."
 		public Keyword getFullStopFullStopKeyword_1_1_1() { return cFullStopFullStopKeyword_1_1_1; }
 
-		//to=Expression
-		public Assignment getToAssignment_1_1_2() { return cToAssignment_1_1_2; }
+		//endIndex=Expression
+		public Assignment getEndIndexAssignment_1_1_2() { return cEndIndexAssignment_1_1_2; }
 
 		//Expression
-		public RuleCall getToExpressionParserRuleCall_1_1_2_0() { return cToExpressionParserRuleCall_1_1_2_0; }
+		public RuleCall getEndIndexExpressionParserRuleCall_1_1_2_0() { return cEndIndexExpressionParserRuleCall_1_1_2_0; }
 	}
 
 	public class UnitTypeSpecifierElements extends AbstractParserRuleElementFinder {
@@ -3765,7 +3765,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ArrayDimensionSpecification:
-	//	unspecified?="?" | size=Expression ({ArrayDimensionSpecification.from=current} ".." to=Expression)?;
+	//	unspecified?="?" | size=Expression ({ArrayDimensionSpecification.beginIndex=current} ".." endIndex=Expression)?;
 	public ArrayDimensionSpecificationElements getArrayDimensionSpecificationAccess() {
 		return (pArrayDimensionSpecification != null) ? pArrayDimensionSpecification : (pArrayDimensionSpecification = new ArrayDimensionSpecificationElements());
 	}

@@ -3175,15 +3175,15 @@ ruleArrayDimensionSpecification returns [EObject current=null]
 )
 )((
     { 
-        temp=factory.create(grammarAccess.getArrayDimensionSpecificationAccess().getArrayDimensionSpecificationFromAction_1_1_0().getType().getClassifier());
+        temp=factory.create(grammarAccess.getArrayDimensionSpecificationAccess().getArrayDimensionSpecificationBeginIndexAction_1_1_0().getType().getClassifier());
         try {
-        	factory.set(temp, "from", $current, null /*ParserRule*/, currentNode);
+        	factory.set(temp, "beginIndex", $current, null /*ParserRule*/, currentNode);
         } catch(ValueConverterException vce) {
         	handleValueConverterException(vce);
         }
         $current = temp; 
         temp = null;
-        CompositeNode newNode = createCompositeNode(grammarAccess.getArrayDimensionSpecificationAccess().getArrayDimensionSpecificationFromAction_1_1_0(), currentNode.getParent());
+        CompositeNode newNode = createCompositeNode(grammarAccess.getArrayDimensionSpecificationAccess().getArrayDimensionSpecificationBeginIndexAction_1_1_0(), currentNode.getParent());
     newNode.getChildren().add(currentNode);
     moveLookaheadInfo(currentNode, newNode);
     currentNode = newNode; 
@@ -3196,9 +3196,9 @@ ruleArrayDimensionSpecification returns [EObject current=null]
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getArrayDimensionSpecificationAccess().getToExpressionParserRuleCall_1_1_2_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getArrayDimensionSpecificationAccess().getEndIndexExpressionParserRuleCall_1_1_2_0(), currentNode); 
 	    }
-		lv_to_4_0=ruleExpression		{
+		lv_endIndex_4_0=ruleExpression		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getArrayDimensionSpecificationRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -3206,8 +3206,8 @@ ruleArrayDimensionSpecification returns [EObject current=null]
 	        try {
 	       		set(
 	       			$current, 
-	       			"to",
-	        		lv_to_4_0, 
+	       			"endIndex",
+	        		lv_endIndex_4_0, 
 	        		"Expression", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {

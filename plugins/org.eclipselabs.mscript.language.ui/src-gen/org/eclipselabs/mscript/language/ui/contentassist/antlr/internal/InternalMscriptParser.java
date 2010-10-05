@@ -22939,13 +22939,13 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
             // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:8583:1: ( () )
             // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:8584:1: ()
             {
-             before(grammarAccess.getArrayDimensionSpecificationAccess().getArrayDimensionSpecificationFromAction_1_1_0()); 
+             before(grammarAccess.getArrayDimensionSpecificationAccess().getArrayDimensionSpecificationBeginIndexAction_1_1_0()); 
             // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:8585:1: ()
             // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:8587:1: 
             {
             }
 
-             after(grammarAccess.getArrayDimensionSpecificationAccess().getArrayDimensionSpecificationFromAction_1_1_0()); 
+             after(grammarAccess.getArrayDimensionSpecificationAccess().getArrayDimensionSpecificationBeginIndexAction_1_1_0()); 
 
             }
 
@@ -23069,30 +23069,30 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__ArrayDimensionSpecification__Group_1_1__2__Impl
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:8639:1: rule__ArrayDimensionSpecification__Group_1_1__2__Impl : ( ( rule__ArrayDimensionSpecification__ToAssignment_1_1_2 ) ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:8639:1: rule__ArrayDimensionSpecification__Group_1_1__2__Impl : ( ( rule__ArrayDimensionSpecification__EndIndexAssignment_1_1_2 ) ) ;
     public final void rule__ArrayDimensionSpecification__Group_1_1__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:8643:1: ( ( ( rule__ArrayDimensionSpecification__ToAssignment_1_1_2 ) ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:8644:1: ( ( rule__ArrayDimensionSpecification__ToAssignment_1_1_2 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:8643:1: ( ( ( rule__ArrayDimensionSpecification__EndIndexAssignment_1_1_2 ) ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:8644:1: ( ( rule__ArrayDimensionSpecification__EndIndexAssignment_1_1_2 ) )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:8644:1: ( ( rule__ArrayDimensionSpecification__ToAssignment_1_1_2 ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:8645:1: ( rule__ArrayDimensionSpecification__ToAssignment_1_1_2 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:8644:1: ( ( rule__ArrayDimensionSpecification__EndIndexAssignment_1_1_2 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:8645:1: ( rule__ArrayDimensionSpecification__EndIndexAssignment_1_1_2 )
             {
-             before(grammarAccess.getArrayDimensionSpecificationAccess().getToAssignment_1_1_2()); 
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:8646:1: ( rule__ArrayDimensionSpecification__ToAssignment_1_1_2 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:8646:2: rule__ArrayDimensionSpecification__ToAssignment_1_1_2
+             before(grammarAccess.getArrayDimensionSpecificationAccess().getEndIndexAssignment_1_1_2()); 
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:8646:1: ( rule__ArrayDimensionSpecification__EndIndexAssignment_1_1_2 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:8646:2: rule__ArrayDimensionSpecification__EndIndexAssignment_1_1_2
             {
-            pushFollow(FOLLOW_rule__ArrayDimensionSpecification__ToAssignment_1_1_2_in_rule__ArrayDimensionSpecification__Group_1_1__2__Impl17674);
-            rule__ArrayDimensionSpecification__ToAssignment_1_1_2();
+            pushFollow(FOLLOW_rule__ArrayDimensionSpecification__EndIndexAssignment_1_1_2_in_rule__ArrayDimensionSpecification__Group_1_1__2__Impl17674);
+            rule__ArrayDimensionSpecification__EndIndexAssignment_1_1_2();
             _fsp--;
 
 
             }
 
-             after(grammarAccess.getArrayDimensionSpecificationAccess().getToAssignment_1_1_2()); 
+             after(grammarAccess.getArrayDimensionSpecificationAccess().getEndIndexAssignment_1_1_2()); 
 
             }
 
@@ -37781,9 +37781,9 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
     // $ANTLR end rule__ArrayDimensionSpecification__SizeAssignment_1_0
 
 
-    // $ANTLR start rule__ArrayDimensionSpecification__ToAssignment_1_1_2
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:14431:1: rule__ArrayDimensionSpecification__ToAssignment_1_1_2 : ( ruleExpression ) ;
-    public final void rule__ArrayDimensionSpecification__ToAssignment_1_1_2() throws RecognitionException {
+    // $ANTLR start rule__ArrayDimensionSpecification__EndIndexAssignment_1_1_2
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:14431:1: rule__ArrayDimensionSpecification__EndIndexAssignment_1_1_2 : ( ruleExpression ) ;
+    public final void rule__ArrayDimensionSpecification__EndIndexAssignment_1_1_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -37794,12 +37794,12 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
             // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:14436:1: ( ruleExpression )
             // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:14437:1: ruleExpression
             {
-             before(grammarAccess.getArrayDimensionSpecificationAccess().getToExpressionParserRuleCall_1_1_2_0()); 
-            pushFollow(FOLLOW_ruleExpression_in_rule__ArrayDimensionSpecification__ToAssignment_1_1_229141);
+             before(grammarAccess.getArrayDimensionSpecificationAccess().getEndIndexExpressionParserRuleCall_1_1_2_0()); 
+            pushFollow(FOLLOW_ruleExpression_in_rule__ArrayDimensionSpecification__EndIndexAssignment_1_1_229141);
             ruleExpression();
             _fsp--;
 
-             after(grammarAccess.getArrayDimensionSpecificationAccess().getToExpressionParserRuleCall_1_1_2_0()); 
+             after(grammarAccess.getArrayDimensionSpecificationAccess().getEndIndexExpressionParserRuleCall_1_1_2_0()); 
 
             }
 
@@ -37818,7 +37818,7 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ArrayDimensionSpecification__ToAssignment_1_1_2
+    // $ANTLR end rule__ArrayDimensionSpecification__EndIndexAssignment_1_1_2
 
 
     // $ANTLR start rule__ConditionalExpression__CasesAssignment_1
@@ -41027,7 +41027,7 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__ArrayDimensionSpecification__Group_1_1__2_in_rule__ArrayDimensionSpecification__Group_1_1__117588 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_59_in_rule__ArrayDimensionSpecification__Group_1_1__1__Impl17616 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__ArrayDimensionSpecification__Group_1_1__2__Impl_in_rule__ArrayDimensionSpecification__Group_1_1__217647 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ArrayDimensionSpecification__ToAssignment_1_1_2_in_rule__ArrayDimensionSpecification__Group_1_1__2__Impl17674 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ArrayDimensionSpecification__EndIndexAssignment_1_1_2_in_rule__ArrayDimensionSpecification__Group_1_1__2__Impl17674 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__UnitTypeSpecifier__Group__0__Impl_in_rule__UnitTypeSpecifier__Group__017710 = new BitSet(new long[]{0x0000000000001000L});
     public static final BitSet FOLLOW_rule__UnitTypeSpecifier__Group__1_in_rule__UnitTypeSpecifier__Group__017713 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__UnitTypeSpecifier__Group__1__Impl_in_rule__UnitTypeSpecifier__Group__117771 = new BitSet(new long[]{0x0000000000000002L});
@@ -41468,7 +41468,7 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_ruleArrayDimensionSpecification_in_rule__NamedTypeSpecifier__DimensionsAssignment_2_2_129035 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_74_in_rule__ArrayDimensionSpecification__UnspecifiedAssignment_029071 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleExpression_in_rule__ArrayDimensionSpecification__SizeAssignment_1_029110 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpression_in_rule__ArrayDimensionSpecification__ToAssignment_1_1_229141 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpression_in_rule__ArrayDimensionSpecification__EndIndexAssignment_1_1_229141 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleConditionalExpressionCase_in_rule__ConditionalExpression__CasesAssignment_129172 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleConditionalExpressionCase_in_rule__ConditionalExpression__CasesAssignment_2_129203 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleExpression_in_rule__ConditionalExpression__ElseExpressionAssignment_429234 = new BitSet(new long[]{0x0000000000000002L});

@@ -252,7 +252,7 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getNamedTypeSpecifierAccess().getDimensionsAssignment_2_2_1(), "rule__NamedTypeSpecifier__DimensionsAssignment_2_2_1");
 					put(grammarAccess.getArrayDimensionSpecificationAccess().getUnspecifiedAssignment_0(), "rule__ArrayDimensionSpecification__UnspecifiedAssignment_0");
 					put(grammarAccess.getArrayDimensionSpecificationAccess().getSizeAssignment_1_0(), "rule__ArrayDimensionSpecification__SizeAssignment_1_0");
-					put(grammarAccess.getArrayDimensionSpecificationAccess().getToAssignment_1_1_2(), "rule__ArrayDimensionSpecification__ToAssignment_1_1_2");
+					put(grammarAccess.getArrayDimensionSpecificationAccess().getEndIndexAssignment_1_1_2(), "rule__ArrayDimensionSpecification__EndIndexAssignment_1_1_2");
 					put(grammarAccess.getConditionalExpressionAccess().getCasesAssignment_1(), "rule__ConditionalExpression__CasesAssignment_1");
 					put(grammarAccess.getConditionalExpressionAccess().getCasesAssignment_2_1(), "rule__ConditionalExpression__CasesAssignment_2_1");
 					put(grammarAccess.getConditionalExpressionAccess().getElseExpressionAssignment_4(), "rule__ConditionalExpression__ElseExpressionAssignment_4");

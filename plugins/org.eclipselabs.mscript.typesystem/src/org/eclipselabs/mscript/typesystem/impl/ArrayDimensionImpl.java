@@ -20,8 +20,8 @@ import org.eclipselabs.mscript.typesystem.TypeSystemPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.typesystem.impl.ArrayDimensionImpl#getFromIndex <em>From Index</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.typesystem.impl.ArrayDimensionImpl#getToIndex <em>To Index</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.typesystem.impl.ArrayDimensionImpl#getBeginIndex <em>Begin Index</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.typesystem.impl.ArrayDimensionImpl#getEndIndex <em>End Index</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.typesystem.impl.ArrayDimensionImpl#getSize <em>Size</em>}</li>
  * </ul>
  * </p>
@@ -30,44 +30,44 @@ import org.eclipselabs.mscript.typesystem.TypeSystemPackage;
  */
 public class ArrayDimensionImpl extends EObjectImpl implements ArrayDimension {
 	/**
-	 * The default value of the '{@link #getFromIndex() <em>From Index</em>}' attribute.
+	 * The default value of the '{@link #getBeginIndex() <em>Begin Index</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getFromIndex()
+	 * @see #getBeginIndex()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int FROM_INDEX_EDEFAULT = 1;
+	protected static final int BEGIN_INDEX_EDEFAULT = 1;
 
 	/**
-	 * The cached value of the '{@link #getFromIndex() <em>From Index</em>}' attribute.
+	 * The cached value of the '{@link #getBeginIndex() <em>Begin Index</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getFromIndex()
+	 * @see #getBeginIndex()
 	 * @generated
 	 * @ordered
 	 */
-	protected int fromIndex = FROM_INDEX_EDEFAULT;
+	protected int beginIndex = BEGIN_INDEX_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getToIndex() <em>To Index</em>}' attribute.
+	 * The default value of the '{@link #getEndIndex() <em>End Index</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getToIndex()
+	 * @see #getEndIndex()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int TO_INDEX_EDEFAULT = 0;
+	protected static final int END_INDEX_EDEFAULT = 0;
 
 	/**
-	 * The cached value of the '{@link #getToIndex() <em>To Index</em>}' attribute.
+	 * The cached value of the '{@link #getEndIndex() <em>End Index</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getToIndex()
+	 * @see #getEndIndex()
 	 * @generated
 	 * @ordered
 	 */
-	protected int toIndex = TO_INDEX_EDEFAULT;
+	protected int endIndex = END_INDEX_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getSize() <em>Size</em>}' attribute.
@@ -103,8 +103,8 @@ public class ArrayDimensionImpl extends EObjectImpl implements ArrayDimension {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int getFromIndex() {
-		return fromIndex;
+	public int getBeginIndex() {
+		return beginIndex;
 	}
 
 	/**
@@ -112,11 +112,11 @@ public class ArrayDimensionImpl extends EObjectImpl implements ArrayDimension {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setFromIndex(int newFromIndex) {
-		int oldFromIndex = fromIndex;
-		fromIndex = newFromIndex;
+	public void setBeginIndex(int newBeginIndex) {
+		int oldBeginIndex = beginIndex;
+		beginIndex = newBeginIndex;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypeSystemPackage.ARRAY_DIMENSION__FROM_INDEX, oldFromIndex, fromIndex));
+			eNotify(new ENotificationImpl(this, Notification.SET, TypeSystemPackage.ARRAY_DIMENSION__BEGIN_INDEX, oldBeginIndex, beginIndex));
 	}
 
 	/**
@@ -124,8 +124,8 @@ public class ArrayDimensionImpl extends EObjectImpl implements ArrayDimension {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int getToIndex() {
-		return toIndex;
+	public int getEndIndex() {
+		return endIndex;
 	}
 
 	/**
@@ -133,11 +133,11 @@ public class ArrayDimensionImpl extends EObjectImpl implements ArrayDimension {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setToIndex(int newToIndex) {
-		int oldToIndex = toIndex;
-		toIndex = newToIndex;
+	public void setEndIndex(int newEndIndex) {
+		int oldEndIndex = endIndex;
+		endIndex = newEndIndex;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypeSystemPackage.ARRAY_DIMENSION__TO_INDEX, oldToIndex, toIndex));
+			eNotify(new ENotificationImpl(this, Notification.SET, TypeSystemPackage.ARRAY_DIMENSION__END_INDEX, oldEndIndex, endIndex));
 	}
 
 	/**
@@ -146,7 +146,7 @@ public class ArrayDimensionImpl extends EObjectImpl implements ArrayDimension {
 	 * @generated NOT
 	 */
 	public int getSize() {
-		return getToIndex() - getFromIndex() + 1;
+		return getEndIndex() - getBeginIndex() + 1;
 	}
 
 	/**
@@ -157,10 +157,10 @@ public class ArrayDimensionImpl extends EObjectImpl implements ArrayDimension {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TypeSystemPackage.ARRAY_DIMENSION__FROM_INDEX:
-				return getFromIndex();
-			case TypeSystemPackage.ARRAY_DIMENSION__TO_INDEX:
-				return getToIndex();
+			case TypeSystemPackage.ARRAY_DIMENSION__BEGIN_INDEX:
+				return getBeginIndex();
+			case TypeSystemPackage.ARRAY_DIMENSION__END_INDEX:
+				return getEndIndex();
 			case TypeSystemPackage.ARRAY_DIMENSION__SIZE:
 				return getSize();
 		}
@@ -175,11 +175,11 @@ public class ArrayDimensionImpl extends EObjectImpl implements ArrayDimension {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TypeSystemPackage.ARRAY_DIMENSION__FROM_INDEX:
-				setFromIndex((Integer)newValue);
+			case TypeSystemPackage.ARRAY_DIMENSION__BEGIN_INDEX:
+				setBeginIndex((Integer)newValue);
 				return;
-			case TypeSystemPackage.ARRAY_DIMENSION__TO_INDEX:
-				setToIndex((Integer)newValue);
+			case TypeSystemPackage.ARRAY_DIMENSION__END_INDEX:
+				setEndIndex((Integer)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -193,11 +193,11 @@ public class ArrayDimensionImpl extends EObjectImpl implements ArrayDimension {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TypeSystemPackage.ARRAY_DIMENSION__FROM_INDEX:
-				setFromIndex(FROM_INDEX_EDEFAULT);
+			case TypeSystemPackage.ARRAY_DIMENSION__BEGIN_INDEX:
+				setBeginIndex(BEGIN_INDEX_EDEFAULT);
 				return;
-			case TypeSystemPackage.ARRAY_DIMENSION__TO_INDEX:
-				setToIndex(TO_INDEX_EDEFAULT);
+			case TypeSystemPackage.ARRAY_DIMENSION__END_INDEX:
+				setEndIndex(END_INDEX_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -211,10 +211,10 @@ public class ArrayDimensionImpl extends EObjectImpl implements ArrayDimension {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TypeSystemPackage.ARRAY_DIMENSION__FROM_INDEX:
-				return fromIndex != FROM_INDEX_EDEFAULT;
-			case TypeSystemPackage.ARRAY_DIMENSION__TO_INDEX:
-				return toIndex != TO_INDEX_EDEFAULT;
+			case TypeSystemPackage.ARRAY_DIMENSION__BEGIN_INDEX:
+				return beginIndex != BEGIN_INDEX_EDEFAULT;
+			case TypeSystemPackage.ARRAY_DIMENSION__END_INDEX:
+				return endIndex != END_INDEX_EDEFAULT;
 			case TypeSystemPackage.ARRAY_DIMENSION__SIZE:
 				return getSize() != SIZE_EDEFAULT;
 		}
@@ -231,10 +231,10 @@ public class ArrayDimensionImpl extends EObjectImpl implements ArrayDimension {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (fromIndex: ");
-		result.append(fromIndex);
-		result.append(", toIndex: ");
-		result.append(toIndex);
+		result.append(" (beginIndex: ");
+		result.append(beginIndex);
+		result.append(", endIndex: ");
+		result.append(endIndex);
 		result.append(')');
 		return result.toString();
 	}

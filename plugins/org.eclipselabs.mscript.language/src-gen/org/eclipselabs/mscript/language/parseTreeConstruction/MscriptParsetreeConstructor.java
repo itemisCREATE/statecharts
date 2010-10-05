@@ -7840,11 +7840,11 @@ protected class NamedTypeSpecifier_RightSquareBracketKeyword_2_3 extends Keyword
 /************ begin Rule ArrayDimensionSpecification ****************
  *
  * ArrayDimensionSpecification:
- * 	unspecified?="?" | size=Expression ({ArrayDimensionSpecification.from=current} ".." to=Expression)?;
+ * 	unspecified?="?" | size=Expression ({ArrayDimensionSpecification.beginIndex=current} ".." endIndex=Expression)?;
  *
  **/
 
-// unspecified?="?" | size=Expression ({ArrayDimensionSpecification.from=current} ".." to=Expression)?
+// unspecified?="?" | size=Expression ({ArrayDimensionSpecification.beginIndex=current} ".." endIndex=Expression)?
 protected class ArrayDimensionSpecification_Alternatives extends AlternativesToken {
 
 	public ArrayDimensionSpecification_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7907,7 +7907,7 @@ protected class ArrayDimensionSpecification_UnspecifiedAssignment_0 extends Assi
 
 }
 
-// size=Expression ({ArrayDimensionSpecification.from=current} ".." to=Expression)?
+// size=Expression ({ArrayDimensionSpecification.beginIndex=current} ".." endIndex=Expression)?
 protected class ArrayDimensionSpecification_Group_1 extends GroupToken {
 	
 	public ArrayDimensionSpecification_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7975,7 +7975,7 @@ protected class ArrayDimensionSpecification_SizeAssignment_1_0 extends Assignmen
 	}	
 }
 
-// ({ArrayDimensionSpecification.from=current} ".." to=Expression)?
+// ({ArrayDimensionSpecification.beginIndex=current} ".." endIndex=Expression)?
 protected class ArrayDimensionSpecification_Group_1_1 extends GroupToken {
 	
 	public ArrayDimensionSpecification_Group_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7990,23 +7990,23 @@ protected class ArrayDimensionSpecification_Group_1_1 extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new ArrayDimensionSpecification_ToAssignment_1_1_2(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new ArrayDimensionSpecification_EndIndexAssignment_1_1_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
 }
 
-// {ArrayDimensionSpecification.from=current}
-protected class ArrayDimensionSpecification_ArrayDimensionSpecificationFromAction_1_1_0 extends ActionToken  {
+// {ArrayDimensionSpecification.beginIndex=current}
+protected class ArrayDimensionSpecification_ArrayDimensionSpecificationBeginIndexAction_1_1_0 extends ActionToken  {
 
-	public ArrayDimensionSpecification_ArrayDimensionSpecificationFromAction_1_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public ArrayDimensionSpecification_ArrayDimensionSpecificationBeginIndexAction_1_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Action getGrammarElement() {
-		return grammarAccess.getArrayDimensionSpecificationAccess().getArrayDimensionSpecificationFromAction_1_1_0();
+		return grammarAccess.getArrayDimensionSpecificationAccess().getArrayDimensionSpecificationBeginIndexAction_1_1_0();
 	}
 
     @Override
@@ -8019,9 +8019,9 @@ protected class ArrayDimensionSpecification_ArrayDimensionSpecificationFromActio
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		Object val = eObjectConsumer.getConsumable("from", false);
+		Object val = eObjectConsumer.getConsumable("beginIndex", false);
 		if(val == null) return null;
-		if(!eObjectConsumer.isConsumedWithLastConsumtion("from")) return null;
+		if(!eObjectConsumer.isConsumedWithLastConsumtion("beginIndex")) return null;
 		return createEObjectConsumer((EObject) val);
 	}
 }
@@ -8041,23 +8041,23 @@ protected class ArrayDimensionSpecification_FullStopFullStopKeyword_1_1_1 extend
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new ArrayDimensionSpecification_ArrayDimensionSpecificationFromAction_1_1_0(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new ArrayDimensionSpecification_ArrayDimensionSpecificationBeginIndexAction_1_1_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
 }
 
-// to=Expression
-protected class ArrayDimensionSpecification_ToAssignment_1_1_2 extends AssignmentToken  {
+// endIndex=Expression
+protected class ArrayDimensionSpecification_EndIndexAssignment_1_1_2 extends AssignmentToken  {
 	
-	public ArrayDimensionSpecification_ToAssignment_1_1_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public ArrayDimensionSpecification_EndIndexAssignment_1_1_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getArrayDimensionSpecificationAccess().getToAssignment_1_1_2();
+		return grammarAccess.getArrayDimensionSpecificationAccess().getEndIndexAssignment_1_1_2();
 	}
 
     @Override
@@ -8070,13 +8070,13 @@ protected class ArrayDimensionSpecification_ToAssignment_1_1_2 extends Assignmen
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("to",false)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("to");
+		if((value = eObjectConsumer.getConsumable("endIndex",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("endIndex");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getExpressionRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getArrayDimensionSpecificationAccess().getToExpressionParserRuleCall_1_1_2_0(); 
+				element = grammarAccess.getArrayDimensionSpecificationAccess().getEndIndexExpressionParserRuleCall_1_1_2_0(); 
 				consumed = obj;
 				return param;
 			}

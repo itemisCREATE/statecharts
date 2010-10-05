@@ -1284,22 +1284,22 @@ public interface AstPackage extends EPackage
   int ARRAY_DIMENSION_SPECIFICATION__SIZE = 1;
 
   /**
-   * The feature id for the '<em><b>From</b></em>' containment reference.
+   * The feature id for the '<em><b>Begin Index</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ARRAY_DIMENSION_SPECIFICATION__FROM = 2;
+  int ARRAY_DIMENSION_SPECIFICATION__BEGIN_INDEX = 2;
 
   /**
-   * The feature id for the '<em><b>To</b></em>' containment reference.
+   * The feature id for the '<em><b>End Index</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ARRAY_DIMENSION_SPECIFICATION__TO = 3;
+  int ARRAY_DIMENSION_SPECIFICATION__END_INDEX = 3;
 
   /**
    * The number of structural features of the '<em>Array Dimension Specification</em>' class.
@@ -3535,26 +3535,26 @@ public interface AstPackage extends EPackage
   EReference getArrayDimensionSpecification_Size();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.ArrayDimensionSpecification#getFrom <em>From</em>}'.
+   * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.ArrayDimensionSpecification#getBeginIndex <em>Begin Index</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>From</em>'.
-   * @see org.eclipselabs.mscript.language.ast.ArrayDimensionSpecification#getFrom()
+   * @return the meta object for the containment reference '<em>Begin Index</em>'.
+   * @see org.eclipselabs.mscript.language.ast.ArrayDimensionSpecification#getBeginIndex()
    * @see #getArrayDimensionSpecification()
    * @generated
    */
-  EReference getArrayDimensionSpecification_From();
+  EReference getArrayDimensionSpecification_BeginIndex();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.ArrayDimensionSpecification#getTo <em>To</em>}'.
+   * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.ArrayDimensionSpecification#getEndIndex <em>End Index</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>To</em>'.
-   * @see org.eclipselabs.mscript.language.ast.ArrayDimensionSpecification#getTo()
+   * @return the meta object for the containment reference '<em>End Index</em>'.
+   * @see org.eclipselabs.mscript.language.ast.ArrayDimensionSpecification#getEndIndex()
    * @see #getArrayDimensionSpecification()
    * @generated
    */
-  EReference getArrayDimensionSpecification_To();
+  EReference getArrayDimensionSpecification_EndIndex();
 
   /**
    * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.UnitTypeSpecifier <em>Unit Type Specifier</em>}'.
@@ -5363,20 +5363,20 @@ public interface AstPackage extends EPackage
     EReference ARRAY_DIMENSION_SPECIFICATION__SIZE = eINSTANCE.getArrayDimensionSpecification_Size();
 
     /**
-     * The meta object literal for the '<em><b>From</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Begin Index</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference ARRAY_DIMENSION_SPECIFICATION__FROM = eINSTANCE.getArrayDimensionSpecification_From();
+    EReference ARRAY_DIMENSION_SPECIFICATION__BEGIN_INDEX = eINSTANCE.getArrayDimensionSpecification_BeginIndex();
 
     /**
-     * The meta object literal for the '<em><b>To</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>End Index</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference ARRAY_DIMENSION_SPECIFICATION__TO = eINSTANCE.getArrayDimensionSpecification_To();
+    EReference ARRAY_DIMENSION_SPECIFICATION__END_INDEX = eINSTANCE.getArrayDimensionSpecification_EndIndex();
 
     /**
      * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.UnitTypeSpecifierImpl <em>Unit Type Specifier</em>}' class.

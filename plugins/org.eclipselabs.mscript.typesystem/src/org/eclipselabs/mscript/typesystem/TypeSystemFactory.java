@@ -170,6 +170,15 @@ public interface TypeSystemFactory extends EFactory {
 	RecordField createRecordField();
 
 	/**
+	 * Returns a new object of class '<em>Unit Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Unit Type</em>'.
+	 * @generated
+	 */
+	UnitType createUnitType();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

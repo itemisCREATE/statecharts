@@ -33,6 +33,7 @@ import org.eclipselabs.mscript.typesystem.TypeSystem;
 import org.eclipselabs.mscript.typesystem.TypeSystemPackage;
 import org.eclipselabs.mscript.typesystem.Unit;
 import org.eclipselabs.mscript.typesystem.UnitFactor;
+import org.eclipselabs.mscript.typesystem.UnitType;
 
 /**
  * <!-- begin-user-doc -->
@@ -307,6 +308,15 @@ public class TypeSystemSwitch<T> {
 			case TypeSystemPackage.RECORD_FIELD: {
 				RecordField recordField = (RecordField)theEObject;
 				T result = caseRecordField(recordField);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TypeSystemPackage.UNIT_TYPE: {
+				UnitType unitType = (UnitType)theEObject;
+				T result = caseUnitType(unitType);
+				if (result == null) result = caseType(unitType);
+				if (result == null) result = casePackageableElement(unitType);
+				if (result == null) result = caseNamedElement(unitType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -656,6 +666,21 @@ public class TypeSystemSwitch<T> {
 	 * @generated
 	 */
 	public T caseRecordField(RecordField object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Unit Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Unit Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseUnitType(UnitType object) {
 		return null;
 	}
 

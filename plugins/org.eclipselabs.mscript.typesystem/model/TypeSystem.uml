@@ -122,13 +122,13 @@
       <ownedAttribute xmi:id="_1W70MHyEEd-o9uob8q6Zlg" name="enumeration" type="_AewtgHMfEd-9E7QZMDWyTg" subsettedProperty="_x_AyYINkEd-Jwv-I5tZZDg" association="_9AlGIHyEEd-o9uob8q6Zlg"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_wV7t4HPQEd-S94eRjnXSAQ" name="ArrayDimension">
-      <ownedAttribute xmi:id="_z8asYHPQEd-S94eRjnXSAQ" name="fromIndex" aggregation="composite">
+      <ownedAttribute xmi:id="_z8asYHPQEd-S94eRjnXSAQ" name="beginIndex" aggregation="composite">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_rhOVALOHEd-dWNaurKNeNQ" value="1"/>
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_rhPjILOHEd-dWNaurKNeNQ" value="1"/>
-        <defaultValue xmi:type="uml:LiteralString" xmi:id="_uDD_oLOHEd-dWNaurKNeNQ" value="1"/>
+        <defaultValue xmi:type="uml:LiteralString" xmi:id="_2pQfMNBsEd-P2NmVd1p3QQ" value="1"/>
       </ownedAttribute>
-      <ownedAttribute xmi:id="_tOuP4HPREd-S94eRjnXSAQ" name="toIndex" aggregation="composite">
+      <ownedAttribute xmi:id="_tOuP4HPREd-S94eRjnXSAQ" name="endIndex" aggregation="composite">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_sJ8h4LOHEd-dWNaurKNeNQ" value="1"/>
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_sJ8h4bOHEd-dWNaurKNeNQ" value="1"/>

@@ -17,8 +17,8 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link org.eclipselabs.mscript.language.ast.ArrayDimensionSpecification#isUnspecified <em>Unspecified</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.ArrayDimensionSpecification#getSize <em>Size</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.ArrayDimensionSpecification#getFrom <em>From</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.ArrayDimensionSpecification#getTo <em>To</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.ArrayDimensionSpecification#getBeginIndex <em>Begin Index</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.ArrayDimensionSpecification#getEndIndex <em>End Index</em>}</li>
  * </ul>
  * </p>
  *
@@ -81,55 +81,55 @@ public interface ArrayDimensionSpecification extends EObject
   void setSize(Expression value);
 
   /**
-   * Returns the value of the '<em><b>From</b></em>' containment reference.
+   * Returns the value of the '<em><b>Begin Index</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>From</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Begin Index</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>From</em>' containment reference.
-   * @see #setFrom(ArrayDimensionSpecification)
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getArrayDimensionSpecification_From()
+   * @return the value of the '<em>Begin Index</em>' containment reference.
+   * @see #setBeginIndex(ArrayDimensionSpecification)
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getArrayDimensionSpecification_BeginIndex()
    * @model containment="true"
    * @generated
    */
-  ArrayDimensionSpecification getFrom();
+  ArrayDimensionSpecification getBeginIndex();
 
   /**
-   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.ArrayDimensionSpecification#getFrom <em>From</em>}' containment reference.
+   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.ArrayDimensionSpecification#getBeginIndex <em>Begin Index</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>From</em>' containment reference.
-   * @see #getFrom()
+   * @param value the new value of the '<em>Begin Index</em>' containment reference.
+   * @see #getBeginIndex()
    * @generated
    */
-  void setFrom(ArrayDimensionSpecification value);
+  void setBeginIndex(ArrayDimensionSpecification value);
 
   /**
-   * Returns the value of the '<em><b>To</b></em>' containment reference.
+   * Returns the value of the '<em><b>End Index</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>To</em>' containment reference isn't clear,
+   * If the meaning of the '<em>End Index</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>To</em>' containment reference.
-   * @see #setTo(Expression)
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getArrayDimensionSpecification_To()
+   * @return the value of the '<em>End Index</em>' containment reference.
+   * @see #setEndIndex(Expression)
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getArrayDimensionSpecification_EndIndex()
    * @model containment="true"
    * @generated
    */
-  Expression getTo();
+  Expression getEndIndex();
 
   /**
-   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.ArrayDimensionSpecification#getTo <em>To</em>}' containment reference.
+   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.ArrayDimensionSpecification#getEndIndex <em>End Index</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>To</em>' containment reference.
-   * @see #getTo()
+   * @param value the new value of the '<em>End Index</em>' containment reference.
+   * @see #getEndIndex()
    * @generated
    */
-  void setTo(Expression value);
+  void setEndIndex(Expression value);
 
 } // ArrayDimensionSpecification

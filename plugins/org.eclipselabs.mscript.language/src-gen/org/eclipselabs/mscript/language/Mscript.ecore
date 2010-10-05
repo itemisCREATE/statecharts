@@ -146,9 +146,9 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="unspecified" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="size" eType="#//Expression"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="from" eType="#//ArrayDimensionSpecification"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="beginIndex" eType="#//ArrayDimensionSpecification"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="to" eType="#//Expression"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="endIndex" eType="#//Expression"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="UnitTypeSpecifier" eSuperTypes="#//TypeSpecifier"/>

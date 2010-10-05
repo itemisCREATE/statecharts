@@ -1582,7 +1582,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getArrayDimensionSpecification_From()
+  public EReference getArrayDimensionSpecification_BeginIndex()
   {
     return (EReference)arrayDimensionSpecificationEClass.getEStructuralFeatures().get(2);
   }
@@ -1592,7 +1592,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getArrayDimensionSpecification_To()
+  public EReference getArrayDimensionSpecification_EndIndex()
   {
     return (EReference)arrayDimensionSpecificationEClass.getEStructuralFeatures().get(3);
   }
@@ -2726,8 +2726,8 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     arrayDimensionSpecificationEClass = createEClass(ARRAY_DIMENSION_SPECIFICATION);
     createEAttribute(arrayDimensionSpecificationEClass, ARRAY_DIMENSION_SPECIFICATION__UNSPECIFIED);
     createEReference(arrayDimensionSpecificationEClass, ARRAY_DIMENSION_SPECIFICATION__SIZE);
-    createEReference(arrayDimensionSpecificationEClass, ARRAY_DIMENSION_SPECIFICATION__FROM);
-    createEReference(arrayDimensionSpecificationEClass, ARRAY_DIMENSION_SPECIFICATION__TO);
+    createEReference(arrayDimensionSpecificationEClass, ARRAY_DIMENSION_SPECIFICATION__BEGIN_INDEX);
+    createEReference(arrayDimensionSpecificationEClass, ARRAY_DIMENSION_SPECIFICATION__END_INDEX);
 
     unitTypeSpecifierEClass = createEClass(UNIT_TYPE_SPECIFIER);
 
@@ -3074,8 +3074,8 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     initEClass(arrayDimensionSpecificationEClass, ArrayDimensionSpecification.class, "ArrayDimensionSpecification", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getArrayDimensionSpecification_Unspecified(), ecorePackage.getEBoolean(), "unspecified", null, 0, 1, ArrayDimensionSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getArrayDimensionSpecification_Size(), this.getExpression(), null, "size", null, 0, 1, ArrayDimensionSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getArrayDimensionSpecification_From(), this.getArrayDimensionSpecification(), null, "from", null, 0, 1, ArrayDimensionSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getArrayDimensionSpecification_To(), this.getExpression(), null, "to", null, 0, 1, ArrayDimensionSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getArrayDimensionSpecification_BeginIndex(), this.getArrayDimensionSpecification(), null, "beginIndex", null, 0, 1, ArrayDimensionSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getArrayDimensionSpecification_EndIndex(), this.getExpression(), null, "endIndex", null, 0, 1, ArrayDimensionSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(unitTypeSpecifierEClass, UnitTypeSpecifier.class, "UnitTypeSpecifier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

@@ -158,7 +158,7 @@ NamedTypeSpecifier :
 	'type' typeReference=SymbolReference ('[' dimensions+=ArrayDimensionSpecification (',' dimensions+=ArrayDimensionSpecification)* ']')?;
 	
 ArrayDimensionSpecification :
-	unspecified?='?' | size=Expression ({ArrayDimensionSpecification.from=current} '..' to=Expression)?;
+	unspecified?='?' | size=Expression ({ArrayDimensionSpecification.beginIndex=current} '..' endIndex=Expression)?;
 	
 UnitTypeSpecifier :
 	{UnitTypeSpecifier} 'unit';

@@ -8581,11 +8581,11 @@ rule__ArrayDimensionSpecification__Group_1_1__0__Impl
     }
 :
 (
-{ before(grammarAccess.getArrayDimensionSpecificationAccess().getArrayDimensionSpecificationFromAction_1_1_0()); }
+{ before(grammarAccess.getArrayDimensionSpecificationAccess().getArrayDimensionSpecificationBeginIndexAction_1_1_0()); }
 (
 
 )
-{ after(grammarAccess.getArrayDimensionSpecificationAccess().getArrayDimensionSpecificationFromAction_1_1_0()); }
+{ after(grammarAccess.getArrayDimensionSpecificationAccess().getArrayDimensionSpecificationBeginIndexAction_1_1_0()); }
 )
 
 ;
@@ -8642,9 +8642,9 @@ rule__ArrayDimensionSpecification__Group_1_1__2__Impl
     }
 :
 (
-{ before(grammarAccess.getArrayDimensionSpecificationAccess().getToAssignment_1_1_2()); }
-(rule__ArrayDimensionSpecification__ToAssignment_1_1_2)
-{ after(grammarAccess.getArrayDimensionSpecificationAccess().getToAssignment_1_1_2()); }
+{ before(grammarAccess.getArrayDimensionSpecificationAccess().getEndIndexAssignment_1_1_2()); }
+(rule__ArrayDimensionSpecification__EndIndexAssignment_1_1_2)
+{ after(grammarAccess.getArrayDimensionSpecificationAccess().getEndIndexAssignment_1_1_2()); }
 )
 
 ;
@@ -14428,14 +14428,14 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ArrayDimensionSpecification__ToAssignment_1_1_2
+rule__ArrayDimensionSpecification__EndIndexAssignment_1_1_2
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getArrayDimensionSpecificationAccess().getToExpressionParserRuleCall_1_1_2_0()); }
-	ruleExpression{ after(grammarAccess.getArrayDimensionSpecificationAccess().getToExpressionParserRuleCall_1_1_2_0()); }
+{ before(grammarAccess.getArrayDimensionSpecificationAccess().getEndIndexExpressionParserRuleCall_1_1_2_0()); }
+	ruleExpression{ after(grammarAccess.getArrayDimensionSpecificationAccess().getEndIndexExpressionParserRuleCall_1_1_2_0()); }
 )
 
 ;

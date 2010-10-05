@@ -277,7 +277,7 @@
     <styles xmi:type="notation:RoutingStyle" xmi:id="_CNBVgYesEd-lNp5-AHWQTA"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_CNBVgoesEd-lNp5-AHWQTA" fontName="Sans"/>
     <element xmi:type="uml:Association" href="TypeSystem.uml#_i3VJEIRKEd-DPIbDtY320g"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_CNBVg4esEd-lNp5-AHWQTA" points="[6, 0, 99, 149]$[77, 0, 170, 149]$[77, -149, 170, 0]$[-43, -149, 50, 0]"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_CNBVg4esEd-lNp5-AHWQTA" points="[6, 3, 99, 143]$[77, 3, 170, 143]$[77, -140, 170, 0]$[-43, -140, 50, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_EYOBwIesEd-lNp5-AHWQTA" id="(0.9695431472081218,0.26785714285714285)"/>
   </edges>
   <edges xmi:type="notation:Connector" xmi:id="_Dxp8gLHnEd-9gfyiGzgI9g" type="4001" source="_DRoOELHmEd-9gfyiGzgI9g" target="_bKtK0HGiEd-Vr_LfGhknIQ">

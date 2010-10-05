@@ -33,6 +33,7 @@ import org.eclipselabs.mscript.typesystem.TypeSystem;
 import org.eclipselabs.mscript.typesystem.TypeSystemPackage;
 import org.eclipselabs.mscript.typesystem.Unit;
 import org.eclipselabs.mscript.typesystem.UnitFactor;
+import org.eclipselabs.mscript.typesystem.UnitType;
 
 /**
  * <!-- begin-user-doc -->
@@ -181,6 +182,10 @@ public class TypeSystemAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseRecordField(RecordField object) {
 				return createRecordFieldAdapter();
+			}
+			@Override
+			public Adapter caseUnitType(UnitType object) {
+				return createUnitTypeAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -521,6 +526,20 @@ public class TypeSystemAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createRecordFieldAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.typesystem.UnitType <em>Unit Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipselabs.mscript.typesystem.UnitType
+	 * @generated
+	 */
+	public Adapter createUnitTypeAdapter() {
 		return null;
 	}
 

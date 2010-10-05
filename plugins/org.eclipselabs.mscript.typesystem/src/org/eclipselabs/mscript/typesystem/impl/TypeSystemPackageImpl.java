@@ -40,6 +40,7 @@ import org.eclipselabs.mscript.typesystem.TypeSystemPackage;
 import org.eclipselabs.mscript.typesystem.Unit;
 import org.eclipselabs.mscript.typesystem.UnitFactor;
 import org.eclipselabs.mscript.typesystem.UnitSymbol;
+import org.eclipselabs.mscript.typesystem.UnitType;
 
 /**
  * <!-- begin-user-doc -->
@@ -208,6 +209,13 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 	 * @generated
 	 */
 	private EClass recordFieldEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass unitTypeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -460,7 +468,7 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getArrayDimension_FromIndex() {
+	public EAttribute getArrayDimension_BeginIndex() {
 		return (EAttribute)arrayDimensionEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -469,7 +477,7 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getArrayDimension_ToIndex() {
+	public EAttribute getArrayDimension_EndIndex() {
 		return (EAttribute)arrayDimensionEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -757,6 +765,15 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getUnitType() {
+		return unitTypeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getOperatorKind() {
 		return operatorKindEEnum;
 	}
@@ -823,8 +840,8 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 		dataTypeEClass = createEClass(DATA_TYPE);
 
 		arrayDimensionEClass = createEClass(ARRAY_DIMENSION);
-		createEAttribute(arrayDimensionEClass, ARRAY_DIMENSION__FROM_INDEX);
-		createEAttribute(arrayDimensionEClass, ARRAY_DIMENSION__TO_INDEX);
+		createEAttribute(arrayDimensionEClass, ARRAY_DIMENSION__BEGIN_INDEX);
+		createEAttribute(arrayDimensionEClass, ARRAY_DIMENSION__END_INDEX);
 		createEAttribute(arrayDimensionEClass, ARRAY_DIMENSION__SIZE);
 
 		primitiveTypeEClass = createEClass(PRIMITIVE_TYPE);
@@ -872,6 +889,8 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 		recordFieldEClass = createEClass(RECORD_FIELD);
 		createEReference(recordFieldEClass, RECORD_FIELD__TYPE);
 		createEAttribute(recordFieldEClass, RECORD_FIELD__NAME);
+
+		unitTypeEClass = createEClass(UNIT_TYPE);
 
 		// Create enums
 		operatorKindEEnum = createEEnum(OPERATOR_KIND);
@@ -925,6 +944,7 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 		packageEClass.getESuperTypes().add(this.getPackageableElement());
 		tensorTypeEClass.getESuperTypes().add(this.getArrayType());
 		recordEClass.getESuperTypes().add(this.getDataType());
+		unitTypeEClass.getESuperTypes().add(this.getType());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(typeEClass, Type.class, "Type", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -965,8 +985,8 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 		addEParameter(op, this.getDataType(), "other", 1, 1, IS_UNIQUE, !IS_ORDERED);
 
 		initEClass(arrayDimensionEClass, ArrayDimension.class, "ArrayDimension", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getArrayDimension_FromIndex(), ecorePackage.getEInt(), "fromIndex", "1", 1, 1, ArrayDimension.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEAttribute(getArrayDimension_ToIndex(), ecorePackage.getEInt(), "toIndex", null, 1, 1, ArrayDimension.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getArrayDimension_BeginIndex(), ecorePackage.getEInt(), "beginIndex", "1", 1, 1, ArrayDimension.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getArrayDimension_EndIndex(), ecorePackage.getEInt(), "endIndex", null, 1, 1, ArrayDimension.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEAttribute(getArrayDimension_Size(), ecorePackage.getEInt(), "size", null, 1, 1, ArrayDimension.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, !IS_ORDERED);
 
 		initEClass(primitiveTypeEClass, PrimitiveType.class, "PrimitiveType", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1036,6 +1056,8 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 		initEClass(recordFieldEClass, RecordField.class, "RecordField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getRecordField_Type(), this.getDataType(), null, "type", null, 1, 1, RecordField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEAttribute(getRecordField_Name(), ecorePackage.getEString(), "name", null, 1, 1, RecordField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+
+		initEClass(unitTypeEClass, UnitType.class, "UnitType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize enums and add enum literals
 		initEEnum(operatorKindEEnum, OperatorKind.class, "OperatorKind");

@@ -518,22 +518,22 @@ public interface TypeSystemPackage extends EPackage {
 	int ARRAY_TYPE_FEATURE_COUNT = DATA_TYPE_FEATURE_COUNT + 7;
 
 	/**
-	 * The feature id for the '<em><b>From Index</b></em>' attribute.
+	 * The feature id for the '<em><b>Begin Index</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ARRAY_DIMENSION__FROM_INDEX = 0;
+	int ARRAY_DIMENSION__BEGIN_INDEX = 0;
 
 	/**
-	 * The feature id for the '<em><b>To Index</b></em>' attribute.
+	 * The feature id for the '<em><b>End Index</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ARRAY_DIMENSION__TO_INDEX = 1;
+	int ARRAY_DIMENSION__END_INDEX = 1;
 
 	/**
 	 * The feature id for the '<em><b>Size</b></em>' attribute.
@@ -1335,6 +1335,52 @@ public interface TypeSystemPackage extends EPackage {
 	int RECORD_FIELD_FEATURE_COUNT = 2;
 
 	/**
+	 * The meta object id for the '{@link org.eclipselabs.mscript.typesystem.impl.UnitTypeImpl <em>Unit Type</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipselabs.mscript.typesystem.impl.UnitTypeImpl
+	 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemPackageImpl#getUnitType()
+	 * @generated
+	 */
+	int UNIT_TYPE = 23;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNIT_TYPE__NAME = TYPE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNIT_TYPE__QUALIFIED_NAME = TYPE__QUALIFIED_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNIT_TYPE__NAMESPACE = TYPE__NAMESPACE;
+
+	/**
+	 * The number of structural features of the '<em>Unit Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNIT_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.typesystem.OperatorKind <em>Operator Kind</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1342,7 +1388,7 @@ public interface TypeSystemPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemPackageImpl#getOperatorKind()
 	 * @generated
 	 */
-	int OPERATOR_KIND = 23;
+	int OPERATOR_KIND = 24;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.typesystem.UnitSymbol <em>Unit Symbol</em>}' enum.
@@ -1352,7 +1398,7 @@ public interface TypeSystemPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemPackageImpl#getUnitSymbol()
 	 * @generated
 	 */
-	int UNIT_SYMBOL = 24;
+	int UNIT_SYMBOL = 25;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipselabs.mscript.typesystem.Type <em>Type</em>}'.
@@ -1557,26 +1603,26 @@ public interface TypeSystemPackage extends EPackage {
 	EClass getArrayDimension();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.typesystem.ArrayDimension#getFromIndex <em>From Index</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.typesystem.ArrayDimension#getBeginIndex <em>Begin Index</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>From Index</em>'.
-	 * @see org.eclipselabs.mscript.typesystem.ArrayDimension#getFromIndex()
+	 * @return the meta object for the attribute '<em>Begin Index</em>'.
+	 * @see org.eclipselabs.mscript.typesystem.ArrayDimension#getBeginIndex()
 	 * @see #getArrayDimension()
 	 * @generated
 	 */
-	EAttribute getArrayDimension_FromIndex();
+	EAttribute getArrayDimension_BeginIndex();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.typesystem.ArrayDimension#getToIndex <em>To Index</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.typesystem.ArrayDimension#getEndIndex <em>End Index</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>To Index</em>'.
-	 * @see org.eclipselabs.mscript.typesystem.ArrayDimension#getToIndex()
+	 * @return the meta object for the attribute '<em>End Index</em>'.
+	 * @see org.eclipselabs.mscript.typesystem.ArrayDimension#getEndIndex()
 	 * @see #getArrayDimension()
 	 * @generated
 	 */
-	EAttribute getArrayDimension_ToIndex();
+	EAttribute getArrayDimension_EndIndex();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.typesystem.ArrayDimension#getSize <em>Size</em>}'.
@@ -1904,6 +1950,16 @@ public interface TypeSystemPackage extends EPackage {
 	EAttribute getRecordField_Name();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipselabs.mscript.typesystem.UnitType <em>Unit Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Unit Type</em>'.
+	 * @see org.eclipselabs.mscript.typesystem.UnitType
+	 * @generated
+	 */
+	EClass getUnitType();
+
+	/**
 	 * Returns the meta object for enum '{@link org.eclipselabs.mscript.typesystem.OperatorKind <em>Operator Kind</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2112,20 +2168,20 @@ public interface TypeSystemPackage extends EPackage {
 		EClass ARRAY_DIMENSION = eINSTANCE.getArrayDimension();
 
 		/**
-		 * The meta object literal for the '<em><b>From Index</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Begin Index</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute ARRAY_DIMENSION__FROM_INDEX = eINSTANCE.getArrayDimension_FromIndex();
+		EAttribute ARRAY_DIMENSION__BEGIN_INDEX = eINSTANCE.getArrayDimension_BeginIndex();
 
 		/**
-		 * The meta object literal for the '<em><b>To Index</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>End Index</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute ARRAY_DIMENSION__TO_INDEX = eINSTANCE.getArrayDimension_ToIndex();
+		EAttribute ARRAY_DIMENSION__END_INDEX = eINSTANCE.getArrayDimension_EndIndex();
 
 		/**
 		 * The meta object literal for the '<em><b>Size</b></em>' attribute feature.
@@ -2406,6 +2462,16 @@ public interface TypeSystemPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute RECORD_FIELD__NAME = eINSTANCE.getRecordField_Name();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipselabs.mscript.typesystem.impl.UnitTypeImpl <em>Unit Type</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipselabs.mscript.typesystem.impl.UnitTypeImpl
+		 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemPackageImpl#getUnitType()
+		 * @generated
+		 */
+		EClass UNIT_TYPE = eINSTANCE.getUnitType();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipselabs.mscript.typesystem.OperatorKind <em>Operator Kind</em>}' enum.
