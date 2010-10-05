@@ -377,6 +377,24 @@ public interface AstFactory extends EFactory
   ConditionalExpressionCase createConditionalExpressionCase();
 
   /**
+   * Returns a new object of class '<em>Add Subtract Expression Part</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Add Subtract Expression Part</em>'.
+   * @generated
+   */
+  AddSubtractExpressionPart createAddSubtractExpressionPart();
+
+  /**
+   * Returns a new object of class '<em>Multiply Divide Expression Part</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Multiply Divide Expression Part</em>'.
+   * @generated
+   */
+  MultiplyDivideExpressionPart createMultiplyDivideExpressionPart();
+
+  /**
    * Returns a new object of class '<em>Feature Call Part</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

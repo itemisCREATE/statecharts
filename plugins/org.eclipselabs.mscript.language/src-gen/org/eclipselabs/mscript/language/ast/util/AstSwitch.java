@@ -415,6 +415,20 @@ public class AstSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case AstPackage.ADD_SUBTRACT_EXPRESSION_PART:
+      {
+        AddSubtractExpressionPart addSubtractExpressionPart = (AddSubtractExpressionPart)theEObject;
+        T result = caseAddSubtractExpressionPart(addSubtractExpressionPart);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AstPackage.MULTIPLY_DIVIDE_EXPRESSION_PART:
+      {
+        MultiplyDivideExpressionPart multiplyDivideExpressionPart = (MultiplyDivideExpressionPart)theEObject;
+        T result = caseMultiplyDivideExpressionPart(multiplyDivideExpressionPart);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case AstPackage.FEATURE_CALL_PART:
       {
         FeatureCallPart featureCallPart = (FeatureCallPart)theEObject;
@@ -1325,6 +1339,38 @@ public class AstSwitch<T>
    * @generated
    */
   public T caseConditionalExpressionCase(ConditionalExpressionCase object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Add Subtract Expression Part</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Add Subtract Expression Part</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAddSubtractExpressionPart(AddSubtractExpressionPart object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Multiply Divide Expression Part</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Multiply Divide Expression Part</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseMultiplyDivideExpressionPart(MultiplyDivideExpressionPart object)
   {
     return null;
   }

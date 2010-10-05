@@ -88,7 +88,7 @@ Block :
 	{Block} '{' (statements+=Statement)* '}';
 
 FeatureCallStatement :
-	featureCall=FeatureCall (assignment?='=' expression=Expression)? ';';
+	featureCall=FeatureCall ('=' assignedValue=Expression)? ';';
 
 IfStatement :
 	'if' cases+=IfCase ('elseif' cases+=IfCase)* ('else' elseBody=Block)?;
@@ -200,15 +200,21 @@ enum RelationalOperator :
 	NotEqualTo='<>';
 
 AddSubtractExpression returns Expression :
-	MultiplyDivideExpression ({AddSubtractExpression.operands+=current} (operators+=AddSubtractOperator operands+=MultiplyDivideExpression)+)?;
+	MultiplyDivideExpression ({AddSubtractExpression.leftOperand=current} (rightParts+=AddSubtractExpressionPart)+)?;
+
+AddSubtractExpressionPart :
+	operator=AddSubtractOperator operand=MultiplyDivideExpression;
 
 enum AddSubtractOperator :
 	Add='+' |
 	Subtract='-';
 
 MultiplyDivideExpression returns Expression :
-	PowerExpression ({MultiplyDivideExpression.operands+=current} (operators+=MultiplyDivideOperator operands+=PowerExpression)+)?;
+	PowerExpression ({MultiplyDivideExpression.leftOperand=current} (rightParts+=MultiplyDivideExpressionPart)+)?;
 
+MultiplyDivideExpressionPart :
+	operator=MultiplyDivideOperator operand=PowerExpression;
+	
 enum MultiplyDivideOperator :
 	Multiply='*' |
 	Divide='/' |
@@ -275,12 +281,6 @@ StringLiteral :
 QualifiedName :
 	identifiers+=KeywordID ('::' identifiers+=KeywordID)*;
 
-//	arguments+=Expression ((',' arguments+=Expression)* (',' namedArguments+=NamedArgument)* | 'for' forIndexList=ForIndexList) |
-//	namedArguments+=NamedArgument (',' namedArguments+=NamedArgument)*;
-
-//NamedArgument :
-//	identifier=ID '=' expression=Expression;
-
 SymbolReference :
 	(global?='::')? name=QualifiedName;
 	
@@ -303,17 +303,7 @@ UnitConstructionOperator :
 	'unit' '(' unitExpression=UnitExpression ')';
 
 ParenthesizedExpression :
-//	'(' expressionList=OutputExpressionList ')';
 	'(' expression=Expression ')';
-
-//OutputExpressionList :
-//	expressions+=FirstOutputExpression (expressions+=RightOutputExpression)*;
-//
-//FirstOutputExpression returns Expression :
-//	{EmptyExpression} | Expression;
-//
-//RightOutputExpression returns Expression :
-//	',' {EmptyExpression} | ',' Expression;
 
 BeginExpression :
 	{BeginExpression} 'begin';
@@ -321,12 +311,6 @@ BeginExpression :
 EndExpression :
 	{EndExpression} 'end';
 	
-//ForIndexList :
-//	indices+=ForIndex (',' indices+=ForIndex)*;
-//	
-//ForIndex :
-//	identifier=ID ('in' inExpression=Expression)?;
-
 /*
  * Unit expressions
  */

@@ -273,6 +273,16 @@ public class AstAdapterFactory extends AdapterFactoryImpl
         return createConditionalExpressionCaseAdapter();
       }
       @Override
+      public Adapter caseAddSubtractExpressionPart(AddSubtractExpressionPart object)
+      {
+        return createAddSubtractExpressionPartAdapter();
+      }
+      @Override
+      public Adapter caseMultiplyDivideExpressionPart(MultiplyDivideExpressionPart object)
+      {
+        return createMultiplyDivideExpressionPartAdapter();
+      }
+      @Override
       public Adapter caseFeatureCallPart(FeatureCallPart object)
       {
         return createFeatureCallPartAdapter();
@@ -1055,6 +1065,36 @@ public class AstAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createConditionalExpressionCaseAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.AddSubtractExpressionPart <em>Add Subtract Expression Part</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipselabs.mscript.language.ast.AddSubtractExpressionPart
+   * @generated
+   */
+  public Adapter createAddSubtractExpressionPartAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.MultiplyDivideExpressionPart <em>Multiply Divide Expression Part</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipselabs.mscript.language.ast.MultiplyDivideExpressionPart
+   * @generated
+   */
+  public Adapter createMultiplyDivideExpressionPartAdapter()
   {
     return null;
   }

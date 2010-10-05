@@ -15,8 +15,8 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.MultiplyDivideExpression#getOperands <em>Operands</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.MultiplyDivideExpression#getOperators <em>Operators</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.MultiplyDivideExpression#getLeftOperand <em>Left Operand</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.MultiplyDivideExpression#getRightParts <em>Right Parts</em>}</li>
  * </ul>
  * </p>
  *
@@ -27,37 +27,45 @@ import org.eclipse.emf.common.util.EList;
 public interface MultiplyDivideExpression extends Expression
 {
   /**
-   * Returns the value of the '<em><b>Operands</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipselabs.mscript.language.ast.Expression}.
+   * Returns the value of the '<em><b>Left Operand</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Operands</em>' containment reference list isn't clear,
+   * If the meaning of the '<em>Left Operand</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Operands</em>' containment reference list.
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getMultiplyDivideExpression_Operands()
+   * @return the value of the '<em>Left Operand</em>' containment reference.
+   * @see #setLeftOperand(Expression)
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getMultiplyDivideExpression_LeftOperand()
    * @model containment="true"
    * @generated
    */
-  EList<Expression> getOperands();
+  Expression getLeftOperand();
 
   /**
-   * Returns the value of the '<em><b>Operators</b></em>' attribute list.
-   * The list contents are of type {@link org.eclipselabs.mscript.language.ast.MultiplyDivideOperator}.
-   * The literals are from the enumeration {@link org.eclipselabs.mscript.language.ast.MultiplyDivideOperator}.
+   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.MultiplyDivideExpression#getLeftOperand <em>Left Operand</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Left Operand</em>' containment reference.
+   * @see #getLeftOperand()
+   * @generated
+   */
+  void setLeftOperand(Expression value);
+
+  /**
+   * Returns the value of the '<em><b>Right Parts</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipselabs.mscript.language.ast.MultiplyDivideExpressionPart}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Operators</em>' attribute list isn't clear,
+   * If the meaning of the '<em>Right Parts</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Operators</em>' attribute list.
-   * @see org.eclipselabs.mscript.language.ast.MultiplyDivideOperator
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getMultiplyDivideExpression_Operators()
-   * @model unique="false"
+   * @return the value of the '<em>Right Parts</em>' containment reference list.
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getMultiplyDivideExpression_RightParts()
+   * @model containment="true"
    * @generated
    */
-  EList<MultiplyDivideOperator> getOperators();
+  EList<MultiplyDivideExpressionPart> getRightParts();
 
 } // MultiplyDivideExpression

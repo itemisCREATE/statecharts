@@ -25,8 +25,7 @@ import org.eclipselabs.mscript.language.ast.FeatureCallStatement;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FeatureCallStatementImpl#getFeatureCall <em>Feature Call</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FeatureCallStatementImpl#isAssignment <em>Assignment</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FeatureCallStatementImpl#getExpression <em>Expression</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FeatureCallStatementImpl#getAssignedValue <em>Assigned Value</em>}</li>
  * </ul>
  * </p>
  *
@@ -45,34 +44,14 @@ public class FeatureCallStatementImpl extends StatementImpl implements FeatureCa
   protected Expression featureCall;
 
   /**
-   * The default value of the '{@link #isAssignment() <em>Assignment</em>}' attribute.
+   * The cached value of the '{@link #getAssignedValue() <em>Assigned Value</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #isAssignment()
+   * @see #getAssignedValue()
    * @generated
    * @ordered
    */
-  protected static final boolean ASSIGNMENT_EDEFAULT = false;
-
-  /**
-   * The cached value of the '{@link #isAssignment() <em>Assignment</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #isAssignment()
-   * @generated
-   * @ordered
-   */
-  protected boolean assignment = ASSIGNMENT_EDEFAULT;
-
-  /**
-   * The cached value of the '{@link #getExpression() <em>Expression</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getExpression()
-   * @generated
-   * @ordered
-   */
-  protected Expression expression;
+  protected Expression assignedValue;
 
   /**
    * <!-- begin-user-doc -->
@@ -148,9 +127,9 @@ public class FeatureCallStatementImpl extends StatementImpl implements FeatureCa
    * <!-- end-user-doc -->
    * @generated
    */
-  public boolean isAssignment()
+  public Expression getAssignedValue()
   {
-    return assignment;
+    return assignedValue;
   }
 
   /**
@@ -158,36 +137,13 @@ public class FeatureCallStatementImpl extends StatementImpl implements FeatureCa
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setAssignment(boolean newAssignment)
+  public NotificationChain basicSetAssignedValue(Expression newAssignedValue, NotificationChain msgs)
   {
-    boolean oldAssignment = assignment;
-    assignment = newAssignment;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.FEATURE_CALL_STATEMENT__ASSIGNMENT, oldAssignment, assignment));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Expression getExpression()
-  {
-    return expression;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetExpression(Expression newExpression, NotificationChain msgs)
-  {
-    Expression oldExpression = expression;
-    expression = newExpression;
+    Expression oldAssignedValue = assignedValue;
+    assignedValue = newAssignedValue;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.FEATURE_CALL_STATEMENT__EXPRESSION, oldExpression, newExpression);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.FEATURE_CALL_STATEMENT__ASSIGNED_VALUE, oldAssignedValue, newAssignedValue);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -198,20 +154,20 @@ public class FeatureCallStatementImpl extends StatementImpl implements FeatureCa
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setExpression(Expression newExpression)
+  public void setAssignedValue(Expression newAssignedValue)
   {
-    if (newExpression != expression)
+    if (newAssignedValue != assignedValue)
     {
       NotificationChain msgs = null;
-      if (expression != null)
-        msgs = ((InternalEObject)expression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.FEATURE_CALL_STATEMENT__EXPRESSION, null, msgs);
-      if (newExpression != null)
-        msgs = ((InternalEObject)newExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.FEATURE_CALL_STATEMENT__EXPRESSION, null, msgs);
-      msgs = basicSetExpression(newExpression, msgs);
+      if (assignedValue != null)
+        msgs = ((InternalEObject)assignedValue).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.FEATURE_CALL_STATEMENT__ASSIGNED_VALUE, null, msgs);
+      if (newAssignedValue != null)
+        msgs = ((InternalEObject)newAssignedValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.FEATURE_CALL_STATEMENT__ASSIGNED_VALUE, null, msgs);
+      msgs = basicSetAssignedValue(newAssignedValue, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.FEATURE_CALL_STATEMENT__EXPRESSION, newExpression, newExpression));
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.FEATURE_CALL_STATEMENT__ASSIGNED_VALUE, newAssignedValue, newAssignedValue));
   }
 
   /**
@@ -226,8 +182,8 @@ public class FeatureCallStatementImpl extends StatementImpl implements FeatureCa
     {
       case AstPackage.FEATURE_CALL_STATEMENT__FEATURE_CALL:
         return basicSetFeatureCall(null, msgs);
-      case AstPackage.FEATURE_CALL_STATEMENT__EXPRESSION:
-        return basicSetExpression(null, msgs);
+      case AstPackage.FEATURE_CALL_STATEMENT__ASSIGNED_VALUE:
+        return basicSetAssignedValue(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -244,10 +200,8 @@ public class FeatureCallStatementImpl extends StatementImpl implements FeatureCa
     {
       case AstPackage.FEATURE_CALL_STATEMENT__FEATURE_CALL:
         return getFeatureCall();
-      case AstPackage.FEATURE_CALL_STATEMENT__ASSIGNMENT:
-        return isAssignment();
-      case AstPackage.FEATURE_CALL_STATEMENT__EXPRESSION:
-        return getExpression();
+      case AstPackage.FEATURE_CALL_STATEMENT__ASSIGNED_VALUE:
+        return getAssignedValue();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -265,11 +219,8 @@ public class FeatureCallStatementImpl extends StatementImpl implements FeatureCa
       case AstPackage.FEATURE_CALL_STATEMENT__FEATURE_CALL:
         setFeatureCall((Expression)newValue);
         return;
-      case AstPackage.FEATURE_CALL_STATEMENT__ASSIGNMENT:
-        setAssignment((Boolean)newValue);
-        return;
-      case AstPackage.FEATURE_CALL_STATEMENT__EXPRESSION:
-        setExpression((Expression)newValue);
+      case AstPackage.FEATURE_CALL_STATEMENT__ASSIGNED_VALUE:
+        setAssignedValue((Expression)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -288,11 +239,8 @@ public class FeatureCallStatementImpl extends StatementImpl implements FeatureCa
       case AstPackage.FEATURE_CALL_STATEMENT__FEATURE_CALL:
         setFeatureCall((Expression)null);
         return;
-      case AstPackage.FEATURE_CALL_STATEMENT__ASSIGNMENT:
-        setAssignment(ASSIGNMENT_EDEFAULT);
-        return;
-      case AstPackage.FEATURE_CALL_STATEMENT__EXPRESSION:
-        setExpression((Expression)null);
+      case AstPackage.FEATURE_CALL_STATEMENT__ASSIGNED_VALUE:
+        setAssignedValue((Expression)null);
         return;
     }
     super.eUnset(featureID);
@@ -310,29 +258,10 @@ public class FeatureCallStatementImpl extends StatementImpl implements FeatureCa
     {
       case AstPackage.FEATURE_CALL_STATEMENT__FEATURE_CALL:
         return featureCall != null;
-      case AstPackage.FEATURE_CALL_STATEMENT__ASSIGNMENT:
-        return assignment != ASSIGNMENT_EDEFAULT;
-      case AstPackage.FEATURE_CALL_STATEMENT__EXPRESSION:
-        return expression != null;
+      case AstPackage.FEATURE_CALL_STATEMENT__ASSIGNED_VALUE:
+        return assignedValue != null;
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (assignment: ");
-    result.append(assignment);
-    result.append(')');
-    return result.toString();
   }
 
 } //FeatureCallStatementImpl

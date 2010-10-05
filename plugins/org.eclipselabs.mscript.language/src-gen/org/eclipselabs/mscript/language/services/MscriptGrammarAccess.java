@@ -504,17 +504,16 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cFeatureCallAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cFeatureCallFeatureCallParserRuleCall_0_0 = (RuleCall)cFeatureCallAssignment_0.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
-		private final Assignment cAssignmentAssignment_1_0 = (Assignment)cGroup_1.eContents().get(0);
-		private final Keyword cAssignmentEqualsSignKeyword_1_0_0 = (Keyword)cAssignmentAssignment_1_0.eContents().get(0);
-		private final Assignment cExpressionAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
-		private final RuleCall cExpressionExpressionParserRuleCall_1_1_0 = (RuleCall)cExpressionAssignment_1_1.eContents().get(0);
+		private final Keyword cEqualsSignKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final Assignment cAssignedValueAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cAssignedValueExpressionParserRuleCall_1_1_0 = (RuleCall)cAssignedValueAssignment_1_1.eContents().get(0);
 		private final Keyword cSemicolonKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//FeatureCallStatement:
-		//	featureCall=FeatureCall (assignment?="=" expression=Expression)? ";";
+		//	featureCall=FeatureCall ("=" assignedValue=Expression)? ";";
 		public ParserRule getRule() { return rule; }
 
-		//featureCall=FeatureCall (assignment?="=" expression=Expression)? ";"
+		//featureCall=FeatureCall ("=" assignedValue=Expression)? ";"
 		public Group getGroup() { return cGroup; }
 
 		//featureCall=FeatureCall
@@ -523,20 +522,17 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		//FeatureCall
 		public RuleCall getFeatureCallFeatureCallParserRuleCall_0_0() { return cFeatureCallFeatureCallParserRuleCall_0_0; }
 
-		//(assignment?="=" expression=Expression)?
+		//("=" assignedValue=Expression)?
 		public Group getGroup_1() { return cGroup_1; }
 
-		//assignment?="="
-		public Assignment getAssignmentAssignment_1_0() { return cAssignmentAssignment_1_0; }
-
 		//"="
-		public Keyword getAssignmentEqualsSignKeyword_1_0_0() { return cAssignmentEqualsSignKeyword_1_0_0; }
+		public Keyword getEqualsSignKeyword_1_0() { return cEqualsSignKeyword_1_0; }
 
-		//expression=Expression
-		public Assignment getExpressionAssignment_1_1() { return cExpressionAssignment_1_1; }
+		//assignedValue=Expression
+		public Assignment getAssignedValueAssignment_1_1() { return cAssignedValueAssignment_1_1; }
 
 		//Expression
-		public RuleCall getExpressionExpressionParserRuleCall_1_1_0() { return cExpressionExpressionParserRuleCall_1_1_0; }
+		public RuleCall getAssignedValueExpressionParserRuleCall_1_1_0() { return cAssignedValueExpressionParserRuleCall_1_1_0; }
 
 		//";"
 		public Keyword getSemicolonKeyword_2() { return cSemicolonKeyword_2; }
@@ -1952,45 +1948,59 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cMultiplyDivideExpressionParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
-		private final Action cAddSubtractExpressionOperandsAction_1_0 = (Action)cGroup_1.eContents().get(0);
-		private final Group cGroup_1_1 = (Group)cGroup_1.eContents().get(1);
-		private final Assignment cOperatorsAssignment_1_1_0 = (Assignment)cGroup_1_1.eContents().get(0);
-		private final RuleCall cOperatorsAddSubtractOperatorEnumRuleCall_1_1_0_0 = (RuleCall)cOperatorsAssignment_1_1_0.eContents().get(0);
-		private final Assignment cOperandsAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
-		private final RuleCall cOperandsMultiplyDivideExpressionParserRuleCall_1_1_1_0 = (RuleCall)cOperandsAssignment_1_1_1.eContents().get(0);
+		private final Action cAddSubtractExpressionLeftOperandAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Assignment cRightPartsAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cRightPartsAddSubtractExpressionPartParserRuleCall_1_1_0 = (RuleCall)cRightPartsAssignment_1_1.eContents().get(0);
 		
 		//AddSubtractExpression returns Expression:
-		//	MultiplyDivideExpression ({AddSubtractExpression.operands+=current} (operators+=AddSubtractOperator
-		//	operands+=MultiplyDivideExpression)+)?;
+		//	MultiplyDivideExpression ({AddSubtractExpression.leftOperand=current} rightParts+=AddSubtractExpressionPart+)?;
 		public ParserRule getRule() { return rule; }
 
-		//MultiplyDivideExpression ({AddSubtractExpression.operands+=current} (operators+=AddSubtractOperator
-		//operands+=MultiplyDivideExpression)+)?
+		//MultiplyDivideExpression ({AddSubtractExpression.leftOperand=current} rightParts+=AddSubtractExpressionPart+)?
 		public Group getGroup() { return cGroup; }
 
 		//MultiplyDivideExpression
 		public RuleCall getMultiplyDivideExpressionParserRuleCall_0() { return cMultiplyDivideExpressionParserRuleCall_0; }
 
-		//({AddSubtractExpression.operands+=current} (operators+=AddSubtractOperator operands+=MultiplyDivideExpression)+)?
+		//({AddSubtractExpression.leftOperand=current} rightParts+=AddSubtractExpressionPart+)?
 		public Group getGroup_1() { return cGroup_1; }
 
-		//{AddSubtractExpression.operands+=current}
-		public Action getAddSubtractExpressionOperandsAction_1_0() { return cAddSubtractExpressionOperandsAction_1_0; }
+		//{AddSubtractExpression.leftOperand=current}
+		public Action getAddSubtractExpressionLeftOperandAction_1_0() { return cAddSubtractExpressionLeftOperandAction_1_0; }
 
-		//(operators+=AddSubtractOperator operands+=MultiplyDivideExpression)+
-		public Group getGroup_1_1() { return cGroup_1_1; }
+		//rightParts+=AddSubtractExpressionPart+
+		public Assignment getRightPartsAssignment_1_1() { return cRightPartsAssignment_1_1; }
 
-		//operators+=AddSubtractOperator
-		public Assignment getOperatorsAssignment_1_1_0() { return cOperatorsAssignment_1_1_0; }
+		//AddSubtractExpressionPart
+		public RuleCall getRightPartsAddSubtractExpressionPartParserRuleCall_1_1_0() { return cRightPartsAddSubtractExpressionPartParserRuleCall_1_1_0; }
+	}
+
+	public class AddSubtractExpressionPartElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AddSubtractExpressionPart");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cOperatorAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cOperatorAddSubtractOperatorEnumRuleCall_0_0 = (RuleCall)cOperatorAssignment_0.eContents().get(0);
+		private final Assignment cOperandAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cOperandMultiplyDivideExpressionParserRuleCall_1_0 = (RuleCall)cOperandAssignment_1.eContents().get(0);
+		
+		//AddSubtractExpressionPart:
+		//	operator=AddSubtractOperator operand=MultiplyDivideExpression;
+		public ParserRule getRule() { return rule; }
+
+		//operator=AddSubtractOperator operand=MultiplyDivideExpression
+		public Group getGroup() { return cGroup; }
+
+		//operator=AddSubtractOperator
+		public Assignment getOperatorAssignment_0() { return cOperatorAssignment_0; }
 
 		//AddSubtractOperator
-		public RuleCall getOperatorsAddSubtractOperatorEnumRuleCall_1_1_0_0() { return cOperatorsAddSubtractOperatorEnumRuleCall_1_1_0_0; }
+		public RuleCall getOperatorAddSubtractOperatorEnumRuleCall_0_0() { return cOperatorAddSubtractOperatorEnumRuleCall_0_0; }
 
-		//operands+=MultiplyDivideExpression
-		public Assignment getOperandsAssignment_1_1_1() { return cOperandsAssignment_1_1_1; }
+		//operand=MultiplyDivideExpression
+		public Assignment getOperandAssignment_1() { return cOperandAssignment_1; }
 
 		//MultiplyDivideExpression
-		public RuleCall getOperandsMultiplyDivideExpressionParserRuleCall_1_1_1_0() { return cOperandsMultiplyDivideExpressionParserRuleCall_1_1_1_0; }
+		public RuleCall getOperandMultiplyDivideExpressionParserRuleCall_1_0() { return cOperandMultiplyDivideExpressionParserRuleCall_1_0; }
 	}
 
 	public class MultiplyDivideExpressionElements extends AbstractParserRuleElementFinder {
@@ -1998,45 +2008,59 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cPowerExpressionParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
-		private final Action cMultiplyDivideExpressionOperandsAction_1_0 = (Action)cGroup_1.eContents().get(0);
-		private final Group cGroup_1_1 = (Group)cGroup_1.eContents().get(1);
-		private final Assignment cOperatorsAssignment_1_1_0 = (Assignment)cGroup_1_1.eContents().get(0);
-		private final RuleCall cOperatorsMultiplyDivideOperatorEnumRuleCall_1_1_0_0 = (RuleCall)cOperatorsAssignment_1_1_0.eContents().get(0);
-		private final Assignment cOperandsAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
-		private final RuleCall cOperandsPowerExpressionParserRuleCall_1_1_1_0 = (RuleCall)cOperandsAssignment_1_1_1.eContents().get(0);
+		private final Action cMultiplyDivideExpressionLeftOperandAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Assignment cRightPartsAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cRightPartsMultiplyDivideExpressionPartParserRuleCall_1_1_0 = (RuleCall)cRightPartsAssignment_1_1.eContents().get(0);
 		
 		//MultiplyDivideExpression returns Expression:
-		//	PowerExpression ({MultiplyDivideExpression.operands+=current} (operators+=MultiplyDivideOperator
-		//	operands+=PowerExpression)+)?;
+		//	PowerExpression ({MultiplyDivideExpression.leftOperand=current} rightParts+=MultiplyDivideExpressionPart+)?;
 		public ParserRule getRule() { return rule; }
 
-		//PowerExpression ({MultiplyDivideExpression.operands+=current} (operators+=MultiplyDivideOperator
-		//operands+=PowerExpression)+)?
+		//PowerExpression ({MultiplyDivideExpression.leftOperand=current} rightParts+=MultiplyDivideExpressionPart+)?
 		public Group getGroup() { return cGroup; }
 
 		//PowerExpression
 		public RuleCall getPowerExpressionParserRuleCall_0() { return cPowerExpressionParserRuleCall_0; }
 
-		//({MultiplyDivideExpression.operands+=current} (operators+=MultiplyDivideOperator operands+=PowerExpression)+)?
+		//({MultiplyDivideExpression.leftOperand=current} rightParts+=MultiplyDivideExpressionPart+)?
 		public Group getGroup_1() { return cGroup_1; }
 
-		//{MultiplyDivideExpression.operands+=current}
-		public Action getMultiplyDivideExpressionOperandsAction_1_0() { return cMultiplyDivideExpressionOperandsAction_1_0; }
+		//{MultiplyDivideExpression.leftOperand=current}
+		public Action getMultiplyDivideExpressionLeftOperandAction_1_0() { return cMultiplyDivideExpressionLeftOperandAction_1_0; }
 
-		//(operators+=MultiplyDivideOperator operands+=PowerExpression)+
-		public Group getGroup_1_1() { return cGroup_1_1; }
+		//rightParts+=MultiplyDivideExpressionPart+
+		public Assignment getRightPartsAssignment_1_1() { return cRightPartsAssignment_1_1; }
 
-		//operators+=MultiplyDivideOperator
-		public Assignment getOperatorsAssignment_1_1_0() { return cOperatorsAssignment_1_1_0; }
+		//MultiplyDivideExpressionPart
+		public RuleCall getRightPartsMultiplyDivideExpressionPartParserRuleCall_1_1_0() { return cRightPartsMultiplyDivideExpressionPartParserRuleCall_1_1_0; }
+	}
+
+	public class MultiplyDivideExpressionPartElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "MultiplyDivideExpressionPart");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cOperatorAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cOperatorMultiplyDivideOperatorEnumRuleCall_0_0 = (RuleCall)cOperatorAssignment_0.eContents().get(0);
+		private final Assignment cOperandAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cOperandPowerExpressionParserRuleCall_1_0 = (RuleCall)cOperandAssignment_1.eContents().get(0);
+		
+		//MultiplyDivideExpressionPart:
+		//	operator=MultiplyDivideOperator operand=PowerExpression;
+		public ParserRule getRule() { return rule; }
+
+		//operator=MultiplyDivideOperator operand=PowerExpression
+		public Group getGroup() { return cGroup; }
+
+		//operator=MultiplyDivideOperator
+		public Assignment getOperatorAssignment_0() { return cOperatorAssignment_0; }
 
 		//MultiplyDivideOperator
-		public RuleCall getOperatorsMultiplyDivideOperatorEnumRuleCall_1_1_0_0() { return cOperatorsMultiplyDivideOperatorEnumRuleCall_1_1_0_0; }
+		public RuleCall getOperatorMultiplyDivideOperatorEnumRuleCall_0_0() { return cOperatorMultiplyDivideOperatorEnumRuleCall_0_0; }
 
-		//operands+=PowerExpression
-		public Assignment getOperandsAssignment_1_1_1() { return cOperandsAssignment_1_1_1; }
+		//operand=PowerExpression
+		public Assignment getOperandAssignment_1() { return cOperandAssignment_1; }
 
 		//PowerExpression
-		public RuleCall getOperandsPowerExpressionParserRuleCall_1_1_1_0() { return cOperandsPowerExpressionParserRuleCall_1_1_1_0; }
+		public RuleCall getOperandPowerExpressionParserRuleCall_1_0() { return cOperandPowerExpressionParserRuleCall_1_0; }
 	}
 
 	public class PowerExpressionElements extends AbstractParserRuleElementFinder {
@@ -2575,10 +2599,6 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameQualifiedNameParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
-		////	arguments+=Expression ((',' arguments+=Expression)* (',' namedArguments+=NamedArgument)* | 'for' forIndexList=ForIndexList) |
-		////	namedArguments+=NamedArgument (',' namedArguments+=NamedArgument)*;
-		////NamedArgument :
-		////	identifier=ID '=' expression=Expression;
 		//SymbolReference:
 		//	global?="::"? name=QualifiedName;
 		public ParserRule getRule() { return rule; }
@@ -2775,15 +2795,13 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cExpressionExpressionParserRuleCall_1_0 = (RuleCall)cExpressionAssignment_1.eContents().get(0);
 		private final Keyword cRightParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
-		//ParenthesizedExpression: //	'(' expressionList=OutputExpressionList ')';
+		//ParenthesizedExpression:
 		//	"(" expression=Expression ")";
 		public ParserRule getRule() { return rule; }
 
-		////	'(' expressionList=OutputExpressionList ')';
 		//"(" expression=Expression ")"
 		public Group getGroup() { return cGroup; }
 
-		////	'(' expressionList=OutputExpressionList ')';
 		//"("
 		public Keyword getLeftParenthesisKeyword_0() { return cLeftParenthesisKeyword_0; }
 
@@ -2803,14 +2821,6 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final Action cBeginExpressionAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cBeginKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
-		////OutputExpressionList :
-		////	expressions+=FirstOutputExpression (expressions+=RightOutputExpression)*;
-		////
-		////FirstOutputExpression returns Expression :
-		////	{EmptyExpression} | Expression;
-		////
-		////RightOutputExpression returns Expression :
-		////	',' {EmptyExpression} | ',' Expression;
 		//BeginExpression:
 		//	{BeginExpression} "begin";
 		public ParserRule getRule() { return rule; }
@@ -2862,11 +2872,6 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cDenominatorAssignment_2_1_1 = (Assignment)cGroup_2_1.eContents().get(1);
 		private final RuleCall cDenominatorUnitExpressionDenominatorParserRuleCall_2_1_1_0 = (RuleCall)cDenominatorAssignment_2_1_1.eContents().get(0);
 		
-		////ForIndexList :
-		////	indices+=ForIndex (',' indices+=ForIndex)*;
-		////	
-		////ForIndex :
-		////	identifier=ID ('in' inExpression=Expression)?;
 		/// *
 		// * Unit expressions
 		// * /UnitExpression:
@@ -3343,8 +3348,10 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	private RelationalExpressionElements pRelationalExpression;
 	private RelationalOperatorElements unknownRuleRelationalOperator;
 	private AddSubtractExpressionElements pAddSubtractExpression;
+	private AddSubtractExpressionPartElements pAddSubtractExpressionPart;
 	private AddSubtractOperatorElements unknownRuleAddSubtractOperator;
 	private MultiplyDivideExpressionElements pMultiplyDivideExpression;
+	private MultiplyDivideExpressionPartElements pMultiplyDivideExpressionPart;
 	private MultiplyDivideOperatorElements unknownRuleMultiplyDivideOperator;
 	private PowerExpressionElements pPowerExpression;
 	private PowerOperatorElements unknownRulePowerOperator;
@@ -3535,7 +3542,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//FeatureCallStatement:
-	//	featureCall=FeatureCall (assignment?="=" expression=Expression)? ";";
+	//	featureCall=FeatureCall ("=" assignedValue=Expression)? ";";
 	public FeatureCallStatementElements getFeatureCallStatementAccess() {
 		return (pFeatureCallStatement != null) ? pFeatureCallStatement : (pFeatureCallStatement = new FeatureCallStatementElements());
 	}
@@ -3879,14 +3886,23 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//AddSubtractExpression returns Expression:
-	//	MultiplyDivideExpression ({AddSubtractExpression.operands+=current} (operators+=AddSubtractOperator
-	//	operands+=MultiplyDivideExpression)+)?;
+	//	MultiplyDivideExpression ({AddSubtractExpression.leftOperand=current} rightParts+=AddSubtractExpressionPart+)?;
 	public AddSubtractExpressionElements getAddSubtractExpressionAccess() {
 		return (pAddSubtractExpression != null) ? pAddSubtractExpression : (pAddSubtractExpression = new AddSubtractExpressionElements());
 	}
 	
 	public ParserRule getAddSubtractExpressionRule() {
 		return getAddSubtractExpressionAccess().getRule();
+	}
+
+	//AddSubtractExpressionPart:
+	//	operator=AddSubtractOperator operand=MultiplyDivideExpression;
+	public AddSubtractExpressionPartElements getAddSubtractExpressionPartAccess() {
+		return (pAddSubtractExpressionPart != null) ? pAddSubtractExpressionPart : (pAddSubtractExpressionPart = new AddSubtractExpressionPartElements());
+	}
+	
+	public ParserRule getAddSubtractExpressionPartRule() {
+		return getAddSubtractExpressionPartAccess().getRule();
 	}
 
 	//enum AddSubtractOperator:
@@ -3900,14 +3916,23 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//MultiplyDivideExpression returns Expression:
-	//	PowerExpression ({MultiplyDivideExpression.operands+=current} (operators+=MultiplyDivideOperator
-	//	operands+=PowerExpression)+)?;
+	//	PowerExpression ({MultiplyDivideExpression.leftOperand=current} rightParts+=MultiplyDivideExpressionPart+)?;
 	public MultiplyDivideExpressionElements getMultiplyDivideExpressionAccess() {
 		return (pMultiplyDivideExpression != null) ? pMultiplyDivideExpression : (pMultiplyDivideExpression = new MultiplyDivideExpressionElements());
 	}
 	
 	public ParserRule getMultiplyDivideExpressionRule() {
 		return getMultiplyDivideExpressionAccess().getRule();
+	}
+
+	//MultiplyDivideExpressionPart:
+	//	operator=MultiplyDivideOperator operand=PowerExpression;
+	public MultiplyDivideExpressionPartElements getMultiplyDivideExpressionPartAccess() {
+		return (pMultiplyDivideExpressionPart != null) ? pMultiplyDivideExpressionPart : (pMultiplyDivideExpressionPart = new MultiplyDivideExpressionPartElements());
+	}
+	
+	public ParserRule getMultiplyDivideExpressionPartRule() {
+		return getMultiplyDivideExpressionPartAccess().getRule();
 	}
 
 	//enum MultiplyDivideOperator:
@@ -4100,10 +4125,6 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		return getQualifiedNameAccess().getRule();
 	}
 
-	////	arguments+=Expression ((',' arguments+=Expression)* (',' namedArguments+=NamedArgument)* | 'for' forIndexList=ForIndexList) |
-	////	namedArguments+=NamedArgument (',' namedArguments+=NamedArgument)*;
-	////NamedArgument :
-	////	identifier=ID '=' expression=Expression;
 	//SymbolReference:
 	//	global?="::"? name=QualifiedName;
 	public SymbolReferenceElements getSymbolReferenceAccess() {
@@ -4174,7 +4195,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		return getUnitConstructionOperatorAccess().getRule();
 	}
 
-	//ParenthesizedExpression: //	'(' expressionList=OutputExpressionList ')';
+	//ParenthesizedExpression:
 	//	"(" expression=Expression ")";
 	public ParenthesizedExpressionElements getParenthesizedExpressionAccess() {
 		return (pParenthesizedExpression != null) ? pParenthesizedExpression : (pParenthesizedExpression = new ParenthesizedExpressionElements());
@@ -4184,14 +4205,6 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		return getParenthesizedExpressionAccess().getRule();
 	}
 
-	////OutputExpressionList :
-	////	expressions+=FirstOutputExpression (expressions+=RightOutputExpression)*;
-	////
-	////FirstOutputExpression returns Expression :
-	////	{EmptyExpression} | Expression;
-	////
-	////RightOutputExpression returns Expression :
-	////	',' {EmptyExpression} | ',' Expression;
 	//BeginExpression:
 	//	{BeginExpression} "begin";
 	public BeginExpressionElements getBeginExpressionAccess() {
@@ -4212,11 +4225,6 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		return getEndExpressionAccess().getRule();
 	}
 
-	////ForIndexList :
-	////	indices+=ForIndex (',' indices+=ForIndex)*;
-	////	
-	////ForIndex :
-	////	identifier=ID ('in' inExpression=Expression)?;
 	/// *
 	// * Unit expressions
 	// * /UnitExpression:

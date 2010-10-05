@@ -60,8 +60,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="FeatureCallStatement" eSuperTypes="#//Statement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="featureCall" eType="#//Expression"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="assignment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//Expression"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="assignedValue" eType="#//Expression"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="IfStatement" eSuperTypes="#//Statement">
@@ -173,9 +172,19 @@
     <eLiterals name="EqualTo" value="4" literal="=="/>
     <eLiterals name="NotEqualTo" value="5" literal="&lt;>"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AddSubtractExpressionPart">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//AddSubtractOperator"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operand" eType="#//Expression"
+        containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="AddSubtractOperator">
     <eLiterals name="Add" literal="+"/>
     <eLiterals name="Subtract" value="1" literal="-"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MultiplyDivideExpressionPart">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//MultiplyDivideOperator"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operand" eType="#//Expression"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="MultiplyDivideOperator">
     <eLiterals name="Multiply" literal="*"/>
@@ -312,16 +321,16 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AddSubtractExpression" eSuperTypes="#//Expression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="operands" upperBound="-1"
-        eType="#//Expression" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operators" unique="false"
-        upperBound="-1" eType="#//AddSubtractOperator"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightParts" upperBound="-1"
+        eType="#//AddSubtractExpressionPart" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MultiplyDivideExpression" eSuperTypes="#//Expression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="operands" upperBound="-1"
-        eType="#//Expression" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operators" unique="false"
-        upperBound="-1" eType="#//MultiplyDivideOperator"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightParts" upperBound="-1"
+        eType="#//MultiplyDivideExpressionPart" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PowerExpression" eSuperTypes="#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="operand" eType="#//Expression"

@@ -107,6 +107,8 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
       case AstPackage.EXPRESSION: return createExpression();
       case AstPackage.CONDITIONAL_EXPRESSION: return createConditionalExpression();
       case AstPackage.CONDITIONAL_EXPRESSION_CASE: return createConditionalExpressionCase();
+      case AstPackage.ADD_SUBTRACT_EXPRESSION_PART: return createAddSubtractExpressionPart();
+      case AstPackage.MULTIPLY_DIVIDE_EXPRESSION_PART: return createMultiplyDivideExpressionPart();
       case AstPackage.FEATURE_CALL_PART: return createFeatureCallPart();
       case AstPackage.FEATURE_REFERENCE: return createFeatureReference();
       case AstPackage.ARRAY_ELEMENT_REFERENCE: return createArrayElementReference();
@@ -625,6 +627,28 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
   {
     ConditionalExpressionCaseImpl conditionalExpressionCase = new ConditionalExpressionCaseImpl();
     return conditionalExpressionCase;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public AddSubtractExpressionPart createAddSubtractExpressionPart()
+  {
+    AddSubtractExpressionPartImpl addSubtractExpressionPart = new AddSubtractExpressionPartImpl();
+    return addSubtractExpressionPart;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public MultiplyDivideExpressionPart createMultiplyDivideExpressionPart()
+  {
+    MultiplyDivideExpressionPartImpl multiplyDivideExpressionPart = new MultiplyDivideExpressionPartImpl();
+    return multiplyDivideExpressionPart;
   }
 
   /**
