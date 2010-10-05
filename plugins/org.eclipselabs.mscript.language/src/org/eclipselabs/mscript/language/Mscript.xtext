@@ -64,7 +64,7 @@ RecordFieldDeclarationItem :
  */
  
 FunctionDefinition :
-	(static?='static')? name=KeywordID '(' (parameters+=ParameterDeclaration (',' parameters+=ParameterDeclaration)*)? ')' body=Block;
+	(static?='static')? 'func' name=KeywordID '(' (parameters+=ParameterDeclaration (',' parameters+=ParameterDeclaration)*)? ')' body=Block;
 
 ParameterDeclaration :
 	(modifier=VariableModifier)? (reference?='ref')? type=TypeSpecifier name=KeywordID;
@@ -197,7 +197,7 @@ enum RelationalOperator :
 	GreaterThan='>' |
 	GreaterThanOrEqualTo='>=' |
 	EqualTo='==' |
-	NotEqualTo='<>';
+	NotEqualTo='!=';
 
 AddSubtractExpression returns Expression :
 	MultiplyDivideExpression ({AddSubtractExpression.leftOperand=current} (rightParts+=AddSubtractExpressionPart)+)?;
@@ -285,14 +285,8 @@ SymbolReference :
 	(global?='::')? name=QualifiedName;
 	
 Subscript :
-	ColonSubscript | ExpressionSubscript;
+	all?=':' | expression=Expression;
 
-ColonSubscript :
-	{ColonSubscript} ':';
-
-ExpressionSubscript :
-	expression=Expression;
-	
 MatrixConstructionOperator :
 	'[' expressionLists+=ExpressionList (';' expressionLists+=ExpressionList)* ']';
 	

@@ -122,8 +122,6 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
       case AstPackage.QUALIFIED_NAME: return createQualifiedName();
       case AstPackage.SYMBOL_REFERENCE: return createSymbolReference();
       case AstPackage.SUBSCRIPT: return createSubscript();
-      case AstPackage.COLON_SUBSCRIPT: return createColonSubscript();
-      case AstPackage.EXPRESSION_SUBSCRIPT: return createExpressionSubscript();
       case AstPackage.MATRIX_CONSTRUCTION_OPERATOR: return createMatrixConstructionOperator();
       case AstPackage.EXPRESSION_LIST: return createExpressionList();
       case AstPackage.UNIT_CONSTRUCTION_OPERATOR: return createUnitConstructionOperator();
@@ -792,28 +790,6 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
   {
     SubscriptImpl subscript = new SubscriptImpl();
     return subscript;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ColonSubscript createColonSubscript()
-  {
-    ColonSubscriptImpl colonSubscript = new ColonSubscriptImpl();
-    return colonSubscript;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ExpressionSubscript createExpressionSubscript()
-  {
-    ExpressionSubscriptImpl expressionSubscript = new ExpressionSubscriptImpl();
-    return expressionSubscript;
   }
 
   /**

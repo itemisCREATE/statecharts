@@ -80,7 +80,7 @@ public enum RelationalOperator implements Enumerator
    * @generated
    * @ordered
    */
-  NOT_EQUAL_TO(5, "NotEqualTo", "<>");
+  NOT_EQUAL_TO(5, "NotEqualTo", "!=");
 
   /**
    * The '<em><b>Less Than</b></em>' literal value.
@@ -166,7 +166,7 @@ public enum RelationalOperator implements Enumerator
    * </p>
    * <!-- end-user-doc -->
    * @see #NOT_EQUAL_TO
-   * @model name="NotEqualTo" literal="<>"
+   * @model name="NotEqualTo" literal="!="
    * @generated
    * @ordered
    */

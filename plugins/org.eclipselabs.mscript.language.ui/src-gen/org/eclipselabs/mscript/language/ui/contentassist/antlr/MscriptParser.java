@@ -74,8 +74,8 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getRecordFieldDeclarationAccess().getGroup(), "rule__RecordFieldDeclaration__Group__0");
 					put(grammarAccess.getRecordFieldDeclarationAccess().getGroup_2(), "rule__RecordFieldDeclaration__Group_2__0");
 					put(grammarAccess.getFunctionDefinitionAccess().getGroup(), "rule__FunctionDefinition__Group__0");
-					put(grammarAccess.getFunctionDefinitionAccess().getGroup_3(), "rule__FunctionDefinition__Group_3__0");
-					put(grammarAccess.getFunctionDefinitionAccess().getGroup_3_1(), "rule__FunctionDefinition__Group_3_1__0");
+					put(grammarAccess.getFunctionDefinitionAccess().getGroup_4(), "rule__FunctionDefinition__Group_4__0");
+					put(grammarAccess.getFunctionDefinitionAccess().getGroup_4_1(), "rule__FunctionDefinition__Group_4_1__0");
 					put(grammarAccess.getParameterDeclarationAccess().getGroup(), "rule__ParameterDeclaration__Group__0");
 					put(grammarAccess.getBlockAccess().getGroup(), "rule__Block__Group__0");
 					put(grammarAccess.getFeatureCallStatementAccess().getGroup(), "rule__FeatureCallStatement__Group__0");
@@ -162,7 +162,6 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getQualifiedNameAccess().getGroup(), "rule__QualifiedName__Group__0");
 					put(grammarAccess.getQualifiedNameAccess().getGroup_1(), "rule__QualifiedName__Group_1__0");
 					put(grammarAccess.getSymbolReferenceAccess().getGroup(), "rule__SymbolReference__Group__0");
-					put(grammarAccess.getColonSubscriptAccess().getGroup(), "rule__ColonSubscript__Group__0");
 					put(grammarAccess.getMatrixConstructionOperatorAccess().getGroup(), "rule__MatrixConstructionOperator__Group__0");
 					put(grammarAccess.getMatrixConstructionOperatorAccess().getGroup_2(), "rule__MatrixConstructionOperator__Group_2__0");
 					put(grammarAccess.getExpressionListAccess().getGroup(), "rule__ExpressionList__Group__0");
@@ -195,10 +194,10 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getRecordFieldDeclarationAccess().getItemsAssignment_2_1(), "rule__RecordFieldDeclaration__ItemsAssignment_2_1");
 					put(grammarAccess.getRecordFieldDeclarationItemAccess().getNameAssignment(), "rule__RecordFieldDeclarationItem__NameAssignment");
 					put(grammarAccess.getFunctionDefinitionAccess().getStaticAssignment_0(), "rule__FunctionDefinition__StaticAssignment_0");
-					put(grammarAccess.getFunctionDefinitionAccess().getNameAssignment_1(), "rule__FunctionDefinition__NameAssignment_1");
-					put(grammarAccess.getFunctionDefinitionAccess().getParametersAssignment_3_0(), "rule__FunctionDefinition__ParametersAssignment_3_0");
-					put(grammarAccess.getFunctionDefinitionAccess().getParametersAssignment_3_1_1(), "rule__FunctionDefinition__ParametersAssignment_3_1_1");
-					put(grammarAccess.getFunctionDefinitionAccess().getBodyAssignment_5(), "rule__FunctionDefinition__BodyAssignment_5");
+					put(grammarAccess.getFunctionDefinitionAccess().getNameAssignment_2(), "rule__FunctionDefinition__NameAssignment_2");
+					put(grammarAccess.getFunctionDefinitionAccess().getParametersAssignment_4_0(), "rule__FunctionDefinition__ParametersAssignment_4_0");
+					put(grammarAccess.getFunctionDefinitionAccess().getParametersAssignment_4_1_1(), "rule__FunctionDefinition__ParametersAssignment_4_1_1");
+					put(grammarAccess.getFunctionDefinitionAccess().getBodyAssignment_6(), "rule__FunctionDefinition__BodyAssignment_6");
 					put(grammarAccess.getParameterDeclarationAccess().getModifierAssignment_0(), "rule__ParameterDeclaration__ModifierAssignment_0");
 					put(grammarAccess.getParameterDeclarationAccess().getReferenceAssignment_1(), "rule__ParameterDeclaration__ReferenceAssignment_1");
 					put(grammarAccess.getParameterDeclarationAccess().getTypeAssignment_2(), "rule__ParameterDeclaration__TypeAssignment_2");
@@ -293,7 +292,8 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getQualifiedNameAccess().getIdentifiersAssignment_1_1(), "rule__QualifiedName__IdentifiersAssignment_1_1");
 					put(grammarAccess.getSymbolReferenceAccess().getGlobalAssignment_0(), "rule__SymbolReference__GlobalAssignment_0");
 					put(grammarAccess.getSymbolReferenceAccess().getNameAssignment_1(), "rule__SymbolReference__NameAssignment_1");
-					put(grammarAccess.getExpressionSubscriptAccess().getExpressionAssignment(), "rule__ExpressionSubscript__ExpressionAssignment");
+					put(grammarAccess.getSubscriptAccess().getAllAssignment_0(), "rule__Subscript__AllAssignment_0");
+					put(grammarAccess.getSubscriptAccess().getExpressionAssignment_1(), "rule__Subscript__ExpressionAssignment_1");
 					put(grammarAccess.getMatrixConstructionOperatorAccess().getExpressionListsAssignment_1(), "rule__MatrixConstructionOperator__ExpressionListsAssignment_1");
 					put(grammarAccess.getMatrixConstructionOperatorAccess().getExpressionListsAssignment_2_1(), "rule__MatrixConstructionOperator__ExpressionListsAssignment_2_1");
 					put(grammarAccess.getExpressionListAccess().getExpressionsAssignment_0(), "rule__ExpressionList__ExpressionsAssignment_0");

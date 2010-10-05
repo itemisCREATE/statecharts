@@ -512,24 +512,6 @@ public interface AstFactory extends EFactory
   Subscript createSubscript();
 
   /**
-   * Returns a new object of class '<em>Colon Subscript</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Colon Subscript</em>'.
-   * @generated
-   */
-  ColonSubscript createColonSubscript();
-
-  /**
-   * Returns a new object of class '<em>Expression Subscript</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Expression Subscript</em>'.
-   * @generated
-   */
-  ExpressionSubscript createExpressionSubscript();
-
-  /**
    * Returns a new object of class '<em>Matrix Construction Operator</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

@@ -198,10 +198,9 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//SymbolReference/global"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//SymbolReference/name"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//Subscript"/>
-    <genClasses ecoreClass="Mscript.ecore#//ColonSubscript"/>
-    <genClasses ecoreClass="Mscript.ecore#//ExpressionSubscript">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ExpressionSubscript/expression"/>
+    <genClasses ecoreClass="Mscript.ecore#//Subscript">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//Subscript/all"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//Subscript/expression"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//MatrixConstructionOperator">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//MatrixConstructionOperator/expressionLists"/>

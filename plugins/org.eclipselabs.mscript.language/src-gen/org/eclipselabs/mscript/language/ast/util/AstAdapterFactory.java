@@ -348,16 +348,6 @@ public class AstAdapterFactory extends AdapterFactoryImpl
         return createSubscriptAdapter();
       }
       @Override
-      public Adapter caseColonSubscript(ColonSubscript object)
-      {
-        return createColonSubscriptAdapter();
-      }
-      @Override
-      public Adapter caseExpressionSubscript(ExpressionSubscript object)
-      {
-        return createExpressionSubscriptAdapter();
-      }
-      @Override
       public Adapter caseMatrixConstructionOperator(MatrixConstructionOperator object)
       {
         return createMatrixConstructionOperatorAdapter();
@@ -1290,36 +1280,6 @@ public class AstAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createSubscriptAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.ColonSubscript <em>Colon Subscript</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.ColonSubscript
-   * @generated
-   */
-  public Adapter createColonSubscriptAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.ExpressionSubscript <em>Expression Subscript</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.ExpressionSubscript
-   * @generated
-   */
-  public Adapter createExpressionSubscriptAdapter()
   {
     return null;
   }

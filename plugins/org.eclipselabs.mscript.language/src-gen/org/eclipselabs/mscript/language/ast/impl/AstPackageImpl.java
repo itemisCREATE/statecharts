@@ -25,7 +25,6 @@ import org.eclipselabs.mscript.language.ast.Block;
 import org.eclipselabs.mscript.language.ast.BooleanKind;
 import org.eclipselabs.mscript.language.ast.BooleanLiteral;
 import org.eclipselabs.mscript.language.ast.BooleanTypeSpecifier;
-import org.eclipselabs.mscript.language.ast.ColonSubscript;
 import org.eclipselabs.mscript.language.ast.ComplexTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.ConditionalExpression;
 import org.eclipselabs.mscript.language.ast.ConditionalExpressionCase;
@@ -36,7 +35,6 @@ import org.eclipselabs.mscript.language.ast.EnumerationDefinition;
 import org.eclipselabs.mscript.language.ast.EnumerationLiteralDeclaration;
 import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.ast.ExpressionList;
-import org.eclipselabs.mscript.language.ast.ExpressionSubscript;
 import org.eclipselabs.mscript.language.ast.FeatureCall;
 import org.eclipselabs.mscript.language.ast.FeatureCallPart;
 import org.eclipselabs.mscript.language.ast.FeatureCallStatement;
@@ -483,20 +481,6 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * @generated
    */
   private EClass subscriptEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass colonSubscriptEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass expressionSubscriptEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -1998,9 +1982,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getColonSubscript()
+  public EAttribute getSubscript_All()
   {
-    return colonSubscriptEClass;
+    return (EAttribute)subscriptEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -2008,19 +1992,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getExpressionSubscript()
+  public EReference getSubscript_Expression()
   {
-    return expressionSubscriptEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getExpressionSubscript_Expression()
-  {
-    return (EReference)expressionSubscriptEClass.getEStructuralFeatures().get(0);
+    return (EReference)subscriptEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -2851,11 +2825,8 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     createEReference(symbolReferenceEClass, SYMBOL_REFERENCE__NAME);
 
     subscriptEClass = createEClass(SUBSCRIPT);
-
-    colonSubscriptEClass = createEClass(COLON_SUBSCRIPT);
-
-    expressionSubscriptEClass = createEClass(EXPRESSION_SUBSCRIPT);
-    createEReference(expressionSubscriptEClass, EXPRESSION_SUBSCRIPT__EXPRESSION);
+    createEAttribute(subscriptEClass, SUBSCRIPT__ALL);
+    createEReference(subscriptEClass, SUBSCRIPT__EXPRESSION);
 
     matrixConstructionOperatorEClass = createEClass(MATRIX_CONSTRUCTION_OPERATOR);
     createEReference(matrixConstructionOperatorEClass, MATRIX_CONSTRUCTION_OPERATOR__EXPRESSION_LISTS);
@@ -3009,8 +2980,6 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     booleanLiteralEClass.getESuperTypes().add(this.getLiteral());
     stringLiteralEClass.getESuperTypes().add(this.getLiteral());
     symbolReferenceEClass.getESuperTypes().add(this.getExpression());
-    colonSubscriptEClass.getESuperTypes().add(this.getSubscript());
-    expressionSubscriptEClass.getESuperTypes().add(this.getSubscript());
     matrixConstructionOperatorEClass.getESuperTypes().add(this.getExpression());
     unitConstructionOperatorEClass.getESuperTypes().add(this.getExpression());
     parenthesizedExpressionEClass.getESuperTypes().add(this.getExpression());
@@ -3206,11 +3175,8 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     initEReference(getSymbolReference_Name(), this.getQualifiedName(), null, "name", null, 0, 1, SymbolReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(subscriptEClass, Subscript.class, "Subscript", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-    initEClass(colonSubscriptEClass, ColonSubscript.class, "ColonSubscript", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-    initEClass(expressionSubscriptEClass, ExpressionSubscript.class, "ExpressionSubscript", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getExpressionSubscript_Expression(), this.getExpression(), null, "expression", null, 0, 1, ExpressionSubscript.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getSubscript_All(), ecorePackage.getEBoolean(), "all", null, 0, 1, Subscript.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getSubscript_Expression(), this.getExpression(), null, "expression", null, 0, 1, Subscript.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(matrixConstructionOperatorEClass, MatrixConstructionOperator.class, "MatrixConstructionOperator", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getMatrixConstructionOperator_ExpressionLists(), this.getExpressionList(), null, "expressionLists", null, 0, -1, MatrixConstructionOperator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

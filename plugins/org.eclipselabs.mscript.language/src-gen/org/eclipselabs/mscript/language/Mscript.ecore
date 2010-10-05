@@ -170,7 +170,7 @@
     <eLiterals name="GreaterThan" value="2" literal=">"/>
     <eLiterals name="GreaterThanOrEqualTo" value="3" literal=">="/>
     <eLiterals name="EqualTo" value="4" literal="=="/>
-    <eLiterals name="NotEqualTo" value="5" literal="&lt;>"/>
+    <eLiterals name="NotEqualTo" value="5" literal="!="/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AddSubtractExpressionPart">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//AddSubtractOperator"/>
@@ -239,9 +239,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="#//QualifiedName"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Subscript"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ColonSubscript" eSuperTypes="#//Subscript"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ExpressionSubscript" eSuperTypes="#//Subscript">
+  <eClassifiers xsi:type="ecore:EClass" name="Subscript">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="all" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//Expression"
         containment="true"/>
   </eClassifiers>
