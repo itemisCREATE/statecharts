@@ -8,6 +8,7 @@
             contributorClass="org.yakindu.sct.statechart.diagram.editor.StatechartDiagramActionbarContributor"
             default="true"
             extensions="sct"
+            icon="icons/obj16/StatemachineDiagramFile.gif"
             id="org.yakindu.sct.statechart.diagram.StatechartDiagramEditor"
             matchingStrategy="org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditorMatchingStrategy"
             name="YAKINDU Statechart Editor">
@@ -135,6 +136,10 @@
       <parser
             class="org.eclipse.gmf.runtime.emf.core.resources.GMFResourceFactory"
             type="sct">
+      </parser>
+      <parser
+            class="org.eclipse.gmf.runtime.emf.core.resources.GMFResourceFactory"
+            type="sct_model">
       </parser>
    </extension>
    <extension
