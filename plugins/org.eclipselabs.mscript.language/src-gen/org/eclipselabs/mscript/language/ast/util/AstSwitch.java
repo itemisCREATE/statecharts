@@ -132,6 +132,31 @@ public class AstSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case AstPackage.TYPE_DEFINITION:
+      {
+        TypeDefinition typeDefinition = (TypeDefinition)theEObject;
+        T result = caseTypeDefinition(typeDefinition);
+        if (result == null) result = casePackageDefinitionElement(typeDefinition);
+        if (result == null) result = caseStatement(typeDefinition);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AstPackage.VARIABLE_DECLARATION:
+      {
+        VariableDeclaration variableDeclaration = (VariableDeclaration)theEObject;
+        T result = caseVariableDeclaration(variableDeclaration);
+        if (result == null) result = casePackageDefinitionElement(variableDeclaration);
+        if (result == null) result = caseStatement(variableDeclaration);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AstPackage.VARIABLE_MODIFIER:
+      {
+        VariableModifier variableModifier = (VariableModifier)theEObject;
+        T result = caseVariableModifier(variableModifier);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case AstPackage.RECORD_DEFINITION:
       {
         RecordDefinition recordDefinition = (RecordDefinition)theEObject;
@@ -147,13 +172,6 @@ public class AstSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AstPackage.RECORD_FIELD_DECLARATION_ITEM:
-      {
-        RecordFieldDeclarationItem recordFieldDeclarationItem = (RecordFieldDeclarationItem)theEObject;
-        T result = caseRecordFieldDeclarationItem(recordFieldDeclarationItem);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case AstPackage.FUNCTION_DEFINITION:
       {
         FunctionDefinition functionDefinition = (FunctionDefinition)theEObject;
@@ -166,6 +184,14 @@ public class AstSwitch<T>
       {
         ParameterDeclaration parameterDeclaration = (ParameterDeclaration)theEObject;
         T result = caseParameterDeclaration(parameterDeclaration);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AstPackage.CHECK_DEFINITION:
+      {
+        CheckDefinition checkDefinition = (CheckDefinition)theEObject;
+        T result = caseCheckDefinition(checkDefinition);
+        if (result == null) result = casePackageDefinitionElement(checkDefinition);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -231,43 +257,19 @@ public class AstSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AstPackage.VARIABLE_DECLARATION:
-      {
-        VariableDeclaration variableDeclaration = (VariableDeclaration)theEObject;
-        T result = caseVariableDeclaration(variableDeclaration);
-        if (result == null) result = casePackageDefinitionElement(variableDeclaration);
-        if (result == null) result = caseStatement(variableDeclaration);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case AstPackage.VARIABLE_MODIFIER:
-      {
-        VariableModifier variableModifier = (VariableModifier)theEObject;
-        T result = caseVariableModifier(variableModifier);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case AstPackage.VARIABLE_DECLARATION_ITEM:
-      {
-        VariableDeclarationItem variableDeclarationItem = (VariableDeclarationItem)theEObject;
-        T result = caseVariableDeclarationItem(variableDeclarationItem);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case AstPackage.TYPE_DEFINITION:
-      {
-        TypeDefinition typeDefinition = (TypeDefinition)theEObject;
-        T result = caseTypeDefinition(typeDefinition);
-        if (result == null) result = casePackageDefinitionElement(typeDefinition);
-        if (result == null) result = caseStatement(typeDefinition);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case AstPackage.RETURN_STATEMENT:
       {
         ReturnStatement returnStatement = (ReturnStatement)theEObject;
         T result = caseReturnStatement(returnStatement);
         if (result == null) result = caseStatement(returnStatement);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AstPackage.CHECK_STATUS_STATEMENT:
+      {
+        CheckStatusStatement checkStatusStatement = (CheckStatusStatement)theEObject;
+        T result = caseCheckStatusStatement(checkStatusStatement);
+        if (result == null) result = caseStatement(checkStatusStatement);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -784,6 +786,54 @@ public class AstSwitch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>Type Definition</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Type Definition</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseTypeDefinition(TypeDefinition object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Variable Declaration</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Variable Declaration</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseVariableDeclaration(VariableDeclaration object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Variable Modifier</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Variable Modifier</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseVariableModifier(VariableModifier object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>Record Definition</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -816,22 +866,6 @@ public class AstSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Record Field Declaration Item</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Record Field Declaration Item</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseRecordFieldDeclarationItem(RecordFieldDeclarationItem object)
-  {
-    return null;
-  }
-
-  /**
    * Returns the result of interpreting the object as an instance of '<em>Function Definition</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -859,6 +893,22 @@ public class AstSwitch<T>
    * @generated
    */
   public T caseParameterDeclaration(ParameterDeclaration object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Check Definition</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Check Definition</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseCheckDefinition(CheckDefinition object)
   {
     return null;
   }
@@ -992,70 +1042,6 @@ public class AstSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Variable Declaration</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Variable Declaration</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseVariableDeclaration(VariableDeclaration object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Variable Modifier</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Variable Modifier</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseVariableModifier(VariableModifier object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Variable Declaration Item</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Variable Declaration Item</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseVariableDeclarationItem(VariableDeclarationItem object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Type Definition</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Type Definition</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseTypeDefinition(TypeDefinition object)
-  {
-    return null;
-  }
-
-  /**
    * Returns the result of interpreting the object as an instance of '<em>Return Statement</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -1067,6 +1053,22 @@ public class AstSwitch<T>
    * @generated
    */
   public T caseReturnStatement(ReturnStatement object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Check Status Statement</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Check Status Statement</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseCheckStatusStatement(CheckStatusStatement object)
   {
     return null;
   }

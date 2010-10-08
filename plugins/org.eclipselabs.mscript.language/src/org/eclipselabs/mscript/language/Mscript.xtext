@@ -29,6 +29,7 @@ PackageDefinitionElement :
 	EnumerationDefinition |
 	RecordDefinition |
 	FunctionDefinition |
+	CheckDefinition |
 	TypeDefinition |
 	VariableDeclaration;
 
@@ -43,7 +44,24 @@ EnumerationDefinition :
 	
 EnumerationLiteralDeclaration :
 	name=KeywordID;
+	
+/*
+ * TypeDefinition
+ */
+ 
+TypeDefinition :
+	'type' name=KeywordID '=' type=PrimitiveTypeSpecifier ';';
 
+/*
+ * VariableDeclaration
+ */
+
+VariableDeclaration :
+	(modifier=VariableModifier)? 'var' name=KeywordID (':' type=TypeSpecifier)? ('=' initialValue=Expression)? ';';
+
+VariableModifier :
+	Auto='auto' | Constant='const';
+			
 /*
  * Record
  */
@@ -54,20 +72,24 @@ RecordDefinition :
 	'}'; 
 
 RecordFieldDeclaration :
-	type=DataTypeSpecifier items+=RecordFieldDeclarationItem (',' items+=RecordFieldDeclarationItem)* ';';
-	
-RecordFieldDeclarationItem :
-	name=KeywordID;
+	name=KeywordID ':' type=DataTypeSpecifier ';';
 
 /*
  * Function
  */
  
 FunctionDefinition :
-	(static?='static')? 'func' name=KeywordID '(' (parameters+=ParameterDeclaration (',' parameters+=ParameterDeclaration)*)? ')' body=Block;
+	'func' name=KeywordID '(' (parameters+=ParameterDeclaration (',' parameters+=ParameterDeclaration)*)? ')' ('pre' precondition=Expression)? body=Block;
 
 ParameterDeclaration :
-	(modifier=VariableModifier)? (reference?='ref')? type=TypeSpecifier name=KeywordID;
+	(reference?='ref')? name=KeywordID ':' type=TypeSpecifier;
+
+/*
+ * Check
+ */
+ 
+CheckDefinition :
+	'check' name=KeywordID '(' (parameters+=ParameterDeclaration (',' parameters+=ParameterDeclaration)*)? ')' body=Block;
 
 /*
  * Statement
@@ -82,8 +104,9 @@ Statement :
 	ForeachStatement |
 	TypeDefinition |
 	VariableDeclaration |
-	ReturnStatement;
-	
+	ReturnStatement |
+	CheckStatusStatement;
+		
 Block :
 	{Block} '{' (statements+=Statement)* '}';
 
@@ -104,21 +127,18 @@ DoWhileStatement :
 
 ForeachStatement :
 	'foreach' elementName=KeywordID 'in' collectionExpression=Expression body=Block;
-
-VariableDeclaration :
-	(modifier=VariableModifier)? (type=PrimitiveTypeSpecifier | type=UnitTypeSpecifier | 'var' type=NamedTypeSpecifier) items+=VariableDeclarationItem (',' items+=VariableDeclarationItem)* ';';
-
-VariableModifier :
-	Auto='auto' | Constant='const' | Static='static';
-			
-VariableDeclarationItem :
-	name=KeywordID ('=' initialValue=Expression)?;
-	
-TypeDefinition :
-	'type' name=KeywordID '=' type=PrimitiveTypeSpecifier ';';
 	
 ReturnStatement :
-	'return' value=Expression ';';
+	{ReturnStatement} 'return' (value=Expression)? ';';
+	
+CheckStatusStatement :
+	kind=CheckStatusKind message=Expression ';';
+	
+enum CheckStatusKind :
+	Info='info' |
+	Warning='warning' |
+	Error='error' |
+	Fatal='fatal';
 
 /*
  * Data type specifier

@@ -24,7 +24,6 @@ import org.eclipselabs.mscript.language.ast.VariableModifier;
  * <ul>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.VariableModifierImpl#getAuto <em>Auto</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.VariableModifierImpl#getConstant <em>Constant</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.VariableModifierImpl#getStatic <em>Static</em>}</li>
  * </ul>
  * </p>
  *
@@ -71,26 +70,6 @@ public class VariableModifierImpl extends MinimalEObjectImpl.Container implement
    * @ordered
    */
   protected String constant = CONSTANT_EDEFAULT;
-
-  /**
-   * The default value of the '{@link #getStatic() <em>Static</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getStatic()
-   * @generated
-   * @ordered
-   */
-  protected static final String STATIC_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getStatic() <em>Static</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getStatic()
-   * @generated
-   * @ordered
-   */
-  protected String static_ = STATIC_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -164,29 +143,6 @@ public class VariableModifierImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getStatic()
-  {
-    return static_;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setStatic(String newStatic)
-  {
-    String oldStatic = static_;
-    static_ = newStatic;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.VARIABLE_MODIFIER__STATIC, oldStatic, static_));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
@@ -196,8 +152,6 @@ public class VariableModifierImpl extends MinimalEObjectImpl.Container implement
         return getAuto();
       case AstPackage.VARIABLE_MODIFIER__CONSTANT:
         return getConstant();
-      case AstPackage.VARIABLE_MODIFIER__STATIC:
-        return getStatic();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -217,9 +171,6 @@ public class VariableModifierImpl extends MinimalEObjectImpl.Container implement
         return;
       case AstPackage.VARIABLE_MODIFIER__CONSTANT:
         setConstant((String)newValue);
-        return;
-      case AstPackage.VARIABLE_MODIFIER__STATIC:
-        setStatic((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -241,9 +192,6 @@ public class VariableModifierImpl extends MinimalEObjectImpl.Container implement
       case AstPackage.VARIABLE_MODIFIER__CONSTANT:
         setConstant(CONSTANT_EDEFAULT);
         return;
-      case AstPackage.VARIABLE_MODIFIER__STATIC:
-        setStatic(STATIC_EDEFAULT);
-        return;
     }
     super.eUnset(featureID);
   }
@@ -262,8 +210,6 @@ public class VariableModifierImpl extends MinimalEObjectImpl.Container implement
         return AUTO_EDEFAULT == null ? auto != null : !AUTO_EDEFAULT.equals(auto);
       case AstPackage.VARIABLE_MODIFIER__CONSTANT:
         return CONSTANT_EDEFAULT == null ? constant != null : !CONSTANT_EDEFAULT.equals(constant);
-      case AstPackage.VARIABLE_MODIFIER__STATIC:
-        return STATIC_EDEFAULT == null ? static_ != null : !STATIC_EDEFAULT.equals(static_);
     }
     return super.eIsSet(featureID);
   }
@@ -283,8 +229,6 @@ public class VariableModifierImpl extends MinimalEObjectImpl.Container implement
     result.append(auto);
     result.append(", Constant: ");
     result.append(constant);
-    result.append(", Static: ");
-    result.append(static_);
     result.append(')');
     return result.toString();
   }

@@ -71,6 +71,33 @@ public interface AstFactory extends EFactory
   EnumerationLiteralDeclaration createEnumerationLiteralDeclaration();
 
   /**
+   * Returns a new object of class '<em>Type Definition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Type Definition</em>'.
+   * @generated
+   */
+  TypeDefinition createTypeDefinition();
+
+  /**
+   * Returns a new object of class '<em>Variable Declaration</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Variable Declaration</em>'.
+   * @generated
+   */
+  VariableDeclaration createVariableDeclaration();
+
+  /**
+   * Returns a new object of class '<em>Variable Modifier</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Variable Modifier</em>'.
+   * @generated
+   */
+  VariableModifier createVariableModifier();
+
+  /**
    * Returns a new object of class '<em>Record Definition</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -89,15 +116,6 @@ public interface AstFactory extends EFactory
   RecordFieldDeclaration createRecordFieldDeclaration();
 
   /**
-   * Returns a new object of class '<em>Record Field Declaration Item</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Record Field Declaration Item</em>'.
-   * @generated
-   */
-  RecordFieldDeclarationItem createRecordFieldDeclarationItem();
-
-  /**
    * Returns a new object of class '<em>Function Definition</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -114,6 +132,15 @@ public interface AstFactory extends EFactory
    * @generated
    */
   ParameterDeclaration createParameterDeclaration();
+
+  /**
+   * Returns a new object of class '<em>Check Definition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Check Definition</em>'.
+   * @generated
+   */
+  CheckDefinition createCheckDefinition();
 
   /**
    * Returns a new object of class '<em>Statement</em>'.
@@ -188,42 +215,6 @@ public interface AstFactory extends EFactory
   ForeachStatement createForeachStatement();
 
   /**
-   * Returns a new object of class '<em>Variable Declaration</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Variable Declaration</em>'.
-   * @generated
-   */
-  VariableDeclaration createVariableDeclaration();
-
-  /**
-   * Returns a new object of class '<em>Variable Modifier</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Variable Modifier</em>'.
-   * @generated
-   */
-  VariableModifier createVariableModifier();
-
-  /**
-   * Returns a new object of class '<em>Variable Declaration Item</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Variable Declaration Item</em>'.
-   * @generated
-   */
-  VariableDeclarationItem createVariableDeclarationItem();
-
-  /**
-   * Returns a new object of class '<em>Type Definition</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Type Definition</em>'.
-   * @generated
-   */
-  TypeDefinition createTypeDefinition();
-
-  /**
    * Returns a new object of class '<em>Return Statement</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -231,6 +222,15 @@ public interface AstFactory extends EFactory
    * @generated
    */
   ReturnStatement createReturnStatement();
+
+  /**
+   * Returns a new object of class '<em>Check Status Statement</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Check Status Statement</em>'.
+   * @generated
+   */
+  CheckStatusStatement createCheckStatusStatement();
 
   /**
    * Returns a new object of class '<em>Type Specifier</em>'.

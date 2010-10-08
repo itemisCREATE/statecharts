@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.Block;
+import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.ast.FunctionDefinition;
 import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
 
@@ -32,9 +33,9 @@ import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl#isStatic <em>Static</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl#getPrecondition <em>Precondition</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl#getBody <em>Body</em>}</li>
  * </ul>
  * </p>
@@ -43,26 +44,6 @@ import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
  */
 public class FunctionDefinitionImpl extends PackageDefinitionElementImpl implements FunctionDefinition
 {
-  /**
-   * The default value of the '{@link #isStatic() <em>Static</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #isStatic()
-   * @generated
-   * @ordered
-   */
-  protected static final boolean STATIC_EDEFAULT = false;
-
-  /**
-   * The cached value of the '{@link #isStatic() <em>Static</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #isStatic()
-   * @generated
-   * @ordered
-   */
-  protected boolean static_ = STATIC_EDEFAULT;
-
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
@@ -92,6 +73,16 @@ public class FunctionDefinitionImpl extends PackageDefinitionElementImpl impleme
    * @ordered
    */
   protected EList<ParameterDeclaration> parameters;
+
+  /**
+   * The cached value of the '{@link #getPrecondition() <em>Precondition</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getPrecondition()
+   * @generated
+   * @ordered
+   */
+  protected Expression precondition;
 
   /**
    * The cached value of the '{@link #getBody() <em>Body</em>}' containment reference.
@@ -129,29 +120,6 @@ public class FunctionDefinitionImpl extends PackageDefinitionElementImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  public boolean isStatic()
-  {
-    return static_;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setStatic(boolean newStatic)
-  {
-    boolean oldStatic = static_;
-    static_ = newStatic;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.FUNCTION_DEFINITION__STATIC, oldStatic, static_));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public String getName()
   {
     return name;
@@ -182,6 +150,54 @@ public class FunctionDefinitionImpl extends PackageDefinitionElementImpl impleme
       parameters = new EObjectContainmentEList<ParameterDeclaration>(ParameterDeclaration.class, this, AstPackage.FUNCTION_DEFINITION__PARAMETERS);
     }
     return parameters;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Expression getPrecondition()
+  {
+    return precondition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetPrecondition(Expression newPrecondition, NotificationChain msgs)
+  {
+    Expression oldPrecondition = precondition;
+    precondition = newPrecondition;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.FUNCTION_DEFINITION__PRECONDITION, oldPrecondition, newPrecondition);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setPrecondition(Expression newPrecondition)
+  {
+    if (newPrecondition != precondition)
+    {
+      NotificationChain msgs = null;
+      if (precondition != null)
+        msgs = ((InternalEObject)precondition).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.FUNCTION_DEFINITION__PRECONDITION, null, msgs);
+      if (newPrecondition != null)
+        msgs = ((InternalEObject)newPrecondition).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.FUNCTION_DEFINITION__PRECONDITION, null, msgs);
+      msgs = basicSetPrecondition(newPrecondition, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.FUNCTION_DEFINITION__PRECONDITION, newPrecondition, newPrecondition));
   }
 
   /**
@@ -244,6 +260,8 @@ public class FunctionDefinitionImpl extends PackageDefinitionElementImpl impleme
     {
       case AstPackage.FUNCTION_DEFINITION__PARAMETERS:
         return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
+      case AstPackage.FUNCTION_DEFINITION__PRECONDITION:
+        return basicSetPrecondition(null, msgs);
       case AstPackage.FUNCTION_DEFINITION__BODY:
         return basicSetBody(null, msgs);
     }
@@ -260,12 +278,12 @@ public class FunctionDefinitionImpl extends PackageDefinitionElementImpl impleme
   {
     switch (featureID)
     {
-      case AstPackage.FUNCTION_DEFINITION__STATIC:
-        return isStatic();
       case AstPackage.FUNCTION_DEFINITION__NAME:
         return getName();
       case AstPackage.FUNCTION_DEFINITION__PARAMETERS:
         return getParameters();
+      case AstPackage.FUNCTION_DEFINITION__PRECONDITION:
+        return getPrecondition();
       case AstPackage.FUNCTION_DEFINITION__BODY:
         return getBody();
     }
@@ -283,15 +301,15 @@ public class FunctionDefinitionImpl extends PackageDefinitionElementImpl impleme
   {
     switch (featureID)
     {
-      case AstPackage.FUNCTION_DEFINITION__STATIC:
-        setStatic((Boolean)newValue);
-        return;
       case AstPackage.FUNCTION_DEFINITION__NAME:
         setName((String)newValue);
         return;
       case AstPackage.FUNCTION_DEFINITION__PARAMETERS:
         getParameters().clear();
         getParameters().addAll((Collection<? extends ParameterDeclaration>)newValue);
+        return;
+      case AstPackage.FUNCTION_DEFINITION__PRECONDITION:
+        setPrecondition((Expression)newValue);
         return;
       case AstPackage.FUNCTION_DEFINITION__BODY:
         setBody((Block)newValue);
@@ -310,14 +328,14 @@ public class FunctionDefinitionImpl extends PackageDefinitionElementImpl impleme
   {
     switch (featureID)
     {
-      case AstPackage.FUNCTION_DEFINITION__STATIC:
-        setStatic(STATIC_EDEFAULT);
-        return;
       case AstPackage.FUNCTION_DEFINITION__NAME:
         setName(NAME_EDEFAULT);
         return;
       case AstPackage.FUNCTION_DEFINITION__PARAMETERS:
         getParameters().clear();
+        return;
+      case AstPackage.FUNCTION_DEFINITION__PRECONDITION:
+        setPrecondition((Expression)null);
         return;
       case AstPackage.FUNCTION_DEFINITION__BODY:
         setBody((Block)null);
@@ -336,12 +354,12 @@ public class FunctionDefinitionImpl extends PackageDefinitionElementImpl impleme
   {
     switch (featureID)
     {
-      case AstPackage.FUNCTION_DEFINITION__STATIC:
-        return static_ != STATIC_EDEFAULT;
       case AstPackage.FUNCTION_DEFINITION__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case AstPackage.FUNCTION_DEFINITION__PARAMETERS:
         return parameters != null && !parameters.isEmpty();
+      case AstPackage.FUNCTION_DEFINITION__PRECONDITION:
+        return precondition != null;
       case AstPackage.FUNCTION_DEFINITION__BODY:
         return body != null;
     }
@@ -359,9 +377,7 @@ public class FunctionDefinitionImpl extends PackageDefinitionElementImpl impleme
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (static: ");
-    result.append(static_);
-    result.append(", name: ");
+    result.append(" (name: ");
     result.append(name);
     result.append(')');
     return result.toString();

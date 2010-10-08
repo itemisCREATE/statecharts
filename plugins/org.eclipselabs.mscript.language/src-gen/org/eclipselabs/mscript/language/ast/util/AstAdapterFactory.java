@@ -103,6 +103,21 @@ public class AstAdapterFactory extends AdapterFactoryImpl
         return createEnumerationLiteralDeclarationAdapter();
       }
       @Override
+      public Adapter caseTypeDefinition(TypeDefinition object)
+      {
+        return createTypeDefinitionAdapter();
+      }
+      @Override
+      public Adapter caseVariableDeclaration(VariableDeclaration object)
+      {
+        return createVariableDeclarationAdapter();
+      }
+      @Override
+      public Adapter caseVariableModifier(VariableModifier object)
+      {
+        return createVariableModifierAdapter();
+      }
+      @Override
       public Adapter caseRecordDefinition(RecordDefinition object)
       {
         return createRecordDefinitionAdapter();
@@ -113,11 +128,6 @@ public class AstAdapterFactory extends AdapterFactoryImpl
         return createRecordFieldDeclarationAdapter();
       }
       @Override
-      public Adapter caseRecordFieldDeclarationItem(RecordFieldDeclarationItem object)
-      {
-        return createRecordFieldDeclarationItemAdapter();
-      }
-      @Override
       public Adapter caseFunctionDefinition(FunctionDefinition object)
       {
         return createFunctionDefinitionAdapter();
@@ -126,6 +136,11 @@ public class AstAdapterFactory extends AdapterFactoryImpl
       public Adapter caseParameterDeclaration(ParameterDeclaration object)
       {
         return createParameterDeclarationAdapter();
+      }
+      @Override
+      public Adapter caseCheckDefinition(CheckDefinition object)
+      {
+        return createCheckDefinitionAdapter();
       }
       @Override
       public Adapter caseStatement(Statement object)
@@ -168,29 +183,14 @@ public class AstAdapterFactory extends AdapterFactoryImpl
         return createForeachStatementAdapter();
       }
       @Override
-      public Adapter caseVariableDeclaration(VariableDeclaration object)
-      {
-        return createVariableDeclarationAdapter();
-      }
-      @Override
-      public Adapter caseVariableModifier(VariableModifier object)
-      {
-        return createVariableModifierAdapter();
-      }
-      @Override
-      public Adapter caseVariableDeclarationItem(VariableDeclarationItem object)
-      {
-        return createVariableDeclarationItemAdapter();
-      }
-      @Override
-      public Adapter caseTypeDefinition(TypeDefinition object)
-      {
-        return createTypeDefinitionAdapter();
-      }
-      @Override
       public Adapter caseReturnStatement(ReturnStatement object)
       {
         return createReturnStatementAdapter();
+      }
+      @Override
+      public Adapter caseCheckStatusStatement(CheckStatusStatement object)
+      {
+        return createCheckStatusStatementAdapter();
       }
       @Override
       public Adapter caseTypeSpecifier(TypeSpecifier object)
@@ -550,6 +550,51 @@ public class AstAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.TypeDefinition <em>Type Definition</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipselabs.mscript.language.ast.TypeDefinition
+   * @generated
+   */
+  public Adapter createTypeDefinitionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.VariableDeclaration <em>Variable Declaration</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipselabs.mscript.language.ast.VariableDeclaration
+   * @generated
+   */
+  public Adapter createVariableDeclarationAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.VariableModifier <em>Variable Modifier</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipselabs.mscript.language.ast.VariableModifier
+   * @generated
+   */
+  public Adapter createVariableModifierAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.RecordDefinition <em>Record Definition</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -580,21 +625,6 @@ public class AstAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.RecordFieldDeclarationItem <em>Record Field Declaration Item</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.RecordFieldDeclarationItem
-   * @generated
-   */
-  public Adapter createRecordFieldDeclarationItemAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.FunctionDefinition <em>Function Definition</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -620,6 +650,21 @@ public class AstAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createParameterDeclarationAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.CheckDefinition <em>Check Definition</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipselabs.mscript.language.ast.CheckDefinition
+   * @generated
+   */
+  public Adapter createCheckDefinitionAdapter()
   {
     return null;
   }
@@ -745,66 +790,6 @@ public class AstAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.VariableDeclaration <em>Variable Declaration</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.VariableDeclaration
-   * @generated
-   */
-  public Adapter createVariableDeclarationAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.VariableModifier <em>Variable Modifier</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.VariableModifier
-   * @generated
-   */
-  public Adapter createVariableModifierAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.VariableDeclarationItem <em>Variable Declaration Item</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.VariableDeclarationItem
-   * @generated
-   */
-  public Adapter createVariableDeclarationItemAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.TypeDefinition <em>Type Definition</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.TypeDefinition
-   * @generated
-   */
-  public Adapter createTypeDefinitionAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.ReturnStatement <em>Return Statement</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -815,6 +800,21 @@ public class AstAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createReturnStatementAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.CheckStatusStatement <em>Check Status Statement</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipselabs.mscript.language.ast.CheckStatusStatement
+   * @generated
+   */
+  public Adapter createCheckStatusStatementAdapter()
   {
     return null;
   }

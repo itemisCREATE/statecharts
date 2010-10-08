@@ -5,34 +5,42 @@
  */
 package org.eclipselabs.mscript.language.ast.impl;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipselabs.mscript.language.ast.AstPackage;
-import org.eclipselabs.mscript.language.ast.Expression;
-import org.eclipselabs.mscript.language.ast.VariableDeclarationItem;
+import org.eclipselabs.mscript.language.ast.Block;
+import org.eclipselabs.mscript.language.ast.CheckDefinition;
+import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Variable Declaration Item</b></em>'.
+ * An implementation of the model object '<em><b>Check Definition</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.VariableDeclarationItemImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.VariableDeclarationItemImpl#getInitialValue <em>Initial Value</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.CheckDefinitionImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.CheckDefinitionImpl#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.CheckDefinitionImpl#getBody <em>Body</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class VariableDeclarationItemImpl extends MinimalEObjectImpl.Container implements VariableDeclarationItem
+public class CheckDefinitionImpl extends PackageDefinitionElementImpl implements CheckDefinition
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -55,21 +63,31 @@ public class VariableDeclarationItemImpl extends MinimalEObjectImpl.Container im
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getInitialValue() <em>Initial Value</em>}' containment reference.
+   * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getInitialValue()
+   * @see #getParameters()
    * @generated
    * @ordered
    */
-  protected Expression initialValue;
+  protected EList<ParameterDeclaration> parameters;
+
+  /**
+   * The cached value of the '{@link #getBody() <em>Body</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getBody()
+   * @generated
+   * @ordered
+   */
+  protected Block body;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected VariableDeclarationItemImpl()
+  protected CheckDefinitionImpl()
   {
     super();
   }
@@ -82,7 +100,7 @@ public class VariableDeclarationItemImpl extends MinimalEObjectImpl.Container im
   @Override
   protected EClass eStaticClass()
   {
-    return AstPackage.Literals.VARIABLE_DECLARATION_ITEM;
+    return AstPackage.Literals.CHECK_DEFINITION;
   }
 
   /**
@@ -105,7 +123,7 @@ public class VariableDeclarationItemImpl extends MinimalEObjectImpl.Container im
     String oldName = name;
     name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.VARIABLE_DECLARATION_ITEM__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.CHECK_DEFINITION__NAME, oldName, name));
   }
 
   /**
@@ -113,9 +131,13 @@ public class VariableDeclarationItemImpl extends MinimalEObjectImpl.Container im
    * <!-- end-user-doc -->
    * @generated
    */
-  public Expression getInitialValue()
+  public EList<ParameterDeclaration> getParameters()
   {
-    return initialValue;
+    if (parameters == null)
+    {
+      parameters = new EObjectContainmentEList<ParameterDeclaration>(ParameterDeclaration.class, this, AstPackage.CHECK_DEFINITION__PARAMETERS);
+    }
+    return parameters;
   }
 
   /**
@@ -123,13 +145,23 @@ public class VariableDeclarationItemImpl extends MinimalEObjectImpl.Container im
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetInitialValue(Expression newInitialValue, NotificationChain msgs)
+  public Block getBody()
   {
-    Expression oldInitialValue = initialValue;
-    initialValue = newInitialValue;
+    return body;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetBody(Block newBody, NotificationChain msgs)
+  {
+    Block oldBody = body;
+    body = newBody;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.VARIABLE_DECLARATION_ITEM__INITIAL_VALUE, oldInitialValue, newInitialValue);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.CHECK_DEFINITION__BODY, oldBody, newBody);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -140,20 +172,20 @@ public class VariableDeclarationItemImpl extends MinimalEObjectImpl.Container im
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setInitialValue(Expression newInitialValue)
+  public void setBody(Block newBody)
   {
-    if (newInitialValue != initialValue)
+    if (newBody != body)
     {
       NotificationChain msgs = null;
-      if (initialValue != null)
-        msgs = ((InternalEObject)initialValue).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.VARIABLE_DECLARATION_ITEM__INITIAL_VALUE, null, msgs);
-      if (newInitialValue != null)
-        msgs = ((InternalEObject)newInitialValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.VARIABLE_DECLARATION_ITEM__INITIAL_VALUE, null, msgs);
-      msgs = basicSetInitialValue(newInitialValue, msgs);
+      if (body != null)
+        msgs = ((InternalEObject)body).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.CHECK_DEFINITION__BODY, null, msgs);
+      if (newBody != null)
+        msgs = ((InternalEObject)newBody).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.CHECK_DEFINITION__BODY, null, msgs);
+      msgs = basicSetBody(newBody, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.VARIABLE_DECLARATION_ITEM__INITIAL_VALUE, newInitialValue, newInitialValue));
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.CHECK_DEFINITION__BODY, newBody, newBody));
   }
 
   /**
@@ -166,8 +198,10 @@ public class VariableDeclarationItemImpl extends MinimalEObjectImpl.Container im
   {
     switch (featureID)
     {
-      case AstPackage.VARIABLE_DECLARATION_ITEM__INITIAL_VALUE:
-        return basicSetInitialValue(null, msgs);
+      case AstPackage.CHECK_DEFINITION__PARAMETERS:
+        return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
+      case AstPackage.CHECK_DEFINITION__BODY:
+        return basicSetBody(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -182,10 +216,12 @@ public class VariableDeclarationItemImpl extends MinimalEObjectImpl.Container im
   {
     switch (featureID)
     {
-      case AstPackage.VARIABLE_DECLARATION_ITEM__NAME:
+      case AstPackage.CHECK_DEFINITION__NAME:
         return getName();
-      case AstPackage.VARIABLE_DECLARATION_ITEM__INITIAL_VALUE:
-        return getInitialValue();
+      case AstPackage.CHECK_DEFINITION__PARAMETERS:
+        return getParameters();
+      case AstPackage.CHECK_DEFINITION__BODY:
+        return getBody();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -195,16 +231,21 @@ public class VariableDeclarationItemImpl extends MinimalEObjectImpl.Container im
    * <!-- end-user-doc -->
    * @generated
    */
+  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
     switch (featureID)
     {
-      case AstPackage.VARIABLE_DECLARATION_ITEM__NAME:
+      case AstPackage.CHECK_DEFINITION__NAME:
         setName((String)newValue);
         return;
-      case AstPackage.VARIABLE_DECLARATION_ITEM__INITIAL_VALUE:
-        setInitialValue((Expression)newValue);
+      case AstPackage.CHECK_DEFINITION__PARAMETERS:
+        getParameters().clear();
+        getParameters().addAll((Collection<? extends ParameterDeclaration>)newValue);
+        return;
+      case AstPackage.CHECK_DEFINITION__BODY:
+        setBody((Block)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -220,11 +261,14 @@ public class VariableDeclarationItemImpl extends MinimalEObjectImpl.Container im
   {
     switch (featureID)
     {
-      case AstPackage.VARIABLE_DECLARATION_ITEM__NAME:
+      case AstPackage.CHECK_DEFINITION__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case AstPackage.VARIABLE_DECLARATION_ITEM__INITIAL_VALUE:
-        setInitialValue((Expression)null);
+      case AstPackage.CHECK_DEFINITION__PARAMETERS:
+        getParameters().clear();
+        return;
+      case AstPackage.CHECK_DEFINITION__BODY:
+        setBody((Block)null);
         return;
     }
     super.eUnset(featureID);
@@ -240,10 +284,12 @@ public class VariableDeclarationItemImpl extends MinimalEObjectImpl.Container im
   {
     switch (featureID)
     {
-      case AstPackage.VARIABLE_DECLARATION_ITEM__NAME:
+      case AstPackage.CHECK_DEFINITION__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case AstPackage.VARIABLE_DECLARATION_ITEM__INITIAL_VALUE:
-        return initialValue != null;
+      case AstPackage.CHECK_DEFINITION__PARAMETERS:
+        return parameters != null && !parameters.isEmpty();
+      case AstPackage.CHECK_DEFINITION__BODY:
+        return body != null;
     }
     return super.eIsSet(featureID);
   }
@@ -265,4 +311,4 @@ public class VariableDeclarationItemImpl extends MinimalEObjectImpl.Container im
     return result.toString();
   }
 
-} //VariableDeclarationItemImpl
+} //CheckDefinitionImpl

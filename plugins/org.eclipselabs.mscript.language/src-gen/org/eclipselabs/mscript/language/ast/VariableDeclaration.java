@@ -5,7 +5,6 @@
  */
 package org.eclipselabs.mscript.language.ast;
 
-import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -16,8 +15,9 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipselabs.mscript.language.ast.VariableDeclaration#getModifier <em>Modifier</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.VariableDeclaration#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.VariableDeclaration#getType <em>Type</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.VariableDeclaration#getItems <em>Items</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.VariableDeclaration#getInitialValue <em>Initial Value</em>}</li>
  * </ul>
  * </p>
  *
@@ -54,6 +54,32 @@ public interface VariableDeclaration extends PackageDefinitionElement, Statement
   void setModifier(VariableModifier value);
 
   /**
+   * Returns the value of the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Name</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Name</em>' attribute.
+   * @see #setName(String)
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getVariableDeclaration_Name()
+   * @model
+   * @generated
+   */
+  String getName();
+
+  /**
+   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.VariableDeclaration#getName <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Name</em>' attribute.
+   * @see #getName()
+   * @generated
+   */
+  void setName(String value);
+
+  /**
    * Returns the value of the '<em><b>Type</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
@@ -80,19 +106,29 @@ public interface VariableDeclaration extends PackageDefinitionElement, Statement
   void setType(TypeSpecifier value);
 
   /**
-   * Returns the value of the '<em><b>Items</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipselabs.mscript.language.ast.VariableDeclarationItem}.
+   * Returns the value of the '<em><b>Initial Value</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Items</em>' containment reference list isn't clear,
+   * If the meaning of the '<em>Initial Value</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Items</em>' containment reference list.
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getVariableDeclaration_Items()
+   * @return the value of the '<em>Initial Value</em>' containment reference.
+   * @see #setInitialValue(Expression)
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getVariableDeclaration_InitialValue()
    * @model containment="true"
    * @generated
    */
-  EList<VariableDeclarationItem> getItems();
+  Expression getInitialValue();
+
+  /**
+   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.VariableDeclaration#getInitialValue <em>Initial Value</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Initial Value</em>' containment reference.
+   * @see #getInitialValue()
+   * @generated
+   */
+  void setInitialValue(Expression value);
 
 } // VariableDeclaration

@@ -5,25 +5,18 @@
  */
 package org.eclipselabs.mscript.language.ast.impl;
 
-import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.eclipselabs.mscript.language.ast.AstPackage;
+import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.ast.TypeSpecifier;
 import org.eclipselabs.mscript.language.ast.VariableDeclaration;
-import org.eclipselabs.mscript.language.ast.VariableDeclarationItem;
 import org.eclipselabs.mscript.language.ast.VariableModifier;
 
 /**
@@ -34,8 +27,9 @@ import org.eclipselabs.mscript.language.ast.VariableModifier;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.VariableDeclarationImpl#getModifier <em>Modifier</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.VariableDeclarationImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.VariableDeclarationImpl#getType <em>Type</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.VariableDeclarationImpl#getItems <em>Items</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.VariableDeclarationImpl#getInitialValue <em>Initial Value</em>}</li>
  * </ul>
  * </p>
  *
@@ -54,6 +48,26 @@ public class VariableDeclarationImpl extends PackageDefinitionElementImpl implem
   protected VariableModifier modifier;
 
   /**
+   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
+  protected static final String NAME_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
+  protected String name = NAME_EDEFAULT;
+
+  /**
    * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -64,14 +78,14 @@ public class VariableDeclarationImpl extends PackageDefinitionElementImpl implem
   protected TypeSpecifier type;
 
   /**
-   * The cached value of the '{@link #getItems() <em>Items</em>}' containment reference list.
+   * The cached value of the '{@link #getInitialValue() <em>Initial Value</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getItems()
+   * @see #getInitialValue()
    * @generated
    * @ordered
    */
-  protected EList<VariableDeclarationItem> items;
+  protected Expression initialValue;
 
   /**
    * <!-- begin-user-doc -->
@@ -147,6 +161,29 @@ public class VariableDeclarationImpl extends PackageDefinitionElementImpl implem
    * <!-- end-user-doc -->
    * @generated
    */
+  public String getName()
+  {
+    return name;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setName(String newName)
+  {
+    String oldName = name;
+    name = newName;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.VARIABLE_DECLARATION__NAME, oldName, name));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public TypeSpecifier getType()
   {
     return type;
@@ -195,13 +232,47 @@ public class VariableDeclarationImpl extends PackageDefinitionElementImpl implem
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<VariableDeclarationItem> getItems()
+  public Expression getInitialValue()
   {
-    if (items == null)
+    return initialValue;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetInitialValue(Expression newInitialValue, NotificationChain msgs)
+  {
+    Expression oldInitialValue = initialValue;
+    initialValue = newInitialValue;
+    if (eNotificationRequired())
     {
-      items = new EObjectContainmentEList<VariableDeclarationItem>(VariableDeclarationItem.class, this, AstPackage.VARIABLE_DECLARATION__ITEMS);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.VARIABLE_DECLARATION__INITIAL_VALUE, oldInitialValue, newInitialValue);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
     }
-    return items;
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setInitialValue(Expression newInitialValue)
+  {
+    if (newInitialValue != initialValue)
+    {
+      NotificationChain msgs = null;
+      if (initialValue != null)
+        msgs = ((InternalEObject)initialValue).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.VARIABLE_DECLARATION__INITIAL_VALUE, null, msgs);
+      if (newInitialValue != null)
+        msgs = ((InternalEObject)newInitialValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.VARIABLE_DECLARATION__INITIAL_VALUE, null, msgs);
+      msgs = basicSetInitialValue(newInitialValue, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.VARIABLE_DECLARATION__INITIAL_VALUE, newInitialValue, newInitialValue));
   }
 
   /**
@@ -218,8 +289,8 @@ public class VariableDeclarationImpl extends PackageDefinitionElementImpl implem
         return basicSetModifier(null, msgs);
       case AstPackage.VARIABLE_DECLARATION__TYPE:
         return basicSetType(null, msgs);
-      case AstPackage.VARIABLE_DECLARATION__ITEMS:
-        return ((InternalEList<?>)getItems()).basicRemove(otherEnd, msgs);
+      case AstPackage.VARIABLE_DECLARATION__INITIAL_VALUE:
+        return basicSetInitialValue(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -236,10 +307,12 @@ public class VariableDeclarationImpl extends PackageDefinitionElementImpl implem
     {
       case AstPackage.VARIABLE_DECLARATION__MODIFIER:
         return getModifier();
+      case AstPackage.VARIABLE_DECLARATION__NAME:
+        return getName();
       case AstPackage.VARIABLE_DECLARATION__TYPE:
         return getType();
-      case AstPackage.VARIABLE_DECLARATION__ITEMS:
-        return getItems();
+      case AstPackage.VARIABLE_DECLARATION__INITIAL_VALUE:
+        return getInitialValue();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -249,7 +322,6 @@ public class VariableDeclarationImpl extends PackageDefinitionElementImpl implem
    * <!-- end-user-doc -->
    * @generated
    */
-  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
@@ -258,12 +330,14 @@ public class VariableDeclarationImpl extends PackageDefinitionElementImpl implem
       case AstPackage.VARIABLE_DECLARATION__MODIFIER:
         setModifier((VariableModifier)newValue);
         return;
+      case AstPackage.VARIABLE_DECLARATION__NAME:
+        setName((String)newValue);
+        return;
       case AstPackage.VARIABLE_DECLARATION__TYPE:
         setType((TypeSpecifier)newValue);
         return;
-      case AstPackage.VARIABLE_DECLARATION__ITEMS:
-        getItems().clear();
-        getItems().addAll((Collection<? extends VariableDeclarationItem>)newValue);
+      case AstPackage.VARIABLE_DECLARATION__INITIAL_VALUE:
+        setInitialValue((Expression)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -282,11 +356,14 @@ public class VariableDeclarationImpl extends PackageDefinitionElementImpl implem
       case AstPackage.VARIABLE_DECLARATION__MODIFIER:
         setModifier((VariableModifier)null);
         return;
+      case AstPackage.VARIABLE_DECLARATION__NAME:
+        setName(NAME_EDEFAULT);
+        return;
       case AstPackage.VARIABLE_DECLARATION__TYPE:
         setType((TypeSpecifier)null);
         return;
-      case AstPackage.VARIABLE_DECLARATION__ITEMS:
-        getItems().clear();
+      case AstPackage.VARIABLE_DECLARATION__INITIAL_VALUE:
+        setInitialValue((Expression)null);
         return;
     }
     super.eUnset(featureID);
@@ -304,12 +381,31 @@ public class VariableDeclarationImpl extends PackageDefinitionElementImpl implem
     {
       case AstPackage.VARIABLE_DECLARATION__MODIFIER:
         return modifier != null;
+      case AstPackage.VARIABLE_DECLARATION__NAME:
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case AstPackage.VARIABLE_DECLARATION__TYPE:
         return type != null;
-      case AstPackage.VARIABLE_DECLARATION__ITEMS:
-        return items != null && !items.isEmpty();
+      case AstPackage.VARIABLE_DECLARATION__INITIAL_VALUE:
+        return initialValue != null;
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (name: ");
+    result.append(name);
+    result.append(')');
+    return result.toString();
   }
 
 } //VariableDeclarationImpl

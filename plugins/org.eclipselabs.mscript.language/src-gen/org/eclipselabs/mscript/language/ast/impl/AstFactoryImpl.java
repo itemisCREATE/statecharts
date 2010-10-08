@@ -73,11 +73,14 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
       case AstPackage.PACKAGE_DEFINITION_ELEMENT: return createPackageDefinitionElement();
       case AstPackage.ENUMERATION_DEFINITION: return createEnumerationDefinition();
       case AstPackage.ENUMERATION_LITERAL_DECLARATION: return createEnumerationLiteralDeclaration();
+      case AstPackage.TYPE_DEFINITION: return createTypeDefinition();
+      case AstPackage.VARIABLE_DECLARATION: return createVariableDeclaration();
+      case AstPackage.VARIABLE_MODIFIER: return createVariableModifier();
       case AstPackage.RECORD_DEFINITION: return createRecordDefinition();
       case AstPackage.RECORD_FIELD_DECLARATION: return createRecordFieldDeclaration();
-      case AstPackage.RECORD_FIELD_DECLARATION_ITEM: return createRecordFieldDeclarationItem();
       case AstPackage.FUNCTION_DEFINITION: return createFunctionDefinition();
       case AstPackage.PARAMETER_DECLARATION: return createParameterDeclaration();
+      case AstPackage.CHECK_DEFINITION: return createCheckDefinition();
       case AstPackage.STATEMENT: return createStatement();
       case AstPackage.BLOCK: return createBlock();
       case AstPackage.FEATURE_CALL_STATEMENT: return createFeatureCallStatement();
@@ -86,11 +89,8 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
       case AstPackage.WHILE_STATEMENT: return createWhileStatement();
       case AstPackage.DO_WHILE_STATEMENT: return createDoWhileStatement();
       case AstPackage.FOREACH_STATEMENT: return createForeachStatement();
-      case AstPackage.VARIABLE_DECLARATION: return createVariableDeclaration();
-      case AstPackage.VARIABLE_MODIFIER: return createVariableModifier();
-      case AstPackage.VARIABLE_DECLARATION_ITEM: return createVariableDeclarationItem();
-      case AstPackage.TYPE_DEFINITION: return createTypeDefinition();
       case AstPackage.RETURN_STATEMENT: return createReturnStatement();
+      case AstPackage.CHECK_STATUS_STATEMENT: return createCheckStatusStatement();
       case AstPackage.TYPE_SPECIFIER: return createTypeSpecifier();
       case AstPackage.DATA_TYPE_SPECIFIER: return createDataTypeSpecifier();
       case AstPackage.PRIMITIVE_TYPE_SPECIFIER: return createPrimitiveTypeSpecifier();
@@ -158,6 +158,8 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
   {
     switch (eDataType.getClassifierID())
     {
+      case AstPackage.CHECK_STATUS_KIND:
+        return createCheckStatusKindFromString(eDataType, initialValue);
       case AstPackage.RELATIONAL_OPERATOR:
         return createRelationalOperatorFromString(eDataType, initialValue);
       case AstPackage.ADD_SUBTRACT_OPERATOR:
@@ -183,6 +185,8 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
   {
     switch (eDataType.getClassifierID())
     {
+      case AstPackage.CHECK_STATUS_KIND:
+        return convertCheckStatusKindToString(eDataType, instanceValue);
       case AstPackage.RELATIONAL_OPERATOR:
         return convertRelationalOperatorToString(eDataType, instanceValue);
       case AstPackage.ADD_SUBTRACT_OPERATOR:
@@ -258,6 +262,39 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  public TypeDefinition createTypeDefinition()
+  {
+    TypeDefinitionImpl typeDefinition = new TypeDefinitionImpl();
+    return typeDefinition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public VariableDeclaration createVariableDeclaration()
+  {
+    VariableDeclarationImpl variableDeclaration = new VariableDeclarationImpl();
+    return variableDeclaration;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public VariableModifier createVariableModifier()
+  {
+    VariableModifierImpl variableModifier = new VariableModifierImpl();
+    return variableModifier;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public RecordDefinition createRecordDefinition()
   {
     RecordDefinitionImpl recordDefinition = new RecordDefinitionImpl();
@@ -280,17 +317,6 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public RecordFieldDeclarationItem createRecordFieldDeclarationItem()
-  {
-    RecordFieldDeclarationItemImpl recordFieldDeclarationItem = new RecordFieldDeclarationItemImpl();
-    return recordFieldDeclarationItem;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public FunctionDefinition createFunctionDefinition()
   {
     FunctionDefinitionImpl functionDefinition = new FunctionDefinitionImpl();
@@ -306,6 +332,17 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
   {
     ParameterDeclarationImpl parameterDeclaration = new ParameterDeclarationImpl();
     return parameterDeclaration;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public CheckDefinition createCheckDefinition()
+  {
+    CheckDefinitionImpl checkDefinition = new CheckDefinitionImpl();
+    return checkDefinition;
   }
 
   /**
@@ -401,54 +438,21 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public VariableDeclaration createVariableDeclaration()
-  {
-    VariableDeclarationImpl variableDeclaration = new VariableDeclarationImpl();
-    return variableDeclaration;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public VariableModifier createVariableModifier()
-  {
-    VariableModifierImpl variableModifier = new VariableModifierImpl();
-    return variableModifier;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public VariableDeclarationItem createVariableDeclarationItem()
-  {
-    VariableDeclarationItemImpl variableDeclarationItem = new VariableDeclarationItemImpl();
-    return variableDeclarationItem;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public TypeDefinition createTypeDefinition()
-  {
-    TypeDefinitionImpl typeDefinition = new TypeDefinitionImpl();
-    return typeDefinition;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public ReturnStatement createReturnStatement()
   {
     ReturnStatementImpl returnStatement = new ReturnStatementImpl();
     return returnStatement;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public CheckStatusStatement createCheckStatusStatement()
+  {
+    CheckStatusStatementImpl checkStatusStatement = new CheckStatusStatementImpl();
+    return checkStatusStatement;
   }
 
   /**
@@ -1021,6 +1025,28 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
   {
     FeatureCallImpl featureCall = new FeatureCallImpl();
     return featureCall;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public CheckStatusKind createCheckStatusKindFromString(EDataType eDataType, String initialValue)
+  {
+    CheckStatusKind result = CheckStatusKind.get(initialValue);
+    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+    return result;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String convertCheckStatusKindToString(EDataType eDataType, Object instanceValue)
+  {
+    return instanceValue == null ? null : instanceValue.toString();
   }
 
   /**

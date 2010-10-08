@@ -12,64 +12,64 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipselabs.mscript.language.ast.AstPackage;
-import org.eclipselabs.mscript.language.ast.DataTypeSpecifier;
-import org.eclipselabs.mscript.language.ast.RecordFieldDeclaration;
+import org.eclipselabs.mscript.language.ast.CheckStatusKind;
+import org.eclipselabs.mscript.language.ast.CheckStatusStatement;
+import org.eclipselabs.mscript.language.ast.Expression;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Record Field Declaration</b></em>'.
+ * An implementation of the model object '<em><b>Check Status Statement</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.RecordFieldDeclarationImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.RecordFieldDeclarationImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.CheckStatusStatementImpl#getKind <em>Kind</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.CheckStatusStatementImpl#getMessage <em>Message</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class RecordFieldDeclarationImpl extends MinimalEObjectImpl.Container implements RecordFieldDeclaration
+public class CheckStatusStatementImpl extends StatementImpl implements CheckStatusStatement
 {
   /**
-   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+   * The default value of the '{@link #getKind() <em>Kind</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getName()
+   * @see #getKind()
    * @generated
    * @ordered
    */
-  protected static final String NAME_EDEFAULT = null;
+  protected static final CheckStatusKind KIND_EDEFAULT = CheckStatusKind.INFO;
 
   /**
-   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+   * The cached value of the '{@link #getKind() <em>Kind</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getName()
+   * @see #getKind()
    * @generated
    * @ordered
    */
-  protected String name = NAME_EDEFAULT;
+  protected CheckStatusKind kind = KIND_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
+   * The cached value of the '{@link #getMessage() <em>Message</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getType()
+   * @see #getMessage()
    * @generated
    * @ordered
    */
-  protected DataTypeSpecifier type;
+  protected Expression message;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected RecordFieldDeclarationImpl()
+  protected CheckStatusStatementImpl()
   {
     super();
   }
@@ -82,7 +82,7 @@ public class RecordFieldDeclarationImpl extends MinimalEObjectImpl.Container imp
   @Override
   protected EClass eStaticClass()
   {
-    return AstPackage.Literals.RECORD_FIELD_DECLARATION;
+    return AstPackage.Literals.CHECK_STATUS_STATEMENT;
   }
 
   /**
@@ -90,9 +90,9 @@ public class RecordFieldDeclarationImpl extends MinimalEObjectImpl.Container imp
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName()
+  public CheckStatusKind getKind()
   {
-    return name;
+    return kind;
   }
 
   /**
@@ -100,12 +100,12 @@ public class RecordFieldDeclarationImpl extends MinimalEObjectImpl.Container imp
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(String newName)
+  public void setKind(CheckStatusKind newKind)
   {
-    String oldName = name;
-    name = newName;
+    CheckStatusKind oldKind = kind;
+    kind = newKind == null ? KIND_EDEFAULT : newKind;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.RECORD_FIELD_DECLARATION__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.CHECK_STATUS_STATEMENT__KIND, oldKind, kind));
   }
 
   /**
@@ -113,9 +113,9 @@ public class RecordFieldDeclarationImpl extends MinimalEObjectImpl.Container imp
    * <!-- end-user-doc -->
    * @generated
    */
-  public DataTypeSpecifier getType()
+  public Expression getMessage()
   {
-    return type;
+    return message;
   }
 
   /**
@@ -123,13 +123,13 @@ public class RecordFieldDeclarationImpl extends MinimalEObjectImpl.Container imp
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetType(DataTypeSpecifier newType, NotificationChain msgs)
+  public NotificationChain basicSetMessage(Expression newMessage, NotificationChain msgs)
   {
-    DataTypeSpecifier oldType = type;
-    type = newType;
+    Expression oldMessage = message;
+    message = newMessage;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.RECORD_FIELD_DECLARATION__TYPE, oldType, newType);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.CHECK_STATUS_STATEMENT__MESSAGE, oldMessage, newMessage);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -140,20 +140,20 @@ public class RecordFieldDeclarationImpl extends MinimalEObjectImpl.Container imp
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setType(DataTypeSpecifier newType)
+  public void setMessage(Expression newMessage)
   {
-    if (newType != type)
+    if (newMessage != message)
     {
       NotificationChain msgs = null;
-      if (type != null)
-        msgs = ((InternalEObject)type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.RECORD_FIELD_DECLARATION__TYPE, null, msgs);
-      if (newType != null)
-        msgs = ((InternalEObject)newType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.RECORD_FIELD_DECLARATION__TYPE, null, msgs);
-      msgs = basicSetType(newType, msgs);
+      if (message != null)
+        msgs = ((InternalEObject)message).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.CHECK_STATUS_STATEMENT__MESSAGE, null, msgs);
+      if (newMessage != null)
+        msgs = ((InternalEObject)newMessage).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.CHECK_STATUS_STATEMENT__MESSAGE, null, msgs);
+      msgs = basicSetMessage(newMessage, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.RECORD_FIELD_DECLARATION__TYPE, newType, newType));
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.CHECK_STATUS_STATEMENT__MESSAGE, newMessage, newMessage));
   }
 
   /**
@@ -166,8 +166,8 @@ public class RecordFieldDeclarationImpl extends MinimalEObjectImpl.Container imp
   {
     switch (featureID)
     {
-      case AstPackage.RECORD_FIELD_DECLARATION__TYPE:
-        return basicSetType(null, msgs);
+      case AstPackage.CHECK_STATUS_STATEMENT__MESSAGE:
+        return basicSetMessage(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -182,10 +182,10 @@ public class RecordFieldDeclarationImpl extends MinimalEObjectImpl.Container imp
   {
     switch (featureID)
     {
-      case AstPackage.RECORD_FIELD_DECLARATION__NAME:
-        return getName();
-      case AstPackage.RECORD_FIELD_DECLARATION__TYPE:
-        return getType();
+      case AstPackage.CHECK_STATUS_STATEMENT__KIND:
+        return getKind();
+      case AstPackage.CHECK_STATUS_STATEMENT__MESSAGE:
+        return getMessage();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -200,11 +200,11 @@ public class RecordFieldDeclarationImpl extends MinimalEObjectImpl.Container imp
   {
     switch (featureID)
     {
-      case AstPackage.RECORD_FIELD_DECLARATION__NAME:
-        setName((String)newValue);
+      case AstPackage.CHECK_STATUS_STATEMENT__KIND:
+        setKind((CheckStatusKind)newValue);
         return;
-      case AstPackage.RECORD_FIELD_DECLARATION__TYPE:
-        setType((DataTypeSpecifier)newValue);
+      case AstPackage.CHECK_STATUS_STATEMENT__MESSAGE:
+        setMessage((Expression)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -220,11 +220,11 @@ public class RecordFieldDeclarationImpl extends MinimalEObjectImpl.Container imp
   {
     switch (featureID)
     {
-      case AstPackage.RECORD_FIELD_DECLARATION__NAME:
-        setName(NAME_EDEFAULT);
+      case AstPackage.CHECK_STATUS_STATEMENT__KIND:
+        setKind(KIND_EDEFAULT);
         return;
-      case AstPackage.RECORD_FIELD_DECLARATION__TYPE:
-        setType((DataTypeSpecifier)null);
+      case AstPackage.CHECK_STATUS_STATEMENT__MESSAGE:
+        setMessage((Expression)null);
         return;
     }
     super.eUnset(featureID);
@@ -240,10 +240,10 @@ public class RecordFieldDeclarationImpl extends MinimalEObjectImpl.Container imp
   {
     switch (featureID)
     {
-      case AstPackage.RECORD_FIELD_DECLARATION__NAME:
-        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case AstPackage.RECORD_FIELD_DECLARATION__TYPE:
-        return type != null;
+      case AstPackage.CHECK_STATUS_STATEMENT__KIND:
+        return kind != KIND_EDEFAULT;
+      case AstPackage.CHECK_STATUS_STATEMENT__MESSAGE:
+        return message != null;
     }
     return super.eIsSet(featureID);
   }
@@ -259,10 +259,10 @@ public class RecordFieldDeclarationImpl extends MinimalEObjectImpl.Container imp
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (name: ");
-    result.append(name);
+    result.append(" (kind: ");
+    result.append(kind);
     result.append(')');
     return result.toString();
   }
 
-} //RecordFieldDeclarationImpl
+} //CheckStatusStatementImpl
