@@ -24,6 +24,7 @@ import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.Block;
 import org.eclipselabs.mscript.language.ast.CheckDefinition;
 import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
+import org.eclipselabs.mscript.language.ast.PreconditionChain;
 
 /**
  * <!-- begin-user-doc -->
@@ -32,36 +33,16 @@ import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.CheckDefinitionImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.CheckDefinitionImpl#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.CheckDefinitionImpl#getPreconditionChain <em>Precondition Chain</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.CheckDefinitionImpl#getBody <em>Body</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class CheckDefinitionImpl extends PackageDefinitionElementImpl implements CheckDefinition
+public class CheckDefinitionImpl extends TypeDefinitionImpl implements CheckDefinition
 {
-  /**
-   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
-  protected static final String NAME_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
-  protected String name = NAME_EDEFAULT;
-
   /**
    * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
    * <!-- begin-user-doc -->
@@ -71,6 +52,16 @@ public class CheckDefinitionImpl extends PackageDefinitionElementImpl implements
    * @ordered
    */
   protected EList<ParameterDeclaration> parameters;
+
+  /**
+   * The cached value of the '{@link #getPreconditionChain() <em>Precondition Chain</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getPreconditionChain()
+   * @generated
+   * @ordered
+   */
+  protected PreconditionChain preconditionChain;
 
   /**
    * The cached value of the '{@link #getBody() <em>Body</em>}' containment reference.
@@ -108,29 +99,6 @@ public class CheckDefinitionImpl extends PackageDefinitionElementImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName()
-  {
-    return name;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setName(String newName)
-  {
-    String oldName = name;
-    name = newName;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.CHECK_DEFINITION__NAME, oldName, name));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EList<ParameterDeclaration> getParameters()
   {
     if (parameters == null)
@@ -138,6 +106,54 @@ public class CheckDefinitionImpl extends PackageDefinitionElementImpl implements
       parameters = new EObjectContainmentEList<ParameterDeclaration>(ParameterDeclaration.class, this, AstPackage.CHECK_DEFINITION__PARAMETERS);
     }
     return parameters;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public PreconditionChain getPreconditionChain()
+  {
+    return preconditionChain;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetPreconditionChain(PreconditionChain newPreconditionChain, NotificationChain msgs)
+  {
+    PreconditionChain oldPreconditionChain = preconditionChain;
+    preconditionChain = newPreconditionChain;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.CHECK_DEFINITION__PRECONDITION_CHAIN, oldPreconditionChain, newPreconditionChain);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setPreconditionChain(PreconditionChain newPreconditionChain)
+  {
+    if (newPreconditionChain != preconditionChain)
+    {
+      NotificationChain msgs = null;
+      if (preconditionChain != null)
+        msgs = ((InternalEObject)preconditionChain).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.CHECK_DEFINITION__PRECONDITION_CHAIN, null, msgs);
+      if (newPreconditionChain != null)
+        msgs = ((InternalEObject)newPreconditionChain).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.CHECK_DEFINITION__PRECONDITION_CHAIN, null, msgs);
+      msgs = basicSetPreconditionChain(newPreconditionChain, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.CHECK_DEFINITION__PRECONDITION_CHAIN, newPreconditionChain, newPreconditionChain));
   }
 
   /**
@@ -200,6 +216,8 @@ public class CheckDefinitionImpl extends PackageDefinitionElementImpl implements
     {
       case AstPackage.CHECK_DEFINITION__PARAMETERS:
         return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
+      case AstPackage.CHECK_DEFINITION__PRECONDITION_CHAIN:
+        return basicSetPreconditionChain(null, msgs);
       case AstPackage.CHECK_DEFINITION__BODY:
         return basicSetBody(null, msgs);
     }
@@ -216,10 +234,10 @@ public class CheckDefinitionImpl extends PackageDefinitionElementImpl implements
   {
     switch (featureID)
     {
-      case AstPackage.CHECK_DEFINITION__NAME:
-        return getName();
       case AstPackage.CHECK_DEFINITION__PARAMETERS:
         return getParameters();
+      case AstPackage.CHECK_DEFINITION__PRECONDITION_CHAIN:
+        return getPreconditionChain();
       case AstPackage.CHECK_DEFINITION__BODY:
         return getBody();
     }
@@ -237,12 +255,12 @@ public class CheckDefinitionImpl extends PackageDefinitionElementImpl implements
   {
     switch (featureID)
     {
-      case AstPackage.CHECK_DEFINITION__NAME:
-        setName((String)newValue);
-        return;
       case AstPackage.CHECK_DEFINITION__PARAMETERS:
         getParameters().clear();
         getParameters().addAll((Collection<? extends ParameterDeclaration>)newValue);
+        return;
+      case AstPackage.CHECK_DEFINITION__PRECONDITION_CHAIN:
+        setPreconditionChain((PreconditionChain)newValue);
         return;
       case AstPackage.CHECK_DEFINITION__BODY:
         setBody((Block)newValue);
@@ -261,11 +279,11 @@ public class CheckDefinitionImpl extends PackageDefinitionElementImpl implements
   {
     switch (featureID)
     {
-      case AstPackage.CHECK_DEFINITION__NAME:
-        setName(NAME_EDEFAULT);
-        return;
       case AstPackage.CHECK_DEFINITION__PARAMETERS:
         getParameters().clear();
+        return;
+      case AstPackage.CHECK_DEFINITION__PRECONDITION_CHAIN:
+        setPreconditionChain((PreconditionChain)null);
         return;
       case AstPackage.CHECK_DEFINITION__BODY:
         setBody((Block)null);
@@ -284,31 +302,14 @@ public class CheckDefinitionImpl extends PackageDefinitionElementImpl implements
   {
     switch (featureID)
     {
-      case AstPackage.CHECK_DEFINITION__NAME:
-        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case AstPackage.CHECK_DEFINITION__PARAMETERS:
         return parameters != null && !parameters.isEmpty();
+      case AstPackage.CHECK_DEFINITION__PRECONDITION_CHAIN:
+        return preconditionChain != null;
       case AstPackage.CHECK_DEFINITION__BODY:
         return body != null;
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (name: ");
-    result.append(name);
-    result.append(')');
-    return result.toString();
   }
 
 } //CheckDefinitionImpl

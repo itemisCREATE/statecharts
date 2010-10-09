@@ -15,9 +15,8 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getParameters <em>Parameters</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getPrecondition <em>Precondition</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getPreconditionChain <em>Precondition Chain</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getBody <em>Body</em>}</li>
  * </ul>
  * </p>
@@ -26,34 +25,8 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface FunctionDefinition extends PackageDefinitionElement
+public interface FunctionDefinition extends TypeDefinition
 {
-  /**
-   * Returns the value of the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Name</em>' attribute.
-   * @see #setName(String)
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getFunctionDefinition_Name()
-   * @model
-   * @generated
-   */
-  String getName();
-
-  /**
-   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getName <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Name</em>' attribute.
-   * @see #getName()
-   * @generated
-   */
-  void setName(String value);
-
   /**
    * Returns the value of the '<em><b>Parameters</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipselabs.mscript.language.ast.ParameterDeclaration}.
@@ -71,30 +44,30 @@ public interface FunctionDefinition extends PackageDefinitionElement
   EList<ParameterDeclaration> getParameters();
 
   /**
-   * Returns the value of the '<em><b>Precondition</b></em>' containment reference.
+   * Returns the value of the '<em><b>Precondition Chain</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Precondition</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Precondition Chain</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Precondition</em>' containment reference.
-   * @see #setPrecondition(Expression)
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getFunctionDefinition_Precondition()
+   * @return the value of the '<em>Precondition Chain</em>' containment reference.
+   * @see #setPreconditionChain(PreconditionChain)
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getFunctionDefinition_PreconditionChain()
    * @model containment="true"
    * @generated
    */
-  Expression getPrecondition();
+  PreconditionChain getPreconditionChain();
 
   /**
-   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getPrecondition <em>Precondition</em>}' containment reference.
+   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getPreconditionChain <em>Precondition Chain</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Precondition</em>' containment reference.
-   * @see #getPrecondition()
+   * @param value the new value of the '<em>Precondition Chain</em>' containment reference.
+   * @see #getPreconditionChain()
    * @generated
    */
-  void setPrecondition(Expression value);
+  void setPreconditionChain(PreconditionChain value);
 
   /**
    * Returns the value of the '<em><b>Body</b></em>' containment reference.

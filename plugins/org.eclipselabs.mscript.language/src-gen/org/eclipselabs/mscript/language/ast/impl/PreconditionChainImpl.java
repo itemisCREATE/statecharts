@@ -14,44 +14,46 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipselabs.mscript.language.ast.AstPackage;
-import org.eclipselabs.mscript.language.ast.EnumerationDefinition;
-import org.eclipselabs.mscript.language.ast.EnumerationLiteralDeclaration;
+import org.eclipselabs.mscript.language.ast.Expression;
+import org.eclipselabs.mscript.language.ast.PreconditionChain;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Enumeration Definition</b></em>'.
+ * An implementation of the model object '<em><b>Precondition Chain</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.EnumerationDefinitionImpl#getLiterals <em>Literals</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.PreconditionChainImpl#getPreconditions <em>Preconditions</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class EnumerationDefinitionImpl extends DataTypeDefinitionImpl implements EnumerationDefinition
+public class PreconditionChainImpl extends MinimalEObjectImpl.Container implements PreconditionChain
 {
   /**
-   * The cached value of the '{@link #getLiterals() <em>Literals</em>}' containment reference list.
+   * The cached value of the '{@link #getPreconditions() <em>Preconditions</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getLiterals()
+   * @see #getPreconditions()
    * @generated
    * @ordered
    */
-  protected EList<EnumerationLiteralDeclaration> literals;
+  protected EList<Expression> preconditions;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected EnumerationDefinitionImpl()
+  protected PreconditionChainImpl()
   {
     super();
   }
@@ -64,7 +66,7 @@ public class EnumerationDefinitionImpl extends DataTypeDefinitionImpl implements
   @Override
   protected EClass eStaticClass()
   {
-    return AstPackage.Literals.ENUMERATION_DEFINITION;
+    return AstPackage.Literals.PRECONDITION_CHAIN;
   }
 
   /**
@@ -72,13 +74,13 @@ public class EnumerationDefinitionImpl extends DataTypeDefinitionImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<EnumerationLiteralDeclaration> getLiterals()
+  public EList<Expression> getPreconditions()
   {
-    if (literals == null)
+    if (preconditions == null)
     {
-      literals = new EObjectContainmentEList<EnumerationLiteralDeclaration>(EnumerationLiteralDeclaration.class, this, AstPackage.ENUMERATION_DEFINITION__LITERALS);
+      preconditions = new EObjectContainmentEList<Expression>(Expression.class, this, AstPackage.PRECONDITION_CHAIN__PRECONDITIONS);
     }
-    return literals;
+    return preconditions;
   }
 
   /**
@@ -91,8 +93,8 @@ public class EnumerationDefinitionImpl extends DataTypeDefinitionImpl implements
   {
     switch (featureID)
     {
-      case AstPackage.ENUMERATION_DEFINITION__LITERALS:
-        return ((InternalEList<?>)getLiterals()).basicRemove(otherEnd, msgs);
+      case AstPackage.PRECONDITION_CHAIN__PRECONDITIONS:
+        return ((InternalEList<?>)getPreconditions()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -107,8 +109,8 @@ public class EnumerationDefinitionImpl extends DataTypeDefinitionImpl implements
   {
     switch (featureID)
     {
-      case AstPackage.ENUMERATION_DEFINITION__LITERALS:
-        return getLiterals();
+      case AstPackage.PRECONDITION_CHAIN__PRECONDITIONS:
+        return getPreconditions();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -124,9 +126,9 @@ public class EnumerationDefinitionImpl extends DataTypeDefinitionImpl implements
   {
     switch (featureID)
     {
-      case AstPackage.ENUMERATION_DEFINITION__LITERALS:
-        getLiterals().clear();
-        getLiterals().addAll((Collection<? extends EnumerationLiteralDeclaration>)newValue);
+      case AstPackage.PRECONDITION_CHAIN__PRECONDITIONS:
+        getPreconditions().clear();
+        getPreconditions().addAll((Collection<? extends Expression>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -142,8 +144,8 @@ public class EnumerationDefinitionImpl extends DataTypeDefinitionImpl implements
   {
     switch (featureID)
     {
-      case AstPackage.ENUMERATION_DEFINITION__LITERALS:
-        getLiterals().clear();
+      case AstPackage.PRECONDITION_CHAIN__PRECONDITIONS:
+        getPreconditions().clear();
         return;
     }
     super.eUnset(featureID);
@@ -159,10 +161,10 @@ public class EnumerationDefinitionImpl extends DataTypeDefinitionImpl implements
   {
     switch (featureID)
     {
-      case AstPackage.ENUMERATION_DEFINITION__LITERALS:
-        return literals != null && !literals.isEmpty();
+      case AstPackage.PRECONDITION_CHAIN__PRECONDITIONS:
+        return preconditions != null && !preconditions.isEmpty();
     }
     return super.eIsSet(featureID);
   }
 
-} //EnumerationDefinitionImpl
+} //PreconditionChainImpl

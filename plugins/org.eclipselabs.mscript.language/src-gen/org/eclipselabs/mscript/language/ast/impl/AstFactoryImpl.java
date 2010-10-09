@@ -71,16 +71,19 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
       case AstPackage.MSCRIPT: return createMscript();
       case AstPackage.PACKAGE_DEFINITION: return createPackageDefinition();
       case AstPackage.PACKAGE_DEFINITION_ELEMENT: return createPackageDefinitionElement();
+      case AstPackage.TYPE_DEFINITION: return createTypeDefinition();
+      case AstPackage.DATA_TYPE_DEFINITION: return createDataTypeDefinition();
       case AstPackage.ENUMERATION_DEFINITION: return createEnumerationDefinition();
       case AstPackage.ENUMERATION_LITERAL_DECLARATION: return createEnumerationLiteralDeclaration();
-      case AstPackage.TYPE_DEFINITION: return createTypeDefinition();
+      case AstPackage.TYPE_ALIAS_DEFINITION: return createTypeAliasDefinition();
       case AstPackage.VARIABLE_DECLARATION: return createVariableDeclaration();
       case AstPackage.VARIABLE_MODIFIER: return createVariableModifier();
       case AstPackage.RECORD_DEFINITION: return createRecordDefinition();
       case AstPackage.RECORD_FIELD_DECLARATION: return createRecordFieldDeclaration();
       case AstPackage.FUNCTION_DEFINITION: return createFunctionDefinition();
-      case AstPackage.PARAMETER_DECLARATION: return createParameterDeclaration();
       case AstPackage.CHECK_DEFINITION: return createCheckDefinition();
+      case AstPackage.PARAMETER_DECLARATION: return createParameterDeclaration();
+      case AstPackage.PRECONDITION_CHAIN: return createPreconditionChain();
       case AstPackage.STATEMENT: return createStatement();
       case AstPackage.BLOCK: return createBlock();
       case AstPackage.FEATURE_CALL_STATEMENT: return createFeatureCallStatement();
@@ -240,6 +243,28 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  public TypeDefinition createTypeDefinition()
+  {
+    TypeDefinitionImpl typeDefinition = new TypeDefinitionImpl();
+    return typeDefinition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public DataTypeDefinition createDataTypeDefinition()
+  {
+    DataTypeDefinitionImpl dataTypeDefinition = new DataTypeDefinitionImpl();
+    return dataTypeDefinition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EnumerationDefinition createEnumerationDefinition()
   {
     EnumerationDefinitionImpl enumerationDefinition = new EnumerationDefinitionImpl();
@@ -262,10 +287,10 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public TypeDefinition createTypeDefinition()
+  public TypeAliasDefinition createTypeAliasDefinition()
   {
-    TypeDefinitionImpl typeDefinition = new TypeDefinitionImpl();
-    return typeDefinition;
+    TypeAliasDefinitionImpl typeAliasDefinition = new TypeAliasDefinitionImpl();
+    return typeAliasDefinition;
   }
 
   /**
@@ -328,6 +353,17 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  public CheckDefinition createCheckDefinition()
+  {
+    CheckDefinitionImpl checkDefinition = new CheckDefinitionImpl();
+    return checkDefinition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public ParameterDeclaration createParameterDeclaration()
   {
     ParameterDeclarationImpl parameterDeclaration = new ParameterDeclarationImpl();
@@ -339,10 +375,10 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public CheckDefinition createCheckDefinition()
+  public PreconditionChain createPreconditionChain()
   {
-    CheckDefinitionImpl checkDefinition = new CheckDefinitionImpl();
-    return checkDefinition;
+    PreconditionChainImpl preconditionChain = new PreconditionChainImpl();
+    return preconditionChain;
   }
 
   /**

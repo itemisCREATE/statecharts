@@ -31,6 +31,7 @@ import org.eclipselabs.mscript.language.ast.CheckStatusStatement;
 import org.eclipselabs.mscript.language.ast.ComplexTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.ConditionalExpression;
 import org.eclipselabs.mscript.language.ast.ConditionalExpressionCase;
+import org.eclipselabs.mscript.language.ast.DataTypeDefinition;
 import org.eclipselabs.mscript.language.ast.DataTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.DoWhileStatement;
 import org.eclipselabs.mscript.language.ast.EndExpression;
@@ -68,6 +69,7 @@ import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
 import org.eclipselabs.mscript.language.ast.ParenthesizedExpression;
 import org.eclipselabs.mscript.language.ast.PowerExpression;
 import org.eclipselabs.mscript.language.ast.PowerOperator;
+import org.eclipselabs.mscript.language.ast.PreconditionChain;
 import org.eclipselabs.mscript.language.ast.PrimitiveTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.QualifiedName;
 import org.eclipselabs.mscript.language.ast.RangeExpression;
@@ -83,6 +85,7 @@ import org.eclipselabs.mscript.language.ast.StringLiteral;
 import org.eclipselabs.mscript.language.ast.StringTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.Subscript;
 import org.eclipselabs.mscript.language.ast.SymbolReference;
+import org.eclipselabs.mscript.language.ast.TypeAliasDefinition;
 import org.eclipselabs.mscript.language.ast.TypeDefinition;
 import org.eclipselabs.mscript.language.ast.TypeSpecifier;
 import org.eclipselabs.mscript.language.ast.UnaryMinusExpression;
@@ -131,6 +134,20 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass typeDefinitionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass dataTypeDefinitionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass enumerationDefinitionEClass = null;
 
   /**
@@ -145,7 +162,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass typeDefinitionEClass = null;
+  private EClass typeAliasDefinitionEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -187,6 +204,13 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass checkDefinitionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass parameterDeclarationEClass = null;
 
   /**
@@ -194,7 +218,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass checkDefinitionEClass = null;
+  private EClass preconditionChainEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -800,6 +824,36 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getTypeDefinition()
+  {
+    return typeDefinitionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getTypeDefinition_Name()
+  {
+    return (EAttribute)typeDefinitionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getDataTypeDefinition()
+  {
+    return dataTypeDefinitionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getEnumerationDefinition()
   {
     return enumerationDefinitionEClass;
@@ -810,19 +864,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getEnumerationDefinition_Name()
-  {
-    return (EAttribute)enumerationDefinitionEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EReference getEnumerationDefinition_Literals()
   {
-    return (EReference)enumerationDefinitionEClass.getEStructuralFeatures().get(1);
+    return (EReference)enumerationDefinitionEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -850,9 +894,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getTypeDefinition()
+  public EClass getTypeAliasDefinition()
   {
-    return typeDefinitionEClass;
+    return typeAliasDefinitionEClass;
   }
 
   /**
@@ -860,19 +904,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getTypeDefinition_Name()
+  public EReference getTypeAliasDefinition_Type()
   {
-    return (EAttribute)typeDefinitionEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getTypeDefinition_Type()
-  {
-    return (EReference)typeDefinitionEClass.getEStructuralFeatures().get(1);
+    return (EReference)typeAliasDefinitionEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -970,19 +1004,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getRecordDefinition_Name()
-  {
-    return (EAttribute)recordDefinitionEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EReference getRecordDefinition_Fields()
   {
-    return (EReference)recordDefinitionEClass.getEStructuralFeatures().get(1);
+    return (EReference)recordDefinitionEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1030,9 +1054,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getFunctionDefinition_Name()
+  public EReference getFunctionDefinition_Parameters()
   {
-    return (EAttribute)functionDefinitionEClass.getEStructuralFeatures().get(0);
+    return (EReference)functionDefinitionEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1040,7 +1064,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getFunctionDefinition_Parameters()
+  public EReference getFunctionDefinition_PreconditionChain()
   {
     return (EReference)functionDefinitionEClass.getEStructuralFeatures().get(1);
   }
@@ -1050,7 +1074,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getFunctionDefinition_Precondition()
+  public EReference getFunctionDefinition_Body()
   {
     return (EReference)functionDefinitionEClass.getEStructuralFeatures().get(2);
   }
@@ -1060,9 +1084,39 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getFunctionDefinition_Body()
+  public EClass getCheckDefinition()
   {
-    return (EReference)functionDefinitionEClass.getEStructuralFeatures().get(3);
+    return checkDefinitionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getCheckDefinition_Parameters()
+  {
+    return (EReference)checkDefinitionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getCheckDefinition_PreconditionChain()
+  {
+    return (EReference)checkDefinitionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getCheckDefinition_Body()
+  {
+    return (EReference)checkDefinitionEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -1110,9 +1164,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getCheckDefinition()
+  public EClass getPreconditionChain()
   {
-    return checkDefinitionEClass;
+    return preconditionChainEClass;
   }
 
   /**
@@ -1120,29 +1174,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getCheckDefinition_Name()
+  public EReference getPreconditionChain_Preconditions()
   {
-    return (EAttribute)checkDefinitionEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getCheckDefinition_Parameters()
-  {
-    return (EReference)checkDefinitionEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getCheckDefinition_Body()
-  {
-    return (EReference)checkDefinitionEClass.getEStructuralFeatures().get(2);
+    return (EReference)preconditionChainEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -2684,16 +2718,19 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
 
     packageDefinitionElementEClass = createEClass(PACKAGE_DEFINITION_ELEMENT);
 
+    typeDefinitionEClass = createEClass(TYPE_DEFINITION);
+    createEAttribute(typeDefinitionEClass, TYPE_DEFINITION__NAME);
+
+    dataTypeDefinitionEClass = createEClass(DATA_TYPE_DEFINITION);
+
     enumerationDefinitionEClass = createEClass(ENUMERATION_DEFINITION);
-    createEAttribute(enumerationDefinitionEClass, ENUMERATION_DEFINITION__NAME);
     createEReference(enumerationDefinitionEClass, ENUMERATION_DEFINITION__LITERALS);
 
     enumerationLiteralDeclarationEClass = createEClass(ENUMERATION_LITERAL_DECLARATION);
     createEAttribute(enumerationLiteralDeclarationEClass, ENUMERATION_LITERAL_DECLARATION__NAME);
 
-    typeDefinitionEClass = createEClass(TYPE_DEFINITION);
-    createEAttribute(typeDefinitionEClass, TYPE_DEFINITION__NAME);
-    createEReference(typeDefinitionEClass, TYPE_DEFINITION__TYPE);
+    typeAliasDefinitionEClass = createEClass(TYPE_ALIAS_DEFINITION);
+    createEReference(typeAliasDefinitionEClass, TYPE_ALIAS_DEFINITION__TYPE);
 
     variableDeclarationEClass = createEClass(VARIABLE_DECLARATION);
     createEReference(variableDeclarationEClass, VARIABLE_DECLARATION__MODIFIER);
@@ -2706,7 +2743,6 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     createEAttribute(variableModifierEClass, VARIABLE_MODIFIER__CONSTANT);
 
     recordDefinitionEClass = createEClass(RECORD_DEFINITION);
-    createEAttribute(recordDefinitionEClass, RECORD_DEFINITION__NAME);
     createEReference(recordDefinitionEClass, RECORD_DEFINITION__FIELDS);
 
     recordFieldDeclarationEClass = createEClass(RECORD_FIELD_DECLARATION);
@@ -2714,20 +2750,22 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     createEReference(recordFieldDeclarationEClass, RECORD_FIELD_DECLARATION__TYPE);
 
     functionDefinitionEClass = createEClass(FUNCTION_DEFINITION);
-    createEAttribute(functionDefinitionEClass, FUNCTION_DEFINITION__NAME);
     createEReference(functionDefinitionEClass, FUNCTION_DEFINITION__PARAMETERS);
-    createEReference(functionDefinitionEClass, FUNCTION_DEFINITION__PRECONDITION);
+    createEReference(functionDefinitionEClass, FUNCTION_DEFINITION__PRECONDITION_CHAIN);
     createEReference(functionDefinitionEClass, FUNCTION_DEFINITION__BODY);
+
+    checkDefinitionEClass = createEClass(CHECK_DEFINITION);
+    createEReference(checkDefinitionEClass, CHECK_DEFINITION__PARAMETERS);
+    createEReference(checkDefinitionEClass, CHECK_DEFINITION__PRECONDITION_CHAIN);
+    createEReference(checkDefinitionEClass, CHECK_DEFINITION__BODY);
 
     parameterDeclarationEClass = createEClass(PARAMETER_DECLARATION);
     createEAttribute(parameterDeclarationEClass, PARAMETER_DECLARATION__REFERENCE);
     createEAttribute(parameterDeclarationEClass, PARAMETER_DECLARATION__NAME);
     createEReference(parameterDeclarationEClass, PARAMETER_DECLARATION__TYPE);
 
-    checkDefinitionEClass = createEClass(CHECK_DEFINITION);
-    createEAttribute(checkDefinitionEClass, CHECK_DEFINITION__NAME);
-    createEReference(checkDefinitionEClass, CHECK_DEFINITION__PARAMETERS);
-    createEReference(checkDefinitionEClass, CHECK_DEFINITION__BODY);
+    preconditionChainEClass = createEClass(PRECONDITION_CHAIN);
+    createEReference(preconditionChainEClass, PRECONDITION_CHAIN__PRECONDITIONS);
 
     statementEClass = createEClass(STATEMENT);
 
@@ -2974,14 +3012,16 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
 
     // Add supertypes to classes
     packageDefinitionEClass.getESuperTypes().add(this.getPackageDefinitionElement());
-    enumerationDefinitionEClass.getESuperTypes().add(this.getPackageDefinitionElement());
     typeDefinitionEClass.getESuperTypes().add(this.getPackageDefinitionElement());
     typeDefinitionEClass.getESuperTypes().add(this.getStatement());
+    dataTypeDefinitionEClass.getESuperTypes().add(this.getTypeDefinition());
+    enumerationDefinitionEClass.getESuperTypes().add(this.getDataTypeDefinition());
+    typeAliasDefinitionEClass.getESuperTypes().add(this.getDataTypeDefinition());
     variableDeclarationEClass.getESuperTypes().add(this.getPackageDefinitionElement());
     variableDeclarationEClass.getESuperTypes().add(this.getStatement());
-    recordDefinitionEClass.getESuperTypes().add(this.getPackageDefinitionElement());
-    functionDefinitionEClass.getESuperTypes().add(this.getPackageDefinitionElement());
-    checkDefinitionEClass.getESuperTypes().add(this.getPackageDefinitionElement());
+    recordDefinitionEClass.getESuperTypes().add(this.getDataTypeDefinition());
+    functionDefinitionEClass.getESuperTypes().add(this.getTypeDefinition());
+    checkDefinitionEClass.getESuperTypes().add(this.getTypeDefinition());
     blockEClass.getESuperTypes().add(this.getStatement());
     featureCallStatementEClass.getESuperTypes().add(this.getStatement());
     ifStatementEClass.getESuperTypes().add(this.getStatement());
@@ -3038,16 +3078,19 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
 
     initEClass(packageDefinitionElementEClass, PackageDefinitionElement.class, "PackageDefinitionElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
+    initEClass(typeDefinitionEClass, TypeDefinition.class, "TypeDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getTypeDefinition_Name(), ecorePackage.getEString(), "name", null, 0, 1, TypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(dataTypeDefinitionEClass, DataTypeDefinition.class, "DataTypeDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
     initEClass(enumerationDefinitionEClass, EnumerationDefinition.class, "EnumerationDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getEnumerationDefinition_Name(), ecorePackage.getEString(), "name", null, 0, 1, EnumerationDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEnumerationDefinition_Literals(), this.getEnumerationLiteralDeclaration(), null, "literals", null, 0, -1, EnumerationDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(enumerationLiteralDeclarationEClass, EnumerationLiteralDeclaration.class, "EnumerationLiteralDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEnumerationLiteralDeclaration_Name(), ecorePackage.getEString(), "name", null, 0, 1, EnumerationLiteralDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(typeDefinitionEClass, TypeDefinition.class, "TypeDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getTypeDefinition_Name(), ecorePackage.getEString(), "name", null, 0, 1, TypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getTypeDefinition_Type(), this.getPrimitiveTypeSpecifier(), null, "type", null, 0, 1, TypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(typeAliasDefinitionEClass, TypeAliasDefinition.class, "TypeAliasDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getTypeAliasDefinition_Type(), this.getPrimitiveTypeSpecifier(), null, "type", null, 0, 1, TypeAliasDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(variableDeclarationEClass, VariableDeclaration.class, "VariableDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getVariableDeclaration_Modifier(), this.getVariableModifier(), null, "modifier", null, 0, 1, VariableDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3060,7 +3103,6 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     initEAttribute(getVariableModifier_Constant(), ecorePackage.getEString(), "Constant", null, 0, 1, VariableModifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(recordDefinitionEClass, RecordDefinition.class, "RecordDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getRecordDefinition_Name(), ecorePackage.getEString(), "name", null, 0, 1, RecordDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getRecordDefinition_Fields(), this.getRecordFieldDeclaration(), null, "fields", null, 0, -1, RecordDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(recordFieldDeclarationEClass, RecordFieldDeclaration.class, "RecordFieldDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -3068,20 +3110,22 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     initEReference(getRecordFieldDeclaration_Type(), this.getDataTypeSpecifier(), null, "type", null, 0, 1, RecordFieldDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(functionDefinitionEClass, FunctionDefinition.class, "FunctionDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getFunctionDefinition_Name(), ecorePackage.getEString(), "name", null, 0, 1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getFunctionDefinition_Parameters(), this.getParameterDeclaration(), null, "parameters", null, 0, -1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getFunctionDefinition_Precondition(), this.getExpression(), null, "precondition", null, 0, 1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getFunctionDefinition_PreconditionChain(), this.getPreconditionChain(), null, "preconditionChain", null, 0, 1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getFunctionDefinition_Body(), this.getBlock(), null, "body", null, 0, 1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(checkDefinitionEClass, CheckDefinition.class, "CheckDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getCheckDefinition_Parameters(), this.getParameterDeclaration(), null, "parameters", null, 0, -1, CheckDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getCheckDefinition_PreconditionChain(), this.getPreconditionChain(), null, "preconditionChain", null, 0, 1, CheckDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getCheckDefinition_Body(), this.getBlock(), null, "body", null, 0, 1, CheckDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(parameterDeclarationEClass, ParameterDeclaration.class, "ParameterDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getParameterDeclaration_Reference(), ecorePackage.getEBoolean(), "reference", null, 0, 1, ParameterDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getParameterDeclaration_Name(), ecorePackage.getEString(), "name", null, 0, 1, ParameterDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getParameterDeclaration_Type(), this.getTypeSpecifier(), null, "type", null, 0, 1, ParameterDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(checkDefinitionEClass, CheckDefinition.class, "CheckDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getCheckDefinition_Name(), ecorePackage.getEString(), "name", null, 0, 1, CheckDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getCheckDefinition_Parameters(), this.getParameterDeclaration(), null, "parameters", null, 0, -1, CheckDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getCheckDefinition_Body(), this.getBlock(), null, "body", null, 0, 1, CheckDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(preconditionChainEClass, PreconditionChain.class, "PreconditionChain", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getPreconditionChain_Preconditions(), this.getExpression(), null, "preconditions", null, 0, -1, PreconditionChain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(statementEClass, Statement.class, "Statement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

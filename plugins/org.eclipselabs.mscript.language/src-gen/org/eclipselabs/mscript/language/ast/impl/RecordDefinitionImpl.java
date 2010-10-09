@@ -7,15 +7,12 @@ package org.eclipselabs.mscript.language.ast.impl;
 
 import java.util.Collection;
 
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -31,35 +28,14 @@ import org.eclipselabs.mscript.language.ast.RecordFieldDeclaration;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.RecordDefinitionImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.RecordDefinitionImpl#getFields <em>Fields</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class RecordDefinitionImpl extends PackageDefinitionElementImpl implements RecordDefinition
+public class RecordDefinitionImpl extends DataTypeDefinitionImpl implements RecordDefinition
 {
-  /**
-   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
-  protected static final String NAME_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
-  protected String name = NAME_EDEFAULT;
-
   /**
    * The cached value of the '{@link #getFields() <em>Fields</em>}' containment reference list.
    * <!-- begin-user-doc -->
@@ -89,29 +65,6 @@ public class RecordDefinitionImpl extends PackageDefinitionElementImpl implement
   protected EClass eStaticClass()
   {
     return AstPackage.Literals.RECORD_DEFINITION;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public String getName()
-  {
-    return name;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setName(String newName)
-  {
-    String oldName = name;
-    name = newName;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.RECORD_DEFINITION__NAME, oldName, name));
   }
 
   /**
@@ -154,8 +107,6 @@ public class RecordDefinitionImpl extends PackageDefinitionElementImpl implement
   {
     switch (featureID)
     {
-      case AstPackage.RECORD_DEFINITION__NAME:
-        return getName();
       case AstPackage.RECORD_DEFINITION__FIELDS:
         return getFields();
     }
@@ -173,9 +124,6 @@ public class RecordDefinitionImpl extends PackageDefinitionElementImpl implement
   {
     switch (featureID)
     {
-      case AstPackage.RECORD_DEFINITION__NAME:
-        setName((String)newValue);
-        return;
       case AstPackage.RECORD_DEFINITION__FIELDS:
         getFields().clear();
         getFields().addAll((Collection<? extends RecordFieldDeclaration>)newValue);
@@ -194,9 +142,6 @@ public class RecordDefinitionImpl extends PackageDefinitionElementImpl implement
   {
     switch (featureID)
     {
-      case AstPackage.RECORD_DEFINITION__NAME:
-        setName(NAME_EDEFAULT);
-        return;
       case AstPackage.RECORD_DEFINITION__FIELDS:
         getFields().clear();
         return;
@@ -214,29 +159,10 @@ public class RecordDefinitionImpl extends PackageDefinitionElementImpl implement
   {
     switch (featureID)
     {
-      case AstPackage.RECORD_DEFINITION__NAME:
-        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case AstPackage.RECORD_DEFINITION__FIELDS:
         return fields != null && !fields.isEmpty();
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (name: ");
-    result.append(name);
-    result.append(')');
-    return result.toString();
   }
 
 } //RecordDefinitionImpl

@@ -53,6 +53,24 @@ public interface AstFactory extends EFactory
   PackageDefinitionElement createPackageDefinitionElement();
 
   /**
+   * Returns a new object of class '<em>Type Definition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Type Definition</em>'.
+   * @generated
+   */
+  TypeDefinition createTypeDefinition();
+
+  /**
+   * Returns a new object of class '<em>Data Type Definition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Data Type Definition</em>'.
+   * @generated
+   */
+  DataTypeDefinition createDataTypeDefinition();
+
+  /**
    * Returns a new object of class '<em>Enumeration Definition</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -71,13 +89,13 @@ public interface AstFactory extends EFactory
   EnumerationLiteralDeclaration createEnumerationLiteralDeclaration();
 
   /**
-   * Returns a new object of class '<em>Type Definition</em>'.
+   * Returns a new object of class '<em>Type Alias Definition</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Type Definition</em>'.
+   * @return a new object of class '<em>Type Alias Definition</em>'.
    * @generated
    */
-  TypeDefinition createTypeDefinition();
+  TypeAliasDefinition createTypeAliasDefinition();
 
   /**
    * Returns a new object of class '<em>Variable Declaration</em>'.
@@ -125,6 +143,15 @@ public interface AstFactory extends EFactory
   FunctionDefinition createFunctionDefinition();
 
   /**
+   * Returns a new object of class '<em>Check Definition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Check Definition</em>'.
+   * @generated
+   */
+  CheckDefinition createCheckDefinition();
+
+  /**
    * Returns a new object of class '<em>Parameter Declaration</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -134,13 +161,13 @@ public interface AstFactory extends EFactory
   ParameterDeclaration createParameterDeclaration();
 
   /**
-   * Returns a new object of class '<em>Check Definition</em>'.
+   * Returns a new object of class '<em>Precondition Chain</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Check Definition</em>'.
+   * @return a new object of class '<em>Precondition Chain</em>'.
    * @generated
    */
-  CheckDefinition createCheckDefinition();
+  PreconditionChain createPreconditionChain();
 
   /**
    * Returns a new object of class '<em>Statement</em>'.

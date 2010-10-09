@@ -15,8 +15,8 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.CheckDefinition#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.CheckDefinition#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.CheckDefinition#getPreconditionChain <em>Precondition Chain</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.CheckDefinition#getBody <em>Body</em>}</li>
  * </ul>
  * </p>
@@ -25,34 +25,8 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface CheckDefinition extends PackageDefinitionElement
+public interface CheckDefinition extends TypeDefinition
 {
-  /**
-   * Returns the value of the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Name</em>' attribute.
-   * @see #setName(String)
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getCheckDefinition_Name()
-   * @model
-   * @generated
-   */
-  String getName();
-
-  /**
-   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.CheckDefinition#getName <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Name</em>' attribute.
-   * @see #getName()
-   * @generated
-   */
-  void setName(String value);
-
   /**
    * Returns the value of the '<em><b>Parameters</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipselabs.mscript.language.ast.ParameterDeclaration}.
@@ -68,6 +42,32 @@ public interface CheckDefinition extends PackageDefinitionElement
    * @generated
    */
   EList<ParameterDeclaration> getParameters();
+
+  /**
+   * Returns the value of the '<em><b>Precondition Chain</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Precondition Chain</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Precondition Chain</em>' containment reference.
+   * @see #setPreconditionChain(PreconditionChain)
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getCheckDefinition_PreconditionChain()
+   * @model containment="true"
+   * @generated
+   */
+  PreconditionChain getPreconditionChain();
+
+  /**
+   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.CheckDefinition#getPreconditionChain <em>Precondition Chain</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Precondition Chain</em>' containment reference.
+   * @see #getPreconditionChain()
+   * @generated
+   */
+  void setPreconditionChain(PreconditionChain value);
 
   /**
    * Returns the value of the '<em><b>Body</b></em>' containment reference.

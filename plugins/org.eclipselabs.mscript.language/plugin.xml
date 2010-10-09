@@ -7,7 +7,7 @@
     <package 
        uri = "http://www.eclipselabs.org/Mscript/1.0.0/AST" 
        class = "org.eclipselabs.mscript.language.ast.AstPackage"
-       genModel = "org/eclipselabs/damos/del/Mscript.genmodel" /> 
+       genModel = "org/eclipselabs/mscript/language/Mscript.genmodel" /> 
 	
   </extension>
 

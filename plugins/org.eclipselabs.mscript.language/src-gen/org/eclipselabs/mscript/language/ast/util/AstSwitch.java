@@ -117,11 +117,33 @@ public class AstSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case AstPackage.TYPE_DEFINITION:
+      {
+        TypeDefinition typeDefinition = (TypeDefinition)theEObject;
+        T result = caseTypeDefinition(typeDefinition);
+        if (result == null) result = casePackageDefinitionElement(typeDefinition);
+        if (result == null) result = caseStatement(typeDefinition);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AstPackage.DATA_TYPE_DEFINITION:
+      {
+        DataTypeDefinition dataTypeDefinition = (DataTypeDefinition)theEObject;
+        T result = caseDataTypeDefinition(dataTypeDefinition);
+        if (result == null) result = caseTypeDefinition(dataTypeDefinition);
+        if (result == null) result = casePackageDefinitionElement(dataTypeDefinition);
+        if (result == null) result = caseStatement(dataTypeDefinition);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case AstPackage.ENUMERATION_DEFINITION:
       {
         EnumerationDefinition enumerationDefinition = (EnumerationDefinition)theEObject;
         T result = caseEnumerationDefinition(enumerationDefinition);
+        if (result == null) result = caseDataTypeDefinition(enumerationDefinition);
+        if (result == null) result = caseTypeDefinition(enumerationDefinition);
         if (result == null) result = casePackageDefinitionElement(enumerationDefinition);
+        if (result == null) result = caseStatement(enumerationDefinition);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -132,12 +154,14 @@ public class AstSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AstPackage.TYPE_DEFINITION:
+      case AstPackage.TYPE_ALIAS_DEFINITION:
       {
-        TypeDefinition typeDefinition = (TypeDefinition)theEObject;
-        T result = caseTypeDefinition(typeDefinition);
-        if (result == null) result = casePackageDefinitionElement(typeDefinition);
-        if (result == null) result = caseStatement(typeDefinition);
+        TypeAliasDefinition typeAliasDefinition = (TypeAliasDefinition)theEObject;
+        T result = caseTypeAliasDefinition(typeAliasDefinition);
+        if (result == null) result = caseDataTypeDefinition(typeAliasDefinition);
+        if (result == null) result = caseTypeDefinition(typeAliasDefinition);
+        if (result == null) result = casePackageDefinitionElement(typeAliasDefinition);
+        if (result == null) result = caseStatement(typeAliasDefinition);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -161,7 +185,10 @@ public class AstSwitch<T>
       {
         RecordDefinition recordDefinition = (RecordDefinition)theEObject;
         T result = caseRecordDefinition(recordDefinition);
+        if (result == null) result = caseDataTypeDefinition(recordDefinition);
+        if (result == null) result = caseTypeDefinition(recordDefinition);
         if (result == null) result = casePackageDefinitionElement(recordDefinition);
+        if (result == null) result = caseStatement(recordDefinition);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -176,7 +203,19 @@ public class AstSwitch<T>
       {
         FunctionDefinition functionDefinition = (FunctionDefinition)theEObject;
         T result = caseFunctionDefinition(functionDefinition);
+        if (result == null) result = caseTypeDefinition(functionDefinition);
         if (result == null) result = casePackageDefinitionElement(functionDefinition);
+        if (result == null) result = caseStatement(functionDefinition);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AstPackage.CHECK_DEFINITION:
+      {
+        CheckDefinition checkDefinition = (CheckDefinition)theEObject;
+        T result = caseCheckDefinition(checkDefinition);
+        if (result == null) result = caseTypeDefinition(checkDefinition);
+        if (result == null) result = casePackageDefinitionElement(checkDefinition);
+        if (result == null) result = caseStatement(checkDefinition);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -187,11 +226,10 @@ public class AstSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AstPackage.CHECK_DEFINITION:
+      case AstPackage.PRECONDITION_CHAIN:
       {
-        CheckDefinition checkDefinition = (CheckDefinition)theEObject;
-        T result = caseCheckDefinition(checkDefinition);
-        if (result == null) result = casePackageDefinitionElement(checkDefinition);
+        PreconditionChain preconditionChain = (PreconditionChain)theEObject;
+        T result = casePreconditionChain(preconditionChain);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -754,6 +792,38 @@ public class AstSwitch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>Type Definition</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Type Definition</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseTypeDefinition(TypeDefinition object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Data Type Definition</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Data Type Definition</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseDataTypeDefinition(DataTypeDefinition object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>Enumeration Definition</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -786,17 +856,17 @@ public class AstSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Type Definition</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Type Alias Definition</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Type Definition</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Type Alias Definition</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseTypeDefinition(TypeDefinition object)
+  public T caseTypeAliasDefinition(TypeAliasDefinition object)
   {
     return null;
   }
@@ -882,6 +952,22 @@ public class AstSwitch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>Check Definition</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Check Definition</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseCheckDefinition(CheckDefinition object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>Parameter Declaration</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -898,17 +984,17 @@ public class AstSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Check Definition</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Precondition Chain</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Check Definition</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Precondition Chain</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseCheckDefinition(CheckDefinition object)
+  public T casePreconditionChain(PreconditionChain object)
   {
     return null;
   }

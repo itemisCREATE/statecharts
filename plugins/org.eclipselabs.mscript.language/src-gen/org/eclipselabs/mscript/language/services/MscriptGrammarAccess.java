@@ -76,42 +76,74 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "PackageDefinitionElement");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cPackageDefinitionParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cEnumerationDefinitionParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		private final RuleCall cRecordDefinitionParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
-		private final RuleCall cFunctionDefinitionParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
-		private final RuleCall cCheckDefinitionParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
-		private final RuleCall cTypeDefinitionParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
-		private final RuleCall cVariableDeclarationParserRuleCall_6 = (RuleCall)cAlternatives.eContents().get(6);
+		private final RuleCall cTypeDefinitionParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cVariableDeclarationParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//PackageDefinitionElement:
-		//	PackageDefinition | EnumerationDefinition | RecordDefinition | FunctionDefinition | CheckDefinition | TypeDefinition |
-		//	VariableDeclaration;
+		//	PackageDefinition | TypeDefinition | VariableDeclaration;
 		public ParserRule getRule() { return rule; }
 
-		//PackageDefinition | EnumerationDefinition | RecordDefinition | FunctionDefinition | CheckDefinition | TypeDefinition |
-		//VariableDeclaration
+		//PackageDefinition | TypeDefinition | VariableDeclaration
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//PackageDefinition
 		public RuleCall getPackageDefinitionParserRuleCall_0() { return cPackageDefinitionParserRuleCall_0; }
 
-		//EnumerationDefinition
-		public RuleCall getEnumerationDefinitionParserRuleCall_1() { return cEnumerationDefinitionParserRuleCall_1; }
-
-		//RecordDefinition
-		public RuleCall getRecordDefinitionParserRuleCall_2() { return cRecordDefinitionParserRuleCall_2; }
-
-		//FunctionDefinition
-		public RuleCall getFunctionDefinitionParserRuleCall_3() { return cFunctionDefinitionParserRuleCall_3; }
-
-		//CheckDefinition
-		public RuleCall getCheckDefinitionParserRuleCall_4() { return cCheckDefinitionParserRuleCall_4; }
-
 		//TypeDefinition
-		public RuleCall getTypeDefinitionParserRuleCall_5() { return cTypeDefinitionParserRuleCall_5; }
+		public RuleCall getTypeDefinitionParserRuleCall_1() { return cTypeDefinitionParserRuleCall_1; }
 
 		//VariableDeclaration
-		public RuleCall getVariableDeclarationParserRuleCall_6() { return cVariableDeclarationParserRuleCall_6; }
+		public RuleCall getVariableDeclarationParserRuleCall_2() { return cVariableDeclarationParserRuleCall_2; }
+	}
+
+	public class TypeDefinitionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TypeDefinition");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cDataTypeDefinitionParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cFunctionDefinitionParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cCheckDefinitionParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		
+		//TypeDefinition:
+		//	DataTypeDefinition | FunctionDefinition | CheckDefinition;
+		public ParserRule getRule() { return rule; }
+
+		//DataTypeDefinition | FunctionDefinition | CheckDefinition
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//DataTypeDefinition
+		public RuleCall getDataTypeDefinitionParserRuleCall_0() { return cDataTypeDefinitionParserRuleCall_0; }
+
+		//FunctionDefinition
+		public RuleCall getFunctionDefinitionParserRuleCall_1() { return cFunctionDefinitionParserRuleCall_1; }
+
+		//CheckDefinition
+		public RuleCall getCheckDefinitionParserRuleCall_2() { return cCheckDefinitionParserRuleCall_2; }
+	}
+
+	public class DataTypeDefinitionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DataTypeDefinition");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cEnumerationDefinitionParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cRecordDefinitionParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cTypeAliasDefinitionParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		
+		/// *
+		// * DataTypeDefinition
+		// * /DataTypeDefinition:
+		//	EnumerationDefinition | RecordDefinition | TypeAliasDefinition;
+		public ParserRule getRule() { return rule; }
+
+		//EnumerationDefinition | RecordDefinition | TypeAliasDefinition
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//EnumerationDefinition
+		public RuleCall getEnumerationDefinitionParserRuleCall_0() { return cEnumerationDefinitionParserRuleCall_0; }
+
+		//RecordDefinition
+		public RuleCall getRecordDefinitionParserRuleCall_1() { return cRecordDefinitionParserRuleCall_1; }
+
+		//TypeAliasDefinition
+		public RuleCall getTypeAliasDefinitionParserRuleCall_2() { return cTypeAliasDefinitionParserRuleCall_2; }
 	}
 
 	public class EnumerationDefinitionElements extends AbstractParserRuleElementFinder {
@@ -193,8 +225,8 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getNameKeywordIDParserRuleCall_0() { return cNameKeywordIDParserRuleCall_0; }
 	}
 
-	public class TypeDefinitionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TypeDefinition");
+	public class TypeAliasDefinitionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TypeAliasDefinition");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cTypeKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -206,7 +238,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		
 		/// *
 		// * TypeDefinition
-		// * /TypeDefinition:
+		// * /TypeAliasDefinition:
 		//	"type" name=KeywordID "=" type=PrimitiveTypeSpecifier ";";
 		public ParserRule getRule() { return rule; }
 
@@ -428,8 +460,8 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightParenthesisKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
 		private final Keyword cPreKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
-		private final Assignment cPreconditionAssignment_5_1 = (Assignment)cGroup_5.eContents().get(1);
-		private final RuleCall cPreconditionExpressionParserRuleCall_5_1_0 = (RuleCall)cPreconditionAssignment_5_1.eContents().get(0);
+		private final Assignment cPreconditionChainAssignment_5_1 = (Assignment)cGroup_5.eContents().get(1);
+		private final RuleCall cPreconditionChainPreconditionChainParserRuleCall_5_1_0 = (RuleCall)cPreconditionChainAssignment_5_1.eContents().get(0);
 		private final Assignment cBodyAssignment_6 = (Assignment)cGroup.eContents().get(6);
 		private final RuleCall cBodyBlockParserRuleCall_6_0 = (RuleCall)cBodyAssignment_6.eContents().get(0);
 		
@@ -437,11 +469,11 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		// * Function
 		// * /FunctionDefinition:
 		//	"func" name=KeywordID "(" (parameters+=ParameterDeclaration ("," parameters+=ParameterDeclaration)*)? ")" ("pre"
-		//	precondition=Expression)? body=Block;
+		//	preconditionChain=PreconditionChain)? body=Block;
 		public ParserRule getRule() { return rule; }
 
 		//"func" name=KeywordID "(" (parameters+=ParameterDeclaration ("," parameters+=ParameterDeclaration)*)? ")" ("pre"
-		//precondition=Expression)? body=Block
+		//preconditionChain=PreconditionChain)? body=Block
 		public Group getGroup() { return cGroup; }
 
 		//"func"
@@ -480,17 +512,103 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		//")"
 		public Keyword getRightParenthesisKeyword_4() { return cRightParenthesisKeyword_4; }
 
-		//("pre" precondition=Expression)?
+		//("pre" preconditionChain=PreconditionChain)?
 		public Group getGroup_5() { return cGroup_5; }
 
 		//"pre"
 		public Keyword getPreKeyword_5_0() { return cPreKeyword_5_0; }
 
-		//precondition=Expression
-		public Assignment getPreconditionAssignment_5_1() { return cPreconditionAssignment_5_1; }
+		//preconditionChain=PreconditionChain
+		public Assignment getPreconditionChainAssignment_5_1() { return cPreconditionChainAssignment_5_1; }
 
-		//Expression
-		public RuleCall getPreconditionExpressionParserRuleCall_5_1_0() { return cPreconditionExpressionParserRuleCall_5_1_0; }
+		//PreconditionChain
+		public RuleCall getPreconditionChainPreconditionChainParserRuleCall_5_1_0() { return cPreconditionChainPreconditionChainParserRuleCall_5_1_0; }
+
+		//body=Block
+		public Assignment getBodyAssignment_6() { return cBodyAssignment_6; }
+
+		//Block
+		public RuleCall getBodyBlockParserRuleCall_6_0() { return cBodyBlockParserRuleCall_6_0; }
+	}
+
+	public class CheckDefinitionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "CheckDefinition");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cCheckKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameKeywordIDParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Keyword cLeftParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Assignment cParametersAssignment_3_0 = (Assignment)cGroup_3.eContents().get(0);
+		private final RuleCall cParametersParameterDeclarationParserRuleCall_3_0_0 = (RuleCall)cParametersAssignment_3_0.eContents().get(0);
+		private final Group cGroup_3_1 = (Group)cGroup_3.eContents().get(1);
+		private final Keyword cCommaKeyword_3_1_0 = (Keyword)cGroup_3_1.eContents().get(0);
+		private final Assignment cParametersAssignment_3_1_1 = (Assignment)cGroup_3_1.eContents().get(1);
+		private final RuleCall cParametersParameterDeclarationParserRuleCall_3_1_1_0 = (RuleCall)cParametersAssignment_3_1_1.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
+		private final Keyword cPreKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
+		private final Assignment cPreconditionChainAssignment_5_1 = (Assignment)cGroup_5.eContents().get(1);
+		private final RuleCall cPreconditionChainPreconditionChainParserRuleCall_5_1_0 = (RuleCall)cPreconditionChainAssignment_5_1.eContents().get(0);
+		private final Assignment cBodyAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final RuleCall cBodyBlockParserRuleCall_6_0 = (RuleCall)cBodyAssignment_6.eContents().get(0);
+		
+		//CheckDefinition:
+		//	"check" name=KeywordID "(" (parameters+=ParameterDeclaration ("," parameters+=ParameterDeclaration)*)? ")" ("pre"
+		//	preconditionChain=PreconditionChain)? body=Block;
+		public ParserRule getRule() { return rule; }
+
+		//"check" name=KeywordID "(" (parameters+=ParameterDeclaration ("," parameters+=ParameterDeclaration)*)? ")" ("pre"
+		//preconditionChain=PreconditionChain)? body=Block
+		public Group getGroup() { return cGroup; }
+
+		//"check"
+		public Keyword getCheckKeyword_0() { return cCheckKeyword_0; }
+
+		//name=KeywordID
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+
+		//KeywordID
+		public RuleCall getNameKeywordIDParserRuleCall_1_0() { return cNameKeywordIDParserRuleCall_1_0; }
+
+		//"("
+		public Keyword getLeftParenthesisKeyword_2() { return cLeftParenthesisKeyword_2; }
+
+		//(parameters+=ParameterDeclaration ("," parameters+=ParameterDeclaration)*)?
+		public Group getGroup_3() { return cGroup_3; }
+
+		//parameters+=ParameterDeclaration
+		public Assignment getParametersAssignment_3_0() { return cParametersAssignment_3_0; }
+
+		//ParameterDeclaration
+		public RuleCall getParametersParameterDeclarationParserRuleCall_3_0_0() { return cParametersParameterDeclarationParserRuleCall_3_0_0; }
+
+		//("," parameters+=ParameterDeclaration)*
+		public Group getGroup_3_1() { return cGroup_3_1; }
+
+		//","
+		public Keyword getCommaKeyword_3_1_0() { return cCommaKeyword_3_1_0; }
+
+		//parameters+=ParameterDeclaration
+		public Assignment getParametersAssignment_3_1_1() { return cParametersAssignment_3_1_1; }
+
+		//ParameterDeclaration
+		public RuleCall getParametersParameterDeclarationParserRuleCall_3_1_1_0() { return cParametersParameterDeclarationParserRuleCall_3_1_1_0; }
+
+		//")"
+		public Keyword getRightParenthesisKeyword_4() { return cRightParenthesisKeyword_4; }
+
+		//("pre" preconditionChain=PreconditionChain)?
+		public Group getGroup_5() { return cGroup_5; }
+
+		//"pre"
+		public Keyword getPreKeyword_5_0() { return cPreKeyword_5_0; }
+
+		//preconditionChain=PreconditionChain
+		public Assignment getPreconditionChainAssignment_5_1() { return cPreconditionChainAssignment_5_1; }
+
+		//PreconditionChain
+		public RuleCall getPreconditionChainPreconditionChainParserRuleCall_5_1_0() { return cPreconditionChainPreconditionChainParserRuleCall_5_1_0; }
 
 		//body=Block
 		public Assignment getBodyAssignment_6() { return cBodyAssignment_6; }
@@ -539,74 +657,40 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getTypeTypeSpecifierParserRuleCall_3_0() { return cTypeTypeSpecifierParserRuleCall_3_0; }
 	}
 
-	public class CheckDefinitionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "CheckDefinition");
+	public class PreconditionChainElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "PreconditionChain");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cCheckKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cNameKeywordIDParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
-		private final Keyword cLeftParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
-		private final Assignment cParametersAssignment_3_0 = (Assignment)cGroup_3.eContents().get(0);
-		private final RuleCall cParametersParameterDeclarationParserRuleCall_3_0_0 = (RuleCall)cParametersAssignment_3_0.eContents().get(0);
-		private final Group cGroup_3_1 = (Group)cGroup_3.eContents().get(1);
-		private final Keyword cCommaKeyword_3_1_0 = (Keyword)cGroup_3_1.eContents().get(0);
-		private final Assignment cParametersAssignment_3_1_1 = (Assignment)cGroup_3_1.eContents().get(1);
-		private final RuleCall cParametersParameterDeclarationParserRuleCall_3_1_1_0 = (RuleCall)cParametersAssignment_3_1_1.eContents().get(0);
-		private final Keyword cRightParenthesisKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		private final Assignment cBodyAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final RuleCall cBodyBlockParserRuleCall_5_0 = (RuleCall)cBodyAssignment_5.eContents().get(0);
+		private final Assignment cPreconditionsAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cPreconditionsFeatureCallParserRuleCall_0_0 = (RuleCall)cPreconditionsAssignment_0.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Keyword cCommaKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final Assignment cPreconditionsAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cPreconditionsFeatureCallParserRuleCall_1_1_0 = (RuleCall)cPreconditionsAssignment_1_1.eContents().get(0);
 		
-		/// *
-		// * Check
-		// * /CheckDefinition:
-		//	"check" name=KeywordID "(" (parameters+=ParameterDeclaration ("," parameters+=ParameterDeclaration)*)? ")" body=Block;
+		//PreconditionChain:
+		//	preconditions+=FeatureCall ("," preconditions+=FeatureCall)*;
 		public ParserRule getRule() { return rule; }
 
-		//"check" name=KeywordID "(" (parameters+=ParameterDeclaration ("," parameters+=ParameterDeclaration)*)? ")" body=Block
+		//preconditions+=FeatureCall ("," preconditions+=FeatureCall)*
 		public Group getGroup() { return cGroup; }
 
-		//"check"
-		public Keyword getCheckKeyword_0() { return cCheckKeyword_0; }
+		//preconditions+=FeatureCall
+		public Assignment getPreconditionsAssignment_0() { return cPreconditionsAssignment_0; }
 
-		//name=KeywordID
-		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		//FeatureCall
+		public RuleCall getPreconditionsFeatureCallParserRuleCall_0_0() { return cPreconditionsFeatureCallParserRuleCall_0_0; }
 
-		//KeywordID
-		public RuleCall getNameKeywordIDParserRuleCall_1_0() { return cNameKeywordIDParserRuleCall_1_0; }
-
-		//"("
-		public Keyword getLeftParenthesisKeyword_2() { return cLeftParenthesisKeyword_2; }
-
-		//(parameters+=ParameterDeclaration ("," parameters+=ParameterDeclaration)*)?
-		public Group getGroup_3() { return cGroup_3; }
-
-		//parameters+=ParameterDeclaration
-		public Assignment getParametersAssignment_3_0() { return cParametersAssignment_3_0; }
-
-		//ParameterDeclaration
-		public RuleCall getParametersParameterDeclarationParserRuleCall_3_0_0() { return cParametersParameterDeclarationParserRuleCall_3_0_0; }
-
-		//("," parameters+=ParameterDeclaration)*
-		public Group getGroup_3_1() { return cGroup_3_1; }
+		//("," preconditions+=FeatureCall)*
+		public Group getGroup_1() { return cGroup_1; }
 
 		//","
-		public Keyword getCommaKeyword_3_1_0() { return cCommaKeyword_3_1_0; }
+		public Keyword getCommaKeyword_1_0() { return cCommaKeyword_1_0; }
 
-		//parameters+=ParameterDeclaration
-		public Assignment getParametersAssignment_3_1_1() { return cParametersAssignment_3_1_1; }
+		//preconditions+=FeatureCall
+		public Assignment getPreconditionsAssignment_1_1() { return cPreconditionsAssignment_1_1; }
 
-		//ParameterDeclaration
-		public RuleCall getParametersParameterDeclarationParserRuleCall_3_1_1_0() { return cParametersParameterDeclarationParserRuleCall_3_1_1_0; }
-
-		//")"
-		public Keyword getRightParenthesisKeyword_4() { return cRightParenthesisKeyword_4; }
-
-		//body=Block
-		public Assignment getBodyAssignment_5() { return cBodyAssignment_5; }
-
-		//Block
-		public RuleCall getBodyBlockParserRuleCall_5_0() { return cBodyBlockParserRuleCall_5_0; }
+		//FeatureCall
+		public RuleCall getPreconditionsFeatureCallParserRuleCall_1_1_0() { return cPreconditionsFeatureCallParserRuleCall_1_1_0; }
 	}
 
 	public class StatementElements extends AbstractParserRuleElementFinder {
@@ -3383,16 +3467,19 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	private MscriptElements pMscript;
 	private PackageDefinitionElements pPackageDefinition;
 	private PackageDefinitionElementElements pPackageDefinitionElement;
+	private TypeDefinitionElements pTypeDefinition;
+	private DataTypeDefinitionElements pDataTypeDefinition;
 	private EnumerationDefinitionElements pEnumerationDefinition;
 	private EnumerationLiteralDeclarationElements pEnumerationLiteralDeclaration;
-	private TypeDefinitionElements pTypeDefinition;
+	private TypeAliasDefinitionElements pTypeAliasDefinition;
 	private VariableDeclarationElements pVariableDeclaration;
 	private VariableModifierElements pVariableModifier;
 	private RecordDefinitionElements pRecordDefinition;
 	private RecordFieldDeclarationElements pRecordFieldDeclaration;
 	private FunctionDefinitionElements pFunctionDefinition;
-	private ParameterDeclarationElements pParameterDeclaration;
 	private CheckDefinitionElements pCheckDefinition;
+	private ParameterDeclarationElements pParameterDeclaration;
+	private PreconditionChainElements pPreconditionChain;
 	private StatementElements pStatement;
 	private BlockElements pBlock;
 	private FeatureCallStatementElements pFeatureCallStatement;
@@ -3507,14 +3594,35 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//PackageDefinitionElement:
-	//	PackageDefinition | EnumerationDefinition | RecordDefinition | FunctionDefinition | CheckDefinition | TypeDefinition |
-	//	VariableDeclaration;
+	//	PackageDefinition | TypeDefinition | VariableDeclaration;
 	public PackageDefinitionElementElements getPackageDefinitionElementAccess() {
 		return (pPackageDefinitionElement != null) ? pPackageDefinitionElement : (pPackageDefinitionElement = new PackageDefinitionElementElements());
 	}
 	
 	public ParserRule getPackageDefinitionElementRule() {
 		return getPackageDefinitionElementAccess().getRule();
+	}
+
+	//TypeDefinition:
+	//	DataTypeDefinition | FunctionDefinition | CheckDefinition;
+	public TypeDefinitionElements getTypeDefinitionAccess() {
+		return (pTypeDefinition != null) ? pTypeDefinition : (pTypeDefinition = new TypeDefinitionElements());
+	}
+	
+	public ParserRule getTypeDefinitionRule() {
+		return getTypeDefinitionAccess().getRule();
+	}
+
+	/// *
+	// * DataTypeDefinition
+	// * /DataTypeDefinition:
+	//	EnumerationDefinition | RecordDefinition | TypeAliasDefinition;
+	public DataTypeDefinitionElements getDataTypeDefinitionAccess() {
+		return (pDataTypeDefinition != null) ? pDataTypeDefinition : (pDataTypeDefinition = new DataTypeDefinitionElements());
+	}
+	
+	public ParserRule getDataTypeDefinitionRule() {
+		return getDataTypeDefinitionAccess().getRule();
 	}
 
 	/// *
@@ -3542,14 +3650,14 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 
 	/// *
 	// * TypeDefinition
-	// * /TypeDefinition:
+	// * /TypeAliasDefinition:
 	//	"type" name=KeywordID "=" type=PrimitiveTypeSpecifier ";";
-	public TypeDefinitionElements getTypeDefinitionAccess() {
-		return (pTypeDefinition != null) ? pTypeDefinition : (pTypeDefinition = new TypeDefinitionElements());
+	public TypeAliasDefinitionElements getTypeAliasDefinitionAccess() {
+		return (pTypeAliasDefinition != null) ? pTypeAliasDefinition : (pTypeAliasDefinition = new TypeAliasDefinitionElements());
 	}
 	
-	public ParserRule getTypeDefinitionRule() {
-		return getTypeDefinitionAccess().getRule();
+	public ParserRule getTypeAliasDefinitionRule() {
+		return getTypeAliasDefinitionAccess().getRule();
 	}
 
 	/// *
@@ -3600,13 +3708,24 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	// * Function
 	// * /FunctionDefinition:
 	//	"func" name=KeywordID "(" (parameters+=ParameterDeclaration ("," parameters+=ParameterDeclaration)*)? ")" ("pre"
-	//	precondition=Expression)? body=Block;
+	//	preconditionChain=PreconditionChain)? body=Block;
 	public FunctionDefinitionElements getFunctionDefinitionAccess() {
 		return (pFunctionDefinition != null) ? pFunctionDefinition : (pFunctionDefinition = new FunctionDefinitionElements());
 	}
 	
 	public ParserRule getFunctionDefinitionRule() {
 		return getFunctionDefinitionAccess().getRule();
+	}
+
+	//CheckDefinition:
+	//	"check" name=KeywordID "(" (parameters+=ParameterDeclaration ("," parameters+=ParameterDeclaration)*)? ")" ("pre"
+	//	preconditionChain=PreconditionChain)? body=Block;
+	public CheckDefinitionElements getCheckDefinitionAccess() {
+		return (pCheckDefinition != null) ? pCheckDefinition : (pCheckDefinition = new CheckDefinitionElements());
+	}
+	
+	public ParserRule getCheckDefinitionRule() {
+		return getCheckDefinitionAccess().getRule();
 	}
 
 	//ParameterDeclaration:
@@ -3619,16 +3738,14 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		return getParameterDeclarationAccess().getRule();
 	}
 
-	/// *
-	// * Check
-	// * /CheckDefinition:
-	//	"check" name=KeywordID "(" (parameters+=ParameterDeclaration ("," parameters+=ParameterDeclaration)*)? ")" body=Block;
-	public CheckDefinitionElements getCheckDefinitionAccess() {
-		return (pCheckDefinition != null) ? pCheckDefinition : (pCheckDefinition = new CheckDefinitionElements());
+	//PreconditionChain:
+	//	preconditions+=FeatureCall ("," preconditions+=FeatureCall)*;
+	public PreconditionChainElements getPreconditionChainAccess() {
+		return (pPreconditionChain != null) ? pPreconditionChain : (pPreconditionChain = new PreconditionChainElements());
 	}
 	
-	public ParserRule getCheckDefinitionRule() {
-		return getCheckDefinitionAccess().getRule();
+	public ParserRule getPreconditionChainRule() {
+		return getPreconditionChainAccess().getRule();
 	}
 
 	/// *

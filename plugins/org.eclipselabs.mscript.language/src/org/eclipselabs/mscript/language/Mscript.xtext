@@ -26,12 +26,22 @@ PackageDefinition :
 
 PackageDefinitionElement :
 	PackageDefinition |
-	EnumerationDefinition |
-	RecordDefinition |
-	FunctionDefinition |
-	CheckDefinition |
 	TypeDefinition |
 	VariableDeclaration;
+	
+TypeDefinition :
+	DataTypeDefinition |
+	FunctionDefinition |
+	CheckDefinition;
+
+/*
+ * DataTypeDefinition
+ */
+ 
+DataTypeDefinition :
+	EnumerationDefinition |
+	RecordDefinition |
+	TypeAliasDefinition;
 
 /*
  * Enumeration
@@ -49,7 +59,7 @@ EnumerationLiteralDeclaration :
  * TypeDefinition
  */
  
-TypeDefinition :
+TypeAliasDefinition :
 	'type' name=KeywordID '=' type=PrimitiveTypeSpecifier ';';
 
 /*
@@ -79,18 +89,17 @@ RecordFieldDeclaration :
  */
  
 FunctionDefinition :
-	'func' name=KeywordID '(' (parameters+=ParameterDeclaration (',' parameters+=ParameterDeclaration)*)? ')' ('pre' precondition=Expression)? body=Block;
+	'func' name=KeywordID '(' (parameters+=ParameterDeclaration (',' parameters+=ParameterDeclaration)*)? ')' ('pre' preconditionChain=PreconditionChain)? body=Block;
+
+CheckDefinition :
+	'check' name=KeywordID '(' (parameters+=ParameterDeclaration (',' parameters+=ParameterDeclaration)*)? ')' ('pre' preconditionChain=PreconditionChain)? body=Block;
 
 ParameterDeclaration :
 	(reference?='ref')? name=KeywordID ':' type=TypeSpecifier;
 
-/*
- * Check
- */
- 
-CheckDefinition :
-	'check' name=KeywordID '(' (parameters+=ParameterDeclaration (',' parameters+=ParameterDeclaration)*)? ')' body=Block;
-
+PreconditionChain :
+	preconditions+=FeatureCall (',' preconditions+=FeatureCall)*;
+	
 /*
  * Statement
  */

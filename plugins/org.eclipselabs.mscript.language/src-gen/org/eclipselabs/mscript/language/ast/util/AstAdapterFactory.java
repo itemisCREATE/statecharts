@@ -93,6 +93,16 @@ public class AstAdapterFactory extends AdapterFactoryImpl
         return createPackageDefinitionElementAdapter();
       }
       @Override
+      public Adapter caseTypeDefinition(TypeDefinition object)
+      {
+        return createTypeDefinitionAdapter();
+      }
+      @Override
+      public Adapter caseDataTypeDefinition(DataTypeDefinition object)
+      {
+        return createDataTypeDefinitionAdapter();
+      }
+      @Override
       public Adapter caseEnumerationDefinition(EnumerationDefinition object)
       {
         return createEnumerationDefinitionAdapter();
@@ -103,9 +113,9 @@ public class AstAdapterFactory extends AdapterFactoryImpl
         return createEnumerationLiteralDeclarationAdapter();
       }
       @Override
-      public Adapter caseTypeDefinition(TypeDefinition object)
+      public Adapter caseTypeAliasDefinition(TypeAliasDefinition object)
       {
-        return createTypeDefinitionAdapter();
+        return createTypeAliasDefinitionAdapter();
       }
       @Override
       public Adapter caseVariableDeclaration(VariableDeclaration object)
@@ -133,14 +143,19 @@ public class AstAdapterFactory extends AdapterFactoryImpl
         return createFunctionDefinitionAdapter();
       }
       @Override
+      public Adapter caseCheckDefinition(CheckDefinition object)
+      {
+        return createCheckDefinitionAdapter();
+      }
+      @Override
       public Adapter caseParameterDeclaration(ParameterDeclaration object)
       {
         return createParameterDeclarationAdapter();
       }
       @Override
-      public Adapter caseCheckDefinition(CheckDefinition object)
+      public Adapter casePreconditionChain(PreconditionChain object)
       {
-        return createCheckDefinitionAdapter();
+        return createPreconditionChainAdapter();
       }
       @Override
       public Adapter caseStatement(Statement object)
@@ -520,6 +535,36 @@ public class AstAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.TypeDefinition <em>Type Definition</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipselabs.mscript.language.ast.TypeDefinition
+   * @generated
+   */
+  public Adapter createTypeDefinitionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.DataTypeDefinition <em>Data Type Definition</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipselabs.mscript.language.ast.DataTypeDefinition
+   * @generated
+   */
+  public Adapter createDataTypeDefinitionAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.EnumerationDefinition <em>Enumeration Definition</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -550,16 +595,16 @@ public class AstAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.TypeDefinition <em>Type Definition</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.TypeAliasDefinition <em>Type Alias Definition</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.TypeDefinition
+   * @see org.eclipselabs.mscript.language.ast.TypeAliasDefinition
    * @generated
    */
-  public Adapter createTypeDefinitionAdapter()
+  public Adapter createTypeAliasDefinitionAdapter()
   {
     return null;
   }
@@ -640,6 +685,21 @@ public class AstAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.CheckDefinition <em>Check Definition</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipselabs.mscript.language.ast.CheckDefinition
+   * @generated
+   */
+  public Adapter createCheckDefinitionAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.ParameterDeclaration <em>Parameter Declaration</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -655,16 +715,16 @@ public class AstAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.CheckDefinition <em>Check Definition</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.PreconditionChain <em>Precondition Chain</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.CheckDefinition
+   * @see org.eclipselabs.mscript.language.ast.PreconditionChain
    * @generated
    */
-  public Adapter createCheckDefinitionAdapter()
+  public Adapter createPreconditionChainAdapter()
   {
     return null;
   }

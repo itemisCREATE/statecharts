@@ -6,15 +6,12 @@
 package org.eclipselabs.mscript.language.ast.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipselabs.mscript.language.ast.AstPackage;
-import org.eclipselabs.mscript.language.ast.PrimitiveTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.TypeDefinition;
 
 /**
@@ -25,7 +22,6 @@ import org.eclipselabs.mscript.language.ast.TypeDefinition;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.TypeDefinitionImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.TypeDefinitionImpl#getType <em>Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -52,16 +48,6 @@ public class TypeDefinitionImpl extends PackageDefinitionElementImpl implements 
    * @ordered
    */
   protected String name = NAME_EDEFAULT;
-
-  /**
-   * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getType()
-   * @generated
-   * @ordered
-   */
-  protected PrimitiveTypeSpecifier type;
 
   /**
    * <!-- begin-user-doc -->
@@ -112,70 +98,6 @@ public class TypeDefinitionImpl extends PackageDefinitionElementImpl implements 
    * <!-- end-user-doc -->
    * @generated
    */
-  public PrimitiveTypeSpecifier getType()
-  {
-    return type;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetType(PrimitiveTypeSpecifier newType, NotificationChain msgs)
-  {
-    PrimitiveTypeSpecifier oldType = type;
-    type = newType;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.TYPE_DEFINITION__TYPE, oldType, newType);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setType(PrimitiveTypeSpecifier newType)
-  {
-    if (newType != type)
-    {
-      NotificationChain msgs = null;
-      if (type != null)
-        msgs = ((InternalEObject)type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.TYPE_DEFINITION__TYPE, null, msgs);
-      if (newType != null)
-        msgs = ((InternalEObject)newType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.TYPE_DEFINITION__TYPE, null, msgs);
-      msgs = basicSetType(newType, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.TYPE_DEFINITION__TYPE, newType, newType));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-  {
-    switch (featureID)
-    {
-      case AstPackage.TYPE_DEFINITION__TYPE:
-        return basicSetType(null, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
@@ -183,8 +105,6 @@ public class TypeDefinitionImpl extends PackageDefinitionElementImpl implements 
     {
       case AstPackage.TYPE_DEFINITION__NAME:
         return getName();
-      case AstPackage.TYPE_DEFINITION__TYPE:
-        return getType();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -201,9 +121,6 @@ public class TypeDefinitionImpl extends PackageDefinitionElementImpl implements 
     {
       case AstPackage.TYPE_DEFINITION__NAME:
         setName((String)newValue);
-        return;
-      case AstPackage.TYPE_DEFINITION__TYPE:
-        setType((PrimitiveTypeSpecifier)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -222,9 +139,6 @@ public class TypeDefinitionImpl extends PackageDefinitionElementImpl implements 
       case AstPackage.TYPE_DEFINITION__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case AstPackage.TYPE_DEFINITION__TYPE:
-        setType((PrimitiveTypeSpecifier)null);
-        return;
     }
     super.eUnset(featureID);
   }
@@ -241,8 +155,6 @@ public class TypeDefinitionImpl extends PackageDefinitionElementImpl implements 
     {
       case AstPackage.TYPE_DEFINITION__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case AstPackage.TYPE_DEFINITION__TYPE:
-        return type != null;
     }
     return super.eIsSet(featureID);
   }

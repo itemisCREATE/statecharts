@@ -15,7 +15,6 @@ package org.eclipselabs.mscript.language.ast;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipselabs.mscript.language.ast.TypeDefinition#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.TypeDefinition#getType <em>Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -50,31 +49,5 @@ public interface TypeDefinition extends PackageDefinitionElement, Statement
    * @generated
    */
   void setName(String value);
-
-  /**
-   * Returns the value of the '<em><b>Type</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Type</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Type</em>' containment reference.
-   * @see #setType(PrimitiveTypeSpecifier)
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getTypeDefinition_Type()
-   * @model containment="true"
-   * @generated
-   */
-  PrimitiveTypeSpecifier getType();
-
-  /**
-   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.TypeDefinition#getType <em>Type</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Type</em>' containment reference.
-   * @see #getType()
-   * @generated
-   */
-  void setType(PrimitiveTypeSpecifier value);
 
 } // TypeDefinition

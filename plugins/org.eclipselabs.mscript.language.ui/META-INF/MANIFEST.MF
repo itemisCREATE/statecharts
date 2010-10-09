@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Damos Scripting UI
-Bundle-Vendor: Damos Project
-Bundle-Version: 0.2.0.qualifier
+Bundle-Name: Mscript Language UI
+Bundle-Vendor: Mscript Project
+Bundle-Version: 0.1.0.qualifier
 Bundle-SymbolicName: org.eclipselabs.mscript.language.ui;singleton:=true
 Eclipse-RegisterBuddy: org.eclipse.xtext.log4j
 Bundle-ActivationPolicy: lazy

@@ -22,9 +22,9 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.Block;
-import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.ast.FunctionDefinition;
 import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
+import org.eclipselabs.mscript.language.ast.PreconditionChain;
 
 /**
  * <!-- begin-user-doc -->
@@ -33,37 +33,16 @@ import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl#getParameters <em>Parameters</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl#getPrecondition <em>Precondition</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl#getPreconditionChain <em>Precondition Chain</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl#getBody <em>Body</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class FunctionDefinitionImpl extends PackageDefinitionElementImpl implements FunctionDefinition
+public class FunctionDefinitionImpl extends TypeDefinitionImpl implements FunctionDefinition
 {
-  /**
-   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
-  protected static final String NAME_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
-  protected String name = NAME_EDEFAULT;
-
   /**
    * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
    * <!-- begin-user-doc -->
@@ -75,14 +54,14 @@ public class FunctionDefinitionImpl extends PackageDefinitionElementImpl impleme
   protected EList<ParameterDeclaration> parameters;
 
   /**
-   * The cached value of the '{@link #getPrecondition() <em>Precondition</em>}' containment reference.
+   * The cached value of the '{@link #getPreconditionChain() <em>Precondition Chain</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getPrecondition()
+   * @see #getPreconditionChain()
    * @generated
    * @ordered
    */
-  protected Expression precondition;
+  protected PreconditionChain preconditionChain;
 
   /**
    * The cached value of the '{@link #getBody() <em>Body</em>}' containment reference.
@@ -120,29 +99,6 @@ public class FunctionDefinitionImpl extends PackageDefinitionElementImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName()
-  {
-    return name;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setName(String newName)
-  {
-    String oldName = name;
-    name = newName;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.FUNCTION_DEFINITION__NAME, oldName, name));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EList<ParameterDeclaration> getParameters()
   {
     if (parameters == null)
@@ -157,9 +113,9 @@ public class FunctionDefinitionImpl extends PackageDefinitionElementImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  public Expression getPrecondition()
+  public PreconditionChain getPreconditionChain()
   {
-    return precondition;
+    return preconditionChain;
   }
 
   /**
@@ -167,13 +123,13 @@ public class FunctionDefinitionImpl extends PackageDefinitionElementImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetPrecondition(Expression newPrecondition, NotificationChain msgs)
+  public NotificationChain basicSetPreconditionChain(PreconditionChain newPreconditionChain, NotificationChain msgs)
   {
-    Expression oldPrecondition = precondition;
-    precondition = newPrecondition;
+    PreconditionChain oldPreconditionChain = preconditionChain;
+    preconditionChain = newPreconditionChain;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.FUNCTION_DEFINITION__PRECONDITION, oldPrecondition, newPrecondition);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.FUNCTION_DEFINITION__PRECONDITION_CHAIN, oldPreconditionChain, newPreconditionChain);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -184,20 +140,20 @@ public class FunctionDefinitionImpl extends PackageDefinitionElementImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setPrecondition(Expression newPrecondition)
+  public void setPreconditionChain(PreconditionChain newPreconditionChain)
   {
-    if (newPrecondition != precondition)
+    if (newPreconditionChain != preconditionChain)
     {
       NotificationChain msgs = null;
-      if (precondition != null)
-        msgs = ((InternalEObject)precondition).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.FUNCTION_DEFINITION__PRECONDITION, null, msgs);
-      if (newPrecondition != null)
-        msgs = ((InternalEObject)newPrecondition).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.FUNCTION_DEFINITION__PRECONDITION, null, msgs);
-      msgs = basicSetPrecondition(newPrecondition, msgs);
+      if (preconditionChain != null)
+        msgs = ((InternalEObject)preconditionChain).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.FUNCTION_DEFINITION__PRECONDITION_CHAIN, null, msgs);
+      if (newPreconditionChain != null)
+        msgs = ((InternalEObject)newPreconditionChain).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.FUNCTION_DEFINITION__PRECONDITION_CHAIN, null, msgs);
+      msgs = basicSetPreconditionChain(newPreconditionChain, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.FUNCTION_DEFINITION__PRECONDITION, newPrecondition, newPrecondition));
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.FUNCTION_DEFINITION__PRECONDITION_CHAIN, newPreconditionChain, newPreconditionChain));
   }
 
   /**
@@ -260,8 +216,8 @@ public class FunctionDefinitionImpl extends PackageDefinitionElementImpl impleme
     {
       case AstPackage.FUNCTION_DEFINITION__PARAMETERS:
         return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
-      case AstPackage.FUNCTION_DEFINITION__PRECONDITION:
-        return basicSetPrecondition(null, msgs);
+      case AstPackage.FUNCTION_DEFINITION__PRECONDITION_CHAIN:
+        return basicSetPreconditionChain(null, msgs);
       case AstPackage.FUNCTION_DEFINITION__BODY:
         return basicSetBody(null, msgs);
     }
@@ -278,12 +234,10 @@ public class FunctionDefinitionImpl extends PackageDefinitionElementImpl impleme
   {
     switch (featureID)
     {
-      case AstPackage.FUNCTION_DEFINITION__NAME:
-        return getName();
       case AstPackage.FUNCTION_DEFINITION__PARAMETERS:
         return getParameters();
-      case AstPackage.FUNCTION_DEFINITION__PRECONDITION:
-        return getPrecondition();
+      case AstPackage.FUNCTION_DEFINITION__PRECONDITION_CHAIN:
+        return getPreconditionChain();
       case AstPackage.FUNCTION_DEFINITION__BODY:
         return getBody();
     }
@@ -301,15 +255,12 @@ public class FunctionDefinitionImpl extends PackageDefinitionElementImpl impleme
   {
     switch (featureID)
     {
-      case AstPackage.FUNCTION_DEFINITION__NAME:
-        setName((String)newValue);
-        return;
       case AstPackage.FUNCTION_DEFINITION__PARAMETERS:
         getParameters().clear();
         getParameters().addAll((Collection<? extends ParameterDeclaration>)newValue);
         return;
-      case AstPackage.FUNCTION_DEFINITION__PRECONDITION:
-        setPrecondition((Expression)newValue);
+      case AstPackage.FUNCTION_DEFINITION__PRECONDITION_CHAIN:
+        setPreconditionChain((PreconditionChain)newValue);
         return;
       case AstPackage.FUNCTION_DEFINITION__BODY:
         setBody((Block)newValue);
@@ -328,14 +279,11 @@ public class FunctionDefinitionImpl extends PackageDefinitionElementImpl impleme
   {
     switch (featureID)
     {
-      case AstPackage.FUNCTION_DEFINITION__NAME:
-        setName(NAME_EDEFAULT);
-        return;
       case AstPackage.FUNCTION_DEFINITION__PARAMETERS:
         getParameters().clear();
         return;
-      case AstPackage.FUNCTION_DEFINITION__PRECONDITION:
-        setPrecondition((Expression)null);
+      case AstPackage.FUNCTION_DEFINITION__PRECONDITION_CHAIN:
+        setPreconditionChain((PreconditionChain)null);
         return;
       case AstPackage.FUNCTION_DEFINITION__BODY:
         setBody((Block)null);
@@ -354,33 +302,14 @@ public class FunctionDefinitionImpl extends PackageDefinitionElementImpl impleme
   {
     switch (featureID)
     {
-      case AstPackage.FUNCTION_DEFINITION__NAME:
-        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case AstPackage.FUNCTION_DEFINITION__PARAMETERS:
         return parameters != null && !parameters.isEmpty();
-      case AstPackage.FUNCTION_DEFINITION__PRECONDITION:
-        return precondition != null;
+      case AstPackage.FUNCTION_DEFINITION__PRECONDITION_CHAIN:
+        return preconditionChain != null;
       case AstPackage.FUNCTION_DEFINITION__BODY:
         return body != null;
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (name: ");
-    result.append(name);
-    result.append(')');
-    return result.toString();
   }
 
 } //FunctionDefinitionImpl
