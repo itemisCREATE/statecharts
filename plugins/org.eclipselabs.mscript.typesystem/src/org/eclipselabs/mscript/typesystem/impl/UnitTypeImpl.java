@@ -19,7 +19,7 @@ import org.eclipselabs.mscript.typesystem.UnitType;
  *
  * @generated
  */
-public class UnitTypeImpl extends TypeImpl implements UnitType {
+public class UnitTypeImpl extends DataTypeImpl implements UnitType {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

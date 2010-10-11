@@ -61,6 +61,15 @@ public class RecordFieldImpl extends EObjectImpl implements RecordField {
 	protected String name = NAME_EDEFAULT;
 
 	/**
+	 * This is true if the Name attribute has been set.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean nameESet;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -134,8 +143,33 @@ public class RecordFieldImpl extends EObjectImpl implements RecordField {
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
+		boolean oldNameESet = nameESet;
+		nameESet = true;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypeSystemPackage.RECORD_FIELD__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, TypeSystemPackage.RECORD_FIELD__NAME, oldName, name, !oldNameESet));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void unsetName() {
+		String oldName = name;
+		boolean oldNameESet = nameESet;
+		name = NAME_EDEFAULT;
+		nameESet = false;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.UNSET, TypeSystemPackage.RECORD_FIELD__NAME, oldName, NAME_EDEFAULT, oldNameESet));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isSetName() {
+		return nameESet;
 	}
 
 	/**
@@ -185,7 +219,7 @@ public class RecordFieldImpl extends EObjectImpl implements RecordField {
 				setType((DataType)null);
 				return;
 			case TypeSystemPackage.RECORD_FIELD__NAME:
-				setName(NAME_EDEFAULT);
+				unsetName();
 				return;
 		}
 		super.eUnset(featureID);
@@ -202,7 +236,7 @@ public class RecordFieldImpl extends EObjectImpl implements RecordField {
 			case TypeSystemPackage.RECORD_FIELD__TYPE:
 				return type != null;
 			case TypeSystemPackage.RECORD_FIELD__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+				return isSetName();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -218,7 +252,7 @@ public class RecordFieldImpl extends EObjectImpl implements RecordField {
 
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (name: ");
-		result.append(name);
+		if (nameESet) result.append(name); else result.append("<unset>");
 		result.append(')');
 		return result.toString();
 	}

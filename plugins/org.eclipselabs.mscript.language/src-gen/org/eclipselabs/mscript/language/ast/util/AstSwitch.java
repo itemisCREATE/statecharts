@@ -174,13 +174,6 @@ public class AstSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AstPackage.VARIABLE_MODIFIER:
-      {
-        VariableModifier variableModifier = (VariableModifier)theEObject;
-        T result = caseVariableModifier(variableModifier);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case AstPackage.RECORD_DEFINITION:
       {
         RecordDefinition recordDefinition = (RecordDefinition)theEObject;
@@ -199,10 +192,21 @@ public class AstSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case AstPackage.SUBROUTINE_DEFINITION:
+      {
+        SubroutineDefinition subroutineDefinition = (SubroutineDefinition)theEObject;
+        T result = caseSubroutineDefinition(subroutineDefinition);
+        if (result == null) result = caseTypeDefinition(subroutineDefinition);
+        if (result == null) result = casePackageDefinitionElement(subroutineDefinition);
+        if (result == null) result = caseStatement(subroutineDefinition);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case AstPackage.FUNCTION_DEFINITION:
       {
         FunctionDefinition functionDefinition = (FunctionDefinition)theEObject;
         T result = caseFunctionDefinition(functionDefinition);
+        if (result == null) result = caseSubroutineDefinition(functionDefinition);
         if (result == null) result = caseTypeDefinition(functionDefinition);
         if (result == null) result = casePackageDefinitionElement(functionDefinition);
         if (result == null) result = caseStatement(functionDefinition);
@@ -213,6 +217,7 @@ public class AstSwitch<T>
       {
         CheckDefinition checkDefinition = (CheckDefinition)theEObject;
         T result = caseCheckDefinition(checkDefinition);
+        if (result == null) result = caseSubroutineDefinition(checkDefinition);
         if (result == null) result = caseTypeDefinition(checkDefinition);
         if (result == null) result = casePackageDefinitionElement(checkDefinition);
         if (result == null) result = caseStatement(checkDefinition);
@@ -248,11 +253,11 @@ public class AstSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AstPackage.FEATURE_CALL_STATEMENT:
+      case AstPackage.EXPRESSION_STATEMENT:
       {
-        FeatureCallStatement featureCallStatement = (FeatureCallStatement)theEObject;
-        T result = caseFeatureCallStatement(featureCallStatement);
-        if (result == null) result = caseStatement(featureCallStatement);
+        ExpressionStatement expressionStatement = (ExpressionStatement)theEObject;
+        T result = caseExpressionStatement(expressionStatement);
+        if (result == null) result = caseStatement(expressionStatement);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -888,22 +893,6 @@ public class AstSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Variable Modifier</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Variable Modifier</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseVariableModifier(VariableModifier object)
-  {
-    return null;
-  }
-
-  /**
    * Returns the result of interpreting the object as an instance of '<em>Record Definition</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -931,6 +920,22 @@ public class AstSwitch<T>
    * @generated
    */
   public T caseRecordFieldDeclaration(RecordFieldDeclaration object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Subroutine Definition</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Subroutine Definition</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseSubroutineDefinition(SubroutineDefinition object)
   {
     return null;
   }
@@ -1032,17 +1037,17 @@ public class AstSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Feature Call Statement</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Expression Statement</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Feature Call Statement</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Expression Statement</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseFeatureCallStatement(FeatureCallStatement object)
+  public T caseExpressionStatement(ExpressionStatement object)
   {
     return null;
   }

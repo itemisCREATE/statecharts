@@ -107,15 +107,6 @@ public interface AstFactory extends EFactory
   VariableDeclaration createVariableDeclaration();
 
   /**
-   * Returns a new object of class '<em>Variable Modifier</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Variable Modifier</em>'.
-   * @generated
-   */
-  VariableModifier createVariableModifier();
-
-  /**
    * Returns a new object of class '<em>Record Definition</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -132,6 +123,15 @@ public interface AstFactory extends EFactory
    * @generated
    */
   RecordFieldDeclaration createRecordFieldDeclaration();
+
+  /**
+   * Returns a new object of class '<em>Subroutine Definition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Subroutine Definition</em>'.
+   * @generated
+   */
+  SubroutineDefinition createSubroutineDefinition();
 
   /**
    * Returns a new object of class '<em>Function Definition</em>'.
@@ -188,13 +188,13 @@ public interface AstFactory extends EFactory
   Block createBlock();
 
   /**
-   * Returns a new object of class '<em>Feature Call Statement</em>'.
+   * Returns a new object of class '<em>Expression Statement</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Feature Call Statement</em>'.
+   * @return a new object of class '<em>Expression Statement</em>'.
    * @generated
    */
-  FeatureCallStatement createFeatureCallStatement();
+  ExpressionStatement createExpressionStatement();
 
   /**
    * Returns a new object of class '<em>If Statement</em>'.

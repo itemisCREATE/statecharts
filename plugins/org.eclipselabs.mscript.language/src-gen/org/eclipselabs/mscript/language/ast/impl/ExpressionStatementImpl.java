@@ -15,33 +15,33 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.Expression;
-import org.eclipselabs.mscript.language.ast.FeatureCallStatement;
+import org.eclipselabs.mscript.language.ast.ExpressionStatement;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Feature Call Statement</b></em>'.
+ * An implementation of the model object '<em><b>Expression Statement</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FeatureCallStatementImpl#getFeatureCall <em>Feature Call</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FeatureCallStatementImpl#getAssignedValue <em>Assigned Value</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.ExpressionStatementImpl#getExpression <em>Expression</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.ExpressionStatementImpl#getAssignedValue <em>Assigned Value</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class FeatureCallStatementImpl extends StatementImpl implements FeatureCallStatement
+public class ExpressionStatementImpl extends StatementImpl implements ExpressionStatement
 {
   /**
-   * The cached value of the '{@link #getFeatureCall() <em>Feature Call</em>}' containment reference.
+   * The cached value of the '{@link #getExpression() <em>Expression</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getFeatureCall()
+   * @see #getExpression()
    * @generated
    * @ordered
    */
-  protected Expression featureCall;
+  protected Expression expression;
 
   /**
    * The cached value of the '{@link #getAssignedValue() <em>Assigned Value</em>}' containment reference.
@@ -58,7 +58,7 @@ public class FeatureCallStatementImpl extends StatementImpl implements FeatureCa
    * <!-- end-user-doc -->
    * @generated
    */
-  protected FeatureCallStatementImpl()
+  protected ExpressionStatementImpl()
   {
     super();
   }
@@ -71,7 +71,7 @@ public class FeatureCallStatementImpl extends StatementImpl implements FeatureCa
   @Override
   protected EClass eStaticClass()
   {
-    return AstPackage.Literals.FEATURE_CALL_STATEMENT;
+    return AstPackage.Literals.EXPRESSION_STATEMENT;
   }
 
   /**
@@ -79,9 +79,9 @@ public class FeatureCallStatementImpl extends StatementImpl implements FeatureCa
    * <!-- end-user-doc -->
    * @generated
    */
-  public Expression getFeatureCall()
+  public Expression getExpression()
   {
-    return featureCall;
+    return expression;
   }
 
   /**
@@ -89,13 +89,13 @@ public class FeatureCallStatementImpl extends StatementImpl implements FeatureCa
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetFeatureCall(Expression newFeatureCall, NotificationChain msgs)
+  public NotificationChain basicSetExpression(Expression newExpression, NotificationChain msgs)
   {
-    Expression oldFeatureCall = featureCall;
-    featureCall = newFeatureCall;
+    Expression oldExpression = expression;
+    expression = newExpression;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.FEATURE_CALL_STATEMENT__FEATURE_CALL, oldFeatureCall, newFeatureCall);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.EXPRESSION_STATEMENT__EXPRESSION, oldExpression, newExpression);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -106,20 +106,20 @@ public class FeatureCallStatementImpl extends StatementImpl implements FeatureCa
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setFeatureCall(Expression newFeatureCall)
+  public void setExpression(Expression newExpression)
   {
-    if (newFeatureCall != featureCall)
+    if (newExpression != expression)
     {
       NotificationChain msgs = null;
-      if (featureCall != null)
-        msgs = ((InternalEObject)featureCall).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.FEATURE_CALL_STATEMENT__FEATURE_CALL, null, msgs);
-      if (newFeatureCall != null)
-        msgs = ((InternalEObject)newFeatureCall).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.FEATURE_CALL_STATEMENT__FEATURE_CALL, null, msgs);
-      msgs = basicSetFeatureCall(newFeatureCall, msgs);
+      if (expression != null)
+        msgs = ((InternalEObject)expression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.EXPRESSION_STATEMENT__EXPRESSION, null, msgs);
+      if (newExpression != null)
+        msgs = ((InternalEObject)newExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.EXPRESSION_STATEMENT__EXPRESSION, null, msgs);
+      msgs = basicSetExpression(newExpression, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.FEATURE_CALL_STATEMENT__FEATURE_CALL, newFeatureCall, newFeatureCall));
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.EXPRESSION_STATEMENT__EXPRESSION, newExpression, newExpression));
   }
 
   /**
@@ -143,7 +143,7 @@ public class FeatureCallStatementImpl extends StatementImpl implements FeatureCa
     assignedValue = newAssignedValue;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.FEATURE_CALL_STATEMENT__ASSIGNED_VALUE, oldAssignedValue, newAssignedValue);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.EXPRESSION_STATEMENT__ASSIGNED_VALUE, oldAssignedValue, newAssignedValue);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -160,14 +160,14 @@ public class FeatureCallStatementImpl extends StatementImpl implements FeatureCa
     {
       NotificationChain msgs = null;
       if (assignedValue != null)
-        msgs = ((InternalEObject)assignedValue).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.FEATURE_CALL_STATEMENT__ASSIGNED_VALUE, null, msgs);
+        msgs = ((InternalEObject)assignedValue).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.EXPRESSION_STATEMENT__ASSIGNED_VALUE, null, msgs);
       if (newAssignedValue != null)
-        msgs = ((InternalEObject)newAssignedValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.FEATURE_CALL_STATEMENT__ASSIGNED_VALUE, null, msgs);
+        msgs = ((InternalEObject)newAssignedValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.EXPRESSION_STATEMENT__ASSIGNED_VALUE, null, msgs);
       msgs = basicSetAssignedValue(newAssignedValue, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.FEATURE_CALL_STATEMENT__ASSIGNED_VALUE, newAssignedValue, newAssignedValue));
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.EXPRESSION_STATEMENT__ASSIGNED_VALUE, newAssignedValue, newAssignedValue));
   }
 
   /**
@@ -180,9 +180,9 @@ public class FeatureCallStatementImpl extends StatementImpl implements FeatureCa
   {
     switch (featureID)
     {
-      case AstPackage.FEATURE_CALL_STATEMENT__FEATURE_CALL:
-        return basicSetFeatureCall(null, msgs);
-      case AstPackage.FEATURE_CALL_STATEMENT__ASSIGNED_VALUE:
+      case AstPackage.EXPRESSION_STATEMENT__EXPRESSION:
+        return basicSetExpression(null, msgs);
+      case AstPackage.EXPRESSION_STATEMENT__ASSIGNED_VALUE:
         return basicSetAssignedValue(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -198,9 +198,9 @@ public class FeatureCallStatementImpl extends StatementImpl implements FeatureCa
   {
     switch (featureID)
     {
-      case AstPackage.FEATURE_CALL_STATEMENT__FEATURE_CALL:
-        return getFeatureCall();
-      case AstPackage.FEATURE_CALL_STATEMENT__ASSIGNED_VALUE:
+      case AstPackage.EXPRESSION_STATEMENT__EXPRESSION:
+        return getExpression();
+      case AstPackage.EXPRESSION_STATEMENT__ASSIGNED_VALUE:
         return getAssignedValue();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -216,10 +216,10 @@ public class FeatureCallStatementImpl extends StatementImpl implements FeatureCa
   {
     switch (featureID)
     {
-      case AstPackage.FEATURE_CALL_STATEMENT__FEATURE_CALL:
-        setFeatureCall((Expression)newValue);
+      case AstPackage.EXPRESSION_STATEMENT__EXPRESSION:
+        setExpression((Expression)newValue);
         return;
-      case AstPackage.FEATURE_CALL_STATEMENT__ASSIGNED_VALUE:
+      case AstPackage.EXPRESSION_STATEMENT__ASSIGNED_VALUE:
         setAssignedValue((Expression)newValue);
         return;
     }
@@ -236,10 +236,10 @@ public class FeatureCallStatementImpl extends StatementImpl implements FeatureCa
   {
     switch (featureID)
     {
-      case AstPackage.FEATURE_CALL_STATEMENT__FEATURE_CALL:
-        setFeatureCall((Expression)null);
+      case AstPackage.EXPRESSION_STATEMENT__EXPRESSION:
+        setExpression((Expression)null);
         return;
-      case AstPackage.FEATURE_CALL_STATEMENT__ASSIGNED_VALUE:
+      case AstPackage.EXPRESSION_STATEMENT__ASSIGNED_VALUE:
         setAssignedValue((Expression)null);
         return;
     }
@@ -256,12 +256,12 @@ public class FeatureCallStatementImpl extends StatementImpl implements FeatureCa
   {
     switch (featureID)
     {
-      case AstPackage.FEATURE_CALL_STATEMENT__FEATURE_CALL:
-        return featureCall != null;
-      case AstPackage.FEATURE_CALL_STATEMENT__ASSIGNED_VALUE:
+      case AstPackage.EXPRESSION_STATEMENT__EXPRESSION:
+        return expression != null;
+      case AstPackage.EXPRESSION_STATEMENT__ASSIGNED_VALUE:
         return assignedValue != null;
     }
     return super.eIsSet(featureID);
   }
 
-} //FeatureCallStatementImpl
+} //ExpressionStatementImpl

@@ -8,6 +8,7 @@ package org.eclipselabs.mscript.typesystem;
 
 
 
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Data Type</b></em>'.

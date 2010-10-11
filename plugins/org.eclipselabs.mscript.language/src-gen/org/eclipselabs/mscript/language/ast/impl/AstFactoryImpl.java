@@ -77,16 +77,16 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
       case AstPackage.ENUMERATION_LITERAL_DECLARATION: return createEnumerationLiteralDeclaration();
       case AstPackage.TYPE_ALIAS_DEFINITION: return createTypeAliasDefinition();
       case AstPackage.VARIABLE_DECLARATION: return createVariableDeclaration();
-      case AstPackage.VARIABLE_MODIFIER: return createVariableModifier();
       case AstPackage.RECORD_DEFINITION: return createRecordDefinition();
       case AstPackage.RECORD_FIELD_DECLARATION: return createRecordFieldDeclaration();
+      case AstPackage.SUBROUTINE_DEFINITION: return createSubroutineDefinition();
       case AstPackage.FUNCTION_DEFINITION: return createFunctionDefinition();
       case AstPackage.CHECK_DEFINITION: return createCheckDefinition();
       case AstPackage.PARAMETER_DECLARATION: return createParameterDeclaration();
       case AstPackage.PRECONDITION_CHAIN: return createPreconditionChain();
       case AstPackage.STATEMENT: return createStatement();
       case AstPackage.BLOCK: return createBlock();
-      case AstPackage.FEATURE_CALL_STATEMENT: return createFeatureCallStatement();
+      case AstPackage.EXPRESSION_STATEMENT: return createExpressionStatement();
       case AstPackage.IF_STATEMENT: return createIfStatement();
       case AstPackage.IF_CASE: return createIfCase();
       case AstPackage.WHILE_STATEMENT: return createWhileStatement();
@@ -309,17 +309,6 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public VariableModifier createVariableModifier()
-  {
-    VariableModifierImpl variableModifier = new VariableModifierImpl();
-    return variableModifier;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public RecordDefinition createRecordDefinition()
   {
     RecordDefinitionImpl recordDefinition = new RecordDefinitionImpl();
@@ -335,6 +324,17 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
   {
     RecordFieldDeclarationImpl recordFieldDeclaration = new RecordFieldDeclarationImpl();
     return recordFieldDeclaration;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public SubroutineDefinition createSubroutineDefinition()
+  {
+    SubroutineDefinitionImpl subroutineDefinition = new SubroutineDefinitionImpl();
+    return subroutineDefinition;
   }
 
   /**
@@ -408,10 +408,10 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public FeatureCallStatement createFeatureCallStatement()
+  public ExpressionStatement createExpressionStatement()
   {
-    FeatureCallStatementImpl featureCallStatement = new FeatureCallStatementImpl();
-    return featureCallStatement;
+    ExpressionStatementImpl expressionStatement = new ExpressionStatementImpl();
+    return expressionStatement;
   }
 
   /**

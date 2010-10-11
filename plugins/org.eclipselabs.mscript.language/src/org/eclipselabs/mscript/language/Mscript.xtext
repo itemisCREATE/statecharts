@@ -31,8 +31,7 @@ PackageDefinitionElement :
 	
 TypeDefinition :
 	DataTypeDefinition |
-	FunctionDefinition |
-	CheckDefinition;
+	SubroutineDefinition;
 
 /*
  * DataTypeDefinition
@@ -67,11 +66,8 @@ TypeAliasDefinition :
  */
 
 VariableDeclaration :
-	(modifier=VariableModifier)? 'var' name=KeywordID (':' type=TypeSpecifier)? ('=' initialValue=Expression)? ';';
+	('var'|constant?='const') name=KeywordID (':' type=TypeSpecifier)? ('=' initialValue=Expression)? ';';
 
-VariableModifier :
-	Auto='auto' | Constant='const';
-			
 /*
  * Record
  */
@@ -85,8 +81,11 @@ RecordFieldDeclaration :
 	name=KeywordID ':' type=DataTypeSpecifier ';';
 
 /*
- * Function
+ * Subroutines
  */
+ 
+SubroutineDefinition :
+	FunctionDefinition | CheckDefinition;
  
 FunctionDefinition :
 	'func' name=KeywordID '(' (parameters+=ParameterDeclaration (',' parameters+=ParameterDeclaration)*)? ')' ('pre' preconditionChain=PreconditionChain)? body=Block;
@@ -106,7 +105,7 @@ PreconditionChain :
 
 Statement :
 	Block |
-	FeatureCallStatement |
+	ExpressionStatement |
 	IfStatement |
 	WhileStatement |
 	DoWhileStatement |
@@ -119,8 +118,8 @@ Statement :
 Block :
 	{Block} '{' (statements+=Statement)* '}';
 
-FeatureCallStatement :
-	featureCall=FeatureCall ('=' assignedValue=Expression)? ';';
+ExpressionStatement :
+	expression=FeatureCall ('=' assignedValue=Expression)? ';';
 
 IfStatement :
 	'if' cases+=IfCase ('elseif' cases+=IfCase)* ('else' elseBody=Block)?;

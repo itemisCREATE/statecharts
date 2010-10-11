@@ -944,7 +944,7 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 		packageEClass.getESuperTypes().add(this.getPackageableElement());
 		tensorTypeEClass.getESuperTypes().add(this.getArrayType());
 		recordEClass.getESuperTypes().add(this.getDataType());
-		unitTypeEClass.getESuperTypes().add(this.getType());
+		unitTypeEClass.getESuperTypes().add(this.getDataType());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(typeEClass, Type.class, "Type", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1055,7 +1055,7 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 
 		initEClass(recordFieldEClass, RecordField.class, "RecordField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getRecordField_Type(), this.getDataType(), null, "type", null, 1, 1, RecordField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEAttribute(getRecordField_Name(), ecorePackage.getEString(), "name", null, 1, 1, RecordField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getRecordField_Name(), ecorePackage.getEString(), "name", null, 0, 1, RecordField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(unitTypeEClass, UnitType.class, "UnitType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

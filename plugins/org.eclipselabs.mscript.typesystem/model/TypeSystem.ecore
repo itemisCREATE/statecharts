@@ -233,8 +233,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="RecordField">
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" ordered="false" lowerBound="1"
         eType="#//DataType"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        unsettable="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="UnitType" eSuperTypes="#//Type"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UnitType" eSuperTypes="#//DataType"/>
 </ecore:EPackage>

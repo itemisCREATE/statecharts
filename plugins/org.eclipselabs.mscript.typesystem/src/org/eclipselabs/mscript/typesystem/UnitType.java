@@ -17,5 +17,5 @@ package org.eclipselabs.mscript.typesystem;
  * @model
  * @generated
  */
-public interface UnitType extends Type {
+public interface UnitType extends DataType {
 } // UnitType

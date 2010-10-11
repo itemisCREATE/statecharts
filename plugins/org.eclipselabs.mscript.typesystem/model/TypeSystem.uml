@@ -333,6 +333,8 @@
       <ownedAttribute xmi:id="_rLwNMM4TEd-06tH_5Us_6Q" name="type" type="_FfGmwH3nEd-EWvFDOLE-rQ" association="_nj8jkM4UEd-06tH_5Us_6Q"/>
       <ownedAttribute xmi:id="_ySiCoM4TEd-06tH_5Us_6Q" name="name" aggregation="composite">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_9AyZUNSbEd-6Zv_9XpuCAw" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_9AzncNSbEd-6Zv_9XpuCAw"/>
       </ownedAttribute>
     </packagedElement>
     <packagedElement xmi:type="uml:Association" xmi:id="_o8DbcM4TEd-06tH_5Us_6Q" memberEnd="_o8ECgM4TEd-06tH_5Us_6Q _k6hfsM4TEd-06tH_5Us_6Q">
@@ -342,7 +344,7 @@
       <ownedEnd xmi:id="_nj9xsM4UEd-06tH_5Us_6Q" type="_dn-fIM4TEd-06tH_5Us_6Q" association="_nj8jkM4UEd-06tH_5Us_6Q"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_MRUIwM4oEd-06tH_5Us_6Q" name="UnitType">
-      <generalization xmi:id="_S5QGEM4oEd-06tH_5Us_6Q" general="_WcuYwHGiEd-Vr_LfGhknIQ"/>
+      <generalization xmi:id="_MyQq0NSYEd-6Zv_9XpuCAw" general="_FfGmwH3nEd-EWvFDOLE-rQ"/>
     </packagedElement>
     <profileApplication xmi:id="_DbDeoHGiEd-Vr_LfGhknIQ">
       <eAnnotations xmi:id="_DbI-MHGiEd-Vr_LfGhknIQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
@@ -390,4 +392,5 @@
   <Ecore:EAttribute xmi:id="_XUoOELRyEd-XzKz8TgAxgw" isTransient="true"/>
   <Ecore:EAttribute xmi:id="_XscRILRyEd-XzKz8TgAxgw" isTransient="true"/>
   <Ecore:EAttribute xmi:id="_YEPGELRyEd-XzKz8TgAxgw" isTransient="true" base_Property="_QH5hoLRyEd-XzKz8TgAxgw"/>
+  <Ecore:EAttribute xmi:id="_9mYZsNSbEd-6Zv_9XpuCAw" isUnsettable="true" base_Property="_ySiCoM4TEd-06tH_5Us_6Q"/>
 </xmi:XMI>

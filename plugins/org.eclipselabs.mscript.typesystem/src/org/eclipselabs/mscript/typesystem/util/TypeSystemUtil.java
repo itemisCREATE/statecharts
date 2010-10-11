@@ -33,6 +33,7 @@ public class TypeSystemUtil {
 	public static final DataType INVALID_DATA_TYPE = TypeSystemFactory.eINSTANCE.createInvalidDataType();
 	public static final DataType BOOLEAN_TYPE = TypeSystemFactory.eINSTANCE.createBooleanType();
 	public static final DataType STRING_TYPE = TypeSystemFactory.eINSTANCE.createStringType();
+	public static final DataType UNIT_TYPE = TypeSystemFactory.eINSTANCE.createUnitType();
 	
 	
 	public static ArrayType createArrayType(DataType elementType, int... sizes) {

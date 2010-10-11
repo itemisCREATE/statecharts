@@ -46,8 +46,7 @@
     </type>
     <alternatives xsi:type="xtext:Alternatives">
       <elements xsi:type="xtext:RuleCall" rule="//@rules.4"/>
-      <elements xsi:type="xtext:RuleCall" rule="//@rules.12"/>
-      <elements xsi:type="xtext:RuleCall" rule="//@rules.13"/>
+      <elements xsi:type="xtext:RuleCall" rule="//@rules.11"/>
     </alternatives>
   </rules>
   <rules xsi:type="xtext:ParserRule" name="DataTypeDefinition">
@@ -56,7 +55,7 @@
     </type>
     <alternatives xsi:type="xtext:Alternatives">
       <elements xsi:type="xtext:RuleCall" rule="//@rules.5"/>
-      <elements xsi:type="xtext:RuleCall" rule="//@rules.10"/>
+      <elements xsi:type="xtext:RuleCall" rule="//@rules.9"/>
       <elements xsi:type="xtext:RuleCall" rule="//@rules.7"/>
     </alternatives>
   </rules>
@@ -113,10 +112,12 @@
       <classifier xsi:type="ecore:EClass" href="http://www.eclipselabs.org/mscript/AST/1.0.0#//VariableDeclaration"/>
     </type>
     <alternatives xsi:type="xtext:Group">
-      <elements xsi:type="xtext:Assignment" cardinality="?" feature="modifier" operator="=">
-        <terminal xsi:type="xtext:RuleCall" rule="//@rules.9"/>
+      <elements xsi:type="xtext:Alternatives">
+        <elements xsi:type="xtext:Keyword" value="var"/>
+        <elements xsi:type="xtext:Assignment" feature="constant" operator="?=">
+          <terminal xsi:type="xtext:Keyword" value="const"/>
+        </elements>
       </elements>
-      <elements xsi:type="xtext:Keyword" value="var"/>
       <elements xsi:type="xtext:Assignment" feature="name" operator="=">
         <terminal xsi:type="xtext:RuleCall" rule="//@rules.86"/>
       </elements>
@@ -135,19 +136,6 @@
       <elements xsi:type="xtext:Keyword" value=";"/>
     </alternatives>
   </rules>
-  <rules xsi:type="xtext:ParserRule" name="VariableModifier">
-    <type metamodel="//@metamodelDeclarations.0">
-      <classifier xsi:type="ecore:EClass" href="http://www.eclipselabs.org/mscript/AST/1.0.0#//VariableModifier"/>
-    </type>
-    <alternatives xsi:type="xtext:Alternatives">
-      <elements xsi:type="xtext:Assignment" feature="Auto" operator="=">
-        <terminal xsi:type="xtext:Keyword" value="auto"/>
-      </elements>
-      <elements xsi:type="xtext:Assignment" feature="Constant" operator="=">
-        <terminal xsi:type="xtext:Keyword" value="const"/>
-      </elements>
-    </alternatives>
-  </rules>
   <rules xsi:type="xtext:ParserRule" name="RecordDefinition">
     <type metamodel="//@metamodelDeclarations.0">
       <classifier xsi:type="ecore:EClass" href="http://www.eclipselabs.org/mscript/AST/1.0.0#//RecordDefinition"/>
@@ -159,7 +147,7 @@
       </elements>
       <elements xsi:type="xtext:Keyword" value="{"/>
       <elements xsi:type="xtext:Assignment" cardinality="*" feature="fields" operator="+=">
-        <terminal xsi:type="xtext:RuleCall" rule="//@rules.11"/>
+        <terminal xsi:type="xtext:RuleCall" rule="//@rules.10"/>
       </elements>
       <elements xsi:type="xtext:Keyword" value="}"/>
     </alternatives>
@@ -177,6 +165,15 @@
         <terminal xsi:type="xtext:RuleCall" rule="//@rules.28"/>
       </elements>
       <elements xsi:type="xtext:Keyword" value=";"/>
+    </alternatives>
+  </rules>
+  <rules xsi:type="xtext:ParserRule" name="SubroutineDefinition">
+    <type metamodel="//@metamodelDeclarations.0">
+      <classifier xsi:type="ecore:EClass" href="http://www.eclipselabs.org/mscript/AST/1.0.0#//SubroutineDefinition"/>
+    </type>
+    <alternatives xsi:type="xtext:Alternatives">
+      <elements xsi:type="xtext:RuleCall" rule="//@rules.12"/>
+      <elements xsi:type="xtext:RuleCall" rule="//@rules.13"/>
     </alternatives>
   </rules>
   <rules xsi:type="xtext:ParserRule" name="FunctionDefinition">
@@ -312,12 +309,12 @@
       <elements xsi:type="xtext:Keyword" value="}"/>
     </alternatives>
   </rules>
-  <rules xsi:type="xtext:ParserRule" name="FeatureCallStatement">
+  <rules xsi:type="xtext:ParserRule" name="ExpressionStatement">
     <type metamodel="//@metamodelDeclarations.0">
-      <classifier xsi:type="ecore:EClass" href="http://www.eclipselabs.org/mscript/AST/1.0.0#//FeatureCallStatement"/>
+      <classifier xsi:type="ecore:EClass" href="http://www.eclipselabs.org/mscript/AST/1.0.0#//ExpressionStatement"/>
     </type>
     <alternatives xsi:type="xtext:Group">
-      <elements xsi:type="xtext:Assignment" feature="featureCall" operator="=">
+      <elements xsi:type="xtext:Assignment" feature="expression" operator="=">
         <terminal xsi:type="xtext:RuleCall" rule="//@rules.58"/>
       </elements>
       <elements xsi:type="xtext:Group" cardinality="?">

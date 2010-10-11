@@ -314,6 +314,7 @@ public class TypeSystemSwitch<T> {
 			case TypeSystemPackage.UNIT_TYPE: {
 				UnitType unitType = (UnitType)theEObject;
 				T result = caseUnitType(unitType);
+				if (result == null) result = caseDataType(unitType);
 				if (result == null) result = caseType(unitType);
 				if (result == null) result = casePackageableElement(unitType);
 				if (result == null) result = caseNamedElement(unitType);
