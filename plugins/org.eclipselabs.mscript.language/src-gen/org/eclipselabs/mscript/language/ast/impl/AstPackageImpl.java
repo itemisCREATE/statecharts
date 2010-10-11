@@ -1364,7 +1364,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getReturnStatement_Value()
+  public EReference getReturnStatement_ReturnValue()
   {
     return (EReference)returnStatementEClass.getEStructuralFeatures().get(0);
   }
@@ -2743,7 +2743,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     createEReference(foreachStatementEClass, FOREACH_STATEMENT__BODY);
 
     returnStatementEClass = createEClass(RETURN_STATEMENT);
-    createEReference(returnStatementEClass, RETURN_STATEMENT__VALUE);
+    createEReference(returnStatementEClass, RETURN_STATEMENT__RETURN_VALUE);
 
     checkStatusStatementEClass = createEClass(CHECK_STATUS_STATEMENT);
     createEAttribute(checkStatusStatementEClass, CHECK_STATUS_STATEMENT__KIND);
@@ -3099,7 +3099,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     initEReference(getForeachStatement_Body(), this.getBlock(), null, "body", null, 0, 1, ForeachStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(returnStatementEClass, ReturnStatement.class, "ReturnStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getReturnStatement_Value(), this.getExpression(), null, "value", null, 0, 1, ReturnStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getReturnStatement_ReturnValue(), this.getExpression(), null, "returnValue", null, 0, 1, ReturnStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(checkStatusStatementEClass, CheckStatusStatement.class, "CheckStatusStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getCheckStatusStatement_Kind(), this.getCheckStatusKind(), "kind", null, 0, 1, CheckStatusStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

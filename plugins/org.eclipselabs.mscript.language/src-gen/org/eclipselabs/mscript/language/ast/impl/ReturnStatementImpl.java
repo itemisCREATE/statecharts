@@ -24,7 +24,7 @@ import org.eclipselabs.mscript.language.ast.ReturnStatement;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.ReturnStatementImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.ReturnStatementImpl#getReturnValue <em>Return Value</em>}</li>
  * </ul>
  * </p>
  *
@@ -33,14 +33,14 @@ import org.eclipselabs.mscript.language.ast.ReturnStatement;
 public class ReturnStatementImpl extends StatementImpl implements ReturnStatement
 {
   /**
-   * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
+   * The cached value of the '{@link #getReturnValue() <em>Return Value</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getValue()
+   * @see #getReturnValue()
    * @generated
    * @ordered
    */
-  protected Expression value;
+  protected Expression returnValue;
 
   /**
    * <!-- begin-user-doc -->
@@ -68,9 +68,9 @@ public class ReturnStatementImpl extends StatementImpl implements ReturnStatemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public Expression getValue()
+  public Expression getReturnValue()
   {
-    return value;
+    return returnValue;
   }
 
   /**
@@ -78,13 +78,13 @@ public class ReturnStatementImpl extends StatementImpl implements ReturnStatemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetValue(Expression newValue, NotificationChain msgs)
+  public NotificationChain basicSetReturnValue(Expression newReturnValue, NotificationChain msgs)
   {
-    Expression oldValue = value;
-    value = newValue;
+    Expression oldReturnValue = returnValue;
+    returnValue = newReturnValue;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.RETURN_STATEMENT__VALUE, oldValue, newValue);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.RETURN_STATEMENT__RETURN_VALUE, oldReturnValue, newReturnValue);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -95,20 +95,20 @@ public class ReturnStatementImpl extends StatementImpl implements ReturnStatemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setValue(Expression newValue)
+  public void setReturnValue(Expression newReturnValue)
   {
-    if (newValue != value)
+    if (newReturnValue != returnValue)
     {
       NotificationChain msgs = null;
-      if (value != null)
-        msgs = ((InternalEObject)value).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.RETURN_STATEMENT__VALUE, null, msgs);
-      if (newValue != null)
-        msgs = ((InternalEObject)newValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.RETURN_STATEMENT__VALUE, null, msgs);
-      msgs = basicSetValue(newValue, msgs);
+      if (returnValue != null)
+        msgs = ((InternalEObject)returnValue).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.RETURN_STATEMENT__RETURN_VALUE, null, msgs);
+      if (newReturnValue != null)
+        msgs = ((InternalEObject)newReturnValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.RETURN_STATEMENT__RETURN_VALUE, null, msgs);
+      msgs = basicSetReturnValue(newReturnValue, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.RETURN_STATEMENT__VALUE, newValue, newValue));
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.RETURN_STATEMENT__RETURN_VALUE, newReturnValue, newReturnValue));
   }
 
   /**
@@ -121,8 +121,8 @@ public class ReturnStatementImpl extends StatementImpl implements ReturnStatemen
   {
     switch (featureID)
     {
-      case AstPackage.RETURN_STATEMENT__VALUE:
-        return basicSetValue(null, msgs);
+      case AstPackage.RETURN_STATEMENT__RETURN_VALUE:
+        return basicSetReturnValue(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -137,8 +137,8 @@ public class ReturnStatementImpl extends StatementImpl implements ReturnStatemen
   {
     switch (featureID)
     {
-      case AstPackage.RETURN_STATEMENT__VALUE:
-        return getValue();
+      case AstPackage.RETURN_STATEMENT__RETURN_VALUE:
+        return getReturnValue();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -153,8 +153,8 @@ public class ReturnStatementImpl extends StatementImpl implements ReturnStatemen
   {
     switch (featureID)
     {
-      case AstPackage.RETURN_STATEMENT__VALUE:
-        setValue((Expression)newValue);
+      case AstPackage.RETURN_STATEMENT__RETURN_VALUE:
+        setReturnValue((Expression)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -170,8 +170,8 @@ public class ReturnStatementImpl extends StatementImpl implements ReturnStatemen
   {
     switch (featureID)
     {
-      case AstPackage.RETURN_STATEMENT__VALUE:
-        setValue((Expression)null);
+      case AstPackage.RETURN_STATEMENT__RETURN_VALUE:
+        setReturnValue((Expression)null);
         return;
     }
     super.eUnset(featureID);
@@ -187,8 +187,8 @@ public class ReturnStatementImpl extends StatementImpl implements ReturnStatemen
   {
     switch (featureID)
     {
-      case AstPackage.RETURN_STATEMENT__VALUE:
-        return value != null;
+      case AstPackage.RETURN_STATEMENT__RETURN_VALUE:
+        return returnValue != null;
     }
     return super.eIsSet(featureID);
   }

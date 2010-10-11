@@ -18195,20 +18195,20 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__ReturnStatement__Group__2__Impl
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:6683:1: rule__ReturnStatement__Group__2__Impl : ( ( rule__ReturnStatement__ValueAssignment_2 )? ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:6683:1: rule__ReturnStatement__Group__2__Impl : ( ( rule__ReturnStatement__ReturnValueAssignment_2 )? ) ;
     public final void rule__ReturnStatement__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:6687:1: ( ( ( rule__ReturnStatement__ValueAssignment_2 )? ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:6688:1: ( ( rule__ReturnStatement__ValueAssignment_2 )? )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:6687:1: ( ( ( rule__ReturnStatement__ReturnValueAssignment_2 )? ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:6688:1: ( ( rule__ReturnStatement__ReturnValueAssignment_2 )? )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:6688:1: ( ( rule__ReturnStatement__ValueAssignment_2 )? )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:6689:1: ( rule__ReturnStatement__ValueAssignment_2 )?
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:6688:1: ( ( rule__ReturnStatement__ReturnValueAssignment_2 )? )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:6689:1: ( rule__ReturnStatement__ReturnValueAssignment_2 )?
             {
-             before(grammarAccess.getReturnStatementAccess().getValueAssignment_2()); 
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:6690:1: ( rule__ReturnStatement__ValueAssignment_2 )?
+             before(grammarAccess.getReturnStatementAccess().getReturnValueAssignment_2()); 
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:6690:1: ( rule__ReturnStatement__ReturnValueAssignment_2 )?
             int alt53=2;
             int LA53_0 = input.LA(1);
 
@@ -18217,10 +18217,10 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
             }
             switch (alt53) {
                 case 1 :
-                    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:6690:2: rule__ReturnStatement__ValueAssignment_2
+                    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:6690:2: rule__ReturnStatement__ReturnValueAssignment_2
                     {
-                    pushFollow(FOLLOW_rule__ReturnStatement__ValueAssignment_2_in_rule__ReturnStatement__Group__2__Impl13878);
-                    rule__ReturnStatement__ValueAssignment_2();
+                    pushFollow(FOLLOW_rule__ReturnStatement__ReturnValueAssignment_2_in_rule__ReturnStatement__Group__2__Impl13878);
+                    rule__ReturnStatement__ReturnValueAssignment_2();
                     _fsp--;
 
 
@@ -18229,7 +18229,7 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
             }
 
-             after(grammarAccess.getReturnStatementAccess().getValueAssignment_2()); 
+             after(grammarAccess.getReturnStatementAccess().getReturnValueAssignment_2()); 
 
             }
 
@@ -38662,9 +38662,9 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
     // $ANTLR end rule__ForeachStatement__BodyAssignment_4
 
 
-    // $ANTLR start rule__ReturnStatement__ValueAssignment_2
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:14768:1: rule__ReturnStatement__ValueAssignment_2 : ( ruleExpression ) ;
-    public final void rule__ReturnStatement__ValueAssignment_2() throws RecognitionException {
+    // $ANTLR start rule__ReturnStatement__ReturnValueAssignment_2
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:14768:1: rule__ReturnStatement__ReturnValueAssignment_2 : ( ruleExpression ) ;
+    public final void rule__ReturnStatement__ReturnValueAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -38675,12 +38675,12 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
             // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:14773:1: ( ruleExpression )
             // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:14774:1: ruleExpression
             {
-             before(grammarAccess.getReturnStatementAccess().getValueExpressionParserRuleCall_2_0()); 
-            pushFollow(FOLLOW_ruleExpression_in_rule__ReturnStatement__ValueAssignment_229822);
+             before(grammarAccess.getReturnStatementAccess().getReturnValueExpressionParserRuleCall_2_0()); 
+            pushFollow(FOLLOW_ruleExpression_in_rule__ReturnStatement__ReturnValueAssignment_229822);
             ruleExpression();
             _fsp--;
 
-             after(grammarAccess.getReturnStatementAccess().getValueExpressionParserRuleCall_2_0()); 
+             after(grammarAccess.getReturnStatementAccess().getReturnValueExpressionParserRuleCall_2_0()); 
 
             }
 
@@ -38699,7 +38699,7 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ReturnStatement__ValueAssignment_2
+    // $ANTLR end rule__ReturnStatement__ReturnValueAssignment_2
 
 
     // $ANTLR start rule__CheckStatusStatement__KindAssignment_0
@@ -42841,7 +42841,7 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_57_in_rule__ReturnStatement__Group__1__Impl13817 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__ReturnStatement__Group__2__Impl_in_rule__ReturnStatement__Group__213848 = new BitSet(new long[]{0x0000040000000000L});
     public static final BitSet FOLLOW_rule__ReturnStatement__Group__3_in_rule__ReturnStatement__Group__213851 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ReturnStatement__ValueAssignment_2_in_rule__ReturnStatement__Group__2__Impl13878 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ReturnStatement__ReturnValueAssignment_2_in_rule__ReturnStatement__Group__2__Impl13878 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__ReturnStatement__Group__3__Impl_in_rule__ReturnStatement__Group__313909 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_42_in_rule__ReturnStatement__Group__3__Impl13937 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__CheckStatusStatement__Group__0__Impl_in_rule__CheckStatusStatement__Group__013976 = new BitSet(new long[]{0x08044006040060F0L,0x0000000000000740L});
@@ -43479,7 +43479,7 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_ruleKeywordID_in_rule__ForeachStatement__ElementNameAssignment_129729 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleExpression_in_rule__ForeachStatement__CollectionExpressionAssignment_329760 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleBlock_in_rule__ForeachStatement__BodyAssignment_429791 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpression_in_rule__ReturnStatement__ValueAssignment_229822 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpression_in_rule__ReturnStatement__ReturnValueAssignment_229822 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleCheckStatusKind_in_rule__CheckStatusStatement__KindAssignment_029853 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleExpression_in_rule__CheckStatusStatement__MessageAssignment_129884 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleUnitExpression_in_rule__RealTypeSpecifier__UnitAssignment_2_129915 = new BitSet(new long[]{0x0000000000000002L});

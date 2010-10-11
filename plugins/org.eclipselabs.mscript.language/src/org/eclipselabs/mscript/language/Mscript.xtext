@@ -137,7 +137,7 @@ ForeachStatement :
 	'foreach' elementName=KeywordID 'in' collectionExpression=Expression body=Block;
 	
 ReturnStatement :
-	{ReturnStatement} 'return' (value=Expression)? ';';
+	{ReturnStatement} 'return' (returnValue=Expression)? ';';
 	
 CheckStatusStatement :
 	kind=CheckStatusKind message=Expression ';';

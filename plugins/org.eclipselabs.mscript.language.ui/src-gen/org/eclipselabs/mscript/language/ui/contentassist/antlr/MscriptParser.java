@@ -237,7 +237,7 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getForeachStatementAccess().getElementNameAssignment_1(), "rule__ForeachStatement__ElementNameAssignment_1");
 					put(grammarAccess.getForeachStatementAccess().getCollectionExpressionAssignment_3(), "rule__ForeachStatement__CollectionExpressionAssignment_3");
 					put(grammarAccess.getForeachStatementAccess().getBodyAssignment_4(), "rule__ForeachStatement__BodyAssignment_4");
-					put(grammarAccess.getReturnStatementAccess().getValueAssignment_2(), "rule__ReturnStatement__ValueAssignment_2");
+					put(grammarAccess.getReturnStatementAccess().getReturnValueAssignment_2(), "rule__ReturnStatement__ReturnValueAssignment_2");
 					put(grammarAccess.getCheckStatusStatementAccess().getKindAssignment_0(), "rule__CheckStatusStatement__KindAssignment_0");
 					put(grammarAccess.getCheckStatusStatementAccess().getMessageAssignment_1(), "rule__CheckStatusStatement__MessageAssignment_1");
 					put(grammarAccess.getRealTypeSpecifierAccess().getUnitAssignment_2_1(), "rule__RealTypeSpecifier__UnitAssignment_2_1");

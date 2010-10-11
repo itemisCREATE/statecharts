@@ -1018,15 +1018,15 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cReturnStatementAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cReturnKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cValueAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cValueExpressionParserRuleCall_2_0 = (RuleCall)cValueAssignment_2.eContents().get(0);
+		private final Assignment cReturnValueAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cReturnValueExpressionParserRuleCall_2_0 = (RuleCall)cReturnValueAssignment_2.eContents().get(0);
 		private final Keyword cSemicolonKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//ReturnStatement:
-		//	{ReturnStatement} "return" value=Expression? ";";
+		//	{ReturnStatement} "return" returnValue=Expression? ";";
 		public ParserRule getRule() { return rule; }
 
-		//{ReturnStatement} "return" value=Expression? ";"
+		//{ReturnStatement} "return" returnValue=Expression? ";"
 		public Group getGroup() { return cGroup; }
 
 		//{ReturnStatement}
@@ -1035,11 +1035,11 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		//"return"
 		public Keyword getReturnKeyword_1() { return cReturnKeyword_1; }
 
-		//value=Expression?
-		public Assignment getValueAssignment_2() { return cValueAssignment_2; }
+		//returnValue=Expression?
+		public Assignment getReturnValueAssignment_2() { return cReturnValueAssignment_2; }
 
 		//Expression
-		public RuleCall getValueExpressionParserRuleCall_2_0() { return cValueExpressionParserRuleCall_2_0; }
+		public RuleCall getReturnValueExpressionParserRuleCall_2_0() { return cReturnValueExpressionParserRuleCall_2_0; }
 
 		//";"
 		public Keyword getSemicolonKeyword_3() { return cSemicolonKeyword_3; }
@@ -3824,7 +3824,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ReturnStatement:
-	//	{ReturnStatement} "return" value=Expression? ";";
+	//	{ReturnStatement} "return" returnValue=Expression? ";";
 	public ReturnStatementElements getReturnStatementAccess() {
 		return (pReturnStatement != null) ? pReturnStatement : (pReturnStatement = new ReturnStatementElements());
 	}

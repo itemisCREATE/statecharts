@@ -4713,21 +4713,21 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleReturnStatement
-    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:2144:1: ruleReturnStatement returns [EObject current=null] : ( () 'return' ( (lv_value_2_0= ruleExpression ) )? ';' ) ;
+    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:2144:1: ruleReturnStatement returns [EObject current=null] : ( () 'return' ( (lv_returnValue_2_0= ruleExpression ) )? ';' ) ;
     public final EObject ruleReturnStatement() throws RecognitionException {
         EObject current = null;
 
-        EObject lv_value_2_0 = null;
+        EObject lv_returnValue_2_0 = null;
 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:2149:6: ( ( () 'return' ( (lv_value_2_0= ruleExpression ) )? ';' ) )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:2150:1: ( () 'return' ( (lv_value_2_0= ruleExpression ) )? ';' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:2149:6: ( ( () 'return' ( (lv_returnValue_2_0= ruleExpression ) )? ';' ) )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:2150:1: ( () 'return' ( (lv_returnValue_2_0= ruleExpression ) )? ';' )
             {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:2150:1: ( () 'return' ( (lv_value_2_0= ruleExpression ) )? ';' )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:2150:2: () 'return' ( (lv_value_2_0= ruleExpression ) )? ';'
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:2150:1: ( () 'return' ( (lv_returnValue_2_0= ruleExpression ) )? ';' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:2150:2: () 'return' ( (lv_returnValue_2_0= ruleExpression ) )? ';'
             {
             // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:2150:2: ()
             // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:2151:5: 
@@ -4749,7 +4749,7 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
                     createLeafNode(grammarAccess.getReturnStatementAccess().getReturnKeyword_1(), null); 
                 
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:2165:1: ( (lv_value_2_0= ruleExpression ) )?
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:2165:1: ( (lv_returnValue_2_0= ruleExpression ) )?
             int alt26=2;
             int LA26_0 = input.LA(1);
 
@@ -4758,16 +4758,16 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
             }
             switch (alt26) {
                 case 1 :
-                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:2166:1: (lv_value_2_0= ruleExpression )
+                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:2166:1: (lv_returnValue_2_0= ruleExpression )
                     {
-                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:2166:1: (lv_value_2_0= ruleExpression )
-                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:2167:3: lv_value_2_0= ruleExpression
+                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:2166:1: (lv_returnValue_2_0= ruleExpression )
+                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:2167:3: lv_returnValue_2_0= ruleExpression
                     {
                      
-                    	        currentNode=createCompositeNode(grammarAccess.getReturnStatementAccess().getValueExpressionParserRuleCall_2_0(), currentNode); 
+                    	        currentNode=createCompositeNode(grammarAccess.getReturnStatementAccess().getReturnValueExpressionParserRuleCall_2_0(), currentNode); 
                     	    
                     pushFollow(FOLLOW_ruleExpression_in_ruleReturnStatement3871);
-                    lv_value_2_0=ruleExpression();
+                    lv_returnValue_2_0=ruleExpression();
                     _fsp--;
 
 
@@ -4778,8 +4778,8 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
                     	        try {
                     	       		set(
                     	       			current, 
-                    	       			"value",
-                    	        		lv_value_2_0, 
+                    	       			"returnValue",
+                    	        		lv_returnValue_2_0, 
                     	        		"Expression", 
                     	        		currentNode);
                     	        } catch (ValueConverterException vce) {

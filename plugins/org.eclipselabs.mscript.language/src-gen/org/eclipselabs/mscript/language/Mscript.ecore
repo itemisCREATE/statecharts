@@ -109,7 +109,7 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ReturnStatement" eSuperTypes="#//Statement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Expression"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="returnValue" eType="#//Expression"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CheckStatusStatement" eSuperTypes="#//Statement">

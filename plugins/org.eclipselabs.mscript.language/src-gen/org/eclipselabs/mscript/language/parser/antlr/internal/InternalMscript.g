@@ -2165,9 +2165,9 @@ ruleReturnStatement returns [EObject current=null]
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getReturnStatementAccess().getValueExpressionParserRuleCall_2_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getReturnStatementAccess().getReturnValueExpressionParserRuleCall_2_0(), currentNode); 
 	    }
-		lv_value_2_0=ruleExpression		{
+		lv_returnValue_2_0=ruleExpression		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getReturnStatementRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -2175,8 +2175,8 @@ ruleReturnStatement returns [EObject current=null]
 	        try {
 	       		set(
 	       			$current, 
-	       			"value",
-	        		lv_value_2_0, 
+	       			"returnValue",
+	        		lv_returnValue_2_0, 
 	        		"Expression", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {

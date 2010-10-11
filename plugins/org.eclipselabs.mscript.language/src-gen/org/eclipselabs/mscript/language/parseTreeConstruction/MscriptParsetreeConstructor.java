@@ -5182,11 +5182,11 @@ protected class ForeachStatement_BodyAssignment_4 extends AssignmentToken  {
 /************ begin Rule ReturnStatement ****************
  *
  * ReturnStatement:
- * 	{ReturnStatement} "return" value=Expression? ";";
+ * 	{ReturnStatement} "return" returnValue=Expression? ";";
  *
  **/
 
-// {ReturnStatement} "return" value=Expression? ";"
+// {ReturnStatement} "return" returnValue=Expression? ";"
 protected class ReturnStatement_Group extends GroupToken {
 	
 	public ReturnStatement_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5263,16 +5263,16 @@ protected class ReturnStatement_ReturnKeyword_1 extends KeywordToken  {
 
 }
 
-// value=Expression?
-protected class ReturnStatement_ValueAssignment_2 extends AssignmentToken  {
+// returnValue=Expression?
+protected class ReturnStatement_ReturnValueAssignment_2 extends AssignmentToken  {
 	
-	public ReturnStatement_ValueAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public ReturnStatement_ReturnValueAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getReturnStatementAccess().getValueAssignment_2();
+		return grammarAccess.getReturnStatementAccess().getReturnValueAssignment_2();
 	}
 
     @Override
@@ -5285,13 +5285,13 @@ protected class ReturnStatement_ValueAssignment_2 extends AssignmentToken  {
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("value",false)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("value");
+		if((value = eObjectConsumer.getConsumable("returnValue",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("returnValue");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getExpressionRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getReturnStatementAccess().getValueExpressionParserRuleCall_2_0(); 
+				element = grammarAccess.getReturnStatementAccess().getReturnValueExpressionParserRuleCall_2_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -5324,7 +5324,7 @@ protected class ReturnStatement_SemicolonKeyword_3 extends KeywordToken  {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new ReturnStatement_ValueAssignment_2(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new ReturnStatement_ReturnValueAssignment_2(lastRuleCallOrigin, this, 0, inst);
 			case 1: return new ReturnStatement_ReturnKeyword_1(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	

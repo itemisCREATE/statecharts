@@ -959,13 +959,13 @@ public interface AstPackage extends EPackage
   int RETURN_STATEMENT = 24;
 
   /**
-   * The feature id for the '<em><b>Value</b></em>' containment reference.
+   * The feature id for the '<em><b>Return Value</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int RETURN_STATEMENT__VALUE = STATEMENT_FEATURE_COUNT + 0;
+  int RETURN_STATEMENT__RETURN_VALUE = STATEMENT_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Return Statement</em>' class.
@@ -3436,15 +3436,15 @@ public interface AstPackage extends EPackage
   EClass getReturnStatement();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.ReturnStatement#getValue <em>Value</em>}'.
+   * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.ReturnStatement#getReturnValue <em>Return Value</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Value</em>'.
-   * @see org.eclipselabs.mscript.language.ast.ReturnStatement#getValue()
+   * @return the meta object for the containment reference '<em>Return Value</em>'.
+   * @see org.eclipselabs.mscript.language.ast.ReturnStatement#getReturnValue()
    * @see #getReturnStatement()
    * @generated
    */
-  EReference getReturnStatement_Value();
+  EReference getReturnStatement_ReturnValue();
 
   /**
    * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.CheckStatusStatement <em>Check Status Statement</em>}'.
@@ -5327,12 +5327,12 @@ public interface AstPackage extends EPackage
     EClass RETURN_STATEMENT = eINSTANCE.getReturnStatement();
 
     /**
-     * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Return Value</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference RETURN_STATEMENT__VALUE = eINSTANCE.getReturnStatement_Value();
+    EReference RETURN_STATEMENT__RETURN_VALUE = eINSTANCE.getReturnStatement_ReturnValue();
 
     /**
      * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.CheckStatusStatementImpl <em>Check Status Statement</em>}' class.
