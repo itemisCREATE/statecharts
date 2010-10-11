@@ -8643,7 +8643,7 @@ protected class ArrayDimensionSpecification_Alternatives extends AlternativesTok
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getArrayDimensionSpecificationAccess().getArrayDimensionSpecificationBeginIndexAction_1_1_0().getType().getClassifier())
+		if(getEObject().eClass() != grammarAccess.getArrayDimensionSpecificationRule().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
 	}
