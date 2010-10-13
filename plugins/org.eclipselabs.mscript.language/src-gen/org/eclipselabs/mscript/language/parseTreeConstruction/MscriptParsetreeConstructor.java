@@ -60,7 +60,7 @@ protected class ThisRootNode extends RootToken {
 			case 26: return new TypeSpecifier_Alternatives(this, this, 26, inst);
 			case 27: return new DataTypeSpecifier_Alternatives(this, this, 27, inst);
 			case 28: return new PrimitiveTypeSpecifier_Alternatives(this, this, 28, inst);
-			case 29: return new NumericalTypeSpecifier_Alternatives(this, this, 29, inst);
+			case 29: return new NumericTypeSpecifier_Alternatives(this, this, 29, inst);
 			case 30: return new RealTypeSpecifier_Group(this, this, 30, inst);
 			case 31: return new IntegerTypeSpecifier_Group(this, this, 31, inst);
 			case 32: return new ComplexTypeSpecifier_Group(this, this, 32, inst);
@@ -91,7 +91,7 @@ protected class ThisRootNode extends RootToken {
 			case 57: return new CallablePrimaryExpression_Alternatives(this, this, 57, inst);
 			case 58: return new PrimaryExpression_Alternatives(this, this, 58, inst);
 			case 59: return new Literal_Alternatives(this, this, 59, inst);
-			case 60: return new NumericalLiteral_Alternatives(this, this, 60, inst);
+			case 60: return new NumericLiteral_Alternatives(this, this, 60, inst);
 			case 61: return new RealLiteral_Group(this, this, 61, inst);
 			case 62: return new IntegerLiteral_Group(this, this, 62, inst);
 			case 63: return new BooleanLiteral_ValueAssignment(this, this, 63, inst);
@@ -5907,11 +5907,11 @@ protected class DataTypeSpecifier_NamedTypeSpecifierParserRuleCall_1 extends Rul
 /************ begin Rule PrimitiveTypeSpecifier ****************
  *
  * PrimitiveTypeSpecifier:
- * 	NumericalTypeSpecifier | BooleanTypeSpecifier | StringTypeSpecifier;
+ * 	NumericTypeSpecifier | BooleanTypeSpecifier | StringTypeSpecifier;
  *
  **/
 
-// NumericalTypeSpecifier | BooleanTypeSpecifier | StringTypeSpecifier
+// NumericTypeSpecifier | BooleanTypeSpecifier | StringTypeSpecifier
 protected class PrimitiveTypeSpecifier_Alternatives extends AlternativesToken {
 
 	public PrimitiveTypeSpecifier_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5926,7 +5926,7 @@ protected class PrimitiveTypeSpecifier_Alternatives extends AlternativesToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new PrimitiveTypeSpecifier_NumericalTypeSpecifierParserRuleCall_0(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new PrimitiveTypeSpecifier_NumericTypeSpecifierParserRuleCall_0(lastRuleCallOrigin, this, 0, inst);
 			case 1: return new PrimitiveTypeSpecifier_BooleanTypeSpecifierParserRuleCall_1(lastRuleCallOrigin, this, 1, inst);
 			case 2: return new PrimitiveTypeSpecifier_StringTypeSpecifierParserRuleCall_2(lastRuleCallOrigin, this, 2, inst);
 			default: return null;
@@ -5947,22 +5947,22 @@ protected class PrimitiveTypeSpecifier_Alternatives extends AlternativesToken {
 
 }
 
-// NumericalTypeSpecifier
-protected class PrimitiveTypeSpecifier_NumericalTypeSpecifierParserRuleCall_0 extends RuleCallToken {
+// NumericTypeSpecifier
+protected class PrimitiveTypeSpecifier_NumericTypeSpecifierParserRuleCall_0 extends RuleCallToken {
 	
-	public PrimitiveTypeSpecifier_NumericalTypeSpecifierParserRuleCall_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public PrimitiveTypeSpecifier_NumericTypeSpecifierParserRuleCall_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public RuleCall getGrammarElement() {
-		return grammarAccess.getPrimitiveTypeSpecifierAccess().getNumericalTypeSpecifierParserRuleCall_0();
+		return grammarAccess.getPrimitiveTypeSpecifierAccess().getNumericTypeSpecifierParserRuleCall_0();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new NumericalTypeSpecifier_Alternatives(this, this, 0, inst);
+			case 0: return new NumericTypeSpecifier_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -5974,7 +5974,7 @@ protected class PrimitiveTypeSpecifier_NumericalTypeSpecifierParserRuleCall_0 ex
 		   getEObject().eClass() != grammarAccess.getIntegerTypeSpecifierAccess().getIntegerTypeSpecifierAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getRealTypeSpecifierAccess().getRealTypeSpecifierAction_0().getType().getClassifier())
 			return null;
-		if(checkForRecursion(NumericalTypeSpecifier_Alternatives.class, eObjectConsumer)) return null;
+		if(checkForRecursion(NumericTypeSpecifier_Alternatives.class, eObjectConsumer)) return null;
 		return eObjectConsumer;
 	}
 	
@@ -6062,32 +6062,32 @@ protected class PrimitiveTypeSpecifier_StringTypeSpecifierParserRuleCall_2 exten
 /************ end Rule PrimitiveTypeSpecifier ****************/
 
 
-/************ begin Rule NumericalTypeSpecifier ****************
+/************ begin Rule NumericTypeSpecifier ****************
  *
- * NumericalTypeSpecifier:
+ * NumericTypeSpecifier:
  * 	RealTypeSpecifier | IntegerTypeSpecifier | ComplexTypeSpecifier | GaussianTypeSpecifier;
  *
  **/
 
 // RealTypeSpecifier | IntegerTypeSpecifier | ComplexTypeSpecifier | GaussianTypeSpecifier
-protected class NumericalTypeSpecifier_Alternatives extends AlternativesToken {
+protected class NumericTypeSpecifier_Alternatives extends AlternativesToken {
 
-	public NumericalTypeSpecifier_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public NumericTypeSpecifier_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Alternatives getGrammarElement() {
-		return grammarAccess.getNumericalTypeSpecifierAccess().getAlternatives();
+		return grammarAccess.getNumericTypeSpecifierAccess().getAlternatives();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new NumericalTypeSpecifier_RealTypeSpecifierParserRuleCall_0(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new NumericalTypeSpecifier_IntegerTypeSpecifierParserRuleCall_1(lastRuleCallOrigin, this, 1, inst);
-			case 2: return new NumericalTypeSpecifier_ComplexTypeSpecifierParserRuleCall_2(lastRuleCallOrigin, this, 2, inst);
-			case 3: return new NumericalTypeSpecifier_GaussianTypeSpecifierParserRuleCall_3(lastRuleCallOrigin, this, 3, inst);
+			case 0: return new NumericTypeSpecifier_RealTypeSpecifierParserRuleCall_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new NumericTypeSpecifier_IntegerTypeSpecifierParserRuleCall_1(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new NumericTypeSpecifier_ComplexTypeSpecifierParserRuleCall_2(lastRuleCallOrigin, this, 2, inst);
+			case 3: return new NumericTypeSpecifier_GaussianTypeSpecifierParserRuleCall_3(lastRuleCallOrigin, this, 3, inst);
 			default: return null;
 		}	
 	}
@@ -6105,15 +6105,15 @@ protected class NumericalTypeSpecifier_Alternatives extends AlternativesToken {
 }
 
 // RealTypeSpecifier
-protected class NumericalTypeSpecifier_RealTypeSpecifierParserRuleCall_0 extends RuleCallToken {
+protected class NumericTypeSpecifier_RealTypeSpecifierParserRuleCall_0 extends RuleCallToken {
 	
-	public NumericalTypeSpecifier_RealTypeSpecifierParserRuleCall_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public NumericTypeSpecifier_RealTypeSpecifierParserRuleCall_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public RuleCall getGrammarElement() {
-		return grammarAccess.getNumericalTypeSpecifierAccess().getRealTypeSpecifierParserRuleCall_0();
+		return grammarAccess.getNumericTypeSpecifierAccess().getRealTypeSpecifierParserRuleCall_0();
 	}
 
     @Override
@@ -6141,15 +6141,15 @@ protected class NumericalTypeSpecifier_RealTypeSpecifierParserRuleCall_0 extends
 }
 
 // IntegerTypeSpecifier
-protected class NumericalTypeSpecifier_IntegerTypeSpecifierParserRuleCall_1 extends RuleCallToken {
+protected class NumericTypeSpecifier_IntegerTypeSpecifierParserRuleCall_1 extends RuleCallToken {
 	
-	public NumericalTypeSpecifier_IntegerTypeSpecifierParserRuleCall_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public NumericTypeSpecifier_IntegerTypeSpecifierParserRuleCall_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public RuleCall getGrammarElement() {
-		return grammarAccess.getNumericalTypeSpecifierAccess().getIntegerTypeSpecifierParserRuleCall_1();
+		return grammarAccess.getNumericTypeSpecifierAccess().getIntegerTypeSpecifierParserRuleCall_1();
 	}
 
     @Override
@@ -6177,15 +6177,15 @@ protected class NumericalTypeSpecifier_IntegerTypeSpecifierParserRuleCall_1 exte
 }
 
 // ComplexTypeSpecifier
-protected class NumericalTypeSpecifier_ComplexTypeSpecifierParserRuleCall_2 extends RuleCallToken {
+protected class NumericTypeSpecifier_ComplexTypeSpecifierParserRuleCall_2 extends RuleCallToken {
 	
-	public NumericalTypeSpecifier_ComplexTypeSpecifierParserRuleCall_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public NumericTypeSpecifier_ComplexTypeSpecifierParserRuleCall_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public RuleCall getGrammarElement() {
-		return grammarAccess.getNumericalTypeSpecifierAccess().getComplexTypeSpecifierParserRuleCall_2();
+		return grammarAccess.getNumericTypeSpecifierAccess().getComplexTypeSpecifierParserRuleCall_2();
 	}
 
     @Override
@@ -6213,15 +6213,15 @@ protected class NumericalTypeSpecifier_ComplexTypeSpecifierParserRuleCall_2 exte
 }
 
 // GaussianTypeSpecifier
-protected class NumericalTypeSpecifier_GaussianTypeSpecifierParserRuleCall_3 extends RuleCallToken {
+protected class NumericTypeSpecifier_GaussianTypeSpecifierParserRuleCall_3 extends RuleCallToken {
 	
-	public NumericalTypeSpecifier_GaussianTypeSpecifierParserRuleCall_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public NumericTypeSpecifier_GaussianTypeSpecifierParserRuleCall_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public RuleCall getGrammarElement() {
-		return grammarAccess.getNumericalTypeSpecifierAccess().getGaussianTypeSpecifierParserRuleCall_3();
+		return grammarAccess.getNumericTypeSpecifierAccess().getGaussianTypeSpecifierParserRuleCall_3();
 	}
 
     @Override
@@ -6249,7 +6249,7 @@ protected class NumericalTypeSpecifier_GaussianTypeSpecifierParserRuleCall_3 ext
 }
 
 
-/************ end Rule NumericalTypeSpecifier ****************/
+/************ end Rule NumericTypeSpecifier ****************/
 
 
 /************ begin Rule RealTypeSpecifier ****************
@@ -13491,11 +13491,11 @@ protected class PrimaryExpression_EndExpressionParserRuleCall_3 extends RuleCall
 /************ begin Rule Literal ****************
  *
  * Literal:
- * 	NumericalLiteral | BooleanLiteral | StringLiteral;
+ * 	NumericLiteral | BooleanLiteral | StringLiteral;
  *
  **/
 
-// NumericalLiteral | BooleanLiteral | StringLiteral
+// NumericLiteral | BooleanLiteral | StringLiteral
 protected class Literal_Alternatives extends AlternativesToken {
 
 	public Literal_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -13510,7 +13510,7 @@ protected class Literal_Alternatives extends AlternativesToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Literal_NumericalLiteralParserRuleCall_0(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new Literal_NumericLiteralParserRuleCall_0(lastRuleCallOrigin, this, 0, inst);
 			case 1: return new Literal_BooleanLiteralParserRuleCall_1(lastRuleCallOrigin, this, 1, inst);
 			case 2: return new Literal_StringLiteralParserRuleCall_2(lastRuleCallOrigin, this, 2, inst);
 			default: return null;
@@ -13529,22 +13529,22 @@ protected class Literal_Alternatives extends AlternativesToken {
 
 }
 
-// NumericalLiteral
-protected class Literal_NumericalLiteralParserRuleCall_0 extends RuleCallToken {
+// NumericLiteral
+protected class Literal_NumericLiteralParserRuleCall_0 extends RuleCallToken {
 	
-	public Literal_NumericalLiteralParserRuleCall_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Literal_NumericLiteralParserRuleCall_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public RuleCall getGrammarElement() {
-		return grammarAccess.getLiteralAccess().getNumericalLiteralParserRuleCall_0();
+		return grammarAccess.getLiteralAccess().getNumericLiteralParserRuleCall_0();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new NumericalLiteral_Alternatives(this, this, 0, inst);
+			case 0: return new NumericLiteral_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -13554,7 +13554,7 @@ protected class Literal_NumericalLiteralParserRuleCall_0 extends RuleCallToken {
 		if(getEObject().eClass() != grammarAccess.getIntegerLiteralRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getRealLiteralRule().getType().getClassifier())
 			return null;
-		if(checkForRecursion(NumericalLiteral_Alternatives.class, eObjectConsumer)) return null;
+		if(checkForRecursion(NumericLiteral_Alternatives.class, eObjectConsumer)) return null;
 		return eObjectConsumer;
 	}
 	
@@ -13642,30 +13642,30 @@ protected class Literal_StringLiteralParserRuleCall_2 extends RuleCallToken {
 /************ end Rule Literal ****************/
 
 
-/************ begin Rule NumericalLiteral ****************
+/************ begin Rule NumericLiteral ****************
  *
- * NumericalLiteral:
+ * NumericLiteral:
  * 	RealLiteral | IntegerLiteral;
  *
  **/
 
 // RealLiteral | IntegerLiteral
-protected class NumericalLiteral_Alternatives extends AlternativesToken {
+protected class NumericLiteral_Alternatives extends AlternativesToken {
 
-	public NumericalLiteral_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public NumericLiteral_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Alternatives getGrammarElement() {
-		return grammarAccess.getNumericalLiteralAccess().getAlternatives();
+		return grammarAccess.getNumericLiteralAccess().getAlternatives();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new NumericalLiteral_RealLiteralParserRuleCall_0(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new NumericalLiteral_IntegerLiteralParserRuleCall_1(lastRuleCallOrigin, this, 1, inst);
+			case 0: return new NumericLiteral_RealLiteralParserRuleCall_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new NumericLiteral_IntegerLiteralParserRuleCall_1(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -13681,15 +13681,15 @@ protected class NumericalLiteral_Alternatives extends AlternativesToken {
 }
 
 // RealLiteral
-protected class NumericalLiteral_RealLiteralParserRuleCall_0 extends RuleCallToken {
+protected class NumericLiteral_RealLiteralParserRuleCall_0 extends RuleCallToken {
 	
-	public NumericalLiteral_RealLiteralParserRuleCall_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public NumericLiteral_RealLiteralParserRuleCall_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public RuleCall getGrammarElement() {
-		return grammarAccess.getNumericalLiteralAccess().getRealLiteralParserRuleCall_0();
+		return grammarAccess.getNumericLiteralAccess().getRealLiteralParserRuleCall_0();
 	}
 
     @Override
@@ -13717,15 +13717,15 @@ protected class NumericalLiteral_RealLiteralParserRuleCall_0 extends RuleCallTok
 }
 
 // IntegerLiteral
-protected class NumericalLiteral_IntegerLiteralParserRuleCall_1 extends RuleCallToken {
+protected class NumericLiteral_IntegerLiteralParserRuleCall_1 extends RuleCallToken {
 	
-	public NumericalLiteral_IntegerLiteralParserRuleCall_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public NumericLiteral_IntegerLiteralParserRuleCall_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public RuleCall getGrammarElement() {
-		return grammarAccess.getNumericalLiteralAccess().getIntegerLiteralParserRuleCall_1();
+		return grammarAccess.getNumericLiteralAccess().getIntegerLiteralParserRuleCall_1();
 	}
 
     @Override
@@ -13753,7 +13753,7 @@ protected class NumericalLiteral_IntegerLiteralParserRuleCall_1 extends RuleCall
 }
 
 
-/************ end Rule NumericalLiteral ****************/
+/************ end Rule NumericLiteral ****************/
 
 
 /************ begin Rule RealLiteral ****************

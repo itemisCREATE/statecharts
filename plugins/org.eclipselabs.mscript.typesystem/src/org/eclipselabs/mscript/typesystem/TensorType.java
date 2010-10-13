@@ -55,6 +55,6 @@ public interface TensorType extends ArrayType {
 	 */
 	boolean isMatrix();
 
-	NumericalType getElementType();
+	NumericType getElementType();
 
 } // TensorType

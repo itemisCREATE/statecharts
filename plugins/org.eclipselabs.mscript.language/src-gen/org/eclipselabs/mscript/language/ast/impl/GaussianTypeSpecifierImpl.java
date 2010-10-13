@@ -19,7 +19,7 @@ import org.eclipselabs.mscript.language.ast.GaussianTypeSpecifier;
  *
  * @generated
  */
-public class GaussianTypeSpecifierImpl extends NumericalTypeSpecifierImpl implements GaussianTypeSpecifier
+public class GaussianTypeSpecifierImpl extends NumericTypeSpecifierImpl implements GaussianTypeSpecifier
 {
   /**
    * <!-- begin-user-doc -->

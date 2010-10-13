@@ -22,7 +22,7 @@ package org.eclipselabs.mscript.language.ast;
  * @model
  * @generated
  */
-public interface IntegerLiteral extends NumericalLiteral
+public interface IntegerLiteral extends NumericLiteral
 {
   /**
    * Returns the value of the '<em><b>Value</b></em>' attribute.

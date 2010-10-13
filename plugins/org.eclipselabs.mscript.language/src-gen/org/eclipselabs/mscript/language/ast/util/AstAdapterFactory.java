@@ -223,9 +223,9 @@ public class AstAdapterFactory extends AdapterFactoryImpl
         return createPrimitiveTypeSpecifierAdapter();
       }
       @Override
-      public Adapter caseNumericalTypeSpecifier(NumericalTypeSpecifier object)
+      public Adapter caseNumericTypeSpecifier(NumericTypeSpecifier object)
       {
-        return createNumericalTypeSpecifierAdapter();
+        return createNumericTypeSpecifierAdapter();
       }
       @Override
       public Adapter caseRealTypeSpecifier(RealTypeSpecifier object)
@@ -323,9 +323,9 @@ public class AstAdapterFactory extends AdapterFactoryImpl
         return createLiteralAdapter();
       }
       @Override
-      public Adapter caseNumericalLiteral(NumericalLiteral object)
+      public Adapter caseNumericLiteral(NumericLiteral object)
       {
-        return createNumericalLiteralAdapter();
+        return createNumericLiteralAdapter();
       }
       @Override
       public Adapter caseRealLiteral(RealLiteral object)
@@ -920,16 +920,16 @@ public class AstAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.NumericalTypeSpecifier <em>Numerical Type Specifier</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.NumericTypeSpecifier <em>Numeric Type Specifier</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.NumericalTypeSpecifier
+   * @see org.eclipselabs.mscript.language.ast.NumericTypeSpecifier
    * @generated
    */
-  public Adapter createNumericalTypeSpecifierAdapter()
+  public Adapter createNumericTypeSpecifierAdapter()
   {
     return null;
   }
@@ -1220,16 +1220,16 @@ public class AstAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.NumericalLiteral <em>Numerical Literal</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.NumericLiteral <em>Numeric Literal</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.NumericalLiteral
+   * @see org.eclipselabs.mscript.language.ast.NumericLiteral
    * @generated
    */
-  public Adapter createNumericalLiteralAdapter()
+  public Adapter createNumericLiteralAdapter()
   {
     return null;
   }

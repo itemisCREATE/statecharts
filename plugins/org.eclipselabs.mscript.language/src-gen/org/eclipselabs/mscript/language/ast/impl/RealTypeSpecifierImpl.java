@@ -19,7 +19,7 @@ import org.eclipselabs.mscript.language.ast.RealTypeSpecifier;
  *
  * @generated
  */
-public class RealTypeSpecifierImpl extends NumericalTypeSpecifierImpl implements RealTypeSpecifier
+public class RealTypeSpecifierImpl extends NumericTypeSpecifierImpl implements RealTypeSpecifier
 {
   /**
    * <!-- begin-user-doc -->

@@ -24,7 +24,7 @@ import org.eclipselabs.mscript.typesystem.IntegerType;
 import org.eclipselabs.mscript.typesystem.InvalidDataType;
 import org.eclipselabs.mscript.typesystem.NamedElement;
 import org.eclipselabs.mscript.typesystem.Namespace;
-import org.eclipselabs.mscript.typesystem.NumericalType;
+import org.eclipselabs.mscript.typesystem.NumericType;
 import org.eclipselabs.mscript.typesystem.OperatorKind;
 import org.eclipselabs.mscript.typesystem.PackageableElement;
 import org.eclipselabs.mscript.typesystem.PrimitiveType;
@@ -117,7 +117,7 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass numericalTypeEClass = null;
+	private EClass numericTypeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -513,8 +513,8 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getNumericalType() {
-		return numericalTypeEClass;
+	public EClass getNumericType() {
+		return numericTypeEClass;
 	}
 
 	/**
@@ -522,8 +522,8 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getNumericalType_Unit() {
-		return (EReference)numericalTypeEClass.getEStructuralFeatures().get(0);
+	public EReference getNumericType_Unit() {
+		return (EReference)numericTypeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -848,8 +848,8 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 
 		realTypeEClass = createEClass(REAL_TYPE);
 
-		numericalTypeEClass = createEClass(NUMERICAL_TYPE);
-		createEReference(numericalTypeEClass, NUMERICAL_TYPE__UNIT);
+		numericTypeEClass = createEClass(NUMERIC_TYPE);
+		createEReference(numericTypeEClass, NUMERIC_TYPE__UNIT);
 
 		unitEClass = createEClass(UNIT);
 		createEReference(unitEClass, UNIT__FACTORS);
@@ -931,9 +931,9 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 		arrayTypeEClass.getESuperTypes().add(this.getDataType());
 		dataTypeEClass.getESuperTypes().add(this.getType());
 		primitiveTypeEClass.getESuperTypes().add(this.getDataType());
-		realTypeEClass.getESuperTypes().add(this.getNumericalType());
-		numericalTypeEClass.getESuperTypes().add(this.getPrimitiveType());
-		integerTypeEClass.getESuperTypes().add(this.getNumericalType());
+		realTypeEClass.getESuperTypes().add(this.getNumericType());
+		numericTypeEClass.getESuperTypes().add(this.getPrimitiveType());
+		integerTypeEClass.getESuperTypes().add(this.getNumericType());
 		booleanTypeEClass.getESuperTypes().add(this.getPrimitiveType());
 		stringTypeEClass.getESuperTypes().add(this.getPrimitiveType());
 		enumerationEClass.getESuperTypes().add(this.getNamespace());
@@ -996,8 +996,8 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 
 		initEClass(realTypeEClass, RealType.class, "RealType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(numericalTypeEClass, NumericalType.class, "NumericalType", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getNumericalType_Unit(), this.getUnit(), null, "unit", null, 0, 1, NumericalType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEClass(numericTypeEClass, NumericType.class, "NumericType", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getNumericType_Unit(), this.getUnit(), null, "unit", null, 0, 1, NumericType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(unitEClass, Unit.class, "Unit", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getUnit_Factors(), this.getUnitFactor(), null, "factors", null, 0, -1, Unit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);

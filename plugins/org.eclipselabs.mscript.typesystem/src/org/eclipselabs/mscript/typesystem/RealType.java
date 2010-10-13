@@ -17,6 +17,6 @@ package org.eclipselabs.mscript.typesystem;
  * @model
  * @generated
  */
-public interface RealType extends NumericalType {
+public interface RealType extends NumericType {
 
 } // RealType

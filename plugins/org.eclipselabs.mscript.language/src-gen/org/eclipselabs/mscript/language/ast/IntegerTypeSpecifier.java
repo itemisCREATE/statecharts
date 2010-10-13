@@ -16,6 +16,6 @@ package org.eclipselabs.mscript.language.ast;
  * @model
  * @generated
  */
-public interface IntegerTypeSpecifier extends NumericalTypeSpecifier
+public interface IntegerTypeSpecifier extends NumericTypeSpecifier
 {
 } // IntegerTypeSpecifier

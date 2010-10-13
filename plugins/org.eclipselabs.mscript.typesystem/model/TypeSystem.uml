@@ -144,7 +144,7 @@
         </ownedParameter>
       </ownedOperation>
     </packagedElement>
-    <packagedElement xmi:type="uml:Class" xmi:id="__s2cgHMrEd-9E7QZMDWyTg" name="NumericalType" isAbstract="true">
+    <packagedElement xmi:type="uml:Class" xmi:id="__s2cgHMrEd-9E7QZMDWyTg" name="NumericType" isAbstract="true">
       <generalization xmi:id="_7vkpAHO3Ed-S94eRjnXSAQ" general="_ckY6kHGiEd-Vr_LfGhknIQ"/>
       <ownedAttribute xmi:id="_amQTwIBlEd-el5xaAFAoOA" name="unit" type="_fm19cHVcEd-ou8M-XcTk7Q" aggregation="composite" association="_ejBEQIBlEd-el5xaAFAoOA">
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_a29CMIBlEd-el5xaAFAoOA" value="1"/>

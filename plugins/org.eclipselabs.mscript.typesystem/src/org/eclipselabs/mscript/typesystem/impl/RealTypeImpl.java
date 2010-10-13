@@ -22,7 +22,7 @@ import org.eclipselabs.mscript.typesystem.internal.operations.RealTypeOperations
  *
  * @generated
  */
-public class RealTypeImpl extends NumericalTypeImpl implements RealType {
+public class RealTypeImpl extends NumericTypeImpl implements RealType {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

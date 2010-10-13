@@ -27,7 +27,7 @@ import org.eclipselabs.mscript.language.ast.IntegerLiteral;
  *
  * @generated
  */
-public class IntegerLiteralImpl extends NumericalLiteralImpl implements IntegerLiteral
+public class IntegerLiteralImpl extends NumericLiteralImpl implements IntegerLiteral
 {
   /**
    * The default value of the '{@link #getValue() <em>Value</em>}' attribute.

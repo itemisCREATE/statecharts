@@ -14,23 +14,23 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipselabs.mscript.language.ast.AstPackage;
-import org.eclipselabs.mscript.language.ast.NumericalTypeSpecifier;
+import org.eclipselabs.mscript.language.ast.NumericTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.UnitExpression;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Numerical Type Specifier</b></em>'.
+ * An implementation of the model object '<em><b>Numeric Type Specifier</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.NumericalTypeSpecifierImpl#getUnit <em>Unit</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.NumericTypeSpecifierImpl#getUnit <em>Unit</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class NumericalTypeSpecifierImpl extends PrimitiveTypeSpecifierImpl implements NumericalTypeSpecifier
+public class NumericTypeSpecifierImpl extends PrimitiveTypeSpecifierImpl implements NumericTypeSpecifier
 {
   /**
    * The cached value of the '{@link #getUnit() <em>Unit</em>}' containment reference.
@@ -47,7 +47,7 @@ public class NumericalTypeSpecifierImpl extends PrimitiveTypeSpecifierImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  protected NumericalTypeSpecifierImpl()
+  protected NumericTypeSpecifierImpl()
   {
     super();
   }
@@ -60,7 +60,7 @@ public class NumericalTypeSpecifierImpl extends PrimitiveTypeSpecifierImpl imple
   @Override
   protected EClass eStaticClass()
   {
-    return AstPackage.Literals.NUMERICAL_TYPE_SPECIFIER;
+    return AstPackage.Literals.NUMERIC_TYPE_SPECIFIER;
   }
 
   /**
@@ -84,7 +84,7 @@ public class NumericalTypeSpecifierImpl extends PrimitiveTypeSpecifierImpl imple
     unit = newUnit;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.NUMERICAL_TYPE_SPECIFIER__UNIT, oldUnit, newUnit);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.NUMERIC_TYPE_SPECIFIER__UNIT, oldUnit, newUnit);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -101,14 +101,14 @@ public class NumericalTypeSpecifierImpl extends PrimitiveTypeSpecifierImpl imple
     {
       NotificationChain msgs = null;
       if (unit != null)
-        msgs = ((InternalEObject)unit).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.NUMERICAL_TYPE_SPECIFIER__UNIT, null, msgs);
+        msgs = ((InternalEObject)unit).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.NUMERIC_TYPE_SPECIFIER__UNIT, null, msgs);
       if (newUnit != null)
-        msgs = ((InternalEObject)newUnit).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.NUMERICAL_TYPE_SPECIFIER__UNIT, null, msgs);
+        msgs = ((InternalEObject)newUnit).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.NUMERIC_TYPE_SPECIFIER__UNIT, null, msgs);
       msgs = basicSetUnit(newUnit, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.NUMERICAL_TYPE_SPECIFIER__UNIT, newUnit, newUnit));
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.NUMERIC_TYPE_SPECIFIER__UNIT, newUnit, newUnit));
   }
 
   /**
@@ -121,7 +121,7 @@ public class NumericalTypeSpecifierImpl extends PrimitiveTypeSpecifierImpl imple
   {
     switch (featureID)
     {
-      case AstPackage.NUMERICAL_TYPE_SPECIFIER__UNIT:
+      case AstPackage.NUMERIC_TYPE_SPECIFIER__UNIT:
         return basicSetUnit(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -137,7 +137,7 @@ public class NumericalTypeSpecifierImpl extends PrimitiveTypeSpecifierImpl imple
   {
     switch (featureID)
     {
-      case AstPackage.NUMERICAL_TYPE_SPECIFIER__UNIT:
+      case AstPackage.NUMERIC_TYPE_SPECIFIER__UNIT:
         return getUnit();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -153,7 +153,7 @@ public class NumericalTypeSpecifierImpl extends PrimitiveTypeSpecifierImpl imple
   {
     switch (featureID)
     {
-      case AstPackage.NUMERICAL_TYPE_SPECIFIER__UNIT:
+      case AstPackage.NUMERIC_TYPE_SPECIFIER__UNIT:
         setUnit((UnitExpression)newValue);
         return;
     }
@@ -170,7 +170,7 @@ public class NumericalTypeSpecifierImpl extends PrimitiveTypeSpecifierImpl imple
   {
     switch (featureID)
     {
-      case AstPackage.NUMERICAL_TYPE_SPECIFIER__UNIT:
+      case AstPackage.NUMERIC_TYPE_SPECIFIER__UNIT:
         setUnit((UnitExpression)null);
         return;
     }
@@ -187,10 +187,10 @@ public class NumericalTypeSpecifierImpl extends PrimitiveTypeSpecifierImpl imple
   {
     switch (featureID)
     {
-      case AstPackage.NUMERICAL_TYPE_SPECIFIER__UNIT:
+      case AstPackage.NUMERIC_TYPE_SPECIFIER__UNIT:
         return unit != null;
     }
     return super.eIsSet(featureID);
   }
 
-} //NumericalTypeSpecifierImpl
+} //NumericTypeSpecifierImpl

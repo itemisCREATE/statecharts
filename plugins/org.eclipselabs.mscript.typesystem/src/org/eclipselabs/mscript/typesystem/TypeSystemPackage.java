@@ -131,16 +131,6 @@ public interface TypeSystemPackage extends EPackage {
 	int PRIMITIVE_TYPE = 7;
 
 	/**
-	 * The meta object id for the '{@link org.eclipselabs.mscript.typesystem.impl.NumericalTypeImpl <em>Numerical Type</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipselabs.mscript.typesystem.impl.NumericalTypeImpl
-	 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemPackageImpl#getNumericalType()
-	 * @generated
-	 */
-	int NUMERICAL_TYPE = 9;
-
-	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.typesystem.impl.RealTypeImpl <em>Real Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -630,49 +620,14 @@ public interface TypeSystemPackage extends EPackage {
 	int PRIMITIVE_TYPE_FEATURE_COUNT = DATA_TYPE_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * The meta object id for the '{@link org.eclipselabs.mscript.typesystem.impl.NumericTypeImpl <em>Numeric Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @see org.eclipselabs.mscript.typesystem.impl.NumericTypeImpl
+	 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemPackageImpl#getNumericType()
 	 * @generated
-	 * @ordered
 	 */
-	int NUMERICAL_TYPE__NAME = PRIMITIVE_TYPE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NUMERICAL_TYPE__QUALIFIED_NAME = PRIMITIVE_TYPE__QUALIFIED_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Namespace</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NUMERICAL_TYPE__NAMESPACE = PRIMITIVE_TYPE__NAMESPACE;
-
-	/**
-	 * The feature id for the '<em><b>Unit</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NUMERICAL_TYPE__UNIT = PRIMITIVE_TYPE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Numerical Type</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NUMERICAL_TYPE_FEATURE_COUNT = PRIMITIVE_TYPE_FEATURE_COUNT + 1;
+	int NUMERIC_TYPE = 9;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -681,7 +636,7 @@ public interface TypeSystemPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REAL_TYPE__NAME = NUMERICAL_TYPE__NAME;
+	int NUMERIC_TYPE__NAME = PRIMITIVE_TYPE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
@@ -690,7 +645,7 @@ public interface TypeSystemPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REAL_TYPE__QUALIFIED_NAME = NUMERICAL_TYPE__QUALIFIED_NAME;
+	int NUMERIC_TYPE__QUALIFIED_NAME = PRIMITIVE_TYPE__QUALIFIED_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Namespace</b></em>' reference.
@@ -699,7 +654,7 @@ public interface TypeSystemPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REAL_TYPE__NAMESPACE = NUMERICAL_TYPE__NAMESPACE;
+	int NUMERIC_TYPE__NAMESPACE = PRIMITIVE_TYPE__NAMESPACE;
 
 	/**
 	 * The feature id for the '<em><b>Unit</b></em>' containment reference.
@@ -708,7 +663,52 @@ public interface TypeSystemPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REAL_TYPE__UNIT = NUMERICAL_TYPE__UNIT;
+	int NUMERIC_TYPE__UNIT = PRIMITIVE_TYPE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Numeric Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NUMERIC_TYPE_FEATURE_COUNT = PRIMITIVE_TYPE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REAL_TYPE__NAME = NUMERIC_TYPE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REAL_TYPE__QUALIFIED_NAME = NUMERIC_TYPE__QUALIFIED_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REAL_TYPE__NAMESPACE = NUMERIC_TYPE__NAMESPACE;
+
+	/**
+	 * The feature id for the '<em><b>Unit</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REAL_TYPE__UNIT = NUMERIC_TYPE__UNIT;
 
 	/**
 	 * The number of structural features of the '<em>Real Type</em>' class.
@@ -717,7 +717,7 @@ public interface TypeSystemPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REAL_TYPE_FEATURE_COUNT = NUMERICAL_TYPE_FEATURE_COUNT + 0;
+	int REAL_TYPE_FEATURE_COUNT = NUMERIC_TYPE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Factors</b></em>' containment reference list.
@@ -780,7 +780,7 @@ public interface TypeSystemPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTEGER_TYPE__NAME = NUMERICAL_TYPE__NAME;
+	int INTEGER_TYPE__NAME = NUMERIC_TYPE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
@@ -789,7 +789,7 @@ public interface TypeSystemPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTEGER_TYPE__QUALIFIED_NAME = NUMERICAL_TYPE__QUALIFIED_NAME;
+	int INTEGER_TYPE__QUALIFIED_NAME = NUMERIC_TYPE__QUALIFIED_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Namespace</b></em>' reference.
@@ -798,7 +798,7 @@ public interface TypeSystemPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTEGER_TYPE__NAMESPACE = NUMERICAL_TYPE__NAMESPACE;
+	int INTEGER_TYPE__NAMESPACE = NUMERIC_TYPE__NAMESPACE;
 
 	/**
 	 * The feature id for the '<em><b>Unit</b></em>' containment reference.
@@ -807,7 +807,7 @@ public interface TypeSystemPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTEGER_TYPE__UNIT = NUMERICAL_TYPE__UNIT;
+	int INTEGER_TYPE__UNIT = NUMERIC_TYPE__UNIT;
 
 	/**
 	 * The number of structural features of the '<em>Integer Type</em>' class.
@@ -816,7 +816,7 @@ public interface TypeSystemPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTEGER_TYPE_FEATURE_COUNT = NUMERICAL_TYPE_FEATURE_COUNT + 0;
+	int INTEGER_TYPE_FEATURE_COUNT = NUMERIC_TYPE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1656,25 +1656,25 @@ public interface TypeSystemPackage extends EPackage {
 	EClass getRealType();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipselabs.mscript.typesystem.NumericalType <em>Numerical Type</em>}'.
+	 * Returns the meta object for class '{@link org.eclipselabs.mscript.typesystem.NumericType <em>Numeric Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Numerical Type</em>'.
-	 * @see org.eclipselabs.mscript.typesystem.NumericalType
+	 * @return the meta object for class '<em>Numeric Type</em>'.
+	 * @see org.eclipselabs.mscript.typesystem.NumericType
 	 * @generated
 	 */
-	EClass getNumericalType();
+	EClass getNumericType();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.typesystem.NumericalType#getUnit <em>Unit</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.typesystem.NumericType#getUnit <em>Unit</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Unit</em>'.
-	 * @see org.eclipselabs.mscript.typesystem.NumericalType#getUnit()
-	 * @see #getNumericalType()
+	 * @see org.eclipselabs.mscript.typesystem.NumericType#getUnit()
+	 * @see #getNumericType()
 	 * @generated
 	 */
-	EReference getNumericalType_Unit();
+	EReference getNumericType_Unit();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipselabs.mscript.typesystem.Unit <em>Unit</em>}'.
@@ -2212,14 +2212,14 @@ public interface TypeSystemPackage extends EPackage {
 		EClass REAL_TYPE = eINSTANCE.getRealType();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipselabs.mscript.typesystem.impl.NumericalTypeImpl <em>Numerical Type</em>}' class.
+		 * The meta object literal for the '{@link org.eclipselabs.mscript.typesystem.impl.NumericTypeImpl <em>Numeric Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipselabs.mscript.typesystem.impl.NumericalTypeImpl
-		 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemPackageImpl#getNumericalType()
+		 * @see org.eclipselabs.mscript.typesystem.impl.NumericTypeImpl
+		 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemPackageImpl#getNumericType()
 		 * @generated
 		 */
-		EClass NUMERICAL_TYPE = eINSTANCE.getNumericalType();
+		EClass NUMERIC_TYPE = eINSTANCE.getNumericType();
 
 		/**
 		 * The meta object literal for the '<em><b>Unit</b></em>' containment reference feature.
@@ -2227,7 +2227,7 @@ public interface TypeSystemPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference NUMERICAL_TYPE__UNIT = eINSTANCE.getNumericalType_Unit();
+		EReference NUMERIC_TYPE__UNIT = eINSTANCE.getNumericType_Unit();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipselabs.mscript.typesystem.impl.UnitImpl <em>Unit</em>}' class.

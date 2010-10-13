@@ -16,6 +16,6 @@ package org.eclipselabs.mscript.language.ast;
  * @model
  * @generated
  */
-public interface ComplexTypeSpecifier extends NumericalTypeSpecifier
+public interface ComplexTypeSpecifier extends NumericTypeSpecifier
 {
 } // ComplexTypeSpecifier

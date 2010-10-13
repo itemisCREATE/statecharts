@@ -19,7 +19,7 @@ import org.eclipselabs.mscript.language.ast.IntegerTypeSpecifier;
  *
  * @generated
  */
-public class IntegerTypeSpecifierImpl extends NumericalTypeSpecifierImpl implements IntegerTypeSpecifier
+public class IntegerTypeSpecifierImpl extends NumericTypeSpecifierImpl implements IntegerTypeSpecifier
 {
   /**
    * <!-- begin-user-doc -->

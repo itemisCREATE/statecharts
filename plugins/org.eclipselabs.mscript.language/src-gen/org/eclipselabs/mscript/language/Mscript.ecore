@@ -129,14 +129,14 @@
         eType="#//ArrayDimensionSpecification" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PrimitiveTypeSpecifier" eSuperTypes="#//DataTypeSpecifier"/>
-  <eClassifiers xsi:type="ecore:EClass" name="NumericalTypeSpecifier" eSuperTypes="#//PrimitiveTypeSpecifier">
+  <eClassifiers xsi:type="ecore:EClass" name="NumericTypeSpecifier" eSuperTypes="#//PrimitiveTypeSpecifier">
     <eStructuralFeatures xsi:type="ecore:EReference" name="unit" eType="#//UnitExpression"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RealTypeSpecifier" eSuperTypes="#//NumericalTypeSpecifier"/>
-  <eClassifiers xsi:type="ecore:EClass" name="IntegerTypeSpecifier" eSuperTypes="#//NumericalTypeSpecifier"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ComplexTypeSpecifier" eSuperTypes="#//NumericalTypeSpecifier"/>
-  <eClassifiers xsi:type="ecore:EClass" name="GaussianTypeSpecifier" eSuperTypes="#//NumericalTypeSpecifier"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RealTypeSpecifier" eSuperTypes="#//NumericTypeSpecifier"/>
+  <eClassifiers xsi:type="ecore:EClass" name="IntegerTypeSpecifier" eSuperTypes="#//NumericTypeSpecifier"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ComplexTypeSpecifier" eSuperTypes="#//NumericTypeSpecifier"/>
+  <eClassifiers xsi:type="ecore:EClass" name="GaussianTypeSpecifier" eSuperTypes="#//NumericTypeSpecifier"/>
   <eClassifiers xsi:type="ecore:EClass" name="BooleanTypeSpecifier" eSuperTypes="#//PrimitiveTypeSpecifier"/>
   <eClassifiers xsi:type="ecore:EClass" name="StringTypeSpecifier" eSuperTypes="#//PrimitiveTypeSpecifier"/>
   <eClassifiers xsi:type="ecore:EClass" name="NamedTypeSpecifier" eSuperTypes="#//DataTypeSpecifier">
@@ -215,15 +215,15 @@
         eType="#//Expression" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Literal" eSuperTypes="#//Expression"/>
-  <eClassifiers xsi:type="ecore:EClass" name="NumericalLiteral" eSuperTypes="#//Literal">
+  <eClassifiers xsi:type="ecore:EClass" name="NumericLiteral" eSuperTypes="#//Literal">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="imaginary" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="unit" eType="#//UnitExpression"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RealLiteral" eSuperTypes="#//NumericalLiteral">
+  <eClassifiers xsi:type="ecore:EClass" name="RealLiteral" eSuperTypes="#//NumericLiteral">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="IntegerLiteral" eSuperTypes="#//NumericalLiteral">
+  <eClassifiers xsi:type="ecore:EClass" name="IntegerLiteral" eSuperTypes="#//NumericLiteral">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BooleanLiteral" eSuperTypes="#//Literal">

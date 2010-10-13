@@ -111,9 +111,9 @@
     </genClasses>
     <genClasses xsi:type="genmodel:GenClass" image="false" ecoreClass="TypeSystem.ecore#//PrimitiveType"/>
     <genClasses xsi:type="genmodel:GenClass" ecoreClass="TypeSystem.ecore#//RealType"/>
-    <genClasses xsi:type="genmodel:GenClass" image="false" ecoreClass="TypeSystem.ecore#//NumericalType">
+    <genClasses xsi:type="genmodel:GenClass" image="false" ecoreClass="TypeSystem.ecore#//NumericType">
       <genFeatures xsi:type="genmodel:GenFeature" property="None" children="true"
-          createChild="true" ecoreFeature="ecore:EReference TypeSystem.ecore#//NumericalType/unit"/>
+          createChild="true" ecoreFeature="ecore:EReference TypeSystem.ecore#//NumericType/unit"/>
     </genClasses>
     <genClasses xsi:type="genmodel:GenClass" ecoreClass="TypeSystem.ecore#//Unit">
       <genFeatures xsi:type="genmodel:GenFeature" property="None" children="true"

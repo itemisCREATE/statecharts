@@ -9,7 +9,7 @@ package org.eclipselabs.mscript.typesystem.internal.operations;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipselabs.mscript.typesystem.DataType;
 import org.eclipselabs.mscript.typesystem.InvalidDataType;
-import org.eclipselabs.mscript.typesystem.NumericalType;
+import org.eclipselabs.mscript.typesystem.NumericType;
 import org.eclipselabs.mscript.typesystem.OperatorKind;
 import org.eclipselabs.mscript.typesystem.TensorType;
 import org.eclipselabs.mscript.typesystem.TypeSystemFactory;
@@ -65,9 +65,9 @@ public class TensorTypeOperations extends DataTypeOperations {
 	}
 	
 	private static DataType evaluateElementWise(TensorType tensorType, OperatorKind operator, DataType other) {
-		if (other instanceof NumericalType) {
+		if (other instanceof NumericType) {
 			if (operator == OperatorKind.ELEMENT_WISE_MULTIPLY || operator == OperatorKind.ELEMENT_WISE_DIVIDE) {
-				return evaluateElementWiseScalar(tensorType, operator, (NumericalType) other);
+				return evaluateElementWiseScalar(tensorType, operator, (NumericType) other);
 			}
 		} else if (other instanceof TensorType) {
 			return evaluateElementWiseTensor(tensorType, operator, (TensorType) other);
@@ -75,7 +75,7 @@ public class TensorTypeOperations extends DataTypeOperations {
 		return TypeSystemFactory.eINSTANCE.createInvalidDataType();
 	}
 	
-	private static DataType evaluateElementWiseScalar(TensorType tensorType, OperatorKind operator, NumericalType other) {
+	private static DataType evaluateElementWiseScalar(TensorType tensorType, OperatorKind operator, NumericType other) {
 		DataType elementType = tensorType.getElementType().evaluate(operator, other);
 		if (elementType instanceof InvalidDataType) {
 			return elementType;
@@ -99,8 +99,8 @@ public class TensorTypeOperations extends DataTypeOperations {
 	}
 	
 	private static DataType evaluateMultiply(TensorType tensorType, DataType other) {
-		if (other instanceof NumericalType) {
-			return evaluateElementWiseScalar(tensorType, OperatorKind.MULTIPLY, (NumericalType) other);
+		if (other instanceof NumericType) {
+			return evaluateElementWiseScalar(tensorType, OperatorKind.MULTIPLY, (NumericType) other);
 		}
 		if (!(other instanceof TensorType)) {
 			return TypeSystemFactory.eINSTANCE.createInvalidDataType();
@@ -125,8 +125,8 @@ public class TensorTypeOperations extends DataTypeOperations {
 	}
 
 	private static DataType evaluateDivide(TensorType tensorType, DataType other) {
-		if (other instanceof NumericalType) {
-			return evaluateElementWiseScalar(tensorType, OperatorKind.DIVIDE, (NumericalType) other);
+		if (other instanceof NumericType) {
+			return evaluateElementWiseScalar(tensorType, OperatorKind.DIVIDE, (NumericType) other);
 		}
 		// TODO
 		return TypeSystemFactory.eINSTANCE.createInvalidDataType();

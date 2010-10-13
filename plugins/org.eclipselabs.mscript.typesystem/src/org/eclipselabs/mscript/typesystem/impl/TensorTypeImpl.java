@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipselabs.mscript.typesystem.DataType;
-import org.eclipselabs.mscript.typesystem.NumericalType;
+import org.eclipselabs.mscript.typesystem.NumericType;
 import org.eclipselabs.mscript.typesystem.OperatorKind;
 import org.eclipselabs.mscript.typesystem.TensorType;
 import org.eclipselabs.mscript.typesystem.TypeSystemPackage;
@@ -89,8 +89,8 @@ public class TensorTypeImpl extends ArrayTypeImpl implements TensorType {
 		return getDimensions().size() == 2;
 	}
 
-	public NumericalType getElementType() {
-		return (NumericalType) getElementTypeGen();
+	public NumericType getElementType() {
+		return (NumericType) getElementTypeGen();
 	}
 	
 	/**
@@ -121,8 +121,8 @@ public class TensorTypeImpl extends ArrayTypeImpl implements TensorType {
 	}
 
 	public void setElementType(DataType newElementType) {
-		if (!(newElementType instanceof NumericalType)) {
-			throw new IllegalArgumentException("New element type must not be NumericalType");
+		if (!(newElementType instanceof NumericType)) {
+			throw new IllegalArgumentException("New element type must not be NumericType");
 		}
 		setElementTypeGen(newElementType);
 	}

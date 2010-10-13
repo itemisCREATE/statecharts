@@ -27,7 +27,7 @@ import org.eclipselabs.mscript.language.ast.RealLiteral;
  *
  * @generated
  */
-public class RealLiteralImpl extends NumericalLiteralImpl implements RealLiteral
+public class RealLiteralImpl extends NumericLiteralImpl implements RealLiteral
 {
   /**
    * The default value of the '{@link #getValue() <em>Value</em>}' attribute.

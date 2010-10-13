@@ -20,7 +20,7 @@ import org.eclipselabs.mscript.typesystem.IntegerType;
 import org.eclipselabs.mscript.typesystem.InvalidDataType;
 import org.eclipselabs.mscript.typesystem.NamedElement;
 import org.eclipselabs.mscript.typesystem.Namespace;
-import org.eclipselabs.mscript.typesystem.NumericalType;
+import org.eclipselabs.mscript.typesystem.NumericType;
 import org.eclipselabs.mscript.typesystem.PackageableElement;
 import org.eclipselabs.mscript.typesystem.PrimitiveType;
 import org.eclipselabs.mscript.typesystem.RealType;
@@ -128,8 +128,8 @@ public class TypeSystemAdapterFactory extends AdapterFactoryImpl {
 				return createRealTypeAdapter();
 			}
 			@Override
-			public Adapter caseNumericalType(NumericalType object) {
-				return createNumericalTypeAdapter();
+			public Adapter caseNumericType(NumericType object) {
+				return createNumericTypeAdapter();
 			}
 			@Override
 			public Adapter caseUnit(Unit object) {
@@ -334,16 +334,16 @@ public class TypeSystemAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.typesystem.NumericalType <em>Numerical Type</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.typesystem.NumericType <em>Numeric Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.typesystem.NumericalType
+	 * @see org.eclipselabs.mscript.typesystem.NumericType
 	 * @generated
 	 */
-	public Adapter createNumericalTypeAdapter() {
+	public Adapter createNumericTypeAdapter() {
 		return null;
 	}
 

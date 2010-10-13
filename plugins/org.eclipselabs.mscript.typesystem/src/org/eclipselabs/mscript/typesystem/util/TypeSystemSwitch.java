@@ -20,7 +20,7 @@ import org.eclipselabs.mscript.typesystem.IntegerType;
 import org.eclipselabs.mscript.typesystem.InvalidDataType;
 import org.eclipselabs.mscript.typesystem.NamedElement;
 import org.eclipselabs.mscript.typesystem.Namespace;
-import org.eclipselabs.mscript.typesystem.NumericalType;
+import org.eclipselabs.mscript.typesystem.NumericType;
 import org.eclipselabs.mscript.typesystem.PackageableElement;
 import org.eclipselabs.mscript.typesystem.PrimitiveType;
 import org.eclipselabs.mscript.typesystem.RealType;
@@ -175,7 +175,7 @@ public class TypeSystemSwitch<T> {
 			case TypeSystemPackage.REAL_TYPE: {
 				RealType realType = (RealType)theEObject;
 				T result = caseRealType(realType);
-				if (result == null) result = caseNumericalType(realType);
+				if (result == null) result = caseNumericType(realType);
 				if (result == null) result = casePrimitiveType(realType);
 				if (result == null) result = caseDataType(realType);
 				if (result == null) result = caseType(realType);
@@ -184,14 +184,14 @@ public class TypeSystemSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TypeSystemPackage.NUMERICAL_TYPE: {
-				NumericalType numericalType = (NumericalType)theEObject;
-				T result = caseNumericalType(numericalType);
-				if (result == null) result = casePrimitiveType(numericalType);
-				if (result == null) result = caseDataType(numericalType);
-				if (result == null) result = caseType(numericalType);
-				if (result == null) result = casePackageableElement(numericalType);
-				if (result == null) result = caseNamedElement(numericalType);
+			case TypeSystemPackage.NUMERIC_TYPE: {
+				NumericType numericType = (NumericType)theEObject;
+				T result = caseNumericType(numericType);
+				if (result == null) result = casePrimitiveType(numericType);
+				if (result == null) result = caseDataType(numericType);
+				if (result == null) result = caseType(numericType);
+				if (result == null) result = casePackageableElement(numericType);
+				if (result == null) result = caseNamedElement(numericType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -210,7 +210,7 @@ public class TypeSystemSwitch<T> {
 			case TypeSystemPackage.INTEGER_TYPE: {
 				IntegerType integerType = (IntegerType)theEObject;
 				T result = caseIntegerType(integerType);
-				if (result == null) result = caseNumericalType(integerType);
+				if (result == null) result = caseNumericType(integerType);
 				if (result == null) result = casePrimitiveType(integerType);
 				if (result == null) result = caseDataType(integerType);
 				if (result == null) result = caseType(integerType);
@@ -461,17 +461,17 @@ public class TypeSystemSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Numerical Type</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Numeric Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Numerical Type</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Numeric Type</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseNumericalType(NumericalType object) {
+	public T caseNumericType(NumericType object) {
 		return null;
 	}
 

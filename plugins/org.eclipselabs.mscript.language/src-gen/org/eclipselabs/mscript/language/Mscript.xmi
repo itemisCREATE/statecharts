@@ -500,9 +500,9 @@
       <elements xsi:type="xtext:RuleCall" rule="//@rules.36"/>
     </alternatives>
   </rules>
-  <rules xsi:type="xtext:ParserRule" name="NumericalTypeSpecifier">
+  <rules xsi:type="xtext:ParserRule" name="NumericTypeSpecifier">
     <type metamodel="//@metamodelDeclarations.0">
-      <classifier xsi:type="ecore:EClass" href="http://www.eclipselabs.org/mscript/AST/1.0.0#//NumericalTypeSpecifier"/>
+      <classifier xsi:type="ecore:EClass" href="http://www.eclipselabs.org/mscript/AST/1.0.0#//NumericTypeSpecifier"/>
     </type>
     <alternatives xsi:type="xtext:Alternatives">
       <elements xsi:type="xtext:RuleCall" rule="//@rules.31"/>
@@ -1228,9 +1228,9 @@
       <elements xsi:type="xtext:RuleCall" rule="//@rules.71"/>
     </alternatives>
   </rules>
-  <rules xsi:type="xtext:ParserRule" name="NumericalLiteral">
+  <rules xsi:type="xtext:ParserRule" name="NumericLiteral">
     <type metamodel="//@metamodelDeclarations.0">
-      <classifier xsi:type="ecore:EClass" href="http://www.eclipselabs.org/mscript/AST/1.0.0#//NumericalLiteral"/>
+      <classifier xsi:type="ecore:EClass" href="http://www.eclipselabs.org/mscript/AST/1.0.0#//NumericLiteral"/>
     </type>
     <alternatives xsi:type="xtext:Alternatives">
       <elements xsi:type="xtext:RuleCall" rule="//@rules.67"/>

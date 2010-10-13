@@ -463,7 +463,7 @@
     </children>
     <styles xmi:type="notation:FontStyle" xmi:id="_6g4oUXO3Ed-S94eRjnXSAQ" fontName="Sans"/>
     <element xmi:type="uml:Generalization" href="TypeSystem.uml#_6g2zIHO3Ed-S94eRjnXSAQ"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_6g4oUnO3Ed-S94eRjnXSAQ" points="[0, -2, 44, 72]$[0, -38, 44, 36]$[-44, -38, 0, 36]$[-44, -72, 0, 2]"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_6g4oUnO3Ed-S94eRjnXSAQ" points="[0, -2, 52, 72]$[0, -38, 52, 36]$[-49, -38, 3, 36]$[-49, -72, 3, 2]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_6g7EkHO3Ed-S94eRjnXSAQ" id="(0.5067567567567568,0.03409090909090909)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_FDfrcHO4Ed-S94eRjnXSAQ" id="(0.6814814814814815,0.9666666666666667)"/>
   </edges>

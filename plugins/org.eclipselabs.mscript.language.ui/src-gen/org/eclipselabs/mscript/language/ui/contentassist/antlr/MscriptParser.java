@@ -46,7 +46,7 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getTypeSpecifierAccess().getAlternatives(), "rule__TypeSpecifier__Alternatives");
 					put(grammarAccess.getDataTypeSpecifierAccess().getAlternatives(), "rule__DataTypeSpecifier__Alternatives");
 					put(grammarAccess.getPrimitiveTypeSpecifierAccess().getAlternatives(), "rule__PrimitiveTypeSpecifier__Alternatives");
-					put(grammarAccess.getNumericalTypeSpecifierAccess().getAlternatives(), "rule__NumericalTypeSpecifier__Alternatives");
+					put(grammarAccess.getNumericTypeSpecifierAccess().getAlternatives(), "rule__NumericTypeSpecifier__Alternatives");
 					put(grammarAccess.getArrayDimensionSpecificationAccess().getAlternatives(), "rule__ArrayDimensionSpecification__Alternatives");
 					put(grammarAccess.getExpressionAccess().getAlternatives(), "rule__Expression__Alternatives");
 					put(grammarAccess.getRelationalExpressionAccess().getAlternatives_1_1(), "rule__RelationalExpression__Alternatives_1_1");
@@ -57,7 +57,7 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getCallablePrimaryExpressionAccess().getAlternatives(), "rule__CallablePrimaryExpression__Alternatives");
 					put(grammarAccess.getPrimaryExpressionAccess().getAlternatives(), "rule__PrimaryExpression__Alternatives");
 					put(grammarAccess.getLiteralAccess().getAlternatives(), "rule__Literal__Alternatives");
-					put(grammarAccess.getNumericalLiteralAccess().getAlternatives(), "rule__NumericalLiteral__Alternatives");
+					put(grammarAccess.getNumericLiteralAccess().getAlternatives(), "rule__NumericLiteral__Alternatives");
 					put(grammarAccess.getSubscriptAccess().getAlternatives(), "rule__Subscript__Alternatives");
 					put(grammarAccess.getUnitExpressionAccess().getAlternatives(), "rule__UnitExpression__Alternatives");
 					put(grammarAccess.getUnitExpressionNumeratorAccess().getAlternatives(), "rule__UnitExpressionNumerator__Alternatives");

@@ -340,13 +340,13 @@ public class AstSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AstPackage.NUMERICAL_TYPE_SPECIFIER:
+      case AstPackage.NUMERIC_TYPE_SPECIFIER:
       {
-        NumericalTypeSpecifier numericalTypeSpecifier = (NumericalTypeSpecifier)theEObject;
-        T result = caseNumericalTypeSpecifier(numericalTypeSpecifier);
-        if (result == null) result = casePrimitiveTypeSpecifier(numericalTypeSpecifier);
-        if (result == null) result = caseDataTypeSpecifier(numericalTypeSpecifier);
-        if (result == null) result = caseTypeSpecifier(numericalTypeSpecifier);
+        NumericTypeSpecifier numericTypeSpecifier = (NumericTypeSpecifier)theEObject;
+        T result = caseNumericTypeSpecifier(numericTypeSpecifier);
+        if (result == null) result = casePrimitiveTypeSpecifier(numericTypeSpecifier);
+        if (result == null) result = caseDataTypeSpecifier(numericTypeSpecifier);
+        if (result == null) result = caseTypeSpecifier(numericTypeSpecifier);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -354,7 +354,7 @@ public class AstSwitch<T>
       {
         RealTypeSpecifier realTypeSpecifier = (RealTypeSpecifier)theEObject;
         T result = caseRealTypeSpecifier(realTypeSpecifier);
-        if (result == null) result = caseNumericalTypeSpecifier(realTypeSpecifier);
+        if (result == null) result = caseNumericTypeSpecifier(realTypeSpecifier);
         if (result == null) result = casePrimitiveTypeSpecifier(realTypeSpecifier);
         if (result == null) result = caseDataTypeSpecifier(realTypeSpecifier);
         if (result == null) result = caseTypeSpecifier(realTypeSpecifier);
@@ -365,7 +365,7 @@ public class AstSwitch<T>
       {
         IntegerTypeSpecifier integerTypeSpecifier = (IntegerTypeSpecifier)theEObject;
         T result = caseIntegerTypeSpecifier(integerTypeSpecifier);
-        if (result == null) result = caseNumericalTypeSpecifier(integerTypeSpecifier);
+        if (result == null) result = caseNumericTypeSpecifier(integerTypeSpecifier);
         if (result == null) result = casePrimitiveTypeSpecifier(integerTypeSpecifier);
         if (result == null) result = caseDataTypeSpecifier(integerTypeSpecifier);
         if (result == null) result = caseTypeSpecifier(integerTypeSpecifier);
@@ -376,7 +376,7 @@ public class AstSwitch<T>
       {
         ComplexTypeSpecifier complexTypeSpecifier = (ComplexTypeSpecifier)theEObject;
         T result = caseComplexTypeSpecifier(complexTypeSpecifier);
-        if (result == null) result = caseNumericalTypeSpecifier(complexTypeSpecifier);
+        if (result == null) result = caseNumericTypeSpecifier(complexTypeSpecifier);
         if (result == null) result = casePrimitiveTypeSpecifier(complexTypeSpecifier);
         if (result == null) result = caseDataTypeSpecifier(complexTypeSpecifier);
         if (result == null) result = caseTypeSpecifier(complexTypeSpecifier);
@@ -387,7 +387,7 @@ public class AstSwitch<T>
       {
         GaussianTypeSpecifier gaussianTypeSpecifier = (GaussianTypeSpecifier)theEObject;
         T result = caseGaussianTypeSpecifier(gaussianTypeSpecifier);
-        if (result == null) result = caseNumericalTypeSpecifier(gaussianTypeSpecifier);
+        if (result == null) result = caseNumericTypeSpecifier(gaussianTypeSpecifier);
         if (result == null) result = casePrimitiveTypeSpecifier(gaussianTypeSpecifier);
         if (result == null) result = caseDataTypeSpecifier(gaussianTypeSpecifier);
         if (result == null) result = caseTypeSpecifier(gaussianTypeSpecifier);
@@ -513,12 +513,12 @@ public class AstSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AstPackage.NUMERICAL_LITERAL:
+      case AstPackage.NUMERIC_LITERAL:
       {
-        NumericalLiteral numericalLiteral = (NumericalLiteral)theEObject;
-        T result = caseNumericalLiteral(numericalLiteral);
-        if (result == null) result = caseLiteral(numericalLiteral);
-        if (result == null) result = caseExpression(numericalLiteral);
+        NumericLiteral numericLiteral = (NumericLiteral)theEObject;
+        T result = caseNumericLiteral(numericLiteral);
+        if (result == null) result = caseLiteral(numericLiteral);
+        if (result == null) result = caseExpression(numericLiteral);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -526,7 +526,7 @@ public class AstSwitch<T>
       {
         RealLiteral realLiteral = (RealLiteral)theEObject;
         T result = caseRealLiteral(realLiteral);
-        if (result == null) result = caseNumericalLiteral(realLiteral);
+        if (result == null) result = caseNumericLiteral(realLiteral);
         if (result == null) result = caseLiteral(realLiteral);
         if (result == null) result = caseExpression(realLiteral);
         if (result == null) result = defaultCase(theEObject);
@@ -536,7 +536,7 @@ public class AstSwitch<T>
       {
         IntegerLiteral integerLiteral = (IntegerLiteral)theEObject;
         T result = caseIntegerLiteral(integerLiteral);
-        if (result == null) result = caseNumericalLiteral(integerLiteral);
+        if (result == null) result = caseNumericLiteral(integerLiteral);
         if (result == null) result = caseLiteral(integerLiteral);
         if (result == null) result = caseExpression(integerLiteral);
         if (result == null) result = defaultCase(theEObject);
@@ -1205,17 +1205,17 @@ public class AstSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Numerical Type Specifier</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Numeric Type Specifier</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Numerical Type Specifier</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Numeric Type Specifier</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseNumericalTypeSpecifier(NumericalTypeSpecifier object)
+  public T caseNumericTypeSpecifier(NumericTypeSpecifier object)
   {
     return null;
   }
@@ -1525,17 +1525,17 @@ public class AstSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Numerical Literal</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Numeric Literal</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Numerical Literal</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Numeric Literal</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseNumericalLiteral(NumericalLiteral object)
+  public T caseNumericLiteral(NumericLiteral object)
   {
     return null;
   }

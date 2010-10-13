@@ -14,24 +14,24 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipselabs.mscript.language.ast.AstPackage;
-import org.eclipselabs.mscript.language.ast.NumericalLiteral;
+import org.eclipselabs.mscript.language.ast.NumericLiteral;
 import org.eclipselabs.mscript.language.ast.UnitExpression;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Numerical Literal</b></em>'.
+ * An implementation of the model object '<em><b>Numeric Literal</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.NumericalLiteralImpl#isImaginary <em>Imaginary</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.NumericalLiteralImpl#getUnit <em>Unit</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.NumericLiteralImpl#isImaginary <em>Imaginary</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.NumericLiteralImpl#getUnit <em>Unit</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class NumericalLiteralImpl extends LiteralImpl implements NumericalLiteral
+public class NumericLiteralImpl extends LiteralImpl implements NumericLiteral
 {
   /**
    * The default value of the '{@link #isImaginary() <em>Imaginary</em>}' attribute.
@@ -68,7 +68,7 @@ public class NumericalLiteralImpl extends LiteralImpl implements NumericalLitera
    * <!-- end-user-doc -->
    * @generated
    */
-  protected NumericalLiteralImpl()
+  protected NumericLiteralImpl()
   {
     super();
   }
@@ -81,7 +81,7 @@ public class NumericalLiteralImpl extends LiteralImpl implements NumericalLitera
   @Override
   protected EClass eStaticClass()
   {
-    return AstPackage.Literals.NUMERICAL_LITERAL;
+    return AstPackage.Literals.NUMERIC_LITERAL;
   }
 
   /**
@@ -104,7 +104,7 @@ public class NumericalLiteralImpl extends LiteralImpl implements NumericalLitera
     boolean oldImaginary = imaginary;
     imaginary = newImaginary;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.NUMERICAL_LITERAL__IMAGINARY, oldImaginary, imaginary));
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.NUMERIC_LITERAL__IMAGINARY, oldImaginary, imaginary));
   }
 
   /**
@@ -128,7 +128,7 @@ public class NumericalLiteralImpl extends LiteralImpl implements NumericalLitera
     unit = newUnit;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.NUMERICAL_LITERAL__UNIT, oldUnit, newUnit);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.NUMERIC_LITERAL__UNIT, oldUnit, newUnit);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -145,14 +145,14 @@ public class NumericalLiteralImpl extends LiteralImpl implements NumericalLitera
     {
       NotificationChain msgs = null;
       if (unit != null)
-        msgs = ((InternalEObject)unit).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.NUMERICAL_LITERAL__UNIT, null, msgs);
+        msgs = ((InternalEObject)unit).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.NUMERIC_LITERAL__UNIT, null, msgs);
       if (newUnit != null)
-        msgs = ((InternalEObject)newUnit).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.NUMERICAL_LITERAL__UNIT, null, msgs);
+        msgs = ((InternalEObject)newUnit).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.NUMERIC_LITERAL__UNIT, null, msgs);
       msgs = basicSetUnit(newUnit, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.NUMERICAL_LITERAL__UNIT, newUnit, newUnit));
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.NUMERIC_LITERAL__UNIT, newUnit, newUnit));
   }
 
   /**
@@ -165,7 +165,7 @@ public class NumericalLiteralImpl extends LiteralImpl implements NumericalLitera
   {
     switch (featureID)
     {
-      case AstPackage.NUMERICAL_LITERAL__UNIT:
+      case AstPackage.NUMERIC_LITERAL__UNIT:
         return basicSetUnit(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -181,9 +181,9 @@ public class NumericalLiteralImpl extends LiteralImpl implements NumericalLitera
   {
     switch (featureID)
     {
-      case AstPackage.NUMERICAL_LITERAL__IMAGINARY:
+      case AstPackage.NUMERIC_LITERAL__IMAGINARY:
         return isImaginary();
-      case AstPackage.NUMERICAL_LITERAL__UNIT:
+      case AstPackage.NUMERIC_LITERAL__UNIT:
         return getUnit();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -199,10 +199,10 @@ public class NumericalLiteralImpl extends LiteralImpl implements NumericalLitera
   {
     switch (featureID)
     {
-      case AstPackage.NUMERICAL_LITERAL__IMAGINARY:
+      case AstPackage.NUMERIC_LITERAL__IMAGINARY:
         setImaginary((Boolean)newValue);
         return;
-      case AstPackage.NUMERICAL_LITERAL__UNIT:
+      case AstPackage.NUMERIC_LITERAL__UNIT:
         setUnit((UnitExpression)newValue);
         return;
     }
@@ -219,10 +219,10 @@ public class NumericalLiteralImpl extends LiteralImpl implements NumericalLitera
   {
     switch (featureID)
     {
-      case AstPackage.NUMERICAL_LITERAL__IMAGINARY:
+      case AstPackage.NUMERIC_LITERAL__IMAGINARY:
         setImaginary(IMAGINARY_EDEFAULT);
         return;
-      case AstPackage.NUMERICAL_LITERAL__UNIT:
+      case AstPackage.NUMERIC_LITERAL__UNIT:
         setUnit((UnitExpression)null);
         return;
     }
@@ -239,9 +239,9 @@ public class NumericalLiteralImpl extends LiteralImpl implements NumericalLitera
   {
     switch (featureID)
     {
-      case AstPackage.NUMERICAL_LITERAL__IMAGINARY:
+      case AstPackage.NUMERIC_LITERAL__IMAGINARY:
         return imaginary != IMAGINARY_EDEFAULT;
-      case AstPackage.NUMERICAL_LITERAL__UNIT:
+      case AstPackage.NUMERIC_LITERAL__UNIT:
         return unit != null;
     }
     return super.eIsSet(featureID);
@@ -264,4 +264,4 @@ public class NumericalLiteralImpl extends LiteralImpl implements NumericalLitera
     return result.toString();
   }
 
-} //NumericalLiteralImpl
+} //NumericLiteralImpl

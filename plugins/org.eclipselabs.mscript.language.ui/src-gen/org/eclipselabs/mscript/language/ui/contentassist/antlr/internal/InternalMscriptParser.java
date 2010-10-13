@@ -2257,20 +2257,20 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
     // $ANTLR end rulePrimitiveTypeSpecifier
 
 
-    // $ANTLR start entryRuleNumericalTypeSpecifier
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:873:1: entryRuleNumericalTypeSpecifier : ruleNumericalTypeSpecifier EOF ;
-    public final void entryRuleNumericalTypeSpecifier() throws RecognitionException {
+    // $ANTLR start entryRuleNumericTypeSpecifier
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:873:1: entryRuleNumericTypeSpecifier : ruleNumericTypeSpecifier EOF ;
+    public final void entryRuleNumericTypeSpecifier() throws RecognitionException {
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:874:1: ( ruleNumericalTypeSpecifier EOF )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:875:1: ruleNumericalTypeSpecifier EOF
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:874:1: ( ruleNumericTypeSpecifier EOF )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:875:1: ruleNumericTypeSpecifier EOF
             {
-             before(grammarAccess.getNumericalTypeSpecifierRule()); 
-            pushFollow(FOLLOW_ruleNumericalTypeSpecifier_in_entryRuleNumericalTypeSpecifier1802);
-            ruleNumericalTypeSpecifier();
+             before(grammarAccess.getNumericTypeSpecifierRule()); 
+            pushFollow(FOLLOW_ruleNumericTypeSpecifier_in_entryRuleNumericTypeSpecifier1802);
+            ruleNumericTypeSpecifier();
             _fsp--;
 
-             after(grammarAccess.getNumericalTypeSpecifierRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleNumericalTypeSpecifier1809); 
+             after(grammarAccess.getNumericTypeSpecifierRule()); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleNumericTypeSpecifier1809); 
 
             }
 
@@ -2283,34 +2283,34 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end entryRuleNumericalTypeSpecifier
+    // $ANTLR end entryRuleNumericTypeSpecifier
 
 
-    // $ANTLR start ruleNumericalTypeSpecifier
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:882:1: ruleNumericalTypeSpecifier : ( ( rule__NumericalTypeSpecifier__Alternatives ) ) ;
-    public final void ruleNumericalTypeSpecifier() throws RecognitionException {
+    // $ANTLR start ruleNumericTypeSpecifier
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:882:1: ruleNumericTypeSpecifier : ( ( rule__NumericTypeSpecifier__Alternatives ) ) ;
+    public final void ruleNumericTypeSpecifier() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:886:2: ( ( ( rule__NumericalTypeSpecifier__Alternatives ) ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:887:1: ( ( rule__NumericalTypeSpecifier__Alternatives ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:886:2: ( ( ( rule__NumericTypeSpecifier__Alternatives ) ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:887:1: ( ( rule__NumericTypeSpecifier__Alternatives ) )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:887:1: ( ( rule__NumericalTypeSpecifier__Alternatives ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:888:1: ( rule__NumericalTypeSpecifier__Alternatives )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:887:1: ( ( rule__NumericTypeSpecifier__Alternatives ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:888:1: ( rule__NumericTypeSpecifier__Alternatives )
             {
-             before(grammarAccess.getNumericalTypeSpecifierAccess().getAlternatives()); 
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:889:1: ( rule__NumericalTypeSpecifier__Alternatives )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:889:2: rule__NumericalTypeSpecifier__Alternatives
+             before(grammarAccess.getNumericTypeSpecifierAccess().getAlternatives()); 
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:889:1: ( rule__NumericTypeSpecifier__Alternatives )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:889:2: rule__NumericTypeSpecifier__Alternatives
             {
-            pushFollow(FOLLOW_rule__NumericalTypeSpecifier__Alternatives_in_ruleNumericalTypeSpecifier1835);
-            rule__NumericalTypeSpecifier__Alternatives();
+            pushFollow(FOLLOW_rule__NumericTypeSpecifier__Alternatives_in_ruleNumericTypeSpecifier1835);
+            rule__NumericTypeSpecifier__Alternatives();
             _fsp--;
 
 
             }
 
-             after(grammarAccess.getNumericalTypeSpecifierAccess().getAlternatives()); 
+             after(grammarAccess.getNumericTypeSpecifierAccess().getAlternatives()); 
 
             }
 
@@ -2329,7 +2329,7 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end ruleNumericalTypeSpecifier
+    // $ANTLR end ruleNumericTypeSpecifier
 
 
     // $ANTLR start entryRuleRealTypeSpecifier
@@ -4582,20 +4582,20 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
     // $ANTLR end ruleLiteral
 
 
-    // $ANTLR start entryRuleNumericalLiteral
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:1741:1: entryRuleNumericalLiteral : ruleNumericalLiteral EOF ;
-    public final void entryRuleNumericalLiteral() throws RecognitionException {
+    // $ANTLR start entryRuleNumericLiteral
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:1741:1: entryRuleNumericLiteral : ruleNumericLiteral EOF ;
+    public final void entryRuleNumericLiteral() throws RecognitionException {
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:1742:1: ( ruleNumericalLiteral EOF )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:1743:1: ruleNumericalLiteral EOF
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:1742:1: ( ruleNumericLiteral EOF )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:1743:1: ruleNumericLiteral EOF
             {
-             before(grammarAccess.getNumericalLiteralRule()); 
-            pushFollow(FOLLOW_ruleNumericalLiteral_in_entryRuleNumericalLiteral3662);
-            ruleNumericalLiteral();
+             before(grammarAccess.getNumericLiteralRule()); 
+            pushFollow(FOLLOW_ruleNumericLiteral_in_entryRuleNumericLiteral3662);
+            ruleNumericLiteral();
             _fsp--;
 
-             after(grammarAccess.getNumericalLiteralRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleNumericalLiteral3669); 
+             after(grammarAccess.getNumericLiteralRule()); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleNumericLiteral3669); 
 
             }
 
@@ -4608,34 +4608,34 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end entryRuleNumericalLiteral
+    // $ANTLR end entryRuleNumericLiteral
 
 
-    // $ANTLR start ruleNumericalLiteral
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:1750:1: ruleNumericalLiteral : ( ( rule__NumericalLiteral__Alternatives ) ) ;
-    public final void ruleNumericalLiteral() throws RecognitionException {
+    // $ANTLR start ruleNumericLiteral
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:1750:1: ruleNumericLiteral : ( ( rule__NumericLiteral__Alternatives ) ) ;
+    public final void ruleNumericLiteral() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:1754:2: ( ( ( rule__NumericalLiteral__Alternatives ) ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:1755:1: ( ( rule__NumericalLiteral__Alternatives ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:1754:2: ( ( ( rule__NumericLiteral__Alternatives ) ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:1755:1: ( ( rule__NumericLiteral__Alternatives ) )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:1755:1: ( ( rule__NumericalLiteral__Alternatives ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:1756:1: ( rule__NumericalLiteral__Alternatives )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:1755:1: ( ( rule__NumericLiteral__Alternatives ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:1756:1: ( rule__NumericLiteral__Alternatives )
             {
-             before(grammarAccess.getNumericalLiteralAccess().getAlternatives()); 
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:1757:1: ( rule__NumericalLiteral__Alternatives )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:1757:2: rule__NumericalLiteral__Alternatives
+             before(grammarAccess.getNumericLiteralAccess().getAlternatives()); 
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:1757:1: ( rule__NumericLiteral__Alternatives )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:1757:2: rule__NumericLiteral__Alternatives
             {
-            pushFollow(FOLLOW_rule__NumericalLiteral__Alternatives_in_ruleNumericalLiteral3695);
-            rule__NumericalLiteral__Alternatives();
+            pushFollow(FOLLOW_rule__NumericLiteral__Alternatives_in_ruleNumericLiteral3695);
+            rule__NumericLiteral__Alternatives();
             _fsp--;
 
 
             }
 
-             after(grammarAccess.getNumericalLiteralAccess().getAlternatives()); 
+             after(grammarAccess.getNumericLiteralAccess().getAlternatives()); 
 
             }
 
@@ -4654,7 +4654,7 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end ruleNumericalLiteral
+    // $ANTLR end ruleNumericLiteral
 
 
     // $ANTLR start entryRuleRealLiteral
@@ -7291,13 +7291,13 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__PrimitiveTypeSpecifier__Alternatives
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2672:1: rule__PrimitiveTypeSpecifier__Alternatives : ( ( ruleNumericalTypeSpecifier ) | ( ruleBooleanTypeSpecifier ) | ( ruleStringTypeSpecifier ) );
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2672:1: rule__PrimitiveTypeSpecifier__Alternatives : ( ( ruleNumericTypeSpecifier ) | ( ruleBooleanTypeSpecifier ) | ( ruleStringTypeSpecifier ) );
     public final void rule__PrimitiveTypeSpecifier__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2676:1: ( ( ruleNumericalTypeSpecifier ) | ( ruleBooleanTypeSpecifier ) | ( ruleStringTypeSpecifier ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2676:1: ( ( ruleNumericTypeSpecifier ) | ( ruleBooleanTypeSpecifier ) | ( ruleStringTypeSpecifier ) )
             int alt10=3;
             switch ( input.LA(1) ) {
             case 59:
@@ -7320,24 +7320,24 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("2672:1: rule__PrimitiveTypeSpecifier__Alternatives : ( ( ruleNumericalTypeSpecifier ) | ( ruleBooleanTypeSpecifier ) | ( ruleStringTypeSpecifier ) );", 10, 0, input);
+                    new NoViableAltException("2672:1: rule__PrimitiveTypeSpecifier__Alternatives : ( ( ruleNumericTypeSpecifier ) | ( ruleBooleanTypeSpecifier ) | ( ruleStringTypeSpecifier ) );", 10, 0, input);
 
                 throw nvae;
             }
 
             switch (alt10) {
                 case 1 :
-                    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2677:1: ( ruleNumericalTypeSpecifier )
+                    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2677:1: ( ruleNumericTypeSpecifier )
                     {
-                    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2677:1: ( ruleNumericalTypeSpecifier )
-                    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2678:1: ruleNumericalTypeSpecifier
+                    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2677:1: ( ruleNumericTypeSpecifier )
+                    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2678:1: ruleNumericTypeSpecifier
                     {
-                     before(grammarAccess.getPrimitiveTypeSpecifierAccess().getNumericalTypeSpecifierParserRuleCall_0()); 
-                    pushFollow(FOLLOW_ruleNumericalTypeSpecifier_in_rule__PrimitiveTypeSpecifier__Alternatives5689);
-                    ruleNumericalTypeSpecifier();
+                     before(grammarAccess.getPrimitiveTypeSpecifierAccess().getNumericTypeSpecifierParserRuleCall_0()); 
+                    pushFollow(FOLLOW_ruleNumericTypeSpecifier_in_rule__PrimitiveTypeSpecifier__Alternatives5689);
+                    ruleNumericTypeSpecifier();
                     _fsp--;
 
-                     after(grammarAccess.getPrimitiveTypeSpecifierAccess().getNumericalTypeSpecifierParserRuleCall_0()); 
+                     after(grammarAccess.getPrimitiveTypeSpecifierAccess().getNumericTypeSpecifierParserRuleCall_0()); 
 
                     }
 
@@ -7397,9 +7397,9 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
     // $ANTLR end rule__PrimitiveTypeSpecifier__Alternatives
 
 
-    // $ANTLR start rule__NumericalTypeSpecifier__Alternatives
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2700:1: rule__NumericalTypeSpecifier__Alternatives : ( ( ruleRealTypeSpecifier ) | ( ruleIntegerTypeSpecifier ) | ( ruleComplexTypeSpecifier ) | ( ruleGaussianTypeSpecifier ) );
-    public final void rule__NumericalTypeSpecifier__Alternatives() throws RecognitionException {
+    // $ANTLR start rule__NumericTypeSpecifier__Alternatives
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2700:1: rule__NumericTypeSpecifier__Alternatives : ( ( ruleRealTypeSpecifier ) | ( ruleIntegerTypeSpecifier ) | ( ruleComplexTypeSpecifier ) | ( ruleGaussianTypeSpecifier ) );
+    public final void rule__NumericTypeSpecifier__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -7429,7 +7429,7 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("2700:1: rule__NumericalTypeSpecifier__Alternatives : ( ( ruleRealTypeSpecifier ) | ( ruleIntegerTypeSpecifier ) | ( ruleComplexTypeSpecifier ) | ( ruleGaussianTypeSpecifier ) );", 11, 0, input);
+                    new NoViableAltException("2700:1: rule__NumericTypeSpecifier__Alternatives : ( ( ruleRealTypeSpecifier ) | ( ruleIntegerTypeSpecifier ) | ( ruleComplexTypeSpecifier ) | ( ruleGaussianTypeSpecifier ) );", 11, 0, input);
 
                 throw nvae;
             }
@@ -7441,12 +7441,12 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
                     // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2705:1: ( ruleRealTypeSpecifier )
                     // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2706:1: ruleRealTypeSpecifier
                     {
-                     before(grammarAccess.getNumericalTypeSpecifierAccess().getRealTypeSpecifierParserRuleCall_0()); 
-                    pushFollow(FOLLOW_ruleRealTypeSpecifier_in_rule__NumericalTypeSpecifier__Alternatives5755);
+                     before(grammarAccess.getNumericTypeSpecifierAccess().getRealTypeSpecifierParserRuleCall_0()); 
+                    pushFollow(FOLLOW_ruleRealTypeSpecifier_in_rule__NumericTypeSpecifier__Alternatives5755);
                     ruleRealTypeSpecifier();
                     _fsp--;
 
-                     after(grammarAccess.getNumericalTypeSpecifierAccess().getRealTypeSpecifierParserRuleCall_0()); 
+                     after(grammarAccess.getNumericTypeSpecifierAccess().getRealTypeSpecifierParserRuleCall_0()); 
 
                     }
 
@@ -7459,12 +7459,12 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
                     // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2711:6: ( ruleIntegerTypeSpecifier )
                     // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2712:1: ruleIntegerTypeSpecifier
                     {
-                     before(grammarAccess.getNumericalTypeSpecifierAccess().getIntegerTypeSpecifierParserRuleCall_1()); 
-                    pushFollow(FOLLOW_ruleIntegerTypeSpecifier_in_rule__NumericalTypeSpecifier__Alternatives5772);
+                     before(grammarAccess.getNumericTypeSpecifierAccess().getIntegerTypeSpecifierParserRuleCall_1()); 
+                    pushFollow(FOLLOW_ruleIntegerTypeSpecifier_in_rule__NumericTypeSpecifier__Alternatives5772);
                     ruleIntegerTypeSpecifier();
                     _fsp--;
 
-                     after(grammarAccess.getNumericalTypeSpecifierAccess().getIntegerTypeSpecifierParserRuleCall_1()); 
+                     after(grammarAccess.getNumericTypeSpecifierAccess().getIntegerTypeSpecifierParserRuleCall_1()); 
 
                     }
 
@@ -7477,12 +7477,12 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
                     // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2717:6: ( ruleComplexTypeSpecifier )
                     // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2718:1: ruleComplexTypeSpecifier
                     {
-                     before(grammarAccess.getNumericalTypeSpecifierAccess().getComplexTypeSpecifierParserRuleCall_2()); 
-                    pushFollow(FOLLOW_ruleComplexTypeSpecifier_in_rule__NumericalTypeSpecifier__Alternatives5789);
+                     before(grammarAccess.getNumericTypeSpecifierAccess().getComplexTypeSpecifierParserRuleCall_2()); 
+                    pushFollow(FOLLOW_ruleComplexTypeSpecifier_in_rule__NumericTypeSpecifier__Alternatives5789);
                     ruleComplexTypeSpecifier();
                     _fsp--;
 
-                     after(grammarAccess.getNumericalTypeSpecifierAccess().getComplexTypeSpecifierParserRuleCall_2()); 
+                     after(grammarAccess.getNumericTypeSpecifierAccess().getComplexTypeSpecifierParserRuleCall_2()); 
 
                     }
 
@@ -7495,12 +7495,12 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
                     // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2723:6: ( ruleGaussianTypeSpecifier )
                     // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2724:1: ruleGaussianTypeSpecifier
                     {
-                     before(grammarAccess.getNumericalTypeSpecifierAccess().getGaussianTypeSpecifierParserRuleCall_3()); 
-                    pushFollow(FOLLOW_ruleGaussianTypeSpecifier_in_rule__NumericalTypeSpecifier__Alternatives5806);
+                     before(grammarAccess.getNumericTypeSpecifierAccess().getGaussianTypeSpecifierParserRuleCall_3()); 
+                    pushFollow(FOLLOW_ruleGaussianTypeSpecifier_in_rule__NumericTypeSpecifier__Alternatives5806);
                     ruleGaussianTypeSpecifier();
                     _fsp--;
 
-                     after(grammarAccess.getNumericalTypeSpecifierAccess().getGaussianTypeSpecifierParserRuleCall_3()); 
+                     after(grammarAccess.getNumericTypeSpecifierAccess().getGaussianTypeSpecifierParserRuleCall_3()); 
 
                     }
 
@@ -7521,7 +7521,7 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__NumericalTypeSpecifier__Alternatives
+    // $ANTLR end rule__NumericTypeSpecifier__Alternatives
 
 
     // $ANTLR start rule__ArrayDimensionSpecification__Alternatives
@@ -8358,13 +8358,13 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Literal__Alternatives
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2958:1: rule__Literal__Alternatives : ( ( ruleNumericalLiteral ) | ( ruleBooleanLiteral ) | ( ruleStringLiteral ) );
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2958:1: rule__Literal__Alternatives : ( ( ruleNumericLiteral ) | ( ruleBooleanLiteral ) | ( ruleStringLiteral ) );
     public final void rule__Literal__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2962:1: ( ( ruleNumericalLiteral ) | ( ruleBooleanLiteral ) | ( ruleStringLiteral ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2962:1: ( ( ruleNumericLiteral ) | ( ruleBooleanLiteral ) | ( ruleStringLiteral ) )
             int alt21=3;
             switch ( input.LA(1) ) {
             case RULE_REAL:
@@ -8386,24 +8386,24 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("2958:1: rule__Literal__Alternatives : ( ( ruleNumericalLiteral ) | ( ruleBooleanLiteral ) | ( ruleStringLiteral ) );", 21, 0, input);
+                    new NoViableAltException("2958:1: rule__Literal__Alternatives : ( ( ruleNumericLiteral ) | ( ruleBooleanLiteral ) | ( ruleStringLiteral ) );", 21, 0, input);
 
                 throw nvae;
             }
 
             switch (alt21) {
                 case 1 :
-                    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2963:1: ( ruleNumericalLiteral )
+                    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2963:1: ( ruleNumericLiteral )
                     {
-                    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2963:1: ( ruleNumericalLiteral )
-                    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2964:1: ruleNumericalLiteral
+                    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2963:1: ( ruleNumericLiteral )
+                    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2964:1: ruleNumericLiteral
                     {
-                     before(grammarAccess.getLiteralAccess().getNumericalLiteralParserRuleCall_0()); 
-                    pushFollow(FOLLOW_ruleNumericalLiteral_in_rule__Literal__Alternatives6356);
-                    ruleNumericalLiteral();
+                     before(grammarAccess.getLiteralAccess().getNumericLiteralParserRuleCall_0()); 
+                    pushFollow(FOLLOW_ruleNumericLiteral_in_rule__Literal__Alternatives6356);
+                    ruleNumericLiteral();
                     _fsp--;
 
-                     after(grammarAccess.getLiteralAccess().getNumericalLiteralParserRuleCall_0()); 
+                     after(grammarAccess.getLiteralAccess().getNumericLiteralParserRuleCall_0()); 
 
                     }
 
@@ -8463,9 +8463,9 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
     // $ANTLR end rule__Literal__Alternatives
 
 
-    // $ANTLR start rule__NumericalLiteral__Alternatives
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2986:1: rule__NumericalLiteral__Alternatives : ( ( ruleRealLiteral ) | ( ruleIntegerLiteral ) );
-    public final void rule__NumericalLiteral__Alternatives() throws RecognitionException {
+    // $ANTLR start rule__NumericLiteral__Alternatives
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2986:1: rule__NumericLiteral__Alternatives : ( ( ruleRealLiteral ) | ( ruleIntegerLiteral ) );
+    public final void rule__NumericLiteral__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -8482,7 +8482,7 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("2986:1: rule__NumericalLiteral__Alternatives : ( ( ruleRealLiteral ) | ( ruleIntegerLiteral ) );", 22, 0, input);
+                    new NoViableAltException("2986:1: rule__NumericLiteral__Alternatives : ( ( ruleRealLiteral ) | ( ruleIntegerLiteral ) );", 22, 0, input);
 
                 throw nvae;
             }
@@ -8493,12 +8493,12 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
                     // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2991:1: ( ruleRealLiteral )
                     // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2992:1: ruleRealLiteral
                     {
-                     before(grammarAccess.getNumericalLiteralAccess().getRealLiteralParserRuleCall_0()); 
-                    pushFollow(FOLLOW_ruleRealLiteral_in_rule__NumericalLiteral__Alternatives6422);
+                     before(grammarAccess.getNumericLiteralAccess().getRealLiteralParserRuleCall_0()); 
+                    pushFollow(FOLLOW_ruleRealLiteral_in_rule__NumericLiteral__Alternatives6422);
                     ruleRealLiteral();
                     _fsp--;
 
-                     after(grammarAccess.getNumericalLiteralAccess().getRealLiteralParserRuleCall_0()); 
+                     after(grammarAccess.getNumericLiteralAccess().getRealLiteralParserRuleCall_0()); 
 
                     }
 
@@ -8511,12 +8511,12 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
                     // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2997:6: ( ruleIntegerLiteral )
                     // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2998:1: ruleIntegerLiteral
                     {
-                     before(grammarAccess.getNumericalLiteralAccess().getIntegerLiteralParserRuleCall_1()); 
-                    pushFollow(FOLLOW_ruleIntegerLiteral_in_rule__NumericalLiteral__Alternatives6439);
+                     before(grammarAccess.getNumericLiteralAccess().getIntegerLiteralParserRuleCall_1()); 
+                    pushFollow(FOLLOW_ruleIntegerLiteral_in_rule__NumericLiteral__Alternatives6439);
                     ruleIntegerLiteral();
                     _fsp--;
 
-                     after(grammarAccess.getNumericalLiteralAccess().getIntegerLiteralParserRuleCall_1()); 
+                     after(grammarAccess.getNumericLiteralAccess().getIntegerLiteralParserRuleCall_1()); 
 
                     }
 
@@ -8537,7 +8537,7 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__NumericalLiteral__Alternatives
+    // $ANTLR end rule__NumericLiteral__Alternatives
 
 
     // $ANTLR start rule__Subscript__Alternatives
@@ -42642,9 +42642,9 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rulePrimitiveTypeSpecifier_in_entryRulePrimitiveTypeSpecifier1742 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRulePrimitiveTypeSpecifier1749 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__PrimitiveTypeSpecifier__Alternatives_in_rulePrimitiveTypeSpecifier1775 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNumericalTypeSpecifier_in_entryRuleNumericalTypeSpecifier1802 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleNumericalTypeSpecifier1809 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__NumericalTypeSpecifier__Alternatives_in_ruleNumericalTypeSpecifier1835 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNumericTypeSpecifier_in_entryRuleNumericTypeSpecifier1802 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleNumericTypeSpecifier1809 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__NumericTypeSpecifier__Alternatives_in_ruleNumericTypeSpecifier1835 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleRealTypeSpecifier_in_entryRuleRealTypeSpecifier1862 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleRealTypeSpecifier1869 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__RealTypeSpecifier__Group__0_in_ruleRealTypeSpecifier1895 = new BitSet(new long[]{0x0000000000000002L});
@@ -42735,9 +42735,9 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_ruleLiteral_in_entryRuleLiteral3602 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleLiteral3609 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Literal__Alternatives_in_ruleLiteral3635 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNumericalLiteral_in_entryRuleNumericalLiteral3662 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleNumericalLiteral3669 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__NumericalLiteral__Alternatives_in_ruleNumericalLiteral3695 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNumericLiteral_in_entryRuleNumericLiteral3662 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleNumericLiteral3669 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__NumericLiteral__Alternatives_in_ruleNumericLiteral3695 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleRealLiteral_in_entryRuleRealLiteral3722 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleRealLiteral3729 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__RealLiteral__Group__0_in_ruleRealLiteral3755 = new BitSet(new long[]{0x0000000000000002L});
@@ -42828,13 +42828,13 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_ruleUnitTypeSpecifier_in_rule__TypeSpecifier__Alternatives5608 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rulePrimitiveTypeSpecifier_in_rule__DataTypeSpecifier__Alternatives5640 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleNamedTypeSpecifier_in_rule__DataTypeSpecifier__Alternatives5657 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNumericalTypeSpecifier_in_rule__PrimitiveTypeSpecifier__Alternatives5689 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNumericTypeSpecifier_in_rule__PrimitiveTypeSpecifier__Alternatives5689 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleBooleanTypeSpecifier_in_rule__PrimitiveTypeSpecifier__Alternatives5706 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleStringTypeSpecifier_in_rule__PrimitiveTypeSpecifier__Alternatives5723 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRealTypeSpecifier_in_rule__NumericalTypeSpecifier__Alternatives5755 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleIntegerTypeSpecifier_in_rule__NumericalTypeSpecifier__Alternatives5772 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleComplexTypeSpecifier_in_rule__NumericalTypeSpecifier__Alternatives5789 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleGaussianTypeSpecifier_in_rule__NumericalTypeSpecifier__Alternatives5806 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleRealTypeSpecifier_in_rule__NumericTypeSpecifier__Alternatives5755 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleIntegerTypeSpecifier_in_rule__NumericTypeSpecifier__Alternatives5772 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleComplexTypeSpecifier_in_rule__NumericTypeSpecifier__Alternatives5789 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleGaussianTypeSpecifier_in_rule__NumericTypeSpecifier__Alternatives5806 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__ArrayDimensionSpecification__UnspecifiedAssignment_0_in_rule__ArrayDimensionSpecification__Alternatives5838 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__ArrayDimensionSpecification__Group_1__0_in_rule__ArrayDimensionSpecification__Alternatives5856 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleConditionalExpression_in_rule__Expression__Alternatives5889 = new BitSet(new long[]{0x0000000000000002L});
@@ -42857,11 +42857,11 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_ruleUnitConstructionOperator_in_rule__PrimaryExpression__Alternatives6290 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleBeginExpression_in_rule__PrimaryExpression__Alternatives6307 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleEndExpression_in_rule__PrimaryExpression__Alternatives6324 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNumericalLiteral_in_rule__Literal__Alternatives6356 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNumericLiteral_in_rule__Literal__Alternatives6356 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleBooleanLiteral_in_rule__Literal__Alternatives6373 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleStringLiteral_in_rule__Literal__Alternatives6390 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRealLiteral_in_rule__NumericalLiteral__Alternatives6422 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleIntegerLiteral_in_rule__NumericalLiteral__Alternatives6439 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleRealLiteral_in_rule__NumericLiteral__Alternatives6422 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleIntegerLiteral_in_rule__NumericLiteral__Alternatives6439 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Subscript__AllAssignment_0_in_rule__Subscript__Alternatives6471 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Subscript__ExpressionAssignment_1_in_rule__Subscript__Alternatives6489 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__UnitExpression__UnspecifiedAssignment_0_in_rule__UnitExpression__Alternatives6522 = new BitSet(new long[]{0x0000000000000002L});

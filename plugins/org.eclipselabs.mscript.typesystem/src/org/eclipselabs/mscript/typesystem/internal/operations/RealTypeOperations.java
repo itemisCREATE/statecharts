@@ -8,7 +8,7 @@ package org.eclipselabs.mscript.typesystem.internal.operations;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipselabs.mscript.typesystem.DataType;
-import org.eclipselabs.mscript.typesystem.NumericalType;
+import org.eclipselabs.mscript.typesystem.NumericType;
 import org.eclipselabs.mscript.typesystem.OperatorKind;
 import org.eclipselabs.mscript.typesystem.RealType;
 import org.eclipselabs.mscript.typesystem.TypeSystemFactory;
@@ -50,10 +50,10 @@ public class RealTypeOperations extends PrimitiveTypeOperations {
 			return (RealType) EcoreUtil.copy(realType);
 		}
 		
-		if (!(other instanceof NumericalType)) {
+		if (!(other instanceof NumericType)) {
 			return TypeSystemFactory.eINSTANCE.createInvalidDataType();
 		}
-		NumericalType otherNumericalType = (NumericalType) other;
+		NumericType otherNumericType = (NumericType) other;
 
 		Unit unit;
 		switch (operator) {
@@ -66,22 +66,22 @@ public class RealTypeOperations extends PrimitiveTypeOperations {
 			return TypeSystemFactory.eINSTANCE.createBooleanType();
 		case ADD:
 		case SUBTRACT:
-			if (!EcoreUtil.equals(realType.getUnit(), otherNumericalType.getUnit())) {
+			if (!EcoreUtil.equals(realType.getUnit(), otherNumericType.getUnit())) {
 				return TypeSystemFactory.eINSTANCE.createInvalidDataType();
 			}
 			unit = (Unit) EcoreUtil.copy(realType.getUnit());
 			break;
 		case MULTIPLY:
-			unit = realType.getUnit().multiply(otherNumericalType.getUnit());
+			unit = realType.getUnit().multiply(otherNumericType.getUnit());
 			break;
 		case DIVIDE:
-			unit = realType.getUnit().divide(otherNumericalType.getUnit());
+			unit = realType.getUnit().divide(otherNumericType.getUnit());
 			break;
 		default:
 			return TypeSystemFactory.eINSTANCE.createInvalidDataType();
 		}
 		
-		NumericalType result = TypeSystemFactory.eINSTANCE.createRealType();
+		NumericType result = TypeSystemFactory.eINSTANCE.createRealType();
 		result.setUnit(unit);
 		
 		return result;
@@ -104,9 +104,9 @@ public class RealTypeOperations extends PrimitiveTypeOperations {
 	 * @generated NOT
 	 */
 	public static  boolean isAssignableFrom(RealType realType, DataType other) {
-		if (other instanceof NumericalType) {
-			NumericalType otherNumericalType = (NumericalType) other;
-			return !realType.isSetUnit() || realType.getUnit().isSameAs(otherNumericalType.getUnit(), false);
+		if (other instanceof NumericType) {
+			NumericType otherNumericType = (NumericType) other;
+			return !realType.isSetUnit() || realType.getUnit().isSameAs(otherNumericType.getUnit(), false);
 		}
 		return false;
 	}

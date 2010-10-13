@@ -1154,19 +1154,19 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	public class PrimitiveTypeSpecifierElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "PrimitiveTypeSpecifier");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cNumericalTypeSpecifierParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cNumericTypeSpecifierParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cBooleanTypeSpecifierParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cStringTypeSpecifierParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//PrimitiveTypeSpecifier:
-		//	NumericalTypeSpecifier | BooleanTypeSpecifier | StringTypeSpecifier;
+		//	NumericTypeSpecifier | BooleanTypeSpecifier | StringTypeSpecifier;
 		public ParserRule getRule() { return rule; }
 
-		//NumericalTypeSpecifier | BooleanTypeSpecifier | StringTypeSpecifier
+		//NumericTypeSpecifier | BooleanTypeSpecifier | StringTypeSpecifier
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//NumericalTypeSpecifier
-		public RuleCall getNumericalTypeSpecifierParserRuleCall_0() { return cNumericalTypeSpecifierParserRuleCall_0; }
+		//NumericTypeSpecifier
+		public RuleCall getNumericTypeSpecifierParserRuleCall_0() { return cNumericTypeSpecifierParserRuleCall_0; }
 
 		//BooleanTypeSpecifier
 		public RuleCall getBooleanTypeSpecifierParserRuleCall_1() { return cBooleanTypeSpecifierParserRuleCall_1; }
@@ -1175,15 +1175,15 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getStringTypeSpecifierParserRuleCall_2() { return cStringTypeSpecifierParserRuleCall_2; }
 	}
 
-	public class NumericalTypeSpecifierElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NumericalTypeSpecifier");
+	public class NumericTypeSpecifierElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NumericTypeSpecifier");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cRealTypeSpecifierParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cIntegerTypeSpecifierParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cComplexTypeSpecifierParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		private final RuleCall cGaussianTypeSpecifierParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		
-		//NumericalTypeSpecifier:
+		//NumericTypeSpecifier:
 		//	RealTypeSpecifier | IntegerTypeSpecifier | ComplexTypeSpecifier | GaussianTypeSpecifier;
 		public ParserRule getRule() { return rule; }
 
@@ -2524,19 +2524,19 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	public class LiteralElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Literal");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cNumericalLiteralParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cNumericLiteralParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cBooleanLiteralParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cStringLiteralParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//Literal:
-		//	NumericalLiteral | BooleanLiteral | StringLiteral;
+		//	NumericLiteral | BooleanLiteral | StringLiteral;
 		public ParserRule getRule() { return rule; }
 
-		//NumericalLiteral | BooleanLiteral | StringLiteral
+		//NumericLiteral | BooleanLiteral | StringLiteral
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//NumericalLiteral
-		public RuleCall getNumericalLiteralParserRuleCall_0() { return cNumericalLiteralParserRuleCall_0; }
+		//NumericLiteral
+		public RuleCall getNumericLiteralParserRuleCall_0() { return cNumericLiteralParserRuleCall_0; }
 
 		//BooleanLiteral
 		public RuleCall getBooleanLiteralParserRuleCall_1() { return cBooleanLiteralParserRuleCall_1; }
@@ -2545,13 +2545,13 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getStringLiteralParserRuleCall_2() { return cStringLiteralParserRuleCall_2; }
 	}
 
-	public class NumericalLiteralElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NumericalLiteral");
+	public class NumericLiteralElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NumericLiteral");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cRealLiteralParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cIntegerLiteralParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		//NumericalLiteral:
+		//NumericLiteral:
 		//	RealLiteral | IntegerLiteral;
 		public ParserRule getRule() { return rule; }
 
@@ -3514,7 +3514,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	private TypeSpecifierElements pTypeSpecifier;
 	private DataTypeSpecifierElements pDataTypeSpecifier;
 	private PrimitiveTypeSpecifierElements pPrimitiveTypeSpecifier;
-	private NumericalTypeSpecifierElements pNumericalTypeSpecifier;
+	private NumericTypeSpecifierElements pNumericTypeSpecifier;
 	private RealTypeSpecifierElements pRealTypeSpecifier;
 	private IntegerTypeSpecifierElements pIntegerTypeSpecifier;
 	private ComplexTypeSpecifierElements pComplexTypeSpecifier;
@@ -3550,7 +3550,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	private CallablePrimaryExpressionElements pCallablePrimaryExpression;
 	private PrimaryExpressionElements pPrimaryExpression;
 	private LiteralElements pLiteral;
-	private NumericalLiteralElements pNumericalLiteral;
+	private NumericLiteralElements pNumericLiteral;
 	private RealLiteralElements pRealLiteral;
 	private IntegerLiteralElements pIntegerLiteral;
 	private BooleanLiteralElements pBooleanLiteral;
@@ -3904,7 +3904,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//PrimitiveTypeSpecifier:
-	//	NumericalTypeSpecifier | BooleanTypeSpecifier | StringTypeSpecifier;
+	//	NumericTypeSpecifier | BooleanTypeSpecifier | StringTypeSpecifier;
 	public PrimitiveTypeSpecifierElements getPrimitiveTypeSpecifierAccess() {
 		return (pPrimitiveTypeSpecifier != null) ? pPrimitiveTypeSpecifier : (pPrimitiveTypeSpecifier = new PrimitiveTypeSpecifierElements());
 	}
@@ -3913,14 +3913,14 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		return getPrimitiveTypeSpecifierAccess().getRule();
 	}
 
-	//NumericalTypeSpecifier:
+	//NumericTypeSpecifier:
 	//	RealTypeSpecifier | IntegerTypeSpecifier | ComplexTypeSpecifier | GaussianTypeSpecifier;
-	public NumericalTypeSpecifierElements getNumericalTypeSpecifierAccess() {
-		return (pNumericalTypeSpecifier != null) ? pNumericalTypeSpecifier : (pNumericalTypeSpecifier = new NumericalTypeSpecifierElements());
+	public NumericTypeSpecifierElements getNumericTypeSpecifierAccess() {
+		return (pNumericTypeSpecifier != null) ? pNumericTypeSpecifier : (pNumericTypeSpecifier = new NumericTypeSpecifierElements());
 	}
 	
-	public ParserRule getNumericalTypeSpecifierRule() {
-		return getNumericalTypeSpecifierAccess().getRule();
+	public ParserRule getNumericTypeSpecifierRule() {
+		return getNumericTypeSpecifierAccess().getRule();
 	}
 
 	//RealTypeSpecifier:
@@ -4275,7 +4275,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Literal:
-	//	NumericalLiteral | BooleanLiteral | StringLiteral;
+	//	NumericLiteral | BooleanLiteral | StringLiteral;
 	public LiteralElements getLiteralAccess() {
 		return (pLiteral != null) ? pLiteral : (pLiteral = new LiteralElements());
 	}
@@ -4284,14 +4284,14 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		return getLiteralAccess().getRule();
 	}
 
-	//NumericalLiteral:
+	//NumericLiteral:
 	//	RealLiteral | IntegerLiteral;
-	public NumericalLiteralElements getNumericalLiteralAccess() {
-		return (pNumericalLiteral != null) ? pNumericalLiteral : (pNumericalLiteral = new NumericalLiteralElements());
+	public NumericLiteralElements getNumericLiteralAccess() {
+		return (pNumericLiteral != null) ? pNumericLiteral : (pNumericLiteral = new NumericLiteralElements());
 	}
 	
-	public ParserRule getNumericalLiteralRule() {
-		return getNumericalLiteralAccess().getRule();
+	public ParserRule getNumericLiteralRule() {
+		return getNumericLiteralAccess().getRule();
 	}
 
 	//RealLiteral:

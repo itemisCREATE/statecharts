@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil.EqualityHelper;
 import org.eclipselabs.mscript.typesystem.ArrayDimension;
 import org.eclipselabs.mscript.typesystem.ArrayType;
 import org.eclipselabs.mscript.typesystem.DataType;
-import org.eclipselabs.mscript.typesystem.NumericalType;
+import org.eclipselabs.mscript.typesystem.NumericType;
 import org.eclipselabs.mscript.typesystem.TypeSystemFactory;
 import org.eclipselabs.mscript.typesystem.Unit;
 import org.eclipselabs.mscript.typesystem.UnitFactor;
@@ -44,7 +44,7 @@ public class TypeSystemUtil {
 	
 	private static ArrayType doCreateArrayType(DataType elementType) {
 		ArrayType arrayType;
-		if (elementType instanceof NumericalType) {
+		if (elementType instanceof NumericType) {
 			arrayType = TypeSystemFactory.eINSTANCE.createTensorType();
 		} else {
 			arrayType = TypeSystemFactory.eINSTANCE.createArrayType();

@@ -1089,14 +1089,14 @@ public interface AstPackage extends EPackage
   int PRIMITIVE_TYPE_SPECIFIER_FEATURE_COUNT = DATA_TYPE_SPECIFIER_FEATURE_COUNT + 0;
 
   /**
-   * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.NumericalTypeSpecifierImpl <em>Numerical Type Specifier</em>}' class.
+   * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.NumericTypeSpecifierImpl <em>Numeric Type Specifier</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.eclipselabs.mscript.language.ast.impl.NumericalTypeSpecifierImpl
-   * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getNumericalTypeSpecifier()
+   * @see org.eclipselabs.mscript.language.ast.impl.NumericTypeSpecifierImpl
+   * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getNumericTypeSpecifier()
    * @generated
    */
-  int NUMERICAL_TYPE_SPECIFIER = 29;
+  int NUMERIC_TYPE_SPECIFIER = 29;
 
   /**
    * The feature id for the '<em><b>Dimensions</b></em>' containment reference list.
@@ -1105,7 +1105,7 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int NUMERICAL_TYPE_SPECIFIER__DIMENSIONS = PRIMITIVE_TYPE_SPECIFIER__DIMENSIONS;
+  int NUMERIC_TYPE_SPECIFIER__DIMENSIONS = PRIMITIVE_TYPE_SPECIFIER__DIMENSIONS;
 
   /**
    * The feature id for the '<em><b>Unit</b></em>' containment reference.
@@ -1114,16 +1114,16 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int NUMERICAL_TYPE_SPECIFIER__UNIT = PRIMITIVE_TYPE_SPECIFIER_FEATURE_COUNT + 0;
+  int NUMERIC_TYPE_SPECIFIER__UNIT = PRIMITIVE_TYPE_SPECIFIER_FEATURE_COUNT + 0;
 
   /**
-   * The number of structural features of the '<em>Numerical Type Specifier</em>' class.
+   * The number of structural features of the '<em>Numeric Type Specifier</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int NUMERICAL_TYPE_SPECIFIER_FEATURE_COUNT = PRIMITIVE_TYPE_SPECIFIER_FEATURE_COUNT + 1;
+  int NUMERIC_TYPE_SPECIFIER_FEATURE_COUNT = PRIMITIVE_TYPE_SPECIFIER_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.RealTypeSpecifierImpl <em>Real Type Specifier</em>}' class.
@@ -1142,7 +1142,7 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int REAL_TYPE_SPECIFIER__DIMENSIONS = NUMERICAL_TYPE_SPECIFIER__DIMENSIONS;
+  int REAL_TYPE_SPECIFIER__DIMENSIONS = NUMERIC_TYPE_SPECIFIER__DIMENSIONS;
 
   /**
    * The feature id for the '<em><b>Unit</b></em>' containment reference.
@@ -1151,7 +1151,7 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int REAL_TYPE_SPECIFIER__UNIT = NUMERICAL_TYPE_SPECIFIER__UNIT;
+  int REAL_TYPE_SPECIFIER__UNIT = NUMERIC_TYPE_SPECIFIER__UNIT;
 
   /**
    * The number of structural features of the '<em>Real Type Specifier</em>' class.
@@ -1160,7 +1160,7 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int REAL_TYPE_SPECIFIER_FEATURE_COUNT = NUMERICAL_TYPE_SPECIFIER_FEATURE_COUNT + 0;
+  int REAL_TYPE_SPECIFIER_FEATURE_COUNT = NUMERIC_TYPE_SPECIFIER_FEATURE_COUNT + 0;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.IntegerTypeSpecifierImpl <em>Integer Type Specifier</em>}' class.
@@ -1179,7 +1179,7 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int INTEGER_TYPE_SPECIFIER__DIMENSIONS = NUMERICAL_TYPE_SPECIFIER__DIMENSIONS;
+  int INTEGER_TYPE_SPECIFIER__DIMENSIONS = NUMERIC_TYPE_SPECIFIER__DIMENSIONS;
 
   /**
    * The feature id for the '<em><b>Unit</b></em>' containment reference.
@@ -1188,7 +1188,7 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int INTEGER_TYPE_SPECIFIER__UNIT = NUMERICAL_TYPE_SPECIFIER__UNIT;
+  int INTEGER_TYPE_SPECIFIER__UNIT = NUMERIC_TYPE_SPECIFIER__UNIT;
 
   /**
    * The number of structural features of the '<em>Integer Type Specifier</em>' class.
@@ -1197,7 +1197,7 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int INTEGER_TYPE_SPECIFIER_FEATURE_COUNT = NUMERICAL_TYPE_SPECIFIER_FEATURE_COUNT + 0;
+  int INTEGER_TYPE_SPECIFIER_FEATURE_COUNT = NUMERIC_TYPE_SPECIFIER_FEATURE_COUNT + 0;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.ComplexTypeSpecifierImpl <em>Complex Type Specifier</em>}' class.
@@ -1216,7 +1216,7 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int COMPLEX_TYPE_SPECIFIER__DIMENSIONS = NUMERICAL_TYPE_SPECIFIER__DIMENSIONS;
+  int COMPLEX_TYPE_SPECIFIER__DIMENSIONS = NUMERIC_TYPE_SPECIFIER__DIMENSIONS;
 
   /**
    * The feature id for the '<em><b>Unit</b></em>' containment reference.
@@ -1225,7 +1225,7 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int COMPLEX_TYPE_SPECIFIER__UNIT = NUMERICAL_TYPE_SPECIFIER__UNIT;
+  int COMPLEX_TYPE_SPECIFIER__UNIT = NUMERIC_TYPE_SPECIFIER__UNIT;
 
   /**
    * The number of structural features of the '<em>Complex Type Specifier</em>' class.
@@ -1234,7 +1234,7 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int COMPLEX_TYPE_SPECIFIER_FEATURE_COUNT = NUMERICAL_TYPE_SPECIFIER_FEATURE_COUNT + 0;
+  int COMPLEX_TYPE_SPECIFIER_FEATURE_COUNT = NUMERIC_TYPE_SPECIFIER_FEATURE_COUNT + 0;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.GaussianTypeSpecifierImpl <em>Gaussian Type Specifier</em>}' class.
@@ -1253,7 +1253,7 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int GAUSSIAN_TYPE_SPECIFIER__DIMENSIONS = NUMERICAL_TYPE_SPECIFIER__DIMENSIONS;
+  int GAUSSIAN_TYPE_SPECIFIER__DIMENSIONS = NUMERIC_TYPE_SPECIFIER__DIMENSIONS;
 
   /**
    * The feature id for the '<em><b>Unit</b></em>' containment reference.
@@ -1262,7 +1262,7 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int GAUSSIAN_TYPE_SPECIFIER__UNIT = NUMERICAL_TYPE_SPECIFIER__UNIT;
+  int GAUSSIAN_TYPE_SPECIFIER__UNIT = NUMERIC_TYPE_SPECIFIER__UNIT;
 
   /**
    * The number of structural features of the '<em>Gaussian Type Specifier</em>' class.
@@ -1271,7 +1271,7 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int GAUSSIAN_TYPE_SPECIFIER_FEATURE_COUNT = NUMERICAL_TYPE_SPECIFIER_FEATURE_COUNT + 0;
+  int GAUSSIAN_TYPE_SPECIFIER_FEATURE_COUNT = NUMERIC_TYPE_SPECIFIER_FEATURE_COUNT + 0;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.BooleanTypeSpecifierImpl <em>Boolean Type Specifier</em>}' class.
@@ -1730,14 +1730,14 @@ public interface AstPackage extends EPackage
   int LITERAL_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 0;
 
   /**
-   * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.NumericalLiteralImpl <em>Numerical Literal</em>}' class.
+   * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.NumericLiteralImpl <em>Numeric Literal</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.eclipselabs.mscript.language.ast.impl.NumericalLiteralImpl
-   * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getNumericalLiteral()
+   * @see org.eclipselabs.mscript.language.ast.impl.NumericLiteralImpl
+   * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getNumericLiteral()
    * @generated
    */
-  int NUMERICAL_LITERAL = 49;
+  int NUMERIC_LITERAL = 49;
 
   /**
    * The feature id for the '<em><b>Imaginary</b></em>' attribute.
@@ -1746,7 +1746,7 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int NUMERICAL_LITERAL__IMAGINARY = LITERAL_FEATURE_COUNT + 0;
+  int NUMERIC_LITERAL__IMAGINARY = LITERAL_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Unit</b></em>' containment reference.
@@ -1755,16 +1755,16 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int NUMERICAL_LITERAL__UNIT = LITERAL_FEATURE_COUNT + 1;
+  int NUMERIC_LITERAL__UNIT = LITERAL_FEATURE_COUNT + 1;
 
   /**
-   * The number of structural features of the '<em>Numerical Literal</em>' class.
+   * The number of structural features of the '<em>Numeric Literal</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int NUMERICAL_LITERAL_FEATURE_COUNT = LITERAL_FEATURE_COUNT + 2;
+  int NUMERIC_LITERAL_FEATURE_COUNT = LITERAL_FEATURE_COUNT + 2;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.RealLiteralImpl <em>Real Literal</em>}' class.
@@ -1783,7 +1783,7 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int REAL_LITERAL__IMAGINARY = NUMERICAL_LITERAL__IMAGINARY;
+  int REAL_LITERAL__IMAGINARY = NUMERIC_LITERAL__IMAGINARY;
 
   /**
    * The feature id for the '<em><b>Unit</b></em>' containment reference.
@@ -1792,7 +1792,7 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int REAL_LITERAL__UNIT = NUMERICAL_LITERAL__UNIT;
+  int REAL_LITERAL__UNIT = NUMERIC_LITERAL__UNIT;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1801,7 +1801,7 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int REAL_LITERAL__VALUE = NUMERICAL_LITERAL_FEATURE_COUNT + 0;
+  int REAL_LITERAL__VALUE = NUMERIC_LITERAL_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Real Literal</em>' class.
@@ -1810,7 +1810,7 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int REAL_LITERAL_FEATURE_COUNT = NUMERICAL_LITERAL_FEATURE_COUNT + 1;
+  int REAL_LITERAL_FEATURE_COUNT = NUMERIC_LITERAL_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.IntegerLiteralImpl <em>Integer Literal</em>}' class.
@@ -1829,7 +1829,7 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int INTEGER_LITERAL__IMAGINARY = NUMERICAL_LITERAL__IMAGINARY;
+  int INTEGER_LITERAL__IMAGINARY = NUMERIC_LITERAL__IMAGINARY;
 
   /**
    * The feature id for the '<em><b>Unit</b></em>' containment reference.
@@ -1838,7 +1838,7 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int INTEGER_LITERAL__UNIT = NUMERICAL_LITERAL__UNIT;
+  int INTEGER_LITERAL__UNIT = NUMERIC_LITERAL__UNIT;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1847,7 +1847,7 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int INTEGER_LITERAL__VALUE = NUMERICAL_LITERAL_FEATURE_COUNT + 0;
+  int INTEGER_LITERAL__VALUE = NUMERIC_LITERAL_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Integer Literal</em>' class.
@@ -1856,7 +1856,7 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int INTEGER_LITERAL_FEATURE_COUNT = NUMERICAL_LITERAL_FEATURE_COUNT + 1;
+  int INTEGER_LITERAL_FEATURE_COUNT = NUMERIC_LITERAL_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.BooleanLiteralImpl <em>Boolean Literal</em>}' class.
@@ -3511,25 +3511,25 @@ public interface AstPackage extends EPackage
   EClass getPrimitiveTypeSpecifier();
 
   /**
-   * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.NumericalTypeSpecifier <em>Numerical Type Specifier</em>}'.
+   * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.NumericTypeSpecifier <em>Numeric Type Specifier</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Numerical Type Specifier</em>'.
-   * @see org.eclipselabs.mscript.language.ast.NumericalTypeSpecifier
+   * @return the meta object for class '<em>Numeric Type Specifier</em>'.
+   * @see org.eclipselabs.mscript.language.ast.NumericTypeSpecifier
    * @generated
    */
-  EClass getNumericalTypeSpecifier();
+  EClass getNumericTypeSpecifier();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.NumericalTypeSpecifier#getUnit <em>Unit</em>}'.
+   * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.NumericTypeSpecifier#getUnit <em>Unit</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Unit</em>'.
-   * @see org.eclipselabs.mscript.language.ast.NumericalTypeSpecifier#getUnit()
-   * @see #getNumericalTypeSpecifier()
+   * @see org.eclipselabs.mscript.language.ast.NumericTypeSpecifier#getUnit()
+   * @see #getNumericTypeSpecifier()
    * @generated
    */
-  EReference getNumericalTypeSpecifier_Unit();
+  EReference getNumericTypeSpecifier_Unit();
 
   /**
    * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.RealTypeSpecifier <em>Real Type Specifier</em>}'.
@@ -3898,36 +3898,36 @@ public interface AstPackage extends EPackage
   EClass getLiteral();
 
   /**
-   * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.NumericalLiteral <em>Numerical Literal</em>}'.
+   * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.NumericLiteral <em>Numeric Literal</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Numerical Literal</em>'.
-   * @see org.eclipselabs.mscript.language.ast.NumericalLiteral
+   * @return the meta object for class '<em>Numeric Literal</em>'.
+   * @see org.eclipselabs.mscript.language.ast.NumericLiteral
    * @generated
    */
-  EClass getNumericalLiteral();
+  EClass getNumericLiteral();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.ast.NumericalLiteral#isImaginary <em>Imaginary</em>}'.
+   * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.ast.NumericLiteral#isImaginary <em>Imaginary</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Imaginary</em>'.
-   * @see org.eclipselabs.mscript.language.ast.NumericalLiteral#isImaginary()
-   * @see #getNumericalLiteral()
+   * @see org.eclipselabs.mscript.language.ast.NumericLiteral#isImaginary()
+   * @see #getNumericLiteral()
    * @generated
    */
-  EAttribute getNumericalLiteral_Imaginary();
+  EAttribute getNumericLiteral_Imaginary();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.NumericalLiteral#getUnit <em>Unit</em>}'.
+   * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.NumericLiteral#getUnit <em>Unit</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Unit</em>'.
-   * @see org.eclipselabs.mscript.language.ast.NumericalLiteral#getUnit()
-   * @see #getNumericalLiteral()
+   * @see org.eclipselabs.mscript.language.ast.NumericLiteral#getUnit()
+   * @see #getNumericLiteral()
    * @generated
    */
-  EReference getNumericalLiteral_Unit();
+  EReference getNumericLiteral_Unit();
 
   /**
    * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.RealLiteral <em>Real Literal</em>}'.
@@ -5390,14 +5390,14 @@ public interface AstPackage extends EPackage
     EClass PRIMITIVE_TYPE_SPECIFIER = eINSTANCE.getPrimitiveTypeSpecifier();
 
     /**
-     * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.NumericalTypeSpecifierImpl <em>Numerical Type Specifier</em>}' class.
+     * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.NumericTypeSpecifierImpl <em>Numeric Type Specifier</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.eclipselabs.mscript.language.ast.impl.NumericalTypeSpecifierImpl
-     * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getNumericalTypeSpecifier()
+     * @see org.eclipselabs.mscript.language.ast.impl.NumericTypeSpecifierImpl
+     * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getNumericTypeSpecifier()
      * @generated
      */
-    EClass NUMERICAL_TYPE_SPECIFIER = eINSTANCE.getNumericalTypeSpecifier();
+    EClass NUMERIC_TYPE_SPECIFIER = eINSTANCE.getNumericTypeSpecifier();
 
     /**
      * The meta object literal for the '<em><b>Unit</b></em>' containment reference feature.
@@ -5405,7 +5405,7 @@ public interface AstPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference NUMERICAL_TYPE_SPECIFIER__UNIT = eINSTANCE.getNumericalTypeSpecifier_Unit();
+    EReference NUMERIC_TYPE_SPECIFIER__UNIT = eINSTANCE.getNumericTypeSpecifier_Unit();
 
     /**
      * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.RealTypeSpecifierImpl <em>Real Type Specifier</em>}' class.
@@ -5726,14 +5726,14 @@ public interface AstPackage extends EPackage
     EClass LITERAL = eINSTANCE.getLiteral();
 
     /**
-     * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.NumericalLiteralImpl <em>Numerical Literal</em>}' class.
+     * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.NumericLiteralImpl <em>Numeric Literal</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.eclipselabs.mscript.language.ast.impl.NumericalLiteralImpl
-     * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getNumericalLiteral()
+     * @see org.eclipselabs.mscript.language.ast.impl.NumericLiteralImpl
+     * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getNumericLiteral()
      * @generated
      */
-    EClass NUMERICAL_LITERAL = eINSTANCE.getNumericalLiteral();
+    EClass NUMERIC_LITERAL = eINSTANCE.getNumericLiteral();
 
     /**
      * The meta object literal for the '<em><b>Imaginary</b></em>' attribute feature.
@@ -5741,7 +5741,7 @@ public interface AstPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute NUMERICAL_LITERAL__IMAGINARY = eINSTANCE.getNumericalLiteral_Imaginary();
+    EAttribute NUMERIC_LITERAL__IMAGINARY = eINSTANCE.getNumericLiteral_Imaginary();
 
     /**
      * The meta object literal for the '<em><b>Unit</b></em>' containment reference feature.
@@ -5749,7 +5749,7 @@ public interface AstPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference NUMERICAL_LITERAL__UNIT = eINSTANCE.getNumericalLiteral_Unit();
+    EReference NUMERIC_LITERAL__UNIT = eINSTANCE.getNumericLiteral_Unit();
 
     /**
      * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.RealLiteralImpl <em>Real Literal</em>}' class.

@@ -59,8 +59,8 @@ import org.eclipselabs.mscript.language.ast.MultiplyDivideExpression;
 import org.eclipselabs.mscript.language.ast.MultiplyDivideExpressionPart;
 import org.eclipselabs.mscript.language.ast.MultiplyDivideOperator;
 import org.eclipselabs.mscript.language.ast.NamedTypeSpecifier;
-import org.eclipselabs.mscript.language.ast.NumericalLiteral;
-import org.eclipselabs.mscript.language.ast.NumericalTypeSpecifier;
+import org.eclipselabs.mscript.language.ast.NumericLiteral;
+import org.eclipselabs.mscript.language.ast.NumericTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.OperationCall;
 import org.eclipselabs.mscript.language.ast.PackageDefinition;
 import org.eclipselabs.mscript.language.ast.PackageDefinitionElement;
@@ -316,7 +316,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass numericalTypeSpecifierEClass = null;
+  private EClass numericTypeSpecifierEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -456,7 +456,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass numericalLiteralEClass = null;
+  private EClass numericLiteralEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -1444,9 +1444,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getNumericalTypeSpecifier()
+  public EClass getNumericTypeSpecifier()
   {
-    return numericalTypeSpecifierEClass;
+    return numericTypeSpecifierEClass;
   }
 
   /**
@@ -1454,9 +1454,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getNumericalTypeSpecifier_Unit()
+  public EReference getNumericTypeSpecifier_Unit()
   {
-    return (EReference)numericalTypeSpecifierEClass.getEStructuralFeatures().get(0);
+    return (EReference)numericTypeSpecifierEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1814,9 +1814,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getNumericalLiteral()
+  public EClass getNumericLiteral()
   {
-    return numericalLiteralEClass;
+    return numericLiteralEClass;
   }
 
   /**
@@ -1824,9 +1824,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getNumericalLiteral_Imaginary()
+  public EAttribute getNumericLiteral_Imaginary()
   {
-    return (EAttribute)numericalLiteralEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)numericLiteralEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1834,9 +1834,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getNumericalLiteral_Unit()
+  public EReference getNumericLiteral_Unit()
   {
-    return (EReference)numericalLiteralEClass.getEStructuralFeatures().get(1);
+    return (EReference)numericLiteralEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -2756,8 +2756,8 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
 
     primitiveTypeSpecifierEClass = createEClass(PRIMITIVE_TYPE_SPECIFIER);
 
-    numericalTypeSpecifierEClass = createEClass(NUMERICAL_TYPE_SPECIFIER);
-    createEReference(numericalTypeSpecifierEClass, NUMERICAL_TYPE_SPECIFIER__UNIT);
+    numericTypeSpecifierEClass = createEClass(NUMERIC_TYPE_SPECIFIER);
+    createEReference(numericTypeSpecifierEClass, NUMERIC_TYPE_SPECIFIER__UNIT);
 
     realTypeSpecifierEClass = createEClass(REAL_TYPE_SPECIFIER);
 
@@ -2813,9 +2813,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
 
     literalEClass = createEClass(LITERAL);
 
-    numericalLiteralEClass = createEClass(NUMERICAL_LITERAL);
-    createEAttribute(numericalLiteralEClass, NUMERICAL_LITERAL__IMAGINARY);
-    createEReference(numericalLiteralEClass, NUMERICAL_LITERAL__UNIT);
+    numericLiteralEClass = createEClass(NUMERIC_LITERAL);
+    createEAttribute(numericLiteralEClass, NUMERIC_LITERAL__IMAGINARY);
+    createEReference(numericLiteralEClass, NUMERIC_LITERAL__UNIT);
 
     realLiteralEClass = createEClass(REAL_LITERAL);
     createEAttribute(realLiteralEClass, REAL_LITERAL__VALUE);
@@ -2977,11 +2977,11 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     checkStatusStatementEClass.getESuperTypes().add(this.getStatement());
     dataTypeSpecifierEClass.getESuperTypes().add(this.getTypeSpecifier());
     primitiveTypeSpecifierEClass.getESuperTypes().add(this.getDataTypeSpecifier());
-    numericalTypeSpecifierEClass.getESuperTypes().add(this.getPrimitiveTypeSpecifier());
-    realTypeSpecifierEClass.getESuperTypes().add(this.getNumericalTypeSpecifier());
-    integerTypeSpecifierEClass.getESuperTypes().add(this.getNumericalTypeSpecifier());
-    complexTypeSpecifierEClass.getESuperTypes().add(this.getNumericalTypeSpecifier());
-    gaussianTypeSpecifierEClass.getESuperTypes().add(this.getNumericalTypeSpecifier());
+    numericTypeSpecifierEClass.getESuperTypes().add(this.getPrimitiveTypeSpecifier());
+    realTypeSpecifierEClass.getESuperTypes().add(this.getNumericTypeSpecifier());
+    integerTypeSpecifierEClass.getESuperTypes().add(this.getNumericTypeSpecifier());
+    complexTypeSpecifierEClass.getESuperTypes().add(this.getNumericTypeSpecifier());
+    gaussianTypeSpecifierEClass.getESuperTypes().add(this.getNumericTypeSpecifier());
     booleanTypeSpecifierEClass.getESuperTypes().add(this.getPrimitiveTypeSpecifier());
     stringTypeSpecifierEClass.getESuperTypes().add(this.getPrimitiveTypeSpecifier());
     namedTypeSpecifierEClass.getESuperTypes().add(this.getDataTypeSpecifier());
@@ -2991,9 +2991,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     arrayElementReferenceEClass.getESuperTypes().add(this.getFeatureCallPart());
     operationCallEClass.getESuperTypes().add(this.getFeatureCallPart());
     literalEClass.getESuperTypes().add(this.getExpression());
-    numericalLiteralEClass.getESuperTypes().add(this.getLiteral());
-    realLiteralEClass.getESuperTypes().add(this.getNumericalLiteral());
-    integerLiteralEClass.getESuperTypes().add(this.getNumericalLiteral());
+    numericLiteralEClass.getESuperTypes().add(this.getLiteral());
+    realLiteralEClass.getESuperTypes().add(this.getNumericLiteral());
+    integerLiteralEClass.getESuperTypes().add(this.getNumericLiteral());
     booleanLiteralEClass.getESuperTypes().add(this.getLiteral());
     stringLiteralEClass.getESuperTypes().add(this.getLiteral());
     symbolReferenceEClass.getESuperTypes().add(this.getExpression());
@@ -3110,8 +3110,8 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
 
     initEClass(primitiveTypeSpecifierEClass, PrimitiveTypeSpecifier.class, "PrimitiveTypeSpecifier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-    initEClass(numericalTypeSpecifierEClass, NumericalTypeSpecifier.class, "NumericalTypeSpecifier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getNumericalTypeSpecifier_Unit(), this.getUnitExpression(), null, "unit", null, 0, 1, NumericalTypeSpecifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(numericTypeSpecifierEClass, NumericTypeSpecifier.class, "NumericTypeSpecifier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getNumericTypeSpecifier_Unit(), this.getUnitExpression(), null, "unit", null, 0, 1, NumericTypeSpecifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(realTypeSpecifierEClass, RealTypeSpecifier.class, "RealTypeSpecifier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -3167,9 +3167,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
 
     initEClass(literalEClass, Literal.class, "Literal", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-    initEClass(numericalLiteralEClass, NumericalLiteral.class, "NumericalLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getNumericalLiteral_Imaginary(), ecorePackage.getEBoolean(), "imaginary", null, 0, 1, NumericalLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getNumericalLiteral_Unit(), this.getUnitExpression(), null, "unit", null, 0, 1, NumericalLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(numericLiteralEClass, NumericLiteral.class, "NumericLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getNumericLiteral_Imaginary(), ecorePackage.getEBoolean(), "imaginary", null, 0, 1, NumericLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getNumericLiteral_Unit(), this.getUnitExpression(), null, "unit", null, 0, 1, NumericLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(realLiteralEClass, RealLiteral.class, "RealLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getRealLiteral_Value(), ecorePackage.getEDouble(), "value", null, 0, 1, RealLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

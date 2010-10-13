@@ -16,6 +16,6 @@ package org.eclipselabs.mscript.language.ast;
  * @model
  * @generated
  */
-public interface RealTypeSpecifier extends NumericalTypeSpecifier
+public interface RealTypeSpecifier extends NumericTypeSpecifier
 {
 } // RealTypeSpecifier

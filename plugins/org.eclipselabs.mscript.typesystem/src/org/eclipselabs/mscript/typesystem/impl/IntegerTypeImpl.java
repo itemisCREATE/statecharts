@@ -22,7 +22,7 @@ import org.eclipselabs.mscript.typesystem.internal.operations.IntegerTypeOperati
  *
  * @generated
  */
-public class IntegerTypeImpl extends NumericalTypeImpl implements IntegerType {
+public class IntegerTypeImpl extends NumericTypeImpl implements IntegerType {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -9,7 +9,7 @@ package org.eclipselabs.mscript.typesystem.internal.operations;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipselabs.mscript.typesystem.DataType;
 import org.eclipselabs.mscript.typesystem.IntegerType;
-import org.eclipselabs.mscript.typesystem.NumericalType;
+import org.eclipselabs.mscript.typesystem.NumericType;
 import org.eclipselabs.mscript.typesystem.OperatorKind;
 import org.eclipselabs.mscript.typesystem.TypeSystemFactory;
 import org.eclipselabs.mscript.typesystem.Unit;
@@ -50,10 +50,10 @@ public class IntegerTypeOperations extends PrimitiveTypeOperations {
 			return (IntegerType) EcoreUtil.copy(integerType);
 		}
 		
-		if (!(other instanceof NumericalType)) {
+		if (!(other instanceof NumericType)) {
 			return TypeSystemFactory.eINSTANCE.createInvalidDataType();
 		}
-		NumericalType otherNumericalType = (NumericalType) other;
+		NumericType otherNumericType = (NumericType) other;
 
 		Unit unit;
 		switch (operator) {
@@ -66,23 +66,23 @@ public class IntegerTypeOperations extends PrimitiveTypeOperations {
 			return TypeSystemFactory.eINSTANCE.createBooleanType();
 		case ADD:
 		case SUBTRACT:
-			if (!EcoreUtil.equals(integerType.getUnit(), otherNumericalType.getUnit())) {
+			if (!EcoreUtil.equals(integerType.getUnit(), otherNumericType.getUnit())) {
 				return TypeSystemFactory.eINSTANCE.createInvalidDataType();
 			}
 			unit = (Unit) EcoreUtil.copy(integerType.getUnit());
 			break;
 		case MULTIPLY:
-			unit = integerType.getUnit().multiply(otherNumericalType.getUnit());
+			unit = integerType.getUnit().multiply(otherNumericType.getUnit());
 			break;
 		case DIVIDE:
-			unit = integerType.getUnit().divide(otherNumericalType.getUnit());
+			unit = integerType.getUnit().divide(otherNumericType.getUnit());
 			break;
 		default:
 			return TypeSystemFactory.eINSTANCE.createInvalidDataType();
 		}
 		
-		NumericalType result;
-		if (otherNumericalType instanceof IntegerType && operator != OperatorKind.DIVIDE) {
+		NumericType result;
+		if (otherNumericType instanceof IntegerType && operator != OperatorKind.DIVIDE) {
 			result = TypeSystemFactory.eINSTANCE.createIntegerType();
 		} else {
 			result = TypeSystemFactory.eINSTANCE.createRealType();

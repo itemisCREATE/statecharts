@@ -17,6 +17,6 @@ package org.eclipselabs.mscript.typesystem;
  * @model
  * @generated
  */
-public interface IntegerType extends NumericalType {
+public interface IntegerType extends NumericType {
 
 } // IntegerType

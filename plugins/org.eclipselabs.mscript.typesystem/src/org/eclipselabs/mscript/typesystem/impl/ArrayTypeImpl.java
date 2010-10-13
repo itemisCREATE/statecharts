@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipselabs.mscript.typesystem.ArrayDimension;
 import org.eclipselabs.mscript.typesystem.ArrayType;
 import org.eclipselabs.mscript.typesystem.DataType;
-import org.eclipselabs.mscript.typesystem.NumericalType;
+import org.eclipselabs.mscript.typesystem.NumericType;
 import org.eclipselabs.mscript.typesystem.TypeSystemPackage;
 
 /**
@@ -158,8 +158,8 @@ public class ArrayTypeImpl extends DataTypeImpl implements ArrayType {
 	}
 	
 	public void setElementType(DataType newElementType) {
-		if (newElementType instanceof NumericalType) {
-			throw new IllegalArgumentException("New element type must be NumericalType");
+		if (newElementType instanceof NumericType) {
+			throw new IllegalArgumentException("New element type must be NumericType");
 		}
 		setElementTypeGen(newElementType);
 	}

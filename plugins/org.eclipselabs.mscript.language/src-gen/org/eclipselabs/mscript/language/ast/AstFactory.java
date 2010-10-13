@@ -287,13 +287,13 @@ public interface AstFactory extends EFactory
   PrimitiveTypeSpecifier createPrimitiveTypeSpecifier();
 
   /**
-   * Returns a new object of class '<em>Numerical Type Specifier</em>'.
+   * Returns a new object of class '<em>Numeric Type Specifier</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Numerical Type Specifier</em>'.
+   * @return a new object of class '<em>Numeric Type Specifier</em>'.
    * @generated
    */
-  NumericalTypeSpecifier createNumericalTypeSpecifier();
+  NumericTypeSpecifier createNumericTypeSpecifier();
 
   /**
    * Returns a new object of class '<em>Real Type Specifier</em>'.
@@ -467,13 +467,13 @@ public interface AstFactory extends EFactory
   Literal createLiteral();
 
   /**
-   * Returns a new object of class '<em>Numerical Literal</em>'.
+   * Returns a new object of class '<em>Numeric Literal</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Numerical Literal</em>'.
+   * @return a new object of class '<em>Numeric Literal</em>'.
    * @generated
    */
-  NumericalLiteral createNumericalLiteral();
+  NumericLiteral createNumericLiteral();
 
   /**
    * Returns a new object of class '<em>Real Literal</em>'.

@@ -2406,11 +2406,11 @@ rulePrimitiveTypeSpecifier returns [EObject current=null]
     }:
 (
     { 
-        currentNode=createCompositeNode(grammarAccess.getPrimitiveTypeSpecifierAccess().getNumericalTypeSpecifierParserRuleCall_0(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getPrimitiveTypeSpecifierAccess().getNumericTypeSpecifierParserRuleCall_0(), currentNode); 
     }
-    this_NumericalTypeSpecifier_0=ruleNumericalTypeSpecifier
+    this_NumericTypeSpecifier_0=ruleNumericTypeSpecifier
     { 
-        $current = $this_NumericalTypeSpecifier_0.current; 
+        $current = $this_NumericTypeSpecifier_0.current; 
         currentNode = currentNode.getParent();
     }
 
@@ -2440,17 +2440,17 @@ rulePrimitiveTypeSpecifier returns [EObject current=null]
 
 
 
-// Entry rule entryRuleNumericalTypeSpecifier
-entryRuleNumericalTypeSpecifier returns [EObject current=null] 
+// Entry rule entryRuleNumericTypeSpecifier
+entryRuleNumericTypeSpecifier returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getNumericalTypeSpecifierRule(), currentNode); }
-	 iv_ruleNumericalTypeSpecifier=ruleNumericalTypeSpecifier 
-	 { $current=$iv_ruleNumericalTypeSpecifier.current; } 
+	{ currentNode = createCompositeNode(grammarAccess.getNumericTypeSpecifierRule(), currentNode); }
+	 iv_ruleNumericTypeSpecifier=ruleNumericTypeSpecifier 
+	 { $current=$iv_ruleNumericTypeSpecifier.current; } 
 	 EOF 
 ;
 
-// Rule NumericalTypeSpecifier
-ruleNumericalTypeSpecifier returns [EObject current=null] 
+// Rule NumericTypeSpecifier
+ruleNumericTypeSpecifier returns [EObject current=null] 
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
@@ -2458,7 +2458,7 @@ ruleNumericalTypeSpecifier returns [EObject current=null]
     }:
 (
     { 
-        currentNode=createCompositeNode(grammarAccess.getNumericalTypeSpecifierAccess().getRealTypeSpecifierParserRuleCall_0(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getNumericTypeSpecifierAccess().getRealTypeSpecifierParserRuleCall_0(), currentNode); 
     }
     this_RealTypeSpecifier_0=ruleRealTypeSpecifier
     { 
@@ -2468,7 +2468,7 @@ ruleNumericalTypeSpecifier returns [EObject current=null]
 
     |
     { 
-        currentNode=createCompositeNode(grammarAccess.getNumericalTypeSpecifierAccess().getIntegerTypeSpecifierParserRuleCall_1(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getNumericTypeSpecifierAccess().getIntegerTypeSpecifierParserRuleCall_1(), currentNode); 
     }
     this_IntegerTypeSpecifier_1=ruleIntegerTypeSpecifier
     { 
@@ -2478,7 +2478,7 @@ ruleNumericalTypeSpecifier returns [EObject current=null]
 
     |
     { 
-        currentNode=createCompositeNode(grammarAccess.getNumericalTypeSpecifierAccess().getComplexTypeSpecifierParserRuleCall_2(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getNumericTypeSpecifierAccess().getComplexTypeSpecifierParserRuleCall_2(), currentNode); 
     }
     this_ComplexTypeSpecifier_2=ruleComplexTypeSpecifier
     { 
@@ -2488,7 +2488,7 @@ ruleNumericalTypeSpecifier returns [EObject current=null]
 
     |
     { 
-        currentNode=createCompositeNode(grammarAccess.getNumericalTypeSpecifierAccess().getGaussianTypeSpecifierParserRuleCall_3(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getNumericTypeSpecifierAccess().getGaussianTypeSpecifierParserRuleCall_3(), currentNode); 
     }
     this_GaussianTypeSpecifier_3=ruleGaussianTypeSpecifier
     { 
@@ -5103,11 +5103,11 @@ ruleLiteral returns [EObject current=null]
     }:
 (
     { 
-        currentNode=createCompositeNode(grammarAccess.getLiteralAccess().getNumericalLiteralParserRuleCall_0(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getLiteralAccess().getNumericLiteralParserRuleCall_0(), currentNode); 
     }
-    this_NumericalLiteral_0=ruleNumericalLiteral
+    this_NumericLiteral_0=ruleNumericLiteral
     { 
-        $current = $this_NumericalLiteral_0.current; 
+        $current = $this_NumericLiteral_0.current; 
         currentNode = currentNode.getParent();
     }
 
@@ -5137,17 +5137,17 @@ ruleLiteral returns [EObject current=null]
 
 
 
-// Entry rule entryRuleNumericalLiteral
-entryRuleNumericalLiteral returns [EObject current=null] 
+// Entry rule entryRuleNumericLiteral
+entryRuleNumericLiteral returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getNumericalLiteralRule(), currentNode); }
-	 iv_ruleNumericalLiteral=ruleNumericalLiteral 
-	 { $current=$iv_ruleNumericalLiteral.current; } 
+	{ currentNode = createCompositeNode(grammarAccess.getNumericLiteralRule(), currentNode); }
+	 iv_ruleNumericLiteral=ruleNumericLiteral 
+	 { $current=$iv_ruleNumericLiteral.current; } 
 	 EOF 
 ;
 
-// Rule NumericalLiteral
-ruleNumericalLiteral returns [EObject current=null] 
+// Rule NumericLiteral
+ruleNumericLiteral returns [EObject current=null] 
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
@@ -5155,7 +5155,7 @@ ruleNumericalLiteral returns [EObject current=null]
     }:
 (
     { 
-        currentNode=createCompositeNode(grammarAccess.getNumericalLiteralAccess().getRealLiteralParserRuleCall_0(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getNumericLiteralAccess().getRealLiteralParserRuleCall_0(), currentNode); 
     }
     this_RealLiteral_0=ruleRealLiteral
     { 
@@ -5165,7 +5165,7 @@ ruleNumericalLiteral returns [EObject current=null]
 
     |
     { 
-        currentNode=createCompositeNode(grammarAccess.getNumericalLiteralAccess().getIntegerLiteralParserRuleCall_1(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getNumericLiteralAccess().getIntegerLiteralParserRuleCall_1(), currentNode); 
     }
     this_IntegerLiteral_1=ruleIntegerLiteral
     { 

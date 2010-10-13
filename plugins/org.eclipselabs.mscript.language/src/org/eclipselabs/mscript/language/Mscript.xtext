@@ -159,9 +159,9 @@ DataTypeSpecifier :
 	PrimitiveTypeSpecifier | NamedTypeSpecifier;
 	
 PrimitiveTypeSpecifier :
-	NumericalTypeSpecifier | BooleanTypeSpecifier | StringTypeSpecifier;
+	NumericTypeSpecifier | BooleanTypeSpecifier | StringTypeSpecifier;
 	
-NumericalTypeSpecifier :
+NumericTypeSpecifier :
 	RealTypeSpecifier | IntegerTypeSpecifier | ComplexTypeSpecifier | GaussianTypeSpecifier;
 	
 RealTypeSpecifier :
@@ -287,9 +287,9 @@ PrimaryExpression returns Expression :
 	EndExpression;
 
 Literal :
-	NumericalLiteral | BooleanLiteral | StringLiteral;
+	NumericLiteral | BooleanLiteral | StringLiteral;
 	
-NumericalLiteral :
+NumericLiteral :
 	RealLiteral | IntegerLiteral;
 	
 RealLiteral :

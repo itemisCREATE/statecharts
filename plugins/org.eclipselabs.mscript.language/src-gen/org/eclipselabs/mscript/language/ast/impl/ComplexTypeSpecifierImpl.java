@@ -19,7 +19,7 @@ import org.eclipselabs.mscript.language.ast.ComplexTypeSpecifier;
  *
  * @generated
  */
-public class ComplexTypeSpecifierImpl extends NumericalTypeSpecifierImpl implements ComplexTypeSpecifier
+public class ComplexTypeSpecifierImpl extends NumericTypeSpecifierImpl implements ComplexTypeSpecifier
 {
   /**
    * <!-- begin-user-doc -->

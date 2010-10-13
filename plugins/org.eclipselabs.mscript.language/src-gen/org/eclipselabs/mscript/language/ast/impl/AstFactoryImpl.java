@@ -97,7 +97,7 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
       case AstPackage.TYPE_SPECIFIER: return createTypeSpecifier();
       case AstPackage.DATA_TYPE_SPECIFIER: return createDataTypeSpecifier();
       case AstPackage.PRIMITIVE_TYPE_SPECIFIER: return createPrimitiveTypeSpecifier();
-      case AstPackage.NUMERICAL_TYPE_SPECIFIER: return createNumericalTypeSpecifier();
+      case AstPackage.NUMERIC_TYPE_SPECIFIER: return createNumericTypeSpecifier();
       case AstPackage.REAL_TYPE_SPECIFIER: return createRealTypeSpecifier();
       case AstPackage.INTEGER_TYPE_SPECIFIER: return createIntegerTypeSpecifier();
       case AstPackage.COMPLEX_TYPE_SPECIFIER: return createComplexTypeSpecifier();
@@ -117,7 +117,7 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
       case AstPackage.ARRAY_ELEMENT_REFERENCE: return createArrayElementReference();
       case AstPackage.OPERATION_CALL: return createOperationCall();
       case AstPackage.LITERAL: return createLiteral();
-      case AstPackage.NUMERICAL_LITERAL: return createNumericalLiteral();
+      case AstPackage.NUMERIC_LITERAL: return createNumericLiteral();
       case AstPackage.REAL_LITERAL: return createRealLiteral();
       case AstPackage.INTEGER_LITERAL: return createIntegerLiteral();
       case AstPackage.BOOLEAN_LITERAL: return createBooleanLiteral();
@@ -532,10 +532,10 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public NumericalTypeSpecifier createNumericalTypeSpecifier()
+  public NumericTypeSpecifier createNumericTypeSpecifier()
   {
-    NumericalTypeSpecifierImpl numericalTypeSpecifier = new NumericalTypeSpecifierImpl();
-    return numericalTypeSpecifier;
+    NumericTypeSpecifierImpl numericTypeSpecifier = new NumericTypeSpecifierImpl();
+    return numericTypeSpecifier;
   }
 
   /**
@@ -752,10 +752,10 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public NumericalLiteral createNumericalLiteral()
+  public NumericLiteral createNumericLiteral()
   {
-    NumericalLiteralImpl numericalLiteral = new NumericalLiteralImpl();
-    return numericalLiteral;
+    NumericLiteralImpl numericLiteral = new NumericLiteralImpl();
+    return numericLiteral;
   }
 
   /**
