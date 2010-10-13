@@ -34,12 +34,12 @@ public interface DoWhileStatement extends Statement
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Body</em>' containment reference.
-   * @see #setBody(Block)
+   * @see #setBody(BlockStatement)
    * @see org.eclipselabs.mscript.language.ast.AstPackage#getDoWhileStatement_Body()
    * @model containment="true"
    * @generated
    */
-  Block getBody();
+  BlockStatement getBody();
 
   /**
    * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.DoWhileStatement#getBody <em>Body</em>}' containment reference.
@@ -49,7 +49,7 @@ public interface DoWhileStatement extends Statement
    * @see #getBody()
    * @generated
    */
-  void setBody(Block value);
+  void setBody(BlockStatement value);
 
   /**
    * Returns the value of the '<em><b>Predicate</b></em>' containment reference.

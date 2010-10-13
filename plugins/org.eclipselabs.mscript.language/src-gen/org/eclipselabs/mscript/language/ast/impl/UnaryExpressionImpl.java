@@ -15,23 +15,45 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.Expression;
-import org.eclipselabs.mscript.language.ast.LogicalNotExpression;
+import org.eclipselabs.mscript.language.ast.UnaryExpression;
+import org.eclipselabs.mscript.language.ast.UnaryOperator;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Logical Not Expression</b></em>'.
+ * An implementation of the model object '<em><b>Unary Expression</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.LogicalNotExpressionImpl#getOperand <em>Operand</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.UnaryExpressionImpl#getOperator <em>Operator</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.UnaryExpressionImpl#getOperand <em>Operand</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class LogicalNotExpressionImpl extends ExpressionImpl implements LogicalNotExpression
+public class UnaryExpressionImpl extends ExpressionImpl implements UnaryExpression
 {
+  /**
+   * The default value of the '{@link #getOperator() <em>Operator</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getOperator()
+   * @generated
+   * @ordered
+   */
+  protected static final UnaryOperator OPERATOR_EDEFAULT = UnaryOperator.MINUS;
+
+  /**
+   * The cached value of the '{@link #getOperator() <em>Operator</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getOperator()
+   * @generated
+   * @ordered
+   */
+  protected UnaryOperator operator = OPERATOR_EDEFAULT;
+
   /**
    * The cached value of the '{@link #getOperand() <em>Operand</em>}' containment reference.
    * <!-- begin-user-doc -->
@@ -47,7 +69,7 @@ public class LogicalNotExpressionImpl extends ExpressionImpl implements LogicalN
    * <!-- end-user-doc -->
    * @generated
    */
-  protected LogicalNotExpressionImpl()
+  protected UnaryExpressionImpl()
   {
     super();
   }
@@ -60,7 +82,30 @@ public class LogicalNotExpressionImpl extends ExpressionImpl implements LogicalN
   @Override
   protected EClass eStaticClass()
   {
-    return AstPackage.Literals.LOGICAL_NOT_EXPRESSION;
+    return AstPackage.Literals.UNARY_EXPRESSION;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public UnaryOperator getOperator()
+  {
+    return operator;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setOperator(UnaryOperator newOperator)
+  {
+    UnaryOperator oldOperator = operator;
+    operator = newOperator == null ? OPERATOR_EDEFAULT : newOperator;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.UNARY_EXPRESSION__OPERATOR, oldOperator, operator));
   }
 
   /**
@@ -84,7 +129,7 @@ public class LogicalNotExpressionImpl extends ExpressionImpl implements LogicalN
     operand = newOperand;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.LOGICAL_NOT_EXPRESSION__OPERAND, oldOperand, newOperand);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.UNARY_EXPRESSION__OPERAND, oldOperand, newOperand);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -101,14 +146,14 @@ public class LogicalNotExpressionImpl extends ExpressionImpl implements LogicalN
     {
       NotificationChain msgs = null;
       if (operand != null)
-        msgs = ((InternalEObject)operand).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.LOGICAL_NOT_EXPRESSION__OPERAND, null, msgs);
+        msgs = ((InternalEObject)operand).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.UNARY_EXPRESSION__OPERAND, null, msgs);
       if (newOperand != null)
-        msgs = ((InternalEObject)newOperand).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.LOGICAL_NOT_EXPRESSION__OPERAND, null, msgs);
+        msgs = ((InternalEObject)newOperand).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.UNARY_EXPRESSION__OPERAND, null, msgs);
       msgs = basicSetOperand(newOperand, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.LOGICAL_NOT_EXPRESSION__OPERAND, newOperand, newOperand));
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.UNARY_EXPRESSION__OPERAND, newOperand, newOperand));
   }
 
   /**
@@ -121,7 +166,7 @@ public class LogicalNotExpressionImpl extends ExpressionImpl implements LogicalN
   {
     switch (featureID)
     {
-      case AstPackage.LOGICAL_NOT_EXPRESSION__OPERAND:
+      case AstPackage.UNARY_EXPRESSION__OPERAND:
         return basicSetOperand(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -137,7 +182,9 @@ public class LogicalNotExpressionImpl extends ExpressionImpl implements LogicalN
   {
     switch (featureID)
     {
-      case AstPackage.LOGICAL_NOT_EXPRESSION__OPERAND:
+      case AstPackage.UNARY_EXPRESSION__OPERATOR:
+        return getOperator();
+      case AstPackage.UNARY_EXPRESSION__OPERAND:
         return getOperand();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -153,7 +200,10 @@ public class LogicalNotExpressionImpl extends ExpressionImpl implements LogicalN
   {
     switch (featureID)
     {
-      case AstPackage.LOGICAL_NOT_EXPRESSION__OPERAND:
+      case AstPackage.UNARY_EXPRESSION__OPERATOR:
+        setOperator((UnaryOperator)newValue);
+        return;
+      case AstPackage.UNARY_EXPRESSION__OPERAND:
         setOperand((Expression)newValue);
         return;
     }
@@ -170,7 +220,10 @@ public class LogicalNotExpressionImpl extends ExpressionImpl implements LogicalN
   {
     switch (featureID)
     {
-      case AstPackage.LOGICAL_NOT_EXPRESSION__OPERAND:
+      case AstPackage.UNARY_EXPRESSION__OPERATOR:
+        setOperator(OPERATOR_EDEFAULT);
+        return;
+      case AstPackage.UNARY_EXPRESSION__OPERAND:
         setOperand((Expression)null);
         return;
     }
@@ -187,10 +240,29 @@ public class LogicalNotExpressionImpl extends ExpressionImpl implements LogicalN
   {
     switch (featureID)
     {
-      case AstPackage.LOGICAL_NOT_EXPRESSION__OPERAND:
+      case AstPackage.UNARY_EXPRESSION__OPERATOR:
+        return operator != OPERATOR_EDEFAULT;
+      case AstPackage.UNARY_EXPRESSION__OPERAND:
         return operand != null;
     }
     return super.eIsSet(featureID);
   }
 
-} //LogicalNotExpressionImpl
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (operator: ");
+    result.append(operator);
+    result.append(')');
+    return result.toString();
+  }
+
+} //UnaryExpressionImpl

@@ -37,6 +37,10 @@
       <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//PowerOperator/Power"/>
       <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//PowerOperator/ElementWisePower"/>
     </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Mscript.ecore#//UnaryOperator">
+      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//UnaryOperator/Minus"/>
+      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//UnaryOperator/LogicalNot"/>
+    </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="Mscript.ecore#//BooleanKind">
       <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//BooleanKind/False"/>
       <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//BooleanKind/True"/>
@@ -91,8 +95,8 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//PreconditionChain/preconditions"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//Statement"/>
-    <genClasses ecoreClass="Mscript.ecore#//Block">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//Block/statements"/>
+    <genClasses ecoreClass="Mscript.ecore#//BlockStatement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//BlockStatement/statements"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//ExpressionStatement">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ExpressionStatement/expression"/>
@@ -251,9 +255,6 @@
     <genClasses ecoreClass="Mscript.ecore#//LogicalAndExpression">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//LogicalAndExpression/operands"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//LogicalNotExpression">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//LogicalNotExpression/operand"/>
-    </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//RelationalExpression">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//RelationalExpression/leftOperand"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//RelationalExpression/typeTest"/>
@@ -274,8 +275,9 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//PowerExpression/operator"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//PowerExpression/exponent"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//UnaryMinusExpression">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//UnaryMinusExpression/operand"/>
+    <genClasses ecoreClass="Mscript.ecore#//UnaryExpression">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//UnaryExpression/operator"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//UnaryExpression/operand"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//FeatureCall">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//FeatureCall/target"/>

@@ -78,12 +78,12 @@ public interface SubroutineDefinition extends TypeDefinition
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Body</em>' containment reference.
-   * @see #setBody(Block)
+   * @see #setBody(BlockStatement)
    * @see org.eclipselabs.mscript.language.ast.AstPackage#getSubroutineDefinition_Body()
    * @model containment="true"
    * @generated
    */
-  Block getBody();
+  BlockStatement getBody();
 
   /**
    * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.SubroutineDefinition#getBody <em>Body</em>}' containment reference.
@@ -93,6 +93,6 @@ public interface SubroutineDefinition extends TypeDefinition
    * @see #getBody()
    * @generated
    */
-  void setBody(Block value);
+  void setBody(BlockStatement value);
 
 } // SubroutineDefinition

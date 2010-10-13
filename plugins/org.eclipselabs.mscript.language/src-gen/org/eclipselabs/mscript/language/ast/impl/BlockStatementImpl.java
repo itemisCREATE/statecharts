@@ -18,23 +18,23 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipselabs.mscript.language.ast.AstPackage;
-import org.eclipselabs.mscript.language.ast.Block;
+import org.eclipselabs.mscript.language.ast.BlockStatement;
 import org.eclipselabs.mscript.language.ast.Statement;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Block</b></em>'.
+ * An implementation of the model object '<em><b>Block Statement</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.BlockImpl#getStatements <em>Statements</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.BlockStatementImpl#getStatements <em>Statements</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class BlockImpl extends StatementImpl implements Block
+public class BlockStatementImpl extends StatementImpl implements BlockStatement
 {
   /**
    * The cached value of the '{@link #getStatements() <em>Statements</em>}' containment reference list.
@@ -51,7 +51,7 @@ public class BlockImpl extends StatementImpl implements Block
    * <!-- end-user-doc -->
    * @generated
    */
-  protected BlockImpl()
+  protected BlockStatementImpl()
   {
     super();
   }
@@ -64,7 +64,7 @@ public class BlockImpl extends StatementImpl implements Block
   @Override
   protected EClass eStaticClass()
   {
-    return AstPackage.Literals.BLOCK;
+    return AstPackage.Literals.BLOCK_STATEMENT;
   }
 
   /**
@@ -76,7 +76,7 @@ public class BlockImpl extends StatementImpl implements Block
   {
     if (statements == null)
     {
-      statements = new EObjectContainmentEList<Statement>(Statement.class, this, AstPackage.BLOCK__STATEMENTS);
+      statements = new EObjectContainmentEList<Statement>(Statement.class, this, AstPackage.BLOCK_STATEMENT__STATEMENTS);
     }
     return statements;
   }
@@ -91,7 +91,7 @@ public class BlockImpl extends StatementImpl implements Block
   {
     switch (featureID)
     {
-      case AstPackage.BLOCK__STATEMENTS:
+      case AstPackage.BLOCK_STATEMENT__STATEMENTS:
         return ((InternalEList<?>)getStatements()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -107,7 +107,7 @@ public class BlockImpl extends StatementImpl implements Block
   {
     switch (featureID)
     {
-      case AstPackage.BLOCK__STATEMENTS:
+      case AstPackage.BLOCK_STATEMENT__STATEMENTS:
         return getStatements();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -124,7 +124,7 @@ public class BlockImpl extends StatementImpl implements Block
   {
     switch (featureID)
     {
-      case AstPackage.BLOCK__STATEMENTS:
+      case AstPackage.BLOCK_STATEMENT__STATEMENTS:
         getStatements().clear();
         getStatements().addAll((Collection<? extends Statement>)newValue);
         return;
@@ -142,7 +142,7 @@ public class BlockImpl extends StatementImpl implements Block
   {
     switch (featureID)
     {
-      case AstPackage.BLOCK__STATEMENTS:
+      case AstPackage.BLOCK_STATEMENT__STATEMENTS:
         getStatements().clear();
         return;
     }
@@ -159,10 +159,10 @@ public class BlockImpl extends StatementImpl implements Block
   {
     switch (featureID)
     {
-      case AstPackage.BLOCK__STATEMENTS:
+      case AstPackage.BLOCK_STATEMENT__STATEMENTS:
         return statements != null && !statements.isEmpty();
     }
     return super.eIsSet(featureID);
   }
 
-} //BlockImpl
+} //BlockStatementImpl

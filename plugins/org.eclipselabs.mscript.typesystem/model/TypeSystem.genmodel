@@ -35,6 +35,15 @@
       <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/ElementWiseMultiply"/>
       <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/ElementWiseDivide"/>
       <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/UnaryMinus"/>
+      <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/LogicalAnd"/>
+      <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/LogicalOr"/>
+      <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/LogicalNot"/>
+      <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/LessThan"/>
+      <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/LessThanOrEqualTo"/>
+      <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/GreaterThan"/>
+      <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/GreaterThanOrEqualTo"/>
+      <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/EqualTo"/>
+      <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/NotEqualTo"/>
     </genEnums>
     <genEnums xsi:type="genmodel:GenEnum" typeSafeEnumCompatible="false" ecoreEnum="TypeSystem.ecore#//UnitSymbol">
       <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//UnitSymbol/Meter"/>
@@ -83,6 +92,9 @@
       <genOperations xsi:type="genmodel:GenOperation" ecoreOperation="TypeSystem.ecore#//DataType/evaluate">
         <genParameters xsi:type="genmodel:GenParameter" ecoreParameter="TypeSystem.ecore#//DataType/evaluate/operator"/>
         <genParameters xsi:type="genmodel:GenParameter" ecoreParameter="TypeSystem.ecore#//DataType/evaluate/other"/>
+      </genOperations>
+      <genOperations xsi:type="genmodel:GenOperation" ecoreOperation="TypeSystem.ecore#//DataType/evaluatePower">
+        <genParameters xsi:type="genmodel:GenParameter" ecoreParameter="TypeSystem.ecore#//DataType/evaluatePower/exponent"/>
       </genOperations>
       <genOperations xsi:type="genmodel:GenOperation" ecoreOperation="TypeSystem.ecore#//DataType/isAssignableFrom">
         <genParameters xsi:type="genmodel:GenParameter" ecoreParameter="TypeSystem.ecore#//DataType/isAssignableFrom/other"/>

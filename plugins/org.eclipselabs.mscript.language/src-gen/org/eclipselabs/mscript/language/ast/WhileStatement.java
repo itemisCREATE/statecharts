@@ -60,12 +60,12 @@ public interface WhileStatement extends Statement
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Body</em>' containment reference.
-   * @see #setBody(Block)
+   * @see #setBody(BlockStatement)
    * @see org.eclipselabs.mscript.language.ast.AstPackage#getWhileStatement_Body()
    * @model containment="true"
    * @generated
    */
-  Block getBody();
+  BlockStatement getBody();
 
   /**
    * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.WhileStatement#getBody <em>Body</em>}' containment reference.
@@ -75,6 +75,6 @@ public interface WhileStatement extends Statement
    * @see #getBody()
    * @generated
    */
-  void setBody(Block value);
+  void setBody(BlockStatement value);
 
 } // WhileStatement

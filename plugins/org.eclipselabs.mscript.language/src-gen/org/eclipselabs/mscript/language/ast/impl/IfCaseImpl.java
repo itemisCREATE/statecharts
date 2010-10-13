@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipselabs.mscript.language.ast.AstPackage;
-import org.eclipselabs.mscript.language.ast.Block;
+import org.eclipselabs.mscript.language.ast.BlockStatement;
 import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.ast.IfCase;
 
@@ -53,7 +53,7 @@ public class IfCaseImpl extends MinimalEObjectImpl.Container implements IfCase
    * @generated
    * @ordered
    */
-  protected Block body;
+  protected BlockStatement body;
 
   /**
    * <!-- begin-user-doc -->
@@ -129,7 +129,7 @@ public class IfCaseImpl extends MinimalEObjectImpl.Container implements IfCase
    * <!-- end-user-doc -->
    * @generated
    */
-  public Block getBody()
+  public BlockStatement getBody()
   {
     return body;
   }
@@ -139,9 +139,9 @@ public class IfCaseImpl extends MinimalEObjectImpl.Container implements IfCase
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetBody(Block newBody, NotificationChain msgs)
+  public NotificationChain basicSetBody(BlockStatement newBody, NotificationChain msgs)
   {
-    Block oldBody = body;
+    BlockStatement oldBody = body;
     body = newBody;
     if (eNotificationRequired())
     {
@@ -156,7 +156,7 @@ public class IfCaseImpl extends MinimalEObjectImpl.Container implements IfCase
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setBody(Block newBody)
+  public void setBody(BlockStatement newBody)
   {
     if (newBody != body)
     {
@@ -222,7 +222,7 @@ public class IfCaseImpl extends MinimalEObjectImpl.Container implements IfCase
         setCondition((Expression)newValue);
         return;
       case AstPackage.IF_CASE__BODY:
-        setBody((Block)newValue);
+        setBody((BlockStatement)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -242,7 +242,7 @@ public class IfCaseImpl extends MinimalEObjectImpl.Container implements IfCase
         setCondition((Expression)null);
         return;
       case AstPackage.IF_CASE__BODY:
-        setBody((Block)null);
+        setBody((BlockStatement)null);
         return;
     }
     super.eUnset(featureID);

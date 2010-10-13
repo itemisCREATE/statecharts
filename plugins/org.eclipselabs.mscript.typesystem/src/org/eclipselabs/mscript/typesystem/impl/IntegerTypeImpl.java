@@ -58,6 +58,16 @@ public class IntegerTypeImpl extends NumericalTypeImpl implements IntegerType {
 	 * @generated
 	 */
 	@Override
+	public DataType evaluatePower(int exponent) {
+		return IntegerTypeOperations.evaluatePower(this, exponent);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public boolean isAssignableFrom(DataType other) {
 		return IntegerTypeOperations.isAssignableFrom(this, other);
 	}

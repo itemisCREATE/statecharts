@@ -55,6 +55,15 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public DataType evaluatePower(int exponent) {
+		return DataTypeOperations.evaluatePower(this, exponent);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public boolean isAssignableFrom(DataType other) {
 		return DataTypeOperations.isAssignableFrom(this, other);
 	}

@@ -31,6 +31,14 @@ public interface DataType extends Type {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @model required="true" ordered="false" exponentRequired="true" exponentOrdered="false"
+	 * @generated
+	 */
+	DataType evaluatePower(int exponent);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @model required="true" ordered="false" otherRequired="true" otherOrdered="false"
 	 * @generated
 	 */

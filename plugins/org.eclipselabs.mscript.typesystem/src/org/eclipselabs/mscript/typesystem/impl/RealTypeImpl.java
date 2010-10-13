@@ -58,6 +58,16 @@ public class RealTypeImpl extends NumericalTypeImpl implements RealType {
 	 * @generated
 	 */
 	@Override
+	public DataType evaluatePower(int exponent) {
+		return RealTypeOperations.evaluatePower(this, exponent);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public boolean isAssignableFrom(DataType other) {
 		return RealTypeOperations.isAssignableFrom(this, other);
 	}

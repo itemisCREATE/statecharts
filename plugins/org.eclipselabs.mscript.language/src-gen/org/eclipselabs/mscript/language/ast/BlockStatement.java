@@ -9,21 +9,21 @@ import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Block</b></em>'.
+ * A representation of the model object '<em><b>Block Statement</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.Block#getStatements <em>Statements</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.BlockStatement#getStatements <em>Statements</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipselabs.mscript.language.ast.AstPackage#getBlock()
+ * @see org.eclipselabs.mscript.language.ast.AstPackage#getBlockStatement()
  * @model
  * @generated
  */
-public interface Block extends Statement
+public interface BlockStatement extends Statement
 {
   /**
    * Returns the value of the '<em><b>Statements</b></em>' containment reference list.
@@ -35,10 +35,10 @@ public interface Block extends Statement
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Statements</em>' containment reference list.
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getBlock_Statements()
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getBlockStatement_Statements()
    * @model containment="true"
    * @generated
    */
   EList<Statement> getStatements();
 
-} // Block
+} // BlockStatement

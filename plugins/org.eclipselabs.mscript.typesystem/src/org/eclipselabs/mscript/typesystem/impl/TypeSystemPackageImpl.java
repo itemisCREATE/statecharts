@@ -978,6 +978,9 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 		addEParameter(op, this.getOperatorKind(), "operator", 1, 1, IS_UNIQUE, !IS_ORDERED);
 		addEParameter(op, this.getDataType(), "other", 0, 1, IS_UNIQUE, !IS_ORDERED);
 
+		op = addEOperation(dataTypeEClass, this.getDataType(), "evaluatePower", 1, 1, IS_UNIQUE, !IS_ORDERED);
+		addEParameter(op, ecorePackage.getEInt(), "exponent", 1, 1, IS_UNIQUE, !IS_ORDERED);
+
 		op = addEOperation(dataTypeEClass, ecorePackage.getEBoolean(), "isAssignableFrom", 1, 1, IS_UNIQUE, !IS_ORDERED);
 		addEParameter(op, this.getDataType(), "other", 1, 1, IS_UNIQUE, !IS_ORDERED);
 
@@ -1068,6 +1071,15 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 		addEEnumLiteral(operatorKindEEnum, OperatorKind.ELEMENT_WISE_MULTIPLY);
 		addEEnumLiteral(operatorKindEEnum, OperatorKind.ELEMENT_WISE_DIVIDE);
 		addEEnumLiteral(operatorKindEEnum, OperatorKind.UNARY_MINUS);
+		addEEnumLiteral(operatorKindEEnum, OperatorKind.LOGICAL_AND);
+		addEEnumLiteral(operatorKindEEnum, OperatorKind.LOGICAL_OR);
+		addEEnumLiteral(operatorKindEEnum, OperatorKind.LOGICAL_NOT);
+		addEEnumLiteral(operatorKindEEnum, OperatorKind.LESS_THAN);
+		addEEnumLiteral(operatorKindEEnum, OperatorKind.LESS_THAN_OR_EQUAL_TO);
+		addEEnumLiteral(operatorKindEEnum, OperatorKind.GREATER_THAN);
+		addEEnumLiteral(operatorKindEEnum, OperatorKind.GREATER_THAN_OR_EQUAL_TO);
+		addEEnumLiteral(operatorKindEEnum, OperatorKind.EQUAL_TO);
+		addEEnumLiteral(operatorKindEEnum, OperatorKind.NOT_EQUAL_TO);
 
 		initEEnum(unitSymbolEEnum, UnitSymbol.class, "UnitSymbol");
 		addEEnumLiteral(unitSymbolEEnum, UnitSymbol.METER);
@@ -1112,7 +1124,7 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 		  (getNamespace_OwnedMembers(), 
 		   source, 
 		   new String[] {
-		   });								
+		   });										
 	}
 
 	/**
@@ -1130,7 +1142,7 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 		   },
 		   new URI[] {
 			 URI.createURI(eNS_URI).appendFragment("//Namespace/members")
-		   });							
+		   });								
 		addAnnotation
 		  (getEnumeration_Literals(), 
 		   source, 
@@ -1154,7 +1166,7 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 		   },
 		   new URI[] {
 			 URI.createURI(eNS_URI).appendFragment("//Namespace/ownedMembers")
-		   });	
+		   });		
 	}
 
 	/**
@@ -1165,6 +1177,11 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 	 */
 	protected void createDuplicatesAnnotations() {
 		String source = "duplicates";						
+		addAnnotation
+		  (primitiveTypeEClass, 
+		   source, 
+		   new String[] {
+		   });		
 		addAnnotation
 		  (realTypeEClass, 
 		   source, 
@@ -1187,6 +1204,11 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 		   });					
 		addAnnotation
 		  (tensorTypeEClass, 
+		   source, 
+		   new String[] {
+		   });		
+		addAnnotation
+		  (unitTypeEClass, 
 		   source, 
 		   new String[] {
 		   });

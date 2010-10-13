@@ -78,7 +78,79 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	UNARY_MINUS(6, "UnaryMinus", "UnaryMinus");
+	UNARY_MINUS(6, "UnaryMinus", "UnaryMinus"), /**
+	 * The '<em><b>Logical And</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #LOGICAL_AND_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	LOGICAL_AND(7, "LogicalAnd", "LogicalAnd"), /**
+	 * The '<em><b>Logical Or</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #LOGICAL_OR_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	LOGICAL_OR(8, "LogicalOr", "LogicalOr"), /**
+	 * The '<em><b>Logical Not</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #LOGICAL_NOT_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	LOGICAL_NOT(9, "LogicalNot", "LogicalNot"), /**
+	 * The '<em><b>Less Than</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #LESS_THAN_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	LESS_THAN(10, "LessThan", "LessThan"), /**
+	 * The '<em><b>Less Than Or Equal To</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #LESS_THAN_OR_EQUAL_TO_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	LESS_THAN_OR_EQUAL_TO(11, "LessThanOrEqualTo", "LessThanOrEqualTo"), /**
+	 * The '<em><b>Greater Than</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #GREATER_THAN_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	GREATER_THAN(12, "GreaterThan", "GreaterThan"), /**
+	 * The '<em><b>Greater Than Or Equal To</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #GREATER_THAN_OR_EQUAL_TO_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	GREATER_THAN_OR_EQUAL_TO(13, "GreaterThanOrEqualTo", "GreaterThanOrEqualTo"), /**
+	 * The '<em><b>Equal To</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #EQUAL_TO_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	EQUAL_TO(14, "EqualTo", "EqualTo"), /**
+	 * The '<em><b>Not Equal To</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #NOT_EQUAL_TO_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	NOT_EQUAL_TO(15, "NotEqualTo", "NotEqualTo");
 
 	/**
 	 * The '<em><b>Add</b></em>' literal value.
@@ -186,6 +258,141 @@ public enum OperatorKind implements Enumerator {
 	public static final int UNARY_MINUS_VALUE = 6;
 
 /**
+	 * The '<em><b>Logical And</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Logical And</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #LOGICAL_AND
+	 * @model name="LogicalAnd"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LOGICAL_AND_VALUE = 7;
+
+/**
+	 * The '<em><b>Logical Or</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Logical Or</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #LOGICAL_OR
+	 * @model name="LogicalOr"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LOGICAL_OR_VALUE = 8;
+
+/**
+	 * The '<em><b>Logical Not</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Logical Not</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #LOGICAL_NOT
+	 * @model name="LogicalNot"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LOGICAL_NOT_VALUE = 9;
+
+/**
+	 * The '<em><b>Less Than</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Less Than</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #LESS_THAN
+	 * @model name="LessThan"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LESS_THAN_VALUE = 10;
+
+/**
+	 * The '<em><b>Less Than Or Equal To</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Less Than Or Equal To</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #LESS_THAN_OR_EQUAL_TO
+	 * @model name="LessThanOrEqualTo"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LESS_THAN_OR_EQUAL_TO_VALUE = 11;
+
+/**
+	 * The '<em><b>Greater Than</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Greater Than</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #GREATER_THAN
+	 * @model name="GreaterThan"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int GREATER_THAN_VALUE = 12;
+
+/**
+	 * The '<em><b>Greater Than Or Equal To</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Greater Than Or Equal To</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #GREATER_THAN_OR_EQUAL_TO
+	 * @model name="GreaterThanOrEqualTo"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int GREATER_THAN_OR_EQUAL_TO_VALUE = 13;
+
+/**
+	 * The '<em><b>Equal To</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Equal To</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #EQUAL_TO
+	 * @model name="EqualTo"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int EQUAL_TO_VALUE = 14;
+
+/**
+	 * The '<em><b>Not Equal To</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Not Equal To</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #NOT_EQUAL_TO
+	 * @model name="NotEqualTo"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int NOT_EQUAL_TO_VALUE = 15;
+
+/**
 	 * An array of all the '<em><b>Operator Kind</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -200,6 +407,15 @@ public enum OperatorKind implements Enumerator {
 			ELEMENT_WISE_MULTIPLY,
 			ELEMENT_WISE_DIVIDE,
 			UNARY_MINUS,
+			LOGICAL_AND,
+			LOGICAL_OR,
+			LOGICAL_NOT,
+			LESS_THAN,
+			LESS_THAN_OR_EQUAL_TO,
+			GREATER_THAN,
+			GREATER_THAN_OR_EQUAL_TO,
+			EQUAL_TO,
+			NOT_EQUAL_TO,
 		};
 
 	/**
@@ -257,6 +473,15 @@ public enum OperatorKind implements Enumerator {
 			case ELEMENT_WISE_MULTIPLY_VALUE: return ELEMENT_WISE_MULTIPLY;
 			case ELEMENT_WISE_DIVIDE_VALUE: return ELEMENT_WISE_DIVIDE;
 			case UNARY_MINUS_VALUE: return UNARY_MINUS;
+			case LOGICAL_AND_VALUE: return LOGICAL_AND;
+			case LOGICAL_OR_VALUE: return LOGICAL_OR;
+			case LOGICAL_NOT_VALUE: return LOGICAL_NOT;
+			case LESS_THAN_VALUE: return LESS_THAN;
+			case LESS_THAN_OR_EQUAL_TO_VALUE: return LESS_THAN_OR_EQUAL_TO;
+			case GREATER_THAN_VALUE: return GREATER_THAN;
+			case GREATER_THAN_OR_EQUAL_TO_VALUE: return GREATER_THAN_OR_EQUAL_TO;
+			case EQUAL_TO_VALUE: return EQUAL_TO;
+			case NOT_EQUAL_TO_VALUE: return NOT_EQUAL_TO;
 		}
 		return null;
 	}

@@ -23,13 +23,14 @@ import org.eclipselabs.mscript.typesystem.Unit;
  * The following operations are supported:
  * <ul>
  *   <li>{@link org.eclipselabs.mscript.typesystem.IntegerType#evaluate(org.eclipselabs.mscript.typesystem.OperatorKind, org.eclipselabs.mscript.typesystem.DataType) <em>Evaluate</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.typesystem.IntegerType#evaluatePower(int) <em>Evaluate Power</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.typesystem.IntegerType#isAssignableFrom(org.eclipselabs.mscript.typesystem.DataType) <em>Is Assignable From</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class IntegerTypeOperations extends DataTypeOperations {
+public class IntegerTypeOperations extends PrimitiveTypeOperations {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -56,6 +57,13 @@ public class IntegerTypeOperations extends DataTypeOperations {
 
 		Unit unit;
 		switch (operator) {
+		case LESS_THAN:
+		case LESS_THAN_OR_EQUAL_TO:
+		case GREATER_THAN:
+		case GREATER_THAN_OR_EQUAL_TO:
+		case EQUAL_TO:
+		case NOT_EQUAL_TO:
+			return TypeSystemFactory.eINSTANCE.createBooleanType();
 		case ADD:
 		case SUBTRACT:
 			if (!EcoreUtil.equals(integerType.getUnit(), otherNumericalType.getUnit())) {
@@ -89,10 +97,21 @@ public class IntegerTypeOperations extends DataTypeOperations {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	public static  DataType evaluatePower(IntegerType integerType, int exponent) {
+		IntegerType result = TypeSystemFactory.eINSTANCE.createIntegerType();
+		result.setUnit(integerType.getUnit().power(exponent));
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
 	public static  boolean isAssignableFrom(IntegerType integerType, DataType other) {
 		if (other instanceof IntegerType) {
 			IntegerType otherIntegerType = (IntegerType) other;
-			return integerType.getUnit().isSameAs(otherIntegerType.getUnit(), false);
+			return !integerType.isSetUnit() || integerType.getUnit().isSameAs(otherIntegerType.getUnit(), false);
 		}
 		return false;
 	}

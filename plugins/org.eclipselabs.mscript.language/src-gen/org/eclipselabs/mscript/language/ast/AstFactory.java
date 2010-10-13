@@ -179,13 +179,13 @@ public interface AstFactory extends EFactory
   Statement createStatement();
 
   /**
-   * Returns a new object of class '<em>Block</em>'.
+   * Returns a new object of class '<em>Block Statement</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Block</em>'.
+   * @return a new object of class '<em>Block Statement</em>'.
    * @generated
    */
-  Block createBlock();
+  BlockStatement createBlockStatement();
 
   /**
    * Returns a new object of class '<em>Expression Statement</em>'.
@@ -665,15 +665,6 @@ public interface AstFactory extends EFactory
   LogicalAndExpression createLogicalAndExpression();
 
   /**
-   * Returns a new object of class '<em>Logical Not Expression</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Logical Not Expression</em>'.
-   * @generated
-   */
-  LogicalNotExpression createLogicalNotExpression();
-
-  /**
    * Returns a new object of class '<em>Relational Expression</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -710,13 +701,13 @@ public interface AstFactory extends EFactory
   PowerExpression createPowerExpression();
 
   /**
-   * Returns a new object of class '<em>Unary Minus Expression</em>'.
+   * Returns a new object of class '<em>Unary Expression</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Unary Minus Expression</em>'.
+   * @return a new object of class '<em>Unary Expression</em>'.
    * @generated
    */
-  UnaryMinusExpression createUnaryMinusExpression();
+  UnaryExpression createUnaryExpression();
 
   /**
    * Returns a new object of class '<em>Feature Call</em>'.

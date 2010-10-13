@@ -23,13 +23,14 @@ import org.eclipselabs.mscript.typesystem.Unit;
  * The following operations are supported:
  * <ul>
  *   <li>{@link org.eclipselabs.mscript.typesystem.RealType#evaluate(org.eclipselabs.mscript.typesystem.OperatorKind, org.eclipselabs.mscript.typesystem.DataType) <em>Evaluate</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.typesystem.RealType#evaluatePower(int) <em>Evaluate Power</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.typesystem.RealType#isAssignableFrom(org.eclipselabs.mscript.typesystem.DataType) <em>Is Assignable From</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class RealTypeOperations extends DataTypeOperations {
+public class RealTypeOperations extends PrimitiveTypeOperations {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -56,6 +57,13 @@ public class RealTypeOperations extends DataTypeOperations {
 
 		Unit unit;
 		switch (operator) {
+		case LESS_THAN:
+		case LESS_THAN_OR_EQUAL_TO:
+		case GREATER_THAN:
+		case GREATER_THAN_OR_EQUAL_TO:
+		case EQUAL_TO:
+		case NOT_EQUAL_TO:
+			return TypeSystemFactory.eINSTANCE.createBooleanType();
 		case ADD:
 		case SUBTRACT:
 			if (!EcoreUtil.equals(realType.getUnit(), otherNumericalType.getUnit())) {
@@ -84,10 +92,21 @@ public class RealTypeOperations extends DataTypeOperations {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	public static  DataType evaluatePower(RealType realType, int exponent) {
+		RealType result = TypeSystemFactory.eINSTANCE.createRealType();
+		result.setUnit(realType.getUnit().power(exponent));
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
 	public static  boolean isAssignableFrom(RealType realType, DataType other) {
 		if (other instanceof NumericalType) {
 			NumericalType otherNumericalType = (NumericalType) other;
-			return realType.getUnit().isSameAs(otherNumericalType.getUnit(), false);
+			return !realType.isSetUnit() || realType.getUnit().isSameAs(otherNumericalType.getUnit(), false);
 		}
 		return false;
 	}

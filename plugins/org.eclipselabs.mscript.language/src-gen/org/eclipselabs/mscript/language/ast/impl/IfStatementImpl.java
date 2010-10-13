@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipselabs.mscript.language.ast.AstPackage;
-import org.eclipselabs.mscript.language.ast.Block;
+import org.eclipselabs.mscript.language.ast.BlockStatement;
 import org.eclipselabs.mscript.language.ast.IfCase;
 import org.eclipselabs.mscript.language.ast.IfStatement;
 
@@ -59,7 +59,7 @@ public class IfStatementImpl extends StatementImpl implements IfStatement
    * @generated
    * @ordered
    */
-  protected Block elseBody;
+  protected BlockStatement elseBody;
 
   /**
    * <!-- begin-user-doc -->
@@ -101,7 +101,7 @@ public class IfStatementImpl extends StatementImpl implements IfStatement
    * <!-- end-user-doc -->
    * @generated
    */
-  public Block getElseBody()
+  public BlockStatement getElseBody()
   {
     return elseBody;
   }
@@ -111,9 +111,9 @@ public class IfStatementImpl extends StatementImpl implements IfStatement
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetElseBody(Block newElseBody, NotificationChain msgs)
+  public NotificationChain basicSetElseBody(BlockStatement newElseBody, NotificationChain msgs)
   {
-    Block oldElseBody = elseBody;
+    BlockStatement oldElseBody = elseBody;
     elseBody = newElseBody;
     if (eNotificationRequired())
     {
@@ -128,7 +128,7 @@ public class IfStatementImpl extends StatementImpl implements IfStatement
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setElseBody(Block newElseBody)
+  public void setElseBody(BlockStatement newElseBody)
   {
     if (newElseBody != elseBody)
     {
@@ -196,7 +196,7 @@ public class IfStatementImpl extends StatementImpl implements IfStatement
         getCases().addAll((Collection<? extends IfCase>)newValue);
         return;
       case AstPackage.IF_STATEMENT__ELSE_BODY:
-        setElseBody((Block)newValue);
+        setElseBody((BlockStatement)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -216,7 +216,7 @@ public class IfStatementImpl extends StatementImpl implements IfStatement
         getCases().clear();
         return;
       case AstPackage.IF_STATEMENT__ELSE_BODY:
-        setElseBody((Block)null);
+        setElseBody((BlockStatement)null);
         return;
     }
     super.eUnset(featureID);

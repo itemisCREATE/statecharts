@@ -88,10 +88,10 @@ SubroutineDefinition :
 	FunctionDefinition | CheckDefinition;
  
 FunctionDefinition :
-	'func' name=KeywordID '(' (parameters+=ParameterDeclaration (',' parameters+=ParameterDeclaration)*)? ')' ('pre' preconditionChain=PreconditionChain)? body=Block;
+	'func' name=KeywordID '(' (parameters+=ParameterDeclaration (',' parameters+=ParameterDeclaration)*)? ')' ('pre' preconditionChain=PreconditionChain)? body=BlockStatement;
 
 CheckDefinition :
-	'check' name=KeywordID '(' (parameters+=ParameterDeclaration (',' parameters+=ParameterDeclaration)*)? ')' ('pre' preconditionChain=PreconditionChain)? body=Block;
+	'check' name=KeywordID '(' (parameters+=ParameterDeclaration (',' parameters+=ParameterDeclaration)*)? ')' ('pre' preconditionChain=PreconditionChain)? body=BlockStatement;
 
 ParameterDeclaration :
 	(reference?='ref')? name=KeywordID ':' type=TypeSpecifier;
@@ -104,7 +104,7 @@ PreconditionChain :
  */
 
 Statement :
-	Block |
+	BlockStatement |
 	ExpressionStatement |
 	IfStatement |
 	WhileStatement |
@@ -115,26 +115,26 @@ Statement :
 	ReturnStatement |
 	CheckStatusStatement;
 		
-Block :
-	{Block} '{' (statements+=Statement)* '}';
+BlockStatement :
+	{BlockStatement} '{' (statements+=Statement)* '}';
 
 ExpressionStatement :
 	expression=FeatureCall ('=' assignedValue=Expression)? ';';
 
 IfStatement :
-	'if' cases+=IfCase ('elseif' cases+=IfCase)* ('else' elseBody=Block)?;
+	'if' cases+=IfCase ('elseif' cases+=IfCase)* ('else' elseBody=BlockStatement)?;
 
 IfCase :
-	condition=Expression body=Block;
+	'(' condition=Expression ')' body=BlockStatement;
 	
 WhileStatement :
-	'while' predicate=Expression body=Block;
+	'while' '(' predicate=Expression ')' body=BlockStatement;
 	
 DoWhileStatement :
-	'do' body=Block 'while' predicate=Expression ';';
+	'do' body=BlockStatement 'while' '(' predicate=Expression ')' ';';
 
 ForeachStatement :
-	'foreach' elementName=KeywordID 'in' collectionExpression=Expression body=Block;
+	'foreach' '(' elementName=KeywordID 'in' collectionExpression=Expression ')' body=BlockStatement;
 	
 ReturnStatement :
 	{ReturnStatement} 'return' (returnValue=Expression)? ';';
@@ -208,13 +208,10 @@ RangeExpression returns Expression :
 	LogicalOrExpression ({RangeExpression.begin=current} ':' end=LogicalOrExpression ({RangeExpression.increment=current} ':' end=LogicalOrExpression)?)?;
 
 LogicalOrExpression returns Expression :
-	LogicalAndExpression ({LogicalOrExpression.operands+=current} ('or' operands+=LogicalAndExpression)+)?;
+	LogicalAndExpression ({LogicalOrExpression.operands+=current} ('||' operands+=LogicalAndExpression)+)?;
 	
 LogicalAndExpression returns Expression :
-	LogicalNotExpression ({LogicalAndExpression.operands+=current} ('and' operands+=LogicalNotExpression)+)?;
-
-LogicalNotExpression returns Expression :
-	RelationalExpression | {LogicalNotExpression} 'not' operand=RelationalExpression;
+	RelationalExpression ({LogicalAndExpression.operands+=current} ('&&' operands+=RelationalExpression)+)?;
 
 RelationalExpression returns Expression :
 	AddSubtractExpression ({RelationalExpression.leftOperand=current} (typeTest?='is' type=DataTypeSpecifier | operator=RelationalOperator rightOperand=AddSubtractExpression))?;
@@ -250,14 +247,18 @@ enum MultiplyDivideOperator :
 	ElementWiseDivide='./';
 	
 PowerExpression returns Expression :
-	UnaryMinusExpression ({PowerExpression.operand=current} operator=PowerOperator exponent=UnaryMinusExpression)?;
+	UnaryExpression ({PowerExpression.operand=current} operator=PowerOperator exponent=UnaryExpression)?;
 
 enum PowerOperator :
 	Power='^' |
 	ElementWisePower='.^';
 	
-UnaryMinusExpression returns Expression :
-	FeatureCall | {UnaryMinusExpression} '-' operand=FeatureCall;
+UnaryExpression returns Expression :
+	FeatureCall | {UnaryExpression} operator=UnaryOperator operand=FeatureCall;
+	
+enum UnaryOperator :
+	Minus='-' |
+	LogicalNot='!';
 
 FeatureCall returns Expression :
 	PrimaryExpression | CallablePrimaryExpression ({FeatureCall.target=current} (parts+=FeatureCallPart)+)?;

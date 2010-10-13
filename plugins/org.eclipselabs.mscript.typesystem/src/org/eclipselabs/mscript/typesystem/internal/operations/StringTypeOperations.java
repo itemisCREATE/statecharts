@@ -23,7 +23,7 @@ import org.eclipselabs.mscript.typesystem.StringType;
  *
  * @generated
  */
-public class StringTypeOperations extends DataTypeOperations {
+public class StringTypeOperations extends PrimitiveTypeOperations {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

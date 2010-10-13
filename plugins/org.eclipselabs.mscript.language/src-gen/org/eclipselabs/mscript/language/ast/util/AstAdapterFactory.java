@@ -163,9 +163,9 @@ public class AstAdapterFactory extends AdapterFactoryImpl
         return createStatementAdapter();
       }
       @Override
-      public Adapter caseBlock(Block object)
+      public Adapter caseBlockStatement(BlockStatement object)
       {
-        return createBlockAdapter();
+        return createBlockStatementAdapter();
       }
       @Override
       public Adapter caseExpressionStatement(ExpressionStatement object)
@@ -433,11 +433,6 @@ public class AstAdapterFactory extends AdapterFactoryImpl
         return createLogicalAndExpressionAdapter();
       }
       @Override
-      public Adapter caseLogicalNotExpression(LogicalNotExpression object)
-      {
-        return createLogicalNotExpressionAdapter();
-      }
-      @Override
       public Adapter caseRelationalExpression(RelationalExpression object)
       {
         return createRelationalExpressionAdapter();
@@ -458,9 +453,9 @@ public class AstAdapterFactory extends AdapterFactoryImpl
         return createPowerExpressionAdapter();
       }
       @Override
-      public Adapter caseUnaryMinusExpression(UnaryMinusExpression object)
+      public Adapter caseUnaryExpression(UnaryExpression object)
       {
-        return createUnaryMinusExpressionAdapter();
+        return createUnaryExpressionAdapter();
       }
       @Override
       public Adapter caseFeatureCall(FeatureCall object)
@@ -745,16 +740,16 @@ public class AstAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.Block <em>Block</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.BlockStatement <em>Block Statement</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.Block
+   * @see org.eclipselabs.mscript.language.ast.BlockStatement
    * @generated
    */
-  public Adapter createBlockAdapter()
+  public Adapter createBlockStatementAdapter()
   {
     return null;
   }
@@ -1555,21 +1550,6 @@ public class AstAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.LogicalNotExpression <em>Logical Not Expression</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.LogicalNotExpression
-   * @generated
-   */
-  public Adapter createLogicalNotExpressionAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.RelationalExpression <em>Relational Expression</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -1630,16 +1610,16 @@ public class AstAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.UnaryMinusExpression <em>Unary Minus Expression</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.UnaryExpression <em>Unary Expression</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.UnaryMinusExpression
+   * @see org.eclipselabs.mscript.language.ast.UnaryExpression
    * @generated
    */
-  public Adapter createUnaryMinusExpressionAdapter()
+  public Adapter createUnaryExpressionAdapter()
   {
     return null;
   }

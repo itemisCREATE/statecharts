@@ -41,6 +41,20 @@
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_ckY6kHGiEd-Vr_LfGhknIQ" name="PrimitiveType" isAbstract="true">
       <generalization xmi:id="_8CE0AHGjEd-Vr_LfGhknIQ" general="_FfGmwH3nEd-EWvFDOLE-rQ"/>
+      <ownedOperation xmi:id="_4YAQENU6Ed-6taNkaoHW5g" name="evaluate" redefinedOperation="_M2L2IH30Ed-EWvFDOLE-rQ">
+        <ownedParameter xmi:id="_4l4UANU6Ed-6taNkaoHW5g" type="_FfGmwH3nEd-EWvFDOLE-rQ" direction="return"/>
+        <ownedParameter xmi:id="_4l47ENU6Ed-6taNkaoHW5g" name="operator" type="_1MUB0H3zEd-EWvFDOLE-rQ"/>
+        <ownedParameter xmi:id="_4l5iINU6Ed-6taNkaoHW5g" name="other" type="_FfGmwH3nEd-EWvFDOLE-rQ">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_4l5iIdU6Ed-6taNkaoHW5g" value="1"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_4l5iItU6Ed-6taNkaoHW5g"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:id="_5nuLgNU6Ed-6taNkaoHW5g" name="evaluatePower" redefinedOperation="_yQLaYNUzEd-6taNkaoHW5g">
+        <ownedParameter xmi:id="_5zbsQNU6Ed-6taNkaoHW5g" type="_FfGmwH3nEd-EWvFDOLE-rQ" direction="return"/>
+        <ownedParameter xmi:id="_5zbsQdU6Ed-6taNkaoHW5g" name="exponent">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+      </ownedOperation>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_j3a5oHMeEd-9E7QZMDWyTg" name="RealType">
       <generalization xmi:id="_5pYYkHO3Ed-S94eRjnXSAQ" general="__s2cgHMrEd-9E7QZMDWyTg"/>
@@ -50,6 +64,12 @@
         <ownedParameter xmi:id="_J3qhcaxVEd-ZZ_8ZIavFMA" name="other" type="_FfGmwH3nEd-EWvFDOLE-rQ">
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_J3qhcqxVEd-ZZ_8ZIavFMA" value="1"/>
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_J3qhc6xVEd-ZZ_8ZIavFMA"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:id="_V1z2ENU0Ed-6taNkaoHW5g" name="evaluatePower" redefinedOperation="_yQLaYNUzEd-6taNkaoHW5g">
+        <ownedParameter xmi:id="_2IJVANU0Ed-6taNkaoHW5g" type="_FfGmwH3nEd-EWvFDOLE-rQ" direction="return"/>
+        <ownedParameter xmi:id="_2IJVAdU0Ed-6taNkaoHW5g" name="exponent">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
         </ownedParameter>
       </ownedOperation>
       <ownedOperation xmi:id="_aWQR0LZ8Ed-ivo-RjtdS8A" name="isAssignableFrom" redefinedOperation="_UEkroH5FEd-92N_8bTdFqA">
@@ -69,6 +89,12 @@
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_MJRXsqxVEd-ZZ_8ZIavFMA"/>
         </ownedParameter>
       </ownedOperation>
+      <ownedOperation xmi:id="_Xv4WENU0Ed-6taNkaoHW5g" name="evaluatePower" redefinedOperation="_yQLaYNUzEd-6taNkaoHW5g">
+        <ownedParameter xmi:id="_3tFSgNU0Ed-6taNkaoHW5g" type="_FfGmwH3nEd-EWvFDOLE-rQ" direction="return"/>
+        <ownedParameter xmi:id="_3tFSgdU0Ed-6taNkaoHW5g" name="exponent">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+      </ownedOperation>
       <ownedOperation xmi:id="_cZKkwLZ8Ed-ivo-RjtdS8A" name="isAssignableFrom" redefinedOperation="_UEkroH5FEd-92N_8bTdFqA">
         <ownedParameter xmi:id="_d1YEELZ8Ed-ivo-RjtdS8A" direction="return">
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
@@ -78,6 +104,14 @@
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_u3XZAHMeEd-9E7QZMDWyTg" name="BooleanType">
       <generalization xmi:id="_7ClnMHO3Ed-S94eRjnXSAQ" general="_ckY6kHGiEd-Vr_LfGhknIQ"/>
+      <ownedOperation xmi:id="_nZrZoNUtEd-6taNkaoHW5g" name="evaluate" redefinedOperation="_M2L2IH30Ed-EWvFDOLE-rQ">
+        <ownedParameter xmi:id="_pR77wNUtEd-6taNkaoHW5g" type="_FfGmwH3nEd-EWvFDOLE-rQ" direction="return"/>
+        <ownedParameter xmi:id="_pR77wdUtEd-6taNkaoHW5g" name="operator" type="_1MUB0H3zEd-EWvFDOLE-rQ"/>
+        <ownedParameter xmi:id="_pR8i0NUtEd-6taNkaoHW5g" name="other" type="_FfGmwH3nEd-EWvFDOLE-rQ">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_pR8i0dUtEd-6taNkaoHW5g" value="1"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_pR8i0tUtEd-6taNkaoHW5g"/>
+        </ownedParameter>
+      </ownedOperation>
       <ownedOperation xmi:id="_eszbULZ8Ed-ivo-RjtdS8A" name="isAssignableFrom" redefinedOperation="_UEkroH5FEd-92N_8bTdFqA">
         <ownedParameter xmi:id="_fMZhYLZ8Ed-ivo-RjtdS8A" direction="return">
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
@@ -207,6 +241,12 @@
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_AKgi0H32Ed-EWvFDOLE-rQ"/>
         </ownedParameter>
       </ownedOperation>
+      <ownedOperation xmi:id="_yQLaYNUzEd-6taNkaoHW5g" name="evaluatePower">
+        <ownedParameter xmi:id="_v2ZqINU0Ed-6taNkaoHW5g" type="_FfGmwH3nEd-EWvFDOLE-rQ" direction="return"/>
+        <ownedParameter xmi:id="_v2aRMNU0Ed-6taNkaoHW5g" name="exponent">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+      </ownedOperation>
       <ownedOperation xmi:id="_UEkroH5FEd-92N_8bTdFqA" name="isAssignableFrom">
         <ownedParameter xmi:id="_Zt32cH5FEd-92N_8bTdFqA" direction="return">
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
@@ -226,6 +266,15 @@
       <ownedLiteral xmi:id="_0E2NkLQkEd-_7IrwlAwZ7g" name="ElementWiseMultiply"/>
       <ownedLiteral xmi:id="_8EaFILQkEd-_7IrwlAwZ7g" name="ElementWiseDivide"/>
       <ownedLiteral xmi:id="_TKiIgLWsEd-vy7wpTNtOBw" name="UnaryMinus"/>
+      <ownedLiteral xmi:id="_-G6KENUuEd-6taNkaoHW5g" name="LogicalAnd"/>
+      <ownedLiteral xmi:id="_AWGlgNUvEd-6taNkaoHW5g" name="LogicalOr"/>
+      <ownedLiteral xmi:id="_BmmkENUvEd-6taNkaoHW5g" name="LogicalNot"/>
+      <ownedLiteral xmi:id="_KXqKANUvEd-6taNkaoHW5g" name="LessThan"/>
+      <ownedLiteral xmi:id="_Mau1ANUvEd-6taNkaoHW5g" name="LessThanOrEqualTo"/>
+      <ownedLiteral xmi:id="_NjXRANUvEd-6taNkaoHW5g" name="GreaterThan"/>
+      <ownedLiteral xmi:id="_O5k2ANUvEd-6taNkaoHW5g" name="GreaterThanOrEqualTo"/>
+      <ownedLiteral xmi:id="_QEpiANUvEd-6taNkaoHW5g" name="EqualTo"/>
+      <ownedLiteral xmi:id="_Re1BANUvEd-6taNkaoHW5g" name="NotEqualTo"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_s1LiUH30Ed-EWvFDOLE-rQ" name="InvalidDataType">
       <generalization xmi:id="_eY1_IH31Ed-EWvFDOLE-rQ" general="_FfGmwH3nEd-EWvFDOLE-rQ"/>
@@ -345,6 +394,20 @@
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_MRUIwM4oEd-06tH_5Us_6Q" name="UnitType">
       <generalization xmi:id="_MyQq0NSYEd-6Zv_9XpuCAw" general="_FfGmwH3nEd-EWvFDOLE-rQ"/>
+      <ownedOperation xmi:id="_zRd0ENU6Ed-6taNkaoHW5g" name="evaluate" redefinedOperation="_M2L2IH30Ed-EWvFDOLE-rQ">
+        <ownedParameter xmi:id="_1shhQNU6Ed-6taNkaoHW5g" type="_FfGmwH3nEd-EWvFDOLE-rQ" direction="return"/>
+        <ownedParameter xmi:id="_1shhQdU6Ed-6taNkaoHW5g" name="operator" type="_1MUB0H3zEd-EWvFDOLE-rQ"/>
+        <ownedParameter xmi:id="_1shhQtU6Ed-6taNkaoHW5g" name="other" type="_FfGmwH3nEd-EWvFDOLE-rQ">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_1shhQ9U6Ed-6taNkaoHW5g" value="1"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_1shhRNU6Ed-6taNkaoHW5g"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:id="_6ogTENU6Ed-6taNkaoHW5g" name="evaluatePower" redefinedOperation="_yQLaYNUzEd-6taNkaoHW5g">
+        <ownedParameter xmi:id="_7UYhoNU6Ed-6taNkaoHW5g" type="_FfGmwH3nEd-EWvFDOLE-rQ" direction="return"/>
+        <ownedParameter xmi:id="_7UZIsNU6Ed-6taNkaoHW5g" name="exponent">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+      </ownedOperation>
     </packagedElement>
     <profileApplication xmi:id="_DbDeoHGiEd-Vr_LfGhknIQ">
       <eAnnotations xmi:id="_DbI-MHGiEd-Vr_LfGhknIQ" source="http://www.eclipse.org/uml2/2.0.0/UML">

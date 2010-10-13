@@ -61,12 +61,12 @@ public interface IfCase extends EObject
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Body</em>' containment reference.
-   * @see #setBody(Block)
+   * @see #setBody(BlockStatement)
    * @see org.eclipselabs.mscript.language.ast.AstPackage#getIfCase_Body()
    * @model containment="true"
    * @generated
    */
-  Block getBody();
+  BlockStatement getBody();
 
   /**
    * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.IfCase#getBody <em>Body</em>}' containment reference.
@@ -76,6 +76,6 @@ public interface IfCase extends EObject
    * @see #getBody()
    * @generated
    */
-  void setBody(Block value);
+  void setBody(BlockStatement value);
 
 } // IfCase

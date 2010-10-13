@@ -51,12 +51,12 @@ public interface IfStatement extends Statement
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Else Body</em>' containment reference.
-   * @see #setElseBody(Block)
+   * @see #setElseBody(BlockStatement)
    * @see org.eclipselabs.mscript.language.ast.AstPackage#getIfStatement_ElseBody()
    * @model containment="true"
    * @generated
    */
-  Block getElseBody();
+  BlockStatement getElseBody();
 
   /**
    * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.IfStatement#getElseBody <em>Else Body</em>}' containment reference.
@@ -66,6 +66,6 @@ public interface IfStatement extends Statement
    * @see #getElseBody()
    * @generated
    */
-  void setElseBody(Block value);
+  void setElseBody(BlockStatement value);
 
 } // IfStatement

@@ -245,11 +245,11 @@ public class AstSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AstPackage.BLOCK:
+      case AstPackage.BLOCK_STATEMENT:
       {
-        Block block = (Block)theEObject;
-        T result = caseBlock(block);
-        if (result == null) result = caseStatement(block);
+        BlockStatement blockStatement = (BlockStatement)theEObject;
+        T result = caseBlockStatement(blockStatement);
+        if (result == null) result = caseStatement(blockStatement);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -688,14 +688,6 @@ public class AstSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AstPackage.LOGICAL_NOT_EXPRESSION:
-      {
-        LogicalNotExpression logicalNotExpression = (LogicalNotExpression)theEObject;
-        T result = caseLogicalNotExpression(logicalNotExpression);
-        if (result == null) result = caseExpression(logicalNotExpression);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case AstPackage.RELATIONAL_EXPRESSION:
       {
         RelationalExpression relationalExpression = (RelationalExpression)theEObject;
@@ -728,11 +720,11 @@ public class AstSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AstPackage.UNARY_MINUS_EXPRESSION:
+      case AstPackage.UNARY_EXPRESSION:
       {
-        UnaryMinusExpression unaryMinusExpression = (UnaryMinusExpression)theEObject;
-        T result = caseUnaryMinusExpression(unaryMinusExpression);
-        if (result == null) result = caseExpression(unaryMinusExpression);
+        UnaryExpression unaryExpression = (UnaryExpression)theEObject;
+        T result = caseUnaryExpression(unaryExpression);
+        if (result == null) result = caseExpression(unaryExpression);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -1021,17 +1013,17 @@ public class AstSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Block</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Block Statement</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Block</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Block Statement</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseBlock(Block object)
+  public T caseBlockStatement(BlockStatement object)
   {
     return null;
   }
@@ -1885,22 +1877,6 @@ public class AstSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Logical Not Expression</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Logical Not Expression</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseLogicalNotExpression(LogicalNotExpression object)
-  {
-    return null;
-  }
-
-  /**
    * Returns the result of interpreting the object as an instance of '<em>Relational Expression</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -1965,17 +1941,17 @@ public class AstSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Unary Minus Expression</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Unary Expression</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Unary Minus Expression</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Unary Expression</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseUnaryMinusExpression(UnaryMinusExpression object)
+  public T caseUnaryExpression(UnaryExpression object)
   {
     return null;
   }

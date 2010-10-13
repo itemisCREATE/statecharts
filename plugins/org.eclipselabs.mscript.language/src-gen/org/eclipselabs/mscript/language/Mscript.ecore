@@ -51,7 +51,7 @@
         eType="#//ParameterDeclaration" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="preconditionChain" eType="#//PreconditionChain"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//Block"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//BlockStatement"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FunctionDefinition" eSuperTypes="#//SubroutineDefinition"/>
@@ -67,7 +67,7 @@
         eType="#//Expression" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Statement"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Block" eSuperTypes="#//Statement">
+  <eClassifiers xsi:type="ecore:EClass" name="BlockStatement" eSuperTypes="#//Statement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="statements" upperBound="-1"
         eType="#//Statement" containment="true"/>
   </eClassifiers>
@@ -80,23 +80,23 @@
   <eClassifiers xsi:type="ecore:EClass" name="IfStatement" eSuperTypes="#//Statement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="cases" upperBound="-1"
         eType="#//IfCase" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="elseBody" eType="#//Block"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elseBody" eType="#//BlockStatement"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="IfCase">
     <eStructuralFeatures xsi:type="ecore:EReference" name="condition" eType="#//Expression"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//Block"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//BlockStatement"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="WhileStatement" eSuperTypes="#//Statement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="predicate" eType="#//Expression"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//Block"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//BlockStatement"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DoWhileStatement" eSuperTypes="#//Statement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//Block"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//BlockStatement"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="predicate" eType="#//Expression"
         containment="true"/>
@@ -105,7 +105,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="elementName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="collectionExpression" eType="#//Expression"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//Block"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//BlockStatement"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ReturnStatement" eSuperTypes="#//Statement">
@@ -197,6 +197,10 @@
   <eClassifiers xsi:type="ecore:EEnum" name="PowerOperator">
     <eLiterals name="Power" literal="^"/>
     <eLiterals name="ElementWisePower" value="1" literal=".^"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="UnaryOperator">
+    <eLiterals name="Minus" literal="-"/>
+    <eLiterals name="LogicalNot" value="1" literal="!"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FeatureCallPart"/>
   <eClassifiers xsi:type="ecore:EClass" name="FeatureReference" eSuperTypes="#//FeatureCallPart">
@@ -307,10 +311,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="operands" upperBound="-1"
         eType="#//Expression" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="LogicalNotExpression" eSuperTypes="#//Expression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="operand" eType="#//Expression"
-        containment="true"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RelationalExpression" eSuperTypes="#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="#//Expression"
         containment="true"/>
@@ -340,7 +340,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="exponent" eType="#//Expression"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="UnaryMinusExpression" eSuperTypes="#//Expression">
+  <eClassifiers xsi:type="ecore:EClass" name="UnaryExpression" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//UnaryOperator"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="operand" eType="#//Expression"
         containment="true"/>
   </eClassifiers>

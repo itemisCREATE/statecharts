@@ -690,14 +690,14 @@ public interface AstPackage extends EPackage
   int STATEMENT_FEATURE_COUNT = 0;
 
   /**
-   * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.BlockImpl <em>Block</em>}' class.
+   * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.BlockStatementImpl <em>Block Statement</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.eclipselabs.mscript.language.ast.impl.BlockImpl
-   * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getBlock()
+   * @see org.eclipselabs.mscript.language.ast.impl.BlockStatementImpl
+   * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getBlockStatement()
    * @generated
    */
-  int BLOCK = 17;
+  int BLOCK_STATEMENT = 17;
 
   /**
    * The feature id for the '<em><b>Statements</b></em>' containment reference list.
@@ -706,16 +706,16 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int BLOCK__STATEMENTS = STATEMENT_FEATURE_COUNT + 0;
+  int BLOCK_STATEMENT__STATEMENTS = STATEMENT_FEATURE_COUNT + 0;
 
   /**
-   * The number of structural features of the '<em>Block</em>' class.
+   * The number of structural features of the '<em>Block Statement</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int BLOCK_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 1;
+  int BLOCK_STATEMENT_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.ExpressionStatementImpl <em>Expression Statement</em>}' class.
@@ -2463,34 +2463,6 @@ public interface AstPackage extends EPackage
   int LOGICAL_AND_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
 
   /**
-   * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.LogicalNotExpressionImpl <em>Logical Not Expression</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipselabs.mscript.language.ast.impl.LogicalNotExpressionImpl
-   * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getLogicalNotExpression()
-   * @generated
-   */
-  int LOGICAL_NOT_EXPRESSION = 71;
-
-  /**
-   * The feature id for the '<em><b>Operand</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int LOGICAL_NOT_EXPRESSION__OPERAND = EXPRESSION_FEATURE_COUNT + 0;
-
-  /**
-   * The number of structural features of the '<em>Logical Not Expression</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int LOGICAL_NOT_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
-
-  /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.RelationalExpressionImpl <em>Relational Expression</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2498,7 +2470,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getRelationalExpression()
    * @generated
    */
-  int RELATIONAL_EXPRESSION = 72;
+  int RELATIONAL_EXPRESSION = 71;
 
   /**
    * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -2562,7 +2534,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getAddSubtractExpression()
    * @generated
    */
-  int ADD_SUBTRACT_EXPRESSION = 73;
+  int ADD_SUBTRACT_EXPRESSION = 72;
 
   /**
    * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -2599,7 +2571,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getMultiplyDivideExpression()
    * @generated
    */
-  int MULTIPLY_DIVIDE_EXPRESSION = 74;
+  int MULTIPLY_DIVIDE_EXPRESSION = 73;
 
   /**
    * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -2636,7 +2608,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getPowerExpression()
    * @generated
    */
-  int POWER_EXPRESSION = 75;
+  int POWER_EXPRESSION = 74;
 
   /**
    * The feature id for the '<em><b>Operand</b></em>' containment reference.
@@ -2675,14 +2647,23 @@ public interface AstPackage extends EPackage
   int POWER_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 3;
 
   /**
-   * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.UnaryMinusExpressionImpl <em>Unary Minus Expression</em>}' class.
+   * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.UnaryExpressionImpl <em>Unary Expression</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.eclipselabs.mscript.language.ast.impl.UnaryMinusExpressionImpl
-   * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getUnaryMinusExpression()
+   * @see org.eclipselabs.mscript.language.ast.impl.UnaryExpressionImpl
+   * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getUnaryExpression()
    * @generated
    */
-  int UNARY_MINUS_EXPRESSION = 76;
+  int UNARY_EXPRESSION = 75;
+
+  /**
+   * The feature id for the '<em><b>Operator</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int UNARY_EXPRESSION__OPERATOR = EXPRESSION_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Operand</b></em>' containment reference.
@@ -2691,16 +2672,16 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int UNARY_MINUS_EXPRESSION__OPERAND = EXPRESSION_FEATURE_COUNT + 0;
+  int UNARY_EXPRESSION__OPERAND = EXPRESSION_FEATURE_COUNT + 1;
 
   /**
-   * The number of structural features of the '<em>Unary Minus Expression</em>' class.
+   * The number of structural features of the '<em>Unary Expression</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int UNARY_MINUS_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
+  int UNARY_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.FeatureCallImpl <em>Feature Call</em>}' class.
@@ -2710,7 +2691,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getFeatureCall()
    * @generated
    */
-  int FEATURE_CALL = 77;
+  int FEATURE_CALL = 76;
 
   /**
    * The feature id for the '<em><b>Target</b></em>' containment reference.
@@ -2747,7 +2728,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getCheckStatusKind()
    * @generated
    */
-  int CHECK_STATUS_KIND = 78;
+  int CHECK_STATUS_KIND = 77;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.RelationalOperator <em>Relational Operator</em>}' enum.
@@ -2757,7 +2738,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getRelationalOperator()
    * @generated
    */
-  int RELATIONAL_OPERATOR = 79;
+  int RELATIONAL_OPERATOR = 78;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.AddSubtractOperator <em>Add Subtract Operator</em>}' enum.
@@ -2767,7 +2748,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getAddSubtractOperator()
    * @generated
    */
-  int ADD_SUBTRACT_OPERATOR = 80;
+  int ADD_SUBTRACT_OPERATOR = 79;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.MultiplyDivideOperator <em>Multiply Divide Operator</em>}' enum.
@@ -2777,7 +2758,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getMultiplyDivideOperator()
    * @generated
    */
-  int MULTIPLY_DIVIDE_OPERATOR = 81;
+  int MULTIPLY_DIVIDE_OPERATOR = 80;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.PowerOperator <em>Power Operator</em>}' enum.
@@ -2787,7 +2768,17 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getPowerOperator()
    * @generated
    */
-  int POWER_OPERATOR = 82;
+  int POWER_OPERATOR = 81;
+
+  /**
+   * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.UnaryOperator <em>Unary Operator</em>}' enum.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipselabs.mscript.language.ast.UnaryOperator
+   * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getUnaryOperator()
+   * @generated
+   */
+  int UNARY_OPERATOR = 82;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.BooleanKind <em>Boolean Kind</em>}' enum.
@@ -3202,25 +3193,25 @@ public interface AstPackage extends EPackage
   EClass getStatement();
 
   /**
-   * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.Block <em>Block</em>}'.
+   * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.BlockStatement <em>Block Statement</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Block</em>'.
-   * @see org.eclipselabs.mscript.language.ast.Block
+   * @return the meta object for class '<em>Block Statement</em>'.
+   * @see org.eclipselabs.mscript.language.ast.BlockStatement
    * @generated
    */
-  EClass getBlock();
+  EClass getBlockStatement();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.ast.Block#getStatements <em>Statements</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.ast.BlockStatement#getStatements <em>Statements</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference list '<em>Statements</em>'.
-   * @see org.eclipselabs.mscript.language.ast.Block#getStatements()
-   * @see #getBlock()
+   * @see org.eclipselabs.mscript.language.ast.BlockStatement#getStatements()
+   * @see #getBlockStatement()
    * @generated
    */
-  EReference getBlock_Statements();
+  EReference getBlockStatement_Statements();
 
   /**
    * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.ExpressionStatement <em>Expression Statement</em>}'.
@@ -4468,27 +4459,6 @@ public interface AstPackage extends EPackage
   EReference getLogicalAndExpression_Operands();
 
   /**
-   * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.LogicalNotExpression <em>Logical Not Expression</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Logical Not Expression</em>'.
-   * @see org.eclipselabs.mscript.language.ast.LogicalNotExpression
-   * @generated
-   */
-  EClass getLogicalNotExpression();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.LogicalNotExpression#getOperand <em>Operand</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Operand</em>'.
-   * @see org.eclipselabs.mscript.language.ast.LogicalNotExpression#getOperand()
-   * @see #getLogicalNotExpression()
-   * @generated
-   */
-  EReference getLogicalNotExpression_Operand();
-
-  /**
    * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.RelationalExpression <em>Relational Expression</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -4661,25 +4631,36 @@ public interface AstPackage extends EPackage
   EReference getPowerExpression_Exponent();
 
   /**
-   * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.UnaryMinusExpression <em>Unary Minus Expression</em>}'.
+   * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.UnaryExpression <em>Unary Expression</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Unary Minus Expression</em>'.
-   * @see org.eclipselabs.mscript.language.ast.UnaryMinusExpression
+   * @return the meta object for class '<em>Unary Expression</em>'.
+   * @see org.eclipselabs.mscript.language.ast.UnaryExpression
    * @generated
    */
-  EClass getUnaryMinusExpression();
+  EClass getUnaryExpression();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.UnaryMinusExpression#getOperand <em>Operand</em>}'.
+   * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.ast.UnaryExpression#getOperator <em>Operator</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Operator</em>'.
+   * @see org.eclipselabs.mscript.language.ast.UnaryExpression#getOperator()
+   * @see #getUnaryExpression()
+   * @generated
+   */
+  EAttribute getUnaryExpression_Operator();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.UnaryExpression#getOperand <em>Operand</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Operand</em>'.
-   * @see org.eclipselabs.mscript.language.ast.UnaryMinusExpression#getOperand()
-   * @see #getUnaryMinusExpression()
+   * @see org.eclipselabs.mscript.language.ast.UnaryExpression#getOperand()
+   * @see #getUnaryExpression()
    * @generated
    */
-  EReference getUnaryMinusExpression_Operand();
+  EReference getUnaryExpression_Operand();
 
   /**
    * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.FeatureCall <em>Feature Call</em>}'.
@@ -4762,6 +4743,16 @@ public interface AstPackage extends EPackage
    * @generated
    */
   EEnum getPowerOperator();
+
+  /**
+   * Returns the meta object for enum '{@link org.eclipselabs.mscript.language.ast.UnaryOperator <em>Unary Operator</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for enum '<em>Unary Operator</em>'.
+   * @see org.eclipselabs.mscript.language.ast.UnaryOperator
+   * @generated
+   */
+  EEnum getUnaryOperator();
 
   /**
    * Returns the meta object for enum '{@link org.eclipselabs.mscript.language.ast.BooleanKind <em>Boolean Kind</em>}'.
@@ -5135,14 +5126,14 @@ public interface AstPackage extends EPackage
     EClass STATEMENT = eINSTANCE.getStatement();
 
     /**
-     * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.BlockImpl <em>Block</em>}' class.
+     * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.BlockStatementImpl <em>Block Statement</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.eclipselabs.mscript.language.ast.impl.BlockImpl
-     * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getBlock()
+     * @see org.eclipselabs.mscript.language.ast.impl.BlockStatementImpl
+     * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getBlockStatement()
      * @generated
      */
-    EClass BLOCK = eINSTANCE.getBlock();
+    EClass BLOCK_STATEMENT = eINSTANCE.getBlockStatement();
 
     /**
      * The meta object literal for the '<em><b>Statements</b></em>' containment reference list feature.
@@ -5150,7 +5141,7 @@ public interface AstPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference BLOCK__STATEMENTS = eINSTANCE.getBlock_Statements();
+    EReference BLOCK_STATEMENT__STATEMENTS = eINSTANCE.getBlockStatement_Statements();
 
     /**
      * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.ExpressionStatementImpl <em>Expression Statement</em>}' class.
@@ -6203,24 +6194,6 @@ public interface AstPackage extends EPackage
     EReference LOGICAL_AND_EXPRESSION__OPERANDS = eINSTANCE.getLogicalAndExpression_Operands();
 
     /**
-     * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.LogicalNotExpressionImpl <em>Logical Not Expression</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipselabs.mscript.language.ast.impl.LogicalNotExpressionImpl
-     * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getLogicalNotExpression()
-     * @generated
-     */
-    EClass LOGICAL_NOT_EXPRESSION = eINSTANCE.getLogicalNotExpression();
-
-    /**
-     * The meta object literal for the '<em><b>Operand</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference LOGICAL_NOT_EXPRESSION__OPERAND = eINSTANCE.getLogicalNotExpression_Operand();
-
-    /**
      * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.RelationalExpressionImpl <em>Relational Expression</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -6357,14 +6330,22 @@ public interface AstPackage extends EPackage
     EReference POWER_EXPRESSION__EXPONENT = eINSTANCE.getPowerExpression_Exponent();
 
     /**
-     * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.UnaryMinusExpressionImpl <em>Unary Minus Expression</em>}' class.
+     * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.UnaryExpressionImpl <em>Unary Expression</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.eclipselabs.mscript.language.ast.impl.UnaryMinusExpressionImpl
-     * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getUnaryMinusExpression()
+     * @see org.eclipselabs.mscript.language.ast.impl.UnaryExpressionImpl
+     * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getUnaryExpression()
      * @generated
      */
-    EClass UNARY_MINUS_EXPRESSION = eINSTANCE.getUnaryMinusExpression();
+    EClass UNARY_EXPRESSION = eINSTANCE.getUnaryExpression();
+
+    /**
+     * The meta object literal for the '<em><b>Operator</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute UNARY_EXPRESSION__OPERATOR = eINSTANCE.getUnaryExpression_Operator();
 
     /**
      * The meta object literal for the '<em><b>Operand</b></em>' containment reference feature.
@@ -6372,7 +6353,7 @@ public interface AstPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference UNARY_MINUS_EXPRESSION__OPERAND = eINSTANCE.getUnaryMinusExpression_Operand();
+    EReference UNARY_EXPRESSION__OPERAND = eINSTANCE.getUnaryExpression_Operand();
 
     /**
      * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.FeatureCallImpl <em>Feature Call</em>}' class.
@@ -6449,6 +6430,16 @@ public interface AstPackage extends EPackage
      * @generated
      */
     EEnum POWER_OPERATOR = eINSTANCE.getPowerOperator();
+
+    /**
+     * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.UnaryOperator <em>Unary Operator</em>}' enum.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipselabs.mscript.language.ast.UnaryOperator
+     * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getUnaryOperator()
+     * @generated
+     */
+    EEnum UNARY_OPERATOR = eINSTANCE.getUnaryOperator();
 
     /**
      * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.BooleanKind <em>Boolean Kind</em>}' enum.

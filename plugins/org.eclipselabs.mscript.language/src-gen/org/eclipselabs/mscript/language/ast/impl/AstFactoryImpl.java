@@ -85,7 +85,7 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
       case AstPackage.PARAMETER_DECLARATION: return createParameterDeclaration();
       case AstPackage.PRECONDITION_CHAIN: return createPreconditionChain();
       case AstPackage.STATEMENT: return createStatement();
-      case AstPackage.BLOCK: return createBlock();
+      case AstPackage.BLOCK_STATEMENT: return createBlockStatement();
       case AstPackage.EXPRESSION_STATEMENT: return createExpressionStatement();
       case AstPackage.IF_STATEMENT: return createIfStatement();
       case AstPackage.IF_CASE: return createIfCase();
@@ -139,12 +139,11 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
       case AstPackage.RANGE_EXPRESSION: return createRangeExpression();
       case AstPackage.LOGICAL_OR_EXPRESSION: return createLogicalOrExpression();
       case AstPackage.LOGICAL_AND_EXPRESSION: return createLogicalAndExpression();
-      case AstPackage.LOGICAL_NOT_EXPRESSION: return createLogicalNotExpression();
       case AstPackage.RELATIONAL_EXPRESSION: return createRelationalExpression();
       case AstPackage.ADD_SUBTRACT_EXPRESSION: return createAddSubtractExpression();
       case AstPackage.MULTIPLY_DIVIDE_EXPRESSION: return createMultiplyDivideExpression();
       case AstPackage.POWER_EXPRESSION: return createPowerExpression();
-      case AstPackage.UNARY_MINUS_EXPRESSION: return createUnaryMinusExpression();
+      case AstPackage.UNARY_EXPRESSION: return createUnaryExpression();
       case AstPackage.FEATURE_CALL: return createFeatureCall();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -171,6 +170,8 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
         return createMultiplyDivideOperatorFromString(eDataType, initialValue);
       case AstPackage.POWER_OPERATOR:
         return createPowerOperatorFromString(eDataType, initialValue);
+      case AstPackage.UNARY_OPERATOR:
+        return createUnaryOperatorFromString(eDataType, initialValue);
       case AstPackage.BOOLEAN_KIND:
         return createBooleanKindFromString(eDataType, initialValue);
       default:
@@ -198,6 +199,8 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
         return convertMultiplyDivideOperatorToString(eDataType, instanceValue);
       case AstPackage.POWER_OPERATOR:
         return convertPowerOperatorToString(eDataType, instanceValue);
+      case AstPackage.UNARY_OPERATOR:
+        return convertUnaryOperatorToString(eDataType, instanceValue);
       case AstPackage.BOOLEAN_KIND:
         return convertBooleanKindToString(eDataType, instanceValue);
       default:
@@ -397,10 +400,10 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public Block createBlock()
+  public BlockStatement createBlockStatement()
   {
-    BlockImpl block = new BlockImpl();
-    return block;
+    BlockStatementImpl blockStatement = new BlockStatementImpl();
+    return blockStatement;
   }
 
   /**
@@ -991,17 +994,6 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public LogicalNotExpression createLogicalNotExpression()
-  {
-    LogicalNotExpressionImpl logicalNotExpression = new LogicalNotExpressionImpl();
-    return logicalNotExpression;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public RelationalExpression createRelationalExpression()
   {
     RelationalExpressionImpl relationalExpression = new RelationalExpressionImpl();
@@ -1046,10 +1038,10 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public UnaryMinusExpression createUnaryMinusExpression()
+  public UnaryExpression createUnaryExpression()
   {
-    UnaryMinusExpressionImpl unaryMinusExpression = new UnaryMinusExpressionImpl();
-    return unaryMinusExpression;
+    UnaryExpressionImpl unaryExpression = new UnaryExpressionImpl();
+    return unaryExpression;
   }
 
   /**
@@ -1169,6 +1161,28 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * @generated
    */
   public String convertPowerOperatorToString(EDataType eDataType, Object instanceValue)
+  {
+    return instanceValue == null ? null : instanceValue.toString();
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public UnaryOperator createUnaryOperatorFromString(EDataType eDataType, String initialValue)
+  {
+    UnaryOperator result = UnaryOperator.get(initialValue);
+    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+    return result;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String convertUnaryOperatorToString(EDataType eDataType, Object instanceValue)
   {
     return instanceValue == null ? null : instanceValue.toString();
   }

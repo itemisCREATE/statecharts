@@ -7,8 +7,11 @@
 package org.eclipselabs.mscript.typesystem.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipselabs.mscript.typesystem.DataType;
+import org.eclipselabs.mscript.typesystem.OperatorKind;
 import org.eclipselabs.mscript.typesystem.TypeSystemPackage;
 import org.eclipselabs.mscript.typesystem.UnitType;
+import org.eclipselabs.mscript.typesystem.internal.operations.UnitTypeOperations;
 
 /**
  * <!-- begin-user-doc -->
@@ -37,6 +40,26 @@ public class UnitTypeImpl extends DataTypeImpl implements UnitType {
 	@Override
 	protected EClass eStaticClass() {
 		return TypeSystemPackage.Literals.UNIT_TYPE;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public DataType evaluate(OperatorKind operator, DataType other) {
+		return UnitTypeOperations.evaluate(this, operator, other);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public DataType evaluatePower(int exponent) {
+		return UnitTypeOperations.evaluatePower(this, exponent);
 	}
 
 } //UnitTypeImpl

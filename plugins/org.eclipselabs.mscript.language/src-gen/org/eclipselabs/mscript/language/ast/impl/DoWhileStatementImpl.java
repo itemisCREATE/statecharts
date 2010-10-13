@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipselabs.mscript.language.ast.AstPackage;
-import org.eclipselabs.mscript.language.ast.Block;
+import org.eclipselabs.mscript.language.ast.BlockStatement;
 import org.eclipselabs.mscript.language.ast.DoWhileStatement;
 import org.eclipselabs.mscript.language.ast.Expression;
 
@@ -42,7 +42,7 @@ public class DoWhileStatementImpl extends StatementImpl implements DoWhileStatem
    * @generated
    * @ordered
    */
-  protected Block body;
+  protected BlockStatement body;
 
   /**
    * The cached value of the '{@link #getPredicate() <em>Predicate</em>}' containment reference.
@@ -80,7 +80,7 @@ public class DoWhileStatementImpl extends StatementImpl implements DoWhileStatem
    * <!-- end-user-doc -->
    * @generated
    */
-  public Block getBody()
+  public BlockStatement getBody()
   {
     return body;
   }
@@ -90,9 +90,9 @@ public class DoWhileStatementImpl extends StatementImpl implements DoWhileStatem
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetBody(Block newBody, NotificationChain msgs)
+  public NotificationChain basicSetBody(BlockStatement newBody, NotificationChain msgs)
   {
-    Block oldBody = body;
+    BlockStatement oldBody = body;
     body = newBody;
     if (eNotificationRequired())
     {
@@ -107,7 +107,7 @@ public class DoWhileStatementImpl extends StatementImpl implements DoWhileStatem
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setBody(Block newBody)
+  public void setBody(BlockStatement newBody)
   {
     if (newBody != body)
     {
@@ -218,7 +218,7 @@ public class DoWhileStatementImpl extends StatementImpl implements DoWhileStatem
     switch (featureID)
     {
       case AstPackage.DO_WHILE_STATEMENT__BODY:
-        setBody((Block)newValue);
+        setBody((BlockStatement)newValue);
         return;
       case AstPackage.DO_WHILE_STATEMENT__PREDICATE:
         setPredicate((Expression)newValue);
@@ -238,7 +238,7 @@ public class DoWhileStatementImpl extends StatementImpl implements DoWhileStatem
     switch (featureID)
     {
       case AstPackage.DO_WHILE_STATEMENT__BODY:
-        setBody((Block)null);
+        setBody((BlockStatement)null);
         return;
       case AstPackage.DO_WHILE_STATEMENT__PREDICATE:
         setPredicate((Expression)null);

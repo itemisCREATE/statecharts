@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipselabs.mscript.language.ast.AstPackage;
-import org.eclipselabs.mscript.language.ast.Block;
+import org.eclipselabs.mscript.language.ast.BlockStatement;
 import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.ast.WhileStatement;
 
@@ -52,7 +52,7 @@ public class WhileStatementImpl extends StatementImpl implements WhileStatement
    * @generated
    * @ordered
    */
-  protected Block body;
+  protected BlockStatement body;
 
   /**
    * <!-- begin-user-doc -->
@@ -128,7 +128,7 @@ public class WhileStatementImpl extends StatementImpl implements WhileStatement
    * <!-- end-user-doc -->
    * @generated
    */
-  public Block getBody()
+  public BlockStatement getBody()
   {
     return body;
   }
@@ -138,9 +138,9 @@ public class WhileStatementImpl extends StatementImpl implements WhileStatement
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetBody(Block newBody, NotificationChain msgs)
+  public NotificationChain basicSetBody(BlockStatement newBody, NotificationChain msgs)
   {
-    Block oldBody = body;
+    BlockStatement oldBody = body;
     body = newBody;
     if (eNotificationRequired())
     {
@@ -155,7 +155,7 @@ public class WhileStatementImpl extends StatementImpl implements WhileStatement
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setBody(Block newBody)
+  public void setBody(BlockStatement newBody)
   {
     if (newBody != body)
     {
@@ -221,7 +221,7 @@ public class WhileStatementImpl extends StatementImpl implements WhileStatement
         setPredicate((Expression)newValue);
         return;
       case AstPackage.WHILE_STATEMENT__BODY:
-        setBody((Block)newValue);
+        setBody((BlockStatement)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -241,7 +241,7 @@ public class WhileStatementImpl extends StatementImpl implements WhileStatement
         setPredicate((Expression)null);
         return;
       case AstPackage.WHILE_STATEMENT__BODY:
-        setBody((Block)null);
+        setBody((BlockStatement)null);
         return;
     }
     super.eUnset(featureID);

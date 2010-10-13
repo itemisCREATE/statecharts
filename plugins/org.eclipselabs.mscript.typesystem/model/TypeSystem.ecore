@@ -60,6 +60,9 @@
       <eParameters name="operator" ordered="false" lowerBound="1" eType="#//OperatorKind"/>
       <eParameters name="other" ordered="false" eType="#//DataType"/>
     </eOperations>
+    <eOperations name="evaluatePower" ordered="false" lowerBound="1" eType="#//DataType">
+      <eParameters name="exponent" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
     <eOperations name="isAssignableFrom" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eParameters name="other" ordered="false" lowerBound="1" eType="#//DataType"/>
     </eOperations>
@@ -75,6 +78,15 @@
     <eLiterals name="ElementWiseMultiply" value="4"/>
     <eLiterals name="ElementWiseDivide" value="5"/>
     <eLiterals name="UnaryMinus" value="6"/>
+    <eLiterals name="LogicalAnd" value="7"/>
+    <eLiterals name="LogicalOr" value="8"/>
+    <eLiterals name="LogicalNot" value="9"/>
+    <eLiterals name="LessThan" value="10"/>
+    <eLiterals name="LessThanOrEqualTo" value="11"/>
+    <eLiterals name="GreaterThan" value="12"/>
+    <eLiterals name="GreaterThanOrEqualTo" value="13"/>
+    <eLiterals name="EqualTo" value="14"/>
+    <eLiterals name="NotEqualTo" value="15"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ArrayDimension">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="beginIndex" ordered="false"
@@ -86,14 +98,33 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" changeable="false"
         volatile="true" transient="true" derived="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="PrimitiveType" abstract="true" eSuperTypes="#//DataType"/>
-  <eClassifiers xsi:type="ecore:EClass" name="RealType" eSuperTypes="#//NumericalType">
+  <eClassifiers xsi:type="ecore:EClass" name="PrimitiveType" abstract="true" eSuperTypes="#//DataType">
     <eAnnotations source="duplicates">
       <contents xsi:type="ecore:EOperation" name="evaluate" ordered="false" lowerBound="1"
           eType="#//DataType">
         <eAnnotations source="redefines" references="#//DataType/evaluate"/>
         <eParameters name="operator" ordered="false" lowerBound="1" eType="#//OperatorKind"/>
         <eParameters name="other" ordered="false" eType="#//DataType"/>
+      </contents>
+      <contents xsi:type="ecore:EOperation" name="evaluatePower" ordered="false" lowerBound="1"
+          eType="#//DataType">
+        <eAnnotations source="redefines" references="#//DataType/evaluatePower"/>
+        <eParameters name="exponent" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      </contents>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RealType" eSuperTypes="#//NumericalType">
+    <eAnnotations source="duplicates">
+      <contents xsi:type="ecore:EOperation" name="evaluate" ordered="false" lowerBound="1"
+          eType="#//DataType">
+        <eAnnotations source="redefines" references="#//DataType/evaluate #//PrimitiveType/%duplicates%/evaluate"/>
+        <eParameters name="operator" ordered="false" lowerBound="1" eType="#//OperatorKind"/>
+        <eParameters name="other" ordered="false" eType="#//DataType"/>
+      </contents>
+      <contents xsi:type="ecore:EOperation" name="evaluatePower" ordered="false" lowerBound="1"
+          eType="#//DataType">
+        <eAnnotations source="redefines" references="#//DataType/evaluatePower #//PrimitiveType/%duplicates%/evaluatePower"/>
+        <eParameters name="exponent" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
       </contents>
       <contents xsi:type="ecore:EOperation" name="isAssignableFrom" ordered="false"
           lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
@@ -148,9 +179,14 @@
     <eAnnotations source="duplicates">
       <contents xsi:type="ecore:EOperation" name="evaluate" ordered="false" lowerBound="1"
           eType="#//DataType">
-        <eAnnotations source="redefines" references="#//DataType/evaluate"/>
+        <eAnnotations source="redefines" references="#//DataType/evaluate #//PrimitiveType/%duplicates%/evaluate"/>
         <eParameters name="operator" ordered="false" lowerBound="1" eType="#//OperatorKind"/>
         <eParameters name="other" ordered="false" eType="#//DataType"/>
+      </contents>
+      <contents xsi:type="ecore:EOperation" name="evaluatePower" ordered="false" lowerBound="1"
+          eType="#//DataType">
+        <eAnnotations source="redefines" references="#//DataType/evaluatePower #//PrimitiveType/%duplicates%/evaluatePower"/>
+        <eParameters name="exponent" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
       </contents>
       <contents xsi:type="ecore:EOperation" name="isAssignableFrom" ordered="false"
           lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
@@ -161,6 +197,12 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BooleanType" eSuperTypes="#//PrimitiveType">
     <eAnnotations source="duplicates">
+      <contents xsi:type="ecore:EOperation" name="evaluate" ordered="false" lowerBound="1"
+          eType="#//DataType">
+        <eAnnotations source="redefines" references="#//DataType/evaluate #//PrimitiveType/%duplicates%/evaluate"/>
+        <eParameters name="operator" ordered="false" lowerBound="1" eType="#//OperatorKind"/>
+        <eParameters name="other" ordered="false" eType="#//DataType"/>
+      </contents>
       <contents xsi:type="ecore:EOperation" name="isAssignableFrom" ordered="false"
           lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
         <eAnnotations source="redefines" references="#//DataType/isAssignableFrom"/>
@@ -236,5 +278,19 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         unsettable="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="UnitType" eSuperTypes="#//DataType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UnitType" eSuperTypes="#//DataType">
+    <eAnnotations source="duplicates">
+      <contents xsi:type="ecore:EOperation" name="evaluate" ordered="false" lowerBound="1"
+          eType="#//DataType">
+        <eAnnotations source="redefines" references="#//DataType/evaluate"/>
+        <eParameters name="operator" ordered="false" lowerBound="1" eType="#//OperatorKind"/>
+        <eParameters name="other" ordered="false" eType="#//DataType"/>
+      </contents>
+      <contents xsi:type="ecore:EOperation" name="evaluatePower" ordered="false" lowerBound="1"
+          eType="#//DataType">
+        <eAnnotations source="redefines" references="#//DataType/evaluatePower"/>
+        <eParameters name="exponent" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      </contents>
+    </eAnnotations>
+  </eClassifiers>
 </ecore:EPackage>
