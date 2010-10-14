@@ -27,8 +27,6 @@ import org.eclipselabs.mscript.language.ast.Expression;
  * <ul>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.ArrayDimensionSpecificationImpl#isUnspecified <em>Unspecified</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.ArrayDimensionSpecificationImpl#getSize <em>Size</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.ArrayDimensionSpecificationImpl#getBeginIndex <em>Begin Index</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.ArrayDimensionSpecificationImpl#getEndIndex <em>End Index</em>}</li>
  * </ul>
  * </p>
  *
@@ -65,26 +63,6 @@ public class ArrayDimensionSpecificationImpl extends MinimalEObjectImpl.Containe
    * @ordered
    */
   protected Expression size;
-
-  /**
-   * The cached value of the '{@link #getBeginIndex() <em>Begin Index</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getBeginIndex()
-   * @generated
-   * @ordered
-   */
-  protected ArrayDimensionSpecification beginIndex;
-
-  /**
-   * The cached value of the '{@link #getEndIndex() <em>End Index</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getEndIndex()
-   * @generated
-   * @ordered
-   */
-  protected Expression endIndex;
 
   /**
    * <!-- begin-user-doc -->
@@ -183,102 +161,6 @@ public class ArrayDimensionSpecificationImpl extends MinimalEObjectImpl.Containe
    * <!-- end-user-doc -->
    * @generated
    */
-  public ArrayDimensionSpecification getBeginIndex()
-  {
-    return beginIndex;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetBeginIndex(ArrayDimensionSpecification newBeginIndex, NotificationChain msgs)
-  {
-    ArrayDimensionSpecification oldBeginIndex = beginIndex;
-    beginIndex = newBeginIndex;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.ARRAY_DIMENSION_SPECIFICATION__BEGIN_INDEX, oldBeginIndex, newBeginIndex);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setBeginIndex(ArrayDimensionSpecification newBeginIndex)
-  {
-    if (newBeginIndex != beginIndex)
-    {
-      NotificationChain msgs = null;
-      if (beginIndex != null)
-        msgs = ((InternalEObject)beginIndex).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.ARRAY_DIMENSION_SPECIFICATION__BEGIN_INDEX, null, msgs);
-      if (newBeginIndex != null)
-        msgs = ((InternalEObject)newBeginIndex).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.ARRAY_DIMENSION_SPECIFICATION__BEGIN_INDEX, null, msgs);
-      msgs = basicSetBeginIndex(newBeginIndex, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.ARRAY_DIMENSION_SPECIFICATION__BEGIN_INDEX, newBeginIndex, newBeginIndex));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Expression getEndIndex()
-  {
-    return endIndex;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetEndIndex(Expression newEndIndex, NotificationChain msgs)
-  {
-    Expression oldEndIndex = endIndex;
-    endIndex = newEndIndex;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.ARRAY_DIMENSION_SPECIFICATION__END_INDEX, oldEndIndex, newEndIndex);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setEndIndex(Expression newEndIndex)
-  {
-    if (newEndIndex != endIndex)
-    {
-      NotificationChain msgs = null;
-      if (endIndex != null)
-        msgs = ((InternalEObject)endIndex).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.ARRAY_DIMENSION_SPECIFICATION__END_INDEX, null, msgs);
-      if (newEndIndex != null)
-        msgs = ((InternalEObject)newEndIndex).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.ARRAY_DIMENSION_SPECIFICATION__END_INDEX, null, msgs);
-      msgs = basicSetEndIndex(newEndIndex, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.ARRAY_DIMENSION_SPECIFICATION__END_INDEX, newEndIndex, newEndIndex));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -286,10 +168,6 @@ public class ArrayDimensionSpecificationImpl extends MinimalEObjectImpl.Containe
     {
       case AstPackage.ARRAY_DIMENSION_SPECIFICATION__SIZE:
         return basicSetSize(null, msgs);
-      case AstPackage.ARRAY_DIMENSION_SPECIFICATION__BEGIN_INDEX:
-        return basicSetBeginIndex(null, msgs);
-      case AstPackage.ARRAY_DIMENSION_SPECIFICATION__END_INDEX:
-        return basicSetEndIndex(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -308,10 +186,6 @@ public class ArrayDimensionSpecificationImpl extends MinimalEObjectImpl.Containe
         return isUnspecified();
       case AstPackage.ARRAY_DIMENSION_SPECIFICATION__SIZE:
         return getSize();
-      case AstPackage.ARRAY_DIMENSION_SPECIFICATION__BEGIN_INDEX:
-        return getBeginIndex();
-      case AstPackage.ARRAY_DIMENSION_SPECIFICATION__END_INDEX:
-        return getEndIndex();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -331,12 +205,6 @@ public class ArrayDimensionSpecificationImpl extends MinimalEObjectImpl.Containe
         return;
       case AstPackage.ARRAY_DIMENSION_SPECIFICATION__SIZE:
         setSize((Expression)newValue);
-        return;
-      case AstPackage.ARRAY_DIMENSION_SPECIFICATION__BEGIN_INDEX:
-        setBeginIndex((ArrayDimensionSpecification)newValue);
-        return;
-      case AstPackage.ARRAY_DIMENSION_SPECIFICATION__END_INDEX:
-        setEndIndex((Expression)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -358,12 +226,6 @@ public class ArrayDimensionSpecificationImpl extends MinimalEObjectImpl.Containe
       case AstPackage.ARRAY_DIMENSION_SPECIFICATION__SIZE:
         setSize((Expression)null);
         return;
-      case AstPackage.ARRAY_DIMENSION_SPECIFICATION__BEGIN_INDEX:
-        setBeginIndex((ArrayDimensionSpecification)null);
-        return;
-      case AstPackage.ARRAY_DIMENSION_SPECIFICATION__END_INDEX:
-        setEndIndex((Expression)null);
-        return;
     }
     super.eUnset(featureID);
   }
@@ -382,10 +244,6 @@ public class ArrayDimensionSpecificationImpl extends MinimalEObjectImpl.Containe
         return unspecified != UNSPECIFIED_EDEFAULT;
       case AstPackage.ARRAY_DIMENSION_SPECIFICATION__SIZE:
         return size != null;
-      case AstPackage.ARRAY_DIMENSION_SPECIFICATION__BEGIN_INDEX:
-        return beginIndex != null;
-      case AstPackage.ARRAY_DIMENSION_SPECIFICATION__END_INDEX:
-        return endIndex != null;
     }
     return super.eIsSet(featureID);
   }

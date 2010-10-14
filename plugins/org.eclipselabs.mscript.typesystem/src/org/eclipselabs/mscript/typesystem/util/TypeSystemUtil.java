@@ -56,7 +56,7 @@ public class TypeSystemUtil {
 	private static void initializeArrayDimensions(ArrayType arrayType, int... sizes) {
 		for (int size : sizes) {
 			ArrayDimension dimension = TypeSystemFactory.eINSTANCE.createArrayDimension();
-			dimension.setEndIndex(size);
+			dimension.setSize(size);
 			arrayType.getDimensions().add(dimension);
 		}
 	}

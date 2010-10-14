@@ -548,31 +548,13 @@ public interface TypeSystemPackage extends EPackage {
 	int ARRAY_TYPE_FEATURE_COUNT = DATA_TYPE_FEATURE_COUNT + 7;
 
 	/**
-	 * The feature id for the '<em><b>Begin Index</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARRAY_DIMENSION__BEGIN_INDEX = 0;
-
-	/**
-	 * The feature id for the '<em><b>End Index</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARRAY_DIMENSION__END_INDEX = 1;
-
-	/**
 	 * The feature id for the '<em><b>Size</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ARRAY_DIMENSION__SIZE = 2;
+	int ARRAY_DIMENSION__SIZE = 0;
 
 	/**
 	 * The number of structural features of the '<em>Array Dimension</em>' class.
@@ -581,7 +563,7 @@ public interface TypeSystemPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ARRAY_DIMENSION_FEATURE_COUNT = 3;
+	int ARRAY_DIMENSION_FEATURE_COUNT = 1;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1603,28 +1585,6 @@ public interface TypeSystemPackage extends EPackage {
 	EClass getArrayDimension();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.typesystem.ArrayDimension#getBeginIndex <em>Begin Index</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Begin Index</em>'.
-	 * @see org.eclipselabs.mscript.typesystem.ArrayDimension#getBeginIndex()
-	 * @see #getArrayDimension()
-	 * @generated
-	 */
-	EAttribute getArrayDimension_BeginIndex();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.typesystem.ArrayDimension#getEndIndex <em>End Index</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>End Index</em>'.
-	 * @see org.eclipselabs.mscript.typesystem.ArrayDimension#getEndIndex()
-	 * @see #getArrayDimension()
-	 * @generated
-	 */
-	EAttribute getArrayDimension_EndIndex();
-
-	/**
 	 * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.typesystem.ArrayDimension#getSize <em>Size</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2166,22 +2126,6 @@ public interface TypeSystemPackage extends EPackage {
 		 * @generated
 		 */
 		EClass ARRAY_DIMENSION = eINSTANCE.getArrayDimension();
-
-		/**
-		 * The meta object literal for the '<em><b>Begin Index</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ARRAY_DIMENSION__BEGIN_INDEX = eINSTANCE.getArrayDimension_BeginIndex();
-
-		/**
-		 * The meta object literal for the '<em><b>End Index</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ARRAY_DIMENSION__END_INDEX = eINSTANCE.getArrayDimension_EndIndex();
 
 		/**
 		 * The meta object literal for the '<em><b>Size</b></em>' attribute feature.

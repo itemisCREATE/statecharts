@@ -1395,31 +1395,13 @@ public interface AstPackage extends EPackage
   int ARRAY_DIMENSION_SPECIFICATION__SIZE = 1;
 
   /**
-   * The feature id for the '<em><b>Begin Index</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ARRAY_DIMENSION_SPECIFICATION__BEGIN_INDEX = 2;
-
-  /**
-   * The feature id for the '<em><b>End Index</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ARRAY_DIMENSION_SPECIFICATION__END_INDEX = 3;
-
-  /**
    * The number of structural features of the '<em>Array Dimension Specification</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ARRAY_DIMENSION_SPECIFICATION_FEATURE_COUNT = 4;
+  int ARRAY_DIMENSION_SPECIFICATION_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.UnitTypeSpecifierImpl <em>Unit Type Specifier</em>}' class.
@@ -1507,13 +1489,13 @@ public interface AstPackage extends EPackage
   int CONDITIONAL_EXPRESSION_CASE = 41;
 
   /**
-   * The feature id for the '<em><b>Condition Expression</b></em>' containment reference.
+   * The feature id for the '<em><b>Condition</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int CONDITIONAL_EXPRESSION_CASE__CONDITION_EXPRESSION = 0;
+  int CONDITIONAL_EXPRESSION_CASE__CONDITION = 0;
 
   /**
    * The feature id for the '<em><b>Then Expression</b></em>' containment reference.
@@ -3645,28 +3627,6 @@ public interface AstPackage extends EPackage
   EReference getArrayDimensionSpecification_Size();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.ArrayDimensionSpecification#getBeginIndex <em>Begin Index</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Begin Index</em>'.
-   * @see org.eclipselabs.mscript.language.ast.ArrayDimensionSpecification#getBeginIndex()
-   * @see #getArrayDimensionSpecification()
-   * @generated
-   */
-  EReference getArrayDimensionSpecification_BeginIndex();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.ArrayDimensionSpecification#getEndIndex <em>End Index</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>End Index</em>'.
-   * @see org.eclipselabs.mscript.language.ast.ArrayDimensionSpecification#getEndIndex()
-   * @see #getArrayDimensionSpecification()
-   * @generated
-   */
-  EReference getArrayDimensionSpecification_EndIndex();
-
-  /**
    * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.UnitTypeSpecifier <em>Unit Type Specifier</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -3729,15 +3689,15 @@ public interface AstPackage extends EPackage
   EClass getConditionalExpressionCase();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.ConditionalExpressionCase#getConditionExpression <em>Condition Expression</em>}'.
+   * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.ConditionalExpressionCase#getCondition <em>Condition</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Condition Expression</em>'.
-   * @see org.eclipselabs.mscript.language.ast.ConditionalExpressionCase#getConditionExpression()
+   * @return the meta object for the containment reference '<em>Condition</em>'.
+   * @see org.eclipselabs.mscript.language.ast.ConditionalExpressionCase#getCondition()
    * @see #getConditionalExpressionCase()
    * @generated
    */
-  EReference getConditionalExpressionCase_ConditionExpression();
+  EReference getConditionalExpressionCase_Condition();
 
   /**
    * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.ConditionalExpressionCase#getThenExpression <em>Then Expression</em>}'.
@@ -5512,22 +5472,6 @@ public interface AstPackage extends EPackage
     EReference ARRAY_DIMENSION_SPECIFICATION__SIZE = eINSTANCE.getArrayDimensionSpecification_Size();
 
     /**
-     * The meta object literal for the '<em><b>Begin Index</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference ARRAY_DIMENSION_SPECIFICATION__BEGIN_INDEX = eINSTANCE.getArrayDimensionSpecification_BeginIndex();
-
-    /**
-     * The meta object literal for the '<em><b>End Index</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference ARRAY_DIMENSION_SPECIFICATION__END_INDEX = eINSTANCE.getArrayDimensionSpecification_EndIndex();
-
-    /**
      * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.UnitTypeSpecifierImpl <em>Unit Type Specifier</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -5584,12 +5528,12 @@ public interface AstPackage extends EPackage
     EClass CONDITIONAL_EXPRESSION_CASE = eINSTANCE.getConditionalExpressionCase();
 
     /**
-     * The meta object literal for the '<em><b>Condition Expression</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Condition</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference CONDITIONAL_EXPRESSION_CASE__CONDITION_EXPRESSION = eINSTANCE.getConditionalExpressionCase_ConditionExpression();
+    EReference CONDITIONAL_EXPRESSION_CASE__CONDITION = eINSTANCE.getConditionalExpressionCase_Condition();
 
     /**
      * The meta object literal for the '<em><b>Then Expression</b></em>' containment reference feature.

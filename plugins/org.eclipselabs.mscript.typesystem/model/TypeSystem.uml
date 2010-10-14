@@ -156,18 +156,7 @@
       <ownedAttribute xmi:id="_1W70MHyEEd-o9uob8q6Zlg" name="enumeration" type="_AewtgHMfEd-9E7QZMDWyTg" subsettedProperty="_x_AyYINkEd-Jwv-I5tZZDg" association="_9AlGIHyEEd-o9uob8q6Zlg"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_wV7t4HPQEd-S94eRjnXSAQ" name="ArrayDimension">
-      <ownedAttribute xmi:id="_z8asYHPQEd-S94eRjnXSAQ" name="beginIndex" aggregation="composite">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
-        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_rhOVALOHEd-dWNaurKNeNQ" value="1"/>
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_rhPjILOHEd-dWNaurKNeNQ" value="1"/>
-        <defaultValue xmi:type="uml:LiteralString" xmi:id="_2pQfMNBsEd-P2NmVd1p3QQ" value="1"/>
-      </ownedAttribute>
-      <ownedAttribute xmi:id="_tOuP4HPREd-S94eRjnXSAQ" name="endIndex" aggregation="composite">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
-        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_sJ8h4LOHEd-dWNaurKNeNQ" value="1"/>
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_sJ8h4bOHEd-dWNaurKNeNQ" value="1"/>
-      </ownedAttribute>
-      <ownedAttribute xmi:id="_Mw19YHPTEd-S94eRjnXSAQ" name="size" isReadOnly="true" isDerived="true" aggregation="composite">
+      <ownedAttribute xmi:id="_Mw19YHPTEd-S94eRjnXSAQ" name="size" aggregation="composite">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
       </ownedAttribute>
     </packagedElement>
@@ -431,7 +420,6 @@
   <Ecore:EDataType xmi:id="_5Van0HPEEd-S94eRjnXSAQ" instanceClassName="long"/>
   <Ecore:EAttribute xmi:id="_CQWigHPFEd-S94eRjnXSAQ" isUnsettable="true"/>
   <Ecore:EAttribute xmi:id="_CyfmQHPFEd-S94eRjnXSAQ" isUnsettable="true"/>
-  <Ecore:EAttribute xmi:id="_Seqb0HPTEd-S94eRjnXSAQ" isTransient="true" base_Property="_Mw19YHPTEd-S94eRjnXSAQ"/>
   <Ecore:EEnumLiteral xmi:id="_hYtwcHVsEd-SucsAP3qLAg" base_EnumerationLiteral="_HL9tgHVdEd-ou8M-XcTk7Q" literal="m"/>
   <Ecore:EEnumLiteral xmi:id="_sJmgIHVsEd-SucsAP3qLAg" base_EnumerationLiteral="_9Vd3kHVeEd-ou8M-XcTk7Q" literal="kg"/>
   <Ecore:EEnumLiteral xmi:id="_shI2YHVsEd-SucsAP3qLAg" base_EnumerationLiteral="__R5IAHVeEd-ou8M-XcTk7Q" literal="s"/>

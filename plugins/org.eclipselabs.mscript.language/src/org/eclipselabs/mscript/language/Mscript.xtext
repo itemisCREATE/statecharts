@@ -186,7 +186,7 @@ NamedTypeSpecifier :
 	typeReference=SymbolReference ('[' dimensions+=ArrayDimensionSpecification (',' dimensions+=ArrayDimensionSpecification)* ']')?;
 	
 ArrayDimensionSpecification :
-	unspecified?='?' | size=Expression ({ArrayDimensionSpecification.beginIndex=current} '..' endIndex=Expression)?;
+	unspecified?='?' | size=Expression;
 	
 UnitTypeSpecifier :
 	{UnitTypeSpecifier} 'unit';
@@ -202,7 +202,7 @@ ConditionalExpression :
 	'if' cases+=ConditionalExpressionCase ('elseif' cases+=ConditionalExpressionCase)* 'else' elseExpression=Expression;
 	
 ConditionalExpressionCase:
-	conditionExpression=Expression 'then' thenExpression=Expression;
+	condition=Expression 'then' thenExpression=Expression;
 
 RangeExpression returns Expression :
 	LogicalOrExpression ({RangeExpression.begin=current} ':' end=LogicalOrExpression ({RangeExpression.increment=current} ':' end=LogicalOrExpression)?)?;

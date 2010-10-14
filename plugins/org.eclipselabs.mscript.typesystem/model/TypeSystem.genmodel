@@ -104,8 +104,6 @@
       </genOperations>
     </genClasses>
     <genClasses xsi:type="genmodel:GenClass" ecoreClass="TypeSystem.ecore#//ArrayDimension">
-      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute TypeSystem.ecore#//ArrayDimension/beginIndex"/>
-      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute TypeSystem.ecore#//ArrayDimension/endIndex"/>
       <genFeatures xsi:type="genmodel:GenFeature" property="Readonly" createChild="false"
           ecoreFeature="ecore:EAttribute TypeSystem.ecore#//ArrayDimension/size"/>
     </genClasses>

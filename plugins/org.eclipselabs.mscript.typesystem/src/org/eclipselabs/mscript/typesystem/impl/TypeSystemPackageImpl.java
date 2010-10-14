@@ -468,26 +468,8 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getArrayDimension_BeginIndex() {
-		return (EAttribute)arrayDimensionEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getArrayDimension_EndIndex() {
-		return (EAttribute)arrayDimensionEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getArrayDimension_Size() {
-		return (EAttribute)arrayDimensionEClass.getEStructuralFeatures().get(2);
+		return (EAttribute)arrayDimensionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -840,8 +822,6 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 		dataTypeEClass = createEClass(DATA_TYPE);
 
 		arrayDimensionEClass = createEClass(ARRAY_DIMENSION);
-		createEAttribute(arrayDimensionEClass, ARRAY_DIMENSION__BEGIN_INDEX);
-		createEAttribute(arrayDimensionEClass, ARRAY_DIMENSION__END_INDEX);
 		createEAttribute(arrayDimensionEClass, ARRAY_DIMENSION__SIZE);
 
 		primitiveTypeEClass = createEClass(PRIMITIVE_TYPE);
@@ -988,9 +968,7 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 		addEParameter(op, this.getDataType(), "other", 1, 1, IS_UNIQUE, !IS_ORDERED);
 
 		initEClass(arrayDimensionEClass, ArrayDimension.class, "ArrayDimension", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getArrayDimension_BeginIndex(), ecorePackage.getEInt(), "beginIndex", "1", 1, 1, ArrayDimension.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEAttribute(getArrayDimension_EndIndex(), ecorePackage.getEInt(), "endIndex", null, 1, 1, ArrayDimension.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEAttribute(getArrayDimension_Size(), ecorePackage.getEInt(), "size", null, 1, 1, ArrayDimension.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getArrayDimension_Size(), ecorePackage.getEInt(), "size", null, 1, 1, ArrayDimension.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(primitiveTypeEClass, PrimitiveType.class, "PrimitiveType", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

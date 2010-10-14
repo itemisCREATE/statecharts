@@ -150,8 +150,6 @@
     <genClasses ecoreClass="Mscript.ecore#//ArrayDimensionSpecification">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//ArrayDimensionSpecification/unspecified"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ArrayDimensionSpecification/size"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ArrayDimensionSpecification/beginIndex"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ArrayDimensionSpecification/endIndex"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//UnitTypeSpecifier"/>
     <genClasses ecoreClass="Mscript.ecore#//Expression"/>
@@ -160,7 +158,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ConditionalExpression/elseExpression"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//ConditionalExpressionCase">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ConditionalExpressionCase/conditionExpression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ConditionalExpressionCase/condition"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ConditionalExpressionCase/thenExpression"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//AddSubtractExpressionPart">

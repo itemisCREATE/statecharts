@@ -25,7 +25,7 @@ import org.eclipselabs.mscript.language.ast.Expression;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.ConditionalExpressionCaseImpl#getConditionExpression <em>Condition Expression</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.ConditionalExpressionCaseImpl#getCondition <em>Condition</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.ConditionalExpressionCaseImpl#getThenExpression <em>Then Expression</em>}</li>
  * </ul>
  * </p>
@@ -35,14 +35,14 @@ import org.eclipselabs.mscript.language.ast.Expression;
 public class ConditionalExpressionCaseImpl extends MinimalEObjectImpl.Container implements ConditionalExpressionCase
 {
   /**
-   * The cached value of the '{@link #getConditionExpression() <em>Condition Expression</em>}' containment reference.
+   * The cached value of the '{@link #getCondition() <em>Condition</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getConditionExpression()
+   * @see #getCondition()
    * @generated
    * @ordered
    */
-  protected Expression conditionExpression;
+  protected Expression condition;
 
   /**
    * The cached value of the '{@link #getThenExpression() <em>Then Expression</em>}' containment reference.
@@ -80,9 +80,9 @@ public class ConditionalExpressionCaseImpl extends MinimalEObjectImpl.Container 
    * <!-- end-user-doc -->
    * @generated
    */
-  public Expression getConditionExpression()
+  public Expression getCondition()
   {
-    return conditionExpression;
+    return condition;
   }
 
   /**
@@ -90,13 +90,13 @@ public class ConditionalExpressionCaseImpl extends MinimalEObjectImpl.Container 
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetConditionExpression(Expression newConditionExpression, NotificationChain msgs)
+  public NotificationChain basicSetCondition(Expression newCondition, NotificationChain msgs)
   {
-    Expression oldConditionExpression = conditionExpression;
-    conditionExpression = newConditionExpression;
+    Expression oldCondition = condition;
+    condition = newCondition;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.CONDITIONAL_EXPRESSION_CASE__CONDITION_EXPRESSION, oldConditionExpression, newConditionExpression);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.CONDITIONAL_EXPRESSION_CASE__CONDITION, oldCondition, newCondition);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -107,20 +107,20 @@ public class ConditionalExpressionCaseImpl extends MinimalEObjectImpl.Container 
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setConditionExpression(Expression newConditionExpression)
+  public void setCondition(Expression newCondition)
   {
-    if (newConditionExpression != conditionExpression)
+    if (newCondition != condition)
     {
       NotificationChain msgs = null;
-      if (conditionExpression != null)
-        msgs = ((InternalEObject)conditionExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.CONDITIONAL_EXPRESSION_CASE__CONDITION_EXPRESSION, null, msgs);
-      if (newConditionExpression != null)
-        msgs = ((InternalEObject)newConditionExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.CONDITIONAL_EXPRESSION_CASE__CONDITION_EXPRESSION, null, msgs);
-      msgs = basicSetConditionExpression(newConditionExpression, msgs);
+      if (condition != null)
+        msgs = ((InternalEObject)condition).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.CONDITIONAL_EXPRESSION_CASE__CONDITION, null, msgs);
+      if (newCondition != null)
+        msgs = ((InternalEObject)newCondition).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.CONDITIONAL_EXPRESSION_CASE__CONDITION, null, msgs);
+      msgs = basicSetCondition(newCondition, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.CONDITIONAL_EXPRESSION_CASE__CONDITION_EXPRESSION, newConditionExpression, newConditionExpression));
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.CONDITIONAL_EXPRESSION_CASE__CONDITION, newCondition, newCondition));
   }
 
   /**
@@ -181,8 +181,8 @@ public class ConditionalExpressionCaseImpl extends MinimalEObjectImpl.Container 
   {
     switch (featureID)
     {
-      case AstPackage.CONDITIONAL_EXPRESSION_CASE__CONDITION_EXPRESSION:
-        return basicSetConditionExpression(null, msgs);
+      case AstPackage.CONDITIONAL_EXPRESSION_CASE__CONDITION:
+        return basicSetCondition(null, msgs);
       case AstPackage.CONDITIONAL_EXPRESSION_CASE__THEN_EXPRESSION:
         return basicSetThenExpression(null, msgs);
     }
@@ -199,8 +199,8 @@ public class ConditionalExpressionCaseImpl extends MinimalEObjectImpl.Container 
   {
     switch (featureID)
     {
-      case AstPackage.CONDITIONAL_EXPRESSION_CASE__CONDITION_EXPRESSION:
-        return getConditionExpression();
+      case AstPackage.CONDITIONAL_EXPRESSION_CASE__CONDITION:
+        return getCondition();
       case AstPackage.CONDITIONAL_EXPRESSION_CASE__THEN_EXPRESSION:
         return getThenExpression();
     }
@@ -217,8 +217,8 @@ public class ConditionalExpressionCaseImpl extends MinimalEObjectImpl.Container 
   {
     switch (featureID)
     {
-      case AstPackage.CONDITIONAL_EXPRESSION_CASE__CONDITION_EXPRESSION:
-        setConditionExpression((Expression)newValue);
+      case AstPackage.CONDITIONAL_EXPRESSION_CASE__CONDITION:
+        setCondition((Expression)newValue);
         return;
       case AstPackage.CONDITIONAL_EXPRESSION_CASE__THEN_EXPRESSION:
         setThenExpression((Expression)newValue);
@@ -237,8 +237,8 @@ public class ConditionalExpressionCaseImpl extends MinimalEObjectImpl.Container 
   {
     switch (featureID)
     {
-      case AstPackage.CONDITIONAL_EXPRESSION_CASE__CONDITION_EXPRESSION:
-        setConditionExpression((Expression)null);
+      case AstPackage.CONDITIONAL_EXPRESSION_CASE__CONDITION:
+        setCondition((Expression)null);
         return;
       case AstPackage.CONDITIONAL_EXPRESSION_CASE__THEN_EXPRESSION:
         setThenExpression((Expression)null);
@@ -257,8 +257,8 @@ public class ConditionalExpressionCaseImpl extends MinimalEObjectImpl.Container 
   {
     switch (featureID)
     {
-      case AstPackage.CONDITIONAL_EXPRESSION_CASE__CONDITION_EXPRESSION:
-        return conditionExpression != null;
+      case AstPackage.CONDITIONAL_EXPRESSION_CASE__CONDITION:
+        return condition != null;
       case AstPackage.CONDITIONAL_EXPRESSION_CASE__THEN_EXPRESSION:
         return thenExpression != null;
     }

@@ -1574,26 +1574,6 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getArrayDimensionSpecification_BeginIndex()
-  {
-    return (EReference)arrayDimensionSpecificationEClass.getEStructuralFeatures().get(2);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getArrayDimensionSpecification_EndIndex()
-  {
-    return (EReference)arrayDimensionSpecificationEClass.getEStructuralFeatures().get(3);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EClass getUnitTypeSpecifier()
   {
     return unitTypeSpecifierEClass;
@@ -1654,7 +1634,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getConditionalExpressionCase_ConditionExpression()
+  public EReference getConditionalExpressionCase_Condition()
   {
     return (EReference)conditionalExpressionCaseEClass.getEStructuralFeatures().get(0);
   }
@@ -2777,8 +2757,6 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     arrayDimensionSpecificationEClass = createEClass(ARRAY_DIMENSION_SPECIFICATION);
     createEAttribute(arrayDimensionSpecificationEClass, ARRAY_DIMENSION_SPECIFICATION__UNSPECIFIED);
     createEReference(arrayDimensionSpecificationEClass, ARRAY_DIMENSION_SPECIFICATION__SIZE);
-    createEReference(arrayDimensionSpecificationEClass, ARRAY_DIMENSION_SPECIFICATION__BEGIN_INDEX);
-    createEReference(arrayDimensionSpecificationEClass, ARRAY_DIMENSION_SPECIFICATION__END_INDEX);
 
     unitTypeSpecifierEClass = createEClass(UNIT_TYPE_SPECIFIER);
 
@@ -2789,7 +2767,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     createEReference(conditionalExpressionEClass, CONDITIONAL_EXPRESSION__ELSE_EXPRESSION);
 
     conditionalExpressionCaseEClass = createEClass(CONDITIONAL_EXPRESSION_CASE);
-    createEReference(conditionalExpressionCaseEClass, CONDITIONAL_EXPRESSION_CASE__CONDITION_EXPRESSION);
+    createEReference(conditionalExpressionCaseEClass, CONDITIONAL_EXPRESSION_CASE__CONDITION);
     createEReference(conditionalExpressionCaseEClass, CONDITIONAL_EXPRESSION_CASE__THEN_EXPRESSION);
 
     addSubtractExpressionPartEClass = createEClass(ADD_SUBTRACT_EXPRESSION_PART);
@@ -3131,8 +3109,6 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     initEClass(arrayDimensionSpecificationEClass, ArrayDimensionSpecification.class, "ArrayDimensionSpecification", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getArrayDimensionSpecification_Unspecified(), ecorePackage.getEBoolean(), "unspecified", null, 0, 1, ArrayDimensionSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getArrayDimensionSpecification_Size(), this.getExpression(), null, "size", null, 0, 1, ArrayDimensionSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getArrayDimensionSpecification_BeginIndex(), this.getArrayDimensionSpecification(), null, "beginIndex", null, 0, 1, ArrayDimensionSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getArrayDimensionSpecification_EndIndex(), this.getExpression(), null, "endIndex", null, 0, 1, ArrayDimensionSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(unitTypeSpecifierEClass, UnitTypeSpecifier.class, "UnitTypeSpecifier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -3143,7 +3119,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     initEReference(getConditionalExpression_ElseExpression(), this.getExpression(), null, "elseExpression", null, 0, 1, ConditionalExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(conditionalExpressionCaseEClass, ConditionalExpressionCase.class, "ConditionalExpressionCase", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getConditionalExpressionCase_ConditionExpression(), this.getExpression(), null, "conditionExpression", null, 0, 1, ConditionalExpressionCase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getConditionalExpressionCase_Condition(), this.getExpression(), null, "condition", null, 0, 1, ConditionalExpressionCase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getConditionalExpressionCase_ThenExpression(), this.getExpression(), null, "thenExpression", null, 0, 1, ConditionalExpressionCase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(addSubtractExpressionPartEClass, AddSubtractExpressionPart.class, "AddSubtractExpressionPart", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

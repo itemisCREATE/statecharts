@@ -65,14 +65,6 @@
     </children>
     <children xmi:type="notation:DecorationNode" xmi:id="_wWPP4HPQEd-S94eRjnXSAQ" type="5019"/>
     <children xmi:type="notation:BasicCompartment" xmi:id="_wWPP4XPQEd-S94eRjnXSAQ" type="7001">
-      <children xmi:type="notation:Node" xmi:id="_z8ou0HPQEd-S94eRjnXSAQ" type="3001">
-        <element xmi:type="uml:Property" href="TypeSystem.uml#_z8asYHPQEd-S94eRjnXSAQ"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_z8ou0XPQEd-S94eRjnXSAQ"/>
-      </children>
-      <children xmi:type="notation:Node" xmi:id="_tO6dIHPREd-S94eRjnXSAQ" type="3001">
-        <element xmi:type="uml:Property" href="TypeSystem.uml#_tOuP4HPREd-S94eRjnXSAQ"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_tO6dIXPREd-S94eRjnXSAQ"/>
-      </children>
       <children xmi:type="notation:Node" xmi:id="_MxF1AHPTEd-S94eRjnXSAQ" type="3001">
         <element xmi:type="uml:Property" href="TypeSystem.uml#_Mw19YHPTEd-S94eRjnXSAQ"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_MxF1AXPTEd-S94eRjnXSAQ"/>
@@ -96,7 +88,7 @@
     </children>
     <styles xmi:type="notation:CanonicalStyle" xmi:id="_wWOo0XPQEd-S94eRjnXSAQ"/>
     <element xmi:type="uml:Class" href="TypeSystem.uml#_wV7t4HPQEd-S94eRjnXSAQ"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_wWOo0nPQEd-S94eRjnXSAQ" x="580" y="220"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_wWOo0nPQEd-S94eRjnXSAQ" x="580" y="240"/>
   </children>
   <children xmi:type="notation:Shape" xmi:id="_FfY6oH3nEd-EWvFDOLE-rQ" type="2001" fontName="Sans">
     <children xmi:type="notation:DecorationNode" xmi:id="_FfZhsH3nEd-EWvFDOLE-rQ" type="5003">
@@ -225,7 +217,7 @@
       <layoutConstraint xmi:type="notation:Location" xmi:id="_pVA983PSEd-S94eRjnXSAQ" y="-15"/>
     </children>
     <children xmi:type="notation:DecorationNode" xmi:id="_pVA99HPSEd-S94eRjnXSAQ" type="6005">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_pVA99XPSEd-S94eRjnXSAQ" x="-7" y="17"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_pVA99XPSEd-S94eRjnXSAQ" x="-17" y="11"/>
     </children>
     <children xmi:type="notation:DecorationNode" xmi:id="_pVA99nPSEd-S94eRjnXSAQ" type="6006">
       <layoutConstraint xmi:type="notation:Location" xmi:id="_pVA993PSEd-S94eRjnXSAQ" y="-30"/>

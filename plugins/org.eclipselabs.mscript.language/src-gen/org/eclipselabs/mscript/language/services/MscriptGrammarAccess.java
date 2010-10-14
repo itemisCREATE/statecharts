@@ -1694,20 +1694,14 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Assignment cUnspecifiedAssignment_0 = (Assignment)cAlternatives.eContents().get(0);
 		private final Keyword cUnspecifiedQuestionMarkKeyword_0_0 = (Keyword)cUnspecifiedAssignment_0.eContents().get(0);
-		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
-		private final Assignment cSizeAssignment_1_0 = (Assignment)cGroup_1.eContents().get(0);
-		private final RuleCall cSizeExpressionParserRuleCall_1_0_0 = (RuleCall)cSizeAssignment_1_0.eContents().get(0);
-		private final Group cGroup_1_1 = (Group)cGroup_1.eContents().get(1);
-		private final Action cArrayDimensionSpecificationBeginIndexAction_1_1_0 = (Action)cGroup_1_1.eContents().get(0);
-		private final Keyword cFullStopFullStopKeyword_1_1_1 = (Keyword)cGroup_1_1.eContents().get(1);
-		private final Assignment cEndIndexAssignment_1_1_2 = (Assignment)cGroup_1_1.eContents().get(2);
-		private final RuleCall cEndIndexExpressionParserRuleCall_1_1_2_0 = (RuleCall)cEndIndexAssignment_1_1_2.eContents().get(0);
+		private final Assignment cSizeAssignment_1 = (Assignment)cAlternatives.eContents().get(1);
+		private final RuleCall cSizeExpressionParserRuleCall_1_0 = (RuleCall)cSizeAssignment_1.eContents().get(0);
 		
 		//ArrayDimensionSpecification:
-		//	unspecified?="?" | size=Expression ({ArrayDimensionSpecification.beginIndex=current} ".." endIndex=Expression)?;
+		//	unspecified?="?" | size=Expression;
 		public ParserRule getRule() { return rule; }
 
-		//unspecified?="?" | size=Expression ({ArrayDimensionSpecification.beginIndex=current} ".." endIndex=Expression)?
+		//unspecified?="?" | size=Expression
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//unspecified?="?"
@@ -1716,29 +1710,11 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		//"?"
 		public Keyword getUnspecifiedQuestionMarkKeyword_0_0() { return cUnspecifiedQuestionMarkKeyword_0_0; }
 
-		//size=Expression ({ArrayDimensionSpecification.beginIndex=current} ".." endIndex=Expression)?
-		public Group getGroup_1() { return cGroup_1; }
-
 		//size=Expression
-		public Assignment getSizeAssignment_1_0() { return cSizeAssignment_1_0; }
+		public Assignment getSizeAssignment_1() { return cSizeAssignment_1; }
 
 		//Expression
-		public RuleCall getSizeExpressionParserRuleCall_1_0_0() { return cSizeExpressionParserRuleCall_1_0_0; }
-
-		//({ArrayDimensionSpecification.beginIndex=current} ".." endIndex=Expression)?
-		public Group getGroup_1_1() { return cGroup_1_1; }
-
-		//{ArrayDimensionSpecification.beginIndex=current}
-		public Action getArrayDimensionSpecificationBeginIndexAction_1_1_0() { return cArrayDimensionSpecificationBeginIndexAction_1_1_0; }
-
-		//".."
-		public Keyword getFullStopFullStopKeyword_1_1_1() { return cFullStopFullStopKeyword_1_1_1; }
-
-		//endIndex=Expression
-		public Assignment getEndIndexAssignment_1_1_2() { return cEndIndexAssignment_1_1_2; }
-
-		//Expression
-		public RuleCall getEndIndexExpressionParserRuleCall_1_1_2_0() { return cEndIndexExpressionParserRuleCall_1_1_2_0; }
+		public RuleCall getSizeExpressionParserRuleCall_1_0() { return cSizeExpressionParserRuleCall_1_0; }
 	}
 
 	public class UnitTypeSpecifierElements extends AbstractParserRuleElementFinder {
@@ -1838,24 +1814,24 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	public class ConditionalExpressionCaseElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ConditionalExpressionCase");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cConditionExpressionAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cConditionExpressionExpressionParserRuleCall_0_0 = (RuleCall)cConditionExpressionAssignment_0.eContents().get(0);
+		private final Assignment cConditionAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cConditionExpressionParserRuleCall_0_0 = (RuleCall)cConditionAssignment_0.eContents().get(0);
 		private final Keyword cThenKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cThenExpressionAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cThenExpressionExpressionParserRuleCall_2_0 = (RuleCall)cThenExpressionAssignment_2.eContents().get(0);
 		
 		//ConditionalExpressionCase:
-		//	conditionExpression=Expression "then" thenExpression=Expression;
+		//	condition=Expression "then" thenExpression=Expression;
 		public ParserRule getRule() { return rule; }
 
-		//conditionExpression=Expression "then" thenExpression=Expression
+		//condition=Expression "then" thenExpression=Expression
 		public Group getGroup() { return cGroup; }
 
-		//conditionExpression=Expression
-		public Assignment getConditionExpressionAssignment_0() { return cConditionExpressionAssignment_0; }
+		//condition=Expression
+		public Assignment getConditionAssignment_0() { return cConditionAssignment_0; }
 
 		//Expression
-		public RuleCall getConditionExpressionExpressionParserRuleCall_0_0() { return cConditionExpressionExpressionParserRuleCall_0_0; }
+		public RuleCall getConditionExpressionParserRuleCall_0_0() { return cConditionExpressionParserRuleCall_0_0; }
 
 		//"then"
 		public Keyword getThenKeyword_1() { return cThenKeyword_1; }
@@ -4001,7 +3977,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ArrayDimensionSpecification:
-	//	unspecified?="?" | size=Expression ({ArrayDimensionSpecification.beginIndex=current} ".." endIndex=Expression)?;
+	//	unspecified?="?" | size=Expression;
 	public ArrayDimensionSpecificationElements getArrayDimensionSpecificationAccess() {
 		return (pArrayDimensionSpecification != null) ? pArrayDimensionSpecification : (pArrayDimensionSpecification = new ArrayDimensionSpecificationElements());
 	}
@@ -4043,7 +4019,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ConditionalExpressionCase:
-	//	conditionExpression=Expression "then" thenExpression=Expression;
+	//	condition=Expression "then" thenExpression=Expression;
 	public ConditionalExpressionCaseElements getConditionalExpressionCaseAccess() {
 		return (pConditionalExpressionCase != null) ? pConditionalExpressionCase : (pConditionalExpressionCase = new ConditionalExpressionCaseElements());
 	}

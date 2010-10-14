@@ -128,8 +128,6 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getNamedTypeSpecifierAccess().getGroup(), "rule__NamedTypeSpecifier__Group__0");
 					put(grammarAccess.getNamedTypeSpecifierAccess().getGroup_1(), "rule__NamedTypeSpecifier__Group_1__0");
 					put(grammarAccess.getNamedTypeSpecifierAccess().getGroup_1_2(), "rule__NamedTypeSpecifier__Group_1_2__0");
-					put(grammarAccess.getArrayDimensionSpecificationAccess().getGroup_1(), "rule__ArrayDimensionSpecification__Group_1__0");
-					put(grammarAccess.getArrayDimensionSpecificationAccess().getGroup_1_1(), "rule__ArrayDimensionSpecification__Group_1_1__0");
 					put(grammarAccess.getUnitTypeSpecifierAccess().getGroup(), "rule__UnitTypeSpecifier__Group__0");
 					put(grammarAccess.getConditionalExpressionAccess().getGroup(), "rule__ConditionalExpression__Group__0");
 					put(grammarAccess.getConditionalExpressionAccess().getGroup_2(), "rule__ConditionalExpression__Group_2__0");
@@ -259,12 +257,11 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getNamedTypeSpecifierAccess().getDimensionsAssignment_1_1(), "rule__NamedTypeSpecifier__DimensionsAssignment_1_1");
 					put(grammarAccess.getNamedTypeSpecifierAccess().getDimensionsAssignment_1_2_1(), "rule__NamedTypeSpecifier__DimensionsAssignment_1_2_1");
 					put(grammarAccess.getArrayDimensionSpecificationAccess().getUnspecifiedAssignment_0(), "rule__ArrayDimensionSpecification__UnspecifiedAssignment_0");
-					put(grammarAccess.getArrayDimensionSpecificationAccess().getSizeAssignment_1_0(), "rule__ArrayDimensionSpecification__SizeAssignment_1_0");
-					put(grammarAccess.getArrayDimensionSpecificationAccess().getEndIndexAssignment_1_1_2(), "rule__ArrayDimensionSpecification__EndIndexAssignment_1_1_2");
+					put(grammarAccess.getArrayDimensionSpecificationAccess().getSizeAssignment_1(), "rule__ArrayDimensionSpecification__SizeAssignment_1");
 					put(grammarAccess.getConditionalExpressionAccess().getCasesAssignment_1(), "rule__ConditionalExpression__CasesAssignment_1");
 					put(grammarAccess.getConditionalExpressionAccess().getCasesAssignment_2_1(), "rule__ConditionalExpression__CasesAssignment_2_1");
 					put(grammarAccess.getConditionalExpressionAccess().getElseExpressionAssignment_4(), "rule__ConditionalExpression__ElseExpressionAssignment_4");
-					put(grammarAccess.getConditionalExpressionCaseAccess().getConditionExpressionAssignment_0(), "rule__ConditionalExpressionCase__ConditionExpressionAssignment_0");
+					put(grammarAccess.getConditionalExpressionCaseAccess().getConditionAssignment_0(), "rule__ConditionalExpressionCase__ConditionAssignment_0");
 					put(grammarAccess.getConditionalExpressionCaseAccess().getThenExpressionAssignment_2(), "rule__ConditionalExpressionCase__ThenExpressionAssignment_2");
 					put(grammarAccess.getRangeExpressionAccess().getEndAssignment_1_2(), "rule__RangeExpression__EndAssignment_1_2");
 					put(grammarAccess.getRangeExpressionAccess().getEndAssignment_1_3_2(), "rule__RangeExpression__EndAssignment_1_3_2");

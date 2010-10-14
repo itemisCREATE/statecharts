@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.ConditionalExpressionCase#getConditionExpression <em>Condition Expression</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.ConditionalExpressionCase#getCondition <em>Condition</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.ConditionalExpressionCase#getThenExpression <em>Then Expression</em>}</li>
  * </ul>
  * </p>
@@ -27,30 +27,30 @@ import org.eclipse.emf.ecore.EObject;
 public interface ConditionalExpressionCase extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Condition Expression</b></em>' containment reference.
+   * Returns the value of the '<em><b>Condition</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Condition Expression</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Condition</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Condition Expression</em>' containment reference.
-   * @see #setConditionExpression(Expression)
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getConditionalExpressionCase_ConditionExpression()
+   * @return the value of the '<em>Condition</em>' containment reference.
+   * @see #setCondition(Expression)
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getConditionalExpressionCase_Condition()
    * @model containment="true"
    * @generated
    */
-  Expression getConditionExpression();
+  Expression getCondition();
 
   /**
-   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.ConditionalExpressionCase#getConditionExpression <em>Condition Expression</em>}' containment reference.
+   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.ConditionalExpressionCase#getCondition <em>Condition</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Condition Expression</em>' containment reference.
-   * @see #getConditionExpression()
+   * @param value the new value of the '<em>Condition</em>' containment reference.
+   * @see #getCondition()
    * @generated
    */
-  void setConditionExpression(Expression value);
+  void setCondition(Expression value);
 
   /**
    * Returns the value of the '<em><b>Then Expression</b></em>' containment reference.
