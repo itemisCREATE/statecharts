@@ -47,7 +47,7 @@ public class RealTypeOperations extends PrimitiveTypeOperations {
 	 */
 	public static  DataType evaluate(RealType realType, OperatorKind operator, DataType other) {
 		if (operator == OperatorKind.UNARY_MINUS) {
-			return (RealType) EcoreUtil.copy(realType);
+			return EcoreUtil.copy(realType);
 		}
 		
 		if (!(other instanceof NumericType)) {
@@ -69,7 +69,7 @@ public class RealTypeOperations extends PrimitiveTypeOperations {
 			if (!EcoreUtil.equals(realType.getUnit(), otherNumericType.getUnit())) {
 				return TypeSystemFactory.eINSTANCE.createInvalidDataType();
 			}
-			unit = (Unit) EcoreUtil.copy(realType.getUnit());
+			unit = EcoreUtil.copy(realType.getUnit());
 			break;
 		case MULTIPLY:
 			unit = realType.getUnit().multiply(otherNumericType.getUnit());

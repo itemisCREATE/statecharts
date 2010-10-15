@@ -59,7 +59,7 @@ public class TensorTypeOperations extends DataTypeOperations {
 		case ELEMENT_WISE_DIVIDE:
 			return evaluateElementWise(tensorType, operator, other);
 		case UNARY_MINUS:
-			return (TensorType) EcoreUtil.copy(tensorType);
+			return EcoreUtil.copy(tensorType);
 		}
 		return TypeSystemFactory.eINSTANCE.createInvalidDataType();
 	}
@@ -80,7 +80,7 @@ public class TensorTypeOperations extends DataTypeOperations {
 		if (elementType instanceof InvalidDataType) {
 			return elementType;
 		}
-		TensorType result = (TensorType) EcoreUtil.copy(tensorType);
+		TensorType result = EcoreUtil.copy(tensorType);
 		result.setElementType(elementType);
 		return result;
 	}
@@ -91,7 +91,7 @@ public class TensorTypeOperations extends DataTypeOperations {
 			if (elementType instanceof InvalidDataType) {
 				return elementType;
 			}
-			TensorType result = (TensorType) EcoreUtil.copy(tensorType);
+			TensorType result = EcoreUtil.copy(tensorType);
 			result.setElementType(elementType);
 			return result;
 		}

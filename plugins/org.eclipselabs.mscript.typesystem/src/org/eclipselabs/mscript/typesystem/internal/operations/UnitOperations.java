@@ -63,7 +63,7 @@ public class UnitOperations {
 	 * @generated NOT
 	 */
 	public static  Unit multiply(Unit unit, Unit other) {
-		Unit result = (Unit) EcoreUtil.copy(unit);
+		Unit result = EcoreUtil.copy(unit);
 		result.setScale(result.getScale() + other.getScale());
 		for (UnitFactor otherFactor : other.getFactors()) {
 			UnitFactor factor = result.getFactor(otherFactor.getSymbol());
@@ -78,7 +78,7 @@ public class UnitOperations {
 	 * @generated NOT
 	 */
 	public static  Unit divide(Unit unit, Unit other) {
-		Unit result = (Unit) EcoreUtil.copy(unit);
+		Unit result = EcoreUtil.copy(unit);
 		result.setScale(result.getScale() - other.getScale());
 		for (UnitFactor otherFactor : other.getFactors()) {
 			UnitFactor factor = result.getFactor(otherFactor.getSymbol());
@@ -93,7 +93,7 @@ public class UnitOperations {
 	 * @generated NOT
 	 */
 	public static  Unit power(Unit unit, int exponent) {
-		Unit result = (Unit) EcoreUtil.copy(unit);
+		Unit result = EcoreUtil.copy(unit);
 		result.setScale(result.getScale() * exponent);
 		for (UnitFactor factor : result.getFactors()) {
 			factor.setExponent(factor.getExponent() * exponent);

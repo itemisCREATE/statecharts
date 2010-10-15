@@ -47,7 +47,7 @@ public class IntegerTypeOperations extends PrimitiveTypeOperations {
 	 */
 	public static  DataType evaluate(IntegerType integerType, OperatorKind operator, DataType other) {
 		if (operator == OperatorKind.UNARY_MINUS) {
-			return (IntegerType) EcoreUtil.copy(integerType);
+			return EcoreUtil.copy(integerType);
 		}
 		
 		if (!(other instanceof NumericType)) {
@@ -69,7 +69,7 @@ public class IntegerTypeOperations extends PrimitiveTypeOperations {
 			if (!EcoreUtil.equals(integerType.getUnit(), otherNumericType.getUnit())) {
 				return TypeSystemFactory.eINSTANCE.createInvalidDataType();
 			}
-			unit = (Unit) EcoreUtil.copy(integerType.getUnit());
+			unit = EcoreUtil.copy(integerType.getUnit());
 			break;
 		case MULTIPLY:
 			unit = integerType.getUnit().multiply(otherNumericType.getUnit());
