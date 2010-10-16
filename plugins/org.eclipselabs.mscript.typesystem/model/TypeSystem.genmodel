@@ -28,12 +28,12 @@
   <genPackages xsi:type="genmodel:GenPackage" prefix="TypeSystem" basePackage="org.eclipselabs.mscript"
       disposableProviderFactory="true" ecorePackage="TypeSystem.ecore#/" operationsPackage="org.eclipselabs.mscript.typesystem.internal.operations">
     <genEnums xsi:type="genmodel:GenEnum" typeSafeEnumCompatible="false" ecoreEnum="TypeSystem.ecore#//OperatorKind">
-      <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/Add"/>
-      <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/Subtract"/>
-      <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/Multiply"/>
-      <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/Divide"/>
-      <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/ElementWiseMultiply"/>
-      <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/ElementWiseDivide"/>
+      <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/Addition"/>
+      <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/Subtraction"/>
+      <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/Multiplication"/>
+      <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/Division"/>
+      <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/ElementWiseMultiplication"/>
+      <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/ElementWiseDivision"/>
       <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/UnaryMinus"/>
       <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/LogicalAnd"/>
       <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/LogicalOr"/>

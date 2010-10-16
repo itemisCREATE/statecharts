@@ -91,6 +91,8 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
       case AstPackage.IF_CASE: return createIfCase();
       case AstPackage.WHILE_STATEMENT: return createWhileStatement();
       case AstPackage.DO_WHILE_STATEMENT: return createDoWhileStatement();
+      case AstPackage.FOR_STATEMENT: return createForStatement();
+      case AstPackage.FOR_STATEMENT_INITIALIZER: return createForStatementInitializer();
       case AstPackage.FOREACH_STATEMENT: return createForeachStatement();
       case AstPackage.RETURN_STATEMENT: return createReturnStatement();
       case AstPackage.CHECK_STATUS_STATEMENT: return createCheckStatusStatement();
@@ -108,10 +110,8 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
       case AstPackage.ARRAY_DIMENSION_SPECIFICATION: return createArrayDimensionSpecification();
       case AstPackage.UNIT_TYPE_SPECIFIER: return createUnitTypeSpecifier();
       case AstPackage.EXPRESSION: return createExpression();
-      case AstPackage.CONDITIONAL_EXPRESSION: return createConditionalExpression();
-      case AstPackage.CONDITIONAL_EXPRESSION_CASE: return createConditionalExpressionCase();
-      case AstPackage.ADD_SUBTRACT_EXPRESSION_PART: return createAddSubtractExpressionPart();
-      case AstPackage.MULTIPLY_DIVIDE_EXPRESSION_PART: return createMultiplyDivideExpressionPart();
+      case AstPackage.ADDITIVE_EXPRESSION_PART: return createAdditiveExpressionPart();
+      case AstPackage.MULTIPLICATIVE_EXPRESSION_PART: return createMultiplicativeExpressionPart();
       case AstPackage.FEATURE_CALL_PART: return createFeatureCallPart();
       case AstPackage.FEATURE_REFERENCE: return createFeatureReference();
       case AstPackage.ARRAY_ELEMENT_REFERENCE: return createArrayElementReference();
@@ -136,14 +136,17 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
       case AstPackage.UNIT_EXPRESSION_DENOMINATOR: return createUnitExpressionDenominator();
       case AstPackage.UNIT_EXPRESSION_FACTOR: return createUnitExpressionFactor();
       case AstPackage.UNIT_EXPRESSION_EXPONENT: return createUnitExpressionExponent();
+      case AstPackage.ASSIGNMENT_EXPRESSION: return createAssignmentExpression();
       case AstPackage.RANGE_EXPRESSION: return createRangeExpression();
+      case AstPackage.CONDITIONAL_EXPRESSION: return createConditionalExpression();
       case AstPackage.LOGICAL_OR_EXPRESSION: return createLogicalOrExpression();
       case AstPackage.LOGICAL_AND_EXPRESSION: return createLogicalAndExpression();
       case AstPackage.RELATIONAL_EXPRESSION: return createRelationalExpression();
-      case AstPackage.ADD_SUBTRACT_EXPRESSION: return createAddSubtractExpression();
-      case AstPackage.MULTIPLY_DIVIDE_EXPRESSION: return createMultiplyDivideExpression();
+      case AstPackage.ADDITIVE_EXPRESSION: return createAdditiveExpression();
+      case AstPackage.MULTIPLICATIVE_EXPRESSION: return createMultiplicativeExpression();
       case AstPackage.POWER_EXPRESSION: return createPowerExpression();
       case AstPackage.UNARY_EXPRESSION: return createUnaryExpression();
+      case AstPackage.POSTFIX_EXPRESSION: return createPostfixExpression();
       case AstPackage.FEATURE_CALL: return createFeatureCall();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -162,16 +165,20 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
     {
       case AstPackage.CHECK_STATUS_KIND:
         return createCheckStatusKindFromString(eDataType, initialValue);
+      case AstPackage.ASSIGNMENT_OPERATOR:
+        return createAssignmentOperatorFromString(eDataType, initialValue);
       case AstPackage.RELATIONAL_OPERATOR:
         return createRelationalOperatorFromString(eDataType, initialValue);
-      case AstPackage.ADD_SUBTRACT_OPERATOR:
-        return createAddSubtractOperatorFromString(eDataType, initialValue);
-      case AstPackage.MULTIPLY_DIVIDE_OPERATOR:
-        return createMultiplyDivideOperatorFromString(eDataType, initialValue);
+      case AstPackage.ADDITIVE_OPERATOR:
+        return createAdditiveOperatorFromString(eDataType, initialValue);
+      case AstPackage.MULTIPLICATIVE_OPERATOR:
+        return createMultiplicativeOperatorFromString(eDataType, initialValue);
       case AstPackage.POWER_OPERATOR:
         return createPowerOperatorFromString(eDataType, initialValue);
       case AstPackage.UNARY_OPERATOR:
         return createUnaryOperatorFromString(eDataType, initialValue);
+      case AstPackage.POSTFIX_OPERATOR:
+        return createPostfixOperatorFromString(eDataType, initialValue);
       case AstPackage.BOOLEAN_KIND:
         return createBooleanKindFromString(eDataType, initialValue);
       default:
@@ -191,16 +198,20 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
     {
       case AstPackage.CHECK_STATUS_KIND:
         return convertCheckStatusKindToString(eDataType, instanceValue);
+      case AstPackage.ASSIGNMENT_OPERATOR:
+        return convertAssignmentOperatorToString(eDataType, instanceValue);
       case AstPackage.RELATIONAL_OPERATOR:
         return convertRelationalOperatorToString(eDataType, instanceValue);
-      case AstPackage.ADD_SUBTRACT_OPERATOR:
-        return convertAddSubtractOperatorToString(eDataType, instanceValue);
-      case AstPackage.MULTIPLY_DIVIDE_OPERATOR:
-        return convertMultiplyDivideOperatorToString(eDataType, instanceValue);
+      case AstPackage.ADDITIVE_OPERATOR:
+        return convertAdditiveOperatorToString(eDataType, instanceValue);
+      case AstPackage.MULTIPLICATIVE_OPERATOR:
+        return convertMultiplicativeOperatorToString(eDataType, instanceValue);
       case AstPackage.POWER_OPERATOR:
         return convertPowerOperatorToString(eDataType, instanceValue);
       case AstPackage.UNARY_OPERATOR:
         return convertUnaryOperatorToString(eDataType, instanceValue);
+      case AstPackage.POSTFIX_OPERATOR:
+        return convertPostfixOperatorToString(eDataType, instanceValue);
       case AstPackage.BOOLEAN_KIND:
         return convertBooleanKindToString(eDataType, instanceValue);
       default:
@@ -466,6 +477,28 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  public ForStatement createForStatement()
+  {
+    ForStatementImpl forStatement = new ForStatementImpl();
+    return forStatement;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ForStatementInitializer createForStatementInitializer()
+  {
+    ForStatementInitializerImpl forStatementInitializer = new ForStatementInitializerImpl();
+    return forStatementInitializer;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public ForeachStatement createForeachStatement()
   {
     ForeachStatementImpl foreachStatement = new ForeachStatementImpl();
@@ -653,10 +686,10 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public ConditionalExpression createConditionalExpression()
+  public AdditiveExpressionPart createAdditiveExpressionPart()
   {
-    ConditionalExpressionImpl conditionalExpression = new ConditionalExpressionImpl();
-    return conditionalExpression;
+    AdditiveExpressionPartImpl additiveExpressionPart = new AdditiveExpressionPartImpl();
+    return additiveExpressionPart;
   }
 
   /**
@@ -664,32 +697,10 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public ConditionalExpressionCase createConditionalExpressionCase()
+  public MultiplicativeExpressionPart createMultiplicativeExpressionPart()
   {
-    ConditionalExpressionCaseImpl conditionalExpressionCase = new ConditionalExpressionCaseImpl();
-    return conditionalExpressionCase;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public AddSubtractExpressionPart createAddSubtractExpressionPart()
-  {
-    AddSubtractExpressionPartImpl addSubtractExpressionPart = new AddSubtractExpressionPartImpl();
-    return addSubtractExpressionPart;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public MultiplyDivideExpressionPart createMultiplyDivideExpressionPart()
-  {
-    MultiplyDivideExpressionPartImpl multiplyDivideExpressionPart = new MultiplyDivideExpressionPartImpl();
-    return multiplyDivideExpressionPart;
+    MultiplicativeExpressionPartImpl multiplicativeExpressionPart = new MultiplicativeExpressionPartImpl();
+    return multiplicativeExpressionPart;
   }
 
   /**
@@ -961,10 +972,32 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  public AssignmentExpression createAssignmentExpression()
+  {
+    AssignmentExpressionImpl assignmentExpression = new AssignmentExpressionImpl();
+    return assignmentExpression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public RangeExpression createRangeExpression()
   {
     RangeExpressionImpl rangeExpression = new RangeExpressionImpl();
     return rangeExpression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ConditionalExpression createConditionalExpression()
+  {
+    ConditionalExpressionImpl conditionalExpression = new ConditionalExpressionImpl();
+    return conditionalExpression;
   }
 
   /**
@@ -1005,10 +1038,10 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public AddSubtractExpression createAddSubtractExpression()
+  public AdditiveExpression createAdditiveExpression()
   {
-    AddSubtractExpressionImpl addSubtractExpression = new AddSubtractExpressionImpl();
-    return addSubtractExpression;
+    AdditiveExpressionImpl additiveExpression = new AdditiveExpressionImpl();
+    return additiveExpression;
   }
 
   /**
@@ -1016,10 +1049,10 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public MultiplyDivideExpression createMultiplyDivideExpression()
+  public MultiplicativeExpression createMultiplicativeExpression()
   {
-    MultiplyDivideExpressionImpl multiplyDivideExpression = new MultiplyDivideExpressionImpl();
-    return multiplyDivideExpression;
+    MultiplicativeExpressionImpl multiplicativeExpression = new MultiplicativeExpressionImpl();
+    return multiplicativeExpression;
   }
 
   /**
@@ -1042,6 +1075,17 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
   {
     UnaryExpressionImpl unaryExpression = new UnaryExpressionImpl();
     return unaryExpression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public PostfixExpression createPostfixExpression()
+  {
+    PostfixExpressionImpl postfixExpression = new PostfixExpressionImpl();
+    return postfixExpression;
   }
 
   /**
@@ -1082,6 +1126,28 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  public AssignmentOperator createAssignmentOperatorFromString(EDataType eDataType, String initialValue)
+  {
+    AssignmentOperator result = AssignmentOperator.get(initialValue);
+    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+    return result;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String convertAssignmentOperatorToString(EDataType eDataType, Object instanceValue)
+  {
+    return instanceValue == null ? null : instanceValue.toString();
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public RelationalOperator createRelationalOperatorFromString(EDataType eDataType, String initialValue)
   {
     RelationalOperator result = RelationalOperator.get(initialValue);
@@ -1104,9 +1170,9 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public AddSubtractOperator createAddSubtractOperatorFromString(EDataType eDataType, String initialValue)
+  public AdditiveOperator createAdditiveOperatorFromString(EDataType eDataType, String initialValue)
   {
-    AddSubtractOperator result = AddSubtractOperator.get(initialValue);
+    AdditiveOperator result = AdditiveOperator.get(initialValue);
     if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
     return result;
   }
@@ -1116,7 +1182,7 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public String convertAddSubtractOperatorToString(EDataType eDataType, Object instanceValue)
+  public String convertAdditiveOperatorToString(EDataType eDataType, Object instanceValue)
   {
     return instanceValue == null ? null : instanceValue.toString();
   }
@@ -1126,9 +1192,9 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public MultiplyDivideOperator createMultiplyDivideOperatorFromString(EDataType eDataType, String initialValue)
+  public MultiplicativeOperator createMultiplicativeOperatorFromString(EDataType eDataType, String initialValue)
   {
-    MultiplyDivideOperator result = MultiplyDivideOperator.get(initialValue);
+    MultiplicativeOperator result = MultiplicativeOperator.get(initialValue);
     if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
     return result;
   }
@@ -1138,7 +1204,7 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public String convertMultiplyDivideOperatorToString(EDataType eDataType, Object instanceValue)
+  public String convertMultiplicativeOperatorToString(EDataType eDataType, Object instanceValue)
   {
     return instanceValue == null ? null : instanceValue.toString();
   }
@@ -1183,6 +1249,28 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * @generated
    */
   public String convertUnaryOperatorToString(EDataType eDataType, Object instanceValue)
+  {
+    return instanceValue == null ? null : instanceValue.toString();
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public PostfixOperator createPostfixOperatorFromString(EDataType eDataType, String initialValue)
+  {
+    PostfixOperator result = PostfixOperator.get(initialValue);
+    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+    return result;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String convertPostfixOperatorToString(EDataType eDataType, Object instanceValue)
   {
     return instanceValue == null ? null : instanceValue.toString();
   }

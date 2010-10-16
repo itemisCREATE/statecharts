@@ -64,17 +64,17 @@ public class RealTypeOperations extends PrimitiveTypeOperations {
 		case EQUAL_TO:
 		case NOT_EQUAL_TO:
 			return TypeSystemFactory.eINSTANCE.createBooleanType();
-		case ADD:
-		case SUBTRACT:
+		case ADDITION:
+		case SUBTRACTION:
 			if (!EcoreUtil.equals(realType.getUnit(), otherNumericType.getUnit())) {
 				return TypeSystemFactory.eINSTANCE.createInvalidDataType();
 			}
 			unit = EcoreUtil.copy(realType.getUnit());
 			break;
-		case MULTIPLY:
+		case MULTIPLICATION:
 			unit = realType.getUnit().multiply(otherNumericType.getUnit());
 			break;
-		case DIVIDE:
+		case DIVISION:
 			unit = realType.getUnit().divide(otherNumericType.getUnit());
 			break;
 		default:

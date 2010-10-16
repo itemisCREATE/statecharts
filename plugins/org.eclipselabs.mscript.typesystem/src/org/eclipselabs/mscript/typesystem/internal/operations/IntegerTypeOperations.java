@@ -64,17 +64,17 @@ public class IntegerTypeOperations extends PrimitiveTypeOperations {
 		case EQUAL_TO:
 		case NOT_EQUAL_TO:
 			return TypeSystemFactory.eINSTANCE.createBooleanType();
-		case ADD:
-		case SUBTRACT:
+		case ADDITION:
+		case SUBTRACTION:
 			if (!EcoreUtil.equals(integerType.getUnit(), otherNumericType.getUnit())) {
 				return TypeSystemFactory.eINSTANCE.createInvalidDataType();
 			}
 			unit = EcoreUtil.copy(integerType.getUnit());
 			break;
-		case MULTIPLY:
+		case MULTIPLICATION:
 			unit = integerType.getUnit().multiply(otherNumericType.getUnit());
 			break;
-		case DIVIDE:
+		case DIVISION:
 			unit = integerType.getUnit().divide(otherNumericType.getUnit());
 			break;
 		default:
@@ -82,7 +82,7 @@ public class IntegerTypeOperations extends PrimitiveTypeOperations {
 		}
 		
 		NumericType result;
-		if (otherNumericType instanceof IntegerType && operator != OperatorKind.DIVIDE) {
+		if (otherNumericType instanceof IntegerType && operator != OperatorKind.DIVISION) {
 			result = TypeSystemFactory.eINSTANCE.createIntegerType();
 		} else {
 			result = TypeSystemFactory.eINSTANCE.createRealType();

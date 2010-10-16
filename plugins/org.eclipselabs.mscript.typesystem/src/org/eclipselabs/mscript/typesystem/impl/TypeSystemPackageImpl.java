@@ -1042,12 +1042,12 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 
 		// Initialize enums and add enum literals
 		initEEnum(operatorKindEEnum, OperatorKind.class, "OperatorKind");
-		addEEnumLiteral(operatorKindEEnum, OperatorKind.ADD);
-		addEEnumLiteral(operatorKindEEnum, OperatorKind.SUBTRACT);
-		addEEnumLiteral(operatorKindEEnum, OperatorKind.MULTIPLY);
-		addEEnumLiteral(operatorKindEEnum, OperatorKind.DIVIDE);
-		addEEnumLiteral(operatorKindEEnum, OperatorKind.ELEMENT_WISE_MULTIPLY);
-		addEEnumLiteral(operatorKindEEnum, OperatorKind.ELEMENT_WISE_DIVIDE);
+		addEEnumLiteral(operatorKindEEnum, OperatorKind.ADDITION);
+		addEEnumLiteral(operatorKindEEnum, OperatorKind.SUBTRACTION);
+		addEEnumLiteral(operatorKindEEnum, OperatorKind.MULTIPLICATION);
+		addEEnumLiteral(operatorKindEEnum, OperatorKind.DIVISION);
+		addEEnumLiteral(operatorKindEEnum, OperatorKind.ELEMENT_WISE_MULTIPLICATION);
+		addEEnumLiteral(operatorKindEEnum, OperatorKind.ELEMENT_WISE_DIVISION);
 		addEEnumLiteral(operatorKindEEnum, OperatorKind.UNARY_MINUS);
 		addEEnumLiteral(operatorKindEEnum, OperatorKind.LOGICAL_AND);
 		addEEnumLiteral(operatorKindEEnum, OperatorKind.LOGICAL_OR);

@@ -74,8 +74,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="ExpressionStatement" eSuperTypes="#//Statement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//Expression"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="assignedValue" eType="#//Expression"
-        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="IfStatement" eSuperTypes="#//Statement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="cases" upperBound="-1"
@@ -99,6 +97,21 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//BlockStatement"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="predicate" eType="#//Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ForStatement" eSuperTypes="#//Statement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="initializers" upperBound="-1"
+        eType="#//ForStatementInitializer" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="testExpression" eType="#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="countExpressions" upperBound="-1"
+        eType="#//Expression" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//BlockStatement"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ForStatementInitializer">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="variableName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//Expression"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ForeachStatement" eSuperTypes="#//Statement">
@@ -150,17 +163,12 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="UnitTypeSpecifier" eSuperTypes="#//TypeSpecifier"/>
   <eClassifiers xsi:type="ecore:EClass" name="Expression"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ConditionalExpression" eSuperTypes="#//Expression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="cases" upperBound="-1"
-        eType="#//ConditionalExpressionCase" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="elseExpression" eType="#//Expression"
-        containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ConditionalExpressionCase">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="condition" eType="#//Expression"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="thenExpression" eType="#//Expression"
-        containment="true"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="AssignmentOperator">
+    <eLiterals name="Assignment" literal="="/>
+    <eLiterals name="AdditionAssignment" value="1" literal="+="/>
+    <eLiterals name="SubtractionAssignment" value="2" literal="-="/>
+    <eLiterals name="MultiplicationAssignment" value="3" literal="*="/>
+    <eLiterals name="DivisionAssignment" value="4" literal="/="/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="RelationalOperator">
     <eLiterals name="LessThan" literal="&lt;"/>
@@ -170,25 +178,25 @@
     <eLiterals name="EqualTo" value="4" literal="=="/>
     <eLiterals name="NotEqualTo" value="5" literal="!="/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AddSubtractExpressionPart">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//AddSubtractOperator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AdditiveExpressionPart">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//AdditiveOperator"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="operand" eType="#//Expression"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="AddSubtractOperator">
-    <eLiterals name="Add" literal="+"/>
-    <eLiterals name="Subtract" value="1" literal="-"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="AdditiveOperator">
+    <eLiterals name="Addition" literal="+"/>
+    <eLiterals name="Subtraction" value="1" literal="-"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="MultiplyDivideExpressionPart">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//MultiplyDivideOperator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MultiplicativeExpressionPart">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//MultiplicativeOperator"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="operand" eType="#//Expression"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="MultiplyDivideOperator">
-    <eLiterals name="Multiply" literal="*"/>
-    <eLiterals name="Divide" value="1" literal="/"/>
-    <eLiterals name="ElementWiseMultiply" value="2" literal=".*"/>
-    <eLiterals name="ElementWiseDivide" value="3" literal="./"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="MultiplicativeOperator">
+    <eLiterals name="Multiplication" literal="*"/>
+    <eLiterals name="Division" value="1" literal="/"/>
+    <eLiterals name="ElementWiseMultiplication" value="2" literal=".*"/>
+    <eLiterals name="ElementWiseDivision" value="3" literal="./"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="PowerOperator">
     <eLiterals name="Power" literal="^"/>
@@ -197,6 +205,12 @@
   <eClassifiers xsi:type="ecore:EEnum" name="UnaryOperator">
     <eLiterals name="Minus" literal="-"/>
     <eLiterals name="LogicalNot" value="1" literal="!"/>
+    <eLiterals name="Increment" value="2" literal="++"/>
+    <eLiterals name="Decrement" value="3" literal="--"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="PostfixOperator">
+    <eLiterals name="Increment" literal="++"/>
+    <eLiterals name="Decrement" value="1" literal="--"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FeatureCallPart"/>
   <eClassifiers xsi:type="ecore:EClass" name="FeatureReference" eSuperTypes="#//FeatureCallPart">
@@ -291,12 +305,27 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="negative" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AssignmentExpression" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftHandSide" eType="#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//AssignmentOperator"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightHandSide" eType="#//Expression"
+        containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RangeExpression" eSuperTypes="#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="begin" eType="#//Expression"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="end" eType="#//Expression"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="increment" eType="#//RangeExpression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConditionalExpression" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="condition" eType="#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="thenExpression" eType="#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elseExpression" eType="#//Expression"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LogicalOrExpression" eSuperTypes="#//Expression">
@@ -317,17 +346,17 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" eType="#//Expression"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AddSubtractExpression" eSuperTypes="#//Expression">
+  <eClassifiers xsi:type="ecore:EClass" name="AdditiveExpression" eSuperTypes="#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="#//Expression"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="rightParts" upperBound="-1"
-        eType="#//AddSubtractExpressionPart" containment="true"/>
+        eType="#//AdditiveExpressionPart" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="MultiplyDivideExpression" eSuperTypes="#//Expression">
+  <eClassifiers xsi:type="ecore:EClass" name="MultiplicativeExpression" eSuperTypes="#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="#//Expression"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="rightParts" upperBound="-1"
-        eType="#//MultiplyDivideExpressionPart" containment="true"/>
+        eType="#//MultiplicativeExpressionPart" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PowerExpression" eSuperTypes="#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="operand" eType="#//Expression"
@@ -340,6 +369,11 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//UnaryOperator"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="operand" eType="#//Expression"
         containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PostfixExpression" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operand" eType="#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//PostfixOperator"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FeatureCall" eSuperTypes="#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//Expression"

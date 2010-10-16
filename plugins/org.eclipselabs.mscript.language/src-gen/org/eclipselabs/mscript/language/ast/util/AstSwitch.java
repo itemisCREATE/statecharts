@@ -292,6 +292,21 @@ public class AstSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case AstPackage.FOR_STATEMENT:
+      {
+        ForStatement forStatement = (ForStatement)theEObject;
+        T result = caseForStatement(forStatement);
+        if (result == null) result = caseStatement(forStatement);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AstPackage.FOR_STATEMENT_INITIALIZER:
+      {
+        ForStatementInitializer forStatementInitializer = (ForStatementInitializer)theEObject;
+        T result = caseForStatementInitializer(forStatementInitializer);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case AstPackage.FOREACH_STATEMENT:
       {
         ForeachStatement foreachStatement = (ForeachStatement)theEObject;
@@ -445,32 +460,17 @@ public class AstSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AstPackage.CONDITIONAL_EXPRESSION:
+      case AstPackage.ADDITIVE_EXPRESSION_PART:
       {
-        ConditionalExpression conditionalExpression = (ConditionalExpression)theEObject;
-        T result = caseConditionalExpression(conditionalExpression);
-        if (result == null) result = caseExpression(conditionalExpression);
+        AdditiveExpressionPart additiveExpressionPart = (AdditiveExpressionPart)theEObject;
+        T result = caseAdditiveExpressionPart(additiveExpressionPart);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AstPackage.CONDITIONAL_EXPRESSION_CASE:
+      case AstPackage.MULTIPLICATIVE_EXPRESSION_PART:
       {
-        ConditionalExpressionCase conditionalExpressionCase = (ConditionalExpressionCase)theEObject;
-        T result = caseConditionalExpressionCase(conditionalExpressionCase);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case AstPackage.ADD_SUBTRACT_EXPRESSION_PART:
-      {
-        AddSubtractExpressionPart addSubtractExpressionPart = (AddSubtractExpressionPart)theEObject;
-        T result = caseAddSubtractExpressionPart(addSubtractExpressionPart);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case AstPackage.MULTIPLY_DIVIDE_EXPRESSION_PART:
-      {
-        MultiplyDivideExpressionPart multiplyDivideExpressionPart = (MultiplyDivideExpressionPart)theEObject;
-        T result = caseMultiplyDivideExpressionPart(multiplyDivideExpressionPart);
+        MultiplicativeExpressionPart multiplicativeExpressionPart = (MultiplicativeExpressionPart)theEObject;
+        T result = caseMultiplicativeExpressionPart(multiplicativeExpressionPart);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -664,11 +664,27 @@ public class AstSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case AstPackage.ASSIGNMENT_EXPRESSION:
+      {
+        AssignmentExpression assignmentExpression = (AssignmentExpression)theEObject;
+        T result = caseAssignmentExpression(assignmentExpression);
+        if (result == null) result = caseExpression(assignmentExpression);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case AstPackage.RANGE_EXPRESSION:
       {
         RangeExpression rangeExpression = (RangeExpression)theEObject;
         T result = caseRangeExpression(rangeExpression);
         if (result == null) result = caseExpression(rangeExpression);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AstPackage.CONDITIONAL_EXPRESSION:
+      {
+        ConditionalExpression conditionalExpression = (ConditionalExpression)theEObject;
+        T result = caseConditionalExpression(conditionalExpression);
+        if (result == null) result = caseExpression(conditionalExpression);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -696,19 +712,19 @@ public class AstSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AstPackage.ADD_SUBTRACT_EXPRESSION:
+      case AstPackage.ADDITIVE_EXPRESSION:
       {
-        AddSubtractExpression addSubtractExpression = (AddSubtractExpression)theEObject;
-        T result = caseAddSubtractExpression(addSubtractExpression);
-        if (result == null) result = caseExpression(addSubtractExpression);
+        AdditiveExpression additiveExpression = (AdditiveExpression)theEObject;
+        T result = caseAdditiveExpression(additiveExpression);
+        if (result == null) result = caseExpression(additiveExpression);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AstPackage.MULTIPLY_DIVIDE_EXPRESSION:
+      case AstPackage.MULTIPLICATIVE_EXPRESSION:
       {
-        MultiplyDivideExpression multiplyDivideExpression = (MultiplyDivideExpression)theEObject;
-        T result = caseMultiplyDivideExpression(multiplyDivideExpression);
-        if (result == null) result = caseExpression(multiplyDivideExpression);
+        MultiplicativeExpression multiplicativeExpression = (MultiplicativeExpression)theEObject;
+        T result = caseMultiplicativeExpression(multiplicativeExpression);
+        if (result == null) result = caseExpression(multiplicativeExpression);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -725,6 +741,14 @@ public class AstSwitch<T>
         UnaryExpression unaryExpression = (UnaryExpression)theEObject;
         T result = caseUnaryExpression(unaryExpression);
         if (result == null) result = caseExpression(unaryExpression);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AstPackage.POSTFIX_EXPRESSION:
+      {
+        PostfixExpression postfixExpression = (PostfixExpression)theEObject;
+        T result = casePostfixExpression(postfixExpression);
+        if (result == null) result = caseExpression(postfixExpression);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -1109,6 +1133,38 @@ public class AstSwitch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>For Statement</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>For Statement</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseForStatement(ForStatement object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>For Statement Initializer</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>For Statement Initializer</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseForStatementInitializer(ForStatementInitializer object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>Foreach Statement</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -1381,65 +1437,33 @@ public class AstSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Conditional Expression</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Additive Expression Part</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Conditional Expression</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Additive Expression Part</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseConditionalExpression(ConditionalExpression object)
+  public T caseAdditiveExpressionPart(AdditiveExpressionPart object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Conditional Expression Case</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Multiplicative Expression Part</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Conditional Expression Case</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Multiplicative Expression Part</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseConditionalExpressionCase(ConditionalExpressionCase object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Add Subtract Expression Part</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Add Subtract Expression Part</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseAddSubtractExpressionPart(AddSubtractExpressionPart object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Multiply Divide Expression Part</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Multiply Divide Expression Part</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseMultiplyDivideExpressionPart(MultiplyDivideExpressionPart object)
+  public T caseMultiplicativeExpressionPart(MultiplicativeExpressionPart object)
   {
     return null;
   }
@@ -1829,6 +1853,22 @@ public class AstSwitch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>Assignment Expression</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Assignment Expression</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAssignmentExpression(AssignmentExpression object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>Range Expression</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -1840,6 +1880,22 @@ public class AstSwitch<T>
    * @generated
    */
   public T caseRangeExpression(RangeExpression object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Conditional Expression</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Conditional Expression</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseConditionalExpression(ConditionalExpression object)
   {
     return null;
   }
@@ -1893,33 +1949,33 @@ public class AstSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Add Subtract Expression</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Additive Expression</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Add Subtract Expression</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Additive Expression</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseAddSubtractExpression(AddSubtractExpression object)
+  public T caseAdditiveExpression(AdditiveExpression object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Multiply Divide Expression</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Multiplicative Expression</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Multiply Divide Expression</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Multiplicative Expression</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseMultiplyDivideExpression(MultiplyDivideExpression object)
+  public T caseMultiplicativeExpression(MultiplicativeExpression object)
   {
     return null;
   }
@@ -1952,6 +2008,22 @@ public class AstSwitch<T>
    * @generated
    */
   public T caseUnaryExpression(UnaryExpression object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Postfix Expression</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Postfix Expression</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T casePostfixExpression(PostfixExpression object)
   {
     return null;
   }

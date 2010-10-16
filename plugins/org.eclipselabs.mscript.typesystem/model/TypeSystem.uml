@@ -248,12 +248,12 @@
       </ownedOperation>
     </packagedElement>
     <packagedElement xmi:type="uml:Enumeration" xmi:id="_1MUB0H3zEd-EWvFDOLE-rQ" name="OperatorKind">
-      <ownedLiteral xmi:id="_scrm8KxQEd-ZZ_8ZIavFMA" name="Add"/>
-      <ownedLiteral xmi:id="_tEktYKxQEd-ZZ_8ZIavFMA" name="Subtract"/>
-      <ownedLiteral xmi:id="_tpDTcKxQEd-ZZ_8ZIavFMA" name="Multiply"/>
-      <ownedLiteral xmi:id="_uSPaYKxQEd-ZZ_8ZIavFMA" name="Divide"/>
-      <ownedLiteral xmi:id="_0E2NkLQkEd-_7IrwlAwZ7g" name="ElementWiseMultiply"/>
-      <ownedLiteral xmi:id="_8EaFILQkEd-_7IrwlAwZ7g" name="ElementWiseDivide"/>
+      <ownedLiteral xmi:id="_scrm8KxQEd-ZZ_8ZIavFMA" name="Addition"/>
+      <ownedLiteral xmi:id="_tEktYKxQEd-ZZ_8ZIavFMA" name="Subtraction"/>
+      <ownedLiteral xmi:id="_tpDTcKxQEd-ZZ_8ZIavFMA" name="Multiplication"/>
+      <ownedLiteral xmi:id="_uSPaYKxQEd-ZZ_8ZIavFMA" name="Division"/>
+      <ownedLiteral xmi:id="_0E2NkLQkEd-_7IrwlAwZ7g" name="ElementWiseMultiplication"/>
+      <ownedLiteral xmi:id="_8EaFILQkEd-_7IrwlAwZ7g" name="ElementWiseDivision"/>
       <ownedLiteral xmi:id="_TKiIgLWsEd-vy7wpTNtOBw" name="UnaryMinus"/>
       <ownedLiteral xmi:id="_-G6KENUuEd-6taNkaoHW5g" name="LogicalAnd"/>
       <ownedLiteral xmi:id="_AWGlgNUvEd-6taNkaoHW5g" name="LogicalOr"/>

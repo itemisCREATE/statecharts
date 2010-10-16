@@ -233,6 +233,24 @@ public interface AstFactory extends EFactory
   DoWhileStatement createDoWhileStatement();
 
   /**
+   * Returns a new object of class '<em>For Statement</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>For Statement</em>'.
+   * @generated
+   */
+  ForStatement createForStatement();
+
+  /**
+   * Returns a new object of class '<em>For Statement Initializer</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>For Statement Initializer</em>'.
+   * @generated
+   */
+  ForStatementInitializer createForStatementInitializer();
+
+  /**
    * Returns a new object of class '<em>Foreach Statement</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -386,40 +404,22 @@ public interface AstFactory extends EFactory
   Expression createExpression();
 
   /**
-   * Returns a new object of class '<em>Conditional Expression</em>'.
+   * Returns a new object of class '<em>Additive Expression Part</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Conditional Expression</em>'.
+   * @return a new object of class '<em>Additive Expression Part</em>'.
    * @generated
    */
-  ConditionalExpression createConditionalExpression();
+  AdditiveExpressionPart createAdditiveExpressionPart();
 
   /**
-   * Returns a new object of class '<em>Conditional Expression Case</em>'.
+   * Returns a new object of class '<em>Multiplicative Expression Part</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Conditional Expression Case</em>'.
+   * @return a new object of class '<em>Multiplicative Expression Part</em>'.
    * @generated
    */
-  ConditionalExpressionCase createConditionalExpressionCase();
-
-  /**
-   * Returns a new object of class '<em>Add Subtract Expression Part</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Add Subtract Expression Part</em>'.
-   * @generated
-   */
-  AddSubtractExpressionPart createAddSubtractExpressionPart();
-
-  /**
-   * Returns a new object of class '<em>Multiply Divide Expression Part</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Multiply Divide Expression Part</em>'.
-   * @generated
-   */
-  MultiplyDivideExpressionPart createMultiplyDivideExpressionPart();
+  MultiplicativeExpressionPart createMultiplicativeExpressionPart();
 
   /**
    * Returns a new object of class '<em>Feature Call Part</em>'.
@@ -638,6 +638,15 @@ public interface AstFactory extends EFactory
   UnitExpressionExponent createUnitExpressionExponent();
 
   /**
+   * Returns a new object of class '<em>Assignment Expression</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Assignment Expression</em>'.
+   * @generated
+   */
+  AssignmentExpression createAssignmentExpression();
+
+  /**
    * Returns a new object of class '<em>Range Expression</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -645,6 +654,15 @@ public interface AstFactory extends EFactory
    * @generated
    */
   RangeExpression createRangeExpression();
+
+  /**
+   * Returns a new object of class '<em>Conditional Expression</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Conditional Expression</em>'.
+   * @generated
+   */
+  ConditionalExpression createConditionalExpression();
 
   /**
    * Returns a new object of class '<em>Logical Or Expression</em>'.
@@ -674,22 +692,22 @@ public interface AstFactory extends EFactory
   RelationalExpression createRelationalExpression();
 
   /**
-   * Returns a new object of class '<em>Add Subtract Expression</em>'.
+   * Returns a new object of class '<em>Additive Expression</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Add Subtract Expression</em>'.
+   * @return a new object of class '<em>Additive Expression</em>'.
    * @generated
    */
-  AddSubtractExpression createAddSubtractExpression();
+  AdditiveExpression createAdditiveExpression();
 
   /**
-   * Returns a new object of class '<em>Multiply Divide Expression</em>'.
+   * Returns a new object of class '<em>Multiplicative Expression</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Multiply Divide Expression</em>'.
+   * @return a new object of class '<em>Multiplicative Expression</em>'.
    * @generated
    */
-  MultiplyDivideExpression createMultiplyDivideExpression();
+  MultiplicativeExpression createMultiplicativeExpression();
 
   /**
    * Returns a new object of class '<em>Power Expression</em>'.
@@ -708,6 +726,15 @@ public interface AstFactory extends EFactory
    * @generated
    */
   UnaryExpression createUnaryExpression();
+
+  /**
+   * Returns a new object of class '<em>Postfix Expression</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Postfix Expression</em>'.
+   * @generated
+   */
+  PostfixExpression createPostfixExpression();
 
   /**
    * Returns a new object of class '<em>Feature Call</em>'.

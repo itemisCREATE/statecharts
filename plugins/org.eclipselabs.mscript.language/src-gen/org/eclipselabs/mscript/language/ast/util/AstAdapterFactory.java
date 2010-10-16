@@ -193,6 +193,16 @@ public class AstAdapterFactory extends AdapterFactoryImpl
         return createDoWhileStatementAdapter();
       }
       @Override
+      public Adapter caseForStatement(ForStatement object)
+      {
+        return createForStatementAdapter();
+      }
+      @Override
+      public Adapter caseForStatementInitializer(ForStatementInitializer object)
+      {
+        return createForStatementInitializerAdapter();
+      }
+      @Override
       public Adapter caseForeachStatement(ForeachStatement object)
       {
         return createForeachStatementAdapter();
@@ -278,24 +288,14 @@ public class AstAdapterFactory extends AdapterFactoryImpl
         return createExpressionAdapter();
       }
       @Override
-      public Adapter caseConditionalExpression(ConditionalExpression object)
+      public Adapter caseAdditiveExpressionPart(AdditiveExpressionPart object)
       {
-        return createConditionalExpressionAdapter();
+        return createAdditiveExpressionPartAdapter();
       }
       @Override
-      public Adapter caseConditionalExpressionCase(ConditionalExpressionCase object)
+      public Adapter caseMultiplicativeExpressionPart(MultiplicativeExpressionPart object)
       {
-        return createConditionalExpressionCaseAdapter();
-      }
-      @Override
-      public Adapter caseAddSubtractExpressionPart(AddSubtractExpressionPart object)
-      {
-        return createAddSubtractExpressionPartAdapter();
-      }
-      @Override
-      public Adapter caseMultiplyDivideExpressionPart(MultiplyDivideExpressionPart object)
-      {
-        return createMultiplyDivideExpressionPartAdapter();
+        return createMultiplicativeExpressionPartAdapter();
       }
       @Override
       public Adapter caseFeatureCallPart(FeatureCallPart object)
@@ -418,9 +418,19 @@ public class AstAdapterFactory extends AdapterFactoryImpl
         return createUnitExpressionExponentAdapter();
       }
       @Override
+      public Adapter caseAssignmentExpression(AssignmentExpression object)
+      {
+        return createAssignmentExpressionAdapter();
+      }
+      @Override
       public Adapter caseRangeExpression(RangeExpression object)
       {
         return createRangeExpressionAdapter();
+      }
+      @Override
+      public Adapter caseConditionalExpression(ConditionalExpression object)
+      {
+        return createConditionalExpressionAdapter();
       }
       @Override
       public Adapter caseLogicalOrExpression(LogicalOrExpression object)
@@ -438,14 +448,14 @@ public class AstAdapterFactory extends AdapterFactoryImpl
         return createRelationalExpressionAdapter();
       }
       @Override
-      public Adapter caseAddSubtractExpression(AddSubtractExpression object)
+      public Adapter caseAdditiveExpression(AdditiveExpression object)
       {
-        return createAddSubtractExpressionAdapter();
+        return createAdditiveExpressionAdapter();
       }
       @Override
-      public Adapter caseMultiplyDivideExpression(MultiplyDivideExpression object)
+      public Adapter caseMultiplicativeExpression(MultiplicativeExpression object)
       {
-        return createMultiplyDivideExpressionAdapter();
+        return createMultiplicativeExpressionAdapter();
       }
       @Override
       public Adapter casePowerExpression(PowerExpression object)
@@ -456,6 +466,11 @@ public class AstAdapterFactory extends AdapterFactoryImpl
       public Adapter caseUnaryExpression(UnaryExpression object)
       {
         return createUnaryExpressionAdapter();
+      }
+      @Override
+      public Adapter casePostfixExpression(PostfixExpression object)
+      {
+        return createPostfixExpressionAdapter();
       }
       @Override
       public Adapter caseFeatureCall(FeatureCall object)
@@ -830,6 +845,36 @@ public class AstAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.ForStatement <em>For Statement</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipselabs.mscript.language.ast.ForStatement
+   * @generated
+   */
+  public Adapter createForStatementAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.ForStatementInitializer <em>For Statement Initializer</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipselabs.mscript.language.ast.ForStatementInitializer
+   * @generated
+   */
+  public Adapter createForStatementInitializerAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.ForeachStatement <em>Foreach Statement</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -1085,61 +1130,31 @@ public class AstAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.ConditionalExpression <em>Conditional Expression</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.AdditiveExpressionPart <em>Additive Expression Part</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.ConditionalExpression
+   * @see org.eclipselabs.mscript.language.ast.AdditiveExpressionPart
    * @generated
    */
-  public Adapter createConditionalExpressionAdapter()
+  public Adapter createAdditiveExpressionPartAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.ConditionalExpressionCase <em>Conditional Expression Case</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.MultiplicativeExpressionPart <em>Multiplicative Expression Part</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.ConditionalExpressionCase
+   * @see org.eclipselabs.mscript.language.ast.MultiplicativeExpressionPart
    * @generated
    */
-  public Adapter createConditionalExpressionCaseAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.AddSubtractExpressionPart <em>Add Subtract Expression Part</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.AddSubtractExpressionPart
-   * @generated
-   */
-  public Adapter createAddSubtractExpressionPartAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.MultiplyDivideExpressionPart <em>Multiply Divide Expression Part</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.MultiplyDivideExpressionPart
-   * @generated
-   */
-  public Adapter createMultiplyDivideExpressionPartAdapter()
+  public Adapter createMultiplicativeExpressionPartAdapter()
   {
     return null;
   }
@@ -1505,6 +1520,21 @@ public class AstAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.AssignmentExpression <em>Assignment Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipselabs.mscript.language.ast.AssignmentExpression
+   * @generated
+   */
+  public Adapter createAssignmentExpressionAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.RangeExpression <em>Range Expression</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -1515,6 +1545,21 @@ public class AstAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createRangeExpressionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.ConditionalExpression <em>Conditional Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipselabs.mscript.language.ast.ConditionalExpression
+   * @generated
+   */
+  public Adapter createConditionalExpressionAdapter()
   {
     return null;
   }
@@ -1565,31 +1610,31 @@ public class AstAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.AddSubtractExpression <em>Add Subtract Expression</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.AdditiveExpression <em>Additive Expression</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.AddSubtractExpression
+   * @see org.eclipselabs.mscript.language.ast.AdditiveExpression
    * @generated
    */
-  public Adapter createAddSubtractExpressionAdapter()
+  public Adapter createAdditiveExpressionAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.MultiplyDivideExpression <em>Multiply Divide Expression</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.MultiplicativeExpression <em>Multiplicative Expression</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.MultiplyDivideExpression
+   * @see org.eclipselabs.mscript.language.ast.MultiplicativeExpression
    * @generated
    */
-  public Adapter createMultiplyDivideExpressionAdapter()
+  public Adapter createMultiplicativeExpressionAdapter()
   {
     return null;
   }
@@ -1620,6 +1665,21 @@ public class AstAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createUnaryExpressionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.PostfixExpression <em>Postfix Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipselabs.mscript.language.ast.PostfixExpression
+   * @generated
+   */
+  public Adapter createPostfixExpressionAdapter()
   {
     return null;
   }

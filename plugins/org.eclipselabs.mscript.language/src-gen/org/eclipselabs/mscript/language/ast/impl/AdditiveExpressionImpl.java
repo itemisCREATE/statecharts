@@ -20,26 +20,26 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.eclipselabs.mscript.language.ast.AddSubtractExpression;
-import org.eclipselabs.mscript.language.ast.AddSubtractExpressionPart;
+import org.eclipselabs.mscript.language.ast.AdditiveExpression;
+import org.eclipselabs.mscript.language.ast.AdditiveExpressionPart;
 import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.Expression;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Add Subtract Expression</b></em>'.
+ * An implementation of the model object '<em><b>Additive Expression</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.AddSubtractExpressionImpl#getLeftOperand <em>Left Operand</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.AddSubtractExpressionImpl#getRightParts <em>Right Parts</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.AdditiveExpressionImpl#getLeftOperand <em>Left Operand</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.AdditiveExpressionImpl#getRightParts <em>Right Parts</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class AddSubtractExpressionImpl extends ExpressionImpl implements AddSubtractExpression
+public class AdditiveExpressionImpl extends ExpressionImpl implements AdditiveExpression
 {
   /**
    * The cached value of the '{@link #getLeftOperand() <em>Left Operand</em>}' containment reference.
@@ -59,14 +59,14 @@ public class AddSubtractExpressionImpl extends ExpressionImpl implements AddSubt
    * @generated
    * @ordered
    */
-  protected EList<AddSubtractExpressionPart> rightParts;
+  protected EList<AdditiveExpressionPart> rightParts;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected AddSubtractExpressionImpl()
+  protected AdditiveExpressionImpl()
   {
     super();
   }
@@ -79,7 +79,7 @@ public class AddSubtractExpressionImpl extends ExpressionImpl implements AddSubt
   @Override
   protected EClass eStaticClass()
   {
-    return AstPackage.Literals.ADD_SUBTRACT_EXPRESSION;
+    return AstPackage.Literals.ADDITIVE_EXPRESSION;
   }
 
   /**
@@ -103,7 +103,7 @@ public class AddSubtractExpressionImpl extends ExpressionImpl implements AddSubt
     leftOperand = newLeftOperand;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.ADD_SUBTRACT_EXPRESSION__LEFT_OPERAND, oldLeftOperand, newLeftOperand);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.ADDITIVE_EXPRESSION__LEFT_OPERAND, oldLeftOperand, newLeftOperand);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -120,14 +120,14 @@ public class AddSubtractExpressionImpl extends ExpressionImpl implements AddSubt
     {
       NotificationChain msgs = null;
       if (leftOperand != null)
-        msgs = ((InternalEObject)leftOperand).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.ADD_SUBTRACT_EXPRESSION__LEFT_OPERAND, null, msgs);
+        msgs = ((InternalEObject)leftOperand).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.ADDITIVE_EXPRESSION__LEFT_OPERAND, null, msgs);
       if (newLeftOperand != null)
-        msgs = ((InternalEObject)newLeftOperand).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.ADD_SUBTRACT_EXPRESSION__LEFT_OPERAND, null, msgs);
+        msgs = ((InternalEObject)newLeftOperand).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.ADDITIVE_EXPRESSION__LEFT_OPERAND, null, msgs);
       msgs = basicSetLeftOperand(newLeftOperand, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.ADD_SUBTRACT_EXPRESSION__LEFT_OPERAND, newLeftOperand, newLeftOperand));
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.ADDITIVE_EXPRESSION__LEFT_OPERAND, newLeftOperand, newLeftOperand));
   }
 
   /**
@@ -135,11 +135,11 @@ public class AddSubtractExpressionImpl extends ExpressionImpl implements AddSubt
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<AddSubtractExpressionPart> getRightParts()
+  public EList<AdditiveExpressionPart> getRightParts()
   {
     if (rightParts == null)
     {
-      rightParts = new EObjectContainmentEList<AddSubtractExpressionPart>(AddSubtractExpressionPart.class, this, AstPackage.ADD_SUBTRACT_EXPRESSION__RIGHT_PARTS);
+      rightParts = new EObjectContainmentEList<AdditiveExpressionPart>(AdditiveExpressionPart.class, this, AstPackage.ADDITIVE_EXPRESSION__RIGHT_PARTS);
     }
     return rightParts;
   }
@@ -154,9 +154,9 @@ public class AddSubtractExpressionImpl extends ExpressionImpl implements AddSubt
   {
     switch (featureID)
     {
-      case AstPackage.ADD_SUBTRACT_EXPRESSION__LEFT_OPERAND:
+      case AstPackage.ADDITIVE_EXPRESSION__LEFT_OPERAND:
         return basicSetLeftOperand(null, msgs);
-      case AstPackage.ADD_SUBTRACT_EXPRESSION__RIGHT_PARTS:
+      case AstPackage.ADDITIVE_EXPRESSION__RIGHT_PARTS:
         return ((InternalEList<?>)getRightParts()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -172,9 +172,9 @@ public class AddSubtractExpressionImpl extends ExpressionImpl implements AddSubt
   {
     switch (featureID)
     {
-      case AstPackage.ADD_SUBTRACT_EXPRESSION__LEFT_OPERAND:
+      case AstPackage.ADDITIVE_EXPRESSION__LEFT_OPERAND:
         return getLeftOperand();
-      case AstPackage.ADD_SUBTRACT_EXPRESSION__RIGHT_PARTS:
+      case AstPackage.ADDITIVE_EXPRESSION__RIGHT_PARTS:
         return getRightParts();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -191,12 +191,12 @@ public class AddSubtractExpressionImpl extends ExpressionImpl implements AddSubt
   {
     switch (featureID)
     {
-      case AstPackage.ADD_SUBTRACT_EXPRESSION__LEFT_OPERAND:
+      case AstPackage.ADDITIVE_EXPRESSION__LEFT_OPERAND:
         setLeftOperand((Expression)newValue);
         return;
-      case AstPackage.ADD_SUBTRACT_EXPRESSION__RIGHT_PARTS:
+      case AstPackage.ADDITIVE_EXPRESSION__RIGHT_PARTS:
         getRightParts().clear();
-        getRightParts().addAll((Collection<? extends AddSubtractExpressionPart>)newValue);
+        getRightParts().addAll((Collection<? extends AdditiveExpressionPart>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -212,10 +212,10 @@ public class AddSubtractExpressionImpl extends ExpressionImpl implements AddSubt
   {
     switch (featureID)
     {
-      case AstPackage.ADD_SUBTRACT_EXPRESSION__LEFT_OPERAND:
+      case AstPackage.ADDITIVE_EXPRESSION__LEFT_OPERAND:
         setLeftOperand((Expression)null);
         return;
-      case AstPackage.ADD_SUBTRACT_EXPRESSION__RIGHT_PARTS:
+      case AstPackage.ADDITIVE_EXPRESSION__RIGHT_PARTS:
         getRightParts().clear();
         return;
     }
@@ -232,12 +232,12 @@ public class AddSubtractExpressionImpl extends ExpressionImpl implements AddSubt
   {
     switch (featureID)
     {
-      case AstPackage.ADD_SUBTRACT_EXPRESSION__LEFT_OPERAND:
+      case AstPackage.ADDITIVE_EXPRESSION__LEFT_OPERAND:
         return leftOperand != null;
-      case AstPackage.ADD_SUBTRACT_EXPRESSION__RIGHT_PARTS:
+      case AstPackage.ADDITIVE_EXPRESSION__RIGHT_PARTS:
         return rightParts != null && !rightParts.isEmpty();
     }
     return super.eIsSet(featureID);
   }
 
-} //AddSubtractExpressionImpl
+} //AdditiveExpressionImpl

@@ -13,149 +13,149 @@ import org.eclipse.emf.common.util.Enumerator;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the literals of the enumeration '<em><b>Multiply Divide Operator</b></em>',
+ * A representation of the literals of the enumeration '<em><b>Multiplicative Operator</b></em>',
  * and utility methods for working with them.
  * <!-- end-user-doc -->
- * @see org.eclipselabs.mscript.language.ast.AstPackage#getMultiplyDivideOperator()
+ * @see org.eclipselabs.mscript.language.ast.AstPackage#getMultiplicativeOperator()
  * @model
  * @generated
  */
-public enum MultiplyDivideOperator implements Enumerator
+public enum MultiplicativeOperator implements Enumerator
 {
   /**
-   * The '<em><b>Multiply</b></em>' literal object.
+   * The '<em><b>Multiplication</b></em>' literal object.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #MULTIPLY_VALUE
+   * @see #MULTIPLICATION_VALUE
    * @generated
    * @ordered
    */
-  MULTIPLY(0, "Multiply", "*"),
+  MULTIPLICATION(0, "Multiplication", "*"),
 
   /**
-   * The '<em><b>Divide</b></em>' literal object.
+   * The '<em><b>Division</b></em>' literal object.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #DIVIDE_VALUE
+   * @see #DIVISION_VALUE
    * @generated
    * @ordered
    */
-  DIVIDE(1, "Divide", "/"),
+  DIVISION(1, "Division", "/"),
 
   /**
-   * The '<em><b>Element Wise Multiply</b></em>' literal object.
+   * The '<em><b>Element Wise Multiplication</b></em>' literal object.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #ELEMENT_WISE_MULTIPLY_VALUE
+   * @see #ELEMENT_WISE_MULTIPLICATION_VALUE
    * @generated
    * @ordered
    */
-  ELEMENT_WISE_MULTIPLY(2, "ElementWiseMultiply", ".*"),
+  ELEMENT_WISE_MULTIPLICATION(2, "ElementWiseMultiplication", ".*"),
 
   /**
-   * The '<em><b>Element Wise Divide</b></em>' literal object.
+   * The '<em><b>Element Wise Division</b></em>' literal object.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #ELEMENT_WISE_DIVIDE_VALUE
+   * @see #ELEMENT_WISE_DIVISION_VALUE
    * @generated
    * @ordered
    */
-  ELEMENT_WISE_DIVIDE(3, "ElementWiseDivide", "./");
+  ELEMENT_WISE_DIVISION(3, "ElementWiseDivision", "./");
 
   /**
-   * The '<em><b>Multiply</b></em>' literal value.
+   * The '<em><b>Multiplication</b></em>' literal value.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of '<em><b>Multiply</b></em>' literal object isn't clear,
+   * If the meaning of '<em><b>Multiplication</b></em>' literal object isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @see #MULTIPLY
-   * @model name="Multiply" literal="*"
+   * @see #MULTIPLICATION
+   * @model name="Multiplication" literal="*"
    * @generated
    * @ordered
    */
-  public static final int MULTIPLY_VALUE = 0;
+  public static final int MULTIPLICATION_VALUE = 0;
 
   /**
-   * The '<em><b>Divide</b></em>' literal value.
+   * The '<em><b>Division</b></em>' literal value.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of '<em><b>Divide</b></em>' literal object isn't clear,
+   * If the meaning of '<em><b>Division</b></em>' literal object isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @see #DIVIDE
-   * @model name="Divide" literal="/"
+   * @see #DIVISION
+   * @model name="Division" literal="/"
    * @generated
    * @ordered
    */
-  public static final int DIVIDE_VALUE = 1;
+  public static final int DIVISION_VALUE = 1;
 
   /**
-   * The '<em><b>Element Wise Multiply</b></em>' literal value.
+   * The '<em><b>Element Wise Multiplication</b></em>' literal value.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of '<em><b>Element Wise Multiply</b></em>' literal object isn't clear,
+   * If the meaning of '<em><b>Element Wise Multiplication</b></em>' literal object isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @see #ELEMENT_WISE_MULTIPLY
-   * @model name="ElementWiseMultiply" literal=".*"
+   * @see #ELEMENT_WISE_MULTIPLICATION
+   * @model name="ElementWiseMultiplication" literal=".*"
    * @generated
    * @ordered
    */
-  public static final int ELEMENT_WISE_MULTIPLY_VALUE = 2;
+  public static final int ELEMENT_WISE_MULTIPLICATION_VALUE = 2;
 
   /**
-   * The '<em><b>Element Wise Divide</b></em>' literal value.
+   * The '<em><b>Element Wise Division</b></em>' literal value.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of '<em><b>Element Wise Divide</b></em>' literal object isn't clear,
+   * If the meaning of '<em><b>Element Wise Division</b></em>' literal object isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @see #ELEMENT_WISE_DIVIDE
-   * @model name="ElementWiseDivide" literal="./"
+   * @see #ELEMENT_WISE_DIVISION
+   * @model name="ElementWiseDivision" literal="./"
    * @generated
    * @ordered
    */
-  public static final int ELEMENT_WISE_DIVIDE_VALUE = 3;
+  public static final int ELEMENT_WISE_DIVISION_VALUE = 3;
 
   /**
-   * An array of all the '<em><b>Multiply Divide Operator</b></em>' enumerators.
+   * An array of all the '<em><b>Multiplicative Operator</b></em>' enumerators.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private static final MultiplyDivideOperator[] VALUES_ARRAY =
-    new MultiplyDivideOperator[]
+  private static final MultiplicativeOperator[] VALUES_ARRAY =
+    new MultiplicativeOperator[]
     {
-      MULTIPLY,
-      DIVIDE,
-      ELEMENT_WISE_MULTIPLY,
-      ELEMENT_WISE_DIVIDE,
+      MULTIPLICATION,
+      DIVISION,
+      ELEMENT_WISE_MULTIPLICATION,
+      ELEMENT_WISE_DIVISION,
     };
 
   /**
-   * A public read-only list of all the '<em><b>Multiply Divide Operator</b></em>' enumerators.
+   * A public read-only list of all the '<em><b>Multiplicative Operator</b></em>' enumerators.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  public static final List<MultiplyDivideOperator> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+  public static final List<MultiplicativeOperator> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
   /**
-   * Returns the '<em><b>Multiply Divide Operator</b></em>' literal with the specified literal value.
+   * Returns the '<em><b>Multiplicative Operator</b></em>' literal with the specified literal value.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  public static MultiplyDivideOperator get(String literal)
+  public static MultiplicativeOperator get(String literal)
   {
     for (int i = 0; i < VALUES_ARRAY.length; ++i)
     {
-      MultiplyDivideOperator result = VALUES_ARRAY[i];
+      MultiplicativeOperator result = VALUES_ARRAY[i];
       if (result.toString().equals(literal))
       {
         return result;
@@ -165,16 +165,16 @@ public enum MultiplyDivideOperator implements Enumerator
   }
 
   /**
-   * Returns the '<em><b>Multiply Divide Operator</b></em>' literal with the specified name.
+   * Returns the '<em><b>Multiplicative Operator</b></em>' literal with the specified name.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  public static MultiplyDivideOperator getByName(String name)
+  public static MultiplicativeOperator getByName(String name)
   {
     for (int i = 0; i < VALUES_ARRAY.length; ++i)
     {
-      MultiplyDivideOperator result = VALUES_ARRAY[i];
+      MultiplicativeOperator result = VALUES_ARRAY[i];
       if (result.getName().equals(name))
       {
         return result;
@@ -184,19 +184,19 @@ public enum MultiplyDivideOperator implements Enumerator
   }
 
   /**
-   * Returns the '<em><b>Multiply Divide Operator</b></em>' literal with the specified integer value.
+   * Returns the '<em><b>Multiplicative Operator</b></em>' literal with the specified integer value.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  public static MultiplyDivideOperator get(int value)
+  public static MultiplicativeOperator get(int value)
   {
     switch (value)
     {
-      case MULTIPLY_VALUE: return MULTIPLY;
-      case DIVIDE_VALUE: return DIVIDE;
-      case ELEMENT_WISE_MULTIPLY_VALUE: return ELEMENT_WISE_MULTIPLY;
-      case ELEMENT_WISE_DIVIDE_VALUE: return ELEMENT_WISE_DIVIDE;
+      case MULTIPLICATION_VALUE: return MULTIPLICATION;
+      case DIVISION_VALUE: return DIVISION;
+      case ELEMENT_WISE_MULTIPLICATION_VALUE: return ELEMENT_WISE_MULTIPLICATION;
+      case ELEMENT_WISE_DIVISION_VALUE: return ELEMENT_WISE_DIVISION;
     }
     return null;
   }
@@ -228,7 +228,7 @@ public enum MultiplyDivideOperator implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
-  private MultiplyDivideOperator(int value, String name, String literal)
+  private MultiplicativeOperator(int value, String name, String literal)
   {
     this.value = value;
     this.name = name;
@@ -277,4 +277,4 @@ public enum MultiplyDivideOperator implements Enumerator
     return literal;
   }
   
-} //MultiplyDivideOperator
+} //MultiplicativeOperator

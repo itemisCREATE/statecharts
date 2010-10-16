@@ -46,8 +46,8 @@ public class UnitTypeOperations extends DataTypeOperations {
 			return TypeSystemFactory.eINSTANCE.createInvalidDataType();
 		}
 		switch (operator) {
-		case MULTIPLY:
-		case DIVIDE:
+		case MULTIPLICATION:
+		case DIVISION:
 			return TypeSystemFactory.eINSTANCE.createUnitType();
 		case EQUAL_TO:
 		case NOT_EQUAL_TO:

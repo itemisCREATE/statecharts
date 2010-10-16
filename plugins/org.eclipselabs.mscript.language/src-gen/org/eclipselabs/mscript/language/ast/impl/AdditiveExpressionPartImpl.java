@@ -14,26 +14,26 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.eclipselabs.mscript.language.ast.AddSubtractExpressionPart;
-import org.eclipselabs.mscript.language.ast.AddSubtractOperator;
+import org.eclipselabs.mscript.language.ast.AdditiveExpressionPart;
+import org.eclipselabs.mscript.language.ast.AdditiveOperator;
 import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.Expression;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Add Subtract Expression Part</b></em>'.
+ * An implementation of the model object '<em><b>Additive Expression Part</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.AddSubtractExpressionPartImpl#getOperator <em>Operator</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.AddSubtractExpressionPartImpl#getOperand <em>Operand</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.AdditiveExpressionPartImpl#getOperator <em>Operator</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.AdditiveExpressionPartImpl#getOperand <em>Operand</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class AddSubtractExpressionPartImpl extends MinimalEObjectImpl.Container implements AddSubtractExpressionPart
+public class AdditiveExpressionPartImpl extends MinimalEObjectImpl.Container implements AdditiveExpressionPart
 {
   /**
    * The default value of the '{@link #getOperator() <em>Operator</em>}' attribute.
@@ -43,7 +43,7 @@ public class AddSubtractExpressionPartImpl extends MinimalEObjectImpl.Container 
    * @generated
    * @ordered
    */
-  protected static final AddSubtractOperator OPERATOR_EDEFAULT = AddSubtractOperator.ADD;
+  protected static final AdditiveOperator OPERATOR_EDEFAULT = AdditiveOperator.ADDITION;
 
   /**
    * The cached value of the '{@link #getOperator() <em>Operator</em>}' attribute.
@@ -53,7 +53,7 @@ public class AddSubtractExpressionPartImpl extends MinimalEObjectImpl.Container 
    * @generated
    * @ordered
    */
-  protected AddSubtractOperator operator = OPERATOR_EDEFAULT;
+  protected AdditiveOperator operator = OPERATOR_EDEFAULT;
 
   /**
    * The cached value of the '{@link #getOperand() <em>Operand</em>}' containment reference.
@@ -70,7 +70,7 @@ public class AddSubtractExpressionPartImpl extends MinimalEObjectImpl.Container 
    * <!-- end-user-doc -->
    * @generated
    */
-  protected AddSubtractExpressionPartImpl()
+  protected AdditiveExpressionPartImpl()
   {
     super();
   }
@@ -83,7 +83,7 @@ public class AddSubtractExpressionPartImpl extends MinimalEObjectImpl.Container 
   @Override
   protected EClass eStaticClass()
   {
-    return AstPackage.Literals.ADD_SUBTRACT_EXPRESSION_PART;
+    return AstPackage.Literals.ADDITIVE_EXPRESSION_PART;
   }
 
   /**
@@ -91,7 +91,7 @@ public class AddSubtractExpressionPartImpl extends MinimalEObjectImpl.Container 
    * <!-- end-user-doc -->
    * @generated
    */
-  public AddSubtractOperator getOperator()
+  public AdditiveOperator getOperator()
   {
     return operator;
   }
@@ -101,12 +101,12 @@ public class AddSubtractExpressionPartImpl extends MinimalEObjectImpl.Container 
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setOperator(AddSubtractOperator newOperator)
+  public void setOperator(AdditiveOperator newOperator)
   {
-    AddSubtractOperator oldOperator = operator;
+    AdditiveOperator oldOperator = operator;
     operator = newOperator == null ? OPERATOR_EDEFAULT : newOperator;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.ADD_SUBTRACT_EXPRESSION_PART__OPERATOR, oldOperator, operator));
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.ADDITIVE_EXPRESSION_PART__OPERATOR, oldOperator, operator));
   }
 
   /**
@@ -130,7 +130,7 @@ public class AddSubtractExpressionPartImpl extends MinimalEObjectImpl.Container 
     operand = newOperand;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.ADD_SUBTRACT_EXPRESSION_PART__OPERAND, oldOperand, newOperand);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.ADDITIVE_EXPRESSION_PART__OPERAND, oldOperand, newOperand);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -147,14 +147,14 @@ public class AddSubtractExpressionPartImpl extends MinimalEObjectImpl.Container 
     {
       NotificationChain msgs = null;
       if (operand != null)
-        msgs = ((InternalEObject)operand).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.ADD_SUBTRACT_EXPRESSION_PART__OPERAND, null, msgs);
+        msgs = ((InternalEObject)operand).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.ADDITIVE_EXPRESSION_PART__OPERAND, null, msgs);
       if (newOperand != null)
-        msgs = ((InternalEObject)newOperand).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.ADD_SUBTRACT_EXPRESSION_PART__OPERAND, null, msgs);
+        msgs = ((InternalEObject)newOperand).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.ADDITIVE_EXPRESSION_PART__OPERAND, null, msgs);
       msgs = basicSetOperand(newOperand, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.ADD_SUBTRACT_EXPRESSION_PART__OPERAND, newOperand, newOperand));
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.ADDITIVE_EXPRESSION_PART__OPERAND, newOperand, newOperand));
   }
 
   /**
@@ -167,7 +167,7 @@ public class AddSubtractExpressionPartImpl extends MinimalEObjectImpl.Container 
   {
     switch (featureID)
     {
-      case AstPackage.ADD_SUBTRACT_EXPRESSION_PART__OPERAND:
+      case AstPackage.ADDITIVE_EXPRESSION_PART__OPERAND:
         return basicSetOperand(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -183,9 +183,9 @@ public class AddSubtractExpressionPartImpl extends MinimalEObjectImpl.Container 
   {
     switch (featureID)
     {
-      case AstPackage.ADD_SUBTRACT_EXPRESSION_PART__OPERATOR:
+      case AstPackage.ADDITIVE_EXPRESSION_PART__OPERATOR:
         return getOperator();
-      case AstPackage.ADD_SUBTRACT_EXPRESSION_PART__OPERAND:
+      case AstPackage.ADDITIVE_EXPRESSION_PART__OPERAND:
         return getOperand();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -201,10 +201,10 @@ public class AddSubtractExpressionPartImpl extends MinimalEObjectImpl.Container 
   {
     switch (featureID)
     {
-      case AstPackage.ADD_SUBTRACT_EXPRESSION_PART__OPERATOR:
-        setOperator((AddSubtractOperator)newValue);
+      case AstPackage.ADDITIVE_EXPRESSION_PART__OPERATOR:
+        setOperator((AdditiveOperator)newValue);
         return;
-      case AstPackage.ADD_SUBTRACT_EXPRESSION_PART__OPERAND:
+      case AstPackage.ADDITIVE_EXPRESSION_PART__OPERAND:
         setOperand((Expression)newValue);
         return;
     }
@@ -221,10 +221,10 @@ public class AddSubtractExpressionPartImpl extends MinimalEObjectImpl.Container 
   {
     switch (featureID)
     {
-      case AstPackage.ADD_SUBTRACT_EXPRESSION_PART__OPERATOR:
+      case AstPackage.ADDITIVE_EXPRESSION_PART__OPERATOR:
         setOperator(OPERATOR_EDEFAULT);
         return;
-      case AstPackage.ADD_SUBTRACT_EXPRESSION_PART__OPERAND:
+      case AstPackage.ADDITIVE_EXPRESSION_PART__OPERAND:
         setOperand((Expression)null);
         return;
     }
@@ -241,9 +241,9 @@ public class AddSubtractExpressionPartImpl extends MinimalEObjectImpl.Container 
   {
     switch (featureID)
     {
-      case AstPackage.ADD_SUBTRACT_EXPRESSION_PART__OPERATOR:
+      case AstPackage.ADDITIVE_EXPRESSION_PART__OPERATOR:
         return operator != OPERATOR_EDEFAULT;
-      case AstPackage.ADD_SUBTRACT_EXPRESSION_PART__OPERAND:
+      case AstPackage.ADDITIVE_EXPRESSION_PART__OPERAND:
         return operand != null;
     }
     return super.eIsSet(featureID);
@@ -266,4 +266,4 @@ public class AddSubtractExpressionPartImpl extends MinimalEObjectImpl.Container 
     return result.toString();
   }
 
-} //AddSubtractExpressionPartImpl
+} //AdditiveExpressionPartImpl

@@ -13,97 +13,97 @@ import org.eclipse.emf.common.util.Enumerator;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the literals of the enumeration '<em><b>Add Subtract Operator</b></em>',
+ * A representation of the literals of the enumeration '<em><b>Postfix Operator</b></em>',
  * and utility methods for working with them.
  * <!-- end-user-doc -->
- * @see org.eclipselabs.mscript.language.ast.AstPackage#getAddSubtractOperator()
+ * @see org.eclipselabs.mscript.language.ast.AstPackage#getPostfixOperator()
  * @model
  * @generated
  */
-public enum AddSubtractOperator implements Enumerator
+public enum PostfixOperator implements Enumerator
 {
   /**
-   * The '<em><b>Add</b></em>' literal object.
+   * The '<em><b>Increment</b></em>' literal object.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #ADD_VALUE
+   * @see #INCREMENT_VALUE
    * @generated
    * @ordered
    */
-  ADD(0, "Add", "+"),
+  INCREMENT(0, "Increment", "++"),
 
   /**
-   * The '<em><b>Subtract</b></em>' literal object.
+   * The '<em><b>Decrement</b></em>' literal object.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #SUBTRACT_VALUE
+   * @see #DECREMENT_VALUE
    * @generated
    * @ordered
    */
-  SUBTRACT(1, "Subtract", "-");
+  DECREMENT(1, "Decrement", "--");
 
   /**
-   * The '<em><b>Add</b></em>' literal value.
+   * The '<em><b>Increment</b></em>' literal value.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of '<em><b>Add</b></em>' literal object isn't clear,
+   * If the meaning of '<em><b>Increment</b></em>' literal object isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @see #ADD
-   * @model name="Add" literal="+"
+   * @see #INCREMENT
+   * @model name="Increment" literal="++"
    * @generated
    * @ordered
    */
-  public static final int ADD_VALUE = 0;
+  public static final int INCREMENT_VALUE = 0;
 
   /**
-   * The '<em><b>Subtract</b></em>' literal value.
+   * The '<em><b>Decrement</b></em>' literal value.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of '<em><b>Subtract</b></em>' literal object isn't clear,
+   * If the meaning of '<em><b>Decrement</b></em>' literal object isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @see #SUBTRACT
-   * @model name="Subtract" literal="-"
+   * @see #DECREMENT
+   * @model name="Decrement" literal="--"
    * @generated
    * @ordered
    */
-  public static final int SUBTRACT_VALUE = 1;
+  public static final int DECREMENT_VALUE = 1;
 
   /**
-   * An array of all the '<em><b>Add Subtract Operator</b></em>' enumerators.
+   * An array of all the '<em><b>Postfix Operator</b></em>' enumerators.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private static final AddSubtractOperator[] VALUES_ARRAY =
-    new AddSubtractOperator[]
+  private static final PostfixOperator[] VALUES_ARRAY =
+    new PostfixOperator[]
     {
-      ADD,
-      SUBTRACT,
+      INCREMENT,
+      DECREMENT,
     };
 
   /**
-   * A public read-only list of all the '<em><b>Add Subtract Operator</b></em>' enumerators.
+   * A public read-only list of all the '<em><b>Postfix Operator</b></em>' enumerators.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  public static final List<AddSubtractOperator> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+  public static final List<PostfixOperator> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
   /**
-   * Returns the '<em><b>Add Subtract Operator</b></em>' literal with the specified literal value.
+   * Returns the '<em><b>Postfix Operator</b></em>' literal with the specified literal value.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  public static AddSubtractOperator get(String literal)
+  public static PostfixOperator get(String literal)
   {
     for (int i = 0; i < VALUES_ARRAY.length; ++i)
     {
-      AddSubtractOperator result = VALUES_ARRAY[i];
+      PostfixOperator result = VALUES_ARRAY[i];
       if (result.toString().equals(literal))
       {
         return result;
@@ -113,16 +113,16 @@ public enum AddSubtractOperator implements Enumerator
   }
 
   /**
-   * Returns the '<em><b>Add Subtract Operator</b></em>' literal with the specified name.
+   * Returns the '<em><b>Postfix Operator</b></em>' literal with the specified name.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  public static AddSubtractOperator getByName(String name)
+  public static PostfixOperator getByName(String name)
   {
     for (int i = 0; i < VALUES_ARRAY.length; ++i)
     {
-      AddSubtractOperator result = VALUES_ARRAY[i];
+      PostfixOperator result = VALUES_ARRAY[i];
       if (result.getName().equals(name))
       {
         return result;
@@ -132,17 +132,17 @@ public enum AddSubtractOperator implements Enumerator
   }
 
   /**
-   * Returns the '<em><b>Add Subtract Operator</b></em>' literal with the specified integer value.
+   * Returns the '<em><b>Postfix Operator</b></em>' literal with the specified integer value.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  public static AddSubtractOperator get(int value)
+  public static PostfixOperator get(int value)
   {
     switch (value)
     {
-      case ADD_VALUE: return ADD;
-      case SUBTRACT_VALUE: return SUBTRACT;
+      case INCREMENT_VALUE: return INCREMENT;
+      case DECREMENT_VALUE: return DECREMENT;
     }
     return null;
   }
@@ -174,7 +174,7 @@ public enum AddSubtractOperator implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
-  private AddSubtractOperator(int value, String name, String literal)
+  private PostfixOperator(int value, String name, String literal)
   {
     this.value = value;
     this.name = name;
@@ -223,4 +223,4 @@ public enum AddSubtractOperator implements Enumerator
     return literal;
   }
   
-} //AddSubtractOperator
+} //PostfixOperator

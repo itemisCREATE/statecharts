@@ -109,6 +109,7 @@ Statement :
 	IfStatement |
 	WhileStatement |
 	DoWhileStatement |
+	ForStatement |
 	ForeachStatement |
 	TypeDefinition |
 	VariableDeclaration |
@@ -119,7 +120,7 @@ BlockStatement :
 	{BlockStatement} '{' (statements+=Statement)* '}';
 
 ExpressionStatement :
-	expression=FeatureCall ('=' assignedValue=Expression)? ';';
+	expression=Expression ';';
 
 IfStatement :
 	'if' cases+=IfCase ('elseif' cases+=IfCase)* ('else' elseBody=BlockStatement)?;
@@ -133,6 +134,12 @@ WhileStatement :
 DoWhileStatement :
 	'do' body=BlockStatement 'while' '(' predicate=Expression ')' ';';
 
+ForStatement :
+	'for' '(' (initializers+=ForStatementInitializer (',' initializers+=ForStatementInitializer)*)? ';' (testExpression=Expression)? ';' (countExpressions+=Expression (',' countExpressions+=Expression)*)? ')' body=BlockStatement;
+	
+ForStatementInitializer :
+	('var' variableName=KeywordID '=')? expression=Expression;
+	
 ForeachStatement :
 	'foreach' '(' elementName=KeywordID 'in' collectionExpression=Expression ')' body=BlockStatement;
 	
@@ -194,18 +201,25 @@ UnitTypeSpecifier :
 /*
  * Expressions
  */
-	
+
 Expression :
-	ConditionalExpression | RangeExpression;
-
-ConditionalExpression :
-	'if' cases+=ConditionalExpressionCase ('elseif' cases+=ConditionalExpressionCase)* 'else' elseExpression=Expression;
+	AssignmentExpression;
 	
-ConditionalExpressionCase:
-	condition=Expression 'then' thenExpression=Expression;
-
+AssignmentExpression returns Expression :
+	RangeExpression ({AssignmentExpression.leftHandSide=current} operator=AssignmentOperator rightHandSide=Expression)?;
+	
+enum AssignmentOperator :
+	Assignment='=' |
+	AdditionAssignment='+=' |
+	SubtractionAssignment='-=' |
+	MultiplicationAssignment='*=' |
+	DivisionAssignment='/=';
+	
 RangeExpression returns Expression :
-	LogicalOrExpression ({RangeExpression.begin=current} ':' end=LogicalOrExpression ({RangeExpression.increment=current} ':' end=LogicalOrExpression)?)?;
+	ConditionalExpression ({RangeExpression.begin=current} ':' end=ConditionalExpression ({RangeExpression.increment=current} ':' end=ConditionalExpression)?)?;
+
+ConditionalExpression returns Expression :
+	LogicalOrExpression ({ConditionalExpression.condition=current} '?' thenExpression=LogicalOrExpression ':' elseExpression=LogicalOrExpression)?;
 
 LogicalOrExpression returns Expression :
 	LogicalAndExpression ({LogicalOrExpression.operands+=current} ('||' operands+=LogicalAndExpression)+)?;
@@ -214,7 +228,7 @@ LogicalAndExpression returns Expression :
 	RelationalExpression ({LogicalAndExpression.operands+=current} ('&&' operands+=RelationalExpression)+)?;
 
 RelationalExpression returns Expression :
-	AddSubtractExpression ({RelationalExpression.leftOperand=current} (typeTest?='is' type=DataTypeSpecifier | operator=RelationalOperator rightOperand=AddSubtractExpression))?;
+	AdditiveExpression ({RelationalExpression.leftOperand=current} (typeTest?='is' type=DataTypeSpecifier | operator=RelationalOperator rightOperand=AdditiveExpression))?;
 
 enum RelationalOperator :
 	LessThan='<' |
@@ -224,27 +238,27 @@ enum RelationalOperator :
 	EqualTo='==' |
 	NotEqualTo='!=';
 
-AddSubtractExpression returns Expression :
-	MultiplyDivideExpression ({AddSubtractExpression.leftOperand=current} (rightParts+=AddSubtractExpressionPart)+)?;
+AdditiveExpression returns Expression :
+	MultiplicativeExpression ({AdditiveExpression.leftOperand=current} (rightParts+=AdditiveExpressionPart)+)?;
 
-AddSubtractExpressionPart :
-	operator=AddSubtractOperator operand=MultiplyDivideExpression;
+AdditiveExpressionPart :
+	operator=AdditiveOperator operand=MultiplicativeExpression;
 
-enum AddSubtractOperator :
-	Add='+' |
-	Subtract='-';
+enum AdditiveOperator :
+	Addition='+' |
+	Subtraction='-';
 
-MultiplyDivideExpression returns Expression :
-	PowerExpression ({MultiplyDivideExpression.leftOperand=current} (rightParts+=MultiplyDivideExpressionPart)+)?;
+MultiplicativeExpression returns Expression :
+	PowerExpression ({MultiplicativeExpression.leftOperand=current} (rightParts+=MultiplicativeExpressionPart)+)?;
 
-MultiplyDivideExpressionPart :
-	operator=MultiplyDivideOperator operand=PowerExpression;
+MultiplicativeExpressionPart :
+	operator=MultiplicativeOperator operand=PowerExpression;
 	
-enum MultiplyDivideOperator :
-	Multiply='*' |
-	Divide='/' |
-	ElementWiseMultiply='.*' |
-	ElementWiseDivide='./';
+enum MultiplicativeOperator :
+	Multiplication='*' |
+	Division='/' |
+	ElementWiseMultiplication='.*' |
+	ElementWiseDivision='./';
 	
 PowerExpression returns Expression :
 	UnaryExpression ({PowerExpression.operand=current} operator=PowerOperator exponent=UnaryExpression)?;
@@ -254,11 +268,20 @@ enum PowerOperator :
 	ElementWisePower='.^';
 	
 UnaryExpression returns Expression :
-	FeatureCall | {UnaryExpression} operator=UnaryOperator operand=FeatureCall;
+	PostfixExpression | {UnaryExpression} operator=UnaryOperator operand=FeatureCall;
 	
 enum UnaryOperator :
 	Minus='-' |
-	LogicalNot='!';
+	LogicalNot='!' |
+	Increment='++' |
+	Decrement='--';
+	
+PostfixExpression returns Expression :
+	FeatureCall ({PostfixExpression.operand=current} operator=PostfixOperator)?;
+
+enum PostfixOperator :
+	Increment='++' |
+	Decrement='--';
 
 FeatureCall returns Expression :
 	PrimaryExpression | CallablePrimaryExpression ({FeatureCall.target=current} (parts+=FeatureCallPart)+)?;

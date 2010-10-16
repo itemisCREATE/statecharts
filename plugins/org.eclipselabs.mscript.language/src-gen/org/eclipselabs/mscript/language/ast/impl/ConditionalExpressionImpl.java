@@ -5,24 +5,16 @@
  */
 package org.eclipselabs.mscript.language.ast.impl;
 
-import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.ConditionalExpression;
-import org.eclipselabs.mscript.language.ast.ConditionalExpressionCase;
 import org.eclipselabs.mscript.language.ast.Expression;
 
 /**
@@ -32,7 +24,8 @@ import org.eclipselabs.mscript.language.ast.Expression;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.ConditionalExpressionImpl#getCases <em>Cases</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.ConditionalExpressionImpl#getCondition <em>Condition</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.ConditionalExpressionImpl#getThenExpression <em>Then Expression</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.ConditionalExpressionImpl#getElseExpression <em>Else Expression</em>}</li>
  * </ul>
  * </p>
@@ -42,14 +35,24 @@ import org.eclipselabs.mscript.language.ast.Expression;
 public class ConditionalExpressionImpl extends ExpressionImpl implements ConditionalExpression
 {
   /**
-   * The cached value of the '{@link #getCases() <em>Cases</em>}' containment reference list.
+   * The cached value of the '{@link #getCondition() <em>Condition</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getCases()
+   * @see #getCondition()
    * @generated
    * @ordered
    */
-  protected EList<ConditionalExpressionCase> cases;
+  protected Expression condition;
+
+  /**
+   * The cached value of the '{@link #getThenExpression() <em>Then Expression</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getThenExpression()
+   * @generated
+   * @ordered
+   */
+  protected Expression thenExpression;
 
   /**
    * The cached value of the '{@link #getElseExpression() <em>Else Expression</em>}' containment reference.
@@ -87,13 +90,95 @@ public class ConditionalExpressionImpl extends ExpressionImpl implements Conditi
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<ConditionalExpressionCase> getCases()
+  public Expression getCondition()
   {
-    if (cases == null)
+    return condition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetCondition(Expression newCondition, NotificationChain msgs)
+  {
+    Expression oldCondition = condition;
+    condition = newCondition;
+    if (eNotificationRequired())
     {
-      cases = new EObjectContainmentEList<ConditionalExpressionCase>(ConditionalExpressionCase.class, this, AstPackage.CONDITIONAL_EXPRESSION__CASES);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.CONDITIONAL_EXPRESSION__CONDITION, oldCondition, newCondition);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
     }
-    return cases;
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setCondition(Expression newCondition)
+  {
+    if (newCondition != condition)
+    {
+      NotificationChain msgs = null;
+      if (condition != null)
+        msgs = ((InternalEObject)condition).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.CONDITIONAL_EXPRESSION__CONDITION, null, msgs);
+      if (newCondition != null)
+        msgs = ((InternalEObject)newCondition).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.CONDITIONAL_EXPRESSION__CONDITION, null, msgs);
+      msgs = basicSetCondition(newCondition, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.CONDITIONAL_EXPRESSION__CONDITION, newCondition, newCondition));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Expression getThenExpression()
+  {
+    return thenExpression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetThenExpression(Expression newThenExpression, NotificationChain msgs)
+  {
+    Expression oldThenExpression = thenExpression;
+    thenExpression = newThenExpression;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.CONDITIONAL_EXPRESSION__THEN_EXPRESSION, oldThenExpression, newThenExpression);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setThenExpression(Expression newThenExpression)
+  {
+    if (newThenExpression != thenExpression)
+    {
+      NotificationChain msgs = null;
+      if (thenExpression != null)
+        msgs = ((InternalEObject)thenExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.CONDITIONAL_EXPRESSION__THEN_EXPRESSION, null, msgs);
+      if (newThenExpression != null)
+        msgs = ((InternalEObject)newThenExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.CONDITIONAL_EXPRESSION__THEN_EXPRESSION, null, msgs);
+      msgs = basicSetThenExpression(newThenExpression, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.CONDITIONAL_EXPRESSION__THEN_EXPRESSION, newThenExpression, newThenExpression));
   }
 
   /**
@@ -154,8 +239,10 @@ public class ConditionalExpressionImpl extends ExpressionImpl implements Conditi
   {
     switch (featureID)
     {
-      case AstPackage.CONDITIONAL_EXPRESSION__CASES:
-        return ((InternalEList<?>)getCases()).basicRemove(otherEnd, msgs);
+      case AstPackage.CONDITIONAL_EXPRESSION__CONDITION:
+        return basicSetCondition(null, msgs);
+      case AstPackage.CONDITIONAL_EXPRESSION__THEN_EXPRESSION:
+        return basicSetThenExpression(null, msgs);
       case AstPackage.CONDITIONAL_EXPRESSION__ELSE_EXPRESSION:
         return basicSetElseExpression(null, msgs);
     }
@@ -172,8 +259,10 @@ public class ConditionalExpressionImpl extends ExpressionImpl implements Conditi
   {
     switch (featureID)
     {
-      case AstPackage.CONDITIONAL_EXPRESSION__CASES:
-        return getCases();
+      case AstPackage.CONDITIONAL_EXPRESSION__CONDITION:
+        return getCondition();
+      case AstPackage.CONDITIONAL_EXPRESSION__THEN_EXPRESSION:
+        return getThenExpression();
       case AstPackage.CONDITIONAL_EXPRESSION__ELSE_EXPRESSION:
         return getElseExpression();
     }
@@ -185,15 +274,16 @@ public class ConditionalExpressionImpl extends ExpressionImpl implements Conditi
    * <!-- end-user-doc -->
    * @generated
    */
-  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
     switch (featureID)
     {
-      case AstPackage.CONDITIONAL_EXPRESSION__CASES:
-        getCases().clear();
-        getCases().addAll((Collection<? extends ConditionalExpressionCase>)newValue);
+      case AstPackage.CONDITIONAL_EXPRESSION__CONDITION:
+        setCondition((Expression)newValue);
+        return;
+      case AstPackage.CONDITIONAL_EXPRESSION__THEN_EXPRESSION:
+        setThenExpression((Expression)newValue);
         return;
       case AstPackage.CONDITIONAL_EXPRESSION__ELSE_EXPRESSION:
         setElseExpression((Expression)newValue);
@@ -212,8 +302,11 @@ public class ConditionalExpressionImpl extends ExpressionImpl implements Conditi
   {
     switch (featureID)
     {
-      case AstPackage.CONDITIONAL_EXPRESSION__CASES:
-        getCases().clear();
+      case AstPackage.CONDITIONAL_EXPRESSION__CONDITION:
+        setCondition((Expression)null);
+        return;
+      case AstPackage.CONDITIONAL_EXPRESSION__THEN_EXPRESSION:
+        setThenExpression((Expression)null);
         return;
       case AstPackage.CONDITIONAL_EXPRESSION__ELSE_EXPRESSION:
         setElseExpression((Expression)null);
@@ -232,8 +325,10 @@ public class ConditionalExpressionImpl extends ExpressionImpl implements Conditi
   {
     switch (featureID)
     {
-      case AstPackage.CONDITIONAL_EXPRESSION__CASES:
-        return cases != null && !cases.isEmpty();
+      case AstPackage.CONDITIONAL_EXPRESSION__CONDITION:
+        return condition != null;
+      case AstPackage.CONDITIONAL_EXPRESSION__THEN_EXPRESSION:
+        return thenExpression != null;
       case AstPackage.CONDITIONAL_EXPRESSION__ELSE_EXPRESSION:
         return elseExpression != null;
     }

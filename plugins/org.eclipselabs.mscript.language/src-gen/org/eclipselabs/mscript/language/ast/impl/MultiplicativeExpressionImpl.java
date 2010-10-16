@@ -22,24 +22,24 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.Expression;
-import org.eclipselabs.mscript.language.ast.MultiplyDivideExpression;
-import org.eclipselabs.mscript.language.ast.MultiplyDivideExpressionPart;
+import org.eclipselabs.mscript.language.ast.MultiplicativeExpression;
+import org.eclipselabs.mscript.language.ast.MultiplicativeExpressionPart;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Multiply Divide Expression</b></em>'.
+ * An implementation of the model object '<em><b>Multiplicative Expression</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.MultiplyDivideExpressionImpl#getLeftOperand <em>Left Operand</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.MultiplyDivideExpressionImpl#getRightParts <em>Right Parts</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.MultiplicativeExpressionImpl#getLeftOperand <em>Left Operand</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.MultiplicativeExpressionImpl#getRightParts <em>Right Parts</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class MultiplyDivideExpressionImpl extends ExpressionImpl implements MultiplyDivideExpression
+public class MultiplicativeExpressionImpl extends ExpressionImpl implements MultiplicativeExpression
 {
   /**
    * The cached value of the '{@link #getLeftOperand() <em>Left Operand</em>}' containment reference.
@@ -59,14 +59,14 @@ public class MultiplyDivideExpressionImpl extends ExpressionImpl implements Mult
    * @generated
    * @ordered
    */
-  protected EList<MultiplyDivideExpressionPart> rightParts;
+  protected EList<MultiplicativeExpressionPart> rightParts;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected MultiplyDivideExpressionImpl()
+  protected MultiplicativeExpressionImpl()
   {
     super();
   }
@@ -79,7 +79,7 @@ public class MultiplyDivideExpressionImpl extends ExpressionImpl implements Mult
   @Override
   protected EClass eStaticClass()
   {
-    return AstPackage.Literals.MULTIPLY_DIVIDE_EXPRESSION;
+    return AstPackage.Literals.MULTIPLICATIVE_EXPRESSION;
   }
 
   /**
@@ -103,7 +103,7 @@ public class MultiplyDivideExpressionImpl extends ExpressionImpl implements Mult
     leftOperand = newLeftOperand;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.MULTIPLY_DIVIDE_EXPRESSION__LEFT_OPERAND, oldLeftOperand, newLeftOperand);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.MULTIPLICATIVE_EXPRESSION__LEFT_OPERAND, oldLeftOperand, newLeftOperand);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -120,14 +120,14 @@ public class MultiplyDivideExpressionImpl extends ExpressionImpl implements Mult
     {
       NotificationChain msgs = null;
       if (leftOperand != null)
-        msgs = ((InternalEObject)leftOperand).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.MULTIPLY_DIVIDE_EXPRESSION__LEFT_OPERAND, null, msgs);
+        msgs = ((InternalEObject)leftOperand).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.MULTIPLICATIVE_EXPRESSION__LEFT_OPERAND, null, msgs);
       if (newLeftOperand != null)
-        msgs = ((InternalEObject)newLeftOperand).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.MULTIPLY_DIVIDE_EXPRESSION__LEFT_OPERAND, null, msgs);
+        msgs = ((InternalEObject)newLeftOperand).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.MULTIPLICATIVE_EXPRESSION__LEFT_OPERAND, null, msgs);
       msgs = basicSetLeftOperand(newLeftOperand, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.MULTIPLY_DIVIDE_EXPRESSION__LEFT_OPERAND, newLeftOperand, newLeftOperand));
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.MULTIPLICATIVE_EXPRESSION__LEFT_OPERAND, newLeftOperand, newLeftOperand));
   }
 
   /**
@@ -135,11 +135,11 @@ public class MultiplyDivideExpressionImpl extends ExpressionImpl implements Mult
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<MultiplyDivideExpressionPart> getRightParts()
+  public EList<MultiplicativeExpressionPart> getRightParts()
   {
     if (rightParts == null)
     {
-      rightParts = new EObjectContainmentEList<MultiplyDivideExpressionPart>(MultiplyDivideExpressionPart.class, this, AstPackage.MULTIPLY_DIVIDE_EXPRESSION__RIGHT_PARTS);
+      rightParts = new EObjectContainmentEList<MultiplicativeExpressionPart>(MultiplicativeExpressionPart.class, this, AstPackage.MULTIPLICATIVE_EXPRESSION__RIGHT_PARTS);
     }
     return rightParts;
   }
@@ -154,9 +154,9 @@ public class MultiplyDivideExpressionImpl extends ExpressionImpl implements Mult
   {
     switch (featureID)
     {
-      case AstPackage.MULTIPLY_DIVIDE_EXPRESSION__LEFT_OPERAND:
+      case AstPackage.MULTIPLICATIVE_EXPRESSION__LEFT_OPERAND:
         return basicSetLeftOperand(null, msgs);
-      case AstPackage.MULTIPLY_DIVIDE_EXPRESSION__RIGHT_PARTS:
+      case AstPackage.MULTIPLICATIVE_EXPRESSION__RIGHT_PARTS:
         return ((InternalEList<?>)getRightParts()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -172,9 +172,9 @@ public class MultiplyDivideExpressionImpl extends ExpressionImpl implements Mult
   {
     switch (featureID)
     {
-      case AstPackage.MULTIPLY_DIVIDE_EXPRESSION__LEFT_OPERAND:
+      case AstPackage.MULTIPLICATIVE_EXPRESSION__LEFT_OPERAND:
         return getLeftOperand();
-      case AstPackage.MULTIPLY_DIVIDE_EXPRESSION__RIGHT_PARTS:
+      case AstPackage.MULTIPLICATIVE_EXPRESSION__RIGHT_PARTS:
         return getRightParts();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -191,12 +191,12 @@ public class MultiplyDivideExpressionImpl extends ExpressionImpl implements Mult
   {
     switch (featureID)
     {
-      case AstPackage.MULTIPLY_DIVIDE_EXPRESSION__LEFT_OPERAND:
+      case AstPackage.MULTIPLICATIVE_EXPRESSION__LEFT_OPERAND:
         setLeftOperand((Expression)newValue);
         return;
-      case AstPackage.MULTIPLY_DIVIDE_EXPRESSION__RIGHT_PARTS:
+      case AstPackage.MULTIPLICATIVE_EXPRESSION__RIGHT_PARTS:
         getRightParts().clear();
-        getRightParts().addAll((Collection<? extends MultiplyDivideExpressionPart>)newValue);
+        getRightParts().addAll((Collection<? extends MultiplicativeExpressionPart>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -212,10 +212,10 @@ public class MultiplyDivideExpressionImpl extends ExpressionImpl implements Mult
   {
     switch (featureID)
     {
-      case AstPackage.MULTIPLY_DIVIDE_EXPRESSION__LEFT_OPERAND:
+      case AstPackage.MULTIPLICATIVE_EXPRESSION__LEFT_OPERAND:
         setLeftOperand((Expression)null);
         return;
-      case AstPackage.MULTIPLY_DIVIDE_EXPRESSION__RIGHT_PARTS:
+      case AstPackage.MULTIPLICATIVE_EXPRESSION__RIGHT_PARTS:
         getRightParts().clear();
         return;
     }
@@ -232,12 +232,12 @@ public class MultiplyDivideExpressionImpl extends ExpressionImpl implements Mult
   {
     switch (featureID)
     {
-      case AstPackage.MULTIPLY_DIVIDE_EXPRESSION__LEFT_OPERAND:
+      case AstPackage.MULTIPLICATIVE_EXPRESSION__LEFT_OPERAND:
         return leftOperand != null;
-      case AstPackage.MULTIPLY_DIVIDE_EXPRESSION__RIGHT_PARTS:
+      case AstPackage.MULTIPLICATIVE_EXPRESSION__RIGHT_PARTS:
         return rightParts != null && !rightParts.isEmpty();
     }
     return super.eIsSet(featureID);
   }
 
-} //MultiplyDivideExpressionImpl
+} //MultiplicativeExpressionImpl

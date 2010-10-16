@@ -12,49 +12,28 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.Expression;
-import org.eclipselabs.mscript.language.ast.MultiplyDivideExpressionPart;
-import org.eclipselabs.mscript.language.ast.MultiplyDivideOperator;
+import org.eclipselabs.mscript.language.ast.PostfixExpression;
+import org.eclipselabs.mscript.language.ast.PostfixOperator;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Multiply Divide Expression Part</b></em>'.
+ * An implementation of the model object '<em><b>Postfix Expression</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.MultiplyDivideExpressionPartImpl#getOperator <em>Operator</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.MultiplyDivideExpressionPartImpl#getOperand <em>Operand</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.PostfixExpressionImpl#getOperand <em>Operand</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.PostfixExpressionImpl#getOperator <em>Operator</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class MultiplyDivideExpressionPartImpl extends MinimalEObjectImpl.Container implements MultiplyDivideExpressionPart
+public class PostfixExpressionImpl extends ExpressionImpl implements PostfixExpression
 {
-  /**
-   * The default value of the '{@link #getOperator() <em>Operator</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getOperator()
-   * @generated
-   * @ordered
-   */
-  protected static final MultiplyDivideOperator OPERATOR_EDEFAULT = MultiplyDivideOperator.MULTIPLY;
-
-  /**
-   * The cached value of the '{@link #getOperator() <em>Operator</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getOperator()
-   * @generated
-   * @ordered
-   */
-  protected MultiplyDivideOperator operator = OPERATOR_EDEFAULT;
-
   /**
    * The cached value of the '{@link #getOperand() <em>Operand</em>}' containment reference.
    * <!-- begin-user-doc -->
@@ -66,11 +45,31 @@ public class MultiplyDivideExpressionPartImpl extends MinimalEObjectImpl.Contain
   protected Expression operand;
 
   /**
+   * The default value of the '{@link #getOperator() <em>Operator</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getOperator()
+   * @generated
+   * @ordered
+   */
+  protected static final PostfixOperator OPERATOR_EDEFAULT = PostfixOperator.INCREMENT;
+
+  /**
+   * The cached value of the '{@link #getOperator() <em>Operator</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getOperator()
+   * @generated
+   * @ordered
+   */
+  protected PostfixOperator operator = OPERATOR_EDEFAULT;
+
+  /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected MultiplyDivideExpressionPartImpl()
+  protected PostfixExpressionImpl()
   {
     super();
   }
@@ -83,30 +82,7 @@ public class MultiplyDivideExpressionPartImpl extends MinimalEObjectImpl.Contain
   @Override
   protected EClass eStaticClass()
   {
-    return AstPackage.Literals.MULTIPLY_DIVIDE_EXPRESSION_PART;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public MultiplyDivideOperator getOperator()
-  {
-    return operator;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setOperator(MultiplyDivideOperator newOperator)
-  {
-    MultiplyDivideOperator oldOperator = operator;
-    operator = newOperator == null ? OPERATOR_EDEFAULT : newOperator;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.MULTIPLY_DIVIDE_EXPRESSION_PART__OPERATOR, oldOperator, operator));
+    return AstPackage.Literals.POSTFIX_EXPRESSION;
   }
 
   /**
@@ -130,7 +106,7 @@ public class MultiplyDivideExpressionPartImpl extends MinimalEObjectImpl.Contain
     operand = newOperand;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.MULTIPLY_DIVIDE_EXPRESSION_PART__OPERAND, oldOperand, newOperand);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.POSTFIX_EXPRESSION__OPERAND, oldOperand, newOperand);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -147,14 +123,37 @@ public class MultiplyDivideExpressionPartImpl extends MinimalEObjectImpl.Contain
     {
       NotificationChain msgs = null;
       if (operand != null)
-        msgs = ((InternalEObject)operand).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.MULTIPLY_DIVIDE_EXPRESSION_PART__OPERAND, null, msgs);
+        msgs = ((InternalEObject)operand).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.POSTFIX_EXPRESSION__OPERAND, null, msgs);
       if (newOperand != null)
-        msgs = ((InternalEObject)newOperand).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.MULTIPLY_DIVIDE_EXPRESSION_PART__OPERAND, null, msgs);
+        msgs = ((InternalEObject)newOperand).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.POSTFIX_EXPRESSION__OPERAND, null, msgs);
       msgs = basicSetOperand(newOperand, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.MULTIPLY_DIVIDE_EXPRESSION_PART__OPERAND, newOperand, newOperand));
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.POSTFIX_EXPRESSION__OPERAND, newOperand, newOperand));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public PostfixOperator getOperator()
+  {
+    return operator;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setOperator(PostfixOperator newOperator)
+  {
+    PostfixOperator oldOperator = operator;
+    operator = newOperator == null ? OPERATOR_EDEFAULT : newOperator;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.POSTFIX_EXPRESSION__OPERATOR, oldOperator, operator));
   }
 
   /**
@@ -167,7 +166,7 @@ public class MultiplyDivideExpressionPartImpl extends MinimalEObjectImpl.Contain
   {
     switch (featureID)
     {
-      case AstPackage.MULTIPLY_DIVIDE_EXPRESSION_PART__OPERAND:
+      case AstPackage.POSTFIX_EXPRESSION__OPERAND:
         return basicSetOperand(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -183,10 +182,10 @@ public class MultiplyDivideExpressionPartImpl extends MinimalEObjectImpl.Contain
   {
     switch (featureID)
     {
-      case AstPackage.MULTIPLY_DIVIDE_EXPRESSION_PART__OPERATOR:
-        return getOperator();
-      case AstPackage.MULTIPLY_DIVIDE_EXPRESSION_PART__OPERAND:
+      case AstPackage.POSTFIX_EXPRESSION__OPERAND:
         return getOperand();
+      case AstPackage.POSTFIX_EXPRESSION__OPERATOR:
+        return getOperator();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -201,11 +200,11 @@ public class MultiplyDivideExpressionPartImpl extends MinimalEObjectImpl.Contain
   {
     switch (featureID)
     {
-      case AstPackage.MULTIPLY_DIVIDE_EXPRESSION_PART__OPERATOR:
-        setOperator((MultiplyDivideOperator)newValue);
-        return;
-      case AstPackage.MULTIPLY_DIVIDE_EXPRESSION_PART__OPERAND:
+      case AstPackage.POSTFIX_EXPRESSION__OPERAND:
         setOperand((Expression)newValue);
+        return;
+      case AstPackage.POSTFIX_EXPRESSION__OPERATOR:
+        setOperator((PostfixOperator)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -221,11 +220,11 @@ public class MultiplyDivideExpressionPartImpl extends MinimalEObjectImpl.Contain
   {
     switch (featureID)
     {
-      case AstPackage.MULTIPLY_DIVIDE_EXPRESSION_PART__OPERATOR:
-        setOperator(OPERATOR_EDEFAULT);
-        return;
-      case AstPackage.MULTIPLY_DIVIDE_EXPRESSION_PART__OPERAND:
+      case AstPackage.POSTFIX_EXPRESSION__OPERAND:
         setOperand((Expression)null);
+        return;
+      case AstPackage.POSTFIX_EXPRESSION__OPERATOR:
+        setOperator(OPERATOR_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -241,10 +240,10 @@ public class MultiplyDivideExpressionPartImpl extends MinimalEObjectImpl.Contain
   {
     switch (featureID)
     {
-      case AstPackage.MULTIPLY_DIVIDE_EXPRESSION_PART__OPERATOR:
-        return operator != OPERATOR_EDEFAULT;
-      case AstPackage.MULTIPLY_DIVIDE_EXPRESSION_PART__OPERAND:
+      case AstPackage.POSTFIX_EXPRESSION__OPERAND:
         return operand != null;
+      case AstPackage.POSTFIX_EXPRESSION__OPERATOR:
+        return operator != OPERATOR_EDEFAULT;
     }
     return super.eIsSet(featureID);
   }
@@ -266,4 +265,4 @@ public class MultiplyDivideExpressionPartImpl extends MinimalEObjectImpl.Contain
     return result.toString();
   }
 
-} //MultiplyDivideExpressionPartImpl
+} //PostfixExpressionImpl

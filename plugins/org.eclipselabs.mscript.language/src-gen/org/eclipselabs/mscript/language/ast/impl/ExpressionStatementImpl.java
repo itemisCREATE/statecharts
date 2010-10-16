@@ -25,7 +25,6 @@ import org.eclipselabs.mscript.language.ast.ExpressionStatement;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.ExpressionStatementImpl#getExpression <em>Expression</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.ExpressionStatementImpl#getAssignedValue <em>Assigned Value</em>}</li>
  * </ul>
  * </p>
  *
@@ -42,16 +41,6 @@ public class ExpressionStatementImpl extends StatementImpl implements Expression
    * @ordered
    */
   protected Expression expression;
-
-  /**
-   * The cached value of the '{@link #getAssignedValue() <em>Assigned Value</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getAssignedValue()
-   * @generated
-   * @ordered
-   */
-  protected Expression assignedValue;
 
   /**
    * <!-- begin-user-doc -->
@@ -127,54 +116,6 @@ public class ExpressionStatementImpl extends StatementImpl implements Expression
    * <!-- end-user-doc -->
    * @generated
    */
-  public Expression getAssignedValue()
-  {
-    return assignedValue;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetAssignedValue(Expression newAssignedValue, NotificationChain msgs)
-  {
-    Expression oldAssignedValue = assignedValue;
-    assignedValue = newAssignedValue;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.EXPRESSION_STATEMENT__ASSIGNED_VALUE, oldAssignedValue, newAssignedValue);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setAssignedValue(Expression newAssignedValue)
-  {
-    if (newAssignedValue != assignedValue)
-    {
-      NotificationChain msgs = null;
-      if (assignedValue != null)
-        msgs = ((InternalEObject)assignedValue).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.EXPRESSION_STATEMENT__ASSIGNED_VALUE, null, msgs);
-      if (newAssignedValue != null)
-        msgs = ((InternalEObject)newAssignedValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.EXPRESSION_STATEMENT__ASSIGNED_VALUE, null, msgs);
-      msgs = basicSetAssignedValue(newAssignedValue, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.EXPRESSION_STATEMENT__ASSIGNED_VALUE, newAssignedValue, newAssignedValue));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -182,8 +123,6 @@ public class ExpressionStatementImpl extends StatementImpl implements Expression
     {
       case AstPackage.EXPRESSION_STATEMENT__EXPRESSION:
         return basicSetExpression(null, msgs);
-      case AstPackage.EXPRESSION_STATEMENT__ASSIGNED_VALUE:
-        return basicSetAssignedValue(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -200,8 +139,6 @@ public class ExpressionStatementImpl extends StatementImpl implements Expression
     {
       case AstPackage.EXPRESSION_STATEMENT__EXPRESSION:
         return getExpression();
-      case AstPackage.EXPRESSION_STATEMENT__ASSIGNED_VALUE:
-        return getAssignedValue();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -218,9 +155,6 @@ public class ExpressionStatementImpl extends StatementImpl implements Expression
     {
       case AstPackage.EXPRESSION_STATEMENT__EXPRESSION:
         setExpression((Expression)newValue);
-        return;
-      case AstPackage.EXPRESSION_STATEMENT__ASSIGNED_VALUE:
-        setAssignedValue((Expression)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -239,9 +173,6 @@ public class ExpressionStatementImpl extends StatementImpl implements Expression
       case AstPackage.EXPRESSION_STATEMENT__EXPRESSION:
         setExpression((Expression)null);
         return;
-      case AstPackage.EXPRESSION_STATEMENT__ASSIGNED_VALUE:
-        setAssignedValue((Expression)null);
-        return;
     }
     super.eUnset(featureID);
   }
@@ -258,8 +189,6 @@ public class ExpressionStatementImpl extends StatementImpl implements Expression
     {
       case AstPackage.EXPRESSION_STATEMENT__EXPRESSION:
         return expression != null;
-      case AstPackage.EXPRESSION_STATEMENT__ASSIGNED_VALUE:
-        return assignedValue != null;
     }
     return super.eIsSet(featureID);
   }

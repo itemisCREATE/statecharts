@@ -71,12 +71,12 @@
     </eOperations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="OperatorKind">
-    <eLiterals name="Add"/>
-    <eLiterals name="Subtract" value="1"/>
-    <eLiterals name="Multiply" value="2"/>
-    <eLiterals name="Divide" value="3"/>
-    <eLiterals name="ElementWiseMultiply" value="4"/>
-    <eLiterals name="ElementWiseDivide" value="5"/>
+    <eLiterals name="Addition"/>
+    <eLiterals name="Subtraction" value="1"/>
+    <eLiterals name="Multiplication" value="2"/>
+    <eLiterals name="Division" value="3"/>
+    <eLiterals name="ElementWiseMultiplication" value="4"/>
+    <eLiterals name="ElementWiseDivision" value="5"/>
     <eLiterals name="UnaryMinus" value="6"/>
     <eLiterals name="LogicalAnd" value="7"/>
     <eLiterals name="LogicalOr" value="8"/>
