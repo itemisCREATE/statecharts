@@ -141,6 +141,7 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
       case AstPackage.CONDITIONAL_EXPRESSION: return createConditionalExpression();
       case AstPackage.LOGICAL_OR_EXPRESSION: return createLogicalOrExpression();
       case AstPackage.LOGICAL_AND_EXPRESSION: return createLogicalAndExpression();
+      case AstPackage.EQUALITY_EXPRESSION: return createEqualityExpression();
       case AstPackage.RELATIONAL_EXPRESSION: return createRelationalExpression();
       case AstPackage.ADDITIVE_EXPRESSION: return createAdditiveExpression();
       case AstPackage.MULTIPLICATIVE_EXPRESSION: return createMultiplicativeExpression();
@@ -167,6 +168,8 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
         return createCheckStatusKindFromString(eDataType, initialValue);
       case AstPackage.ASSIGNMENT_OPERATOR:
         return createAssignmentOperatorFromString(eDataType, initialValue);
+      case AstPackage.EQUALITY_OPERATOR:
+        return createEqualityOperatorFromString(eDataType, initialValue);
       case AstPackage.RELATIONAL_OPERATOR:
         return createRelationalOperatorFromString(eDataType, initialValue);
       case AstPackage.ADDITIVE_OPERATOR:
@@ -200,6 +203,8 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
         return convertCheckStatusKindToString(eDataType, instanceValue);
       case AstPackage.ASSIGNMENT_OPERATOR:
         return convertAssignmentOperatorToString(eDataType, instanceValue);
+      case AstPackage.EQUALITY_OPERATOR:
+        return convertEqualityOperatorToString(eDataType, instanceValue);
       case AstPackage.RELATIONAL_OPERATOR:
         return convertRelationalOperatorToString(eDataType, instanceValue);
       case AstPackage.ADDITIVE_OPERATOR:
@@ -1027,6 +1032,17 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  public EqualityExpression createEqualityExpression()
+  {
+    EqualityExpressionImpl equalityExpression = new EqualityExpressionImpl();
+    return equalityExpression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public RelationalExpression createRelationalExpression()
   {
     RelationalExpressionImpl relationalExpression = new RelationalExpressionImpl();
@@ -1139,6 +1155,28 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * @generated
    */
   public String convertAssignmentOperatorToString(EDataType eDataType, Object instanceValue)
+  {
+    return instanceValue == null ? null : instanceValue.toString();
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EqualityOperator createEqualityOperatorFromString(EDataType eDataType, String initialValue)
+  {
+    EqualityOperator result = EqualityOperator.get(initialValue);
+    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+    return result;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String convertEqualityOperatorToString(EDataType eDataType, Object instanceValue)
   {
     return instanceValue == null ? null : instanceValue.toString();
   }

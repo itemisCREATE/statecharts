@@ -64,6 +64,7 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getKeywordIDAccess().getAlternatives(), "rule__KeywordID__Alternatives");
 					put(grammarAccess.getCheckStatusKindAccess().getAlternatives(), "rule__CheckStatusKind__Alternatives");
 					put(grammarAccess.getAssignmentOperatorAccess().getAlternatives(), "rule__AssignmentOperator__Alternatives");
+					put(grammarAccess.getEqualityOperatorAccess().getAlternatives(), "rule__EqualityOperator__Alternatives");
 					put(grammarAccess.getRelationalOperatorAccess().getAlternatives(), "rule__RelationalOperator__Alternatives");
 					put(grammarAccess.getAdditiveOperatorAccess().getAlternatives(), "rule__AdditiveOperator__Alternatives");
 					put(grammarAccess.getMultiplicativeOperatorAccess().getAlternatives(), "rule__MultiplicativeOperator__Alternatives");
@@ -149,6 +150,8 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getLogicalAndExpressionAccess().getGroup(), "rule__LogicalAndExpression__Group__0");
 					put(grammarAccess.getLogicalAndExpressionAccess().getGroup_1(), "rule__LogicalAndExpression__Group_1__0");
 					put(grammarAccess.getLogicalAndExpressionAccess().getGroup_1_1(), "rule__LogicalAndExpression__Group_1_1__0");
+					put(grammarAccess.getEqualityExpressionAccess().getGroup(), "rule__EqualityExpression__Group__0");
+					put(grammarAccess.getEqualityExpressionAccess().getGroup_1(), "rule__EqualityExpression__Group_1__0");
 					put(grammarAccess.getRelationalExpressionAccess().getGroup(), "rule__RelationalExpression__Group__0");
 					put(grammarAccess.getRelationalExpressionAccess().getGroup_1(), "rule__RelationalExpression__Group_1__0");
 					put(grammarAccess.getRelationalExpressionAccess().getGroup_1_1_0(), "rule__RelationalExpression__Group_1_1_0__0");
@@ -283,6 +286,8 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getConditionalExpressionAccess().getElseExpressionAssignment_1_4(), "rule__ConditionalExpression__ElseExpressionAssignment_1_4");
 					put(grammarAccess.getLogicalOrExpressionAccess().getOperandsAssignment_1_1_1(), "rule__LogicalOrExpression__OperandsAssignment_1_1_1");
 					put(grammarAccess.getLogicalAndExpressionAccess().getOperandsAssignment_1_1_1(), "rule__LogicalAndExpression__OperandsAssignment_1_1_1");
+					put(grammarAccess.getEqualityExpressionAccess().getOperatorAssignment_1_1(), "rule__EqualityExpression__OperatorAssignment_1_1");
+					put(grammarAccess.getEqualityExpressionAccess().getRightOperandAssignment_1_2(), "rule__EqualityExpression__RightOperandAssignment_1_2");
 					put(grammarAccess.getRelationalExpressionAccess().getTypeTestAssignment_1_1_0_0(), "rule__RelationalExpression__TypeTestAssignment_1_1_0_0");
 					put(grammarAccess.getRelationalExpressionAccess().getTypeAssignment_1_1_0_1(), "rule__RelationalExpression__TypeAssignment_1_1_0_1");
 					put(grammarAccess.getRelationalExpressionAccess().getOperatorAssignment_1_1_1_0(), "rule__RelationalExpression__OperatorAssignment_1_1_1_0");

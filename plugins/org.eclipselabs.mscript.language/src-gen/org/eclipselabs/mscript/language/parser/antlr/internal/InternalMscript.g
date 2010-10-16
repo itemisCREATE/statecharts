@@ -4134,11 +4134,11 @@ ruleLogicalAndExpression returns [EObject current=null]
     }:
 (
     { 
-        currentNode=createCompositeNode(grammarAccess.getLogicalAndExpressionAccess().getRelationalExpressionParserRuleCall_0(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getLogicalAndExpressionAccess().getEqualityExpressionParserRuleCall_0(), currentNode); 
     }
-    this_RelationalExpression_0=ruleRelationalExpression
+    this_EqualityExpression_0=ruleEqualityExpression
     { 
-        $current = $this_RelationalExpression_0.current; 
+        $current = $this_EqualityExpression_0.current; 
         currentNode = currentNode.getParent();
     }
 ((
@@ -4164,9 +4164,9 @@ ruleLogicalAndExpression returns [EObject current=null]
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getLogicalAndExpressionAccess().getOperandsRelationalExpressionParserRuleCall_1_1_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getLogicalAndExpressionAccess().getOperandsEqualityExpressionParserRuleCall_1_1_1_0(), currentNode); 
 	    }
-		lv_operands_3_0=ruleRelationalExpression		{
+		lv_operands_3_0=ruleEqualityExpression		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getLogicalAndExpressionRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -4176,7 +4176,7 @@ ruleLogicalAndExpression returns [EObject current=null]
 	       			$current, 
 	       			"operands",
 	        		lv_operands_3_0, 
-	        		"RelationalExpression", 
+	        		"EqualityExpression", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
@@ -4186,6 +4186,102 @@ ruleLogicalAndExpression returns [EObject current=null]
 
 )
 ))+)?)
+;
+
+
+
+
+
+// Entry rule entryRuleEqualityExpression
+entryRuleEqualityExpression returns [EObject current=null] 
+	:
+	{ currentNode = createCompositeNode(grammarAccess.getEqualityExpressionRule(), currentNode); }
+	 iv_ruleEqualityExpression=ruleEqualityExpression 
+	 { $current=$iv_ruleEqualityExpression.current; } 
+	 EOF 
+;
+
+// Rule EqualityExpression
+ruleEqualityExpression returns [EObject current=null] 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+(
+    { 
+        currentNode=createCompositeNode(grammarAccess.getEqualityExpressionAccess().getRelationalExpressionParserRuleCall_0(), currentNode); 
+    }
+    this_RelationalExpression_0=ruleRelationalExpression
+    { 
+        $current = $this_RelationalExpression_0.current; 
+        currentNode = currentNode.getParent();
+    }
+((
+    { 
+        temp=factory.create(grammarAccess.getEqualityExpressionAccess().getEqualityExpressionLeftOperandAction_1_0().getType().getClassifier());
+        try {
+        	factory.set(temp, "leftOperand", $current, null /*ParserRule*/, currentNode);
+        } catch(ValueConverterException vce) {
+        	handleValueConverterException(vce);
+        }
+        $current = temp; 
+        temp = null;
+        CompositeNode newNode = createCompositeNode(grammarAccess.getEqualityExpressionAccess().getEqualityExpressionLeftOperandAction_1_0(), currentNode.getParent());
+    newNode.getChildren().add(currentNode);
+    moveLookaheadInfo(currentNode, newNode);
+    currentNode = newNode; 
+        associateNodeWithAstElement(currentNode, $current); 
+    }
+)(
+(
+		{ 
+	        currentNode=createCompositeNode(grammarAccess.getEqualityExpressionAccess().getOperatorEqualityOperatorEnumRuleCall_1_1_0(), currentNode); 
+	    }
+		lv_operator_2_0=ruleEqualityOperator		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getEqualityExpressionRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        try {
+	       		set(
+	       			$current, 
+	       			"operator",
+	        		lv_operator_2_0, 
+	        		"EqualityOperator", 
+	        		currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+
+)
+)(
+(
+		{ 
+	        currentNode=createCompositeNode(grammarAccess.getEqualityExpressionAccess().getRightOperandRelationalExpressionParserRuleCall_1_2_0(), currentNode); 
+	    }
+		lv_rightOperand_3_0=ruleRelationalExpression		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getEqualityExpressionRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        try {
+	       		set(
+	       			$current, 
+	       			"rightOperand",
+	        		lv_rightOperand_3_0, 
+	        		"RelationalExpression", 
+	        		currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+
+)
+))?)
 ;
 
 
@@ -6911,6 +7007,27 @@ ruleAssignmentOperator returns [Enumerator current=null]
 
 
 
+// Rule EqualityOperator
+ruleEqualityOperator returns [Enumerator current=null] 
+    @init { setCurrentLookahead(); resetLookahead(); }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+((	'==' 
+	{
+        $current = grammarAccess.getEqualityOperatorAccess().getEqualToEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
+        createLeafNode(grammarAccess.getEqualityOperatorAccess().getEqualToEnumLiteralDeclaration_0(), null); 
+    }
+)
+    |(	'!=' 
+	{
+        $current = grammarAccess.getEqualityOperatorAccess().getNotEqualToEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
+        createLeafNode(grammarAccess.getEqualityOperatorAccess().getNotEqualToEnumLiteralDeclaration_1(), null); 
+    }
+));
+
+
+
 // Rule RelationalOperator
 ruleRelationalOperator returns [Enumerator current=null] 
     @init { setCurrentLookahead(); resetLookahead(); }
@@ -6939,18 +7056,6 @@ ruleRelationalOperator returns [Enumerator current=null]
 	{
         $current = grammarAccess.getRelationalOperatorAccess().getGreaterThanOrEqualToEnumLiteralDeclaration_3().getEnumLiteral().getInstance();
         createLeafNode(grammarAccess.getRelationalOperatorAccess().getGreaterThanOrEqualToEnumLiteralDeclaration_3(), null); 
-    }
-)
-    |(	'==' 
-	{
-        $current = grammarAccess.getRelationalOperatorAccess().getEqualToEnumLiteralDeclaration_4().getEnumLiteral().getInstance();
-        createLeafNode(grammarAccess.getRelationalOperatorAccess().getEqualToEnumLiteralDeclaration_4(), null); 
-    }
-)
-    |(	'!=' 
-	{
-        $current = grammarAccess.getRelationalOperatorAccess().getNotEqualToEnumLiteralDeclaration_5().getEnumLiteral().getInstance();
-        createLeafNode(grammarAccess.getRelationalOperatorAccess().getNotEqualToEnumLiteralDeclaration_5(), null); 
     }
 ));
 

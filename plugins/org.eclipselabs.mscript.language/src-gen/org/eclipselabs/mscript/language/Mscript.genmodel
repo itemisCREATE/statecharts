@@ -22,13 +22,15 @@
       <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//AssignmentOperator/MultiplicationAssignment"/>
       <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//AssignmentOperator/DivisionAssignment"/>
     </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Mscript.ecore#//EqualityOperator">
+      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//EqualityOperator/EqualTo"/>
+      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//EqualityOperator/NotEqualTo"/>
+    </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="Mscript.ecore#//RelationalOperator">
       <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//RelationalOperator/LessThan"/>
       <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//RelationalOperator/LessThanOrEqualTo"/>
       <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//RelationalOperator/GreaterThan"/>
       <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//RelationalOperator/GreaterThanOrEqualTo"/>
-      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//RelationalOperator/EqualTo"/>
-      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//RelationalOperator/NotEqualTo"/>
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="Mscript.ecore#//AdditiveOperator">
       <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//AdditiveOperator/Addition"/>
@@ -276,6 +278,11 @@
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//LogicalAndExpression">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//LogicalAndExpression/operands"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//EqualityExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//EqualityExpression/leftOperand"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//EqualityExpression/operator"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//EqualityExpression/rightOperand"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//RelationalExpression">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//RelationalExpression/leftOperand"/>

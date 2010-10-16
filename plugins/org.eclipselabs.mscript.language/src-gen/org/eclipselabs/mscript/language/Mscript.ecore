@@ -170,13 +170,15 @@
     <eLiterals name="MultiplicationAssignment" value="3" literal="*="/>
     <eLiterals name="DivisionAssignment" value="4" literal="/="/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="EqualityOperator">
+    <eLiterals name="EqualTo" literal="=="/>
+    <eLiterals name="NotEqualTo" value="1" literal="!="/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="RelationalOperator">
     <eLiterals name="LessThan" literal="&lt;"/>
     <eLiterals name="LessThanOrEqualTo" value="1" literal="&lt;="/>
     <eLiterals name="GreaterThan" value="2" literal=">"/>
     <eLiterals name="GreaterThanOrEqualTo" value="3" literal=">="/>
-    <eLiterals name="EqualTo" value="4" literal="=="/>
-    <eLiterals name="NotEqualTo" value="5" literal="!="/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AdditiveExpressionPart">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//AdditiveOperator"/>
@@ -335,6 +337,13 @@
   <eClassifiers xsi:type="ecore:EClass" name="LogicalAndExpression" eSuperTypes="#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="operands" upperBound="-1"
         eType="#//Expression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EqualityExpression" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//EqualityOperator"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" eType="#//Expression"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RelationalExpression" eSuperTypes="#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="#//Expression"

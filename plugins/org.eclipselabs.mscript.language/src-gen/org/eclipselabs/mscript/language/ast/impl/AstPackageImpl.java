@@ -38,6 +38,8 @@ import org.eclipselabs.mscript.language.ast.DoWhileStatement;
 import org.eclipselabs.mscript.language.ast.EndExpression;
 import org.eclipselabs.mscript.language.ast.EnumerationDefinition;
 import org.eclipselabs.mscript.language.ast.EnumerationLiteralDeclaration;
+import org.eclipselabs.mscript.language.ast.EqualityExpression;
+import org.eclipselabs.mscript.language.ast.EqualityOperator;
 import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.ast.ExpressionList;
 import org.eclipselabs.mscript.language.ast.ExpressionStatement;
@@ -629,6 +631,13 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass equalityExpressionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass relationalExpressionEClass = null;
 
   /**
@@ -686,6 +695,13 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * @generated
    */
   private EEnum assignmentOperatorEEnum = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EEnum equalityOperatorEEnum = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -2454,6 +2470,46 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getEqualityExpression()
+  {
+    return equalityExpressionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getEqualityExpression_LeftOperand()
+  {
+    return (EReference)equalityExpressionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getEqualityExpression_Operator()
+  {
+    return (EAttribute)equalityExpressionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getEqualityExpression_RightOperand()
+  {
+    return (EReference)equalityExpressionEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getRelationalExpression()
   {
     return relationalExpressionEClass;
@@ -2717,6 +2773,16 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
   public EEnum getAssignmentOperator()
   {
     return assignmentOperatorEEnum;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EEnum getEqualityOperator()
+  {
+    return equalityOperatorEEnum;
   }
 
   /**
@@ -3057,6 +3123,11 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     logicalAndExpressionEClass = createEClass(LOGICAL_AND_EXPRESSION);
     createEReference(logicalAndExpressionEClass, LOGICAL_AND_EXPRESSION__OPERANDS);
 
+    equalityExpressionEClass = createEClass(EQUALITY_EXPRESSION);
+    createEReference(equalityExpressionEClass, EQUALITY_EXPRESSION__LEFT_OPERAND);
+    createEAttribute(equalityExpressionEClass, EQUALITY_EXPRESSION__OPERATOR);
+    createEReference(equalityExpressionEClass, EQUALITY_EXPRESSION__RIGHT_OPERAND);
+
     relationalExpressionEClass = createEClass(RELATIONAL_EXPRESSION);
     createEReference(relationalExpressionEClass, RELATIONAL_EXPRESSION__LEFT_OPERAND);
     createEAttribute(relationalExpressionEClass, RELATIONAL_EXPRESSION__TYPE_TEST);
@@ -3092,6 +3163,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     // Create enums
     checkStatusKindEEnum = createEEnum(CHECK_STATUS_KIND);
     assignmentOperatorEEnum = createEEnum(ASSIGNMENT_OPERATOR);
+    equalityOperatorEEnum = createEEnum(EQUALITY_OPERATOR);
     relationalOperatorEEnum = createEEnum(RELATIONAL_OPERATOR);
     additiveOperatorEEnum = createEEnum(ADDITIVE_OPERATOR);
     multiplicativeOperatorEEnum = createEEnum(MULTIPLICATIVE_OPERATOR);
@@ -3182,6 +3254,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     conditionalExpressionEClass.getESuperTypes().add(this.getExpression());
     logicalOrExpressionEClass.getESuperTypes().add(this.getExpression());
     logicalAndExpressionEClass.getESuperTypes().add(this.getExpression());
+    equalityExpressionEClass.getESuperTypes().add(this.getExpression());
     relationalExpressionEClass.getESuperTypes().add(this.getExpression());
     additiveExpressionEClass.getESuperTypes().add(this.getExpression());
     multiplicativeExpressionEClass.getESuperTypes().add(this.getExpression());
@@ -3429,6 +3502,11 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     initEClass(logicalAndExpressionEClass, LogicalAndExpression.class, "LogicalAndExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getLogicalAndExpression_Operands(), this.getExpression(), null, "operands", null, 0, -1, LogicalAndExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+    initEClass(equalityExpressionEClass, EqualityExpression.class, "EqualityExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getEqualityExpression_LeftOperand(), this.getExpression(), null, "leftOperand", null, 0, 1, EqualityExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getEqualityExpression_Operator(), this.getEqualityOperator(), "operator", null, 0, 1, EqualityExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEqualityExpression_RightOperand(), this.getExpression(), null, "rightOperand", null, 0, 1, EqualityExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
     initEClass(relationalExpressionEClass, RelationalExpression.class, "RelationalExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getRelationalExpression_LeftOperand(), this.getExpression(), null, "leftOperand", null, 0, 1, RelationalExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getRelationalExpression_TypeTest(), ecorePackage.getEBoolean(), "typeTest", null, 0, 1, RelationalExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3475,13 +3553,15 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     addEEnumLiteral(assignmentOperatorEEnum, AssignmentOperator.MULTIPLICATION_ASSIGNMENT);
     addEEnumLiteral(assignmentOperatorEEnum, AssignmentOperator.DIVISION_ASSIGNMENT);
 
+    initEEnum(equalityOperatorEEnum, EqualityOperator.class, "EqualityOperator");
+    addEEnumLiteral(equalityOperatorEEnum, EqualityOperator.EQUAL_TO);
+    addEEnumLiteral(equalityOperatorEEnum, EqualityOperator.NOT_EQUAL_TO);
+
     initEEnum(relationalOperatorEEnum, RelationalOperator.class, "RelationalOperator");
     addEEnumLiteral(relationalOperatorEEnum, RelationalOperator.LESS_THAN);
     addEEnumLiteral(relationalOperatorEEnum, RelationalOperator.LESS_THAN_OR_EQUAL_TO);
     addEEnumLiteral(relationalOperatorEEnum, RelationalOperator.GREATER_THAN);
     addEEnumLiteral(relationalOperatorEEnum, RelationalOperator.GREATER_THAN_OR_EQUAL_TO);
-    addEEnumLiteral(relationalOperatorEEnum, RelationalOperator.EQUAL_TO);
-    addEEnumLiteral(relationalOperatorEEnum, RelationalOperator.NOT_EQUAL_TO);
 
     initEEnum(additiveOperatorEEnum, AdditiveOperator.class, "AdditiveOperator");
     addEEnumLiteral(additiveOperatorEEnum, AdditiveOperator.ADDITION);

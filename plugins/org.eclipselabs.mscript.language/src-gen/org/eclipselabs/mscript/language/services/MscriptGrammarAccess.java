@@ -2080,41 +2080,83 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	public class LogicalAndExpressionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "LogicalAndExpression");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final RuleCall cRelationalExpressionParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final RuleCall cEqualityExpressionParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
 		private final Action cLogicalAndExpressionOperandsAction_1_0 = (Action)cGroup_1.eContents().get(0);
 		private final Group cGroup_1_1 = (Group)cGroup_1.eContents().get(1);
 		private final Keyword cAmpersandAmpersandKeyword_1_1_0 = (Keyword)cGroup_1_1.eContents().get(0);
 		private final Assignment cOperandsAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
-		private final RuleCall cOperandsRelationalExpressionParserRuleCall_1_1_1_0 = (RuleCall)cOperandsAssignment_1_1_1.eContents().get(0);
+		private final RuleCall cOperandsEqualityExpressionParserRuleCall_1_1_1_0 = (RuleCall)cOperandsAssignment_1_1_1.eContents().get(0);
 		
 		//LogicalAndExpression returns Expression:
-		//	RelationalExpression ({LogicalAndExpression.operands+=current} ("&&" operands+=RelationalExpression)+)?;
+		//	EqualityExpression ({LogicalAndExpression.operands+=current} ("&&" operands+=EqualityExpression)+)?;
 		public ParserRule getRule() { return rule; }
 
-		//RelationalExpression ({LogicalAndExpression.operands+=current} ("&&" operands+=RelationalExpression)+)?
+		//EqualityExpression ({LogicalAndExpression.operands+=current} ("&&" operands+=EqualityExpression)+)?
 		public Group getGroup() { return cGroup; }
 
-		//RelationalExpression
-		public RuleCall getRelationalExpressionParserRuleCall_0() { return cRelationalExpressionParserRuleCall_0; }
+		//EqualityExpression
+		public RuleCall getEqualityExpressionParserRuleCall_0() { return cEqualityExpressionParserRuleCall_0; }
 
-		//({LogicalAndExpression.operands+=current} ("&&" operands+=RelationalExpression)+)?
+		//({LogicalAndExpression.operands+=current} ("&&" operands+=EqualityExpression)+)?
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{LogicalAndExpression.operands+=current}
 		public Action getLogicalAndExpressionOperandsAction_1_0() { return cLogicalAndExpressionOperandsAction_1_0; }
 
-		//("&&" operands+=RelationalExpression)+
+		//("&&" operands+=EqualityExpression)+
 		public Group getGroup_1_1() { return cGroup_1_1; }
 
 		//"&&"
 		public Keyword getAmpersandAmpersandKeyword_1_1_0() { return cAmpersandAmpersandKeyword_1_1_0; }
 
-		//operands+=RelationalExpression
+		//operands+=EqualityExpression
 		public Assignment getOperandsAssignment_1_1_1() { return cOperandsAssignment_1_1_1; }
 
+		//EqualityExpression
+		public RuleCall getOperandsEqualityExpressionParserRuleCall_1_1_1_0() { return cOperandsEqualityExpressionParserRuleCall_1_1_1_0; }
+	}
+
+	public class EqualityExpressionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EqualityExpression");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final RuleCall cRelationalExpressionParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Action cEqualityExpressionLeftOperandAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Assignment cOperatorAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cOperatorEqualityOperatorEnumRuleCall_1_1_0 = (RuleCall)cOperatorAssignment_1_1.eContents().get(0);
+		private final Assignment cRightOperandAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
+		private final RuleCall cRightOperandRelationalExpressionParserRuleCall_1_2_0 = (RuleCall)cRightOperandAssignment_1_2.eContents().get(0);
+		
+		//EqualityExpression returns Expression:
+		//	RelationalExpression ({EqualityExpression.leftOperand=current} operator=EqualityOperator
+		//	rightOperand=RelationalExpression)?;
+		public ParserRule getRule() { return rule; }
+
+		//RelationalExpression ({EqualityExpression.leftOperand=current} operator=EqualityOperator
+		//rightOperand=RelationalExpression)?
+		public Group getGroup() { return cGroup; }
+
 		//RelationalExpression
-		public RuleCall getOperandsRelationalExpressionParserRuleCall_1_1_1_0() { return cOperandsRelationalExpressionParserRuleCall_1_1_1_0; }
+		public RuleCall getRelationalExpressionParserRuleCall_0() { return cRelationalExpressionParserRuleCall_0; }
+
+		//({EqualityExpression.leftOperand=current} operator=EqualityOperator rightOperand=RelationalExpression)?
+		public Group getGroup_1() { return cGroup_1; }
+
+		//{EqualityExpression.leftOperand=current}
+		public Action getEqualityExpressionLeftOperandAction_1_0() { return cEqualityExpressionLeftOperandAction_1_0; }
+
+		//operator=EqualityOperator
+		public Assignment getOperatorAssignment_1_1() { return cOperatorAssignment_1_1; }
+
+		//EqualityOperator
+		public RuleCall getOperatorEqualityOperatorEnumRuleCall_1_1_0() { return cOperatorEqualityOperatorEnumRuleCall_1_1_0; }
+
+		//rightOperand=RelationalExpression
+		public Assignment getRightOperandAssignment_1_2() { return cRightOperandAssignment_1_2; }
+
+		//RelationalExpression
+		public RuleCall getRightOperandRelationalExpressionParserRuleCall_1_2_0() { return cRightOperandRelationalExpressionParserRuleCall_1_2_0; }
 	}
 
 	public class RelationalExpressionElements extends AbstractParserRuleElementFinder {
@@ -3465,6 +3507,34 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		public Keyword getDivisionAssignmentSolidusEqualsSignKeyword_4_0() { return cDivisionAssignmentSolidusEqualsSignKeyword_4_0; }
 	}
 
+	public class EqualityOperatorElements extends AbstractEnumRuleElementFinder {
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "EqualityOperator");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final EnumLiteralDeclaration cEqualToEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
+		private final Keyword cEqualToEqualsSignEqualsSignKeyword_0_0 = (Keyword)cEqualToEnumLiteralDeclaration_0.eContents().get(0);
+		private final EnumLiteralDeclaration cNotEqualToEnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
+		private final Keyword cNotEqualToExclamationMarkEqualsSignKeyword_1_0 = (Keyword)cNotEqualToEnumLiteralDeclaration_1.eContents().get(0);
+		
+		//enum EqualityOperator:
+		//	EqualTo="==" | NotEqualTo="!=";
+		public EnumRule getRule() { return rule; }
+
+		//EqualTo="==" | NotEqualTo="!="
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//EqualTo="=="
+		public EnumLiteralDeclaration getEqualToEnumLiteralDeclaration_0() { return cEqualToEnumLiteralDeclaration_0; }
+
+		//"=="
+		public Keyword getEqualToEqualsSignEqualsSignKeyword_0_0() { return cEqualToEqualsSignEqualsSignKeyword_0_0; }
+
+		//NotEqualTo="!="
+		public EnumLiteralDeclaration getNotEqualToEnumLiteralDeclaration_1() { return cNotEqualToEnumLiteralDeclaration_1; }
+
+		//"!="
+		public Keyword getNotEqualToExclamationMarkEqualsSignKeyword_1_0() { return cNotEqualToExclamationMarkEqualsSignKeyword_1_0; }
+	}
+
 	public class RelationalOperatorElements extends AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "RelationalOperator");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -3476,16 +3546,12 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cGreaterThanGreaterThanSignKeyword_2_0 = (Keyword)cGreaterThanEnumLiteralDeclaration_2.eContents().get(0);
 		private final EnumLiteralDeclaration cGreaterThanOrEqualToEnumLiteralDeclaration_3 = (EnumLiteralDeclaration)cAlternatives.eContents().get(3);
 		private final Keyword cGreaterThanOrEqualToGreaterThanSignEqualsSignKeyword_3_0 = (Keyword)cGreaterThanOrEqualToEnumLiteralDeclaration_3.eContents().get(0);
-		private final EnumLiteralDeclaration cEqualToEnumLiteralDeclaration_4 = (EnumLiteralDeclaration)cAlternatives.eContents().get(4);
-		private final Keyword cEqualToEqualsSignEqualsSignKeyword_4_0 = (Keyword)cEqualToEnumLiteralDeclaration_4.eContents().get(0);
-		private final EnumLiteralDeclaration cNotEqualToEnumLiteralDeclaration_5 = (EnumLiteralDeclaration)cAlternatives.eContents().get(5);
-		private final Keyword cNotEqualToExclamationMarkEqualsSignKeyword_5_0 = (Keyword)cNotEqualToEnumLiteralDeclaration_5.eContents().get(0);
 		
 		//enum RelationalOperator:
-		//	LessThan="<" | LessThanOrEqualTo="<=" | GreaterThan=">" | GreaterThanOrEqualTo=">=" | EqualTo="==" | NotEqualTo="!=";
+		//	LessThan="<" | LessThanOrEqualTo="<=" | GreaterThan=">" | GreaterThanOrEqualTo=">=";
 		public EnumRule getRule() { return rule; }
 
-		//LessThan="<" | LessThanOrEqualTo="<=" | GreaterThan=">" | GreaterThanOrEqualTo=">=" | EqualTo="==" | NotEqualTo="!="
+		//LessThan="<" | LessThanOrEqualTo="<=" | GreaterThan=">" | GreaterThanOrEqualTo=">="
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//LessThan="<"
@@ -3511,18 +3577,6 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 
 		//">="
 		public Keyword getGreaterThanOrEqualToGreaterThanSignEqualsSignKeyword_3_0() { return cGreaterThanOrEqualToGreaterThanSignEqualsSignKeyword_3_0; }
-
-		//EqualTo="=="
-		public EnumLiteralDeclaration getEqualToEnumLiteralDeclaration_4() { return cEqualToEnumLiteralDeclaration_4; }
-
-		//"=="
-		public Keyword getEqualToEqualsSignEqualsSignKeyword_4_0() { return cEqualToEqualsSignEqualsSignKeyword_4_0; }
-
-		//NotEqualTo="!="
-		public EnumLiteralDeclaration getNotEqualToEnumLiteralDeclaration_5() { return cNotEqualToEnumLiteralDeclaration_5; }
-
-		//"!="
-		public Keyword getNotEqualToExclamationMarkEqualsSignKeyword_5_0() { return cNotEqualToExclamationMarkEqualsSignKeyword_5_0; }
 	}
 
 	public class AdditiveOperatorElements extends AbstractEnumRuleElementFinder {
@@ -3774,6 +3828,8 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	private ConditionalExpressionElements pConditionalExpression;
 	private LogicalOrExpressionElements pLogicalOrExpression;
 	private LogicalAndExpressionElements pLogicalAndExpression;
+	private EqualityExpressionElements pEqualityExpression;
+	private EqualityOperatorElements unknownRuleEqualityOperator;
 	private RelationalExpressionElements pRelationalExpression;
 	private RelationalOperatorElements unknownRuleRelationalOperator;
 	private AdditiveExpressionElements pAdditiveExpression;
@@ -4354,13 +4410,34 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//LogicalAndExpression returns Expression:
-	//	RelationalExpression ({LogicalAndExpression.operands+=current} ("&&" operands+=RelationalExpression)+)?;
+	//	EqualityExpression ({LogicalAndExpression.operands+=current} ("&&" operands+=EqualityExpression)+)?;
 	public LogicalAndExpressionElements getLogicalAndExpressionAccess() {
 		return (pLogicalAndExpression != null) ? pLogicalAndExpression : (pLogicalAndExpression = new LogicalAndExpressionElements());
 	}
 	
 	public ParserRule getLogicalAndExpressionRule() {
 		return getLogicalAndExpressionAccess().getRule();
+	}
+
+	//EqualityExpression returns Expression:
+	//	RelationalExpression ({EqualityExpression.leftOperand=current} operator=EqualityOperator
+	//	rightOperand=RelationalExpression)?;
+	public EqualityExpressionElements getEqualityExpressionAccess() {
+		return (pEqualityExpression != null) ? pEqualityExpression : (pEqualityExpression = new EqualityExpressionElements());
+	}
+	
+	public ParserRule getEqualityExpressionRule() {
+		return getEqualityExpressionAccess().getRule();
+	}
+
+	//enum EqualityOperator:
+	//	EqualTo="==" | NotEqualTo="!=";
+	public EqualityOperatorElements getEqualityOperatorAccess() {
+		return (unknownRuleEqualityOperator != null) ? unknownRuleEqualityOperator : (unknownRuleEqualityOperator = new EqualityOperatorElements());
+	}
+	
+	public EnumRule getEqualityOperatorRule() {
+		return getEqualityOperatorAccess().getRule();
 	}
 
 	//RelationalExpression returns Expression:
@@ -4375,7 +4452,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//enum RelationalOperator:
-	//	LessThan="<" | LessThanOrEqualTo="<=" | GreaterThan=">" | GreaterThanOrEqualTo=">=" | EqualTo="==" | NotEqualTo="!=";
+	//	LessThan="<" | LessThanOrEqualTo="<=" | GreaterThan=">" | GreaterThanOrEqualTo=">=";
 	public RelationalOperatorElements getRelationalOperatorAccess() {
 		return (unknownRuleRelationalOperator != null) ? unknownRuleRelationalOperator : (unknownRuleRelationalOperator = new RelationalOperatorElements());
 	}

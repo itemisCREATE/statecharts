@@ -60,27 +60,7 @@ public enum RelationalOperator implements Enumerator
    * @generated
    * @ordered
    */
-  GREATER_THAN_OR_EQUAL_TO(3, "GreaterThanOrEqualTo", ">="),
-
-  /**
-   * The '<em><b>Equal To</b></em>' literal object.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #EQUAL_TO_VALUE
-   * @generated
-   * @ordered
-   */
-  EQUAL_TO(4, "EqualTo", "=="),
-
-  /**
-   * The '<em><b>Not Equal To</b></em>' literal object.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #NOT_EQUAL_TO_VALUE
-   * @generated
-   * @ordered
-   */
-  NOT_EQUAL_TO(5, "NotEqualTo", "!=");
+  GREATER_THAN_OR_EQUAL_TO(3, "GreaterThanOrEqualTo", ">=");
 
   /**
    * The '<em><b>Less Than</b></em>' literal value.
@@ -143,36 +123,6 @@ public enum RelationalOperator implements Enumerator
   public static final int GREATER_THAN_OR_EQUAL_TO_VALUE = 3;
 
   /**
-   * The '<em><b>Equal To</b></em>' literal value.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Equal To</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @see #EQUAL_TO
-   * @model name="EqualTo" literal="=="
-   * @generated
-   * @ordered
-   */
-  public static final int EQUAL_TO_VALUE = 4;
-
-  /**
-   * The '<em><b>Not Equal To</b></em>' literal value.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Not Equal To</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @see #NOT_EQUAL_TO
-   * @model name="NotEqualTo" literal="!="
-   * @generated
-   * @ordered
-   */
-  public static final int NOT_EQUAL_TO_VALUE = 5;
-
-  /**
    * An array of all the '<em><b>Relational Operator</b></em>' enumerators.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -185,8 +135,6 @@ public enum RelationalOperator implements Enumerator
       LESS_THAN_OR_EQUAL_TO,
       GREATER_THAN,
       GREATER_THAN_OR_EQUAL_TO,
-      EQUAL_TO,
-      NOT_EQUAL_TO,
     };
 
   /**
@@ -249,8 +197,6 @@ public enum RelationalOperator implements Enumerator
       case LESS_THAN_OR_EQUAL_TO_VALUE: return LESS_THAN_OR_EQUAL_TO;
       case GREATER_THAN_VALUE: return GREATER_THAN;
       case GREATER_THAN_OR_EQUAL_TO_VALUE: return GREATER_THAN_OR_EQUAL_TO;
-      case EQUAL_TO_VALUE: return EQUAL_TO;
-      case NOT_EQUAL_TO_VALUE: return NOT_EQUAL_TO;
     }
     return null;
   }

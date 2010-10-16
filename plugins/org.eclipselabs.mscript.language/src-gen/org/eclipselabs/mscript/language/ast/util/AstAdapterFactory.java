@@ -443,6 +443,11 @@ public class AstAdapterFactory extends AdapterFactoryImpl
         return createLogicalAndExpressionAdapter();
       }
       @Override
+      public Adapter caseEqualityExpression(EqualityExpression object)
+      {
+        return createEqualityExpressionAdapter();
+      }
+      @Override
       public Adapter caseRelationalExpression(RelationalExpression object)
       {
         return createRelationalExpressionAdapter();
@@ -1590,6 +1595,21 @@ public class AstAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createLogicalAndExpressionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.EqualityExpression <em>Equality Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipselabs.mscript.language.ast.EqualityExpression
+   * @generated
+   */
+  public Adapter createEqualityExpressionAdapter()
   {
     return null;
   }

@@ -683,6 +683,15 @@ public interface AstFactory extends EFactory
   LogicalAndExpression createLogicalAndExpression();
 
   /**
+   * Returns a new object of class '<em>Equality Expression</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Equality Expression</em>'.
+   * @generated
+   */
+  EqualityExpression createEqualityExpression();
+
+  /**
    * Returns a new object of class '<em>Relational Expression</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

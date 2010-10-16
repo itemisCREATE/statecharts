@@ -704,6 +704,14 @@ public class AstSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case AstPackage.EQUALITY_EXPRESSION:
+      {
+        EqualityExpression equalityExpression = (EqualityExpression)theEObject;
+        T result = caseEqualityExpression(equalityExpression);
+        if (result == null) result = caseExpression(equalityExpression);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case AstPackage.RELATIONAL_EXPRESSION:
       {
         RelationalExpression relationalExpression = (RelationalExpression)theEObject;
@@ -1928,6 +1936,22 @@ public class AstSwitch<T>
    * @generated
    */
   public T caseLogicalAndExpression(LogicalAndExpression object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Equality Expression</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Equality Expression</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEqualityExpression(EqualityExpression object)
   {
     return null;
   }
