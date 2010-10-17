@@ -147,6 +147,17 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ForeachStatement/collectionExpression"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ForeachStatement/body"/>
     </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//SwitchStatement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//SwitchStatement/controlExpression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//SwitchStatement/cases"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//SwitchStatement/defaultStatements"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//SwitchCase">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//SwitchCase/value"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//SwitchCase/statements"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//ContinueStatement"/>
+    <genClasses ecoreClass="Mscript.ecore#//BreakStatement"/>
     <genClasses ecoreClass="Mscript.ecore#//ReturnStatement">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ReturnStatement/returnValue"/>
     </genClasses>

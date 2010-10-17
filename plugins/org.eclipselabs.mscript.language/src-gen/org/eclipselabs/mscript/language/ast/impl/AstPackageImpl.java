@@ -27,11 +27,13 @@ import org.eclipselabs.mscript.language.ast.BlockStatement;
 import org.eclipselabs.mscript.language.ast.BooleanKind;
 import org.eclipselabs.mscript.language.ast.BooleanLiteral;
 import org.eclipselabs.mscript.language.ast.BooleanTypeSpecifier;
+import org.eclipselabs.mscript.language.ast.BreakStatement;
 import org.eclipselabs.mscript.language.ast.CheckDefinition;
 import org.eclipselabs.mscript.language.ast.CheckStatusKind;
 import org.eclipselabs.mscript.language.ast.CheckStatusStatement;
 import org.eclipselabs.mscript.language.ast.ComplexTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.ConditionalExpression;
+import org.eclipselabs.mscript.language.ast.ContinueStatement;
 import org.eclipselabs.mscript.language.ast.DataTypeDefinition;
 import org.eclipselabs.mscript.language.ast.DataTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.DoWhileStatement;
@@ -91,6 +93,8 @@ import org.eclipselabs.mscript.language.ast.StringLiteral;
 import org.eclipselabs.mscript.language.ast.StringTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.SubroutineDefinition;
 import org.eclipselabs.mscript.language.ast.Subscript;
+import org.eclipselabs.mscript.language.ast.SwitchCase;
+import org.eclipselabs.mscript.language.ast.SwitchStatement;
 import org.eclipselabs.mscript.language.ast.SymbolReference;
 import org.eclipselabs.mscript.language.ast.TypeAliasDefinition;
 import org.eclipselabs.mscript.language.ast.TypeDefinition;
@@ -296,6 +300,34 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * @generated
    */
   private EClass foreachStatementEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass switchStatementEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass switchCaseEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass continueStatementEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass breakStatementEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -1473,6 +1505,96 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
   public EReference getForeachStatement_Body()
   {
     return (EReference)foreachStatementEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getSwitchStatement()
+  {
+    return switchStatementEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getSwitchStatement_ControlExpression()
+  {
+    return (EReference)switchStatementEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getSwitchStatement_Cases()
+  {
+    return (EReference)switchStatementEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getSwitchStatement_DefaultStatements()
+  {
+    return (EReference)switchStatementEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getSwitchCase()
+  {
+    return switchCaseEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getSwitchCase_Value()
+  {
+    return (EReference)switchCaseEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getSwitchCase_Statements()
+  {
+    return (EReference)switchCaseEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getContinueStatement()
+  {
+    return continueStatementEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getBreakStatement()
+  {
+    return breakStatementEClass;
   }
 
   /**
@@ -2977,6 +3099,19 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     createEReference(foreachStatementEClass, FOREACH_STATEMENT__COLLECTION_EXPRESSION);
     createEReference(foreachStatementEClass, FOREACH_STATEMENT__BODY);
 
+    switchStatementEClass = createEClass(SWITCH_STATEMENT);
+    createEReference(switchStatementEClass, SWITCH_STATEMENT__CONTROL_EXPRESSION);
+    createEReference(switchStatementEClass, SWITCH_STATEMENT__CASES);
+    createEReference(switchStatementEClass, SWITCH_STATEMENT__DEFAULT_STATEMENTS);
+
+    switchCaseEClass = createEClass(SWITCH_CASE);
+    createEReference(switchCaseEClass, SWITCH_CASE__VALUE);
+    createEReference(switchCaseEClass, SWITCH_CASE__STATEMENTS);
+
+    continueStatementEClass = createEClass(CONTINUE_STATEMENT);
+
+    breakStatementEClass = createEClass(BREAK_STATEMENT);
+
     returnStatementEClass = createEClass(RETURN_STATEMENT);
     createEReference(returnStatementEClass, RETURN_STATEMENT__RETURN_VALUE);
 
@@ -3221,6 +3356,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     doWhileStatementEClass.getESuperTypes().add(this.getStatement());
     forStatementEClass.getESuperTypes().add(this.getStatement());
     foreachStatementEClass.getESuperTypes().add(this.getStatement());
+    switchStatementEClass.getESuperTypes().add(this.getStatement());
+    continueStatementEClass.getESuperTypes().add(this.getStatement());
+    breakStatementEClass.getESuperTypes().add(this.getStatement());
     returnStatementEClass.getESuperTypes().add(this.getStatement());
     checkStatusStatementEClass.getESuperTypes().add(this.getStatement());
     dataTypeSpecifierEClass.getESuperTypes().add(this.getTypeSpecifier());
@@ -3355,6 +3493,19 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     initEAttribute(getForeachStatement_ElementName(), ecorePackage.getEString(), "elementName", null, 0, 1, ForeachStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getForeachStatement_CollectionExpression(), this.getExpression(), null, "collectionExpression", null, 0, 1, ForeachStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getForeachStatement_Body(), this.getBlockStatement(), null, "body", null, 0, 1, ForeachStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(switchStatementEClass, SwitchStatement.class, "SwitchStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getSwitchStatement_ControlExpression(), this.getExpression(), null, "controlExpression", null, 0, 1, SwitchStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getSwitchStatement_Cases(), this.getSwitchCase(), null, "cases", null, 0, -1, SwitchStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getSwitchStatement_DefaultStatements(), this.getStatement(), null, "defaultStatements", null, 0, -1, SwitchStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(switchCaseEClass, SwitchCase.class, "SwitchCase", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getSwitchCase_Value(), this.getExpression(), null, "value", null, 0, 1, SwitchCase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getSwitchCase_Statements(), this.getStatement(), null, "statements", null, 0, -1, SwitchCase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(continueStatementEClass, ContinueStatement.class, "ContinueStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(breakStatementEClass, BreakStatement.class, "BreakStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(returnStatementEClass, ReturnStatement.class, "ReturnStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getReturnStatement_ReturnValue(), this.getExpression(), null, "returnValue", null, 0, 1, ReturnStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

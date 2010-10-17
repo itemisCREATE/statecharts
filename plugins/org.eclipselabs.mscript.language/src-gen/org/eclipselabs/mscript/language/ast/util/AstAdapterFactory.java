@@ -208,6 +208,26 @@ public class AstAdapterFactory extends AdapterFactoryImpl
         return createForeachStatementAdapter();
       }
       @Override
+      public Adapter caseSwitchStatement(SwitchStatement object)
+      {
+        return createSwitchStatementAdapter();
+      }
+      @Override
+      public Adapter caseSwitchCase(SwitchCase object)
+      {
+        return createSwitchCaseAdapter();
+      }
+      @Override
+      public Adapter caseContinueStatement(ContinueStatement object)
+      {
+        return createContinueStatementAdapter();
+      }
+      @Override
+      public Adapter caseBreakStatement(BreakStatement object)
+      {
+        return createBreakStatementAdapter();
+      }
+      @Override
       public Adapter caseReturnStatement(ReturnStatement object)
       {
         return createReturnStatementAdapter();
@@ -890,6 +910,66 @@ public class AstAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createForeachStatementAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.SwitchStatement <em>Switch Statement</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipselabs.mscript.language.ast.SwitchStatement
+   * @generated
+   */
+  public Adapter createSwitchStatementAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.SwitchCase <em>Switch Case</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipselabs.mscript.language.ast.SwitchCase
+   * @generated
+   */
+  public Adapter createSwitchCaseAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.ContinueStatement <em>Continue Statement</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipselabs.mscript.language.ast.ContinueStatement
+   * @generated
+   */
+  public Adapter createContinueStatementAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.BreakStatement <em>Break Statement</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipselabs.mscript.language.ast.BreakStatement
+   * @generated
+   */
+  public Adapter createBreakStatementAdapter()
   {
     return null;
   }

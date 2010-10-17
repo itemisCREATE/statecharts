@@ -94,6 +94,10 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
       case AstPackage.FOR_STATEMENT: return createForStatement();
       case AstPackage.FOR_STATEMENT_INITIALIZER: return createForStatementInitializer();
       case AstPackage.FOREACH_STATEMENT: return createForeachStatement();
+      case AstPackage.SWITCH_STATEMENT: return createSwitchStatement();
+      case AstPackage.SWITCH_CASE: return createSwitchCase();
+      case AstPackage.CONTINUE_STATEMENT: return createContinueStatement();
+      case AstPackage.BREAK_STATEMENT: return createBreakStatement();
       case AstPackage.RETURN_STATEMENT: return createReturnStatement();
       case AstPackage.CHECK_STATUS_STATEMENT: return createCheckStatusStatement();
       case AstPackage.TYPE_SPECIFIER: return createTypeSpecifier();
@@ -508,6 +512,50 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
   {
     ForeachStatementImpl foreachStatement = new ForeachStatementImpl();
     return foreachStatement;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public SwitchStatement createSwitchStatement()
+  {
+    SwitchStatementImpl switchStatement = new SwitchStatementImpl();
+    return switchStatement;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public SwitchCase createSwitchCase()
+  {
+    SwitchCaseImpl switchCase = new SwitchCaseImpl();
+    return switchCase;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ContinueStatement createContinueStatement()
+  {
+    ContinueStatementImpl continueStatement = new ContinueStatementImpl();
+    return continueStatement;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public BreakStatement createBreakStatement()
+  {
+    BreakStatementImpl breakStatement = new BreakStatementImpl();
+    return breakStatement;
   }
 
   /**

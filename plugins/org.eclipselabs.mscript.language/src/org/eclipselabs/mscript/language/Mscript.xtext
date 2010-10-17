@@ -111,6 +111,9 @@ Statement :
 	DoWhileStatement |
 	ForStatement |
 	ForeachStatement |
+	SwitchStatement |
+	ContinueStatement |
+	BreakStatement |
 	TypeDefinition |
 	VariableDeclaration |
 	ReturnStatement |
@@ -142,6 +145,21 @@ ForStatementInitializer :
 	
 ForeachStatement :
 	'foreach' '(' elementName=KeywordID 'in' collectionExpression=Expression ')' body=BlockStatement;
+	
+SwitchStatement :
+	'switch' '(' controlExpression=Expression ')' '{'
+		(cases+=SwitchCase)*
+		('default' ':' (defaultStatements+=Statement)*)?
+	'}';
+
+SwitchCase :
+	'case' value=LogicalOrExpression ':' (statements+=Statement)*;
+		
+ContinueStatement :
+	{ContinueStatement} 'continue' ';';
+	
+BreakStatement :
+	{BreakStatement} 'break' ';';
 	
 ReturnStatement :
 	{ReturnStatement} 'return' (returnValue=Expression)? ';';

@@ -315,6 +315,37 @@ public class AstSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case AstPackage.SWITCH_STATEMENT:
+      {
+        SwitchStatement switchStatement = (SwitchStatement)theEObject;
+        T result = caseSwitchStatement(switchStatement);
+        if (result == null) result = caseStatement(switchStatement);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AstPackage.SWITCH_CASE:
+      {
+        SwitchCase switchCase = (SwitchCase)theEObject;
+        T result = caseSwitchCase(switchCase);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AstPackage.CONTINUE_STATEMENT:
+      {
+        ContinueStatement continueStatement = (ContinueStatement)theEObject;
+        T result = caseContinueStatement(continueStatement);
+        if (result == null) result = caseStatement(continueStatement);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AstPackage.BREAK_STATEMENT:
+      {
+        BreakStatement breakStatement = (BreakStatement)theEObject;
+        T result = caseBreakStatement(breakStatement);
+        if (result == null) result = caseStatement(breakStatement);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case AstPackage.RETURN_STATEMENT:
       {
         ReturnStatement returnStatement = (ReturnStatement)theEObject;
@@ -1184,6 +1215,70 @@ public class AstSwitch<T>
    * @generated
    */
   public T caseForeachStatement(ForeachStatement object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Switch Statement</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Switch Statement</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseSwitchStatement(SwitchStatement object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Switch Case</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Switch Case</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseSwitchCase(SwitchCase object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Continue Statement</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Continue Statement</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseContinueStatement(ContinueStatement object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Break Statement</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Break Statement</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseBreakStatement(BreakStatement object)
   {
     return null;
   }

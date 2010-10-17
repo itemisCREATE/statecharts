@@ -109,6 +109,11 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getForStatementInitializerAccess().getGroup(), "rule__ForStatementInitializer__Group__0");
 					put(grammarAccess.getForStatementInitializerAccess().getGroup_0(), "rule__ForStatementInitializer__Group_0__0");
 					put(grammarAccess.getForeachStatementAccess().getGroup(), "rule__ForeachStatement__Group__0");
+					put(grammarAccess.getSwitchStatementAccess().getGroup(), "rule__SwitchStatement__Group__0");
+					put(grammarAccess.getSwitchStatementAccess().getGroup_6(), "rule__SwitchStatement__Group_6__0");
+					put(grammarAccess.getSwitchCaseAccess().getGroup(), "rule__SwitchCase__Group__0");
+					put(grammarAccess.getContinueStatementAccess().getGroup(), "rule__ContinueStatement__Group__0");
+					put(grammarAccess.getBreakStatementAccess().getGroup(), "rule__BreakStatement__Group__0");
 					put(grammarAccess.getReturnStatementAccess().getGroup(), "rule__ReturnStatement__Group__0");
 					put(grammarAccess.getCheckStatusStatementAccess().getGroup(), "rule__CheckStatusStatement__Group__0");
 					put(grammarAccess.getRealTypeSpecifierAccess().getGroup(), "rule__RealTypeSpecifier__Group__0");
@@ -254,6 +259,11 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getForeachStatementAccess().getElementNameAssignment_2(), "rule__ForeachStatement__ElementNameAssignment_2");
 					put(grammarAccess.getForeachStatementAccess().getCollectionExpressionAssignment_4(), "rule__ForeachStatement__CollectionExpressionAssignment_4");
 					put(grammarAccess.getForeachStatementAccess().getBodyAssignment_6(), "rule__ForeachStatement__BodyAssignment_6");
+					put(grammarAccess.getSwitchStatementAccess().getControlExpressionAssignment_2(), "rule__SwitchStatement__ControlExpressionAssignment_2");
+					put(grammarAccess.getSwitchStatementAccess().getCasesAssignment_5(), "rule__SwitchStatement__CasesAssignment_5");
+					put(grammarAccess.getSwitchStatementAccess().getDefaultStatementsAssignment_6_2(), "rule__SwitchStatement__DefaultStatementsAssignment_6_2");
+					put(grammarAccess.getSwitchCaseAccess().getValueAssignment_1(), "rule__SwitchCase__ValueAssignment_1");
+					put(grammarAccess.getSwitchCaseAccess().getStatementsAssignment_3(), "rule__SwitchCase__StatementsAssignment_3");
 					put(grammarAccess.getReturnStatementAccess().getReturnValueAssignment_2(), "rule__ReturnStatement__ReturnValueAssignment_2");
 					put(grammarAccess.getCheckStatusStatementAccess().getKindAssignment_0(), "rule__CheckStatusStatement__KindAssignment_0");
 					put(grammarAccess.getCheckStatusStatementAccess().getMessageAssignment_1(), "rule__CheckStatusStatement__MessageAssignment_1");

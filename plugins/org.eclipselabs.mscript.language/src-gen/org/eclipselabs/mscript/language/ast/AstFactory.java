@@ -260,6 +260,42 @@ public interface AstFactory extends EFactory
   ForeachStatement createForeachStatement();
 
   /**
+   * Returns a new object of class '<em>Switch Statement</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Switch Statement</em>'.
+   * @generated
+   */
+  SwitchStatement createSwitchStatement();
+
+  /**
+   * Returns a new object of class '<em>Switch Case</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Switch Case</em>'.
+   * @generated
+   */
+  SwitchCase createSwitchCase();
+
+  /**
+   * Returns a new object of class '<em>Continue Statement</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Continue Statement</em>'.
+   * @generated
+   */
+  ContinueStatement createContinueStatement();
+
+  /**
+   * Returns a new object of class '<em>Break Statement</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Break Statement</em>'.
+   * @generated
+   */
+  BreakStatement createBreakStatement();
+
+  /**
    * Returns a new object of class '<em>Return Statement</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
