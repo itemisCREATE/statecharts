@@ -48,6 +48,21 @@ public abstract class AbstractMscriptUiModule extends DefaultUiModule {
 		binder.bind(org.eclipse.xtext.parser.antlr.ITokenDefProvider.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.ui.LexerUIBindings.HIGHLIGHTING)).to(org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class);
 	}
 
+	// contributed by org.eclipse.xtext.generator.exporting.QualifiedNamesFragment
+	public Class<? extends org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher> bindPrefixMatcher() {
+		return org.eclipse.xtext.ui.editor.contentassist.FQNPrefixMatcher.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.builder.BuilderIntegrationFragment
+	public void configureIResourceDescriptionsBuilderScope(com.google.inject.Binder binder) {
+		binder.bind(org.eclipse.xtext.resource.IResourceDescriptions.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.scoping.impl.AbstractGlobalScopeProvider.NAMED_BUILDER_SCOPE)).to(org.eclipse.xtext.builder.builderState.ShadowingResourceDescriptions.class);
+	}
+
+	// contributed by org.eclipse.xtext.generator.builder.BuilderIntegrationFragment
+	public Class<? extends org.eclipse.xtext.ui.editor.IXtextEditorCallback> bindIXtextEditorCallback() {
+		return org.eclipse.xtext.builder.nature.NatureAddingEditorCallback.class;
+	}
+
 	// contributed by org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment
 	public Class<? extends org.eclipse.jface.viewers.ILabelProvider> bindILabelProvider() {
 		return org.eclipselabs.mscript.language.ui.labeling.MscriptLabelProvider.class;
@@ -66,6 +81,11 @@ public abstract class AbstractMscriptUiModule extends DefaultUiModule {
 	// contributed by org.eclipse.xtext.ui.generator.outline.OutlineNodeAdapterFactoryFragment
 	public Class<? extends org.eclipse.xtext.ui.editor.outline.actions.IContentOutlineNodeAdapterFactory> bindIContentOutlineNodeAdapterFactory() {
 		return org.eclipselabs.mscript.language.ui.outline.MscriptOutlineNodeAdapterFactory.class;
+	}
+
+	// contributed by org.eclipse.xtext.ui.generator.quickfix.QuickfixProviderFragment
+	public Class<? extends org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider> bindIssueResolutionProvider() {
+		return org.eclipselabs.mscript.language.ui.quickfix.MscriptQuickfixProvider.class;
 	}
 
 	// contributed by org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment

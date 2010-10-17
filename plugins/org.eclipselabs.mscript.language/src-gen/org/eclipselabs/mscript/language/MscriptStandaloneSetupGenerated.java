@@ -47,5 +47,6 @@ public class MscriptStandaloneSetupGenerated implements ISetup {
 
 
 
+
 	}
 }
