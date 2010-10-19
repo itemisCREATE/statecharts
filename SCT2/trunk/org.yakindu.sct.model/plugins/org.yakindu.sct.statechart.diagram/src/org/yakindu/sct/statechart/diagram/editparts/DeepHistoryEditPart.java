@@ -16,7 +16,7 @@ import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.statechart.diagram.editor.figures.DeepHistoryFigure;
 import org.yakindu.sct.statechart.diagram.editor.figures.utils.MapModeUtils;
-import org.yakindu.sct.statechart.diagram.policies.ChoiceSemanticEditPolicy;
+import org.yakindu.sct.statechart.diagram.policies.RelationshipSemanticEditPolicy;
 
 /**
  * 
@@ -29,11 +29,11 @@ public class DeepHistoryEditPart extends FixedSizeShapeNodeEditPart {
 	public DeepHistoryEditPart(View view) {
 		super(view);
 	}
-	
+
 	@Override
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
-		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE, new ChoiceSemanticEditPolicy());
+		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE, new RelationshipSemanticEditPolicy());
 	}
 
 	@Override
