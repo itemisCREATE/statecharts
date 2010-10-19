@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.Mscript#getPackages <em>Packages</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.Mscript#getNamespaces <em>Namespaces</em>}</li>
  * </ul>
  * </p>
  *
@@ -28,19 +28,19 @@ import org.eclipse.emf.ecore.EObject;
 public interface Mscript extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Packages</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipselabs.mscript.language.ast.PackageDefinition}.
+   * Returns the value of the '<em><b>Namespaces</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipselabs.mscript.language.ast.NamespaceDefinition}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Packages</em>' containment reference list isn't clear,
+   * If the meaning of the '<em>Namespaces</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Packages</em>' containment reference list.
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getMscript_Packages()
+   * @return the value of the '<em>Namespaces</em>' containment reference list.
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getMscript_Namespaces()
    * @model containment="true"
    * @generated
    */
-  EList<PackageDefinition> getPackages();
+  EList<NamespaceDefinition> getNamespaces();
 
 } // Mscript

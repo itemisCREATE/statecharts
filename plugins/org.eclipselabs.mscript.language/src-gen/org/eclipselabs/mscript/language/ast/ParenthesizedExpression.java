@@ -5,6 +5,7 @@
  */
 package org.eclipselabs.mscript.language.ast;
 
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -14,7 +15,7 @@ package org.eclipselabs.mscript.language.ast;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.ParenthesizedExpression#getExpression <em>Expression</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.ParenthesizedExpression#getExpressions <em>Expressions</em>}</li>
  * </ul>
  * </p>
  *
@@ -25,29 +26,19 @@ package org.eclipselabs.mscript.language.ast;
 public interface ParenthesizedExpression extends Expression
 {
   /**
-   * Returns the value of the '<em><b>Expression</b></em>' containment reference.
+   * Returns the value of the '<em><b>Expressions</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipselabs.mscript.language.ast.Expression}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Expression</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Expressions</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Expression</em>' containment reference.
-   * @see #setExpression(Expression)
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getParenthesizedExpression_Expression()
+   * @return the value of the '<em>Expressions</em>' containment reference list.
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getParenthesizedExpression_Expressions()
    * @model containment="true"
    * @generated
    */
-  Expression getExpression();
-
-  /**
-   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.ParenthesizedExpression#getExpression <em>Expression</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Expression</em>' containment reference.
-   * @see #getExpression()
-   * @generated
-   */
-  void setExpression(Expression value);
+  EList<Expression> getExpressions();
 
 } // ParenthesizedExpression

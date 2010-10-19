@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.Mscript;
-import org.eclipselabs.mscript.language.ast.PackageDefinition;
+import org.eclipselabs.mscript.language.ast.NamespaceDefinition;
 
 /**
  * <!-- begin-user-doc -->
@@ -30,7 +30,7 @@ import org.eclipselabs.mscript.language.ast.PackageDefinition;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.MscriptImpl#getPackages <em>Packages</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.MscriptImpl#getNamespaces <em>Namespaces</em>}</li>
  * </ul>
  * </p>
  *
@@ -39,14 +39,14 @@ import org.eclipselabs.mscript.language.ast.PackageDefinition;
 public class MscriptImpl extends MinimalEObjectImpl.Container implements Mscript
 {
   /**
-   * The cached value of the '{@link #getPackages() <em>Packages</em>}' containment reference list.
+   * The cached value of the '{@link #getNamespaces() <em>Namespaces</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getPackages()
+   * @see #getNamespaces()
    * @generated
    * @ordered
    */
-  protected EList<PackageDefinition> packages;
+  protected EList<NamespaceDefinition> namespaces;
 
   /**
    * <!-- begin-user-doc -->
@@ -74,13 +74,13 @@ public class MscriptImpl extends MinimalEObjectImpl.Container implements Mscript
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<PackageDefinition> getPackages()
+  public EList<NamespaceDefinition> getNamespaces()
   {
-    if (packages == null)
+    if (namespaces == null)
     {
-      packages = new EObjectContainmentEList<PackageDefinition>(PackageDefinition.class, this, AstPackage.MSCRIPT__PACKAGES);
+      namespaces = new EObjectContainmentEList<NamespaceDefinition>(NamespaceDefinition.class, this, AstPackage.MSCRIPT__NAMESPACES);
     }
-    return packages;
+    return namespaces;
   }
 
   /**
@@ -93,8 +93,8 @@ public class MscriptImpl extends MinimalEObjectImpl.Container implements Mscript
   {
     switch (featureID)
     {
-      case AstPackage.MSCRIPT__PACKAGES:
-        return ((InternalEList<?>)getPackages()).basicRemove(otherEnd, msgs);
+      case AstPackage.MSCRIPT__NAMESPACES:
+        return ((InternalEList<?>)getNamespaces()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -109,8 +109,8 @@ public class MscriptImpl extends MinimalEObjectImpl.Container implements Mscript
   {
     switch (featureID)
     {
-      case AstPackage.MSCRIPT__PACKAGES:
-        return getPackages();
+      case AstPackage.MSCRIPT__NAMESPACES:
+        return getNamespaces();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -126,9 +126,9 @@ public class MscriptImpl extends MinimalEObjectImpl.Container implements Mscript
   {
     switch (featureID)
     {
-      case AstPackage.MSCRIPT__PACKAGES:
-        getPackages().clear();
-        getPackages().addAll((Collection<? extends PackageDefinition>)newValue);
+      case AstPackage.MSCRIPT__NAMESPACES:
+        getNamespaces().clear();
+        getNamespaces().addAll((Collection<? extends NamespaceDefinition>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -144,8 +144,8 @@ public class MscriptImpl extends MinimalEObjectImpl.Container implements Mscript
   {
     switch (featureID)
     {
-      case AstPackage.MSCRIPT__PACKAGES:
-        getPackages().clear();
+      case AstPackage.MSCRIPT__NAMESPACES:
+        getNamespaces().clear();
         return;
     }
     super.eUnset(featureID);
@@ -161,8 +161,8 @@ public class MscriptImpl extends MinimalEObjectImpl.Container implements Mscript
   {
     switch (featureID)
     {
-      case AstPackage.MSCRIPT__PACKAGES:
-        return packages != null && !packages.isEmpty();
+      case AstPackage.MSCRIPT__NAMESPACES:
+        return namespaces != null && !namespaces.isEmpty();
     }
     return super.eIsSet(featureID);
   }

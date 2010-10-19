@@ -17,21 +17,20 @@ generate ast "http://www.eclipselabs.org/mscript/AST/1.0.0"
 import 'http://www.eclipse.org/emf/2002/Ecore' as ecore
 
 Mscript :
-	(packages+=PackageDefinition)*;
+	(namespaces+=NamespaceDefinition)*;
 	
-PackageDefinition :
-	'package' name=QualifiedName '{'
-		(elements+=PackageDefinitionElement)*
+NamespaceDefinition :
+	'namespace' name=QualifiedName '{'
+		(elements+=NamespaceMember)*
 	'}';
 
-PackageDefinitionElement :
-	PackageDefinition |
-	TypeDefinition |
-	VariableDeclaration;
+NamespaceMember :
+	NamespaceDefinition |
+	TypeDefinition;
 	
 TypeDefinition :
 	DataTypeDefinition |
-	SubroutineDefinition;
+	FunctionDefinition;
 
 /*
  * DataTypeDefinition
@@ -55,18 +54,11 @@ EnumerationLiteralDeclaration :
 	name=KeywordID;
 	
 /*
- * TypeDefinition
+ * TypeAlias
  */
  
 TypeAliasDefinition :
-	'type' name=KeywordID '=' type=PrimitiveTypeSpecifier ';';
-
-/*
- * VariableDeclaration
- */
-
-VariableDeclaration :
-	('var'|constant?='const') name=KeywordID (':' type=TypeSpecifier)? ('=' initialValue=Expression)? ';';
+	'type' name=KeywordID '=' type=PrimitiveTypeSpecifier ';';	
 
 /*
  * Record
@@ -81,97 +73,40 @@ RecordFieldDeclaration :
 	name=KeywordID ':' type=DataTypeSpecifier ';';
 
 /*
- * Subroutines
+ * Function
  */
- 
-SubroutineDefinition :
-	FunctionDefinition | CheckDefinition;
  
 FunctionDefinition :
-	'func' name=KeywordID '(' (parameters+=ParameterDeclaration (',' parameters+=ParameterDeclaration)*)? ')' ('pre' preconditionChain=PreconditionChain)? body=BlockStatement;
-
-CheckDefinition :
-	'check' name=KeywordID '(' (parameters+=ParameterDeclaration (',' parameters+=ParameterDeclaration)*)? ')' ('pre' preconditionChain=PreconditionChain)? body=BlockStatement;
-
-ParameterDeclaration :
-	(reference?='ref')? name=KeywordID ':' type=TypeSpecifier;
-
-PreconditionChain :
-	preconditions+=FeatureCall (',' preconditions+=FeatureCall)*;
-	
-/*
- * Statement
- */
-
-Statement :
-	BlockStatement |
-	ExpressionStatement |
-	IfStatement |
-	WhileStatement |
-	DoWhileStatement |
-	ForStatement |
-	ForeachStatement |
-	SwitchStatement |
-	ContinueStatement |
-	BreakStatement |
-	TypeDefinition |
-	VariableDeclaration |
-	ReturnStatement |
-	CheckStatusStatement;
-		
-BlockStatement :
-	{BlockStatement} '{' (statements+=Statement)* '}';
-
-ExpressionStatement :
-	expression=Expression ';';
-
-IfStatement :
-	'if' cases+=IfCase ('elseif' cases+=IfCase)* ('else' elseBody=BlockStatement)?;
-
-IfCase :
-	'(' condition=Expression ')' body=BlockStatement;
-	
-WhileStatement :
-	'while' '(' predicate=Expression ')' body=BlockStatement;
-	
-DoWhileStatement :
-	'do' body=BlockStatement 'while' '(' predicate=Expression ')' ';';
-
-ForStatement :
-	'for' '(' (initializers+=ForStatementInitializer (',' initializers+=ForStatementInitializer)*)? ';' (testExpression=Expression)? ';' (countExpressions+=Expression (',' countExpressions+=Expression)*)? ')' body=BlockStatement;
-	
-ForStatementInitializer :
-	('var' variableName=KeywordID '=')? expression=Expression;
-	
-ForeachStatement :
-	'foreach' '(' elementName=KeywordID 'in' collectionExpression=Expression ')' body=BlockStatement;
-	
-SwitchStatement :
-	'switch' '(' controlExpression=Expression ')' '{'
-		(cases+=SwitchCase)*
-		('default' ':' (defaultStatements+=Statement)*)?
+	'func' name=KeywordID ('<' templateParameters+=ParameterDeclaration (',' templateParameters+=ParameterDeclaration)* '>')? '(' (inputParameters+=ParameterDeclaration (',' inputParameters+=ParameterDeclaration)*)? ')' ':' outputParameters+=ParameterDeclaration (',' outputParameters+=ParameterDeclaration)* '{'
+		(assertions+=AssertionDeclaration |
+		functors+=FunctorDeclaration |
+		variables+=VariableDeclaration |
+		equations+=Equation)*
 	'}';
 
-SwitchCase :
-	'case' value=LogicalOrExpression ':' (statements+=Statement)*;
-		
-ContinueStatement :
-	{ContinueStatement} 'continue' ';';
-	
-BreakStatement :
-	{BreakStatement} 'break' ';';
-	
-ReturnStatement :
-	{ReturnStatement} 'return' (returnValue=Expression)? ';';
-	
-CheckStatusStatement :
-	kind=CheckStatusKind message=Expression ';';
-	
-enum CheckStatusKind :
+ParameterDeclaration :
+	name=KeywordID;
+
+enum AssertionStatusKind :
 	Info='info' |
 	Warning='warning' |
 	Error='error' |
 	Fatal='fatal';
+
+AssertionDeclaration :
+	'assert' predicate=Expression ':' statusKind=AssertionStatusKind message=Expression ';';
+
+VariableDeclaration :
+	'var' name=KeywordID ';';
+	
+FunctorDeclaration :
+	'functor' name=KeywordID '=' functionName=QualifiedName ('<' templateArguments+=ArgumentDeclaration (',' templateArguments+=ArgumentDeclaration)* '>')? ';';
+
+ArgumentDeclaration :
+	name=KeywordID;
+
+Equation :
+	leftHandSide=Expression '=' rightHandSide=Expression ';';
 
 /*
  * Data type specifier
@@ -208,7 +143,7 @@ StringTypeSpecifier :
 	{StringTypeSpecifier} 'string' ('[' dimensions+=ArrayDimensionSpecification (',' dimensions+=ArrayDimensionSpecification)* ']')?;
 	
 NamedTypeSpecifier :
-	typeReference=SymbolReference ('[' dimensions+=ArrayDimensionSpecification (',' dimensions+=ArrayDimensionSpecification)* ']')?;
+	typeReference=QualifiedName ('[' dimensions+=ArrayDimensionSpecification (',' dimensions+=ArrayDimensionSpecification)* ']')?;
 	
 ArrayDimensionSpecification :
 	unspecified?='?' | size=Expression;
@@ -221,23 +156,24 @@ UnitTypeSpecifier :
  */
 
 Expression :
-	AssignmentExpression;
+	IfExpression | SwitchExpression | RangeExpression;
 	
-AssignmentExpression returns Expression :
-	RangeExpression ({AssignmentExpression.leftHandSide=current} operator=AssignmentOperator rightHandSide=Expression)?;
-	
-enum AssignmentOperator :
-	Assignment='=' |
-	AdditionAssignment='+=' |
-	SubtractionAssignment='-=' |
-	MultiplicationAssignment='*=' |
-	DivisionAssignment='/=';
-	
-RangeExpression returns Expression :
-	ConditionalExpression ({RangeExpression.begin=current} ':' end=ConditionalExpression ({RangeExpression.increment=current} ':' end=ConditionalExpression)?)?;
+IfExpression :
+	'if' condition=Expression 'then' thenExpression=Expression 'else' elseExpression=Expression;
 
-ConditionalExpression returns Expression :
-	LogicalOrExpression ({ConditionalExpression.condition=current} '?' thenExpression=LogicalOrExpression ':' elseExpression=LogicalOrExpression)?;
+SwitchExpression :
+	'switch' controlExpression=Expression
+		(cases+=SwitchCase)*
+		'default' ':' defaultExpression=Expression;
+
+SwitchCase :
+	'case' value=ImpliesExpression ':' expression=Expression;
+
+RangeExpression returns Expression :
+	ImpliesExpression ({RangeExpression.begin=current} ':' end=ImpliesExpression ({RangeExpression.increment=current} ':' end=ImpliesExpression)?)?;
+
+ImpliesExpression returns Expression :
+	LogicalOrExpression ({ImpliesExpression.leftOperand=current} '->' rightOperand=LogicalOrExpression)?;
 
 LogicalOrExpression returns Expression :
 	LogicalAndExpression ({LogicalOrExpression.operands+=current} ('||' operands+=LogicalAndExpression)+)?;
@@ -295,22 +231,19 @@ UnaryExpression returns Expression :
 	
 enum UnaryOperator :
 	Minus='-' |
-	LogicalNot='!' |
-	Increment='++' |
-	Decrement='--';
+	LogicalNot='!';
 	
 PostfixExpression returns Expression :
 	FeatureCall ({PostfixExpression.operand=current} operator=PostfixOperator)?;
 
 enum PostfixOperator :
-	Increment='++' |
-	Decrement='--';
+	Transpose="'";
 
 FeatureCall returns Expression :
 	PrimaryExpression | CallablePrimaryExpression ({FeatureCall.target=current} (parts+=FeatureCallPart)+)?;
 
 FeatureCallPart :
-	FeatureReference | ArrayElementReference | OperationCall;
+	FeatureReference | ArrayElementReference | OperationCall | IteratorCall;
 	
 FeatureReference :
 	'.' featureName=(ID | 'unit');
@@ -321,9 +254,12 @@ ArrayElementReference :
 OperationCall :
 	{OperationCall} '(' (arguments+=Expression (',' arguments+=Expression)*)? ')';
 
+IteratorCall :
+	{ElementDeclaration} '(' elementName=KeywordID (';' accumulatorName=KeywordID '=' initialValue=Expression)? '|' expression=Expression ')';
+
 CallablePrimaryExpression returns Expression :
+	SimpleName |
 	MatrixConstructionOperator |
-	SymbolReference |
 	ParenthesizedExpression;
 
 PrimaryExpression returns Expression :
@@ -353,14 +289,14 @@ enum BooleanKind :
 StringLiteral :
 	value=STRING;
 	
-QualifiedName :
-	identifiers+=KeywordID ('::' identifiers+=KeywordID)*;
+SimpleName :
+	identifier=ID;
 
-SymbolReference :
-	(global?='::')? name=QualifiedName;
+QualifiedName :
+	identifiers+=KeywordID ('.' identifiers+=KeywordID)*;
 	
 Subscript :
-	all?=':' | expression=Expression;
+	slice?=':' | expression=Expression;
 
 MatrixConstructionOperator :
 	'[' expressionLists+=ExpressionList (';' expressionLists+=ExpressionList)* ']';
@@ -369,10 +305,10 @@ ExpressionList :
 	expressions+=Expression (',' expressions+=Expression)*;
 	
 UnitConstructionOperator :
-	'unit' '(' unitExpression=UnitExpression ')';
+	'unit' '(' unit=UnitExpression ')';
 
 ParenthesizedExpression :
-	'(' expression=Expression ')';
+	'(' expressions+=Expression (',' expressions+=Expression)* ')';
 
 BeginExpression :
 	{BeginExpression} 'begin';

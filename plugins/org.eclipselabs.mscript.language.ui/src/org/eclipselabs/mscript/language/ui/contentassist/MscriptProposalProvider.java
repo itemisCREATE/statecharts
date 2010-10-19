@@ -3,7 +3,6 @@
 */
 package org.eclipselabs.mscript.language.ui.contentassist;
 
-import org.eclipselabs.mscript.language.ui.contentassist.AbstractMscriptProposalProvider;
 /**
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#contentAssist on how to customize content assistant
  */

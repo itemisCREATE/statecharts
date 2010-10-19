@@ -5,13 +5,17 @@
  */
 package org.eclipselabs.mscript.language.ast.impl;
 
-import org.eclipse.emf.common.notify.Notification;
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.Expression;
@@ -24,7 +28,7 @@ import org.eclipselabs.mscript.language.ast.ParenthesizedExpression;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.ParenthesizedExpressionImpl#getExpression <em>Expression</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.ParenthesizedExpressionImpl#getExpressions <em>Expressions</em>}</li>
  * </ul>
  * </p>
  *
@@ -33,14 +37,14 @@ import org.eclipselabs.mscript.language.ast.ParenthesizedExpression;
 public class ParenthesizedExpressionImpl extends ExpressionImpl implements ParenthesizedExpression
 {
   /**
-   * The cached value of the '{@link #getExpression() <em>Expression</em>}' containment reference.
+   * The cached value of the '{@link #getExpressions() <em>Expressions</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getExpression()
+   * @see #getExpressions()
    * @generated
    * @ordered
    */
-  protected Expression expression;
+  protected EList<Expression> expressions;
 
   /**
    * <!-- begin-user-doc -->
@@ -68,47 +72,13 @@ public class ParenthesizedExpressionImpl extends ExpressionImpl implements Paren
    * <!-- end-user-doc -->
    * @generated
    */
-  public Expression getExpression()
+  public EList<Expression> getExpressions()
   {
-    return expression;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetExpression(Expression newExpression, NotificationChain msgs)
-  {
-    Expression oldExpression = expression;
-    expression = newExpression;
-    if (eNotificationRequired())
+    if (expressions == null)
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.PARENTHESIZED_EXPRESSION__EXPRESSION, oldExpression, newExpression);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
+      expressions = new EObjectContainmentEList<Expression>(Expression.class, this, AstPackage.PARENTHESIZED_EXPRESSION__EXPRESSIONS);
     }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setExpression(Expression newExpression)
-  {
-    if (newExpression != expression)
-    {
-      NotificationChain msgs = null;
-      if (expression != null)
-        msgs = ((InternalEObject)expression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.PARENTHESIZED_EXPRESSION__EXPRESSION, null, msgs);
-      if (newExpression != null)
-        msgs = ((InternalEObject)newExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.PARENTHESIZED_EXPRESSION__EXPRESSION, null, msgs);
-      msgs = basicSetExpression(newExpression, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.PARENTHESIZED_EXPRESSION__EXPRESSION, newExpression, newExpression));
+    return expressions;
   }
 
   /**
@@ -121,8 +91,8 @@ public class ParenthesizedExpressionImpl extends ExpressionImpl implements Paren
   {
     switch (featureID)
     {
-      case AstPackage.PARENTHESIZED_EXPRESSION__EXPRESSION:
-        return basicSetExpression(null, msgs);
+      case AstPackage.PARENTHESIZED_EXPRESSION__EXPRESSIONS:
+        return ((InternalEList<?>)getExpressions()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -137,8 +107,8 @@ public class ParenthesizedExpressionImpl extends ExpressionImpl implements Paren
   {
     switch (featureID)
     {
-      case AstPackage.PARENTHESIZED_EXPRESSION__EXPRESSION:
-        return getExpression();
+      case AstPackage.PARENTHESIZED_EXPRESSION__EXPRESSIONS:
+        return getExpressions();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -148,13 +118,15 @@ public class ParenthesizedExpressionImpl extends ExpressionImpl implements Paren
    * <!-- end-user-doc -->
    * @generated
    */
+  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
     switch (featureID)
     {
-      case AstPackage.PARENTHESIZED_EXPRESSION__EXPRESSION:
-        setExpression((Expression)newValue);
+      case AstPackage.PARENTHESIZED_EXPRESSION__EXPRESSIONS:
+        getExpressions().clear();
+        getExpressions().addAll((Collection<? extends Expression>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -170,8 +142,8 @@ public class ParenthesizedExpressionImpl extends ExpressionImpl implements Paren
   {
     switch (featureID)
     {
-      case AstPackage.PARENTHESIZED_EXPRESSION__EXPRESSION:
-        setExpression((Expression)null);
+      case AstPackage.PARENTHESIZED_EXPRESSION__EXPRESSIONS:
+        getExpressions().clear();
         return;
     }
     super.eUnset(featureID);
@@ -187,8 +159,8 @@ public class ParenthesizedExpressionImpl extends ExpressionImpl implements Paren
   {
     switch (featureID)
     {
-      case AstPackage.PARENTHESIZED_EXPRESSION__EXPRESSION:
-        return expression != null;
+      case AstPackage.PARENTHESIZED_EXPRESSION__EXPRESSIONS:
+        return expressions != null && !expressions.isEmpty();
     }
     return super.eIsSet(featureID);
   }

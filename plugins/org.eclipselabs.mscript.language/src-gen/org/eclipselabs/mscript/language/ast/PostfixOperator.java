@@ -23,54 +23,29 @@ import org.eclipse.emf.common.util.Enumerator;
 public enum PostfixOperator implements Enumerator
 {
   /**
-   * The '<em><b>Increment</b></em>' literal object.
+   * The '<em><b>Transpose</b></em>' literal object.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #INCREMENT_VALUE
+   * @see #TRANSPOSE_VALUE
    * @generated
    * @ordered
    */
-  INCREMENT(0, "Increment", "++"),
+  TRANSPOSE(0, "Transpose", "\'");
 
   /**
-   * The '<em><b>Decrement</b></em>' literal object.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #DECREMENT_VALUE
-   * @generated
-   * @ordered
-   */
-  DECREMENT(1, "Decrement", "--");
-
-  /**
-   * The '<em><b>Increment</b></em>' literal value.
+   * The '<em><b>Transpose</b></em>' literal value.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of '<em><b>Increment</b></em>' literal object isn't clear,
+   * If the meaning of '<em><b>Transpose</b></em>' literal object isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @see #INCREMENT
-   * @model name="Increment" literal="++"
+   * @see #TRANSPOSE
+   * @model name="Transpose" literal="\'"
    * @generated
    * @ordered
    */
-  public static final int INCREMENT_VALUE = 0;
-
-  /**
-   * The '<em><b>Decrement</b></em>' literal value.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Decrement</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @see #DECREMENT
-   * @model name="Decrement" literal="--"
-   * @generated
-   * @ordered
-   */
-  public static final int DECREMENT_VALUE = 1;
+  public static final int TRANSPOSE_VALUE = 0;
 
   /**
    * An array of all the '<em><b>Postfix Operator</b></em>' enumerators.
@@ -81,8 +56,7 @@ public enum PostfixOperator implements Enumerator
   private static final PostfixOperator[] VALUES_ARRAY =
     new PostfixOperator[]
     {
-      INCREMENT,
-      DECREMENT,
+      TRANSPOSE,
     };
 
   /**
@@ -141,8 +115,7 @@ public enum PostfixOperator implements Enumerator
   {
     switch (value)
     {
-      case INCREMENT_VALUE: return INCREMENT;
-      case DECREMENT_VALUE: return DECREMENT;
+      case TRANSPOSE_VALUE: return TRANSPOSE;
     }
     return null;
   }

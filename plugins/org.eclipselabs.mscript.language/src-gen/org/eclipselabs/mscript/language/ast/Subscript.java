@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.Subscript#isAll <em>All</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.Subscript#isSlice <em>Slice</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.Subscript#getExpression <em>Expression</em>}</li>
  * </ul>
  * </p>
@@ -27,30 +27,30 @@ import org.eclipse.emf.ecore.EObject;
 public interface Subscript extends EObject
 {
   /**
-   * Returns the value of the '<em><b>All</b></em>' attribute.
+   * Returns the value of the '<em><b>Slice</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>All</em>' attribute isn't clear,
+   * If the meaning of the '<em>Slice</em>' attribute isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>All</em>' attribute.
-   * @see #setAll(boolean)
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getSubscript_All()
+   * @return the value of the '<em>Slice</em>' attribute.
+   * @see #setSlice(boolean)
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getSubscript_Slice()
    * @model
    * @generated
    */
-  boolean isAll();
+  boolean isSlice();
 
   /**
-   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.Subscript#isAll <em>All</em>}' attribute.
+   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.Subscript#isSlice <em>Slice</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>All</em>' attribute.
-   * @see #isAll()
+   * @param value the new value of the '<em>Slice</em>' attribute.
+   * @see #isSlice()
    * @generated
    */
-  void setAll(boolean value);
+  void setSlice(boolean value);
 
   /**
    * Returns the value of the '<em><b>Expression</b></em>' containment reference.

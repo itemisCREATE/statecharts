@@ -69,37 +69,22 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
     switch (eClass.getClassifierID())
     {
       case AstPackage.MSCRIPT: return createMscript();
-      case AstPackage.PACKAGE_DEFINITION: return createPackageDefinition();
-      case AstPackage.PACKAGE_DEFINITION_ELEMENT: return createPackageDefinitionElement();
+      case AstPackage.NAMESPACE_DEFINITION: return createNamespaceDefinition();
+      case AstPackage.NAMESPACE_MEMBER: return createNamespaceMember();
       case AstPackage.TYPE_DEFINITION: return createTypeDefinition();
       case AstPackage.DATA_TYPE_DEFINITION: return createDataTypeDefinition();
       case AstPackage.ENUMERATION_DEFINITION: return createEnumerationDefinition();
       case AstPackage.ENUMERATION_LITERAL_DECLARATION: return createEnumerationLiteralDeclaration();
       case AstPackage.TYPE_ALIAS_DEFINITION: return createTypeAliasDefinition();
-      case AstPackage.VARIABLE_DECLARATION: return createVariableDeclaration();
       case AstPackage.RECORD_DEFINITION: return createRecordDefinition();
       case AstPackage.RECORD_FIELD_DECLARATION: return createRecordFieldDeclaration();
-      case AstPackage.SUBROUTINE_DEFINITION: return createSubroutineDefinition();
       case AstPackage.FUNCTION_DEFINITION: return createFunctionDefinition();
-      case AstPackage.CHECK_DEFINITION: return createCheckDefinition();
       case AstPackage.PARAMETER_DECLARATION: return createParameterDeclaration();
-      case AstPackage.PRECONDITION_CHAIN: return createPreconditionChain();
-      case AstPackage.STATEMENT: return createStatement();
-      case AstPackage.BLOCK_STATEMENT: return createBlockStatement();
-      case AstPackage.EXPRESSION_STATEMENT: return createExpressionStatement();
-      case AstPackage.IF_STATEMENT: return createIfStatement();
-      case AstPackage.IF_CASE: return createIfCase();
-      case AstPackage.WHILE_STATEMENT: return createWhileStatement();
-      case AstPackage.DO_WHILE_STATEMENT: return createDoWhileStatement();
-      case AstPackage.FOR_STATEMENT: return createForStatement();
-      case AstPackage.FOR_STATEMENT_INITIALIZER: return createForStatementInitializer();
-      case AstPackage.FOREACH_STATEMENT: return createForeachStatement();
-      case AstPackage.SWITCH_STATEMENT: return createSwitchStatement();
-      case AstPackage.SWITCH_CASE: return createSwitchCase();
-      case AstPackage.CONTINUE_STATEMENT: return createContinueStatement();
-      case AstPackage.BREAK_STATEMENT: return createBreakStatement();
-      case AstPackage.RETURN_STATEMENT: return createReturnStatement();
-      case AstPackage.CHECK_STATUS_STATEMENT: return createCheckStatusStatement();
+      case AstPackage.ASSERTION_DECLARATION: return createAssertionDeclaration();
+      case AstPackage.VARIABLE_DECLARATION: return createVariableDeclaration();
+      case AstPackage.FUNCTOR_DECLARATION: return createFunctorDeclaration();
+      case AstPackage.ARGUMENT_DECLARATION: return createArgumentDeclaration();
+      case AstPackage.EQUATION: return createEquation();
       case AstPackage.TYPE_SPECIFIER: return createTypeSpecifier();
       case AstPackage.DATA_TYPE_SPECIFIER: return createDataTypeSpecifier();
       case AstPackage.PRIMITIVE_TYPE_SPECIFIER: return createPrimitiveTypeSpecifier();
@@ -114,20 +99,24 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
       case AstPackage.ARRAY_DIMENSION_SPECIFICATION: return createArrayDimensionSpecification();
       case AstPackage.UNIT_TYPE_SPECIFIER: return createUnitTypeSpecifier();
       case AstPackage.EXPRESSION: return createExpression();
+      case AstPackage.IF_EXPRESSION: return createIfExpression();
+      case AstPackage.SWITCH_EXPRESSION: return createSwitchExpression();
+      case AstPackage.SWITCH_CASE: return createSwitchCase();
       case AstPackage.ADDITIVE_EXPRESSION_PART: return createAdditiveExpressionPart();
       case AstPackage.MULTIPLICATIVE_EXPRESSION_PART: return createMultiplicativeExpressionPart();
       case AstPackage.FEATURE_CALL_PART: return createFeatureCallPart();
       case AstPackage.FEATURE_REFERENCE: return createFeatureReference();
       case AstPackage.ARRAY_ELEMENT_REFERENCE: return createArrayElementReference();
       case AstPackage.OPERATION_CALL: return createOperationCall();
+      case AstPackage.ITERATOR_CALL: return createIteratorCall();
       case AstPackage.LITERAL: return createLiteral();
       case AstPackage.NUMERIC_LITERAL: return createNumericLiteral();
       case AstPackage.REAL_LITERAL: return createRealLiteral();
       case AstPackage.INTEGER_LITERAL: return createIntegerLiteral();
       case AstPackage.BOOLEAN_LITERAL: return createBooleanLiteral();
       case AstPackage.STRING_LITERAL: return createStringLiteral();
+      case AstPackage.SIMPLE_NAME: return createSimpleName();
       case AstPackage.QUALIFIED_NAME: return createQualifiedName();
-      case AstPackage.SYMBOL_REFERENCE: return createSymbolReference();
       case AstPackage.SUBSCRIPT: return createSubscript();
       case AstPackage.MATRIX_CONSTRUCTION_OPERATOR: return createMatrixConstructionOperator();
       case AstPackage.EXPRESSION_LIST: return createExpressionList();
@@ -140,9 +129,8 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
       case AstPackage.UNIT_EXPRESSION_DENOMINATOR: return createUnitExpressionDenominator();
       case AstPackage.UNIT_EXPRESSION_FACTOR: return createUnitExpressionFactor();
       case AstPackage.UNIT_EXPRESSION_EXPONENT: return createUnitExpressionExponent();
-      case AstPackage.ASSIGNMENT_EXPRESSION: return createAssignmentExpression();
       case AstPackage.RANGE_EXPRESSION: return createRangeExpression();
-      case AstPackage.CONDITIONAL_EXPRESSION: return createConditionalExpression();
+      case AstPackage.IMPLIES_EXPRESSION: return createImpliesExpression();
       case AstPackage.LOGICAL_OR_EXPRESSION: return createLogicalOrExpression();
       case AstPackage.LOGICAL_AND_EXPRESSION: return createLogicalAndExpression();
       case AstPackage.EQUALITY_EXPRESSION: return createEqualityExpression();
@@ -153,6 +141,7 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
       case AstPackage.UNARY_EXPRESSION: return createUnaryExpression();
       case AstPackage.POSTFIX_EXPRESSION: return createPostfixExpression();
       case AstPackage.FEATURE_CALL: return createFeatureCall();
+      case AstPackage.ELEMENT_DECLARATION: return createElementDeclaration();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -168,10 +157,8 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
   {
     switch (eDataType.getClassifierID())
     {
-      case AstPackage.CHECK_STATUS_KIND:
-        return createCheckStatusKindFromString(eDataType, initialValue);
-      case AstPackage.ASSIGNMENT_OPERATOR:
-        return createAssignmentOperatorFromString(eDataType, initialValue);
+      case AstPackage.ASSERTION_STATUS_KIND:
+        return createAssertionStatusKindFromString(eDataType, initialValue);
       case AstPackage.EQUALITY_OPERATOR:
         return createEqualityOperatorFromString(eDataType, initialValue);
       case AstPackage.RELATIONAL_OPERATOR:
@@ -203,10 +190,8 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
   {
     switch (eDataType.getClassifierID())
     {
-      case AstPackage.CHECK_STATUS_KIND:
-        return convertCheckStatusKindToString(eDataType, instanceValue);
-      case AstPackage.ASSIGNMENT_OPERATOR:
-        return convertAssignmentOperatorToString(eDataType, instanceValue);
+      case AstPackage.ASSERTION_STATUS_KIND:
+        return convertAssertionStatusKindToString(eDataType, instanceValue);
       case AstPackage.EQUALITY_OPERATOR:
         return convertEqualityOperatorToString(eDataType, instanceValue);
       case AstPackage.RELATIONAL_OPERATOR:
@@ -244,10 +229,10 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public PackageDefinition createPackageDefinition()
+  public NamespaceDefinition createNamespaceDefinition()
   {
-    PackageDefinitionImpl packageDefinition = new PackageDefinitionImpl();
-    return packageDefinition;
+    NamespaceDefinitionImpl namespaceDefinition = new NamespaceDefinitionImpl();
+    return namespaceDefinition;
   }
 
   /**
@@ -255,10 +240,10 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public PackageDefinitionElement createPackageDefinitionElement()
+  public NamespaceMember createNamespaceMember()
   {
-    PackageDefinitionElementImpl packageDefinitionElement = new PackageDefinitionElementImpl();
-    return packageDefinitionElement;
+    NamespaceMemberImpl namespaceMember = new NamespaceMemberImpl();
+    return namespaceMember;
   }
 
   /**
@@ -321,17 +306,6 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public VariableDeclaration createVariableDeclaration()
-  {
-    VariableDeclarationImpl variableDeclaration = new VariableDeclarationImpl();
-    return variableDeclaration;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public RecordDefinition createRecordDefinition()
   {
     RecordDefinitionImpl recordDefinition = new RecordDefinitionImpl();
@@ -354,32 +328,10 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public SubroutineDefinition createSubroutineDefinition()
-  {
-    SubroutineDefinitionImpl subroutineDefinition = new SubroutineDefinitionImpl();
-    return subroutineDefinition;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public FunctionDefinition createFunctionDefinition()
   {
     FunctionDefinitionImpl functionDefinition = new FunctionDefinitionImpl();
     return functionDefinition;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public CheckDefinition createCheckDefinition()
-  {
-    CheckDefinitionImpl checkDefinition = new CheckDefinitionImpl();
-    return checkDefinition;
   }
 
   /**
@@ -398,10 +350,10 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public PreconditionChain createPreconditionChain()
+  public AssertionDeclaration createAssertionDeclaration()
   {
-    PreconditionChainImpl preconditionChain = new PreconditionChainImpl();
-    return preconditionChain;
+    AssertionDeclarationImpl assertionDeclaration = new AssertionDeclarationImpl();
+    return assertionDeclaration;
   }
 
   /**
@@ -409,10 +361,10 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public Statement createStatement()
+  public VariableDeclaration createVariableDeclaration()
   {
-    StatementImpl statement = new StatementImpl();
-    return statement;
+    VariableDeclarationImpl variableDeclaration = new VariableDeclarationImpl();
+    return variableDeclaration;
   }
 
   /**
@@ -420,10 +372,10 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public BlockStatement createBlockStatement()
+  public FunctorDeclaration createFunctorDeclaration()
   {
-    BlockStatementImpl blockStatement = new BlockStatementImpl();
-    return blockStatement;
+    FunctorDeclarationImpl functorDeclaration = new FunctorDeclarationImpl();
+    return functorDeclaration;
   }
 
   /**
@@ -431,10 +383,10 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public ExpressionStatement createExpressionStatement()
+  public ArgumentDeclaration createArgumentDeclaration()
   {
-    ExpressionStatementImpl expressionStatement = new ExpressionStatementImpl();
-    return expressionStatement;
+    ArgumentDeclarationImpl argumentDeclaration = new ArgumentDeclarationImpl();
+    return argumentDeclaration;
   }
 
   /**
@@ -442,142 +394,10 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public IfStatement createIfStatement()
+  public Equation createEquation()
   {
-    IfStatementImpl ifStatement = new IfStatementImpl();
-    return ifStatement;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public IfCase createIfCase()
-  {
-    IfCaseImpl ifCase = new IfCaseImpl();
-    return ifCase;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public WhileStatement createWhileStatement()
-  {
-    WhileStatementImpl whileStatement = new WhileStatementImpl();
-    return whileStatement;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public DoWhileStatement createDoWhileStatement()
-  {
-    DoWhileStatementImpl doWhileStatement = new DoWhileStatementImpl();
-    return doWhileStatement;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ForStatement createForStatement()
-  {
-    ForStatementImpl forStatement = new ForStatementImpl();
-    return forStatement;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ForStatementInitializer createForStatementInitializer()
-  {
-    ForStatementInitializerImpl forStatementInitializer = new ForStatementInitializerImpl();
-    return forStatementInitializer;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ForeachStatement createForeachStatement()
-  {
-    ForeachStatementImpl foreachStatement = new ForeachStatementImpl();
-    return foreachStatement;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public SwitchStatement createSwitchStatement()
-  {
-    SwitchStatementImpl switchStatement = new SwitchStatementImpl();
-    return switchStatement;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public SwitchCase createSwitchCase()
-  {
-    SwitchCaseImpl switchCase = new SwitchCaseImpl();
-    return switchCase;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ContinueStatement createContinueStatement()
-  {
-    ContinueStatementImpl continueStatement = new ContinueStatementImpl();
-    return continueStatement;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public BreakStatement createBreakStatement()
-  {
-    BreakStatementImpl breakStatement = new BreakStatementImpl();
-    return breakStatement;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ReturnStatement createReturnStatement()
-  {
-    ReturnStatementImpl returnStatement = new ReturnStatementImpl();
-    return returnStatement;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public CheckStatusStatement createCheckStatusStatement()
-  {
-    CheckStatusStatementImpl checkStatusStatement = new CheckStatusStatementImpl();
-    return checkStatusStatement;
+    EquationImpl equation = new EquationImpl();
+    return equation;
   }
 
   /**
@@ -739,6 +559,39 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  public IfExpression createIfExpression()
+  {
+    IfExpressionImpl ifExpression = new IfExpressionImpl();
+    return ifExpression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public SwitchExpression createSwitchExpression()
+  {
+    SwitchExpressionImpl switchExpression = new SwitchExpressionImpl();
+    return switchExpression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public SwitchCase createSwitchCase()
+  {
+    SwitchCaseImpl switchCase = new SwitchCaseImpl();
+    return switchCase;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public AdditiveExpressionPart createAdditiveExpressionPart()
   {
     AdditiveExpressionPartImpl additiveExpressionPart = new AdditiveExpressionPartImpl();
@@ -798,6 +651,17 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
   {
     OperationCallImpl operationCall = new OperationCallImpl();
     return operationCall;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public IteratorCall createIteratorCall()
+  {
+    IteratorCallImpl iteratorCall = new IteratorCallImpl();
+    return iteratorCall;
   }
 
   /**
@@ -871,10 +735,10 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public QualifiedName createQualifiedName()
+  public SimpleName createSimpleName()
   {
-    QualifiedNameImpl qualifiedName = new QualifiedNameImpl();
-    return qualifiedName;
+    SimpleNameImpl simpleName = new SimpleNameImpl();
+    return simpleName;
   }
 
   /**
@@ -882,10 +746,10 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public SymbolReference createSymbolReference()
+  public QualifiedName createQualifiedName()
   {
-    SymbolReferenceImpl symbolReference = new SymbolReferenceImpl();
-    return symbolReference;
+    QualifiedNameImpl qualifiedName = new QualifiedNameImpl();
+    return qualifiedName;
   }
 
   /**
@@ -1025,17 +889,6 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public AssignmentExpression createAssignmentExpression()
-  {
-    AssignmentExpressionImpl assignmentExpression = new AssignmentExpressionImpl();
-    return assignmentExpression;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public RangeExpression createRangeExpression()
   {
     RangeExpressionImpl rangeExpression = new RangeExpressionImpl();
@@ -1047,10 +900,10 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public ConditionalExpression createConditionalExpression()
+  public ImpliesExpression createImpliesExpression()
   {
-    ConditionalExpressionImpl conditionalExpression = new ConditionalExpressionImpl();
-    return conditionalExpression;
+    ImpliesExpressionImpl impliesExpression = new ImpliesExpressionImpl();
+    return impliesExpression;
   }
 
   /**
@@ -1168,9 +1021,20 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public CheckStatusKind createCheckStatusKindFromString(EDataType eDataType, String initialValue)
+  public ElementDeclaration createElementDeclaration()
   {
-    CheckStatusKind result = CheckStatusKind.get(initialValue);
+    ElementDeclarationImpl elementDeclaration = new ElementDeclarationImpl();
+    return elementDeclaration;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public AssertionStatusKind createAssertionStatusKindFromString(EDataType eDataType, String initialValue)
+  {
+    AssertionStatusKind result = AssertionStatusKind.get(initialValue);
     if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
     return result;
   }
@@ -1180,29 +1044,7 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public String convertCheckStatusKindToString(EDataType eDataType, Object instanceValue)
-  {
-    return instanceValue == null ? null : instanceValue.toString();
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public AssignmentOperator createAssignmentOperatorFromString(EDataType eDataType, String initialValue)
-  {
-    AssignmentOperator result = AssignmentOperator.get(initialValue);
-    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-    return result;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public String convertAssignmentOperatorToString(EDataType eDataType, Object instanceValue)
+  public String convertAssertionStatusKindToString(EDataType eDataType, Object instanceValue)
   {
     return instanceValue == null ? null : instanceValue.toString();
   }

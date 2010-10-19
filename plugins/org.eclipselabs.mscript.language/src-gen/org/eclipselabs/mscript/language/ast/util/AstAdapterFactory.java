@@ -83,14 +83,14 @@ public class AstAdapterFactory extends AdapterFactoryImpl
         return createMscriptAdapter();
       }
       @Override
-      public Adapter casePackageDefinition(PackageDefinition object)
+      public Adapter caseNamespaceDefinition(NamespaceDefinition object)
       {
-        return createPackageDefinitionAdapter();
+        return createNamespaceDefinitionAdapter();
       }
       @Override
-      public Adapter casePackageDefinitionElement(PackageDefinitionElement object)
+      public Adapter caseNamespaceMember(NamespaceMember object)
       {
-        return createPackageDefinitionElementAdapter();
+        return createNamespaceMemberAdapter();
       }
       @Override
       public Adapter caseTypeDefinition(TypeDefinition object)
@@ -118,11 +118,6 @@ public class AstAdapterFactory extends AdapterFactoryImpl
         return createTypeAliasDefinitionAdapter();
       }
       @Override
-      public Adapter caseVariableDeclaration(VariableDeclaration object)
-      {
-        return createVariableDeclarationAdapter();
-      }
-      @Override
       public Adapter caseRecordDefinition(RecordDefinition object)
       {
         return createRecordDefinitionAdapter();
@@ -133,19 +128,9 @@ public class AstAdapterFactory extends AdapterFactoryImpl
         return createRecordFieldDeclarationAdapter();
       }
       @Override
-      public Adapter caseSubroutineDefinition(SubroutineDefinition object)
-      {
-        return createSubroutineDefinitionAdapter();
-      }
-      @Override
       public Adapter caseFunctionDefinition(FunctionDefinition object)
       {
         return createFunctionDefinitionAdapter();
-      }
-      @Override
-      public Adapter caseCheckDefinition(CheckDefinition object)
-      {
-        return createCheckDefinitionAdapter();
       }
       @Override
       public Adapter caseParameterDeclaration(ParameterDeclaration object)
@@ -153,89 +138,29 @@ public class AstAdapterFactory extends AdapterFactoryImpl
         return createParameterDeclarationAdapter();
       }
       @Override
-      public Adapter casePreconditionChain(PreconditionChain object)
+      public Adapter caseAssertionDeclaration(AssertionDeclaration object)
       {
-        return createPreconditionChainAdapter();
+        return createAssertionDeclarationAdapter();
       }
       @Override
-      public Adapter caseStatement(Statement object)
+      public Adapter caseVariableDeclaration(VariableDeclaration object)
       {
-        return createStatementAdapter();
+        return createVariableDeclarationAdapter();
       }
       @Override
-      public Adapter caseBlockStatement(BlockStatement object)
+      public Adapter caseFunctorDeclaration(FunctorDeclaration object)
       {
-        return createBlockStatementAdapter();
+        return createFunctorDeclarationAdapter();
       }
       @Override
-      public Adapter caseExpressionStatement(ExpressionStatement object)
+      public Adapter caseArgumentDeclaration(ArgumentDeclaration object)
       {
-        return createExpressionStatementAdapter();
+        return createArgumentDeclarationAdapter();
       }
       @Override
-      public Adapter caseIfStatement(IfStatement object)
+      public Adapter caseEquation(Equation object)
       {
-        return createIfStatementAdapter();
-      }
-      @Override
-      public Adapter caseIfCase(IfCase object)
-      {
-        return createIfCaseAdapter();
-      }
-      @Override
-      public Adapter caseWhileStatement(WhileStatement object)
-      {
-        return createWhileStatementAdapter();
-      }
-      @Override
-      public Adapter caseDoWhileStatement(DoWhileStatement object)
-      {
-        return createDoWhileStatementAdapter();
-      }
-      @Override
-      public Adapter caseForStatement(ForStatement object)
-      {
-        return createForStatementAdapter();
-      }
-      @Override
-      public Adapter caseForStatementInitializer(ForStatementInitializer object)
-      {
-        return createForStatementInitializerAdapter();
-      }
-      @Override
-      public Adapter caseForeachStatement(ForeachStatement object)
-      {
-        return createForeachStatementAdapter();
-      }
-      @Override
-      public Adapter caseSwitchStatement(SwitchStatement object)
-      {
-        return createSwitchStatementAdapter();
-      }
-      @Override
-      public Adapter caseSwitchCase(SwitchCase object)
-      {
-        return createSwitchCaseAdapter();
-      }
-      @Override
-      public Adapter caseContinueStatement(ContinueStatement object)
-      {
-        return createContinueStatementAdapter();
-      }
-      @Override
-      public Adapter caseBreakStatement(BreakStatement object)
-      {
-        return createBreakStatementAdapter();
-      }
-      @Override
-      public Adapter caseReturnStatement(ReturnStatement object)
-      {
-        return createReturnStatementAdapter();
-      }
-      @Override
-      public Adapter caseCheckStatusStatement(CheckStatusStatement object)
-      {
-        return createCheckStatusStatementAdapter();
+        return createEquationAdapter();
       }
       @Override
       public Adapter caseTypeSpecifier(TypeSpecifier object)
@@ -308,6 +233,21 @@ public class AstAdapterFactory extends AdapterFactoryImpl
         return createExpressionAdapter();
       }
       @Override
+      public Adapter caseIfExpression(IfExpression object)
+      {
+        return createIfExpressionAdapter();
+      }
+      @Override
+      public Adapter caseSwitchExpression(SwitchExpression object)
+      {
+        return createSwitchExpressionAdapter();
+      }
+      @Override
+      public Adapter caseSwitchCase(SwitchCase object)
+      {
+        return createSwitchCaseAdapter();
+      }
+      @Override
       public Adapter caseAdditiveExpressionPart(AdditiveExpressionPart object)
       {
         return createAdditiveExpressionPartAdapter();
@@ -336,6 +276,11 @@ public class AstAdapterFactory extends AdapterFactoryImpl
       public Adapter caseOperationCall(OperationCall object)
       {
         return createOperationCallAdapter();
+      }
+      @Override
+      public Adapter caseIteratorCall(IteratorCall object)
+      {
+        return createIteratorCallAdapter();
       }
       @Override
       public Adapter caseLiteral(Literal object)
@@ -368,14 +313,14 @@ public class AstAdapterFactory extends AdapterFactoryImpl
         return createStringLiteralAdapter();
       }
       @Override
+      public Adapter caseSimpleName(SimpleName object)
+      {
+        return createSimpleNameAdapter();
+      }
+      @Override
       public Adapter caseQualifiedName(QualifiedName object)
       {
         return createQualifiedNameAdapter();
-      }
-      @Override
-      public Adapter caseSymbolReference(SymbolReference object)
-      {
-        return createSymbolReferenceAdapter();
       }
       @Override
       public Adapter caseSubscript(Subscript object)
@@ -438,19 +383,14 @@ public class AstAdapterFactory extends AdapterFactoryImpl
         return createUnitExpressionExponentAdapter();
       }
       @Override
-      public Adapter caseAssignmentExpression(AssignmentExpression object)
-      {
-        return createAssignmentExpressionAdapter();
-      }
-      @Override
       public Adapter caseRangeExpression(RangeExpression object)
       {
         return createRangeExpressionAdapter();
       }
       @Override
-      public Adapter caseConditionalExpression(ConditionalExpression object)
+      public Adapter caseImpliesExpression(ImpliesExpression object)
       {
-        return createConditionalExpressionAdapter();
+        return createImpliesExpressionAdapter();
       }
       @Override
       public Adapter caseLogicalOrExpression(LogicalOrExpression object)
@@ -503,6 +443,11 @@ public class AstAdapterFactory extends AdapterFactoryImpl
         return createFeatureCallAdapter();
       }
       @Override
+      public Adapter caseElementDeclaration(ElementDeclaration object)
+      {
+        return createElementDeclarationAdapter();
+      }
+      @Override
       public Adapter defaultCase(EObject object)
       {
         return createEObjectAdapter();
@@ -540,31 +485,31 @@ public class AstAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.PackageDefinition <em>Package Definition</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.NamespaceDefinition <em>Namespace Definition</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.PackageDefinition
+   * @see org.eclipselabs.mscript.language.ast.NamespaceDefinition
    * @generated
    */
-  public Adapter createPackageDefinitionAdapter()
+  public Adapter createNamespaceDefinitionAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.PackageDefinitionElement <em>Package Definition Element</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.NamespaceMember <em>Namespace Member</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.PackageDefinitionElement
+   * @see org.eclipselabs.mscript.language.ast.NamespaceMember
    * @generated
    */
-  public Adapter createPackageDefinitionElementAdapter()
+  public Adapter createNamespaceMemberAdapter()
   {
     return null;
   }
@@ -645,21 +590,6 @@ public class AstAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.VariableDeclaration <em>Variable Declaration</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.VariableDeclaration
-   * @generated
-   */
-  public Adapter createVariableDeclarationAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.RecordDefinition <em>Record Definition</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -690,21 +620,6 @@ public class AstAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.SubroutineDefinition <em>Subroutine Definition</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.SubroutineDefinition
-   * @generated
-   */
-  public Adapter createSubroutineDefinitionAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.FunctionDefinition <em>Function Definition</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -715,21 +630,6 @@ public class AstAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createFunctionDefinitionAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.CheckDefinition <em>Check Definition</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.CheckDefinition
-   * @generated
-   */
-  public Adapter createCheckDefinitionAdapter()
   {
     return null;
   }
@@ -750,256 +650,76 @@ public class AstAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.PreconditionChain <em>Precondition Chain</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.AssertionDeclaration <em>Assertion Declaration</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.PreconditionChain
+   * @see org.eclipselabs.mscript.language.ast.AssertionDeclaration
    * @generated
    */
-  public Adapter createPreconditionChainAdapter()
+  public Adapter createAssertionDeclarationAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.Statement <em>Statement</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.VariableDeclaration <em>Variable Declaration</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.Statement
+   * @see org.eclipselabs.mscript.language.ast.VariableDeclaration
    * @generated
    */
-  public Adapter createStatementAdapter()
+  public Adapter createVariableDeclarationAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.BlockStatement <em>Block Statement</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.FunctorDeclaration <em>Functor Declaration</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.BlockStatement
+   * @see org.eclipselabs.mscript.language.ast.FunctorDeclaration
    * @generated
    */
-  public Adapter createBlockStatementAdapter()
+  public Adapter createFunctorDeclarationAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.ExpressionStatement <em>Expression Statement</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.ArgumentDeclaration <em>Argument Declaration</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.ExpressionStatement
+   * @see org.eclipselabs.mscript.language.ast.ArgumentDeclaration
    * @generated
    */
-  public Adapter createExpressionStatementAdapter()
+  public Adapter createArgumentDeclarationAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.IfStatement <em>If Statement</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.Equation <em>Equation</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.IfStatement
+   * @see org.eclipselabs.mscript.language.ast.Equation
    * @generated
    */
-  public Adapter createIfStatementAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.IfCase <em>If Case</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.IfCase
-   * @generated
-   */
-  public Adapter createIfCaseAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.WhileStatement <em>While Statement</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.WhileStatement
-   * @generated
-   */
-  public Adapter createWhileStatementAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.DoWhileStatement <em>Do While Statement</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.DoWhileStatement
-   * @generated
-   */
-  public Adapter createDoWhileStatementAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.ForStatement <em>For Statement</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.ForStatement
-   * @generated
-   */
-  public Adapter createForStatementAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.ForStatementInitializer <em>For Statement Initializer</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.ForStatementInitializer
-   * @generated
-   */
-  public Adapter createForStatementInitializerAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.ForeachStatement <em>Foreach Statement</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.ForeachStatement
-   * @generated
-   */
-  public Adapter createForeachStatementAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.SwitchStatement <em>Switch Statement</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.SwitchStatement
-   * @generated
-   */
-  public Adapter createSwitchStatementAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.SwitchCase <em>Switch Case</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.SwitchCase
-   * @generated
-   */
-  public Adapter createSwitchCaseAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.ContinueStatement <em>Continue Statement</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.ContinueStatement
-   * @generated
-   */
-  public Adapter createContinueStatementAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.BreakStatement <em>Break Statement</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.BreakStatement
-   * @generated
-   */
-  public Adapter createBreakStatementAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.ReturnStatement <em>Return Statement</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.ReturnStatement
-   * @generated
-   */
-  public Adapter createReturnStatementAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.CheckStatusStatement <em>Check Status Statement</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.CheckStatusStatement
-   * @generated
-   */
-  public Adapter createCheckStatusStatementAdapter()
+  public Adapter createEquationAdapter()
   {
     return null;
   }
@@ -1215,6 +935,51 @@ public class AstAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.IfExpression <em>If Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipselabs.mscript.language.ast.IfExpression
+   * @generated
+   */
+  public Adapter createIfExpressionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.SwitchExpression <em>Switch Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipselabs.mscript.language.ast.SwitchExpression
+   * @generated
+   */
+  public Adapter createSwitchExpressionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.SwitchCase <em>Switch Case</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipselabs.mscript.language.ast.SwitchCase
+   * @generated
+   */
+  public Adapter createSwitchCaseAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.AdditiveExpressionPart <em>Additive Expression Part</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -1300,6 +1065,21 @@ public class AstAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createOperationCallAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.IteratorCall <em>Iterator Call</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipselabs.mscript.language.ast.IteratorCall
+   * @generated
+   */
+  public Adapter createIteratorCallAdapter()
   {
     return null;
   }
@@ -1395,6 +1175,21 @@ public class AstAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.SimpleName <em>Simple Name</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipselabs.mscript.language.ast.SimpleName
+   * @generated
+   */
+  public Adapter createSimpleNameAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.QualifiedName <em>Qualified Name</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -1405,21 +1200,6 @@ public class AstAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createQualifiedNameAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.SymbolReference <em>Symbol Reference</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.SymbolReference
-   * @generated
-   */
-  public Adapter createSymbolReferenceAdapter()
   {
     return null;
   }
@@ -1605,21 +1385,6 @@ public class AstAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.AssignmentExpression <em>Assignment Expression</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.AssignmentExpression
-   * @generated
-   */
-  public Adapter createAssignmentExpressionAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.RangeExpression <em>Range Expression</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -1635,16 +1400,16 @@ public class AstAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.ConditionalExpression <em>Conditional Expression</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.ImpliesExpression <em>Implies Expression</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.ConditionalExpression
+   * @see org.eclipselabs.mscript.language.ast.ImpliesExpression
    * @generated
    */
-  public Adapter createConditionalExpressionAdapter()
+  public Adapter createImpliesExpressionAdapter()
   {
     return null;
   }
@@ -1795,6 +1560,21 @@ public class AstAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createFeatureCallAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.ElementDeclaration <em>Element Declaration</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipselabs.mscript.language.ast.ElementDeclaration
+   * @generated
+   */
+  public Adapter createElementDeclarationAdapter()
   {
     return null;
   }

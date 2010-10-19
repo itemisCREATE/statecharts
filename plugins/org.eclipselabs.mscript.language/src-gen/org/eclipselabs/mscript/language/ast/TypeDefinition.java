@@ -22,7 +22,7 @@ package org.eclipselabs.mscript.language.ast;
  * @model
  * @generated
  */
-public interface TypeDefinition extends PackageDefinitionElement, Statement
+public interface TypeDefinition extends NamespaceMember
 {
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.

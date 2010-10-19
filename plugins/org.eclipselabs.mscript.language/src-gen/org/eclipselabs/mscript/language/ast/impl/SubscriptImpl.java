@@ -25,7 +25,7 @@ import org.eclipselabs.mscript.language.ast.Subscript;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.SubscriptImpl#isAll <em>All</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.SubscriptImpl#isSlice <em>Slice</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.SubscriptImpl#getExpression <em>Expression</em>}</li>
  * </ul>
  * </p>
@@ -35,24 +35,24 @@ import org.eclipselabs.mscript.language.ast.Subscript;
 public class SubscriptImpl extends MinimalEObjectImpl.Container implements Subscript
 {
   /**
-   * The default value of the '{@link #isAll() <em>All</em>}' attribute.
+   * The default value of the '{@link #isSlice() <em>Slice</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #isAll()
+   * @see #isSlice()
    * @generated
    * @ordered
    */
-  protected static final boolean ALL_EDEFAULT = false;
+  protected static final boolean SLICE_EDEFAULT = false;
 
   /**
-   * The cached value of the '{@link #isAll() <em>All</em>}' attribute.
+   * The cached value of the '{@link #isSlice() <em>Slice</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #isAll()
+   * @see #isSlice()
    * @generated
    * @ordered
    */
-  protected boolean all = ALL_EDEFAULT;
+  protected boolean slice = SLICE_EDEFAULT;
 
   /**
    * The cached value of the '{@link #getExpression() <em>Expression</em>}' containment reference.
@@ -90,9 +90,9 @@ public class SubscriptImpl extends MinimalEObjectImpl.Container implements Subsc
    * <!-- end-user-doc -->
    * @generated
    */
-  public boolean isAll()
+  public boolean isSlice()
   {
-    return all;
+    return slice;
   }
 
   /**
@@ -100,12 +100,12 @@ public class SubscriptImpl extends MinimalEObjectImpl.Container implements Subsc
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setAll(boolean newAll)
+  public void setSlice(boolean newSlice)
   {
-    boolean oldAll = all;
-    all = newAll;
+    boolean oldSlice = slice;
+    slice = newSlice;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.SUBSCRIPT__ALL, oldAll, all));
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.SUBSCRIPT__SLICE, oldSlice, slice));
   }
 
   /**
@@ -182,8 +182,8 @@ public class SubscriptImpl extends MinimalEObjectImpl.Container implements Subsc
   {
     switch (featureID)
     {
-      case AstPackage.SUBSCRIPT__ALL:
-        return isAll();
+      case AstPackage.SUBSCRIPT__SLICE:
+        return isSlice();
       case AstPackage.SUBSCRIPT__EXPRESSION:
         return getExpression();
     }
@@ -200,8 +200,8 @@ public class SubscriptImpl extends MinimalEObjectImpl.Container implements Subsc
   {
     switch (featureID)
     {
-      case AstPackage.SUBSCRIPT__ALL:
-        setAll((Boolean)newValue);
+      case AstPackage.SUBSCRIPT__SLICE:
+        setSlice((Boolean)newValue);
         return;
       case AstPackage.SUBSCRIPT__EXPRESSION:
         setExpression((Expression)newValue);
@@ -220,8 +220,8 @@ public class SubscriptImpl extends MinimalEObjectImpl.Container implements Subsc
   {
     switch (featureID)
     {
-      case AstPackage.SUBSCRIPT__ALL:
-        setAll(ALL_EDEFAULT);
+      case AstPackage.SUBSCRIPT__SLICE:
+        setSlice(SLICE_EDEFAULT);
         return;
       case AstPackage.SUBSCRIPT__EXPRESSION:
         setExpression((Expression)null);
@@ -240,8 +240,8 @@ public class SubscriptImpl extends MinimalEObjectImpl.Container implements Subsc
   {
     switch (featureID)
     {
-      case AstPackage.SUBSCRIPT__ALL:
-        return all != ALL_EDEFAULT;
+      case AstPackage.SUBSCRIPT__SLICE:
+        return slice != SLICE_EDEFAULT;
       case AstPackage.SUBSCRIPT__EXPRESSION:
         return expression != null;
     }
@@ -259,8 +259,8 @@ public class SubscriptImpl extends MinimalEObjectImpl.Container implements Subsc
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (all: ");
-    result.append(all);
+    result.append(" (slice: ");
+    result.append(slice);
     result.append(')');
     return result.toString();
   }

@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.NamedTypeSpecifier;
-import org.eclipselabs.mscript.language.ast.SymbolReference;
+import org.eclipselabs.mscript.language.ast.QualifiedName;
 
 /**
  * <!-- begin-user-doc -->
@@ -40,7 +40,7 @@ public class NamedTypeSpecifierImpl extends DataTypeSpecifierImpl implements Nam
    * @generated
    * @ordered
    */
-  protected SymbolReference typeReference;
+  protected QualifiedName typeReference;
 
   /**
    * <!-- begin-user-doc -->
@@ -68,7 +68,7 @@ public class NamedTypeSpecifierImpl extends DataTypeSpecifierImpl implements Nam
    * <!-- end-user-doc -->
    * @generated
    */
-  public SymbolReference getTypeReference()
+  public QualifiedName getTypeReference()
   {
     return typeReference;
   }
@@ -78,9 +78,9 @@ public class NamedTypeSpecifierImpl extends DataTypeSpecifierImpl implements Nam
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetTypeReference(SymbolReference newTypeReference, NotificationChain msgs)
+  public NotificationChain basicSetTypeReference(QualifiedName newTypeReference, NotificationChain msgs)
   {
-    SymbolReference oldTypeReference = typeReference;
+    QualifiedName oldTypeReference = typeReference;
     typeReference = newTypeReference;
     if (eNotificationRequired())
     {
@@ -95,7 +95,7 @@ public class NamedTypeSpecifierImpl extends DataTypeSpecifierImpl implements Nam
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setTypeReference(SymbolReference newTypeReference)
+  public void setTypeReference(QualifiedName newTypeReference)
   {
     if (newTypeReference != typeReference)
     {
@@ -154,7 +154,7 @@ public class NamedTypeSpecifierImpl extends DataTypeSpecifierImpl implements Nam
     switch (featureID)
     {
       case AstPackage.NAMED_TYPE_SPECIFIER__TYPE_REFERENCE:
-        setTypeReference((SymbolReference)newValue);
+        setTypeReference((QualifiedName)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -171,7 +171,7 @@ public class NamedTypeSpecifierImpl extends DataTypeSpecifierImpl implements Nam
     switch (featureID)
     {
       case AstPackage.NAMED_TYPE_SPECIFIER__TYPE_REFERENCE:
-        setTypeReference((SymbolReference)null);
+        setTypeReference((QualifiedName)null);
         return;
     }
     super.eUnset(featureID);

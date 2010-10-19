@@ -33,12 +33,12 @@ public interface NamedTypeSpecifier extends DataTypeSpecifier
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Type Reference</em>' containment reference.
-   * @see #setTypeReference(SymbolReference)
+   * @see #setTypeReference(QualifiedName)
    * @see org.eclipselabs.mscript.language.ast.AstPackage#getNamedTypeSpecifier_TypeReference()
    * @model containment="true"
    * @generated
    */
-  SymbolReference getTypeReference();
+  QualifiedName getTypeReference();
 
   /**
    * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.NamedTypeSpecifier#getTypeReference <em>Type Reference</em>}' containment reference.
@@ -48,6 +48,6 @@ public interface NamedTypeSpecifier extends DataTypeSpecifier
    * @see #getTypeReference()
    * @generated
    */
-  void setTypeReference(SymbolReference value);
+  void setTypeReference(QualifiedName value);
 
 } // NamedTypeSpecifier

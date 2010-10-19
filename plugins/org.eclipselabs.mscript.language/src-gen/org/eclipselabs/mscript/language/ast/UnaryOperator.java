@@ -40,27 +40,7 @@ public enum UnaryOperator implements Enumerator
    * @generated
    * @ordered
    */
-  LOGICAL_NOT(1, "LogicalNot", "!"),
-
-  /**
-   * The '<em><b>Increment</b></em>' literal object.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #INCREMENT_VALUE
-   * @generated
-   * @ordered
-   */
-  INCREMENT(2, "Increment", "++"),
-
-  /**
-   * The '<em><b>Decrement</b></em>' literal object.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #DECREMENT_VALUE
-   * @generated
-   * @ordered
-   */
-  DECREMENT(3, "Decrement", "--");
+  LOGICAL_NOT(1, "LogicalNot", "!");
 
   /**
    * The '<em><b>Minus</b></em>' literal value.
@@ -93,36 +73,6 @@ public enum UnaryOperator implements Enumerator
   public static final int LOGICAL_NOT_VALUE = 1;
 
   /**
-   * The '<em><b>Increment</b></em>' literal value.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Increment</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @see #INCREMENT
-   * @model name="Increment" literal="++"
-   * @generated
-   * @ordered
-   */
-  public static final int INCREMENT_VALUE = 2;
-
-  /**
-   * The '<em><b>Decrement</b></em>' literal value.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Decrement</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @see #DECREMENT
-   * @model name="Decrement" literal="--"
-   * @generated
-   * @ordered
-   */
-  public static final int DECREMENT_VALUE = 3;
-
-  /**
    * An array of all the '<em><b>Unary Operator</b></em>' enumerators.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -133,8 +83,6 @@ public enum UnaryOperator implements Enumerator
     {
       MINUS,
       LOGICAL_NOT,
-      INCREMENT,
-      DECREMENT,
     };
 
   /**
@@ -195,8 +143,6 @@ public enum UnaryOperator implements Enumerator
     {
       case MINUS_VALUE: return MINUS;
       case LOGICAL_NOT_VALUE: return LOGICAL_NOT;
-      case INCREMENT_VALUE: return INCREMENT;
-      case DECREMENT_VALUE: return DECREMENT;
     }
     return null;
   }

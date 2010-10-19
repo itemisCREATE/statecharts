@@ -1,7 +1,6 @@
 
 package org.eclipselabs.mscript.language;
 
-import org.eclipselabs.mscript.language.MscriptStandaloneSetupGenerated;
 
 /**
  * Initialization support for running Xtext languages 

@@ -52,7 +52,7 @@ public class PostfixExpressionImpl extends ExpressionImpl implements PostfixExpr
    * @generated
    * @ordered
    */
-  protected static final PostfixOperator OPERATOR_EDEFAULT = PostfixOperator.INCREMENT;
+  protected static final PostfixOperator OPERATOR_EDEFAULT = PostfixOperator.TRANSPOSE;
 
   /**
    * The cached value of the '{@link #getOperator() <em>Operator</em>}' attribute.

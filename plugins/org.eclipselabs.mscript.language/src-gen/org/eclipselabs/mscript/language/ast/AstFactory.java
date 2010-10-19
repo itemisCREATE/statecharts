@@ -35,22 +35,22 @@ public interface AstFactory extends EFactory
   Mscript createMscript();
 
   /**
-   * Returns a new object of class '<em>Package Definition</em>'.
+   * Returns a new object of class '<em>Namespace Definition</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Package Definition</em>'.
+   * @return a new object of class '<em>Namespace Definition</em>'.
    * @generated
    */
-  PackageDefinition createPackageDefinition();
+  NamespaceDefinition createNamespaceDefinition();
 
   /**
-   * Returns a new object of class '<em>Package Definition Element</em>'.
+   * Returns a new object of class '<em>Namespace Member</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Package Definition Element</em>'.
+   * @return a new object of class '<em>Namespace Member</em>'.
    * @generated
    */
-  PackageDefinitionElement createPackageDefinitionElement();
+  NamespaceMember createNamespaceMember();
 
   /**
    * Returns a new object of class '<em>Type Definition</em>'.
@@ -98,15 +98,6 @@ public interface AstFactory extends EFactory
   TypeAliasDefinition createTypeAliasDefinition();
 
   /**
-   * Returns a new object of class '<em>Variable Declaration</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Variable Declaration</em>'.
-   * @generated
-   */
-  VariableDeclaration createVariableDeclaration();
-
-  /**
    * Returns a new object of class '<em>Record Definition</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -125,15 +116,6 @@ public interface AstFactory extends EFactory
   RecordFieldDeclaration createRecordFieldDeclaration();
 
   /**
-   * Returns a new object of class '<em>Subroutine Definition</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Subroutine Definition</em>'.
-   * @generated
-   */
-  SubroutineDefinition createSubroutineDefinition();
-
-  /**
    * Returns a new object of class '<em>Function Definition</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -141,15 +123,6 @@ public interface AstFactory extends EFactory
    * @generated
    */
   FunctionDefinition createFunctionDefinition();
-
-  /**
-   * Returns a new object of class '<em>Check Definition</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Check Definition</em>'.
-   * @generated
-   */
-  CheckDefinition createCheckDefinition();
 
   /**
    * Returns a new object of class '<em>Parameter Declaration</em>'.
@@ -161,157 +134,49 @@ public interface AstFactory extends EFactory
   ParameterDeclaration createParameterDeclaration();
 
   /**
-   * Returns a new object of class '<em>Precondition Chain</em>'.
+   * Returns a new object of class '<em>Assertion Declaration</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Precondition Chain</em>'.
+   * @return a new object of class '<em>Assertion Declaration</em>'.
    * @generated
    */
-  PreconditionChain createPreconditionChain();
+  AssertionDeclaration createAssertionDeclaration();
 
   /**
-   * Returns a new object of class '<em>Statement</em>'.
+   * Returns a new object of class '<em>Variable Declaration</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Statement</em>'.
+   * @return a new object of class '<em>Variable Declaration</em>'.
    * @generated
    */
-  Statement createStatement();
+  VariableDeclaration createVariableDeclaration();
 
   /**
-   * Returns a new object of class '<em>Block Statement</em>'.
+   * Returns a new object of class '<em>Functor Declaration</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Block Statement</em>'.
+   * @return a new object of class '<em>Functor Declaration</em>'.
    * @generated
    */
-  BlockStatement createBlockStatement();
+  FunctorDeclaration createFunctorDeclaration();
 
   /**
-   * Returns a new object of class '<em>Expression Statement</em>'.
+   * Returns a new object of class '<em>Argument Declaration</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Expression Statement</em>'.
+   * @return a new object of class '<em>Argument Declaration</em>'.
    * @generated
    */
-  ExpressionStatement createExpressionStatement();
+  ArgumentDeclaration createArgumentDeclaration();
 
   /**
-   * Returns a new object of class '<em>If Statement</em>'.
+   * Returns a new object of class '<em>Equation</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>If Statement</em>'.
+   * @return a new object of class '<em>Equation</em>'.
    * @generated
    */
-  IfStatement createIfStatement();
-
-  /**
-   * Returns a new object of class '<em>If Case</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>If Case</em>'.
-   * @generated
-   */
-  IfCase createIfCase();
-
-  /**
-   * Returns a new object of class '<em>While Statement</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>While Statement</em>'.
-   * @generated
-   */
-  WhileStatement createWhileStatement();
-
-  /**
-   * Returns a new object of class '<em>Do While Statement</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Do While Statement</em>'.
-   * @generated
-   */
-  DoWhileStatement createDoWhileStatement();
-
-  /**
-   * Returns a new object of class '<em>For Statement</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>For Statement</em>'.
-   * @generated
-   */
-  ForStatement createForStatement();
-
-  /**
-   * Returns a new object of class '<em>For Statement Initializer</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>For Statement Initializer</em>'.
-   * @generated
-   */
-  ForStatementInitializer createForStatementInitializer();
-
-  /**
-   * Returns a new object of class '<em>Foreach Statement</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Foreach Statement</em>'.
-   * @generated
-   */
-  ForeachStatement createForeachStatement();
-
-  /**
-   * Returns a new object of class '<em>Switch Statement</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Switch Statement</em>'.
-   * @generated
-   */
-  SwitchStatement createSwitchStatement();
-
-  /**
-   * Returns a new object of class '<em>Switch Case</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Switch Case</em>'.
-   * @generated
-   */
-  SwitchCase createSwitchCase();
-
-  /**
-   * Returns a new object of class '<em>Continue Statement</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Continue Statement</em>'.
-   * @generated
-   */
-  ContinueStatement createContinueStatement();
-
-  /**
-   * Returns a new object of class '<em>Break Statement</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Break Statement</em>'.
-   * @generated
-   */
-  BreakStatement createBreakStatement();
-
-  /**
-   * Returns a new object of class '<em>Return Statement</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Return Statement</em>'.
-   * @generated
-   */
-  ReturnStatement createReturnStatement();
-
-  /**
-   * Returns a new object of class '<em>Check Status Statement</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Check Status Statement</em>'.
-   * @generated
-   */
-  CheckStatusStatement createCheckStatusStatement();
+  Equation createEquation();
 
   /**
    * Returns a new object of class '<em>Type Specifier</em>'.
@@ -440,6 +305,33 @@ public interface AstFactory extends EFactory
   Expression createExpression();
 
   /**
+   * Returns a new object of class '<em>If Expression</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>If Expression</em>'.
+   * @generated
+   */
+  IfExpression createIfExpression();
+
+  /**
+   * Returns a new object of class '<em>Switch Expression</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Switch Expression</em>'.
+   * @generated
+   */
+  SwitchExpression createSwitchExpression();
+
+  /**
+   * Returns a new object of class '<em>Switch Case</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Switch Case</em>'.
+   * @generated
+   */
+  SwitchCase createSwitchCase();
+
+  /**
    * Returns a new object of class '<em>Additive Expression Part</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -492,6 +384,15 @@ public interface AstFactory extends EFactory
    * @generated
    */
   OperationCall createOperationCall();
+
+  /**
+   * Returns a new object of class '<em>Iterator Call</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Iterator Call</em>'.
+   * @generated
+   */
+  IteratorCall createIteratorCall();
 
   /**
    * Returns a new object of class '<em>Literal</em>'.
@@ -548,6 +449,15 @@ public interface AstFactory extends EFactory
   StringLiteral createStringLiteral();
 
   /**
+   * Returns a new object of class '<em>Simple Name</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Simple Name</em>'.
+   * @generated
+   */
+  SimpleName createSimpleName();
+
+  /**
    * Returns a new object of class '<em>Qualified Name</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -555,15 +465,6 @@ public interface AstFactory extends EFactory
    * @generated
    */
   QualifiedName createQualifiedName();
-
-  /**
-   * Returns a new object of class '<em>Symbol Reference</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Symbol Reference</em>'.
-   * @generated
-   */
-  SymbolReference createSymbolReference();
 
   /**
    * Returns a new object of class '<em>Subscript</em>'.
@@ -674,15 +575,6 @@ public interface AstFactory extends EFactory
   UnitExpressionExponent createUnitExpressionExponent();
 
   /**
-   * Returns a new object of class '<em>Assignment Expression</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Assignment Expression</em>'.
-   * @generated
-   */
-  AssignmentExpression createAssignmentExpression();
-
-  /**
    * Returns a new object of class '<em>Range Expression</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -692,13 +584,13 @@ public interface AstFactory extends EFactory
   RangeExpression createRangeExpression();
 
   /**
-   * Returns a new object of class '<em>Conditional Expression</em>'.
+   * Returns a new object of class '<em>Implies Expression</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Conditional Expression</em>'.
+   * @return a new object of class '<em>Implies Expression</em>'.
    * @generated
    */
-  ConditionalExpression createConditionalExpression();
+  ImpliesExpression createImpliesExpression();
 
   /**
    * Returns a new object of class '<em>Logical Or Expression</em>'.
@@ -789,6 +681,15 @@ public interface AstFactory extends EFactory
    * @generated
    */
   FeatureCall createFeatureCall();
+
+  /**
+   * Returns a new object of class '<em>Element Declaration</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Element Declaration</em>'.
+   * @generated
+   */
+  ElementDeclaration createElementDeclaration();
 
   /**
    * Returns the package supported by this factory.

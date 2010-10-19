@@ -24,7 +24,7 @@ import org.eclipselabs.mscript.language.ast.UnitExpression;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.UnitConstructionOperatorImpl#getUnitExpression <em>Unit Expression</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.UnitConstructionOperatorImpl#getUnit <em>Unit</em>}</li>
  * </ul>
  * </p>
  *
@@ -33,14 +33,14 @@ import org.eclipselabs.mscript.language.ast.UnitExpression;
 public class UnitConstructionOperatorImpl extends ExpressionImpl implements UnitConstructionOperator
 {
   /**
-   * The cached value of the '{@link #getUnitExpression() <em>Unit Expression</em>}' containment reference.
+   * The cached value of the '{@link #getUnit() <em>Unit</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getUnitExpression()
+   * @see #getUnit()
    * @generated
    * @ordered
    */
-  protected UnitExpression unitExpression;
+  protected UnitExpression unit;
 
   /**
    * <!-- begin-user-doc -->
@@ -68,9 +68,9 @@ public class UnitConstructionOperatorImpl extends ExpressionImpl implements Unit
    * <!-- end-user-doc -->
    * @generated
    */
-  public UnitExpression getUnitExpression()
+  public UnitExpression getUnit()
   {
-    return unitExpression;
+    return unit;
   }
 
   /**
@@ -78,13 +78,13 @@ public class UnitConstructionOperatorImpl extends ExpressionImpl implements Unit
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetUnitExpression(UnitExpression newUnitExpression, NotificationChain msgs)
+  public NotificationChain basicSetUnit(UnitExpression newUnit, NotificationChain msgs)
   {
-    UnitExpression oldUnitExpression = unitExpression;
-    unitExpression = newUnitExpression;
+    UnitExpression oldUnit = unit;
+    unit = newUnit;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.UNIT_CONSTRUCTION_OPERATOR__UNIT_EXPRESSION, oldUnitExpression, newUnitExpression);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.UNIT_CONSTRUCTION_OPERATOR__UNIT, oldUnit, newUnit);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -95,20 +95,20 @@ public class UnitConstructionOperatorImpl extends ExpressionImpl implements Unit
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setUnitExpression(UnitExpression newUnitExpression)
+  public void setUnit(UnitExpression newUnit)
   {
-    if (newUnitExpression != unitExpression)
+    if (newUnit != unit)
     {
       NotificationChain msgs = null;
-      if (unitExpression != null)
-        msgs = ((InternalEObject)unitExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.UNIT_CONSTRUCTION_OPERATOR__UNIT_EXPRESSION, null, msgs);
-      if (newUnitExpression != null)
-        msgs = ((InternalEObject)newUnitExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.UNIT_CONSTRUCTION_OPERATOR__UNIT_EXPRESSION, null, msgs);
-      msgs = basicSetUnitExpression(newUnitExpression, msgs);
+      if (unit != null)
+        msgs = ((InternalEObject)unit).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.UNIT_CONSTRUCTION_OPERATOR__UNIT, null, msgs);
+      if (newUnit != null)
+        msgs = ((InternalEObject)newUnit).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.UNIT_CONSTRUCTION_OPERATOR__UNIT, null, msgs);
+      msgs = basicSetUnit(newUnit, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.UNIT_CONSTRUCTION_OPERATOR__UNIT_EXPRESSION, newUnitExpression, newUnitExpression));
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.UNIT_CONSTRUCTION_OPERATOR__UNIT, newUnit, newUnit));
   }
 
   /**
@@ -121,8 +121,8 @@ public class UnitConstructionOperatorImpl extends ExpressionImpl implements Unit
   {
     switch (featureID)
     {
-      case AstPackage.UNIT_CONSTRUCTION_OPERATOR__UNIT_EXPRESSION:
-        return basicSetUnitExpression(null, msgs);
+      case AstPackage.UNIT_CONSTRUCTION_OPERATOR__UNIT:
+        return basicSetUnit(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -137,8 +137,8 @@ public class UnitConstructionOperatorImpl extends ExpressionImpl implements Unit
   {
     switch (featureID)
     {
-      case AstPackage.UNIT_CONSTRUCTION_OPERATOR__UNIT_EXPRESSION:
-        return getUnitExpression();
+      case AstPackage.UNIT_CONSTRUCTION_OPERATOR__UNIT:
+        return getUnit();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -153,8 +153,8 @@ public class UnitConstructionOperatorImpl extends ExpressionImpl implements Unit
   {
     switch (featureID)
     {
-      case AstPackage.UNIT_CONSTRUCTION_OPERATOR__UNIT_EXPRESSION:
-        setUnitExpression((UnitExpression)newValue);
+      case AstPackage.UNIT_CONSTRUCTION_OPERATOR__UNIT:
+        setUnit((UnitExpression)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -170,8 +170,8 @@ public class UnitConstructionOperatorImpl extends ExpressionImpl implements Unit
   {
     switch (featureID)
     {
-      case AstPackage.UNIT_CONSTRUCTION_OPERATOR__UNIT_EXPRESSION:
-        setUnitExpression((UnitExpression)null);
+      case AstPackage.UNIT_CONSTRUCTION_OPERATOR__UNIT:
+        setUnit((UnitExpression)null);
         return;
     }
     super.eUnset(featureID);
@@ -187,8 +187,8 @@ public class UnitConstructionOperatorImpl extends ExpressionImpl implements Unit
   {
     switch (featureID)
     {
-      case AstPackage.UNIT_CONSTRUCTION_OPERATOR__UNIT_EXPRESSION:
-        return unitExpression != null;
+      case AstPackage.UNIT_CONSTRUCTION_OPERATOR__UNIT:
+        return unit != null;
     }
     return super.eIsSet(featureID);
   }

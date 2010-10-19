@@ -27,7 +27,7 @@ import org.eclipselabs.mscript.language.ast.TypeDefinition;
  *
  * @generated
  */
-public class TypeDefinitionImpl extends PackageDefinitionElementImpl implements TypeDefinition
+public class TypeDefinitionImpl extends NamespaceMemberImpl implements TypeDefinition
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
