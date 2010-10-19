@@ -12,9 +12,11 @@ package org.yakindu.sct.statechart.diagram.editparts;
 
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.geometry.Dimension;
+import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.statechart.diagram.editor.figures.FinalStateFigure;
 import org.yakindu.sct.statechart.diagram.editor.figures.utils.MapModeUtils;
+import org.yakindu.sct.statechart.diagram.policies.RelationshipSemanticEditPolicy;
 
 /**
  * 
@@ -29,13 +31,19 @@ public class FinalStateEditPart extends FixedSizeShapeNodeEditPart {
 	}
 
 	@Override
+	protected void createDefaultEditPolicies() {
+		super.createDefaultEditPolicies();
+		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE, new RelationshipSemanticEditPolicy());
+	}
+
+	@Override
 	public Dimension getDefaultSize() {
 		return MapModeUtils.getDefaultSizeDimension(getMapMode());
 	}
 
 	@Override
 	public IFigure getPrimaryShape() {
-		return new FinalStateFigure();
+		return new FinalStateFigure(getMapMode());
 	}
 
 }
