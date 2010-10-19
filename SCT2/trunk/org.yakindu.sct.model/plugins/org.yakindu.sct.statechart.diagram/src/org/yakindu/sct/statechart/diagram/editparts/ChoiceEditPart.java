@@ -10,16 +10,13 @@
  */
 package org.yakindu.sct.statechart.diagram.editparts;
 
-import java.util.Collections;
-import java.util.List;
-
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.statechart.diagram.editor.figures.ChoiceFigure;
 import org.yakindu.sct.statechart.diagram.editor.figures.utils.MapModeUtils;
-import org.yakindu.sct.statechart.diagram.policies.ChoiceSemanticEditPolicy;
+import org.yakindu.sct.statechart.diagram.policies.RelationshipSemanticEditPolicy;
 
 /**
  * 
@@ -36,7 +33,7 @@ public class ChoiceEditPart extends FixedSizeShapeNodeEditPart {
 	@Override
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
-		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE, new ChoiceSemanticEditPolicy());
+		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE, new RelationshipSemanticEditPolicy());
 	}
 
 	@Override
@@ -48,5 +45,5 @@ public class ChoiceEditPart extends FixedSizeShapeNodeEditPart {
 	public IFigure getPrimaryShape() {
 		return new ChoiceFigure();
 	}
-	
+
 }
