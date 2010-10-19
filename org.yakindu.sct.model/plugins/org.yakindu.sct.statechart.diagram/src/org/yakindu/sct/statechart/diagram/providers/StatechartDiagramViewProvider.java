@@ -68,7 +68,6 @@ public class StatechartDiagramViewProvider extends AbstractViewProvider implemen
 
 	@Override
 	protected Class<?> getEdgeViewClass(IAdaptable semanticAdapter, View containerView, String semanticHint) {
-		System.out.println("Edge contaqiner is " + containerView);
 		return getClass(semanticHint);
 	}
 

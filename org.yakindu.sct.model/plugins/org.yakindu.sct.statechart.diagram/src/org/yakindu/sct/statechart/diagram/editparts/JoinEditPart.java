@@ -12,9 +12,11 @@ package org.yakindu.sct.statechart.diagram.editparts;
 
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.geometry.Dimension;
+import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.statechart.diagram.editor.figures.JoinFigure;
 import org.yakindu.sct.statechart.diagram.editor.figures.utils.MapModeUtils;
+import org.yakindu.sct.statechart.diagram.policies.RelationshipSemanticEditPolicy;
 
 /**
  * 
@@ -26,6 +28,11 @@ public class JoinEditPart extends FixedSizeShapeNodeEditPart {
 
 	public JoinEditPart(View view) {
 		super(view);
+	}
+	@Override
+	protected void createDefaultEditPolicies() {
+		super.createDefaultEditPolicies();
+		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE, new RelationshipSemanticEditPolicy());
 	}
 
 	@Override

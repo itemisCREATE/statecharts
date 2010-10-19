@@ -18,12 +18,14 @@ import org.eclipse.gmf.runtime.emf.type.core.requests.IEditCommandRequest;
 import org.yakindu.sct.statechart.diagram.commands.CreateTransitionCommand;
 
 /**
+ * {@link SemanticEditPolicy} for creation of Transitions between Vertices.
  * 
  * @author Andreas Muelder <a
  *         href="mailto:andreas.muelder@itemis.de">andreas.muelder@itemis.de</a>
  * 
  */
-public class StateSemanticEditPolicy extends SemanticEditPolicy {
+public class RelationshipSemanticEditPolicy extends SemanticEditPolicy {
+	
 	@Override
 	protected Command getSemanticCommand(IEditCommandRequest request) {
 		if (request instanceof CreateRelationshipRequest) {
@@ -32,5 +34,4 @@ public class StateSemanticEditPolicy extends SemanticEditPolicy {
 		}
 		return super.getSemanticCommand(request);
 	}
-	
 }
