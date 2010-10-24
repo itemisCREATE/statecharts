@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipselabs.mscript.language.ast.AssertionDeclaration;
 import org.eclipselabs.mscript.language.ast.AstPackage;
-import org.eclipselabs.mscript.language.ast.Equation;
+import org.eclipselabs.mscript.language.ast.EquationDefinition;
 import org.eclipselabs.mscript.language.ast.FunctionDefinition;
 import org.eclipselabs.mscript.language.ast.FunctorDeclaration;
 import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
@@ -37,7 +37,7 @@ import org.eclipselabs.mscript.language.ast.VariableDeclaration;
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl#getOutputParameters <em>Output Parameters</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl#getAssertions <em>Assertions</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl#getFunctors <em>Functors</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl#getVariables <em>Variables</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl#getStateVariables <em>State Variables</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl#getEquations <em>Equations</em>}</li>
  * </ul>
  * </p>
@@ -97,14 +97,14 @@ public class FunctionDefinitionImpl extends TypeDefinitionImpl implements Functi
   protected EList<FunctorDeclaration> functors;
 
   /**
-   * The cached value of the '{@link #getVariables() <em>Variables</em>}' containment reference list.
+   * The cached value of the '{@link #getStateVariables() <em>State Variables</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getVariables()
+   * @see #getStateVariables()
    * @generated
    * @ordered
    */
-  protected EList<VariableDeclaration> variables;
+  protected EList<VariableDeclaration> stateVariables;
 
   /**
    * The cached value of the '{@link #getEquations() <em>Equations</em>}' containment reference list.
@@ -114,7 +114,7 @@ public class FunctionDefinitionImpl extends TypeDefinitionImpl implements Functi
    * @generated
    * @ordered
    */
-  protected EList<Equation> equations;
+  protected EList<EquationDefinition> equations;
 
   /**
    * <!-- begin-user-doc -->
@@ -212,13 +212,13 @@ public class FunctionDefinitionImpl extends TypeDefinitionImpl implements Functi
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<VariableDeclaration> getVariables()
+  public EList<VariableDeclaration> getStateVariables()
   {
-    if (variables == null)
+    if (stateVariables == null)
     {
-      variables = new EObjectContainmentEList<VariableDeclaration>(VariableDeclaration.class, this, AstPackage.FUNCTION_DEFINITION__VARIABLES);
+      stateVariables = new EObjectContainmentEList<VariableDeclaration>(VariableDeclaration.class, this, AstPackage.FUNCTION_DEFINITION__STATE_VARIABLES);
     }
-    return variables;
+    return stateVariables;
   }
 
   /**
@@ -226,11 +226,11 @@ public class FunctionDefinitionImpl extends TypeDefinitionImpl implements Functi
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Equation> getEquations()
+  public EList<EquationDefinition> getEquations()
   {
     if (equations == null)
     {
-      equations = new EObjectContainmentEList<Equation>(Equation.class, this, AstPackage.FUNCTION_DEFINITION__EQUATIONS);
+      equations = new EObjectContainmentEList<EquationDefinition>(EquationDefinition.class, this, AstPackage.FUNCTION_DEFINITION__EQUATIONS);
     }
     return equations;
   }
@@ -255,8 +255,8 @@ public class FunctionDefinitionImpl extends TypeDefinitionImpl implements Functi
         return ((InternalEList<?>)getAssertions()).basicRemove(otherEnd, msgs);
       case AstPackage.FUNCTION_DEFINITION__FUNCTORS:
         return ((InternalEList<?>)getFunctors()).basicRemove(otherEnd, msgs);
-      case AstPackage.FUNCTION_DEFINITION__VARIABLES:
-        return ((InternalEList<?>)getVariables()).basicRemove(otherEnd, msgs);
+      case AstPackage.FUNCTION_DEFINITION__STATE_VARIABLES:
+        return ((InternalEList<?>)getStateVariables()).basicRemove(otherEnd, msgs);
       case AstPackage.FUNCTION_DEFINITION__EQUATIONS:
         return ((InternalEList<?>)getEquations()).basicRemove(otherEnd, msgs);
     }
@@ -283,8 +283,8 @@ public class FunctionDefinitionImpl extends TypeDefinitionImpl implements Functi
         return getAssertions();
       case AstPackage.FUNCTION_DEFINITION__FUNCTORS:
         return getFunctors();
-      case AstPackage.FUNCTION_DEFINITION__VARIABLES:
-        return getVariables();
+      case AstPackage.FUNCTION_DEFINITION__STATE_VARIABLES:
+        return getStateVariables();
       case AstPackage.FUNCTION_DEFINITION__EQUATIONS:
         return getEquations();
     }
@@ -322,13 +322,13 @@ public class FunctionDefinitionImpl extends TypeDefinitionImpl implements Functi
         getFunctors().clear();
         getFunctors().addAll((Collection<? extends FunctorDeclaration>)newValue);
         return;
-      case AstPackage.FUNCTION_DEFINITION__VARIABLES:
-        getVariables().clear();
-        getVariables().addAll((Collection<? extends VariableDeclaration>)newValue);
+      case AstPackage.FUNCTION_DEFINITION__STATE_VARIABLES:
+        getStateVariables().clear();
+        getStateVariables().addAll((Collection<? extends VariableDeclaration>)newValue);
         return;
       case AstPackage.FUNCTION_DEFINITION__EQUATIONS:
         getEquations().clear();
-        getEquations().addAll((Collection<? extends Equation>)newValue);
+        getEquations().addAll((Collection<? extends EquationDefinition>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -359,8 +359,8 @@ public class FunctionDefinitionImpl extends TypeDefinitionImpl implements Functi
       case AstPackage.FUNCTION_DEFINITION__FUNCTORS:
         getFunctors().clear();
         return;
-      case AstPackage.FUNCTION_DEFINITION__VARIABLES:
-        getVariables().clear();
+      case AstPackage.FUNCTION_DEFINITION__STATE_VARIABLES:
+        getStateVariables().clear();
         return;
       case AstPackage.FUNCTION_DEFINITION__EQUATIONS:
         getEquations().clear();
@@ -389,8 +389,8 @@ public class FunctionDefinitionImpl extends TypeDefinitionImpl implements Functi
         return assertions != null && !assertions.isEmpty();
       case AstPackage.FUNCTION_DEFINITION__FUNCTORS:
         return functors != null && !functors.isEmpty();
-      case AstPackage.FUNCTION_DEFINITION__VARIABLES:
-        return variables != null && !variables.isEmpty();
+      case AstPackage.FUNCTION_DEFINITION__STATE_VARIABLES:
+        return stateVariables != null && !stateVariables.isEmpty();
       case AstPackage.FUNCTION_DEFINITION__EQUATIONS:
         return equations != null && !equations.isEmpty();
     }

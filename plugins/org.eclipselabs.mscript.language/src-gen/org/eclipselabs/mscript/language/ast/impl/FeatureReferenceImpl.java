@@ -21,7 +21,7 @@ import org.eclipselabs.mscript.language.ast.FeatureReference;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FeatureReferenceImpl#getFeatureName <em>Feature Name</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FeatureReferenceImpl#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -30,24 +30,24 @@ import org.eclipselabs.mscript.language.ast.FeatureReference;
 public class FeatureReferenceImpl extends FeatureCallPartImpl implements FeatureReference
 {
   /**
-   * The default value of the '{@link #getFeatureName() <em>Feature Name</em>}' attribute.
+   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getFeatureName()
+   * @see #getName()
    * @generated
    * @ordered
    */
-  protected static final String FEATURE_NAME_EDEFAULT = null;
+  protected static final String NAME_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getFeatureName() <em>Feature Name</em>}' attribute.
+   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getFeatureName()
+   * @see #getName()
    * @generated
    * @ordered
    */
-  protected String featureName = FEATURE_NAME_EDEFAULT;
+  protected String name = NAME_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -75,9 +75,9 @@ public class FeatureReferenceImpl extends FeatureCallPartImpl implements Feature
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getFeatureName()
+  public String getName()
   {
-    return featureName;
+    return name;
   }
 
   /**
@@ -85,12 +85,12 @@ public class FeatureReferenceImpl extends FeatureCallPartImpl implements Feature
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setFeatureName(String newFeatureName)
+  public void setName(String newName)
   {
-    String oldFeatureName = featureName;
-    featureName = newFeatureName;
+    String oldName = name;
+    name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.FEATURE_REFERENCE__FEATURE_NAME, oldFeatureName, featureName));
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.FEATURE_REFERENCE__NAME, oldName, name));
   }
 
   /**
@@ -103,8 +103,8 @@ public class FeatureReferenceImpl extends FeatureCallPartImpl implements Feature
   {
     switch (featureID)
     {
-      case AstPackage.FEATURE_REFERENCE__FEATURE_NAME:
-        return getFeatureName();
+      case AstPackage.FEATURE_REFERENCE__NAME:
+        return getName();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -119,8 +119,8 @@ public class FeatureReferenceImpl extends FeatureCallPartImpl implements Feature
   {
     switch (featureID)
     {
-      case AstPackage.FEATURE_REFERENCE__FEATURE_NAME:
-        setFeatureName((String)newValue);
+      case AstPackage.FEATURE_REFERENCE__NAME:
+        setName((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -136,8 +136,8 @@ public class FeatureReferenceImpl extends FeatureCallPartImpl implements Feature
   {
     switch (featureID)
     {
-      case AstPackage.FEATURE_REFERENCE__FEATURE_NAME:
-        setFeatureName(FEATURE_NAME_EDEFAULT);
+      case AstPackage.FEATURE_REFERENCE__NAME:
+        setName(NAME_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -153,8 +153,8 @@ public class FeatureReferenceImpl extends FeatureCallPartImpl implements Feature
   {
     switch (featureID)
     {
-      case AstPackage.FEATURE_REFERENCE__FEATURE_NAME:
-        return FEATURE_NAME_EDEFAULT == null ? featureName != null : !FEATURE_NAME_EDEFAULT.equals(featureName);
+      case AstPackage.FEATURE_REFERENCE__NAME:
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
     }
     return super.eIsSet(featureID);
   }
@@ -170,8 +170,8 @@ public class FeatureReferenceImpl extends FeatureCallPartImpl implements Feature
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (featureName: ");
-    result.append(featureName);
+    result.append(" (name: ");
+    result.append(name);
     result.append(')');
     return result.toString();
   }

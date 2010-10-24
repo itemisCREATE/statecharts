@@ -22,6 +22,7 @@ RULE_ML_COMMENT=8
 'warning'=16
 '+'=25
 '.'=69
+'=>'=66
 'is'=75
 'eval'=73
 '^'=31
@@ -57,7 +58,6 @@ RULE_ML_COMMENT=8
 'functor'=51
 ')'=48
 'bool'=58
-'->'=66
 './'=30
 'case'=65
 '}'=38

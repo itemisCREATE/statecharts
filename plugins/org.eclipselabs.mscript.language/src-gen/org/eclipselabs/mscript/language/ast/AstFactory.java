@@ -170,13 +170,13 @@ public interface AstFactory extends EFactory
   ArgumentDeclaration createArgumentDeclaration();
 
   /**
-   * Returns a new object of class '<em>Equation</em>'.
+   * Returns a new object of class '<em>Equation Definition</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Equation</em>'.
+   * @return a new object of class '<em>Equation Definition</em>'.
    * @generated
    */
-  Equation createEquation();
+  EquationDefinition createEquationDefinition();
 
   /**
    * Returns a new object of class '<em>Type Specifier</em>'.
@@ -350,51 +350,6 @@ public interface AstFactory extends EFactory
   MultiplicativeExpressionPart createMultiplicativeExpressionPart();
 
   /**
-   * Returns a new object of class '<em>Feature Call Part</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Feature Call Part</em>'.
-   * @generated
-   */
-  FeatureCallPart createFeatureCallPart();
-
-  /**
-   * Returns a new object of class '<em>Feature Reference</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Feature Reference</em>'.
-   * @generated
-   */
-  FeatureReference createFeatureReference();
-
-  /**
-   * Returns a new object of class '<em>Array Element Reference</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Array Element Reference</em>'.
-   * @generated
-   */
-  ArrayElementReference createArrayElementReference();
-
-  /**
-   * Returns a new object of class '<em>Operation Call</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Operation Call</em>'.
-   * @generated
-   */
-  OperationCall createOperationCall();
-
-  /**
-   * Returns a new object of class '<em>Iterator Call</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Iterator Call</em>'.
-   * @generated
-   */
-  IteratorCall createIteratorCall();
-
-  /**
    * Returns a new object of class '<em>Literal</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -449,22 +404,49 @@ public interface AstFactory extends EFactory
   StringLiteral createStringLiteral();
 
   /**
-   * Returns a new object of class '<em>Simple Name</em>'.
+   * Returns a new object of class '<em>Feature Call Part</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Simple Name</em>'.
+   * @return a new object of class '<em>Feature Call Part</em>'.
    * @generated
    */
-  SimpleName createSimpleName();
+  FeatureCallPart createFeatureCallPart();
 
   /**
-   * Returns a new object of class '<em>Qualified Name</em>'.
+   * Returns a new object of class '<em>Feature Reference</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Qualified Name</em>'.
+   * @return a new object of class '<em>Feature Reference</em>'.
    * @generated
    */
-  QualifiedName createQualifiedName();
+  FeatureReference createFeatureReference();
+
+  /**
+   * Returns a new object of class '<em>Array Element Reference</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Array Element Reference</em>'.
+   * @generated
+   */
+  ArrayElementReference createArrayElementReference();
+
+  /**
+   * Returns a new object of class '<em>Operation Call</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Operation Call</em>'.
+   * @generated
+   */
+  OperationCall createOperationCall();
+
+  /**
+   * Returns a new object of class '<em>Iterator Call</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Iterator Call</em>'.
+   * @generated
+   */
+  IteratorCall createIteratorCall();
 
   /**
    * Returns a new object of class '<em>Subscript</em>'.
@@ -528,6 +510,15 @@ public interface AstFactory extends EFactory
    * @generated
    */
   EndExpression createEndExpression();
+
+  /**
+   * Returns a new object of class '<em>Qualified Name</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Qualified Name</em>'.
+   * @generated
+   */
+  QualifiedName createQualifiedName();
 
   /**
    * Returns a new object of class '<em>Unit Expression</em>'.
@@ -681,6 +672,15 @@ public interface AstFactory extends EFactory
    * @generated
    */
   FeatureCall createFeatureCall();
+
+  /**
+   * Returns a new object of class '<em>Simple Name</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Simple Name</em>'.
+   * @generated
+   */
+  SimpleName createSimpleName();
 
   /**
    * Returns a new object of class '<em>Element Declaration</em>'.

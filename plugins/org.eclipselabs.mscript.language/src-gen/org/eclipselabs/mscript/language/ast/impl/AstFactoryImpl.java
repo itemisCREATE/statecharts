@@ -84,7 +84,7 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
       case AstPackage.VARIABLE_DECLARATION: return createVariableDeclaration();
       case AstPackage.FUNCTOR_DECLARATION: return createFunctorDeclaration();
       case AstPackage.ARGUMENT_DECLARATION: return createArgumentDeclaration();
-      case AstPackage.EQUATION: return createEquation();
+      case AstPackage.EQUATION_DEFINITION: return createEquationDefinition();
       case AstPackage.TYPE_SPECIFIER: return createTypeSpecifier();
       case AstPackage.DATA_TYPE_SPECIFIER: return createDataTypeSpecifier();
       case AstPackage.PRIMITIVE_TYPE_SPECIFIER: return createPrimitiveTypeSpecifier();
@@ -104,19 +104,17 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
       case AstPackage.SWITCH_CASE: return createSwitchCase();
       case AstPackage.ADDITIVE_EXPRESSION_PART: return createAdditiveExpressionPart();
       case AstPackage.MULTIPLICATIVE_EXPRESSION_PART: return createMultiplicativeExpressionPart();
-      case AstPackage.FEATURE_CALL_PART: return createFeatureCallPart();
-      case AstPackage.FEATURE_REFERENCE: return createFeatureReference();
-      case AstPackage.ARRAY_ELEMENT_REFERENCE: return createArrayElementReference();
-      case AstPackage.OPERATION_CALL: return createOperationCall();
-      case AstPackage.ITERATOR_CALL: return createIteratorCall();
       case AstPackage.LITERAL: return createLiteral();
       case AstPackage.NUMERIC_LITERAL: return createNumericLiteral();
       case AstPackage.REAL_LITERAL: return createRealLiteral();
       case AstPackage.INTEGER_LITERAL: return createIntegerLiteral();
       case AstPackage.BOOLEAN_LITERAL: return createBooleanLiteral();
       case AstPackage.STRING_LITERAL: return createStringLiteral();
-      case AstPackage.SIMPLE_NAME: return createSimpleName();
-      case AstPackage.QUALIFIED_NAME: return createQualifiedName();
+      case AstPackage.FEATURE_CALL_PART: return createFeatureCallPart();
+      case AstPackage.FEATURE_REFERENCE: return createFeatureReference();
+      case AstPackage.ARRAY_ELEMENT_REFERENCE: return createArrayElementReference();
+      case AstPackage.OPERATION_CALL: return createOperationCall();
+      case AstPackage.ITERATOR_CALL: return createIteratorCall();
       case AstPackage.SUBSCRIPT: return createSubscript();
       case AstPackage.MATRIX_CONSTRUCTION_OPERATOR: return createMatrixConstructionOperator();
       case AstPackage.EXPRESSION_LIST: return createExpressionList();
@@ -124,6 +122,7 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
       case AstPackage.PARENTHESIZED_EXPRESSION: return createParenthesizedExpression();
       case AstPackage.BEGIN_EXPRESSION: return createBeginExpression();
       case AstPackage.END_EXPRESSION: return createEndExpression();
+      case AstPackage.QUALIFIED_NAME: return createQualifiedName();
       case AstPackage.UNIT_EXPRESSION: return createUnitExpression();
       case AstPackage.UNIT_EXPRESSION_NUMERATOR: return createUnitExpressionNumerator();
       case AstPackage.UNIT_EXPRESSION_DENOMINATOR: return createUnitExpressionDenominator();
@@ -141,6 +140,7 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
       case AstPackage.UNARY_EXPRESSION: return createUnaryExpression();
       case AstPackage.POSTFIX_EXPRESSION: return createPostfixExpression();
       case AstPackage.FEATURE_CALL: return createFeatureCall();
+      case AstPackage.SIMPLE_NAME: return createSimpleName();
       case AstPackage.ELEMENT_DECLARATION: return createElementDeclaration();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -394,10 +394,10 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public Equation createEquation()
+  public EquationDefinition createEquationDefinition()
   {
-    EquationImpl equation = new EquationImpl();
-    return equation;
+    EquationDefinitionImpl equationDefinition = new EquationDefinitionImpl();
+    return equationDefinition;
   }
 
   /**
@@ -614,61 +614,6 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public FeatureCallPart createFeatureCallPart()
-  {
-    FeatureCallPartImpl featureCallPart = new FeatureCallPartImpl();
-    return featureCallPart;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public FeatureReference createFeatureReference()
-  {
-    FeatureReferenceImpl featureReference = new FeatureReferenceImpl();
-    return featureReference;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ArrayElementReference createArrayElementReference()
-  {
-    ArrayElementReferenceImpl arrayElementReference = new ArrayElementReferenceImpl();
-    return arrayElementReference;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public OperationCall createOperationCall()
-  {
-    OperationCallImpl operationCall = new OperationCallImpl();
-    return operationCall;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public IteratorCall createIteratorCall()
-  {
-    IteratorCallImpl iteratorCall = new IteratorCallImpl();
-    return iteratorCall;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public Literal createLiteral()
   {
     LiteralImpl literal = new LiteralImpl();
@@ -735,10 +680,10 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public SimpleName createSimpleName()
+  public FeatureCallPart createFeatureCallPart()
   {
-    SimpleNameImpl simpleName = new SimpleNameImpl();
-    return simpleName;
+    FeatureCallPartImpl featureCallPart = new FeatureCallPartImpl();
+    return featureCallPart;
   }
 
   /**
@@ -746,10 +691,43 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public QualifiedName createQualifiedName()
+  public FeatureReference createFeatureReference()
   {
-    QualifiedNameImpl qualifiedName = new QualifiedNameImpl();
-    return qualifiedName;
+    FeatureReferenceImpl featureReference = new FeatureReferenceImpl();
+    return featureReference;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ArrayElementReference createArrayElementReference()
+  {
+    ArrayElementReferenceImpl arrayElementReference = new ArrayElementReferenceImpl();
+    return arrayElementReference;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public OperationCall createOperationCall()
+  {
+    OperationCallImpl operationCall = new OperationCallImpl();
+    return operationCall;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public IteratorCall createIteratorCall()
+  {
+    IteratorCallImpl iteratorCall = new IteratorCallImpl();
+    return iteratorCall;
   }
 
   /**
@@ -827,6 +805,17 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
   {
     EndExpressionImpl endExpression = new EndExpressionImpl();
     return endExpression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public QualifiedName createQualifiedName()
+  {
+    QualifiedNameImpl qualifiedName = new QualifiedNameImpl();
+    return qualifiedName;
   }
 
   /**
@@ -1014,6 +1003,17 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
   {
     FeatureCallImpl featureCall = new FeatureCallImpl();
     return featureCall;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public SimpleName createSimpleName()
+  {
+    SimpleNameImpl simpleName = new SimpleNameImpl();
+    return simpleName;
   }
 
   /**

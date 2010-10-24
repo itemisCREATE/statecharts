@@ -80,8 +80,8 @@ FunctionDefinition :
 	'func' name=KeywordID ('<' templateParameters+=ParameterDeclaration (',' templateParameters+=ParameterDeclaration)* '>')? '(' (inputParameters+=ParameterDeclaration (',' inputParameters+=ParameterDeclaration)*)? ')' ':' outputParameters+=ParameterDeclaration (',' outputParameters+=ParameterDeclaration)* '{'
 		(assertions+=AssertionDeclaration |
 		functors+=FunctorDeclaration |
-		variables+=VariableDeclaration |
-		equations+=Equation)*
+		stateVariables+=VariableDeclaration |
+		equations+=EquationDefinition)*
 	'}';
 
 ParameterDeclaration :
@@ -105,7 +105,7 @@ FunctorDeclaration :
 ArgumentDeclaration :
 	name=KeywordID;
 
-Equation :
+EquationDefinition :
 	leftHandSide=Expression '=' rightHandSide=Expression ';';
 
 /*
@@ -173,7 +173,7 @@ RangeExpression returns Expression :
 	ImpliesExpression ({RangeExpression.begin=current} ':' end=ImpliesExpression ({RangeExpression.increment=current} ':' end=ImpliesExpression)?)?;
 
 ImpliesExpression returns Expression :
-	LogicalOrExpression ({ImpliesExpression.leftOperand=current} '->' rightOperand=LogicalOrExpression)?;
+	LogicalOrExpression ({ImpliesExpression.leftOperand=current} '=>' rightOperand=LogicalOrExpression)?;
 
 LogicalOrExpression returns Expression :
 	LogicalAndExpression ({LogicalOrExpression.operands+=current} ('||' operands+=LogicalAndExpression)+)?;
@@ -227,46 +227,28 @@ enum PowerOperator :
 	ElementWisePower='.^';
 	
 UnaryExpression returns Expression :
-	PostfixExpression | {UnaryExpression} operator=UnaryOperator operand=FeatureCall;
+	PostfixExpression | {UnaryExpression} operator=UnaryOperator operand=PostfixExpression;
 	
 enum UnaryOperator :
 	Minus='-' |
 	LogicalNot='!';
 	
 PostfixExpression returns Expression :
-	FeatureCall ({PostfixExpression.operand=current} operator=PostfixOperator)?;
+	PrimaryExpression ({PostfixExpression.operand=current} operator=PostfixOperator)?;
 
 enum PostfixOperator :
 	Transpose="'";
 
-FeatureCall returns Expression :
-	PrimaryExpression | CallablePrimaryExpression ({FeatureCall.target=current} (parts+=FeatureCallPart)+)?;
-
-FeatureCallPart :
-	FeatureReference | ArrayElementReference | OperationCall | IteratorCall;
-	
-FeatureReference :
-	'.' featureName=(ID | 'unit');
-	
-ArrayElementReference :
-	'[' subscripts+=Subscript (',' subscripts+=Subscript)* ']';
-
-OperationCall :
-	{OperationCall} '(' (arguments+=Expression (',' arguments+=Expression)*)? ')';
-
-IteratorCall :
-	{ElementDeclaration} '(' elementName=KeywordID (';' accumulatorName=KeywordID '=' initialValue=Expression)? '|' expression=Expression ')';
-
-CallablePrimaryExpression returns Expression :
-	SimpleName |
-	MatrixConstructionOperator |
-	ParenthesizedExpression;
-
 PrimaryExpression returns Expression :
 	Literal |
+	FeatureCall |
 	UnitConstructionOperator |
 	BeginExpression |
 	EndExpression;
+
+CallablePrimaryExpression returns Expression :
+	MatrixConstructionOperator |
+	ParenthesizedExpression;
 
 Literal :
 	NumericLiteral | BooleanLiteral | StringLiteral;
@@ -288,13 +270,28 @@ enum BooleanKind :
 	
 StringLiteral :
 	value=STRING;
-	
-SimpleName :
-	identifier=ID;
+		
+FeatureCall returns Expression :
+	CallablePrimaryExpression ({FeatureCall.target=current} (parts+=FeatureCallPart)+)? | {FeatureCall} target=SimpleName (parts+=FeatureCallPart)*;
 
-QualifiedName :
-	identifiers+=KeywordID ('.' identifiers+=KeywordID)*;
+SimpleName returns Expression :
+	{SimpleName} identifier=ID;
+
+FeatureCallPart :
+	FeatureReference | ArrayElementReference | OperationCall | IteratorCall;
 	
+FeatureReference :
+	'.' name=(ID | 'unit');
+	
+ArrayElementReference :
+	'[' subscripts+=Subscript (',' subscripts+=Subscript)* ']';
+
+OperationCall :
+	{OperationCall} '(' (arguments+=Expression (',' arguments+=Expression)*)? ')';
+
+IteratorCall :
+	{ElementDeclaration} '(' elementName=KeywordID (';' accumulatorName=KeywordID '=' initialValue=Expression)? '|' expression=Expression ')';
+
 Subscript :
 	slice?=':' | expression=Expression;
 
@@ -316,6 +313,9 @@ BeginExpression :
 EndExpression :
 	{EndExpression} 'end';
 	
+QualifiedName :
+	identifiers+=KeywordID ('.' identifiers+=KeywordID)*;
+
 /*
  * Unit expressions
  */

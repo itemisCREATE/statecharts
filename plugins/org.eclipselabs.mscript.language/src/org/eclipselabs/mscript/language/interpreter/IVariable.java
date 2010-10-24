@@ -24,7 +24,11 @@ public interface IVariable {
 	String getName();
 	void setName(String name);
 	
-	IValue getValue();
-	void setValue(IValue value);
+	void ensureValueIndex(int step);
+
+	IValue getValue(int step);
+	void setValue(int step, IValue value);
+	
+	void incrementStep();
 	
 }

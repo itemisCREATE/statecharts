@@ -13,7 +13,16 @@ package org.eclipselabs.mscript.language.interpreter;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.MultiStatus;
+import org.eclipse.emf.common.util.DiagnosticChain;
+import org.eclipselabs.mscript.language.ast.Expression;
+import org.eclipselabs.mscript.language.ast.FeatureCall;
+import org.eclipselabs.mscript.language.ast.FeatureCallPart;
+import org.eclipselabs.mscript.language.ast.OperationCall;
+import org.eclipselabs.mscript.language.ast.SimpleName;
 import org.eclipselabs.mscript.language.internal.LanguagePlugin;
+import org.eclipselabs.mscript.language.internal.functionmodel.util.StepExpressionHelper;
+import org.eclipselabs.mscript.language.internal.functionmodel.util.StepExpressionResult;
+import org.eclipselabs.mscript.language.interpreter.value.IValue;
 import org.eclipselabs.mscript.language.interpreter.value.IValueFactory;
 
 /**
@@ -22,19 +31,44 @@ import org.eclipselabs.mscript.language.interpreter.value.IValueFactory;
  */
 public class InterpreterContext implements IInterpreterContext {
 
+	private DiagnosticChain diagnostics;
 	private IValueFactory valueFactory;
 	private boolean staticOnly;
 	
 	private volatile boolean canceled;
+	
+	private IFunctor functor;
 	
 	private MultiStatus status = new MultiStatus(LanguagePlugin.PLUGIN_ID, 0, "", null);
 	
 	/**
 	 * 
 	 */
-	public InterpreterContext(IValueFactory valueFactory, boolean staticOnly) {
+	public InterpreterContext(DiagnosticChain diagnostics, IValueFactory valueFactory, boolean staticOnly) {
+		this.diagnostics = diagnostics;
 		this.valueFactory = valueFactory;
 		this.staticOnly = staticOnly;
+	}
+	
+	/**
+	 * @return the diagnosticChain
+	 */
+	public DiagnosticChain getDiagnostics() {
+		return diagnostics;
+	}
+	
+	/**
+	 * @return the functor
+	 */
+	public IFunctor getFunctor() {
+		return functor;
+	}
+	
+	/**
+	 * @param functor the functor to set
+	 */
+	public void setFunctor(IFunctor functor) {
+		this.functor = functor;
 	}
 
 	/* (non-Javadoc)
@@ -49,6 +83,36 @@ public class InterpreterContext implements IInterpreterContext {
 	 */
 	public boolean isStaticOnly() {
 		return staticOnly;
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.language.interpreter.IInterpreterContext#getFeatureValue(org.eclipselabs.mscript.language.ast.Expression)
+	 */
+	public IValue getFeatureValue(FeatureCall featureCall) {
+		if (featureCall.getTarget() instanceof SimpleName) {
+			SimpleName simpleName = (SimpleName) featureCall.getTarget();
+			IValue value = functor.getTemplateArgument(simpleName.getIdentifier());
+			if (value != null) {
+				return value;
+			}
+			if (functor.isInitialized()) {
+				IVariable variable = functor.getVariable(simpleName.getIdentifier());
+				if (variable != null) {
+					FeatureCallPart part = featureCall.getParts().get(0);
+					if (part instanceof OperationCall) {
+						OperationCall operationCall = (OperationCall) part;
+						if (operationCall.getArguments().size() == 1) {
+							Expression stepExpression = operationCall.getArguments().get(0);
+							StepExpressionResult stepExpressionResult = new StepExpressionHelper().evaluate(stepExpression, getDiagnostics());
+							if (stepExpressionResult != null) {
+								return variable.getValue(stepExpressionResult.getStep());
+							}
+						}
+					}
+				}
+			}
+		}
+		return null;
 	}
 	
 	/* (non-Javadoc)

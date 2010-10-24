@@ -6,8 +6,10 @@ import org.eclipselabs.mscript.language.ast.ArrayElementReference;
 import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.BeginExpression;
 import org.eclipselabs.mscript.language.ast.EndExpression;
+import org.eclipselabs.mscript.language.ast.FunctionDefinition;
 import org.eclipselabs.mscript.language.ast.Subscript;
 import org.eclipselabs.mscript.language.ast.UnitExpressionNumerator;
+import org.eclipselabs.mscript.language.functionmodel.util.FunctionConstructor;
 
 public class MscriptJavaValidator extends AbstractMscriptJavaValidator {
 
@@ -40,6 +42,11 @@ public class MscriptJavaValidator extends AbstractMscriptJavaValidator {
 		if (numerator.getFactors().isEmpty() && numerator.getOne() != 1) {
 			error("Invalid unit numerator", AstPackage.UNIT_EXPRESSION_NUMERATOR__ONE);
 		}
+	}
+	
+	@Check
+	public void checkFunctionDefinition(FunctionDefinition functionDefinition) {
+		new FunctionConstructor().construct(functionDefinition, getChain());
 	}
 	
 }

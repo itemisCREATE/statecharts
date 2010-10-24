@@ -11,13 +11,15 @@
 
 package org.eclipselabs.mscript.language.interpreter;
 
-import org.eclipse.core.runtime.IStatus;
+import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipselabs.mscript.language.ast.AdditiveExpression;
 import org.eclipselabs.mscript.language.ast.BooleanKind;
 import org.eclipselabs.mscript.language.ast.BooleanLiteral;
 import org.eclipselabs.mscript.language.ast.EqualityExpression;
 import org.eclipselabs.mscript.language.ast.Expression;
+import org.eclipselabs.mscript.language.ast.FeatureCall;
 import org.eclipselabs.mscript.language.ast.IfExpression;
 import org.eclipselabs.mscript.language.ast.IntegerLiteral;
 import org.eclipselabs.mscript.language.ast.LogicalAndExpression;
@@ -30,6 +32,7 @@ import org.eclipselabs.mscript.language.ast.UnaryExpression;
 import org.eclipselabs.mscript.language.ast.UnitConstructionOperator;
 import org.eclipselabs.mscript.language.internal.interpreter.InvalidUnitExpressionOperandException;
 import org.eclipselabs.mscript.language.internal.interpreter.UnitExpressionHelper;
+import org.eclipselabs.mscript.language.internal.util.EObjectDiagnostic;
 import org.eclipselabs.mscript.language.interpreter.value.IBooleanValue;
 import org.eclipselabs.mscript.language.interpreter.value.IValue;
 import org.eclipselabs.mscript.language.interpreter.value.InvalidValue;
@@ -57,44 +60,7 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 	public ExpressionValueEvaluator(IInterpreterContext context) {
 		this.context = context;
 	}
-	
-	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseAssignmentExpression(org.eclipselabs.mscript.language.ast.AssignmentExpression)
-	 */
-//	@Override
-//	public IValue caseAssignmentExpression(AssignmentExpression assignmentExpression) {
-//		IFeature feature = context.getFeature(assignmentExpression.getLeftHandSide());
-//		if (feature instanceof IVariable) {
-//			IValue value = doSwitch(assignmentExpression.getRightHandSide());
-//			if (value != null) {
-//				IVariable variable = (IVariable) feature;
-//				IValue convertedValue;
-//				if (variable.getDataType() != null) {
-//					convertedValue = value.convert(variable.getDataType());
-//				} else {
-//					if (variable.getValue().getDataType() == null) {
-//						convertedValue = value;
-//					} else {
-//						if (variable.getValue().getDataType().isAssignableFrom(value.getDataType())) {
-//							convertedValue = value.convert(variable.getValue().getDataType());
-//						} else if (value.getDataType().isAssignableFrom(variable.getValue().getDataType())) {
-//							convertedValue = value;
-//						} else {
-//							convertedValue = InvalidValue.SINGLETON;
-//						}
-//					}
-//				}
-//				if (convertedValue instanceof InvalidValue) {
-//					context.addStatus(new InterpreterStatus(IStatus.ERROR, "Illegal assignment", assignmentExpression, null));
-//				}
-//				variable.setValue(convertedValue);
-//				return convertedValue;
-//			}
-//		}
-//		context.addStatus(new InterpreterStatus(IStatus.ERROR, "Variable not found", assignmentExpression.getLeftHandSide(), null));
-//		return InvalidValue.SINGLETON;
-//	}
-	
+		
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.language.interpreter.AbstractExpressionEvaluator#caseAdditiveExpression(org.eclipselabs.mscript.language.ast.AdditiveExpression)
 	 */
@@ -102,7 +68,7 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 	public IValue caseAdditiveExpression(AdditiveExpression addSubtractExpression) {
 		IValue result = super.caseAdditiveExpression(addSubtractExpression);
 		if (result instanceof InvalidValue) {
-			context.addStatus(new InterpreterStatus(IStatus.ERROR, "Additive operation cannot not be performed on provided operands", addSubtractExpression, null));
+			context.getDiagnostics().add(new EObjectDiagnostic(Diagnostic.ERROR, "Additive operation cannot not be performed on provided operands", addSubtractExpression));
 		}
 		return result;
 	}
@@ -128,7 +94,7 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 	public IValue caseMultiplicativeExpression(MultiplicativeExpression multiplyDivideExpression) {
 		IValue result = super.caseMultiplicativeExpression(multiplyDivideExpression);
 		if (result instanceof InvalidValue) {
-			context.addStatus(new InterpreterStatus(IStatus.ERROR, "Multiplicative operation cannot not be performed on provided operands", multiplyDivideExpression, null));
+			context.getDiagnostics().add(new EObjectDiagnostic(Diagnostic.ERROR, "Multiplicative operation cannot not be performed on provided operands", multiplyDivideExpression));
 		}
 		return result;
 	}
@@ -174,7 +140,7 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 					return context.getValueFactory().createBooleanValue(false);
 				}
 			} else {
-				context.addStatus(new InterpreterStatus(IStatus.ERROR, "Logical expression operands must be boolean", operand, null));
+				context.getDiagnostics().add(new EObjectDiagnostic(Diagnostic.ERROR, "Logical expression operands must be boolean", operand));
 				return InvalidValue.SINGLETON;
 			}
 		}
@@ -194,7 +160,7 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 					return context.getValueFactory().createBooleanValue(true);
 				}
 			} else {
-				context.addStatus(new InterpreterStatus(IStatus.ERROR, "Logical expression operands must be boolean", operand, null));
+				context.getDiagnostics().add(new EObjectDiagnostic(Diagnostic.ERROR, "Logical expression operands must be boolean", operand));
 				return InvalidValue.SINGLETON;
 			}
 		}
@@ -218,7 +184,7 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 			throw new IllegalArgumentException();
 		}
 		if (result instanceof InvalidValue) {
-			context.addStatus(new InterpreterStatus(IStatus.ERROR, "Invalid equality operation operands", equalityExpression, null));
+			context.getDiagnostics().add(new EObjectDiagnostic(Diagnostic.ERROR, "Invalid equality operation operands", equalityExpression));
 		}
 		return result;
 	}
@@ -252,7 +218,7 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 			}
 		}
 		if (result instanceof InvalidValue) {
-			context.addStatus(new InterpreterStatus(IStatus.ERROR, "Invalid relational operation operands", relationalExpression, null));
+			context.getDiagnostics().add(new EObjectDiagnostic(Diagnostic.ERROR, "Invalid relational operation operands", relationalExpression));
 		}
 		return result;
 	}
@@ -280,7 +246,7 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 			throw new IllegalArgumentException();
 		}
 		if (result instanceof InvalidValue) {
-			context.addStatus(new InterpreterStatus(IStatus.ERROR, "Invalid unary operation operand", unaryExpression, null));
+			context.getDiagnostics().add(new EObjectDiagnostic(Diagnostic.ERROR, "Invalid unary operation operand", unaryExpression));
 		}
 		return result;
 	}
@@ -326,7 +292,7 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 				return doSwitch(ifExpression.getThenExpression());
 			}
 		} else {
-			context.addStatus(new InterpreterStatus(IStatus.ERROR, "Condition expression must be boolean", ifExpression.getCondition(), null));
+			context.getDiagnostics().add(new EObjectDiagnostic(Diagnostic.ERROR, "Condition expression must be boolean", ifExpression.getCondition()));
 			return InvalidValue.SINGLETON;
 		}
 		return doSwitch(ifExpression.getElseExpression());
@@ -344,9 +310,22 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 			}
 			return new UnitValue(unit);
 		} catch (InvalidUnitExpressionOperandException e) {
-			context.addStatus(new InterpreterStatus(IStatus.ERROR, "Invalid unit", unitConstructionOperator.getUnit(), null));
+			context.getDiagnostics().add(new EObjectDiagnostic(Diagnostic.ERROR, "Invalid unit", unitConstructionOperator.getUnit()));
 		}
 		return InvalidValue.SINGLETON;
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseFeatureCall(org.eclipselabs.mscript.language.ast.FeatureCall)
+	 */
+	@Override
+	public IValue caseFeatureCall(FeatureCall featureCall) {
+		IValue value = context.getFeatureValue(featureCall);
+		if (value == null) {
+			context.getDiagnostics().add(new EObjectDiagnostic(Diagnostic.ERROR, "Feature not found", featureCall));
+			return InvalidValue.SINGLETON;
+		}
+		return value;
 	}
 	
 //	/* (non-Javadoc)
@@ -390,7 +369,7 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 //				}
 //			}
 //		}
-//		context.addStatus(new InterpreterStatus(IStatus.ERROR, "Feature call could not be resolved", featureCall, null));
+//		context.getDiagnosticChain().add(new InterpreterStatus(Diagnostic.ERROR, "Feature call could not be resolved", featureCall));
 //		return InvalidValue.SINGLETON;
 //	}
 	
@@ -407,7 +386,7 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 				realType.setUnit(TypeSystemUtil.createUnit());
 			}
 		} catch (InvalidUnitExpressionOperandException e) {
-			context.addStatus(new InterpreterStatus(IStatus.ERROR, "Invalid unit", realLiteral.getUnit(), null));
+			context.getDiagnostics().add(new EObjectDiagnostic(Diagnostic.ERROR, "Invalid unit", realLiteral.getUnit()));
 			return InvalidValue.SINGLETON;
 		}
 		return context.getValueFactory().createRealValue(realType, realLiteral.getValue());
@@ -426,7 +405,7 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 				integerType.setUnit(TypeSystemUtil.createUnit());
 			}
 		} catch (InvalidUnitExpressionOperandException e) {
-			context.addStatus(new InterpreterStatus(IStatus.ERROR, "Invalid unit", integerLiteral.getUnit(), null));
+			context.getDiagnostics().add(new EObjectDiagnostic(Diagnostic.ERROR, "Invalid unit", integerLiteral.getUnit()));
 			return InvalidValue.SINGLETON;
 		}
 		return context.getValueFactory().createIntegerValue(integerType, integerLiteral.getValue());
@@ -457,8 +436,17 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 //		if (feature instanceof IVariable) {
 //			return ((IVariable) feature).getValue();
 //		}
-//		context.addStatus(new InterpreterStatus(IStatus.ERROR, "Symbol reference could not be resolved", symbolReference, null));
+//		context.getDiagnosticChain().add(new InterpreterStatus(Diagnostic.ERROR, "Symbol reference could not be resolved", symbolReference));
 //		return InvalidValue.SINGLETON;
 //	}
+	
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#defaultCase(org.eclipse.emf.ecore.EObject)
+	 */
+	@Override
+	public IValue defaultCase(EObject object) {
+		context.getDiagnostics().add(new EObjectDiagnostic(Diagnostic.ERROR, "Invalid expression", object));
+		return InvalidValue.SINGLETON;
+	}
 	
 }

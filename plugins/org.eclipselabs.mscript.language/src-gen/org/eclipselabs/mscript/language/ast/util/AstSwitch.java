@@ -222,10 +222,10 @@ public class AstSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AstPackage.EQUATION:
+      case AstPackage.EQUATION_DEFINITION:
       {
-        Equation equation = (Equation)theEObject;
-        T result = caseEquation(equation);
+        EquationDefinition equationDefinition = (EquationDefinition)theEObject;
+        T result = caseEquationDefinition(equationDefinition);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -395,45 +395,6 @@ public class AstSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AstPackage.FEATURE_CALL_PART:
-      {
-        FeatureCallPart featureCallPart = (FeatureCallPart)theEObject;
-        T result = caseFeatureCallPart(featureCallPart);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case AstPackage.FEATURE_REFERENCE:
-      {
-        FeatureReference featureReference = (FeatureReference)theEObject;
-        T result = caseFeatureReference(featureReference);
-        if (result == null) result = caseFeatureCallPart(featureReference);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case AstPackage.ARRAY_ELEMENT_REFERENCE:
-      {
-        ArrayElementReference arrayElementReference = (ArrayElementReference)theEObject;
-        T result = caseArrayElementReference(arrayElementReference);
-        if (result == null) result = caseFeatureCallPart(arrayElementReference);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case AstPackage.OPERATION_CALL:
-      {
-        OperationCall operationCall = (OperationCall)theEObject;
-        T result = caseOperationCall(operationCall);
-        if (result == null) result = caseFeatureCallPart(operationCall);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case AstPackage.ITERATOR_CALL:
-      {
-        IteratorCall iteratorCall = (IteratorCall)theEObject;
-        T result = caseIteratorCall(iteratorCall);
-        if (result == null) result = caseFeatureCallPart(iteratorCall);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case AstPackage.LITERAL:
       {
         Literal literal = (Literal)theEObject;
@@ -489,18 +450,42 @@ public class AstSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AstPackage.SIMPLE_NAME:
+      case AstPackage.FEATURE_CALL_PART:
       {
-        SimpleName simpleName = (SimpleName)theEObject;
-        T result = caseSimpleName(simpleName);
-        if (result == null) result = caseExpression(simpleName);
+        FeatureCallPart featureCallPart = (FeatureCallPart)theEObject;
+        T result = caseFeatureCallPart(featureCallPart);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AstPackage.QUALIFIED_NAME:
+      case AstPackage.FEATURE_REFERENCE:
       {
-        QualifiedName qualifiedName = (QualifiedName)theEObject;
-        T result = caseQualifiedName(qualifiedName);
+        FeatureReference featureReference = (FeatureReference)theEObject;
+        T result = caseFeatureReference(featureReference);
+        if (result == null) result = caseFeatureCallPart(featureReference);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AstPackage.ARRAY_ELEMENT_REFERENCE:
+      {
+        ArrayElementReference arrayElementReference = (ArrayElementReference)theEObject;
+        T result = caseArrayElementReference(arrayElementReference);
+        if (result == null) result = caseFeatureCallPart(arrayElementReference);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AstPackage.OPERATION_CALL:
+      {
+        OperationCall operationCall = (OperationCall)theEObject;
+        T result = caseOperationCall(operationCall);
+        if (result == null) result = caseFeatureCallPart(operationCall);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AstPackage.ITERATOR_CALL:
+      {
+        IteratorCall iteratorCall = (IteratorCall)theEObject;
+        T result = caseIteratorCall(iteratorCall);
+        if (result == null) result = caseFeatureCallPart(iteratorCall);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -555,6 +540,13 @@ public class AstSwitch<T>
         EndExpression endExpression = (EndExpression)theEObject;
         T result = caseEndExpression(endExpression);
         if (result == null) result = caseExpression(endExpression);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AstPackage.QUALIFIED_NAME:
+      {
+        QualifiedName qualifiedName = (QualifiedName)theEObject;
+        T result = caseQualifiedName(qualifiedName);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -686,6 +678,14 @@ public class AstSwitch<T>
         FeatureCall featureCall = (FeatureCall)theEObject;
         T result = caseFeatureCall(featureCall);
         if (result == null) result = caseExpression(featureCall);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AstPackage.SIMPLE_NAME:
+      {
+        SimpleName simpleName = (SimpleName)theEObject;
+        T result = caseSimpleName(simpleName);
+        if (result == null) result = caseExpression(simpleName);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -959,17 +959,17 @@ public class AstSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Equation</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Equation Definition</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Equation</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Equation Definition</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseEquation(Equation object)
+  public T caseEquationDefinition(EquationDefinition object)
   {
     return null;
   }
@@ -1279,86 +1279,6 @@ public class AstSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Feature Call Part</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Feature Call Part</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseFeatureCallPart(FeatureCallPart object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Feature Reference</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Feature Reference</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseFeatureReference(FeatureReference object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Array Element Reference</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Array Element Reference</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseArrayElementReference(ArrayElementReference object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Operation Call</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Operation Call</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseOperationCall(OperationCall object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Iterator Call</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Iterator Call</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseIteratorCall(IteratorCall object)
-  {
-    return null;
-  }
-
-  /**
    * Returns the result of interpreting the object as an instance of '<em>Literal</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -1455,33 +1375,81 @@ public class AstSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Simple Name</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Feature Call Part</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Simple Name</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Feature Call Part</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseSimpleName(SimpleName object)
+  public T caseFeatureCallPart(FeatureCallPart object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Qualified Name</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Feature Reference</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Qualified Name</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Feature Reference</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseQualifiedName(QualifiedName object)
+  public T caseFeatureReference(FeatureReference object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Array Element Reference</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Array Element Reference</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseArrayElementReference(ArrayElementReference object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Operation Call</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Operation Call</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseOperationCall(OperationCall object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Iterator Call</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Iterator Call</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseIteratorCall(IteratorCall object)
   {
     return null;
   }
@@ -1594,6 +1562,22 @@ public class AstSwitch<T>
    * @generated
    */
   public T caseEndExpression(EndExpression object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Qualified Name</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Qualified Name</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseQualifiedName(QualifiedName object)
   {
     return null;
   }
@@ -1866,6 +1850,22 @@ public class AstSwitch<T>
    * @generated
    */
   public T caseFeatureCall(FeatureCall object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Simple Name</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Simple Name</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseSimpleName(SimpleName object)
   {
     return null;
   }

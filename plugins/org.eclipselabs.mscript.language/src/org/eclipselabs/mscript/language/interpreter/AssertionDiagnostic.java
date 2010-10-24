@@ -14,12 +14,13 @@ package org.eclipselabs.mscript.language.interpreter;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipselabs.mscript.language.ast.AssertionStatusKind;
+import org.eclipselabs.mscript.language.internal.util.EObjectDiagnostic;
 
 /**
  * @author Andreas Unger
  *
  */
-public class AssertionStatus extends InterpreterStatus {
+public class AssertionDiagnostic extends EObjectDiagnostic {
 
 	/**
 	 * @param severity
@@ -27,7 +28,7 @@ public class AssertionStatus extends InterpreterStatus {
 	 * @param source
 	 * @param featureId
 	 */
-	public AssertionStatus(int severity, String message, EObject source, Integer featureId) {
+	public AssertionDiagnostic(int severity, String message, EObject source, Integer featureId) {
 		super(severity, message, source, featureId);
 	}
 

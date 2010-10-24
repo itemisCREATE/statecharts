@@ -11,7 +11,9 @@
 
 package org.eclipselabs.mscript.language.interpreter;
 
-import org.eclipse.core.runtime.IStatus;
+import org.eclipse.emf.common.util.DiagnosticChain;
+import org.eclipselabs.mscript.language.ast.FeatureCall;
+import org.eclipselabs.mscript.language.interpreter.value.IValue;
 import org.eclipselabs.mscript.language.interpreter.value.IValueFactory;
 
 /**
@@ -26,10 +28,14 @@ public interface IInterpreterContext {
 
 	boolean isStaticOnly();
 	
-	IStatus getStatus();
-	void addStatus(IStatus status);
+	IValue getFeatureValue(FeatureCall featureCall);
+
+	DiagnosticChain getDiagnostics();
 		
 	void setCanceled(boolean canceled);
 	boolean isCanceled();
+
+	IFunctor getFunctor();
+	void setFunctor(IFunctor functor);
 	
 }

@@ -20,7 +20,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getOutputParameters <em>Output Parameters</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getAssertions <em>Assertions</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getFunctors <em>Functors</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getVariables <em>Variables</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getStateVariables <em>State Variables</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getEquations <em>Equations</em>}</li>
  * </ul>
  * </p>
@@ -112,24 +112,24 @@ public interface FunctionDefinition extends TypeDefinition
   EList<FunctorDeclaration> getFunctors();
 
   /**
-   * Returns the value of the '<em><b>Variables</b></em>' containment reference list.
+   * Returns the value of the '<em><b>State Variables</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipselabs.mscript.language.ast.VariableDeclaration}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Variables</em>' containment reference list isn't clear,
+   * If the meaning of the '<em>State Variables</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Variables</em>' containment reference list.
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getFunctionDefinition_Variables()
+   * @return the value of the '<em>State Variables</em>' containment reference list.
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getFunctionDefinition_StateVariables()
    * @model containment="true"
    * @generated
    */
-  EList<VariableDeclaration> getVariables();
+  EList<VariableDeclaration> getStateVariables();
 
   /**
    * Returns the value of the '<em><b>Equations</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipselabs.mscript.language.ast.Equation}.
+   * The list contents are of type {@link org.eclipselabs.mscript.language.ast.EquationDefinition}.
    * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Equations</em>' containment reference list isn't clear,
@@ -141,6 +141,6 @@ public interface FunctionDefinition extends TypeDefinition
    * @model containment="true"
    * @generated
    */
-  EList<Equation> getEquations();
+  EList<EquationDefinition> getEquations();
 
 } // FunctionDefinition
