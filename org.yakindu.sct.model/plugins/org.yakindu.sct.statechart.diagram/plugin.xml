@@ -333,5 +333,30 @@
          </propertySection>
       </propertySections>
    </extension>
+   <extension
+         point="org.eclipse.gmf.runtime.emf.ui.modelingAssistantProviders">
+      <modelingAssistantProvider
+            class="org.yakindu.sct.statechart.diagram.assistent.StatechartModelingAssistantProvider">
+         <Priority
+               name="Lowest">
+         </Priority>
+         <object
+               class="org.yakindu.sct.statechart.diagram.editparts.RegionEditPart"
+               id="Region">
+         </object>
+         <object
+               class="org.yakindu.sct.statechart.diagram.editparts.StateEditPart"
+               id="State">
+         </object>
+         <object
+               class="org.yakindu.sct.statechart.diagram.editparts.RegionCompartmentEditPart"
+               id="Region_Compartment">
+         </object>
+         <object
+               class="org.yakindu.sct.statechart.diagram.editparts.StateCompartmentEditPart"
+               id="State_Compartment">
+         </object>
+      </modelingAssistantProvider>
+   </extension>
 
 </plugin>
