@@ -17,7 +17,9 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.swt.graphics.Color;
 import org.yakindu.sct.statechart.diagram.editor.figures.RegionFigure;
+import org.yakindu.sct.statechart.diagram.preferences.StatechartPreferenceManager;
 
 /**
  * 
@@ -32,15 +34,18 @@ public class RegionEditPart extends ShapeNodeEditPart {
 	}
 
 	@Override
-	protected void createDefaultEditPolicies() {
-		super.createDefaultEditPolicies();
-	}
-
-	@Override
 	protected NodeFigure createNodeFigure() {
 		final NodeFigure figure = new DefaultSizeNodeFigure(40, 40);
 		figure.setLayoutManager(new StackLayout());
 		figure.add(new RegionFigure(getMapMode()));
+		return figure;
+	}
+
+	@Override
+	public IFigure getFigure() {
+		IFigure figure = super.getFigure();
+		Color regionColor = StatechartPreferenceManager.getInstance().getRegionColor();
+		figure.setBackgroundColor(regionColor);
 		return figure;
 	}
 
@@ -58,10 +63,10 @@ public class RegionEditPart extends ShapeNodeEditPart {
 		if (childEditPart instanceof RegionCompartmentEditPart) {
 			IFigure pane = getPrimaryShape().getCompartmentPane();
 			pane.setLayoutManager(new StackLayout());
-			IFigure figure2 = ((RegionCompartmentEditPart) childEditPart).getFigure();
+			IFigure figure2 = ((RegionCompartmentEditPart) childEditPart)
+					.getFigure();
 			pane.add(figure2);
-		}
-		else
+		} else
 			super.addChildVisual(childEditPart, index);
 	}
 }
