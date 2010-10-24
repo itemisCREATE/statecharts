@@ -10,11 +10,7 @@
  */
 package org.yakindu.sct.statechart.diagram.editparts;
 
-import java.util.Collections;
-import java.util.List;
-
 import org.eclipse.draw2d.Connection;
-import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionNodeEditPart;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.statechart.diagram.editor.figures.TransitionFigure;
@@ -34,12 +30,6 @@ public class TransitionEditPart extends ConnectionNodeEditPart {
 	@Override
 	protected Connection createConnectionFigure() {
 		return new TransitionFigure(getMapMode());
-	}
-	
-	@Override
-	public void setSource(EditPart editPart) {
-		// TODO Auto-generated method stub
-		super.setSource(editPart);
 	}
 	
 }
