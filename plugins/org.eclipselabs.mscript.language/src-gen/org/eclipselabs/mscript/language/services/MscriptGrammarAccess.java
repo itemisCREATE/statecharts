@@ -39,15 +39,15 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameQualifiedNameParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cElementsAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cElementsNamespaceMemberParserRuleCall_3_0 = (RuleCall)cElementsAssignment_3.eContents().get(0);
+		private final Assignment cMembersAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cMembersNamespaceMemberParserRuleCall_3_0 = (RuleCall)cMembersAssignment_3.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//NamespaceDefinition:
-		//	"namespace" name=QualifiedName "{" elements+=NamespaceMember* "}";
+		//	"namespace" name=QualifiedName "{" members+=NamespaceMember* "}";
 		public ParserRule getRule() { return rule; }
 
-		//"namespace" name=QualifiedName "{" elements+=NamespaceMember* "}"
+		//"namespace" name=QualifiedName "{" members+=NamespaceMember* "}"
 		public Group getGroup() { return cGroup; }
 
 		//"namespace"
@@ -62,11 +62,11 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
 
-		//elements+=NamespaceMember*
-		public Assignment getElementsAssignment_3() { return cElementsAssignment_3; }
+		//members+=NamespaceMember*
+		public Assignment getMembersAssignment_3() { return cMembersAssignment_3; }
 
 		//NamespaceMember
-		public RuleCall getElementsNamespaceMemberParserRuleCall_3_0() { return cElementsNamespaceMemberParserRuleCall_3_0; }
+		public RuleCall getMembersNamespaceMemberParserRuleCall_3_0() { return cMembersNamespaceMemberParserRuleCall_3_0; }
 
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
@@ -3509,7 +3509,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//NamespaceDefinition:
-	//	"namespace" name=QualifiedName "{" elements+=NamespaceMember* "}";
+	//	"namespace" name=QualifiedName "{" members+=NamespaceMember* "}";
 	public NamespaceDefinitionElements getNamespaceDefinitionAccess() {
 		return (pNamespaceDefinition != null) ? pNamespaceDefinition : (pNamespaceDefinition = new NamespaceDefinitionElements());
 	}

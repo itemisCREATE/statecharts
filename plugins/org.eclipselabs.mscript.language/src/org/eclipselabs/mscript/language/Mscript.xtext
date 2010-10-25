@@ -21,7 +21,7 @@ Mscript :
 	
 NamespaceDefinition :
 	'namespace' name=QualifiedName '{'
-		(elements+=NamespaceMember)*
+		(members+=NamespaceMember)*
 	'}';
 
 NamespaceMember :

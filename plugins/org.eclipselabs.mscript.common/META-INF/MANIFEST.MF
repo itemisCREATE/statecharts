@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Mscript Common
+Bundle-SymbolicName: org.eclipselabs.mscript.common
+Bundle-Version: 0.1.0.qualifier
+Bundle-Activator: org.eclipselabs.mscript.common.CommonPlugin
+Bundle-Vendor: Mscript Project
+Require-Bundle: org.eclipse.core.runtime
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
+Export-Package: org.eclipselabs.mscript.common.registry

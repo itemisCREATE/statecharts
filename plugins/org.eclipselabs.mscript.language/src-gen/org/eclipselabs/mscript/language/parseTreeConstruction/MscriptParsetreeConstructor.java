@@ -171,11 +171,11 @@ protected class Mscript_NamespacesAssignment extends AssignmentToken  {
 /************ begin Rule NamespaceDefinition ****************
  *
  * NamespaceDefinition:
- * 	"namespace" name=QualifiedName "{" elements+=NamespaceMember* "}";
+ * 	"namespace" name=QualifiedName "{" members+=NamespaceMember* "}";
  *
  **/
 
-// "namespace" name=QualifiedName "{" elements+=NamespaceMember* "}"
+// "namespace" name=QualifiedName "{" members+=NamespaceMember* "}"
 protected class NamespaceDefinition_Group extends GroupToken {
 	
 	public NamespaceDefinition_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -293,16 +293,16 @@ protected class NamespaceDefinition_LeftCurlyBracketKeyword_2 extends KeywordTok
 
 }
 
-// elements+=NamespaceMember*
-protected class NamespaceDefinition_ElementsAssignment_3 extends AssignmentToken  {
+// members+=NamespaceMember*
+protected class NamespaceDefinition_MembersAssignment_3 extends AssignmentToken  {
 	
-	public NamespaceDefinition_ElementsAssignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public NamespaceDefinition_MembersAssignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getNamespaceDefinitionAccess().getElementsAssignment_3();
+		return grammarAccess.getNamespaceDefinitionAccess().getMembersAssignment_3();
 	}
 
     @Override
@@ -315,13 +315,13 @@ protected class NamespaceDefinition_ElementsAssignment_3 extends AssignmentToken
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("elements",false)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("elements");
+		if((value = eObjectConsumer.getConsumable("members",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("members");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getNamespaceMemberRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getNamespaceDefinitionAccess().getElementsNamespaceMemberParserRuleCall_3_0(); 
+				element = grammarAccess.getNamespaceDefinitionAccess().getMembersNamespaceMemberParserRuleCall_3_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -333,7 +333,7 @@ protected class NamespaceDefinition_ElementsAssignment_3 extends AssignmentToken
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new NamespaceDefinition_ElementsAssignment_3(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new NamespaceDefinition_MembersAssignment_3(lastRuleCallOrigin, next, actIndex, consumed);
 			case 1: return new NamespaceDefinition_LeftCurlyBracketKeyword_2(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
@@ -355,7 +355,7 @@ protected class NamespaceDefinition_RightCurlyBracketKeyword_4 extends KeywordTo
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new NamespaceDefinition_ElementsAssignment_3(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new NamespaceDefinition_MembersAssignment_3(lastRuleCallOrigin, this, 0, inst);
 			case 1: return new NamespaceDefinition_LeftCurlyBracketKeyword_2(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	

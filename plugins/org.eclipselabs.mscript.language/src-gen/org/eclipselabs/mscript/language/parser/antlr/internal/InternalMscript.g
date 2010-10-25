@@ -172,9 +172,9 @@ ruleNamespaceDefinition returns [EObject current=null]
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getNamespaceDefinitionAccess().getElementsNamespaceMemberParserRuleCall_3_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getNamespaceDefinitionAccess().getMembersNamespaceMemberParserRuleCall_3_0(), currentNode); 
 	    }
-		lv_elements_3_0=ruleNamespaceMember		{
+		lv_members_3_0=ruleNamespaceMember		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getNamespaceDefinitionRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -182,8 +182,8 @@ ruleNamespaceDefinition returns [EObject current=null]
 	        try {
 	       		add(
 	       			$current, 
-	       			"elements",
-	        		lv_elements_3_0, 
+	       			"members",
+	        		lv_members_3_0, 
 	        		"NamespaceMember", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {

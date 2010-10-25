@@ -232,23 +232,23 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleNamespaceDefinition
-    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:134:1: ruleNamespaceDefinition returns [EObject current=null] : ( 'namespace' ( (lv_name_1_0= ruleQualifiedName ) ) '{' ( (lv_elements_3_0= ruleNamespaceMember ) )* '}' ) ;
+    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:134:1: ruleNamespaceDefinition returns [EObject current=null] : ( 'namespace' ( (lv_name_1_0= ruleQualifiedName ) ) '{' ( (lv_members_3_0= ruleNamespaceMember ) )* '}' ) ;
     public final EObject ruleNamespaceDefinition() throws RecognitionException {
         EObject current = null;
 
         EObject lv_name_1_0 = null;
 
-        EObject lv_elements_3_0 = null;
+        EObject lv_members_3_0 = null;
 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:139:6: ( ( 'namespace' ( (lv_name_1_0= ruleQualifiedName ) ) '{' ( (lv_elements_3_0= ruleNamespaceMember ) )* '}' ) )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:140:1: ( 'namespace' ( (lv_name_1_0= ruleQualifiedName ) ) '{' ( (lv_elements_3_0= ruleNamespaceMember ) )* '}' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:139:6: ( ( 'namespace' ( (lv_name_1_0= ruleQualifiedName ) ) '{' ( (lv_members_3_0= ruleNamespaceMember ) )* '}' ) )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:140:1: ( 'namespace' ( (lv_name_1_0= ruleQualifiedName ) ) '{' ( (lv_members_3_0= ruleNamespaceMember ) )* '}' )
             {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:140:1: ( 'namespace' ( (lv_name_1_0= ruleQualifiedName ) ) '{' ( (lv_elements_3_0= ruleNamespaceMember ) )* '}' )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:140:3: 'namespace' ( (lv_name_1_0= ruleQualifiedName ) ) '{' ( (lv_elements_3_0= ruleNamespaceMember ) )* '}'
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:140:1: ( 'namespace' ( (lv_name_1_0= ruleQualifiedName ) ) '{' ( (lv_members_3_0= ruleNamespaceMember ) )* '}' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:140:3: 'namespace' ( (lv_name_1_0= ruleQualifiedName ) ) '{' ( (lv_members_3_0= ruleNamespaceMember ) )* '}'
             {
             match(input,12,FOLLOW_12_in_ruleNamespaceDefinition211); 
 
@@ -294,7 +294,7 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
                     createLeafNode(grammarAccess.getNamespaceDefinitionAccess().getLeftCurlyBracketKeyword_2(), null); 
                 
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:172:1: ( (lv_elements_3_0= ruleNamespaceMember ) )*
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:172:1: ( (lv_members_3_0= ruleNamespaceMember ) )*
             loop2:
             do {
                 int alt2=2;
@@ -307,16 +307,16 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
                 switch (alt2) {
             	case 1 :
-            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:173:1: (lv_elements_3_0= ruleNamespaceMember )
+            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:173:1: (lv_members_3_0= ruleNamespaceMember )
             	    {
-            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:173:1: (lv_elements_3_0= ruleNamespaceMember )
-            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:174:3: lv_elements_3_0= ruleNamespaceMember
+            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:173:1: (lv_members_3_0= ruleNamespaceMember )
+            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:174:3: lv_members_3_0= ruleNamespaceMember
             	    {
             	     
-            	    	        currentNode=createCompositeNode(grammarAccess.getNamespaceDefinitionAccess().getElementsNamespaceMemberParserRuleCall_3_0(), currentNode); 
+            	    	        currentNode=createCompositeNode(grammarAccess.getNamespaceDefinitionAccess().getMembersNamespaceMemberParserRuleCall_3_0(), currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleNamespaceMember_in_ruleNamespaceDefinition263);
-            	    lv_elements_3_0=ruleNamespaceMember();
+            	    lv_members_3_0=ruleNamespaceMember();
             	    _fsp--;
 
 
@@ -327,8 +327,8 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
             	    	        try {
             	    	       		add(
             	    	       			current, 
-            	    	       			"elements",
-            	    	        		lv_elements_3_0, 
+            	    	       			"members",
+            	    	        		lv_members_3_0, 
             	    	        		"NamespaceMember", 
             	    	        		currentNode);
             	    	        } catch (ValueConverterException vce) {

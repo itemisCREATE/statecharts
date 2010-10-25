@@ -10,7 +10,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="NamespaceDefinition" eSuperTypes="#//NamespaceMember">
     <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="#//QualifiedName"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="members" upperBound="-1"
         eType="#//NamespaceMember" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NamespaceMember"/>

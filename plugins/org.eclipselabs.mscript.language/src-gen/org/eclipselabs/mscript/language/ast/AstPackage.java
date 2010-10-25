@@ -127,13 +127,13 @@ public interface AstPackage extends EPackage
   int NAMESPACE_DEFINITION__NAME = NAMESPACE_MEMBER_FEATURE_COUNT + 0;
 
   /**
-   * The feature id for the '<em><b>Elements</b></em>' containment reference list.
+   * The feature id for the '<em><b>Members</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int NAMESPACE_DEFINITION__ELEMENTS = NAMESPACE_MEMBER_FEATURE_COUNT + 1;
+  int NAMESPACE_DEFINITION__MEMBERS = NAMESPACE_MEMBER_FEATURE_COUNT + 1;
 
   /**
    * The number of structural features of the '<em>Namespace Definition</em>' class.
@@ -2743,15 +2743,15 @@ public interface AstPackage extends EPackage
   EReference getNamespaceDefinition_Name();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.ast.NamespaceDefinition#getElements <em>Elements</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.ast.NamespaceDefinition#getMembers <em>Members</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Elements</em>'.
-   * @see org.eclipselabs.mscript.language.ast.NamespaceDefinition#getElements()
+   * @return the meta object for the containment reference list '<em>Members</em>'.
+   * @see org.eclipselabs.mscript.language.ast.NamespaceDefinition#getMembers()
    * @see #getNamespaceDefinition()
    * @generated
    */
-  EReference getNamespaceDefinition_Elements();
+  EReference getNamespaceDefinition_Members();
 
   /**
    * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.NamespaceMember <em>Namespace Member</em>}'.
@@ -4745,12 +4745,12 @@ public interface AstPackage extends EPackage
     EReference NAMESPACE_DEFINITION__NAME = eINSTANCE.getNamespaceDefinition_Name();
 
     /**
-     * The meta object literal for the '<em><b>Elements</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Members</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference NAMESPACE_DEFINITION__ELEMENTS = eINSTANCE.getNamespaceDefinition_Elements();
+    EReference NAMESPACE_DEFINITION__MEMBERS = eINSTANCE.getNamespaceDefinition_Members();
 
     /**
      * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.NamespaceMemberImpl <em>Namespace Member</em>}' class.

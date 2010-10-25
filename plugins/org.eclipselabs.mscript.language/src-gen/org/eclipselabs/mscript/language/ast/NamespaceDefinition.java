@@ -16,7 +16,7 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipselabs.mscript.language.ast.NamespaceDefinition#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.NamespaceDefinition#getElements <em>Elements</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.NamespaceDefinition#getMembers <em>Members</em>}</li>
  * </ul>
  * </p>
  *
@@ -53,19 +53,19 @@ public interface NamespaceDefinition extends NamespaceMember
   void setName(QualifiedName value);
 
   /**
-   * Returns the value of the '<em><b>Elements</b></em>' containment reference list.
+   * Returns the value of the '<em><b>Members</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipselabs.mscript.language.ast.NamespaceMember}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Elements</em>' containment reference list isn't clear,
+   * If the meaning of the '<em>Members</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Elements</em>' containment reference list.
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getNamespaceDefinition_Elements()
+   * @return the value of the '<em>Members</em>' containment reference list.
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getNamespaceDefinition_Members()
    * @model containment="true"
    * @generated
    */
-  EList<NamespaceMember> getElements();
+  EList<NamespaceMember> getMembers();
 
 } // NamespaceDefinition

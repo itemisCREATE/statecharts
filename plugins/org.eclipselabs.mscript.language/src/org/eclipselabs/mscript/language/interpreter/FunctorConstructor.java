@@ -11,6 +11,8 @@
 
 package org.eclipselabs.mscript.language.interpreter;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipselabs.mscript.language.ast.FunctionDefinition;
@@ -29,11 +31,22 @@ import org.eclipselabs.mscript.language.interpreter.value.IValue;
  */
 public class FunctorConstructor {
 
-	public IFunctor construct(IInterpreterContext context, FunctionDefinition functionDefinition, Map<String, IValue> templateArguments) {
+	public IFunctor construct(IInterpreterContext context, FunctionDefinition functionDefinition, List<IValue> templateArguments) {
+		if (functionDefinition.getTemplateParameters().size() != templateArguments.size()) {
+			throw new IllegalArgumentException("Number of template arguments must be equal to number of template parameters of function definition");
+		}
+		
+		Map<String, IValue> templateArgumentMap = new HashMap<String, IValue>();
+		int i = 0;
+		for (ParameterDeclaration parameterDeclaration : functionDefinition.getTemplateParameters()) {
+			templateArgumentMap.put(parameterDeclaration.getName(), templateArguments.get(i));
+			++i;
+		}
+		
 		Function function = new FunctionConstructor().construct(functionDefinition, context.getDiagnostics());
 
 		Functor functor = new Functor();
-		functor.setTemplateArguments(templateArguments);
+		functor.setTemplateArguments(templateArgumentMap);
 		functor.setFunction(function);
 
 		context.setFunctor(functor);

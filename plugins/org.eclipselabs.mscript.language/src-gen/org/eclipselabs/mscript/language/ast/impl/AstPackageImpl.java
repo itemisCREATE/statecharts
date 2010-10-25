@@ -796,7 +796,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getNamespaceDefinition_Elements()
+  public EReference getNamespaceDefinition_Members()
   {
     return (EReference)namespaceDefinitionEClass.getEStructuralFeatures().get(1);
   }
@@ -2666,7 +2666,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
 
     namespaceDefinitionEClass = createEClass(NAMESPACE_DEFINITION);
     createEReference(namespaceDefinitionEClass, NAMESPACE_DEFINITION__NAME);
-    createEReference(namespaceDefinitionEClass, NAMESPACE_DEFINITION__ELEMENTS);
+    createEReference(namespaceDefinitionEClass, NAMESPACE_DEFINITION__MEMBERS);
 
     namespaceMemberEClass = createEClass(NAMESPACE_MEMBER);
 
@@ -3011,7 +3011,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
 
     initEClass(namespaceDefinitionEClass, NamespaceDefinition.class, "NamespaceDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getNamespaceDefinition_Name(), this.getQualifiedName(), null, "name", null, 0, 1, NamespaceDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getNamespaceDefinition_Elements(), this.getNamespaceMember(), null, "elements", null, 0, -1, NamespaceDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getNamespaceDefinition_Members(), this.getNamespaceMember(), null, "members", null, 0, -1, NamespaceDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(namespaceMemberEClass, NamespaceMember.class, "NamespaceMember", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

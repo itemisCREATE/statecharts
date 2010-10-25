@@ -55,7 +55,7 @@
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//NamespaceDefinition">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//NamespaceDefinition/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//NamespaceDefinition/elements"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//NamespaceDefinition/members"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//NamespaceMember"/>
     <genClasses ecoreClass="Mscript.ecore#//TypeDefinition">

@@ -33,7 +33,7 @@ import org.eclipselabs.mscript.language.ast.QualifiedName;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.NamespaceDefinitionImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.NamespaceDefinitionImpl#getElements <em>Elements</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.NamespaceDefinitionImpl#getMembers <em>Members</em>}</li>
  * </ul>
  * </p>
  *
@@ -52,14 +52,14 @@ public class NamespaceDefinitionImpl extends NamespaceMemberImpl implements Name
   protected QualifiedName name;
 
   /**
-   * The cached value of the '{@link #getElements() <em>Elements</em>}' containment reference list.
+   * The cached value of the '{@link #getMembers() <em>Members</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getElements()
+   * @see #getMembers()
    * @generated
    * @ordered
    */
-  protected EList<NamespaceMember> elements;
+  protected EList<NamespaceMember> members;
 
   /**
    * <!-- begin-user-doc -->
@@ -135,13 +135,13 @@ public class NamespaceDefinitionImpl extends NamespaceMemberImpl implements Name
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<NamespaceMember> getElements()
+  public EList<NamespaceMember> getMembers()
   {
-    if (elements == null)
+    if (members == null)
     {
-      elements = new EObjectContainmentEList<NamespaceMember>(NamespaceMember.class, this, AstPackage.NAMESPACE_DEFINITION__ELEMENTS);
+      members = new EObjectContainmentEList<NamespaceMember>(NamespaceMember.class, this, AstPackage.NAMESPACE_DEFINITION__MEMBERS);
     }
-    return elements;
+    return members;
   }
 
   /**
@@ -156,8 +156,8 @@ public class NamespaceDefinitionImpl extends NamespaceMemberImpl implements Name
     {
       case AstPackage.NAMESPACE_DEFINITION__NAME:
         return basicSetName(null, msgs);
-      case AstPackage.NAMESPACE_DEFINITION__ELEMENTS:
-        return ((InternalEList<?>)getElements()).basicRemove(otherEnd, msgs);
+      case AstPackage.NAMESPACE_DEFINITION__MEMBERS:
+        return ((InternalEList<?>)getMembers()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -174,8 +174,8 @@ public class NamespaceDefinitionImpl extends NamespaceMemberImpl implements Name
     {
       case AstPackage.NAMESPACE_DEFINITION__NAME:
         return getName();
-      case AstPackage.NAMESPACE_DEFINITION__ELEMENTS:
-        return getElements();
+      case AstPackage.NAMESPACE_DEFINITION__MEMBERS:
+        return getMembers();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -194,9 +194,9 @@ public class NamespaceDefinitionImpl extends NamespaceMemberImpl implements Name
       case AstPackage.NAMESPACE_DEFINITION__NAME:
         setName((QualifiedName)newValue);
         return;
-      case AstPackage.NAMESPACE_DEFINITION__ELEMENTS:
-        getElements().clear();
-        getElements().addAll((Collection<? extends NamespaceMember>)newValue);
+      case AstPackage.NAMESPACE_DEFINITION__MEMBERS:
+        getMembers().clear();
+        getMembers().addAll((Collection<? extends NamespaceMember>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -215,8 +215,8 @@ public class NamespaceDefinitionImpl extends NamespaceMemberImpl implements Name
       case AstPackage.NAMESPACE_DEFINITION__NAME:
         setName((QualifiedName)null);
         return;
-      case AstPackage.NAMESPACE_DEFINITION__ELEMENTS:
-        getElements().clear();
+      case AstPackage.NAMESPACE_DEFINITION__MEMBERS:
+        getMembers().clear();
         return;
     }
     super.eUnset(featureID);
@@ -234,8 +234,8 @@ public class NamespaceDefinitionImpl extends NamespaceMemberImpl implements Name
     {
       case AstPackage.NAMESPACE_DEFINITION__NAME:
         return name != null;
-      case AstPackage.NAMESPACE_DEFINITION__ELEMENTS:
-        return elements != null && !elements.isEmpty();
+      case AstPackage.NAMESPACE_DEFINITION__MEMBERS:
+        return members != null && !members.isEmpty();
     }
     return super.eIsSet(featureID);
   }

@@ -3272,9 +3272,9 @@ rule__NamespaceDefinition__Group__3__Impl
     }
 :
 (
-{ before(grammarAccess.getNamespaceDefinitionAccess().getElementsAssignment_3()); }
-(rule__NamespaceDefinition__ElementsAssignment_3)*
-{ after(grammarAccess.getNamespaceDefinitionAccess().getElementsAssignment_3()); }
+{ before(grammarAccess.getNamespaceDefinitionAccess().getMembersAssignment_3()); }
+(rule__NamespaceDefinition__MembersAssignment_3)*
+{ after(grammarAccess.getNamespaceDefinitionAccess().getMembersAssignment_3()); }
 )
 
 ;
@@ -13770,14 +13770,14 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__NamespaceDefinition__ElementsAssignment_3
+rule__NamespaceDefinition__MembersAssignment_3
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getNamespaceDefinitionAccess().getElementsNamespaceMemberParserRuleCall_3_0()); }
-	ruleNamespaceMember{ after(grammarAccess.getNamespaceDefinitionAccess().getElementsNamespaceMemberParserRuleCall_3_0()); }
+{ before(grammarAccess.getNamespaceDefinitionAccess().getMembersNamespaceMemberParserRuleCall_3_0()); }
+	ruleNamespaceMember{ after(grammarAccess.getNamespaceDefinitionAccess().getMembersNamespaceMemberParserRuleCall_3_0()); }
 )
 
 ;

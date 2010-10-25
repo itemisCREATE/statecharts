@@ -9535,20 +9535,20 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__NamespaceDefinition__Group__3__Impl
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:3269:1: rule__NamespaceDefinition__Group__3__Impl : ( ( rule__NamespaceDefinition__ElementsAssignment_3 )* ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:3269:1: rule__NamespaceDefinition__Group__3__Impl : ( ( rule__NamespaceDefinition__MembersAssignment_3 )* ) ;
     public final void rule__NamespaceDefinition__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:3273:1: ( ( ( rule__NamespaceDefinition__ElementsAssignment_3 )* ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:3274:1: ( ( rule__NamespaceDefinition__ElementsAssignment_3 )* )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:3273:1: ( ( ( rule__NamespaceDefinition__MembersAssignment_3 )* ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:3274:1: ( ( rule__NamespaceDefinition__MembersAssignment_3 )* )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:3274:1: ( ( rule__NamespaceDefinition__ElementsAssignment_3 )* )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:3275:1: ( rule__NamespaceDefinition__ElementsAssignment_3 )*
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:3274:1: ( ( rule__NamespaceDefinition__MembersAssignment_3 )* )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:3275:1: ( rule__NamespaceDefinition__MembersAssignment_3 )*
             {
-             before(grammarAccess.getNamespaceDefinitionAccess().getElementsAssignment_3()); 
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:3276:1: ( rule__NamespaceDefinition__ElementsAssignment_3 )*
+             before(grammarAccess.getNamespaceDefinitionAccess().getMembersAssignment_3()); 
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:3276:1: ( rule__NamespaceDefinition__MembersAssignment_3 )*
             loop33:
             do {
                 int alt33=2;
@@ -9561,10 +9561,10 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
                 switch (alt33) {
             	case 1 :
-            	    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:3276:2: rule__NamespaceDefinition__ElementsAssignment_3
+            	    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:3276:2: rule__NamespaceDefinition__MembersAssignment_3
             	    {
-            	    pushFollow(FOLLOW_rule__NamespaceDefinition__ElementsAssignment_3_in_rule__NamespaceDefinition__Group__3__Impl7086);
-            	    rule__NamespaceDefinition__ElementsAssignment_3();
+            	    pushFollow(FOLLOW_rule__NamespaceDefinition__MembersAssignment_3_in_rule__NamespaceDefinition__Group__3__Impl7086);
+            	    rule__NamespaceDefinition__MembersAssignment_3();
             	    _fsp--;
 
 
@@ -9576,7 +9576,7 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
                 }
             } while (true);
 
-             after(grammarAccess.getNamespaceDefinitionAccess().getElementsAssignment_3()); 
+             after(grammarAccess.getNamespaceDefinitionAccess().getMembersAssignment_3()); 
 
             }
 
@@ -35934,9 +35934,9 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
     // $ANTLR end rule__NamespaceDefinition__NameAssignment_1
 
 
-    // $ANTLR start rule__NamespaceDefinition__ElementsAssignment_3
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:13773:1: rule__NamespaceDefinition__ElementsAssignment_3 : ( ruleNamespaceMember ) ;
-    public final void rule__NamespaceDefinition__ElementsAssignment_3() throws RecognitionException {
+    // $ANTLR start rule__NamespaceDefinition__MembersAssignment_3
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:13773:1: rule__NamespaceDefinition__MembersAssignment_3 : ( ruleNamespaceMember ) ;
+    public final void rule__NamespaceDefinition__MembersAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -35947,12 +35947,12 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
             // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:13778:1: ( ruleNamespaceMember )
             // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:13779:1: ruleNamespaceMember
             {
-             before(grammarAccess.getNamespaceDefinitionAccess().getElementsNamespaceMemberParserRuleCall_3_0()); 
-            pushFollow(FOLLOW_ruleNamespaceMember_in_rule__NamespaceDefinition__ElementsAssignment_327717);
+             before(grammarAccess.getNamespaceDefinitionAccess().getMembersNamespaceMemberParserRuleCall_3_0()); 
+            pushFollow(FOLLOW_ruleNamespaceMember_in_rule__NamespaceDefinition__MembersAssignment_327717);
             ruleNamespaceMember();
             _fsp--;
 
-             after(grammarAccess.getNamespaceDefinitionAccess().getElementsNamespaceMemberParserRuleCall_3_0()); 
+             after(grammarAccess.getNamespaceDefinitionAccess().getMembersNamespaceMemberParserRuleCall_3_0()); 
 
             }
 
@@ -35971,7 +35971,7 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__NamespaceDefinition__ElementsAssignment_3
+    // $ANTLR end rule__NamespaceDefinition__MembersAssignment_3
 
 
     // $ANTLR start rule__EnumerationDefinition__NameAssignment_1
@@ -41526,7 +41526,7 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_37_in_rule__NamespaceDefinition__Group__2__Impl7025 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__NamespaceDefinition__Group__3__Impl_in_rule__NamespaceDefinition__Group__37056 = new BitSet(new long[]{0x0000004000000000L});
     public static final BitSet FOLLOW_rule__NamespaceDefinition__Group__4_in_rule__NamespaceDefinition__Group__37059 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__NamespaceDefinition__ElementsAssignment_3_in_rule__NamespaceDefinition__Group__3__Impl7086 = new BitSet(new long[]{0x0000529000000002L});
+    public static final BitSet FOLLOW_rule__NamespaceDefinition__MembersAssignment_3_in_rule__NamespaceDefinition__Group__3__Impl7086 = new BitSet(new long[]{0x0000529000000002L});
     public static final BitSet FOLLOW_rule__NamespaceDefinition__Group__4__Impl_in_rule__NamespaceDefinition__Group__47117 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_38_in_rule__NamespaceDefinition__Group__4__Impl7145 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EnumerationDefinition__Group__0__Impl_in_rule__EnumerationDefinition__Group__07186 = new BitSet(new long[]{0x0000000000004010L});
@@ -42385,7 +42385,7 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__UnitExpressionExponent__ValueAssignment_1_in_rule__UnitExpressionExponent__Group__1__Impl27616 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleNamespaceDefinition_in_rule__Mscript__NamespacesAssignment27655 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleQualifiedName_in_rule__NamespaceDefinition__NameAssignment_127686 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNamespaceMember_in_rule__NamespaceDefinition__ElementsAssignment_327717 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNamespaceMember_in_rule__NamespaceDefinition__MembersAssignment_327717 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleKeywordID_in_rule__EnumerationDefinition__NameAssignment_127748 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleEnumerationLiteralDeclaration_in_rule__EnumerationDefinition__LiteralsAssignment_3_027779 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleEnumerationLiteralDeclaration_in_rule__EnumerationDefinition__LiteralsAssignment_3_1_127810 = new BitSet(new long[]{0x0000000000000002L});
