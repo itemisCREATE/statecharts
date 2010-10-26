@@ -77,7 +77,7 @@ RecordFieldDeclaration :
  */
  
 FunctionDefinition :
-	'func' name=KeywordID ('<' templateParameters+=ParameterDeclaration (',' templateParameters+=ParameterDeclaration)* '>')? '(' (inputParameters+=ParameterDeclaration (',' inputParameters+=ParameterDeclaration)*)? ')' ':' outputParameters+=ParameterDeclaration (',' outputParameters+=ParameterDeclaration)* '{'
+	'func' name=KeywordID ('<' templateParameters+=ParameterDeclaration (',' templateParameters+=ParameterDeclaration)* '>')? '(' (inputParameters+=ParameterDeclaration (',' inputParameters+=ParameterDeclaration)*)? ')' '->' outputParameters+=ParameterDeclaration (',' outputParameters+=ParameterDeclaration)* '{'
 		(assertions+=AssertionDeclaration |
 		functors+=FunctorDeclaration |
 		stateVariables+=VariableDeclaration |

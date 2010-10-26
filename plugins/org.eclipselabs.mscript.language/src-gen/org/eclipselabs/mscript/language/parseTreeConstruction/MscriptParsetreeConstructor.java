@@ -1654,7 +1654,7 @@ protected class RecordFieldDeclaration_SemicolonKeyword_3 extends KeywordToken  
  *  * Function
  *  * /FunctionDefinition:
  * 	"func" name=KeywordID ("<" templateParameters+=ParameterDeclaration ("," templateParameters+=ParameterDeclaration)*
- * 	">")? "(" (inputParameters+=ParameterDeclaration ("," inputParameters+=ParameterDeclaration)*)? ")" ":"
+ * 	">")? "(" (inputParameters+=ParameterDeclaration ("," inputParameters+=ParameterDeclaration)*)? ")" "->"
  * 	outputParameters+=ParameterDeclaration ("," outputParameters+=ParameterDeclaration)* "{"
  * 	(assertions+=AssertionDeclaration | functors+=FunctorDeclaration | stateVariables+=VariableDeclaration |
  * 	equations+=EquationDefinition)* "}";
@@ -1662,7 +1662,7 @@ protected class RecordFieldDeclaration_SemicolonKeyword_3 extends KeywordToken  
  **/
 
 // "func" name=KeywordID ("<" templateParameters+=ParameterDeclaration ("," templateParameters+=ParameterDeclaration)*
-// ">")? "(" (inputParameters+=ParameterDeclaration ("," inputParameters+=ParameterDeclaration)*)? ")" ":"
+// ">")? "(" (inputParameters+=ParameterDeclaration ("," inputParameters+=ParameterDeclaration)*)? ")" "->"
 // outputParameters+=ParameterDeclaration ("," outputParameters+=ParameterDeclaration)* "{"
 // (assertions+=AssertionDeclaration | functors+=FunctorDeclaration | stateVariables+=VariableDeclaration |
 // equations+=EquationDefinition)* "}"
@@ -2163,16 +2163,16 @@ protected class FunctionDefinition_RightParenthesisKeyword_5 extends KeywordToke
 
 }
 
-// ":"
-protected class FunctionDefinition_ColonKeyword_6 extends KeywordToken  {
+// "->"
+protected class FunctionDefinition_HyphenMinusGreaterThanSignKeyword_6 extends KeywordToken  {
 	
-	public FunctionDefinition_ColonKeyword_6(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public FunctionDefinition_HyphenMinusGreaterThanSignKeyword_6(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getFunctionDefinitionAccess().getColonKeyword_6();
+		return grammarAccess.getFunctionDefinitionAccess().getHyphenMinusGreaterThanSignKeyword_6();
 	}
 
     @Override
@@ -2225,7 +2225,7 @@ protected class FunctionDefinition_OutputParametersAssignment_7 extends Assignme
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new FunctionDefinition_ColonKeyword_6(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new FunctionDefinition_HyphenMinusGreaterThanSignKeyword_6(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	

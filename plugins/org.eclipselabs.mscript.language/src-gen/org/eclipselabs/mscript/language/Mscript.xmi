@@ -172,7 +172,7 @@
         </elements>
       </elements>
       <elements xsi:type="xtext:Keyword" value=")"/>
-      <elements xsi:type="xtext:Keyword" value=":"/>
+      <elements xsi:type="xtext:Keyword" value="->"/>
       <elements xsi:type="xtext:Assignment" feature="outputParameters" operator="+=">
         <terminal xsi:type="xtext:RuleCall" rule="//@rules.11"/>
       </elements>

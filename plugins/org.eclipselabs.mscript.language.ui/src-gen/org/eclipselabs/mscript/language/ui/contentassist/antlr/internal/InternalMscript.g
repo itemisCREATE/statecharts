@@ -4252,11 +4252,11 @@ rule__FunctionDefinition__Group__6__Impl
     }
 :
 (
-{ before(grammarAccess.getFunctionDefinitionAccess().getColonKeyword_6()); }
+{ before(grammarAccess.getFunctionDefinitionAccess().getHyphenMinusGreaterThanSignKeyword_6()); }
 
-	':' 
+	'->' 
 
-{ after(grammarAccess.getFunctionDefinitionAccess().getColonKeyword_6()); }
+{ after(grammarAccess.getFunctionDefinitionAccess().getHyphenMinusGreaterThanSignKeyword_6()); }
 )
 
 ;

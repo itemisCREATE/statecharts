@@ -907,9 +907,9 @@ ruleFunctionDefinition returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getFunctionDefinitionAccess().getRightParenthesisKeyword_5(), null); 
     }
-	':' 
+	'->' 
     {
-        createLeafNode(grammarAccess.getFunctionDefinitionAccess().getColonKeyword_6(), null); 
+        createLeafNode(grammarAccess.getFunctionDefinitionAccess().getHyphenMinusGreaterThanSignKeyword_6(), null); 
     }
 (
 (
