@@ -15,6 +15,7 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#isStateful <em>Stateful</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getTemplateParameters <em>Template Parameters</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getInputParameters <em>Input Parameters</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getOutputParameters <em>Output Parameters</em>}</li>
@@ -31,6 +32,32 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface FunctionDefinition extends TypeDefinition
 {
+  /**
+   * Returns the value of the '<em><b>Stateful</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Stateful</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Stateful</em>' attribute.
+   * @see #setStateful(boolean)
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getFunctionDefinition_Stateful()
+   * @model
+   * @generated
+   */
+  boolean isStateful();
+
+  /**
+   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#isStateful <em>Stateful</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Stateful</em>' attribute.
+   * @see #isStateful()
+   * @generated
+   */
+  void setStateful(boolean value);
+
   /**
    * Returns the value of the '<em><b>Template Parameters</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipselabs.mscript.language.ast.ParameterDeclaration}.

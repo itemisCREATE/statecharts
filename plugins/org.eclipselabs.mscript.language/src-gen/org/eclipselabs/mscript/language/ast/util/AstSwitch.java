@@ -358,6 +358,21 @@ public class AstSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case AstPackage.LET_EXPRESSION:
+      {
+        LetExpression letExpression = (LetExpression)theEObject;
+        T result = caseLetExpression(letExpression);
+        if (result == null) result = caseExpression(letExpression);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AstPackage.LET_EXPRESSION_VARIABLE:
+      {
+        LetExpressionVariable letExpressionVariable = (LetExpressionVariable)theEObject;
+        T result = caseLetExpressionVariable(letExpressionVariable);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case AstPackage.IF_EXPRESSION:
       {
         IfExpression ifExpression = (IfExpression)theEObject;
@@ -1194,6 +1209,38 @@ public class AstSwitch<T>
    * @generated
    */
   public T caseExpression(Expression object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Let Expression</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Let Expression</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseLetExpression(LetExpression object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Let Expression Variable</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Let Expression Variable</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseLetExpressionVariable(LetExpressionVariable object)
   {
     return null;
   }

@@ -26,7 +26,7 @@ import org.eclipselabs.mscript.language.ast.Expression;
  * <ul>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.ElementDeclarationImpl#getElementName <em>Element Name</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.ElementDeclarationImpl#getAccumulatorName <em>Accumulator Name</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.ElementDeclarationImpl#getInitialValue <em>Initial Value</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.ElementDeclarationImpl#getInitialExpression <em>Initial Expression</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.ElementDeclarationImpl#getExpression <em>Expression</em>}</li>
  * </ul>
  * </p>
@@ -76,14 +76,14 @@ public class ElementDeclarationImpl extends IteratorCallImpl implements ElementD
   protected String accumulatorName = ACCUMULATOR_NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getInitialValue() <em>Initial Value</em>}' containment reference.
+   * The cached value of the '{@link #getInitialExpression() <em>Initial Expression</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getInitialValue()
+   * @see #getInitialExpression()
    * @generated
    * @ordered
    */
-  protected Expression initialValue;
+  protected Expression initialExpression;
 
   /**
    * The cached value of the '{@link #getExpression() <em>Expression</em>}' containment reference.
@@ -167,9 +167,9 @@ public class ElementDeclarationImpl extends IteratorCallImpl implements ElementD
    * <!-- end-user-doc -->
    * @generated
    */
-  public Expression getInitialValue()
+  public Expression getInitialExpression()
   {
-    return initialValue;
+    return initialExpression;
   }
 
   /**
@@ -177,13 +177,13 @@ public class ElementDeclarationImpl extends IteratorCallImpl implements ElementD
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetInitialValue(Expression newInitialValue, NotificationChain msgs)
+  public NotificationChain basicSetInitialExpression(Expression newInitialExpression, NotificationChain msgs)
   {
-    Expression oldInitialValue = initialValue;
-    initialValue = newInitialValue;
+    Expression oldInitialExpression = initialExpression;
+    initialExpression = newInitialExpression;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.ELEMENT_DECLARATION__INITIAL_VALUE, oldInitialValue, newInitialValue);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.ELEMENT_DECLARATION__INITIAL_EXPRESSION, oldInitialExpression, newInitialExpression);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -194,20 +194,20 @@ public class ElementDeclarationImpl extends IteratorCallImpl implements ElementD
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setInitialValue(Expression newInitialValue)
+  public void setInitialExpression(Expression newInitialExpression)
   {
-    if (newInitialValue != initialValue)
+    if (newInitialExpression != initialExpression)
     {
       NotificationChain msgs = null;
-      if (initialValue != null)
-        msgs = ((InternalEObject)initialValue).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.ELEMENT_DECLARATION__INITIAL_VALUE, null, msgs);
-      if (newInitialValue != null)
-        msgs = ((InternalEObject)newInitialValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.ELEMENT_DECLARATION__INITIAL_VALUE, null, msgs);
-      msgs = basicSetInitialValue(newInitialValue, msgs);
+      if (initialExpression != null)
+        msgs = ((InternalEObject)initialExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.ELEMENT_DECLARATION__INITIAL_EXPRESSION, null, msgs);
+      if (newInitialExpression != null)
+        msgs = ((InternalEObject)newInitialExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.ELEMENT_DECLARATION__INITIAL_EXPRESSION, null, msgs);
+      msgs = basicSetInitialExpression(newInitialExpression, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.ELEMENT_DECLARATION__INITIAL_VALUE, newInitialValue, newInitialValue));
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.ELEMENT_DECLARATION__INITIAL_EXPRESSION, newInitialExpression, newInitialExpression));
   }
 
   /**
@@ -268,8 +268,8 @@ public class ElementDeclarationImpl extends IteratorCallImpl implements ElementD
   {
     switch (featureID)
     {
-      case AstPackage.ELEMENT_DECLARATION__INITIAL_VALUE:
-        return basicSetInitialValue(null, msgs);
+      case AstPackage.ELEMENT_DECLARATION__INITIAL_EXPRESSION:
+        return basicSetInitialExpression(null, msgs);
       case AstPackage.ELEMENT_DECLARATION__EXPRESSION:
         return basicSetExpression(null, msgs);
     }
@@ -290,8 +290,8 @@ public class ElementDeclarationImpl extends IteratorCallImpl implements ElementD
         return getElementName();
       case AstPackage.ELEMENT_DECLARATION__ACCUMULATOR_NAME:
         return getAccumulatorName();
-      case AstPackage.ELEMENT_DECLARATION__INITIAL_VALUE:
-        return getInitialValue();
+      case AstPackage.ELEMENT_DECLARATION__INITIAL_EXPRESSION:
+        return getInitialExpression();
       case AstPackage.ELEMENT_DECLARATION__EXPRESSION:
         return getExpression();
     }
@@ -314,8 +314,8 @@ public class ElementDeclarationImpl extends IteratorCallImpl implements ElementD
       case AstPackage.ELEMENT_DECLARATION__ACCUMULATOR_NAME:
         setAccumulatorName((String)newValue);
         return;
-      case AstPackage.ELEMENT_DECLARATION__INITIAL_VALUE:
-        setInitialValue((Expression)newValue);
+      case AstPackage.ELEMENT_DECLARATION__INITIAL_EXPRESSION:
+        setInitialExpression((Expression)newValue);
         return;
       case AstPackage.ELEMENT_DECLARATION__EXPRESSION:
         setExpression((Expression)newValue);
@@ -340,8 +340,8 @@ public class ElementDeclarationImpl extends IteratorCallImpl implements ElementD
       case AstPackage.ELEMENT_DECLARATION__ACCUMULATOR_NAME:
         setAccumulatorName(ACCUMULATOR_NAME_EDEFAULT);
         return;
-      case AstPackage.ELEMENT_DECLARATION__INITIAL_VALUE:
-        setInitialValue((Expression)null);
+      case AstPackage.ELEMENT_DECLARATION__INITIAL_EXPRESSION:
+        setInitialExpression((Expression)null);
         return;
       case AstPackage.ELEMENT_DECLARATION__EXPRESSION:
         setExpression((Expression)null);
@@ -364,8 +364,8 @@ public class ElementDeclarationImpl extends IteratorCallImpl implements ElementD
         return ELEMENT_NAME_EDEFAULT == null ? elementName != null : !ELEMENT_NAME_EDEFAULT.equals(elementName);
       case AstPackage.ELEMENT_DECLARATION__ACCUMULATOR_NAME:
         return ACCUMULATOR_NAME_EDEFAULT == null ? accumulatorName != null : !ACCUMULATOR_NAME_EDEFAULT.equals(accumulatorName);
-      case AstPackage.ELEMENT_DECLARATION__INITIAL_VALUE:
-        return initialValue != null;
+      case AstPackage.ELEMENT_DECLARATION__INITIAL_EXPRESSION:
+        return initialExpression != null;
       case AstPackage.ELEMENT_DECLARATION__EXPRESSION:
         return expression != null;
     }

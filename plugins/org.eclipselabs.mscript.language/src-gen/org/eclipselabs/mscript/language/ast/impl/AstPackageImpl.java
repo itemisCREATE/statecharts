@@ -50,6 +50,8 @@ import org.eclipselabs.mscript.language.ast.ImpliesExpression;
 import org.eclipselabs.mscript.language.ast.IntegerLiteral;
 import org.eclipselabs.mscript.language.ast.IntegerTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.IteratorCall;
+import org.eclipselabs.mscript.language.ast.LetExpression;
+import org.eclipselabs.mscript.language.ast.LetExpressionVariable;
 import org.eclipselabs.mscript.language.ast.Literal;
 import org.eclipselabs.mscript.language.ast.LogicalAndExpression;
 import org.eclipselabs.mscript.language.ast.LogicalOrExpression;
@@ -323,6 +325,20 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * @generated
    */
   private EClass expressionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass letExpressionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass letExpressionVariableEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -966,9 +982,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getFunctionDefinition_TemplateParameters()
+  public EAttribute getFunctionDefinition_Stateful()
   {
-    return (EReference)functionDefinitionEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)functionDefinitionEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -976,7 +992,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getFunctionDefinition_InputParameters()
+  public EReference getFunctionDefinition_TemplateParameters()
   {
     return (EReference)functionDefinitionEClass.getEStructuralFeatures().get(1);
   }
@@ -986,7 +1002,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getFunctionDefinition_OutputParameters()
+  public EReference getFunctionDefinition_InputParameters()
   {
     return (EReference)functionDefinitionEClass.getEStructuralFeatures().get(2);
   }
@@ -996,7 +1012,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getFunctionDefinition_Assertions()
+  public EReference getFunctionDefinition_OutputParameters()
   {
     return (EReference)functionDefinitionEClass.getEStructuralFeatures().get(3);
   }
@@ -1006,7 +1022,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getFunctionDefinition_Functors()
+  public EReference getFunctionDefinition_Assertions()
   {
     return (EReference)functionDefinitionEClass.getEStructuralFeatures().get(4);
   }
@@ -1016,7 +1032,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getFunctionDefinition_StateVariables()
+  public EReference getFunctionDefinition_Functors()
   {
     return (EReference)functionDefinitionEClass.getEStructuralFeatures().get(5);
   }
@@ -1026,9 +1042,19 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getFunctionDefinition_Equations()
+  public EReference getFunctionDefinition_StateVariables()
   {
     return (EReference)functionDefinitionEClass.getEStructuralFeatures().get(6);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getFunctionDefinition_Equations()
+  {
+    return (EReference)functionDefinitionEClass.getEStructuralFeatures().get(7);
   }
 
   /**
@@ -1396,6 +1422,66 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getLetExpression()
+  {
+    return letExpressionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getLetExpression_Variables()
+  {
+    return (EReference)letExpressionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getLetExpression_TargetExpression()
+  {
+    return (EReference)letExpressionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getLetExpressionVariable()
+  {
+    return letExpressionVariableEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getLetExpressionVariable_Name()
+  {
+    return (EAttribute)letExpressionVariableEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getLetExpressionVariable_AssignedExpression()
+  {
+    return (EReference)letExpressionVariableEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getIfExpression()
   {
     return ifExpressionEClass;
@@ -1486,7 +1572,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getSwitchCase_Value()
+  public EReference getSwitchCase_CaseExpression()
   {
     return (EReference)switchCaseEClass.getEStructuralFeatures().get(0);
   }
@@ -1496,7 +1582,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getSwitchCase_Expression()
+  public EReference getSwitchCase_ResultExpression()
   {
     return (EReference)switchCaseEClass.getEStructuralFeatures().get(1);
   }
@@ -2526,7 +2612,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getElementDeclaration_InitialValue()
+  public EReference getElementDeclaration_InitialExpression()
   {
     return (EReference)elementDeclarationEClass.getEStructuralFeatures().get(2);
   }
@@ -2692,6 +2778,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     createEReference(recordFieldDeclarationEClass, RECORD_FIELD_DECLARATION__TYPE);
 
     functionDefinitionEClass = createEClass(FUNCTION_DEFINITION);
+    createEAttribute(functionDefinitionEClass, FUNCTION_DEFINITION__STATEFUL);
     createEReference(functionDefinitionEClass, FUNCTION_DEFINITION__TEMPLATE_PARAMETERS);
     createEReference(functionDefinitionEClass, FUNCTION_DEFINITION__INPUT_PARAMETERS);
     createEReference(functionDefinitionEClass, FUNCTION_DEFINITION__OUTPUT_PARAMETERS);
@@ -2756,6 +2843,14 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
 
     expressionEClass = createEClass(EXPRESSION);
 
+    letExpressionEClass = createEClass(LET_EXPRESSION);
+    createEReference(letExpressionEClass, LET_EXPRESSION__VARIABLES);
+    createEReference(letExpressionEClass, LET_EXPRESSION__TARGET_EXPRESSION);
+
+    letExpressionVariableEClass = createEClass(LET_EXPRESSION_VARIABLE);
+    createEAttribute(letExpressionVariableEClass, LET_EXPRESSION_VARIABLE__NAME);
+    createEReference(letExpressionVariableEClass, LET_EXPRESSION_VARIABLE__ASSIGNED_EXPRESSION);
+
     ifExpressionEClass = createEClass(IF_EXPRESSION);
     createEReference(ifExpressionEClass, IF_EXPRESSION__CONDITION);
     createEReference(ifExpressionEClass, IF_EXPRESSION__THEN_EXPRESSION);
@@ -2767,8 +2862,8 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     createEReference(switchExpressionEClass, SWITCH_EXPRESSION__DEFAULT_EXPRESSION);
 
     switchCaseEClass = createEClass(SWITCH_CASE);
-    createEReference(switchCaseEClass, SWITCH_CASE__VALUE);
-    createEReference(switchCaseEClass, SWITCH_CASE__EXPRESSION);
+    createEReference(switchCaseEClass, SWITCH_CASE__CASE_EXPRESSION);
+    createEReference(switchCaseEClass, SWITCH_CASE__RESULT_EXPRESSION);
 
     additiveExpressionPartEClass = createEClass(ADDITIVE_EXPRESSION_PART);
     createEAttribute(additiveExpressionPartEClass, ADDITIVE_EXPRESSION_PART__OPERATOR);
@@ -2911,7 +3006,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     elementDeclarationEClass = createEClass(ELEMENT_DECLARATION);
     createEAttribute(elementDeclarationEClass, ELEMENT_DECLARATION__ELEMENT_NAME);
     createEAttribute(elementDeclarationEClass, ELEMENT_DECLARATION__ACCUMULATOR_NAME);
-    createEReference(elementDeclarationEClass, ELEMENT_DECLARATION__INITIAL_VALUE);
+    createEReference(elementDeclarationEClass, ELEMENT_DECLARATION__INITIAL_EXPRESSION);
     createEReference(elementDeclarationEClass, ELEMENT_DECLARATION__EXPRESSION);
 
     // Create enums
@@ -2973,6 +3068,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     stringTypeSpecifierEClass.getESuperTypes().add(this.getPrimitiveTypeSpecifier());
     namedTypeSpecifierEClass.getESuperTypes().add(this.getDataTypeSpecifier());
     unitTypeSpecifierEClass.getESuperTypes().add(this.getTypeSpecifier());
+    letExpressionEClass.getESuperTypes().add(this.getExpression());
     ifExpressionEClass.getESuperTypes().add(this.getExpression());
     switchExpressionEClass.getESuperTypes().add(this.getExpression());
     literalEClass.getESuperTypes().add(this.getExpression());
@@ -3037,6 +3133,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     initEReference(getRecordFieldDeclaration_Type(), this.getDataTypeSpecifier(), null, "type", null, 0, 1, RecordFieldDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(functionDefinitionEClass, FunctionDefinition.class, "FunctionDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getFunctionDefinition_Stateful(), ecorePackage.getEBoolean(), "stateful", null, 0, 1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getFunctionDefinition_TemplateParameters(), this.getParameterDeclaration(), null, "templateParameters", null, 0, -1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getFunctionDefinition_InputParameters(), this.getParameterDeclaration(), null, "inputParameters", null, 0, -1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getFunctionDefinition_OutputParameters(), this.getParameterDeclaration(), null, "outputParameters", null, 0, -1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3101,6 +3198,14 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
 
     initEClass(expressionEClass, Expression.class, "Expression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
+    initEClass(letExpressionEClass, LetExpression.class, "LetExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getLetExpression_Variables(), this.getLetExpressionVariable(), null, "variables", null, 0, -1, LetExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getLetExpression_TargetExpression(), this.getExpression(), null, "targetExpression", null, 0, 1, LetExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(letExpressionVariableEClass, LetExpressionVariable.class, "LetExpressionVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getLetExpressionVariable_Name(), ecorePackage.getEString(), "name", null, 0, 1, LetExpressionVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getLetExpressionVariable_AssignedExpression(), this.getExpression(), null, "assignedExpression", null, 0, 1, LetExpressionVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
     initEClass(ifExpressionEClass, IfExpression.class, "IfExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getIfExpression_Condition(), this.getExpression(), null, "condition", null, 0, 1, IfExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getIfExpression_ThenExpression(), this.getExpression(), null, "thenExpression", null, 0, 1, IfExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3112,8 +3217,8 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     initEReference(getSwitchExpression_DefaultExpression(), this.getExpression(), null, "defaultExpression", null, 0, 1, SwitchExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(switchCaseEClass, SwitchCase.class, "SwitchCase", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getSwitchCase_Value(), this.getExpression(), null, "value", null, 0, 1, SwitchCase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getSwitchCase_Expression(), this.getExpression(), null, "expression", null, 0, 1, SwitchCase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getSwitchCase_CaseExpression(), this.getExpression(), null, "caseExpression", null, 0, 1, SwitchCase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getSwitchCase_ResultExpression(), this.getExpression(), null, "resultExpression", null, 0, 1, SwitchCase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(additiveExpressionPartEClass, AdditiveExpressionPart.class, "AdditiveExpressionPart", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getAdditiveExpressionPart_Operator(), this.getAdditiveOperator(), "operator", null, 0, 1, AdditiveExpressionPart.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3256,7 +3361,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     initEClass(elementDeclarationEClass, ElementDeclaration.class, "ElementDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getElementDeclaration_ElementName(), ecorePackage.getEString(), "elementName", null, 0, 1, ElementDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getElementDeclaration_AccumulatorName(), ecorePackage.getEString(), "accumulatorName", null, 0, 1, ElementDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getElementDeclaration_InitialValue(), this.getExpression(), null, "initialValue", null, 0, 1, ElementDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getElementDeclaration_InitialExpression(), this.getExpression(), null, "initialExpression", null, 0, 1, ElementDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getElementDeclaration_Expression(), this.getExpression(), null, "expression", null, 0, 1, ElementDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Initialize enums and add enum literals

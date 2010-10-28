@@ -46,7 +46,7 @@ public class Variable implements IVariable {
 		this.name = name;
 	}
 	
-	public void ensureValueIndex(int step) {
+	public void ensureStep(int step) {
 		values.ensureLocationIndex(step);
 	}
 	

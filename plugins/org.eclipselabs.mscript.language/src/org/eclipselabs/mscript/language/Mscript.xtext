@@ -77,7 +77,7 @@ RecordFieldDeclaration :
  */
  
 FunctionDefinition :
-	'func' name=KeywordID ('<' templateParameters+=ParameterDeclaration (',' templateParameters+=ParameterDeclaration)* '>')? '(' (inputParameters+=ParameterDeclaration (',' inputParameters+=ParameterDeclaration)*)? ')' '->' outputParameters+=ParameterDeclaration (',' outputParameters+=ParameterDeclaration)* '{'
+	(stateful?='stateful')? 'func' name=KeywordID ('<' templateParameters+=ParameterDeclaration (',' templateParameters+=ParameterDeclaration)* '>')? '(' (inputParameters+=ParameterDeclaration (',' inputParameters+=ParameterDeclaration)*)? ')' '->' outputParameters+=ParameterDeclaration (',' outputParameters+=ParameterDeclaration)* '{'
 		(assertions+=AssertionDeclaration |
 		functors+=FunctorDeclaration |
 		stateVariables+=VariableDeclaration |
@@ -156,7 +156,13 @@ UnitTypeSpecifier :
  */
 
 Expression :
-	IfExpression | SwitchExpression | RangeExpression;
+	LetExpression | IfExpression | SwitchExpression | RangeExpression;
+
+LetExpression :
+	'let' variables+=LetExpressionVariable (',' variables+=LetExpressionVariable)* 'in' targetExpression=Expression;
+	
+LetExpressionVariable :
+	name=KeywordID '=' assignedExpression=Expression;
 	
 IfExpression :
 	'if' condition=Expression 'then' thenExpression=Expression 'else' elseExpression=Expression;
@@ -167,7 +173,7 @@ SwitchExpression :
 		'default' ':' defaultExpression=Expression;
 
 SwitchCase :
-	'case' value=ImpliesExpression ':' expression=Expression;
+	'case' caseExpression=ImpliesExpression ':' resultExpression=Expression;
 
 RangeExpression returns Expression :
 	ImpliesExpression ({RangeExpression.begin=current} ':' end=ImpliesExpression ({RangeExpression.increment=current} ':' end=ImpliesExpression)?)?;
@@ -290,7 +296,7 @@ OperationCall :
 	{OperationCall} '(' (arguments+=Expression (',' arguments+=Expression)*)? ')';
 
 IteratorCall :
-	{ElementDeclaration} '(' elementName=KeywordID (';' accumulatorName=KeywordID '=' initialValue=Expression)? '|' expression=Expression ')';
+	{ElementDeclaration} '(' elementName=KeywordID (';' accumulatorName=KeywordID '=' initialExpression=Expression)? '|' expression=Expression ')';
 
 Subscript :
 	slice?=':' | expression=Expression;

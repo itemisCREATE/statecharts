@@ -11,6 +11,9 @@
 
 package org.eclipselabs.mscript.language.interpreter;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -22,11 +25,14 @@ import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.ast.FeatureCall;
 import org.eclipselabs.mscript.language.ast.IfExpression;
 import org.eclipselabs.mscript.language.ast.IntegerLiteral;
+import org.eclipselabs.mscript.language.ast.LetExpression;
+import org.eclipselabs.mscript.language.ast.LetExpressionVariable;
 import org.eclipselabs.mscript.language.ast.LogicalAndExpression;
 import org.eclipselabs.mscript.language.ast.LogicalOrExpression;
 import org.eclipselabs.mscript.language.ast.MultiplicativeExpression;
 import org.eclipselabs.mscript.language.ast.RealLiteral;
 import org.eclipselabs.mscript.language.ast.RelationalExpression;
+import org.eclipselabs.mscript.language.ast.SimpleName;
 import org.eclipselabs.mscript.language.ast.StringLiteral;
 import org.eclipselabs.mscript.language.ast.UnaryExpression;
 import org.eclipselabs.mscript.language.ast.UnitConstructionOperator;
@@ -52,7 +58,11 @@ import org.eclipselabs.mscript.typesystem.util.TypeSystemUtil;
  */
 public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue> {
 
+	private static final Scope MOST_OUTER_SCOPE = new Scope(null);
+	
 	private IInterpreterContext context;
+	
+	private Scope scope = MOST_OUTER_SCOPE;
 	
 	/**
 	 * 
@@ -284,6 +294,27 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 		return TypeSystemUtil.createArrayType(elementType, rowSize, columnSize);
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseLetExpression(org.eclipselabs.mscript.language.ast.LetExpression)
+	 */
+	@Override
+	public IValue caseLetExpression(LetExpression letExpression) {
+		Scope newScope = new Scope(scope);
+		for (LetExpressionVariable variable : letExpression.getVariables()) {
+			IValue value = doSwitch(variable.getAssignedExpression());
+			if (value instanceof InvalidValue) {
+				return value;
+			}
+			newScope.addVariable(variable.getName(), value);
+		}
+		
+		scope = newScope;
+		IValue result = doSwitch(letExpression.getTargetExpression());
+		scope = scope.getOuterScope();
+		
+		return result;
+	}
+	
 	public IValue caseIfExpression(IfExpression ifExpression) {
 		IValue conditionValue = doSwitch(ifExpression.getCondition());
 		if (conditionValue instanceof IBooleanValue) {
@@ -320,59 +351,20 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 	 */
 	@Override
 	public IValue caseFeatureCall(FeatureCall featureCall) {
-		IValue value = context.getFeatureValue(featureCall);
+		IValue value = null;
+		if (featureCall.getTarget() instanceof SimpleName && featureCall.getParts().isEmpty()) {
+			value = scope.getVariableValue(((SimpleName) featureCall.getTarget()).getIdentifier());
+		}
 		if (value == null) {
-			context.getDiagnostics().add(new EObjectDiagnostic(Diagnostic.ERROR, "Feature not found", featureCall));
-			return InvalidValue.SINGLETON;
+			value = context.getFeatureValue(featureCall);
+			if (value == null) {
+				context.getDiagnostics().add(new EObjectDiagnostic(Diagnostic.ERROR, "Feature not found", featureCall));
+				return InvalidValue.SINGLETON;
+			}
 		}
 		return value;
 	}
-	
-//	/* (non-Javadoc)
-//	 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseFeatureCall(org.eclipselabs.mscript.language.ast.FeatureCall)
-//	 */
-//	@Override
-//	public IValue caseFeatureCall(FeatureCall featureCall) {
-//		if (featureCall.getTarget() instanceof SymbolReference && featureCall.getParts().size() == 1) {
-//			FeatureCallPart firstPart = featureCall.getParts().get(0);
-//			if (firstPart instanceof FeatureReference) {
-//				FeatureReference featureReference = (FeatureReference) firstPart;
-//				IFeature feature = context.getFeature(featureCall.getTarget());
-//				if (feature instanceof IVariable) {
-//					IVariable variable = (IVariable) feature;
-//					String featureName = featureReference.getFeatureName();
-//					if (featureName.equals("unit")) {
-//						IValue value = variable.getValue();
-//						if (value.getDataType() instanceof NumericType) {
-//							return new UnitValue(EcoreUtil.copy(((NumericType) value.getDataType()).getUnit()));
-//						}
-//					} else {
-//						IValue value = variable.getValue().getProperty(featureName, null);
-//						if (value != null) {
-//							return value;
-//						}
-//					}
-//				}
-//			} else if (firstPart instanceof OperationCall) {
-//				OperationCall operationCall = (OperationCall) firstPart;
-//				IFeature feature = context.getFeature(featureCall);
-//				if (feature instanceof IOperation) {
-//					IOperation operation = (IOperation) feature;
-//					List<IValue> argumentValues = new ArrayList<IValue>();
-//					for (Expression expression : operationCall.getArguments()) {
-//						argumentValues.add(new ExpressionValueEvaluator(context).doSwitch(expression));
-//					}
-//					IValue result = operation.invoke(context, argumentValues);
-//					if (result == null) {
-//						return InvalidValue.SINGLETON;
-//					}
-//				}
-//			}
-//		}
-//		context.getDiagnosticChain().add(new InterpreterStatus(Diagnostic.ERROR, "Feature call could not be resolved", featureCall));
-//		return InvalidValue.SINGLETON;
-//	}
-	
+		
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseRealLiteral(org.eclipselabs.mscript.language.ast.RealLiteral)
 	 */
@@ -427,19 +419,6 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 		return new StringValue(stringLiteral.getValue());
 	}
 	
-//	/* (non-Javadoc)
-//	 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseSymbolReference(org.eclipselabs.mscript.language.ast.SymbolReference)
-//	 */
-//	@Override
-//	public IValue caseSymbolReference(SymbolReference symbolReference) {
-//		IFeature feature = context.getFeature(symbolReference);
-//		if (feature instanceof IVariable) {
-//			return ((IVariable) feature).getValue();
-//		}
-//		context.getDiagnosticChain().add(new InterpreterStatus(Diagnostic.ERROR, "Symbol reference could not be resolved", symbolReference));
-//		return InvalidValue.SINGLETON;
-//	}
-	
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#defaultCase(org.eclipse.emf.ecore.EObject)
 	 */
@@ -449,4 +428,38 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 		return InvalidValue.SINGLETON;
 	}
 	
+	private static class Scope {
+
+		private Scope outerScope;
+		private Map<String, IValue> variables = new HashMap<String, IValue>();
+		
+		/**
+		 * 
+		 */
+		public Scope(Scope outerScope) {
+			this.outerScope = outerScope;
+		}
+		
+		/**
+		 * @return the outerScope
+		 */
+		public Scope getOuterScope() {
+			return outerScope;
+		}
+		
+		public void addVariable(String name, IValue value) {
+			variables.put(name, value);
+		}
+		
+		public IValue getVariableValue(String name) {
+			IValue value;
+			Scope scope = this;
+			do {
+				value = scope.variables.get(name);
+			} while (value == null && (scope = scope.outerScope) != null);
+			return value;
+		}
+		
+	}
+
 }

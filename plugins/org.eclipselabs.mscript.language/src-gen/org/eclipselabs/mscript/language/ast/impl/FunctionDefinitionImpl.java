@@ -7,12 +7,15 @@ package org.eclipselabs.mscript.language.ast.impl;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -32,6 +35,7 @@ import org.eclipselabs.mscript.language.ast.VariableDeclaration;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl#isStateful <em>Stateful</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl#getTemplateParameters <em>Template Parameters</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl#getInputParameters <em>Input Parameters</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl#getOutputParameters <em>Output Parameters</em>}</li>
@@ -46,6 +50,26 @@ import org.eclipselabs.mscript.language.ast.VariableDeclaration;
  */
 public class FunctionDefinitionImpl extends TypeDefinitionImpl implements FunctionDefinition
 {
+  /**
+   * The default value of the '{@link #isStateful() <em>Stateful</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isStateful()
+   * @generated
+   * @ordered
+   */
+  protected static final boolean STATEFUL_EDEFAULT = false;
+
+  /**
+   * The cached value of the '{@link #isStateful() <em>Stateful</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isStateful()
+   * @generated
+   * @ordered
+   */
+  protected boolean stateful = STATEFUL_EDEFAULT;
+
   /**
    * The cached value of the '{@link #getTemplateParameters() <em>Template Parameters</em>}' containment reference list.
    * <!-- begin-user-doc -->
@@ -135,6 +159,29 @@ public class FunctionDefinitionImpl extends TypeDefinitionImpl implements Functi
   protected EClass eStaticClass()
   {
     return AstPackage.Literals.FUNCTION_DEFINITION;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public boolean isStateful()
+  {
+    return stateful;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setStateful(boolean newStateful)
+  {
+    boolean oldStateful = stateful;
+    stateful = newStateful;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.FUNCTION_DEFINITION__STATEFUL, oldStateful, stateful));
   }
 
   /**
@@ -273,6 +320,8 @@ public class FunctionDefinitionImpl extends TypeDefinitionImpl implements Functi
   {
     switch (featureID)
     {
+      case AstPackage.FUNCTION_DEFINITION__STATEFUL:
+        return isStateful();
       case AstPackage.FUNCTION_DEFINITION__TEMPLATE_PARAMETERS:
         return getTemplateParameters();
       case AstPackage.FUNCTION_DEFINITION__INPUT_PARAMETERS:
@@ -302,6 +351,9 @@ public class FunctionDefinitionImpl extends TypeDefinitionImpl implements Functi
   {
     switch (featureID)
     {
+      case AstPackage.FUNCTION_DEFINITION__STATEFUL:
+        setStateful((Boolean)newValue);
+        return;
       case AstPackage.FUNCTION_DEFINITION__TEMPLATE_PARAMETERS:
         getTemplateParameters().clear();
         getTemplateParameters().addAll((Collection<? extends ParameterDeclaration>)newValue);
@@ -344,6 +396,9 @@ public class FunctionDefinitionImpl extends TypeDefinitionImpl implements Functi
   {
     switch (featureID)
     {
+      case AstPackage.FUNCTION_DEFINITION__STATEFUL:
+        setStateful(STATEFUL_EDEFAULT);
+        return;
       case AstPackage.FUNCTION_DEFINITION__TEMPLATE_PARAMETERS:
         getTemplateParameters().clear();
         return;
@@ -379,6 +434,8 @@ public class FunctionDefinitionImpl extends TypeDefinitionImpl implements Functi
   {
     switch (featureID)
     {
+      case AstPackage.FUNCTION_DEFINITION__STATEFUL:
+        return stateful != STATEFUL_EDEFAULT;
       case AstPackage.FUNCTION_DEFINITION__TEMPLATE_PARAMETERS:
         return templateParameters != null && !templateParameters.isEmpty();
       case AstPackage.FUNCTION_DEFINITION__INPUT_PARAMETERS:
@@ -395,6 +452,23 @@ public class FunctionDefinitionImpl extends TypeDefinitionImpl implements Functi
         return equations != null && !equations.isEmpty();
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (stateful: ");
+    result.append(stateful);
+    result.append(')');
+    return result.toString();
   }
 
 } //FunctionDefinitionImpl

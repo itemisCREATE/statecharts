@@ -73,14 +73,14 @@ public class FunctorConstructor {
 				String name = equationPart.getVariableReference().getName();
 				IVariable variable = functor.getVariable(name);
 				if (variable != null) {
-					variable.ensureValueIndex(equationPart.getVariableReference().getStep());
+					variable.ensureStep(equationPart.getVariableReference().getStep());
 				}
 			}
 			for (EquationPart equationPart : equation.getRightHandSide().getParts()) {
 				String name = equationPart.getVariableReference().getName();
 				IVariable variable = functor.getVariable(name);
 				if (variable != null) {
-					variable.ensureValueIndex(equationPart.getVariableReference().getStep());
+					variable.ensureStep(equationPart.getVariableReference().getStep());
 				}
 			}
 		}

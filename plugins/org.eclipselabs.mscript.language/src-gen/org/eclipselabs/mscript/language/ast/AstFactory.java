@@ -305,6 +305,24 @@ public interface AstFactory extends EFactory
   Expression createExpression();
 
   /**
+   * Returns a new object of class '<em>Let Expression</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Let Expression</em>'.
+   * @generated
+   */
+  LetExpression createLetExpression();
+
+  /**
+   * Returns a new object of class '<em>Let Expression Variable</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Let Expression Variable</em>'.
+   * @generated
+   */
+  LetExpressionVariable createLetExpressionVariable();
+
+  /**
    * Returns a new object of class '<em>If Expression</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

@@ -16,7 +16,7 @@ package org.eclipselabs.mscript.language.ast;
  * <ul>
  *   <li>{@link org.eclipselabs.mscript.language.ast.ElementDeclaration#getElementName <em>Element Name</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.ElementDeclaration#getAccumulatorName <em>Accumulator Name</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.ElementDeclaration#getInitialValue <em>Initial Value</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.ElementDeclaration#getInitialExpression <em>Initial Expression</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.ElementDeclaration#getExpression <em>Expression</em>}</li>
  * </ul>
  * </p>
@@ -80,30 +80,30 @@ public interface ElementDeclaration extends IteratorCall
   void setAccumulatorName(String value);
 
   /**
-   * Returns the value of the '<em><b>Initial Value</b></em>' containment reference.
+   * Returns the value of the '<em><b>Initial Expression</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Initial Value</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Initial Expression</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Initial Value</em>' containment reference.
-   * @see #setInitialValue(Expression)
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getElementDeclaration_InitialValue()
+   * @return the value of the '<em>Initial Expression</em>' containment reference.
+   * @see #setInitialExpression(Expression)
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getElementDeclaration_InitialExpression()
    * @model containment="true"
    * @generated
    */
-  Expression getInitialValue();
+  Expression getInitialExpression();
 
   /**
-   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.ElementDeclaration#getInitialValue <em>Initial Value</em>}' containment reference.
+   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.ElementDeclaration#getInitialExpression <em>Initial Expression</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Initial Value</em>' containment reference.
-   * @see #getInitialValue()
+   * @param value the new value of the '<em>Initial Expression</em>' containment reference.
+   * @see #getInitialExpression()
    * @generated
    */
-  void setInitialValue(Expression value);
+  void setInitialExpression(Expression value);
 
   /**
    * Returns the value of the '<em><b>Expression</b></em>' containment reference.

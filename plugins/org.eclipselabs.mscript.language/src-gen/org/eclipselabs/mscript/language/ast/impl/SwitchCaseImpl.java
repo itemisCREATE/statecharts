@@ -25,8 +25,8 @@ import org.eclipselabs.mscript.language.ast.SwitchCase;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.SwitchCaseImpl#getValue <em>Value</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.SwitchCaseImpl#getExpression <em>Expression</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.SwitchCaseImpl#getCaseExpression <em>Case Expression</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.SwitchCaseImpl#getResultExpression <em>Result Expression</em>}</li>
  * </ul>
  * </p>
  *
@@ -35,24 +35,24 @@ import org.eclipselabs.mscript.language.ast.SwitchCase;
 public class SwitchCaseImpl extends MinimalEObjectImpl.Container implements SwitchCase
 {
   /**
-   * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
+   * The cached value of the '{@link #getCaseExpression() <em>Case Expression</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getValue()
+   * @see #getCaseExpression()
    * @generated
    * @ordered
    */
-  protected Expression value;
+  protected Expression caseExpression;
 
   /**
-   * The cached value of the '{@link #getExpression() <em>Expression</em>}' containment reference.
+   * The cached value of the '{@link #getResultExpression() <em>Result Expression</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getExpression()
+   * @see #getResultExpression()
    * @generated
    * @ordered
    */
-  protected Expression expression;
+  protected Expression resultExpression;
 
   /**
    * <!-- begin-user-doc -->
@@ -80,9 +80,9 @@ public class SwitchCaseImpl extends MinimalEObjectImpl.Container implements Swit
    * <!-- end-user-doc -->
    * @generated
    */
-  public Expression getValue()
+  public Expression getCaseExpression()
   {
-    return value;
+    return caseExpression;
   }
 
   /**
@@ -90,13 +90,13 @@ public class SwitchCaseImpl extends MinimalEObjectImpl.Container implements Swit
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetValue(Expression newValue, NotificationChain msgs)
+  public NotificationChain basicSetCaseExpression(Expression newCaseExpression, NotificationChain msgs)
   {
-    Expression oldValue = value;
-    value = newValue;
+    Expression oldCaseExpression = caseExpression;
+    caseExpression = newCaseExpression;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.SWITCH_CASE__VALUE, oldValue, newValue);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.SWITCH_CASE__CASE_EXPRESSION, oldCaseExpression, newCaseExpression);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -107,20 +107,20 @@ public class SwitchCaseImpl extends MinimalEObjectImpl.Container implements Swit
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setValue(Expression newValue)
+  public void setCaseExpression(Expression newCaseExpression)
   {
-    if (newValue != value)
+    if (newCaseExpression != caseExpression)
     {
       NotificationChain msgs = null;
-      if (value != null)
-        msgs = ((InternalEObject)value).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.SWITCH_CASE__VALUE, null, msgs);
-      if (newValue != null)
-        msgs = ((InternalEObject)newValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.SWITCH_CASE__VALUE, null, msgs);
-      msgs = basicSetValue(newValue, msgs);
+      if (caseExpression != null)
+        msgs = ((InternalEObject)caseExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.SWITCH_CASE__CASE_EXPRESSION, null, msgs);
+      if (newCaseExpression != null)
+        msgs = ((InternalEObject)newCaseExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.SWITCH_CASE__CASE_EXPRESSION, null, msgs);
+      msgs = basicSetCaseExpression(newCaseExpression, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.SWITCH_CASE__VALUE, newValue, newValue));
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.SWITCH_CASE__CASE_EXPRESSION, newCaseExpression, newCaseExpression));
   }
 
   /**
@@ -128,9 +128,9 @@ public class SwitchCaseImpl extends MinimalEObjectImpl.Container implements Swit
    * <!-- end-user-doc -->
    * @generated
    */
-  public Expression getExpression()
+  public Expression getResultExpression()
   {
-    return expression;
+    return resultExpression;
   }
 
   /**
@@ -138,13 +138,13 @@ public class SwitchCaseImpl extends MinimalEObjectImpl.Container implements Swit
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetExpression(Expression newExpression, NotificationChain msgs)
+  public NotificationChain basicSetResultExpression(Expression newResultExpression, NotificationChain msgs)
   {
-    Expression oldExpression = expression;
-    expression = newExpression;
+    Expression oldResultExpression = resultExpression;
+    resultExpression = newResultExpression;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.SWITCH_CASE__EXPRESSION, oldExpression, newExpression);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.SWITCH_CASE__RESULT_EXPRESSION, oldResultExpression, newResultExpression);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -155,20 +155,20 @@ public class SwitchCaseImpl extends MinimalEObjectImpl.Container implements Swit
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setExpression(Expression newExpression)
+  public void setResultExpression(Expression newResultExpression)
   {
-    if (newExpression != expression)
+    if (newResultExpression != resultExpression)
     {
       NotificationChain msgs = null;
-      if (expression != null)
-        msgs = ((InternalEObject)expression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.SWITCH_CASE__EXPRESSION, null, msgs);
-      if (newExpression != null)
-        msgs = ((InternalEObject)newExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.SWITCH_CASE__EXPRESSION, null, msgs);
-      msgs = basicSetExpression(newExpression, msgs);
+      if (resultExpression != null)
+        msgs = ((InternalEObject)resultExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.SWITCH_CASE__RESULT_EXPRESSION, null, msgs);
+      if (newResultExpression != null)
+        msgs = ((InternalEObject)newResultExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.SWITCH_CASE__RESULT_EXPRESSION, null, msgs);
+      msgs = basicSetResultExpression(newResultExpression, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.SWITCH_CASE__EXPRESSION, newExpression, newExpression));
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.SWITCH_CASE__RESULT_EXPRESSION, newResultExpression, newResultExpression));
   }
 
   /**
@@ -181,10 +181,10 @@ public class SwitchCaseImpl extends MinimalEObjectImpl.Container implements Swit
   {
     switch (featureID)
     {
-      case AstPackage.SWITCH_CASE__VALUE:
-        return basicSetValue(null, msgs);
-      case AstPackage.SWITCH_CASE__EXPRESSION:
-        return basicSetExpression(null, msgs);
+      case AstPackage.SWITCH_CASE__CASE_EXPRESSION:
+        return basicSetCaseExpression(null, msgs);
+      case AstPackage.SWITCH_CASE__RESULT_EXPRESSION:
+        return basicSetResultExpression(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -199,10 +199,10 @@ public class SwitchCaseImpl extends MinimalEObjectImpl.Container implements Swit
   {
     switch (featureID)
     {
-      case AstPackage.SWITCH_CASE__VALUE:
-        return getValue();
-      case AstPackage.SWITCH_CASE__EXPRESSION:
-        return getExpression();
+      case AstPackage.SWITCH_CASE__CASE_EXPRESSION:
+        return getCaseExpression();
+      case AstPackage.SWITCH_CASE__RESULT_EXPRESSION:
+        return getResultExpression();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -217,11 +217,11 @@ public class SwitchCaseImpl extends MinimalEObjectImpl.Container implements Swit
   {
     switch (featureID)
     {
-      case AstPackage.SWITCH_CASE__VALUE:
-        setValue((Expression)newValue);
+      case AstPackage.SWITCH_CASE__CASE_EXPRESSION:
+        setCaseExpression((Expression)newValue);
         return;
-      case AstPackage.SWITCH_CASE__EXPRESSION:
-        setExpression((Expression)newValue);
+      case AstPackage.SWITCH_CASE__RESULT_EXPRESSION:
+        setResultExpression((Expression)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -237,11 +237,11 @@ public class SwitchCaseImpl extends MinimalEObjectImpl.Container implements Swit
   {
     switch (featureID)
     {
-      case AstPackage.SWITCH_CASE__VALUE:
-        setValue((Expression)null);
+      case AstPackage.SWITCH_CASE__CASE_EXPRESSION:
+        setCaseExpression((Expression)null);
         return;
-      case AstPackage.SWITCH_CASE__EXPRESSION:
-        setExpression((Expression)null);
+      case AstPackage.SWITCH_CASE__RESULT_EXPRESSION:
+        setResultExpression((Expression)null);
         return;
     }
     super.eUnset(featureID);
@@ -257,10 +257,10 @@ public class SwitchCaseImpl extends MinimalEObjectImpl.Container implements Swit
   {
     switch (featureID)
     {
-      case AstPackage.SWITCH_CASE__VALUE:
-        return value != null;
-      case AstPackage.SWITCH_CASE__EXPRESSION:
-        return expression != null;
+      case AstPackage.SWITCH_CASE__CASE_EXPRESSION:
+        return caseExpression != null;
+      case AstPackage.SWITCH_CASE__RESULT_EXPRESSION:
+        return resultExpression != null;
     }
     return super.eIsSet(featureID);
   }
