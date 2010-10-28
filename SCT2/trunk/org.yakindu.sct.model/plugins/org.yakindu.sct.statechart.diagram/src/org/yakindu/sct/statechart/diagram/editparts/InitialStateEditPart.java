@@ -20,8 +20,7 @@ import org.yakindu.sct.statechart.diagram.policies.RelationshipSemanticEditPolic
 
 /**
  * 
- * @author Andreas Muelder <a
- *         href="mailto:andreas.muelder@itemis.de">andreas.muelder@itemis.de</a>
+ * @author Andreas Muelder <ahref="mailto:andreas.muelder@itemis.de">andreas.muelder@itemis.de</a>
  * 
  */
 public class InitialStateEditPart extends FixedSizeShapeNodeEditPart {
@@ -38,9 +37,10 @@ public class InitialStateEditPart extends FixedSizeShapeNodeEditPart {
 
 	@Override
 	public Dimension getDefaultSize() {
-		return MapModeUtils.getDefaultSizeDimension(getMapMode());
+		return MapModeUtils.getMappedDimensions(getMapMode(), MapModeUtils.DEFAULT_SMALL_NODE_DIMENSION);
 	}
 
+	
 	@Override
 	public IFigure getPrimaryShape() {
 		return new InitialStateFigure();

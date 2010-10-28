@@ -22,12 +22,12 @@ public class JunctionFigure extends Ellipse {
 	}
 
 	private void init() {
-		this.setOutline(false);
+		this.setOutline(true);
 		this.setLineWidth(0);
 		this.setSize(new Dimension(10, 10));
 		this.setBorder(new MarginBorder(2, 2, 2, 2));
-		this.setBackgroundColor(ColorConstants.black);
-		this.setForegroundColor(ColorConstants.white);
+		this.setBackgroundColor(ColorConstants.white);
+		this.setForegroundColor(ColorConstants.black);
 	}
 
 }
