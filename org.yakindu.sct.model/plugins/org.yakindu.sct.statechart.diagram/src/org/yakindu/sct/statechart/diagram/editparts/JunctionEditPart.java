@@ -26,6 +26,9 @@ import org.yakindu.sct.statechart.diagram.policies.RelationshipSemanticEditPolic
  */
 public class JunctionEditPart extends FixedSizeShapeNodeEditPart {
 
+	private static final Dimension DIMENSION = new Dimension(10, 10);
+	
+	
 	public JunctionEditPart(View view) {
 		super(view);
 	}
@@ -38,7 +41,7 @@ public class JunctionEditPart extends FixedSizeShapeNodeEditPart {
 
 	@Override
 	public Dimension getDefaultSize() {
-		return MapModeUtils.getDefaultSizeDimension(getMapMode());
+		return MapModeUtils.getMappedDimensions(getMapMode(), DIMENSION);
 	}
 
 	@Override

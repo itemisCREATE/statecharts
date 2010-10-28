@@ -38,7 +38,7 @@ public class FinalStateEditPart extends FixedSizeShapeNodeEditPart {
 
 	@Override
 	public Dimension getDefaultSize() {
-		return MapModeUtils.getDefaultSizeDimension(getMapMode());
+		return MapModeUtils.getMappedDimensions(getMapMode(), MapModeUtils.DEFAULT_SMALL_NODE_DIMENSION);
 	}
 
 	@Override
