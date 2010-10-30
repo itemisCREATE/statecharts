@@ -129,7 +129,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//NamedTypeSpecifier/typeReference"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//ArrayDimensionSpecification">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//ArrayDimensionSpecification/unspecified"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ArrayDimensionSpecification/size"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//Expression"/>
@@ -165,7 +164,7 @@
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//Literal"/>
     <genClasses ecoreClass="Mscript.ecore#//NumericLiteral">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//NumericLiteral/imaginary"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//NumericLiteral/modifier"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//NumericLiteral/unit"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//RealLiteral">
@@ -190,10 +189,25 @@
     <genClasses ecoreClass="Mscript.ecore#//OperationCall">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//OperationCall/arguments"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//IteratorCall"/>
+    <genClasses ecoreClass="Mscript.ecore#//IterationCall"/>
+    <genClasses ecoreClass="Mscript.ecore#//IterationVariable">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//IterationVariable/name"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//IterationAccumulator">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//IterationAccumulator/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//IterationAccumulator/initialExpression"/>
+    </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//Subscript">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//Subscript/slice"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//Subscript/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//ArrayConstructionOperator">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ArrayConstructionOperator/expressions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ArrayConstructionOperator/iterationClauses"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//ArrayConstructionIterationClause">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//ArrayConstructionIterationClause/variableName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ArrayConstructionIterationClause/collectionExpression"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//MatrixConstructionOperator">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//MatrixConstructionOperator/expressionLists"/>
@@ -213,8 +227,6 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//QualifiedName/identifiers"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//UnitExpression">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//UnitExpression/unspecified"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//UnitExpression/expression"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//UnitExpression/numerator"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//UnitExpression/denominator"/>
     </genClasses>
@@ -289,9 +301,8 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//SimpleName/identifier"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//ElementDeclaration">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//ElementDeclaration/elementName"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//ElementDeclaration/accumulatorName"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ElementDeclaration/initialExpression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ElementDeclaration/variables"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ElementDeclaration/accumulator"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ElementDeclaration/expression"/>
     </genClasses>
   </genPackages>

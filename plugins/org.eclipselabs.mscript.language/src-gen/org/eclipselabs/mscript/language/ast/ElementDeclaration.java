@@ -5,6 +5,7 @@
  */
 package org.eclipselabs.mscript.language.ast;
 
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -14,9 +15,8 @@ package org.eclipselabs.mscript.language.ast;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.ElementDeclaration#getElementName <em>Element Name</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.ElementDeclaration#getAccumulatorName <em>Accumulator Name</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.ElementDeclaration#getInitialExpression <em>Initial Expression</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.ElementDeclaration#getVariables <em>Variables</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.ElementDeclaration#getAccumulator <em>Accumulator</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.ElementDeclaration#getExpression <em>Expression</em>}</li>
  * </ul>
  * </p>
@@ -25,85 +25,49 @@ package org.eclipselabs.mscript.language.ast;
  * @model
  * @generated
  */
-public interface ElementDeclaration extends IteratorCall
+public interface ElementDeclaration extends IterationCall
 {
   /**
-   * Returns the value of the '<em><b>Element Name</b></em>' attribute.
+   * Returns the value of the '<em><b>Variables</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipselabs.mscript.language.ast.IterationVariable}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Element Name</em>' attribute isn't clear,
+   * If the meaning of the '<em>Variables</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Element Name</em>' attribute.
-   * @see #setElementName(String)
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getElementDeclaration_ElementName()
-   * @model
-   * @generated
-   */
-  String getElementName();
-
-  /**
-   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.ElementDeclaration#getElementName <em>Element Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Element Name</em>' attribute.
-   * @see #getElementName()
-   * @generated
-   */
-  void setElementName(String value);
-
-  /**
-   * Returns the value of the '<em><b>Accumulator Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Accumulator Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Accumulator Name</em>' attribute.
-   * @see #setAccumulatorName(String)
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getElementDeclaration_AccumulatorName()
-   * @model
-   * @generated
-   */
-  String getAccumulatorName();
-
-  /**
-   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.ElementDeclaration#getAccumulatorName <em>Accumulator Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Accumulator Name</em>' attribute.
-   * @see #getAccumulatorName()
-   * @generated
-   */
-  void setAccumulatorName(String value);
-
-  /**
-   * Returns the value of the '<em><b>Initial Expression</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Initial Expression</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Initial Expression</em>' containment reference.
-   * @see #setInitialExpression(Expression)
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getElementDeclaration_InitialExpression()
+   * @return the value of the '<em>Variables</em>' containment reference list.
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getElementDeclaration_Variables()
    * @model containment="true"
    * @generated
    */
-  Expression getInitialExpression();
+  EList<IterationVariable> getVariables();
 
   /**
-   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.ElementDeclaration#getInitialExpression <em>Initial Expression</em>}' containment reference.
+   * Returns the value of the '<em><b>Accumulator</b></em>' containment reference.
    * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Accumulator</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Initial Expression</em>' containment reference.
-   * @see #getInitialExpression()
+   * @return the value of the '<em>Accumulator</em>' containment reference.
+   * @see #setAccumulator(IterationAccumulator)
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getElementDeclaration_Accumulator()
+   * @model containment="true"
    * @generated
    */
-  void setInitialExpression(Expression value);
+  IterationAccumulator getAccumulator();
+
+  /**
+   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.ElementDeclaration#getAccumulator <em>Accumulator</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Accumulator</em>' containment reference.
+   * @see #getAccumulator()
+   * @generated
+   */
+  void setAccumulator(IterationAccumulator value);
 
   /**
    * Returns the value of the '<em><b>Expression</b></em>' containment reference.

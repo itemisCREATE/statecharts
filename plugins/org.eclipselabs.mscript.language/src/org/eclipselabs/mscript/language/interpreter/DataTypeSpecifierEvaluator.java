@@ -46,7 +46,7 @@ public class DataTypeSpecifierEvaluator extends AstSwitch<DataType> {
 	public DataType caseRealTypeSpecifier(RealTypeSpecifier realTypeSpecifier) {
 		RealType realType = (RealType) TypeSystemFactory.eINSTANCE.createRealType();
 		if (realTypeSpecifier.getUnit() != null) {
-			if (!realTypeSpecifier.getUnit().isUnspecified()) {
+			if (realTypeSpecifier.getUnit().getNumerator() != null) {
 				try {
 					realType.setUnit(new UnitExpressionHelper().evaluate(realTypeSpecifier.getUnit()));
 				} catch (InvalidUnitExpressionOperandException e) {
@@ -66,7 +66,7 @@ public class DataTypeSpecifierEvaluator extends AstSwitch<DataType> {
 	public DataType caseIntegerTypeSpecifier(IntegerTypeSpecifier integerTypeSpecifier) {
 		IntegerType integerType = (IntegerType) TypeSystemFactory.eINSTANCE.createIntegerType();
 		if (integerTypeSpecifier.getUnit() != null) {
-			if (!integerTypeSpecifier.getUnit().isUnspecified()) {
+			if (integerTypeSpecifier.getUnit().getNumerator() != null) {
 				try {
 					integerType.setUnit(new UnitExpressionHelper().evaluate(integerTypeSpecifier.getUnit()));
 				} catch (InvalidUnitExpressionOperandException e) {

@@ -114,8 +114,12 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
       case AstPackage.FEATURE_REFERENCE: return createFeatureReference();
       case AstPackage.ARRAY_ELEMENT_REFERENCE: return createArrayElementReference();
       case AstPackage.OPERATION_CALL: return createOperationCall();
-      case AstPackage.ITERATOR_CALL: return createIteratorCall();
+      case AstPackage.ITERATION_CALL: return createIterationCall();
+      case AstPackage.ITERATION_VARIABLE: return createIterationVariable();
+      case AstPackage.ITERATION_ACCUMULATOR: return createIterationAccumulator();
       case AstPackage.SUBSCRIPT: return createSubscript();
+      case AstPackage.ARRAY_CONSTRUCTION_OPERATOR: return createArrayConstructionOperator();
+      case AstPackage.ARRAY_CONSTRUCTION_ITERATION_CLAUSE: return createArrayConstructionIterationClause();
       case AstPackage.MATRIX_CONSTRUCTION_OPERATOR: return createMatrixConstructionOperator();
       case AstPackage.EXPRESSION_LIST: return createExpressionList();
       case AstPackage.UNIT_CONSTRUCTION_OPERATOR: return createUnitConstructionOperator();
@@ -724,10 +728,32 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public IteratorCall createIteratorCall()
+  public IterationCall createIterationCall()
   {
-    IteratorCallImpl iteratorCall = new IteratorCallImpl();
-    return iteratorCall;
+    IterationCallImpl iterationCall = new IterationCallImpl();
+    return iterationCall;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public IterationVariable createIterationVariable()
+  {
+    IterationVariableImpl iterationVariable = new IterationVariableImpl();
+    return iterationVariable;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public IterationAccumulator createIterationAccumulator()
+  {
+    IterationAccumulatorImpl iterationAccumulator = new IterationAccumulatorImpl();
+    return iterationAccumulator;
   }
 
   /**
@@ -739,6 +765,28 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
   {
     SubscriptImpl subscript = new SubscriptImpl();
     return subscript;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ArrayConstructionOperator createArrayConstructionOperator()
+  {
+    ArrayConstructionOperatorImpl arrayConstructionOperator = new ArrayConstructionOperatorImpl();
+    return arrayConstructionOperator;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ArrayConstructionIterationClause createArrayConstructionIterationClause()
+  {
+    ArrayConstructionIterationClauseImpl arrayConstructionIterationClause = new ArrayConstructionIterationClauseImpl();
+    return arrayConstructionIterationClause;
   }
 
   /**

@@ -15,7 +15,6 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.ArrayDimensionSpecification#isUnspecified <em>Unspecified</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.ArrayDimensionSpecification#getSize <em>Size</em>}</li>
  * </ul>
  * </p>
@@ -26,32 +25,6 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface ArrayDimensionSpecification extends EObject
 {
-  /**
-   * Returns the value of the '<em><b>Unspecified</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Unspecified</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Unspecified</em>' attribute.
-   * @see #setUnspecified(boolean)
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getArrayDimensionSpecification_Unspecified()
-   * @model
-   * @generated
-   */
-  boolean isUnspecified();
-
-  /**
-   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.ArrayDimensionSpecification#isUnspecified <em>Unspecified</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Unspecified</em>' attribute.
-   * @see #isUnspecified()
-   * @generated
-   */
-  void setUnspecified(boolean value);
-
   /**
    * Returns the value of the '<em><b>Size</b></em>' containment reference.
    * <!-- begin-user-doc -->

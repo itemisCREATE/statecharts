@@ -440,13 +440,31 @@ public interface AstFactory extends EFactory
   OperationCall createOperationCall();
 
   /**
-   * Returns a new object of class '<em>Iterator Call</em>'.
+   * Returns a new object of class '<em>Iteration Call</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Iterator Call</em>'.
+   * @return a new object of class '<em>Iteration Call</em>'.
    * @generated
    */
-  IteratorCall createIteratorCall();
+  IterationCall createIterationCall();
+
+  /**
+   * Returns a new object of class '<em>Iteration Variable</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Iteration Variable</em>'.
+   * @generated
+   */
+  IterationVariable createIterationVariable();
+
+  /**
+   * Returns a new object of class '<em>Iteration Accumulator</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Iteration Accumulator</em>'.
+   * @generated
+   */
+  IterationAccumulator createIterationAccumulator();
 
   /**
    * Returns a new object of class '<em>Subscript</em>'.
@@ -456,6 +474,24 @@ public interface AstFactory extends EFactory
    * @generated
    */
   Subscript createSubscript();
+
+  /**
+   * Returns a new object of class '<em>Array Construction Operator</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Array Construction Operator</em>'.
+   * @generated
+   */
+  ArrayConstructionOperator createArrayConstructionOperator();
+
+  /**
+   * Returns a new object of class '<em>Array Construction Iteration Clause</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Array Construction Iteration Clause</em>'.
+   * @generated
+   */
+  ArrayConstructionIterationClause createArrayConstructionIterationClause();
 
   /**
    * Returns a new object of class '<em>Matrix Construction Operator</em>'.

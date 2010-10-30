@@ -1043,22 +1043,13 @@ public interface AstPackage extends EPackage
   int ARRAY_DIMENSION_SPECIFICATION = 27;
 
   /**
-   * The feature id for the '<em><b>Unspecified</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ARRAY_DIMENSION_SPECIFICATION__UNSPECIFIED = 0;
-
-  /**
    * The feature id for the '<em><b>Size</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ARRAY_DIMENSION_SPECIFICATION__SIZE = 1;
+  int ARRAY_DIMENSION_SPECIFICATION__SIZE = 0;
 
   /**
    * The number of structural features of the '<em>Array Dimension Specification</em>' class.
@@ -1067,7 +1058,7 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ARRAY_DIMENSION_SPECIFICATION_FEATURE_COUNT = 2;
+  int ARRAY_DIMENSION_SPECIFICATION_FEATURE_COUNT = 1;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.ExpressionImpl <em>Expression</em>}' class.
@@ -1395,13 +1386,13 @@ public interface AstPackage extends EPackage
   int NUMERIC_LITERAL = 37;
 
   /**
-   * The feature id for the '<em><b>Imaginary</b></em>' attribute.
+   * The feature id for the '<em><b>Modifier</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int NUMERIC_LITERAL__IMAGINARY = LITERAL_FEATURE_COUNT + 0;
+  int NUMERIC_LITERAL__MODIFIER = LITERAL_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Unit</b></em>' containment reference.
@@ -1432,13 +1423,13 @@ public interface AstPackage extends EPackage
   int REAL_LITERAL = 38;
 
   /**
-   * The feature id for the '<em><b>Imaginary</b></em>' attribute.
+   * The feature id for the '<em><b>Modifier</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int REAL_LITERAL__IMAGINARY = NUMERIC_LITERAL__IMAGINARY;
+  int REAL_LITERAL__MODIFIER = NUMERIC_LITERAL__MODIFIER;
 
   /**
    * The feature id for the '<em><b>Unit</b></em>' containment reference.
@@ -1478,13 +1469,13 @@ public interface AstPackage extends EPackage
   int INTEGER_LITERAL = 39;
 
   /**
-   * The feature id for the '<em><b>Imaginary</b></em>' attribute.
+   * The feature id for the '<em><b>Modifier</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int INTEGER_LITERAL__IMAGINARY = NUMERIC_LITERAL__IMAGINARY;
+  int INTEGER_LITERAL__MODIFIER = NUMERIC_LITERAL__MODIFIER;
 
   /**
    * The feature id for the '<em><b>Unit</b></em>' containment reference.
@@ -1673,23 +1664,88 @@ public interface AstPackage extends EPackage
   int OPERATION_CALL_FEATURE_COUNT = FEATURE_CALL_PART_FEATURE_COUNT + 1;
 
   /**
-   * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.IteratorCallImpl <em>Iterator Call</em>}' class.
+   * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.IterationCallImpl <em>Iteration Call</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.eclipselabs.mscript.language.ast.impl.IteratorCallImpl
-   * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getIteratorCall()
+   * @see org.eclipselabs.mscript.language.ast.impl.IterationCallImpl
+   * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getIterationCall()
    * @generated
    */
-  int ITERATOR_CALL = 46;
+  int ITERATION_CALL = 46;
 
   /**
-   * The number of structural features of the '<em>Iterator Call</em>' class.
+   * The number of structural features of the '<em>Iteration Call</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ITERATOR_CALL_FEATURE_COUNT = FEATURE_CALL_PART_FEATURE_COUNT + 0;
+  int ITERATION_CALL_FEATURE_COUNT = FEATURE_CALL_PART_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.IterationVariableImpl <em>Iteration Variable</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipselabs.mscript.language.ast.impl.IterationVariableImpl
+   * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getIterationVariable()
+   * @generated
+   */
+  int ITERATION_VARIABLE = 47;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ITERATION_VARIABLE__NAME = 0;
+
+  /**
+   * The number of structural features of the '<em>Iteration Variable</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ITERATION_VARIABLE_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.IterationAccumulatorImpl <em>Iteration Accumulator</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipselabs.mscript.language.ast.impl.IterationAccumulatorImpl
+   * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getIterationAccumulator()
+   * @generated
+   */
+  int ITERATION_ACCUMULATOR = 48;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ITERATION_ACCUMULATOR__NAME = 0;
+
+  /**
+   * The feature id for the '<em><b>Initial Expression</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ITERATION_ACCUMULATOR__INITIAL_EXPRESSION = 1;
+
+  /**
+   * The number of structural features of the '<em>Iteration Accumulator</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ITERATION_ACCUMULATOR_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.SubscriptImpl <em>Subscript</em>}' class.
@@ -1699,7 +1755,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getSubscript()
    * @generated
    */
-  int SUBSCRIPT = 47;
+  int SUBSCRIPT = 49;
 
   /**
    * The feature id for the '<em><b>Slice</b></em>' attribute.
@@ -1729,6 +1785,80 @@ public interface AstPackage extends EPackage
   int SUBSCRIPT_FEATURE_COUNT = 2;
 
   /**
+   * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.ArrayConstructionOperatorImpl <em>Array Construction Operator</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipselabs.mscript.language.ast.impl.ArrayConstructionOperatorImpl
+   * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getArrayConstructionOperator()
+   * @generated
+   */
+  int ARRAY_CONSTRUCTION_OPERATOR = 50;
+
+  /**
+   * The feature id for the '<em><b>Expressions</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARRAY_CONSTRUCTION_OPERATOR__EXPRESSIONS = EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Iteration Clauses</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARRAY_CONSTRUCTION_OPERATOR__ITERATION_CLAUSES = EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Array Construction Operator</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARRAY_CONSTRUCTION_OPERATOR_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.ArrayConstructionIterationClauseImpl <em>Array Construction Iteration Clause</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipselabs.mscript.language.ast.impl.ArrayConstructionIterationClauseImpl
+   * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getArrayConstructionIterationClause()
+   * @generated
+   */
+  int ARRAY_CONSTRUCTION_ITERATION_CLAUSE = 51;
+
+  /**
+   * The feature id for the '<em><b>Variable Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARRAY_CONSTRUCTION_ITERATION_CLAUSE__VARIABLE_NAME = 0;
+
+  /**
+   * The feature id for the '<em><b>Collection Expression</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARRAY_CONSTRUCTION_ITERATION_CLAUSE__COLLECTION_EXPRESSION = 1;
+
+  /**
+   * The number of structural features of the '<em>Array Construction Iteration Clause</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARRAY_CONSTRUCTION_ITERATION_CLAUSE_FEATURE_COUNT = 2;
+
+  /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.MatrixConstructionOperatorImpl <em>Matrix Construction Operator</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1736,7 +1866,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getMatrixConstructionOperator()
    * @generated
    */
-  int MATRIX_CONSTRUCTION_OPERATOR = 48;
+  int MATRIX_CONSTRUCTION_OPERATOR = 52;
 
   /**
    * The feature id for the '<em><b>Expression Lists</b></em>' containment reference list.
@@ -1764,7 +1894,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getExpressionList()
    * @generated
    */
-  int EXPRESSION_LIST = 49;
+  int EXPRESSION_LIST = 53;
 
   /**
    * The feature id for the '<em><b>Expressions</b></em>' containment reference list.
@@ -1792,7 +1922,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getUnitConstructionOperator()
    * @generated
    */
-  int UNIT_CONSTRUCTION_OPERATOR = 50;
+  int UNIT_CONSTRUCTION_OPERATOR = 54;
 
   /**
    * The feature id for the '<em><b>Unit</b></em>' containment reference.
@@ -1820,7 +1950,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getParenthesizedExpression()
    * @generated
    */
-  int PARENTHESIZED_EXPRESSION = 51;
+  int PARENTHESIZED_EXPRESSION = 55;
 
   /**
    * The feature id for the '<em><b>Expressions</b></em>' containment reference list.
@@ -1848,7 +1978,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getBeginExpression()
    * @generated
    */
-  int BEGIN_EXPRESSION = 52;
+  int BEGIN_EXPRESSION = 56;
 
   /**
    * The number of structural features of the '<em>Begin Expression</em>' class.
@@ -1867,7 +1997,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getEndExpression()
    * @generated
    */
-  int END_EXPRESSION = 53;
+  int END_EXPRESSION = 57;
 
   /**
    * The number of structural features of the '<em>End Expression</em>' class.
@@ -1886,7 +2016,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getQualifiedName()
    * @generated
    */
-  int QUALIFIED_NAME = 54;
+  int QUALIFIED_NAME = 58;
 
   /**
    * The feature id for the '<em><b>Identifiers</b></em>' attribute list.
@@ -1914,25 +2044,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getUnitExpression()
    * @generated
    */
-  int UNIT_EXPRESSION = 55;
-
-  /**
-   * The feature id for the '<em><b>Unspecified</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int UNIT_EXPRESSION__UNSPECIFIED = 0;
-
-  /**
-   * The feature id for the '<em><b>Expression</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int UNIT_EXPRESSION__EXPRESSION = 1;
+  int UNIT_EXPRESSION = 59;
 
   /**
    * The feature id for the '<em><b>Numerator</b></em>' containment reference.
@@ -1941,7 +2053,7 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int UNIT_EXPRESSION__NUMERATOR = 2;
+  int UNIT_EXPRESSION__NUMERATOR = 0;
 
   /**
    * The feature id for the '<em><b>Denominator</b></em>' containment reference.
@@ -1950,7 +2062,7 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int UNIT_EXPRESSION__DENOMINATOR = 3;
+  int UNIT_EXPRESSION__DENOMINATOR = 1;
 
   /**
    * The number of structural features of the '<em>Unit Expression</em>' class.
@@ -1959,7 +2071,7 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int UNIT_EXPRESSION_FEATURE_COUNT = 4;
+  int UNIT_EXPRESSION_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.UnitExpressionNumeratorImpl <em>Unit Expression Numerator</em>}' class.
@@ -1969,7 +2081,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getUnitExpressionNumerator()
    * @generated
    */
-  int UNIT_EXPRESSION_NUMERATOR = 56;
+  int UNIT_EXPRESSION_NUMERATOR = 60;
 
   /**
    * The feature id for the '<em><b>One</b></em>' attribute.
@@ -2006,7 +2118,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getUnitExpressionDenominator()
    * @generated
    */
-  int UNIT_EXPRESSION_DENOMINATOR = 57;
+  int UNIT_EXPRESSION_DENOMINATOR = 61;
 
   /**
    * The feature id for the '<em><b>Factors</b></em>' containment reference list.
@@ -2034,7 +2146,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getUnitExpressionFactor()
    * @generated
    */
-  int UNIT_EXPRESSION_FACTOR = 58;
+  int UNIT_EXPRESSION_FACTOR = 62;
 
   /**
    * The feature id for the '<em><b>Operand</b></em>' attribute.
@@ -2071,7 +2183,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getUnitExpressionExponent()
    * @generated
    */
-  int UNIT_EXPRESSION_EXPONENT = 59;
+  int UNIT_EXPRESSION_EXPONENT = 63;
 
   /**
    * The feature id for the '<em><b>Negative</b></em>' attribute.
@@ -2108,7 +2220,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getRangeExpression()
    * @generated
    */
-  int RANGE_EXPRESSION = 60;
+  int RANGE_EXPRESSION = 64;
 
   /**
    * The feature id for the '<em><b>Begin</b></em>' containment reference.
@@ -2154,7 +2266,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getImpliesExpression()
    * @generated
    */
-  int IMPLIES_EXPRESSION = 61;
+  int IMPLIES_EXPRESSION = 65;
 
   /**
    * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -2191,7 +2303,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getLogicalOrExpression()
    * @generated
    */
-  int LOGICAL_OR_EXPRESSION = 62;
+  int LOGICAL_OR_EXPRESSION = 66;
 
   /**
    * The feature id for the '<em><b>Operands</b></em>' containment reference list.
@@ -2219,7 +2331,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getLogicalAndExpression()
    * @generated
    */
-  int LOGICAL_AND_EXPRESSION = 63;
+  int LOGICAL_AND_EXPRESSION = 67;
 
   /**
    * The feature id for the '<em><b>Operands</b></em>' containment reference list.
@@ -2247,7 +2359,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getEqualityExpression()
    * @generated
    */
-  int EQUALITY_EXPRESSION = 64;
+  int EQUALITY_EXPRESSION = 68;
 
   /**
    * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -2293,7 +2405,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getRelationalExpression()
    * @generated
    */
-  int RELATIONAL_EXPRESSION = 65;
+  int RELATIONAL_EXPRESSION = 69;
 
   /**
    * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -2357,7 +2469,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getAdditiveExpression()
    * @generated
    */
-  int ADDITIVE_EXPRESSION = 66;
+  int ADDITIVE_EXPRESSION = 70;
 
   /**
    * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -2394,7 +2506,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getMultiplicativeExpression()
    * @generated
    */
-  int MULTIPLICATIVE_EXPRESSION = 67;
+  int MULTIPLICATIVE_EXPRESSION = 71;
 
   /**
    * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -2431,7 +2543,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getPowerExpression()
    * @generated
    */
-  int POWER_EXPRESSION = 68;
+  int POWER_EXPRESSION = 72;
 
   /**
    * The feature id for the '<em><b>Operand</b></em>' containment reference.
@@ -2477,7 +2589,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getUnaryExpression()
    * @generated
    */
-  int UNARY_EXPRESSION = 69;
+  int UNARY_EXPRESSION = 73;
 
   /**
    * The feature id for the '<em><b>Operator</b></em>' attribute.
@@ -2514,7 +2626,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getPostfixExpression()
    * @generated
    */
-  int POSTFIX_EXPRESSION = 70;
+  int POSTFIX_EXPRESSION = 74;
 
   /**
    * The feature id for the '<em><b>Operand</b></em>' containment reference.
@@ -2551,7 +2663,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getFeatureCall()
    * @generated
    */
-  int FEATURE_CALL = 71;
+  int FEATURE_CALL = 75;
 
   /**
    * The feature id for the '<em><b>Target</b></em>' containment reference.
@@ -2588,7 +2700,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getSimpleName()
    * @generated
    */
-  int SIMPLE_NAME = 72;
+  int SIMPLE_NAME = 76;
 
   /**
    * The feature id for the '<em><b>Identifier</b></em>' attribute.
@@ -2616,34 +2728,25 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getElementDeclaration()
    * @generated
    */
-  int ELEMENT_DECLARATION = 73;
+  int ELEMENT_DECLARATION = 77;
 
   /**
-   * The feature id for the '<em><b>Element Name</b></em>' attribute.
+   * The feature id for the '<em><b>Variables</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ELEMENT_DECLARATION__ELEMENT_NAME = ITERATOR_CALL_FEATURE_COUNT + 0;
+  int ELEMENT_DECLARATION__VARIABLES = ITERATION_CALL_FEATURE_COUNT + 0;
 
   /**
-   * The feature id for the '<em><b>Accumulator Name</b></em>' attribute.
+   * The feature id for the '<em><b>Accumulator</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ELEMENT_DECLARATION__ACCUMULATOR_NAME = ITERATOR_CALL_FEATURE_COUNT + 1;
-
-  /**
-   * The feature id for the '<em><b>Initial Expression</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ELEMENT_DECLARATION__INITIAL_EXPRESSION = ITERATOR_CALL_FEATURE_COUNT + 2;
+  int ELEMENT_DECLARATION__ACCUMULATOR = ITERATION_CALL_FEATURE_COUNT + 1;
 
   /**
    * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -2652,7 +2755,7 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ELEMENT_DECLARATION__EXPRESSION = ITERATOR_CALL_FEATURE_COUNT + 3;
+  int ELEMENT_DECLARATION__EXPRESSION = ITERATION_CALL_FEATURE_COUNT + 2;
 
   /**
    * The number of structural features of the '<em>Element Declaration</em>' class.
@@ -2661,7 +2764,7 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ELEMENT_DECLARATION_FEATURE_COUNT = ITERATOR_CALL_FEATURE_COUNT + 4;
+  int ELEMENT_DECLARATION_FEATURE_COUNT = ITERATION_CALL_FEATURE_COUNT + 3;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.AssertionStatusKind <em>Assertion Status Kind</em>}' enum.
@@ -2671,7 +2774,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getAssertionStatusKind()
    * @generated
    */
-  int ASSERTION_STATUS_KIND = 74;
+  int ASSERTION_STATUS_KIND = 78;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.EqualityOperator <em>Equality Operator</em>}' enum.
@@ -2681,7 +2784,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getEqualityOperator()
    * @generated
    */
-  int EQUALITY_OPERATOR = 75;
+  int EQUALITY_OPERATOR = 79;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.RelationalOperator <em>Relational Operator</em>}' enum.
@@ -2691,7 +2794,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getRelationalOperator()
    * @generated
    */
-  int RELATIONAL_OPERATOR = 76;
+  int RELATIONAL_OPERATOR = 80;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.AdditiveOperator <em>Additive Operator</em>}' enum.
@@ -2701,7 +2804,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getAdditiveOperator()
    * @generated
    */
-  int ADDITIVE_OPERATOR = 77;
+  int ADDITIVE_OPERATOR = 81;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.MultiplicativeOperator <em>Multiplicative Operator</em>}' enum.
@@ -2711,7 +2814,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getMultiplicativeOperator()
    * @generated
    */
-  int MULTIPLICATIVE_OPERATOR = 78;
+  int MULTIPLICATIVE_OPERATOR = 82;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.PowerOperator <em>Power Operator</em>}' enum.
@@ -2721,7 +2824,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getPowerOperator()
    * @generated
    */
-  int POWER_OPERATOR = 79;
+  int POWER_OPERATOR = 83;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.UnaryOperator <em>Unary Operator</em>}' enum.
@@ -2731,7 +2834,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getUnaryOperator()
    * @generated
    */
-  int UNARY_OPERATOR = 80;
+  int UNARY_OPERATOR = 84;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.PostfixOperator <em>Postfix Operator</em>}' enum.
@@ -2741,7 +2844,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getPostfixOperator()
    * @generated
    */
-  int POSTFIX_OPERATOR = 81;
+  int POSTFIX_OPERATOR = 85;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.BooleanKind <em>Boolean Kind</em>}' enum.
@@ -2751,7 +2854,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getBooleanKind()
    * @generated
    */
-  int BOOLEAN_KIND = 82;
+  int BOOLEAN_KIND = 86;
 
 
   /**
@@ -3398,17 +3501,6 @@ public interface AstPackage extends EPackage
   EClass getArrayDimensionSpecification();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.ast.ArrayDimensionSpecification#isUnspecified <em>Unspecified</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Unspecified</em>'.
-   * @see org.eclipselabs.mscript.language.ast.ArrayDimensionSpecification#isUnspecified()
-   * @see #getArrayDimensionSpecification()
-   * @generated
-   */
-  EAttribute getArrayDimensionSpecification_Unspecified();
-
-  /**
    * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.ArrayDimensionSpecification#getSize <em>Size</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -3696,15 +3788,15 @@ public interface AstPackage extends EPackage
   EClass getNumericLiteral();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.ast.NumericLiteral#isImaginary <em>Imaginary</em>}'.
+   * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.ast.NumericLiteral#getModifier <em>Modifier</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Imaginary</em>'.
-   * @see org.eclipselabs.mscript.language.ast.NumericLiteral#isImaginary()
+   * @return the meta object for the attribute '<em>Modifier</em>'.
+   * @see org.eclipselabs.mscript.language.ast.NumericLiteral#getModifier()
    * @see #getNumericLiteral()
    * @generated
    */
-  EAttribute getNumericLiteral_Imaginary();
+  EAttribute getNumericLiteral_Modifier();
 
   /**
    * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.NumericLiteral#getUnit <em>Unit</em>}'.
@@ -3875,14 +3967,67 @@ public interface AstPackage extends EPackage
   EReference getOperationCall_Arguments();
 
   /**
-   * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.IteratorCall <em>Iterator Call</em>}'.
+   * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.IterationCall <em>Iteration Call</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Iterator Call</em>'.
-   * @see org.eclipselabs.mscript.language.ast.IteratorCall
+   * @return the meta object for class '<em>Iteration Call</em>'.
+   * @see org.eclipselabs.mscript.language.ast.IterationCall
    * @generated
    */
-  EClass getIteratorCall();
+  EClass getIterationCall();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.IterationVariable <em>Iteration Variable</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Iteration Variable</em>'.
+   * @see org.eclipselabs.mscript.language.ast.IterationVariable
+   * @generated
+   */
+  EClass getIterationVariable();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.ast.IterationVariable#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipselabs.mscript.language.ast.IterationVariable#getName()
+   * @see #getIterationVariable()
+   * @generated
+   */
+  EAttribute getIterationVariable_Name();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.IterationAccumulator <em>Iteration Accumulator</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Iteration Accumulator</em>'.
+   * @see org.eclipselabs.mscript.language.ast.IterationAccumulator
+   * @generated
+   */
+  EClass getIterationAccumulator();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.ast.IterationAccumulator#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipselabs.mscript.language.ast.IterationAccumulator#getName()
+   * @see #getIterationAccumulator()
+   * @generated
+   */
+  EAttribute getIterationAccumulator_Name();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.IterationAccumulator#getInitialExpression <em>Initial Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Initial Expression</em>'.
+   * @see org.eclipselabs.mscript.language.ast.IterationAccumulator#getInitialExpression()
+   * @see #getIterationAccumulator()
+   * @generated
+   */
+  EReference getIterationAccumulator_InitialExpression();
 
   /**
    * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.Subscript <em>Subscript</em>}'.
@@ -3915,6 +4060,70 @@ public interface AstPackage extends EPackage
    * @generated
    */
   EReference getSubscript_Expression();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.ArrayConstructionOperator <em>Array Construction Operator</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Array Construction Operator</em>'.
+   * @see org.eclipselabs.mscript.language.ast.ArrayConstructionOperator
+   * @generated
+   */
+  EClass getArrayConstructionOperator();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.ast.ArrayConstructionOperator#getExpressions <em>Expressions</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Expressions</em>'.
+   * @see org.eclipselabs.mscript.language.ast.ArrayConstructionOperator#getExpressions()
+   * @see #getArrayConstructionOperator()
+   * @generated
+   */
+  EReference getArrayConstructionOperator_Expressions();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.ast.ArrayConstructionOperator#getIterationClauses <em>Iteration Clauses</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Iteration Clauses</em>'.
+   * @see org.eclipselabs.mscript.language.ast.ArrayConstructionOperator#getIterationClauses()
+   * @see #getArrayConstructionOperator()
+   * @generated
+   */
+  EReference getArrayConstructionOperator_IterationClauses();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.ArrayConstructionIterationClause <em>Array Construction Iteration Clause</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Array Construction Iteration Clause</em>'.
+   * @see org.eclipselabs.mscript.language.ast.ArrayConstructionIterationClause
+   * @generated
+   */
+  EClass getArrayConstructionIterationClause();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.ast.ArrayConstructionIterationClause#getVariableName <em>Variable Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Variable Name</em>'.
+   * @see org.eclipselabs.mscript.language.ast.ArrayConstructionIterationClause#getVariableName()
+   * @see #getArrayConstructionIterationClause()
+   * @generated
+   */
+  EAttribute getArrayConstructionIterationClause_VariableName();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.ArrayConstructionIterationClause#getCollectionExpression <em>Collection Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Collection Expression</em>'.
+   * @see org.eclipselabs.mscript.language.ast.ArrayConstructionIterationClause#getCollectionExpression()
+   * @see #getArrayConstructionIterationClause()
+   * @generated
+   */
+  EReference getArrayConstructionIterationClause_CollectionExpression();
 
   /**
    * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.MatrixConstructionOperator <em>Matrix Construction Operator</em>}'.
@@ -4050,28 +4259,6 @@ public interface AstPackage extends EPackage
    * @generated
    */
   EClass getUnitExpression();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.ast.UnitExpression#isUnspecified <em>Unspecified</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Unspecified</em>'.
-   * @see org.eclipselabs.mscript.language.ast.UnitExpression#isUnspecified()
-   * @see #getUnitExpression()
-   * @generated
-   */
-  EAttribute getUnitExpression_Unspecified();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.UnitExpression#getExpression <em>Expression</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Expression</em>'.
-   * @see org.eclipselabs.mscript.language.ast.UnitExpression#getExpression()
-   * @see #getUnitExpression()
-   * @generated
-   */
-  EReference getUnitExpression_Expression();
 
   /**
    * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.UnitExpression#getNumerator <em>Numerator</em>}'.
@@ -4672,37 +4859,26 @@ public interface AstPackage extends EPackage
   EClass getElementDeclaration();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.ast.ElementDeclaration#getElementName <em>Element Name</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.ast.ElementDeclaration#getVariables <em>Variables</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Element Name</em>'.
-   * @see org.eclipselabs.mscript.language.ast.ElementDeclaration#getElementName()
+   * @return the meta object for the containment reference list '<em>Variables</em>'.
+   * @see org.eclipselabs.mscript.language.ast.ElementDeclaration#getVariables()
    * @see #getElementDeclaration()
    * @generated
    */
-  EAttribute getElementDeclaration_ElementName();
+  EReference getElementDeclaration_Variables();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.ast.ElementDeclaration#getAccumulatorName <em>Accumulator Name</em>}'.
+   * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.ElementDeclaration#getAccumulator <em>Accumulator</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Accumulator Name</em>'.
-   * @see org.eclipselabs.mscript.language.ast.ElementDeclaration#getAccumulatorName()
+   * @return the meta object for the containment reference '<em>Accumulator</em>'.
+   * @see org.eclipselabs.mscript.language.ast.ElementDeclaration#getAccumulator()
    * @see #getElementDeclaration()
    * @generated
    */
-  EAttribute getElementDeclaration_AccumulatorName();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.ElementDeclaration#getInitialExpression <em>Initial Expression</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Initial Expression</em>'.
-   * @see org.eclipselabs.mscript.language.ast.ElementDeclaration#getInitialExpression()
-   * @see #getElementDeclaration()
-   * @generated
-   */
-  EReference getElementDeclaration_InitialExpression();
+  EReference getElementDeclaration_Accumulator();
 
   /**
    * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.ElementDeclaration#getExpression <em>Expression</em>}'.
@@ -5373,14 +5549,6 @@ public interface AstPackage extends EPackage
     EClass ARRAY_DIMENSION_SPECIFICATION = eINSTANCE.getArrayDimensionSpecification();
 
     /**
-     * The meta object literal for the '<em><b>Unspecified</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute ARRAY_DIMENSION_SPECIFICATION__UNSPECIFIED = eINSTANCE.getArrayDimensionSpecification_Unspecified();
-
-    /**
      * The meta object literal for the '<em><b>Size</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -5617,12 +5785,12 @@ public interface AstPackage extends EPackage
     EClass NUMERIC_LITERAL = eINSTANCE.getNumericLiteral();
 
     /**
-     * The meta object literal for the '<em><b>Imaginary</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Modifier</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute NUMERIC_LITERAL__IMAGINARY = eINSTANCE.getNumericLiteral_Imaginary();
+    EAttribute NUMERIC_LITERAL__MODIFIER = eINSTANCE.getNumericLiteral_Modifier();
 
     /**
      * The meta object literal for the '<em><b>Unit</b></em>' containment reference feature.
@@ -5769,14 +5937,58 @@ public interface AstPackage extends EPackage
     EReference OPERATION_CALL__ARGUMENTS = eINSTANCE.getOperationCall_Arguments();
 
     /**
-     * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.IteratorCallImpl <em>Iterator Call</em>}' class.
+     * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.IterationCallImpl <em>Iteration Call</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.eclipselabs.mscript.language.ast.impl.IteratorCallImpl
-     * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getIteratorCall()
+     * @see org.eclipselabs.mscript.language.ast.impl.IterationCallImpl
+     * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getIterationCall()
      * @generated
      */
-    EClass ITERATOR_CALL = eINSTANCE.getIteratorCall();
+    EClass ITERATION_CALL = eINSTANCE.getIterationCall();
+
+    /**
+     * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.IterationVariableImpl <em>Iteration Variable</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipselabs.mscript.language.ast.impl.IterationVariableImpl
+     * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getIterationVariable()
+     * @generated
+     */
+    EClass ITERATION_VARIABLE = eINSTANCE.getIterationVariable();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ITERATION_VARIABLE__NAME = eINSTANCE.getIterationVariable_Name();
+
+    /**
+     * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.IterationAccumulatorImpl <em>Iteration Accumulator</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipselabs.mscript.language.ast.impl.IterationAccumulatorImpl
+     * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getIterationAccumulator()
+     * @generated
+     */
+    EClass ITERATION_ACCUMULATOR = eINSTANCE.getIterationAccumulator();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ITERATION_ACCUMULATOR__NAME = eINSTANCE.getIterationAccumulator_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Initial Expression</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ITERATION_ACCUMULATOR__INITIAL_EXPRESSION = eINSTANCE.getIterationAccumulator_InitialExpression();
 
     /**
      * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.SubscriptImpl <em>Subscript</em>}' class.
@@ -5803,6 +6015,58 @@ public interface AstPackage extends EPackage
      * @generated
      */
     EReference SUBSCRIPT__EXPRESSION = eINSTANCE.getSubscript_Expression();
+
+    /**
+     * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.ArrayConstructionOperatorImpl <em>Array Construction Operator</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipselabs.mscript.language.ast.impl.ArrayConstructionOperatorImpl
+     * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getArrayConstructionOperator()
+     * @generated
+     */
+    EClass ARRAY_CONSTRUCTION_OPERATOR = eINSTANCE.getArrayConstructionOperator();
+
+    /**
+     * The meta object literal for the '<em><b>Expressions</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ARRAY_CONSTRUCTION_OPERATOR__EXPRESSIONS = eINSTANCE.getArrayConstructionOperator_Expressions();
+
+    /**
+     * The meta object literal for the '<em><b>Iteration Clauses</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ARRAY_CONSTRUCTION_OPERATOR__ITERATION_CLAUSES = eINSTANCE.getArrayConstructionOperator_IterationClauses();
+
+    /**
+     * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.ArrayConstructionIterationClauseImpl <em>Array Construction Iteration Clause</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipselabs.mscript.language.ast.impl.ArrayConstructionIterationClauseImpl
+     * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getArrayConstructionIterationClause()
+     * @generated
+     */
+    EClass ARRAY_CONSTRUCTION_ITERATION_CLAUSE = eINSTANCE.getArrayConstructionIterationClause();
+
+    /**
+     * The meta object literal for the '<em><b>Variable Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ARRAY_CONSTRUCTION_ITERATION_CLAUSE__VARIABLE_NAME = eINSTANCE.getArrayConstructionIterationClause_VariableName();
+
+    /**
+     * The meta object literal for the '<em><b>Collection Expression</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ARRAY_CONSTRUCTION_ITERATION_CLAUSE__COLLECTION_EXPRESSION = eINSTANCE.getArrayConstructionIterationClause_CollectionExpression();
 
     /**
      * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.MatrixConstructionOperatorImpl <em>Matrix Construction Operator</em>}' class.
@@ -5923,22 +6187,6 @@ public interface AstPackage extends EPackage
      * @generated
      */
     EClass UNIT_EXPRESSION = eINSTANCE.getUnitExpression();
-
-    /**
-     * The meta object literal for the '<em><b>Unspecified</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute UNIT_EXPRESSION__UNSPECIFIED = eINSTANCE.getUnitExpression_Unspecified();
-
-    /**
-     * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference UNIT_EXPRESSION__EXPRESSION = eINSTANCE.getUnitExpression_Expression();
 
     /**
      * The meta object literal for the '<em><b>Numerator</b></em>' containment reference feature.
@@ -6425,28 +6673,20 @@ public interface AstPackage extends EPackage
     EClass ELEMENT_DECLARATION = eINSTANCE.getElementDeclaration();
 
     /**
-     * The meta object literal for the '<em><b>Element Name</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Variables</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute ELEMENT_DECLARATION__ELEMENT_NAME = eINSTANCE.getElementDeclaration_ElementName();
+    EReference ELEMENT_DECLARATION__VARIABLES = eINSTANCE.getElementDeclaration_Variables();
 
     /**
-     * The meta object literal for the '<em><b>Accumulator Name</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Accumulator</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute ELEMENT_DECLARATION__ACCUMULATOR_NAME = eINSTANCE.getElementDeclaration_AccumulatorName();
-
-    /**
-     * The meta object literal for the '<em><b>Initial Expression</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference ELEMENT_DECLARATION__INITIAL_EXPRESSION = eINSTANCE.getElementDeclaration_InitialExpression();
+    EReference ELEMENT_DECLARATION__ACCUMULATOR = eINSTANCE.getElementDeclaration_Accumulator();
 
     /**
      * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.

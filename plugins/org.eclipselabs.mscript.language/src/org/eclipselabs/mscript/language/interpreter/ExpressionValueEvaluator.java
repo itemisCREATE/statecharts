@@ -336,7 +336,7 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 	public IValue caseUnitConstructionOperator(UnitConstructionOperator unitConstructionOperator) {
 		try {
 			Unit unit = null;
-			if (!unitConstructionOperator.getUnit().isUnspecified()) {
+			if (unitConstructionOperator.getUnit().getNumerator() != null) {
 				unit = new UnitExpressionHelper().evaluate(unitConstructionOperator.getUnit());
 			}
 			return new UnitValue(unit);

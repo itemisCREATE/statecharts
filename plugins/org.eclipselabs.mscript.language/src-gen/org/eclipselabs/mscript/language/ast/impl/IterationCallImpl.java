@@ -8,25 +8,25 @@ package org.eclipselabs.mscript.language.ast.impl;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipselabs.mscript.language.ast.AstPackage;
-import org.eclipselabs.mscript.language.ast.IteratorCall;
+import org.eclipselabs.mscript.language.ast.IterationCall;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Iterator Call</b></em>'.
+ * An implementation of the model object '<em><b>Iteration Call</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public class IteratorCallImpl extends FeatureCallPartImpl implements IteratorCall
+public class IterationCallImpl extends FeatureCallPartImpl implements IterationCall
 {
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected IteratorCallImpl()
+  protected IterationCallImpl()
   {
     super();
   }
@@ -39,7 +39,7 @@ public class IteratorCallImpl extends FeatureCallPartImpl implements IteratorCal
   @Override
   protected EClass eStaticClass()
   {
-    return AstPackage.Literals.ITERATOR_CALL;
+    return AstPackage.Literals.ITERATION_CALL;
   }
 
-} //IteratorCallImpl
+} //IterationCallImpl

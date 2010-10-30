@@ -24,7 +24,7 @@ import org.eclipselabs.mscript.language.ast.UnitExpression;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.NumericLiteralImpl#isImaginary <em>Imaginary</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.NumericLiteralImpl#getModifier <em>Modifier</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.NumericLiteralImpl#getUnit <em>Unit</em>}</li>
  * </ul>
  * </p>
@@ -34,24 +34,24 @@ import org.eclipselabs.mscript.language.ast.UnitExpression;
 public class NumericLiteralImpl extends LiteralImpl implements NumericLiteral
 {
   /**
-   * The default value of the '{@link #isImaginary() <em>Imaginary</em>}' attribute.
+   * The default value of the '{@link #getModifier() <em>Modifier</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #isImaginary()
+   * @see #getModifier()
    * @generated
    * @ordered
    */
-  protected static final boolean IMAGINARY_EDEFAULT = false;
+  protected static final String MODIFIER_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #isImaginary() <em>Imaginary</em>}' attribute.
+   * The cached value of the '{@link #getModifier() <em>Modifier</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #isImaginary()
+   * @see #getModifier()
    * @generated
    * @ordered
    */
-  protected boolean imaginary = IMAGINARY_EDEFAULT;
+  protected String modifier = MODIFIER_EDEFAULT;
 
   /**
    * The cached value of the '{@link #getUnit() <em>Unit</em>}' containment reference.
@@ -89,9 +89,9 @@ public class NumericLiteralImpl extends LiteralImpl implements NumericLiteral
    * <!-- end-user-doc -->
    * @generated
    */
-  public boolean isImaginary()
+  public String getModifier()
   {
-    return imaginary;
+    return modifier;
   }
 
   /**
@@ -99,12 +99,12 @@ public class NumericLiteralImpl extends LiteralImpl implements NumericLiteral
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setImaginary(boolean newImaginary)
+  public void setModifier(String newModifier)
   {
-    boolean oldImaginary = imaginary;
-    imaginary = newImaginary;
+    String oldModifier = modifier;
+    modifier = newModifier;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.NUMERIC_LITERAL__IMAGINARY, oldImaginary, imaginary));
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.NUMERIC_LITERAL__MODIFIER, oldModifier, modifier));
   }
 
   /**
@@ -181,8 +181,8 @@ public class NumericLiteralImpl extends LiteralImpl implements NumericLiteral
   {
     switch (featureID)
     {
-      case AstPackage.NUMERIC_LITERAL__IMAGINARY:
-        return isImaginary();
+      case AstPackage.NUMERIC_LITERAL__MODIFIER:
+        return getModifier();
       case AstPackage.NUMERIC_LITERAL__UNIT:
         return getUnit();
     }
@@ -199,8 +199,8 @@ public class NumericLiteralImpl extends LiteralImpl implements NumericLiteral
   {
     switch (featureID)
     {
-      case AstPackage.NUMERIC_LITERAL__IMAGINARY:
-        setImaginary((Boolean)newValue);
+      case AstPackage.NUMERIC_LITERAL__MODIFIER:
+        setModifier((String)newValue);
         return;
       case AstPackage.NUMERIC_LITERAL__UNIT:
         setUnit((UnitExpression)newValue);
@@ -219,8 +219,8 @@ public class NumericLiteralImpl extends LiteralImpl implements NumericLiteral
   {
     switch (featureID)
     {
-      case AstPackage.NUMERIC_LITERAL__IMAGINARY:
-        setImaginary(IMAGINARY_EDEFAULT);
+      case AstPackage.NUMERIC_LITERAL__MODIFIER:
+        setModifier(MODIFIER_EDEFAULT);
         return;
       case AstPackage.NUMERIC_LITERAL__UNIT:
         setUnit((UnitExpression)null);
@@ -239,8 +239,8 @@ public class NumericLiteralImpl extends LiteralImpl implements NumericLiteral
   {
     switch (featureID)
     {
-      case AstPackage.NUMERIC_LITERAL__IMAGINARY:
-        return imaginary != IMAGINARY_EDEFAULT;
+      case AstPackage.NUMERIC_LITERAL__MODIFIER:
+        return MODIFIER_EDEFAULT == null ? modifier != null : !MODIFIER_EDEFAULT.equals(modifier);
       case AstPackage.NUMERIC_LITERAL__UNIT:
         return unit != null;
     }
@@ -258,8 +258,8 @@ public class NumericLiteralImpl extends LiteralImpl implements NumericLiteral
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (imaginary: ");
-    result.append(imaginary);
+    result.append(" (modifier: ");
+    result.append(modifier);
     result.append(')');
     return result.toString();
   }

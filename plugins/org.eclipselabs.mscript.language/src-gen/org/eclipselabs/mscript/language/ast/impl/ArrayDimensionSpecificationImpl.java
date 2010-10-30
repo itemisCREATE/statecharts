@@ -25,7 +25,6 @@ import org.eclipselabs.mscript.language.ast.Expression;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.ArrayDimensionSpecificationImpl#isUnspecified <em>Unspecified</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.ArrayDimensionSpecificationImpl#getSize <em>Size</em>}</li>
  * </ul>
  * </p>
@@ -34,26 +33,6 @@ import org.eclipselabs.mscript.language.ast.Expression;
  */
 public class ArrayDimensionSpecificationImpl extends MinimalEObjectImpl.Container implements ArrayDimensionSpecification
 {
-  /**
-   * The default value of the '{@link #isUnspecified() <em>Unspecified</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #isUnspecified()
-   * @generated
-   * @ordered
-   */
-  protected static final boolean UNSPECIFIED_EDEFAULT = false;
-
-  /**
-   * The cached value of the '{@link #isUnspecified() <em>Unspecified</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #isUnspecified()
-   * @generated
-   * @ordered
-   */
-  protected boolean unspecified = UNSPECIFIED_EDEFAULT;
-
   /**
    * The cached value of the '{@link #getSize() <em>Size</em>}' containment reference.
    * <!-- begin-user-doc -->
@@ -83,29 +62,6 @@ public class ArrayDimensionSpecificationImpl extends MinimalEObjectImpl.Containe
   protected EClass eStaticClass()
   {
     return AstPackage.Literals.ARRAY_DIMENSION_SPECIFICATION;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public boolean isUnspecified()
-  {
-    return unspecified;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setUnspecified(boolean newUnspecified)
-  {
-    boolean oldUnspecified = unspecified;
-    unspecified = newUnspecified;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.ARRAY_DIMENSION_SPECIFICATION__UNSPECIFIED, oldUnspecified, unspecified));
   }
 
   /**
@@ -182,8 +138,6 @@ public class ArrayDimensionSpecificationImpl extends MinimalEObjectImpl.Containe
   {
     switch (featureID)
     {
-      case AstPackage.ARRAY_DIMENSION_SPECIFICATION__UNSPECIFIED:
-        return isUnspecified();
       case AstPackage.ARRAY_DIMENSION_SPECIFICATION__SIZE:
         return getSize();
     }
@@ -200,9 +154,6 @@ public class ArrayDimensionSpecificationImpl extends MinimalEObjectImpl.Containe
   {
     switch (featureID)
     {
-      case AstPackage.ARRAY_DIMENSION_SPECIFICATION__UNSPECIFIED:
-        setUnspecified((Boolean)newValue);
-        return;
       case AstPackage.ARRAY_DIMENSION_SPECIFICATION__SIZE:
         setSize((Expression)newValue);
         return;
@@ -220,9 +171,6 @@ public class ArrayDimensionSpecificationImpl extends MinimalEObjectImpl.Containe
   {
     switch (featureID)
     {
-      case AstPackage.ARRAY_DIMENSION_SPECIFICATION__UNSPECIFIED:
-        setUnspecified(UNSPECIFIED_EDEFAULT);
-        return;
       case AstPackage.ARRAY_DIMENSION_SPECIFICATION__SIZE:
         setSize((Expression)null);
         return;
@@ -240,29 +188,10 @@ public class ArrayDimensionSpecificationImpl extends MinimalEObjectImpl.Containe
   {
     switch (featureID)
     {
-      case AstPackage.ARRAY_DIMENSION_SPECIFICATION__UNSPECIFIED:
-        return unspecified != UNSPECIFIED_EDEFAULT;
       case AstPackage.ARRAY_DIMENSION_SPECIFICATION__SIZE:
         return size != null;
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (unspecified: ");
-    result.append(unspecified);
-    result.append(')');
-    return result.toString();
   }
 
 } //ArrayDimensionSpecificationImpl

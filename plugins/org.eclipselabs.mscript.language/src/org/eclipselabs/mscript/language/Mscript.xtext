@@ -46,38 +46,38 @@ DataTypeDefinition :
  */
  	
 EnumerationDefinition :
-	'enum' name=KeywordID '{'
+	'enum' name=ID '{'
 		(literals+=EnumerationLiteralDeclaration (',' literals+=EnumerationLiteralDeclaration)*)?
 	'}';
 	
 EnumerationLiteralDeclaration :
-	name=KeywordID;
+	name=ID;
 	
 /*
  * TypeAlias
  */
  
 TypeAliasDefinition :
-	'type' name=KeywordID '=' type=PrimitiveTypeSpecifier ';';	
+	'type' name=ID '=' type=PrimitiveTypeSpecifier ';';	
 
 /*
  * Record
  */
 
 RecordDefinition :
-	'record' name=KeywordID '{'
+	'record' name=ID '{'
 		(fields+=RecordFieldDeclaration)*
 	'}'; 
 
 RecordFieldDeclaration :
-	name=KeywordID ':' type=DataTypeSpecifier ';';
+	name=ID ':' type=DataTypeSpecifier ';';
 
 /*
  * Function
  */
  
 FunctionDefinition :
-	(stateful?='stateful')? 'func' name=KeywordID ('<' templateParameters+=ParameterDeclaration (',' templateParameters+=ParameterDeclaration)* '>')? '(' (inputParameters+=ParameterDeclaration (',' inputParameters+=ParameterDeclaration)*)? ')' '->' outputParameters+=ParameterDeclaration (',' outputParameters+=ParameterDeclaration)* '{'
+	(stateful?='stateful')? 'func' name=ID ('<' templateParameters+=ParameterDeclaration (',' templateParameters+=ParameterDeclaration)* '>')? '(' (inputParameters+=ParameterDeclaration (',' inputParameters+=ParameterDeclaration)*)? ')' '->' outputParameters+=ParameterDeclaration (',' outputParameters+=ParameterDeclaration)* '{'
 		(assertions+=AssertionDeclaration |
 		functors+=FunctorDeclaration |
 		stateVariables+=VariableDeclaration |
@@ -85,7 +85,7 @@ FunctionDefinition :
 	'}';
 
 ParameterDeclaration :
-	name=KeywordID;
+	name=ID;
 
 enum AssertionStatusKind :
 	Info='info' |
@@ -94,16 +94,16 @@ enum AssertionStatusKind :
 	Fatal='fatal';
 
 AssertionDeclaration :
-	(static?='static') 'assert' predicate=Expression ':' statusKind=AssertionStatusKind message=Expression ';';
+	(static?='static')? 'assert' predicate=Expression ':' statusKind=AssertionStatusKind message=Expression ';';
 
 VariableDeclaration :
-	'var' name=KeywordID ';';
+	'var' name=ID ';';
 	
 FunctorDeclaration :
-	'functor' name=KeywordID ':' functionName=QualifiedName ('<' templateArguments+=ArgumentDeclaration (',' templateArguments+=ArgumentDeclaration)* '>')? ';';
+	'functor' name=ID ':' functionName=QualifiedName ('<' templateArguments+=ArgumentDeclaration (',' templateArguments+=ArgumentDeclaration)* '>')? ';';
 
 ArgumentDeclaration :
-	name=KeywordID;
+	name=ID;
 
 EquationDefinition :
 	leftHandSide=Expression '=' rightHandSide=Expression ';';
@@ -143,7 +143,7 @@ NamedTypeSpecifier :
 	typeReference=QualifiedName ('[' dimensions+=ArrayDimensionSpecification (',' dimensions+=ArrayDimensionSpecification)* ']')?;
 	
 ArrayDimensionSpecification :
-	unspecified?='?' | size=Expression;
+	{ArrayDimensionSpecification} (size=Expression)?;
 	
 /*
  * Expressions
@@ -156,7 +156,7 @@ LetExpression :
 	'let' variables+=LetExpressionVariable (',' variables+=LetExpressionVariable)* 'in' targetExpression=Expression;
 	
 LetExpressionVariable :
-	name=KeywordID '=' assignedExpression=Expression;
+	name=ID '=' assignedExpression=Expression;
 	
 IfExpression :
 	'if' condition=Expression 'then' thenExpression=Expression 'else' elseExpression=Expression;
@@ -247,6 +247,7 @@ PrimaryExpression returns Expression :
 	EndExpression;
 
 CallablePrimaryExpression returns Expression :
+	ArrayConstructionOperator |
 	MatrixConstructionOperator |
 	ParenthesizedExpression;
 
@@ -257,10 +258,10 @@ NumericLiteral :
 	RealLiteral | IntegerLiteral;
 	
 RealLiteral :
-	value=REAL (imaginary?='j')? ('(' unit=UnitExpression ')')?;
+	value=REAL (modifier=ID)? ('(' unit=UnitExpression ')')?;
 	
 IntegerLiteral :
-	value=INTEGER (imaginary?='j')? ('(' unit=UnitExpression ')')?;
+	value=INTEGER (modifier=ID)? ('(' unit=UnitExpression ')')?;
 
 BooleanLiteral :
 	value=BooleanKind;
@@ -278,7 +279,7 @@ SimpleName returns Expression :
 	{SimpleName} identifier=ID;
 
 FeatureCallPart :
-	FeatureReference | ArrayElementReference | OperationCall | IteratorCall;
+	FeatureReference | ArrayElementReference | OperationCall | IterationCall;
 	
 FeatureReference :
 	'.' name=(ID | 'unit');
@@ -289,11 +290,23 @@ ArrayElementReference :
 OperationCall :
 	{OperationCall} '(' (arguments+=Expression (',' arguments+=Expression)*)? ')';
 
-IteratorCall :
-	{ElementDeclaration} '(' elementName=KeywordID (';' accumulatorName=KeywordID '=' initialExpression=Expression)? '|' expression=Expression ')';
+IterationCall :
+	{ElementDeclaration} '(' variables+=IterationVariable (',' variables+=IterationVariable)* (';' accumulator=IterationAccumulator)? '|' expression=Expression ')';
 
+IterationVariable :
+	name=ID;
+
+IterationAccumulator :
+	name=ID '=' initialExpression=Expression;
+	
 Subscript :
 	slice?=':' | expression=Expression;
+
+ArrayConstructionOperator :
+	'{'  expressions+=Expression ((',' expressions+=Expression)* | 'for' iterationClauses+=ArrayConstructionIterationClause (',' iterationClauses+=ArrayConstructionIterationClause)*) '}';
+
+ArrayConstructionIterationClause :
+	variableName=ID 'in' collectionExpression=Expression;
 
 MatrixConstructionOperator :
 	'[' expressionLists+=ExpressionList (';' expressionLists+=ExpressionList)* ']';
@@ -314,14 +327,14 @@ EndExpression :
 	{EndExpression} 'end';
 	
 QualifiedName :
-	identifiers+=KeywordID ('.' identifiers+=KeywordID)*;
+	identifiers+=ID ('.' identifiers+=ID)*;
 
 /*
  * Unit expressions
  */
 	
 UnitExpression :
-	unspecified?='?' | 'eval' expression=Expression  | numerator=UnitExpressionNumerator ('/' denominator=UnitExpressionDenominator)?;
+	{UnitExpression} (numerator=UnitExpressionNumerator ('/' denominator=UnitExpressionDenominator)?)?;
 
 UnitExpressionNumerator :
 	one=INTEGER /* must be '1' */ | factors+=UnitExpressionFactor ('*' factors+=UnitExpressionFactor)*;
@@ -330,17 +343,10 @@ UnitExpressionDenominator :
 	factors+=UnitExpressionFactor | '(' factors+=UnitExpressionFactor ('*' factors+=UnitExpressionFactor)* ')';
 
 UnitExpressionFactor :
-	operand=KeywordID ('^' exponent=UnitExpressionExponent)?;
+	operand=ID ('^' exponent=UnitExpressionExponent)?;
 
 UnitExpressionExponent :
 	(negative?='-')? value=INTEGER;
-
-/*
- * Keyword ID
- */
-	
-KeywordID :
-	ID | 'j';
 
 /*
  * Terminals

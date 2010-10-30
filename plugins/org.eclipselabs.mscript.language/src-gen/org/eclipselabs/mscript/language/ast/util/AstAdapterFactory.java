@@ -308,14 +308,34 @@ public class AstAdapterFactory extends AdapterFactoryImpl
         return createOperationCallAdapter();
       }
       @Override
-      public Adapter caseIteratorCall(IteratorCall object)
+      public Adapter caseIterationCall(IterationCall object)
       {
-        return createIteratorCallAdapter();
+        return createIterationCallAdapter();
+      }
+      @Override
+      public Adapter caseIterationVariable(IterationVariable object)
+      {
+        return createIterationVariableAdapter();
+      }
+      @Override
+      public Adapter caseIterationAccumulator(IterationAccumulator object)
+      {
+        return createIterationAccumulatorAdapter();
       }
       @Override
       public Adapter caseSubscript(Subscript object)
       {
         return createSubscriptAdapter();
+      }
+      @Override
+      public Adapter caseArrayConstructionOperator(ArrayConstructionOperator object)
+      {
+        return createArrayConstructionOperatorAdapter();
+      }
+      @Override
+      public Adapter caseArrayConstructionIterationClause(ArrayConstructionIterationClause object)
+      {
+        return createArrayConstructionIterationClauseAdapter();
       }
       @Override
       public Adapter caseMatrixConstructionOperator(MatrixConstructionOperator object)
@@ -1160,16 +1180,46 @@ public class AstAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.IteratorCall <em>Iterator Call</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.IterationCall <em>Iteration Call</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.IteratorCall
+   * @see org.eclipselabs.mscript.language.ast.IterationCall
    * @generated
    */
-  public Adapter createIteratorCallAdapter()
+  public Adapter createIterationCallAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.IterationVariable <em>Iteration Variable</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipselabs.mscript.language.ast.IterationVariable
+   * @generated
+   */
+  public Adapter createIterationVariableAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.IterationAccumulator <em>Iteration Accumulator</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipselabs.mscript.language.ast.IterationAccumulator
+   * @generated
+   */
+  public Adapter createIterationAccumulatorAdapter()
   {
     return null;
   }
@@ -1185,6 +1235,36 @@ public class AstAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createSubscriptAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.ArrayConstructionOperator <em>Array Construction Operator</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipselabs.mscript.language.ast.ArrayConstructionOperator
+   * @generated
+   */
+  public Adapter createArrayConstructionOperatorAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.ArrayConstructionIterationClause <em>Array Construction Iteration Clause</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipselabs.mscript.language.ast.ArrayConstructionIterationClause
+   * @generated
+   */
+  public Adapter createArrayConstructionIterationClauseAdapter()
   {
     return null;
   }

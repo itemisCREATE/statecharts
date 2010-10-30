@@ -5,17 +5,26 @@
  */
 package org.eclipselabs.mscript.language.ast.impl;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
 import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.ElementDeclaration;
 import org.eclipselabs.mscript.language.ast.Expression;
+import org.eclipselabs.mscript.language.ast.IterationAccumulator;
+import org.eclipselabs.mscript.language.ast.IterationVariable;
 
 /**
  * <!-- begin-user-doc -->
@@ -24,66 +33,35 @@ import org.eclipselabs.mscript.language.ast.Expression;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.ElementDeclarationImpl#getElementName <em>Element Name</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.ElementDeclarationImpl#getAccumulatorName <em>Accumulator Name</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.ElementDeclarationImpl#getInitialExpression <em>Initial Expression</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.ElementDeclarationImpl#getVariables <em>Variables</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.ElementDeclarationImpl#getAccumulator <em>Accumulator</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.ElementDeclarationImpl#getExpression <em>Expression</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ElementDeclarationImpl extends IteratorCallImpl implements ElementDeclaration
+public class ElementDeclarationImpl extends IterationCallImpl implements ElementDeclaration
 {
   /**
-   * The default value of the '{@link #getElementName() <em>Element Name</em>}' attribute.
+   * The cached value of the '{@link #getVariables() <em>Variables</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getElementName()
+   * @see #getVariables()
    * @generated
    * @ordered
    */
-  protected static final String ELEMENT_NAME_EDEFAULT = null;
+  protected EList<IterationVariable> variables;
 
   /**
-   * The cached value of the '{@link #getElementName() <em>Element Name</em>}' attribute.
+   * The cached value of the '{@link #getAccumulator() <em>Accumulator</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getElementName()
+   * @see #getAccumulator()
    * @generated
    * @ordered
    */
-  protected String elementName = ELEMENT_NAME_EDEFAULT;
-
-  /**
-   * The default value of the '{@link #getAccumulatorName() <em>Accumulator Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getAccumulatorName()
-   * @generated
-   * @ordered
-   */
-  protected static final String ACCUMULATOR_NAME_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getAccumulatorName() <em>Accumulator Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getAccumulatorName()
-   * @generated
-   * @ordered
-   */
-  protected String accumulatorName = ACCUMULATOR_NAME_EDEFAULT;
-
-  /**
-   * The cached value of the '{@link #getInitialExpression() <em>Initial Expression</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getInitialExpression()
-   * @generated
-   * @ordered
-   */
-  protected Expression initialExpression;
+  protected IterationAccumulator accumulator;
 
   /**
    * The cached value of the '{@link #getExpression() <em>Expression</em>}' containment reference.
@@ -121,9 +99,13 @@ public class ElementDeclarationImpl extends IteratorCallImpl implements ElementD
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getElementName()
+  public EList<IterationVariable> getVariables()
   {
-    return elementName;
+    if (variables == null)
+    {
+      variables = new EObjectContainmentEList<IterationVariable>(IterationVariable.class, this, AstPackage.ELEMENT_DECLARATION__VARIABLES);
+    }
+    return variables;
   }
 
   /**
@@ -131,12 +113,9 @@ public class ElementDeclarationImpl extends IteratorCallImpl implements ElementD
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setElementName(String newElementName)
+  public IterationAccumulator getAccumulator()
   {
-    String oldElementName = elementName;
-    elementName = newElementName;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.ELEMENT_DECLARATION__ELEMENT_NAME, oldElementName, elementName));
+    return accumulator;
   }
 
   /**
@@ -144,46 +123,13 @@ public class ElementDeclarationImpl extends IteratorCallImpl implements ElementD
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getAccumulatorName()
+  public NotificationChain basicSetAccumulator(IterationAccumulator newAccumulator, NotificationChain msgs)
   {
-    return accumulatorName;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setAccumulatorName(String newAccumulatorName)
-  {
-    String oldAccumulatorName = accumulatorName;
-    accumulatorName = newAccumulatorName;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.ELEMENT_DECLARATION__ACCUMULATOR_NAME, oldAccumulatorName, accumulatorName));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Expression getInitialExpression()
-  {
-    return initialExpression;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetInitialExpression(Expression newInitialExpression, NotificationChain msgs)
-  {
-    Expression oldInitialExpression = initialExpression;
-    initialExpression = newInitialExpression;
+    IterationAccumulator oldAccumulator = accumulator;
+    accumulator = newAccumulator;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.ELEMENT_DECLARATION__INITIAL_EXPRESSION, oldInitialExpression, newInitialExpression);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.ELEMENT_DECLARATION__ACCUMULATOR, oldAccumulator, newAccumulator);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -194,20 +140,20 @@ public class ElementDeclarationImpl extends IteratorCallImpl implements ElementD
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setInitialExpression(Expression newInitialExpression)
+  public void setAccumulator(IterationAccumulator newAccumulator)
   {
-    if (newInitialExpression != initialExpression)
+    if (newAccumulator != accumulator)
     {
       NotificationChain msgs = null;
-      if (initialExpression != null)
-        msgs = ((InternalEObject)initialExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.ELEMENT_DECLARATION__INITIAL_EXPRESSION, null, msgs);
-      if (newInitialExpression != null)
-        msgs = ((InternalEObject)newInitialExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.ELEMENT_DECLARATION__INITIAL_EXPRESSION, null, msgs);
-      msgs = basicSetInitialExpression(newInitialExpression, msgs);
+      if (accumulator != null)
+        msgs = ((InternalEObject)accumulator).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.ELEMENT_DECLARATION__ACCUMULATOR, null, msgs);
+      if (newAccumulator != null)
+        msgs = ((InternalEObject)newAccumulator).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.ELEMENT_DECLARATION__ACCUMULATOR, null, msgs);
+      msgs = basicSetAccumulator(newAccumulator, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.ELEMENT_DECLARATION__INITIAL_EXPRESSION, newInitialExpression, newInitialExpression));
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.ELEMENT_DECLARATION__ACCUMULATOR, newAccumulator, newAccumulator));
   }
 
   /**
@@ -268,8 +214,10 @@ public class ElementDeclarationImpl extends IteratorCallImpl implements ElementD
   {
     switch (featureID)
     {
-      case AstPackage.ELEMENT_DECLARATION__INITIAL_EXPRESSION:
-        return basicSetInitialExpression(null, msgs);
+      case AstPackage.ELEMENT_DECLARATION__VARIABLES:
+        return ((InternalEList<?>)getVariables()).basicRemove(otherEnd, msgs);
+      case AstPackage.ELEMENT_DECLARATION__ACCUMULATOR:
+        return basicSetAccumulator(null, msgs);
       case AstPackage.ELEMENT_DECLARATION__EXPRESSION:
         return basicSetExpression(null, msgs);
     }
@@ -286,12 +234,10 @@ public class ElementDeclarationImpl extends IteratorCallImpl implements ElementD
   {
     switch (featureID)
     {
-      case AstPackage.ELEMENT_DECLARATION__ELEMENT_NAME:
-        return getElementName();
-      case AstPackage.ELEMENT_DECLARATION__ACCUMULATOR_NAME:
-        return getAccumulatorName();
-      case AstPackage.ELEMENT_DECLARATION__INITIAL_EXPRESSION:
-        return getInitialExpression();
+      case AstPackage.ELEMENT_DECLARATION__VARIABLES:
+        return getVariables();
+      case AstPackage.ELEMENT_DECLARATION__ACCUMULATOR:
+        return getAccumulator();
       case AstPackage.ELEMENT_DECLARATION__EXPRESSION:
         return getExpression();
     }
@@ -303,19 +249,18 @@ public class ElementDeclarationImpl extends IteratorCallImpl implements ElementD
    * <!-- end-user-doc -->
    * @generated
    */
+  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
     switch (featureID)
     {
-      case AstPackage.ELEMENT_DECLARATION__ELEMENT_NAME:
-        setElementName((String)newValue);
+      case AstPackage.ELEMENT_DECLARATION__VARIABLES:
+        getVariables().clear();
+        getVariables().addAll((Collection<? extends IterationVariable>)newValue);
         return;
-      case AstPackage.ELEMENT_DECLARATION__ACCUMULATOR_NAME:
-        setAccumulatorName((String)newValue);
-        return;
-      case AstPackage.ELEMENT_DECLARATION__INITIAL_EXPRESSION:
-        setInitialExpression((Expression)newValue);
+      case AstPackage.ELEMENT_DECLARATION__ACCUMULATOR:
+        setAccumulator((IterationAccumulator)newValue);
         return;
       case AstPackage.ELEMENT_DECLARATION__EXPRESSION:
         setExpression((Expression)newValue);
@@ -334,14 +279,11 @@ public class ElementDeclarationImpl extends IteratorCallImpl implements ElementD
   {
     switch (featureID)
     {
-      case AstPackage.ELEMENT_DECLARATION__ELEMENT_NAME:
-        setElementName(ELEMENT_NAME_EDEFAULT);
+      case AstPackage.ELEMENT_DECLARATION__VARIABLES:
+        getVariables().clear();
         return;
-      case AstPackage.ELEMENT_DECLARATION__ACCUMULATOR_NAME:
-        setAccumulatorName(ACCUMULATOR_NAME_EDEFAULT);
-        return;
-      case AstPackage.ELEMENT_DECLARATION__INITIAL_EXPRESSION:
-        setInitialExpression((Expression)null);
+      case AstPackage.ELEMENT_DECLARATION__ACCUMULATOR:
+        setAccumulator((IterationAccumulator)null);
         return;
       case AstPackage.ELEMENT_DECLARATION__EXPRESSION:
         setExpression((Expression)null);
@@ -360,35 +302,14 @@ public class ElementDeclarationImpl extends IteratorCallImpl implements ElementD
   {
     switch (featureID)
     {
-      case AstPackage.ELEMENT_DECLARATION__ELEMENT_NAME:
-        return ELEMENT_NAME_EDEFAULT == null ? elementName != null : !ELEMENT_NAME_EDEFAULT.equals(elementName);
-      case AstPackage.ELEMENT_DECLARATION__ACCUMULATOR_NAME:
-        return ACCUMULATOR_NAME_EDEFAULT == null ? accumulatorName != null : !ACCUMULATOR_NAME_EDEFAULT.equals(accumulatorName);
-      case AstPackage.ELEMENT_DECLARATION__INITIAL_EXPRESSION:
-        return initialExpression != null;
+      case AstPackage.ELEMENT_DECLARATION__VARIABLES:
+        return variables != null && !variables.isEmpty();
+      case AstPackage.ELEMENT_DECLARATION__ACCUMULATOR:
+        return accumulator != null;
       case AstPackage.ELEMENT_DECLARATION__EXPRESSION:
         return expression != null;
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (elementName: ");
-    result.append(elementName);
-    result.append(", accumulatorName: ");
-    result.append(accumulatorName);
-    result.append(')');
-    return result.toString();
   }
 
 } //ElementDeclarationImpl

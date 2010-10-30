@@ -471,11 +471,25 @@ public class AstSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AstPackage.ITERATOR_CALL:
+      case AstPackage.ITERATION_CALL:
       {
-        IteratorCall iteratorCall = (IteratorCall)theEObject;
-        T result = caseIteratorCall(iteratorCall);
-        if (result == null) result = caseFeatureCallPart(iteratorCall);
+        IterationCall iterationCall = (IterationCall)theEObject;
+        T result = caseIterationCall(iterationCall);
+        if (result == null) result = caseFeatureCallPart(iterationCall);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AstPackage.ITERATION_VARIABLE:
+      {
+        IterationVariable iterationVariable = (IterationVariable)theEObject;
+        T result = caseIterationVariable(iterationVariable);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AstPackage.ITERATION_ACCUMULATOR:
+      {
+        IterationAccumulator iterationAccumulator = (IterationAccumulator)theEObject;
+        T result = caseIterationAccumulator(iterationAccumulator);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -483,6 +497,21 @@ public class AstSwitch<T>
       {
         Subscript subscript = (Subscript)theEObject;
         T result = caseSubscript(subscript);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AstPackage.ARRAY_CONSTRUCTION_OPERATOR:
+      {
+        ArrayConstructionOperator arrayConstructionOperator = (ArrayConstructionOperator)theEObject;
+        T result = caseArrayConstructionOperator(arrayConstructionOperator);
+        if (result == null) result = caseExpression(arrayConstructionOperator);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AstPackage.ARRAY_CONSTRUCTION_ITERATION_CLAUSE:
+      {
+        ArrayConstructionIterationClause arrayConstructionIterationClause = (ArrayConstructionIterationClause)theEObject;
+        T result = caseArrayConstructionIterationClause(arrayConstructionIterationClause);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -683,7 +712,7 @@ public class AstSwitch<T>
       {
         ElementDeclaration elementDeclaration = (ElementDeclaration)theEObject;
         T result = caseElementDeclaration(elementDeclaration);
-        if (result == null) result = caseIteratorCall(elementDeclaration);
+        if (result == null) result = caseIterationCall(elementDeclaration);
         if (result == null) result = caseFeatureCallPart(elementDeclaration);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -1429,17 +1458,49 @@ public class AstSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Iterator Call</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Iteration Call</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Iterator Call</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Iteration Call</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseIteratorCall(IteratorCall object)
+  public T caseIterationCall(IterationCall object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Iteration Variable</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Iteration Variable</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseIterationVariable(IterationVariable object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Iteration Accumulator</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Iteration Accumulator</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseIterationAccumulator(IterationAccumulator object)
   {
     return null;
   }
@@ -1456,6 +1517,38 @@ public class AstSwitch<T>
    * @generated
    */
   public T caseSubscript(Subscript object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Array Construction Operator</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Array Construction Operator</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseArrayConstructionOperator(ArrayConstructionOperator object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Array Construction Iteration Clause</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Array Construction Iteration Clause</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseArrayConstructionIterationClause(ArrayConstructionIterationClause object)
   {
     return null;
   }
