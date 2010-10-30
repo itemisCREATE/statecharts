@@ -26,6 +26,7 @@ import org.eclipselabs.mscript.language.ast.Expression;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.AssertionDeclarationImpl#isStatic <em>Static</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.AssertionDeclarationImpl#getPredicate <em>Predicate</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.AssertionDeclarationImpl#getStatusKind <em>Status Kind</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.AssertionDeclarationImpl#getMessage <em>Message</em>}</li>
@@ -36,6 +37,26 @@ import org.eclipselabs.mscript.language.ast.Expression;
  */
 public class AssertionDeclarationImpl extends MinimalEObjectImpl.Container implements AssertionDeclaration
 {
+  /**
+   * The default value of the '{@link #isStatic() <em>Static</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isStatic()
+   * @generated
+   * @ordered
+   */
+  protected static final boolean STATIC_EDEFAULT = false;
+
+  /**
+   * The cached value of the '{@link #isStatic() <em>Static</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isStatic()
+   * @generated
+   * @ordered
+   */
+  protected boolean static_ = STATIC_EDEFAULT;
+
   /**
    * The cached value of the '{@link #getPredicate() <em>Predicate</em>}' containment reference.
    * <!-- begin-user-doc -->
@@ -95,6 +116,29 @@ public class AssertionDeclarationImpl extends MinimalEObjectImpl.Container imple
   protected EClass eStaticClass()
   {
     return AstPackage.Literals.ASSERTION_DECLARATION;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public boolean isStatic()
+  {
+    return static_;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setStatic(boolean newStatic)
+  {
+    boolean oldStatic = static_;
+    static_ = newStatic;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.ASSERTION_DECLARATION__STATIC, oldStatic, static_));
   }
 
   /**
@@ -244,6 +288,8 @@ public class AssertionDeclarationImpl extends MinimalEObjectImpl.Container imple
   {
     switch (featureID)
     {
+      case AstPackage.ASSERTION_DECLARATION__STATIC:
+        return isStatic();
       case AstPackage.ASSERTION_DECLARATION__PREDICATE:
         return getPredicate();
       case AstPackage.ASSERTION_DECLARATION__STATUS_KIND:
@@ -264,6 +310,9 @@ public class AssertionDeclarationImpl extends MinimalEObjectImpl.Container imple
   {
     switch (featureID)
     {
+      case AstPackage.ASSERTION_DECLARATION__STATIC:
+        setStatic((Boolean)newValue);
+        return;
       case AstPackage.ASSERTION_DECLARATION__PREDICATE:
         setPredicate((Expression)newValue);
         return;
@@ -287,6 +336,9 @@ public class AssertionDeclarationImpl extends MinimalEObjectImpl.Container imple
   {
     switch (featureID)
     {
+      case AstPackage.ASSERTION_DECLARATION__STATIC:
+        setStatic(STATIC_EDEFAULT);
+        return;
       case AstPackage.ASSERTION_DECLARATION__PREDICATE:
         setPredicate((Expression)null);
         return;
@@ -310,6 +362,8 @@ public class AssertionDeclarationImpl extends MinimalEObjectImpl.Container imple
   {
     switch (featureID)
     {
+      case AstPackage.ASSERTION_DECLARATION__STATIC:
+        return static_ != STATIC_EDEFAULT;
       case AstPackage.ASSERTION_DECLARATION__PREDICATE:
         return predicate != null;
       case AstPackage.ASSERTION_DECLARATION__STATUS_KIND:
@@ -331,7 +385,9 @@ public class AssertionDeclarationImpl extends MinimalEObjectImpl.Container imple
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (statusKind: ");
+    result.append(" (static: ");
+    result.append(static_);
+    result.append(", statusKind: ");
     result.append(statusKind);
     result.append(')');
     return result.toString();

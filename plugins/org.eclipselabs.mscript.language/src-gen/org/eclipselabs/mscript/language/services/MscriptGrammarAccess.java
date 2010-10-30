@@ -543,49 +543,57 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	public class AssertionDeclarationElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AssertionDeclaration");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cAssertKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cPredicateAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cPredicateExpressionParserRuleCall_1_0 = (RuleCall)cPredicateAssignment_1.eContents().get(0);
-		private final Keyword cColonKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cStatusKindAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cStatusKindAssertionStatusKindEnumRuleCall_3_0 = (RuleCall)cStatusKindAssignment_3.eContents().get(0);
-		private final Assignment cMessageAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall cMessageExpressionParserRuleCall_4_0 = (RuleCall)cMessageAssignment_4.eContents().get(0);
-		private final Keyword cSemicolonKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Assignment cStaticAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final Keyword cStaticStaticKeyword_0_0 = (Keyword)cStaticAssignment_0.eContents().get(0);
+		private final Keyword cAssertKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cPredicateAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cPredicateExpressionParserRuleCall_2_0 = (RuleCall)cPredicateAssignment_2.eContents().get(0);
+		private final Keyword cColonKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cStatusKindAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cStatusKindAssertionStatusKindEnumRuleCall_4_0 = (RuleCall)cStatusKindAssignment_4.eContents().get(0);
+		private final Assignment cMessageAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cMessageExpressionParserRuleCall_5_0 = (RuleCall)cMessageAssignment_5.eContents().get(0);
+		private final Keyword cSemicolonKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
 		//AssertionDeclaration:
-		//	"assert" predicate=Expression ":" statusKind=AssertionStatusKind message=Expression ";";
+		//	static?="static" "assert" predicate=Expression ":" statusKind=AssertionStatusKind message=Expression ";";
 		public ParserRule getRule() { return rule; }
 
-		//"assert" predicate=Expression ":" statusKind=AssertionStatusKind message=Expression ";"
+		//static?="static" "assert" predicate=Expression ":" statusKind=AssertionStatusKind message=Expression ";"
 		public Group getGroup() { return cGroup; }
 
+		//static?="static"
+		public Assignment getStaticAssignment_0() { return cStaticAssignment_0; }
+
+		//"static"
+		public Keyword getStaticStaticKeyword_0_0() { return cStaticStaticKeyword_0_0; }
+
 		//"assert"
-		public Keyword getAssertKeyword_0() { return cAssertKeyword_0; }
+		public Keyword getAssertKeyword_1() { return cAssertKeyword_1; }
 
 		//predicate=Expression
-		public Assignment getPredicateAssignment_1() { return cPredicateAssignment_1; }
+		public Assignment getPredicateAssignment_2() { return cPredicateAssignment_2; }
 
 		//Expression
-		public RuleCall getPredicateExpressionParserRuleCall_1_0() { return cPredicateExpressionParserRuleCall_1_0; }
+		public RuleCall getPredicateExpressionParserRuleCall_2_0() { return cPredicateExpressionParserRuleCall_2_0; }
 
 		//":"
-		public Keyword getColonKeyword_2() { return cColonKeyword_2; }
+		public Keyword getColonKeyword_3() { return cColonKeyword_3; }
 
 		//statusKind=AssertionStatusKind
-		public Assignment getStatusKindAssignment_3() { return cStatusKindAssignment_3; }
+		public Assignment getStatusKindAssignment_4() { return cStatusKindAssignment_4; }
 
 		//AssertionStatusKind
-		public RuleCall getStatusKindAssertionStatusKindEnumRuleCall_3_0() { return cStatusKindAssertionStatusKindEnumRuleCall_3_0; }
+		public RuleCall getStatusKindAssertionStatusKindEnumRuleCall_4_0() { return cStatusKindAssertionStatusKindEnumRuleCall_4_0; }
 
 		//message=Expression
-		public Assignment getMessageAssignment_4() { return cMessageAssignment_4; }
+		public Assignment getMessageAssignment_5() { return cMessageAssignment_5; }
 
 		//Expression
-		public RuleCall getMessageExpressionParserRuleCall_4_0() { return cMessageExpressionParserRuleCall_4_0; }
+		public RuleCall getMessageExpressionParserRuleCall_5_0() { return cMessageExpressionParserRuleCall_5_0; }
 
 		//";"
-		public Keyword getSemicolonKeyword_5() { return cSemicolonKeyword_5; }
+		public Keyword getSemicolonKeyword_6() { return cSemicolonKeyword_6; }
 	}
 
 	public class VariableDeclarationElements extends AbstractParserRuleElementFinder {
@@ -622,7 +630,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cFunctorKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameKeywordIDParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
-		private final Keyword cEqualsSignKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Keyword cColonKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final Assignment cFunctionNameAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cFunctionNameQualifiedNameParserRuleCall_3_0 = (RuleCall)cFunctionNameAssignment_3.eContents().get(0);
 		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
@@ -637,11 +645,11 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cSemicolonKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//FunctorDeclaration:
-		//	"functor" name=KeywordID "=" functionName=QualifiedName ("<" templateArguments+=ArgumentDeclaration (","
+		//	"functor" name=KeywordID ":" functionName=QualifiedName ("<" templateArguments+=ArgumentDeclaration (","
 		//	templateArguments+=ArgumentDeclaration)* ">")? ";";
 		public ParserRule getRule() { return rule; }
 
-		//"functor" name=KeywordID "=" functionName=QualifiedName ("<" templateArguments+=ArgumentDeclaration (","
+		//"functor" name=KeywordID ":" functionName=QualifiedName ("<" templateArguments+=ArgumentDeclaration (","
 		//templateArguments+=ArgumentDeclaration)* ">")? ";"
 		public Group getGroup() { return cGroup; }
 
@@ -654,8 +662,8 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		//KeywordID
 		public RuleCall getNameKeywordIDParserRuleCall_1_0() { return cNameKeywordIDParserRuleCall_1_0; }
 
-		//"="
-		public Keyword getEqualsSignKeyword_2() { return cEqualsSignKeyword_2; }
+		//":"
+		public Keyword getColonKeyword_2() { return cColonKeyword_2; }
 
 		//functionName=QualifiedName
 		public Assignment getFunctionNameAssignment_3() { return cFunctionNameAssignment_3; }
@@ -746,35 +754,15 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		public Keyword getSemicolonKeyword_3() { return cSemicolonKeyword_3; }
 	}
 
-	public class TypeSpecifierElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TypeSpecifier");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cDataTypeSpecifierParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cUnitTypeSpecifierParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		
-		/// *
-		// * Data type specifier
-		// * /TypeSpecifier:
-		//	DataTypeSpecifier | UnitTypeSpecifier;
-		public ParserRule getRule() { return rule; }
-
-		//DataTypeSpecifier | UnitTypeSpecifier
-		public Alternatives getAlternatives() { return cAlternatives; }
-
-		//DataTypeSpecifier
-		public RuleCall getDataTypeSpecifierParserRuleCall_0() { return cDataTypeSpecifierParserRuleCall_0; }
-
-		//UnitTypeSpecifier
-		public RuleCall getUnitTypeSpecifierParserRuleCall_1() { return cUnitTypeSpecifierParserRuleCall_1; }
-	}
-
 	public class DataTypeSpecifierElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DataTypeSpecifier");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cPrimitiveTypeSpecifierParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cNamedTypeSpecifierParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		//DataTypeSpecifier:
+		/// *
+		// * Data type specifier
+		// * /DataTypeSpecifier:
 		//	PrimitiveTypeSpecifier | NamedTypeSpecifier;
 		public ParserRule getRule() { return rule; }
 
@@ -1352,26 +1340,6 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 
 		//Expression
 		public RuleCall getSizeExpressionParserRuleCall_1_0() { return cSizeExpressionParserRuleCall_1_0; }
-	}
-
-	public class UnitTypeSpecifierElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "UnitTypeSpecifier");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cUnitTypeSpecifierAction_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cUnitKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		
-		//UnitTypeSpecifier:
-		//	{UnitTypeSpecifier} "unit";
-		public ParserRule getRule() { return rule; }
-
-		//{UnitTypeSpecifier} "unit"
-		public Group getGroup() { return cGroup; }
-
-		//{UnitTypeSpecifier}
-		public Action getUnitTypeSpecifierAction_0() { return cUnitTypeSpecifierAction_0; }
-
-		//"unit"
-		public Keyword getUnitKeyword_1() { return cUnitKeyword_1; }
 	}
 
 	public class ExpressionElements extends AbstractParserRuleElementFinder {
@@ -3505,7 +3473,6 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	private FunctorDeclarationElements pFunctorDeclaration;
 	private ArgumentDeclarationElements pArgumentDeclaration;
 	private EquationDefinitionElements pEquationDefinition;
-	private TypeSpecifierElements pTypeSpecifier;
 	private DataTypeSpecifierElements pDataTypeSpecifier;
 	private PrimitiveTypeSpecifierElements pPrimitiveTypeSpecifier;
 	private NumericTypeSpecifierElements pNumericTypeSpecifier;
@@ -3517,7 +3484,6 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	private StringTypeSpecifierElements pStringTypeSpecifier;
 	private NamedTypeSpecifierElements pNamedTypeSpecifier;
 	private ArrayDimensionSpecificationElements pArrayDimensionSpecification;
-	private UnitTypeSpecifierElements pUnitTypeSpecifier;
 	private ExpressionElements pExpression;
 	private LetExpressionElements pLetExpression;
 	private LetExpressionVariableElements pLetExpressionVariable;
@@ -3742,7 +3708,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//AssertionDeclaration:
-	//	"assert" predicate=Expression ":" statusKind=AssertionStatusKind message=Expression ";";
+	//	static?="static" "assert" predicate=Expression ":" statusKind=AssertionStatusKind message=Expression ";";
 	public AssertionDeclarationElements getAssertionDeclarationAccess() {
 		return (pAssertionDeclaration != null) ? pAssertionDeclaration : (pAssertionDeclaration = new AssertionDeclarationElements());
 	}
@@ -3762,7 +3728,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//FunctorDeclaration:
-	//	"functor" name=KeywordID "=" functionName=QualifiedName ("<" templateArguments+=ArgumentDeclaration (","
+	//	"functor" name=KeywordID ":" functionName=QualifiedName ("<" templateArguments+=ArgumentDeclaration (","
 	//	templateArguments+=ArgumentDeclaration)* ">")? ";";
 	public FunctorDeclarationElements getFunctorDeclarationAccess() {
 		return (pFunctorDeclaration != null) ? pFunctorDeclaration : (pFunctorDeclaration = new FunctorDeclarationElements());
@@ -3794,17 +3760,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 
 	/// *
 	// * Data type specifier
-	// * /TypeSpecifier:
-	//	DataTypeSpecifier | UnitTypeSpecifier;
-	public TypeSpecifierElements getTypeSpecifierAccess() {
-		return (pTypeSpecifier != null) ? pTypeSpecifier : (pTypeSpecifier = new TypeSpecifierElements());
-	}
-	
-	public ParserRule getTypeSpecifierRule() {
-		return getTypeSpecifierAccess().getRule();
-	}
-
-	//DataTypeSpecifier:
+	// * /DataTypeSpecifier:
 	//	PrimitiveTypeSpecifier | NamedTypeSpecifier;
 	public DataTypeSpecifierElements getDataTypeSpecifierAccess() {
 		return (pDataTypeSpecifier != null) ? pDataTypeSpecifier : (pDataTypeSpecifier = new DataTypeSpecifierElements());
@@ -3919,16 +3875,6 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getArrayDimensionSpecificationRule() {
 		return getArrayDimensionSpecificationAccess().getRule();
-	}
-
-	//UnitTypeSpecifier:
-	//	{UnitTypeSpecifier} "unit";
-	public UnitTypeSpecifierElements getUnitTypeSpecifierAccess() {
-		return (pUnitTypeSpecifier != null) ? pUnitTypeSpecifier : (pUnitTypeSpecifier = new UnitTypeSpecifierElements());
-	}
-	
-	public ParserRule getUnitTypeSpecifierRule() {
-		return getUnitTypeSpecifierAccess().getRule();
 	}
 
 	/// *

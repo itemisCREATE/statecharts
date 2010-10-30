@@ -179,15 +179,6 @@ public interface AstFactory extends EFactory
   EquationDefinition createEquationDefinition();
 
   /**
-   * Returns a new object of class '<em>Type Specifier</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Type Specifier</em>'.
-   * @generated
-   */
-  TypeSpecifier createTypeSpecifier();
-
-  /**
    * Returns a new object of class '<em>Data Type Specifier</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -285,15 +276,6 @@ public interface AstFactory extends EFactory
    * @generated
    */
   ArrayDimensionSpecification createArrayDimensionSpecification();
-
-  /**
-   * Returns a new object of class '<em>Unit Type Specifier</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Unit Type Specifier</em>'.
-   * @generated
-   */
-  UnitTypeSpecifier createUnitTypeSpecifier();
 
   /**
    * Returns a new object of class '<em>Expression</em>'.

@@ -92,6 +92,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//ParameterDeclaration/name"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//AssertionDeclaration">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//AssertionDeclaration/static"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//AssertionDeclaration/predicate"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//AssertionDeclaration/statusKind"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//AssertionDeclaration/message"/>
@@ -111,7 +112,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//EquationDefinition/leftHandSide"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//EquationDefinition/rightHandSide"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//TypeSpecifier"/>
     <genClasses ecoreClass="Mscript.ecore#//DataTypeSpecifier">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//DataTypeSpecifier/dimensions"/>
     </genClasses>
@@ -132,7 +132,6 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//ArrayDimensionSpecification/unspecified"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ArrayDimensionSpecification/size"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//UnitTypeSpecifier"/>
     <genClasses ecoreClass="Mscript.ecore#//Expression"/>
     <genClasses ecoreClass="Mscript.ecore#//LetExpression">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//LetExpression/variables"/>

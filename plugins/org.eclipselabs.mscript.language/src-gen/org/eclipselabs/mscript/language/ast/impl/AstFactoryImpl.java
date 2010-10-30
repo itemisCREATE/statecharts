@@ -85,7 +85,6 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
       case AstPackage.FUNCTOR_DECLARATION: return createFunctorDeclaration();
       case AstPackage.ARGUMENT_DECLARATION: return createArgumentDeclaration();
       case AstPackage.EQUATION_DEFINITION: return createEquationDefinition();
-      case AstPackage.TYPE_SPECIFIER: return createTypeSpecifier();
       case AstPackage.DATA_TYPE_SPECIFIER: return createDataTypeSpecifier();
       case AstPackage.PRIMITIVE_TYPE_SPECIFIER: return createPrimitiveTypeSpecifier();
       case AstPackage.NUMERIC_TYPE_SPECIFIER: return createNumericTypeSpecifier();
@@ -97,7 +96,6 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
       case AstPackage.STRING_TYPE_SPECIFIER: return createStringTypeSpecifier();
       case AstPackage.NAMED_TYPE_SPECIFIER: return createNamedTypeSpecifier();
       case AstPackage.ARRAY_DIMENSION_SPECIFICATION: return createArrayDimensionSpecification();
-      case AstPackage.UNIT_TYPE_SPECIFIER: return createUnitTypeSpecifier();
       case AstPackage.EXPRESSION: return createExpression();
       case AstPackage.LET_EXPRESSION: return createLetExpression();
       case AstPackage.LET_EXPRESSION_VARIABLE: return createLetExpressionVariable();
@@ -407,17 +405,6 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public TypeSpecifier createTypeSpecifier()
-  {
-    TypeSpecifierImpl typeSpecifier = new TypeSpecifierImpl();
-    return typeSpecifier;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public DataTypeSpecifier createDataTypeSpecifier()
   {
     DataTypeSpecifierImpl dataTypeSpecifier = new DataTypeSpecifierImpl();
@@ -532,17 +519,6 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
   {
     ArrayDimensionSpecificationImpl arrayDimensionSpecification = new ArrayDimensionSpecificationImpl();
     return arrayDimensionSpecification;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public UnitTypeSpecifier createUnitTypeSpecifier()
-  {
-    UnitTypeSpecifierImpl unitTypeSpecifier = new UnitTypeSpecifierImpl();
-    return unitTypeSpecifier;
   }
 
   /**

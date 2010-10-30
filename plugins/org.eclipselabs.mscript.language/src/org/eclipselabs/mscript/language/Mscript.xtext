@@ -94,13 +94,13 @@ enum AssertionStatusKind :
 	Fatal='fatal';
 
 AssertionDeclaration :
-	'assert' predicate=Expression ':' statusKind=AssertionStatusKind message=Expression ';';
+	(static?='static') 'assert' predicate=Expression ':' statusKind=AssertionStatusKind message=Expression ';';
 
 VariableDeclaration :
 	'var' name=KeywordID ';';
 	
 FunctorDeclaration :
-	'functor' name=KeywordID '=' functionName=QualifiedName ('<' templateArguments+=ArgumentDeclaration (',' templateArguments+=ArgumentDeclaration)* '>')? ';';
+	'functor' name=KeywordID ':' functionName=QualifiedName ('<' templateArguments+=ArgumentDeclaration (',' templateArguments+=ArgumentDeclaration)* '>')? ';';
 
 ArgumentDeclaration :
 	name=KeywordID;
@@ -112,9 +112,6 @@ EquationDefinition :
  * Data type specifier
  */
 
-TypeSpecifier :
-	DataTypeSpecifier | UnitTypeSpecifier;
-	
 DataTypeSpecifier :
 	PrimitiveTypeSpecifier | NamedTypeSpecifier;
 	
@@ -148,9 +145,6 @@ NamedTypeSpecifier :
 ArrayDimensionSpecification :
 	unspecified?='?' | size=Expression;
 	
-UnitTypeSpecifier :
-	{UnitTypeSpecifier} 'unit';
-
 /*
  * Expressions
  */

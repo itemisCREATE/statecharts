@@ -7,6 +7,8 @@ package org.eclipselabs.mscript.language.ast;
 
 import org.eclipse.emf.common.util.EList;
 
+import org.eclipse.emf.ecore.EObject;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Data Type Specifier</b></em>'.
@@ -23,7 +25,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface DataTypeSpecifier extends TypeSpecifier
+public interface DataTypeSpecifier extends EObject
 {
   /**
    * Returns the value of the '<em><b>Dimensions</b></em>' containment reference list.

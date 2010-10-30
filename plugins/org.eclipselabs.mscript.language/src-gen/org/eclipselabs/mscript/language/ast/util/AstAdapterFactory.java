@@ -163,11 +163,6 @@ public class AstAdapterFactory extends AdapterFactoryImpl
         return createEquationDefinitionAdapter();
       }
       @Override
-      public Adapter caseTypeSpecifier(TypeSpecifier object)
-      {
-        return createTypeSpecifierAdapter();
-      }
-      @Override
       public Adapter caseDataTypeSpecifier(DataTypeSpecifier object)
       {
         return createDataTypeSpecifierAdapter();
@@ -221,11 +216,6 @@ public class AstAdapterFactory extends AdapterFactoryImpl
       public Adapter caseArrayDimensionSpecification(ArrayDimensionSpecification object)
       {
         return createArrayDimensionSpecificationAdapter();
-      }
-      @Override
-      public Adapter caseUnitTypeSpecifier(UnitTypeSpecifier object)
-      {
-        return createUnitTypeSpecifierAdapter();
       }
       @Override
       public Adapter caseExpression(Expression object)
@@ -735,21 +725,6 @@ public class AstAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.TypeSpecifier <em>Type Specifier</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.TypeSpecifier
-   * @generated
-   */
-  public Adapter createTypeSpecifierAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.DataTypeSpecifier <em>Data Type Specifier</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -910,21 +885,6 @@ public class AstAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createArrayDimensionSpecificationAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.UnitTypeSpecifier <em>Unit Type Specifier</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.UnitTypeSpecifier
-   * @generated
-   */
-  public Adapter createUnitTypeSpecifierAdapter()
   {
     return null;
   }

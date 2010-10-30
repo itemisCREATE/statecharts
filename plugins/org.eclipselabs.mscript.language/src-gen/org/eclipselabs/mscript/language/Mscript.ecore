@@ -65,6 +65,7 @@
     <eLiterals name="Fatal" value="3" literal="fatal"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AssertionDeclaration">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="static" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="predicate" eType="#//Expression"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="statusKind" eType="#//AssertionStatusKind"/>
@@ -90,8 +91,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="rightHandSide" eType="#//Expression"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TypeSpecifier"/>
-  <eClassifiers xsi:type="ecore:EClass" name="DataTypeSpecifier" eSuperTypes="#//TypeSpecifier">
+  <eClassifiers xsi:type="ecore:EClass" name="DataTypeSpecifier">
     <eStructuralFeatures xsi:type="ecore:EReference" name="dimensions" upperBound="-1"
         eType="#//ArrayDimensionSpecification" containment="true"/>
   </eClassifiers>
@@ -115,7 +115,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="size" eType="#//Expression"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="UnitTypeSpecifier" eSuperTypes="#//TypeSpecifier"/>
   <eClassifiers xsi:type="ecore:EClass" name="Expression"/>
   <eClassifiers xsi:type="ecore:EClass" name="LetExpression" eSuperTypes="#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="variables" upperBound="-1"
