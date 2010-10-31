@@ -209,8 +209,8 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//ArrayConstructionIterationClause/variableName"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ArrayConstructionIterationClause/collectionExpression"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//MatrixConstructionOperator">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//MatrixConstructionOperator/expressionLists"/>
+    <genClasses ecoreClass="Mscript.ecore#//ArrayConcatenationOperator">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ArrayConcatenationOperator/rows"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//ExpressionList">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ExpressionList/expressions"/>
@@ -246,9 +246,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//UnitExpressionExponent/value"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//RangeExpression">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//RangeExpression/begin"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//RangeExpression/end"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//RangeExpression/increment"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//RangeExpression/operands"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//ImpliesExpression">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ImpliesExpression/leftOperand"/>

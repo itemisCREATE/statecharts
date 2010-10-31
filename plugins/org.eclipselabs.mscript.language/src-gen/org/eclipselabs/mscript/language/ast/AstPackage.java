@@ -1859,32 +1859,32 @@ public interface AstPackage extends EPackage
   int ARRAY_CONSTRUCTION_ITERATION_CLAUSE_FEATURE_COUNT = 2;
 
   /**
-   * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.MatrixConstructionOperatorImpl <em>Matrix Construction Operator</em>}' class.
+   * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.ArrayConcatenationOperatorImpl <em>Array Concatenation Operator</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.eclipselabs.mscript.language.ast.impl.MatrixConstructionOperatorImpl
-   * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getMatrixConstructionOperator()
+   * @see org.eclipselabs.mscript.language.ast.impl.ArrayConcatenationOperatorImpl
+   * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getArrayConcatenationOperator()
    * @generated
    */
-  int MATRIX_CONSTRUCTION_OPERATOR = 52;
+  int ARRAY_CONCATENATION_OPERATOR = 52;
 
   /**
-   * The feature id for the '<em><b>Expression Lists</b></em>' containment reference list.
+   * The feature id for the '<em><b>Rows</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MATRIX_CONSTRUCTION_OPERATOR__EXPRESSION_LISTS = EXPRESSION_FEATURE_COUNT + 0;
+  int ARRAY_CONCATENATION_OPERATOR__ROWS = EXPRESSION_FEATURE_COUNT + 0;
 
   /**
-   * The number of structural features of the '<em>Matrix Construction Operator</em>' class.
+   * The number of structural features of the '<em>Array Concatenation Operator</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MATRIX_CONSTRUCTION_OPERATOR_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
+  int ARRAY_CONCATENATION_OPERATOR_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.ExpressionListImpl <em>Expression List</em>}' class.
@@ -2223,31 +2223,13 @@ public interface AstPackage extends EPackage
   int RANGE_EXPRESSION = 64;
 
   /**
-   * The feature id for the '<em><b>Begin</b></em>' containment reference.
+   * The feature id for the '<em><b>Operands</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int RANGE_EXPRESSION__BEGIN = EXPRESSION_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>End</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int RANGE_EXPRESSION__END = EXPRESSION_FEATURE_COUNT + 1;
-
-  /**
-   * The feature id for the '<em><b>Increment</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int RANGE_EXPRESSION__INCREMENT = EXPRESSION_FEATURE_COUNT + 2;
+  int RANGE_EXPRESSION__OPERANDS = EXPRESSION_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Range Expression</em>' class.
@@ -2256,7 +2238,7 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int RANGE_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 3;
+  int RANGE_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.ImpliesExpressionImpl <em>Implies Expression</em>}' class.
@@ -4126,25 +4108,25 @@ public interface AstPackage extends EPackage
   EReference getArrayConstructionIterationClause_CollectionExpression();
 
   /**
-   * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.MatrixConstructionOperator <em>Matrix Construction Operator</em>}'.
+   * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.ArrayConcatenationOperator <em>Array Concatenation Operator</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Matrix Construction Operator</em>'.
-   * @see org.eclipselabs.mscript.language.ast.MatrixConstructionOperator
+   * @return the meta object for class '<em>Array Concatenation Operator</em>'.
+   * @see org.eclipselabs.mscript.language.ast.ArrayConcatenationOperator
    * @generated
    */
-  EClass getMatrixConstructionOperator();
+  EClass getArrayConcatenationOperator();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.ast.MatrixConstructionOperator#getExpressionLists <em>Expression Lists</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.ast.ArrayConcatenationOperator#getRows <em>Rows</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Expression Lists</em>'.
-   * @see org.eclipselabs.mscript.language.ast.MatrixConstructionOperator#getExpressionLists()
-   * @see #getMatrixConstructionOperator()
+   * @return the meta object for the containment reference list '<em>Rows</em>'.
+   * @see org.eclipselabs.mscript.language.ast.ArrayConcatenationOperator#getRows()
+   * @see #getArrayConcatenationOperator()
    * @generated
    */
-  EReference getMatrixConstructionOperator_ExpressionLists();
+  EReference getArrayConcatenationOperator_Rows();
 
   /**
    * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.ExpressionList <em>Expression List</em>}'.
@@ -4410,37 +4392,15 @@ public interface AstPackage extends EPackage
   EClass getRangeExpression();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.RangeExpression#getBegin <em>Begin</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.ast.RangeExpression#getOperands <em>Operands</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Begin</em>'.
-   * @see org.eclipselabs.mscript.language.ast.RangeExpression#getBegin()
+   * @return the meta object for the containment reference list '<em>Operands</em>'.
+   * @see org.eclipselabs.mscript.language.ast.RangeExpression#getOperands()
    * @see #getRangeExpression()
    * @generated
    */
-  EReference getRangeExpression_Begin();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.RangeExpression#getEnd <em>End</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>End</em>'.
-   * @see org.eclipselabs.mscript.language.ast.RangeExpression#getEnd()
-   * @see #getRangeExpression()
-   * @generated
-   */
-  EReference getRangeExpression_End();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.RangeExpression#getIncrement <em>Increment</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Increment</em>'.
-   * @see org.eclipselabs.mscript.language.ast.RangeExpression#getIncrement()
-   * @see #getRangeExpression()
-   * @generated
-   */
-  EReference getRangeExpression_Increment();
+  EReference getRangeExpression_Operands();
 
   /**
    * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.ImpliesExpression <em>Implies Expression</em>}'.
@@ -6069,22 +6029,22 @@ public interface AstPackage extends EPackage
     EReference ARRAY_CONSTRUCTION_ITERATION_CLAUSE__COLLECTION_EXPRESSION = eINSTANCE.getArrayConstructionIterationClause_CollectionExpression();
 
     /**
-     * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.MatrixConstructionOperatorImpl <em>Matrix Construction Operator</em>}' class.
+     * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.ArrayConcatenationOperatorImpl <em>Array Concatenation Operator</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.eclipselabs.mscript.language.ast.impl.MatrixConstructionOperatorImpl
-     * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getMatrixConstructionOperator()
+     * @see org.eclipselabs.mscript.language.ast.impl.ArrayConcatenationOperatorImpl
+     * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getArrayConcatenationOperator()
      * @generated
      */
-    EClass MATRIX_CONSTRUCTION_OPERATOR = eINSTANCE.getMatrixConstructionOperator();
+    EClass ARRAY_CONCATENATION_OPERATOR = eINSTANCE.getArrayConcatenationOperator();
 
     /**
-     * The meta object literal for the '<em><b>Expression Lists</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Rows</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference MATRIX_CONSTRUCTION_OPERATOR__EXPRESSION_LISTS = eINSTANCE.getMatrixConstructionOperator_ExpressionLists();
+    EReference ARRAY_CONCATENATION_OPERATOR__ROWS = eINSTANCE.getArrayConcatenationOperator_Rows();
 
     /**
      * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.ExpressionListImpl <em>Expression List</em>}' class.
@@ -6311,28 +6271,12 @@ public interface AstPackage extends EPackage
     EClass RANGE_EXPRESSION = eINSTANCE.getRangeExpression();
 
     /**
-     * The meta object literal for the '<em><b>Begin</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Operands</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference RANGE_EXPRESSION__BEGIN = eINSTANCE.getRangeExpression_Begin();
-
-    /**
-     * The meta object literal for the '<em><b>End</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference RANGE_EXPRESSION__END = eINSTANCE.getRangeExpression_End();
-
-    /**
-     * The meta object literal for the '<em><b>Increment</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference RANGE_EXPRESSION__INCREMENT = eINSTANCE.getRangeExpression_Increment();
+    EReference RANGE_EXPRESSION__OPERANDS = eINSTANCE.getRangeExpression_Operands();
 
     /**
      * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.ImpliesExpressionImpl <em>Implies Expression</em>}' class.

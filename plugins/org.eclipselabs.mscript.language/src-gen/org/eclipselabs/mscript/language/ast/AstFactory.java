@@ -494,13 +494,13 @@ public interface AstFactory extends EFactory
   ArrayConstructionIterationClause createArrayConstructionIterationClause();
 
   /**
-   * Returns a new object of class '<em>Matrix Construction Operator</em>'.
+   * Returns a new object of class '<em>Array Concatenation Operator</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Matrix Construction Operator</em>'.
+   * @return a new object of class '<em>Array Concatenation Operator</em>'.
    * @generated
    */
-  MatrixConstructionOperator createMatrixConstructionOperator();
+  ArrayConcatenationOperator createArrayConcatenationOperator();
 
   /**
    * Returns a new object of class '<em>Expression List</em>'.

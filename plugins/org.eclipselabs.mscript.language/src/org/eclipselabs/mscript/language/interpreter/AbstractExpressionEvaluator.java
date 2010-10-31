@@ -14,9 +14,9 @@ package org.eclipselabs.mscript.language.interpreter;
 import org.eclipselabs.mscript.language.ast.AdditiveExpression;
 import org.eclipselabs.mscript.language.ast.AdditiveExpressionPart;
 import org.eclipselabs.mscript.language.ast.AdditiveOperator;
+import org.eclipselabs.mscript.language.ast.ArrayConcatenationOperator;
 import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.ast.ExpressionList;
-import org.eclipselabs.mscript.language.ast.MatrixConstructionOperator;
 import org.eclipselabs.mscript.language.ast.MultiplicativeExpression;
 import org.eclipselabs.mscript.language.ast.MultiplicativeExpressionPart;
 import org.eclipselabs.mscript.language.ast.MultiplicativeOperator;
@@ -89,11 +89,11 @@ public abstract class AbstractExpressionEvaluator<T> extends AstSwitch<T> {
 
 	protected abstract T elementWiseDivide(T dividend, T divisor);
 	
-	public T caseMatrixConstructionOperator(MatrixConstructionOperator matrixConstructionOperator) {
-		int rowSize = matrixConstructionOperator.getExpressionLists().size();
+	public T caseArrayConcatenationOperator(ArrayConcatenationOperator arrayConcatenationOperator) {
+		int rowSize = arrayConcatenationOperator.getRows().size();
 		int columnSize = -1;
 		
-		for (ExpressionList expressionList : matrixConstructionOperator.getExpressionLists()) {
+		for (ExpressionList expressionList : arrayConcatenationOperator.getRows()) {
 			if (columnSize == -1) {
 				columnSize = expressionList.getExpressions().size();
 			} else if (columnSize < expressionList.getExpressions().size()) {
@@ -105,7 +105,7 @@ public abstract class AbstractExpressionEvaluator<T> extends AstSwitch<T> {
 		T[][] matrix = (T[][]) new Object[rowSize][columnSize];
 
 		int row = 0;
-		for (ExpressionList expressionList : matrixConstructionOperator.getExpressionLists()) {
+		for (ExpressionList expressionList : arrayConcatenationOperator.getRows()) {
 			int column = 0;
 			for (Expression expression : expressionList.getExpressions()) {
 				matrix[row][column] = doSwitch(expression);

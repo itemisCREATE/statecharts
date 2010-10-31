@@ -17,41 +17,41 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.eclipselabs.mscript.language.ast.ArrayConcatenationOperator;
 import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.ExpressionList;
-import org.eclipselabs.mscript.language.ast.MatrixConstructionOperator;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Matrix Construction Operator</b></em>'.
+ * An implementation of the model object '<em><b>Array Concatenation Operator</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.MatrixConstructionOperatorImpl#getExpressionLists <em>Expression Lists</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.ArrayConcatenationOperatorImpl#getRows <em>Rows</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class MatrixConstructionOperatorImpl extends ExpressionImpl implements MatrixConstructionOperator
+public class ArrayConcatenationOperatorImpl extends ExpressionImpl implements ArrayConcatenationOperator
 {
   /**
-   * The cached value of the '{@link #getExpressionLists() <em>Expression Lists</em>}' containment reference list.
+   * The cached value of the '{@link #getRows() <em>Rows</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getExpressionLists()
+   * @see #getRows()
    * @generated
    * @ordered
    */
-  protected EList<ExpressionList> expressionLists;
+  protected EList<ExpressionList> rows;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected MatrixConstructionOperatorImpl()
+  protected ArrayConcatenationOperatorImpl()
   {
     super();
   }
@@ -64,7 +64,7 @@ public class MatrixConstructionOperatorImpl extends ExpressionImpl implements Ma
   @Override
   protected EClass eStaticClass()
   {
-    return AstPackage.Literals.MATRIX_CONSTRUCTION_OPERATOR;
+    return AstPackage.Literals.ARRAY_CONCATENATION_OPERATOR;
   }
 
   /**
@@ -72,13 +72,13 @@ public class MatrixConstructionOperatorImpl extends ExpressionImpl implements Ma
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<ExpressionList> getExpressionLists()
+  public EList<ExpressionList> getRows()
   {
-    if (expressionLists == null)
+    if (rows == null)
     {
-      expressionLists = new EObjectContainmentEList<ExpressionList>(ExpressionList.class, this, AstPackage.MATRIX_CONSTRUCTION_OPERATOR__EXPRESSION_LISTS);
+      rows = new EObjectContainmentEList<ExpressionList>(ExpressionList.class, this, AstPackage.ARRAY_CONCATENATION_OPERATOR__ROWS);
     }
-    return expressionLists;
+    return rows;
   }
 
   /**
@@ -91,8 +91,8 @@ public class MatrixConstructionOperatorImpl extends ExpressionImpl implements Ma
   {
     switch (featureID)
     {
-      case AstPackage.MATRIX_CONSTRUCTION_OPERATOR__EXPRESSION_LISTS:
-        return ((InternalEList<?>)getExpressionLists()).basicRemove(otherEnd, msgs);
+      case AstPackage.ARRAY_CONCATENATION_OPERATOR__ROWS:
+        return ((InternalEList<?>)getRows()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -107,8 +107,8 @@ public class MatrixConstructionOperatorImpl extends ExpressionImpl implements Ma
   {
     switch (featureID)
     {
-      case AstPackage.MATRIX_CONSTRUCTION_OPERATOR__EXPRESSION_LISTS:
-        return getExpressionLists();
+      case AstPackage.ARRAY_CONCATENATION_OPERATOR__ROWS:
+        return getRows();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -124,9 +124,9 @@ public class MatrixConstructionOperatorImpl extends ExpressionImpl implements Ma
   {
     switch (featureID)
     {
-      case AstPackage.MATRIX_CONSTRUCTION_OPERATOR__EXPRESSION_LISTS:
-        getExpressionLists().clear();
-        getExpressionLists().addAll((Collection<? extends ExpressionList>)newValue);
+      case AstPackage.ARRAY_CONCATENATION_OPERATOR__ROWS:
+        getRows().clear();
+        getRows().addAll((Collection<? extends ExpressionList>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -142,8 +142,8 @@ public class MatrixConstructionOperatorImpl extends ExpressionImpl implements Ma
   {
     switch (featureID)
     {
-      case AstPackage.MATRIX_CONSTRUCTION_OPERATOR__EXPRESSION_LISTS:
-        getExpressionLists().clear();
+      case AstPackage.ARRAY_CONCATENATION_OPERATOR__ROWS:
+        getRows().clear();
         return;
     }
     super.eUnset(featureID);
@@ -159,10 +159,10 @@ public class MatrixConstructionOperatorImpl extends ExpressionImpl implements Ma
   {
     switch (featureID)
     {
-      case AstPackage.MATRIX_CONSTRUCTION_OPERATOR__EXPRESSION_LISTS:
-        return expressionLists != null && !expressionLists.isEmpty();
+      case AstPackage.ARRAY_CONCATENATION_OPERATOR__ROWS:
+        return rows != null && !rows.isEmpty();
     }
     return super.eIsSet(featureID);
   }
 
-} //MatrixConstructionOperatorImpl
+} //ArrayConcatenationOperatorImpl

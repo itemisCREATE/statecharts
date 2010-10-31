@@ -515,11 +515,11 @@ public class AstSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AstPackage.MATRIX_CONSTRUCTION_OPERATOR:
+      case AstPackage.ARRAY_CONCATENATION_OPERATOR:
       {
-        MatrixConstructionOperator matrixConstructionOperator = (MatrixConstructionOperator)theEObject;
-        T result = caseMatrixConstructionOperator(matrixConstructionOperator);
-        if (result == null) result = caseExpression(matrixConstructionOperator);
+        ArrayConcatenationOperator arrayConcatenationOperator = (ArrayConcatenationOperator)theEObject;
+        T result = caseArrayConcatenationOperator(arrayConcatenationOperator);
+        if (result == null) result = caseExpression(arrayConcatenationOperator);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -1554,17 +1554,17 @@ public class AstSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Matrix Construction Operator</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Array Concatenation Operator</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Matrix Construction Operator</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Array Concatenation Operator</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseMatrixConstructionOperator(MatrixConstructionOperator object)
+  public T caseArrayConcatenationOperator(ArrayConcatenationOperator object)
   {
     return null;
   }

@@ -678,23 +678,18 @@
     <alternatives xsi:type="xtext:Group">
       <elements xsi:type="xtext:RuleCall" rule="//@rules.36"/>
       <elements xsi:type="xtext:Group" cardinality="?">
-        <elements xsi:type="xtext:Action" feature="begin" operator="=">
+        <elements xsi:type="xtext:Action" feature="operands" operator="+=">
           <type metamodel="//@metamodelDeclarations.0">
             <classifier xsi:type="ecore:EClass" href="http://www.eclipselabs.org/mscript/AST/1.0.0#//RangeExpression"/>
           </type>
         </elements>
         <elements xsi:type="xtext:Keyword" value=":"/>
-        <elements xsi:type="xtext:Assignment" feature="end" operator="=">
+        <elements xsi:type="xtext:Assignment" feature="operands" operator="+=">
           <terminal xsi:type="xtext:RuleCall" rule="//@rules.36"/>
         </elements>
         <elements xsi:type="xtext:Group" cardinality="?">
-          <elements xsi:type="xtext:Action" feature="increment" operator="=">
-            <type metamodel="//@metamodelDeclarations.0">
-              <classifier xsi:type="ecore:EClass" href="http://www.eclipselabs.org/mscript/AST/1.0.0#//RangeExpression"/>
-            </type>
-          </elements>
           <elements xsi:type="xtext:Keyword" value=":"/>
-          <elements xsi:type="xtext:Assignment" feature="end" operator="=">
+          <elements xsi:type="xtext:Assignment" feature="operands" operator="+=">
             <terminal xsi:type="xtext:RuleCall" rule="//@rules.36"/>
           </elements>
         </elements>
@@ -1395,18 +1390,18 @@
       </elements>
     </alternatives>
   </rules>
-  <rules xsi:type="xtext:ParserRule" name="MatrixConstructionOperator">
+  <rules xsi:type="xtext:ParserRule" name="ArrayConcatenationOperator">
     <type metamodel="//@metamodelDeclarations.0">
-      <classifier xsi:type="ecore:EClass" href="http://www.eclipselabs.org/mscript/AST/1.0.0#//MatrixConstructionOperator"/>
+      <classifier xsi:type="ecore:EClass" href="http://www.eclipselabs.org/mscript/AST/1.0.0#//ArrayConcatenationOperator"/>
     </type>
     <alternatives xsi:type="xtext:Group">
       <elements xsi:type="xtext:Keyword" value="["/>
-      <elements xsi:type="xtext:Assignment" feature="expressionLists" operator="+=">
+      <elements xsi:type="xtext:Assignment" feature="rows" operator="+=">
         <terminal xsi:type="xtext:RuleCall" rule="//@rules.77"/>
       </elements>
       <elements xsi:type="xtext:Group" cardinality="*">
         <elements xsi:type="xtext:Keyword" value=";"/>
-        <elements xsi:type="xtext:Assignment" feature="expressionLists" operator="+=">
+        <elements xsi:type="xtext:Assignment" feature="rows" operator="+=">
           <terminal xsi:type="xtext:RuleCall" rule="//@rules.77"/>
         </elements>
       </elements>

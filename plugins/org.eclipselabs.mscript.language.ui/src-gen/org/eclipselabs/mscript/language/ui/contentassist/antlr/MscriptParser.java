@@ -168,8 +168,8 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getArrayConstructionOperatorAccess().getGroup_2_1(), "rule__ArrayConstructionOperator__Group_2_1__0");
 					put(grammarAccess.getArrayConstructionOperatorAccess().getGroup_2_1_2(), "rule__ArrayConstructionOperator__Group_2_1_2__0");
 					put(grammarAccess.getArrayConstructionIterationClauseAccess().getGroup(), "rule__ArrayConstructionIterationClause__Group__0");
-					put(grammarAccess.getMatrixConstructionOperatorAccess().getGroup(), "rule__MatrixConstructionOperator__Group__0");
-					put(grammarAccess.getMatrixConstructionOperatorAccess().getGroup_2(), "rule__MatrixConstructionOperator__Group_2__0");
+					put(grammarAccess.getArrayConcatenationOperatorAccess().getGroup(), "rule__ArrayConcatenationOperator__Group__0");
+					put(grammarAccess.getArrayConcatenationOperatorAccess().getGroup_2(), "rule__ArrayConcatenationOperator__Group_2__0");
 					put(grammarAccess.getExpressionListAccess().getGroup(), "rule__ExpressionList__Group__0");
 					put(grammarAccess.getExpressionListAccess().getGroup_1(), "rule__ExpressionList__Group_1__0");
 					put(grammarAccess.getUnitConstructionOperatorAccess().getGroup(), "rule__UnitConstructionOperator__Group__0");
@@ -260,8 +260,8 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getSwitchExpressionAccess().getDefaultExpressionAssignment_5(), "rule__SwitchExpression__DefaultExpressionAssignment_5");
 					put(grammarAccess.getSwitchCaseAccess().getCaseExpressionAssignment_1(), "rule__SwitchCase__CaseExpressionAssignment_1");
 					put(grammarAccess.getSwitchCaseAccess().getResultExpressionAssignment_3(), "rule__SwitchCase__ResultExpressionAssignment_3");
-					put(grammarAccess.getRangeExpressionAccess().getEndAssignment_1_2(), "rule__RangeExpression__EndAssignment_1_2");
-					put(grammarAccess.getRangeExpressionAccess().getEndAssignment_1_3_2(), "rule__RangeExpression__EndAssignment_1_3_2");
+					put(grammarAccess.getRangeExpressionAccess().getOperandsAssignment_1_2(), "rule__RangeExpression__OperandsAssignment_1_2");
+					put(grammarAccess.getRangeExpressionAccess().getOperandsAssignment_1_3_1(), "rule__RangeExpression__OperandsAssignment_1_3_1");
 					put(grammarAccess.getImpliesExpressionAccess().getRightOperandAssignment_1_2(), "rule__ImpliesExpression__RightOperandAssignment_1_2");
 					put(grammarAccess.getLogicalOrExpressionAccess().getOperandsAssignment_1_1_1(), "rule__LogicalOrExpression__OperandsAssignment_1_1_1");
 					put(grammarAccess.getLogicalAndExpressionAccess().getOperandsAssignment_1_1_1(), "rule__LogicalAndExpression__OperandsAssignment_1_1_1");
@@ -314,8 +314,8 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getArrayConstructionOperatorAccess().getIterationClausesAssignment_2_1_2_1(), "rule__ArrayConstructionOperator__IterationClausesAssignment_2_1_2_1");
 					put(grammarAccess.getArrayConstructionIterationClauseAccess().getVariableNameAssignment_0(), "rule__ArrayConstructionIterationClause__VariableNameAssignment_0");
 					put(grammarAccess.getArrayConstructionIterationClauseAccess().getCollectionExpressionAssignment_2(), "rule__ArrayConstructionIterationClause__CollectionExpressionAssignment_2");
-					put(grammarAccess.getMatrixConstructionOperatorAccess().getExpressionListsAssignment_1(), "rule__MatrixConstructionOperator__ExpressionListsAssignment_1");
-					put(grammarAccess.getMatrixConstructionOperatorAccess().getExpressionListsAssignment_2_1(), "rule__MatrixConstructionOperator__ExpressionListsAssignment_2_1");
+					put(grammarAccess.getArrayConcatenationOperatorAccess().getRowsAssignment_1(), "rule__ArrayConcatenationOperator__RowsAssignment_1");
+					put(grammarAccess.getArrayConcatenationOperatorAccess().getRowsAssignment_2_1(), "rule__ArrayConcatenationOperator__RowsAssignment_2_1");
 					put(grammarAccess.getExpressionListAccess().getExpressionsAssignment_0(), "rule__ExpressionList__ExpressionsAssignment_0");
 					put(grammarAccess.getExpressionListAccess().getExpressionsAssignment_1_1(), "rule__ExpressionList__ExpressionsAssignment_1_1");
 					put(grammarAccess.getUnitConstructionOperatorAccess().getUnitAssignment_2(), "rule__UnitConstructionOperator__UnitAssignment_2");

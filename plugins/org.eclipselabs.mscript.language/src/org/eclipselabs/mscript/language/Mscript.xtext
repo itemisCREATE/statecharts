@@ -170,7 +170,7 @@ SwitchCase :
 	'case' caseExpression=ImpliesExpression ':' resultExpression=Expression;
 
 RangeExpression returns Expression :
-	ImpliesExpression ({RangeExpression.begin=current} ':' end=ImpliesExpression ({RangeExpression.increment=current} ':' end=ImpliesExpression)?)?;
+	ImpliesExpression ({RangeExpression.operands+=current} ':' operands+=ImpliesExpression (':' operands+=ImpliesExpression)?)?;
 
 ImpliesExpression returns Expression :
 	LogicalOrExpression ({ImpliesExpression.leftOperand=current} '=>' rightOperand=LogicalOrExpression)?;
@@ -248,7 +248,7 @@ PrimaryExpression returns Expression :
 
 CallablePrimaryExpression returns Expression :
 	ArrayConstructionOperator |
-	MatrixConstructionOperator |
+	ArrayConcatenationOperator |
 	ParenthesizedExpression;
 
 Literal :
@@ -303,13 +303,13 @@ Subscript :
 	slice?=':' | expression=Expression;
 
 ArrayConstructionOperator :
-	'{'  expressions+=Expression ((',' expressions+=Expression)* | 'for' iterationClauses+=ArrayConstructionIterationClause (',' iterationClauses+=ArrayConstructionIterationClause)*) '}';
+	'{' expressions+=Expression ((',' expressions+=Expression)* | 'for' iterationClauses+=ArrayConstructionIterationClause (',' iterationClauses+=ArrayConstructionIterationClause)*) '}';
 
 ArrayConstructionIterationClause :
 	variableName=ID 'in' collectionExpression=Expression;
 
-MatrixConstructionOperator :
-	'[' expressionLists+=ExpressionList (';' expressionLists+=ExpressionList)* ']';
+ArrayConcatenationOperator :
+	'[' rows+=ExpressionList (';' rows+=ExpressionList)* ']';
 	
 ExpressionList :
 	expressions+=Expression (',' expressions+=Expression)*;

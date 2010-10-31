@@ -120,7 +120,7 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
       case AstPackage.SUBSCRIPT: return createSubscript();
       case AstPackage.ARRAY_CONSTRUCTION_OPERATOR: return createArrayConstructionOperator();
       case AstPackage.ARRAY_CONSTRUCTION_ITERATION_CLAUSE: return createArrayConstructionIterationClause();
-      case AstPackage.MATRIX_CONSTRUCTION_OPERATOR: return createMatrixConstructionOperator();
+      case AstPackage.ARRAY_CONCATENATION_OPERATOR: return createArrayConcatenationOperator();
       case AstPackage.EXPRESSION_LIST: return createExpressionList();
       case AstPackage.UNIT_CONSTRUCTION_OPERATOR: return createUnitConstructionOperator();
       case AstPackage.PARENTHESIZED_EXPRESSION: return createParenthesizedExpression();
@@ -794,10 +794,10 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public MatrixConstructionOperator createMatrixConstructionOperator()
+  public ArrayConcatenationOperator createArrayConcatenationOperator()
   {
-    MatrixConstructionOperatorImpl matrixConstructionOperator = new MatrixConstructionOperatorImpl();
-    return matrixConstructionOperator;
+    ArrayConcatenationOperatorImpl arrayConcatenationOperator = new ArrayConcatenationOperatorImpl();
+    return arrayConcatenationOperator;
   }
 
   /**

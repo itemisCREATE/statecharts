@@ -338,9 +338,9 @@ public class AstAdapterFactory extends AdapterFactoryImpl
         return createArrayConstructionIterationClauseAdapter();
       }
       @Override
-      public Adapter caseMatrixConstructionOperator(MatrixConstructionOperator object)
+      public Adapter caseArrayConcatenationOperator(ArrayConcatenationOperator object)
       {
-        return createMatrixConstructionOperatorAdapter();
+        return createArrayConcatenationOperatorAdapter();
       }
       @Override
       public Adapter caseExpressionList(ExpressionList object)
@@ -1270,16 +1270,16 @@ public class AstAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.MatrixConstructionOperator <em>Matrix Construction Operator</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.ArrayConcatenationOperator <em>Array Concatenation Operator</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.MatrixConstructionOperator
+   * @see org.eclipselabs.mscript.language.ast.ArrayConcatenationOperator
    * @generated
    */
-  public Adapter createMatrixConstructionOperatorAdapter()
+  public Adapter createArrayConcatenationOperatorAdapter()
   {
     return null;
   }
