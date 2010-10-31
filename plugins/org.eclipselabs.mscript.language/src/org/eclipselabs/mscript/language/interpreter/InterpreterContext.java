@@ -11,6 +11,8 @@
 
 package org.eclipselabs.mscript.language.interpreter;
 
+import java.util.List;
+
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.emf.common.util.DiagnosticChain;
@@ -98,14 +100,19 @@ public class InterpreterContext implements IInterpreterContext {
 			if (functor.isInitialized()) {
 				IVariable variable = functor.getVariable(simpleName.getIdentifier());
 				if (variable != null) {
-					FeatureCallPart part = featureCall.getParts().get(0);
-					if (part instanceof OperationCall) {
-						OperationCall operationCall = (OperationCall) part;
-						if (operationCall.getArguments().size() == 1) {
-							Expression stepExpression = operationCall.getArguments().get(0);
-							StepExpressionResult stepExpressionResult = new StepExpressionHelper().evaluate(stepExpression, getDiagnostics());
-							if (stepExpressionResult != null) {
-								return variable.getValue(stepExpressionResult.getStep());
+					List<FeatureCallPart> parts = featureCall.getParts();
+					if (parts.isEmpty()) {
+						return variable.getValue(0);
+					} else {
+						FeatureCallPart part = parts.get(0);
+						if (part instanceof OperationCall) {
+							OperationCall operationCall = (OperationCall) part;
+							if (operationCall.getArguments().size() == 1) {
+								Expression stepExpression = operationCall.getArguments().get(0);
+								StepExpressionResult stepExpressionResult = new StepExpressionHelper().evaluate(stepExpression, getDiagnostics());
+								if (stepExpressionResult != null) {
+									return variable.getValue(stepExpressionResult.getStep());
+								}
 							}
 						}
 					}
