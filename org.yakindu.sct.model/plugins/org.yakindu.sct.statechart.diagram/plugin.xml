@@ -137,10 +137,6 @@
             class="org.eclipse.gmf.runtime.emf.core.resources.GMFResourceFactory"
             type="sct">
       </parser>
-      <parser
-            class="org.eclipse.gmf.runtime.emf.core.resources.GMFResourceFactory"
-            type="sct_model">
-      </parser>
    </extension>
    <extension
          point="org.eclipse.gmf.runtime.diagram.core.viewProviders">
@@ -164,7 +160,7 @@
          point="org.eclipse.ui.newWizards">
       <wizard
             category="YAKINDU"
-            class="org.yakindu.sct.statechart.diagram.wizards.StatechartDiagramWizard"
+            class="org.yakindu.sct.statechart.diagram.wizards.CreationWizard"
             icon="icons/obj16/StatemachineDiagramFile.gif"
             id="org.yakindu.sct.statechart.diagram.StatechartDiagramWizard"
             name="YAKINDU Statechart Diagram"
