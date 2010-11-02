@@ -11,7 +11,6 @@
 package org.yakindu.sct.statechart.diagram.wizards;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -56,9 +55,7 @@ public class CreationWizard extends Wizard implements INewWizard {
 
 	protected IStructuredSelection selection;
 
-	protected CreationWizardPage diagramModelFilePage;
-
-	protected CreationWizardPage domainModelFilePage;
+	protected CreationWizardPage modelFilePage;
 
 	protected Resource diagram;
 
@@ -73,26 +70,10 @@ public class CreationWizard extends Wizard implements INewWizard {
 
 	@Override
 	public void addPages() {
-		diagramModelFilePage = new CreationWizardPage("DiagramModelFile", getSelection(), "sct");
-		diagramModelFilePage.setTitle("YAKINDU SCT Diagram");
-		diagramModelFilePage.setDescription("Create a new YAKINDU SCT Diagram File");
-		addPage(diagramModelFilePage);
-
-		domainModelFilePage = new CreationWizardPage("DomainModelFile", getSelection(), "sct_model") {
-
-			@Override
-			public void setVisible(boolean visible) {
-				if (visible) {
-					String fileName = diagramModelFilePage.getFileName();
-					fileName = fileName.substring(0, fileName.length() - ".sct".length());
-					setFileName(CreationWizardPage.getUniqueFileName(getContainerFullPath(), fileName, "sct_model"));
-				}
-				super.setVisible(visible);
-			}
-		};
-		domainModelFilePage.setTitle("YAKINDU Model File");
-		domainModelFilePage.setDescription("Creates a new YAKINDU Model File");
-		addPage(domainModelFilePage);
+		modelFilePage = new CreationWizardPage("DiagramModelFile", getSelection(), "sct");
+		modelFilePage.setTitle("YAKINDU SCT Diagram");
+		modelFilePage.setDescription("Create a new YAKINDU SCT Diagram File");
+		addPage(modelFilePage);
 	}
 
 	@Override
@@ -101,7 +82,7 @@ public class CreationWizard extends Wizard implements INewWizard {
 
 			@Override
 			protected void execute(IProgressMonitor monitor) throws CoreException, InterruptedException {
-				diagram = createDiagram(diagramModelFilePage.getURI(), domainModelFilePage.getURI(), monitor);
+				diagram = createDiagram(modelFilePage.getURI(), modelFilePage.getURI(), monitor);
 				if (isOpenOnCreate() && diagram != null) {
 					try {
 						openDiagram(diagram);
@@ -113,25 +94,10 @@ public class CreationWizard extends Wizard implements INewWizard {
 		};
 		try {
 			getContainer().run(false, true, op);
-		} catch (InterruptedException e) {
-			return false;
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
 			return false;
 		}
 		return diagram != null;
-	}
-
-	public IStructuredSelection getSelection() {
-		return selection;
-	}
-
-	public void setSelection(IStructuredSelection selection) {
-		this.selection = selection;
-	}
-
-	public boolean isOpenOnCreate() {
-		return openOnCreate;
 	}
 
 	public static boolean openDiagram(Resource diagram) throws PartInitException {
@@ -147,27 +113,23 @@ public class CreationWizard extends Wizard implements INewWizard {
 	public static Resource createDiagram(URI diagramURI, URI modelURI, IProgressMonitor progressMonitor) {
 		TransactionalEditingDomain editingDomain = GMFEditingDomainFactory.INSTANCE.createEditingDomain();
 		progressMonitor.beginTask("Creating diagram file ...", 3);
-		final Resource diagramResource = editingDomain.getResourceSet().createResource(diagramURI);
-		final Resource modelResource = editingDomain.getResourceSet().createResource(modelURI);
+		final Resource resource = editingDomain.getResourceSet().createResource(modelURI);
 		AbstractTransactionalCommand command = new AbstractTransactionalCommand(editingDomain,
 				"Creating diagram file ...", Collections.EMPTY_LIST) {
 			@Override
 			protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info)
 					throws ExecutionException {
 				Statechart statechart = StatechartFactory.eINSTANCE.createStatechart();
-				modelResource.getContents().add(statechart);
-
+				resource.getContents().add(statechart);
 				Diagram diagram = ViewService.createDiagram(statechart, StatechartDiagramEditor.ID,
 						DiagramActivator.DIAGRAM_PREFERENCES_HINT);
 				if (diagram != null) {
-					diagramResource.getContents().add(diagram);
+					resource.getContents().add(diagram);
 					diagram.setName("YAKINDU Statechart Model");
 					diagram.setElement(statechart);
 				}
-
 				try {
-					modelResource.save(getSaveOptions());
-					diagramResource.save(getSaveOptions());
+					resource.save(getSaveOptions());
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -180,9 +142,8 @@ public class CreationWizard extends Wizard implements INewWizard {
 		} catch (ExecutionException e) {
 			e.printStackTrace();
 		}
-		setCharset(WorkspaceSynchronizer.getFile(modelResource));
-		setCharset(WorkspaceSynchronizer.getFile(diagramResource));
-		return diagramResource;
+		setCharset(WorkspaceSynchronizer.getFile(resource));
+		return resource;
 	}
 
 	public static Map<String, String> getSaveOptions() {
@@ -201,6 +162,18 @@ public class CreationWizard extends Wizard implements INewWizard {
 		} catch (CoreException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public IStructuredSelection getSelection() {
+		return selection;
+	}
+
+	public void setSelection(IStructuredSelection selection) {
+		this.selection = selection;
+	}
+
+	public boolean isOpenOnCreate() {
+		return openOnCreate;
 	}
 
 }

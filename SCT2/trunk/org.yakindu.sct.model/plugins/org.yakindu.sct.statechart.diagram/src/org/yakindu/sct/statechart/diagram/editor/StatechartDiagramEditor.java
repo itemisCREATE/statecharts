@@ -11,11 +11,9 @@
 package org.yakindu.sct.statechart.diagram.editor;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.gmf.runtime.diagram.ui.resources.editor.document.IDocumentProvider;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
 import org.eclipse.swt.widgets.Display;
 import org.yakindu.sct.statechart.diagram.DiagramActivator;
-import org.yakindu.sct.statechart.diagram.providers.StatechartDiagramDocumentProvider;
 import org.yakindu.sct.statechart.diagram.utils.Validator;
 
 /**
@@ -35,11 +33,6 @@ public class StatechartDiagramEditor extends DiagramDocumentEditor {
 	@Override
 	public String getContributorId() {
 		return DiagramActivator.PLUGIN_ID;
-	}
-
-	@Override
-	protected void setDocumentProvider(IDocumentProvider provider) {
-		super.setDocumentProvider(new StatechartDiagramDocumentProvider());
 	}
 
 	@Override
