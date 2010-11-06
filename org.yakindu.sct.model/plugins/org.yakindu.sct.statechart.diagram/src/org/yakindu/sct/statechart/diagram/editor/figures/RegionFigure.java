@@ -24,11 +24,14 @@ import org.yakindu.sct.statechart.diagram.utils.FontConstants;
 
 public class RegionFigure extends RoundedRectangle {
 
-	private WrappingLabel priorityLabel;
+	private WrappingLabel nameLabel;
 
 	private RectangleFigure compartmentPane;
 
+	private final IMapMode mapMode;
+
 	public RegionFigure(IMapMode mapMode) {
+		this.mapMode = mapMode;
 		setLayoutManager(new XYLayout());
 
 		GridLayout layoutThis = new GridLayout();
@@ -55,11 +58,13 @@ public class RegionFigure extends RoundedRectangle {
 		labelFigure.setLayoutManager(layout);
 
 		/** Priority Label **/
-		priorityLabel = new WrappingLabel();
-		priorityLabel.setFont(FontConstants.DEFAULT);
-		priorityLabel.setText("<priority>");
-		labelFigure.add(priorityLabel,
-				GridDataFactory.fillDefaults().align(GridData.CENTER, GridData.CENTER).grab(true, true).getData());
+		nameLabel = new WrappingLabel();
+		nameLabel.setFont(FontConstants.DEFAULT);
+		nameLabel.setText("<priority>");
+		GridData data = GridDataFactory.fillDefaults().align(GridData.CENTER, GridData.CENTER).grab(true, true)
+				.getData();
+		data.heightHint = mapMode.DPtoLP(15);
+		labelFigure.add(nameLabel, data);
 
 		/** Compartment container **/
 		compartmentPane = new RectangleFigure();
@@ -73,7 +78,7 @@ public class RegionFigure extends RoundedRectangle {
 	}
 
 	public WrappingLabel getPriorityLabel() {
-		return priorityLabel;
+		return nameLabel;
 	}
 
 	public RectangleFigure getCompartmentPane() {

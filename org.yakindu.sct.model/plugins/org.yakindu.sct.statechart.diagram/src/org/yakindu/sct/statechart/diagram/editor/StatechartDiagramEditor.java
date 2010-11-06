@@ -11,10 +11,11 @@
 package org.yakindu.sct.statechart.diagram.editor;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.edit.ui.action.ValidateAction;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
 import org.eclipse.swt.widgets.Display;
 import org.yakindu.sct.statechart.diagram.DiagramActivator;
-import org.yakindu.sct.statechart.diagram.utils.Validator;
+import org.yakindu.sct.statechart.diagram.validation.ValidationAction;
 
 /**
  * 
@@ -40,7 +41,7 @@ public class StatechartDiagramEditor extends DiagramDocumentEditor {
 		Display.getDefault().asyncExec(new Runnable() {
 			@Override
 			public void run() {
-				Validator.validate(getDiagramEditPart(), getDiagram());
+				ValidationAction.validate(getDiagramEditPart(), getDiagram());
 			}
 		});
 		super.doSave(progressMonitor);

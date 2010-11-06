@@ -21,7 +21,9 @@ public interface ProviderConstants {
 	String REGION_COMPARTMENT = "RegionCompartment";
 	String TRANSITION = "Transition";
 	String STATE = "State";
-	String STATE_COMPARTMENT = "StateCompartment";
+	String STATE_FIGURE_COMPARTMENT = "StateFigureCompartment";
+	String STATE_TEXT_COMPARTMENT = "StateTextCompartment";
+	String STATE_TEXT_COMPARTMENT_EXPRESSION = "StateTextCompartmentExpression";
 	String CHOICE = "Choice";
 	String DEEPHISTORY = "DeepHistory";
 	String SHALLOWHISTORY = "ShallowHistory";

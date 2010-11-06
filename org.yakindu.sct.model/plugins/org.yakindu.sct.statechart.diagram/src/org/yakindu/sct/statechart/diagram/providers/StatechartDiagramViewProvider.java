@@ -20,6 +20,7 @@ import org.eclipse.gmf.runtime.diagram.ui.view.factories.optimal.ShapeViewFactor
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.statechart.diagram.editor.StatechartDiagramEditor;
 import org.yakindu.sct.statechart.diagram.factories.RegionViewFactory;
+import org.yakindu.sct.statechart.diagram.factories.StateTextCompartmentViewFactory;
 import org.yakindu.sct.statechart.diagram.factories.StateViewFactory;
 
 /**
@@ -42,7 +43,9 @@ public class StatechartDiagramViewProvider extends AbstractViewProvider implemen
 		factories.put(REGION, RegionViewFactory.class);
 		factories.put(REGION_COMPARTMENT, ShapeViewFactory.class);
 		factories.put(STATE, StateViewFactory.class);
-		factories.put(STATE_COMPARTMENT, ShapeViewFactory.class);
+		factories.put(STATE_FIGURE_COMPARTMENT, ShapeViewFactory.class);
+		factories.put(STATE_TEXT_COMPARTMENT, StateTextCompartmentViewFactory.class);
+		factories.put(STATE_TEXT_COMPARTMENT_EXPRESSION, ShapeViewFactory.class);
 		factories.put(TRANSITION, TransitionViewFactory.class);
 		factories.put(CHOICE, ShapeViewFactory.class);
 		factories.put(INITIALSTATE, ShapeViewFactory.class);
