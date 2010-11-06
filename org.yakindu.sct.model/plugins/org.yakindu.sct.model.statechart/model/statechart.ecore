@@ -7,7 +7,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="regions" ordered="false"
         lowerBound="1" upperBound="-1" eType="#//Region" containment="true" eOpposite="#//Region/statechart"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Region">
+  <eClassifiers xsi:type="ecore:EClass" name="Region" eSuperTypes="#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="vertices" ordered="false"
         upperBound="-1" eType="#//Vertex" containment="true" eOpposite="#//Vertex/containingRegion"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="transitions" ordered="false"
@@ -31,9 +31,10 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" ordered="false"
         lowerBound="1" eType="#//Vertex" eOpposite="#//Vertex/incomingTransitions"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="State" eSuperTypes="#//Vertex">
+  <eClassifiers xsi:type="ecore:EClass" name="State" eSuperTypes="#//Vertex #//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="regions" ordered="false"
         upperBound="-1" eType="#//Region" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="expression" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Pseudostate" abstract="true" eSuperTypes="#//Vertex"/>
   <eClassifiers xsi:type="ecore:EClass" name="FinalState" eSuperTypes="#//State"/>
@@ -45,4 +46,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="Join" eSuperTypes="#//Pseudostate"/>
   <eClassifiers xsi:type="ecore:EClass" name="Junction" eSuperTypes="#//Pseudostate"/>
   <eClassifiers xsi:type="ecore:EClass" name="Choice" eSuperTypes="#//Pseudostate"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
 </ecore:EPackage>

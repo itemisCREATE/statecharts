@@ -355,6 +355,29 @@ public class StatechartItemProviderAdapterFactory extends StatechartAdapterFacto
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.statechart.statechart.NamedElement} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected NamedElementItemProvider namedElementItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.sct.model.statechart.statechart.NamedElement}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createNamedElementAdapter() {
+		if (namedElementItemProvider == null) {
+			namedElementItemProvider = new NamedElementItemProvider(this);
+		}
+
+		return namedElementItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -465,6 +488,7 @@ public class StatechartItemProviderAdapterFactory extends StatechartAdapterFacto
 		if (joinItemProvider != null) joinItemProvider.dispose();
 		if (junctionItemProvider != null) junctionItemProvider.dispose();
 		if (choiceItemProvider != null) choiceItemProvider.dispose();
+		if (namedElementItemProvider != null) namedElementItemProvider.dispose();
 	}
 
 }

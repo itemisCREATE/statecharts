@@ -20,6 +20,7 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.yakindu.sct.model.statechart.statechart.State#getRegions <em>Regions</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.statechart.statechart.State#getExpression <em>Expression</em>}</li>
  * </ul>
  * </p>
  *
@@ -27,7 +28,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface State extends Vertex {
+public interface State extends Vertex, NamedElement {
 	/**
 	 * Returns the value of the '<em><b>Regions</b></em>' containment reference list.
 	 * The list contents are of type {@link org.yakindu.sct.model.statechart.statechart.Region}.
@@ -43,5 +44,31 @@ public interface State extends Vertex {
 	 * @generated
 	 */
 	EList<Region> getRegions();
+
+	/**
+	 * Returns the value of the '<em><b>Expression</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Expression</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Expression</em>' attribute.
+	 * @see #setExpression(String)
+	 * @see org.yakindu.sct.model.statechart.statechart.StatechartPackage#getState_Expression()
+	 * @model
+	 * @generated
+	 */
+	String getExpression();
+
+	/**
+	 * Sets the value of the '{@link org.yakindu.sct.model.statechart.statechart.State#getExpression <em>Expression</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Expression</em>' attribute.
+	 * @see #getExpression()
+	 * @generated
+	 */
+	void setExpression(String value);
 
 } // State

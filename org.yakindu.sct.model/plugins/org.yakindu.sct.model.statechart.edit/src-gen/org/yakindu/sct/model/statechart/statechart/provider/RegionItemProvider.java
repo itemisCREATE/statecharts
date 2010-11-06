@@ -40,7 +40,7 @@ import org.yakindu.sct.model.statechart.statechart.StatechartPackage;
  * @generated
  */
 public class RegionItemProvider
-	extends ItemProviderAdapter
+	extends NamedElementItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -122,7 +122,10 @@ public class RegionItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_Region_type");
+		String label = ((Region)object).getName();
+		return label == null || label.length() == 0 ?
+			getString("_UI_Region_type") :
+			getString("_UI_Region_type") + " " + label;
 	}
 
 	/**
@@ -205,17 +208,6 @@ public class RegionItemProvider
 			(createChildParameter
 				(StatechartPackage.Literals.REGION__TRANSITIONS,
 				 StatechartFactory.eINSTANCE.createTransition()));
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return StatechartEditPlugin.INSTANCE;
 	}
 
 }
