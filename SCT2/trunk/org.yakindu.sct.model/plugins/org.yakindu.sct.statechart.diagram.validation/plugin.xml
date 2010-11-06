@@ -32,6 +32,22 @@
                      class="Region">
                </target>
             </constraint>
+             <constraint
+                      class="org.yakindu.sct.statechart.diagram.validation.constraints.NoOutgoingTransitions"
+                      id="Statechart:NoOutgoingTransitions"
+                      isEnabledByDefault="true"
+                      lang="Java"
+                      mode="Batch"
+                      name="Statechart:NoOutgoingTransitions"
+                      severity="ERROR"
+                      statusCode="1">
+               <message>
+                  {0} must have at least one outgoing transition.
+               </message>
+               <target class="Choice" />
+               <target class="Junction" />
+               <target class="State" />
+            </constraint>
                </constraints>
 	 </constraintProvider>
 	 </extension>
@@ -46,6 +62,11 @@
     <binding
           category="org.yakindu.sct.statechart.diagram.validation.ModelIntegrity"
           constraint="Statechart:ExactlyOneStartNode"
+          context="org.yakindu.sct.statechart.diagram.validation.StatechartContext">
+    </binding>
+    <binding
+          category="org.yakindu.sct.statechart.diagram.validation.ModelIntegrity"
+          constraint="Statechart:NoOutgoingTransitions"
           context="org.yakindu.sct.statechart.diagram.validation.StatechartContext">
     </binding>
  </extension>
