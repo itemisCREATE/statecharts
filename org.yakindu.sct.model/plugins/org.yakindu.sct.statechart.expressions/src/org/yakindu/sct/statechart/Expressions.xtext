@@ -1,0 +1,211 @@
+grammar org.yakindu.sct.statechart.Expressions with org.eclipse.xtext.common.Terminals
+
+generate expressions "http://www.yakindu.org/sct/statechart/Expressions"
+
+Expression
+: 	TriggerExpression | GuardExpression | ActionExpression
+;
+
+TriggerExpression 
+:	(triggers+=(Trigger) ("," triggers+=Trigger)*)
+;	
+
+GuardExpression
+: 	expression = BooleanOrExpression
+;
+  
+ActionExpression 
+:	(statement += Statement)+
+;
+
+Trigger 
+: 	event = Event
+;
+
+Event
+:   SignalEvent 
+| 	TimeEvent
+;
+
+SignalEvent
+: 	identifier = ID
+;
+  
+TimeEvent
+: 	'after' '(' duration = TimeExpression ')'
+;
+
+TimeExpression
+: 	TimeConstant
+|   VariableReference 	
+;
+
+VariableReference 
+:  variable = Variable
+|  'var' '(' variable = Variable ')' // backwards compatibility
+;
+
+Variable
+:  	identifier = ID
+;
+
+TimeConstant
+:  value = INT (unit = TimeUnit)?
+; 
+
+enum TimeUnit
+: 	second = 's'
+|   millisecond = 'ms'
+|   nanosecond = 'ns'
+;
+
+Statement
+: 	(VariableAssignment | EventRaising | ProcedureCall) ";"
+;
+
+VariableAssignment
+:	variableReference = VariableReference  operator = AssignmentOperator value = ConditionalExpression
+;
+
+ProcedureCall
+:  procedure = Procedure '(' ')'
+;
+
+Procedure
+: 	identifier = ID
+;
+
+enum AssignmentOperator
+: assign = '=' 
+| multAssign = '*=' 
+| divAssign = '/=' 
+| modAssign = '%=' 
+| addAssign = '+=' 
+| subAssign = '-=' 
+| leftShiftAssign = '<<=' 
+| rightShiftAssign = '>>=' 
+| andAssign = '&=' 
+| xorAssign = '^=' 
+| orAssign = '|='
+;
+
+EventRaising
+:	'raise' '(' event = SignalEvent ')'
+;
+
+BooleanOrExpression
+	: operand1 = BooleanAndExpression ('||' operand2 = BooleanAndExpression)*
+	;
+
+BooleanAndExpression
+	: operand1 = BitwiseXorExpression ('&&' operand2 = BitwiseXorExpression)*
+	;
+
+BitwiseXorExpression
+	: operand1 = BitwiseOrExpression ('^' operand2 = BitwiseOrExpression)*
+	;
+
+BitwiseOrExpression
+	: operand1 = BitwiseAndExpression ('|' operand2 = BitwiseAndExpression)*
+	;
+
+BitwiseAndExpression
+	: operand1 = EqualityExpression ('&' operand2 = EqualityExpression)*
+	;
+	
+EqualityExpression
+	: operand1 = RelationalExpression (operator = EqualityOperator operand2 = RelationalExpression)*
+	;
+
+enum EqualityOperator
+:	equals = '=='
+|   notEquals = '!='
+;
+
+RelationalExpression
+: operand1 = ShiftExpression (operator = RelationalOperator operand2 = ShiftExpression)*
+;
+
+enum RelationalOperator
+:	smaller = '<'
+|   greater = '>'
+|   smallerEqual = '<='
+|   greaterEqual = '>='
+;
+
+ConditionalExpression
+:  	operand1 = BooleanOrExpression ('?' operand2 = ShiftExpression ':' operand3 = ShiftExpression)?
+;
+
+ShiftExpression
+: operand1 = AdditiveExpression (operator = ShiftOperator operand2 = AdditiveExpression)*
+;	
+	
+enum ShiftOperator
+:	left = '<<'
+|   right = '>>'
+;
+
+AdditiveExpression
+	: operand1 = MultiplicativeExpression (operator = AdditiveOperator operand2 = MultiplicativeExpression)*
+	;
+	
+enum AdditiveOperator
+:	plus = '+'
+|   minus = '-'
+;
+
+MultiplicativeExpression
+	: operand1 = UnaryExpression (operator = MultiplicativeOperator operand2 = UnaryExpression)*
+;
+
+enum MultiplicativeOperator
+: 	mul = '*'
+|   div = '/'
+|   mod = '%'
+;
+
+UnaryExpression
+:	 (operator = UnaryOperator)? operand = (PrimaryExpression ) 
+;
+	
+enum UnaryOperator
+:	positive = '+'
+|   negative = '-'
+|   complement = '~'
+|   not = '!'
+;
+
+PrimaryExpression
+: 	VariableReference 
+|   LiteralValue
+|   '(' NestedExpression ')'
+;
+
+NestedExpression
+:  	expression = ConditionalExpression
+;
+
+LiteralValue
+: 	value = Literal
+;
+
+Literal
+:  	HEX_LITERAL
+|   BOOLEAN_LITERAL
+|   INT
+|	STRING
+|   FLOATING_POINT_LITERAL
+;
+
+terminal BOOLEAN_LITERAL
+:	"true" | "false"
+;
+
+// LEXER TOKENS
+terminal HEX_LITERAL 
+: ('0') ('x'|'X') ('0'..'9'|'a'..'f'|'A'..'F')+;
+
+terminal FLOATING_POINT_LITERAL
+: 	('0'..'9')* '.' ('0'..'9')* (('e'|'E') ('+'|'-')? ('0'..'9')+)? ('f'|'F'|'d'|'D')?
+;

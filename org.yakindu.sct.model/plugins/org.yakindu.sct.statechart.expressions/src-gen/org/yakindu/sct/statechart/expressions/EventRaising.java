@@ -1,0 +1,54 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+
+ */
+package org.yakindu.sct.statechart.expressions;
+
+
+/**
+ * <!-- begin-user-doc -->
+ * A representation of the model object '<em><b>Event Raising</b></em>'.
+ * <!-- end-user-doc -->
+ *
+ * <p>
+ * The following features are supported:
+ * <ul>
+ *   <li>{@link org.yakindu.sct.statechart.expressions.EventRaising#getEvent <em>Event</em>}</li>
+ * </ul>
+ * </p>
+ *
+ * @see org.yakindu.sct.statechart.expressions.ExpressionsPackage#getEventRaising()
+ * @model
+ * @generated
+ */
+public interface EventRaising extends Statement
+{
+  /**
+   * Returns the value of the '<em><b>Event</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Event</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Event</em>' containment reference.
+   * @see #setEvent(SignalEvent)
+   * @see org.yakindu.sct.statechart.expressions.ExpressionsPackage#getEventRaising_Event()
+   * @model containment="true"
+   * @generated
+   */
+  SignalEvent getEvent();
+
+  /**
+   * Sets the value of the '{@link org.yakindu.sct.statechart.expressions.EventRaising#getEvent <em>Event</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Event</em>' containment reference.
+   * @see #getEvent()
+   * @generated
+   */
+  void setEvent(SignalEvent value);
+
+} // EventRaising
