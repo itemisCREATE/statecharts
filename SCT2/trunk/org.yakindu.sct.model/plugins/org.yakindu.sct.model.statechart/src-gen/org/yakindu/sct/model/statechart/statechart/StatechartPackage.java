@@ -9,6 +9,7 @@
  */
 package org.yakindu.sct.model.statechart.statechart;
 
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -90,6 +91,34 @@ public interface StatechartPackage extends EPackage {
 	int STATECHART_FEATURE_COUNT = 1;
 
 	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.statechart.statechart.impl.NamedElementImpl <em>Named Element</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.statechart.statechart.impl.NamedElementImpl
+	 * @see org.yakindu.sct.model.statechart.statechart.impl.StatechartPackageImpl#getNamedElement()
+	 * @generated
+	 */
+	int NAMED_ELEMENT = 15;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_ELEMENT__NAME = 0;
+
+	/**
+	 * The number of structural features of the '<em>Named Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_ELEMENT_FEATURE_COUNT = 1;
+
+	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.statechart.statechart.impl.RegionImpl <em>Region</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -100,13 +129,22 @@ public interface StatechartPackage extends EPackage {
 	int REGION = 1;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REGION__NAME = NAMED_ELEMENT__NAME;
+
+	/**
 	 * The feature id for the '<em><b>Vertices</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REGION__VERTICES = 0;
+	int REGION__VERTICES = NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Transitions</b></em>' containment reference list.
@@ -115,7 +153,7 @@ public interface StatechartPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REGION__TRANSITIONS = 1;
+	int REGION__TRANSITIONS = NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Statechart</b></em>' container reference.
@@ -124,7 +162,7 @@ public interface StatechartPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REGION__STATECHART = 2;
+	int REGION__STATECHART = NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Region</em>' class.
@@ -133,7 +171,7 @@ public interface StatechartPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REGION_FEATURE_COUNT = 3;
+	int REGION_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.statechart.statechart.impl.VertexImpl <em>Vertex</em>}' class.
@@ -265,13 +303,31 @@ public interface StatechartPackage extends EPackage {
 	int STATE__CONTAINING_REGION = VERTEX__CONTAINING_REGION;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE__NAME = VERTEX_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Regions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__REGIONS = VERTEX_FEATURE_COUNT + 0;
+	int STATE__REGIONS = VERTEX_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Expression</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE__EXPRESSION = VERTEX_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>State</em>' class.
@@ -280,7 +336,7 @@ public interface StatechartPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE_FEATURE_COUNT = VERTEX_FEATURE_COUNT + 1;
+	int STATE_FEATURE_COUNT = VERTEX_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.statechart.statechart.impl.PseudostateImpl <em>Pseudostate</em>}' class.
@@ -366,6 +422,15 @@ public interface StatechartPackage extends EPackage {
 	int FINAL_STATE__CONTAINING_REGION = STATE__CONTAINING_REGION;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FINAL_STATE__NAME = STATE__NAME;
+
+	/**
 	 * The feature id for the '<em><b>Regions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -373,6 +438,15 @@ public interface StatechartPackage extends EPackage {
 	 * @ordered
 	 */
 	int FINAL_STATE__REGIONS = STATE__REGIONS;
+
+	/**
+	 * The feature id for the '<em><b>Expression</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FINAL_STATE__EXPRESSION = STATE__EXPRESSION;
 
 	/**
 	 * The number of structural features of the '<em>Final State</em>' class.
@@ -924,6 +998,17 @@ public interface StatechartPackage extends EPackage {
 	EReference getState_Regions();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.statechart.statechart.State#getExpression <em>Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Expression</em>'.
+	 * @see org.yakindu.sct.model.statechart.statechart.State#getExpression()
+	 * @see #getState()
+	 * @generated
+	 */
+	EAttribute getState_Expression();
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.statechart.statechart.Pseudostate <em>Pseudostate</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1022,6 +1107,27 @@ public interface StatechartPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getChoice();
+
+	/**
+	 * Returns the meta object for class '{@link org.yakindu.sct.model.statechart.statechart.NamedElement <em>Named Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Named Element</em>'.
+	 * @see org.yakindu.sct.model.statechart.statechart.NamedElement
+	 * @generated
+	 */
+	EClass getNamedElement();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.statechart.statechart.NamedElement#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.yakindu.sct.model.statechart.statechart.NamedElement#getName()
+	 * @see #getNamedElement()
+	 * @generated
+	 */
+	EAttribute getNamedElement_Name();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1184,6 +1290,14 @@ public interface StatechartPackage extends EPackage {
 		EReference STATE__REGIONS = eINSTANCE.getState_Regions();
 
 		/**
+		 * The meta object literal for the '<em><b>Expression</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STATE__EXPRESSION = eINSTANCE.getState_Expression();
+
+		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.statechart.statechart.impl.PseudostateImpl <em>Pseudostate</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1282,6 +1396,24 @@ public interface StatechartPackage extends EPackage {
 		 * @generated
 		 */
 		EClass CHOICE = eINSTANCE.getChoice();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.sct.model.statechart.statechart.impl.NamedElementImpl <em>Named Element</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.sct.model.statechart.statechart.impl.NamedElementImpl
+		 * @see org.yakindu.sct.model.statechart.statechart.impl.StatechartPackageImpl#getNamedElement()
+		 * @generated
+		 */
+		EClass NAMED_ELEMENT = eINSTANCE.getNamedElement();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute NAMED_ELEMENT__NAME = eINSTANCE.getNamedElement_Name();
 
 	}
 
