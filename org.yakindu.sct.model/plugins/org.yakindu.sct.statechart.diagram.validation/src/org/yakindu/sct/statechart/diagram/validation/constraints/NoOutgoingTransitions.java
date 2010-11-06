@@ -10,25 +10,22 @@
  */
 package org.yakindu.sct.statechart.diagram.validation.constraints;
 
-import java.util.List;
-
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.validation.AbstractModelConstraint;
 import org.eclipse.emf.validation.IValidationContext;
-import org.eclipse.xtext.EcoreUtil2;
-import org.yakindu.sct.model.statechart.statechart.InitialState;
-import org.yakindu.sct.model.statechart.statechart.Region;
+import org.yakindu.sct.model.statechart.statechart.FinalState;
+import org.yakindu.sct.model.statechart.statechart.Vertex;
 
-public class ExactlyOneInitialState extends AbstractModelConstraint {
+public class NoOutgoingTransitions extends AbstractModelConstraint {
+
 	@Override
 	public IStatus validate(IValidationContext ctx) {
-		Region region = (Region) ctx.getTarget();
-		List<InitialState> initialStates = EcoreUtil2.getAllContentsOfType(region, InitialState.class);
-		if (initialStates.size() != 1) {
-			return ctx.createFailureStatus(region, initialStates.size());
+		Vertex vertex = (Vertex) ctx.getTarget();
+		if (!(vertex instanceof FinalState)) {
+			if (vertex.getOutgoingTransitions().size() == 0) {
+				return ctx.createFailureStatus(vertex);
+			}
 		}
 		return ctx.createSuccessStatus();
-
 	}
-
 }
