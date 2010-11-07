@@ -8,7 +8,9 @@ package org.eclipselabs.mscript.language.functionmodel.impl;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -20,9 +22,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
-import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.FunctionDefinition;
@@ -226,28 +226,51 @@ public class FunctionImpl extends EObjectImpl implements Function {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public boolean hasNoCyclicEquations(DiagnosticChain diagnostics, Map<Object, Object> context) {
-		// TODO: implement this method
-		// -> specify the condition that violates the invariant
-		// -> verify the details of the diagnostic, including severity and message
-		// Ensure that you remove @generated or mark it @generated NOT
-		if (false) {
-			if (diagnostics != null) {
-				diagnostics.add
-					(new BasicDiagnostic
-						(Diagnostic.ERROR,
-						 FunctionModelValidator.DIAGNOSTIC_SOURCE,
-						 FunctionModelValidator.FUNCTION__HAS_NO_CYCLIC_EQUATIONS,
-						 EcorePlugin.INSTANCE.getString("_UI_GenericInvariant_diagnostic", new Object[] { "hasNoCyclicEquations", EObjectValidator.getObjectLabel(this, context) }),
-						 new Object [] { this }));
+		boolean result = true;
+		for (VariableReference variableReference : getVariableReferences()) {
+			for (VariableStep variableStep : variableReference.getSteps()) {
+				if (hasCyclicEquations(new HashSet<VariableStep>(), variableStep)) {
+					for (EquationPart equationPart : variableStep.getUsingEquationParts()) {
+						String message;
+						if (equationPart.getSide() == equationPart.getSide().getEquation().getLeftHandSide()) {
+							message = "Cyclic equation definition of '" + variableStep.getReference().getName() + "'";
+						} else {
+							message = "'" + variableStep.getReference().getName() + "' is part of a cyclic equation definition";
+						}
+						diagnostics.add(new BasicDiagnostic(
+								Diagnostic.ERROR,
+								FunctionModelValidator.DIAGNOSTIC_SOURCE,
+								FunctionModelValidator.FUNCTION__HAS_NO_CYCLIC_EQUATIONS,
+								message,
+								new Object[] { equationPart.getFeatureCall() }));
+					}
+					result = false;
+				}
 			}
-			return false;
 		}
-		return true;
+		return result;
 	}
-
+	
+	private boolean hasCyclicEquations(Set<VariableStep> dependents, VariableStep variableStep) {
+		for (EquationPart usingEquationPart : variableStep.getUsingEquationParts()) {
+			if (usingEquationPart.getSide() == usingEquationPart.getSide().getEquation().getLeftHandSide()) {
+				if (!dependents.add(variableStep)) {
+					return true;
+				}
+				for (EquationPart rhsEquationPart : usingEquationPart.getSide().getEquation().getRightHandSide().getParts()) {
+					if (hasCyclicEquations(dependents, rhsEquationPart.getVariableStep())) {
+						return true;
+					}
+				}
+				break;
+			}
+		}
+		return false;
+	}
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

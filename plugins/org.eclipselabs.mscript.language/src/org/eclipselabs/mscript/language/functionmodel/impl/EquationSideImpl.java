@@ -171,6 +171,16 @@ public class EquationSideImpl extends EObjectImpl implements EquationSide {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public EquationSide getOtherSide() {
+		Equation equation = getEquation();
+		return equation.getLeftHandSide() == this ? equation.getRightHandSide() : equation.getLeftHandSide();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")

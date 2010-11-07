@@ -101,4 +101,12 @@ public interface EquationSide extends EObject {
 	 */
 	EList<EquationPart> getParts();
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" required="true"
+	 * @generated
+	 */
+	EquationSide getOtherSide();
+
 } // EquationSide

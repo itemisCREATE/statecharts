@@ -581,6 +581,8 @@ public class FunctionModelPackageImpl extends EPackageImpl implements FunctionMo
 		initEReference(getEquationSide_Expression(), theAstPackage.getExpression(), null, "expression", null, 1, 1, EquationSide.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEquationSide_Parts(), this.getEquationPart(), this.getEquationPart_Side(), "parts", null, 0, -1, EquationSide.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		addEOperation(equationSideEClass, this.getEquationSide(), "getOtherSide", 1, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(equationPartEClass, EquationPart.class, "EquationPart", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getEquationPart_Side(), this.getEquationSide(), this.getEquationSide_Parts(), "side", null, 0, 1, EquationPart.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEquationPart_FeatureCall(), theAstPackage.getFeatureCall(), null, "featureCall", null, 1, 1, EquationPart.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
