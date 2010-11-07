@@ -28,6 +28,7 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 
 import org.yakindu.sct.model.statechart.statechart.StatechartPackage;
+import org.yakindu.sct.model.statechart.statechart.Transition;
 
 /**
  * This is the item provider adapter for a {@link org.yakindu.sct.model.statechart.statechart.Transition} object.
@@ -36,7 +37,7 @@ import org.yakindu.sct.model.statechart.statechart.StatechartPackage;
  * @generated
  */
 public class TransitionItemProvider
-	extends ItemProviderAdapter
+	extends ExpressionElementItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -133,7 +134,10 @@ public class TransitionItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_Transition_type");
+		String label = ((Transition)object).getExpression();
+		return label == null || label.length() == 0 ?
+			getString("_UI_Transition_type") :
+			getString("_UI_Transition_type") + " " + label;
 	}
 
 	/**
@@ -159,17 +163,6 @@ public class TransitionItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return StatechartEditPlugin.INSTANCE;
 	}
 
 }

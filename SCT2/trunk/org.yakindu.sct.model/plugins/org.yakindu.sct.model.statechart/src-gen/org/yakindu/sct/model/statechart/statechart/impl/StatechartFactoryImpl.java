@@ -76,6 +76,7 @@ public class StatechartFactoryImpl extends EFactoryImpl implements StatechartFac
 			case StatechartPackage.JUNCTION: return createJunction();
 			case StatechartPackage.CHOICE: return createChoice();
 			case StatechartPackage.NAMED_ELEMENT: return createNamedElement();
+			case StatechartPackage.EXPRESSION_ELEMENT: return createExpressionElement();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -209,6 +210,16 @@ public class StatechartFactoryImpl extends EFactoryImpl implements StatechartFac
 	public NamedElement createNamedElement() {
 		NamedElementImpl namedElement = new NamedElementImpl();
 		return namedElement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ExpressionElement createExpressionElement() {
+		ExpressionElementImpl expressionElement = new ExpressionElementImpl();
+		return expressionElement;
 	}
 
 	/**

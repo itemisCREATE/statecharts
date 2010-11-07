@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import org.yakindu.sct.model.statechart.statechart.Choice;
 import org.yakindu.sct.model.statechart.statechart.DeepHistoryState;
+import org.yakindu.sct.model.statechart.statechart.ExpressionElement;
 import org.yakindu.sct.model.statechart.statechart.FinalState;
 import org.yakindu.sct.model.statechart.statechart.Fork;
 import org.yakindu.sct.model.statechart.statechart.HistoryState;
@@ -153,6 +154,13 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * @generated
 	 */
 	private EClass namedElementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass expressionElementEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -364,15 +372,6 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getState_Expression() {
-		return (EAttribute)stateEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getPseudostate() {
 		return pseudostateEClass;
 	}
@@ -481,6 +480,24 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getExpressionElement() {
+		return expressionElementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getExpressionElement_Expression() {
+		return (EAttribute)expressionElementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public StatechartFactory getStatechartFactory() {
 		return (StatechartFactory)getEFactoryInstance();
 	}
@@ -524,7 +541,6 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 
 		stateEClass = createEClass(STATE);
 		createEReference(stateEClass, STATE__REGIONS);
-		createEAttribute(stateEClass, STATE__EXPRESSION);
 
 		pseudostateEClass = createEClass(PSEUDOSTATE);
 
@@ -548,6 +564,9 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 
 		namedElementEClass = createEClass(NAMED_ELEMENT);
 		createEAttribute(namedElementEClass, NAMED_ELEMENT__NAME);
+
+		expressionElementEClass = createEClass(EXPRESSION_ELEMENT);
+		createEAttribute(expressionElementEClass, EXPRESSION_ELEMENT__EXPRESSION);
 	}
 
 	/**
@@ -579,8 +598,10 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 
 		// Add supertypes to classes
 		regionEClass.getESuperTypes().add(this.getNamedElement());
+		transitionEClass.getESuperTypes().add(this.getExpressionElement());
 		stateEClass.getESuperTypes().add(this.getVertex());
 		stateEClass.getESuperTypes().add(this.getNamedElement());
+		stateEClass.getESuperTypes().add(this.getExpressionElement());
 		pseudostateEClass.getESuperTypes().add(this.getVertex());
 		finalStateEClass.getESuperTypes().add(this.getState());
 		initialStateEClass.getESuperTypes().add(this.getPseudostate());
@@ -591,6 +612,7 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 		joinEClass.getESuperTypes().add(this.getPseudostate());
 		junctionEClass.getESuperTypes().add(this.getPseudostate());
 		choiceEClass.getESuperTypes().add(this.getPseudostate());
+		choiceEClass.getESuperTypes().add(this.getExpressionElement());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(statechartEClass, Statechart.class, "Statechart", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -613,7 +635,6 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 
 		initEClass(stateEClass, State.class, "State", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getState_Regions(), this.getRegion(), null, "regions", null, 0, -1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEAttribute(getState_Expression(), ecorePackage.getEString(), "expression", null, 0, 1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(pseudostateEClass, Pseudostate.class, "Pseudostate", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -637,6 +658,9 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 
 		initEClass(namedElementEClass, NamedElement.class, "NamedElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getNamedElement_Name(), ecorePackage.getEString(), "name", null, 0, 1, NamedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(expressionElementEClass, ExpressionElement.class, "ExpressionElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getExpressionElement_Expression(), ecorePackage.getEString(), "expression", null, 0, 1, ExpressionElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

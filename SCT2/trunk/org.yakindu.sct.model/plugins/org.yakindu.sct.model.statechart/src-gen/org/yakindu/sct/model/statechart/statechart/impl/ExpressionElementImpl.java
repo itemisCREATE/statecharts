@@ -10,27 +10,29 @@
 package org.yakindu.sct.model.statechart.statechart.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.yakindu.sct.model.statechart.statechart.Choice;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+
 import org.yakindu.sct.model.statechart.statechart.ExpressionElement;
 import org.yakindu.sct.model.statechart.statechart.StatechartPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Choice</b></em>'.
+ * An implementation of the model object '<em><b>Expression Element</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.yakindu.sct.model.statechart.statechart.impl.ChoiceImpl#getExpression <em>Expression</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.statechart.statechart.impl.ExpressionElementImpl#getExpression <em>Expression</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ChoiceImpl extends PseudostateImpl implements Choice {
+public class ExpressionElementImpl extends EObjectImpl implements ExpressionElement {
 	/**
 	 * The default value of the '{@link #getExpression() <em>Expression</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -40,6 +42,7 @@ public class ChoiceImpl extends PseudostateImpl implements Choice {
 	 * @ordered
 	 */
 	protected static final String EXPRESSION_EDEFAULT = null;
+
 	/**
 	 * The cached value of the '{@link #getExpression() <em>Expression</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -55,7 +58,7 @@ public class ChoiceImpl extends PseudostateImpl implements Choice {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ChoiceImpl() {
+	protected ExpressionElementImpl() {
 		super();
 	}
 
@@ -66,7 +69,7 @@ public class ChoiceImpl extends PseudostateImpl implements Choice {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return StatechartPackage.Literals.CHOICE;
+		return StatechartPackage.Literals.EXPRESSION_ELEMENT;
 	}
 
 	/**
@@ -87,7 +90,7 @@ public class ChoiceImpl extends PseudostateImpl implements Choice {
 		String oldExpression = expression;
 		expression = newExpression;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, StatechartPackage.CHOICE__EXPRESSION, oldExpression, expression));
+			eNotify(new ENotificationImpl(this, Notification.SET, StatechartPackage.EXPRESSION_ELEMENT__EXPRESSION, oldExpression, expression));
 	}
 
 	/**
@@ -98,7 +101,7 @@ public class ChoiceImpl extends PseudostateImpl implements Choice {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case StatechartPackage.CHOICE__EXPRESSION:
+			case StatechartPackage.EXPRESSION_ELEMENT__EXPRESSION:
 				return getExpression();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -112,7 +115,7 @@ public class ChoiceImpl extends PseudostateImpl implements Choice {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case StatechartPackage.CHOICE__EXPRESSION:
+			case StatechartPackage.EXPRESSION_ELEMENT__EXPRESSION:
 				setExpression((String)newValue);
 				return;
 		}
@@ -127,7 +130,7 @@ public class ChoiceImpl extends PseudostateImpl implements Choice {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case StatechartPackage.CHOICE__EXPRESSION:
+			case StatechartPackage.EXPRESSION_ELEMENT__EXPRESSION:
 				setExpression(EXPRESSION_EDEFAULT);
 				return;
 		}
@@ -142,42 +145,10 @@ public class ChoiceImpl extends PseudostateImpl implements Choice {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case StatechartPackage.CHOICE__EXPRESSION:
+			case StatechartPackage.EXPRESSION_ELEMENT__EXPRESSION:
 				return EXPRESSION_EDEFAULT == null ? expression != null : !EXPRESSION_EDEFAULT.equals(expression);
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == ExpressionElement.class) {
-			switch (derivedFeatureID) {
-				case StatechartPackage.CHOICE__EXPRESSION: return StatechartPackage.EXPRESSION_ELEMENT__EXPRESSION;
-				default: return -1;
-			}
-		}
-		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == ExpressionElement.class) {
-			switch (baseFeatureID) {
-				case StatechartPackage.EXPRESSION_ELEMENT__EXPRESSION: return StatechartPackage.CHOICE__EXPRESSION;
-				default: return -1;
-			}
-		}
-		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
 	/**
@@ -196,4 +167,4 @@ public class ChoiceImpl extends PseudostateImpl implements Choice {
 		return result.toString();
 	}
 
-} //ChoiceImpl
+} //ExpressionElementImpl
