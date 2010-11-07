@@ -226,14 +226,14 @@ public class EquationImpl extends EObjectImpl implements Equation {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public boolean leftHandSideIsSingleVariableReference(DiagnosticChain diagnostics, Map<Object, Object> context) {
+	public boolean leftHandSideHasValidVariableReference(DiagnosticChain diagnostics, Map<Object, Object> context) {
 		Expression lhsExpression = getDefinition().getLeftHandSide();
 		String message = null;
 		if (getLeftHandSide().getParts().size() == 1 && lhsExpression instanceof FeatureCall) {
-			EquationPart equationPart = getLeftHandSide().getParts().get(0);
-			switch (equationPart.getVariableStep().getReference().getKind()) {
+			EquationPart part = getLeftHandSide().getParts().get(0);
+			switch (part.getVariableStep().getReference().getKind()) {
 			case TEMPLATE_PARAMETER:
-				message = "Left-hand side must not be template parameter reference";;
+				message = "Left-hand side must not be template parameter reference";
 				break;
 			case FUNCTOR:
 				message = "Left-hand side must not be functor reference";
@@ -241,21 +241,48 @@ public class EquationImpl extends EObjectImpl implements Equation {
 			case CONSTANT:
 				message = "Left-hand side must not be constant reference";
 				break;
+			default:
+				if (part.getVariableStep().getIndex() < 0 && !part.getVariableStep().isInitial()) {
+					message = "Left-hand side must not reference a previous value";
+				}
+				break;
 			}
 		} else {
 			message = "Left-hand side must be single variable reference";
 		}
 		if (message != null && diagnostics != null) {
-			diagnostics.add
-				(new BasicDiagnostic
-					(Diagnostic.ERROR,
-					 FunctionModelValidator.DIAGNOSTIC_SOURCE,
-					 FunctionModelValidator.EQUATION__LEFT_HAND_SIDE_IS_SINGLE_VARIABLE_REFERENCE,
-					 message,
-					 new Object [] { lhsExpression }));
+			diagnostics.add(new BasicDiagnostic(
+					Diagnostic.ERROR,
+					FunctionModelValidator.DIAGNOSTIC_SOURCE,
+					FunctionModelValidator.EQUATION__LEFT_HAND_SIDE_HAS_VALID_VARIABLE_REFERENCE,
+					message,
+					new Object [] { lhsExpression }));
 			return false;
 		}
 		return true;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public boolean rightHandSideHasValidVariableReferences(DiagnosticChain diagnostics, Map<Object, Object> context) {
+		boolean result = true;
+		for (EquationPart part : getRightHandSide().getParts()) {
+			if (part.getVariableStep().isInitial()) {
+				if (diagnostics != null) {
+					diagnostics.add(new BasicDiagnostic(
+							Diagnostic.ERROR,
+							FunctionModelValidator.DIAGNOSTIC_SOURCE,
+							FunctionModelValidator.EQUATION__RIGHT_HAND_SIDE_HAS_VALID_VARIABLE_REFERENCES,
+							"Right-hand side must not reference initial value",
+							new Object [] { part.getFeatureCall() }));
+				}
+				result = false;
+			}
+		}
+		return result;
 	}
 
 	/**

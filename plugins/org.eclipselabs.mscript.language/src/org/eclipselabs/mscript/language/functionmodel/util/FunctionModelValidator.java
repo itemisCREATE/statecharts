@@ -80,12 +80,20 @@ public class FunctionModelValidator extends EObjectValidator {
 	public static final int FUNCTION__HAS_EQUATIONS_FOR_EACH_VARIABLE_REFERENCE = 4;
 
 	/**
-	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Left Hand Side Is Single Variable Reference' of 'Equation'.
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Left Hand Side Has Valid Variable Reference' of 'Equation'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int EQUATION__LEFT_HAND_SIDE_IS_SINGLE_VARIABLE_REFERENCE = 5;
+	public static final int EQUATION__LEFT_HAND_SIDE_HAS_VALID_VARIABLE_REFERENCE = 5;
+
+	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Right Hand Side Has Valid Variable References' of 'Equation'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int EQUATION__RIGHT_HAND_SIDE_HAS_VALID_VARIABLE_REFERENCES = 6;
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants.
@@ -93,7 +101,7 @@ public class FunctionModelValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 5;
+	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 6;
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants in a derived class.
@@ -229,18 +237,29 @@ public class FunctionModelValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(equation, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(equation, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(equation, diagnostics, context);
-		if (result || diagnostics != null) result &= validateEquation_leftHandSideIsSingleVariableReference(equation, diagnostics, context);
+		if (result || diagnostics != null) result &= validateEquation_leftHandSideHasValidVariableReference(equation, diagnostics, context);
+		if (result || diagnostics != null) result &= validateEquation_rightHandSideHasValidVariableReferences(equation, diagnostics, context);
 		return result;
 	}
 
 	/**
-	 * Validates the leftHandSideIsSingleVariableReference constraint of '<em>Equation</em>'.
+	 * Validates the leftHandSideHasValidVariableReference constraint of '<em>Equation</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateEquation_leftHandSideIsSingleVariableReference(Equation equation, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return equation.leftHandSideIsSingleVariableReference(diagnostics, context);
+	public boolean validateEquation_leftHandSideHasValidVariableReference(Equation equation, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return equation.leftHandSideHasValidVariableReference(diagnostics, context);
+	}
+
+	/**
+	 * Validates the rightHandSideHasValidVariableReferences constraint of '<em>Equation</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateEquation_rightHandSideHasValidVariableReferences(Equation equation, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return equation.rightHandSideHasValidVariableReferences(diagnostics, context);
 	}
 
 	/**

@@ -142,6 +142,14 @@ public interface Equation extends EObject {
 	 * @model required="true"
 	 * @generated
 	 */
-	boolean leftHandSideIsSingleVariableReference(DiagnosticChain diagnostics, Map<Object, Object> context);
+	boolean leftHandSideHasValidVariableReference(DiagnosticChain diagnostics, Map<Object, Object> context);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model required="true"
+	 * @generated
+	 */
+	boolean rightHandSideHasValidVariableReferences(DiagnosticChain diagnostics, Map<Object, Object> context);
 
 } // Equation

@@ -46,9 +46,13 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionModel.ecore#//Equation/sides"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionModel.ecore#//Equation/leftHandSide"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionModel.ecore#//Equation/rightHandSide"/>
-      <genOperations ecoreOperation="FunctionModel.ecore#//Equation/leftHandSideIsSingleVariableReference">
-        <genParameters ecoreParameter="FunctionModel.ecore#//Equation/leftHandSideIsSingleVariableReference/diagnostics"/>
-        <genParameters ecoreParameter="FunctionModel.ecore#//Equation/leftHandSideIsSingleVariableReference/context"/>
+      <genOperations ecoreOperation="FunctionModel.ecore#//Equation/leftHandSideHasValidVariableReference">
+        <genParameters ecoreParameter="FunctionModel.ecore#//Equation/leftHandSideHasValidVariableReference/diagnostics"/>
+        <genParameters ecoreParameter="FunctionModel.ecore#//Equation/leftHandSideHasValidVariableReference/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="FunctionModel.ecore#//Equation/rightHandSideHasValidVariableReferences">
+        <genParameters ecoreParameter="FunctionModel.ecore#//Equation/rightHandSideHasValidVariableReferences/diagnostics"/>
+        <genParameters ecoreParameter="FunctionModel.ecore#//Equation/rightHandSideHasValidVariableReferences/context"/>
       </genOperations>
     </genClasses>
     <genClasses ecoreClass="FunctionModel.ecore#//EquationSide">

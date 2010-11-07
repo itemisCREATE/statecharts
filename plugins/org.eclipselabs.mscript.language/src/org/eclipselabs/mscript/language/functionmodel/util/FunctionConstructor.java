@@ -126,40 +126,74 @@ public class FunctionConstructor {
 				SimpleName simpleName = (SimpleName) featureCall.getTarget();
 				if (scope.containsVariable(simpleName.getIdentifier())) {
 					if (!featureCall.getParts().isEmpty()) {
-						diagnostics.add(new EObjectDiagnostic(Diagnostic.ERROR, "Let variable " + simpleName.getIdentifier() + " cannot be called", simpleName));
+						diagnostics.add(new EObjectDiagnostic(Diagnostic.ERROR, "Let variable '" + simpleName.getIdentifier() + "' cannot be called", featureCall));
 					}
 					return true;
 				}
+				
 				Function function = equationSide.getEquation().getFunction();
 				VariableKind variableKind = getVariableKind(
 						function.getDefinition(),
 						simpleName.getIdentifier());
-				if (variableKind != VariableKind.UNKNOWN) {
-					StepExpressionResult stepExpressionResult = evaluateStepExpression(featureCall, diagnostics);
-					if (stepExpressionResult != null) {
-						EquationPart part = FunctionModelFactory.eINSTANCE.createEquationPart();
-						part.setSide(equationSide);
-						part.setFeatureCall(featureCall);
-						VariableReference variableReference = function.getVariableReference(simpleName.getIdentifier());
-						if (variableReference == null) {
-							variableReference = FunctionModelFactory.eINSTANCE.createVariableReference();
-							variableReference.setFunction(function);
-							variableReference.setName(simpleName.getIdentifier());
-							variableReference.setKind(variableKind);
-						}
-						VariableStep variableStep = variableReference.getStep(
-								stepExpressionResult.getIndex(),
-								stepExpressionResult.isInitial());
-						if (variableStep == null) {
-							variableStep = FunctionModelFactory.eINSTANCE.createVariableStep();
-							variableStep.setReference(variableReference);
-							variableStep.setIndex(stepExpressionResult.getIndex());
-							variableStep.setInitial(stepExpressionResult.isInitial());
-						}
-						part.setVariableStep(variableStep);
+				
+				switch (variableKind) {
+				case TEMPLATE_PARAMETER:
+					if (!featureCall.getParts().isEmpty() && featureCall.getParts().get(0) instanceof OperationCall) {
+						diagnostics.add(new EObjectDiagnostic(Diagnostic.ERROR, "Template parameters cannot be called", featureCall));
 					}
+					break;
+				case INPUT_PARAMETER:
+				case OUTPUT_PARAMETER:
+				case STATE_VARIABLE:
+					if (!function.getDefinition().isStateful() && !featureCall.getParts().isEmpty() && featureCall.getParts().get(0) instanceof OperationCall) {
+						diagnostics.add(new EObjectDiagnostic(Diagnostic.ERROR, "Variable references of stateless functions must not specify step expressions", featureCall));
+					}
+					break;
+				case CONSTANT:
+					if (!featureCall.getParts().isEmpty() && featureCall.getParts().get(0) instanceof OperationCall) {
+						diagnostics.add(new EObjectDiagnostic(Diagnostic.ERROR, "Constants cannot be called", featureCall));
+					}
+					break;
+				case FUNCTOR:
+					diagnostics.add(new EObjectDiagnostic(Diagnostic.ERROR, "Functors not supported yet", featureCall));
+					break;
+				}
+				
+				if (variableKind != VariableKind.UNKNOWN) {
+					int stepIndex = 0;
+					boolean initial = false;
+					
+					if (variableKind == VariableKind.INPUT_PARAMETER
+							|| variableKind == VariableKind.OUTPUT_PARAMETER
+							|| variableKind == VariableKind.STATE_VARIABLE) {
+						StepExpressionResult stepExpressionResult = evaluateStepExpression(featureCall, diagnostics);
+						if (stepExpressionResult != null) {
+							stepIndex = stepExpressionResult.getIndex();
+							initial = stepExpressionResult.isInitial();
+						}
+					}
+
+					EquationPart part = FunctionModelFactory.eINSTANCE.createEquationPart();
+					part.setSide(equationSide);
+					part.setFeatureCall(featureCall);
+					VariableReference variableReference = function.getVariableReference(simpleName.getIdentifier());
+					if (variableReference == null) {
+						variableReference = FunctionModelFactory.eINSTANCE.createVariableReference();
+						variableReference.setFunction(function);
+						variableReference.setName(simpleName.getIdentifier());
+						variableReference.setKind(variableKind);
+					}
+					
+					VariableStep variableStep = variableReference.getStep(stepIndex, initial);
+					if (variableStep == null) {
+						variableStep = FunctionModelFactory.eINSTANCE.createVariableStep();
+						variableStep.setReference(variableReference);
+						variableStep.setIndex(stepIndex);
+						variableStep.setInitial(initial);
+					}
+					part.setVariableStep(variableStep);
 				} else {
-					diagnostics.add(new EObjectDiagnostic(Diagnostic.ERROR, simpleName.getIdentifier() + " cannot be resolved to a variable", simpleName));
+					diagnostics.add(new EObjectDiagnostic(Diagnostic.ERROR, "'" + simpleName.getIdentifier() + "' cannot be resolved to a variable", simpleName));
 				}
 			} else {
 				diagnostics.add(new EObjectDiagnostic(Diagnostic.ERROR, "Invalid expression", featureCall.getTarget()));

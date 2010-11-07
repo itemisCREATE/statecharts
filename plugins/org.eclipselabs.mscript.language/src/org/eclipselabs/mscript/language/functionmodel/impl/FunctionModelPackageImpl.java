@@ -567,7 +567,16 @@ public class FunctionModelPackageImpl extends EPackageImpl implements FunctionMo
 		initEReference(getEquation_LeftHandSide(), this.getEquationSide(), null, "leftHandSide", null, 1, 1, Equation.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getEquation_RightHandSide(), this.getEquationSide(), null, "rightHandSide", null, 1, 1, Equation.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
-		op = addEOperation(equationEClass, ecorePackage.getEBoolean(), "leftHandSideIsSingleVariableReference", 1, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(equationEClass, ecorePackage.getEBoolean(), "leftHandSideHasValidVariableReference", 1, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(equationEClass, ecorePackage.getEBoolean(), "rightHandSideHasValidVariableReferences", 1, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
