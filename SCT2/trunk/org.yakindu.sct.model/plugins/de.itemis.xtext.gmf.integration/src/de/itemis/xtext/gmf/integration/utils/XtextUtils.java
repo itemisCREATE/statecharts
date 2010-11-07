@@ -145,24 +145,7 @@ public final class XtextUtils {
 	 */
 	private static void fakeResourceUri(final XtextResource resource) {
 		// TODO Abhängikeit zu Project URI und Nature entfernen
-		Display.getDefault().syncExec(new Runnable() {
-			@Override
-			public void run() {
-				IWorkbenchWindow activeWorkbenchWindow = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
-				IWorkbenchPage activePage = activeWorkbenchWindow.getActivePage();
-				// if (activePage == null) {
-				// resource.setURI(URI.createURI("platform:/resource/"
-				// + System.currentTimeMillis() + "/dummy"));
-				// return;
-				// }
-				IEditorInput editorInput = activePage.getActiveEditor().getEditorInput();
-				if (editorInput instanceof FileEditorInput) {
-					FileEditorInput input = (FileEditorInput) editorInput;
-					String activeProject = input.getFile().getProject().getName();
-					resource.setURI(URI.createURI("platform:/resource/" + activeProject + "/dummy"));
-				}
-			}
-		});
+		resource.setURI(URI.createURI("platform:/resource/dummyProject/dummyResource"));
 	}
 
 	private static ValidationJob createValidationJob(Injector injector, XtextDocument document,

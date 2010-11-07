@@ -7,7 +7,12 @@ import org.eclipse.gmf.runtime.diagram.ui.view.factories.AbstractShapeViewFactor
 import org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.statechart.diagram.providers.ProviderConstants;
-
+/**
+ * 
+ * @author Andreas Muelder <a
+ *         href="mailto:andreas.muelder@itemis.de">andreas.muelder@itemis.de</a>
+ * 
+ */
 public class RegionViewFactory extends AbstractShapeViewFactory {
 
 	@Override
@@ -21,6 +26,9 @@ public class RegionViewFactory extends AbstractShapeViewFactory {
 		if (eObject != null) {
 			eObjectAdapter = new EObjectAdapter(eObject);
 		}
+		FactoryUtils.createLabel(view, ProviderConstants.REGION_NAME);
+		
+		
 		getViewService().createNode(eObjectAdapter, view, ProviderConstants.REGION_COMPARTMENT, ViewUtil.APPEND, true,
 				getPreferencesHint());
 	}

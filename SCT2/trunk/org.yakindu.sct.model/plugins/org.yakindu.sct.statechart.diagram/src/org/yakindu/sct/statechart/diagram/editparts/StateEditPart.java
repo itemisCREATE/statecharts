@@ -16,16 +16,15 @@ import org.eclipse.gef.EditPart;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.commands.UnexecutableCommand;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IPrimaryEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.CreationEditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewAndElementRequest;
-import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.swt.graphics.Color;
 import org.yakindu.sct.model.statechart.statechart.State;
-import org.yakindu.sct.model.statechart.statechart.StatechartPackage;
 import org.yakindu.sct.statechart.diagram.editor.figures.StateFigure;
 import org.yakindu.sct.statechart.diagram.editor.figures.utils.MapModeUtils;
 import org.yakindu.sct.statechart.diagram.policies.RelationshipSemanticEditPolicy;
@@ -38,15 +37,17 @@ import org.yakindu.sct.statechart.diagram.preferences.StatechartPreferenceManage
  *         href="mailto:andreas.muelder@itemis.de">andreas.muelder@itemis.de</a>
  * 
  */
-public class StateEditPart extends TextAwareShapeNodeEditPart implements IPrimaryEditPart {
+public class StateEditPart extends ShapeNodeEditPart implements
+		IPrimaryEditPart {
 
 	public StateEditPart(View view) {
-		super(view, StatechartPackage.Literals.NAMED_ELEMENT__NAME);
+		super(view);
 	}
 
 	@Override
 	protected NodeFigure createNodeFigure() {
-		final NodeFigure figure = new DefaultSizeNodeFigure(MapModeUtils.getDefaultSizeDimension(getMapMode()));
+		final NodeFigure figure = new DefaultSizeNodeFigure(
+				MapModeUtils.getDefaultSizeDimension(getMapMode()));
 		figure.setLayoutManager(new StackLayout());
 		StateFigure stateFigure = new StateFigure(getMapMode());
 		figure.add(stateFigure);
@@ -56,7 +57,8 @@ public class StateEditPart extends TextAwareShapeNodeEditPart implements IPrimar
 	@Override
 	public IFigure getFigure() {
 		IFigure figure = super.getFigure();
-		Color stateColor = StatechartPreferenceManager.getInstance().getStateColor();
+		Color stateColor = StatechartPreferenceManager.getInstance()
+				.getStateColor();
 		figure.setBackgroundColor(stateColor);
 		return figure;
 	}
@@ -64,14 +66,17 @@ public class StateEditPart extends TextAwareShapeNodeEditPart implements IPrimar
 	@Override
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
-		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE, new RelationshipSemanticEditPolicy());
+		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE,
+				new RelationshipSemanticEditPolicy());
 		// We don't want to allow creation for parent editpart on a State
-		installEditPolicy(EditPolicyRoles.CREATION_ROLE, new CreationEditPolicy() {
-			@Override
-			protected Command getCreateElementAndViewCommand(CreateViewAndElementRequest request) {
-				return UnexecutableCommand.INSTANCE;
-			}
-		});
+		installEditPolicy(EditPolicyRoles.CREATION_ROLE,
+				new CreationEditPolicy() {
+					@Override
+					protected Command getCreateElementAndViewCommand(
+							CreateViewAndElementRequest request) {
+						return UnexecutableCommand.INSTANCE;
+					}
+				});
 	}
 
 	@Override
@@ -88,20 +93,20 @@ public class StateEditPart extends TextAwareShapeNodeEditPart implements IPrimar
 		if (childEditPart instanceof StateFigureCompartmentEditPart) {
 			IFigure pane = getPrimaryShape().getFigureCompartmentPane();
 			pane.setLayoutManager(new StackLayout());
-			IFigure compartmentFigure = ((StateFigureCompartmentEditPart) childEditPart).getFigure();
+			IFigure compartmentFigure = ((StateFigureCompartmentEditPart) childEditPart)
+					.getFigure();
 			pane.add(compartmentFigure);
 		} else if (childEditPart instanceof StateTextCompartmentEditPart) {
 			IFigure pane = getPrimaryShape().getTextCompartmentPane();
 			pane.setLayoutManager(new StackLayout());
-			IFigure compartmentFigure = ((StateTextCompartmentEditPart) childEditPart).getFigure();
+			IFigure compartmentFigure = ((StateTextCompartmentEditPart) childEditPart)
+					.getFigure();
 			pane.add(compartmentFigure);
+		} else if (childEditPart instanceof StateNameEditPart) {
+			((StateNameEditPart) childEditPart).setLabel(getPrimaryShape()
+					.getNameFigure());
 		} else {
 			super.addChildVisual(childEditPart, index);
 		}
-	}
-
-	@Override
-	protected WrappingLabel getWrappingLabel() {
-		return getPrimaryShape().getNameFigure();
 	}
 }

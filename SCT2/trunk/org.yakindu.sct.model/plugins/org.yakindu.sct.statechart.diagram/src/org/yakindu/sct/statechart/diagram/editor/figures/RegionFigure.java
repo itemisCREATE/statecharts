@@ -60,7 +60,6 @@ public class RegionFigure extends RoundedRectangle {
 		/** Priority Label **/
 		nameLabel = new WrappingLabel();
 		nameLabel.setFont(FontConstants.DEFAULT);
-		nameLabel.setText("<priority>");
 		GridData data = GridDataFactory.fillDefaults().align(GridData.CENTER, GridData.CENTER).grab(true, true)
 				.getData();
 		data.heightHint = mapMode.DPtoLP(15);
@@ -77,7 +76,7 @@ public class RegionFigure extends RoundedRectangle {
 		this.add(compartmentPane, GridDataFactory.fillDefaults().grab(true, true).getData());
 	}
 
-	public WrappingLabel getPriorityLabel() {
+	public WrappingLabel getNameLabel() {
 		return nameLabel;
 	}
 

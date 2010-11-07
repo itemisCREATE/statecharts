@@ -323,7 +323,7 @@
          <propertySection
             id="property.section.domain" 
             tab="property.tab.domain"
-            class="org.yakindu.sct.statechart.diagram.propertysheets.GenericPropertySection">
+            class="org.yakindu.sct.statechart.diagram.propertysheets.DiagramPropertySection">
             <input type="org.eclipse.gmf.runtime.notation.View"/>
             <input type="org.eclipse.gef.EditPart"/>
          </propertySection>

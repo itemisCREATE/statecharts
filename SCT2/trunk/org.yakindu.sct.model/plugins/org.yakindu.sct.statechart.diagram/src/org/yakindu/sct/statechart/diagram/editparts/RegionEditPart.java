@@ -66,6 +66,8 @@ public class RegionEditPart extends ShapeNodeEditPart {
 			IFigure figure2 = ((RegionCompartmentEditPart) childEditPart)
 					.getFigure();
 			pane.add(figure2);
+		}else if(childEditPart instanceof RegionNameEditPart){
+			((RegionNameEditPart) childEditPart).setLabel(getPrimaryShape().getNameLabel());
 		} else
 			super.addChildVisual(childEditPart, index);
 	}

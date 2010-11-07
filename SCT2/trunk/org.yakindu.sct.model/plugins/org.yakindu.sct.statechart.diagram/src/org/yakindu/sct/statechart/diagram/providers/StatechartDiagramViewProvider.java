@@ -22,6 +22,7 @@ import org.yakindu.sct.statechart.diagram.editor.StatechartDiagramEditor;
 import org.yakindu.sct.statechart.diagram.factories.RegionViewFactory;
 import org.yakindu.sct.statechart.diagram.factories.StateTextCompartmentViewFactory;
 import org.yakindu.sct.statechart.diagram.factories.StateViewFactory;
+import org.yakindu.sct.statechart.diagram.factories.TransitionViewFactory;
 
 /**
  * 
