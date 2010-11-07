@@ -13,7 +13,6 @@ package org.eclipselabs.mscript.language.functionmodel.util;
 
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.Diagnostic;
@@ -37,13 +36,13 @@ import org.eclipselabs.mscript.language.functionmodel.EquationPart;
 import org.eclipselabs.mscript.language.functionmodel.EquationSide;
 import org.eclipselabs.mscript.language.functionmodel.Function;
 import org.eclipselabs.mscript.language.functionmodel.FunctionModelFactory;
+import org.eclipselabs.mscript.language.functionmodel.VariableKind;
 import org.eclipselabs.mscript.language.functionmodel.VariableReference;
-import org.eclipselabs.mscript.language.functionmodel.VariableReferenceKind;
+import org.eclipselabs.mscript.language.functionmodel.VariableStep;
 import org.eclipselabs.mscript.language.internal.functionmodel.util.StepExpressionHelper;
 import org.eclipselabs.mscript.language.internal.functionmodel.util.StepExpressionResult;
 import org.eclipselabs.mscript.language.internal.util.EObjectDiagnostic;
 import org.eclipselabs.mscript.language.internal.util.TreeIterator;
-import org.eclipselabs.mscript.language.internal.util.VariableReferenceDescriptor;
 
 /**
  * @author Andreas Unger
@@ -52,8 +51,6 @@ import org.eclipselabs.mscript.language.internal.util.VariableReferenceDescripto
 public class FunctionConstructor {
 
 	public Function construct(FunctionDefinition functionDefinition, DiagnosticChain diagnostics) {
-		VariableReferenceMap variableReferences = new VariableReferenceMap();
-				
 		Function function = FunctionModelFactory.eINSTANCE.createFunction();
 		function.setDefinition(functionDefinition);
 
@@ -66,13 +63,13 @@ public class FunctionConstructor {
 			EquationSide lhs = FunctionModelFactory.eINSTANCE.createEquationSide();
 			lhs.setEquation(equation);
 			lhs.setExpression(lhsExpression);
-			new EquationSideInitializer(lhs, variableReferences, diagnostics).initialize();
+			new EquationSideInitializer(lhs, diagnostics).initialize();
 			
 			Expression rhsExpression = equationDefinition.getRightHandSide();
 			EquationSide rhs = FunctionModelFactory.eINSTANCE.createEquationSide();
 			rhs.setEquation(equation);
 			rhs.setExpression(rhsExpression);
-			new EquationSideInitializer(rhs, variableReferences, diagnostics).initialize();
+			new EquationSideInitializer(rhs, diagnostics).initialize();
 		}
 		
 		for (TreeIterator it = new TreeIterator(function, true); it.hasNext();) {
@@ -82,60 +79,19 @@ public class FunctionConstructor {
 		return function;
 	}
 		
-	protected VariableReference getVariableReference(String name, VariableReferenceKind kind, int step, boolean initial, Function function, Map<VariableReferenceDescriptor, VariableReference> variableReferences) {
-		VariableReferenceDescriptor descriptor = new VariableReferenceDescriptor(name, step, initial);
-		VariableReference variableReference = variableReferences.get(descriptor);
-		if (variableReference == null) {
-			variableReference = FunctionModelFactory.eINSTANCE.createVariableReference();
-			variableReference.setName(name);
-			variableReference.setKind(kind);
-			variableReference.setStep(step);
-			variableReference.setInitial(initial);
-			variableReference.setFunction(function);
-			variableReferences.put(descriptor, variableReference);
-		}
-		return variableReference;
-	}
-
-	private static class VariableReferenceMap extends HashMap<VariableReferenceDescriptor, VariableReference> {
-		
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = 1L;
-
-		public VariableReference get(String name, VariableReferenceKind kind, int step, boolean initial, Function function) {
-			VariableReferenceDescriptor descriptor = new VariableReferenceDescriptor(name, step, initial);
-			VariableReference variableReference = get(descriptor);
-			if (variableReference == null) {
-				variableReference = FunctionModelFactory.eINSTANCE.createVariableReference();
-				variableReference.setName(name);
-				variableReference.setKind(kind);
-				variableReference.setStep(step);
-				variableReference.setInitial(initial);
-				variableReference.setFunction(function);
-				put(descriptor, variableReference);
-			}
-			return variableReference;
-		}
-
-	}
-	
 	private static class EquationSideInitializer extends AstSwitch<Boolean> {
 
 		private static final Scope MOST_OUTER_SCOPE = new Scope(null);
 		private Scope scope = MOST_OUTER_SCOPE;
 
 		private EquationSide equationSide;
-		private VariableReferenceMap variableReferences;
 		private DiagnosticChain diagnostics;
 		
 		/**
 		 * 
 		 */
-		public EquationSideInitializer(EquationSide equationSide, VariableReferenceMap variableReferences, DiagnosticChain diagnostics) {
+		public EquationSideInitializer(EquationSide equationSide, DiagnosticChain diagnostics) {
 			this.equationSide = equationSide;
-			this.variableReferences = variableReferences;
 			this.diagnostics = diagnostics;
 		}
 		
@@ -174,22 +130,33 @@ public class FunctionConstructor {
 					}
 					return true;
 				}
-				VariableReferenceKind variableReferenceKind = getVariableReferenceKind(
-						equationSide.getEquation().getFunction().getDefinition(),
+				Function function = equationSide.getEquation().getFunction();
+				VariableKind variableKind = getVariableKind(
+						function.getDefinition(),
 						simpleName.getIdentifier());
-				if (variableReferenceKind != VariableReferenceKind.UNKNOWN) {
+				if (variableKind != VariableKind.UNKNOWN) {
 					StepExpressionResult stepExpressionResult = evaluateStepExpression(featureCall, diagnostics);
 					if (stepExpressionResult != null) {
 						EquationPart part = FunctionModelFactory.eINSTANCE.createEquationPart();
 						part.setSide(equationSide);
 						part.setFeatureCall(featureCall);
-						VariableReference variableReference = variableReferences.get(
-								simpleName.getIdentifier(),
-								variableReferenceKind,
-								stepExpressionResult.getStep(),
-								stepExpressionResult.isAbsolute(),
-								equationSide.getEquation().getFunction());
-						part.setVariableReference(variableReference);
+						VariableReference variableReference = function.getVariableReference(simpleName.getIdentifier());
+						if (variableReference == null) {
+							variableReference = FunctionModelFactory.eINSTANCE.createVariableReference();
+							variableReference.setFunction(function);
+							variableReference.setName(simpleName.getIdentifier());
+							variableReference.setKind(variableKind);
+						}
+						VariableStep variableStep = variableReference.getStep(
+								stepExpressionResult.getIndex(),
+								stepExpressionResult.isInitial());
+						if (variableStep == null) {
+							variableStep = FunctionModelFactory.eINSTANCE.createVariableStep();
+							variableStep.setReference(variableReference);
+							variableStep.setIndex(stepExpressionResult.getIndex());
+							variableStep.setInitial(stepExpressionResult.isInitial());
+						}
+						part.setVariableStep(variableStep);
 					}
 				} else {
 					diagnostics.add(new EObjectDiagnostic(Diagnostic.ERROR, simpleName.getIdentifier() + " cannot be resolved to a variable", simpleName));
@@ -200,28 +167,28 @@ public class FunctionConstructor {
 			return true;
 		}
 		
-		private VariableReferenceKind getVariableReferenceKind(FunctionDefinition functionDefinition, String name) {
+		private VariableKind getVariableKind(FunctionDefinition functionDefinition, String name) {
 			for (ParameterDeclaration parameterDeclaration : functionDefinition.getTemplateParameters()) {
 				if (name.equals(parameterDeclaration.getName())) {
-					return VariableReferenceKind.TEMPLATE_PARAMETER;
+					return VariableKind.TEMPLATE_PARAMETER;
 				}
 			}
 			for (ParameterDeclaration parameterDeclaration : functionDefinition.getInputParameters()) {
 				if (name.equals(parameterDeclaration.getName())) {
-					return VariableReferenceKind.INPUT_PARAMETER;
+					return VariableKind.INPUT_PARAMETER;
 				}
 			}
 			for (ParameterDeclaration parameterDeclaration : functionDefinition.getOutputParameters()) {
 				if (name.equals(parameterDeclaration.getName())) {
-					return VariableReferenceKind.OUTPUT_PARAMETER;
+					return VariableKind.OUTPUT_PARAMETER;
 				}
 			}
 			for (VariableDeclaration stateVariableDeclaration : functionDefinition.getStateVariables()) {
 				if (name.equals(stateVariableDeclaration.getName())) {
-					return VariableReferenceKind.STATE_VARIABLE;
+					return VariableKind.STATE_VARIABLE;
 				}
 			}
-			return VariableReferenceKind.UNKNOWN;
+			return VariableKind.UNKNOWN;
 		}
 
 		private StepExpressionResult evaluateStepExpression(FeatureCall featureCall, DiagnosticChain diagnostics) {

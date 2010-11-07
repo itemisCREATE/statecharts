@@ -111,7 +111,7 @@ public class InterpreterContext implements IInterpreterContext {
 								Expression stepExpression = operationCall.getArguments().get(0);
 								StepExpressionResult stepExpressionResult = new StepExpressionHelper().evaluate(stepExpression, getDiagnostics());
 								if (stepExpressionResult != null) {
-									return variable.getValue(stepExpressionResult.getStep());
+									return variable.getValue(stepExpressionResult.getIndex());
 								}
 							}
 						}

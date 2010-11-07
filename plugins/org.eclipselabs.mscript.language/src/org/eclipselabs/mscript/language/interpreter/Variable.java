@@ -46,25 +46,25 @@ public class Variable implements IVariable {
 		this.name = name;
 	}
 	
-	public void ensureStep(int step) {
-		values.ensureLocationIndex(step);
+	public void ensureStep(int stepIndex) {
+		values.ensureLocationIndex(stepIndex);
 	}
 	
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.execution.IVariable#getValue()
 	 */
-	public IValue getValue(int step) {
-		return values.get(step);
+	public IValue getValue(int stepIndex) {
+		return values.get(stepIndex);
 	}
 
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.execution.IVariable#setValue(org.eclipselabs.mscript.execution.value.IValue)
 	 */
-	public void setValue(int step, IValue value) {
-		values.set(step, value);
+	public void setValue(int stepIndex, IValue value) {
+		values.set(stepIndex, value);
 	}
 	
-	public void incrementStep() {
+	public void incrementStepIndex() {
 		values.incrementLocation();
 	}
 	

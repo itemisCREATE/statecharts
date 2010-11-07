@@ -245,13 +245,13 @@ public interface FunctionModelPackage extends EPackage {
 	int EQUATION_PART__FEATURE_CALL = 1;
 
 	/**
-	 * The feature id for the '<em><b>Variable Reference</b></em>' reference.
+	 * The feature id for the '<em><b>Variable Step</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EQUATION_PART__VARIABLE_REFERENCE = 2;
+	int EQUATION_PART__VARIABLE_STEP = 2;
 
 	/**
 	 * The number of structural features of the '<em>Equation Part</em>' class.
@@ -300,31 +300,13 @@ public interface FunctionModelPackage extends EPackage {
 	int VARIABLE_REFERENCE__KIND = 2;
 
 	/**
-	 * The feature id for the '<em><b>Step</b></em>' attribute.
+	 * The feature id for the '<em><b>Steps</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_REFERENCE__STEP = 3;
-
-	/**
-	 * The feature id for the '<em><b>Initial</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VARIABLE_REFERENCE__INITIAL = 4;
-
-	/**
-	 * The feature id for the '<em><b>Using Equation Parts</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VARIABLE_REFERENCE__USING_EQUATION_PARTS = 5;
+	int VARIABLE_REFERENCE__STEPS = 3;
 
 	/**
 	 * The number of structural features of the '<em>Variable Reference</em>' class.
@@ -333,17 +315,72 @@ public interface FunctionModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_REFERENCE_FEATURE_COUNT = 6;
+	int VARIABLE_REFERENCE_FEATURE_COUNT = 4;
 
 	/**
-	 * The meta object id for the '{@link org.eclipselabs.mscript.language.functionmodel.VariableReferenceKind <em>Variable Reference Kind</em>}' enum.
+	 * The meta object id for the '{@link org.eclipselabs.mscript.language.functionmodel.impl.VariableStepImpl <em>Variable Step</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipselabs.mscript.language.functionmodel.VariableReferenceKind
-	 * @see org.eclipselabs.mscript.language.functionmodel.impl.FunctionModelPackageImpl#getVariableReferenceKind()
+	 * @see org.eclipselabs.mscript.language.functionmodel.impl.VariableStepImpl
+	 * @see org.eclipselabs.mscript.language.functionmodel.impl.FunctionModelPackageImpl#getVariableStep()
 	 * @generated
 	 */
-	int VARIABLE_REFERENCE_KIND = 5;
+	int VARIABLE_STEP = 5;
+
+	/**
+	 * The feature id for the '<em><b>Reference</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_STEP__REFERENCE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Index</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_STEP__INDEX = 1;
+
+	/**
+	 * The feature id for the '<em><b>Initial</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_STEP__INITIAL = 2;
+
+	/**
+	 * The feature id for the '<em><b>Using Equation Parts</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_STEP__USING_EQUATION_PARTS = 3;
+
+	/**
+	 * The number of structural features of the '<em>Variable Step</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_STEP_FEATURE_COUNT = 4;
+
+	/**
+	 * The meta object id for the '{@link org.eclipselabs.mscript.language.functionmodel.VariableKind <em>Variable Kind</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipselabs.mscript.language.functionmodel.VariableKind
+	 * @see org.eclipselabs.mscript.language.functionmodel.impl.FunctionModelPackageImpl#getVariableKind()
+	 * @generated
+	 */
+	int VARIABLE_KIND = 6;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.functionmodel.Function <em>Function</em>}'.
@@ -518,17 +555,6 @@ public interface FunctionModelPackage extends EPackage {
 	EReference getEquationPart_Side();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipselabs.mscript.language.functionmodel.EquationPart#getVariableReference <em>Variable Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Variable Reference</em>'.
-	 * @see org.eclipselabs.mscript.language.functionmodel.EquationPart#getVariableReference()
-	 * @see #getEquationPart()
-	 * @generated
-	 */
-	EReference getEquationPart_VariableReference();
-
-	/**
 	 * Returns the meta object for the reference '{@link org.eclipselabs.mscript.language.functionmodel.EquationPart#getFeatureCall <em>Feature Call</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -538,6 +564,17 @@ public interface FunctionModelPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getEquationPart_FeatureCall();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipselabs.mscript.language.functionmodel.EquationPart#getVariableStep <em>Variable Step</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Variable Step</em>'.
+	 * @see org.eclipselabs.mscript.language.functionmodel.EquationPart#getVariableStep()
+	 * @see #getEquationPart()
+	 * @generated
+	 */
+	EReference getEquationPart_VariableStep();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.functionmodel.VariableReference <em>Variable Reference</em>}'.
@@ -583,47 +620,79 @@ public interface FunctionModelPackage extends EPackage {
 	EAttribute getVariableReference_Kind();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.functionmodel.VariableReference#getStep <em>Step</em>}'.
+	 * Returns the meta object for the reference list '{@link org.eclipselabs.mscript.language.functionmodel.VariableReference#getSteps <em>Steps</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Step</em>'.
-	 * @see org.eclipselabs.mscript.language.functionmodel.VariableReference#getStep()
+	 * @return the meta object for the reference list '<em>Steps</em>'.
+	 * @see org.eclipselabs.mscript.language.functionmodel.VariableReference#getSteps()
 	 * @see #getVariableReference()
 	 * @generated
 	 */
-	EAttribute getVariableReference_Step();
+	EReference getVariableReference_Steps();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.functionmodel.VariableReference#isInitial <em>Initial</em>}'.
+	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.functionmodel.VariableStep <em>Variable Step</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Variable Step</em>'.
+	 * @see org.eclipselabs.mscript.language.functionmodel.VariableStep
+	 * @generated
+	 */
+	EClass getVariableStep();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipselabs.mscript.language.functionmodel.VariableStep#getReference <em>Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Reference</em>'.
+	 * @see org.eclipselabs.mscript.language.functionmodel.VariableStep#getReference()
+	 * @see #getVariableStep()
+	 * @generated
+	 */
+	EReference getVariableStep_Reference();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.functionmodel.VariableStep#getIndex <em>Index</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Index</em>'.
+	 * @see org.eclipselabs.mscript.language.functionmodel.VariableStep#getIndex()
+	 * @see #getVariableStep()
+	 * @generated
+	 */
+	EAttribute getVariableStep_Index();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.functionmodel.VariableStep#isInitial <em>Initial</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Initial</em>'.
-	 * @see org.eclipselabs.mscript.language.functionmodel.VariableReference#isInitial()
-	 * @see #getVariableReference()
+	 * @see org.eclipselabs.mscript.language.functionmodel.VariableStep#isInitial()
+	 * @see #getVariableStep()
 	 * @generated
 	 */
-	EAttribute getVariableReference_Initial();
+	EAttribute getVariableStep_Initial();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.eclipselabs.mscript.language.functionmodel.VariableReference#getUsingEquationParts <em>Using Equation Parts</em>}'.
+	 * Returns the meta object for the reference list '{@link org.eclipselabs.mscript.language.functionmodel.VariableStep#getUsingEquationParts <em>Using Equation Parts</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference list '<em>Using Equation Parts</em>'.
-	 * @see org.eclipselabs.mscript.language.functionmodel.VariableReference#getUsingEquationParts()
-	 * @see #getVariableReference()
+	 * @see org.eclipselabs.mscript.language.functionmodel.VariableStep#getUsingEquationParts()
+	 * @see #getVariableStep()
 	 * @generated
 	 */
-	EReference getVariableReference_UsingEquationParts();
+	EReference getVariableStep_UsingEquationParts();
 
 	/**
-	 * Returns the meta object for enum '{@link org.eclipselabs.mscript.language.functionmodel.VariableReferenceKind <em>Variable Reference Kind</em>}'.
+	 * Returns the meta object for enum '{@link org.eclipselabs.mscript.language.functionmodel.VariableKind <em>Variable Kind</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for enum '<em>Variable Reference Kind</em>'.
-	 * @see org.eclipselabs.mscript.language.functionmodel.VariableReferenceKind
+	 * @return the meta object for enum '<em>Variable Kind</em>'.
+	 * @see org.eclipselabs.mscript.language.functionmodel.VariableKind
 	 * @generated
 	 */
-	EEnum getVariableReferenceKind();
+	EEnum getVariableKind();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -784,20 +853,20 @@ public interface FunctionModelPackage extends EPackage {
 		EReference EQUATION_PART__SIDE = eINSTANCE.getEquationPart_Side();
 
 		/**
-		 * The meta object literal for the '<em><b>Variable Reference</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference EQUATION_PART__VARIABLE_REFERENCE = eINSTANCE.getEquationPart_VariableReference();
-
-		/**
 		 * The meta object literal for the '<em><b>Feature Call</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference EQUATION_PART__FEATURE_CALL = eINSTANCE.getEquationPart_FeatureCall();
+
+		/**
+		 * The meta object literal for the '<em><b>Variable Step</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EQUATION_PART__VARIABLE_STEP = eINSTANCE.getEquationPart_VariableStep();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.functionmodel.impl.VariableReferenceImpl <em>Variable Reference</em>}' class.
@@ -834,12 +903,38 @@ public interface FunctionModelPackage extends EPackage {
 		EAttribute VARIABLE_REFERENCE__KIND = eINSTANCE.getVariableReference_Kind();
 
 		/**
-		 * The meta object literal for the '<em><b>Step</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Steps</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute VARIABLE_REFERENCE__STEP = eINSTANCE.getVariableReference_Step();
+		EReference VARIABLE_REFERENCE__STEPS = eINSTANCE.getVariableReference_Steps();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.functionmodel.impl.VariableStepImpl <em>Variable Step</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipselabs.mscript.language.functionmodel.impl.VariableStepImpl
+		 * @see org.eclipselabs.mscript.language.functionmodel.impl.FunctionModelPackageImpl#getVariableStep()
+		 * @generated
+		 */
+		EClass VARIABLE_STEP = eINSTANCE.getVariableStep();
+
+		/**
+		 * The meta object literal for the '<em><b>Reference</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference VARIABLE_STEP__REFERENCE = eINSTANCE.getVariableStep_Reference();
+
+		/**
+		 * The meta object literal for the '<em><b>Index</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute VARIABLE_STEP__INDEX = eINSTANCE.getVariableStep_Index();
 
 		/**
 		 * The meta object literal for the '<em><b>Initial</b></em>' attribute feature.
@@ -847,7 +942,7 @@ public interface FunctionModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute VARIABLE_REFERENCE__INITIAL = eINSTANCE.getVariableReference_Initial();
+		EAttribute VARIABLE_STEP__INITIAL = eINSTANCE.getVariableStep_Initial();
 
 		/**
 		 * The meta object literal for the '<em><b>Using Equation Parts</b></em>' reference list feature.
@@ -855,17 +950,17 @@ public interface FunctionModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference VARIABLE_REFERENCE__USING_EQUATION_PARTS = eINSTANCE.getVariableReference_UsingEquationParts();
+		EReference VARIABLE_STEP__USING_EQUATION_PARTS = eINSTANCE.getVariableStep_UsingEquationParts();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.functionmodel.VariableReferenceKind <em>Variable Reference Kind</em>}' enum.
+		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.functionmodel.VariableKind <em>Variable Kind</em>}' enum.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipselabs.mscript.language.functionmodel.VariableReferenceKind
-		 * @see org.eclipselabs.mscript.language.functionmodel.impl.FunctionModelPackageImpl#getVariableReferenceKind()
+		 * @see org.eclipselabs.mscript.language.functionmodel.VariableKind
+		 * @see org.eclipselabs.mscript.language.functionmodel.impl.FunctionModelPackageImpl#getVariableKind()
 		 * @generated
 		 */
-		EEnum VARIABLE_REFERENCE_KIND = eINSTANCE.getVariableReferenceKind();
+		EEnum VARIABLE_KIND = eINSTANCE.getVariableKind();
 
 	}
 

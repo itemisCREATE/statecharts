@@ -97,18 +97,10 @@ public interface Function extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model required="true"
+	 * @model nameRequired="true"
 	 * @generated
 	 */
-	boolean equationExistsForEachOutput(DiagnosticChain diagnostics, Map<Object, Object> context);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model required="true"
-	 * @generated
-	 */
-	boolean equationExistsForEachStep(DiagnosticChain diagnostics, Map<Object, Object> context);
+	VariableReference getVariableReference(String name);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -117,5 +109,29 @@ public interface Function extends EObject {
 	 * @generated
 	 */
 	boolean hasNoDuplicateEquations(DiagnosticChain diagnostics, Map<Object, Object> context);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model required="true"
+	 * @generated
+	 */
+	boolean hasNoCyclicEquations(DiagnosticChain diagnostics, Map<Object, Object> context);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model required="true"
+	 * @generated
+	 */
+	boolean hasEquationsForEachOutput(DiagnosticChain diagnostics, Map<Object, Object> context);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model required="true"
+	 * @generated
+	 */
+	boolean hasEquationsForEachVariableReference(DiagnosticChain diagnostics, Map<Object, Object> context);
 
 } // Function

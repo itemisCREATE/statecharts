@@ -231,7 +231,7 @@ public class EquationImpl extends EObjectImpl implements Equation {
 		String message = null;
 		if (getLeftHandSide().getParts().size() == 1 && lhsExpression instanceof FeatureCall) {
 			EquationPart equationPart = getLeftHandSide().getParts().get(0);
-			switch (equationPart.getVariableReference().getKind()) {
+			switch (equationPart.getVariableStep().getReference().getKind()) {
 			case TEMPLATE_PARAMETER:
 				message = "Left-hand side must not be template parameter reference";;
 				break;

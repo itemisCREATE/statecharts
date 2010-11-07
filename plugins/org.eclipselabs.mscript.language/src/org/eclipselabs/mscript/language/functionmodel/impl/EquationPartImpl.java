@@ -17,7 +17,7 @@ import org.eclipselabs.mscript.language.ast.FeatureCall;
 import org.eclipselabs.mscript.language.functionmodel.EquationPart;
 import org.eclipselabs.mscript.language.functionmodel.EquationSide;
 import org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage;
-import org.eclipselabs.mscript.language.functionmodel.VariableReference;
+import org.eclipselabs.mscript.language.functionmodel.VariableStep;
 
 /**
  * <!-- begin-user-doc -->
@@ -28,7 +28,7 @@ import org.eclipselabs.mscript.language.functionmodel.VariableReference;
  * <ul>
  *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.EquationPartImpl#getSide <em>Side</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.EquationPartImpl#getFeatureCall <em>Feature Call</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.EquationPartImpl#getVariableReference <em>Variable Reference</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.EquationPartImpl#getVariableStep <em>Variable Step</em>}</li>
  * </ul>
  * </p>
  *
@@ -46,14 +46,14 @@ public class EquationPartImpl extends EObjectImpl implements EquationPart {
 	protected FeatureCall featureCall;
 
 	/**
-	 * The cached value of the '{@link #getVariableReference() <em>Variable Reference</em>}' reference.
+	 * The cached value of the '{@link #getVariableStep() <em>Variable Step</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getVariableReference()
+	 * @see #getVariableStep()
 	 * @generated
 	 * @ordered
 	 */
-	protected VariableReference variableReference;
+	protected VariableStep variableStep;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -120,66 +120,6 @@ public class EquationPartImpl extends EObjectImpl implements EquationPart {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public VariableReference getVariableReference() {
-		if (variableReference != null && variableReference.eIsProxy()) {
-			InternalEObject oldVariableReference = (InternalEObject)variableReference;
-			variableReference = (VariableReference)eResolveProxy(oldVariableReference);
-			if (variableReference != oldVariableReference) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, FunctionModelPackage.EQUATION_PART__VARIABLE_REFERENCE, oldVariableReference, variableReference));
-			}
-		}
-		return variableReference;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public VariableReference basicGetVariableReference() {
-		return variableReference;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetVariableReference(VariableReference newVariableReference, NotificationChain msgs) {
-		VariableReference oldVariableReference = variableReference;
-		variableReference = newVariableReference;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FunctionModelPackage.EQUATION_PART__VARIABLE_REFERENCE, oldVariableReference, newVariableReference);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setVariableReference(VariableReference newVariableReference) {
-		if (newVariableReference != variableReference) {
-			NotificationChain msgs = null;
-			if (variableReference != null)
-				msgs = ((InternalEObject)variableReference).eInverseRemove(this, FunctionModelPackage.VARIABLE_REFERENCE__USING_EQUATION_PARTS, VariableReference.class, msgs);
-			if (newVariableReference != null)
-				msgs = ((InternalEObject)newVariableReference).eInverseAdd(this, FunctionModelPackage.VARIABLE_REFERENCE__USING_EQUATION_PARTS, VariableReference.class, msgs);
-			msgs = basicSetVariableReference(newVariableReference, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FunctionModelPackage.EQUATION_PART__VARIABLE_REFERENCE, newVariableReference, newVariableReference));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public FeatureCall getFeatureCall() {
 		if (featureCall != null && featureCall.eIsProxy()) {
 			InternalEObject oldFeatureCall = (InternalEObject)featureCall;
@@ -218,6 +158,66 @@ public class EquationPartImpl extends EObjectImpl implements EquationPart {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public VariableStep getVariableStep() {
+		if (variableStep != null && variableStep.eIsProxy()) {
+			InternalEObject oldVariableStep = (InternalEObject)variableStep;
+			variableStep = (VariableStep)eResolveProxy(oldVariableStep);
+			if (variableStep != oldVariableStep) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, FunctionModelPackage.EQUATION_PART__VARIABLE_STEP, oldVariableStep, variableStep));
+			}
+		}
+		return variableStep;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public VariableStep basicGetVariableStep() {
+		return variableStep;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetVariableStep(VariableStep newVariableStep, NotificationChain msgs) {
+		VariableStep oldVariableStep = variableStep;
+		variableStep = newVariableStep;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FunctionModelPackage.EQUATION_PART__VARIABLE_STEP, oldVariableStep, newVariableStep);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setVariableStep(VariableStep newVariableStep) {
+		if (newVariableStep != variableStep) {
+			NotificationChain msgs = null;
+			if (variableStep != null)
+				msgs = ((InternalEObject)variableStep).eInverseRemove(this, FunctionModelPackage.VARIABLE_STEP__USING_EQUATION_PARTS, VariableStep.class, msgs);
+			if (newVariableStep != null)
+				msgs = ((InternalEObject)newVariableStep).eInverseAdd(this, FunctionModelPackage.VARIABLE_STEP__USING_EQUATION_PARTS, VariableStep.class, msgs);
+			msgs = basicSetVariableStep(newVariableStep, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FunctionModelPackage.EQUATION_PART__VARIABLE_STEP, newVariableStep, newVariableStep));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -225,10 +225,10 @@ public class EquationPartImpl extends EObjectImpl implements EquationPart {
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetSide((EquationSide)otherEnd, msgs);
-			case FunctionModelPackage.EQUATION_PART__VARIABLE_REFERENCE:
-				if (variableReference != null)
-					msgs = ((InternalEObject)variableReference).eInverseRemove(this, FunctionModelPackage.VARIABLE_REFERENCE__USING_EQUATION_PARTS, VariableReference.class, msgs);
-				return basicSetVariableReference((VariableReference)otherEnd, msgs);
+			case FunctionModelPackage.EQUATION_PART__VARIABLE_STEP:
+				if (variableStep != null)
+					msgs = ((InternalEObject)variableStep).eInverseRemove(this, FunctionModelPackage.VARIABLE_STEP__USING_EQUATION_PARTS, VariableStep.class, msgs);
+				return basicSetVariableStep((VariableStep)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -243,8 +243,8 @@ public class EquationPartImpl extends EObjectImpl implements EquationPart {
 		switch (featureID) {
 			case FunctionModelPackage.EQUATION_PART__SIDE:
 				return basicSetSide(null, msgs);
-			case FunctionModelPackage.EQUATION_PART__VARIABLE_REFERENCE:
-				return basicSetVariableReference(null, msgs);
+			case FunctionModelPackage.EQUATION_PART__VARIABLE_STEP:
+				return basicSetVariableStep(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -276,9 +276,9 @@ public class EquationPartImpl extends EObjectImpl implements EquationPart {
 			case FunctionModelPackage.EQUATION_PART__FEATURE_CALL:
 				if (resolve) return getFeatureCall();
 				return basicGetFeatureCall();
-			case FunctionModelPackage.EQUATION_PART__VARIABLE_REFERENCE:
-				if (resolve) return getVariableReference();
-				return basicGetVariableReference();
+			case FunctionModelPackage.EQUATION_PART__VARIABLE_STEP:
+				if (resolve) return getVariableStep();
+				return basicGetVariableStep();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -297,8 +297,8 @@ public class EquationPartImpl extends EObjectImpl implements EquationPart {
 			case FunctionModelPackage.EQUATION_PART__FEATURE_CALL:
 				setFeatureCall((FeatureCall)newValue);
 				return;
-			case FunctionModelPackage.EQUATION_PART__VARIABLE_REFERENCE:
-				setVariableReference((VariableReference)newValue);
+			case FunctionModelPackage.EQUATION_PART__VARIABLE_STEP:
+				setVariableStep((VariableStep)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -318,8 +318,8 @@ public class EquationPartImpl extends EObjectImpl implements EquationPart {
 			case FunctionModelPackage.EQUATION_PART__FEATURE_CALL:
 				setFeatureCall((FeatureCall)null);
 				return;
-			case FunctionModelPackage.EQUATION_PART__VARIABLE_REFERENCE:
-				setVariableReference((VariableReference)null);
+			case FunctionModelPackage.EQUATION_PART__VARIABLE_STEP:
+				setVariableStep((VariableStep)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -337,8 +337,8 @@ public class EquationPartImpl extends EObjectImpl implements EquationPart {
 				return getSide() != null;
 			case FunctionModelPackage.EQUATION_PART__FEATURE_CALL:
 				return featureCall != null;
-			case FunctionModelPackage.EQUATION_PART__VARIABLE_REFERENCE:
-				return variableReference != null;
+			case FunctionModelPackage.EQUATION_PART__VARIABLE_STEP:
+				return variableStep != null;
 		}
 		return super.eIsSet(featureID);
 	}

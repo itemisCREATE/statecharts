@@ -7,30 +7,37 @@
   <foreignModel>FunctionModel.ecore</foreignModel>
   <genPackages prefix="FunctionModel" basePackage="org.eclipselabs.mscript.language"
       disposableProviderFactory="true" ecorePackage="FunctionModel.ecore#/">
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="FunctionModel.ecore#//VariableReferenceKind">
-      <genEnumLiterals ecoreEnumLiteral="FunctionModel.ecore#//VariableReferenceKind/Unknown"/>
-      <genEnumLiterals ecoreEnumLiteral="FunctionModel.ecore#//VariableReferenceKind/TemplateParameter"/>
-      <genEnumLiterals ecoreEnumLiteral="FunctionModel.ecore#//VariableReferenceKind/InputParameter"/>
-      <genEnumLiterals ecoreEnumLiteral="FunctionModel.ecore#//VariableReferenceKind/OutputParameter"/>
-      <genEnumLiterals ecoreEnumLiteral="FunctionModel.ecore#//VariableReferenceKind/StateVariable"/>
-      <genEnumLiterals ecoreEnumLiteral="FunctionModel.ecore#//VariableReferenceKind/Constant"/>
-      <genEnumLiterals ecoreEnumLiteral="FunctionModel.ecore#//VariableReferenceKind/Functor"/>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="FunctionModel.ecore#//VariableKind">
+      <genEnumLiterals ecoreEnumLiteral="FunctionModel.ecore#//VariableKind/Unknown"/>
+      <genEnumLiterals ecoreEnumLiteral="FunctionModel.ecore#//VariableKind/TemplateParameter"/>
+      <genEnumLiterals ecoreEnumLiteral="FunctionModel.ecore#//VariableKind/InputParameter"/>
+      <genEnumLiterals ecoreEnumLiteral="FunctionModel.ecore#//VariableKind/OutputParameter"/>
+      <genEnumLiterals ecoreEnumLiteral="FunctionModel.ecore#//VariableKind/StateVariable"/>
+      <genEnumLiterals ecoreEnumLiteral="FunctionModel.ecore#//VariableKind/Constant"/>
+      <genEnumLiterals ecoreEnumLiteral="FunctionModel.ecore#//VariableKind/Functor"/>
     </genEnums>
     <genClasses ecoreClass="FunctionModel.ecore#//Function">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FunctionModel.ecore#//Function/definition"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionModel.ecore#//Function/equations"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionModel.ecore#//Function/variableReferences"/>
+      <genOperations ecoreOperation="FunctionModel.ecore#//Function/getVariableReference">
+        <genParameters ecoreParameter="FunctionModel.ecore#//Function/getVariableReference/name"/>
+      </genOperations>
       <genOperations ecoreOperation="FunctionModel.ecore#//Function/hasNoDuplicateEquations">
         <genParameters ecoreParameter="FunctionModel.ecore#//Function/hasNoDuplicateEquations/diagnostics"/>
         <genParameters ecoreParameter="FunctionModel.ecore#//Function/hasNoDuplicateEquations/context"/>
       </genOperations>
-      <genOperations ecoreOperation="FunctionModel.ecore#//Function/equationExistsForEachOutput">
-        <genParameters ecoreParameter="FunctionModel.ecore#//Function/equationExistsForEachOutput/diagnostics"/>
-        <genParameters ecoreParameter="FunctionModel.ecore#//Function/equationExistsForEachOutput/context"/>
+      <genOperations ecoreOperation="FunctionModel.ecore#//Function/hasNoCyclicEquations">
+        <genParameters ecoreParameter="FunctionModel.ecore#//Function/hasNoCyclicEquations/diagnostics"/>
+        <genParameters ecoreParameter="FunctionModel.ecore#//Function/hasNoCyclicEquations/context"/>
       </genOperations>
-      <genOperations ecoreOperation="FunctionModel.ecore#//Function/equationExistsForEachStep">
-        <genParameters ecoreParameter="FunctionModel.ecore#//Function/equationExistsForEachStep/diagnostics"/>
-        <genParameters ecoreParameter="FunctionModel.ecore#//Function/equationExistsForEachStep/context"/>
+      <genOperations ecoreOperation="FunctionModel.ecore#//Function/hasEquationsForEachOutput">
+        <genParameters ecoreParameter="FunctionModel.ecore#//Function/hasEquationsForEachOutput/diagnostics"/>
+        <genParameters ecoreParameter="FunctionModel.ecore#//Function/hasEquationsForEachOutput/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="FunctionModel.ecore#//Function/hasEquationsForEachVariableReference">
+        <genParameters ecoreParameter="FunctionModel.ecore#//Function/hasEquationsForEachVariableReference/diagnostics"/>
+        <genParameters ecoreParameter="FunctionModel.ecore#//Function/hasEquationsForEachVariableReference/context"/>
       </genOperations>
     </genClasses>
     <genClasses ecoreClass="FunctionModel.ecore#//Equation">
@@ -52,15 +59,23 @@
     <genClasses ecoreClass="FunctionModel.ecore#//EquationPart">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FunctionModel.ecore#//EquationPart/side"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FunctionModel.ecore#//EquationPart/featureCall"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FunctionModel.ecore#//EquationPart/variableReference"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FunctionModel.ecore#//EquationPart/variableStep"/>
     </genClasses>
     <genClasses ecoreClass="FunctionModel.ecore#//VariableReference">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FunctionModel.ecore#//VariableReference/function"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionModel.ecore#//VariableReference/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionModel.ecore#//VariableReference/kind"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionModel.ecore#//VariableReference/step"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionModel.ecore#//VariableReference/initial"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FunctionModel.ecore#//VariableReference/usingEquationParts"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FunctionModel.ecore#//VariableReference/steps"/>
+      <genOperations ecoreOperation="FunctionModel.ecore#//VariableReference/getStep">
+        <genParameters ecoreParameter="FunctionModel.ecore#//VariableReference/getStep/index"/>
+        <genParameters ecoreParameter="FunctionModel.ecore#//VariableReference/getStep/initial"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="FunctionModel.ecore#//VariableStep">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FunctionModel.ecore#//VariableStep/reference"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionModel.ecore#//VariableStep/index"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionModel.ecore#//VariableStep/initial"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FunctionModel.ecore#//VariableStep/usingEquationParts"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

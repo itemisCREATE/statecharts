@@ -18,8 +18,9 @@ import org.eclipselabs.mscript.language.functionmodel.EquationSide;
 import org.eclipselabs.mscript.language.functionmodel.Function;
 import org.eclipselabs.mscript.language.functionmodel.FunctionModelFactory;
 import org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage;
+import org.eclipselabs.mscript.language.functionmodel.VariableKind;
 import org.eclipselabs.mscript.language.functionmodel.VariableReference;
-import org.eclipselabs.mscript.language.functionmodel.VariableReferenceKind;
+import org.eclipselabs.mscript.language.functionmodel.VariableStep;
 
 /**
  * <!-- begin-user-doc -->
@@ -70,6 +71,7 @@ public class FunctionModelFactoryImpl extends EFactoryImpl implements FunctionMo
 			case FunctionModelPackage.EQUATION_SIDE: return createEquationSide();
 			case FunctionModelPackage.EQUATION_PART: return createEquationPart();
 			case FunctionModelPackage.VARIABLE_REFERENCE: return createVariableReference();
+			case FunctionModelPackage.VARIABLE_STEP: return createVariableStep();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -83,8 +85,8 @@ public class FunctionModelFactoryImpl extends EFactoryImpl implements FunctionMo
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
-			case FunctionModelPackage.VARIABLE_REFERENCE_KIND:
-				return createVariableReferenceKindFromString(eDataType, initialValue);
+			case FunctionModelPackage.VARIABLE_KIND:
+				return createVariableKindFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -98,8 +100,8 @@ public class FunctionModelFactoryImpl extends EFactoryImpl implements FunctionMo
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
-			case FunctionModelPackage.VARIABLE_REFERENCE_KIND:
-				return convertVariableReferenceKindToString(eDataType, instanceValue);
+			case FunctionModelPackage.VARIABLE_KIND:
+				return convertVariableKindToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -160,8 +162,18 @@ public class FunctionModelFactoryImpl extends EFactoryImpl implements FunctionMo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public VariableReferenceKind createVariableReferenceKindFromString(EDataType eDataType, String initialValue) {
-		VariableReferenceKind result = VariableReferenceKind.get(initialValue);
+	public VariableStep createVariableStep() {
+		VariableStepImpl variableStep = new VariableStepImpl();
+		return variableStep;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public VariableKind createVariableKindFromString(EDataType eDataType, String initialValue) {
+		VariableKind result = VariableKind.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
@@ -171,7 +183,7 @@ public class FunctionModelFactoryImpl extends EFactoryImpl implements FunctionMo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String convertVariableReferenceKindToString(EDataType eDataType, Object instanceValue) {
+	public String convertVariableKindToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

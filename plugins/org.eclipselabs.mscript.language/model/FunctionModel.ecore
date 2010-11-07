@@ -4,6 +4,9 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="functionmodel"
     nsURI="http://www.eclipselabs.org/mscript/FunctionModel/1.0.0" nsPrefix="functionmodel">
   <eClassifiers xsi:type="ecore:EClass" name="Function">
+    <eOperations name="getVariableReference" eType="#//VariableReference">
+      <eParameters name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
     <eOperations name="hasNoDuplicateEquations" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -13,7 +16,7 @@
         </eGenericType>
       </eParameters>
     </eOperations>
-    <eOperations name="equationExistsForEachOutput" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+    <eOperations name="hasNoCyclicEquations" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
         <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
@@ -22,7 +25,16 @@
         </eGenericType>
       </eParameters>
     </eOperations>
-    <eOperations name="equationExistsForEachStep" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+    <eOperations name="hasEquationsForEachOutput" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
+      <eParameters name="context">
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eOperations name="hasEquationsForEachVariableReference" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
         <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
@@ -74,20 +86,30 @@
         eOpposite="#//EquationSide/parts"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="featureCall" lowerBound="1"
         eType="ecore:EClass ../src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//FeatureCall"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="variableReference" lowerBound="1"
-        eType="#//VariableReference" eOpposite="#//VariableReference/usingEquationParts"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variableStep" lowerBound="1"
+        eType="#//VariableStep" eOpposite="#//VariableStep/usingEquationParts"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="VariableReference">
+    <eOperations name="getStep" eType="#//VariableStep">
+      <eParameters name="index" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="initial" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="function" lowerBound="1"
         eType="#//Function" eOpposite="#//Function/variableReferences"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" eType="#//VariableReferenceKind"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="step" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" eType="#//VariableKind"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="steps" upperBound="-1"
+        eType="#//VariableStep" eOpposite="#//VariableStep/reference"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VariableStep">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reference" eType="#//VariableReference"
+        eOpposite="#//VariableReference/steps"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="initial" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="usingEquationParts" upperBound="-1"
-        eType="#//EquationPart" eOpposite="#//EquationPart/variableReference"/>
+        eType="#//EquationPart" eOpposite="#//EquationPart/variableStep"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="VariableReferenceKind">
+  <eClassifiers xsi:type="ecore:EEnum" name="VariableKind">
     <eLiterals name="Unknown" value="-1"/>
     <eLiterals name="TemplateParameter"/>
     <eLiterals name="InputParameter" value="1"/>

@@ -18,11 +18,11 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipselabs.mscript.language.functionmodel.EquationPart;
 import org.eclipselabs.mscript.language.functionmodel.Function;
 import org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage;
+import org.eclipselabs.mscript.language.functionmodel.VariableKind;
 import org.eclipselabs.mscript.language.functionmodel.VariableReference;
-import org.eclipselabs.mscript.language.functionmodel.VariableReferenceKind;
+import org.eclipselabs.mscript.language.functionmodel.VariableStep;
 
 /**
  * <!-- begin-user-doc -->
@@ -34,9 +34,7 @@ import org.eclipselabs.mscript.language.functionmodel.VariableReferenceKind;
  *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.VariableReferenceImpl#getFunction <em>Function</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.VariableReferenceImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.VariableReferenceImpl#getKind <em>Kind</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.VariableReferenceImpl#getStep <em>Step</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.VariableReferenceImpl#isInitial <em>Initial</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.VariableReferenceImpl#getUsingEquationParts <em>Using Equation Parts</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.VariableReferenceImpl#getSteps <em>Steps</em>}</li>
  * </ul>
  * </p>
  *
@@ -71,7 +69,7 @@ public class VariableReferenceImpl extends EObjectImpl implements VariableRefere
 	 * @generated
 	 * @ordered
 	 */
-	protected static final VariableReferenceKind KIND_EDEFAULT = VariableReferenceKind.UNKNOWN;
+	protected static final VariableKind KIND_EDEFAULT = VariableKind.UNKNOWN;
 
 	/**
 	 * The cached value of the '{@link #getKind() <em>Kind</em>}' attribute.
@@ -81,57 +79,17 @@ public class VariableReferenceImpl extends EObjectImpl implements VariableRefere
 	 * @generated
 	 * @ordered
 	 */
-	protected VariableReferenceKind kind = KIND_EDEFAULT;
+	protected VariableKind kind = KIND_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getStep() <em>Step</em>}' attribute.
+	 * The cached value of the '{@link #getSteps() <em>Steps</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getStep()
+	 * @see #getSteps()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int STEP_EDEFAULT = 0;
-
-	/**
-	 * The cached value of the '{@link #getStep() <em>Step</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getStep()
-	 * @generated
-	 * @ordered
-	 */
-	protected int step = STEP_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #isInitial() <em>Initial</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isInitial()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean INITIAL_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isInitial() <em>Initial</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isInitial()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean initial = INITIAL_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getUsingEquationParts() <em>Using Equation Parts</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getUsingEquationParts()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<EquationPart> usingEquationParts;
+	protected EList<VariableStep> steps;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -219,7 +177,7 @@ public class VariableReferenceImpl extends EObjectImpl implements VariableRefere
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public VariableReferenceKind getKind() {
+	public VariableKind getKind() {
 		return kind;
 	}
 
@@ -228,8 +186,8 @@ public class VariableReferenceImpl extends EObjectImpl implements VariableRefere
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setKind(VariableReferenceKind newKind) {
-		VariableReferenceKind oldKind = kind;
+	public void setKind(VariableKind newKind) {
+		VariableKind oldKind = kind;
 		kind = newKind == null ? KIND_EDEFAULT : newKind;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, FunctionModelPackage.VARIABLE_REFERENCE__KIND, oldKind, kind));
@@ -240,53 +198,25 @@ public class VariableReferenceImpl extends EObjectImpl implements VariableRefere
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int getStep() {
-		return step;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setStep(int newStep) {
-		int oldStep = step;
-		step = newStep;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FunctionModelPackage.VARIABLE_REFERENCE__STEP, oldStep, step));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isInitial() {
-		return initial;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setInitial(boolean newInitial) {
-		boolean oldInitial = initial;
-		initial = newInitial;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FunctionModelPackage.VARIABLE_REFERENCE__INITIAL, oldInitial, initial));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<EquationPart> getUsingEquationParts() {
-		if (usingEquationParts == null) {
-			usingEquationParts = new EObjectWithInverseResolvingEList<EquationPart>(EquationPart.class, this, FunctionModelPackage.VARIABLE_REFERENCE__USING_EQUATION_PARTS, FunctionModelPackage.EQUATION_PART__VARIABLE_REFERENCE);
+	public EList<VariableStep> getSteps() {
+		if (steps == null) {
+			steps = new EObjectWithInverseResolvingEList<VariableStep>(VariableStep.class, this, FunctionModelPackage.VARIABLE_REFERENCE__STEPS, FunctionModelPackage.VARIABLE_STEP__REFERENCE);
 		}
-		return usingEquationParts;
+		return steps;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public VariableStep getStep(int index, boolean initial) {
+		for (VariableStep step : getSteps()) {
+			if (step.getIndex() == index && step.isInitial() == initial) {
+				return step;
+			}
+		}
+		return null;
 	}
 
 	/**
@@ -302,8 +232,8 @@ public class VariableReferenceImpl extends EObjectImpl implements VariableRefere
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetFunction((Function)otherEnd, msgs);
-			case FunctionModelPackage.VARIABLE_REFERENCE__USING_EQUATION_PARTS:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getUsingEquationParts()).basicAdd(otherEnd, msgs);
+			case FunctionModelPackage.VARIABLE_REFERENCE__STEPS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getSteps()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -318,8 +248,8 @@ public class VariableReferenceImpl extends EObjectImpl implements VariableRefere
 		switch (featureID) {
 			case FunctionModelPackage.VARIABLE_REFERENCE__FUNCTION:
 				return basicSetFunction(null, msgs);
-			case FunctionModelPackage.VARIABLE_REFERENCE__USING_EQUATION_PARTS:
-				return ((InternalEList<?>)getUsingEquationParts()).basicRemove(otherEnd, msgs);
+			case FunctionModelPackage.VARIABLE_REFERENCE__STEPS:
+				return ((InternalEList<?>)getSteps()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -352,12 +282,8 @@ public class VariableReferenceImpl extends EObjectImpl implements VariableRefere
 				return getName();
 			case FunctionModelPackage.VARIABLE_REFERENCE__KIND:
 				return getKind();
-			case FunctionModelPackage.VARIABLE_REFERENCE__STEP:
-				return getStep();
-			case FunctionModelPackage.VARIABLE_REFERENCE__INITIAL:
-				return isInitial();
-			case FunctionModelPackage.VARIABLE_REFERENCE__USING_EQUATION_PARTS:
-				return getUsingEquationParts();
+			case FunctionModelPackage.VARIABLE_REFERENCE__STEPS:
+				return getSteps();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -378,17 +304,11 @@ public class VariableReferenceImpl extends EObjectImpl implements VariableRefere
 				setName((String)newValue);
 				return;
 			case FunctionModelPackage.VARIABLE_REFERENCE__KIND:
-				setKind((VariableReferenceKind)newValue);
+				setKind((VariableKind)newValue);
 				return;
-			case FunctionModelPackage.VARIABLE_REFERENCE__STEP:
-				setStep((Integer)newValue);
-				return;
-			case FunctionModelPackage.VARIABLE_REFERENCE__INITIAL:
-				setInitial((Boolean)newValue);
-				return;
-			case FunctionModelPackage.VARIABLE_REFERENCE__USING_EQUATION_PARTS:
-				getUsingEquationParts().clear();
-				getUsingEquationParts().addAll((Collection<? extends EquationPart>)newValue);
+			case FunctionModelPackage.VARIABLE_REFERENCE__STEPS:
+				getSteps().clear();
+				getSteps().addAll((Collection<? extends VariableStep>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -411,14 +331,8 @@ public class VariableReferenceImpl extends EObjectImpl implements VariableRefere
 			case FunctionModelPackage.VARIABLE_REFERENCE__KIND:
 				setKind(KIND_EDEFAULT);
 				return;
-			case FunctionModelPackage.VARIABLE_REFERENCE__STEP:
-				setStep(STEP_EDEFAULT);
-				return;
-			case FunctionModelPackage.VARIABLE_REFERENCE__INITIAL:
-				setInitial(INITIAL_EDEFAULT);
-				return;
-			case FunctionModelPackage.VARIABLE_REFERENCE__USING_EQUATION_PARTS:
-				getUsingEquationParts().clear();
+			case FunctionModelPackage.VARIABLE_REFERENCE__STEPS:
+				getSteps().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -438,12 +352,8 @@ public class VariableReferenceImpl extends EObjectImpl implements VariableRefere
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case FunctionModelPackage.VARIABLE_REFERENCE__KIND:
 				return kind != KIND_EDEFAULT;
-			case FunctionModelPackage.VARIABLE_REFERENCE__STEP:
-				return step != STEP_EDEFAULT;
-			case FunctionModelPackage.VARIABLE_REFERENCE__INITIAL:
-				return initial != INITIAL_EDEFAULT;
-			case FunctionModelPackage.VARIABLE_REFERENCE__USING_EQUATION_PARTS:
-				return usingEquationParts != null && !usingEquationParts.isEmpty();
+			case FunctionModelPackage.VARIABLE_REFERENCE__STEPS:
+				return steps != null && !steps.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -462,10 +372,6 @@ public class VariableReferenceImpl extends EObjectImpl implements VariableRefere
 		result.append(name);
 		result.append(", kind: ");
 		result.append(kind);
-		result.append(", step: ");
-		result.append(step);
-		result.append(", initial: ");
-		result.append(initial);
 		result.append(')');
 		return result.toString();
 	}

@@ -16,7 +16,7 @@ import java.util.List;
 
 import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
 import org.eclipselabs.mscript.language.functionmodel.Equation;
-import org.eclipselabs.mscript.language.functionmodel.VariableReference;
+import org.eclipselabs.mscript.language.functionmodel.VariableStep;
 import org.eclipselabs.mscript.language.interpreter.value.IValue;
 import org.eclipselabs.mscript.language.interpreter.value.InvalidValue;
 
@@ -31,13 +31,13 @@ public class Interpreter {
 		
 		for (Equation equation : functor.getFunction().getEquations()) {
 			if (equation.getLeftHandSide().getParts().size() == 1) {
-				VariableReference reference = equation.getLeftHandSide().getParts().get(0).getVariableReference();
-				if (!reference.isInitial()) {
+				VariableStep variableStep = equation.getLeftHandSide().getParts().get(0).getVariableStep();
+				if (!variableStep.isInitial()) {
 					IValue rhsValue = new ExpressionValueEvaluator(context).doSwitch(equation.getDefinition().getRightHandSide());
 					if (!(rhsValue instanceof InvalidValue)) {
-						IVariable variable = functor.getVariable(reference.getName());
+						IVariable variable = functor.getVariable(variableStep.getReference().getName());
 						if (variable != null) {
-							variable.setValue(reference.getStep(), rhsValue);
+							variable.setValue(variableStep.getIndex(), rhsValue);
 						}
 					}
 				}
@@ -69,7 +69,7 @@ public class Interpreter {
 
 	public void incrementVariableIndices(IInterpreterContext context, IFunctor functor) {
 		for (IVariable variable : functor.getVariables()) {
-			variable.incrementStep();
+			variable.incrementStepIndex();
 		}	
 	}	
 	

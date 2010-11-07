@@ -71,6 +71,15 @@ public interface FunctionModelFactory extends EFactory {
 	VariableReference createVariableReference();
 
 	/**
+	 * Returns a new object of class '<em>Variable Step</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Variable Step</em>'.
+	 * @generated
+	 */
+	VariableStep createVariableStep();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

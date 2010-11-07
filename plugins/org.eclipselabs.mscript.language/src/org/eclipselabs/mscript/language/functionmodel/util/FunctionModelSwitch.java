@@ -16,6 +16,7 @@ import org.eclipselabs.mscript.language.functionmodel.EquationSide;
 import org.eclipselabs.mscript.language.functionmodel.Function;
 import org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage;
 import org.eclipselabs.mscript.language.functionmodel.VariableReference;
+import org.eclipselabs.mscript.language.functionmodel.VariableStep;
 
 /**
  * <!-- begin-user-doc -->
@@ -121,6 +122,12 @@ public class FunctionModelSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case FunctionModelPackage.VARIABLE_STEP: {
+				VariableStep variableStep = (VariableStep)theEObject;
+				T result = caseVariableStep(variableStep);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -197,6 +204,21 @@ public class FunctionModelSwitch<T> {
 	 * @generated
 	 */
 	public T caseVariableReference(VariableReference object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Variable Step</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Variable Step</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseVariableStep(VariableStep object) {
 		return null;
 	}
 

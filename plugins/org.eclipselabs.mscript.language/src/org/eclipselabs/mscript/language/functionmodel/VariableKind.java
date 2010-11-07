@@ -14,14 +14,14 @@ import org.eclipse.emf.common.util.Enumerator;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the literals of the enumeration '<em><b>Variable Reference Kind</b></em>',
+ * A representation of the literals of the enumeration '<em><b>Variable Kind</b></em>',
  * and utility methods for working with them.
  * <!-- end-user-doc -->
- * @see org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage#getVariableReferenceKind()
+ * @see org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage#getVariableKind()
  * @model
  * @generated
  */
-public enum VariableReferenceKind implements Enumerator {
+public enum VariableKind implements Enumerator {
 	/**
 	 * The '<em><b>Unknown</b></em>' literal object.
 	 * <!-- begin-user-doc -->
@@ -40,7 +40,9 @@ public enum VariableReferenceKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	TEMPLATE_PARAMETER(0, "TemplateParameter", "TemplateParameter"), /**
+	TEMPLATE_PARAMETER(0, "TemplateParameter", "TemplateParameter"),
+
+	/**
 	 * The '<em><b>Input Parameter</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -48,7 +50,9 @@ public enum VariableReferenceKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	INPUT_PARAMETER(1, "InputParameter", "InputParameter"), /**
+	INPUT_PARAMETER(1, "InputParameter", "InputParameter"),
+
+	/**
 	 * The '<em><b>Output Parameter</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -56,7 +60,9 @@ public enum VariableReferenceKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	OUTPUT_PARAMETER(2, "OutputParameter", "OutputParameter"), /**
+	OUTPUT_PARAMETER(2, "OutputParameter", "OutputParameter"),
+
+	/**
 	 * The '<em><b>State Variable</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -64,7 +70,9 @@ public enum VariableReferenceKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	STATE_VARIABLE(3, "StateVariable", "StateVariable"), /**
+	STATE_VARIABLE(3, "StateVariable", "StateVariable"),
+
+	/**
 	 * The '<em><b>Constant</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -72,7 +80,9 @@ public enum VariableReferenceKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	CONSTANT(4, "Constant", "Constant"), /**
+	CONSTANT(4, "Constant", "Constant"),
+
+	/**
 	 * The '<em><b>Functor</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -188,13 +198,13 @@ public enum VariableReferenceKind implements Enumerator {
 	public static final int FUNCTOR_VALUE = 5;
 
 	/**
-	 * An array of all the '<em><b>Variable Reference Kind</b></em>' enumerators.
+	 * An array of all the '<em><b>Variable Kind</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final VariableReferenceKind[] VALUES_ARRAY =
-		new VariableReferenceKind[] {
+	private static final VariableKind[] VALUES_ARRAY =
+		new VariableKind[] {
 			UNKNOWN,
 			TEMPLATE_PARAMETER,
 			INPUT_PARAMETER,
@@ -205,22 +215,22 @@ public enum VariableReferenceKind implements Enumerator {
 		};
 
 	/**
-	 * A public read-only list of all the '<em><b>Variable Reference Kind</b></em>' enumerators.
+	 * A public read-only list of all the '<em><b>Variable Kind</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final List<VariableReferenceKind> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+	public static final List<VariableKind> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
-	 * Returns the '<em><b>Variable Reference Kind</b></em>' literal with the specified literal value.
+	 * Returns the '<em><b>Variable Kind</b></em>' literal with the specified literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static VariableReferenceKind get(String literal) {
+	public static VariableKind get(String literal) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			VariableReferenceKind result = VALUES_ARRAY[i];
+			VariableKind result = VALUES_ARRAY[i];
 			if (result.toString().equals(literal)) {
 				return result;
 			}
@@ -229,14 +239,14 @@ public enum VariableReferenceKind implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>Variable Reference Kind</b></em>' literal with the specified name.
+	 * Returns the '<em><b>Variable Kind</b></em>' literal with the specified name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static VariableReferenceKind getByName(String name) {
+	public static VariableKind getByName(String name) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			VariableReferenceKind result = VALUES_ARRAY[i];
+			VariableKind result = VALUES_ARRAY[i];
 			if (result.getName().equals(name)) {
 				return result;
 			}
@@ -245,12 +255,12 @@ public enum VariableReferenceKind implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>Variable Reference Kind</b></em>' literal with the specified integer value.
+	 * Returns the '<em><b>Variable Kind</b></em>' literal with the specified integer value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static VariableReferenceKind get(int value) {
+	public static VariableKind get(int value) {
 		switch (value) {
 			case UNKNOWN_VALUE: return UNKNOWN;
 			case TEMPLATE_PARAMETER_VALUE: return TEMPLATE_PARAMETER;
@@ -290,7 +300,7 @@ public enum VariableReferenceKind implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private VariableReferenceKind(int value, String name, String literal) {
+	private VariableKind(int value, String name, String literal) {
 		this.value = value;
 		this.name = name;
 		this.literal = literal;
@@ -334,4 +344,4 @@ public enum VariableReferenceKind implements Enumerator {
 		return literal;
 	}
 	
-} //VariableReferenceKind
+} //VariableKind

@@ -21,7 +21,7 @@ import org.eclipselabs.mscript.language.ast.VariableDeclaration;
 import org.eclipselabs.mscript.language.functionmodel.Equation;
 import org.eclipselabs.mscript.language.functionmodel.EquationPart;
 import org.eclipselabs.mscript.language.functionmodel.Function;
-import org.eclipselabs.mscript.language.functionmodel.VariableReference;
+import org.eclipselabs.mscript.language.functionmodel.VariableStep;
 import org.eclipselabs.mscript.language.functionmodel.util.FunctionConstructor;
 import org.eclipselabs.mscript.language.interpreter.value.IValue;
 
@@ -70,30 +70,30 @@ public class FunctorConstructor {
 		
 		for (Equation equation : functor.getFunction().getEquations()) {
 			for (EquationPart equationPart : equation.getLeftHandSide().getParts()) {
-				String name = equationPart.getVariableReference().getName();
+				String name = equationPart.getVariableStep().getReference().getName();
 				IVariable variable = functor.getVariable(name);
 				if (variable != null) {
-					variable.ensureStep(equationPart.getVariableReference().getStep());
+					variable.ensureStep(equationPart.getVariableStep().getIndex());
 				}
 			}
 			for (EquationPart equationPart : equation.getRightHandSide().getParts()) {
-				String name = equationPart.getVariableReference().getName();
+				String name = equationPart.getVariableStep().getReference().getName();
 				IVariable variable = functor.getVariable(name);
 				if (variable != null) {
-					variable.ensureStep(equationPart.getVariableReference().getStep());
+					variable.ensureStep(equationPart.getVariableStep().getIndex());
 				}
 			}
 		}
 
 		for (Equation equation : functor.getFunction().getEquations()) {
 			if (!equation.getLeftHandSide().getParts().isEmpty()) {
-				VariableReference variableReference = equation.getLeftHandSide().getParts().get(0).getVariableReference();
-				if (variableReference.isInitial()) {
-					String name = variableReference.getName();
+				VariableStep variableStep = equation.getLeftHandSide().getParts().get(0).getVariableStep();
+				if (variableStep.isInitial()) {
+					String name = variableStep.getReference().getName();
 					IVariable variable = functor.getVariable(name);
 					if (variable != null) {
 						IValue rhsValue = new ExpressionValueEvaluator(context).doSwitch(equation.getDefinition().getRightHandSide());
-						variable.setValue(variableReference.getStep(), rhsValue);
+						variable.setValue(variableStep.getIndex(), rhsValue);
 					}
 				}
 			}

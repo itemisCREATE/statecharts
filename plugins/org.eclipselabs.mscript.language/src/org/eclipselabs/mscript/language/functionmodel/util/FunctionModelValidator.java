@@ -17,8 +17,9 @@ import org.eclipselabs.mscript.language.functionmodel.EquationPart;
 import org.eclipselabs.mscript.language.functionmodel.EquationSide;
 import org.eclipselabs.mscript.language.functionmodel.Function;
 import org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage;
+import org.eclipselabs.mscript.language.functionmodel.VariableKind;
 import org.eclipselabs.mscript.language.functionmodel.VariableReference;
-import org.eclipselabs.mscript.language.functionmodel.VariableReferenceKind;
+import org.eclipselabs.mscript.language.functionmodel.VariableStep;
 
 /**
  * <!-- begin-user-doc -->
@@ -47,22 +48,6 @@ public class FunctionModelValidator extends EObjectValidator {
 	public static final String DIAGNOSTIC_SOURCE = "org.eclipselabs.mscript.language.functionmodel";
 
 	/**
-	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Equation Exists For Each Output' of 'Function'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static final int FUNCTION__EQUATION_EXISTS_FOR_EACH_OUTPUT = 2;
-
-	/**
-	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Equation Exists For Each Step' of 'Function'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static final int FUNCTION__EQUATION_EXISTS_FOR_EACH_STEP = 3;
-
-	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Has No Duplicate Equations' of 'Function'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -71,12 +56,36 @@ public class FunctionModelValidator extends EObjectValidator {
 	public static final int FUNCTION__HAS_NO_DUPLICATE_EQUATIONS = 1;
 
 	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Has No Cyclic Equations' of 'Function'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int FUNCTION__HAS_NO_CYCLIC_EQUATIONS = 2;
+
+	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Has Equations For Each Output' of 'Function'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int FUNCTION__HAS_EQUATIONS_FOR_EACH_OUTPUT = 3;
+
+	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Has Equations For Each Variable Reference' of 'Function'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int FUNCTION__HAS_EQUATIONS_FOR_EACH_VARIABLE_REFERENCE = 4;
+
+	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Left Hand Side Is Single Variable Reference' of 'Equation'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int EQUATION__LEFT_HAND_SIDE_IS_SINGLE_VARIABLE_REFERENCE = 4;
+	public static final int EQUATION__LEFT_HAND_SIDE_IS_SINGLE_VARIABLE_REFERENCE = 5;
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants.
@@ -84,7 +93,7 @@ public class FunctionModelValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 4;
+	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 5;
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants in a derived class.
@@ -134,8 +143,10 @@ public class FunctionModelValidator extends EObjectValidator {
 				return validateEquationPart((EquationPart)value, diagnostics, context);
 			case FunctionModelPackage.VARIABLE_REFERENCE:
 				return validateVariableReference((VariableReference)value, diagnostics, context);
-			case FunctionModelPackage.VARIABLE_REFERENCE_KIND:
-				return validateVariableReferenceKind((VariableReferenceKind)value, diagnostics, context);
+			case FunctionModelPackage.VARIABLE_STEP:
+				return validateVariableStep((VariableStep)value, diagnostics, context);
+			case FunctionModelPackage.VARIABLE_KIND:
+				return validateVariableKind((VariableKind)value, diagnostics, context);
 			default:
 				return true;
 		}
@@ -157,29 +168,10 @@ public class FunctionModelValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(function, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(function, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFunction_hasNoDuplicateEquations(function, diagnostics, context);
-		if (result || diagnostics != null) result &= validateFunction_equationExistsForEachOutput(function, diagnostics, context);
-		if (result || diagnostics != null) result &= validateFunction_equationExistsForEachStep(function, diagnostics, context);
+		if (result || diagnostics != null) result &= validateFunction_hasNoCyclicEquations(function, diagnostics, context);
+		if (result || diagnostics != null) result &= validateFunction_hasEquationsForEachOutput(function, diagnostics, context);
+		if (result || diagnostics != null) result &= validateFunction_hasEquationsForEachVariableReference(function, diagnostics, context);
 		return result;
-	}
-
-	/**
-	 * Validates the equationExistsForEachOutput constraint of '<em>Function</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateFunction_equationExistsForEachOutput(Function function, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return function.equationExistsForEachOutput(diagnostics, context);
-	}
-
-	/**
-	 * Validates the equationExistsForEachStep constraint of '<em>Function</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateFunction_equationExistsForEachStep(Function function, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return function.equationExistsForEachStep(diagnostics, context);
 	}
 
 	/**
@@ -190,6 +182,36 @@ public class FunctionModelValidator extends EObjectValidator {
 	 */
 	public boolean validateFunction_hasNoDuplicateEquations(Function function, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return function.hasNoDuplicateEquations(diagnostics, context);
+	}
+
+	/**
+	 * Validates the hasNoCyclicEquations constraint of '<em>Function</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateFunction_hasNoCyclicEquations(Function function, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return function.hasNoCyclicEquations(diagnostics, context);
+	}
+
+	/**
+	 * Validates the hasEquationsForEachOutput constraint of '<em>Function</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateFunction_hasEquationsForEachOutput(Function function, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return function.hasEquationsForEachOutput(diagnostics, context);
+	}
+
+	/**
+	 * Validates the hasEquationsForEachVariableReference constraint of '<em>Function</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateFunction_hasEquationsForEachVariableReference(Function function, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return function.hasEquationsForEachVariableReference(diagnostics, context);
 	}
 
 	/**
@@ -253,7 +275,16 @@ public class FunctionModelValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateVariableReferenceKind(VariableReferenceKind variableReferenceKind, DiagnosticChain diagnostics, Map<Object, Object> context) {
+	public boolean validateVariableStep(VariableStep variableStep, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(variableStep, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateVariableKind(VariableKind variableKind, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return true;
 	}
 

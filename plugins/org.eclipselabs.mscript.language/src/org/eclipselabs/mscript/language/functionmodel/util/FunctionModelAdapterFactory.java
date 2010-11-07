@@ -16,6 +16,7 @@ import org.eclipselabs.mscript.language.functionmodel.EquationSide;
 import org.eclipselabs.mscript.language.functionmodel.Function;
 import org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage;
 import org.eclipselabs.mscript.language.functionmodel.VariableReference;
+import org.eclipselabs.mscript.language.functionmodel.VariableStep;
 
 /**
  * <!-- begin-user-doc -->
@@ -92,6 +93,10 @@ public class FunctionModelAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseVariableReference(VariableReference object) {
 				return createVariableReferenceAdapter();
+			}
+			@Override
+			public Adapter caseVariableStep(VariableStep object) {
+				return createVariableStepAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -180,6 +185,20 @@ public class FunctionModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createVariableReferenceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.functionmodel.VariableStep <em>Variable Step</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipselabs.mscript.language.functionmodel.VariableStep
+	 * @generated
+	 */
+	public Adapter createVariableStepAdapter() {
 		return null;
 	}
 

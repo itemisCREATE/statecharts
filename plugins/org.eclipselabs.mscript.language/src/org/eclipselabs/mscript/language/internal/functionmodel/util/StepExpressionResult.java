@@ -17,29 +17,29 @@ package org.eclipselabs.mscript.language.internal.functionmodel.util;
  */
 public class StepExpressionResult {
 
-	private int step;
-	private boolean absolute;
+	private int index;
+	private boolean initial;
 	
 	/**
 	 * 
 	 */
-	public StepExpressionResult(int step, boolean absolute) {
-		this.step = step;
-		this.absolute = absolute;
+	public StepExpressionResult(int index, boolean initial) {
+		this.index = index;
+		this.initial = initial;
 	}
 	
 	/**
-	 * @return the step
+	 * @return the step index
 	 */
-	public int getStep() {
-		return step;
+	public int getIndex() {
+		return index;
 	}
 	
 	/**
-	 * @return the absolute
+	 * @return the initial
 	 */
-	public boolean isAbsolute() {
-		return absolute;
+	public boolean isInitial() {
+		return initial;
 	}
 	
 }

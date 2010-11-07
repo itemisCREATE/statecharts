@@ -22,8 +22,9 @@ import org.eclipselabs.mscript.language.functionmodel.EquationSide;
 import org.eclipselabs.mscript.language.functionmodel.Function;
 import org.eclipselabs.mscript.language.functionmodel.FunctionModelFactory;
 import org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage;
+import org.eclipselabs.mscript.language.functionmodel.VariableKind;
 import org.eclipselabs.mscript.language.functionmodel.VariableReference;
-import org.eclipselabs.mscript.language.functionmodel.VariableReferenceKind;
+import org.eclipselabs.mscript.language.functionmodel.VariableStep;
 import org.eclipselabs.mscript.language.functionmodel.util.FunctionModelValidator;
 
 /**
@@ -73,7 +74,14 @@ public class FunctionModelPackageImpl extends EPackageImpl implements FunctionMo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EEnum variableReferenceKindEEnum = null;
+	private EClass variableStepEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum variableKindEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -297,8 +305,8 @@ public class FunctionModelPackageImpl extends EPackageImpl implements FunctionMo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEquationPart_VariableReference() {
-		return (EReference)equationPartEClass.getEStructuralFeatures().get(2);
+	public EReference getEquationPart_FeatureCall() {
+		return (EReference)equationPartEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -306,8 +314,8 @@ public class FunctionModelPackageImpl extends EPackageImpl implements FunctionMo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEquationPart_FeatureCall() {
-		return (EReference)equationPartEClass.getEStructuralFeatures().get(1);
+	public EReference getEquationPart_VariableStep() {
+		return (EReference)equationPartEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -351,8 +359,8 @@ public class FunctionModelPackageImpl extends EPackageImpl implements FunctionMo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getVariableReference_Step() {
-		return (EAttribute)variableReferenceEClass.getEStructuralFeatures().get(3);
+	public EReference getVariableReference_Steps() {
+		return (EReference)variableReferenceEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -360,8 +368,8 @@ public class FunctionModelPackageImpl extends EPackageImpl implements FunctionMo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getVariableReference_Initial() {
-		return (EAttribute)variableReferenceEClass.getEStructuralFeatures().get(4);
+	public EClass getVariableStep() {
+		return variableStepEClass;
 	}
 
 	/**
@@ -369,8 +377,8 @@ public class FunctionModelPackageImpl extends EPackageImpl implements FunctionMo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getVariableReference_UsingEquationParts() {
-		return (EReference)variableReferenceEClass.getEStructuralFeatures().get(5);
+	public EReference getVariableStep_Reference() {
+		return (EReference)variableStepEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -378,8 +386,35 @@ public class FunctionModelPackageImpl extends EPackageImpl implements FunctionMo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EEnum getVariableReferenceKind() {
-		return variableReferenceKindEEnum;
+	public EAttribute getVariableStep_Index() {
+		return (EAttribute)variableStepEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getVariableStep_Initial() {
+		return (EAttribute)variableStepEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getVariableStep_UsingEquationParts() {
+		return (EReference)variableStepEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getVariableKind() {
+		return variableKindEEnum;
 	}
 
 	/**
@@ -430,18 +465,22 @@ public class FunctionModelPackageImpl extends EPackageImpl implements FunctionMo
 		equationPartEClass = createEClass(EQUATION_PART);
 		createEReference(equationPartEClass, EQUATION_PART__SIDE);
 		createEReference(equationPartEClass, EQUATION_PART__FEATURE_CALL);
-		createEReference(equationPartEClass, EQUATION_PART__VARIABLE_REFERENCE);
+		createEReference(equationPartEClass, EQUATION_PART__VARIABLE_STEP);
 
 		variableReferenceEClass = createEClass(VARIABLE_REFERENCE);
 		createEReference(variableReferenceEClass, VARIABLE_REFERENCE__FUNCTION);
 		createEAttribute(variableReferenceEClass, VARIABLE_REFERENCE__NAME);
 		createEAttribute(variableReferenceEClass, VARIABLE_REFERENCE__KIND);
-		createEAttribute(variableReferenceEClass, VARIABLE_REFERENCE__STEP);
-		createEAttribute(variableReferenceEClass, VARIABLE_REFERENCE__INITIAL);
-		createEReference(variableReferenceEClass, VARIABLE_REFERENCE__USING_EQUATION_PARTS);
+		createEReference(variableReferenceEClass, VARIABLE_REFERENCE__STEPS);
+
+		variableStepEClass = createEClass(VARIABLE_STEP);
+		createEReference(variableStepEClass, VARIABLE_STEP__REFERENCE);
+		createEAttribute(variableStepEClass, VARIABLE_STEP__INDEX);
+		createEAttribute(variableStepEClass, VARIABLE_STEP__INITIAL);
+		createEReference(variableStepEClass, VARIABLE_STEP__USING_EQUATION_PARTS);
 
 		// Create enums
-		variableReferenceKindEEnum = createEEnum(VARIABLE_REFERENCE_KIND);
+		variableKindEEnum = createEEnum(VARIABLE_KIND);
 	}
 
 	/**
@@ -482,7 +521,10 @@ public class FunctionModelPackageImpl extends EPackageImpl implements FunctionMo
 		initEReference(getFunction_Equations(), this.getEquation(), this.getEquation_Function(), "equations", null, 0, -1, Function.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFunction_VariableReferences(), this.getVariableReference(), this.getVariableReference_Function(), "variableReferences", null, 0, -1, Function.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		EOperation op = addEOperation(functionEClass, ecorePackage.getEBoolean(), "hasNoDuplicateEquations", 1, 1, IS_UNIQUE, IS_ORDERED);
+		EOperation op = addEOperation(functionEClass, this.getVariableReference(), "getVariableReference", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "name", 1, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(functionEClass, ecorePackage.getEBoolean(), "hasNoDuplicateEquations", 1, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
 		EGenericType g1 = createEGenericType(ecorePackage.getEMap());
 		EGenericType g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -491,7 +533,7 @@ public class FunctionModelPackageImpl extends EPackageImpl implements FunctionMo
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(functionEClass, ecorePackage.getEBoolean(), "equationExistsForEachOutput", 1, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(functionEClass, ecorePackage.getEBoolean(), "hasNoCyclicEquations", 1, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -500,7 +542,16 @@ public class FunctionModelPackageImpl extends EPackageImpl implements FunctionMo
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(functionEClass, ecorePackage.getEBoolean(), "equationExistsForEachStep", 1, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(functionEClass, ecorePackage.getEBoolean(), "hasEquationsForEachOutput", 1, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(functionEClass, ecorePackage.getEBoolean(), "hasEquationsForEachVariableReference", 1, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -533,25 +584,33 @@ public class FunctionModelPackageImpl extends EPackageImpl implements FunctionMo
 		initEClass(equationPartEClass, EquationPart.class, "EquationPart", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getEquationPart_Side(), this.getEquationSide(), this.getEquationSide_Parts(), "side", null, 0, 1, EquationPart.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEquationPart_FeatureCall(), theAstPackage.getFeatureCall(), null, "featureCall", null, 1, 1, EquationPart.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getEquationPart_VariableReference(), this.getVariableReference(), this.getVariableReference_UsingEquationParts(), "variableReference", null, 1, 1, EquationPart.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEquationPart_VariableStep(), this.getVariableStep(), this.getVariableStep_UsingEquationParts(), "variableStep", null, 1, 1, EquationPart.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(variableReferenceEClass, VariableReference.class, "VariableReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getVariableReference_Function(), this.getFunction(), this.getFunction_VariableReferences(), "function", null, 1, 1, VariableReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getVariableReference_Name(), ecorePackage.getEString(), "name", null, 0, 1, VariableReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getVariableReference_Kind(), this.getVariableReferenceKind(), "kind", null, 0, 1, VariableReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getVariableReference_Step(), ecorePackage.getEInt(), "step", null, 0, 1, VariableReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getVariableReference_Initial(), ecorePackage.getEBoolean(), "initial", null, 0, 1, VariableReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getVariableReference_UsingEquationParts(), this.getEquationPart(), this.getEquationPart_VariableReference(), "usingEquationParts", null, 0, -1, VariableReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getVariableReference_Kind(), this.getVariableKind(), "kind", null, 0, 1, VariableReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getVariableReference_Steps(), this.getVariableStep(), this.getVariableStep_Reference(), "steps", null, 0, -1, VariableReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		op = addEOperation(variableReferenceEClass, this.getVariableStep(), "getStep", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEInt(), "index", 1, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEBoolean(), "initial", 1, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(variableStepEClass, VariableStep.class, "VariableStep", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getVariableStep_Reference(), this.getVariableReference(), this.getVariableReference_Steps(), "reference", null, 0, 1, VariableStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getVariableStep_Index(), ecorePackage.getEInt(), "index", null, 0, 1, VariableStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getVariableStep_Initial(), ecorePackage.getEBoolean(), "initial", null, 0, 1, VariableStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getVariableStep_UsingEquationParts(), this.getEquationPart(), this.getEquationPart_VariableStep(), "usingEquationParts", null, 0, -1, VariableStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
-		initEEnum(variableReferenceKindEEnum, VariableReferenceKind.class, "VariableReferenceKind");
-		addEEnumLiteral(variableReferenceKindEEnum, VariableReferenceKind.UNKNOWN);
-		addEEnumLiteral(variableReferenceKindEEnum, VariableReferenceKind.TEMPLATE_PARAMETER);
-		addEEnumLiteral(variableReferenceKindEEnum, VariableReferenceKind.INPUT_PARAMETER);
-		addEEnumLiteral(variableReferenceKindEEnum, VariableReferenceKind.OUTPUT_PARAMETER);
-		addEEnumLiteral(variableReferenceKindEEnum, VariableReferenceKind.STATE_VARIABLE);
-		addEEnumLiteral(variableReferenceKindEEnum, VariableReferenceKind.CONSTANT);
-		addEEnumLiteral(variableReferenceKindEEnum, VariableReferenceKind.FUNCTOR);
+		initEEnum(variableKindEEnum, VariableKind.class, "VariableKind");
+		addEEnumLiteral(variableKindEEnum, VariableKind.UNKNOWN);
+		addEEnumLiteral(variableKindEEnum, VariableKind.TEMPLATE_PARAMETER);
+		addEEnumLiteral(variableKindEEnum, VariableKind.INPUT_PARAMETER);
+		addEEnumLiteral(variableKindEEnum, VariableKind.OUTPUT_PARAMETER);
+		addEEnumLiteral(variableKindEEnum, VariableKind.STATE_VARIABLE);
+		addEEnumLiteral(variableKindEEnum, VariableKind.CONSTANT);
+		addEEnumLiteral(variableKindEEnum, VariableKind.FUNCTOR);
 
 		// Create resource
 		createResource(eNS_URI);

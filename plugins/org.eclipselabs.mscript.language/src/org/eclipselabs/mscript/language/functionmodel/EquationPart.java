@@ -19,7 +19,7 @@ import org.eclipselabs.mscript.language.ast.FeatureCall;
  * <ul>
  *   <li>{@link org.eclipselabs.mscript.language.functionmodel.EquationPart#getSide <em>Side</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.functionmodel.EquationPart#getFeatureCall <em>Feature Call</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.functionmodel.EquationPart#getVariableReference <em>Variable Reference</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.functionmodel.EquationPart#getVariableStep <em>Variable Step</em>}</li>
  * </ul>
  * </p>
  *
@@ -57,34 +57,6 @@ public interface EquationPart extends EObject {
 	void setSide(EquationSide value);
 
 	/**
-	 * Returns the value of the '<em><b>Variable Reference</b></em>' reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipselabs.mscript.language.functionmodel.VariableReference#getUsingEquationParts <em>Using Equation Parts</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Variable Reference</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Variable Reference</em>' reference.
-	 * @see #setVariableReference(VariableReference)
-	 * @see org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage#getEquationPart_VariableReference()
-	 * @see org.eclipselabs.mscript.language.functionmodel.VariableReference#getUsingEquationParts
-	 * @model opposite="usingEquationParts" required="true"
-	 * @generated
-	 */
-	VariableReference getVariableReference();
-
-	/**
-	 * Sets the value of the '{@link org.eclipselabs.mscript.language.functionmodel.EquationPart#getVariableReference <em>Variable Reference</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Variable Reference</em>' reference.
-	 * @see #getVariableReference()
-	 * @generated
-	 */
-	void setVariableReference(VariableReference value);
-
-	/**
 	 * Returns the value of the '<em><b>Feature Call</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -109,5 +81,33 @@ public interface EquationPart extends EObject {
 	 * @generated
 	 */
 	void setFeatureCall(FeatureCall value);
+
+	/**
+	 * Returns the value of the '<em><b>Variable Step</b></em>' reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipselabs.mscript.language.functionmodel.VariableStep#getUsingEquationParts <em>Using Equation Parts</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Variable Step</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Variable Step</em>' reference.
+	 * @see #setVariableStep(VariableStep)
+	 * @see org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage#getEquationPart_VariableStep()
+	 * @see org.eclipselabs.mscript.language.functionmodel.VariableStep#getUsingEquationParts
+	 * @model opposite="usingEquationParts" required="true"
+	 * @generated
+	 */
+	VariableStep getVariableStep();
+
+	/**
+	 * Sets the value of the '{@link org.eclipselabs.mscript.language.functionmodel.EquationPart#getVariableStep <em>Variable Step</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Variable Step</em>' reference.
+	 * @see #getVariableStep()
+	 * @generated
+	 */
+	void setVariableStep(VariableStep value);
 
 } // EquationPart

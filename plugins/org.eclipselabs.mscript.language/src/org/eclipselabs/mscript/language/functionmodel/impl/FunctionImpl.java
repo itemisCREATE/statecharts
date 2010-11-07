@@ -8,9 +8,7 @@ package org.eclipselabs.mscript.language.functionmodel.impl;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -22,8 +20,11 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.FunctionDefinition;
 import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
 import org.eclipselabs.mscript.language.functionmodel.Equation;
@@ -31,7 +32,7 @@ import org.eclipselabs.mscript.language.functionmodel.EquationPart;
 import org.eclipselabs.mscript.language.functionmodel.Function;
 import org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage;
 import org.eclipselabs.mscript.language.functionmodel.VariableReference;
-import org.eclipselabs.mscript.language.functionmodel.VariableReferenceKind;
+import org.eclipselabs.mscript.language.functionmodel.VariableStep;
 import org.eclipselabs.mscript.language.functionmodel.util.FunctionModelValidator;
 import org.eclipselabs.mscript.language.internal.util.VariableReferenceDescriptor;
 
@@ -167,37 +168,51 @@ public class FunctionImpl extends EObjectImpl implements Function {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	public VariableReference getVariableReference(String name) {
+		for (VariableReference variableReference : getVariableReferences()) {
+			if (name.equals(variableReference.getName())) {
+				return variableReference;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
 	public boolean hasNoDuplicateEquations(DiagnosticChain diagnostics, Map<Object, Object> context) {
 		boolean result = true;
 		Map<VariableReferenceDescriptor, EquationPart> descriptors = new HashMap<VariableReferenceDescriptor, EquationPart>();
 		for (Equation equation : getEquations()) {
 			if (!equation.getLeftHandSide().getParts().isEmpty()) {
 				EquationPart equationPart = equation.getLeftHandSide().getParts().get(0);
-				VariableReference variableReference = equationPart.getVariableReference();
-				VariableReferenceDescriptor descriptor = new VariableReferenceDescriptor(variableReference.getName(), variableReference.getStep());
+				VariableStep variableStep = equationPart.getVariableStep();
+				VariableReferenceDescriptor descriptor = new VariableReferenceDescriptor(variableStep.getReference().getName(), variableStep.getIndex());
 				EquationPart previousEquationPart = descriptors.put(descriptor, equationPart);
 				if (previousEquationPart != null) {
 					if (diagnostics != null) {
 						StringBuilder message = new StringBuilder();
 						message.append("Duplicate equation for ");
-						message.append(variableReference.getName());
+						message.append(variableStep.getReference().getName());
 						message.append("(n");
-						if (variableReference.getStep() >= 0) {
+						if (variableStep.getIndex() >= 0) {
 							message.append("+");
 						}
-						message.append(variableReference.getStep());
+						message.append(variableStep.getIndex());
 						message.append(")");
 						
 						if (result) {
 							diagnostics.add(new BasicDiagnostic(Diagnostic.ERROR,
 									FunctionModelValidator.DIAGNOSTIC_SOURCE,
-									FunctionModelValidator.FUNCTION__EQUATION_EXISTS_FOR_EACH_OUTPUT,
+									FunctionModelValidator.FUNCTION__HAS_NO_DUPLICATE_EQUATIONS,
 									message.toString(),
 									new Object[] { previousEquationPart.getFeatureCall() }));
 						}
 						diagnostics.add(new BasicDiagnostic(Diagnostic.ERROR,
 								FunctionModelValidator.DIAGNOSTIC_SOURCE,
-								FunctionModelValidator.FUNCTION__EQUATION_EXISTS_FOR_EACH_OUTPUT,
+								FunctionModelValidator.FUNCTION__HAS_NO_DUPLICATE_EQUATIONS,
 								message.toString(),
 								new Object[] { equationPart.getFeatureCall() }));
 					}
@@ -211,30 +226,47 @@ public class FunctionImpl extends EObjectImpl implements Function {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean hasNoCyclicEquations(DiagnosticChain diagnostics, Map<Object, Object> context) {
+		// TODO: implement this method
+		// -> specify the condition that violates the invariant
+		// -> verify the details of the diagnostic, including severity and message
+		// Ensure that you remove @generated or mark it @generated NOT
+		if (false) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(new BasicDiagnostic
+						(Diagnostic.ERROR,
+						 FunctionModelValidator.DIAGNOSTIC_SOURCE,
+						 FunctionModelValidator.FUNCTION__HAS_NO_CYCLIC_EQUATIONS,
+						 EcorePlugin.INSTANCE.getString("_UI_GenericInvariant_diagnostic", new Object[] { "hasNoCyclicEquations", EObjectValidator.getObjectLabel(this, context) }),
+						 new Object [] { this }));
+			}
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public boolean equationExistsForEachOutput(DiagnosticChain diagnostics, Map<Object, Object> context) {
-		Set<String> outputs = new HashSet<String>();
-		for (Equation equation : getEquations()) {
-			if (!equation.getLeftHandSide().getParts().isEmpty()) {
-				VariableReference variableReference = equation.getLeftHandSide().getParts().get(0).getVariableReference();
-				if (variableReference.getKind() == VariableReferenceKind.OUTPUT_PARAMETER
-						&& variableReference.getStep() == 0
-						&& !variableReference.isInitial()) {
-					outputs.add(variableReference.getName());
-				}
-			}
-		}
+	public boolean hasEquationsForEachOutput(DiagnosticChain diagnostics, Map<Object, Object> context) {
 		boolean result = true;
 		for (ParameterDeclaration parameterDeclaration : getDefinition().getOutputParameters()) {
-			if (!outputs.contains(parameterDeclaration.getName())) {
+			VariableReference variableReference = getVariableReference(parameterDeclaration.getName());
+			if (variableReference != null) {
+				hasPrecedentEquationsFor(variableReference, 0, diagnostics);
+			} else {
 				if (diagnostics != null) {
 					diagnostics.add(new BasicDiagnostic(
 							Diagnostic.ERROR,
 							FunctionModelValidator.DIAGNOSTIC_SOURCE,
-							FunctionModelValidator.FUNCTION__EQUATION_EXISTS_FOR_EACH_OUTPUT,
-							"No step-n equation for output '" + parameterDeclaration.getName() + "' specified",
-							new Object [] { parameterDeclaration }));
+							FunctionModelValidator.FUNCTION__HAS_EQUATIONS_FOR_EACH_OUTPUT,
+							"No equation specified for output '" + parameterDeclaration.getName() + "'",
+							new Object[] { parameterDeclaration }));
 				}
 				result = false;
 			}
@@ -247,32 +279,122 @@ public class FunctionImpl extends EObjectImpl implements Function {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public boolean equationExistsForEachStep(DiagnosticChain diagnostics, Map<Object, Object> context) {
-		for (Equation equation : getEquations()) {
-			for (EquationPart equationPart : equation.getRightHandSide().getParts()) {
-				VariableReference variableReference = equationPart.getVariableReference();
-				if (!variableReference.isInitial() && variableReference.getStep() <= 0) {
-					for (int i = 0; i >= variableReference.getStep(); --i) {
-						// check initials
+	public boolean hasEquationsForEachVariableReference(DiagnosticChain diagnostics, Map<Object, Object> context) {
+		boolean result = true;
+		for (VariableReference variableReference : getVariableReferences()) {
+			for (VariableStep variableStep : variableReference.getSteps()) {
+				for (EquationPart equationPart : variableStep.getUsingEquationParts()) {
+					if (equationPart.getSide() == equationPart.getSide().getEquation().getRightHandSide()) {
+						if (!hasEquationsFor(equationPart.getVariableStep(), diagnostics)) {
+							result = false;
+						}
+						break;
 					}
 				}
 			}
 		}
-//		if (false) {
-//			if (diagnostics != null) {
-//				diagnostics.add
-//					(new BasicDiagnostic
-//						(Diagnostic.ERROR,
-//						 FunctionModelValidator.DIAGNOSTIC_SOURCE,
-//						 FunctionModelValidator.FUNCTION__EQUATION_EXISTS_FOR_EACH_STEP,
-//						 EcorePlugin.INSTANCE.getString("_UI_GenericInvariant_diagnostic", new Object[] { "equationExistsForEachStep", EObjectValidator.getObjectLabel(this, context) }),
-//						 new Object [] { this }));
-//			}
-//			return false;
-//		}
+		return result;
+	}
+	
+	private boolean hasEquationsFor(VariableStep variableStep, DiagnosticChain diagnostics) {
+		int index = variableStep.getIndex();
+		switch (variableStep.getReference().getKind()) {
+		case INPUT_PARAMETER:
+			// index == 0 => always ok
+			// index > 0  => error: future input values cannot be referenced; checked by other validation
+			if (index < 0) {
+				return hasEquationForEachStep(variableStep.getReference(), -1, variableStep.getIndex(), true, diagnostics);
+			}
+			break;
+		case OUTPUT_PARAMETER:
+		case STATE_VARIABLE:
+			return hasPrecedentEquationsFor(variableStep.getReference(), index, diagnostics);
+		}
 		return true;
 	}
+	
+	private boolean hasPrecedentEquationsFor(VariableReference variableReference, int index, DiagnosticChain diagnostics) {
+		boolean ok = false;
+		for (VariableStep step : variableReference.getSteps()) {
+			if (!step.isInitial()) {
+				for (EquationPart equationPart : step.getUsingEquationParts()) {
+					if (equationPart.getSide() == equationPart.getSide().getEquation().getLeftHandSide()) {
+						if (step.getIndex() >= index) {
+							ok = hasEquationForEachStep(variableReference, step.getIndex(), index, false, diagnostics);
+							if (!ok) {
+								return ok;
+							}
+							break;
+						}
+					}
+				}
+			}
+		}
+		if (!ok && diagnostics != null) {
+			String message = String.format(
+					"No '%s(n+i) = ...' equation with i >= %d specified",
+					variableReference.getName(),
+					index);
+			diagnostics.add(new BasicDiagnostic(
+					Diagnostic.ERROR,
+					FunctionModelValidator.DIAGNOSTIC_SOURCE,
+					FunctionModelValidator.FUNCTION__HAS_EQUATIONS_FOR_EACH_VARIABLE_REFERENCE,
+					message,
+					new Object[] { getDefinition(), AstPackage.FUNCTION_DEFINITION__NAME }));
+		}
+		return ok;
+	}
+	
+	private boolean hasEquationForEachStep(VariableReference variableReference, int beginStepIndex, int endStepIndex, boolean initialOnly, DiagnosticChain diagnostics) {
+		if (beginStepIndex > endStepIndex) {
+			int temp = beginStepIndex;
+			beginStepIndex = endStepIndex;
+			endStepIndex = temp;
+		}
+		boolean result = true;
+		for (int i = beginStepIndex; i <= endStepIndex; ++i) {
+			if (!hasEquationForStep(variableReference, i, initialOnly)) {
+				if (diagnostics != null) {
+					String message;
+					if (initialOnly) {
+						message = String.format(
+								"No '%s(%d) = ...' equation specified",
+								variableReference.getName(),
+								i);
+					} else {
+						message = String.format(
+								"No '%s(%d) = ...' or '%s(n%s) = ...' equation specified",
+								variableReference.getName(),
+								i,
+								variableReference.getName(),
+								i == 0 ? "" : (i < 0 ? "" : "+") + Integer.toString(i));
+					}
+					diagnostics.add(new BasicDiagnostic(
+							Diagnostic.ERROR,
+							FunctionModelValidator.DIAGNOSTIC_SOURCE,
+							FunctionModelValidator.FUNCTION__HAS_EQUATIONS_FOR_EACH_VARIABLE_REFERENCE,
+							message,
+							new Object[] { getDefinition(), AstPackage.FUNCTION_DEFINITION__NAME }));
+				}
+				result = false;
+			}
+		}
+		return result;
+	}
 
+	private boolean hasEquationForStep(VariableReference variableReference, int stepIndex, boolean initialOnly) {
+		for (VariableStep variableStep : variableReference.getSteps()) {
+			if (variableStep.getIndex() == stepIndex && (!initialOnly || variableStep.isInitial())) {
+				for (EquationPart equationPart : variableStep.getUsingEquationParts()) {
+					if (equationPart.getSide() == equationPart.getSide().getEquation().getLeftHandSide()) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
