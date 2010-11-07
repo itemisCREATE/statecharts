@@ -51,6 +51,8 @@ import org.eclipselabs.mscript.language.internal.util.TreeIterator;
 public class FunctionConstructor {
 
 	public Function construct(FunctionDefinition functionDefinition, DiagnosticChain diagnostics) {
+		validate(functionDefinition, diagnostics);
+		
 		Function function = FunctionModelFactory.eINSTANCE.createFunction();
 		function.setDefinition(functionDefinition);
 
@@ -77,6 +79,27 @@ public class FunctionConstructor {
 		}
 		
 		return function;
+	}
+	
+	protected boolean validate(FunctionDefinition functionDefinition, DiagnosticChain diagnostics) {
+		boolean result = true;
+		
+		if (!functionDefinition.isStateful()) {
+			if (!functionDefinition.getTemplateParameters().isEmpty()) {
+				diagnostics.add(new EObjectDiagnostic(Diagnostic.ERROR, "Stateless functions must not declare template parameters", functionDefinition, AstPackage.FUNCTION_DEFINITION__NAME));
+				result = false;
+			}
+			if (!functionDefinition.getStateVariables().isEmpty()) {
+				diagnostics.add(new EObjectDiagnostic(Diagnostic.ERROR, "Stateless functions must not declare state variables", functionDefinition, AstPackage.FUNCTION_DEFINITION__NAME));
+				result = false;
+			}
+			if (!functionDefinition.getFunctors().isEmpty()) {
+				diagnostics.add(new EObjectDiagnostic(Diagnostic.ERROR, "Stateless functions must not declare functors", functionDefinition, AstPackage.FUNCTION_DEFINITION__NAME));
+				result = false;
+			}
+		}
+		
+		return result;
 	}
 		
 	private static class EquationSideInitializer extends AstSwitch<Boolean> {
