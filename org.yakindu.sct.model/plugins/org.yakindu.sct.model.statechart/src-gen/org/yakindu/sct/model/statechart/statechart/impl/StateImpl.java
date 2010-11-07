@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.yakindu.sct.model.statechart.statechart.ExpressionElement;
 import org.yakindu.sct.model.statechart.statechart.NamedElement;
 import org.yakindu.sct.model.statechart.statechart.Region;
 import org.yakindu.sct.model.statechart.statechart.State;
@@ -36,8 +37,8 @@ import org.yakindu.sct.model.statechart.statechart.StatechartPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.yakindu.sct.model.statechart.statechart.impl.StateImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.yakindu.sct.model.statechart.statechart.impl.StateImpl#getRegions <em>Regions</em>}</li>
  *   <li>{@link org.yakindu.sct.model.statechart.statechart.impl.StateImpl#getExpression <em>Expression</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.statechart.statechart.impl.StateImpl#getRegions <em>Regions</em>}</li>
  * </ul>
  * </p>
  *
@@ -64,16 +65,6 @@ public class StateImpl extends VertexImpl implements State {
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getRegions() <em>Regions</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getRegions()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Region> regions;
-
-	/**
 	 * The default value of the '{@link #getExpression() <em>Expression</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -91,6 +82,15 @@ public class StateImpl extends VertexImpl implements State {
 	 * @ordered
 	 */
 	protected String expression = EXPRESSION_EDEFAULT;
+	/**
+	 * The cached value of the '{@link #getRegions() <em>Regions</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRegions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Region> regions;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -189,10 +189,10 @@ public class StateImpl extends VertexImpl implements State {
 		switch (featureID) {
 			case StatechartPackage.STATE__NAME:
 				return getName();
-			case StatechartPackage.STATE__REGIONS:
-				return getRegions();
 			case StatechartPackage.STATE__EXPRESSION:
 				return getExpression();
+			case StatechartPackage.STATE__REGIONS:
+				return getRegions();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -209,12 +209,12 @@ public class StateImpl extends VertexImpl implements State {
 			case StatechartPackage.STATE__NAME:
 				setName((String)newValue);
 				return;
+			case StatechartPackage.STATE__EXPRESSION:
+				setExpression((String)newValue);
+				return;
 			case StatechartPackage.STATE__REGIONS:
 				getRegions().clear();
 				getRegions().addAll((Collection<? extends Region>)newValue);
-				return;
-			case StatechartPackage.STATE__EXPRESSION:
-				setExpression((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -231,11 +231,11 @@ public class StateImpl extends VertexImpl implements State {
 			case StatechartPackage.STATE__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case StatechartPackage.STATE__REGIONS:
-				getRegions().clear();
-				return;
 			case StatechartPackage.STATE__EXPRESSION:
 				setExpression(EXPRESSION_EDEFAULT);
+				return;
+			case StatechartPackage.STATE__REGIONS:
+				getRegions().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -251,10 +251,10 @@ public class StateImpl extends VertexImpl implements State {
 		switch (featureID) {
 			case StatechartPackage.STATE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case StatechartPackage.STATE__REGIONS:
-				return regions != null && !regions.isEmpty();
 			case StatechartPackage.STATE__EXPRESSION:
 				return EXPRESSION_EDEFAULT == null ? expression != null : !EXPRESSION_EDEFAULT.equals(expression);
+			case StatechartPackage.STATE__REGIONS:
+				return regions != null && !regions.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -272,6 +272,12 @@ public class StateImpl extends VertexImpl implements State {
 				default: return -1;
 			}
 		}
+		if (baseClass == ExpressionElement.class) {
+			switch (derivedFeatureID) {
+				case StatechartPackage.STATE__EXPRESSION: return StatechartPackage.EXPRESSION_ELEMENT__EXPRESSION;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -285,6 +291,12 @@ public class StateImpl extends VertexImpl implements State {
 		if (baseClass == NamedElement.class) {
 			switch (baseFeatureID) {
 				case StatechartPackage.NAMED_ELEMENT__NAME: return StatechartPackage.STATE__NAME;
+				default: return -1;
+			}
+		}
+		if (baseClass == ExpressionElement.class) {
+			switch (baseFeatureID) {
+				case StatechartPackage.EXPRESSION_ELEMENT__EXPRESSION: return StatechartPackage.STATE__EXPRESSION;
 				default: return -1;
 			}
 		}

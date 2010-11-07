@@ -20,5 +20,5 @@ package org.yakindu.sct.model.statechart.statechart;
  * @model
  * @generated
  */
-public interface Choice extends Pseudostate {
+public interface Choice extends Pseudostate, ExpressionElement {
 } // Choice

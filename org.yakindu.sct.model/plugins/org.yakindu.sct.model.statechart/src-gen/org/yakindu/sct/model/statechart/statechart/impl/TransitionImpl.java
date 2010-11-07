@@ -40,7 +40,7 @@ import org.yakindu.sct.model.statechart.statechart.Vertex;
  *
  * @generated
  */
-public class TransitionImpl extends EObjectImpl implements Transition {
+public class TransitionImpl extends ExpressionElementImpl implements Transition {
 	/**
 	 * The cached value of the '{@link #getSource() <em>Source</em>}' reference.
 	 * <!-- begin-user-doc -->

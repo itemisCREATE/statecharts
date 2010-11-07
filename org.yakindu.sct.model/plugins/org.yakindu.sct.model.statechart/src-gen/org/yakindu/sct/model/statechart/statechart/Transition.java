@@ -29,7 +29,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface Transition extends EObject {
+public interface Transition extends ExpressionElement {
 	/**
 	 * Returns the value of the '<em><b>Source</b></em>' reference.
 	 * It is bidirectional and its opposite is '{@link org.yakindu.sct.model.statechart.statechart.Vertex#getOutgoingTransitions <em>Outgoing Transitions</em>}'.

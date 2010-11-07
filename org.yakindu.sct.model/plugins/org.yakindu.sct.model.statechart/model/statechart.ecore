@@ -23,7 +23,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="containingRegion" ordered="false"
         lowerBound="1" eType="#//Region" eOpposite="#//Region/vertices"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Transition">
+  <eClassifiers xsi:type="ecore:EClass" name="Transition" eSuperTypes="#//ExpressionElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" ordered="false"
         lowerBound="1" eType="#//Vertex" eOpposite="#//Vertex/outgoingTransitions"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="region" ordered="false"
@@ -31,10 +31,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" ordered="false"
         lowerBound="1" eType="#//Vertex" eOpposite="#//Vertex/incomingTransitions"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="State" eSuperTypes="#//Vertex #//NamedElement">
+  <eClassifiers xsi:type="ecore:EClass" name="State" eSuperTypes="#//Vertex #//NamedElement #//ExpressionElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="regions" ordered="false"
         upperBound="-1" eType="#//Region" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="expression" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Pseudostate" abstract="true" eSuperTypes="#//Vertex"/>
   <eClassifiers xsi:type="ecore:EClass" name="FinalState" eSuperTypes="#//State"/>
@@ -45,8 +44,11 @@
   <eClassifiers xsi:type="ecore:EClass" name="Fork" eSuperTypes="#//Pseudostate"/>
   <eClassifiers xsi:type="ecore:EClass" name="Join" eSuperTypes="#//Pseudostate"/>
   <eClassifiers xsi:type="ecore:EClass" name="Junction" eSuperTypes="#//Pseudostate"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Choice" eSuperTypes="#//Pseudostate"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Choice" eSuperTypes="#//Pseudostate #//ExpressionElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="NamedElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExpressionElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="expression" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>
