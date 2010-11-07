@@ -22,8 +22,8 @@ import org.eclipse.gef.tools.DirectEditManager;
 import org.eclipse.gmf.runtime.common.ui.services.parser.IParser;
 import org.eclipse.gmf.runtime.common.ui.services.parser.ParserOptions;
 import org.eclipse.gmf.runtime.diagram.core.listener.NotificationListener;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.CompartmentEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ITextAwareEditPart;
-import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.LabelDirectEditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.tools.TextDirectEditManager;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
@@ -36,22 +36,16 @@ import org.eclipse.swt.widgets.Text;
 import org.yakindu.sct.statechart.diagram.parser.AttributeParser;
 
 /**
- * This is a common abstract base class for all {@link ShapeNodeEditPart} which
- * want to be TextAware via implementation of {@link ITextAwareEditPart}.
+ * This is a common abstract base class for all Label Edit Parts which are
+ * {@link ITextAwareEditPart}.
  * 
- * Clients have to implement {@link TextAwareShapeNodeEditPart}
- * {@link #getWrappingLabel()} to pass the label where DirectEditing should be
- * applied. Apart from that, an {@link EAttribute} must be provided where the
- * String is read from / is written to.
- * 
- * Maybe this class should be extended in the future to handle multiple
- * attributes.
  * 
  * @author Andreas Muelder <a
  *         href="mailto:andreas.muelder@itemis.de">andreas.muelder@itemis.de</a>
  * 
  */
-public abstract class TextAwareShapeNodeEditPart extends ShapeNodeEditPart implements ITextAwareEditPart {
+public abstract class TextAwareLabelEditPart extends CompartmentEditPart
+		implements ITextAwareEditPart {
 
 	private static final String UPDATE_NAME_FILTER = "update.name";
 
@@ -71,42 +65,27 @@ public abstract class TextAwareShapeNodeEditPart extends ShapeNodeEditPart imple
 			}
 		}
 	};
-	/**
-	 * TODO: Provide a hook for clients to override
-	 */
-	private final CellEditorLocator editorLocator = new CellEditorLocator() {
-		@Override
-		public void relocate(CellEditor celleditor) {
-			Text text = (Text) celleditor.getControl();
-			Rectangle textRectangle = getWrappingLabel().getBounds().getCopy();
-			Rectangle figureRectangle = getFigure().getBounds().getCopy();
-			getFigure().translateToAbsolute(textRectangle);
-			getFigure().translateToAbsolute(figureRectangle);
-			text.setBounds(figureRectangle.x, figureRectangle.y, figureRectangle.width, textRectangle.height);
-		}
-	};
 
-	/**
-	 * @return the WrappingLabel the text editing is for.
-	 */
-	protected abstract WrappingLabel getWrappingLabel();
-
-	public TextAwareShapeNodeEditPart(View view, EAttribute feature) {
+	public TextAwareLabelEditPart(View view, EAttribute feature) {
 		super(view);
 		this.feature = feature;
 		manager = createDirectEditManager();
-		getWrappingLabel().setText(getEditText());
 
 	}
 
 	protected DirectEditManager createDirectEditManager() {
-		return new TextDirectEditManager(this, null, editorLocator);
+		return new TextDirectEditManager(this, null, createEditorLocator());
+	}
+
+	private CellEditorLocator createEditorLocator() {
+		return new DefaultCellEditorLocator();
 	}
 
 	@Override
 	protected void addSemanticListeners() {
 		super.addSemanticListeners();
-		addListenerFilter(UPDATE_NAME_FILTER, updateLabelListener, resolveSemanticElement());
+		addListenerFilter(UPDATE_NAME_FILTER, updateLabelListener,
+				resolveSemanticElement());
 	};
 
 	@Override
@@ -118,19 +97,25 @@ public abstract class TextAwareShapeNodeEditPart extends ShapeNodeEditPart imple
 	@Override
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
-		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE, new LabelDirectEditPolicy());
+		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE,
+				new LabelDirectEditPolicy());
 		// TODO: Add a Feedback role
 	}
 
 	@Override
 	public String getEditText() {
-		return getParser().getEditString(new EObjectAdapter(resolveSemanticElement()), -1);
+		return getParser().getEditString(
+				new EObjectAdapter(resolveSemanticElement()), -1);
 	}
 
 	@Override
 	public void setLabelText(String text) {
 		getWrappingLabel().setText(text);
 
+	}
+
+	private WrappingLabel getWrappingLabel() {
+		return (WrappingLabel) getFigure();
 	}
 
 	@Override
@@ -161,10 +146,12 @@ public abstract class TextAwareShapeNodeEditPart extends ShapeNodeEditPart imple
 				@Override
 				public void run() {
 					if (isActive()) {
-						if (theRequest.getExtendedData().get(REQ_DIRECTEDIT_EXTENDEDDATA_INITIAL_CHAR) instanceof Character
+						if (theRequest.getExtendedData().get(
+								REQ_DIRECTEDIT_EXTENDEDDATA_INITIAL_CHAR) instanceof Character
 								&& manager instanceof TextDirectEditManager) {
-							Character initialChar = (Character) theRequest.getExtendedData().get(
-									REQ_DIRECTEDIT_EXTENDEDDATA_INITIAL_CHAR);
+							Character initialChar = (Character) theRequest
+									.getExtendedData()
+									.get(REQ_DIRECTEDIT_EXTENDEDDATA_INITIAL_CHAR);
 
 							((TextDirectEditManager) manager).show(initialChar);
 
@@ -179,4 +166,18 @@ public abstract class TextAwareShapeNodeEditPart extends ShapeNodeEditPart imple
 		}
 	}
 
+	private class DefaultCellEditorLocator implements CellEditorLocator {
+
+		private static final int minimumWidth = 30;
+
+		@Override
+		public void relocate(CellEditor celleditor) {
+			Text text = (Text) celleditor.getControl();
+			Rectangle textRectangle = getWrappingLabel().getBounds().getCopy();
+			getFigure().translateToAbsolute(textRectangle);
+			text.setBounds(textRectangle.x, textRectangle.y,
+					Math.max(textRectangle.width, minimumWidth),
+					textRectangle.height);
+		}
+	};
 }

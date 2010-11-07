@@ -1,3 +1,13 @@
+/**
+ * Copyright (c) 2010 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * Contributors:
+ * 	committers of YAKINDU - initial API and implementation
+ * 
+ */
 package org.yakindu.sct.statechart.diagram.propertysheets;
 
 import java.util.ArrayList;
@@ -18,12 +28,17 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.views.properties.IPropertySource;
 import org.eclipse.ui.views.properties.IPropertySourceProvider;
+import org.yakindu.sct.model.statechart.statechart.ExpressionElement;
+import org.yakindu.sct.model.statechart.statechart.StatechartPackage;
 
 /**
- * Copied from generated code
+ * 
+ * @author Andreas Muelder <a
+ *         href="mailto:andreas.muelder@itemis.de">andreas.muelder@itemis.de</a>
  * 
  */
-public class GenericPropertySection extends AdvancedPropertySection implements IPropertySourceProvider {
+public class DiagramPropertySection extends AdvancedPropertySection implements
+		IPropertySourceProvider {
 
 	@Override
 	public IPropertySource getPropertySource(Object object) {
@@ -32,13 +47,21 @@ public class GenericPropertySection extends AdvancedPropertySection implements I
 		}
 		AdapterFactory af = getAdapterFactory(object);
 		if (af != null) {
-			IItemPropertySource ips = (IItemPropertySource) af.adapt(object, IItemPropertySource.class);
+			IItemPropertySource ips = (IItemPropertySource) af.adapt(object,
+					IItemPropertySource.class);
 			if (ips != null) {
+				if (object instanceof ExpressionElement) {
+					return new ExpressionsPropertySource(
+							object,
+							ips,
+							StatechartPackage.Literals.EXPRESSION_ELEMENT__EXPRESSION);
+				}
 				return new PropertySource(object, ips);
 			}
 		}
 		if (object instanceof IAdaptable) {
-			return (IPropertySource) ((IAdaptable) object).getAdapter(IPropertySource.class);
+			return (IPropertySource) ((IAdaptable) object)
+					.getAdapter(IPropertySource.class);
 		}
 		return null;
 	}
@@ -72,12 +95,14 @@ public class GenericPropertySection extends AdvancedPropertySection implements I
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public void setInput(IWorkbenchPart part, ISelection selection) {
-		if (selection.isEmpty() || false == selection instanceof StructuredSelection) {
+		if (selection.isEmpty()
+				|| false == selection instanceof StructuredSelection) {
 			super.setInput(part, selection);
 			return;
 		}
 		final StructuredSelection structuredSelection = ((StructuredSelection) selection);
-		ArrayList transformedSelection = new ArrayList(structuredSelection.size());
+		ArrayList transformedSelection = new ArrayList(
+				structuredSelection.size());
 		for (Iterator it = structuredSelection.iterator(); it.hasNext();) {
 			Object r = transformSelection(it.next());
 			if (r != null) {
@@ -89,11 +114,14 @@ public class GenericPropertySection extends AdvancedPropertySection implements I
 
 	protected AdapterFactory getAdapterFactory(Object object) {
 		if (getEditingDomain() instanceof AdapterFactoryEditingDomain) {
-			return ((AdapterFactoryEditingDomain) getEditingDomain()).getAdapterFactory();
+			return ((AdapterFactoryEditingDomain) getEditingDomain())
+					.getAdapterFactory();
 		}
-		TransactionalEditingDomain editingDomain = TransactionUtil.getEditingDomain(object);
+		TransactionalEditingDomain editingDomain = TransactionUtil
+				.getEditingDomain(object);
 		if (editingDomain != null) {
-			return ((AdapterFactoryEditingDomain) editingDomain).getAdapterFactory();
+			return ((AdapterFactoryEditingDomain) editingDomain)
+					.getAdapterFactory();
 		}
 		return null;
 	}

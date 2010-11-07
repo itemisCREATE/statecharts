@@ -37,7 +37,7 @@ public class AttributeParser implements IParser {
 		if (element.eGet(attribute) != null) {
 			return String.valueOf(element.eGet(attribute));
 		} else {
-			return "";
+			return "<"+attribute.getName()+">";
 		}
 	}
 

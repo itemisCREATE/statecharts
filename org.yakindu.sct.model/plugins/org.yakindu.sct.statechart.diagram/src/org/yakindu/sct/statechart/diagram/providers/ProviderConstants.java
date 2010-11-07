@@ -17,18 +17,31 @@ package org.yakindu.sct.statechart.diagram.providers;
  * 
  */
 public interface ProviderConstants {
+	
 	String REGION = "Region";
+	String REGION_NAME = "RegionName";
 	String REGION_COMPARTMENT = "RegionCompartment";
+	
 	String TRANSITION = "Transition";
+	String TRANSITION_EXPRESSION = "TransitionExpression";
+
 	String STATE = "State";
+	String STATE_NAME = "StateName";
 	String STATE_FIGURE_COMPARTMENT = "StateFigureCompartment";
 	String STATE_TEXT_COMPARTMENT = "StateTextCompartment";
 	String STATE_TEXT_COMPARTMENT_EXPRESSION = "StateTextCompartmentExpression";
+
 	String CHOICE = "Choice";
+
 	String DEEPHISTORY = "DeepHistory";
+	
 	String SHALLOWHISTORY = "ShallowHistory";
+	
 	String INITIALSTATE = "InitialState";
+	
 	String FINALSTATE = "FinalState";
+	
 	String JOIN = "Join";
+	
 	String JUNCTION = "Junction";
 }

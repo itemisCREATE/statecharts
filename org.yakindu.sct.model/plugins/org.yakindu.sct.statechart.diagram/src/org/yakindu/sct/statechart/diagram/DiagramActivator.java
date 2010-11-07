@@ -11,9 +11,15 @@
 package org.yakindu.sct.statechart.diagram;
 
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
-import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.osgi.framework.BundleContext;
+import org.yakindu.sct.statechart.ExpressionsRuntimeModule;
+import org.yakindu.sct.statechart.ui.ExpressionsUiModule;
+import org.yakindu.sct.statechart.ui.internal.ExpressionsActivator;
+
+import com.google.inject.Module;
+import com.google.inject.util.Modules;
 
 /**
  * 
@@ -26,7 +32,8 @@ public class DiagramActivator extends AbstractUIPlugin {
 	// The plug-in ID
 	public static final String PLUGIN_ID = "org.yakindu.sct.statechart.diagram";
 
-	public static final PreferencesHint DIAGRAM_PREFERENCES_HINT = new PreferencesHint(PLUGIN_ID);
+	public static final PreferencesHint DIAGRAM_PREFERENCES_HINT = new PreferencesHint(
+			PLUGIN_ID);
 
 	// The shared instance
 	private static DiagramActivator plugin;
@@ -70,6 +77,16 @@ public class DiagramActivator extends AbstractUIPlugin {
 	 */
 	public static DiagramActivator getDefault() {
 		return plugin;
+	}
+
+	// TODO: Provide interface bewteen grammar and diagram editor via extension
+	// point
+	public static Module getXtextModule() {
+		Module xtextModule = Modules.override(
+				Modules.override(new ExpressionsRuntimeModule()).with(
+						new ExpressionsUiModule(ExpressionsActivator
+								.getInstance()))).with(new SharedStateModule());
+		return xtextModule;
 	}
 
 }

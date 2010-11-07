@@ -11,7 +11,6 @@
 package org.yakindu.sct.statechart.diagram.editor;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.edit.ui.action.ValidateAction;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
 import org.eclipse.swt.widgets.Display;
 import org.yakindu.sct.statechart.diagram.DiagramActivator;
