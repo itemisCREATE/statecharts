@@ -560,14 +560,14 @@ public interface AstPackage extends EPackage
   int ASSERTION_DECLARATION_FEATURE_COUNT = 4;
 
   /**
-   * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.VariableDeclarationImpl <em>Variable Declaration</em>}' class.
+   * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.StateVariableDeclarationImpl <em>State Variable Declaration</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.eclipselabs.mscript.language.ast.impl.VariableDeclarationImpl
-   * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getVariableDeclaration()
+   * @see org.eclipselabs.mscript.language.ast.impl.StateVariableDeclarationImpl
+   * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getStateVariableDeclaration()
    * @generated
    */
-  int VARIABLE_DECLARATION = 13;
+  int STATE_VARIABLE_DECLARATION = 13;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -576,16 +576,16 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int VARIABLE_DECLARATION__NAME = 0;
+  int STATE_VARIABLE_DECLARATION__NAME = 0;
 
   /**
-   * The number of structural features of the '<em>Variable Declaration</em>' class.
+   * The number of structural features of the '<em>State Variable Declaration</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int VARIABLE_DECLARATION_FEATURE_COUNT = 1;
+  int STATE_VARIABLE_DECLARATION_FEATURE_COUNT = 1;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.FunctorDeclarationImpl <em>Functor Declaration</em>}' class.
@@ -3223,25 +3223,25 @@ public interface AstPackage extends EPackage
   EReference getAssertionDeclaration_Message();
 
   /**
-   * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.VariableDeclaration <em>Variable Declaration</em>}'.
+   * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.StateVariableDeclaration <em>State Variable Declaration</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Variable Declaration</em>'.
-   * @see org.eclipselabs.mscript.language.ast.VariableDeclaration
+   * @return the meta object for class '<em>State Variable Declaration</em>'.
+   * @see org.eclipselabs.mscript.language.ast.StateVariableDeclaration
    * @generated
    */
-  EClass getVariableDeclaration();
+  EClass getStateVariableDeclaration();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.ast.VariableDeclaration#getName <em>Name</em>}'.
+   * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.ast.StateVariableDeclaration#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.eclipselabs.mscript.language.ast.VariableDeclaration#getName()
-   * @see #getVariableDeclaration()
+   * @see org.eclipselabs.mscript.language.ast.StateVariableDeclaration#getName()
+   * @see #getStateVariableDeclaration()
    * @generated
    */
-  EAttribute getVariableDeclaration_Name();
+  EAttribute getStateVariableDeclaration_Name();
 
   /**
    * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.FunctorDeclaration <em>Functor Declaration</em>}'.
@@ -5279,14 +5279,14 @@ public interface AstPackage extends EPackage
     EReference ASSERTION_DECLARATION__MESSAGE = eINSTANCE.getAssertionDeclaration_Message();
 
     /**
-     * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.VariableDeclarationImpl <em>Variable Declaration</em>}' class.
+     * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.StateVariableDeclarationImpl <em>State Variable Declaration</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.eclipselabs.mscript.language.ast.impl.VariableDeclarationImpl
-     * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getVariableDeclaration()
+     * @see org.eclipselabs.mscript.language.ast.impl.StateVariableDeclarationImpl
+     * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getStateVariableDeclaration()
      * @generated
      */
-    EClass VARIABLE_DECLARATION = eINSTANCE.getVariableDeclaration();
+    EClass STATE_VARIABLE_DECLARATION = eINSTANCE.getStateVariableDeclaration();
 
     /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -5294,7 +5294,7 @@ public interface AstPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute VARIABLE_DECLARATION__NAME = eINSTANCE.getVariableDeclaration_Name();
+    EAttribute STATE_VARIABLE_DECLARATION__NAME = eINSTANCE.getStateVariableDeclaration_Name();
 
     /**
      * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.FunctorDeclarationImpl <em>Functor Declaration</em>}' class.

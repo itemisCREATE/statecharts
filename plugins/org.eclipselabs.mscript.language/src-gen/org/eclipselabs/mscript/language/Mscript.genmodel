@@ -97,8 +97,8 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//AssertionDeclaration/statusKind"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//AssertionDeclaration/message"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//VariableDeclaration">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//VariableDeclaration/name"/>
+    <genClasses ecoreClass="Mscript.ecore#//StateVariableDeclaration">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//StateVariableDeclaration/name"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//FunctorDeclaration">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//FunctorDeclaration/name"/>

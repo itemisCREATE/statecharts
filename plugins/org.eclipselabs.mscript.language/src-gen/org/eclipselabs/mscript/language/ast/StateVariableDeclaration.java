@@ -9,21 +9,21 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Variable Declaration</b></em>'.
+ * A representation of the model object '<em><b>State Variable Declaration</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.VariableDeclaration#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.StateVariableDeclaration#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipselabs.mscript.language.ast.AstPackage#getVariableDeclaration()
+ * @see org.eclipselabs.mscript.language.ast.AstPackage#getStateVariableDeclaration()
  * @model
  * @generated
  */
-public interface VariableDeclaration extends EObject
+public interface StateVariableDeclaration extends EObject
 {
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
@@ -35,14 +35,14 @@ public interface VariableDeclaration extends EObject
    * <!-- end-user-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getVariableDeclaration_Name()
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getStateVariableDeclaration_Name()
    * @model
    * @generated
    */
   String getName();
 
   /**
-   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.VariableDeclaration#getName <em>Name</em>}' attribute.
+   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.StateVariableDeclaration#getName <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Name</em>' attribute.
@@ -51,4 +51,4 @@ public interface VariableDeclaration extends EObject
    */
   void setName(String value);
 
-} // VariableDeclaration
+} // StateVariableDeclaration

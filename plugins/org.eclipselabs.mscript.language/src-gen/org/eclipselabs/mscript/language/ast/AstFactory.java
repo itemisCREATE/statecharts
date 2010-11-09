@@ -143,13 +143,13 @@ public interface AstFactory extends EFactory
   AssertionDeclaration createAssertionDeclaration();
 
   /**
-   * Returns a new object of class '<em>Variable Declaration</em>'.
+   * Returns a new object of class '<em>State Variable Declaration</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Variable Declaration</em>'.
+   * @return a new object of class '<em>State Variable Declaration</em>'.
    * @generated
    */
-  VariableDeclaration createVariableDeclaration();
+  StateVariableDeclaration createStateVariableDeclaration();
 
   /**
    * Returns a new object of class '<em>Functor Declaration</em>'.

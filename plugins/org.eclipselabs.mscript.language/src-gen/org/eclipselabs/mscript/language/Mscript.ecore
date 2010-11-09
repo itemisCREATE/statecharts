@@ -51,7 +51,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="functors" upperBound="-1"
         eType="#//FunctorDeclaration" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="stateVariables" upperBound="-1"
-        eType="#//VariableDeclaration" containment="true"/>
+        eType="#//StateVariableDeclaration" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="equations" upperBound="-1"
         eType="#//EquationDefinition" containment="true"/>
   </eClassifiers>
@@ -72,7 +72,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="message" eType="#//Expression"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="VariableDeclaration">
+  <eClassifiers xsi:type="ecore:EClass" name="StateVariableDeclaration">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FunctorDeclaration">

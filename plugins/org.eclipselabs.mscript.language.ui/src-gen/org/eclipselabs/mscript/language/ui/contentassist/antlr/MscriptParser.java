@@ -80,7 +80,7 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getFunctionDefinitionAccess().getGroup_5_1(), "rule__FunctionDefinition__Group_5_1__0");
 					put(grammarAccess.getFunctionDefinitionAccess().getGroup_9(), "rule__FunctionDefinition__Group_9__0");
 					put(grammarAccess.getAssertionDeclarationAccess().getGroup(), "rule__AssertionDeclaration__Group__0");
-					put(grammarAccess.getVariableDeclarationAccess().getGroup(), "rule__VariableDeclaration__Group__0");
+					put(grammarAccess.getStateVariableDeclarationAccess().getGroup(), "rule__StateVariableDeclaration__Group__0");
 					put(grammarAccess.getFunctorDeclarationAccess().getGroup(), "rule__FunctorDeclaration__Group__0");
 					put(grammarAccess.getFunctorDeclarationAccess().getGroup_4(), "rule__FunctorDeclaration__Group_4__0");
 					put(grammarAccess.getFunctorDeclarationAccess().getGroup_4_2(), "rule__FunctorDeclaration__Group_4_2__0");
@@ -219,7 +219,7 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getAssertionDeclarationAccess().getPredicateAssignment_2(), "rule__AssertionDeclaration__PredicateAssignment_2");
 					put(grammarAccess.getAssertionDeclarationAccess().getStatusKindAssignment_4(), "rule__AssertionDeclaration__StatusKindAssignment_4");
 					put(grammarAccess.getAssertionDeclarationAccess().getMessageAssignment_5(), "rule__AssertionDeclaration__MessageAssignment_5");
-					put(grammarAccess.getVariableDeclarationAccess().getNameAssignment_1(), "rule__VariableDeclaration__NameAssignment_1");
+					put(grammarAccess.getStateVariableDeclarationAccess().getNameAssignment_1(), "rule__StateVariableDeclaration__NameAssignment_1");
 					put(grammarAccess.getFunctorDeclarationAccess().getNameAssignment_1(), "rule__FunctorDeclaration__NameAssignment_1");
 					put(grammarAccess.getFunctorDeclarationAccess().getFunctionNameAssignment_3(), "rule__FunctorDeclaration__FunctionNameAssignment_3");
 					put(grammarAccess.getFunctorDeclarationAccess().getTemplateArgumentsAssignment_4_1(), "rule__FunctorDeclaration__TemplateArgumentsAssignment_4_1");

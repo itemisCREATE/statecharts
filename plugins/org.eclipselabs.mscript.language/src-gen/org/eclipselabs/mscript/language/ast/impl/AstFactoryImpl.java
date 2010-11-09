@@ -81,7 +81,7 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
       case AstPackage.FUNCTION_DEFINITION: return createFunctionDefinition();
       case AstPackage.PARAMETER_DECLARATION: return createParameterDeclaration();
       case AstPackage.ASSERTION_DECLARATION: return createAssertionDeclaration();
-      case AstPackage.VARIABLE_DECLARATION: return createVariableDeclaration();
+      case AstPackage.STATE_VARIABLE_DECLARATION: return createStateVariableDeclaration();
       case AstPackage.FUNCTOR_DECLARATION: return createFunctorDeclaration();
       case AstPackage.ARGUMENT_DECLARATION: return createArgumentDeclaration();
       case AstPackage.EQUATION_DEFINITION: return createEquationDefinition();
@@ -365,10 +365,10 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public VariableDeclaration createVariableDeclaration()
+  public StateVariableDeclaration createStateVariableDeclaration()
   {
-    VariableDeclarationImpl variableDeclaration = new VariableDeclarationImpl();
-    return variableDeclaration;
+    StateVariableDeclarationImpl stateVariableDeclaration = new StateVariableDeclarationImpl();
+    return stateVariableDeclaration;
   }
 
   /**

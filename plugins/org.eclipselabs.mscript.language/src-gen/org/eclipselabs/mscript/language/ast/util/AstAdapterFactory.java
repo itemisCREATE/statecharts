@@ -143,9 +143,9 @@ public class AstAdapterFactory extends AdapterFactoryImpl
         return createAssertionDeclarationAdapter();
       }
       @Override
-      public Adapter caseVariableDeclaration(VariableDeclaration object)
+      public Adapter caseStateVariableDeclaration(StateVariableDeclaration object)
       {
-        return createVariableDeclarationAdapter();
+        return createStateVariableDeclarationAdapter();
       }
       @Override
       public Adapter caseFunctorDeclaration(FunctorDeclaration object)
@@ -685,16 +685,16 @@ public class AstAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.VariableDeclaration <em>Variable Declaration</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.StateVariableDeclaration <em>State Variable Declaration</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.VariableDeclaration
+   * @see org.eclipselabs.mscript.language.ast.StateVariableDeclaration
    * @generated
    */
-  public Adapter createVariableDeclarationAdapter()
+  public Adapter createStateVariableDeclarationAdapter()
   {
     return null;
   }

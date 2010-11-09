@@ -140,7 +140,7 @@ public interface FunctionDefinition extends TypeDefinition
 
   /**
    * Returns the value of the '<em><b>State Variables</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipselabs.mscript.language.ast.VariableDeclaration}.
+   * The list contents are of type {@link org.eclipselabs.mscript.language.ast.StateVariableDeclaration}.
    * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>State Variables</em>' containment reference list isn't clear,
@@ -152,7 +152,7 @@ public interface FunctionDefinition extends TypeDefinition
    * @model containment="true"
    * @generated
    */
-  EList<VariableDeclaration> getStateVariables();
+  EList<StateVariableDeclaration> getStateVariables();
 
   /**
    * Returns the value of the '<em><b>Equations</b></em>' containment reference list.

@@ -26,7 +26,7 @@ import org.eclipselabs.mscript.language.ast.EquationDefinition;
 import org.eclipselabs.mscript.language.ast.FunctionDefinition;
 import org.eclipselabs.mscript.language.ast.FunctorDeclaration;
 import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
-import org.eclipselabs.mscript.language.ast.VariableDeclaration;
+import org.eclipselabs.mscript.language.ast.StateVariableDeclaration;
 
 /**
  * <!-- begin-user-doc -->
@@ -128,7 +128,7 @@ public class FunctionDefinitionImpl extends TypeDefinitionImpl implements Functi
    * @generated
    * @ordered
    */
-  protected EList<VariableDeclaration> stateVariables;
+  protected EList<StateVariableDeclaration> stateVariables;
 
   /**
    * The cached value of the '{@link #getEquations() <em>Equations</em>}' containment reference list.
@@ -259,11 +259,11 @@ public class FunctionDefinitionImpl extends TypeDefinitionImpl implements Functi
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<VariableDeclaration> getStateVariables()
+  public EList<StateVariableDeclaration> getStateVariables()
   {
     if (stateVariables == null)
     {
-      stateVariables = new EObjectContainmentEList<VariableDeclaration>(VariableDeclaration.class, this, AstPackage.FUNCTION_DEFINITION__STATE_VARIABLES);
+      stateVariables = new EObjectContainmentEList<StateVariableDeclaration>(StateVariableDeclaration.class, this, AstPackage.FUNCTION_DEFINITION__STATE_VARIABLES);
     }
     return stateVariables;
   }
@@ -376,7 +376,7 @@ public class FunctionDefinitionImpl extends TypeDefinitionImpl implements Functi
         return;
       case AstPackage.FUNCTION_DEFINITION__STATE_VARIABLES:
         getStateVariables().clear();
-        getStateVariables().addAll((Collection<? extends VariableDeclaration>)newValue);
+        getStateVariables().addAll((Collection<? extends StateVariableDeclaration>)newValue);
         return;
       case AstPackage.FUNCTION_DEFINITION__EQUATIONS:
         getEquations().clear();

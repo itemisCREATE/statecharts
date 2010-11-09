@@ -44,7 +44,7 @@ protected class ThisRootNode extends RootToken {
 			case 10: return new FunctionDefinition_Group(this, this, 10, inst);
 			case 11: return new ParameterDeclaration_NameAssignment(this, this, 11, inst);
 			case 12: return new AssertionDeclaration_Group(this, this, 12, inst);
-			case 13: return new VariableDeclaration_Group(this, this, 13, inst);
+			case 13: return new StateVariableDeclaration_Group(this, this, 13, inst);
 			case 14: return new FunctorDeclaration_Group(this, this, 14, inst);
 			case 15: return new ArgumentDeclaration_NameAssignment(this, this, 15, inst);
 			case 16: return new EquationDefinition_Group(this, this, 16, inst);
@@ -1660,7 +1660,7 @@ protected class RecordFieldDeclaration_SemicolonKeyword_3 extends KeywordToken  
  * 	templateParameters+=ParameterDeclaration)* ">")? "(" (inputParameters+=ParameterDeclaration (","
  * 	inputParameters+=ParameterDeclaration)*)? ")" "->" outputParameters+=ParameterDeclaration (","
  * 	outputParameters+=ParameterDeclaration)* "{" (assertions+=AssertionDeclaration | functors+=FunctorDeclaration |
- * 	stateVariables+=VariableDeclaration | equations+=EquationDefinition)* "}";
+ * 	stateVariables+=StateVariableDeclaration | equations+=EquationDefinition)* "}";
  *
  **/
 
@@ -1668,7 +1668,7 @@ protected class RecordFieldDeclaration_SemicolonKeyword_3 extends KeywordToken  
 // templateParameters+=ParameterDeclaration)* ">")? "(" (inputParameters+=ParameterDeclaration (","
 // inputParameters+=ParameterDeclaration)*)? ")" "->" outputParameters+=ParameterDeclaration (","
 // outputParameters+=ParameterDeclaration)* "{" (assertions+=AssertionDeclaration | functors+=FunctorDeclaration |
-// stateVariables+=VariableDeclaration | equations+=EquationDefinition)* "}"
+// stateVariables+=StateVariableDeclaration | equations+=EquationDefinition)* "}"
 protected class FunctionDefinition_Group extends GroupToken {
 	
 	public FunctionDefinition_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2383,7 +2383,7 @@ protected class FunctionDefinition_LeftCurlyBracketKeyword_10 extends KeywordTok
 
 }
 
-// (assertions+=AssertionDeclaration | functors+=FunctorDeclaration | stateVariables+=VariableDeclaration |
+// (assertions+=AssertionDeclaration | functors+=FunctorDeclaration | stateVariables+=StateVariableDeclaration |
 // equations+=EquationDefinition)*
 protected class FunctionDefinition_Alternatives_11 extends AlternativesToken {
 
@@ -2503,7 +2503,7 @@ protected class FunctionDefinition_FunctorsAssignment_11_1 extends AssignmentTok
 	}	
 }
 
-// stateVariables+=VariableDeclaration
+// stateVariables+=StateVariableDeclaration
 protected class FunctionDefinition_StateVariablesAssignment_11_2 extends AssignmentToken  {
 	
 	public FunctionDefinition_StateVariablesAssignment_11_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2518,7 +2518,7 @@ protected class FunctionDefinition_StateVariablesAssignment_11_2 extends Assignm
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new VariableDeclaration_Group(this, this, 0, inst);
+			case 0: return new StateVariableDeclaration_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -2529,9 +2529,9 @@ protected class FunctionDefinition_StateVariablesAssignment_11_2 extends Assignm
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("stateVariables");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getVariableDeclarationRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getStateVariableDeclarationRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getFunctionDefinitionAccess().getStateVariablesVariableDeclarationParserRuleCall_11_2_0(); 
+				element = grammarAccess.getFunctionDefinitionAccess().getStateVariablesStateVariableDeclarationParserRuleCall_11_2_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -2935,36 +2935,36 @@ protected class AssertionDeclaration_SemicolonKeyword_6 extends KeywordToken  {
 /************ end Rule AssertionDeclaration ****************/
 
 
-/************ begin Rule VariableDeclaration ****************
+/************ begin Rule StateVariableDeclaration ****************
  *
- * VariableDeclaration:
+ * StateVariableDeclaration:
  * 	"var" name=ID ";";
  *
  **/
 
 // "var" name=ID ";"
-protected class VariableDeclaration_Group extends GroupToken {
+protected class StateVariableDeclaration_Group extends GroupToken {
 	
-	public VariableDeclaration_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public StateVariableDeclaration_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.getVariableDeclarationAccess().getGroup();
+		return grammarAccess.getStateVariableDeclarationAccess().getGroup();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new VariableDeclaration_SemicolonKeyword_2(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new StateVariableDeclaration_SemicolonKeyword_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getVariableDeclarationRule().getType().getClassifier())
+		if(getEObject().eClass() != grammarAccess.getStateVariableDeclarationRule().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
 	}
@@ -2972,15 +2972,15 @@ protected class VariableDeclaration_Group extends GroupToken {
 }
 
 // "var"
-protected class VariableDeclaration_VarKeyword_0 extends KeywordToken  {
+protected class StateVariableDeclaration_VarKeyword_0 extends KeywordToken  {
 	
-	public VariableDeclaration_VarKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public StateVariableDeclaration_VarKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getVariableDeclarationAccess().getVarKeyword_0();
+		return grammarAccess.getStateVariableDeclarationAccess().getVarKeyword_0();
 	}
 
     @Override
@@ -2993,21 +2993,21 @@ protected class VariableDeclaration_VarKeyword_0 extends KeywordToken  {
 }
 
 // name=ID
-protected class VariableDeclaration_NameAssignment_1 extends AssignmentToken  {
+protected class StateVariableDeclaration_NameAssignment_1 extends AssignmentToken  {
 	
-	public VariableDeclaration_NameAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public StateVariableDeclaration_NameAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getVariableDeclarationAccess().getNameAssignment_1();
+		return grammarAccess.getStateVariableDeclarationAccess().getNameAssignment_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new VariableDeclaration_VarKeyword_0(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new StateVariableDeclaration_VarKeyword_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -3016,9 +3016,9 @@ protected class VariableDeclaration_NameAssignment_1 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("name",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("name");
-		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getVariableDeclarationAccess().getNameIDTerminalRuleCall_1_0(), value, null)) {
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getStateVariableDeclarationAccess().getNameIDTerminalRuleCall_1_0(), value, null)) {
 			type = AssignmentType.TERMINAL_RULE_CALL;
-			element = grammarAccess.getVariableDeclarationAccess().getNameIDTerminalRuleCall_1_0();
+			element = grammarAccess.getStateVariableDeclarationAccess().getNameIDTerminalRuleCall_1_0();
 			return obj;
 		}
 		return null;
@@ -3027,21 +3027,21 @@ protected class VariableDeclaration_NameAssignment_1 extends AssignmentToken  {
 }
 
 // ";"
-protected class VariableDeclaration_SemicolonKeyword_2 extends KeywordToken  {
+protected class StateVariableDeclaration_SemicolonKeyword_2 extends KeywordToken  {
 	
-	public VariableDeclaration_SemicolonKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public StateVariableDeclaration_SemicolonKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getVariableDeclarationAccess().getSemicolonKeyword_2();
+		return grammarAccess.getStateVariableDeclarationAccess().getSemicolonKeyword_2();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new VariableDeclaration_NameAssignment_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new StateVariableDeclaration_NameAssignment_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -3049,7 +3049,7 @@ protected class VariableDeclaration_SemicolonKeyword_2 extends KeywordToken  {
 }
 
 
-/************ end Rule VariableDeclaration ****************/
+/************ end Rule StateVariableDeclaration ****************/
 
 
 /************ begin Rule FunctorDeclaration ****************

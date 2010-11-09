@@ -29,7 +29,7 @@ import org.eclipselabs.mscript.language.ast.LetExpressionVariable;
 import org.eclipselabs.mscript.language.ast.OperationCall;
 import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
 import org.eclipselabs.mscript.language.ast.SimpleName;
-import org.eclipselabs.mscript.language.ast.VariableDeclaration;
+import org.eclipselabs.mscript.language.ast.StateVariableDeclaration;
 import org.eclipselabs.mscript.language.ast.util.AstSwitch;
 import org.eclipselabs.mscript.language.functionmodel.Equation;
 import org.eclipselabs.mscript.language.functionmodel.EquationPart;
@@ -240,7 +240,7 @@ public class FunctionConstructor {
 					return VariableKind.OUTPUT_PARAMETER;
 				}
 			}
-			for (VariableDeclaration stateVariableDeclaration : functionDefinition.getStateVariables()) {
+			for (StateVariableDeclaration stateVariableDeclaration : functionDefinition.getStateVariables()) {
 				if (name.equals(stateVariableDeclaration.getName())) {
 					return VariableKind.STATE_VARIABLE;
 				}

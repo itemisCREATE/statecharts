@@ -17,7 +17,7 @@ import java.util.Map;
 
 import org.eclipselabs.mscript.language.ast.FunctionDefinition;
 import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
-import org.eclipselabs.mscript.language.ast.VariableDeclaration;
+import org.eclipselabs.mscript.language.ast.StateVariableDeclaration;
 import org.eclipselabs.mscript.language.functionmodel.Equation;
 import org.eclipselabs.mscript.language.functionmodel.EquationPart;
 import org.eclipselabs.mscript.language.functionmodel.Function;
@@ -64,7 +64,7 @@ public class FunctorConstructor {
 		for (ParameterDeclaration parameterDeclaration : functor.getFunction().getDefinition().getOutputParameters()) {
 			functor.addVariable(new Variable(parameterDeclaration.getName()));
 		}
-		for (VariableDeclaration variableDeclaration : functor.getFunction().getDefinition().getStateVariables()) {
+		for (StateVariableDeclaration variableDeclaration : functor.getFunction().getDefinition().getStateVariables()) {
 			functor.addVariable(new Variable(variableDeclaration.getName()));
 		}
 		

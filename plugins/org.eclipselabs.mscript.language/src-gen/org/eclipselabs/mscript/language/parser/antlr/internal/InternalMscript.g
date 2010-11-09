@@ -1041,9 +1041,9 @@ ruleFunctionDefinition returns [EObject current=null]
     |(
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getFunctionDefinitionAccess().getStateVariablesVariableDeclarationParserRuleCall_11_2_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getFunctionDefinitionAccess().getStateVariablesStateVariableDeclarationParserRuleCall_11_2_0(), currentNode); 
 	    }
-		lv_stateVariables_20_0=ruleVariableDeclaration		{
+		lv_stateVariables_20_0=ruleStateVariableDeclaration		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getFunctionDefinitionRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -1053,7 +1053,7 @@ ruleFunctionDefinition returns [EObject current=null]
 	       			$current, 
 	       			"stateVariables",
 	        		lv_stateVariables_20_0, 
-	        		"VariableDeclaration", 
+	        		"StateVariableDeclaration", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
@@ -1273,17 +1273,17 @@ ruleAssertionDeclaration returns [EObject current=null]
 
 
 
-// Entry rule entryRuleVariableDeclaration
-entryRuleVariableDeclaration returns [EObject current=null] 
+// Entry rule entryRuleStateVariableDeclaration
+entryRuleStateVariableDeclaration returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getVariableDeclarationRule(), currentNode); }
-	 iv_ruleVariableDeclaration=ruleVariableDeclaration 
-	 { $current=$iv_ruleVariableDeclaration.current; } 
+	{ currentNode = createCompositeNode(grammarAccess.getStateVariableDeclarationRule(), currentNode); }
+	 iv_ruleStateVariableDeclaration=ruleStateVariableDeclaration 
+	 { $current=$iv_ruleStateVariableDeclaration.current; } 
 	 EOF 
 ;
 
-// Rule VariableDeclaration
-ruleVariableDeclaration returns [EObject current=null] 
+// Rule StateVariableDeclaration
+ruleStateVariableDeclaration returns [EObject current=null] 
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
@@ -1291,17 +1291,17 @@ ruleVariableDeclaration returns [EObject current=null]
     }:
 (	'var' 
     {
-        createLeafNode(grammarAccess.getVariableDeclarationAccess().getVarKeyword_0(), null); 
+        createLeafNode(grammarAccess.getStateVariableDeclarationAccess().getVarKeyword_0(), null); 
     }
 (
 (
 		lv_name_1_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getVariableDeclarationAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+			createLeafNode(grammarAccess.getStateVariableDeclarationAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getVariableDeclarationRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getStateVariableDeclarationRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        try {
@@ -1319,7 +1319,7 @@ ruleVariableDeclaration returns [EObject current=null]
 )
 )	';' 
     {
-        createLeafNode(grammarAccess.getVariableDeclarationAccess().getSemicolonKeyword_2(), null); 
+        createLeafNode(grammarAccess.getStateVariableDeclarationAccess().getSemicolonKeyword_2(), null); 
     }
 )
 ;

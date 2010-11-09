@@ -13,22 +13,22 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipselabs.mscript.language.ast.AstPackage;
-import org.eclipselabs.mscript.language.ast.VariableDeclaration;
+import org.eclipselabs.mscript.language.ast.StateVariableDeclaration;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Variable Declaration</b></em>'.
+ * An implementation of the model object '<em><b>State Variable Declaration</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.VariableDeclarationImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.StateVariableDeclarationImpl#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class VariableDeclarationImpl extends MinimalEObjectImpl.Container implements VariableDeclaration
+public class StateVariableDeclarationImpl extends MinimalEObjectImpl.Container implements StateVariableDeclaration
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -55,7 +55,7 @@ public class VariableDeclarationImpl extends MinimalEObjectImpl.Container implem
    * <!-- end-user-doc -->
    * @generated
    */
-  protected VariableDeclarationImpl()
+  protected StateVariableDeclarationImpl()
   {
     super();
   }
@@ -68,7 +68,7 @@ public class VariableDeclarationImpl extends MinimalEObjectImpl.Container implem
   @Override
   protected EClass eStaticClass()
   {
-    return AstPackage.Literals.VARIABLE_DECLARATION;
+    return AstPackage.Literals.STATE_VARIABLE_DECLARATION;
   }
 
   /**
@@ -91,7 +91,7 @@ public class VariableDeclarationImpl extends MinimalEObjectImpl.Container implem
     String oldName = name;
     name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.VARIABLE_DECLARATION__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.STATE_VARIABLE_DECLARATION__NAME, oldName, name));
   }
 
   /**
@@ -104,7 +104,7 @@ public class VariableDeclarationImpl extends MinimalEObjectImpl.Container implem
   {
     switch (featureID)
     {
-      case AstPackage.VARIABLE_DECLARATION__NAME:
+      case AstPackage.STATE_VARIABLE_DECLARATION__NAME:
         return getName();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -120,7 +120,7 @@ public class VariableDeclarationImpl extends MinimalEObjectImpl.Container implem
   {
     switch (featureID)
     {
-      case AstPackage.VARIABLE_DECLARATION__NAME:
+      case AstPackage.STATE_VARIABLE_DECLARATION__NAME:
         setName((String)newValue);
         return;
     }
@@ -137,7 +137,7 @@ public class VariableDeclarationImpl extends MinimalEObjectImpl.Container implem
   {
     switch (featureID)
     {
-      case AstPackage.VARIABLE_DECLARATION__NAME:
+      case AstPackage.STATE_VARIABLE_DECLARATION__NAME:
         setName(NAME_EDEFAULT);
         return;
     }
@@ -154,7 +154,7 @@ public class VariableDeclarationImpl extends MinimalEObjectImpl.Container implem
   {
     switch (featureID)
     {
-      case AstPackage.VARIABLE_DECLARATION__NAME:
+      case AstPackage.STATE_VARIABLE_DECLARATION__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
     }
     return super.eIsSet(featureID);
@@ -177,4 +177,4 @@ public class VariableDeclarationImpl extends MinimalEObjectImpl.Container implem
     return result.toString();
   }
 
-} //VariableDeclarationImpl
+} //StateVariableDeclarationImpl

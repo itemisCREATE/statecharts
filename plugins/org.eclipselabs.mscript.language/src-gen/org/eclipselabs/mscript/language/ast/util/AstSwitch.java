@@ -201,10 +201,10 @@ public class AstSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AstPackage.VARIABLE_DECLARATION:
+      case AstPackage.STATE_VARIABLE_DECLARATION:
       {
-        VariableDeclaration variableDeclaration = (VariableDeclaration)theEObject;
-        T result = caseVariableDeclaration(variableDeclaration);
+        StateVariableDeclaration stateVariableDeclaration = (StateVariableDeclaration)theEObject;
+        T result = caseStateVariableDeclaration(stateVariableDeclaration);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -930,17 +930,17 @@ public class AstSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Variable Declaration</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>State Variable Declaration</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Variable Declaration</em>'.
+   * @return the result of interpreting the object as an instance of '<em>State Variable Declaration</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseVariableDeclaration(VariableDeclaration object)
+  public T caseStateVariableDeclaration(StateVariableDeclaration object)
   {
     return null;
   }

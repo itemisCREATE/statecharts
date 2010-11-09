@@ -80,7 +80,7 @@ FunctionDefinition :
 	(stateful?='stateful')? 'func' name=ID ('<' templateParameters+=ParameterDeclaration (',' templateParameters+=ParameterDeclaration)* '>')? '(' (inputParameters+=ParameterDeclaration (',' inputParameters+=ParameterDeclaration)*)? ')' '->' outputParameters+=ParameterDeclaration (',' outputParameters+=ParameterDeclaration)* '{'
 		(assertions+=AssertionDeclaration |
 		functors+=FunctorDeclaration |
-		stateVariables+=VariableDeclaration |
+		stateVariables+=StateVariableDeclaration |
 		equations+=EquationDefinition)*
 	'}';
 
@@ -96,7 +96,7 @@ enum AssertionStatusKind :
 AssertionDeclaration :
 	(static?='static')? 'assert' predicate=Expression ':' statusKind=AssertionStatusKind message=Expression ';';
 
-VariableDeclaration :
+StateVariableDeclaration :
 	'var' name=ID ';';
 	
 FunctorDeclaration :
