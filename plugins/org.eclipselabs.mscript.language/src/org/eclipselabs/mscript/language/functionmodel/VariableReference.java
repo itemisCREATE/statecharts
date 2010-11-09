@@ -113,7 +113,7 @@ public interface VariableReference extends EObject {
 	void setKind(VariableKind value);
 
 	/**
-	 * Returns the value of the '<em><b>Steps</b></em>' reference list.
+	 * Returns the value of the '<em><b>Steps</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipselabs.mscript.language.functionmodel.VariableStep}.
 	 * It is bidirectional and its opposite is '{@link org.eclipselabs.mscript.language.functionmodel.VariableStep#getReference <em>Reference</em>}'.
 	 * <!-- begin-user-doc -->
@@ -122,10 +122,10 @@ public interface VariableReference extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Steps</em>' reference list.
+	 * @return the value of the '<em>Steps</em>' containment reference list.
 	 * @see org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage#getVariableReference_Steps()
 	 * @see org.eclipselabs.mscript.language.functionmodel.VariableStep#getReference
-	 * @model opposite="reference"
+	 * @model opposite="reference" containment="true"
 	 * @generated
 	 */
 	EList<VariableStep> getSteps();

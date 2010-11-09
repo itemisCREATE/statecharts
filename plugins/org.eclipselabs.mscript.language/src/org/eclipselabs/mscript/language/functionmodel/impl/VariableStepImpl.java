@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipselabs.mscript.language.functionmodel.EquationPart;
 import org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage;
@@ -39,16 +40,6 @@ import org.eclipselabs.mscript.language.functionmodel.VariableStep;
  * @generated
  */
 public class VariableStepImpl extends EObjectImpl implements VariableStep {
-	/**
-	 * The cached value of the '{@link #getReference() <em>Reference</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getReference()
-	 * @generated
-	 * @ordered
-	 */
-	protected VariableReference reference;
-
 	/**
 	 * The default value of the '{@link #getIndex() <em>Index</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -124,24 +115,8 @@ public class VariableStepImpl extends EObjectImpl implements VariableStep {
 	 * @generated
 	 */
 	public VariableReference getReference() {
-		if (reference != null && reference.eIsProxy()) {
-			InternalEObject oldReference = (InternalEObject)reference;
-			reference = (VariableReference)eResolveProxy(oldReference);
-			if (reference != oldReference) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, FunctionModelPackage.VARIABLE_STEP__REFERENCE, oldReference, reference));
-			}
-		}
-		return reference;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public VariableReference basicGetReference() {
-		return reference;
+		if (eContainerFeatureID() != FunctionModelPackage.VARIABLE_STEP__REFERENCE) return null;
+		return (VariableReference)eContainer();
 	}
 
 	/**
@@ -150,12 +125,7 @@ public class VariableStepImpl extends EObjectImpl implements VariableStep {
 	 * @generated
 	 */
 	public NotificationChain basicSetReference(VariableReference newReference, NotificationChain msgs) {
-		VariableReference oldReference = reference;
-		reference = newReference;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FunctionModelPackage.VARIABLE_STEP__REFERENCE, oldReference, newReference);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
+		msgs = eBasicSetContainer((InternalEObject)newReference, FunctionModelPackage.VARIABLE_STEP__REFERENCE, msgs);
 		return msgs;
 	}
 
@@ -165,10 +135,12 @@ public class VariableStepImpl extends EObjectImpl implements VariableStep {
 	 * @generated
 	 */
 	public void setReference(VariableReference newReference) {
-		if (newReference != reference) {
+		if (newReference != eInternalContainer() || (eContainerFeatureID() != FunctionModelPackage.VARIABLE_STEP__REFERENCE && newReference != null)) {
+			if (EcoreUtil.isAncestor(this, newReference))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
-			if (reference != null)
-				msgs = ((InternalEObject)reference).eInverseRemove(this, FunctionModelPackage.VARIABLE_REFERENCE__STEPS, VariableReference.class, msgs);
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
 			if (newReference != null)
 				msgs = ((InternalEObject)newReference).eInverseAdd(this, FunctionModelPackage.VARIABLE_REFERENCE__STEPS, VariableReference.class, msgs);
 			msgs = basicSetReference(newReference, msgs);
@@ -242,8 +214,8 @@ public class VariableStepImpl extends EObjectImpl implements VariableStep {
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case FunctionModelPackage.VARIABLE_STEP__REFERENCE:
-				if (reference != null)
-					msgs = ((InternalEObject)reference).eInverseRemove(this, FunctionModelPackage.VARIABLE_REFERENCE__STEPS, VariableReference.class, msgs);
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetReference((VariableReference)otherEnd, msgs);
 			case FunctionModelPackage.VARIABLE_STEP__USING_EQUATION_PARTS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getUsingEquationParts()).basicAdd(otherEnd, msgs);
@@ -273,11 +245,24 @@ public class VariableStepImpl extends EObjectImpl implements VariableStep {
 	 * @generated
 	 */
 	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+			case FunctionModelPackage.VARIABLE_STEP__REFERENCE:
+				return eInternalContainer().eInverseRemove(this, FunctionModelPackage.VARIABLE_REFERENCE__STEPS, VariableReference.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case FunctionModelPackage.VARIABLE_STEP__REFERENCE:
-				if (resolve) return getReference();
-				return basicGetReference();
+				return getReference();
 			case FunctionModelPackage.VARIABLE_STEP__INDEX:
 				return getIndex();
 			case FunctionModelPackage.VARIABLE_STEP__INITIAL:
@@ -347,7 +332,7 @@ public class VariableStepImpl extends EObjectImpl implements VariableStep {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case FunctionModelPackage.VARIABLE_STEP__REFERENCE:
-				return reference != null;
+				return getReference() != null;
 			case FunctionModelPackage.VARIABLE_STEP__INDEX:
 				return index != INDEX_EDEFAULT;
 			case FunctionModelPackage.VARIABLE_STEP__INITIAL:

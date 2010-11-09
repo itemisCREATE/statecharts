@@ -300,7 +300,7 @@ public interface FunctionModelPackage extends EPackage {
 	int VARIABLE_REFERENCE__KIND = 2;
 
 	/**
-	 * The feature id for the '<em><b>Steps</b></em>' reference list.
+	 * The feature id for the '<em><b>Steps</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -328,7 +328,7 @@ public interface FunctionModelPackage extends EPackage {
 	int VARIABLE_STEP = 5;
 
 	/**
-	 * The feature id for the '<em><b>Reference</b></em>' reference.
+	 * The feature id for the '<em><b>Reference</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -620,10 +620,10 @@ public interface FunctionModelPackage extends EPackage {
 	EAttribute getVariableReference_Kind();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.eclipselabs.mscript.language.functionmodel.VariableReference#getSteps <em>Steps</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.functionmodel.VariableReference#getSteps <em>Steps</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Steps</em>'.
+	 * @return the meta object for the containment reference list '<em>Steps</em>'.
 	 * @see org.eclipselabs.mscript.language.functionmodel.VariableReference#getSteps()
 	 * @see #getVariableReference()
 	 * @generated
@@ -641,10 +641,10 @@ public interface FunctionModelPackage extends EPackage {
 	EClass getVariableStep();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipselabs.mscript.language.functionmodel.VariableStep#getReference <em>Reference</em>}'.
+	 * Returns the meta object for the container reference '{@link org.eclipselabs.mscript.language.functionmodel.VariableStep#getReference <em>Reference</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Reference</em>'.
+	 * @return the meta object for the container reference '<em>Reference</em>'.
 	 * @see org.eclipselabs.mscript.language.functionmodel.VariableStep#getReference()
 	 * @see #getVariableStep()
 	 * @generated
@@ -903,7 +903,7 @@ public interface FunctionModelPackage extends EPackage {
 		EAttribute VARIABLE_REFERENCE__KIND = eINSTANCE.getVariableReference_Kind();
 
 		/**
-		 * The meta object literal for the '<em><b>Steps</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Steps</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -921,7 +921,7 @@ public interface FunctionModelPackage extends EPackage {
 		EClass VARIABLE_STEP = eINSTANCE.getVariableStep();
 
 		/**
-		 * The meta object literal for the '<em><b>Reference</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Reference</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

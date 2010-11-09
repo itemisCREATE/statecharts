@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipselabs.mscript.language.functionmodel.Function;
@@ -82,7 +82,7 @@ public class VariableReferenceImpl extends EObjectImpl implements VariableRefere
 	protected VariableKind kind = KIND_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getSteps() <em>Steps</em>}' reference list.
+	 * The cached value of the '{@link #getSteps() <em>Steps</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getSteps()
@@ -200,7 +200,7 @@ public class VariableReferenceImpl extends EObjectImpl implements VariableRefere
 	 */
 	public EList<VariableStep> getSteps() {
 		if (steps == null) {
-			steps = new EObjectWithInverseResolvingEList<VariableStep>(VariableStep.class, this, FunctionModelPackage.VARIABLE_REFERENCE__STEPS, FunctionModelPackage.VARIABLE_STEP__REFERENCE);
+			steps = new EObjectContainmentWithInverseEList<VariableStep>(VariableStep.class, this, FunctionModelPackage.VARIABLE_REFERENCE__STEPS, FunctionModelPackage.VARIABLE_STEP__REFERENCE);
 		}
 		return steps;
 	}

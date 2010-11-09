@@ -109,7 +109,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" eType="#//VariableKind"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="steps" upperBound="-1"
-        eType="#//VariableStep" eOpposite="#//VariableStep/reference"/>
+        eType="#//VariableStep" containment="true" eOpposite="#//VariableStep/reference"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="VariableStep">
     <eStructuralFeatures xsi:type="ecore:EReference" name="reference" eType="#//VariableReference"

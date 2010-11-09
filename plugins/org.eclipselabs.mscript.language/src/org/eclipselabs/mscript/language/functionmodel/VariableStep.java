@@ -30,7 +30,7 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface VariableStep extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Reference</b></em>' reference.
+	 * Returns the value of the '<em><b>Reference</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link org.eclipselabs.mscript.language.functionmodel.VariableReference#getSteps <em>Steps</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -38,20 +38,20 @@ public interface VariableStep extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Reference</em>' reference.
+	 * @return the value of the '<em>Reference</em>' container reference.
 	 * @see #setReference(VariableReference)
 	 * @see org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage#getVariableStep_Reference()
 	 * @see org.eclipselabs.mscript.language.functionmodel.VariableReference#getSteps
-	 * @model opposite="steps"
+	 * @model opposite="steps" transient="false"
 	 * @generated
 	 */
 	VariableReference getReference();
 
 	/**
-	 * Sets the value of the '{@link org.eclipselabs.mscript.language.functionmodel.VariableStep#getReference <em>Reference</em>}' reference.
+	 * Sets the value of the '{@link org.eclipselabs.mscript.language.functionmodel.VariableStep#getReference <em>Reference</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Reference</em>' reference.
+	 * @param value the new value of the '<em>Reference</em>' container reference.
 	 * @see #getReference()
 	 * @generated
 	 */
