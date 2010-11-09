@@ -463,11 +463,6 @@ public class AstAdapterFactory extends AdapterFactoryImpl
         return createSimpleNameAdapter();
       }
       @Override
-      public Adapter caseElementDeclaration(ElementDeclaration object)
-      {
-        return createElementDeclarationAdapter();
-      }
-      @Override
       public Adapter defaultCase(EObject object)
       {
         return createEObjectAdapter();
@@ -1640,21 +1635,6 @@ public class AstAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createSimpleNameAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.ElementDeclaration <em>Element Declaration</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.ElementDeclaration
-   * @generated
-   */
-  public Adapter createElementDeclarationAdapter()
   {
     return null;
   }

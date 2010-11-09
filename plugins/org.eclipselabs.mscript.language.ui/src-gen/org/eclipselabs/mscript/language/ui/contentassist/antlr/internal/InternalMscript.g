@@ -12244,11 +12244,11 @@ rule__IterationCall__Group__0__Impl
     }
 :
 (
-{ before(grammarAccess.getIterationCallAccess().getElementDeclarationAction_0()); }
+{ before(grammarAccess.getIterationCallAccess().getIterationCallAction_0()); }
 (
 
 )
-{ after(grammarAccess.getIterationCallAccess().getElementDeclarationAction_0()); }
+{ after(grammarAccess.getIterationCallAccess().getIterationCallAction_0()); }
 )
 
 ;

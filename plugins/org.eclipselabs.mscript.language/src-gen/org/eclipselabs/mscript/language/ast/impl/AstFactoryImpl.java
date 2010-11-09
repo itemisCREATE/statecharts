@@ -145,7 +145,6 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
       case AstPackage.POSTFIX_EXPRESSION: return createPostfixExpression();
       case AstPackage.FEATURE_CALL: return createFeatureCall();
       case AstPackage.SIMPLE_NAME: return createSimpleName();
-      case AstPackage.ELEMENT_DECLARATION: return createElementDeclaration();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -1062,17 +1061,6 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
   {
     SimpleNameImpl simpleName = new SimpleNameImpl();
     return simpleName;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ElementDeclaration createElementDeclaration()
-  {
-    ElementDeclarationImpl elementDeclaration = new ElementDeclarationImpl();
-    return elementDeclaration;
   }
 
   /**

@@ -2571,7 +2571,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	public class IterationCallElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "IterationCall");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cElementDeclarationAction_0 = (Action)cGroup.eContents().get(0);
+		private final Action cIterationCallAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cLeftParenthesisKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cVariablesAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cVariablesIterationVariableParserRuleCall_2_0 = (RuleCall)cVariablesAssignment_2.eContents().get(0);
@@ -2589,16 +2589,16 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightParenthesisKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		
 		//IterationCall:
-		//	{ElementDeclaration} "(" variables+=IterationVariable ("," variables+=IterationVariable)* (";"
+		//	{IterationCall} "(" variables+=IterationVariable ("," variables+=IterationVariable)* (";"
 		//	accumulator=IterationAccumulator)? "|" expression=Expression ")";
 		public ParserRule getRule() { return rule; }
 
-		//{ElementDeclaration} "(" variables+=IterationVariable ("," variables+=IterationVariable)* (";"
+		//{IterationCall} "(" variables+=IterationVariable ("," variables+=IterationVariable)* (";"
 		//accumulator=IterationAccumulator)? "|" expression=Expression ")"
 		public Group getGroup() { return cGroup; }
 
-		//{ElementDeclaration}
-		public Action getElementDeclarationAction_0() { return cElementDeclarationAction_0; }
+		//{IterationCall}
+		public Action getIterationCallAction_0() { return cIterationCallAction_0; }
 
 		//"("
 		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
@@ -4413,7 +4413,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//IterationCall:
-	//	{ElementDeclaration} "(" variables+=IterationVariable ("," variables+=IterationVariable)* (";"
+	//	{IterationCall} "(" variables+=IterationVariable ("," variables+=IterationVariable)* (";"
 	//	accumulator=IterationAccumulator)? "|" expression=Expression ")";
 	public IterationCallElements getIterationCallAccess() {
 		return (pIterationCall != null) ? pIterationCall : (pIterationCall = new IterationCallElements());

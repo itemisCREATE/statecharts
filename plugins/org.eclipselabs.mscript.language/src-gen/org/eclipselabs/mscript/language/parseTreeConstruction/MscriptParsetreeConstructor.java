@@ -12877,8 +12877,8 @@ protected class FeatureCallPart_Alternatives extends AlternativesToken {
     @Override
 	public IEObjectConsumer tryConsume() {
 		if(getEObject().eClass() != grammarAccess.getArrayElementReferenceRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getIterationCallAccess().getElementDeclarationAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getFeatureReferenceRule().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getIterationCallAccess().getIterationCallAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getOperationCallAccess().getOperationCallAction_0().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
@@ -13016,7 +13016,7 @@ protected class FeatureCallPart_IterationCallParserRuleCall_3 extends RuleCallTo
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getIterationCallAccess().getElementDeclarationAction_0().getType().getClassifier())
+		if(getEObject().eClass() != grammarAccess.getIterationCallAccess().getIterationCallAction_0().getType().getClassifier())
 			return null;
 		if(checkForRecursion(IterationCall_Group.class, eObjectConsumer)) return null;
 		return eObjectConsumer;
@@ -13632,12 +13632,12 @@ protected class OperationCall_RightParenthesisKeyword_3 extends KeywordToken  {
 /************ begin Rule IterationCall ****************
  *
  * IterationCall:
- * 	{ElementDeclaration} "(" variables+=IterationVariable ("," variables+=IterationVariable)* (";"
+ * 	{IterationCall} "(" variables+=IterationVariable ("," variables+=IterationVariable)* (";"
  * 	accumulator=IterationAccumulator)? "|" expression=Expression ")";
  *
  **/
 
-// {ElementDeclaration} "(" variables+=IterationVariable ("," variables+=IterationVariable)* (";"
+// {IterationCall} "(" variables+=IterationVariable ("," variables+=IterationVariable)* (";"
 // accumulator=IterationAccumulator)? "|" expression=Expression ")"
 protected class IterationCall_Group extends GroupToken {
 	
@@ -13660,23 +13660,23 @@ protected class IterationCall_Group extends GroupToken {
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getIterationCallAccess().getElementDeclarationAction_0().getType().getClassifier())
+		if(getEObject().eClass() != grammarAccess.getIterationCallAccess().getIterationCallAction_0().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
 	}
 
 }
 
-// {ElementDeclaration}
-protected class IterationCall_ElementDeclarationAction_0 extends ActionToken  {
+// {IterationCall}
+protected class IterationCall_IterationCallAction_0 extends ActionToken  {
 
-	public IterationCall_ElementDeclarationAction_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public IterationCall_IterationCallAction_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Action getGrammarElement() {
-		return grammarAccess.getIterationCallAccess().getElementDeclarationAction_0();
+		return grammarAccess.getIterationCallAccess().getIterationCallAction_0();
 	}
 
     @Override
@@ -13708,7 +13708,7 @@ protected class IterationCall_LeftParenthesisKeyword_1 extends KeywordToken  {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new IterationCall_ElementDeclarationAction_0(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new IterationCall_IterationCallAction_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}

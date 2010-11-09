@@ -291,7 +291,7 @@ OperationCall :
 	{OperationCall} '(' (arguments+=Expression (',' arguments+=Expression)*)? ')';
 
 IterationCall :
-	{ElementDeclaration} '(' variables+=IterationVariable (',' variables+=IterationVariable)* (';' accumulator=IterationAccumulator)? '|' expression=Expression ')';
+	{IterationCall} '(' variables+=IterationVariable (',' variables+=IterationVariable)* (';' accumulator=IterationAccumulator)? '|' expression=Expression ')';
 
 IterationVariable :
 	name=ID;

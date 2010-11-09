@@ -189,7 +189,11 @@
     <genClasses ecoreClass="Mscript.ecore#//OperationCall">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//OperationCall/arguments"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//IterationCall"/>
+    <genClasses ecoreClass="Mscript.ecore#//IterationCall">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//IterationCall/variables"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//IterationCall/accumulator"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//IterationCall/expression"/>
+    </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//IterationVariable">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//IterationVariable/name"/>
     </genClasses>
@@ -297,11 +301,6 @@
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//SimpleName">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//SimpleName/identifier"/>
-    </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//ElementDeclaration">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ElementDeclaration/variables"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ElementDeclaration/accumulator"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ElementDeclaration/expression"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

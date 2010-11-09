@@ -5324,10 +5324,10 @@ ruleIterationCall returns [EObject current=null]
     }:
 ((
     { 
-        temp=factory.create(grammarAccess.getIterationCallAccess().getElementDeclarationAction_0().getType().getClassifier());
+        temp=factory.create(grammarAccess.getIterationCallAccess().getIterationCallAction_0().getType().getClassifier());
         $current = temp; 
         temp = null;
-        CompositeNode newNode = createCompositeNode(grammarAccess.getIterationCallAccess().getElementDeclarationAction_0(), currentNode.getParent());
+        CompositeNode newNode = createCompositeNode(grammarAccess.getIterationCallAccess().getIterationCallAction_0(), currentNode.getParent());
     newNode.getChildren().add(currentNode);
     moveLookaheadInfo(currentNode, newNode);
     currentNode = newNode; 

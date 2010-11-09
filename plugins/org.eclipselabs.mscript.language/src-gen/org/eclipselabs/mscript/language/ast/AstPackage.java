@@ -1674,13 +1674,40 @@ public interface AstPackage extends EPackage
   int ITERATION_CALL = 46;
 
   /**
+   * The feature id for the '<em><b>Variables</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ITERATION_CALL__VARIABLES = FEATURE_CALL_PART_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Accumulator</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ITERATION_CALL__ACCUMULATOR = FEATURE_CALL_PART_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Expression</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ITERATION_CALL__EXPRESSION = FEATURE_CALL_PART_FEATURE_COUNT + 2;
+
+  /**
    * The number of structural features of the '<em>Iteration Call</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ITERATION_CALL_FEATURE_COUNT = FEATURE_CALL_PART_FEATURE_COUNT + 0;
+  int ITERATION_CALL_FEATURE_COUNT = FEATURE_CALL_PART_FEATURE_COUNT + 3;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.IterationVariableImpl <em>Iteration Variable</em>}' class.
@@ -2703,52 +2730,6 @@ public interface AstPackage extends EPackage
   int SIMPLE_NAME_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
 
   /**
-   * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.ElementDeclarationImpl <em>Element Declaration</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipselabs.mscript.language.ast.impl.ElementDeclarationImpl
-   * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getElementDeclaration()
-   * @generated
-   */
-  int ELEMENT_DECLARATION = 77;
-
-  /**
-   * The feature id for the '<em><b>Variables</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ELEMENT_DECLARATION__VARIABLES = ITERATION_CALL_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>Accumulator</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ELEMENT_DECLARATION__ACCUMULATOR = ITERATION_CALL_FEATURE_COUNT + 1;
-
-  /**
-   * The feature id for the '<em><b>Expression</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ELEMENT_DECLARATION__EXPRESSION = ITERATION_CALL_FEATURE_COUNT + 2;
-
-  /**
-   * The number of structural features of the '<em>Element Declaration</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ELEMENT_DECLARATION_FEATURE_COUNT = ITERATION_CALL_FEATURE_COUNT + 3;
-
-  /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.AssertionStatusKind <em>Assertion Status Kind</em>}' enum.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2756,7 +2737,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getAssertionStatusKind()
    * @generated
    */
-  int ASSERTION_STATUS_KIND = 78;
+  int ASSERTION_STATUS_KIND = 77;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.EqualityOperator <em>Equality Operator</em>}' enum.
@@ -2766,7 +2747,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getEqualityOperator()
    * @generated
    */
-  int EQUALITY_OPERATOR = 79;
+  int EQUALITY_OPERATOR = 78;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.RelationalOperator <em>Relational Operator</em>}' enum.
@@ -2776,7 +2757,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getRelationalOperator()
    * @generated
    */
-  int RELATIONAL_OPERATOR = 80;
+  int RELATIONAL_OPERATOR = 79;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.AdditiveOperator <em>Additive Operator</em>}' enum.
@@ -2786,7 +2767,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getAdditiveOperator()
    * @generated
    */
-  int ADDITIVE_OPERATOR = 81;
+  int ADDITIVE_OPERATOR = 80;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.MultiplicativeOperator <em>Multiplicative Operator</em>}' enum.
@@ -2796,7 +2777,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getMultiplicativeOperator()
    * @generated
    */
-  int MULTIPLICATIVE_OPERATOR = 82;
+  int MULTIPLICATIVE_OPERATOR = 81;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.PowerOperator <em>Power Operator</em>}' enum.
@@ -2806,7 +2787,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getPowerOperator()
    * @generated
    */
-  int POWER_OPERATOR = 83;
+  int POWER_OPERATOR = 82;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.UnaryOperator <em>Unary Operator</em>}' enum.
@@ -2816,7 +2797,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getUnaryOperator()
    * @generated
    */
-  int UNARY_OPERATOR = 84;
+  int UNARY_OPERATOR = 83;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.PostfixOperator <em>Postfix Operator</em>}' enum.
@@ -2826,7 +2807,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getPostfixOperator()
    * @generated
    */
-  int POSTFIX_OPERATOR = 85;
+  int POSTFIX_OPERATOR = 84;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.BooleanKind <em>Boolean Kind</em>}' enum.
@@ -2836,7 +2817,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getBooleanKind()
    * @generated
    */
-  int BOOLEAN_KIND = 86;
+  int BOOLEAN_KIND = 85;
 
 
   /**
@@ -3959,6 +3940,39 @@ public interface AstPackage extends EPackage
   EClass getIterationCall();
 
   /**
+   * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.ast.IterationCall#getVariables <em>Variables</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Variables</em>'.
+   * @see org.eclipselabs.mscript.language.ast.IterationCall#getVariables()
+   * @see #getIterationCall()
+   * @generated
+   */
+  EReference getIterationCall_Variables();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.IterationCall#getAccumulator <em>Accumulator</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Accumulator</em>'.
+   * @see org.eclipselabs.mscript.language.ast.IterationCall#getAccumulator()
+   * @see #getIterationCall()
+   * @generated
+   */
+  EReference getIterationCall_Accumulator();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.IterationCall#getExpression <em>Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Expression</em>'.
+   * @see org.eclipselabs.mscript.language.ast.IterationCall#getExpression()
+   * @see #getIterationCall()
+   * @generated
+   */
+  EReference getIterationCall_Expression();
+
+  /**
    * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.IterationVariable <em>Iteration Variable</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -4807,49 +4821,6 @@ public interface AstPackage extends EPackage
    * @generated
    */
   EAttribute getSimpleName_Identifier();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.ElementDeclaration <em>Element Declaration</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Element Declaration</em>'.
-   * @see org.eclipselabs.mscript.language.ast.ElementDeclaration
-   * @generated
-   */
-  EClass getElementDeclaration();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.ast.ElementDeclaration#getVariables <em>Variables</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Variables</em>'.
-   * @see org.eclipselabs.mscript.language.ast.ElementDeclaration#getVariables()
-   * @see #getElementDeclaration()
-   * @generated
-   */
-  EReference getElementDeclaration_Variables();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.ElementDeclaration#getAccumulator <em>Accumulator</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Accumulator</em>'.
-   * @see org.eclipselabs.mscript.language.ast.ElementDeclaration#getAccumulator()
-   * @see #getElementDeclaration()
-   * @generated
-   */
-  EReference getElementDeclaration_Accumulator();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.ElementDeclaration#getExpression <em>Expression</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Expression</em>'.
-   * @see org.eclipselabs.mscript.language.ast.ElementDeclaration#getExpression()
-   * @see #getElementDeclaration()
-   * @generated
-   */
-  EReference getElementDeclaration_Expression();
 
   /**
    * Returns the meta object for enum '{@link org.eclipselabs.mscript.language.ast.AssertionStatusKind <em>Assertion Status Kind</em>}'.
@@ -5907,6 +5878,30 @@ public interface AstPackage extends EPackage
     EClass ITERATION_CALL = eINSTANCE.getIterationCall();
 
     /**
+     * The meta object literal for the '<em><b>Variables</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ITERATION_CALL__VARIABLES = eINSTANCE.getIterationCall_Variables();
+
+    /**
+     * The meta object literal for the '<em><b>Accumulator</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ITERATION_CALL__ACCUMULATOR = eINSTANCE.getIterationCall_Accumulator();
+
+    /**
+     * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ITERATION_CALL__EXPRESSION = eINSTANCE.getIterationCall_Expression();
+
+    /**
      * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.IterationVariableImpl <em>Iteration Variable</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -6605,40 +6600,6 @@ public interface AstPackage extends EPackage
      * @generated
      */
     EAttribute SIMPLE_NAME__IDENTIFIER = eINSTANCE.getSimpleName_Identifier();
-
-    /**
-     * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.ElementDeclarationImpl <em>Element Declaration</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipselabs.mscript.language.ast.impl.ElementDeclarationImpl
-     * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getElementDeclaration()
-     * @generated
-     */
-    EClass ELEMENT_DECLARATION = eINSTANCE.getElementDeclaration();
-
-    /**
-     * The meta object literal for the '<em><b>Variables</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference ELEMENT_DECLARATION__VARIABLES = eINSTANCE.getElementDeclaration_Variables();
-
-    /**
-     * The meta object literal for the '<em><b>Accumulator</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference ELEMENT_DECLARATION__ACCUMULATOR = eINSTANCE.getElementDeclaration_Accumulator();
-
-    /**
-     * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference ELEMENT_DECLARATION__EXPRESSION = eINSTANCE.getElementDeclaration_Expression();
 
     /**
      * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.AssertionStatusKind <em>Assertion Status Kind</em>}' enum.

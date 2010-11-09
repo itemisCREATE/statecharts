@@ -32123,13 +32123,13 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
             // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:12246:1: ( () )
             // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:12247:1: ()
             {
-             before(grammarAccess.getIterationCallAccess().getElementDeclarationAction_0()); 
+             before(grammarAccess.getIterationCallAccess().getIterationCallAction_0()); 
             // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:12248:1: ()
             // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:12250:1: 
             {
             }
 
-             after(grammarAccess.getIterationCallAccess().getElementDeclarationAction_0()); 
+             after(grammarAccess.getIterationCallAccess().getIterationCallAction_0()); 
 
             }
 
