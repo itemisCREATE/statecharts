@@ -89,13 +89,13 @@ public interface FunctionModelPackage extends EPackage {
 	int FUNCTION__EQUATIONS = 1;
 
 	/**
-	 * The feature id for the '<em><b>Variable References</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Variable Descriptors</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FUNCTION__VARIABLE_REFERENCES = 2;
+	int FUNCTION__VARIABLE_DESCRIPTORS = 2;
 
 	/**
 	 * The number of structural features of the '<em>Function</em>' class.
@@ -263,14 +263,14 @@ public interface FunctionModelPackage extends EPackage {
 	int EQUATION_PART_FEATURE_COUNT = 3;
 
 	/**
-	 * The meta object id for the '{@link org.eclipselabs.mscript.language.functionmodel.impl.VariableReferenceImpl <em>Variable Reference</em>}' class.
+	 * The meta object id for the '{@link org.eclipselabs.mscript.language.functionmodel.impl.VariableDescriptorImpl <em>Variable Descriptor</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipselabs.mscript.language.functionmodel.impl.VariableReferenceImpl
-	 * @see org.eclipselabs.mscript.language.functionmodel.impl.FunctionModelPackageImpl#getVariableReference()
+	 * @see org.eclipselabs.mscript.language.functionmodel.impl.VariableDescriptorImpl
+	 * @see org.eclipselabs.mscript.language.functionmodel.impl.FunctionModelPackageImpl#getVariableDescriptor()
 	 * @generated
 	 */
-	int VARIABLE_REFERENCE = 4;
+	int VARIABLE_DESCRIPTOR = 4;
 
 	/**
 	 * The feature id for the '<em><b>Function</b></em>' container reference.
@@ -279,7 +279,7 @@ public interface FunctionModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_REFERENCE__FUNCTION = 0;
+	int VARIABLE_DESCRIPTOR__FUNCTION = 0;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -288,7 +288,7 @@ public interface FunctionModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_REFERENCE__NAME = 1;
+	int VARIABLE_DESCRIPTOR__NAME = 1;
 
 	/**
 	 * The feature id for the '<em><b>Kind</b></em>' attribute.
@@ -297,7 +297,7 @@ public interface FunctionModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_REFERENCE__KIND = 2;
+	int VARIABLE_DESCRIPTOR__KIND = 2;
 
 	/**
 	 * The feature id for the '<em><b>Steps</b></em>' containment reference list.
@@ -306,16 +306,16 @@ public interface FunctionModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_REFERENCE__STEPS = 3;
+	int VARIABLE_DESCRIPTOR__STEPS = 3;
 
 	/**
-	 * The number of structural features of the '<em>Variable Reference</em>' class.
+	 * The number of structural features of the '<em>Variable Descriptor</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_REFERENCE_FEATURE_COUNT = 4;
+	int VARIABLE_DESCRIPTOR_FEATURE_COUNT = 4;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.language.functionmodel.impl.VariableStepImpl <em>Variable Step</em>}' class.
@@ -328,13 +328,13 @@ public interface FunctionModelPackage extends EPackage {
 	int VARIABLE_STEP = 5;
 
 	/**
-	 * The feature id for the '<em><b>Reference</b></em>' container reference.
+	 * The feature id for the '<em><b>Descriptor</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_STEP__REFERENCE = 0;
+	int VARIABLE_STEP__DESCRIPTOR = 0;
 
 	/**
 	 * The feature id for the '<em><b>Index</b></em>' attribute.
@@ -415,15 +415,15 @@ public interface FunctionModelPackage extends EPackage {
 	EReference getFunction_Equations();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.functionmodel.Function#getVariableReferences <em>Variable References</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.functionmodel.Function#getVariableDescriptors <em>Variable Descriptors</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Variable References</em>'.
-	 * @see org.eclipselabs.mscript.language.functionmodel.Function#getVariableReferences()
+	 * @return the meta object for the containment reference list '<em>Variable Descriptors</em>'.
+	 * @see org.eclipselabs.mscript.language.functionmodel.Function#getVariableDescriptors()
 	 * @see #getFunction()
 	 * @generated
 	 */
-	EReference getFunction_VariableReferences();
+	EReference getFunction_VariableDescriptors();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.functionmodel.Equation <em>Equation</em>}'.
@@ -577,58 +577,58 @@ public interface FunctionModelPackage extends EPackage {
 	EReference getEquationPart_VariableStep();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.functionmodel.VariableReference <em>Variable Reference</em>}'.
+	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.functionmodel.VariableDescriptor <em>Variable Descriptor</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Variable Reference</em>'.
-	 * @see org.eclipselabs.mscript.language.functionmodel.VariableReference
+	 * @return the meta object for class '<em>Variable Descriptor</em>'.
+	 * @see org.eclipselabs.mscript.language.functionmodel.VariableDescriptor
 	 * @generated
 	 */
-	EClass getVariableReference();
+	EClass getVariableDescriptor();
 
 	/**
-	 * Returns the meta object for the container reference '{@link org.eclipselabs.mscript.language.functionmodel.VariableReference#getFunction <em>Function</em>}'.
+	 * Returns the meta object for the container reference '{@link org.eclipselabs.mscript.language.functionmodel.VariableDescriptor#getFunction <em>Function</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the container reference '<em>Function</em>'.
-	 * @see org.eclipselabs.mscript.language.functionmodel.VariableReference#getFunction()
-	 * @see #getVariableReference()
+	 * @see org.eclipselabs.mscript.language.functionmodel.VariableDescriptor#getFunction()
+	 * @see #getVariableDescriptor()
 	 * @generated
 	 */
-	EReference getVariableReference_Function();
+	EReference getVariableDescriptor_Function();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.functionmodel.VariableReference#getName <em>Name</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.functionmodel.VariableDescriptor#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.eclipselabs.mscript.language.functionmodel.VariableReference#getName()
-	 * @see #getVariableReference()
+	 * @see org.eclipselabs.mscript.language.functionmodel.VariableDescriptor#getName()
+	 * @see #getVariableDescriptor()
 	 * @generated
 	 */
-	EAttribute getVariableReference_Name();
+	EAttribute getVariableDescriptor_Name();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.functionmodel.VariableReference#getKind <em>Kind</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.functionmodel.VariableDescriptor#getKind <em>Kind</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Kind</em>'.
-	 * @see org.eclipselabs.mscript.language.functionmodel.VariableReference#getKind()
-	 * @see #getVariableReference()
+	 * @see org.eclipselabs.mscript.language.functionmodel.VariableDescriptor#getKind()
+	 * @see #getVariableDescriptor()
 	 * @generated
 	 */
-	EAttribute getVariableReference_Kind();
+	EAttribute getVariableDescriptor_Kind();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.functionmodel.VariableReference#getSteps <em>Steps</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.functionmodel.VariableDescriptor#getSteps <em>Steps</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Steps</em>'.
-	 * @see org.eclipselabs.mscript.language.functionmodel.VariableReference#getSteps()
-	 * @see #getVariableReference()
+	 * @see org.eclipselabs.mscript.language.functionmodel.VariableDescriptor#getSteps()
+	 * @see #getVariableDescriptor()
 	 * @generated
 	 */
-	EReference getVariableReference_Steps();
+	EReference getVariableDescriptor_Steps();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.functionmodel.VariableStep <em>Variable Step</em>}'.
@@ -641,15 +641,15 @@ public interface FunctionModelPackage extends EPackage {
 	EClass getVariableStep();
 
 	/**
-	 * Returns the meta object for the container reference '{@link org.eclipselabs.mscript.language.functionmodel.VariableStep#getReference <em>Reference</em>}'.
+	 * Returns the meta object for the container reference '{@link org.eclipselabs.mscript.language.functionmodel.VariableStep#getDescriptor <em>Descriptor</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Reference</em>'.
-	 * @see org.eclipselabs.mscript.language.functionmodel.VariableStep#getReference()
+	 * @return the meta object for the container reference '<em>Descriptor</em>'.
+	 * @see org.eclipselabs.mscript.language.functionmodel.VariableStep#getDescriptor()
 	 * @see #getVariableStep()
 	 * @generated
 	 */
-	EReference getVariableStep_Reference();
+	EReference getVariableStep_Descriptor();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.functionmodel.VariableStep#getIndex <em>Index</em>}'.
@@ -743,12 +743,12 @@ public interface FunctionModelPackage extends EPackage {
 		EReference FUNCTION__EQUATIONS = eINSTANCE.getFunction_Equations();
 
 		/**
-		 * The meta object literal for the '<em><b>Variable References</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Variable Descriptors</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference FUNCTION__VARIABLE_REFERENCES = eINSTANCE.getFunction_VariableReferences();
+		EReference FUNCTION__VARIABLE_DESCRIPTORS = eINSTANCE.getFunction_VariableDescriptors();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.functionmodel.impl.EquationImpl <em>Equation</em>}' class.
@@ -869,14 +869,14 @@ public interface FunctionModelPackage extends EPackage {
 		EReference EQUATION_PART__VARIABLE_STEP = eINSTANCE.getEquationPart_VariableStep();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.functionmodel.impl.VariableReferenceImpl <em>Variable Reference</em>}' class.
+		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.functionmodel.impl.VariableDescriptorImpl <em>Variable Descriptor</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipselabs.mscript.language.functionmodel.impl.VariableReferenceImpl
-		 * @see org.eclipselabs.mscript.language.functionmodel.impl.FunctionModelPackageImpl#getVariableReference()
+		 * @see org.eclipselabs.mscript.language.functionmodel.impl.VariableDescriptorImpl
+		 * @see org.eclipselabs.mscript.language.functionmodel.impl.FunctionModelPackageImpl#getVariableDescriptor()
 		 * @generated
 		 */
-		EClass VARIABLE_REFERENCE = eINSTANCE.getVariableReference();
+		EClass VARIABLE_DESCRIPTOR = eINSTANCE.getVariableDescriptor();
 
 		/**
 		 * The meta object literal for the '<em><b>Function</b></em>' container reference feature.
@@ -884,7 +884,7 @@ public interface FunctionModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference VARIABLE_REFERENCE__FUNCTION = eINSTANCE.getVariableReference_Function();
+		EReference VARIABLE_DESCRIPTOR__FUNCTION = eINSTANCE.getVariableDescriptor_Function();
 
 		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -892,7 +892,7 @@ public interface FunctionModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute VARIABLE_REFERENCE__NAME = eINSTANCE.getVariableReference_Name();
+		EAttribute VARIABLE_DESCRIPTOR__NAME = eINSTANCE.getVariableDescriptor_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>Kind</b></em>' attribute feature.
@@ -900,7 +900,7 @@ public interface FunctionModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute VARIABLE_REFERENCE__KIND = eINSTANCE.getVariableReference_Kind();
+		EAttribute VARIABLE_DESCRIPTOR__KIND = eINSTANCE.getVariableDescriptor_Kind();
 
 		/**
 		 * The meta object literal for the '<em><b>Steps</b></em>' containment reference list feature.
@@ -908,7 +908,7 @@ public interface FunctionModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference VARIABLE_REFERENCE__STEPS = eINSTANCE.getVariableReference_Steps();
+		EReference VARIABLE_DESCRIPTOR__STEPS = eINSTANCE.getVariableDescriptor_Steps();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.functionmodel.impl.VariableStepImpl <em>Variable Step</em>}' class.
@@ -921,12 +921,12 @@ public interface FunctionModelPackage extends EPackage {
 		EClass VARIABLE_STEP = eINSTANCE.getVariableStep();
 
 		/**
-		 * The meta object literal for the '<em><b>Reference</b></em>' container reference feature.
+		 * The meta object literal for the '<em><b>Descriptor</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference VARIABLE_STEP__REFERENCE = eINSTANCE.getVariableStep_Reference();
+		EReference VARIABLE_STEP__DESCRIPTOR = eINSTANCE.getVariableStep_Descriptor();
 
 		/**
 		 * The meta object literal for the '<em><b>Index</b></em>' attribute feature.

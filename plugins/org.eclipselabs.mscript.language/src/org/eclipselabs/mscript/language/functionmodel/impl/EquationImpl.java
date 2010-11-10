@@ -226,12 +226,12 @@ public class EquationImpl extends EObjectImpl implements Equation {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public boolean leftHandSideHasValidVariableReference(DiagnosticChain diagnostics, Map<Object, Object> context) {
+	public boolean isLeftHandSideValid(DiagnosticChain diagnostics, Map<Object, Object> context) {
 		Expression lhsExpression = getDefinition().getLeftHandSide();
 		String message = null;
 		if (getLeftHandSide().getParts().size() == 1 && lhsExpression instanceof FeatureCall) {
 			EquationPart part = getLeftHandSide().getParts().get(0);
-			switch (part.getVariableStep().getReference().getKind()) {
+			switch (part.getVariableStep().getDescriptor().getKind()) {
 			case TEMPLATE_PARAMETER:
 				message = "Left-hand side must not be template parameter reference";
 				break;
@@ -254,7 +254,7 @@ public class EquationImpl extends EObjectImpl implements Equation {
 			diagnostics.add(new BasicDiagnostic(
 					Diagnostic.ERROR,
 					FunctionModelValidator.DIAGNOSTIC_SOURCE,
-					FunctionModelValidator.EQUATION__LEFT_HAND_SIDE_HAS_VALID_VARIABLE_REFERENCE,
+					FunctionModelValidator.EQUATION__IS_LEFT_HAND_SIDE_VALID,
 					message,
 					new Object [] { lhsExpression }));
 			return false;
@@ -267,7 +267,7 @@ public class EquationImpl extends EObjectImpl implements Equation {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public boolean rightHandSideHasValidVariableReferences(DiagnosticChain diagnostics, Map<Object, Object> context) {
+	public boolean isRightHandSideValid(DiagnosticChain diagnostics, Map<Object, Object> context) {
 		boolean result = true;
 		for (EquationPart part : getRightHandSide().getParts()) {
 			if (part.getVariableStep().isInitial()) {
@@ -275,7 +275,7 @@ public class EquationImpl extends EObjectImpl implements Equation {
 					diagnostics.add(new BasicDiagnostic(
 							Diagnostic.ERROR,
 							FunctionModelValidator.DIAGNOSTIC_SOURCE,
-							FunctionModelValidator.EQUATION__RIGHT_HAND_SIDE_HAS_VALID_VARIABLE_REFERENCES,
+							FunctionModelValidator.EQUATION__IS_RIGHT_HAND_SIDE_VALID,
 							"Right-hand side must not reference initial value",
 							new Object [] { part.getFeatureCall() }));
 				}

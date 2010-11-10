@@ -199,7 +199,7 @@
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//IterationAccumulator">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//IterationAccumulator/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//IterationAccumulator/initialExpression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//IterationAccumulator/initializer"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//Subscript">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//Subscript/slice"/>

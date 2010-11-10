@@ -1757,13 +1757,13 @@ public interface AstPackage extends EPackage
   int ITERATION_ACCUMULATOR__NAME = 0;
 
   /**
-   * The feature id for the '<em><b>Initial Expression</b></em>' containment reference.
+   * The feature id for the '<em><b>Initializer</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ITERATION_ACCUMULATOR__INITIAL_EXPRESSION = 1;
+  int ITERATION_ACCUMULATOR__INITIALIZER = 1;
 
   /**
    * The number of structural features of the '<em>Iteration Accumulator</em>' class.
@@ -4015,15 +4015,15 @@ public interface AstPackage extends EPackage
   EAttribute getIterationAccumulator_Name();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.IterationAccumulator#getInitialExpression <em>Initial Expression</em>}'.
+   * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.IterationAccumulator#getInitializer <em>Initializer</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Initial Expression</em>'.
-   * @see org.eclipselabs.mscript.language.ast.IterationAccumulator#getInitialExpression()
+   * @return the meta object for the containment reference '<em>Initializer</em>'.
+   * @see org.eclipselabs.mscript.language.ast.IterationAccumulator#getInitializer()
    * @see #getIterationAccumulator()
    * @generated
    */
-  EReference getIterationAccumulator_InitialExpression();
+  EReference getIterationAccumulator_Initializer();
 
   /**
    * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.Subscript <em>Subscript</em>}'.
@@ -5938,12 +5938,12 @@ public interface AstPackage extends EPackage
     EAttribute ITERATION_ACCUMULATOR__NAME = eINSTANCE.getIterationAccumulator_Name();
 
     /**
-     * The meta object literal for the '<em><b>Initial Expression</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Initializer</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference ITERATION_ACCUMULATOR__INITIAL_EXPRESSION = eINSTANCE.getIterationAccumulator_InitialExpression();
+    EReference ITERATION_ACCUMULATOR__INITIALIZER = eINSTANCE.getIterationAccumulator_Initializer();
 
     /**
      * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.SubscriptImpl <em>Subscript</em>}' class.

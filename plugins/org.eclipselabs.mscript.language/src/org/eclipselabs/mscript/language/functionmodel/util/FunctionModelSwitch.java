@@ -15,7 +15,7 @@ import org.eclipselabs.mscript.language.functionmodel.EquationPart;
 import org.eclipselabs.mscript.language.functionmodel.EquationSide;
 import org.eclipselabs.mscript.language.functionmodel.Function;
 import org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage;
-import org.eclipselabs.mscript.language.functionmodel.VariableReference;
+import org.eclipselabs.mscript.language.functionmodel.VariableDescriptor;
 import org.eclipselabs.mscript.language.functionmodel.VariableStep;
 
 /**
@@ -116,9 +116,9 @@ public class FunctionModelSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case FunctionModelPackage.VARIABLE_REFERENCE: {
-				VariableReference variableReference = (VariableReference)theEObject;
-				T result = caseVariableReference(variableReference);
+			case FunctionModelPackage.VARIABLE_DESCRIPTOR: {
+				VariableDescriptor variableDescriptor = (VariableDescriptor)theEObject;
+				T result = caseVariableDescriptor(variableDescriptor);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -193,17 +193,17 @@ public class FunctionModelSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Variable Reference</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Variable Descriptor</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Variable Reference</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Variable Descriptor</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseVariableReference(VariableReference object) {
+	public T caseVariableDescriptor(VariableDescriptor object) {
 		return null;
 	}
 

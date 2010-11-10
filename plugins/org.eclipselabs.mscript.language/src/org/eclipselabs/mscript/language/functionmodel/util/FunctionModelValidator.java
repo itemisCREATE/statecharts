@@ -17,8 +17,8 @@ import org.eclipselabs.mscript.language.functionmodel.EquationPart;
 import org.eclipselabs.mscript.language.functionmodel.EquationSide;
 import org.eclipselabs.mscript.language.functionmodel.Function;
 import org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage;
+import org.eclipselabs.mscript.language.functionmodel.VariableDescriptor;
 import org.eclipselabs.mscript.language.functionmodel.VariableKind;
-import org.eclipselabs.mscript.language.functionmodel.VariableReference;
 import org.eclipselabs.mscript.language.functionmodel.VariableStep;
 
 /**
@@ -72,28 +72,28 @@ public class FunctionModelValidator extends EObjectValidator {
 	public static final int FUNCTION__HAS_EQUATIONS_FOR_EACH_OUTPUT = 3;
 
 	/**
-	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Has Equations For Each Variable Reference' of 'Function'.
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Has Equations For Each Variable Step' of 'Function'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int FUNCTION__HAS_EQUATIONS_FOR_EACH_VARIABLE_REFERENCE = 4;
+	public static final int FUNCTION__HAS_EQUATIONS_FOR_EACH_VARIABLE_STEP = 4;
 
 	/**
-	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Left Hand Side Has Valid Variable Reference' of 'Equation'.
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Is Left Hand Side Valid' of 'Equation'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int EQUATION__LEFT_HAND_SIDE_HAS_VALID_VARIABLE_REFERENCE = 5;
+	public static final int EQUATION__IS_LEFT_HAND_SIDE_VALID = 5;
 
 	/**
-	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Right Hand Side Has Valid Variable References' of 'Equation'.
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Is Right Hand Side Valid' of 'Equation'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int EQUATION__RIGHT_HAND_SIDE_HAS_VALID_VARIABLE_REFERENCES = 6;
+	public static final int EQUATION__IS_RIGHT_HAND_SIDE_VALID = 6;
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants.
@@ -149,8 +149,8 @@ public class FunctionModelValidator extends EObjectValidator {
 				return validateEquationSide((EquationSide)value, diagnostics, context);
 			case FunctionModelPackage.EQUATION_PART:
 				return validateEquationPart((EquationPart)value, diagnostics, context);
-			case FunctionModelPackage.VARIABLE_REFERENCE:
-				return validateVariableReference((VariableReference)value, diagnostics, context);
+			case FunctionModelPackage.VARIABLE_DESCRIPTOR:
+				return validateVariableDescriptor((VariableDescriptor)value, diagnostics, context);
 			case FunctionModelPackage.VARIABLE_STEP:
 				return validateVariableStep((VariableStep)value, diagnostics, context);
 			case FunctionModelPackage.VARIABLE_KIND:
@@ -178,7 +178,7 @@ public class FunctionModelValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validateFunction_hasNoDuplicateEquations(function, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFunction_hasNoCyclicEquations(function, diagnostics, context);
 		if (result || diagnostics != null) result &= validateFunction_hasEquationsForEachOutput(function, diagnostics, context);
-		if (result || diagnostics != null) result &= validateFunction_hasEquationsForEachVariableReference(function, diagnostics, context);
+		if (result || diagnostics != null) result &= validateFunction_hasEquationsForEachVariableStep(function, diagnostics, context);
 		return result;
 	}
 
@@ -213,13 +213,13 @@ public class FunctionModelValidator extends EObjectValidator {
 	}
 
 	/**
-	 * Validates the hasEquationsForEachVariableReference constraint of '<em>Function</em>'.
+	 * Validates the hasEquationsForEachVariableStep constraint of '<em>Function</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateFunction_hasEquationsForEachVariableReference(Function function, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return function.hasEquationsForEachVariableReference(diagnostics, context);
+	public boolean validateFunction_hasEquationsForEachVariableStep(Function function, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return function.hasEquationsForEachVariableStep(diagnostics, context);
 	}
 
 	/**
@@ -237,29 +237,29 @@ public class FunctionModelValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_UniqueID(equation, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(equation, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(equation, diagnostics, context);
-		if (result || diagnostics != null) result &= validateEquation_leftHandSideHasValidVariableReference(equation, diagnostics, context);
-		if (result || diagnostics != null) result &= validateEquation_rightHandSideHasValidVariableReferences(equation, diagnostics, context);
+		if (result || diagnostics != null) result &= validateEquation_isLeftHandSideValid(equation, diagnostics, context);
+		if (result || diagnostics != null) result &= validateEquation_isRightHandSideValid(equation, diagnostics, context);
 		return result;
 	}
 
 	/**
-	 * Validates the leftHandSideHasValidVariableReference constraint of '<em>Equation</em>'.
+	 * Validates the isLeftHandSideValid constraint of '<em>Equation</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateEquation_leftHandSideHasValidVariableReference(Equation equation, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return equation.leftHandSideHasValidVariableReference(diagnostics, context);
+	public boolean validateEquation_isLeftHandSideValid(Equation equation, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return equation.isLeftHandSideValid(diagnostics, context);
 	}
 
 	/**
-	 * Validates the rightHandSideHasValidVariableReferences constraint of '<em>Equation</em>'.
+	 * Validates the isRightHandSideValid constraint of '<em>Equation</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateEquation_rightHandSideHasValidVariableReferences(Equation equation, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return equation.rightHandSideHasValidVariableReferences(diagnostics, context);
+	public boolean validateEquation_isRightHandSideValid(Equation equation, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return equation.isRightHandSideValid(diagnostics, context);
 	}
 
 	/**
@@ -285,8 +285,8 @@ public class FunctionModelValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateVariableReference(VariableReference variableReference, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(variableReference, diagnostics, context);
+	public boolean validateVariableDescriptor(VariableDescriptor variableDescriptor, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(variableDescriptor, diagnostics, context);
 	}
 
 	/**

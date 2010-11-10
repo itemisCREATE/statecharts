@@ -26,7 +26,7 @@ import org.eclipselabs.mscript.language.ast.IterationAccumulator;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.IterationAccumulatorImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.IterationAccumulatorImpl#getInitialExpression <em>Initial Expression</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.IterationAccumulatorImpl#getInitializer <em>Initializer</em>}</li>
  * </ul>
  * </p>
  *
@@ -55,14 +55,14 @@ public class IterationAccumulatorImpl extends MinimalEObjectImpl.Container imple
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getInitialExpression() <em>Initial Expression</em>}' containment reference.
+   * The cached value of the '{@link #getInitializer() <em>Initializer</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getInitialExpression()
+   * @see #getInitializer()
    * @generated
    * @ordered
    */
-  protected Expression initialExpression;
+  protected Expression initializer;
 
   /**
    * <!-- begin-user-doc -->
@@ -113,9 +113,9 @@ public class IterationAccumulatorImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public Expression getInitialExpression()
+  public Expression getInitializer()
   {
-    return initialExpression;
+    return initializer;
   }
 
   /**
@@ -123,13 +123,13 @@ public class IterationAccumulatorImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetInitialExpression(Expression newInitialExpression, NotificationChain msgs)
+  public NotificationChain basicSetInitializer(Expression newInitializer, NotificationChain msgs)
   {
-    Expression oldInitialExpression = initialExpression;
-    initialExpression = newInitialExpression;
+    Expression oldInitializer = initializer;
+    initializer = newInitializer;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.ITERATION_ACCUMULATOR__INITIAL_EXPRESSION, oldInitialExpression, newInitialExpression);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.ITERATION_ACCUMULATOR__INITIALIZER, oldInitializer, newInitializer);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -140,20 +140,20 @@ public class IterationAccumulatorImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setInitialExpression(Expression newInitialExpression)
+  public void setInitializer(Expression newInitializer)
   {
-    if (newInitialExpression != initialExpression)
+    if (newInitializer != initializer)
     {
       NotificationChain msgs = null;
-      if (initialExpression != null)
-        msgs = ((InternalEObject)initialExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.ITERATION_ACCUMULATOR__INITIAL_EXPRESSION, null, msgs);
-      if (newInitialExpression != null)
-        msgs = ((InternalEObject)newInitialExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.ITERATION_ACCUMULATOR__INITIAL_EXPRESSION, null, msgs);
-      msgs = basicSetInitialExpression(newInitialExpression, msgs);
+      if (initializer != null)
+        msgs = ((InternalEObject)initializer).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.ITERATION_ACCUMULATOR__INITIALIZER, null, msgs);
+      if (newInitializer != null)
+        msgs = ((InternalEObject)newInitializer).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.ITERATION_ACCUMULATOR__INITIALIZER, null, msgs);
+      msgs = basicSetInitializer(newInitializer, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.ITERATION_ACCUMULATOR__INITIAL_EXPRESSION, newInitialExpression, newInitialExpression));
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.ITERATION_ACCUMULATOR__INITIALIZER, newInitializer, newInitializer));
   }
 
   /**
@@ -166,8 +166,8 @@ public class IterationAccumulatorImpl extends MinimalEObjectImpl.Container imple
   {
     switch (featureID)
     {
-      case AstPackage.ITERATION_ACCUMULATOR__INITIAL_EXPRESSION:
-        return basicSetInitialExpression(null, msgs);
+      case AstPackage.ITERATION_ACCUMULATOR__INITIALIZER:
+        return basicSetInitializer(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -184,8 +184,8 @@ public class IterationAccumulatorImpl extends MinimalEObjectImpl.Container imple
     {
       case AstPackage.ITERATION_ACCUMULATOR__NAME:
         return getName();
-      case AstPackage.ITERATION_ACCUMULATOR__INITIAL_EXPRESSION:
-        return getInitialExpression();
+      case AstPackage.ITERATION_ACCUMULATOR__INITIALIZER:
+        return getInitializer();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -203,8 +203,8 @@ public class IterationAccumulatorImpl extends MinimalEObjectImpl.Container imple
       case AstPackage.ITERATION_ACCUMULATOR__NAME:
         setName((String)newValue);
         return;
-      case AstPackage.ITERATION_ACCUMULATOR__INITIAL_EXPRESSION:
-        setInitialExpression((Expression)newValue);
+      case AstPackage.ITERATION_ACCUMULATOR__INITIALIZER:
+        setInitializer((Expression)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -223,8 +223,8 @@ public class IterationAccumulatorImpl extends MinimalEObjectImpl.Container imple
       case AstPackage.ITERATION_ACCUMULATOR__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case AstPackage.ITERATION_ACCUMULATOR__INITIAL_EXPRESSION:
-        setInitialExpression((Expression)null);
+      case AstPackage.ITERATION_ACCUMULATOR__INITIALIZER:
+        setInitializer((Expression)null);
         return;
     }
     super.eUnset(featureID);
@@ -242,8 +242,8 @@ public class IterationAccumulatorImpl extends MinimalEObjectImpl.Container imple
     {
       case AstPackage.ITERATION_ACCUMULATOR__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case AstPackage.ITERATION_ACCUMULATOR__INITIAL_EXPRESSION:
-        return initialExpression != null;
+      case AstPackage.ITERATION_ACCUMULATOR__INITIALIZER:
+        return initializer != null;
     }
     return super.eIsSet(featureID);
   }

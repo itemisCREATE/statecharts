@@ -2668,14 +2668,14 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cNameIDTerminalRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
 		private final Keyword cEqualsSignKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cInitialExpressionAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cInitialExpressionExpressionParserRuleCall_2_0 = (RuleCall)cInitialExpressionAssignment_2.eContents().get(0);
+		private final Assignment cInitializerAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cInitializerExpressionParserRuleCall_2_0 = (RuleCall)cInitializerAssignment_2.eContents().get(0);
 		
 		//IterationAccumulator:
-		//	name=ID "=" initialExpression=Expression;
+		//	name=ID "=" initializer=Expression;
 		public ParserRule getRule() { return rule; }
 
-		//name=ID "=" initialExpression=Expression
+		//name=ID "=" initializer=Expression
 		public Group getGroup() { return cGroup; }
 
 		//name=ID
@@ -2687,11 +2687,11 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		//"="
 		public Keyword getEqualsSignKeyword_1() { return cEqualsSignKeyword_1; }
 
-		//initialExpression=Expression
-		public Assignment getInitialExpressionAssignment_2() { return cInitialExpressionAssignment_2; }
+		//initializer=Expression
+		public Assignment getInitializerAssignment_2() { return cInitializerAssignment_2; }
 
 		//Expression
-		public RuleCall getInitialExpressionExpressionParserRuleCall_2_0() { return cInitialExpressionExpressionParserRuleCall_2_0; }
+		public RuleCall getInitializerExpressionParserRuleCall_2_0() { return cInitializerExpressionParserRuleCall_2_0; }
 	}
 
 	public class SubscriptElements extends AbstractParserRuleElementFinder {
@@ -4434,7 +4434,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//IterationAccumulator:
-	//	name=ID "=" initialExpression=Expression;
+	//	name=ID "=" initializer=Expression;
 	public IterationAccumulatorElements getIterationAccumulatorAccess() {
 		return (pIterationAccumulator != null) ? pIterationAccumulator : (pIterationAccumulator = new IterationAccumulatorElements());
 	}

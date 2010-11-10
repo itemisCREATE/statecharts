@@ -1910,7 +1910,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getIterationAccumulator_InitialExpression()
+  public EReference getIterationAccumulator_Initializer()
   {
     return (EReference)iterationAccumulatorEClass.getEStructuralFeatures().get(1);
   }
@@ -2946,7 +2946,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
 
     iterationAccumulatorEClass = createEClass(ITERATION_ACCUMULATOR);
     createEAttribute(iterationAccumulatorEClass, ITERATION_ACCUMULATOR__NAME);
-    createEReference(iterationAccumulatorEClass, ITERATION_ACCUMULATOR__INITIAL_EXPRESSION);
+    createEReference(iterationAccumulatorEClass, ITERATION_ACCUMULATOR__INITIALIZER);
 
     subscriptEClass = createEClass(SUBSCRIPT);
     createEAttribute(subscriptEClass, SUBSCRIPT__SLICE);
@@ -3303,7 +3303,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
 
     initEClass(iterationAccumulatorEClass, IterationAccumulator.class, "IterationAccumulator", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getIterationAccumulator_Name(), ecorePackage.getEString(), "name", null, 0, 1, IterationAccumulator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getIterationAccumulator_InitialExpression(), this.getExpression(), null, "initialExpression", null, 0, 1, IterationAccumulator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getIterationAccumulator_Initializer(), this.getExpression(), null, "initializer", null, 0, 1, IterationAccumulator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(subscriptEClass, Subscript.class, "Subscript", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getSubscript_Slice(), ecorePackage.getEBoolean(), "slice", null, 0, 1, Subscript.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

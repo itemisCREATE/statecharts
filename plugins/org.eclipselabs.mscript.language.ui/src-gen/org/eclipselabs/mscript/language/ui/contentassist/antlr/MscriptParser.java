@@ -305,7 +305,7 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getIterationCallAccess().getExpressionAssignment_6(), "rule__IterationCall__ExpressionAssignment_6");
 					put(grammarAccess.getIterationVariableAccess().getNameAssignment(), "rule__IterationVariable__NameAssignment");
 					put(grammarAccess.getIterationAccumulatorAccess().getNameAssignment_0(), "rule__IterationAccumulator__NameAssignment_0");
-					put(grammarAccess.getIterationAccumulatorAccess().getInitialExpressionAssignment_2(), "rule__IterationAccumulator__InitialExpressionAssignment_2");
+					put(grammarAccess.getIterationAccumulatorAccess().getInitializerAssignment_2(), "rule__IterationAccumulator__InitializerAssignment_2");
 					put(grammarAccess.getSubscriptAccess().getSliceAssignment_0(), "rule__Subscript__SliceAssignment_0");
 					put(grammarAccess.getSubscriptAccess().getExpressionAssignment_1(), "rule__Subscript__ExpressionAssignment_1");
 					put(grammarAccess.getArrayConstructionOperatorAccess().getExpressionsAssignment_1(), "rule__ArrayConstructionOperator__ExpressionsAssignment_1");

@@ -11,27 +11,27 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Variable Reference</b></em>'.
+ * A representation of the model object '<em><b>Variable Descriptor</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.functionmodel.VariableReference#getFunction <em>Function</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.functionmodel.VariableReference#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.functionmodel.VariableReference#getKind <em>Kind</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.functionmodel.VariableReference#getSteps <em>Steps</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.functionmodel.VariableDescriptor#getFunction <em>Function</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.functionmodel.VariableDescriptor#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.functionmodel.VariableDescriptor#getKind <em>Kind</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.functionmodel.VariableDescriptor#getSteps <em>Steps</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage#getVariableReference()
+ * @see org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage#getVariableDescriptor()
  * @model
  * @generated
  */
-public interface VariableReference extends EObject {
+public interface VariableDescriptor extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Function</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipselabs.mscript.language.functionmodel.Function#getVariableReferences <em>Variable References</em>}'.
+	 * It is bidirectional and its opposite is '{@link org.eclipselabs.mscript.language.functionmodel.Function#getVariableDescriptors <em>Variable Descriptors</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Function</em>' container reference isn't clear,
@@ -40,15 +40,15 @@ public interface VariableReference extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Function</em>' container reference.
 	 * @see #setFunction(Function)
-	 * @see org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage#getVariableReference_Function()
-	 * @see org.eclipselabs.mscript.language.functionmodel.Function#getVariableReferences
-	 * @model opposite="variableReferences" required="true" transient="false"
+	 * @see org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage#getVariableDescriptor_Function()
+	 * @see org.eclipselabs.mscript.language.functionmodel.Function#getVariableDescriptors
+	 * @model opposite="variableDescriptors" required="true" transient="false"
 	 * @generated
 	 */
 	Function getFunction();
 
 	/**
-	 * Sets the value of the '{@link org.eclipselabs.mscript.language.functionmodel.VariableReference#getFunction <em>Function</em>}' container reference.
+	 * Sets the value of the '{@link org.eclipselabs.mscript.language.functionmodel.VariableDescriptor#getFunction <em>Function</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Function</em>' container reference.
@@ -67,14 +67,14 @@ public interface VariableReference extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
-	 * @see org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage#getVariableReference_Name()
+	 * @see org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage#getVariableDescriptor_Name()
 	 * @model
 	 * @generated
 	 */
 	String getName();
 
 	/**
-	 * Sets the value of the '{@link org.eclipselabs.mscript.language.functionmodel.VariableReference#getName <em>Name</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipselabs.mscript.language.functionmodel.VariableDescriptor#getName <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Name</em>' attribute.
@@ -95,14 +95,14 @@ public interface VariableReference extends EObject {
 	 * @return the value of the '<em>Kind</em>' attribute.
 	 * @see org.eclipselabs.mscript.language.functionmodel.VariableKind
 	 * @see #setKind(VariableKind)
-	 * @see org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage#getVariableReference_Kind()
+	 * @see org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage#getVariableDescriptor_Kind()
 	 * @model
 	 * @generated
 	 */
 	VariableKind getKind();
 
 	/**
-	 * Sets the value of the '{@link org.eclipselabs.mscript.language.functionmodel.VariableReference#getKind <em>Kind</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipselabs.mscript.language.functionmodel.VariableDescriptor#getKind <em>Kind</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Kind</em>' attribute.
@@ -115,17 +115,17 @@ public interface VariableReference extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Steps</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipselabs.mscript.language.functionmodel.VariableStep}.
-	 * It is bidirectional and its opposite is '{@link org.eclipselabs.mscript.language.functionmodel.VariableStep#getReference <em>Reference</em>}'.
+	 * It is bidirectional and its opposite is '{@link org.eclipselabs.mscript.language.functionmodel.VariableStep#getDescriptor <em>Descriptor</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Steps</em>' reference isn't clear,
+	 * If the meaning of the '<em>Steps</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Steps</em>' containment reference list.
-	 * @see org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage#getVariableReference_Steps()
-	 * @see org.eclipselabs.mscript.language.functionmodel.VariableStep#getReference
-	 * @model opposite="reference" containment="true"
+	 * @see org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage#getVariableDescriptor_Steps()
+	 * @see org.eclipselabs.mscript.language.functionmodel.VariableStep#getDescriptor
+	 * @model opposite="descriptor" containment="true"
 	 * @generated
 	 */
 	EList<VariableStep> getSteps();
@@ -138,4 +138,4 @@ public interface VariableReference extends EObject {
 	 */
 	VariableStep getStep(int index, boolean initial);
 
-} // VariableReference
+} // VariableDescriptor

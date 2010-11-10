@@ -19,9 +19,9 @@
     <genClasses ecoreClass="FunctionModel.ecore#//Function">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FunctionModel.ecore#//Function/definition"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionModel.ecore#//Function/equations"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionModel.ecore#//Function/variableReferences"/>
-      <genOperations ecoreOperation="FunctionModel.ecore#//Function/getVariableReference">
-        <genParameters ecoreParameter="FunctionModel.ecore#//Function/getVariableReference/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionModel.ecore#//Function/variableDescriptors"/>
+      <genOperations ecoreOperation="FunctionModel.ecore#//Function/getVariableDescriptor">
+        <genParameters ecoreParameter="FunctionModel.ecore#//Function/getVariableDescriptor/name"/>
       </genOperations>
       <genOperations ecoreOperation="FunctionModel.ecore#//Function/hasNoDuplicateEquations">
         <genParameters ecoreParameter="FunctionModel.ecore#//Function/hasNoDuplicateEquations/diagnostics"/>
@@ -35,9 +35,9 @@
         <genParameters ecoreParameter="FunctionModel.ecore#//Function/hasEquationsForEachOutput/diagnostics"/>
         <genParameters ecoreParameter="FunctionModel.ecore#//Function/hasEquationsForEachOutput/context"/>
       </genOperations>
-      <genOperations ecoreOperation="FunctionModel.ecore#//Function/hasEquationsForEachVariableReference">
-        <genParameters ecoreParameter="FunctionModel.ecore#//Function/hasEquationsForEachVariableReference/diagnostics"/>
-        <genParameters ecoreParameter="FunctionModel.ecore#//Function/hasEquationsForEachVariableReference/context"/>
+      <genOperations ecoreOperation="FunctionModel.ecore#//Function/hasEquationsForEachVariableStep">
+        <genParameters ecoreParameter="FunctionModel.ecore#//Function/hasEquationsForEachVariableStep/diagnostics"/>
+        <genParameters ecoreParameter="FunctionModel.ecore#//Function/hasEquationsForEachVariableStep/context"/>
       </genOperations>
     </genClasses>
     <genClasses ecoreClass="FunctionModel.ecore#//Equation">
@@ -46,13 +46,13 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionModel.ecore#//Equation/sides"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionModel.ecore#//Equation/leftHandSide"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionModel.ecore#//Equation/rightHandSide"/>
-      <genOperations ecoreOperation="FunctionModel.ecore#//Equation/leftHandSideHasValidVariableReference">
-        <genParameters ecoreParameter="FunctionModel.ecore#//Equation/leftHandSideHasValidVariableReference/diagnostics"/>
-        <genParameters ecoreParameter="FunctionModel.ecore#//Equation/leftHandSideHasValidVariableReference/context"/>
+      <genOperations ecoreOperation="FunctionModel.ecore#//Equation/isLeftHandSideValid">
+        <genParameters ecoreParameter="FunctionModel.ecore#//Equation/isLeftHandSideValid/diagnostics"/>
+        <genParameters ecoreParameter="FunctionModel.ecore#//Equation/isLeftHandSideValid/context"/>
       </genOperations>
-      <genOperations ecoreOperation="FunctionModel.ecore#//Equation/rightHandSideHasValidVariableReferences">
-        <genParameters ecoreParameter="FunctionModel.ecore#//Equation/rightHandSideHasValidVariableReferences/diagnostics"/>
-        <genParameters ecoreParameter="FunctionModel.ecore#//Equation/rightHandSideHasValidVariableReferences/context"/>
+      <genOperations ecoreOperation="FunctionModel.ecore#//Equation/isRightHandSideValid">
+        <genParameters ecoreParameter="FunctionModel.ecore#//Equation/isRightHandSideValid/diagnostics"/>
+        <genParameters ecoreParameter="FunctionModel.ecore#//Equation/isRightHandSideValid/context"/>
       </genOperations>
     </genClasses>
     <genClasses ecoreClass="FunctionModel.ecore#//EquationSide">
@@ -66,18 +66,18 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FunctionModel.ecore#//EquationPart/featureCall"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FunctionModel.ecore#//EquationPart/variableStep"/>
     </genClasses>
-    <genClasses ecoreClass="FunctionModel.ecore#//VariableReference">
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FunctionModel.ecore#//VariableReference/function"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionModel.ecore#//VariableReference/name"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionModel.ecore#//VariableReference/kind"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FunctionModel.ecore#//VariableReference/steps"/>
-      <genOperations ecoreOperation="FunctionModel.ecore#//VariableReference/getStep">
-        <genParameters ecoreParameter="FunctionModel.ecore#//VariableReference/getStep/index"/>
-        <genParameters ecoreParameter="FunctionModel.ecore#//VariableReference/getStep/initial"/>
+    <genClasses ecoreClass="FunctionModel.ecore#//VariableDescriptor">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FunctionModel.ecore#//VariableDescriptor/function"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionModel.ecore#//VariableDescriptor/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionModel.ecore#//VariableDescriptor/kind"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionModel.ecore#//VariableDescriptor/steps"/>
+      <genOperations ecoreOperation="FunctionModel.ecore#//VariableDescriptor/getStep">
+        <genParameters ecoreParameter="FunctionModel.ecore#//VariableDescriptor/getStep/index"/>
+        <genParameters ecoreParameter="FunctionModel.ecore#//VariableDescriptor/getStep/initial"/>
       </genOperations>
     </genClasses>
     <genClasses ecoreClass="FunctionModel.ecore#//VariableStep">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FunctionModel.ecore#//VariableStep/reference"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FunctionModel.ecore#//VariableStep/descriptor"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionModel.ecore#//VariableStep/index"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FunctionModel.ecore#//VariableStep/initial"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FunctionModel.ecore#//VariableStep/usingEquationParts"/>

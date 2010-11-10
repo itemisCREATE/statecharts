@@ -18,8 +18,8 @@ import org.eclipselabs.mscript.language.functionmodel.EquationSide;
 import org.eclipselabs.mscript.language.functionmodel.Function;
 import org.eclipselabs.mscript.language.functionmodel.FunctionModelFactory;
 import org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage;
+import org.eclipselabs.mscript.language.functionmodel.VariableDescriptor;
 import org.eclipselabs.mscript.language.functionmodel.VariableKind;
-import org.eclipselabs.mscript.language.functionmodel.VariableReference;
 import org.eclipselabs.mscript.language.functionmodel.VariableStep;
 
 /**
@@ -70,7 +70,7 @@ public class FunctionModelFactoryImpl extends EFactoryImpl implements FunctionMo
 			case FunctionModelPackage.EQUATION: return createEquation();
 			case FunctionModelPackage.EQUATION_SIDE: return createEquationSide();
 			case FunctionModelPackage.EQUATION_PART: return createEquationPart();
-			case FunctionModelPackage.VARIABLE_REFERENCE: return createVariableReference();
+			case FunctionModelPackage.VARIABLE_DESCRIPTOR: return createVariableDescriptor();
 			case FunctionModelPackage.VARIABLE_STEP: return createVariableStep();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -152,9 +152,9 @@ public class FunctionModelFactoryImpl extends EFactoryImpl implements FunctionMo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public VariableReference createVariableReference() {
-		VariableReferenceImpl variableReference = new VariableReferenceImpl();
-		return variableReference;
+	public VariableDescriptor createVariableDescriptor() {
+		VariableDescriptorImpl variableDescriptor = new VariableDescriptorImpl();
+		return variableDescriptor;
 	}
 
 	/**

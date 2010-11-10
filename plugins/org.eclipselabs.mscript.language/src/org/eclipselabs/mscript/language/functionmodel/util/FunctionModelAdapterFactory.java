@@ -15,7 +15,7 @@ import org.eclipselabs.mscript.language.functionmodel.EquationPart;
 import org.eclipselabs.mscript.language.functionmodel.EquationSide;
 import org.eclipselabs.mscript.language.functionmodel.Function;
 import org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage;
-import org.eclipselabs.mscript.language.functionmodel.VariableReference;
+import org.eclipselabs.mscript.language.functionmodel.VariableDescriptor;
 import org.eclipselabs.mscript.language.functionmodel.VariableStep;
 
 /**
@@ -91,8 +91,8 @@ public class FunctionModelAdapterFactory extends AdapterFactoryImpl {
 				return createEquationPartAdapter();
 			}
 			@Override
-			public Adapter caseVariableReference(VariableReference object) {
-				return createVariableReferenceAdapter();
+			public Adapter caseVariableDescriptor(VariableDescriptor object) {
+				return createVariableDescriptorAdapter();
 			}
 			@Override
 			public Adapter caseVariableStep(VariableStep object) {
@@ -175,16 +175,16 @@ public class FunctionModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.functionmodel.VariableReference <em>Variable Reference</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.functionmodel.VariableDescriptor <em>Variable Descriptor</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.language.functionmodel.VariableReference
+	 * @see org.eclipselabs.mscript.language.functionmodel.VariableDescriptor
 	 * @generated
 	 */
-	public Adapter createVariableReferenceAdapter() {
+	public Adapter createVariableDescriptorAdapter() {
 		return null;
 	}
 

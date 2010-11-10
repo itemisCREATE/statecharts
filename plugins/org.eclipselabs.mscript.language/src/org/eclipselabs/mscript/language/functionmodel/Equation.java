@@ -142,7 +142,7 @@ public interface Equation extends EObject {
 	 * @model required="true"
 	 * @generated
 	 */
-	boolean leftHandSideHasValidVariableReference(DiagnosticChain diagnostics, Map<Object, Object> context);
+	boolean isLeftHandSideValid(DiagnosticChain diagnostics, Map<Object, Object> context);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -150,6 +150,6 @@ public interface Equation extends EObject {
 	 * @model required="true"
 	 * @generated
 	 */
-	boolean rightHandSideHasValidVariableReferences(DiagnosticChain diagnostics, Map<Object, Object> context);
+	boolean isRightHandSideValid(DiagnosticChain diagnostics, Map<Object, Object> context);
 
 } // Equation

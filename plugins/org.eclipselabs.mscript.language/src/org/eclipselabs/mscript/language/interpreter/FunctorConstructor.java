@@ -70,14 +70,14 @@ public class FunctorConstructor {
 		
 		for (Equation equation : functor.getFunction().getEquations()) {
 			for (EquationPart equationPart : equation.getLeftHandSide().getParts()) {
-				String name = equationPart.getVariableStep().getReference().getName();
+				String name = equationPart.getVariableStep().getDescriptor().getName();
 				IVariable variable = functor.getVariable(name);
 				if (variable != null) {
 					variable.ensureStep(equationPart.getVariableStep().getIndex());
 				}
 			}
 			for (EquationPart equationPart : equation.getRightHandSide().getParts()) {
-				String name = equationPart.getVariableStep().getReference().getName();
+				String name = equationPart.getVariableStep().getDescriptor().getName();
 				IVariable variable = functor.getVariable(name);
 				if (variable != null) {
 					variable.ensureStep(equationPart.getVariableStep().getIndex());
@@ -89,7 +89,7 @@ public class FunctorConstructor {
 			if (!equation.getLeftHandSide().getParts().isEmpty()) {
 				VariableStep variableStep = equation.getLeftHandSide().getParts().get(0).getVariableStep();
 				if (variableStep.isInitial()) {
-					String name = variableStep.getReference().getName();
+					String name = variableStep.getDescriptor().getName();
 					IVariable variable = functor.getVariable(name);
 					if (variable != null) {
 						IValue rhsValue = new ExpressionValueEvaluator(context).doSwitch(equation.getDefinition().getRightHandSide());

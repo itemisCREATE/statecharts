@@ -20,27 +20,27 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipselabs.mscript.language.functionmodel.Function;
 import org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage;
+import org.eclipselabs.mscript.language.functionmodel.VariableDescriptor;
 import org.eclipselabs.mscript.language.functionmodel.VariableKind;
-import org.eclipselabs.mscript.language.functionmodel.VariableReference;
 import org.eclipselabs.mscript.language.functionmodel.VariableStep;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Variable Reference</b></em>'.
+ * An implementation of the model object '<em><b>Variable Descriptor</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.VariableReferenceImpl#getFunction <em>Function</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.VariableReferenceImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.VariableReferenceImpl#getKind <em>Kind</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.VariableReferenceImpl#getSteps <em>Steps</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.VariableDescriptorImpl#getFunction <em>Function</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.VariableDescriptorImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.VariableDescriptorImpl#getKind <em>Kind</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.VariableDescriptorImpl#getSteps <em>Steps</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class VariableReferenceImpl extends EObjectImpl implements VariableReference {
+public class VariableDescriptorImpl extends EObjectImpl implements VariableDescriptor {
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -96,7 +96,7 @@ public class VariableReferenceImpl extends EObjectImpl implements VariableRefere
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected VariableReferenceImpl() {
+	protected VariableDescriptorImpl() {
 		super();
 	}
 
@@ -107,7 +107,7 @@ public class VariableReferenceImpl extends EObjectImpl implements VariableRefere
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return FunctionModelPackage.Literals.VARIABLE_REFERENCE;
+		return FunctionModelPackage.Literals.VARIABLE_DESCRIPTOR;
 	}
 
 	/**
@@ -116,7 +116,7 @@ public class VariableReferenceImpl extends EObjectImpl implements VariableRefere
 	 * @generated
 	 */
 	public Function getFunction() {
-		if (eContainerFeatureID() != FunctionModelPackage.VARIABLE_REFERENCE__FUNCTION) return null;
+		if (eContainerFeatureID() != FunctionModelPackage.VARIABLE_DESCRIPTOR__FUNCTION) return null;
 		return (Function)eContainer();
 	}
 
@@ -126,7 +126,7 @@ public class VariableReferenceImpl extends EObjectImpl implements VariableRefere
 	 * @generated
 	 */
 	public NotificationChain basicSetFunction(Function newFunction, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newFunction, FunctionModelPackage.VARIABLE_REFERENCE__FUNCTION, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newFunction, FunctionModelPackage.VARIABLE_DESCRIPTOR__FUNCTION, msgs);
 		return msgs;
 	}
 
@@ -136,19 +136,19 @@ public class VariableReferenceImpl extends EObjectImpl implements VariableRefere
 	 * @generated
 	 */
 	public void setFunction(Function newFunction) {
-		if (newFunction != eInternalContainer() || (eContainerFeatureID() != FunctionModelPackage.VARIABLE_REFERENCE__FUNCTION && newFunction != null)) {
+		if (newFunction != eInternalContainer() || (eContainerFeatureID() != FunctionModelPackage.VARIABLE_DESCRIPTOR__FUNCTION && newFunction != null)) {
 			if (EcoreUtil.isAncestor(this, newFunction))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newFunction != null)
-				msgs = ((InternalEObject)newFunction).eInverseAdd(this, FunctionModelPackage.FUNCTION__VARIABLE_REFERENCES, Function.class, msgs);
+				msgs = ((InternalEObject)newFunction).eInverseAdd(this, FunctionModelPackage.FUNCTION__VARIABLE_DESCRIPTORS, Function.class, msgs);
 			msgs = basicSetFunction(newFunction, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FunctionModelPackage.VARIABLE_REFERENCE__FUNCTION, newFunction, newFunction));
+			eNotify(new ENotificationImpl(this, Notification.SET, FunctionModelPackage.VARIABLE_DESCRIPTOR__FUNCTION, newFunction, newFunction));
 	}
 
 	/**
@@ -169,7 +169,7 @@ public class VariableReferenceImpl extends EObjectImpl implements VariableRefere
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FunctionModelPackage.VARIABLE_REFERENCE__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, FunctionModelPackage.VARIABLE_DESCRIPTOR__NAME, oldName, name));
 	}
 
 	/**
@@ -190,7 +190,7 @@ public class VariableReferenceImpl extends EObjectImpl implements VariableRefere
 		VariableKind oldKind = kind;
 		kind = newKind == null ? KIND_EDEFAULT : newKind;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FunctionModelPackage.VARIABLE_REFERENCE__KIND, oldKind, kind));
+			eNotify(new ENotificationImpl(this, Notification.SET, FunctionModelPackage.VARIABLE_DESCRIPTOR__KIND, oldKind, kind));
 	}
 
 	/**
@@ -200,7 +200,7 @@ public class VariableReferenceImpl extends EObjectImpl implements VariableRefere
 	 */
 	public EList<VariableStep> getSteps() {
 		if (steps == null) {
-			steps = new EObjectContainmentWithInverseEList<VariableStep>(VariableStep.class, this, FunctionModelPackage.VARIABLE_REFERENCE__STEPS, FunctionModelPackage.VARIABLE_STEP__REFERENCE);
+			steps = new EObjectContainmentWithInverseEList<VariableStep>(VariableStep.class, this, FunctionModelPackage.VARIABLE_DESCRIPTOR__STEPS, FunctionModelPackage.VARIABLE_STEP__DESCRIPTOR);
 		}
 		return steps;
 	}
@@ -228,11 +228,11 @@ public class VariableReferenceImpl extends EObjectImpl implements VariableRefere
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case FunctionModelPackage.VARIABLE_REFERENCE__FUNCTION:
+			case FunctionModelPackage.VARIABLE_DESCRIPTOR__FUNCTION:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetFunction((Function)otherEnd, msgs);
-			case FunctionModelPackage.VARIABLE_REFERENCE__STEPS:
+			case FunctionModelPackage.VARIABLE_DESCRIPTOR__STEPS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getSteps()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -246,9 +246,9 @@ public class VariableReferenceImpl extends EObjectImpl implements VariableRefere
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case FunctionModelPackage.VARIABLE_REFERENCE__FUNCTION:
+			case FunctionModelPackage.VARIABLE_DESCRIPTOR__FUNCTION:
 				return basicSetFunction(null, msgs);
-			case FunctionModelPackage.VARIABLE_REFERENCE__STEPS:
+			case FunctionModelPackage.VARIABLE_DESCRIPTOR__STEPS:
 				return ((InternalEList<?>)getSteps()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -262,8 +262,8 @@ public class VariableReferenceImpl extends EObjectImpl implements VariableRefere
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case FunctionModelPackage.VARIABLE_REFERENCE__FUNCTION:
-				return eInternalContainer().eInverseRemove(this, FunctionModelPackage.FUNCTION__VARIABLE_REFERENCES, Function.class, msgs);
+			case FunctionModelPackage.VARIABLE_DESCRIPTOR__FUNCTION:
+				return eInternalContainer().eInverseRemove(this, FunctionModelPackage.FUNCTION__VARIABLE_DESCRIPTORS, Function.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -276,13 +276,13 @@ public class VariableReferenceImpl extends EObjectImpl implements VariableRefere
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case FunctionModelPackage.VARIABLE_REFERENCE__FUNCTION:
+			case FunctionModelPackage.VARIABLE_DESCRIPTOR__FUNCTION:
 				return getFunction();
-			case FunctionModelPackage.VARIABLE_REFERENCE__NAME:
+			case FunctionModelPackage.VARIABLE_DESCRIPTOR__NAME:
 				return getName();
-			case FunctionModelPackage.VARIABLE_REFERENCE__KIND:
+			case FunctionModelPackage.VARIABLE_DESCRIPTOR__KIND:
 				return getKind();
-			case FunctionModelPackage.VARIABLE_REFERENCE__STEPS:
+			case FunctionModelPackage.VARIABLE_DESCRIPTOR__STEPS:
 				return getSteps();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -297,16 +297,16 @@ public class VariableReferenceImpl extends EObjectImpl implements VariableRefere
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case FunctionModelPackage.VARIABLE_REFERENCE__FUNCTION:
+			case FunctionModelPackage.VARIABLE_DESCRIPTOR__FUNCTION:
 				setFunction((Function)newValue);
 				return;
-			case FunctionModelPackage.VARIABLE_REFERENCE__NAME:
+			case FunctionModelPackage.VARIABLE_DESCRIPTOR__NAME:
 				setName((String)newValue);
 				return;
-			case FunctionModelPackage.VARIABLE_REFERENCE__KIND:
+			case FunctionModelPackage.VARIABLE_DESCRIPTOR__KIND:
 				setKind((VariableKind)newValue);
 				return;
-			case FunctionModelPackage.VARIABLE_REFERENCE__STEPS:
+			case FunctionModelPackage.VARIABLE_DESCRIPTOR__STEPS:
 				getSteps().clear();
 				getSteps().addAll((Collection<? extends VariableStep>)newValue);
 				return;
@@ -322,16 +322,16 @@ public class VariableReferenceImpl extends EObjectImpl implements VariableRefere
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case FunctionModelPackage.VARIABLE_REFERENCE__FUNCTION:
+			case FunctionModelPackage.VARIABLE_DESCRIPTOR__FUNCTION:
 				setFunction((Function)null);
 				return;
-			case FunctionModelPackage.VARIABLE_REFERENCE__NAME:
+			case FunctionModelPackage.VARIABLE_DESCRIPTOR__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case FunctionModelPackage.VARIABLE_REFERENCE__KIND:
+			case FunctionModelPackage.VARIABLE_DESCRIPTOR__KIND:
 				setKind(KIND_EDEFAULT);
 				return;
-			case FunctionModelPackage.VARIABLE_REFERENCE__STEPS:
+			case FunctionModelPackage.VARIABLE_DESCRIPTOR__STEPS:
 				getSteps().clear();
 				return;
 		}
@@ -346,13 +346,13 @@ public class VariableReferenceImpl extends EObjectImpl implements VariableRefere
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case FunctionModelPackage.VARIABLE_REFERENCE__FUNCTION:
+			case FunctionModelPackage.VARIABLE_DESCRIPTOR__FUNCTION:
 				return getFunction() != null;
-			case FunctionModelPackage.VARIABLE_REFERENCE__NAME:
+			case FunctionModelPackage.VARIABLE_DESCRIPTOR__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case FunctionModelPackage.VARIABLE_REFERENCE__KIND:
+			case FunctionModelPackage.VARIABLE_DESCRIPTOR__KIND:
 				return kind != KIND_EDEFAULT;
-			case FunctionModelPackage.VARIABLE_REFERENCE__STEPS:
+			case FunctionModelPackage.VARIABLE_DESCRIPTOR__STEPS:
 				return steps != null && !steps.isEmpty();
 		}
 		return super.eIsSet(featureID);
@@ -376,4 +376,4 @@ public class VariableReferenceImpl extends EObjectImpl implements VariableRefere
 		return result.toString();
 	}
 
-} //VariableReferenceImpl
+} //VariableDescriptorImpl

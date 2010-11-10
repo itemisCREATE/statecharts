@@ -33209,30 +33209,30 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__IterationAccumulator__Group__2__Impl
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:12681:1: rule__IterationAccumulator__Group__2__Impl : ( ( rule__IterationAccumulator__InitialExpressionAssignment_2 ) ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:12681:1: rule__IterationAccumulator__Group__2__Impl : ( ( rule__IterationAccumulator__InitializerAssignment_2 ) ) ;
     public final void rule__IterationAccumulator__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:12685:1: ( ( ( rule__IterationAccumulator__InitialExpressionAssignment_2 ) ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:12686:1: ( ( rule__IterationAccumulator__InitialExpressionAssignment_2 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:12685:1: ( ( ( rule__IterationAccumulator__InitializerAssignment_2 ) ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:12686:1: ( ( rule__IterationAccumulator__InitializerAssignment_2 ) )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:12686:1: ( ( rule__IterationAccumulator__InitialExpressionAssignment_2 ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:12687:1: ( rule__IterationAccumulator__InitialExpressionAssignment_2 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:12686:1: ( ( rule__IterationAccumulator__InitializerAssignment_2 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:12687:1: ( rule__IterationAccumulator__InitializerAssignment_2 )
             {
-             before(grammarAccess.getIterationAccumulatorAccess().getInitialExpressionAssignment_2()); 
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:12688:1: ( rule__IterationAccumulator__InitialExpressionAssignment_2 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:12688:2: rule__IterationAccumulator__InitialExpressionAssignment_2
+             before(grammarAccess.getIterationAccumulatorAccess().getInitializerAssignment_2()); 
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:12688:1: ( rule__IterationAccumulator__InitializerAssignment_2 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:12688:2: rule__IterationAccumulator__InitializerAssignment_2
             {
-            pushFollow(FOLLOW_rule__IterationAccumulator__InitialExpressionAssignment_2_in_rule__IterationAccumulator__Group__2__Impl25604);
-            rule__IterationAccumulator__InitialExpressionAssignment_2();
+            pushFollow(FOLLOW_rule__IterationAccumulator__InitializerAssignment_2_in_rule__IterationAccumulator__Group__2__Impl25604);
+            rule__IterationAccumulator__InitializerAssignment_2();
             _fsp--;
 
 
             }
 
-             after(grammarAccess.getIterationAccumulatorAccess().getInitialExpressionAssignment_2()); 
+             after(grammarAccess.getIterationAccumulatorAccess().getInitializerAssignment_2()); 
 
             }
 
@@ -42920,9 +42920,9 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
     // $ANTLR end rule__IterationAccumulator__NameAssignment_0
 
 
-    // $ANTLR start rule__IterationAccumulator__InitialExpressionAssignment_2
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16484:1: rule__IterationAccumulator__InitialExpressionAssignment_2 : ( ruleExpression ) ;
-    public final void rule__IterationAccumulator__InitialExpressionAssignment_2() throws RecognitionException {
+    // $ANTLR start rule__IterationAccumulator__InitializerAssignment_2
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16484:1: rule__IterationAccumulator__InitializerAssignment_2 : ( ruleExpression ) ;
+    public final void rule__IterationAccumulator__InitializerAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -42933,12 +42933,12 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
             // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16489:1: ( ruleExpression )
             // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:16490:1: ruleExpression
             {
-             before(grammarAccess.getIterationAccumulatorAccess().getInitialExpressionExpressionParserRuleCall_2_0()); 
-            pushFollow(FOLLOW_ruleExpression_in_rule__IterationAccumulator__InitialExpressionAssignment_233236);
+             before(grammarAccess.getIterationAccumulatorAccess().getInitializerExpressionParserRuleCall_2_0()); 
+            pushFollow(FOLLOW_ruleExpression_in_rule__IterationAccumulator__InitializerAssignment_233236);
             ruleExpression();
             _fsp--;
 
-             after(grammarAccess.getIterationAccumulatorAccess().getInitialExpressionExpressionParserRuleCall_2_0()); 
+             after(grammarAccess.getIterationAccumulatorAccess().getInitializerExpressionParserRuleCall_2_0()); 
 
             }
 
@@ -42957,7 +42957,7 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__IterationAccumulator__InitialExpressionAssignment_2
+    // $ANTLR end rule__IterationAccumulator__InitializerAssignment_2
 
 
     // $ANTLR start rule__Subscript__SliceAssignment_0
@@ -45284,7 +45284,7 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__IterationAccumulator__Group__2_in_rule__IterationAccumulator__Group__125518 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_41_in_rule__IterationAccumulator__Group__1__Impl25546 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__IterationAccumulator__Group__2__Impl_in_rule__IterationAccumulator__Group__225577 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__IterationAccumulator__InitialExpressionAssignment_2_in_rule__IterationAccumulator__Group__2__Impl25604 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__IterationAccumulator__InitializerAssignment_2_in_rule__IterationAccumulator__Group__2__Impl25604 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__ArrayConstructionOperator__Group__0__Impl_in_rule__ArrayConstructionOperator__Group__025640 = new BitSet(new long[]{0x50204017020020F0L,0x0000000000000C02L});
     public static final BitSet FOLLOW_rule__ArrayConstructionOperator__Group__1_in_rule__ArrayConstructionOperator__Group__025643 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_36_in_rule__ArrayConstructionOperator__Group__0__Impl25671 = new BitSet(new long[]{0x0000000000000002L});
@@ -45564,7 +45564,7 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_ruleExpression_in_rule__IterationCall__ExpressionAssignment_633143 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_ID_in_rule__IterationVariable__NameAssignment33174 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_ID_in_rule__IterationAccumulator__NameAssignment_033205 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpression_in_rule__IterationAccumulator__InitialExpressionAssignment_233236 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpression_in_rule__IterationAccumulator__InitializerAssignment_233236 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_44_in_rule__Subscript__SliceAssignment_033272 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleExpression_in_rule__Subscript__ExpressionAssignment_133311 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleExpression_in_rule__ArrayConstructionOperator__ExpressionsAssignment_133342 = new BitSet(new long[]{0x0000000000000002L});

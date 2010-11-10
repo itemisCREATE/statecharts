@@ -297,7 +297,7 @@ IterationVariable :
 	name=ID;
 
 IterationAccumulator :
-	name=ID '=' initialExpression=Expression;
+	name=ID '=' initializer=Expression;
 	
 Subscript :
 	slice?=':' | expression=Expression;

@@ -35,7 +35,7 @@ public class Interpreter {
 				if (!variableStep.isInitial()) {
 					IValue rhsValue = new ExpressionValueEvaluator(context).doSwitch(equation.getDefinition().getRightHandSide());
 					if (!(rhsValue instanceof InvalidValue)) {
-						IVariable variable = functor.getVariable(variableStep.getReference().getName());
+						IVariable variable = functor.getVariable(variableStep.getDescriptor().getName());
 						if (variable != null) {
 							variable.setValue(variableStep.getIndex(), rhsValue);
 						}

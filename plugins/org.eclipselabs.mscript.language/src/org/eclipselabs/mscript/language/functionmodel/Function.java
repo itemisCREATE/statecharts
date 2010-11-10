@@ -23,7 +23,7 @@ import org.eclipselabs.mscript.language.ast.FunctionDefinition;
  * <ul>
  *   <li>{@link org.eclipselabs.mscript.language.functionmodel.Function#getDefinition <em>Definition</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.functionmodel.Function#getEquations <em>Equations</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.functionmodel.Function#getVariableReferences <em>Variable References</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.functionmodel.Function#getVariableDescriptors <em>Variable Descriptors</em>}</li>
  * </ul>
  * </p>
  *
@@ -77,22 +77,22 @@ public interface Function extends EObject {
 	EList<Equation> getEquations();
 
 	/**
-	 * Returns the value of the '<em><b>Variable References</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipselabs.mscript.language.functionmodel.VariableReference}.
-	 * It is bidirectional and its opposite is '{@link org.eclipselabs.mscript.language.functionmodel.VariableReference#getFunction <em>Function</em>}'.
+	 * Returns the value of the '<em><b>Variable Descriptors</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipselabs.mscript.language.functionmodel.VariableDescriptor}.
+	 * It is bidirectional and its opposite is '{@link org.eclipselabs.mscript.language.functionmodel.VariableDescriptor#getFunction <em>Function</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Variable References</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Variable Descriptors</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Variable References</em>' containment reference list.
-	 * @see org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage#getFunction_VariableReferences()
-	 * @see org.eclipselabs.mscript.language.functionmodel.VariableReference#getFunction
+	 * @return the value of the '<em>Variable Descriptors</em>' containment reference list.
+	 * @see org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage#getFunction_VariableDescriptors()
+	 * @see org.eclipselabs.mscript.language.functionmodel.VariableDescriptor#getFunction
 	 * @model opposite="function" containment="true"
 	 * @generated
 	 */
-	EList<VariableReference> getVariableReferences();
+	EList<VariableDescriptor> getVariableDescriptors();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -100,7 +100,7 @@ public interface Function extends EObject {
 	 * @model nameRequired="true"
 	 * @generated
 	 */
-	VariableReference getVariableReference(String name);
+	VariableDescriptor getVariableDescriptor(String name);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -132,6 +132,6 @@ public interface Function extends EObject {
 	 * @model required="true"
 	 * @generated
 	 */
-	boolean hasEquationsForEachVariableReference(DiagnosticChain diagnostics, Map<Object, Object> context);
+	boolean hasEquationsForEachVariableStep(DiagnosticChain diagnostics, Map<Object, Object> context);
 
 } // Function

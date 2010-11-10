@@ -14089,11 +14089,11 @@ protected class IterationVariable_NameAssignment extends AssignmentToken  {
 /************ begin Rule IterationAccumulator ****************
  *
  * IterationAccumulator:
- * 	name=ID "=" initialExpression=Expression;
+ * 	name=ID "=" initializer=Expression;
  *
  **/
 
-// name=ID "=" initialExpression=Expression
+// name=ID "=" initializer=Expression
 protected class IterationAccumulator_Group extends GroupToken {
 	
 	public IterationAccumulator_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -14108,7 +14108,7 @@ protected class IterationAccumulator_Group extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new IterationAccumulator_InitialExpressionAssignment_2(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new IterationAccumulator_InitializerAssignment_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -14177,16 +14177,16 @@ protected class IterationAccumulator_EqualsSignKeyword_1 extends KeywordToken  {
 
 }
 
-// initialExpression=Expression
-protected class IterationAccumulator_InitialExpressionAssignment_2 extends AssignmentToken  {
+// initializer=Expression
+protected class IterationAccumulator_InitializerAssignment_2 extends AssignmentToken  {
 	
-	public IterationAccumulator_InitialExpressionAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public IterationAccumulator_InitializerAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getIterationAccumulatorAccess().getInitialExpressionAssignment_2();
+		return grammarAccess.getIterationAccumulatorAccess().getInitializerAssignment_2();
 	}
 
     @Override
@@ -14199,13 +14199,13 @@ protected class IterationAccumulator_InitialExpressionAssignment_2 extends Assig
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("initialExpression",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("initialExpression");
+		if((value = eObjectConsumer.getConsumable("initializer",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("initializer");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getExpressionRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getIterationAccumulatorAccess().getInitialExpressionExpressionParserRuleCall_2_0(); 
+				element = grammarAccess.getIterationAccumulatorAccess().getInitializerExpressionParserRuleCall_2_0(); 
 				consumed = obj;
 				return param;
 			}

@@ -36,8 +36,8 @@ import org.eclipselabs.mscript.language.functionmodel.EquationPart;
 import org.eclipselabs.mscript.language.functionmodel.EquationSide;
 import org.eclipselabs.mscript.language.functionmodel.Function;
 import org.eclipselabs.mscript.language.functionmodel.FunctionModelFactory;
+import org.eclipselabs.mscript.language.functionmodel.VariableDescriptor;
 import org.eclipselabs.mscript.language.functionmodel.VariableKind;
-import org.eclipselabs.mscript.language.functionmodel.VariableReference;
 import org.eclipselabs.mscript.language.functionmodel.VariableStep;
 import org.eclipselabs.mscript.language.internal.functionmodel.util.StepExpressionHelper;
 import org.eclipselabs.mscript.language.internal.functionmodel.util.StepExpressionResult;
@@ -199,18 +199,18 @@ public class FunctionConstructor {
 					EquationPart part = FunctionModelFactory.eINSTANCE.createEquationPart();
 					part.setSide(equationSide);
 					part.setFeatureCall(featureCall);
-					VariableReference variableReference = function.getVariableReference(simpleName.getIdentifier());
-					if (variableReference == null) {
-						variableReference = FunctionModelFactory.eINSTANCE.createVariableReference();
-						variableReference.setFunction(function);
-						variableReference.setName(simpleName.getIdentifier());
-						variableReference.setKind(variableKind);
+					VariableDescriptor variableDescriptor = function.getVariableDescriptor(simpleName.getIdentifier());
+					if (variableDescriptor == null) {
+						variableDescriptor = FunctionModelFactory.eINSTANCE.createVariableDescriptor();
+						variableDescriptor.setFunction(function);
+						variableDescriptor.setName(simpleName.getIdentifier());
+						variableDescriptor.setKind(variableKind);
 					}
 					
-					VariableStep variableStep = variableReference.getStep(stepIndex, initial);
+					VariableStep variableStep = variableDescriptor.getStep(stepIndex, initial);
 					if (variableStep == null) {
 						variableStep = FunctionModelFactory.eINSTANCE.createVariableStep();
-						variableStep.setReference(variableReference);
+						variableStep.setDescriptor(variableDescriptor);
 						variableStep.setIndex(stepIndex);
 						variableStep.setInitial(initial);
 					}

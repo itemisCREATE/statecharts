@@ -62,13 +62,13 @@ public interface FunctionModelFactory extends EFactory {
 	EquationPart createEquationPart();
 
 	/**
-	 * Returns a new object of class '<em>Variable Reference</em>'.
+	 * Returns a new object of class '<em>Variable Descriptor</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Variable Reference</em>'.
+	 * @return a new object of class '<em>Variable Descriptor</em>'.
 	 * @generated
 	 */
-	VariableReference createVariableReference();
+	VariableDescriptor createVariableDescriptor();
 
 	/**
 	 * Returns a new object of class '<em>Variable Step</em>'.

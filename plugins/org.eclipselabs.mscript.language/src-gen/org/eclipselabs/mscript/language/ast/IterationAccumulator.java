@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipselabs.mscript.language.ast.IterationAccumulator#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.IterationAccumulator#getInitialExpression <em>Initial Expression</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.IterationAccumulator#getInitializer <em>Initializer</em>}</li>
  * </ul>
  * </p>
  *
@@ -53,29 +53,29 @@ public interface IterationAccumulator extends EObject
   void setName(String value);
 
   /**
-   * Returns the value of the '<em><b>Initial Expression</b></em>' containment reference.
+   * Returns the value of the '<em><b>Initializer</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Initial Expression</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Initializer</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Initial Expression</em>' containment reference.
-   * @see #setInitialExpression(Expression)
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getIterationAccumulator_InitialExpression()
+   * @return the value of the '<em>Initializer</em>' containment reference.
+   * @see #setInitializer(Expression)
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getIterationAccumulator_Initializer()
    * @model containment="true"
    * @generated
    */
-  Expression getInitialExpression();
+  Expression getInitializer();
 
   /**
-   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.IterationAccumulator#getInitialExpression <em>Initial Expression</em>}' containment reference.
+   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.IterationAccumulator#getInitializer <em>Initializer</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Initial Expression</em>' containment reference.
-   * @see #getInitialExpression()
+   * @param value the new value of the '<em>Initializer</em>' containment reference.
+   * @see #getInitializer()
    * @generated
    */
-  void setInitialExpression(Expression value);
+  void setInitializer(Expression value);
 
 } // IterationAccumulator

@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.functionmodel.VariableStep#getReference <em>Reference</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.functionmodel.VariableStep#getDescriptor <em>Descriptor</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.functionmodel.VariableStep#getIndex <em>Index</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.functionmodel.VariableStep#isInitial <em>Initial</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.functionmodel.VariableStep#getUsingEquationParts <em>Using Equation Parts</em>}</li>
@@ -30,32 +30,32 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface VariableStep extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Reference</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipselabs.mscript.language.functionmodel.VariableReference#getSteps <em>Steps</em>}'.
+	 * Returns the value of the '<em><b>Descriptor</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipselabs.mscript.language.functionmodel.VariableDescriptor#getSteps <em>Steps</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Reference</em>' reference isn't clear,
+	 * If the meaning of the '<em>Descriptor</em>' container reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Reference</em>' container reference.
-	 * @see #setReference(VariableReference)
-	 * @see org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage#getVariableStep_Reference()
-	 * @see org.eclipselabs.mscript.language.functionmodel.VariableReference#getSteps
+	 * @return the value of the '<em>Descriptor</em>' container reference.
+	 * @see #setDescriptor(VariableDescriptor)
+	 * @see org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage#getVariableStep_Descriptor()
+	 * @see org.eclipselabs.mscript.language.functionmodel.VariableDescriptor#getSteps
 	 * @model opposite="steps" transient="false"
 	 * @generated
 	 */
-	VariableReference getReference();
+	VariableDescriptor getDescriptor();
 
 	/**
-	 * Sets the value of the '{@link org.eclipselabs.mscript.language.functionmodel.VariableStep#getReference <em>Reference</em>}' container reference.
+	 * Sets the value of the '{@link org.eclipselabs.mscript.language.functionmodel.VariableStep#getDescriptor <em>Descriptor</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Reference</em>' container reference.
-	 * @see #getReference()
+	 * @param value the new value of the '<em>Descriptor</em>' container reference.
+	 * @see #getDescriptor()
 	 * @generated
 	 */
-	void setReference(VariableReference value);
+	void setDescriptor(VariableDescriptor value);
 
 	/**
 	 * Returns the value of the '<em><b>Index</b></em>' attribute.

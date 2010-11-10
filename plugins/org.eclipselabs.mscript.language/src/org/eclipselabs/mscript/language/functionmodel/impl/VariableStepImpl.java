@@ -20,7 +20,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipselabs.mscript.language.functionmodel.EquationPart;
 import org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage;
-import org.eclipselabs.mscript.language.functionmodel.VariableReference;
+import org.eclipselabs.mscript.language.functionmodel.VariableDescriptor;
 import org.eclipselabs.mscript.language.functionmodel.VariableStep;
 
 /**
@@ -30,7 +30,7 @@ import org.eclipselabs.mscript.language.functionmodel.VariableStep;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.VariableStepImpl#getReference <em>Reference</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.VariableStepImpl#getDescriptor <em>Descriptor</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.VariableStepImpl#getIndex <em>Index</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.VariableStepImpl#isInitial <em>Initial</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.VariableStepImpl#getUsingEquationParts <em>Using Equation Parts</em>}</li>
@@ -114,9 +114,9 @@ public class VariableStepImpl extends EObjectImpl implements VariableStep {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public VariableReference getReference() {
-		if (eContainerFeatureID() != FunctionModelPackage.VARIABLE_STEP__REFERENCE) return null;
-		return (VariableReference)eContainer();
+	public VariableDescriptor getDescriptor() {
+		if (eContainerFeatureID() != FunctionModelPackage.VARIABLE_STEP__DESCRIPTOR) return null;
+		return (VariableDescriptor)eContainer();
 	}
 
 	/**
@@ -124,8 +124,8 @@ public class VariableStepImpl extends EObjectImpl implements VariableStep {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetReference(VariableReference newReference, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newReference, FunctionModelPackage.VARIABLE_STEP__REFERENCE, msgs);
+	public NotificationChain basicSetDescriptor(VariableDescriptor newDescriptor, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newDescriptor, FunctionModelPackage.VARIABLE_STEP__DESCRIPTOR, msgs);
 		return msgs;
 	}
 
@@ -134,20 +134,20 @@ public class VariableStepImpl extends EObjectImpl implements VariableStep {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setReference(VariableReference newReference) {
-		if (newReference != eInternalContainer() || (eContainerFeatureID() != FunctionModelPackage.VARIABLE_STEP__REFERENCE && newReference != null)) {
-			if (EcoreUtil.isAncestor(this, newReference))
+	public void setDescriptor(VariableDescriptor newDescriptor) {
+		if (newDescriptor != eInternalContainer() || (eContainerFeatureID() != FunctionModelPackage.VARIABLE_STEP__DESCRIPTOR && newDescriptor != null)) {
+			if (EcoreUtil.isAncestor(this, newDescriptor))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
-			if (newReference != null)
-				msgs = ((InternalEObject)newReference).eInverseAdd(this, FunctionModelPackage.VARIABLE_REFERENCE__STEPS, VariableReference.class, msgs);
-			msgs = basicSetReference(newReference, msgs);
+			if (newDescriptor != null)
+				msgs = ((InternalEObject)newDescriptor).eInverseAdd(this, FunctionModelPackage.VARIABLE_DESCRIPTOR__STEPS, VariableDescriptor.class, msgs);
+			msgs = basicSetDescriptor(newDescriptor, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FunctionModelPackage.VARIABLE_STEP__REFERENCE, newReference, newReference));
+			eNotify(new ENotificationImpl(this, Notification.SET, FunctionModelPackage.VARIABLE_STEP__DESCRIPTOR, newDescriptor, newDescriptor));
 	}
 
 	/**
@@ -213,10 +213,10 @@ public class VariableStepImpl extends EObjectImpl implements VariableStep {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case FunctionModelPackage.VARIABLE_STEP__REFERENCE:
+			case FunctionModelPackage.VARIABLE_STEP__DESCRIPTOR:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetReference((VariableReference)otherEnd, msgs);
+				return basicSetDescriptor((VariableDescriptor)otherEnd, msgs);
 			case FunctionModelPackage.VARIABLE_STEP__USING_EQUATION_PARTS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getUsingEquationParts()).basicAdd(otherEnd, msgs);
 		}
@@ -231,8 +231,8 @@ public class VariableStepImpl extends EObjectImpl implements VariableStep {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case FunctionModelPackage.VARIABLE_STEP__REFERENCE:
-				return basicSetReference(null, msgs);
+			case FunctionModelPackage.VARIABLE_STEP__DESCRIPTOR:
+				return basicSetDescriptor(null, msgs);
 			case FunctionModelPackage.VARIABLE_STEP__USING_EQUATION_PARTS:
 				return ((InternalEList<?>)getUsingEquationParts()).basicRemove(otherEnd, msgs);
 		}
@@ -247,8 +247,8 @@ public class VariableStepImpl extends EObjectImpl implements VariableStep {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case FunctionModelPackage.VARIABLE_STEP__REFERENCE:
-				return eInternalContainer().eInverseRemove(this, FunctionModelPackage.VARIABLE_REFERENCE__STEPS, VariableReference.class, msgs);
+			case FunctionModelPackage.VARIABLE_STEP__DESCRIPTOR:
+				return eInternalContainer().eInverseRemove(this, FunctionModelPackage.VARIABLE_DESCRIPTOR__STEPS, VariableDescriptor.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -261,8 +261,8 @@ public class VariableStepImpl extends EObjectImpl implements VariableStep {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case FunctionModelPackage.VARIABLE_STEP__REFERENCE:
-				return getReference();
+			case FunctionModelPackage.VARIABLE_STEP__DESCRIPTOR:
+				return getDescriptor();
 			case FunctionModelPackage.VARIABLE_STEP__INDEX:
 				return getIndex();
 			case FunctionModelPackage.VARIABLE_STEP__INITIAL:
@@ -282,8 +282,8 @@ public class VariableStepImpl extends EObjectImpl implements VariableStep {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case FunctionModelPackage.VARIABLE_STEP__REFERENCE:
-				setReference((VariableReference)newValue);
+			case FunctionModelPackage.VARIABLE_STEP__DESCRIPTOR:
+				setDescriptor((VariableDescriptor)newValue);
 				return;
 			case FunctionModelPackage.VARIABLE_STEP__INDEX:
 				setIndex((Integer)newValue);
@@ -307,8 +307,8 @@ public class VariableStepImpl extends EObjectImpl implements VariableStep {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case FunctionModelPackage.VARIABLE_STEP__REFERENCE:
-				setReference((VariableReference)null);
+			case FunctionModelPackage.VARIABLE_STEP__DESCRIPTOR:
+				setDescriptor((VariableDescriptor)null);
 				return;
 			case FunctionModelPackage.VARIABLE_STEP__INDEX:
 				setIndex(INDEX_EDEFAULT);
@@ -331,8 +331,8 @@ public class VariableStepImpl extends EObjectImpl implements VariableStep {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case FunctionModelPackage.VARIABLE_STEP__REFERENCE:
-				return getReference() != null;
+			case FunctionModelPackage.VARIABLE_STEP__DESCRIPTOR:
+				return getDescriptor() != null;
 			case FunctionModelPackage.VARIABLE_STEP__INDEX:
 				return index != INDEX_EDEFAULT;
 			case FunctionModelPackage.VARIABLE_STEP__INITIAL:

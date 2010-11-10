@@ -5550,9 +5550,9 @@ ruleIterationAccumulator returns [EObject current=null]
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getIterationAccumulatorAccess().getInitialExpressionExpressionParserRuleCall_2_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getIterationAccumulatorAccess().getInitializerExpressionParserRuleCall_2_0(), currentNode); 
 	    }
-		lv_initialExpression_2_0=ruleExpression		{
+		lv_initializer_2_0=ruleExpression		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getIterationAccumulatorRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -5560,8 +5560,8 @@ ruleIterationAccumulator returns [EObject current=null]
 	        try {
 	       		set(
 	       			$current, 
-	       			"initialExpression",
-	        		lv_initialExpression_2_0, 
+	       			"initializer",
+	        		lv_initializer_2_0, 
 	        		"Expression", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
