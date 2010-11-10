@@ -19,7 +19,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DataTypeDefinition" eSuperTypes="#//TypeDefinition"/>
   <eClassifiers xsi:type="ecore:EClass" name="EnumerationDefinition" eSuperTypes="#//DataTypeDefinition">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="literals" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="literalDeclarations" upperBound="-1"
         eType="#//EnumerationLiteralDeclaration" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EnumerationLiteralDeclaration">
@@ -30,7 +30,7 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RecordDefinition" eSuperTypes="#//DataTypeDefinition">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="fields" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fieldDeclarations" upperBound="-1"
         eType="#//RecordFieldDeclaration" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RecordFieldDeclaration">
@@ -40,18 +40,18 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FunctionDefinition" eSuperTypes="#//TypeDefinition">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="stateful" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="templateParameters" upperBound="-1"
-        eType="#//ParameterDeclaration" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="inputParameters" upperBound="-1"
-        eType="#//ParameterDeclaration" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="outputParameters" upperBound="-1"
-        eType="#//ParameterDeclaration" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="assertions" upperBound="-1"
-        eType="#//AssertionDeclaration" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="functors" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="templateParameterDeclarations"
+        upperBound="-1" eType="#//ParameterDeclaration" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inputParameterDeclarations"
+        upperBound="-1" eType="#//ParameterDeclaration" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outputParameterDeclarations"
+        upperBound="-1" eType="#//ParameterDeclaration" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="assertionDeclarations"
+        upperBound="-1" eType="#//AssertionDeclaration" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="functorDeclarations" upperBound="-1"
         eType="#//FunctorDeclaration" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="stateVariables" upperBound="-1"
-        eType="#//StateVariableDeclaration" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="stateVariableDeclarations"
+        upperBound="-1" eType="#//StateVariableDeclaration" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="equations" upperBound="-1"
         eType="#//EquationDefinition" containment="true"/>
   </eClassifiers>
@@ -79,8 +79,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="functionName" eType="#//QualifiedName"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="templateArguments" upperBound="-1"
-        eType="#//ArgumentDeclaration" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="templateArgumentDeclarations"
+        upperBound="-1" eType="#//ArgumentDeclaration" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ArgumentDeclaration">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

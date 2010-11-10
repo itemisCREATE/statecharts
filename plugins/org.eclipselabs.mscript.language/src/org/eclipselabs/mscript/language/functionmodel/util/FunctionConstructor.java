@@ -85,15 +85,15 @@ public class FunctionConstructor {
 		boolean result = true;
 		
 		if (!functionDefinition.isStateful()) {
-			if (!functionDefinition.getTemplateParameters().isEmpty()) {
+			if (!functionDefinition.getTemplateParameterDeclarations().isEmpty()) {
 				diagnostics.add(new EObjectDiagnostic(Diagnostic.ERROR, "Stateless functions must not declare template parameters", functionDefinition, AstPackage.FUNCTION_DEFINITION__NAME));
 				result = false;
 			}
-			if (!functionDefinition.getStateVariables().isEmpty()) {
+			if (!functionDefinition.getStateVariableDeclarations().isEmpty()) {
 				diagnostics.add(new EObjectDiagnostic(Diagnostic.ERROR, "Stateless functions must not declare state variables", functionDefinition, AstPackage.FUNCTION_DEFINITION__NAME));
 				result = false;
 			}
-			if (!functionDefinition.getFunctors().isEmpty()) {
+			if (!functionDefinition.getFunctorDeclarations().isEmpty()) {
 				diagnostics.add(new EObjectDiagnostic(Diagnostic.ERROR, "Stateless functions must not declare functors", functionDefinition, AstPackage.FUNCTION_DEFINITION__NAME));
 				result = false;
 			}
@@ -225,22 +225,22 @@ public class FunctionConstructor {
 		}
 		
 		private VariableKind getVariableKind(FunctionDefinition functionDefinition, String name) {
-			for (ParameterDeclaration parameterDeclaration : functionDefinition.getTemplateParameters()) {
+			for (ParameterDeclaration parameterDeclaration : functionDefinition.getTemplateParameterDeclarations()) {
 				if (name.equals(parameterDeclaration.getName())) {
 					return VariableKind.TEMPLATE_PARAMETER;
 				}
 			}
-			for (ParameterDeclaration parameterDeclaration : functionDefinition.getInputParameters()) {
+			for (ParameterDeclaration parameterDeclaration : functionDefinition.getInputParameterDeclarations()) {
 				if (name.equals(parameterDeclaration.getName())) {
 					return VariableKind.INPUT_PARAMETER;
 				}
 			}
-			for (ParameterDeclaration parameterDeclaration : functionDefinition.getOutputParameters()) {
+			for (ParameterDeclaration parameterDeclaration : functionDefinition.getOutputParameterDeclarations()) {
 				if (name.equals(parameterDeclaration.getName())) {
 					return VariableKind.OUTPUT_PARAMETER;
 				}
 			}
-			for (StateVariableDeclaration stateVariableDeclaration : functionDefinition.getStateVariables()) {
+			for (StateVariableDeclaration stateVariableDeclaration : functionDefinition.getStateVariableDeclarations()) {
 				if (name.equals(stateVariableDeclaration.getName())) {
 					return VariableKind.STATE_VARIABLE;
 				}

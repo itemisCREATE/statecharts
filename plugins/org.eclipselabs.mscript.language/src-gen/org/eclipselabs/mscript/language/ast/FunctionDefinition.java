@@ -16,12 +16,12 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#isStateful <em>Stateful</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getTemplateParameters <em>Template Parameters</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getInputParameters <em>Input Parameters</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getOutputParameters <em>Output Parameters</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getAssertions <em>Assertions</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getFunctors <em>Functors</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getStateVariables <em>State Variables</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getTemplateParameterDeclarations <em>Template Parameter Declarations</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getInputParameterDeclarations <em>Input Parameter Declarations</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getOutputParameterDeclarations <em>Output Parameter Declarations</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getAssertionDeclarations <em>Assertion Declarations</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getFunctorDeclarations <em>Functor Declarations</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getStateVariableDeclarations <em>State Variable Declarations</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getEquations <em>Equations</em>}</li>
  * </ul>
  * </p>
@@ -59,100 +59,100 @@ public interface FunctionDefinition extends TypeDefinition
   void setStateful(boolean value);
 
   /**
-   * Returns the value of the '<em><b>Template Parameters</b></em>' containment reference list.
+   * Returns the value of the '<em><b>Template Parameter Declarations</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipselabs.mscript.language.ast.ParameterDeclaration}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Template Parameters</em>' containment reference list isn't clear,
+   * If the meaning of the '<em>Template Parameter Declarations</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Template Parameters</em>' containment reference list.
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getFunctionDefinition_TemplateParameters()
+   * @return the value of the '<em>Template Parameter Declarations</em>' containment reference list.
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getFunctionDefinition_TemplateParameterDeclarations()
    * @model containment="true"
    * @generated
    */
-  EList<ParameterDeclaration> getTemplateParameters();
+  EList<ParameterDeclaration> getTemplateParameterDeclarations();
 
   /**
-   * Returns the value of the '<em><b>Input Parameters</b></em>' containment reference list.
+   * Returns the value of the '<em><b>Input Parameter Declarations</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipselabs.mscript.language.ast.ParameterDeclaration}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Input Parameters</em>' containment reference list isn't clear,
+   * If the meaning of the '<em>Input Parameter Declarations</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Input Parameters</em>' containment reference list.
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getFunctionDefinition_InputParameters()
+   * @return the value of the '<em>Input Parameter Declarations</em>' containment reference list.
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getFunctionDefinition_InputParameterDeclarations()
    * @model containment="true"
    * @generated
    */
-  EList<ParameterDeclaration> getInputParameters();
+  EList<ParameterDeclaration> getInputParameterDeclarations();
 
   /**
-   * Returns the value of the '<em><b>Output Parameters</b></em>' containment reference list.
+   * Returns the value of the '<em><b>Output Parameter Declarations</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipselabs.mscript.language.ast.ParameterDeclaration}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Output Parameters</em>' containment reference list isn't clear,
+   * If the meaning of the '<em>Output Parameter Declarations</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Output Parameters</em>' containment reference list.
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getFunctionDefinition_OutputParameters()
+   * @return the value of the '<em>Output Parameter Declarations</em>' containment reference list.
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getFunctionDefinition_OutputParameterDeclarations()
    * @model containment="true"
    * @generated
    */
-  EList<ParameterDeclaration> getOutputParameters();
+  EList<ParameterDeclaration> getOutputParameterDeclarations();
 
   /**
-   * Returns the value of the '<em><b>Assertions</b></em>' containment reference list.
+   * Returns the value of the '<em><b>Assertion Declarations</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipselabs.mscript.language.ast.AssertionDeclaration}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Assertions</em>' containment reference list isn't clear,
+   * If the meaning of the '<em>Assertion Declarations</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Assertions</em>' containment reference list.
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getFunctionDefinition_Assertions()
+   * @return the value of the '<em>Assertion Declarations</em>' containment reference list.
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getFunctionDefinition_AssertionDeclarations()
    * @model containment="true"
    * @generated
    */
-  EList<AssertionDeclaration> getAssertions();
+  EList<AssertionDeclaration> getAssertionDeclarations();
 
   /**
-   * Returns the value of the '<em><b>Functors</b></em>' containment reference list.
+   * Returns the value of the '<em><b>Functor Declarations</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipselabs.mscript.language.ast.FunctorDeclaration}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Functors</em>' containment reference list isn't clear,
+   * If the meaning of the '<em>Functor Declarations</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Functors</em>' containment reference list.
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getFunctionDefinition_Functors()
+   * @return the value of the '<em>Functor Declarations</em>' containment reference list.
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getFunctionDefinition_FunctorDeclarations()
    * @model containment="true"
    * @generated
    */
-  EList<FunctorDeclaration> getFunctors();
+  EList<FunctorDeclaration> getFunctorDeclarations();
 
   /**
-   * Returns the value of the '<em><b>State Variables</b></em>' containment reference list.
+   * Returns the value of the '<em><b>State Variable Declarations</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipselabs.mscript.language.ast.StateVariableDeclaration}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>State Variables</em>' containment reference list isn't clear,
+   * If the meaning of the '<em>State Variable Declarations</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>State Variables</em>' containment reference list.
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getFunctionDefinition_StateVariables()
+   * @return the value of the '<em>State Variable Declarations</em>' containment reference list.
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getFunctionDefinition_StateVariableDeclarations()
    * @model containment="true"
    * @generated
    */
-  EList<StateVariableDeclaration> getStateVariables();
+  EList<StateVariableDeclaration> getStateVariableDeclarations();
 
   /**
    * Returns the value of the '<em><b>Equations</b></em>' containment reference list.

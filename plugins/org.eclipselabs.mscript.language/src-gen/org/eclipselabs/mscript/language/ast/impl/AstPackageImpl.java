@@ -880,7 +880,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getEnumerationDefinition_Literals()
+  public EReference getEnumerationDefinition_LiteralDeclarations()
   {
     return (EReference)enumerationDefinitionEClass.getEStructuralFeatures().get(0);
   }
@@ -940,7 +940,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getRecordDefinition_Fields()
+  public EReference getRecordDefinition_FieldDeclarations()
   {
     return (EReference)recordDefinitionEClass.getEStructuralFeatures().get(0);
   }
@@ -1000,7 +1000,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getFunctionDefinition_TemplateParameters()
+  public EReference getFunctionDefinition_TemplateParameterDeclarations()
   {
     return (EReference)functionDefinitionEClass.getEStructuralFeatures().get(1);
   }
@@ -1010,7 +1010,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getFunctionDefinition_InputParameters()
+  public EReference getFunctionDefinition_InputParameterDeclarations()
   {
     return (EReference)functionDefinitionEClass.getEStructuralFeatures().get(2);
   }
@@ -1020,7 +1020,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getFunctionDefinition_OutputParameters()
+  public EReference getFunctionDefinition_OutputParameterDeclarations()
   {
     return (EReference)functionDefinitionEClass.getEStructuralFeatures().get(3);
   }
@@ -1030,7 +1030,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getFunctionDefinition_Assertions()
+  public EReference getFunctionDefinition_AssertionDeclarations()
   {
     return (EReference)functionDefinitionEClass.getEStructuralFeatures().get(4);
   }
@@ -1040,7 +1040,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getFunctionDefinition_Functors()
+  public EReference getFunctionDefinition_FunctorDeclarations()
   {
     return (EReference)functionDefinitionEClass.getEStructuralFeatures().get(5);
   }
@@ -1050,7 +1050,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getFunctionDefinition_StateVariables()
+  public EReference getFunctionDefinition_StateVariableDeclarations()
   {
     return (EReference)functionDefinitionEClass.getEStructuralFeatures().get(6);
   }
@@ -1190,7 +1190,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getFunctorDeclaration_TemplateArguments()
+  public EReference getFunctorDeclaration_TemplateArgumentDeclarations()
   {
     return (EReference)functorDeclarationEClass.getEStructuralFeatures().get(2);
   }
@@ -2800,7 +2800,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     dataTypeDefinitionEClass = createEClass(DATA_TYPE_DEFINITION);
 
     enumerationDefinitionEClass = createEClass(ENUMERATION_DEFINITION);
-    createEReference(enumerationDefinitionEClass, ENUMERATION_DEFINITION__LITERALS);
+    createEReference(enumerationDefinitionEClass, ENUMERATION_DEFINITION__LITERAL_DECLARATIONS);
 
     enumerationLiteralDeclarationEClass = createEClass(ENUMERATION_LITERAL_DECLARATION);
     createEAttribute(enumerationLiteralDeclarationEClass, ENUMERATION_LITERAL_DECLARATION__NAME);
@@ -2809,7 +2809,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     createEReference(typeAliasDefinitionEClass, TYPE_ALIAS_DEFINITION__TYPE);
 
     recordDefinitionEClass = createEClass(RECORD_DEFINITION);
-    createEReference(recordDefinitionEClass, RECORD_DEFINITION__FIELDS);
+    createEReference(recordDefinitionEClass, RECORD_DEFINITION__FIELD_DECLARATIONS);
 
     recordFieldDeclarationEClass = createEClass(RECORD_FIELD_DECLARATION);
     createEAttribute(recordFieldDeclarationEClass, RECORD_FIELD_DECLARATION__NAME);
@@ -2817,12 +2817,12 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
 
     functionDefinitionEClass = createEClass(FUNCTION_DEFINITION);
     createEAttribute(functionDefinitionEClass, FUNCTION_DEFINITION__STATEFUL);
-    createEReference(functionDefinitionEClass, FUNCTION_DEFINITION__TEMPLATE_PARAMETERS);
-    createEReference(functionDefinitionEClass, FUNCTION_DEFINITION__INPUT_PARAMETERS);
-    createEReference(functionDefinitionEClass, FUNCTION_DEFINITION__OUTPUT_PARAMETERS);
-    createEReference(functionDefinitionEClass, FUNCTION_DEFINITION__ASSERTIONS);
-    createEReference(functionDefinitionEClass, FUNCTION_DEFINITION__FUNCTORS);
-    createEReference(functionDefinitionEClass, FUNCTION_DEFINITION__STATE_VARIABLES);
+    createEReference(functionDefinitionEClass, FUNCTION_DEFINITION__TEMPLATE_PARAMETER_DECLARATIONS);
+    createEReference(functionDefinitionEClass, FUNCTION_DEFINITION__INPUT_PARAMETER_DECLARATIONS);
+    createEReference(functionDefinitionEClass, FUNCTION_DEFINITION__OUTPUT_PARAMETER_DECLARATIONS);
+    createEReference(functionDefinitionEClass, FUNCTION_DEFINITION__ASSERTION_DECLARATIONS);
+    createEReference(functionDefinitionEClass, FUNCTION_DEFINITION__FUNCTOR_DECLARATIONS);
+    createEReference(functionDefinitionEClass, FUNCTION_DEFINITION__STATE_VARIABLE_DECLARATIONS);
     createEReference(functionDefinitionEClass, FUNCTION_DEFINITION__EQUATIONS);
 
     parameterDeclarationEClass = createEClass(PARAMETER_DECLARATION);
@@ -2840,7 +2840,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     functorDeclarationEClass = createEClass(FUNCTOR_DECLARATION);
     createEAttribute(functorDeclarationEClass, FUNCTOR_DECLARATION__NAME);
     createEReference(functorDeclarationEClass, FUNCTOR_DECLARATION__FUNCTION_NAME);
-    createEReference(functorDeclarationEClass, FUNCTOR_DECLARATION__TEMPLATE_ARGUMENTS);
+    createEReference(functorDeclarationEClass, FUNCTOR_DECLARATION__TEMPLATE_ARGUMENT_DECLARATIONS);
 
     argumentDeclarationEClass = createEClass(ARGUMENT_DECLARATION);
     createEAttribute(argumentDeclarationEClass, ARGUMENT_DECLARATION__NAME);
@@ -3157,7 +3157,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     initEClass(dataTypeDefinitionEClass, DataTypeDefinition.class, "DataTypeDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(enumerationDefinitionEClass, EnumerationDefinition.class, "EnumerationDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getEnumerationDefinition_Literals(), this.getEnumerationLiteralDeclaration(), null, "literals", null, 0, -1, EnumerationDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEnumerationDefinition_LiteralDeclarations(), this.getEnumerationLiteralDeclaration(), null, "literalDeclarations", null, 0, -1, EnumerationDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(enumerationLiteralDeclarationEClass, EnumerationLiteralDeclaration.class, "EnumerationLiteralDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEnumerationLiteralDeclaration_Name(), ecorePackage.getEString(), "name", null, 0, 1, EnumerationLiteralDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3166,7 +3166,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     initEReference(getTypeAliasDefinition_Type(), this.getPrimitiveTypeSpecifier(), null, "type", null, 0, 1, TypeAliasDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(recordDefinitionEClass, RecordDefinition.class, "RecordDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getRecordDefinition_Fields(), this.getRecordFieldDeclaration(), null, "fields", null, 0, -1, RecordDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getRecordDefinition_FieldDeclarations(), this.getRecordFieldDeclaration(), null, "fieldDeclarations", null, 0, -1, RecordDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(recordFieldDeclarationEClass, RecordFieldDeclaration.class, "RecordFieldDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getRecordFieldDeclaration_Name(), ecorePackage.getEString(), "name", null, 0, 1, RecordFieldDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3174,12 +3174,12 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
 
     initEClass(functionDefinitionEClass, FunctionDefinition.class, "FunctionDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getFunctionDefinition_Stateful(), ecorePackage.getEBoolean(), "stateful", null, 0, 1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getFunctionDefinition_TemplateParameters(), this.getParameterDeclaration(), null, "templateParameters", null, 0, -1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getFunctionDefinition_InputParameters(), this.getParameterDeclaration(), null, "inputParameters", null, 0, -1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getFunctionDefinition_OutputParameters(), this.getParameterDeclaration(), null, "outputParameters", null, 0, -1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getFunctionDefinition_Assertions(), this.getAssertionDeclaration(), null, "assertions", null, 0, -1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getFunctionDefinition_Functors(), this.getFunctorDeclaration(), null, "functors", null, 0, -1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getFunctionDefinition_StateVariables(), this.getStateVariableDeclaration(), null, "stateVariables", null, 0, -1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getFunctionDefinition_TemplateParameterDeclarations(), this.getParameterDeclaration(), null, "templateParameterDeclarations", null, 0, -1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getFunctionDefinition_InputParameterDeclarations(), this.getParameterDeclaration(), null, "inputParameterDeclarations", null, 0, -1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getFunctionDefinition_OutputParameterDeclarations(), this.getParameterDeclaration(), null, "outputParameterDeclarations", null, 0, -1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getFunctionDefinition_AssertionDeclarations(), this.getAssertionDeclaration(), null, "assertionDeclarations", null, 0, -1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getFunctionDefinition_FunctorDeclarations(), this.getFunctorDeclaration(), null, "functorDeclarations", null, 0, -1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getFunctionDefinition_StateVariableDeclarations(), this.getStateVariableDeclaration(), null, "stateVariableDeclarations", null, 0, -1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getFunctionDefinition_Equations(), this.getEquationDefinition(), null, "equations", null, 0, -1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(parameterDeclarationEClass, ParameterDeclaration.class, "ParameterDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -3197,7 +3197,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     initEClass(functorDeclarationEClass, FunctorDeclaration.class, "FunctorDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getFunctorDeclaration_Name(), ecorePackage.getEString(), "name", null, 0, 1, FunctorDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getFunctorDeclaration_FunctionName(), this.getQualifiedName(), null, "functionName", null, 0, 1, FunctorDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getFunctorDeclaration_TemplateArguments(), this.getArgumentDeclaration(), null, "templateArguments", null, 0, -1, FunctorDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getFunctorDeclaration_TemplateArgumentDeclarations(), this.getArgumentDeclaration(), null, "templateArgumentDeclarations", null, 0, -1, FunctorDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(argumentDeclarationEClass, ArgumentDeclaration.class, "ArgumentDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getArgumentDeclaration_Name(), ecorePackage.getEString(), "name", null, 0, 1, ArgumentDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -32,13 +32,13 @@ import org.eclipselabs.mscript.language.interpreter.value.IValue;
 public class FunctorConstructor {
 
 	public IFunctor construct(IInterpreterContext context, FunctionDefinition functionDefinition, List<IValue> templateArguments) {
-		if (functionDefinition.getTemplateParameters().size() != templateArguments.size()) {
+		if (functionDefinition.getTemplateParameterDeclarations().size() != templateArguments.size()) {
 			throw new IllegalArgumentException("Number of template arguments must be equal to number of template parameters of function definition");
 		}
 		
 		Map<String, IValue> templateArgumentMap = new HashMap<String, IValue>();
 		int i = 0;
-		for (ParameterDeclaration parameterDeclaration : functionDefinition.getTemplateParameters()) {
+		for (ParameterDeclaration parameterDeclaration : functionDefinition.getTemplateParameterDeclarations()) {
 			templateArgumentMap.put(parameterDeclaration.getName(), templateArguments.get(i));
 			++i;
 		}
@@ -58,13 +58,13 @@ public class FunctorConstructor {
 	}
 	
 	protected void createVariables(IInterpreterContext context, IFunctor functor) {
-		for (ParameterDeclaration parameterDeclaration : functor.getFunction().getDefinition().getInputParameters()) {
+		for (ParameterDeclaration parameterDeclaration : functor.getFunction().getDefinition().getInputParameterDeclarations()) {
 			functor.addVariable(new Variable(parameterDeclaration.getName()));
 		}
-		for (ParameterDeclaration parameterDeclaration : functor.getFunction().getDefinition().getOutputParameters()) {
+		for (ParameterDeclaration parameterDeclaration : functor.getFunction().getDefinition().getOutputParameterDeclarations()) {
 			functor.addVariable(new Variable(parameterDeclaration.getName()));
 		}
-		for (StateVariableDeclaration variableDeclaration : functor.getFunction().getDefinition().getStateVariables()) {
+		for (StateVariableDeclaration variableDeclaration : functor.getFunction().getDefinition().getStateVariableDeclarations()) {
 			functor.addVariable(new Variable(variableDeclaration.getName()));
 		}
 		

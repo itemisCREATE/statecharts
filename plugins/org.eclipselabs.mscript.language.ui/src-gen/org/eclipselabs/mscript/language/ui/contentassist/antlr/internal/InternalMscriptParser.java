@@ -6677,13 +6677,13 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__FunctionDefinition__Alternatives_11
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2517:1: rule__FunctionDefinition__Alternatives_11 : ( ( ( rule__FunctionDefinition__AssertionsAssignment_11_0 ) ) | ( ( rule__FunctionDefinition__FunctorsAssignment_11_1 ) ) | ( ( rule__FunctionDefinition__StateVariablesAssignment_11_2 ) ) | ( ( rule__FunctionDefinition__EquationsAssignment_11_3 ) ) );
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2517:1: rule__FunctionDefinition__Alternatives_11 : ( ( ( rule__FunctionDefinition__AssertionDeclarationsAssignment_11_0 ) ) | ( ( rule__FunctionDefinition__FunctorDeclarationsAssignment_11_1 ) ) | ( ( rule__FunctionDefinition__StateVariableDeclarationsAssignment_11_2 ) ) | ( ( rule__FunctionDefinition__EquationsAssignment_11_3 ) ) );
     public final void rule__FunctionDefinition__Alternatives_11() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2521:1: ( ( ( rule__FunctionDefinition__AssertionsAssignment_11_0 ) ) | ( ( rule__FunctionDefinition__FunctorsAssignment_11_1 ) ) | ( ( rule__FunctionDefinition__StateVariablesAssignment_11_2 ) ) | ( ( rule__FunctionDefinition__EquationsAssignment_11_3 ) ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2521:1: ( ( ( rule__FunctionDefinition__AssertionDeclarationsAssignment_11_0 ) ) | ( ( rule__FunctionDefinition__FunctorDeclarationsAssignment_11_1 ) ) | ( ( rule__FunctionDefinition__StateVariableDeclarationsAssignment_11_2 ) ) | ( ( rule__FunctionDefinition__EquationsAssignment_11_3 ) ) )
             int alt5=4;
             switch ( input.LA(1) ) {
             case 49:
@@ -6725,30 +6725,30 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("2517:1: rule__FunctionDefinition__Alternatives_11 : ( ( ( rule__FunctionDefinition__AssertionsAssignment_11_0 ) ) | ( ( rule__FunctionDefinition__FunctorsAssignment_11_1 ) ) | ( ( rule__FunctionDefinition__StateVariablesAssignment_11_2 ) ) | ( ( rule__FunctionDefinition__EquationsAssignment_11_3 ) ) );", 5, 0, input);
+                    new NoViableAltException("2517:1: rule__FunctionDefinition__Alternatives_11 : ( ( ( rule__FunctionDefinition__AssertionDeclarationsAssignment_11_0 ) ) | ( ( rule__FunctionDefinition__FunctorDeclarationsAssignment_11_1 ) ) | ( ( rule__FunctionDefinition__StateVariableDeclarationsAssignment_11_2 ) ) | ( ( rule__FunctionDefinition__EquationsAssignment_11_3 ) ) );", 5, 0, input);
 
                 throw nvae;
             }
 
             switch (alt5) {
                 case 1 :
-                    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2522:1: ( ( rule__FunctionDefinition__AssertionsAssignment_11_0 ) )
+                    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2522:1: ( ( rule__FunctionDefinition__AssertionDeclarationsAssignment_11_0 ) )
                     {
-                    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2522:1: ( ( rule__FunctionDefinition__AssertionsAssignment_11_0 ) )
-                    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2523:1: ( rule__FunctionDefinition__AssertionsAssignment_11_0 )
+                    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2522:1: ( ( rule__FunctionDefinition__AssertionDeclarationsAssignment_11_0 ) )
+                    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2523:1: ( rule__FunctionDefinition__AssertionDeclarationsAssignment_11_0 )
                     {
-                     before(grammarAccess.getFunctionDefinitionAccess().getAssertionsAssignment_11_0()); 
-                    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2524:1: ( rule__FunctionDefinition__AssertionsAssignment_11_0 )
-                    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2524:2: rule__FunctionDefinition__AssertionsAssignment_11_0
+                     before(grammarAccess.getFunctionDefinitionAccess().getAssertionDeclarationsAssignment_11_0()); 
+                    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2524:1: ( rule__FunctionDefinition__AssertionDeclarationsAssignment_11_0 )
+                    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2524:2: rule__FunctionDefinition__AssertionDeclarationsAssignment_11_0
                     {
-                    pushFollow(FOLLOW_rule__FunctionDefinition__AssertionsAssignment_11_0_in_rule__FunctionDefinition__Alternatives_115302);
-                    rule__FunctionDefinition__AssertionsAssignment_11_0();
+                    pushFollow(FOLLOW_rule__FunctionDefinition__AssertionDeclarationsAssignment_11_0_in_rule__FunctionDefinition__Alternatives_115302);
+                    rule__FunctionDefinition__AssertionDeclarationsAssignment_11_0();
                     _fsp--;
 
 
                     }
 
-                     after(grammarAccess.getFunctionDefinitionAccess().getAssertionsAssignment_11_0()); 
+                     after(grammarAccess.getFunctionDefinitionAccess().getAssertionDeclarationsAssignment_11_0()); 
 
                     }
 
@@ -6756,23 +6756,23 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2528:6: ( ( rule__FunctionDefinition__FunctorsAssignment_11_1 ) )
+                    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2528:6: ( ( rule__FunctionDefinition__FunctorDeclarationsAssignment_11_1 ) )
                     {
-                    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2528:6: ( ( rule__FunctionDefinition__FunctorsAssignment_11_1 ) )
-                    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2529:1: ( rule__FunctionDefinition__FunctorsAssignment_11_1 )
+                    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2528:6: ( ( rule__FunctionDefinition__FunctorDeclarationsAssignment_11_1 ) )
+                    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2529:1: ( rule__FunctionDefinition__FunctorDeclarationsAssignment_11_1 )
                     {
-                     before(grammarAccess.getFunctionDefinitionAccess().getFunctorsAssignment_11_1()); 
-                    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2530:1: ( rule__FunctionDefinition__FunctorsAssignment_11_1 )
-                    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2530:2: rule__FunctionDefinition__FunctorsAssignment_11_1
+                     before(grammarAccess.getFunctionDefinitionAccess().getFunctorDeclarationsAssignment_11_1()); 
+                    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2530:1: ( rule__FunctionDefinition__FunctorDeclarationsAssignment_11_1 )
+                    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2530:2: rule__FunctionDefinition__FunctorDeclarationsAssignment_11_1
                     {
-                    pushFollow(FOLLOW_rule__FunctionDefinition__FunctorsAssignment_11_1_in_rule__FunctionDefinition__Alternatives_115320);
-                    rule__FunctionDefinition__FunctorsAssignment_11_1();
+                    pushFollow(FOLLOW_rule__FunctionDefinition__FunctorDeclarationsAssignment_11_1_in_rule__FunctionDefinition__Alternatives_115320);
+                    rule__FunctionDefinition__FunctorDeclarationsAssignment_11_1();
                     _fsp--;
 
 
                     }
 
-                     after(grammarAccess.getFunctionDefinitionAccess().getFunctorsAssignment_11_1()); 
+                     after(grammarAccess.getFunctionDefinitionAccess().getFunctorDeclarationsAssignment_11_1()); 
 
                     }
 
@@ -6780,23 +6780,23 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 3 :
-                    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2534:6: ( ( rule__FunctionDefinition__StateVariablesAssignment_11_2 ) )
+                    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2534:6: ( ( rule__FunctionDefinition__StateVariableDeclarationsAssignment_11_2 ) )
                     {
-                    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2534:6: ( ( rule__FunctionDefinition__StateVariablesAssignment_11_2 ) )
-                    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2535:1: ( rule__FunctionDefinition__StateVariablesAssignment_11_2 )
+                    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2534:6: ( ( rule__FunctionDefinition__StateVariableDeclarationsAssignment_11_2 ) )
+                    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2535:1: ( rule__FunctionDefinition__StateVariableDeclarationsAssignment_11_2 )
                     {
-                     before(grammarAccess.getFunctionDefinitionAccess().getStateVariablesAssignment_11_2()); 
-                    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2536:1: ( rule__FunctionDefinition__StateVariablesAssignment_11_2 )
-                    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2536:2: rule__FunctionDefinition__StateVariablesAssignment_11_2
+                     before(grammarAccess.getFunctionDefinitionAccess().getStateVariableDeclarationsAssignment_11_2()); 
+                    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2536:1: ( rule__FunctionDefinition__StateVariableDeclarationsAssignment_11_2 )
+                    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:2536:2: rule__FunctionDefinition__StateVariableDeclarationsAssignment_11_2
                     {
-                    pushFollow(FOLLOW_rule__FunctionDefinition__StateVariablesAssignment_11_2_in_rule__FunctionDefinition__Alternatives_115338);
-                    rule__FunctionDefinition__StateVariablesAssignment_11_2();
+                    pushFollow(FOLLOW_rule__FunctionDefinition__StateVariableDeclarationsAssignment_11_2_in_rule__FunctionDefinition__Alternatives_115338);
+                    rule__FunctionDefinition__StateVariableDeclarationsAssignment_11_2();
                     _fsp--;
 
 
                     }
 
-                     after(grammarAccess.getFunctionDefinitionAccess().getStateVariablesAssignment_11_2()); 
+                     after(grammarAccess.getFunctionDefinitionAccess().getStateVariableDeclarationsAssignment_11_2()); 
 
                     }
 
@@ -10201,30 +10201,30 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__EnumerationDefinition__Group_3__0__Impl
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:3567:1: rule__EnumerationDefinition__Group_3__0__Impl : ( ( rule__EnumerationDefinition__LiteralsAssignment_3_0 ) ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:3567:1: rule__EnumerationDefinition__Group_3__0__Impl : ( ( rule__EnumerationDefinition__LiteralDeclarationsAssignment_3_0 ) ) ;
     public final void rule__EnumerationDefinition__Group_3__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:3571:1: ( ( ( rule__EnumerationDefinition__LiteralsAssignment_3_0 ) ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:3572:1: ( ( rule__EnumerationDefinition__LiteralsAssignment_3_0 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:3571:1: ( ( ( rule__EnumerationDefinition__LiteralDeclarationsAssignment_3_0 ) ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:3572:1: ( ( rule__EnumerationDefinition__LiteralDeclarationsAssignment_3_0 ) )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:3572:1: ( ( rule__EnumerationDefinition__LiteralsAssignment_3_0 ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:3573:1: ( rule__EnumerationDefinition__LiteralsAssignment_3_0 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:3572:1: ( ( rule__EnumerationDefinition__LiteralDeclarationsAssignment_3_0 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:3573:1: ( rule__EnumerationDefinition__LiteralDeclarationsAssignment_3_0 )
             {
-             before(grammarAccess.getEnumerationDefinitionAccess().getLiteralsAssignment_3_0()); 
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:3574:1: ( rule__EnumerationDefinition__LiteralsAssignment_3_0 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:3574:2: rule__EnumerationDefinition__LiteralsAssignment_3_0
+             before(grammarAccess.getEnumerationDefinitionAccess().getLiteralDeclarationsAssignment_3_0()); 
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:3574:1: ( rule__EnumerationDefinition__LiteralDeclarationsAssignment_3_0 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:3574:2: rule__EnumerationDefinition__LiteralDeclarationsAssignment_3_0
             {
-            pushFollow(FOLLOW_rule__EnumerationDefinition__LiteralsAssignment_3_0_in_rule__EnumerationDefinition__Group_3__0__Impl7681);
-            rule__EnumerationDefinition__LiteralsAssignment_3_0();
+            pushFollow(FOLLOW_rule__EnumerationDefinition__LiteralDeclarationsAssignment_3_0_in_rule__EnumerationDefinition__Group_3__0__Impl7681);
+            rule__EnumerationDefinition__LiteralDeclarationsAssignment_3_0();
             _fsp--;
 
 
             }
 
-             after(grammarAccess.getEnumerationDefinitionAccess().getLiteralsAssignment_3_0()); 
+             after(grammarAccess.getEnumerationDefinitionAccess().getLiteralDeclarationsAssignment_3_0()); 
 
             }
 
@@ -10448,30 +10448,30 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__EnumerationDefinition__Group_3_1__1__Impl
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:3658:1: rule__EnumerationDefinition__Group_3_1__1__Impl : ( ( rule__EnumerationDefinition__LiteralsAssignment_3_1_1 ) ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:3658:1: rule__EnumerationDefinition__Group_3_1__1__Impl : ( ( rule__EnumerationDefinition__LiteralDeclarationsAssignment_3_1_1 ) ) ;
     public final void rule__EnumerationDefinition__Group_3_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:3662:1: ( ( ( rule__EnumerationDefinition__LiteralsAssignment_3_1_1 ) ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:3663:1: ( ( rule__EnumerationDefinition__LiteralsAssignment_3_1_1 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:3662:1: ( ( ( rule__EnumerationDefinition__LiteralDeclarationsAssignment_3_1_1 ) ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:3663:1: ( ( rule__EnumerationDefinition__LiteralDeclarationsAssignment_3_1_1 ) )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:3663:1: ( ( rule__EnumerationDefinition__LiteralsAssignment_3_1_1 ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:3664:1: ( rule__EnumerationDefinition__LiteralsAssignment_3_1_1 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:3663:1: ( ( rule__EnumerationDefinition__LiteralDeclarationsAssignment_3_1_1 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:3664:1: ( rule__EnumerationDefinition__LiteralDeclarationsAssignment_3_1_1 )
             {
-             before(grammarAccess.getEnumerationDefinitionAccess().getLiteralsAssignment_3_1_1()); 
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:3665:1: ( rule__EnumerationDefinition__LiteralsAssignment_3_1_1 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:3665:2: rule__EnumerationDefinition__LiteralsAssignment_3_1_1
+             before(grammarAccess.getEnumerationDefinitionAccess().getLiteralDeclarationsAssignment_3_1_1()); 
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:3665:1: ( rule__EnumerationDefinition__LiteralDeclarationsAssignment_3_1_1 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:3665:2: rule__EnumerationDefinition__LiteralDeclarationsAssignment_3_1_1
             {
-            pushFollow(FOLLOW_rule__EnumerationDefinition__LiteralsAssignment_3_1_1_in_rule__EnumerationDefinition__Group_3_1__1__Impl7862);
-            rule__EnumerationDefinition__LiteralsAssignment_3_1_1();
+            pushFollow(FOLLOW_rule__EnumerationDefinition__LiteralDeclarationsAssignment_3_1_1_in_rule__EnumerationDefinition__Group_3_1__1__Impl7862);
+            rule__EnumerationDefinition__LiteralDeclarationsAssignment_3_1_1();
             _fsp--;
 
 
             }
 
-             after(grammarAccess.getEnumerationDefinitionAccess().getLiteralsAssignment_3_1_1()); 
+             after(grammarAccess.getEnumerationDefinitionAccess().getLiteralDeclarationsAssignment_3_1_1()); 
 
             }
 
@@ -11137,20 +11137,20 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__RecordDefinition__Group__3__Impl
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:3942:1: rule__RecordDefinition__Group__3__Impl : ( ( rule__RecordDefinition__FieldsAssignment_3 )* ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:3942:1: rule__RecordDefinition__Group__3__Impl : ( ( rule__RecordDefinition__FieldDeclarationsAssignment_3 )* ) ;
     public final void rule__RecordDefinition__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:3946:1: ( ( ( rule__RecordDefinition__FieldsAssignment_3 )* ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:3947:1: ( ( rule__RecordDefinition__FieldsAssignment_3 )* )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:3946:1: ( ( ( rule__RecordDefinition__FieldDeclarationsAssignment_3 )* ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:3947:1: ( ( rule__RecordDefinition__FieldDeclarationsAssignment_3 )* )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:3947:1: ( ( rule__RecordDefinition__FieldsAssignment_3 )* )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:3948:1: ( rule__RecordDefinition__FieldsAssignment_3 )*
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:3947:1: ( ( rule__RecordDefinition__FieldDeclarationsAssignment_3 )* )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:3948:1: ( rule__RecordDefinition__FieldDeclarationsAssignment_3 )*
             {
-             before(grammarAccess.getRecordDefinitionAccess().getFieldsAssignment_3()); 
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:3949:1: ( rule__RecordDefinition__FieldsAssignment_3 )*
+             before(grammarAccess.getRecordDefinitionAccess().getFieldDeclarationsAssignment_3()); 
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:3949:1: ( rule__RecordDefinition__FieldDeclarationsAssignment_3 )*
             loop35:
             do {
                 int alt35=2;
@@ -11163,10 +11163,10 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
                 switch (alt35) {
             	case 1 :
-            	    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:3949:2: rule__RecordDefinition__FieldsAssignment_3
+            	    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:3949:2: rule__RecordDefinition__FieldDeclarationsAssignment_3
             	    {
-            	    pushFollow(FOLLOW_rule__RecordDefinition__FieldsAssignment_3_in_rule__RecordDefinition__Group__3__Impl8423);
-            	    rule__RecordDefinition__FieldsAssignment_3();
+            	    pushFollow(FOLLOW_rule__RecordDefinition__FieldDeclarationsAssignment_3_in_rule__RecordDefinition__Group__3__Impl8423);
+            	    rule__RecordDefinition__FieldDeclarationsAssignment_3();
             	    _fsp--;
 
 
@@ -11178,7 +11178,7 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
                 }
             } while (true);
 
-             after(grammarAccess.getRecordDefinitionAccess().getFieldsAssignment_3()); 
+             after(grammarAccess.getRecordDefinitionAccess().getFieldDeclarationsAssignment_3()); 
 
             }
 
@@ -12265,30 +12265,30 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__FunctionDefinition__Group__8__Impl
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4378:1: rule__FunctionDefinition__Group__8__Impl : ( ( rule__FunctionDefinition__OutputParametersAssignment_8 ) ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4378:1: rule__FunctionDefinition__Group__8__Impl : ( ( rule__FunctionDefinition__OutputParameterDeclarationsAssignment_8 ) ) ;
     public final void rule__FunctionDefinition__Group__8__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4382:1: ( ( ( rule__FunctionDefinition__OutputParametersAssignment_8 ) ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4383:1: ( ( rule__FunctionDefinition__OutputParametersAssignment_8 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4382:1: ( ( ( rule__FunctionDefinition__OutputParameterDeclarationsAssignment_8 ) ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4383:1: ( ( rule__FunctionDefinition__OutputParameterDeclarationsAssignment_8 ) )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4383:1: ( ( rule__FunctionDefinition__OutputParametersAssignment_8 ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4384:1: ( rule__FunctionDefinition__OutputParametersAssignment_8 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4383:1: ( ( rule__FunctionDefinition__OutputParameterDeclarationsAssignment_8 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4384:1: ( rule__FunctionDefinition__OutputParameterDeclarationsAssignment_8 )
             {
-             before(grammarAccess.getFunctionDefinitionAccess().getOutputParametersAssignment_8()); 
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4385:1: ( rule__FunctionDefinition__OutputParametersAssignment_8 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4385:2: rule__FunctionDefinition__OutputParametersAssignment_8
+             before(grammarAccess.getFunctionDefinitionAccess().getOutputParameterDeclarationsAssignment_8()); 
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4385:1: ( rule__FunctionDefinition__OutputParameterDeclarationsAssignment_8 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4385:2: rule__FunctionDefinition__OutputParameterDeclarationsAssignment_8
             {
-            pushFollow(FOLLOW_rule__FunctionDefinition__OutputParametersAssignment_8_in_rule__FunctionDefinition__Group__8__Impl9293);
-            rule__FunctionDefinition__OutputParametersAssignment_8();
+            pushFollow(FOLLOW_rule__FunctionDefinition__OutputParameterDeclarationsAssignment_8_in_rule__FunctionDefinition__Group__8__Impl9293);
+            rule__FunctionDefinition__OutputParameterDeclarationsAssignment_8();
             _fsp--;
 
 
             }
 
-             after(grammarAccess.getFunctionDefinitionAccess().getOutputParametersAssignment_8()); 
+             after(grammarAccess.getFunctionDefinitionAccess().getOutputParameterDeclarationsAssignment_8()); 
 
             }
 
@@ -12762,30 +12762,30 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__FunctionDefinition__Group_3__1__Impl
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4583:1: rule__FunctionDefinition__Group_3__1__Impl : ( ( rule__FunctionDefinition__TemplateParametersAssignment_3_1 ) ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4583:1: rule__FunctionDefinition__Group_3__1__Impl : ( ( rule__FunctionDefinition__TemplateParameterDeclarationsAssignment_3_1 ) ) ;
     public final void rule__FunctionDefinition__Group_3__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4587:1: ( ( ( rule__FunctionDefinition__TemplateParametersAssignment_3_1 ) ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4588:1: ( ( rule__FunctionDefinition__TemplateParametersAssignment_3_1 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4587:1: ( ( ( rule__FunctionDefinition__TemplateParameterDeclarationsAssignment_3_1 ) ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4588:1: ( ( rule__FunctionDefinition__TemplateParameterDeclarationsAssignment_3_1 ) )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4588:1: ( ( rule__FunctionDefinition__TemplateParametersAssignment_3_1 ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4589:1: ( rule__FunctionDefinition__TemplateParametersAssignment_3_1 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4588:1: ( ( rule__FunctionDefinition__TemplateParameterDeclarationsAssignment_3_1 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4589:1: ( rule__FunctionDefinition__TemplateParameterDeclarationsAssignment_3_1 )
             {
-             before(grammarAccess.getFunctionDefinitionAccess().getTemplateParametersAssignment_3_1()); 
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4590:1: ( rule__FunctionDefinition__TemplateParametersAssignment_3_1 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4590:2: rule__FunctionDefinition__TemplateParametersAssignment_3_1
+             before(grammarAccess.getFunctionDefinitionAccess().getTemplateParameterDeclarationsAssignment_3_1()); 
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4590:1: ( rule__FunctionDefinition__TemplateParameterDeclarationsAssignment_3_1 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4590:2: rule__FunctionDefinition__TemplateParameterDeclarationsAssignment_3_1
             {
-            pushFollow(FOLLOW_rule__FunctionDefinition__TemplateParametersAssignment_3_1_in_rule__FunctionDefinition__Group_3__1__Impl9684);
-            rule__FunctionDefinition__TemplateParametersAssignment_3_1();
+            pushFollow(FOLLOW_rule__FunctionDefinition__TemplateParameterDeclarationsAssignment_3_1_in_rule__FunctionDefinition__Group_3__1__Impl9684);
+            rule__FunctionDefinition__TemplateParameterDeclarationsAssignment_3_1();
             _fsp--;
 
 
             }
 
-             after(grammarAccess.getFunctionDefinitionAccess().getTemplateParametersAssignment_3_1()); 
+             after(grammarAccess.getFunctionDefinitionAccess().getTemplateParameterDeclarationsAssignment_3_1()); 
 
             }
 
@@ -13082,30 +13082,30 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__FunctionDefinition__Group_3_2__1__Impl
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4709:1: rule__FunctionDefinition__Group_3_2__1__Impl : ( ( rule__FunctionDefinition__TemplateParametersAssignment_3_2_1 ) ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4709:1: rule__FunctionDefinition__Group_3_2__1__Impl : ( ( rule__FunctionDefinition__TemplateParameterDeclarationsAssignment_3_2_1 ) ) ;
     public final void rule__FunctionDefinition__Group_3_2__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4713:1: ( ( ( rule__FunctionDefinition__TemplateParametersAssignment_3_2_1 ) ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4714:1: ( ( rule__FunctionDefinition__TemplateParametersAssignment_3_2_1 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4713:1: ( ( ( rule__FunctionDefinition__TemplateParameterDeclarationsAssignment_3_2_1 ) ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4714:1: ( ( rule__FunctionDefinition__TemplateParameterDeclarationsAssignment_3_2_1 ) )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4714:1: ( ( rule__FunctionDefinition__TemplateParametersAssignment_3_2_1 ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4715:1: ( rule__FunctionDefinition__TemplateParametersAssignment_3_2_1 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4714:1: ( ( rule__FunctionDefinition__TemplateParameterDeclarationsAssignment_3_2_1 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4715:1: ( rule__FunctionDefinition__TemplateParameterDeclarationsAssignment_3_2_1 )
             {
-             before(grammarAccess.getFunctionDefinitionAccess().getTemplateParametersAssignment_3_2_1()); 
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4716:1: ( rule__FunctionDefinition__TemplateParametersAssignment_3_2_1 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4716:2: rule__FunctionDefinition__TemplateParametersAssignment_3_2_1
+             before(grammarAccess.getFunctionDefinitionAccess().getTemplateParameterDeclarationsAssignment_3_2_1()); 
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4716:1: ( rule__FunctionDefinition__TemplateParameterDeclarationsAssignment_3_2_1 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4716:2: rule__FunctionDefinition__TemplateParameterDeclarationsAssignment_3_2_1
             {
-            pushFollow(FOLLOW_rule__FunctionDefinition__TemplateParametersAssignment_3_2_1_in_rule__FunctionDefinition__Group_3_2__1__Impl9931);
-            rule__FunctionDefinition__TemplateParametersAssignment_3_2_1();
+            pushFollow(FOLLOW_rule__FunctionDefinition__TemplateParameterDeclarationsAssignment_3_2_1_in_rule__FunctionDefinition__Group_3_2__1__Impl9931);
+            rule__FunctionDefinition__TemplateParameterDeclarationsAssignment_3_2_1();
             _fsp--;
 
 
             }
 
-             after(grammarAccess.getFunctionDefinitionAccess().getTemplateParametersAssignment_3_2_1()); 
+             after(grammarAccess.getFunctionDefinitionAccess().getTemplateParameterDeclarationsAssignment_3_2_1()); 
 
             }
 
@@ -13164,30 +13164,30 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__FunctionDefinition__Group_5__0__Impl
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4742:1: rule__FunctionDefinition__Group_5__0__Impl : ( ( rule__FunctionDefinition__InputParametersAssignment_5_0 ) ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4742:1: rule__FunctionDefinition__Group_5__0__Impl : ( ( rule__FunctionDefinition__InputParameterDeclarationsAssignment_5_0 ) ) ;
     public final void rule__FunctionDefinition__Group_5__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4746:1: ( ( ( rule__FunctionDefinition__InputParametersAssignment_5_0 ) ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4747:1: ( ( rule__FunctionDefinition__InputParametersAssignment_5_0 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4746:1: ( ( ( rule__FunctionDefinition__InputParameterDeclarationsAssignment_5_0 ) ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4747:1: ( ( rule__FunctionDefinition__InputParameterDeclarationsAssignment_5_0 ) )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4747:1: ( ( rule__FunctionDefinition__InputParametersAssignment_5_0 ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4748:1: ( rule__FunctionDefinition__InputParametersAssignment_5_0 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4747:1: ( ( rule__FunctionDefinition__InputParameterDeclarationsAssignment_5_0 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4748:1: ( rule__FunctionDefinition__InputParameterDeclarationsAssignment_5_0 )
             {
-             before(grammarAccess.getFunctionDefinitionAccess().getInputParametersAssignment_5_0()); 
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4749:1: ( rule__FunctionDefinition__InputParametersAssignment_5_0 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4749:2: rule__FunctionDefinition__InputParametersAssignment_5_0
+             before(grammarAccess.getFunctionDefinitionAccess().getInputParameterDeclarationsAssignment_5_0()); 
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4749:1: ( rule__FunctionDefinition__InputParameterDeclarationsAssignment_5_0 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4749:2: rule__FunctionDefinition__InputParameterDeclarationsAssignment_5_0
             {
-            pushFollow(FOLLOW_rule__FunctionDefinition__InputParametersAssignment_5_0_in_rule__FunctionDefinition__Group_5__0__Impl9995);
-            rule__FunctionDefinition__InputParametersAssignment_5_0();
+            pushFollow(FOLLOW_rule__FunctionDefinition__InputParameterDeclarationsAssignment_5_0_in_rule__FunctionDefinition__Group_5__0__Impl9995);
+            rule__FunctionDefinition__InputParameterDeclarationsAssignment_5_0();
             _fsp--;
 
 
             }
 
-             after(grammarAccess.getFunctionDefinitionAccess().getInputParametersAssignment_5_0()); 
+             after(grammarAccess.getFunctionDefinitionAccess().getInputParameterDeclarationsAssignment_5_0()); 
 
             }
 
@@ -13411,30 +13411,30 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__FunctionDefinition__Group_5_1__1__Impl
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4833:1: rule__FunctionDefinition__Group_5_1__1__Impl : ( ( rule__FunctionDefinition__InputParametersAssignment_5_1_1 ) ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4833:1: rule__FunctionDefinition__Group_5_1__1__Impl : ( ( rule__FunctionDefinition__InputParameterDeclarationsAssignment_5_1_1 ) ) ;
     public final void rule__FunctionDefinition__Group_5_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4837:1: ( ( ( rule__FunctionDefinition__InputParametersAssignment_5_1_1 ) ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4838:1: ( ( rule__FunctionDefinition__InputParametersAssignment_5_1_1 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4837:1: ( ( ( rule__FunctionDefinition__InputParameterDeclarationsAssignment_5_1_1 ) ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4838:1: ( ( rule__FunctionDefinition__InputParameterDeclarationsAssignment_5_1_1 ) )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4838:1: ( ( rule__FunctionDefinition__InputParametersAssignment_5_1_1 ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4839:1: ( rule__FunctionDefinition__InputParametersAssignment_5_1_1 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4838:1: ( ( rule__FunctionDefinition__InputParameterDeclarationsAssignment_5_1_1 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4839:1: ( rule__FunctionDefinition__InputParameterDeclarationsAssignment_5_1_1 )
             {
-             before(grammarAccess.getFunctionDefinitionAccess().getInputParametersAssignment_5_1_1()); 
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4840:1: ( rule__FunctionDefinition__InputParametersAssignment_5_1_1 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4840:2: rule__FunctionDefinition__InputParametersAssignment_5_1_1
+             before(grammarAccess.getFunctionDefinitionAccess().getInputParameterDeclarationsAssignment_5_1_1()); 
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4840:1: ( rule__FunctionDefinition__InputParameterDeclarationsAssignment_5_1_1 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4840:2: rule__FunctionDefinition__InputParameterDeclarationsAssignment_5_1_1
             {
-            pushFollow(FOLLOW_rule__FunctionDefinition__InputParametersAssignment_5_1_1_in_rule__FunctionDefinition__Group_5_1__1__Impl10176);
-            rule__FunctionDefinition__InputParametersAssignment_5_1_1();
+            pushFollow(FOLLOW_rule__FunctionDefinition__InputParameterDeclarationsAssignment_5_1_1_in_rule__FunctionDefinition__Group_5_1__1__Impl10176);
+            rule__FunctionDefinition__InputParameterDeclarationsAssignment_5_1_1();
             _fsp--;
 
 
             }
 
-             after(grammarAccess.getFunctionDefinitionAccess().getInputParametersAssignment_5_1_1()); 
+             after(grammarAccess.getFunctionDefinitionAccess().getInputParameterDeclarationsAssignment_5_1_1()); 
 
             }
 
@@ -13562,30 +13562,30 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__FunctionDefinition__Group_9__1__Impl
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4896:1: rule__FunctionDefinition__Group_9__1__Impl : ( ( rule__FunctionDefinition__OutputParametersAssignment_9_1 ) ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4896:1: rule__FunctionDefinition__Group_9__1__Impl : ( ( rule__FunctionDefinition__OutputParameterDeclarationsAssignment_9_1 ) ) ;
     public final void rule__FunctionDefinition__Group_9__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4900:1: ( ( ( rule__FunctionDefinition__OutputParametersAssignment_9_1 ) ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4901:1: ( ( rule__FunctionDefinition__OutputParametersAssignment_9_1 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4900:1: ( ( ( rule__FunctionDefinition__OutputParameterDeclarationsAssignment_9_1 ) ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4901:1: ( ( rule__FunctionDefinition__OutputParameterDeclarationsAssignment_9_1 ) )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4901:1: ( ( rule__FunctionDefinition__OutputParametersAssignment_9_1 ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4902:1: ( rule__FunctionDefinition__OutputParametersAssignment_9_1 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4901:1: ( ( rule__FunctionDefinition__OutputParameterDeclarationsAssignment_9_1 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4902:1: ( rule__FunctionDefinition__OutputParameterDeclarationsAssignment_9_1 )
             {
-             before(grammarAccess.getFunctionDefinitionAccess().getOutputParametersAssignment_9_1()); 
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4903:1: ( rule__FunctionDefinition__OutputParametersAssignment_9_1 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4903:2: rule__FunctionDefinition__OutputParametersAssignment_9_1
+             before(grammarAccess.getFunctionDefinitionAccess().getOutputParameterDeclarationsAssignment_9_1()); 
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4903:1: ( rule__FunctionDefinition__OutputParameterDeclarationsAssignment_9_1 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4903:2: rule__FunctionDefinition__OutputParameterDeclarationsAssignment_9_1
             {
-            pushFollow(FOLLOW_rule__FunctionDefinition__OutputParametersAssignment_9_1_in_rule__FunctionDefinition__Group_9__1__Impl10299);
-            rule__FunctionDefinition__OutputParametersAssignment_9_1();
+            pushFollow(FOLLOW_rule__FunctionDefinition__OutputParameterDeclarationsAssignment_9_1_in_rule__FunctionDefinition__Group_9__1__Impl10299);
+            rule__FunctionDefinition__OutputParameterDeclarationsAssignment_9_1();
             _fsp--;
 
 
             }
 
-             after(grammarAccess.getFunctionDefinitionAccess().getOutputParametersAssignment_9_1()); 
+             after(grammarAccess.getFunctionDefinitionAccess().getOutputParameterDeclarationsAssignment_9_1()); 
 
             }
 
@@ -14967,30 +14967,30 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__FunctorDeclaration__Group_4__1__Impl
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:5469:1: rule__FunctorDeclaration__Group_4__1__Impl : ( ( rule__FunctorDeclaration__TemplateArgumentsAssignment_4_1 ) ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:5469:1: rule__FunctorDeclaration__Group_4__1__Impl : ( ( rule__FunctorDeclaration__TemplateArgumentDeclarationsAssignment_4_1 ) ) ;
     public final void rule__FunctorDeclaration__Group_4__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:5473:1: ( ( ( rule__FunctorDeclaration__TemplateArgumentsAssignment_4_1 ) ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:5474:1: ( ( rule__FunctorDeclaration__TemplateArgumentsAssignment_4_1 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:5473:1: ( ( ( rule__FunctorDeclaration__TemplateArgumentDeclarationsAssignment_4_1 ) ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:5474:1: ( ( rule__FunctorDeclaration__TemplateArgumentDeclarationsAssignment_4_1 ) )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:5474:1: ( ( rule__FunctorDeclaration__TemplateArgumentsAssignment_4_1 ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:5475:1: ( rule__FunctorDeclaration__TemplateArgumentsAssignment_4_1 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:5474:1: ( ( rule__FunctorDeclaration__TemplateArgumentDeclarationsAssignment_4_1 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:5475:1: ( rule__FunctorDeclaration__TemplateArgumentDeclarationsAssignment_4_1 )
             {
-             before(grammarAccess.getFunctorDeclarationAccess().getTemplateArgumentsAssignment_4_1()); 
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:5476:1: ( rule__FunctorDeclaration__TemplateArgumentsAssignment_4_1 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:5476:2: rule__FunctorDeclaration__TemplateArgumentsAssignment_4_1
+             before(grammarAccess.getFunctorDeclarationAccess().getTemplateArgumentDeclarationsAssignment_4_1()); 
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:5476:1: ( rule__FunctorDeclaration__TemplateArgumentDeclarationsAssignment_4_1 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:5476:2: rule__FunctorDeclaration__TemplateArgumentDeclarationsAssignment_4_1
             {
-            pushFollow(FOLLOW_rule__FunctorDeclaration__TemplateArgumentsAssignment_4_1_in_rule__FunctorDeclaration__Group_4__1__Impl11426);
-            rule__FunctorDeclaration__TemplateArgumentsAssignment_4_1();
+            pushFollow(FOLLOW_rule__FunctorDeclaration__TemplateArgumentDeclarationsAssignment_4_1_in_rule__FunctorDeclaration__Group_4__1__Impl11426);
+            rule__FunctorDeclaration__TemplateArgumentDeclarationsAssignment_4_1();
             _fsp--;
 
 
             }
 
-             after(grammarAccess.getFunctorDeclarationAccess().getTemplateArgumentsAssignment_4_1()); 
+             after(grammarAccess.getFunctorDeclarationAccess().getTemplateArgumentDeclarationsAssignment_4_1()); 
 
             }
 
@@ -15287,30 +15287,30 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__FunctorDeclaration__Group_4_2__1__Impl
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:5595:1: rule__FunctorDeclaration__Group_4_2__1__Impl : ( ( rule__FunctorDeclaration__TemplateArgumentsAssignment_4_2_1 ) ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:5595:1: rule__FunctorDeclaration__Group_4_2__1__Impl : ( ( rule__FunctorDeclaration__TemplateArgumentDeclarationsAssignment_4_2_1 ) ) ;
     public final void rule__FunctorDeclaration__Group_4_2__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:5599:1: ( ( ( rule__FunctorDeclaration__TemplateArgumentsAssignment_4_2_1 ) ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:5600:1: ( ( rule__FunctorDeclaration__TemplateArgumentsAssignment_4_2_1 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:5599:1: ( ( ( rule__FunctorDeclaration__TemplateArgumentDeclarationsAssignment_4_2_1 ) ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:5600:1: ( ( rule__FunctorDeclaration__TemplateArgumentDeclarationsAssignment_4_2_1 ) )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:5600:1: ( ( rule__FunctorDeclaration__TemplateArgumentsAssignment_4_2_1 ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:5601:1: ( rule__FunctorDeclaration__TemplateArgumentsAssignment_4_2_1 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:5600:1: ( ( rule__FunctorDeclaration__TemplateArgumentDeclarationsAssignment_4_2_1 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:5601:1: ( rule__FunctorDeclaration__TemplateArgumentDeclarationsAssignment_4_2_1 )
             {
-             before(grammarAccess.getFunctorDeclarationAccess().getTemplateArgumentsAssignment_4_2_1()); 
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:5602:1: ( rule__FunctorDeclaration__TemplateArgumentsAssignment_4_2_1 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:5602:2: rule__FunctorDeclaration__TemplateArgumentsAssignment_4_2_1
+             before(grammarAccess.getFunctorDeclarationAccess().getTemplateArgumentDeclarationsAssignment_4_2_1()); 
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:5602:1: ( rule__FunctorDeclaration__TemplateArgumentDeclarationsAssignment_4_2_1 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:5602:2: rule__FunctorDeclaration__TemplateArgumentDeclarationsAssignment_4_2_1
             {
-            pushFollow(FOLLOW_rule__FunctorDeclaration__TemplateArgumentsAssignment_4_2_1_in_rule__FunctorDeclaration__Group_4_2__1__Impl11673);
-            rule__FunctorDeclaration__TemplateArgumentsAssignment_4_2_1();
+            pushFollow(FOLLOW_rule__FunctorDeclaration__TemplateArgumentDeclarationsAssignment_4_2_1_in_rule__FunctorDeclaration__Group_4_2__1__Impl11673);
+            rule__FunctorDeclaration__TemplateArgumentDeclarationsAssignment_4_2_1();
             _fsp--;
 
 
             }
 
-             after(grammarAccess.getFunctorDeclarationAccess().getTemplateArgumentsAssignment_4_2_1()); 
+             after(grammarAccess.getFunctorDeclarationAccess().getTemplateArgumentDeclarationsAssignment_4_2_1()); 
 
             }
 
@@ -38473,9 +38473,9 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
     // $ANTLR end rule__EnumerationDefinition__NameAssignment_1
 
 
-    // $ANTLR start rule__EnumerationDefinition__LiteralsAssignment_3_0
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:14779:1: rule__EnumerationDefinition__LiteralsAssignment_3_0 : ( ruleEnumerationLiteralDeclaration ) ;
-    public final void rule__EnumerationDefinition__LiteralsAssignment_3_0() throws RecognitionException {
+    // $ANTLR start rule__EnumerationDefinition__LiteralDeclarationsAssignment_3_0
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:14779:1: rule__EnumerationDefinition__LiteralDeclarationsAssignment_3_0 : ( ruleEnumerationLiteralDeclaration ) ;
+    public final void rule__EnumerationDefinition__LiteralDeclarationsAssignment_3_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -38486,12 +38486,12 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
             // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:14784:1: ( ruleEnumerationLiteralDeclaration )
             // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:14785:1: ruleEnumerationLiteralDeclaration
             {
-             before(grammarAccess.getEnumerationDefinitionAccess().getLiteralsEnumerationLiteralDeclarationParserRuleCall_3_0_0()); 
-            pushFollow(FOLLOW_ruleEnumerationLiteralDeclaration_in_rule__EnumerationDefinition__LiteralsAssignment_3_029723);
+             before(grammarAccess.getEnumerationDefinitionAccess().getLiteralDeclarationsEnumerationLiteralDeclarationParserRuleCall_3_0_0()); 
+            pushFollow(FOLLOW_ruleEnumerationLiteralDeclaration_in_rule__EnumerationDefinition__LiteralDeclarationsAssignment_3_029723);
             ruleEnumerationLiteralDeclaration();
             _fsp--;
 
-             after(grammarAccess.getEnumerationDefinitionAccess().getLiteralsEnumerationLiteralDeclarationParserRuleCall_3_0_0()); 
+             after(grammarAccess.getEnumerationDefinitionAccess().getLiteralDeclarationsEnumerationLiteralDeclarationParserRuleCall_3_0_0()); 
 
             }
 
@@ -38510,12 +38510,12 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__EnumerationDefinition__LiteralsAssignment_3_0
+    // $ANTLR end rule__EnumerationDefinition__LiteralDeclarationsAssignment_3_0
 
 
-    // $ANTLR start rule__EnumerationDefinition__LiteralsAssignment_3_1_1
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:14794:1: rule__EnumerationDefinition__LiteralsAssignment_3_1_1 : ( ruleEnumerationLiteralDeclaration ) ;
-    public final void rule__EnumerationDefinition__LiteralsAssignment_3_1_1() throws RecognitionException {
+    // $ANTLR start rule__EnumerationDefinition__LiteralDeclarationsAssignment_3_1_1
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:14794:1: rule__EnumerationDefinition__LiteralDeclarationsAssignment_3_1_1 : ( ruleEnumerationLiteralDeclaration ) ;
+    public final void rule__EnumerationDefinition__LiteralDeclarationsAssignment_3_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -38526,12 +38526,12 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
             // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:14799:1: ( ruleEnumerationLiteralDeclaration )
             // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:14800:1: ruleEnumerationLiteralDeclaration
             {
-             before(grammarAccess.getEnumerationDefinitionAccess().getLiteralsEnumerationLiteralDeclarationParserRuleCall_3_1_1_0()); 
-            pushFollow(FOLLOW_ruleEnumerationLiteralDeclaration_in_rule__EnumerationDefinition__LiteralsAssignment_3_1_129754);
+             before(grammarAccess.getEnumerationDefinitionAccess().getLiteralDeclarationsEnumerationLiteralDeclarationParserRuleCall_3_1_1_0()); 
+            pushFollow(FOLLOW_ruleEnumerationLiteralDeclaration_in_rule__EnumerationDefinition__LiteralDeclarationsAssignment_3_1_129754);
             ruleEnumerationLiteralDeclaration();
             _fsp--;
 
-             after(grammarAccess.getEnumerationDefinitionAccess().getLiteralsEnumerationLiteralDeclarationParserRuleCall_3_1_1_0()); 
+             after(grammarAccess.getEnumerationDefinitionAccess().getLiteralDeclarationsEnumerationLiteralDeclarationParserRuleCall_3_1_1_0()); 
 
             }
 
@@ -38550,7 +38550,7 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__EnumerationDefinition__LiteralsAssignment_3_1_1
+    // $ANTLR end rule__EnumerationDefinition__LiteralDeclarationsAssignment_3_1_1
 
 
     // $ANTLR start rule__EnumerationLiteralDeclaration__NameAssignment
@@ -38704,9 +38704,9 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
     // $ANTLR end rule__RecordDefinition__NameAssignment_1
 
 
-    // $ANTLR start rule__RecordDefinition__FieldsAssignment_3
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:14869:1: rule__RecordDefinition__FieldsAssignment_3 : ( ruleRecordFieldDeclaration ) ;
-    public final void rule__RecordDefinition__FieldsAssignment_3() throws RecognitionException {
+    // $ANTLR start rule__RecordDefinition__FieldDeclarationsAssignment_3
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:14869:1: rule__RecordDefinition__FieldDeclarationsAssignment_3 : ( ruleRecordFieldDeclaration ) ;
+    public final void rule__RecordDefinition__FieldDeclarationsAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -38717,12 +38717,12 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
             // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:14874:1: ( ruleRecordFieldDeclaration )
             // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:14875:1: ruleRecordFieldDeclaration
             {
-             before(grammarAccess.getRecordDefinitionAccess().getFieldsRecordFieldDeclarationParserRuleCall_3_0()); 
-            pushFollow(FOLLOW_ruleRecordFieldDeclaration_in_rule__RecordDefinition__FieldsAssignment_329909);
+             before(grammarAccess.getRecordDefinitionAccess().getFieldDeclarationsRecordFieldDeclarationParserRuleCall_3_0()); 
+            pushFollow(FOLLOW_ruleRecordFieldDeclaration_in_rule__RecordDefinition__FieldDeclarationsAssignment_329909);
             ruleRecordFieldDeclaration();
             _fsp--;
 
-             after(grammarAccess.getRecordDefinitionAccess().getFieldsRecordFieldDeclarationParserRuleCall_3_0()); 
+             after(grammarAccess.getRecordDefinitionAccess().getFieldDeclarationsRecordFieldDeclarationParserRuleCall_3_0()); 
 
             }
 
@@ -38741,7 +38741,7 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__RecordDefinition__FieldsAssignment_3
+    // $ANTLR end rule__RecordDefinition__FieldDeclarationsAssignment_3
 
 
     // $ANTLR start rule__RecordFieldDeclaration__NameAssignment_0
@@ -38903,9 +38903,9 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
     // $ANTLR end rule__FunctionDefinition__NameAssignment_2
 
 
-    // $ANTLR start rule__FunctionDefinition__TemplateParametersAssignment_3_1
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:14952:1: rule__FunctionDefinition__TemplateParametersAssignment_3_1 : ( ruleParameterDeclaration ) ;
-    public final void rule__FunctionDefinition__TemplateParametersAssignment_3_1() throws RecognitionException {
+    // $ANTLR start rule__FunctionDefinition__TemplateParameterDeclarationsAssignment_3_1
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:14952:1: rule__FunctionDefinition__TemplateParameterDeclarationsAssignment_3_1 : ( ruleParameterDeclaration ) ;
+    public final void rule__FunctionDefinition__TemplateParameterDeclarationsAssignment_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -38916,12 +38916,12 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
             // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:14957:1: ( ruleParameterDeclaration )
             // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:14958:1: ruleParameterDeclaration
             {
-             before(grammarAccess.getFunctionDefinitionAccess().getTemplateParametersParameterDeclarationParserRuleCall_3_1_0()); 
-            pushFollow(FOLLOW_ruleParameterDeclaration_in_rule__FunctionDefinition__TemplateParametersAssignment_3_130077);
+             before(grammarAccess.getFunctionDefinitionAccess().getTemplateParameterDeclarationsParameterDeclarationParserRuleCall_3_1_0()); 
+            pushFollow(FOLLOW_ruleParameterDeclaration_in_rule__FunctionDefinition__TemplateParameterDeclarationsAssignment_3_130077);
             ruleParameterDeclaration();
             _fsp--;
 
-             after(grammarAccess.getFunctionDefinitionAccess().getTemplateParametersParameterDeclarationParserRuleCall_3_1_0()); 
+             after(grammarAccess.getFunctionDefinitionAccess().getTemplateParameterDeclarationsParameterDeclarationParserRuleCall_3_1_0()); 
 
             }
 
@@ -38940,12 +38940,12 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__FunctionDefinition__TemplateParametersAssignment_3_1
+    // $ANTLR end rule__FunctionDefinition__TemplateParameterDeclarationsAssignment_3_1
 
 
-    // $ANTLR start rule__FunctionDefinition__TemplateParametersAssignment_3_2_1
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:14967:1: rule__FunctionDefinition__TemplateParametersAssignment_3_2_1 : ( ruleParameterDeclaration ) ;
-    public final void rule__FunctionDefinition__TemplateParametersAssignment_3_2_1() throws RecognitionException {
+    // $ANTLR start rule__FunctionDefinition__TemplateParameterDeclarationsAssignment_3_2_1
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:14967:1: rule__FunctionDefinition__TemplateParameterDeclarationsAssignment_3_2_1 : ( ruleParameterDeclaration ) ;
+    public final void rule__FunctionDefinition__TemplateParameterDeclarationsAssignment_3_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -38956,12 +38956,12 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
             // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:14972:1: ( ruleParameterDeclaration )
             // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:14973:1: ruleParameterDeclaration
             {
-             before(grammarAccess.getFunctionDefinitionAccess().getTemplateParametersParameterDeclarationParserRuleCall_3_2_1_0()); 
-            pushFollow(FOLLOW_ruleParameterDeclaration_in_rule__FunctionDefinition__TemplateParametersAssignment_3_2_130108);
+             before(grammarAccess.getFunctionDefinitionAccess().getTemplateParameterDeclarationsParameterDeclarationParserRuleCall_3_2_1_0()); 
+            pushFollow(FOLLOW_ruleParameterDeclaration_in_rule__FunctionDefinition__TemplateParameterDeclarationsAssignment_3_2_130108);
             ruleParameterDeclaration();
             _fsp--;
 
-             after(grammarAccess.getFunctionDefinitionAccess().getTemplateParametersParameterDeclarationParserRuleCall_3_2_1_0()); 
+             after(grammarAccess.getFunctionDefinitionAccess().getTemplateParameterDeclarationsParameterDeclarationParserRuleCall_3_2_1_0()); 
 
             }
 
@@ -38980,12 +38980,12 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__FunctionDefinition__TemplateParametersAssignment_3_2_1
+    // $ANTLR end rule__FunctionDefinition__TemplateParameterDeclarationsAssignment_3_2_1
 
 
-    // $ANTLR start rule__FunctionDefinition__InputParametersAssignment_5_0
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:14982:1: rule__FunctionDefinition__InputParametersAssignment_5_0 : ( ruleParameterDeclaration ) ;
-    public final void rule__FunctionDefinition__InputParametersAssignment_5_0() throws RecognitionException {
+    // $ANTLR start rule__FunctionDefinition__InputParameterDeclarationsAssignment_5_0
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:14982:1: rule__FunctionDefinition__InputParameterDeclarationsAssignment_5_0 : ( ruleParameterDeclaration ) ;
+    public final void rule__FunctionDefinition__InputParameterDeclarationsAssignment_5_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -38996,12 +38996,12 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
             // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:14987:1: ( ruleParameterDeclaration )
             // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:14988:1: ruleParameterDeclaration
             {
-             before(grammarAccess.getFunctionDefinitionAccess().getInputParametersParameterDeclarationParserRuleCall_5_0_0()); 
-            pushFollow(FOLLOW_ruleParameterDeclaration_in_rule__FunctionDefinition__InputParametersAssignment_5_030139);
+             before(grammarAccess.getFunctionDefinitionAccess().getInputParameterDeclarationsParameterDeclarationParserRuleCall_5_0_0()); 
+            pushFollow(FOLLOW_ruleParameterDeclaration_in_rule__FunctionDefinition__InputParameterDeclarationsAssignment_5_030139);
             ruleParameterDeclaration();
             _fsp--;
 
-             after(grammarAccess.getFunctionDefinitionAccess().getInputParametersParameterDeclarationParserRuleCall_5_0_0()); 
+             after(grammarAccess.getFunctionDefinitionAccess().getInputParameterDeclarationsParameterDeclarationParserRuleCall_5_0_0()); 
 
             }
 
@@ -39020,12 +39020,12 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__FunctionDefinition__InputParametersAssignment_5_0
+    // $ANTLR end rule__FunctionDefinition__InputParameterDeclarationsAssignment_5_0
 
 
-    // $ANTLR start rule__FunctionDefinition__InputParametersAssignment_5_1_1
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:14997:1: rule__FunctionDefinition__InputParametersAssignment_5_1_1 : ( ruleParameterDeclaration ) ;
-    public final void rule__FunctionDefinition__InputParametersAssignment_5_1_1() throws RecognitionException {
+    // $ANTLR start rule__FunctionDefinition__InputParameterDeclarationsAssignment_5_1_1
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:14997:1: rule__FunctionDefinition__InputParameterDeclarationsAssignment_5_1_1 : ( ruleParameterDeclaration ) ;
+    public final void rule__FunctionDefinition__InputParameterDeclarationsAssignment_5_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -39036,12 +39036,12 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
             // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:15002:1: ( ruleParameterDeclaration )
             // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:15003:1: ruleParameterDeclaration
             {
-             before(grammarAccess.getFunctionDefinitionAccess().getInputParametersParameterDeclarationParserRuleCall_5_1_1_0()); 
-            pushFollow(FOLLOW_ruleParameterDeclaration_in_rule__FunctionDefinition__InputParametersAssignment_5_1_130170);
+             before(grammarAccess.getFunctionDefinitionAccess().getInputParameterDeclarationsParameterDeclarationParserRuleCall_5_1_1_0()); 
+            pushFollow(FOLLOW_ruleParameterDeclaration_in_rule__FunctionDefinition__InputParameterDeclarationsAssignment_5_1_130170);
             ruleParameterDeclaration();
             _fsp--;
 
-             after(grammarAccess.getFunctionDefinitionAccess().getInputParametersParameterDeclarationParserRuleCall_5_1_1_0()); 
+             after(grammarAccess.getFunctionDefinitionAccess().getInputParameterDeclarationsParameterDeclarationParserRuleCall_5_1_1_0()); 
 
             }
 
@@ -39060,12 +39060,12 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__FunctionDefinition__InputParametersAssignment_5_1_1
+    // $ANTLR end rule__FunctionDefinition__InputParameterDeclarationsAssignment_5_1_1
 
 
-    // $ANTLR start rule__FunctionDefinition__OutputParametersAssignment_8
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:15012:1: rule__FunctionDefinition__OutputParametersAssignment_8 : ( ruleParameterDeclaration ) ;
-    public final void rule__FunctionDefinition__OutputParametersAssignment_8() throws RecognitionException {
+    // $ANTLR start rule__FunctionDefinition__OutputParameterDeclarationsAssignment_8
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:15012:1: rule__FunctionDefinition__OutputParameterDeclarationsAssignment_8 : ( ruleParameterDeclaration ) ;
+    public final void rule__FunctionDefinition__OutputParameterDeclarationsAssignment_8() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -39076,12 +39076,12 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
             // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:15017:1: ( ruleParameterDeclaration )
             // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:15018:1: ruleParameterDeclaration
             {
-             before(grammarAccess.getFunctionDefinitionAccess().getOutputParametersParameterDeclarationParserRuleCall_8_0()); 
-            pushFollow(FOLLOW_ruleParameterDeclaration_in_rule__FunctionDefinition__OutputParametersAssignment_830201);
+             before(grammarAccess.getFunctionDefinitionAccess().getOutputParameterDeclarationsParameterDeclarationParserRuleCall_8_0()); 
+            pushFollow(FOLLOW_ruleParameterDeclaration_in_rule__FunctionDefinition__OutputParameterDeclarationsAssignment_830201);
             ruleParameterDeclaration();
             _fsp--;
 
-             after(grammarAccess.getFunctionDefinitionAccess().getOutputParametersParameterDeclarationParserRuleCall_8_0()); 
+             after(grammarAccess.getFunctionDefinitionAccess().getOutputParameterDeclarationsParameterDeclarationParserRuleCall_8_0()); 
 
             }
 
@@ -39100,12 +39100,12 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__FunctionDefinition__OutputParametersAssignment_8
+    // $ANTLR end rule__FunctionDefinition__OutputParameterDeclarationsAssignment_8
 
 
-    // $ANTLR start rule__FunctionDefinition__OutputParametersAssignment_9_1
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:15027:1: rule__FunctionDefinition__OutputParametersAssignment_9_1 : ( ruleParameterDeclaration ) ;
-    public final void rule__FunctionDefinition__OutputParametersAssignment_9_1() throws RecognitionException {
+    // $ANTLR start rule__FunctionDefinition__OutputParameterDeclarationsAssignment_9_1
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:15027:1: rule__FunctionDefinition__OutputParameterDeclarationsAssignment_9_1 : ( ruleParameterDeclaration ) ;
+    public final void rule__FunctionDefinition__OutputParameterDeclarationsAssignment_9_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -39116,12 +39116,12 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
             // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:15032:1: ( ruleParameterDeclaration )
             // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:15033:1: ruleParameterDeclaration
             {
-             before(grammarAccess.getFunctionDefinitionAccess().getOutputParametersParameterDeclarationParserRuleCall_9_1_0()); 
-            pushFollow(FOLLOW_ruleParameterDeclaration_in_rule__FunctionDefinition__OutputParametersAssignment_9_130232);
+             before(grammarAccess.getFunctionDefinitionAccess().getOutputParameterDeclarationsParameterDeclarationParserRuleCall_9_1_0()); 
+            pushFollow(FOLLOW_ruleParameterDeclaration_in_rule__FunctionDefinition__OutputParameterDeclarationsAssignment_9_130232);
             ruleParameterDeclaration();
             _fsp--;
 
-             after(grammarAccess.getFunctionDefinitionAccess().getOutputParametersParameterDeclarationParserRuleCall_9_1_0()); 
+             after(grammarAccess.getFunctionDefinitionAccess().getOutputParameterDeclarationsParameterDeclarationParserRuleCall_9_1_0()); 
 
             }
 
@@ -39140,12 +39140,12 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__FunctionDefinition__OutputParametersAssignment_9_1
+    // $ANTLR end rule__FunctionDefinition__OutputParameterDeclarationsAssignment_9_1
 
 
-    // $ANTLR start rule__FunctionDefinition__AssertionsAssignment_11_0
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:15042:1: rule__FunctionDefinition__AssertionsAssignment_11_0 : ( ruleAssertionDeclaration ) ;
-    public final void rule__FunctionDefinition__AssertionsAssignment_11_0() throws RecognitionException {
+    // $ANTLR start rule__FunctionDefinition__AssertionDeclarationsAssignment_11_0
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:15042:1: rule__FunctionDefinition__AssertionDeclarationsAssignment_11_0 : ( ruleAssertionDeclaration ) ;
+    public final void rule__FunctionDefinition__AssertionDeclarationsAssignment_11_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -39156,12 +39156,12 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
             // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:15047:1: ( ruleAssertionDeclaration )
             // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:15048:1: ruleAssertionDeclaration
             {
-             before(grammarAccess.getFunctionDefinitionAccess().getAssertionsAssertionDeclarationParserRuleCall_11_0_0()); 
-            pushFollow(FOLLOW_ruleAssertionDeclaration_in_rule__FunctionDefinition__AssertionsAssignment_11_030263);
+             before(grammarAccess.getFunctionDefinitionAccess().getAssertionDeclarationsAssertionDeclarationParserRuleCall_11_0_0()); 
+            pushFollow(FOLLOW_ruleAssertionDeclaration_in_rule__FunctionDefinition__AssertionDeclarationsAssignment_11_030263);
             ruleAssertionDeclaration();
             _fsp--;
 
-             after(grammarAccess.getFunctionDefinitionAccess().getAssertionsAssertionDeclarationParserRuleCall_11_0_0()); 
+             after(grammarAccess.getFunctionDefinitionAccess().getAssertionDeclarationsAssertionDeclarationParserRuleCall_11_0_0()); 
 
             }
 
@@ -39180,12 +39180,12 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__FunctionDefinition__AssertionsAssignment_11_0
+    // $ANTLR end rule__FunctionDefinition__AssertionDeclarationsAssignment_11_0
 
 
-    // $ANTLR start rule__FunctionDefinition__FunctorsAssignment_11_1
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:15057:1: rule__FunctionDefinition__FunctorsAssignment_11_1 : ( ruleFunctorDeclaration ) ;
-    public final void rule__FunctionDefinition__FunctorsAssignment_11_1() throws RecognitionException {
+    // $ANTLR start rule__FunctionDefinition__FunctorDeclarationsAssignment_11_1
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:15057:1: rule__FunctionDefinition__FunctorDeclarationsAssignment_11_1 : ( ruleFunctorDeclaration ) ;
+    public final void rule__FunctionDefinition__FunctorDeclarationsAssignment_11_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -39196,12 +39196,12 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
             // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:15062:1: ( ruleFunctorDeclaration )
             // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:15063:1: ruleFunctorDeclaration
             {
-             before(grammarAccess.getFunctionDefinitionAccess().getFunctorsFunctorDeclarationParserRuleCall_11_1_0()); 
-            pushFollow(FOLLOW_ruleFunctorDeclaration_in_rule__FunctionDefinition__FunctorsAssignment_11_130294);
+             before(grammarAccess.getFunctionDefinitionAccess().getFunctorDeclarationsFunctorDeclarationParserRuleCall_11_1_0()); 
+            pushFollow(FOLLOW_ruleFunctorDeclaration_in_rule__FunctionDefinition__FunctorDeclarationsAssignment_11_130294);
             ruleFunctorDeclaration();
             _fsp--;
 
-             after(grammarAccess.getFunctionDefinitionAccess().getFunctorsFunctorDeclarationParserRuleCall_11_1_0()); 
+             after(grammarAccess.getFunctionDefinitionAccess().getFunctorDeclarationsFunctorDeclarationParserRuleCall_11_1_0()); 
 
             }
 
@@ -39220,12 +39220,12 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__FunctionDefinition__FunctorsAssignment_11_1
+    // $ANTLR end rule__FunctionDefinition__FunctorDeclarationsAssignment_11_1
 
 
-    // $ANTLR start rule__FunctionDefinition__StateVariablesAssignment_11_2
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:15072:1: rule__FunctionDefinition__StateVariablesAssignment_11_2 : ( ruleStateVariableDeclaration ) ;
-    public final void rule__FunctionDefinition__StateVariablesAssignment_11_2() throws RecognitionException {
+    // $ANTLR start rule__FunctionDefinition__StateVariableDeclarationsAssignment_11_2
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:15072:1: rule__FunctionDefinition__StateVariableDeclarationsAssignment_11_2 : ( ruleStateVariableDeclaration ) ;
+    public final void rule__FunctionDefinition__StateVariableDeclarationsAssignment_11_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -39236,12 +39236,12 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
             // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:15077:1: ( ruleStateVariableDeclaration )
             // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:15078:1: ruleStateVariableDeclaration
             {
-             before(grammarAccess.getFunctionDefinitionAccess().getStateVariablesStateVariableDeclarationParserRuleCall_11_2_0()); 
-            pushFollow(FOLLOW_ruleStateVariableDeclaration_in_rule__FunctionDefinition__StateVariablesAssignment_11_230325);
+             before(grammarAccess.getFunctionDefinitionAccess().getStateVariableDeclarationsStateVariableDeclarationParserRuleCall_11_2_0()); 
+            pushFollow(FOLLOW_ruleStateVariableDeclaration_in_rule__FunctionDefinition__StateVariableDeclarationsAssignment_11_230325);
             ruleStateVariableDeclaration();
             _fsp--;
 
-             after(grammarAccess.getFunctionDefinitionAccess().getStateVariablesStateVariableDeclarationParserRuleCall_11_2_0()); 
+             after(grammarAccess.getFunctionDefinitionAccess().getStateVariableDeclarationsStateVariableDeclarationParserRuleCall_11_2_0()); 
 
             }
 
@@ -39260,7 +39260,7 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__FunctionDefinition__StateVariablesAssignment_11_2
+    // $ANTLR end rule__FunctionDefinition__StateVariableDeclarationsAssignment_11_2
 
 
     // $ANTLR start rule__FunctionDefinition__EquationsAssignment_11_3
@@ -39619,9 +39619,9 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
     // $ANTLR end rule__FunctorDeclaration__FunctionNameAssignment_3
 
 
-    // $ANTLR start rule__FunctorDeclaration__TemplateArgumentsAssignment_4_1
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:15230:1: rule__FunctorDeclaration__TemplateArgumentsAssignment_4_1 : ( ruleArgumentDeclaration ) ;
-    public final void rule__FunctorDeclaration__TemplateArgumentsAssignment_4_1() throws RecognitionException {
+    // $ANTLR start rule__FunctorDeclaration__TemplateArgumentDeclarationsAssignment_4_1
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:15230:1: rule__FunctorDeclaration__TemplateArgumentDeclarationsAssignment_4_1 : ( ruleArgumentDeclaration ) ;
+    public final void rule__FunctorDeclaration__TemplateArgumentDeclarationsAssignment_4_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -39632,12 +39632,12 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
             // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:15235:1: ( ruleArgumentDeclaration )
             // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:15236:1: ruleArgumentDeclaration
             {
-             before(grammarAccess.getFunctorDeclarationAccess().getTemplateArgumentsArgumentDeclarationParserRuleCall_4_1_0()); 
-            pushFollow(FOLLOW_ruleArgumentDeclaration_in_rule__FunctorDeclaration__TemplateArgumentsAssignment_4_130648);
+             before(grammarAccess.getFunctorDeclarationAccess().getTemplateArgumentDeclarationsArgumentDeclarationParserRuleCall_4_1_0()); 
+            pushFollow(FOLLOW_ruleArgumentDeclaration_in_rule__FunctorDeclaration__TemplateArgumentDeclarationsAssignment_4_130648);
             ruleArgumentDeclaration();
             _fsp--;
 
-             after(grammarAccess.getFunctorDeclarationAccess().getTemplateArgumentsArgumentDeclarationParserRuleCall_4_1_0()); 
+             after(grammarAccess.getFunctorDeclarationAccess().getTemplateArgumentDeclarationsArgumentDeclarationParserRuleCall_4_1_0()); 
 
             }
 
@@ -39656,12 +39656,12 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__FunctorDeclaration__TemplateArgumentsAssignment_4_1
+    // $ANTLR end rule__FunctorDeclaration__TemplateArgumentDeclarationsAssignment_4_1
 
 
-    // $ANTLR start rule__FunctorDeclaration__TemplateArgumentsAssignment_4_2_1
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:15245:1: rule__FunctorDeclaration__TemplateArgumentsAssignment_4_2_1 : ( ruleArgumentDeclaration ) ;
-    public final void rule__FunctorDeclaration__TemplateArgumentsAssignment_4_2_1() throws RecognitionException {
+    // $ANTLR start rule__FunctorDeclaration__TemplateArgumentDeclarationsAssignment_4_2_1
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:15245:1: rule__FunctorDeclaration__TemplateArgumentDeclarationsAssignment_4_2_1 : ( ruleArgumentDeclaration ) ;
+    public final void rule__FunctorDeclaration__TemplateArgumentDeclarationsAssignment_4_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -39672,12 +39672,12 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
             // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:15250:1: ( ruleArgumentDeclaration )
             // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:15251:1: ruleArgumentDeclaration
             {
-             before(grammarAccess.getFunctorDeclarationAccess().getTemplateArgumentsArgumentDeclarationParserRuleCall_4_2_1_0()); 
-            pushFollow(FOLLOW_ruleArgumentDeclaration_in_rule__FunctorDeclaration__TemplateArgumentsAssignment_4_2_130679);
+             before(grammarAccess.getFunctorDeclarationAccess().getTemplateArgumentDeclarationsArgumentDeclarationParserRuleCall_4_2_1_0()); 
+            pushFollow(FOLLOW_ruleArgumentDeclaration_in_rule__FunctorDeclaration__TemplateArgumentDeclarationsAssignment_4_2_130679);
             ruleArgumentDeclaration();
             _fsp--;
 
-             after(grammarAccess.getFunctorDeclarationAccess().getTemplateArgumentsArgumentDeclarationParserRuleCall_4_2_1_0()); 
+             after(grammarAccess.getFunctorDeclarationAccess().getTemplateArgumentDeclarationsArgumentDeclarationParserRuleCall_4_2_1_0()); 
 
             }
 
@@ -39696,7 +39696,7 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__FunctorDeclaration__TemplateArgumentsAssignment_4_2_1
+    // $ANTLR end rule__FunctorDeclaration__TemplateArgumentDeclarationsAssignment_4_2_1
 
 
     // $ANTLR start rule__ArgumentDeclaration__NameAssignment
@@ -44431,9 +44431,9 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_ruleEnumerationDefinition_in_rule__DataTypeDefinition__Alternatives5236 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleRecordDefinition_in_rule__DataTypeDefinition__Alternatives5253 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleTypeAliasDefinition_in_rule__DataTypeDefinition__Alternatives5270 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FunctionDefinition__AssertionsAssignment_11_0_in_rule__FunctionDefinition__Alternatives_115302 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FunctionDefinition__FunctorsAssignment_11_1_in_rule__FunctionDefinition__Alternatives_115320 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FunctionDefinition__StateVariablesAssignment_11_2_in_rule__FunctionDefinition__Alternatives_115338 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FunctionDefinition__AssertionDeclarationsAssignment_11_0_in_rule__FunctionDefinition__Alternatives_115302 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FunctionDefinition__FunctorDeclarationsAssignment_11_1_in_rule__FunctionDefinition__Alternatives_115320 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FunctionDefinition__StateVariableDeclarationsAssignment_11_2_in_rule__FunctionDefinition__Alternatives_115338 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__FunctionDefinition__EquationsAssignment_11_3_in_rule__FunctionDefinition__Alternatives_115356 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rulePrimitiveTypeSpecifier_in_rule__DataTypeSpecifier__Alternatives5389 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleNamedTypeSpecifier_in_rule__DataTypeSpecifier__Alternatives5406 = new BitSet(new long[]{0x0000000000000002L});
@@ -44533,14 +44533,14 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_37_in_rule__EnumerationDefinition__Group__4__Impl7610 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EnumerationDefinition__Group_3__0__Impl_in_rule__EnumerationDefinition__Group_3__07651 = new BitSet(new long[]{0x0000008000000002L});
     public static final BitSet FOLLOW_rule__EnumerationDefinition__Group_3__1_in_rule__EnumerationDefinition__Group_3__07654 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EnumerationDefinition__LiteralsAssignment_3_0_in_rule__EnumerationDefinition__Group_3__0__Impl7681 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__EnumerationDefinition__LiteralDeclarationsAssignment_3_0_in_rule__EnumerationDefinition__Group_3__0__Impl7681 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EnumerationDefinition__Group_3__1__Impl_in_rule__EnumerationDefinition__Group_3__17711 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EnumerationDefinition__Group_3_1__0_in_rule__EnumerationDefinition__Group_3__1__Impl7738 = new BitSet(new long[]{0x0000008000000002L});
     public static final BitSet FOLLOW_rule__EnumerationDefinition__Group_3_1__0__Impl_in_rule__EnumerationDefinition__Group_3_1__07773 = new BitSet(new long[]{0x0000000000000010L});
     public static final BitSet FOLLOW_rule__EnumerationDefinition__Group_3_1__1_in_rule__EnumerationDefinition__Group_3_1__07776 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_39_in_rule__EnumerationDefinition__Group_3_1__0__Impl7804 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EnumerationDefinition__Group_3_1__1__Impl_in_rule__EnumerationDefinition__Group_3_1__17835 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EnumerationDefinition__LiteralsAssignment_3_1_1_in_rule__EnumerationDefinition__Group_3_1__1__Impl7862 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__EnumerationDefinition__LiteralDeclarationsAssignment_3_1_1_in_rule__EnumerationDefinition__Group_3_1__1__Impl7862 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__TypeAliasDefinition__Group__0__Impl_in_rule__TypeAliasDefinition__Group__07896 = new BitSet(new long[]{0x0000000000000010L});
     public static final BitSet FOLLOW_rule__TypeAliasDefinition__Group__1_in_rule__TypeAliasDefinition__Group__07899 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_40_in_rule__TypeAliasDefinition__Group__0__Impl7927 = new BitSet(new long[]{0x0000000000000002L});
@@ -44566,7 +44566,7 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_36_in_rule__RecordDefinition__Group__2__Impl8362 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__RecordDefinition__Group__3__Impl_in_rule__RecordDefinition__Group__38393 = new BitSet(new long[]{0x0000002000000000L});
     public static final BitSet FOLLOW_rule__RecordDefinition__Group__4_in_rule__RecordDefinition__Group__38396 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__RecordDefinition__FieldsAssignment_3_in_rule__RecordDefinition__Group__3__Impl8423 = new BitSet(new long[]{0x0000000000000012L});
+    public static final BitSet FOLLOW_rule__RecordDefinition__FieldDeclarationsAssignment_3_in_rule__RecordDefinition__Group__3__Impl8423 = new BitSet(new long[]{0x0000000000000012L});
     public static final BitSet FOLLOW_rule__RecordDefinition__Group__4__Impl_in_rule__RecordDefinition__Group__48454 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_37_in_rule__RecordDefinition__Group__4__Impl8482 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__RecordFieldDeclaration__Group__0__Impl_in_rule__RecordFieldDeclaration__Group__08523 = new BitSet(new long[]{0x0000100000000000L});
@@ -44606,7 +44606,7 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_48_in_rule__FunctionDefinition__Group__7__Impl9232 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__FunctionDefinition__Group__8__Impl_in_rule__FunctionDefinition__Group__89263 = new BitSet(new long[]{0x0000009000000000L});
     public static final BitSet FOLLOW_rule__FunctionDefinition__Group__9_in_rule__FunctionDefinition__Group__89266 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FunctionDefinition__OutputParametersAssignment_8_in_rule__FunctionDefinition__Group__8__Impl9293 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FunctionDefinition__OutputParameterDeclarationsAssignment_8_in_rule__FunctionDefinition__Group__8__Impl9293 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__FunctionDefinition__Group__9__Impl_in_rule__FunctionDefinition__Group__99323 = new BitSet(new long[]{0x0000001000000000L});
     public static final BitSet FOLLOW_rule__FunctionDefinition__Group__10_in_rule__FunctionDefinition__Group__99326 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__FunctionDefinition__Group_9__0_in_rule__FunctionDefinition__Group__9__Impl9353 = new BitSet(new long[]{0x0000008000000002L});
@@ -44623,7 +44623,7 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_20_in_rule__FunctionDefinition__Group_3__0__Impl9623 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__FunctionDefinition__Group_3__1__Impl_in_rule__FunctionDefinition__Group_3__19654 = new BitSet(new long[]{0x0000008000400000L});
     public static final BitSet FOLLOW_rule__FunctionDefinition__Group_3__2_in_rule__FunctionDefinition__Group_3__19657 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FunctionDefinition__TemplateParametersAssignment_3_1_in_rule__FunctionDefinition__Group_3__1__Impl9684 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FunctionDefinition__TemplateParameterDeclarationsAssignment_3_1_in_rule__FunctionDefinition__Group_3__1__Impl9684 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__FunctionDefinition__Group_3__2__Impl_in_rule__FunctionDefinition__Group_3__29714 = new BitSet(new long[]{0x0000000000400000L});
     public static final BitSet FOLLOW_rule__FunctionDefinition__Group_3__3_in_rule__FunctionDefinition__Group_3__29717 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__FunctionDefinition__Group_3_2__0_in_rule__FunctionDefinition__Group_3__2__Impl9744 = new BitSet(new long[]{0x0000008000000002L});
@@ -44633,22 +44633,22 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__FunctionDefinition__Group_3_2__1_in_rule__FunctionDefinition__Group_3_2__09845 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_39_in_rule__FunctionDefinition__Group_3_2__0__Impl9873 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__FunctionDefinition__Group_3_2__1__Impl_in_rule__FunctionDefinition__Group_3_2__19904 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FunctionDefinition__TemplateParametersAssignment_3_2_1_in_rule__FunctionDefinition__Group_3_2__1__Impl9931 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FunctionDefinition__TemplateParameterDeclarationsAssignment_3_2_1_in_rule__FunctionDefinition__Group_3_2__1__Impl9931 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__FunctionDefinition__Group_5__0__Impl_in_rule__FunctionDefinition__Group_5__09965 = new BitSet(new long[]{0x0000008000000002L});
     public static final BitSet FOLLOW_rule__FunctionDefinition__Group_5__1_in_rule__FunctionDefinition__Group_5__09968 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FunctionDefinition__InputParametersAssignment_5_0_in_rule__FunctionDefinition__Group_5__0__Impl9995 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FunctionDefinition__InputParameterDeclarationsAssignment_5_0_in_rule__FunctionDefinition__Group_5__0__Impl9995 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__FunctionDefinition__Group_5__1__Impl_in_rule__FunctionDefinition__Group_5__110025 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__FunctionDefinition__Group_5_1__0_in_rule__FunctionDefinition__Group_5__1__Impl10052 = new BitSet(new long[]{0x0000008000000002L});
     public static final BitSet FOLLOW_rule__FunctionDefinition__Group_5_1__0__Impl_in_rule__FunctionDefinition__Group_5_1__010087 = new BitSet(new long[]{0x0000000000000010L});
     public static final BitSet FOLLOW_rule__FunctionDefinition__Group_5_1__1_in_rule__FunctionDefinition__Group_5_1__010090 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_39_in_rule__FunctionDefinition__Group_5_1__0__Impl10118 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__FunctionDefinition__Group_5_1__1__Impl_in_rule__FunctionDefinition__Group_5_1__110149 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FunctionDefinition__InputParametersAssignment_5_1_1_in_rule__FunctionDefinition__Group_5_1__1__Impl10176 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FunctionDefinition__InputParameterDeclarationsAssignment_5_1_1_in_rule__FunctionDefinition__Group_5_1__1__Impl10176 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__FunctionDefinition__Group_9__0__Impl_in_rule__FunctionDefinition__Group_9__010210 = new BitSet(new long[]{0x0000000000000010L});
     public static final BitSet FOLLOW_rule__FunctionDefinition__Group_9__1_in_rule__FunctionDefinition__Group_9__010213 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_39_in_rule__FunctionDefinition__Group_9__0__Impl10241 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__FunctionDefinition__Group_9__1__Impl_in_rule__FunctionDefinition__Group_9__110272 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FunctionDefinition__OutputParametersAssignment_9_1_in_rule__FunctionDefinition__Group_9__1__Impl10299 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FunctionDefinition__OutputParameterDeclarationsAssignment_9_1_in_rule__FunctionDefinition__Group_9__1__Impl10299 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__AssertionDeclaration__Group__0__Impl_in_rule__AssertionDeclaration__Group__010333 = new BitSet(new long[]{0x0002000000000000L});
     public static final BitSet FOLLOW_rule__AssertionDeclaration__Group__1_in_rule__AssertionDeclaration__Group__010336 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__AssertionDeclaration__StaticAssignment_0_in_rule__AssertionDeclaration__Group__0__Impl10363 = new BitSet(new long[]{0x0000000000000002L});
@@ -44699,7 +44699,7 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_20_in_rule__FunctorDeclaration__Group_4__0__Impl11365 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__FunctorDeclaration__Group_4__1__Impl_in_rule__FunctorDeclaration__Group_4__111396 = new BitSet(new long[]{0x0000008000400000L});
     public static final BitSet FOLLOW_rule__FunctorDeclaration__Group_4__2_in_rule__FunctorDeclaration__Group_4__111399 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FunctorDeclaration__TemplateArgumentsAssignment_4_1_in_rule__FunctorDeclaration__Group_4__1__Impl11426 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FunctorDeclaration__TemplateArgumentDeclarationsAssignment_4_1_in_rule__FunctorDeclaration__Group_4__1__Impl11426 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__FunctorDeclaration__Group_4__2__Impl_in_rule__FunctorDeclaration__Group_4__211456 = new BitSet(new long[]{0x0000000000400000L});
     public static final BitSet FOLLOW_rule__FunctorDeclaration__Group_4__3_in_rule__FunctorDeclaration__Group_4__211459 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__FunctorDeclaration__Group_4_2__0_in_rule__FunctorDeclaration__Group_4__2__Impl11486 = new BitSet(new long[]{0x0000008000000002L});
@@ -44709,7 +44709,7 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__FunctorDeclaration__Group_4_2__1_in_rule__FunctorDeclaration__Group_4_2__011587 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_39_in_rule__FunctorDeclaration__Group_4_2__0__Impl11615 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__FunctorDeclaration__Group_4_2__1__Impl_in_rule__FunctorDeclaration__Group_4_2__111646 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FunctorDeclaration__TemplateArgumentsAssignment_4_2_1_in_rule__FunctorDeclaration__Group_4_2__1__Impl11673 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FunctorDeclaration__TemplateArgumentDeclarationsAssignment_4_2_1_in_rule__FunctorDeclaration__Group_4_2__1__Impl11673 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EquationDefinition__Group__0__Impl_in_rule__EquationDefinition__Group__011707 = new BitSet(new long[]{0x0000020000000000L});
     public static final BitSet FOLLOW_rule__EquationDefinition__Group__1_in_rule__EquationDefinition__Group__011710 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EquationDefinition__LeftHandSideAssignment_0_in_rule__EquationDefinition__Group__0__Impl11737 = new BitSet(new long[]{0x0000000000000002L});
@@ -45452,26 +45452,26 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_ruleQualifiedName_in_rule__NamespaceDefinition__NameAssignment_129630 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleNamespaceMember_in_rule__NamespaceDefinition__MembersAssignment_329661 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_ID_in_rule__EnumerationDefinition__NameAssignment_129692 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEnumerationLiteralDeclaration_in_rule__EnumerationDefinition__LiteralsAssignment_3_029723 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEnumerationLiteralDeclaration_in_rule__EnumerationDefinition__LiteralsAssignment_3_1_129754 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEnumerationLiteralDeclaration_in_rule__EnumerationDefinition__LiteralDeclarationsAssignment_3_029723 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEnumerationLiteralDeclaration_in_rule__EnumerationDefinition__LiteralDeclarationsAssignment_3_1_129754 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_ID_in_rule__EnumerationLiteralDeclaration__NameAssignment29785 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_ID_in_rule__TypeAliasDefinition__NameAssignment_129816 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rulePrimitiveTypeSpecifier_in_rule__TypeAliasDefinition__TypeAssignment_329847 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_ID_in_rule__RecordDefinition__NameAssignment_129878 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRecordFieldDeclaration_in_rule__RecordDefinition__FieldsAssignment_329909 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleRecordFieldDeclaration_in_rule__RecordDefinition__FieldDeclarationsAssignment_329909 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_ID_in_rule__RecordFieldDeclaration__NameAssignment_029940 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleDataTypeSpecifier_in_rule__RecordFieldDeclaration__TypeAssignment_229971 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_76_in_rule__FunctionDefinition__StatefulAssignment_030007 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_ID_in_rule__FunctionDefinition__NameAssignment_230046 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleParameterDeclaration_in_rule__FunctionDefinition__TemplateParametersAssignment_3_130077 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleParameterDeclaration_in_rule__FunctionDefinition__TemplateParametersAssignment_3_2_130108 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleParameterDeclaration_in_rule__FunctionDefinition__InputParametersAssignment_5_030139 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleParameterDeclaration_in_rule__FunctionDefinition__InputParametersAssignment_5_1_130170 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleParameterDeclaration_in_rule__FunctionDefinition__OutputParametersAssignment_830201 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleParameterDeclaration_in_rule__FunctionDefinition__OutputParametersAssignment_9_130232 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAssertionDeclaration_in_rule__FunctionDefinition__AssertionsAssignment_11_030263 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleFunctorDeclaration_in_rule__FunctionDefinition__FunctorsAssignment_11_130294 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleStateVariableDeclaration_in_rule__FunctionDefinition__StateVariablesAssignment_11_230325 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleParameterDeclaration_in_rule__FunctionDefinition__TemplateParameterDeclarationsAssignment_3_130077 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleParameterDeclaration_in_rule__FunctionDefinition__TemplateParameterDeclarationsAssignment_3_2_130108 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleParameterDeclaration_in_rule__FunctionDefinition__InputParameterDeclarationsAssignment_5_030139 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleParameterDeclaration_in_rule__FunctionDefinition__InputParameterDeclarationsAssignment_5_1_130170 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleParameterDeclaration_in_rule__FunctionDefinition__OutputParameterDeclarationsAssignment_830201 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleParameterDeclaration_in_rule__FunctionDefinition__OutputParameterDeclarationsAssignment_9_130232 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAssertionDeclaration_in_rule__FunctionDefinition__AssertionDeclarationsAssignment_11_030263 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleFunctorDeclaration_in_rule__FunctionDefinition__FunctorDeclarationsAssignment_11_130294 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleStateVariableDeclaration_in_rule__FunctionDefinition__StateVariableDeclarationsAssignment_11_230325 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleEquationDefinition_in_rule__FunctionDefinition__EquationsAssignment_11_330356 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_ID_in_rule__ParameterDeclaration__NameAssignment30387 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_77_in_rule__AssertionDeclaration__StaticAssignment_030423 = new BitSet(new long[]{0x0000000000000002L});
@@ -45481,8 +45481,8 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_RULE_ID_in_rule__StateVariableDeclaration__NameAssignment_130555 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_ID_in_rule__FunctorDeclaration__NameAssignment_130586 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleQualifiedName_in_rule__FunctorDeclaration__FunctionNameAssignment_330617 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleArgumentDeclaration_in_rule__FunctorDeclaration__TemplateArgumentsAssignment_4_130648 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleArgumentDeclaration_in_rule__FunctorDeclaration__TemplateArgumentsAssignment_4_2_130679 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleArgumentDeclaration_in_rule__FunctorDeclaration__TemplateArgumentDeclarationsAssignment_4_130648 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleArgumentDeclaration_in_rule__FunctorDeclaration__TemplateArgumentDeclarationsAssignment_4_2_130679 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_ID_in_rule__ArgumentDeclaration__NameAssignment30710 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleExpression_in_rule__EquationDefinition__LeftHandSideAssignment_030741 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleExpression_in_rule__EquationDefinition__RightHandSideAssignment_230772 = new BitSet(new long[]{0x0000000000000002L});

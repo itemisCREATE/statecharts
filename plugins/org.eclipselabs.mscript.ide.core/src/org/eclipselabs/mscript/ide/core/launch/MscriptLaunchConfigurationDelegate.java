@@ -94,7 +94,7 @@ public class MscriptLaunchConfigurationDelegate extends LaunchConfigurationDeleg
 	protected void checkInputFile(FunctionDefinition functionDefinition, IFile inputFile, IProgressMonitor monitor) throws CoreException {
 		try {
 			BufferedReader reader = new BufferedReader(new InputStreamReader(inputFile.getContents()));
-			int n = functionDefinition.getInputParameters().size();
+			int n = functionDefinition.getInputParameterDeclarations().size();
 			while (!monitor.isCanceled() && reader.ready()) {
 				String[] values = reader.readLine().split(",", 0);
 				if (values.length != n) {
@@ -143,7 +143,7 @@ public class MscriptLaunchConfigurationDelegate extends LaunchConfigurationDeleg
 		if (args[0].length() == 0) {
 			args = new String[0];
 		}
-		if (args.length != functionDefinition.getTemplateParameters().size()) {
+		if (args.length != functionDefinition.getTemplateParameterDeclarations().size()) {
 			throw new CoreException(new Status(IStatus.ERROR, IDECorePlugin.PLUGIN_ID, "Number of template arguments provided in launch configuration does not correspond to number of template arguments in function definition"));
 		}
 		for (String arg : args) {

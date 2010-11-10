@@ -220,13 +220,13 @@ public interface AstPackage extends EPackage
   int ENUMERATION_DEFINITION__NAME = DATA_TYPE_DEFINITION__NAME;
 
   /**
-   * The feature id for the '<em><b>Literals</b></em>' containment reference list.
+   * The feature id for the '<em><b>Literal Declarations</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ENUMERATION_DEFINITION__LITERALS = DATA_TYPE_DEFINITION_FEATURE_COUNT + 0;
+  int ENUMERATION_DEFINITION__LITERAL_DECLARATIONS = DATA_TYPE_DEFINITION_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Enumeration Definition</em>' class.
@@ -322,13 +322,13 @@ public interface AstPackage extends EPackage
   int RECORD_DEFINITION__NAME = DATA_TYPE_DEFINITION__NAME;
 
   /**
-   * The feature id for the '<em><b>Fields</b></em>' containment reference list.
+   * The feature id for the '<em><b>Field Declarations</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int RECORD_DEFINITION__FIELDS = DATA_TYPE_DEFINITION_FEATURE_COUNT + 0;
+  int RECORD_DEFINITION__FIELD_DECLARATIONS = DATA_TYPE_DEFINITION_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Record Definition</em>' class.
@@ -405,58 +405,58 @@ public interface AstPackage extends EPackage
   int FUNCTION_DEFINITION__STATEFUL = TYPE_DEFINITION_FEATURE_COUNT + 0;
 
   /**
-   * The feature id for the '<em><b>Template Parameters</b></em>' containment reference list.
+   * The feature id for the '<em><b>Template Parameter Declarations</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int FUNCTION_DEFINITION__TEMPLATE_PARAMETERS = TYPE_DEFINITION_FEATURE_COUNT + 1;
+  int FUNCTION_DEFINITION__TEMPLATE_PARAMETER_DECLARATIONS = TYPE_DEFINITION_FEATURE_COUNT + 1;
 
   /**
-   * The feature id for the '<em><b>Input Parameters</b></em>' containment reference list.
+   * The feature id for the '<em><b>Input Parameter Declarations</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int FUNCTION_DEFINITION__INPUT_PARAMETERS = TYPE_DEFINITION_FEATURE_COUNT + 2;
+  int FUNCTION_DEFINITION__INPUT_PARAMETER_DECLARATIONS = TYPE_DEFINITION_FEATURE_COUNT + 2;
 
   /**
-   * The feature id for the '<em><b>Output Parameters</b></em>' containment reference list.
+   * The feature id for the '<em><b>Output Parameter Declarations</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int FUNCTION_DEFINITION__OUTPUT_PARAMETERS = TYPE_DEFINITION_FEATURE_COUNT + 3;
+  int FUNCTION_DEFINITION__OUTPUT_PARAMETER_DECLARATIONS = TYPE_DEFINITION_FEATURE_COUNT + 3;
 
   /**
-   * The feature id for the '<em><b>Assertions</b></em>' containment reference list.
+   * The feature id for the '<em><b>Assertion Declarations</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int FUNCTION_DEFINITION__ASSERTIONS = TYPE_DEFINITION_FEATURE_COUNT + 4;
+  int FUNCTION_DEFINITION__ASSERTION_DECLARATIONS = TYPE_DEFINITION_FEATURE_COUNT + 4;
 
   /**
-   * The feature id for the '<em><b>Functors</b></em>' containment reference list.
+   * The feature id for the '<em><b>Functor Declarations</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int FUNCTION_DEFINITION__FUNCTORS = TYPE_DEFINITION_FEATURE_COUNT + 5;
+  int FUNCTION_DEFINITION__FUNCTOR_DECLARATIONS = TYPE_DEFINITION_FEATURE_COUNT + 5;
 
   /**
-   * The feature id for the '<em><b>State Variables</b></em>' containment reference list.
+   * The feature id for the '<em><b>State Variable Declarations</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int FUNCTION_DEFINITION__STATE_VARIABLES = TYPE_DEFINITION_FEATURE_COUNT + 6;
+  int FUNCTION_DEFINITION__STATE_VARIABLE_DECLARATIONS = TYPE_DEFINITION_FEATURE_COUNT + 6;
 
   /**
    * The feature id for the '<em><b>Equations</b></em>' containment reference list.
@@ -616,13 +616,13 @@ public interface AstPackage extends EPackage
   int FUNCTOR_DECLARATION__FUNCTION_NAME = 1;
 
   /**
-   * The feature id for the '<em><b>Template Arguments</b></em>' containment reference list.
+   * The feature id for the '<em><b>Template Argument Declarations</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int FUNCTOR_DECLARATION__TEMPLATE_ARGUMENTS = 2;
+  int FUNCTOR_DECLARATION__TEMPLATE_ARGUMENT_DECLARATIONS = 2;
 
   /**
    * The number of structural features of the '<em>Functor Declaration</em>' class.
@@ -2925,15 +2925,15 @@ public interface AstPackage extends EPackage
   EClass getEnumerationDefinition();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.ast.EnumerationDefinition#getLiterals <em>Literals</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.ast.EnumerationDefinition#getLiteralDeclarations <em>Literal Declarations</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Literals</em>'.
-   * @see org.eclipselabs.mscript.language.ast.EnumerationDefinition#getLiterals()
+   * @return the meta object for the containment reference list '<em>Literal Declarations</em>'.
+   * @see org.eclipselabs.mscript.language.ast.EnumerationDefinition#getLiteralDeclarations()
    * @see #getEnumerationDefinition()
    * @generated
    */
-  EReference getEnumerationDefinition_Literals();
+  EReference getEnumerationDefinition_LiteralDeclarations();
 
   /**
    * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.EnumerationLiteralDeclaration <em>Enumeration Literal Declaration</em>}'.
@@ -2988,15 +2988,15 @@ public interface AstPackage extends EPackage
   EClass getRecordDefinition();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.ast.RecordDefinition#getFields <em>Fields</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.ast.RecordDefinition#getFieldDeclarations <em>Field Declarations</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Fields</em>'.
-   * @see org.eclipselabs.mscript.language.ast.RecordDefinition#getFields()
+   * @return the meta object for the containment reference list '<em>Field Declarations</em>'.
+   * @see org.eclipselabs.mscript.language.ast.RecordDefinition#getFieldDeclarations()
    * @see #getRecordDefinition()
    * @generated
    */
-  EReference getRecordDefinition_Fields();
+  EReference getRecordDefinition_FieldDeclarations();
 
   /**
    * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.RecordFieldDeclaration <em>Record Field Declaration</em>}'.
@@ -3052,70 +3052,70 @@ public interface AstPackage extends EPackage
   EAttribute getFunctionDefinition_Stateful();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getTemplateParameters <em>Template Parameters</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getTemplateParameterDeclarations <em>Template Parameter Declarations</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Template Parameters</em>'.
-   * @see org.eclipselabs.mscript.language.ast.FunctionDefinition#getTemplateParameters()
+   * @return the meta object for the containment reference list '<em>Template Parameter Declarations</em>'.
+   * @see org.eclipselabs.mscript.language.ast.FunctionDefinition#getTemplateParameterDeclarations()
    * @see #getFunctionDefinition()
    * @generated
    */
-  EReference getFunctionDefinition_TemplateParameters();
+  EReference getFunctionDefinition_TemplateParameterDeclarations();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getInputParameters <em>Input Parameters</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getInputParameterDeclarations <em>Input Parameter Declarations</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Input Parameters</em>'.
-   * @see org.eclipselabs.mscript.language.ast.FunctionDefinition#getInputParameters()
+   * @return the meta object for the containment reference list '<em>Input Parameter Declarations</em>'.
+   * @see org.eclipselabs.mscript.language.ast.FunctionDefinition#getInputParameterDeclarations()
    * @see #getFunctionDefinition()
    * @generated
    */
-  EReference getFunctionDefinition_InputParameters();
+  EReference getFunctionDefinition_InputParameterDeclarations();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getOutputParameters <em>Output Parameters</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getOutputParameterDeclarations <em>Output Parameter Declarations</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Output Parameters</em>'.
-   * @see org.eclipselabs.mscript.language.ast.FunctionDefinition#getOutputParameters()
+   * @return the meta object for the containment reference list '<em>Output Parameter Declarations</em>'.
+   * @see org.eclipselabs.mscript.language.ast.FunctionDefinition#getOutputParameterDeclarations()
    * @see #getFunctionDefinition()
    * @generated
    */
-  EReference getFunctionDefinition_OutputParameters();
+  EReference getFunctionDefinition_OutputParameterDeclarations();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getAssertions <em>Assertions</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getAssertionDeclarations <em>Assertion Declarations</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Assertions</em>'.
-   * @see org.eclipselabs.mscript.language.ast.FunctionDefinition#getAssertions()
+   * @return the meta object for the containment reference list '<em>Assertion Declarations</em>'.
+   * @see org.eclipselabs.mscript.language.ast.FunctionDefinition#getAssertionDeclarations()
    * @see #getFunctionDefinition()
    * @generated
    */
-  EReference getFunctionDefinition_Assertions();
+  EReference getFunctionDefinition_AssertionDeclarations();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getFunctors <em>Functors</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getFunctorDeclarations <em>Functor Declarations</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Functors</em>'.
-   * @see org.eclipselabs.mscript.language.ast.FunctionDefinition#getFunctors()
+   * @return the meta object for the containment reference list '<em>Functor Declarations</em>'.
+   * @see org.eclipselabs.mscript.language.ast.FunctionDefinition#getFunctorDeclarations()
    * @see #getFunctionDefinition()
    * @generated
    */
-  EReference getFunctionDefinition_Functors();
+  EReference getFunctionDefinition_FunctorDeclarations();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getStateVariables <em>State Variables</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getStateVariableDeclarations <em>State Variable Declarations</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>State Variables</em>'.
-   * @see org.eclipselabs.mscript.language.ast.FunctionDefinition#getStateVariables()
+   * @return the meta object for the containment reference list '<em>State Variable Declarations</em>'.
+   * @see org.eclipselabs.mscript.language.ast.FunctionDefinition#getStateVariableDeclarations()
    * @see #getFunctionDefinition()
    * @generated
    */
-  EReference getFunctionDefinition_StateVariables();
+  EReference getFunctionDefinition_StateVariableDeclarations();
 
   /**
    * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getEquations <em>Equations</em>}'.
@@ -3257,15 +3257,15 @@ public interface AstPackage extends EPackage
   EReference getFunctorDeclaration_FunctionName();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.ast.FunctorDeclaration#getTemplateArguments <em>Template Arguments</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.ast.FunctorDeclaration#getTemplateArgumentDeclarations <em>Template Argument Declarations</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Template Arguments</em>'.
-   * @see org.eclipselabs.mscript.language.ast.FunctorDeclaration#getTemplateArguments()
+   * @return the meta object for the containment reference list '<em>Template Argument Declarations</em>'.
+   * @see org.eclipselabs.mscript.language.ast.FunctorDeclaration#getTemplateArgumentDeclarations()
    * @see #getFunctorDeclaration()
    * @generated
    */
-  EReference getFunctorDeclaration_TemplateArguments();
+  EReference getFunctorDeclaration_TemplateArgumentDeclarations();
 
   /**
    * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.ArgumentDeclaration <em>Argument Declaration</em>}'.
@@ -5028,12 +5028,12 @@ public interface AstPackage extends EPackage
     EClass ENUMERATION_DEFINITION = eINSTANCE.getEnumerationDefinition();
 
     /**
-     * The meta object literal for the '<em><b>Literals</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Literal Declarations</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference ENUMERATION_DEFINITION__LITERALS = eINSTANCE.getEnumerationDefinition_Literals();
+    EReference ENUMERATION_DEFINITION__LITERAL_DECLARATIONS = eINSTANCE.getEnumerationDefinition_LiteralDeclarations();
 
     /**
      * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.EnumerationLiteralDeclarationImpl <em>Enumeration Literal Declaration</em>}' class.
@@ -5082,12 +5082,12 @@ public interface AstPackage extends EPackage
     EClass RECORD_DEFINITION = eINSTANCE.getRecordDefinition();
 
     /**
-     * The meta object literal for the '<em><b>Fields</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Field Declarations</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference RECORD_DEFINITION__FIELDS = eINSTANCE.getRecordDefinition_Fields();
+    EReference RECORD_DEFINITION__FIELD_DECLARATIONS = eINSTANCE.getRecordDefinition_FieldDeclarations();
 
     /**
      * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.RecordFieldDeclarationImpl <em>Record Field Declaration</em>}' class.
@@ -5134,52 +5134,52 @@ public interface AstPackage extends EPackage
     EAttribute FUNCTION_DEFINITION__STATEFUL = eINSTANCE.getFunctionDefinition_Stateful();
 
     /**
-     * The meta object literal for the '<em><b>Template Parameters</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Template Parameter Declarations</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference FUNCTION_DEFINITION__TEMPLATE_PARAMETERS = eINSTANCE.getFunctionDefinition_TemplateParameters();
+    EReference FUNCTION_DEFINITION__TEMPLATE_PARAMETER_DECLARATIONS = eINSTANCE.getFunctionDefinition_TemplateParameterDeclarations();
 
     /**
-     * The meta object literal for the '<em><b>Input Parameters</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Input Parameter Declarations</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference FUNCTION_DEFINITION__INPUT_PARAMETERS = eINSTANCE.getFunctionDefinition_InputParameters();
+    EReference FUNCTION_DEFINITION__INPUT_PARAMETER_DECLARATIONS = eINSTANCE.getFunctionDefinition_InputParameterDeclarations();
 
     /**
-     * The meta object literal for the '<em><b>Output Parameters</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Output Parameter Declarations</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference FUNCTION_DEFINITION__OUTPUT_PARAMETERS = eINSTANCE.getFunctionDefinition_OutputParameters();
+    EReference FUNCTION_DEFINITION__OUTPUT_PARAMETER_DECLARATIONS = eINSTANCE.getFunctionDefinition_OutputParameterDeclarations();
 
     /**
-     * The meta object literal for the '<em><b>Assertions</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Assertion Declarations</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference FUNCTION_DEFINITION__ASSERTIONS = eINSTANCE.getFunctionDefinition_Assertions();
+    EReference FUNCTION_DEFINITION__ASSERTION_DECLARATIONS = eINSTANCE.getFunctionDefinition_AssertionDeclarations();
 
     /**
-     * The meta object literal for the '<em><b>Functors</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Functor Declarations</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference FUNCTION_DEFINITION__FUNCTORS = eINSTANCE.getFunctionDefinition_Functors();
+    EReference FUNCTION_DEFINITION__FUNCTOR_DECLARATIONS = eINSTANCE.getFunctionDefinition_FunctorDeclarations();
 
     /**
-     * The meta object literal for the '<em><b>State Variables</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>State Variable Declarations</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference FUNCTION_DEFINITION__STATE_VARIABLES = eINSTANCE.getFunctionDefinition_StateVariables();
+    EReference FUNCTION_DEFINITION__STATE_VARIABLE_DECLARATIONS = eINSTANCE.getFunctionDefinition_StateVariableDeclarations();
 
     /**
      * The meta object literal for the '<em><b>Equations</b></em>' containment reference list feature.
@@ -5294,12 +5294,12 @@ public interface AstPackage extends EPackage
     EReference FUNCTOR_DECLARATION__FUNCTION_NAME = eINSTANCE.getFunctorDeclaration_FunctionName();
 
     /**
-     * The meta object literal for the '<em><b>Template Arguments</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Template Argument Declarations</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference FUNCTOR_DECLARATION__TEMPLATE_ARGUMENTS = eINSTANCE.getFunctorDeclaration_TemplateArguments();
+    EReference FUNCTOR_DECLARATION__TEMPLATE_ARGUMENT_DECLARATIONS = eINSTANCE.getFunctorDeclaration_TemplateArgumentDeclarations();
 
     /**
      * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.ArgumentDeclarationImpl <em>Argument Declaration</em>}' class.

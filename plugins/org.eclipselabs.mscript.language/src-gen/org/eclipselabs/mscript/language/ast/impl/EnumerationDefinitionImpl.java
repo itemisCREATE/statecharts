@@ -28,7 +28,7 @@ import org.eclipselabs.mscript.language.ast.EnumerationLiteralDeclaration;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.EnumerationDefinitionImpl#getLiterals <em>Literals</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.EnumerationDefinitionImpl#getLiteralDeclarations <em>Literal Declarations</em>}</li>
  * </ul>
  * </p>
  *
@@ -37,14 +37,14 @@ import org.eclipselabs.mscript.language.ast.EnumerationLiteralDeclaration;
 public class EnumerationDefinitionImpl extends DataTypeDefinitionImpl implements EnumerationDefinition
 {
   /**
-   * The cached value of the '{@link #getLiterals() <em>Literals</em>}' containment reference list.
+   * The cached value of the '{@link #getLiteralDeclarations() <em>Literal Declarations</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getLiterals()
+   * @see #getLiteralDeclarations()
    * @generated
    * @ordered
    */
-  protected EList<EnumerationLiteralDeclaration> literals;
+  protected EList<EnumerationLiteralDeclaration> literalDeclarations;
 
   /**
    * <!-- begin-user-doc -->
@@ -72,13 +72,13 @@ public class EnumerationDefinitionImpl extends DataTypeDefinitionImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<EnumerationLiteralDeclaration> getLiterals()
+  public EList<EnumerationLiteralDeclaration> getLiteralDeclarations()
   {
-    if (literals == null)
+    if (literalDeclarations == null)
     {
-      literals = new EObjectContainmentEList<EnumerationLiteralDeclaration>(EnumerationLiteralDeclaration.class, this, AstPackage.ENUMERATION_DEFINITION__LITERALS);
+      literalDeclarations = new EObjectContainmentEList<EnumerationLiteralDeclaration>(EnumerationLiteralDeclaration.class, this, AstPackage.ENUMERATION_DEFINITION__LITERAL_DECLARATIONS);
     }
-    return literals;
+    return literalDeclarations;
   }
 
   /**
@@ -91,8 +91,8 @@ public class EnumerationDefinitionImpl extends DataTypeDefinitionImpl implements
   {
     switch (featureID)
     {
-      case AstPackage.ENUMERATION_DEFINITION__LITERALS:
-        return ((InternalEList<?>)getLiterals()).basicRemove(otherEnd, msgs);
+      case AstPackage.ENUMERATION_DEFINITION__LITERAL_DECLARATIONS:
+        return ((InternalEList<?>)getLiteralDeclarations()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -107,8 +107,8 @@ public class EnumerationDefinitionImpl extends DataTypeDefinitionImpl implements
   {
     switch (featureID)
     {
-      case AstPackage.ENUMERATION_DEFINITION__LITERALS:
-        return getLiterals();
+      case AstPackage.ENUMERATION_DEFINITION__LITERAL_DECLARATIONS:
+        return getLiteralDeclarations();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -124,9 +124,9 @@ public class EnumerationDefinitionImpl extends DataTypeDefinitionImpl implements
   {
     switch (featureID)
     {
-      case AstPackage.ENUMERATION_DEFINITION__LITERALS:
-        getLiterals().clear();
-        getLiterals().addAll((Collection<? extends EnumerationLiteralDeclaration>)newValue);
+      case AstPackage.ENUMERATION_DEFINITION__LITERAL_DECLARATIONS:
+        getLiteralDeclarations().clear();
+        getLiteralDeclarations().addAll((Collection<? extends EnumerationLiteralDeclaration>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -142,8 +142,8 @@ public class EnumerationDefinitionImpl extends DataTypeDefinitionImpl implements
   {
     switch (featureID)
     {
-      case AstPackage.ENUMERATION_DEFINITION__LITERALS:
-        getLiterals().clear();
+      case AstPackage.ENUMERATION_DEFINITION__LITERAL_DECLARATIONS:
+        getLiteralDeclarations().clear();
         return;
     }
     super.eUnset(featureID);
@@ -159,8 +159,8 @@ public class EnumerationDefinitionImpl extends DataTypeDefinitionImpl implements
   {
     switch (featureID)
     {
-      case AstPackage.ENUMERATION_DEFINITION__LITERALS:
-        return literals != null && !literals.isEmpty();
+      case AstPackage.ENUMERATION_DEFINITION__LITERAL_DECLARATIONS:
+        return literalDeclarations != null && !literalDeclarations.isEmpty();
     }
     return super.eIsSet(featureID);
   }

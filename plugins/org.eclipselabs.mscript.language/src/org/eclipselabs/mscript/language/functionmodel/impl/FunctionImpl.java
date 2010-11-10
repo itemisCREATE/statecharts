@@ -278,7 +278,7 @@ public class FunctionImpl extends EObjectImpl implements Function {
 	 */
 	public boolean hasEquationsForEachOutput(DiagnosticChain diagnostics, Map<Object, Object> context) {
 		boolean result = true;
-		for (ParameterDeclaration parameterDeclaration : getDefinition().getOutputParameters()) {
+		for (ParameterDeclaration parameterDeclaration : getDefinition().getOutputParameterDeclarations()) {
 			VariableDescriptor variableDescriptor = getVariableDescriptor(parameterDeclaration.getName());
 			if (variableDescriptor != null) {
 				hasPrecedentEquationsFor(variableDescriptor, 0, diagnostics);

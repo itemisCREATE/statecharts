@@ -47,7 +47,7 @@ DataTypeDefinition :
  	
 EnumerationDefinition :
 	'enum' name=ID '{'
-		(literals+=EnumerationLiteralDeclaration (',' literals+=EnumerationLiteralDeclaration)*)?
+		(literalDeclarations+=EnumerationLiteralDeclaration (',' literalDeclarations+=EnumerationLiteralDeclaration)*)?
 	'}';
 	
 EnumerationLiteralDeclaration :
@@ -66,7 +66,7 @@ TypeAliasDefinition :
 
 RecordDefinition :
 	'record' name=ID '{'
-		(fields+=RecordFieldDeclaration)*
+		(fieldDeclarations+=RecordFieldDeclaration)*
 	'}'; 
 
 RecordFieldDeclaration :
@@ -77,10 +77,13 @@ RecordFieldDeclaration :
  */
  
 FunctionDefinition :
-	(stateful?='stateful')? 'func' name=ID ('<' templateParameters+=ParameterDeclaration (',' templateParameters+=ParameterDeclaration)* '>')? '(' (inputParameters+=ParameterDeclaration (',' inputParameters+=ParameterDeclaration)*)? ')' '->' outputParameters+=ParameterDeclaration (',' outputParameters+=ParameterDeclaration)* '{'
-		(assertions+=AssertionDeclaration |
-		functors+=FunctorDeclaration |
-		stateVariables+=StateVariableDeclaration |
+	(stateful?='stateful')? 'func' name=ID
+			('<' templateParameterDeclarations+=ParameterDeclaration (',' templateParameterDeclarations+=ParameterDeclaration)* '>')?
+			'(' (inputParameterDeclarations+=ParameterDeclaration (',' inputParameterDeclarations+=ParameterDeclaration)*)? ')'
+			'->' outputParameterDeclarations+=ParameterDeclaration (',' outputParameterDeclarations+=ParameterDeclaration)* '{'
+		(assertionDeclarations+=AssertionDeclaration |
+		functorDeclarations+=FunctorDeclaration |
+		stateVariableDeclarations+=StateVariableDeclaration |
 		equations+=EquationDefinition)*
 	'}';
 
@@ -100,7 +103,7 @@ StateVariableDeclaration :
 	'var' name=ID ';';
 	
 FunctorDeclaration :
-	'functor' name=ID ':' functionName=QualifiedName ('<' templateArguments+=ArgumentDeclaration (',' templateArguments+=ArgumentDeclaration)* '>')? ';';
+	'functor' name=ID ':' functionName=QualifiedName ('<' templateArgumentDeclarations+=ArgumentDeclaration (',' templateArgumentDeclarations+=ArgumentDeclaration)* '>')? ';';
 
 ArgumentDeclaration :
 	name=ID;

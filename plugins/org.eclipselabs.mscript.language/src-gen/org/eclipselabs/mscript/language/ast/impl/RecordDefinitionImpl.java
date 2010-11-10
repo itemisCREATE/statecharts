@@ -28,7 +28,7 @@ import org.eclipselabs.mscript.language.ast.RecordFieldDeclaration;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.RecordDefinitionImpl#getFields <em>Fields</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.RecordDefinitionImpl#getFieldDeclarations <em>Field Declarations</em>}</li>
  * </ul>
  * </p>
  *
@@ -37,14 +37,14 @@ import org.eclipselabs.mscript.language.ast.RecordFieldDeclaration;
 public class RecordDefinitionImpl extends DataTypeDefinitionImpl implements RecordDefinition
 {
   /**
-   * The cached value of the '{@link #getFields() <em>Fields</em>}' containment reference list.
+   * The cached value of the '{@link #getFieldDeclarations() <em>Field Declarations</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getFields()
+   * @see #getFieldDeclarations()
    * @generated
    * @ordered
    */
-  protected EList<RecordFieldDeclaration> fields;
+  protected EList<RecordFieldDeclaration> fieldDeclarations;
 
   /**
    * <!-- begin-user-doc -->
@@ -72,13 +72,13 @@ public class RecordDefinitionImpl extends DataTypeDefinitionImpl implements Reco
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<RecordFieldDeclaration> getFields()
+  public EList<RecordFieldDeclaration> getFieldDeclarations()
   {
-    if (fields == null)
+    if (fieldDeclarations == null)
     {
-      fields = new EObjectContainmentEList<RecordFieldDeclaration>(RecordFieldDeclaration.class, this, AstPackage.RECORD_DEFINITION__FIELDS);
+      fieldDeclarations = new EObjectContainmentEList<RecordFieldDeclaration>(RecordFieldDeclaration.class, this, AstPackage.RECORD_DEFINITION__FIELD_DECLARATIONS);
     }
-    return fields;
+    return fieldDeclarations;
   }
 
   /**
@@ -91,8 +91,8 @@ public class RecordDefinitionImpl extends DataTypeDefinitionImpl implements Reco
   {
     switch (featureID)
     {
-      case AstPackage.RECORD_DEFINITION__FIELDS:
-        return ((InternalEList<?>)getFields()).basicRemove(otherEnd, msgs);
+      case AstPackage.RECORD_DEFINITION__FIELD_DECLARATIONS:
+        return ((InternalEList<?>)getFieldDeclarations()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -107,8 +107,8 @@ public class RecordDefinitionImpl extends DataTypeDefinitionImpl implements Reco
   {
     switch (featureID)
     {
-      case AstPackage.RECORD_DEFINITION__FIELDS:
-        return getFields();
+      case AstPackage.RECORD_DEFINITION__FIELD_DECLARATIONS:
+        return getFieldDeclarations();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -124,9 +124,9 @@ public class RecordDefinitionImpl extends DataTypeDefinitionImpl implements Reco
   {
     switch (featureID)
     {
-      case AstPackage.RECORD_DEFINITION__FIELDS:
-        getFields().clear();
-        getFields().addAll((Collection<? extends RecordFieldDeclaration>)newValue);
+      case AstPackage.RECORD_DEFINITION__FIELD_DECLARATIONS:
+        getFieldDeclarations().clear();
+        getFieldDeclarations().addAll((Collection<? extends RecordFieldDeclaration>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -142,8 +142,8 @@ public class RecordDefinitionImpl extends DataTypeDefinitionImpl implements Reco
   {
     switch (featureID)
     {
-      case AstPackage.RECORD_DEFINITION__FIELDS:
-        getFields().clear();
+      case AstPackage.RECORD_DEFINITION__FIELD_DECLARATIONS:
+        getFieldDeclarations().clear();
         return;
     }
     super.eUnset(featureID);
@@ -159,8 +159,8 @@ public class RecordDefinitionImpl extends DataTypeDefinitionImpl implements Reco
   {
     switch (featureID)
     {
-      case AstPackage.RECORD_DEFINITION__FIELDS:
-        return fields != null && !fields.isEmpty();
+      case AstPackage.RECORD_DEFINITION__FIELD_DECLARATIONS:
+        return fieldDeclarations != null && !fieldDeclarations.isEmpty();
     }
     return super.eIsSet(featureID);
   }

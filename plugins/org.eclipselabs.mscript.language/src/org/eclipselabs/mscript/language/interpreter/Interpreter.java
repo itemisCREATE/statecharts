@@ -45,7 +45,7 @@ public class Interpreter {
 		}
 		
 		List<IValue> outputValues = new ArrayList<IValue>();
-		for (ParameterDeclaration parameterDeclaration : functor.getFunction().getDefinition().getOutputParameters()) {
+		for (ParameterDeclaration parameterDeclaration : functor.getFunction().getDefinition().getOutputParameterDeclarations()) {
 			IVariable variable = functor.getVariable(parameterDeclaration.getName());
 			outputValues.add(variable.getValue(0));
 		}
@@ -57,7 +57,7 @@ public class Interpreter {
 	
 	public void assignInputValues(IInterpreterContext context, IFunctor functor, List<IValue> inputValues) {
 		int i = 0;
-		for (ParameterDeclaration parameterDeclaration : functor.getFunction().getDefinition().getInputParameters()) {
+		for (ParameterDeclaration parameterDeclaration : functor.getFunction().getDefinition().getInputParameterDeclarations()) {
 			IVariable variable = functor.getVariable(parameterDeclaration.getName());
 			variable.setValue(0, inputValues.get(i));
 			++i;
