@@ -235,6 +235,11 @@ public class EquationImpl extends EObjectImpl implements Equation {
 			case TEMPLATE_PARAMETER:
 				message = "Left-hand side must not be template parameter reference";
 				break;
+			case INPUT_PARAMETER:
+				if (!part.getVariableStep().isInitial() || part.getVariableStep().getIndex() >= 0) {
+					message = "Left-hand side input reference must be negative initial step";
+				}
+				break;
 			case FUNCTOR:
 				message = "Left-hand side must not be functor reference";
 				break;
