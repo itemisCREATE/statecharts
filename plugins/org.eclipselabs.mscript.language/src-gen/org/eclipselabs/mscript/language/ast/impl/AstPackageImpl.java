@@ -21,7 +21,8 @@ import org.eclipselabs.mscript.language.ast.ArrayConcatenationOperator;
 import org.eclipselabs.mscript.language.ast.ArrayConstructionIterationClause;
 import org.eclipselabs.mscript.language.ast.ArrayConstructionOperator;
 import org.eclipselabs.mscript.language.ast.ArrayDimensionSpecification;
-import org.eclipselabs.mscript.language.ast.ArrayElementReference;
+import org.eclipselabs.mscript.language.ast.ArrayElementAccess;
+import org.eclipselabs.mscript.language.ast.ArraySubscript;
 import org.eclipselabs.mscript.language.ast.AssertionDeclaration;
 import org.eclipselabs.mscript.language.ast.AssertionStatusKind;
 import org.eclipselabs.mscript.language.ast.AstFactory;
@@ -41,9 +42,9 @@ import org.eclipselabs.mscript.language.ast.EqualityOperator;
 import org.eclipselabs.mscript.language.ast.EquationDefinition;
 import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.ast.ExpressionList;
+import org.eclipselabs.mscript.language.ast.FeatureAccess;
 import org.eclipselabs.mscript.language.ast.FeatureCall;
 import org.eclipselabs.mscript.language.ast.FeatureCallPart;
-import org.eclipselabs.mscript.language.ast.FeatureReference;
 import org.eclipselabs.mscript.language.ast.FunctionDefinition;
 import org.eclipselabs.mscript.language.ast.FunctorDeclaration;
 import org.eclipselabs.mscript.language.ast.GaussianTypeSpecifier;
@@ -88,7 +89,6 @@ import org.eclipselabs.mscript.language.ast.SimpleName;
 import org.eclipselabs.mscript.language.ast.StateVariableDeclaration;
 import org.eclipselabs.mscript.language.ast.StringLiteral;
 import org.eclipselabs.mscript.language.ast.StringTypeSpecifier;
-import org.eclipselabs.mscript.language.ast.Subscript;
 import org.eclipselabs.mscript.language.ast.SwitchCase;
 import org.eclipselabs.mscript.language.ast.SwitchExpression;
 import org.eclipselabs.mscript.language.ast.TypeAliasDefinition;
@@ -416,14 +416,21 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass featureReferenceEClass = null;
+  private EClass featureAccessEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass arrayElementReferenceEClass = null;
+  private EClass arrayElementAccessEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass arraySubscriptEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -452,13 +459,6 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * @generated
    */
   private EClass iterationAccumulatorEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass subscriptEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -640,14 +640,14 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass featureCallEClass = null;
+  private EClass simpleNameEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass simpleNameEClass = null;
+  private EClass featureCallEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -1770,9 +1770,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getFeatureReference()
+  public EClass getFeatureAccess()
   {
-    return featureReferenceEClass;
+    return featureAccessEClass;
   }
 
   /**
@@ -1780,9 +1780,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getFeatureReference_Name()
+  public EAttribute getFeatureAccess_Name()
   {
-    return (EAttribute)featureReferenceEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)featureAccessEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1790,9 +1790,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getArrayElementReference()
+  public EClass getArrayElementAccess()
   {
-    return arrayElementReferenceEClass;
+    return arrayElementAccessEClass;
   }
 
   /**
@@ -1800,9 +1800,39 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getArrayElementReference_Subscripts()
+  public EReference getArrayElementAccess_Subscripts()
   {
-    return (EReference)arrayElementReferenceEClass.getEStructuralFeatures().get(0);
+    return (EReference)arrayElementAccessEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getArraySubscript()
+  {
+    return arraySubscriptEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getArraySubscript_Slice()
+  {
+    return (EAttribute)arraySubscriptEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getArraySubscript_Expression()
+  {
+    return (EReference)arraySubscriptEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -1913,36 +1943,6 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
   public EReference getIterationAccumulator_Initializer()
   {
     return (EReference)iterationAccumulatorEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getSubscript()
-  {
-    return subscriptEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getSubscript_Slice()
-  {
-    return (EAttribute)subscriptEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getSubscript_Expression()
-  {
-    return (EReference)subscriptEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -2620,6 +2620,26 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getSimpleName()
+  {
+    return simpleNameEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getSimpleName_Identifier()
+  {
+    return (EAttribute)simpleNameEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getFeatureCall()
   {
     return featureCallEClass;
@@ -2643,26 +2663,6 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
   public EReference getFeatureCall_Parts()
   {
     return (EReference)featureCallEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getSimpleName()
-  {
-    return simpleNameEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getSimpleName_Identifier()
-  {
-    return (EAttribute)simpleNameEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -2927,11 +2927,15 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
 
     featureCallPartEClass = createEClass(FEATURE_CALL_PART);
 
-    featureReferenceEClass = createEClass(FEATURE_REFERENCE);
-    createEAttribute(featureReferenceEClass, FEATURE_REFERENCE__NAME);
+    featureAccessEClass = createEClass(FEATURE_ACCESS);
+    createEAttribute(featureAccessEClass, FEATURE_ACCESS__NAME);
 
-    arrayElementReferenceEClass = createEClass(ARRAY_ELEMENT_REFERENCE);
-    createEReference(arrayElementReferenceEClass, ARRAY_ELEMENT_REFERENCE__SUBSCRIPTS);
+    arrayElementAccessEClass = createEClass(ARRAY_ELEMENT_ACCESS);
+    createEReference(arrayElementAccessEClass, ARRAY_ELEMENT_ACCESS__SUBSCRIPTS);
+
+    arraySubscriptEClass = createEClass(ARRAY_SUBSCRIPT);
+    createEAttribute(arraySubscriptEClass, ARRAY_SUBSCRIPT__SLICE);
+    createEReference(arraySubscriptEClass, ARRAY_SUBSCRIPT__EXPRESSION);
 
     operationCallEClass = createEClass(OPERATION_CALL);
     createEReference(operationCallEClass, OPERATION_CALL__ARGUMENTS);
@@ -2947,10 +2951,6 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     iterationAccumulatorEClass = createEClass(ITERATION_ACCUMULATOR);
     createEAttribute(iterationAccumulatorEClass, ITERATION_ACCUMULATOR__NAME);
     createEReference(iterationAccumulatorEClass, ITERATION_ACCUMULATOR__INITIALIZER);
-
-    subscriptEClass = createEClass(SUBSCRIPT);
-    createEAttribute(subscriptEClass, SUBSCRIPT__SLICE);
-    createEReference(subscriptEClass, SUBSCRIPT__EXPRESSION);
 
     arrayConstructionOperatorEClass = createEClass(ARRAY_CONSTRUCTION_OPERATOR);
     createEReference(arrayConstructionOperatorEClass, ARRAY_CONSTRUCTION_OPERATOR__EXPRESSIONS);
@@ -3044,12 +3044,12 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     createEReference(postfixExpressionEClass, POSTFIX_EXPRESSION__OPERAND);
     createEAttribute(postfixExpressionEClass, POSTFIX_EXPRESSION__OPERATOR);
 
+    simpleNameEClass = createEClass(SIMPLE_NAME);
+    createEAttribute(simpleNameEClass, SIMPLE_NAME__IDENTIFIER);
+
     featureCallEClass = createEClass(FEATURE_CALL);
     createEReference(featureCallEClass, FEATURE_CALL__TARGET);
     createEReference(featureCallEClass, FEATURE_CALL__PARTS);
-
-    simpleNameEClass = createEClass(SIMPLE_NAME);
-    createEAttribute(simpleNameEClass, SIMPLE_NAME__IDENTIFIER);
 
     // Create enums
     assertionStatusKindEEnum = createEEnum(ASSERTION_STATUS_KIND);
@@ -3117,8 +3117,8 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     integerLiteralEClass.getESuperTypes().add(this.getNumericLiteral());
     booleanLiteralEClass.getESuperTypes().add(this.getLiteral());
     stringLiteralEClass.getESuperTypes().add(this.getLiteral());
-    featureReferenceEClass.getESuperTypes().add(this.getFeatureCallPart());
-    arrayElementReferenceEClass.getESuperTypes().add(this.getFeatureCallPart());
+    featureAccessEClass.getESuperTypes().add(this.getFeatureCallPart());
+    arrayElementAccessEClass.getESuperTypes().add(this.getFeatureCallPart());
     operationCallEClass.getESuperTypes().add(this.getFeatureCallPart());
     iterationCallEClass.getESuperTypes().add(this.getFeatureCallPart());
     arrayConstructionOperatorEClass.getESuperTypes().add(this.getExpression());
@@ -3138,8 +3138,8 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     powerExpressionEClass.getESuperTypes().add(this.getExpression());
     unaryExpressionEClass.getESuperTypes().add(this.getExpression());
     postfixExpressionEClass.getESuperTypes().add(this.getExpression());
-    featureCallEClass.getESuperTypes().add(this.getExpression());
     simpleNameEClass.getESuperTypes().add(this.getExpression());
+    featureCallEClass.getESuperTypes().add(this.getExpression());
 
     // Initialize classes and features; add operations and parameters
     initEClass(mscriptEClass, Mscript.class, "Mscript", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -3284,11 +3284,15 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
 
     initEClass(featureCallPartEClass, FeatureCallPart.class, "FeatureCallPart", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-    initEClass(featureReferenceEClass, FeatureReference.class, "FeatureReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getFeatureReference_Name(), ecorePackage.getEString(), "name", null, 0, 1, FeatureReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(featureAccessEClass, FeatureAccess.class, "FeatureAccess", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getFeatureAccess_Name(), ecorePackage.getEString(), "name", null, 0, 1, FeatureAccess.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(arrayElementReferenceEClass, ArrayElementReference.class, "ArrayElementReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getArrayElementReference_Subscripts(), this.getSubscript(), null, "subscripts", null, 0, -1, ArrayElementReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(arrayElementAccessEClass, ArrayElementAccess.class, "ArrayElementAccess", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getArrayElementAccess_Subscripts(), this.getArraySubscript(), null, "subscripts", null, 0, -1, ArrayElementAccess.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(arraySubscriptEClass, ArraySubscript.class, "ArraySubscript", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getArraySubscript_Slice(), ecorePackage.getEBoolean(), "slice", null, 0, 1, ArraySubscript.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getArraySubscript_Expression(), this.getExpression(), null, "expression", null, 0, 1, ArraySubscript.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(operationCallEClass, OperationCall.class, "OperationCall", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getOperationCall_Arguments(), this.getExpression(), null, "arguments", null, 0, -1, OperationCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3304,10 +3308,6 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     initEClass(iterationAccumulatorEClass, IterationAccumulator.class, "IterationAccumulator", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getIterationAccumulator_Name(), ecorePackage.getEString(), "name", null, 0, 1, IterationAccumulator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getIterationAccumulator_Initializer(), this.getExpression(), null, "initializer", null, 0, 1, IterationAccumulator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(subscriptEClass, Subscript.class, "Subscript", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getSubscript_Slice(), ecorePackage.getEBoolean(), "slice", null, 0, 1, Subscript.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getSubscript_Expression(), this.getExpression(), null, "expression", null, 0, 1, Subscript.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(arrayConstructionOperatorEClass, ArrayConstructionOperator.class, "ArrayConstructionOperator", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getArrayConstructionOperator_Expressions(), this.getExpression(), null, "expressions", null, 0, -1, ArrayConstructionOperator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3401,12 +3401,12 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     initEReference(getPostfixExpression_Operand(), this.getExpression(), null, "operand", null, 0, 1, PostfixExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getPostfixExpression_Operator(), this.getPostfixOperator(), "operator", null, 0, 1, PostfixExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+    initEClass(simpleNameEClass, SimpleName.class, "SimpleName", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getSimpleName_Identifier(), ecorePackage.getEString(), "identifier", null, 0, 1, SimpleName.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
     initEClass(featureCallEClass, FeatureCall.class, "FeatureCall", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getFeatureCall_Target(), this.getExpression(), null, "target", null, 0, 1, FeatureCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getFeatureCall_Parts(), this.getFeatureCallPart(), null, "parts", null, 0, -1, FeatureCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(simpleNameEClass, SimpleName.class, "SimpleName", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getSimpleName_Identifier(), ecorePackage.getEString(), "identifier", null, 0, 1, SimpleName.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Initialize enums and add enum literals
     initEEnum(assertionStatusKindEEnum, AssertionStatusKind.class, "AssertionStatusKind");

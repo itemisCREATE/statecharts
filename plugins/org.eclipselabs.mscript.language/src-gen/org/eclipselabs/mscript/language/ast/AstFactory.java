@@ -413,22 +413,31 @@ public interface AstFactory extends EFactory
   FeatureCallPart createFeatureCallPart();
 
   /**
-   * Returns a new object of class '<em>Feature Reference</em>'.
+   * Returns a new object of class '<em>Feature Access</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Feature Reference</em>'.
+   * @return a new object of class '<em>Feature Access</em>'.
    * @generated
    */
-  FeatureReference createFeatureReference();
+  FeatureAccess createFeatureAccess();
 
   /**
-   * Returns a new object of class '<em>Array Element Reference</em>'.
+   * Returns a new object of class '<em>Array Element Access</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Array Element Reference</em>'.
+   * @return a new object of class '<em>Array Element Access</em>'.
    * @generated
    */
-  ArrayElementReference createArrayElementReference();
+  ArrayElementAccess createArrayElementAccess();
+
+  /**
+   * Returns a new object of class '<em>Array Subscript</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Array Subscript</em>'.
+   * @generated
+   */
+  ArraySubscript createArraySubscript();
 
   /**
    * Returns a new object of class '<em>Operation Call</em>'.
@@ -465,15 +474,6 @@ public interface AstFactory extends EFactory
    * @generated
    */
   IterationAccumulator createIterationAccumulator();
-
-  /**
-   * Returns a new object of class '<em>Subscript</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Subscript</em>'.
-   * @generated
-   */
-  Subscript createSubscript();
 
   /**
    * Returns a new object of class '<em>Array Construction Operator</em>'.
@@ -701,15 +701,6 @@ public interface AstFactory extends EFactory
   PostfixExpression createPostfixExpression();
 
   /**
-   * Returns a new object of class '<em>Feature Call</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Feature Call</em>'.
-   * @generated
-   */
-  FeatureCall createFeatureCall();
-
-  /**
    * Returns a new object of class '<em>Simple Name</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -717,6 +708,15 @@ public interface AstFactory extends EFactory
    * @generated
    */
   SimpleName createSimpleName();
+
+  /**
+   * Returns a new object of class '<em>Feature Call</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Feature Call</em>'.
+   * @generated
+   */
+  FeatureCall createFeatureCall();
 
   /**
    * Returns the package supported by this factory.

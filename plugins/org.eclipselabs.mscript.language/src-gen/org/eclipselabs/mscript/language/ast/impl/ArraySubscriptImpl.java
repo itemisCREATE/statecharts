@@ -14,25 +14,25 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.eclipselabs.mscript.language.ast.ArraySubscript;
 import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.Expression;
-import org.eclipselabs.mscript.language.ast.Subscript;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Subscript</b></em>'.
+ * An implementation of the model object '<em><b>Array Subscript</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.SubscriptImpl#isSlice <em>Slice</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.SubscriptImpl#getExpression <em>Expression</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.ArraySubscriptImpl#isSlice <em>Slice</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.ArraySubscriptImpl#getExpression <em>Expression</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class SubscriptImpl extends MinimalEObjectImpl.Container implements Subscript
+public class ArraySubscriptImpl extends MinimalEObjectImpl.Container implements ArraySubscript
 {
   /**
    * The default value of the '{@link #isSlice() <em>Slice</em>}' attribute.
@@ -69,7 +69,7 @@ public class SubscriptImpl extends MinimalEObjectImpl.Container implements Subsc
    * <!-- end-user-doc -->
    * @generated
    */
-  protected SubscriptImpl()
+  protected ArraySubscriptImpl()
   {
     super();
   }
@@ -82,7 +82,7 @@ public class SubscriptImpl extends MinimalEObjectImpl.Container implements Subsc
   @Override
   protected EClass eStaticClass()
   {
-    return AstPackage.Literals.SUBSCRIPT;
+    return AstPackage.Literals.ARRAY_SUBSCRIPT;
   }
 
   /**
@@ -105,7 +105,7 @@ public class SubscriptImpl extends MinimalEObjectImpl.Container implements Subsc
     boolean oldSlice = slice;
     slice = newSlice;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.SUBSCRIPT__SLICE, oldSlice, slice));
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.ARRAY_SUBSCRIPT__SLICE, oldSlice, slice));
   }
 
   /**
@@ -129,7 +129,7 @@ public class SubscriptImpl extends MinimalEObjectImpl.Container implements Subsc
     expression = newExpression;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.SUBSCRIPT__EXPRESSION, oldExpression, newExpression);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.ARRAY_SUBSCRIPT__EXPRESSION, oldExpression, newExpression);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -146,14 +146,14 @@ public class SubscriptImpl extends MinimalEObjectImpl.Container implements Subsc
     {
       NotificationChain msgs = null;
       if (expression != null)
-        msgs = ((InternalEObject)expression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.SUBSCRIPT__EXPRESSION, null, msgs);
+        msgs = ((InternalEObject)expression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.ARRAY_SUBSCRIPT__EXPRESSION, null, msgs);
       if (newExpression != null)
-        msgs = ((InternalEObject)newExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.SUBSCRIPT__EXPRESSION, null, msgs);
+        msgs = ((InternalEObject)newExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.ARRAY_SUBSCRIPT__EXPRESSION, null, msgs);
       msgs = basicSetExpression(newExpression, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.SUBSCRIPT__EXPRESSION, newExpression, newExpression));
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.ARRAY_SUBSCRIPT__EXPRESSION, newExpression, newExpression));
   }
 
   /**
@@ -166,7 +166,7 @@ public class SubscriptImpl extends MinimalEObjectImpl.Container implements Subsc
   {
     switch (featureID)
     {
-      case AstPackage.SUBSCRIPT__EXPRESSION:
+      case AstPackage.ARRAY_SUBSCRIPT__EXPRESSION:
         return basicSetExpression(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -182,9 +182,9 @@ public class SubscriptImpl extends MinimalEObjectImpl.Container implements Subsc
   {
     switch (featureID)
     {
-      case AstPackage.SUBSCRIPT__SLICE:
+      case AstPackage.ARRAY_SUBSCRIPT__SLICE:
         return isSlice();
-      case AstPackage.SUBSCRIPT__EXPRESSION:
+      case AstPackage.ARRAY_SUBSCRIPT__EXPRESSION:
         return getExpression();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -200,10 +200,10 @@ public class SubscriptImpl extends MinimalEObjectImpl.Container implements Subsc
   {
     switch (featureID)
     {
-      case AstPackage.SUBSCRIPT__SLICE:
+      case AstPackage.ARRAY_SUBSCRIPT__SLICE:
         setSlice((Boolean)newValue);
         return;
-      case AstPackage.SUBSCRIPT__EXPRESSION:
+      case AstPackage.ARRAY_SUBSCRIPT__EXPRESSION:
         setExpression((Expression)newValue);
         return;
     }
@@ -220,10 +220,10 @@ public class SubscriptImpl extends MinimalEObjectImpl.Container implements Subsc
   {
     switch (featureID)
     {
-      case AstPackage.SUBSCRIPT__SLICE:
+      case AstPackage.ARRAY_SUBSCRIPT__SLICE:
         setSlice(SLICE_EDEFAULT);
         return;
-      case AstPackage.SUBSCRIPT__EXPRESSION:
+      case AstPackage.ARRAY_SUBSCRIPT__EXPRESSION:
         setExpression((Expression)null);
         return;
     }
@@ -240,9 +240,9 @@ public class SubscriptImpl extends MinimalEObjectImpl.Container implements Subsc
   {
     switch (featureID)
     {
-      case AstPackage.SUBSCRIPT__SLICE:
+      case AstPackage.ARRAY_SUBSCRIPT__SLICE:
         return slice != SLICE_EDEFAULT;
-      case AstPackage.SUBSCRIPT__EXPRESSION:
+      case AstPackage.ARRAY_SUBSCRIPT__EXPRESSION:
         return expression != null;
     }
     return super.eIsSet(featureID);
@@ -265,4 +265,4 @@ public class SubscriptImpl extends MinimalEObjectImpl.Container implements Subsc
     return result.toString();
   }
 
-} //SubscriptImpl
+} //ArraySubscriptImpl

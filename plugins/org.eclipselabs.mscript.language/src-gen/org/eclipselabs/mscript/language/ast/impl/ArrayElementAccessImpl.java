@@ -17,24 +17,24 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.eclipselabs.mscript.language.ast.ArrayElementReference;
+import org.eclipselabs.mscript.language.ast.ArrayElementAccess;
+import org.eclipselabs.mscript.language.ast.ArraySubscript;
 import org.eclipselabs.mscript.language.ast.AstPackage;
-import org.eclipselabs.mscript.language.ast.Subscript;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Array Element Reference</b></em>'.
+ * An implementation of the model object '<em><b>Array Element Access</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.ArrayElementReferenceImpl#getSubscripts <em>Subscripts</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.ArrayElementAccessImpl#getSubscripts <em>Subscripts</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ArrayElementReferenceImpl extends FeatureCallPartImpl implements ArrayElementReference
+public class ArrayElementAccessImpl extends FeatureCallPartImpl implements ArrayElementAccess
 {
   /**
    * The cached value of the '{@link #getSubscripts() <em>Subscripts</em>}' containment reference list.
@@ -44,14 +44,14 @@ public class ArrayElementReferenceImpl extends FeatureCallPartImpl implements Ar
    * @generated
    * @ordered
    */
-  protected EList<Subscript> subscripts;
+  protected EList<ArraySubscript> subscripts;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ArrayElementReferenceImpl()
+  protected ArrayElementAccessImpl()
   {
     super();
   }
@@ -64,7 +64,7 @@ public class ArrayElementReferenceImpl extends FeatureCallPartImpl implements Ar
   @Override
   protected EClass eStaticClass()
   {
-    return AstPackage.Literals.ARRAY_ELEMENT_REFERENCE;
+    return AstPackage.Literals.ARRAY_ELEMENT_ACCESS;
   }
 
   /**
@@ -72,11 +72,11 @@ public class ArrayElementReferenceImpl extends FeatureCallPartImpl implements Ar
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Subscript> getSubscripts()
+  public EList<ArraySubscript> getSubscripts()
   {
     if (subscripts == null)
     {
-      subscripts = new EObjectContainmentEList<Subscript>(Subscript.class, this, AstPackage.ARRAY_ELEMENT_REFERENCE__SUBSCRIPTS);
+      subscripts = new EObjectContainmentEList<ArraySubscript>(ArraySubscript.class, this, AstPackage.ARRAY_ELEMENT_ACCESS__SUBSCRIPTS);
     }
     return subscripts;
   }
@@ -91,7 +91,7 @@ public class ArrayElementReferenceImpl extends FeatureCallPartImpl implements Ar
   {
     switch (featureID)
     {
-      case AstPackage.ARRAY_ELEMENT_REFERENCE__SUBSCRIPTS:
+      case AstPackage.ARRAY_ELEMENT_ACCESS__SUBSCRIPTS:
         return ((InternalEList<?>)getSubscripts()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -107,7 +107,7 @@ public class ArrayElementReferenceImpl extends FeatureCallPartImpl implements Ar
   {
     switch (featureID)
     {
-      case AstPackage.ARRAY_ELEMENT_REFERENCE__SUBSCRIPTS:
+      case AstPackage.ARRAY_ELEMENT_ACCESS__SUBSCRIPTS:
         return getSubscripts();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -124,9 +124,9 @@ public class ArrayElementReferenceImpl extends FeatureCallPartImpl implements Ar
   {
     switch (featureID)
     {
-      case AstPackage.ARRAY_ELEMENT_REFERENCE__SUBSCRIPTS:
+      case AstPackage.ARRAY_ELEMENT_ACCESS__SUBSCRIPTS:
         getSubscripts().clear();
-        getSubscripts().addAll((Collection<? extends Subscript>)newValue);
+        getSubscripts().addAll((Collection<? extends ArraySubscript>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -142,7 +142,7 @@ public class ArrayElementReferenceImpl extends FeatureCallPartImpl implements Ar
   {
     switch (featureID)
     {
-      case AstPackage.ARRAY_ELEMENT_REFERENCE__SUBSCRIPTS:
+      case AstPackage.ARRAY_ELEMENT_ACCESS__SUBSCRIPTS:
         getSubscripts().clear();
         return;
     }
@@ -159,10 +159,10 @@ public class ArrayElementReferenceImpl extends FeatureCallPartImpl implements Ar
   {
     switch (featureID)
     {
-      case AstPackage.ARRAY_ELEMENT_REFERENCE__SUBSCRIPTS:
+      case AstPackage.ARRAY_ELEMENT_ACCESS__SUBSCRIPTS:
         return subscripts != null && !subscripts.isEmpty();
     }
     return super.eIsSet(featureID);
   }
 
-} //ArrayElementReferenceImpl
+} //ArrayElementAccessImpl

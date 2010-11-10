@@ -10677,8 +10677,130 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
     // $ANTLR end ruleStringLiteral
 
 
+    // $ANTLR start entryRuleSimpleName
+    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4809:1: entryRuleSimpleName returns [EObject current=null] : iv_ruleSimpleName= ruleSimpleName EOF ;
+    public final EObject entryRuleSimpleName() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleSimpleName = null;
+
+
+        try {
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4810:2: (iv_ruleSimpleName= ruleSimpleName EOF )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4811:2: iv_ruleSimpleName= ruleSimpleName EOF
+            {
+             currentNode = createCompositeNode(grammarAccess.getSimpleNameRule(), currentNode); 
+            pushFollow(FOLLOW_ruleSimpleName_in_entryRuleSimpleName8484);
+            iv_ruleSimpleName=ruleSimpleName();
+            _fsp--;
+
+             current =iv_ruleSimpleName; 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleSimpleName8494); 
+
+            }
+
+        }
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
+                appendSkippedTokens();
+            } 
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end entryRuleSimpleName
+
+
+    // $ANTLR start ruleSimpleName
+    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4818:1: ruleSimpleName returns [EObject current=null] : ( () ( (lv_identifier_1_0= RULE_ID ) ) ) ;
+    public final EObject ruleSimpleName() throws RecognitionException {
+        EObject current = null;
+
+        Token lv_identifier_1_0=null;
+
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+            
+        try {
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4823:6: ( ( () ( (lv_identifier_1_0= RULE_ID ) ) ) )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4824:1: ( () ( (lv_identifier_1_0= RULE_ID ) ) )
+            {
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4824:1: ( () ( (lv_identifier_1_0= RULE_ID ) ) )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4824:2: () ( (lv_identifier_1_0= RULE_ID ) )
+            {
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4824:2: ()
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4825:5: 
+            {
+             
+                    temp=factory.create(grammarAccess.getSimpleNameAccess().getSimpleNameAction_0().getType().getClassifier());
+                    current = temp; 
+                    temp = null;
+                    CompositeNode newNode = createCompositeNode(grammarAccess.getSimpleNameAccess().getSimpleNameAction_0(), currentNode.getParent());
+                newNode.getChildren().add(currentNode);
+                moveLookaheadInfo(currentNode, newNode);
+                currentNode = newNode; 
+                    associateNodeWithAstElement(currentNode, current); 
+                
+
+            }
+
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4835:2: ( (lv_identifier_1_0= RULE_ID ) )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4836:1: (lv_identifier_1_0= RULE_ID )
+            {
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4836:1: (lv_identifier_1_0= RULE_ID )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4837:3: lv_identifier_1_0= RULE_ID
+            {
+            lv_identifier_1_0=(Token)input.LT(1);
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSimpleName8545); 
+
+            			createLeafNode(grammarAccess.getSimpleNameAccess().getIdentifierIDTerminalRuleCall_1_0(), "identifier"); 
+            		
+
+            	        if (current==null) {
+            	            current = factory.create(grammarAccess.getSimpleNameRule().getType().getClassifier());
+            	            associateNodeWithAstElement(currentNode, current);
+            	        }
+            	        try {
+            	       		set(
+            	       			current, 
+            	       			"identifier",
+            	        		lv_identifier_1_0, 
+            	        		"ID", 
+            	        		lastConsumedNode);
+            	        } catch (ValueConverterException vce) {
+            				handleValueConverterException(vce);
+            	        }
+            	    
+
+            }
+
+
+            }
+
+
+            }
+
+
+            }
+
+             resetLookahead(); 
+                	lastConsumedNode = currentNode;
+                
+        }
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
+                appendSkippedTokens();
+            } 
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end ruleSimpleName
+
+
     // $ANTLR start entryRuleFeatureCall
-    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4809:1: entryRuleFeatureCall returns [EObject current=null] : iv_ruleFeatureCall= ruleFeatureCall EOF ;
+    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4867:1: entryRuleFeatureCall returns [EObject current=null] : iv_ruleFeatureCall= ruleFeatureCall EOF ;
     public final EObject entryRuleFeatureCall() throws RecognitionException {
         EObject current = null;
 
@@ -10686,16 +10808,16 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4810:2: (iv_ruleFeatureCall= ruleFeatureCall EOF )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4811:2: iv_ruleFeatureCall= ruleFeatureCall EOF
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4868:2: (iv_ruleFeatureCall= ruleFeatureCall EOF )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4869:2: iv_ruleFeatureCall= ruleFeatureCall EOF
             {
              currentNode = createCompositeNode(grammarAccess.getFeatureCallRule(), currentNode); 
-            pushFollow(FOLLOW_ruleFeatureCall_in_entryRuleFeatureCall8484);
+            pushFollow(FOLLOW_ruleFeatureCall_in_entryRuleFeatureCall8586);
             iv_ruleFeatureCall=ruleFeatureCall();
             _fsp--;
 
              current =iv_ruleFeatureCall; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleFeatureCall8494); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleFeatureCall8596); 
 
             }
 
@@ -10713,7 +10835,7 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleFeatureCall
-    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4818:1: ruleFeatureCall returns [EObject current=null] : ( (this_CallablePrimaryExpression_0= ruleCallablePrimaryExpression ( () ( (lv_parts_2_0= ruleFeatureCallPart ) )+ )? ) | ( () ( (lv_target_4_0= ruleSimpleName ) ) ( (lv_parts_5_0= ruleFeatureCallPart ) )* ) ) ;
+    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4876:1: ruleFeatureCall returns [EObject current=null] : ( (this_CallablePrimaryExpression_0= ruleCallablePrimaryExpression ( () ( (lv_parts_2_0= ruleFeatureCallPart ) )+ )? ) | ( () ( (lv_target_4_0= ruleSimpleName ) ) ( (lv_parts_5_0= ruleFeatureCallPart ) )* ) ) ;
     public final EObject ruleFeatureCall() throws RecognitionException {
         EObject current = null;
 
@@ -10729,10 +10851,10 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4823:6: ( ( (this_CallablePrimaryExpression_0= ruleCallablePrimaryExpression ( () ( (lv_parts_2_0= ruleFeatureCallPart ) )+ )? ) | ( () ( (lv_target_4_0= ruleSimpleName ) ) ( (lv_parts_5_0= ruleFeatureCallPart ) )* ) ) )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4824:1: ( (this_CallablePrimaryExpression_0= ruleCallablePrimaryExpression ( () ( (lv_parts_2_0= ruleFeatureCallPart ) )+ )? ) | ( () ( (lv_target_4_0= ruleSimpleName ) ) ( (lv_parts_5_0= ruleFeatureCallPart ) )* ) )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4881:6: ( ( (this_CallablePrimaryExpression_0= ruleCallablePrimaryExpression ( () ( (lv_parts_2_0= ruleFeatureCallPart ) )+ )? ) | ( () ( (lv_target_4_0= ruleSimpleName ) ) ( (lv_parts_5_0= ruleFeatureCallPart ) )* ) ) )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4882:1: ( (this_CallablePrimaryExpression_0= ruleCallablePrimaryExpression ( () ( (lv_parts_2_0= ruleFeatureCallPart ) )+ )? ) | ( () ( (lv_target_4_0= ruleSimpleName ) ) ( (lv_parts_5_0= ruleFeatureCallPart ) )* ) )
             {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4824:1: ( (this_CallablePrimaryExpression_0= ruleCallablePrimaryExpression ( () ( (lv_parts_2_0= ruleFeatureCallPart ) )+ )? ) | ( () ( (lv_target_4_0= ruleSimpleName ) ) ( (lv_parts_5_0= ruleFeatureCallPart ) )* ) )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4882:1: ( (this_CallablePrimaryExpression_0= ruleCallablePrimaryExpression ( () ( (lv_parts_2_0= ruleFeatureCallPart ) )+ )? ) | ( () ( (lv_target_4_0= ruleSimpleName ) ) ( (lv_parts_5_0= ruleFeatureCallPart ) )* ) )
             int alt72=2;
             int LA72_0 = input.LA(1);
 
@@ -10744,21 +10866,21 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("4824:1: ( (this_CallablePrimaryExpression_0= ruleCallablePrimaryExpression ( () ( (lv_parts_2_0= ruleFeatureCallPart ) )+ )? ) | ( () ( (lv_target_4_0= ruleSimpleName ) ) ( (lv_parts_5_0= ruleFeatureCallPart ) )* ) )", 72, 0, input);
+                    new NoViableAltException("4882:1: ( (this_CallablePrimaryExpression_0= ruleCallablePrimaryExpression ( () ( (lv_parts_2_0= ruleFeatureCallPart ) )+ )? ) | ( () ( (lv_target_4_0= ruleSimpleName ) ) ( (lv_parts_5_0= ruleFeatureCallPart ) )* ) )", 72, 0, input);
 
                 throw nvae;
             }
             switch (alt72) {
                 case 1 :
-                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4824:2: (this_CallablePrimaryExpression_0= ruleCallablePrimaryExpression ( () ( (lv_parts_2_0= ruleFeatureCallPart ) )+ )? )
+                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4882:2: (this_CallablePrimaryExpression_0= ruleCallablePrimaryExpression ( () ( (lv_parts_2_0= ruleFeatureCallPart ) )+ )? )
                     {
-                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4824:2: (this_CallablePrimaryExpression_0= ruleCallablePrimaryExpression ( () ( (lv_parts_2_0= ruleFeatureCallPart ) )+ )? )
-                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4825:5: this_CallablePrimaryExpression_0= ruleCallablePrimaryExpression ( () ( (lv_parts_2_0= ruleFeatureCallPart ) )+ )?
+                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4882:2: (this_CallablePrimaryExpression_0= ruleCallablePrimaryExpression ( () ( (lv_parts_2_0= ruleFeatureCallPart ) )+ )? )
+                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4883:5: this_CallablePrimaryExpression_0= ruleCallablePrimaryExpression ( () ( (lv_parts_2_0= ruleFeatureCallPart ) )+ )?
                     {
                      
                             currentNode=createCompositeNode(grammarAccess.getFeatureCallAccess().getCallablePrimaryExpressionParserRuleCall_0_0(), currentNode); 
                         
-                    pushFollow(FOLLOW_ruleCallablePrimaryExpression_in_ruleFeatureCall8542);
+                    pushFollow(FOLLOW_ruleCallablePrimaryExpression_in_ruleFeatureCall8644);
                     this_CallablePrimaryExpression_0=ruleCallablePrimaryExpression();
                     _fsp--;
 
@@ -10766,7 +10888,7 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
                             current = this_CallablePrimaryExpression_0; 
                             currentNode = currentNode.getParent();
                         
-                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4833:1: ( () ( (lv_parts_2_0= ruleFeatureCallPart ) )+ )?
+                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4891:1: ( () ( (lv_parts_2_0= ruleFeatureCallPart ) )+ )?
                     int alt70=2;
                     int LA70_0 = input.LA(1);
 
@@ -10775,10 +10897,10 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt70) {
                         case 1 :
-                            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4833:2: () ( (lv_parts_2_0= ruleFeatureCallPart ) )+
+                            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4891:2: () ( (lv_parts_2_0= ruleFeatureCallPart ) )+
                             {
-                            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4833:2: ()
-                            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4834:5: 
+                            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4891:2: ()
+                            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4892:5: 
                             {
                              
                                     temp=factory.create(grammarAccess.getFeatureCallAccess().getFeatureCallTargetAction_0_1_0().getType().getClassifier());
@@ -10798,7 +10920,7 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
                             }
 
-                            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4849:2: ( (lv_parts_2_0= ruleFeatureCallPart ) )+
+                            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4907:2: ( (lv_parts_2_0= ruleFeatureCallPart ) )+
                             int cnt69=0;
                             loop69:
                             do {
@@ -10812,15 +10934,15 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
                                 switch (alt69) {
                             	case 1 :
-                            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4850:1: (lv_parts_2_0= ruleFeatureCallPart )
+                            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4908:1: (lv_parts_2_0= ruleFeatureCallPart )
                             	    {
-                            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4850:1: (lv_parts_2_0= ruleFeatureCallPart )
-                            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4851:3: lv_parts_2_0= ruleFeatureCallPart
+                            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4908:1: (lv_parts_2_0= ruleFeatureCallPart )
+                            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4909:3: lv_parts_2_0= ruleFeatureCallPart
                             	    {
                             	     
                             	    	        currentNode=createCompositeNode(grammarAccess.getFeatureCallAccess().getPartsFeatureCallPartParserRuleCall_0_1_1_0(), currentNode); 
                             	    	    
-                            	    pushFollow(FOLLOW_ruleFeatureCallPart_in_ruleFeatureCall8572);
+                            	    pushFollow(FOLLOW_ruleFeatureCallPart_in_ruleFeatureCall8674);
                             	    lv_parts_2_0=ruleFeatureCallPart();
                             	    _fsp--;
 
@@ -10870,13 +10992,13 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4874:6: ( () ( (lv_target_4_0= ruleSimpleName ) ) ( (lv_parts_5_0= ruleFeatureCallPart ) )* )
+                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4932:6: ( () ( (lv_target_4_0= ruleSimpleName ) ) ( (lv_parts_5_0= ruleFeatureCallPart ) )* )
                     {
-                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4874:6: ( () ( (lv_target_4_0= ruleSimpleName ) ) ( (lv_parts_5_0= ruleFeatureCallPart ) )* )
-                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4874:7: () ( (lv_target_4_0= ruleSimpleName ) ) ( (lv_parts_5_0= ruleFeatureCallPart ) )*
+                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4932:6: ( () ( (lv_target_4_0= ruleSimpleName ) ) ( (lv_parts_5_0= ruleFeatureCallPart ) )* )
+                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4932:7: () ( (lv_target_4_0= ruleSimpleName ) ) ( (lv_parts_5_0= ruleFeatureCallPart ) )*
                     {
-                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4874:7: ()
-                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4875:5: 
+                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4932:7: ()
+                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4933:5: 
                     {
                      
                             temp=factory.create(grammarAccess.getFeatureCallAccess().getFeatureCallAction_1_0().getType().getClassifier());
@@ -10891,16 +11013,16 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4885:2: ( (lv_target_4_0= ruleSimpleName ) )
-                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4886:1: (lv_target_4_0= ruleSimpleName )
+                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4943:2: ( (lv_target_4_0= ruleSimpleName ) )
+                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4944:1: (lv_target_4_0= ruleSimpleName )
                     {
-                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4886:1: (lv_target_4_0= ruleSimpleName )
-                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4887:3: lv_target_4_0= ruleSimpleName
+                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4944:1: (lv_target_4_0= ruleSimpleName )
+                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4945:3: lv_target_4_0= ruleSimpleName
                     {
                      
                     	        currentNode=createCompositeNode(grammarAccess.getFeatureCallAccess().getTargetSimpleNameParserRuleCall_1_1_0(), currentNode); 
                     	    
-                    pushFollow(FOLLOW_ruleSimpleName_in_ruleFeatureCall8613);
+                    pushFollow(FOLLOW_ruleSimpleName_in_ruleFeatureCall8715);
                     lv_target_4_0=ruleSimpleName();
                     _fsp--;
 
@@ -10927,7 +11049,7 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4909:2: ( (lv_parts_5_0= ruleFeatureCallPart ) )*
+                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4967:2: ( (lv_parts_5_0= ruleFeatureCallPart ) )*
                     loop71:
                     do {
                         int alt71=2;
@@ -10940,15 +11062,15 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
                         switch (alt71) {
                     	case 1 :
-                    	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4910:1: (lv_parts_5_0= ruleFeatureCallPart )
+                    	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4968:1: (lv_parts_5_0= ruleFeatureCallPart )
                     	    {
-                    	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4910:1: (lv_parts_5_0= ruleFeatureCallPart )
-                    	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4911:3: lv_parts_5_0= ruleFeatureCallPart
+                    	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4968:1: (lv_parts_5_0= ruleFeatureCallPart )
+                    	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4969:3: lv_parts_5_0= ruleFeatureCallPart
                     	    {
                     	     
                     	    	        currentNode=createCompositeNode(grammarAccess.getFeatureCallAccess().getPartsFeatureCallPartParserRuleCall_1_2_0(), currentNode); 
                     	    	    
-                    	    pushFollow(FOLLOW_ruleFeatureCallPart_in_ruleFeatureCall8634);
+                    	    pushFollow(FOLLOW_ruleFeatureCallPart_in_ruleFeatureCall8736);
                     	    lv_parts_5_0=ruleFeatureCallPart();
                     	    _fsp--;
 
@@ -11009,128 +11131,6 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
     // $ANTLR end ruleFeatureCall
 
 
-    // $ANTLR start entryRuleSimpleName
-    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4941:1: entryRuleSimpleName returns [EObject current=null] : iv_ruleSimpleName= ruleSimpleName EOF ;
-    public final EObject entryRuleSimpleName() throws RecognitionException {
-        EObject current = null;
-
-        EObject iv_ruleSimpleName = null;
-
-
-        try {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4942:2: (iv_ruleSimpleName= ruleSimpleName EOF )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4943:2: iv_ruleSimpleName= ruleSimpleName EOF
-            {
-             currentNode = createCompositeNode(grammarAccess.getSimpleNameRule(), currentNode); 
-            pushFollow(FOLLOW_ruleSimpleName_in_entryRuleSimpleName8672);
-            iv_ruleSimpleName=ruleSimpleName();
-            _fsp--;
-
-             current =iv_ruleSimpleName; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleSimpleName8682); 
-
-            }
-
-        }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
-                appendSkippedTokens();
-            } 
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end entryRuleSimpleName
-
-
-    // $ANTLR start ruleSimpleName
-    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4950:1: ruleSimpleName returns [EObject current=null] : ( () ( (lv_identifier_1_0= RULE_ID ) ) ) ;
-    public final EObject ruleSimpleName() throws RecognitionException {
-        EObject current = null;
-
-        Token lv_identifier_1_0=null;
-
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
-            
-        try {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4955:6: ( ( () ( (lv_identifier_1_0= RULE_ID ) ) ) )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4956:1: ( () ( (lv_identifier_1_0= RULE_ID ) ) )
-            {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4956:1: ( () ( (lv_identifier_1_0= RULE_ID ) ) )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4956:2: () ( (lv_identifier_1_0= RULE_ID ) )
-            {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4956:2: ()
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4957:5: 
-            {
-             
-                    temp=factory.create(grammarAccess.getSimpleNameAccess().getSimpleNameAction_0().getType().getClassifier());
-                    current = temp; 
-                    temp = null;
-                    CompositeNode newNode = createCompositeNode(grammarAccess.getSimpleNameAccess().getSimpleNameAction_0(), currentNode.getParent());
-                newNode.getChildren().add(currentNode);
-                moveLookaheadInfo(currentNode, newNode);
-                currentNode = newNode; 
-                    associateNodeWithAstElement(currentNode, current); 
-                
-
-            }
-
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4967:2: ( (lv_identifier_1_0= RULE_ID ) )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4968:1: (lv_identifier_1_0= RULE_ID )
-            {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4968:1: (lv_identifier_1_0= RULE_ID )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4969:3: lv_identifier_1_0= RULE_ID
-            {
-            lv_identifier_1_0=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSimpleName8733); 
-
-            			createLeafNode(grammarAccess.getSimpleNameAccess().getIdentifierIDTerminalRuleCall_1_0(), "identifier"); 
-            		
-
-            	        if (current==null) {
-            	            current = factory.create(grammarAccess.getSimpleNameRule().getType().getClassifier());
-            	            associateNodeWithAstElement(currentNode, current);
-            	        }
-            	        try {
-            	       		set(
-            	       			current, 
-            	       			"identifier",
-            	        		lv_identifier_1_0, 
-            	        		"ID", 
-            	        		lastConsumedNode);
-            	        } catch (ValueConverterException vce) {
-            				handleValueConverterException(vce);
-            	        }
-            	    
-
-            }
-
-
-            }
-
-
-            }
-
-
-            }
-
-             resetLookahead(); 
-                	lastConsumedNode = currentNode;
-                
-        }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
-                appendSkippedTokens();
-            } 
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end ruleSimpleName
-
-
     // $ANTLR start entryRuleFeatureCallPart
     // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:4999:1: entryRuleFeatureCallPart returns [EObject current=null] : iv_ruleFeatureCallPart= ruleFeatureCallPart EOF ;
     public final EObject entryRuleFeatureCallPart() throws RecognitionException {
@@ -11167,13 +11167,13 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleFeatureCallPart
-    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5008:1: ruleFeatureCallPart returns [EObject current=null] : (this_FeatureReference_0= ruleFeatureReference | this_ArrayElementReference_1= ruleArrayElementReference | this_OperationCall_2= ruleOperationCall | this_IterationCall_3= ruleIterationCall ) ;
+    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5008:1: ruleFeatureCallPart returns [EObject current=null] : (this_FeatureAccess_0= ruleFeatureAccess | this_ArrayElementAccess_1= ruleArrayElementAccess | this_OperationCall_2= ruleOperationCall | this_IterationCall_3= ruleIterationCall ) ;
     public final EObject ruleFeatureCallPart() throws RecognitionException {
         EObject current = null;
 
-        EObject this_FeatureReference_0 = null;
+        EObject this_FeatureAccess_0 = null;
 
-        EObject this_ArrayElementReference_1 = null;
+        EObject this_ArrayElementAccess_1 = null;
 
         EObject this_OperationCall_2 = null;
 
@@ -11183,42 +11183,42 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5013:6: ( (this_FeatureReference_0= ruleFeatureReference | this_ArrayElementReference_1= ruleArrayElementReference | this_OperationCall_2= ruleOperationCall | this_IterationCall_3= ruleIterationCall ) )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5014:1: (this_FeatureReference_0= ruleFeatureReference | this_ArrayElementReference_1= ruleArrayElementReference | this_OperationCall_2= ruleOperationCall | this_IterationCall_3= ruleIterationCall )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5013:6: ( (this_FeatureAccess_0= ruleFeatureAccess | this_ArrayElementAccess_1= ruleArrayElementAccess | this_OperationCall_2= ruleOperationCall | this_IterationCall_3= ruleIterationCall ) )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5014:1: (this_FeatureAccess_0= ruleFeatureAccess | this_ArrayElementAccess_1= ruleArrayElementAccess | this_OperationCall_2= ruleOperationCall | this_IterationCall_3= ruleIterationCall )
             {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5014:1: (this_FeatureReference_0= ruleFeatureReference | this_ArrayElementReference_1= ruleArrayElementReference | this_OperationCall_2= ruleOperationCall | this_IterationCall_3= ruleIterationCall )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5014:1: (this_FeatureAccess_0= ruleFeatureAccess | this_ArrayElementAccess_1= ruleArrayElementAccess | this_OperationCall_2= ruleOperationCall | this_IterationCall_3= ruleIterationCall )
             int alt73=4;
             alt73 = dfa73.predict(input);
             switch (alt73) {
                 case 1 :
-                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5015:5: this_FeatureReference_0= ruleFeatureReference
+                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5015:5: this_FeatureAccess_0= ruleFeatureAccess
                     {
                      
-                            currentNode=createCompositeNode(grammarAccess.getFeatureCallPartAccess().getFeatureReferenceParserRuleCall_0(), currentNode); 
+                            currentNode=createCompositeNode(grammarAccess.getFeatureCallPartAccess().getFeatureAccessParserRuleCall_0(), currentNode); 
                         
-                    pushFollow(FOLLOW_ruleFeatureReference_in_ruleFeatureCallPart8831);
-                    this_FeatureReference_0=ruleFeatureReference();
+                    pushFollow(FOLLOW_ruleFeatureAccess_in_ruleFeatureCallPart8831);
+                    this_FeatureAccess_0=ruleFeatureAccess();
                     _fsp--;
 
                      
-                            current = this_FeatureReference_0; 
+                            current = this_FeatureAccess_0; 
                             currentNode = currentNode.getParent();
                         
 
                     }
                     break;
                 case 2 :
-                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5025:5: this_ArrayElementReference_1= ruleArrayElementReference
+                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5025:5: this_ArrayElementAccess_1= ruleArrayElementAccess
                     {
                      
-                            currentNode=createCompositeNode(grammarAccess.getFeatureCallPartAccess().getArrayElementReferenceParserRuleCall_1(), currentNode); 
+                            currentNode=createCompositeNode(grammarAccess.getFeatureCallPartAccess().getArrayElementAccessParserRuleCall_1(), currentNode); 
                         
-                    pushFollow(FOLLOW_ruleArrayElementReference_in_ruleFeatureCallPart8858);
-                    this_ArrayElementReference_1=ruleArrayElementReference();
+                    pushFollow(FOLLOW_ruleArrayElementAccess_in_ruleFeatureCallPart8858);
+                    this_ArrayElementAccess_1=ruleArrayElementAccess();
                     _fsp--;
 
                      
-                            current = this_ArrayElementReference_1; 
+                            current = this_ArrayElementAccess_1; 
                             currentNode = currentNode.getParent();
                         
 
@@ -11280,25 +11280,25 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
     // $ANTLR end ruleFeatureCallPart
 
 
-    // $ANTLR start entryRuleFeatureReference
-    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5061:1: entryRuleFeatureReference returns [EObject current=null] : iv_ruleFeatureReference= ruleFeatureReference EOF ;
-    public final EObject entryRuleFeatureReference() throws RecognitionException {
+    // $ANTLR start entryRuleFeatureAccess
+    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5061:1: entryRuleFeatureAccess returns [EObject current=null] : iv_ruleFeatureAccess= ruleFeatureAccess EOF ;
+    public final EObject entryRuleFeatureAccess() throws RecognitionException {
         EObject current = null;
 
-        EObject iv_ruleFeatureReference = null;
+        EObject iv_ruleFeatureAccess = null;
 
 
         try {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5062:2: (iv_ruleFeatureReference= ruleFeatureReference EOF )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5063:2: iv_ruleFeatureReference= ruleFeatureReference EOF
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5062:2: (iv_ruleFeatureAccess= ruleFeatureAccess EOF )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5063:2: iv_ruleFeatureAccess= ruleFeatureAccess EOF
             {
-             currentNode = createCompositeNode(grammarAccess.getFeatureReferenceRule(), currentNode); 
-            pushFollow(FOLLOW_ruleFeatureReference_in_entryRuleFeatureReference8947);
-            iv_ruleFeatureReference=ruleFeatureReference();
+             currentNode = createCompositeNode(grammarAccess.getFeatureAccessRule(), currentNode); 
+            pushFollow(FOLLOW_ruleFeatureAccess_in_entryRuleFeatureAccess8947);
+            iv_ruleFeatureAccess=ruleFeatureAccess();
             _fsp--;
 
-             current =iv_ruleFeatureReference; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleFeatureReference8957); 
+             current =iv_ruleFeatureAccess; 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleFeatureAccess8957); 
 
             }
 
@@ -11312,12 +11312,12 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end entryRuleFeatureReference
+    // $ANTLR end entryRuleFeatureAccess
 
 
-    // $ANTLR start ruleFeatureReference
-    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5070:1: ruleFeatureReference returns [EObject current=null] : ( '.' ( ( (lv_name_1_1= RULE_ID | lv_name_1_2= 'unit' ) ) ) ) ;
-    public final EObject ruleFeatureReference() throws RecognitionException {
+    // $ANTLR start ruleFeatureAccess
+    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5070:1: ruleFeatureAccess returns [EObject current=null] : ( '.' ( ( (lv_name_1_1= RULE_ID | lv_name_1_2= 'unit' ) ) ) ) ;
+    public final EObject ruleFeatureAccess() throws RecognitionException {
         EObject current = null;
 
         Token lv_name_1_1=null;
@@ -11332,9 +11332,9 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
             // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5076:1: ( '.' ( ( (lv_name_1_1= RULE_ID | lv_name_1_2= 'unit' ) ) ) )
             // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5076:3: '.' ( ( (lv_name_1_1= RULE_ID | lv_name_1_2= 'unit' ) ) )
             {
-            match(input,53,FOLLOW_53_in_ruleFeatureReference8992); 
+            match(input,53,FOLLOW_53_in_ruleFeatureAccess8992); 
 
-                    createLeafNode(grammarAccess.getFeatureReferenceAccess().getFullStopKeyword_0(), null); 
+                    createLeafNode(grammarAccess.getFeatureAccessAccess().getFullStopKeyword_0(), null); 
                 
             // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5080:1: ( ( (lv_name_1_1= RULE_ID | lv_name_1_2= 'unit' ) ) )
             // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5081:1: ( (lv_name_1_1= RULE_ID | lv_name_1_2= 'unit' ) )
@@ -11363,13 +11363,13 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
                     // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5083:3: lv_name_1_1= RULE_ID
                     {
                     lv_name_1_1=(Token)input.LT(1);
-                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFeatureReference9011); 
+                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFeatureAccess9011); 
 
-                    			createLeafNode(grammarAccess.getFeatureReferenceAccess().getNameIDTerminalRuleCall_1_0_0(), "name"); 
+                    			createLeafNode(grammarAccess.getFeatureAccessAccess().getNameIDTerminalRuleCall_1_0_0(), "name"); 
                     		
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.getFeatureReferenceRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getFeatureAccessRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        try {
@@ -11390,13 +11390,13 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
                     // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5104:8: lv_name_1_2= 'unit'
                     {
                     lv_name_1_2=(Token)input.LT(1);
-                    match(input,54,FOLLOW_54_in_ruleFeatureReference9032); 
+                    match(input,54,FOLLOW_54_in_ruleFeatureAccess9032); 
 
-                            createLeafNode(grammarAccess.getFeatureReferenceAccess().getNameUnitKeyword_1_0_1(), "name"); 
+                            createLeafNode(grammarAccess.getFeatureAccessAccess().getNameUnitKeyword_1_0_1(), "name"); 
                         
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.getFeatureReferenceRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getFeatureAccessRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -11437,28 +11437,28 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end ruleFeatureReference
+    // $ANTLR end ruleFeatureAccess
 
 
-    // $ANTLR start entryRuleArrayElementReference
-    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5133:1: entryRuleArrayElementReference returns [EObject current=null] : iv_ruleArrayElementReference= ruleArrayElementReference EOF ;
-    public final EObject entryRuleArrayElementReference() throws RecognitionException {
+    // $ANTLR start entryRuleArrayElementAccess
+    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5133:1: entryRuleArrayElementAccess returns [EObject current=null] : iv_ruleArrayElementAccess= ruleArrayElementAccess EOF ;
+    public final EObject entryRuleArrayElementAccess() throws RecognitionException {
         EObject current = null;
 
-        EObject iv_ruleArrayElementReference = null;
+        EObject iv_ruleArrayElementAccess = null;
 
 
         try {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5134:2: (iv_ruleArrayElementReference= ruleArrayElementReference EOF )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5135:2: iv_ruleArrayElementReference= ruleArrayElementReference EOF
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5134:2: (iv_ruleArrayElementAccess= ruleArrayElementAccess EOF )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5135:2: iv_ruleArrayElementAccess= ruleArrayElementAccess EOF
             {
-             currentNode = createCompositeNode(grammarAccess.getArrayElementReferenceRule(), currentNode); 
-            pushFollow(FOLLOW_ruleArrayElementReference_in_entryRuleArrayElementReference9084);
-            iv_ruleArrayElementReference=ruleArrayElementReference();
+             currentNode = createCompositeNode(grammarAccess.getArrayElementAccessRule(), currentNode); 
+            pushFollow(FOLLOW_ruleArrayElementAccess_in_entryRuleArrayElementAccess9084);
+            iv_ruleArrayElementAccess=ruleArrayElementAccess();
             _fsp--;
 
-             current =iv_ruleArrayElementReference; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleArrayElementReference9094); 
+             current =iv_ruleArrayElementAccess; 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleArrayElementAccess9094); 
 
             }
 
@@ -11472,12 +11472,12 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end entryRuleArrayElementReference
+    // $ANTLR end entryRuleArrayElementAccess
 
 
-    // $ANTLR start ruleArrayElementReference
-    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5142:1: ruleArrayElementReference returns [EObject current=null] : ( '[' ( (lv_subscripts_1_0= ruleSubscript ) ) ( ',' ( (lv_subscripts_3_0= ruleSubscript ) ) )* ']' ) ;
-    public final EObject ruleArrayElementReference() throws RecognitionException {
+    // $ANTLR start ruleArrayElementAccess
+    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5142:1: ruleArrayElementAccess returns [EObject current=null] : ( '[' ( (lv_subscripts_1_0= ruleArraySubscript ) ) ( ',' ( (lv_subscripts_3_0= ruleArraySubscript ) ) )* ']' ) ;
+    public final EObject ruleArrayElementAccess() throws RecognitionException {
         EObject current = null;
 
         EObject lv_subscripts_1_0 = null;
@@ -11488,32 +11488,32 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5147:6: ( ( '[' ( (lv_subscripts_1_0= ruleSubscript ) ) ( ',' ( (lv_subscripts_3_0= ruleSubscript ) ) )* ']' ) )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5148:1: ( '[' ( (lv_subscripts_1_0= ruleSubscript ) ) ( ',' ( (lv_subscripts_3_0= ruleSubscript ) ) )* ']' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5147:6: ( ( '[' ( (lv_subscripts_1_0= ruleArraySubscript ) ) ( ',' ( (lv_subscripts_3_0= ruleArraySubscript ) ) )* ']' ) )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5148:1: ( '[' ( (lv_subscripts_1_0= ruleArraySubscript ) ) ( ',' ( (lv_subscripts_3_0= ruleArraySubscript ) ) )* ']' )
             {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5148:1: ( '[' ( (lv_subscripts_1_0= ruleSubscript ) ) ( ',' ( (lv_subscripts_3_0= ruleSubscript ) ) )* ']' )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5148:3: '[' ( (lv_subscripts_1_0= ruleSubscript ) ) ( ',' ( (lv_subscripts_3_0= ruleSubscript ) ) )* ']'
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5148:1: ( '[' ( (lv_subscripts_1_0= ruleArraySubscript ) ) ( ',' ( (lv_subscripts_3_0= ruleArraySubscript ) ) )* ']' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5148:3: '[' ( (lv_subscripts_1_0= ruleArraySubscript ) ) ( ',' ( (lv_subscripts_3_0= ruleArraySubscript ) ) )* ']'
             {
-            match(input,34,FOLLOW_34_in_ruleArrayElementReference9129); 
+            match(input,34,FOLLOW_34_in_ruleArrayElementAccess9129); 
 
-                    createLeafNode(grammarAccess.getArrayElementReferenceAccess().getLeftSquareBracketKeyword_0(), null); 
+                    createLeafNode(grammarAccess.getArrayElementAccessAccess().getLeftSquareBracketKeyword_0(), null); 
                 
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5152:1: ( (lv_subscripts_1_0= ruleSubscript ) )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5153:1: (lv_subscripts_1_0= ruleSubscript )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5152:1: ( (lv_subscripts_1_0= ruleArraySubscript ) )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5153:1: (lv_subscripts_1_0= ruleArraySubscript )
             {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5153:1: (lv_subscripts_1_0= ruleSubscript )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5154:3: lv_subscripts_1_0= ruleSubscript
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5153:1: (lv_subscripts_1_0= ruleArraySubscript )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5154:3: lv_subscripts_1_0= ruleArraySubscript
             {
              
-            	        currentNode=createCompositeNode(grammarAccess.getArrayElementReferenceAccess().getSubscriptsSubscriptParserRuleCall_1_0(), currentNode); 
+            	        currentNode=createCompositeNode(grammarAccess.getArrayElementAccessAccess().getSubscriptsArraySubscriptParserRuleCall_1_0(), currentNode); 
             	    
-            pushFollow(FOLLOW_ruleSubscript_in_ruleArrayElementReference9150);
-            lv_subscripts_1_0=ruleSubscript();
+            pushFollow(FOLLOW_ruleArraySubscript_in_ruleArrayElementAccess9150);
+            lv_subscripts_1_0=ruleArraySubscript();
             _fsp--;
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.getArrayElementReferenceRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getArrayElementAccessRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        try {
@@ -11521,7 +11521,7 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
             	       			current, 
             	       			"subscripts",
             	        		lv_subscripts_1_0, 
-            	        		"Subscript", 
+            	        		"ArraySubscript", 
             	        		currentNode);
             	        } catch (ValueConverterException vce) {
             				handleValueConverterException(vce);
@@ -11534,7 +11534,7 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5176:2: ( ',' ( (lv_subscripts_3_0= ruleSubscript ) ) )*
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5176:2: ( ',' ( (lv_subscripts_3_0= ruleArraySubscript ) ) )*
             loop75:
             do {
                 int alt75=2;
@@ -11547,28 +11547,28 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
                 switch (alt75) {
             	case 1 :
-            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5176:4: ',' ( (lv_subscripts_3_0= ruleSubscript ) )
+            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5176:4: ',' ( (lv_subscripts_3_0= ruleArraySubscript ) )
             	    {
-            	    match(input,16,FOLLOW_16_in_ruleArrayElementReference9161); 
+            	    match(input,16,FOLLOW_16_in_ruleArrayElementAccess9161); 
 
-            	            createLeafNode(grammarAccess.getArrayElementReferenceAccess().getCommaKeyword_2_0(), null); 
+            	            createLeafNode(grammarAccess.getArrayElementAccessAccess().getCommaKeyword_2_0(), null); 
             	        
-            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5180:1: ( (lv_subscripts_3_0= ruleSubscript ) )
-            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5181:1: (lv_subscripts_3_0= ruleSubscript )
+            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5180:1: ( (lv_subscripts_3_0= ruleArraySubscript ) )
+            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5181:1: (lv_subscripts_3_0= ruleArraySubscript )
             	    {
-            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5181:1: (lv_subscripts_3_0= ruleSubscript )
-            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5182:3: lv_subscripts_3_0= ruleSubscript
+            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5181:1: (lv_subscripts_3_0= ruleArraySubscript )
+            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5182:3: lv_subscripts_3_0= ruleArraySubscript
             	    {
             	     
-            	    	        currentNode=createCompositeNode(grammarAccess.getArrayElementReferenceAccess().getSubscriptsSubscriptParserRuleCall_2_1_0(), currentNode); 
+            	    	        currentNode=createCompositeNode(grammarAccess.getArrayElementAccessAccess().getSubscriptsArraySubscriptParserRuleCall_2_1_0(), currentNode); 
             	    	    
-            	    pushFollow(FOLLOW_ruleSubscript_in_ruleArrayElementReference9182);
-            	    lv_subscripts_3_0=ruleSubscript();
+            	    pushFollow(FOLLOW_ruleArraySubscript_in_ruleArrayElementAccess9182);
+            	    lv_subscripts_3_0=ruleArraySubscript();
             	    _fsp--;
 
 
             	    	        if (current==null) {
-            	    	            current = factory.create(grammarAccess.getArrayElementReferenceRule().getType().getClassifier());
+            	    	            current = factory.create(grammarAccess.getArrayElementAccessRule().getType().getClassifier());
             	    	            associateNodeWithAstElement(currentNode.getParent(), current);
             	    	        }
             	    	        try {
@@ -11576,7 +11576,7 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
             	    	       			current, 
             	    	       			"subscripts",
             	    	        		lv_subscripts_3_0, 
-            	    	        		"Subscript", 
+            	    	        		"ArraySubscript", 
             	    	        		currentNode);
             	    	        } catch (ValueConverterException vce) {
             	    				handleValueConverterException(vce);
@@ -11598,9 +11598,9 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            match(input,35,FOLLOW_35_in_ruleArrayElementReference9194); 
+            match(input,35,FOLLOW_35_in_ruleArrayElementAccess9194); 
 
-                    createLeafNode(grammarAccess.getArrayElementReferenceAccess().getRightSquareBracketKeyword_3(), null); 
+                    createLeafNode(grammarAccess.getArrayElementAccessAccess().getRightSquareBracketKeyword_3(), null); 
                 
 
             }
@@ -11621,11 +11621,177 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end ruleArrayElementReference
+    // $ANTLR end ruleArrayElementAccess
+
+
+    // $ANTLR start entryRuleArraySubscript
+    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5216:1: entryRuleArraySubscript returns [EObject current=null] : iv_ruleArraySubscript= ruleArraySubscript EOF ;
+    public final EObject entryRuleArraySubscript() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleArraySubscript = null;
+
+
+        try {
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5217:2: (iv_ruleArraySubscript= ruleArraySubscript EOF )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5218:2: iv_ruleArraySubscript= ruleArraySubscript EOF
+            {
+             currentNode = createCompositeNode(grammarAccess.getArraySubscriptRule(), currentNode); 
+            pushFollow(FOLLOW_ruleArraySubscript_in_entryRuleArraySubscript9230);
+            iv_ruleArraySubscript=ruleArraySubscript();
+            _fsp--;
+
+             current =iv_ruleArraySubscript; 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleArraySubscript9240); 
+
+            }
+
+        }
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
+                appendSkippedTokens();
+            } 
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end entryRuleArraySubscript
+
+
+    // $ANTLR start ruleArraySubscript
+    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5225:1: ruleArraySubscript returns [EObject current=null] : ( ( (lv_slice_0_0= ':' ) ) | ( (lv_expression_1_0= ruleExpression ) ) ) ;
+    public final EObject ruleArraySubscript() throws RecognitionException {
+        EObject current = null;
+
+        Token lv_slice_0_0=null;
+        EObject lv_expression_1_0 = null;
+
+
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+            
+        try {
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5230:6: ( ( ( (lv_slice_0_0= ':' ) ) | ( (lv_expression_1_0= ruleExpression ) ) ) )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5231:1: ( ( (lv_slice_0_0= ':' ) ) | ( (lv_expression_1_0= ruleExpression ) ) )
+            {
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5231:1: ( ( (lv_slice_0_0= ':' ) ) | ( (lv_expression_1_0= ruleExpression ) ) )
+            int alt76=2;
+            int LA76_0 = input.LA(1);
+
+            if ( (LA76_0==21) ) {
+                alt76=1;
+            }
+            else if ( ((LA76_0>=RULE_ID && LA76_0<=RULE_STRING)||LA76_0==13||LA76_0==26||LA76_0==34||LA76_0==41||LA76_0==43||LA76_0==46||LA76_0==54||(LA76_0>=57 && LA76_0<=58)||LA76_0==62||LA76_0==75||(LA76_0>=77 && LA76_0<=78)) ) {
+                alt76=2;
+            }
+            else {
+                NoViableAltException nvae =
+                    new NoViableAltException("5231:1: ( ( (lv_slice_0_0= ':' ) ) | ( (lv_expression_1_0= ruleExpression ) ) )", 76, 0, input);
+
+                throw nvae;
+            }
+            switch (alt76) {
+                case 1 :
+                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5231:2: ( (lv_slice_0_0= ':' ) )
+                    {
+                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5231:2: ( (lv_slice_0_0= ':' ) )
+                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5232:1: (lv_slice_0_0= ':' )
+                    {
+                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5232:1: (lv_slice_0_0= ':' )
+                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5233:3: lv_slice_0_0= ':'
+                    {
+                    lv_slice_0_0=(Token)input.LT(1);
+                    match(input,21,FOLLOW_21_in_ruleArraySubscript9283); 
+
+                            createLeafNode(grammarAccess.getArraySubscriptAccess().getSliceColonKeyword_0_0(), "slice"); 
+                        
+
+                    	        if (current==null) {
+                    	            current = factory.create(grammarAccess.getArraySubscriptRule().getType().getClassifier());
+                    	            associateNodeWithAstElement(currentNode, current);
+                    	        }
+                    	        
+                    	        try {
+                    	       		set(current, "slice", true, ":", lastConsumedNode);
+                    	        } catch (ValueConverterException vce) {
+                    				handleValueConverterException(vce);
+                    	        }
+                    	    
+
+                    }
+
+
+                    }
+
+
+                    }
+                    break;
+                case 2 :
+                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5253:6: ( (lv_expression_1_0= ruleExpression ) )
+                    {
+                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5253:6: ( (lv_expression_1_0= ruleExpression ) )
+                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5254:1: (lv_expression_1_0= ruleExpression )
+                    {
+                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5254:1: (lv_expression_1_0= ruleExpression )
+                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5255:3: lv_expression_1_0= ruleExpression
+                    {
+                     
+                    	        currentNode=createCompositeNode(grammarAccess.getArraySubscriptAccess().getExpressionExpressionParserRuleCall_1_0(), currentNode); 
+                    	    
+                    pushFollow(FOLLOW_ruleExpression_in_ruleArraySubscript9323);
+                    lv_expression_1_0=ruleExpression();
+                    _fsp--;
+
+
+                    	        if (current==null) {
+                    	            current = factory.create(grammarAccess.getArraySubscriptRule().getType().getClassifier());
+                    	            associateNodeWithAstElement(currentNode.getParent(), current);
+                    	        }
+                    	        try {
+                    	       		set(
+                    	       			current, 
+                    	       			"expression",
+                    	        		lv_expression_1_0, 
+                    	        		"Expression", 
+                    	        		currentNode);
+                    	        } catch (ValueConverterException vce) {
+                    				handleValueConverterException(vce);
+                    	        }
+                    	        currentNode = currentNode.getParent();
+                    	    
+
+                    }
+
+
+                    }
+
+
+                    }
+                    break;
+
+            }
+
+
+            }
+
+             resetLookahead(); 
+                	lastConsumedNode = currentNode;
+                
+        }
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
+                appendSkippedTokens();
+            } 
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end ruleArraySubscript
 
 
     // $ANTLR start entryRuleOperationCall
-    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5216:1: entryRuleOperationCall returns [EObject current=null] : iv_ruleOperationCall= ruleOperationCall EOF ;
+    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5285:1: entryRuleOperationCall returns [EObject current=null] : iv_ruleOperationCall= ruleOperationCall EOF ;
     public final EObject entryRuleOperationCall() throws RecognitionException {
         EObject current = null;
 
@@ -11633,16 +11799,16 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5217:2: (iv_ruleOperationCall= ruleOperationCall EOF )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5218:2: iv_ruleOperationCall= ruleOperationCall EOF
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5286:2: (iv_ruleOperationCall= ruleOperationCall EOF )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5287:2: iv_ruleOperationCall= ruleOperationCall EOF
             {
              currentNode = createCompositeNode(grammarAccess.getOperationCallRule(), currentNode); 
-            pushFollow(FOLLOW_ruleOperationCall_in_entryRuleOperationCall9230);
+            pushFollow(FOLLOW_ruleOperationCall_in_entryRuleOperationCall9359);
             iv_ruleOperationCall=ruleOperationCall();
             _fsp--;
 
              current =iv_ruleOperationCall; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleOperationCall9240); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleOperationCall9369); 
 
             }
 
@@ -11660,7 +11826,7 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleOperationCall
-    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5225:1: ruleOperationCall returns [EObject current=null] : ( () '(' ( ( (lv_arguments_2_0= ruleExpression ) ) ( ',' ( (lv_arguments_4_0= ruleExpression ) ) )* )? ')' ) ;
+    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5294:1: ruleOperationCall returns [EObject current=null] : ( () '(' ( ( (lv_arguments_2_0= ruleExpression ) ) ( ',' ( (lv_arguments_4_0= ruleExpression ) ) )* )? ')' ) ;
     public final EObject ruleOperationCall() throws RecognitionException {
         EObject current = null;
 
@@ -11672,14 +11838,14 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5230:6: ( ( () '(' ( ( (lv_arguments_2_0= ruleExpression ) ) ( ',' ( (lv_arguments_4_0= ruleExpression ) ) )* )? ')' ) )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5231:1: ( () '(' ( ( (lv_arguments_2_0= ruleExpression ) ) ( ',' ( (lv_arguments_4_0= ruleExpression ) ) )* )? ')' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5299:6: ( ( () '(' ( ( (lv_arguments_2_0= ruleExpression ) ) ( ',' ( (lv_arguments_4_0= ruleExpression ) ) )* )? ')' ) )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5300:1: ( () '(' ( ( (lv_arguments_2_0= ruleExpression ) ) ( ',' ( (lv_arguments_4_0= ruleExpression ) ) )* )? ')' )
             {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5231:1: ( () '(' ( ( (lv_arguments_2_0= ruleExpression ) ) ( ',' ( (lv_arguments_4_0= ruleExpression ) ) )* )? ')' )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5231:2: () '(' ( ( (lv_arguments_2_0= ruleExpression ) ) ( ',' ( (lv_arguments_4_0= ruleExpression ) ) )* )? ')'
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5300:1: ( () '(' ( ( (lv_arguments_2_0= ruleExpression ) ) ( ',' ( (lv_arguments_4_0= ruleExpression ) ) )* )? ')' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5300:2: () '(' ( ( (lv_arguments_2_0= ruleExpression ) ) ( ',' ( (lv_arguments_4_0= ruleExpression ) ) )* )? ')'
             {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5231:2: ()
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5232:5: 
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5300:2: ()
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5301:5: 
             {
              
                     temp=factory.create(grammarAccess.getOperationCallAccess().getOperationCallAction_0().getType().getClassifier());
@@ -11694,31 +11860,31 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
             }
 
-            match(input,26,FOLLOW_26_in_ruleOperationCall9284); 
+            match(input,26,FOLLOW_26_in_ruleOperationCall9413); 
 
                     createLeafNode(grammarAccess.getOperationCallAccess().getLeftParenthesisKeyword_1(), null); 
                 
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5246:1: ( ( (lv_arguments_2_0= ruleExpression ) ) ( ',' ( (lv_arguments_4_0= ruleExpression ) ) )* )?
-            int alt77=2;
-            int LA77_0 = input.LA(1);
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5315:1: ( ( (lv_arguments_2_0= ruleExpression ) ) ( ',' ( (lv_arguments_4_0= ruleExpression ) ) )* )?
+            int alt78=2;
+            int LA78_0 = input.LA(1);
 
-            if ( ((LA77_0>=RULE_ID && LA77_0<=RULE_STRING)||LA77_0==13||LA77_0==26||LA77_0==34||LA77_0==41||LA77_0==43||LA77_0==46||LA77_0==54||(LA77_0>=57 && LA77_0<=58)||LA77_0==62||LA77_0==75||(LA77_0>=77 && LA77_0<=78)) ) {
-                alt77=1;
+            if ( ((LA78_0>=RULE_ID && LA78_0<=RULE_STRING)||LA78_0==13||LA78_0==26||LA78_0==34||LA78_0==41||LA78_0==43||LA78_0==46||LA78_0==54||(LA78_0>=57 && LA78_0<=58)||LA78_0==62||LA78_0==75||(LA78_0>=77 && LA78_0<=78)) ) {
+                alt78=1;
             }
-            switch (alt77) {
+            switch (alt78) {
                 case 1 :
-                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5246:2: ( (lv_arguments_2_0= ruleExpression ) ) ( ',' ( (lv_arguments_4_0= ruleExpression ) ) )*
+                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5315:2: ( (lv_arguments_2_0= ruleExpression ) ) ( ',' ( (lv_arguments_4_0= ruleExpression ) ) )*
                     {
-                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5246:2: ( (lv_arguments_2_0= ruleExpression ) )
-                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5247:1: (lv_arguments_2_0= ruleExpression )
+                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5315:2: ( (lv_arguments_2_0= ruleExpression ) )
+                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5316:1: (lv_arguments_2_0= ruleExpression )
                     {
-                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5247:1: (lv_arguments_2_0= ruleExpression )
-                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5248:3: lv_arguments_2_0= ruleExpression
+                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5316:1: (lv_arguments_2_0= ruleExpression )
+                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5317:3: lv_arguments_2_0= ruleExpression
                     {
                      
                     	        currentNode=createCompositeNode(grammarAccess.getOperationCallAccess().getArgumentsExpressionParserRuleCall_2_0_0(), currentNode); 
                     	    
-                    pushFollow(FOLLOW_ruleExpression_in_ruleOperationCall9306);
+                    pushFollow(FOLLOW_ruleExpression_in_ruleOperationCall9435);
                     lv_arguments_2_0=ruleExpression();
                     _fsp--;
 
@@ -11745,35 +11911,35 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5270:2: ( ',' ( (lv_arguments_4_0= ruleExpression ) ) )*
-                    loop76:
+                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5339:2: ( ',' ( (lv_arguments_4_0= ruleExpression ) ) )*
+                    loop77:
                     do {
-                        int alt76=2;
-                        int LA76_0 = input.LA(1);
+                        int alt77=2;
+                        int LA77_0 = input.LA(1);
 
-                        if ( (LA76_0==16) ) {
-                            alt76=1;
+                        if ( (LA77_0==16) ) {
+                            alt77=1;
                         }
 
 
-                        switch (alt76) {
+                        switch (alt77) {
                     	case 1 :
-                    	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5270:4: ',' ( (lv_arguments_4_0= ruleExpression ) )
+                    	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5339:4: ',' ( (lv_arguments_4_0= ruleExpression ) )
                     	    {
-                    	    match(input,16,FOLLOW_16_in_ruleOperationCall9317); 
+                    	    match(input,16,FOLLOW_16_in_ruleOperationCall9446); 
 
                     	            createLeafNode(grammarAccess.getOperationCallAccess().getCommaKeyword_2_1_0(), null); 
                     	        
-                    	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5274:1: ( (lv_arguments_4_0= ruleExpression ) )
-                    	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5275:1: (lv_arguments_4_0= ruleExpression )
+                    	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5343:1: ( (lv_arguments_4_0= ruleExpression ) )
+                    	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5344:1: (lv_arguments_4_0= ruleExpression )
                     	    {
-                    	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5275:1: (lv_arguments_4_0= ruleExpression )
-                    	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5276:3: lv_arguments_4_0= ruleExpression
+                    	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5344:1: (lv_arguments_4_0= ruleExpression )
+                    	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5345:3: lv_arguments_4_0= ruleExpression
                     	    {
                     	     
                     	    	        currentNode=createCompositeNode(grammarAccess.getOperationCallAccess().getArgumentsExpressionParserRuleCall_2_1_1_0(), currentNode); 
                     	    	    
-                    	    pushFollow(FOLLOW_ruleExpression_in_ruleOperationCall9338);
+                    	    pushFollow(FOLLOW_ruleExpression_in_ruleOperationCall9467);
                     	    lv_arguments_4_0=ruleExpression();
                     	    _fsp--;
 
@@ -11805,7 +11971,7 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    break loop76;
+                    	    break loop77;
                         }
                     } while (true);
 
@@ -11815,7 +11981,7 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
             }
 
-            match(input,27,FOLLOW_27_in_ruleOperationCall9352); 
+            match(input,27,FOLLOW_27_in_ruleOperationCall9481); 
 
                     createLeafNode(grammarAccess.getOperationCallAccess().getRightParenthesisKeyword_3(), null); 
                 
@@ -11842,7 +12008,7 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start entryRuleIterationCall
-    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5310:1: entryRuleIterationCall returns [EObject current=null] : iv_ruleIterationCall= ruleIterationCall EOF ;
+    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5379:1: entryRuleIterationCall returns [EObject current=null] : iv_ruleIterationCall= ruleIterationCall EOF ;
     public final EObject entryRuleIterationCall() throws RecognitionException {
         EObject current = null;
 
@@ -11850,16 +12016,16 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5311:2: (iv_ruleIterationCall= ruleIterationCall EOF )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5312:2: iv_ruleIterationCall= ruleIterationCall EOF
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5380:2: (iv_ruleIterationCall= ruleIterationCall EOF )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5381:2: iv_ruleIterationCall= ruleIterationCall EOF
             {
              currentNode = createCompositeNode(grammarAccess.getIterationCallRule(), currentNode); 
-            pushFollow(FOLLOW_ruleIterationCall_in_entryRuleIterationCall9388);
+            pushFollow(FOLLOW_ruleIterationCall_in_entryRuleIterationCall9517);
             iv_ruleIterationCall=ruleIterationCall();
             _fsp--;
 
              current =iv_ruleIterationCall; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleIterationCall9398); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleIterationCall9527); 
 
             }
 
@@ -11877,7 +12043,7 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleIterationCall
-    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5319:1: ruleIterationCall returns [EObject current=null] : ( () '(' ( (lv_variables_2_0= ruleIterationVariable ) ) ( ',' ( (lv_variables_4_0= ruleIterationVariable ) ) )* ( ';' ( (lv_accumulator_6_0= ruleIterationAccumulator ) ) )? '|' ( (lv_expression_8_0= ruleExpression ) ) ')' ) ;
+    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5388:1: ruleIterationCall returns [EObject current=null] : ( () '(' ( (lv_variables_2_0= ruleIterationVariable ) ) ( ',' ( (lv_variables_4_0= ruleIterationVariable ) ) )* ( ';' ( (lv_accumulator_6_0= ruleIterationAccumulator ) ) )? '|' ( (lv_expression_8_0= ruleExpression ) ) ')' ) ;
     public final EObject ruleIterationCall() throws RecognitionException {
         EObject current = null;
 
@@ -11893,14 +12059,14 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5324:6: ( ( () '(' ( (lv_variables_2_0= ruleIterationVariable ) ) ( ',' ( (lv_variables_4_0= ruleIterationVariable ) ) )* ( ';' ( (lv_accumulator_6_0= ruleIterationAccumulator ) ) )? '|' ( (lv_expression_8_0= ruleExpression ) ) ')' ) )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5325:1: ( () '(' ( (lv_variables_2_0= ruleIterationVariable ) ) ( ',' ( (lv_variables_4_0= ruleIterationVariable ) ) )* ( ';' ( (lv_accumulator_6_0= ruleIterationAccumulator ) ) )? '|' ( (lv_expression_8_0= ruleExpression ) ) ')' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5393:6: ( ( () '(' ( (lv_variables_2_0= ruleIterationVariable ) ) ( ',' ( (lv_variables_4_0= ruleIterationVariable ) ) )* ( ';' ( (lv_accumulator_6_0= ruleIterationAccumulator ) ) )? '|' ( (lv_expression_8_0= ruleExpression ) ) ')' ) )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5394:1: ( () '(' ( (lv_variables_2_0= ruleIterationVariable ) ) ( ',' ( (lv_variables_4_0= ruleIterationVariable ) ) )* ( ';' ( (lv_accumulator_6_0= ruleIterationAccumulator ) ) )? '|' ( (lv_expression_8_0= ruleExpression ) ) ')' )
             {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5325:1: ( () '(' ( (lv_variables_2_0= ruleIterationVariable ) ) ( ',' ( (lv_variables_4_0= ruleIterationVariable ) ) )* ( ';' ( (lv_accumulator_6_0= ruleIterationAccumulator ) ) )? '|' ( (lv_expression_8_0= ruleExpression ) ) ')' )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5325:2: () '(' ( (lv_variables_2_0= ruleIterationVariable ) ) ( ',' ( (lv_variables_4_0= ruleIterationVariable ) ) )* ( ';' ( (lv_accumulator_6_0= ruleIterationAccumulator ) ) )? '|' ( (lv_expression_8_0= ruleExpression ) ) ')'
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5394:1: ( () '(' ( (lv_variables_2_0= ruleIterationVariable ) ) ( ',' ( (lv_variables_4_0= ruleIterationVariable ) ) )* ( ';' ( (lv_accumulator_6_0= ruleIterationAccumulator ) ) )? '|' ( (lv_expression_8_0= ruleExpression ) ) ')' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5394:2: () '(' ( (lv_variables_2_0= ruleIterationVariable ) ) ( ',' ( (lv_variables_4_0= ruleIterationVariable ) ) )* ( ';' ( (lv_accumulator_6_0= ruleIterationAccumulator ) ) )? '|' ( (lv_expression_8_0= ruleExpression ) ) ')'
             {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5325:2: ()
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5326:5: 
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5394:2: ()
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5395:5: 
             {
              
                     temp=factory.create(grammarAccess.getIterationCallAccess().getIterationCallAction_0().getType().getClassifier());
@@ -11915,20 +12081,20 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
             }
 
-            match(input,26,FOLLOW_26_in_ruleIterationCall9442); 
+            match(input,26,FOLLOW_26_in_ruleIterationCall9571); 
 
                     createLeafNode(grammarAccess.getIterationCallAccess().getLeftParenthesisKeyword_1(), null); 
                 
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5340:1: ( (lv_variables_2_0= ruleIterationVariable ) )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5341:1: (lv_variables_2_0= ruleIterationVariable )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5409:1: ( (lv_variables_2_0= ruleIterationVariable ) )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5410:1: (lv_variables_2_0= ruleIterationVariable )
             {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5341:1: (lv_variables_2_0= ruleIterationVariable )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5342:3: lv_variables_2_0= ruleIterationVariable
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5410:1: (lv_variables_2_0= ruleIterationVariable )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5411:3: lv_variables_2_0= ruleIterationVariable
             {
              
             	        currentNode=createCompositeNode(grammarAccess.getIterationCallAccess().getVariablesIterationVariableParserRuleCall_2_0(), currentNode); 
             	    
-            pushFollow(FOLLOW_ruleIterationVariable_in_ruleIterationCall9463);
+            pushFollow(FOLLOW_ruleIterationVariable_in_ruleIterationCall9592);
             lv_variables_2_0=ruleIterationVariable();
             _fsp--;
 
@@ -11955,35 +12121,35 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5364:2: ( ',' ( (lv_variables_4_0= ruleIterationVariable ) ) )*
-            loop78:
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5433:2: ( ',' ( (lv_variables_4_0= ruleIterationVariable ) ) )*
+            loop79:
             do {
-                int alt78=2;
-                int LA78_0 = input.LA(1);
+                int alt79=2;
+                int LA79_0 = input.LA(1);
 
-                if ( (LA78_0==16) ) {
-                    alt78=1;
+                if ( (LA79_0==16) ) {
+                    alt79=1;
                 }
 
 
-                switch (alt78) {
+                switch (alt79) {
             	case 1 :
-            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5364:4: ',' ( (lv_variables_4_0= ruleIterationVariable ) )
+            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5433:4: ',' ( (lv_variables_4_0= ruleIterationVariable ) )
             	    {
-            	    match(input,16,FOLLOW_16_in_ruleIterationCall9474); 
+            	    match(input,16,FOLLOW_16_in_ruleIterationCall9603); 
 
             	            createLeafNode(grammarAccess.getIterationCallAccess().getCommaKeyword_3_0(), null); 
             	        
-            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5368:1: ( (lv_variables_4_0= ruleIterationVariable ) )
-            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5369:1: (lv_variables_4_0= ruleIterationVariable )
+            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5437:1: ( (lv_variables_4_0= ruleIterationVariable ) )
+            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5438:1: (lv_variables_4_0= ruleIterationVariable )
             	    {
-            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5369:1: (lv_variables_4_0= ruleIterationVariable )
-            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5370:3: lv_variables_4_0= ruleIterationVariable
+            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5438:1: (lv_variables_4_0= ruleIterationVariable )
+            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5439:3: lv_variables_4_0= ruleIterationVariable
             	    {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.getIterationCallAccess().getVariablesIterationVariableParserRuleCall_3_1_0(), currentNode); 
             	    	    
-            	    pushFollow(FOLLOW_ruleIterationVariable_in_ruleIterationCall9495);
+            	    pushFollow(FOLLOW_ruleIterationVariable_in_ruleIterationCall9624);
             	    lv_variables_4_0=ruleIterationVariable();
             	    _fsp--;
 
@@ -12015,35 +12181,35 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop78;
+            	    break loop79;
                 }
             } while (true);
 
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5392:4: ( ';' ( (lv_accumulator_6_0= ruleIterationAccumulator ) ) )?
-            int alt79=2;
-            int LA79_0 = input.LA(1);
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5461:4: ( ';' ( (lv_accumulator_6_0= ruleIterationAccumulator ) ) )?
+            int alt80=2;
+            int LA80_0 = input.LA(1);
 
-            if ( (LA79_0==19) ) {
-                alt79=1;
+            if ( (LA80_0==19) ) {
+                alt80=1;
             }
-            switch (alt79) {
+            switch (alt80) {
                 case 1 :
-                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5392:6: ';' ( (lv_accumulator_6_0= ruleIterationAccumulator ) )
+                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5461:6: ';' ( (lv_accumulator_6_0= ruleIterationAccumulator ) )
                     {
-                    match(input,19,FOLLOW_19_in_ruleIterationCall9508); 
+                    match(input,19,FOLLOW_19_in_ruleIterationCall9637); 
 
                             createLeafNode(grammarAccess.getIterationCallAccess().getSemicolonKeyword_4_0(), null); 
                         
-                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5396:1: ( (lv_accumulator_6_0= ruleIterationAccumulator ) )
-                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5397:1: (lv_accumulator_6_0= ruleIterationAccumulator )
+                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5465:1: ( (lv_accumulator_6_0= ruleIterationAccumulator ) )
+                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5466:1: (lv_accumulator_6_0= ruleIterationAccumulator )
                     {
-                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5397:1: (lv_accumulator_6_0= ruleIterationAccumulator )
-                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5398:3: lv_accumulator_6_0= ruleIterationAccumulator
+                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5466:1: (lv_accumulator_6_0= ruleIterationAccumulator )
+                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5467:3: lv_accumulator_6_0= ruleIterationAccumulator
                     {
                      
                     	        currentNode=createCompositeNode(grammarAccess.getIterationCallAccess().getAccumulatorIterationAccumulatorParserRuleCall_4_1_0(), currentNode); 
                     	    
-                    pushFollow(FOLLOW_ruleIterationAccumulator_in_ruleIterationCall9529);
+                    pushFollow(FOLLOW_ruleIterationAccumulator_in_ruleIterationCall9658);
                     lv_accumulator_6_0=ruleIterationAccumulator();
                     _fsp--;
 
@@ -12076,20 +12242,20 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
             }
 
-            match(input,55,FOLLOW_55_in_ruleIterationCall9541); 
+            match(input,55,FOLLOW_55_in_ruleIterationCall9670); 
 
                     createLeafNode(grammarAccess.getIterationCallAccess().getVerticalLineKeyword_5(), null); 
                 
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5424:1: ( (lv_expression_8_0= ruleExpression ) )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5425:1: (lv_expression_8_0= ruleExpression )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5493:1: ( (lv_expression_8_0= ruleExpression ) )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5494:1: (lv_expression_8_0= ruleExpression )
             {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5425:1: (lv_expression_8_0= ruleExpression )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5426:3: lv_expression_8_0= ruleExpression
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5494:1: (lv_expression_8_0= ruleExpression )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5495:3: lv_expression_8_0= ruleExpression
             {
              
             	        currentNode=createCompositeNode(grammarAccess.getIterationCallAccess().getExpressionExpressionParserRuleCall_6_0(), currentNode); 
             	    
-            pushFollow(FOLLOW_ruleExpression_in_ruleIterationCall9562);
+            pushFollow(FOLLOW_ruleExpression_in_ruleIterationCall9691);
             lv_expression_8_0=ruleExpression();
             _fsp--;
 
@@ -12116,7 +12282,7 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
             }
 
-            match(input,27,FOLLOW_27_in_ruleIterationCall9572); 
+            match(input,27,FOLLOW_27_in_ruleIterationCall9701); 
 
                     createLeafNode(grammarAccess.getIterationCallAccess().getRightParenthesisKeyword_7(), null); 
                 
@@ -12143,7 +12309,7 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start entryRuleIterationVariable
-    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5460:1: entryRuleIterationVariable returns [EObject current=null] : iv_ruleIterationVariable= ruleIterationVariable EOF ;
+    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5529:1: entryRuleIterationVariable returns [EObject current=null] : iv_ruleIterationVariable= ruleIterationVariable EOF ;
     public final EObject entryRuleIterationVariable() throws RecognitionException {
         EObject current = null;
 
@@ -12151,16 +12317,16 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5461:2: (iv_ruleIterationVariable= ruleIterationVariable EOF )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5462:2: iv_ruleIterationVariable= ruleIterationVariable EOF
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5530:2: (iv_ruleIterationVariable= ruleIterationVariable EOF )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5531:2: iv_ruleIterationVariable= ruleIterationVariable EOF
             {
              currentNode = createCompositeNode(grammarAccess.getIterationVariableRule(), currentNode); 
-            pushFollow(FOLLOW_ruleIterationVariable_in_entryRuleIterationVariable9608);
+            pushFollow(FOLLOW_ruleIterationVariable_in_entryRuleIterationVariable9737);
             iv_ruleIterationVariable=ruleIterationVariable();
             _fsp--;
 
              current =iv_ruleIterationVariable; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleIterationVariable9618); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleIterationVariable9747); 
 
             }
 
@@ -12178,7 +12344,7 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleIterationVariable
-    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5469:1: ruleIterationVariable returns [EObject current=null] : ( (lv_name_0_0= RULE_ID ) ) ;
+    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5538:1: ruleIterationVariable returns [EObject current=null] : ( (lv_name_0_0= RULE_ID ) ) ;
     public final EObject ruleIterationVariable() throws RecognitionException {
         EObject current = null;
 
@@ -12187,17 +12353,17 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5474:6: ( ( (lv_name_0_0= RULE_ID ) ) )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5475:1: ( (lv_name_0_0= RULE_ID ) )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5543:6: ( ( (lv_name_0_0= RULE_ID ) ) )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5544:1: ( (lv_name_0_0= RULE_ID ) )
             {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5475:1: ( (lv_name_0_0= RULE_ID ) )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5476:1: (lv_name_0_0= RULE_ID )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5544:1: ( (lv_name_0_0= RULE_ID ) )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5545:1: (lv_name_0_0= RULE_ID )
             {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5476:1: (lv_name_0_0= RULE_ID )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5477:3: lv_name_0_0= RULE_ID
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5545:1: (lv_name_0_0= RULE_ID )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5546:3: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleIterationVariable9659); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleIterationVariable9788); 
 
             			createLeafNode(grammarAccess.getIterationVariableAccess().getNameIDTerminalRuleCall_0(), "name"); 
             		
@@ -12243,7 +12409,7 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start entryRuleIterationAccumulator
-    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5507:1: entryRuleIterationAccumulator returns [EObject current=null] : iv_ruleIterationAccumulator= ruleIterationAccumulator EOF ;
+    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5576:1: entryRuleIterationAccumulator returns [EObject current=null] : iv_ruleIterationAccumulator= ruleIterationAccumulator EOF ;
     public final EObject entryRuleIterationAccumulator() throws RecognitionException {
         EObject current = null;
 
@@ -12251,16 +12417,16 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5508:2: (iv_ruleIterationAccumulator= ruleIterationAccumulator EOF )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5509:2: iv_ruleIterationAccumulator= ruleIterationAccumulator EOF
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5577:2: (iv_ruleIterationAccumulator= ruleIterationAccumulator EOF )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5578:2: iv_ruleIterationAccumulator= ruleIterationAccumulator EOF
             {
              currentNode = createCompositeNode(grammarAccess.getIterationAccumulatorRule(), currentNode); 
-            pushFollow(FOLLOW_ruleIterationAccumulator_in_entryRuleIterationAccumulator9699);
+            pushFollow(FOLLOW_ruleIterationAccumulator_in_entryRuleIterationAccumulator9828);
             iv_ruleIterationAccumulator=ruleIterationAccumulator();
             _fsp--;
 
              current =iv_ruleIterationAccumulator; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleIterationAccumulator9709); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleIterationAccumulator9838); 
 
             }
 
@@ -12278,7 +12444,7 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleIterationAccumulator
-    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5516:1: ruleIterationAccumulator returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) '=' ( (lv_initializer_2_0= ruleExpression ) ) ) ;
+    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5585:1: ruleIterationAccumulator returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) '=' ( (lv_initializer_2_0= ruleExpression ) ) ) ;
     public final EObject ruleIterationAccumulator() throws RecognitionException {
         EObject current = null;
 
@@ -12289,20 +12455,20 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5521:6: ( ( ( (lv_name_0_0= RULE_ID ) ) '=' ( (lv_initializer_2_0= ruleExpression ) ) ) )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5522:1: ( ( (lv_name_0_0= RULE_ID ) ) '=' ( (lv_initializer_2_0= ruleExpression ) ) )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5590:6: ( ( ( (lv_name_0_0= RULE_ID ) ) '=' ( (lv_initializer_2_0= ruleExpression ) ) ) )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5591:1: ( ( (lv_name_0_0= RULE_ID ) ) '=' ( (lv_initializer_2_0= ruleExpression ) ) )
             {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5522:1: ( ( (lv_name_0_0= RULE_ID ) ) '=' ( (lv_initializer_2_0= ruleExpression ) ) )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5522:2: ( (lv_name_0_0= RULE_ID ) ) '=' ( (lv_initializer_2_0= ruleExpression ) )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5591:1: ( ( (lv_name_0_0= RULE_ID ) ) '=' ( (lv_initializer_2_0= ruleExpression ) ) )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5591:2: ( (lv_name_0_0= RULE_ID ) ) '=' ( (lv_initializer_2_0= ruleExpression ) )
             {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5522:2: ( (lv_name_0_0= RULE_ID ) )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5523:1: (lv_name_0_0= RULE_ID )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5591:2: ( (lv_name_0_0= RULE_ID ) )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5592:1: (lv_name_0_0= RULE_ID )
             {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5523:1: (lv_name_0_0= RULE_ID )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5524:3: lv_name_0_0= RULE_ID
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5592:1: (lv_name_0_0= RULE_ID )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5593:3: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleIterationAccumulator9751); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleIterationAccumulator9880); 
 
             			createLeafNode(grammarAccess.getIterationAccumulatorAccess().getNameIDTerminalRuleCall_0_0(), "name"); 
             		
@@ -12328,20 +12494,20 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
             }
 
-            match(input,18,FOLLOW_18_in_ruleIterationAccumulator9766); 
+            match(input,18,FOLLOW_18_in_ruleIterationAccumulator9895); 
 
                     createLeafNode(grammarAccess.getIterationAccumulatorAccess().getEqualsSignKeyword_1(), null); 
                 
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5550:1: ( (lv_initializer_2_0= ruleExpression ) )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5551:1: (lv_initializer_2_0= ruleExpression )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5619:1: ( (lv_initializer_2_0= ruleExpression ) )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5620:1: (lv_initializer_2_0= ruleExpression )
             {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5551:1: (lv_initializer_2_0= ruleExpression )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5552:3: lv_initializer_2_0= ruleExpression
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5620:1: (lv_initializer_2_0= ruleExpression )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5621:3: lv_initializer_2_0= ruleExpression
             {
              
             	        currentNode=createCompositeNode(grammarAccess.getIterationAccumulatorAccess().getInitializerExpressionParserRuleCall_2_0(), currentNode); 
             	    
-            pushFollow(FOLLOW_ruleExpression_in_ruleIterationAccumulator9787);
+            pushFollow(FOLLOW_ruleExpression_in_ruleIterationAccumulator9916);
             lv_initializer_2_0=ruleExpression();
             _fsp--;
 
@@ -12388,172 +12554,6 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
         return current;
     }
     // $ANTLR end ruleIterationAccumulator
-
-
-    // $ANTLR start entryRuleSubscript
-    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5582:1: entryRuleSubscript returns [EObject current=null] : iv_ruleSubscript= ruleSubscript EOF ;
-    public final EObject entryRuleSubscript() throws RecognitionException {
-        EObject current = null;
-
-        EObject iv_ruleSubscript = null;
-
-
-        try {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5583:2: (iv_ruleSubscript= ruleSubscript EOF )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5584:2: iv_ruleSubscript= ruleSubscript EOF
-            {
-             currentNode = createCompositeNode(grammarAccess.getSubscriptRule(), currentNode); 
-            pushFollow(FOLLOW_ruleSubscript_in_entryRuleSubscript9823);
-            iv_ruleSubscript=ruleSubscript();
-            _fsp--;
-
-             current =iv_ruleSubscript; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleSubscript9833); 
-
-            }
-
-        }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
-                appendSkippedTokens();
-            } 
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end entryRuleSubscript
-
-
-    // $ANTLR start ruleSubscript
-    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5591:1: ruleSubscript returns [EObject current=null] : ( ( (lv_slice_0_0= ':' ) ) | ( (lv_expression_1_0= ruleExpression ) ) ) ;
-    public final EObject ruleSubscript() throws RecognitionException {
-        EObject current = null;
-
-        Token lv_slice_0_0=null;
-        EObject lv_expression_1_0 = null;
-
-
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
-            
-        try {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5596:6: ( ( ( (lv_slice_0_0= ':' ) ) | ( (lv_expression_1_0= ruleExpression ) ) ) )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5597:1: ( ( (lv_slice_0_0= ':' ) ) | ( (lv_expression_1_0= ruleExpression ) ) )
-            {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5597:1: ( ( (lv_slice_0_0= ':' ) ) | ( (lv_expression_1_0= ruleExpression ) ) )
-            int alt80=2;
-            int LA80_0 = input.LA(1);
-
-            if ( (LA80_0==21) ) {
-                alt80=1;
-            }
-            else if ( ((LA80_0>=RULE_ID && LA80_0<=RULE_STRING)||LA80_0==13||LA80_0==26||LA80_0==34||LA80_0==41||LA80_0==43||LA80_0==46||LA80_0==54||(LA80_0>=57 && LA80_0<=58)||LA80_0==62||LA80_0==75||(LA80_0>=77 && LA80_0<=78)) ) {
-                alt80=2;
-            }
-            else {
-                NoViableAltException nvae =
-                    new NoViableAltException("5597:1: ( ( (lv_slice_0_0= ':' ) ) | ( (lv_expression_1_0= ruleExpression ) ) )", 80, 0, input);
-
-                throw nvae;
-            }
-            switch (alt80) {
-                case 1 :
-                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5597:2: ( (lv_slice_0_0= ':' ) )
-                    {
-                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5597:2: ( (lv_slice_0_0= ':' ) )
-                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5598:1: (lv_slice_0_0= ':' )
-                    {
-                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5598:1: (lv_slice_0_0= ':' )
-                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5599:3: lv_slice_0_0= ':'
-                    {
-                    lv_slice_0_0=(Token)input.LT(1);
-                    match(input,21,FOLLOW_21_in_ruleSubscript9876); 
-
-                            createLeafNode(grammarAccess.getSubscriptAccess().getSliceColonKeyword_0_0(), "slice"); 
-                        
-
-                    	        if (current==null) {
-                    	            current = factory.create(grammarAccess.getSubscriptRule().getType().getClassifier());
-                    	            associateNodeWithAstElement(currentNode, current);
-                    	        }
-                    	        
-                    	        try {
-                    	       		set(current, "slice", true, ":", lastConsumedNode);
-                    	        } catch (ValueConverterException vce) {
-                    				handleValueConverterException(vce);
-                    	        }
-                    	    
-
-                    }
-
-
-                    }
-
-
-                    }
-                    break;
-                case 2 :
-                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5619:6: ( (lv_expression_1_0= ruleExpression ) )
-                    {
-                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5619:6: ( (lv_expression_1_0= ruleExpression ) )
-                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5620:1: (lv_expression_1_0= ruleExpression )
-                    {
-                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5620:1: (lv_expression_1_0= ruleExpression )
-                    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:5621:3: lv_expression_1_0= ruleExpression
-                    {
-                     
-                    	        currentNode=createCompositeNode(grammarAccess.getSubscriptAccess().getExpressionExpressionParserRuleCall_1_0(), currentNode); 
-                    	    
-                    pushFollow(FOLLOW_ruleExpression_in_ruleSubscript9916);
-                    lv_expression_1_0=ruleExpression();
-                    _fsp--;
-
-
-                    	        if (current==null) {
-                    	            current = factory.create(grammarAccess.getSubscriptRule().getType().getClassifier());
-                    	            associateNodeWithAstElement(currentNode.getParent(), current);
-                    	        }
-                    	        try {
-                    	       		set(
-                    	       			current, 
-                    	       			"expression",
-                    	        		lv_expression_1_0, 
-                    	        		"Expression", 
-                    	        		currentNode);
-                    	        } catch (ValueConverterException vce) {
-                    				handleValueConverterException(vce);
-                    	        }
-                    	        currentNode = currentNode.getParent();
-                    	    
-
-                    }
-
-
-                    }
-
-
-                    }
-                    break;
-
-            }
-
-
-            }
-
-             resetLookahead(); 
-                	lastConsumedNode = currentNode;
-                
-        }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
-                appendSkippedTokens();
-            } 
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end ruleSubscript
 
 
     // $ANTLR start entryRuleArrayConstructionOperator
@@ -15969,7 +15969,7 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
             this.transition = DFA73_transition;
         }
         public String getDescription() {
-            return "5014:1: (this_FeatureReference_0= ruleFeatureReference | this_ArrayElementReference_1= ruleArrayElementReference | this_OperationCall_2= ruleOperationCall | this_IterationCall_3= ruleIterationCall )";
+            return "5014:1: (this_FeatureAccess_0= ruleFeatureAccess | this_ArrayElementAccess_1= ruleArrayElementAccess | this_OperationCall_2= ruleOperationCall | this_IterationCall_3= ruleIterationCall )";
         }
     }
  
@@ -16324,63 +16324,63 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_ruleStringLiteral_in_entryRuleStringLiteral8393 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleStringLiteral8403 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_STRING_in_ruleStringLiteral8444 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleFeatureCall_in_entryRuleFeatureCall8484 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleFeatureCall8494 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleCallablePrimaryExpression_in_ruleFeatureCall8542 = new BitSet(new long[]{0x0020000404000002L});
-    public static final BitSet FOLLOW_ruleFeatureCallPart_in_ruleFeatureCall8572 = new BitSet(new long[]{0x0020000404000002L});
-    public static final BitSet FOLLOW_ruleSimpleName_in_ruleFeatureCall8613 = new BitSet(new long[]{0x0020000404000002L});
-    public static final BitSet FOLLOW_ruleFeatureCallPart_in_ruleFeatureCall8634 = new BitSet(new long[]{0x0020000404000002L});
-    public static final BitSet FOLLOW_ruleSimpleName_in_entryRuleSimpleName8672 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleSimpleName8682 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleSimpleName8733 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSimpleName_in_entryRuleSimpleName8484 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleSimpleName8494 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleSimpleName8545 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleFeatureCall_in_entryRuleFeatureCall8586 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleFeatureCall8596 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleCallablePrimaryExpression_in_ruleFeatureCall8644 = new BitSet(new long[]{0x0020000404000002L});
+    public static final BitSet FOLLOW_ruleFeatureCallPart_in_ruleFeatureCall8674 = new BitSet(new long[]{0x0020000404000002L});
+    public static final BitSet FOLLOW_ruleSimpleName_in_ruleFeatureCall8715 = new BitSet(new long[]{0x0020000404000002L});
+    public static final BitSet FOLLOW_ruleFeatureCallPart_in_ruleFeatureCall8736 = new BitSet(new long[]{0x0020000404000002L});
     public static final BitSet FOLLOW_ruleFeatureCallPart_in_entryRuleFeatureCallPart8774 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleFeatureCallPart8784 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleFeatureReference_in_ruleFeatureCallPart8831 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleArrayElementReference_in_ruleFeatureCallPart8858 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleFeatureAccess_in_ruleFeatureCallPart8831 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleArrayElementAccess_in_ruleFeatureCallPart8858 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleOperationCall_in_ruleFeatureCallPart8885 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleIterationCall_in_ruleFeatureCallPart8912 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleFeatureReference_in_entryRuleFeatureReference8947 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleFeatureReference8957 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_53_in_ruleFeatureReference8992 = new BitSet(new long[]{0x0040000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleFeatureReference9011 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_54_in_ruleFeatureReference9032 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleArrayElementReference_in_entryRuleArrayElementReference9084 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleArrayElementReference9094 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_34_in_ruleArrayElementReference9129 = new BitSet(new long[]{0x46404A04042020F0L,0x0000000000006800L});
-    public static final BitSet FOLLOW_ruleSubscript_in_ruleArrayElementReference9150 = new BitSet(new long[]{0x0000000800010000L});
-    public static final BitSet FOLLOW_16_in_ruleArrayElementReference9161 = new BitSet(new long[]{0x46404A04042020F0L,0x0000000000006800L});
-    public static final BitSet FOLLOW_ruleSubscript_in_ruleArrayElementReference9182 = new BitSet(new long[]{0x0000000800010000L});
-    public static final BitSet FOLLOW_35_in_ruleArrayElementReference9194 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOperationCall_in_entryRuleOperationCall9230 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleOperationCall9240 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_26_in_ruleOperationCall9284 = new BitSet(new long[]{0x46404A040C0020F0L,0x0000000000006800L});
-    public static final BitSet FOLLOW_ruleExpression_in_ruleOperationCall9306 = new BitSet(new long[]{0x0000000008010000L});
-    public static final BitSet FOLLOW_16_in_ruleOperationCall9317 = new BitSet(new long[]{0x46404A04040020F0L,0x0000000000006800L});
-    public static final BitSet FOLLOW_ruleExpression_in_ruleOperationCall9338 = new BitSet(new long[]{0x0000000008010000L});
-    public static final BitSet FOLLOW_27_in_ruleOperationCall9352 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleIterationCall_in_entryRuleIterationCall9388 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleIterationCall9398 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_26_in_ruleIterationCall9442 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleIterationVariable_in_ruleIterationCall9463 = new BitSet(new long[]{0x0080000000090000L});
-    public static final BitSet FOLLOW_16_in_ruleIterationCall9474 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleIterationVariable_in_ruleIterationCall9495 = new BitSet(new long[]{0x0080000000090000L});
-    public static final BitSet FOLLOW_19_in_ruleIterationCall9508 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleIterationAccumulator_in_ruleIterationCall9529 = new BitSet(new long[]{0x0080000000000000L});
-    public static final BitSet FOLLOW_55_in_ruleIterationCall9541 = new BitSet(new long[]{0x46404A04040020F0L,0x0000000000006800L});
-    public static final BitSet FOLLOW_ruleExpression_in_ruleIterationCall9562 = new BitSet(new long[]{0x0000000008000000L});
-    public static final BitSet FOLLOW_27_in_ruleIterationCall9572 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleIterationVariable_in_entryRuleIterationVariable9608 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleIterationVariable9618 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleIterationVariable9659 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleIterationAccumulator_in_entryRuleIterationAccumulator9699 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleIterationAccumulator9709 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleIterationAccumulator9751 = new BitSet(new long[]{0x0000000000040000L});
-    public static final BitSet FOLLOW_18_in_ruleIterationAccumulator9766 = new BitSet(new long[]{0x46404A04040020F0L,0x0000000000006800L});
-    public static final BitSet FOLLOW_ruleExpression_in_ruleIterationAccumulator9787 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSubscript_in_entryRuleSubscript9823 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleSubscript9833 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_21_in_ruleSubscript9876 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpression_in_ruleSubscript9916 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleFeatureAccess_in_entryRuleFeatureAccess8947 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleFeatureAccess8957 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_53_in_ruleFeatureAccess8992 = new BitSet(new long[]{0x0040000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleFeatureAccess9011 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_54_in_ruleFeatureAccess9032 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleArrayElementAccess_in_entryRuleArrayElementAccess9084 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleArrayElementAccess9094 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_34_in_ruleArrayElementAccess9129 = new BitSet(new long[]{0x46404A04042020F0L,0x0000000000006800L});
+    public static final BitSet FOLLOW_ruleArraySubscript_in_ruleArrayElementAccess9150 = new BitSet(new long[]{0x0000000800010000L});
+    public static final BitSet FOLLOW_16_in_ruleArrayElementAccess9161 = new BitSet(new long[]{0x46404A04042020F0L,0x0000000000006800L});
+    public static final BitSet FOLLOW_ruleArraySubscript_in_ruleArrayElementAccess9182 = new BitSet(new long[]{0x0000000800010000L});
+    public static final BitSet FOLLOW_35_in_ruleArrayElementAccess9194 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleArraySubscript_in_entryRuleArraySubscript9230 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleArraySubscript9240 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_21_in_ruleArraySubscript9283 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpression_in_ruleArraySubscript9323 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOperationCall_in_entryRuleOperationCall9359 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleOperationCall9369 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_26_in_ruleOperationCall9413 = new BitSet(new long[]{0x46404A040C0020F0L,0x0000000000006800L});
+    public static final BitSet FOLLOW_ruleExpression_in_ruleOperationCall9435 = new BitSet(new long[]{0x0000000008010000L});
+    public static final BitSet FOLLOW_16_in_ruleOperationCall9446 = new BitSet(new long[]{0x46404A04040020F0L,0x0000000000006800L});
+    public static final BitSet FOLLOW_ruleExpression_in_ruleOperationCall9467 = new BitSet(new long[]{0x0000000008010000L});
+    public static final BitSet FOLLOW_27_in_ruleOperationCall9481 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleIterationCall_in_entryRuleIterationCall9517 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleIterationCall9527 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_26_in_ruleIterationCall9571 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleIterationVariable_in_ruleIterationCall9592 = new BitSet(new long[]{0x0080000000090000L});
+    public static final BitSet FOLLOW_16_in_ruleIterationCall9603 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleIterationVariable_in_ruleIterationCall9624 = new BitSet(new long[]{0x0080000000090000L});
+    public static final BitSet FOLLOW_19_in_ruleIterationCall9637 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleIterationAccumulator_in_ruleIterationCall9658 = new BitSet(new long[]{0x0080000000000000L});
+    public static final BitSet FOLLOW_55_in_ruleIterationCall9670 = new BitSet(new long[]{0x46404A04040020F0L,0x0000000000006800L});
+    public static final BitSet FOLLOW_ruleExpression_in_ruleIterationCall9691 = new BitSet(new long[]{0x0000000008000000L});
+    public static final BitSet FOLLOW_27_in_ruleIterationCall9701 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleIterationVariable_in_entryRuleIterationVariable9737 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleIterationVariable9747 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleIterationVariable9788 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleIterationAccumulator_in_entryRuleIterationAccumulator9828 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleIterationAccumulator9838 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleIterationAccumulator9880 = new BitSet(new long[]{0x0000000000040000L});
+    public static final BitSet FOLLOW_18_in_ruleIterationAccumulator9895 = new BitSet(new long[]{0x46404A04040020F0L,0x0000000000006800L});
+    public static final BitSet FOLLOW_ruleExpression_in_ruleIterationAccumulator9916 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleArrayConstructionOperator_in_entryRuleArrayConstructionOperator9952 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleArrayConstructionOperator9962 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_13_in_ruleArrayConstructionOperator9997 = new BitSet(new long[]{0x46404A04040020F0L,0x0000000000006800L});

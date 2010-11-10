@@ -9,22 +9,22 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Subscript</b></em>'.
+ * A representation of the model object '<em><b>Array Subscript</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.Subscript#isSlice <em>Slice</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.Subscript#getExpression <em>Expression</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.ArraySubscript#isSlice <em>Slice</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.ArraySubscript#getExpression <em>Expression</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipselabs.mscript.language.ast.AstPackage#getSubscript()
+ * @see org.eclipselabs.mscript.language.ast.AstPackage#getArraySubscript()
  * @model
  * @generated
  */
-public interface Subscript extends EObject
+public interface ArraySubscript extends EObject
 {
   /**
    * Returns the value of the '<em><b>Slice</b></em>' attribute.
@@ -36,14 +36,14 @@ public interface Subscript extends EObject
    * <!-- end-user-doc -->
    * @return the value of the '<em>Slice</em>' attribute.
    * @see #setSlice(boolean)
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getSubscript_Slice()
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getArraySubscript_Slice()
    * @model
    * @generated
    */
   boolean isSlice();
 
   /**
-   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.Subscript#isSlice <em>Slice</em>}' attribute.
+   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.ArraySubscript#isSlice <em>Slice</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Slice</em>' attribute.
@@ -62,14 +62,14 @@ public interface Subscript extends EObject
    * <!-- end-user-doc -->
    * @return the value of the '<em>Expression</em>' containment reference.
    * @see #setExpression(Expression)
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getSubscript_Expression()
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getArraySubscript_Expression()
    * @model containment="true"
    * @generated
    */
   Expression getExpression();
 
   /**
-   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.Subscript#getExpression <em>Expression</em>}' containment reference.
+   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.ArraySubscript#getExpression <em>Expression</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Expression</em>' containment reference.
@@ -78,4 +78,4 @@ public interface Subscript extends EObject
    */
   void setExpression(Expression value);
 
-} // Subscript
+} // ArraySubscript

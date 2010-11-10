@@ -8,21 +8,21 @@ package org.eclipselabs.mscript.language.ast;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Feature Reference</b></em>'.
+ * A representation of the model object '<em><b>Feature Access</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.FeatureReference#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.FeatureAccess#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipselabs.mscript.language.ast.AstPackage#getFeatureReference()
+ * @see org.eclipselabs.mscript.language.ast.AstPackage#getFeatureAccess()
  * @model
  * @generated
  */
-public interface FeatureReference extends FeatureCallPart
+public interface FeatureAccess extends FeatureCallPart
 {
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
@@ -34,14 +34,14 @@ public interface FeatureReference extends FeatureCallPart
    * <!-- end-user-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getFeatureReference_Name()
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getFeatureAccess_Name()
    * @model
    * @generated
    */
   String getName();
 
   /**
-   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.FeatureReference#getName <em>Name</em>}' attribute.
+   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.FeatureAccess#getName <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Name</em>' attribute.
@@ -50,4 +50,4 @@ public interface FeatureReference extends FeatureCallPart
    */
   void setName(String value);
 
-} // FeatureReference
+} // FeatureAccess

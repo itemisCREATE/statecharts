@@ -447,19 +447,26 @@ public class AstSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AstPackage.FEATURE_REFERENCE:
+      case AstPackage.FEATURE_ACCESS:
       {
-        FeatureReference featureReference = (FeatureReference)theEObject;
-        T result = caseFeatureReference(featureReference);
-        if (result == null) result = caseFeatureCallPart(featureReference);
+        FeatureAccess featureAccess = (FeatureAccess)theEObject;
+        T result = caseFeatureAccess(featureAccess);
+        if (result == null) result = caseFeatureCallPart(featureAccess);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AstPackage.ARRAY_ELEMENT_REFERENCE:
+      case AstPackage.ARRAY_ELEMENT_ACCESS:
       {
-        ArrayElementReference arrayElementReference = (ArrayElementReference)theEObject;
-        T result = caseArrayElementReference(arrayElementReference);
-        if (result == null) result = caseFeatureCallPart(arrayElementReference);
+        ArrayElementAccess arrayElementAccess = (ArrayElementAccess)theEObject;
+        T result = caseArrayElementAccess(arrayElementAccess);
+        if (result == null) result = caseFeatureCallPart(arrayElementAccess);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AstPackage.ARRAY_SUBSCRIPT:
+      {
+        ArraySubscript arraySubscript = (ArraySubscript)theEObject;
+        T result = caseArraySubscript(arraySubscript);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -490,13 +497,6 @@ public class AstSwitch<T>
       {
         IterationAccumulator iterationAccumulator = (IterationAccumulator)theEObject;
         T result = caseIterationAccumulator(iterationAccumulator);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case AstPackage.SUBSCRIPT:
-      {
-        Subscript subscript = (Subscript)theEObject;
-        T result = caseSubscript(subscript);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -692,19 +692,19 @@ public class AstSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AstPackage.FEATURE_CALL:
-      {
-        FeatureCall featureCall = (FeatureCall)theEObject;
-        T result = caseFeatureCall(featureCall);
-        if (result == null) result = caseExpression(featureCall);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case AstPackage.SIMPLE_NAME:
       {
         SimpleName simpleName = (SimpleName)theEObject;
         T result = caseSimpleName(simpleName);
         if (result == null) result = caseExpression(simpleName);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AstPackage.FEATURE_CALL:
+      {
+        FeatureCall featureCall = (FeatureCall)theEObject;
+        T result = caseFeatureCall(featureCall);
+        if (result == null) result = caseExpression(featureCall);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -1401,33 +1401,49 @@ public class AstSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Feature Reference</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Feature Access</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Feature Reference</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Feature Access</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseFeatureReference(FeatureReference object)
+  public T caseFeatureAccess(FeatureAccess object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Array Element Reference</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Array Element Access</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Array Element Reference</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Array Element Access</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseArrayElementReference(ArrayElementReference object)
+  public T caseArrayElementAccess(ArrayElementAccess object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Array Subscript</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Array Subscript</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseArraySubscript(ArraySubscript object)
   {
     return null;
   }
@@ -1492,22 +1508,6 @@ public class AstSwitch<T>
    * @generated
    */
   public T caseIterationAccumulator(IterationAccumulator object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Subscript</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Subscript</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseSubscript(Subscript object)
   {
     return null;
   }
@@ -1913,22 +1913,6 @@ public class AstSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Feature Call</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Feature Call</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseFeatureCall(FeatureCall object)
-  {
-    return null;
-  }
-
-  /**
    * Returns the result of interpreting the object as an instance of '<em>Simple Name</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -1940,6 +1924,22 @@ public class AstSwitch<T>
    * @generated
    */
   public T caseSimpleName(SimpleName object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Feature Call</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Feature Call</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseFeatureCall(FeatureCall object)
   {
     return null;
   }

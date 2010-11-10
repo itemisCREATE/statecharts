@@ -4,33 +4,24 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="imperativemodel"
     nsURI="http://www.eclipselabs.org/mscript/ImperativeModel/1.0.0" nsPrefix="imperativemodel">
   <eClassifiers xsi:type="ecore:EClass" name="Subroutine">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="context" eType="#//SubroutineContext"
-        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="templateVariableDeclarations"
+        upperBound="-1" eType="#//VariableDeclaration" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="inputVariableDeclarations"
         upperBound="-1" eType="#//VariableDeclaration" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="outputVariableDeclarations"
         lowerBound="1" upperBound="-1" eType="#//VariableDeclaration" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="computationBlocks" upperBound="-1"
-        eType="#//ComputationBlock" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SubroutineContext">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="templateVariableDeclarations"
-        upperBound="-1" eType="#//VariableDeclaration" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="stateVariableDeclarations"
         upperBound="-1" eType="#//VariableDeclaration" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ringBufferDeclarations"
-        upperBound="-1" eType="#//RingBufferDeclaration" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="initializationBlock" eType="#//Block"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="computationBlocks" upperBound="-1"
+        eType="#//ComputationBlock" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="VariableDeclaration">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="ecore:EClass ../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//DataType"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RingBufferDeclaration">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="size" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="variableDeclaration" lowerBound="1"
-        eType="#//VariableDeclaration"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ringBufferSize" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="1"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Statement" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="Block" eSuperTypes="#//Statement">
@@ -71,13 +62,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//Block"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="VariableReference" eSuperTypes="../src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression">
+  <eClassifiers xsi:type="ecore:EClass" name="VariableAccess" eSuperTypes="../src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="referencedDeclaration"
         lowerBound="1" eType="#//VariableDeclaration"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RingBufferReference" eSuperTypes="../src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="referencedDeclaration"
-        lowerBound="1" eType="#//RingBufferDeclaration"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="stepIndex" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
 </ecore:EPackage>

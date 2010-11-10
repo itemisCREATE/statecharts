@@ -2,12 +2,12 @@ package org.eclipselabs.mscript.language.validation;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.validation.Check;
-import org.eclipselabs.mscript.language.ast.ArrayElementReference;
+import org.eclipselabs.mscript.language.ast.ArrayElementAccess;
+import org.eclipselabs.mscript.language.ast.ArraySubscript;
 import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.BeginExpression;
 import org.eclipselabs.mscript.language.ast.EndExpression;
 import org.eclipselabs.mscript.language.ast.FunctionDefinition;
-import org.eclipselabs.mscript.language.ast.Subscript;
 import org.eclipselabs.mscript.language.ast.UnitExpressionNumerator;
 import org.eclipselabs.mscript.language.functionmodel.util.FunctionConstructor;
 
@@ -30,11 +30,11 @@ public class MscriptJavaValidator extends AbstractMscriptJavaValidator {
 	private boolean isInsideArraySubscript(EObject eObject) {
 		EObject container = eObject.eContainer();
 		
-		while (container != null && !(container instanceof Subscript)) {
+		while (container != null && !(container instanceof ArraySubscript)) {
 			container = container.eContainer();
 		}
 		
-		return container instanceof Subscript && ((Subscript) container).eContainer() instanceof ArrayElementReference;
+		return container instanceof ArraySubscript && ((ArraySubscript) container).eContainer() instanceof ArrayElementAccess;
 	}
 
 	@Check

@@ -111,13 +111,13 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
       case AstPackage.BOOLEAN_LITERAL: return createBooleanLiteral();
       case AstPackage.STRING_LITERAL: return createStringLiteral();
       case AstPackage.FEATURE_CALL_PART: return createFeatureCallPart();
-      case AstPackage.FEATURE_REFERENCE: return createFeatureReference();
-      case AstPackage.ARRAY_ELEMENT_REFERENCE: return createArrayElementReference();
+      case AstPackage.FEATURE_ACCESS: return createFeatureAccess();
+      case AstPackage.ARRAY_ELEMENT_ACCESS: return createArrayElementAccess();
+      case AstPackage.ARRAY_SUBSCRIPT: return createArraySubscript();
       case AstPackage.OPERATION_CALL: return createOperationCall();
       case AstPackage.ITERATION_CALL: return createIterationCall();
       case AstPackage.ITERATION_VARIABLE: return createIterationVariable();
       case AstPackage.ITERATION_ACCUMULATOR: return createIterationAccumulator();
-      case AstPackage.SUBSCRIPT: return createSubscript();
       case AstPackage.ARRAY_CONSTRUCTION_OPERATOR: return createArrayConstructionOperator();
       case AstPackage.ARRAY_CONSTRUCTION_ITERATION_CLAUSE: return createArrayConstructionIterationClause();
       case AstPackage.ARRAY_CONCATENATION_OPERATOR: return createArrayConcatenationOperator();
@@ -143,8 +143,8 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
       case AstPackage.POWER_EXPRESSION: return createPowerExpression();
       case AstPackage.UNARY_EXPRESSION: return createUnaryExpression();
       case AstPackage.POSTFIX_EXPRESSION: return createPostfixExpression();
-      case AstPackage.FEATURE_CALL: return createFeatureCall();
       case AstPackage.SIMPLE_NAME: return createSimpleName();
+      case AstPackage.FEATURE_CALL: return createFeatureCall();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -694,10 +694,10 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public FeatureReference createFeatureReference()
+  public FeatureAccess createFeatureAccess()
   {
-    FeatureReferenceImpl featureReference = new FeatureReferenceImpl();
-    return featureReference;
+    FeatureAccessImpl featureAccess = new FeatureAccessImpl();
+    return featureAccess;
   }
 
   /**
@@ -705,10 +705,21 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public ArrayElementReference createArrayElementReference()
+  public ArrayElementAccess createArrayElementAccess()
   {
-    ArrayElementReferenceImpl arrayElementReference = new ArrayElementReferenceImpl();
-    return arrayElementReference;
+    ArrayElementAccessImpl arrayElementAccess = new ArrayElementAccessImpl();
+    return arrayElementAccess;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ArraySubscript createArraySubscript()
+  {
+    ArraySubscriptImpl arraySubscript = new ArraySubscriptImpl();
+    return arraySubscript;
   }
 
   /**
@@ -753,17 +764,6 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
   {
     IterationAccumulatorImpl iterationAccumulator = new IterationAccumulatorImpl();
     return iterationAccumulator;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Subscript createSubscript()
-  {
-    SubscriptImpl subscript = new SubscriptImpl();
-    return subscript;
   }
 
   /**
@@ -1046,10 +1046,10 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public FeatureCall createFeatureCall()
+  public SimpleName createSimpleName()
   {
-    FeatureCallImpl featureCall = new FeatureCallImpl();
-    return featureCall;
+    SimpleNameImpl simpleName = new SimpleNameImpl();
+    return simpleName;
   }
 
   /**
@@ -1057,10 +1057,10 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public SimpleName createSimpleName()
+  public FeatureCall createFeatureCall()
   {
-    SimpleNameImpl simpleName = new SimpleNameImpl();
-    return simpleName;
+    FeatureCallImpl featureCall = new FeatureCallImpl();
+    return featureCall;
   }
 
   /**

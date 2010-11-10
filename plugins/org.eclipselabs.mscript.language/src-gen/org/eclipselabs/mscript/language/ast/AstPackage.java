@@ -1580,14 +1580,14 @@ public interface AstPackage extends EPackage
   int FEATURE_CALL_PART_FEATURE_COUNT = 0;
 
   /**
-   * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.FeatureReferenceImpl <em>Feature Reference</em>}' class.
+   * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.FeatureAccessImpl <em>Feature Access</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.eclipselabs.mscript.language.ast.impl.FeatureReferenceImpl
-   * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getFeatureReference()
+   * @see org.eclipselabs.mscript.language.ast.impl.FeatureAccessImpl
+   * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getFeatureAccess()
    * @generated
    */
-  int FEATURE_REFERENCE = 43;
+  int FEATURE_ACCESS = 43;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1596,26 +1596,26 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int FEATURE_REFERENCE__NAME = FEATURE_CALL_PART_FEATURE_COUNT + 0;
+  int FEATURE_ACCESS__NAME = FEATURE_CALL_PART_FEATURE_COUNT + 0;
 
   /**
-   * The number of structural features of the '<em>Feature Reference</em>' class.
+   * The number of structural features of the '<em>Feature Access</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int FEATURE_REFERENCE_FEATURE_COUNT = FEATURE_CALL_PART_FEATURE_COUNT + 1;
+  int FEATURE_ACCESS_FEATURE_COUNT = FEATURE_CALL_PART_FEATURE_COUNT + 1;
 
   /**
-   * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.ArrayElementReferenceImpl <em>Array Element Reference</em>}' class.
+   * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.ArrayElementAccessImpl <em>Array Element Access</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.eclipselabs.mscript.language.ast.impl.ArrayElementReferenceImpl
-   * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getArrayElementReference()
+   * @see org.eclipselabs.mscript.language.ast.impl.ArrayElementAccessImpl
+   * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getArrayElementAccess()
    * @generated
    */
-  int ARRAY_ELEMENT_REFERENCE = 44;
+  int ARRAY_ELEMENT_ACCESS = 44;
 
   /**
    * The feature id for the '<em><b>Subscripts</b></em>' containment reference list.
@@ -1624,16 +1624,53 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ARRAY_ELEMENT_REFERENCE__SUBSCRIPTS = FEATURE_CALL_PART_FEATURE_COUNT + 0;
+  int ARRAY_ELEMENT_ACCESS__SUBSCRIPTS = FEATURE_CALL_PART_FEATURE_COUNT + 0;
 
   /**
-   * The number of structural features of the '<em>Array Element Reference</em>' class.
+   * The number of structural features of the '<em>Array Element Access</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ARRAY_ELEMENT_REFERENCE_FEATURE_COUNT = FEATURE_CALL_PART_FEATURE_COUNT + 1;
+  int ARRAY_ELEMENT_ACCESS_FEATURE_COUNT = FEATURE_CALL_PART_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.ArraySubscriptImpl <em>Array Subscript</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipselabs.mscript.language.ast.impl.ArraySubscriptImpl
+   * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getArraySubscript()
+   * @generated
+   */
+  int ARRAY_SUBSCRIPT = 45;
+
+  /**
+   * The feature id for the '<em><b>Slice</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARRAY_SUBSCRIPT__SLICE = 0;
+
+  /**
+   * The feature id for the '<em><b>Expression</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARRAY_SUBSCRIPT__EXPRESSION = 1;
+
+  /**
+   * The number of structural features of the '<em>Array Subscript</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ARRAY_SUBSCRIPT_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.OperationCallImpl <em>Operation Call</em>}' class.
@@ -1643,7 +1680,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getOperationCall()
    * @generated
    */
-  int OPERATION_CALL = 45;
+  int OPERATION_CALL = 46;
 
   /**
    * The feature id for the '<em><b>Arguments</b></em>' containment reference list.
@@ -1671,7 +1708,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getIterationCall()
    * @generated
    */
-  int ITERATION_CALL = 46;
+  int ITERATION_CALL = 47;
 
   /**
    * The feature id for the '<em><b>Variables</b></em>' containment reference list.
@@ -1717,7 +1754,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getIterationVariable()
    * @generated
    */
-  int ITERATION_VARIABLE = 47;
+  int ITERATION_VARIABLE = 48;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1745,7 +1782,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getIterationAccumulator()
    * @generated
    */
-  int ITERATION_ACCUMULATOR = 48;
+  int ITERATION_ACCUMULATOR = 49;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1773,43 +1810,6 @@ public interface AstPackage extends EPackage
    * @ordered
    */
   int ITERATION_ACCUMULATOR_FEATURE_COUNT = 2;
-
-  /**
-   * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.SubscriptImpl <em>Subscript</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipselabs.mscript.language.ast.impl.SubscriptImpl
-   * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getSubscript()
-   * @generated
-   */
-  int SUBSCRIPT = 49;
-
-  /**
-   * The feature id for the '<em><b>Slice</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SUBSCRIPT__SLICE = 0;
-
-  /**
-   * The feature id for the '<em><b>Expression</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SUBSCRIPT__EXPRESSION = 1;
-
-  /**
-   * The number of structural features of the '<em>Subscript</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SUBSCRIPT_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.ArrayConstructionOperatorImpl <em>Array Construction Operator</em>}' class.
@@ -2665,6 +2665,34 @@ public interface AstPackage extends EPackage
   int POSTFIX_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
 
   /**
+   * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.SimpleNameImpl <em>Simple Name</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipselabs.mscript.language.ast.impl.SimpleNameImpl
+   * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getSimpleName()
+   * @generated
+   */
+  int SIMPLE_NAME = 75;
+
+  /**
+   * The feature id for the '<em><b>Identifier</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SIMPLE_NAME__IDENTIFIER = EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Simple Name</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SIMPLE_NAME_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.FeatureCallImpl <em>Feature Call</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2672,7 +2700,7 @@ public interface AstPackage extends EPackage
    * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getFeatureCall()
    * @generated
    */
-  int FEATURE_CALL = 75;
+  int FEATURE_CALL = 76;
 
   /**
    * The feature id for the '<em><b>Target</b></em>' containment reference.
@@ -2700,34 +2728,6 @@ public interface AstPackage extends EPackage
    * @ordered
    */
   int FEATURE_CALL_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
-
-  /**
-   * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.SimpleNameImpl <em>Simple Name</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipselabs.mscript.language.ast.impl.SimpleNameImpl
-   * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getSimpleName()
-   * @generated
-   */
-  int SIMPLE_NAME = 76;
-
-  /**
-   * The feature id for the '<em><b>Identifier</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SIMPLE_NAME__IDENTIFIER = EXPRESSION_FEATURE_COUNT + 0;
-
-  /**
-   * The number of structural features of the '<em>Simple Name</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SIMPLE_NAME_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.AssertionStatusKind <em>Assertion Status Kind</em>}' enum.
@@ -3867,46 +3867,78 @@ public interface AstPackage extends EPackage
   EClass getFeatureCallPart();
 
   /**
-   * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.FeatureReference <em>Feature Reference</em>}'.
+   * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.FeatureAccess <em>Feature Access</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Feature Reference</em>'.
-   * @see org.eclipselabs.mscript.language.ast.FeatureReference
+   * @return the meta object for class '<em>Feature Access</em>'.
+   * @see org.eclipselabs.mscript.language.ast.FeatureAccess
    * @generated
    */
-  EClass getFeatureReference();
+  EClass getFeatureAccess();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.ast.FeatureReference#getName <em>Name</em>}'.
+   * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.ast.FeatureAccess#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.eclipselabs.mscript.language.ast.FeatureReference#getName()
-   * @see #getFeatureReference()
+   * @see org.eclipselabs.mscript.language.ast.FeatureAccess#getName()
+   * @see #getFeatureAccess()
    * @generated
    */
-  EAttribute getFeatureReference_Name();
+  EAttribute getFeatureAccess_Name();
 
   /**
-   * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.ArrayElementReference <em>Array Element Reference</em>}'.
+   * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.ArrayElementAccess <em>Array Element Access</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Array Element Reference</em>'.
-   * @see org.eclipselabs.mscript.language.ast.ArrayElementReference
+   * @return the meta object for class '<em>Array Element Access</em>'.
+   * @see org.eclipselabs.mscript.language.ast.ArrayElementAccess
    * @generated
    */
-  EClass getArrayElementReference();
+  EClass getArrayElementAccess();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.ast.ArrayElementReference#getSubscripts <em>Subscripts</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.ast.ArrayElementAccess#getSubscripts <em>Subscripts</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference list '<em>Subscripts</em>'.
-   * @see org.eclipselabs.mscript.language.ast.ArrayElementReference#getSubscripts()
-   * @see #getArrayElementReference()
+   * @see org.eclipselabs.mscript.language.ast.ArrayElementAccess#getSubscripts()
+   * @see #getArrayElementAccess()
    * @generated
    */
-  EReference getArrayElementReference_Subscripts();
+  EReference getArrayElementAccess_Subscripts();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.ArraySubscript <em>Array Subscript</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Array Subscript</em>'.
+   * @see org.eclipselabs.mscript.language.ast.ArraySubscript
+   * @generated
+   */
+  EClass getArraySubscript();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.ast.ArraySubscript#isSlice <em>Slice</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Slice</em>'.
+   * @see org.eclipselabs.mscript.language.ast.ArraySubscript#isSlice()
+   * @see #getArraySubscript()
+   * @generated
+   */
+  EAttribute getArraySubscript_Slice();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.ArraySubscript#getExpression <em>Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Expression</em>'.
+   * @see org.eclipselabs.mscript.language.ast.ArraySubscript#getExpression()
+   * @see #getArraySubscript()
+   * @generated
+   */
+  EReference getArraySubscript_Expression();
 
   /**
    * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.OperationCall <em>Operation Call</em>}'.
@@ -4024,38 +4056,6 @@ public interface AstPackage extends EPackage
    * @generated
    */
   EReference getIterationAccumulator_Initializer();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.Subscript <em>Subscript</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Subscript</em>'.
-   * @see org.eclipselabs.mscript.language.ast.Subscript
-   * @generated
-   */
-  EClass getSubscript();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.ast.Subscript#isSlice <em>Slice</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Slice</em>'.
-   * @see org.eclipselabs.mscript.language.ast.Subscript#isSlice()
-   * @see #getSubscript()
-   * @generated
-   */
-  EAttribute getSubscript_Slice();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.Subscript#getExpression <em>Expression</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Expression</em>'.
-   * @see org.eclipselabs.mscript.language.ast.Subscript#getExpression()
-   * @see #getSubscript()
-   * @generated
-   */
-  EReference getSubscript_Expression();
 
   /**
    * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.ArrayConstructionOperator <em>Array Construction Operator</em>}'.
@@ -4770,6 +4770,27 @@ public interface AstPackage extends EPackage
   EAttribute getPostfixExpression_Operator();
 
   /**
+   * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.SimpleName <em>Simple Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Simple Name</em>'.
+   * @see org.eclipselabs.mscript.language.ast.SimpleName
+   * @generated
+   */
+  EClass getSimpleName();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.ast.SimpleName#getIdentifier <em>Identifier</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Identifier</em>'.
+   * @see org.eclipselabs.mscript.language.ast.SimpleName#getIdentifier()
+   * @see #getSimpleName()
+   * @generated
+   */
+  EAttribute getSimpleName_Identifier();
+
+  /**
    * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.FeatureCall <em>Feature Call</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -4800,27 +4821,6 @@ public interface AstPackage extends EPackage
    * @generated
    */
   EReference getFeatureCall_Parts();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.SimpleName <em>Simple Name</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Simple Name</em>'.
-   * @see org.eclipselabs.mscript.language.ast.SimpleName
-   * @generated
-   */
-  EClass getSimpleName();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.ast.SimpleName#getIdentifier <em>Identifier</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Identifier</em>'.
-   * @see org.eclipselabs.mscript.language.ast.SimpleName#getIdentifier()
-   * @see #getSimpleName()
-   * @generated
-   */
-  EAttribute getSimpleName_Identifier();
 
   /**
    * Returns the meta object for enum '{@link org.eclipselabs.mscript.language.ast.AssertionStatusKind <em>Assertion Status Kind</em>}'.
@@ -5814,14 +5814,14 @@ public interface AstPackage extends EPackage
     EClass FEATURE_CALL_PART = eINSTANCE.getFeatureCallPart();
 
     /**
-     * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.FeatureReferenceImpl <em>Feature Reference</em>}' class.
+     * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.FeatureAccessImpl <em>Feature Access</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.eclipselabs.mscript.language.ast.impl.FeatureReferenceImpl
-     * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getFeatureReference()
+     * @see org.eclipselabs.mscript.language.ast.impl.FeatureAccessImpl
+     * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getFeatureAccess()
      * @generated
      */
-    EClass FEATURE_REFERENCE = eINSTANCE.getFeatureReference();
+    EClass FEATURE_ACCESS = eINSTANCE.getFeatureAccess();
 
     /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -5829,17 +5829,17 @@ public interface AstPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute FEATURE_REFERENCE__NAME = eINSTANCE.getFeatureReference_Name();
+    EAttribute FEATURE_ACCESS__NAME = eINSTANCE.getFeatureAccess_Name();
 
     /**
-     * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.ArrayElementReferenceImpl <em>Array Element Reference</em>}' class.
+     * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.ArrayElementAccessImpl <em>Array Element Access</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.eclipselabs.mscript.language.ast.impl.ArrayElementReferenceImpl
-     * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getArrayElementReference()
+     * @see org.eclipselabs.mscript.language.ast.impl.ArrayElementAccessImpl
+     * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getArrayElementAccess()
      * @generated
      */
-    EClass ARRAY_ELEMENT_REFERENCE = eINSTANCE.getArrayElementReference();
+    EClass ARRAY_ELEMENT_ACCESS = eINSTANCE.getArrayElementAccess();
 
     /**
      * The meta object literal for the '<em><b>Subscripts</b></em>' containment reference list feature.
@@ -5847,7 +5847,33 @@ public interface AstPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference ARRAY_ELEMENT_REFERENCE__SUBSCRIPTS = eINSTANCE.getArrayElementReference_Subscripts();
+    EReference ARRAY_ELEMENT_ACCESS__SUBSCRIPTS = eINSTANCE.getArrayElementAccess_Subscripts();
+
+    /**
+     * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.ArraySubscriptImpl <em>Array Subscript</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipselabs.mscript.language.ast.impl.ArraySubscriptImpl
+     * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getArraySubscript()
+     * @generated
+     */
+    EClass ARRAY_SUBSCRIPT = eINSTANCE.getArraySubscript();
+
+    /**
+     * The meta object literal for the '<em><b>Slice</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ARRAY_SUBSCRIPT__SLICE = eINSTANCE.getArraySubscript_Slice();
+
+    /**
+     * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ARRAY_SUBSCRIPT__EXPRESSION = eINSTANCE.getArraySubscript_Expression();
 
     /**
      * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.OperationCallImpl <em>Operation Call</em>}' class.
@@ -5944,32 +5970,6 @@ public interface AstPackage extends EPackage
      * @generated
      */
     EReference ITERATION_ACCUMULATOR__INITIALIZER = eINSTANCE.getIterationAccumulator_Initializer();
-
-    /**
-     * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.SubscriptImpl <em>Subscript</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipselabs.mscript.language.ast.impl.SubscriptImpl
-     * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getSubscript()
-     * @generated
-     */
-    EClass SUBSCRIPT = eINSTANCE.getSubscript();
-
-    /**
-     * The meta object literal for the '<em><b>Slice</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute SUBSCRIPT__SLICE = eINSTANCE.getSubscript_Slice();
-
-    /**
-     * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference SUBSCRIPT__EXPRESSION = eINSTANCE.getSubscript_Expression();
 
     /**
      * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.ArrayConstructionOperatorImpl <em>Array Construction Operator</em>}' class.
@@ -6558,6 +6558,24 @@ public interface AstPackage extends EPackage
     EAttribute POSTFIX_EXPRESSION__OPERATOR = eINSTANCE.getPostfixExpression_Operator();
 
     /**
+     * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.SimpleNameImpl <em>Simple Name</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipselabs.mscript.language.ast.impl.SimpleNameImpl
+     * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getSimpleName()
+     * @generated
+     */
+    EClass SIMPLE_NAME = eINSTANCE.getSimpleName();
+
+    /**
+     * The meta object literal for the '<em><b>Identifier</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute SIMPLE_NAME__IDENTIFIER = eINSTANCE.getSimpleName_Identifier();
+
+    /**
      * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.FeatureCallImpl <em>Feature Call</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -6582,24 +6600,6 @@ public interface AstPackage extends EPackage
      * @generated
      */
     EReference FEATURE_CALL__PARTS = eINSTANCE.getFeatureCall_Parts();
-
-    /**
-     * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.SimpleNameImpl <em>Simple Name</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipselabs.mscript.language.ast.impl.SimpleNameImpl
-     * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getSimpleName()
-     * @generated
-     */
-    EClass SIMPLE_NAME = eINSTANCE.getSimpleName();
-
-    /**
-     * The meta object literal for the '<em><b>Identifier</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute SIMPLE_NAME__IDENTIFIER = eINSTANCE.getSimpleName_Identifier();
 
     /**
      * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.AssertionStatusKind <em>Assertion Status Kind</em>}' enum.

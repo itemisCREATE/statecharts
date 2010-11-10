@@ -293,14 +293,19 @@ public class AstAdapterFactory extends AdapterFactoryImpl
         return createFeatureCallPartAdapter();
       }
       @Override
-      public Adapter caseFeatureReference(FeatureReference object)
+      public Adapter caseFeatureAccess(FeatureAccess object)
       {
-        return createFeatureReferenceAdapter();
+        return createFeatureAccessAdapter();
       }
       @Override
-      public Adapter caseArrayElementReference(ArrayElementReference object)
+      public Adapter caseArrayElementAccess(ArrayElementAccess object)
       {
-        return createArrayElementReferenceAdapter();
+        return createArrayElementAccessAdapter();
+      }
+      @Override
+      public Adapter caseArraySubscript(ArraySubscript object)
+      {
+        return createArraySubscriptAdapter();
       }
       @Override
       public Adapter caseOperationCall(OperationCall object)
@@ -321,11 +326,6 @@ public class AstAdapterFactory extends AdapterFactoryImpl
       public Adapter caseIterationAccumulator(IterationAccumulator object)
       {
         return createIterationAccumulatorAdapter();
-      }
-      @Override
-      public Adapter caseSubscript(Subscript object)
-      {
-        return createSubscriptAdapter();
       }
       @Override
       public Adapter caseArrayConstructionOperator(ArrayConstructionOperator object)
@@ -453,14 +453,14 @@ public class AstAdapterFactory extends AdapterFactoryImpl
         return createPostfixExpressionAdapter();
       }
       @Override
-      public Adapter caseFeatureCall(FeatureCall object)
-      {
-        return createFeatureCallAdapter();
-      }
-      @Override
       public Adapter caseSimpleName(SimpleName object)
       {
         return createSimpleNameAdapter();
+      }
+      @Override
+      public Adapter caseFeatureCall(FeatureCall object)
+      {
+        return createFeatureCallAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -1130,31 +1130,46 @@ public class AstAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.FeatureReference <em>Feature Reference</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.FeatureAccess <em>Feature Access</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.FeatureReference
+   * @see org.eclipselabs.mscript.language.ast.FeatureAccess
    * @generated
    */
-  public Adapter createFeatureReferenceAdapter()
+  public Adapter createFeatureAccessAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.ArrayElementReference <em>Array Element Reference</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.ArrayElementAccess <em>Array Element Access</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.ArrayElementReference
+   * @see org.eclipselabs.mscript.language.ast.ArrayElementAccess
    * @generated
    */
-  public Adapter createArrayElementReferenceAdapter()
+  public Adapter createArrayElementAccessAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.ArraySubscript <em>Array Subscript</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipselabs.mscript.language.ast.ArraySubscript
+   * @generated
+   */
+  public Adapter createArraySubscriptAdapter()
   {
     return null;
   }
@@ -1215,21 +1230,6 @@ public class AstAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createIterationAccumulatorAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.Subscript <em>Subscript</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.Subscript
-   * @generated
-   */
-  public Adapter createSubscriptAdapter()
   {
     return null;
   }
@@ -1610,21 +1610,6 @@ public class AstAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.FeatureCall <em>Feature Call</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.FeatureCall
-   * @generated
-   */
-  public Adapter createFeatureCallAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.SimpleName <em>Simple Name</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -1635,6 +1620,21 @@ public class AstAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createSimpleNameAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.FeatureCall <em>Feature Call</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipselabs.mscript.language.ast.FeatureCall
+   * @generated
+   */
+  public Adapter createFeatureCallAdapter()
   {
     return null;
   }

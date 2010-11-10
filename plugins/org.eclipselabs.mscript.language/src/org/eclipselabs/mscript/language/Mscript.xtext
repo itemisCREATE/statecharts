@@ -275,20 +275,23 @@ enum BooleanKind :
 StringLiteral :
 	value=STRING;
 		
-FeatureCall returns Expression :
-	CallablePrimaryExpression ({FeatureCall.target=current} (parts+=FeatureCallPart)+)? | {FeatureCall} target=SimpleName (parts+=FeatureCallPart)*;
-
 SimpleName returns Expression :
 	{SimpleName} identifier=ID;
 
+FeatureCall returns Expression :
+	CallablePrimaryExpression ({FeatureCall.target=current} (parts+=FeatureCallPart)+)? | {FeatureCall} target=SimpleName (parts+=FeatureCallPart)*;
+
 FeatureCallPart :
-	FeatureReference | ArrayElementReference | OperationCall | IterationCall;
+	FeatureAccess | ArrayElementAccess | OperationCall | IterationCall;
 	
-FeatureReference :
+FeatureAccess :
 	'.' name=(ID | 'unit');
 	
-ArrayElementReference :
-	'[' subscripts+=Subscript (',' subscripts+=Subscript)* ']';
+ArrayElementAccess :
+	'[' subscripts+=ArraySubscript (',' subscripts+=ArraySubscript)* ']';
+
+ArraySubscript :
+	slice?=':' | expression=Expression;
 
 OperationCall :
 	{OperationCall} '(' (arguments+=Expression (',' arguments+=Expression)*)? ')';
@@ -302,9 +305,6 @@ IterationVariable :
 IterationAccumulator :
 	name=ID '=' initializer=Expression;
 	
-Subscript :
-	slice?=':' | expression=Expression;
-
 ArrayConstructionOperator :
 	'{' expressions+=Expression ((',' expressions+=Expression)* | 'for' iterationClauses+=ArrayConstructionIterationClause (',' iterationClauses+=ArrayConstructionIterationClause)*) '}';
 
