@@ -13810,30 +13810,30 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__AssertionDeclaration__Group__2__Impl
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4989:1: rule__AssertionDeclaration__Group__2__Impl : ( ( rule__AssertionDeclaration__PredicateAssignment_2 ) ) ;
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4989:1: rule__AssertionDeclaration__Group__2__Impl : ( ( rule__AssertionDeclaration__ConditionAssignment_2 ) ) ;
     public final void rule__AssertionDeclaration__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4993:1: ( ( ( rule__AssertionDeclaration__PredicateAssignment_2 ) ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4994:1: ( ( rule__AssertionDeclaration__PredicateAssignment_2 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4993:1: ( ( ( rule__AssertionDeclaration__ConditionAssignment_2 ) ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4994:1: ( ( rule__AssertionDeclaration__ConditionAssignment_2 ) )
             {
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4994:1: ( ( rule__AssertionDeclaration__PredicateAssignment_2 ) )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4995:1: ( rule__AssertionDeclaration__PredicateAssignment_2 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4994:1: ( ( rule__AssertionDeclaration__ConditionAssignment_2 ) )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4995:1: ( rule__AssertionDeclaration__ConditionAssignment_2 )
             {
-             before(grammarAccess.getAssertionDeclarationAccess().getPredicateAssignment_2()); 
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4996:1: ( rule__AssertionDeclaration__PredicateAssignment_2 )
-            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4996:2: rule__AssertionDeclaration__PredicateAssignment_2
+             before(grammarAccess.getAssertionDeclarationAccess().getConditionAssignment_2()); 
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4996:1: ( rule__AssertionDeclaration__ConditionAssignment_2 )
+            // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:4996:2: rule__AssertionDeclaration__ConditionAssignment_2
             {
-            pushFollow(FOLLOW_rule__AssertionDeclaration__PredicateAssignment_2_in_rule__AssertionDeclaration__Group__2__Impl10486);
-            rule__AssertionDeclaration__PredicateAssignment_2();
+            pushFollow(FOLLOW_rule__AssertionDeclaration__ConditionAssignment_2_in_rule__AssertionDeclaration__Group__2__Impl10486);
+            rule__AssertionDeclaration__ConditionAssignment_2();
             _fsp--;
 
 
             }
 
-             after(grammarAccess.getAssertionDeclarationAccess().getPredicateAssignment_2()); 
+             after(grammarAccess.getAssertionDeclarationAccess().getConditionAssignment_2()); 
 
             }
 
@@ -39385,9 +39385,9 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
     // $ANTLR end rule__AssertionDeclaration__StaticAssignment_0
 
 
-    // $ANTLR start rule__AssertionDeclaration__PredicateAssignment_2
-    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:15140:1: rule__AssertionDeclaration__PredicateAssignment_2 : ( ruleExpression ) ;
-    public final void rule__AssertionDeclaration__PredicateAssignment_2() throws RecognitionException {
+    // $ANTLR start rule__AssertionDeclaration__ConditionAssignment_2
+    // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:15140:1: rule__AssertionDeclaration__ConditionAssignment_2 : ( ruleExpression ) ;
+    public final void rule__AssertionDeclaration__ConditionAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -39398,12 +39398,12 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
             // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:15145:1: ( ruleExpression )
             // ../org.eclipselabs.mscript.language.ui/src-gen/org/eclipselabs/mscript/language/ui/contentassist/antlr/internal/InternalMscript.g:15146:1: ruleExpression
             {
-             before(grammarAccess.getAssertionDeclarationAccess().getPredicateExpressionParserRuleCall_2_0()); 
-            pushFollow(FOLLOW_ruleExpression_in_rule__AssertionDeclaration__PredicateAssignment_230462);
+             before(grammarAccess.getAssertionDeclarationAccess().getConditionExpressionParserRuleCall_2_0()); 
+            pushFollow(FOLLOW_ruleExpression_in_rule__AssertionDeclaration__ConditionAssignment_230462);
             ruleExpression();
             _fsp--;
 
-             after(grammarAccess.getAssertionDeclarationAccess().getPredicateExpressionParserRuleCall_2_0()); 
+             after(grammarAccess.getAssertionDeclarationAccess().getConditionExpressionParserRuleCall_2_0()); 
 
             }
 
@@ -39422,7 +39422,7 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__AssertionDeclaration__PredicateAssignment_2
+    // $ANTLR end rule__AssertionDeclaration__ConditionAssignment_2
 
 
     // $ANTLR start rule__AssertionDeclaration__StatusKindAssignment_4
@@ -44657,7 +44657,7 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_49_in_rule__AssertionDeclaration__Group__1__Impl10425 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__AssertionDeclaration__Group__2__Impl_in_rule__AssertionDeclaration__Group__210456 = new BitSet(new long[]{0x0000100000000000L});
     public static final BitSet FOLLOW_rule__AssertionDeclaration__Group__3_in_rule__AssertionDeclaration__Group__210459 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__AssertionDeclaration__PredicateAssignment_2_in_rule__AssertionDeclaration__Group__2__Impl10486 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__AssertionDeclaration__ConditionAssignment_2_in_rule__AssertionDeclaration__Group__2__Impl10486 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__AssertionDeclaration__Group__3__Impl_in_rule__AssertionDeclaration__Group__310516 = new BitSet(new long[]{0x000000000003C000L});
     public static final BitSet FOLLOW_rule__AssertionDeclaration__Group__4_in_rule__AssertionDeclaration__Group__310519 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_44_in_rule__AssertionDeclaration__Group__3__Impl10547 = new BitSet(new long[]{0x0000000000000002L});
@@ -45475,7 +45475,7 @@ public class InternalMscriptParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_ruleEquationDefinition_in_rule__FunctionDefinition__EquationsAssignment_11_330356 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_ID_in_rule__ParameterDeclaration__NameAssignment30387 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_77_in_rule__AssertionDeclaration__StaticAssignment_030423 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpression_in_rule__AssertionDeclaration__PredicateAssignment_230462 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpression_in_rule__AssertionDeclaration__ConditionAssignment_230462 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleAssertionStatusKind_in_rule__AssertionDeclaration__StatusKindAssignment_430493 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleExpression_in_rule__AssertionDeclaration__MessageAssignment_530524 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_ID_in_rule__StateVariableDeclaration__NameAssignment_130555 = new BitSet(new long[]{0x0000000000000002L});

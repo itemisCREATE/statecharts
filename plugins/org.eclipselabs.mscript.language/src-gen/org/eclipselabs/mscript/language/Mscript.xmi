@@ -243,7 +243,7 @@
         <terminal xsi:type="xtext:Keyword" value="static"/>
       </elements>
       <elements xsi:type="xtext:Keyword" value="assert"/>
-      <elements xsi:type="xtext:Assignment" feature="predicate" operator="=">
+      <elements xsi:type="xtext:Assignment" feature="condition" operator="=">
         <terminal xsi:type="xtext:RuleCall" rule="//@rules.29"/>
       </elements>
       <elements xsi:type="xtext:Keyword" value=":"/>

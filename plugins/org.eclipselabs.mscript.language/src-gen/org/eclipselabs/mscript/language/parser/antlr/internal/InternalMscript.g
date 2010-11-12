@@ -1189,9 +1189,9 @@ ruleAssertionDeclaration returns [EObject current=null]
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getAssertionDeclarationAccess().getPredicateExpressionParserRuleCall_2_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getAssertionDeclarationAccess().getConditionExpressionParserRuleCall_2_0(), currentNode); 
 	    }
-		lv_predicate_2_0=ruleExpression		{
+		lv_condition_2_0=ruleExpression		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getAssertionDeclarationRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -1199,8 +1199,8 @@ ruleAssertionDeclaration returns [EObject current=null]
 	        try {
 	       		set(
 	       			$current, 
-	       			"predicate",
-	        		lv_predicate_2_0, 
+	       			"condition",
+	        		lv_condition_2_0, 
 	        		"Expression", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {

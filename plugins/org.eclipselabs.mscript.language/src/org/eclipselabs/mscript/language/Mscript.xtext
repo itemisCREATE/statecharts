@@ -97,7 +97,7 @@ enum AssertionStatusKind :
 	Fatal='fatal';
 
 AssertionDeclaration :
-	(static?='static')? 'assert' predicate=Expression ':' statusKind=AssertionStatusKind message=Expression ';';
+	(static?='static')? 'assert' condition=Expression ':' statusKind=AssertionStatusKind message=Expression ';';
 
 StateVariableDeclaration :
 	'var' name=ID ';';

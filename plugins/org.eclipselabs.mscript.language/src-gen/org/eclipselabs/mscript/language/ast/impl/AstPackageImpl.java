@@ -1110,7 +1110,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getAssertionDeclaration_Predicate()
+  public EReference getAssertionDeclaration_Condition()
   {
     return (EReference)assertionDeclarationEClass.getEStructuralFeatures().get(1);
   }
@@ -2830,7 +2830,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
 
     assertionDeclarationEClass = createEClass(ASSERTION_DECLARATION);
     createEAttribute(assertionDeclarationEClass, ASSERTION_DECLARATION__STATIC);
-    createEReference(assertionDeclarationEClass, ASSERTION_DECLARATION__PREDICATE);
+    createEReference(assertionDeclarationEClass, ASSERTION_DECLARATION__CONDITION);
     createEAttribute(assertionDeclarationEClass, ASSERTION_DECLARATION__STATUS_KIND);
     createEReference(assertionDeclarationEClass, ASSERTION_DECLARATION__MESSAGE);
 
@@ -3187,7 +3187,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
 
     initEClass(assertionDeclarationEClass, AssertionDeclaration.class, "AssertionDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getAssertionDeclaration_Static(), ecorePackage.getEBoolean(), "static", null, 0, 1, AssertionDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getAssertionDeclaration_Predicate(), this.getExpression(), null, "predicate", null, 0, 1, AssertionDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getAssertionDeclaration_Condition(), this.getExpression(), null, "condition", null, 0, 1, AssertionDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getAssertionDeclaration_StatusKind(), this.getAssertionStatusKind(), "statusKind", null, 0, 1, AssertionDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getAssertionDeclaration_Message(), this.getExpression(), null, "message", null, 0, 1, AssertionDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

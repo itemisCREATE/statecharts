@@ -524,13 +524,13 @@ public interface AstPackage extends EPackage
   int ASSERTION_DECLARATION__STATIC = 0;
 
   /**
-   * The feature id for the '<em><b>Predicate</b></em>' containment reference.
+   * The feature id for the '<em><b>Condition</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ASSERTION_DECLARATION__PREDICATE = 1;
+  int ASSERTION_DECLARATION__CONDITION = 1;
 
   /**
    * The feature id for the '<em><b>Status Kind</b></em>' attribute.
@@ -3171,15 +3171,15 @@ public interface AstPackage extends EPackage
   EAttribute getAssertionDeclaration_Static();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.AssertionDeclaration#getPredicate <em>Predicate</em>}'.
+   * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.AssertionDeclaration#getCondition <em>Condition</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Predicate</em>'.
-   * @see org.eclipselabs.mscript.language.ast.AssertionDeclaration#getPredicate()
+   * @return the meta object for the containment reference '<em>Condition</em>'.
+   * @see org.eclipselabs.mscript.language.ast.AssertionDeclaration#getCondition()
    * @see #getAssertionDeclaration()
    * @generated
    */
-  EReference getAssertionDeclaration_Predicate();
+  EReference getAssertionDeclaration_Condition();
 
   /**
    * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.ast.AssertionDeclaration#getStatusKind <em>Status Kind</em>}'.
@@ -5226,12 +5226,12 @@ public interface AstPackage extends EPackage
     EAttribute ASSERTION_DECLARATION__STATIC = eINSTANCE.getAssertionDeclaration_Static();
 
     /**
-     * The meta object literal for the '<em><b>Predicate</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Condition</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference ASSERTION_DECLARATION__PREDICATE = eINSTANCE.getAssertionDeclaration_Predicate();
+    EReference ASSERTION_DECLARATION__CONDITION = eINSTANCE.getAssertionDeclaration_Condition();
 
     /**
      * The meta object literal for the '<em><b>Status Kind</b></em>' attribute feature.

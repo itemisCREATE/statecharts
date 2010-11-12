@@ -27,7 +27,7 @@ import org.eclipselabs.mscript.language.ast.Expression;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.AssertionDeclarationImpl#isStatic <em>Static</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.AssertionDeclarationImpl#getPredicate <em>Predicate</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.AssertionDeclarationImpl#getCondition <em>Condition</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.AssertionDeclarationImpl#getStatusKind <em>Status Kind</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.AssertionDeclarationImpl#getMessage <em>Message</em>}</li>
  * </ul>
@@ -58,14 +58,14 @@ public class AssertionDeclarationImpl extends MinimalEObjectImpl.Container imple
   protected boolean static_ = STATIC_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getPredicate() <em>Predicate</em>}' containment reference.
+   * The cached value of the '{@link #getCondition() <em>Condition</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getPredicate()
+   * @see #getCondition()
    * @generated
    * @ordered
    */
-  protected Expression predicate;
+  protected Expression condition;
 
   /**
    * The default value of the '{@link #getStatusKind() <em>Status Kind</em>}' attribute.
@@ -146,9 +146,9 @@ public class AssertionDeclarationImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public Expression getPredicate()
+  public Expression getCondition()
   {
-    return predicate;
+    return condition;
   }
 
   /**
@@ -156,13 +156,13 @@ public class AssertionDeclarationImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetPredicate(Expression newPredicate, NotificationChain msgs)
+  public NotificationChain basicSetCondition(Expression newCondition, NotificationChain msgs)
   {
-    Expression oldPredicate = predicate;
-    predicate = newPredicate;
+    Expression oldCondition = condition;
+    condition = newCondition;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.ASSERTION_DECLARATION__PREDICATE, oldPredicate, newPredicate);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.ASSERTION_DECLARATION__CONDITION, oldCondition, newCondition);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -173,20 +173,20 @@ public class AssertionDeclarationImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setPredicate(Expression newPredicate)
+  public void setCondition(Expression newCondition)
   {
-    if (newPredicate != predicate)
+    if (newCondition != condition)
     {
       NotificationChain msgs = null;
-      if (predicate != null)
-        msgs = ((InternalEObject)predicate).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.ASSERTION_DECLARATION__PREDICATE, null, msgs);
-      if (newPredicate != null)
-        msgs = ((InternalEObject)newPredicate).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.ASSERTION_DECLARATION__PREDICATE, null, msgs);
-      msgs = basicSetPredicate(newPredicate, msgs);
+      if (condition != null)
+        msgs = ((InternalEObject)condition).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.ASSERTION_DECLARATION__CONDITION, null, msgs);
+      if (newCondition != null)
+        msgs = ((InternalEObject)newCondition).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.ASSERTION_DECLARATION__CONDITION, null, msgs);
+      msgs = basicSetCondition(newCondition, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.ASSERTION_DECLARATION__PREDICATE, newPredicate, newPredicate));
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.ASSERTION_DECLARATION__CONDITION, newCondition, newCondition));
   }
 
   /**
@@ -270,8 +270,8 @@ public class AssertionDeclarationImpl extends MinimalEObjectImpl.Container imple
   {
     switch (featureID)
     {
-      case AstPackage.ASSERTION_DECLARATION__PREDICATE:
-        return basicSetPredicate(null, msgs);
+      case AstPackage.ASSERTION_DECLARATION__CONDITION:
+        return basicSetCondition(null, msgs);
       case AstPackage.ASSERTION_DECLARATION__MESSAGE:
         return basicSetMessage(null, msgs);
     }
@@ -290,8 +290,8 @@ public class AssertionDeclarationImpl extends MinimalEObjectImpl.Container imple
     {
       case AstPackage.ASSERTION_DECLARATION__STATIC:
         return isStatic();
-      case AstPackage.ASSERTION_DECLARATION__PREDICATE:
-        return getPredicate();
+      case AstPackage.ASSERTION_DECLARATION__CONDITION:
+        return getCondition();
       case AstPackage.ASSERTION_DECLARATION__STATUS_KIND:
         return getStatusKind();
       case AstPackage.ASSERTION_DECLARATION__MESSAGE:
@@ -313,8 +313,8 @@ public class AssertionDeclarationImpl extends MinimalEObjectImpl.Container imple
       case AstPackage.ASSERTION_DECLARATION__STATIC:
         setStatic((Boolean)newValue);
         return;
-      case AstPackage.ASSERTION_DECLARATION__PREDICATE:
-        setPredicate((Expression)newValue);
+      case AstPackage.ASSERTION_DECLARATION__CONDITION:
+        setCondition((Expression)newValue);
         return;
       case AstPackage.ASSERTION_DECLARATION__STATUS_KIND:
         setStatusKind((AssertionStatusKind)newValue);
@@ -339,8 +339,8 @@ public class AssertionDeclarationImpl extends MinimalEObjectImpl.Container imple
       case AstPackage.ASSERTION_DECLARATION__STATIC:
         setStatic(STATIC_EDEFAULT);
         return;
-      case AstPackage.ASSERTION_DECLARATION__PREDICATE:
-        setPredicate((Expression)null);
+      case AstPackage.ASSERTION_DECLARATION__CONDITION:
+        setCondition((Expression)null);
         return;
       case AstPackage.ASSERTION_DECLARATION__STATUS_KIND:
         setStatusKind(STATUS_KIND_EDEFAULT);
@@ -364,8 +364,8 @@ public class AssertionDeclarationImpl extends MinimalEObjectImpl.Container imple
     {
       case AstPackage.ASSERTION_DECLARATION__STATIC:
         return static_ != STATIC_EDEFAULT;
-      case AstPackage.ASSERTION_DECLARATION__PREDICATE:
-        return predicate != null;
+      case AstPackage.ASSERTION_DECLARATION__CONDITION:
+        return condition != null;
       case AstPackage.ASSERTION_DECLARATION__STATUS_KIND:
         return statusKind != STATUS_KIND_EDEFAULT;
       case AstPackage.ASSERTION_DECLARATION__MESSAGE:

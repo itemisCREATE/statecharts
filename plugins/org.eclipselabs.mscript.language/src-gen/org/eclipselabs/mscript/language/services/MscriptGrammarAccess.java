@@ -550,8 +550,8 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cStaticAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final Keyword cStaticStaticKeyword_0_0 = (Keyword)cStaticAssignment_0.eContents().get(0);
 		private final Keyword cAssertKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cPredicateAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cPredicateExpressionParserRuleCall_2_0 = (RuleCall)cPredicateAssignment_2.eContents().get(0);
+		private final Assignment cConditionAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cConditionExpressionParserRuleCall_2_0 = (RuleCall)cConditionAssignment_2.eContents().get(0);
 		private final Keyword cColonKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		private final Assignment cStatusKindAssignment_4 = (Assignment)cGroup.eContents().get(4);
 		private final RuleCall cStatusKindAssertionStatusKindEnumRuleCall_4_0 = (RuleCall)cStatusKindAssignment_4.eContents().get(0);
@@ -560,10 +560,10 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cSemicolonKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
 		//AssertionDeclaration:
-		//	static?="static"? "assert" predicate=Expression ":" statusKind=AssertionStatusKind message=Expression ";";
+		//	static?="static"? "assert" condition=Expression ":" statusKind=AssertionStatusKind message=Expression ";";
 		public ParserRule getRule() { return rule; }
 
-		//static?="static"? "assert" predicate=Expression ":" statusKind=AssertionStatusKind message=Expression ";"
+		//static?="static"? "assert" condition=Expression ":" statusKind=AssertionStatusKind message=Expression ";"
 		public Group getGroup() { return cGroup; }
 
 		//static?="static"?
@@ -575,11 +575,11 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		//"assert"
 		public Keyword getAssertKeyword_1() { return cAssertKeyword_1; }
 
-		//predicate=Expression
-		public Assignment getPredicateAssignment_2() { return cPredicateAssignment_2; }
+		//condition=Expression
+		public Assignment getConditionAssignment_2() { return cConditionAssignment_2; }
 
 		//Expression
-		public RuleCall getPredicateExpressionParserRuleCall_2_0() { return cPredicateExpressionParserRuleCall_2_0; }
+		public RuleCall getConditionExpressionParserRuleCall_2_0() { return cConditionExpressionParserRuleCall_2_0; }
 
 		//":"
 		public Keyword getColonKeyword_3() { return cColonKeyword_3; }
@@ -3834,7 +3834,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//AssertionDeclaration:
-	//	static?="static"? "assert" predicate=Expression ":" statusKind=AssertionStatusKind message=Expression ";";
+	//	static?="static"? "assert" condition=Expression ":" statusKind=AssertionStatusKind message=Expression ";";
 	public AssertionDeclarationElements getAssertionDeclarationAccess() {
 		return (pAssertionDeclaration != null) ? pAssertionDeclaration : (pAssertionDeclaration = new AssertionDeclarationElements());
 	}

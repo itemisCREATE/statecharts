@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipselabs.mscript.language.ast.AssertionDeclaration#isStatic <em>Static</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.AssertionDeclaration#getPredicate <em>Predicate</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.AssertionDeclaration#getCondition <em>Condition</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.AssertionDeclaration#getStatusKind <em>Status Kind</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.AssertionDeclaration#getMessage <em>Message</em>}</li>
  * </ul>
@@ -55,30 +55,30 @@ public interface AssertionDeclaration extends EObject
   void setStatic(boolean value);
 
   /**
-   * Returns the value of the '<em><b>Predicate</b></em>' containment reference.
+   * Returns the value of the '<em><b>Condition</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Predicate</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Condition</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Predicate</em>' containment reference.
-   * @see #setPredicate(Expression)
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getAssertionDeclaration_Predicate()
+   * @return the value of the '<em>Condition</em>' containment reference.
+   * @see #setCondition(Expression)
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getAssertionDeclaration_Condition()
    * @model containment="true"
    * @generated
    */
-  Expression getPredicate();
+  Expression getCondition();
 
   /**
-   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.AssertionDeclaration#getPredicate <em>Predicate</em>}' containment reference.
+   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.AssertionDeclaration#getCondition <em>Condition</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Predicate</em>' containment reference.
-   * @see #getPredicate()
+   * @param value the new value of the '<em>Condition</em>' containment reference.
+   * @see #getCondition()
    * @generated
    */
-  void setPredicate(Expression value);
+  void setCondition(Expression value);
 
   /**
    * Returns the value of the '<em><b>Status Kind</b></em>' attribute.

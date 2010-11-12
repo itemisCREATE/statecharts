@@ -4992,9 +4992,9 @@ rule__AssertionDeclaration__Group__2__Impl
     }
 :
 (
-{ before(grammarAccess.getAssertionDeclarationAccess().getPredicateAssignment_2()); }
-(rule__AssertionDeclaration__PredicateAssignment_2)
-{ after(grammarAccess.getAssertionDeclarationAccess().getPredicateAssignment_2()); }
+{ before(grammarAccess.getAssertionDeclarationAccess().getConditionAssignment_2()); }
+(rule__AssertionDeclaration__ConditionAssignment_2)
+{ after(grammarAccess.getAssertionDeclarationAccess().getConditionAssignment_2()); }
 )
 
 ;
@@ -15137,14 +15137,14 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__AssertionDeclaration__PredicateAssignment_2
+rule__AssertionDeclaration__ConditionAssignment_2
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getAssertionDeclarationAccess().getPredicateExpressionParserRuleCall_2_0()); }
-	ruleExpression{ after(grammarAccess.getAssertionDeclarationAccess().getPredicateExpressionParserRuleCall_2_0()); }
+{ before(grammarAccess.getAssertionDeclarationAccess().getConditionExpressionParserRuleCall_2_0()); }
+	ruleExpression{ after(grammarAccess.getAssertionDeclarationAccess().getConditionExpressionParserRuleCall_2_0()); }
 )
 
 ;

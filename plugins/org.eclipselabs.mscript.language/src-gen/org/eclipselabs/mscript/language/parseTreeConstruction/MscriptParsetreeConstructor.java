@@ -2678,11 +2678,11 @@ protected class ParameterDeclaration_NameAssignment extends AssignmentToken  {
 /************ begin Rule AssertionDeclaration ****************
  *
  * AssertionDeclaration:
- * 	static?="static"? "assert" predicate=Expression ":" statusKind=AssertionStatusKind message=Expression ";";
+ * 	static?="static"? "assert" condition=Expression ":" statusKind=AssertionStatusKind message=Expression ";";
  *
  **/
 
-// static?="static"? "assert" predicate=Expression ":" statusKind=AssertionStatusKind message=Expression ";"
+// static?="static"? "assert" condition=Expression ":" statusKind=AssertionStatusKind message=Expression ";"
 protected class AssertionDeclaration_Group extends GroupToken {
 	
 	public AssertionDeclaration_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2766,16 +2766,16 @@ protected class AssertionDeclaration_AssertKeyword_1 extends KeywordToken  {
 
 }
 
-// predicate=Expression
-protected class AssertionDeclaration_PredicateAssignment_2 extends AssignmentToken  {
+// condition=Expression
+protected class AssertionDeclaration_ConditionAssignment_2 extends AssignmentToken  {
 	
-	public AssertionDeclaration_PredicateAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public AssertionDeclaration_ConditionAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getAssertionDeclarationAccess().getPredicateAssignment_2();
+		return grammarAccess.getAssertionDeclarationAccess().getConditionAssignment_2();
 	}
 
     @Override
@@ -2788,13 +2788,13 @@ protected class AssertionDeclaration_PredicateAssignment_2 extends AssignmentTok
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("predicate",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("predicate");
+		if((value = eObjectConsumer.getConsumable("condition",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("condition");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getExpressionRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getAssertionDeclarationAccess().getPredicateExpressionParserRuleCall_2_0(); 
+				element = grammarAccess.getAssertionDeclarationAccess().getConditionExpressionParserRuleCall_2_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -2827,7 +2827,7 @@ protected class AssertionDeclaration_ColonKeyword_3 extends KeywordToken  {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new AssertionDeclaration_PredicateAssignment_2(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new AssertionDeclaration_ConditionAssignment_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}

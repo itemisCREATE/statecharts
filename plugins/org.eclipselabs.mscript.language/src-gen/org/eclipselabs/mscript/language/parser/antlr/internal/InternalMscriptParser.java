@@ -2484,12 +2484,12 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleAssertionDeclaration
-    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1158:1: ruleAssertionDeclaration returns [EObject current=null] : ( ( (lv_static_0_0= 'static' ) )? 'assert' ( (lv_predicate_2_0= ruleExpression ) ) ':' ( (lv_statusKind_4_0= ruleAssertionStatusKind ) ) ( (lv_message_5_0= ruleExpression ) ) ';' ) ;
+    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1158:1: ruleAssertionDeclaration returns [EObject current=null] : ( ( (lv_static_0_0= 'static' ) )? 'assert' ( (lv_condition_2_0= ruleExpression ) ) ':' ( (lv_statusKind_4_0= ruleAssertionStatusKind ) ) ( (lv_message_5_0= ruleExpression ) ) ';' ) ;
     public final EObject ruleAssertionDeclaration() throws RecognitionException {
         EObject current = null;
 
         Token lv_static_0_0=null;
-        EObject lv_predicate_2_0 = null;
+        EObject lv_condition_2_0 = null;
 
         Enumerator lv_statusKind_4_0 = null;
 
@@ -2499,11 +2499,11 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1163:6: ( ( ( (lv_static_0_0= 'static' ) )? 'assert' ( (lv_predicate_2_0= ruleExpression ) ) ':' ( (lv_statusKind_4_0= ruleAssertionStatusKind ) ) ( (lv_message_5_0= ruleExpression ) ) ';' ) )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1164:1: ( ( (lv_static_0_0= 'static' ) )? 'assert' ( (lv_predicate_2_0= ruleExpression ) ) ':' ( (lv_statusKind_4_0= ruleAssertionStatusKind ) ) ( (lv_message_5_0= ruleExpression ) ) ';' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1163:6: ( ( ( (lv_static_0_0= 'static' ) )? 'assert' ( (lv_condition_2_0= ruleExpression ) ) ':' ( (lv_statusKind_4_0= ruleAssertionStatusKind ) ) ( (lv_message_5_0= ruleExpression ) ) ';' ) )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1164:1: ( ( (lv_static_0_0= 'static' ) )? 'assert' ( (lv_condition_2_0= ruleExpression ) ) ':' ( (lv_statusKind_4_0= ruleAssertionStatusKind ) ) ( (lv_message_5_0= ruleExpression ) ) ';' )
             {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1164:1: ( ( (lv_static_0_0= 'static' ) )? 'assert' ( (lv_predicate_2_0= ruleExpression ) ) ':' ( (lv_statusKind_4_0= ruleAssertionStatusKind ) ) ( (lv_message_5_0= ruleExpression ) ) ';' )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1164:2: ( (lv_static_0_0= 'static' ) )? 'assert' ( (lv_predicate_2_0= ruleExpression ) ) ':' ( (lv_statusKind_4_0= ruleAssertionStatusKind ) ) ( (lv_message_5_0= ruleExpression ) ) ';'
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1164:1: ( ( (lv_static_0_0= 'static' ) )? 'assert' ( (lv_condition_2_0= ruleExpression ) ) ':' ( (lv_statusKind_4_0= ruleAssertionStatusKind ) ) ( (lv_message_5_0= ruleExpression ) ) ';' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1164:2: ( (lv_static_0_0= 'static' ) )? 'assert' ( (lv_condition_2_0= ruleExpression ) ) ':' ( (lv_statusKind_4_0= ruleAssertionStatusKind ) ) ( (lv_message_5_0= ruleExpression ) ) ';'
             {
             // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1164:2: ( (lv_static_0_0= 'static' ) )?
             int alt16=2;
@@ -2549,17 +2549,17 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
                     createLeafNode(grammarAccess.getAssertionDeclarationAccess().getAssertKeyword_1(), null); 
                 
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1189:1: ( (lv_predicate_2_0= ruleExpression ) )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1190:1: (lv_predicate_2_0= ruleExpression )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1189:1: ( (lv_condition_2_0= ruleExpression ) )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1190:1: (lv_condition_2_0= ruleExpression )
             {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1190:1: (lv_predicate_2_0= ruleExpression )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1191:3: lv_predicate_2_0= ruleExpression
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1190:1: (lv_condition_2_0= ruleExpression )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1191:3: lv_condition_2_0= ruleExpression
             {
              
-            	        currentNode=createCompositeNode(grammarAccess.getAssertionDeclarationAccess().getPredicateExpressionParserRuleCall_2_0(), currentNode); 
+            	        currentNode=createCompositeNode(grammarAccess.getAssertionDeclarationAccess().getConditionExpressionParserRuleCall_2_0(), currentNode); 
             	    
             pushFollow(FOLLOW_ruleExpression_in_ruleAssertionDeclaration2059);
-            lv_predicate_2_0=ruleExpression();
+            lv_condition_2_0=ruleExpression();
             _fsp--;
 
 
@@ -2570,8 +2570,8 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
             	        try {
             	       		set(
             	       			current, 
-            	       			"predicate",
-            	        		lv_predicate_2_0, 
+            	       			"condition",
+            	        		lv_condition_2_0, 
             	        		"Expression", 
             	        		currentNode);
             	        } catch (ValueConverterException vce) {

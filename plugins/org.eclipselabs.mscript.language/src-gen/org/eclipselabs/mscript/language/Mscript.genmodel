@@ -93,7 +93,7 @@
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//AssertionDeclaration">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//AssertionDeclaration/static"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//AssertionDeclaration/predicate"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//AssertionDeclaration/condition"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//AssertionDeclaration/statusKind"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//AssertionDeclaration/message"/>
     </genClasses>
