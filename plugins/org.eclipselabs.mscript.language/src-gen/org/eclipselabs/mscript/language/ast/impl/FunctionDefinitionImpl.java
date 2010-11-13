@@ -20,9 +20,9 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.eclipselabs.mscript.language.ast.AssertionDeclaration;
+import org.eclipselabs.mscript.language.ast.AssertionStatement;
 import org.eclipselabs.mscript.language.ast.AstPackage;
-import org.eclipselabs.mscript.language.ast.EquationDefinition;
+import org.eclipselabs.mscript.language.ast.EquationStatement;
 import org.eclipselabs.mscript.language.ast.FunctionDefinition;
 import org.eclipselabs.mscript.language.ast.FunctorDeclaration;
 import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
@@ -39,16 +39,16 @@ import org.eclipselabs.mscript.language.ast.StateVariableDeclaration;
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl#getTemplateParameterDeclarations <em>Template Parameter Declarations</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl#getInputParameterDeclarations <em>Input Parameter Declarations</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl#getOutputParameterDeclarations <em>Output Parameter Declarations</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl#getAssertionDeclarations <em>Assertion Declarations</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl#getAssertionStatements <em>Assertion Statements</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl#getFunctorDeclarations <em>Functor Declarations</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl#getStateVariableDeclarations <em>State Variable Declarations</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl#getEquations <em>Equations</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl#getEquationStatements <em>Equation Statements</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class FunctionDefinitionImpl extends TypeDefinitionImpl implements FunctionDefinition
+public class FunctionDefinitionImpl extends DefinitionImpl implements FunctionDefinition
 {
   /**
    * The default value of the '{@link #isStateful() <em>Stateful</em>}' attribute.
@@ -101,14 +101,14 @@ public class FunctionDefinitionImpl extends TypeDefinitionImpl implements Functi
   protected EList<ParameterDeclaration> outputParameterDeclarations;
 
   /**
-   * The cached value of the '{@link #getAssertionDeclarations() <em>Assertion Declarations</em>}' containment reference list.
+   * The cached value of the '{@link #getAssertionStatements() <em>Assertion Statements</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getAssertionDeclarations()
+   * @see #getAssertionStatements()
    * @generated
    * @ordered
    */
-  protected EList<AssertionDeclaration> assertionDeclarations;
+  protected EList<AssertionStatement> assertionStatements;
 
   /**
    * The cached value of the '{@link #getFunctorDeclarations() <em>Functor Declarations</em>}' containment reference list.
@@ -131,14 +131,14 @@ public class FunctionDefinitionImpl extends TypeDefinitionImpl implements Functi
   protected EList<StateVariableDeclaration> stateVariableDeclarations;
 
   /**
-   * The cached value of the '{@link #getEquations() <em>Equations</em>}' containment reference list.
+   * The cached value of the '{@link #getEquationStatements() <em>Equation Statements</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getEquations()
+   * @see #getEquationStatements()
    * @generated
    * @ordered
    */
-  protected EList<EquationDefinition> equations;
+  protected EList<EquationStatement> equationStatements;
 
   /**
    * <!-- begin-user-doc -->
@@ -231,13 +231,13 @@ public class FunctionDefinitionImpl extends TypeDefinitionImpl implements Functi
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<AssertionDeclaration> getAssertionDeclarations()
+  public EList<AssertionStatement> getAssertionStatements()
   {
-    if (assertionDeclarations == null)
+    if (assertionStatements == null)
     {
-      assertionDeclarations = new EObjectContainmentEList<AssertionDeclaration>(AssertionDeclaration.class, this, AstPackage.FUNCTION_DEFINITION__ASSERTION_DECLARATIONS);
+      assertionStatements = new EObjectContainmentEList<AssertionStatement>(AssertionStatement.class, this, AstPackage.FUNCTION_DEFINITION__ASSERTION_STATEMENTS);
     }
-    return assertionDeclarations;
+    return assertionStatements;
   }
 
   /**
@@ -273,13 +273,13 @@ public class FunctionDefinitionImpl extends TypeDefinitionImpl implements Functi
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<EquationDefinition> getEquations()
+  public EList<EquationStatement> getEquationStatements()
   {
-    if (equations == null)
+    if (equationStatements == null)
     {
-      equations = new EObjectContainmentEList<EquationDefinition>(EquationDefinition.class, this, AstPackage.FUNCTION_DEFINITION__EQUATIONS);
+      equationStatements = new EObjectContainmentEList<EquationStatement>(EquationStatement.class, this, AstPackage.FUNCTION_DEFINITION__EQUATION_STATEMENTS);
     }
-    return equations;
+    return equationStatements;
   }
 
   /**
@@ -298,14 +298,14 @@ public class FunctionDefinitionImpl extends TypeDefinitionImpl implements Functi
         return ((InternalEList<?>)getInputParameterDeclarations()).basicRemove(otherEnd, msgs);
       case AstPackage.FUNCTION_DEFINITION__OUTPUT_PARAMETER_DECLARATIONS:
         return ((InternalEList<?>)getOutputParameterDeclarations()).basicRemove(otherEnd, msgs);
-      case AstPackage.FUNCTION_DEFINITION__ASSERTION_DECLARATIONS:
-        return ((InternalEList<?>)getAssertionDeclarations()).basicRemove(otherEnd, msgs);
+      case AstPackage.FUNCTION_DEFINITION__ASSERTION_STATEMENTS:
+        return ((InternalEList<?>)getAssertionStatements()).basicRemove(otherEnd, msgs);
       case AstPackage.FUNCTION_DEFINITION__FUNCTOR_DECLARATIONS:
         return ((InternalEList<?>)getFunctorDeclarations()).basicRemove(otherEnd, msgs);
       case AstPackage.FUNCTION_DEFINITION__STATE_VARIABLE_DECLARATIONS:
         return ((InternalEList<?>)getStateVariableDeclarations()).basicRemove(otherEnd, msgs);
-      case AstPackage.FUNCTION_DEFINITION__EQUATIONS:
-        return ((InternalEList<?>)getEquations()).basicRemove(otherEnd, msgs);
+      case AstPackage.FUNCTION_DEFINITION__EQUATION_STATEMENTS:
+        return ((InternalEList<?>)getEquationStatements()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -328,14 +328,14 @@ public class FunctionDefinitionImpl extends TypeDefinitionImpl implements Functi
         return getInputParameterDeclarations();
       case AstPackage.FUNCTION_DEFINITION__OUTPUT_PARAMETER_DECLARATIONS:
         return getOutputParameterDeclarations();
-      case AstPackage.FUNCTION_DEFINITION__ASSERTION_DECLARATIONS:
-        return getAssertionDeclarations();
+      case AstPackage.FUNCTION_DEFINITION__ASSERTION_STATEMENTS:
+        return getAssertionStatements();
       case AstPackage.FUNCTION_DEFINITION__FUNCTOR_DECLARATIONS:
         return getFunctorDeclarations();
       case AstPackage.FUNCTION_DEFINITION__STATE_VARIABLE_DECLARATIONS:
         return getStateVariableDeclarations();
-      case AstPackage.FUNCTION_DEFINITION__EQUATIONS:
-        return getEquations();
+      case AstPackage.FUNCTION_DEFINITION__EQUATION_STATEMENTS:
+        return getEquationStatements();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -366,9 +366,9 @@ public class FunctionDefinitionImpl extends TypeDefinitionImpl implements Functi
         getOutputParameterDeclarations().clear();
         getOutputParameterDeclarations().addAll((Collection<? extends ParameterDeclaration>)newValue);
         return;
-      case AstPackage.FUNCTION_DEFINITION__ASSERTION_DECLARATIONS:
-        getAssertionDeclarations().clear();
-        getAssertionDeclarations().addAll((Collection<? extends AssertionDeclaration>)newValue);
+      case AstPackage.FUNCTION_DEFINITION__ASSERTION_STATEMENTS:
+        getAssertionStatements().clear();
+        getAssertionStatements().addAll((Collection<? extends AssertionStatement>)newValue);
         return;
       case AstPackage.FUNCTION_DEFINITION__FUNCTOR_DECLARATIONS:
         getFunctorDeclarations().clear();
@@ -378,9 +378,9 @@ public class FunctionDefinitionImpl extends TypeDefinitionImpl implements Functi
         getStateVariableDeclarations().clear();
         getStateVariableDeclarations().addAll((Collection<? extends StateVariableDeclaration>)newValue);
         return;
-      case AstPackage.FUNCTION_DEFINITION__EQUATIONS:
-        getEquations().clear();
-        getEquations().addAll((Collection<? extends EquationDefinition>)newValue);
+      case AstPackage.FUNCTION_DEFINITION__EQUATION_STATEMENTS:
+        getEquationStatements().clear();
+        getEquationStatements().addAll((Collection<? extends EquationStatement>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -408,8 +408,8 @@ public class FunctionDefinitionImpl extends TypeDefinitionImpl implements Functi
       case AstPackage.FUNCTION_DEFINITION__OUTPUT_PARAMETER_DECLARATIONS:
         getOutputParameterDeclarations().clear();
         return;
-      case AstPackage.FUNCTION_DEFINITION__ASSERTION_DECLARATIONS:
-        getAssertionDeclarations().clear();
+      case AstPackage.FUNCTION_DEFINITION__ASSERTION_STATEMENTS:
+        getAssertionStatements().clear();
         return;
       case AstPackage.FUNCTION_DEFINITION__FUNCTOR_DECLARATIONS:
         getFunctorDeclarations().clear();
@@ -417,8 +417,8 @@ public class FunctionDefinitionImpl extends TypeDefinitionImpl implements Functi
       case AstPackage.FUNCTION_DEFINITION__STATE_VARIABLE_DECLARATIONS:
         getStateVariableDeclarations().clear();
         return;
-      case AstPackage.FUNCTION_DEFINITION__EQUATIONS:
-        getEquations().clear();
+      case AstPackage.FUNCTION_DEFINITION__EQUATION_STATEMENTS:
+        getEquationStatements().clear();
         return;
     }
     super.eUnset(featureID);
@@ -442,14 +442,14 @@ public class FunctionDefinitionImpl extends TypeDefinitionImpl implements Functi
         return inputParameterDeclarations != null && !inputParameterDeclarations.isEmpty();
       case AstPackage.FUNCTION_DEFINITION__OUTPUT_PARAMETER_DECLARATIONS:
         return outputParameterDeclarations != null && !outputParameterDeclarations.isEmpty();
-      case AstPackage.FUNCTION_DEFINITION__ASSERTION_DECLARATIONS:
-        return assertionDeclarations != null && !assertionDeclarations.isEmpty();
+      case AstPackage.FUNCTION_DEFINITION__ASSERTION_STATEMENTS:
+        return assertionStatements != null && !assertionStatements.isEmpty();
       case AstPackage.FUNCTION_DEFINITION__FUNCTOR_DECLARATIONS:
         return functorDeclarations != null && !functorDeclarations.isEmpty();
       case AstPackage.FUNCTION_DEFINITION__STATE_VARIABLE_DECLARATIONS:
         return stateVariableDeclarations != null && !stateVariableDeclarations.isEmpty();
-      case AstPackage.FUNCTION_DEFINITION__EQUATIONS:
-        return equations != null && !equations.isEmpty();
+      case AstPackage.FUNCTION_DEFINITION__EQUATION_STATEMENTS:
+        return equationStatements != null && !equationStatements.isEmpty();
     }
     return super.eIsSet(featureID);
   }

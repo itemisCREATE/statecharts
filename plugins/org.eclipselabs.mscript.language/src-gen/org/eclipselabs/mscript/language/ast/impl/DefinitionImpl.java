@@ -10,24 +10,25 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipselabs.mscript.language.ast.AstPackage;
-import org.eclipselabs.mscript.language.ast.TypeDefinition;
+import org.eclipselabs.mscript.language.ast.Definition;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Type Definition</b></em>'.
+ * An implementation of the model object '<em><b>Definition</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.TypeDefinitionImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.DefinitionImpl#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class TypeDefinitionImpl extends NamespaceMemberImpl implements TypeDefinition
+public class DefinitionImpl extends MinimalEObjectImpl.Container implements Definition
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -54,7 +55,7 @@ public class TypeDefinitionImpl extends NamespaceMemberImpl implements TypeDefin
    * <!-- end-user-doc -->
    * @generated
    */
-  protected TypeDefinitionImpl()
+  protected DefinitionImpl()
   {
     super();
   }
@@ -67,7 +68,7 @@ public class TypeDefinitionImpl extends NamespaceMemberImpl implements TypeDefin
   @Override
   protected EClass eStaticClass()
   {
-    return AstPackage.Literals.TYPE_DEFINITION;
+    return AstPackage.Literals.DEFINITION;
   }
 
   /**
@@ -90,7 +91,7 @@ public class TypeDefinitionImpl extends NamespaceMemberImpl implements TypeDefin
     String oldName = name;
     name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.TYPE_DEFINITION__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.DEFINITION__NAME, oldName, name));
   }
 
   /**
@@ -103,7 +104,7 @@ public class TypeDefinitionImpl extends NamespaceMemberImpl implements TypeDefin
   {
     switch (featureID)
     {
-      case AstPackage.TYPE_DEFINITION__NAME:
+      case AstPackage.DEFINITION__NAME:
         return getName();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -119,7 +120,7 @@ public class TypeDefinitionImpl extends NamespaceMemberImpl implements TypeDefin
   {
     switch (featureID)
     {
-      case AstPackage.TYPE_DEFINITION__NAME:
+      case AstPackage.DEFINITION__NAME:
         setName((String)newValue);
         return;
     }
@@ -136,7 +137,7 @@ public class TypeDefinitionImpl extends NamespaceMemberImpl implements TypeDefin
   {
     switch (featureID)
     {
-      case AstPackage.TYPE_DEFINITION__NAME:
+      case AstPackage.DEFINITION__NAME:
         setName(NAME_EDEFAULT);
         return;
     }
@@ -153,7 +154,7 @@ public class TypeDefinitionImpl extends NamespaceMemberImpl implements TypeDefin
   {
     switch (featureID)
     {
-      case AstPackage.TYPE_DEFINITION__NAME:
+      case AstPackage.DEFINITION__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
     }
     return super.eIsSet(featureID);
@@ -176,4 +177,4 @@ public class TypeDefinitionImpl extends NamespaceMemberImpl implements TypeDefin
     return result.toString();
   }
 
-} //TypeDefinitionImpl
+} //DefinitionImpl

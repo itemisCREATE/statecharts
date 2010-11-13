@@ -95,33 +95,17 @@ public class AstSwitch<T>
   {
     switch (classifierID)
     {
-      case AstPackage.MSCRIPT:
+      case AstPackage.MODULE:
       {
-        Mscript mscript = (Mscript)theEObject;
-        T result = caseMscript(mscript);
+        Module module = (Module)theEObject;
+        T result = caseModule(module);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AstPackage.NAMESPACE_DEFINITION:
+      case AstPackage.DEFINITION:
       {
-        NamespaceDefinition namespaceDefinition = (NamespaceDefinition)theEObject;
-        T result = caseNamespaceDefinition(namespaceDefinition);
-        if (result == null) result = caseNamespaceMember(namespaceDefinition);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case AstPackage.NAMESPACE_MEMBER:
-      {
-        NamespaceMember namespaceMember = (NamespaceMember)theEObject;
-        T result = caseNamespaceMember(namespaceMember);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case AstPackage.TYPE_DEFINITION:
-      {
-        TypeDefinition typeDefinition = (TypeDefinition)theEObject;
-        T result = caseTypeDefinition(typeDefinition);
-        if (result == null) result = caseNamespaceMember(typeDefinition);
+        Definition definition = (Definition)theEObject;
+        T result = caseDefinition(definition);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -129,8 +113,7 @@ public class AstSwitch<T>
       {
         DataTypeDefinition dataTypeDefinition = (DataTypeDefinition)theEObject;
         T result = caseDataTypeDefinition(dataTypeDefinition);
-        if (result == null) result = caseTypeDefinition(dataTypeDefinition);
-        if (result == null) result = caseNamespaceMember(dataTypeDefinition);
+        if (result == null) result = caseDefinition(dataTypeDefinition);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -139,8 +122,7 @@ public class AstSwitch<T>
         EnumerationDefinition enumerationDefinition = (EnumerationDefinition)theEObject;
         T result = caseEnumerationDefinition(enumerationDefinition);
         if (result == null) result = caseDataTypeDefinition(enumerationDefinition);
-        if (result == null) result = caseTypeDefinition(enumerationDefinition);
-        if (result == null) result = caseNamespaceMember(enumerationDefinition);
+        if (result == null) result = caseDefinition(enumerationDefinition);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -156,8 +138,7 @@ public class AstSwitch<T>
         TypeAliasDefinition typeAliasDefinition = (TypeAliasDefinition)theEObject;
         T result = caseTypeAliasDefinition(typeAliasDefinition);
         if (result == null) result = caseDataTypeDefinition(typeAliasDefinition);
-        if (result == null) result = caseTypeDefinition(typeAliasDefinition);
-        if (result == null) result = caseNamespaceMember(typeAliasDefinition);
+        if (result == null) result = caseDefinition(typeAliasDefinition);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -166,8 +147,7 @@ public class AstSwitch<T>
         RecordDefinition recordDefinition = (RecordDefinition)theEObject;
         T result = caseRecordDefinition(recordDefinition);
         if (result == null) result = caseDataTypeDefinition(recordDefinition);
-        if (result == null) result = caseTypeDefinition(recordDefinition);
-        if (result == null) result = caseNamespaceMember(recordDefinition);
+        if (result == null) result = caseDefinition(recordDefinition);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -182,8 +162,7 @@ public class AstSwitch<T>
       {
         FunctionDefinition functionDefinition = (FunctionDefinition)theEObject;
         T result = caseFunctionDefinition(functionDefinition);
-        if (result == null) result = caseTypeDefinition(functionDefinition);
-        if (result == null) result = caseNamespaceMember(functionDefinition);
+        if (result == null) result = caseDefinition(functionDefinition);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -194,10 +173,10 @@ public class AstSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AstPackage.ASSERTION_DECLARATION:
+      case AstPackage.ASSERTION_STATEMENT:
       {
-        AssertionDeclaration assertionDeclaration = (AssertionDeclaration)theEObject;
-        T result = caseAssertionDeclaration(assertionDeclaration);
+        AssertionStatement assertionStatement = (AssertionStatement)theEObject;
+        T result = caseAssertionStatement(assertionStatement);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -222,10 +201,10 @@ public class AstSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AstPackage.EQUATION_DEFINITION:
+      case AstPackage.EQUATION_STATEMENT:
       {
-        EquationDefinition equationDefinition = (EquationDefinition)theEObject;
-        T result = caseEquationDefinition(equationDefinition);
+        EquationStatement equationStatement = (EquationStatement)theEObject;
+        T result = caseEquationStatement(equationStatement);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -713,65 +692,33 @@ public class AstSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Mscript</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Module</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Mscript</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Module</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseMscript(Mscript object)
+  public T caseModule(Module object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Namespace Definition</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Definition</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Namespace Definition</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Definition</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseNamespaceDefinition(NamespaceDefinition object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Namespace Member</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Namespace Member</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseNamespaceMember(NamespaceMember object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Type Definition</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Type Definition</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseTypeDefinition(TypeDefinition object)
+  public T caseDefinition(Definition object)
   {
     return null;
   }
@@ -905,17 +852,17 @@ public class AstSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Assertion Declaration</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Assertion Statement</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Assertion Declaration</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Assertion Statement</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseAssertionDeclaration(AssertionDeclaration object)
+  public T caseAssertionStatement(AssertionStatement object)
   {
     return null;
   }
@@ -969,17 +916,17 @@ public class AstSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Equation Definition</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Equation Statement</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Equation Definition</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Equation Statement</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseEquationDefinition(EquationDefinition object)
+  public T caseEquationStatement(EquationStatement object)
   {
     return null;
   }

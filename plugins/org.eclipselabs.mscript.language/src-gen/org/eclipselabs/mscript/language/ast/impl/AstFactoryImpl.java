@@ -68,10 +68,8 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
   {
     switch (eClass.getClassifierID())
     {
-      case AstPackage.MSCRIPT: return createMscript();
-      case AstPackage.NAMESPACE_DEFINITION: return createNamespaceDefinition();
-      case AstPackage.NAMESPACE_MEMBER: return createNamespaceMember();
-      case AstPackage.TYPE_DEFINITION: return createTypeDefinition();
+      case AstPackage.MODULE: return createModule();
+      case AstPackage.DEFINITION: return createDefinition();
       case AstPackage.DATA_TYPE_DEFINITION: return createDataTypeDefinition();
       case AstPackage.ENUMERATION_DEFINITION: return createEnumerationDefinition();
       case AstPackage.ENUMERATION_LITERAL_DECLARATION: return createEnumerationLiteralDeclaration();
@@ -80,11 +78,11 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
       case AstPackage.RECORD_FIELD_DECLARATION: return createRecordFieldDeclaration();
       case AstPackage.FUNCTION_DEFINITION: return createFunctionDefinition();
       case AstPackage.PARAMETER_DECLARATION: return createParameterDeclaration();
-      case AstPackage.ASSERTION_DECLARATION: return createAssertionDeclaration();
+      case AstPackage.ASSERTION_STATEMENT: return createAssertionStatement();
       case AstPackage.STATE_VARIABLE_DECLARATION: return createStateVariableDeclaration();
       case AstPackage.FUNCTOR_DECLARATION: return createFunctorDeclaration();
       case AstPackage.ARGUMENT_DECLARATION: return createArgumentDeclaration();
-      case AstPackage.EQUATION_DEFINITION: return createEquationDefinition();
+      case AstPackage.EQUATION_STATEMENT: return createEquationStatement();
       case AstPackage.DATA_TYPE_SPECIFIER: return createDataTypeSpecifier();
       case AstPackage.PRIMITIVE_TYPE_SPECIFIER: return createPrimitiveTypeSpecifier();
       case AstPackage.NUMERIC_TYPE_SPECIFIER: return createNumericTypeSpecifier();
@@ -221,10 +219,10 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public Mscript createMscript()
+  public Module createModule()
   {
-    MscriptImpl mscript = new MscriptImpl();
-    return mscript;
+    ModuleImpl module = new ModuleImpl();
+    return module;
   }
 
   /**
@@ -232,32 +230,10 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public NamespaceDefinition createNamespaceDefinition()
+  public Definition createDefinition()
   {
-    NamespaceDefinitionImpl namespaceDefinition = new NamespaceDefinitionImpl();
-    return namespaceDefinition;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NamespaceMember createNamespaceMember()
-  {
-    NamespaceMemberImpl namespaceMember = new NamespaceMemberImpl();
-    return namespaceMember;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public TypeDefinition createTypeDefinition()
-  {
-    TypeDefinitionImpl typeDefinition = new TypeDefinitionImpl();
-    return typeDefinition;
+    DefinitionImpl definition = new DefinitionImpl();
+    return definition;
   }
 
   /**
@@ -353,10 +329,10 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public AssertionDeclaration createAssertionDeclaration()
+  public AssertionStatement createAssertionStatement()
   {
-    AssertionDeclarationImpl assertionDeclaration = new AssertionDeclarationImpl();
-    return assertionDeclaration;
+    AssertionStatementImpl assertionStatement = new AssertionStatementImpl();
+    return assertionStatement;
   }
 
   /**
@@ -397,10 +373,10 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public EquationDefinition createEquationDefinition()
+  public EquationStatement createEquationStatement()
   {
-    EquationDefinitionImpl equationDefinition = new EquationDefinitionImpl();
-    return equationDefinition;
+    EquationStatementImpl equationStatement = new EquationStatementImpl();
+    return equationStatement;
   }
 
   /**

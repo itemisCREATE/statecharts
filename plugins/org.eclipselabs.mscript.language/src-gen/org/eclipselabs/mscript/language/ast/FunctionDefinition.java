@@ -19,10 +19,10 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getTemplateParameterDeclarations <em>Template Parameter Declarations</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getInputParameterDeclarations <em>Input Parameter Declarations</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getOutputParameterDeclarations <em>Output Parameter Declarations</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getAssertionDeclarations <em>Assertion Declarations</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getAssertionStatements <em>Assertion Statements</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getFunctorDeclarations <em>Functor Declarations</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getStateVariableDeclarations <em>State Variable Declarations</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getEquations <em>Equations</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getEquationStatements <em>Equation Statements</em>}</li>
  * </ul>
  * </p>
  *
@@ -30,7 +30,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface FunctionDefinition extends TypeDefinition
+public interface FunctionDefinition extends Definition
 {
   /**
    * Returns the value of the '<em><b>Stateful</b></em>' attribute.
@@ -107,20 +107,20 @@ public interface FunctionDefinition extends TypeDefinition
   EList<ParameterDeclaration> getOutputParameterDeclarations();
 
   /**
-   * Returns the value of the '<em><b>Assertion Declarations</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipselabs.mscript.language.ast.AssertionDeclaration}.
+   * Returns the value of the '<em><b>Assertion Statements</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipselabs.mscript.language.ast.AssertionStatement}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Assertion Declarations</em>' containment reference list isn't clear,
+   * If the meaning of the '<em>Assertion Statements</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Assertion Declarations</em>' containment reference list.
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getFunctionDefinition_AssertionDeclarations()
+   * @return the value of the '<em>Assertion Statements</em>' containment reference list.
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getFunctionDefinition_AssertionStatements()
    * @model containment="true"
    * @generated
    */
-  EList<AssertionDeclaration> getAssertionDeclarations();
+  EList<AssertionStatement> getAssertionStatements();
 
   /**
    * Returns the value of the '<em><b>Functor Declarations</b></em>' containment reference list.
@@ -155,19 +155,19 @@ public interface FunctionDefinition extends TypeDefinition
   EList<StateVariableDeclaration> getStateVariableDeclarations();
 
   /**
-   * Returns the value of the '<em><b>Equations</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipselabs.mscript.language.ast.EquationDefinition}.
+   * Returns the value of the '<em><b>Equation Statements</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipselabs.mscript.language.ast.EquationStatement}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Equations</em>' containment reference list isn't clear,
+   * If the meaning of the '<em>Equation Statements</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Equations</em>' containment reference list.
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getFunctionDefinition_Equations()
+   * @return the value of the '<em>Equation Statements</em>' containment reference list.
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getFunctionDefinition_EquationStatements()
    * @model containment="true"
    * @generated
    */
-  EList<EquationDefinition> getEquations();
+  EList<EquationStatement> getEquationStatements();
 
 } // FunctionDefinition

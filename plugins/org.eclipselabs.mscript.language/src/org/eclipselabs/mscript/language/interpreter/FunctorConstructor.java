@@ -92,7 +92,7 @@ public class FunctorConstructor {
 					String name = variableStep.getDescriptor().getName();
 					IVariable variable = functor.getVariable(name);
 					if (variable != null) {
-						IValue rhsValue = new ExpressionValueEvaluator(context).doSwitch(equation.getDefinition().getRightHandSide());
+						IValue rhsValue = new ExpressionValueEvaluator(context).doSwitch(equation.getStatement().getRightHandSide());
 						variable.setValue(variableStep.getIndex(), rhsValue);
 					}
 				}

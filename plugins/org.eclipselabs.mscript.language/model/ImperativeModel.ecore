@@ -17,13 +17,15 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="computationBlocks" upperBound="-1"
         eType="#//ComputationBlock" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="VariableDeclaration">
+  <eClassifiers xsi:type="ecore:EClass" name="Statement" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="VariableDeclaration" eSuperTypes="#//Statement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="ecore:EClass ../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//DataType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="initializer" eType="ecore:EClass ../src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ringBufferSize" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
         defaultValueLiteral="1"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Statement" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="Block" eSuperTypes="#//Statement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="statements" eType="#//Statement"
         containment="true"/>
@@ -33,12 +35,6 @@
         eType="#//VariableDeclaration"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="computedOutputs" upperBound="-1"
         eType="#//VariableDeclaration"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="VariableDeclarationStatement" eSuperTypes="#//Statement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="variableDeclaration" lowerBound="1"
-        eType="#//VariableDeclaration" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="initializer" eType="ecore:EClass ../src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"
-        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Assignment" eSuperTypes="#//Statement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//VariableDeclaration"/>
@@ -63,8 +59,9 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="VariableAccess" eSuperTypes="../src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="referencedDeclaration"
-        lowerBound="1" eType="#//VariableDeclaration"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="stepIndex" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="accessedDeclaration" lowerBound="1"
+        eType="#//VariableDeclaration"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="stepIndex" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="0"/>
   </eClassifiers>
 </ecore:EPackage>

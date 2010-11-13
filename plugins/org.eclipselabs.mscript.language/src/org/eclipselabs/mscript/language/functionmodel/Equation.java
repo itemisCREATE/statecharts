@@ -11,7 +11,7 @@ import java.util.Map;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipselabs.mscript.language.ast.EquationDefinition;
+import org.eclipselabs.mscript.language.ast.EquationStatement;
 
 /**
  * <!-- begin-user-doc -->
@@ -22,7 +22,7 @@ import org.eclipselabs.mscript.language.ast.EquationDefinition;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipselabs.mscript.language.functionmodel.Equation#getFunction <em>Function</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.functionmodel.Equation#getDefinition <em>Definition</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.functionmodel.Equation#getStatement <em>Statement</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.functionmodel.Equation#getSides <em>Sides</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.functionmodel.Equation#getLeftHandSide <em>Left Hand Side</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.functionmodel.Equation#getRightHandSide <em>Right Hand Side</em>}</li>
@@ -63,30 +63,30 @@ public interface Equation extends EObject {
 	void setFunction(Function value);
 
 	/**
-	 * Returns the value of the '<em><b>Definition</b></em>' reference.
+	 * Returns the value of the '<em><b>Statement</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Definition</em>' reference isn't clear,
+	 * If the meaning of the '<em>Statement</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Definition</em>' reference.
-	 * @see #setDefinition(EquationDefinition)
-	 * @see org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage#getEquation_Definition()
+	 * @return the value of the '<em>Statement</em>' reference.
+	 * @see #setStatement(EquationStatement)
+	 * @see org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage#getEquation_Statement()
 	 * @model required="true"
 	 * @generated
 	 */
-	EquationDefinition getDefinition();
+	EquationStatement getStatement();
 
 	/**
-	 * Sets the value of the '{@link org.eclipselabs.mscript.language.functionmodel.Equation#getDefinition <em>Definition</em>}' reference.
+	 * Sets the value of the '{@link org.eclipselabs.mscript.language.functionmodel.Equation#getStatement <em>Statement</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Definition</em>' reference.
-	 * @see #getDefinition()
+	 * @param value the new value of the '<em>Statement</em>' reference.
+	 * @see #getStatement()
 	 * @generated
 	 */
-	void setDefinition(EquationDefinition value);
+	void setStatement(EquationStatement value);
 
 	/**
 	 * Returns the value of the '<em><b>Sides</b></em>' containment reference list.

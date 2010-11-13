@@ -42,7 +42,7 @@ public class MscriptParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrP
 	
 	@Override 
 	protected String getDefaultRuleName() {
-		return "Mscript";
+		return "Module";
 	}
 	
 	public MscriptGrammarAccess getGrammarAccess() {

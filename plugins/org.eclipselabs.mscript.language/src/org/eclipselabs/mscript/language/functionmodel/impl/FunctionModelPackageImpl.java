@@ -215,7 +215,7 @@ public class FunctionModelPackageImpl extends EPackageImpl implements FunctionMo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEquation_Definition() {
+	public EReference getEquation_Statement() {
 		return (EReference)equationEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -452,7 +452,7 @@ public class FunctionModelPackageImpl extends EPackageImpl implements FunctionMo
 
 		equationEClass = createEClass(EQUATION);
 		createEReference(equationEClass, EQUATION__FUNCTION);
-		createEReference(equationEClass, EQUATION__DEFINITION);
+		createEReference(equationEClass, EQUATION__STATEMENT);
 		createEReference(equationEClass, EQUATION__SIDES);
 		createEReference(equationEClass, EQUATION__LEFT_HAND_SIDE);
 		createEReference(equationEClass, EQUATION__RIGHT_HAND_SIDE);
@@ -562,7 +562,7 @@ public class FunctionModelPackageImpl extends EPackageImpl implements FunctionMo
 
 		initEClass(equationEClass, Equation.class, "Equation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getEquation_Function(), this.getFunction(), this.getFunction_Equations(), "function", null, 1, 1, Equation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getEquation_Definition(), theAstPackage.getEquationDefinition(), null, "definition", null, 1, 1, Equation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEquation_Statement(), theAstPackage.getEquationStatement(), null, "statement", null, 1, 1, Equation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEquation_Sides(), this.getEquationSide(), this.getEquationSide_Equation(), "sides", null, 2, 2, Equation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEquation_LeftHandSide(), this.getEquationSide(), null, "leftHandSide", null, 1, 1, Equation.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getEquation_RightHandSide(), this.getEquationSide(), null, "rightHandSide", null, 1, 1, Equation.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);

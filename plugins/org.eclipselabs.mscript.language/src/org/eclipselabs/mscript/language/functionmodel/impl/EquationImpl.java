@@ -23,7 +23,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipselabs.mscript.language.ast.EquationDefinition;
+import org.eclipselabs.mscript.language.ast.EquationStatement;
 import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.ast.FeatureCall;
 import org.eclipselabs.mscript.language.functionmodel.Equation;
@@ -41,7 +41,7 @@ import org.eclipselabs.mscript.language.functionmodel.util.FunctionModelValidato
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.EquationImpl#getFunction <em>Function</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.EquationImpl#getDefinition <em>Definition</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.EquationImpl#getStatement <em>Statement</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.EquationImpl#getSides <em>Sides</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.EquationImpl#getLeftHandSide <em>Left Hand Side</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.EquationImpl#getRightHandSide <em>Right Hand Side</em>}</li>
@@ -52,14 +52,14 @@ import org.eclipselabs.mscript.language.functionmodel.util.FunctionModelValidato
  */
 public class EquationImpl extends EObjectImpl implements Equation {
 	/**
-	 * The cached value of the '{@link #getDefinition() <em>Definition</em>}' reference.
+	 * The cached value of the '{@link #getStatement() <em>Statement</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDefinition()
+	 * @see #getStatement()
 	 * @generated
 	 * @ordered
 	 */
-	protected EquationDefinition definition;
+	protected EquationStatement statement;
 
 	/**
 	 * The cached value of the '{@link #getSides() <em>Sides</em>}' containment reference list.
@@ -136,16 +136,16 @@ public class EquationImpl extends EObjectImpl implements Equation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EquationDefinition getDefinition() {
-		if (definition != null && definition.eIsProxy()) {
-			InternalEObject oldDefinition = (InternalEObject)definition;
-			definition = (EquationDefinition)eResolveProxy(oldDefinition);
-			if (definition != oldDefinition) {
+	public EquationStatement getStatement() {
+		if (statement != null && statement.eIsProxy()) {
+			InternalEObject oldStatement = (InternalEObject)statement;
+			statement = (EquationStatement)eResolveProxy(oldStatement);
+			if (statement != oldStatement) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, FunctionModelPackage.EQUATION__DEFINITION, oldDefinition, definition));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, FunctionModelPackage.EQUATION__STATEMENT, oldStatement, statement));
 			}
 		}
-		return definition;
+		return statement;
 	}
 
 	/**
@@ -153,8 +153,8 @@ public class EquationImpl extends EObjectImpl implements Equation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EquationDefinition basicGetDefinition() {
-		return definition;
+	public EquationStatement basicGetStatement() {
+		return statement;
 	}
 
 	/**
@@ -162,11 +162,11 @@ public class EquationImpl extends EObjectImpl implements Equation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setDefinition(EquationDefinition newDefinition) {
-		EquationDefinition oldDefinition = definition;
-		definition = newDefinition;
+	public void setStatement(EquationStatement newStatement) {
+		EquationStatement oldStatement = statement;
+		statement = newStatement;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FunctionModelPackage.EQUATION__DEFINITION, oldDefinition, definition));
+			eNotify(new ENotificationImpl(this, Notification.SET, FunctionModelPackage.EQUATION__STATEMENT, oldStatement, statement));
 	}
 
 	/**
@@ -227,7 +227,7 @@ public class EquationImpl extends EObjectImpl implements Equation {
 	 * @generated NOT
 	 */
 	public boolean isLeftHandSideValid(DiagnosticChain diagnostics, Map<Object, Object> context) {
-		Expression lhsExpression = getDefinition().getLeftHandSide();
+		Expression lhsExpression = getStatement().getLeftHandSide();
 		String message = null;
 		if (getLeftHandSide().getParts().size() == 1 && lhsExpression instanceof FeatureCall) {
 			EquationPart part = getLeftHandSide().getParts().get(0);
@@ -349,9 +349,9 @@ public class EquationImpl extends EObjectImpl implements Equation {
 		switch (featureID) {
 			case FunctionModelPackage.EQUATION__FUNCTION:
 				return getFunction();
-			case FunctionModelPackage.EQUATION__DEFINITION:
-				if (resolve) return getDefinition();
-				return basicGetDefinition();
+			case FunctionModelPackage.EQUATION__STATEMENT:
+				if (resolve) return getStatement();
+				return basicGetStatement();
 			case FunctionModelPackage.EQUATION__SIDES:
 				return getSides();
 			case FunctionModelPackage.EQUATION__LEFT_HAND_SIDE:
@@ -376,8 +376,8 @@ public class EquationImpl extends EObjectImpl implements Equation {
 			case FunctionModelPackage.EQUATION__FUNCTION:
 				setFunction((Function)newValue);
 				return;
-			case FunctionModelPackage.EQUATION__DEFINITION:
-				setDefinition((EquationDefinition)newValue);
+			case FunctionModelPackage.EQUATION__STATEMENT:
+				setStatement((EquationStatement)newValue);
 				return;
 			case FunctionModelPackage.EQUATION__SIDES:
 				getSides().clear();
@@ -398,8 +398,8 @@ public class EquationImpl extends EObjectImpl implements Equation {
 			case FunctionModelPackage.EQUATION__FUNCTION:
 				setFunction((Function)null);
 				return;
-			case FunctionModelPackage.EQUATION__DEFINITION:
-				setDefinition((EquationDefinition)null);
+			case FunctionModelPackage.EQUATION__STATEMENT:
+				setStatement((EquationStatement)null);
 				return;
 			case FunctionModelPackage.EQUATION__SIDES:
 				getSides().clear();
@@ -418,8 +418,8 @@ public class EquationImpl extends EObjectImpl implements Equation {
 		switch (featureID) {
 			case FunctionModelPackage.EQUATION__FUNCTION:
 				return getFunction() != null;
-			case FunctionModelPackage.EQUATION__DEFINITION:
-				return definition != null;
+			case FunctionModelPackage.EQUATION__STATEMENT:
+				return statement != null;
 			case FunctionModelPackage.EQUATION__SIDES:
 				return sides != null && !sides.isEmpty();
 			case FunctionModelPackage.EQUATION__LEFT_HAND_SIDE:

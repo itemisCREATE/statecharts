@@ -3,21 +3,14 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ast"
     nsURI="http://www.eclipselabs.org/mscript/AST/1.0.0" nsPrefix="ast">
-  <eClassifiers xsi:type="ecore:EClass" name="Mscript">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="namespaces" upperBound="-1"
-        eType="#//NamespaceDefinition" containment="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Module">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="definitions" upperBound="-1"
+        eType="#//Definition" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="NamespaceDefinition" eSuperTypes="#//NamespaceMember">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="#//QualifiedName"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="members" upperBound="-1"
-        eType="#//NamespaceMember" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="NamespaceMember"/>
-  <eClassifiers xsi:type="ecore:EClass" name="TypeDefinition" eSuperTypes="#//NamespaceMember">
+  <eClassifiers xsi:type="ecore:EClass" name="Definition">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DataTypeDefinition" eSuperTypes="#//TypeDefinition"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DataTypeDefinition" eSuperTypes="#//Definition"/>
   <eClassifiers xsi:type="ecore:EClass" name="EnumerationDefinition" eSuperTypes="#//DataTypeDefinition">
     <eStructuralFeatures xsi:type="ecore:EReference" name="literalDeclarations" upperBound="-1"
         eType="#//EnumerationLiteralDeclaration" containment="true"/>
@@ -38,7 +31,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//DataTypeSpecifier"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FunctionDefinition" eSuperTypes="#//TypeDefinition">
+  <eClassifiers xsi:type="ecore:EClass" name="FunctionDefinition" eSuperTypes="#//Definition">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="stateful" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="templateParameterDeclarations"
         upperBound="-1" eType="#//ParameterDeclaration" containment="true"/>
@@ -46,14 +39,14 @@
         upperBound="-1" eType="#//ParameterDeclaration" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="outputParameterDeclarations"
         upperBound="-1" eType="#//ParameterDeclaration" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="assertionDeclarations"
-        upperBound="-1" eType="#//AssertionDeclaration" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="assertionStatements" upperBound="-1"
+        eType="#//AssertionStatement" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="functorDeclarations" upperBound="-1"
         eType="#//FunctorDeclaration" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="stateVariableDeclarations"
         upperBound="-1" eType="#//StateVariableDeclaration" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="equations" upperBound="-1"
-        eType="#//EquationDefinition" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="equationStatements" upperBound="-1"
+        eType="#//EquationStatement" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ParameterDeclaration">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -64,7 +57,7 @@
     <eLiterals name="Error" value="2" literal="error"/>
     <eLiterals name="Fatal" value="3" literal="fatal"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AssertionDeclaration">
+  <eClassifiers xsi:type="ecore:EClass" name="AssertionStatement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="static" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="condition" eType="#//Expression"
         containment="true"/>
@@ -85,7 +78,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="ArgumentDeclaration">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EquationDefinition">
+  <eClassifiers xsi:type="ecore:EClass" name="EquationStatement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="leftHandSide" eType="#//Expression"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="rightHandSide" eType="#//Expression"

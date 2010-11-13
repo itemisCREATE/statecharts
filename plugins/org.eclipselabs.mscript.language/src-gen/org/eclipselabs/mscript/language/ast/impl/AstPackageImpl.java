@@ -23,7 +23,7 @@ import org.eclipselabs.mscript.language.ast.ArrayConstructionOperator;
 import org.eclipselabs.mscript.language.ast.ArrayDimensionSpecification;
 import org.eclipselabs.mscript.language.ast.ArrayElementAccess;
 import org.eclipselabs.mscript.language.ast.ArraySubscript;
-import org.eclipselabs.mscript.language.ast.AssertionDeclaration;
+import org.eclipselabs.mscript.language.ast.AssertionStatement;
 import org.eclipselabs.mscript.language.ast.AssertionStatusKind;
 import org.eclipselabs.mscript.language.ast.AstFactory;
 import org.eclipselabs.mscript.language.ast.AstPackage;
@@ -34,12 +34,13 @@ import org.eclipselabs.mscript.language.ast.BooleanTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.ComplexTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.DataTypeDefinition;
 import org.eclipselabs.mscript.language.ast.DataTypeSpecifier;
+import org.eclipselabs.mscript.language.ast.Definition;
 import org.eclipselabs.mscript.language.ast.EndExpression;
 import org.eclipselabs.mscript.language.ast.EnumerationDefinition;
 import org.eclipselabs.mscript.language.ast.EnumerationLiteralDeclaration;
 import org.eclipselabs.mscript.language.ast.EqualityExpression;
 import org.eclipselabs.mscript.language.ast.EqualityOperator;
-import org.eclipselabs.mscript.language.ast.EquationDefinition;
+import org.eclipselabs.mscript.language.ast.EquationStatement;
 import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.ast.ExpressionList;
 import org.eclipselabs.mscript.language.ast.FeatureAccess;
@@ -60,13 +61,11 @@ import org.eclipselabs.mscript.language.ast.LetExpressionVariable;
 import org.eclipselabs.mscript.language.ast.Literal;
 import org.eclipselabs.mscript.language.ast.LogicalAndExpression;
 import org.eclipselabs.mscript.language.ast.LogicalOrExpression;
-import org.eclipselabs.mscript.language.ast.Mscript;
+import org.eclipselabs.mscript.language.ast.Module;
 import org.eclipselabs.mscript.language.ast.MultiplicativeExpression;
 import org.eclipselabs.mscript.language.ast.MultiplicativeExpressionPart;
 import org.eclipselabs.mscript.language.ast.MultiplicativeOperator;
 import org.eclipselabs.mscript.language.ast.NamedTypeSpecifier;
-import org.eclipselabs.mscript.language.ast.NamespaceDefinition;
-import org.eclipselabs.mscript.language.ast.NamespaceMember;
 import org.eclipselabs.mscript.language.ast.NumericLiteral;
 import org.eclipselabs.mscript.language.ast.NumericTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.OperationCall;
@@ -92,7 +91,6 @@ import org.eclipselabs.mscript.language.ast.StringTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.SwitchCase;
 import org.eclipselabs.mscript.language.ast.SwitchExpression;
 import org.eclipselabs.mscript.language.ast.TypeAliasDefinition;
-import org.eclipselabs.mscript.language.ast.TypeDefinition;
 import org.eclipselabs.mscript.language.ast.UnaryExpression;
 import org.eclipselabs.mscript.language.ast.UnaryOperator;
 import org.eclipselabs.mscript.language.ast.UnitConstructionOperator;
@@ -115,28 +113,14 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass mscriptEClass = null;
+  private EClass moduleEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass namespaceDefinitionEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass namespaceMemberEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass typeDefinitionEClass = null;
+  private EClass definitionEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -199,7 +183,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass assertionDeclarationEClass = null;
+  private EClass assertionStatementEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -227,7 +211,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass equationDefinitionEClass = null;
+  private EClass equationStatementEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -780,9 +764,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getMscript()
+  public EClass getModule()
   {
-    return mscriptEClass;
+    return moduleEClass;
   }
 
   /**
@@ -790,9 +774,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getMscript_Namespaces()
+  public EReference getModule_Definitions()
   {
-    return (EReference)mscriptEClass.getEStructuralFeatures().get(0);
+    return (EReference)moduleEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -800,9 +784,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getNamespaceDefinition()
+  public EClass getDefinition()
   {
-    return namespaceDefinitionEClass;
+    return definitionEClass;
   }
 
   /**
@@ -810,49 +794,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getNamespaceDefinition_Name()
+  public EAttribute getDefinition_Name()
   {
-    return (EReference)namespaceDefinitionEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getNamespaceDefinition_Members()
-  {
-    return (EReference)namespaceDefinitionEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getNamespaceMember()
-  {
-    return namespaceMemberEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getTypeDefinition()
-  {
-    return typeDefinitionEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getTypeDefinition_Name()
-  {
-    return (EAttribute)typeDefinitionEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)definitionEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1030,7 +974,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getFunctionDefinition_AssertionDeclarations()
+  public EReference getFunctionDefinition_AssertionStatements()
   {
     return (EReference)functionDefinitionEClass.getEStructuralFeatures().get(4);
   }
@@ -1060,7 +1004,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getFunctionDefinition_Equations()
+  public EReference getFunctionDefinition_EquationStatements()
   {
     return (EReference)functionDefinitionEClass.getEStructuralFeatures().get(7);
   }
@@ -1090,9 +1034,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getAssertionDeclaration()
+  public EClass getAssertionStatement()
   {
-    return assertionDeclarationEClass;
+    return assertionStatementEClass;
   }
 
   /**
@@ -1100,9 +1044,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getAssertionDeclaration_Static()
+  public EAttribute getAssertionStatement_Static()
   {
-    return (EAttribute)assertionDeclarationEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)assertionStatementEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1110,9 +1054,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getAssertionDeclaration_Condition()
+  public EReference getAssertionStatement_Condition()
   {
-    return (EReference)assertionDeclarationEClass.getEStructuralFeatures().get(1);
+    return (EReference)assertionStatementEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -1120,9 +1064,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getAssertionDeclaration_StatusKind()
+  public EAttribute getAssertionStatement_StatusKind()
   {
-    return (EAttribute)assertionDeclarationEClass.getEStructuralFeatures().get(2);
+    return (EAttribute)assertionStatementEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -1130,9 +1074,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getAssertionDeclaration_Message()
+  public EReference getAssertionStatement_Message()
   {
-    return (EReference)assertionDeclarationEClass.getEStructuralFeatures().get(3);
+    return (EReference)assertionStatementEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -1220,9 +1164,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getEquationDefinition()
+  public EClass getEquationStatement()
   {
-    return equationDefinitionEClass;
+    return equationStatementEClass;
   }
 
   /**
@@ -1230,9 +1174,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getEquationDefinition_LeftHandSide()
+  public EReference getEquationStatement_LeftHandSide()
   {
-    return (EReference)equationDefinitionEClass.getEStructuralFeatures().get(0);
+    return (EReference)equationStatementEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1240,9 +1184,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getEquationDefinition_RightHandSide()
+  public EReference getEquationStatement_RightHandSide()
   {
-    return (EReference)equationDefinitionEClass.getEStructuralFeatures().get(1);
+    return (EReference)equationStatementEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -2785,17 +2729,11 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     isCreated = true;
 
     // Create classes and their features
-    mscriptEClass = createEClass(MSCRIPT);
-    createEReference(mscriptEClass, MSCRIPT__NAMESPACES);
+    moduleEClass = createEClass(MODULE);
+    createEReference(moduleEClass, MODULE__DEFINITIONS);
 
-    namespaceDefinitionEClass = createEClass(NAMESPACE_DEFINITION);
-    createEReference(namespaceDefinitionEClass, NAMESPACE_DEFINITION__NAME);
-    createEReference(namespaceDefinitionEClass, NAMESPACE_DEFINITION__MEMBERS);
-
-    namespaceMemberEClass = createEClass(NAMESPACE_MEMBER);
-
-    typeDefinitionEClass = createEClass(TYPE_DEFINITION);
-    createEAttribute(typeDefinitionEClass, TYPE_DEFINITION__NAME);
+    definitionEClass = createEClass(DEFINITION);
+    createEAttribute(definitionEClass, DEFINITION__NAME);
 
     dataTypeDefinitionEClass = createEClass(DATA_TYPE_DEFINITION);
 
@@ -2820,19 +2758,19 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     createEReference(functionDefinitionEClass, FUNCTION_DEFINITION__TEMPLATE_PARAMETER_DECLARATIONS);
     createEReference(functionDefinitionEClass, FUNCTION_DEFINITION__INPUT_PARAMETER_DECLARATIONS);
     createEReference(functionDefinitionEClass, FUNCTION_DEFINITION__OUTPUT_PARAMETER_DECLARATIONS);
-    createEReference(functionDefinitionEClass, FUNCTION_DEFINITION__ASSERTION_DECLARATIONS);
+    createEReference(functionDefinitionEClass, FUNCTION_DEFINITION__ASSERTION_STATEMENTS);
     createEReference(functionDefinitionEClass, FUNCTION_DEFINITION__FUNCTOR_DECLARATIONS);
     createEReference(functionDefinitionEClass, FUNCTION_DEFINITION__STATE_VARIABLE_DECLARATIONS);
-    createEReference(functionDefinitionEClass, FUNCTION_DEFINITION__EQUATIONS);
+    createEReference(functionDefinitionEClass, FUNCTION_DEFINITION__EQUATION_STATEMENTS);
 
     parameterDeclarationEClass = createEClass(PARAMETER_DECLARATION);
     createEAttribute(parameterDeclarationEClass, PARAMETER_DECLARATION__NAME);
 
-    assertionDeclarationEClass = createEClass(ASSERTION_DECLARATION);
-    createEAttribute(assertionDeclarationEClass, ASSERTION_DECLARATION__STATIC);
-    createEReference(assertionDeclarationEClass, ASSERTION_DECLARATION__CONDITION);
-    createEAttribute(assertionDeclarationEClass, ASSERTION_DECLARATION__STATUS_KIND);
-    createEReference(assertionDeclarationEClass, ASSERTION_DECLARATION__MESSAGE);
+    assertionStatementEClass = createEClass(ASSERTION_STATEMENT);
+    createEAttribute(assertionStatementEClass, ASSERTION_STATEMENT__STATIC);
+    createEReference(assertionStatementEClass, ASSERTION_STATEMENT__CONDITION);
+    createEAttribute(assertionStatementEClass, ASSERTION_STATEMENT__STATUS_KIND);
+    createEReference(assertionStatementEClass, ASSERTION_STATEMENT__MESSAGE);
 
     stateVariableDeclarationEClass = createEClass(STATE_VARIABLE_DECLARATION);
     createEAttribute(stateVariableDeclarationEClass, STATE_VARIABLE_DECLARATION__NAME);
@@ -2845,9 +2783,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     argumentDeclarationEClass = createEClass(ARGUMENT_DECLARATION);
     createEAttribute(argumentDeclarationEClass, ARGUMENT_DECLARATION__NAME);
 
-    equationDefinitionEClass = createEClass(EQUATION_DEFINITION);
-    createEReference(equationDefinitionEClass, EQUATION_DEFINITION__LEFT_HAND_SIDE);
-    createEReference(equationDefinitionEClass, EQUATION_DEFINITION__RIGHT_HAND_SIDE);
+    equationStatementEClass = createEClass(EQUATION_STATEMENT);
+    createEReference(equationStatementEClass, EQUATION_STATEMENT__LEFT_HAND_SIDE);
+    createEReference(equationStatementEClass, EQUATION_STATEMENT__RIGHT_HAND_SIDE);
 
     dataTypeSpecifierEClass = createEClass(DATA_TYPE_SPECIFIER);
     createEReference(dataTypeSpecifierEClass, DATA_TYPE_SPECIFIER__DIMENSIONS);
@@ -3092,13 +3030,11 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     // Set bounds for type parameters
 
     // Add supertypes to classes
-    namespaceDefinitionEClass.getESuperTypes().add(this.getNamespaceMember());
-    typeDefinitionEClass.getESuperTypes().add(this.getNamespaceMember());
-    dataTypeDefinitionEClass.getESuperTypes().add(this.getTypeDefinition());
+    dataTypeDefinitionEClass.getESuperTypes().add(this.getDefinition());
     enumerationDefinitionEClass.getESuperTypes().add(this.getDataTypeDefinition());
     typeAliasDefinitionEClass.getESuperTypes().add(this.getDataTypeDefinition());
     recordDefinitionEClass.getESuperTypes().add(this.getDataTypeDefinition());
-    functionDefinitionEClass.getESuperTypes().add(this.getTypeDefinition());
+    functionDefinitionEClass.getESuperTypes().add(this.getDefinition());
     primitiveTypeSpecifierEClass.getESuperTypes().add(this.getDataTypeSpecifier());
     numericTypeSpecifierEClass.getESuperTypes().add(this.getPrimitiveTypeSpecifier());
     realTypeSpecifierEClass.getESuperTypes().add(this.getNumericTypeSpecifier());
@@ -3142,17 +3078,11 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     featureCallEClass.getESuperTypes().add(this.getExpression());
 
     // Initialize classes and features; add operations and parameters
-    initEClass(mscriptEClass, Mscript.class, "Mscript", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getMscript_Namespaces(), this.getNamespaceDefinition(), null, "namespaces", null, 0, -1, Mscript.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(moduleEClass, Module.class, "Module", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getModule_Definitions(), this.getDefinition(), null, "definitions", null, 0, -1, Module.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(namespaceDefinitionEClass, NamespaceDefinition.class, "NamespaceDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getNamespaceDefinition_Name(), this.getQualifiedName(), null, "name", null, 0, 1, NamespaceDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getNamespaceDefinition_Members(), this.getNamespaceMember(), null, "members", null, 0, -1, NamespaceDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(namespaceMemberEClass, NamespaceMember.class, "NamespaceMember", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-    initEClass(typeDefinitionEClass, TypeDefinition.class, "TypeDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getTypeDefinition_Name(), ecorePackage.getEString(), "name", null, 0, 1, TypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(definitionEClass, Definition.class, "Definition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getDefinition_Name(), ecorePackage.getEString(), "name", null, 0, 1, Definition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(dataTypeDefinitionEClass, DataTypeDefinition.class, "DataTypeDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -3177,19 +3107,19 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     initEReference(getFunctionDefinition_TemplateParameterDeclarations(), this.getParameterDeclaration(), null, "templateParameterDeclarations", null, 0, -1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getFunctionDefinition_InputParameterDeclarations(), this.getParameterDeclaration(), null, "inputParameterDeclarations", null, 0, -1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getFunctionDefinition_OutputParameterDeclarations(), this.getParameterDeclaration(), null, "outputParameterDeclarations", null, 0, -1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getFunctionDefinition_AssertionDeclarations(), this.getAssertionDeclaration(), null, "assertionDeclarations", null, 0, -1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getFunctionDefinition_AssertionStatements(), this.getAssertionStatement(), null, "assertionStatements", null, 0, -1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getFunctionDefinition_FunctorDeclarations(), this.getFunctorDeclaration(), null, "functorDeclarations", null, 0, -1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getFunctionDefinition_StateVariableDeclarations(), this.getStateVariableDeclaration(), null, "stateVariableDeclarations", null, 0, -1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getFunctionDefinition_Equations(), this.getEquationDefinition(), null, "equations", null, 0, -1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getFunctionDefinition_EquationStatements(), this.getEquationStatement(), null, "equationStatements", null, 0, -1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(parameterDeclarationEClass, ParameterDeclaration.class, "ParameterDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getParameterDeclaration_Name(), ecorePackage.getEString(), "name", null, 0, 1, ParameterDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(assertionDeclarationEClass, AssertionDeclaration.class, "AssertionDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getAssertionDeclaration_Static(), ecorePackage.getEBoolean(), "static", null, 0, 1, AssertionDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getAssertionDeclaration_Condition(), this.getExpression(), null, "condition", null, 0, 1, AssertionDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getAssertionDeclaration_StatusKind(), this.getAssertionStatusKind(), "statusKind", null, 0, 1, AssertionDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getAssertionDeclaration_Message(), this.getExpression(), null, "message", null, 0, 1, AssertionDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(assertionStatementEClass, AssertionStatement.class, "AssertionStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getAssertionStatement_Static(), ecorePackage.getEBoolean(), "static", null, 0, 1, AssertionStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getAssertionStatement_Condition(), this.getExpression(), null, "condition", null, 0, 1, AssertionStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getAssertionStatement_StatusKind(), this.getAssertionStatusKind(), "statusKind", null, 0, 1, AssertionStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getAssertionStatement_Message(), this.getExpression(), null, "message", null, 0, 1, AssertionStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(stateVariableDeclarationEClass, StateVariableDeclaration.class, "StateVariableDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getStateVariableDeclaration_Name(), ecorePackage.getEString(), "name", null, 0, 1, StateVariableDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3202,9 +3132,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     initEClass(argumentDeclarationEClass, ArgumentDeclaration.class, "ArgumentDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getArgumentDeclaration_Name(), ecorePackage.getEString(), "name", null, 0, 1, ArgumentDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(equationDefinitionEClass, EquationDefinition.class, "EquationDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getEquationDefinition_LeftHandSide(), this.getExpression(), null, "leftHandSide", null, 0, 1, EquationDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEquationDefinition_RightHandSide(), this.getExpression(), null, "rightHandSide", null, 0, 1, EquationDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(equationStatementEClass, EquationStatement.class, "EquationStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getEquationStatement_LeftHandSide(), this.getExpression(), null, "leftHandSide", null, 0, 1, EquationStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEquationStatement_RightHandSide(), this.getExpression(), null, "rightHandSide", null, 0, 1, EquationStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(dataTypeSpecifierEClass, DataTypeSpecifier.class, "DataTypeSpecifier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getDataTypeSpecifier_Dimensions(), this.getArrayDimensionSpecification(), null, "dimensions", null, 0, -1, DataTypeSpecifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

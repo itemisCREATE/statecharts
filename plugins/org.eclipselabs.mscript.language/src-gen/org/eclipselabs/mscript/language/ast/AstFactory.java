@@ -26,40 +26,22 @@ public interface AstFactory extends EFactory
   AstFactory eINSTANCE = org.eclipselabs.mscript.language.ast.impl.AstFactoryImpl.init();
 
   /**
-   * Returns a new object of class '<em>Mscript</em>'.
+   * Returns a new object of class '<em>Module</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Mscript</em>'.
+   * @return a new object of class '<em>Module</em>'.
    * @generated
    */
-  Mscript createMscript();
+  Module createModule();
 
   /**
-   * Returns a new object of class '<em>Namespace Definition</em>'.
+   * Returns a new object of class '<em>Definition</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Namespace Definition</em>'.
+   * @return a new object of class '<em>Definition</em>'.
    * @generated
    */
-  NamespaceDefinition createNamespaceDefinition();
-
-  /**
-   * Returns a new object of class '<em>Namespace Member</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Namespace Member</em>'.
-   * @generated
-   */
-  NamespaceMember createNamespaceMember();
-
-  /**
-   * Returns a new object of class '<em>Type Definition</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Type Definition</em>'.
-   * @generated
-   */
-  TypeDefinition createTypeDefinition();
+  Definition createDefinition();
 
   /**
    * Returns a new object of class '<em>Data Type Definition</em>'.
@@ -134,13 +116,13 @@ public interface AstFactory extends EFactory
   ParameterDeclaration createParameterDeclaration();
 
   /**
-   * Returns a new object of class '<em>Assertion Declaration</em>'.
+   * Returns a new object of class '<em>Assertion Statement</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Assertion Declaration</em>'.
+   * @return a new object of class '<em>Assertion Statement</em>'.
    * @generated
    */
-  AssertionDeclaration createAssertionDeclaration();
+  AssertionStatement createAssertionStatement();
 
   /**
    * Returns a new object of class '<em>State Variable Declaration</em>'.
@@ -170,13 +152,13 @@ public interface AstFactory extends EFactory
   ArgumentDeclaration createArgumentDeclaration();
 
   /**
-   * Returns a new object of class '<em>Equation Definition</em>'.
+   * Returns a new object of class '<em>Equation Statement</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Equation Definition</em>'.
+   * @return a new object of class '<em>Equation Statement</em>'.
    * @generated
    */
-  EquationDefinition createEquationDefinition();
+  EquationStatement createEquationStatement();
 
   /**
    * Returns a new object of class '<em>Data Type Specifier</em>'.

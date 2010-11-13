@@ -19,7 +19,7 @@ import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipselabs.mscript.language.ast.AstPackage;
-import org.eclipselabs.mscript.language.ast.EquationDefinition;
+import org.eclipselabs.mscript.language.ast.EquationStatement;
 import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.ast.FeatureCall;
 import org.eclipselabs.mscript.language.ast.FeatureCallPart;
@@ -56,18 +56,18 @@ public class FunctionConstructor {
 		Function function = FunctionModelFactory.eINSTANCE.createFunction();
 		function.setDefinition(functionDefinition);
 
-		for (EquationDefinition equationDefinition : functionDefinition.getEquations()) {
+		for (EquationStatement equationStatement : functionDefinition.getEquationStatements()) {
 			Equation equation = FunctionModelFactory.eINSTANCE.createEquation();
 			equation.setFunction(function);
-			equation.setDefinition(equationDefinition);
+			equation.setStatement(equationStatement);
 			
-			Expression lhsExpression = equationDefinition.getLeftHandSide();
+			Expression lhsExpression = equationStatement.getLeftHandSide();
 			EquationSide lhs = FunctionModelFactory.eINSTANCE.createEquationSide();
 			lhs.setEquation(equation);
 			lhs.setExpression(lhsExpression);
 			new EquationSideInitializer(lhs, diagnostics).initialize();
 			
-			Expression rhsExpression = equationDefinition.getRightHandSide();
+			Expression rhsExpression = equationStatement.getRightHandSide();
 			EquationSide rhs = FunctionModelFactory.eINSTANCE.createEquationSide();
 			rhs.setEquation(equation);
 			rhs.setExpression(rhsExpression);

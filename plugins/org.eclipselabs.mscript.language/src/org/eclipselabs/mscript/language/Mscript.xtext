@@ -16,19 +16,10 @@ generate ast "http://www.eclipselabs.org/mscript/AST/1.0.0"
 
 import 'http://www.eclipse.org/emf/2002/Ecore' as ecore
 
-Mscript :
-	(namespaces+=NamespaceDefinition)*;
+Module :
+	(definitions+=Definition)*;
 	
-NamespaceDefinition :
-	'namespace' name=QualifiedName '{'
-		(members+=NamespaceMember)*
-	'}';
-
-NamespaceMember :
-	NamespaceDefinition |
-	TypeDefinition;
-	
-TypeDefinition :
+Definition :
 	DataTypeDefinition |
 	FunctionDefinition;
 
@@ -81,10 +72,10 @@ FunctionDefinition :
 			('<' templateParameterDeclarations+=ParameterDeclaration (',' templateParameterDeclarations+=ParameterDeclaration)* '>')?
 			'(' (inputParameterDeclarations+=ParameterDeclaration (',' inputParameterDeclarations+=ParameterDeclaration)*)? ')'
 			'->' outputParameterDeclarations+=ParameterDeclaration (',' outputParameterDeclarations+=ParameterDeclaration)* '{'
-		(assertionDeclarations+=AssertionDeclaration |
+		(assertionStatements+=AssertionStatement |
 		functorDeclarations+=FunctorDeclaration |
 		stateVariableDeclarations+=StateVariableDeclaration |
-		equations+=EquationDefinition)*
+		equationStatements+=EquationStatement)*
 	'}';
 
 ParameterDeclaration :
@@ -96,7 +87,7 @@ enum AssertionStatusKind :
 	Error='error' |
 	Fatal='fatal';
 
-AssertionDeclaration :
+AssertionStatement :
 	(static?='static')? 'assert' condition=Expression ':' statusKind=AssertionStatusKind message=Expression ';';
 
 StateVariableDeclaration :
@@ -108,7 +99,7 @@ FunctorDeclaration :
 ArgumentDeclaration :
 	name=ID;
 
-EquationDefinition :
+EquationStatement :
 	leftHandSide=Expression '=' rightHandSide=Expression ';';
 
 /*

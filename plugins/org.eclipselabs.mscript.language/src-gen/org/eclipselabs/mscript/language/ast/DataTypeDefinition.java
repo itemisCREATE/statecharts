@@ -16,6 +16,6 @@ package org.eclipselabs.mscript.language.ast;
  * @model
  * @generated
  */
-public interface DataTypeDefinition extends TypeDefinition
+public interface DataTypeDefinition extends Definition
 {
 } // DataTypeDefinition

@@ -126,13 +126,13 @@ public interface FunctionModelPackage extends EPackage {
 	int EQUATION__FUNCTION = 0;
 
 	/**
-	 * The feature id for the '<em><b>Definition</b></em>' reference.
+	 * The feature id for the '<em><b>Statement</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EQUATION__DEFINITION = 1;
+	int EQUATION__STATEMENT = 1;
 
 	/**
 	 * The feature id for the '<em><b>Sides</b></em>' containment reference list.
@@ -447,15 +447,15 @@ public interface FunctionModelPackage extends EPackage {
 	EReference getEquation_Function();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipselabs.mscript.language.functionmodel.Equation#getDefinition <em>Definition</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipselabs.mscript.language.functionmodel.Equation#getStatement <em>Statement</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Definition</em>'.
-	 * @see org.eclipselabs.mscript.language.functionmodel.Equation#getDefinition()
+	 * @return the meta object for the reference '<em>Statement</em>'.
+	 * @see org.eclipselabs.mscript.language.functionmodel.Equation#getStatement()
 	 * @see #getEquation()
 	 * @generated
 	 */
-	EReference getEquation_Definition();
+	EReference getEquation_Statement();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.functionmodel.Equation#getSides <em>Sides</em>}'.
@@ -769,12 +769,12 @@ public interface FunctionModelPackage extends EPackage {
 		EReference EQUATION__FUNCTION = eINSTANCE.getEquation_Function();
 
 		/**
-		 * The meta object literal for the '<em><b>Definition</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Statement</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference EQUATION__DEFINITION = eINSTANCE.getEquation_Definition();
+		EReference EQUATION__STATEMENT = eINSTANCE.getEquation_Statement();
 
 		/**
 		 * The meta object literal for the '<em><b>Sides</b></em>' containment reference list feature.

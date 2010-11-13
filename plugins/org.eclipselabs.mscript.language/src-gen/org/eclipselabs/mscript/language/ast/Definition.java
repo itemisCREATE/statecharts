@@ -5,24 +5,25 @@
  */
 package org.eclipselabs.mscript.language.ast;
 
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Type Definition</b></em>'.
+ * A representation of the model object '<em><b>Definition</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.TypeDefinition#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.Definition#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipselabs.mscript.language.ast.AstPackage#getTypeDefinition()
+ * @see org.eclipselabs.mscript.language.ast.AstPackage#getDefinition()
  * @model
  * @generated
  */
-public interface TypeDefinition extends NamespaceMember
+public interface Definition extends EObject
 {
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
@@ -34,14 +35,14 @@ public interface TypeDefinition extends NamespaceMember
    * <!-- end-user-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getTypeDefinition_Name()
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getDefinition_Name()
    * @model
    * @generated
    */
   String getName();
 
   /**
-   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.TypeDefinition#getName <em>Name</em>}' attribute.
+   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.Definition#getName <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Name</em>' attribute.
@@ -50,4 +51,4 @@ public interface TypeDefinition extends NamespaceMember
    */
   void setName(String value);
 
-} // TypeDefinition
+} // Definition

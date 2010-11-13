@@ -20,40 +20,40 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipselabs.mscript.language.ast.AstPackage;
-import org.eclipselabs.mscript.language.ast.Mscript;
-import org.eclipselabs.mscript.language.ast.NamespaceDefinition;
+import org.eclipselabs.mscript.language.ast.Definition;
+import org.eclipselabs.mscript.language.ast.Module;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Mscript</b></em>'.
+ * An implementation of the model object '<em><b>Module</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.MscriptImpl#getNamespaces <em>Namespaces</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.ModuleImpl#getDefinitions <em>Definitions</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class MscriptImpl extends MinimalEObjectImpl.Container implements Mscript
+public class ModuleImpl extends MinimalEObjectImpl.Container implements Module
 {
   /**
-   * The cached value of the '{@link #getNamespaces() <em>Namespaces</em>}' containment reference list.
+   * The cached value of the '{@link #getDefinitions() <em>Definitions</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getNamespaces()
+   * @see #getDefinitions()
    * @generated
    * @ordered
    */
-  protected EList<NamespaceDefinition> namespaces;
+  protected EList<Definition> definitions;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected MscriptImpl()
+  protected ModuleImpl()
   {
     super();
   }
@@ -66,7 +66,7 @@ public class MscriptImpl extends MinimalEObjectImpl.Container implements Mscript
   @Override
   protected EClass eStaticClass()
   {
-    return AstPackage.Literals.MSCRIPT;
+    return AstPackage.Literals.MODULE;
   }
 
   /**
@@ -74,13 +74,13 @@ public class MscriptImpl extends MinimalEObjectImpl.Container implements Mscript
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<NamespaceDefinition> getNamespaces()
+  public EList<Definition> getDefinitions()
   {
-    if (namespaces == null)
+    if (definitions == null)
     {
-      namespaces = new EObjectContainmentEList<NamespaceDefinition>(NamespaceDefinition.class, this, AstPackage.MSCRIPT__NAMESPACES);
+      definitions = new EObjectContainmentEList<Definition>(Definition.class, this, AstPackage.MODULE__DEFINITIONS);
     }
-    return namespaces;
+    return definitions;
   }
 
   /**
@@ -93,8 +93,8 @@ public class MscriptImpl extends MinimalEObjectImpl.Container implements Mscript
   {
     switch (featureID)
     {
-      case AstPackage.MSCRIPT__NAMESPACES:
-        return ((InternalEList<?>)getNamespaces()).basicRemove(otherEnd, msgs);
+      case AstPackage.MODULE__DEFINITIONS:
+        return ((InternalEList<?>)getDefinitions()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -109,8 +109,8 @@ public class MscriptImpl extends MinimalEObjectImpl.Container implements Mscript
   {
     switch (featureID)
     {
-      case AstPackage.MSCRIPT__NAMESPACES:
-        return getNamespaces();
+      case AstPackage.MODULE__DEFINITIONS:
+        return getDefinitions();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -126,9 +126,9 @@ public class MscriptImpl extends MinimalEObjectImpl.Container implements Mscript
   {
     switch (featureID)
     {
-      case AstPackage.MSCRIPT__NAMESPACES:
-        getNamespaces().clear();
-        getNamespaces().addAll((Collection<? extends NamespaceDefinition>)newValue);
+      case AstPackage.MODULE__DEFINITIONS:
+        getDefinitions().clear();
+        getDefinitions().addAll((Collection<? extends Definition>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -144,8 +144,8 @@ public class MscriptImpl extends MinimalEObjectImpl.Container implements Mscript
   {
     switch (featureID)
     {
-      case AstPackage.MSCRIPT__NAMESPACES:
-        getNamespaces().clear();
+      case AstPackage.MODULE__DEFINITIONS:
+        getDefinitions().clear();
         return;
     }
     super.eUnset(featureID);
@@ -161,10 +161,10 @@ public class MscriptImpl extends MinimalEObjectImpl.Container implements Mscript
   {
     switch (featureID)
     {
-      case AstPackage.MSCRIPT__NAMESPACES:
-        return namespaces != null && !namespaces.isEmpty();
+      case AstPackage.MODULE__DEFINITIONS:
+        return definitions != null && !definitions.isEmpty();
     }
     return super.eIsSet(featureID);
   }
 
-} //MscriptImpl
+} //ModuleImpl

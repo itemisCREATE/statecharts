@@ -78,24 +78,14 @@ public class AstAdapterFactory extends AdapterFactoryImpl
     new AstSwitch<Adapter>()
     {
       @Override
-      public Adapter caseMscript(Mscript object)
+      public Adapter caseModule(Module object)
       {
-        return createMscriptAdapter();
+        return createModuleAdapter();
       }
       @Override
-      public Adapter caseNamespaceDefinition(NamespaceDefinition object)
+      public Adapter caseDefinition(Definition object)
       {
-        return createNamespaceDefinitionAdapter();
-      }
-      @Override
-      public Adapter caseNamespaceMember(NamespaceMember object)
-      {
-        return createNamespaceMemberAdapter();
-      }
-      @Override
-      public Adapter caseTypeDefinition(TypeDefinition object)
-      {
-        return createTypeDefinitionAdapter();
+        return createDefinitionAdapter();
       }
       @Override
       public Adapter caseDataTypeDefinition(DataTypeDefinition object)
@@ -138,9 +128,9 @@ public class AstAdapterFactory extends AdapterFactoryImpl
         return createParameterDeclarationAdapter();
       }
       @Override
-      public Adapter caseAssertionDeclaration(AssertionDeclaration object)
+      public Adapter caseAssertionStatement(AssertionStatement object)
       {
-        return createAssertionDeclarationAdapter();
+        return createAssertionStatementAdapter();
       }
       @Override
       public Adapter caseStateVariableDeclaration(StateVariableDeclaration object)
@@ -158,9 +148,9 @@ public class AstAdapterFactory extends AdapterFactoryImpl
         return createArgumentDeclarationAdapter();
       }
       @Override
-      public Adapter caseEquationDefinition(EquationDefinition object)
+      public Adapter caseEquationStatement(EquationStatement object)
       {
-        return createEquationDefinitionAdapter();
+        return createEquationStatementAdapter();
       }
       @Override
       public Adapter caseDataTypeSpecifier(DataTypeSpecifier object)
@@ -485,61 +475,31 @@ public class AstAdapterFactory extends AdapterFactoryImpl
 
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.Mscript <em>Mscript</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.Module <em>Module</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.Mscript
+   * @see org.eclipselabs.mscript.language.ast.Module
    * @generated
    */
-  public Adapter createMscriptAdapter()
+  public Adapter createModuleAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.NamespaceDefinition <em>Namespace Definition</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.Definition <em>Definition</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.NamespaceDefinition
+   * @see org.eclipselabs.mscript.language.ast.Definition
    * @generated
    */
-  public Adapter createNamespaceDefinitionAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.NamespaceMember <em>Namespace Member</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.NamespaceMember
-   * @generated
-   */
-  public Adapter createNamespaceMemberAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.TypeDefinition <em>Type Definition</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.TypeDefinition
-   * @generated
-   */
-  public Adapter createTypeDefinitionAdapter()
+  public Adapter createDefinitionAdapter()
   {
     return null;
   }
@@ -665,16 +625,16 @@ public class AstAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.AssertionDeclaration <em>Assertion Declaration</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.AssertionStatement <em>Assertion Statement</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.AssertionDeclaration
+   * @see org.eclipselabs.mscript.language.ast.AssertionStatement
    * @generated
    */
-  public Adapter createAssertionDeclarationAdapter()
+  public Adapter createAssertionStatementAdapter()
   {
     return null;
   }
@@ -725,16 +685,16 @@ public class AstAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.EquationDefinition <em>Equation Definition</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.EquationStatement <em>Equation Statement</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.EquationDefinition
+   * @see org.eclipselabs.mscript.language.ast.EquationStatement
    * @generated
    */
-  public Adapter createEquationDefinitionAdapter()
+  public Adapter createEquationStatementAdapter()
   {
     return null;
   }

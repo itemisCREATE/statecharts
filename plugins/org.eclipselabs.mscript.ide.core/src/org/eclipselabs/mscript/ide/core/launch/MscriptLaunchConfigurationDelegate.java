@@ -23,7 +23,7 @@ import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipselabs.mscript.ide.core.IDECorePlugin;
 import org.eclipselabs.mscript.language.ast.FunctionDefinition;
-import org.eclipselabs.mscript.language.ast.Mscript;
+import org.eclipselabs.mscript.language.ast.Module;
 import org.eclipselabs.mscript.language.interpreter.FunctorConstructor;
 import org.eclipselabs.mscript.language.interpreter.IFunctor;
 import org.eclipselabs.mscript.language.interpreter.IInterpreterContext;
@@ -128,12 +128,12 @@ public class MscriptLaunchConfigurationDelegate extends LaunchConfigurationDeleg
 			throw new CoreException(new Status(IStatus.ERROR, IDECorePlugin.PLUGIN_ID, "Parse errors"));
 		}
 			
-		if (!(parseResult.getRootASTElement() instanceof Mscript)) {
+		if (!(parseResult.getRootASTElement() instanceof Module)) {
 			throw new CoreException(new Status(IStatus.ERROR, IDECorePlugin.PLUGIN_ID, "Invalid parse result"));
 		}
 
-		Mscript mscript = (Mscript) parseResult.getRootASTElement();
-		FunctionDefinition functionDefinition = LanguageUtil.getFunctionDefinition(mscript, functionName);
+		Module module = (Module) parseResult.getRootASTElement();
+		FunctionDefinition functionDefinition = LanguageUtil.getFunctionDefinition(module, functionName);
 		if (functionDefinition == null) {
 			throw new CoreException(new Status(IStatus.ERROR, IDECorePlugin.PLUGIN_ID, "Function '" + functionName + "' not found"));
 		}
