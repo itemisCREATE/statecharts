@@ -72,11 +72,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="functionName" eType="#//QualifiedName"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="templateArgumentDeclarations"
-        upperBound="-1" eType="#//ArgumentDeclaration" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ArgumentDeclaration">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="templateArguments" upperBound="-1"
+        eType="#//Expression" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EquationStatement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="leftHandSide" eType="#//Expression"

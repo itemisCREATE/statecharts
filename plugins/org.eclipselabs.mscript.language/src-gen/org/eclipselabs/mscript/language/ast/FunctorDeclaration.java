@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link org.eclipselabs.mscript.language.ast.FunctorDeclaration#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.FunctorDeclaration#getFunctionName <em>Function Name</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.FunctorDeclaration#getTemplateArgumentDeclarations <em>Template Argument Declarations</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.FunctorDeclaration#getTemplateArguments <em>Template Arguments</em>}</li>
  * </ul>
  * </p>
  *
@@ -82,19 +82,19 @@ public interface FunctorDeclaration extends EObject
   void setFunctionName(QualifiedName value);
 
   /**
-   * Returns the value of the '<em><b>Template Argument Declarations</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipselabs.mscript.language.ast.ArgumentDeclaration}.
+   * Returns the value of the '<em><b>Template Arguments</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipselabs.mscript.language.ast.Expression}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Template Argument Declarations</em>' containment reference list isn't clear,
+   * If the meaning of the '<em>Template Arguments</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Template Argument Declarations</em>' containment reference list.
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getFunctorDeclaration_TemplateArgumentDeclarations()
+   * @return the value of the '<em>Template Arguments</em>' containment reference list.
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getFunctorDeclaration_TemplateArguments()
    * @model containment="true"
    * @generated
    */
-  EList<ArgumentDeclaration> getTemplateArgumentDeclarations();
+  EList<Expression> getTemplateArguments();
 
 } // FunctorDeclaration

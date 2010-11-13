@@ -94,10 +94,7 @@ StateVariableDeclaration :
 	'var' name=ID ';';
 	
 FunctorDeclaration :
-	'functor' name=ID ':' functionName=QualifiedName ('<' templateArgumentDeclarations+=ArgumentDeclaration (',' templateArgumentDeclarations+=ArgumentDeclaration)* '>')? ';';
-
-ArgumentDeclaration :
-	name=ID;
+	'functor' name=ID ':' functionName=QualifiedName ('<' templateArguments+=Expression (',' templateArguments+=Expression)* '>')? ';';
 
 EquationStatement :
 	leftHandSide=Expression '=' rightHandSide=Expression ';';

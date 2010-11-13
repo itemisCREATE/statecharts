@@ -1282,9 +1282,9 @@ ruleFunctorDeclaration returns [EObject current=null]
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getFunctorDeclarationAccess().getTemplateArgumentDeclarationsArgumentDeclarationParserRuleCall_4_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getFunctorDeclarationAccess().getTemplateArgumentsExpressionParserRuleCall_4_1_0(), currentNode); 
 	    }
-		lv_templateArgumentDeclarations_5_0=ruleArgumentDeclaration		{
+		lv_templateArguments_5_0=ruleExpression		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getFunctorDeclarationRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -1292,9 +1292,9 @@ ruleFunctorDeclaration returns [EObject current=null]
 	        try {
 	       		add(
 	       			$current, 
-	       			"templateArgumentDeclarations",
-	        		lv_templateArgumentDeclarations_5_0, 
-	        		"ArgumentDeclaration", 
+	       			"templateArguments",
+	        		lv_templateArguments_5_0, 
+	        		"Expression", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
@@ -1310,9 +1310,9 @@ ruleFunctorDeclaration returns [EObject current=null]
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getFunctorDeclarationAccess().getTemplateArgumentDeclarationsArgumentDeclarationParserRuleCall_4_2_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getFunctorDeclarationAccess().getTemplateArgumentsExpressionParserRuleCall_4_2_1_0(), currentNode); 
 	    }
-		lv_templateArgumentDeclarations_7_0=ruleArgumentDeclaration		{
+		lv_templateArguments_7_0=ruleExpression		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getFunctorDeclarationRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -1320,9 +1320,9 @@ ruleFunctorDeclaration returns [EObject current=null]
 	        try {
 	       		add(
 	       			$current, 
-	       			"templateArgumentDeclarations",
-	        		lv_templateArgumentDeclarations_7_0, 
-	        		"ArgumentDeclaration", 
+	       			"templateArguments",
+	        		lv_templateArguments_7_0, 
+	        		"Expression", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
@@ -1339,53 +1339,6 @@ ruleFunctorDeclaration returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getFunctorDeclarationAccess().getSemicolonKeyword_5(), null); 
     }
-)
-;
-
-
-
-
-
-// Entry rule entryRuleArgumentDeclaration
-entryRuleArgumentDeclaration returns [EObject current=null] 
-	:
-	{ currentNode = createCompositeNode(grammarAccess.getArgumentDeclarationRule(), currentNode); }
-	 iv_ruleArgumentDeclaration=ruleArgumentDeclaration 
-	 { $current=$iv_ruleArgumentDeclaration.current; } 
-	 EOF 
-;
-
-// Rule ArgumentDeclaration
-ruleArgumentDeclaration returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
-    }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
-(
-(
-		lv_name_0_0=RULE_ID
-		{
-			createLeafNode(grammarAccess.getArgumentDeclarationAccess().getNameIDTerminalRuleCall_0(), "name"); 
-		}
-		{
-	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getArgumentDeclarationRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
-	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"name",
-	        		lv_name_0_0, 
-	        		"ID", 
-	        		lastConsumedNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	    }
-
-)
 )
 ;
 

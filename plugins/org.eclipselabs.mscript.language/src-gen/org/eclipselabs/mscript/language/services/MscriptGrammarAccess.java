@@ -579,22 +579,22 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cFunctionNameQualifiedNameParserRuleCall_3_0 = (RuleCall)cFunctionNameAssignment_3.eContents().get(0);
 		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
 		private final Keyword cLessThanSignKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
-		private final Assignment cTemplateArgumentDeclarationsAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
-		private final RuleCall cTemplateArgumentDeclarationsArgumentDeclarationParserRuleCall_4_1_0 = (RuleCall)cTemplateArgumentDeclarationsAssignment_4_1.eContents().get(0);
+		private final Assignment cTemplateArgumentsAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
+		private final RuleCall cTemplateArgumentsExpressionParserRuleCall_4_1_0 = (RuleCall)cTemplateArgumentsAssignment_4_1.eContents().get(0);
 		private final Group cGroup_4_2 = (Group)cGroup_4.eContents().get(2);
 		private final Keyword cCommaKeyword_4_2_0 = (Keyword)cGroup_4_2.eContents().get(0);
-		private final Assignment cTemplateArgumentDeclarationsAssignment_4_2_1 = (Assignment)cGroup_4_2.eContents().get(1);
-		private final RuleCall cTemplateArgumentDeclarationsArgumentDeclarationParserRuleCall_4_2_1_0 = (RuleCall)cTemplateArgumentDeclarationsAssignment_4_2_1.eContents().get(0);
+		private final Assignment cTemplateArgumentsAssignment_4_2_1 = (Assignment)cGroup_4_2.eContents().get(1);
+		private final RuleCall cTemplateArgumentsExpressionParserRuleCall_4_2_1_0 = (RuleCall)cTemplateArgumentsAssignment_4_2_1.eContents().get(0);
 		private final Keyword cGreaterThanSignKeyword_4_3 = (Keyword)cGroup_4.eContents().get(3);
 		private final Keyword cSemicolonKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//FunctorDeclaration:
-		//	"functor" name=ID ":" functionName=QualifiedName ("<" templateArgumentDeclarations+=ArgumentDeclaration (","
-		//	templateArgumentDeclarations+=ArgumentDeclaration)* ">")? ";";
+		//	"functor" name=ID ":" functionName=QualifiedName ("<" templateArguments+=Expression (","
+		//	templateArguments+=Expression)* ">")? ";";
 		public ParserRule getRule() { return rule; }
 
-		//"functor" name=ID ":" functionName=QualifiedName ("<" templateArgumentDeclarations+=ArgumentDeclaration (","
-		//templateArgumentDeclarations+=ArgumentDeclaration)* ">")? ";"
+		//"functor" name=ID ":" functionName=QualifiedName ("<" templateArguments+=Expression ("," templateArguments+=Expression)*
+		//">")? ";"
 		public Group getGroup() { return cGroup; }
 
 		//"functor"
@@ -615,51 +615,35 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		//QualifiedName
 		public RuleCall getFunctionNameQualifiedNameParserRuleCall_3_0() { return cFunctionNameQualifiedNameParserRuleCall_3_0; }
 
-		//("<" templateArgumentDeclarations+=ArgumentDeclaration ("," templateArgumentDeclarations+=ArgumentDeclaration)* ">")?
+		//("<" templateArguments+=Expression ("," templateArguments+=Expression)* ">")?
 		public Group getGroup_4() { return cGroup_4; }
 
 		//"<"
 		public Keyword getLessThanSignKeyword_4_0() { return cLessThanSignKeyword_4_0; }
 
-		//templateArgumentDeclarations+=ArgumentDeclaration
-		public Assignment getTemplateArgumentDeclarationsAssignment_4_1() { return cTemplateArgumentDeclarationsAssignment_4_1; }
+		//templateArguments+=Expression
+		public Assignment getTemplateArgumentsAssignment_4_1() { return cTemplateArgumentsAssignment_4_1; }
 
-		//ArgumentDeclaration
-		public RuleCall getTemplateArgumentDeclarationsArgumentDeclarationParserRuleCall_4_1_0() { return cTemplateArgumentDeclarationsArgumentDeclarationParserRuleCall_4_1_0; }
+		//Expression
+		public RuleCall getTemplateArgumentsExpressionParserRuleCall_4_1_0() { return cTemplateArgumentsExpressionParserRuleCall_4_1_0; }
 
-		//("," templateArgumentDeclarations+=ArgumentDeclaration)*
+		//("," templateArguments+=Expression)*
 		public Group getGroup_4_2() { return cGroup_4_2; }
 
 		//","
 		public Keyword getCommaKeyword_4_2_0() { return cCommaKeyword_4_2_0; }
 
-		//templateArgumentDeclarations+=ArgumentDeclaration
-		public Assignment getTemplateArgumentDeclarationsAssignment_4_2_1() { return cTemplateArgumentDeclarationsAssignment_4_2_1; }
+		//templateArguments+=Expression
+		public Assignment getTemplateArgumentsAssignment_4_2_1() { return cTemplateArgumentsAssignment_4_2_1; }
 
-		//ArgumentDeclaration
-		public RuleCall getTemplateArgumentDeclarationsArgumentDeclarationParserRuleCall_4_2_1_0() { return cTemplateArgumentDeclarationsArgumentDeclarationParserRuleCall_4_2_1_0; }
+		//Expression
+		public RuleCall getTemplateArgumentsExpressionParserRuleCall_4_2_1_0() { return cTemplateArgumentsExpressionParserRuleCall_4_2_1_0; }
 
 		//">"
 		public Keyword getGreaterThanSignKeyword_4_3() { return cGreaterThanSignKeyword_4_3; }
 
 		//";"
 		public Keyword getSemicolonKeyword_5() { return cSemicolonKeyword_5; }
-	}
-
-	public class ArgumentDeclarationElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ArgumentDeclaration");
-		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
-		private final RuleCall cNameIDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
-		
-		//ArgumentDeclaration:
-		//	name=ID;
-		public ParserRule getRule() { return rule; }
-
-		//name=ID
-		public Assignment getNameAssignment() { return cNameAssignment; }
-
-		//ID
-		public RuleCall getNameIDTerminalRuleCall_0() { return cNameIDTerminalRuleCall_0; }
 	}
 
 	public class EquationStatementElements extends AbstractParserRuleElementFinder {
@@ -3531,7 +3515,6 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	private AssertionStatementElements pAssertionStatement;
 	private StateVariableDeclarationElements pStateVariableDeclaration;
 	private FunctorDeclarationElements pFunctorDeclaration;
-	private ArgumentDeclarationElements pArgumentDeclaration;
 	private EquationStatementElements pEquationStatement;
 	private DataTypeSpecifierElements pDataTypeSpecifier;
 	private PrimitiveTypeSpecifierElements pPrimitiveTypeSpecifier;
@@ -3772,24 +3755,14 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//FunctorDeclaration:
-	//	"functor" name=ID ":" functionName=QualifiedName ("<" templateArgumentDeclarations+=ArgumentDeclaration (","
-	//	templateArgumentDeclarations+=ArgumentDeclaration)* ">")? ";";
+	//	"functor" name=ID ":" functionName=QualifiedName ("<" templateArguments+=Expression (","
+	//	templateArguments+=Expression)* ">")? ";";
 	public FunctorDeclarationElements getFunctorDeclarationAccess() {
 		return (pFunctorDeclaration != null) ? pFunctorDeclaration : (pFunctorDeclaration = new FunctorDeclarationElements());
 	}
 	
 	public ParserRule getFunctorDeclarationRule() {
 		return getFunctorDeclarationAccess().getRule();
-	}
-
-	//ArgumentDeclaration:
-	//	name=ID;
-	public ArgumentDeclarationElements getArgumentDeclarationAccess() {
-		return (pArgumentDeclaration != null) ? pArgumentDeclaration : (pArgumentDeclaration = new ArgumentDeclarationElements());
-	}
-	
-	public ParserRule getArgumentDeclarationRule() {
-		return getArgumentDeclarationAccess().getRule();
 	}
 
 	//EquationStatement:

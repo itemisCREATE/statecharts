@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipselabs.mscript.language.ast.AdditiveExpression;
 import org.eclipselabs.mscript.language.ast.AdditiveExpressionPart;
 import org.eclipselabs.mscript.language.ast.AdditiveOperator;
-import org.eclipselabs.mscript.language.ast.ArgumentDeclaration;
 import org.eclipselabs.mscript.language.ast.ArrayConcatenationOperator;
 import org.eclipselabs.mscript.language.ast.ArrayConstructionIterationClause;
 import org.eclipselabs.mscript.language.ast.ArrayConstructionOperator;
@@ -198,13 +197,6 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * @generated
    */
   private EClass functorDeclarationEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass argumentDeclarationEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -1134,29 +1126,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getFunctorDeclaration_TemplateArgumentDeclarations()
+  public EReference getFunctorDeclaration_TemplateArguments()
   {
     return (EReference)functorDeclarationEClass.getEStructuralFeatures().get(2);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getArgumentDeclaration()
-  {
-    return argumentDeclarationEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getArgumentDeclaration_Name()
-  {
-    return (EAttribute)argumentDeclarationEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -2778,10 +2750,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     functorDeclarationEClass = createEClass(FUNCTOR_DECLARATION);
     createEAttribute(functorDeclarationEClass, FUNCTOR_DECLARATION__NAME);
     createEReference(functorDeclarationEClass, FUNCTOR_DECLARATION__FUNCTION_NAME);
-    createEReference(functorDeclarationEClass, FUNCTOR_DECLARATION__TEMPLATE_ARGUMENT_DECLARATIONS);
-
-    argumentDeclarationEClass = createEClass(ARGUMENT_DECLARATION);
-    createEAttribute(argumentDeclarationEClass, ARGUMENT_DECLARATION__NAME);
+    createEReference(functorDeclarationEClass, FUNCTOR_DECLARATION__TEMPLATE_ARGUMENTS);
 
     equationStatementEClass = createEClass(EQUATION_STATEMENT);
     createEReference(equationStatementEClass, EQUATION_STATEMENT__LEFT_HAND_SIDE);
@@ -3127,10 +3096,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     initEClass(functorDeclarationEClass, FunctorDeclaration.class, "FunctorDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getFunctorDeclaration_Name(), ecorePackage.getEString(), "name", null, 0, 1, FunctorDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getFunctorDeclaration_FunctionName(), this.getQualifiedName(), null, "functionName", null, 0, 1, FunctorDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getFunctorDeclaration_TemplateArgumentDeclarations(), this.getArgumentDeclaration(), null, "templateArgumentDeclarations", null, 0, -1, FunctorDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(argumentDeclarationEClass, ArgumentDeclaration.class, "ArgumentDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getArgumentDeclaration_Name(), ecorePackage.getEString(), "name", null, 0, 1, ArgumentDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getFunctorDeclaration_TemplateArguments(), this.getExpression(), null, "templateArguments", null, 0, -1, FunctorDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(equationStatementEClass, EquationStatement.class, "EquationStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEquationStatement_LeftHandSide(), this.getExpression(), null, "leftHandSide", null, 0, 1, EquationStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

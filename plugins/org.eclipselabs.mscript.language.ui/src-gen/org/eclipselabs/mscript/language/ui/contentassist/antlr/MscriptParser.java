@@ -218,9 +218,8 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getStateVariableDeclarationAccess().getNameAssignment_1(), "rule__StateVariableDeclaration__NameAssignment_1");
 					put(grammarAccess.getFunctorDeclarationAccess().getNameAssignment_1(), "rule__FunctorDeclaration__NameAssignment_1");
 					put(grammarAccess.getFunctorDeclarationAccess().getFunctionNameAssignment_3(), "rule__FunctorDeclaration__FunctionNameAssignment_3");
-					put(grammarAccess.getFunctorDeclarationAccess().getTemplateArgumentDeclarationsAssignment_4_1(), "rule__FunctorDeclaration__TemplateArgumentDeclarationsAssignment_4_1");
-					put(grammarAccess.getFunctorDeclarationAccess().getTemplateArgumentDeclarationsAssignment_4_2_1(), "rule__FunctorDeclaration__TemplateArgumentDeclarationsAssignment_4_2_1");
-					put(grammarAccess.getArgumentDeclarationAccess().getNameAssignment(), "rule__ArgumentDeclaration__NameAssignment");
+					put(grammarAccess.getFunctorDeclarationAccess().getTemplateArgumentsAssignment_4_1(), "rule__FunctorDeclaration__TemplateArgumentsAssignment_4_1");
+					put(grammarAccess.getFunctorDeclarationAccess().getTemplateArgumentsAssignment_4_2_1(), "rule__FunctorDeclaration__TemplateArgumentsAssignment_4_2_1");
 					put(grammarAccess.getEquationStatementAccess().getLeftHandSideAssignment_0(), "rule__EquationStatement__LeftHandSideAssignment_0");
 					put(grammarAccess.getEquationStatementAccess().getRightHandSideAssignment_2(), "rule__EquationStatement__RightHandSideAssignment_2");
 					put(grammarAccess.getRealTypeSpecifierAccess().getUnitAssignment_2_1(), "rule__RealTypeSpecifier__UnitAssignment_2_1");

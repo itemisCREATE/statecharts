@@ -21,8 +21,8 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.eclipselabs.mscript.language.ast.ArgumentDeclaration;
 import org.eclipselabs.mscript.language.ast.AstPackage;
+import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.ast.FunctorDeclaration;
 import org.eclipselabs.mscript.language.ast.QualifiedName;
 
@@ -35,7 +35,7 @@ import org.eclipselabs.mscript.language.ast.QualifiedName;
  * <ul>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctorDeclarationImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctorDeclarationImpl#getFunctionName <em>Function Name</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctorDeclarationImpl#getTemplateArgumentDeclarations <em>Template Argument Declarations</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctorDeclarationImpl#getTemplateArguments <em>Template Arguments</em>}</li>
  * </ul>
  * </p>
  *
@@ -74,14 +74,14 @@ public class FunctorDeclarationImpl extends MinimalEObjectImpl.Container impleme
   protected QualifiedName functionName;
 
   /**
-   * The cached value of the '{@link #getTemplateArgumentDeclarations() <em>Template Argument Declarations</em>}' containment reference list.
+   * The cached value of the '{@link #getTemplateArguments() <em>Template Arguments</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getTemplateArgumentDeclarations()
+   * @see #getTemplateArguments()
    * @generated
    * @ordered
    */
-  protected EList<ArgumentDeclaration> templateArgumentDeclarations;
+  protected EList<Expression> templateArguments;
 
   /**
    * <!-- begin-user-doc -->
@@ -180,13 +180,13 @@ public class FunctorDeclarationImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<ArgumentDeclaration> getTemplateArgumentDeclarations()
+  public EList<Expression> getTemplateArguments()
   {
-    if (templateArgumentDeclarations == null)
+    if (templateArguments == null)
     {
-      templateArgumentDeclarations = new EObjectContainmentEList<ArgumentDeclaration>(ArgumentDeclaration.class, this, AstPackage.FUNCTOR_DECLARATION__TEMPLATE_ARGUMENT_DECLARATIONS);
+      templateArguments = new EObjectContainmentEList<Expression>(Expression.class, this, AstPackage.FUNCTOR_DECLARATION__TEMPLATE_ARGUMENTS);
     }
-    return templateArgumentDeclarations;
+    return templateArguments;
   }
 
   /**
@@ -201,8 +201,8 @@ public class FunctorDeclarationImpl extends MinimalEObjectImpl.Container impleme
     {
       case AstPackage.FUNCTOR_DECLARATION__FUNCTION_NAME:
         return basicSetFunctionName(null, msgs);
-      case AstPackage.FUNCTOR_DECLARATION__TEMPLATE_ARGUMENT_DECLARATIONS:
-        return ((InternalEList<?>)getTemplateArgumentDeclarations()).basicRemove(otherEnd, msgs);
+      case AstPackage.FUNCTOR_DECLARATION__TEMPLATE_ARGUMENTS:
+        return ((InternalEList<?>)getTemplateArguments()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -221,8 +221,8 @@ public class FunctorDeclarationImpl extends MinimalEObjectImpl.Container impleme
         return getName();
       case AstPackage.FUNCTOR_DECLARATION__FUNCTION_NAME:
         return getFunctionName();
-      case AstPackage.FUNCTOR_DECLARATION__TEMPLATE_ARGUMENT_DECLARATIONS:
-        return getTemplateArgumentDeclarations();
+      case AstPackage.FUNCTOR_DECLARATION__TEMPLATE_ARGUMENTS:
+        return getTemplateArguments();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -244,9 +244,9 @@ public class FunctorDeclarationImpl extends MinimalEObjectImpl.Container impleme
       case AstPackage.FUNCTOR_DECLARATION__FUNCTION_NAME:
         setFunctionName((QualifiedName)newValue);
         return;
-      case AstPackage.FUNCTOR_DECLARATION__TEMPLATE_ARGUMENT_DECLARATIONS:
-        getTemplateArgumentDeclarations().clear();
-        getTemplateArgumentDeclarations().addAll((Collection<? extends ArgumentDeclaration>)newValue);
+      case AstPackage.FUNCTOR_DECLARATION__TEMPLATE_ARGUMENTS:
+        getTemplateArguments().clear();
+        getTemplateArguments().addAll((Collection<? extends Expression>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -268,8 +268,8 @@ public class FunctorDeclarationImpl extends MinimalEObjectImpl.Container impleme
       case AstPackage.FUNCTOR_DECLARATION__FUNCTION_NAME:
         setFunctionName((QualifiedName)null);
         return;
-      case AstPackage.FUNCTOR_DECLARATION__TEMPLATE_ARGUMENT_DECLARATIONS:
-        getTemplateArgumentDeclarations().clear();
+      case AstPackage.FUNCTOR_DECLARATION__TEMPLATE_ARGUMENTS:
+        getTemplateArguments().clear();
         return;
     }
     super.eUnset(featureID);
@@ -289,8 +289,8 @@ public class FunctorDeclarationImpl extends MinimalEObjectImpl.Container impleme
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case AstPackage.FUNCTOR_DECLARATION__FUNCTION_NAME:
         return functionName != null;
-      case AstPackage.FUNCTOR_DECLARATION__TEMPLATE_ARGUMENT_DECLARATIONS:
-        return templateArgumentDeclarations != null && !templateArgumentDeclarations.isEmpty();
+      case AstPackage.FUNCTOR_DECLARATION__TEMPLATE_ARGUMENTS:
+        return templateArguments != null && !templateArguments.isEmpty();
     }
     return super.eIsSet(featureID);
   }

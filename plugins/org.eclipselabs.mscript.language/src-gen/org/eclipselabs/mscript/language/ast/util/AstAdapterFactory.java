@@ -143,11 +143,6 @@ public class AstAdapterFactory extends AdapterFactoryImpl
         return createFunctorDeclarationAdapter();
       }
       @Override
-      public Adapter caseArgumentDeclaration(ArgumentDeclaration object)
-      {
-        return createArgumentDeclarationAdapter();
-      }
-      @Override
       public Adapter caseEquationStatement(EquationStatement object)
       {
         return createEquationStatementAdapter();
@@ -665,21 +660,6 @@ public class AstAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createFunctorDeclarationAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.ArgumentDeclaration <em>Argument Declaration</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.ArgumentDeclaration
-   * @generated
-   */
-  public Adapter createArgumentDeclarationAdapter()
   {
     return null;
   }

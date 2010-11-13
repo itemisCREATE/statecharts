@@ -143,15 +143,6 @@ public interface AstFactory extends EFactory
   FunctorDeclaration createFunctorDeclaration();
 
   /**
-   * Returns a new object of class '<em>Argument Declaration</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Argument Declaration</em>'.
-   * @generated
-   */
-  ArgumentDeclaration createArgumentDeclaration();
-
-  /**
    * Returns a new object of class '<em>Equation Statement</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

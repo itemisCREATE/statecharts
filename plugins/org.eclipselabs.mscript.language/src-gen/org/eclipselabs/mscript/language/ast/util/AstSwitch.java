@@ -194,13 +194,6 @@ public class AstSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AstPackage.ARGUMENT_DECLARATION:
-      {
-        ArgumentDeclaration argumentDeclaration = (ArgumentDeclaration)theEObject;
-        T result = caseArgumentDeclaration(argumentDeclaration);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case AstPackage.EQUATION_STATEMENT:
       {
         EquationStatement equationStatement = (EquationStatement)theEObject;
@@ -895,22 +888,6 @@ public class AstSwitch<T>
    * @generated
    */
   public T caseFunctorDeclaration(FunctorDeclaration object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Argument Declaration</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Argument Declaration</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseArgumentDeclaration(ArgumentDeclaration object)
   {
     return null;
   }
