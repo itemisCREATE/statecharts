@@ -22,7 +22,7 @@ import org.eclipselabs.mscript.language.ast.FunctionDefinition;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipselabs.mscript.language.functionmodel.Function#getDefinition <em>Definition</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.functionmodel.Function#getEquations <em>Equations</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.functionmodel.Function#getEquationDescriptors <em>Equation Descriptors</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.functionmodel.Function#getVariableDescriptors <em>Variable Descriptors</em>}</li>
  * </ul>
  * </p>
@@ -59,22 +59,22 @@ public interface Function extends EObject {
 	void setDefinition(FunctionDefinition value);
 
 	/**
-	 * Returns the value of the '<em><b>Equations</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipselabs.mscript.language.functionmodel.Equation}.
-	 * It is bidirectional and its opposite is '{@link org.eclipselabs.mscript.language.functionmodel.Equation#getFunction <em>Function</em>}'.
+	 * Returns the value of the '<em><b>Equation Descriptors</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipselabs.mscript.language.functionmodel.EquationDescriptor}.
+	 * It is bidirectional and its opposite is '{@link org.eclipselabs.mscript.language.functionmodel.EquationDescriptor#getFunction <em>Function</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Equations</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Equations</em>' containment reference list.
-	 * @see org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage#getFunction_Equations()
-	 * @see org.eclipselabs.mscript.language.functionmodel.Equation#getFunction
+	 * @return the value of the '<em>Equation Descriptors</em>' containment reference list.
+	 * @see org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage#getFunction_EquationDescriptors()
+	 * @see org.eclipselabs.mscript.language.functionmodel.EquationDescriptor#getFunction
 	 * @model opposite="function" containment="true"
 	 * @generated
 	 */
-	EList<Equation> getEquations();
+	EList<EquationDescriptor> getEquationDescriptors();
 
 	/**
 	 * Returns the value of the '<em><b>Variable Descriptors</b></em>' containment reference list.

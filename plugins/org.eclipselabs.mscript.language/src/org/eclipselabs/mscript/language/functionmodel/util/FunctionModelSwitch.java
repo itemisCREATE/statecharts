@@ -10,7 +10,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipselabs.mscript.language.functionmodel.Equation;
+import org.eclipselabs.mscript.language.functionmodel.EquationDescriptor;
 import org.eclipselabs.mscript.language.functionmodel.EquationPart;
 import org.eclipselabs.mscript.language.functionmodel.EquationSide;
 import org.eclipselabs.mscript.language.functionmodel.Function;
@@ -98,9 +98,9 @@ public class FunctionModelSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case FunctionModelPackage.EQUATION: {
-				Equation equation = (Equation)theEObject;
-				T result = caseEquation(equation);
+			case FunctionModelPackage.EQUATION_DESCRIPTOR: {
+				EquationDescriptor equationDescriptor = (EquationDescriptor)theEObject;
+				T result = caseEquationDescriptor(equationDescriptor);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -148,17 +148,17 @@ public class FunctionModelSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Equation</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Equation Descriptor</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Equation</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Equation Descriptor</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseEquation(Equation object) {
+	public T caseEquationDescriptor(EquationDescriptor object) {
 		return null;
 	}
 

@@ -376,13 +376,13 @@ public interface AstPackage extends EPackage
   int FUNCTION_DEFINITION__OUTPUT_PARAMETER_DECLARATIONS = DEFINITION_FEATURE_COUNT + 3;
 
   /**
-   * The feature id for the '<em><b>Assertion Statements</b></em>' containment reference list.
+   * The feature id for the '<em><b>Assertions</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int FUNCTION_DEFINITION__ASSERTION_STATEMENTS = DEFINITION_FEATURE_COUNT + 4;
+  int FUNCTION_DEFINITION__ASSERTIONS = DEFINITION_FEATURE_COUNT + 4;
 
   /**
    * The feature id for the '<em><b>Functor Declarations</b></em>' containment reference list.
@@ -403,13 +403,13 @@ public interface AstPackage extends EPackage
   int FUNCTION_DEFINITION__STATE_VARIABLE_DECLARATIONS = DEFINITION_FEATURE_COUNT + 6;
 
   /**
-   * The feature id for the '<em><b>Equation Statements</b></em>' containment reference list.
+   * The feature id for the '<em><b>Equations</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int FUNCTION_DEFINITION__EQUATION_STATEMENTS = DEFINITION_FEATURE_COUNT + 7;
+  int FUNCTION_DEFINITION__EQUATIONS = DEFINITION_FEATURE_COUNT + 7;
 
   /**
    * The number of structural features of the '<em>Function Definition</em>' class.
@@ -449,14 +449,14 @@ public interface AstPackage extends EPackage
   int PARAMETER_DECLARATION_FEATURE_COUNT = 1;
 
   /**
-   * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.AssertionStatementImpl <em>Assertion Statement</em>}' class.
+   * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.AssertionImpl <em>Assertion</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.eclipselabs.mscript.language.ast.impl.AssertionStatementImpl
-   * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getAssertionStatement()
+   * @see org.eclipselabs.mscript.language.ast.impl.AssertionImpl
+   * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getAssertion()
    * @generated
    */
-  int ASSERTION_STATEMENT = 10;
+  int ASSERTION = 10;
 
   /**
    * The feature id for the '<em><b>Static</b></em>' attribute.
@@ -465,7 +465,7 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ASSERTION_STATEMENT__STATIC = 0;
+  int ASSERTION__STATIC = 0;
 
   /**
    * The feature id for the '<em><b>Condition</b></em>' containment reference.
@@ -474,7 +474,7 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ASSERTION_STATEMENT__CONDITION = 1;
+  int ASSERTION__CONDITION = 1;
 
   /**
    * The feature id for the '<em><b>Status Kind</b></em>' attribute.
@@ -483,7 +483,7 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ASSERTION_STATEMENT__STATUS_KIND = 2;
+  int ASSERTION__STATUS_KIND = 2;
 
   /**
    * The feature id for the '<em><b>Message</b></em>' containment reference.
@@ -492,16 +492,16 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ASSERTION_STATEMENT__MESSAGE = 3;
+  int ASSERTION__MESSAGE = 3;
 
   /**
-   * The number of structural features of the '<em>Assertion Statement</em>' class.
+   * The number of structural features of the '<em>Assertion</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ASSERTION_STATEMENT_FEATURE_COUNT = 4;
+  int ASSERTION_FEATURE_COUNT = 4;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.StateVariableDeclarationImpl <em>State Variable Declaration</em>}' class.
@@ -578,14 +578,14 @@ public interface AstPackage extends EPackage
   int FUNCTOR_DECLARATION_FEATURE_COUNT = 3;
 
   /**
-   * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.EquationStatementImpl <em>Equation Statement</em>}' class.
+   * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.EquationImpl <em>Equation</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.eclipselabs.mscript.language.ast.impl.EquationStatementImpl
-   * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getEquationStatement()
+   * @see org.eclipselabs.mscript.language.ast.impl.EquationImpl
+   * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getEquation()
    * @generated
    */
-  int EQUATION_STATEMENT = 13;
+  int EQUATION = 13;
 
   /**
    * The feature id for the '<em><b>Left Hand Side</b></em>' containment reference.
@@ -594,7 +594,7 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EQUATION_STATEMENT__LEFT_HAND_SIDE = 0;
+  int EQUATION__LEFT_HAND_SIDE = 0;
 
   /**
    * The feature id for the '<em><b>Right Hand Side</b></em>' containment reference.
@@ -603,16 +603,16 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EQUATION_STATEMENT__RIGHT_HAND_SIDE = 1;
+  int EQUATION__RIGHT_HAND_SIDE = 1;
 
   /**
-   * The number of structural features of the '<em>Equation Statement</em>' class.
+   * The number of structural features of the '<em>Equation</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EQUATION_STATEMENT_FEATURE_COUNT = 2;
+  int EQUATION_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.DataTypeSpecifierImpl <em>Data Type Specifier</em>}' class.
@@ -2959,15 +2959,15 @@ public interface AstPackage extends EPackage
   EReference getFunctionDefinition_OutputParameterDeclarations();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getAssertionStatements <em>Assertion Statements</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getAssertions <em>Assertions</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Assertion Statements</em>'.
-   * @see org.eclipselabs.mscript.language.ast.FunctionDefinition#getAssertionStatements()
+   * @return the meta object for the containment reference list '<em>Assertions</em>'.
+   * @see org.eclipselabs.mscript.language.ast.FunctionDefinition#getAssertions()
    * @see #getFunctionDefinition()
    * @generated
    */
-  EReference getFunctionDefinition_AssertionStatements();
+  EReference getFunctionDefinition_Assertions();
 
   /**
    * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getFunctorDeclarations <em>Functor Declarations</em>}'.
@@ -2992,15 +2992,15 @@ public interface AstPackage extends EPackage
   EReference getFunctionDefinition_StateVariableDeclarations();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getEquationStatements <em>Equation Statements</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getEquations <em>Equations</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Equation Statements</em>'.
-   * @see org.eclipselabs.mscript.language.ast.FunctionDefinition#getEquationStatements()
+   * @return the meta object for the containment reference list '<em>Equations</em>'.
+   * @see org.eclipselabs.mscript.language.ast.FunctionDefinition#getEquations()
    * @see #getFunctionDefinition()
    * @generated
    */
-  EReference getFunctionDefinition_EquationStatements();
+  EReference getFunctionDefinition_Equations();
 
   /**
    * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.ParameterDeclaration <em>Parameter Declaration</em>}'.
@@ -3024,58 +3024,58 @@ public interface AstPackage extends EPackage
   EAttribute getParameterDeclaration_Name();
 
   /**
-   * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.AssertionStatement <em>Assertion Statement</em>}'.
+   * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.Assertion <em>Assertion</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Assertion Statement</em>'.
-   * @see org.eclipselabs.mscript.language.ast.AssertionStatement
+   * @return the meta object for class '<em>Assertion</em>'.
+   * @see org.eclipselabs.mscript.language.ast.Assertion
    * @generated
    */
-  EClass getAssertionStatement();
+  EClass getAssertion();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.ast.AssertionStatement#isStatic <em>Static</em>}'.
+   * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.ast.Assertion#isStatic <em>Static</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Static</em>'.
-   * @see org.eclipselabs.mscript.language.ast.AssertionStatement#isStatic()
-   * @see #getAssertionStatement()
+   * @see org.eclipselabs.mscript.language.ast.Assertion#isStatic()
+   * @see #getAssertion()
    * @generated
    */
-  EAttribute getAssertionStatement_Static();
+  EAttribute getAssertion_Static();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.AssertionStatement#getCondition <em>Condition</em>}'.
+   * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.Assertion#getCondition <em>Condition</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Condition</em>'.
-   * @see org.eclipselabs.mscript.language.ast.AssertionStatement#getCondition()
-   * @see #getAssertionStatement()
+   * @see org.eclipselabs.mscript.language.ast.Assertion#getCondition()
+   * @see #getAssertion()
    * @generated
    */
-  EReference getAssertionStatement_Condition();
+  EReference getAssertion_Condition();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.ast.AssertionStatement#getStatusKind <em>Status Kind</em>}'.
+   * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.ast.Assertion#getStatusKind <em>Status Kind</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Status Kind</em>'.
-   * @see org.eclipselabs.mscript.language.ast.AssertionStatement#getStatusKind()
-   * @see #getAssertionStatement()
+   * @see org.eclipselabs.mscript.language.ast.Assertion#getStatusKind()
+   * @see #getAssertion()
    * @generated
    */
-  EAttribute getAssertionStatement_StatusKind();
+  EAttribute getAssertion_StatusKind();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.AssertionStatement#getMessage <em>Message</em>}'.
+   * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.Assertion#getMessage <em>Message</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Message</em>'.
-   * @see org.eclipselabs.mscript.language.ast.AssertionStatement#getMessage()
-   * @see #getAssertionStatement()
+   * @see org.eclipselabs.mscript.language.ast.Assertion#getMessage()
+   * @see #getAssertion()
    * @generated
    */
-  EReference getAssertionStatement_Message();
+  EReference getAssertion_Message();
 
   /**
    * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.StateVariableDeclaration <em>State Variable Declaration</em>}'.
@@ -3142,36 +3142,36 @@ public interface AstPackage extends EPackage
   EReference getFunctorDeclaration_TemplateArguments();
 
   /**
-   * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.EquationStatement <em>Equation Statement</em>}'.
+   * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.Equation <em>Equation</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Equation Statement</em>'.
-   * @see org.eclipselabs.mscript.language.ast.EquationStatement
+   * @return the meta object for class '<em>Equation</em>'.
+   * @see org.eclipselabs.mscript.language.ast.Equation
    * @generated
    */
-  EClass getEquationStatement();
+  EClass getEquation();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.EquationStatement#getLeftHandSide <em>Left Hand Side</em>}'.
+   * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.Equation#getLeftHandSide <em>Left Hand Side</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Left Hand Side</em>'.
-   * @see org.eclipselabs.mscript.language.ast.EquationStatement#getLeftHandSide()
-   * @see #getEquationStatement()
+   * @see org.eclipselabs.mscript.language.ast.Equation#getLeftHandSide()
+   * @see #getEquation()
    * @generated
    */
-  EReference getEquationStatement_LeftHandSide();
+  EReference getEquation_LeftHandSide();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.EquationStatement#getRightHandSide <em>Right Hand Side</em>}'.
+   * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.Equation#getRightHandSide <em>Right Hand Side</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Right Hand Side</em>'.
-   * @see org.eclipselabs.mscript.language.ast.EquationStatement#getRightHandSide()
-   * @see #getEquationStatement()
+   * @see org.eclipselabs.mscript.language.ast.Equation#getRightHandSide()
+   * @see #getEquation()
    * @generated
    */
-  EReference getEquationStatement_RightHandSide();
+  EReference getEquation_RightHandSide();
 
   /**
    * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.DataTypeSpecifier <em>Data Type Specifier</em>}'.
@@ -4975,12 +4975,12 @@ public interface AstPackage extends EPackage
     EReference FUNCTION_DEFINITION__OUTPUT_PARAMETER_DECLARATIONS = eINSTANCE.getFunctionDefinition_OutputParameterDeclarations();
 
     /**
-     * The meta object literal for the '<em><b>Assertion Statements</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Assertions</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference FUNCTION_DEFINITION__ASSERTION_STATEMENTS = eINSTANCE.getFunctionDefinition_AssertionStatements();
+    EReference FUNCTION_DEFINITION__ASSERTIONS = eINSTANCE.getFunctionDefinition_Assertions();
 
     /**
      * The meta object literal for the '<em><b>Functor Declarations</b></em>' containment reference list feature.
@@ -4999,12 +4999,12 @@ public interface AstPackage extends EPackage
     EReference FUNCTION_DEFINITION__STATE_VARIABLE_DECLARATIONS = eINSTANCE.getFunctionDefinition_StateVariableDeclarations();
 
     /**
-     * The meta object literal for the '<em><b>Equation Statements</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Equations</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference FUNCTION_DEFINITION__EQUATION_STATEMENTS = eINSTANCE.getFunctionDefinition_EquationStatements();
+    EReference FUNCTION_DEFINITION__EQUATIONS = eINSTANCE.getFunctionDefinition_Equations();
 
     /**
      * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.ParameterDeclarationImpl <em>Parameter Declaration</em>}' class.
@@ -5025,14 +5025,14 @@ public interface AstPackage extends EPackage
     EAttribute PARAMETER_DECLARATION__NAME = eINSTANCE.getParameterDeclaration_Name();
 
     /**
-     * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.AssertionStatementImpl <em>Assertion Statement</em>}' class.
+     * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.AssertionImpl <em>Assertion</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.eclipselabs.mscript.language.ast.impl.AssertionStatementImpl
-     * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getAssertionStatement()
+     * @see org.eclipselabs.mscript.language.ast.impl.AssertionImpl
+     * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getAssertion()
      * @generated
      */
-    EClass ASSERTION_STATEMENT = eINSTANCE.getAssertionStatement();
+    EClass ASSERTION = eINSTANCE.getAssertion();
 
     /**
      * The meta object literal for the '<em><b>Static</b></em>' attribute feature.
@@ -5040,7 +5040,7 @@ public interface AstPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute ASSERTION_STATEMENT__STATIC = eINSTANCE.getAssertionStatement_Static();
+    EAttribute ASSERTION__STATIC = eINSTANCE.getAssertion_Static();
 
     /**
      * The meta object literal for the '<em><b>Condition</b></em>' containment reference feature.
@@ -5048,7 +5048,7 @@ public interface AstPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference ASSERTION_STATEMENT__CONDITION = eINSTANCE.getAssertionStatement_Condition();
+    EReference ASSERTION__CONDITION = eINSTANCE.getAssertion_Condition();
 
     /**
      * The meta object literal for the '<em><b>Status Kind</b></em>' attribute feature.
@@ -5056,7 +5056,7 @@ public interface AstPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute ASSERTION_STATEMENT__STATUS_KIND = eINSTANCE.getAssertionStatement_StatusKind();
+    EAttribute ASSERTION__STATUS_KIND = eINSTANCE.getAssertion_StatusKind();
 
     /**
      * The meta object literal for the '<em><b>Message</b></em>' containment reference feature.
@@ -5064,7 +5064,7 @@ public interface AstPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference ASSERTION_STATEMENT__MESSAGE = eINSTANCE.getAssertionStatement_Message();
+    EReference ASSERTION__MESSAGE = eINSTANCE.getAssertion_Message();
 
     /**
      * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.StateVariableDeclarationImpl <em>State Variable Declaration</em>}' class.
@@ -5119,14 +5119,14 @@ public interface AstPackage extends EPackage
     EReference FUNCTOR_DECLARATION__TEMPLATE_ARGUMENTS = eINSTANCE.getFunctorDeclaration_TemplateArguments();
 
     /**
-     * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.EquationStatementImpl <em>Equation Statement</em>}' class.
+     * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.EquationImpl <em>Equation</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.eclipselabs.mscript.language.ast.impl.EquationStatementImpl
-     * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getEquationStatement()
+     * @see org.eclipselabs.mscript.language.ast.impl.EquationImpl
+     * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getEquation()
      * @generated
      */
-    EClass EQUATION_STATEMENT = eINSTANCE.getEquationStatement();
+    EClass EQUATION = eINSTANCE.getEquation();
 
     /**
      * The meta object literal for the '<em><b>Left Hand Side</b></em>' containment reference feature.
@@ -5134,7 +5134,7 @@ public interface AstPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference EQUATION_STATEMENT__LEFT_HAND_SIDE = eINSTANCE.getEquationStatement_LeftHandSide();
+    EReference EQUATION__LEFT_HAND_SIDE = eINSTANCE.getEquation_LeftHandSide();
 
     /**
      * The meta object literal for the '<em><b>Right Hand Side</b></em>' containment reference feature.
@@ -5142,7 +5142,7 @@ public interface AstPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference EQUATION_STATEMENT__RIGHT_HAND_SIDE = eINSTANCE.getEquationStatement_RightHandSide();
+    EReference EQUATION__RIGHT_HAND_SIDE = eINSTANCE.getEquation_RightHandSide();
 
     /**
      * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.DataTypeSpecifierImpl <em>Data Type Specifier</em>}' class.

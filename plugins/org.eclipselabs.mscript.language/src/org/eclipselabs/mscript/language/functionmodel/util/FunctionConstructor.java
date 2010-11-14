@@ -19,7 +19,7 @@ import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipselabs.mscript.language.ast.AstPackage;
-import org.eclipselabs.mscript.language.ast.EquationStatement;
+import org.eclipselabs.mscript.language.ast.Equation;
 import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.ast.FeatureCall;
 import org.eclipselabs.mscript.language.ast.FeatureCallPart;
@@ -31,7 +31,7 @@ import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
 import org.eclipselabs.mscript.language.ast.SimpleName;
 import org.eclipselabs.mscript.language.ast.StateVariableDeclaration;
 import org.eclipselabs.mscript.language.ast.util.AstSwitch;
-import org.eclipselabs.mscript.language.functionmodel.Equation;
+import org.eclipselabs.mscript.language.functionmodel.EquationDescriptor;
 import org.eclipselabs.mscript.language.functionmodel.EquationPart;
 import org.eclipselabs.mscript.language.functionmodel.EquationSide;
 import org.eclipselabs.mscript.language.functionmodel.Function;
@@ -56,20 +56,20 @@ public class FunctionConstructor {
 		Function function = FunctionModelFactory.eINSTANCE.createFunction();
 		function.setDefinition(functionDefinition);
 
-		for (EquationStatement equationStatement : functionDefinition.getEquationStatements()) {
-			Equation equation = FunctionModelFactory.eINSTANCE.createEquation();
-			equation.setFunction(function);
-			equation.setStatement(equationStatement);
+		for (Equation equation : functionDefinition.getEquations()) {
+			EquationDescriptor equationDescriptor = FunctionModelFactory.eINSTANCE.createEquationDescriptor();
+			equationDescriptor.setFunction(function);
+			equationDescriptor.setEquation(equation);
 			
-			Expression lhsExpression = equationStatement.getLeftHandSide();
+			Expression lhsExpression = equation.getLeftHandSide();
 			EquationSide lhs = FunctionModelFactory.eINSTANCE.createEquationSide();
-			lhs.setEquation(equation);
+			lhs.setDescriptor(equationDescriptor);
 			lhs.setExpression(lhsExpression);
 			new EquationSideInitializer(lhs, diagnostics).initialize();
 			
-			Expression rhsExpression = equationStatement.getRightHandSide();
+			Expression rhsExpression = equation.getRightHandSide();
 			EquationSide rhs = FunctionModelFactory.eINSTANCE.createEquationSide();
-			rhs.setEquation(equation);
+			rhs.setDescriptor(equationDescriptor);
 			rhs.setExpression(rhsExpression);
 			new EquationSideInitializer(rhs, diagnostics).initialize();
 		}
@@ -154,7 +154,7 @@ public class FunctionConstructor {
 					return true;
 				}
 				
-				Function function = equationSide.getEquation().getFunction();
+				Function function = equationSide.getDescriptor().getFunction();
 				VariableKind variableKind = getVariableKind(
 						function.getDefinition(),
 						simpleName.getIdentifier());

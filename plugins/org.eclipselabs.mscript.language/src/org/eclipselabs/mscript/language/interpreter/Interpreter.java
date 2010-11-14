@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
-import org.eclipselabs.mscript.language.functionmodel.Equation;
+import org.eclipselabs.mscript.language.functionmodel.EquationDescriptor;
 import org.eclipselabs.mscript.language.functionmodel.VariableStep;
 import org.eclipselabs.mscript.language.interpreter.value.IValue;
 import org.eclipselabs.mscript.language.interpreter.value.InvalidValue;
@@ -29,11 +29,11 @@ public class Interpreter {
 	public List<IValue> execute(IInterpreterContext context, IFunctor functor, List<IValue> inputValues) {
 		assignInputValues(context, functor, inputValues);
 		
-		for (Equation equation : functor.getFunction().getEquations()) {
-			if (equation.getLeftHandSide().getParts().size() == 1) {
-				VariableStep variableStep = equation.getLeftHandSide().getParts().get(0).getVariableStep();
+		for (EquationDescriptor equationDescriptor : functor.getFunction().getEquationDescriptors()) {
+			if (equationDescriptor.getLeftHandSide().getParts().size() == 1) {
+				VariableStep variableStep = equationDescriptor.getLeftHandSide().getParts().get(0).getVariableStep();
 				if (!variableStep.isInitial()) {
-					IValue rhsValue = new ExpressionValueEvaluator(context).doSwitch(equation.getStatement().getRightHandSide());
+					IValue rhsValue = new ExpressionValueEvaluator(context).doSwitch(equationDescriptor.getEquation().getRightHandSide());
 					if (!(rhsValue instanceof InvalidValue)) {
 						IVariable variable = functor.getVariable(variableStep.getDescriptor().getName());
 						if (variable != null) {

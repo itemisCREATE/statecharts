@@ -39,14 +39,14 @@
         upperBound="-1" eType="#//ParameterDeclaration" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="outputParameterDeclarations"
         upperBound="-1" eType="#//ParameterDeclaration" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="assertionStatements" upperBound="-1"
-        eType="#//AssertionStatement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="assertions" upperBound="-1"
+        eType="#//Assertion" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="functorDeclarations" upperBound="-1"
         eType="#//FunctorDeclaration" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="stateVariableDeclarations"
         upperBound="-1" eType="#//StateVariableDeclaration" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="equationStatements" upperBound="-1"
-        eType="#//EquationStatement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="equations" upperBound="-1"
+        eType="#//Equation" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ParameterDeclaration">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -57,7 +57,7 @@
     <eLiterals name="Error" value="2" literal="error"/>
     <eLiterals name="Fatal" value="3" literal="fatal"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AssertionStatement">
+  <eClassifiers xsi:type="ecore:EClass" name="Assertion">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="static" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="condition" eType="#//Expression"
         containment="true"/>
@@ -75,7 +75,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="templateArguments" upperBound="-1"
         eType="#//Expression" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EquationStatement">
+  <eClassifiers xsi:type="ecore:EClass" name="Equation">
     <eStructuralFeatures xsi:type="ecore:EReference" name="leftHandSide" eType="#//Expression"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="rightHandSide" eType="#//Expression"

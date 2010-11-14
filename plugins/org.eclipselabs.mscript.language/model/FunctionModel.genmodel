@@ -18,7 +18,7 @@
     </genEnums>
     <genClasses ecoreClass="FunctionModel.ecore#//Function">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FunctionModel.ecore#//Function/definition"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionModel.ecore#//Function/equations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionModel.ecore#//Function/equationDescriptors"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionModel.ecore#//Function/variableDescriptors"/>
       <genOperations ecoreOperation="FunctionModel.ecore#//Function/getVariableDescriptor">
         <genParameters ecoreParameter="FunctionModel.ecore#//Function/getVariableDescriptor/name"/>
@@ -40,23 +40,23 @@
         <genParameters ecoreParameter="FunctionModel.ecore#//Function/hasEquationsForEachVariableStep/context"/>
       </genOperations>
     </genClasses>
-    <genClasses ecoreClass="FunctionModel.ecore#//Equation">
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FunctionModel.ecore#//Equation/function"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FunctionModel.ecore#//Equation/statement"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionModel.ecore#//Equation/sides"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionModel.ecore#//Equation/leftHandSide"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionModel.ecore#//Equation/rightHandSide"/>
-      <genOperations ecoreOperation="FunctionModel.ecore#//Equation/isLeftHandSideValid">
-        <genParameters ecoreParameter="FunctionModel.ecore#//Equation/isLeftHandSideValid/diagnostics"/>
-        <genParameters ecoreParameter="FunctionModel.ecore#//Equation/isLeftHandSideValid/context"/>
+    <genClasses ecoreClass="FunctionModel.ecore#//EquationDescriptor">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FunctionModel.ecore#//EquationDescriptor/function"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FunctionModel.ecore#//EquationDescriptor/equation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionModel.ecore#//EquationDescriptor/sides"/>
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference FunctionModel.ecore#//EquationDescriptor/leftHandSide"/>
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference FunctionModel.ecore#//EquationDescriptor/rightHandSide"/>
+      <genOperations ecoreOperation="FunctionModel.ecore#//EquationDescriptor/isLeftHandSideValid">
+        <genParameters ecoreParameter="FunctionModel.ecore#//EquationDescriptor/isLeftHandSideValid/diagnostics"/>
+        <genParameters ecoreParameter="FunctionModel.ecore#//EquationDescriptor/isLeftHandSideValid/context"/>
       </genOperations>
-      <genOperations ecoreOperation="FunctionModel.ecore#//Equation/isRightHandSideValid">
-        <genParameters ecoreParameter="FunctionModel.ecore#//Equation/isRightHandSideValid/diagnostics"/>
-        <genParameters ecoreParameter="FunctionModel.ecore#//Equation/isRightHandSideValid/context"/>
+      <genOperations ecoreOperation="FunctionModel.ecore#//EquationDescriptor/isRightHandSideValid">
+        <genParameters ecoreParameter="FunctionModel.ecore#//EquationDescriptor/isRightHandSideValid/diagnostics"/>
+        <genParameters ecoreParameter="FunctionModel.ecore#//EquationDescriptor/isRightHandSideValid/context"/>
       </genOperations>
     </genClasses>
     <genClasses ecoreClass="FunctionModel.ecore#//EquationSide">
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FunctionModel.ecore#//EquationSide/equation"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FunctionModel.ecore#//EquationSide/descriptor"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FunctionModel.ecore#//EquationSide/expression"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionModel.ecore#//EquationSide/parts"/>
       <genOperations ecoreOperation="FunctionModel.ecore#//EquationSide/getOtherSide"/>

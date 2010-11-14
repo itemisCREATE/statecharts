@@ -173,10 +173,10 @@ public class AstSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AstPackage.ASSERTION_STATEMENT:
+      case AstPackage.ASSERTION:
       {
-        AssertionStatement assertionStatement = (AssertionStatement)theEObject;
-        T result = caseAssertionStatement(assertionStatement);
+        Assertion assertion = (Assertion)theEObject;
+        T result = caseAssertion(assertion);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -194,10 +194,10 @@ public class AstSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AstPackage.EQUATION_STATEMENT:
+      case AstPackage.EQUATION:
       {
-        EquationStatement equationStatement = (EquationStatement)theEObject;
-        T result = caseEquationStatement(equationStatement);
+        Equation equation = (Equation)theEObject;
+        T result = caseEquation(equation);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -845,17 +845,17 @@ public class AstSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Assertion Statement</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Assertion</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Assertion Statement</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Assertion</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseAssertionStatement(AssertionStatement object)
+  public T caseAssertion(Assertion object)
   {
     return null;
   }
@@ -893,17 +893,17 @@ public class AstSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Equation Statement</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Equation</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Equation Statement</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Equation</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseEquationStatement(EquationStatement object)
+  public T caseEquation(Equation object)
   {
     return null;
   }

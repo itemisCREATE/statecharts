@@ -80,13 +80,13 @@ public interface FunctionModelPackage extends EPackage {
 	int FUNCTION__DEFINITION = 0;
 
 	/**
-	 * The feature id for the '<em><b>Equations</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Equation Descriptors</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FUNCTION__EQUATIONS = 1;
+	int FUNCTION__EQUATION_DESCRIPTORS = 1;
 
 	/**
 	 * The feature id for the '<em><b>Variable Descriptors</b></em>' containment reference list.
@@ -107,14 +107,14 @@ public interface FunctionModelPackage extends EPackage {
 	int FUNCTION_FEATURE_COUNT = 3;
 
 	/**
-	 * The meta object id for the '{@link org.eclipselabs.mscript.language.functionmodel.impl.EquationImpl <em>Equation</em>}' class.
+	 * The meta object id for the '{@link org.eclipselabs.mscript.language.functionmodel.impl.EquationDescriptorImpl <em>Equation Descriptor</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipselabs.mscript.language.functionmodel.impl.EquationImpl
-	 * @see org.eclipselabs.mscript.language.functionmodel.impl.FunctionModelPackageImpl#getEquation()
+	 * @see org.eclipselabs.mscript.language.functionmodel.impl.EquationDescriptorImpl
+	 * @see org.eclipselabs.mscript.language.functionmodel.impl.FunctionModelPackageImpl#getEquationDescriptor()
 	 * @generated
 	 */
-	int EQUATION = 1;
+	int EQUATION_DESCRIPTOR = 1;
 
 	/**
 	 * The feature id for the '<em><b>Function</b></em>' container reference.
@@ -123,16 +123,16 @@ public interface FunctionModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EQUATION__FUNCTION = 0;
+	int EQUATION_DESCRIPTOR__FUNCTION = 0;
 
 	/**
-	 * The feature id for the '<em><b>Statement</b></em>' reference.
+	 * The feature id for the '<em><b>Equation</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EQUATION__STATEMENT = 1;
+	int EQUATION_DESCRIPTOR__EQUATION = 1;
 
 	/**
 	 * The feature id for the '<em><b>Sides</b></em>' containment reference list.
@@ -141,7 +141,7 @@ public interface FunctionModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EQUATION__SIDES = 2;
+	int EQUATION_DESCRIPTOR__SIDES = 2;
 
 	/**
 	 * The feature id for the '<em><b>Left Hand Side</b></em>' reference.
@@ -150,7 +150,7 @@ public interface FunctionModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EQUATION__LEFT_HAND_SIDE = 3;
+	int EQUATION_DESCRIPTOR__LEFT_HAND_SIDE = 3;
 
 	/**
 	 * The feature id for the '<em><b>Right Hand Side</b></em>' reference.
@@ -159,16 +159,16 @@ public interface FunctionModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EQUATION__RIGHT_HAND_SIDE = 4;
+	int EQUATION_DESCRIPTOR__RIGHT_HAND_SIDE = 4;
 
 	/**
-	 * The number of structural features of the '<em>Equation</em>' class.
+	 * The number of structural features of the '<em>Equation Descriptor</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EQUATION_FEATURE_COUNT = 5;
+	int EQUATION_DESCRIPTOR_FEATURE_COUNT = 5;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.language.functionmodel.impl.EquationSideImpl <em>Equation Side</em>}' class.
@@ -181,13 +181,13 @@ public interface FunctionModelPackage extends EPackage {
 	int EQUATION_SIDE = 2;
 
 	/**
-	 * The feature id for the '<em><b>Equation</b></em>' container reference.
+	 * The feature id for the '<em><b>Descriptor</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EQUATION_SIDE__EQUATION = 0;
+	int EQUATION_SIDE__DESCRIPTOR = 0;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' reference.
@@ -404,15 +404,15 @@ public interface FunctionModelPackage extends EPackage {
 	EReference getFunction_Definition();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.functionmodel.Function#getEquations <em>Equations</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.functionmodel.Function#getEquationDescriptors <em>Equation Descriptors</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Equations</em>'.
-	 * @see org.eclipselabs.mscript.language.functionmodel.Function#getEquations()
+	 * @return the meta object for the containment reference list '<em>Equation Descriptors</em>'.
+	 * @see org.eclipselabs.mscript.language.functionmodel.Function#getEquationDescriptors()
 	 * @see #getFunction()
 	 * @generated
 	 */
-	EReference getFunction_Equations();
+	EReference getFunction_EquationDescriptors();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.functionmodel.Function#getVariableDescriptors <em>Variable Descriptors</em>}'.
@@ -426,69 +426,69 @@ public interface FunctionModelPackage extends EPackage {
 	EReference getFunction_VariableDescriptors();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.functionmodel.Equation <em>Equation</em>}'.
+	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.functionmodel.EquationDescriptor <em>Equation Descriptor</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Equation</em>'.
-	 * @see org.eclipselabs.mscript.language.functionmodel.Equation
+	 * @return the meta object for class '<em>Equation Descriptor</em>'.
+	 * @see org.eclipselabs.mscript.language.functionmodel.EquationDescriptor
 	 * @generated
 	 */
-	EClass getEquation();
+	EClass getEquationDescriptor();
 
 	/**
-	 * Returns the meta object for the container reference '{@link org.eclipselabs.mscript.language.functionmodel.Equation#getFunction <em>Function</em>}'.
+	 * Returns the meta object for the container reference '{@link org.eclipselabs.mscript.language.functionmodel.EquationDescriptor#getFunction <em>Function</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the container reference '<em>Function</em>'.
-	 * @see org.eclipselabs.mscript.language.functionmodel.Equation#getFunction()
-	 * @see #getEquation()
+	 * @see org.eclipselabs.mscript.language.functionmodel.EquationDescriptor#getFunction()
+	 * @see #getEquationDescriptor()
 	 * @generated
 	 */
-	EReference getEquation_Function();
+	EReference getEquationDescriptor_Function();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipselabs.mscript.language.functionmodel.Equation#getStatement <em>Statement</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipselabs.mscript.language.functionmodel.EquationDescriptor#getEquation <em>Equation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Statement</em>'.
-	 * @see org.eclipselabs.mscript.language.functionmodel.Equation#getStatement()
-	 * @see #getEquation()
+	 * @return the meta object for the reference '<em>Equation</em>'.
+	 * @see org.eclipselabs.mscript.language.functionmodel.EquationDescriptor#getEquation()
+	 * @see #getEquationDescriptor()
 	 * @generated
 	 */
-	EReference getEquation_Statement();
+	EReference getEquationDescriptor_Equation();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.functionmodel.Equation#getSides <em>Sides</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.functionmodel.EquationDescriptor#getSides <em>Sides</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Sides</em>'.
-	 * @see org.eclipselabs.mscript.language.functionmodel.Equation#getSides()
-	 * @see #getEquation()
+	 * @see org.eclipselabs.mscript.language.functionmodel.EquationDescriptor#getSides()
+	 * @see #getEquationDescriptor()
 	 * @generated
 	 */
-	EReference getEquation_Sides();
+	EReference getEquationDescriptor_Sides();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipselabs.mscript.language.functionmodel.Equation#getLeftHandSide <em>Left Hand Side</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipselabs.mscript.language.functionmodel.EquationDescriptor#getLeftHandSide <em>Left Hand Side</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Left Hand Side</em>'.
-	 * @see org.eclipselabs.mscript.language.functionmodel.Equation#getLeftHandSide()
-	 * @see #getEquation()
+	 * @see org.eclipselabs.mscript.language.functionmodel.EquationDescriptor#getLeftHandSide()
+	 * @see #getEquationDescriptor()
 	 * @generated
 	 */
-	EReference getEquation_LeftHandSide();
+	EReference getEquationDescriptor_LeftHandSide();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipselabs.mscript.language.functionmodel.Equation#getRightHandSide <em>Right Hand Side</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipselabs.mscript.language.functionmodel.EquationDescriptor#getRightHandSide <em>Right Hand Side</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Right Hand Side</em>'.
-	 * @see org.eclipselabs.mscript.language.functionmodel.Equation#getRightHandSide()
-	 * @see #getEquation()
+	 * @see org.eclipselabs.mscript.language.functionmodel.EquationDescriptor#getRightHandSide()
+	 * @see #getEquationDescriptor()
 	 * @generated
 	 */
-	EReference getEquation_RightHandSide();
+	EReference getEquationDescriptor_RightHandSide();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.functionmodel.EquationSide <em>Equation Side</em>}'.
@@ -501,15 +501,15 @@ public interface FunctionModelPackage extends EPackage {
 	EClass getEquationSide();
 
 	/**
-	 * Returns the meta object for the container reference '{@link org.eclipselabs.mscript.language.functionmodel.EquationSide#getEquation <em>Equation</em>}'.
+	 * Returns the meta object for the container reference '{@link org.eclipselabs.mscript.language.functionmodel.EquationSide#getDescriptor <em>Descriptor</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Equation</em>'.
-	 * @see org.eclipselabs.mscript.language.functionmodel.EquationSide#getEquation()
+	 * @return the meta object for the container reference '<em>Descriptor</em>'.
+	 * @see org.eclipselabs.mscript.language.functionmodel.EquationSide#getDescriptor()
 	 * @see #getEquationSide()
 	 * @generated
 	 */
-	EReference getEquationSide_Equation();
+	EReference getEquationSide_Descriptor();
 
 	/**
 	 * Returns the meta object for the reference '{@link org.eclipselabs.mscript.language.functionmodel.EquationSide#getExpression <em>Expression</em>}'.
@@ -735,12 +735,12 @@ public interface FunctionModelPackage extends EPackage {
 		EReference FUNCTION__DEFINITION = eINSTANCE.getFunction_Definition();
 
 		/**
-		 * The meta object literal for the '<em><b>Equations</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Equation Descriptors</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference FUNCTION__EQUATIONS = eINSTANCE.getFunction_Equations();
+		EReference FUNCTION__EQUATION_DESCRIPTORS = eINSTANCE.getFunction_EquationDescriptors();
 
 		/**
 		 * The meta object literal for the '<em><b>Variable Descriptors</b></em>' containment reference list feature.
@@ -751,14 +751,14 @@ public interface FunctionModelPackage extends EPackage {
 		EReference FUNCTION__VARIABLE_DESCRIPTORS = eINSTANCE.getFunction_VariableDescriptors();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.functionmodel.impl.EquationImpl <em>Equation</em>}' class.
+		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.functionmodel.impl.EquationDescriptorImpl <em>Equation Descriptor</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipselabs.mscript.language.functionmodel.impl.EquationImpl
-		 * @see org.eclipselabs.mscript.language.functionmodel.impl.FunctionModelPackageImpl#getEquation()
+		 * @see org.eclipselabs.mscript.language.functionmodel.impl.EquationDescriptorImpl
+		 * @see org.eclipselabs.mscript.language.functionmodel.impl.FunctionModelPackageImpl#getEquationDescriptor()
 		 * @generated
 		 */
-		EClass EQUATION = eINSTANCE.getEquation();
+		EClass EQUATION_DESCRIPTOR = eINSTANCE.getEquationDescriptor();
 
 		/**
 		 * The meta object literal for the '<em><b>Function</b></em>' container reference feature.
@@ -766,15 +766,15 @@ public interface FunctionModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference EQUATION__FUNCTION = eINSTANCE.getEquation_Function();
+		EReference EQUATION_DESCRIPTOR__FUNCTION = eINSTANCE.getEquationDescriptor_Function();
 
 		/**
-		 * The meta object literal for the '<em><b>Statement</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Equation</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference EQUATION__STATEMENT = eINSTANCE.getEquation_Statement();
+		EReference EQUATION_DESCRIPTOR__EQUATION = eINSTANCE.getEquationDescriptor_Equation();
 
 		/**
 		 * The meta object literal for the '<em><b>Sides</b></em>' containment reference list feature.
@@ -782,7 +782,7 @@ public interface FunctionModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference EQUATION__SIDES = eINSTANCE.getEquation_Sides();
+		EReference EQUATION_DESCRIPTOR__SIDES = eINSTANCE.getEquationDescriptor_Sides();
 
 		/**
 		 * The meta object literal for the '<em><b>Left Hand Side</b></em>' reference feature.
@@ -790,7 +790,7 @@ public interface FunctionModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference EQUATION__LEFT_HAND_SIDE = eINSTANCE.getEquation_LeftHandSide();
+		EReference EQUATION_DESCRIPTOR__LEFT_HAND_SIDE = eINSTANCE.getEquationDescriptor_LeftHandSide();
 
 		/**
 		 * The meta object literal for the '<em><b>Right Hand Side</b></em>' reference feature.
@@ -798,7 +798,7 @@ public interface FunctionModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference EQUATION__RIGHT_HAND_SIDE = eINSTANCE.getEquation_RightHandSide();
+		EReference EQUATION_DESCRIPTOR__RIGHT_HAND_SIDE = eINSTANCE.getEquationDescriptor_RightHandSide();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.functionmodel.impl.EquationSideImpl <em>Equation Side</em>}' class.
@@ -811,12 +811,12 @@ public interface FunctionModelPackage extends EPackage {
 		EClass EQUATION_SIDE = eINSTANCE.getEquationSide();
 
 		/**
-		 * The meta object literal for the '<em><b>Equation</b></em>' container reference feature.
+		 * The meta object literal for the '<em><b>Descriptor</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference EQUATION_SIDE__EQUATION = eINSTANCE.getEquationSide_Equation();
+		EReference EQUATION_SIDE__DESCRIPTOR = eINSTANCE.getEquationSide_Descriptor();
 
 		/**
 		 * The meta object literal for the '<em><b>Expression</b></em>' reference feature.

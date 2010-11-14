@@ -9,24 +9,24 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Assertion Statement</b></em>'.
+ * A representation of the model object '<em><b>Assertion</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.AssertionStatement#isStatic <em>Static</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.AssertionStatement#getCondition <em>Condition</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.AssertionStatement#getStatusKind <em>Status Kind</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.AssertionStatement#getMessage <em>Message</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.Assertion#isStatic <em>Static</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.Assertion#getCondition <em>Condition</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.Assertion#getStatusKind <em>Status Kind</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.Assertion#getMessage <em>Message</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipselabs.mscript.language.ast.AstPackage#getAssertionStatement()
+ * @see org.eclipselabs.mscript.language.ast.AstPackage#getAssertion()
  * @model
  * @generated
  */
-public interface AssertionStatement extends EObject
+public interface Assertion extends EObject
 {
   /**
    * Returns the value of the '<em><b>Static</b></em>' attribute.
@@ -38,14 +38,14 @@ public interface AssertionStatement extends EObject
    * <!-- end-user-doc -->
    * @return the value of the '<em>Static</em>' attribute.
    * @see #setStatic(boolean)
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getAssertionStatement_Static()
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getAssertion_Static()
    * @model
    * @generated
    */
   boolean isStatic();
 
   /**
-   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.AssertionStatement#isStatic <em>Static</em>}' attribute.
+   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.Assertion#isStatic <em>Static</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Static</em>' attribute.
@@ -64,14 +64,14 @@ public interface AssertionStatement extends EObject
    * <!-- end-user-doc -->
    * @return the value of the '<em>Condition</em>' containment reference.
    * @see #setCondition(Expression)
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getAssertionStatement_Condition()
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getAssertion_Condition()
    * @model containment="true"
    * @generated
    */
   Expression getCondition();
 
   /**
-   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.AssertionStatement#getCondition <em>Condition</em>}' containment reference.
+   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.Assertion#getCondition <em>Condition</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Condition</em>' containment reference.
@@ -92,14 +92,14 @@ public interface AssertionStatement extends EObject
    * @return the value of the '<em>Status Kind</em>' attribute.
    * @see org.eclipselabs.mscript.language.ast.AssertionStatusKind
    * @see #setStatusKind(AssertionStatusKind)
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getAssertionStatement_StatusKind()
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getAssertion_StatusKind()
    * @model
    * @generated
    */
   AssertionStatusKind getStatusKind();
 
   /**
-   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.AssertionStatement#getStatusKind <em>Status Kind</em>}' attribute.
+   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.Assertion#getStatusKind <em>Status Kind</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Status Kind</em>' attribute.
@@ -119,14 +119,14 @@ public interface AssertionStatement extends EObject
    * <!-- end-user-doc -->
    * @return the value of the '<em>Message</em>' containment reference.
    * @see #setMessage(Expression)
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getAssertionStatement_Message()
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getAssertion_Message()
    * @model containment="true"
    * @generated
    */
   Expression getMessage();
 
   /**
-   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.AssertionStatement#getMessage <em>Message</em>}' containment reference.
+   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.Assertion#getMessage <em>Message</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Message</em>' containment reference.
@@ -135,4 +135,4 @@ public interface AssertionStatement extends EObject
    */
   void setMessage(Expression value);
 
-} // AssertionStatement
+} // Assertion

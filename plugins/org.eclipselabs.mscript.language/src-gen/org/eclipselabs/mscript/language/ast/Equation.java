@@ -9,22 +9,22 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Equation Statement</b></em>'.
+ * A representation of the model object '<em><b>Equation</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.EquationStatement#getLeftHandSide <em>Left Hand Side</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.EquationStatement#getRightHandSide <em>Right Hand Side</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.Equation#getLeftHandSide <em>Left Hand Side</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.Equation#getRightHandSide <em>Right Hand Side</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipselabs.mscript.language.ast.AstPackage#getEquationStatement()
+ * @see org.eclipselabs.mscript.language.ast.AstPackage#getEquation()
  * @model
  * @generated
  */
-public interface EquationStatement extends EObject
+public interface Equation extends EObject
 {
   /**
    * Returns the value of the '<em><b>Left Hand Side</b></em>' containment reference.
@@ -36,14 +36,14 @@ public interface EquationStatement extends EObject
    * <!-- end-user-doc -->
    * @return the value of the '<em>Left Hand Side</em>' containment reference.
    * @see #setLeftHandSide(Expression)
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getEquationStatement_LeftHandSide()
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getEquation_LeftHandSide()
    * @model containment="true"
    * @generated
    */
   Expression getLeftHandSide();
 
   /**
-   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.EquationStatement#getLeftHandSide <em>Left Hand Side</em>}' containment reference.
+   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.Equation#getLeftHandSide <em>Left Hand Side</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Left Hand Side</em>' containment reference.
@@ -62,14 +62,14 @@ public interface EquationStatement extends EObject
    * <!-- end-user-doc -->
    * @return the value of the '<em>Right Hand Side</em>' containment reference.
    * @see #setRightHandSide(Expression)
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getEquationStatement_RightHandSide()
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getEquation_RightHandSide()
    * @model containment="true"
    * @generated
    */
   Expression getRightHandSide();
 
   /**
-   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.EquationStatement#getRightHandSide <em>Right Hand Side</em>}' containment reference.
+   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.Equation#getRightHandSide <em>Right Hand Side</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Right Hand Side</em>' containment reference.
@@ -78,4 +78,4 @@ public interface EquationStatement extends EObject
    */
   void setRightHandSide(Expression value);
 
-} // EquationStatement
+} // Equation

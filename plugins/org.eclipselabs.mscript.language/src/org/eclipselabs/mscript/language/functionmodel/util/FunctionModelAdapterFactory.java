@@ -10,7 +10,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipselabs.mscript.language.functionmodel.Equation;
+import org.eclipselabs.mscript.language.functionmodel.EquationDescriptor;
 import org.eclipselabs.mscript.language.functionmodel.EquationPart;
 import org.eclipselabs.mscript.language.functionmodel.EquationSide;
 import org.eclipselabs.mscript.language.functionmodel.Function;
@@ -79,8 +79,8 @@ public class FunctionModelAdapterFactory extends AdapterFactoryImpl {
 				return createFunctionAdapter();
 			}
 			@Override
-			public Adapter caseEquation(Equation object) {
-				return createEquationAdapter();
+			public Adapter caseEquationDescriptor(EquationDescriptor object) {
+				return createEquationDescriptorAdapter();
 			}
 			@Override
 			public Adapter caseEquationSide(EquationSide object) {
@@ -133,16 +133,16 @@ public class FunctionModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.functionmodel.Equation <em>Equation</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.functionmodel.EquationDescriptor <em>Equation Descriptor</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.language.functionmodel.Equation
+	 * @see org.eclipselabs.mscript.language.functionmodel.EquationDescriptor
 	 * @generated
 	 */
-	public Adapter createEquationAdapter() {
+	public Adapter createEquationDescriptorAdapter() {
 		return null;
 	}
 

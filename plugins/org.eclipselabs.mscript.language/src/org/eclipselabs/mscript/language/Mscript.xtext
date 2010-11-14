@@ -72,10 +72,10 @@ FunctionDefinition :
 			('<' templateParameterDeclarations+=ParameterDeclaration (',' templateParameterDeclarations+=ParameterDeclaration)* '>')?
 			'(' (inputParameterDeclarations+=ParameterDeclaration (',' inputParameterDeclarations+=ParameterDeclaration)*)? ')'
 			'->' outputParameterDeclarations+=ParameterDeclaration (',' outputParameterDeclarations+=ParameterDeclaration)* '{'
-		(assertionStatements+=AssertionStatement |
+		(assertions+=Assertion |
 		functorDeclarations+=FunctorDeclaration |
 		stateVariableDeclarations+=StateVariableDeclaration |
-		equationStatements+=EquationStatement)*
+		equations+=Equation)*
 	'}';
 
 ParameterDeclaration :
@@ -87,7 +87,7 @@ enum AssertionStatusKind :
 	Error='error' |
 	Fatal='fatal';
 
-AssertionStatement :
+Assertion :
 	(static?='static')? 'assert' condition=Expression ':' statusKind=AssertionStatusKind message=Expression ';';
 
 StateVariableDeclaration :
@@ -96,7 +96,7 @@ StateVariableDeclaration :
 FunctorDeclaration :
 	'functor' name=ID ':' functionName=QualifiedName ('<' templateArguments+=Expression (',' templateArguments+=Expression)* '>')? ';';
 
-EquationStatement :
+Equation :
 	leftHandSide=Expression '=' rightHandSide=Expression ';';
 
 /*

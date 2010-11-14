@@ -19,10 +19,10 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getTemplateParameterDeclarations <em>Template Parameter Declarations</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getInputParameterDeclarations <em>Input Parameter Declarations</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getOutputParameterDeclarations <em>Output Parameter Declarations</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getAssertionStatements <em>Assertion Statements</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getAssertions <em>Assertions</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getFunctorDeclarations <em>Functor Declarations</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getStateVariableDeclarations <em>State Variable Declarations</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getEquationStatements <em>Equation Statements</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getEquations <em>Equations</em>}</li>
  * </ul>
  * </p>
  *
@@ -107,20 +107,20 @@ public interface FunctionDefinition extends Definition
   EList<ParameterDeclaration> getOutputParameterDeclarations();
 
   /**
-   * Returns the value of the '<em><b>Assertion Statements</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipselabs.mscript.language.ast.AssertionStatement}.
+   * Returns the value of the '<em><b>Assertions</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipselabs.mscript.language.ast.Assertion}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Assertion Statements</em>' containment reference list isn't clear,
+   * If the meaning of the '<em>Assertions</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Assertion Statements</em>' containment reference list.
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getFunctionDefinition_AssertionStatements()
+   * @return the value of the '<em>Assertions</em>' containment reference list.
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getFunctionDefinition_Assertions()
    * @model containment="true"
    * @generated
    */
-  EList<AssertionStatement> getAssertionStatements();
+  EList<Assertion> getAssertions();
 
   /**
    * Returns the value of the '<em><b>Functor Declarations</b></em>' containment reference list.
@@ -155,19 +155,19 @@ public interface FunctionDefinition extends Definition
   EList<StateVariableDeclaration> getStateVariableDeclarations();
 
   /**
-   * Returns the value of the '<em><b>Equation Statements</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipselabs.mscript.language.ast.EquationStatement}.
+   * Returns the value of the '<em><b>Equations</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipselabs.mscript.language.ast.Equation}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Equation Statements</em>' containment reference list isn't clear,
+   * If the meaning of the '<em>Equations</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Equation Statements</em>' containment reference list.
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getFunctionDefinition_EquationStatements()
+   * @return the value of the '<em>Equations</em>' containment reference list.
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getFunctionDefinition_Equations()
    * @model containment="true"
    * @generated
    */
-  EList<EquationStatement> getEquationStatements();
+  EList<Equation> getEquations();
 
 } // FunctionDefinition

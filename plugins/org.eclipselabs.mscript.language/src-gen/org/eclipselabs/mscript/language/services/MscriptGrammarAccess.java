@@ -313,14 +313,14 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cOutputParameterDeclarationsParameterDeclarationParserRuleCall_9_1_0 = (RuleCall)cOutputParameterDeclarationsAssignment_9_1.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_10 = (Keyword)cGroup.eContents().get(10);
 		private final Alternatives cAlternatives_11 = (Alternatives)cGroup.eContents().get(11);
-		private final Assignment cAssertionStatementsAssignment_11_0 = (Assignment)cAlternatives_11.eContents().get(0);
-		private final RuleCall cAssertionStatementsAssertionStatementParserRuleCall_11_0_0 = (RuleCall)cAssertionStatementsAssignment_11_0.eContents().get(0);
+		private final Assignment cAssertionsAssignment_11_0 = (Assignment)cAlternatives_11.eContents().get(0);
+		private final RuleCall cAssertionsAssertionParserRuleCall_11_0_0 = (RuleCall)cAssertionsAssignment_11_0.eContents().get(0);
 		private final Assignment cFunctorDeclarationsAssignment_11_1 = (Assignment)cAlternatives_11.eContents().get(1);
 		private final RuleCall cFunctorDeclarationsFunctorDeclarationParserRuleCall_11_1_0 = (RuleCall)cFunctorDeclarationsAssignment_11_1.eContents().get(0);
 		private final Assignment cStateVariableDeclarationsAssignment_11_2 = (Assignment)cAlternatives_11.eContents().get(2);
 		private final RuleCall cStateVariableDeclarationsStateVariableDeclarationParserRuleCall_11_2_0 = (RuleCall)cStateVariableDeclarationsAssignment_11_2.eContents().get(0);
-		private final Assignment cEquationStatementsAssignment_11_3 = (Assignment)cAlternatives_11.eContents().get(3);
-		private final RuleCall cEquationStatementsEquationStatementParserRuleCall_11_3_0 = (RuleCall)cEquationStatementsAssignment_11_3.eContents().get(0);
+		private final Assignment cEquationsAssignment_11_3 = (Assignment)cAlternatives_11.eContents().get(3);
+		private final RuleCall cEquationsEquationParserRuleCall_11_3_0 = (RuleCall)cEquationsAssignment_11_3.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_12 = (Keyword)cGroup.eContents().get(12);
 		
 		/// *
@@ -329,17 +329,17 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		//	stateful?="stateful"? "func" name=ID ("<" templateParameterDeclarations+=ParameterDeclaration (","
 		//	templateParameterDeclarations+=ParameterDeclaration)* ">")? "(" (inputParameterDeclarations+=ParameterDeclaration (","
 		//	inputParameterDeclarations+=ParameterDeclaration)*)? ")" "->" outputParameterDeclarations+=ParameterDeclaration (","
-		//	outputParameterDeclarations+=ParameterDeclaration)* "{" (assertionStatements+=AssertionStatement |
-		//	functorDeclarations+=FunctorDeclaration | stateVariableDeclarations+=StateVariableDeclaration |
-		//	equationStatements+=EquationStatement)* "}";
+		//	outputParameterDeclarations+=ParameterDeclaration)* "{" (assertions+=Assertion |
+		//	functorDeclarations+=FunctorDeclaration | stateVariableDeclarations+=StateVariableDeclaration | equations+=Equation)*
+		//	"}";
 		public ParserRule getRule() { return rule; }
 
 		//stateful?="stateful"? "func" name=ID ("<" templateParameterDeclarations+=ParameterDeclaration (","
 		//templateParameterDeclarations+=ParameterDeclaration)* ">")? "(" (inputParameterDeclarations+=ParameterDeclaration (","
 		//inputParameterDeclarations+=ParameterDeclaration)*)? ")" "->" outputParameterDeclarations+=ParameterDeclaration (","
-		//outputParameterDeclarations+=ParameterDeclaration)* "{" (assertionStatements+=AssertionStatement |
-		//functorDeclarations+=FunctorDeclaration | stateVariableDeclarations+=StateVariableDeclaration |
-		//equationStatements+=EquationStatement)* "}"
+		//outputParameterDeclarations+=ParameterDeclaration)* "{" (assertions+=Assertion |
+		//functorDeclarations+=FunctorDeclaration | stateVariableDeclarations+=StateVariableDeclaration | equations+=Equation)*
+		//"}"
 		public Group getGroup() { return cGroup; }
 
 		//stateful?="stateful"?
@@ -436,15 +436,15 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_10() { return cLeftCurlyBracketKeyword_10; }
 
-		//(assertionStatements+=AssertionStatement | functorDeclarations+=FunctorDeclaration |
-		//stateVariableDeclarations+=StateVariableDeclaration | equationStatements+=EquationStatement)*
+		//(assertions+=Assertion | functorDeclarations+=FunctorDeclaration | stateVariableDeclarations+=StateVariableDeclaration |
+		//equations+=Equation)*
 		public Alternatives getAlternatives_11() { return cAlternatives_11; }
 
-		//assertionStatements+=AssertionStatement
-		public Assignment getAssertionStatementsAssignment_11_0() { return cAssertionStatementsAssignment_11_0; }
+		//assertions+=Assertion
+		public Assignment getAssertionsAssignment_11_0() { return cAssertionsAssignment_11_0; }
 
-		//AssertionStatement
-		public RuleCall getAssertionStatementsAssertionStatementParserRuleCall_11_0_0() { return cAssertionStatementsAssertionStatementParserRuleCall_11_0_0; }
+		//Assertion
+		public RuleCall getAssertionsAssertionParserRuleCall_11_0_0() { return cAssertionsAssertionParserRuleCall_11_0_0; }
 
 		//functorDeclarations+=FunctorDeclaration
 		public Assignment getFunctorDeclarationsAssignment_11_1() { return cFunctorDeclarationsAssignment_11_1; }
@@ -458,11 +458,11 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		//StateVariableDeclaration
 		public RuleCall getStateVariableDeclarationsStateVariableDeclarationParserRuleCall_11_2_0() { return cStateVariableDeclarationsStateVariableDeclarationParserRuleCall_11_2_0; }
 
-		//equationStatements+=EquationStatement
-		public Assignment getEquationStatementsAssignment_11_3() { return cEquationStatementsAssignment_11_3; }
+		//equations+=Equation
+		public Assignment getEquationsAssignment_11_3() { return cEquationsAssignment_11_3; }
 
-		//EquationStatement
-		public RuleCall getEquationStatementsEquationStatementParserRuleCall_11_3_0() { return cEquationStatementsEquationStatementParserRuleCall_11_3_0; }
+		//Equation
+		public RuleCall getEquationsEquationParserRuleCall_11_3_0() { return cEquationsEquationParserRuleCall_11_3_0; }
 
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_12() { return cRightCurlyBracketKeyword_12; }
@@ -484,8 +484,8 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getNameIDTerminalRuleCall_0() { return cNameIDTerminalRuleCall_0; }
 	}
 
-	public class AssertionStatementElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AssertionStatement");
+	public class AssertionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Assertion");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cStaticAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final Keyword cStaticStaticKeyword_0_0 = (Keyword)cStaticAssignment_0.eContents().get(0);
@@ -499,7 +499,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cMessageExpressionParserRuleCall_5_0 = (RuleCall)cMessageAssignment_5.eContents().get(0);
 		private final Keyword cSemicolonKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
-		//AssertionStatement:
+		//Assertion:
 		//	static?="static"? "assert" condition=Expression ":" statusKind=AssertionStatusKind message=Expression ";";
 		public ParserRule getRule() { return rule; }
 
@@ -646,8 +646,8 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		public Keyword getSemicolonKeyword_5() { return cSemicolonKeyword_5; }
 	}
 
-	public class EquationStatementElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EquationStatement");
+	public class EquationElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Equation");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cLeftHandSideAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cLeftHandSideExpressionParserRuleCall_0_0 = (RuleCall)cLeftHandSideAssignment_0.eContents().get(0);
@@ -656,7 +656,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cRightHandSideExpressionParserRuleCall_2_0 = (RuleCall)cRightHandSideAssignment_2.eContents().get(0);
 		private final Keyword cSemicolonKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
-		//EquationStatement:
+		//Equation:
 		//	leftHandSide=Expression "=" rightHandSide=Expression ";";
 		public ParserRule getRule() { return rule; }
 
@@ -3512,10 +3512,10 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	private FunctionDefinitionElements pFunctionDefinition;
 	private ParameterDeclarationElements pParameterDeclaration;
 	private AssertionStatusKindElements unknownRuleAssertionStatusKind;
-	private AssertionStatementElements pAssertionStatement;
+	private AssertionElements pAssertion;
 	private StateVariableDeclarationElements pStateVariableDeclaration;
 	private FunctorDeclarationElements pFunctorDeclaration;
-	private EquationStatementElements pEquationStatement;
+	private EquationElements pEquation;
 	private DataTypeSpecifierElements pDataTypeSpecifier;
 	private PrimitiveTypeSpecifierElements pPrimitiveTypeSpecifier;
 	private NumericTypeSpecifierElements pNumericTypeSpecifier;
@@ -3703,9 +3703,9 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	//	stateful?="stateful"? "func" name=ID ("<" templateParameterDeclarations+=ParameterDeclaration (","
 	//	templateParameterDeclarations+=ParameterDeclaration)* ">")? "(" (inputParameterDeclarations+=ParameterDeclaration (","
 	//	inputParameterDeclarations+=ParameterDeclaration)*)? ")" "->" outputParameterDeclarations+=ParameterDeclaration (","
-	//	outputParameterDeclarations+=ParameterDeclaration)* "{" (assertionStatements+=AssertionStatement |
-	//	functorDeclarations+=FunctorDeclaration | stateVariableDeclarations+=StateVariableDeclaration |
-	//	equationStatements+=EquationStatement)* "}";
+	//	outputParameterDeclarations+=ParameterDeclaration)* "{" (assertions+=Assertion |
+	//	functorDeclarations+=FunctorDeclaration | stateVariableDeclarations+=StateVariableDeclaration | equations+=Equation)*
+	//	"}";
 	public FunctionDefinitionElements getFunctionDefinitionAccess() {
 		return (pFunctionDefinition != null) ? pFunctionDefinition : (pFunctionDefinition = new FunctionDefinitionElements());
 	}
@@ -3734,14 +3734,14 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		return getAssertionStatusKindAccess().getRule();
 	}
 
-	//AssertionStatement:
+	//Assertion:
 	//	static?="static"? "assert" condition=Expression ":" statusKind=AssertionStatusKind message=Expression ";";
-	public AssertionStatementElements getAssertionStatementAccess() {
-		return (pAssertionStatement != null) ? pAssertionStatement : (pAssertionStatement = new AssertionStatementElements());
+	public AssertionElements getAssertionAccess() {
+		return (pAssertion != null) ? pAssertion : (pAssertion = new AssertionElements());
 	}
 	
-	public ParserRule getAssertionStatementRule() {
-		return getAssertionStatementAccess().getRule();
+	public ParserRule getAssertionRule() {
+		return getAssertionAccess().getRule();
 	}
 
 	//StateVariableDeclaration:
@@ -3765,14 +3765,14 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		return getFunctorDeclarationAccess().getRule();
 	}
 
-	//EquationStatement:
+	//Equation:
 	//	leftHandSide=Expression "=" rightHandSide=Expression ";";
-	public EquationStatementElements getEquationStatementAccess() {
-		return (pEquationStatement != null) ? pEquationStatement : (pEquationStatement = new EquationStatementElements());
+	public EquationElements getEquationAccess() {
+		return (pEquation != null) ? pEquation : (pEquation = new EquationElements());
 	}
 	
-	public ParserRule getEquationStatementRule() {
-		return getEquationStatementAccess().getRule();
+	public ParserRule getEquationRule() {
+		return getEquationAccess().getRule();
 	}
 
 	/// *

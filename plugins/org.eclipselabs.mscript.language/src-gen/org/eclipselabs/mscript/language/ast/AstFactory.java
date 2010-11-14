@@ -116,13 +116,13 @@ public interface AstFactory extends EFactory
   ParameterDeclaration createParameterDeclaration();
 
   /**
-   * Returns a new object of class '<em>Assertion Statement</em>'.
+   * Returns a new object of class '<em>Assertion</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Assertion Statement</em>'.
+   * @return a new object of class '<em>Assertion</em>'.
    * @generated
    */
-  AssertionStatement createAssertionStatement();
+  Assertion createAssertion();
 
   /**
    * Returns a new object of class '<em>State Variable Declaration</em>'.
@@ -143,13 +143,13 @@ public interface AstFactory extends EFactory
   FunctorDeclaration createFunctorDeclaration();
 
   /**
-   * Returns a new object of class '<em>Equation Statement</em>'.
+   * Returns a new object of class '<em>Equation</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Equation Statement</em>'.
+   * @return a new object of class '<em>Equation</em>'.
    * @generated
    */
-  EquationStatement createEquationStatement();
+  Equation createEquation();
 
   /**
    * Returns a new object of class '<em>Data Type Specifier</em>'.

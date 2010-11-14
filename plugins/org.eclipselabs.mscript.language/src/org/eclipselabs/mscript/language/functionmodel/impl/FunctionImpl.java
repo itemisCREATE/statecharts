@@ -27,7 +27,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.FunctionDefinition;
 import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
-import org.eclipselabs.mscript.language.functionmodel.Equation;
+import org.eclipselabs.mscript.language.functionmodel.EquationDescriptor;
 import org.eclipselabs.mscript.language.functionmodel.EquationPart;
 import org.eclipselabs.mscript.language.functionmodel.Function;
 import org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage;
@@ -44,7 +44,7 @@ import org.eclipselabs.mscript.language.internal.functionmodel.util.VariableDesc
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.FunctionImpl#getDefinition <em>Definition</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.FunctionImpl#getEquations <em>Equations</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.FunctionImpl#getEquationDescriptors <em>Equation Descriptors</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.FunctionImpl#getVariableDescriptors <em>Variable Descriptors</em>}</li>
  * </ul>
  * </p>
@@ -63,14 +63,14 @@ public class FunctionImpl extends EObjectImpl implements Function {
 	protected FunctionDefinition definition;
 
 	/**
-	 * The cached value of the '{@link #getEquations() <em>Equations</em>}' containment reference list.
+	 * The cached value of the '{@link #getEquationDescriptors() <em>Equation Descriptors</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getEquations()
+	 * @see #getEquationDescriptors()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Equation> equations;
+	protected EList<EquationDescriptor> equationDescriptors;
 
 	/**
 	 * The cached value of the '{@link #getVariableDescriptors() <em>Variable Descriptors</em>}' containment reference list.
@@ -144,11 +144,11 @@ public class FunctionImpl extends EObjectImpl implements Function {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Equation> getEquations() {
-		if (equations == null) {
-			equations = new EObjectContainmentWithInverseEList<Equation>(Equation.class, this, FunctionModelPackage.FUNCTION__EQUATIONS, FunctionModelPackage.EQUATION__FUNCTION);
+	public EList<EquationDescriptor> getEquationDescriptors() {
+		if (equationDescriptors == null) {
+			equationDescriptors = new EObjectContainmentWithInverseEList<EquationDescriptor>(EquationDescriptor.class, this, FunctionModelPackage.FUNCTION__EQUATION_DESCRIPTORS, FunctionModelPackage.EQUATION_DESCRIPTOR__FUNCTION);
 		}
-		return equations;
+		return equationDescriptors;
 	}
 
 	/**
@@ -185,9 +185,9 @@ public class FunctionImpl extends EObjectImpl implements Function {
 	public boolean hasNoDuplicateEquations(DiagnosticChain diagnostics, Map<Object, Object> context) {
 		boolean result = true;
 		Map<VariableDescriptorWrapper, EquationPart> wrappers = new HashMap<VariableDescriptorWrapper, EquationPart>();
-		for (Equation equation : getEquations()) {
-			if (!equation.getLeftHandSide().getParts().isEmpty()) {
-				EquationPart equationPart = equation.getLeftHandSide().getParts().get(0);
+		for (EquationDescriptor equationDescriptor : getEquationDescriptors()) {
+			if (!equationDescriptor.getLeftHandSide().getParts().isEmpty()) {
+				EquationPart equationPart = equationDescriptor.getLeftHandSide().getParts().get(0);
 				VariableStep variableStep = equationPart.getVariableStep();
 				VariableDescriptorWrapper descriptor = new VariableDescriptorWrapper(variableStep.getDescriptor().getName(), variableStep.getIndex());
 				EquationPart previousEquationPart = wrappers.put(descriptor, equationPart);
@@ -235,7 +235,7 @@ public class FunctionImpl extends EObjectImpl implements Function {
 				if (hasCyclicEquations(new HashSet<VariableStep>(), variableStep)) {
 					for (EquationPart equationPart : variableStep.getUsingEquationParts()) {
 						String message;
-						if (equationPart.getSide() == equationPart.getSide().getEquation().getLeftHandSide()) {
+						if (equationPart.getSide() == equationPart.getSide().getDescriptor().getLeftHandSide()) {
 							message = "Cyclic equation definition of '" + variableStep.getDescriptor().getName() + "'";
 						} else {
 							message = "'" + variableStep.getDescriptor().getName() + "' is part of a cyclic equation definition";
@@ -256,11 +256,11 @@ public class FunctionImpl extends EObjectImpl implements Function {
 	
 	private boolean hasCyclicEquations(Set<VariableStep> dependents, VariableStep variableStep) {
 		for (EquationPart usingEquationPart : variableStep.getUsingEquationParts()) {
-			if (usingEquationPart.getSide() == usingEquationPart.getSide().getEquation().getLeftHandSide()) {
+			if (usingEquationPart.getSide() == usingEquationPart.getSide().getDescriptor().getLeftHandSide()) {
 				if (!dependents.add(variableStep)) {
 					return true;
 				}
-				for (EquationPart rhsEquationPart : usingEquationPart.getSide().getEquation().getRightHandSide().getParts()) {
+				for (EquationPart rhsEquationPart : usingEquationPart.getSide().getDescriptor().getRightHandSide().getParts()) {
 					if (hasCyclicEquations(dependents, rhsEquationPart.getVariableStep())) {
 						return true;
 					}
@@ -307,7 +307,7 @@ public class FunctionImpl extends EObjectImpl implements Function {
 		for (VariableDescriptor variableDescriptor : getVariableDescriptors()) {
 			for (VariableStep variableStep : variableDescriptor.getSteps()) {
 				for (EquationPart equationPart : variableStep.getUsingEquationParts()) {
-					if (equationPart.getSide() == equationPart.getSide().getEquation().getRightHandSide()) {
+					if (equationPart.getSide() == equationPart.getSide().getDescriptor().getRightHandSide()) {
 						if (!hasEquationsFor(equationPart.getVariableStep(), diagnostics)) {
 							result = false;
 						}
@@ -341,7 +341,7 @@ public class FunctionImpl extends EObjectImpl implements Function {
 		for (VariableStep step : variableDescriptor.getSteps()) {
 			if (!step.isInitial()) {
 				for (EquationPart equationPart : step.getUsingEquationParts()) {
-					if (equationPart.getSide() == equationPart.getSide().getEquation().getLeftHandSide()) {
+					if (equationPart.getSide() == equationPart.getSide().getDescriptor().getLeftHandSide()) {
 						if (step.getIndex() >= index) {
 							ok = hasEquationForEachStep(variableDescriptor, step.getIndex(), index, false, diagnostics);
 							if (!ok) {
@@ -409,7 +409,7 @@ public class FunctionImpl extends EObjectImpl implements Function {
 		for (VariableStep variableStep : variableDescriptor.getSteps()) {
 			if (variableStep.getIndex() == stepIndex && (!initialOnly || variableStep.isInitial())) {
 				for (EquationPart equationPart : variableStep.getUsingEquationParts()) {
-					if (equationPart.getSide() == equationPart.getSide().getEquation().getLeftHandSide()) {
+					if (equationPart.getSide() == equationPart.getSide().getDescriptor().getLeftHandSide()) {
 						return true;
 					}
 				}
@@ -427,8 +427,8 @@ public class FunctionImpl extends EObjectImpl implements Function {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case FunctionModelPackage.FUNCTION__EQUATIONS:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getEquations()).basicAdd(otherEnd, msgs);
+			case FunctionModelPackage.FUNCTION__EQUATION_DESCRIPTORS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getEquationDescriptors()).basicAdd(otherEnd, msgs);
 			case FunctionModelPackage.FUNCTION__VARIABLE_DESCRIPTORS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getVariableDescriptors()).basicAdd(otherEnd, msgs);
 		}
@@ -443,8 +443,8 @@ public class FunctionImpl extends EObjectImpl implements Function {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case FunctionModelPackage.FUNCTION__EQUATIONS:
-				return ((InternalEList<?>)getEquations()).basicRemove(otherEnd, msgs);
+			case FunctionModelPackage.FUNCTION__EQUATION_DESCRIPTORS:
+				return ((InternalEList<?>)getEquationDescriptors()).basicRemove(otherEnd, msgs);
 			case FunctionModelPackage.FUNCTION__VARIABLE_DESCRIPTORS:
 				return ((InternalEList<?>)getVariableDescriptors()).basicRemove(otherEnd, msgs);
 		}
@@ -462,8 +462,8 @@ public class FunctionImpl extends EObjectImpl implements Function {
 			case FunctionModelPackage.FUNCTION__DEFINITION:
 				if (resolve) return getDefinition();
 				return basicGetDefinition();
-			case FunctionModelPackage.FUNCTION__EQUATIONS:
-				return getEquations();
+			case FunctionModelPackage.FUNCTION__EQUATION_DESCRIPTORS:
+				return getEquationDescriptors();
 			case FunctionModelPackage.FUNCTION__VARIABLE_DESCRIPTORS:
 				return getVariableDescriptors();
 		}
@@ -482,9 +482,9 @@ public class FunctionImpl extends EObjectImpl implements Function {
 			case FunctionModelPackage.FUNCTION__DEFINITION:
 				setDefinition((FunctionDefinition)newValue);
 				return;
-			case FunctionModelPackage.FUNCTION__EQUATIONS:
-				getEquations().clear();
-				getEquations().addAll((Collection<? extends Equation>)newValue);
+			case FunctionModelPackage.FUNCTION__EQUATION_DESCRIPTORS:
+				getEquationDescriptors().clear();
+				getEquationDescriptors().addAll((Collection<? extends EquationDescriptor>)newValue);
 				return;
 			case FunctionModelPackage.FUNCTION__VARIABLE_DESCRIPTORS:
 				getVariableDescriptors().clear();
@@ -505,8 +505,8 @@ public class FunctionImpl extends EObjectImpl implements Function {
 			case FunctionModelPackage.FUNCTION__DEFINITION:
 				setDefinition((FunctionDefinition)null);
 				return;
-			case FunctionModelPackage.FUNCTION__EQUATIONS:
-				getEquations().clear();
+			case FunctionModelPackage.FUNCTION__EQUATION_DESCRIPTORS:
+				getEquationDescriptors().clear();
 				return;
 			case FunctionModelPackage.FUNCTION__VARIABLE_DESCRIPTORS:
 				getVariableDescriptors().clear();
@@ -525,8 +525,8 @@ public class FunctionImpl extends EObjectImpl implements Function {
 		switch (featureID) {
 			case FunctionModelPackage.FUNCTION__DEFINITION:
 				return definition != null;
-			case FunctionModelPackage.FUNCTION__EQUATIONS:
-				return equations != null && !equations.isEmpty();
+			case FunctionModelPackage.FUNCTION__EQUATION_DESCRIPTORS:
+				return equationDescriptors != null && !equationDescriptors.isEmpty();
 			case FunctionModelPackage.FUNCTION__VARIABLE_DESCRIPTORS:
 				return variableDescriptors != null && !variableDescriptors.isEmpty();
 		}

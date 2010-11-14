@@ -15,24 +15,24 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipselabs.mscript.language.ast.AstPackage;
-import org.eclipselabs.mscript.language.ast.EquationStatement;
+import org.eclipselabs.mscript.language.ast.Equation;
 import org.eclipselabs.mscript.language.ast.Expression;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Equation Statement</b></em>'.
+ * An implementation of the model object '<em><b>Equation</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.EquationStatementImpl#getLeftHandSide <em>Left Hand Side</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.EquationStatementImpl#getRightHandSide <em>Right Hand Side</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.EquationImpl#getLeftHandSide <em>Left Hand Side</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.EquationImpl#getRightHandSide <em>Right Hand Side</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class EquationStatementImpl extends MinimalEObjectImpl.Container implements EquationStatement
+public class EquationImpl extends MinimalEObjectImpl.Container implements Equation
 {
   /**
    * The cached value of the '{@link #getLeftHandSide() <em>Left Hand Side</em>}' containment reference.
@@ -59,7 +59,7 @@ public class EquationStatementImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  protected EquationStatementImpl()
+  protected EquationImpl()
   {
     super();
   }
@@ -72,7 +72,7 @@ public class EquationStatementImpl extends MinimalEObjectImpl.Container implemen
   @Override
   protected EClass eStaticClass()
   {
-    return AstPackage.Literals.EQUATION_STATEMENT;
+    return AstPackage.Literals.EQUATION;
   }
 
   /**
@@ -96,7 +96,7 @@ public class EquationStatementImpl extends MinimalEObjectImpl.Container implemen
     leftHandSide = newLeftHandSide;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.EQUATION_STATEMENT__LEFT_HAND_SIDE, oldLeftHandSide, newLeftHandSide);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.EQUATION__LEFT_HAND_SIDE, oldLeftHandSide, newLeftHandSide);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -113,14 +113,14 @@ public class EquationStatementImpl extends MinimalEObjectImpl.Container implemen
     {
       NotificationChain msgs = null;
       if (leftHandSide != null)
-        msgs = ((InternalEObject)leftHandSide).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.EQUATION_STATEMENT__LEFT_HAND_SIDE, null, msgs);
+        msgs = ((InternalEObject)leftHandSide).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.EQUATION__LEFT_HAND_SIDE, null, msgs);
       if (newLeftHandSide != null)
-        msgs = ((InternalEObject)newLeftHandSide).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.EQUATION_STATEMENT__LEFT_HAND_SIDE, null, msgs);
+        msgs = ((InternalEObject)newLeftHandSide).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.EQUATION__LEFT_HAND_SIDE, null, msgs);
       msgs = basicSetLeftHandSide(newLeftHandSide, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.EQUATION_STATEMENT__LEFT_HAND_SIDE, newLeftHandSide, newLeftHandSide));
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.EQUATION__LEFT_HAND_SIDE, newLeftHandSide, newLeftHandSide));
   }
 
   /**
@@ -144,7 +144,7 @@ public class EquationStatementImpl extends MinimalEObjectImpl.Container implemen
     rightHandSide = newRightHandSide;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.EQUATION_STATEMENT__RIGHT_HAND_SIDE, oldRightHandSide, newRightHandSide);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.EQUATION__RIGHT_HAND_SIDE, oldRightHandSide, newRightHandSide);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -161,14 +161,14 @@ public class EquationStatementImpl extends MinimalEObjectImpl.Container implemen
     {
       NotificationChain msgs = null;
       if (rightHandSide != null)
-        msgs = ((InternalEObject)rightHandSide).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.EQUATION_STATEMENT__RIGHT_HAND_SIDE, null, msgs);
+        msgs = ((InternalEObject)rightHandSide).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.EQUATION__RIGHT_HAND_SIDE, null, msgs);
       if (newRightHandSide != null)
-        msgs = ((InternalEObject)newRightHandSide).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.EQUATION_STATEMENT__RIGHT_HAND_SIDE, null, msgs);
+        msgs = ((InternalEObject)newRightHandSide).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.EQUATION__RIGHT_HAND_SIDE, null, msgs);
       msgs = basicSetRightHandSide(newRightHandSide, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.EQUATION_STATEMENT__RIGHT_HAND_SIDE, newRightHandSide, newRightHandSide));
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.EQUATION__RIGHT_HAND_SIDE, newRightHandSide, newRightHandSide));
   }
 
   /**
@@ -181,9 +181,9 @@ public class EquationStatementImpl extends MinimalEObjectImpl.Container implemen
   {
     switch (featureID)
     {
-      case AstPackage.EQUATION_STATEMENT__LEFT_HAND_SIDE:
+      case AstPackage.EQUATION__LEFT_HAND_SIDE:
         return basicSetLeftHandSide(null, msgs);
-      case AstPackage.EQUATION_STATEMENT__RIGHT_HAND_SIDE:
+      case AstPackage.EQUATION__RIGHT_HAND_SIDE:
         return basicSetRightHandSide(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -199,9 +199,9 @@ public class EquationStatementImpl extends MinimalEObjectImpl.Container implemen
   {
     switch (featureID)
     {
-      case AstPackage.EQUATION_STATEMENT__LEFT_HAND_SIDE:
+      case AstPackage.EQUATION__LEFT_HAND_SIDE:
         return getLeftHandSide();
-      case AstPackage.EQUATION_STATEMENT__RIGHT_HAND_SIDE:
+      case AstPackage.EQUATION__RIGHT_HAND_SIDE:
         return getRightHandSide();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -217,10 +217,10 @@ public class EquationStatementImpl extends MinimalEObjectImpl.Container implemen
   {
     switch (featureID)
     {
-      case AstPackage.EQUATION_STATEMENT__LEFT_HAND_SIDE:
+      case AstPackage.EQUATION__LEFT_HAND_SIDE:
         setLeftHandSide((Expression)newValue);
         return;
-      case AstPackage.EQUATION_STATEMENT__RIGHT_HAND_SIDE:
+      case AstPackage.EQUATION__RIGHT_HAND_SIDE:
         setRightHandSide((Expression)newValue);
         return;
     }
@@ -237,10 +237,10 @@ public class EquationStatementImpl extends MinimalEObjectImpl.Container implemen
   {
     switch (featureID)
     {
-      case AstPackage.EQUATION_STATEMENT__LEFT_HAND_SIDE:
+      case AstPackage.EQUATION__LEFT_HAND_SIDE:
         setLeftHandSide((Expression)null);
         return;
-      case AstPackage.EQUATION_STATEMENT__RIGHT_HAND_SIDE:
+      case AstPackage.EQUATION__RIGHT_HAND_SIDE:
         setRightHandSide((Expression)null);
         return;
     }
@@ -257,12 +257,12 @@ public class EquationStatementImpl extends MinimalEObjectImpl.Container implemen
   {
     switch (featureID)
     {
-      case AstPackage.EQUATION_STATEMENT__LEFT_HAND_SIDE:
+      case AstPackage.EQUATION__LEFT_HAND_SIDE:
         return leftHandSide != null;
-      case AstPackage.EQUATION_STATEMENT__RIGHT_HAND_SIDE:
+      case AstPackage.EQUATION__RIGHT_HAND_SIDE:
         return rightHandSide != null;
     }
     return super.eIsSet(featureID);
   }
 
-} //EquationStatementImpl
+} //EquationImpl

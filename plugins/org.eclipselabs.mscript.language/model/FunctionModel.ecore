@@ -45,12 +45,12 @@
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="definition" lowerBound="1"
         eType="ecore:EClass ../src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//FunctionDefinition"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="equations" upperBound="-1"
-        eType="#//Equation" containment="true" eOpposite="#//Equation/function"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="equationDescriptors" upperBound="-1"
+        eType="#//EquationDescriptor" containment="true" eOpposite="#//EquationDescriptor/function"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="variableDescriptors" upperBound="-1"
         eType="#//VariableDescriptor" containment="true" eOpposite="#//VariableDescriptor/function"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Equation">
+  <eClassifiers xsi:type="ecore:EClass" name="EquationDescriptor">
     <eOperations name="isLeftHandSideValid" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -70,11 +70,11 @@
       </eParameters>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="function" lowerBound="1"
-        eType="#//Function" eOpposite="#//Function/equations"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="statement" lowerBound="1"
-        eType="ecore:EClass ../src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//EquationStatement"/>
+        eType="#//Function" eOpposite="#//Function/equationDescriptors"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="equation" lowerBound="1"
+        eType="ecore:EClass ../src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Equation"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sides" lowerBound="2" upperBound="2"
-        eType="#//EquationSide" containment="true" eOpposite="#//EquationSide/equation"/>
+        eType="#//EquationSide" containment="true" eOpposite="#//EquationSide/descriptor"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="leftHandSide" lowerBound="1"
         eType="#//EquationSide" changeable="false" volatile="true" transient="true"
         derived="true"/>
@@ -84,8 +84,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EquationSide">
     <eOperations name="getOtherSide" lowerBound="1" eType="#//EquationSide"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="equation" lowerBound="1"
-        eType="#//Equation" eOpposite="#//Equation/sides"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="descriptor" lowerBound="1"
+        eType="#//EquationDescriptor" eOpposite="#//EquationDescriptor/sides"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="expression" lowerBound="1"
         eType="ecore:EClass ../src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parts" upperBound="-1"

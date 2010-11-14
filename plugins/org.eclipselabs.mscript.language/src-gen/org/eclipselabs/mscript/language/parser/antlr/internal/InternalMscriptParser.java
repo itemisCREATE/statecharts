@@ -1329,7 +1329,7 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleFunctionDefinition
-    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:631:1: ruleFunctionDefinition returns [EObject current=null] : ( ( (lv_stateful_0_0= 'stateful' ) )? 'func' ( (lv_name_2_0= RULE_ID ) ) ( '<' ( (lv_templateParameterDeclarations_4_0= ruleParameterDeclaration ) ) ( ',' ( (lv_templateParameterDeclarations_6_0= ruleParameterDeclaration ) ) )* '>' )? '(' ( ( (lv_inputParameterDeclarations_9_0= ruleParameterDeclaration ) ) ( ',' ( (lv_inputParameterDeclarations_11_0= ruleParameterDeclaration ) ) )* )? ')' '->' ( (lv_outputParameterDeclarations_14_0= ruleParameterDeclaration ) ) ( ',' ( (lv_outputParameterDeclarations_16_0= ruleParameterDeclaration ) ) )* '{' ( ( (lv_assertionStatements_18_0= ruleAssertionStatement ) ) | ( (lv_functorDeclarations_19_0= ruleFunctorDeclaration ) ) | ( (lv_stateVariableDeclarations_20_0= ruleStateVariableDeclaration ) ) | ( (lv_equationStatements_21_0= ruleEquationStatement ) ) )* '}' ) ;
+    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:631:1: ruleFunctionDefinition returns [EObject current=null] : ( ( (lv_stateful_0_0= 'stateful' ) )? 'func' ( (lv_name_2_0= RULE_ID ) ) ( '<' ( (lv_templateParameterDeclarations_4_0= ruleParameterDeclaration ) ) ( ',' ( (lv_templateParameterDeclarations_6_0= ruleParameterDeclaration ) ) )* '>' )? '(' ( ( (lv_inputParameterDeclarations_9_0= ruleParameterDeclaration ) ) ( ',' ( (lv_inputParameterDeclarations_11_0= ruleParameterDeclaration ) ) )* )? ')' '->' ( (lv_outputParameterDeclarations_14_0= ruleParameterDeclaration ) ) ( ',' ( (lv_outputParameterDeclarations_16_0= ruleParameterDeclaration ) ) )* '{' ( ( (lv_assertions_18_0= ruleAssertion ) ) | ( (lv_functorDeclarations_19_0= ruleFunctorDeclaration ) ) | ( (lv_stateVariableDeclarations_20_0= ruleStateVariableDeclaration ) ) | ( (lv_equations_21_0= ruleEquation ) ) )* '}' ) ;
     public final EObject ruleFunctionDefinition() throws RecognitionException {
         EObject current = null;
 
@@ -1347,23 +1347,23 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
         EObject lv_outputParameterDeclarations_16_0 = null;
 
-        EObject lv_assertionStatements_18_0 = null;
+        EObject lv_assertions_18_0 = null;
 
         EObject lv_functorDeclarations_19_0 = null;
 
         EObject lv_stateVariableDeclarations_20_0 = null;
 
-        EObject lv_equationStatements_21_0 = null;
+        EObject lv_equations_21_0 = null;
 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:636:6: ( ( ( (lv_stateful_0_0= 'stateful' ) )? 'func' ( (lv_name_2_0= RULE_ID ) ) ( '<' ( (lv_templateParameterDeclarations_4_0= ruleParameterDeclaration ) ) ( ',' ( (lv_templateParameterDeclarations_6_0= ruleParameterDeclaration ) ) )* '>' )? '(' ( ( (lv_inputParameterDeclarations_9_0= ruleParameterDeclaration ) ) ( ',' ( (lv_inputParameterDeclarations_11_0= ruleParameterDeclaration ) ) )* )? ')' '->' ( (lv_outputParameterDeclarations_14_0= ruleParameterDeclaration ) ) ( ',' ( (lv_outputParameterDeclarations_16_0= ruleParameterDeclaration ) ) )* '{' ( ( (lv_assertionStatements_18_0= ruleAssertionStatement ) ) | ( (lv_functorDeclarations_19_0= ruleFunctorDeclaration ) ) | ( (lv_stateVariableDeclarations_20_0= ruleStateVariableDeclaration ) ) | ( (lv_equationStatements_21_0= ruleEquationStatement ) ) )* '}' ) )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:637:1: ( ( (lv_stateful_0_0= 'stateful' ) )? 'func' ( (lv_name_2_0= RULE_ID ) ) ( '<' ( (lv_templateParameterDeclarations_4_0= ruleParameterDeclaration ) ) ( ',' ( (lv_templateParameterDeclarations_6_0= ruleParameterDeclaration ) ) )* '>' )? '(' ( ( (lv_inputParameterDeclarations_9_0= ruleParameterDeclaration ) ) ( ',' ( (lv_inputParameterDeclarations_11_0= ruleParameterDeclaration ) ) )* )? ')' '->' ( (lv_outputParameterDeclarations_14_0= ruleParameterDeclaration ) ) ( ',' ( (lv_outputParameterDeclarations_16_0= ruleParameterDeclaration ) ) )* '{' ( ( (lv_assertionStatements_18_0= ruleAssertionStatement ) ) | ( (lv_functorDeclarations_19_0= ruleFunctorDeclaration ) ) | ( (lv_stateVariableDeclarations_20_0= ruleStateVariableDeclaration ) ) | ( (lv_equationStatements_21_0= ruleEquationStatement ) ) )* '}' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:636:6: ( ( ( (lv_stateful_0_0= 'stateful' ) )? 'func' ( (lv_name_2_0= RULE_ID ) ) ( '<' ( (lv_templateParameterDeclarations_4_0= ruleParameterDeclaration ) ) ( ',' ( (lv_templateParameterDeclarations_6_0= ruleParameterDeclaration ) ) )* '>' )? '(' ( ( (lv_inputParameterDeclarations_9_0= ruleParameterDeclaration ) ) ( ',' ( (lv_inputParameterDeclarations_11_0= ruleParameterDeclaration ) ) )* )? ')' '->' ( (lv_outputParameterDeclarations_14_0= ruleParameterDeclaration ) ) ( ',' ( (lv_outputParameterDeclarations_16_0= ruleParameterDeclaration ) ) )* '{' ( ( (lv_assertions_18_0= ruleAssertion ) ) | ( (lv_functorDeclarations_19_0= ruleFunctorDeclaration ) ) | ( (lv_stateVariableDeclarations_20_0= ruleStateVariableDeclaration ) ) | ( (lv_equations_21_0= ruleEquation ) ) )* '}' ) )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:637:1: ( ( (lv_stateful_0_0= 'stateful' ) )? 'func' ( (lv_name_2_0= RULE_ID ) ) ( '<' ( (lv_templateParameterDeclarations_4_0= ruleParameterDeclaration ) ) ( ',' ( (lv_templateParameterDeclarations_6_0= ruleParameterDeclaration ) ) )* '>' )? '(' ( ( (lv_inputParameterDeclarations_9_0= ruleParameterDeclaration ) ) ( ',' ( (lv_inputParameterDeclarations_11_0= ruleParameterDeclaration ) ) )* )? ')' '->' ( (lv_outputParameterDeclarations_14_0= ruleParameterDeclaration ) ) ( ',' ( (lv_outputParameterDeclarations_16_0= ruleParameterDeclaration ) ) )* '{' ( ( (lv_assertions_18_0= ruleAssertion ) ) | ( (lv_functorDeclarations_19_0= ruleFunctorDeclaration ) ) | ( (lv_stateVariableDeclarations_20_0= ruleStateVariableDeclaration ) ) | ( (lv_equations_21_0= ruleEquation ) ) )* '}' )
             {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:637:1: ( ( (lv_stateful_0_0= 'stateful' ) )? 'func' ( (lv_name_2_0= RULE_ID ) ) ( '<' ( (lv_templateParameterDeclarations_4_0= ruleParameterDeclaration ) ) ( ',' ( (lv_templateParameterDeclarations_6_0= ruleParameterDeclaration ) ) )* '>' )? '(' ( ( (lv_inputParameterDeclarations_9_0= ruleParameterDeclaration ) ) ( ',' ( (lv_inputParameterDeclarations_11_0= ruleParameterDeclaration ) ) )* )? ')' '->' ( (lv_outputParameterDeclarations_14_0= ruleParameterDeclaration ) ) ( ',' ( (lv_outputParameterDeclarations_16_0= ruleParameterDeclaration ) ) )* '{' ( ( (lv_assertionStatements_18_0= ruleAssertionStatement ) ) | ( (lv_functorDeclarations_19_0= ruleFunctorDeclaration ) ) | ( (lv_stateVariableDeclarations_20_0= ruleStateVariableDeclaration ) ) | ( (lv_equationStatements_21_0= ruleEquationStatement ) ) )* '}' )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:637:2: ( (lv_stateful_0_0= 'stateful' ) )? 'func' ( (lv_name_2_0= RULE_ID ) ) ( '<' ( (lv_templateParameterDeclarations_4_0= ruleParameterDeclaration ) ) ( ',' ( (lv_templateParameterDeclarations_6_0= ruleParameterDeclaration ) ) )* '>' )? '(' ( ( (lv_inputParameterDeclarations_9_0= ruleParameterDeclaration ) ) ( ',' ( (lv_inputParameterDeclarations_11_0= ruleParameterDeclaration ) ) )* )? ')' '->' ( (lv_outputParameterDeclarations_14_0= ruleParameterDeclaration ) ) ( ',' ( (lv_outputParameterDeclarations_16_0= ruleParameterDeclaration ) ) )* '{' ( ( (lv_assertionStatements_18_0= ruleAssertionStatement ) ) | ( (lv_functorDeclarations_19_0= ruleFunctorDeclaration ) ) | ( (lv_stateVariableDeclarations_20_0= ruleStateVariableDeclaration ) ) | ( (lv_equationStatements_21_0= ruleEquationStatement ) ) )* '}'
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:637:1: ( ( (lv_stateful_0_0= 'stateful' ) )? 'func' ( (lv_name_2_0= RULE_ID ) ) ( '<' ( (lv_templateParameterDeclarations_4_0= ruleParameterDeclaration ) ) ( ',' ( (lv_templateParameterDeclarations_6_0= ruleParameterDeclaration ) ) )* '>' )? '(' ( ( (lv_inputParameterDeclarations_9_0= ruleParameterDeclaration ) ) ( ',' ( (lv_inputParameterDeclarations_11_0= ruleParameterDeclaration ) ) )* )? ')' '->' ( (lv_outputParameterDeclarations_14_0= ruleParameterDeclaration ) ) ( ',' ( (lv_outputParameterDeclarations_16_0= ruleParameterDeclaration ) ) )* '{' ( ( (lv_assertions_18_0= ruleAssertion ) ) | ( (lv_functorDeclarations_19_0= ruleFunctorDeclaration ) ) | ( (lv_stateVariableDeclarations_20_0= ruleStateVariableDeclaration ) ) | ( (lv_equations_21_0= ruleEquation ) ) )* '}' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:637:2: ( (lv_stateful_0_0= 'stateful' ) )? 'func' ( (lv_name_2_0= RULE_ID ) ) ( '<' ( (lv_templateParameterDeclarations_4_0= ruleParameterDeclaration ) ) ( ',' ( (lv_templateParameterDeclarations_6_0= ruleParameterDeclaration ) ) )* '>' )? '(' ( ( (lv_inputParameterDeclarations_9_0= ruleParameterDeclaration ) ) ( ',' ( (lv_inputParameterDeclarations_11_0= ruleParameterDeclaration ) ) )* )? ')' '->' ( (lv_outputParameterDeclarations_14_0= ruleParameterDeclaration ) ) ( ',' ( (lv_outputParameterDeclarations_16_0= ruleParameterDeclaration ) ) )* '{' ( ( (lv_assertions_18_0= ruleAssertion ) ) | ( (lv_functorDeclarations_19_0= ruleFunctorDeclaration ) ) | ( (lv_stateVariableDeclarations_20_0= ruleStateVariableDeclaration ) ) | ( (lv_equations_21_0= ruleEquation ) ) )* '}'
             {
             // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:637:2: ( (lv_stateful_0_0= 'stateful' ) )?
             int alt7=2;
@@ -1800,7 +1800,7 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
                     createLeafNode(grammarAccess.getFunctionDefinitionAccess().getLeftCurlyBracketKeyword_10(), null); 
                 
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:866:1: ( ( (lv_assertionStatements_18_0= ruleAssertionStatement ) ) | ( (lv_functorDeclarations_19_0= ruleFunctorDeclaration ) ) | ( (lv_stateVariableDeclarations_20_0= ruleStateVariableDeclaration ) ) | ( (lv_equationStatements_21_0= ruleEquationStatement ) ) )*
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:866:1: ( ( (lv_assertions_18_0= ruleAssertion ) ) | ( (lv_functorDeclarations_19_0= ruleFunctorDeclaration ) ) | ( (lv_stateVariableDeclarations_20_0= ruleStateVariableDeclaration ) ) | ( (lv_equations_21_0= ruleEquation ) ) )*
             loop13:
             do {
                 int alt13=5;
@@ -1847,19 +1847,19 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
                 switch (alt13) {
             	case 1 :
-            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:866:2: ( (lv_assertionStatements_18_0= ruleAssertionStatement ) )
+            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:866:2: ( (lv_assertions_18_0= ruleAssertion ) )
             	    {
-            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:866:2: ( (lv_assertionStatements_18_0= ruleAssertionStatement ) )
-            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:867:1: (lv_assertionStatements_18_0= ruleAssertionStatement )
+            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:866:2: ( (lv_assertions_18_0= ruleAssertion ) )
+            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:867:1: (lv_assertions_18_0= ruleAssertion )
             	    {
-            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:867:1: (lv_assertionStatements_18_0= ruleAssertionStatement )
-            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:868:3: lv_assertionStatements_18_0= ruleAssertionStatement
+            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:867:1: (lv_assertions_18_0= ruleAssertion )
+            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:868:3: lv_assertions_18_0= ruleAssertion
             	    {
             	     
-            	    	        currentNode=createCompositeNode(grammarAccess.getFunctionDefinitionAccess().getAssertionStatementsAssertionStatementParserRuleCall_11_0_0(), currentNode); 
+            	    	        currentNode=createCompositeNode(grammarAccess.getFunctionDefinitionAccess().getAssertionsAssertionParserRuleCall_11_0_0(), currentNode); 
             	    	    
-            	    pushFollow(FOLLOW_ruleAssertionStatement_in_ruleFunctionDefinition1478);
-            	    lv_assertionStatements_18_0=ruleAssertionStatement();
+            	    pushFollow(FOLLOW_ruleAssertion_in_ruleFunctionDefinition1478);
+            	    lv_assertions_18_0=ruleAssertion();
             	    _fsp--;
 
 
@@ -1870,9 +1870,9 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
             	    	        try {
             	    	       		add(
             	    	       			current, 
-            	    	       			"assertionStatements",
-            	    	        		lv_assertionStatements_18_0, 
-            	    	        		"AssertionStatement", 
+            	    	       			"assertions",
+            	    	        		lv_assertions_18_0, 
+            	    	        		"Assertion", 
             	    	        		currentNode);
             	    	        } catch (ValueConverterException vce) {
             	    				handleValueConverterException(vce);
@@ -1973,19 +1973,19 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 4 :
-            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:941:6: ( (lv_equationStatements_21_0= ruleEquationStatement ) )
+            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:941:6: ( (lv_equations_21_0= ruleEquation ) )
             	    {
-            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:941:6: ( (lv_equationStatements_21_0= ruleEquationStatement ) )
-            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:942:1: (lv_equationStatements_21_0= ruleEquationStatement )
+            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:941:6: ( (lv_equations_21_0= ruleEquation ) )
+            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:942:1: (lv_equations_21_0= ruleEquation )
             	    {
-            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:942:1: (lv_equationStatements_21_0= ruleEquationStatement )
-            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:943:3: lv_equationStatements_21_0= ruleEquationStatement
+            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:942:1: (lv_equations_21_0= ruleEquation )
+            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:943:3: lv_equations_21_0= ruleEquation
             	    {
             	     
-            	    	        currentNode=createCompositeNode(grammarAccess.getFunctionDefinitionAccess().getEquationStatementsEquationStatementParserRuleCall_11_3_0(), currentNode); 
+            	    	        currentNode=createCompositeNode(grammarAccess.getFunctionDefinitionAccess().getEquationsEquationParserRuleCall_11_3_0(), currentNode); 
             	    	    
-            	    pushFollow(FOLLOW_ruleEquationStatement_in_ruleFunctionDefinition1559);
-            	    lv_equationStatements_21_0=ruleEquationStatement();
+            	    pushFollow(FOLLOW_ruleEquation_in_ruleFunctionDefinition1559);
+            	    lv_equations_21_0=ruleEquation();
             	    _fsp--;
 
 
@@ -1996,9 +1996,9 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
             	    	        try {
             	    	       		add(
             	    	       			current, 
-            	    	       			"equationStatements",
-            	    	        		lv_equationStatements_21_0, 
-            	    	        		"EquationStatement", 
+            	    	       			"equations",
+            	    	        		lv_equations_21_0, 
+            	    	        		"Equation", 
             	    	        		currentNode);
             	    	        } catch (ValueConverterException vce) {
             	    				handleValueConverterException(vce);
@@ -2146,25 +2146,25 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
     // $ANTLR end ruleParameterDeclaration
 
 
-    // $ANTLR start entryRuleAssertionStatement
-    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1024:1: entryRuleAssertionStatement returns [EObject current=null] : iv_ruleAssertionStatement= ruleAssertionStatement EOF ;
-    public final EObject entryRuleAssertionStatement() throws RecognitionException {
+    // $ANTLR start entryRuleAssertion
+    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1024:1: entryRuleAssertion returns [EObject current=null] : iv_ruleAssertion= ruleAssertion EOF ;
+    public final EObject entryRuleAssertion() throws RecognitionException {
         EObject current = null;
 
-        EObject iv_ruleAssertionStatement = null;
+        EObject iv_ruleAssertion = null;
 
 
         try {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1025:2: (iv_ruleAssertionStatement= ruleAssertionStatement EOF )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1026:2: iv_ruleAssertionStatement= ruleAssertionStatement EOF
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1025:2: (iv_ruleAssertion= ruleAssertion EOF )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1026:2: iv_ruleAssertion= ruleAssertion EOF
             {
-             currentNode = createCompositeNode(grammarAccess.getAssertionStatementRule(), currentNode); 
-            pushFollow(FOLLOW_ruleAssertionStatement_in_entryRuleAssertionStatement1698);
-            iv_ruleAssertionStatement=ruleAssertionStatement();
+             currentNode = createCompositeNode(grammarAccess.getAssertionRule(), currentNode); 
+            pushFollow(FOLLOW_ruleAssertion_in_entryRuleAssertion1698);
+            iv_ruleAssertion=ruleAssertion();
             _fsp--;
 
-             current =iv_ruleAssertionStatement; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleAssertionStatement1708); 
+             current =iv_ruleAssertion; 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleAssertion1708); 
 
             }
 
@@ -2178,12 +2178,12 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end entryRuleAssertionStatement
+    // $ANTLR end entryRuleAssertion
 
 
-    // $ANTLR start ruleAssertionStatement
-    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1033:1: ruleAssertionStatement returns [EObject current=null] : ( ( (lv_static_0_0= 'static' ) )? 'assert' ( (lv_condition_2_0= ruleExpression ) ) ':' ( (lv_statusKind_4_0= ruleAssertionStatusKind ) ) ( (lv_message_5_0= ruleExpression ) ) ';' ) ;
-    public final EObject ruleAssertionStatement() throws RecognitionException {
+    // $ANTLR start ruleAssertion
+    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1033:1: ruleAssertion returns [EObject current=null] : ( ( (lv_static_0_0= 'static' ) )? 'assert' ( (lv_condition_2_0= ruleExpression ) ) ':' ( (lv_statusKind_4_0= ruleAssertionStatusKind ) ) ( (lv_message_5_0= ruleExpression ) ) ';' ) ;
+    public final EObject ruleAssertion() throws RecognitionException {
         EObject current = null;
 
         Token lv_static_0_0=null;
@@ -2218,13 +2218,13 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
                     // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1041:3: lv_static_0_0= 'static'
                     {
                     lv_static_0_0=(Token)input.LT(1);
-                    match(input,28,FOLLOW_28_in_ruleAssertionStatement1751); 
+                    match(input,28,FOLLOW_28_in_ruleAssertion1751); 
 
-                            createLeafNode(grammarAccess.getAssertionStatementAccess().getStaticStaticKeyword_0_0(), "static"); 
+                            createLeafNode(grammarAccess.getAssertionAccess().getStaticStaticKeyword_0_0(), "static"); 
                         
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.getAssertionStatementRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getAssertionRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
@@ -2243,9 +2243,9 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
             }
 
-            match(input,29,FOLLOW_29_in_ruleAssertionStatement1775); 
+            match(input,29,FOLLOW_29_in_ruleAssertion1775); 
 
-                    createLeafNode(grammarAccess.getAssertionStatementAccess().getAssertKeyword_1(), null); 
+                    createLeafNode(grammarAccess.getAssertionAccess().getAssertKeyword_1(), null); 
                 
             // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1064:1: ( (lv_condition_2_0= ruleExpression ) )
             // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1065:1: (lv_condition_2_0= ruleExpression )
@@ -2254,15 +2254,15 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
             // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1066:3: lv_condition_2_0= ruleExpression
             {
              
-            	        currentNode=createCompositeNode(grammarAccess.getAssertionStatementAccess().getConditionExpressionParserRuleCall_2_0(), currentNode); 
+            	        currentNode=createCompositeNode(grammarAccess.getAssertionAccess().getConditionExpressionParserRuleCall_2_0(), currentNode); 
             	    
-            pushFollow(FOLLOW_ruleExpression_in_ruleAssertionStatement1796);
+            pushFollow(FOLLOW_ruleExpression_in_ruleAssertion1796);
             lv_condition_2_0=ruleExpression();
             _fsp--;
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.getAssertionStatementRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getAssertionRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        try {
@@ -2283,9 +2283,9 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
             }
 
-            match(input,20,FOLLOW_20_in_ruleAssertionStatement1806); 
+            match(input,20,FOLLOW_20_in_ruleAssertion1806); 
 
-                    createLeafNode(grammarAccess.getAssertionStatementAccess().getColonKeyword_3(), null); 
+                    createLeafNode(grammarAccess.getAssertionAccess().getColonKeyword_3(), null); 
                 
             // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1092:1: ( (lv_statusKind_4_0= ruleAssertionStatusKind ) )
             // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1093:1: (lv_statusKind_4_0= ruleAssertionStatusKind )
@@ -2294,15 +2294,15 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
             // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1094:3: lv_statusKind_4_0= ruleAssertionStatusKind
             {
              
-            	        currentNode=createCompositeNode(grammarAccess.getAssertionStatementAccess().getStatusKindAssertionStatusKindEnumRuleCall_4_0(), currentNode); 
+            	        currentNode=createCompositeNode(grammarAccess.getAssertionAccess().getStatusKindAssertionStatusKindEnumRuleCall_4_0(), currentNode); 
             	    
-            pushFollow(FOLLOW_ruleAssertionStatusKind_in_ruleAssertionStatement1827);
+            pushFollow(FOLLOW_ruleAssertionStatusKind_in_ruleAssertion1827);
             lv_statusKind_4_0=ruleAssertionStatusKind();
             _fsp--;
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.getAssertionStatementRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getAssertionRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        try {
@@ -2330,15 +2330,15 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
             // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1118:3: lv_message_5_0= ruleExpression
             {
              
-            	        currentNode=createCompositeNode(grammarAccess.getAssertionStatementAccess().getMessageExpressionParserRuleCall_5_0(), currentNode); 
+            	        currentNode=createCompositeNode(grammarAccess.getAssertionAccess().getMessageExpressionParserRuleCall_5_0(), currentNode); 
             	    
-            pushFollow(FOLLOW_ruleExpression_in_ruleAssertionStatement1848);
+            pushFollow(FOLLOW_ruleExpression_in_ruleAssertion1848);
             lv_message_5_0=ruleExpression();
             _fsp--;
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.getAssertionStatementRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getAssertionRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        try {
@@ -2359,9 +2359,9 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
             }
 
-            match(input,18,FOLLOW_18_in_ruleAssertionStatement1858); 
+            match(input,18,FOLLOW_18_in_ruleAssertion1858); 
 
-                    createLeafNode(grammarAccess.getAssertionStatementAccess().getSemicolonKeyword_6(), null); 
+                    createLeafNode(grammarAccess.getAssertionAccess().getSemicolonKeyword_6(), null); 
                 
 
             }
@@ -2382,7 +2382,7 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end ruleAssertionStatement
+    // $ANTLR end ruleAssertion
 
 
     // $ANTLR start entryRuleStateVariableDeclaration
@@ -2784,25 +2784,25 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
     // $ANTLR end ruleFunctorDeclaration
 
 
-    // $ANTLR start entryRuleEquationStatement
-    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1350:1: entryRuleEquationStatement returns [EObject current=null] : iv_ruleEquationStatement= ruleEquationStatement EOF ;
-    public final EObject entryRuleEquationStatement() throws RecognitionException {
+    // $ANTLR start entryRuleEquation
+    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1350:1: entryRuleEquation returns [EObject current=null] : iv_ruleEquation= ruleEquation EOF ;
+    public final EObject entryRuleEquation() throws RecognitionException {
         EObject current = null;
 
-        EObject iv_ruleEquationStatement = null;
+        EObject iv_ruleEquation = null;
 
 
         try {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1351:2: (iv_ruleEquationStatement= ruleEquationStatement EOF )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1352:2: iv_ruleEquationStatement= ruleEquationStatement EOF
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1351:2: (iv_ruleEquation= ruleEquation EOF )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1352:2: iv_ruleEquation= ruleEquation EOF
             {
-             currentNode = createCompositeNode(grammarAccess.getEquationStatementRule(), currentNode); 
-            pushFollow(FOLLOW_ruleEquationStatement_in_entryRuleEquationStatement2229);
-            iv_ruleEquationStatement=ruleEquationStatement();
+             currentNode = createCompositeNode(grammarAccess.getEquationRule(), currentNode); 
+            pushFollow(FOLLOW_ruleEquation_in_entryRuleEquation2229);
+            iv_ruleEquation=ruleEquation();
             _fsp--;
 
-             current =iv_ruleEquationStatement; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleEquationStatement2239); 
+             current =iv_ruleEquation; 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleEquation2239); 
 
             }
 
@@ -2816,12 +2816,12 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end entryRuleEquationStatement
+    // $ANTLR end entryRuleEquation
 
 
-    // $ANTLR start ruleEquationStatement
-    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1359:1: ruleEquationStatement returns [EObject current=null] : ( ( (lv_leftHandSide_0_0= ruleExpression ) ) '=' ( (lv_rightHandSide_2_0= ruleExpression ) ) ';' ) ;
-    public final EObject ruleEquationStatement() throws RecognitionException {
+    // $ANTLR start ruleEquation
+    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1359:1: ruleEquation returns [EObject current=null] : ( ( (lv_leftHandSide_0_0= ruleExpression ) ) '=' ( (lv_rightHandSide_2_0= ruleExpression ) ) ';' ) ;
+    public final EObject ruleEquation() throws RecognitionException {
         EObject current = null;
 
         EObject lv_leftHandSide_0_0 = null;
@@ -2845,15 +2845,15 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
             // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1367:3: lv_leftHandSide_0_0= ruleExpression
             {
              
-            	        currentNode=createCompositeNode(grammarAccess.getEquationStatementAccess().getLeftHandSideExpressionParserRuleCall_0_0(), currentNode); 
+            	        currentNode=createCompositeNode(grammarAccess.getEquationAccess().getLeftHandSideExpressionParserRuleCall_0_0(), currentNode); 
             	    
-            pushFollow(FOLLOW_ruleExpression_in_ruleEquationStatement2285);
+            pushFollow(FOLLOW_ruleExpression_in_ruleEquation2285);
             lv_leftHandSide_0_0=ruleExpression();
             _fsp--;
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.getEquationStatementRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getEquationRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        try {
@@ -2874,9 +2874,9 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
             }
 
-            match(input,17,FOLLOW_17_in_ruleEquationStatement2295); 
+            match(input,17,FOLLOW_17_in_ruleEquation2295); 
 
-                    createLeafNode(grammarAccess.getEquationStatementAccess().getEqualsSignKeyword_1(), null); 
+                    createLeafNode(grammarAccess.getEquationAccess().getEqualsSignKeyword_1(), null); 
                 
             // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1393:1: ( (lv_rightHandSide_2_0= ruleExpression ) )
             // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1394:1: (lv_rightHandSide_2_0= ruleExpression )
@@ -2885,15 +2885,15 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
             // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1395:3: lv_rightHandSide_2_0= ruleExpression
             {
              
-            	        currentNode=createCompositeNode(grammarAccess.getEquationStatementAccess().getRightHandSideExpressionParserRuleCall_2_0(), currentNode); 
+            	        currentNode=createCompositeNode(grammarAccess.getEquationAccess().getRightHandSideExpressionParserRuleCall_2_0(), currentNode); 
             	    
-            pushFollow(FOLLOW_ruleExpression_in_ruleEquationStatement2316);
+            pushFollow(FOLLOW_ruleExpression_in_ruleEquation2316);
             lv_rightHandSide_2_0=ruleExpression();
             _fsp--;
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.getEquationStatementRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getEquationRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        try {
@@ -2914,9 +2914,9 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
             }
 
-            match(input,18,FOLLOW_18_in_ruleEquationStatement2326); 
+            match(input,18,FOLLOW_18_in_ruleEquation2326); 
 
-                    createLeafNode(grammarAccess.getEquationStatementAccess().getSemicolonKeyword_3(), null); 
+                    createLeafNode(grammarAccess.getEquationAccess().getSemicolonKeyword_3(), null); 
                 
 
             }
@@ -2937,7 +2937,7 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end ruleEquationStatement
+    // $ANTLR end ruleEquation
 
 
     // $ANTLR start entryRuleDataTypeSpecifier
@@ -15643,23 +15643,23 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_14_in_ruleFunctionDefinition1423 = new BitSet(new long[]{0x0000000000000010L});
     public static final BitSet FOLLOW_ruleParameterDeclaration_in_ruleFunctionDefinition1444 = new BitSet(new long[]{0x0000000000006000L});
     public static final BitSet FOLLOW_13_in_ruleFunctionDefinition1456 = new BitSet(new long[]{0x23202502F200A0F0L,0x0000000000003400L});
-    public static final BitSet FOLLOW_ruleAssertionStatement_in_ruleFunctionDefinition1478 = new BitSet(new long[]{0x23202502F200A0F0L,0x0000000000003400L});
+    public static final BitSet FOLLOW_ruleAssertion_in_ruleFunctionDefinition1478 = new BitSet(new long[]{0x23202502F200A0F0L,0x0000000000003400L});
     public static final BitSet FOLLOW_ruleFunctorDeclaration_in_ruleFunctionDefinition1505 = new BitSet(new long[]{0x23202502F200A0F0L,0x0000000000003400L});
     public static final BitSet FOLLOW_ruleStateVariableDeclaration_in_ruleFunctionDefinition1532 = new BitSet(new long[]{0x23202502F200A0F0L,0x0000000000003400L});
-    public static final BitSet FOLLOW_ruleEquationStatement_in_ruleFunctionDefinition1559 = new BitSet(new long[]{0x23202502F200A0F0L,0x0000000000003400L});
+    public static final BitSet FOLLOW_ruleEquation_in_ruleFunctionDefinition1559 = new BitSet(new long[]{0x23202502F200A0F0L,0x0000000000003400L});
     public static final BitSet FOLLOW_15_in_ruleFunctionDefinition1571 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleParameterDeclaration_in_entryRuleParameterDeclaration1607 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleParameterDeclaration1617 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_ID_in_ruleParameterDeclaration1658 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAssertionStatement_in_entryRuleAssertionStatement1698 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleAssertionStatement1708 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_28_in_ruleAssertionStatement1751 = new BitSet(new long[]{0x0000000020000000L});
-    public static final BitSet FOLLOW_29_in_ruleAssertionStatement1775 = new BitSet(new long[]{0x23202502020020F0L,0x0000000000003400L});
-    public static final BitSet FOLLOW_ruleExpression_in_ruleAssertionStatement1796 = new BitSet(new long[]{0x0000000000100000L});
-    public static final BitSet FOLLOW_20_in_ruleAssertionStatement1806 = new BitSet(new long[]{0xC000000000000000L,0x0000000000000003L});
-    public static final BitSet FOLLOW_ruleAssertionStatusKind_in_ruleAssertionStatement1827 = new BitSet(new long[]{0x23202502020020F0L,0x0000000000003400L});
-    public static final BitSet FOLLOW_ruleExpression_in_ruleAssertionStatement1848 = new BitSet(new long[]{0x0000000000040000L});
-    public static final BitSet FOLLOW_18_in_ruleAssertionStatement1858 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAssertion_in_entryRuleAssertion1698 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleAssertion1708 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_28_in_ruleAssertion1751 = new BitSet(new long[]{0x0000000020000000L});
+    public static final BitSet FOLLOW_29_in_ruleAssertion1775 = new BitSet(new long[]{0x23202502020020F0L,0x0000000000003400L});
+    public static final BitSet FOLLOW_ruleExpression_in_ruleAssertion1796 = new BitSet(new long[]{0x0000000000100000L});
+    public static final BitSet FOLLOW_20_in_ruleAssertion1806 = new BitSet(new long[]{0xC000000000000000L,0x0000000000000003L});
+    public static final BitSet FOLLOW_ruleAssertionStatusKind_in_ruleAssertion1827 = new BitSet(new long[]{0x23202502020020F0L,0x0000000000003400L});
+    public static final BitSet FOLLOW_ruleExpression_in_ruleAssertion1848 = new BitSet(new long[]{0x0000000000040000L});
+    public static final BitSet FOLLOW_18_in_ruleAssertion1858 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleStateVariableDeclaration_in_entryRuleStateVariableDeclaration1894 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleStateVariableDeclaration1904 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_30_in_ruleStateVariableDeclaration1939 = new BitSet(new long[]{0x0000000000000010L});
@@ -15677,12 +15677,12 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_ruleExpression_in_ruleFunctorDeclaration2169 = new BitSet(new long[]{0x0000000001004000L});
     public static final BitSet FOLLOW_24_in_ruleFunctorDeclaration2181 = new BitSet(new long[]{0x0000000000040000L});
     public static final BitSet FOLLOW_18_in_ruleFunctorDeclaration2193 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEquationStatement_in_entryRuleEquationStatement2229 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleEquationStatement2239 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpression_in_ruleEquationStatement2285 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_17_in_ruleEquationStatement2295 = new BitSet(new long[]{0x23202502020020F0L,0x0000000000003400L});
-    public static final BitSet FOLLOW_ruleExpression_in_ruleEquationStatement2316 = new BitSet(new long[]{0x0000000000040000L});
-    public static final BitSet FOLLOW_18_in_ruleEquationStatement2326 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEquation_in_entryRuleEquation2229 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleEquation2239 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpression_in_ruleEquation2285 = new BitSet(new long[]{0x0000000000020000L});
+    public static final BitSet FOLLOW_17_in_ruleEquation2295 = new BitSet(new long[]{0x23202502020020F0L,0x0000000000003400L});
+    public static final BitSet FOLLOW_ruleExpression_in_ruleEquation2316 = new BitSet(new long[]{0x0000000000040000L});
+    public static final BitSet FOLLOW_18_in_ruleEquation2326 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleDataTypeSpecifier_in_entryRuleDataTypeSpecifier2362 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleDataTypeSpecifier2372 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rulePrimitiveTypeSpecifier_in_ruleDataTypeSpecifier2419 = new BitSet(new long[]{0x0000000000000002L});

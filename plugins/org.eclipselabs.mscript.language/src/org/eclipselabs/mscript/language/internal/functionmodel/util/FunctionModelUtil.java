@@ -19,7 +19,7 @@ import org.eclipse.emf.common.util.AbstractTreeIterator;
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipselabs.mscript.language.functionmodel.Equation;
+import org.eclipselabs.mscript.language.functionmodel.EquationDescriptor;
 import org.eclipselabs.mscript.language.functionmodel.EquationPart;
 import org.eclipselabs.mscript.language.functionmodel.Function;
 import org.eclipselabs.mscript.language.functionmodel.VariableDescriptor;
@@ -31,17 +31,17 @@ import org.eclipselabs.mscript.language.functionmodel.VariableStep;
  */
 public class FunctionModelUtil {
 
-	public static Equation getDefiningEquation(VariableStep variableStep) {
+	public static EquationDescriptor getDefiningEquation(VariableStep variableStep) {
 		for (EquationPart equationPart : variableStep.getUsingEquationParts()) {
-			Equation equation = equationPart.getSide().getEquation();
-			if (equationPart.getSide() == equation.getLeftHandSide()) {
-				return equation;
+			EquationDescriptor equationDescriptor = equationPart.getSide().getDescriptor();
+			if (equationPart.getSide() == equationDescriptor.getLeftHandSide()) {
+				return equationDescriptor;
 			}
 		}
 		return null;
 	}
 
-	public static Equation getDefiningEquation(Function function, String variableName, int stepIndex, boolean initial) {
+	public static EquationDescriptor getDefiningEquation(Function function, String variableName, int stepIndex, boolean initial) {
 		VariableDescriptor variableDescriptor = function.getVariableDescriptor(variableName);
 		if (variableDescriptor != null) {
 			VariableStep variableStep = variableDescriptor.getStep(stepIndex, initial);
@@ -52,23 +52,23 @@ public class FunctionModelUtil {
 		return null;
 	}
 
-	public static TreeIterator<Equation> getDefiningEquations(Function function, String variableName, int stepIndex, boolean initial) {
-		Equation root = getDefiningEquation(function, variableName, stepIndex, initial);
+	public static TreeIterator<EquationDescriptor> getDefiningEquations(Function function, String variableName, int stepIndex, boolean initial) {
+		EquationDescriptor root = getDefiningEquation(function, variableName, stepIndex, initial);
 		if (root != null) {
 			return new EquationIterator(root);
 		}
 		return EcoreUtil.getAllContents(ECollections.emptyEList());
 	}
 	
-	public static TreeIterator<Equation> getDefiningEquations(VariableStep variableStep) {
-		Equation root = getDefiningEquation(variableStep);
+	public static TreeIterator<EquationDescriptor> getDefiningEquations(VariableStep variableStep) {
+		EquationDescriptor root = getDefiningEquation(variableStep);
 		if (root != null) {
 			return new EquationIterator(root);
 		}
 		return EcoreUtil.getAllContents(ECollections.emptyEList());
 	}
 		
-	private static class EquationIterator extends AbstractTreeIterator<Equation> {
+	public static class EquationIterator extends AbstractTreeIterator<EquationDescriptor> {
 
 		/**
 		 * 
@@ -78,26 +78,26 @@ public class FunctionModelUtil {
 		/**
 		 * 
 		 */
-		public EquationIterator(Equation equation) {
-			super(equation, true);
+		public EquationIterator(EquationDescriptor equationDescriptor) {
+			super(equationDescriptor, true);
 		}
 		
 		/* (non-Javadoc)
 		 * @see org.eclipse.emf.common.util.AbstractTreeIterator#getChildren(java.lang.Object)
 		 */
 		@Override
-		protected Iterator<? extends Equation> getChildren(Object object) {
-			if (object instanceof Equation) {
-				List<Equation> equations = new ArrayList<Equation>();
-				for (EquationPart equationPart : ((Equation) object).getRightHandSide().getParts()) {
-					Equation equation = getDefiningEquation(equationPart.getVariableStep());
-					if (equation != null) {
-						equations.add(equation);
+		protected Iterator<? extends EquationDescriptor> getChildren(Object object) {
+			if (object instanceof EquationDescriptor) {
+				List<EquationDescriptor> equations = new ArrayList<EquationDescriptor>();
+				for (EquationPart equationPart : ((EquationDescriptor) object).getRightHandSide().getParts()) {
+					EquationDescriptor equationDescriptor = getDefiningEquation(equationPart.getVariableStep());
+					if (equationDescriptor != null) {
+						equations.add(equationDescriptor);
 					}
 				}
 				return equations.iterator();
 			}
-			return ECollections.<Equation>emptyEList().iterator();
+			return ECollections.<EquationDescriptor>emptyEList().iterator();
 		}
 
 	}

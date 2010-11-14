@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipselabs.mscript.language.ast.AstPackage;
-import org.eclipselabs.mscript.language.functionmodel.Equation;
+import org.eclipselabs.mscript.language.functionmodel.EquationDescriptor;
 import org.eclipselabs.mscript.language.functionmodel.EquationPart;
 import org.eclipselabs.mscript.language.functionmodel.EquationSide;
 import org.eclipselabs.mscript.language.functionmodel.Function;
@@ -46,7 +46,7 @@ public class FunctionModelPackageImpl extends EPackageImpl implements FunctionMo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass equationEClass = null;
+	private EClass equationDescriptorEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -179,7 +179,7 @@ public class FunctionModelPackageImpl extends EPackageImpl implements FunctionMo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getFunction_Equations() {
+	public EReference getFunction_EquationDescriptors() {
 		return (EReference)functionEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -197,8 +197,8 @@ public class FunctionModelPackageImpl extends EPackageImpl implements FunctionMo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getEquation() {
-		return equationEClass;
+	public EClass getEquationDescriptor() {
+		return equationDescriptorEClass;
 	}
 
 	/**
@@ -206,8 +206,8 @@ public class FunctionModelPackageImpl extends EPackageImpl implements FunctionMo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEquation_Function() {
-		return (EReference)equationEClass.getEStructuralFeatures().get(0);
+	public EReference getEquationDescriptor_Function() {
+		return (EReference)equationDescriptorEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -215,8 +215,8 @@ public class FunctionModelPackageImpl extends EPackageImpl implements FunctionMo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEquation_Statement() {
-		return (EReference)equationEClass.getEStructuralFeatures().get(1);
+	public EReference getEquationDescriptor_Equation() {
+		return (EReference)equationDescriptorEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -224,8 +224,8 @@ public class FunctionModelPackageImpl extends EPackageImpl implements FunctionMo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEquation_Sides() {
-		return (EReference)equationEClass.getEStructuralFeatures().get(2);
+	public EReference getEquationDescriptor_Sides() {
+		return (EReference)equationDescriptorEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -233,8 +233,8 @@ public class FunctionModelPackageImpl extends EPackageImpl implements FunctionMo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEquation_LeftHandSide() {
-		return (EReference)equationEClass.getEStructuralFeatures().get(3);
+	public EReference getEquationDescriptor_LeftHandSide() {
+		return (EReference)equationDescriptorEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -242,8 +242,8 @@ public class FunctionModelPackageImpl extends EPackageImpl implements FunctionMo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEquation_RightHandSide() {
-		return (EReference)equationEClass.getEStructuralFeatures().get(4);
+	public EReference getEquationDescriptor_RightHandSide() {
+		return (EReference)equationDescriptorEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -260,7 +260,7 @@ public class FunctionModelPackageImpl extends EPackageImpl implements FunctionMo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEquationSide_Equation() {
+	public EReference getEquationSide_Descriptor() {
 		return (EReference)equationSideEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -447,18 +447,18 @@ public class FunctionModelPackageImpl extends EPackageImpl implements FunctionMo
 		// Create classes and their features
 		functionEClass = createEClass(FUNCTION);
 		createEReference(functionEClass, FUNCTION__DEFINITION);
-		createEReference(functionEClass, FUNCTION__EQUATIONS);
+		createEReference(functionEClass, FUNCTION__EQUATION_DESCRIPTORS);
 		createEReference(functionEClass, FUNCTION__VARIABLE_DESCRIPTORS);
 
-		equationEClass = createEClass(EQUATION);
-		createEReference(equationEClass, EQUATION__FUNCTION);
-		createEReference(equationEClass, EQUATION__STATEMENT);
-		createEReference(equationEClass, EQUATION__SIDES);
-		createEReference(equationEClass, EQUATION__LEFT_HAND_SIDE);
-		createEReference(equationEClass, EQUATION__RIGHT_HAND_SIDE);
+		equationDescriptorEClass = createEClass(EQUATION_DESCRIPTOR);
+		createEReference(equationDescriptorEClass, EQUATION_DESCRIPTOR__FUNCTION);
+		createEReference(equationDescriptorEClass, EQUATION_DESCRIPTOR__EQUATION);
+		createEReference(equationDescriptorEClass, EQUATION_DESCRIPTOR__SIDES);
+		createEReference(equationDescriptorEClass, EQUATION_DESCRIPTOR__LEFT_HAND_SIDE);
+		createEReference(equationDescriptorEClass, EQUATION_DESCRIPTOR__RIGHT_HAND_SIDE);
 
 		equationSideEClass = createEClass(EQUATION_SIDE);
-		createEReference(equationSideEClass, EQUATION_SIDE__EQUATION);
+		createEReference(equationSideEClass, EQUATION_SIDE__DESCRIPTOR);
 		createEReference(equationSideEClass, EQUATION_SIDE__EXPRESSION);
 		createEReference(equationSideEClass, EQUATION_SIDE__PARTS);
 
@@ -518,7 +518,7 @@ public class FunctionModelPackageImpl extends EPackageImpl implements FunctionMo
 		// Initialize classes and features; add operations and parameters
 		initEClass(functionEClass, Function.class, "Function", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getFunction_Definition(), theAstPackage.getFunctionDefinition(), null, "definition", null, 1, 1, Function.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getFunction_Equations(), this.getEquation(), this.getEquation_Function(), "equations", null, 0, -1, Function.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFunction_EquationDescriptors(), this.getEquationDescriptor(), this.getEquationDescriptor_Function(), "equationDescriptors", null, 0, -1, Function.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFunction_VariableDescriptors(), this.getVariableDescriptor(), this.getVariableDescriptor_Function(), "variableDescriptors", null, 0, -1, Function.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = addEOperation(functionEClass, this.getVariableDescriptor(), "getVariableDescriptor", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -560,14 +560,14 @@ public class FunctionModelPackageImpl extends EPackageImpl implements FunctionMo
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		initEClass(equationEClass, Equation.class, "Equation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getEquation_Function(), this.getFunction(), this.getFunction_Equations(), "function", null, 1, 1, Equation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getEquation_Statement(), theAstPackage.getEquationStatement(), null, "statement", null, 1, 1, Equation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getEquation_Sides(), this.getEquationSide(), this.getEquationSide_Equation(), "sides", null, 2, 2, Equation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getEquation_LeftHandSide(), this.getEquationSide(), null, "leftHandSide", null, 1, 1, Equation.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEReference(getEquation_RightHandSide(), this.getEquationSide(), null, "rightHandSide", null, 1, 1, Equation.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEClass(equationDescriptorEClass, EquationDescriptor.class, "EquationDescriptor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getEquationDescriptor_Function(), this.getFunction(), this.getFunction_EquationDescriptors(), "function", null, 1, 1, EquationDescriptor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEquationDescriptor_Equation(), theAstPackage.getEquation(), null, "equation", null, 1, 1, EquationDescriptor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEquationDescriptor_Sides(), this.getEquationSide(), this.getEquationSide_Descriptor(), "sides", null, 2, 2, EquationDescriptor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEquationDescriptor_LeftHandSide(), this.getEquationSide(), null, "leftHandSide", null, 1, 1, EquationDescriptor.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getEquationDescriptor_RightHandSide(), this.getEquationSide(), null, "rightHandSide", null, 1, 1, EquationDescriptor.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
-		op = addEOperation(equationEClass, ecorePackage.getEBoolean(), "isLeftHandSideValid", 1, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(equationDescriptorEClass, ecorePackage.getEBoolean(), "isLeftHandSideValid", 1, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -576,7 +576,7 @@ public class FunctionModelPackageImpl extends EPackageImpl implements FunctionMo
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(equationEClass, ecorePackage.getEBoolean(), "isRightHandSideValid", 1, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(equationDescriptorEClass, ecorePackage.getEBoolean(), "isRightHandSideValid", 1, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -586,7 +586,7 @@ public class FunctionModelPackageImpl extends EPackageImpl implements FunctionMo
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(equationSideEClass, EquationSide.class, "EquationSide", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getEquationSide_Equation(), this.getEquation(), this.getEquation_Sides(), "equation", null, 1, 1, EquationSide.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEquationSide_Descriptor(), this.getEquationDescriptor(), this.getEquationDescriptor_Sides(), "descriptor", null, 1, 1, EquationSide.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEquationSide_Expression(), theAstPackage.getExpression(), null, "expression", null, 1, 1, EquationSide.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEquationSide_Parts(), this.getEquationPart(), this.getEquationPart_Side(), "parts", null, 0, -1, EquationSide.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

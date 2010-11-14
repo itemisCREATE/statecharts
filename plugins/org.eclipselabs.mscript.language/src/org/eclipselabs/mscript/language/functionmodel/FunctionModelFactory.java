@@ -35,13 +35,13 @@ public interface FunctionModelFactory extends EFactory {
 	Function createFunction();
 
 	/**
-	 * Returns a new object of class '<em>Equation</em>'.
+	 * Returns a new object of class '<em>Equation Descriptor</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Equation</em>'.
+	 * @return a new object of class '<em>Equation Descriptor</em>'.
 	 * @generated
 	 */
-	Equation createEquation();
+	EquationDescriptor createEquationDescriptor();
 
 	/**
 	 * Returns a new object of class '<em>Equation Side</em>'.

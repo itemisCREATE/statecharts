@@ -128,9 +128,9 @@ public class AstAdapterFactory extends AdapterFactoryImpl
         return createParameterDeclarationAdapter();
       }
       @Override
-      public Adapter caseAssertionStatement(AssertionStatement object)
+      public Adapter caseAssertion(Assertion object)
       {
-        return createAssertionStatementAdapter();
+        return createAssertionAdapter();
       }
       @Override
       public Adapter caseStateVariableDeclaration(StateVariableDeclaration object)
@@ -143,9 +143,9 @@ public class AstAdapterFactory extends AdapterFactoryImpl
         return createFunctorDeclarationAdapter();
       }
       @Override
-      public Adapter caseEquationStatement(EquationStatement object)
+      public Adapter caseEquation(Equation object)
       {
-        return createEquationStatementAdapter();
+        return createEquationAdapter();
       }
       @Override
       public Adapter caseDataTypeSpecifier(DataTypeSpecifier object)
@@ -620,16 +620,16 @@ public class AstAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.AssertionStatement <em>Assertion Statement</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.Assertion <em>Assertion</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.AssertionStatement
+   * @see org.eclipselabs.mscript.language.ast.Assertion
    * @generated
    */
-  public Adapter createAssertionStatementAdapter()
+  public Adapter createAssertionAdapter()
   {
     return null;
   }
@@ -665,16 +665,16 @@ public class AstAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.EquationStatement <em>Equation Statement</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.Equation <em>Equation</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.EquationStatement
+   * @see org.eclipselabs.mscript.language.ast.Equation
    * @generated
    */
-  public Adapter createEquationStatementAdapter()
+  public Adapter createEquationAdapter()
   {
     return null;
   }

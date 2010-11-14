@@ -866,9 +866,9 @@ ruleFunctionDefinition returns [EObject current=null]
 ((
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getFunctionDefinitionAccess().getAssertionStatementsAssertionStatementParserRuleCall_11_0_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getFunctionDefinitionAccess().getAssertionsAssertionParserRuleCall_11_0_0(), currentNode); 
 	    }
-		lv_assertionStatements_18_0=ruleAssertionStatement		{
+		lv_assertions_18_0=ruleAssertion		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getFunctionDefinitionRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -876,9 +876,9 @@ ruleFunctionDefinition returns [EObject current=null]
 	        try {
 	       		add(
 	       			$current, 
-	       			"assertionStatements",
-	        		lv_assertionStatements_18_0, 
-	        		"AssertionStatement", 
+	       			"assertions",
+	        		lv_assertions_18_0, 
+	        		"Assertion", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
@@ -941,9 +941,9 @@ ruleFunctionDefinition returns [EObject current=null]
     |(
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getFunctionDefinitionAccess().getEquationStatementsEquationStatementParserRuleCall_11_3_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getFunctionDefinitionAccess().getEquationsEquationParserRuleCall_11_3_0(), currentNode); 
 	    }
-		lv_equationStatements_21_0=ruleEquationStatement		{
+		lv_equations_21_0=ruleEquation		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getFunctionDefinitionRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -951,9 +951,9 @@ ruleFunctionDefinition returns [EObject current=null]
 	        try {
 	       		add(
 	       			$current, 
-	       			"equationStatements",
-	        		lv_equationStatements_21_0, 
-	        		"EquationStatement", 
+	       			"equations",
+	        		lv_equations_21_0, 
+	        		"Equation", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
@@ -1020,17 +1020,17 @@ ruleParameterDeclaration returns [EObject current=null]
 
 
 
-// Entry rule entryRuleAssertionStatement
-entryRuleAssertionStatement returns [EObject current=null] 
+// Entry rule entryRuleAssertion
+entryRuleAssertion returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getAssertionStatementRule(), currentNode); }
-	 iv_ruleAssertionStatement=ruleAssertionStatement 
-	 { $current=$iv_ruleAssertionStatement.current; } 
+	{ currentNode = createCompositeNode(grammarAccess.getAssertionRule(), currentNode); }
+	 iv_ruleAssertion=ruleAssertion 
+	 { $current=$iv_ruleAssertion.current; } 
 	 EOF 
 ;
 
-// Rule AssertionStatement
-ruleAssertionStatement returns [EObject current=null] 
+// Rule Assertion
+ruleAssertion returns [EObject current=null] 
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
@@ -1040,12 +1040,12 @@ ruleAssertionStatement returns [EObject current=null]
 (
 		lv_static_0_0=	'static' 
     {
-        createLeafNode(grammarAccess.getAssertionStatementAccess().getStaticStaticKeyword_0_0(), "static"); 
+        createLeafNode(grammarAccess.getAssertionAccess().getStaticStaticKeyword_0_0(), "static"); 
     }
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getAssertionStatementRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getAssertionRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -1059,16 +1059,16 @@ ruleAssertionStatement returns [EObject current=null]
 )
 )?	'assert' 
     {
-        createLeafNode(grammarAccess.getAssertionStatementAccess().getAssertKeyword_1(), null); 
+        createLeafNode(grammarAccess.getAssertionAccess().getAssertKeyword_1(), null); 
     }
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getAssertionStatementAccess().getConditionExpressionParserRuleCall_2_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getAssertionAccess().getConditionExpressionParserRuleCall_2_0(), currentNode); 
 	    }
 		lv_condition_2_0=ruleExpression		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getAssertionStatementRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getAssertionRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        try {
@@ -1087,16 +1087,16 @@ ruleAssertionStatement returns [EObject current=null]
 )
 )	':' 
     {
-        createLeafNode(grammarAccess.getAssertionStatementAccess().getColonKeyword_3(), null); 
+        createLeafNode(grammarAccess.getAssertionAccess().getColonKeyword_3(), null); 
     }
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getAssertionStatementAccess().getStatusKindAssertionStatusKindEnumRuleCall_4_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getAssertionAccess().getStatusKindAssertionStatusKindEnumRuleCall_4_0(), currentNode); 
 	    }
 		lv_statusKind_4_0=ruleAssertionStatusKind		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getAssertionStatementRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getAssertionRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        try {
@@ -1116,11 +1116,11 @@ ruleAssertionStatement returns [EObject current=null]
 )(
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getAssertionStatementAccess().getMessageExpressionParserRuleCall_5_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getAssertionAccess().getMessageExpressionParserRuleCall_5_0(), currentNode); 
 	    }
 		lv_message_5_0=ruleExpression		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getAssertionStatementRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getAssertionRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        try {
@@ -1139,7 +1139,7 @@ ruleAssertionStatement returns [EObject current=null]
 )
 )	';' 
     {
-        createLeafNode(grammarAccess.getAssertionStatementAccess().getSemicolonKeyword_6(), null); 
+        createLeafNode(grammarAccess.getAssertionAccess().getSemicolonKeyword_6(), null); 
     }
 )
 ;
@@ -1346,17 +1346,17 @@ ruleFunctorDeclaration returns [EObject current=null]
 
 
 
-// Entry rule entryRuleEquationStatement
-entryRuleEquationStatement returns [EObject current=null] 
+// Entry rule entryRuleEquation
+entryRuleEquation returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getEquationStatementRule(), currentNode); }
-	 iv_ruleEquationStatement=ruleEquationStatement 
-	 { $current=$iv_ruleEquationStatement.current; } 
+	{ currentNode = createCompositeNode(grammarAccess.getEquationRule(), currentNode); }
+	 iv_ruleEquation=ruleEquation 
+	 { $current=$iv_ruleEquation.current; } 
 	 EOF 
 ;
 
-// Rule EquationStatement
-ruleEquationStatement returns [EObject current=null] 
+// Rule Equation
+ruleEquation returns [EObject current=null] 
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
@@ -1365,11 +1365,11 @@ ruleEquationStatement returns [EObject current=null]
 ((
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getEquationStatementAccess().getLeftHandSideExpressionParserRuleCall_0_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getEquationAccess().getLeftHandSideExpressionParserRuleCall_0_0(), currentNode); 
 	    }
 		lv_leftHandSide_0_0=ruleExpression		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getEquationStatementRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getEquationRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        try {
@@ -1388,16 +1388,16 @@ ruleEquationStatement returns [EObject current=null]
 )
 )	'=' 
     {
-        createLeafNode(grammarAccess.getEquationStatementAccess().getEqualsSignKeyword_1(), null); 
+        createLeafNode(grammarAccess.getEquationAccess().getEqualsSignKeyword_1(), null); 
     }
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getEquationStatementAccess().getRightHandSideExpressionParserRuleCall_2_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getEquationAccess().getRightHandSideExpressionParserRuleCall_2_0(), currentNode); 
 	    }
 		lv_rightHandSide_2_0=ruleExpression		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getEquationStatementRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getEquationRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        try {
@@ -1416,7 +1416,7 @@ ruleEquationStatement returns [EObject current=null]
 )
 )	';' 
     {
-        createLeafNode(grammarAccess.getEquationStatementAccess().getSemicolonKeyword_3(), null); 
+        createLeafNode(grammarAccess.getEquationAccess().getSemicolonKeyword_3(), null); 
     }
 )
 ;

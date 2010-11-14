@@ -18,7 +18,7 @@ import org.eclipselabs.mscript.language.ast.Expression;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.functionmodel.EquationSide#getEquation <em>Equation</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.functionmodel.EquationSide#getDescriptor <em>Descriptor</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.functionmodel.EquationSide#getExpression <em>Expression</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.functionmodel.EquationSide#getParts <em>Parts</em>}</li>
  * </ul>
@@ -30,32 +30,32 @@ import org.eclipselabs.mscript.language.ast.Expression;
  */
 public interface EquationSide extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Equation</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipselabs.mscript.language.functionmodel.Equation#getSides <em>Sides</em>}'.
+	 * Returns the value of the '<em><b>Descriptor</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipselabs.mscript.language.functionmodel.EquationDescriptor#getSides <em>Sides</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Equation</em>' container reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Equation</em>' container reference.
-	 * @see #setEquation(Equation)
-	 * @see org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage#getEquationSide_Equation()
-	 * @see org.eclipselabs.mscript.language.functionmodel.Equation#getSides
+	 * @return the value of the '<em>Descriptor</em>' container reference.
+	 * @see #setDescriptor(EquationDescriptor)
+	 * @see org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage#getEquationSide_Descriptor()
+	 * @see org.eclipselabs.mscript.language.functionmodel.EquationDescriptor#getSides
 	 * @model opposite="sides" required="true" transient="false"
 	 * @generated
 	 */
-	Equation getEquation();
+	EquationDescriptor getDescriptor();
 
 	/**
-	 * Sets the value of the '{@link org.eclipselabs.mscript.language.functionmodel.EquationSide#getEquation <em>Equation</em>}' container reference.
+	 * Sets the value of the '{@link org.eclipselabs.mscript.language.functionmodel.EquationSide#getDescriptor <em>Descriptor</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Equation</em>' container reference.
-	 * @see #getEquation()
+	 * @param value the new value of the '<em>Descriptor</em>' container reference.
+	 * @see #getDescriptor()
 	 * @generated
 	 */
-	void setEquation(Equation value);
+	void setDescriptor(EquationDescriptor value);
 
 	/**
 	 * Returns the value of the '<em><b>Expression</b></em>' reference.

@@ -78,10 +78,10 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
       case AstPackage.RECORD_FIELD_DECLARATION: return createRecordFieldDeclaration();
       case AstPackage.FUNCTION_DEFINITION: return createFunctionDefinition();
       case AstPackage.PARAMETER_DECLARATION: return createParameterDeclaration();
-      case AstPackage.ASSERTION_STATEMENT: return createAssertionStatement();
+      case AstPackage.ASSERTION: return createAssertion();
       case AstPackage.STATE_VARIABLE_DECLARATION: return createStateVariableDeclaration();
       case AstPackage.FUNCTOR_DECLARATION: return createFunctorDeclaration();
-      case AstPackage.EQUATION_STATEMENT: return createEquationStatement();
+      case AstPackage.EQUATION: return createEquation();
       case AstPackage.DATA_TYPE_SPECIFIER: return createDataTypeSpecifier();
       case AstPackage.PRIMITIVE_TYPE_SPECIFIER: return createPrimitiveTypeSpecifier();
       case AstPackage.NUMERIC_TYPE_SPECIFIER: return createNumericTypeSpecifier();
@@ -328,10 +328,10 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public AssertionStatement createAssertionStatement()
+  public Assertion createAssertion()
   {
-    AssertionStatementImpl assertionStatement = new AssertionStatementImpl();
-    return assertionStatement;
+    AssertionImpl assertion = new AssertionImpl();
+    return assertion;
   }
 
   /**
@@ -361,10 +361,10 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public EquationStatement createEquationStatement()
+  public Equation createEquation()
   {
-    EquationStatementImpl equationStatement = new EquationStatementImpl();
-    return equationStatement;
+    EquationImpl equation = new EquationImpl();
+    return equation;
   }
 
   /**

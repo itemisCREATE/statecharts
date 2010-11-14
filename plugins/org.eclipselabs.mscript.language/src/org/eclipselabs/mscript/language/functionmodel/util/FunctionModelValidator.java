@@ -12,7 +12,7 @@ import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.EObjectValidator;
-import org.eclipselabs.mscript.language.functionmodel.Equation;
+import org.eclipselabs.mscript.language.functionmodel.EquationDescriptor;
 import org.eclipselabs.mscript.language.functionmodel.EquationPart;
 import org.eclipselabs.mscript.language.functionmodel.EquationSide;
 import org.eclipselabs.mscript.language.functionmodel.Function;
@@ -80,20 +80,20 @@ public class FunctionModelValidator extends EObjectValidator {
 	public static final int FUNCTION__HAS_EQUATIONS_FOR_EACH_VARIABLE_STEP = 4;
 
 	/**
-	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Is Left Hand Side Valid' of 'Equation'.
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Is Left Hand Side Valid' of 'Equation Descriptor'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int EQUATION__IS_LEFT_HAND_SIDE_VALID = 5;
+	public static final int EQUATION_DESCRIPTOR__IS_LEFT_HAND_SIDE_VALID = 5;
 
 	/**
-	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Is Right Hand Side Valid' of 'Equation'.
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Is Right Hand Side Valid' of 'Equation Descriptor'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int EQUATION__IS_RIGHT_HAND_SIDE_VALID = 6;
+	public static final int EQUATION_DESCRIPTOR__IS_RIGHT_HAND_SIDE_VALID = 6;
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants.
@@ -143,8 +143,8 @@ public class FunctionModelValidator extends EObjectValidator {
 		switch (classifierID) {
 			case FunctionModelPackage.FUNCTION:
 				return validateFunction((Function)value, diagnostics, context);
-			case FunctionModelPackage.EQUATION:
-				return validateEquation((Equation)value, diagnostics, context);
+			case FunctionModelPackage.EQUATION_DESCRIPTOR:
+				return validateEquationDescriptor((EquationDescriptor)value, diagnostics, context);
 			case FunctionModelPackage.EQUATION_SIDE:
 				return validateEquationSide((EquationSide)value, diagnostics, context);
 			case FunctionModelPackage.EQUATION_PART:
@@ -227,39 +227,39 @@ public class FunctionModelValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateEquation(Equation equation, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(equation, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(equation, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(equation, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(equation, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(equation, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(equation, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(equation, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(equation, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(equation, diagnostics, context);
-		if (result || diagnostics != null) result &= validateEquation_isLeftHandSideValid(equation, diagnostics, context);
-		if (result || diagnostics != null) result &= validateEquation_isRightHandSideValid(equation, diagnostics, context);
+	public boolean validateEquationDescriptor(EquationDescriptor equationDescriptor, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (!validate_NoCircularContainment(equationDescriptor, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms(equationDescriptor, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(equationDescriptor, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(equationDescriptor, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(equationDescriptor, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(equationDescriptor, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(equationDescriptor, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(equationDescriptor, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(equationDescriptor, diagnostics, context);
+		if (result || diagnostics != null) result &= validateEquationDescriptor_isLeftHandSideValid(equationDescriptor, diagnostics, context);
+		if (result || diagnostics != null) result &= validateEquationDescriptor_isRightHandSideValid(equationDescriptor, diagnostics, context);
 		return result;
 	}
 
 	/**
-	 * Validates the isLeftHandSideValid constraint of '<em>Equation</em>'.
+	 * Validates the isLeftHandSideValid constraint of '<em>Equation Descriptor</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateEquation_isLeftHandSideValid(Equation equation, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return equation.isLeftHandSideValid(diagnostics, context);
+	public boolean validateEquationDescriptor_isLeftHandSideValid(EquationDescriptor equationDescriptor, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return equationDescriptor.isLeftHandSideValid(diagnostics, context);
 	}
 
 	/**
-	 * Validates the isRightHandSideValid constraint of '<em>Equation</em>'.
+	 * Validates the isRightHandSideValid constraint of '<em>Equation Descriptor</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean validateEquation_isRightHandSideValid(Equation equation, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return equation.isRightHandSideValid(diagnostics, context);
+	public boolean validateEquationDescriptor_isRightHandSideValid(EquationDescriptor equationDescriptor, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return equationDescriptor.isRightHandSideValid(diagnostics, context);
 	}
 
 	/**

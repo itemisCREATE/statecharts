@@ -23,10 +23,10 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipselabs.mscript.language.ast.EquationStatement;
+import org.eclipselabs.mscript.language.ast.Equation;
 import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.ast.FeatureCall;
-import org.eclipselabs.mscript.language.functionmodel.Equation;
+import org.eclipselabs.mscript.language.functionmodel.EquationDescriptor;
 import org.eclipselabs.mscript.language.functionmodel.EquationPart;
 import org.eclipselabs.mscript.language.functionmodel.EquationSide;
 import org.eclipselabs.mscript.language.functionmodel.Function;
@@ -40,26 +40,26 @@ import org.eclipselabs.mscript.language.functionmodel.util.FunctionModelValidato
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.EquationImpl#getFunction <em>Function</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.EquationImpl#getStatement <em>Statement</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.EquationImpl#getSides <em>Sides</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.EquationImpl#getLeftHandSide <em>Left Hand Side</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.EquationImpl#getRightHandSide <em>Right Hand Side</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.EquationDescriptorImpl#getFunction <em>Function</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.EquationDescriptorImpl#getEquation <em>Equation</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.EquationDescriptorImpl#getSides <em>Sides</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.EquationDescriptorImpl#getLeftHandSide <em>Left Hand Side</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.EquationDescriptorImpl#getRightHandSide <em>Right Hand Side</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class EquationImpl extends EObjectImpl implements Equation {
+public class EquationDescriptorImpl extends EObjectImpl implements EquationDescriptor {
 	/**
-	 * The cached value of the '{@link #getStatement() <em>Statement</em>}' reference.
+	 * The cached value of the '{@link #getEquation() <em>Equation</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getStatement()
+	 * @see #getEquation()
 	 * @generated
 	 * @ordered
 	 */
-	protected EquationStatement statement;
+	protected Equation equation;
 
 	/**
 	 * The cached value of the '{@link #getSides() <em>Sides</em>}' containment reference list.
@@ -76,7 +76,7 @@ public class EquationImpl extends EObjectImpl implements Equation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected EquationImpl() {
+	protected EquationDescriptorImpl() {
 		super();
 	}
 
@@ -87,7 +87,7 @@ public class EquationImpl extends EObjectImpl implements Equation {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return FunctionModelPackage.Literals.EQUATION;
+		return FunctionModelPackage.Literals.EQUATION_DESCRIPTOR;
 	}
 
 	/**
@@ -96,7 +96,7 @@ public class EquationImpl extends EObjectImpl implements Equation {
 	 * @generated
 	 */
 	public Function getFunction() {
-		if (eContainerFeatureID() != FunctionModelPackage.EQUATION__FUNCTION) return null;
+		if (eContainerFeatureID() != FunctionModelPackage.EQUATION_DESCRIPTOR__FUNCTION) return null;
 		return (Function)eContainer();
 	}
 
@@ -106,7 +106,7 @@ public class EquationImpl extends EObjectImpl implements Equation {
 	 * @generated
 	 */
 	public NotificationChain basicSetFunction(Function newFunction, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newFunction, FunctionModelPackage.EQUATION__FUNCTION, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newFunction, FunctionModelPackage.EQUATION_DESCRIPTOR__FUNCTION, msgs);
 		return msgs;
 	}
 
@@ -116,19 +116,19 @@ public class EquationImpl extends EObjectImpl implements Equation {
 	 * @generated
 	 */
 	public void setFunction(Function newFunction) {
-		if (newFunction != eInternalContainer() || (eContainerFeatureID() != FunctionModelPackage.EQUATION__FUNCTION && newFunction != null)) {
+		if (newFunction != eInternalContainer() || (eContainerFeatureID() != FunctionModelPackage.EQUATION_DESCRIPTOR__FUNCTION && newFunction != null)) {
 			if (EcoreUtil.isAncestor(this, newFunction))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newFunction != null)
-				msgs = ((InternalEObject)newFunction).eInverseAdd(this, FunctionModelPackage.FUNCTION__EQUATIONS, Function.class, msgs);
+				msgs = ((InternalEObject)newFunction).eInverseAdd(this, FunctionModelPackage.FUNCTION__EQUATION_DESCRIPTORS, Function.class, msgs);
 			msgs = basicSetFunction(newFunction, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FunctionModelPackage.EQUATION__FUNCTION, newFunction, newFunction));
+			eNotify(new ENotificationImpl(this, Notification.SET, FunctionModelPackage.EQUATION_DESCRIPTOR__FUNCTION, newFunction, newFunction));
 	}
 
 	/**
@@ -136,16 +136,16 @@ public class EquationImpl extends EObjectImpl implements Equation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EquationStatement getStatement() {
-		if (statement != null && statement.eIsProxy()) {
-			InternalEObject oldStatement = (InternalEObject)statement;
-			statement = (EquationStatement)eResolveProxy(oldStatement);
-			if (statement != oldStatement) {
+	public Equation getEquation() {
+		if (equation != null && equation.eIsProxy()) {
+			InternalEObject oldEquation = (InternalEObject)equation;
+			equation = (Equation)eResolveProxy(oldEquation);
+			if (equation != oldEquation) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, FunctionModelPackage.EQUATION__STATEMENT, oldStatement, statement));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, FunctionModelPackage.EQUATION_DESCRIPTOR__EQUATION, oldEquation, equation));
 			}
 		}
-		return statement;
+		return equation;
 	}
 
 	/**
@@ -153,8 +153,8 @@ public class EquationImpl extends EObjectImpl implements Equation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EquationStatement basicGetStatement() {
-		return statement;
+	public Equation basicGetEquation() {
+		return equation;
 	}
 
 	/**
@@ -162,11 +162,11 @@ public class EquationImpl extends EObjectImpl implements Equation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setStatement(EquationStatement newStatement) {
-		EquationStatement oldStatement = statement;
-		statement = newStatement;
+	public void setEquation(Equation newEquation) {
+		Equation oldEquation = equation;
+		equation = newEquation;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FunctionModelPackage.EQUATION__STATEMENT, oldStatement, statement));
+			eNotify(new ENotificationImpl(this, Notification.SET, FunctionModelPackage.EQUATION_DESCRIPTOR__EQUATION, oldEquation, equation));
 	}
 
 	/**
@@ -176,7 +176,7 @@ public class EquationImpl extends EObjectImpl implements Equation {
 	 */
 	public EList<EquationSide> getSides() {
 		if (sides == null) {
-			sides = new EObjectContainmentWithInverseEList<EquationSide>(EquationSide.class, this, FunctionModelPackage.EQUATION__SIDES, FunctionModelPackage.EQUATION_SIDE__EQUATION);
+			sides = new EObjectContainmentWithInverseEList<EquationSide>(EquationSide.class, this, FunctionModelPackage.EQUATION_DESCRIPTOR__SIDES, FunctionModelPackage.EQUATION_SIDE__DESCRIPTOR);
 		}
 		return sides;
 	}
@@ -227,7 +227,7 @@ public class EquationImpl extends EObjectImpl implements Equation {
 	 * @generated NOT
 	 */
 	public boolean isLeftHandSideValid(DiagnosticChain diagnostics, Map<Object, Object> context) {
-		Expression lhsExpression = getStatement().getLeftHandSide();
+		Expression lhsExpression = getEquation().getLeftHandSide();
 		String message = null;
 		if (getLeftHandSide().getParts().size() == 1 && lhsExpression instanceof FeatureCall) {
 			EquationPart part = getLeftHandSide().getParts().get(0);
@@ -259,7 +259,7 @@ public class EquationImpl extends EObjectImpl implements Equation {
 			diagnostics.add(new BasicDiagnostic(
 					Diagnostic.ERROR,
 					FunctionModelValidator.DIAGNOSTIC_SOURCE,
-					FunctionModelValidator.EQUATION__IS_LEFT_HAND_SIDE_VALID,
+					FunctionModelValidator.EQUATION_DESCRIPTOR__IS_LEFT_HAND_SIDE_VALID,
 					message,
 					new Object [] { lhsExpression }));
 			return false;
@@ -280,7 +280,7 @@ public class EquationImpl extends EObjectImpl implements Equation {
 					diagnostics.add(new BasicDiagnostic(
 							Diagnostic.ERROR,
 							FunctionModelValidator.DIAGNOSTIC_SOURCE,
-							FunctionModelValidator.EQUATION__IS_RIGHT_HAND_SIDE_VALID,
+							FunctionModelValidator.EQUATION_DESCRIPTOR__IS_RIGHT_HAND_SIDE_VALID,
 							"Right-hand side must not reference initial value",
 							new Object [] { part.getFeatureCall() }));
 				}
@@ -299,11 +299,11 @@ public class EquationImpl extends EObjectImpl implements Equation {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case FunctionModelPackage.EQUATION__FUNCTION:
+			case FunctionModelPackage.EQUATION_DESCRIPTOR__FUNCTION:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetFunction((Function)otherEnd, msgs);
-			case FunctionModelPackage.EQUATION__SIDES:
+			case FunctionModelPackage.EQUATION_DESCRIPTOR__SIDES:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getSides()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -317,9 +317,9 @@ public class EquationImpl extends EObjectImpl implements Equation {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case FunctionModelPackage.EQUATION__FUNCTION:
+			case FunctionModelPackage.EQUATION_DESCRIPTOR__FUNCTION:
 				return basicSetFunction(null, msgs);
-			case FunctionModelPackage.EQUATION__SIDES:
+			case FunctionModelPackage.EQUATION_DESCRIPTOR__SIDES:
 				return ((InternalEList<?>)getSides()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -333,8 +333,8 @@ public class EquationImpl extends EObjectImpl implements Equation {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case FunctionModelPackage.EQUATION__FUNCTION:
-				return eInternalContainer().eInverseRemove(this, FunctionModelPackage.FUNCTION__EQUATIONS, Function.class, msgs);
+			case FunctionModelPackage.EQUATION_DESCRIPTOR__FUNCTION:
+				return eInternalContainer().eInverseRemove(this, FunctionModelPackage.FUNCTION__EQUATION_DESCRIPTORS, Function.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -347,17 +347,17 @@ public class EquationImpl extends EObjectImpl implements Equation {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case FunctionModelPackage.EQUATION__FUNCTION:
+			case FunctionModelPackage.EQUATION_DESCRIPTOR__FUNCTION:
 				return getFunction();
-			case FunctionModelPackage.EQUATION__STATEMENT:
-				if (resolve) return getStatement();
-				return basicGetStatement();
-			case FunctionModelPackage.EQUATION__SIDES:
+			case FunctionModelPackage.EQUATION_DESCRIPTOR__EQUATION:
+				if (resolve) return getEquation();
+				return basicGetEquation();
+			case FunctionModelPackage.EQUATION_DESCRIPTOR__SIDES:
 				return getSides();
-			case FunctionModelPackage.EQUATION__LEFT_HAND_SIDE:
+			case FunctionModelPackage.EQUATION_DESCRIPTOR__LEFT_HAND_SIDE:
 				if (resolve) return getLeftHandSide();
 				return basicGetLeftHandSide();
-			case FunctionModelPackage.EQUATION__RIGHT_HAND_SIDE:
+			case FunctionModelPackage.EQUATION_DESCRIPTOR__RIGHT_HAND_SIDE:
 				if (resolve) return getRightHandSide();
 				return basicGetRightHandSide();
 		}
@@ -373,13 +373,13 @@ public class EquationImpl extends EObjectImpl implements Equation {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case FunctionModelPackage.EQUATION__FUNCTION:
+			case FunctionModelPackage.EQUATION_DESCRIPTOR__FUNCTION:
 				setFunction((Function)newValue);
 				return;
-			case FunctionModelPackage.EQUATION__STATEMENT:
-				setStatement((EquationStatement)newValue);
+			case FunctionModelPackage.EQUATION_DESCRIPTOR__EQUATION:
+				setEquation((Equation)newValue);
 				return;
-			case FunctionModelPackage.EQUATION__SIDES:
+			case FunctionModelPackage.EQUATION_DESCRIPTOR__SIDES:
 				getSides().clear();
 				getSides().addAll((Collection<? extends EquationSide>)newValue);
 				return;
@@ -395,13 +395,13 @@ public class EquationImpl extends EObjectImpl implements Equation {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case FunctionModelPackage.EQUATION__FUNCTION:
+			case FunctionModelPackage.EQUATION_DESCRIPTOR__FUNCTION:
 				setFunction((Function)null);
 				return;
-			case FunctionModelPackage.EQUATION__STATEMENT:
-				setStatement((EquationStatement)null);
+			case FunctionModelPackage.EQUATION_DESCRIPTOR__EQUATION:
+				setEquation((Equation)null);
 				return;
-			case FunctionModelPackage.EQUATION__SIDES:
+			case FunctionModelPackage.EQUATION_DESCRIPTOR__SIDES:
 				getSides().clear();
 				return;
 		}
@@ -416,15 +416,15 @@ public class EquationImpl extends EObjectImpl implements Equation {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case FunctionModelPackage.EQUATION__FUNCTION:
+			case FunctionModelPackage.EQUATION_DESCRIPTOR__FUNCTION:
 				return getFunction() != null;
-			case FunctionModelPackage.EQUATION__STATEMENT:
-				return statement != null;
-			case FunctionModelPackage.EQUATION__SIDES:
+			case FunctionModelPackage.EQUATION_DESCRIPTOR__EQUATION:
+				return equation != null;
+			case FunctionModelPackage.EQUATION_DESCRIPTOR__SIDES:
 				return sides != null && !sides.isEmpty();
-			case FunctionModelPackage.EQUATION__LEFT_HAND_SIDE:
+			case FunctionModelPackage.EQUATION_DESCRIPTOR__LEFT_HAND_SIDE:
 				return basicGetLeftHandSide() != null;
-			case FunctionModelPackage.EQUATION__RIGHT_HAND_SIDE:
+			case FunctionModelPackage.EQUATION_DESCRIPTOR__RIGHT_HAND_SIDE:
 				return basicGetRightHandSide() != null;
 		}
 		return super.eIsSet(featureID);

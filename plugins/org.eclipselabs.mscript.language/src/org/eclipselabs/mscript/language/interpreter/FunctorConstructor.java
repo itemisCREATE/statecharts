@@ -18,7 +18,7 @@ import java.util.Map;
 import org.eclipselabs.mscript.language.ast.FunctionDefinition;
 import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
 import org.eclipselabs.mscript.language.ast.StateVariableDeclaration;
-import org.eclipselabs.mscript.language.functionmodel.Equation;
+import org.eclipselabs.mscript.language.functionmodel.EquationDescriptor;
 import org.eclipselabs.mscript.language.functionmodel.EquationPart;
 import org.eclipselabs.mscript.language.functionmodel.Function;
 import org.eclipselabs.mscript.language.functionmodel.VariableStep;
@@ -68,15 +68,15 @@ public class FunctorConstructor {
 			functor.addVariable(new Variable(variableDeclaration.getName()));
 		}
 		
-		for (Equation equation : functor.getFunction().getEquations()) {
-			for (EquationPart equationPart : equation.getLeftHandSide().getParts()) {
+		for (EquationDescriptor equationDescriptor : functor.getFunction().getEquationDescriptors()) {
+			for (EquationPart equationPart : equationDescriptor.getLeftHandSide().getParts()) {
 				String name = equationPart.getVariableStep().getDescriptor().getName();
 				IVariable variable = functor.getVariable(name);
 				if (variable != null) {
 					variable.ensureStep(equationPart.getVariableStep().getIndex());
 				}
 			}
-			for (EquationPart equationPart : equation.getRightHandSide().getParts()) {
+			for (EquationPart equationPart : equationDescriptor.getRightHandSide().getParts()) {
 				String name = equationPart.getVariableStep().getDescriptor().getName();
 				IVariable variable = functor.getVariable(name);
 				if (variable != null) {
@@ -85,14 +85,14 @@ public class FunctorConstructor {
 			}
 		}
 
-		for (Equation equation : functor.getFunction().getEquations()) {
-			if (!equation.getLeftHandSide().getParts().isEmpty()) {
-				VariableStep variableStep = equation.getLeftHandSide().getParts().get(0).getVariableStep();
+		for (EquationDescriptor equationDescriptor : functor.getFunction().getEquationDescriptors()) {
+			if (!equationDescriptor.getLeftHandSide().getParts().isEmpty()) {
+				VariableStep variableStep = equationDescriptor.getLeftHandSide().getParts().get(0).getVariableStep();
 				if (variableStep.isInitial()) {
 					String name = variableStep.getDescriptor().getName();
 					IVariable variable = functor.getVariable(name);
 					if (variable != null) {
-						IValue rhsValue = new ExpressionValueEvaluator(context).doSwitch(equation.getStatement().getRightHandSide());
+						IValue rhsValue = new ExpressionValueEvaluator(context).doSwitch(equationDescriptor.getEquation().getRightHandSide());
 						variable.setValue(variableStep.getIndex(), rhsValue);
 					}
 				}
