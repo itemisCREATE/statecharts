@@ -107,22 +107,22 @@ public interface ImperativeModelPackage extends EPackage {
 	int SUBROUTINE__STATE_VARIABLE_DECLARATIONS = 3;
 
 	/**
-	 * The feature id for the '<em><b>Initialization Block</b></em>' containment reference.
+	 * The feature id for the '<em><b>Initialization Compound</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SUBROUTINE__INITIALIZATION_BLOCK = 4;
+	int SUBROUTINE__INITIALIZATION_COMPOUND = 4;
 
 	/**
-	 * The feature id for the '<em><b>Computation Blocks</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Computation Compounds</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SUBROUTINE__COMPUTATION_BLOCKS = 5;
+	int SUBROUTINE__COMPUTATION_COMPOUNDS = 5;
 
 	/**
 	 * The number of structural features of the '<em>Subroutine</em>' class.
@@ -208,14 +208,14 @@ public interface ImperativeModelPackage extends EPackage {
 	int VARIABLE_DECLARATION_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 4;
 
 	/**
-	 * The meta object id for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.BlockImpl <em>Block</em>}' class.
+	 * The meta object id for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.CompoundImpl <em>Compound</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipselabs.mscript.language.imperativemodel.impl.BlockImpl
-	 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getBlock()
+	 * @see org.eclipselabs.mscript.language.imperativemodel.impl.CompoundImpl
+	 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getCompound()
 	 * @generated
 	 */
-	int BLOCK = 3;
+	int COMPOUND = 3;
 
 	/**
 	 * The feature id for the '<em><b>Statements</b></em>' containment reference.
@@ -224,26 +224,26 @@ public interface ImperativeModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BLOCK__STATEMENTS = STATEMENT_FEATURE_COUNT + 0;
+	int COMPOUND__STATEMENTS = STATEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>Block</em>' class.
+	 * The number of structural features of the '<em>Compound</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BLOCK_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 1;
+	int COMPOUND_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.ComputationBlockImpl <em>Computation Block</em>}' class.
+	 * The meta object id for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.ComputationCompoundImpl <em>Computation Compound</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ComputationBlockImpl
-	 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getComputationBlock()
+	 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ComputationCompoundImpl
+	 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getComputationCompound()
 	 * @generated
 	 */
-	int COMPUTATION_BLOCK = 4;
+	int COMPUTATION_COMPOUND = 4;
 
 	/**
 	 * The feature id for the '<em><b>Statements</b></em>' containment reference.
@@ -252,7 +252,7 @@ public interface ImperativeModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPUTATION_BLOCK__STATEMENTS = BLOCK__STATEMENTS;
+	int COMPUTATION_COMPOUND__STATEMENTS = COMPOUND__STATEMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Used Inputs</b></em>' reference list.
@@ -261,7 +261,7 @@ public interface ImperativeModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPUTATION_BLOCK__USED_INPUTS = BLOCK_FEATURE_COUNT + 0;
+	int COMPUTATION_COMPOUND__USED_INPUTS = COMPOUND_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Computed Outputs</b></em>' reference list.
@@ -270,16 +270,16 @@ public interface ImperativeModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPUTATION_BLOCK__COMPUTED_OUTPUTS = BLOCK_FEATURE_COUNT + 1;
+	int COMPUTATION_COMPOUND__COMPUTED_OUTPUTS = COMPOUND_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of structural features of the '<em>Computation Block</em>' class.
+	 * The number of structural features of the '<em>Computation Compound</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPUTATION_BLOCK_FEATURE_COUNT = BLOCK_FEATURE_COUNT + 2;
+	int COMPUTATION_COMPOUND_FEATURE_COUNT = COMPOUND_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.AssignmentImpl <em>Assignment</em>}' class.
@@ -503,26 +503,26 @@ public interface ImperativeModelPackage extends EPackage {
 	EReference getSubroutine_StateVariableDeclarations();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.imperativemodel.Subroutine#getInitializationBlock <em>Initialization Block</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.imperativemodel.Subroutine#getInitializationCompound <em>Initialization Compound</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Initialization Block</em>'.
-	 * @see org.eclipselabs.mscript.language.imperativemodel.Subroutine#getInitializationBlock()
+	 * @return the meta object for the containment reference '<em>Initialization Compound</em>'.
+	 * @see org.eclipselabs.mscript.language.imperativemodel.Subroutine#getInitializationCompound()
 	 * @see #getSubroutine()
 	 * @generated
 	 */
-	EReference getSubroutine_InitializationBlock();
+	EReference getSubroutine_InitializationCompound();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.imperativemodel.Subroutine#getComputationBlocks <em>Computation Blocks</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.imperativemodel.Subroutine#getComputationCompounds <em>Computation Compounds</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Computation Blocks</em>'.
-	 * @see org.eclipselabs.mscript.language.imperativemodel.Subroutine#getComputationBlocks()
+	 * @return the meta object for the containment reference list '<em>Computation Compounds</em>'.
+	 * @see org.eclipselabs.mscript.language.imperativemodel.Subroutine#getComputationCompounds()
 	 * @see #getSubroutine()
 	 * @generated
 	 */
-	EReference getSubroutine_ComputationBlocks();
+	EReference getSubroutine_ComputationCompounds();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.imperativemodel.Statement <em>Statement</em>}'.
@@ -589,57 +589,57 @@ public interface ImperativeModelPackage extends EPackage {
 	EAttribute getVariableDeclaration_RingBufferSize();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.imperativemodel.Block <em>Block</em>}'.
+	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.imperativemodel.Compound <em>Compound</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Block</em>'.
-	 * @see org.eclipselabs.mscript.language.imperativemodel.Block
+	 * @return the meta object for class '<em>Compound</em>'.
+	 * @see org.eclipselabs.mscript.language.imperativemodel.Compound
 	 * @generated
 	 */
-	EClass getBlock();
+	EClass getCompound();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.imperativemodel.Block#getStatements <em>Statements</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.imperativemodel.Compound#getStatements <em>Statements</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Statements</em>'.
-	 * @see org.eclipselabs.mscript.language.imperativemodel.Block#getStatements()
-	 * @see #getBlock()
+	 * @see org.eclipselabs.mscript.language.imperativemodel.Compound#getStatements()
+	 * @see #getCompound()
 	 * @generated
 	 */
-	EReference getBlock_Statements();
+	EReference getCompound_Statements();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.imperativemodel.ComputationBlock <em>Computation Block</em>}'.
+	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.imperativemodel.ComputationCompound <em>Computation Compound</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Computation Block</em>'.
-	 * @see org.eclipselabs.mscript.language.imperativemodel.ComputationBlock
+	 * @return the meta object for class '<em>Computation Compound</em>'.
+	 * @see org.eclipselabs.mscript.language.imperativemodel.ComputationCompound
 	 * @generated
 	 */
-	EClass getComputationBlock();
+	EClass getComputationCompound();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.eclipselabs.mscript.language.imperativemodel.ComputationBlock#getUsedInputs <em>Used Inputs</em>}'.
+	 * Returns the meta object for the reference list '{@link org.eclipselabs.mscript.language.imperativemodel.ComputationCompound#getUsedInputs <em>Used Inputs</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference list '<em>Used Inputs</em>'.
-	 * @see org.eclipselabs.mscript.language.imperativemodel.ComputationBlock#getUsedInputs()
-	 * @see #getComputationBlock()
+	 * @see org.eclipselabs.mscript.language.imperativemodel.ComputationCompound#getUsedInputs()
+	 * @see #getComputationCompound()
 	 * @generated
 	 */
-	EReference getComputationBlock_UsedInputs();
+	EReference getComputationCompound_UsedInputs();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.eclipselabs.mscript.language.imperativemodel.ComputationBlock#getComputedOutputs <em>Computed Outputs</em>}'.
+	 * Returns the meta object for the reference list '{@link org.eclipselabs.mscript.language.imperativemodel.ComputationCompound#getComputedOutputs <em>Computed Outputs</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference list '<em>Computed Outputs</em>'.
-	 * @see org.eclipselabs.mscript.language.imperativemodel.ComputationBlock#getComputedOutputs()
-	 * @see #getComputationBlock()
+	 * @see org.eclipselabs.mscript.language.imperativemodel.ComputationCompound#getComputedOutputs()
+	 * @see #getComputationCompound()
 	 * @generated
 	 */
-	EReference getComputationBlock_ComputedOutputs();
+	EReference getComputationCompound_ComputedOutputs();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.imperativemodel.Assignment <em>Assignment</em>}'.
@@ -856,20 +856,20 @@ public interface ImperativeModelPackage extends EPackage {
 		EReference SUBROUTINE__STATE_VARIABLE_DECLARATIONS = eINSTANCE.getSubroutine_StateVariableDeclarations();
 
 		/**
-		 * The meta object literal for the '<em><b>Initialization Block</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Initialization Compound</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SUBROUTINE__INITIALIZATION_BLOCK = eINSTANCE.getSubroutine_InitializationBlock();
+		EReference SUBROUTINE__INITIALIZATION_COMPOUND = eINSTANCE.getSubroutine_InitializationCompound();
 
 		/**
-		 * The meta object literal for the '<em><b>Computation Blocks</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Computation Compounds</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SUBROUTINE__COMPUTATION_BLOCKS = eINSTANCE.getSubroutine_ComputationBlocks();
+		EReference SUBROUTINE__COMPUTATION_COMPOUNDS = eINSTANCE.getSubroutine_ComputationCompounds();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.StatementImpl <em>Statement</em>}' class.
@@ -924,14 +924,14 @@ public interface ImperativeModelPackage extends EPackage {
 		EAttribute VARIABLE_DECLARATION__RING_BUFFER_SIZE = eINSTANCE.getVariableDeclaration_RingBufferSize();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.BlockImpl <em>Block</em>}' class.
+		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.CompoundImpl <em>Compound</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipselabs.mscript.language.imperativemodel.impl.BlockImpl
-		 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getBlock()
+		 * @see org.eclipselabs.mscript.language.imperativemodel.impl.CompoundImpl
+		 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getCompound()
 		 * @generated
 		 */
-		EClass BLOCK = eINSTANCE.getBlock();
+		EClass COMPOUND = eINSTANCE.getCompound();
 
 		/**
 		 * The meta object literal for the '<em><b>Statements</b></em>' containment reference feature.
@@ -939,17 +939,17 @@ public interface ImperativeModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference BLOCK__STATEMENTS = eINSTANCE.getBlock_Statements();
+		EReference COMPOUND__STATEMENTS = eINSTANCE.getCompound_Statements();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.ComputationBlockImpl <em>Computation Block</em>}' class.
+		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.ComputationCompoundImpl <em>Computation Compound</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ComputationBlockImpl
-		 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getComputationBlock()
+		 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ComputationCompoundImpl
+		 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getComputationCompound()
 		 * @generated
 		 */
-		EClass COMPUTATION_BLOCK = eINSTANCE.getComputationBlock();
+		EClass COMPUTATION_COMPOUND = eINSTANCE.getComputationCompound();
 
 		/**
 		 * The meta object literal for the '<em><b>Used Inputs</b></em>' reference list feature.
@@ -957,7 +957,7 @@ public interface ImperativeModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference COMPUTATION_BLOCK__USED_INPUTS = eINSTANCE.getComputationBlock_UsedInputs();
+		EReference COMPUTATION_COMPOUND__USED_INPUTS = eINSTANCE.getComputationCompound_UsedInputs();
 
 		/**
 		 * The meta object literal for the '<em><b>Computed Outputs</b></em>' reference list feature.
@@ -965,7 +965,7 @@ public interface ImperativeModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference COMPUTATION_BLOCK__COMPUTED_OUTPUTS = eINSTANCE.getComputationBlock_ComputedOutputs();
+		EReference COMPUTATION_COMPOUND__COMPUTED_OUTPUTS = eINSTANCE.getComputationCompound_ComputedOutputs();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.AssignmentImpl <em>Assignment</em>}' class.

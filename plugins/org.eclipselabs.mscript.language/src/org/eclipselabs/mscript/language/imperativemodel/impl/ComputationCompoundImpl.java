@@ -11,25 +11,25 @@ import java.util.Collection;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-import org.eclipselabs.mscript.language.imperativemodel.ComputationBlock;
+import org.eclipselabs.mscript.language.imperativemodel.ComputationCompound;
 import org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage;
 import org.eclipselabs.mscript.language.imperativemodel.VariableDeclaration;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Computation Block</b></em>'.
+ * An implementation of the model object '<em><b>Computation Compound</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.impl.ComputationBlockImpl#getUsedInputs <em>Used Inputs</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.impl.ComputationBlockImpl#getComputedOutputs <em>Computed Outputs</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.impl.ComputationCompoundImpl#getUsedInputs <em>Used Inputs</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.impl.ComputationCompoundImpl#getComputedOutputs <em>Computed Outputs</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ComputationBlockImpl extends BlockImpl implements ComputationBlock {
+public class ComputationCompoundImpl extends CompoundImpl implements ComputationCompound {
 	/**
 	 * The cached value of the '{@link #getUsedInputs() <em>Used Inputs</em>}' reference list.
 	 * <!-- begin-user-doc -->
@@ -55,7 +55,7 @@ public class ComputationBlockImpl extends BlockImpl implements ComputationBlock 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ComputationBlockImpl() {
+	protected ComputationCompoundImpl() {
 		super();
 	}
 
@@ -66,7 +66,7 @@ public class ComputationBlockImpl extends BlockImpl implements ComputationBlock 
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return ImperativeModelPackage.Literals.COMPUTATION_BLOCK;
+		return ImperativeModelPackage.Literals.COMPUTATION_COMPOUND;
 	}
 
 	/**
@@ -76,7 +76,7 @@ public class ComputationBlockImpl extends BlockImpl implements ComputationBlock 
 	 */
 	public EList<VariableDeclaration> getUsedInputs() {
 		if (usedInputs == null) {
-			usedInputs = new EObjectResolvingEList<VariableDeclaration>(VariableDeclaration.class, this, ImperativeModelPackage.COMPUTATION_BLOCK__USED_INPUTS);
+			usedInputs = new EObjectResolvingEList<VariableDeclaration>(VariableDeclaration.class, this, ImperativeModelPackage.COMPUTATION_COMPOUND__USED_INPUTS);
 		}
 		return usedInputs;
 	}
@@ -88,7 +88,7 @@ public class ComputationBlockImpl extends BlockImpl implements ComputationBlock 
 	 */
 	public EList<VariableDeclaration> getComputedOutputs() {
 		if (computedOutputs == null) {
-			computedOutputs = new EObjectResolvingEList<VariableDeclaration>(VariableDeclaration.class, this, ImperativeModelPackage.COMPUTATION_BLOCK__COMPUTED_OUTPUTS);
+			computedOutputs = new EObjectResolvingEList<VariableDeclaration>(VariableDeclaration.class, this, ImperativeModelPackage.COMPUTATION_COMPOUND__COMPUTED_OUTPUTS);
 		}
 		return computedOutputs;
 	}
@@ -101,9 +101,9 @@ public class ComputationBlockImpl extends BlockImpl implements ComputationBlock 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ImperativeModelPackage.COMPUTATION_BLOCK__USED_INPUTS:
+			case ImperativeModelPackage.COMPUTATION_COMPOUND__USED_INPUTS:
 				return getUsedInputs();
-			case ImperativeModelPackage.COMPUTATION_BLOCK__COMPUTED_OUTPUTS:
+			case ImperativeModelPackage.COMPUTATION_COMPOUND__COMPUTED_OUTPUTS:
 				return getComputedOutputs();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -118,11 +118,11 @@ public class ComputationBlockImpl extends BlockImpl implements ComputationBlock 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ImperativeModelPackage.COMPUTATION_BLOCK__USED_INPUTS:
+			case ImperativeModelPackage.COMPUTATION_COMPOUND__USED_INPUTS:
 				getUsedInputs().clear();
 				getUsedInputs().addAll((Collection<? extends VariableDeclaration>)newValue);
 				return;
-			case ImperativeModelPackage.COMPUTATION_BLOCK__COMPUTED_OUTPUTS:
+			case ImperativeModelPackage.COMPUTATION_COMPOUND__COMPUTED_OUTPUTS:
 				getComputedOutputs().clear();
 				getComputedOutputs().addAll((Collection<? extends VariableDeclaration>)newValue);
 				return;
@@ -138,10 +138,10 @@ public class ComputationBlockImpl extends BlockImpl implements ComputationBlock 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ImperativeModelPackage.COMPUTATION_BLOCK__USED_INPUTS:
+			case ImperativeModelPackage.COMPUTATION_COMPOUND__USED_INPUTS:
 				getUsedInputs().clear();
 				return;
-			case ImperativeModelPackage.COMPUTATION_BLOCK__COMPUTED_OUTPUTS:
+			case ImperativeModelPackage.COMPUTATION_COMPOUND__COMPUTED_OUTPUTS:
 				getComputedOutputs().clear();
 				return;
 		}
@@ -156,12 +156,12 @@ public class ComputationBlockImpl extends BlockImpl implements ComputationBlock 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ImperativeModelPackage.COMPUTATION_BLOCK__USED_INPUTS:
+			case ImperativeModelPackage.COMPUTATION_COMPOUND__USED_INPUTS:
 				return usedInputs != null && !usedInputs.isEmpty();
-			case ImperativeModelPackage.COMPUTATION_BLOCK__COMPUTED_OUTPUTS:
+			case ImperativeModelPackage.COMPUTATION_COMPOUND__COMPUTED_OUTPUTS:
 				return computedOutputs != null && !computedOutputs.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //ComputationBlockImpl
+} //ComputationCompoundImpl

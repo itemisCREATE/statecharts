@@ -9,21 +9,21 @@ package org.eclipselabs.mscript.language.imperativemodel;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Block</b></em>'.
+ * A representation of the model object '<em><b>Compound</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.Block#getStatements <em>Statements</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.Compound#getStatements <em>Statements</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage#getBlock()
+ * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage#getCompound()
  * @model
  * @generated
  */
-public interface Block extends Statement {
+public interface Compound extends Statement {
 	/**
 	 * Returns the value of the '<em><b>Statements</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
@@ -34,14 +34,14 @@ public interface Block extends Statement {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Statements</em>' containment reference.
 	 * @see #setStatements(Statement)
-	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage#getBlock_Statements()
+	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage#getCompound_Statements()
 	 * @model containment="true"
 	 * @generated
 	 */
 	Statement getStatements();
 
 	/**
-	 * Sets the value of the '{@link org.eclipselabs.mscript.language.imperativemodel.Block#getStatements <em>Statements</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipselabs.mscript.language.imperativemodel.Compound#getStatements <em>Statements</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Statements</em>' containment reference.
@@ -50,4 +50,4 @@ public interface Block extends Statement {
 	 */
 	void setStatements(Statement value);
 
-} // Block
+} // Compound

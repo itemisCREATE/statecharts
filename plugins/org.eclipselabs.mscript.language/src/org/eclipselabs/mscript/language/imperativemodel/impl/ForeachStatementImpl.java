@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipselabs.mscript.language.ast.Expression;
-import org.eclipselabs.mscript.language.imperativemodel.Block;
+import org.eclipselabs.mscript.language.imperativemodel.Compound;
 import org.eclipselabs.mscript.language.imperativemodel.ForeachStatement;
 import org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage;
 import org.eclipselabs.mscript.language.imperativemodel.VariableDeclaration;
@@ -61,7 +61,7 @@ public class ForeachStatementImpl extends StatementImpl implements ForeachStatem
 	 * @generated
 	 * @ordered
 	 */
-	protected Block body;
+	protected Compound body;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -173,7 +173,7 @@ public class ForeachStatementImpl extends StatementImpl implements ForeachStatem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Block getBody() {
+	public Compound getBody() {
 		return body;
 	}
 
@@ -182,8 +182,8 @@ public class ForeachStatementImpl extends StatementImpl implements ForeachStatem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetBody(Block newBody, NotificationChain msgs) {
-		Block oldBody = body;
+	public NotificationChain basicSetBody(Compound newBody, NotificationChain msgs) {
+		Compound oldBody = body;
 		body = newBody;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ImperativeModelPackage.FOREACH_STATEMENT__BODY, oldBody, newBody);
@@ -197,7 +197,7 @@ public class ForeachStatementImpl extends StatementImpl implements ForeachStatem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setBody(Block newBody) {
+	public void setBody(Compound newBody) {
 		if (newBody != body) {
 			NotificationChain msgs = null;
 			if (body != null)
@@ -262,7 +262,7 @@ public class ForeachStatementImpl extends StatementImpl implements ForeachStatem
 				setCollectionExpression((Expression)newValue);
 				return;
 			case ImperativeModelPackage.FOREACH_STATEMENT__BODY:
-				setBody((Block)newValue);
+				setBody((Compound)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -283,7 +283,7 @@ public class ForeachStatementImpl extends StatementImpl implements ForeachStatem
 				setCollectionExpression((Expression)null);
 				return;
 			case ImperativeModelPackage.FOREACH_STATEMENT__BODY:
-				setBody((Block)null);
+				setBody((Compound)null);
 				return;
 		}
 		super.eUnset(featureID);

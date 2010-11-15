@@ -21,8 +21,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.Subroutine#getInputVariableDeclarations <em>Input Variable Declarations</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.Subroutine#getOutputVariableDeclarations <em>Output Variable Declarations</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.Subroutine#getStateVariableDeclarations <em>State Variable Declarations</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.Subroutine#getInitializationBlock <em>Initialization Block</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.Subroutine#getComputationBlocks <em>Computation Blocks</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.Subroutine#getInitializationCompound <em>Initialization Compound</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.Subroutine#getComputationCompounds <em>Computation Compounds</em>}</li>
  * </ul>
  * </p>
  *
@@ -96,45 +96,45 @@ public interface Subroutine extends EObject {
 	EList<VariableDeclaration> getStateVariableDeclarations();
 
 	/**
-	 * Returns the value of the '<em><b>Initialization Block</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Initialization Compound</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Initialization Block</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Initialization Compound</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Initialization Block</em>' containment reference.
-	 * @see #setInitializationBlock(Block)
-	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage#getSubroutine_InitializationBlock()
+	 * @return the value of the '<em>Initialization Compound</em>' containment reference.
+	 * @see #setInitializationCompound(Compound)
+	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage#getSubroutine_InitializationCompound()
 	 * @model containment="true"
 	 * @generated
 	 */
-	Block getInitializationBlock();
+	Compound getInitializationCompound();
 
 	/**
-	 * Sets the value of the '{@link org.eclipselabs.mscript.language.imperativemodel.Subroutine#getInitializationBlock <em>Initialization Block</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipselabs.mscript.language.imperativemodel.Subroutine#getInitializationCompound <em>Initialization Compound</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Initialization Block</em>' containment reference.
-	 * @see #getInitializationBlock()
+	 * @param value the new value of the '<em>Initialization Compound</em>' containment reference.
+	 * @see #getInitializationCompound()
 	 * @generated
 	 */
-	void setInitializationBlock(Block value);
+	void setInitializationCompound(Compound value);
 
 	/**
-	 * Returns the value of the '<em><b>Computation Blocks</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipselabs.mscript.language.imperativemodel.ComputationBlock}.
+	 * Returns the value of the '<em><b>Computation Compounds</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipselabs.mscript.language.imperativemodel.ComputationCompound}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Computation Blocks</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Computation Compounds</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Computation Blocks</em>' containment reference list.
-	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage#getSubroutine_ComputationBlocks()
+	 * @return the value of the '<em>Computation Compounds</em>' containment reference list.
+	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage#getSubroutine_ComputationCompounds()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<ComputationBlock> getComputationBlocks();
+	EList<ComputationCompound> getComputationCompounds();
 
 } // Subroutine

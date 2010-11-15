@@ -12,8 +12,8 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipselabs.mscript.language.imperativemodel.Assignment;
-import org.eclipselabs.mscript.language.imperativemodel.Block;
-import org.eclipselabs.mscript.language.imperativemodel.ComputationBlock;
+import org.eclipselabs.mscript.language.imperativemodel.Compound;
+import org.eclipselabs.mscript.language.imperativemodel.ComputationCompound;
 import org.eclipselabs.mscript.language.imperativemodel.ForeachStatement;
 import org.eclipselabs.mscript.language.imperativemodel.IfStatement;
 import org.eclipselabs.mscript.language.imperativemodel.ImperativeModelFactory;
@@ -68,8 +68,8 @@ public class ImperativeModelFactoryImpl extends EFactoryImpl implements Imperati
 		switch (eClass.getClassifierID()) {
 			case ImperativeModelPackage.SUBROUTINE: return createSubroutine();
 			case ImperativeModelPackage.VARIABLE_DECLARATION: return createVariableDeclaration();
-			case ImperativeModelPackage.BLOCK: return createBlock();
-			case ImperativeModelPackage.COMPUTATION_BLOCK: return createComputationBlock();
+			case ImperativeModelPackage.COMPOUND: return createCompound();
+			case ImperativeModelPackage.COMPUTATION_COMPOUND: return createComputationCompound();
 			case ImperativeModelPackage.ASSIGNMENT: return createAssignment();
 			case ImperativeModelPackage.IF_STATEMENT: return createIfStatement();
 			case ImperativeModelPackage.FOREACH_STATEMENT: return createForeachStatement();
@@ -104,9 +104,9 @@ public class ImperativeModelFactoryImpl extends EFactoryImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Block createBlock() {
-		BlockImpl block = new BlockImpl();
-		return block;
+	public Compound createCompound() {
+		CompoundImpl compound = new CompoundImpl();
+		return compound;
 	}
 
 	/**
@@ -114,9 +114,9 @@ public class ImperativeModelFactoryImpl extends EFactoryImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ComputationBlock createComputationBlock() {
-		ComputationBlockImpl computationBlock = new ComputationBlockImpl();
-		return computationBlock;
+	public ComputationCompound createComputationCompound() {
+		ComputationCompoundImpl computationCompound = new ComputationCompoundImpl();
+		return computationCompound;
 	}
 
 	/**

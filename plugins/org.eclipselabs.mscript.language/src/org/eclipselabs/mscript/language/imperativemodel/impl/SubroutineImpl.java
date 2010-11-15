@@ -17,8 +17,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipselabs.mscript.language.imperativemodel.Block;
-import org.eclipselabs.mscript.language.imperativemodel.ComputationBlock;
+import org.eclipselabs.mscript.language.imperativemodel.Compound;
+import org.eclipselabs.mscript.language.imperativemodel.ComputationCompound;
 import org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage;
 import org.eclipselabs.mscript.language.imperativemodel.Subroutine;
 import org.eclipselabs.mscript.language.imperativemodel.VariableDeclaration;
@@ -34,8 +34,8 @@ import org.eclipselabs.mscript.language.imperativemodel.VariableDeclaration;
  *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.impl.SubroutineImpl#getInputVariableDeclarations <em>Input Variable Declarations</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.impl.SubroutineImpl#getOutputVariableDeclarations <em>Output Variable Declarations</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.impl.SubroutineImpl#getStateVariableDeclarations <em>State Variable Declarations</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.impl.SubroutineImpl#getInitializationBlock <em>Initialization Block</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.impl.SubroutineImpl#getComputationBlocks <em>Computation Blocks</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.impl.SubroutineImpl#getInitializationCompound <em>Initialization Compound</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.impl.SubroutineImpl#getComputationCompounds <em>Computation Compounds</em>}</li>
  * </ul>
  * </p>
  *
@@ -83,24 +83,24 @@ public class SubroutineImpl extends EObjectImpl implements Subroutine {
 	protected EList<VariableDeclaration> stateVariableDeclarations;
 
 	/**
-	 * The cached value of the '{@link #getInitializationBlock() <em>Initialization Block</em>}' containment reference.
+	 * The cached value of the '{@link #getInitializationCompound() <em>Initialization Compound</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getInitializationBlock()
+	 * @see #getInitializationCompound()
 	 * @generated
 	 * @ordered
 	 */
-	protected Block initializationBlock;
+	protected Compound initializationCompound;
 
 	/**
-	 * The cached value of the '{@link #getComputationBlocks() <em>Computation Blocks</em>}' containment reference list.
+	 * The cached value of the '{@link #getComputationCompounds() <em>Computation Compounds</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getComputationBlocks()
+	 * @see #getComputationCompounds()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ComputationBlock> computationBlocks;
+	protected EList<ComputationCompound> computationCompounds;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -174,8 +174,8 @@ public class SubroutineImpl extends EObjectImpl implements Subroutine {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Block getInitializationBlock() {
-		return initializationBlock;
+	public Compound getInitializationCompound() {
+		return initializationCompound;
 	}
 
 	/**
@@ -183,11 +183,11 @@ public class SubroutineImpl extends EObjectImpl implements Subroutine {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetInitializationBlock(Block newInitializationBlock, NotificationChain msgs) {
-		Block oldInitializationBlock = initializationBlock;
-		initializationBlock = newInitializationBlock;
+	public NotificationChain basicSetInitializationCompound(Compound newInitializationCompound, NotificationChain msgs) {
+		Compound oldInitializationCompound = initializationCompound;
+		initializationCompound = newInitializationCompound;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ImperativeModelPackage.SUBROUTINE__INITIALIZATION_BLOCK, oldInitializationBlock, newInitializationBlock);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ImperativeModelPackage.SUBROUTINE__INITIALIZATION_COMPOUND, oldInitializationCompound, newInitializationCompound);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -198,18 +198,18 @@ public class SubroutineImpl extends EObjectImpl implements Subroutine {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setInitializationBlock(Block newInitializationBlock) {
-		if (newInitializationBlock != initializationBlock) {
+	public void setInitializationCompound(Compound newInitializationCompound) {
+		if (newInitializationCompound != initializationCompound) {
 			NotificationChain msgs = null;
-			if (initializationBlock != null)
-				msgs = ((InternalEObject)initializationBlock).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ImperativeModelPackage.SUBROUTINE__INITIALIZATION_BLOCK, null, msgs);
-			if (newInitializationBlock != null)
-				msgs = ((InternalEObject)newInitializationBlock).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ImperativeModelPackage.SUBROUTINE__INITIALIZATION_BLOCK, null, msgs);
-			msgs = basicSetInitializationBlock(newInitializationBlock, msgs);
+			if (initializationCompound != null)
+				msgs = ((InternalEObject)initializationCompound).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ImperativeModelPackage.SUBROUTINE__INITIALIZATION_COMPOUND, null, msgs);
+			if (newInitializationCompound != null)
+				msgs = ((InternalEObject)newInitializationCompound).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ImperativeModelPackage.SUBROUTINE__INITIALIZATION_COMPOUND, null, msgs);
+			msgs = basicSetInitializationCompound(newInitializationCompound, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ImperativeModelPackage.SUBROUTINE__INITIALIZATION_BLOCK, newInitializationBlock, newInitializationBlock));
+			eNotify(new ENotificationImpl(this, Notification.SET, ImperativeModelPackage.SUBROUTINE__INITIALIZATION_COMPOUND, newInitializationCompound, newInitializationCompound));
 	}
 
 	/**
@@ -217,11 +217,11 @@ public class SubroutineImpl extends EObjectImpl implements Subroutine {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ComputationBlock> getComputationBlocks() {
-		if (computationBlocks == null) {
-			computationBlocks = new EObjectContainmentEList<ComputationBlock>(ComputationBlock.class, this, ImperativeModelPackage.SUBROUTINE__COMPUTATION_BLOCKS);
+	public EList<ComputationCompound> getComputationCompounds() {
+		if (computationCompounds == null) {
+			computationCompounds = new EObjectContainmentEList<ComputationCompound>(ComputationCompound.class, this, ImperativeModelPackage.SUBROUTINE__COMPUTATION_COMPOUNDS);
 		}
-		return computationBlocks;
+		return computationCompounds;
 	}
 
 	/**
@@ -240,10 +240,10 @@ public class SubroutineImpl extends EObjectImpl implements Subroutine {
 				return ((InternalEList<?>)getOutputVariableDeclarations()).basicRemove(otherEnd, msgs);
 			case ImperativeModelPackage.SUBROUTINE__STATE_VARIABLE_DECLARATIONS:
 				return ((InternalEList<?>)getStateVariableDeclarations()).basicRemove(otherEnd, msgs);
-			case ImperativeModelPackage.SUBROUTINE__INITIALIZATION_BLOCK:
-				return basicSetInitializationBlock(null, msgs);
-			case ImperativeModelPackage.SUBROUTINE__COMPUTATION_BLOCKS:
-				return ((InternalEList<?>)getComputationBlocks()).basicRemove(otherEnd, msgs);
+			case ImperativeModelPackage.SUBROUTINE__INITIALIZATION_COMPOUND:
+				return basicSetInitializationCompound(null, msgs);
+			case ImperativeModelPackage.SUBROUTINE__COMPUTATION_COMPOUNDS:
+				return ((InternalEList<?>)getComputationCompounds()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -264,10 +264,10 @@ public class SubroutineImpl extends EObjectImpl implements Subroutine {
 				return getOutputVariableDeclarations();
 			case ImperativeModelPackage.SUBROUTINE__STATE_VARIABLE_DECLARATIONS:
 				return getStateVariableDeclarations();
-			case ImperativeModelPackage.SUBROUTINE__INITIALIZATION_BLOCK:
-				return getInitializationBlock();
-			case ImperativeModelPackage.SUBROUTINE__COMPUTATION_BLOCKS:
-				return getComputationBlocks();
+			case ImperativeModelPackage.SUBROUTINE__INITIALIZATION_COMPOUND:
+				return getInitializationCompound();
+			case ImperativeModelPackage.SUBROUTINE__COMPUTATION_COMPOUNDS:
+				return getComputationCompounds();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -297,12 +297,12 @@ public class SubroutineImpl extends EObjectImpl implements Subroutine {
 				getStateVariableDeclarations().clear();
 				getStateVariableDeclarations().addAll((Collection<? extends VariableDeclaration>)newValue);
 				return;
-			case ImperativeModelPackage.SUBROUTINE__INITIALIZATION_BLOCK:
-				setInitializationBlock((Block)newValue);
+			case ImperativeModelPackage.SUBROUTINE__INITIALIZATION_COMPOUND:
+				setInitializationCompound((Compound)newValue);
 				return;
-			case ImperativeModelPackage.SUBROUTINE__COMPUTATION_BLOCKS:
-				getComputationBlocks().clear();
-				getComputationBlocks().addAll((Collection<? extends ComputationBlock>)newValue);
+			case ImperativeModelPackage.SUBROUTINE__COMPUTATION_COMPOUNDS:
+				getComputationCompounds().clear();
+				getComputationCompounds().addAll((Collection<? extends ComputationCompound>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -328,11 +328,11 @@ public class SubroutineImpl extends EObjectImpl implements Subroutine {
 			case ImperativeModelPackage.SUBROUTINE__STATE_VARIABLE_DECLARATIONS:
 				getStateVariableDeclarations().clear();
 				return;
-			case ImperativeModelPackage.SUBROUTINE__INITIALIZATION_BLOCK:
-				setInitializationBlock((Block)null);
+			case ImperativeModelPackage.SUBROUTINE__INITIALIZATION_COMPOUND:
+				setInitializationCompound((Compound)null);
 				return;
-			case ImperativeModelPackage.SUBROUTINE__COMPUTATION_BLOCKS:
-				getComputationBlocks().clear();
+			case ImperativeModelPackage.SUBROUTINE__COMPUTATION_COMPOUNDS:
+				getComputationCompounds().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -354,10 +354,10 @@ public class SubroutineImpl extends EObjectImpl implements Subroutine {
 				return outputVariableDeclarations != null && !outputVariableDeclarations.isEmpty();
 			case ImperativeModelPackage.SUBROUTINE__STATE_VARIABLE_DECLARATIONS:
 				return stateVariableDeclarations != null && !stateVariableDeclarations.isEmpty();
-			case ImperativeModelPackage.SUBROUTINE__INITIALIZATION_BLOCK:
-				return initializationBlock != null;
-			case ImperativeModelPackage.SUBROUTINE__COMPUTATION_BLOCKS:
-				return computationBlocks != null && !computationBlocks.isEmpty();
+			case ImperativeModelPackage.SUBROUTINE__INITIALIZATION_COMPOUND:
+				return initializationCompound != null;
+			case ImperativeModelPackage.SUBROUTINE__COMPUTATION_COMPOUNDS:
+				return computationCompounds != null && !computationCompounds.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

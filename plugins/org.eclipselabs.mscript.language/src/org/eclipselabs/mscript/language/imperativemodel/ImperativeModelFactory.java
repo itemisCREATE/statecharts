@@ -44,22 +44,22 @@ public interface ImperativeModelFactory extends EFactory {
 	VariableDeclaration createVariableDeclaration();
 
 	/**
-	 * Returns a new object of class '<em>Block</em>'.
+	 * Returns a new object of class '<em>Compound</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Block</em>'.
+	 * @return a new object of class '<em>Compound</em>'.
 	 * @generated
 	 */
-	Block createBlock();
+	Compound createCompound();
 
 	/**
-	 * Returns a new object of class '<em>Computation Block</em>'.
+	 * Returns a new object of class '<em>Computation Compound</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Computation Block</em>'.
+	 * @return a new object of class '<em>Computation Compound</em>'.
 	 * @generated
 	 */
-	ComputationBlock createComputationBlock();
+	ComputationCompound createComputationCompound();
 
 	/**
 	 * Returns a new object of class '<em>Assignment</em>'.

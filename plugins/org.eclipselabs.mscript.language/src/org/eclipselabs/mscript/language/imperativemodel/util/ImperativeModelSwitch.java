@@ -12,8 +12,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.imperativemodel.Assignment;
-import org.eclipselabs.mscript.language.imperativemodel.Block;
-import org.eclipselabs.mscript.language.imperativemodel.ComputationBlock;
+import org.eclipselabs.mscript.language.imperativemodel.Compound;
+import org.eclipselabs.mscript.language.imperativemodel.ComputationCompound;
 import org.eclipselabs.mscript.language.imperativemodel.ForeachStatement;
 import org.eclipselabs.mscript.language.imperativemodel.IfStatement;
 import org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage;
@@ -115,18 +115,18 @@ public class ImperativeModelSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ImperativeModelPackage.BLOCK: {
-				Block block = (Block)theEObject;
-				T result = caseBlock(block);
-				if (result == null) result = caseStatement(block);
+			case ImperativeModelPackage.COMPOUND: {
+				Compound compound = (Compound)theEObject;
+				T result = caseCompound(compound);
+				if (result == null) result = caseStatement(compound);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ImperativeModelPackage.COMPUTATION_BLOCK: {
-				ComputationBlock computationBlock = (ComputationBlock)theEObject;
-				T result = caseComputationBlock(computationBlock);
-				if (result == null) result = caseBlock(computationBlock);
-				if (result == null) result = caseStatement(computationBlock);
+			case ImperativeModelPackage.COMPUTATION_COMPOUND: {
+				ComputationCompound computationCompound = (ComputationCompound)theEObject;
+				T result = caseComputationCompound(computationCompound);
+				if (result == null) result = caseCompound(computationCompound);
+				if (result == null) result = caseStatement(computationCompound);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -208,32 +208,32 @@ public class ImperativeModelSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Block</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Compound</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Block</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Compound</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseBlock(Block object) {
+	public T caseCompound(Compound object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Computation Block</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Computation Compound</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Computation Block</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Computation Compound</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseComputationBlock(ComputationBlock object) {
+	public T caseComputationCompound(ComputationCompound object) {
 		return null;
 	}
 

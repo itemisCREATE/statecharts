@@ -88,12 +88,12 @@ public interface ForeachStatement extends Statement {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Body</em>' containment reference.
-	 * @see #setBody(Block)
+	 * @see #setBody(Compound)
 	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage#getForeachStatement_Body()
 	 * @model containment="true"
 	 * @generated
 	 */
-	Block getBody();
+	Compound getBody();
 
 	/**
 	 * Sets the value of the '{@link org.eclipselabs.mscript.language.imperativemodel.ForeachStatement#getBody <em>Body</em>}' containment reference.
@@ -103,6 +103,6 @@ public interface ForeachStatement extends Statement {
 	 * @see #getBody()
 	 * @generated
 	 */
-	void setBody(Block value);
+	void setBody(Compound value);
 
 } // ForeachStatement

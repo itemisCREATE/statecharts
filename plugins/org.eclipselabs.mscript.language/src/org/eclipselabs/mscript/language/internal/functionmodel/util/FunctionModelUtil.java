@@ -31,6 +31,16 @@ import org.eclipselabs.mscript.language.functionmodel.VariableStep;
  */
 public class FunctionModelUtil {
 
+	public static EquationPart getFirstLeftHandSideEquationPart(EquationDescriptor equationDescriptor) {
+		List<EquationPart> lhsEquationParts = equationDescriptor.getLeftHandSide().getParts();
+		return !lhsEquationParts.isEmpty() ? lhsEquationParts.get(0) : null;
+	}
+	
+	public static VariableStep getFirstLeftHandSideVariableStep(EquationDescriptor equationDescriptor) {
+		EquationPart lhsEquationPart = getFirstLeftHandSideEquationPart(equationDescriptor);
+		return lhsEquationPart != null ? lhsEquationPart.getVariableStep() : null;
+	}
+
 	public static EquationDescriptor getDefiningEquation(VariableStep variableStep) {
 		for (EquationPart equationPart : variableStep.getUsingEquationParts()) {
 			EquationDescriptor equationDescriptor = equationPart.getSide().getDescriptor();

@@ -13,8 +13,8 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.imperativemodel.Assignment;
-import org.eclipselabs.mscript.language.imperativemodel.Block;
-import org.eclipselabs.mscript.language.imperativemodel.ComputationBlock;
+import org.eclipselabs.mscript.language.imperativemodel.Compound;
+import org.eclipselabs.mscript.language.imperativemodel.ComputationCompound;
 import org.eclipselabs.mscript.language.imperativemodel.ForeachStatement;
 import org.eclipselabs.mscript.language.imperativemodel.IfStatement;
 import org.eclipselabs.mscript.language.imperativemodel.ImperativeModelFactory;
@@ -58,14 +58,14 @@ public class ImperativeModelPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass blockEClass = null;
+	private EClass compoundEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass computationBlockEClass = null;
+	private EClass computationCompoundEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -210,7 +210,7 @@ public class ImperativeModelPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getSubroutine_InitializationBlock() {
+	public EReference getSubroutine_InitializationCompound() {
 		return (EReference)subroutineEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -219,7 +219,7 @@ public class ImperativeModelPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getSubroutine_ComputationBlocks() {
+	public EReference getSubroutine_ComputationCompounds() {
 		return (EReference)subroutineEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -282,8 +282,8 @@ public class ImperativeModelPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getBlock() {
-		return blockEClass;
+	public EClass getCompound() {
+		return compoundEClass;
 	}
 
 	/**
@@ -291,8 +291,8 @@ public class ImperativeModelPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getBlock_Statements() {
-		return (EReference)blockEClass.getEStructuralFeatures().get(0);
+	public EReference getCompound_Statements() {
+		return (EReference)compoundEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -300,8 +300,8 @@ public class ImperativeModelPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getComputationBlock() {
-		return computationBlockEClass;
+	public EClass getComputationCompound() {
+		return computationCompoundEClass;
 	}
 
 	/**
@@ -309,8 +309,8 @@ public class ImperativeModelPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getComputationBlock_UsedInputs() {
-		return (EReference)computationBlockEClass.getEStructuralFeatures().get(0);
+	public EReference getComputationCompound_UsedInputs() {
+		return (EReference)computationCompoundEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -318,8 +318,8 @@ public class ImperativeModelPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getComputationBlock_ComputedOutputs() {
-		return (EReference)computationBlockEClass.getEStructuralFeatures().get(1);
+	public EReference getComputationCompound_ComputedOutputs() {
+		return (EReference)computationCompoundEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -481,8 +481,8 @@ public class ImperativeModelPackageImpl extends EPackageImpl implements Imperati
 		createEReference(subroutineEClass, SUBROUTINE__INPUT_VARIABLE_DECLARATIONS);
 		createEReference(subroutineEClass, SUBROUTINE__OUTPUT_VARIABLE_DECLARATIONS);
 		createEReference(subroutineEClass, SUBROUTINE__STATE_VARIABLE_DECLARATIONS);
-		createEReference(subroutineEClass, SUBROUTINE__INITIALIZATION_BLOCK);
-		createEReference(subroutineEClass, SUBROUTINE__COMPUTATION_BLOCKS);
+		createEReference(subroutineEClass, SUBROUTINE__INITIALIZATION_COMPOUND);
+		createEReference(subroutineEClass, SUBROUTINE__COMPUTATION_COMPOUNDS);
 
 		statementEClass = createEClass(STATEMENT);
 
@@ -492,12 +492,12 @@ public class ImperativeModelPackageImpl extends EPackageImpl implements Imperati
 		createEReference(variableDeclarationEClass, VARIABLE_DECLARATION__INITIALIZER);
 		createEAttribute(variableDeclarationEClass, VARIABLE_DECLARATION__RING_BUFFER_SIZE);
 
-		blockEClass = createEClass(BLOCK);
-		createEReference(blockEClass, BLOCK__STATEMENTS);
+		compoundEClass = createEClass(COMPOUND);
+		createEReference(compoundEClass, COMPOUND__STATEMENTS);
 
-		computationBlockEClass = createEClass(COMPUTATION_BLOCK);
-		createEReference(computationBlockEClass, COMPUTATION_BLOCK__USED_INPUTS);
-		createEReference(computationBlockEClass, COMPUTATION_BLOCK__COMPUTED_OUTPUTS);
+		computationCompoundEClass = createEClass(COMPUTATION_COMPOUND);
+		createEReference(computationCompoundEClass, COMPUTATION_COMPOUND__USED_INPUTS);
+		createEReference(computationCompoundEClass, COMPUTATION_COMPOUND__COMPUTED_OUTPUTS);
 
 		assignmentEClass = createEClass(ASSIGNMENT);
 		createEReference(assignmentEClass, ASSIGNMENT__TARGET);
@@ -551,8 +551,8 @@ public class ImperativeModelPackageImpl extends EPackageImpl implements Imperati
 
 		// Add supertypes to classes
 		variableDeclarationEClass.getESuperTypes().add(this.getStatement());
-		blockEClass.getESuperTypes().add(this.getStatement());
-		computationBlockEClass.getESuperTypes().add(this.getBlock());
+		compoundEClass.getESuperTypes().add(this.getStatement());
+		computationCompoundEClass.getESuperTypes().add(this.getCompound());
 		assignmentEClass.getESuperTypes().add(this.getStatement());
 		ifStatementEClass.getESuperTypes().add(this.getStatement());
 		foreachStatementEClass.getESuperTypes().add(this.getStatement());
@@ -564,8 +564,8 @@ public class ImperativeModelPackageImpl extends EPackageImpl implements Imperati
 		initEReference(getSubroutine_InputVariableDeclarations(), this.getVariableDeclaration(), null, "inputVariableDeclarations", null, 0, -1, Subroutine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSubroutine_OutputVariableDeclarations(), this.getVariableDeclaration(), null, "outputVariableDeclarations", null, 1, -1, Subroutine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSubroutine_StateVariableDeclarations(), this.getVariableDeclaration(), null, "stateVariableDeclarations", null, 0, -1, Subroutine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSubroutine_InitializationBlock(), this.getBlock(), null, "initializationBlock", null, 0, 1, Subroutine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSubroutine_ComputationBlocks(), this.getComputationBlock(), null, "computationBlocks", null, 0, -1, Subroutine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSubroutine_InitializationCompound(), this.getCompound(), null, "initializationCompound", null, 0, 1, Subroutine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSubroutine_ComputationCompounds(), this.getComputationCompound(), null, "computationCompounds", null, 0, -1, Subroutine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(statementEClass, Statement.class, "Statement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -575,12 +575,12 @@ public class ImperativeModelPackageImpl extends EPackageImpl implements Imperati
 		initEReference(getVariableDeclaration_Initializer(), theAstPackage.getExpression(), null, "initializer", null, 0, 1, VariableDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getVariableDeclaration_RingBufferSize(), ecorePackage.getEInt(), "ringBufferSize", "1", 0, 1, VariableDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(blockEClass, Block.class, "Block", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getBlock_Statements(), this.getStatement(), null, "statements", null, 0, 1, Block.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(compoundEClass, Compound.class, "Compound", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getCompound_Statements(), this.getStatement(), null, "statements", null, 0, 1, Compound.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(computationBlockEClass, ComputationBlock.class, "ComputationBlock", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getComputationBlock_UsedInputs(), this.getVariableDeclaration(), null, "usedInputs", null, 0, -1, ComputationBlock.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getComputationBlock_ComputedOutputs(), this.getVariableDeclaration(), null, "computedOutputs", null, 0, -1, ComputationBlock.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(computationCompoundEClass, ComputationCompound.class, "ComputationCompound", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getComputationCompound_UsedInputs(), this.getVariableDeclaration(), null, "usedInputs", null, 0, -1, ComputationCompound.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getComputationCompound_ComputedOutputs(), this.getVariableDeclaration(), null, "computedOutputs", null, 0, -1, ComputationCompound.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(assignmentEClass, Assignment.class, "Assignment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAssignment_Target(), this.getVariableDeclaration(), null, "target", null, 0, 1, Assignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -594,7 +594,7 @@ public class ImperativeModelPackageImpl extends EPackageImpl implements Imperati
 		initEClass(foreachStatementEClass, ForeachStatement.class, "ForeachStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getForeachStatement_IterationVariableDeclaration(), this.getVariableDeclaration(), null, "iterationVariableDeclaration", null, 0, 1, ForeachStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getForeachStatement_CollectionExpression(), theAstPackage.getExpression(), null, "collectionExpression", null, 0, 1, ForeachStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getForeachStatement_Body(), this.getBlock(), null, "body", null, 0, 1, ForeachStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getForeachStatement_Body(), this.getCompound(), null, "body", null, 0, 1, ForeachStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(variableAccessEClass, VariableAccess.class, "VariableAccess", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getVariableAccess_AccessedDeclaration(), this.getVariableDeclaration(), null, "accessedDeclaration", null, 1, 1, VariableAccess.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

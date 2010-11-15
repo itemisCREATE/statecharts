@@ -12,8 +12,8 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//Subroutine/inputVariableDeclarations"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//Subroutine/outputVariableDeclarations"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//Subroutine/stateVariableDeclarations"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//Subroutine/initializationBlock"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//Subroutine/computationBlocks"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//Subroutine/initializationCompound"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//Subroutine/computationCompounds"/>
     </genClasses>
     <genClasses image="false" ecoreClass="ImperativeModel.ecore#//Statement"/>
     <genClasses ecoreClass="ImperativeModel.ecore#//VariableDeclaration">
@@ -22,12 +22,12 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//VariableDeclaration/initializer"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ImperativeModel.ecore#//VariableDeclaration/ringBufferSize"/>
     </genClasses>
-    <genClasses ecoreClass="ImperativeModel.ecore#//Block">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//Block/statements"/>
+    <genClasses ecoreClass="ImperativeModel.ecore#//Compound">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//Compound/statements"/>
     </genClasses>
-    <genClasses ecoreClass="ImperativeModel.ecore#//ComputationBlock">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//ComputationBlock/usedInputs"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//ComputationBlock/computedOutputs"/>
+    <genClasses ecoreClass="ImperativeModel.ecore#//ComputationCompound">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//ComputationCompound/usedInputs"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//ComputationCompound/computedOutputs"/>
     </genClasses>
     <genClasses ecoreClass="ImperativeModel.ecore#//Assignment">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//Assignment/target"/>

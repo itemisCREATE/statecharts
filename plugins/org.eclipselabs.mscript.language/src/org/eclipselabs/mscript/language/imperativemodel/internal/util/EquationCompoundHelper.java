@@ -28,26 +28,26 @@ import org.eclipselabs.mscript.language.internal.functionmodel.util.FunctionMode
  * @author Andreas Unger
  *
  */
-public class EquationBlockHelper {
+public class EquationCompoundHelper {
 
 	private static final EquationComparator EQUATION_COMPARATOR = new EquationComparator();
 
-	public Collection<List<EquationDescriptor>> getEquationBlocks(Function function) {
+	public Collection<List<EquationDescriptor>> getEquationCompounds(Function function) {
 		List<EquationDescriptor> backlog = new LinkedList<EquationDescriptor>(function.getEquationDescriptors());
-		Collection<List<EquationDescriptor>> equationBlocks = new ArrayList<List<EquationDescriptor>>();
+		Collection<List<EquationDescriptor>> equationCompounds = new ArrayList<List<EquationDescriptor>>();
 		while (!backlog.isEmpty()) {
 			List<EquationDescriptor> equationDescriptors = getNextEquationBlock(backlog);
-			equationBlocks.add(equationDescriptors);
+			equationCompounds.add(equationDescriptors);
 		}
-		return equationBlocks;
+		return equationCompounds;
 	}
 	
 	private List<EquationDescriptor> getNextEquationBlock(List<EquationDescriptor> backlog) {
-		List<EquationDescriptor> equationBlock = new LinkedList<EquationDescriptor>();
+		List<EquationDescriptor> equationCompound = new LinkedList<EquationDescriptor>();
 		for (Iterator<EquationDescriptor> backlogIt = backlog.iterator(); backlogIt.hasNext();) {
 			EquationDescriptor backlogEquationDescriptor = backlogIt.next();
 			int compareResult = 1;
-			for (ListIterator<EquationDescriptor> it = equationBlock.listIterator(); it.hasNext();) {
+			for (ListIterator<EquationDescriptor> it = equationCompound.listIterator(); it.hasNext();) {
 				EquationDescriptor next = it.next();
 				compareResult = EQUATION_COMPARATOR.compare(backlogEquationDescriptor, next);
 				if (compareResult < 0) {
@@ -59,11 +59,11 @@ public class EquationBlockHelper {
 				}
 			}
 			if (compareResult > 0) {
-				equationBlock.add(backlogEquationDescriptor);
+				equationCompound.add(backlogEquationDescriptor);
 				backlogIt.remove();
 			}
 		}
-		return equationBlock;
+		return equationCompound;
 	}
 	
 	private static class EquationComparator implements Comparator<EquationDescriptor> {
