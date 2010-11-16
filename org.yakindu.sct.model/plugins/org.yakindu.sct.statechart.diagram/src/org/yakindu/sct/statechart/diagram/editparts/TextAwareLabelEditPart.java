@@ -57,11 +57,10 @@ public abstract class TextAwareLabelEditPart extends CompartmentEditPart
 	 * Semantic listener that updates the Label in case of model changes.
 	 */
 	private final NotificationListener updateLabelListener = new NotificationListener() {
-
 		@Override
 		public void notifyChanged(Notification notification) {
 			if (notification.getFeature() == feature) {
-				getWrappingLabel().setText(getEditText());
+				updateLabelText();
 			}
 		}
 	};
@@ -70,7 +69,16 @@ public abstract class TextAwareLabelEditPart extends CompartmentEditPart
 		super(view);
 		this.feature = feature;
 		manager = createDirectEditManager();
-
+	}
+	
+	private void updateLabelText() {
+		getWrappingLabel().setText(getEditText());
+	}
+	
+	@Override
+	public void activate() {
+		super.activate();
+		updateLabelText();
 	}
 
 	protected DirectEditManager createDirectEditManager() {

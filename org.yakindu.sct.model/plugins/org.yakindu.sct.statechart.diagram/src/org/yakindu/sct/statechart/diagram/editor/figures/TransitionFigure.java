@@ -16,7 +16,6 @@ public class TransitionFigure extends PolylineConnectionEx {
 
 	public TransitionFigure(IMapMode mapMode) {
 		this.mapMode = mapMode;
-		setSmoothness(SMOOTH_NORMAL);
 		setLineWidth(mapMode.DPtoLP(1));
 		expression = new WrappingLabel();
 		this.add(expression);

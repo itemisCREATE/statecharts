@@ -12,9 +12,7 @@ package org.yakindu.sct.statechart.diagram.editor;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
-import org.eclipse.swt.widgets.Display;
 import org.yakindu.sct.statechart.diagram.DiagramActivator;
-import org.yakindu.sct.statechart.diagram.validation.ValidationAction;
 
 /**
  * 
@@ -37,12 +35,12 @@ public class StatechartDiagramEditor extends DiagramDocumentEditor {
 
 	@Override
 	public void doSave(IProgressMonitor progressMonitor) {
-		Display.getDefault().asyncExec(new Runnable() {
-			@Override
-			public void run() {
-				ValidationAction.validate(getDiagramEditPart(), getDiagram());
-			}
-		});
+//		Display.getDefault().asyncExec(new Runnable() {
+//			@Override
+//			public void run() {
+//				ValidationAction.validate(getDiagramEditPart(), getDiagram());
+//			}
+//		});
 		super.doSave(progressMonitor);
 	}
 }
