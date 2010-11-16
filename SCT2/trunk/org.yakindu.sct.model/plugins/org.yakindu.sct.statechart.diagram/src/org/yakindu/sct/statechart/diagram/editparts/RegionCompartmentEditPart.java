@@ -42,4 +42,8 @@ public class RegionCompartmentEditPart extends ShapeCompartmentEditPart {
 		ShapeCompartmentFigure figure = (ShapeCompartmentFigure) super.createFigure();
 		return figure;
 	}
+	@Override
+	public boolean isSelectable() {
+		return false;
+	}
 }
