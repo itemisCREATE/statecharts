@@ -15,13 +15,14 @@ import java.util.Map;
 
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.gmf.runtime.diagram.core.providers.AbstractViewProvider;
-import org.eclipse.gmf.runtime.diagram.ui.view.factories.DiagramViewFactory;
+import org.eclipse.gmf.runtime.diagram.ui.view.factories.optimal.CompartmentViewFactory;
 import org.eclipse.gmf.runtime.diagram.ui.view.factories.optimal.ShapeViewFactory;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.statechart.diagram.editor.StatechartDiagramEditor;
 import org.yakindu.sct.statechart.diagram.factories.RegionViewFactory;
 import org.yakindu.sct.statechart.diagram.factories.StateTextCompartmentViewFactory;
 import org.yakindu.sct.statechart.diagram.factories.StateViewFactory;
+import org.yakindu.sct.statechart.diagram.factories.StatechartDiagramViewFactory;
 import org.yakindu.sct.statechart.diagram.factories.TransitionViewFactory;
 
 /**
@@ -40,11 +41,11 @@ public class StatechartDiagramViewProvider extends AbstractViewProvider implemen
 	}
 
 	private void init() {
-		factories.put(StatechartDiagramEditor.ID, DiagramViewFactory.class);
+		factories.put(StatechartDiagramEditor.ID, StatechartDiagramViewFactory.class);
 		factories.put(REGION, RegionViewFactory.class);
 		factories.put(REGION_COMPARTMENT, ShapeViewFactory.class);
 		factories.put(STATE, StateViewFactory.class);
-		factories.put(STATE_FIGURE_COMPARTMENT, ShapeViewFactory.class);
+		factories.put(STATE_FIGURE_COMPARTMENT, CompartmentViewFactory.class);
 		factories.put(STATE_TEXT_COMPARTMENT, StateTextCompartmentViewFactory.class);
 		factories.put(STATE_TEXT_COMPARTMENT_EXPRESSION, ShapeViewFactory.class);
 		factories.put(TRANSITION, TransitionViewFactory.class);
