@@ -12,7 +12,6 @@ package org.yakindu.sct.statechart.diagram.editor.figures;
 
 import org.eclipse.draw2d.GridData;
 import org.eclipse.draw2d.GridLayout;
-import org.eclipse.draw2d.LineBorder;
 import org.eclipse.draw2d.RectangleFigure;
 import org.eclipse.draw2d.RoundedRectangle;
 import org.eclipse.draw2d.XYLayout;
@@ -40,7 +39,7 @@ public class RegionFigure extends RoundedRectangle {
 		layoutThis.verticalSpacing = 2;
 		this.setLayoutManager(layoutThis);
 
-		this.setCornerDimensions(new Dimension(mapMode.DPtoLP(8), mapMode.DPtoLP(8)));
+		this.setCornerDimensions(new Dimension(mapMode.DPtoLP(20), mapMode.DPtoLP(20)));
 		this.setLineWidth(mapMode.DPtoLP(1));
 		createContents();
 	}
@@ -68,7 +67,6 @@ public class RegionFigure extends RoundedRectangle {
 		/** Compartment container **/
 		compartmentPane = new RectangleFigure();
 		compartmentPane.setOutline(false);
-		compartmentPane.setBorder(new LineBorder(1));
 		GridLayout compartmentLayout = new GridLayout();
 		compartmentLayout.numColumns = 1;
 		compartmentLayout.makeColumnsEqualWidth = true;

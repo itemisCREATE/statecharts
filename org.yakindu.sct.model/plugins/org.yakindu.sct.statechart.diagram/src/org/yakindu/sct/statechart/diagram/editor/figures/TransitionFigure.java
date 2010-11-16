@@ -1,8 +1,9 @@
 package org.yakindu.sct.statechart.diagram.editor.figures;
 
 import org.eclipse.draw2d.IFigure;
-import org.eclipse.draw2d.PolylineDecoration;
+import org.eclipse.draw2d.PolygonDecoration;
 import org.eclipse.draw2d.RotatableDecoration;
+import org.eclipse.draw2d.geometry.PointList;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 import org.eclipse.gmf.runtime.draw2d.ui.mapmode.IMapMode;
@@ -10,26 +11,32 @@ import org.eclipse.gmf.runtime.draw2d.ui.mapmode.IMapMode;
 public class TransitionFigure extends PolylineConnectionEx {
 
 	private final IMapMode mapMode;
-	
-	private WrappingLabel expression;
+
+	private final WrappingLabel expression;
 
 	public TransitionFigure(IMapMode mapMode) {
 		this.mapMode = mapMode;
-		setTargetDecoration(createTargetDecoration());
 		setSmoothness(SMOOTH_NORMAL);
 		setLineWidth(mapMode.DPtoLP(1));
 		expression = new WrappingLabel();
-		expression.setText("Hallo");
 		this.add(expression);
+		setTargetDecoration(createTargetDecoration());
+	}
+
+	protected IMapMode getMapMode() {
+		return mapMode;
 	}
 
 	private RotatableDecoration createTargetDecoration() {
-		PolylineDecoration df = new PolylineDecoration();
-		df.setLineWidth(mapMode.DPtoLP(1));
-		int wMapped = mapMode.DPtoLP(1);
-		df.setScale(8 * wMapped, 2.0 * wMapped);
+		PolygonDecoration df = new PolygonDecoration();
+		df.setFill(true);
+		df.setLineWidth(getMapMode().DPtoLP(1));
+		PointList pl = new PointList();
+		pl.addPoint(getMapMode().DPtoLP(-2), getMapMode().DPtoLP(-1));
+		pl.addPoint(getMapMode().DPtoLP(-2), getMapMode().DPtoLP(1));
+		pl.addPoint(getMapMode().DPtoLP(0), getMapMode().DPtoLP(0));
+		df.setTemplate(pl);
 		return df;
-
 	}
 
 	public IFigure getExpressionLabel() {

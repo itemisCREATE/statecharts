@@ -13,7 +13,6 @@ package org.yakindu.sct.statechart.diagram.editor.figures;
 import org.eclipse.draw2d.GridData;
 import org.eclipse.draw2d.GridLayout;
 import org.eclipse.draw2d.IFigure;
-import org.eclipse.draw2d.LineBorder;
 import org.eclipse.draw2d.RectangleFigure;
 import org.eclipse.draw2d.RoundedRectangle;
 import org.eclipse.draw2d.geometry.Dimension;
@@ -41,9 +40,7 @@ public class StateFigure extends RoundedRectangle {
 		layoutThis.numColumns = 1;
 		layoutThis.makeColumnsEqualWidth = false;
 		this.setLayoutManager(layoutThis);
-		this.setCornerDimensions(new Dimension(10, 10));
-		this.setLineWidth(1);
-		this.setBorder(new LineBorder());
+		this.setCornerDimensions(new Dimension(mapMode.DPtoLP(20), mapMode.DPtoLP(20)));
 		this.setOutline(true);
 		createContents();
 	}
@@ -79,8 +76,6 @@ public class StateFigure extends RoundedRectangle {
 	private void createFigureCompartmentFigure() {
 		figureCompartmentPane = new RectangleFigure();
 		figureCompartmentPane.setOutline(false);
-		figureCompartmentPane.setBorder(new LineBorder());
-		figureCompartmentPane.setLineWidth(1);
 		GridData data = GridDataFactory.fillDefaults().align(GridData.FILL, GridData.FILL).grab(true, true).getData();
 		data.heightHint = mapMode.DPtoLP(15);
 		this.add(figureCompartmentPane, data);
@@ -89,8 +84,6 @@ public class StateFigure extends RoundedRectangle {
 	private void createTextCompartmentFigure() {
 		textCompartmentPane = new RectangleFigure();
 		textCompartmentPane.setOutline(false);
-		textCompartmentPane.setBorder(new LineBorder());
-		textCompartmentPane.setLineWidth(1);
 		GridData data = GridDataFactory.fillDefaults().align(GridData.FILL, GridData.FILL).grab(true, true).getData();
 		data.heightHint = mapMode.DPtoLP(15);
 		this.add(textCompartmentPane, data);
@@ -105,7 +98,7 @@ public class StateFigure extends RoundedRectangle {
 	}
 
 	public RectangleFigure getTextCompartmentPane() {
-		return figureCompartmentPane;
+		return textCompartmentPane;
 	}
 
 }
