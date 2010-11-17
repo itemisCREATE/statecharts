@@ -18,6 +18,8 @@ import org.eclipselabs.mscript.language.imperativemodel.CompoundStatement;
 import org.eclipselabs.mscript.language.imperativemodel.ComputationCompound;
 import org.eclipselabs.mscript.language.imperativemodel.ForeachStatement;
 import org.eclipselabs.mscript.language.imperativemodel.IfStatement;
+import org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction;
+import org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionContext;
 import org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage;
 import org.eclipselabs.mscript.language.imperativemodel.InputVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.LocalVariableDeclaration;
@@ -25,8 +27,6 @@ import org.eclipselabs.mscript.language.imperativemodel.OutputVariableDeclaratio
 import org.eclipselabs.mscript.language.imperativemodel.StateVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.StatefulVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.Statement;
-import org.eclipselabs.mscript.language.imperativemodel.Subroutine;
-import org.eclipselabs.mscript.language.imperativemodel.SubroutineContext;
 import org.eclipselabs.mscript.language.imperativemodel.TemplateVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.VariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.VariableReference;
@@ -88,12 +88,12 @@ public class ImperativeModelAdapterFactory extends AdapterFactoryImpl {
 	protected ImperativeModelSwitch<Adapter> modelSwitch =
 		new ImperativeModelSwitch<Adapter>() {
 			@Override
-			public Adapter caseSubroutine(Subroutine object) {
-				return createSubroutineAdapter();
+			public Adapter caseImperativeFunction(ImperativeFunction object) {
+				return createImperativeFunctionAdapter();
 			}
 			@Override
-			public Adapter caseSubroutineContext(SubroutineContext object) {
-				return createSubroutineContextAdapter();
+			public Adapter caseImperativeFunctionContext(ImperativeFunctionContext object) {
+				return createImperativeFunctionContextAdapter();
 			}
 			@Override
 			public Adapter caseCircularBufferDeclaration(CircularBufferDeclaration object) {
@@ -184,30 +184,30 @@ public class ImperativeModelAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.imperativemodel.Subroutine <em>Subroutine</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction <em>Imperative Function</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.language.imperativemodel.Subroutine
+	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction
 	 * @generated
 	 */
-	public Adapter createSubroutineAdapter() {
+	public Adapter createImperativeFunctionAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.imperativemodel.SubroutineContext <em>Subroutine Context</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionContext <em>Imperative Function Context</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.language.imperativemodel.SubroutineContext
+	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionContext
 	 * @generated
 	 */
-	public Adapter createSubroutineContextAdapter() {
+	public Adapter createImperativeFunctionContextAdapter() {
 		return null;
 	}
 

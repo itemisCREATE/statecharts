@@ -11,24 +11,24 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Subroutine</b></em>'.
+ * A representation of the model object '<em><b>Imperative Function</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.Subroutine#getContext <em>Context</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.Subroutine#getInputVariableDeclarations <em>Input Variable Declarations</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.Subroutine#getOutputVariableDeclarations <em>Output Variable Declarations</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.Subroutine#getComputationCompounds <em>Computation Compounds</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction#getContext <em>Context</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction#getInputVariableDeclarations <em>Input Variable Declarations</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction#getOutputVariableDeclarations <em>Output Variable Declarations</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction#getComputationCompounds <em>Computation Compounds</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage#getSubroutine()
+ * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage#getImperativeFunction()
  * @model
  * @generated
  */
-public interface Subroutine extends EObject {
+public interface ImperativeFunction extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Context</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
@@ -38,22 +38,22 @@ public interface Subroutine extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Context</em>' containment reference.
-	 * @see #setContext(SubroutineContext)
-	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage#getSubroutine_Context()
+	 * @see #setContext(ImperativeFunctionContext)
+	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage#getImperativeFunction_Context()
 	 * @model containment="true"
 	 * @generated
 	 */
-	SubroutineContext getContext();
+	ImperativeFunctionContext getContext();
 
 	/**
-	 * Sets the value of the '{@link org.eclipselabs.mscript.language.imperativemodel.Subroutine#getContext <em>Context</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction#getContext <em>Context</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Context</em>' containment reference.
 	 * @see #getContext()
 	 * @generated
 	 */
-	void setContext(SubroutineContext value);
+	void setContext(ImperativeFunctionContext value);
 
 	/**
 	 * Returns the value of the '<em><b>Input Variable Declarations</b></em>' containment reference list.
@@ -65,7 +65,7 @@ public interface Subroutine extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Input Variable Declarations</em>' containment reference list.
-	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage#getSubroutine_InputVariableDeclarations()
+	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage#getImperativeFunction_InputVariableDeclarations()
 	 * @model containment="true"
 	 * @generated
 	 */
@@ -81,7 +81,7 @@ public interface Subroutine extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Output Variable Declarations</em>' containment reference list.
-	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage#getSubroutine_OutputVariableDeclarations()
+	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage#getImperativeFunction_OutputVariableDeclarations()
 	 * @model containment="true"
 	 * @generated
 	 */
@@ -97,10 +97,10 @@ public interface Subroutine extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Computation Compounds</em>' containment reference list.
-	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage#getSubroutine_ComputationCompounds()
+	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage#getImperativeFunction_ComputationCompounds()
 	 * @model containment="true"
 	 * @generated
 	 */
 	EList<ComputationCompound> getComputationCompounds();
 
-} // Subroutine
+} // ImperativeFunction

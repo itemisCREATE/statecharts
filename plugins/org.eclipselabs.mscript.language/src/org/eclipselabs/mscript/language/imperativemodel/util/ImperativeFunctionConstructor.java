@@ -18,9 +18,9 @@ import org.eclipselabs.mscript.language.functionmodel.EquationDescriptor;
 import org.eclipselabs.mscript.language.functionmodel.Function;
 import org.eclipselabs.mscript.language.functionmodel.VariableStep;
 import org.eclipselabs.mscript.language.imperativemodel.Compound;
+import org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction;
+import org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionContext;
 import org.eclipselabs.mscript.language.imperativemodel.ImperativeModelFactory;
-import org.eclipselabs.mscript.language.imperativemodel.Subroutine;
-import org.eclipselabs.mscript.language.imperativemodel.SubroutineContext;
 import org.eclipselabs.mscript.language.imperativemodel.internal.util.EquationCompoundHelper;
 import org.eclipselabs.mscript.language.internal.functionmodel.util.FunctionModelUtil;
 
@@ -28,15 +28,15 @@ import org.eclipselabs.mscript.language.internal.functionmodel.util.FunctionMode
  * @author Andreas Unger
  *
  */
-public class ImperativeModelConstructor {
+public class ImperativeFunctionConstructor {
 	
-	public Subroutine constructSubroutine(Function function) {
-		Subroutine subroutine = ImperativeModelFactory.eINSTANCE.createSubroutine();
+	public ImperativeFunction construct(Function function) {
+		ImperativeFunction imperativeFunction = ImperativeModelFactory.eINSTANCE.createImperativeFunction();
 
 		Collection<List<EquationDescriptor>> equationCompounds = new EquationCompoundHelper().getEquationCompounds(function);
 		
 		if (function.getDefinition().isStateful()) {
-			constructSubroutineContext(subroutine, equationCompounds);
+			constructImperativeFunctionContext(imperativeFunction, equationCompounds);
 		}
 		
 		System.out.println("+++ Function: " + function.getDefinition().getName());
@@ -52,16 +52,16 @@ public class ImperativeModelConstructor {
 			}
 		}
 		
-		return subroutine;
+		return imperativeFunction;
 	}
 	
-	private void constructSubroutineContext(Subroutine subroutine, Collection<List<EquationDescriptor>> equationCompounds) {
-		SubroutineContext subroutineContext = ImperativeModelFactory.eINSTANCE.createSubroutineContext();
-		constructInitializationCompound(subroutineContext, equationCompounds);
-		subroutine.setContext(subroutineContext);
+	private void constructImperativeFunctionContext(ImperativeFunction imperativeFunction, Collection<List<EquationDescriptor>> equationCompounds) {
+		ImperativeFunctionContext imperativeFunctionContext = ImperativeModelFactory.eINSTANCE.createImperativeFunctionContext();
+		constructInitializationCompound(imperativeFunctionContext, equationCompounds);
+		imperativeFunction.setContext(imperativeFunctionContext);
 	}
 	
-	private void constructInitializationCompound(SubroutineContext subroutineContext, Collection<List<EquationDescriptor>> equationCompounds) {
+	private void constructInitializationCompound(ImperativeFunctionContext imperativeFunctionContext, Collection<List<EquationDescriptor>> equationCompounds) {
 		Compound compound = ImperativeModelFactory.eINSTANCE.createCompound();
 		for (List<EquationDescriptor> equationDescriptors : equationCompounds) {
 			for (EquationDescriptor equationDescriptor : equationDescriptors) {
@@ -71,7 +71,7 @@ public class ImperativeModelConstructor {
 				}
 			}
 		}
-		subroutineContext.setInitializationCompound(compound);
+		imperativeFunctionContext.setInitializationCompound(compound);
 	}
 	
 }

@@ -26,22 +26,22 @@ public interface ImperativeModelFactory extends EFactory {
 	ImperativeModelFactory eINSTANCE = org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Subroutine</em>'.
+	 * Returns a new object of class '<em>Imperative Function</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Subroutine</em>'.
+	 * @return a new object of class '<em>Imperative Function</em>'.
 	 * @generated
 	 */
-	Subroutine createSubroutine();
+	ImperativeFunction createImperativeFunction();
 
 	/**
-	 * Returns a new object of class '<em>Subroutine Context</em>'.
+	 * Returns a new object of class '<em>Imperative Function Context</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Subroutine Context</em>'.
+	 * @return a new object of class '<em>Imperative Function Context</em>'.
 	 * @generated
 	 */
-	SubroutineContext createSubroutineContext();
+	ImperativeFunctionContext createImperativeFunctionContext();
 
 	/**
 	 * Returns a new object of class '<em>Circular Buffer Declaration</em>'.

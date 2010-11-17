@@ -7,17 +7,17 @@
   <foreignModel>ImperativeModel.ecore</foreignModel>
   <genPackages prefix="ImperativeModel" basePackage="org.eclipselabs.mscript.language"
       disposableProviderFactory="true" ecorePackage="ImperativeModel.ecore#/">
-    <genClasses ecoreClass="ImperativeModel.ecore#//Subroutine">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//Subroutine/context"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//Subroutine/inputVariableDeclarations"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//Subroutine/outputVariableDeclarations"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//Subroutine/computationCompounds"/>
+    <genClasses ecoreClass="ImperativeModel.ecore#//ImperativeFunction">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//ImperativeFunction/context"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//ImperativeFunction/inputVariableDeclarations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//ImperativeFunction/outputVariableDeclarations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//ImperativeFunction/computationCompounds"/>
     </genClasses>
-    <genClasses ecoreClass="ImperativeModel.ecore#//SubroutineContext">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//SubroutineContext/templateVariableDeclarations"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//SubroutineContext/stateVariableDeclarations"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//SubroutineContext/circularBufferDeclarations"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//SubroutineContext/initializationCompound"/>
+    <genClasses ecoreClass="ImperativeModel.ecore#//ImperativeFunctionContext">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//ImperativeFunctionContext/templateVariableDeclarations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//ImperativeFunctionContext/stateVariableDeclarations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//ImperativeFunctionContext/circularBufferDeclarations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//ImperativeFunctionContext/initializationCompound"/>
     </genClasses>
     <genClasses ecoreClass="ImperativeModel.ecore#//CircularBufferDeclaration">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ImperativeModel.ecore#//CircularBufferDeclaration/size"/>

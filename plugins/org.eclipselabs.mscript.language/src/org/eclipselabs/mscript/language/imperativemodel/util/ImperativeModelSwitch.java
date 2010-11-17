@@ -18,6 +18,8 @@ import org.eclipselabs.mscript.language.imperativemodel.CompoundStatement;
 import org.eclipselabs.mscript.language.imperativemodel.ComputationCompound;
 import org.eclipselabs.mscript.language.imperativemodel.ForeachStatement;
 import org.eclipselabs.mscript.language.imperativemodel.IfStatement;
+import org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction;
+import org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionContext;
 import org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage;
 import org.eclipselabs.mscript.language.imperativemodel.InputVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.LocalVariableDeclaration;
@@ -25,8 +27,6 @@ import org.eclipselabs.mscript.language.imperativemodel.OutputVariableDeclaratio
 import org.eclipselabs.mscript.language.imperativemodel.StateVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.StatefulVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.Statement;
-import org.eclipselabs.mscript.language.imperativemodel.Subroutine;
-import org.eclipselabs.mscript.language.imperativemodel.SubroutineContext;
 import org.eclipselabs.mscript.language.imperativemodel.TemplateVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.VariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.VariableReference;
@@ -105,15 +105,15 @@ public class ImperativeModelSwitch<T> {
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case ImperativeModelPackage.SUBROUTINE: {
-				Subroutine subroutine = (Subroutine)theEObject;
-				T result = caseSubroutine(subroutine);
+			case ImperativeModelPackage.IMPERATIVE_FUNCTION: {
+				ImperativeFunction imperativeFunction = (ImperativeFunction)theEObject;
+				T result = caseImperativeFunction(imperativeFunction);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ImperativeModelPackage.SUBROUTINE_CONTEXT: {
-				SubroutineContext subroutineContext = (SubroutineContext)theEObject;
-				T result = caseSubroutineContext(subroutineContext);
+			case ImperativeModelPackage.IMPERATIVE_FUNCTION_CONTEXT: {
+				ImperativeFunctionContext imperativeFunctionContext = (ImperativeFunctionContext)theEObject;
+				T result = caseImperativeFunctionContext(imperativeFunctionContext);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -235,32 +235,32 @@ public class ImperativeModelSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Subroutine</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Imperative Function</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Subroutine</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Imperative Function</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseSubroutine(Subroutine object) {
+	public T caseImperativeFunction(ImperativeFunction object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Subroutine Context</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Imperative Function Context</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Subroutine Context</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Imperative Function Context</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseSubroutineContext(SubroutineContext object) {
+	public T caseImperativeFunctionContext(ImperativeFunctionContext object) {
 		return null;
 	}
 

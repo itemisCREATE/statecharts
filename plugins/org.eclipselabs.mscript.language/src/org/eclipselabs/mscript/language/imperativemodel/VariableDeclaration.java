@@ -64,7 +64,7 @@ public interface VariableDeclaration extends EObject {
 	 * @return the value of the '<em>Type</em>' reference.
 	 * @see #setType(DataType)
 	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage#getVariableDeclaration_Type()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	DataType getType();

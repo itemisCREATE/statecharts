@@ -18,14 +18,14 @@ import org.eclipselabs.mscript.language.imperativemodel.CompoundStatement;
 import org.eclipselabs.mscript.language.imperativemodel.ComputationCompound;
 import org.eclipselabs.mscript.language.imperativemodel.ForeachStatement;
 import org.eclipselabs.mscript.language.imperativemodel.IfStatement;
+import org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction;
+import org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionContext;
 import org.eclipselabs.mscript.language.imperativemodel.ImperativeModelFactory;
 import org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage;
 import org.eclipselabs.mscript.language.imperativemodel.InputVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.LocalVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.OutputVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.StateVariableDeclaration;
-import org.eclipselabs.mscript.language.imperativemodel.Subroutine;
-import org.eclipselabs.mscript.language.imperativemodel.SubroutineContext;
 import org.eclipselabs.mscript.language.imperativemodel.TemplateVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.VariableReference;
 
@@ -73,8 +73,8 @@ public class ImperativeModelFactoryImpl extends EFactoryImpl implements Imperati
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case ImperativeModelPackage.SUBROUTINE: return createSubroutine();
-			case ImperativeModelPackage.SUBROUTINE_CONTEXT: return createSubroutineContext();
+			case ImperativeModelPackage.IMPERATIVE_FUNCTION: return createImperativeFunction();
+			case ImperativeModelPackage.IMPERATIVE_FUNCTION_CONTEXT: return createImperativeFunctionContext();
 			case ImperativeModelPackage.CIRCULAR_BUFFER_DECLARATION: return createCircularBufferDeclaration();
 			case ImperativeModelPackage.COMPOUND: return createCompound();
 			case ImperativeModelPackage.COMPUTATION_COMPOUND: return createComputationCompound();
@@ -98,9 +98,9 @@ public class ImperativeModelFactoryImpl extends EFactoryImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Subroutine createSubroutine() {
-		SubroutineImpl subroutine = new SubroutineImpl();
-		return subroutine;
+	public ImperativeFunction createImperativeFunction() {
+		ImperativeFunctionImpl imperativeFunction = new ImperativeFunctionImpl();
+		return imperativeFunction;
 	}
 
 	/**
@@ -108,9 +108,9 @@ public class ImperativeModelFactoryImpl extends EFactoryImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SubroutineContext createSubroutineContext() {
-		SubroutineContextImpl subroutineContext = new SubroutineContextImpl();
-		return subroutineContext;
+	public ImperativeFunctionContext createImperativeFunctionContext() {
+		ImperativeFunctionContextImpl imperativeFunctionContext = new ImperativeFunctionContextImpl();
+		return imperativeFunctionContext;
 	}
 
 	/**

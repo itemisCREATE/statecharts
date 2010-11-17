@@ -61,14 +61,14 @@ public interface ImperativeModelPackage extends EPackage {
 	ImperativeModelPackage eINSTANCE = org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.SubroutineImpl <em>Subroutine</em>}' class.
+	 * The meta object id for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeFunctionImpl <em>Imperative Function</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipselabs.mscript.language.imperativemodel.impl.SubroutineImpl
-	 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getSubroutine()
+	 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeFunctionImpl
+	 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getImperativeFunction()
 	 * @generated
 	 */
-	int SUBROUTINE = 0;
+	int IMPERATIVE_FUNCTION = 0;
 
 	/**
 	 * The feature id for the '<em><b>Context</b></em>' containment reference.
@@ -77,7 +77,7 @@ public interface ImperativeModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SUBROUTINE__CONTEXT = 0;
+	int IMPERATIVE_FUNCTION__CONTEXT = 0;
 
 	/**
 	 * The feature id for the '<em><b>Input Variable Declarations</b></em>' containment reference list.
@@ -86,7 +86,7 @@ public interface ImperativeModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SUBROUTINE__INPUT_VARIABLE_DECLARATIONS = 1;
+	int IMPERATIVE_FUNCTION__INPUT_VARIABLE_DECLARATIONS = 1;
 
 	/**
 	 * The feature id for the '<em><b>Output Variable Declarations</b></em>' containment reference list.
@@ -95,7 +95,7 @@ public interface ImperativeModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SUBROUTINE__OUTPUT_VARIABLE_DECLARATIONS = 2;
+	int IMPERATIVE_FUNCTION__OUTPUT_VARIABLE_DECLARATIONS = 2;
 
 	/**
 	 * The feature id for the '<em><b>Computation Compounds</b></em>' containment reference list.
@@ -104,26 +104,26 @@ public interface ImperativeModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SUBROUTINE__COMPUTATION_COMPOUNDS = 3;
+	int IMPERATIVE_FUNCTION__COMPUTATION_COMPOUNDS = 3;
 
 	/**
-	 * The number of structural features of the '<em>Subroutine</em>' class.
+	 * The number of structural features of the '<em>Imperative Function</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SUBROUTINE_FEATURE_COUNT = 4;
+	int IMPERATIVE_FUNCTION_FEATURE_COUNT = 4;
 
 	/**
-	 * The meta object id for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.SubroutineContextImpl <em>Subroutine Context</em>}' class.
+	 * The meta object id for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeFunctionContextImpl <em>Imperative Function Context</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipselabs.mscript.language.imperativemodel.impl.SubroutineContextImpl
-	 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getSubroutineContext()
+	 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeFunctionContextImpl
+	 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getImperativeFunctionContext()
 	 * @generated
 	 */
-	int SUBROUTINE_CONTEXT = 1;
+	int IMPERATIVE_FUNCTION_CONTEXT = 1;
 
 	/**
 	 * The feature id for the '<em><b>Template Variable Declarations</b></em>' containment reference list.
@@ -132,7 +132,7 @@ public interface ImperativeModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SUBROUTINE_CONTEXT__TEMPLATE_VARIABLE_DECLARATIONS = 0;
+	int IMPERATIVE_FUNCTION_CONTEXT__TEMPLATE_VARIABLE_DECLARATIONS = 0;
 
 	/**
 	 * The feature id for the '<em><b>State Variable Declarations</b></em>' containment reference list.
@@ -141,7 +141,7 @@ public interface ImperativeModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SUBROUTINE_CONTEXT__STATE_VARIABLE_DECLARATIONS = 1;
+	int IMPERATIVE_FUNCTION_CONTEXT__STATE_VARIABLE_DECLARATIONS = 1;
 
 	/**
 	 * The feature id for the '<em><b>Circular Buffer Declarations</b></em>' containment reference list.
@@ -150,7 +150,7 @@ public interface ImperativeModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SUBROUTINE_CONTEXT__CIRCULAR_BUFFER_DECLARATIONS = 2;
+	int IMPERATIVE_FUNCTION_CONTEXT__CIRCULAR_BUFFER_DECLARATIONS = 2;
 
 	/**
 	 * The feature id for the '<em><b>Initialization Compound</b></em>' containment reference.
@@ -159,16 +159,16 @@ public interface ImperativeModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SUBROUTINE_CONTEXT__INITIALIZATION_COMPOUND = 3;
+	int IMPERATIVE_FUNCTION_CONTEXT__INITIALIZATION_COMPOUND = 3;
 
 	/**
-	 * The number of structural features of the '<em>Subroutine Context</em>' class.
+	 * The number of structural features of the '<em>Imperative Function Context</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SUBROUTINE_CONTEXT_FEATURE_COUNT = 4;
+	int IMPERATIVE_FUNCTION_CONTEXT_FEATURE_COUNT = 4;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.CircularBufferDeclarationImpl <em>Circular Buffer Declaration</em>}' class.
@@ -799,112 +799,112 @@ public interface ImperativeModelPackage extends EPackage {
 	int VARIABLE_REFERENCE_FEATURE_COUNT = AstPackage.EXPRESSION_FEATURE_COUNT + 3;
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.imperativemodel.Subroutine <em>Subroutine</em>}'.
+	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction <em>Imperative Function</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Subroutine</em>'.
-	 * @see org.eclipselabs.mscript.language.imperativemodel.Subroutine
+	 * @return the meta object for class '<em>Imperative Function</em>'.
+	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction
 	 * @generated
 	 */
-	EClass getSubroutine();
+	EClass getImperativeFunction();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.imperativemodel.Subroutine#getContext <em>Context</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction#getContext <em>Context</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Context</em>'.
-	 * @see org.eclipselabs.mscript.language.imperativemodel.Subroutine#getContext()
-	 * @see #getSubroutine()
+	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction#getContext()
+	 * @see #getImperativeFunction()
 	 * @generated
 	 */
-	EReference getSubroutine_Context();
+	EReference getImperativeFunction_Context();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.imperativemodel.Subroutine#getInputVariableDeclarations <em>Input Variable Declarations</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction#getInputVariableDeclarations <em>Input Variable Declarations</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Input Variable Declarations</em>'.
-	 * @see org.eclipselabs.mscript.language.imperativemodel.Subroutine#getInputVariableDeclarations()
-	 * @see #getSubroutine()
+	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction#getInputVariableDeclarations()
+	 * @see #getImperativeFunction()
 	 * @generated
 	 */
-	EReference getSubroutine_InputVariableDeclarations();
+	EReference getImperativeFunction_InputVariableDeclarations();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.imperativemodel.Subroutine#getOutputVariableDeclarations <em>Output Variable Declarations</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction#getOutputVariableDeclarations <em>Output Variable Declarations</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Output Variable Declarations</em>'.
-	 * @see org.eclipselabs.mscript.language.imperativemodel.Subroutine#getOutputVariableDeclarations()
-	 * @see #getSubroutine()
+	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction#getOutputVariableDeclarations()
+	 * @see #getImperativeFunction()
 	 * @generated
 	 */
-	EReference getSubroutine_OutputVariableDeclarations();
+	EReference getImperativeFunction_OutputVariableDeclarations();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.imperativemodel.Subroutine#getComputationCompounds <em>Computation Compounds</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction#getComputationCompounds <em>Computation Compounds</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Computation Compounds</em>'.
-	 * @see org.eclipselabs.mscript.language.imperativemodel.Subroutine#getComputationCompounds()
-	 * @see #getSubroutine()
+	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction#getComputationCompounds()
+	 * @see #getImperativeFunction()
 	 * @generated
 	 */
-	EReference getSubroutine_ComputationCompounds();
+	EReference getImperativeFunction_ComputationCompounds();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.imperativemodel.SubroutineContext <em>Subroutine Context</em>}'.
+	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionContext <em>Imperative Function Context</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Subroutine Context</em>'.
-	 * @see org.eclipselabs.mscript.language.imperativemodel.SubroutineContext
+	 * @return the meta object for class '<em>Imperative Function Context</em>'.
+	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionContext
 	 * @generated
 	 */
-	EClass getSubroutineContext();
+	EClass getImperativeFunctionContext();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.imperativemodel.SubroutineContext#getTemplateVariableDeclarations <em>Template Variable Declarations</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionContext#getTemplateVariableDeclarations <em>Template Variable Declarations</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Template Variable Declarations</em>'.
-	 * @see org.eclipselabs.mscript.language.imperativemodel.SubroutineContext#getTemplateVariableDeclarations()
-	 * @see #getSubroutineContext()
+	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionContext#getTemplateVariableDeclarations()
+	 * @see #getImperativeFunctionContext()
 	 * @generated
 	 */
-	EReference getSubroutineContext_TemplateVariableDeclarations();
+	EReference getImperativeFunctionContext_TemplateVariableDeclarations();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.imperativemodel.SubroutineContext#getStateVariableDeclarations <em>State Variable Declarations</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionContext#getStateVariableDeclarations <em>State Variable Declarations</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>State Variable Declarations</em>'.
-	 * @see org.eclipselabs.mscript.language.imperativemodel.SubroutineContext#getStateVariableDeclarations()
-	 * @see #getSubroutineContext()
+	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionContext#getStateVariableDeclarations()
+	 * @see #getImperativeFunctionContext()
 	 * @generated
 	 */
-	EReference getSubroutineContext_StateVariableDeclarations();
+	EReference getImperativeFunctionContext_StateVariableDeclarations();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.imperativemodel.SubroutineContext#getCircularBufferDeclarations <em>Circular Buffer Declarations</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionContext#getCircularBufferDeclarations <em>Circular Buffer Declarations</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Circular Buffer Declarations</em>'.
-	 * @see org.eclipselabs.mscript.language.imperativemodel.SubroutineContext#getCircularBufferDeclarations()
-	 * @see #getSubroutineContext()
+	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionContext#getCircularBufferDeclarations()
+	 * @see #getImperativeFunctionContext()
 	 * @generated
 	 */
-	EReference getSubroutineContext_CircularBufferDeclarations();
+	EReference getImperativeFunctionContext_CircularBufferDeclarations();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.imperativemodel.SubroutineContext#getInitializationCompound <em>Initialization Compound</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionContext#getInitializationCompound <em>Initialization Compound</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Initialization Compound</em>'.
-	 * @see org.eclipselabs.mscript.language.imperativemodel.SubroutineContext#getInitializationCompound()
-	 * @see #getSubroutineContext()
+	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionContext#getInitializationCompound()
+	 * @see #getImperativeFunctionContext()
 	 * @generated
 	 */
-	EReference getSubroutineContext_InitializationCompound();
+	EReference getImperativeFunctionContext_InitializationCompound();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.imperativemodel.CircularBufferDeclaration <em>Circular Buffer Declaration</em>}'.
@@ -1298,14 +1298,14 @@ public interface ImperativeModelPackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.SubroutineImpl <em>Subroutine</em>}' class.
+		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeFunctionImpl <em>Imperative Function</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipselabs.mscript.language.imperativemodel.impl.SubroutineImpl
-		 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getSubroutine()
+		 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeFunctionImpl
+		 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getImperativeFunction()
 		 * @generated
 		 */
-		EClass SUBROUTINE = eINSTANCE.getSubroutine();
+		EClass IMPERATIVE_FUNCTION = eINSTANCE.getImperativeFunction();
 
 		/**
 		 * The meta object literal for the '<em><b>Context</b></em>' containment reference feature.
@@ -1313,7 +1313,7 @@ public interface ImperativeModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SUBROUTINE__CONTEXT = eINSTANCE.getSubroutine_Context();
+		EReference IMPERATIVE_FUNCTION__CONTEXT = eINSTANCE.getImperativeFunction_Context();
 
 		/**
 		 * The meta object literal for the '<em><b>Input Variable Declarations</b></em>' containment reference list feature.
@@ -1321,7 +1321,7 @@ public interface ImperativeModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SUBROUTINE__INPUT_VARIABLE_DECLARATIONS = eINSTANCE.getSubroutine_InputVariableDeclarations();
+		EReference IMPERATIVE_FUNCTION__INPUT_VARIABLE_DECLARATIONS = eINSTANCE.getImperativeFunction_InputVariableDeclarations();
 
 		/**
 		 * The meta object literal for the '<em><b>Output Variable Declarations</b></em>' containment reference list feature.
@@ -1329,7 +1329,7 @@ public interface ImperativeModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SUBROUTINE__OUTPUT_VARIABLE_DECLARATIONS = eINSTANCE.getSubroutine_OutputVariableDeclarations();
+		EReference IMPERATIVE_FUNCTION__OUTPUT_VARIABLE_DECLARATIONS = eINSTANCE.getImperativeFunction_OutputVariableDeclarations();
 
 		/**
 		 * The meta object literal for the '<em><b>Computation Compounds</b></em>' containment reference list feature.
@@ -1337,17 +1337,17 @@ public interface ImperativeModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SUBROUTINE__COMPUTATION_COMPOUNDS = eINSTANCE.getSubroutine_ComputationCompounds();
+		EReference IMPERATIVE_FUNCTION__COMPUTATION_COMPOUNDS = eINSTANCE.getImperativeFunction_ComputationCompounds();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.SubroutineContextImpl <em>Subroutine Context</em>}' class.
+		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeFunctionContextImpl <em>Imperative Function Context</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipselabs.mscript.language.imperativemodel.impl.SubroutineContextImpl
-		 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getSubroutineContext()
+		 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeFunctionContextImpl
+		 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getImperativeFunctionContext()
 		 * @generated
 		 */
-		EClass SUBROUTINE_CONTEXT = eINSTANCE.getSubroutineContext();
+		EClass IMPERATIVE_FUNCTION_CONTEXT = eINSTANCE.getImperativeFunctionContext();
 
 		/**
 		 * The meta object literal for the '<em><b>Template Variable Declarations</b></em>' containment reference list feature.
@@ -1355,7 +1355,7 @@ public interface ImperativeModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SUBROUTINE_CONTEXT__TEMPLATE_VARIABLE_DECLARATIONS = eINSTANCE.getSubroutineContext_TemplateVariableDeclarations();
+		EReference IMPERATIVE_FUNCTION_CONTEXT__TEMPLATE_VARIABLE_DECLARATIONS = eINSTANCE.getImperativeFunctionContext_TemplateVariableDeclarations();
 
 		/**
 		 * The meta object literal for the '<em><b>State Variable Declarations</b></em>' containment reference list feature.
@@ -1363,7 +1363,7 @@ public interface ImperativeModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SUBROUTINE_CONTEXT__STATE_VARIABLE_DECLARATIONS = eINSTANCE.getSubroutineContext_StateVariableDeclarations();
+		EReference IMPERATIVE_FUNCTION_CONTEXT__STATE_VARIABLE_DECLARATIONS = eINSTANCE.getImperativeFunctionContext_StateVariableDeclarations();
 
 		/**
 		 * The meta object literal for the '<em><b>Circular Buffer Declarations</b></em>' containment reference list feature.
@@ -1371,7 +1371,7 @@ public interface ImperativeModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SUBROUTINE_CONTEXT__CIRCULAR_BUFFER_DECLARATIONS = eINSTANCE.getSubroutineContext_CircularBufferDeclarations();
+		EReference IMPERATIVE_FUNCTION_CONTEXT__CIRCULAR_BUFFER_DECLARATIONS = eINSTANCE.getImperativeFunctionContext_CircularBufferDeclarations();
 
 		/**
 		 * The meta object literal for the '<em><b>Initialization Compound</b></em>' containment reference feature.
@@ -1379,7 +1379,7 @@ public interface ImperativeModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SUBROUTINE_CONTEXT__INITIALIZATION_COMPOUND = eINSTANCE.getSubroutineContext_InitializationCompound();
+		EReference IMPERATIVE_FUNCTION_CONTEXT__INITIALIZATION_COMPOUND = eINSTANCE.getImperativeFunctionContext_InitializationCompound();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.CircularBufferDeclarationImpl <em>Circular Buffer Declaration</em>}' class.

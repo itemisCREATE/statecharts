@@ -11,7 +11,7 @@ import org.eclipselabs.mscript.language.ast.FunctionDefinition;
 import org.eclipselabs.mscript.language.ast.UnitExpressionNumerator;
 import org.eclipselabs.mscript.language.functionmodel.Function;
 import org.eclipselabs.mscript.language.functionmodel.util.FunctionConstructor;
-import org.eclipselabs.mscript.language.imperativemodel.util.ImperativeModelConstructor;
+import org.eclipselabs.mscript.language.imperativemodel.util.ImperativeFunctionConstructor;
 
 public class MscriptJavaValidator extends AbstractMscriptJavaValidator {
 
@@ -49,7 +49,7 @@ public class MscriptJavaValidator extends AbstractMscriptJavaValidator {
 	@Check
 	public void checkFunctionDefinition(FunctionDefinition functionDefinition) {
 		Function function = new FunctionConstructor().construct(functionDefinition, getChain());
-		new ImperativeModelConstructor().constructSubroutine(function);
+		new ImperativeFunctionConstructor().construct(function);
 	}
 	
 }
