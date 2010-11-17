@@ -12,22 +12,20 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.imperativemodel.Assignment;
-import org.eclipselabs.mscript.language.imperativemodel.CircularBufferDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.Compound;
 import org.eclipselabs.mscript.language.imperativemodel.CompoundStatement;
 import org.eclipselabs.mscript.language.imperativemodel.ComputationCompound;
+import org.eclipselabs.mscript.language.imperativemodel.ConstantDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.ForeachStatement;
 import org.eclipselabs.mscript.language.imperativemodel.IfStatement;
 import org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction;
-import org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionContext;
 import org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage;
 import org.eclipselabs.mscript.language.imperativemodel.InputVariableDeclaration;
+import org.eclipselabs.mscript.language.imperativemodel.InstanceVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.LocalVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.OutputVariableDeclaration;
-import org.eclipselabs.mscript.language.imperativemodel.StateVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.StatefulVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.Statement;
-import org.eclipselabs.mscript.language.imperativemodel.TemplateVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.VariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.VariableReference;
 
@@ -92,14 +90,6 @@ public class ImperativeModelAdapterFactory extends AdapterFactoryImpl {
 				return createImperativeFunctionAdapter();
 			}
 			@Override
-			public Adapter caseImperativeFunctionContext(ImperativeFunctionContext object) {
-				return createImperativeFunctionContextAdapter();
-			}
-			@Override
-			public Adapter caseCircularBufferDeclaration(CircularBufferDeclaration object) {
-				return createCircularBufferDeclarationAdapter();
-			}
-			@Override
 			public Adapter caseCompound(Compound object) {
 				return createCompoundAdapter();
 			}
@@ -116,6 +106,10 @@ public class ImperativeModelAdapterFactory extends AdapterFactoryImpl {
 				return createStatefulVariableDeclarationAdapter();
 			}
 			@Override
+			public Adapter caseConstantDeclaration(ConstantDeclaration object) {
+				return createConstantDeclarationAdapter();
+			}
+			@Override
 			public Adapter caseInputVariableDeclaration(InputVariableDeclaration object) {
 				return createInputVariableDeclarationAdapter();
 			}
@@ -124,12 +118,8 @@ public class ImperativeModelAdapterFactory extends AdapterFactoryImpl {
 				return createOutputVariableDeclarationAdapter();
 			}
 			@Override
-			public Adapter caseTemplateVariableDeclaration(TemplateVariableDeclaration object) {
-				return createTemplateVariableDeclarationAdapter();
-			}
-			@Override
-			public Adapter caseStateVariableDeclaration(StateVariableDeclaration object) {
-				return createStateVariableDeclarationAdapter();
+			public Adapter caseInstanceVariableDeclaration(InstanceVariableDeclaration object) {
+				return createInstanceVariableDeclarationAdapter();
 			}
 			@Override
 			public Adapter caseLocalVariableDeclaration(LocalVariableDeclaration object) {
@@ -198,34 +188,6 @@ public class ImperativeModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionContext <em>Imperative Function Context</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionContext
-	 * @generated
-	 */
-	public Adapter createImperativeFunctionContextAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.imperativemodel.CircularBufferDeclaration <em>Circular Buffer Declaration</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.language.imperativemodel.CircularBufferDeclaration
-	 * @generated
-	 */
-	public Adapter createCircularBufferDeclarationAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.imperativemodel.Statement <em>Statement</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -282,6 +244,20 @@ public class ImperativeModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.imperativemodel.ConstantDeclaration <em>Constant Declaration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipselabs.mscript.language.imperativemodel.ConstantDeclaration
+	 * @generated
+	 */
+	public Adapter createConstantDeclarationAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.imperativemodel.InputVariableDeclaration <em>Input Variable Declaration</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -310,30 +286,16 @@ public class ImperativeModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.imperativemodel.TemplateVariableDeclaration <em>Template Variable Declaration</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.imperativemodel.InstanceVariableDeclaration <em>Instance Variable Declaration</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.language.imperativemodel.TemplateVariableDeclaration
+	 * @see org.eclipselabs.mscript.language.imperativemodel.InstanceVariableDeclaration
 	 * @generated
 	 */
-	public Adapter createTemplateVariableDeclarationAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.imperativemodel.StateVariableDeclaration <em>State Variable Declaration</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.language.imperativemodel.StateVariableDeclaration
-	 * @generated
-	 */
-	public Adapter createStateVariableDeclarationAdapter() {
+	public Adapter createInstanceVariableDeclarationAdapter() {
 		return null;
 	}
 

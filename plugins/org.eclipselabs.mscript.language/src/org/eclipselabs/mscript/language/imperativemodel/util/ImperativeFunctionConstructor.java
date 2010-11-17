@@ -19,7 +19,6 @@ import org.eclipselabs.mscript.language.functionmodel.Function;
 import org.eclipselabs.mscript.language.functionmodel.VariableStep;
 import org.eclipselabs.mscript.language.imperativemodel.Compound;
 import org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction;
-import org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionContext;
 import org.eclipselabs.mscript.language.imperativemodel.ImperativeModelFactory;
 import org.eclipselabs.mscript.language.imperativemodel.internal.util.EquationCompoundHelper;
 import org.eclipselabs.mscript.language.internal.functionmodel.util.FunctionModelUtil;
@@ -36,7 +35,7 @@ public class ImperativeFunctionConstructor {
 		Collection<List<EquationDescriptor>> equationCompounds = new EquationCompoundHelper().getEquationCompounds(function);
 		
 		if (function.getDefinition().isStateful()) {
-			constructImperativeFunctionContext(imperativeFunction, equationCompounds);
+			constructInitializationCompound(imperativeFunction, equationCompounds);
 		}
 		
 		System.out.println("+++ Function: " + function.getDefinition().getName());
@@ -55,13 +54,7 @@ public class ImperativeFunctionConstructor {
 		return imperativeFunction;
 	}
 	
-	private void constructImperativeFunctionContext(ImperativeFunction imperativeFunction, Collection<List<EquationDescriptor>> equationCompounds) {
-		ImperativeFunctionContext imperativeFunctionContext = ImperativeModelFactory.eINSTANCE.createImperativeFunctionContext();
-		constructInitializationCompound(imperativeFunctionContext, equationCompounds);
-		imperativeFunction.setContext(imperativeFunctionContext);
-	}
-	
-	private void constructInitializationCompound(ImperativeFunctionContext imperativeFunctionContext, Collection<List<EquationDescriptor>> equationCompounds) {
+	private void constructInitializationCompound(ImperativeFunction imperativeFunction, Collection<List<EquationDescriptor>> equationCompounds) {
 		Compound compound = ImperativeModelFactory.eINSTANCE.createCompound();
 		for (List<EquationDescriptor> equationDescriptors : equationCompounds) {
 			for (EquationDescriptor equationDescriptor : equationDescriptors) {
@@ -71,7 +64,7 @@ public class ImperativeFunctionConstructor {
 				}
 			}
 		}
-		imperativeFunctionContext.setInitializationCompound(compound);
+		imperativeFunction.setInitializationCompound(compound);
 	}
 	
 }

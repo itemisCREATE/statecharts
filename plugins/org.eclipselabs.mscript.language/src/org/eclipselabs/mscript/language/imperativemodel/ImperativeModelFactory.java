@@ -35,24 +35,6 @@ public interface ImperativeModelFactory extends EFactory {
 	ImperativeFunction createImperativeFunction();
 
 	/**
-	 * Returns a new object of class '<em>Imperative Function Context</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Imperative Function Context</em>'.
-	 * @generated
-	 */
-	ImperativeFunctionContext createImperativeFunctionContext();
-
-	/**
-	 * Returns a new object of class '<em>Circular Buffer Declaration</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Circular Buffer Declaration</em>'.
-	 * @generated
-	 */
-	CircularBufferDeclaration createCircularBufferDeclaration();
-
-	/**
 	 * Returns a new object of class '<em>Compound</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -69,6 +51,15 @@ public interface ImperativeModelFactory extends EFactory {
 	 * @generated
 	 */
 	ComputationCompound createComputationCompound();
+
+	/**
+	 * Returns a new object of class '<em>Constant Declaration</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Constant Declaration</em>'.
+	 * @generated
+	 */
+	ConstantDeclaration createConstantDeclaration();
 
 	/**
 	 * Returns a new object of class '<em>Input Variable Declaration</em>'.
@@ -89,22 +80,13 @@ public interface ImperativeModelFactory extends EFactory {
 	OutputVariableDeclaration createOutputVariableDeclaration();
 
 	/**
-	 * Returns a new object of class '<em>Template Variable Declaration</em>'.
+	 * Returns a new object of class '<em>Instance Variable Declaration</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Template Variable Declaration</em>'.
+	 * @return a new object of class '<em>Instance Variable Declaration</em>'.
 	 * @generated
 	 */
-	TemplateVariableDeclaration createTemplateVariableDeclaration();
-
-	/**
-	 * Returns a new object of class '<em>State Variable Declaration</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>State Variable Declaration</em>'.
-	 * @generated
-	 */
-	StateVariableDeclaration createStateVariableDeclaration();
+	InstanceVariableDeclaration createInstanceVariableDeclaration();
 
 	/**
 	 * Returns a new object of class '<em>Local Variable Declaration</em>'.

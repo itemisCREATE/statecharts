@@ -8,19 +8,12 @@
   <genPackages prefix="ImperativeModel" basePackage="org.eclipselabs.mscript.language"
       disposableProviderFactory="true" ecorePackage="ImperativeModel.ecore#/">
     <genClasses ecoreClass="ImperativeModel.ecore#//ImperativeFunction">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//ImperativeFunction/context"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//ImperativeFunction/constantDeclarations"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//ImperativeFunction/inputVariableDeclarations"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//ImperativeFunction/outputVariableDeclarations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//ImperativeFunction/instanceVariableDeclarations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//ImperativeFunction/initializationCompound"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//ImperativeFunction/computationCompounds"/>
-    </genClasses>
-    <genClasses ecoreClass="ImperativeModel.ecore#//ImperativeFunctionContext">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//ImperativeFunctionContext/templateVariableDeclarations"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//ImperativeFunctionContext/stateVariableDeclarations"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//ImperativeFunctionContext/circularBufferDeclarations"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//ImperativeFunctionContext/initializationCompound"/>
-    </genClasses>
-    <genClasses ecoreClass="ImperativeModel.ecore#//CircularBufferDeclaration">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ImperativeModel.ecore#//CircularBufferDeclaration/size"/>
     </genClasses>
     <genClasses ecoreClass="ImperativeModel.ecore#//Compound">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//Compound/statements"/>
@@ -34,12 +27,12 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//VariableDeclaration/type"/>
     </genClasses>
     <genClasses image="false" ecoreClass="ImperativeModel.ecore#//StatefulVariableDeclaration">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//StatefulVariableDeclaration/circularBufferDeclaration"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ImperativeModel.ecore#//StatefulVariableDeclaration/circularBufferSize"/>
     </genClasses>
+    <genClasses ecoreClass="ImperativeModel.ecore#//ConstantDeclaration"/>
     <genClasses ecoreClass="ImperativeModel.ecore#//InputVariableDeclaration"/>
     <genClasses ecoreClass="ImperativeModel.ecore#//OutputVariableDeclaration"/>
-    <genClasses ecoreClass="ImperativeModel.ecore#//TemplateVariableDeclaration"/>
-    <genClasses ecoreClass="ImperativeModel.ecore#//StateVariableDeclaration"/>
+    <genClasses ecoreClass="ImperativeModel.ecore#//InstanceVariableDeclaration"/>
     <genClasses ecoreClass="ImperativeModel.ecore#//LocalVariableDeclaration">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//LocalVariableDeclaration/initializer"/>
     </genClasses>

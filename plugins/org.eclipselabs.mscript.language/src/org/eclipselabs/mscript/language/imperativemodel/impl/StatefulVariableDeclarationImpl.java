@@ -8,9 +8,7 @@ package org.eclipselabs.mscript.language.imperativemodel.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipselabs.mscript.language.imperativemodel.CircularBufferDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage;
 import org.eclipselabs.mscript.language.imperativemodel.StatefulVariableDeclaration;
 
@@ -21,7 +19,7 @@ import org.eclipselabs.mscript.language.imperativemodel.StatefulVariableDeclarat
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.impl.StatefulVariableDeclarationImpl#getCircularBufferDeclaration <em>Circular Buffer Declaration</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.impl.StatefulVariableDeclarationImpl#getCircularBufferSize <em>Circular Buffer Size</em>}</li>
  * </ul>
  * </p>
  *
@@ -29,15 +27,23 @@ import org.eclipselabs.mscript.language.imperativemodel.StatefulVariableDeclarat
  */
 public abstract class StatefulVariableDeclarationImpl extends VariableDeclarationImpl implements StatefulVariableDeclaration {
 	/**
-	 * The cached value of the '{@link #getCircularBufferDeclaration() <em>Circular Buffer Declaration</em>}' reference.
+	 * The default value of the '{@link #getCircularBufferSize() <em>Circular Buffer Size</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getCircularBufferDeclaration()
+	 * @see #getCircularBufferSize()
 	 * @generated
 	 * @ordered
 	 */
-	protected CircularBufferDeclaration circularBufferDeclaration;
-
+	protected static final int CIRCULAR_BUFFER_SIZE_EDEFAULT = 0;
+	/**
+	 * The cached value of the '{@link #getCircularBufferSize() <em>Circular Buffer Size</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCircularBufferSize()
+	 * @generated
+	 * @ordered
+	 */
+	protected int circularBufferSize = CIRCULAR_BUFFER_SIZE_EDEFAULT;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -62,16 +68,8 @@ public abstract class StatefulVariableDeclarationImpl extends VariableDeclaratio
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CircularBufferDeclaration getCircularBufferDeclaration() {
-		if (circularBufferDeclaration != null && circularBufferDeclaration.eIsProxy()) {
-			InternalEObject oldCircularBufferDeclaration = (InternalEObject)circularBufferDeclaration;
-			circularBufferDeclaration = (CircularBufferDeclaration)eResolveProxy(oldCircularBufferDeclaration);
-			if (circularBufferDeclaration != oldCircularBufferDeclaration) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ImperativeModelPackage.STATEFUL_VARIABLE_DECLARATION__CIRCULAR_BUFFER_DECLARATION, oldCircularBufferDeclaration, circularBufferDeclaration));
-			}
-		}
-		return circularBufferDeclaration;
+	public int getCircularBufferSize() {
+		return circularBufferSize;
 	}
 
 	/**
@@ -79,20 +77,11 @@ public abstract class StatefulVariableDeclarationImpl extends VariableDeclaratio
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CircularBufferDeclaration basicGetCircularBufferDeclaration() {
-		return circularBufferDeclaration;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setCircularBufferDeclaration(CircularBufferDeclaration newCircularBufferDeclaration) {
-		CircularBufferDeclaration oldCircularBufferDeclaration = circularBufferDeclaration;
-		circularBufferDeclaration = newCircularBufferDeclaration;
+	public void setCircularBufferSize(int newCircularBufferSize) {
+		int oldCircularBufferSize = circularBufferSize;
+		circularBufferSize = newCircularBufferSize;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ImperativeModelPackage.STATEFUL_VARIABLE_DECLARATION__CIRCULAR_BUFFER_DECLARATION, oldCircularBufferDeclaration, circularBufferDeclaration));
+			eNotify(new ENotificationImpl(this, Notification.SET, ImperativeModelPackage.STATEFUL_VARIABLE_DECLARATION__CIRCULAR_BUFFER_SIZE, oldCircularBufferSize, circularBufferSize));
 	}
 
 	/**
@@ -103,9 +92,8 @@ public abstract class StatefulVariableDeclarationImpl extends VariableDeclaratio
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ImperativeModelPackage.STATEFUL_VARIABLE_DECLARATION__CIRCULAR_BUFFER_DECLARATION:
-				if (resolve) return getCircularBufferDeclaration();
-				return basicGetCircularBufferDeclaration();
+			case ImperativeModelPackage.STATEFUL_VARIABLE_DECLARATION__CIRCULAR_BUFFER_SIZE:
+				return getCircularBufferSize();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -118,8 +106,8 @@ public abstract class StatefulVariableDeclarationImpl extends VariableDeclaratio
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ImperativeModelPackage.STATEFUL_VARIABLE_DECLARATION__CIRCULAR_BUFFER_DECLARATION:
-				setCircularBufferDeclaration((CircularBufferDeclaration)newValue);
+			case ImperativeModelPackage.STATEFUL_VARIABLE_DECLARATION__CIRCULAR_BUFFER_SIZE:
+				setCircularBufferSize((Integer)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -133,8 +121,8 @@ public abstract class StatefulVariableDeclarationImpl extends VariableDeclaratio
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ImperativeModelPackage.STATEFUL_VARIABLE_DECLARATION__CIRCULAR_BUFFER_DECLARATION:
-				setCircularBufferDeclaration((CircularBufferDeclaration)null);
+			case ImperativeModelPackage.STATEFUL_VARIABLE_DECLARATION__CIRCULAR_BUFFER_SIZE:
+				setCircularBufferSize(CIRCULAR_BUFFER_SIZE_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -148,10 +136,26 @@ public abstract class StatefulVariableDeclarationImpl extends VariableDeclaratio
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ImperativeModelPackage.STATEFUL_VARIABLE_DECLARATION__CIRCULAR_BUFFER_DECLARATION:
-				return circularBufferDeclaration != null;
+			case ImperativeModelPackage.STATEFUL_VARIABLE_DECLARATION__CIRCULAR_BUFFER_SIZE:
+				return circularBufferSize != CIRCULAR_BUFFER_SIZE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (circularBufferSize: ");
+		result.append(circularBufferSize);
+		result.append(')');
+		return result.toString();
 	}
 
 } //StatefulVariableDeclarationImpl

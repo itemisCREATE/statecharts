@@ -13,23 +13,21 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.imperativemodel.Assignment;
-import org.eclipselabs.mscript.language.imperativemodel.CircularBufferDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.Compound;
 import org.eclipselabs.mscript.language.imperativemodel.CompoundStatement;
 import org.eclipselabs.mscript.language.imperativemodel.ComputationCompound;
+import org.eclipselabs.mscript.language.imperativemodel.ConstantDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.ForeachStatement;
 import org.eclipselabs.mscript.language.imperativemodel.IfStatement;
 import org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction;
-import org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionContext;
 import org.eclipselabs.mscript.language.imperativemodel.ImperativeModelFactory;
 import org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage;
 import org.eclipselabs.mscript.language.imperativemodel.InputVariableDeclaration;
+import org.eclipselabs.mscript.language.imperativemodel.InstanceVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.LocalVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.OutputVariableDeclaration;
-import org.eclipselabs.mscript.language.imperativemodel.StateVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.StatefulVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.Statement;
-import org.eclipselabs.mscript.language.imperativemodel.TemplateVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.VariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.VariableReference;
 import org.eclipselabs.mscript.typesystem.TypeSystemPackage;
@@ -47,20 +45,6 @@ public class ImperativeModelPackageImpl extends EPackageImpl implements Imperati
 	 * @generated
 	 */
 	private EClass imperativeFunctionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass imperativeFunctionContextEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass circularBufferDeclarationEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -95,6 +79,13 @@ public class ImperativeModelPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass constantDeclarationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass inputVariableDeclarationEClass = null;
 
 	/**
@@ -109,14 +100,7 @@ public class ImperativeModelPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass templateVariableDeclarationEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass stateVariableDeclarationEClass = null;
+	private EClass instanceVariableDeclarationEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -246,7 +230,7 @@ public class ImperativeModelPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getImperativeFunction_Context() {
+	public EReference getImperativeFunction_ConstantDeclarations() {
 		return (EReference)imperativeFunctionEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -273,7 +257,7 @@ public class ImperativeModelPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getImperativeFunction_ComputationCompounds() {
+	public EReference getImperativeFunction_InstanceVariableDeclarations() {
 		return (EReference)imperativeFunctionEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -282,8 +266,8 @@ public class ImperativeModelPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getImperativeFunctionContext() {
-		return imperativeFunctionContextEClass;
+	public EReference getImperativeFunction_InitializationCompound() {
+		return (EReference)imperativeFunctionEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -291,53 +275,8 @@ public class ImperativeModelPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getImperativeFunctionContext_TemplateVariableDeclarations() {
-		return (EReference)imperativeFunctionContextEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getImperativeFunctionContext_StateVariableDeclarations() {
-		return (EReference)imperativeFunctionContextEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getImperativeFunctionContext_CircularBufferDeclarations() {
-		return (EReference)imperativeFunctionContextEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getImperativeFunctionContext_InitializationCompound() {
-		return (EReference)imperativeFunctionContextEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getCircularBufferDeclaration() {
-		return circularBufferDeclarationEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getCircularBufferDeclaration_Size() {
-		return (EAttribute)circularBufferDeclarationEClass.getEStructuralFeatures().get(0);
+	public EReference getImperativeFunction_ComputationCompounds() {
+		return (EReference)imperativeFunctionEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -399,8 +338,17 @@ public class ImperativeModelPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getStatefulVariableDeclaration_CircularBufferDeclaration() {
-		return (EReference)statefulVariableDeclarationEClass.getEStructuralFeatures().get(0);
+	public EAttribute getStatefulVariableDeclaration_CircularBufferSize() {
+		return (EAttribute)statefulVariableDeclarationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getConstantDeclaration() {
+		return constantDeclarationEClass;
 	}
 
 	/**
@@ -426,17 +374,8 @@ public class ImperativeModelPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getTemplateVariableDeclaration() {
-		return templateVariableDeclarationEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getStateVariableDeclaration() {
-		return stateVariableDeclarationEClass;
+	public EClass getInstanceVariableDeclaration() {
+		return instanceVariableDeclarationEClass;
 	}
 
 	/**
@@ -666,19 +605,12 @@ public class ImperativeModelPackageImpl extends EPackageImpl implements Imperati
 
 		// Create classes and their features
 		imperativeFunctionEClass = createEClass(IMPERATIVE_FUNCTION);
-		createEReference(imperativeFunctionEClass, IMPERATIVE_FUNCTION__CONTEXT);
+		createEReference(imperativeFunctionEClass, IMPERATIVE_FUNCTION__CONSTANT_DECLARATIONS);
 		createEReference(imperativeFunctionEClass, IMPERATIVE_FUNCTION__INPUT_VARIABLE_DECLARATIONS);
 		createEReference(imperativeFunctionEClass, IMPERATIVE_FUNCTION__OUTPUT_VARIABLE_DECLARATIONS);
+		createEReference(imperativeFunctionEClass, IMPERATIVE_FUNCTION__INSTANCE_VARIABLE_DECLARATIONS);
+		createEReference(imperativeFunctionEClass, IMPERATIVE_FUNCTION__INITIALIZATION_COMPOUND);
 		createEReference(imperativeFunctionEClass, IMPERATIVE_FUNCTION__COMPUTATION_COMPOUNDS);
-
-		imperativeFunctionContextEClass = createEClass(IMPERATIVE_FUNCTION_CONTEXT);
-		createEReference(imperativeFunctionContextEClass, IMPERATIVE_FUNCTION_CONTEXT__TEMPLATE_VARIABLE_DECLARATIONS);
-		createEReference(imperativeFunctionContextEClass, IMPERATIVE_FUNCTION_CONTEXT__STATE_VARIABLE_DECLARATIONS);
-		createEReference(imperativeFunctionContextEClass, IMPERATIVE_FUNCTION_CONTEXT__CIRCULAR_BUFFER_DECLARATIONS);
-		createEReference(imperativeFunctionContextEClass, IMPERATIVE_FUNCTION_CONTEXT__INITIALIZATION_COMPOUND);
-
-		circularBufferDeclarationEClass = createEClass(CIRCULAR_BUFFER_DECLARATION);
-		createEAttribute(circularBufferDeclarationEClass, CIRCULAR_BUFFER_DECLARATION__SIZE);
 
 		compoundEClass = createEClass(COMPOUND);
 		createEReference(compoundEClass, COMPOUND__STATEMENTS);
@@ -692,15 +624,15 @@ public class ImperativeModelPackageImpl extends EPackageImpl implements Imperati
 		createEReference(variableDeclarationEClass, VARIABLE_DECLARATION__TYPE);
 
 		statefulVariableDeclarationEClass = createEClass(STATEFUL_VARIABLE_DECLARATION);
-		createEReference(statefulVariableDeclarationEClass, STATEFUL_VARIABLE_DECLARATION__CIRCULAR_BUFFER_DECLARATION);
+		createEAttribute(statefulVariableDeclarationEClass, STATEFUL_VARIABLE_DECLARATION__CIRCULAR_BUFFER_SIZE);
+
+		constantDeclarationEClass = createEClass(CONSTANT_DECLARATION);
 
 		inputVariableDeclarationEClass = createEClass(INPUT_VARIABLE_DECLARATION);
 
 		outputVariableDeclarationEClass = createEClass(OUTPUT_VARIABLE_DECLARATION);
 
-		templateVariableDeclarationEClass = createEClass(TEMPLATE_VARIABLE_DECLARATION);
-
-		stateVariableDeclarationEClass = createEClass(STATE_VARIABLE_DECLARATION);
+		instanceVariableDeclarationEClass = createEClass(INSTANCE_VARIABLE_DECLARATION);
 
 		localVariableDeclarationEClass = createEClass(LOCAL_VARIABLE_DECLARATION);
 		createEReference(localVariableDeclarationEClass, LOCAL_VARIABLE_DECLARATION__INITIALIZER);
@@ -753,8 +685,8 @@ public class ImperativeModelPackageImpl extends EPackageImpl implements Imperati
 		setNsURI(eNS_URI);
 
 		// Obtain other dependent packages
-		AstPackage theAstPackage = (AstPackage)EPackage.Registry.INSTANCE.getEPackage(AstPackage.eNS_URI);
 		TypeSystemPackage theTypeSystemPackage = (TypeSystemPackage)EPackage.Registry.INSTANCE.getEPackage(TypeSystemPackage.eNS_URI);
+		AstPackage theAstPackage = (AstPackage)EPackage.Registry.INSTANCE.getEPackage(AstPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -763,10 +695,10 @@ public class ImperativeModelPackageImpl extends EPackageImpl implements Imperati
 		// Add supertypes to classes
 		computationCompoundEClass.getESuperTypes().add(this.getCompound());
 		statefulVariableDeclarationEClass.getESuperTypes().add(this.getVariableDeclaration());
+		constantDeclarationEClass.getESuperTypes().add(this.getVariableDeclaration());
 		inputVariableDeclarationEClass.getESuperTypes().add(this.getStatefulVariableDeclaration());
 		outputVariableDeclarationEClass.getESuperTypes().add(this.getStatefulVariableDeclaration());
-		templateVariableDeclarationEClass.getESuperTypes().add(this.getVariableDeclaration());
-		stateVariableDeclarationEClass.getESuperTypes().add(this.getStatefulVariableDeclaration());
+		instanceVariableDeclarationEClass.getESuperTypes().add(this.getStatefulVariableDeclaration());
 		localVariableDeclarationEClass.getESuperTypes().add(this.getVariableDeclaration());
 		localVariableDeclarationEClass.getESuperTypes().add(this.getStatement());
 		compoundStatementEClass.getESuperTypes().add(this.getCompound());
@@ -778,19 +710,12 @@ public class ImperativeModelPackageImpl extends EPackageImpl implements Imperati
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(imperativeFunctionEClass, ImperativeFunction.class, "ImperativeFunction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getImperativeFunction_Context(), this.getImperativeFunctionContext(), null, "context", null, 0, 1, ImperativeFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getImperativeFunction_ConstantDeclarations(), this.getConstantDeclaration(), null, "constantDeclarations", null, 0, -1, ImperativeFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getImperativeFunction_InputVariableDeclarations(), this.getInputVariableDeclaration(), null, "inputVariableDeclarations", null, 0, -1, ImperativeFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getImperativeFunction_OutputVariableDeclarations(), this.getOutputVariableDeclaration(), null, "outputVariableDeclarations", null, 0, -1, ImperativeFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getImperativeFunction_InstanceVariableDeclarations(), this.getInstanceVariableDeclaration(), null, "instanceVariableDeclarations", null, 0, -1, ImperativeFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getImperativeFunction_InitializationCompound(), this.getCompound(), null, "initializationCompound", null, 0, 1, ImperativeFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getImperativeFunction_ComputationCompounds(), this.getComputationCompound(), null, "computationCompounds", null, 0, -1, ImperativeFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(imperativeFunctionContextEClass, ImperativeFunctionContext.class, "ImperativeFunctionContext", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getImperativeFunctionContext_TemplateVariableDeclarations(), this.getTemplateVariableDeclaration(), null, "templateVariableDeclarations", null, 0, -1, ImperativeFunctionContext.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getImperativeFunctionContext_StateVariableDeclarations(), theAstPackage.getStateVariableDeclaration(), null, "stateVariableDeclarations", null, 0, -1, ImperativeFunctionContext.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getImperativeFunctionContext_CircularBufferDeclarations(), this.getCircularBufferDeclaration(), null, "circularBufferDeclarations", null, 0, -1, ImperativeFunctionContext.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getImperativeFunctionContext_InitializationCompound(), this.getCompound(), null, "initializationCompound", null, 0, 1, ImperativeFunctionContext.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(circularBufferDeclarationEClass, CircularBufferDeclaration.class, "CircularBufferDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getCircularBufferDeclaration_Size(), ecorePackage.getEInt(), "size", null, 1, 1, CircularBufferDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(compoundEClass, Compound.class, "Compound", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCompound_Statements(), this.getStatement(), null, "statements", null, 0, 1, Compound.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -804,15 +729,15 @@ public class ImperativeModelPackageImpl extends EPackageImpl implements Imperati
 		initEReference(getVariableDeclaration_Type(), theTypeSystemPackage.getDataType(), null, "type", null, 0, 1, VariableDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(statefulVariableDeclarationEClass, StatefulVariableDeclaration.class, "StatefulVariableDeclaration", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getStatefulVariableDeclaration_CircularBufferDeclaration(), this.getCircularBufferDeclaration(), null, "circularBufferDeclaration", null, 0, 1, StatefulVariableDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getStatefulVariableDeclaration_CircularBufferSize(), ecorePackage.getEInt(), "circularBufferSize", null, 0, 1, StatefulVariableDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(constantDeclarationEClass, ConstantDeclaration.class, "ConstantDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(inputVariableDeclarationEClass, InputVariableDeclaration.class, "InputVariableDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(outputVariableDeclarationEClass, OutputVariableDeclaration.class, "OutputVariableDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(templateVariableDeclarationEClass, TemplateVariableDeclaration.class, "TemplateVariableDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(stateVariableDeclarationEClass, StateVariableDeclaration.class, "StateVariableDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(instanceVariableDeclarationEClass, InstanceVariableDeclaration.class, "InstanceVariableDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(localVariableDeclarationEClass, LocalVariableDeclaration.class, "LocalVariableDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getLocalVariableDeclaration_Initializer(), theAstPackage.getExpression(), null, "initializer", null, 0, 1, LocalVariableDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

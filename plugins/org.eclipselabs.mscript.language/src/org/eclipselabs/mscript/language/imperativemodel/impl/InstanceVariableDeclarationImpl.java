@@ -8,24 +8,24 @@ package org.eclipselabs.mscript.language.imperativemodel.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage;
-import org.eclipselabs.mscript.language.imperativemodel.TemplateVariableDeclaration;
+import org.eclipselabs.mscript.language.imperativemodel.InstanceVariableDeclaration;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Template Variable Declaration</b></em>'.
+ * An implementation of the model object '<em><b>Instance Variable Declaration</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public class TemplateVariableDeclarationImpl extends VariableDeclarationImpl implements TemplateVariableDeclaration {
+public class InstanceVariableDeclarationImpl extends StatefulVariableDeclarationImpl implements InstanceVariableDeclaration {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected TemplateVariableDeclarationImpl() {
+	protected InstanceVariableDeclarationImpl() {
 		super();
 	}
 
@@ -36,7 +36,7 @@ public class TemplateVariableDeclarationImpl extends VariableDeclarationImpl imp
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return ImperativeModelPackage.Literals.TEMPLATE_VARIABLE_DECLARATION;
+		return ImperativeModelPackage.Literals.INSTANCE_VARIABLE_DECLARATION;
 	}
 
-} //TemplateVariableDeclarationImpl
+} //InstanceVariableDeclarationImpl

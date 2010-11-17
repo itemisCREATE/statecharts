@@ -17,9 +17,11 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction#getContext <em>Context</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction#getConstantDeclarations <em>Constant Declarations</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction#getInputVariableDeclarations <em>Input Variable Declarations</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction#getOutputVariableDeclarations <em>Output Variable Declarations</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction#getInstanceVariableDeclarations <em>Instance Variable Declarations</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction#getInitializationCompound <em>Initialization Compound</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction#getComputationCompounds <em>Computation Compounds</em>}</li>
  * </ul>
  * </p>
@@ -30,30 +32,20 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface ImperativeFunction extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Context</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Constant Declarations</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipselabs.mscript.language.imperativemodel.ConstantDeclaration}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Context</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Constant Declarations</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Context</em>' containment reference.
-	 * @see #setContext(ImperativeFunctionContext)
-	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage#getImperativeFunction_Context()
+	 * @return the value of the '<em>Constant Declarations</em>' containment reference list.
+	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage#getImperativeFunction_ConstantDeclarations()
 	 * @model containment="true"
 	 * @generated
 	 */
-	ImperativeFunctionContext getContext();
-
-	/**
-	 * Sets the value of the '{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction#getContext <em>Context</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Context</em>' containment reference.
-	 * @see #getContext()
-	 * @generated
-	 */
-	void setContext(ImperativeFunctionContext value);
+	EList<ConstantDeclaration> getConstantDeclarations();
 
 	/**
 	 * Returns the value of the '<em><b>Input Variable Declarations</b></em>' containment reference list.
@@ -86,6 +78,48 @@ public interface ImperativeFunction extends EObject {
 	 * @generated
 	 */
 	EList<OutputVariableDeclaration> getOutputVariableDeclarations();
+
+	/**
+	 * Returns the value of the '<em><b>Instance Variable Declarations</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipselabs.mscript.language.imperativemodel.InstanceVariableDeclaration}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Instance Variable Declarations</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Instance Variable Declarations</em>' containment reference list.
+	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage#getImperativeFunction_InstanceVariableDeclarations()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<InstanceVariableDeclaration> getInstanceVariableDeclarations();
+
+	/**
+	 * Returns the value of the '<em><b>Initialization Compound</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Initialization Compound</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Initialization Compound</em>' containment reference.
+	 * @see #setInitializationCompound(Compound)
+	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage#getImperativeFunction_InitializationCompound()
+	 * @model containment="true"
+	 * @generated
+	 */
+	Compound getInitializationCompound();
+
+	/**
+	 * Sets the value of the '{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction#getInitializationCompound <em>Initialization Compound</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Initialization Compound</em>' containment reference.
+	 * @see #getInitializationCompound()
+	 * @generated
+	 */
+	void setInitializationCompound(Compound value);
 
 	/**
 	 * Returns the value of the '<em><b>Computation Compounds</b></em>' containment reference list.

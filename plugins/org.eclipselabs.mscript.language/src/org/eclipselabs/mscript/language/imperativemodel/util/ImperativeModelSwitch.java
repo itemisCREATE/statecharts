@@ -12,22 +12,20 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.imperativemodel.Assignment;
-import org.eclipselabs.mscript.language.imperativemodel.CircularBufferDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.Compound;
 import org.eclipselabs.mscript.language.imperativemodel.CompoundStatement;
 import org.eclipselabs.mscript.language.imperativemodel.ComputationCompound;
+import org.eclipselabs.mscript.language.imperativemodel.ConstantDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.ForeachStatement;
 import org.eclipselabs.mscript.language.imperativemodel.IfStatement;
 import org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction;
-import org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionContext;
 import org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage;
 import org.eclipselabs.mscript.language.imperativemodel.InputVariableDeclaration;
+import org.eclipselabs.mscript.language.imperativemodel.InstanceVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.LocalVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.OutputVariableDeclaration;
-import org.eclipselabs.mscript.language.imperativemodel.StateVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.StatefulVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.Statement;
-import org.eclipselabs.mscript.language.imperativemodel.TemplateVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.VariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.VariableReference;
 
@@ -111,18 +109,6 @@ public class ImperativeModelSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ImperativeModelPackage.IMPERATIVE_FUNCTION_CONTEXT: {
-				ImperativeFunctionContext imperativeFunctionContext = (ImperativeFunctionContext)theEObject;
-				T result = caseImperativeFunctionContext(imperativeFunctionContext);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ImperativeModelPackage.CIRCULAR_BUFFER_DECLARATION: {
-				CircularBufferDeclaration circularBufferDeclaration = (CircularBufferDeclaration)theEObject;
-				T result = caseCircularBufferDeclaration(circularBufferDeclaration);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case ImperativeModelPackage.COMPOUND: {
 				Compound compound = (Compound)theEObject;
 				T result = caseCompound(compound);
@@ -149,6 +135,13 @@ public class ImperativeModelSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case ImperativeModelPackage.CONSTANT_DECLARATION: {
+				ConstantDeclaration constantDeclaration = (ConstantDeclaration)theEObject;
+				T result = caseConstantDeclaration(constantDeclaration);
+				if (result == null) result = caseVariableDeclaration(constantDeclaration);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case ImperativeModelPackage.INPUT_VARIABLE_DECLARATION: {
 				InputVariableDeclaration inputVariableDeclaration = (InputVariableDeclaration)theEObject;
 				T result = caseInputVariableDeclaration(inputVariableDeclaration);
@@ -165,18 +158,11 @@ public class ImperativeModelSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ImperativeModelPackage.TEMPLATE_VARIABLE_DECLARATION: {
-				TemplateVariableDeclaration templateVariableDeclaration = (TemplateVariableDeclaration)theEObject;
-				T result = caseTemplateVariableDeclaration(templateVariableDeclaration);
-				if (result == null) result = caseVariableDeclaration(templateVariableDeclaration);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ImperativeModelPackage.STATE_VARIABLE_DECLARATION: {
-				StateVariableDeclaration stateVariableDeclaration = (StateVariableDeclaration)theEObject;
-				T result = caseStateVariableDeclaration(stateVariableDeclaration);
-				if (result == null) result = caseStatefulVariableDeclaration(stateVariableDeclaration);
-				if (result == null) result = caseVariableDeclaration(stateVariableDeclaration);
+			case ImperativeModelPackage.INSTANCE_VARIABLE_DECLARATION: {
+				InstanceVariableDeclaration instanceVariableDeclaration = (InstanceVariableDeclaration)theEObject;
+				T result = caseInstanceVariableDeclaration(instanceVariableDeclaration);
+				if (result == null) result = caseStatefulVariableDeclaration(instanceVariableDeclaration);
+				if (result == null) result = caseVariableDeclaration(instanceVariableDeclaration);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -250,36 +236,6 @@ public class ImperativeModelSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Imperative Function Context</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Imperative Function Context</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseImperativeFunctionContext(ImperativeFunctionContext object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Circular Buffer Declaration</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Circular Buffer Declaration</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseCircularBufferDeclaration(CircularBufferDeclaration object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Statement</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -340,6 +296,21 @@ public class ImperativeModelSwitch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Constant Declaration</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Constant Declaration</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseConstantDeclaration(ConstantDeclaration object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Input Variable Declaration</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -370,32 +341,17 @@ public class ImperativeModelSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Template Variable Declaration</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Instance Variable Declaration</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Template Variable Declaration</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Instance Variable Declaration</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTemplateVariableDeclaration(TemplateVariableDeclaration object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>State Variable Declaration</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>State Variable Declaration</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseStateVariableDeclaration(StateVariableDeclaration object) {
+	public T caseInstanceVariableDeclaration(InstanceVariableDeclaration object) {
 		return null;
 	}
 

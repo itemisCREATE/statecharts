@@ -12,21 +12,19 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipselabs.mscript.language.imperativemodel.Assignment;
-import org.eclipselabs.mscript.language.imperativemodel.CircularBufferDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.Compound;
 import org.eclipselabs.mscript.language.imperativemodel.CompoundStatement;
 import org.eclipselabs.mscript.language.imperativemodel.ComputationCompound;
+import org.eclipselabs.mscript.language.imperativemodel.ConstantDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.ForeachStatement;
 import org.eclipselabs.mscript.language.imperativemodel.IfStatement;
 import org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction;
-import org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionContext;
 import org.eclipselabs.mscript.language.imperativemodel.ImperativeModelFactory;
 import org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage;
 import org.eclipselabs.mscript.language.imperativemodel.InputVariableDeclaration;
+import org.eclipselabs.mscript.language.imperativemodel.InstanceVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.LocalVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.OutputVariableDeclaration;
-import org.eclipselabs.mscript.language.imperativemodel.StateVariableDeclaration;
-import org.eclipselabs.mscript.language.imperativemodel.TemplateVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.VariableReference;
 
 /**
@@ -74,14 +72,12 @@ public class ImperativeModelFactoryImpl extends EFactoryImpl implements Imperati
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case ImperativeModelPackage.IMPERATIVE_FUNCTION: return createImperativeFunction();
-			case ImperativeModelPackage.IMPERATIVE_FUNCTION_CONTEXT: return createImperativeFunctionContext();
-			case ImperativeModelPackage.CIRCULAR_BUFFER_DECLARATION: return createCircularBufferDeclaration();
 			case ImperativeModelPackage.COMPOUND: return createCompound();
 			case ImperativeModelPackage.COMPUTATION_COMPOUND: return createComputationCompound();
+			case ImperativeModelPackage.CONSTANT_DECLARATION: return createConstantDeclaration();
 			case ImperativeModelPackage.INPUT_VARIABLE_DECLARATION: return createInputVariableDeclaration();
 			case ImperativeModelPackage.OUTPUT_VARIABLE_DECLARATION: return createOutputVariableDeclaration();
-			case ImperativeModelPackage.TEMPLATE_VARIABLE_DECLARATION: return createTemplateVariableDeclaration();
-			case ImperativeModelPackage.STATE_VARIABLE_DECLARATION: return createStateVariableDeclaration();
+			case ImperativeModelPackage.INSTANCE_VARIABLE_DECLARATION: return createInstanceVariableDeclaration();
 			case ImperativeModelPackage.LOCAL_VARIABLE_DECLARATION: return createLocalVariableDeclaration();
 			case ImperativeModelPackage.COMPOUND_STATEMENT: return createCompoundStatement();
 			case ImperativeModelPackage.ASSIGNMENT: return createAssignment();
@@ -101,26 +97,6 @@ public class ImperativeModelFactoryImpl extends EFactoryImpl implements Imperati
 	public ImperativeFunction createImperativeFunction() {
 		ImperativeFunctionImpl imperativeFunction = new ImperativeFunctionImpl();
 		return imperativeFunction;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ImperativeFunctionContext createImperativeFunctionContext() {
-		ImperativeFunctionContextImpl imperativeFunctionContext = new ImperativeFunctionContextImpl();
-		return imperativeFunctionContext;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public CircularBufferDeclaration createCircularBufferDeclaration() {
-		CircularBufferDeclarationImpl circularBufferDeclaration = new CircularBufferDeclarationImpl();
-		return circularBufferDeclaration;
 	}
 
 	/**
@@ -148,6 +124,16 @@ public class ImperativeModelFactoryImpl extends EFactoryImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public ConstantDeclaration createConstantDeclaration() {
+		ConstantDeclarationImpl constantDeclaration = new ConstantDeclarationImpl();
+		return constantDeclaration;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public InputVariableDeclaration createInputVariableDeclaration() {
 		InputVariableDeclarationImpl inputVariableDeclaration = new InputVariableDeclarationImpl();
 		return inputVariableDeclaration;
@@ -168,19 +154,9 @@ public class ImperativeModelFactoryImpl extends EFactoryImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TemplateVariableDeclaration createTemplateVariableDeclaration() {
-		TemplateVariableDeclarationImpl templateVariableDeclaration = new TemplateVariableDeclarationImpl();
-		return templateVariableDeclaration;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public StateVariableDeclaration createStateVariableDeclaration() {
-		StateVariableDeclarationImpl stateVariableDeclaration = new StateVariableDeclarationImpl();
-		return stateVariableDeclaration;
+	public InstanceVariableDeclaration createInstanceVariableDeclaration() {
+		InstanceVariableDeclarationImpl instanceVariableDeclaration = new InstanceVariableDeclarationImpl();
+		return instanceVariableDeclaration;
 	}
 
 	/**

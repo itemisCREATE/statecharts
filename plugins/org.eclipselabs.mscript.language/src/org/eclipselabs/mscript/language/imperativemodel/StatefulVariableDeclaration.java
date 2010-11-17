@@ -15,7 +15,7 @@ package org.eclipselabs.mscript.language.imperativemodel;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.StatefulVariableDeclaration#getCircularBufferDeclaration <em>Circular Buffer Declaration</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.StatefulVariableDeclaration#getCircularBufferSize <em>Circular Buffer Size</em>}</li>
  * </ul>
  * </p>
  *
@@ -25,29 +25,29 @@ package org.eclipselabs.mscript.language.imperativemodel;
  */
 public interface StatefulVariableDeclaration extends VariableDeclaration {
 	/**
-	 * Returns the value of the '<em><b>Circular Buffer Declaration</b></em>' reference.
+	 * Returns the value of the '<em><b>Circular Buffer Size</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Circular Buffer Declaration</em>' reference isn't clear,
+	 * If the meaning of the '<em>Circular Buffer Size</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Circular Buffer Declaration</em>' reference.
-	 * @see #setCircularBufferDeclaration(CircularBufferDeclaration)
-	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage#getStatefulVariableDeclaration_CircularBufferDeclaration()
+	 * @return the value of the '<em>Circular Buffer Size</em>' attribute.
+	 * @see #setCircularBufferSize(int)
+	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage#getStatefulVariableDeclaration_CircularBufferSize()
 	 * @model
 	 * @generated
 	 */
-	CircularBufferDeclaration getCircularBufferDeclaration();
+	int getCircularBufferSize();
 
 	/**
-	 * Sets the value of the '{@link org.eclipselabs.mscript.language.imperativemodel.StatefulVariableDeclaration#getCircularBufferDeclaration <em>Circular Buffer Declaration</em>}' reference.
+	 * Sets the value of the '{@link org.eclipselabs.mscript.language.imperativemodel.StatefulVariableDeclaration#getCircularBufferSize <em>Circular Buffer Size</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Circular Buffer Declaration</em>' reference.
-	 * @see #getCircularBufferDeclaration()
+	 * @param value the new value of the '<em>Circular Buffer Size</em>' attribute.
+	 * @see #getCircularBufferSize()
 	 * @generated
 	 */
-	void setCircularBufferDeclaration(CircularBufferDeclaration value);
+	void setCircularBufferSize(int value);
 
 } // StatefulVariableDeclaration

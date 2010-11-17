@@ -7,25 +7,25 @@
 package org.eclipselabs.mscript.language.imperativemodel.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipselabs.mscript.language.imperativemodel.ConstantDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage;
-import org.eclipselabs.mscript.language.imperativemodel.StateVariableDeclaration;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>State Variable Declaration</b></em>'.
+ * An implementation of the model object '<em><b>Constant Declaration</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public class StateVariableDeclarationImpl extends StatefulVariableDeclarationImpl implements StateVariableDeclaration {
+public class ConstantDeclarationImpl extends VariableDeclarationImpl implements ConstantDeclaration {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected StateVariableDeclarationImpl() {
+	protected ConstantDeclarationImpl() {
 		super();
 	}
 
@@ -36,7 +36,7 @@ public class StateVariableDeclarationImpl extends StatefulVariableDeclarationImp
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return ImperativeModelPackage.Literals.STATE_VARIABLE_DECLARATION;
+		return ImperativeModelPackage.Literals.CONSTANT_DECLARATION;
 	}
 
-} //StateVariableDeclarationImpl
+} //ConstantDeclarationImpl
