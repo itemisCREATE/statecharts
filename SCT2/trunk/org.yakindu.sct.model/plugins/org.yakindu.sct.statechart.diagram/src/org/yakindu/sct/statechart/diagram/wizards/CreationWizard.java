@@ -32,10 +32,8 @@ import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
-import org.eclipse.gmf.runtime.diagram.core.services.ViewService;
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
 import org.eclipse.gmf.runtime.emf.core.GMFEditingDomainFactory;
-import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
@@ -46,10 +44,8 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.part.FileEditorInput;
-import org.yakindu.sct.model.statechart.statechart.Statechart;
-import org.yakindu.sct.model.statechart.statechart.StatechartFactory;
-import org.yakindu.sct.statechart.diagram.DiagramActivator;
 import org.yakindu.sct.statechart.diagram.editor.StatechartDiagramEditor;
+import org.yakindu.sct.statechart.diagram.factories.FactoryUtils;
 
 public class CreationWizard extends Wizard implements INewWizard {
 
@@ -119,15 +115,9 @@ public class CreationWizard extends Wizard implements INewWizard {
 			@Override
 			protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info)
 					throws ExecutionException {
-				Statechart statechart = StatechartFactory.eINSTANCE.createStatechart();
-				resource.getContents().add(statechart);
-				Diagram diagram = ViewService.createDiagram(statechart, StatechartDiagramEditor.ID,
-						DiagramActivator.DIAGRAM_PREFERENCES_HINT);
-				if (diagram != null) {
-					resource.getContents().add(diagram);
-					diagram.setName("YAKINDU Statechart Model");
-					diagram.setElement(statechart);
-				}
+
+				FactoryUtils.createStatechartModel(resource);
+
 				try {
 					resource.save(getSaveOptions());
 				} catch (IOException e) {
@@ -135,6 +125,7 @@ public class CreationWizard extends Wizard implements INewWizard {
 				}
 				return CommandResult.newOKCommandResult();
 			}
+
 		};
 		try {
 			OperationHistoryFactory.getOperationHistory().execute(command, new SubProgressMonitor(progressMonitor, 1),
