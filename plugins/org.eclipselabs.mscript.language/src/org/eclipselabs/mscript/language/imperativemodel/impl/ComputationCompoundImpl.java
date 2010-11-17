@@ -13,7 +13,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipselabs.mscript.language.imperativemodel.ComputationCompound;
 import org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage;
-import org.eclipselabs.mscript.language.imperativemodel.VariableDeclaration;
+import org.eclipselabs.mscript.language.imperativemodel.InputVariableDeclaration;
+import org.eclipselabs.mscript.language.imperativemodel.OutputVariableDeclaration;
 
 /**
  * <!-- begin-user-doc -->
@@ -22,8 +23,8 @@ import org.eclipselabs.mscript.language.imperativemodel.VariableDeclaration;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.impl.ComputationCompoundImpl#getUsedInputs <em>Used Inputs</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.impl.ComputationCompoundImpl#getComputedOutputs <em>Computed Outputs</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.impl.ComputationCompoundImpl#getInputs <em>Inputs</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.impl.ComputationCompoundImpl#getOutputs <em>Outputs</em>}</li>
  * </ul>
  * </p>
  *
@@ -31,24 +32,24 @@ import org.eclipselabs.mscript.language.imperativemodel.VariableDeclaration;
  */
 public class ComputationCompoundImpl extends CompoundImpl implements ComputationCompound {
 	/**
-	 * The cached value of the '{@link #getUsedInputs() <em>Used Inputs</em>}' reference list.
+	 * The cached value of the '{@link #getInputs() <em>Inputs</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getUsedInputs()
+	 * @see #getInputs()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<VariableDeclaration> usedInputs;
+	protected EList<InputVariableDeclaration> inputs;
 
 	/**
-	 * The cached value of the '{@link #getComputedOutputs() <em>Computed Outputs</em>}' reference list.
+	 * The cached value of the '{@link #getOutputs() <em>Outputs</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getComputedOutputs()
+	 * @see #getOutputs()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<VariableDeclaration> computedOutputs;
+	protected EList<OutputVariableDeclaration> outputs;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -74,11 +75,11 @@ public class ComputationCompoundImpl extends CompoundImpl implements Computation
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<VariableDeclaration> getUsedInputs() {
-		if (usedInputs == null) {
-			usedInputs = new EObjectResolvingEList<VariableDeclaration>(VariableDeclaration.class, this, ImperativeModelPackage.COMPUTATION_COMPOUND__USED_INPUTS);
+	public EList<InputVariableDeclaration> getInputs() {
+		if (inputs == null) {
+			inputs = new EObjectResolvingEList<InputVariableDeclaration>(InputVariableDeclaration.class, this, ImperativeModelPackage.COMPUTATION_COMPOUND__INPUTS);
 		}
-		return usedInputs;
+		return inputs;
 	}
 
 	/**
@@ -86,11 +87,11 @@ public class ComputationCompoundImpl extends CompoundImpl implements Computation
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<VariableDeclaration> getComputedOutputs() {
-		if (computedOutputs == null) {
-			computedOutputs = new EObjectResolvingEList<VariableDeclaration>(VariableDeclaration.class, this, ImperativeModelPackage.COMPUTATION_COMPOUND__COMPUTED_OUTPUTS);
+	public EList<OutputVariableDeclaration> getOutputs() {
+		if (outputs == null) {
+			outputs = new EObjectResolvingEList<OutputVariableDeclaration>(OutputVariableDeclaration.class, this, ImperativeModelPackage.COMPUTATION_COMPOUND__OUTPUTS);
 		}
-		return computedOutputs;
+		return outputs;
 	}
 
 	/**
@@ -101,10 +102,10 @@ public class ComputationCompoundImpl extends CompoundImpl implements Computation
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ImperativeModelPackage.COMPUTATION_COMPOUND__USED_INPUTS:
-				return getUsedInputs();
-			case ImperativeModelPackage.COMPUTATION_COMPOUND__COMPUTED_OUTPUTS:
-				return getComputedOutputs();
+			case ImperativeModelPackage.COMPUTATION_COMPOUND__INPUTS:
+				return getInputs();
+			case ImperativeModelPackage.COMPUTATION_COMPOUND__OUTPUTS:
+				return getOutputs();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -118,13 +119,13 @@ public class ComputationCompoundImpl extends CompoundImpl implements Computation
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ImperativeModelPackage.COMPUTATION_COMPOUND__USED_INPUTS:
-				getUsedInputs().clear();
-				getUsedInputs().addAll((Collection<? extends VariableDeclaration>)newValue);
+			case ImperativeModelPackage.COMPUTATION_COMPOUND__INPUTS:
+				getInputs().clear();
+				getInputs().addAll((Collection<? extends InputVariableDeclaration>)newValue);
 				return;
-			case ImperativeModelPackage.COMPUTATION_COMPOUND__COMPUTED_OUTPUTS:
-				getComputedOutputs().clear();
-				getComputedOutputs().addAll((Collection<? extends VariableDeclaration>)newValue);
+			case ImperativeModelPackage.COMPUTATION_COMPOUND__OUTPUTS:
+				getOutputs().clear();
+				getOutputs().addAll((Collection<? extends OutputVariableDeclaration>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -138,11 +139,11 @@ public class ComputationCompoundImpl extends CompoundImpl implements Computation
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ImperativeModelPackage.COMPUTATION_COMPOUND__USED_INPUTS:
-				getUsedInputs().clear();
+			case ImperativeModelPackage.COMPUTATION_COMPOUND__INPUTS:
+				getInputs().clear();
 				return;
-			case ImperativeModelPackage.COMPUTATION_COMPOUND__COMPUTED_OUTPUTS:
-				getComputedOutputs().clear();
+			case ImperativeModelPackage.COMPUTATION_COMPOUND__OUTPUTS:
+				getOutputs().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -156,10 +157,10 @@ public class ComputationCompoundImpl extends CompoundImpl implements Computation
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ImperativeModelPackage.COMPUTATION_COMPOUND__USED_INPUTS:
-				return usedInputs != null && !usedInputs.isEmpty();
-			case ImperativeModelPackage.COMPUTATION_COMPOUND__COMPUTED_OUTPUTS:
-				return computedOutputs != null && !computedOutputs.isEmpty();
+			case ImperativeModelPackage.COMPUTATION_COMPOUND__INPUTS:
+				return inputs != null && !inputs.isEmpty();
+			case ImperativeModelPackage.COMPUTATION_COMPOUND__OUTPUTS:
+				return outputs != null && !outputs.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

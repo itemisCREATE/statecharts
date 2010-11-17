@@ -6,7 +6,7 @@
  */
 package org.eclipselabs.mscript.language.imperativemodel;
 
-import org.eclipselabs.mscript.language.ast.Expression;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipselabs.mscript.typesystem.DataType;
 
 /**
@@ -19,16 +19,14 @@ import org.eclipselabs.mscript.typesystem.DataType;
  * <ul>
  *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.VariableDeclaration#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.VariableDeclaration#getType <em>Type</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.VariableDeclaration#getInitializer <em>Initializer</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.VariableDeclaration#getRingBufferSize <em>Ring Buffer Size</em>}</li>
  * </ul>
  * </p>
  *
  * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage#getVariableDeclaration()
- * @model
+ * @model abstract="true"
  * @generated
  */
-public interface VariableDeclaration extends Statement {
+public interface VariableDeclaration extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -80,58 +78,5 @@ public interface VariableDeclaration extends Statement {
 	 * @generated
 	 */
 	void setType(DataType value);
-
-	/**
-	 * Returns the value of the '<em><b>Initializer</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Initializer</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Initializer</em>' containment reference.
-	 * @see #setInitializer(Expression)
-	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage#getVariableDeclaration_Initializer()
-	 * @model containment="true"
-	 * @generated
-	 */
-	Expression getInitializer();
-
-	/**
-	 * Sets the value of the '{@link org.eclipselabs.mscript.language.imperativemodel.VariableDeclaration#getInitializer <em>Initializer</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Initializer</em>' containment reference.
-	 * @see #getInitializer()
-	 * @generated
-	 */
-	void setInitializer(Expression value);
-
-	/**
-	 * Returns the value of the '<em><b>Ring Buffer Size</b></em>' attribute.
-	 * The default value is <code>"1"</code>.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Ring Buffer Size</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Ring Buffer Size</em>' attribute.
-	 * @see #setRingBufferSize(int)
-	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage#getVariableDeclaration_RingBufferSize()
-	 * @model default="1"
-	 * @generated
-	 */
-	int getRingBufferSize();
-
-	/**
-	 * Sets the value of the '{@link org.eclipselabs.mscript.language.imperativemodel.VariableDeclaration#getRingBufferSize <em>Ring Buffer Size</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Ring Buffer Size</em>' attribute.
-	 * @see #getRingBufferSize()
-	 * @generated
-	 */
-	void setRingBufferSize(int value);
 
 } // VariableDeclaration

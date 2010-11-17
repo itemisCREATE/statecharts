@@ -35,13 +35,22 @@ public interface ImperativeModelFactory extends EFactory {
 	Subroutine createSubroutine();
 
 	/**
-	 * Returns a new object of class '<em>Variable Declaration</em>'.
+	 * Returns a new object of class '<em>Subroutine Context</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Variable Declaration</em>'.
+	 * @return a new object of class '<em>Subroutine Context</em>'.
 	 * @generated
 	 */
-	VariableDeclaration createVariableDeclaration();
+	SubroutineContext createSubroutineContext();
+
+	/**
+	 * Returns a new object of class '<em>Circular Buffer Declaration</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Circular Buffer Declaration</em>'.
+	 * @generated
+	 */
+	CircularBufferDeclaration createCircularBufferDeclaration();
 
 	/**
 	 * Returns a new object of class '<em>Compound</em>'.
@@ -60,6 +69,60 @@ public interface ImperativeModelFactory extends EFactory {
 	 * @generated
 	 */
 	ComputationCompound createComputationCompound();
+
+	/**
+	 * Returns a new object of class '<em>Input Variable Declaration</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Input Variable Declaration</em>'.
+	 * @generated
+	 */
+	InputVariableDeclaration createInputVariableDeclaration();
+
+	/**
+	 * Returns a new object of class '<em>Output Variable Declaration</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Output Variable Declaration</em>'.
+	 * @generated
+	 */
+	OutputVariableDeclaration createOutputVariableDeclaration();
+
+	/**
+	 * Returns a new object of class '<em>Template Variable Declaration</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Template Variable Declaration</em>'.
+	 * @generated
+	 */
+	TemplateVariableDeclaration createTemplateVariableDeclaration();
+
+	/**
+	 * Returns a new object of class '<em>State Variable Declaration</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>State Variable Declaration</em>'.
+	 * @generated
+	 */
+	StateVariableDeclaration createStateVariableDeclaration();
+
+	/**
+	 * Returns a new object of class '<em>Local Variable Declaration</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Local Variable Declaration</em>'.
+	 * @generated
+	 */
+	LocalVariableDeclaration createLocalVariableDeclaration();
+
+	/**
+	 * Returns a new object of class '<em>Compound Statement</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Compound Statement</em>'.
+	 * @generated
+	 */
+	CompoundStatement createCompoundStatement();
 
 	/**
 	 * Returns a new object of class '<em>Assignment</em>'.
@@ -89,13 +152,13 @@ public interface ImperativeModelFactory extends EFactory {
 	ForeachStatement createForeachStatement();
 
 	/**
-	 * Returns a new object of class '<em>Variable Access</em>'.
+	 * Returns a new object of class '<em>Variable Reference</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Variable Access</em>'.
+	 * @return a new object of class '<em>Variable Reference</em>'.
 	 * @generated
 	 */
-	VariableAccess createVariableAccess();
+	VariableReference createVariableReference();
 
 	/**
 	 * Returns the package supported by this factory.

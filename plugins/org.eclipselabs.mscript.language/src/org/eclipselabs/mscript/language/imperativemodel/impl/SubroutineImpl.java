@@ -17,11 +17,12 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipselabs.mscript.language.imperativemodel.Compound;
 import org.eclipselabs.mscript.language.imperativemodel.ComputationCompound;
 import org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage;
+import org.eclipselabs.mscript.language.imperativemodel.InputVariableDeclaration;
+import org.eclipselabs.mscript.language.imperativemodel.OutputVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.Subroutine;
-import org.eclipselabs.mscript.language.imperativemodel.VariableDeclaration;
+import org.eclipselabs.mscript.language.imperativemodel.SubroutineContext;
 
 /**
  * <!-- begin-user-doc -->
@@ -30,11 +31,9 @@ import org.eclipselabs.mscript.language.imperativemodel.VariableDeclaration;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.impl.SubroutineImpl#getTemplateVariableDeclarations <em>Template Variable Declarations</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.impl.SubroutineImpl#getContext <em>Context</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.impl.SubroutineImpl#getInputVariableDeclarations <em>Input Variable Declarations</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.impl.SubroutineImpl#getOutputVariableDeclarations <em>Output Variable Declarations</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.impl.SubroutineImpl#getStateVariableDeclarations <em>State Variable Declarations</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.impl.SubroutineImpl#getInitializationCompound <em>Initialization Compound</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.impl.SubroutineImpl#getComputationCompounds <em>Computation Compounds</em>}</li>
  * </ul>
  * </p>
@@ -43,14 +42,14 @@ import org.eclipselabs.mscript.language.imperativemodel.VariableDeclaration;
  */
 public class SubroutineImpl extends EObjectImpl implements Subroutine {
 	/**
-	 * The cached value of the '{@link #getTemplateVariableDeclarations() <em>Template Variable Declarations</em>}' containment reference list.
+	 * The cached value of the '{@link #getContext() <em>Context</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTemplateVariableDeclarations()
+	 * @see #getContext()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<VariableDeclaration> templateVariableDeclarations;
+	protected SubroutineContext context;
 
 	/**
 	 * The cached value of the '{@link #getInputVariableDeclarations() <em>Input Variable Declarations</em>}' containment reference list.
@@ -60,7 +59,7 @@ public class SubroutineImpl extends EObjectImpl implements Subroutine {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<VariableDeclaration> inputVariableDeclarations;
+	protected EList<InputVariableDeclaration> inputVariableDeclarations;
 
 	/**
 	 * The cached value of the '{@link #getOutputVariableDeclarations() <em>Output Variable Declarations</em>}' containment reference list.
@@ -70,27 +69,7 @@ public class SubroutineImpl extends EObjectImpl implements Subroutine {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<VariableDeclaration> outputVariableDeclarations;
-
-	/**
-	 * The cached value of the '{@link #getStateVariableDeclarations() <em>State Variable Declarations</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getStateVariableDeclarations()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<VariableDeclaration> stateVariableDeclarations;
-
-	/**
-	 * The cached value of the '{@link #getInitializationCompound() <em>Initialization Compound</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getInitializationCompound()
-	 * @generated
-	 * @ordered
-	 */
-	protected Compound initializationCompound;
+	protected EList<OutputVariableDeclaration> outputVariableDeclarations;
 
 	/**
 	 * The cached value of the '{@link #getComputationCompounds() <em>Computation Compounds</em>}' containment reference list.
@@ -126,11 +105,8 @@ public class SubroutineImpl extends EObjectImpl implements Subroutine {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<VariableDeclaration> getTemplateVariableDeclarations() {
-		if (templateVariableDeclarations == null) {
-			templateVariableDeclarations = new EObjectContainmentEList<VariableDeclaration>(VariableDeclaration.class, this, ImperativeModelPackage.SUBROUTINE__TEMPLATE_VARIABLE_DECLARATIONS);
-		}
-		return templateVariableDeclarations;
+	public SubroutineContext getContext() {
+		return context;
 	}
 
 	/**
@@ -138,56 +114,11 @@ public class SubroutineImpl extends EObjectImpl implements Subroutine {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<VariableDeclaration> getInputVariableDeclarations() {
-		if (inputVariableDeclarations == null) {
-			inputVariableDeclarations = new EObjectContainmentEList<VariableDeclaration>(VariableDeclaration.class, this, ImperativeModelPackage.SUBROUTINE__INPUT_VARIABLE_DECLARATIONS);
-		}
-		return inputVariableDeclarations;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<VariableDeclaration> getOutputVariableDeclarations() {
-		if (outputVariableDeclarations == null) {
-			outputVariableDeclarations = new EObjectContainmentEList<VariableDeclaration>(VariableDeclaration.class, this, ImperativeModelPackage.SUBROUTINE__OUTPUT_VARIABLE_DECLARATIONS);
-		}
-		return outputVariableDeclarations;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<VariableDeclaration> getStateVariableDeclarations() {
-		if (stateVariableDeclarations == null) {
-			stateVariableDeclarations = new EObjectContainmentEList<VariableDeclaration>(VariableDeclaration.class, this, ImperativeModelPackage.SUBROUTINE__STATE_VARIABLE_DECLARATIONS);
-		}
-		return stateVariableDeclarations;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Compound getInitializationCompound() {
-		return initializationCompound;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetInitializationCompound(Compound newInitializationCompound, NotificationChain msgs) {
-		Compound oldInitializationCompound = initializationCompound;
-		initializationCompound = newInitializationCompound;
+	public NotificationChain basicSetContext(SubroutineContext newContext, NotificationChain msgs) {
+		SubroutineContext oldContext = context;
+		context = newContext;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ImperativeModelPackage.SUBROUTINE__INITIALIZATION_COMPOUND, oldInitializationCompound, newInitializationCompound);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ImperativeModelPackage.SUBROUTINE__CONTEXT, oldContext, newContext);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -198,18 +129,42 @@ public class SubroutineImpl extends EObjectImpl implements Subroutine {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setInitializationCompound(Compound newInitializationCompound) {
-		if (newInitializationCompound != initializationCompound) {
+	public void setContext(SubroutineContext newContext) {
+		if (newContext != context) {
 			NotificationChain msgs = null;
-			if (initializationCompound != null)
-				msgs = ((InternalEObject)initializationCompound).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ImperativeModelPackage.SUBROUTINE__INITIALIZATION_COMPOUND, null, msgs);
-			if (newInitializationCompound != null)
-				msgs = ((InternalEObject)newInitializationCompound).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ImperativeModelPackage.SUBROUTINE__INITIALIZATION_COMPOUND, null, msgs);
-			msgs = basicSetInitializationCompound(newInitializationCompound, msgs);
+			if (context != null)
+				msgs = ((InternalEObject)context).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ImperativeModelPackage.SUBROUTINE__CONTEXT, null, msgs);
+			if (newContext != null)
+				msgs = ((InternalEObject)newContext).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ImperativeModelPackage.SUBROUTINE__CONTEXT, null, msgs);
+			msgs = basicSetContext(newContext, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ImperativeModelPackage.SUBROUTINE__INITIALIZATION_COMPOUND, newInitializationCompound, newInitializationCompound));
+			eNotify(new ENotificationImpl(this, Notification.SET, ImperativeModelPackage.SUBROUTINE__CONTEXT, newContext, newContext));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<InputVariableDeclaration> getInputVariableDeclarations() {
+		if (inputVariableDeclarations == null) {
+			inputVariableDeclarations = new EObjectContainmentEList<InputVariableDeclaration>(InputVariableDeclaration.class, this, ImperativeModelPackage.SUBROUTINE__INPUT_VARIABLE_DECLARATIONS);
+		}
+		return inputVariableDeclarations;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<OutputVariableDeclaration> getOutputVariableDeclarations() {
+		if (outputVariableDeclarations == null) {
+			outputVariableDeclarations = new EObjectContainmentEList<OutputVariableDeclaration>(OutputVariableDeclaration.class, this, ImperativeModelPackage.SUBROUTINE__OUTPUT_VARIABLE_DECLARATIONS);
+		}
+		return outputVariableDeclarations;
 	}
 
 	/**
@@ -232,16 +187,12 @@ public class SubroutineImpl extends EObjectImpl implements Subroutine {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ImperativeModelPackage.SUBROUTINE__TEMPLATE_VARIABLE_DECLARATIONS:
-				return ((InternalEList<?>)getTemplateVariableDeclarations()).basicRemove(otherEnd, msgs);
+			case ImperativeModelPackage.SUBROUTINE__CONTEXT:
+				return basicSetContext(null, msgs);
 			case ImperativeModelPackage.SUBROUTINE__INPUT_VARIABLE_DECLARATIONS:
 				return ((InternalEList<?>)getInputVariableDeclarations()).basicRemove(otherEnd, msgs);
 			case ImperativeModelPackage.SUBROUTINE__OUTPUT_VARIABLE_DECLARATIONS:
 				return ((InternalEList<?>)getOutputVariableDeclarations()).basicRemove(otherEnd, msgs);
-			case ImperativeModelPackage.SUBROUTINE__STATE_VARIABLE_DECLARATIONS:
-				return ((InternalEList<?>)getStateVariableDeclarations()).basicRemove(otherEnd, msgs);
-			case ImperativeModelPackage.SUBROUTINE__INITIALIZATION_COMPOUND:
-				return basicSetInitializationCompound(null, msgs);
 			case ImperativeModelPackage.SUBROUTINE__COMPUTATION_COMPOUNDS:
 				return ((InternalEList<?>)getComputationCompounds()).basicRemove(otherEnd, msgs);
 		}
@@ -256,16 +207,12 @@ public class SubroutineImpl extends EObjectImpl implements Subroutine {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ImperativeModelPackage.SUBROUTINE__TEMPLATE_VARIABLE_DECLARATIONS:
-				return getTemplateVariableDeclarations();
+			case ImperativeModelPackage.SUBROUTINE__CONTEXT:
+				return getContext();
 			case ImperativeModelPackage.SUBROUTINE__INPUT_VARIABLE_DECLARATIONS:
 				return getInputVariableDeclarations();
 			case ImperativeModelPackage.SUBROUTINE__OUTPUT_VARIABLE_DECLARATIONS:
 				return getOutputVariableDeclarations();
-			case ImperativeModelPackage.SUBROUTINE__STATE_VARIABLE_DECLARATIONS:
-				return getStateVariableDeclarations();
-			case ImperativeModelPackage.SUBROUTINE__INITIALIZATION_COMPOUND:
-				return getInitializationCompound();
 			case ImperativeModelPackage.SUBROUTINE__COMPUTATION_COMPOUNDS:
 				return getComputationCompounds();
 		}
@@ -281,24 +228,16 @@ public class SubroutineImpl extends EObjectImpl implements Subroutine {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ImperativeModelPackage.SUBROUTINE__TEMPLATE_VARIABLE_DECLARATIONS:
-				getTemplateVariableDeclarations().clear();
-				getTemplateVariableDeclarations().addAll((Collection<? extends VariableDeclaration>)newValue);
+			case ImperativeModelPackage.SUBROUTINE__CONTEXT:
+				setContext((SubroutineContext)newValue);
 				return;
 			case ImperativeModelPackage.SUBROUTINE__INPUT_VARIABLE_DECLARATIONS:
 				getInputVariableDeclarations().clear();
-				getInputVariableDeclarations().addAll((Collection<? extends VariableDeclaration>)newValue);
+				getInputVariableDeclarations().addAll((Collection<? extends InputVariableDeclaration>)newValue);
 				return;
 			case ImperativeModelPackage.SUBROUTINE__OUTPUT_VARIABLE_DECLARATIONS:
 				getOutputVariableDeclarations().clear();
-				getOutputVariableDeclarations().addAll((Collection<? extends VariableDeclaration>)newValue);
-				return;
-			case ImperativeModelPackage.SUBROUTINE__STATE_VARIABLE_DECLARATIONS:
-				getStateVariableDeclarations().clear();
-				getStateVariableDeclarations().addAll((Collection<? extends VariableDeclaration>)newValue);
-				return;
-			case ImperativeModelPackage.SUBROUTINE__INITIALIZATION_COMPOUND:
-				setInitializationCompound((Compound)newValue);
+				getOutputVariableDeclarations().addAll((Collection<? extends OutputVariableDeclaration>)newValue);
 				return;
 			case ImperativeModelPackage.SUBROUTINE__COMPUTATION_COMPOUNDS:
 				getComputationCompounds().clear();
@@ -316,20 +255,14 @@ public class SubroutineImpl extends EObjectImpl implements Subroutine {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ImperativeModelPackage.SUBROUTINE__TEMPLATE_VARIABLE_DECLARATIONS:
-				getTemplateVariableDeclarations().clear();
+			case ImperativeModelPackage.SUBROUTINE__CONTEXT:
+				setContext((SubroutineContext)null);
 				return;
 			case ImperativeModelPackage.SUBROUTINE__INPUT_VARIABLE_DECLARATIONS:
 				getInputVariableDeclarations().clear();
 				return;
 			case ImperativeModelPackage.SUBROUTINE__OUTPUT_VARIABLE_DECLARATIONS:
 				getOutputVariableDeclarations().clear();
-				return;
-			case ImperativeModelPackage.SUBROUTINE__STATE_VARIABLE_DECLARATIONS:
-				getStateVariableDeclarations().clear();
-				return;
-			case ImperativeModelPackage.SUBROUTINE__INITIALIZATION_COMPOUND:
-				setInitializationCompound((Compound)null);
 				return;
 			case ImperativeModelPackage.SUBROUTINE__COMPUTATION_COMPOUNDS:
 				getComputationCompounds().clear();
@@ -346,16 +279,12 @@ public class SubroutineImpl extends EObjectImpl implements Subroutine {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ImperativeModelPackage.SUBROUTINE__TEMPLATE_VARIABLE_DECLARATIONS:
-				return templateVariableDeclarations != null && !templateVariableDeclarations.isEmpty();
+			case ImperativeModelPackage.SUBROUTINE__CONTEXT:
+				return context != null;
 			case ImperativeModelPackage.SUBROUTINE__INPUT_VARIABLE_DECLARATIONS:
 				return inputVariableDeclarations != null && !inputVariableDeclarations.isEmpty();
 			case ImperativeModelPackage.SUBROUTINE__OUTPUT_VARIABLE_DECLARATIONS:
 				return outputVariableDeclarations != null && !outputVariableDeclarations.isEmpty();
-			case ImperativeModelPackage.SUBROUTINE__STATE_VARIABLE_DECLARATIONS:
-				return stateVariableDeclarations != null && !stateVariableDeclarations.isEmpty();
-			case ImperativeModelPackage.SUBROUTINE__INITIALIZATION_COMPOUND:
-				return initializationCompound != null;
 			case ImperativeModelPackage.SUBROUTINE__COMPUTATION_COMPOUNDS:
 				return computationCompounds != null && !computationCompounds.isEmpty();
 		}

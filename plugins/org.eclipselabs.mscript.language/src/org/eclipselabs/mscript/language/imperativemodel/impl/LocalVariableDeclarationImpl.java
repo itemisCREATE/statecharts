@@ -11,41 +11,40 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipselabs.mscript.language.imperativemodel.Compound;
+import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage;
-import org.eclipselabs.mscript.language.imperativemodel.Statement;
+import org.eclipselabs.mscript.language.imperativemodel.LocalVariableDeclaration;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Compound</b></em>'.
+ * An implementation of the model object '<em><b>Local Variable Declaration</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.impl.CompoundImpl#getStatements <em>Statements</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.impl.LocalVariableDeclarationImpl#getInitializer <em>Initializer</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class CompoundImpl extends EObjectImpl implements Compound {
+public class LocalVariableDeclarationImpl extends VariableDeclarationImpl implements LocalVariableDeclaration {
 	/**
-	 * The cached value of the '{@link #getStatements() <em>Statements</em>}' containment reference.
+	 * The cached value of the '{@link #getInitializer() <em>Initializer</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getStatements()
+	 * @see #getInitializer()
 	 * @generated
 	 * @ordered
 	 */
-	protected Statement statements;
+	protected Expression initializer;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected CompoundImpl() {
+	protected LocalVariableDeclarationImpl() {
 		super();
 	}
 
@@ -56,7 +55,7 @@ public class CompoundImpl extends EObjectImpl implements Compound {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return ImperativeModelPackage.Literals.COMPOUND;
+		return ImperativeModelPackage.Literals.LOCAL_VARIABLE_DECLARATION;
 	}
 
 	/**
@@ -64,8 +63,8 @@ public class CompoundImpl extends EObjectImpl implements Compound {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Statement getStatements() {
-		return statements;
+	public Expression getInitializer() {
+		return initializer;
 	}
 
 	/**
@@ -73,11 +72,11 @@ public class CompoundImpl extends EObjectImpl implements Compound {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetStatements(Statement newStatements, NotificationChain msgs) {
-		Statement oldStatements = statements;
-		statements = newStatements;
+	public NotificationChain basicSetInitializer(Expression newInitializer, NotificationChain msgs) {
+		Expression oldInitializer = initializer;
+		initializer = newInitializer;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ImperativeModelPackage.COMPOUND__STATEMENTS, oldStatements, newStatements);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ImperativeModelPackage.LOCAL_VARIABLE_DECLARATION__INITIALIZER, oldInitializer, newInitializer);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -88,18 +87,18 @@ public class CompoundImpl extends EObjectImpl implements Compound {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setStatements(Statement newStatements) {
-		if (newStatements != statements) {
+	public void setInitializer(Expression newInitializer) {
+		if (newInitializer != initializer) {
 			NotificationChain msgs = null;
-			if (statements != null)
-				msgs = ((InternalEObject)statements).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ImperativeModelPackage.COMPOUND__STATEMENTS, null, msgs);
-			if (newStatements != null)
-				msgs = ((InternalEObject)newStatements).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ImperativeModelPackage.COMPOUND__STATEMENTS, null, msgs);
-			msgs = basicSetStatements(newStatements, msgs);
+			if (initializer != null)
+				msgs = ((InternalEObject)initializer).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ImperativeModelPackage.LOCAL_VARIABLE_DECLARATION__INITIALIZER, null, msgs);
+			if (newInitializer != null)
+				msgs = ((InternalEObject)newInitializer).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ImperativeModelPackage.LOCAL_VARIABLE_DECLARATION__INITIALIZER, null, msgs);
+			msgs = basicSetInitializer(newInitializer, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ImperativeModelPackage.COMPOUND__STATEMENTS, newStatements, newStatements));
+			eNotify(new ENotificationImpl(this, Notification.SET, ImperativeModelPackage.LOCAL_VARIABLE_DECLARATION__INITIALIZER, newInitializer, newInitializer));
 	}
 
 	/**
@@ -110,8 +109,8 @@ public class CompoundImpl extends EObjectImpl implements Compound {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ImperativeModelPackage.COMPOUND__STATEMENTS:
-				return basicSetStatements(null, msgs);
+			case ImperativeModelPackage.LOCAL_VARIABLE_DECLARATION__INITIALIZER:
+				return basicSetInitializer(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -124,8 +123,8 @@ public class CompoundImpl extends EObjectImpl implements Compound {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ImperativeModelPackage.COMPOUND__STATEMENTS:
-				return getStatements();
+			case ImperativeModelPackage.LOCAL_VARIABLE_DECLARATION__INITIALIZER:
+				return getInitializer();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -138,8 +137,8 @@ public class CompoundImpl extends EObjectImpl implements Compound {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ImperativeModelPackage.COMPOUND__STATEMENTS:
-				setStatements((Statement)newValue);
+			case ImperativeModelPackage.LOCAL_VARIABLE_DECLARATION__INITIALIZER:
+				setInitializer((Expression)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -153,8 +152,8 @@ public class CompoundImpl extends EObjectImpl implements Compound {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ImperativeModelPackage.COMPOUND__STATEMENTS:
-				setStatements((Statement)null);
+			case ImperativeModelPackage.LOCAL_VARIABLE_DECLARATION__INITIALIZER:
+				setInitializer((Expression)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -168,10 +167,10 @@ public class CompoundImpl extends EObjectImpl implements Compound {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ImperativeModelPackage.COMPOUND__STATEMENTS:
-				return statements != null;
+			case ImperativeModelPackage.LOCAL_VARIABLE_DECLARATION__INITIALIZER:
+				return initializer != null;
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //CompoundImpl
+} //LocalVariableDeclarationImpl

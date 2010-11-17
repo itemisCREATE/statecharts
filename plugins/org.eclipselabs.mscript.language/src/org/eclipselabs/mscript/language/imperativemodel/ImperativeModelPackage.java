@@ -71,13 +71,13 @@ public interface ImperativeModelPackage extends EPackage {
 	int SUBROUTINE = 0;
 
 	/**
-	 * The feature id for the '<em><b>Template Variable Declarations</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Context</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SUBROUTINE__TEMPLATE_VARIABLE_DECLARATIONS = 0;
+	int SUBROUTINE__CONTEXT = 0;
 
 	/**
 	 * The feature id for the '<em><b>Input Variable Declarations</b></em>' containment reference list.
@@ -98,31 +98,13 @@ public interface ImperativeModelPackage extends EPackage {
 	int SUBROUTINE__OUTPUT_VARIABLE_DECLARATIONS = 2;
 
 	/**
-	 * The feature id for the '<em><b>State Variable Declarations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SUBROUTINE__STATE_VARIABLE_DECLARATIONS = 3;
-
-	/**
-	 * The feature id for the '<em><b>Initialization Compound</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SUBROUTINE__INITIALIZATION_COMPOUND = 4;
-
-	/**
 	 * The feature id for the '<em><b>Computation Compounds</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SUBROUTINE__COMPUTATION_COMPOUNDS = 5;
+	int SUBROUTINE__COMPUTATION_COMPOUNDS = 3;
 
 	/**
 	 * The number of structural features of the '<em>Subroutine</em>' class.
@@ -131,7 +113,90 @@ public interface ImperativeModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SUBROUTINE_FEATURE_COUNT = 6;
+	int SUBROUTINE_FEATURE_COUNT = 4;
+
+	/**
+	 * The meta object id for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.SubroutineContextImpl <em>Subroutine Context</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipselabs.mscript.language.imperativemodel.impl.SubroutineContextImpl
+	 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getSubroutineContext()
+	 * @generated
+	 */
+	int SUBROUTINE_CONTEXT = 1;
+
+	/**
+	 * The feature id for the '<em><b>Template Variable Declarations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUBROUTINE_CONTEXT__TEMPLATE_VARIABLE_DECLARATIONS = 0;
+
+	/**
+	 * The feature id for the '<em><b>State Variable Declarations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUBROUTINE_CONTEXT__STATE_VARIABLE_DECLARATIONS = 1;
+
+	/**
+	 * The feature id for the '<em><b>Circular Buffer Declarations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUBROUTINE_CONTEXT__CIRCULAR_BUFFER_DECLARATIONS = 2;
+
+	/**
+	 * The feature id for the '<em><b>Initialization Compound</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUBROUTINE_CONTEXT__INITIALIZATION_COMPOUND = 3;
+
+	/**
+	 * The number of structural features of the '<em>Subroutine Context</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUBROUTINE_CONTEXT_FEATURE_COUNT = 4;
+
+	/**
+	 * The meta object id for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.CircularBufferDeclarationImpl <em>Circular Buffer Declaration</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipselabs.mscript.language.imperativemodel.impl.CircularBufferDeclarationImpl
+	 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getCircularBufferDeclaration()
+	 * @generated
+	 */
+	int CIRCULAR_BUFFER_DECLARATION = 2;
+
+	/**
+	 * The feature id for the '<em><b>Size</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CIRCULAR_BUFFER_DECLARATION__SIZE = 0;
+
+	/**
+	 * The number of structural features of the '<em>Circular Buffer Declaration</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CIRCULAR_BUFFER_DECLARATION_FEATURE_COUNT = 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.StatementImpl <em>Statement</em>}' class.
@@ -141,16 +206,17 @@ public interface ImperativeModelPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getStatement()
 	 * @generated
 	 */
-	int STATEMENT = 1;
+	int STATEMENT = 12;
 
 	/**
-	 * The number of structural features of the '<em>Statement</em>' class.
+	 * The meta object id for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.CompoundStatementImpl <em>Compound Statement</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @see org.eclipselabs.mscript.language.imperativemodel.impl.CompoundStatementImpl
+	 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getCompoundStatement()
 	 * @generated
-	 * @ordered
 	 */
-	int STATEMENT_FEATURE_COUNT = 0;
+	int COMPOUND_STATEMENT = 13;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.VariableDeclarationImpl <em>Variable Declaration</em>}' class.
@@ -160,52 +226,67 @@ public interface ImperativeModelPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getVariableDeclaration()
 	 * @generated
 	 */
-	int VARIABLE_DECLARATION = 2;
+	int VARIABLE_DECLARATION = 5;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * The meta object id for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.StatefulVariableDeclarationImpl <em>Stateful Variable Declaration</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @see org.eclipselabs.mscript.language.imperativemodel.impl.StatefulVariableDeclarationImpl
+	 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getStatefulVariableDeclaration()
 	 * @generated
-	 * @ordered
 	 */
-	int VARIABLE_DECLARATION__NAME = STATEMENT_FEATURE_COUNT + 0;
+	int STATEFUL_VARIABLE_DECLARATION = 6;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * The meta object id for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.InputVariableDeclarationImpl <em>Input Variable Declaration</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @see org.eclipselabs.mscript.language.imperativemodel.impl.InputVariableDeclarationImpl
+	 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getInputVariableDeclaration()
 	 * @generated
-	 * @ordered
 	 */
-	int VARIABLE_DECLARATION__TYPE = STATEMENT_FEATURE_COUNT + 1;
+	int INPUT_VARIABLE_DECLARATION = 7;
 
 	/**
-	 * The feature id for the '<em><b>Initializer</b></em>' containment reference.
+	 * The meta object id for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.OutputVariableDeclarationImpl <em>Output Variable Declaration</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @see org.eclipselabs.mscript.language.imperativemodel.impl.OutputVariableDeclarationImpl
+	 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getOutputVariableDeclaration()
 	 * @generated
-	 * @ordered
 	 */
-	int VARIABLE_DECLARATION__INITIALIZER = STATEMENT_FEATURE_COUNT + 2;
+	int OUTPUT_VARIABLE_DECLARATION = 8;
 
 	/**
-	 * The feature id for the '<em><b>Ring Buffer Size</b></em>' attribute.
+	 * The meta object id for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.TemplateVariableDeclarationImpl <em>Template Variable Declaration</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @see org.eclipselabs.mscript.language.imperativemodel.impl.TemplateVariableDeclarationImpl
+	 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getTemplateVariableDeclaration()
 	 * @generated
-	 * @ordered
 	 */
-	int VARIABLE_DECLARATION__RING_BUFFER_SIZE = STATEMENT_FEATURE_COUNT + 3;
+	int TEMPLATE_VARIABLE_DECLARATION = 9;
 
 	/**
-	 * The number of structural features of the '<em>Variable Declaration</em>' class.
+	 * The meta object id for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.StateVariableDeclarationImpl <em>State Variable Declaration</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @see org.eclipselabs.mscript.language.imperativemodel.impl.StateVariableDeclarationImpl
+	 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getStateVariableDeclaration()
 	 * @generated
-	 * @ordered
 	 */
-	int VARIABLE_DECLARATION_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 4;
+	int STATE_VARIABLE_DECLARATION = 10;
+
+	/**
+	 * The meta object id for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.LocalVariableDeclarationImpl <em>Local Variable Declaration</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipselabs.mscript.language.imperativemodel.impl.LocalVariableDeclarationImpl
+	 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getLocalVariableDeclaration()
+	 * @generated
+	 */
+	int LOCAL_VARIABLE_DECLARATION = 11;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.CompoundImpl <em>Compound</em>}' class.
@@ -224,7 +305,7 @@ public interface ImperativeModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOUND__STATEMENTS = STATEMENT_FEATURE_COUNT + 0;
+	int COMPOUND__STATEMENTS = 0;
 
 	/**
 	 * The number of structural features of the '<em>Compound</em>' class.
@@ -233,7 +314,7 @@ public interface ImperativeModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOUND_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 1;
+	int COMPOUND_FEATURE_COUNT = 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.ComputationCompoundImpl <em>Computation Compound</em>}' class.
@@ -255,22 +336,22 @@ public interface ImperativeModelPackage extends EPackage {
 	int COMPUTATION_COMPOUND__STATEMENTS = COMPOUND__STATEMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Used Inputs</b></em>' reference list.
+	 * The feature id for the '<em><b>Inputs</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPUTATION_COMPOUND__USED_INPUTS = COMPOUND_FEATURE_COUNT + 0;
+	int COMPUTATION_COMPOUND__INPUTS = COMPOUND_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Computed Outputs</b></em>' reference list.
+	 * The feature id for the '<em><b>Outputs</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPUTATION_COMPOUND__COMPUTED_OUTPUTS = COMPOUND_FEATURE_COUNT + 1;
+	int COMPUTATION_COMPOUND__OUTPUTS = COMPOUND_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Computation Compound</em>' class.
@@ -282,6 +363,267 @@ public interface ImperativeModelPackage extends EPackage {
 	int COMPUTATION_COMPOUND_FEATURE_COUNT = COMPOUND_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_DECLARATION__NAME = 0;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_DECLARATION__TYPE = 1;
+
+	/**
+	 * The number of structural features of the '<em>Variable Declaration</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_DECLARATION_FEATURE_COUNT = 2;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATEFUL_VARIABLE_DECLARATION__NAME = VARIABLE_DECLARATION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATEFUL_VARIABLE_DECLARATION__TYPE = VARIABLE_DECLARATION__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Circular Buffer Declaration</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATEFUL_VARIABLE_DECLARATION__CIRCULAR_BUFFER_DECLARATION = VARIABLE_DECLARATION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Stateful Variable Declaration</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATEFUL_VARIABLE_DECLARATION_FEATURE_COUNT = VARIABLE_DECLARATION_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_VARIABLE_DECLARATION__NAME = STATEFUL_VARIABLE_DECLARATION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_VARIABLE_DECLARATION__TYPE = STATEFUL_VARIABLE_DECLARATION__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Circular Buffer Declaration</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_VARIABLE_DECLARATION__CIRCULAR_BUFFER_DECLARATION = STATEFUL_VARIABLE_DECLARATION__CIRCULAR_BUFFER_DECLARATION;
+
+	/**
+	 * The number of structural features of the '<em>Input Variable Declaration</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_VARIABLE_DECLARATION_FEATURE_COUNT = STATEFUL_VARIABLE_DECLARATION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OUTPUT_VARIABLE_DECLARATION__NAME = STATEFUL_VARIABLE_DECLARATION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OUTPUT_VARIABLE_DECLARATION__TYPE = STATEFUL_VARIABLE_DECLARATION__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Circular Buffer Declaration</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OUTPUT_VARIABLE_DECLARATION__CIRCULAR_BUFFER_DECLARATION = STATEFUL_VARIABLE_DECLARATION__CIRCULAR_BUFFER_DECLARATION;
+
+	/**
+	 * The number of structural features of the '<em>Output Variable Declaration</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OUTPUT_VARIABLE_DECLARATION_FEATURE_COUNT = STATEFUL_VARIABLE_DECLARATION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_VARIABLE_DECLARATION__NAME = VARIABLE_DECLARATION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_VARIABLE_DECLARATION__TYPE = VARIABLE_DECLARATION__TYPE;
+
+	/**
+	 * The number of structural features of the '<em>Template Variable Declaration</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_VARIABLE_DECLARATION_FEATURE_COUNT = VARIABLE_DECLARATION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE_VARIABLE_DECLARATION__NAME = STATEFUL_VARIABLE_DECLARATION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE_VARIABLE_DECLARATION__TYPE = STATEFUL_VARIABLE_DECLARATION__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Circular Buffer Declaration</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE_VARIABLE_DECLARATION__CIRCULAR_BUFFER_DECLARATION = STATEFUL_VARIABLE_DECLARATION__CIRCULAR_BUFFER_DECLARATION;
+
+	/**
+	 * The number of structural features of the '<em>State Variable Declaration</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE_VARIABLE_DECLARATION_FEATURE_COUNT = STATEFUL_VARIABLE_DECLARATION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOCAL_VARIABLE_DECLARATION__NAME = VARIABLE_DECLARATION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOCAL_VARIABLE_DECLARATION__TYPE = VARIABLE_DECLARATION__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Initializer</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOCAL_VARIABLE_DECLARATION__INITIALIZER = VARIABLE_DECLARATION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Local Variable Declaration</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOCAL_VARIABLE_DECLARATION_FEATURE_COUNT = VARIABLE_DECLARATION_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Statement</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATEMENT_FEATURE_COUNT = 0;
+
+	/**
+	 * The feature id for the '<em><b>Statements</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOUND_STATEMENT__STATEMENTS = COMPOUND__STATEMENTS;
+
+	/**
+	 * The number of structural features of the '<em>Compound Statement</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOUND_STATEMENT_FEATURE_COUNT = COMPOUND_FEATURE_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.AssignmentImpl <em>Assignment</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -289,7 +631,7 @@ public interface ImperativeModelPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getAssignment()
 	 * @generated
 	 */
-	int ASSIGNMENT = 5;
+	int ASSIGNMENT = 14;
 
 	/**
 	 * The feature id for the '<em><b>Target</b></em>' reference.
@@ -326,7 +668,7 @@ public interface ImperativeModelPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getIfStatement()
 	 * @generated
 	 */
-	int IF_STATEMENT = 6;
+	int IF_STATEMENT = 15;
 
 	/**
 	 * The feature id for the '<em><b>Condition</b></em>' containment reference.
@@ -372,7 +714,7 @@ public interface ImperativeModelPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getForeachStatement()
 	 * @generated
 	 */
-	int FOREACH_STATEMENT = 7;
+	int FOREACH_STATEMENT = 16;
 
 	/**
 	 * The feature id for the '<em><b>Iteration Variable Declaration</b></em>' containment reference.
@@ -411,23 +753,23 @@ public interface ImperativeModelPackage extends EPackage {
 	int FOREACH_STATEMENT_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.VariableAccessImpl <em>Variable Access</em>}' class.
+	 * The meta object id for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.VariableReferenceImpl <em>Variable Reference</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipselabs.mscript.language.imperativemodel.impl.VariableAccessImpl
-	 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getVariableAccess()
+	 * @see org.eclipselabs.mscript.language.imperativemodel.impl.VariableReferenceImpl
+	 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getVariableReference()
 	 * @generated
 	 */
-	int VARIABLE_ACCESS = 8;
+	int VARIABLE_REFERENCE = 17;
 
 	/**
-	 * The feature id for the '<em><b>Accessed Declaration</b></em>' reference.
+	 * The feature id for the '<em><b>Declaration</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_ACCESS__ACCESSED_DECLARATION = AstPackage.EXPRESSION_FEATURE_COUNT + 0;
+	int VARIABLE_REFERENCE__DECLARATION = AstPackage.EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Step Index</b></em>' attribute.
@@ -436,17 +778,25 @@ public interface ImperativeModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_ACCESS__STEP_INDEX = AstPackage.EXPRESSION_FEATURE_COUNT + 1;
+	int VARIABLE_REFERENCE__STEP_INDEX = AstPackage.EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of structural features of the '<em>Variable Access</em>' class.
+	 * The feature id for the '<em><b>Array Indices</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_ACCESS_FEATURE_COUNT = AstPackage.EXPRESSION_FEATURE_COUNT + 2;
+	int VARIABLE_REFERENCE__ARRAY_INDICES = AstPackage.EXPRESSION_FEATURE_COUNT + 2;
 
+	/**
+	 * The number of structural features of the '<em>Variable Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_REFERENCE_FEATURE_COUNT = AstPackage.EXPRESSION_FEATURE_COUNT + 3;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.imperativemodel.Subroutine <em>Subroutine</em>}'.
@@ -459,15 +809,15 @@ public interface ImperativeModelPackage extends EPackage {
 	EClass getSubroutine();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.imperativemodel.Subroutine#getTemplateVariableDeclarations <em>Template Variable Declarations</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.imperativemodel.Subroutine#getContext <em>Context</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Template Variable Declarations</em>'.
-	 * @see org.eclipselabs.mscript.language.imperativemodel.Subroutine#getTemplateVariableDeclarations()
+	 * @return the meta object for the containment reference '<em>Context</em>'.
+	 * @see org.eclipselabs.mscript.language.imperativemodel.Subroutine#getContext()
 	 * @see #getSubroutine()
 	 * @generated
 	 */
-	EReference getSubroutine_TemplateVariableDeclarations();
+	EReference getSubroutine_Context();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.imperativemodel.Subroutine#getInputVariableDeclarations <em>Input Variable Declarations</em>}'.
@@ -492,28 +842,6 @@ public interface ImperativeModelPackage extends EPackage {
 	EReference getSubroutine_OutputVariableDeclarations();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.imperativemodel.Subroutine#getStateVariableDeclarations <em>State Variable Declarations</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>State Variable Declarations</em>'.
-	 * @see org.eclipselabs.mscript.language.imperativemodel.Subroutine#getStateVariableDeclarations()
-	 * @see #getSubroutine()
-	 * @generated
-	 */
-	EReference getSubroutine_StateVariableDeclarations();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.imperativemodel.Subroutine#getInitializationCompound <em>Initialization Compound</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Initialization Compound</em>'.
-	 * @see org.eclipselabs.mscript.language.imperativemodel.Subroutine#getInitializationCompound()
-	 * @see #getSubroutine()
-	 * @generated
-	 */
-	EReference getSubroutine_InitializationCompound();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.imperativemodel.Subroutine#getComputationCompounds <em>Computation Compounds</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -525,6 +853,81 @@ public interface ImperativeModelPackage extends EPackage {
 	EReference getSubroutine_ComputationCompounds();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.imperativemodel.SubroutineContext <em>Subroutine Context</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Subroutine Context</em>'.
+	 * @see org.eclipselabs.mscript.language.imperativemodel.SubroutineContext
+	 * @generated
+	 */
+	EClass getSubroutineContext();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.imperativemodel.SubroutineContext#getTemplateVariableDeclarations <em>Template Variable Declarations</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Template Variable Declarations</em>'.
+	 * @see org.eclipselabs.mscript.language.imperativemodel.SubroutineContext#getTemplateVariableDeclarations()
+	 * @see #getSubroutineContext()
+	 * @generated
+	 */
+	EReference getSubroutineContext_TemplateVariableDeclarations();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.imperativemodel.SubroutineContext#getStateVariableDeclarations <em>State Variable Declarations</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>State Variable Declarations</em>'.
+	 * @see org.eclipselabs.mscript.language.imperativemodel.SubroutineContext#getStateVariableDeclarations()
+	 * @see #getSubroutineContext()
+	 * @generated
+	 */
+	EReference getSubroutineContext_StateVariableDeclarations();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.imperativemodel.SubroutineContext#getCircularBufferDeclarations <em>Circular Buffer Declarations</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Circular Buffer Declarations</em>'.
+	 * @see org.eclipselabs.mscript.language.imperativemodel.SubroutineContext#getCircularBufferDeclarations()
+	 * @see #getSubroutineContext()
+	 * @generated
+	 */
+	EReference getSubroutineContext_CircularBufferDeclarations();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.imperativemodel.SubroutineContext#getInitializationCompound <em>Initialization Compound</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Initialization Compound</em>'.
+	 * @see org.eclipselabs.mscript.language.imperativemodel.SubroutineContext#getInitializationCompound()
+	 * @see #getSubroutineContext()
+	 * @generated
+	 */
+	EReference getSubroutineContext_InitializationCompound();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.imperativemodel.CircularBufferDeclaration <em>Circular Buffer Declaration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Circular Buffer Declaration</em>'.
+	 * @see org.eclipselabs.mscript.language.imperativemodel.CircularBufferDeclaration
+	 * @generated
+	 */
+	EClass getCircularBufferDeclaration();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.imperativemodel.CircularBufferDeclaration#getSize <em>Size</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Size</em>'.
+	 * @see org.eclipselabs.mscript.language.imperativemodel.CircularBufferDeclaration#getSize()
+	 * @see #getCircularBufferDeclaration()
+	 * @generated
+	 */
+	EAttribute getCircularBufferDeclaration_Size();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.imperativemodel.Statement <em>Statement</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -533,6 +936,16 @@ public interface ImperativeModelPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getStatement();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.imperativemodel.CompoundStatement <em>Compound Statement</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Compound Statement</em>'.
+	 * @see org.eclipselabs.mscript.language.imperativemodel.CompoundStatement
+	 * @generated
+	 */
+	EClass getCompoundStatement();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.imperativemodel.VariableDeclaration <em>Variable Declaration</em>}'.
@@ -567,26 +980,86 @@ public interface ImperativeModelPackage extends EPackage {
 	EReference getVariableDeclaration_Type();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.imperativemodel.VariableDeclaration#getInitializer <em>Initializer</em>}'.
+	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.imperativemodel.StatefulVariableDeclaration <em>Stateful Variable Declaration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Stateful Variable Declaration</em>'.
+	 * @see org.eclipselabs.mscript.language.imperativemodel.StatefulVariableDeclaration
+	 * @generated
+	 */
+	EClass getStatefulVariableDeclaration();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipselabs.mscript.language.imperativemodel.StatefulVariableDeclaration#getCircularBufferDeclaration <em>Circular Buffer Declaration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Circular Buffer Declaration</em>'.
+	 * @see org.eclipselabs.mscript.language.imperativemodel.StatefulVariableDeclaration#getCircularBufferDeclaration()
+	 * @see #getStatefulVariableDeclaration()
+	 * @generated
+	 */
+	EReference getStatefulVariableDeclaration_CircularBufferDeclaration();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.imperativemodel.InputVariableDeclaration <em>Input Variable Declaration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Input Variable Declaration</em>'.
+	 * @see org.eclipselabs.mscript.language.imperativemodel.InputVariableDeclaration
+	 * @generated
+	 */
+	EClass getInputVariableDeclaration();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.imperativemodel.OutputVariableDeclaration <em>Output Variable Declaration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Output Variable Declaration</em>'.
+	 * @see org.eclipselabs.mscript.language.imperativemodel.OutputVariableDeclaration
+	 * @generated
+	 */
+	EClass getOutputVariableDeclaration();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.imperativemodel.TemplateVariableDeclaration <em>Template Variable Declaration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Template Variable Declaration</em>'.
+	 * @see org.eclipselabs.mscript.language.imperativemodel.TemplateVariableDeclaration
+	 * @generated
+	 */
+	EClass getTemplateVariableDeclaration();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.imperativemodel.StateVariableDeclaration <em>State Variable Declaration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>State Variable Declaration</em>'.
+	 * @see org.eclipselabs.mscript.language.imperativemodel.StateVariableDeclaration
+	 * @generated
+	 */
+	EClass getStateVariableDeclaration();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.imperativemodel.LocalVariableDeclaration <em>Local Variable Declaration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Local Variable Declaration</em>'.
+	 * @see org.eclipselabs.mscript.language.imperativemodel.LocalVariableDeclaration
+	 * @generated
+	 */
+	EClass getLocalVariableDeclaration();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.imperativemodel.LocalVariableDeclaration#getInitializer <em>Initializer</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Initializer</em>'.
-	 * @see org.eclipselabs.mscript.language.imperativemodel.VariableDeclaration#getInitializer()
-	 * @see #getVariableDeclaration()
+	 * @see org.eclipselabs.mscript.language.imperativemodel.LocalVariableDeclaration#getInitializer()
+	 * @see #getLocalVariableDeclaration()
 	 * @generated
 	 */
-	EReference getVariableDeclaration_Initializer();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.imperativemodel.VariableDeclaration#getRingBufferSize <em>Ring Buffer Size</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Ring Buffer Size</em>'.
-	 * @see org.eclipselabs.mscript.language.imperativemodel.VariableDeclaration#getRingBufferSize()
-	 * @see #getVariableDeclaration()
-	 * @generated
-	 */
-	EAttribute getVariableDeclaration_RingBufferSize();
+	EReference getLocalVariableDeclaration_Initializer();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.imperativemodel.Compound <em>Compound</em>}'.
@@ -620,26 +1093,26 @@ public interface ImperativeModelPackage extends EPackage {
 	EClass getComputationCompound();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.eclipselabs.mscript.language.imperativemodel.ComputationCompound#getUsedInputs <em>Used Inputs</em>}'.
+	 * Returns the meta object for the reference list '{@link org.eclipselabs.mscript.language.imperativemodel.ComputationCompound#getInputs <em>Inputs</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Used Inputs</em>'.
-	 * @see org.eclipselabs.mscript.language.imperativemodel.ComputationCompound#getUsedInputs()
+	 * @return the meta object for the reference list '<em>Inputs</em>'.
+	 * @see org.eclipselabs.mscript.language.imperativemodel.ComputationCompound#getInputs()
 	 * @see #getComputationCompound()
 	 * @generated
 	 */
-	EReference getComputationCompound_UsedInputs();
+	EReference getComputationCompound_Inputs();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.eclipselabs.mscript.language.imperativemodel.ComputationCompound#getComputedOutputs <em>Computed Outputs</em>}'.
+	 * Returns the meta object for the reference list '{@link org.eclipselabs.mscript.language.imperativemodel.ComputationCompound#getOutputs <em>Outputs</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Computed Outputs</em>'.
-	 * @see org.eclipselabs.mscript.language.imperativemodel.ComputationCompound#getComputedOutputs()
+	 * @return the meta object for the reference list '<em>Outputs</em>'.
+	 * @see org.eclipselabs.mscript.language.imperativemodel.ComputationCompound#getOutputs()
 	 * @see #getComputationCompound()
 	 * @generated
 	 */
-	EReference getComputationCompound_ComputedOutputs();
+	EReference getComputationCompound_Outputs();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.imperativemodel.Assignment <em>Assignment</em>}'.
@@ -760,36 +1233,47 @@ public interface ImperativeModelPackage extends EPackage {
 	EReference getForeachStatement_Body();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.imperativemodel.VariableAccess <em>Variable Access</em>}'.
+	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.imperativemodel.VariableReference <em>Variable Reference</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Variable Access</em>'.
-	 * @see org.eclipselabs.mscript.language.imperativemodel.VariableAccess
+	 * @return the meta object for class '<em>Variable Reference</em>'.
+	 * @see org.eclipselabs.mscript.language.imperativemodel.VariableReference
 	 * @generated
 	 */
-	EClass getVariableAccess();
+	EClass getVariableReference();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipselabs.mscript.language.imperativemodel.VariableAccess#getAccessedDeclaration <em>Accessed Declaration</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipselabs.mscript.language.imperativemodel.VariableReference#getDeclaration <em>Declaration</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Accessed Declaration</em>'.
-	 * @see org.eclipselabs.mscript.language.imperativemodel.VariableAccess#getAccessedDeclaration()
-	 * @see #getVariableAccess()
+	 * @return the meta object for the reference '<em>Declaration</em>'.
+	 * @see org.eclipselabs.mscript.language.imperativemodel.VariableReference#getDeclaration()
+	 * @see #getVariableReference()
 	 * @generated
 	 */
-	EReference getVariableAccess_AccessedDeclaration();
+	EReference getVariableReference_Declaration();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.imperativemodel.VariableAccess#getStepIndex <em>Step Index</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.imperativemodel.VariableReference#getStepIndex <em>Step Index</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Step Index</em>'.
-	 * @see org.eclipselabs.mscript.language.imperativemodel.VariableAccess#getStepIndex()
-	 * @see #getVariableAccess()
+	 * @see org.eclipselabs.mscript.language.imperativemodel.VariableReference#getStepIndex()
+	 * @see #getVariableReference()
 	 * @generated
 	 */
-	EAttribute getVariableAccess_StepIndex();
+	EAttribute getVariableReference_StepIndex();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.imperativemodel.VariableReference#getArrayIndices <em>Array Indices</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Array Indices</em>'.
+	 * @see org.eclipselabs.mscript.language.imperativemodel.VariableReference#getArrayIndices()
+	 * @see #getVariableReference()
+	 * @generated
+	 */
+	EReference getVariableReference_ArrayIndices();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -824,12 +1308,12 @@ public interface ImperativeModelPackage extends EPackage {
 		EClass SUBROUTINE = eINSTANCE.getSubroutine();
 
 		/**
-		 * The meta object literal for the '<em><b>Template Variable Declarations</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Context</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SUBROUTINE__TEMPLATE_VARIABLE_DECLARATIONS = eINSTANCE.getSubroutine_TemplateVariableDeclarations();
+		EReference SUBROUTINE__CONTEXT = eINSTANCE.getSubroutine_Context();
 
 		/**
 		 * The meta object literal for the '<em><b>Input Variable Declarations</b></em>' containment reference list feature.
@@ -848,12 +1332,46 @@ public interface ImperativeModelPackage extends EPackage {
 		EReference SUBROUTINE__OUTPUT_VARIABLE_DECLARATIONS = eINSTANCE.getSubroutine_OutputVariableDeclarations();
 
 		/**
+		 * The meta object literal for the '<em><b>Computation Compounds</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SUBROUTINE__COMPUTATION_COMPOUNDS = eINSTANCE.getSubroutine_ComputationCompounds();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.SubroutineContextImpl <em>Subroutine Context</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipselabs.mscript.language.imperativemodel.impl.SubroutineContextImpl
+		 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getSubroutineContext()
+		 * @generated
+		 */
+		EClass SUBROUTINE_CONTEXT = eINSTANCE.getSubroutineContext();
+
+		/**
+		 * The meta object literal for the '<em><b>Template Variable Declarations</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SUBROUTINE_CONTEXT__TEMPLATE_VARIABLE_DECLARATIONS = eINSTANCE.getSubroutineContext_TemplateVariableDeclarations();
+
+		/**
 		 * The meta object literal for the '<em><b>State Variable Declarations</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SUBROUTINE__STATE_VARIABLE_DECLARATIONS = eINSTANCE.getSubroutine_StateVariableDeclarations();
+		EReference SUBROUTINE_CONTEXT__STATE_VARIABLE_DECLARATIONS = eINSTANCE.getSubroutineContext_StateVariableDeclarations();
+
+		/**
+		 * The meta object literal for the '<em><b>Circular Buffer Declarations</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SUBROUTINE_CONTEXT__CIRCULAR_BUFFER_DECLARATIONS = eINSTANCE.getSubroutineContext_CircularBufferDeclarations();
 
 		/**
 		 * The meta object literal for the '<em><b>Initialization Compound</b></em>' containment reference feature.
@@ -861,15 +1379,25 @@ public interface ImperativeModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SUBROUTINE__INITIALIZATION_COMPOUND = eINSTANCE.getSubroutine_InitializationCompound();
+		EReference SUBROUTINE_CONTEXT__INITIALIZATION_COMPOUND = eINSTANCE.getSubroutineContext_InitializationCompound();
 
 		/**
-		 * The meta object literal for the '<em><b>Computation Compounds</b></em>' containment reference list feature.
+		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.CircularBufferDeclarationImpl <em>Circular Buffer Declaration</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipselabs.mscript.language.imperativemodel.impl.CircularBufferDeclarationImpl
+		 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getCircularBufferDeclaration()
+		 * @generated
+		 */
+		EClass CIRCULAR_BUFFER_DECLARATION = eINSTANCE.getCircularBufferDeclaration();
+
+		/**
+		 * The meta object literal for the '<em><b>Size</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SUBROUTINE__COMPUTATION_COMPOUNDS = eINSTANCE.getSubroutine_ComputationCompounds();
+		EAttribute CIRCULAR_BUFFER_DECLARATION__SIZE = eINSTANCE.getCircularBufferDeclaration_Size();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.StatementImpl <em>Statement</em>}' class.
@@ -880,6 +1408,16 @@ public interface ImperativeModelPackage extends EPackage {
 		 * @generated
 		 */
 		EClass STATEMENT = eINSTANCE.getStatement();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.CompoundStatementImpl <em>Compound Statement</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipselabs.mscript.language.imperativemodel.impl.CompoundStatementImpl
+		 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getCompoundStatement()
+		 * @generated
+		 */
+		EClass COMPOUND_STATEMENT = eINSTANCE.getCompoundStatement();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.VariableDeclarationImpl <em>Variable Declaration</em>}' class.
@@ -908,20 +1446,80 @@ public interface ImperativeModelPackage extends EPackage {
 		EReference VARIABLE_DECLARATION__TYPE = eINSTANCE.getVariableDeclaration_Type();
 
 		/**
+		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.StatefulVariableDeclarationImpl <em>Stateful Variable Declaration</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipselabs.mscript.language.imperativemodel.impl.StatefulVariableDeclarationImpl
+		 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getStatefulVariableDeclaration()
+		 * @generated
+		 */
+		EClass STATEFUL_VARIABLE_DECLARATION = eINSTANCE.getStatefulVariableDeclaration();
+
+		/**
+		 * The meta object literal for the '<em><b>Circular Buffer Declaration</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STATEFUL_VARIABLE_DECLARATION__CIRCULAR_BUFFER_DECLARATION = eINSTANCE.getStatefulVariableDeclaration_CircularBufferDeclaration();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.InputVariableDeclarationImpl <em>Input Variable Declaration</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipselabs.mscript.language.imperativemodel.impl.InputVariableDeclarationImpl
+		 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getInputVariableDeclaration()
+		 * @generated
+		 */
+		EClass INPUT_VARIABLE_DECLARATION = eINSTANCE.getInputVariableDeclaration();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.OutputVariableDeclarationImpl <em>Output Variable Declaration</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipselabs.mscript.language.imperativemodel.impl.OutputVariableDeclarationImpl
+		 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getOutputVariableDeclaration()
+		 * @generated
+		 */
+		EClass OUTPUT_VARIABLE_DECLARATION = eINSTANCE.getOutputVariableDeclaration();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.TemplateVariableDeclarationImpl <em>Template Variable Declaration</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipselabs.mscript.language.imperativemodel.impl.TemplateVariableDeclarationImpl
+		 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getTemplateVariableDeclaration()
+		 * @generated
+		 */
+		EClass TEMPLATE_VARIABLE_DECLARATION = eINSTANCE.getTemplateVariableDeclaration();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.StateVariableDeclarationImpl <em>State Variable Declaration</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipselabs.mscript.language.imperativemodel.impl.StateVariableDeclarationImpl
+		 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getStateVariableDeclaration()
+		 * @generated
+		 */
+		EClass STATE_VARIABLE_DECLARATION = eINSTANCE.getStateVariableDeclaration();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.LocalVariableDeclarationImpl <em>Local Variable Declaration</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipselabs.mscript.language.imperativemodel.impl.LocalVariableDeclarationImpl
+		 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getLocalVariableDeclaration()
+		 * @generated
+		 */
+		EClass LOCAL_VARIABLE_DECLARATION = eINSTANCE.getLocalVariableDeclaration();
+
+		/**
 		 * The meta object literal for the '<em><b>Initializer</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference VARIABLE_DECLARATION__INITIALIZER = eINSTANCE.getVariableDeclaration_Initializer();
-
-		/**
-		 * The meta object literal for the '<em><b>Ring Buffer Size</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute VARIABLE_DECLARATION__RING_BUFFER_SIZE = eINSTANCE.getVariableDeclaration_RingBufferSize();
+		EReference LOCAL_VARIABLE_DECLARATION__INITIALIZER = eINSTANCE.getLocalVariableDeclaration_Initializer();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.CompoundImpl <em>Compound</em>}' class.
@@ -952,20 +1550,20 @@ public interface ImperativeModelPackage extends EPackage {
 		EClass COMPUTATION_COMPOUND = eINSTANCE.getComputationCompound();
 
 		/**
-		 * The meta object literal for the '<em><b>Used Inputs</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Inputs</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference COMPUTATION_COMPOUND__USED_INPUTS = eINSTANCE.getComputationCompound_UsedInputs();
+		EReference COMPUTATION_COMPOUND__INPUTS = eINSTANCE.getComputationCompound_Inputs();
 
 		/**
-		 * The meta object literal for the '<em><b>Computed Outputs</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Outputs</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference COMPUTATION_COMPOUND__COMPUTED_OUTPUTS = eINSTANCE.getComputationCompound_ComputedOutputs();
+		EReference COMPUTATION_COMPOUND__OUTPUTS = eINSTANCE.getComputationCompound_Outputs();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.AssignmentImpl <em>Assignment</em>}' class.
@@ -1062,22 +1660,22 @@ public interface ImperativeModelPackage extends EPackage {
 		EReference FOREACH_STATEMENT__BODY = eINSTANCE.getForeachStatement_Body();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.VariableAccessImpl <em>Variable Access</em>}' class.
+		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.VariableReferenceImpl <em>Variable Reference</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipselabs.mscript.language.imperativemodel.impl.VariableAccessImpl
-		 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getVariableAccess()
+		 * @see org.eclipselabs.mscript.language.imperativemodel.impl.VariableReferenceImpl
+		 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getVariableReference()
 		 * @generated
 		 */
-		EClass VARIABLE_ACCESS = eINSTANCE.getVariableAccess();
+		EClass VARIABLE_REFERENCE = eINSTANCE.getVariableReference();
 
 		/**
-		 * The meta object literal for the '<em><b>Accessed Declaration</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Declaration</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference VARIABLE_ACCESS__ACCESSED_DECLARATION = eINSTANCE.getVariableAccess_AccessedDeclaration();
+		EReference VARIABLE_REFERENCE__DECLARATION = eINSTANCE.getVariableReference_Declaration();
 
 		/**
 		 * The meta object literal for the '<em><b>Step Index</b></em>' attribute feature.
@@ -1085,7 +1683,15 @@ public interface ImperativeModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute VARIABLE_ACCESS__STEP_INDEX = eINSTANCE.getVariableAccess_StepIndex();
+		EAttribute VARIABLE_REFERENCE__STEP_INDEX = eINSTANCE.getVariableReference_StepIndex();
+
+		/**
+		 * The meta object literal for the '<em><b>Array Indices</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference VARIABLE_REFERENCE__ARRAY_INDICES = eINSTANCE.getVariableReference_ArrayIndices();
 
 	}
 

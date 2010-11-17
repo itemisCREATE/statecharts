@@ -7,11 +7,10 @@
 package org.eclipselabs.mscript.language.imperativemodel.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipselabs.mscript.language.ast.Expression;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage;
 import org.eclipselabs.mscript.language.imperativemodel.VariableDeclaration;
 import org.eclipselabs.mscript.typesystem.DataType;
@@ -25,14 +24,12 @@ import org.eclipselabs.mscript.typesystem.DataType;
  * <ul>
  *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.impl.VariableDeclarationImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.impl.VariableDeclarationImpl#getType <em>Type</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.impl.VariableDeclarationImpl#getInitializer <em>Initializer</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.impl.VariableDeclarationImpl#getRingBufferSize <em>Ring Buffer Size</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class VariableDeclarationImpl extends StatementImpl implements VariableDeclaration {
+public abstract class VariableDeclarationImpl extends EObjectImpl implements VariableDeclaration {
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -62,36 +59,6 @@ public class VariableDeclarationImpl extends StatementImpl implements VariableDe
 	 * @ordered
 	 */
 	protected DataType type;
-
-	/**
-	 * The cached value of the '{@link #getInitializer() <em>Initializer</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getInitializer()
-	 * @generated
-	 * @ordered
-	 */
-	protected Expression initializer;
-
-	/**
-	 * The default value of the '{@link #getRingBufferSize() <em>Ring Buffer Size</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getRingBufferSize()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final int RING_BUFFER_SIZE_EDEFAULT = 1;
-
-	/**
-	 * The cached value of the '{@link #getRingBufferSize() <em>Ring Buffer Size</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getRingBufferSize()
-	 * @generated
-	 * @ordered
-	 */
-	protected int ringBufferSize = RING_BUFFER_SIZE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -176,84 +143,6 @@ public class VariableDeclarationImpl extends StatementImpl implements VariableDe
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Expression getInitializer() {
-		return initializer;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetInitializer(Expression newInitializer, NotificationChain msgs) {
-		Expression oldInitializer = initializer;
-		initializer = newInitializer;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ImperativeModelPackage.VARIABLE_DECLARATION__INITIALIZER, oldInitializer, newInitializer);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setInitializer(Expression newInitializer) {
-		if (newInitializer != initializer) {
-			NotificationChain msgs = null;
-			if (initializer != null)
-				msgs = ((InternalEObject)initializer).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ImperativeModelPackage.VARIABLE_DECLARATION__INITIALIZER, null, msgs);
-			if (newInitializer != null)
-				msgs = ((InternalEObject)newInitializer).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ImperativeModelPackage.VARIABLE_DECLARATION__INITIALIZER, null, msgs);
-			msgs = basicSetInitializer(newInitializer, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ImperativeModelPackage.VARIABLE_DECLARATION__INITIALIZER, newInitializer, newInitializer));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public int getRingBufferSize() {
-		return ringBufferSize;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setRingBufferSize(int newRingBufferSize) {
-		int oldRingBufferSize = ringBufferSize;
-		ringBufferSize = newRingBufferSize;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ImperativeModelPackage.VARIABLE_DECLARATION__RING_BUFFER_SIZE, oldRingBufferSize, ringBufferSize));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case ImperativeModelPackage.VARIABLE_DECLARATION__INITIALIZER:
-				return basicSetInitializer(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -262,10 +151,6 @@ public class VariableDeclarationImpl extends StatementImpl implements VariableDe
 			case ImperativeModelPackage.VARIABLE_DECLARATION__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
-			case ImperativeModelPackage.VARIABLE_DECLARATION__INITIALIZER:
-				return getInitializer();
-			case ImperativeModelPackage.VARIABLE_DECLARATION__RING_BUFFER_SIZE:
-				return getRingBufferSize();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -283,12 +168,6 @@ public class VariableDeclarationImpl extends StatementImpl implements VariableDe
 				return;
 			case ImperativeModelPackage.VARIABLE_DECLARATION__TYPE:
 				setType((DataType)newValue);
-				return;
-			case ImperativeModelPackage.VARIABLE_DECLARATION__INITIALIZER:
-				setInitializer((Expression)newValue);
-				return;
-			case ImperativeModelPackage.VARIABLE_DECLARATION__RING_BUFFER_SIZE:
-				setRingBufferSize((Integer)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -308,12 +187,6 @@ public class VariableDeclarationImpl extends StatementImpl implements VariableDe
 			case ImperativeModelPackage.VARIABLE_DECLARATION__TYPE:
 				setType((DataType)null);
 				return;
-			case ImperativeModelPackage.VARIABLE_DECLARATION__INITIALIZER:
-				setInitializer((Expression)null);
-				return;
-			case ImperativeModelPackage.VARIABLE_DECLARATION__RING_BUFFER_SIZE:
-				setRingBufferSize(RING_BUFFER_SIZE_EDEFAULT);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -330,10 +203,6 @@ public class VariableDeclarationImpl extends StatementImpl implements VariableDe
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case ImperativeModelPackage.VARIABLE_DECLARATION__TYPE:
 				return type != null;
-			case ImperativeModelPackage.VARIABLE_DECLARATION__INITIALIZER:
-				return initializer != null;
-			case ImperativeModelPackage.VARIABLE_DECLARATION__RING_BUFFER_SIZE:
-				return ringBufferSize != RING_BUFFER_SIZE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -350,8 +219,6 @@ public class VariableDeclarationImpl extends StatementImpl implements VariableDe
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (name: ");
 		result.append(name);
-		result.append(", ringBufferSize: ");
-		result.append(ringBufferSize);
 		result.append(')');
 		return result.toString();
 	}

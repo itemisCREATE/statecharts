@@ -6,6 +6,8 @@
  */
 package org.eclipselabs.mscript.language.imperativemodel;
 
+import org.eclipse.emf.ecore.EObject;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -23,7 +25,7 @@ package org.eclipselabs.mscript.language.imperativemodel;
  * @model
  * @generated
  */
-public interface Compound extends Statement {
+public interface Compound extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Statements</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

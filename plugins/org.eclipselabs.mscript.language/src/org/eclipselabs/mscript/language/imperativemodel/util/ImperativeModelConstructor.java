@@ -20,6 +20,7 @@ import org.eclipselabs.mscript.language.functionmodel.VariableStep;
 import org.eclipselabs.mscript.language.imperativemodel.Compound;
 import org.eclipselabs.mscript.language.imperativemodel.ImperativeModelFactory;
 import org.eclipselabs.mscript.language.imperativemodel.Subroutine;
+import org.eclipselabs.mscript.language.imperativemodel.SubroutineContext;
 import org.eclipselabs.mscript.language.imperativemodel.internal.util.EquationCompoundHelper;
 import org.eclipselabs.mscript.language.internal.functionmodel.util.FunctionModelUtil;
 
@@ -34,7 +35,9 @@ public class ImperativeModelConstructor {
 
 		Collection<List<EquationDescriptor>> equationCompounds = new EquationCompoundHelper().getEquationCompounds(function);
 		
-		constructInitializationCompound(subroutine, equationCompounds);
+		if (function.getDefinition().isStateful()) {
+			constructSubroutineContext(subroutine, equationCompounds);
+		}
 		
 		System.out.println("+++ Function: " + function.getDefinition().getName());
 		for (List<EquationDescriptor> equationDescriptors : equationCompounds) {
@@ -52,7 +55,13 @@ public class ImperativeModelConstructor {
 		return subroutine;
 	}
 	
-	private void constructInitializationCompound(Subroutine subroutine, Collection<List<EquationDescriptor>> equationCompounds) {
+	private void constructSubroutineContext(Subroutine subroutine, Collection<List<EquationDescriptor>> equationCompounds) {
+		SubroutineContext subroutineContext = ImperativeModelFactory.eINSTANCE.createSubroutineContext();
+		constructInitializationCompound(subroutineContext, equationCompounds);
+		subroutine.setContext(subroutineContext);
+	}
+	
+	private void constructInitializationCompound(SubroutineContext subroutineContext, Collection<List<EquationDescriptor>> equationCompounds) {
 		Compound compound = ImperativeModelFactory.eINSTANCE.createCompound();
 		for (List<EquationDescriptor> equationDescriptors : equationCompounds) {
 			for (EquationDescriptor equationDescriptor : equationDescriptors) {
@@ -62,7 +71,7 @@ public class ImperativeModelConstructor {
 				}
 			}
 		}
-		subroutine.setInitializationCompound(compound);
+		subroutineContext.setInitializationCompound(compound);
 	}
 	
 }
