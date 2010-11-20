@@ -138,4 +138,20 @@ public interface VariableDescriptor extends EObject {
 	 */
 	VariableStep getStep(int index, boolean initial);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" required="true"
+	 * @generated
+	 */
+	VariableStep getMinimumStep();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" required="true"
+	 * @generated
+	 */
+	VariableStep getMaximumStep();
+
 } // VariableDescriptor

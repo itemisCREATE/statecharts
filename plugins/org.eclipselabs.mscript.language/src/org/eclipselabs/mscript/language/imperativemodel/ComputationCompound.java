@@ -29,6 +29,7 @@ public interface ComputationCompound extends Compound {
 	/**
 	 * Returns the value of the '<em><b>Inputs</b></em>' reference list.
 	 * The list contents are of type {@link org.eclipselabs.mscript.language.imperativemodel.InputVariableDeclaration}.
+	 * It is bidirectional and its opposite is '{@link org.eclipselabs.mscript.language.imperativemodel.InputVariableDeclaration#getFeedingCompounds <em>Feeding Compounds</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Inputs</em>' reference list isn't clear,
@@ -37,7 +38,8 @@ public interface ComputationCompound extends Compound {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Inputs</em>' reference list.
 	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage#getComputationCompound_Inputs()
-	 * @model
+	 * @see org.eclipselabs.mscript.language.imperativemodel.InputVariableDeclaration#getFeedingCompounds
+	 * @model opposite="feedingCompounds"
 	 * @generated
 	 */
 	EList<InputVariableDeclaration> getInputs();

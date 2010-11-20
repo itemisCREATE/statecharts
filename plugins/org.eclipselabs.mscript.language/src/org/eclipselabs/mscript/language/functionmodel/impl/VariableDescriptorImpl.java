@@ -222,6 +222,36 @@ public class VariableDescriptorImpl extends EObjectImpl implements VariableDescr
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public VariableStep getMinimumStep() {
+		VariableStep minimumStep = null;
+		for (VariableStep step : getSteps()) {
+			if (minimumStep == null || step.getIndex() < minimumStep.getIndex()) {
+				minimumStep = step;
+			}
+		}
+		return minimumStep;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public VariableStep getMaximumStep() {
+		VariableStep maxiumStep = null;
+		for (VariableStep step : getSteps()) {
+			if (maxiumStep == null || step.getIndex() > maxiumStep.getIndex()) {
+				maxiumStep = step;
+			}
+		}
+		return maxiumStep;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")

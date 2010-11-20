@@ -7,6 +7,7 @@
 package org.eclipselabs.mscript.language.imperativemodel.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
@@ -26,6 +27,7 @@ import org.eclipselabs.mscript.language.imperativemodel.InstanceVariableDeclarat
 import org.eclipselabs.mscript.language.imperativemodel.LocalVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.OutputVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.VariableReference;
+import org.eclipselabs.mscript.language.interpreter.value.IValue;
 
 /**
  * <!-- begin-user-doc -->
@@ -86,6 +88,36 @@ public class ImperativeModelFactoryImpl extends EFactoryImpl implements Imperati
 			case ImperativeModelPackage.VARIABLE_REFERENCE: return createVariableReference();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object createFromString(EDataType eDataType, String initialValue) {
+		switch (eDataType.getClassifierID()) {
+			case ImperativeModelPackage.IVALUE:
+				return createIValueFromString(eDataType, initialValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String convertToString(EDataType eDataType, Object instanceValue) {
+		switch (eDataType.getClassifierID()) {
+			case ImperativeModelPackage.IVALUE:
+				return convertIValueToString(eDataType, instanceValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
 	}
 
@@ -217,6 +249,24 @@ public class ImperativeModelFactoryImpl extends EFactoryImpl implements Imperati
 	public VariableReference createVariableReference() {
 		VariableReferenceImpl variableReference = new VariableReferenceImpl();
 		return variableReference;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public IValue createIValueFromString(EDataType eDataType, String initialValue) {
+		return (IValue)super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertIValueToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
 	}
 
 	/**

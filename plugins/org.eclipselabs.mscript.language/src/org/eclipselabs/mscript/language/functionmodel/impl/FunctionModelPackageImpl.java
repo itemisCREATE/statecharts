@@ -607,6 +607,10 @@ public class FunctionModelPackageImpl extends EPackageImpl implements FunctionMo
 		addEParameter(op, ecorePackage.getEInt(), "index", 1, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEBoolean(), "initial", 1, 1, IS_UNIQUE, IS_ORDERED);
 
+		addEOperation(variableDescriptorEClass, this.getVariableStep(), "getMinimumStep", 1, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(variableDescriptorEClass, this.getVariableStep(), "getMaximumStep", 1, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(variableStepEClass, VariableStep.class, "VariableStep", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getVariableStep_Descriptor(), this.getVariableDescriptor(), this.getVariableDescriptor_Steps(), "descriptor", null, 0, 1, VariableStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getVariableStep_Index(), ecorePackage.getEInt(), "index", null, 0, 1, VariableStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

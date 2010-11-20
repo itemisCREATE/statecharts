@@ -24,6 +24,7 @@ import org.eclipselabs.mscript.language.imperativemodel.VariableDeclaration;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.impl.AssignmentImpl#getTarget <em>Target</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.impl.AssignmentImpl#getStepIndex <em>Step Index</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.impl.AssignmentImpl#getAssignedExpression <em>Assigned Expression</em>}</li>
  * </ul>
  * </p>
@@ -40,6 +41,26 @@ public class AssignmentImpl extends StatementImpl implements Assignment {
 	 * @ordered
 	 */
 	protected VariableDeclaration target;
+
+	/**
+	 * The default value of the '{@link #getStepIndex() <em>Step Index</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStepIndex()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int STEP_INDEX_EDEFAULT = 0;
+
+	/**
+	 * The cached value of the '{@link #getStepIndex() <em>Step Index</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStepIndex()
+	 * @generated
+	 * @ordered
+	 */
+	protected int stepIndex = STEP_INDEX_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getAssignedExpression() <em>Assigned Expression</em>}' containment reference.
@@ -113,6 +134,27 @@ public class AssignmentImpl extends StatementImpl implements Assignment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public int getStepIndex() {
+		return stepIndex;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setStepIndex(int newStepIndex) {
+		int oldStepIndex = stepIndex;
+		stepIndex = newStepIndex;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ImperativeModelPackage.ASSIGNMENT__STEP_INDEX, oldStepIndex, stepIndex));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Expression getAssignedExpression() {
 		return assignedExpression;
 	}
@@ -176,6 +218,8 @@ public class AssignmentImpl extends StatementImpl implements Assignment {
 			case ImperativeModelPackage.ASSIGNMENT__TARGET:
 				if (resolve) return getTarget();
 				return basicGetTarget();
+			case ImperativeModelPackage.ASSIGNMENT__STEP_INDEX:
+				return getStepIndex();
 			case ImperativeModelPackage.ASSIGNMENT__ASSIGNED_EXPRESSION:
 				return getAssignedExpression();
 		}
@@ -192,6 +236,9 @@ public class AssignmentImpl extends StatementImpl implements Assignment {
 		switch (featureID) {
 			case ImperativeModelPackage.ASSIGNMENT__TARGET:
 				setTarget((VariableDeclaration)newValue);
+				return;
+			case ImperativeModelPackage.ASSIGNMENT__STEP_INDEX:
+				setStepIndex((Integer)newValue);
 				return;
 			case ImperativeModelPackage.ASSIGNMENT__ASSIGNED_EXPRESSION:
 				setAssignedExpression((Expression)newValue);
@@ -211,6 +258,9 @@ public class AssignmentImpl extends StatementImpl implements Assignment {
 			case ImperativeModelPackage.ASSIGNMENT__TARGET:
 				setTarget((VariableDeclaration)null);
 				return;
+			case ImperativeModelPackage.ASSIGNMENT__STEP_INDEX:
+				setStepIndex(STEP_INDEX_EDEFAULT);
+				return;
 			case ImperativeModelPackage.ASSIGNMENT__ASSIGNED_EXPRESSION:
 				setAssignedExpression((Expression)null);
 				return;
@@ -228,10 +278,28 @@ public class AssignmentImpl extends StatementImpl implements Assignment {
 		switch (featureID) {
 			case ImperativeModelPackage.ASSIGNMENT__TARGET:
 				return target != null;
+			case ImperativeModelPackage.ASSIGNMENT__STEP_INDEX:
+				return stepIndex != STEP_INDEX_EDEFAULT;
 			case ImperativeModelPackage.ASSIGNMENT__ASSIGNED_EXPRESSION:
 				return assignedExpression != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (stepIndex: ");
+		result.append(stepIndex);
+		result.append(')');
+		return result.toString();
 	}
 
 } //AssignmentImpl

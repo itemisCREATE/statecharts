@@ -11,7 +11,6 @@
 
 package org.eclipselabs.mscript.language.imperativemodel.internal.util;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -34,7 +33,7 @@ public class EquationCompoundHelper {
 
 	public Collection<List<EquationDescriptor>> getEquationCompounds(Function function) {
 		List<EquationDescriptor> backlog = new LinkedList<EquationDescriptor>(function.getEquationDescriptors());
-		Collection<List<EquationDescriptor>> equationCompounds = new ArrayList<List<EquationDescriptor>>();
+		Collection<List<EquationDescriptor>> equationCompounds = new LinkedList<List<EquationDescriptor>>();
 		while (!backlog.isEmpty()) {
 			List<EquationDescriptor> equationDescriptors = getNextEquationBlock(backlog);
 			equationCompounds.add(equationDescriptors);

@@ -75,6 +75,8 @@
         <genParameters ecoreParameter="FunctionModel.ecore#//VariableDescriptor/getStep/index"/>
         <genParameters ecoreParameter="FunctionModel.ecore#//VariableDescriptor/getStep/initial"/>
       </genOperations>
+      <genOperations ecoreOperation="FunctionModel.ecore#//VariableDescriptor/getMinimumStep"/>
+      <genOperations ecoreOperation="FunctionModel.ecore#//VariableDescriptor/getMaximumStep"/>
     </genClasses>
     <genClasses ecoreClass="FunctionModel.ecore#//VariableStep">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FunctionModel.ecore#//VariableStep/descriptor"/>

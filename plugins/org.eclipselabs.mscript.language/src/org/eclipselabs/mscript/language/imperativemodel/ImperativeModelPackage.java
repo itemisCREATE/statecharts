@@ -8,6 +8,7 @@ package org.eclipselabs.mscript.language.imperativemodel;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipselabs.mscript.language.ast.AstPackage;
@@ -214,7 +215,7 @@ public interface ImperativeModelPackage extends EPackage {
 	int COMPOUND = 1;
 
 	/**
-	 * The feature id for the '<em><b>Statements</b></em>' containment reference.
+	 * The feature id for the '<em><b>Statements</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -242,7 +243,7 @@ public interface ImperativeModelPackage extends EPackage {
 	int COMPUTATION_COMPOUND = 2;
 
 	/**
-	 * The feature id for the '<em><b>Statements</b></em>' containment reference.
+	 * The feature id for the '<em><b>Statements</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -369,13 +370,22 @@ public interface ImperativeModelPackage extends EPackage {
 	int CONSTANT_DECLARATION__TYPE = VARIABLE_DECLARATION__TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTANT_DECLARATION__VALUE = VARIABLE_DECLARATION_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Constant Declaration</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTANT_DECLARATION_FEATURE_COUNT = VARIABLE_DECLARATION_FEATURE_COUNT + 0;
+	int CONSTANT_DECLARATION_FEATURE_COUNT = VARIABLE_DECLARATION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -405,13 +415,22 @@ public interface ImperativeModelPackage extends EPackage {
 	int INPUT_VARIABLE_DECLARATION__CIRCULAR_BUFFER_SIZE = STATEFUL_VARIABLE_DECLARATION__CIRCULAR_BUFFER_SIZE;
 
 	/**
+	 * The feature id for the '<em><b>Feeding Compounds</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_VARIABLE_DECLARATION__FEEDING_COMPOUNDS = STATEFUL_VARIABLE_DECLARATION_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Input Variable Declaration</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INPUT_VARIABLE_DECLARATION_FEATURE_COUNT = STATEFUL_VARIABLE_DECLARATION_FEATURE_COUNT + 0;
+	int INPUT_VARIABLE_DECLARATION_FEATURE_COUNT = STATEFUL_VARIABLE_DECLARATION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -541,7 +560,7 @@ public interface ImperativeModelPackage extends EPackage {
 	int STATEMENT_FEATURE_COUNT = 0;
 
 	/**
-	 * The feature id for the '<em><b>Statements</b></em>' containment reference.
+	 * The feature id for the '<em><b>Statements</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -578,13 +597,22 @@ public interface ImperativeModelPackage extends EPackage {
 	int ASSIGNMENT__TARGET = STATEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Step Index</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSIGNMENT__STEP_INDEX = STATEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Assigned Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASSIGNMENT__ASSIGNED_EXPRESSION = STATEMENT_FEATURE_COUNT + 1;
+	int ASSIGNMENT__ASSIGNED_EXPRESSION = STATEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Assignment</em>' class.
@@ -593,7 +621,7 @@ public interface ImperativeModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSIGNMENT_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 2;
+	int ASSIGNMENT_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.IfStatementImpl <em>If Statement</em>}' class.
@@ -732,6 +760,16 @@ public interface ImperativeModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int VARIABLE_REFERENCE_FEATURE_COUNT = AstPackage.EXPRESSION_FEATURE_COUNT + 3;
+
+	/**
+	 * The meta object id for the '<em>IValue</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipselabs.mscript.language.interpreter.value.IValue
+	 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getIValue()
+	 * @generated
+	 */
+	int IVALUE = 16;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction <em>Imperative Function</em>}'.
@@ -893,6 +931,17 @@ public interface ImperativeModelPackage extends EPackage {
 	EClass getConstantDeclaration();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.imperativemodel.ConstantDeclaration#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see org.eclipselabs.mscript.language.imperativemodel.ConstantDeclaration#getValue()
+	 * @see #getConstantDeclaration()
+	 * @generated
+	 */
+	EAttribute getConstantDeclaration_Value();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.imperativemodel.InputVariableDeclaration <em>Input Variable Declaration</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -901,6 +950,17 @@ public interface ImperativeModelPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getInputVariableDeclaration();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipselabs.mscript.language.imperativemodel.InputVariableDeclaration#getFeedingCompounds <em>Feeding Compounds</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Feeding Compounds</em>'.
+	 * @see org.eclipselabs.mscript.language.imperativemodel.InputVariableDeclaration#getFeedingCompounds()
+	 * @see #getInputVariableDeclaration()
+	 * @generated
+	 */
+	EReference getInputVariableDeclaration_FeedingCompounds();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.imperativemodel.OutputVariableDeclaration <em>Output Variable Declaration</em>}'.
@@ -954,10 +1014,10 @@ public interface ImperativeModelPackage extends EPackage {
 	EClass getCompound();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.imperativemodel.Compound#getStatements <em>Statements</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.imperativemodel.Compound#getStatements <em>Statements</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Statements</em>'.
+	 * @return the meta object for the containment reference list '<em>Statements</em>'.
 	 * @see org.eclipselabs.mscript.language.imperativemodel.Compound#getStatements()
 	 * @see #getCompound()
 	 * @generated
@@ -1016,6 +1076,17 @@ public interface ImperativeModelPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getAssignment_Target();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.imperativemodel.Assignment#getStepIndex <em>Step Index</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Step Index</em>'.
+	 * @see org.eclipselabs.mscript.language.imperativemodel.Assignment#getStepIndex()
+	 * @see #getAssignment()
+	 * @generated
+	 */
+	EAttribute getAssignment_StepIndex();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.imperativemodel.Assignment#getAssignedExpression <em>Assigned Expression</em>}'.
@@ -1156,6 +1227,17 @@ public interface ImperativeModelPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getVariableReference_ArrayIndices();
+
+	/**
+	 * Returns the meta object for data type '{@link org.eclipselabs.mscript.language.interpreter.value.IValue <em>IValue</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>IValue</em>'.
+	 * @see org.eclipselabs.mscript.language.interpreter.value.IValue
+	 * @model instanceClass="org.eclipselabs.mscript.language.interpreter.value.IValue"
+	 * @generated
+	 */
+	EDataType getIValue();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1312,6 +1394,14 @@ public interface ImperativeModelPackage extends EPackage {
 		EClass CONSTANT_DECLARATION = eINSTANCE.getConstantDeclaration();
 
 		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONSTANT_DECLARATION__VALUE = eINSTANCE.getConstantDeclaration_Value();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.InputVariableDeclarationImpl <em>Input Variable Declaration</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1320,6 +1410,14 @@ public interface ImperativeModelPackage extends EPackage {
 		 * @generated
 		 */
 		EClass INPUT_VARIABLE_DECLARATION = eINSTANCE.getInputVariableDeclaration();
+
+		/**
+		 * The meta object literal for the '<em><b>Feeding Compounds</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference INPUT_VARIABLE_DECLARATION__FEEDING_COMPOUNDS = eINSTANCE.getInputVariableDeclaration_FeedingCompounds();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.OutputVariableDeclarationImpl <em>Output Variable Declaration</em>}' class.
@@ -1370,7 +1468,7 @@ public interface ImperativeModelPackage extends EPackage {
 		EClass COMPOUND = eINSTANCE.getCompound();
 
 		/**
-		 * The meta object literal for the '<em><b>Statements</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Statements</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -1420,6 +1518,14 @@ public interface ImperativeModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ASSIGNMENT__TARGET = eINSTANCE.getAssignment_Target();
+
+		/**
+		 * The meta object literal for the '<em><b>Step Index</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ASSIGNMENT__STEP_INDEX = eINSTANCE.getAssignment_StepIndex();
 
 		/**
 		 * The meta object literal for the '<em><b>Assigned Expression</b></em>' containment reference feature.
@@ -1530,6 +1636,16 @@ public interface ImperativeModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference VARIABLE_REFERENCE__ARRAY_INDICES = eINSTANCE.getVariableReference_ArrayIndices();
+
+		/**
+		 * The meta object literal for the '<em>IValue</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipselabs.mscript.language.interpreter.value.IValue
+		 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getIValue()
+		 * @generated
+		 */
+		EDataType IVALUE = eINSTANCE.getIValue();
 
 	}
 
