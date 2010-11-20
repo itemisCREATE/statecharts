@@ -144,10 +144,10 @@ Expression :
 	LetExpression | IfExpression | SwitchExpression | RangeExpression;
 
 LetExpression :
-	'let' variables+=LetExpressionVariable (',' variables+=LetExpressionVariable)* 'in' targetExpression=Expression;
+	'let' variableDeclarations+=LetExpressionVariableDeclaration (',' variableDeclarations+=LetExpressionVariableDeclaration)* 'in' targetExpression=Expression;
 	
-LetExpressionVariable :
-	name=ID '=' assignedExpression=Expression;
+LetExpressionVariableDeclaration :
+	(names+=ID | '(' names+=ID (',' names+=ID)+ ')') '=' assignedExpression=Expression;
 	
 IfExpression :
 	'if' condition=Expression 'then' thenExpression=Expression 'else' elseExpression=Expression;

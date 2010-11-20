@@ -56,7 +56,7 @@ import org.eclipselabs.mscript.language.ast.IterationAccumulator;
 import org.eclipselabs.mscript.language.ast.IterationCall;
 import org.eclipselabs.mscript.language.ast.IterationVariable;
 import org.eclipselabs.mscript.language.ast.LetExpression;
-import org.eclipselabs.mscript.language.ast.LetExpressionVariable;
+import org.eclipselabs.mscript.language.ast.LetExpressionVariableDeclaration;
 import org.eclipselabs.mscript.language.ast.Literal;
 import org.eclipselabs.mscript.language.ast.LogicalAndExpression;
 import org.eclipselabs.mscript.language.ast.LogicalOrExpression;
@@ -301,7 +301,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass letExpressionVariableEClass = null;
+  private EClass letExpressionVariableDeclarationEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -1336,7 +1336,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getLetExpression_Variables()
+  public EReference getLetExpression_VariableDeclarations()
   {
     return (EReference)letExpressionEClass.getEStructuralFeatures().get(0);
   }
@@ -1356,9 +1356,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getLetExpressionVariable()
+  public EClass getLetExpressionVariableDeclaration()
   {
-    return letExpressionVariableEClass;
+    return letExpressionVariableDeclarationEClass;
   }
 
   /**
@@ -1366,9 +1366,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getLetExpressionVariable_Name()
+  public EAttribute getLetExpressionVariableDeclaration_Names()
   {
-    return (EAttribute)letExpressionVariableEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)letExpressionVariableDeclarationEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1376,9 +1376,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getLetExpressionVariable_AssignedExpression()
+  public EReference getLetExpressionVariableDeclaration_AssignedExpression()
   {
-    return (EReference)letExpressionVariableEClass.getEStructuralFeatures().get(1);
+    return (EReference)letExpressionVariableDeclarationEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -2785,12 +2785,12 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     expressionEClass = createEClass(EXPRESSION);
 
     letExpressionEClass = createEClass(LET_EXPRESSION);
-    createEReference(letExpressionEClass, LET_EXPRESSION__VARIABLES);
+    createEReference(letExpressionEClass, LET_EXPRESSION__VARIABLE_DECLARATIONS);
     createEReference(letExpressionEClass, LET_EXPRESSION__TARGET_EXPRESSION);
 
-    letExpressionVariableEClass = createEClass(LET_EXPRESSION_VARIABLE);
-    createEAttribute(letExpressionVariableEClass, LET_EXPRESSION_VARIABLE__NAME);
-    createEReference(letExpressionVariableEClass, LET_EXPRESSION_VARIABLE__ASSIGNED_EXPRESSION);
+    letExpressionVariableDeclarationEClass = createEClass(LET_EXPRESSION_VARIABLE_DECLARATION);
+    createEAttribute(letExpressionVariableDeclarationEClass, LET_EXPRESSION_VARIABLE_DECLARATION__NAMES);
+    createEReference(letExpressionVariableDeclarationEClass, LET_EXPRESSION_VARIABLE_DECLARATION__ASSIGNED_EXPRESSION);
 
     ifExpressionEClass = createEClass(IF_EXPRESSION);
     createEReference(ifExpressionEClass, IF_EXPRESSION__CONDITION);
@@ -3131,12 +3131,12 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     initEClass(expressionEClass, Expression.class, "Expression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(letExpressionEClass, LetExpression.class, "LetExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getLetExpression_Variables(), this.getLetExpressionVariable(), null, "variables", null, 0, -1, LetExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getLetExpression_VariableDeclarations(), this.getLetExpressionVariableDeclaration(), null, "variableDeclarations", null, 0, -1, LetExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getLetExpression_TargetExpression(), this.getExpression(), null, "targetExpression", null, 0, 1, LetExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(letExpressionVariableEClass, LetExpressionVariable.class, "LetExpressionVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getLetExpressionVariable_Name(), ecorePackage.getEString(), "name", null, 0, 1, LetExpressionVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getLetExpressionVariable_AssignedExpression(), this.getExpression(), null, "assignedExpression", null, 0, 1, LetExpressionVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(letExpressionVariableDeclarationEClass, LetExpressionVariableDeclaration.class, "LetExpressionVariableDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getLetExpressionVariableDeclaration_Names(), ecorePackage.getEString(), "names", null, 0, -1, LetExpressionVariableDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getLetExpressionVariableDeclaration_AssignedExpression(), this.getExpression(), null, "assignedExpression", null, 0, 1, LetExpressionVariableDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(ifExpressionEClass, IfExpression.class, "IfExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getIfExpression_Condition(), this.getExpression(), null, "condition", null, 0, 1, IfExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

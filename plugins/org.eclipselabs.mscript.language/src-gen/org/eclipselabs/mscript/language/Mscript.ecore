@@ -106,13 +106,14 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Expression"/>
   <eClassifiers xsi:type="ecore:EClass" name="LetExpression" eSuperTypes="#//Expression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="variables" upperBound="-1"
-        eType="#//LetExpressionVariable" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variableDeclarations" upperBound="-1"
+        eType="#//LetExpressionVariableDeclaration" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="targetExpression" eType="#//Expression"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="LetExpressionVariable">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LetExpressionVariableDeclaration">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="names" unique="false" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="assignedExpression" eType="#//Expression"
         containment="true"/>
   </eClassifiers>

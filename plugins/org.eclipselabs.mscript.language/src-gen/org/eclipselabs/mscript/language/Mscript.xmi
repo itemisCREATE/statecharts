@@ -556,12 +556,12 @@
     </type>
     <alternatives xsi:type="xtext:Group">
       <elements xsi:type="xtext:Keyword" value="let"/>
-      <elements xsi:type="xtext:Assignment" feature="variables" operator="+=">
+      <elements xsi:type="xtext:Assignment" feature="variableDeclarations" operator="+=">
         <terminal xsi:type="xtext:RuleCall" rule="//@rules.28"/>
       </elements>
       <elements xsi:type="xtext:Group" cardinality="*">
         <elements xsi:type="xtext:Keyword" value=","/>
-        <elements xsi:type="xtext:Assignment" feature="variables" operator="+=">
+        <elements xsi:type="xtext:Assignment" feature="variableDeclarations" operator="+=">
           <terminal xsi:type="xtext:RuleCall" rule="//@rules.28"/>
         </elements>
       </elements>
@@ -571,13 +571,28 @@
       </elements>
     </alternatives>
   </rules>
-  <rules xsi:type="xtext:ParserRule" name="LetExpressionVariable">
+  <rules xsi:type="xtext:ParserRule" name="LetExpressionVariableDeclaration">
     <type metamodel="//@metamodelDeclarations.0">
-      <classifier xsi:type="ecore:EClass" href="http://www.eclipselabs.org/mscript/AST/1.0.0#//LetExpressionVariable"/>
+      <classifier xsi:type="ecore:EClass" href="http://www.eclipselabs.org/mscript/AST/1.0.0#//LetExpressionVariableDeclaration"/>
     </type>
     <alternatives xsi:type="xtext:Group">
-      <elements xsi:type="xtext:Assignment" feature="name" operator="=">
-        <terminal xsi:type="xtext:RuleCall" rule="//@rules.85"/>
+      <elements xsi:type="xtext:Alternatives">
+        <elements xsi:type="xtext:Assignment" feature="names" operator="+=">
+          <terminal xsi:type="xtext:RuleCall" rule="//@rules.85"/>
+        </elements>
+        <elements xsi:type="xtext:Group">
+          <elements xsi:type="xtext:Keyword" value="("/>
+          <elements xsi:type="xtext:Assignment" feature="names" operator="+=">
+            <terminal xsi:type="xtext:RuleCall" rule="//@rules.85"/>
+          </elements>
+          <elements xsi:type="xtext:Group" cardinality="+">
+            <elements xsi:type="xtext:Keyword" value=","/>
+            <elements xsi:type="xtext:Assignment" feature="names" operator="+=">
+              <terminal xsi:type="xtext:RuleCall" rule="//@rules.85"/>
+            </elements>
+          </elements>
+          <elements xsi:type="xtext:Keyword" value=")"/>
+        </elements>
       </elements>
       <elements xsi:type="xtext:Keyword" value="="/>
       <elements xsi:type="xtext:Assignment" feature="assignedExpression" operator="=">

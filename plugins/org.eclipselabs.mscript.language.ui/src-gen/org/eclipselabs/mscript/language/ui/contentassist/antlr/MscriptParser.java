@@ -44,6 +44,7 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getPrimitiveTypeSpecifierAccess().getAlternatives(), "rule__PrimitiveTypeSpecifier__Alternatives");
 					put(grammarAccess.getNumericTypeSpecifierAccess().getAlternatives(), "rule__NumericTypeSpecifier__Alternatives");
 					put(grammarAccess.getExpressionAccess().getAlternatives(), "rule__Expression__Alternatives");
+					put(grammarAccess.getLetExpressionVariableDeclarationAccess().getAlternatives_0(), "rule__LetExpressionVariableDeclaration__Alternatives_0");
 					put(grammarAccess.getRelationalExpressionAccess().getAlternatives_1_1(), "rule__RelationalExpression__Alternatives_1_1");
 					put(grammarAccess.getUnaryExpressionAccess().getAlternatives(), "rule__UnaryExpression__Alternatives");
 					put(grammarAccess.getPrimaryExpressionAccess().getAlternatives(), "rule__PrimaryExpression__Alternatives");
@@ -111,7 +112,9 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getArrayDimensionSpecificationAccess().getGroup(), "rule__ArrayDimensionSpecification__Group__0");
 					put(grammarAccess.getLetExpressionAccess().getGroup(), "rule__LetExpression__Group__0");
 					put(grammarAccess.getLetExpressionAccess().getGroup_2(), "rule__LetExpression__Group_2__0");
-					put(grammarAccess.getLetExpressionVariableAccess().getGroup(), "rule__LetExpressionVariable__Group__0");
+					put(grammarAccess.getLetExpressionVariableDeclarationAccess().getGroup(), "rule__LetExpressionVariableDeclaration__Group__0");
+					put(grammarAccess.getLetExpressionVariableDeclarationAccess().getGroup_0_1(), "rule__LetExpressionVariableDeclaration__Group_0_1__0");
+					put(grammarAccess.getLetExpressionVariableDeclarationAccess().getGroup_0_1_2(), "rule__LetExpressionVariableDeclaration__Group_0_1_2__0");
 					put(grammarAccess.getIfExpressionAccess().getGroup(), "rule__IfExpression__Group__0");
 					put(grammarAccess.getSwitchExpressionAccess().getGroup(), "rule__SwitchExpression__Group__0");
 					put(grammarAccess.getSwitchCaseAccess().getGroup(), "rule__SwitchCase__Group__0");
@@ -242,11 +245,13 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getNamedTypeSpecifierAccess().getDimensionsAssignment_1_1(), "rule__NamedTypeSpecifier__DimensionsAssignment_1_1");
 					put(grammarAccess.getNamedTypeSpecifierAccess().getDimensionsAssignment_1_2_1(), "rule__NamedTypeSpecifier__DimensionsAssignment_1_2_1");
 					put(grammarAccess.getArrayDimensionSpecificationAccess().getSizeAssignment_1(), "rule__ArrayDimensionSpecification__SizeAssignment_1");
-					put(grammarAccess.getLetExpressionAccess().getVariablesAssignment_1(), "rule__LetExpression__VariablesAssignment_1");
-					put(grammarAccess.getLetExpressionAccess().getVariablesAssignment_2_1(), "rule__LetExpression__VariablesAssignment_2_1");
+					put(grammarAccess.getLetExpressionAccess().getVariableDeclarationsAssignment_1(), "rule__LetExpression__VariableDeclarationsAssignment_1");
+					put(grammarAccess.getLetExpressionAccess().getVariableDeclarationsAssignment_2_1(), "rule__LetExpression__VariableDeclarationsAssignment_2_1");
 					put(grammarAccess.getLetExpressionAccess().getTargetExpressionAssignment_4(), "rule__LetExpression__TargetExpressionAssignment_4");
-					put(grammarAccess.getLetExpressionVariableAccess().getNameAssignment_0(), "rule__LetExpressionVariable__NameAssignment_0");
-					put(grammarAccess.getLetExpressionVariableAccess().getAssignedExpressionAssignment_2(), "rule__LetExpressionVariable__AssignedExpressionAssignment_2");
+					put(grammarAccess.getLetExpressionVariableDeclarationAccess().getNamesAssignment_0_0(), "rule__LetExpressionVariableDeclaration__NamesAssignment_0_0");
+					put(grammarAccess.getLetExpressionVariableDeclarationAccess().getNamesAssignment_0_1_1(), "rule__LetExpressionVariableDeclaration__NamesAssignment_0_1_1");
+					put(grammarAccess.getLetExpressionVariableDeclarationAccess().getNamesAssignment_0_1_2_1(), "rule__LetExpressionVariableDeclaration__NamesAssignment_0_1_2_1");
+					put(grammarAccess.getLetExpressionVariableDeclarationAccess().getAssignedExpressionAssignment_2(), "rule__LetExpressionVariableDeclaration__AssignedExpressionAssignment_2");
 					put(grammarAccess.getIfExpressionAccess().getConditionAssignment_1(), "rule__IfExpression__ConditionAssignment_1");
 					put(grammarAccess.getIfExpressionAccess().getThenExpressionAssignment_3(), "rule__IfExpression__ThenExpressionAssignment_3");
 					put(grammarAccess.getIfExpressionAccess().getElseExpressionAssignment_5(), "rule__IfExpression__ElseExpressionAssignment_5");

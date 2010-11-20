@@ -26,7 +26,7 @@ import org.eclipselabs.mscript.language.ast.FeatureCall;
 import org.eclipselabs.mscript.language.ast.IfExpression;
 import org.eclipselabs.mscript.language.ast.IntegerLiteral;
 import org.eclipselabs.mscript.language.ast.LetExpression;
-import org.eclipselabs.mscript.language.ast.LetExpressionVariable;
+import org.eclipselabs.mscript.language.ast.LetExpressionVariableDeclaration;
 import org.eclipselabs.mscript.language.ast.LogicalAndExpression;
 import org.eclipselabs.mscript.language.ast.LogicalOrExpression;
 import org.eclipselabs.mscript.language.ast.MultiplicativeExpression;
@@ -300,12 +300,12 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 	@Override
 	public IValue caseLetExpression(LetExpression letExpression) {
 		Scope newScope = new Scope(scope);
-		for (LetExpressionVariable variable : letExpression.getVariables()) {
-			IValue value = doSwitch(variable.getAssignedExpression());
+		for (LetExpressionVariableDeclaration variableDeclaration : letExpression.getVariableDeclarations()) {
+			IValue value = doSwitch(variableDeclaration.getAssignedExpression());
 			if (value instanceof InvalidValue) {
 				return value;
 			}
-			newScope.addVariable(variable.getName(), value);
+			newScope.addVariable(variableDeclaration.getNames().get(0), value);
 		}
 		
 		scope = newScope;

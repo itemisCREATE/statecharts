@@ -23,7 +23,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.ast.LetExpression;
-import org.eclipselabs.mscript.language.ast.LetExpressionVariable;
+import org.eclipselabs.mscript.language.ast.LetExpressionVariableDeclaration;
 
 /**
  * <!-- begin-user-doc -->
@@ -32,7 +32,7 @@ import org.eclipselabs.mscript.language.ast.LetExpressionVariable;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.LetExpressionImpl#getVariables <em>Variables</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.LetExpressionImpl#getVariableDeclarations <em>Variable Declarations</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.LetExpressionImpl#getTargetExpression <em>Target Expression</em>}</li>
  * </ul>
  * </p>
@@ -42,14 +42,14 @@ import org.eclipselabs.mscript.language.ast.LetExpressionVariable;
 public class LetExpressionImpl extends ExpressionImpl implements LetExpression
 {
   /**
-   * The cached value of the '{@link #getVariables() <em>Variables</em>}' containment reference list.
+   * The cached value of the '{@link #getVariableDeclarations() <em>Variable Declarations</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getVariables()
+   * @see #getVariableDeclarations()
    * @generated
    * @ordered
    */
-  protected EList<LetExpressionVariable> variables;
+  protected EList<LetExpressionVariableDeclaration> variableDeclarations;
 
   /**
    * The cached value of the '{@link #getTargetExpression() <em>Target Expression</em>}' containment reference.
@@ -87,13 +87,13 @@ public class LetExpressionImpl extends ExpressionImpl implements LetExpression
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<LetExpressionVariable> getVariables()
+  public EList<LetExpressionVariableDeclaration> getVariableDeclarations()
   {
-    if (variables == null)
+    if (variableDeclarations == null)
     {
-      variables = new EObjectContainmentEList<LetExpressionVariable>(LetExpressionVariable.class, this, AstPackage.LET_EXPRESSION__VARIABLES);
+      variableDeclarations = new EObjectContainmentEList<LetExpressionVariableDeclaration>(LetExpressionVariableDeclaration.class, this, AstPackage.LET_EXPRESSION__VARIABLE_DECLARATIONS);
     }
-    return variables;
+    return variableDeclarations;
   }
 
   /**
@@ -154,8 +154,8 @@ public class LetExpressionImpl extends ExpressionImpl implements LetExpression
   {
     switch (featureID)
     {
-      case AstPackage.LET_EXPRESSION__VARIABLES:
-        return ((InternalEList<?>)getVariables()).basicRemove(otherEnd, msgs);
+      case AstPackage.LET_EXPRESSION__VARIABLE_DECLARATIONS:
+        return ((InternalEList<?>)getVariableDeclarations()).basicRemove(otherEnd, msgs);
       case AstPackage.LET_EXPRESSION__TARGET_EXPRESSION:
         return basicSetTargetExpression(null, msgs);
     }
@@ -172,8 +172,8 @@ public class LetExpressionImpl extends ExpressionImpl implements LetExpression
   {
     switch (featureID)
     {
-      case AstPackage.LET_EXPRESSION__VARIABLES:
-        return getVariables();
+      case AstPackage.LET_EXPRESSION__VARIABLE_DECLARATIONS:
+        return getVariableDeclarations();
       case AstPackage.LET_EXPRESSION__TARGET_EXPRESSION:
         return getTargetExpression();
     }
@@ -191,9 +191,9 @@ public class LetExpressionImpl extends ExpressionImpl implements LetExpression
   {
     switch (featureID)
     {
-      case AstPackage.LET_EXPRESSION__VARIABLES:
-        getVariables().clear();
-        getVariables().addAll((Collection<? extends LetExpressionVariable>)newValue);
+      case AstPackage.LET_EXPRESSION__VARIABLE_DECLARATIONS:
+        getVariableDeclarations().clear();
+        getVariableDeclarations().addAll((Collection<? extends LetExpressionVariableDeclaration>)newValue);
         return;
       case AstPackage.LET_EXPRESSION__TARGET_EXPRESSION:
         setTargetExpression((Expression)newValue);
@@ -212,8 +212,8 @@ public class LetExpressionImpl extends ExpressionImpl implements LetExpression
   {
     switch (featureID)
     {
-      case AstPackage.LET_EXPRESSION__VARIABLES:
-        getVariables().clear();
+      case AstPackage.LET_EXPRESSION__VARIABLE_DECLARATIONS:
+        getVariableDeclarations().clear();
         return;
       case AstPackage.LET_EXPRESSION__TARGET_EXPRESSION:
         setTargetExpression((Expression)null);
@@ -232,8 +232,8 @@ public class LetExpressionImpl extends ExpressionImpl implements LetExpression
   {
     switch (featureID)
     {
-      case AstPackage.LET_EXPRESSION__VARIABLES:
-        return variables != null && !variables.isEmpty();
+      case AstPackage.LET_EXPRESSION__VARIABLE_DECLARATIONS:
+        return variableDeclarations != null && !variableDeclarations.isEmpty();
       case AstPackage.LET_EXPRESSION__TARGET_EXPRESSION:
         return targetExpression != null;
     }

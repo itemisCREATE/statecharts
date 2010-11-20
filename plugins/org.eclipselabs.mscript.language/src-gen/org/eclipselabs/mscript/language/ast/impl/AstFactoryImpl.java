@@ -95,7 +95,7 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
       case AstPackage.ARRAY_DIMENSION_SPECIFICATION: return createArrayDimensionSpecification();
       case AstPackage.EXPRESSION: return createExpression();
       case AstPackage.LET_EXPRESSION: return createLetExpression();
-      case AstPackage.LET_EXPRESSION_VARIABLE: return createLetExpressionVariable();
+      case AstPackage.LET_EXPRESSION_VARIABLE_DECLARATION: return createLetExpressionVariableDeclaration();
       case AstPackage.IF_EXPRESSION: return createIfExpression();
       case AstPackage.SWITCH_EXPRESSION: return createSwitchExpression();
       case AstPackage.SWITCH_CASE: return createSwitchCase();
@@ -515,10 +515,10 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public LetExpressionVariable createLetExpressionVariable()
+  public LetExpressionVariableDeclaration createLetExpressionVariableDeclaration()
   {
-    LetExpressionVariableImpl letExpressionVariable = new LetExpressionVariableImpl();
-    return letExpressionVariable;
+    LetExpressionVariableDeclarationImpl letExpressionVariableDeclaration = new LetExpressionVariableDeclarationImpl();
+    return letExpressionVariableDeclaration;
   }
 
   /**

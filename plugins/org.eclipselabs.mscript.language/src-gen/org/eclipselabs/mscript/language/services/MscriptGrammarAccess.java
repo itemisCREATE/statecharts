@@ -1300,43 +1300,45 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "LetExpression");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cLetKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cVariablesAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cVariablesLetExpressionVariableParserRuleCall_1_0 = (RuleCall)cVariablesAssignment_1.eContents().get(0);
+		private final Assignment cVariableDeclarationsAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cVariableDeclarationsLetExpressionVariableDeclarationParserRuleCall_1_0 = (RuleCall)cVariableDeclarationsAssignment_1.eContents().get(0);
 		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
 		private final Keyword cCommaKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
-		private final Assignment cVariablesAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final RuleCall cVariablesLetExpressionVariableParserRuleCall_2_1_0 = (RuleCall)cVariablesAssignment_2_1.eContents().get(0);
+		private final Assignment cVariableDeclarationsAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final RuleCall cVariableDeclarationsLetExpressionVariableDeclarationParserRuleCall_2_1_0 = (RuleCall)cVariableDeclarationsAssignment_2_1.eContents().get(0);
 		private final Keyword cInKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		private final Assignment cTargetExpressionAssignment_4 = (Assignment)cGroup.eContents().get(4);
 		private final RuleCall cTargetExpressionExpressionParserRuleCall_4_0 = (RuleCall)cTargetExpressionAssignment_4.eContents().get(0);
 		
 		//LetExpression:
-		//	"let" variables+=LetExpressionVariable ("," variables+=LetExpressionVariable)* "in" targetExpression=Expression;
+		//	"let" variableDeclarations+=LetExpressionVariableDeclaration (","
+		//	variableDeclarations+=LetExpressionVariableDeclaration)* "in" targetExpression=Expression;
 		public ParserRule getRule() { return rule; }
 
-		//"let" variables+=LetExpressionVariable ("," variables+=LetExpressionVariable)* "in" targetExpression=Expression
+		//"let" variableDeclarations+=LetExpressionVariableDeclaration (","
+		//variableDeclarations+=LetExpressionVariableDeclaration)* "in" targetExpression=Expression
 		public Group getGroup() { return cGroup; }
 
 		//"let"
 		public Keyword getLetKeyword_0() { return cLetKeyword_0; }
 
-		//variables+=LetExpressionVariable
-		public Assignment getVariablesAssignment_1() { return cVariablesAssignment_1; }
+		//variableDeclarations+=LetExpressionVariableDeclaration
+		public Assignment getVariableDeclarationsAssignment_1() { return cVariableDeclarationsAssignment_1; }
 
-		//LetExpressionVariable
-		public RuleCall getVariablesLetExpressionVariableParserRuleCall_1_0() { return cVariablesLetExpressionVariableParserRuleCall_1_0; }
+		//LetExpressionVariableDeclaration
+		public RuleCall getVariableDeclarationsLetExpressionVariableDeclarationParserRuleCall_1_0() { return cVariableDeclarationsLetExpressionVariableDeclarationParserRuleCall_1_0; }
 
-		//("," variables+=LetExpressionVariable)*
+		//("," variableDeclarations+=LetExpressionVariableDeclaration)*
 		public Group getGroup_2() { return cGroup_2; }
 
 		//","
 		public Keyword getCommaKeyword_2_0() { return cCommaKeyword_2_0; }
 
-		//variables+=LetExpressionVariable
-		public Assignment getVariablesAssignment_2_1() { return cVariablesAssignment_2_1; }
+		//variableDeclarations+=LetExpressionVariableDeclaration
+		public Assignment getVariableDeclarationsAssignment_2_1() { return cVariableDeclarationsAssignment_2_1; }
 
-		//LetExpressionVariable
-		public RuleCall getVariablesLetExpressionVariableParserRuleCall_2_1_0() { return cVariablesLetExpressionVariableParserRuleCall_2_1_0; }
+		//LetExpressionVariableDeclaration
+		public RuleCall getVariableDeclarationsLetExpressionVariableDeclarationParserRuleCall_2_1_0() { return cVariableDeclarationsLetExpressionVariableDeclarationParserRuleCall_2_1_0; }
 
 		//"in"
 		public Keyword getInKeyword_3() { return cInKeyword_3; }
@@ -1348,27 +1350,67 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getTargetExpressionExpressionParserRuleCall_4_0() { return cTargetExpressionExpressionParserRuleCall_4_0; }
 	}
 
-	public class LetExpressionVariableElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "LetExpressionVariable");
+	public class LetExpressionVariableDeclarationElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "LetExpressionVariableDeclaration");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cNameIDTerminalRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
+		private final Alternatives cAlternatives_0 = (Alternatives)cGroup.eContents().get(0);
+		private final Assignment cNamesAssignment_0_0 = (Assignment)cAlternatives_0.eContents().get(0);
+		private final RuleCall cNamesIDTerminalRuleCall_0_0_0 = (RuleCall)cNamesAssignment_0_0.eContents().get(0);
+		private final Group cGroup_0_1 = (Group)cAlternatives_0.eContents().get(1);
+		private final Keyword cLeftParenthesisKeyword_0_1_0 = (Keyword)cGroup_0_1.eContents().get(0);
+		private final Assignment cNamesAssignment_0_1_1 = (Assignment)cGroup_0_1.eContents().get(1);
+		private final RuleCall cNamesIDTerminalRuleCall_0_1_1_0 = (RuleCall)cNamesAssignment_0_1_1.eContents().get(0);
+		private final Group cGroup_0_1_2 = (Group)cGroup_0_1.eContents().get(2);
+		private final Keyword cCommaKeyword_0_1_2_0 = (Keyword)cGroup_0_1_2.eContents().get(0);
+		private final Assignment cNamesAssignment_0_1_2_1 = (Assignment)cGroup_0_1_2.eContents().get(1);
+		private final RuleCall cNamesIDTerminalRuleCall_0_1_2_1_0 = (RuleCall)cNamesAssignment_0_1_2_1.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_0_1_3 = (Keyword)cGroup_0_1.eContents().get(3);
 		private final Keyword cEqualsSignKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cAssignedExpressionAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cAssignedExpressionExpressionParserRuleCall_2_0 = (RuleCall)cAssignedExpressionAssignment_2.eContents().get(0);
 		
-		//LetExpressionVariable:
-		//	name=ID "=" assignedExpression=Expression;
+		//LetExpressionVariableDeclaration:
+		//	(names+=ID | "(" names+=ID ("," names+=ID)+ ")") "=" assignedExpression=Expression;
 		public ParserRule getRule() { return rule; }
 
-		//name=ID "=" assignedExpression=Expression
+		//(names+=ID | "(" names+=ID ("," names+=ID)+ ")") "=" assignedExpression=Expression
 		public Group getGroup() { return cGroup; }
 
-		//name=ID
-		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
+		//names+=ID | "(" names+=ID ("," names+=ID)+ ")"
+		public Alternatives getAlternatives_0() { return cAlternatives_0; }
+
+		//names+=ID
+		public Assignment getNamesAssignment_0_0() { return cNamesAssignment_0_0; }
 
 		//ID
-		public RuleCall getNameIDTerminalRuleCall_0_0() { return cNameIDTerminalRuleCall_0_0; }
+		public RuleCall getNamesIDTerminalRuleCall_0_0_0() { return cNamesIDTerminalRuleCall_0_0_0; }
+
+		//"(" names+=ID ("," names+=ID)+ ")"
+		public Group getGroup_0_1() { return cGroup_0_1; }
+
+		//"("
+		public Keyword getLeftParenthesisKeyword_0_1_0() { return cLeftParenthesisKeyword_0_1_0; }
+
+		//names+=ID
+		public Assignment getNamesAssignment_0_1_1() { return cNamesAssignment_0_1_1; }
+
+		//ID
+		public RuleCall getNamesIDTerminalRuleCall_0_1_1_0() { return cNamesIDTerminalRuleCall_0_1_1_0; }
+
+		//("," names+=ID)+
+		public Group getGroup_0_1_2() { return cGroup_0_1_2; }
+
+		//","
+		public Keyword getCommaKeyword_0_1_2_0() { return cCommaKeyword_0_1_2_0; }
+
+		//names+=ID
+		public Assignment getNamesAssignment_0_1_2_1() { return cNamesAssignment_0_1_2_1; }
+
+		//ID
+		public RuleCall getNamesIDTerminalRuleCall_0_1_2_1_0() { return cNamesIDTerminalRuleCall_0_1_2_1_0; }
+
+		//")"
+		public Keyword getRightParenthesisKeyword_0_1_3() { return cRightParenthesisKeyword_0_1_3; }
 
 		//"="
 		public Keyword getEqualsSignKeyword_1() { return cEqualsSignKeyword_1; }
@@ -3529,7 +3571,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	private ArrayDimensionSpecificationElements pArrayDimensionSpecification;
 	private ExpressionElements pExpression;
 	private LetExpressionElements pLetExpression;
-	private LetExpressionVariableElements pLetExpressionVariable;
+	private LetExpressionVariableDeclarationElements pLetExpressionVariableDeclaration;
 	private IfExpressionElements pIfExpression;
 	private SwitchExpressionElements pSwitchExpression;
 	private SwitchCaseElements pSwitchCase;
@@ -3907,7 +3949,8 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//LetExpression:
-	//	"let" variables+=LetExpressionVariable ("," variables+=LetExpressionVariable)* "in" targetExpression=Expression;
+	//	"let" variableDeclarations+=LetExpressionVariableDeclaration (","
+	//	variableDeclarations+=LetExpressionVariableDeclaration)* "in" targetExpression=Expression;
 	public LetExpressionElements getLetExpressionAccess() {
 		return (pLetExpression != null) ? pLetExpression : (pLetExpression = new LetExpressionElements());
 	}
@@ -3916,14 +3959,14 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		return getLetExpressionAccess().getRule();
 	}
 
-	//LetExpressionVariable:
-	//	name=ID "=" assignedExpression=Expression;
-	public LetExpressionVariableElements getLetExpressionVariableAccess() {
-		return (pLetExpressionVariable != null) ? pLetExpressionVariable : (pLetExpressionVariable = new LetExpressionVariableElements());
+	//LetExpressionVariableDeclaration:
+	//	(names+=ID | "(" names+=ID ("," names+=ID)+ ")") "=" assignedExpression=Expression;
+	public LetExpressionVariableDeclarationElements getLetExpressionVariableDeclarationAccess() {
+		return (pLetExpressionVariableDeclaration != null) ? pLetExpressionVariableDeclaration : (pLetExpressionVariableDeclaration = new LetExpressionVariableDeclarationElements());
 	}
 	
-	public ParserRule getLetExpressionVariableRule() {
-		return getLetExpressionVariableAccess().getRule();
+	public ParserRule getLetExpressionVariableDeclarationRule() {
+		return getLetExpressionVariableDeclarationAccess().getRule();
 	}
 
 	//IfExpression:

@@ -125,12 +125,12 @@
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//Expression"/>
     <genClasses ecoreClass="Mscript.ecore#//LetExpression">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//LetExpression/variables"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//LetExpression/variableDeclarations"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//LetExpression/targetExpression"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//LetExpressionVariable">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//LetExpressionVariable/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//LetExpressionVariable/assignedExpression"/>
+    <genClasses ecoreClass="Mscript.ecore#//LetExpressionVariableDeclaration">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//LetExpressionVariableDeclaration/names"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//LetExpressionVariableDeclaration/assignedExpression"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//IfExpression">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//IfExpression/condition"/>

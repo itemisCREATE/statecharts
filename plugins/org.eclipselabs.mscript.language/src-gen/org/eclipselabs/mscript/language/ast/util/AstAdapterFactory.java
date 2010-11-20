@@ -213,9 +213,9 @@ public class AstAdapterFactory extends AdapterFactoryImpl
         return createLetExpressionAdapter();
       }
       @Override
-      public Adapter caseLetExpressionVariable(LetExpressionVariable object)
+      public Adapter caseLetExpressionVariableDeclaration(LetExpressionVariableDeclaration object)
       {
-        return createLetExpressionVariableAdapter();
+        return createLetExpressionVariableDeclarationAdapter();
       }
       @Override
       public Adapter caseIfExpression(IfExpression object)
@@ -875,16 +875,16 @@ public class AstAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.LetExpressionVariable <em>Let Expression Variable</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.LetExpressionVariableDeclaration <em>Let Expression Variable Declaration</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.LetExpressionVariable
+   * @see org.eclipselabs.mscript.language.ast.LetExpressionVariableDeclaration
    * @generated
    */
-  public Adapter createLetExpressionVariableAdapter()
+  public Adapter createLetExpressionVariableDeclarationAdapter()
   {
     return null;
   }

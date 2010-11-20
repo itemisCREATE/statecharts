@@ -1006,13 +1006,13 @@ public interface AstPackage extends EPackage
   int LET_EXPRESSION = 26;
 
   /**
-   * The feature id for the '<em><b>Variables</b></em>' containment reference list.
+   * The feature id for the '<em><b>Variable Declarations</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int LET_EXPRESSION__VARIABLES = EXPRESSION_FEATURE_COUNT + 0;
+  int LET_EXPRESSION__VARIABLE_DECLARATIONS = EXPRESSION_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Target Expression</b></em>' containment reference.
@@ -1033,23 +1033,23 @@ public interface AstPackage extends EPackage
   int LET_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
 
   /**
-   * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.LetExpressionVariableImpl <em>Let Expression Variable</em>}' class.
+   * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.LetExpressionVariableDeclarationImpl <em>Let Expression Variable Declaration</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.eclipselabs.mscript.language.ast.impl.LetExpressionVariableImpl
-   * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getLetExpressionVariable()
+   * @see org.eclipselabs.mscript.language.ast.impl.LetExpressionVariableDeclarationImpl
+   * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getLetExpressionVariableDeclaration()
    * @generated
    */
-  int LET_EXPRESSION_VARIABLE = 27;
+  int LET_EXPRESSION_VARIABLE_DECLARATION = 27;
 
   /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * The feature id for the '<em><b>Names</b></em>' attribute list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int LET_EXPRESSION_VARIABLE__NAME = 0;
+  int LET_EXPRESSION_VARIABLE_DECLARATION__NAMES = 0;
 
   /**
    * The feature id for the '<em><b>Assigned Expression</b></em>' containment reference.
@@ -1058,16 +1058,16 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int LET_EXPRESSION_VARIABLE__ASSIGNED_EXPRESSION = 1;
+  int LET_EXPRESSION_VARIABLE_DECLARATION__ASSIGNED_EXPRESSION = 1;
 
   /**
-   * The number of structural features of the '<em>Let Expression Variable</em>' class.
+   * The number of structural features of the '<em>Let Expression Variable Declaration</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int LET_EXPRESSION_VARIABLE_FEATURE_COUNT = 2;
+  int LET_EXPRESSION_VARIABLE_DECLARATION_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.IfExpressionImpl <em>If Expression</em>}' class.
@@ -3348,15 +3348,15 @@ public interface AstPackage extends EPackage
   EClass getLetExpression();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.ast.LetExpression#getVariables <em>Variables</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.ast.LetExpression#getVariableDeclarations <em>Variable Declarations</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Variables</em>'.
-   * @see org.eclipselabs.mscript.language.ast.LetExpression#getVariables()
+   * @return the meta object for the containment reference list '<em>Variable Declarations</em>'.
+   * @see org.eclipselabs.mscript.language.ast.LetExpression#getVariableDeclarations()
    * @see #getLetExpression()
    * @generated
    */
-  EReference getLetExpression_Variables();
+  EReference getLetExpression_VariableDeclarations();
 
   /**
    * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.LetExpression#getTargetExpression <em>Target Expression</em>}'.
@@ -3370,36 +3370,36 @@ public interface AstPackage extends EPackage
   EReference getLetExpression_TargetExpression();
 
   /**
-   * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.LetExpressionVariable <em>Let Expression Variable</em>}'.
+   * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.LetExpressionVariableDeclaration <em>Let Expression Variable Declaration</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Let Expression Variable</em>'.
-   * @see org.eclipselabs.mscript.language.ast.LetExpressionVariable
+   * @return the meta object for class '<em>Let Expression Variable Declaration</em>'.
+   * @see org.eclipselabs.mscript.language.ast.LetExpressionVariableDeclaration
    * @generated
    */
-  EClass getLetExpressionVariable();
+  EClass getLetExpressionVariableDeclaration();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.ast.LetExpressionVariable#getName <em>Name</em>}'.
+   * Returns the meta object for the attribute list '{@link org.eclipselabs.mscript.language.ast.LetExpressionVariableDeclaration#getNames <em>Names</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.eclipselabs.mscript.language.ast.LetExpressionVariable#getName()
-   * @see #getLetExpressionVariable()
+   * @return the meta object for the attribute list '<em>Names</em>'.
+   * @see org.eclipselabs.mscript.language.ast.LetExpressionVariableDeclaration#getNames()
+   * @see #getLetExpressionVariableDeclaration()
    * @generated
    */
-  EAttribute getLetExpressionVariable_Name();
+  EAttribute getLetExpressionVariableDeclaration_Names();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.LetExpressionVariable#getAssignedExpression <em>Assigned Expression</em>}'.
+   * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.LetExpressionVariableDeclaration#getAssignedExpression <em>Assigned Expression</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Assigned Expression</em>'.
-   * @see org.eclipselabs.mscript.language.ast.LetExpressionVariable#getAssignedExpression()
-   * @see #getLetExpressionVariable()
+   * @see org.eclipselabs.mscript.language.ast.LetExpressionVariableDeclaration#getAssignedExpression()
+   * @see #getLetExpressionVariableDeclaration()
    * @generated
    */
-  EReference getLetExpressionVariable_AssignedExpression();
+  EReference getLetExpressionVariableDeclaration_AssignedExpression();
 
   /**
    * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.IfExpression <em>If Expression</em>}'.
@@ -5307,12 +5307,12 @@ public interface AstPackage extends EPackage
     EClass LET_EXPRESSION = eINSTANCE.getLetExpression();
 
     /**
-     * The meta object literal for the '<em><b>Variables</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Variable Declarations</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference LET_EXPRESSION__VARIABLES = eINSTANCE.getLetExpression_Variables();
+    EReference LET_EXPRESSION__VARIABLE_DECLARATIONS = eINSTANCE.getLetExpression_VariableDeclarations();
 
     /**
      * The meta object literal for the '<em><b>Target Expression</b></em>' containment reference feature.
@@ -5323,22 +5323,22 @@ public interface AstPackage extends EPackage
     EReference LET_EXPRESSION__TARGET_EXPRESSION = eINSTANCE.getLetExpression_TargetExpression();
 
     /**
-     * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.LetExpressionVariableImpl <em>Let Expression Variable</em>}' class.
+     * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.LetExpressionVariableDeclarationImpl <em>Let Expression Variable Declaration</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.eclipselabs.mscript.language.ast.impl.LetExpressionVariableImpl
-     * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getLetExpressionVariable()
+     * @see org.eclipselabs.mscript.language.ast.impl.LetExpressionVariableDeclarationImpl
+     * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getLetExpressionVariableDeclaration()
      * @generated
      */
-    EClass LET_EXPRESSION_VARIABLE = eINSTANCE.getLetExpressionVariable();
+    EClass LET_EXPRESSION_VARIABLE_DECLARATION = eINSTANCE.getLetExpressionVariableDeclaration();
 
     /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Names</b></em>' attribute list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute LET_EXPRESSION_VARIABLE__NAME = eINSTANCE.getLetExpressionVariable_Name();
+    EAttribute LET_EXPRESSION_VARIABLE_DECLARATION__NAMES = eINSTANCE.getLetExpressionVariableDeclaration_Names();
 
     /**
      * The meta object literal for the '<em><b>Assigned Expression</b></em>' containment reference feature.
@@ -5346,7 +5346,7 @@ public interface AstPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference LET_EXPRESSION_VARIABLE__ASSIGNED_EXPRESSION = eINSTANCE.getLetExpressionVariable_AssignedExpression();
+    EReference LET_EXPRESSION_VARIABLE_DECLARATION__ASSIGNED_EXPRESSION = eINSTANCE.getLetExpressionVariableDeclaration_AssignedExpression();
 
     /**
      * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.IfExpressionImpl <em>If Expression</em>}' class.

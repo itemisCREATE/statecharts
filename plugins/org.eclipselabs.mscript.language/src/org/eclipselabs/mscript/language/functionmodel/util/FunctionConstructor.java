@@ -25,7 +25,7 @@ import org.eclipselabs.mscript.language.ast.FeatureCall;
 import org.eclipselabs.mscript.language.ast.FeatureCallPart;
 import org.eclipselabs.mscript.language.ast.FunctionDefinition;
 import org.eclipselabs.mscript.language.ast.LetExpression;
-import org.eclipselabs.mscript.language.ast.LetExpressionVariable;
+import org.eclipselabs.mscript.language.ast.LetExpressionVariableDeclaration;
 import org.eclipselabs.mscript.language.ast.OperationCall;
 import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
 import org.eclipselabs.mscript.language.ast.SimpleName;
@@ -128,9 +128,9 @@ public class FunctionConstructor {
 		@Override
 		public Boolean caseLetExpression(LetExpression letExpression) {
 			Scope newScope = new Scope(scope);
-			for (LetExpressionVariable variable : letExpression.getVariables()) {
-				doSwitch(variable.getAssignedExpression());
-				newScope.addVariable(variable.getName());
+			for (LetExpressionVariableDeclaration variableDeclaration : letExpression.getVariableDeclarations()) {
+				doSwitch(variableDeclaration.getAssignedExpression());
+				newScope.addVariable(variableDeclaration.getNames().get(0));
 			}
 			
 			scope = newScope;
