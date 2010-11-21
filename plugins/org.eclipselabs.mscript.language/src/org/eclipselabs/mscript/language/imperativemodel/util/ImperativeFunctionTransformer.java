@@ -42,9 +42,9 @@ import org.eclipselabs.mscript.language.internal.functionmodel.util.FunctionMode
  * @author Andreas Unger
  *
  */
-public class ImperativeFunctionConstructor {
+public class ImperativeFunctionTransformer {
 	
-	public ImperativeFunction construct(Function function) {
+	public ImperativeFunction transform(Function function) {
 		ImperativeFunction imperativeFunction = ImperativeModelFactory.eINSTANCE.createImperativeFunction();
 
 		Map<VariableDescriptor, VariableDeclaration> variableDeclarations = new HashMap<VariableDescriptor, VariableDeclaration>();
