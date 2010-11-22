@@ -15,7 +15,6 @@ import org.eclipselabs.mscript.language.imperativemodel.Assignment;
 import org.eclipselabs.mscript.language.imperativemodel.Compound;
 import org.eclipselabs.mscript.language.imperativemodel.CompoundStatement;
 import org.eclipselabs.mscript.language.imperativemodel.ComputationCompound;
-import org.eclipselabs.mscript.language.imperativemodel.ConstantDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.ForeachStatement;
 import org.eclipselabs.mscript.language.imperativemodel.IfStatement;
 import org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction;
@@ -26,6 +25,7 @@ import org.eclipselabs.mscript.language.imperativemodel.LocalVariableDeclaration
 import org.eclipselabs.mscript.language.imperativemodel.OutputVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.StatefulVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.Statement;
+import org.eclipselabs.mscript.language.imperativemodel.TemplateVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.VariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.VariableReference;
 
@@ -135,10 +135,10 @@ public class ImperativeModelSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ImperativeModelPackage.CONSTANT_DECLARATION: {
-				ConstantDeclaration constantDeclaration = (ConstantDeclaration)theEObject;
-				T result = caseConstantDeclaration(constantDeclaration);
-				if (result == null) result = caseVariableDeclaration(constantDeclaration);
+			case ImperativeModelPackage.TEMPLATE_VARIABLE_DECLARATION: {
+				TemplateVariableDeclaration templateVariableDeclaration = (TemplateVariableDeclaration)theEObject;
+				T result = caseTemplateVariableDeclaration(templateVariableDeclaration);
+				if (result == null) result = caseVariableDeclaration(templateVariableDeclaration);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -296,17 +296,17 @@ public class ImperativeModelSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Constant Declaration</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Template Variable Declaration</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Constant Declaration</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Template Variable Declaration</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseConstantDeclaration(ConstantDeclaration object) {
+	public T caseTemplateVariableDeclaration(TemplateVariableDeclaration object) {
 		return null;
 	}
 

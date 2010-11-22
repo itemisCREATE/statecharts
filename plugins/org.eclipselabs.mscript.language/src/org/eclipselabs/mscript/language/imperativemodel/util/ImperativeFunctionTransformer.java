@@ -28,12 +28,12 @@ import org.eclipselabs.mscript.language.functionmodel.VariableStep;
 import org.eclipselabs.mscript.language.imperativemodel.Assignment;
 import org.eclipselabs.mscript.language.imperativemodel.Compound;
 import org.eclipselabs.mscript.language.imperativemodel.ComputationCompound;
-import org.eclipselabs.mscript.language.imperativemodel.ConstantDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction;
 import org.eclipselabs.mscript.language.imperativemodel.ImperativeModelFactory;
 import org.eclipselabs.mscript.language.imperativemodel.InputVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.InstanceVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.OutputVariableDeclaration;
+import org.eclipselabs.mscript.language.imperativemodel.TemplateVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.VariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.internal.util.EquationCompoundHelper;
 import org.eclipselabs.mscript.language.internal.functionmodel.util.FunctionModelUtil;
@@ -63,7 +63,7 @@ public class ImperativeFunctionTransformer {
 		for (VariableDescriptor variableDescriptor : function.getVariableDescriptors()) {
 			switch (variableDescriptor.getKind()) {
 			case TEMPLATE_PARAMETER:
-				initializeConstantDeclaration(imperativeFunction, variableDescriptor, variableDeclarations);
+				initializeTemplateVariableDeclaration(imperativeFunction, variableDescriptor, variableDeclarations);
 				break;
 			case INPUT_PARAMETER:
 				initializeInputVariableDeclaration(imperativeFunction, variableDescriptor, variableDeclarations);
@@ -78,11 +78,11 @@ public class ImperativeFunctionTransformer {
 		}
 	}
 	
-	private void initializeConstantDeclaration(ImperativeFunction imperativeFunction, VariableDescriptor variableDescriptor, Map<VariableDescriptor, VariableDeclaration> variableDeclarations) {
-		ConstantDeclaration constantDeclaration = ImperativeModelFactory.eINSTANCE.createConstantDeclaration();
-		constantDeclaration.setName(variableDescriptor.getName());
-		imperativeFunction.getConstantDeclarations().add(constantDeclaration);
-		variableDeclarations.put(variableDescriptor, constantDeclaration);
+	private void initializeTemplateVariableDeclaration(ImperativeFunction imperativeFunction, VariableDescriptor variableDescriptor, Map<VariableDescriptor, VariableDeclaration> variableDeclarations) {
+		TemplateVariableDeclaration templateVariableDeclaration = ImperativeModelFactory.eINSTANCE.createTemplateVariableDeclaration();
+		templateVariableDeclaration.setName(variableDescriptor.getName());
+		imperativeFunction.getTemplateVariableDeclarations().add(templateVariableDeclaration);
+		variableDeclarations.put(variableDescriptor, templateVariableDeclaration);
 	}
 	
 	private void initializeInputVariableDeclaration(ImperativeFunction imperativeFunction, VariableDescriptor variableDescriptor, Map<VariableDescriptor, VariableDeclaration> variableDeclarations) {

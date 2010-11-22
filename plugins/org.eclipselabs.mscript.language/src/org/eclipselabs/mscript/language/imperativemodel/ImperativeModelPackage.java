@@ -8,7 +8,6 @@ package org.eclipselabs.mscript.language.imperativemodel;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipselabs.mscript.language.ast.AstPackage;
@@ -72,13 +71,13 @@ public interface ImperativeModelPackage extends EPackage {
 	int IMPERATIVE_FUNCTION = 0;
 
 	/**
-	 * The feature id for the '<em><b>Constant Declarations</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Template Variable Declarations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPERATIVE_FUNCTION__CONSTANT_DECLARATIONS = 0;
+	int IMPERATIVE_FUNCTION__TEMPLATE_VARIABLE_DECLARATIONS = 0;
 
 	/**
 	 * The feature id for the '<em><b>Input Variable Declarations</b></em>' containment reference list.
@@ -342,14 +341,14 @@ public interface ImperativeModelPackage extends EPackage {
 	int STATEFUL_VARIABLE_DECLARATION_FEATURE_COUNT = VARIABLE_DECLARATION_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.ConstantDeclarationImpl <em>Constant Declaration</em>}' class.
+	 * The meta object id for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.TemplateVariableDeclarationImpl <em>Template Variable Declaration</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ConstantDeclarationImpl
-	 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getConstantDeclaration()
+	 * @see org.eclipselabs.mscript.language.imperativemodel.impl.TemplateVariableDeclarationImpl
+	 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getTemplateVariableDeclaration()
 	 * @generated
 	 */
-	int CONSTANT_DECLARATION = 5;
+	int TEMPLATE_VARIABLE_DECLARATION = 5;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -358,7 +357,7 @@ public interface ImperativeModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTANT_DECLARATION__NAME = VARIABLE_DECLARATION__NAME;
+	int TEMPLATE_VARIABLE_DECLARATION__NAME = VARIABLE_DECLARATION__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -367,25 +366,16 @@ public interface ImperativeModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTANT_DECLARATION__TYPE = VARIABLE_DECLARATION__TYPE;
+	int TEMPLATE_VARIABLE_DECLARATION__TYPE = VARIABLE_DECLARATION__TYPE;
 
 	/**
-	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * The number of structural features of the '<em>Template Variable Declaration</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTANT_DECLARATION__VALUE = VARIABLE_DECLARATION_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Constant Declaration</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONSTANT_DECLARATION_FEATURE_COUNT = VARIABLE_DECLARATION_FEATURE_COUNT + 1;
+	int TEMPLATE_VARIABLE_DECLARATION_FEATURE_COUNT = VARIABLE_DECLARATION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -762,16 +752,6 @@ public interface ImperativeModelPackage extends EPackage {
 	int VARIABLE_REFERENCE_FEATURE_COUNT = AstPackage.EXPRESSION_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '<em>IValue</em>' data type.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipselabs.mscript.language.interpreter.value.IValue
-	 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getIValue()
-	 * @generated
-	 */
-	int IVALUE = 16;
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction <em>Imperative Function</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -782,15 +762,15 @@ public interface ImperativeModelPackage extends EPackage {
 	EClass getImperativeFunction();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction#getConstantDeclarations <em>Constant Declarations</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction#getTemplateVariableDeclarations <em>Template Variable Declarations</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Constant Declarations</em>'.
-	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction#getConstantDeclarations()
+	 * @return the meta object for the containment reference list '<em>Template Variable Declarations</em>'.
+	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction#getTemplateVariableDeclarations()
 	 * @see #getImperativeFunction()
 	 * @generated
 	 */
-	EReference getImperativeFunction_ConstantDeclarations();
+	EReference getImperativeFunction_TemplateVariableDeclarations();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction#getInputVariableDeclarations <em>Input Variable Declarations</em>}'.
@@ -921,25 +901,14 @@ public interface ImperativeModelPackage extends EPackage {
 	EAttribute getStatefulVariableDeclaration_CircularBufferSize();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.imperativemodel.ConstantDeclaration <em>Constant Declaration</em>}'.
+	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.imperativemodel.TemplateVariableDeclaration <em>Template Variable Declaration</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Constant Declaration</em>'.
-	 * @see org.eclipselabs.mscript.language.imperativemodel.ConstantDeclaration
+	 * @return the meta object for class '<em>Template Variable Declaration</em>'.
+	 * @see org.eclipselabs.mscript.language.imperativemodel.TemplateVariableDeclaration
 	 * @generated
 	 */
-	EClass getConstantDeclaration();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.imperativemodel.ConstantDeclaration#getValue <em>Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Value</em>'.
-	 * @see org.eclipselabs.mscript.language.imperativemodel.ConstantDeclaration#getValue()
-	 * @see #getConstantDeclaration()
-	 * @generated
-	 */
-	EAttribute getConstantDeclaration_Value();
+	EClass getTemplateVariableDeclaration();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.imperativemodel.InputVariableDeclaration <em>Input Variable Declaration</em>}'.
@@ -1229,17 +1198,6 @@ public interface ImperativeModelPackage extends EPackage {
 	EReference getVariableReference_ArrayIndices();
 
 	/**
-	 * Returns the meta object for data type '{@link org.eclipselabs.mscript.language.interpreter.value.IValue <em>IValue</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for data type '<em>IValue</em>'.
-	 * @see org.eclipselabs.mscript.language.interpreter.value.IValue
-	 * @model instanceClass="org.eclipselabs.mscript.language.interpreter.value.IValue"
-	 * @generated
-	 */
-	EDataType getIValue();
-
-	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1272,12 +1230,12 @@ public interface ImperativeModelPackage extends EPackage {
 		EClass IMPERATIVE_FUNCTION = eINSTANCE.getImperativeFunction();
 
 		/**
-		 * The meta object literal for the '<em><b>Constant Declarations</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Template Variable Declarations</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference IMPERATIVE_FUNCTION__CONSTANT_DECLARATIONS = eINSTANCE.getImperativeFunction_ConstantDeclarations();
+		EReference IMPERATIVE_FUNCTION__TEMPLATE_VARIABLE_DECLARATIONS = eINSTANCE.getImperativeFunction_TemplateVariableDeclarations();
 
 		/**
 		 * The meta object literal for the '<em><b>Input Variable Declarations</b></em>' containment reference list feature.
@@ -1384,22 +1342,14 @@ public interface ImperativeModelPackage extends EPackage {
 		EAttribute STATEFUL_VARIABLE_DECLARATION__CIRCULAR_BUFFER_SIZE = eINSTANCE.getStatefulVariableDeclaration_CircularBufferSize();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.ConstantDeclarationImpl <em>Constant Declaration</em>}' class.
+		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.TemplateVariableDeclarationImpl <em>Template Variable Declaration</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ConstantDeclarationImpl
-		 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getConstantDeclaration()
+		 * @see org.eclipselabs.mscript.language.imperativemodel.impl.TemplateVariableDeclarationImpl
+		 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getTemplateVariableDeclaration()
 		 * @generated
 		 */
-		EClass CONSTANT_DECLARATION = eINSTANCE.getConstantDeclaration();
-
-		/**
-		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute CONSTANT_DECLARATION__VALUE = eINSTANCE.getConstantDeclaration_Value();
+		EClass TEMPLATE_VARIABLE_DECLARATION = eINSTANCE.getTemplateVariableDeclaration();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.InputVariableDeclarationImpl <em>Input Variable Declaration</em>}' class.
@@ -1636,16 +1586,6 @@ public interface ImperativeModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference VARIABLE_REFERENCE__ARRAY_INDICES = eINSTANCE.getVariableReference_ArrayIndices();
-
-		/**
-		 * The meta object literal for the '<em>IValue</em>' data type.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipselabs.mscript.language.interpreter.value.IValue
-		 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getIValue()
-		 * @generated
-		 */
-		EDataType IVALUE = eINSTANCE.getIValue();
 
 	}
 

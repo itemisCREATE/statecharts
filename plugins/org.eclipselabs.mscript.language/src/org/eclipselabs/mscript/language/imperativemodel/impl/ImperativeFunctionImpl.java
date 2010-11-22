@@ -19,12 +19,12 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipselabs.mscript.language.imperativemodel.Compound;
 import org.eclipselabs.mscript.language.imperativemodel.ComputationCompound;
-import org.eclipselabs.mscript.language.imperativemodel.ConstantDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction;
 import org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage;
 import org.eclipselabs.mscript.language.imperativemodel.InputVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.InstanceVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.OutputVariableDeclaration;
+import org.eclipselabs.mscript.language.imperativemodel.TemplateVariableDeclaration;
 
 /**
  * <!-- begin-user-doc -->
@@ -33,7 +33,7 @@ import org.eclipselabs.mscript.language.imperativemodel.OutputVariableDeclaratio
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeFunctionImpl#getConstantDeclarations <em>Constant Declarations</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeFunctionImpl#getTemplateVariableDeclarations <em>Template Variable Declarations</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeFunctionImpl#getInputVariableDeclarations <em>Input Variable Declarations</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeFunctionImpl#getOutputVariableDeclarations <em>Output Variable Declarations</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeFunctionImpl#getInstanceVariableDeclarations <em>Instance Variable Declarations</em>}</li>
@@ -46,14 +46,14 @@ import org.eclipselabs.mscript.language.imperativemodel.OutputVariableDeclaratio
  */
 public class ImperativeFunctionImpl extends EObjectImpl implements ImperativeFunction {
 	/**
-	 * The cached value of the '{@link #getConstantDeclarations() <em>Constant Declarations</em>}' containment reference list.
+	 * The cached value of the '{@link #getTemplateVariableDeclarations() <em>Template Variable Declarations</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getConstantDeclarations()
+	 * @see #getTemplateVariableDeclarations()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ConstantDeclaration> constantDeclarations;
+	protected EList<TemplateVariableDeclaration> templateVariableDeclarations;
 
 	/**
 	 * The cached value of the '{@link #getInputVariableDeclarations() <em>Input Variable Declarations</em>}' containment reference list.
@@ -129,11 +129,11 @@ public class ImperativeFunctionImpl extends EObjectImpl implements ImperativeFun
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ConstantDeclaration> getConstantDeclarations() {
-		if (constantDeclarations == null) {
-			constantDeclarations = new EObjectContainmentEList<ConstantDeclaration>(ConstantDeclaration.class, this, ImperativeModelPackage.IMPERATIVE_FUNCTION__CONSTANT_DECLARATIONS);
+	public EList<TemplateVariableDeclaration> getTemplateVariableDeclarations() {
+		if (templateVariableDeclarations == null) {
+			templateVariableDeclarations = new EObjectContainmentEList<TemplateVariableDeclaration>(TemplateVariableDeclaration.class, this, ImperativeModelPackage.IMPERATIVE_FUNCTION__TEMPLATE_VARIABLE_DECLARATIONS);
 		}
-		return constantDeclarations;
+		return templateVariableDeclarations;
 	}
 
 	/**
@@ -235,8 +235,8 @@ public class ImperativeFunctionImpl extends EObjectImpl implements ImperativeFun
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ImperativeModelPackage.IMPERATIVE_FUNCTION__CONSTANT_DECLARATIONS:
-				return ((InternalEList<?>)getConstantDeclarations()).basicRemove(otherEnd, msgs);
+			case ImperativeModelPackage.IMPERATIVE_FUNCTION__TEMPLATE_VARIABLE_DECLARATIONS:
+				return ((InternalEList<?>)getTemplateVariableDeclarations()).basicRemove(otherEnd, msgs);
 			case ImperativeModelPackage.IMPERATIVE_FUNCTION__INPUT_VARIABLE_DECLARATIONS:
 				return ((InternalEList<?>)getInputVariableDeclarations()).basicRemove(otherEnd, msgs);
 			case ImperativeModelPackage.IMPERATIVE_FUNCTION__OUTPUT_VARIABLE_DECLARATIONS:
@@ -259,8 +259,8 @@ public class ImperativeFunctionImpl extends EObjectImpl implements ImperativeFun
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ImperativeModelPackage.IMPERATIVE_FUNCTION__CONSTANT_DECLARATIONS:
-				return getConstantDeclarations();
+			case ImperativeModelPackage.IMPERATIVE_FUNCTION__TEMPLATE_VARIABLE_DECLARATIONS:
+				return getTemplateVariableDeclarations();
 			case ImperativeModelPackage.IMPERATIVE_FUNCTION__INPUT_VARIABLE_DECLARATIONS:
 				return getInputVariableDeclarations();
 			case ImperativeModelPackage.IMPERATIVE_FUNCTION__OUTPUT_VARIABLE_DECLARATIONS:
@@ -284,9 +284,9 @@ public class ImperativeFunctionImpl extends EObjectImpl implements ImperativeFun
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ImperativeModelPackage.IMPERATIVE_FUNCTION__CONSTANT_DECLARATIONS:
-				getConstantDeclarations().clear();
-				getConstantDeclarations().addAll((Collection<? extends ConstantDeclaration>)newValue);
+			case ImperativeModelPackage.IMPERATIVE_FUNCTION__TEMPLATE_VARIABLE_DECLARATIONS:
+				getTemplateVariableDeclarations().clear();
+				getTemplateVariableDeclarations().addAll((Collection<? extends TemplateVariableDeclaration>)newValue);
 				return;
 			case ImperativeModelPackage.IMPERATIVE_FUNCTION__INPUT_VARIABLE_DECLARATIONS:
 				getInputVariableDeclarations().clear();
@@ -319,8 +319,8 @@ public class ImperativeFunctionImpl extends EObjectImpl implements ImperativeFun
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ImperativeModelPackage.IMPERATIVE_FUNCTION__CONSTANT_DECLARATIONS:
-				getConstantDeclarations().clear();
+			case ImperativeModelPackage.IMPERATIVE_FUNCTION__TEMPLATE_VARIABLE_DECLARATIONS:
+				getTemplateVariableDeclarations().clear();
 				return;
 			case ImperativeModelPackage.IMPERATIVE_FUNCTION__INPUT_VARIABLE_DECLARATIONS:
 				getInputVariableDeclarations().clear();
@@ -349,8 +349,8 @@ public class ImperativeFunctionImpl extends EObjectImpl implements ImperativeFun
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ImperativeModelPackage.IMPERATIVE_FUNCTION__CONSTANT_DECLARATIONS:
-				return constantDeclarations != null && !constantDeclarations.isEmpty();
+			case ImperativeModelPackage.IMPERATIVE_FUNCTION__TEMPLATE_VARIABLE_DECLARATIONS:
+				return templateVariableDeclarations != null && !templateVariableDeclarations.isEmpty();
 			case ImperativeModelPackage.IMPERATIVE_FUNCTION__INPUT_VARIABLE_DECLARATIONS:
 				return inputVariableDeclarations != null && !inputVariableDeclarations.isEmpty();
 			case ImperativeModelPackage.IMPERATIVE_FUNCTION__OUTPUT_VARIABLE_DECLARATIONS:

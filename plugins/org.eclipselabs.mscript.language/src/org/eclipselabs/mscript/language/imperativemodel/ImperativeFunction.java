@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction#getConstantDeclarations <em>Constant Declarations</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction#getTemplateVariableDeclarations <em>Template Variable Declarations</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction#getInputVariableDeclarations <em>Input Variable Declarations</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction#getOutputVariableDeclarations <em>Output Variable Declarations</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction#getInstanceVariableDeclarations <em>Instance Variable Declarations</em>}</li>
@@ -32,20 +32,20 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface ImperativeFunction extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Constant Declarations</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipselabs.mscript.language.imperativemodel.ConstantDeclaration}.
+	 * Returns the value of the '<em><b>Template Variable Declarations</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipselabs.mscript.language.imperativemodel.TemplateVariableDeclaration}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Constant Declarations</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Template Variable Declarations</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Constant Declarations</em>' containment reference list.
-	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage#getImperativeFunction_ConstantDeclarations()
+	 * @return the value of the '<em>Template Variable Declarations</em>' containment reference list.
+	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage#getImperativeFunction_TemplateVariableDeclarations()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<ConstantDeclaration> getConstantDeclarations();
+	EList<TemplateVariableDeclaration> getTemplateVariableDeclarations();
 
 	/**
 	 * Returns the value of the '<em><b>Input Variable Declarations</b></em>' containment reference list.

@@ -15,7 +15,6 @@ import org.eclipselabs.mscript.language.imperativemodel.Assignment;
 import org.eclipselabs.mscript.language.imperativemodel.Compound;
 import org.eclipselabs.mscript.language.imperativemodel.CompoundStatement;
 import org.eclipselabs.mscript.language.imperativemodel.ComputationCompound;
-import org.eclipselabs.mscript.language.imperativemodel.ConstantDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.ForeachStatement;
 import org.eclipselabs.mscript.language.imperativemodel.IfStatement;
 import org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction;
@@ -26,6 +25,7 @@ import org.eclipselabs.mscript.language.imperativemodel.LocalVariableDeclaration
 import org.eclipselabs.mscript.language.imperativemodel.OutputVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.StatefulVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.Statement;
+import org.eclipselabs.mscript.language.imperativemodel.TemplateVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.VariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.VariableReference;
 
@@ -106,8 +106,8 @@ public class ImperativeModelAdapterFactory extends AdapterFactoryImpl {
 				return createStatefulVariableDeclarationAdapter();
 			}
 			@Override
-			public Adapter caseConstantDeclaration(ConstantDeclaration object) {
-				return createConstantDeclarationAdapter();
+			public Adapter caseTemplateVariableDeclaration(TemplateVariableDeclaration object) {
+				return createTemplateVariableDeclarationAdapter();
 			}
 			@Override
 			public Adapter caseInputVariableDeclaration(InputVariableDeclaration object) {
@@ -244,16 +244,16 @@ public class ImperativeModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.imperativemodel.ConstantDeclaration <em>Constant Declaration</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.imperativemodel.TemplateVariableDeclaration <em>Template Variable Declaration</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.language.imperativemodel.ConstantDeclaration
+	 * @see org.eclipselabs.mscript.language.imperativemodel.TemplateVariableDeclaration
 	 * @generated
 	 */
-	public Adapter createConstantDeclarationAdapter() {
+	public Adapter createTemplateVariableDeclarationAdapter() {
 		return null;
 	}
 

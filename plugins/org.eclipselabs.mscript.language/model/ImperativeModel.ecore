@@ -4,8 +4,8 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="imperativemodel"
     nsURI="http://www.eclipselabs.org/mscript/ImperativeModel/1.0.0" nsPrefix="imperativemodel">
   <eClassifiers xsi:type="ecore:EClass" name="ImperativeFunction">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="constantDeclarations" upperBound="-1"
-        eType="#//ConstantDeclaration" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="templateVariableDeclarations"
+        upperBound="-1" eType="#//TemplateVariableDeclaration" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="inputVariableDeclarations"
         upperBound="-1" eType="#//InputVariableDeclaration" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="outputVariableDeclarations"
@@ -35,10 +35,7 @@
       eSuperTypes="#//VariableDeclaration">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="circularBufferSize" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ConstantDeclaration" eSuperTypes="#//VariableDeclaration">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//IValue"
-        transient="true"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TemplateVariableDeclaration" eSuperTypes="#//VariableDeclaration"/>
   <eClassifiers xsi:type="ecore:EClass" name="InputVariableDeclaration" eSuperTypes="#//StatefulVariableDeclaration">
     <eStructuralFeatures xsi:type="ecore:EReference" name="feedingCompounds" upperBound="-1"
         eType="#//ComputationCompound" eOpposite="#//ComputationCompound/inputs"/>
@@ -83,5 +80,4 @@
         eType="ecore:EClass ../src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EDataType" name="IValue" instanceClassName="org.eclipselabs.mscript.language.interpreter.value.IValue"/>
 </ecore:EPackage>

@@ -7,9 +7,8 @@
   <foreignModel>ImperativeModel.ecore</foreignModel>
   <genPackages prefix="ImperativeModel" basePackage="org.eclipselabs.mscript.language"
       disposableProviderFactory="true" ecorePackage="ImperativeModel.ecore#/">
-    <genDataTypes ecoreDataType="ImperativeModel.ecore#//IValue"/>
     <genClasses ecoreClass="ImperativeModel.ecore#//ImperativeFunction">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//ImperativeFunction/constantDeclarations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//ImperativeFunction/templateVariableDeclarations"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//ImperativeFunction/inputVariableDeclarations"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//ImperativeFunction/outputVariableDeclarations"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//ImperativeFunction/instanceVariableDeclarations"/>
@@ -30,9 +29,7 @@
     <genClasses image="false" ecoreClass="ImperativeModel.ecore#//StatefulVariableDeclaration">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ImperativeModel.ecore#//StatefulVariableDeclaration/circularBufferSize"/>
     </genClasses>
-    <genClasses ecoreClass="ImperativeModel.ecore#//ConstantDeclaration">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ImperativeModel.ecore#//ConstantDeclaration/value"/>
-    </genClasses>
+    <genClasses ecoreClass="ImperativeModel.ecore#//TemplateVariableDeclaration"/>
     <genClasses ecoreClass="ImperativeModel.ecore#//InputVariableDeclaration">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//InputVariableDeclaration/feedingCompounds"/>
     </genClasses>

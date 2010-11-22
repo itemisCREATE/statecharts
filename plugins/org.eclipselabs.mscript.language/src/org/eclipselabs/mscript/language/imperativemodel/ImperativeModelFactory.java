@@ -53,13 +53,13 @@ public interface ImperativeModelFactory extends EFactory {
 	ComputationCompound createComputationCompound();
 
 	/**
-	 * Returns a new object of class '<em>Constant Declaration</em>'.
+	 * Returns a new object of class '<em>Template Variable Declaration</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Constant Declaration</em>'.
+	 * @return a new object of class '<em>Template Variable Declaration</em>'.
 	 * @generated
 	 */
-	ConstantDeclaration createConstantDeclaration();
+	TemplateVariableDeclaration createTemplateVariableDeclaration();
 
 	/**
 	 * Returns a new object of class '<em>Input Variable Declaration</em>'.
