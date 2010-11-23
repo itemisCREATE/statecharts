@@ -12,6 +12,7 @@
 package org.eclipselabs.mscript.language.imperativemodel.util;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -25,7 +26,6 @@ import org.eclipselabs.mscript.language.functionmodel.Function;
 import org.eclipselabs.mscript.language.functionmodel.VariableDescriptor;
 import org.eclipselabs.mscript.language.functionmodel.VariableKind;
 import org.eclipselabs.mscript.language.functionmodel.VariableStep;
-import org.eclipselabs.mscript.language.imperativemodel.Assignment;
 import org.eclipselabs.mscript.language.imperativemodel.Compound;
 import org.eclipselabs.mscript.language.imperativemodel.ComputationCompound;
 import org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction;
@@ -36,6 +36,7 @@ import org.eclipselabs.mscript.language.imperativemodel.OutputVariableDeclaratio
 import org.eclipselabs.mscript.language.imperativemodel.TemplateVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.VariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.internal.util.EquationCompoundHelper;
+import org.eclipselabs.mscript.language.imperativemodel.util.ImperativeExpressionTransformer.Scope;
 import org.eclipselabs.mscript.language.internal.functionmodel.util.FunctionModelUtil;
 
 /**
@@ -89,6 +90,7 @@ public class ImperativeFunctionTransformer {
 		InputVariableDeclaration inputVariableDeclaration = ImperativeModelFactory.eINSTANCE.createInputVariableDeclaration();
 		inputVariableDeclaration.setName(variableDescriptor.getName());
 		inputVariableDeclaration.setCircularBufferSize(variableDescriptor.getMaximumStep().getIndex() - variableDescriptor.getMinimumStep().getIndex() + 1);
+		imperativeFunction.getInputVariableDeclarations().add(inputVariableDeclaration);
 		variableDeclarations.put(variableDescriptor, inputVariableDeclaration);
 	}
 	
@@ -96,6 +98,7 @@ public class ImperativeFunctionTransformer {
 		OutputVariableDeclaration outputVariableDeclaration = ImperativeModelFactory.eINSTANCE.createOutputVariableDeclaration();
 		outputVariableDeclaration.setName(variableDescriptor.getName());
 		outputVariableDeclaration.setCircularBufferSize(variableDescriptor.getMaximumStep().getIndex() - variableDescriptor.getMinimumStep().getIndex() + 1);
+		imperativeFunction.getOutputVariableDeclarations().add(outputVariableDeclaration);
 		variableDeclarations.put(variableDescriptor, outputVariableDeclaration);
 	}
 
@@ -103,6 +106,7 @@ public class ImperativeFunctionTransformer {
 		InstanceVariableDeclaration instanceVariableDeclaration = ImperativeModelFactory.eINSTANCE.createInstanceVariableDeclaration();
 		instanceVariableDeclaration.setName(variableDescriptor.getName());
 		instanceVariableDeclaration.setCircularBufferSize(variableDescriptor.getMaximumStep().getIndex() - variableDescriptor.getMinimumStep().getIndex() + 1);
+		imperativeFunction.getInstanceVariableDeclarations().add(instanceVariableDeclaration);
 		variableDeclarations.put(variableDescriptor, instanceVariableDeclaration);
 	}
 
@@ -114,11 +118,10 @@ public class ImperativeFunctionTransformer {
 			for (EquationDescriptor equationDescriptor : equationDescriptors) {
 				VariableStep lhsVariableStep = FunctionModelUtil.getFirstLeftHandSideVariableStep(equationDescriptor);
 				if (lhsVariableStep != null && lhsVariableStep.isInitial()) {
-					Assignment assignment = ImperativeModelFactory.eINSTANCE.createAssignment();
-					assignment.setTarget(variableDeclarations.get(lhsVariableStep.getDescriptor()));
-					assignment.setStepIndex(lhsVariableStep.getIndex());
-					assignment.setAssignedExpression(equationDescriptor.getRightHandSide().getExpression());
-					compound.getStatements().add(assignment);
+					ImperativeExpressionTarget target = new ImperativeExpressionTarget(variableDeclarations.get(lhsVariableStep.getDescriptor()), lhsVariableStep.getIndex());
+					Scope scope = createScope(imperativeFunction, compound);
+					ImperativeExpressionTransformer transformer = new ImperativeExpressionTransformer(scope);
+					transformer.transform(equationDescriptor.getRightHandSide().getExpression(), Collections.singletonList(target));
 					processed = true;
 				}
 			}
@@ -136,11 +139,10 @@ public class ImperativeFunctionTransformer {
 			for (EquationDescriptor equationDescriptor : equationDescriptors) {
 				VariableStep lhsVariableStep = FunctionModelUtil.getFirstLeftHandSideVariableStep(equationDescriptor);
 				if (lhsVariableStep != null) {
-					Assignment assignment = ImperativeModelFactory.eINSTANCE.createAssignment();
-					assignment.setTarget(variableDeclarations.get(lhsVariableStep.getDescriptor()));
-					assignment.setStepIndex(lhsVariableStep.getIndex());
-					assignment.setAssignedExpression(equationDescriptor.getRightHandSide().getExpression());
-					compound.getStatements().add(assignment);
+					ImperativeExpressionTarget target = new ImperativeExpressionTarget(variableDeclarations.get(lhsVariableStep.getDescriptor()), lhsVariableStep.getIndex());
+					Scope scope = createScope(imperativeFunction, compound);
+					ImperativeExpressionTransformer transformer = new ImperativeExpressionTransformer(scope);
+					transformer.transform(equationDescriptor.getRightHandSide().getExpression(), Collections.singletonList(target));
 
 					for (EquationPart equationPart : equationDescriptor.getRightHandSide().getParts()) {
 						VariableStep rhsVariableStep = equationPart.getVariableStep();
@@ -161,6 +163,23 @@ public class ImperativeFunctionTransformer {
 			}
 			imperativeFunction.getComputationCompounds().add(compound);
 		}
+	}
+	
+	protected Scope createScope(ImperativeFunction imperativeFunction, Compound compound) {
+		Scope scope = new Scope(null, compound);
+		for (TemplateVariableDeclaration templateVariableDeclaration : imperativeFunction.getTemplateVariableDeclarations()) {
+			scope.addVariableDeclaration(templateVariableDeclaration);
+		}
+		for (InputVariableDeclaration inputVariableDeclaration : imperativeFunction.getInputVariableDeclarations()) {
+			scope.addVariableDeclaration(inputVariableDeclaration);
+		}
+		for (OutputVariableDeclaration outputVariableDeclaration : imperativeFunction.getOutputVariableDeclarations()) {
+			scope.addVariableDeclaration(outputVariableDeclaration);
+		}
+		for (InstanceVariableDeclaration instanceVariableDeclaration : imperativeFunction.getInstanceVariableDeclarations()) {
+			scope.addVariableDeclaration(instanceVariableDeclaration);
+		}
+		return scope;
 	}
 	
 }

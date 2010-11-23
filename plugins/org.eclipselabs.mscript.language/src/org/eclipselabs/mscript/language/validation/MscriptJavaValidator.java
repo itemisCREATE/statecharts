@@ -11,6 +11,8 @@ import org.eclipselabs.mscript.language.ast.FunctionDefinition;
 import org.eclipselabs.mscript.language.ast.UnitExpressionNumerator;
 import org.eclipselabs.mscript.language.functionmodel.Function;
 import org.eclipselabs.mscript.language.functionmodel.util.FunctionConstructor;
+import org.eclipselabs.mscript.language.imperativemodel.Compound;
+import org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction;
 import org.eclipselabs.mscript.language.imperativemodel.util.ImperativeFunctionTransformer;
 
 public class MscriptJavaValidator extends AbstractMscriptJavaValidator {
@@ -49,7 +51,16 @@ public class MscriptJavaValidator extends AbstractMscriptJavaValidator {
 	@Check
 	public void checkFunctionDefinition(FunctionDefinition functionDefinition) {
 		Function function = new FunctionConstructor().construct(functionDefinition, getChain());
-		new ImperativeFunctionTransformer().transform(function);
+		ImperativeFunction imperativeFunction = new ImperativeFunctionTransformer().transform(function);
+
+		System.out.println("### " + functionDefinition.getName());
+		System.out.println("--- Initialize compound:");
+		System.out.println(new CompoundCGenerator().doSwitch(imperativeFunction.getInitializationCompound()));
+		for (Compound compound : imperativeFunction.getComputationCompounds()) {
+			System.out.println("--- Computation compound:");
+			System.out.println(new CompoundCGenerator().doSwitch(compound));
+		}
+		System.out.println();
 	}
 	
 }
