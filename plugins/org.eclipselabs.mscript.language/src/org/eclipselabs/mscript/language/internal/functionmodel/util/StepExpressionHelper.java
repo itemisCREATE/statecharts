@@ -11,15 +11,20 @@
 
 package org.eclipselabs.mscript.language.internal.functionmodel.util;
 
+import java.util.ListIterator;
+
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipselabs.mscript.language.ast.AdditiveExpression;
 import org.eclipselabs.mscript.language.ast.AdditiveExpressionPart;
 import org.eclipselabs.mscript.language.ast.AdditiveOperator;
+import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.ast.FeatureCall;
+import org.eclipselabs.mscript.language.ast.FeatureCallPart;
 import org.eclipselabs.mscript.language.ast.IntegerLiteral;
+import org.eclipselabs.mscript.language.ast.OperationCall;
 import org.eclipselabs.mscript.language.ast.ParenthesizedExpression;
 import org.eclipselabs.mscript.language.ast.SimpleName;
 import org.eclipselabs.mscript.language.ast.UnaryExpression;
@@ -32,7 +37,23 @@ import org.eclipselabs.mscript.language.internal.util.EObjectDiagnostic;
  */
 public class StepExpressionHelper {
 
-	public StepExpressionResult evaluate(Expression expression, DiagnosticChain diagnostics) {
+	public StepExpressionResult getStepExpression(ListIterator<FeatureCallPart> iterator, DiagnosticChain diagnostics) {
+		if (iterator.hasNext()) {
+			FeatureCallPart part = iterator.next();
+			if (part instanceof OperationCall) {
+				OperationCall operationCall = (OperationCall) part;
+				if (operationCall.getArguments().size() == 1) {
+					return evaluateStepExpression(operationCall.getArguments().get(0), diagnostics);
+				}
+				diagnostics.add(new EObjectDiagnostic(Diagnostic.ERROR, "Invalid parameter count", operationCall, AstPackage.OPERATION_CALL__ARGUMENTS));
+				return null;
+			}
+			iterator.previous();
+		}
+		return new StepExpressionResult(0, false);
+	}
+
+	private StepExpressionResult evaluateStepExpression(Expression expression, DiagnosticChain diagnostics) {
 		Evaluator evaluator = new Evaluator(diagnostics);
 		int result = evaluator.doSwitch(expression);
 		if (evaluator.isOk()) {

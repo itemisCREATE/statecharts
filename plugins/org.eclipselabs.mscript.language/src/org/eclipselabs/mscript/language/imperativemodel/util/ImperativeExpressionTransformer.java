@@ -14,6 +14,7 @@ package org.eclipselabs.mscript.language.imperativemodel.util;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.BasicDiagnostic;
@@ -31,7 +32,6 @@ import org.eclipselabs.mscript.language.ast.LetExpression;
 import org.eclipselabs.mscript.language.ast.LetExpressionVariableDeclaration;
 import org.eclipselabs.mscript.language.ast.MultiplicativeExpression;
 import org.eclipselabs.mscript.language.ast.MultiplicativeExpressionPart;
-import org.eclipselabs.mscript.language.ast.OperationCall;
 import org.eclipselabs.mscript.language.ast.ParenthesizedExpression;
 import org.eclipselabs.mscript.language.ast.RealLiteral;
 import org.eclipselabs.mscript.language.ast.RelationalExpression;
@@ -157,19 +157,14 @@ public class ImperativeExpressionTransformer extends AstSwitch<Expression> {
 			SimpleName simpleName = (SimpleName) featureCall.getTarget();
 			VariableDeclaration variableDeclaration = scope.getVariableDeclaration(simpleName.getIdentifier());
 			if (variableDeclaration != null) {
-				int stepIndex = 0;
-				List<FeatureCallPart> parts = featureCall.getParts();
-				if (!parts.isEmpty() && parts.get(0) instanceof OperationCall) {
-					OperationCall operationCall = (OperationCall) parts.get(0);
-					if (!operationCall.getArguments().isEmpty()) {
-						StepExpressionResult stepExpressionResult = new StepExpressionHelper().evaluate(operationCall.getArguments().get(0), new BasicDiagnostic());
-						stepIndex = stepExpressionResult.getIndex();
-					}
+				ListIterator<FeatureCallPart> partIterator = featureCall.getParts().listIterator();
+				StepExpressionResult stepExpressionResult = new StepExpressionHelper().getStepExpression(partIterator, new BasicDiagnostic());
+				if (stepExpressionResult != null) {
+					VariableReference variableReference = ImperativeModelFactory.eINSTANCE.createVariableReference();
+					variableReference.setDeclaration(variableDeclaration);
+					variableReference.setStepIndex(stepExpressionResult.getIndex());
+					return variableReference;
 				}
-				VariableReference variableReference = ImperativeModelFactory.eINSTANCE.createVariableReference();
-				variableReference.setDeclaration(variableDeclaration);
-				variableReference.setStepIndex(stepIndex);
-				return variableReference;
 			}
 		}
 		return super.caseFeatureCall(featureCall);

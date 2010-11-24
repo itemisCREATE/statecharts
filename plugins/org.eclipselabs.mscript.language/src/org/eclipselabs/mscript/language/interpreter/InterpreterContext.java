@@ -11,15 +11,13 @@
 
 package org.eclipselabs.mscript.language.interpreter;
 
-import java.util.List;
+import java.util.ListIterator;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.emf.common.util.DiagnosticChain;
-import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.ast.FeatureCall;
 import org.eclipselabs.mscript.language.ast.FeatureCallPart;
-import org.eclipselabs.mscript.language.ast.OperationCall;
 import org.eclipselabs.mscript.language.ast.SimpleName;
 import org.eclipselabs.mscript.language.internal.LanguagePlugin;
 import org.eclipselabs.mscript.language.internal.functionmodel.util.StepExpressionHelper;
@@ -100,21 +98,10 @@ public class InterpreterContext implements IInterpreterContext {
 			if (functor.isInitialized()) {
 				IVariable variable = functor.getVariable(simpleName.getIdentifier());
 				if (variable != null) {
-					List<FeatureCallPart> parts = featureCall.getParts();
-					if (parts.isEmpty()) {
-						return variable.getValue(0);
-					} else {
-						FeatureCallPart part = parts.get(0);
-						if (part instanceof OperationCall) {
-							OperationCall operationCall = (OperationCall) part;
-							if (operationCall.getArguments().size() == 1) {
-								Expression stepExpression = operationCall.getArguments().get(0);
-								StepExpressionResult stepExpressionResult = new StepExpressionHelper().evaluate(stepExpression, getDiagnostics());
-								if (stepExpressionResult != null) {
-									return variable.getValue(stepExpressionResult.getIndex());
-								}
-							}
-						}
+					ListIterator<FeatureCallPart> partIterator = featureCall.getParts().listIterator();
+					StepExpressionResult stepExpressionResult = new StepExpressionHelper().getStepExpression(partIterator, diagnostics);
+					if (stepExpressionResult != null) {
+						return variable.getValue(stepExpressionResult.getIndex());
 					}
 				}
 			}

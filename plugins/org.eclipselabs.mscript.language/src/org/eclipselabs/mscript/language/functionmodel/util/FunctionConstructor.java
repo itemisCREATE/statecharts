@@ -13,6 +13,7 @@ package org.eclipselabs.mscript.language.functionmodel.util;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.ListIterator;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.Diagnostic;
@@ -189,7 +190,8 @@ public class FunctionConstructor {
 					if (variableKind == VariableKind.INPUT_PARAMETER
 							|| variableKind == VariableKind.OUTPUT_PARAMETER
 							|| variableKind == VariableKind.STATE_VARIABLE) {
-						StepExpressionResult stepExpressionResult = evaluateStepExpression(featureCall, diagnostics);
+						ListIterator<FeatureCallPart> partIterator = featureCall.getParts().listIterator();
+						StepExpressionResult stepExpressionResult = new StepExpressionHelper().getStepExpression(partIterator, diagnostics);
 						if (stepExpressionResult != null) {
 							stepIndex = stepExpressionResult.getIndex();
 							initial = stepExpressionResult.isInitial();
@@ -248,27 +250,6 @@ public class FunctionConstructor {
 			return VariableKind.UNKNOWN;
 		}
 
-		private StepExpressionResult evaluateStepExpression(FeatureCall featureCall, DiagnosticChain diagnostics) {
-			if (featureCall.getParts().isEmpty()) {
-				return new StepExpressionResult(0, false);
-			}
-			Expression stepExpression = getStepExpression(featureCall, diagnostics);
-			return new StepExpressionHelper().evaluate(stepExpression, diagnostics);
-		}
-
-		private Expression getStepExpression(FeatureCall featureCall, DiagnosticChain diagnostics) {
-			FeatureCallPart part = featureCall.getParts().get(0);
-			if (part instanceof OperationCall) {
-				OperationCall operationCall = (OperationCall) part;
-				if (operationCall.getArguments().size() != 1) {
-					diagnostics.add(new EObjectDiagnostic(Diagnostic.ERROR, "Invalid parameter count", operationCall, AstPackage.OPERATION_CALL__ARGUMENTS));
-				} else {
-					return operationCall.getArguments().get(0);
-				}
-			}
-			return null;
-		}
-		
 		/* (non-Javadoc)
 		 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#defaultCase(org.eclipse.emf.ecore.EObject)
 		 */
