@@ -21,7 +21,6 @@ import org.eclipse.gef.tools.CellEditorLocator;
 import org.eclipse.gef.tools.DirectEditManager;
 import org.eclipse.gmf.runtime.common.ui.services.parser.IParser;
 import org.eclipse.gmf.runtime.common.ui.services.parser.ParserOptions;
-import org.eclipse.gmf.runtime.diagram.core.listener.NotificationListener;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.CompartmentEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ITextAwareEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.LabelDirectEditPolicy;
@@ -47,23 +46,10 @@ import org.yakindu.sct.statechart.diagram.parser.AttributeParser;
 public abstract class TextAwareLabelEditPart extends CompartmentEditPart
 		implements ITextAwareEditPart {
 
-	private static final String UPDATE_NAME_FILTER = "update.name";
-
 	private final DirectEditManager manager;
 
 	private final EAttribute feature;
 
-	/**
-	 * Semantic listener that updates the Label in case of model changes.
-	 */
-	private final NotificationListener updateLabelListener = new NotificationListener() {
-		@Override
-		public void notifyChanged(Notification notification) {
-			if (notification.getFeature() == feature) {
-				updateLabelText();
-			}
-		}
-	};
 
 	public TextAwareLabelEditPart(View view, EAttribute feature) {
 		super(view);
@@ -87,19 +73,6 @@ public abstract class TextAwareLabelEditPart extends CompartmentEditPart
 
 	private CellEditorLocator createEditorLocator() {
 		return new DefaultCellEditorLocator();
-	}
-
-	@Override
-	protected void addSemanticListeners() {
-		super.addSemanticListeners();
-		addListenerFilter(UPDATE_NAME_FILTER, updateLabelListener,
-				resolveSemanticElement());
-	};
-
-	@Override
-	protected void removeSemanticListeners() {
-		super.removeSemanticListeners();
-		removeListenerFilter(UPDATE_NAME_FILTER);
 	}
 
 	@Override
@@ -172,6 +145,13 @@ public abstract class TextAwareLabelEditPart extends CompartmentEditPart
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+	}
+	@Override
+	protected void handleNotificationEvent(Notification event) {
+		if (event.getFeature() == feature) {
+			updateLabelText();
+		}
+		super.handleNotificationEvent(event);
 	}
 
 	private class DefaultCellEditorLocator implements CellEditorLocator {

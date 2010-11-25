@@ -51,17 +51,7 @@ public enum UnaryOperator implements Enumerator
    * @generated
    * @ordered
    */
-  COMPLEMENT(2, "complement", "~"),
-
-  /**
-   * The '<em><b>Not</b></em>' literal object.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #NOT_VALUE
-   * @generated
-   * @ordered
-   */
-  NOT(3, "not", "!");
+  COMPLEMENT(2, "complement", "~");
 
   /**
    * The '<em><b>Positive</b></em>' literal value.
@@ -109,21 +99,6 @@ public enum UnaryOperator implements Enumerator
   public static final int COMPLEMENT_VALUE = 2;
 
   /**
-   * The '<em><b>Not</b></em>' literal value.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Not</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @see #NOT
-   * @model name="not" literal="!"
-   * @generated
-   * @ordered
-   */
-  public static final int NOT_VALUE = 3;
-
-  /**
    * An array of all the '<em><b>Unary Operator</b></em>' enumerators.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -135,7 +110,6 @@ public enum UnaryOperator implements Enumerator
       POSITIVE,
       NEGATIVE,
       COMPLEMENT,
-      NOT,
     };
 
   /**
@@ -197,7 +171,6 @@ public enum UnaryOperator implements Enumerator
       case POSITIVE_VALUE: return POSITIVE;
       case NEGATIVE_VALUE: return NEGATIVE;
       case COMPLEMENT_VALUE: return COMPLEMENT;
-      case NOT_VALUE: return NOT;
     }
     return null;
   }

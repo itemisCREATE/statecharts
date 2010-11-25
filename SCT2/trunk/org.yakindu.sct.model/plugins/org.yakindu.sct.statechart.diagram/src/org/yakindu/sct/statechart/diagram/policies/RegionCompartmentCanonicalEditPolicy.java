@@ -68,7 +68,8 @@ public class RegionCompartmentCanonicalEditPolicy extends CanonicalConnectionEdi
 	@Override
 	protected String getFactoryHint(IAdaptable elementAdapter) {
 		EObject modelElement = (EObject) elementAdapter.getAdapter(EObject.class);
-		return SemanticHintUtil.getSemanticHint(modelElement);
+		String factoryHint =  SemanticHintUtil.getSemanticHint(modelElement);
+		return factoryHint;
 	}
 	
 	@Override

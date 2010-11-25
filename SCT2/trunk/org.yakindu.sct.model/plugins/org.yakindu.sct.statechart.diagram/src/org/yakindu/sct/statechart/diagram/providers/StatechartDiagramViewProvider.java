@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.diagram.core.providers.AbstractViewProvider;
 import org.eclipse.gmf.runtime.diagram.ui.view.factories.optimal.CompartmentViewFactory;
 import org.eclipse.gmf.runtime.diagram.ui.view.factories.optimal.ShapeViewFactory;
@@ -24,6 +25,7 @@ import org.yakindu.sct.statechart.diagram.factories.StateTextCompartmentViewFact
 import org.yakindu.sct.statechart.diagram.factories.StateViewFactory;
 import org.yakindu.sct.statechart.diagram.factories.StatechartDiagramViewFactory;
 import org.yakindu.sct.statechart.diagram.factories.TransitionViewFactory;
+import org.yakindu.sct.statechart.diagram.utils.SemanticHintUtil;
 
 /**
  * 
@@ -73,11 +75,17 @@ public class StatechartDiagramViewProvider extends AbstractViewProvider implemen
 
 	@Override
 	protected Class<?> getEdgeViewClass(IAdaptable semanticAdapter, View containerView, String semanticHint) {
+		if(semanticHint == null || semanticHint.isEmpty()){
+			semanticHint = SemanticHintUtil.getSemanticHint((EObject)semanticAdapter.getAdapter(EObject.class));
+		}
 		return getClass(semanticHint);
 	}
 
 	@Override
 	protected Class<?> getNodeViewClass(IAdaptable semanticAdapter, View containerView, String semanticHint) {
+		if(semanticHint == null || semanticHint.isEmpty()){
+			semanticHint = SemanticHintUtil.getSemanticHint((EObject)semanticAdapter.getAdapter(EObject.class));
+		}
 		return getClass(semanticHint);
 	}
 }

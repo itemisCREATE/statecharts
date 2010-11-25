@@ -1,211 +1,118 @@
-grammar org.yakindu.sct.statechart.Expressions with org.eclipse.xtext.common.Terminals
+grammar org.yakindu.sct.statechart.Expressions with
+org.eclipse.xtext.common.Terminals
 
 generate expressions "http://www.yakindu.org/sct/statechart/Expressions"
 
-Expression
-: 	TriggerExpression | GuardExpression | ActionExpression
-;
+StatementModel:
+(statements+=Statement)+;
 
-TriggerExpression 
-:	(triggers+=(Trigger) ("," triggers+=Trigger)*)
-;	
+Statement:
+VariableDefinition | SignalEventDefinition | ActionDefinition |
+TransitionDefinition;
 
-GuardExpression
-: 	expression = BooleanOrExpression
-;
-  
-ActionExpression 
-:	(statement += Statement)+
-;
+TransitionDefinition:
+(triggers+=(Event) ("," triggers+=Event)*)
+(guardExpression=ExpressionRule)?;
 
-Trigger 
-: 	event = Event
-;
+VariableDefinition:
+'var' name=ID ':' type=Type;
 
-Event
-:   SignalEvent 
-| 	TimeEvent
-;
+ActionDefinition:
+('entry' | 'exit' 'do') ':' expression=ExpressionRule ';';
 
-SignalEvent
-: 	identifier = ID
-;
-  
-TimeEvent
-: 	'after' '(' duration = TimeExpression ')'
-;
+Event:
+SignalEventDefinition | TimeEventDefinition;
 
-TimeExpression
-: 	TimeConstant
-|   VariableReference 	
-;
+SignalEventDefinition returns Event:
+'event' name=ID ':' direction=DirectionKind ';';
 
-VariableReference 
-:  variable = Variable
-|  'var' '(' variable = Variable ')' // backwards compatibility
-;
-
-Variable
-:  	identifier = ID
-;
+TimeEventDefinition returns Event:
+'after' '('time=TimeConstant')';
 
 TimeConstant
-:  value = INT (unit = TimeUnit)?
-; 
+:  value = INT (unit = TimeUnit)?;
+
+ExpressionRule:
+    expression=(LogicalOrExpression | RaiseEventExpression);
+
+RaiseEventExpression:
+'raise' event=[Event];
+
+LogicalOrExpression returns Expression:
+    LogicalAndExpression ({LogicalOrExpression.leftOperand=current} '||'
+rightOperand=LogicalAndExpression)*;
+
+LogicalAndExpression returns Expression:
+    LogicalNotExpression ({LogicalAndExpression.leftOperand=current}
+'&&' rightOperand=LogicalNotExpression)*;
+
+LogicalNotExpression returns Expression:
+    LogicalRelationExpression | {LogicalNotExpression} '!'
+operand=LogicalRelationExpression;
+
+LogicalRelationExpression returns Expression:
+    NumericalAddSubtractExpression
+({LogicalRelationExpression.leftOperand=current} operator=RelationalOperator
+    rightOperand=NumericalAddSubtractExpression)*;
+
+NumericalAddSubtractExpression returns Expression:
+    NumericalMultiplyDivideExpression
+({NumericalAddSubtractExpression.leftOperand=current}
+operator=AdditiveOperator
+    rightOperand=NumericalMultiplyDivideExpression)*;
+
+NumericalMultiplyDivideExpression returns Expression:
+    NumericalUnaryExpression
+({NumericalMultiplyDivideExpression.leftOperand=current}
+operator=MultiplicativeOperator
+    rightOperand=NumericalUnaryExpression)*;
+
+NumericalUnaryExpression returns Expression:
+    PrimaryExpression | {NumericalUnaryExpression}
+operator=UnaryOperator operand=PrimaryExpression;
+    
+PrimaryExpression returns Expression:
+    ValueExpression | '(' LogicalOrExpression ')';
+
+enum AdditiveOperator:
+    plus='+' | minus='-';
+
+enum MultiplicativeOperator:
+    mul='*' | div='/' | mod='%';
+
+enum UnaryOperator:
+    positive='+' | negative='-' | complement='~';
+
+enum RelationalOperator:
+    smaller='<' | smallerEqual='<=' | greater='>' | greaterEqual='>=' |
+    equals='==' | notEquals='!=';
+
+enum DirectionKind:
+incoming = 'in' | outgoing ='out';
 
 enum TimeUnit
-: 	second = 's'
+:     second = 's'
 |   millisecond = 'ms'
-|   nanosecond = 'ns'
-;
+|   nanosecond = 'ns';
 
-Statement
-: 	(VariableAssignment | EventRaising | ProcedureCall) ";"
-;
+enum Type:
+int ='int' | float='float' | boolean='boolean';
 
-VariableAssignment
-:	variableReference = VariableReference  operator = AssignmentOperator value = ConditionalExpression
-;
+ValueExpression returns Expression:
+    PrimitiveValueExpression | VariableReferenceExpression;
 
-ProcedureCall
-:  procedure = Procedure '(' ')'
-;
+PrimitiveValueExpression returns Expression:
+    {PrimitiveValueExpression} value=Literal;
 
-Procedure
-: 	identifier = ID
-;
+VariableReferenceExpression returns Expression:
+    {PropertyReferenceExpression} value=[VariableDefinition];
 
-enum AssignmentOperator
-: assign = '=' 
-| multAssign = '*=' 
-| divAssign = '/=' 
-| modAssign = '%=' 
-| addAssign = '+=' 
-| subAssign = '-=' 
-| leftShiftAssign = '<<=' 
-| rightShiftAssign = '>>=' 
-| andAssign = '&=' 
-| xorAssign = '^=' 
-| orAssign = '|='
-;
+Literal:
+BOOL | INT | STRING | FLOAT;
 
-EventRaising
-:	'raise' '(' event = SignalEvent ')'
-;
+terminal BOOL:
+    'true' | 'false';
 
-BooleanOrExpression
-	: operand1 = BooleanAndExpression ('||' operand2 = BooleanAndExpression)*
-	;
+terminal FLOAT:
+    ('-' | '+')? (INT '.' INT) ('e' ('-' | '+') INT)?;
 
-BooleanAndExpression
-	: operand1 = BitwiseXorExpression ('&&' operand2 = BitwiseXorExpression)*
-	;
-
-BitwiseXorExpression
-	: operand1 = BitwiseOrExpression ('^' operand2 = BitwiseOrExpression)*
-	;
-
-BitwiseOrExpression
-	: operand1 = BitwiseAndExpression ('|' operand2 = BitwiseAndExpression)*
-	;
-
-BitwiseAndExpression
-	: operand1 = EqualityExpression ('&' operand2 = EqualityExpression)*
-	;
-	
-EqualityExpression
-	: operand1 = RelationalExpression (operator = EqualityOperator operand2 = RelationalExpression)*
-	;
-
-enum EqualityOperator
-:	equals = '=='
-|   notEquals = '!='
-;
-
-RelationalExpression
-: operand1 = ShiftExpression (operator = RelationalOperator operand2 = ShiftExpression)*
-;
-
-enum RelationalOperator
-:	smaller = '<'
-|   greater = '>'
-|   smallerEqual = '<='
-|   greaterEqual = '>='
-;
-
-ConditionalExpression
-:  	operand1 = BooleanOrExpression ('?' operand2 = ShiftExpression ':' operand3 = ShiftExpression)?
-;
-
-ShiftExpression
-: operand1 = AdditiveExpression (operator = ShiftOperator operand2 = AdditiveExpression)*
-;	
-	
-enum ShiftOperator
-:	left = '<<'
-|   right = '>>'
-;
-
-AdditiveExpression
-	: operand1 = MultiplicativeExpression (operator = AdditiveOperator operand2 = MultiplicativeExpression)*
-	;
-	
-enum AdditiveOperator
-:	plus = '+'
-|   minus = '-'
-;
-
-MultiplicativeExpression
-	: operand1 = UnaryExpression (operator = MultiplicativeOperator operand2 = UnaryExpression)*
-;
-
-enum MultiplicativeOperator
-: 	mul = '*'
-|   div = '/'
-|   mod = '%'
-;
-
-UnaryExpression
-:	 (operator = UnaryOperator)? operand = (PrimaryExpression ) 
-;
-	
-enum UnaryOperator
-:	positive = '+'
-|   negative = '-'
-|   complement = '~'
-|   not = '!'
-;
-
-PrimaryExpression
-: 	VariableReference 
-|   LiteralValue
-|   '(' NestedExpression ')'
-;
-
-NestedExpression
-:  	expression = ConditionalExpression
-;
-
-LiteralValue
-: 	value = Literal
-;
-
-Literal
-:  	HEX_LITERAL
-|   BOOLEAN_LITERAL
-|   INT
-|	STRING
-|   FLOATING_POINT_LITERAL
-;
-
-terminal BOOLEAN_LITERAL
-:	"true" | "false"
-;
-
-// LEXER TOKENS
-terminal HEX_LITERAL 
-: ('0') ('x'|'X') ('0'..'9'|'a'..'f'|'A'..'F')+;
-
-terminal FLOATING_POINT_LITERAL
-: 	('0'..'9')* '.' ('0'..'9')* (('e'|'E') ('+'|'-')? ('0'..'9')+)? ('f'|'F'|'d'|'D')?
-;

@@ -13,11 +13,15 @@ package org.yakindu.sct.statechart.diagram;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
+import org.eclipselabs.xtfo.demo.rcp.partialEditing.EmbeddedXtextEditorModule;
 import org.osgi.framework.BundleContext;
 import org.yakindu.sct.statechart.ExpressionsRuntimeModule;
 import org.yakindu.sct.statechart.ui.ExpressionsUiModule;
 import org.yakindu.sct.statechart.ui.internal.ExpressionsActivator;
+import org.yakindu.sct.statechart.xtextintegration.editors.XTextCellEditor;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import com.google.inject.Module;
 import com.google.inject.util.Modules;
 
@@ -78,15 +82,16 @@ public class DiagramActivator extends AbstractUIPlugin {
 	public static DiagramActivator getDefault() {
 		return plugin;
 	}
-
-	// TODO: Provide interface bewteen grammar and diagram editor via extension
-	// point
-	public static Module getXtextModule() {
-		Module xtextModule = Modules.override(
-				Modules.override(new ExpressionsRuntimeModule()).with(
-						new ExpressionsUiModule(ExpressionsActivator
-								.getInstance()))).with(new SharedStateModule());
-		return xtextModule;
+	
+	public Injector getDslInjectorForEmbedded() {
+		//FIXME
+		Injector injector =  Guice.createInjector(Modules.override(
+				Modules.override(
+						Modules.override(new ExpressionsRuntimeModule()).with(
+								new ExpressionsUiModule(DiagramActivator.getDefault()
+										))).with(
+						new SharedStateModule())).with(new EmbeddedXtextEditorModule()));
+		XTextCellEditor.injector = injector;
+		return injector;
 	}
-
 }

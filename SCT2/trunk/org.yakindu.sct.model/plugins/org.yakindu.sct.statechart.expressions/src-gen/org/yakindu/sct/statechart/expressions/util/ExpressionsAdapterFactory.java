@@ -79,64 +79,9 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl
     new ExpressionsSwitch<Adapter>()
     {
       @Override
-      public Adapter caseExpression(Expression object)
+      public Adapter caseStatementModel(StatementModel object)
       {
-        return createExpressionAdapter();
-      }
-      @Override
-      public Adapter caseTriggerExpression(TriggerExpression object)
-      {
-        return createTriggerExpressionAdapter();
-      }
-      @Override
-      public Adapter caseGuardExpression(GuardExpression object)
-      {
-        return createGuardExpressionAdapter();
-      }
-      @Override
-      public Adapter caseActionExpression(ActionExpression object)
-      {
-        return createActionExpressionAdapter();
-      }
-      @Override
-      public Adapter caseTrigger(Trigger object)
-      {
-        return createTriggerAdapter();
-      }
-      @Override
-      public Adapter caseEvent(Event object)
-      {
-        return createEventAdapter();
-      }
-      @Override
-      public Adapter caseSignalEvent(SignalEvent object)
-      {
-        return createSignalEventAdapter();
-      }
-      @Override
-      public Adapter caseTimeEvent(TimeEvent object)
-      {
-        return createTimeEventAdapter();
-      }
-      @Override
-      public Adapter caseTimeExpression(TimeExpression object)
-      {
-        return createTimeExpressionAdapter();
-      }
-      @Override
-      public Adapter caseVariableReference(VariableReference object)
-      {
-        return createVariableReferenceAdapter();
-      }
-      @Override
-      public Adapter caseVariable(Variable object)
-      {
-        return createVariableAdapter();
-      }
-      @Override
-      public Adapter caseTimeConstant(TimeConstant object)
-      {
-        return createTimeConstantAdapter();
+        return createStatementModelAdapter();
       }
       @Override
       public Adapter caseStatement(Statement object)
@@ -144,99 +89,89 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl
         return createStatementAdapter();
       }
       @Override
-      public Adapter caseVariableAssignment(VariableAssignment object)
+      public Adapter caseTransitionDefinition(TransitionDefinition object)
       {
-        return createVariableAssignmentAdapter();
+        return createTransitionDefinitionAdapter();
       }
       @Override
-      public Adapter caseProcedureCall(ProcedureCall object)
+      public Adapter caseVariableDefinition(VariableDefinition object)
       {
-        return createProcedureCallAdapter();
+        return createVariableDefinitionAdapter();
       }
       @Override
-      public Adapter caseProcedure(Procedure object)
+      public Adapter caseActionDefinition(ActionDefinition object)
       {
-        return createProcedureAdapter();
+        return createActionDefinitionAdapter();
       }
       @Override
-      public Adapter caseEventRaising(EventRaising object)
+      public Adapter caseEvent(Event object)
       {
-        return createEventRaisingAdapter();
+        return createEventAdapter();
       }
       @Override
-      public Adapter caseBooleanOrExpression(BooleanOrExpression object)
+      public Adapter caseTimeConstant(TimeConstant object)
       {
-        return createBooleanOrExpressionAdapter();
+        return createTimeConstantAdapter();
       }
       @Override
-      public Adapter caseBooleanAndExpression(BooleanAndExpression object)
+      public Adapter caseExpressionRule(ExpressionRule object)
       {
-        return createBooleanAndExpressionAdapter();
+        return createExpressionRuleAdapter();
       }
       @Override
-      public Adapter caseBitwiseXorExpression(BitwiseXorExpression object)
+      public Adapter caseRaiseEventExpression(RaiseEventExpression object)
       {
-        return createBitwiseXorExpressionAdapter();
+        return createRaiseEventExpressionAdapter();
       }
       @Override
-      public Adapter caseBitwiseOrExpression(BitwiseOrExpression object)
+      public Adapter caseExpression(Expression object)
       {
-        return createBitwiseOrExpressionAdapter();
+        return createExpressionAdapter();
       }
       @Override
-      public Adapter caseBitwiseAndExpression(BitwiseAndExpression object)
+      public Adapter caseLogicalOrExpression(LogicalOrExpression object)
       {
-        return createBitwiseAndExpressionAdapter();
+        return createLogicalOrExpressionAdapter();
       }
       @Override
-      public Adapter caseEqualityExpression(EqualityExpression object)
+      public Adapter caseLogicalAndExpression(LogicalAndExpression object)
       {
-        return createEqualityExpressionAdapter();
+        return createLogicalAndExpressionAdapter();
       }
       @Override
-      public Adapter caseRelationalExpression(RelationalExpression object)
+      public Adapter caseLogicalNotExpression(LogicalNotExpression object)
       {
-        return createRelationalExpressionAdapter();
+        return createLogicalNotExpressionAdapter();
       }
       @Override
-      public Adapter caseConditionalExpression(ConditionalExpression object)
+      public Adapter caseLogicalRelationExpression(LogicalRelationExpression object)
       {
-        return createConditionalExpressionAdapter();
+        return createLogicalRelationExpressionAdapter();
       }
       @Override
-      public Adapter caseShiftExpression(ShiftExpression object)
+      public Adapter caseNumericalAddSubtractExpression(NumericalAddSubtractExpression object)
       {
-        return createShiftExpressionAdapter();
+        return createNumericalAddSubtractExpressionAdapter();
       }
       @Override
-      public Adapter caseAdditiveExpression(AdditiveExpression object)
+      public Adapter caseNumericalMultiplyDivideExpression(NumericalMultiplyDivideExpression object)
       {
-        return createAdditiveExpressionAdapter();
+        return createNumericalMultiplyDivideExpressionAdapter();
       }
       @Override
-      public Adapter caseMultiplicativeExpression(MultiplicativeExpression object)
+      public Adapter caseNumericalUnaryExpression(NumericalUnaryExpression object)
       {
-        return createMultiplicativeExpressionAdapter();
+        return createNumericalUnaryExpressionAdapter();
       }
       @Override
-      public Adapter caseUnaryExpression(UnaryExpression object)
+      public Adapter casePrimitiveValueExpression(PrimitiveValueExpression object)
       {
-        return createUnaryExpressionAdapter();
+        return createPrimitiveValueExpressionAdapter();
       }
       @Override
-      public Adapter casePrimaryExpression(PrimaryExpression object)
+      public Adapter casePropertyReferenceExpression(PropertyReferenceExpression object)
       {
-        return createPrimaryExpressionAdapter();
-      }
-      @Override
-      public Adapter caseNestedExpression(NestedExpression object)
-      {
-        return createNestedExpressionAdapter();
-      }
-      @Override
-      public Adapter caseLiteralValue(LiteralValue object)
-      {
-        return createLiteralValueAdapter();
+        return createPropertyReferenceExpressionAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -261,181 +196,16 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl
 
 
   /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.Expression <em>Expression</em>}'.
+   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.StatementModel <em>Statement Model</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.yakindu.sct.statechart.expressions.Expression
+   * @see org.yakindu.sct.statechart.expressions.StatementModel
    * @generated
    */
-  public Adapter createExpressionAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.TriggerExpression <em>Trigger Expression</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.yakindu.sct.statechart.expressions.TriggerExpression
-   * @generated
-   */
-  public Adapter createTriggerExpressionAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.GuardExpression <em>Guard Expression</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.yakindu.sct.statechart.expressions.GuardExpression
-   * @generated
-   */
-  public Adapter createGuardExpressionAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.ActionExpression <em>Action Expression</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.yakindu.sct.statechart.expressions.ActionExpression
-   * @generated
-   */
-  public Adapter createActionExpressionAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.Trigger <em>Trigger</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.yakindu.sct.statechart.expressions.Trigger
-   * @generated
-   */
-  public Adapter createTriggerAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.Event <em>Event</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.yakindu.sct.statechart.expressions.Event
-   * @generated
-   */
-  public Adapter createEventAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.SignalEvent <em>Signal Event</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.yakindu.sct.statechart.expressions.SignalEvent
-   * @generated
-   */
-  public Adapter createSignalEventAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.TimeEvent <em>Time Event</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.yakindu.sct.statechart.expressions.TimeEvent
-   * @generated
-   */
-  public Adapter createTimeEventAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.TimeExpression <em>Time Expression</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.yakindu.sct.statechart.expressions.TimeExpression
-   * @generated
-   */
-  public Adapter createTimeExpressionAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.VariableReference <em>Variable Reference</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.yakindu.sct.statechart.expressions.VariableReference
-   * @generated
-   */
-  public Adapter createVariableReferenceAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.Variable <em>Variable</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.yakindu.sct.statechart.expressions.Variable
-   * @generated
-   */
-  public Adapter createVariableAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.TimeConstant <em>Time Constant</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.yakindu.sct.statechart.expressions.TimeConstant
-   * @generated
-   */
-  public Adapter createTimeConstantAdapter()
+  public Adapter createStatementModelAdapter()
   {
     return null;
   }
@@ -456,286 +226,256 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.VariableAssignment <em>Variable Assignment</em>}'.
+   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.TransitionDefinition <em>Transition Definition</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.yakindu.sct.statechart.expressions.VariableAssignment
+   * @see org.yakindu.sct.statechart.expressions.TransitionDefinition
    * @generated
    */
-  public Adapter createVariableAssignmentAdapter()
+  public Adapter createTransitionDefinitionAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.ProcedureCall <em>Procedure Call</em>}'.
+   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.VariableDefinition <em>Variable Definition</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.yakindu.sct.statechart.expressions.ProcedureCall
+   * @see org.yakindu.sct.statechart.expressions.VariableDefinition
    * @generated
    */
-  public Adapter createProcedureCallAdapter()
+  public Adapter createVariableDefinitionAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.Procedure <em>Procedure</em>}'.
+   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.ActionDefinition <em>Action Definition</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.yakindu.sct.statechart.expressions.Procedure
+   * @see org.yakindu.sct.statechart.expressions.ActionDefinition
    * @generated
    */
-  public Adapter createProcedureAdapter()
+  public Adapter createActionDefinitionAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.EventRaising <em>Event Raising</em>}'.
+   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.Event <em>Event</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.yakindu.sct.statechart.expressions.EventRaising
+   * @see org.yakindu.sct.statechart.expressions.Event
    * @generated
    */
-  public Adapter createEventRaisingAdapter()
+  public Adapter createEventAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.BooleanOrExpression <em>Boolean Or Expression</em>}'.
+   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.TimeConstant <em>Time Constant</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.yakindu.sct.statechart.expressions.BooleanOrExpression
+   * @see org.yakindu.sct.statechart.expressions.TimeConstant
    * @generated
    */
-  public Adapter createBooleanOrExpressionAdapter()
+  public Adapter createTimeConstantAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.BooleanAndExpression <em>Boolean And Expression</em>}'.
+   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.ExpressionRule <em>Expression Rule</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.yakindu.sct.statechart.expressions.BooleanAndExpression
+   * @see org.yakindu.sct.statechart.expressions.ExpressionRule
    * @generated
    */
-  public Adapter createBooleanAndExpressionAdapter()
+  public Adapter createExpressionRuleAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.BitwiseXorExpression <em>Bitwise Xor Expression</em>}'.
+   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.RaiseEventExpression <em>Raise Event Expression</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.yakindu.sct.statechart.expressions.BitwiseXorExpression
+   * @see org.yakindu.sct.statechart.expressions.RaiseEventExpression
    * @generated
    */
-  public Adapter createBitwiseXorExpressionAdapter()
+  public Adapter createRaiseEventExpressionAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.BitwiseOrExpression <em>Bitwise Or Expression</em>}'.
+   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.Expression <em>Expression</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.yakindu.sct.statechart.expressions.BitwiseOrExpression
+   * @see org.yakindu.sct.statechart.expressions.Expression
    * @generated
    */
-  public Adapter createBitwiseOrExpressionAdapter()
+  public Adapter createExpressionAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.BitwiseAndExpression <em>Bitwise And Expression</em>}'.
+   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.LogicalOrExpression <em>Logical Or Expression</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.yakindu.sct.statechart.expressions.BitwiseAndExpression
+   * @see org.yakindu.sct.statechart.expressions.LogicalOrExpression
    * @generated
    */
-  public Adapter createBitwiseAndExpressionAdapter()
+  public Adapter createLogicalOrExpressionAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.EqualityExpression <em>Equality Expression</em>}'.
+   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.LogicalAndExpression <em>Logical And Expression</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.yakindu.sct.statechart.expressions.EqualityExpression
+   * @see org.yakindu.sct.statechart.expressions.LogicalAndExpression
    * @generated
    */
-  public Adapter createEqualityExpressionAdapter()
+  public Adapter createLogicalAndExpressionAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.RelationalExpression <em>Relational Expression</em>}'.
+   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.LogicalNotExpression <em>Logical Not Expression</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.yakindu.sct.statechart.expressions.RelationalExpression
+   * @see org.yakindu.sct.statechart.expressions.LogicalNotExpression
    * @generated
    */
-  public Adapter createRelationalExpressionAdapter()
+  public Adapter createLogicalNotExpressionAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.ConditionalExpression <em>Conditional Expression</em>}'.
+   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.LogicalRelationExpression <em>Logical Relation Expression</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.yakindu.sct.statechart.expressions.ConditionalExpression
+   * @see org.yakindu.sct.statechart.expressions.LogicalRelationExpression
    * @generated
    */
-  public Adapter createConditionalExpressionAdapter()
+  public Adapter createLogicalRelationExpressionAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.ShiftExpression <em>Shift Expression</em>}'.
+   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.NumericalAddSubtractExpression <em>Numerical Add Subtract Expression</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.yakindu.sct.statechart.expressions.ShiftExpression
+   * @see org.yakindu.sct.statechart.expressions.NumericalAddSubtractExpression
    * @generated
    */
-  public Adapter createShiftExpressionAdapter()
+  public Adapter createNumericalAddSubtractExpressionAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.AdditiveExpression <em>Additive Expression</em>}'.
+   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.NumericalMultiplyDivideExpression <em>Numerical Multiply Divide Expression</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.yakindu.sct.statechart.expressions.AdditiveExpression
+   * @see org.yakindu.sct.statechart.expressions.NumericalMultiplyDivideExpression
    * @generated
    */
-  public Adapter createAdditiveExpressionAdapter()
+  public Adapter createNumericalMultiplyDivideExpressionAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.MultiplicativeExpression <em>Multiplicative Expression</em>}'.
+   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.NumericalUnaryExpression <em>Numerical Unary Expression</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.yakindu.sct.statechart.expressions.MultiplicativeExpression
+   * @see org.yakindu.sct.statechart.expressions.NumericalUnaryExpression
    * @generated
    */
-  public Adapter createMultiplicativeExpressionAdapter()
+  public Adapter createNumericalUnaryExpressionAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.UnaryExpression <em>Unary Expression</em>}'.
+   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.PrimitiveValueExpression <em>Primitive Value Expression</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.yakindu.sct.statechart.expressions.UnaryExpression
+   * @see org.yakindu.sct.statechart.expressions.PrimitiveValueExpression
    * @generated
    */
-  public Adapter createUnaryExpressionAdapter()
+  public Adapter createPrimitiveValueExpressionAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.PrimaryExpression <em>Primary Expression</em>}'.
+   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.PropertyReferenceExpression <em>Property Reference Expression</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.yakindu.sct.statechart.expressions.PrimaryExpression
+   * @see org.yakindu.sct.statechart.expressions.PropertyReferenceExpression
    * @generated
    */
-  public Adapter createPrimaryExpressionAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.NestedExpression <em>Nested Expression</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.yakindu.sct.statechart.expressions.NestedExpression
-   * @generated
-   */
-  public Adapter createNestedExpressionAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.LiteralValue <em>Literal Value</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.yakindu.sct.statechart.expressions.LiteralValue
-   * @generated
-   */
-  public Adapter createLiteralValueAdapter()
+  public Adapter createPropertyReferenceExpressionAdapter()
   {
     return null;
   }

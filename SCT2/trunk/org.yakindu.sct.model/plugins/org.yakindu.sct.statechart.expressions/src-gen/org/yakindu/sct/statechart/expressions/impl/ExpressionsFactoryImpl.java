@@ -69,38 +69,25 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
   {
     switch (eClass.getClassifierID())
     {
-      case ExpressionsPackage.EXPRESSION: return createExpression();
-      case ExpressionsPackage.TRIGGER_EXPRESSION: return createTriggerExpression();
-      case ExpressionsPackage.GUARD_EXPRESSION: return createGuardExpression();
-      case ExpressionsPackage.ACTION_EXPRESSION: return createActionExpression();
-      case ExpressionsPackage.TRIGGER: return createTrigger();
-      case ExpressionsPackage.EVENT: return createEvent();
-      case ExpressionsPackage.SIGNAL_EVENT: return createSignalEvent();
-      case ExpressionsPackage.TIME_EVENT: return createTimeEvent();
-      case ExpressionsPackage.TIME_EXPRESSION: return createTimeExpression();
-      case ExpressionsPackage.VARIABLE_REFERENCE: return createVariableReference();
-      case ExpressionsPackage.VARIABLE: return createVariable();
-      case ExpressionsPackage.TIME_CONSTANT: return createTimeConstant();
+      case ExpressionsPackage.STATEMENT_MODEL: return createStatementModel();
       case ExpressionsPackage.STATEMENT: return createStatement();
-      case ExpressionsPackage.VARIABLE_ASSIGNMENT: return createVariableAssignment();
-      case ExpressionsPackage.PROCEDURE_CALL: return createProcedureCall();
-      case ExpressionsPackage.PROCEDURE: return createProcedure();
-      case ExpressionsPackage.EVENT_RAISING: return createEventRaising();
-      case ExpressionsPackage.BOOLEAN_OR_EXPRESSION: return createBooleanOrExpression();
-      case ExpressionsPackage.BOOLEAN_AND_EXPRESSION: return createBooleanAndExpression();
-      case ExpressionsPackage.BITWISE_XOR_EXPRESSION: return createBitwiseXorExpression();
-      case ExpressionsPackage.BITWISE_OR_EXPRESSION: return createBitwiseOrExpression();
-      case ExpressionsPackage.BITWISE_AND_EXPRESSION: return createBitwiseAndExpression();
-      case ExpressionsPackage.EQUALITY_EXPRESSION: return createEqualityExpression();
-      case ExpressionsPackage.RELATIONAL_EXPRESSION: return createRelationalExpression();
-      case ExpressionsPackage.CONDITIONAL_EXPRESSION: return createConditionalExpression();
-      case ExpressionsPackage.SHIFT_EXPRESSION: return createShiftExpression();
-      case ExpressionsPackage.ADDITIVE_EXPRESSION: return createAdditiveExpression();
-      case ExpressionsPackage.MULTIPLICATIVE_EXPRESSION: return createMultiplicativeExpression();
-      case ExpressionsPackage.UNARY_EXPRESSION: return createUnaryExpression();
-      case ExpressionsPackage.PRIMARY_EXPRESSION: return createPrimaryExpression();
-      case ExpressionsPackage.NESTED_EXPRESSION: return createNestedExpression();
-      case ExpressionsPackage.LITERAL_VALUE: return createLiteralValue();
+      case ExpressionsPackage.TRANSITION_DEFINITION: return createTransitionDefinition();
+      case ExpressionsPackage.VARIABLE_DEFINITION: return createVariableDefinition();
+      case ExpressionsPackage.ACTION_DEFINITION: return createActionDefinition();
+      case ExpressionsPackage.EVENT: return createEvent();
+      case ExpressionsPackage.TIME_CONSTANT: return createTimeConstant();
+      case ExpressionsPackage.EXPRESSION_RULE: return createExpressionRule();
+      case ExpressionsPackage.RAISE_EVENT_EXPRESSION: return createRaiseEventExpression();
+      case ExpressionsPackage.EXPRESSION: return createExpression();
+      case ExpressionsPackage.LOGICAL_OR_EXPRESSION: return createLogicalOrExpression();
+      case ExpressionsPackage.LOGICAL_AND_EXPRESSION: return createLogicalAndExpression();
+      case ExpressionsPackage.LOGICAL_NOT_EXPRESSION: return createLogicalNotExpression();
+      case ExpressionsPackage.LOGICAL_RELATION_EXPRESSION: return createLogicalRelationExpression();
+      case ExpressionsPackage.NUMERICAL_ADD_SUBTRACT_EXPRESSION: return createNumericalAddSubtractExpression();
+      case ExpressionsPackage.NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION: return createNumericalMultiplyDivideExpression();
+      case ExpressionsPackage.NUMERICAL_UNARY_EXPRESSION: return createNumericalUnaryExpression();
+      case ExpressionsPackage.PRIMITIVE_VALUE_EXPRESSION: return createPrimitiveValueExpression();
+      case ExpressionsPackage.PROPERTY_REFERENCE_EXPRESSION: return createPropertyReferenceExpression();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -116,22 +103,20 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
   {
     switch (eDataType.getClassifierID())
     {
-      case ExpressionsPackage.TIME_UNIT:
-        return createTimeUnitFromString(eDataType, initialValue);
-      case ExpressionsPackage.ASSIGNMENT_OPERATOR:
-        return createAssignmentOperatorFromString(eDataType, initialValue);
-      case ExpressionsPackage.EQUALITY_OPERATOR:
-        return createEqualityOperatorFromString(eDataType, initialValue);
-      case ExpressionsPackage.RELATIONAL_OPERATOR:
-        return createRelationalOperatorFromString(eDataType, initialValue);
-      case ExpressionsPackage.SHIFT_OPERATOR:
-        return createShiftOperatorFromString(eDataType, initialValue);
       case ExpressionsPackage.ADDITIVE_OPERATOR:
         return createAdditiveOperatorFromString(eDataType, initialValue);
       case ExpressionsPackage.MULTIPLICATIVE_OPERATOR:
         return createMultiplicativeOperatorFromString(eDataType, initialValue);
       case ExpressionsPackage.UNARY_OPERATOR:
         return createUnaryOperatorFromString(eDataType, initialValue);
+      case ExpressionsPackage.RELATIONAL_OPERATOR:
+        return createRelationalOperatorFromString(eDataType, initialValue);
+      case ExpressionsPackage.DIRECTION_KIND:
+        return createDirectionKindFromString(eDataType, initialValue);
+      case ExpressionsPackage.TIME_UNIT:
+        return createTimeUnitFromString(eDataType, initialValue);
+      case ExpressionsPackage.TYPE:
+        return createTypeFromString(eDataType, initialValue);
       default:
         throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
     }
@@ -147,22 +132,20 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
   {
     switch (eDataType.getClassifierID())
     {
-      case ExpressionsPackage.TIME_UNIT:
-        return convertTimeUnitToString(eDataType, instanceValue);
-      case ExpressionsPackage.ASSIGNMENT_OPERATOR:
-        return convertAssignmentOperatorToString(eDataType, instanceValue);
-      case ExpressionsPackage.EQUALITY_OPERATOR:
-        return convertEqualityOperatorToString(eDataType, instanceValue);
-      case ExpressionsPackage.RELATIONAL_OPERATOR:
-        return convertRelationalOperatorToString(eDataType, instanceValue);
-      case ExpressionsPackage.SHIFT_OPERATOR:
-        return convertShiftOperatorToString(eDataType, instanceValue);
       case ExpressionsPackage.ADDITIVE_OPERATOR:
         return convertAdditiveOperatorToString(eDataType, instanceValue);
       case ExpressionsPackage.MULTIPLICATIVE_OPERATOR:
         return convertMultiplicativeOperatorToString(eDataType, instanceValue);
       case ExpressionsPackage.UNARY_OPERATOR:
         return convertUnaryOperatorToString(eDataType, instanceValue);
+      case ExpressionsPackage.RELATIONAL_OPERATOR:
+        return convertRelationalOperatorToString(eDataType, instanceValue);
+      case ExpressionsPackage.DIRECTION_KIND:
+        return convertDirectionKindToString(eDataType, instanceValue);
+      case ExpressionsPackage.TIME_UNIT:
+        return convertTimeUnitToString(eDataType, instanceValue);
+      case ExpressionsPackage.TYPE:
+        return convertTypeToString(eDataType, instanceValue);
       default:
         throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
     }
@@ -173,131 +156,10 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
    * <!-- end-user-doc -->
    * @generated
    */
-  public Expression createExpression()
+  public StatementModel createStatementModel()
   {
-    ExpressionImpl expression = new ExpressionImpl();
-    return expression;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public TriggerExpression createTriggerExpression()
-  {
-    TriggerExpressionImpl triggerExpression = new TriggerExpressionImpl();
-    return triggerExpression;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public GuardExpression createGuardExpression()
-  {
-    GuardExpressionImpl guardExpression = new GuardExpressionImpl();
-    return guardExpression;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ActionExpression createActionExpression()
-  {
-    ActionExpressionImpl actionExpression = new ActionExpressionImpl();
-    return actionExpression;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Trigger createTrigger()
-  {
-    TriggerImpl trigger = new TriggerImpl();
-    return trigger;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Event createEvent()
-  {
-    EventImpl event = new EventImpl();
-    return event;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public SignalEvent createSignalEvent()
-  {
-    SignalEventImpl signalEvent = new SignalEventImpl();
-    return signalEvent;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public TimeEvent createTimeEvent()
-  {
-    TimeEventImpl timeEvent = new TimeEventImpl();
-    return timeEvent;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public TimeExpression createTimeExpression()
-  {
-    TimeExpressionImpl timeExpression = new TimeExpressionImpl();
-    return timeExpression;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public VariableReference createVariableReference()
-  {
-    VariableReferenceImpl variableReference = new VariableReferenceImpl();
-    return variableReference;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Variable createVariable()
-  {
-    VariableImpl variable = new VariableImpl();
-    return variable;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public TimeConstant createTimeConstant()
-  {
-    TimeConstantImpl timeConstant = new TimeConstantImpl();
-    return timeConstant;
+    StatementModelImpl statementModel = new StatementModelImpl();
+    return statementModel;
   }
 
   /**
@@ -316,10 +178,10 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
    * <!-- end-user-doc -->
    * @generated
    */
-  public VariableAssignment createVariableAssignment()
+  public TransitionDefinition createTransitionDefinition()
   {
-    VariableAssignmentImpl variableAssignment = new VariableAssignmentImpl();
-    return variableAssignment;
+    TransitionDefinitionImpl transitionDefinition = new TransitionDefinitionImpl();
+    return transitionDefinition;
   }
 
   /**
@@ -327,10 +189,10 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
    * <!-- end-user-doc -->
    * @generated
    */
-  public ProcedureCall createProcedureCall()
+  public VariableDefinition createVariableDefinition()
   {
-    ProcedureCallImpl procedureCall = new ProcedureCallImpl();
-    return procedureCall;
+    VariableDefinitionImpl variableDefinition = new VariableDefinitionImpl();
+    return variableDefinition;
   }
 
   /**
@@ -338,10 +200,10 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
    * <!-- end-user-doc -->
    * @generated
    */
-  public Procedure createProcedure()
+  public ActionDefinition createActionDefinition()
   {
-    ProcedureImpl procedure = new ProcedureImpl();
-    return procedure;
+    ActionDefinitionImpl actionDefinition = new ActionDefinitionImpl();
+    return actionDefinition;
   }
 
   /**
@@ -349,10 +211,10 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
    * <!-- end-user-doc -->
    * @generated
    */
-  public EventRaising createEventRaising()
+  public Event createEvent()
   {
-    EventRaisingImpl eventRaising = new EventRaisingImpl();
-    return eventRaising;
+    EventImpl event = new EventImpl();
+    return event;
   }
 
   /**
@@ -360,10 +222,10 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
    * <!-- end-user-doc -->
    * @generated
    */
-  public BooleanOrExpression createBooleanOrExpression()
+  public TimeConstant createTimeConstant()
   {
-    BooleanOrExpressionImpl booleanOrExpression = new BooleanOrExpressionImpl();
-    return booleanOrExpression;
+    TimeConstantImpl timeConstant = new TimeConstantImpl();
+    return timeConstant;
   }
 
   /**
@@ -371,10 +233,10 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
    * <!-- end-user-doc -->
    * @generated
    */
-  public BooleanAndExpression createBooleanAndExpression()
+  public ExpressionRule createExpressionRule()
   {
-    BooleanAndExpressionImpl booleanAndExpression = new BooleanAndExpressionImpl();
-    return booleanAndExpression;
+    ExpressionRuleImpl expressionRule = new ExpressionRuleImpl();
+    return expressionRule;
   }
 
   /**
@@ -382,10 +244,10 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
    * <!-- end-user-doc -->
    * @generated
    */
-  public BitwiseXorExpression createBitwiseXorExpression()
+  public RaiseEventExpression createRaiseEventExpression()
   {
-    BitwiseXorExpressionImpl bitwiseXorExpression = new BitwiseXorExpressionImpl();
-    return bitwiseXorExpression;
+    RaiseEventExpressionImpl raiseEventExpression = new RaiseEventExpressionImpl();
+    return raiseEventExpression;
   }
 
   /**
@@ -393,10 +255,10 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
    * <!-- end-user-doc -->
    * @generated
    */
-  public BitwiseOrExpression createBitwiseOrExpression()
+  public Expression createExpression()
   {
-    BitwiseOrExpressionImpl bitwiseOrExpression = new BitwiseOrExpressionImpl();
-    return bitwiseOrExpression;
+    ExpressionImpl expression = new ExpressionImpl();
+    return expression;
   }
 
   /**
@@ -404,10 +266,10 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
    * <!-- end-user-doc -->
    * @generated
    */
-  public BitwiseAndExpression createBitwiseAndExpression()
+  public LogicalOrExpression createLogicalOrExpression()
   {
-    BitwiseAndExpressionImpl bitwiseAndExpression = new BitwiseAndExpressionImpl();
-    return bitwiseAndExpression;
+    LogicalOrExpressionImpl logicalOrExpression = new LogicalOrExpressionImpl();
+    return logicalOrExpression;
   }
 
   /**
@@ -415,10 +277,10 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
    * <!-- end-user-doc -->
    * @generated
    */
-  public EqualityExpression createEqualityExpression()
+  public LogicalAndExpression createLogicalAndExpression()
   {
-    EqualityExpressionImpl equalityExpression = new EqualityExpressionImpl();
-    return equalityExpression;
+    LogicalAndExpressionImpl logicalAndExpression = new LogicalAndExpressionImpl();
+    return logicalAndExpression;
   }
 
   /**
@@ -426,10 +288,10 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
    * <!-- end-user-doc -->
    * @generated
    */
-  public RelationalExpression createRelationalExpression()
+  public LogicalNotExpression createLogicalNotExpression()
   {
-    RelationalExpressionImpl relationalExpression = new RelationalExpressionImpl();
-    return relationalExpression;
+    LogicalNotExpressionImpl logicalNotExpression = new LogicalNotExpressionImpl();
+    return logicalNotExpression;
   }
 
   /**
@@ -437,10 +299,10 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
    * <!-- end-user-doc -->
    * @generated
    */
-  public ConditionalExpression createConditionalExpression()
+  public LogicalRelationExpression createLogicalRelationExpression()
   {
-    ConditionalExpressionImpl conditionalExpression = new ConditionalExpressionImpl();
-    return conditionalExpression;
+    LogicalRelationExpressionImpl logicalRelationExpression = new LogicalRelationExpressionImpl();
+    return logicalRelationExpression;
   }
 
   /**
@@ -448,10 +310,10 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
    * <!-- end-user-doc -->
    * @generated
    */
-  public ShiftExpression createShiftExpression()
+  public NumericalAddSubtractExpression createNumericalAddSubtractExpression()
   {
-    ShiftExpressionImpl shiftExpression = new ShiftExpressionImpl();
-    return shiftExpression;
+    NumericalAddSubtractExpressionImpl numericalAddSubtractExpression = new NumericalAddSubtractExpressionImpl();
+    return numericalAddSubtractExpression;
   }
 
   /**
@@ -459,10 +321,10 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
    * <!-- end-user-doc -->
    * @generated
    */
-  public AdditiveExpression createAdditiveExpression()
+  public NumericalMultiplyDivideExpression createNumericalMultiplyDivideExpression()
   {
-    AdditiveExpressionImpl additiveExpression = new AdditiveExpressionImpl();
-    return additiveExpression;
+    NumericalMultiplyDivideExpressionImpl numericalMultiplyDivideExpression = new NumericalMultiplyDivideExpressionImpl();
+    return numericalMultiplyDivideExpression;
   }
 
   /**
@@ -470,10 +332,10 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
    * <!-- end-user-doc -->
    * @generated
    */
-  public MultiplicativeExpression createMultiplicativeExpression()
+  public NumericalUnaryExpression createNumericalUnaryExpression()
   {
-    MultiplicativeExpressionImpl multiplicativeExpression = new MultiplicativeExpressionImpl();
-    return multiplicativeExpression;
+    NumericalUnaryExpressionImpl numericalUnaryExpression = new NumericalUnaryExpressionImpl();
+    return numericalUnaryExpression;
   }
 
   /**
@@ -481,10 +343,10 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
    * <!-- end-user-doc -->
    * @generated
    */
-  public UnaryExpression createUnaryExpression()
+  public PrimitiveValueExpression createPrimitiveValueExpression()
   {
-    UnaryExpressionImpl unaryExpression = new UnaryExpressionImpl();
-    return unaryExpression;
+    PrimitiveValueExpressionImpl primitiveValueExpression = new PrimitiveValueExpressionImpl();
+    return primitiveValueExpression;
   }
 
   /**
@@ -492,142 +354,10 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
    * <!-- end-user-doc -->
    * @generated
    */
-  public PrimaryExpression createPrimaryExpression()
+  public PropertyReferenceExpression createPropertyReferenceExpression()
   {
-    PrimaryExpressionImpl primaryExpression = new PrimaryExpressionImpl();
-    return primaryExpression;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NestedExpression createNestedExpression()
-  {
-    NestedExpressionImpl nestedExpression = new NestedExpressionImpl();
-    return nestedExpression;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public LiteralValue createLiteralValue()
-  {
-    LiteralValueImpl literalValue = new LiteralValueImpl();
-    return literalValue;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public TimeUnit createTimeUnitFromString(EDataType eDataType, String initialValue)
-  {
-    TimeUnit result = TimeUnit.get(initialValue);
-    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-    return result;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public String convertTimeUnitToString(EDataType eDataType, Object instanceValue)
-  {
-    return instanceValue == null ? null : instanceValue.toString();
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public AssignmentOperator createAssignmentOperatorFromString(EDataType eDataType, String initialValue)
-  {
-    AssignmentOperator result = AssignmentOperator.get(initialValue);
-    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-    return result;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public String convertAssignmentOperatorToString(EDataType eDataType, Object instanceValue)
-  {
-    return instanceValue == null ? null : instanceValue.toString();
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EqualityOperator createEqualityOperatorFromString(EDataType eDataType, String initialValue)
-  {
-    EqualityOperator result = EqualityOperator.get(initialValue);
-    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-    return result;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public String convertEqualityOperatorToString(EDataType eDataType, Object instanceValue)
-  {
-    return instanceValue == null ? null : instanceValue.toString();
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public RelationalOperator createRelationalOperatorFromString(EDataType eDataType, String initialValue)
-  {
-    RelationalOperator result = RelationalOperator.get(initialValue);
-    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-    return result;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public String convertRelationalOperatorToString(EDataType eDataType, Object instanceValue)
-  {
-    return instanceValue == null ? null : instanceValue.toString();
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ShiftOperator createShiftOperatorFromString(EDataType eDataType, String initialValue)
-  {
-    ShiftOperator result = ShiftOperator.get(initialValue);
-    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-    return result;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public String convertShiftOperatorToString(EDataType eDataType, Object instanceValue)
-  {
-    return instanceValue == null ? null : instanceValue.toString();
+    PropertyReferenceExpressionImpl propertyReferenceExpression = new PropertyReferenceExpressionImpl();
+    return propertyReferenceExpression;
   }
 
   /**
@@ -692,6 +422,94 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
    * @generated
    */
   public String convertUnaryOperatorToString(EDataType eDataType, Object instanceValue)
+  {
+    return instanceValue == null ? null : instanceValue.toString();
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public RelationalOperator createRelationalOperatorFromString(EDataType eDataType, String initialValue)
+  {
+    RelationalOperator result = RelationalOperator.get(initialValue);
+    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+    return result;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String convertRelationalOperatorToString(EDataType eDataType, Object instanceValue)
+  {
+    return instanceValue == null ? null : instanceValue.toString();
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public DirectionKind createDirectionKindFromString(EDataType eDataType, String initialValue)
+  {
+    DirectionKind result = DirectionKind.get(initialValue);
+    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+    return result;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String convertDirectionKindToString(EDataType eDataType, Object instanceValue)
+  {
+    return instanceValue == null ? null : instanceValue.toString();
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public TimeUnit createTimeUnitFromString(EDataType eDataType, String initialValue)
+  {
+    TimeUnit result = TimeUnit.get(initialValue);
+    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+    return result;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String convertTimeUnitToString(EDataType eDataType, Object instanceValue)
+  {
+    return instanceValue == null ? null : instanceValue.toString();
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Type createTypeFromString(EDataType eDataType, String initialValue)
+  {
+    Type result = Type.get(initialValue);
+    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+    return result;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String convertTypeToString(EDataType eDataType, Object instanceValue)
   {
     return instanceValue == null ? null : instanceValue.toString();
   }
