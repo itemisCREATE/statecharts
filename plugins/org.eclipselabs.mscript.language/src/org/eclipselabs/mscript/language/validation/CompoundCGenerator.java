@@ -20,6 +20,7 @@ import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.ast.IntegerLiteral;
 import org.eclipselabs.mscript.language.ast.MultiplicativeExpression;
 import org.eclipselabs.mscript.language.ast.MultiplicativeExpressionPart;
+import org.eclipselabs.mscript.language.ast.MultiplicativeOperator;
 import org.eclipselabs.mscript.language.ast.ParenthesizedExpression;
 import org.eclipselabs.mscript.language.ast.RealLiteral;
 import org.eclipselabs.mscript.language.ast.RelationalExpression;
@@ -35,6 +36,9 @@ import org.eclipselabs.mscript.language.imperativemodel.Statement;
 import org.eclipselabs.mscript.language.imperativemodel.VariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.VariableReference;
 import org.eclipselabs.mscript.language.imperativemodel.util.ImperativeModelSwitch;
+import org.eclipselabs.mscript.typesystem.DataType;
+import org.eclipselabs.mscript.typesystem.IntegerType;
+import org.eclipselabs.mscript.typesystem.RealType;
 
 /**
  * Note: This class is for testing purposes only.
@@ -69,7 +73,8 @@ class CompoundCGenerator extends ImperativeModelSwitch<String> {
 	@Override
 	public String caseLocalVariableDeclaration(LocalVariableDeclaration localVariableDeclaration) {
 		StringBuilder sb = new StringBuilder();
-		sb.append("var ");
+		sb.append(dataTypeToString(localVariableDeclaration.getType()));
+		sb.append(" ");
 		sb.append(localVariableDeclaration.getName());
 		if (localVariableDeclaration.getInitializer() != null) {
 			sb.append(" = ");
@@ -123,6 +128,16 @@ class CompoundCGenerator extends ImperativeModelSwitch<String> {
 		return super.defaultCase(object);
 	}
 	
+	private String dataTypeToString(DataType dataType) {
+		if (dataType instanceof RealType) {
+			return "double";
+		}
+		if (dataType instanceof IntegerType) {
+			return "int";
+		}
+		return "var";
+	}
+	
 	private void appendStateArraySubscript(StringBuilder sb, StatefulVariableDeclaration statefulVariableDeclaration, int stepIndex) {
 		if (statefulVariableDeclaration.getCircularBufferSize() > 1) {
 			sb.append("[(");
@@ -163,8 +178,15 @@ class CompoundCGenerator extends ImperativeModelSwitch<String> {
 			for (MultiplicativeExpressionPart rightPart : multiplicativeExpression.getRightParts()) {
 				sb.append(" ");
 				sb.append(rightPart.getOperator().getLiteral());
-				sb.append(" ");
+				if (rightPart.getOperator() == MultiplicativeOperator.DIVISION) {
+					sb.append(" (double) (");
+				} else {
+					sb.append(" ");
+				}
 				sb.append(doSwitch(rightPart.getOperand()));
+				if (rightPart.getOperator() == MultiplicativeOperator.DIVISION) {
+					sb.append(")");
+				}
 			}
 			return sb.toString();
 		}
