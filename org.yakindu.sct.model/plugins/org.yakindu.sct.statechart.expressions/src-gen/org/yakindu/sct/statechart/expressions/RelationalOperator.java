@@ -34,16 +34,6 @@ public enum RelationalOperator implements Enumerator
   SMALLER(0, "smaller", "<"),
 
   /**
-   * The '<em><b>Greater</b></em>' literal object.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #GREATER_VALUE
-   * @generated
-   * @ordered
-   */
-  GREATER(1, "greater", ">"),
-
-  /**
    * The '<em><b>Smaller Equal</b></em>' literal object.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -51,7 +41,17 @@ public enum RelationalOperator implements Enumerator
    * @generated
    * @ordered
    */
-  SMALLER_EQUAL(2, "smallerEqual", "<="),
+  SMALLER_EQUAL(1, "smallerEqual", "<="),
+
+  /**
+   * The '<em><b>Greater</b></em>' literal object.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #GREATER_VALUE
+   * @generated
+   * @ordered
+   */
+  GREATER(2, "greater", ">"),
 
   /**
    * The '<em><b>Greater Equal</b></em>' literal object.
@@ -61,7 +61,27 @@ public enum RelationalOperator implements Enumerator
    * @generated
    * @ordered
    */
-  GREATER_EQUAL(3, "greaterEqual", ">=");
+  GREATER_EQUAL(3, "greaterEqual", ">="),
+
+  /**
+   * The '<em><b>Equals</b></em>' literal object.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #EQUALS_VALUE
+   * @generated
+   * @ordered
+   */
+  EQUALS(4, "equals", "=="),
+
+  /**
+   * The '<em><b>Not Equals</b></em>' literal object.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #NOT_EQUALS_VALUE
+   * @generated
+   * @ordered
+   */
+  NOT_EQUALS(5, "notEquals", "!=");
 
   /**
    * The '<em><b>Smaller</b></em>' literal value.
@@ -79,21 +99,6 @@ public enum RelationalOperator implements Enumerator
   public static final int SMALLER_VALUE = 0;
 
   /**
-   * The '<em><b>Greater</b></em>' literal value.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Greater</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @see #GREATER
-   * @model name="greater" literal=">"
-   * @generated
-   * @ordered
-   */
-  public static final int GREATER_VALUE = 1;
-
-  /**
    * The '<em><b>Smaller Equal</b></em>' literal value.
    * <!-- begin-user-doc -->
    * <p>
@@ -106,7 +111,22 @@ public enum RelationalOperator implements Enumerator
    * @generated
    * @ordered
    */
-  public static final int SMALLER_EQUAL_VALUE = 2;
+  public static final int SMALLER_EQUAL_VALUE = 1;
+
+  /**
+   * The '<em><b>Greater</b></em>' literal value.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of '<em><b>Greater</b></em>' literal object isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @see #GREATER
+   * @model name="greater" literal=">"
+   * @generated
+   * @ordered
+   */
+  public static final int GREATER_VALUE = 2;
 
   /**
    * The '<em><b>Greater Equal</b></em>' literal value.
@@ -124,6 +144,36 @@ public enum RelationalOperator implements Enumerator
   public static final int GREATER_EQUAL_VALUE = 3;
 
   /**
+   * The '<em><b>Equals</b></em>' literal value.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of '<em><b>Equals</b></em>' literal object isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @see #EQUALS
+   * @model name="equals" literal="=="
+   * @generated
+   * @ordered
+   */
+  public static final int EQUALS_VALUE = 4;
+
+  /**
+   * The '<em><b>Not Equals</b></em>' literal value.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of '<em><b>Not Equals</b></em>' literal object isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @see #NOT_EQUALS
+   * @model name="notEquals" literal="!="
+   * @generated
+   * @ordered
+   */
+  public static final int NOT_EQUALS_VALUE = 5;
+
+  /**
    * An array of all the '<em><b>Relational Operator</b></em>' enumerators.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -133,9 +183,11 @@ public enum RelationalOperator implements Enumerator
     new RelationalOperator[]
     {
       SMALLER,
-      GREATER,
       SMALLER_EQUAL,
+      GREATER,
       GREATER_EQUAL,
+      EQUALS,
+      NOT_EQUALS,
     };
 
   /**
@@ -195,9 +247,11 @@ public enum RelationalOperator implements Enumerator
     switch (value)
     {
       case SMALLER_VALUE: return SMALLER;
-      case GREATER_VALUE: return GREATER;
       case SMALLER_EQUAL_VALUE: return SMALLER_EQUAL;
+      case GREATER_VALUE: return GREATER;
       case GREATER_EQUAL_VALUE: return GREATER_EQUAL;
+      case EQUALS_VALUE: return EQUALS;
+      case NOT_EQUALS_VALUE: return NOT_EQUALS;
     }
     return null;
   }

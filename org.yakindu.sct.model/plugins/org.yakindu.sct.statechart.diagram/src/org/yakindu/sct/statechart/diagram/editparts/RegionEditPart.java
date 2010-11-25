@@ -40,7 +40,7 @@ public class RegionEditPart extends ShapeNodeEditPart {
 		figure.add(new RegionFigure(getMapMode()));
 		return figure;
 	}
-
+	
 	@Override
 	public IFigure getFigure() {
 		IFigure figure = super.getFigure();

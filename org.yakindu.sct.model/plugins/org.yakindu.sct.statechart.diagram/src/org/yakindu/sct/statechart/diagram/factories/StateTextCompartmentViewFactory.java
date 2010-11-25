@@ -2,9 +2,11 @@ package org.yakindu.sct.statechart.diagram.factories;
 
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.gmf.runtime.diagram.core.util.ViewUtil;
 import org.eclipse.gmf.runtime.diagram.ui.view.factories.optimal.CompartmentViewFactory;
 import org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter;
 import org.eclipse.gmf.runtime.notation.View;
+import org.yakindu.sct.statechart.diagram.providers.ProviderConstants;
 
 /**
  * 
@@ -24,8 +26,8 @@ public class StateTextCompartmentViewFactory extends CompartmentViewFactory {
 		if (eObject != null) {
 			eObjectAdapter = new EObjectAdapter(eObject);
 		}
-		// getViewService().createNode(eObjectAdapter, view,
-		// ProviderConstants.STATE_TEXT_COMPARTMENT_EXPRESSION, ViewUtil.APPEND,
-		// true, getPreferencesHint());
+		getViewService().createNode(eObjectAdapter, view,
+				ProviderConstants.STATE_TEXT_COMPARTMENT_EXPRESSION,
+				ViewUtil.APPEND, true, getPreferencesHint());
 	}
 }

@@ -22,7 +22,6 @@ import org.eclipse.gef.tools.CellEditorLocator;
 import org.eclipse.gef.tools.DirectEditManager;
 import org.eclipse.gmf.runtime.common.ui.services.parser.IParser;
 import org.eclipse.gmf.runtime.common.ui.services.parser.ParserOptions;
-import org.eclipse.gmf.runtime.diagram.core.listener.NotificationListener;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ITextAwareEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.LabelEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.LabelDirectEditPolicy;
@@ -33,18 +32,12 @@ import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.ICellEditorValidator;
-import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.SWT;
 import org.yakindu.sct.model.statechart.statechart.StatechartPackage;
 import org.yakindu.sct.statechart.diagram.DiagramActivator;
 import org.yakindu.sct.statechart.diagram.parser.AttributeParser;
 
-import de.itemis.xtext.gmf.integration.directediting.XTextDirectEditManager;
-
 /**
- * FIXME: This class shares lot of code with {@link TextAwareLabelEditPart}.
- * That is because java does not support multiple inheritance. Refactor common
- * code into delegate...
- * 
  * @author Andreas Muelder <a
  *         href="mailto:andreas.muelder@itemis.de">andreas.muelder@itemis.de</a>
  * 
@@ -54,50 +47,31 @@ public class TransitionExpressionEditPart extends LabelEditPart implements
 
 	private DirectEditManager manager;
 
-	private static final String UPDATE_NAME_FILTER = "update.name";
-
 	private static final EAttribute feature = StatechartPackage.Literals.EXPRESSION_ELEMENT__EXPRESSION;
-
-	/**
-	 * Semantic listener that updates the Label in case of model changes.
-	 */
-	private final NotificationListener updateLabelListener = new NotificationListener() {
-
-		@Override
-		public void notifyChanged(Notification notification) {
-			if (notification.getFeature() == feature) {
-				getWrappingLabel().setText(getEditText());
-			}
-		}
-	};
 
 	public TransitionExpressionEditPart(View view) {
 		super(view);
 	}
+	
+	@Override
+	protected void handleNotificationEvent(Notification notification) {
+		if (notification.getFeature() == feature) {
+			getWrappingLabel().setText(getEditText());
+		}
+		super.handleNotificationEvent(notification);
+	}
 
 	public void setLabel(IFigure figure) {
 		setFigure(figure);
-		manager = new XTextDirectEditManager(this, DiagramActivator.getXtextModule(),
-				new DefaultCellEditorLocator());
+		manager = new org.yakindu.sct.statechart.xtextintegration.editors.XTextDirectEditManager(
+				this,
+				DiagramActivator.getDefault().getDslInjectorForEmbedded(),
+				new DefaultCellEditorLocator(), SWT.SINGLE);
 	}
-
 
 	@Override
 	protected IFigure createFigure() {
 		return null;
-	}
-
-	@Override
-	protected void addSemanticListeners() {
-		super.addSemanticListeners();
-		addListenerFilter(UPDATE_NAME_FILTER, updateLabelListener,
-				resolveSemanticElement());
-	};
-
-	@Override
-	protected void removeSemanticListeners() {
-		super.removeSemanticListeners();
-		removeListenerFilter(UPDATE_NAME_FILTER);
 	}
 
 	@Override
@@ -174,15 +148,15 @@ public class TransitionExpressionEditPart extends LabelEditPart implements
 
 	private class DefaultCellEditorLocator implements CellEditorLocator {
 
-		private static final int minimumWidth = 50;
-		private static final int minimumHeight = 15;
+		private static final int minimumWidth = 100;
+		private static final int minimumHeight = 40;
 
 		@Override
 		public void relocate(CellEditor celleditor) {
-			Text text = (Text) celleditor.getControl();
+			// Text text = (Text) celleditor.getControl();
 			Rectangle textRectangle = getWrappingLabel().getBounds().getCopy();
 			getFigure().translateToAbsolute(textRectangle);
-			text.setBounds(textRectangle.x, textRectangle.y,
+			celleditor.getControl().setBounds(textRectangle.x, textRectangle.y,
 					Math.max(textRectangle.width, minimumWidth),
 					Math.max(textRectangle.height, minimumHeight));
 		}

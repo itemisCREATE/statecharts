@@ -10,6 +10,9 @@
  */
 package org.yakindu.sct.statechart.diagram.editparts;
 
+import org.eclipse.draw2d.LayoutManager;
+import org.eclipse.draw2d.StackLayout;
+import org.eclipse.gef.EditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeCompartmentEditPart;
 import org.eclipse.gmf.runtime.notation.View;
 
@@ -24,9 +27,19 @@ public class StateTextCompartmentEditPart extends ShapeCompartmentEditPart {
 	public StateTextCompartmentEditPart(View view) {
 		super(view);
 	}
+	
+	@Override
+	protected void createDefaultEditPolicies() {
+		super.createDefaultEditPolicies();
+	}
 
 	@Override
 	public boolean isSelectable() {
 		return false;
+	}
+
+	@Override
+	protected LayoutManager getLayoutManager() {
+		return new StackLayout();
 	}
 }

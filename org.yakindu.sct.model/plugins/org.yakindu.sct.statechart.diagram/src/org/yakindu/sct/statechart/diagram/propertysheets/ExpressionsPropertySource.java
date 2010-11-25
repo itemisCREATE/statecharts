@@ -13,18 +13,15 @@ package org.yakindu.sct.statechart.diagram.propertysheets;
 import java.util.Arrays;
 
 import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.ui.provider.PropertyDescriptor;
 import org.eclipse.emf.edit.ui.provider.PropertySource;
 import org.eclipse.jface.viewers.CellEditor;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.views.properties.IPropertyDescriptor;
-import org.yakindu.sct.statechart.diagram.DiagramActivator;
-
-
-import de.itemis.xtext.gmf.integration.celleditors.XTextCellEditor;
+import org.yakindu.sct.statechart.xtextintegration.editors.XTextCellEditor;
 
 /**
  * 
@@ -32,8 +29,8 @@ import de.itemis.xtext.gmf.integration.celleditors.XTextCellEditor;
  * Creates an {@link XTextCellEditor} for the given {@link EAttribute}s of the
  * {@link PropertySource}.
  * 
- * @author andreas.muelder@itemis.de
- * 
+ * @author Andreas Muelder <a
+ *         href="mailto:andreas.muelder@itemis.de">andreas.muelder@itemis.de</a>
  */
 public class ExpressionsPropertySource extends PropertySource {
 
@@ -61,11 +58,8 @@ public class ExpressionsPropertySource extends PropertySource {
 				return new PropertyDescriptor(object, itemPropertyDescriptor) {
 					@Override
 					public CellEditor createPropertyEditor(Composite composite) {
-						EObject eObject = (EObject) object;
 						XTextCellEditor xTextEditor = new XTextCellEditor(
-								composite, DiagramActivator.getXtextModule(),
-								eObject.eResource().getResourceSet()
-										.getResources());
+								composite, SWT.SINGLE);
 						return xTextEditor;
 					}
 				};

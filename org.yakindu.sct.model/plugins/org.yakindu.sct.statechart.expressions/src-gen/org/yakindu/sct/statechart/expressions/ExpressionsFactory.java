@@ -27,112 +27,13 @@ public interface ExpressionsFactory extends EFactory
   ExpressionsFactory eINSTANCE = org.yakindu.sct.statechart.expressions.impl.ExpressionsFactoryImpl.init();
 
   /**
-   * Returns a new object of class '<em>Expression</em>'.
+   * Returns a new object of class '<em>Statement Model</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Expression</em>'.
+   * @return a new object of class '<em>Statement Model</em>'.
    * @generated
    */
-  Expression createExpression();
-
-  /**
-   * Returns a new object of class '<em>Trigger Expression</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Trigger Expression</em>'.
-   * @generated
-   */
-  TriggerExpression createTriggerExpression();
-
-  /**
-   * Returns a new object of class '<em>Guard Expression</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Guard Expression</em>'.
-   * @generated
-   */
-  GuardExpression createGuardExpression();
-
-  /**
-   * Returns a new object of class '<em>Action Expression</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Action Expression</em>'.
-   * @generated
-   */
-  ActionExpression createActionExpression();
-
-  /**
-   * Returns a new object of class '<em>Trigger</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Trigger</em>'.
-   * @generated
-   */
-  Trigger createTrigger();
-
-  /**
-   * Returns a new object of class '<em>Event</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Event</em>'.
-   * @generated
-   */
-  Event createEvent();
-
-  /**
-   * Returns a new object of class '<em>Signal Event</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Signal Event</em>'.
-   * @generated
-   */
-  SignalEvent createSignalEvent();
-
-  /**
-   * Returns a new object of class '<em>Time Event</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Time Event</em>'.
-   * @generated
-   */
-  TimeEvent createTimeEvent();
-
-  /**
-   * Returns a new object of class '<em>Time Expression</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Time Expression</em>'.
-   * @generated
-   */
-  TimeExpression createTimeExpression();
-
-  /**
-   * Returns a new object of class '<em>Variable Reference</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Variable Reference</em>'.
-   * @generated
-   */
-  VariableReference createVariableReference();
-
-  /**
-   * Returns a new object of class '<em>Variable</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Variable</em>'.
-   * @generated
-   */
-  Variable createVariable();
-
-  /**
-   * Returns a new object of class '<em>Time Constant</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Time Constant</em>'.
-   * @generated
-   */
-  TimeConstant createTimeConstant();
+  StatementModel createStatementModel();
 
   /**
    * Returns a new object of class '<em>Statement</em>'.
@@ -144,175 +45,157 @@ public interface ExpressionsFactory extends EFactory
   Statement createStatement();
 
   /**
-   * Returns a new object of class '<em>Variable Assignment</em>'.
+   * Returns a new object of class '<em>Transition Definition</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Variable Assignment</em>'.
+   * @return a new object of class '<em>Transition Definition</em>'.
    * @generated
    */
-  VariableAssignment createVariableAssignment();
+  TransitionDefinition createTransitionDefinition();
 
   /**
-   * Returns a new object of class '<em>Procedure Call</em>'.
+   * Returns a new object of class '<em>Variable Definition</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Procedure Call</em>'.
+   * @return a new object of class '<em>Variable Definition</em>'.
    * @generated
    */
-  ProcedureCall createProcedureCall();
+  VariableDefinition createVariableDefinition();
 
   /**
-   * Returns a new object of class '<em>Procedure</em>'.
+   * Returns a new object of class '<em>Action Definition</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Procedure</em>'.
+   * @return a new object of class '<em>Action Definition</em>'.
    * @generated
    */
-  Procedure createProcedure();
+  ActionDefinition createActionDefinition();
 
   /**
-   * Returns a new object of class '<em>Event Raising</em>'.
+   * Returns a new object of class '<em>Event</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Event Raising</em>'.
+   * @return a new object of class '<em>Event</em>'.
    * @generated
    */
-  EventRaising createEventRaising();
+  Event createEvent();
 
   /**
-   * Returns a new object of class '<em>Boolean Or Expression</em>'.
+   * Returns a new object of class '<em>Time Constant</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Boolean Or Expression</em>'.
+   * @return a new object of class '<em>Time Constant</em>'.
    * @generated
    */
-  BooleanOrExpression createBooleanOrExpression();
+  TimeConstant createTimeConstant();
 
   /**
-   * Returns a new object of class '<em>Boolean And Expression</em>'.
+   * Returns a new object of class '<em>Expression Rule</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Boolean And Expression</em>'.
+   * @return a new object of class '<em>Expression Rule</em>'.
    * @generated
    */
-  BooleanAndExpression createBooleanAndExpression();
+  ExpressionRule createExpressionRule();
 
   /**
-   * Returns a new object of class '<em>Bitwise Xor Expression</em>'.
+   * Returns a new object of class '<em>Raise Event Expression</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Bitwise Xor Expression</em>'.
+   * @return a new object of class '<em>Raise Event Expression</em>'.
    * @generated
    */
-  BitwiseXorExpression createBitwiseXorExpression();
+  RaiseEventExpression createRaiseEventExpression();
 
   /**
-   * Returns a new object of class '<em>Bitwise Or Expression</em>'.
+   * Returns a new object of class '<em>Expression</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Bitwise Or Expression</em>'.
+   * @return a new object of class '<em>Expression</em>'.
    * @generated
    */
-  BitwiseOrExpression createBitwiseOrExpression();
+  Expression createExpression();
 
   /**
-   * Returns a new object of class '<em>Bitwise And Expression</em>'.
+   * Returns a new object of class '<em>Logical Or Expression</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Bitwise And Expression</em>'.
+   * @return a new object of class '<em>Logical Or Expression</em>'.
    * @generated
    */
-  BitwiseAndExpression createBitwiseAndExpression();
+  LogicalOrExpression createLogicalOrExpression();
 
   /**
-   * Returns a new object of class '<em>Equality Expression</em>'.
+   * Returns a new object of class '<em>Logical And Expression</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Equality Expression</em>'.
+   * @return a new object of class '<em>Logical And Expression</em>'.
    * @generated
    */
-  EqualityExpression createEqualityExpression();
+  LogicalAndExpression createLogicalAndExpression();
 
   /**
-   * Returns a new object of class '<em>Relational Expression</em>'.
+   * Returns a new object of class '<em>Logical Not Expression</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Relational Expression</em>'.
+   * @return a new object of class '<em>Logical Not Expression</em>'.
    * @generated
    */
-  RelationalExpression createRelationalExpression();
+  LogicalNotExpression createLogicalNotExpression();
 
   /**
-   * Returns a new object of class '<em>Conditional Expression</em>'.
+   * Returns a new object of class '<em>Logical Relation Expression</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Conditional Expression</em>'.
+   * @return a new object of class '<em>Logical Relation Expression</em>'.
    * @generated
    */
-  ConditionalExpression createConditionalExpression();
+  LogicalRelationExpression createLogicalRelationExpression();
 
   /**
-   * Returns a new object of class '<em>Shift Expression</em>'.
+   * Returns a new object of class '<em>Numerical Add Subtract Expression</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Shift Expression</em>'.
+   * @return a new object of class '<em>Numerical Add Subtract Expression</em>'.
    * @generated
    */
-  ShiftExpression createShiftExpression();
+  NumericalAddSubtractExpression createNumericalAddSubtractExpression();
 
   /**
-   * Returns a new object of class '<em>Additive Expression</em>'.
+   * Returns a new object of class '<em>Numerical Multiply Divide Expression</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Additive Expression</em>'.
+   * @return a new object of class '<em>Numerical Multiply Divide Expression</em>'.
    * @generated
    */
-  AdditiveExpression createAdditiveExpression();
+  NumericalMultiplyDivideExpression createNumericalMultiplyDivideExpression();
 
   /**
-   * Returns a new object of class '<em>Multiplicative Expression</em>'.
+   * Returns a new object of class '<em>Numerical Unary Expression</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Multiplicative Expression</em>'.
+   * @return a new object of class '<em>Numerical Unary Expression</em>'.
    * @generated
    */
-  MultiplicativeExpression createMultiplicativeExpression();
+  NumericalUnaryExpression createNumericalUnaryExpression();
 
   /**
-   * Returns a new object of class '<em>Unary Expression</em>'.
+   * Returns a new object of class '<em>Primitive Value Expression</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Unary Expression</em>'.
+   * @return a new object of class '<em>Primitive Value Expression</em>'.
    * @generated
    */
-  UnaryExpression createUnaryExpression();
+  PrimitiveValueExpression createPrimitiveValueExpression();
 
   /**
-   * Returns a new object of class '<em>Primary Expression</em>'.
+   * Returns a new object of class '<em>Property Reference Expression</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Primary Expression</em>'.
+   * @return a new object of class '<em>Property Reference Expression</em>'.
    * @generated
    */
-  PrimaryExpression createPrimaryExpression();
-
-  /**
-   * Returns a new object of class '<em>Nested Expression</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Nested Expression</em>'.
-   * @generated
-   */
-  NestedExpression createNestedExpression();
-
-  /**
-   * Returns a new object of class '<em>Literal Value</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Literal Value</em>'.
-   * @generated
-   */
-  LiteralValue createLiteralValue();
+  PropertyReferenceExpression createPropertyReferenceExpression();
 
   /**
    * Returns the package supported by this factory.

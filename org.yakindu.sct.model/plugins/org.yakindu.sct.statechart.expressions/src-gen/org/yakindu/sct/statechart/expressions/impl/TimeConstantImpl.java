@@ -11,6 +11,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.yakindu.sct.statechart.expressions.ExpressionsPackage;
 import org.yakindu.sct.statechart.expressions.TimeConstant;
@@ -30,7 +31,7 @@ import org.yakindu.sct.statechart.expressions.TimeUnit;
  *
  * @generated
  */
-public class TimeConstantImpl extends TimeExpressionImpl implements TimeConstant
+public class TimeConstantImpl extends MinimalEObjectImpl.Container implements TimeConstant
 {
   /**
    * The default value of the '{@link #getValue() <em>Value</em>}' attribute.

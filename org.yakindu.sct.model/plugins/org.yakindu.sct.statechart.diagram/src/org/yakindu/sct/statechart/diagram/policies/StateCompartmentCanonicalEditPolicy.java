@@ -32,8 +32,8 @@ public class StateCompartmentCanonicalEditPolicy extends CanonicalEditPolicy {
 
 	@Override
 	protected String getFactoryHint(IAdaptable elementAdapter) {
-		EObject modelElement = (EObject) elementAdapter
-				.getAdapter(EObject.class);
-		return SemanticHintUtil.getSemanticHint(modelElement);
+		EObject modelElement = (EObject) elementAdapter.getAdapter(EObject.class);
+		String factoryHint =  SemanticHintUtil.getSemanticHint(modelElement);
+		return factoryHint;
 	}
 }

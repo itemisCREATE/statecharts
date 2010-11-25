@@ -33,6 +33,7 @@ public class TransitionEditPart extends ConnectionNodeEditPart {
 		return new TransitionFigure(getMapMode());
 	}
 	
+	
 	private TransitionFigure getPrimaryShape(){
 		return (TransitionFigure) getFigure();
 	}
