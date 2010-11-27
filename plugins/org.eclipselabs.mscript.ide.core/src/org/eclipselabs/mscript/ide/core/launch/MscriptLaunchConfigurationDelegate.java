@@ -85,7 +85,7 @@ public class MscriptLaunchConfigurationDelegate extends LaunchConfigurationDeleg
 		IInterpreterContext context = new InterpreterContext(diagnostics, new ValueFactory(), false);
 		
 		IFunctor functor = createFunctor(context, file, functionName, templateArguments, inputFile, outputFile, monitor);
-		checkInputFile(functor.getFunction().getDefinition(), inputFile, monitor);
+		checkInputFile(functor.getDescriptorFunction().getDefinition(), inputFile, monitor);
 		prepareOutputFile(outputFile, monitor);
 
 		new MscriptProcess(launch, "Mscript Application").run(context, functor, inputFile, outputFile);
