@@ -32,11 +32,14 @@ import org.eclipselabs.mscript.language.imperativemodel.Compound;
 import org.eclipselabs.mscript.language.imperativemodel.ForeachStatement;
 import org.eclipselabs.mscript.language.imperativemodel.IfStatement;
 import org.eclipselabs.mscript.language.imperativemodel.LocalVariableDeclaration;
+import org.eclipselabs.mscript.language.imperativemodel.OutputVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.StatefulVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.Statement;
 import org.eclipselabs.mscript.language.imperativemodel.VariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.VariableReference;
 import org.eclipselabs.mscript.language.imperativemodel.util.ImperativeModelSwitch;
+import org.eclipselabs.mscript.language.imperativemodel.util.ImperativeModelUtil;
+import org.eclipselabs.mscript.typesystem.ArrayType;
 import org.eclipselabs.mscript.typesystem.DataType;
 import org.eclipselabs.mscript.typesystem.IntegerType;
 import org.eclipselabs.mscript.typesystem.RealType;
@@ -59,6 +62,12 @@ class CompoundCGenerator extends ImperativeModelSwitch<String> {
 		if (block) {
 			sb.append("{\n");
 		}
+		for (LocalVariableDeclaration localVariableDeclaration : compound.getLocalVariableDeclarations()) {
+			sb.append(dataTypeToString(localVariableDeclaration.getType()));
+			sb.append(" ");
+			sb.append(localVariableDeclaration.getName());
+			sb.append(";\n");
+		}
 		for (Statement statement : compound.getStatements()) {
 			sb.append(doSwitch(statement));
 		}
@@ -73,16 +82,17 @@ class CompoundCGenerator extends ImperativeModelSwitch<String> {
 	 */
 	@Override
 	public String caseLocalVariableDeclaration(LocalVariableDeclaration localVariableDeclaration) {
-		StringBuilder sb = new StringBuilder();
-		sb.append(dataTypeToString(localVariableDeclaration.getType()));
-		sb.append(" ");
-		sb.append(localVariableDeclaration.getName());
 		if (localVariableDeclaration.getInitializer() != null) {
-			sb.append(" = ");
-			sb.append(doSwitch(localVariableDeclaration.getInitializer()));
+			StringBuilder sb = new StringBuilder();
+			sb.append(localVariableDeclaration.getName());
+			if (localVariableDeclaration.getInitializer() != null) {
+				sb.append(" = ");
+				sb.append(doSwitch(localVariableDeclaration.getInitializer()));
+			}
+			sb.append(";\n");
+			return sb.toString();
 		}
-		sb.append(";\n");
-		return sb.toString();
+		return "";
 	}
 	
 	/* (non-Javadoc)
@@ -92,7 +102,13 @@ class CompoundCGenerator extends ImperativeModelSwitch<String> {
 	public String caseAssignment(Assignment assignment) {
 		StringBuilder sb = new StringBuilder();
 		VariableDeclaration target = assignment.getTarget();
+		if (target instanceof OutputVariableDeclaration) {
+			sb.append("(*");
+		}
 		sb.append(target.getName());
+		if (target instanceof OutputVariableDeclaration) {
+			sb.append(")");
+		}
 		if (target instanceof StatefulVariableDeclaration) {
 			StatefulVariableDeclaration statefulVariableDeclaration = (StatefulVariableDeclaration) target;
 			appendStateArraySubscript(sb, statefulVariableDeclaration, assignment.getStepIndex());
@@ -124,14 +140,28 @@ class CompoundCGenerator extends ImperativeModelSwitch<String> {
 	@Override
 	public String caseForeachStatement(ForeachStatement foreachStatement) {
 		StringBuilder sb = new StringBuilder();
-		VariableDeclaration iterationVariableDeclaration = foreachStatement.getIterationVariableDeclaration(); 
-		sb.append("for (int i = 0; i < 10; ++i) {\n"); // TODO
+		VariableDeclaration iterationVariableDeclaration = foreachStatement.getIterationVariableDeclaration();
+		DataType collectionDataType = ImperativeModelUtil.getDataType(foreachStatement.getCollectionExpression());
+		if (!(collectionDataType instanceof ArrayType)) {
+			throw new RuntimeException("Collection type must be array type");
+		}
+		ArrayType collectionArrayType = (ArrayType) collectionDataType;
+		if (collectionArrayType.getDimensionality() != 1) {
+			throw new RuntimeException("Array dimensionality must be 1");
+		}
+		sb.append("{\n");
+		sb.append("int i;\n");
+		sb.append("for (i = 0; i < ");
+		sb.append(collectionArrayType.getDimensions().get(0).getSize());
+		sb.append("; ++i) {\n");
 		sb.append(dataTypeToString(iterationVariableDeclaration.getType()));
 		sb.append(" ");
 		sb.append(iterationVariableDeclaration.getName());
-		sb.append(" = 0"); // TODO
-		sb.append(";\n");
+		sb.append(" = (");
+		sb.append(doSwitch(foreachStatement.getCollectionExpression()));
+		sb.append(")[i];\n");
 		sb.append(doSwitch(foreachStatement.getBody()));
+		sb.append("}\n");
 		sb.append("}\n");
 		return sb.toString();
 	}
@@ -159,9 +189,9 @@ class CompoundCGenerator extends ImperativeModelSwitch<String> {
 	
 	private void appendStateArraySubscript(StringBuilder sb, StatefulVariableDeclaration statefulVariableDeclaration, int stepIndex) {
 		if (statefulVariableDeclaration.getCircularBufferSize() > 1) {
-			sb.append("[(");
+			sb.append("[(_");
 			sb.append(statefulVariableDeclaration.getName());
-			sb.append("_index + (");
+			sb.append("index + (");
 			sb.append(stepIndex);
 			sb.append(")) % ");
 			sb.append(statefulVariableDeclaration.getCircularBufferSize());

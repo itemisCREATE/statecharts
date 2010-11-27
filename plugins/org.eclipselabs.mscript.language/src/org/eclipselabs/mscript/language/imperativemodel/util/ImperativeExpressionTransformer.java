@@ -51,6 +51,9 @@ import org.eclipselabs.mscript.language.imperativemodel.VariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.VariableReference;
 import org.eclipselabs.mscript.language.internal.functionmodel.util.StepExpressionHelper;
 import org.eclipselabs.mscript.language.internal.functionmodel.util.StepExpressionResult;
+import org.eclipselabs.mscript.language.internal.interpreter.InvalidUnitExpressionOperandException;
+import org.eclipselabs.mscript.language.internal.interpreter.UnitExpressionHelper;
+import org.eclipselabs.mscript.typesystem.ArrayType;
 import org.eclipselabs.mscript.typesystem.DataType;
 import org.eclipselabs.mscript.typesystem.IntegerType;
 import org.eclipselabs.mscript.typesystem.InvalidDataType;
@@ -63,7 +66,7 @@ import org.eclipselabs.mscript.typesystem.util.TypeSystemUtil;
  * @author Andreas Unger
  *
  */
-public class ImperativeExpressionTransformer extends AstSwitch<ExpressionDescriptor> {
+public class ImperativeExpressionTransformer extends AstSwitch<Expression> {
 	
 	private Scope scope;
 
@@ -75,25 +78,30 @@ public class ImperativeExpressionTransformer extends AstSwitch<ExpressionDescrip
 	}
 	
 	public void transform(Expression expression, List<ImperativeExpressionTarget> targets) {
-		ExpressionDescriptor result = doSwitch(expression);
+		Expression result = doSwitch(expression);
+		DataType dataType = ImperativeModelUtil.getDataType(result);
+		
+		if (dataType == null) {
+			throw new RuntimeException("Data type not set");
+		}
 
-		if (result.getDataType() instanceof InvalidDataType) {
+		if (dataType instanceof InvalidDataType) {
 			throw new RuntimeException("Invalid data type");
 		}
 
 		ImperativeExpressionTarget target = targets.get(0);
 		if (target.getVariableDeclaration().getType() == null) {
-			target.getVariableDeclaration().setType(result.getDataType());
+			target.getVariableDeclaration().setType(EcoreUtil.copy(dataType));
 		} else {
-			DataType leftHandDataType = TypeSystemUtil.getLeftHandDataType(target.getVariableDeclaration().getType(), result.getDataType());
+			DataType leftHandDataType = TypeSystemUtil.getLeftHandDataType(target.getVariableDeclaration().getType(), dataType);
 			if (leftHandDataType == null) {
 				throw new RuntimeException("Incompatible data types in assignment");
 			}
-			target.getVariableDeclaration().setType(leftHandDataType);
+			target.getVariableDeclaration().setType(EcoreUtil.copy(leftHandDataType));
 		}
 
 		Assignment assignment = ImperativeModelFactory.eINSTANCE.createAssignment();
-		assignment.setAssignedExpression(result.getExpression());
+		assignment.setAssignedExpression(result);
 		assignment.setTarget(target.getVariableDeclaration());
 		assignment.setStepIndex(target.getStepIndex());
 		scope.getCompound().getStatements().add(assignment);
@@ -103,7 +111,7 @@ public class ImperativeExpressionTransformer extends AstSwitch<ExpressionDescrip
 	 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseLetExpression(org.eclipselabs.mscript.language.ast.LetExpression)
 	 */
 	@Override
-	public ExpressionDescriptor caseLetExpression(LetExpression letExpression) {
+	public Expression caseLetExpression(LetExpression letExpression) {
 		LocalVariableDeclaration localVariableDeclaration = ImperativeModelFactory.eINSTANCE.createLocalVariableDeclaration();
 		localVariableDeclaration.setName(createLocalVariableName("letResult"));
 		scope.getCompound().getStatements().add(localVariableDeclaration);
@@ -115,9 +123,9 @@ public class ImperativeExpressionTransformer extends AstSwitch<ExpressionDescrip
 		for (LetExpressionVariableDeclaration letExpressionVariableDeclaration : letExpression.getVariableDeclarations()) {
 			LocalVariableDeclaration letVariableDeclaration = ImperativeModelFactory.eINSTANCE.createLocalVariableDeclaration();
 			letVariableDeclaration.setName(createLocalVariableName(letExpressionVariableDeclaration.getNames().get(0)));
-			ExpressionDescriptor assignedExpressionDescriptor = doSwitch(letExpressionVariableDeclaration.getAssignedExpression());
-			letVariableDeclaration.setType(assignedExpressionDescriptor.getDataType());
-			letVariableDeclaration.setInitializer(assignedExpressionDescriptor.getExpression());
+			Expression assignedExpression = doSwitch(letExpressionVariableDeclaration.getAssignedExpression());
+			letVariableDeclaration.setType(EcoreUtil.copy(ImperativeModelUtil.getDataType(assignedExpression)));
+			letVariableDeclaration.setInitializer(assignedExpression);
 			compoundStatement.getStatements().add(letVariableDeclaration);
 			scope.addVariableDeclaration(letVariableDeclaration);
 		}
@@ -133,20 +141,21 @@ public class ImperativeExpressionTransformer extends AstSwitch<ExpressionDescrip
 		VariableReference variableReference = ImperativeModelFactory.eINSTANCE.createVariableReference();
 		variableReference.setDeclaration(localVariableDeclaration);
 		variableReference.setStepIndex(0);
-		return new ExpressionDescriptor(variableReference, localVariableDeclaration.getType());
+		ImperativeModelUtil.adaptDataType(variableReference, localVariableDeclaration.getType());
+		return variableReference;
 	}
 	
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseIfExpression(org.eclipselabs.mscript.language.ast.IfExpression)
 	 */
 	@Override
-	public ExpressionDescriptor caseIfExpression(IfExpression ifExpression) {
+	public Expression caseIfExpression(IfExpression ifExpression) {
 		LocalVariableDeclaration localVariableDeclaration = ImperativeModelFactory.eINSTANCE.createLocalVariableDeclaration();
 		localVariableDeclaration.setName(createLocalVariableName("ifResult"));
 		scope.getCompound().getStatements().add(localVariableDeclaration);
 		IfStatement ifStatement = ImperativeModelFactory.eINSTANCE.createIfStatement();
-		ExpressionDescriptor conditionExpressionDescriptor = doSwitch(ifExpression.getCondition());
-		ifStatement.setCondition(conditionExpressionDescriptor.getExpression());
+		Expression conditionExpression = doSwitch(ifExpression.getCondition());
+		ifStatement.setCondition(conditionExpression);
 		
 		CompoundStatement thenStatement = ImperativeModelFactory.eINSTANCE.createCompoundStatement();
 		scope = new Scope(scope, thenStatement);
@@ -171,82 +180,34 @@ public class ImperativeExpressionTransformer extends AstSwitch<ExpressionDescrip
 		VariableReference variableReference = ImperativeModelFactory.eINSTANCE.createVariableReference();
 		variableReference.setDeclaration(localVariableDeclaration);
 		variableReference.setStepIndex(0);
-		return new ExpressionDescriptor(variableReference, localVariableDeclaration.getType());
+		ImperativeModelUtil.adaptDataType(variableReference, localVariableDeclaration.getType());
+		return variableReference;
 	}
 	
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseFeatureCall(org.eclipselabs.mscript.language.ast.FeatureCall)
 	 */
 	@Override
-	public ExpressionDescriptor caseFeatureCall(FeatureCall featureCall) {
-		ExpressionDescriptor targetExpressionDescriptor;
+	public Expression caseFeatureCall(FeatureCall featureCall) {
+		Expression targetExpression;
 		ListIterator<FeatureCallPart> featureCallPartIterator = featureCall.getParts().listIterator();
 		if (featureCall.getTarget() instanceof SimpleName) {
 			SimpleName simpleName = (SimpleName) featureCall.getTarget();
-			targetExpressionDescriptor = resolveSimpleName(simpleName, featureCallPartIterator);
-			if (targetExpressionDescriptor == null) {
+			targetExpression = resolveSimpleName(simpleName, featureCallPartIterator);
+			if (targetExpression == null) {
 				// TODO: Is it a function call? Maybe full qualified?
 				throw new RuntimeException("Not yet implemented");
 			}
 		} else {
-			targetExpressionDescriptor = doSwitch(featureCall.getTarget());
+			targetExpression = doSwitch(featureCall.getTarget());
 		}
-		if (featureCallPartIterator.hasNext()) {
-			// Check for iterators
-			FeatureCallPart featureCallPart = featureCallPartIterator.next();
-			if (!(featureCallPart instanceof FeatureAccess)) {
-				throw new RuntimeException("No idea what to do here");
-			}
-			FeatureAccess featureAccess = (FeatureAccess) featureCallPart;
-			if (!featureCallPartIterator.hasNext()) {
-				throw new RuntimeException("There should be more here");
-			}
-			featureCallPart = featureCallPartIterator.next();
-			if (!(featureCallPart instanceof IterationCall)) {
-				throw new RuntimeException("Must be operation call");
-			}
-			IterationCall iterationCall = (IterationCall) featureCallPart;
-			
-			LocalVariableDeclaration accumulatorDeclaration = ImperativeModelFactory.eINSTANCE.createLocalVariableDeclaration();
-			accumulatorDeclaration.setName(createLocalVariableName(iterationCall.getAccumulator().getName()));
-			scope.getCompound().getStatements().add(accumulatorDeclaration);
-			ForeachStatement foreachStatement = ImperativeModelFactory.eINSTANCE.createForeachStatement();
-			
-			LocalVariableDeclaration iterationVariableDeclaration = ImperativeModelFactory.eINSTANCE.createLocalVariableDeclaration();
-			iterationVariableDeclaration.setName(iterationCall.getVariables().get(0).getName());
-			// TODO: get collection element data type
-			IntegerType integerType = TypeSystemFactory.eINSTANCE.createIntegerType();
-			integerType.setUnit(TypeSystemUtil.createUnit());
-			iterationVariableDeclaration.setType(integerType);
-			// ------
-			ExpressionDescriptor initializerExpressionDescriptor = doSwitch(iterationCall.getAccumulator().getInitializer());
-			accumulatorDeclaration.setInitializer(initializerExpressionDescriptor.getExpression());
-			accumulatorDeclaration.setType(initializerExpressionDescriptor.getDataType());
-
-			foreachStatement.setIterationVariableDeclaration(iterationVariableDeclaration);
-			foreachStatement.setCollectionExpression(targetExpressionDescriptor.getExpression());
-
-			CompoundStatement body = ImperativeModelFactory.eINSTANCE.createCompoundStatement();
-			scope = new Scope(scope, body);
-			scope.addVariableDeclaration(accumulatorDeclaration);
-			scope.addVariableDeclaration(iterationVariableDeclaration);
-			transform(
-					iterationCall.getExpression(),
-					Collections.singletonList(new ImperativeExpressionTarget(accumulatorDeclaration, 0)));
-			scope = scope.getOuterScope();
-			foreachStatement.setBody(body);
-
-			scope.getCompound().getStatements().add(foreachStatement);
-			
-			VariableReference variableReference = ImperativeModelFactory.eINSTANCE.createVariableReference();
-			variableReference.setDeclaration(accumulatorDeclaration);
-			variableReference.setStepIndex(0);
-			return new ExpressionDescriptor(variableReference, accumulatorDeclaration.getType());
+		while (featureCallPartIterator.hasNext()) {
+			targetExpression = transformNextFeatureCallPart(featureCallPartIterator, targetExpression);
 		}
-		return targetExpressionDescriptor;
+		return targetExpression;
 	}
 	
-	private ExpressionDescriptor resolveSimpleName(SimpleName simpleName, ListIterator<FeatureCallPart> featureCallPartIterator) {
+	private Expression resolveSimpleName(SimpleName simpleName, ListIterator<FeatureCallPart> featureCallPartIterator) {
 		VariableDeclaration variableDeclaration = scope.getVariableDeclaration(simpleName.getIdentifier());
 		if (variableDeclaration != null) {
 			StepExpressionResult stepExpressionResult = new StepExpressionHelper().getStepExpression(featureCallPartIterator, null);
@@ -257,26 +218,84 @@ public class ImperativeExpressionTransformer extends AstSwitch<ExpressionDescrip
 				if (variableDeclaration.getType() == null) {
 					throw new RuntimeException("Data type of variable declaration not set");
 				}
-				return new ExpressionDescriptor(variableReference, variableDeclaration.getType());
+				ImperativeModelUtil.adaptDataType(variableReference, variableDeclaration.getType());
+				return variableReference;
 			}
 		}
 		return null;
+	}
+	
+	private Expression transformNextFeatureCallPart(ListIterator<FeatureCallPart> featureCallPartIterator, Expression collectionExpression) {
+		// Check for iterators
+		FeatureCallPart featureCallPart = featureCallPartIterator.next();
+		if (!(featureCallPart instanceof FeatureAccess)) {
+			throw new RuntimeException("No idea what to do here");
+		}
+		FeatureAccess featureAccess = (FeatureAccess) featureCallPart;
+		if (!featureCallPartIterator.hasNext()) {
+			throw new RuntimeException("There should be more here");
+		}
+		featureCallPart = featureCallPartIterator.next();
+		if (!(featureCallPart instanceof IterationCall)) {
+			throw new RuntimeException("Must be iteration call");
+		}
+		IterationCall iterationCall = (IterationCall) featureCallPart;
+		
+		LocalVariableDeclaration accumulatorDeclaration = ImperativeModelFactory.eINSTANCE.createLocalVariableDeclaration();
+		accumulatorDeclaration.setName(createLocalVariableName(iterationCall.getAccumulator().getName()));
+		scope.getCompound().getStatements().add(accumulatorDeclaration);
+		ForeachStatement foreachStatement = ImperativeModelFactory.eINSTANCE.createForeachStatement();
+		
+		LocalVariableDeclaration iterationVariableDeclaration = ImperativeModelFactory.eINSTANCE.createLocalVariableDeclaration();
+		iterationVariableDeclaration.setName(createLocalVariableName(iterationCall.getVariables().get(0).getName()));
+
+		DataType collectionDataType = ImperativeModelUtil.getDataType(collectionExpression);
+		if (!(collectionDataType instanceof ArrayType)) {
+			throw new RuntimeException("Collection type must be array type");
+		}
+		ArrayType arrayType = (ArrayType) collectionDataType;
+		iterationVariableDeclaration.setType(EcoreUtil.copy(arrayType.getElementType()));
+
+		Expression initializerExpression = doSwitch(iterationCall.getAccumulator().getInitializer());
+		accumulatorDeclaration.setInitializer(initializerExpression);
+		accumulatorDeclaration.setType(EcoreUtil.copy(ImperativeModelUtil.getDataType(initializerExpression)));
+
+		foreachStatement.setIterationVariableDeclaration(iterationVariableDeclaration);
+		foreachStatement.setCollectionExpression(collectionExpression);
+
+		CompoundStatement body = ImperativeModelFactory.eINSTANCE.createCompoundStatement();
+		scope = new Scope(scope, body);
+		scope.addVariableDeclaration(accumulatorDeclaration);
+		scope.addVariableDeclaration(iterationVariableDeclaration);
+		transform(
+				iterationCall.getExpression(),
+				Collections.singletonList(new ImperativeExpressionTarget(accumulatorDeclaration, 0)));
+		scope = scope.getOuterScope();
+		foreachStatement.setBody(body);
+
+		scope.getCompound().getStatements().add(foreachStatement);
+		
+		VariableReference variableReference = ImperativeModelFactory.eINSTANCE.createVariableReference();
+		variableReference.setDeclaration(accumulatorDeclaration);
+		variableReference.setStepIndex(0);
+		ImperativeModelUtil.adaptDataType(variableReference, accumulatorDeclaration.getType());
+		return variableReference;
 	}
 	
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseAdditiveExpression(org.eclipselabs.mscript.language.ast.AdditiveExpression)
 	 */
 	@Override
-	public ExpressionDescriptor caseAdditiveExpression(AdditiveExpression additiveExpression) {
+	public Expression caseAdditiveExpression(AdditiveExpression additiveExpression) {
 		AdditiveExpression transformedExpression = AstFactory.eINSTANCE.createAdditiveExpression();
-		ExpressionDescriptor expressionDescriptor = doSwitch(additiveExpression.getLeftOperand());
-		transformedExpression.setLeftOperand(expressionDescriptor.getExpression());
-		DataType dataType = expressionDescriptor.getDataType();
+		Expression expression = doSwitch(additiveExpression.getLeftOperand());
+		transformedExpression.setLeftOperand(expression);
+		DataType dataType = ImperativeModelUtil.getDataType(expression);
 		for (AdditiveExpressionPart rightPart : additiveExpression.getRightParts()) {
 			AdditiveExpressionPart transformedRightPart = AstFactory.eINSTANCE.createAdditiveExpressionPart();
 			transformedRightPart.setOperator(rightPart.getOperator());
-			expressionDescriptor = doSwitch(rightPart.getOperand());
-			transformedRightPart.setOperand(expressionDescriptor.getExpression());
+			expression = doSwitch(rightPart.getOperand());
+			transformedRightPart.setOperand(expression);
 			OperatorKind operatorKind;
 			switch (rightPart.getOperator()) {
 			case ADDITION:
@@ -288,26 +307,27 @@ public class ImperativeExpressionTransformer extends AstSwitch<ExpressionDescrip
 			default:
 				throw new IllegalArgumentException();
 			}
-			dataType = dataType.evaluate(operatorKind, expressionDescriptor.getDataType());
+			dataType = dataType.evaluate(operatorKind, ImperativeModelUtil.getDataType(expression));
 			transformedExpression.getRightParts().add(transformedRightPart);
 		}
-		return new ExpressionDescriptor(transformedExpression, dataType);
+		ImperativeModelUtil.adaptDataType(transformedExpression, dataType);
+		return transformedExpression;
 	}
 	
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseMultiplicativeExpression(org.eclipselabs.mscript.language.ast.MultiplicativeExpression)
 	 */
 	@Override
-	public ExpressionDescriptor caseMultiplicativeExpression(MultiplicativeExpression multiplicativeExpression) {
+	public Expression caseMultiplicativeExpression(MultiplicativeExpression multiplicativeExpression) {
 		MultiplicativeExpression transformedExpression = AstFactory.eINSTANCE.createMultiplicativeExpression();
-		ExpressionDescriptor expressionDescriptor = doSwitch(multiplicativeExpression.getLeftOperand());
-		transformedExpression.setLeftOperand(expressionDescriptor.getExpression());
-		DataType dataType = expressionDescriptor.getDataType();
+		Expression expression = doSwitch(multiplicativeExpression.getLeftOperand());
+		transformedExpression.setLeftOperand(expression);
+		DataType dataType = ImperativeModelUtil.getDataType(expression);
 		for (MultiplicativeExpressionPart rightPart : multiplicativeExpression.getRightParts()) {
 			MultiplicativeExpressionPart transformedRightPart = AstFactory.eINSTANCE.createMultiplicativeExpressionPart();
 			transformedRightPart.setOperator(rightPart.getOperator());
-			expressionDescriptor = doSwitch(rightPart.getOperand());
-			transformedRightPart.setOperand(expressionDescriptor.getExpression());
+			expression = doSwitch(rightPart.getOperand());
+			transformedRightPart.setOperand(expression);
 			OperatorKind operatorKind;
 			switch (rightPart.getOperator()) {
 			case MULTIPLICATION:
@@ -325,17 +345,18 @@ public class ImperativeExpressionTransformer extends AstSwitch<ExpressionDescrip
 			default:
 				throw new IllegalArgumentException();
 			}
-			dataType = dataType.evaluate(operatorKind, expressionDescriptor.getDataType());
+			dataType = dataType.evaluate(operatorKind, ImperativeModelUtil.getDataType(expression));
 			transformedExpression.getRightParts().add(transformedRightPart);
 		}
-		return new ExpressionDescriptor(transformedExpression, dataType);
+		ImperativeModelUtil.adaptDataType(transformedExpression, dataType);
+		return transformedExpression;
 	}
 	
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseRelationalExpression(org.eclipselabs.mscript.language.ast.RelationalExpression)
 	 */
 	@Override
-	public ExpressionDescriptor caseRelationalExpression(RelationalExpression relationalExpression) {
+	public Expression caseRelationalExpression(RelationalExpression relationalExpression) {
 		if (relationalExpression.isTypeTest()) {
 			// TODO: to be implemented
 			throw new IllegalArgumentException();
@@ -343,10 +364,10 @@ public class ImperativeExpressionTransformer extends AstSwitch<ExpressionDescrip
 		RelationalExpression transformedExpression = AstFactory.eINSTANCE.createRelationalExpression();
 		transformedExpression.setTypeTest(false);
 		transformedExpression.setOperator(relationalExpression.getOperator());
-		ExpressionDescriptor leftExpressionDescriptor = doSwitch(relationalExpression.getLeftOperand());
-		transformedExpression.setLeftOperand(leftExpressionDescriptor.getExpression());
-		ExpressionDescriptor rightExpressionDescriptor = doSwitch(relationalExpression.getRightOperand());
-		transformedExpression.setRightOperand(rightExpressionDescriptor.getExpression());
+		Expression leftExpression = doSwitch(relationalExpression.getLeftOperand());
+		transformedExpression.setLeftOperand(leftExpression);
+		Expression rightExpression = doSwitch(relationalExpression.getRightOperand());
+		transformedExpression.setRightOperand(rightExpression);
 		OperatorKind operatorKind;
 		switch (relationalExpression.getOperator()) {
 		case GREATER_THAN:
@@ -364,67 +385,102 @@ public class ImperativeExpressionTransformer extends AstSwitch<ExpressionDescrip
 		default:
 			throw new IllegalArgumentException();
 		}
-		return new ExpressionDescriptor(transformedExpression, leftExpressionDescriptor.getDataType().evaluate(operatorKind, rightExpressionDescriptor.getDataType()));
+		DataType leftDataType = ImperativeModelUtil.getDataType(leftExpression);
+		DataType rightDataType = ImperativeModelUtil.getDataType(rightExpression);
+		DataType transformedDataType = leftDataType.evaluate(operatorKind, rightDataType);
+		ImperativeModelUtil.adaptDataType(transformedExpression, transformedDataType);
+		return transformedExpression;
 	}
 	
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseUnaryExpression(org.eclipselabs.mscript.language.ast.UnaryExpression)
 	 */
 	@Override
-	public ExpressionDescriptor caseUnaryExpression(UnaryExpression unaryExpression) {
+	public Expression caseUnaryExpression(UnaryExpression unaryExpression) {
 		UnaryExpression transformedExpression = AstFactory.eINSTANCE.createUnaryExpression();
 		transformedExpression.setOperator(unaryExpression.getOperator());
-		ExpressionDescriptor expressionDescriptor = doSwitch(unaryExpression.getOperand());
-		transformedExpression.setOperand(expressionDescriptor.getExpression());
-		return new ExpressionDescriptor(transformedExpression, expressionDescriptor.getDataType().evaluate(OperatorKind.UNARY_MINUS, null));
+		Expression expression = doSwitch(unaryExpression.getOperand());
+		transformedExpression.setOperand(expression);
+		DataType dataType = ImperativeModelUtil.getDataType(expression);
+		DataType transformedDataType = dataType.evaluate(OperatorKind.UNARY_MINUS, null);
+		ImperativeModelUtil.adaptDataType(transformedExpression, transformedDataType);
+		return transformedExpression;
 	}
 	
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseParenthesizedExpression(org.eclipselabs.mscript.language.ast.ParenthesizedExpression)
 	 */
 	@Override
-	public ExpressionDescriptor caseParenthesizedExpression(ParenthesizedExpression parenthesizedExpression) {
+	public Expression caseParenthesizedExpression(ParenthesizedExpression parenthesizedExpression) {
 		ParenthesizedExpression transformedExpression = AstFactory.eINSTANCE.createParenthesizedExpression();
-		Expression expression = parenthesizedExpression.getExpressions().get(0);
-		ExpressionDescriptor expressionDescriptor = doSwitch(expression);
-		transformedExpression.getExpressions().add(expressionDescriptor.getExpression());
-		return new ExpressionDescriptor(transformedExpression, expressionDescriptor.getDataType());
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseIntegerLiteral(org.eclipselabs.mscript.language.ast.IntegerLiteral)
-	 */
-	@Override
-	public ExpressionDescriptor caseIntegerLiteral(IntegerLiteral integerLiteral) {
-		IntegerType integerType = TypeSystemFactory.eINSTANCE.createIntegerType();
-		integerType.setUnit(TypeSystemUtil.createUnit());
-		return new ExpressionDescriptor(EcoreUtil.copy(integerLiteral), integerType);
+		Expression firstParenthesizedExpression = parenthesizedExpression.getExpressions().get(0);
+		Expression transformedFirstParenthesizedExpression = doSwitch(firstParenthesizedExpression);
+		transformedExpression.getExpressions().add(transformedFirstParenthesizedExpression);
+		DataType dataType = ImperativeModelUtil.getDataType(transformedFirstParenthesizedExpression);
+		ImperativeModelUtil.adaptDataType(transformedExpression, dataType);
+		return transformedExpression;
 	}
 	
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseRealLiteral(org.eclipselabs.mscript.language.ast.RealLiteral)
 	 */
 	@Override
-	public ExpressionDescriptor caseRealLiteral(RealLiteral realLiteral) {
+	public Expression caseRealLiteral(RealLiteral realLiteral) {
 		RealType realType = TypeSystemFactory.eINSTANCE.createRealType();
-		realType.setUnit(TypeSystemUtil.createUnit());
-		return new ExpressionDescriptor(EcoreUtil.copy(realLiteral), realType);
+		try {
+			if (realLiteral.getUnit() != null) {
+				realType.setUnit(new UnitExpressionHelper().evaluate(realLiteral.getUnit()));
+			} else {
+				realType.setUnit(TypeSystemUtil.createUnit());
+			}
+		} catch (InvalidUnitExpressionOperandException e) {
+			throw new RuntimeException("Invalid unit", e);
+		}
+		
+		RealLiteral transformedRealLiteral = EcoreUtil.copy(realLiteral);
+		ImperativeModelUtil.adaptDataType(transformedRealLiteral, realType);
+		return transformedRealLiteral;
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseIntegerLiteral(org.eclipselabs.mscript.language.ast.IntegerLiteral)
+	 */
+	@Override
+	public Expression caseIntegerLiteral(IntegerLiteral integerLiteral) {
+		IntegerType integerType = TypeSystemFactory.eINSTANCE.createIntegerType();
+		try {
+			if (integerLiteral.getUnit() != null) {
+				integerType.setUnit(new UnitExpressionHelper().evaluate(integerLiteral.getUnit()));
+			} else {
+				integerType.setUnit(TypeSystemUtil.createUnit());
+			}
+		} catch (InvalidUnitExpressionOperandException e) {
+			throw new RuntimeException("Invalid unit", e);
+		}
+
+		IntegerLiteral transformedIntegerLiteral = EcoreUtil.copy(integerLiteral);
+		ImperativeModelUtil.adaptDataType(transformedIntegerLiteral, integerType);
+		return transformedIntegerLiteral;
 	}
 	
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseBooleanLiteral(org.eclipselabs.mscript.language.ast.BooleanLiteral)
 	 */
 	@Override
-	public ExpressionDescriptor caseBooleanLiteral(BooleanLiteral booleanLiteral) {
-		return new ExpressionDescriptor(EcoreUtil.copy(booleanLiteral), TypeSystemFactory.eINSTANCE.createBooleanType());
+	public Expression caseBooleanLiteral(BooleanLiteral booleanLiteral) {
+		BooleanLiteral transformedBooleanLiteral = EcoreUtil.copy(booleanLiteral);
+		ImperativeModelUtil.adaptDataType(transformedBooleanLiteral, TypeSystemFactory.eINSTANCE.createBooleanType());
+		return transformedBooleanLiteral;
 	}
 	
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseStringLiteral(org.eclipselabs.mscript.language.ast.StringLiteral)
 	 */
 	@Override
-	public ExpressionDescriptor caseStringLiteral(StringLiteral stringLiteral) {
-		return new ExpressionDescriptor(EcoreUtil.copy(stringLiteral), TypeSystemFactory.eINSTANCE.createStringType());
+	public Expression caseStringLiteral(StringLiteral stringLiteral) {
+		StringLiteral transformedStringLiteral = EcoreUtil.copy(stringLiteral);
+		ImperativeModelUtil.adaptDataType(transformedStringLiteral, TypeSystemFactory.eINSTANCE.createStringType());
+		return transformedStringLiteral;
 	}
 	
 	private String createLocalVariableName(String preferredName) {

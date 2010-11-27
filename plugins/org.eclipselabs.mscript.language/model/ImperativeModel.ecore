@@ -20,6 +20,9 @@
   <eClassifiers xsi:type="ecore:EClass" name="Compound">
     <eStructuralFeatures xsi:type="ecore:EReference" name="statements" upperBound="-1"
         eType="#//Statement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="localVariableDeclarations"
+        upperBound="-1" eType="#//LocalVariableDeclaration" changeable="false" volatile="true"
+        transient="true" derived="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ComputationCompound" eSuperTypes="#//Compound">
     <eStructuralFeatures xsi:type="ecore:EReference" name="inputs" upperBound="-1"

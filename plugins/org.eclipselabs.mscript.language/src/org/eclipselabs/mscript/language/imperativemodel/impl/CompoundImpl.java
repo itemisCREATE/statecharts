@@ -9,6 +9,7 @@ package org.eclipselabs.mscript.language.imperativemodel.impl;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -17,6 +18,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipselabs.mscript.language.imperativemodel.Compound;
 import org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage;
+import org.eclipselabs.mscript.language.imperativemodel.LocalVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.Statement;
 
 /**
@@ -27,6 +29,7 @@ import org.eclipselabs.mscript.language.imperativemodel.Statement;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.impl.CompoundImpl#getStatements <em>Statements</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.impl.CompoundImpl#getLocalVariableDeclarations <em>Local Variable Declarations</em>}</li>
  * </ul>
  * </p>
  *
@@ -77,6 +80,21 @@ public class CompoundImpl extends EObjectImpl implements Compound {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public EList<LocalVariableDeclaration> getLocalVariableDeclarations() {
+		EList<LocalVariableDeclaration> localVariableDeclarations = new BasicEList<LocalVariableDeclaration>();
+		for (Statement statement : getStatements()) {
+			if (statement instanceof LocalVariableDeclaration) {
+				localVariableDeclarations.add((LocalVariableDeclaration) statement);
+			}
+		}
+		return localVariableDeclarations;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -98,6 +116,8 @@ public class CompoundImpl extends EObjectImpl implements Compound {
 		switch (featureID) {
 			case ImperativeModelPackage.COMPOUND__STATEMENTS:
 				return getStatements();
+			case ImperativeModelPackage.COMPOUND__LOCAL_VARIABLE_DECLARATIONS:
+				return getLocalVariableDeclarations();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -144,6 +164,8 @@ public class CompoundImpl extends EObjectImpl implements Compound {
 		switch (featureID) {
 			case ImperativeModelPackage.COMPOUND__STATEMENTS:
 				return statements != null && !statements.isEmpty();
+			case ImperativeModelPackage.COMPOUND__LOCAL_VARIABLE_DECLARATIONS:
+				return !getLocalVariableDeclarations().isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

@@ -17,6 +17,7 @@
     </genClasses>
     <genClasses ecoreClass="ImperativeModel.ecore#//Compound">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//Compound/statements"/>
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference ImperativeModel.ecore#//Compound/localVariableDeclarations"/>
     </genClasses>
     <genClasses ecoreClass="ImperativeModel.ecore#//ComputationCompound">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//ComputationCompound/inputs"/>

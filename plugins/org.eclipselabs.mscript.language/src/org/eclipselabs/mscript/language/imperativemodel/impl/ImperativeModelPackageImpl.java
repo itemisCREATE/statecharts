@@ -428,6 +428,15 @@ public class ImperativeModelPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getCompound_LocalVariableDeclarations() {
+		return (EReference)compoundEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getComputationCompound() {
 		return computationCompoundEClass;
 	}
@@ -632,6 +641,7 @@ public class ImperativeModelPackageImpl extends EPackageImpl implements Imperati
 
 		compoundEClass = createEClass(COMPOUND);
 		createEReference(compoundEClass, COMPOUND__STATEMENTS);
+		createEReference(compoundEClass, COMPOUND__LOCAL_VARIABLE_DECLARATIONS);
 
 		computationCompoundEClass = createEClass(COMPUTATION_COMPOUND);
 		createEReference(computationCompoundEClass, COMPUTATION_COMPOUND__INPUTS);
@@ -739,6 +749,7 @@ public class ImperativeModelPackageImpl extends EPackageImpl implements Imperati
 
 		initEClass(compoundEClass, Compound.class, "Compound", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCompound_Statements(), this.getStatement(), null, "statements", null, 0, -1, Compound.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCompound_LocalVariableDeclarations(), this.getLocalVariableDeclaration(), null, "localVariableDeclarations", null, 0, -1, Compound.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(computationCompoundEClass, ComputationCompound.class, "ComputationCompound", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getComputationCompound_Inputs(), this.getInputVariableDeclaration(), this.getInputVariableDeclaration_FeedingCompounds(), "inputs", null, 0, -1, ComputationCompound.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

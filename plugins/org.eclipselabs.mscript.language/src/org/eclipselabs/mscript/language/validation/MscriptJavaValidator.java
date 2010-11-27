@@ -18,8 +18,11 @@ import org.eclipselabs.mscript.language.functionmodel.util.FunctionDescriptorCon
 import org.eclipselabs.mscript.language.imperativemodel.Compound;
 import org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction;
 import org.eclipselabs.mscript.language.imperativemodel.util.ImperativeFunctionTransformer;
+import org.eclipselabs.mscript.typesystem.ArrayDimension;
 import org.eclipselabs.mscript.typesystem.DataType;
 import org.eclipselabs.mscript.typesystem.IntegerType;
+import org.eclipselabs.mscript.typesystem.RealType;
+import org.eclipselabs.mscript.typesystem.TensorType;
 import org.eclipselabs.mscript.typesystem.TypeSystemFactory;
 import org.eclipselabs.mscript.typesystem.util.TypeSystemUtil;
 
@@ -59,21 +62,36 @@ public class MscriptJavaValidator extends AbstractMscriptJavaValidator {
 	@Check
 	public void checkFunctionDefinition(FunctionDefinition functionDefinition) {
 		FunctionDescriptor functionDescriptor = new FunctionDescriptorConstructor().construct(functionDefinition, getChain());
-		
 		List<DataType> templateParameterDataTypes = new ArrayList<DataType>();
-		for (ParameterDeclaration parameterDeclaration : functionDefinition.getTemplateParameterDeclarations()) {
-			IntegerType realType = TypeSystemFactory.eINSTANCE.createIntegerType();
-			realType.setUnit(TypeSystemUtil.createUnit());
-			templateParameterDataTypes.add(realType);
-			parameterDeclaration.getName();
-		}
 		List<DataType> inputParameterDataTypes = new ArrayList<DataType>();
-		for (ParameterDeclaration parameterDeclaration : functionDefinition.getInputParameterDeclarations()) {
-			IntegerType realType = TypeSystemFactory.eINSTANCE.createIntegerType();
-			realType.setUnit(TypeSystemUtil.createUnit());
-			inputParameterDataTypes.add(realType);
-			parameterDeclaration.getName();
+		
+		if (functionDefinition.getName().equals("sum123")) {
+			for (ParameterDeclaration parameterDeclaration : functionDefinition.getInputParameterDeclarations()) {
+				RealType elementType = TypeSystemFactory.eINSTANCE.createRealType();
+				elementType.setUnit(TypeSystemUtil.createUnit());
+				TensorType tensorType = TypeSystemFactory.eINSTANCE.createTensorType();
+				tensorType.setElementType(elementType);
+				ArrayDimension arrayDimension = TypeSystemFactory.eINSTANCE.createArrayDimension();
+				arrayDimension.setSize(10);
+				tensorType.getDimensions().add(arrayDimension);
+				inputParameterDataTypes.add(tensorType);
+				parameterDeclaration.getName();
+			}
+		} else {
+			for (ParameterDeclaration parameterDeclaration : functionDefinition.getTemplateParameterDeclarations()) {
+				IntegerType type = TypeSystemFactory.eINSTANCE.createIntegerType();
+				type.setUnit(TypeSystemUtil.createUnit());
+				templateParameterDataTypes.add(type);
+				parameterDeclaration.getName();
+			}
+			for (ParameterDeclaration parameterDeclaration : functionDefinition.getInputParameterDeclarations()) {
+				IntegerType type = TypeSystemFactory.eINSTANCE.createIntegerType();
+				type.setUnit(TypeSystemUtil.createUnit());
+				inputParameterDataTypes.add(type);
+				parameterDeclaration.getName();
+			}
 		}
+
 		ImperativeFunction imperativeFunction = new ImperativeFunctionTransformer().transform(functionDescriptor, templateParameterDataTypes, inputParameterDataTypes);
 
 		System.out.println("### " + functionDefinition.getName());

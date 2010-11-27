@@ -223,13 +223,22 @@ public interface ImperativeModelPackage extends EPackage {
 	int COMPOUND__STATEMENTS = 0;
 
 	/**
+	 * The feature id for the '<em><b>Local Variable Declarations</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOUND__LOCAL_VARIABLE_DECLARATIONS = 1;
+
+	/**
 	 * The number of structural features of the '<em>Compound</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOUND_FEATURE_COUNT = 1;
+	int COMPOUND_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.ComputationCompoundImpl <em>Computation Compound</em>}' class.
@@ -249,6 +258,15 @@ public interface ImperativeModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int COMPUTATION_COMPOUND__STATEMENTS = COMPOUND__STATEMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Local Variable Declarations</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPUTATION_COMPOUND__LOCAL_VARIABLE_DECLARATIONS = COMPOUND__LOCAL_VARIABLE_DECLARATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Inputs</b></em>' reference list.
@@ -557,6 +575,15 @@ public interface ImperativeModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int COMPOUND_STATEMENT__STATEMENTS = COMPOUND__STATEMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Local Variable Declarations</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOUND_STATEMENT__LOCAL_VARIABLE_DECLARATIONS = COMPOUND__LOCAL_VARIABLE_DECLARATIONS;
 
 	/**
 	 * The number of structural features of the '<em>Compound Statement</em>' class.
@@ -994,6 +1021,17 @@ public interface ImperativeModelPackage extends EPackage {
 	EReference getCompound_Statements();
 
 	/**
+	 * Returns the meta object for the reference list '{@link org.eclipselabs.mscript.language.imperativemodel.Compound#getLocalVariableDeclarations <em>Local Variable Declarations</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Local Variable Declarations</em>'.
+	 * @see org.eclipselabs.mscript.language.imperativemodel.Compound#getLocalVariableDeclarations()
+	 * @see #getCompound()
+	 * @generated
+	 */
+	EReference getCompound_LocalVariableDeclarations();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.imperativemodel.ComputationCompound <em>Computation Compound</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1424,6 +1462,14 @@ public interface ImperativeModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference COMPOUND__STATEMENTS = eINSTANCE.getCompound_Statements();
+
+		/**
+		 * The meta object literal for the '<em><b>Local Variable Declarations</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference COMPOUND__LOCAL_VARIABLE_DECLARATIONS = eINSTANCE.getCompound_LocalVariableDeclarations();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.ComputationCompoundImpl <em>Computation Compound</em>}' class.
