@@ -3,7 +3,7 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="functionmodel"
     nsURI="http://www.eclipselabs.org/mscript/FunctionModel/1.0.0" nsPrefix="functionmodel">
-  <eClassifiers xsi:type="ecore:EClass" name="Function">
+  <eClassifiers xsi:type="ecore:EClass" name="FunctionDescriptor">
     <eOperations name="getVariableDescriptor" eType="#//VariableDescriptor">
       <eParameters name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
@@ -46,7 +46,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="definition" lowerBound="1"
         eType="ecore:EClass ../src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//FunctionDefinition"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="equationDescriptors" upperBound="-1"
-        eType="#//EquationDescriptor" containment="true" eOpposite="#//EquationDescriptor/function"/>
+        eType="#//EquationDescriptor" containment="true" eOpposite="#//EquationDescriptor/functionDescriptor"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="variableDescriptors" upperBound="-1"
         eType="#//VariableDescriptor" containment="true" eOpposite="#//VariableDescriptor/function"/>
   </eClassifiers>
@@ -69,8 +69,8 @@
         </eGenericType>
       </eParameters>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="function" lowerBound="1"
-        eType="#//Function" eOpposite="#//Function/equationDescriptors"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="functionDescriptor" lowerBound="1"
+        eType="#//FunctionDescriptor" eOpposite="#//FunctionDescriptor/equationDescriptors"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="equation" lowerBound="1"
         eType="ecore:EClass ../src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Equation"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sides" lowerBound="2" upperBound="2"
@@ -107,7 +107,7 @@
     <eOperations name="getMinimumStep" lowerBound="1" eType="#//VariableStep"/>
     <eOperations name="getMaximumStep" lowerBound="1" eType="#//VariableStep"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="function" lowerBound="1"
-        eType="#//Function" eOpposite="#//Function/variableDescriptors"/>
+        eType="#//FunctionDescriptor" eOpposite="#//FunctionDescriptor/variableDescriptors"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" eType="#//VariableKind"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="steps" upperBound="-1"

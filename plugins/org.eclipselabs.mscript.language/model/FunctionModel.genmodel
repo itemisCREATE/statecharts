@@ -16,32 +16,32 @@
       <genEnumLiterals ecoreEnumLiteral="FunctionModel.ecore#//VariableKind/Constant"/>
       <genEnumLiterals ecoreEnumLiteral="FunctionModel.ecore#//VariableKind/Functor"/>
     </genEnums>
-    <genClasses ecoreClass="FunctionModel.ecore#//Function">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FunctionModel.ecore#//Function/definition"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionModel.ecore#//Function/equationDescriptors"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionModel.ecore#//Function/variableDescriptors"/>
-      <genOperations ecoreOperation="FunctionModel.ecore#//Function/getVariableDescriptor">
-        <genParameters ecoreParameter="FunctionModel.ecore#//Function/getVariableDescriptor/name"/>
+    <genClasses ecoreClass="FunctionModel.ecore#//FunctionDescriptor">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FunctionModel.ecore#//FunctionDescriptor/definition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionModel.ecore#//FunctionDescriptor/equationDescriptors"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionModel.ecore#//FunctionDescriptor/variableDescriptors"/>
+      <genOperations ecoreOperation="FunctionModel.ecore#//FunctionDescriptor/getVariableDescriptor">
+        <genParameters ecoreParameter="FunctionModel.ecore#//FunctionDescriptor/getVariableDescriptor/name"/>
       </genOperations>
-      <genOperations ecoreOperation="FunctionModel.ecore#//Function/hasNoDuplicateEquations">
-        <genParameters ecoreParameter="FunctionModel.ecore#//Function/hasNoDuplicateEquations/diagnostics"/>
-        <genParameters ecoreParameter="FunctionModel.ecore#//Function/hasNoDuplicateEquations/context"/>
+      <genOperations ecoreOperation="FunctionModel.ecore#//FunctionDescriptor/hasNoDuplicateEquations">
+        <genParameters ecoreParameter="FunctionModel.ecore#//FunctionDescriptor/hasNoDuplicateEquations/diagnostics"/>
+        <genParameters ecoreParameter="FunctionModel.ecore#//FunctionDescriptor/hasNoDuplicateEquations/context"/>
       </genOperations>
-      <genOperations ecoreOperation="FunctionModel.ecore#//Function/hasNoCyclicEquations">
-        <genParameters ecoreParameter="FunctionModel.ecore#//Function/hasNoCyclicEquations/diagnostics"/>
-        <genParameters ecoreParameter="FunctionModel.ecore#//Function/hasNoCyclicEquations/context"/>
+      <genOperations ecoreOperation="FunctionModel.ecore#//FunctionDescriptor/hasNoCyclicEquations">
+        <genParameters ecoreParameter="FunctionModel.ecore#//FunctionDescriptor/hasNoCyclicEquations/diagnostics"/>
+        <genParameters ecoreParameter="FunctionModel.ecore#//FunctionDescriptor/hasNoCyclicEquations/context"/>
       </genOperations>
-      <genOperations ecoreOperation="FunctionModel.ecore#//Function/hasEquationsForEachOutput">
-        <genParameters ecoreParameter="FunctionModel.ecore#//Function/hasEquationsForEachOutput/diagnostics"/>
-        <genParameters ecoreParameter="FunctionModel.ecore#//Function/hasEquationsForEachOutput/context"/>
+      <genOperations ecoreOperation="FunctionModel.ecore#//FunctionDescriptor/hasEquationsForEachOutput">
+        <genParameters ecoreParameter="FunctionModel.ecore#//FunctionDescriptor/hasEquationsForEachOutput/diagnostics"/>
+        <genParameters ecoreParameter="FunctionModel.ecore#//FunctionDescriptor/hasEquationsForEachOutput/context"/>
       </genOperations>
-      <genOperations ecoreOperation="FunctionModel.ecore#//Function/hasEquationsForEachVariableStep">
-        <genParameters ecoreParameter="FunctionModel.ecore#//Function/hasEquationsForEachVariableStep/diagnostics"/>
-        <genParameters ecoreParameter="FunctionModel.ecore#//Function/hasEquationsForEachVariableStep/context"/>
+      <genOperations ecoreOperation="FunctionModel.ecore#//FunctionDescriptor/hasEquationsForEachVariableStep">
+        <genParameters ecoreParameter="FunctionModel.ecore#//FunctionDescriptor/hasEquationsForEachVariableStep/diagnostics"/>
+        <genParameters ecoreParameter="FunctionModel.ecore#//FunctionDescriptor/hasEquationsForEachVariableStep/context"/>
       </genOperations>
     </genClasses>
     <genClasses ecoreClass="FunctionModel.ecore#//EquationDescriptor">
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FunctionModel.ecore#//EquationDescriptor/function"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference FunctionModel.ecore#//EquationDescriptor/functionDescriptor"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FunctionModel.ecore#//EquationDescriptor/equation"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FunctionModel.ecore#//EquationDescriptor/sides"/>
       <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference FunctionModel.ecore#//EquationDescriptor/leftHandSide"/>
