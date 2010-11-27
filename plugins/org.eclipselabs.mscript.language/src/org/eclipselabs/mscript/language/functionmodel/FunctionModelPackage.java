@@ -61,14 +61,14 @@ public interface FunctionModelPackage extends EPackage {
 	FunctionModelPackage eINSTANCE = org.eclipselabs.mscript.language.functionmodel.impl.FunctionModelPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link org.eclipselabs.mscript.language.functionmodel.impl.FunctionImpl <em>Function</em>}' class.
+	 * The meta object id for the '{@link org.eclipselabs.mscript.language.functionmodel.impl.FunctionDescriptorImpl <em>Function Descriptor</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipselabs.mscript.language.functionmodel.impl.FunctionImpl
-	 * @see org.eclipselabs.mscript.language.functionmodel.impl.FunctionModelPackageImpl#getFunction()
+	 * @see org.eclipselabs.mscript.language.functionmodel.impl.FunctionDescriptorImpl
+	 * @see org.eclipselabs.mscript.language.functionmodel.impl.FunctionModelPackageImpl#getFunctionDescriptor()
 	 * @generated
 	 */
-	int FUNCTION = 0;
+	int FUNCTION_DESCRIPTOR = 0;
 
 	/**
 	 * The feature id for the '<em><b>Definition</b></em>' reference.
@@ -77,7 +77,7 @@ public interface FunctionModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FUNCTION__DEFINITION = 0;
+	int FUNCTION_DESCRIPTOR__DEFINITION = 0;
 
 	/**
 	 * The feature id for the '<em><b>Equation Descriptors</b></em>' containment reference list.
@@ -86,7 +86,7 @@ public interface FunctionModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FUNCTION__EQUATION_DESCRIPTORS = 1;
+	int FUNCTION_DESCRIPTOR__EQUATION_DESCRIPTORS = 1;
 
 	/**
 	 * The feature id for the '<em><b>Variable Descriptors</b></em>' containment reference list.
@@ -95,16 +95,16 @@ public interface FunctionModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FUNCTION__VARIABLE_DESCRIPTORS = 2;
+	int FUNCTION_DESCRIPTOR__VARIABLE_DESCRIPTORS = 2;
 
 	/**
-	 * The number of structural features of the '<em>Function</em>' class.
+	 * The number of structural features of the '<em>Function Descriptor</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FUNCTION_FEATURE_COUNT = 3;
+	int FUNCTION_DESCRIPTOR_FEATURE_COUNT = 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.language.functionmodel.impl.EquationDescriptorImpl <em>Equation Descriptor</em>}' class.
@@ -117,13 +117,13 @@ public interface FunctionModelPackage extends EPackage {
 	int EQUATION_DESCRIPTOR = 1;
 
 	/**
-	 * The feature id for the '<em><b>Function</b></em>' container reference.
+	 * The feature id for the '<em><b>Function Descriptor</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EQUATION_DESCRIPTOR__FUNCTION = 0;
+	int EQUATION_DESCRIPTOR__FUNCTION_DESCRIPTOR = 0;
 
 	/**
 	 * The feature id for the '<em><b>Equation</b></em>' reference.
@@ -383,47 +383,47 @@ public interface FunctionModelPackage extends EPackage {
 	int VARIABLE_KIND = 6;
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.functionmodel.Function <em>Function</em>}'.
+	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.functionmodel.FunctionDescriptor <em>Function Descriptor</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Function</em>'.
-	 * @see org.eclipselabs.mscript.language.functionmodel.Function
+	 * @return the meta object for class '<em>Function Descriptor</em>'.
+	 * @see org.eclipselabs.mscript.language.functionmodel.FunctionDescriptor
 	 * @generated
 	 */
-	EClass getFunction();
+	EClass getFunctionDescriptor();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipselabs.mscript.language.functionmodel.Function#getDefinition <em>Definition</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipselabs.mscript.language.functionmodel.FunctionDescriptor#getDefinition <em>Definition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Definition</em>'.
-	 * @see org.eclipselabs.mscript.language.functionmodel.Function#getDefinition()
-	 * @see #getFunction()
+	 * @see org.eclipselabs.mscript.language.functionmodel.FunctionDescriptor#getDefinition()
+	 * @see #getFunctionDescriptor()
 	 * @generated
 	 */
-	EReference getFunction_Definition();
+	EReference getFunctionDescriptor_Definition();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.functionmodel.Function#getEquationDescriptors <em>Equation Descriptors</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.functionmodel.FunctionDescriptor#getEquationDescriptors <em>Equation Descriptors</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Equation Descriptors</em>'.
-	 * @see org.eclipselabs.mscript.language.functionmodel.Function#getEquationDescriptors()
-	 * @see #getFunction()
+	 * @see org.eclipselabs.mscript.language.functionmodel.FunctionDescriptor#getEquationDescriptors()
+	 * @see #getFunctionDescriptor()
 	 * @generated
 	 */
-	EReference getFunction_EquationDescriptors();
+	EReference getFunctionDescriptor_EquationDescriptors();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.functionmodel.Function#getVariableDescriptors <em>Variable Descriptors</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.functionmodel.FunctionDescriptor#getVariableDescriptors <em>Variable Descriptors</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Variable Descriptors</em>'.
-	 * @see org.eclipselabs.mscript.language.functionmodel.Function#getVariableDescriptors()
-	 * @see #getFunction()
+	 * @see org.eclipselabs.mscript.language.functionmodel.FunctionDescriptor#getVariableDescriptors()
+	 * @see #getFunctionDescriptor()
 	 * @generated
 	 */
-	EReference getFunction_VariableDescriptors();
+	EReference getFunctionDescriptor_VariableDescriptors();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.functionmodel.EquationDescriptor <em>Equation Descriptor</em>}'.
@@ -436,15 +436,15 @@ public interface FunctionModelPackage extends EPackage {
 	EClass getEquationDescriptor();
 
 	/**
-	 * Returns the meta object for the container reference '{@link org.eclipselabs.mscript.language.functionmodel.EquationDescriptor#getFunction <em>Function</em>}'.
+	 * Returns the meta object for the container reference '{@link org.eclipselabs.mscript.language.functionmodel.EquationDescriptor#getFunctionDescriptor <em>Function Descriptor</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Function</em>'.
-	 * @see org.eclipselabs.mscript.language.functionmodel.EquationDescriptor#getFunction()
+	 * @return the meta object for the container reference '<em>Function Descriptor</em>'.
+	 * @see org.eclipselabs.mscript.language.functionmodel.EquationDescriptor#getFunctionDescriptor()
 	 * @see #getEquationDescriptor()
 	 * @generated
 	 */
-	EReference getEquationDescriptor_Function();
+	EReference getEquationDescriptor_FunctionDescriptor();
 
 	/**
 	 * Returns the meta object for the reference '{@link org.eclipselabs.mscript.language.functionmodel.EquationDescriptor#getEquation <em>Equation</em>}'.
@@ -717,14 +717,14 @@ public interface FunctionModelPackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.functionmodel.impl.FunctionImpl <em>Function</em>}' class.
+		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.functionmodel.impl.FunctionDescriptorImpl <em>Function Descriptor</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipselabs.mscript.language.functionmodel.impl.FunctionImpl
-		 * @see org.eclipselabs.mscript.language.functionmodel.impl.FunctionModelPackageImpl#getFunction()
+		 * @see org.eclipselabs.mscript.language.functionmodel.impl.FunctionDescriptorImpl
+		 * @see org.eclipselabs.mscript.language.functionmodel.impl.FunctionModelPackageImpl#getFunctionDescriptor()
 		 * @generated
 		 */
-		EClass FUNCTION = eINSTANCE.getFunction();
+		EClass FUNCTION_DESCRIPTOR = eINSTANCE.getFunctionDescriptor();
 
 		/**
 		 * The meta object literal for the '<em><b>Definition</b></em>' reference feature.
@@ -732,7 +732,7 @@ public interface FunctionModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference FUNCTION__DEFINITION = eINSTANCE.getFunction_Definition();
+		EReference FUNCTION_DESCRIPTOR__DEFINITION = eINSTANCE.getFunctionDescriptor_Definition();
 
 		/**
 		 * The meta object literal for the '<em><b>Equation Descriptors</b></em>' containment reference list feature.
@@ -740,7 +740,7 @@ public interface FunctionModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference FUNCTION__EQUATION_DESCRIPTORS = eINSTANCE.getFunction_EquationDescriptors();
+		EReference FUNCTION_DESCRIPTOR__EQUATION_DESCRIPTORS = eINSTANCE.getFunctionDescriptor_EquationDescriptors();
 
 		/**
 		 * The meta object literal for the '<em><b>Variable Descriptors</b></em>' containment reference list feature.
@@ -748,7 +748,7 @@ public interface FunctionModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference FUNCTION__VARIABLE_DESCRIPTORS = eINSTANCE.getFunction_VariableDescriptors();
+		EReference FUNCTION_DESCRIPTOR__VARIABLE_DESCRIPTORS = eINSTANCE.getFunctionDescriptor_VariableDescriptors();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.functionmodel.impl.EquationDescriptorImpl <em>Equation Descriptor</em>}' class.
@@ -761,12 +761,12 @@ public interface FunctionModelPackage extends EPackage {
 		EClass EQUATION_DESCRIPTOR = eINSTANCE.getEquationDescriptor();
 
 		/**
-		 * The meta object literal for the '<em><b>Function</b></em>' container reference feature.
+		 * The meta object literal for the '<em><b>Function Descriptor</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference EQUATION_DESCRIPTOR__FUNCTION = eINSTANCE.getEquationDescriptor_Function();
+		EReference EQUATION_DESCRIPTOR__FUNCTION_DESCRIPTOR = eINSTANCE.getEquationDescriptor_FunctionDescriptor();
 
 		/**
 		 * The meta object literal for the '<em><b>Equation</b></em>' reference feature.

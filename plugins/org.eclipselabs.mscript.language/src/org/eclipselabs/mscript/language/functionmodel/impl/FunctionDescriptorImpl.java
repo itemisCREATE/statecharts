@@ -29,7 +29,7 @@ import org.eclipselabs.mscript.language.ast.FunctionDefinition;
 import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
 import org.eclipselabs.mscript.language.functionmodel.EquationDescriptor;
 import org.eclipselabs.mscript.language.functionmodel.EquationPart;
-import org.eclipselabs.mscript.language.functionmodel.Function;
+import org.eclipselabs.mscript.language.functionmodel.FunctionDescriptor;
 import org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage;
 import org.eclipselabs.mscript.language.functionmodel.VariableDescriptor;
 import org.eclipselabs.mscript.language.functionmodel.VariableStep;
@@ -43,15 +43,15 @@ import org.eclipselabs.mscript.language.internal.functionmodel.util.VariableDesc
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.FunctionImpl#getDefinition <em>Definition</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.FunctionImpl#getEquationDescriptors <em>Equation Descriptors</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.FunctionImpl#getVariableDescriptors <em>Variable Descriptors</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.FunctionDescriptorImpl#getDefinition <em>Definition</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.FunctionDescriptorImpl#getEquationDescriptors <em>Equation Descriptors</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.FunctionDescriptorImpl#getVariableDescriptors <em>Variable Descriptors</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class FunctionImpl extends EObjectImpl implements Function {
+public class FunctionDescriptorImpl extends EObjectImpl implements FunctionDescriptor {
 	/**
 	 * The cached value of the '{@link #getDefinition() <em>Definition</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -87,7 +87,7 @@ public class FunctionImpl extends EObjectImpl implements Function {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected FunctionImpl() {
+	protected FunctionDescriptorImpl() {
 		super();
 	}
 
@@ -98,7 +98,7 @@ public class FunctionImpl extends EObjectImpl implements Function {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return FunctionModelPackage.Literals.FUNCTION;
+		return FunctionModelPackage.Literals.FUNCTION_DESCRIPTOR;
 	}
 
 	/**
@@ -112,7 +112,7 @@ public class FunctionImpl extends EObjectImpl implements Function {
 			definition = (FunctionDefinition)eResolveProxy(oldDefinition);
 			if (definition != oldDefinition) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, FunctionModelPackage.FUNCTION__DEFINITION, oldDefinition, definition));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, FunctionModelPackage.FUNCTION_DESCRIPTOR__DEFINITION, oldDefinition, definition));
 			}
 		}
 		return definition;
@@ -136,7 +136,7 @@ public class FunctionImpl extends EObjectImpl implements Function {
 		FunctionDefinition oldDefinition = definition;
 		definition = newDefinition;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FunctionModelPackage.FUNCTION__DEFINITION, oldDefinition, definition));
+			eNotify(new ENotificationImpl(this, Notification.SET, FunctionModelPackage.FUNCTION_DESCRIPTOR__DEFINITION, oldDefinition, definition));
 	}
 
 	/**
@@ -146,7 +146,7 @@ public class FunctionImpl extends EObjectImpl implements Function {
 	 */
 	public EList<EquationDescriptor> getEquationDescriptors() {
 		if (equationDescriptors == null) {
-			equationDescriptors = new EObjectContainmentWithInverseEList<EquationDescriptor>(EquationDescriptor.class, this, FunctionModelPackage.FUNCTION__EQUATION_DESCRIPTORS, FunctionModelPackage.EQUATION_DESCRIPTOR__FUNCTION);
+			equationDescriptors = new EObjectContainmentWithInverseEList<EquationDescriptor>(EquationDescriptor.class, this, FunctionModelPackage.FUNCTION_DESCRIPTOR__EQUATION_DESCRIPTORS, FunctionModelPackage.EQUATION_DESCRIPTOR__FUNCTION_DESCRIPTOR);
 		}
 		return equationDescriptors;
 	}
@@ -158,7 +158,7 @@ public class FunctionImpl extends EObjectImpl implements Function {
 	 */
 	public EList<VariableDescriptor> getVariableDescriptors() {
 		if (variableDescriptors == null) {
-			variableDescriptors = new EObjectContainmentWithInverseEList<VariableDescriptor>(VariableDescriptor.class, this, FunctionModelPackage.FUNCTION__VARIABLE_DESCRIPTORS, FunctionModelPackage.VARIABLE_DESCRIPTOR__FUNCTION);
+			variableDescriptors = new EObjectContainmentWithInverseEList<VariableDescriptor>(VariableDescriptor.class, this, FunctionModelPackage.FUNCTION_DESCRIPTOR__VARIABLE_DESCRIPTORS, FunctionModelPackage.VARIABLE_DESCRIPTOR__FUNCTION);
 		}
 		return variableDescriptors;
 	}
@@ -206,13 +206,13 @@ public class FunctionImpl extends EObjectImpl implements Function {
 						if (result) {
 							diagnostics.add(new BasicDiagnostic(Diagnostic.ERROR,
 									FunctionModelValidator.DIAGNOSTIC_SOURCE,
-									FunctionModelValidator.FUNCTION__HAS_NO_DUPLICATE_EQUATIONS,
+									FunctionModelValidator.FUNCTION_DESCRIPTOR__HAS_NO_DUPLICATE_EQUATIONS,
 									message.toString(),
 									new Object[] { previousEquationPart.getFeatureCall() }));
 						}
 						diagnostics.add(new BasicDiagnostic(Diagnostic.ERROR,
 								FunctionModelValidator.DIAGNOSTIC_SOURCE,
-								FunctionModelValidator.FUNCTION__HAS_NO_DUPLICATE_EQUATIONS,
+								FunctionModelValidator.FUNCTION_DESCRIPTOR__HAS_NO_DUPLICATE_EQUATIONS,
 								message.toString(),
 								new Object[] { equationPart.getFeatureCall() }));
 					}
@@ -243,7 +243,7 @@ public class FunctionImpl extends EObjectImpl implements Function {
 						diagnostics.add(new BasicDiagnostic(
 								Diagnostic.ERROR,
 								FunctionModelValidator.DIAGNOSTIC_SOURCE,
-								FunctionModelValidator.FUNCTION__HAS_NO_CYCLIC_EQUATIONS,
+								FunctionModelValidator.FUNCTION_DESCRIPTOR__HAS_NO_CYCLIC_EQUATIONS,
 								message,
 								new Object[] { equationPart.getFeatureCall() }));
 					}
@@ -287,7 +287,7 @@ public class FunctionImpl extends EObjectImpl implements Function {
 					diagnostics.add(new BasicDiagnostic(
 							Diagnostic.ERROR,
 							FunctionModelValidator.DIAGNOSTIC_SOURCE,
-							FunctionModelValidator.FUNCTION__HAS_EQUATIONS_FOR_EACH_OUTPUT,
+							FunctionModelValidator.FUNCTION_DESCRIPTOR__HAS_EQUATIONS_FOR_EACH_OUTPUT,
 							"No equation specified for output '" + parameterDeclaration.getName() + "'",
 							new Object[] { parameterDeclaration }));
 				}
@@ -361,7 +361,7 @@ public class FunctionImpl extends EObjectImpl implements Function {
 			diagnostics.add(new BasicDiagnostic(
 					Diagnostic.ERROR,
 					FunctionModelValidator.DIAGNOSTIC_SOURCE,
-					FunctionModelValidator.FUNCTION__HAS_EQUATIONS_FOR_EACH_VARIABLE_STEP,
+					FunctionModelValidator.FUNCTION_DESCRIPTOR__HAS_EQUATIONS_FOR_EACH_VARIABLE_STEP,
 					message,
 					new Object[] { getDefinition(), AstPackage.FUNCTION_DEFINITION__NAME }));
 		}
@@ -395,7 +395,7 @@ public class FunctionImpl extends EObjectImpl implements Function {
 					diagnostics.add(new BasicDiagnostic(
 							Diagnostic.ERROR,
 							FunctionModelValidator.DIAGNOSTIC_SOURCE,
-							FunctionModelValidator.FUNCTION__HAS_EQUATIONS_FOR_EACH_VARIABLE_STEP,
+							FunctionModelValidator.FUNCTION_DESCRIPTOR__HAS_EQUATIONS_FOR_EACH_VARIABLE_STEP,
 							message,
 							new Object[] { getDefinition(), AstPackage.FUNCTION_DEFINITION__NAME }));
 				}
@@ -427,9 +427,9 @@ public class FunctionImpl extends EObjectImpl implements Function {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case FunctionModelPackage.FUNCTION__EQUATION_DESCRIPTORS:
+			case FunctionModelPackage.FUNCTION_DESCRIPTOR__EQUATION_DESCRIPTORS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getEquationDescriptors()).basicAdd(otherEnd, msgs);
-			case FunctionModelPackage.FUNCTION__VARIABLE_DESCRIPTORS:
+			case FunctionModelPackage.FUNCTION_DESCRIPTOR__VARIABLE_DESCRIPTORS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getVariableDescriptors()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -443,9 +443,9 @@ public class FunctionImpl extends EObjectImpl implements Function {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case FunctionModelPackage.FUNCTION__EQUATION_DESCRIPTORS:
+			case FunctionModelPackage.FUNCTION_DESCRIPTOR__EQUATION_DESCRIPTORS:
 				return ((InternalEList<?>)getEquationDescriptors()).basicRemove(otherEnd, msgs);
-			case FunctionModelPackage.FUNCTION__VARIABLE_DESCRIPTORS:
+			case FunctionModelPackage.FUNCTION_DESCRIPTOR__VARIABLE_DESCRIPTORS:
 				return ((InternalEList<?>)getVariableDescriptors()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -459,12 +459,12 @@ public class FunctionImpl extends EObjectImpl implements Function {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case FunctionModelPackage.FUNCTION__DEFINITION:
+			case FunctionModelPackage.FUNCTION_DESCRIPTOR__DEFINITION:
 				if (resolve) return getDefinition();
 				return basicGetDefinition();
-			case FunctionModelPackage.FUNCTION__EQUATION_DESCRIPTORS:
+			case FunctionModelPackage.FUNCTION_DESCRIPTOR__EQUATION_DESCRIPTORS:
 				return getEquationDescriptors();
-			case FunctionModelPackage.FUNCTION__VARIABLE_DESCRIPTORS:
+			case FunctionModelPackage.FUNCTION_DESCRIPTOR__VARIABLE_DESCRIPTORS:
 				return getVariableDescriptors();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -479,14 +479,14 @@ public class FunctionImpl extends EObjectImpl implements Function {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case FunctionModelPackage.FUNCTION__DEFINITION:
+			case FunctionModelPackage.FUNCTION_DESCRIPTOR__DEFINITION:
 				setDefinition((FunctionDefinition)newValue);
 				return;
-			case FunctionModelPackage.FUNCTION__EQUATION_DESCRIPTORS:
+			case FunctionModelPackage.FUNCTION_DESCRIPTOR__EQUATION_DESCRIPTORS:
 				getEquationDescriptors().clear();
 				getEquationDescriptors().addAll((Collection<? extends EquationDescriptor>)newValue);
 				return;
-			case FunctionModelPackage.FUNCTION__VARIABLE_DESCRIPTORS:
+			case FunctionModelPackage.FUNCTION_DESCRIPTOR__VARIABLE_DESCRIPTORS:
 				getVariableDescriptors().clear();
 				getVariableDescriptors().addAll((Collection<? extends VariableDescriptor>)newValue);
 				return;
@@ -502,13 +502,13 @@ public class FunctionImpl extends EObjectImpl implements Function {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case FunctionModelPackage.FUNCTION__DEFINITION:
+			case FunctionModelPackage.FUNCTION_DESCRIPTOR__DEFINITION:
 				setDefinition((FunctionDefinition)null);
 				return;
-			case FunctionModelPackage.FUNCTION__EQUATION_DESCRIPTORS:
+			case FunctionModelPackage.FUNCTION_DESCRIPTOR__EQUATION_DESCRIPTORS:
 				getEquationDescriptors().clear();
 				return;
-			case FunctionModelPackage.FUNCTION__VARIABLE_DESCRIPTORS:
+			case FunctionModelPackage.FUNCTION_DESCRIPTOR__VARIABLE_DESCRIPTORS:
 				getVariableDescriptors().clear();
 				return;
 		}
@@ -523,11 +523,11 @@ public class FunctionImpl extends EObjectImpl implements Function {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case FunctionModelPackage.FUNCTION__DEFINITION:
+			case FunctionModelPackage.FUNCTION_DESCRIPTOR__DEFINITION:
 				return definition != null;
-			case FunctionModelPackage.FUNCTION__EQUATION_DESCRIPTORS:
+			case FunctionModelPackage.FUNCTION_DESCRIPTOR__EQUATION_DESCRIPTORS:
 				return equationDescriptors != null && !equationDescriptors.isEmpty();
-			case FunctionModelPackage.FUNCTION__VARIABLE_DESCRIPTORS:
+			case FunctionModelPackage.FUNCTION_DESCRIPTOR__VARIABLE_DESCRIPTORS:
 				return variableDescriptors != null && !variableDescriptors.isEmpty();
 		}
 		return super.eIsSet(featureID);

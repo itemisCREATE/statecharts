@@ -25,7 +25,7 @@ import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
 import org.eclipselabs.mscript.language.ast.StateVariableDeclaration;
 import org.eclipselabs.mscript.language.functionmodel.EquationDescriptor;
 import org.eclipselabs.mscript.language.functionmodel.EquationPart;
-import org.eclipselabs.mscript.language.functionmodel.Function;
+import org.eclipselabs.mscript.language.functionmodel.FunctionDescriptor;
 import org.eclipselabs.mscript.language.functionmodel.VariableDescriptor;
 import org.eclipselabs.mscript.language.functionmodel.VariableKind;
 import org.eclipselabs.mscript.language.functionmodel.VariableStep;
@@ -49,14 +49,14 @@ import org.eclipselabs.mscript.typesystem.DataType;
  */
 public class ImperativeFunctionTransformer {
 	
-	public ImperativeFunction transform(Function function, List<DataType> templateParameterDataTypes, List<DataType> inputParameterDataTypes) {
+	public ImperativeFunction transform(FunctionDescriptor functionDescriptor, List<DataType> templateParameterDataTypes, List<DataType> inputParameterDataTypes) {
 		ImperativeFunction imperativeFunction = ImperativeModelFactory.eINSTANCE.createImperativeFunction();
 
 		Map<VariableDescriptor, VariableDeclaration> variableDeclarations = new HashMap<VariableDescriptor, VariableDeclaration>();
 		
-		initializeVariableDeclarations(imperativeFunction, function, templateParameterDataTypes, inputParameterDataTypes, variableDeclarations);
+		initializeVariableDeclarations(imperativeFunction, functionDescriptor, templateParameterDataTypes, inputParameterDataTypes, variableDeclarations);
 
-		Collection<List<EquationDescriptor>> equationCompounds = new EquationCompoundHelper().getEquationCompounds(function);
+		Collection<List<EquationDescriptor>> equationCompounds = new EquationCompoundHelper().getEquationCompounds(functionDescriptor);
 
 		constructInitializationCompound(imperativeFunction, equationCompounds, variableDeclarations);
 		constructComputationCompounds(imperativeFunction, equationCompounds, variableDeclarations);
@@ -64,15 +64,15 @@ public class ImperativeFunctionTransformer {
 		return imperativeFunction;
 	}
 	
-	private void initializeVariableDeclarations(ImperativeFunction imperativeFunction, Function function, List<DataType> templateParameterDataTypes, List<DataType> inputParameterDataTypes, Map<VariableDescriptor, VariableDeclaration> variableDeclarations) {
+	private void initializeVariableDeclarations(ImperativeFunction imperativeFunction, FunctionDescriptor functionDescriptor, List<DataType> templateParameterDataTypes, List<DataType> inputParameterDataTypes, Map<VariableDescriptor, VariableDeclaration> variableDeclarations) {
 		Iterator<DataType> dataTypeIterator = templateParameterDataTypes.iterator();
-		for (ParameterDeclaration parameterDeclaration : function.getDefinition().getTemplateParameterDeclarations()) {
+		for (ParameterDeclaration parameterDeclaration : functionDescriptor.getDefinition().getTemplateParameterDeclarations()) {
 			TemplateVariableDeclaration templateVariableDeclaration = ImperativeModelFactory.eINSTANCE.createTemplateVariableDeclaration();
 			templateVariableDeclaration.setName(parameterDeclaration.getName());
 			if (dataTypeIterator.hasNext()) {
 				templateVariableDeclaration.setType(EcoreUtil.copy(dataTypeIterator.next()));
 			}
-			VariableDescriptor variableDescriptor = function.getVariableDescriptor(parameterDeclaration.getName());
+			VariableDescriptor variableDescriptor = functionDescriptor.getVariableDescriptor(parameterDeclaration.getName());
 			if (variableDescriptor != null) {
 				variableDeclarations.put(variableDescriptor, templateVariableDeclaration);
 			}
@@ -80,13 +80,13 @@ public class ImperativeFunctionTransformer {
 		}
 
 		dataTypeIterator = inputParameterDataTypes.iterator();
-		for (ParameterDeclaration parameterDeclaration : function.getDefinition().getInputParameterDeclarations()) {
+		for (ParameterDeclaration parameterDeclaration : functionDescriptor.getDefinition().getInputParameterDeclarations()) {
 			InputVariableDeclaration inputVariableDeclaration = ImperativeModelFactory.eINSTANCE.createInputVariableDeclaration();
 			inputVariableDeclaration.setName(parameterDeclaration.getName());
 			if (dataTypeIterator.hasNext()) {
 				inputVariableDeclaration.setType(EcoreUtil.copy(dataTypeIterator.next()));
 			}
-			VariableDescriptor variableDescriptor = function.getVariableDescriptor(parameterDeclaration.getName());
+			VariableDescriptor variableDescriptor = functionDescriptor.getVariableDescriptor(parameterDeclaration.getName());
 			if (variableDescriptor != null) {
 				inputVariableDeclaration.setCircularBufferSize(variableDescriptor.getMaximumStep().getIndex() - variableDescriptor.getMinimumStep().getIndex() + 1);
 				variableDeclarations.put(variableDescriptor, inputVariableDeclaration);
@@ -94,10 +94,10 @@ public class ImperativeFunctionTransformer {
 			imperativeFunction.getInputVariableDeclarations().add(inputVariableDeclaration);
 		}
 		
-		for (ParameterDeclaration parameterDeclaration : function.getDefinition().getOutputParameterDeclarations()) {
+		for (ParameterDeclaration parameterDeclaration : functionDescriptor.getDefinition().getOutputParameterDeclarations()) {
 			OutputVariableDeclaration outputVariableDeclaration = ImperativeModelFactory.eINSTANCE.createOutputVariableDeclaration();
 			outputVariableDeclaration.setName(parameterDeclaration.getName());
-			VariableDescriptor variableDescriptor = function.getVariableDescriptor(parameterDeclaration.getName());
+			VariableDescriptor variableDescriptor = functionDescriptor.getVariableDescriptor(parameterDeclaration.getName());
 			if (variableDescriptor != null) {
 				outputVariableDeclaration.setCircularBufferSize(variableDescriptor.getMaximumStep().getIndex() - variableDescriptor.getMinimumStep().getIndex() + 1);
 				variableDeclarations.put(variableDescriptor, outputVariableDeclaration);
@@ -105,10 +105,10 @@ public class ImperativeFunctionTransformer {
 			imperativeFunction.getOutputVariableDeclarations().add(outputVariableDeclaration);
 		}
 
-		for (StateVariableDeclaration stateVariableDeclaration : function.getDefinition().getStateVariableDeclarations()) {
+		for (StateVariableDeclaration stateVariableDeclaration : functionDescriptor.getDefinition().getStateVariableDeclarations()) {
 			InstanceVariableDeclaration instanceVariableDeclaration = ImperativeModelFactory.eINSTANCE.createInstanceVariableDeclaration();
 			instanceVariableDeclaration.setName(stateVariableDeclaration.getName());
-			VariableDescriptor variableDescriptor = function.getVariableDescriptor(stateVariableDeclaration.getName());
+			VariableDescriptor variableDescriptor = functionDescriptor.getVariableDescriptor(stateVariableDeclaration.getName());
 			if (variableDescriptor != null) {
 				instanceVariableDeclaration.setCircularBufferSize(variableDescriptor.getMaximumStep().getIndex() - variableDescriptor.getMinimumStep().getIndex() + 1);
 				variableDeclarations.put(variableDescriptor, instanceVariableDeclaration);

@@ -19,7 +19,7 @@ import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.functionmodel.EquationDescriptor;
 import org.eclipselabs.mscript.language.functionmodel.EquationPart;
 import org.eclipselabs.mscript.language.functionmodel.EquationSide;
-import org.eclipselabs.mscript.language.functionmodel.Function;
+import org.eclipselabs.mscript.language.functionmodel.FunctionDescriptor;
 import org.eclipselabs.mscript.language.functionmodel.FunctionModelFactory;
 import org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage;
 import org.eclipselabs.mscript.language.functionmodel.VariableDescriptor;
@@ -39,7 +39,7 @@ public class FunctionModelPackageImpl extends EPackageImpl implements FunctionMo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass functionEClass = null;
+	private EClass functionDescriptorEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -161,8 +161,8 @@ public class FunctionModelPackageImpl extends EPackageImpl implements FunctionMo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getFunction() {
-		return functionEClass;
+	public EClass getFunctionDescriptor() {
+		return functionDescriptorEClass;
 	}
 
 	/**
@@ -170,8 +170,8 @@ public class FunctionModelPackageImpl extends EPackageImpl implements FunctionMo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getFunction_Definition() {
-		return (EReference)functionEClass.getEStructuralFeatures().get(0);
+	public EReference getFunctionDescriptor_Definition() {
+		return (EReference)functionDescriptorEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -179,8 +179,8 @@ public class FunctionModelPackageImpl extends EPackageImpl implements FunctionMo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getFunction_EquationDescriptors() {
-		return (EReference)functionEClass.getEStructuralFeatures().get(1);
+	public EReference getFunctionDescriptor_EquationDescriptors() {
+		return (EReference)functionDescriptorEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -188,8 +188,8 @@ public class FunctionModelPackageImpl extends EPackageImpl implements FunctionMo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getFunction_VariableDescriptors() {
-		return (EReference)functionEClass.getEStructuralFeatures().get(2);
+	public EReference getFunctionDescriptor_VariableDescriptors() {
+		return (EReference)functionDescriptorEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -206,7 +206,7 @@ public class FunctionModelPackageImpl extends EPackageImpl implements FunctionMo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEquationDescriptor_Function() {
+	public EReference getEquationDescriptor_FunctionDescriptor() {
 		return (EReference)equationDescriptorEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -445,13 +445,13 @@ public class FunctionModelPackageImpl extends EPackageImpl implements FunctionMo
 		isCreated = true;
 
 		// Create classes and their features
-		functionEClass = createEClass(FUNCTION);
-		createEReference(functionEClass, FUNCTION__DEFINITION);
-		createEReference(functionEClass, FUNCTION__EQUATION_DESCRIPTORS);
-		createEReference(functionEClass, FUNCTION__VARIABLE_DESCRIPTORS);
+		functionDescriptorEClass = createEClass(FUNCTION_DESCRIPTOR);
+		createEReference(functionDescriptorEClass, FUNCTION_DESCRIPTOR__DEFINITION);
+		createEReference(functionDescriptorEClass, FUNCTION_DESCRIPTOR__EQUATION_DESCRIPTORS);
+		createEReference(functionDescriptorEClass, FUNCTION_DESCRIPTOR__VARIABLE_DESCRIPTORS);
 
 		equationDescriptorEClass = createEClass(EQUATION_DESCRIPTOR);
-		createEReference(equationDescriptorEClass, EQUATION_DESCRIPTOR__FUNCTION);
+		createEReference(equationDescriptorEClass, EQUATION_DESCRIPTOR__FUNCTION_DESCRIPTOR);
 		createEReference(equationDescriptorEClass, EQUATION_DESCRIPTOR__EQUATION);
 		createEReference(equationDescriptorEClass, EQUATION_DESCRIPTOR__SIDES);
 		createEReference(equationDescriptorEClass, EQUATION_DESCRIPTOR__LEFT_HAND_SIDE);
@@ -516,15 +516,15 @@ public class FunctionModelPackageImpl extends EPackageImpl implements FunctionMo
 		// Add supertypes to classes
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(functionEClass, Function.class, "Function", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getFunction_Definition(), theAstPackage.getFunctionDefinition(), null, "definition", null, 1, 1, Function.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getFunction_EquationDescriptors(), this.getEquationDescriptor(), this.getEquationDescriptor_Function(), "equationDescriptors", null, 0, -1, Function.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getFunction_VariableDescriptors(), this.getVariableDescriptor(), this.getVariableDescriptor_Function(), "variableDescriptors", null, 0, -1, Function.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(functionDescriptorEClass, FunctionDescriptor.class, "FunctionDescriptor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getFunctionDescriptor_Definition(), theAstPackage.getFunctionDefinition(), null, "definition", null, 1, 1, FunctionDescriptor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFunctionDescriptor_EquationDescriptors(), this.getEquationDescriptor(), this.getEquationDescriptor_FunctionDescriptor(), "equationDescriptors", null, 0, -1, FunctionDescriptor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFunctionDescriptor_VariableDescriptors(), this.getVariableDescriptor(), this.getVariableDescriptor_Function(), "variableDescriptors", null, 0, -1, FunctionDescriptor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		EOperation op = addEOperation(functionEClass, this.getVariableDescriptor(), "getVariableDescriptor", 0, 1, IS_UNIQUE, IS_ORDERED);
+		EOperation op = addEOperation(functionDescriptorEClass, this.getVariableDescriptor(), "getVariableDescriptor", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "name", 1, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(functionEClass, ecorePackage.getEBoolean(), "hasNoDuplicateEquations", 1, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(functionDescriptorEClass, ecorePackage.getEBoolean(), "hasNoDuplicateEquations", 1, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
 		EGenericType g1 = createEGenericType(ecorePackage.getEMap());
 		EGenericType g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -533,7 +533,7 @@ public class FunctionModelPackageImpl extends EPackageImpl implements FunctionMo
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(functionEClass, ecorePackage.getEBoolean(), "hasNoCyclicEquations", 1, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(functionDescriptorEClass, ecorePackage.getEBoolean(), "hasNoCyclicEquations", 1, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -542,7 +542,7 @@ public class FunctionModelPackageImpl extends EPackageImpl implements FunctionMo
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(functionEClass, ecorePackage.getEBoolean(), "hasEquationsForEachOutput", 1, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(functionDescriptorEClass, ecorePackage.getEBoolean(), "hasEquationsForEachOutput", 1, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -551,7 +551,7 @@ public class FunctionModelPackageImpl extends EPackageImpl implements FunctionMo
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(functionEClass, ecorePackage.getEBoolean(), "hasEquationsForEachVariableStep", 1, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(functionDescriptorEClass, ecorePackage.getEBoolean(), "hasEquationsForEachVariableStep", 1, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(ecorePackage.getEMap());
 		g2 = createEGenericType(ecorePackage.getEJavaObject());
@@ -561,7 +561,7 @@ public class FunctionModelPackageImpl extends EPackageImpl implements FunctionMo
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(equationDescriptorEClass, EquationDescriptor.class, "EquationDescriptor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getEquationDescriptor_Function(), this.getFunction(), this.getFunction_EquationDescriptors(), "function", null, 1, 1, EquationDescriptor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEquationDescriptor_FunctionDescriptor(), this.getFunctionDescriptor(), this.getFunctionDescriptor_EquationDescriptors(), "functionDescriptor", null, 1, 1, EquationDescriptor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEquationDescriptor_Equation(), theAstPackage.getEquation(), null, "equation", null, 1, 1, EquationDescriptor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEquationDescriptor_Sides(), this.getEquationSide(), this.getEquationSide_Descriptor(), "sides", null, 2, 2, EquationDescriptor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEquationDescriptor_LeftHandSide(), this.getEquationSide(), null, "leftHandSide", null, 1, 1, EquationDescriptor.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
@@ -598,7 +598,7 @@ public class FunctionModelPackageImpl extends EPackageImpl implements FunctionMo
 		initEReference(getEquationPart_VariableStep(), this.getVariableStep(), this.getVariableStep_UsingEquationParts(), "variableStep", null, 1, 1, EquationPart.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(variableDescriptorEClass, VariableDescriptor.class, "VariableDescriptor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getVariableDescriptor_Function(), this.getFunction(), this.getFunction_VariableDescriptors(), "function", null, 1, 1, VariableDescriptor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getVariableDescriptor_Function(), this.getFunctionDescriptor(), this.getFunctionDescriptor_VariableDescriptors(), "function", null, 1, 1, VariableDescriptor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getVariableDescriptor_Name(), ecorePackage.getEString(), "name", null, 0, 1, VariableDescriptor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getVariableDescriptor_Kind(), this.getVariableKind(), "kind", null, 0, 1, VariableDescriptor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getVariableDescriptor_Steps(), this.getVariableStep(), this.getVariableStep_Descriptor(), "steps", null, 0, -1, VariableDescriptor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

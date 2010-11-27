@@ -13,7 +13,7 @@ package org.eclipselabs.mscript.language.interpreter;
 
 import java.util.Collection;
 
-import org.eclipselabs.mscript.language.functionmodel.Function;
+import org.eclipselabs.mscript.language.functionmodel.FunctionDescriptor;
 import org.eclipselabs.mscript.language.interpreter.value.IValue;
 
 /**
@@ -22,7 +22,7 @@ import org.eclipselabs.mscript.language.interpreter.value.IValue;
  */
 public interface IFunctor {
 
-	Function getFunction();
+	FunctionDescriptor getDescriptorFunction();
 	
 	IValue getTemplateArgument(String name);
 

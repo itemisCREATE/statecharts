@@ -26,13 +26,13 @@ public interface FunctionModelFactory extends EFactory {
 	FunctionModelFactory eINSTANCE = org.eclipselabs.mscript.language.functionmodel.impl.FunctionModelFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Function</em>'.
+	 * Returns a new object of class '<em>Function Descriptor</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Function</em>'.
+	 * @return a new object of class '<em>Function Descriptor</em>'.
 	 * @generated
 	 */
-	Function createFunction();
+	FunctionDescriptor createFunctionDescriptor();
 
 	/**
 	 * Returns a new object of class '<em>Equation Descriptor</em>'.

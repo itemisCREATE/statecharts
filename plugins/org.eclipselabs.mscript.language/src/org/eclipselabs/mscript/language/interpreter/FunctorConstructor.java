@@ -20,9 +20,9 @@ import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
 import org.eclipselabs.mscript.language.ast.StateVariableDeclaration;
 import org.eclipselabs.mscript.language.functionmodel.EquationDescriptor;
 import org.eclipselabs.mscript.language.functionmodel.EquationPart;
-import org.eclipselabs.mscript.language.functionmodel.Function;
+import org.eclipselabs.mscript.language.functionmodel.FunctionDescriptor;
 import org.eclipselabs.mscript.language.functionmodel.VariableStep;
-import org.eclipselabs.mscript.language.functionmodel.util.FunctionConstructor;
+import org.eclipselabs.mscript.language.functionmodel.util.FunctionDescriptorConstructor;
 import org.eclipselabs.mscript.language.interpreter.value.IValue;
 
 /**
@@ -43,11 +43,11 @@ public class FunctorConstructor {
 			++i;
 		}
 		
-		Function function = new FunctionConstructor().construct(functionDefinition, context.getDiagnostics());
+		FunctionDescriptor functionDescriptor = new FunctionDescriptorConstructor().construct(functionDefinition, context.getDiagnostics());
 
 		Functor functor = new Functor();
 		functor.setTemplateArguments(templateArgumentMap);
-		functor.setFunction(function);
+		functor.setFunction(functionDescriptor);
 
 		context.setFunctor(functor);
 		createVariables(context, functor);
@@ -58,17 +58,17 @@ public class FunctorConstructor {
 	}
 	
 	protected void createVariables(IInterpreterContext context, IFunctor functor) {
-		for (ParameterDeclaration parameterDeclaration : functor.getFunction().getDefinition().getInputParameterDeclarations()) {
+		for (ParameterDeclaration parameterDeclaration : functor.getDescriptorFunction().getDefinition().getInputParameterDeclarations()) {
 			functor.addVariable(new Variable(parameterDeclaration.getName()));
 		}
-		for (ParameterDeclaration parameterDeclaration : functor.getFunction().getDefinition().getOutputParameterDeclarations()) {
+		for (ParameterDeclaration parameterDeclaration : functor.getDescriptorFunction().getDefinition().getOutputParameterDeclarations()) {
 			functor.addVariable(new Variable(parameterDeclaration.getName()));
 		}
-		for (StateVariableDeclaration variableDeclaration : functor.getFunction().getDefinition().getStateVariableDeclarations()) {
+		for (StateVariableDeclaration variableDeclaration : functor.getDescriptorFunction().getDefinition().getStateVariableDeclarations()) {
 			functor.addVariable(new Variable(variableDeclaration.getName()));
 		}
 		
-		for (EquationDescriptor equationDescriptor : functor.getFunction().getEquationDescriptors()) {
+		for (EquationDescriptor equationDescriptor : functor.getDescriptorFunction().getEquationDescriptors()) {
 			for (EquationPart equationPart : equationDescriptor.getLeftHandSide().getParts()) {
 				String name = equationPart.getVariableStep().getDescriptor().getName();
 				IVariable variable = functor.getVariable(name);
@@ -85,7 +85,7 @@ public class FunctorConstructor {
 			}
 		}
 
-		for (EquationDescriptor equationDescriptor : functor.getFunction().getEquationDescriptors()) {
+		for (EquationDescriptor equationDescriptor : functor.getDescriptorFunction().getEquationDescriptors()) {
 			if (!equationDescriptor.getLeftHandSide().getParts().isEmpty()) {
 				VariableStep variableStep = equationDescriptor.getLeftHandSide().getParts().get(0).getVariableStep();
 				if (variableStep.isInitial()) {

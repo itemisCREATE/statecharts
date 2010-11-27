@@ -29,7 +29,7 @@ import org.eclipselabs.mscript.language.ast.FeatureCall;
 import org.eclipselabs.mscript.language.functionmodel.EquationDescriptor;
 import org.eclipselabs.mscript.language.functionmodel.EquationPart;
 import org.eclipselabs.mscript.language.functionmodel.EquationSide;
-import org.eclipselabs.mscript.language.functionmodel.Function;
+import org.eclipselabs.mscript.language.functionmodel.FunctionDescriptor;
 import org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage;
 import org.eclipselabs.mscript.language.functionmodel.util.FunctionModelValidator;
 
@@ -40,7 +40,7 @@ import org.eclipselabs.mscript.language.functionmodel.util.FunctionModelValidato
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.EquationDescriptorImpl#getFunction <em>Function</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.EquationDescriptorImpl#getFunctionDescriptor <em>Function Descriptor</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.EquationDescriptorImpl#getEquation <em>Equation</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.EquationDescriptorImpl#getSides <em>Sides</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.EquationDescriptorImpl#getLeftHandSide <em>Left Hand Side</em>}</li>
@@ -95,9 +95,9 @@ public class EquationDescriptorImpl extends EObjectImpl implements EquationDescr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Function getFunction() {
-		if (eContainerFeatureID() != FunctionModelPackage.EQUATION_DESCRIPTOR__FUNCTION) return null;
-		return (Function)eContainer();
+	public FunctionDescriptor getFunctionDescriptor() {
+		if (eContainerFeatureID() != FunctionModelPackage.EQUATION_DESCRIPTOR__FUNCTION_DESCRIPTOR) return null;
+		return (FunctionDescriptor)eContainer();
 	}
 
 	/**
@@ -105,8 +105,8 @@ public class EquationDescriptorImpl extends EObjectImpl implements EquationDescr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetFunction(Function newFunction, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newFunction, FunctionModelPackage.EQUATION_DESCRIPTOR__FUNCTION, msgs);
+	public NotificationChain basicSetFunctionDescriptor(FunctionDescriptor newFunctionDescriptor, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newFunctionDescriptor, FunctionModelPackage.EQUATION_DESCRIPTOR__FUNCTION_DESCRIPTOR, msgs);
 		return msgs;
 	}
 
@@ -115,20 +115,20 @@ public class EquationDescriptorImpl extends EObjectImpl implements EquationDescr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setFunction(Function newFunction) {
-		if (newFunction != eInternalContainer() || (eContainerFeatureID() != FunctionModelPackage.EQUATION_DESCRIPTOR__FUNCTION && newFunction != null)) {
-			if (EcoreUtil.isAncestor(this, newFunction))
+	public void setFunctionDescriptor(FunctionDescriptor newFunctionDescriptor) {
+		if (newFunctionDescriptor != eInternalContainer() || (eContainerFeatureID() != FunctionModelPackage.EQUATION_DESCRIPTOR__FUNCTION_DESCRIPTOR && newFunctionDescriptor != null)) {
+			if (EcoreUtil.isAncestor(this, newFunctionDescriptor))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
-			if (newFunction != null)
-				msgs = ((InternalEObject)newFunction).eInverseAdd(this, FunctionModelPackage.FUNCTION__EQUATION_DESCRIPTORS, Function.class, msgs);
-			msgs = basicSetFunction(newFunction, msgs);
+			if (newFunctionDescriptor != null)
+				msgs = ((InternalEObject)newFunctionDescriptor).eInverseAdd(this, FunctionModelPackage.FUNCTION_DESCRIPTOR__EQUATION_DESCRIPTORS, FunctionDescriptor.class, msgs);
+			msgs = basicSetFunctionDescriptor(newFunctionDescriptor, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FunctionModelPackage.EQUATION_DESCRIPTOR__FUNCTION, newFunction, newFunction));
+			eNotify(new ENotificationImpl(this, Notification.SET, FunctionModelPackage.EQUATION_DESCRIPTOR__FUNCTION_DESCRIPTOR, newFunctionDescriptor, newFunctionDescriptor));
 	}
 
 	/**
@@ -299,10 +299,10 @@ public class EquationDescriptorImpl extends EObjectImpl implements EquationDescr
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case FunctionModelPackage.EQUATION_DESCRIPTOR__FUNCTION:
+			case FunctionModelPackage.EQUATION_DESCRIPTOR__FUNCTION_DESCRIPTOR:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetFunction((Function)otherEnd, msgs);
+				return basicSetFunctionDescriptor((FunctionDescriptor)otherEnd, msgs);
 			case FunctionModelPackage.EQUATION_DESCRIPTOR__SIDES:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getSides()).basicAdd(otherEnd, msgs);
 		}
@@ -317,8 +317,8 @@ public class EquationDescriptorImpl extends EObjectImpl implements EquationDescr
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case FunctionModelPackage.EQUATION_DESCRIPTOR__FUNCTION:
-				return basicSetFunction(null, msgs);
+			case FunctionModelPackage.EQUATION_DESCRIPTOR__FUNCTION_DESCRIPTOR:
+				return basicSetFunctionDescriptor(null, msgs);
 			case FunctionModelPackage.EQUATION_DESCRIPTOR__SIDES:
 				return ((InternalEList<?>)getSides()).basicRemove(otherEnd, msgs);
 		}
@@ -333,8 +333,8 @@ public class EquationDescriptorImpl extends EObjectImpl implements EquationDescr
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case FunctionModelPackage.EQUATION_DESCRIPTOR__FUNCTION:
-				return eInternalContainer().eInverseRemove(this, FunctionModelPackage.FUNCTION__EQUATION_DESCRIPTORS, Function.class, msgs);
+			case FunctionModelPackage.EQUATION_DESCRIPTOR__FUNCTION_DESCRIPTOR:
+				return eInternalContainer().eInverseRemove(this, FunctionModelPackage.FUNCTION_DESCRIPTOR__EQUATION_DESCRIPTORS, FunctionDescriptor.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -347,8 +347,8 @@ public class EquationDescriptorImpl extends EObjectImpl implements EquationDescr
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case FunctionModelPackage.EQUATION_DESCRIPTOR__FUNCTION:
-				return getFunction();
+			case FunctionModelPackage.EQUATION_DESCRIPTOR__FUNCTION_DESCRIPTOR:
+				return getFunctionDescriptor();
 			case FunctionModelPackage.EQUATION_DESCRIPTOR__EQUATION:
 				if (resolve) return getEquation();
 				return basicGetEquation();
@@ -373,8 +373,8 @@ public class EquationDescriptorImpl extends EObjectImpl implements EquationDescr
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case FunctionModelPackage.EQUATION_DESCRIPTOR__FUNCTION:
-				setFunction((Function)newValue);
+			case FunctionModelPackage.EQUATION_DESCRIPTOR__FUNCTION_DESCRIPTOR:
+				setFunctionDescriptor((FunctionDescriptor)newValue);
 				return;
 			case FunctionModelPackage.EQUATION_DESCRIPTOR__EQUATION:
 				setEquation((Equation)newValue);
@@ -395,8 +395,8 @@ public class EquationDescriptorImpl extends EObjectImpl implements EquationDescr
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case FunctionModelPackage.EQUATION_DESCRIPTOR__FUNCTION:
-				setFunction((Function)null);
+			case FunctionModelPackage.EQUATION_DESCRIPTOR__FUNCTION_DESCRIPTOR:
+				setFunctionDescriptor((FunctionDescriptor)null);
 				return;
 			case FunctionModelPackage.EQUATION_DESCRIPTOR__EQUATION:
 				setEquation((Equation)null);
@@ -416,8 +416,8 @@ public class EquationDescriptorImpl extends EObjectImpl implements EquationDescr
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case FunctionModelPackage.EQUATION_DESCRIPTOR__FUNCTION:
-				return getFunction() != null;
+			case FunctionModelPackage.EQUATION_DESCRIPTOR__FUNCTION_DESCRIPTOR:
+				return getFunctionDescriptor() != null;
 			case FunctionModelPackage.EQUATION_DESCRIPTOR__EQUATION:
 				return equation != null;
 			case FunctionModelPackage.EQUATION_DESCRIPTOR__SIDES:

@@ -13,8 +13,8 @@ import org.eclipselabs.mscript.language.ast.EndExpression;
 import org.eclipselabs.mscript.language.ast.FunctionDefinition;
 import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
 import org.eclipselabs.mscript.language.ast.UnitExpressionNumerator;
-import org.eclipselabs.mscript.language.functionmodel.Function;
-import org.eclipselabs.mscript.language.functionmodel.util.FunctionConstructor;
+import org.eclipselabs.mscript.language.functionmodel.FunctionDescriptor;
+import org.eclipselabs.mscript.language.functionmodel.util.FunctionDescriptorConstructor;
 import org.eclipselabs.mscript.language.imperativemodel.Compound;
 import org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction;
 import org.eclipselabs.mscript.language.imperativemodel.util.ImperativeFunctionTransformer;
@@ -58,7 +58,7 @@ public class MscriptJavaValidator extends AbstractMscriptJavaValidator {
 	
 	@Check
 	public void checkFunctionDefinition(FunctionDefinition functionDefinition) {
-		Function function = new FunctionConstructor().construct(functionDefinition, getChain());
+		FunctionDescriptor functionDescriptor = new FunctionDescriptorConstructor().construct(functionDefinition, getChain());
 		
 		List<DataType> templateParameterDataTypes = new ArrayList<DataType>();
 		for (ParameterDeclaration parameterDeclaration : functionDefinition.getTemplateParameterDeclarations()) {
@@ -74,7 +74,7 @@ public class MscriptJavaValidator extends AbstractMscriptJavaValidator {
 			inputParameterDataTypes.add(realType);
 			parameterDeclaration.getName();
 		}
-		ImperativeFunction imperativeFunction = new ImperativeFunctionTransformer().transform(function, templateParameterDataTypes, inputParameterDataTypes);
+		ImperativeFunction imperativeFunction = new ImperativeFunctionTransformer().transform(functionDescriptor, templateParameterDataTypes, inputParameterDataTypes);
 
 		System.out.println("### " + functionDefinition.getName());
 		System.out.println("--- Initialize compound:");

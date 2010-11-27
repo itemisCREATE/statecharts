@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipselabs.mscript.language.functionmodel.EquationDescriptor;
 import org.eclipselabs.mscript.language.functionmodel.EquationPart;
 import org.eclipselabs.mscript.language.functionmodel.EquationSide;
-import org.eclipselabs.mscript.language.functionmodel.Function;
+import org.eclipselabs.mscript.language.functionmodel.FunctionDescriptor;
 import org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage;
 import org.eclipselabs.mscript.language.functionmodel.VariableDescriptor;
 import org.eclipselabs.mscript.language.functionmodel.VariableStep;
@@ -75,8 +75,8 @@ public class FunctionModelAdapterFactory extends AdapterFactoryImpl {
 	protected FunctionModelSwitch<Adapter> modelSwitch =
 		new FunctionModelSwitch<Adapter>() {
 			@Override
-			public Adapter caseFunction(Function object) {
-				return createFunctionAdapter();
+			public Adapter caseFunctionDescriptor(FunctionDescriptor object) {
+				return createFunctionDescriptorAdapter();
 			}
 			@Override
 			public Adapter caseEquationDescriptor(EquationDescriptor object) {
@@ -119,16 +119,16 @@ public class FunctionModelAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.functionmodel.Function <em>Function</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.functionmodel.FunctionDescriptor <em>Function Descriptor</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.language.functionmodel.Function
+	 * @see org.eclipselabs.mscript.language.functionmodel.FunctionDescriptor
 	 * @generated
 	 */
-	public Adapter createFunctionAdapter() {
+	public Adapter createFunctionDescriptorAdapter() {
 		return null;
 	}
 

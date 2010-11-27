@@ -21,7 +21,7 @@ import org.eclipselabs.mscript.language.ast.Equation;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.functionmodel.EquationDescriptor#getFunction <em>Function</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.functionmodel.EquationDescriptor#getFunctionDescriptor <em>Function Descriptor</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.functionmodel.EquationDescriptor#getEquation <em>Equation</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.functionmodel.EquationDescriptor#getSides <em>Sides</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.functionmodel.EquationDescriptor#getLeftHandSide <em>Left Hand Side</em>}</li>
@@ -35,32 +35,32 @@ import org.eclipselabs.mscript.language.ast.Equation;
  */
 public interface EquationDescriptor extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Function</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipselabs.mscript.language.functionmodel.Function#getEquationDescriptors <em>Equation Descriptors</em>}'.
+	 * Returns the value of the '<em><b>Function Descriptor</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipselabs.mscript.language.functionmodel.FunctionDescriptor#getEquationDescriptors <em>Equation Descriptors</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Function</em>' container reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Function</em>' container reference.
-	 * @see #setFunction(Function)
-	 * @see org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage#getEquationDescriptor_Function()
-	 * @see org.eclipselabs.mscript.language.functionmodel.Function#getEquationDescriptors
+	 * @return the value of the '<em>Function Descriptor</em>' container reference.
+	 * @see #setFunctionDescriptor(FunctionDescriptor)
+	 * @see org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage#getEquationDescriptor_FunctionDescriptor()
+	 * @see org.eclipselabs.mscript.language.functionmodel.FunctionDescriptor#getEquationDescriptors
 	 * @model opposite="equationDescriptors" required="true" transient="false"
 	 * @generated
 	 */
-	Function getFunction();
+	FunctionDescriptor getFunctionDescriptor();
 
 	/**
-	 * Sets the value of the '{@link org.eclipselabs.mscript.language.functionmodel.EquationDescriptor#getFunction <em>Function</em>}' container reference.
+	 * Sets the value of the '{@link org.eclipselabs.mscript.language.functionmodel.EquationDescriptor#getFunctionDescriptor <em>Function Descriptor</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Function</em>' container reference.
-	 * @see #getFunction()
+	 * @param value the new value of the '<em>Function Descriptor</em>' container reference.
+	 * @see #getFunctionDescriptor()
 	 * @generated
 	 */
-	void setFunction(Function value);
+	void setFunctionDescriptor(FunctionDescriptor value);
 
 	/**
 	 * Returns the value of the '<em><b>Equation</b></em>' reference.

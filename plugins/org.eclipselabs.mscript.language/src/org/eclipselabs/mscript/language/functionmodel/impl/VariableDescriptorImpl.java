@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipselabs.mscript.language.functionmodel.Function;
+import org.eclipselabs.mscript.language.functionmodel.FunctionDescriptor;
 import org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage;
 import org.eclipselabs.mscript.language.functionmodel.VariableDescriptor;
 import org.eclipselabs.mscript.language.functionmodel.VariableKind;
@@ -115,9 +115,9 @@ public class VariableDescriptorImpl extends EObjectImpl implements VariableDescr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Function getFunction() {
+	public FunctionDescriptor getFunction() {
 		if (eContainerFeatureID() != FunctionModelPackage.VARIABLE_DESCRIPTOR__FUNCTION) return null;
-		return (Function)eContainer();
+		return (FunctionDescriptor)eContainer();
 	}
 
 	/**
@@ -125,7 +125,7 @@ public class VariableDescriptorImpl extends EObjectImpl implements VariableDescr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetFunction(Function newFunction, NotificationChain msgs) {
+	public NotificationChain basicSetFunction(FunctionDescriptor newFunction, NotificationChain msgs) {
 		msgs = eBasicSetContainer((InternalEObject)newFunction, FunctionModelPackage.VARIABLE_DESCRIPTOR__FUNCTION, msgs);
 		return msgs;
 	}
@@ -135,7 +135,7 @@ public class VariableDescriptorImpl extends EObjectImpl implements VariableDescr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setFunction(Function newFunction) {
+	public void setFunction(FunctionDescriptor newFunction) {
 		if (newFunction != eInternalContainer() || (eContainerFeatureID() != FunctionModelPackage.VARIABLE_DESCRIPTOR__FUNCTION && newFunction != null)) {
 			if (EcoreUtil.isAncestor(this, newFunction))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
@@ -143,7 +143,7 @@ public class VariableDescriptorImpl extends EObjectImpl implements VariableDescr
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newFunction != null)
-				msgs = ((InternalEObject)newFunction).eInverseAdd(this, FunctionModelPackage.FUNCTION__VARIABLE_DESCRIPTORS, Function.class, msgs);
+				msgs = ((InternalEObject)newFunction).eInverseAdd(this, FunctionModelPackage.FUNCTION_DESCRIPTOR__VARIABLE_DESCRIPTORS, FunctionDescriptor.class, msgs);
 			msgs = basicSetFunction(newFunction, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -261,7 +261,7 @@ public class VariableDescriptorImpl extends EObjectImpl implements VariableDescr
 			case FunctionModelPackage.VARIABLE_DESCRIPTOR__FUNCTION:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetFunction((Function)otherEnd, msgs);
+				return basicSetFunction((FunctionDescriptor)otherEnd, msgs);
 			case FunctionModelPackage.VARIABLE_DESCRIPTOR__STEPS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getSteps()).basicAdd(otherEnd, msgs);
 		}
@@ -293,7 +293,7 @@ public class VariableDescriptorImpl extends EObjectImpl implements VariableDescr
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
 			case FunctionModelPackage.VARIABLE_DESCRIPTOR__FUNCTION:
-				return eInternalContainer().eInverseRemove(this, FunctionModelPackage.FUNCTION__VARIABLE_DESCRIPTORS, Function.class, msgs);
+				return eInternalContainer().eInverseRemove(this, FunctionModelPackage.FUNCTION_DESCRIPTOR__VARIABLE_DESCRIPTORS, FunctionDescriptor.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -328,7 +328,7 @@ public class VariableDescriptorImpl extends EObjectImpl implements VariableDescr
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case FunctionModelPackage.VARIABLE_DESCRIPTOR__FUNCTION:
-				setFunction((Function)newValue);
+				setFunction((FunctionDescriptor)newValue);
 				return;
 			case FunctionModelPackage.VARIABLE_DESCRIPTOR__NAME:
 				setName((String)newValue);
@@ -353,7 +353,7 @@ public class VariableDescriptorImpl extends EObjectImpl implements VariableDescr
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case FunctionModelPackage.VARIABLE_DESCRIPTOR__FUNCTION:
-				setFunction((Function)null);
+				setFunction((FunctionDescriptor)null);
 				return;
 			case FunctionModelPackage.VARIABLE_DESCRIPTOR__NAME:
 				setName(NAME_EDEFAULT);

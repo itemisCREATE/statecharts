@@ -21,7 +21,7 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipselabs.mscript.language.functionmodel.EquationDescriptor;
 import org.eclipselabs.mscript.language.functionmodel.EquationPart;
-import org.eclipselabs.mscript.language.functionmodel.Function;
+import org.eclipselabs.mscript.language.functionmodel.FunctionDescriptor;
 import org.eclipselabs.mscript.language.functionmodel.VariableDescriptor;
 import org.eclipselabs.mscript.language.functionmodel.VariableStep;
 
@@ -51,8 +51,8 @@ public class FunctionModelUtil {
 		return null;
 	}
 
-	public static EquationDescriptor getDefiningEquation(Function function, String variableName, int stepIndex, boolean initial) {
-		VariableDescriptor variableDescriptor = function.getVariableDescriptor(variableName);
+	public static EquationDescriptor getDefiningEquation(FunctionDescriptor functionDescriptor, String variableName, int stepIndex, boolean initial) {
+		VariableDescriptor variableDescriptor = functionDescriptor.getVariableDescriptor(variableName);
 		if (variableDescriptor != null) {
 			VariableStep variableStep = variableDescriptor.getStep(stepIndex, initial);
 			if (variableStep != null) {
@@ -62,8 +62,8 @@ public class FunctionModelUtil {
 		return null;
 	}
 
-	public static TreeIterator<EquationDescriptor> getDefiningEquations(Function function, String variableName, int stepIndex, boolean initial) {
-		EquationDescriptor root = getDefiningEquation(function, variableName, stepIndex, initial);
+	public static TreeIterator<EquationDescriptor> getDefiningEquations(FunctionDescriptor functionDescriptor, String variableName, int stepIndex, boolean initial) {
+		EquationDescriptor root = getDefiningEquation(functionDescriptor, variableName, stepIndex, initial);
 		if (root != null) {
 			return new EquationIterator(root);
 		}

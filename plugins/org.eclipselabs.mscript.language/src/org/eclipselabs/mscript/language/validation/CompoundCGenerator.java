@@ -29,6 +29,7 @@ import org.eclipselabs.mscript.language.ast.UnaryExpression;
 import org.eclipselabs.mscript.language.ast.util.AstSwitch;
 import org.eclipselabs.mscript.language.imperativemodel.Assignment;
 import org.eclipselabs.mscript.language.imperativemodel.Compound;
+import org.eclipselabs.mscript.language.imperativemodel.ForeachStatement;
 import org.eclipselabs.mscript.language.imperativemodel.IfStatement;
 import org.eclipselabs.mscript.language.imperativemodel.LocalVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.StatefulVariableDeclaration;
@@ -114,6 +115,24 @@ class CompoundCGenerator extends ImperativeModelSwitch<String> {
 		sb.append(doSwitch(ifStatement.getThenStatement()));
 		sb.append("else\n");
 		sb.append(doSwitch(ifStatement.getElseStatement()));
+		return sb.toString();
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.language.imperativemodel.util.ImperativeModelSwitch#caseForeachStatement(org.eclipselabs.mscript.language.imperativemodel.ForeachStatement)
+	 */
+	@Override
+	public String caseForeachStatement(ForeachStatement foreachStatement) {
+		StringBuilder sb = new StringBuilder();
+		VariableDeclaration iterationVariableDeclaration = foreachStatement.getIterationVariableDeclaration(); 
+		sb.append("for (int i = 0; i < 10; ++i) {\n"); // TODO
+		sb.append(dataTypeToString(iterationVariableDeclaration.getType()));
+		sb.append(" ");
+		sb.append(iterationVariableDeclaration.getName());
+		sb.append(" = 0"); // TODO
+		sb.append(";\n");
+		sb.append(doSwitch(foreachStatement.getBody()));
+		sb.append("}\n");
 		return sb.toString();
 	}
 	

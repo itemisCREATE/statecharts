@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipselabs.mscript.language.functionmodel.EquationDescriptor;
 import org.eclipselabs.mscript.language.functionmodel.EquationPart;
 import org.eclipselabs.mscript.language.functionmodel.EquationSide;
-import org.eclipselabs.mscript.language.functionmodel.Function;
+import org.eclipselabs.mscript.language.functionmodel.FunctionDescriptor;
 import org.eclipselabs.mscript.language.functionmodel.FunctionModelFactory;
 import org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage;
 import org.eclipselabs.mscript.language.functionmodel.VariableDescriptor;
@@ -66,7 +66,7 @@ public class FunctionModelFactoryImpl extends EFactoryImpl implements FunctionMo
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case FunctionModelPackage.FUNCTION: return createFunction();
+			case FunctionModelPackage.FUNCTION_DESCRIPTOR: return createFunctionDescriptor();
 			case FunctionModelPackage.EQUATION_DESCRIPTOR: return createEquationDescriptor();
 			case FunctionModelPackage.EQUATION_SIDE: return createEquationSide();
 			case FunctionModelPackage.EQUATION_PART: return createEquationPart();
@@ -112,9 +112,9 @@ public class FunctionModelFactoryImpl extends EFactoryImpl implements FunctionMo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Function createFunction() {
-		FunctionImpl function = new FunctionImpl();
-		return function;
+	public FunctionDescriptor createFunctionDescriptor() {
+		FunctionDescriptorImpl functionDescriptor = new FunctionDescriptorImpl();
+		return functionDescriptor;
 	}
 
 	/**

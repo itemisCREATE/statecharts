@@ -35,7 +35,7 @@ import org.eclipselabs.mscript.language.ast.util.AstSwitch;
 import org.eclipselabs.mscript.language.functionmodel.EquationDescriptor;
 import org.eclipselabs.mscript.language.functionmodel.EquationPart;
 import org.eclipselabs.mscript.language.functionmodel.EquationSide;
-import org.eclipselabs.mscript.language.functionmodel.Function;
+import org.eclipselabs.mscript.language.functionmodel.FunctionDescriptor;
 import org.eclipselabs.mscript.language.functionmodel.FunctionModelFactory;
 import org.eclipselabs.mscript.language.functionmodel.VariableDescriptor;
 import org.eclipselabs.mscript.language.functionmodel.VariableKind;
@@ -49,17 +49,17 @@ import org.eclipselabs.mscript.language.internal.util.TreeIterator;
  * @author Andreas Unger
  *
  */
-public class FunctionConstructor {
+public class FunctionDescriptorConstructor {
 
-	public Function construct(FunctionDefinition functionDefinition, DiagnosticChain diagnostics) {
+	public FunctionDescriptor construct(FunctionDefinition functionDefinition, DiagnosticChain diagnostics) {
 		validate(functionDefinition, diagnostics);
 		
-		Function function = FunctionModelFactory.eINSTANCE.createFunction();
-		function.setDefinition(functionDefinition);
+		FunctionDescriptor functionDescriptor = FunctionModelFactory.eINSTANCE.createFunctionDescriptor();
+		functionDescriptor.setDefinition(functionDefinition);
 
 		for (Equation equation : functionDefinition.getEquations()) {
 			EquationDescriptor equationDescriptor = FunctionModelFactory.eINSTANCE.createEquationDescriptor();
-			equationDescriptor.setFunction(function);
+			equationDescriptor.setFunctionDescriptor(functionDescriptor);
 			equationDescriptor.setEquation(equation);
 			
 			Expression lhsExpression = equation.getLeftHandSide();
@@ -75,11 +75,11 @@ public class FunctionConstructor {
 			new EquationSideInitializer(rhs, diagnostics).initialize();
 		}
 		
-		for (TreeIterator it = new TreeIterator(function, true); it.hasNext();) {
+		for (TreeIterator it = new TreeIterator(functionDescriptor, true); it.hasNext();) {
 			FunctionModelValidator.INSTANCE.validate(it.next(), diagnostics, new HashMap<Object, Object>());
 		}
 		
-		return function;
+		return functionDescriptor;
 	}
 	
 	protected boolean validate(FunctionDefinition functionDefinition, DiagnosticChain diagnostics) {
@@ -155,9 +155,9 @@ public class FunctionConstructor {
 					return true;
 				}
 				
-				Function function = equationSide.getDescriptor().getFunction();
+				FunctionDescriptor functionDescriptor = equationSide.getDescriptor().getFunctionDescriptor();
 				VariableKind variableKind = getVariableKind(
-						function.getDefinition(),
+						functionDescriptor.getDefinition(),
 						simpleName.getIdentifier());
 				
 				switch (variableKind) {
@@ -169,7 +169,7 @@ public class FunctionConstructor {
 				case INPUT_PARAMETER:
 				case OUTPUT_PARAMETER:
 				case STATE_VARIABLE:
-					if (!function.getDefinition().isStateful() && !featureCall.getParts().isEmpty() && featureCall.getParts().get(0) instanceof OperationCall) {
+					if (!functionDescriptor.getDefinition().isStateful() && !featureCall.getParts().isEmpty() && featureCall.getParts().get(0) instanceof OperationCall) {
 						diagnostics.add(new EObjectDiagnostic(Diagnostic.ERROR, "Variable references of stateless functions must not specify step expressions", featureCall));
 					}
 					break;
@@ -201,10 +201,10 @@ public class FunctionConstructor {
 					EquationPart part = FunctionModelFactory.eINSTANCE.createEquationPart();
 					part.setSide(equationSide);
 					part.setFeatureCall(featureCall);
-					VariableDescriptor variableDescriptor = function.getVariableDescriptor(simpleName.getIdentifier());
+					VariableDescriptor variableDescriptor = functionDescriptor.getVariableDescriptor(simpleName.getIdentifier());
 					if (variableDescriptor == null) {
 						variableDescriptor = FunctionModelFactory.eINSTANCE.createVariableDescriptor();
-						variableDescriptor.setFunction(function);
+						variableDescriptor.setFunction(functionDescriptor);
 						variableDescriptor.setName(simpleName.getIdentifier());
 						variableDescriptor.setKind(variableKind);
 					}

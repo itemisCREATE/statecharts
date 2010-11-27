@@ -31,7 +31,7 @@ import org.eclipse.emf.ecore.EObject;
 public interface VariableDescriptor extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Function</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipselabs.mscript.language.functionmodel.Function#getVariableDescriptors <em>Variable Descriptors</em>}'.
+	 * It is bidirectional and its opposite is '{@link org.eclipselabs.mscript.language.functionmodel.FunctionDescriptor#getVariableDescriptors <em>Variable Descriptors</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Function</em>' container reference isn't clear,
@@ -39,13 +39,13 @@ public interface VariableDescriptor extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Function</em>' container reference.
-	 * @see #setFunction(Function)
+	 * @see #setFunction(FunctionDescriptor)
 	 * @see org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage#getVariableDescriptor_Function()
-	 * @see org.eclipselabs.mscript.language.functionmodel.Function#getVariableDescriptors
+	 * @see org.eclipselabs.mscript.language.functionmodel.FunctionDescriptor#getVariableDescriptors
 	 * @model opposite="variableDescriptors" required="true" transient="false"
 	 * @generated
 	 */
-	Function getFunction();
+	FunctionDescriptor getFunction();
 
 	/**
 	 * Sets the value of the '{@link org.eclipselabs.mscript.language.functionmodel.VariableDescriptor#getFunction <em>Function</em>}' container reference.
@@ -55,7 +55,7 @@ public interface VariableDescriptor extends EObject {
 	 * @see #getFunction()
 	 * @generated
 	 */
-	void setFunction(Function value);
+	void setFunction(FunctionDescriptor value);
 
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.

@@ -20,7 +20,7 @@ import java.util.ListIterator;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipselabs.mscript.language.functionmodel.EquationDescriptor;
-import org.eclipselabs.mscript.language.functionmodel.Function;
+import org.eclipselabs.mscript.language.functionmodel.FunctionDescriptor;
 import org.eclipselabs.mscript.language.internal.functionmodel.util.FunctionModelUtil.EquationIterator;
 
 /**
@@ -31,8 +31,8 @@ public class EquationCompoundHelper {
 
 	private static final EquationComparator EQUATION_COMPARATOR = new EquationComparator();
 
-	public Collection<List<EquationDescriptor>> getEquationCompounds(Function function) {
-		List<EquationDescriptor> backlog = new LinkedList<EquationDescriptor>(function.getEquationDescriptors());
+	public Collection<List<EquationDescriptor>> getEquationCompounds(FunctionDescriptor functionDescriptor) {
+		List<EquationDescriptor> backlog = new LinkedList<EquationDescriptor>(functionDescriptor.getEquationDescriptors());
 		Collection<List<EquationDescriptor>> equationCompounds = new LinkedList<List<EquationDescriptor>>();
 		while (!backlog.isEmpty()) {
 			List<EquationDescriptor> equationDescriptors = getNextEquationBlock(backlog);

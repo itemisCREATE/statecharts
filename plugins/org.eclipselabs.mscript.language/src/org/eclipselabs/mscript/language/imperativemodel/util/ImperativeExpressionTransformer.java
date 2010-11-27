@@ -23,10 +23,12 @@ import org.eclipselabs.mscript.language.ast.AdditiveExpressionPart;
 import org.eclipselabs.mscript.language.ast.AstFactory;
 import org.eclipselabs.mscript.language.ast.BooleanLiteral;
 import org.eclipselabs.mscript.language.ast.Expression;
+import org.eclipselabs.mscript.language.ast.FeatureAccess;
 import org.eclipselabs.mscript.language.ast.FeatureCall;
 import org.eclipselabs.mscript.language.ast.FeatureCallPart;
 import org.eclipselabs.mscript.language.ast.IfExpression;
 import org.eclipselabs.mscript.language.ast.IntegerLiteral;
+import org.eclipselabs.mscript.language.ast.IterationCall;
 import org.eclipselabs.mscript.language.ast.LetExpression;
 import org.eclipselabs.mscript.language.ast.LetExpressionVariableDeclaration;
 import org.eclipselabs.mscript.language.ast.MultiplicativeExpression;
@@ -41,6 +43,7 @@ import org.eclipselabs.mscript.language.ast.util.AstSwitch;
 import org.eclipselabs.mscript.language.imperativemodel.Assignment;
 import org.eclipselabs.mscript.language.imperativemodel.Compound;
 import org.eclipselabs.mscript.language.imperativemodel.CompoundStatement;
+import org.eclipselabs.mscript.language.imperativemodel.ForeachStatement;
 import org.eclipselabs.mscript.language.imperativemodel.IfStatement;
 import org.eclipselabs.mscript.language.imperativemodel.ImperativeModelFactory;
 import org.eclipselabs.mscript.language.imperativemodel.LocalVariableDeclaration;
@@ -176,24 +179,88 @@ public class ImperativeExpressionTransformer extends AstSwitch<ExpressionDescrip
 	 */
 	@Override
 	public ExpressionDescriptor caseFeatureCall(FeatureCall featureCall) {
+		ExpressionDescriptor targetExpressionDescriptor;
+		ListIterator<FeatureCallPart> featureCallPartIterator = featureCall.getParts().listIterator();
 		if (featureCall.getTarget() instanceof SimpleName) {
 			SimpleName simpleName = (SimpleName) featureCall.getTarget();
-			VariableDeclaration variableDeclaration = scope.getVariableDeclaration(simpleName.getIdentifier());
-			if (variableDeclaration != null) {
-				ListIterator<FeatureCallPart> partIterator = featureCall.getParts().listIterator();
-				StepExpressionResult stepExpressionResult = new StepExpressionHelper().getStepExpression(partIterator, null);
-				if (stepExpressionResult != null) {
-					VariableReference variableReference = ImperativeModelFactory.eINSTANCE.createVariableReference();
-					variableReference.setDeclaration(variableDeclaration);
-					variableReference.setStepIndex(stepExpressionResult.getIndex());
-					if (variableDeclaration.getType() == null) {
-						throw new RuntimeException("Data type of variable declaration not set");
-					}
-					return new ExpressionDescriptor(variableReference, variableDeclaration.getType());
+			targetExpressionDescriptor = resolveSimpleName(simpleName, featureCallPartIterator);
+			if (targetExpressionDescriptor == null) {
+				// TODO: Is it a function call? Maybe full qualified?
+				throw new RuntimeException("Not yet implemented");
+			}
+		} else {
+			targetExpressionDescriptor = doSwitch(featureCall.getTarget());
+		}
+		if (featureCallPartIterator.hasNext()) {
+			// Check for iterators
+			FeatureCallPart featureCallPart = featureCallPartIterator.next();
+			if (!(featureCallPart instanceof FeatureAccess)) {
+				throw new RuntimeException("No idea what to do here");
+			}
+			FeatureAccess featureAccess = (FeatureAccess) featureCallPart;
+			if (!featureCallPartIterator.hasNext()) {
+				throw new RuntimeException("There should be more here");
+			}
+			featureCallPart = featureCallPartIterator.next();
+			if (!(featureCallPart instanceof IterationCall)) {
+				throw new RuntimeException("Must be operation call");
+			}
+			IterationCall iterationCall = (IterationCall) featureCallPart;
+			
+			LocalVariableDeclaration accumulatorDeclaration = ImperativeModelFactory.eINSTANCE.createLocalVariableDeclaration();
+			accumulatorDeclaration.setName(createLocalVariableName(iterationCall.getAccumulator().getName()));
+			scope.getCompound().getStatements().add(accumulatorDeclaration);
+			ForeachStatement foreachStatement = ImperativeModelFactory.eINSTANCE.createForeachStatement();
+			
+			LocalVariableDeclaration iterationVariableDeclaration = ImperativeModelFactory.eINSTANCE.createLocalVariableDeclaration();
+			iterationVariableDeclaration.setName(iterationCall.getVariables().get(0).getName());
+			// TODO: get collection element data type
+			IntegerType integerType = TypeSystemFactory.eINSTANCE.createIntegerType();
+			integerType.setUnit(TypeSystemUtil.createUnit());
+			iterationVariableDeclaration.setType(integerType);
+			// ------
+			ExpressionDescriptor initializerExpressionDescriptor = doSwitch(iterationCall.getAccumulator().getInitializer());
+			accumulatorDeclaration.setInitializer(initializerExpressionDescriptor.getExpression());
+			accumulatorDeclaration.setType(initializerExpressionDescriptor.getDataType());
+
+			foreachStatement.setIterationVariableDeclaration(iterationVariableDeclaration);
+			foreachStatement.setCollectionExpression(targetExpressionDescriptor.getExpression());
+
+			CompoundStatement body = ImperativeModelFactory.eINSTANCE.createCompoundStatement();
+			scope = new Scope(scope, body);
+			scope.addVariableDeclaration(accumulatorDeclaration);
+			scope.addVariableDeclaration(iterationVariableDeclaration);
+			transform(
+					iterationCall.getExpression(),
+					Collections.singletonList(new ImperativeExpressionTarget(accumulatorDeclaration, 0)));
+			scope = scope.getOuterScope();
+			foreachStatement.setBody(body);
+
+			scope.getCompound().getStatements().add(foreachStatement);
+			
+			VariableReference variableReference = ImperativeModelFactory.eINSTANCE.createVariableReference();
+			variableReference.setDeclaration(accumulatorDeclaration);
+			variableReference.setStepIndex(0);
+			return new ExpressionDescriptor(variableReference, accumulatorDeclaration.getType());
+		}
+		return targetExpressionDescriptor;
+	}
+	
+	private ExpressionDescriptor resolveSimpleName(SimpleName simpleName, ListIterator<FeatureCallPart> featureCallPartIterator) {
+		VariableDeclaration variableDeclaration = scope.getVariableDeclaration(simpleName.getIdentifier());
+		if (variableDeclaration != null) {
+			StepExpressionResult stepExpressionResult = new StepExpressionHelper().getStepExpression(featureCallPartIterator, null);
+			if (stepExpressionResult != null) {
+				VariableReference variableReference = ImperativeModelFactory.eINSTANCE.createVariableReference();
+				variableReference.setDeclaration(variableDeclaration);
+				variableReference.setStepIndex(stepExpressionResult.getIndex());
+				if (variableDeclaration.getType() == null) {
+					throw new RuntimeException("Data type of variable declaration not set");
 				}
+				return new ExpressionDescriptor(variableReference, variableDeclaration.getType());
 			}
 		}
-		return super.caseFeatureCall(featureCall);
+		return null;
 	}
 	
 	/* (non-Javadoc)

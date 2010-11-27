@@ -21,17 +21,17 @@ import org.eclipselabs.mscript.language.ast.FunctionDefinition;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.functionmodel.Function#getDefinition <em>Definition</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.functionmodel.Function#getEquationDescriptors <em>Equation Descriptors</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.functionmodel.Function#getVariableDescriptors <em>Variable Descriptors</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.functionmodel.FunctionDescriptor#getDefinition <em>Definition</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.functionmodel.FunctionDescriptor#getEquationDescriptors <em>Equation Descriptors</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.functionmodel.FunctionDescriptor#getVariableDescriptors <em>Variable Descriptors</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage#getFunction()
+ * @see org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage#getFunctionDescriptor()
  * @model
  * @generated
  */
-public interface Function extends EObject {
+public interface FunctionDescriptor extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Definition</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -42,14 +42,14 @@ public interface Function extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Definition</em>' reference.
 	 * @see #setDefinition(FunctionDefinition)
-	 * @see org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage#getFunction_Definition()
+	 * @see org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage#getFunctionDescriptor_Definition()
 	 * @model required="true"
 	 * @generated
 	 */
 	FunctionDefinition getDefinition();
 
 	/**
-	 * Sets the value of the '{@link org.eclipselabs.mscript.language.functionmodel.Function#getDefinition <em>Definition</em>}' reference.
+	 * Sets the value of the '{@link org.eclipselabs.mscript.language.functionmodel.FunctionDescriptor#getDefinition <em>Definition</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Definition</em>' reference.
@@ -61,7 +61,7 @@ public interface Function extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Equation Descriptors</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipselabs.mscript.language.functionmodel.EquationDescriptor}.
-	 * It is bidirectional and its opposite is '{@link org.eclipselabs.mscript.language.functionmodel.EquationDescriptor#getFunction <em>Function</em>}'.
+	 * It is bidirectional and its opposite is '{@link org.eclipselabs.mscript.language.functionmodel.EquationDescriptor#getFunctionDescriptor <em>Function Descriptor</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Equations</em>' containment reference list isn't clear,
@@ -69,9 +69,9 @@ public interface Function extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Equation Descriptors</em>' containment reference list.
-	 * @see org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage#getFunction_EquationDescriptors()
-	 * @see org.eclipselabs.mscript.language.functionmodel.EquationDescriptor#getFunction
-	 * @model opposite="function" containment="true"
+	 * @see org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage#getFunctionDescriptor_EquationDescriptors()
+	 * @see org.eclipselabs.mscript.language.functionmodel.EquationDescriptor#getFunctionDescriptor
+	 * @model opposite="functionDescriptor" containment="true"
 	 * @generated
 	 */
 	EList<EquationDescriptor> getEquationDescriptors();
@@ -87,7 +87,7 @@ public interface Function extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Variable Descriptors</em>' containment reference list.
-	 * @see org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage#getFunction_VariableDescriptors()
+	 * @see org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage#getFunctionDescriptor_VariableDescriptors()
 	 * @see org.eclipselabs.mscript.language.functionmodel.VariableDescriptor#getFunction
 	 * @model opposite="function" containment="true"
 	 * @generated

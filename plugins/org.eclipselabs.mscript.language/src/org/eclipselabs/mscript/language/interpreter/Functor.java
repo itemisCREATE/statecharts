@@ -16,7 +16,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.eclipselabs.mscript.language.functionmodel.Function;
+import org.eclipselabs.mscript.language.functionmodel.FunctionDescriptor;
 import org.eclipselabs.mscript.language.interpreter.value.IValue;
 
 /**
@@ -25,7 +25,7 @@ import org.eclipselabs.mscript.language.interpreter.value.IValue;
  */
 public class Functor implements IFunctor {
 
-	private Function function;
+	private FunctionDescriptor functionDescriptor;
 	private Map<String, IValue> templateArguments = new HashMap<String, IValue>();
 	private Map<String, IVariable> variables = new HashMap<String, IVariable>();
 	
@@ -34,15 +34,15 @@ public class Functor implements IFunctor {
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.language.interpreter.IFunctor#getFunctionDefinition()
 	 */
-	public Function getFunction() {
-		return function;
+	public FunctionDescriptor getDescriptorFunction() {
+		return functionDescriptor;
 	}
 	
 	/**
 	 * @param function the function to set
 	 */
-	public void setFunction(Function function) {
-		this.function = function;
+	public void setFunction(FunctionDescriptor functionDescriptor) {
+		this.functionDescriptor = functionDescriptor;
 	}
 	
 	public IValue getTemplateArgument(String name) {
