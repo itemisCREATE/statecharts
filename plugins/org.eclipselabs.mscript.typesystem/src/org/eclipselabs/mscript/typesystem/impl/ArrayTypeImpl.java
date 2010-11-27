@@ -159,7 +159,7 @@ public class ArrayTypeImpl extends DataTypeImpl implements ArrayType {
 	
 	public void setElementType(DataType newElementType) {
 		if (newElementType instanceof NumericType) {
-			throw new IllegalArgumentException("New element type must be NumericType");
+			throw new IllegalArgumentException("New element type must not be NumericType");
 		}
 		setElementTypeGen(newElementType);
 	}

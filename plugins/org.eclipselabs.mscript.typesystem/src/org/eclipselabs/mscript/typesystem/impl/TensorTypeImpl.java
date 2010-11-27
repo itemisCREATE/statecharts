@@ -122,7 +122,7 @@ public class TensorTypeImpl extends ArrayTypeImpl implements TensorType {
 
 	public void setElementType(DataType newElementType) {
 		if (!(newElementType instanceof NumericType)) {
-			throw new IllegalArgumentException("New element type must not be NumericType");
+			throw new IllegalArgumentException("New element type must be NumericType");
 		}
 		setElementTypeGen(newElementType);
 	}
