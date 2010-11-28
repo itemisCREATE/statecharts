@@ -135,6 +135,7 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
       case AstPackage.LOGICAL_AND_EXPRESSION: return createLogicalAndExpression();
       case AstPackage.EQUALITY_EXPRESSION: return createEqualityExpression();
       case AstPackage.RELATIONAL_EXPRESSION: return createRelationalExpression();
+      case AstPackage.TYPE_TEST_EXPRESSION: return createTypeTestExpression();
       case AstPackage.ADDITIVE_EXPRESSION: return createAdditiveExpression();
       case AstPackage.MULTIPLICATIVE_EXPRESSION: return createMultiplicativeExpression();
       case AstPackage.POWER_EXPRESSION: return createPowerExpression();
@@ -948,6 +949,17 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
   {
     RelationalExpressionImpl relationalExpression = new RelationalExpressionImpl();
     return relationalExpression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public TypeTestExpression createTypeTestExpression()
+  {
+    TypeTestExpressionImpl typeTestExpression = new TypeTestExpressionImpl();
+    return typeTestExpression;
   }
 
   /**

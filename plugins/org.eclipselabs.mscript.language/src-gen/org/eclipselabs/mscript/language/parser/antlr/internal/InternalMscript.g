@@ -3513,9 +3513,9 @@ ruleRelationalExpression returns [EObject current=null]
         $current = $this_AdditiveExpression_0.current; 
         currentNode = currentNode.getParent();
     }
-((
+(((
     { 
-        temp=factory.create(grammarAccess.getRelationalExpressionAccess().getRelationalExpressionLeftOperandAction_1_0().getType().getClassifier());
+        temp=factory.create(grammarAccess.getRelationalExpressionAccess().getRelationalExpressionLeftOperandAction_1_0_0().getType().getClassifier());
         try {
         	factory.set(temp, "leftOperand", $current, null /*ParserRule*/, currentNode);
         } catch(ValueConverterException vce) {
@@ -3523,64 +3523,18 @@ ruleRelationalExpression returns [EObject current=null]
         }
         $current = temp; 
         temp = null;
-        CompositeNode newNode = createCompositeNode(grammarAccess.getRelationalExpressionAccess().getRelationalExpressionLeftOperandAction_1_0(), currentNode.getParent());
+        CompositeNode newNode = createCompositeNode(grammarAccess.getRelationalExpressionAccess().getRelationalExpressionLeftOperandAction_1_0_0(), currentNode.getParent());
     newNode.getChildren().add(currentNode);
     moveLookaheadInfo(currentNode, newNode);
     currentNode = newNode; 
         associateNodeWithAstElement(currentNode, $current); 
     }
-)(((
-(
-		lv_typeTest_2_0=	'is' 
-    {
-        createLeafNode(grammarAccess.getRelationalExpressionAccess().getTypeTestIsKeyword_1_1_0_0_0(), "typeTest"); 
-    }
- 
-	    {
-	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getRelationalExpressionRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
-	        }
-	        
-	        try {
-	       		set($current, "typeTest", true, "is", lastConsumedNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	    }
-
-)
 )(
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getRelationalExpressionAccess().getTypeDataTypeSpecifierParserRuleCall_1_1_0_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getRelationalExpressionAccess().getOperatorRelationalOperatorEnumRuleCall_1_0_1_0(), currentNode); 
 	    }
-		lv_type_3_0=ruleDataTypeSpecifier		{
-	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getRelationalExpressionRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
-	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"type",
-	        		lv_type_3_0, 
-	        		"DataTypeSpecifier", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
-	    }
-
-)
-))
-    |((
-(
-		{ 
-	        currentNode=createCompositeNode(grammarAccess.getRelationalExpressionAccess().getOperatorRelationalOperatorEnumRuleCall_1_1_1_0_0(), currentNode); 
-	    }
-		lv_operator_4_0=ruleRelationalOperator		{
+		lv_operator_2_0=ruleRelationalOperator		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getRelationalExpressionRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -3589,7 +3543,7 @@ ruleRelationalExpression returns [EObject current=null]
 	       		set(
 	       			$current, 
 	       			"operator",
-	        		lv_operator_4_0, 
+	        		lv_operator_2_0, 
 	        		"RelationalOperator", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
@@ -3602,9 +3556,9 @@ ruleRelationalExpression returns [EObject current=null]
 )(
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getRelationalExpressionAccess().getRightOperandAdditiveExpressionParserRuleCall_1_1_1_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getRelationalExpressionAccess().getRightOperandAdditiveExpressionParserRuleCall_1_0_2_0(), currentNode); 
 	    }
-		lv_rightOperand_5_0=ruleAdditiveExpression		{
+		lv_rightOperand_3_0=ruleAdditiveExpression		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getRelationalExpressionRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -3613,7 +3567,7 @@ ruleRelationalExpression returns [EObject current=null]
 	       		set(
 	       			$current, 
 	       			"rightOperand",
-	        		lv_rightOperand_5_0, 
+	        		lv_rightOperand_3_0, 
 	        		"AdditiveExpression", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
@@ -3623,7 +3577,52 @@ ruleRelationalExpression returns [EObject current=null]
 	    }
 
 )
-))))?)
+))
+    |((
+    { 
+        temp=factory.create(grammarAccess.getRelationalExpressionAccess().getTypeTestExpressionExpressionAction_1_1_0().getType().getClassifier());
+        try {
+        	factory.set(temp, "expression", $current, null /*ParserRule*/, currentNode);
+        } catch(ValueConverterException vce) {
+        	handleValueConverterException(vce);
+        }
+        $current = temp; 
+        temp = null;
+        CompositeNode newNode = createCompositeNode(grammarAccess.getRelationalExpressionAccess().getTypeTestExpressionExpressionAction_1_1_0(), currentNode.getParent());
+    newNode.getChildren().add(currentNode);
+    moveLookaheadInfo(currentNode, newNode);
+    currentNode = newNode; 
+        associateNodeWithAstElement(currentNode, $current); 
+    }
+)	'is' 
+    {
+        createLeafNode(grammarAccess.getRelationalExpressionAccess().getIsKeyword_1_1_1(), null); 
+    }
+(
+(
+		{ 
+	        currentNode=createCompositeNode(grammarAccess.getRelationalExpressionAccess().getTypeDataTypeSpecifierParserRuleCall_1_1_2_0(), currentNode); 
+	    }
+		lv_type_6_0=ruleDataTypeSpecifier		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getRelationalExpressionRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        try {
+	       		set(
+	       			$current, 
+	       			"type",
+	        		lv_type_6_0, 
+	        		"DataTypeSpecifier", 
+	        		currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+
+)
+)))?)
 ;
 
 

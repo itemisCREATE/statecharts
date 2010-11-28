@@ -413,6 +413,11 @@ public class AstAdapterFactory extends AdapterFactoryImpl
         return createRelationalExpressionAdapter();
       }
       @Override
+      public Adapter caseTypeTestExpression(TypeTestExpression object)
+      {
+        return createTypeTestExpressionAdapter();
+      }
+      @Override
       public Adapter caseAdditiveExpression(AdditiveExpression object)
       {
         return createAdditiveExpressionAdapter();
@@ -1470,6 +1475,21 @@ public class AstAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createRelationalExpressionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.TypeTestExpression <em>Type Test Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipselabs.mscript.language.ast.TypeTestExpression
+   * @generated
+   */
+  public Adapter createTypeTestExpressionAdapter()
   {
     return null;
   }

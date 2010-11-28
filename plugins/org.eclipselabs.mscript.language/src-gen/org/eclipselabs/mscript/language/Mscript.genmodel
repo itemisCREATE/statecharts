@@ -261,10 +261,12 @@
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//RelationalExpression">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//RelationalExpression/leftOperand"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//RelationalExpression/typeTest"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//RelationalExpression/type"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//RelationalExpression/operator"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//RelationalExpression/rightOperand"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//TypeTestExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//TypeTestExpression/expression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//TypeTestExpression/type"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//AdditiveExpression">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//AdditiveExpression/leftOperand"/>

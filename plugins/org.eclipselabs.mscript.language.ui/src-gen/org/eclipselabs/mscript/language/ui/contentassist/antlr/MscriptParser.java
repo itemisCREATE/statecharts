@@ -45,7 +45,7 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getNumericTypeSpecifierAccess().getAlternatives(), "rule__NumericTypeSpecifier__Alternatives");
 					put(grammarAccess.getExpressionAccess().getAlternatives(), "rule__Expression__Alternatives");
 					put(grammarAccess.getLetExpressionVariableDeclarationAccess().getAlternatives_0(), "rule__LetExpressionVariableDeclaration__Alternatives_0");
-					put(grammarAccess.getRelationalExpressionAccess().getAlternatives_1_1(), "rule__RelationalExpression__Alternatives_1_1");
+					put(grammarAccess.getRelationalExpressionAccess().getAlternatives_1(), "rule__RelationalExpression__Alternatives_1");
 					put(grammarAccess.getUnaryExpressionAccess().getAlternatives(), "rule__UnaryExpression__Alternatives");
 					put(grammarAccess.getPrimaryExpressionAccess().getAlternatives(), "rule__PrimaryExpression__Alternatives");
 					put(grammarAccess.getCallablePrimaryExpressionAccess().getAlternatives(), "rule__CallablePrimaryExpression__Alternatives");
@@ -132,9 +132,8 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getEqualityExpressionAccess().getGroup(), "rule__EqualityExpression__Group__0");
 					put(grammarAccess.getEqualityExpressionAccess().getGroup_1(), "rule__EqualityExpression__Group_1__0");
 					put(grammarAccess.getRelationalExpressionAccess().getGroup(), "rule__RelationalExpression__Group__0");
-					put(grammarAccess.getRelationalExpressionAccess().getGroup_1(), "rule__RelationalExpression__Group_1__0");
-					put(grammarAccess.getRelationalExpressionAccess().getGroup_1_1_0(), "rule__RelationalExpression__Group_1_1_0__0");
-					put(grammarAccess.getRelationalExpressionAccess().getGroup_1_1_1(), "rule__RelationalExpression__Group_1_1_1__0");
+					put(grammarAccess.getRelationalExpressionAccess().getGroup_1_0(), "rule__RelationalExpression__Group_1_0__0");
+					put(grammarAccess.getRelationalExpressionAccess().getGroup_1_1(), "rule__RelationalExpression__Group_1_1__0");
 					put(grammarAccess.getAdditiveExpressionAccess().getGroup(), "rule__AdditiveExpression__Group__0");
 					put(grammarAccess.getAdditiveExpressionAccess().getGroup_1(), "rule__AdditiveExpression__Group_1__0");
 					put(grammarAccess.getAdditiveExpressionPartAccess().getGroup(), "rule__AdditiveExpressionPart__Group__0");
@@ -267,10 +266,9 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getLogicalAndExpressionAccess().getOperandsAssignment_1_1_1(), "rule__LogicalAndExpression__OperandsAssignment_1_1_1");
 					put(grammarAccess.getEqualityExpressionAccess().getOperatorAssignment_1_1(), "rule__EqualityExpression__OperatorAssignment_1_1");
 					put(grammarAccess.getEqualityExpressionAccess().getRightOperandAssignment_1_2(), "rule__EqualityExpression__RightOperandAssignment_1_2");
-					put(grammarAccess.getRelationalExpressionAccess().getTypeTestAssignment_1_1_0_0(), "rule__RelationalExpression__TypeTestAssignment_1_1_0_0");
-					put(grammarAccess.getRelationalExpressionAccess().getTypeAssignment_1_1_0_1(), "rule__RelationalExpression__TypeAssignment_1_1_0_1");
-					put(grammarAccess.getRelationalExpressionAccess().getOperatorAssignment_1_1_1_0(), "rule__RelationalExpression__OperatorAssignment_1_1_1_0");
-					put(grammarAccess.getRelationalExpressionAccess().getRightOperandAssignment_1_1_1_1(), "rule__RelationalExpression__RightOperandAssignment_1_1_1_1");
+					put(grammarAccess.getRelationalExpressionAccess().getOperatorAssignment_1_0_1(), "rule__RelationalExpression__OperatorAssignment_1_0_1");
+					put(grammarAccess.getRelationalExpressionAccess().getRightOperandAssignment_1_0_2(), "rule__RelationalExpression__RightOperandAssignment_1_0_2");
+					put(grammarAccess.getRelationalExpressionAccess().getTypeAssignment_1_1_2(), "rule__RelationalExpression__TypeAssignment_1_1_2");
 					put(grammarAccess.getAdditiveExpressionAccess().getRightPartsAssignment_1_1(), "rule__AdditiveExpression__RightPartsAssignment_1_1");
 					put(grammarAccess.getAdditiveExpressionPartAccess().getOperatorAssignment_0(), "rule__AdditiveExpressionPart__OperatorAssignment_0");
 					put(grammarAccess.getAdditiveExpressionPartAccess().getOperandAssignment_1(), "rule__AdditiveExpressionPart__OperandAssignment_1");

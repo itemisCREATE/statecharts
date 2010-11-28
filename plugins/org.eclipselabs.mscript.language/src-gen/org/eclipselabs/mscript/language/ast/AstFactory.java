@@ -629,6 +629,15 @@ public interface AstFactory extends EFactory
   RelationalExpression createRelationalExpression();
 
   /**
+   * Returns a new object of class '<em>Type Test Expression</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Type Test Expression</em>'.
+   * @generated
+   */
+  TypeTestExpression createTypeTestExpression();
+
+  /**
    * Returns a new object of class '<em>Additive Expression</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

@@ -1770,71 +1770,67 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "RelationalExpression");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cAdditiveExpressionParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
-		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
-		private final Action cRelationalExpressionLeftOperandAction_1_0 = (Action)cGroup_1.eContents().get(0);
-		private final Alternatives cAlternatives_1_1 = (Alternatives)cGroup_1.eContents().get(1);
-		private final Group cGroup_1_1_0 = (Group)cAlternatives_1_1.eContents().get(0);
-		private final Assignment cTypeTestAssignment_1_1_0_0 = (Assignment)cGroup_1_1_0.eContents().get(0);
-		private final Keyword cTypeTestIsKeyword_1_1_0_0_0 = (Keyword)cTypeTestAssignment_1_1_0_0.eContents().get(0);
-		private final Assignment cTypeAssignment_1_1_0_1 = (Assignment)cGroup_1_1_0.eContents().get(1);
-		private final RuleCall cTypeDataTypeSpecifierParserRuleCall_1_1_0_1_0 = (RuleCall)cTypeAssignment_1_1_0_1.eContents().get(0);
-		private final Group cGroup_1_1_1 = (Group)cAlternatives_1_1.eContents().get(1);
-		private final Assignment cOperatorAssignment_1_1_1_0 = (Assignment)cGroup_1_1_1.eContents().get(0);
-		private final RuleCall cOperatorRelationalOperatorEnumRuleCall_1_1_1_0_0 = (RuleCall)cOperatorAssignment_1_1_1_0.eContents().get(0);
-		private final Assignment cRightOperandAssignment_1_1_1_1 = (Assignment)cGroup_1_1_1.eContents().get(1);
-		private final RuleCall cRightOperandAdditiveExpressionParserRuleCall_1_1_1_1_0 = (RuleCall)cRightOperandAssignment_1_1_1_1.eContents().get(0);
+		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
+		private final Group cGroup_1_0 = (Group)cAlternatives_1.eContents().get(0);
+		private final Action cRelationalExpressionLeftOperandAction_1_0_0 = (Action)cGroup_1_0.eContents().get(0);
+		private final Assignment cOperatorAssignment_1_0_1 = (Assignment)cGroup_1_0.eContents().get(1);
+		private final RuleCall cOperatorRelationalOperatorEnumRuleCall_1_0_1_0 = (RuleCall)cOperatorAssignment_1_0_1.eContents().get(0);
+		private final Assignment cRightOperandAssignment_1_0_2 = (Assignment)cGroup_1_0.eContents().get(2);
+		private final RuleCall cRightOperandAdditiveExpressionParserRuleCall_1_0_2_0 = (RuleCall)cRightOperandAssignment_1_0_2.eContents().get(0);
+		private final Group cGroup_1_1 = (Group)cAlternatives_1.eContents().get(1);
+		private final Action cTypeTestExpressionExpressionAction_1_1_0 = (Action)cGroup_1_1.eContents().get(0);
+		private final Keyword cIsKeyword_1_1_1 = (Keyword)cGroup_1_1.eContents().get(1);
+		private final Assignment cTypeAssignment_1_1_2 = (Assignment)cGroup_1_1.eContents().get(2);
+		private final RuleCall cTypeDataTypeSpecifierParserRuleCall_1_1_2_0 = (RuleCall)cTypeAssignment_1_1_2.eContents().get(0);
 		
 		//RelationalExpression returns Expression:
-		//	AdditiveExpression ({RelationalExpression.leftOperand=current} (typeTest?="is" type=DataTypeSpecifier |
-		//	operator=RelationalOperator rightOperand=AdditiveExpression))?;
+		//	AdditiveExpression ({RelationalExpression.leftOperand=current} operator=RelationalOperator
+		//	rightOperand=AdditiveExpression | {TypeTestExpression.expression=current} "is" type=DataTypeSpecifier)?;
 		public ParserRule getRule() { return rule; }
 
-		//AdditiveExpression ({RelationalExpression.leftOperand=current} (typeTest?="is" type=DataTypeSpecifier |
-		//operator=RelationalOperator rightOperand=AdditiveExpression))?
+		//AdditiveExpression ({RelationalExpression.leftOperand=current} operator=RelationalOperator
+		//rightOperand=AdditiveExpression | {TypeTestExpression.expression=current} "is" type=DataTypeSpecifier)?
 		public Group getGroup() { return cGroup; }
 
 		//AdditiveExpression
 		public RuleCall getAdditiveExpressionParserRuleCall_0() { return cAdditiveExpressionParserRuleCall_0; }
 
-		//({RelationalExpression.leftOperand=current} (typeTest?="is" type=DataTypeSpecifier | operator=RelationalOperator
-		//rightOperand=AdditiveExpression))?
-		public Group getGroup_1() { return cGroup_1; }
+		//({RelationalExpression.leftOperand=current} operator=RelationalOperator rightOperand=AdditiveExpression |
+		//{TypeTestExpression.expression=current} "is" type=DataTypeSpecifier)?
+		public Alternatives getAlternatives_1() { return cAlternatives_1; }
+
+		//{RelationalExpression.leftOperand=current} operator=RelationalOperator rightOperand=AdditiveExpression
+		public Group getGroup_1_0() { return cGroup_1_0; }
 
 		//{RelationalExpression.leftOperand=current}
-		public Action getRelationalExpressionLeftOperandAction_1_0() { return cRelationalExpressionLeftOperandAction_1_0; }
-
-		//typeTest?="is" type=DataTypeSpecifier | operator=RelationalOperator rightOperand=AdditiveExpression
-		public Alternatives getAlternatives_1_1() { return cAlternatives_1_1; }
-
-		//typeTest?="is" type=DataTypeSpecifier
-		public Group getGroup_1_1_0() { return cGroup_1_1_0; }
-
-		//typeTest?="is"
-		public Assignment getTypeTestAssignment_1_1_0_0() { return cTypeTestAssignment_1_1_0_0; }
-
-		//"is"
-		public Keyword getTypeTestIsKeyword_1_1_0_0_0() { return cTypeTestIsKeyword_1_1_0_0_0; }
-
-		//type=DataTypeSpecifier
-		public Assignment getTypeAssignment_1_1_0_1() { return cTypeAssignment_1_1_0_1; }
-
-		//DataTypeSpecifier
-		public RuleCall getTypeDataTypeSpecifierParserRuleCall_1_1_0_1_0() { return cTypeDataTypeSpecifierParserRuleCall_1_1_0_1_0; }
-
-		//operator=RelationalOperator rightOperand=AdditiveExpression
-		public Group getGroup_1_1_1() { return cGroup_1_1_1; }
+		public Action getRelationalExpressionLeftOperandAction_1_0_0() { return cRelationalExpressionLeftOperandAction_1_0_0; }
 
 		//operator=RelationalOperator
-		public Assignment getOperatorAssignment_1_1_1_0() { return cOperatorAssignment_1_1_1_0; }
+		public Assignment getOperatorAssignment_1_0_1() { return cOperatorAssignment_1_0_1; }
 
 		//RelationalOperator
-		public RuleCall getOperatorRelationalOperatorEnumRuleCall_1_1_1_0_0() { return cOperatorRelationalOperatorEnumRuleCall_1_1_1_0_0; }
+		public RuleCall getOperatorRelationalOperatorEnumRuleCall_1_0_1_0() { return cOperatorRelationalOperatorEnumRuleCall_1_0_1_0; }
 
 		//rightOperand=AdditiveExpression
-		public Assignment getRightOperandAssignment_1_1_1_1() { return cRightOperandAssignment_1_1_1_1; }
+		public Assignment getRightOperandAssignment_1_0_2() { return cRightOperandAssignment_1_0_2; }
 
 		//AdditiveExpression
-		public RuleCall getRightOperandAdditiveExpressionParserRuleCall_1_1_1_1_0() { return cRightOperandAdditiveExpressionParserRuleCall_1_1_1_1_0; }
+		public RuleCall getRightOperandAdditiveExpressionParserRuleCall_1_0_2_0() { return cRightOperandAdditiveExpressionParserRuleCall_1_0_2_0; }
+
+		//{TypeTestExpression.expression=current} "is" type=DataTypeSpecifier
+		public Group getGroup_1_1() { return cGroup_1_1; }
+
+		//{TypeTestExpression.expression=current}
+		public Action getTypeTestExpressionExpressionAction_1_1_0() { return cTypeTestExpressionExpressionAction_1_1_0; }
+
+		//"is"
+		public Keyword getIsKeyword_1_1_1() { return cIsKeyword_1_1_1; }
+
+		//type=DataTypeSpecifier
+		public Assignment getTypeAssignment_1_1_2() { return cTypeAssignment_1_1_2; }
+
+		//DataTypeSpecifier
+		public RuleCall getTypeDataTypeSpecifierParserRuleCall_1_1_2_0() { return cTypeDataTypeSpecifierParserRuleCall_1_1_2_0; }
 	}
 
 	public class AdditiveExpressionElements extends AbstractParserRuleElementFinder {
@@ -4062,8 +4058,8 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//RelationalExpression returns Expression:
-	//	AdditiveExpression ({RelationalExpression.leftOperand=current} (typeTest?="is" type=DataTypeSpecifier |
-	//	operator=RelationalOperator rightOperand=AdditiveExpression))?;
+	//	AdditiveExpression ({RelationalExpression.leftOperand=current} operator=RelationalOperator
+	//	rightOperand=AdditiveExpression | {TypeTestExpression.expression=current} "is" type=DataTypeSpecifier)?;
 	public RelationalExpressionElements getRelationalExpressionAccess() {
 		return (pRelationalExpression != null) ? pRelationalExpression : (pRelationalExpression = new RelationalExpressionElements());
 	}

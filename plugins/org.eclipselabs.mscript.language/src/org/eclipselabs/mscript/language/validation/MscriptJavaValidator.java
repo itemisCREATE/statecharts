@@ -17,6 +17,7 @@ import org.eclipselabs.mscript.language.functionmodel.FunctionDescriptor;
 import org.eclipselabs.mscript.language.functionmodel.util.FunctionDescriptorConstructor;
 import org.eclipselabs.mscript.language.imperativemodel.Compound;
 import org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction;
+import org.eclipselabs.mscript.language.imperativemodel.OutputVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.util.ImperativeFunctionTransformer;
 import org.eclipselabs.mscript.typesystem.ArrayDimension;
 import org.eclipselabs.mscript.typesystem.DataType;
@@ -94,7 +95,12 @@ public class MscriptJavaValidator extends AbstractMscriptJavaValidator {
 
 		ImperativeFunction imperativeFunction = new ImperativeFunctionTransformer().transform(functionDescriptor, templateParameterDataTypes, inputParameterDataTypes);
 
-		System.out.println("### " + functionDefinition.getName());
+		System.out.print("### " + functionDefinition.getName() + " -> ");
+		for (OutputVariableDeclaration outputVariableDeclaration : imperativeFunction.getOutputVariableDeclarations()) {
+			System.out.print(outputVariableDeclaration.getType().getClass().getSimpleName());
+			System.out.print(" ");
+		}
+		System.out.println();
 		System.out.println("--- Initialize compound:");
 		System.out.println(new CompoundCGenerator().doSwitch(imperativeFunction.getInitializationCompound()));
 		for (Compound compound : imperativeFunction.getComputationCompounds()) {

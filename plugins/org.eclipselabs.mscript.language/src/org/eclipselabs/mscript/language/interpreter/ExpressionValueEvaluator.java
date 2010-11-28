@@ -205,27 +205,21 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 	@Override
 	public IValue caseRelationalExpression(RelationalExpression relationalExpression) {
 		IValue result = null;
-		if (relationalExpression.getType() != null) {
-			IValue value = doSwitch(relationalExpression.getLeftOperand());
-			DataType dataType = new DataTypeSpecifierEvaluator(context).doSwitch(relationalExpression.getType());
-			result = context.getValueFactory().createBooleanValue(dataType.isAssignableFrom(value.getDataType()));
-		} else {
-			switch (relationalExpression.getOperator()) {
-			case LESS_THAN:
-				result = doSwitch(relationalExpression.getLeftOperand()).lessThan(doSwitch(relationalExpression.getRightOperand()));
-				break;
-			case LESS_THAN_OR_EQUAL_TO:
-				result = doSwitch(relationalExpression.getLeftOperand()).lessThanOrEqualTo(doSwitch(relationalExpression.getRightOperand()));
-				break;
-			case GREATER_THAN:
-				result = doSwitch(relationalExpression.getLeftOperand()).greaterThan(doSwitch(relationalExpression.getRightOperand()));
-				break;
-			case GREATER_THAN_OR_EQUAL_TO:
-				result = doSwitch(relationalExpression.getLeftOperand()).greaterThanOrEqualTo(doSwitch(relationalExpression.getRightOperand()));
-				break;
-			default:
-				throw new IllegalArgumentException();
-			}
+		switch (relationalExpression.getOperator()) {
+		case LESS_THAN:
+			result = doSwitch(relationalExpression.getLeftOperand()).lessThan(doSwitch(relationalExpression.getRightOperand()));
+			break;
+		case LESS_THAN_OR_EQUAL_TO:
+			result = doSwitch(relationalExpression.getLeftOperand()).lessThanOrEqualTo(doSwitch(relationalExpression.getRightOperand()));
+			break;
+		case GREATER_THAN:
+			result = doSwitch(relationalExpression.getLeftOperand()).greaterThan(doSwitch(relationalExpression.getRightOperand()));
+			break;
+		case GREATER_THAN_OR_EQUAL_TO:
+			result = doSwitch(relationalExpression.getLeftOperand()).greaterThanOrEqualTo(doSwitch(relationalExpression.getRightOperand()));
+			break;
+		default:
+			throw new IllegalArgumentException();
 		}
 		if (result instanceof InvalidValue) {
 			context.getDiagnostics().add(new EObjectDiagnostic(Diagnostic.ERROR, "Invalid relational operation operands", relationalExpression));

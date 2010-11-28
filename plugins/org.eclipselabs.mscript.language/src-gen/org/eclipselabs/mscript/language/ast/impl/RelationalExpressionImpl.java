@@ -14,7 +14,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipselabs.mscript.language.ast.AstPackage;
-import org.eclipselabs.mscript.language.ast.DataTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.ast.RelationalExpression;
 import org.eclipselabs.mscript.language.ast.RelationalOperator;
@@ -27,8 +26,6 @@ import org.eclipselabs.mscript.language.ast.RelationalOperator;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.RelationalExpressionImpl#getLeftOperand <em>Left Operand</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.RelationalExpressionImpl#isTypeTest <em>Type Test</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.RelationalExpressionImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.RelationalExpressionImpl#getOperator <em>Operator</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.RelationalExpressionImpl#getRightOperand <em>Right Operand</em>}</li>
  * </ul>
@@ -47,36 +44,6 @@ public class RelationalExpressionImpl extends ExpressionImpl implements Relation
    * @ordered
    */
   protected Expression leftOperand;
-
-  /**
-   * The default value of the '{@link #isTypeTest() <em>Type Test</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #isTypeTest()
-   * @generated
-   * @ordered
-   */
-  protected static final boolean TYPE_TEST_EDEFAULT = false;
-
-  /**
-   * The cached value of the '{@link #isTypeTest() <em>Type Test</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #isTypeTest()
-   * @generated
-   * @ordered
-   */
-  protected boolean typeTest = TYPE_TEST_EDEFAULT;
-
-  /**
-   * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getType()
-   * @generated
-   * @ordered
-   */
-  protected DataTypeSpecifier type;
 
   /**
    * The default value of the '{@link #getOperator() <em>Operator</em>}' attribute.
@@ -182,77 +149,6 @@ public class RelationalExpressionImpl extends ExpressionImpl implements Relation
    * <!-- end-user-doc -->
    * @generated
    */
-  public boolean isTypeTest()
-  {
-    return typeTest;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setTypeTest(boolean newTypeTest)
-  {
-    boolean oldTypeTest = typeTest;
-    typeTest = newTypeTest;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.RELATIONAL_EXPRESSION__TYPE_TEST, oldTypeTest, typeTest));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public DataTypeSpecifier getType()
-  {
-    return type;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetType(DataTypeSpecifier newType, NotificationChain msgs)
-  {
-    DataTypeSpecifier oldType = type;
-    type = newType;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.RELATIONAL_EXPRESSION__TYPE, oldType, newType);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setType(DataTypeSpecifier newType)
-  {
-    if (newType != type)
-    {
-      NotificationChain msgs = null;
-      if (type != null)
-        msgs = ((InternalEObject)type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.RELATIONAL_EXPRESSION__TYPE, null, msgs);
-      if (newType != null)
-        msgs = ((InternalEObject)newType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.RELATIONAL_EXPRESSION__TYPE, null, msgs);
-      msgs = basicSetType(newType, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.RELATIONAL_EXPRESSION__TYPE, newType, newType));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public RelationalOperator getOperator()
   {
     return operator;
@@ -331,8 +227,6 @@ public class RelationalExpressionImpl extends ExpressionImpl implements Relation
     {
       case AstPackage.RELATIONAL_EXPRESSION__LEFT_OPERAND:
         return basicSetLeftOperand(null, msgs);
-      case AstPackage.RELATIONAL_EXPRESSION__TYPE:
-        return basicSetType(null, msgs);
       case AstPackage.RELATIONAL_EXPRESSION__RIGHT_OPERAND:
         return basicSetRightOperand(null, msgs);
     }
@@ -351,10 +245,6 @@ public class RelationalExpressionImpl extends ExpressionImpl implements Relation
     {
       case AstPackage.RELATIONAL_EXPRESSION__LEFT_OPERAND:
         return getLeftOperand();
-      case AstPackage.RELATIONAL_EXPRESSION__TYPE_TEST:
-        return isTypeTest();
-      case AstPackage.RELATIONAL_EXPRESSION__TYPE:
-        return getType();
       case AstPackage.RELATIONAL_EXPRESSION__OPERATOR:
         return getOperator();
       case AstPackage.RELATIONAL_EXPRESSION__RIGHT_OPERAND:
@@ -375,12 +265,6 @@ public class RelationalExpressionImpl extends ExpressionImpl implements Relation
     {
       case AstPackage.RELATIONAL_EXPRESSION__LEFT_OPERAND:
         setLeftOperand((Expression)newValue);
-        return;
-      case AstPackage.RELATIONAL_EXPRESSION__TYPE_TEST:
-        setTypeTest((Boolean)newValue);
-        return;
-      case AstPackage.RELATIONAL_EXPRESSION__TYPE:
-        setType((DataTypeSpecifier)newValue);
         return;
       case AstPackage.RELATIONAL_EXPRESSION__OPERATOR:
         setOperator((RelationalOperator)newValue);
@@ -405,12 +289,6 @@ public class RelationalExpressionImpl extends ExpressionImpl implements Relation
       case AstPackage.RELATIONAL_EXPRESSION__LEFT_OPERAND:
         setLeftOperand((Expression)null);
         return;
-      case AstPackage.RELATIONAL_EXPRESSION__TYPE_TEST:
-        setTypeTest(TYPE_TEST_EDEFAULT);
-        return;
-      case AstPackage.RELATIONAL_EXPRESSION__TYPE:
-        setType((DataTypeSpecifier)null);
-        return;
       case AstPackage.RELATIONAL_EXPRESSION__OPERATOR:
         setOperator(OPERATOR_EDEFAULT);
         return;
@@ -433,10 +311,6 @@ public class RelationalExpressionImpl extends ExpressionImpl implements Relation
     {
       case AstPackage.RELATIONAL_EXPRESSION__LEFT_OPERAND:
         return leftOperand != null;
-      case AstPackage.RELATIONAL_EXPRESSION__TYPE_TEST:
-        return typeTest != TYPE_TEST_EDEFAULT;
-      case AstPackage.RELATIONAL_EXPRESSION__TYPE:
-        return type != null;
       case AstPackage.RELATIONAL_EXPRESSION__OPERATOR:
         return operator != OPERATOR_EDEFAULT;
       case AstPackage.RELATIONAL_EXPRESSION__RIGHT_OPERAND:
@@ -456,9 +330,7 @@ public class RelationalExpressionImpl extends ExpressionImpl implements Relation
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (typeTest: ");
-    result.append(typeTest);
-    result.append(", operator: ");
+    result.append(" (operator: ");
     result.append(operator);
     result.append(')');
     return result.toString();

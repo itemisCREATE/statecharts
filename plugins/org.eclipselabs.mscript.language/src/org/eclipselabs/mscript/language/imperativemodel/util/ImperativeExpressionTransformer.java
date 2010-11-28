@@ -38,6 +38,7 @@ import org.eclipselabs.mscript.language.ast.RealLiteral;
 import org.eclipselabs.mscript.language.ast.RelationalExpression;
 import org.eclipselabs.mscript.language.ast.SimpleName;
 import org.eclipselabs.mscript.language.ast.StringLiteral;
+import org.eclipselabs.mscript.language.ast.TypeTestExpression;
 import org.eclipselabs.mscript.language.ast.UnaryExpression;
 import org.eclipselabs.mscript.language.ast.util.AstSwitch;
 import org.eclipselabs.mscript.language.imperativemodel.Assignment;
@@ -357,12 +358,7 @@ public class ImperativeExpressionTransformer extends AstSwitch<Expression> {
 	 */
 	@Override
 	public Expression caseRelationalExpression(RelationalExpression relationalExpression) {
-		if (relationalExpression.isTypeTest()) {
-			// TODO: to be implemented
-			throw new IllegalArgumentException();
-		}
 		RelationalExpression transformedExpression = AstFactory.eINSTANCE.createRelationalExpression();
-		transformedExpression.setTypeTest(false);
 		transformedExpression.setOperator(relationalExpression.getOperator());
 		Expression leftExpression = doSwitch(relationalExpression.getLeftOperand());
 		transformedExpression.setLeftOperand(leftExpression);
@@ -390,6 +386,19 @@ public class ImperativeExpressionTransformer extends AstSwitch<Expression> {
 		DataType transformedDataType = leftDataType.evaluate(operatorKind, rightDataType);
 		ImperativeModelUtil.adaptDataType(transformedExpression, transformedDataType);
 		return transformedExpression;
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseTypeTestExpression(org.eclipselabs.mscript.language.ast.TypeTestExpression)
+	 */
+	@Override
+	public Expression caseTypeTestExpression(TypeTestExpression typeTestExpression) {
+		TypeTestExpression transformedTypeTestExpression = AstFactory.eINSTANCE.createTypeTestExpression();
+		Expression expression = doSwitch(typeTestExpression.getExpression());
+		transformedTypeTestExpression.setExpression(expression);
+		transformedTypeTestExpression.setType(EcoreUtil.copy(typeTestExpression.getType()));
+		ImperativeModelUtil.adaptDataType(transformedTypeTestExpression, TypeSystemFactory.eINSTANCE.createBooleanType());
+		return transformedTypeTestExpression;
 	}
 	
 	/* (non-Javadoc)

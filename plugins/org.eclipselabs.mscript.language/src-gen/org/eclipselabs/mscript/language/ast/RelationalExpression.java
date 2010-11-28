@@ -15,8 +15,6 @@ package org.eclipselabs.mscript.language.ast;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipselabs.mscript.language.ast.RelationalExpression#getLeftOperand <em>Left Operand</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.RelationalExpression#isTypeTest <em>Type Test</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.RelationalExpression#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.RelationalExpression#getOperator <em>Operator</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.RelationalExpression#getRightOperand <em>Right Operand</em>}</li>
  * </ul>
@@ -53,58 +51,6 @@ public interface RelationalExpression extends Expression
    * @generated
    */
   void setLeftOperand(Expression value);
-
-  /**
-   * Returns the value of the '<em><b>Type Test</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Type Test</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Type Test</em>' attribute.
-   * @see #setTypeTest(boolean)
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getRelationalExpression_TypeTest()
-   * @model
-   * @generated
-   */
-  boolean isTypeTest();
-
-  /**
-   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.RelationalExpression#isTypeTest <em>Type Test</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Type Test</em>' attribute.
-   * @see #isTypeTest()
-   * @generated
-   */
-  void setTypeTest(boolean value);
-
-  /**
-   * Returns the value of the '<em><b>Type</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Type</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Type</em>' containment reference.
-   * @see #setType(DataTypeSpecifier)
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getRelationalExpression_Type()
-   * @model containment="true"
-   * @generated
-   */
-  DataTypeSpecifier getType();
-
-  /**
-   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.RelationalExpression#getType <em>Type</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Type</em>' containment reference.
-   * @see #getType()
-   * @generated
-   */
-  void setType(DataTypeSpecifier value);
 
   /**
    * Returns the value of the '<em><b>Operator</b></em>' attribute.

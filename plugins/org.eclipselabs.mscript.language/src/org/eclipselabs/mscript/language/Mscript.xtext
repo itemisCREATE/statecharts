@@ -180,7 +180,7 @@ enum EqualityOperator :
 	NotEqualTo='!=';
 	
 RelationalExpression returns Expression :
-	AdditiveExpression ({RelationalExpression.leftOperand=current} (typeTest?='is' type=DataTypeSpecifier | operator=RelationalOperator rightOperand=AdditiveExpression))?;
+	AdditiveExpression ({RelationalExpression.leftOperand=current} operator=RelationalOperator rightOperand=AdditiveExpression | {TypeTestExpression.expression=current} 'is' type=DataTypeSpecifier)?;
 
 enum RelationalOperator :
 	LessThan='<' |
