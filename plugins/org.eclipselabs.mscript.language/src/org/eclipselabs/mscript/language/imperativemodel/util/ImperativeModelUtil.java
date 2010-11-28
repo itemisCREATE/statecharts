@@ -11,8 +11,8 @@
 
 package org.eclipselabs.mscript.language.imperativemodel.util;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.typesystem.DataType;
 
 /**
@@ -21,13 +21,13 @@ import org.eclipselabs.mscript.typesystem.DataType;
  */
 public class ImperativeModelUtil {
 
-	public static DataType getDataType(EObject eObject) {
-		DataTypeAdapter adapter = (DataTypeAdapter) EcoreUtil.getAdapter(eObject.eAdapters(), DataTypeAdapter.class);
+	public static DataType getDataType(Expression expression) {
+		DataTypeAdapter adapter = (DataTypeAdapter) EcoreUtil.getAdapter(expression.eAdapters(), DataTypeAdapter.class);
 		return adapter != null ? adapter.getDataType() : null;
 	}
 	
-	public static void adaptDataType(EObject eObject, DataType dataType) {
-		eObject.eAdapters().add(new DataTypeAdapter(dataType));
+	public static void adaptDataType(Expression expression, DataType dataType) {
+		expression.eAdapters().add(new DataTypeAdapter(dataType));
 	}
 	
 }

@@ -68,6 +68,8 @@ public class MscriptThread extends Thread {
 	@Override
 	public void run() {
 		try {
+			new Interpreter().initialize(interpreterContext, functor);
+			
 			BufferedReader reader = new BufferedReader(new InputStreamReader(inputFile.getContents()));
 			while (!interpreterContext.isCanceled() && reader.ready()) {
 				List<IValue> inputValues = new ArrayList<IValue>();

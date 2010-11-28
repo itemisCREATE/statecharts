@@ -11,18 +11,11 @@
 
 package org.eclipselabs.mscript.language.interpreter;
 
-import java.util.ListIterator;
+import java.util.HashMap;
+import java.util.Map;
 
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.emf.common.util.DiagnosticChain;
-import org.eclipselabs.mscript.language.ast.FeatureCall;
-import org.eclipselabs.mscript.language.ast.FeatureCallPart;
-import org.eclipselabs.mscript.language.ast.SimpleName;
-import org.eclipselabs.mscript.language.internal.LanguagePlugin;
-import org.eclipselabs.mscript.language.internal.functionmodel.util.StepExpressionHelper;
-import org.eclipselabs.mscript.language.internal.functionmodel.util.StepExpressionResult;
-import org.eclipselabs.mscript.language.interpreter.value.IValue;
+import org.eclipselabs.mscript.language.imperativemodel.VariableDeclaration;
 import org.eclipselabs.mscript.language.interpreter.value.IValueFactory;
 
 /**
@@ -31,23 +24,23 @@ import org.eclipselabs.mscript.language.interpreter.value.IValueFactory;
  */
 public class InterpreterContext implements IInterpreterContext {
 
+	private static final Scope MOST_OUTER_SCOPE = new Scope(null);
+	
+	private Scope scope = MOST_OUTER_SCOPE;
+
 	private DiagnosticChain diagnostics;
 	private IValueFactory valueFactory;
-	private boolean staticOnly;
 	
 	private volatile boolean canceled;
 	
 	private IFunctor functor;
 	
-	private MultiStatus status = new MultiStatus(LanguagePlugin.PLUGIN_ID, 0, "", null);
-	
 	/**
 	 * 
 	 */
-	public InterpreterContext(DiagnosticChain diagnostics, IValueFactory valueFactory, boolean staticOnly) {
+	public InterpreterContext(DiagnosticChain diagnostics, IValueFactory valueFactory) {
 		this.diagnostics = diagnostics;
 		this.valueFactory = valueFactory;
-		this.staticOnly = staticOnly;
 	}
 	
 	/**
@@ -79,51 +72,6 @@ public class InterpreterContext implements IInterpreterContext {
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.interpreter.IInterpreterContext#isStaticOnly()
-	 */
-	public boolean isStaticOnly() {
-		return staticOnly;
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.language.interpreter.IInterpreterContext#getFeatureValue(org.eclipselabs.mscript.language.ast.Expression)
-	 */
-	public IValue getFeatureValue(FeatureCall featureCall) {
-		if (featureCall.getTarget() instanceof SimpleName) {
-			SimpleName simpleName = (SimpleName) featureCall.getTarget();
-			IValue value = functor.getTemplateArgument(simpleName.getIdentifier());
-			if (value != null) {
-				return value;
-			}
-			if (functor.isInitialized()) {
-				IVariable variable = functor.getVariable(simpleName.getIdentifier());
-				if (variable != null) {
-					ListIterator<FeatureCallPart> partIterator = featureCall.getParts().listIterator();
-					StepExpressionResult stepExpressionResult = new StepExpressionHelper().getStepExpression(partIterator, diagnostics);
-					if (stepExpressionResult != null) {
-						return variable.getValue(stepExpressionResult.getIndex());
-					}
-				}
-			}
-		}
-		return null;
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.language.interpreter.IInterpreterContext#getStatus()
-	 */
-	public IStatus getStatus() {
-		return status;
-	}
-
-	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.language.interpreter.IInterpreterContext#addStatus(org.eclipse.core.runtime.IStatus)
-	 */
-	public void addStatus(IStatus status) {
-		this.status.add(status);
-	}
-	
-	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.interpreter.IInterpreterContext#isCanceled()
 	 */
 	public boolean isCanceled() {
@@ -137,4 +85,67 @@ public class InterpreterContext implements IInterpreterContext {
 		this.canceled = canceled;
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.language.interpreter.IInterpreterContext#enterScope()
+	 */
+	public void enterScope() {
+		scope = new Scope(scope);
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.language.interpreter.IInterpreterContext#leaveScope()
+	 */
+	public void leaveScope() {
+		scope = scope.getOuterScope();
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.language.interpreter.IInterpreterContext#addLocalVariable(org.eclipselabs.mscript.language.interpreter.IVariable)
+	 */
+	public void addLocalVariable(IVariable variable) {
+		scope.addVariable(variable);
+	}
+	
+	public IVariable getVariable(VariableDeclaration declaration) {
+		IVariable variable = scope.getVariable(declaration);
+		if (variable == null) {
+			variable = functor.getVariable(declaration);
+		}
+		return variable;
+	}
+	
+	private static class Scope {
+
+		private Scope outerScope;
+		private Map<VariableDeclaration, IVariable> variables = new HashMap<VariableDeclaration, IVariable>();
+		
+		/**
+		 * 
+		 */
+		public Scope(Scope outerScope) {
+			this.outerScope = outerScope;
+		}
+		
+		/**
+		 * @return the outerScope
+		 */
+		public Scope getOuterScope() {
+			return outerScope;
+		}
+		
+		public void addVariable(IVariable variable) {
+			variables.put(variable.getDeclaration(), variable);
+		}
+		
+		public IVariable getVariable(VariableDeclaration declaration) {
+			IVariable variable;
+			Scope scope = this;
+			do {
+				variable = scope.variables.get(declaration);
+			} while (variable == null && (scope = scope.outerScope) != null);
+			return variable;
+		}
+		
+	}
+
 }

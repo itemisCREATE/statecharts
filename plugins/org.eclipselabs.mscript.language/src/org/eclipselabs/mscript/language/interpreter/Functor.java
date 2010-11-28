@@ -11,12 +11,16 @@
 
 package org.eclipselabs.mscript.language.interpreter;
 
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import org.eclipselabs.mscript.language.functionmodel.FunctionDescriptor;
+import org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction;
+import org.eclipselabs.mscript.language.imperativemodel.InputVariableDeclaration;
+import org.eclipselabs.mscript.language.imperativemodel.InstanceVariableDeclaration;
+import org.eclipselabs.mscript.language.imperativemodel.OutputVariableDeclaration;
+import org.eclipselabs.mscript.language.imperativemodel.TemplateVariableDeclaration;
+import org.eclipselabs.mscript.language.imperativemodel.VariableDeclaration;
 import org.eclipselabs.mscript.language.interpreter.value.IValue;
 
 /**
@@ -25,67 +29,67 @@ import org.eclipselabs.mscript.language.interpreter.value.IValue;
  */
 public class Functor implements IFunctor {
 
-	private FunctionDescriptor functionDescriptor;
-	private Map<String, IValue> templateArguments = new HashMap<String, IValue>();
-	private Map<String, IVariable> variables = new HashMap<String, IVariable>();
+	private ImperativeFunction function;
+	private Map<VariableDeclaration, IVariable> variables = new HashMap<VariableDeclaration, IVariable>();
 	
-	private boolean initialized;
-
+	/**
+	 * 
+	 */
+	private Functor() {
+	}
+	
+	public static IFunctor create(ImperativeFunction function, List<IValue> templateArguments) {
+		if (function.getTemplateVariableDeclarations().size() != templateArguments.size()) {
+			throw new IllegalArgumentException("Number of template arguments must be equal to number of template parameters of function definition");
+		}
+		
+		Functor functor = new Functor();
+		functor.function = function;
+		
+		int i = 0;
+		for (TemplateVariableDeclaration declaration : function.getTemplateVariableDeclarations()) {
+			IVariable variable = new Variable(declaration, 1);
+			variable.setValue(0, templateArguments.get(i));
+			functor.variables.put(declaration, variable);
+			++i;
+		}
+		
+		for (InputVariableDeclaration declaration : function.getInputVariableDeclarations()) {
+			functor.variables.put(declaration, new Variable(declaration, declaration.getCircularBufferSize()));
+		}
+		
+		for (OutputVariableDeclaration declaration : function.getOutputVariableDeclarations()) {
+			functor.variables.put(declaration, new Variable(declaration, declaration.getCircularBufferSize()));
+		}
+		
+		for (InstanceVariableDeclaration declaration : function.getInstanceVariableDeclarations()) {
+			functor.variables.put(declaration, new Variable(declaration, declaration.getCircularBufferSize()));
+		}
+		
+		return functor;
+	}
+	
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.language.interpreter.IFunctor#getFunctionDefinition()
 	 */
-	public FunctionDescriptor getDescriptorFunction() {
-		return functionDescriptor;
-	}
-	
-	/**
-	 * @param function the function to set
-	 */
-	public void setFunction(FunctionDescriptor functionDescriptor) {
-		this.functionDescriptor = functionDescriptor;
-	}
-	
-	public IValue getTemplateArgument(String name) {
-		return templateArguments.get(name);
-	}
-	
-	/**
-	 * @param templateArguments the templateArguments to set
-	 */
-	public void setTemplateArguments(Map<String, IValue> templateArguments) {
-		this.templateArguments = templateArguments;
+	public ImperativeFunction getFunction() {
+		return function;
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.language.interpreter.IFunctor#getVariables()
+	 * @see org.eclipselabs.mscript.language.interpreter.IFunctor#getVariable(org.eclipselabs.mscript.language.imperativemodel.VariableDeclaration)
 	 */
-	public Collection<IVariable> getVariables() {
-		return Collections.unmodifiableCollection(variables.values());
+	public IVariable getVariable(VariableDeclaration declaration) {
+		return variables.get(declaration);
 	}
 	
-	/**
-	 * @return the variables
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.language.interpreter.IFunctor#incrementStepIndex()
 	 */
-	public IVariable getVariable(String name) {
-		return variables.get(name);
-	}
-	
-	public void addVariable(IVariable variable) {
-		variables.put(variable.getName(), variable);
-	}
-	
-	/**
-	 * @return the initialized
-	 */
-	public boolean isInitialized() {
-		return initialized;
-	}
-	
-	/**
-	 * @param initialized the initialized to set
-	 */
-	public void setInitialized(boolean initialized) {
-		this.initialized = initialized;
+	public void incrementStepIndex() {
+		for (IVariable variable : variables.values()) {
+			variable.incrementStepIndex();
+		}
 	}
 	
 }

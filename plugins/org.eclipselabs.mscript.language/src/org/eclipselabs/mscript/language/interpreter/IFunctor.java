@@ -11,10 +11,8 @@
 
 package org.eclipselabs.mscript.language.interpreter;
 
-import java.util.Collection;
-
-import org.eclipselabs.mscript.language.functionmodel.FunctionDescriptor;
-import org.eclipselabs.mscript.language.interpreter.value.IValue;
+import org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction;
+import org.eclipselabs.mscript.language.imperativemodel.VariableDeclaration;
 
 /**
  * @author Andreas Unger
@@ -22,16 +20,10 @@ import org.eclipselabs.mscript.language.interpreter.value.IValue;
  */
 public interface IFunctor {
 
-	FunctionDescriptor getDescriptorFunction();
+	ImperativeFunction getFunction();
 	
-	IValue getTemplateArgument(String name);
-
-	Collection<IVariable> getVariables();
-	IVariable getVariable(String name);
-	void addVariable(IVariable variable);
-
-	void setInitialized(boolean initialized);
-
-	boolean isInitialized();
+	IVariable getVariable(VariableDeclaration declaration);
+	
+	void incrementStepIndex();
 
 }

@@ -18,19 +18,26 @@ import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.model.LaunchConfigurationDelegate;
 import org.eclipse.emf.common.util.BasicDiagnostic;
+import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipselabs.mscript.ide.core.IDECorePlugin;
 import org.eclipselabs.mscript.language.ast.FunctionDefinition;
 import org.eclipselabs.mscript.language.ast.Module;
-import org.eclipselabs.mscript.language.interpreter.FunctorConstructor;
+import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
+import org.eclipselabs.mscript.language.functionmodel.FunctionDescriptor;
+import org.eclipselabs.mscript.language.functionmodel.util.FunctionDescriptorConstructor;
+import org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction;
+import org.eclipselabs.mscript.language.imperativemodel.util.ImperativeFunctionTransformer;
+import org.eclipselabs.mscript.language.interpreter.Functor;
 import org.eclipselabs.mscript.language.interpreter.IFunctor;
 import org.eclipselabs.mscript.language.interpreter.IInterpreterContext;
 import org.eclipselabs.mscript.language.interpreter.InterpreterContext;
 import org.eclipselabs.mscript.language.interpreter.value.IValue;
 import org.eclipselabs.mscript.language.interpreter.value.ValueFactory;
 import org.eclipselabs.mscript.language.util.LanguageUtil;
+import org.eclipselabs.mscript.typesystem.DataType;
 import org.eclipselabs.mscript.typesystem.RealType;
 import org.eclipselabs.mscript.typesystem.TypeSystemFactory;
 import org.eclipselabs.mscript.typesystem.util.TypeSystemUtil;
@@ -82,19 +89,19 @@ public class MscriptLaunchConfigurationDelegate extends LaunchConfigurationDeleg
 
 		
 		DiagnosticChain diagnostics = new BasicDiagnostic();
-		IInterpreterContext context = new InterpreterContext(diagnostics, new ValueFactory(), false);
+		IInterpreterContext context = new InterpreterContext(diagnostics, new ValueFactory());
 		
 		IFunctor functor = createFunctor(context, file, functionName, templateArguments, inputFile, outputFile, monitor);
-		checkInputFile(functor.getDescriptorFunction().getDefinition(), inputFile, monitor);
+		checkInputFile(functor.getFunction(), inputFile, monitor);
 		prepareOutputFile(outputFile, monitor);
 
 		new MscriptProcess(launch, "Mscript Application").run(context, functor, inputFile, outputFile);
 	}
 	
-	protected void checkInputFile(FunctionDefinition functionDefinition, IFile inputFile, IProgressMonitor monitor) throws CoreException {
+	protected void checkInputFile(ImperativeFunction function, IFile inputFile, IProgressMonitor monitor) throws CoreException {
 		try {
 			BufferedReader reader = new BufferedReader(new InputStreamReader(inputFile.getContents()));
-			int n = functionDefinition.getInputParameterDeclarations().size();
+			int n = function.getInputVariableDeclarations().size();
 			while (!monitor.isCanceled() && reader.ready()) {
 				String[] values = reader.readLine().split(",", 0);
 				if (values.length != n) {
@@ -156,7 +163,32 @@ public class MscriptLaunchConfigurationDelegate extends LaunchConfigurationDeleg
 				throw new CoreException(new Status(IStatus.ERROR, IDECorePlugin.PLUGIN_ID, "Template arguments contain invalid numeric values"));
 			}
 		}
-		return new FunctorConstructor().construct(interpreterContext, functionDefinition, templateArguments);
+		
+		BasicDiagnostic diagnostics = new BasicDiagnostic();
+		FunctionDescriptor functionDescriptor = new FunctionDescriptorConstructor().construct(functionDefinition, diagnostics);
+		if (diagnostics.getSeverity() != Diagnostic.OK) {
+			throw new CoreException(BasicDiagnostic.toIStatus(diagnostics));
+		}
+		
+		List<DataType> templateParameterDataTypes = new ArrayList<DataType>();
+		for (IValue value : templateArguments) {
+			templateParameterDataTypes.add(value.getDataType());
+		}
+		
+		List<DataType> inputParameterDataTypes = new ArrayList<DataType>();
+		for (ParameterDeclaration parameterDeclaration : functionDefinition.getInputParameterDeclarations()) {
+			RealType realType = TypeSystemFactory.eINSTANCE.createRealType();
+			realType.setUnit(TypeSystemUtil.createUnit());
+			inputParameterDataTypes.add(realType);
+			parameterDeclaration.getName();
+		}
+		
+		ImperativeFunction imperativeFunction = new ImperativeFunctionTransformer().transform(functionDescriptor, templateParameterDataTypes, inputParameterDataTypes);
+		IFunctor functor = Functor.create(imperativeFunction, templateArguments);
+		
+		interpreterContext.setFunctor(functor);
+		
+		return functor;
 	}
 	
 	public boolean buildForLaunch(ILaunchConfiguration configuration, String mode, IProgressMonitor monitor) throws CoreException {

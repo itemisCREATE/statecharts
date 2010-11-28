@@ -12,8 +12,7 @@
 package org.eclipselabs.mscript.language.interpreter;
 
 import org.eclipse.emf.common.util.DiagnosticChain;
-import org.eclipselabs.mscript.language.ast.FeatureCall;
-import org.eclipselabs.mscript.language.interpreter.value.IValue;
+import org.eclipselabs.mscript.language.imperativemodel.VariableDeclaration;
 import org.eclipselabs.mscript.language.interpreter.value.IValueFactory;
 
 /**
@@ -26,16 +25,18 @@ public interface IInterpreterContext {
 	
 	IValueFactory getValueFactory();
 
-	boolean isStaticOnly();
-	
-	IValue getFeatureValue(FeatureCall featureCall);
-
 	DiagnosticChain getDiagnostics();
 		
-	void setCanceled(boolean canceled);
-	boolean isCanceled();
-
 	IFunctor getFunctor();
 	void setFunctor(IFunctor functor);
 	
+	void enterScope();
+	void leaveScope();
+	
+	void addLocalVariable(IVariable variable);
+	IVariable getVariable(VariableDeclaration declaration);
+	
+	void setCanceled(boolean canceled);
+	boolean isCanceled();
+
 }

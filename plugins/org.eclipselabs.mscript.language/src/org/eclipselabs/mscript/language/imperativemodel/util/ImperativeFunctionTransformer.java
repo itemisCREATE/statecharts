@@ -21,6 +21,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipselabs.mscript.language.ast.Assertion;
 import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
 import org.eclipselabs.mscript.language.ast.StateVariableDeclaration;
 import org.eclipselabs.mscript.language.functionmodel.EquationDescriptor;
@@ -51,19 +52,32 @@ public class ImperativeFunctionTransformer {
 	
 	public ImperativeFunction transform(FunctionDescriptor functionDescriptor, List<DataType> templateParameterDataTypes, List<DataType> inputParameterDataTypes) {
 		ImperativeFunction imperativeFunction = ImperativeModelFactory.eINSTANCE.createImperativeFunction();
-
+		
 		Map<VariableDescriptor, VariableDeclaration> variableDeclarations = new HashMap<VariableDescriptor, VariableDeclaration>();
 		
 		initializeVariableDeclarations(imperativeFunction, functionDescriptor, templateParameterDataTypes, inputParameterDataTypes, variableDeclarations);
+		evaluateStaticAssertions(functionDescriptor, templateParameterDataTypes, inputParameterDataTypes);
 
 		Collection<List<EquationDescriptor>> equationCompounds = new EquationCompoundHelper().getEquationCompounds(functionDescriptor);
-
 		constructInitializationCompound(imperativeFunction, equationCompounds, variableDeclarations);
 		constructComputationCompounds(imperativeFunction, equationCompounds, variableDeclarations);
 		
 		return imperativeFunction;
 	}
 	
+	/**
+	 * @param functionDescriptor
+	 * @param templateParameterDataTypes
+	 * @param inputParameterDataTypes
+	 */
+	private void evaluateStaticAssertions(FunctionDescriptor functionDescriptor, List<DataType> templateParameterDataTypes, List<DataType> inputParameterDataTypes) {
+		for (Assertion assertion : functionDescriptor.getDefinition().getAssertions()) {
+			if (!assertion.isStatic()) {
+				continue;
+			}
+		}
+	}
+
 	private void initializeVariableDeclarations(ImperativeFunction imperativeFunction, FunctionDescriptor functionDescriptor, List<DataType> templateParameterDataTypes, List<DataType> inputParameterDataTypes, Map<VariableDescriptor, VariableDeclaration> variableDeclarations) {
 		Iterator<DataType> dataTypeIterator = templateParameterDataTypes.iterator();
 		for (ParameterDeclaration parameterDeclaration : functionDescriptor.getDefinition().getTemplateParameterDeclarations()) {

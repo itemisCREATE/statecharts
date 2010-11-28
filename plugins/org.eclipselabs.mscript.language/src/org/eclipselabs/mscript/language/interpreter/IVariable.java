@@ -11,6 +11,7 @@
 
 package org.eclipselabs.mscript.language.interpreter;
 
+import org.eclipselabs.mscript.language.imperativemodel.VariableDeclaration;
 import org.eclipselabs.mscript.language.interpreter.value.IValue;
 
 /**
@@ -21,11 +22,8 @@ import org.eclipselabs.mscript.language.interpreter.value.IValue;
  */
 public interface IVariable {
 
-	String getName();
-	void setName(String name);
+	VariableDeclaration getDeclaration();
 	
-	void ensureStep(int stepIndex);
-
 	IValue getValue(int stepIndex);
 	void setValue(int stepIndex, IValue value);
 	

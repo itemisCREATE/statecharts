@@ -13,6 +13,7 @@ package org.eclipselabs.mscript.language.interpreter;
 
 import java.util.ArrayList;
 
+import org.eclipselabs.mscript.language.imperativemodel.VariableDeclaration;
 import org.eclipselabs.mscript.language.interpreter.value.IValue;
 
 /**
@@ -21,35 +22,25 @@ import org.eclipselabs.mscript.language.interpreter.value.IValue;
  */
 public class Variable implements IVariable {
 
-	private String name;
+	private VariableDeclaration declaration;
 	
-	private RingBuffer<IValue> values = new RingBuffer<IValue>();
+	private CircularBuffer<IValue> values = new CircularBuffer<IValue>();
 		
 	/**
 	 * 
 	 */
-	public Variable(String name) {
-		this.name = name;
+	public Variable(VariableDeclaration declaration, int circularBufferSize) {
+		this.declaration = declaration;
+		values.resize(circularBufferSize);
 	}
 	
-	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.execution.IVariable#getName()
+	/**
+	 * @return the declaration
 	 */
-	public String getName() {
-		return name;
+	public VariableDeclaration getDeclaration() {
+		return declaration;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.execution.IVariable#setName(java.lang.String)
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	public void ensureStep(int stepIndex) {
-		values.ensureLocationIndex(stepIndex);
-	}
-	
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.execution.IVariable#getValue()
 	 */
@@ -68,11 +59,9 @@ public class Variable implements IVariable {
 		values.incrementLocation();
 	}
 	
-	private static class RingBuffer<E> extends ArrayList<E> {
+	private static class CircularBuffer<E> extends ArrayList<E> {
 		
 		private int locationIndex;
-		private int beginIndex;
-		private int endIndex;
 
 		/**
 		 * 
@@ -82,34 +71,18 @@ public class Variable implements IVariable {
 		/**
 		 * 
 		 */
-		public RingBuffer() {
+		public CircularBuffer() {
 			add(null);
 		}
 		
 		public E get(int index) {
-			ensureLocationIndex(index);
 			return super.get(computeActualIndex(index));
 		}
 		
 		public E set(int index, E element) {
-			ensureLocationIndex(index);
 			return super.set(computeActualIndex(index), element);
 		}
 
-		public void ensureLocationIndex(int index) {
-			if (index < 0) {
-				if (index < this.beginIndex) {
-					beginIndex = index;
-					resize(endIndex - beginIndex + 1);
-				}
-			} else if (index > 0) {
-				if (index > this.endIndex) {
-					endIndex = index;
-					resize(endIndex - beginIndex + 1);
-				}
-			}
-		}
-		
 		public void resize(int newSize) {
 			int diff = newSize - size();
 			if (diff == 0) {

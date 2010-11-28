@@ -11,9 +11,6 @@
 
 package org.eclipselabs.mscript.language.interpreter;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -22,20 +19,16 @@ import org.eclipselabs.mscript.language.ast.BooleanKind;
 import org.eclipselabs.mscript.language.ast.BooleanLiteral;
 import org.eclipselabs.mscript.language.ast.EqualityExpression;
 import org.eclipselabs.mscript.language.ast.Expression;
-import org.eclipselabs.mscript.language.ast.FeatureCall;
-import org.eclipselabs.mscript.language.ast.IfExpression;
 import org.eclipselabs.mscript.language.ast.IntegerLiteral;
-import org.eclipselabs.mscript.language.ast.LetExpression;
-import org.eclipselabs.mscript.language.ast.LetExpressionVariableDeclaration;
 import org.eclipselabs.mscript.language.ast.LogicalAndExpression;
 import org.eclipselabs.mscript.language.ast.LogicalOrExpression;
 import org.eclipselabs.mscript.language.ast.MultiplicativeExpression;
 import org.eclipselabs.mscript.language.ast.RealLiteral;
 import org.eclipselabs.mscript.language.ast.RelationalExpression;
-import org.eclipselabs.mscript.language.ast.SimpleName;
 import org.eclipselabs.mscript.language.ast.StringLiteral;
 import org.eclipselabs.mscript.language.ast.UnaryExpression;
 import org.eclipselabs.mscript.language.ast.UnitConstructionOperator;
+import org.eclipselabs.mscript.language.imperativemodel.VariableReference;
 import org.eclipselabs.mscript.language.internal.interpreter.InvalidUnitExpressionOperandException;
 import org.eclipselabs.mscript.language.internal.interpreter.UnitExpressionHelper;
 import org.eclipselabs.mscript.language.internal.util.EObjectDiagnostic;
@@ -58,11 +51,7 @@ import org.eclipselabs.mscript.typesystem.util.TypeSystemUtil;
  */
 public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue> {
 
-	private static final Scope MOST_OUTER_SCOPE = new Scope(null);
-	
 	private IInterpreterContext context;
-	
-	private Scope scope = MOST_OUTER_SCOPE;
 	
 	/**
 	 * 
@@ -287,42 +276,7 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 		
 		return TypeSystemUtil.createArrayType(elementType, rowSize, columnSize);
 	}
-	
-	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseLetExpression(org.eclipselabs.mscript.language.ast.LetExpression)
-	 */
-	@Override
-	public IValue caseLetExpression(LetExpression letExpression) {
-		Scope newScope = new Scope(scope);
-		for (LetExpressionVariableDeclaration variableDeclaration : letExpression.getVariableDeclarations()) {
-			IValue value = doSwitch(variableDeclaration.getAssignedExpression());
-			if (value instanceof InvalidValue) {
-				return value;
-			}
-			newScope.addVariable(variableDeclaration.getNames().get(0), value);
-		}
 		
-		scope = newScope;
-		IValue result = doSwitch(letExpression.getTargetExpression());
-		scope = scope.getOuterScope();
-		
-		return result;
-	}
-	
-	public IValue caseIfExpression(IfExpression ifExpression) {
-		IValue conditionValue = doSwitch(ifExpression.getCondition());
-		if (conditionValue instanceof IBooleanValue) {
-			IBooleanValue booleanConditionValue = (IBooleanValue) conditionValue;
-			if (booleanConditionValue.booleanValue()) {
-				return doSwitch(ifExpression.getThenExpression());
-			}
-		} else {
-			context.getDiagnostics().add(new EObjectDiagnostic(Diagnostic.ERROR, "Condition expression must be boolean", ifExpression.getCondition()));
-			return InvalidValue.SINGLETON;
-		}
-		return doSwitch(ifExpression.getElseExpression());
-	}
-	
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseUnitConstructionOperator(org.eclipselabs.mscript.language.ast.UnitConstructionOperator)
 	 */
@@ -340,25 +294,6 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 		return InvalidValue.SINGLETON;
 	}
 	
-	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseFeatureCall(org.eclipselabs.mscript.language.ast.FeatureCall)
-	 */
-	@Override
-	public IValue caseFeatureCall(FeatureCall featureCall) {
-		IValue value = null;
-		if (featureCall.getTarget() instanceof SimpleName && featureCall.getParts().isEmpty()) {
-			value = scope.getVariableValue(((SimpleName) featureCall.getTarget()).getIdentifier());
-		}
-		if (value == null) {
-			value = context.getFeatureValue(featureCall);
-			if (value == null) {
-				context.getDiagnostics().add(new EObjectDiagnostic(Diagnostic.ERROR, "Feature not found", featureCall));
-				return InvalidValue.SINGLETON;
-			}
-		}
-		return value;
-	}
-		
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseRealLiteral(org.eclipselabs.mscript.language.ast.RealLiteral)
 	 */
@@ -413,47 +348,21 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 		return new StringValue(stringLiteral.getValue());
 	}
 	
+	public IValue caseVariableReference(VariableReference variableReference) {
+		IVariable variable = context.getVariable(variableReference.getDeclaration());
+		return variable.getValue(variableReference.getStepIndex());
+	}
+	
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#defaultCase(org.eclipse.emf.ecore.EObject)
 	 */
 	@Override
 	public IValue defaultCase(EObject object) {
+		if (object instanceof VariableReference) {
+			return caseVariableReference((VariableReference) object);
+		}
 		context.getDiagnostics().add(new EObjectDiagnostic(Diagnostic.ERROR, "Invalid expression", object));
 		return InvalidValue.SINGLETON;
-	}
-	
-	private static class Scope {
-
-		private Scope outerScope;
-		private Map<String, IValue> variables = new HashMap<String, IValue>();
-		
-		/**
-		 * 
-		 */
-		public Scope(Scope outerScope) {
-			this.outerScope = outerScope;
-		}
-		
-		/**
-		 * @return the outerScope
-		 */
-		public Scope getOuterScope() {
-			return outerScope;
-		}
-		
-		public void addVariable(String name, IValue value) {
-			variables.put(name, value);
-		}
-		
-		public IValue getVariableValue(String name) {
-			IValue value;
-			Scope scope = this;
-			do {
-				value = scope.variables.get(name);
-			} while (value == null && (scope = scope.outerScope) != null);
-			return value;
-		}
-		
 	}
 
 }
