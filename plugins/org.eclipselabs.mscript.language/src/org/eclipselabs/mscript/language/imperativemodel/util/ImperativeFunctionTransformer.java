@@ -20,8 +20,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipselabs.mscript.language.ast.Assertion;
 import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
 import org.eclipselabs.mscript.language.ast.StateVariableDeclaration;
 import org.eclipselabs.mscript.language.functionmodel.EquationDescriptor;
@@ -42,6 +42,7 @@ import org.eclipselabs.mscript.language.imperativemodel.VariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.internal.util.EquationCompoundHelper;
 import org.eclipselabs.mscript.language.imperativemodel.util.ImperativeExpressionTransformer.Scope;
 import org.eclipselabs.mscript.language.internal.functionmodel.util.FunctionModelUtil;
+import org.eclipselabs.mscript.language.interpreter.AssertionEvaluator;
 import org.eclipselabs.mscript.typesystem.DataType;
 
 /**
@@ -50,13 +51,13 @@ import org.eclipselabs.mscript.typesystem.DataType;
  */
 public class ImperativeFunctionTransformer {
 	
-	public ImperativeFunction transform(FunctionDescriptor functionDescriptor, List<DataType> templateParameterDataTypes, List<DataType> inputParameterDataTypes) {
+	public ImperativeFunction transform(FunctionDescriptor functionDescriptor, List<DataType> templateParameterDataTypes, List<DataType> inputParameterDataTypes, DiagnosticChain diagnostics) {
 		ImperativeFunction imperativeFunction = ImperativeModelFactory.eINSTANCE.createImperativeFunction();
 		
 		Map<VariableDescriptor, VariableDeclaration> variableDeclarations = new HashMap<VariableDescriptor, VariableDeclaration>();
 		
 		initializeVariableDeclarations(imperativeFunction, functionDescriptor, templateParameterDataTypes, inputParameterDataTypes, variableDeclarations);
-		evaluateStaticAssertions(functionDescriptor, templateParameterDataTypes, inputParameterDataTypes);
+		new AssertionEvaluator().evaluate(imperativeFunction, functionDescriptor, templateParameterDataTypes, inputParameterDataTypes, diagnostics);
 
 		Collection<List<EquationDescriptor>> equationCompounds = new EquationCompoundHelper().getEquationCompounds(functionDescriptor);
 		constructInitializationCompound(imperativeFunction, equationCompounds, variableDeclarations);
@@ -65,19 +66,6 @@ public class ImperativeFunctionTransformer {
 		return imperativeFunction;
 	}
 	
-	/**
-	 * @param functionDescriptor
-	 * @param templateParameterDataTypes
-	 * @param inputParameterDataTypes
-	 */
-	private void evaluateStaticAssertions(FunctionDescriptor functionDescriptor, List<DataType> templateParameterDataTypes, List<DataType> inputParameterDataTypes) {
-		for (Assertion assertion : functionDescriptor.getDefinition().getAssertions()) {
-			if (!assertion.isStatic()) {
-				continue;
-			}
-		}
-	}
-
 	private void initializeVariableDeclarations(ImperativeFunction imperativeFunction, FunctionDescriptor functionDescriptor, List<DataType> templateParameterDataTypes, List<DataType> inputParameterDataTypes, Map<VariableDescriptor, VariableDeclaration> variableDeclarations) {
 		Iterator<DataType> dataTypeIterator = templateParameterDataTypes.iterator();
 		for (ParameterDeclaration parameterDeclaration : functionDescriptor.getDefinition().getTemplateParameterDeclarations()) {

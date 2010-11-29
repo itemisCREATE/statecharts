@@ -1052,6 +1052,7 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 		addEEnumLiteral(operatorKindEEnum, OperatorKind.LOGICAL_AND);
 		addEEnumLiteral(operatorKindEEnum, OperatorKind.LOGICAL_OR);
 		addEEnumLiteral(operatorKindEEnum, OperatorKind.LOGICAL_NOT);
+		addEEnumLiteral(operatorKindEEnum, OperatorKind.IMPLIES);
 		addEEnumLiteral(operatorKindEEnum, OperatorKind.LESS_THAN);
 		addEEnumLiteral(operatorKindEEnum, OperatorKind.LESS_THAN_OR_EQUAL_TO);
 		addEEnumLiteral(operatorKindEEnum, OperatorKind.GREATER_THAN);

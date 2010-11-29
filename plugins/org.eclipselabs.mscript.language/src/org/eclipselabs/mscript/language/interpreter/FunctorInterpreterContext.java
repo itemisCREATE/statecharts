@@ -17,23 +17,40 @@ import org.eclipselabs.mscript.language.interpreter.value.IValueFactory;
 
 /**
  * @author Andreas Unger
- * 
- * @noextend
- * @noimplement
+ *
  */
-public interface IInterpreterContext {
-	
-	IValueFactory getValueFactory();
+public class FunctorInterpreterContext extends InterpreterContext implements IFunctorInterpreterContext {
 
-	DiagnosticChain getDiagnostics();
+	private IFunctor functor;
+
+	/**
+	 * @param diagnostics
+	 * @param valueFactory
+	 */
+	public FunctorInterpreterContext(DiagnosticChain diagnostics, IValueFactory valueFactory) {
+		super(diagnostics, valueFactory);
+	}
+
+	/**
+	 * @return the functor
+	 */
+	public IFunctor getFunctor() {
+		return functor;
+	}
 	
-	void enterScope();
-	void leaveScope();
-	
-	void addVariable(IVariable variable);
-	IVariable getVariable(VariableDeclaration declaration);
-	
-	void setCanceled(boolean canceled);
-	boolean isCanceled();
+	/**
+	 * @param functor the functor to set
+	 */
+	public void setFunctor(IFunctor functor) {
+		this.functor = functor;
+	}
+
+	public IVariable getVariable(VariableDeclaration declaration) {
+		IVariable variable = super.getVariable(declaration);
+		if (variable == null) {
+			variable = functor.getVariable(declaration);
+		}
+		return variable;
+	}
 
 }

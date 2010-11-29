@@ -26,6 +26,7 @@ package org.eclipselabs.mscript.language.imperativemodel;
 public interface StatefulVariableDeclaration extends VariableDeclaration {
 	/**
 	 * Returns the value of the '<em><b>Circular Buffer Size</b></em>' attribute.
+	 * The default value is <code>"1"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Circular Buffer Size</em>' attribute isn't clear,
@@ -35,7 +36,7 @@ public interface StatefulVariableDeclaration extends VariableDeclaration {
 	 * @return the value of the '<em>Circular Buffer Size</em>' attribute.
 	 * @see #setCircularBufferSize(int)
 	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage#getStatefulVariableDeclaration_CircularBufferSize()
-	 * @model
+	 * @model default="1"
 	 * @generated
 	 */
 	int getCircularBufferSize();

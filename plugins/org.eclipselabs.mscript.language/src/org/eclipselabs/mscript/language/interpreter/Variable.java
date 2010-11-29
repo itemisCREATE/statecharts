@@ -26,6 +26,11 @@ public class Variable implements IVariable {
 	
 	private CircularBuffer<IValue> values = new CircularBuffer<IValue>();
 		
+	public Variable(VariableDeclaration declaration) {
+		this.declaration = declaration;
+		values.resize(1);
+	}
+
 	/**
 	 * 
 	 */

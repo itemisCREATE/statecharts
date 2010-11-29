@@ -16,8 +16,12 @@ import org.eclipselabs.mscript.language.ast.AdditiveExpression;
 import org.eclipselabs.mscript.language.ast.AdditiveExpressionPart;
 import org.eclipselabs.mscript.language.ast.BooleanKind;
 import org.eclipselabs.mscript.language.ast.BooleanLiteral;
+import org.eclipselabs.mscript.language.ast.EqualityExpression;
 import org.eclipselabs.mscript.language.ast.Expression;
+import org.eclipselabs.mscript.language.ast.ImpliesExpression;
 import org.eclipselabs.mscript.language.ast.IntegerLiteral;
+import org.eclipselabs.mscript.language.ast.LogicalAndExpression;
+import org.eclipselabs.mscript.language.ast.LogicalOrExpression;
 import org.eclipselabs.mscript.language.ast.MultiplicativeExpression;
 import org.eclipselabs.mscript.language.ast.MultiplicativeExpressionPart;
 import org.eclipselabs.mscript.language.ast.MultiplicativeOperator;
@@ -202,6 +206,78 @@ class CompoundCGenerator extends ImperativeModelSwitch<String> {
 	private class ExpressionCGenerator extends AstSwitch<String> {
 		
 		/* (non-Javadoc)
+		 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseImpliesExpression(org.eclipselabs.mscript.language.ast.ImpliesExpression)
+		 */
+		@Override
+		public String caseImpliesExpression(ImpliesExpression impliesExpression) {
+			StringBuilder sb = new StringBuilder();
+			sb.append("(!(");
+			sb.append(doSwitch(impliesExpression.getLeftOperand()));
+			sb.append(") || ");
+			sb.append(doSwitch(impliesExpression.getRightOperand()));
+			sb.append(")");
+			return sb.toString();
+		}
+		
+		/* (non-Javadoc)
+		 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseLogicalOrExpression(org.eclipselabs.mscript.language.ast.LogicalOrExpression)
+		 */
+		@Override
+		public String caseLogicalOrExpression(LogicalOrExpression logicalOrExpression) {
+			StringBuilder sb = new StringBuilder();
+			for (Expression operand : logicalOrExpression.getOperands()) {
+				if (sb.length() > 0) {
+					sb.append(" || ");
+				}
+				sb.append(doSwitch(operand));
+			}
+			return sb.toString();
+		}
+		
+		/* (non-Javadoc)
+		 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseLogicalAndExpression(org.eclipselabs.mscript.language.ast.LogicalAndExpression)
+		 */
+		@Override
+		public String caseLogicalAndExpression(LogicalAndExpression logicalAndExpression) {
+			StringBuilder sb = new StringBuilder();
+			for (Expression operand : logicalAndExpression.getOperands()) {
+				if (sb.length() > 0) {
+					sb.append(" && ");
+				}
+				sb.append(doSwitch(operand));
+			}
+			return sb.toString();
+		}
+		
+		/* (non-Javadoc)
+		 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseEqualityExpression(org.eclipselabs.mscript.language.ast.EqualityExpression)
+		 */
+		@Override
+		public String caseEqualityExpression(EqualityExpression equalityExpression) {
+			StringBuilder sb = new StringBuilder();
+			sb.append(doSwitch(equalityExpression.getLeftOperand()));
+			sb.append(" ");
+			sb.append(equalityExpression.getOperator().getLiteral());
+			sb.append(" ");
+			sb.append(doSwitch(equalityExpression.getRightOperand()));
+			return sb.toString();
+		}
+		
+		/* (non-Javadoc)
+		 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseRelationalExpression(org.eclipselabs.mscript.language.ast.RelationalExpression)
+		 */
+		@Override
+		public String caseRelationalExpression(RelationalExpression relationalExpression) {
+			StringBuilder sb = new StringBuilder();
+			sb.append(doSwitch(relationalExpression.getLeftOperand()));
+			sb.append(" ");
+			sb.append(relationalExpression.getOperator().getLiteral());
+			sb.append(" ");
+			sb.append(doSwitch(relationalExpression.getRightOperand()));
+			return sb.toString();
+		}
+		
+		/* (non-Javadoc)
 		 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseAdditiveExpression(org.eclipselabs.mscript.language.ast.AdditiveExpression)
 		 */
 		@Override
@@ -237,20 +313,6 @@ class CompoundCGenerator extends ImperativeModelSwitch<String> {
 					sb.append(")");
 				}
 			}
-			return sb.toString();
-		}
-		
-		/* (non-Javadoc)
-		 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseRelationalExpression(org.eclipselabs.mscript.language.ast.RelationalExpression)
-		 */
-		@Override
-		public String caseRelationalExpression(RelationalExpression relationalExpression) {
-			StringBuilder sb = new StringBuilder();
-			sb.append(doSwitch(relationalExpression.getLeftOperand()));
-			sb.append(" ");
-			sb.append(relationalExpression.getOperator().getLiteral());
-			sb.append(" ");
-			sb.append(doSwitch(relationalExpression.getRightOperand()));
 			return sb.toString();
 		}
 		

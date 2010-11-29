@@ -98,6 +98,7 @@ public class MscriptThread extends Thread {
 				}
 				sb.append("\n");
 				outputFile.appendContents(new StringInputStream(sb.toString()), false, false, new NullProgressMonitor());
+				functor.incrementStepIndex();
 			}
 		} catch (Exception e) {
 			fireMscriptExecutionListener(new MscriptExecutionEvent(this, new Status(IStatus.ERROR, IDECorePlugin.PLUGIN_ID, e.getMessage(), e)));

@@ -258,6 +258,7 @@
       <ownedLiteral xmi:id="_-G6KENUuEd-6taNkaoHW5g" name="LogicalAnd"/>
       <ownedLiteral xmi:id="_AWGlgNUvEd-6taNkaoHW5g" name="LogicalOr"/>
       <ownedLiteral xmi:id="_BmmkENUvEd-6taNkaoHW5g" name="LogicalNot"/>
+      <ownedLiteral xmi:id="_6XqXwPunEd-7irtzbCcKvg" name="Implies"/>
       <ownedLiteral xmi:id="_KXqKANUvEd-6taNkaoHW5g" name="LessThan"/>
       <ownedLiteral xmi:id="_Mau1ANUvEd-6taNkaoHW5g" name="LessThanOrEqualTo"/>
       <ownedLiteral xmi:id="_NjXRANUvEd-6taNkaoHW5g" name="GreaterThan"/>

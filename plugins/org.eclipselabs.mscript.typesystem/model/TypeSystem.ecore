@@ -81,12 +81,13 @@
     <eLiterals name="LogicalAnd" value="7"/>
     <eLiterals name="LogicalOr" value="8"/>
     <eLiterals name="LogicalNot" value="9"/>
-    <eLiterals name="LessThan" value="10"/>
-    <eLiterals name="LessThanOrEqualTo" value="11"/>
-    <eLiterals name="GreaterThan" value="12"/>
-    <eLiterals name="GreaterThanOrEqualTo" value="13"/>
-    <eLiterals name="EqualTo" value="14"/>
-    <eLiterals name="NotEqualTo" value="15"/>
+    <eLiterals name="Implies" value="10"/>
+    <eLiterals name="LessThan" value="11"/>
+    <eLiterals name="LessThanOrEqualTo" value="12"/>
+    <eLiterals name="GreaterThan" value="13"/>
+    <eLiterals name="GreaterThanOrEqualTo" value="14"/>
+    <eLiterals name="EqualTo" value="15"/>
+    <eLiterals name="NotEqualTo" value="16"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ArrayDimension">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="size" ordered="false" lowerBound="1"

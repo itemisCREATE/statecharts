@@ -22,15 +22,19 @@ import org.eclipselabs.mscript.language.ast.AdditiveExpression;
 import org.eclipselabs.mscript.language.ast.AdditiveExpressionPart;
 import org.eclipselabs.mscript.language.ast.AstFactory;
 import org.eclipselabs.mscript.language.ast.BooleanLiteral;
+import org.eclipselabs.mscript.language.ast.EqualityExpression;
 import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.ast.FeatureAccess;
 import org.eclipselabs.mscript.language.ast.FeatureCall;
 import org.eclipselabs.mscript.language.ast.FeatureCallPart;
 import org.eclipselabs.mscript.language.ast.IfExpression;
+import org.eclipselabs.mscript.language.ast.ImpliesExpression;
 import org.eclipselabs.mscript.language.ast.IntegerLiteral;
 import org.eclipselabs.mscript.language.ast.IterationCall;
 import org.eclipselabs.mscript.language.ast.LetExpression;
 import org.eclipselabs.mscript.language.ast.LetExpressionVariableDeclaration;
+import org.eclipselabs.mscript.language.ast.LogicalAndExpression;
+import org.eclipselabs.mscript.language.ast.LogicalOrExpression;
 import org.eclipselabs.mscript.language.ast.MultiplicativeExpression;
 import org.eclipselabs.mscript.language.ast.MultiplicativeExpressionPart;
 import org.eclipselabs.mscript.language.ast.ParenthesizedExpression;
@@ -284,6 +288,144 @@ public class ImperativeExpressionTransformer extends AstSwitch<Expression> {
 	}
 	
 	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseImpliesExpression(org.eclipselabs.mscript.language.ast.ImpliesExpression)
+	 */
+	@Override
+	public Expression caseImpliesExpression(ImpliesExpression impliesExpression) {
+		ImpliesExpression transformedImpliesExpression = AstFactory.eINSTANCE.createImpliesExpression();
+		
+		Expression leftTransformedExpression = doSwitch(impliesExpression.getLeftOperand());
+		Expression rightTransformedExpression = doSwitch(impliesExpression.getRightOperand());
+		
+		DataType leftDataType = ImperativeModelUtil.getDataType(leftTransformedExpression);
+		DataType rightDataType = ImperativeModelUtil.getDataType(rightTransformedExpression);
+		
+		DataType dataType = leftDataType.evaluate(OperatorKind.IMPLIES, rightDataType);
+		
+		transformedImpliesExpression.setLeftOperand(leftTransformedExpression);
+		transformedImpliesExpression.setRightOperand(rightTransformedExpression);
+
+		ImperativeModelUtil.adaptDataType(transformedImpliesExpression, dataType);
+		
+		return transformedImpliesExpression;
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseLogicalOrExpression(org.eclipselabs.mscript.language.ast.LogicalOrExpression)
+	 */
+	@Override
+	public Expression caseLogicalOrExpression(LogicalOrExpression logicalOrExpression) {
+		LogicalOrExpression transformedExpression = AstFactory.eINSTANCE.createLogicalOrExpression();
+		DataType dataType = null;
+		
+		for (Expression operand : logicalOrExpression.getOperands()) {
+			Expression transformedOperand = doSwitch(operand);
+			DataType operandDataType = ImperativeModelUtil.getDataType(transformedOperand);
+			if (dataType == null) {
+				dataType = operandDataType;
+			} else {
+				dataType = dataType.evaluate(OperatorKind.LOGICAL_OR, operandDataType);
+			}
+			transformedExpression.getOperands().add(transformedOperand);
+		}
+		
+		ImperativeModelUtil.adaptDataType(transformedExpression, dataType);
+		return transformedExpression;
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseLogicalAndExpression(org.eclipselabs.mscript.language.ast.LogicalAndExpression)
+	 */
+	@Override
+	public Expression caseLogicalAndExpression(LogicalAndExpression logicalAndExpression) {
+		LogicalAndExpression transformedExpression = AstFactory.eINSTANCE.createLogicalAndExpression();
+		DataType dataType = null;
+		
+		for (Expression operand : logicalAndExpression.getOperands()) {
+			Expression transformedOperand = doSwitch(operand);
+			DataType operandDataType = ImperativeModelUtil.getDataType(transformedOperand);
+			if (dataType == null) {
+				dataType = operandDataType;
+			} else {
+				dataType = dataType.evaluate(OperatorKind.LOGICAL_AND, operandDataType);
+			}
+			transformedExpression.getOperands().add(transformedOperand);
+		}
+		
+		ImperativeModelUtil.adaptDataType(transformedExpression, dataType);
+		return transformedExpression;
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseEqualityExpression(org.eclipselabs.mscript.language.ast.EqualityExpression)
+	 */
+	@Override
+	public Expression caseEqualityExpression(EqualityExpression equalityExpression) {
+		EqualityExpression transformedExpression = AstFactory.eINSTANCE.createEqualityExpression();
+		transformedExpression.setOperator(equalityExpression.getOperator());
+		
+		Expression leftExpression = doSwitch(equalityExpression.getLeftOperand());
+		transformedExpression.setLeftOperand(leftExpression);
+		Expression rightExpression = doSwitch(equalityExpression.getRightOperand());		
+		transformedExpression.setRightOperand(rightExpression);
+		
+		OperatorKind operatorKind;
+		switch (equalityExpression.getOperator()) {
+		case EQUAL_TO:
+			operatorKind = OperatorKind.EQUAL_TO;
+			break;
+		case NOT_EQUAL_TO:
+			operatorKind = OperatorKind.NOT_EQUAL_TO;
+			break;
+		default:
+			throw new IllegalArgumentException();
+		}
+		
+		DataType leftDataType = ImperativeModelUtil.getDataType(leftExpression);
+		DataType rightDataType = ImperativeModelUtil.getDataType(rightExpression);
+		DataType transformedDataType = leftDataType.evaluate(operatorKind, rightDataType);
+		ImperativeModelUtil.adaptDataType(transformedExpression, transformedDataType);
+		return transformedExpression;
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseRelationalExpression(org.eclipselabs.mscript.language.ast.RelationalExpression)
+	 */
+	@Override
+	public Expression caseRelationalExpression(RelationalExpression relationalExpression) {
+		RelationalExpression transformedExpression = AstFactory.eINSTANCE.createRelationalExpression();
+		transformedExpression.setOperator(relationalExpression.getOperator());
+		
+		Expression leftExpression = doSwitch(relationalExpression.getLeftOperand());
+		transformedExpression.setLeftOperand(leftExpression);
+		Expression rightExpression = doSwitch(relationalExpression.getRightOperand());
+		transformedExpression.setRightOperand(rightExpression);
+		
+		OperatorKind operatorKind;
+		switch (relationalExpression.getOperator()) {
+		case GREATER_THAN:
+			operatorKind = OperatorKind.GREATER_THAN;
+			break;
+		case GREATER_THAN_OR_EQUAL_TO:
+			operatorKind = OperatorKind.GREATER_THAN_OR_EQUAL_TO;
+			break;
+		case LESS_THAN:
+			operatorKind = OperatorKind.LESS_THAN;
+			break;
+		case LESS_THAN_OR_EQUAL_TO:
+			operatorKind = OperatorKind.LESS_THAN_OR_EQUAL_TO;
+			break;
+		default:
+			throw new IllegalArgumentException();
+		}
+		DataType leftDataType = ImperativeModelUtil.getDataType(leftExpression);
+		DataType rightDataType = ImperativeModelUtil.getDataType(rightExpression);
+		DataType transformedDataType = leftDataType.evaluate(operatorKind, rightDataType);
+		ImperativeModelUtil.adaptDataType(transformedExpression, transformedDataType);
+		return transformedExpression;
+	}
+	
+	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseAdditiveExpression(org.eclipselabs.mscript.language.ast.AdditiveExpression)
 	 */
 	@Override
@@ -350,41 +492,6 @@ public class ImperativeExpressionTransformer extends AstSwitch<Expression> {
 			transformedExpression.getRightParts().add(transformedRightPart);
 		}
 		ImperativeModelUtil.adaptDataType(transformedExpression, dataType);
-		return transformedExpression;
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseRelationalExpression(org.eclipselabs.mscript.language.ast.RelationalExpression)
-	 */
-	@Override
-	public Expression caseRelationalExpression(RelationalExpression relationalExpression) {
-		RelationalExpression transformedExpression = AstFactory.eINSTANCE.createRelationalExpression();
-		transformedExpression.setOperator(relationalExpression.getOperator());
-		Expression leftExpression = doSwitch(relationalExpression.getLeftOperand());
-		transformedExpression.setLeftOperand(leftExpression);
-		Expression rightExpression = doSwitch(relationalExpression.getRightOperand());
-		transformedExpression.setRightOperand(rightExpression);
-		OperatorKind operatorKind;
-		switch (relationalExpression.getOperator()) {
-		case GREATER_THAN:
-			operatorKind = OperatorKind.GREATER_THAN;
-			break;
-		case GREATER_THAN_OR_EQUAL_TO:
-			operatorKind = OperatorKind.GREATER_THAN_OR_EQUAL_TO;
-			break;
-		case LESS_THAN:
-			operatorKind = OperatorKind.LESS_THAN;
-			break;
-		case LESS_THAN_OR_EQUAL_TO:
-			operatorKind = OperatorKind.LESS_THAN_OR_EQUAL_TO;
-			break;
-		default:
-			throw new IllegalArgumentException();
-		}
-		DataType leftDataType = ImperativeModelUtil.getDataType(leftExpression);
-		DataType rightDataType = ImperativeModelUtil.getDataType(rightExpression);
-		DataType transformedDataType = leftDataType.evaluate(operatorKind, rightDataType);
-		ImperativeModelUtil.adaptDataType(transformedExpression, transformedDataType);
 		return transformedExpression;
 	}
 	

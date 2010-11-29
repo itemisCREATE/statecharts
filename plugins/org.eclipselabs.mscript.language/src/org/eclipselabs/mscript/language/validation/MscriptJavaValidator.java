@@ -93,7 +93,7 @@ public class MscriptJavaValidator extends AbstractMscriptJavaValidator {
 			}
 		}
 
-		ImperativeFunction imperativeFunction = new ImperativeFunctionTransformer().transform(functionDescriptor, templateParameterDataTypes, inputParameterDataTypes);
+		ImperativeFunction imperativeFunction = new ImperativeFunctionTransformer().transform(functionDescriptor, templateParameterDataTypes, inputParameterDataTypes, getChain());
 
 		System.out.print("### " + functionDefinition.getName() + " -> ");
 		for (OutputVariableDeclaration outputVariableDeclaration : imperativeFunction.getOutputVariableDeclarations()) {

@@ -103,6 +103,14 @@ public enum OperatorKind implements Enumerator {
 	 * @ordered
 	 */
 	LOGICAL_NOT(9, "LogicalNot", "LogicalNot"), /**
+	 * The '<em><b>Implies</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #IMPLIES_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	IMPLIES(10, "Implies", "Implies"), /**
 	 * The '<em><b>Less Than</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -110,7 +118,7 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	LESS_THAN(10, "LessThan", "LessThan"), /**
+	LESS_THAN(11, "LessThan", "LessThan"), /**
 	 * The '<em><b>Less Than Or Equal To</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -118,7 +126,7 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	LESS_THAN_OR_EQUAL_TO(11, "LessThanOrEqualTo", "LessThanOrEqualTo"), /**
+	LESS_THAN_OR_EQUAL_TO(12, "LessThanOrEqualTo", "LessThanOrEqualTo"), /**
 	 * The '<em><b>Greater Than</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -126,7 +134,7 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	GREATER_THAN(12, "GreaterThan", "GreaterThan"), /**
+	GREATER_THAN(13, "GreaterThan", "GreaterThan"), /**
 	 * The '<em><b>Greater Than Or Equal To</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -134,7 +142,7 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	GREATER_THAN_OR_EQUAL_TO(13, "GreaterThanOrEqualTo", "GreaterThanOrEqualTo"), /**
+	GREATER_THAN_OR_EQUAL_TO(14, "GreaterThanOrEqualTo", "GreaterThanOrEqualTo"), /**
 	 * The '<em><b>Equal To</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -142,7 +150,7 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	EQUAL_TO(14, "EqualTo", "EqualTo"), /**
+	EQUAL_TO(15, "EqualTo", "EqualTo"), /**
 	 * The '<em><b>Not Equal To</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -150,7 +158,7 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	NOT_EQUAL_TO(15, "NotEqualTo", "NotEqualTo");
+	NOT_EQUAL_TO(16, "NotEqualTo", "NotEqualTo");
 
 	/**
 	 * The '<em><b>Addition</b></em>' literal value.
@@ -303,6 +311,21 @@ public enum OperatorKind implements Enumerator {
 	public static final int LOGICAL_NOT_VALUE = 9;
 
 /**
+	 * The '<em><b>Implies</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Implies</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #IMPLIES
+	 * @model name="Implies"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int IMPLIES_VALUE = 10;
+
+/**
 	 * The '<em><b>Less Than</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -315,7 +338,7 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int LESS_THAN_VALUE = 10;
+	public static final int LESS_THAN_VALUE = 11;
 
 /**
 	 * The '<em><b>Less Than Or Equal To</b></em>' literal value.
@@ -330,7 +353,7 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int LESS_THAN_OR_EQUAL_TO_VALUE = 11;
+	public static final int LESS_THAN_OR_EQUAL_TO_VALUE = 12;
 
 /**
 	 * The '<em><b>Greater Than</b></em>' literal value.
@@ -345,7 +368,7 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int GREATER_THAN_VALUE = 12;
+	public static final int GREATER_THAN_VALUE = 13;
 
 /**
 	 * The '<em><b>Greater Than Or Equal To</b></em>' literal value.
@@ -360,7 +383,7 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int GREATER_THAN_OR_EQUAL_TO_VALUE = 13;
+	public static final int GREATER_THAN_OR_EQUAL_TO_VALUE = 14;
 
 /**
 	 * The '<em><b>Equal To</b></em>' literal value.
@@ -375,7 +398,7 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int EQUAL_TO_VALUE = 14;
+	public static final int EQUAL_TO_VALUE = 15;
 
 /**
 	 * The '<em><b>Not Equal To</b></em>' literal value.
@@ -390,7 +413,7 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int NOT_EQUAL_TO_VALUE = 15;
+	public static final int NOT_EQUAL_TO_VALUE = 16;
 
 /**
 	 * An array of all the '<em><b>Operator Kind</b></em>' enumerators.
@@ -410,6 +433,7 @@ public enum OperatorKind implements Enumerator {
 			LOGICAL_AND,
 			LOGICAL_OR,
 			LOGICAL_NOT,
+			IMPLIES,
 			LESS_THAN,
 			LESS_THAN_OR_EQUAL_TO,
 			GREATER_THAN,
@@ -476,6 +500,7 @@ public enum OperatorKind implements Enumerator {
 			case LOGICAL_AND_VALUE: return LOGICAL_AND;
 			case LOGICAL_OR_VALUE: return LOGICAL_OR;
 			case LOGICAL_NOT_VALUE: return LOGICAL_NOT;
+			case IMPLIES_VALUE: return IMPLIES;
 			case LESS_THAN_VALUE: return LESS_THAN;
 			case LESS_THAN_OR_EQUAL_TO_VALUE: return LESS_THAN_OR_EQUAL_TO;
 			case GREATER_THAN_VALUE: return GREATER_THAN;

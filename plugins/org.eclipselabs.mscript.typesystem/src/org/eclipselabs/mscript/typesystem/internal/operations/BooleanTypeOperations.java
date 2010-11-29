@@ -51,6 +51,7 @@ public class BooleanTypeOperations extends PrimitiveTypeOperations {
 			case NOT_EQUAL_TO:
 			case LOGICAL_AND:
 			case LOGICAL_OR:
+			case IMPLIES:
 				return TypeSystemFactory.eINSTANCE.createBooleanType();
 			}
 		}

@@ -31,9 +31,9 @@ import org.eclipselabs.mscript.language.functionmodel.util.FunctionDescriptorCon
 import org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction;
 import org.eclipselabs.mscript.language.imperativemodel.util.ImperativeFunctionTransformer;
 import org.eclipselabs.mscript.language.interpreter.Functor;
+import org.eclipselabs.mscript.language.interpreter.FunctorInterpreterContext;
 import org.eclipselabs.mscript.language.interpreter.IFunctor;
-import org.eclipselabs.mscript.language.interpreter.IInterpreterContext;
-import org.eclipselabs.mscript.language.interpreter.InterpreterContext;
+import org.eclipselabs.mscript.language.interpreter.IFunctorInterpreterContext;
 import org.eclipselabs.mscript.language.interpreter.value.IValue;
 import org.eclipselabs.mscript.language.interpreter.value.ValueFactory;
 import org.eclipselabs.mscript.language.util.LanguageUtil;
@@ -88,8 +88,8 @@ public class MscriptLaunchConfigurationDelegate extends LaunchConfigurationDeleg
 		IFile outputFile = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(outputFilePathString));
 
 		
-		DiagnosticChain diagnostics = new BasicDiagnostic();
-		IInterpreterContext context = new InterpreterContext(diagnostics, new ValueFactory());
+		DiagnosticChain diagnostics = new BasicDiagnostic(IDECorePlugin.PLUGIN_ID, 0, "Mscript execution failed", new Object[] {});
+		IFunctorInterpreterContext context = new FunctorInterpreterContext(diagnostics, new ValueFactory());
 		
 		IFunctor functor = createFunctor(context, file, functionName, templateArguments, inputFile, outputFile, monitor);
 		checkInputFile(functor.getFunction(), inputFile, monitor);
@@ -129,7 +129,7 @@ public class MscriptLaunchConfigurationDelegate extends LaunchConfigurationDeleg
 		}
 	}
 	
-	protected IFunctor createFunctor(IInterpreterContext interpreterContext, IFile file, String functionName, String templateArgumentString, IFile inputFile, IFile outputFile, IProgressMonitor monitor) throws CoreException {
+	protected IFunctor createFunctor(IFunctorInterpreterContext interpreterContext, IFile file, String functionName, String templateArgumentString, IFile inputFile, IFile outputFile, IProgressMonitor monitor) throws CoreException {
 		IParseResult parseResult = IDECorePlugin.getDefault().getMscriptParser().parse(new InputStreamReader(file.getContents()));
 		if (!parseResult.getParseErrors().isEmpty()) {
 			throw new CoreException(new Status(IStatus.ERROR, IDECorePlugin.PLUGIN_ID, "Parse errors"));
@@ -164,7 +164,7 @@ public class MscriptLaunchConfigurationDelegate extends LaunchConfigurationDeleg
 			}
 		}
 		
-		BasicDiagnostic diagnostics = new BasicDiagnostic();
+		BasicDiagnostic diagnostics = new BasicDiagnostic(IDECorePlugin.PLUGIN_ID, 0, "Functor construction failed", new Object[] {});
 		FunctionDescriptor functionDescriptor = new FunctionDescriptorConstructor().construct(functionDefinition, diagnostics);
 		if (diagnostics.getSeverity() != Diagnostic.OK) {
 			throw new CoreException(BasicDiagnostic.toIStatus(diagnostics));
@@ -183,9 +183,12 @@ public class MscriptLaunchConfigurationDelegate extends LaunchConfigurationDeleg
 			parameterDeclaration.getName();
 		}
 		
-		ImperativeFunction imperativeFunction = new ImperativeFunctionTransformer().transform(functionDescriptor, templateParameterDataTypes, inputParameterDataTypes);
+		ImperativeFunction imperativeFunction = new ImperativeFunctionTransformer().transform(functionDescriptor, templateParameterDataTypes, inputParameterDataTypes, diagnostics);
+		if (diagnostics.getSeverity() != Diagnostic.OK) {
+			throw new CoreException(BasicDiagnostic.toIStatus(diagnostics));
+		}
+
 		IFunctor functor = Functor.create(imperativeFunction, templateArguments);
-		
 		interpreterContext.setFunctor(functor);
 		
 		return functor;

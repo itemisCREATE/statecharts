@@ -24,17 +24,13 @@ import org.eclipselabs.mscript.language.interpreter.value.IValueFactory;
  */
 public class InterpreterContext implements IInterpreterContext {
 
-	private static final Scope MOST_OUTER_SCOPE = new Scope(null);
-	
-	private Scope scope = MOST_OUTER_SCOPE;
+	private Scope scope = new Scope(null);
 
 	private DiagnosticChain diagnostics;
 	private IValueFactory valueFactory;
 	
 	private volatile boolean canceled;
-	
-	private IFunctor functor;
-	
+		
 	/**
 	 * 
 	 */
@@ -50,20 +46,6 @@ public class InterpreterContext implements IInterpreterContext {
 		return diagnostics;
 	}
 	
-	/**
-	 * @return the functor
-	 */
-	public IFunctor getFunctor() {
-		return functor;
-	}
-	
-	/**
-	 * @param functor the functor to set
-	 */
-	public void setFunctor(IFunctor functor) {
-		this.functor = functor;
-	}
-
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.interpreter.IInterpreterContext#getValueFactory()
 	 */
@@ -102,16 +84,12 @@ public class InterpreterContext implements IInterpreterContext {
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.language.interpreter.IInterpreterContext#addLocalVariable(org.eclipselabs.mscript.language.interpreter.IVariable)
 	 */
-	public void addLocalVariable(IVariable variable) {
+	public void addVariable(IVariable variable) {
 		scope.addVariable(variable);
 	}
 	
 	public IVariable getVariable(VariableDeclaration declaration) {
-		IVariable variable = scope.getVariable(declaration);
-		if (variable == null) {
-			variable = functor.getVariable(declaration);
-		}
-		return variable;
+		return scope.getVariable(declaration);
 	}
 	
 	private static class Scope {

@@ -38,7 +38,7 @@ public interface VariableDeclaration extends EObject {
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
 	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage#getVariableDeclaration_Name()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	String getName();

@@ -34,7 +34,7 @@ public abstract class StatefulVariableDeclarationImpl extends VariableDeclaratio
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int CIRCULAR_BUFFER_SIZE_EDEFAULT = 0;
+	protected static final int CIRCULAR_BUFFER_SIZE_EDEFAULT = 1;
 	/**
 	 * The cached value of the '{@link #getCircularBufferSize() <em>Circular Buffer Size</em>}' attribute.
 	 * <!-- begin-user-doc -->

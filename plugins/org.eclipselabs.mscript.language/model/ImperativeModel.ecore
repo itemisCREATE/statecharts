@@ -31,12 +31,13 @@
         eType="#//OutputVariableDeclaration"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="VariableDeclaration" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass ../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//DataType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StatefulVariableDeclaration" abstract="true"
       eSuperTypes="#//VariableDeclaration">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="circularBufferSize" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="circularBufferSize" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="1"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TemplateVariableDeclaration" eSuperTypes="#//VariableDeclaration"/>
   <eClassifiers xsi:type="ecore:EClass" name="InputVariableDeclaration" eSuperTypes="#//StatefulVariableDeclaration">

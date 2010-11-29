@@ -38,6 +38,7 @@
       <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/LogicalAnd"/>
       <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/LogicalOr"/>
       <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/LogicalNot"/>
+      <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/Implies"/>
       <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/LessThan"/>
       <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/LessThanOrEqualTo"/>
       <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/GreaterThan"/>

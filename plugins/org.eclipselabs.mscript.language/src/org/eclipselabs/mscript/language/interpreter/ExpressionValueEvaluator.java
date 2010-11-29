@@ -19,6 +19,7 @@ import org.eclipselabs.mscript.language.ast.BooleanKind;
 import org.eclipselabs.mscript.language.ast.BooleanLiteral;
 import org.eclipselabs.mscript.language.ast.EqualityExpression;
 import org.eclipselabs.mscript.language.ast.Expression;
+import org.eclipselabs.mscript.language.ast.ImpliesExpression;
 import org.eclipselabs.mscript.language.ast.IntegerLiteral;
 import org.eclipselabs.mscript.language.ast.LogicalAndExpression;
 import org.eclipselabs.mscript.language.ast.LogicalOrExpression;
@@ -26,6 +27,7 @@ import org.eclipselabs.mscript.language.ast.MultiplicativeExpression;
 import org.eclipselabs.mscript.language.ast.RealLiteral;
 import org.eclipselabs.mscript.language.ast.RelationalExpression;
 import org.eclipselabs.mscript.language.ast.StringLiteral;
+import org.eclipselabs.mscript.language.ast.TypeTestExpression;
 import org.eclipselabs.mscript.language.ast.UnaryExpression;
 import org.eclipselabs.mscript.language.ast.UnitConstructionOperator;
 import org.eclipselabs.mscript.language.imperativemodel.VariableReference;
@@ -127,6 +129,28 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 	}
 	
 	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseImpliesExpression(org.eclipselabs.mscript.language.ast.ImpliesExpression)
+	 */
+	@Override
+	public IValue caseImpliesExpression(ImpliesExpression impliesExpression) {
+		Expression operand = impliesExpression.getLeftOperand();
+		IValue value = doSwitch(operand);
+		if (value instanceof IBooleanValue) {
+			IBooleanValue booleanResult = (IBooleanValue) value;
+			if (!booleanResult.booleanValue()) {
+				return context.getValueFactory().createBooleanValue(true);
+			}
+			value = doSwitch(impliesExpression.getRightOperand());
+			if (value instanceof IBooleanValue) {
+				booleanResult = (IBooleanValue) value;
+				return context.getValueFactory().createBooleanValue(booleanResult.booleanValue());
+			}
+		}
+		context.getDiagnostics().add(new EObjectDiagnostic(Diagnostic.ERROR, "Implies expression operands must be boolean", operand));
+		return InvalidValue.SINGLETON;
+	}
+	
+	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseLogicalAndExpression(org.eclipselabs.mscript.language.ast.LogicalAndExpression)
 	 */
 	@Override
@@ -214,6 +238,16 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 			context.getDiagnostics().add(new EObjectDiagnostic(Diagnostic.ERROR, "Invalid relational operation operands", relationalExpression));
 		}
 		return result;
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseTypeTestExpression(org.eclipselabs.mscript.language.ast.TypeTestExpression)
+	 */
+	@Override
+	public IValue caseTypeTestExpression(TypeTestExpression typeTestExpression) {
+		IValue value = doSwitch(typeTestExpression.getExpression());
+		DataType dataType = new DataTypeSpecifierEvaluator(context).doSwitch(typeTestExpression.getType());
+		return context.getValueFactory().createBooleanValue(dataType.isAssignableFrom(value.getDataType()));
 	}
 
 	/* (non-Javadoc)
