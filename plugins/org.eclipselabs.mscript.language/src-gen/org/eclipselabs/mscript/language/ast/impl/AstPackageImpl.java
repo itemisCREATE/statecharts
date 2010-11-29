@@ -42,9 +42,9 @@ import org.eclipselabs.mscript.language.ast.EqualityOperator;
 import org.eclipselabs.mscript.language.ast.Equation;
 import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.ast.ExpressionList;
-import org.eclipselabs.mscript.language.ast.FeatureAccess;
 import org.eclipselabs.mscript.language.ast.FeatureCall;
 import org.eclipselabs.mscript.language.ast.FeatureCallPart;
+import org.eclipselabs.mscript.language.ast.FeatureReference;
 import org.eclipselabs.mscript.language.ast.FunctionDefinition;
 import org.eclipselabs.mscript.language.ast.FunctorDeclaration;
 import org.eclipselabs.mscript.language.ast.GaussianTypeSpecifier;
@@ -67,7 +67,7 @@ import org.eclipselabs.mscript.language.ast.MultiplicativeOperator;
 import org.eclipselabs.mscript.language.ast.NamedTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.NumericLiteral;
 import org.eclipselabs.mscript.language.ast.NumericTypeSpecifier;
-import org.eclipselabs.mscript.language.ast.OperationCall;
+import org.eclipselabs.mscript.language.ast.OperationArgumentList;
 import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
 import org.eclipselabs.mscript.language.ast.ParenthesizedExpression;
 import org.eclipselabs.mscript.language.ast.PostfixExpression;
@@ -393,7 +393,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass featureAccessEClass = null;
+  private EClass featureReferenceEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -414,7 +414,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass operationCallEClass = null;
+  private EClass operationArgumentListEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -1694,9 +1694,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getFeatureAccess()
+  public EClass getFeatureReference()
   {
-    return featureAccessEClass;
+    return featureReferenceEClass;
   }
 
   /**
@@ -1704,9 +1704,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getFeatureAccess_Name()
+  public EAttribute getFeatureReference_Name()
   {
-    return (EAttribute)featureAccessEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)featureReferenceEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1764,9 +1764,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getOperationCall()
+  public EClass getOperationArgumentList()
   {
-    return operationCallEClass;
+    return operationArgumentListEClass;
   }
 
   /**
@@ -1774,9 +1774,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getOperationCall_Arguments()
+  public EReference getOperationArgumentList_Arguments()
   {
-    return (EReference)operationCallEClass.getEStructuralFeatures().get(0);
+    return (EReference)operationArgumentListEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1794,9 +1794,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getIterationCall_Variables()
+  public EAttribute getIterationCall_Name()
   {
-    return (EReference)iterationCallEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)iterationCallEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1804,7 +1804,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getIterationCall_Accumulator()
+  public EReference getIterationCall_Variables()
   {
     return (EReference)iterationCallEClass.getEStructuralFeatures().get(1);
   }
@@ -1814,9 +1814,19 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getIterationCall_Expression()
+  public EReference getIterationCall_Accumulator()
   {
     return (EReference)iterationCallEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getIterationCall_Expression()
+  {
+    return (EReference)iterationCallEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -2852,8 +2862,8 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
 
     featureCallPartEClass = createEClass(FEATURE_CALL_PART);
 
-    featureAccessEClass = createEClass(FEATURE_ACCESS);
-    createEAttribute(featureAccessEClass, FEATURE_ACCESS__NAME);
+    featureReferenceEClass = createEClass(FEATURE_REFERENCE);
+    createEAttribute(featureReferenceEClass, FEATURE_REFERENCE__NAME);
 
     arrayElementAccessEClass = createEClass(ARRAY_ELEMENT_ACCESS);
     createEReference(arrayElementAccessEClass, ARRAY_ELEMENT_ACCESS__SUBSCRIPTS);
@@ -2862,10 +2872,11 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     createEAttribute(arraySubscriptEClass, ARRAY_SUBSCRIPT__SLICE);
     createEReference(arraySubscriptEClass, ARRAY_SUBSCRIPT__EXPRESSION);
 
-    operationCallEClass = createEClass(OPERATION_CALL);
-    createEReference(operationCallEClass, OPERATION_CALL__ARGUMENTS);
+    operationArgumentListEClass = createEClass(OPERATION_ARGUMENT_LIST);
+    createEReference(operationArgumentListEClass, OPERATION_ARGUMENT_LIST__ARGUMENTS);
 
     iterationCallEClass = createEClass(ITERATION_CALL);
+    createEAttribute(iterationCallEClass, ITERATION_CALL__NAME);
     createEReference(iterationCallEClass, ITERATION_CALL__VARIABLES);
     createEReference(iterationCallEClass, ITERATION_CALL__ACCUMULATOR);
     createEReference(iterationCallEClass, ITERATION_CALL__EXPRESSION);
@@ -3042,9 +3053,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     integerLiteralEClass.getESuperTypes().add(this.getNumericLiteral());
     booleanLiteralEClass.getESuperTypes().add(this.getLiteral());
     stringLiteralEClass.getESuperTypes().add(this.getLiteral());
-    featureAccessEClass.getESuperTypes().add(this.getFeatureCallPart());
+    featureReferenceEClass.getESuperTypes().add(this.getFeatureCallPart());
     arrayElementAccessEClass.getESuperTypes().add(this.getFeatureCallPart());
-    operationCallEClass.getESuperTypes().add(this.getFeatureCallPart());
+    operationArgumentListEClass.getESuperTypes().add(this.getFeatureCallPart());
     iterationCallEClass.getESuperTypes().add(this.getFeatureCallPart());
     arrayConstructionOperatorEClass.getESuperTypes().add(this.getExpression());
     arrayConcatenationOperatorEClass.getESuperTypes().add(this.getExpression());
@@ -3201,8 +3212,8 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
 
     initEClass(featureCallPartEClass, FeatureCallPart.class, "FeatureCallPart", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-    initEClass(featureAccessEClass, FeatureAccess.class, "FeatureAccess", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getFeatureAccess_Name(), ecorePackage.getEString(), "name", null, 0, 1, FeatureAccess.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(featureReferenceEClass, FeatureReference.class, "FeatureReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getFeatureReference_Name(), ecorePackage.getEString(), "name", null, 0, 1, FeatureReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(arrayElementAccessEClass, ArrayElementAccess.class, "ArrayElementAccess", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getArrayElementAccess_Subscripts(), this.getArraySubscript(), null, "subscripts", null, 0, -1, ArrayElementAccess.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3211,10 +3222,11 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     initEAttribute(getArraySubscript_Slice(), ecorePackage.getEBoolean(), "slice", null, 0, 1, ArraySubscript.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getArraySubscript_Expression(), this.getExpression(), null, "expression", null, 0, 1, ArraySubscript.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(operationCallEClass, OperationCall.class, "OperationCall", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getOperationCall_Arguments(), this.getExpression(), null, "arguments", null, 0, -1, OperationCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(operationArgumentListEClass, OperationArgumentList.class, "OperationArgumentList", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getOperationArgumentList_Arguments(), this.getExpression(), null, "arguments", null, 0, -1, OperationArgumentList.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(iterationCallEClass, IterationCall.class, "IterationCall", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getIterationCall_Name(), ecorePackage.getEString(), "name", null, 0, 1, IterationCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getIterationCall_Variables(), this.getIterationVariable(), null, "variables", null, 0, -1, IterationCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getIterationCall_Accumulator(), this.getIterationAccumulator(), null, "accumulator", null, 0, 1, IterationCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getIterationCall_Expression(), this.getExpression(), null, "expression", null, 0, 1, IterationCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

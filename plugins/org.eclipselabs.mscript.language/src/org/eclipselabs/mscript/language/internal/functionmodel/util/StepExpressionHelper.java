@@ -24,7 +24,7 @@ import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.ast.FeatureCall;
 import org.eclipselabs.mscript.language.ast.FeatureCallPart;
 import org.eclipselabs.mscript.language.ast.IntegerLiteral;
-import org.eclipselabs.mscript.language.ast.OperationCall;
+import org.eclipselabs.mscript.language.ast.OperationArgumentList;
 import org.eclipselabs.mscript.language.ast.ParenthesizedExpression;
 import org.eclipselabs.mscript.language.ast.SimpleName;
 import org.eclipselabs.mscript.language.ast.UnaryExpression;
@@ -40,12 +40,12 @@ public class StepExpressionHelper {
 	public StepExpressionResult getStepExpression(ListIterator<FeatureCallPart> iterator, DiagnosticChain diagnostics) {
 		if (iterator.hasNext()) {
 			FeatureCallPart part = iterator.next();
-			if (part instanceof OperationCall) {
-				OperationCall operationCall = (OperationCall) part;
-				if (operationCall.getArguments().size() == 1) {
-					return evaluateStepExpression(operationCall.getArguments().get(0), diagnostics);
+			if (part instanceof OperationArgumentList) {
+				OperationArgumentList operationArgumentList = (OperationArgumentList) part;
+				if (operationArgumentList.getArguments().size() == 1) {
+					return evaluateStepExpression(operationArgumentList.getArguments().get(0), diagnostics);
 				}
-				diagnostics.add(new EObjectDiagnostic(Diagnostic.ERROR, "Invalid parameter count", operationCall, AstPackage.OPERATION_CALL__ARGUMENTS));
+				diagnostics.add(new EObjectDiagnostic(Diagnostic.ERROR, "Invalid parameter count", operationArgumentList, AstPackage.OPERATION_ARGUMENT_LIST__ARGUMENTS));
 				return null;
 			}
 			iterator.previous();

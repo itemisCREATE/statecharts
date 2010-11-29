@@ -1496,14 +1496,14 @@ public interface AstPackage extends EPackage
   int FEATURE_CALL_PART_FEATURE_COUNT = 0;
 
   /**
-   * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.FeatureAccessImpl <em>Feature Access</em>}' class.
+   * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.FeatureReferenceImpl <em>Feature Reference</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.eclipselabs.mscript.language.ast.impl.FeatureAccessImpl
-   * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getFeatureAccess()
+   * @see org.eclipselabs.mscript.language.ast.impl.FeatureReferenceImpl
+   * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getFeatureReference()
    * @generated
    */
-  int FEATURE_ACCESS = 40;
+  int FEATURE_REFERENCE = 40;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1512,16 +1512,16 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int FEATURE_ACCESS__NAME = FEATURE_CALL_PART_FEATURE_COUNT + 0;
+  int FEATURE_REFERENCE__NAME = FEATURE_CALL_PART_FEATURE_COUNT + 0;
 
   /**
-   * The number of structural features of the '<em>Feature Access</em>' class.
+   * The number of structural features of the '<em>Feature Reference</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int FEATURE_ACCESS_FEATURE_COUNT = FEATURE_CALL_PART_FEATURE_COUNT + 1;
+  int FEATURE_REFERENCE_FEATURE_COUNT = FEATURE_CALL_PART_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.ArrayElementAccessImpl <em>Array Element Access</em>}' class.
@@ -1589,14 +1589,14 @@ public interface AstPackage extends EPackage
   int ARRAY_SUBSCRIPT_FEATURE_COUNT = 2;
 
   /**
-   * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.OperationCallImpl <em>Operation Call</em>}' class.
+   * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.OperationArgumentListImpl <em>Operation Argument List</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.eclipselabs.mscript.language.ast.impl.OperationCallImpl
-   * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getOperationCall()
+   * @see org.eclipselabs.mscript.language.ast.impl.OperationArgumentListImpl
+   * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getOperationArgumentList()
    * @generated
    */
-  int OPERATION_CALL = 43;
+  int OPERATION_ARGUMENT_LIST = 43;
 
   /**
    * The feature id for the '<em><b>Arguments</b></em>' containment reference list.
@@ -1605,16 +1605,16 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int OPERATION_CALL__ARGUMENTS = FEATURE_CALL_PART_FEATURE_COUNT + 0;
+  int OPERATION_ARGUMENT_LIST__ARGUMENTS = FEATURE_CALL_PART_FEATURE_COUNT + 0;
 
   /**
-   * The number of structural features of the '<em>Operation Call</em>' class.
+   * The number of structural features of the '<em>Operation Argument List</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int OPERATION_CALL_FEATURE_COUNT = FEATURE_CALL_PART_FEATURE_COUNT + 1;
+  int OPERATION_ARGUMENT_LIST_FEATURE_COUNT = FEATURE_CALL_PART_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.IterationCallImpl <em>Iteration Call</em>}' class.
@@ -1627,13 +1627,22 @@ public interface AstPackage extends EPackage
   int ITERATION_CALL = 44;
 
   /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ITERATION_CALL__NAME = FEATURE_CALL_PART_FEATURE_COUNT + 0;
+
+  /**
    * The feature id for the '<em><b>Variables</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ITERATION_CALL__VARIABLES = FEATURE_CALL_PART_FEATURE_COUNT + 0;
+  int ITERATION_CALL__VARIABLES = FEATURE_CALL_PART_FEATURE_COUNT + 1;
 
   /**
    * The feature id for the '<em><b>Accumulator</b></em>' containment reference.
@@ -1642,7 +1651,7 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ITERATION_CALL__ACCUMULATOR = FEATURE_CALL_PART_FEATURE_COUNT + 1;
+  int ITERATION_CALL__ACCUMULATOR = FEATURE_CALL_PART_FEATURE_COUNT + 2;
 
   /**
    * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -1651,7 +1660,7 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ITERATION_CALL__EXPRESSION = FEATURE_CALL_PART_FEATURE_COUNT + 2;
+  int ITERATION_CALL__EXPRESSION = FEATURE_CALL_PART_FEATURE_COUNT + 3;
 
   /**
    * The number of structural features of the '<em>Iteration Call</em>' class.
@@ -1660,7 +1669,7 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ITERATION_CALL_FEATURE_COUNT = FEATURE_CALL_PART_FEATURE_COUNT + 3;
+  int ITERATION_CALL_FEATURE_COUNT = FEATURE_CALL_PART_FEATURE_COUNT + 4;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.IterationVariableImpl <em>Iteration Variable</em>}' class.
@@ -3739,25 +3748,25 @@ public interface AstPackage extends EPackage
   EClass getFeatureCallPart();
 
   /**
-   * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.FeatureAccess <em>Feature Access</em>}'.
+   * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.FeatureReference <em>Feature Reference</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Feature Access</em>'.
-   * @see org.eclipselabs.mscript.language.ast.FeatureAccess
+   * @return the meta object for class '<em>Feature Reference</em>'.
+   * @see org.eclipselabs.mscript.language.ast.FeatureReference
    * @generated
    */
-  EClass getFeatureAccess();
+  EClass getFeatureReference();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.ast.FeatureAccess#getName <em>Name</em>}'.
+   * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.ast.FeatureReference#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.eclipselabs.mscript.language.ast.FeatureAccess#getName()
-   * @see #getFeatureAccess()
+   * @see org.eclipselabs.mscript.language.ast.FeatureReference#getName()
+   * @see #getFeatureReference()
    * @generated
    */
-  EAttribute getFeatureAccess_Name();
+  EAttribute getFeatureReference_Name();
 
   /**
    * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.ArrayElementAccess <em>Array Element Access</em>}'.
@@ -3813,25 +3822,25 @@ public interface AstPackage extends EPackage
   EReference getArraySubscript_Expression();
 
   /**
-   * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.OperationCall <em>Operation Call</em>}'.
+   * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.OperationArgumentList <em>Operation Argument List</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Operation Call</em>'.
-   * @see org.eclipselabs.mscript.language.ast.OperationCall
+   * @return the meta object for class '<em>Operation Argument List</em>'.
+   * @see org.eclipselabs.mscript.language.ast.OperationArgumentList
    * @generated
    */
-  EClass getOperationCall();
+  EClass getOperationArgumentList();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.ast.OperationCall#getArguments <em>Arguments</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.ast.OperationArgumentList#getArguments <em>Arguments</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference list '<em>Arguments</em>'.
-   * @see org.eclipselabs.mscript.language.ast.OperationCall#getArguments()
-   * @see #getOperationCall()
+   * @see org.eclipselabs.mscript.language.ast.OperationArgumentList#getArguments()
+   * @see #getOperationArgumentList()
    * @generated
    */
-  EReference getOperationCall_Arguments();
+  EReference getOperationArgumentList_Arguments();
 
   /**
    * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.IterationCall <em>Iteration Call</em>}'.
@@ -3842,6 +3851,17 @@ public interface AstPackage extends EPackage
    * @generated
    */
   EClass getIterationCall();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.ast.IterationCall#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipselabs.mscript.language.ast.IterationCall#getName()
+   * @see #getIterationCall()
+   * @generated
+   */
+  EAttribute getIterationCall_Name();
 
   /**
    * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.ast.IterationCall#getVariables <em>Variables</em>}'.
@@ -5642,14 +5662,14 @@ public interface AstPackage extends EPackage
     EClass FEATURE_CALL_PART = eINSTANCE.getFeatureCallPart();
 
     /**
-     * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.FeatureAccessImpl <em>Feature Access</em>}' class.
+     * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.FeatureReferenceImpl <em>Feature Reference</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.eclipselabs.mscript.language.ast.impl.FeatureAccessImpl
-     * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getFeatureAccess()
+     * @see org.eclipselabs.mscript.language.ast.impl.FeatureReferenceImpl
+     * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getFeatureReference()
      * @generated
      */
-    EClass FEATURE_ACCESS = eINSTANCE.getFeatureAccess();
+    EClass FEATURE_REFERENCE = eINSTANCE.getFeatureReference();
 
     /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -5657,7 +5677,7 @@ public interface AstPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute FEATURE_ACCESS__NAME = eINSTANCE.getFeatureAccess_Name();
+    EAttribute FEATURE_REFERENCE__NAME = eINSTANCE.getFeatureReference_Name();
 
     /**
      * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.ArrayElementAccessImpl <em>Array Element Access</em>}' class.
@@ -5704,14 +5724,14 @@ public interface AstPackage extends EPackage
     EReference ARRAY_SUBSCRIPT__EXPRESSION = eINSTANCE.getArraySubscript_Expression();
 
     /**
-     * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.OperationCallImpl <em>Operation Call</em>}' class.
+     * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.OperationArgumentListImpl <em>Operation Argument List</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.eclipselabs.mscript.language.ast.impl.OperationCallImpl
-     * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getOperationCall()
+     * @see org.eclipselabs.mscript.language.ast.impl.OperationArgumentListImpl
+     * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getOperationArgumentList()
      * @generated
      */
-    EClass OPERATION_CALL = eINSTANCE.getOperationCall();
+    EClass OPERATION_ARGUMENT_LIST = eINSTANCE.getOperationArgumentList();
 
     /**
      * The meta object literal for the '<em><b>Arguments</b></em>' containment reference list feature.
@@ -5719,7 +5739,7 @@ public interface AstPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference OPERATION_CALL__ARGUMENTS = eINSTANCE.getOperationCall_Arguments();
+    EReference OPERATION_ARGUMENT_LIST__ARGUMENTS = eINSTANCE.getOperationArgumentList_Arguments();
 
     /**
      * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.IterationCallImpl <em>Iteration Call</em>}' class.
@@ -5730,6 +5750,14 @@ public interface AstPackage extends EPackage
      * @generated
      */
     EClass ITERATION_CALL = eINSTANCE.getIterationCall();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ITERATION_CALL__NAME = eINSTANCE.getIterationCall_Name();
 
     /**
      * The meta object literal for the '<em><b>Variables</b></em>' containment reference list feature.

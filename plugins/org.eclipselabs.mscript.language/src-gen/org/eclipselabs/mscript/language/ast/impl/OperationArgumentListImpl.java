@@ -19,22 +19,22 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.Expression;
-import org.eclipselabs.mscript.language.ast.OperationCall;
+import org.eclipselabs.mscript.language.ast.OperationArgumentList;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Operation Call</b></em>'.
+ * An implementation of the model object '<em><b>Operation Argument List</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.OperationCallImpl#getArguments <em>Arguments</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.OperationArgumentListImpl#getArguments <em>Arguments</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class OperationCallImpl extends FeatureCallPartImpl implements OperationCall
+public class OperationArgumentListImpl extends FeatureCallPartImpl implements OperationArgumentList
 {
   /**
    * The cached value of the '{@link #getArguments() <em>Arguments</em>}' containment reference list.
@@ -51,7 +51,7 @@ public class OperationCallImpl extends FeatureCallPartImpl implements OperationC
    * <!-- end-user-doc -->
    * @generated
    */
-  protected OperationCallImpl()
+  protected OperationArgumentListImpl()
   {
     super();
   }
@@ -64,7 +64,7 @@ public class OperationCallImpl extends FeatureCallPartImpl implements OperationC
   @Override
   protected EClass eStaticClass()
   {
-    return AstPackage.Literals.OPERATION_CALL;
+    return AstPackage.Literals.OPERATION_ARGUMENT_LIST;
   }
 
   /**
@@ -76,7 +76,7 @@ public class OperationCallImpl extends FeatureCallPartImpl implements OperationC
   {
     if (arguments == null)
     {
-      arguments = new EObjectContainmentEList<Expression>(Expression.class, this, AstPackage.OPERATION_CALL__ARGUMENTS);
+      arguments = new EObjectContainmentEList<Expression>(Expression.class, this, AstPackage.OPERATION_ARGUMENT_LIST__ARGUMENTS);
     }
     return arguments;
   }
@@ -91,7 +91,7 @@ public class OperationCallImpl extends FeatureCallPartImpl implements OperationC
   {
     switch (featureID)
     {
-      case AstPackage.OPERATION_CALL__ARGUMENTS:
+      case AstPackage.OPERATION_ARGUMENT_LIST__ARGUMENTS:
         return ((InternalEList<?>)getArguments()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -107,7 +107,7 @@ public class OperationCallImpl extends FeatureCallPartImpl implements OperationC
   {
     switch (featureID)
     {
-      case AstPackage.OPERATION_CALL__ARGUMENTS:
+      case AstPackage.OPERATION_ARGUMENT_LIST__ARGUMENTS:
         return getArguments();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -124,7 +124,7 @@ public class OperationCallImpl extends FeatureCallPartImpl implements OperationC
   {
     switch (featureID)
     {
-      case AstPackage.OPERATION_CALL__ARGUMENTS:
+      case AstPackage.OPERATION_ARGUMENT_LIST__ARGUMENTS:
         getArguments().clear();
         getArguments().addAll((Collection<? extends Expression>)newValue);
         return;
@@ -142,7 +142,7 @@ public class OperationCallImpl extends FeatureCallPartImpl implements OperationC
   {
     switch (featureID)
     {
-      case AstPackage.OPERATION_CALL__ARGUMENTS:
+      case AstPackage.OPERATION_ARGUMENT_LIST__ARGUMENTS:
         getArguments().clear();
         return;
     }
@@ -159,10 +159,10 @@ public class OperationCallImpl extends FeatureCallPartImpl implements OperationC
   {
     switch (featureID)
     {
-      case AstPackage.OPERATION_CALL__ARGUMENTS:
+      case AstPackage.OPERATION_ARGUMENT_LIST__ARGUMENTS:
         return arguments != null && !arguments.isEmpty();
     }
     return super.eIsSet(featureID);
   }
 
-} //OperationCallImpl
+} //OperationArgumentListImpl

@@ -27,7 +27,7 @@ import org.eclipselabs.mscript.language.ast.FeatureCallPart;
 import org.eclipselabs.mscript.language.ast.FunctionDefinition;
 import org.eclipselabs.mscript.language.ast.LetExpression;
 import org.eclipselabs.mscript.language.ast.LetExpressionVariableDeclaration;
-import org.eclipselabs.mscript.language.ast.OperationCall;
+import org.eclipselabs.mscript.language.ast.OperationArgumentList;
 import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
 import org.eclipselabs.mscript.language.ast.SimpleName;
 import org.eclipselabs.mscript.language.ast.StateVariableDeclaration;
@@ -162,19 +162,19 @@ public class FunctionDescriptorConstructor {
 				
 				switch (variableKind) {
 				case TEMPLATE_PARAMETER:
-					if (!featureCall.getParts().isEmpty() && featureCall.getParts().get(0) instanceof OperationCall) {
+					if (!featureCall.getParts().isEmpty() && featureCall.getParts().get(0) instanceof OperationArgumentList) {
 						diagnostics.add(new EObjectDiagnostic(Diagnostic.ERROR, "Template parameters cannot be called", featureCall));
 					}
 					break;
 				case INPUT_PARAMETER:
 				case OUTPUT_PARAMETER:
 				case STATE_VARIABLE:
-					if (!functionDescriptor.getDefinition().isStateful() && !featureCall.getParts().isEmpty() && featureCall.getParts().get(0) instanceof OperationCall) {
+					if (!functionDescriptor.getDefinition().isStateful() && !featureCall.getParts().isEmpty() && featureCall.getParts().get(0) instanceof OperationArgumentList) {
 						diagnostics.add(new EObjectDiagnostic(Diagnostic.ERROR, "Variable references of stateless functions must not specify step expressions", featureCall));
 					}
 					break;
 				case CONSTANT:
-					if (!featureCall.getParts().isEmpty() && featureCall.getParts().get(0) instanceof OperationCall) {
+					if (!featureCall.getParts().isEmpty() && featureCall.getParts().get(0) instanceof OperationArgumentList) {
 						diagnostics.add(new EObjectDiagnostic(Diagnostic.ERROR, "Constants cannot be called", featureCall));
 					}
 					break;

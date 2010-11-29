@@ -9,21 +9,21 @@ import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Operation Call</b></em>'.
+ * A representation of the model object '<em><b>Operation Argument List</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.OperationCall#getArguments <em>Arguments</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.OperationArgumentList#getArguments <em>Arguments</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipselabs.mscript.language.ast.AstPackage#getOperationCall()
+ * @see org.eclipselabs.mscript.language.ast.AstPackage#getOperationArgumentList()
  * @model
  * @generated
  */
-public interface OperationCall extends FeatureCallPart
+public interface OperationArgumentList extends FeatureCallPart
 {
   /**
    * Returns the value of the '<em><b>Arguments</b></em>' containment reference list.
@@ -35,10 +35,10 @@ public interface OperationCall extends FeatureCallPart
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Arguments</em>' containment reference list.
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getOperationCall_Arguments()
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getOperationArgumentList_Arguments()
    * @model containment="true"
    * @generated
    */
   EList<Expression> getArguments();
 
-} // OperationCall
+} // OperationArgumentList

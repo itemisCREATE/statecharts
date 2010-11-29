@@ -419,11 +419,11 @@ public class AstSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AstPackage.FEATURE_ACCESS:
+      case AstPackage.FEATURE_REFERENCE:
       {
-        FeatureAccess featureAccess = (FeatureAccess)theEObject;
-        T result = caseFeatureAccess(featureAccess);
-        if (result == null) result = caseFeatureCallPart(featureAccess);
+        FeatureReference featureReference = (FeatureReference)theEObject;
+        T result = caseFeatureReference(featureReference);
+        if (result == null) result = caseFeatureCallPart(featureReference);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -442,11 +442,11 @@ public class AstSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AstPackage.OPERATION_CALL:
+      case AstPackage.OPERATION_ARGUMENT_LIST:
       {
-        OperationCall operationCall = (OperationCall)theEObject;
-        T result = caseOperationCall(operationCall);
-        if (result == null) result = caseFeatureCallPart(operationCall);
+        OperationArgumentList operationArgumentList = (OperationArgumentList)theEObject;
+        T result = caseOperationArgumentList(operationArgumentList);
+        if (result == null) result = caseFeatureCallPart(operationArgumentList);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -1333,17 +1333,17 @@ public class AstSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Feature Access</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Feature Reference</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Feature Access</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Feature Reference</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseFeatureAccess(FeatureAccess object)
+  public T caseFeatureReference(FeatureReference object)
   {
     return null;
   }
@@ -1381,17 +1381,17 @@ public class AstSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Operation Call</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Operation Argument List</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Operation Call</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Operation Argument List</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseOperationCall(OperationCall object)
+  public T caseOperationArgumentList(OperationArgumentList object)
   {
     return null;
   }

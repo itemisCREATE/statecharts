@@ -2382,33 +2382,33 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	public class FeatureCallPartElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "FeatureCallPart");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cFeatureAccessParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cFeatureReferenceParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cArrayElementAccessParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		private final RuleCall cOperationCallParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cOperationArgumentListParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		private final RuleCall cIterationCallParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		
 		//FeatureCallPart:
-		//	FeatureAccess | ArrayElementAccess | OperationCall | IterationCall;
+		//	FeatureReference | ArrayElementAccess | OperationArgumentList | IterationCall;
 		public ParserRule getRule() { return rule; }
 
-		//FeatureAccess | ArrayElementAccess | OperationCall | IterationCall
+		//FeatureReference | ArrayElementAccess | OperationArgumentList | IterationCall
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//FeatureAccess
-		public RuleCall getFeatureAccessParserRuleCall_0() { return cFeatureAccessParserRuleCall_0; }
+		//FeatureReference
+		public RuleCall getFeatureReferenceParserRuleCall_0() { return cFeatureReferenceParserRuleCall_0; }
 
 		//ArrayElementAccess
 		public RuleCall getArrayElementAccessParserRuleCall_1() { return cArrayElementAccessParserRuleCall_1; }
 
-		//OperationCall
-		public RuleCall getOperationCallParserRuleCall_2() { return cOperationCallParserRuleCall_2; }
+		//OperationArgumentList
+		public RuleCall getOperationArgumentListParserRuleCall_2() { return cOperationArgumentListParserRuleCall_2; }
 
 		//IterationCall
 		public RuleCall getIterationCallParserRuleCall_3() { return cIterationCallParserRuleCall_3; }
 	}
 
-	public class FeatureAccessElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "FeatureAccess");
+	public class FeatureReferenceElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "FeatureReference");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cFullStopKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -2416,7 +2416,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cNameIDTerminalRuleCall_1_0_0 = (RuleCall)cNameAlternatives_1_0.eContents().get(0);
 		private final Keyword cNameUnitKeyword_1_0_1 = (Keyword)cNameAlternatives_1_0.eContents().get(1);
 		
-		//FeatureAccess:
+		//FeatureReference:
 		//	"." name=(ID | "unit");
 		public ParserRule getRule() { return rule; }
 
@@ -2511,10 +2511,10 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getExpressionExpressionParserRuleCall_1_0() { return cExpressionExpressionParserRuleCall_1_0; }
 	}
 
-	public class OperationCallElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "OperationCall");
+	public class OperationArgumentListElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "OperationArgumentList");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cOperationCallAction_0 = (Action)cGroup.eContents().get(0);
+		private final Action cOperationArgumentListAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cLeftParenthesisKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
 		private final Assignment cArgumentsAssignment_2_0 = (Assignment)cGroup_2.eContents().get(0);
@@ -2525,15 +2525,15 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cArgumentsExpressionParserRuleCall_2_1_1_0 = (RuleCall)cArgumentsAssignment_2_1_1.eContents().get(0);
 		private final Keyword cRightParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
-		//OperationCall:
-		//	{OperationCall} "(" (arguments+=Expression ("," arguments+=Expression)*)? ")";
+		//OperationArgumentList:
+		//	{OperationArgumentList} "(" (arguments+=Expression ("," arguments+=Expression)*)? ")";
 		public ParserRule getRule() { return rule; }
 
-		//{OperationCall} "(" (arguments+=Expression ("," arguments+=Expression)*)? ")"
+		//{OperationArgumentList} "(" (arguments+=Expression ("," arguments+=Expression)*)? ")"
 		public Group getGroup() { return cGroup; }
 
-		//{OperationCall}
-		public Action getOperationCallAction_0() { return cOperationCallAction_0; }
+		//{OperationArgumentList}
+		public Action getOperationArgumentListAction_0() { return cOperationArgumentListAction_0; }
 
 		//"("
 		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
@@ -2566,79 +2566,87 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	public class IterationCallElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "IterationCall");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cIterationCallAction_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cLeftParenthesisKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cVariablesAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cVariablesIterationVariableParserRuleCall_2_0 = (RuleCall)cVariablesAssignment_2.eContents().get(0);
-		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
-		private final Keyword cCommaKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
-		private final Assignment cVariablesAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
-		private final RuleCall cVariablesIterationVariableParserRuleCall_3_1_0 = (RuleCall)cVariablesAssignment_3_1.eContents().get(0);
+		private final Keyword cFullStopKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Keyword cLeftParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cVariablesAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cVariablesIterationVariableParserRuleCall_3_0 = (RuleCall)cVariablesAssignment_3.eContents().get(0);
 		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
-		private final Keyword cSemicolonKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
-		private final Assignment cAccumulatorAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
-		private final RuleCall cAccumulatorIterationAccumulatorParserRuleCall_4_1_0 = (RuleCall)cAccumulatorAssignment_4_1.eContents().get(0);
-		private final Keyword cVerticalLineKeyword_5 = (Keyword)cGroup.eContents().get(5);
-		private final Assignment cExpressionAssignment_6 = (Assignment)cGroup.eContents().get(6);
-		private final RuleCall cExpressionExpressionParserRuleCall_6_0 = (RuleCall)cExpressionAssignment_6.eContents().get(0);
-		private final Keyword cRightParenthesisKeyword_7 = (Keyword)cGroup.eContents().get(7);
+		private final Keyword cCommaKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
+		private final Assignment cVariablesAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
+		private final RuleCall cVariablesIterationVariableParserRuleCall_4_1_0 = (RuleCall)cVariablesAssignment_4_1.eContents().get(0);
+		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
+		private final Keyword cSemicolonKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
+		private final Assignment cAccumulatorAssignment_5_1 = (Assignment)cGroup_5.eContents().get(1);
+		private final RuleCall cAccumulatorIterationAccumulatorParserRuleCall_5_1_0 = (RuleCall)cAccumulatorAssignment_5_1.eContents().get(0);
+		private final Keyword cVerticalLineKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		private final Assignment cExpressionAssignment_7 = (Assignment)cGroup.eContents().get(7);
+		private final RuleCall cExpressionExpressionParserRuleCall_7_0 = (RuleCall)cExpressionAssignment_7.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_8 = (Keyword)cGroup.eContents().get(8);
 		
 		//IterationCall:
-		//	{IterationCall} "(" variables+=IterationVariable ("," variables+=IterationVariable)* (";"
+		//	"." name=ID "(" variables+=IterationVariable ("," variables+=IterationVariable)* (";"
 		//	accumulator=IterationAccumulator)? "|" expression=Expression ")";
 		public ParserRule getRule() { return rule; }
 
-		//{IterationCall} "(" variables+=IterationVariable ("," variables+=IterationVariable)* (";"
-		//accumulator=IterationAccumulator)? "|" expression=Expression ")"
+		//"." name=ID "(" variables+=IterationVariable ("," variables+=IterationVariable)* (";" accumulator=IterationAccumulator)?
+		//"|" expression=Expression ")"
 		public Group getGroup() { return cGroup; }
 
-		//{IterationCall}
-		public Action getIterationCallAction_0() { return cIterationCallAction_0; }
+		//"."
+		public Keyword getFullStopKeyword_0() { return cFullStopKeyword_0; }
+
+		//name=ID
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
 		//"("
-		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
+		public Keyword getLeftParenthesisKeyword_2() { return cLeftParenthesisKeyword_2; }
 
 		//variables+=IterationVariable
-		public Assignment getVariablesAssignment_2() { return cVariablesAssignment_2; }
+		public Assignment getVariablesAssignment_3() { return cVariablesAssignment_3; }
 
 		//IterationVariable
-		public RuleCall getVariablesIterationVariableParserRuleCall_2_0() { return cVariablesIterationVariableParserRuleCall_2_0; }
+		public RuleCall getVariablesIterationVariableParserRuleCall_3_0() { return cVariablesIterationVariableParserRuleCall_3_0; }
 
 		//("," variables+=IterationVariable)*
-		public Group getGroup_3() { return cGroup_3; }
-
-		//","
-		public Keyword getCommaKeyword_3_0() { return cCommaKeyword_3_0; }
-
-		//variables+=IterationVariable
-		public Assignment getVariablesAssignment_3_1() { return cVariablesAssignment_3_1; }
-
-		//IterationVariable
-		public RuleCall getVariablesIterationVariableParserRuleCall_3_1_0() { return cVariablesIterationVariableParserRuleCall_3_1_0; }
-
-		//(";" accumulator=IterationAccumulator)?
 		public Group getGroup_4() { return cGroup_4; }
 
+		//","
+		public Keyword getCommaKeyword_4_0() { return cCommaKeyword_4_0; }
+
+		//variables+=IterationVariable
+		public Assignment getVariablesAssignment_4_1() { return cVariablesAssignment_4_1; }
+
+		//IterationVariable
+		public RuleCall getVariablesIterationVariableParserRuleCall_4_1_0() { return cVariablesIterationVariableParserRuleCall_4_1_0; }
+
+		//(";" accumulator=IterationAccumulator)?
+		public Group getGroup_5() { return cGroup_5; }
+
 		//";"
-		public Keyword getSemicolonKeyword_4_0() { return cSemicolonKeyword_4_0; }
+		public Keyword getSemicolonKeyword_5_0() { return cSemicolonKeyword_5_0; }
 
 		//accumulator=IterationAccumulator
-		public Assignment getAccumulatorAssignment_4_1() { return cAccumulatorAssignment_4_1; }
+		public Assignment getAccumulatorAssignment_5_1() { return cAccumulatorAssignment_5_1; }
 
 		//IterationAccumulator
-		public RuleCall getAccumulatorIterationAccumulatorParserRuleCall_4_1_0() { return cAccumulatorIterationAccumulatorParserRuleCall_4_1_0; }
+		public RuleCall getAccumulatorIterationAccumulatorParserRuleCall_5_1_0() { return cAccumulatorIterationAccumulatorParserRuleCall_5_1_0; }
 
 		//"|"
-		public Keyword getVerticalLineKeyword_5() { return cVerticalLineKeyword_5; }
+		public Keyword getVerticalLineKeyword_6() { return cVerticalLineKeyword_6; }
 
 		//expression=Expression
-		public Assignment getExpressionAssignment_6() { return cExpressionAssignment_6; }
+		public Assignment getExpressionAssignment_7() { return cExpressionAssignment_7; }
 
 		//Expression
-		public RuleCall getExpressionExpressionParserRuleCall_6_0() { return cExpressionExpressionParserRuleCall_6_0; }
+		public RuleCall getExpressionExpressionParserRuleCall_7_0() { return cExpressionExpressionParserRuleCall_7_0; }
 
 		//")"
-		public Keyword getRightParenthesisKeyword_7() { return cRightParenthesisKeyword_7; }
+		public Keyword getRightParenthesisKeyword_8() { return cRightParenthesisKeyword_8; }
 	}
 
 	public class IterationVariableElements extends AbstractParserRuleElementFinder {
@@ -3603,10 +3611,10 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	private SimpleNameElements pSimpleName;
 	private FeatureCallElements pFeatureCall;
 	private FeatureCallPartElements pFeatureCallPart;
-	private FeatureAccessElements pFeatureAccess;
+	private FeatureReferenceElements pFeatureReference;
 	private ArrayElementAccessElements pArrayElementAccess;
 	private ArraySubscriptElements pArraySubscript;
-	private OperationCallElements pOperationCall;
+	private OperationArgumentListElements pOperationArgumentList;
 	private IterationCallElements pIterationCall;
 	private IterationVariableElements pIterationVariable;
 	private IterationAccumulatorElements pIterationAccumulator;
@@ -4310,7 +4318,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//FeatureCallPart:
-	//	FeatureAccess | ArrayElementAccess | OperationCall | IterationCall;
+	//	FeatureReference | ArrayElementAccess | OperationArgumentList | IterationCall;
 	public FeatureCallPartElements getFeatureCallPartAccess() {
 		return (pFeatureCallPart != null) ? pFeatureCallPart : (pFeatureCallPart = new FeatureCallPartElements());
 	}
@@ -4319,14 +4327,14 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		return getFeatureCallPartAccess().getRule();
 	}
 
-	//FeatureAccess:
+	//FeatureReference:
 	//	"." name=(ID | "unit");
-	public FeatureAccessElements getFeatureAccessAccess() {
-		return (pFeatureAccess != null) ? pFeatureAccess : (pFeatureAccess = new FeatureAccessElements());
+	public FeatureReferenceElements getFeatureReferenceAccess() {
+		return (pFeatureReference != null) ? pFeatureReference : (pFeatureReference = new FeatureReferenceElements());
 	}
 	
-	public ParserRule getFeatureAccessRule() {
-		return getFeatureAccessAccess().getRule();
+	public ParserRule getFeatureReferenceRule() {
+		return getFeatureReferenceAccess().getRule();
 	}
 
 	//ArrayElementAccess:
@@ -4349,18 +4357,18 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		return getArraySubscriptAccess().getRule();
 	}
 
-	//OperationCall:
-	//	{OperationCall} "(" (arguments+=Expression ("," arguments+=Expression)*)? ")";
-	public OperationCallElements getOperationCallAccess() {
-		return (pOperationCall != null) ? pOperationCall : (pOperationCall = new OperationCallElements());
+	//OperationArgumentList:
+	//	{OperationArgumentList} "(" (arguments+=Expression ("," arguments+=Expression)*)? ")";
+	public OperationArgumentListElements getOperationArgumentListAccess() {
+		return (pOperationArgumentList != null) ? pOperationArgumentList : (pOperationArgumentList = new OperationArgumentListElements());
 	}
 	
-	public ParserRule getOperationCallRule() {
-		return getOperationCallAccess().getRule();
+	public ParserRule getOperationArgumentListRule() {
+		return getOperationArgumentListAccess().getRule();
 	}
 
 	//IterationCall:
-	//	{IterationCall} "(" variables+=IterationVariable ("," variables+=IterationVariable)* (";"
+	//	"." name=ID "(" variables+=IterationVariable ("," variables+=IterationVariable)* (";"
 	//	accumulator=IterationAccumulator)? "|" expression=Expression ")";
 	public IterationCallElements getIterationCallAccess() {
 		return (pIterationCall != null) ? pIterationCall : (pIterationCall = new IterationCallElements());

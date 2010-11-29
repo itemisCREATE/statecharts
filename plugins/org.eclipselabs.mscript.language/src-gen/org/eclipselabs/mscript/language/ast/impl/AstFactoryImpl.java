@@ -108,10 +108,10 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
       case AstPackage.BOOLEAN_LITERAL: return createBooleanLiteral();
       case AstPackage.STRING_LITERAL: return createStringLiteral();
       case AstPackage.FEATURE_CALL_PART: return createFeatureCallPart();
-      case AstPackage.FEATURE_ACCESS: return createFeatureAccess();
+      case AstPackage.FEATURE_REFERENCE: return createFeatureReference();
       case AstPackage.ARRAY_ELEMENT_ACCESS: return createArrayElementAccess();
       case AstPackage.ARRAY_SUBSCRIPT: return createArraySubscript();
-      case AstPackage.OPERATION_CALL: return createOperationCall();
+      case AstPackage.OPERATION_ARGUMENT_LIST: return createOperationArgumentList();
       case AstPackage.ITERATION_CALL: return createIterationCall();
       case AstPackage.ITERATION_VARIABLE: return createIterationVariable();
       case AstPackage.ITERATION_ACCUMULATOR: return createIterationAccumulator();
@@ -659,10 +659,10 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public FeatureAccess createFeatureAccess()
+  public FeatureReference createFeatureReference()
   {
-    FeatureAccessImpl featureAccess = new FeatureAccessImpl();
-    return featureAccess;
+    FeatureReferenceImpl featureReference = new FeatureReferenceImpl();
+    return featureReference;
   }
 
   /**
@@ -692,10 +692,10 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public OperationCall createOperationCall()
+  public OperationArgumentList createOperationArgumentList()
   {
-    OperationCallImpl operationCall = new OperationCallImpl();
-    return operationCall;
+    OperationArgumentListImpl operationArgumentList = new OperationArgumentListImpl();
+    return operationArgumentList;
   }
 
   /**

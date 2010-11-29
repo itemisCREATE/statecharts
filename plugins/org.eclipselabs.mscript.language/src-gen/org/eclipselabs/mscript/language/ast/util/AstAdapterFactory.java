@@ -278,9 +278,9 @@ public class AstAdapterFactory extends AdapterFactoryImpl
         return createFeatureCallPartAdapter();
       }
       @Override
-      public Adapter caseFeatureAccess(FeatureAccess object)
+      public Adapter caseFeatureReference(FeatureReference object)
       {
-        return createFeatureAccessAdapter();
+        return createFeatureReferenceAdapter();
       }
       @Override
       public Adapter caseArrayElementAccess(ArrayElementAccess object)
@@ -293,9 +293,9 @@ public class AstAdapterFactory extends AdapterFactoryImpl
         return createArraySubscriptAdapter();
       }
       @Override
-      public Adapter caseOperationCall(OperationCall object)
+      public Adapter caseOperationArgumentList(OperationArgumentList object)
       {
-        return createOperationCallAdapter();
+        return createOperationArgumentListAdapter();
       }
       @Override
       public Adapter caseIterationCall(IterationCall object)
@@ -1075,16 +1075,16 @@ public class AstAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.FeatureAccess <em>Feature Access</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.FeatureReference <em>Feature Reference</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.FeatureAccess
+   * @see org.eclipselabs.mscript.language.ast.FeatureReference
    * @generated
    */
-  public Adapter createFeatureAccessAdapter()
+  public Adapter createFeatureReferenceAdapter()
   {
     return null;
   }
@@ -1120,16 +1120,16 @@ public class AstAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.OperationCall <em>Operation Call</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.OperationArgumentList <em>Operation Argument List</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.OperationCall
+   * @see org.eclipselabs.mscript.language.ast.OperationArgumentList
    * @generated
    */
-  public Adapter createOperationCallAdapter()
+  public Adapter createOperationArgumentListAdapter()
   {
     return null;
   }

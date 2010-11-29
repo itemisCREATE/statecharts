@@ -270,9 +270,9 @@ FeatureCall returns Expression :
 	CallablePrimaryExpression ({FeatureCall.target=current} (parts+=FeatureCallPart)+)? | {FeatureCall} target=SimpleName (parts+=FeatureCallPart)*;
 
 FeatureCallPart :
-	FeatureAccess | ArrayElementAccess | OperationCall | IterationCall;
+	FeatureReference | ArrayElementAccess | OperationArgumentList | IterationCall;
 	
-FeatureAccess :
+FeatureReference :
 	'.' name=(ID | 'unit');
 	
 ArrayElementAccess :
@@ -281,11 +281,11 @@ ArrayElementAccess :
 ArraySubscript :
 	slice?=':' | expression=Expression;
 
-OperationCall :
-	{OperationCall} '(' (arguments+=Expression (',' arguments+=Expression)*)? ')';
+OperationArgumentList :
+	{OperationArgumentList} '(' (arguments+=Expression (',' arguments+=Expression)*)? ')';
 
 IterationCall :
-	{IterationCall} '(' variables+=IterationVariable (',' variables+=IterationVariable)* (';' accumulator=IterationAccumulator)? '|' expression=Expression ')';
+	'.' name=ID '(' variables+=IterationVariable (',' variables+=IterationVariable)* (';' accumulator=IterationAccumulator)? '|' expression=Expression ')';
 
 IterationVariable :
 	name=ID;

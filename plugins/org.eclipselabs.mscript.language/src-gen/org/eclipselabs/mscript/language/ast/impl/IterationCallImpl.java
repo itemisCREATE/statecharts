@@ -33,6 +33,7 @@ import org.eclipselabs.mscript.language.ast.IterationVariable;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.IterationCallImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.IterationCallImpl#getVariables <em>Variables</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.IterationCallImpl#getAccumulator <em>Accumulator</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.IterationCallImpl#getExpression <em>Expression</em>}</li>
@@ -43,6 +44,26 @@ import org.eclipselabs.mscript.language.ast.IterationVariable;
  */
 public class IterationCallImpl extends FeatureCallPartImpl implements IterationCall
 {
+  /**
+   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
+  protected static final String NAME_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
+  protected String name = NAME_EDEFAULT;
+
   /**
    * The cached value of the '{@link #getVariables() <em>Variables</em>}' containment reference list.
    * <!-- begin-user-doc -->
@@ -92,6 +113,29 @@ public class IterationCallImpl extends FeatureCallPartImpl implements IterationC
   protected EClass eStaticClass()
   {
     return AstPackage.Literals.ITERATION_CALL;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String getName()
+  {
+    return name;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setName(String newName)
+  {
+    String oldName = name;
+    name = newName;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.ITERATION_CALL__NAME, oldName, name));
   }
 
   /**
@@ -234,6 +278,8 @@ public class IterationCallImpl extends FeatureCallPartImpl implements IterationC
   {
     switch (featureID)
     {
+      case AstPackage.ITERATION_CALL__NAME:
+        return getName();
       case AstPackage.ITERATION_CALL__VARIABLES:
         return getVariables();
       case AstPackage.ITERATION_CALL__ACCUMULATOR:
@@ -255,6 +301,9 @@ public class IterationCallImpl extends FeatureCallPartImpl implements IterationC
   {
     switch (featureID)
     {
+      case AstPackage.ITERATION_CALL__NAME:
+        setName((String)newValue);
+        return;
       case AstPackage.ITERATION_CALL__VARIABLES:
         getVariables().clear();
         getVariables().addAll((Collection<? extends IterationVariable>)newValue);
@@ -279,6 +328,9 @@ public class IterationCallImpl extends FeatureCallPartImpl implements IterationC
   {
     switch (featureID)
     {
+      case AstPackage.ITERATION_CALL__NAME:
+        setName(NAME_EDEFAULT);
+        return;
       case AstPackage.ITERATION_CALL__VARIABLES:
         getVariables().clear();
         return;
@@ -302,6 +354,8 @@ public class IterationCallImpl extends FeatureCallPartImpl implements IterationC
   {
     switch (featureID)
     {
+      case AstPackage.ITERATION_CALL__NAME:
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case AstPackage.ITERATION_CALL__VARIABLES:
         return variables != null && !variables.isEmpty();
       case AstPackage.ITERATION_CALL__ACCUMULATOR:
@@ -310,6 +364,23 @@ public class IterationCallImpl extends FeatureCallPartImpl implements IterationC
         return expression != null;
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (name: ");
+    result.append(name);
+    result.append(')');
+    return result.toString();
   }
 
 } //IterationCallImpl

@@ -172,8 +172,8 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//StringLiteral/value"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//FeatureCallPart"/>
-    <genClasses ecoreClass="Mscript.ecore#//FeatureAccess">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//FeatureAccess/name"/>
+    <genClasses ecoreClass="Mscript.ecore#//FeatureReference">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//FeatureReference/name"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//ArrayElementAccess">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ArrayElementAccess/subscripts"/>
@@ -182,10 +182,11 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//ArraySubscript/slice"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ArraySubscript/expression"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//OperationCall">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//OperationCall/arguments"/>
+    <genClasses ecoreClass="Mscript.ecore#//OperationArgumentList">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//OperationArgumentList/arguments"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//IterationCall">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//IterationCall/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//IterationCall/variables"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//IterationCall/accumulator"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//IterationCall/expression"/>

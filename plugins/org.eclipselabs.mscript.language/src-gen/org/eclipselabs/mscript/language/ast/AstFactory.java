@@ -386,13 +386,13 @@ public interface AstFactory extends EFactory
   FeatureCallPart createFeatureCallPart();
 
   /**
-   * Returns a new object of class '<em>Feature Access</em>'.
+   * Returns a new object of class '<em>Feature Reference</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Feature Access</em>'.
+   * @return a new object of class '<em>Feature Reference</em>'.
    * @generated
    */
-  FeatureAccess createFeatureAccess();
+  FeatureReference createFeatureReference();
 
   /**
    * Returns a new object of class '<em>Array Element Access</em>'.
@@ -413,13 +413,13 @@ public interface AstFactory extends EFactory
   ArraySubscript createArraySubscript();
 
   /**
-   * Returns a new object of class '<em>Operation Call</em>'.
+   * Returns a new object of class '<em>Operation Argument List</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Operation Call</em>'.
+   * @return a new object of class '<em>Operation Argument List</em>'.
    * @generated
    */
-  OperationCall createOperationCall();
+  OperationArgumentList createOperationArgumentList();
 
   /**
    * Returns a new object of class '<em>Iteration Call</em>'.

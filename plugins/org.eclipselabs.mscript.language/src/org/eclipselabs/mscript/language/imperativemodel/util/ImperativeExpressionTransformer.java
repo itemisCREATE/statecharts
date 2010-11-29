@@ -24,7 +24,6 @@ import org.eclipselabs.mscript.language.ast.AstFactory;
 import org.eclipselabs.mscript.language.ast.BooleanLiteral;
 import org.eclipselabs.mscript.language.ast.EqualityExpression;
 import org.eclipselabs.mscript.language.ast.Expression;
-import org.eclipselabs.mscript.language.ast.FeatureAccess;
 import org.eclipselabs.mscript.language.ast.FeatureCall;
 import org.eclipselabs.mscript.language.ast.FeatureCallPart;
 import org.eclipselabs.mscript.language.ast.IfExpression;
@@ -233,16 +232,8 @@ public class ImperativeExpressionTransformer extends AstSwitch<Expression> {
 	private Expression transformNextFeatureCallPart(ListIterator<FeatureCallPart> featureCallPartIterator, Expression collectionExpression) {
 		// Check for iterators
 		FeatureCallPart featureCallPart = featureCallPartIterator.next();
-		if (!(featureCallPart instanceof FeatureAccess)) {
-			throw new RuntimeException("No idea what to do here");
-		}
-		FeatureAccess featureAccess = (FeatureAccess) featureCallPart;
-		if (!featureCallPartIterator.hasNext()) {
-			throw new RuntimeException("There should be more here");
-		}
-		featureCallPart = featureCallPartIterator.next();
 		if (!(featureCallPart instanceof IterationCall)) {
-			throw new RuntimeException("Must be iteration call");
+			throw new RuntimeException("No idea what to do here");
 		}
 		IterationCall iterationCall = (IterationCall) featureCallPart;
 		
