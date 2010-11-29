@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipselabs.mscript.language.imperativemodel.*;
 import org.eclipselabs.mscript.language.imperativemodel.Assignment;
 import org.eclipselabs.mscript.language.imperativemodel.Compound;
 import org.eclipselabs.mscript.language.imperativemodel.CompoundStatement;
@@ -84,6 +85,7 @@ public class ImperativeModelFactoryImpl extends EFactoryImpl implements Imperati
 			case ImperativeModelPackage.IF_STATEMENT: return createIfStatement();
 			case ImperativeModelPackage.FOREACH_STATEMENT: return createForeachStatement();
 			case ImperativeModelPackage.VARIABLE_REFERENCE: return createVariableReference();
+			case ImperativeModelPackage.BUILTIN_FUNCTION_CALL: return createBuiltinFunctionCall();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -217,6 +219,16 @@ public class ImperativeModelFactoryImpl extends EFactoryImpl implements Imperati
 	public VariableReference createVariableReference() {
 		VariableReferenceImpl variableReference = new VariableReferenceImpl();
 		return variableReference;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BuiltinFunctionCall createBuiltinFunctionCall() {
+		BuiltinFunctionCallImpl builtinFunctionCall = new BuiltinFunctionCallImpl();
+		return builtinFunctionCall;
 	}
 
 	/**

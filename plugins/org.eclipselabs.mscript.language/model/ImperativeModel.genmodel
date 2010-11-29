@@ -61,5 +61,11 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ImperativeModel.ecore#//VariableReference/stepIndex"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//VariableReference/arrayIndices"/>
     </genClasses>
+    <genClasses image="false" ecoreClass="ImperativeModel.ecore#//OperationCall">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//OperationCall/arguments"/>
+    </genClasses>
+    <genClasses ecoreClass="ImperativeModel.ecore#//BuiltinFunctionCall">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ImperativeModel.ecore#//BuiltinFunctionCall/name"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

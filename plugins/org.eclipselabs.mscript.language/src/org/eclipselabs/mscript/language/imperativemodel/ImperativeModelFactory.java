@@ -143,6 +143,15 @@ public interface ImperativeModelFactory extends EFactory {
 	VariableReference createVariableReference();
 
 	/**
+	 * Returns a new object of class '<em>Builtin Function Call</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Builtin Function Call</em>'.
+	 * @generated
+	 */
+	BuiltinFunctionCall createBuiltinFunctionCall();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

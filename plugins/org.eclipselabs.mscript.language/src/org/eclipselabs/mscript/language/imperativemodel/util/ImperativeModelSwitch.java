@@ -11,6 +11,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipselabs.mscript.language.ast.Expression;
+import org.eclipselabs.mscript.language.imperativemodel.*;
 import org.eclipselabs.mscript.language.imperativemodel.Assignment;
 import org.eclipselabs.mscript.language.imperativemodel.Compound;
 import org.eclipselabs.mscript.language.imperativemodel.CompoundStatement;
@@ -213,6 +214,21 @@ public class ImperativeModelSwitch<T> {
 				VariableReference variableReference = (VariableReference)theEObject;
 				T result = caseVariableReference(variableReference);
 				if (result == null) result = caseExpression(variableReference);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ImperativeModelPackage.OPERATION_CALL: {
+				OperationCall operationCall = (OperationCall)theEObject;
+				T result = caseOperationCall(operationCall);
+				if (result == null) result = caseExpression(operationCall);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ImperativeModelPackage.BUILTIN_FUNCTION_CALL: {
+				BuiltinFunctionCall builtinFunctionCall = (BuiltinFunctionCall)theEObject;
+				T result = caseBuiltinFunctionCall(builtinFunctionCall);
+				if (result == null) result = caseOperationCall(builtinFunctionCall);
+				if (result == null) result = caseExpression(builtinFunctionCall);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -457,6 +473,36 @@ public class ImperativeModelSwitch<T> {
 	 * @generated
 	 */
 	public T caseVariableReference(VariableReference object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Operation Call</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Operation Call</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseOperationCall(OperationCall object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Builtin Function Call</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Builtin Function Call</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBuiltinFunctionCall(BuiltinFunctionCall object) {
 		return null;
 	}
 

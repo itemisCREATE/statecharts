@@ -30,7 +30,10 @@ import org.eclipselabs.mscript.language.ast.StringLiteral;
 import org.eclipselabs.mscript.language.ast.TypeTestExpression;
 import org.eclipselabs.mscript.language.ast.UnaryExpression;
 import org.eclipselabs.mscript.language.ast.UnitConstructionOperator;
+import org.eclipselabs.mscript.language.imperativemodel.BuiltinFunctionCall;
 import org.eclipselabs.mscript.language.imperativemodel.VariableReference;
+import org.eclipselabs.mscript.language.imperativemodel.util.ImperativeModelSwitch;
+import org.eclipselabs.mscript.language.imperativemodel.util.ImperativeModelUtil;
 import org.eclipselabs.mscript.language.internal.interpreter.InvalidUnitExpressionOperandException;
 import org.eclipselabs.mscript.language.internal.interpreter.UnitExpressionHelper;
 import org.eclipselabs.mscript.language.internal.util.EObjectDiagnostic;
@@ -42,6 +45,7 @@ import org.eclipselabs.mscript.language.interpreter.value.UnitValue;
 import org.eclipselabs.mscript.typesystem.DataType;
 import org.eclipselabs.mscript.typesystem.IntegerType;
 import org.eclipselabs.mscript.typesystem.InvalidDataType;
+import org.eclipselabs.mscript.typesystem.NumericType;
 import org.eclipselabs.mscript.typesystem.RealType;
 import org.eclipselabs.mscript.typesystem.TypeSystemFactory;
 import org.eclipselabs.mscript.typesystem.Unit;
@@ -54,6 +58,8 @@ import org.eclipselabs.mscript.typesystem.util.TypeSystemUtil;
 public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue> {
 
 	private IInterpreterContext context;
+	
+	private ImperativeExpressionValueEvaluator imperativeExpressionValueEvaluator = new ImperativeExpressionValueEvaluator();
 	
 	/**
 	 * 
@@ -382,21 +388,46 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 		return new StringValue(stringLiteral.getValue());
 	}
 	
-	public IValue caseVariableReference(VariableReference variableReference) {
-		IVariable variable = context.getVariable(variableReference.getDeclaration());
-		return variable.getValue(variableReference.getStepIndex());
-	}
-	
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#defaultCase(org.eclipse.emf.ecore.EObject)
 	 */
 	@Override
 	public IValue defaultCase(EObject object) {
-		if (object instanceof VariableReference) {
-			return caseVariableReference((VariableReference) object);
+		IValue value = imperativeExpressionValueEvaluator.doSwitch(object);
+		if (value != null) {
+			return value;
 		}
 		context.getDiagnostics().add(new EObjectDiagnostic(Diagnostic.ERROR, "Invalid expression", object));
 		return InvalidValue.SINGLETON;
+	}
+	
+	private class ImperativeExpressionValueEvaluator extends ImperativeModelSwitch<IValue> {
+		
+		/* (non-Javadoc)
+		 * @see org.eclipselabs.mscript.language.imperativemodel.util.ImperativeModelSwitch#caseVariableReference(org.eclipselabs.mscript.language.imperativemodel.VariableReference)
+		 */
+		@Override
+		public IValue caseVariableReference(VariableReference variableReference) {
+			IVariable variable = context.getVariable(variableReference.getDeclaration());
+			return variable.getValue(variableReference.getStepIndex());
+		}
+		
+		/* (non-Javadoc)
+		 * @see org.eclipselabs.mscript.language.imperativemodel.util.ImperativeModelSwitch#caseBuiltinFunctionCall(org.eclipselabs.mscript.language.imperativemodel.BuiltinFunctionCall)
+		 */
+		@Override
+		public IValue caseBuiltinFunctionCall(BuiltinFunctionCall builtinFunctionCall) {
+			if ("unit".equals(builtinFunctionCall.getName())) {
+				Expression expression = builtinFunctionCall.getArguments().get(0);
+				DataType dataType = ImperativeModelUtil.getDataType(expression);
+				if (dataType instanceof NumericType) {
+					NumericType numericType = (NumericType) dataType;
+					return new UnitValue(EcoreUtil.copy(numericType.getUnit()));
+				}
+			}
+			return super.caseBuiltinFunctionCall(builtinFunctionCall);
+		}
+		
 	}
 
 }

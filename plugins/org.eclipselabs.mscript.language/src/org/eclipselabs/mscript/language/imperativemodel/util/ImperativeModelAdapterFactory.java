@@ -11,6 +11,7 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipselabs.mscript.language.ast.Expression;
+import org.eclipselabs.mscript.language.imperativemodel.*;
 import org.eclipselabs.mscript.language.imperativemodel.Assignment;
 import org.eclipselabs.mscript.language.imperativemodel.Compound;
 import org.eclipselabs.mscript.language.imperativemodel.CompoundStatement;
@@ -148,6 +149,14 @@ public class ImperativeModelAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseVariableReference(VariableReference object) {
 				return createVariableReferenceAdapter();
+			}
+			@Override
+			public Adapter caseOperationCall(OperationCall object) {
+				return createOperationCallAdapter();
+			}
+			@Override
+			public Adapter caseBuiltinFunctionCall(BuiltinFunctionCall object) {
+				return createBuiltinFunctionCallAdapter();
 			}
 			@Override
 			public Adapter caseExpression(Expression object) {
@@ -394,6 +403,34 @@ public class ImperativeModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createVariableReferenceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.imperativemodel.OperationCall <em>Operation Call</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipselabs.mscript.language.imperativemodel.OperationCall
+	 * @generated
+	 */
+	public Adapter createOperationCallAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.imperativemodel.BuiltinFunctionCall <em>Builtin Function Call</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipselabs.mscript.language.imperativemodel.BuiltinFunctionCall
+	 * @generated
+	 */
+	public Adapter createBuiltinFunctionCallAdapter() {
 		return null;
 	}
 

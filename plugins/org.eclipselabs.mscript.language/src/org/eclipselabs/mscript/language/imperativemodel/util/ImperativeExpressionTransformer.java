@@ -26,6 +26,7 @@ import org.eclipselabs.mscript.language.ast.EqualityExpression;
 import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.ast.FeatureCall;
 import org.eclipselabs.mscript.language.ast.FeatureCallPart;
+import org.eclipselabs.mscript.language.ast.FeatureReference;
 import org.eclipselabs.mscript.language.ast.IfExpression;
 import org.eclipselabs.mscript.language.ast.ImpliesExpression;
 import org.eclipselabs.mscript.language.ast.IntegerLiteral;
@@ -43,8 +44,10 @@ import org.eclipselabs.mscript.language.ast.SimpleName;
 import org.eclipselabs.mscript.language.ast.StringLiteral;
 import org.eclipselabs.mscript.language.ast.TypeTestExpression;
 import org.eclipselabs.mscript.language.ast.UnaryExpression;
+import org.eclipselabs.mscript.language.ast.UnitConstructionOperator;
 import org.eclipselabs.mscript.language.ast.util.AstSwitch;
 import org.eclipselabs.mscript.language.imperativemodel.Assignment;
+import org.eclipselabs.mscript.language.imperativemodel.BuiltinFunctionCall;
 import org.eclipselabs.mscript.language.imperativemodel.Compound;
 import org.eclipselabs.mscript.language.imperativemodel.CompoundStatement;
 import org.eclipselabs.mscript.language.imperativemodel.ForeachStatement;
@@ -206,7 +209,23 @@ public class ImperativeExpressionTransformer extends AstSwitch<Expression> {
 			targetExpression = doSwitch(featureCall.getTarget());
 		}
 		while (featureCallPartIterator.hasNext()) {
-			targetExpression = transformNextFeatureCallPart(featureCallPartIterator, targetExpression);
+			FeatureCallPart part = featureCallPartIterator.next();
+			if (part instanceof FeatureReference) {
+				FeatureReference featureReference = (FeatureReference) part;
+				BuiltinFunction builtinFunction = BuiltinFunction.valueOf(featureReference.getName(), BuiltinFunction.PROPERTY);
+				if (builtinFunction != null) {
+					BuiltinFunctionCall builtinFunctionCall = ImperativeModelFactory.eINSTANCE.createBuiltinFunctionCall();
+					builtinFunctionCall.setName(featureReference.getName());
+					builtinFunctionCall.getArguments().add(targetExpression);
+					ImperativeModelUtil.adaptDataType(builtinFunctionCall, TypeSystemFactory.eINSTANCE.createUnitType());
+					targetExpression = builtinFunctionCall;
+				} else {
+					featureCallPartIterator.previous();
+				}
+			} else {
+				featureCallPartIterator.previous();
+				targetExpression = transformNextFeatureCallPart(featureCallPartIterator, targetExpression);
+			}
 		}
 		return targetExpression;
 	}
@@ -588,6 +607,16 @@ public class ImperativeExpressionTransformer extends AstSwitch<Expression> {
 		StringLiteral transformedStringLiteral = EcoreUtil.copy(stringLiteral);
 		ImperativeModelUtil.adaptDataType(transformedStringLiteral, TypeSystemFactory.eINSTANCE.createStringType());
 		return transformedStringLiteral;
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseUnitConstructionOperator(org.eclipselabs.mscript.language.ast.UnitConstructionOperator)
+	 */
+	@Override
+	public Expression caseUnitConstructionOperator(UnitConstructionOperator unitConstructionOperator) {
+		UnitConstructionOperator transformedUnitConstructionOperator = EcoreUtil.copy(unitConstructionOperator);
+		ImperativeModelUtil.adaptDataType(transformedUnitConstructionOperator, TypeSystemFactory.eINSTANCE.createUnitType());
+		return transformedUnitConstructionOperator;
 	}
 	
 	private String createLocalVariableName(String preferredName) {

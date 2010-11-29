@@ -53,22 +53,16 @@ public class CompoundInterpreter extends ImperativeModelSwitch<Boolean> {
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.language.imperativemodel.util.ImperativeModelSwitch#caseLocalVariableDeclaration(org.eclipselabs.mscript.language.imperativemodel.LocalVariableDeclaration)
+	 * @see org.eclipselabs.mscript.language.imperativemodel.util.ImperativeModelSwitch#caseAssignment(org.eclipselabs.mscript.language.imperativemodel.Assignment)
 	 */
 	@Override
-	public Boolean caseLocalVariableDeclaration(LocalVariableDeclaration localVariableDeclaration) {
-		IValue value;
-		if (localVariableDeclaration.getInitializer() != null) {
-			value = new ExpressionValueEvaluator(context).doSwitch(localVariableDeclaration.getInitializer());
-		} else {
-			value = new UninitializedValue();
-		}
-		IVariable variable = new Variable(localVariableDeclaration, 1);
-		variable.setValue(0, value);
-		context.addVariable(variable);
+	public Boolean caseAssignment(Assignment assignment) {
+		IValue value = new ExpressionValueEvaluator(context).doSwitch(assignment.getAssignedExpression());
+		IVariable variable = context.getVariable(assignment.getTarget());
+		variable.setValue(assignment.getStepIndex(), value);
 		return true;
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.language.imperativemodel.util.ImperativeModelSwitch#caseIfStatement(org.eclipselabs.mscript.language.imperativemodel.IfStatement)
 	 */
@@ -97,13 +91,19 @@ public class CompoundInterpreter extends ImperativeModelSwitch<Boolean> {
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.language.imperativemodel.util.ImperativeModelSwitch#caseAssignment(org.eclipselabs.mscript.language.imperativemodel.Assignment)
+	 * @see org.eclipselabs.mscript.language.imperativemodel.util.ImperativeModelSwitch#caseLocalVariableDeclaration(org.eclipselabs.mscript.language.imperativemodel.LocalVariableDeclaration)
 	 */
 	@Override
-	public Boolean caseAssignment(Assignment assignment) {
-		IValue value = new ExpressionValueEvaluator(context).doSwitch(assignment.getAssignedExpression());
-		IVariable variable = context.getVariable(assignment.getTarget());
-		variable.setValue(assignment.getStepIndex(), value);
+	public Boolean caseLocalVariableDeclaration(LocalVariableDeclaration localVariableDeclaration) {
+		IValue value;
+		if (localVariableDeclaration.getInitializer() != null) {
+			value = new ExpressionValueEvaluator(context).doSwitch(localVariableDeclaration.getInitializer());
+		} else {
+			value = new UninitializedValue();
+		}
+		IVariable variable = new Variable(localVariableDeclaration, 1);
+		variable.setValue(0, value);
+		context.addVariable(variable);
 		return true;
 	}
 

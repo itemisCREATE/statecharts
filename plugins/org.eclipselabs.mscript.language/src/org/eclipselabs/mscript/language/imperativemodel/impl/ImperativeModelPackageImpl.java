@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.imperativemodel.Assignment;
+import org.eclipselabs.mscript.language.imperativemodel.BuiltinFunctionCall;
 import org.eclipselabs.mscript.language.imperativemodel.Compound;
 import org.eclipselabs.mscript.language.imperativemodel.CompoundStatement;
 import org.eclipselabs.mscript.language.imperativemodel.ComputationCompound;
@@ -24,6 +25,7 @@ import org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage;
 import org.eclipselabs.mscript.language.imperativemodel.InputVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.InstanceVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.LocalVariableDeclaration;
+import org.eclipselabs.mscript.language.imperativemodel.OperationCall;
 import org.eclipselabs.mscript.language.imperativemodel.OutputVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.StatefulVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.Statement;
@@ -150,6 +152,20 @@ public class ImperativeModelPackageImpl extends EPackageImpl implements Imperati
 	 * @generated
 	 */
 	private EClass variableReferenceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass operationCallEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass builtinFunctionCallEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -608,6 +624,42 @@ public class ImperativeModelPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getOperationCall() {
+		return operationCallEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getOperationCall_Arguments() {
+		return (EReference)operationCallEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getBuiltinFunctionCall() {
+		return builtinFunctionCallEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBuiltinFunctionCall_Name() {
+		return (EAttribute)builtinFunctionCallEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ImperativeModelFactory getImperativeModelFactory() {
 		return (ImperativeModelFactory)getEFactoryInstance();
 	}
@@ -689,6 +741,12 @@ public class ImperativeModelPackageImpl extends EPackageImpl implements Imperati
 		createEReference(variableReferenceEClass, VARIABLE_REFERENCE__DECLARATION);
 		createEAttribute(variableReferenceEClass, VARIABLE_REFERENCE__STEP_INDEX);
 		createEReference(variableReferenceEClass, VARIABLE_REFERENCE__ARRAY_INDICES);
+
+		operationCallEClass = createEClass(OPERATION_CALL);
+		createEReference(operationCallEClass, OPERATION_CALL__ARGUMENTS);
+
+		builtinFunctionCallEClass = createEClass(BUILTIN_FUNCTION_CALL);
+		createEAttribute(builtinFunctionCallEClass, BUILTIN_FUNCTION_CALL__NAME);
 	}
 
 	/**
@@ -737,6 +795,8 @@ public class ImperativeModelPackageImpl extends EPackageImpl implements Imperati
 		ifStatementEClass.getESuperTypes().add(this.getStatement());
 		foreachStatementEClass.getESuperTypes().add(this.getStatement());
 		variableReferenceEClass.getESuperTypes().add(theAstPackage.getExpression());
+		operationCallEClass.getESuperTypes().add(theAstPackage.getExpression());
+		builtinFunctionCallEClass.getESuperTypes().add(this.getOperationCall());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(imperativeFunctionDefinitionEClass, ImperativeFunctionDefinition.class, "ImperativeFunctionDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -797,6 +857,12 @@ public class ImperativeModelPackageImpl extends EPackageImpl implements Imperati
 		initEReference(getVariableReference_Declaration(), this.getVariableDeclaration(), null, "declaration", null, 1, 1, VariableReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getVariableReference_StepIndex(), ecorePackage.getEInt(), "stepIndex", "0", 0, 1, VariableReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getVariableReference_ArrayIndices(), theAstPackage.getExpression(), null, "arrayIndices", null, 0, -1, VariableReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(operationCallEClass, OperationCall.class, "OperationCall", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getOperationCall_Arguments(), theAstPackage.getExpression(), null, "arguments", null, 0, -1, OperationCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(builtinFunctionCallEClass, BuiltinFunctionCall.class, "BuiltinFunctionCall", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getBuiltinFunctionCall_Name(), ecorePackage.getEString(), "name", null, 1, 1, BuiltinFunctionCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

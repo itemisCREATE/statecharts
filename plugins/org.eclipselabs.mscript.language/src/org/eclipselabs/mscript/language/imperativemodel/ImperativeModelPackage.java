@@ -779,6 +779,71 @@ public interface ImperativeModelPackage extends EPackage {
 	int VARIABLE_REFERENCE_FEATURE_COUNT = AstPackage.EXPRESSION_FEATURE_COUNT + 3;
 
 	/**
+	 * The meta object id for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.OperationCallImpl <em>Operation Call</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipselabs.mscript.language.imperativemodel.impl.OperationCallImpl
+	 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getOperationCall()
+	 * @generated
+	 */
+	int OPERATION_CALL = 16;
+
+	/**
+	 * The feature id for the '<em><b>Arguments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_CALL__ARGUMENTS = AstPackage.EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Operation Call</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_CALL_FEATURE_COUNT = AstPackage.EXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.BuiltinFunctionCallImpl <em>Builtin Function Call</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipselabs.mscript.language.imperativemodel.impl.BuiltinFunctionCallImpl
+	 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getBuiltinFunctionCall()
+	 * @generated
+	 */
+	int BUILTIN_FUNCTION_CALL = 17;
+
+	/**
+	 * The feature id for the '<em><b>Arguments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUILTIN_FUNCTION_CALL__ARGUMENTS = OPERATION_CALL__ARGUMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUILTIN_FUNCTION_CALL__NAME = OPERATION_CALL_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Builtin Function Call</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUILTIN_FUNCTION_CALL_FEATURE_COUNT = OPERATION_CALL_FEATURE_COUNT + 1;
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionDefinition <em>Imperative Function Definition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1236,6 +1301,48 @@ public interface ImperativeModelPackage extends EPackage {
 	EReference getVariableReference_ArrayIndices();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.imperativemodel.OperationCall <em>Operation Call</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Operation Call</em>'.
+	 * @see org.eclipselabs.mscript.language.imperativemodel.OperationCall
+	 * @generated
+	 */
+	EClass getOperationCall();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.imperativemodel.OperationCall#getArguments <em>Arguments</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Arguments</em>'.
+	 * @see org.eclipselabs.mscript.language.imperativemodel.OperationCall#getArguments()
+	 * @see #getOperationCall()
+	 * @generated
+	 */
+	EReference getOperationCall_Arguments();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.imperativemodel.BuiltinFunctionCall <em>Builtin Function Call</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Builtin Function Call</em>'.
+	 * @see org.eclipselabs.mscript.language.imperativemodel.BuiltinFunctionCall
+	 * @generated
+	 */
+	EClass getBuiltinFunctionCall();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.imperativemodel.BuiltinFunctionCall#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.eclipselabs.mscript.language.imperativemodel.BuiltinFunctionCall#getName()
+	 * @see #getBuiltinFunctionCall()
+	 * @generated
+	 */
+	EAttribute getBuiltinFunctionCall_Name();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1632,6 +1739,42 @@ public interface ImperativeModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference VARIABLE_REFERENCE__ARRAY_INDICES = eINSTANCE.getVariableReference_ArrayIndices();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.OperationCallImpl <em>Operation Call</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipselabs.mscript.language.imperativemodel.impl.OperationCallImpl
+		 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getOperationCall()
+		 * @generated
+		 */
+		EClass OPERATION_CALL = eINSTANCE.getOperationCall();
+
+		/**
+		 * The meta object literal for the '<em><b>Arguments</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference OPERATION_CALL__ARGUMENTS = eINSTANCE.getOperationCall_Arguments();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.BuiltinFunctionCallImpl <em>Builtin Function Call</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipselabs.mscript.language.imperativemodel.impl.BuiltinFunctionCallImpl
+		 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getBuiltinFunctionCall()
+		 * @generated
+		 */
+		EClass BUILTIN_FUNCTION_CALL = eINSTANCE.getBuiltinFunctionCall();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BUILTIN_FUNCTION_CALL__NAME = eINSTANCE.getBuiltinFunctionCall_Name();
 
 	}
 
