@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction;
+import org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionDefinition;
 import org.eclipselabs.mscript.language.imperativemodel.InputVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.InstanceVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.OutputVariableDeclaration;
@@ -29,7 +29,7 @@ import org.eclipselabs.mscript.language.interpreter.value.IValue;
  */
 public class Functor implements IFunctor {
 
-	private ImperativeFunction function;
+	private ImperativeFunctionDefinition functionDefinition;
 	private Map<VariableDeclaration, IVariable> variables = new HashMap<VariableDeclaration, IVariable>();
 	
 	/**
@@ -38,31 +38,31 @@ public class Functor implements IFunctor {
 	private Functor() {
 	}
 	
-	public static IFunctor create(ImperativeFunction function, List<IValue> templateArguments) {
-		if (function.getTemplateVariableDeclarations().size() != templateArguments.size()) {
+	public static IFunctor create(ImperativeFunctionDefinition functionDefinition, List<IValue> templateArguments) {
+		if (functionDefinition.getTemplateVariableDeclarations().size() != templateArguments.size()) {
 			throw new IllegalArgumentException("Number of template arguments must be equal to number of template parameters of function definition");
 		}
 		
 		Functor functor = new Functor();
-		functor.function = function;
+		functor.functionDefinition = functionDefinition;
 		
 		int i = 0;
-		for (TemplateVariableDeclaration declaration : function.getTemplateVariableDeclarations()) {
+		for (TemplateVariableDeclaration declaration : functionDefinition.getTemplateVariableDeclarations()) {
 			IVariable variable = new Variable(declaration, 1);
 			variable.setValue(0, templateArguments.get(i));
 			functor.variables.put(declaration, variable);
 			++i;
 		}
 		
-		for (InputVariableDeclaration declaration : function.getInputVariableDeclarations()) {
+		for (InputVariableDeclaration declaration : functionDefinition.getInputVariableDeclarations()) {
 			functor.variables.put(declaration, new Variable(declaration, declaration.getCircularBufferSize()));
 		}
 		
-		for (OutputVariableDeclaration declaration : function.getOutputVariableDeclarations()) {
+		for (OutputVariableDeclaration declaration : functionDefinition.getOutputVariableDeclarations()) {
 			functor.variables.put(declaration, new Variable(declaration, declaration.getCircularBufferSize()));
 		}
 		
-		for (InstanceVariableDeclaration declaration : function.getInstanceVariableDeclarations()) {
+		for (InstanceVariableDeclaration declaration : functionDefinition.getInstanceVariableDeclarations()) {
 			functor.variables.put(declaration, new Variable(declaration, declaration.getCircularBufferSize()));
 		}
 		
@@ -72,8 +72,8 @@ public class Functor implements IFunctor {
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.language.interpreter.IFunctor#getFunctionDefinition()
 	 */
-	public ImperativeFunction getFunction() {
-		return function;
+	public ImperativeFunctionDefinition getFunctionDefinition() {
+		return functionDefinition;
 	}
 	
 	/* (non-Javadoc)

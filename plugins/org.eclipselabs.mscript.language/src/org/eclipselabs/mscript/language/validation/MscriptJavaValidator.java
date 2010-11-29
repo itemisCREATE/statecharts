@@ -16,7 +16,7 @@ import org.eclipselabs.mscript.language.ast.UnitExpressionNumerator;
 import org.eclipselabs.mscript.language.functionmodel.FunctionDescriptor;
 import org.eclipselabs.mscript.language.functionmodel.util.FunctionDescriptorConstructor;
 import org.eclipselabs.mscript.language.imperativemodel.Compound;
-import org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction;
+import org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionDefinition;
 import org.eclipselabs.mscript.language.imperativemodel.OutputVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.util.ImperativeFunctionTransformer;
 import org.eclipselabs.mscript.typesystem.ArrayDimension;
@@ -93,17 +93,17 @@ public class MscriptJavaValidator extends AbstractMscriptJavaValidator {
 			}
 		}
 
-		ImperativeFunction imperativeFunction = new ImperativeFunctionTransformer().transform(functionDescriptor, templateParameterDataTypes, inputParameterDataTypes, getChain());
+		ImperativeFunctionDefinition imperativeFunctionDefinition = new ImperativeFunctionTransformer().transform(functionDescriptor, templateParameterDataTypes, inputParameterDataTypes, getChain());
 
 		System.out.print("### " + functionDefinition.getName() + " -> ");
-		for (OutputVariableDeclaration outputVariableDeclaration : imperativeFunction.getOutputVariableDeclarations()) {
+		for (OutputVariableDeclaration outputVariableDeclaration : imperativeFunctionDefinition.getOutputVariableDeclarations()) {
 			System.out.print(outputVariableDeclaration.getType().getClass().getSimpleName());
 			System.out.print(" ");
 		}
 		System.out.println();
 		System.out.println("--- Initialize compound:");
-		System.out.println(new CompoundCGenerator().doSwitch(imperativeFunction.getInitializationCompound()));
-		for (Compound compound : imperativeFunction.getComputationCompounds()) {
+		System.out.println(new CompoundCGenerator().doSwitch(imperativeFunctionDefinition.getInitializationCompound()));
+		for (Compound compound : imperativeFunctionDefinition.getComputationCompounds()) {
 			System.out.println("--- Computation compound:");
 			System.out.println(new CompoundCGenerator().doSwitch(compound));
 		}

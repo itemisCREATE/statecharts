@@ -18,7 +18,7 @@ import org.eclipselabs.mscript.language.imperativemodel.CompoundStatement;
 import org.eclipselabs.mscript.language.imperativemodel.ComputationCompound;
 import org.eclipselabs.mscript.language.imperativemodel.ForeachStatement;
 import org.eclipselabs.mscript.language.imperativemodel.IfStatement;
-import org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction;
+import org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionDefinition;
 import org.eclipselabs.mscript.language.imperativemodel.ImperativeModelFactory;
 import org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage;
 import org.eclipselabs.mscript.language.imperativemodel.InputVariableDeclaration;
@@ -44,7 +44,7 @@ public class ImperativeModelPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass imperativeFunctionEClass = null;
+	private EClass imperativeFunctionDefinitionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -221,8 +221,8 @@ public class ImperativeModelPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getImperativeFunction() {
-		return imperativeFunctionEClass;
+	public EClass getImperativeFunctionDefinition() {
+		return imperativeFunctionDefinitionEClass;
 	}
 
 	/**
@@ -230,8 +230,8 @@ public class ImperativeModelPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getImperativeFunction_TemplateVariableDeclarations() {
-		return (EReference)imperativeFunctionEClass.getEStructuralFeatures().get(0);
+	public EReference getImperativeFunctionDefinition_TemplateVariableDeclarations() {
+		return (EReference)imperativeFunctionDefinitionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -239,8 +239,8 @@ public class ImperativeModelPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getImperativeFunction_InputVariableDeclarations() {
-		return (EReference)imperativeFunctionEClass.getEStructuralFeatures().get(1);
+	public EReference getImperativeFunctionDefinition_InputVariableDeclarations() {
+		return (EReference)imperativeFunctionDefinitionEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -248,8 +248,8 @@ public class ImperativeModelPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getImperativeFunction_OutputVariableDeclarations() {
-		return (EReference)imperativeFunctionEClass.getEStructuralFeatures().get(2);
+	public EReference getImperativeFunctionDefinition_OutputVariableDeclarations() {
+		return (EReference)imperativeFunctionDefinitionEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -257,8 +257,8 @@ public class ImperativeModelPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getImperativeFunction_InstanceVariableDeclarations() {
-		return (EReference)imperativeFunctionEClass.getEStructuralFeatures().get(3);
+	public EReference getImperativeFunctionDefinition_InstanceVariableDeclarations() {
+		return (EReference)imperativeFunctionDefinitionEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -266,8 +266,8 @@ public class ImperativeModelPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getImperativeFunction_InitializationCompound() {
-		return (EReference)imperativeFunctionEClass.getEStructuralFeatures().get(4);
+	public EReference getImperativeFunctionDefinition_InitializationCompound() {
+		return (EReference)imperativeFunctionDefinitionEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -275,8 +275,8 @@ public class ImperativeModelPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getImperativeFunction_ComputationCompounds() {
-		return (EReference)imperativeFunctionEClass.getEStructuralFeatures().get(5);
+	public EReference getImperativeFunctionDefinition_ComputationCompounds() {
+		return (EReference)imperativeFunctionDefinitionEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -631,13 +631,13 @@ public class ImperativeModelPackageImpl extends EPackageImpl implements Imperati
 		isCreated = true;
 
 		// Create classes and their features
-		imperativeFunctionEClass = createEClass(IMPERATIVE_FUNCTION);
-		createEReference(imperativeFunctionEClass, IMPERATIVE_FUNCTION__TEMPLATE_VARIABLE_DECLARATIONS);
-		createEReference(imperativeFunctionEClass, IMPERATIVE_FUNCTION__INPUT_VARIABLE_DECLARATIONS);
-		createEReference(imperativeFunctionEClass, IMPERATIVE_FUNCTION__OUTPUT_VARIABLE_DECLARATIONS);
-		createEReference(imperativeFunctionEClass, IMPERATIVE_FUNCTION__INSTANCE_VARIABLE_DECLARATIONS);
-		createEReference(imperativeFunctionEClass, IMPERATIVE_FUNCTION__INITIALIZATION_COMPOUND);
-		createEReference(imperativeFunctionEClass, IMPERATIVE_FUNCTION__COMPUTATION_COMPOUNDS);
+		imperativeFunctionDefinitionEClass = createEClass(IMPERATIVE_FUNCTION_DEFINITION);
+		createEReference(imperativeFunctionDefinitionEClass, IMPERATIVE_FUNCTION_DEFINITION__TEMPLATE_VARIABLE_DECLARATIONS);
+		createEReference(imperativeFunctionDefinitionEClass, IMPERATIVE_FUNCTION_DEFINITION__INPUT_VARIABLE_DECLARATIONS);
+		createEReference(imperativeFunctionDefinitionEClass, IMPERATIVE_FUNCTION_DEFINITION__OUTPUT_VARIABLE_DECLARATIONS);
+		createEReference(imperativeFunctionDefinitionEClass, IMPERATIVE_FUNCTION_DEFINITION__INSTANCE_VARIABLE_DECLARATIONS);
+		createEReference(imperativeFunctionDefinitionEClass, IMPERATIVE_FUNCTION_DEFINITION__INITIALIZATION_COMPOUND);
+		createEReference(imperativeFunctionDefinitionEClass, IMPERATIVE_FUNCTION_DEFINITION__COMPUTATION_COMPOUNDS);
 
 		compoundEClass = createEClass(COMPOUND);
 		createEReference(compoundEClass, COMPOUND__STATEMENTS);
@@ -739,13 +739,13 @@ public class ImperativeModelPackageImpl extends EPackageImpl implements Imperati
 		variableReferenceEClass.getESuperTypes().add(theAstPackage.getExpression());
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(imperativeFunctionEClass, ImperativeFunction.class, "ImperativeFunction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getImperativeFunction_TemplateVariableDeclarations(), this.getTemplateVariableDeclaration(), null, "templateVariableDeclarations", null, 0, -1, ImperativeFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getImperativeFunction_InputVariableDeclarations(), this.getInputVariableDeclaration(), null, "inputVariableDeclarations", null, 0, -1, ImperativeFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getImperativeFunction_OutputVariableDeclarations(), this.getOutputVariableDeclaration(), null, "outputVariableDeclarations", null, 0, -1, ImperativeFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getImperativeFunction_InstanceVariableDeclarations(), this.getInstanceVariableDeclaration(), null, "instanceVariableDeclarations", null, 0, -1, ImperativeFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getImperativeFunction_InitializationCompound(), this.getCompound(), null, "initializationCompound", null, 0, 1, ImperativeFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getImperativeFunction_ComputationCompounds(), this.getComputationCompound(), null, "computationCompounds", null, 0, -1, ImperativeFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(imperativeFunctionDefinitionEClass, ImperativeFunctionDefinition.class, "ImperativeFunctionDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getImperativeFunctionDefinition_TemplateVariableDeclarations(), this.getTemplateVariableDeclaration(), null, "templateVariableDeclarations", null, 0, -1, ImperativeFunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getImperativeFunctionDefinition_InputVariableDeclarations(), this.getInputVariableDeclaration(), null, "inputVariableDeclarations", null, 0, -1, ImperativeFunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getImperativeFunctionDefinition_OutputVariableDeclarations(), this.getOutputVariableDeclaration(), null, "outputVariableDeclarations", null, 0, -1, ImperativeFunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getImperativeFunctionDefinition_InstanceVariableDeclarations(), this.getInstanceVariableDeclaration(), null, "instanceVariableDeclarations", null, 0, -1, ImperativeFunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getImperativeFunctionDefinition_InitializationCompound(), this.getCompound(), null, "initializationCompound", null, 0, 1, ImperativeFunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getImperativeFunctionDefinition_ComputationCompounds(), this.getComputationCompound(), null, "computationCompounds", null, 0, -1, ImperativeFunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(compoundEClass, Compound.class, "Compound", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCompound_Statements(), this.getStatement(), null, "statements", null, 0, -1, Compound.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

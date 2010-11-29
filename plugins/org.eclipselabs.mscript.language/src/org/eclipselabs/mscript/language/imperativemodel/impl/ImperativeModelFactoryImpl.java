@@ -17,7 +17,7 @@ import org.eclipselabs.mscript.language.imperativemodel.CompoundStatement;
 import org.eclipselabs.mscript.language.imperativemodel.ComputationCompound;
 import org.eclipselabs.mscript.language.imperativemodel.ForeachStatement;
 import org.eclipselabs.mscript.language.imperativemodel.IfStatement;
-import org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction;
+import org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionDefinition;
 import org.eclipselabs.mscript.language.imperativemodel.ImperativeModelFactory;
 import org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage;
 import org.eclipselabs.mscript.language.imperativemodel.InputVariableDeclaration;
@@ -71,7 +71,7 @@ public class ImperativeModelFactoryImpl extends EFactoryImpl implements Imperati
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case ImperativeModelPackage.IMPERATIVE_FUNCTION: return createImperativeFunction();
+			case ImperativeModelPackage.IMPERATIVE_FUNCTION_DEFINITION: return createImperativeFunctionDefinition();
 			case ImperativeModelPackage.COMPOUND: return createCompound();
 			case ImperativeModelPackage.COMPUTATION_COMPOUND: return createComputationCompound();
 			case ImperativeModelPackage.TEMPLATE_VARIABLE_DECLARATION: return createTemplateVariableDeclaration();
@@ -94,9 +94,9 @@ public class ImperativeModelFactoryImpl extends EFactoryImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ImperativeFunction createImperativeFunction() {
-		ImperativeFunctionImpl imperativeFunction = new ImperativeFunctionImpl();
-		return imperativeFunction;
+	public ImperativeFunctionDefinition createImperativeFunctionDefinition() {
+		ImperativeFunctionDefinitionImpl imperativeFunctionDefinition = new ImperativeFunctionDefinitionImpl();
+		return imperativeFunctionDefinition;
 	}
 
 	/**

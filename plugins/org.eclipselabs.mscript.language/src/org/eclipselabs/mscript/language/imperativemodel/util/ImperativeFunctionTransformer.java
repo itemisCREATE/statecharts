@@ -32,7 +32,7 @@ import org.eclipselabs.mscript.language.functionmodel.VariableKind;
 import org.eclipselabs.mscript.language.functionmodel.VariableStep;
 import org.eclipselabs.mscript.language.imperativemodel.Compound;
 import org.eclipselabs.mscript.language.imperativemodel.ComputationCompound;
-import org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction;
+import org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionDefinition;
 import org.eclipselabs.mscript.language.imperativemodel.ImperativeModelFactory;
 import org.eclipselabs.mscript.language.imperativemodel.InputVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.InstanceVariableDeclaration;
@@ -51,22 +51,22 @@ import org.eclipselabs.mscript.typesystem.DataType;
  */
 public class ImperativeFunctionTransformer {
 	
-	public ImperativeFunction transform(FunctionDescriptor functionDescriptor, List<DataType> templateParameterDataTypes, List<DataType> inputParameterDataTypes, DiagnosticChain diagnostics) {
-		ImperativeFunction imperativeFunction = ImperativeModelFactory.eINSTANCE.createImperativeFunction();
+	public ImperativeFunctionDefinition transform(FunctionDescriptor functionDescriptor, List<DataType> templateParameterDataTypes, List<DataType> inputParameterDataTypes, DiagnosticChain diagnostics) {
+		ImperativeFunctionDefinition imperativeFunctionDefinition = ImperativeModelFactory.eINSTANCE.createImperativeFunctionDefinition();
 		
 		Map<VariableDescriptor, VariableDeclaration> variableDeclarations = new HashMap<VariableDescriptor, VariableDeclaration>();
 		
-		initializeVariableDeclarations(imperativeFunction, functionDescriptor, templateParameterDataTypes, inputParameterDataTypes, variableDeclarations);
-		new AssertionEvaluator().evaluate(imperativeFunction, functionDescriptor, templateParameterDataTypes, inputParameterDataTypes, diagnostics);
+		initializeVariableDeclarations(imperativeFunctionDefinition, functionDescriptor, templateParameterDataTypes, inputParameterDataTypes, variableDeclarations);
+		new AssertionEvaluator().evaluate(imperativeFunctionDefinition, functionDescriptor, templateParameterDataTypes, inputParameterDataTypes, diagnostics);
 
 		Collection<List<EquationDescriptor>> equationCompounds = new EquationCompoundHelper().getEquationCompounds(functionDescriptor);
-		constructInitializationCompound(imperativeFunction, equationCompounds, variableDeclarations);
-		constructComputationCompounds(imperativeFunction, equationCompounds, variableDeclarations);
+		constructInitializationCompound(imperativeFunctionDefinition, equationCompounds, variableDeclarations);
+		constructComputationCompounds(imperativeFunctionDefinition, equationCompounds, variableDeclarations);
 		
-		return imperativeFunction;
+		return imperativeFunctionDefinition;
 	}
 	
-	private void initializeVariableDeclarations(ImperativeFunction imperativeFunction, FunctionDescriptor functionDescriptor, List<DataType> templateParameterDataTypes, List<DataType> inputParameterDataTypes, Map<VariableDescriptor, VariableDeclaration> variableDeclarations) {
+	private void initializeVariableDeclarations(ImperativeFunctionDefinition imperativeFunctionDefinition, FunctionDescriptor functionDescriptor, List<DataType> templateParameterDataTypes, List<DataType> inputParameterDataTypes, Map<VariableDescriptor, VariableDeclaration> variableDeclarations) {
 		Iterator<DataType> dataTypeIterator = templateParameterDataTypes.iterator();
 		for (ParameterDeclaration parameterDeclaration : functionDescriptor.getDefinition().getTemplateParameterDeclarations()) {
 			TemplateVariableDeclaration templateVariableDeclaration = ImperativeModelFactory.eINSTANCE.createTemplateVariableDeclaration();
@@ -78,7 +78,7 @@ public class ImperativeFunctionTransformer {
 			if (variableDescriptor != null) {
 				variableDeclarations.put(variableDescriptor, templateVariableDeclaration);
 			}
-			imperativeFunction.getTemplateVariableDeclarations().add(templateVariableDeclaration);
+			imperativeFunctionDefinition.getTemplateVariableDeclarations().add(templateVariableDeclaration);
 		}
 
 		dataTypeIterator = inputParameterDataTypes.iterator();
@@ -93,7 +93,7 @@ public class ImperativeFunctionTransformer {
 				inputVariableDeclaration.setCircularBufferSize(variableDescriptor.getMaximumStep().getIndex() - variableDescriptor.getMinimumStep().getIndex() + 1);
 				variableDeclarations.put(variableDescriptor, inputVariableDeclaration);
 			}
-			imperativeFunction.getInputVariableDeclarations().add(inputVariableDeclaration);
+			imperativeFunctionDefinition.getInputVariableDeclarations().add(inputVariableDeclaration);
 		}
 		
 		for (ParameterDeclaration parameterDeclaration : functionDescriptor.getDefinition().getOutputParameterDeclarations()) {
@@ -104,7 +104,7 @@ public class ImperativeFunctionTransformer {
 				outputVariableDeclaration.setCircularBufferSize(variableDescriptor.getMaximumStep().getIndex() - variableDescriptor.getMinimumStep().getIndex() + 1);
 				variableDeclarations.put(variableDescriptor, outputVariableDeclaration);
 			}
-			imperativeFunction.getOutputVariableDeclarations().add(outputVariableDeclaration);
+			imperativeFunctionDefinition.getOutputVariableDeclarations().add(outputVariableDeclaration);
 		}
 
 		for (StateVariableDeclaration stateVariableDeclaration : functionDescriptor.getDefinition().getStateVariableDeclarations()) {
@@ -115,11 +115,11 @@ public class ImperativeFunctionTransformer {
 				instanceVariableDeclaration.setCircularBufferSize(variableDescriptor.getMaximumStep().getIndex() - variableDescriptor.getMinimumStep().getIndex() + 1);
 				variableDeclarations.put(variableDescriptor, instanceVariableDeclaration);
 			}
-			imperativeFunction.getInstanceVariableDeclarations().add(instanceVariableDeclaration);
+			imperativeFunctionDefinition.getInstanceVariableDeclarations().add(instanceVariableDeclaration);
 		}
 	}
 	
-	private void constructInitializationCompound(ImperativeFunction imperativeFunction, Collection<List<EquationDescriptor>> equationCompounds, Map<VariableDescriptor, VariableDeclaration> variableDeclarations) {
+	private void constructInitializationCompound(ImperativeFunctionDefinition imperativeFunctionDefinition, Collection<List<EquationDescriptor>> equationCompounds, Map<VariableDescriptor, VariableDeclaration> variableDeclarations) {
 		Compound compound = ImperativeModelFactory.eINSTANCE.createCompound();
 		for (Iterator<List<EquationDescriptor>> it = equationCompounds.iterator(); it.hasNext();) {
 			List<EquationDescriptor> equationDescriptors = it.next();
@@ -128,7 +128,7 @@ public class ImperativeFunctionTransformer {
 				VariableStep lhsVariableStep = FunctionModelUtil.getFirstLeftHandSideVariableStep(equationDescriptor);
 				if (lhsVariableStep != null && lhsVariableStep.isInitial()) {
 					ImperativeExpressionTarget target = new ImperativeExpressionTarget(variableDeclarations.get(lhsVariableStep.getDescriptor()), lhsVariableStep.getIndex());
-					Scope scope = createScope(imperativeFunction, compound);
+					Scope scope = createScope(imperativeFunctionDefinition, compound);
 					ImperativeExpressionTransformer transformer = new ImperativeExpressionTransformer(scope);
 					transformer.transform(equationDescriptor.getRightHandSide().getExpression(), Collections.singletonList(target));
 					processed = true;
@@ -138,10 +138,10 @@ public class ImperativeFunctionTransformer {
 				it.remove();
 			}
 		}
-		imperativeFunction.setInitializationCompound(compound);
+		imperativeFunctionDefinition.setInitializationCompound(compound);
 	}
 	
-	private void constructComputationCompounds(ImperativeFunction imperativeFunction, Collection<List<EquationDescriptor>> equationCompounds, Map<VariableDescriptor, VariableDeclaration> variableDeclarations) {
+	private void constructComputationCompounds(ImperativeFunctionDefinition imperativeFunctionDefinition, Collection<List<EquationDescriptor>> equationCompounds, Map<VariableDescriptor, VariableDeclaration> variableDeclarations) {
 		for (List<EquationDescriptor> equationDescriptors : equationCompounds) {
 			ComputationCompound compound = ImperativeModelFactory.eINSTANCE.createComputationCompound();
 			Set<InputVariableDeclaration> inputs = new HashSet<InputVariableDeclaration>();
@@ -149,7 +149,7 @@ public class ImperativeFunctionTransformer {
 				VariableStep lhsVariableStep = FunctionModelUtil.getFirstLeftHandSideVariableStep(equationDescriptor);
 				if (lhsVariableStep != null) {
 					ImperativeExpressionTarget target = new ImperativeExpressionTarget(variableDeclarations.get(lhsVariableStep.getDescriptor()), lhsVariableStep.getIndex());
-					Scope scope = createScope(imperativeFunction, compound);
+					Scope scope = createScope(imperativeFunctionDefinition, compound);
 					ImperativeExpressionTransformer transformer = new ImperativeExpressionTransformer(scope);
 					transformer.transform(equationDescriptor.getRightHandSide().getExpression(), Collections.singletonList(target));
 
@@ -170,22 +170,22 @@ public class ImperativeFunctionTransformer {
 			for (InputVariableDeclaration input : inputs) {
 				compound.getInputs().add(input);
 			}
-			imperativeFunction.getComputationCompounds().add(compound);
+			imperativeFunctionDefinition.getComputationCompounds().add(compound);
 		}
 	}
 	
-	protected Scope createScope(ImperativeFunction imperativeFunction, Compound compound) {
+	protected Scope createScope(ImperativeFunctionDefinition imperativeFunctionDefinition, Compound compound) {
 		Scope scope = new Scope(null, compound);
-		for (TemplateVariableDeclaration templateVariableDeclaration : imperativeFunction.getTemplateVariableDeclarations()) {
+		for (TemplateVariableDeclaration templateVariableDeclaration : imperativeFunctionDefinition.getTemplateVariableDeclarations()) {
 			scope.addVariableDeclaration(templateVariableDeclaration);
 		}
-		for (InputVariableDeclaration inputVariableDeclaration : imperativeFunction.getInputVariableDeclarations()) {
+		for (InputVariableDeclaration inputVariableDeclaration : imperativeFunctionDefinition.getInputVariableDeclarations()) {
 			scope.addVariableDeclaration(inputVariableDeclaration);
 		}
-		for (OutputVariableDeclaration outputVariableDeclaration : imperativeFunction.getOutputVariableDeclarations()) {
+		for (OutputVariableDeclaration outputVariableDeclaration : imperativeFunctionDefinition.getOutputVariableDeclarations()) {
 			scope.addVariableDeclaration(outputVariableDeclaration);
 		}
-		for (InstanceVariableDeclaration instanceVariableDeclaration : imperativeFunction.getInstanceVariableDeclarations()) {
+		for (InstanceVariableDeclaration instanceVariableDeclaration : imperativeFunctionDefinition.getInstanceVariableDeclarations()) {
 			scope.addVariableDeclaration(instanceVariableDeclaration);
 		}
 		return scope;

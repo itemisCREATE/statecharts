@@ -17,7 +17,7 @@ import org.eclipselabs.mscript.language.imperativemodel.CompoundStatement;
 import org.eclipselabs.mscript.language.imperativemodel.ComputationCompound;
 import org.eclipselabs.mscript.language.imperativemodel.ForeachStatement;
 import org.eclipselabs.mscript.language.imperativemodel.IfStatement;
-import org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction;
+import org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionDefinition;
 import org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage;
 import org.eclipselabs.mscript.language.imperativemodel.InputVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.InstanceVariableDeclaration;
@@ -86,8 +86,8 @@ public class ImperativeModelAdapterFactory extends AdapterFactoryImpl {
 	protected ImperativeModelSwitch<Adapter> modelSwitch =
 		new ImperativeModelSwitch<Adapter>() {
 			@Override
-			public Adapter caseImperativeFunction(ImperativeFunction object) {
-				return createImperativeFunctionAdapter();
+			public Adapter caseImperativeFunctionDefinition(ImperativeFunctionDefinition object) {
+				return createImperativeFunctionDefinitionAdapter();
 			}
 			@Override
 			public Adapter caseCompound(Compound object) {
@@ -174,16 +174,16 @@ public class ImperativeModelAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction <em>Imperative Function</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionDefinition <em>Imperative Function Definition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction
+	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionDefinition
 	 * @generated
 	 */
-	public Adapter createImperativeFunctionAdapter() {
+	public Adapter createImperativeFunctionDefinitionAdapter() {
 		return null;
 	}
 

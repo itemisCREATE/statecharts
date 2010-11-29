@@ -17,20 +17,20 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction#getTemplateVariableDeclarations <em>Template Variable Declarations</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction#getInputVariableDeclarations <em>Input Variable Declarations</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction#getOutputVariableDeclarations <em>Output Variable Declarations</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction#getInstanceVariableDeclarations <em>Instance Variable Declarations</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction#getInitializationCompound <em>Initialization Compound</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction#getComputationCompounds <em>Computation Compounds</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionDefinition#getTemplateVariableDeclarations <em>Template Variable Declarations</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionDefinition#getInputVariableDeclarations <em>Input Variable Declarations</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionDefinition#getOutputVariableDeclarations <em>Output Variable Declarations</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionDefinition#getInstanceVariableDeclarations <em>Instance Variable Declarations</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionDefinition#getInitializationCompound <em>Initialization Compound</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionDefinition#getComputationCompounds <em>Computation Compounds</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage#getImperativeFunction()
+ * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage#getImperativeFunctionDefinition()
  * @model
  * @generated
  */
-public interface ImperativeFunction extends EObject {
+public interface ImperativeFunctionDefinition extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Template Variable Declarations</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipselabs.mscript.language.imperativemodel.TemplateVariableDeclaration}.
@@ -41,7 +41,7 @@ public interface ImperativeFunction extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Template Variable Declarations</em>' containment reference list.
-	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage#getImperativeFunction_TemplateVariableDeclarations()
+	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage#getImperativeFunctionDefinition_TemplateVariableDeclarations()
 	 * @model containment="true"
 	 * @generated
 	 */
@@ -57,7 +57,7 @@ public interface ImperativeFunction extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Input Variable Declarations</em>' containment reference list.
-	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage#getImperativeFunction_InputVariableDeclarations()
+	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage#getImperativeFunctionDefinition_InputVariableDeclarations()
 	 * @model containment="true"
 	 * @generated
 	 */
@@ -73,7 +73,7 @@ public interface ImperativeFunction extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Output Variable Declarations</em>' containment reference list.
-	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage#getImperativeFunction_OutputVariableDeclarations()
+	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage#getImperativeFunctionDefinition_OutputVariableDeclarations()
 	 * @model containment="true"
 	 * @generated
 	 */
@@ -89,7 +89,7 @@ public interface ImperativeFunction extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Instance Variable Declarations</em>' containment reference list.
-	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage#getImperativeFunction_InstanceVariableDeclarations()
+	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage#getImperativeFunctionDefinition_InstanceVariableDeclarations()
 	 * @model containment="true"
 	 * @generated
 	 */
@@ -105,14 +105,14 @@ public interface ImperativeFunction extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Initialization Compound</em>' containment reference.
 	 * @see #setInitializationCompound(Compound)
-	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage#getImperativeFunction_InitializationCompound()
+	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage#getImperativeFunctionDefinition_InitializationCompound()
 	 * @model containment="true"
 	 * @generated
 	 */
 	Compound getInitializationCompound();
 
 	/**
-	 * Sets the value of the '{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction#getInitializationCompound <em>Initialization Compound</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionDefinition#getInitializationCompound <em>Initialization Compound</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Initialization Compound</em>' containment reference.
@@ -131,7 +131,7 @@ public interface ImperativeFunction extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Computation Compounds</em>' containment reference list.
-	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage#getImperativeFunction_ComputationCompounds()
+	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage#getImperativeFunctionDefinition_ComputationCompounds()
 	 * @model containment="true"
 	 * @generated
 	 */

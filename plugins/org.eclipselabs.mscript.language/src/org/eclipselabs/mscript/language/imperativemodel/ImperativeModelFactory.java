@@ -26,13 +26,13 @@ public interface ImperativeModelFactory extends EFactory {
 	ImperativeModelFactory eINSTANCE = org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Imperative Function</em>'.
+	 * Returns a new object of class '<em>Imperative Function Definition</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Imperative Function</em>'.
+	 * @return a new object of class '<em>Imperative Function Definition</em>'.
 	 * @generated
 	 */
-	ImperativeFunction createImperativeFunction();
+	ImperativeFunctionDefinition createImperativeFunctionDefinition();
 
 	/**
 	 * Returns a new object of class '<em>Compound</em>'.

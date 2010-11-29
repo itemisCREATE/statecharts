@@ -7,13 +7,13 @@
   <foreignModel>ImperativeModel.ecore</foreignModel>
   <genPackages prefix="ImperativeModel" basePackage="org.eclipselabs.mscript.language"
       disposableProviderFactory="true" ecorePackage="ImperativeModel.ecore#/">
-    <genClasses ecoreClass="ImperativeModel.ecore#//ImperativeFunction">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//ImperativeFunction/templateVariableDeclarations"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//ImperativeFunction/inputVariableDeclarations"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//ImperativeFunction/outputVariableDeclarations"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//ImperativeFunction/instanceVariableDeclarations"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//ImperativeFunction/initializationCompound"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//ImperativeFunction/computationCompounds"/>
+    <genClasses ecoreClass="ImperativeModel.ecore#//ImperativeFunctionDefinition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//ImperativeFunctionDefinition/templateVariableDeclarations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//ImperativeFunctionDefinition/inputVariableDeclarations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//ImperativeFunctionDefinition/outputVariableDeclarations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//ImperativeFunctionDefinition/instanceVariableDeclarations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//ImperativeFunctionDefinition/initializationCompound"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//ImperativeFunctionDefinition/computationCompounds"/>
     </genClasses>
     <genClasses ecoreClass="ImperativeModel.ecore#//Compound">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeModel.ecore#//Compound/statements"/>

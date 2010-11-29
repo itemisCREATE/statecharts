@@ -23,7 +23,7 @@ import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.ast.StringLiteral;
 import org.eclipselabs.mscript.language.functionmodel.FunctionDescriptor;
 import org.eclipselabs.mscript.language.imperativemodel.Compound;
-import org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction;
+import org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionDefinition;
 import org.eclipselabs.mscript.language.imperativemodel.ImperativeModelFactory;
 import org.eclipselabs.mscript.language.imperativemodel.InputVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.LocalVariableDeclaration;
@@ -46,7 +46,7 @@ import org.eclipselabs.mscript.typesystem.DataType;
  */
 public class AssertionEvaluator {
 
-	public void evaluate(ImperativeFunction imperativeFunction, FunctionDescriptor functionDescriptor, List<DataType> templateParameterDataTypes, List<DataType> inputParameterDataTypes, DiagnosticChain diagnostics) {
+	public void evaluate(ImperativeFunctionDefinition functionDefinition, FunctionDescriptor functionDescriptor, List<DataType> templateParameterDataTypes, List<DataType> inputParameterDataTypes, DiagnosticChain diagnostics) {
 		for (Assertion assertion : functionDescriptor.getDefinition().getAssertions()) {
 			if (!assertion.isStatic()) {
 				continue;
@@ -54,7 +54,7 @@ public class AssertionEvaluator {
 			LocalVariableDeclaration assertResultVariableDeclaration = ImperativeModelFactory.eINSTANCE.createLocalVariableDeclaration();
 			
 			Compound compound = ImperativeModelFactory.eINSTANCE.createCompound();
-			Scope scope = createScope(imperativeFunction, compound);
+			Scope scope = createScope(functionDefinition, compound);
 			scope.addVariableDeclaration(assertResultVariableDeclaration);
 			ImperativeExpressionTarget target = new ImperativeExpressionTarget(assertResultVariableDeclaration, 0);
 			new ImperativeExpressionTransformer(scope).transform(assertion.getCondition(), Collections.singletonList(target));
@@ -66,7 +66,7 @@ public class AssertionEvaluator {
 			IInterpreterContext context = new InterpreterContext(diagnostics, new ValueFactory());
 			
 			Iterator<DataType> dataTypeIterator = templateParameterDataTypes.iterator();
-			for (TemplateVariableDeclaration templateVariableDeclaration : imperativeFunction.getTemplateVariableDeclarations()) {
+			for (TemplateVariableDeclaration templateVariableDeclaration : functionDefinition.getTemplateVariableDeclarations()) {
 				IValue value = new AnyValue(dataTypeIterator.next());
 				IVariable variable = new Variable(templateVariableDeclaration);
 				variable.setValue(0, value);
@@ -74,7 +74,7 @@ public class AssertionEvaluator {
 			}
 
 			dataTypeIterator = inputParameterDataTypes.iterator();
-			for (InputVariableDeclaration inputVariableDeclaration : imperativeFunction.getInputVariableDeclarations()) {
+			for (InputVariableDeclaration inputVariableDeclaration : functionDefinition.getInputVariableDeclarations()) {
 				IValue value = new AnyValue(dataTypeIterator.next());
 				IVariable variable = new Variable(inputVariableDeclaration);
 				variable.setValue(0, value);
@@ -97,12 +97,12 @@ public class AssertionEvaluator {
 		}
 	}
 
-	protected Scope createScope(ImperativeFunction imperativeFunction, Compound compound) {
+	protected Scope createScope(ImperativeFunctionDefinition functionDefinition, Compound compound) {
 		Scope scope = new Scope(null, compound);
-		for (TemplateVariableDeclaration templateVariableDeclaration : imperativeFunction.getTemplateVariableDeclarations()) {
+		for (TemplateVariableDeclaration templateVariableDeclaration : functionDefinition.getTemplateVariableDeclarations()) {
 			scope.addVariableDeclaration(templateVariableDeclaration);
 		}
-		for (InputVariableDeclaration inputVariableDeclaration : imperativeFunction.getInputVariableDeclarations()) {
+		for (InputVariableDeclaration inputVariableDeclaration : functionDefinition.getInputVariableDeclarations()) {
 			scope.addVariableDeclaration(inputVariableDeclaration);
 		}
 		return scope;

@@ -28,7 +28,7 @@ import org.eclipselabs.mscript.language.interpreter.value.IValue;
 public class Interpreter {
 
 	public void initialize(IInterpreterContext context, IFunctor functor) {
-		Compound initializationCompound = functor.getFunction().getInitializationCompound();
+		Compound initializationCompound = functor.getFunctionDefinition().getInitializationCompound();
 		if (initializationCompound != null) {
 			new CompoundInterpreter(context).doSwitch(initializationCompound);
 		}
@@ -36,19 +36,19 @@ public class Interpreter {
 	
 	public List<IValue> execute(IInterpreterContext context, IFunctor functor, List<IValue> inputValues) {
 		Iterator<IValue> inputValueIterator = inputValues.iterator();
-		for (InputVariableDeclaration inputVariableDeclaration : functor.getFunction().getInputVariableDeclarations()) {
+		for (InputVariableDeclaration inputVariableDeclaration : functor.getFunctionDefinition().getInputVariableDeclarations()) {
 			IVariable variable = functor.getVariable(inputVariableDeclaration);
 			variable.setValue(0, inputValueIterator.next());
 		}
 		
 		CompoundInterpreter compoundInterpreter = new CompoundInterpreter(context);
 		
-		for (ComputationCompound compound : functor.getFunction().getComputationCompounds()) {
+		for (ComputationCompound compound : functor.getFunctionDefinition().getComputationCompounds()) {
 			compoundInterpreter.doSwitch(compound);
 		}
 		
 		List<IValue> outputValues = new ArrayList<IValue>();
-		for (OutputVariableDeclaration outputVariableDeclaration : functor.getFunction().getOutputVariableDeclarations()) {
+		for (OutputVariableDeclaration outputVariableDeclaration : functor.getFunctionDefinition().getOutputVariableDeclarations()) {
 			outputValues.add(functor.getVariable(outputVariableDeclaration).getValue(0));
 		}
 		

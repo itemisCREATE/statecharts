@@ -61,14 +61,14 @@ public interface ImperativeModelPackage extends EPackage {
 	ImperativeModelPackage eINSTANCE = org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeFunctionImpl <em>Imperative Function</em>}' class.
+	 * The meta object id for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeFunctionDefinitionImpl <em>Imperative Function Definition</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeFunctionImpl
-	 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getImperativeFunction()
+	 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeFunctionDefinitionImpl
+	 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getImperativeFunctionDefinition()
 	 * @generated
 	 */
-	int IMPERATIVE_FUNCTION = 0;
+	int IMPERATIVE_FUNCTION_DEFINITION = 0;
 
 	/**
 	 * The feature id for the '<em><b>Template Variable Declarations</b></em>' containment reference list.
@@ -77,7 +77,7 @@ public interface ImperativeModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int IMPERATIVE_FUNCTION__TEMPLATE_VARIABLE_DECLARATIONS = 0;
+	int IMPERATIVE_FUNCTION_DEFINITION__TEMPLATE_VARIABLE_DECLARATIONS = 0;
 
 	/**
 	 * The feature id for the '<em><b>Input Variable Declarations</b></em>' containment reference list.
@@ -86,7 +86,7 @@ public interface ImperativeModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int IMPERATIVE_FUNCTION__INPUT_VARIABLE_DECLARATIONS = 1;
+	int IMPERATIVE_FUNCTION_DEFINITION__INPUT_VARIABLE_DECLARATIONS = 1;
 
 	/**
 	 * The feature id for the '<em><b>Output Variable Declarations</b></em>' containment reference list.
@@ -95,7 +95,7 @@ public interface ImperativeModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int IMPERATIVE_FUNCTION__OUTPUT_VARIABLE_DECLARATIONS = 2;
+	int IMPERATIVE_FUNCTION_DEFINITION__OUTPUT_VARIABLE_DECLARATIONS = 2;
 
 	/**
 	 * The feature id for the '<em><b>Instance Variable Declarations</b></em>' containment reference list.
@@ -104,7 +104,7 @@ public interface ImperativeModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int IMPERATIVE_FUNCTION__INSTANCE_VARIABLE_DECLARATIONS = 3;
+	int IMPERATIVE_FUNCTION_DEFINITION__INSTANCE_VARIABLE_DECLARATIONS = 3;
 
 	/**
 	 * The feature id for the '<em><b>Initialization Compound</b></em>' containment reference.
@@ -113,7 +113,7 @@ public interface ImperativeModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int IMPERATIVE_FUNCTION__INITIALIZATION_COMPOUND = 4;
+	int IMPERATIVE_FUNCTION_DEFINITION__INITIALIZATION_COMPOUND = 4;
 
 	/**
 	 * The feature id for the '<em><b>Computation Compounds</b></em>' containment reference list.
@@ -122,16 +122,16 @@ public interface ImperativeModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int IMPERATIVE_FUNCTION__COMPUTATION_COMPOUNDS = 5;
+	int IMPERATIVE_FUNCTION_DEFINITION__COMPUTATION_COMPOUNDS = 5;
 
 	/**
-	 * The number of structural features of the '<em>Imperative Function</em>' class.
+	 * The number of structural features of the '<em>Imperative Function Definition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPERATIVE_FUNCTION_FEATURE_COUNT = 6;
+	int IMPERATIVE_FUNCTION_DEFINITION_FEATURE_COUNT = 6;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.StatementImpl <em>Statement</em>}' class.
@@ -779,80 +779,80 @@ public interface ImperativeModelPackage extends EPackage {
 	int VARIABLE_REFERENCE_FEATURE_COUNT = AstPackage.EXPRESSION_FEATURE_COUNT + 3;
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction <em>Imperative Function</em>}'.
+	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionDefinition <em>Imperative Function Definition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Imperative Function</em>'.
-	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction
+	 * @return the meta object for class '<em>Imperative Function Definition</em>'.
+	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionDefinition
 	 * @generated
 	 */
-	EClass getImperativeFunction();
+	EClass getImperativeFunctionDefinition();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction#getTemplateVariableDeclarations <em>Template Variable Declarations</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionDefinition#getTemplateVariableDeclarations <em>Template Variable Declarations</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Template Variable Declarations</em>'.
-	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction#getTemplateVariableDeclarations()
-	 * @see #getImperativeFunction()
+	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionDefinition#getTemplateVariableDeclarations()
+	 * @see #getImperativeFunctionDefinition()
 	 * @generated
 	 */
-	EReference getImperativeFunction_TemplateVariableDeclarations();
+	EReference getImperativeFunctionDefinition_TemplateVariableDeclarations();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction#getInputVariableDeclarations <em>Input Variable Declarations</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionDefinition#getInputVariableDeclarations <em>Input Variable Declarations</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Input Variable Declarations</em>'.
-	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction#getInputVariableDeclarations()
-	 * @see #getImperativeFunction()
+	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionDefinition#getInputVariableDeclarations()
+	 * @see #getImperativeFunctionDefinition()
 	 * @generated
 	 */
-	EReference getImperativeFunction_InputVariableDeclarations();
+	EReference getImperativeFunctionDefinition_InputVariableDeclarations();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction#getOutputVariableDeclarations <em>Output Variable Declarations</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionDefinition#getOutputVariableDeclarations <em>Output Variable Declarations</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Output Variable Declarations</em>'.
-	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction#getOutputVariableDeclarations()
-	 * @see #getImperativeFunction()
+	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionDefinition#getOutputVariableDeclarations()
+	 * @see #getImperativeFunctionDefinition()
 	 * @generated
 	 */
-	EReference getImperativeFunction_OutputVariableDeclarations();
+	EReference getImperativeFunctionDefinition_OutputVariableDeclarations();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction#getInstanceVariableDeclarations <em>Instance Variable Declarations</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionDefinition#getInstanceVariableDeclarations <em>Instance Variable Declarations</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Instance Variable Declarations</em>'.
-	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction#getInstanceVariableDeclarations()
-	 * @see #getImperativeFunction()
+	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionDefinition#getInstanceVariableDeclarations()
+	 * @see #getImperativeFunctionDefinition()
 	 * @generated
 	 */
-	EReference getImperativeFunction_InstanceVariableDeclarations();
+	EReference getImperativeFunctionDefinition_InstanceVariableDeclarations();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction#getInitializationCompound <em>Initialization Compound</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionDefinition#getInitializationCompound <em>Initialization Compound</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Initialization Compound</em>'.
-	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction#getInitializationCompound()
-	 * @see #getImperativeFunction()
+	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionDefinition#getInitializationCompound()
+	 * @see #getImperativeFunctionDefinition()
 	 * @generated
 	 */
-	EReference getImperativeFunction_InitializationCompound();
+	EReference getImperativeFunctionDefinition_InitializationCompound();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction#getComputationCompounds <em>Computation Compounds</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionDefinition#getComputationCompounds <em>Computation Compounds</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Computation Compounds</em>'.
-	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction#getComputationCompounds()
-	 * @see #getImperativeFunction()
+	 * @see org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionDefinition#getComputationCompounds()
+	 * @see #getImperativeFunctionDefinition()
 	 * @generated
 	 */
-	EReference getImperativeFunction_ComputationCompounds();
+	EReference getImperativeFunctionDefinition_ComputationCompounds();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.imperativemodel.Statement <em>Statement</em>}'.
@@ -1258,14 +1258,14 @@ public interface ImperativeModelPackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeFunctionImpl <em>Imperative Function</em>}' class.
+		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeFunctionDefinitionImpl <em>Imperative Function Definition</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeFunctionImpl
-		 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getImperativeFunction()
+		 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeFunctionDefinitionImpl
+		 * @see org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeModelPackageImpl#getImperativeFunctionDefinition()
 		 * @generated
 		 */
-		EClass IMPERATIVE_FUNCTION = eINSTANCE.getImperativeFunction();
+		EClass IMPERATIVE_FUNCTION_DEFINITION = eINSTANCE.getImperativeFunctionDefinition();
 
 		/**
 		 * The meta object literal for the '<em><b>Template Variable Declarations</b></em>' containment reference list feature.
@@ -1273,7 +1273,7 @@ public interface ImperativeModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference IMPERATIVE_FUNCTION__TEMPLATE_VARIABLE_DECLARATIONS = eINSTANCE.getImperativeFunction_TemplateVariableDeclarations();
+		EReference IMPERATIVE_FUNCTION_DEFINITION__TEMPLATE_VARIABLE_DECLARATIONS = eINSTANCE.getImperativeFunctionDefinition_TemplateVariableDeclarations();
 
 		/**
 		 * The meta object literal for the '<em><b>Input Variable Declarations</b></em>' containment reference list feature.
@@ -1281,7 +1281,7 @@ public interface ImperativeModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference IMPERATIVE_FUNCTION__INPUT_VARIABLE_DECLARATIONS = eINSTANCE.getImperativeFunction_InputVariableDeclarations();
+		EReference IMPERATIVE_FUNCTION_DEFINITION__INPUT_VARIABLE_DECLARATIONS = eINSTANCE.getImperativeFunctionDefinition_InputVariableDeclarations();
 
 		/**
 		 * The meta object literal for the '<em><b>Output Variable Declarations</b></em>' containment reference list feature.
@@ -1289,7 +1289,7 @@ public interface ImperativeModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference IMPERATIVE_FUNCTION__OUTPUT_VARIABLE_DECLARATIONS = eINSTANCE.getImperativeFunction_OutputVariableDeclarations();
+		EReference IMPERATIVE_FUNCTION_DEFINITION__OUTPUT_VARIABLE_DECLARATIONS = eINSTANCE.getImperativeFunctionDefinition_OutputVariableDeclarations();
 
 		/**
 		 * The meta object literal for the '<em><b>Instance Variable Declarations</b></em>' containment reference list feature.
@@ -1297,7 +1297,7 @@ public interface ImperativeModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference IMPERATIVE_FUNCTION__INSTANCE_VARIABLE_DECLARATIONS = eINSTANCE.getImperativeFunction_InstanceVariableDeclarations();
+		EReference IMPERATIVE_FUNCTION_DEFINITION__INSTANCE_VARIABLE_DECLARATIONS = eINSTANCE.getImperativeFunctionDefinition_InstanceVariableDeclarations();
 
 		/**
 		 * The meta object literal for the '<em><b>Initialization Compound</b></em>' containment reference feature.
@@ -1305,7 +1305,7 @@ public interface ImperativeModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference IMPERATIVE_FUNCTION__INITIALIZATION_COMPOUND = eINSTANCE.getImperativeFunction_InitializationCompound();
+		EReference IMPERATIVE_FUNCTION_DEFINITION__INITIALIZATION_COMPOUND = eINSTANCE.getImperativeFunctionDefinition_InitializationCompound();
 
 		/**
 		 * The meta object literal for the '<em><b>Computation Compounds</b></em>' containment reference list feature.
@@ -1313,7 +1313,7 @@ public interface ImperativeModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference IMPERATIVE_FUNCTION__COMPUTATION_COMPOUNDS = eINSTANCE.getImperativeFunction_ComputationCompounds();
+		EReference IMPERATIVE_FUNCTION_DEFINITION__COMPUTATION_COMPOUNDS = eINSTANCE.getImperativeFunctionDefinition_ComputationCompounds();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.imperativemodel.impl.StatementImpl <em>Statement</em>}' class.

@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipselabs.mscript.language.imperativemodel.Compound;
 import org.eclipselabs.mscript.language.imperativemodel.ComputationCompound;
-import org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction;
+import org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionDefinition;
 import org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage;
 import org.eclipselabs.mscript.language.imperativemodel.InputVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.InstanceVariableDeclaration;
@@ -33,18 +33,18 @@ import org.eclipselabs.mscript.language.imperativemodel.TemplateVariableDeclarat
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeFunctionImpl#getTemplateVariableDeclarations <em>Template Variable Declarations</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeFunctionImpl#getInputVariableDeclarations <em>Input Variable Declarations</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeFunctionImpl#getOutputVariableDeclarations <em>Output Variable Declarations</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeFunctionImpl#getInstanceVariableDeclarations <em>Instance Variable Declarations</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeFunctionImpl#getInitializationCompound <em>Initialization Compound</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeFunctionImpl#getComputationCompounds <em>Computation Compounds</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeFunctionDefinitionImpl#getTemplateVariableDeclarations <em>Template Variable Declarations</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeFunctionDefinitionImpl#getInputVariableDeclarations <em>Input Variable Declarations</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeFunctionDefinitionImpl#getOutputVariableDeclarations <em>Output Variable Declarations</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeFunctionDefinitionImpl#getInstanceVariableDeclarations <em>Instance Variable Declarations</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeFunctionDefinitionImpl#getInitializationCompound <em>Initialization Compound</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.imperativemodel.impl.ImperativeFunctionDefinitionImpl#getComputationCompounds <em>Computation Compounds</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ImperativeFunctionImpl extends EObjectImpl implements ImperativeFunction {
+public class ImperativeFunctionDefinitionImpl extends EObjectImpl implements ImperativeFunctionDefinition {
 	/**
 	 * The cached value of the '{@link #getTemplateVariableDeclarations() <em>Template Variable Declarations</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -110,7 +110,7 @@ public class ImperativeFunctionImpl extends EObjectImpl implements ImperativeFun
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ImperativeFunctionImpl() {
+	protected ImperativeFunctionDefinitionImpl() {
 		super();
 	}
 
@@ -121,7 +121,7 @@ public class ImperativeFunctionImpl extends EObjectImpl implements ImperativeFun
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return ImperativeModelPackage.Literals.IMPERATIVE_FUNCTION;
+		return ImperativeModelPackage.Literals.IMPERATIVE_FUNCTION_DEFINITION;
 	}
 
 	/**
@@ -131,7 +131,7 @@ public class ImperativeFunctionImpl extends EObjectImpl implements ImperativeFun
 	 */
 	public EList<TemplateVariableDeclaration> getTemplateVariableDeclarations() {
 		if (templateVariableDeclarations == null) {
-			templateVariableDeclarations = new EObjectContainmentEList<TemplateVariableDeclaration>(TemplateVariableDeclaration.class, this, ImperativeModelPackage.IMPERATIVE_FUNCTION__TEMPLATE_VARIABLE_DECLARATIONS);
+			templateVariableDeclarations = new EObjectContainmentEList<TemplateVariableDeclaration>(TemplateVariableDeclaration.class, this, ImperativeModelPackage.IMPERATIVE_FUNCTION_DEFINITION__TEMPLATE_VARIABLE_DECLARATIONS);
 		}
 		return templateVariableDeclarations;
 	}
@@ -143,7 +143,7 @@ public class ImperativeFunctionImpl extends EObjectImpl implements ImperativeFun
 	 */
 	public EList<InputVariableDeclaration> getInputVariableDeclarations() {
 		if (inputVariableDeclarations == null) {
-			inputVariableDeclarations = new EObjectContainmentEList<InputVariableDeclaration>(InputVariableDeclaration.class, this, ImperativeModelPackage.IMPERATIVE_FUNCTION__INPUT_VARIABLE_DECLARATIONS);
+			inputVariableDeclarations = new EObjectContainmentEList<InputVariableDeclaration>(InputVariableDeclaration.class, this, ImperativeModelPackage.IMPERATIVE_FUNCTION_DEFINITION__INPUT_VARIABLE_DECLARATIONS);
 		}
 		return inputVariableDeclarations;
 	}
@@ -155,7 +155,7 @@ public class ImperativeFunctionImpl extends EObjectImpl implements ImperativeFun
 	 */
 	public EList<OutputVariableDeclaration> getOutputVariableDeclarations() {
 		if (outputVariableDeclarations == null) {
-			outputVariableDeclarations = new EObjectContainmentEList<OutputVariableDeclaration>(OutputVariableDeclaration.class, this, ImperativeModelPackage.IMPERATIVE_FUNCTION__OUTPUT_VARIABLE_DECLARATIONS);
+			outputVariableDeclarations = new EObjectContainmentEList<OutputVariableDeclaration>(OutputVariableDeclaration.class, this, ImperativeModelPackage.IMPERATIVE_FUNCTION_DEFINITION__OUTPUT_VARIABLE_DECLARATIONS);
 		}
 		return outputVariableDeclarations;
 	}
@@ -167,7 +167,7 @@ public class ImperativeFunctionImpl extends EObjectImpl implements ImperativeFun
 	 */
 	public EList<InstanceVariableDeclaration> getInstanceVariableDeclarations() {
 		if (instanceVariableDeclarations == null) {
-			instanceVariableDeclarations = new EObjectContainmentEList<InstanceVariableDeclaration>(InstanceVariableDeclaration.class, this, ImperativeModelPackage.IMPERATIVE_FUNCTION__INSTANCE_VARIABLE_DECLARATIONS);
+			instanceVariableDeclarations = new EObjectContainmentEList<InstanceVariableDeclaration>(InstanceVariableDeclaration.class, this, ImperativeModelPackage.IMPERATIVE_FUNCTION_DEFINITION__INSTANCE_VARIABLE_DECLARATIONS);
 		}
 		return instanceVariableDeclarations;
 	}
@@ -190,7 +190,7 @@ public class ImperativeFunctionImpl extends EObjectImpl implements ImperativeFun
 		Compound oldInitializationCompound = initializationCompound;
 		initializationCompound = newInitializationCompound;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ImperativeModelPackage.IMPERATIVE_FUNCTION__INITIALIZATION_COMPOUND, oldInitializationCompound, newInitializationCompound);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ImperativeModelPackage.IMPERATIVE_FUNCTION_DEFINITION__INITIALIZATION_COMPOUND, oldInitializationCompound, newInitializationCompound);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -205,14 +205,14 @@ public class ImperativeFunctionImpl extends EObjectImpl implements ImperativeFun
 		if (newInitializationCompound != initializationCompound) {
 			NotificationChain msgs = null;
 			if (initializationCompound != null)
-				msgs = ((InternalEObject)initializationCompound).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ImperativeModelPackage.IMPERATIVE_FUNCTION__INITIALIZATION_COMPOUND, null, msgs);
+				msgs = ((InternalEObject)initializationCompound).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ImperativeModelPackage.IMPERATIVE_FUNCTION_DEFINITION__INITIALIZATION_COMPOUND, null, msgs);
 			if (newInitializationCompound != null)
-				msgs = ((InternalEObject)newInitializationCompound).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ImperativeModelPackage.IMPERATIVE_FUNCTION__INITIALIZATION_COMPOUND, null, msgs);
+				msgs = ((InternalEObject)newInitializationCompound).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ImperativeModelPackage.IMPERATIVE_FUNCTION_DEFINITION__INITIALIZATION_COMPOUND, null, msgs);
 			msgs = basicSetInitializationCompound(newInitializationCompound, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ImperativeModelPackage.IMPERATIVE_FUNCTION__INITIALIZATION_COMPOUND, newInitializationCompound, newInitializationCompound));
+			eNotify(new ENotificationImpl(this, Notification.SET, ImperativeModelPackage.IMPERATIVE_FUNCTION_DEFINITION__INITIALIZATION_COMPOUND, newInitializationCompound, newInitializationCompound));
 	}
 
 	/**
@@ -222,7 +222,7 @@ public class ImperativeFunctionImpl extends EObjectImpl implements ImperativeFun
 	 */
 	public EList<ComputationCompound> getComputationCompounds() {
 		if (computationCompounds == null) {
-			computationCompounds = new EObjectContainmentEList<ComputationCompound>(ComputationCompound.class, this, ImperativeModelPackage.IMPERATIVE_FUNCTION__COMPUTATION_COMPOUNDS);
+			computationCompounds = new EObjectContainmentEList<ComputationCompound>(ComputationCompound.class, this, ImperativeModelPackage.IMPERATIVE_FUNCTION_DEFINITION__COMPUTATION_COMPOUNDS);
 		}
 		return computationCompounds;
 	}
@@ -235,17 +235,17 @@ public class ImperativeFunctionImpl extends EObjectImpl implements ImperativeFun
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ImperativeModelPackage.IMPERATIVE_FUNCTION__TEMPLATE_VARIABLE_DECLARATIONS:
+			case ImperativeModelPackage.IMPERATIVE_FUNCTION_DEFINITION__TEMPLATE_VARIABLE_DECLARATIONS:
 				return ((InternalEList<?>)getTemplateVariableDeclarations()).basicRemove(otherEnd, msgs);
-			case ImperativeModelPackage.IMPERATIVE_FUNCTION__INPUT_VARIABLE_DECLARATIONS:
+			case ImperativeModelPackage.IMPERATIVE_FUNCTION_DEFINITION__INPUT_VARIABLE_DECLARATIONS:
 				return ((InternalEList<?>)getInputVariableDeclarations()).basicRemove(otherEnd, msgs);
-			case ImperativeModelPackage.IMPERATIVE_FUNCTION__OUTPUT_VARIABLE_DECLARATIONS:
+			case ImperativeModelPackage.IMPERATIVE_FUNCTION_DEFINITION__OUTPUT_VARIABLE_DECLARATIONS:
 				return ((InternalEList<?>)getOutputVariableDeclarations()).basicRemove(otherEnd, msgs);
-			case ImperativeModelPackage.IMPERATIVE_FUNCTION__INSTANCE_VARIABLE_DECLARATIONS:
+			case ImperativeModelPackage.IMPERATIVE_FUNCTION_DEFINITION__INSTANCE_VARIABLE_DECLARATIONS:
 				return ((InternalEList<?>)getInstanceVariableDeclarations()).basicRemove(otherEnd, msgs);
-			case ImperativeModelPackage.IMPERATIVE_FUNCTION__INITIALIZATION_COMPOUND:
+			case ImperativeModelPackage.IMPERATIVE_FUNCTION_DEFINITION__INITIALIZATION_COMPOUND:
 				return basicSetInitializationCompound(null, msgs);
-			case ImperativeModelPackage.IMPERATIVE_FUNCTION__COMPUTATION_COMPOUNDS:
+			case ImperativeModelPackage.IMPERATIVE_FUNCTION_DEFINITION__COMPUTATION_COMPOUNDS:
 				return ((InternalEList<?>)getComputationCompounds()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -259,17 +259,17 @@ public class ImperativeFunctionImpl extends EObjectImpl implements ImperativeFun
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ImperativeModelPackage.IMPERATIVE_FUNCTION__TEMPLATE_VARIABLE_DECLARATIONS:
+			case ImperativeModelPackage.IMPERATIVE_FUNCTION_DEFINITION__TEMPLATE_VARIABLE_DECLARATIONS:
 				return getTemplateVariableDeclarations();
-			case ImperativeModelPackage.IMPERATIVE_FUNCTION__INPUT_VARIABLE_DECLARATIONS:
+			case ImperativeModelPackage.IMPERATIVE_FUNCTION_DEFINITION__INPUT_VARIABLE_DECLARATIONS:
 				return getInputVariableDeclarations();
-			case ImperativeModelPackage.IMPERATIVE_FUNCTION__OUTPUT_VARIABLE_DECLARATIONS:
+			case ImperativeModelPackage.IMPERATIVE_FUNCTION_DEFINITION__OUTPUT_VARIABLE_DECLARATIONS:
 				return getOutputVariableDeclarations();
-			case ImperativeModelPackage.IMPERATIVE_FUNCTION__INSTANCE_VARIABLE_DECLARATIONS:
+			case ImperativeModelPackage.IMPERATIVE_FUNCTION_DEFINITION__INSTANCE_VARIABLE_DECLARATIONS:
 				return getInstanceVariableDeclarations();
-			case ImperativeModelPackage.IMPERATIVE_FUNCTION__INITIALIZATION_COMPOUND:
+			case ImperativeModelPackage.IMPERATIVE_FUNCTION_DEFINITION__INITIALIZATION_COMPOUND:
 				return getInitializationCompound();
-			case ImperativeModelPackage.IMPERATIVE_FUNCTION__COMPUTATION_COMPOUNDS:
+			case ImperativeModelPackage.IMPERATIVE_FUNCTION_DEFINITION__COMPUTATION_COMPOUNDS:
 				return getComputationCompounds();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -284,26 +284,26 @@ public class ImperativeFunctionImpl extends EObjectImpl implements ImperativeFun
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ImperativeModelPackage.IMPERATIVE_FUNCTION__TEMPLATE_VARIABLE_DECLARATIONS:
+			case ImperativeModelPackage.IMPERATIVE_FUNCTION_DEFINITION__TEMPLATE_VARIABLE_DECLARATIONS:
 				getTemplateVariableDeclarations().clear();
 				getTemplateVariableDeclarations().addAll((Collection<? extends TemplateVariableDeclaration>)newValue);
 				return;
-			case ImperativeModelPackage.IMPERATIVE_FUNCTION__INPUT_VARIABLE_DECLARATIONS:
+			case ImperativeModelPackage.IMPERATIVE_FUNCTION_DEFINITION__INPUT_VARIABLE_DECLARATIONS:
 				getInputVariableDeclarations().clear();
 				getInputVariableDeclarations().addAll((Collection<? extends InputVariableDeclaration>)newValue);
 				return;
-			case ImperativeModelPackage.IMPERATIVE_FUNCTION__OUTPUT_VARIABLE_DECLARATIONS:
+			case ImperativeModelPackage.IMPERATIVE_FUNCTION_DEFINITION__OUTPUT_VARIABLE_DECLARATIONS:
 				getOutputVariableDeclarations().clear();
 				getOutputVariableDeclarations().addAll((Collection<? extends OutputVariableDeclaration>)newValue);
 				return;
-			case ImperativeModelPackage.IMPERATIVE_FUNCTION__INSTANCE_VARIABLE_DECLARATIONS:
+			case ImperativeModelPackage.IMPERATIVE_FUNCTION_DEFINITION__INSTANCE_VARIABLE_DECLARATIONS:
 				getInstanceVariableDeclarations().clear();
 				getInstanceVariableDeclarations().addAll((Collection<? extends InstanceVariableDeclaration>)newValue);
 				return;
-			case ImperativeModelPackage.IMPERATIVE_FUNCTION__INITIALIZATION_COMPOUND:
+			case ImperativeModelPackage.IMPERATIVE_FUNCTION_DEFINITION__INITIALIZATION_COMPOUND:
 				setInitializationCompound((Compound)newValue);
 				return;
-			case ImperativeModelPackage.IMPERATIVE_FUNCTION__COMPUTATION_COMPOUNDS:
+			case ImperativeModelPackage.IMPERATIVE_FUNCTION_DEFINITION__COMPUTATION_COMPOUNDS:
 				getComputationCompounds().clear();
 				getComputationCompounds().addAll((Collection<? extends ComputationCompound>)newValue);
 				return;
@@ -319,22 +319,22 @@ public class ImperativeFunctionImpl extends EObjectImpl implements ImperativeFun
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ImperativeModelPackage.IMPERATIVE_FUNCTION__TEMPLATE_VARIABLE_DECLARATIONS:
+			case ImperativeModelPackage.IMPERATIVE_FUNCTION_DEFINITION__TEMPLATE_VARIABLE_DECLARATIONS:
 				getTemplateVariableDeclarations().clear();
 				return;
-			case ImperativeModelPackage.IMPERATIVE_FUNCTION__INPUT_VARIABLE_DECLARATIONS:
+			case ImperativeModelPackage.IMPERATIVE_FUNCTION_DEFINITION__INPUT_VARIABLE_DECLARATIONS:
 				getInputVariableDeclarations().clear();
 				return;
-			case ImperativeModelPackage.IMPERATIVE_FUNCTION__OUTPUT_VARIABLE_DECLARATIONS:
+			case ImperativeModelPackage.IMPERATIVE_FUNCTION_DEFINITION__OUTPUT_VARIABLE_DECLARATIONS:
 				getOutputVariableDeclarations().clear();
 				return;
-			case ImperativeModelPackage.IMPERATIVE_FUNCTION__INSTANCE_VARIABLE_DECLARATIONS:
+			case ImperativeModelPackage.IMPERATIVE_FUNCTION_DEFINITION__INSTANCE_VARIABLE_DECLARATIONS:
 				getInstanceVariableDeclarations().clear();
 				return;
-			case ImperativeModelPackage.IMPERATIVE_FUNCTION__INITIALIZATION_COMPOUND:
+			case ImperativeModelPackage.IMPERATIVE_FUNCTION_DEFINITION__INITIALIZATION_COMPOUND:
 				setInitializationCompound((Compound)null);
 				return;
-			case ImperativeModelPackage.IMPERATIVE_FUNCTION__COMPUTATION_COMPOUNDS:
+			case ImperativeModelPackage.IMPERATIVE_FUNCTION_DEFINITION__COMPUTATION_COMPOUNDS:
 				getComputationCompounds().clear();
 				return;
 		}
@@ -349,17 +349,17 @@ public class ImperativeFunctionImpl extends EObjectImpl implements ImperativeFun
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ImperativeModelPackage.IMPERATIVE_FUNCTION__TEMPLATE_VARIABLE_DECLARATIONS:
+			case ImperativeModelPackage.IMPERATIVE_FUNCTION_DEFINITION__TEMPLATE_VARIABLE_DECLARATIONS:
 				return templateVariableDeclarations != null && !templateVariableDeclarations.isEmpty();
-			case ImperativeModelPackage.IMPERATIVE_FUNCTION__INPUT_VARIABLE_DECLARATIONS:
+			case ImperativeModelPackage.IMPERATIVE_FUNCTION_DEFINITION__INPUT_VARIABLE_DECLARATIONS:
 				return inputVariableDeclarations != null && !inputVariableDeclarations.isEmpty();
-			case ImperativeModelPackage.IMPERATIVE_FUNCTION__OUTPUT_VARIABLE_DECLARATIONS:
+			case ImperativeModelPackage.IMPERATIVE_FUNCTION_DEFINITION__OUTPUT_VARIABLE_DECLARATIONS:
 				return outputVariableDeclarations != null && !outputVariableDeclarations.isEmpty();
-			case ImperativeModelPackage.IMPERATIVE_FUNCTION__INSTANCE_VARIABLE_DECLARATIONS:
+			case ImperativeModelPackage.IMPERATIVE_FUNCTION_DEFINITION__INSTANCE_VARIABLE_DECLARATIONS:
 				return instanceVariableDeclarations != null && !instanceVariableDeclarations.isEmpty();
-			case ImperativeModelPackage.IMPERATIVE_FUNCTION__INITIALIZATION_COMPOUND:
+			case ImperativeModelPackage.IMPERATIVE_FUNCTION_DEFINITION__INITIALIZATION_COMPOUND:
 				return initializationCompound != null;
-			case ImperativeModelPackage.IMPERATIVE_FUNCTION__COMPUTATION_COMPOUNDS:
+			case ImperativeModelPackage.IMPERATIVE_FUNCTION_DEFINITION__COMPUTATION_COMPOUNDS:
 				return computationCompounds != null && !computationCompounds.isEmpty();
 		}
 		return super.eIsSet(featureID);

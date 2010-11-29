@@ -28,7 +28,7 @@ import org.eclipselabs.mscript.language.ast.Module;
 import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
 import org.eclipselabs.mscript.language.functionmodel.FunctionDescriptor;
 import org.eclipselabs.mscript.language.functionmodel.util.FunctionDescriptorConstructor;
-import org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction;
+import org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionDefinition;
 import org.eclipselabs.mscript.language.imperativemodel.util.ImperativeFunctionTransformer;
 import org.eclipselabs.mscript.language.interpreter.Functor;
 import org.eclipselabs.mscript.language.interpreter.FunctorInterpreterContext;
@@ -92,16 +92,16 @@ public class MscriptLaunchConfigurationDelegate extends LaunchConfigurationDeleg
 		IFunctorInterpreterContext context = new FunctorInterpreterContext(diagnostics, new ValueFactory());
 		
 		IFunctor functor = createFunctor(context, file, functionName, templateArguments, inputFile, outputFile, monitor);
-		checkInputFile(functor.getFunction(), inputFile, monitor);
+		checkInputFile(functor.getFunctionDefinition(), inputFile, monitor);
 		prepareOutputFile(outputFile, monitor);
 
 		new MscriptProcess(launch, "Mscript Application").run(context, functor, inputFile, outputFile);
 	}
 	
-	protected void checkInputFile(ImperativeFunction function, IFile inputFile, IProgressMonitor monitor) throws CoreException {
+	protected void checkInputFile(ImperativeFunctionDefinition functionDefinition, IFile inputFile, IProgressMonitor monitor) throws CoreException {
 		try {
 			BufferedReader reader = new BufferedReader(new InputStreamReader(inputFile.getContents()));
-			int n = function.getInputVariableDeclarations().size();
+			int n = functionDefinition.getInputVariableDeclarations().size();
 			while (!monitor.isCanceled() && reader.ready()) {
 				String[] values = reader.readLine().split(",", 0);
 				if (values.length != n) {
@@ -183,12 +183,12 @@ public class MscriptLaunchConfigurationDelegate extends LaunchConfigurationDeleg
 			parameterDeclaration.getName();
 		}
 		
-		ImperativeFunction imperativeFunction = new ImperativeFunctionTransformer().transform(functionDescriptor, templateParameterDataTypes, inputParameterDataTypes, diagnostics);
+		ImperativeFunctionDefinition imperativeFunctionDefinition = new ImperativeFunctionTransformer().transform(functionDescriptor, templateParameterDataTypes, inputParameterDataTypes, diagnostics);
 		if (diagnostics.getSeverity() != Diagnostic.OK) {
 			throw new CoreException(BasicDiagnostic.toIStatus(diagnostics));
 		}
 
-		IFunctor functor = Functor.create(imperativeFunction, templateArguments);
+		IFunctor functor = Functor.create(imperativeFunctionDefinition, templateArguments);
 		interpreterContext.setFunctor(functor);
 		
 		return functor;

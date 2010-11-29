@@ -17,7 +17,7 @@ import org.eclipselabs.mscript.language.imperativemodel.CompoundStatement;
 import org.eclipselabs.mscript.language.imperativemodel.ComputationCompound;
 import org.eclipselabs.mscript.language.imperativemodel.ForeachStatement;
 import org.eclipselabs.mscript.language.imperativemodel.IfStatement;
-import org.eclipselabs.mscript.language.imperativemodel.ImperativeFunction;
+import org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionDefinition;
 import org.eclipselabs.mscript.language.imperativemodel.ImperativeModelPackage;
 import org.eclipselabs.mscript.language.imperativemodel.InputVariableDeclaration;
 import org.eclipselabs.mscript.language.imperativemodel.InstanceVariableDeclaration;
@@ -103,9 +103,9 @@ public class ImperativeModelSwitch<T> {
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case ImperativeModelPackage.IMPERATIVE_FUNCTION: {
-				ImperativeFunction imperativeFunction = (ImperativeFunction)theEObject;
-				T result = caseImperativeFunction(imperativeFunction);
+			case ImperativeModelPackage.IMPERATIVE_FUNCTION_DEFINITION: {
+				ImperativeFunctionDefinition imperativeFunctionDefinition = (ImperativeFunctionDefinition)theEObject;
+				T result = caseImperativeFunctionDefinition(imperativeFunctionDefinition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -221,17 +221,17 @@ public class ImperativeModelSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Imperative Function</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Imperative Function Definition</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Imperative Function</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Imperative Function Definition</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseImperativeFunction(ImperativeFunction object) {
+	public T caseImperativeFunctionDefinition(ImperativeFunctionDefinition object) {
 		return null;
 	}
 
