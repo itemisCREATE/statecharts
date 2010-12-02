@@ -10,9 +10,15 @@
  */
 package org.yakindu.sct.statechart.diagram.editor;
 
+import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.gmf.runtime.common.ui.services.marker.MarkerNavigationService;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.ide.IGotoMarker;
 import org.yakindu.sct.statechart.diagram.DiagramActivator;
+import org.yakindu.sct.statechart.diagram.validation.ValidationAction;
 
 /**
  * 
@@ -20,7 +26,7 @@ import org.yakindu.sct.statechart.diagram.DiagramActivator;
  *         href="mailto:andreas.muelder@itemis.de">andreas.muelder@itemis.de</a>
  * 
  */
-public class StatechartDiagramEditor extends DiagramDocumentEditor {
+public class StatechartDiagramEditor extends DiagramDocumentEditor implements IGotoMarker {
 
 	public static final String ID = "org.yakindu.sct.statechart.diagram.StatechartDiagramEditor";
 
@@ -35,12 +41,22 @@ public class StatechartDiagramEditor extends DiagramDocumentEditor {
 
 	@Override
 	public void doSave(IProgressMonitor progressMonitor) {
-//		Display.getDefault().asyncExec(new Runnable() {
-//			@Override
-//			public void run() {
-//				ValidationAction.validate(getDiagramEditPart(), getDiagram());
-//			}
-//		});
+		Display.getDefault().asyncExec(new Runnable() {
+			@Override
+			public void run() {
+				ValidationAction.validate(getDiagramEditPart(), getDiagram());
+			}
+		});
 		super.doSave(progressMonitor);
+	}
+	
+	@Override
+	public void setInput(IEditorInput input) {
+		
+		super.setInput(input);
+	}
+	
+	public void gotoMarker(IMarker marker) {
+		MarkerNavigationService.getInstance().gotoMarker(this, marker);
 	}
 }

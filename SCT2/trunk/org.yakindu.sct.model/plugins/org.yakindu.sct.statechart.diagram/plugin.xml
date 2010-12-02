@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
+   <extension-point id="org.yakindu.sct.statechart.diagram.validation.provider" name="org.yakindu.sct.statechart.diagram.validation.provider" schema="schema/org.yakindu.sct.statechart.diagram.validation.provider.exsd"/>
    <extension
          point="org.eclipse.ui.editors">
       <editor
@@ -283,19 +284,6 @@
          </editor>
       </paletteProvider>
    </extension>
-   <extension
-         point="org.eclipse.gmf.runtime.diagram.ui.editpolicyProviders">
-   </extension>
-   <extension
-         point="org.eclipse.gmf.runtime.diagram.ui.resources.editor.documentProviders">
-      <provider
-            class="org.yakindu.sct.statechart.diagram.providers.StatechartDiagramDocumentProvider"
-            documentType="org.eclipse.gmf.runtime.diagram.ui.editor.IDocument"
-            extensions="sct"
-            id="org.yakindu.sct.statechart.diagram.provider1"
-            inputTypes="org.eclipse.ui.IStorageEditorInput">
-      </provider>
-   </extension>
 
 <!-- Property Tabs -->
 
@@ -367,6 +355,28 @@
       <initializer
             class="org.yakindu.sct.statechart.diagram.preferences.PreferenceInitializer">
       </initializer>
+   </extension>
+   
+   <!-- marker && validation -->
+    <extension id="diagnostic" name="Statechart Plugin problems" point="org.eclipse.core.resources.markers">
+      <super type="org.eclipse.core.resources.problemmarker"/>
+      <super type="org.eclipse.gmf.runtime.common.ui.services.marker"/>
+      <persistent value="true"/>
+   </extension>   
+  
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.markerNavigationProviders" id="markers-navigation">
+      <MarkerNavigationProvider class="org.yakindu.sct.statechart.diagram.providers.StatechartMarkerNavigationProvider">
+         <MarkerType name="org.yakindu.sct.statechart.diagram.diagnostic"/>
+         <Priority name="Highest"/>
+      </MarkerNavigationProvider>
+   </extension>
+   
+   <extension id="validationDecoratorProvider" name="ValidationDecorations" point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders">
+      <decoratorProvider class="org.yakindu.sct.statechart.diagram.providers.StatechartValidationDecorationProvider">
+         <Priority name="Lowest"/>
+         <object class="org.eclipse.gmf.runtime.diagram.ui.editparts.IPrimaryEditPart(org.eclipse.gmf.runtime.diagram.ui)" id="PRIMARY_VIEW"/>
+         <context decoratorTargets="PRIMARY_VIEW"/>
+      </decoratorProvider>
    </extension>
 
 </plugin>

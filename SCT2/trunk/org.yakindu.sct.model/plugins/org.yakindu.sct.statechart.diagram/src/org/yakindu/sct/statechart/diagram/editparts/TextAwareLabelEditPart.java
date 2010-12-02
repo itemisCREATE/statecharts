@@ -163,6 +163,9 @@ public abstract class TextAwareLabelEditPart extends CompartmentEditPart
 			Text text = (Text) celleditor.getControl();
 			Rectangle textRectangle = getWrappingLabel().getBounds().getCopy();
 			getFigure().translateToAbsolute(textRectangle);
+			
+			
+			
 			text.setBounds(textRectangle.x, textRectangle.y,
 					Math.max(textRectangle.width, minimumWidth),
 					textRectangle.height);
