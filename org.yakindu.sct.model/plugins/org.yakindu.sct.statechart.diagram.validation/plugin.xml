@@ -1,73 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
- <extension
-         point="org.eclipse.emf.validation.constraintProviders">
-      <category
-            id="org.yakindu.sct.statechart.diagram.validation.ModelIntegrity"
-            mandatory="true"
-            name="Statechart Diagram Constraints">
-      </category>
-      <constraintProvider
-            cache="false"
-            mode="Batch">
-         <package
-               namespaceUri="http://www.yakindu.org/sct/model/statechart/2.0">
-         </package>
-         <constraints
-               categories="org.yakindu.sct.statechart.diagram.validation.ModelIntegrity">
-                <constraint
-                      class="org.yakindu.sct.statechart.diagram.validation.constraints.ExactlyOneInitialState"
-                      id="Statechart:ExactlyOneStartNode"
-                      isEnabledByDefault="true"
-                      lang="Java"
-                      mode="Batch"
-                      name="Statechart::ExactlyOneStartNode"
-                      severity="ERROR"
-                      statusCode="1">
-               <message>
-                  {0} does have {1} initial state(s).
-               </message>
-               <target
-                     class="Region">
-               </target>
-            </constraint>
-             <constraint
-                      class="org.yakindu.sct.statechart.diagram.validation.constraints.NoOutgoingTransitions"
-                      id="Statechart:NoOutgoingTransitions"
-                      isEnabledByDefault="true"
-                      lang="Java"
-                      mode="Batch"
-                      name="Statechart:NoOutgoingTransitions"
-                      severity="ERROR"
-                      statusCode="1">
-               <message>
-                  {0} must have at least one outgoing transition.
-               </message>
-               <target class="Choice" />
-               <target class="Junction" />
-               <target class="State" />
-            </constraint>
-               </constraints>
-	 </constraintProvider>
-	 </extension>
- <extension
-       point="org.eclipse.emf.validation.constraintBindings">
-    <clientContext
-          id="org.yakindu.sct.statechart.diagram.validation.StatechartContext">
-       <enablement>
-      	 <instanceof value="org.eclipse.emf.ecore.EObject" />
-       </enablement>
-    </clientContext>
-    <binding
-          category="org.yakindu.sct.statechart.diagram.validation.ModelIntegrity"
-          constraint="Statechart:ExactlyOneStartNode"
-          context="org.yakindu.sct.statechart.diagram.validation.StatechartContext">
-    </binding>
-    <binding
-          category="org.yakindu.sct.statechart.diagram.validation.ModelIntegrity"
-          constraint="Statechart:NoOutgoingTransitions"
-          context="org.yakindu.sct.statechart.diagram.validation.StatechartContext">
-    </binding>
- </extension>
+   <extension
+         point="org.yakindu.sct.statechart.diagram.validation.provider">
+      <ValidationProvider
+            class="org.yakindu.sct.statechart.diagram.validation.provider.impl.StatechartDefaultValidationProvider">
+      </ValidationProvider>
+   </extension>
+ 
 </plugin>

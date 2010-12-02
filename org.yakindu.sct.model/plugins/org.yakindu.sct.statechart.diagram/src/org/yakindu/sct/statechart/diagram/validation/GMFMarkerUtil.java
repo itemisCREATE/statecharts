@@ -7,7 +7,6 @@ import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.validation.model.IConstraintStatus;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
 import org.eclipse.gmf.runtime.emf.core.util.EMFCoreUtil;
 import org.eclipse.gmf.runtime.notation.Diagram;
@@ -21,33 +20,34 @@ import org.eclipse.xtext.EcoreUtil2;
  *         href="mailto:andreas.muelder@itemis.de">andreas.muelder@itemis.de</a>
  * 
  */
-public final class MarkerUtil {
+public final class GMFMarkerUtil {
 
-	private MarkerUtil() {
+	private GMFMarkerUtil() {
 		// Not to be instantiated
 	}
 
-	public static void createMarkers(IFile target, IStatus validationStatus, DiagramEditPart diagramEditPart,
-			String markerType) {
+	public static void createMarker(IFile target, IStatus validationStatus,
+			DiagramEditPart diagramEditPart, String markerType,
+			EObject semanticTarget) {
 		if (validationStatus.isOK()) {
 			return;
 		}
-
-		IStatus[] children = validationStatus.getChildren();
-		for (IStatus child : children) {
-			IConstraintStatus nextStatus = (IConstraintStatus) child;
-			View view = findNotationView(diagramEditPart.getDiagramView(), nextStatus.getTarget());
-			addMarker(target, view.eResource().getURIFragment(view),
-					EMFCoreUtil.getQualifiedName(nextStatus.getTarget(), true), nextStatus.getMessage(),
-					nextStatus.getSeverity(), markerType);
-		}
+		View view = findNotationView(diagramEditPart.getDiagramView(),
+				semanticTarget);
+		addMarker(target, view.eResource().getURIFragment(view),
+				EMFCoreUtil.getQualifiedName(semanticTarget, true),
+				validationStatus.getMessage(), validationStatus.getSeverity(),
+				markerType);
 
 	}
 
-	private static View findNotationView(Diagram diagram, EObject semanticElement) {
-		List<EObject> allNotationElements = EcoreUtil2.eAllContentsAsList(diagram);
+	private static View findNotationView(Diagram diagram,
+			EObject semanticElement) {
+		List<EObject> allNotationElements = EcoreUtil2
+				.eAllContentsAsList(diagram);
 		for (EObject eObject : allNotationElements) {
-			if (eObject instanceof View && semanticElement.equals(((View) eObject).getElement())) {
+			if (eObject instanceof View
+					&& semanticElement.equals(((View) eObject).getElement())) {
 				return (View) eObject;
 			}
 		}
@@ -55,19 +55,22 @@ public final class MarkerUtil {
 
 	}
 
-	private static IMarker addMarker(IFile file, String elementId, String location, String message, int statusSeverity,
+	private static IMarker addMarker(IFile file, String elementId,
+			String location, String message, int statusSeverity,
 			String markerType) {
-		System.out.println("Element id is " + elementId);
 		IMarker marker = null;
 		try {
 			marker = file.createMarker(markerType);
 			marker.setAttribute(IMarker.MESSAGE, message);
 			marker.setAttribute(IMarker.LOCATION, location);
-			marker.setAttribute(org.eclipse.gmf.runtime.common.ui.resources.IMarker.ELEMENT_ID, elementId);
+			marker.setAttribute(
+					org.eclipse.gmf.runtime.common.ui.resources.IMarker.ELEMENT_ID,
+			elementId);
 			int markerSeverity = IMarker.SEVERITY_INFO;
 			if (statusSeverity == IStatus.WARNING) {
 				markerSeverity = IMarker.SEVERITY_WARNING;
-			} else if (statusSeverity == IStatus.ERROR || statusSeverity == IStatus.CANCEL) {
+			} else if (statusSeverity == IStatus.ERROR
+					|| statusSeverity == IStatus.CANCEL) {
 				markerSeverity = IMarker.SEVERITY_ERROR;
 			}
 			marker.setAttribute(IMarker.SEVERITY, markerSeverity);
