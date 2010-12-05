@@ -399,6 +399,33 @@
         </ownedParameter>
       </ownedOperation>
     </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_WYej8P_WEd-8X600jmiTLA" name="AnyDataType">
+      <generalization xmi:id="_ZD2lEP_WEd-8X600jmiTLA" general="_FfGmwH3nEd-EWvFDOLE-rQ"/>
+      <ownedOperation xmi:id="__Q2EkP_WEd-8X600jmiTLA" name="evaluate" redefinedOperation="_M2L2IH30Ed-EWvFDOLE-rQ">
+        <ownedParameter xmi:id="__ww6wP_WEd-8X600jmiTLA" type="_FfGmwH3nEd-EWvFDOLE-rQ" direction="return"/>
+        <ownedParameter xmi:id="__wxh0P_WEd-8X600jmiTLA" name="operator" type="_1MUB0H3zEd-EWvFDOLE-rQ"/>
+        <ownedParameter xmi:id="__wxh0f_WEd-8X600jmiTLA" name="other" type="_FfGmwH3nEd-EWvFDOLE-rQ">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="__wxh0v_WEd-8X600jmiTLA" value="1"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="__wxh0__WEd-8X600jmiTLA"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:id="_A6rJIP_XEd-8X600jmiTLA" name="evaluatePower" redefinedOperation="_yQLaYNUzEd-6taNkaoHW5g">
+        <ownedParameter xmi:id="_BXscUP_XEd-8X600jmiTLA" type="_FfGmwH3nEd-EWvFDOLE-rQ" direction="return"/>
+        <ownedParameter xmi:id="_BXtDYP_XEd-8X600jmiTLA" name="exponent">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:id="_CU_yEP_XEd-8X600jmiTLA" name="isAssignableFrom" redefinedOperation="_UEkroH5FEd-92N_8bTdFqA">
+        <ownedParameter xmi:id="_C8geAP_XEd-8X600jmiTLA" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        </ownedParameter>
+        <ownedParameter xmi:id="_C8hFEP_XEd-8X600jmiTLA" name="other" type="_FfGmwH3nEd-EWvFDOLE-rQ"/>
+      </ownedOperation>
+      <ownedOperation xmi:id="_FI5dEP_XEd-8X600jmiTLA" name="convertTo" redefinedOperation="__lmb0H-eEd-8ibE6W-dHMQ">
+        <ownedParameter xmi:id="_FoEFUP_XEd-8X600jmiTLA" type="_FfGmwH3nEd-EWvFDOLE-rQ" direction="return"/>
+        <ownedParameter xmi:id="_FoEsYP_XEd-8X600jmiTLA" name="other" type="_FfGmwH3nEd-EWvFDOLE-rQ"/>
+      </ownedOperation>
+    </packagedElement>
     <profileApplication xmi:id="_DbDeoHGiEd-Vr_LfGhknIQ">
       <eAnnotations xmi:id="_DbI-MHGiEd-Vr_LfGhknIQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
         <references xmi:type="ecore:EPackage" href="pathmap://UML_PROFILES/Ecore.profile.uml#_z1OFcHjqEdy8S4Cr8Rc_NA"/>

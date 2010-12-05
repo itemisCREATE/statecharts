@@ -11,16 +11,18 @@
 
 package org.eclipselabs.mscript.language.interpreter;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionDefinition;
-import org.eclipselabs.mscript.language.imperativemodel.InputVariableDeclaration;
-import org.eclipselabs.mscript.language.imperativemodel.InstanceVariableDeclaration;
-import org.eclipselabs.mscript.language.imperativemodel.OutputVariableDeclaration;
-import org.eclipselabs.mscript.language.imperativemodel.TemplateVariableDeclaration;
-import org.eclipselabs.mscript.language.imperativemodel.VariableDeclaration;
+import org.eclipselabs.mscript.language.il.ILFunctionDefinition;
+import org.eclipselabs.mscript.language.il.InputVariableDeclaration;
+import org.eclipselabs.mscript.language.il.InstanceVariableDeclaration;
+import org.eclipselabs.mscript.language.il.OutputVariableDeclaration;
+import org.eclipselabs.mscript.language.il.TemplateVariableDeclaration;
+import org.eclipselabs.mscript.language.il.VariableDeclaration;
 import org.eclipselabs.mscript.language.interpreter.value.IValue;
 
 /**
@@ -29,7 +31,7 @@ import org.eclipselabs.mscript.language.interpreter.value.IValue;
  */
 public class Functor implements IFunctor {
 
-	private ImperativeFunctionDefinition functionDefinition;
+	private ILFunctionDefinition functionDefinition;
 	private Map<VariableDeclaration, IVariable> variables = new HashMap<VariableDeclaration, IVariable>();
 	
 	/**
@@ -38,7 +40,7 @@ public class Functor implements IFunctor {
 	private Functor() {
 	}
 	
-	public static IFunctor create(ImperativeFunctionDefinition functionDefinition, List<IValue> templateArguments) {
+	public static IFunctor create(ILFunctionDefinition functionDefinition, List<IValue> templateArguments) {
 		if (functionDefinition.getTemplateVariableDeclarations().size() != templateArguments.size()) {
 			throw new IllegalArgumentException("Number of template arguments must be equal to number of template parameters of function definition");
 		}
@@ -72,8 +74,15 @@ public class Functor implements IFunctor {
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.language.interpreter.IFunctor#getFunctionDefinition()
 	 */
-	public ImperativeFunctionDefinition getFunctionDefinition() {
+	public ILFunctionDefinition getFunctionDefinition() {
 		return functionDefinition;
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.language.interpreter.IFunctor#getVariables()
+	 */
+	public Collection<IVariable> getVariables() {
+		return Collections.unmodifiableCollection(variables.values());
 	}
 	
 	/* (non-Javadoc)

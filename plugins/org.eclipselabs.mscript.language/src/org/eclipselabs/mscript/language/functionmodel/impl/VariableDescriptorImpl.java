@@ -31,7 +31,7 @@ import org.eclipselabs.mscript.language.functionmodel.VariableStep;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.VariableDescriptorImpl#getFunction <em>Function</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.VariableDescriptorImpl#getFunctionDescriptor <em>Function Descriptor</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.VariableDescriptorImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.VariableDescriptorImpl#getKind <em>Kind</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.functionmodel.impl.VariableDescriptorImpl#getSteps <em>Steps</em>}</li>
@@ -115,8 +115,8 @@ public class VariableDescriptorImpl extends EObjectImpl implements VariableDescr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public FunctionDescriptor getFunction() {
-		if (eContainerFeatureID() != FunctionModelPackage.VARIABLE_DESCRIPTOR__FUNCTION) return null;
+	public FunctionDescriptor getFunctionDescriptor() {
+		if (eContainerFeatureID() != FunctionModelPackage.VARIABLE_DESCRIPTOR__FUNCTION_DESCRIPTOR) return null;
 		return (FunctionDescriptor)eContainer();
 	}
 
@@ -125,8 +125,8 @@ public class VariableDescriptorImpl extends EObjectImpl implements VariableDescr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetFunction(FunctionDescriptor newFunction, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newFunction, FunctionModelPackage.VARIABLE_DESCRIPTOR__FUNCTION, msgs);
+	public NotificationChain basicSetFunctionDescriptor(FunctionDescriptor newFunctionDescriptor, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newFunctionDescriptor, FunctionModelPackage.VARIABLE_DESCRIPTOR__FUNCTION_DESCRIPTOR, msgs);
 		return msgs;
 	}
 
@@ -135,20 +135,20 @@ public class VariableDescriptorImpl extends EObjectImpl implements VariableDescr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setFunction(FunctionDescriptor newFunction) {
-		if (newFunction != eInternalContainer() || (eContainerFeatureID() != FunctionModelPackage.VARIABLE_DESCRIPTOR__FUNCTION && newFunction != null)) {
-			if (EcoreUtil.isAncestor(this, newFunction))
+	public void setFunctionDescriptor(FunctionDescriptor newFunctionDescriptor) {
+		if (newFunctionDescriptor != eInternalContainer() || (eContainerFeatureID() != FunctionModelPackage.VARIABLE_DESCRIPTOR__FUNCTION_DESCRIPTOR && newFunctionDescriptor != null)) {
+			if (EcoreUtil.isAncestor(this, newFunctionDescriptor))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
-			if (newFunction != null)
-				msgs = ((InternalEObject)newFunction).eInverseAdd(this, FunctionModelPackage.FUNCTION_DESCRIPTOR__VARIABLE_DESCRIPTORS, FunctionDescriptor.class, msgs);
-			msgs = basicSetFunction(newFunction, msgs);
+			if (newFunctionDescriptor != null)
+				msgs = ((InternalEObject)newFunctionDescriptor).eInverseAdd(this, FunctionModelPackage.FUNCTION_DESCRIPTOR__VARIABLE_DESCRIPTORS, FunctionDescriptor.class, msgs);
+			msgs = basicSetFunctionDescriptor(newFunctionDescriptor, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FunctionModelPackage.VARIABLE_DESCRIPTOR__FUNCTION, newFunction, newFunction));
+			eNotify(new ENotificationImpl(this, Notification.SET, FunctionModelPackage.VARIABLE_DESCRIPTOR__FUNCTION_DESCRIPTOR, newFunctionDescriptor, newFunctionDescriptor));
 	}
 
 	/**
@@ -258,10 +258,10 @@ public class VariableDescriptorImpl extends EObjectImpl implements VariableDescr
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case FunctionModelPackage.VARIABLE_DESCRIPTOR__FUNCTION:
+			case FunctionModelPackage.VARIABLE_DESCRIPTOR__FUNCTION_DESCRIPTOR:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetFunction((FunctionDescriptor)otherEnd, msgs);
+				return basicSetFunctionDescriptor((FunctionDescriptor)otherEnd, msgs);
 			case FunctionModelPackage.VARIABLE_DESCRIPTOR__STEPS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getSteps()).basicAdd(otherEnd, msgs);
 		}
@@ -276,8 +276,8 @@ public class VariableDescriptorImpl extends EObjectImpl implements VariableDescr
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case FunctionModelPackage.VARIABLE_DESCRIPTOR__FUNCTION:
-				return basicSetFunction(null, msgs);
+			case FunctionModelPackage.VARIABLE_DESCRIPTOR__FUNCTION_DESCRIPTOR:
+				return basicSetFunctionDescriptor(null, msgs);
 			case FunctionModelPackage.VARIABLE_DESCRIPTOR__STEPS:
 				return ((InternalEList<?>)getSteps()).basicRemove(otherEnd, msgs);
 		}
@@ -292,7 +292,7 @@ public class VariableDescriptorImpl extends EObjectImpl implements VariableDescr
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case FunctionModelPackage.VARIABLE_DESCRIPTOR__FUNCTION:
+			case FunctionModelPackage.VARIABLE_DESCRIPTOR__FUNCTION_DESCRIPTOR:
 				return eInternalContainer().eInverseRemove(this, FunctionModelPackage.FUNCTION_DESCRIPTOR__VARIABLE_DESCRIPTORS, FunctionDescriptor.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
@@ -306,8 +306,8 @@ public class VariableDescriptorImpl extends EObjectImpl implements VariableDescr
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case FunctionModelPackage.VARIABLE_DESCRIPTOR__FUNCTION:
-				return getFunction();
+			case FunctionModelPackage.VARIABLE_DESCRIPTOR__FUNCTION_DESCRIPTOR:
+				return getFunctionDescriptor();
 			case FunctionModelPackage.VARIABLE_DESCRIPTOR__NAME:
 				return getName();
 			case FunctionModelPackage.VARIABLE_DESCRIPTOR__KIND:
@@ -327,8 +327,8 @@ public class VariableDescriptorImpl extends EObjectImpl implements VariableDescr
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case FunctionModelPackage.VARIABLE_DESCRIPTOR__FUNCTION:
-				setFunction((FunctionDescriptor)newValue);
+			case FunctionModelPackage.VARIABLE_DESCRIPTOR__FUNCTION_DESCRIPTOR:
+				setFunctionDescriptor((FunctionDescriptor)newValue);
 				return;
 			case FunctionModelPackage.VARIABLE_DESCRIPTOR__NAME:
 				setName((String)newValue);
@@ -352,8 +352,8 @@ public class VariableDescriptorImpl extends EObjectImpl implements VariableDescr
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case FunctionModelPackage.VARIABLE_DESCRIPTOR__FUNCTION:
-				setFunction((FunctionDescriptor)null);
+			case FunctionModelPackage.VARIABLE_DESCRIPTOR__FUNCTION_DESCRIPTOR:
+				setFunctionDescriptor((FunctionDescriptor)null);
 				return;
 			case FunctionModelPackage.VARIABLE_DESCRIPTOR__NAME:
 				setName(NAME_EDEFAULT);
@@ -376,8 +376,8 @@ public class VariableDescriptorImpl extends EObjectImpl implements VariableDescr
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case FunctionModelPackage.VARIABLE_DESCRIPTOR__FUNCTION:
-				return getFunction() != null;
+			case FunctionModelPackage.VARIABLE_DESCRIPTOR__FUNCTION_DESCRIPTOR:
+				return getFunctionDescriptor() != null;
 			case FunctionModelPackage.VARIABLE_DESCRIPTOR__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case FunctionModelPackage.VARIABLE_DESCRIPTOR__KIND:

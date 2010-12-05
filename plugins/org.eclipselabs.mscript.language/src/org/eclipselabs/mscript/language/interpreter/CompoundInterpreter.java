@@ -11,15 +11,13 @@
 
 package org.eclipselabs.mscript.language.interpreter;
 
-import org.eclipse.emf.common.util.Diagnostic;
-import org.eclipselabs.mscript.language.imperativemodel.Assignment;
-import org.eclipselabs.mscript.language.imperativemodel.Compound;
-import org.eclipselabs.mscript.language.imperativemodel.ForeachStatement;
-import org.eclipselabs.mscript.language.imperativemodel.IfStatement;
-import org.eclipselabs.mscript.language.imperativemodel.LocalVariableDeclaration;
-import org.eclipselabs.mscript.language.imperativemodel.Statement;
-import org.eclipselabs.mscript.language.imperativemodel.util.ImperativeModelSwitch;
-import org.eclipselabs.mscript.language.internal.util.EObjectDiagnostic;
+import org.eclipselabs.mscript.language.il.Assignment;
+import org.eclipselabs.mscript.language.il.Compound;
+import org.eclipselabs.mscript.language.il.ForeachStatement;
+import org.eclipselabs.mscript.language.il.IfStatement;
+import org.eclipselabs.mscript.language.il.LocalVariableDeclaration;
+import org.eclipselabs.mscript.language.il.Statement;
+import org.eclipselabs.mscript.language.il.util.ILSwitch;
 import org.eclipselabs.mscript.language.interpreter.value.IBooleanValue;
 import org.eclipselabs.mscript.language.interpreter.value.IValue;
 import org.eclipselabs.mscript.language.interpreter.value.UninitializedValue;
@@ -28,7 +26,7 @@ import org.eclipselabs.mscript.language.interpreter.value.UninitializedValue;
  * @author Andreas Unger
  *
  */
-public class CompoundInterpreter extends ImperativeModelSwitch<Boolean> {
+public class CompoundInterpreter extends ILSwitch<Boolean> {
 
 	private IInterpreterContext context;
 	
@@ -40,7 +38,7 @@ public class CompoundInterpreter extends ImperativeModelSwitch<Boolean> {
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.language.imperativemodel.util.ImperativeModelSwitch#caseCompound(org.eclipselabs.mscript.language.imperativemodel.Compound)
+	 * @see org.eclipselabs.mscript.language.imperativemodel.util.ILSwitch#caseCompound(org.eclipselabs.mscript.language.imperativemodel.Compound)
 	 */
 	@Override
 	public Boolean caseCompound(Compound compound) {
@@ -53,18 +51,18 @@ public class CompoundInterpreter extends ImperativeModelSwitch<Boolean> {
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.language.imperativemodel.util.ImperativeModelSwitch#caseAssignment(org.eclipselabs.mscript.language.imperativemodel.Assignment)
+	 * @see org.eclipselabs.mscript.language.imperativemodel.util.ILSwitch#caseAssignment(org.eclipselabs.mscript.language.imperativemodel.Assignment)
 	 */
 	@Override
 	public Boolean caseAssignment(Assignment assignment) {
 		IValue value = new ExpressionValueEvaluator(context).doSwitch(assignment.getAssignedExpression());
-		IVariable variable = context.getVariable(assignment.getTarget());
+		IVariable variable = context.getScope().findInEnclosingScopes(assignment.getTarget());
 		variable.setValue(assignment.getStepIndex(), value);
 		return true;
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.language.imperativemodel.util.ImperativeModelSwitch#caseIfStatement(org.eclipselabs.mscript.language.imperativemodel.IfStatement)
+	 * @see org.eclipselabs.mscript.language.imperativemodel.util.ILSwitch#caseIfStatement(org.eclipselabs.mscript.language.imperativemodel.IfStatement)
 	 */
 	@Override
 	public Boolean caseIfStatement(IfStatement ifStatement) {
@@ -75,14 +73,13 @@ public class CompoundInterpreter extends ImperativeModelSwitch<Boolean> {
 				return doSwitch(ifStatement.getThenStatement());
 			}
 		} else {
-			context.getDiagnostics().add(new EObjectDiagnostic(Diagnostic.ERROR, "Condition expression must be boolean", null));
-			return true;
+			throw new RuntimeException("Condition expression must be boolean");
 		}
 		return doSwitch(ifStatement.getElseStatement());
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.language.imperativemodel.util.ImperativeModelSwitch#caseForeachStatement(org.eclipselabs.mscript.language.imperativemodel.ForeachStatement)
+	 * @see org.eclipselabs.mscript.language.imperativemodel.util.ILSwitch#caseForeachStatement(org.eclipselabs.mscript.language.imperativemodel.ForeachStatement)
 	 */
 	@Override
 	public Boolean caseForeachStatement(ForeachStatement object) {
@@ -91,7 +88,7 @@ public class CompoundInterpreter extends ImperativeModelSwitch<Boolean> {
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.language.imperativemodel.util.ImperativeModelSwitch#caseLocalVariableDeclaration(org.eclipselabs.mscript.language.imperativemodel.LocalVariableDeclaration)
+	 * @see org.eclipselabs.mscript.language.imperativemodel.util.ILSwitch#caseLocalVariableDeclaration(org.eclipselabs.mscript.language.imperativemodel.LocalVariableDeclaration)
 	 */
 	@Override
 	public Boolean caseLocalVariableDeclaration(LocalVariableDeclaration localVariableDeclaration) {
@@ -103,7 +100,7 @@ public class CompoundInterpreter extends ImperativeModelSwitch<Boolean> {
 		}
 		IVariable variable = new Variable(localVariableDeclaration, 1);
 		variable.setValue(0, value);
-		context.addVariable(variable);
+		context.getScope().add(variable);
 		return true;
 	}
 

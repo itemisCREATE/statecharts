@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+import org.eclipselabs.mscript.typesystem.AnyDataType;
 import org.eclipselabs.mscript.typesystem.ArrayDimension;
 import org.eclipselabs.mscript.typesystem.ArrayType;
 import org.eclipselabs.mscript.typesystem.BooleanType;
@@ -216,6 +217,13 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 	 * @generated
 	 */
 	private EClass unitTypeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass anyDataTypeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -756,6 +764,15 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getAnyDataType() {
+		return anyDataTypeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getOperatorKind() {
 		return operatorKindEEnum;
 	}
@@ -872,6 +889,8 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 
 		unitTypeEClass = createEClass(UNIT_TYPE);
 
+		anyDataTypeEClass = createEClass(ANY_DATA_TYPE);
+
 		// Create enums
 		operatorKindEEnum = createEEnum(OPERATOR_KIND);
 		unitSymbolEEnum = createEEnum(UNIT_SYMBOL);
@@ -925,6 +944,7 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 		tensorTypeEClass.getESuperTypes().add(this.getArrayType());
 		recordEClass.getESuperTypes().add(this.getDataType());
 		unitTypeEClass.getESuperTypes().add(this.getDataType());
+		anyDataTypeEClass.getESuperTypes().add(this.getDataType());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(typeEClass, Type.class, "Type", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1040,6 +1060,8 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 
 		initEClass(unitTypeEClass, UnitType.class, "UnitType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
+		initEClass(anyDataTypeEClass, AnyDataType.class, "AnyDataType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
 		// Initialize enums and add enum literals
 		initEEnum(operatorKindEEnum, OperatorKind.class, "OperatorKind");
 		addEEnumLiteral(operatorKindEEnum, OperatorKind.ADDITION);
@@ -1103,7 +1125,7 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 		  (getNamespace_OwnedMembers(), 
 		   source, 
 		   new String[] {
-		   });										
+		   });											
 	}
 
 	/**
@@ -1145,7 +1167,7 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 		   },
 		   new URI[] {
 			 URI.createURI(eNS_URI).appendFragment("//Namespace/ownedMembers")
-		   });		
+		   });			
 	}
 
 	/**
@@ -1188,6 +1210,11 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 		   });		
 		addAnnotation
 		  (unitTypeEClass, 
+		   source, 
+		   new String[] {
+		   });		
+		addAnnotation
+		  (anyDataTypeEClass, 
 		   source, 
 		   new String[] {
 		   });

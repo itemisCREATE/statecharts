@@ -179,6 +179,15 @@ public interface TypeSystemFactory extends EFactory {
 	UnitType createUnitType();
 
 	/**
+	 * Returns a new object of class '<em>Any Data Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Any Data Type</em>'.
+	 * @generated
+	 */
+	AnyDataType createAnyDataType();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

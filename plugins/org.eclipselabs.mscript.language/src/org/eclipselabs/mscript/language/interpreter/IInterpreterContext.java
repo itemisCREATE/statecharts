@@ -11,8 +11,6 @@
 
 package org.eclipselabs.mscript.language.interpreter;
 
-import org.eclipse.emf.common.util.DiagnosticChain;
-import org.eclipselabs.mscript.language.imperativemodel.VariableDeclaration;
 import org.eclipselabs.mscript.language.interpreter.value.IValueFactory;
 
 /**
@@ -25,13 +23,9 @@ public interface IInterpreterContext {
 	
 	IValueFactory getValueFactory();
 
-	DiagnosticChain getDiagnostics();
-	
+	IInterpreterScope getScope();
 	void enterScope();
 	void leaveScope();
-	
-	void addVariable(IVariable variable);
-	IVariable getVariable(VariableDeclaration declaration);
 	
 	void setCanceled(boolean canceled);
 	boolean isCanceled();

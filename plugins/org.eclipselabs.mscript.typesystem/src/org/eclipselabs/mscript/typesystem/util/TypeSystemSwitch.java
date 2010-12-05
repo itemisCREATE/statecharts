@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipselabs.mscript.typesystem.AnyDataType;
 import org.eclipselabs.mscript.typesystem.ArrayDimension;
 import org.eclipselabs.mscript.typesystem.ArrayType;
 import org.eclipselabs.mscript.typesystem.BooleanType;
@@ -318,6 +319,16 @@ public class TypeSystemSwitch<T> {
 				if (result == null) result = caseType(unitType);
 				if (result == null) result = casePackageableElement(unitType);
 				if (result == null) result = caseNamedElement(unitType);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TypeSystemPackage.ANY_DATA_TYPE: {
+				AnyDataType anyDataType = (AnyDataType)theEObject;
+				T result = caseAnyDataType(anyDataType);
+				if (result == null) result = caseDataType(anyDataType);
+				if (result == null) result = caseType(anyDataType);
+				if (result == null) result = casePackageableElement(anyDataType);
+				if (result == null) result = caseNamedElement(anyDataType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -682,6 +693,21 @@ public class TypeSystemSwitch<T> {
 	 * @generated
 	 */
 	public T caseUnitType(UnitType object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Any Data Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Any Data Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAnyDataType(AnyDataType object) {
 		return null;
 	}
 

@@ -15,10 +15,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.eclipselabs.mscript.language.imperativemodel.Compound;
-import org.eclipselabs.mscript.language.imperativemodel.ComputationCompound;
-import org.eclipselabs.mscript.language.imperativemodel.InputVariableDeclaration;
-import org.eclipselabs.mscript.language.imperativemodel.OutputVariableDeclaration;
+import org.eclipselabs.mscript.language.il.Compound;
+import org.eclipselabs.mscript.language.il.ComputationCompound;
+import org.eclipselabs.mscript.language.il.InputVariableDeclaration;
+import org.eclipselabs.mscript.language.il.OutputVariableDeclaration;
 import org.eclipselabs.mscript.language.interpreter.value.IValue;
 
 /**

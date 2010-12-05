@@ -332,7 +332,7 @@ public class FunctionModelPackageImpl extends EPackageImpl implements FunctionMo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getVariableDescriptor_Function() {
+	public EReference getVariableDescriptor_FunctionDescriptor() {
 		return (EReference)variableDescriptorEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -468,7 +468,7 @@ public class FunctionModelPackageImpl extends EPackageImpl implements FunctionMo
 		createEReference(equationPartEClass, EQUATION_PART__VARIABLE_STEP);
 
 		variableDescriptorEClass = createEClass(VARIABLE_DESCRIPTOR);
-		createEReference(variableDescriptorEClass, VARIABLE_DESCRIPTOR__FUNCTION);
+		createEReference(variableDescriptorEClass, VARIABLE_DESCRIPTOR__FUNCTION_DESCRIPTOR);
 		createEAttribute(variableDescriptorEClass, VARIABLE_DESCRIPTOR__NAME);
 		createEAttribute(variableDescriptorEClass, VARIABLE_DESCRIPTOR__KIND);
 		createEReference(variableDescriptorEClass, VARIABLE_DESCRIPTOR__STEPS);
@@ -519,7 +519,7 @@ public class FunctionModelPackageImpl extends EPackageImpl implements FunctionMo
 		initEClass(functionDescriptorEClass, FunctionDescriptor.class, "FunctionDescriptor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getFunctionDescriptor_Definition(), theAstPackage.getFunctionDefinition(), null, "definition", null, 1, 1, FunctionDescriptor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFunctionDescriptor_EquationDescriptors(), this.getEquationDescriptor(), this.getEquationDescriptor_FunctionDescriptor(), "equationDescriptors", null, 0, -1, FunctionDescriptor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getFunctionDescriptor_VariableDescriptors(), this.getVariableDescriptor(), this.getVariableDescriptor_Function(), "variableDescriptors", null, 0, -1, FunctionDescriptor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFunctionDescriptor_VariableDescriptors(), this.getVariableDescriptor(), this.getVariableDescriptor_FunctionDescriptor(), "variableDescriptors", null, 0, -1, FunctionDescriptor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = addEOperation(functionDescriptorEClass, this.getVariableDescriptor(), "getVariableDescriptor", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "name", 1, 1, IS_UNIQUE, IS_ORDERED);
@@ -598,7 +598,7 @@ public class FunctionModelPackageImpl extends EPackageImpl implements FunctionMo
 		initEReference(getEquationPart_VariableStep(), this.getVariableStep(), this.getVariableStep_UsingEquationParts(), "variableStep", null, 1, 1, EquationPart.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(variableDescriptorEClass, VariableDescriptor.class, "VariableDescriptor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getVariableDescriptor_Function(), this.getFunctionDescriptor(), this.getFunctionDescriptor_VariableDescriptors(), "function", null, 1, 1, VariableDescriptor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getVariableDescriptor_FunctionDescriptor(), this.getFunctionDescriptor(), this.getFunctionDescriptor_VariableDescriptors(), "functionDescriptor", null, 1, 1, VariableDescriptor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getVariableDescriptor_Name(), ecorePackage.getEString(), "name", null, 0, 1, VariableDescriptor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getVariableDescriptor_Kind(), this.getVariableKind(), "kind", null, 0, 1, VariableDescriptor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getVariableDescriptor_Steps(), this.getVariableStep(), this.getVariableStep_Descriptor(), "steps", null, 0, -1, VariableDescriptor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

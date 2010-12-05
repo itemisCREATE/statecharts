@@ -1363,6 +1363,52 @@ public interface TypeSystemPackage extends EPackage {
 	int UNIT_TYPE_FEATURE_COUNT = DATA_TYPE_FEATURE_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link org.eclipselabs.mscript.typesystem.impl.AnyDataTypeImpl <em>Any Data Type</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipselabs.mscript.typesystem.impl.AnyDataTypeImpl
+	 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemPackageImpl#getAnyDataType()
+	 * @generated
+	 */
+	int ANY_DATA_TYPE = 24;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANY_DATA_TYPE__NAME = DATA_TYPE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANY_DATA_TYPE__QUALIFIED_NAME = DATA_TYPE__QUALIFIED_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANY_DATA_TYPE__NAMESPACE = DATA_TYPE__NAMESPACE;
+
+	/**
+	 * The number of structural features of the '<em>Any Data Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANY_DATA_TYPE_FEATURE_COUNT = DATA_TYPE_FEATURE_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.typesystem.OperatorKind <em>Operator Kind</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1370,7 +1416,7 @@ public interface TypeSystemPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemPackageImpl#getOperatorKind()
 	 * @generated
 	 */
-	int OPERATOR_KIND = 24;
+	int OPERATOR_KIND = 25;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.typesystem.UnitSymbol <em>Unit Symbol</em>}' enum.
@@ -1380,7 +1426,7 @@ public interface TypeSystemPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemPackageImpl#getUnitSymbol()
 	 * @generated
 	 */
-	int UNIT_SYMBOL = 25;
+	int UNIT_SYMBOL = 26;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipselabs.mscript.typesystem.Type <em>Type</em>}'.
@@ -1920,6 +1966,16 @@ public interface TypeSystemPackage extends EPackage {
 	EClass getUnitType();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipselabs.mscript.typesystem.AnyDataType <em>Any Data Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Any Data Type</em>'.
+	 * @see org.eclipselabs.mscript.typesystem.AnyDataType
+	 * @generated
+	 */
+	EClass getAnyDataType();
+
+	/**
 	 * Returns the meta object for enum '{@link org.eclipselabs.mscript.typesystem.OperatorKind <em>Operator Kind</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2416,6 +2472,16 @@ public interface TypeSystemPackage extends EPackage {
 		 * @generated
 		 */
 		EClass UNIT_TYPE = eINSTANCE.getUnitType();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipselabs.mscript.typesystem.impl.AnyDataTypeImpl <em>Any Data Type</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipselabs.mscript.typesystem.impl.AnyDataTypeImpl
+		 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemPackageImpl#getAnyDataType()
+		 * @generated
+		 */
+		EClass ANY_DATA_TYPE = eINSTANCE.getAnyDataType();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipselabs.mscript.typesystem.OperatorKind <em>Operator Kind</em>}' enum.

@@ -1,6 +1,7 @@
 package org.eclipselabs.mscript.language.validation;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
@@ -11,23 +12,38 @@ import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.BeginExpression;
 import org.eclipselabs.mscript.language.ast.EndExpression;
 import org.eclipselabs.mscript.language.ast.FunctionDefinition;
+import org.eclipselabs.mscript.language.ast.FunctorDeclaration;
 import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
+import org.eclipselabs.mscript.language.ast.StateVariableDeclaration;
 import org.eclipselabs.mscript.language.ast.UnitExpressionNumerator;
 import org.eclipselabs.mscript.language.functionmodel.FunctionDescriptor;
 import org.eclipselabs.mscript.language.functionmodel.util.FunctionDescriptorConstructor;
-import org.eclipselabs.mscript.language.imperativemodel.Compound;
-import org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionDefinition;
-import org.eclipselabs.mscript.language.imperativemodel.OutputVariableDeclaration;
-import org.eclipselabs.mscript.language.imperativemodel.util.ImperativeFunctionTransformer;
-import org.eclipselabs.mscript.typesystem.ArrayDimension;
+import org.eclipselabs.mscript.language.functionmodel.util.FunctionModelValidator;
+import org.eclipselabs.mscript.language.functionmodel.util.IFunctionDescriptorConstructorResult;
+import org.eclipselabs.mscript.language.il.transform.FunctionDefinitionTransformer;
+import org.eclipselabs.mscript.language.il.transform.IFunctionDefinitionTransformerResult;
+import org.eclipselabs.mscript.language.internal.util.EObjectTreeIterator;
+import org.eclipselabs.mscript.language.util.SyntaxStatus;
+import org.eclipselabs.mscript.typesystem.AnyDataType;
 import org.eclipselabs.mscript.typesystem.DataType;
-import org.eclipselabs.mscript.typesystem.IntegerType;
-import org.eclipselabs.mscript.typesystem.RealType;
-import org.eclipselabs.mscript.typesystem.TensorType;
 import org.eclipselabs.mscript.typesystem.TypeSystemFactory;
-import org.eclipselabs.mscript.typesystem.util.TypeSystemUtil;
 
 public class MscriptJavaValidator extends AbstractMscriptJavaValidator {
+
+	@Check
+	public void checkStatelessFunctionDefinition(FunctionDefinition functionDefinition) {
+		if (!functionDefinition.isStateful()) {
+			for (ParameterDeclaration parameterDeclaration : functionDefinition.getTemplateParameterDeclarations()) {
+				error("Stateless functions must not declare template parameters", parameterDeclaration, null);
+			}
+			for (StateVariableDeclaration stateVariableDeclaration : functionDefinition.getStateVariableDeclarations()) {
+				error("Stateless functions must not declare state variables", stateVariableDeclaration, null);
+			}
+			for (FunctorDeclaration functorDeclaration : functionDefinition.getFunctorDeclarations()) {
+				error("Stateless functions must not declare functors", functorDeclaration, null);
+			}
+		}
+	}
 
 	@Check
 	public void checkBeginExpressionMustBeInsideArraySubscript(BeginExpression beginExpression) {
@@ -62,52 +78,36 @@ public class MscriptJavaValidator extends AbstractMscriptJavaValidator {
 	
 	@Check
 	public void checkFunctionDefinition(FunctionDefinition functionDefinition) {
-		FunctionDescriptor functionDescriptor = new FunctionDescriptorConstructor().construct(functionDefinition, getChain());
-		List<DataType> templateParameterDataTypes = new ArrayList<DataType>();
-		List<DataType> inputParameterDataTypes = new ArrayList<DataType>();
+		IFunctionDescriptorConstructorResult functionDescriptorConstructorResult = new FunctionDescriptorConstructor().construct(functionDefinition);
 		
-		if (functionDefinition.getName().equals("sum123")) {
-			for (ParameterDeclaration parameterDeclaration : functionDefinition.getInputParameterDeclarations()) {
-				RealType elementType = TypeSystemFactory.eINSTANCE.createRealType();
-				elementType.setUnit(TypeSystemUtil.createUnit());
-				TensorType tensorType = TypeSystemFactory.eINSTANCE.createTensorType();
-				tensorType.setElementType(elementType);
-				ArrayDimension arrayDimension = TypeSystemFactory.eINSTANCE.createArrayDimension();
-				arrayDimension.setSize(10);
-				tensorType.getDimensions().add(arrayDimension);
-				inputParameterDataTypes.add(tensorType);
-				parameterDeclaration.getName();
-			}
-		} else {
-			for (ParameterDeclaration parameterDeclaration : functionDefinition.getTemplateParameterDeclarations()) {
-				IntegerType type = TypeSystemFactory.eINSTANCE.createIntegerType();
-				type.setUnit(TypeSystemUtil.createUnit());
-				templateParameterDataTypes.add(type);
-				parameterDeclaration.getName();
-			}
-			for (ParameterDeclaration parameterDeclaration : functionDefinition.getInputParameterDeclarations()) {
-				IntegerType type = TypeSystemFactory.eINSTANCE.createIntegerType();
-				type.setUnit(TypeSystemUtil.createUnit());
-				inputParameterDataTypes.add(type);
-				parameterDeclaration.getName();
-			}
+		SyntaxStatus.addAllSyntaxStatusesToDiagnostics(
+				functionDescriptorConstructorResult.getStatus(),
+				getChain());
+		
+		FunctionDescriptor functionDescriptor = functionDescriptorConstructorResult.getFunctionDescriptor();
+		
+		FunctionModelValidator validator = new FunctionModelValidator();
+		for (EObjectTreeIterator it = new EObjectTreeIterator(functionDescriptor, true); it.hasNext();) {
+			validator.validate(it.next(), getChain(), new HashMap<Object, Object>());
 		}
 
-		ImperativeFunctionDefinition imperativeFunctionDefinition = new ImperativeFunctionTransformer().transform(functionDescriptor, templateParameterDataTypes, inputParameterDataTypes, getChain());
+		List<DataType> templateParameterDataTypes = new ArrayList<DataType>();
+		for (int i = 0, n = functionDefinition.getTemplateParameterDeclarations().size(); i < n; ++i) {
+			AnyDataType type = TypeSystemFactory.eINSTANCE.createAnyDataType();
+			templateParameterDataTypes.add(type);
+		}
 
-		System.out.print("### " + functionDefinition.getName() + " -> ");
-		for (OutputVariableDeclaration outputVariableDeclaration : imperativeFunctionDefinition.getOutputVariableDeclarations()) {
-			System.out.print(outputVariableDeclaration.getType().getClass().getSimpleName());
-			System.out.print(" ");
+		List<DataType> inputParameterDataTypes = new ArrayList<DataType>();
+		for (int i = 0, n = functionDefinition.getInputParameterDeclarations().size(); i < n; ++i) {
+			AnyDataType type = TypeSystemFactory.eINSTANCE.createAnyDataType();
+			inputParameterDataTypes.add(type);
 		}
-		System.out.println();
-		System.out.println("--- Initialize compound:");
-		System.out.println(new CompoundCGenerator().doSwitch(imperativeFunctionDefinition.getInitializationCompound()));
-		for (Compound compound : imperativeFunctionDefinition.getComputationCompounds()) {
-			System.out.println("--- Computation compound:");
-			System.out.println(new CompoundCGenerator().doSwitch(compound));
-		}
-		System.out.println();
+
+		IFunctionDefinitionTransformerResult functionDefinitionTransformerResult = new FunctionDefinitionTransformer().transform(functionDescriptor, templateParameterDataTypes, inputParameterDataTypes);
+
+		SyntaxStatus.addAllSyntaxStatusesToDiagnostics(
+				functionDefinitionTransformerResult.getStatus(),
+				getChain());
 	}
 	
 }

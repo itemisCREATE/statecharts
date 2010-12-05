@@ -273,13 +273,13 @@ public interface FunctionModelPackage extends EPackage {
 	int VARIABLE_DESCRIPTOR = 4;
 
 	/**
-	 * The feature id for the '<em><b>Function</b></em>' container reference.
+	 * The feature id for the '<em><b>Function Descriptor</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_DESCRIPTOR__FUNCTION = 0;
+	int VARIABLE_DESCRIPTOR__FUNCTION_DESCRIPTOR = 0;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -587,15 +587,15 @@ public interface FunctionModelPackage extends EPackage {
 	EClass getVariableDescriptor();
 
 	/**
-	 * Returns the meta object for the container reference '{@link org.eclipselabs.mscript.language.functionmodel.VariableDescriptor#getFunction <em>Function</em>}'.
+	 * Returns the meta object for the container reference '{@link org.eclipselabs.mscript.language.functionmodel.VariableDescriptor#getFunctionDescriptor <em>Function Descriptor</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Function</em>'.
-	 * @see org.eclipselabs.mscript.language.functionmodel.VariableDescriptor#getFunction()
+	 * @return the meta object for the container reference '<em>Function Descriptor</em>'.
+	 * @see org.eclipselabs.mscript.language.functionmodel.VariableDescriptor#getFunctionDescriptor()
 	 * @see #getVariableDescriptor()
 	 * @generated
 	 */
-	EReference getVariableDescriptor_Function();
+	EReference getVariableDescriptor_FunctionDescriptor();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.functionmodel.VariableDescriptor#getName <em>Name</em>}'.
@@ -879,12 +879,12 @@ public interface FunctionModelPackage extends EPackage {
 		EClass VARIABLE_DESCRIPTOR = eINSTANCE.getVariableDescriptor();
 
 		/**
-		 * The meta object literal for the '<em><b>Function</b></em>' container reference feature.
+		 * The meta object literal for the '<em><b>Function Descriptor</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference VARIABLE_DESCRIPTOR__FUNCTION = eINSTANCE.getVariableDescriptor_Function();
+		EReference VARIABLE_DESCRIPTOR__FUNCTION_DESCRIPTOR = eINSTANCE.getVariableDescriptor_FunctionDescriptor();
 
 		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.

@@ -11,22 +11,17 @@
 
 package org.eclipselabs.mscript.language.functionmodel.util;
 
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.ListIterator;
-import java.util.Set;
 
-import org.eclipse.emf.common.util.Diagnostic;
-import org.eclipse.emf.common.util.DiagnosticChain;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.Equation;
 import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.ast.FeatureCall;
 import org.eclipselabs.mscript.language.ast.FeatureCallPart;
 import org.eclipselabs.mscript.language.ast.FunctionDefinition;
-import org.eclipselabs.mscript.language.ast.LetExpression;
-import org.eclipselabs.mscript.language.ast.LetExpressionVariableDeclaration;
 import org.eclipselabs.mscript.language.ast.OperationArgumentList;
 import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
 import org.eclipselabs.mscript.language.ast.SimpleName;
@@ -40,10 +35,11 @@ import org.eclipselabs.mscript.language.functionmodel.FunctionModelFactory;
 import org.eclipselabs.mscript.language.functionmodel.VariableDescriptor;
 import org.eclipselabs.mscript.language.functionmodel.VariableKind;
 import org.eclipselabs.mscript.language.functionmodel.VariableStep;
+import org.eclipselabs.mscript.language.internal.LanguagePlugin;
 import org.eclipselabs.mscript.language.internal.functionmodel.util.StepExpressionHelper;
 import org.eclipselabs.mscript.language.internal.functionmodel.util.StepExpressionResult;
-import org.eclipselabs.mscript.language.internal.util.EObjectDiagnostic;
-import org.eclipselabs.mscript.language.internal.util.TreeIterator;
+import org.eclipselabs.mscript.language.internal.util.StatusUtil;
+import org.eclipselabs.mscript.language.util.SyntaxStatus;
 
 /**
  * @author Andreas Unger
@@ -51,9 +47,9 @@ import org.eclipselabs.mscript.language.internal.util.TreeIterator;
  */
 public class FunctionDescriptorConstructor {
 
-	public FunctionDescriptor construct(FunctionDefinition functionDefinition, DiagnosticChain diagnostics) {
-		validate(functionDefinition, diagnostics);
-		
+	public IFunctionDescriptorConstructorResult construct(FunctionDefinition functionDefinition) {
+		MultiStatus status = new MultiStatus(LanguagePlugin.PLUGIN_ID, 0, "Function descriptor construction errors", null);
+
 		FunctionDescriptor functionDescriptor = FunctionModelFactory.eINSTANCE.createFunctionDescriptor();
 		functionDescriptor.setDefinition(functionDefinition);
 
@@ -66,81 +62,40 @@ public class FunctionDescriptorConstructor {
 			EquationSide lhs = FunctionModelFactory.eINSTANCE.createEquationSide();
 			lhs.setDescriptor(equationDescriptor);
 			lhs.setExpression(lhsExpression);
-			new EquationSideInitializer(lhs, diagnostics).initialize();
+			StatusUtil.merge(status, new EquationSideInitializer(lhs).initialize());
 			
 			Expression rhsExpression = equation.getRightHandSide();
 			EquationSide rhs = FunctionModelFactory.eINSTANCE.createEquationSide();
 			rhs.setDescriptor(equationDescriptor);
 			rhs.setExpression(rhsExpression);
-			new EquationSideInitializer(rhs, diagnostics).initialize();
+			StatusUtil.merge(status, new EquationSideInitializer(rhs).initialize());
 		}
 		
-		for (TreeIterator it = new TreeIterator(functionDescriptor, true); it.hasNext();) {
-			FunctionModelValidator.INSTANCE.validate(it.next(), diagnostics, new HashMap<Object, Object>());
+		if (!status.isOK()) {
+			return new FunctionDescriptorConstructorResult(functionDescriptor, status);
 		}
 		
-		return functionDescriptor;
+		return new FunctionDescriptorConstructorResult(functionDescriptor);
 	}
-	
-	protected boolean validate(FunctionDefinition functionDefinition, DiagnosticChain diagnostics) {
-		boolean result = true;
-		
-		if (!functionDefinition.isStateful()) {
-			if (!functionDefinition.getTemplateParameterDeclarations().isEmpty()) {
-				diagnostics.add(new EObjectDiagnostic(Diagnostic.ERROR, "Stateless functions must not declare template parameters", functionDefinition, AstPackage.FUNCTION_DEFINITION__NAME));
-				result = false;
-			}
-			if (!functionDefinition.getStateVariableDeclarations().isEmpty()) {
-				diagnostics.add(new EObjectDiagnostic(Diagnostic.ERROR, "Stateless functions must not declare state variables", functionDefinition, AstPackage.FUNCTION_DEFINITION__NAME));
-				result = false;
-			}
-			if (!functionDefinition.getFunctorDeclarations().isEmpty()) {
-				diagnostics.add(new EObjectDiagnostic(Diagnostic.ERROR, "Stateless functions must not declare functors", functionDefinition, AstPackage.FUNCTION_DEFINITION__NAME));
-				result = false;
-			}
-		}
-		
-		return result;
-	}
-		
+			
 	private static class EquationSideInitializer extends AstSwitch<Boolean> {
 
-		private static final Scope MOST_OUTER_SCOPE = new Scope(null);
-		private Scope scope = MOST_OUTER_SCOPE;
-
 		private EquationSide equationSide;
-		private DiagnosticChain diagnostics;
+		private MultiStatus status;
 		
 		/**
 		 * 
 		 */
-		public EquationSideInitializer(EquationSide equationSide, DiagnosticChain diagnostics) {
+		public EquationSideInitializer(EquationSide equationSide) {
 			this.equationSide = equationSide;
-			this.diagnostics = diagnostics;
 		}
 		
-		public void initialize() {
+		public IStatus initialize() {
+			status = new MultiStatus(LanguagePlugin.PLUGIN_ID, 0, "", null);
 			doSwitch(equationSide.getExpression());
+			return status;
 		}
 
-		/* (non-Javadoc)
-		 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseLetExpression(org.eclipselabs.mscript.language.ast.LetExpression)
-		 */
-		@Override
-		public Boolean caseLetExpression(LetExpression letExpression) {
-			Scope newScope = new Scope(scope);
-			for (LetExpressionVariableDeclaration variableDeclaration : letExpression.getVariableDeclarations()) {
-				doSwitch(variableDeclaration.getAssignedExpression());
-				newScope.addVariable(variableDeclaration.getNames().get(0));
-			}
-			
-			scope = newScope;
-			doSwitch(letExpression.getTargetExpression());
-			scope = scope.getOuterScope();
-			
-			return true;
-		}
-		
 		/* (non-Javadoc)
 		 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseFeatureCall(org.eclipselabs.mscript.language.ast.FeatureCall)
 		 */
@@ -148,40 +103,13 @@ public class FunctionDescriptorConstructor {
 		public Boolean caseFeatureCall(FeatureCall featureCall) {
 			if (featureCall.getTarget() instanceof SimpleName) {
 				SimpleName simpleName = (SimpleName) featureCall.getTarget();
-				if (scope.containsVariable(simpleName.getIdentifier())) {
-					if (!featureCall.getParts().isEmpty()) {
-						diagnostics.add(new EObjectDiagnostic(Diagnostic.ERROR, "Let variable '" + simpleName.getIdentifier() + "' cannot be called", featureCall));
-					}
-					return true;
-				}
 				
 				FunctionDescriptor functionDescriptor = equationSide.getDescriptor().getFunctionDescriptor();
 				VariableKind variableKind = getVariableKind(
 						functionDescriptor.getDefinition(),
 						simpleName.getIdentifier());
 				
-				switch (variableKind) {
-				case TEMPLATE_PARAMETER:
-					if (!featureCall.getParts().isEmpty() && featureCall.getParts().get(0) instanceof OperationArgumentList) {
-						diagnostics.add(new EObjectDiagnostic(Diagnostic.ERROR, "Template parameters cannot be called", featureCall));
-					}
-					break;
-				case INPUT_PARAMETER:
-				case OUTPUT_PARAMETER:
-				case STATE_VARIABLE:
-					if (!functionDescriptor.getDefinition().isStateful() && !featureCall.getParts().isEmpty() && featureCall.getParts().get(0) instanceof OperationArgumentList) {
-						diagnostics.add(new EObjectDiagnostic(Diagnostic.ERROR, "Variable references of stateless functions must not specify step expressions", featureCall));
-					}
-					break;
-				case CONSTANT:
-					if (!featureCall.getParts().isEmpty() && featureCall.getParts().get(0) instanceof OperationArgumentList) {
-						diagnostics.add(new EObjectDiagnostic(Diagnostic.ERROR, "Constants cannot be called", featureCall));
-					}
-					break;
-				case FUNCTOR:
-					diagnostics.add(new EObjectDiagnostic(Diagnostic.ERROR, "Functors not supported yet", featureCall));
-					break;
-				}
+				checkFeatureCall(featureCall, variableKind);
 				
 				if (variableKind != VariableKind.UNKNOWN) {
 					int stepIndex = 0;
@@ -191,10 +119,12 @@ public class FunctionDescriptorConstructor {
 							|| variableKind == VariableKind.OUTPUT_PARAMETER
 							|| variableKind == VariableKind.STATE_VARIABLE) {
 						ListIterator<FeatureCallPart> partIterator = featureCall.getParts().listIterator();
-						StepExpressionResult stepExpressionResult = new StepExpressionHelper().getStepExpression(partIterator, diagnostics);
-						if (stepExpressionResult != null) {
+						try {
+							StepExpressionResult stepExpressionResult = new StepExpressionHelper().getStepExpression(partIterator);
 							stepIndex = stepExpressionResult.getIndex();
 							initial = stepExpressionResult.isInitial();
+						} catch (CoreException e) {
+							StatusUtil.merge(status, e.getStatus());
 						}
 					}
 
@@ -204,7 +134,7 @@ public class FunctionDescriptorConstructor {
 					VariableDescriptor variableDescriptor = functionDescriptor.getVariableDescriptor(simpleName.getIdentifier());
 					if (variableDescriptor == null) {
 						variableDescriptor = FunctionModelFactory.eINSTANCE.createVariableDescriptor();
-						variableDescriptor.setFunction(functionDescriptor);
+						variableDescriptor.setFunctionDescriptor(functionDescriptor);
 						variableDescriptor.setName(simpleName.getIdentifier());
 						variableDescriptor.setKind(variableKind);
 					}
@@ -217,15 +147,54 @@ public class FunctionDescriptorConstructor {
 						variableStep.setInitial(initial);
 					}
 					part.setVariableStep(variableStep);
-				} else {
-					diagnostics.add(new EObjectDiagnostic(Diagnostic.ERROR, "'" + simpleName.getIdentifier() + "' cannot be resolved to a variable", simpleName));
 				}
 			} else {
-				diagnostics.add(new EObjectDiagnostic(Diagnostic.ERROR, "Invalid expression", featureCall.getTarget()));
+				doSwitch(featureCall.getTarget());
+			}
+			for (FeatureCallPart part : featureCall.getParts()) {
+				doSwitch(part);
 			}
 			return true;
 		}
 		
+		/**
+		 * @param featureCall
+		 * @param variableKind
+		 */
+		private void checkFeatureCall(FeatureCall featureCall, VariableKind variableKind) {
+			ListIterator<FeatureCallPart> featureCallPartIterator = featureCall.getParts().listIterator();
+
+			String message = null;
+			switch (variableKind) {
+			case TEMPLATE_PARAMETER:
+				if (featureCallPartIterator.hasNext() && featureCallPartIterator.next() instanceof OperationArgumentList) {
+					message = "Template parameters cannot be called";
+				}
+				break;
+			case INPUT_PARAMETER:
+			case OUTPUT_PARAMETER:
+			case STATE_VARIABLE:
+				if (featureCallPartIterator.hasNext() && featureCallPartIterator.next() instanceof OperationArgumentList) {
+					if (!equationSide.getDescriptor().getFunctionDescriptor().getDefinition().isStateful()) {
+						message = "Variable references of stateless functions must not specify step expressions";
+					}
+				}
+				break;
+			case CONSTANT:
+				if (!featureCall.getParts().isEmpty() && featureCall.getParts().get(0) instanceof OperationArgumentList) {
+					message = "Constants cannot be called";
+				}
+				break;
+			case FUNCTOR:
+				message = "Functors not supported yet";
+				break;
+			}
+			
+			if (message != null) {
+				status.add(new SyntaxStatus(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, 0, message, featureCall));
+			}
+		}
+
 		private VariableKind getVariableKind(FunctionDefinition functionDefinition, String name) {
 			for (ParameterDeclaration parameterDeclaration : functionDefinition.getTemplateParameterDeclarations()) {
 				if (name.equals(parameterDeclaration.getName())) {
@@ -249,7 +218,7 @@ public class FunctionDescriptorConstructor {
 			}
 			return VariableKind.UNKNOWN;
 		}
-
+		
 		/* (non-Javadoc)
 		 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#defaultCase(org.eclipse.emf.ecore.EObject)
 		 */
@@ -259,35 +228,6 @@ public class FunctionDescriptorConstructor {
 				doSwitch(content);
 			}
 			return true;
-		}
-
-		private static class Scope {
-
-			private Scope outerScope;
-			private Set<String> variables = new HashSet<String>();
-			
-			/**
-			 * 
-			 */
-			public Scope(Scope outerScope) {
-				this.outerScope = outerScope;
-			}
-			
-			/**
-			 * @return the outerScope
-			 */
-			public Scope getOuterScope() {
-				return outerScope;
-			}
-			
-			public void addVariable(String name) {
-				variables.add(name);
-			}
-			
-			public boolean containsVariable(String name) {
-				return variables.contains(name);
-			}
-			
 		}
 
 	}

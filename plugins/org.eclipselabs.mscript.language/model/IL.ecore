@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="il"
+    nsURI="http://www.eclipselabs.org/mscript/IL/1.0.0" nsPrefix="il">
+  <eClassifiers xsi:type="ecore:EClass" name="ILFunctionDefinition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="templateVariableDeclarations"
+        upperBound="-1" eType="#//TemplateVariableDeclaration" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inputVariableDeclarations"
+        upperBound="-1" eType="#//InputVariableDeclaration" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outputVariableDeclarations"
+        upperBound="-1" eType="#//OutputVariableDeclaration" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="instanceVariableDeclarations"
+        upperBound="-1" eType="#//InstanceVariableDeclaration" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="initializationCompound"
+        eType="#//Compound" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="computationCompounds" upperBound="-1"
+        eType="#//ComputationCompound" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Compound">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="statements" upperBound="-1"
+        eType="#//Statement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="localVariableDeclarations"
+        upperBound="-1" eType="#//LocalVariableDeclaration" changeable="false" volatile="true"
+        transient="true" derived="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ComputationCompound" eSuperTypes="#//Compound">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inputs" upperBound="-1"
+        eType="#//InputVariableDeclaration" eOpposite="#//InputVariableDeclaration/feedingCompounds"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outputs" upperBound="-1"
+        eType="#//OutputVariableDeclaration"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VariableDeclaration" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass ../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//DataType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StatefulVariableDeclaration" abstract="true"
+      eSuperTypes="#//VariableDeclaration">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="circularBufferSize" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TemplateVariableDeclaration" eSuperTypes="#//VariableDeclaration"/>
+  <eClassifiers xsi:type="ecore:EClass" name="InputVariableDeclaration" eSuperTypes="#//StatefulVariableDeclaration">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="feedingCompounds" upperBound="-1"
+        eType="#//ComputationCompound" eOpposite="#//ComputationCompound/inputs"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OutputVariableDeclaration" eSuperTypes="#//StatefulVariableDeclaration"/>
+  <eClassifiers xsi:type="ecore:EClass" name="InstanceVariableDeclaration" eSuperTypes="#//StatefulVariableDeclaration"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LocalVariableDeclaration" eSuperTypes="#//VariableDeclaration #//Statement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="initializer" eType="ecore:EClass ../src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Statement" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CompoundStatement" eSuperTypes="#//Compound #//Statement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Assignment" eSuperTypes="#//Statement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//VariableDeclaration"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="stepIndex" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="assignedExpression" eType="ecore:EClass ../src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IfStatement" eSuperTypes="#//Statement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="condition" lowerBound="1"
+        eType="ecore:EClass ../src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="thenStatement" eType="#//Statement"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elseStatement" eType="#//Statement"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ForeachStatement" eSuperTypes="#//Statement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="iterationVariableDeclaration"
+        eType="#//VariableDeclaration" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="collectionExpression" eType="ecore:EClass ../src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//Compound"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VariableReference" eSuperTypes="../src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="declaration" lowerBound="1"
+        eType="#//VariableDeclaration"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="stepIndex" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="0"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="arrayIndices" upperBound="-1"
+        eType="ecore:EClass ../src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OperationCall" abstract="true" eSuperTypes="../src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
+        eType="ecore:EClass ../src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BuiltinFunctionCall" eSuperTypes="#//OperationCall">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InvalidExpression" eSuperTypes="../src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"/>
+</ecore:EPackage>

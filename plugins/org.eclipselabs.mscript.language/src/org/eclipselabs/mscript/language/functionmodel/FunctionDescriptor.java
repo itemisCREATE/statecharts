@@ -79,7 +79,7 @@ public interface FunctionDescriptor extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Variable Descriptors</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipselabs.mscript.language.functionmodel.VariableDescriptor}.
-	 * It is bidirectional and its opposite is '{@link org.eclipselabs.mscript.language.functionmodel.VariableDescriptor#getFunction <em>Function</em>}'.
+	 * It is bidirectional and its opposite is '{@link org.eclipselabs.mscript.language.functionmodel.VariableDescriptor#getFunctionDescriptor <em>Function Descriptor</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Variable Descriptors</em>' containment reference list isn't clear,
@@ -88,8 +88,8 @@ public interface FunctionDescriptor extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Variable Descriptors</em>' containment reference list.
 	 * @see org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage#getFunctionDescriptor_VariableDescriptors()
-	 * @see org.eclipselabs.mscript.language.functionmodel.VariableDescriptor#getFunction
-	 * @model opposite="function" containment="true"
+	 * @see org.eclipselabs.mscript.language.functionmodel.VariableDescriptor#getFunctionDescriptor
+	 * @model opposite="functionDescriptor" containment="true"
 	 * @generated
 	 */
 	EList<VariableDescriptor> getVariableDescriptors();

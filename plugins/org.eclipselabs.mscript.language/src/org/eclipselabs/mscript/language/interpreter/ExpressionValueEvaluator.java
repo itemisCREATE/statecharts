@@ -11,7 +11,6 @@
 
 package org.eclipselabs.mscript.language.interpreter;
 
-import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipselabs.mscript.language.ast.AdditiveExpression;
@@ -30,13 +29,11 @@ import org.eclipselabs.mscript.language.ast.StringLiteral;
 import org.eclipselabs.mscript.language.ast.TypeTestExpression;
 import org.eclipselabs.mscript.language.ast.UnaryExpression;
 import org.eclipselabs.mscript.language.ast.UnitConstructionOperator;
-import org.eclipselabs.mscript.language.imperativemodel.BuiltinFunctionCall;
-import org.eclipselabs.mscript.language.imperativemodel.VariableReference;
-import org.eclipselabs.mscript.language.imperativemodel.util.ImperativeModelSwitch;
-import org.eclipselabs.mscript.language.imperativemodel.util.ImperativeModelUtil;
+import org.eclipselabs.mscript.language.il.BuiltinFunctionCall;
+import org.eclipselabs.mscript.language.il.VariableReference;
+import org.eclipselabs.mscript.language.il.util.ILSwitch;
 import org.eclipselabs.mscript.language.internal.interpreter.InvalidUnitExpressionOperandException;
 import org.eclipselabs.mscript.language.internal.interpreter.UnitExpressionHelper;
-import org.eclipselabs.mscript.language.internal.util.EObjectDiagnostic;
 import org.eclipselabs.mscript.language.interpreter.value.IBooleanValue;
 import org.eclipselabs.mscript.language.interpreter.value.IValue;
 import org.eclipselabs.mscript.language.interpreter.value.InvalidValue;
@@ -45,7 +42,6 @@ import org.eclipselabs.mscript.language.interpreter.value.UnitValue;
 import org.eclipselabs.mscript.typesystem.DataType;
 import org.eclipselabs.mscript.typesystem.IntegerType;
 import org.eclipselabs.mscript.typesystem.InvalidDataType;
-import org.eclipselabs.mscript.typesystem.NumericType;
 import org.eclipselabs.mscript.typesystem.RealType;
 import org.eclipselabs.mscript.typesystem.TypeSystemFactory;
 import org.eclipselabs.mscript.typesystem.Unit;
@@ -59,7 +55,7 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 
 	private IInterpreterContext context;
 	
-	private ImperativeExpressionValueEvaluator imperativeExpressionValueEvaluator = new ImperativeExpressionValueEvaluator();
+	private ILExpressionValueEvaluator ilExpressionValueEvaluator = new ILExpressionValueEvaluator();
 	
 	/**
 	 * 
@@ -75,7 +71,7 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 	public IValue caseAdditiveExpression(AdditiveExpression addSubtractExpression) {
 		IValue result = super.caseAdditiveExpression(addSubtractExpression);
 		if (result instanceof InvalidValue) {
-			context.getDiagnostics().add(new EObjectDiagnostic(Diagnostic.ERROR, "Additive operation cannot not be performed on provided operands", addSubtractExpression));
+			throw new RuntimeException("Additive operation cannot not be performed on provided operands");
 		}
 		return result;
 	}
@@ -101,7 +97,7 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 	public IValue caseMultiplicativeExpression(MultiplicativeExpression multiplyDivideExpression) {
 		IValue result = super.caseMultiplicativeExpression(multiplyDivideExpression);
 		if (result instanceof InvalidValue) {
-			context.getDiagnostics().add(new EObjectDiagnostic(Diagnostic.ERROR, "Multiplicative operation cannot not be performed on provided operands", multiplyDivideExpression));
+			throw new RuntimeException("Multiplicative operation cannot not be performed on provided operands");
 		}
 		return result;
 	}
@@ -152,8 +148,7 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 				return context.getValueFactory().createBooleanValue(booleanResult.booleanValue());
 			}
 		}
-		context.getDiagnostics().add(new EObjectDiagnostic(Diagnostic.ERROR, "Implies expression operands must be boolean", operand));
-		return InvalidValue.SINGLETON;
+		throw new RuntimeException("Implies expression operands must be boolean");
 	}
 	
 	/* (non-Javadoc)
@@ -169,8 +164,7 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 					return context.getValueFactory().createBooleanValue(false);
 				}
 			} else {
-				context.getDiagnostics().add(new EObjectDiagnostic(Diagnostic.ERROR, "Logical expression operands must be boolean", operand));
-				return InvalidValue.SINGLETON;
+				throw new RuntimeException("Logical expression operands must be boolean");
 			}
 		}
 		return context.getValueFactory().createBooleanValue(true);
@@ -189,8 +183,7 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 					return context.getValueFactory().createBooleanValue(true);
 				}
 			} else {
-				context.getDiagnostics().add(new EObjectDiagnostic(Diagnostic.ERROR, "Logical expression operands must be boolean", operand));
-				return InvalidValue.SINGLETON;
+				throw new RuntimeException("Logical expression operands must be boolean");
 			}
 		}
 		return context.getValueFactory().createBooleanValue(false);
@@ -213,7 +206,7 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 			throw new IllegalArgumentException();
 		}
 		if (result instanceof InvalidValue) {
-			context.getDiagnostics().add(new EObjectDiagnostic(Diagnostic.ERROR, "Invalid equality operation operands", equalityExpression));
+			throw new RuntimeException("Invalid equality operation operands");
 		}
 		return result;
 	}
@@ -241,7 +234,7 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 			throw new IllegalArgumentException();
 		}
 		if (result instanceof InvalidValue) {
-			context.getDiagnostics().add(new EObjectDiagnostic(Diagnostic.ERROR, "Invalid relational operation operands", relationalExpression));
+			throw new RuntimeException("Invalid relational operation operands");
 		}
 		return result;
 	}
@@ -279,7 +272,7 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 			throw new IllegalArgumentException();
 		}
 		if (result instanceof InvalidValue) {
-			context.getDiagnostics().add(new EObjectDiagnostic(Diagnostic.ERROR, "Invalid unary operation operand", unaryExpression));
+			throw new RuntimeException("Invalid unary operation operand");
 		}
 		return result;
 	}
@@ -329,9 +322,8 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 			}
 			return new UnitValue(unit);
 		} catch (InvalidUnitExpressionOperandException e) {
-			context.getDiagnostics().add(new EObjectDiagnostic(Diagnostic.ERROR, "Invalid unit", unitConstructionOperator.getUnit()));
+			throw new RuntimeException("Invalid unit", e);
 		}
-		return InvalidValue.SINGLETON;
 	}
 	
 	/* (non-Javadoc)
@@ -347,8 +339,7 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 				realType.setUnit(TypeSystemUtil.createUnit());
 			}
 		} catch (InvalidUnitExpressionOperandException e) {
-			context.getDiagnostics().add(new EObjectDiagnostic(Diagnostic.ERROR, "Invalid unit", realLiteral.getUnit()));
-			return InvalidValue.SINGLETON;
+			throw new RuntimeException("Invalid unit", e);
 		}
 		return context.getValueFactory().createRealValue(realType, realLiteral.getValue());
 	}
@@ -366,8 +357,7 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 				integerType.setUnit(TypeSystemUtil.createUnit());
 			}
 		} catch (InvalidUnitExpressionOperandException e) {
-			context.getDiagnostics().add(new EObjectDiagnostic(Diagnostic.ERROR, "Invalid unit", integerLiteral.getUnit()));
-			return InvalidValue.SINGLETON;
+			throw new RuntimeException("Invalid unit", e);
 		}
 		return context.getValueFactory().createIntegerValue(integerType, integerLiteral.getValue());
 	}
@@ -393,37 +383,34 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 	 */
 	@Override
 	public IValue defaultCase(EObject object) {
-		IValue value = imperativeExpressionValueEvaluator.doSwitch(object);
+		IValue value = ilExpressionValueEvaluator.doSwitch(object);
 		if (value != null) {
 			return value;
 		}
-		context.getDiagnostics().add(new EObjectDiagnostic(Diagnostic.ERROR, "Invalid expression", object));
-		return InvalidValue.SINGLETON;
+		throw new RuntimeException("Invalid expression");
 	}
 	
-	private class ImperativeExpressionValueEvaluator extends ImperativeModelSwitch<IValue> {
+	private class ILExpressionValueEvaluator extends ILSwitch<IValue> {
+		
+		private BuiltinFunctionDescriptorLookupTable builtinFunctionLookupTable = new BuiltinFunctionDescriptorLookupTable();
 		
 		/* (non-Javadoc)
-		 * @see org.eclipselabs.mscript.language.imperativemodel.util.ImperativeModelSwitch#caseVariableReference(org.eclipselabs.mscript.language.imperativemodel.VariableReference)
+		 * @see org.eclipselabs.mscript.language.imperativemodel.util.ILSwitch#caseVariableReference(org.eclipselabs.mscript.language.imperativemodel.VariableReference)
 		 */
 		@Override
 		public IValue caseVariableReference(VariableReference variableReference) {
-			IVariable variable = context.getVariable(variableReference.getDeclaration());
+			IVariable variable = context.getScope().findInEnclosingScopes(variableReference.getDeclaration());
 			return variable.getValue(variableReference.getStepIndex());
 		}
 		
 		/* (non-Javadoc)
-		 * @see org.eclipselabs.mscript.language.imperativemodel.util.ImperativeModelSwitch#caseBuiltinFunctionCall(org.eclipselabs.mscript.language.imperativemodel.BuiltinFunctionCall)
+		 * @see org.eclipselabs.mscript.language.imperativemodel.util.ILSwitch#caseBuiltinFunctionCall(org.eclipselabs.mscript.language.imperativemodel.BuiltinFunctionCall)
 		 */
 		@Override
 		public IValue caseBuiltinFunctionCall(BuiltinFunctionCall builtinFunctionCall) {
-			if ("unit".equals(builtinFunctionCall.getName())) {
-				Expression expression = builtinFunctionCall.getArguments().get(0);
-				DataType dataType = ImperativeModelUtil.getDataType(expression);
-				if (dataType instanceof NumericType) {
-					NumericType numericType = (NumericType) dataType;
-					return new UnitValue(EcoreUtil.copy(numericType.getUnit()));
-				}
+			IFunction behavior = builtinFunctionLookupTable.getFunction(builtinFunctionCall.getName());
+			if (behavior != null) {
+				return behavior.call(builtinFunctionCall.getArguments());
 			}
 			return super.caseBuiltinFunctionCall(builtinFunctionCall);
 		}

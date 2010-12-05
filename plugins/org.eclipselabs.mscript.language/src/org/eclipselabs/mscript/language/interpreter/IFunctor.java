@@ -11,16 +11,22 @@
 
 package org.eclipselabs.mscript.language.interpreter;
 
-import org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionDefinition;
-import org.eclipselabs.mscript.language.imperativemodel.VariableDeclaration;
+import java.util.Collection;
+
+import org.eclipselabs.mscript.language.il.ILFunctionDefinition;
+import org.eclipselabs.mscript.language.il.VariableDeclaration;
 
 /**
  * @author Andreas Unger
  *
+ * @noextend
+ * @noimplement
  */
 public interface IFunctor {
 
-	ImperativeFunctionDefinition getFunctionDefinition();
+	ILFunctionDefinition getFunctionDefinition();
+	
+	Collection<IVariable> getVariables();
 	
 	IVariable getVariable(VariableDeclaration declaration);
 	

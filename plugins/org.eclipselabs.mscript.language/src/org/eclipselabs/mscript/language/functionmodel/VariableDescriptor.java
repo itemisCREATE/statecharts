@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.functionmodel.VariableDescriptor#getFunction <em>Function</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.functionmodel.VariableDescriptor#getFunctionDescriptor <em>Function Descriptor</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.functionmodel.VariableDescriptor#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.functionmodel.VariableDescriptor#getKind <em>Kind</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.functionmodel.VariableDescriptor#getSteps <em>Steps</em>}</li>
@@ -30,7 +30,7 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface VariableDescriptor extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Function</b></em>' container reference.
+	 * Returns the value of the '<em><b>Function Descriptor</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link org.eclipselabs.mscript.language.functionmodel.FunctionDescriptor#getVariableDescriptors <em>Variable Descriptors</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -38,24 +38,24 @@ public interface VariableDescriptor extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Function</em>' container reference.
-	 * @see #setFunction(FunctionDescriptor)
-	 * @see org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage#getVariableDescriptor_Function()
+	 * @return the value of the '<em>Function Descriptor</em>' container reference.
+	 * @see #setFunctionDescriptor(FunctionDescriptor)
+	 * @see org.eclipselabs.mscript.language.functionmodel.FunctionModelPackage#getVariableDescriptor_FunctionDescriptor()
 	 * @see org.eclipselabs.mscript.language.functionmodel.FunctionDescriptor#getVariableDescriptors
 	 * @model opposite="variableDescriptors" required="true" transient="false"
 	 * @generated
 	 */
-	FunctionDescriptor getFunction();
+	FunctionDescriptor getFunctionDescriptor();
 
 	/**
-	 * Sets the value of the '{@link org.eclipselabs.mscript.language.functionmodel.VariableDescriptor#getFunction <em>Function</em>}' container reference.
+	 * Sets the value of the '{@link org.eclipselabs.mscript.language.functionmodel.VariableDescriptor#getFunctionDescriptor <em>Function Descriptor</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Function</em>' container reference.
-	 * @see #getFunction()
+	 * @param value the new value of the '<em>Function Descriptor</em>' container reference.
+	 * @see #getFunctionDescriptor()
 	 * @generated
 	 */
-	void setFunction(FunctionDescriptor value);
+	void setFunctionDescriptor(FunctionDescriptor value);
 
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.

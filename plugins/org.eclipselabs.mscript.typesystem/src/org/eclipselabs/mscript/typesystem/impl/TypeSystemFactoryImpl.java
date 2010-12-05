@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipselabs.mscript.typesystem.AnyDataType;
 import org.eclipselabs.mscript.typesystem.ArrayDimension;
 import org.eclipselabs.mscript.typesystem.ArrayType;
 import org.eclipselabs.mscript.typesystem.BooleanType;
@@ -94,6 +95,7 @@ public class TypeSystemFactoryImpl extends EFactoryImpl implements TypeSystemFac
 			case TypeSystemPackage.RECORD: return createRecord();
 			case TypeSystemPackage.RECORD_FIELD: return createRecordField();
 			case TypeSystemPackage.UNIT_TYPE: return createUnitType();
+			case TypeSystemPackage.ANY_DATA_TYPE: return createAnyDataType();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -301,6 +303,16 @@ public class TypeSystemFactoryImpl extends EFactoryImpl implements TypeSystemFac
 	public UnitType createUnitType() {
 		UnitTypeImpl unitType = new UnitTypeImpl();
 		return unitType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AnyDataType createAnyDataType() {
+		AnyDataTypeImpl anyDataType = new AnyDataTypeImpl();
+		return anyDataType;
 	}
 
 	/**

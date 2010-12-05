@@ -31,18 +31,18 @@ import org.eclipselabs.mscript.language.ast.RelationalExpression;
 import org.eclipselabs.mscript.language.ast.StringLiteral;
 import org.eclipselabs.mscript.language.ast.UnaryExpression;
 import org.eclipselabs.mscript.language.ast.util.AstSwitch;
-import org.eclipselabs.mscript.language.imperativemodel.Assignment;
-import org.eclipselabs.mscript.language.imperativemodel.Compound;
-import org.eclipselabs.mscript.language.imperativemodel.ForeachStatement;
-import org.eclipselabs.mscript.language.imperativemodel.IfStatement;
-import org.eclipselabs.mscript.language.imperativemodel.LocalVariableDeclaration;
-import org.eclipselabs.mscript.language.imperativemodel.OutputVariableDeclaration;
-import org.eclipselabs.mscript.language.imperativemodel.StatefulVariableDeclaration;
-import org.eclipselabs.mscript.language.imperativemodel.Statement;
-import org.eclipselabs.mscript.language.imperativemodel.VariableDeclaration;
-import org.eclipselabs.mscript.language.imperativemodel.VariableReference;
-import org.eclipselabs.mscript.language.imperativemodel.util.ImperativeModelSwitch;
-import org.eclipselabs.mscript.language.imperativemodel.util.ImperativeModelUtil;
+import org.eclipselabs.mscript.language.il.Assignment;
+import org.eclipselabs.mscript.language.il.Compound;
+import org.eclipselabs.mscript.language.il.ForeachStatement;
+import org.eclipselabs.mscript.language.il.IfStatement;
+import org.eclipselabs.mscript.language.il.LocalVariableDeclaration;
+import org.eclipselabs.mscript.language.il.OutputVariableDeclaration;
+import org.eclipselabs.mscript.language.il.StatefulVariableDeclaration;
+import org.eclipselabs.mscript.language.il.Statement;
+import org.eclipselabs.mscript.language.il.VariableDeclaration;
+import org.eclipselabs.mscript.language.il.VariableReference;
+import org.eclipselabs.mscript.language.il.util.ILSwitch;
+import org.eclipselabs.mscript.language.il.util.ILUtil;
 import org.eclipselabs.mscript.typesystem.ArrayType;
 import org.eclipselabs.mscript.typesystem.DataType;
 import org.eclipselabs.mscript.typesystem.IntegerType;
@@ -54,10 +54,10 @@ import org.eclipselabs.mscript.typesystem.RealType;
  * @author Andreas Unger
  *
  */
-class CompoundCGenerator extends ImperativeModelSwitch<String> {
+class CompoundCGenerator extends ILSwitch<String> {
 
 	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.language.imperativemodel.util.ImperativeModelSwitch#caseCompound(org.eclipselabs.mscript.language.imperativemodel.Compound)
+	 * @see org.eclipselabs.mscript.language.imperativemodel.util.ILSwitch#caseCompound(org.eclipselabs.mscript.language.imperativemodel.Compound)
 	 */
 	@Override
 	public String caseCompound(Compound compound) {
@@ -82,7 +82,7 @@ class CompoundCGenerator extends ImperativeModelSwitch<String> {
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.language.imperativemodel.util.ImperativeModelSwitch#caseLocalVariableDeclaration(org.eclipselabs.mscript.language.imperativemodel.LocalVariableDeclaration)
+	 * @see org.eclipselabs.mscript.language.imperativemodel.util.ILSwitch#caseLocalVariableDeclaration(org.eclipselabs.mscript.language.imperativemodel.LocalVariableDeclaration)
 	 */
 	@Override
 	public String caseLocalVariableDeclaration(LocalVariableDeclaration localVariableDeclaration) {
@@ -100,7 +100,7 @@ class CompoundCGenerator extends ImperativeModelSwitch<String> {
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.language.imperativemodel.util.ImperativeModelSwitch#caseAssignment(org.eclipselabs.mscript.language.imperativemodel.Assignment)
+	 * @see org.eclipselabs.mscript.language.imperativemodel.util.ILSwitch#caseAssignment(org.eclipselabs.mscript.language.imperativemodel.Assignment)
 	 */
 	@Override
 	public String caseAssignment(Assignment assignment) {
@@ -124,7 +124,7 @@ class CompoundCGenerator extends ImperativeModelSwitch<String> {
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.language.imperativemodel.util.ImperativeModelSwitch#caseIfStatement(org.eclipselabs.mscript.language.imperativemodel.IfStatement)
+	 * @see org.eclipselabs.mscript.language.imperativemodel.util.ILSwitch#caseIfStatement(org.eclipselabs.mscript.language.imperativemodel.IfStatement)
 	 */
 	@Override
 	public String caseIfStatement(IfStatement ifStatement) {
@@ -139,13 +139,13 @@ class CompoundCGenerator extends ImperativeModelSwitch<String> {
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.language.imperativemodel.util.ImperativeModelSwitch#caseForeachStatement(org.eclipselabs.mscript.language.imperativemodel.ForeachStatement)
+	 * @see org.eclipselabs.mscript.language.imperativemodel.util.ILSwitch#caseForeachStatement(org.eclipselabs.mscript.language.imperativemodel.ForeachStatement)
 	 */
 	@Override
 	public String caseForeachStatement(ForeachStatement foreachStatement) {
 		StringBuilder sb = new StringBuilder();
 		VariableDeclaration iterationVariableDeclaration = foreachStatement.getIterationVariableDeclaration();
-		DataType collectionDataType = ImperativeModelUtil.getDataType(foreachStatement.getCollectionExpression());
+		DataType collectionDataType = ILUtil.getDataType(foreachStatement.getCollectionExpression());
 		if (!(collectionDataType instanceof ArrayType)) {
 			throw new RuntimeException("Collection type must be array type");
 		}
@@ -171,7 +171,7 @@ class CompoundCGenerator extends ImperativeModelSwitch<String> {
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.language.imperativemodel.util.ImperativeModelSwitch#defaultCase(org.eclipse.emf.ecore.EObject)
+	 * @see org.eclipselabs.mscript.language.imperativemodel.util.ILSwitch#defaultCase(org.eclipse.emf.ecore.EObject)
 	 */
 	@Override
 	public String defaultCase(EObject object) {

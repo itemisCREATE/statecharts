@@ -17,23 +17,22 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.model.LaunchConfigurationDelegate;
-import org.eclipse.emf.common.util.BasicDiagnostic;
-import org.eclipse.emf.common.util.Diagnostic;
-import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipselabs.mscript.ide.core.IDECorePlugin;
 import org.eclipselabs.mscript.language.ast.FunctionDefinition;
 import org.eclipselabs.mscript.language.ast.Module;
 import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
-import org.eclipselabs.mscript.language.functionmodel.FunctionDescriptor;
 import org.eclipselabs.mscript.language.functionmodel.util.FunctionDescriptorConstructor;
-import org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionDefinition;
-import org.eclipselabs.mscript.language.imperativemodel.util.ImperativeFunctionTransformer;
+import org.eclipselabs.mscript.language.functionmodel.util.IFunctionDescriptorConstructorResult;
+import org.eclipselabs.mscript.language.il.ILFunctionDefinition;
+import org.eclipselabs.mscript.language.il.transform.FunctionDefinitionTransformer;
+import org.eclipselabs.mscript.language.il.transform.IFunctionDefinitionTransformerResult;
 import org.eclipselabs.mscript.language.interpreter.Functor;
-import org.eclipselabs.mscript.language.interpreter.FunctorInterpreterContext;
 import org.eclipselabs.mscript.language.interpreter.IFunctor;
-import org.eclipselabs.mscript.language.interpreter.IFunctorInterpreterContext;
+import org.eclipselabs.mscript.language.interpreter.IInterpreterContext;
+import org.eclipselabs.mscript.language.interpreter.IVariable;
+import org.eclipselabs.mscript.language.interpreter.InterpreterContext;
 import org.eclipselabs.mscript.language.interpreter.value.IValue;
 import org.eclipselabs.mscript.language.interpreter.value.ValueFactory;
 import org.eclipselabs.mscript.language.util.LanguageUtil;
@@ -88,8 +87,7 @@ public class MscriptLaunchConfigurationDelegate extends LaunchConfigurationDeleg
 		IFile outputFile = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(outputFilePathString));
 
 		
-		DiagnosticChain diagnostics = new BasicDiagnostic(IDECorePlugin.PLUGIN_ID, 0, "Mscript execution failed", new Object[] {});
-		IFunctorInterpreterContext context = new FunctorInterpreterContext(diagnostics, new ValueFactory());
+		IInterpreterContext context = new InterpreterContext(new ValueFactory());
 		
 		IFunctor functor = createFunctor(context, file, functionName, templateArguments, inputFile, outputFile, monitor);
 		checkInputFile(functor.getFunctionDefinition(), inputFile, monitor);
@@ -98,7 +96,7 @@ public class MscriptLaunchConfigurationDelegate extends LaunchConfigurationDeleg
 		new MscriptProcess(launch, "Mscript Application").run(context, functor, inputFile, outputFile);
 	}
 	
-	protected void checkInputFile(ImperativeFunctionDefinition functionDefinition, IFile inputFile, IProgressMonitor monitor) throws CoreException {
+	protected void checkInputFile(ILFunctionDefinition functionDefinition, IFile inputFile, IProgressMonitor monitor) throws CoreException {
 		try {
 			BufferedReader reader = new BufferedReader(new InputStreamReader(inputFile.getContents()));
 			int n = functionDefinition.getInputVariableDeclarations().size();
@@ -129,7 +127,7 @@ public class MscriptLaunchConfigurationDelegate extends LaunchConfigurationDeleg
 		}
 	}
 	
-	protected IFunctor createFunctor(IFunctorInterpreterContext interpreterContext, IFile file, String functionName, String templateArgumentString, IFile inputFile, IFile outputFile, IProgressMonitor monitor) throws CoreException {
+	protected IFunctor createFunctor(IInterpreterContext interpreterContext, IFile file, String functionName, String templateArgumentString, IFile inputFile, IFile outputFile, IProgressMonitor monitor) throws CoreException {
 		IParseResult parseResult = IDECorePlugin.getDefault().getMscriptParser().parse(new InputStreamReader(file.getContents()));
 		if (!parseResult.getParseErrors().isEmpty()) {
 			throw new CoreException(new Status(IStatus.ERROR, IDECorePlugin.PLUGIN_ID, "Parse errors"));
@@ -164,10 +162,9 @@ public class MscriptLaunchConfigurationDelegate extends LaunchConfigurationDeleg
 			}
 		}
 		
-		BasicDiagnostic diagnostics = new BasicDiagnostic(IDECorePlugin.PLUGIN_ID, 0, "Functor construction failed", new Object[] {});
-		FunctionDescriptor functionDescriptor = new FunctionDescriptorConstructor().construct(functionDefinition, diagnostics);
-		if (diagnostics.getSeverity() != Diagnostic.OK) {
-			throw new CoreException(BasicDiagnostic.toIStatus(diagnostics));
+		IFunctionDescriptorConstructorResult functionDescriptorConstructorResult = new FunctionDescriptorConstructor().construct(functionDefinition);
+		if (!functionDescriptorConstructorResult.getStatus().isOK()) {
+			throw new CoreException(functionDescriptorConstructorResult.getStatus());
 		}
 		
 		List<DataType> templateParameterDataTypes = new ArrayList<DataType>();
@@ -183,13 +180,16 @@ public class MscriptLaunchConfigurationDelegate extends LaunchConfigurationDeleg
 			parameterDeclaration.getName();
 		}
 		
-		ImperativeFunctionDefinition imperativeFunctionDefinition = new ImperativeFunctionTransformer().transform(functionDescriptor, templateParameterDataTypes, inputParameterDataTypes, diagnostics);
-		if (diagnostics.getSeverity() != Diagnostic.OK) {
-			throw new CoreException(BasicDiagnostic.toIStatus(diagnostics));
+		IFunctionDefinitionTransformerResult functionDefinitionTransformerResult = new FunctionDefinitionTransformer().transform(functionDescriptorConstructorResult.getFunctionDescriptor(), templateParameterDataTypes, inputParameterDataTypes);
+		if (!functionDefinitionTransformerResult.getStatus().isOK()) {
+			throw new CoreException(functionDefinitionTransformerResult.getStatus());
 		}
 
-		IFunctor functor = Functor.create(imperativeFunctionDefinition, templateArguments);
-		interpreterContext.setFunctor(functor);
+		IFunctor functor = Functor.create(functionDefinitionTransformerResult.getILFunctionDefinition(), templateArguments);
+		
+		for (IVariable variable : functor.getVariables()) {
+			interpreterContext.getScope().add(variable);
+		}
 		
 		return functor;
 	}

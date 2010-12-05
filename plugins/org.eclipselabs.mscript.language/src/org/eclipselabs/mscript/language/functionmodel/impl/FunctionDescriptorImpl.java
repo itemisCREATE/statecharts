@@ -158,7 +158,7 @@ public class FunctionDescriptorImpl extends EObjectImpl implements FunctionDescr
 	 */
 	public EList<VariableDescriptor> getVariableDescriptors() {
 		if (variableDescriptors == null) {
-			variableDescriptors = new EObjectContainmentWithInverseEList<VariableDescriptor>(VariableDescriptor.class, this, FunctionModelPackage.FUNCTION_DESCRIPTOR__VARIABLE_DESCRIPTORS, FunctionModelPackage.VARIABLE_DESCRIPTOR__FUNCTION);
+			variableDescriptors = new EObjectContainmentWithInverseEList<VariableDescriptor>(VariableDescriptor.class, this, FunctionModelPackage.FUNCTION_DESCRIPTOR__VARIABLE_DESCRIPTORS, FunctionModelPackage.VARIABLE_DESCRIPTOR__FUNCTION_DESCRIPTOR);
 		}
 		return variableDescriptors;
 	}

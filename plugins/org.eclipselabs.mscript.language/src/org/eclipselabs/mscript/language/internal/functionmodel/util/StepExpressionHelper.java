@@ -13,13 +13,13 @@ package org.eclipselabs.mscript.language.internal.functionmodel.util;
 
 import java.util.ListIterator;
 
-import org.eclipse.emf.common.util.Diagnostic;
-import org.eclipse.emf.common.util.DiagnosticChain;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipselabs.mscript.language.ast.AdditiveExpression;
 import org.eclipselabs.mscript.language.ast.AdditiveExpressionPart;
 import org.eclipselabs.mscript.language.ast.AdditiveOperator;
-import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.ast.FeatureCall;
 import org.eclipselabs.mscript.language.ast.FeatureCallPart;
@@ -29,7 +29,8 @@ import org.eclipselabs.mscript.language.ast.ParenthesizedExpression;
 import org.eclipselabs.mscript.language.ast.SimpleName;
 import org.eclipselabs.mscript.language.ast.UnaryExpression;
 import org.eclipselabs.mscript.language.ast.util.AstSwitch;
-import org.eclipselabs.mscript.language.internal.util.EObjectDiagnostic;
+import org.eclipselabs.mscript.language.internal.LanguagePlugin;
+import org.eclipselabs.mscript.language.util.SyntaxStatus;
 
 /**
  * @author Andreas Unger
@@ -37,50 +38,53 @@ import org.eclipselabs.mscript.language.internal.util.EObjectDiagnostic;
  */
 public class StepExpressionHelper {
 
-	public StepExpressionResult getStepExpression(ListIterator<FeatureCallPart> iterator, DiagnosticChain diagnostics) {
+	public StepExpressionResult getStepExpression(ListIterator<FeatureCallPart> iterator) throws CoreException {
 		if (iterator.hasNext()) {
 			FeatureCallPart part = iterator.next();
 			if (part instanceof OperationArgumentList) {
 				OperationArgumentList operationArgumentList = (OperationArgumentList) part;
 				if (operationArgumentList.getArguments().size() == 1) {
-					return evaluateStepExpression(operationArgumentList.getArguments().get(0), diagnostics);
+					return evaluateStepExpression(operationArgumentList.getArguments().get(0));
 				}
-				diagnostics.add(new EObjectDiagnostic(Diagnostic.ERROR, "Invalid parameter count", operationArgumentList, AstPackage.OPERATION_ARGUMENT_LIST__ARGUMENTS));
-				return null;
+				throw new CoreException(new SyntaxStatus(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, 0, "Invalid parameter count", operationArgumentList));
 			}
 			iterator.previous();
 		}
 		return new StepExpressionResult(0, false);
 	}
 
-	private StepExpressionResult evaluateStepExpression(Expression expression, DiagnosticChain diagnostics) {
-		Evaluator evaluator = new Evaluator(diagnostics);
+	private StepExpressionResult evaluateStepExpression(Expression expression) throws CoreException {
+		Evaluator evaluator = new Evaluator();
 		int result = evaluator.doSwitch(expression);
-		if (evaluator.isOk()) {
+		IStatus status = evaluator.getStatus();
+		if (status.isOK()) {
 			return new StepExpressionResult(result, evaluator.isAbsolute());
 		}
-		return null;
+		throw new CoreException(status);
 	}
 	
 	private static class Evaluator extends AstSwitch<Integer> {
 	
-		private DiagnosticChain diagnostics;
+		private MultiStatus status;
+		
 		private boolean absolute = true;
-		private boolean ok = true;
 		
 		/**
 		 * 
 		 */
-		public Evaluator(DiagnosticChain diagnostics) {
-			this.diagnostics = diagnostics;
+		public Evaluator() {
+			status = new MultiStatus(LanguagePlugin.PLUGIN_ID, 0, "Step expression evaluation failed", null);
+		}
+		
+		/**
+		 * @return the status
+		 */
+		public IStatus getStatus() {
+			return status;
 		}
 		
 		public boolean isAbsolute() {
 			return absolute;
-		}
-		
-		public boolean isOk() {
-			return ok;
 		}
 		
 		/* (non-Javadoc)
@@ -118,8 +122,7 @@ public class StepExpressionHelper {
 				break;
 			case LOGICAL_NOT:
 				result = 0;
-				diagnostics.add(new EObjectDiagnostic(Diagnostic.ERROR, "Invalid unary operation", unaryExpression));
-				ok = false;
+				status.add(new SyntaxStatus(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, 0, "Invalid unary operation", unaryExpression));
 				break;
 			default:
 				throw new IllegalArgumentException();
@@ -139,15 +142,14 @@ public class StepExpressionHelper {
 						absolute = false;
 						return 0;
 					} else {
-						diagnostics.add(new EObjectDiagnostic(Diagnostic.ERROR, "Duplicate 'n'", simpleName));
+						status.add(new SyntaxStatus(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, 0, "Duplicate 'n'", simpleName));
 					}
 				} else {
-					diagnostics.add(new EObjectDiagnostic(Diagnostic.ERROR, "Invalid symbol", simpleName));
+					status.add(new SyntaxStatus(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, 0, "Invalid symbol", simpleName));
 				}
 			} else {
-				diagnostics.add(new EObjectDiagnostic(Diagnostic.ERROR, "Invalid expression", featureCall));
+				status.add(new SyntaxStatus(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, 0, "Invalid expression", featureCall));
 			}
-			ok = false;
 			return 0;
 		}
 		
@@ -157,8 +159,7 @@ public class StepExpressionHelper {
 		@Override
 		public Integer caseIntegerLiteral(IntegerLiteral integerLiteral) {
 			if (integerLiteral.getUnit() != null) {
-				diagnostics.add(new EObjectDiagnostic(Diagnostic.ERROR, "Integer literal must not specify unit", integerLiteral.getUnit()));
-				ok = false;
+				status.add(new SyntaxStatus(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, 0, "Integer literal must not specify unit", integerLiteral.getUnit()));
 				return 0;
 			}
 			return (int) integerLiteral.getValue();
@@ -177,8 +178,7 @@ public class StepExpressionHelper {
 		 */
 		@Override
 		public Integer defaultCase(EObject object) {
-			diagnostics.add(new EObjectDiagnostic(Diagnostic.ERROR, "Invalid expression part", object));
-			ok = false;
+			status.add(new SyntaxStatus(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, 0, "Invalid expression part", object));
 			return 0;
 		}
 	

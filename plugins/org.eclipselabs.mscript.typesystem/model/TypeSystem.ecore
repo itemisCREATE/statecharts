@@ -288,4 +288,29 @@
       </contents>
     </eAnnotations>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AnyDataType" eSuperTypes="#//DataType">
+    <eAnnotations source="duplicates">
+      <contents xsi:type="ecore:EOperation" name="evaluate" ordered="false" lowerBound="1"
+          eType="#//DataType">
+        <eAnnotations source="redefines" references="#//DataType/evaluate"/>
+        <eParameters name="operator" ordered="false" lowerBound="1" eType="#//OperatorKind"/>
+        <eParameters name="other" ordered="false" eType="#//DataType"/>
+      </contents>
+      <contents xsi:type="ecore:EOperation" name="evaluatePower" ordered="false" lowerBound="1"
+          eType="#//DataType">
+        <eAnnotations source="redefines" references="#//DataType/evaluatePower"/>
+        <eParameters name="exponent" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      </contents>
+      <contents xsi:type="ecore:EOperation" name="isAssignableFrom" ordered="false"
+          lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+        <eAnnotations source="redefines" references="#//DataType/isAssignableFrom"/>
+        <eParameters name="other" ordered="false" lowerBound="1" eType="#//DataType"/>
+      </contents>
+      <contents xsi:type="ecore:EOperation" name="convertTo" ordered="false" lowerBound="1"
+          eType="#//DataType">
+        <eAnnotations source="redefines" references="#//DataType/convertTo"/>
+        <eParameters name="other" ordered="false" lowerBound="1" eType="#//DataType"/>
+      </contents>
+    </eAnnotations>
+  </eClassifiers>
 </ecore:EPackage>

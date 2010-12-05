@@ -15,28 +15,30 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.emf.common.util.BasicDiagnostic;
-import org.eclipse.emf.common.util.Diagnostic;
-import org.eclipse.emf.common.util.DiagnosticChain;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.MultiStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipselabs.mscript.language.ast.Assertion;
 import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.ast.StringLiteral;
 import org.eclipselabs.mscript.language.functionmodel.FunctionDescriptor;
-import org.eclipselabs.mscript.language.imperativemodel.Compound;
-import org.eclipselabs.mscript.language.imperativemodel.ImperativeFunctionDefinition;
-import org.eclipselabs.mscript.language.imperativemodel.ImperativeModelFactory;
-import org.eclipselabs.mscript.language.imperativemodel.InputVariableDeclaration;
-import org.eclipselabs.mscript.language.imperativemodel.LocalVariableDeclaration;
-import org.eclipselabs.mscript.language.imperativemodel.TemplateVariableDeclaration;
-import org.eclipselabs.mscript.language.imperativemodel.util.ImperativeExpressionTarget;
-import org.eclipselabs.mscript.language.imperativemodel.util.ImperativeExpressionTransformer;
-import org.eclipselabs.mscript.language.imperativemodel.util.ImperativeExpressionTransformer.Scope;
+import org.eclipselabs.mscript.language.il.Compound;
+import org.eclipselabs.mscript.language.il.ILFactory;
+import org.eclipselabs.mscript.language.il.ILFunctionDefinition;
+import org.eclipselabs.mscript.language.il.InputVariableDeclaration;
+import org.eclipselabs.mscript.language.il.LocalVariableDeclaration;
+import org.eclipselabs.mscript.language.il.TemplateVariableDeclaration;
+import org.eclipselabs.mscript.language.il.transform.ExpressionTarget;
+import org.eclipselabs.mscript.language.il.transform.ExpressionTransformer;
+import org.eclipselabs.mscript.language.il.transform.ExpressionTransformerContext;
+import org.eclipselabs.mscript.language.il.transform.IExpressionTransformerContext;
 import org.eclipselabs.mscript.language.internal.LanguagePlugin;
-import org.eclipselabs.mscript.language.internal.util.EObjectDiagnostic;
+import org.eclipselabs.mscript.language.internal.util.StatusUtil;
 import org.eclipselabs.mscript.language.interpreter.value.AnyValue;
 import org.eclipselabs.mscript.language.interpreter.value.IBooleanValue;
 import org.eclipselabs.mscript.language.interpreter.value.IValue;
 import org.eclipselabs.mscript.language.interpreter.value.ValueFactory;
+import org.eclipselabs.mscript.language.util.SyntaxStatus;
 import org.eclipselabs.mscript.typesystem.BooleanType;
 import org.eclipselabs.mscript.typesystem.DataType;
 
@@ -46,31 +48,43 @@ import org.eclipselabs.mscript.typesystem.DataType;
  */
 public class AssertionEvaluator {
 
-	public void evaluate(ImperativeFunctionDefinition functionDefinition, FunctionDescriptor functionDescriptor, List<DataType> templateParameterDataTypes, List<DataType> inputParameterDataTypes, DiagnosticChain diagnostics) {
+	public IStatus evaluate(ILFunctionDefinition functionDefinition, FunctionDescriptor functionDescriptor, List<DataType> templateParameterDataTypes, List<DataType> inputParameterDataTypes) {
+		MultiStatus status = new MultiStatus(LanguagePlugin.PLUGIN_ID, 0, "Assertion failed", null);
+		
 		for (Assertion assertion : functionDescriptor.getDefinition().getAssertions()) {
 			if (!assertion.isStatic()) {
 				continue;
 			}
-			LocalVariableDeclaration assertResultVariableDeclaration = ImperativeModelFactory.eINSTANCE.createLocalVariableDeclaration();
+			LocalVariableDeclaration assertResultVariableDeclaration = ILFactory.eINSTANCE.createLocalVariableDeclaration();
 			
-			Compound compound = ImperativeModelFactory.eINSTANCE.createCompound();
-			Scope scope = createScope(functionDefinition, compound);
-			scope.addVariableDeclaration(assertResultVariableDeclaration);
-			ImperativeExpressionTarget target = new ImperativeExpressionTarget(assertResultVariableDeclaration, 0);
-			new ImperativeExpressionTransformer(scope).transform(assertion.getCondition(), Collections.singletonList(target));
-			if (!(assertResultVariableDeclaration.getType() instanceof BooleanType)) {
-				diagnostics.add(new EObjectDiagnostic(Diagnostic.ERROR, "Assert condition must result to boolean type", assertion.getCondition()));
+			Compound compound = ILFactory.eINSTANCE.createCompound();
+
+			IExpressionTransformerContext expressionTransformerContext = new ExpressionTransformerContext();
+			initializeContext(expressionTransformerContext, functionDefinition, compound);
+			expressionTransformerContext.getScope().add(assertResultVariableDeclaration);
+			
+			ExpressionTarget target = new ExpressionTarget(assertResultVariableDeclaration, 0);
+			
+			IStatus transformationStatus = new ExpressionTransformer(expressionTransformerContext).transform(assertion.getCondition(), Collections.singletonList(target));
+			
+			if (!transformationStatus.isOK()) {
+				StatusUtil.merge(status, transformationStatus);
 				continue;
 			}
 			
-			IInterpreterContext context = new InterpreterContext(diagnostics, new ValueFactory());
+			if (!(assertResultVariableDeclaration.getType() instanceof BooleanType)) {
+				status.add(new SyntaxStatus(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, 0, "Assert condition must result to boolean type", assertion.getCondition()));
+				continue;
+			}
+			
+			IInterpreterContext interpreterContext = new InterpreterContext(new ValueFactory());
 			
 			Iterator<DataType> dataTypeIterator = templateParameterDataTypes.iterator();
 			for (TemplateVariableDeclaration templateVariableDeclaration : functionDefinition.getTemplateVariableDeclarations()) {
 				IValue value = new AnyValue(dataTypeIterator.next());
 				IVariable variable = new Variable(templateVariableDeclaration);
 				variable.setValue(0, value);
-				context.addVariable(variable);
+				interpreterContext.getScope().add(variable);
 			}
 
 			dataTypeIterator = inputParameterDataTypes.iterator();
@@ -78,34 +92,35 @@ public class AssertionEvaluator {
 				IValue value = new AnyValue(dataTypeIterator.next());
 				IVariable variable = new Variable(inputVariableDeclaration);
 				variable.setValue(0, value);
-				context.addVariable(variable);
+				interpreterContext.getScope().add(variable);
 			}
 			
 			IVariable outputVariable = new Variable(assertResultVariableDeclaration);
-			context.addVariable(outputVariable);
+			interpreterContext.getScope().add(outputVariable);
 			
-			new CompoundInterpreter(context).doSwitch(compound);
+			new CompoundInterpreter(interpreterContext).doSwitch(compound);
 			IBooleanValue outputValue = (IBooleanValue) outputVariable.getValue(0);
 			
 			if (!outputValue.booleanValue()) {
 				Expression message = assertion.getMessage();
 				if (message instanceof StringLiteral) {
 					StringLiteral stringMessage = (StringLiteral) message;
-					diagnostics.add(new BasicDiagnostic(Diagnostic.ERROR, LanguagePlugin.PLUGIN_ID, 0, stringMessage.getValue(), new Object[] {}));
+					status.add(new Status(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, stringMessage.getValue()));
 				}
 			}
 		}
+		
+		return status.isOK() ? Status.OK_STATUS : status;
 	}
 
-	protected Scope createScope(ImperativeFunctionDefinition functionDefinition, Compound compound) {
-		Scope scope = new Scope(null, compound);
-		for (TemplateVariableDeclaration templateVariableDeclaration : functionDefinition.getTemplateVariableDeclarations()) {
-			scope.addVariableDeclaration(templateVariableDeclaration);
+	protected void initializeContext(IExpressionTransformerContext context, ILFunctionDefinition ilFunctionDefinition, Compound compound) {
+		context.getScope().setCompound(compound);
+		for (TemplateVariableDeclaration templateVariableDeclaration : ilFunctionDefinition.getTemplateVariableDeclarations()) {
+			context.getScope().add(templateVariableDeclaration);
 		}
-		for (InputVariableDeclaration inputVariableDeclaration : functionDefinition.getInputVariableDeclarations()) {
-			scope.addVariableDeclaration(inputVariableDeclaration);
+		for (InputVariableDeclaration inputVariableDeclaration : ilFunctionDefinition.getInputVariableDeclarations()) {
+			context.getScope().add(inputVariableDeclaration);
 		}
-		return scope;
 	}
 
 }

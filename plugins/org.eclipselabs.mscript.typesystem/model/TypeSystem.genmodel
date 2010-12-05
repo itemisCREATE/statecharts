@@ -181,5 +181,6 @@
       <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute TypeSystem.ecore#//RecordField/name"/>
     </genClasses>
     <genClasses xsi:type="genmodel:GenClass" ecoreClass="TypeSystem.ecore#//UnitType"/>
+    <genClasses xsi:type="genmodel:GenClass" ecoreClass="TypeSystem.ecore#//AnyDataType"/>
   </genPackages>
 </genmodel:GenModel>

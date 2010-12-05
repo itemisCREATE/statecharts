@@ -48,7 +48,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="equationDescriptors" upperBound="-1"
         eType="#//EquationDescriptor" containment="true" eOpposite="#//EquationDescriptor/functionDescriptor"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="variableDescriptors" upperBound="-1"
-        eType="#//VariableDescriptor" containment="true" eOpposite="#//VariableDescriptor/function"/>
+        eType="#//VariableDescriptor" containment="true" eOpposite="#//VariableDescriptor/functionDescriptor"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EquationDescriptor">
     <eOperations name="isLeftHandSideValid" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
@@ -106,7 +106,7 @@
     </eOperations>
     <eOperations name="getMinimumStep" lowerBound="1" eType="#//VariableStep"/>
     <eOperations name="getMaximumStep" lowerBound="1" eType="#//VariableStep"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="function" lowerBound="1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="functionDescriptor" lowerBound="1"
         eType="#//FunctionDescriptor" eOpposite="#//FunctionDescriptor/variableDescriptors"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" eType="#//VariableKind"/>

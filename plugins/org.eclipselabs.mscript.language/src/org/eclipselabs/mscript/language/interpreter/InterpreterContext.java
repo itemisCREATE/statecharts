@@ -11,11 +11,6 @@
 
 package org.eclipselabs.mscript.language.interpreter;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import org.eclipse.emf.common.util.DiagnosticChain;
-import org.eclipselabs.mscript.language.imperativemodel.VariableDeclaration;
 import org.eclipselabs.mscript.language.interpreter.value.IValueFactory;
 
 /**
@@ -24,9 +19,8 @@ import org.eclipselabs.mscript.language.interpreter.value.IValueFactory;
  */
 public class InterpreterContext implements IInterpreterContext {
 
-	private Scope scope = new Scope(null);
+	private IInterpreterScope scope = new InterpreterScope(null);
 
-	private DiagnosticChain diagnostics;
 	private IValueFactory valueFactory;
 	
 	private volatile boolean canceled;
@@ -34,16 +28,8 @@ public class InterpreterContext implements IInterpreterContext {
 	/**
 	 * 
 	 */
-	public InterpreterContext(DiagnosticChain diagnostics, IValueFactory valueFactory) {
-		this.diagnostics = diagnostics;
+	public InterpreterContext(IValueFactory valueFactory) {
 		this.valueFactory = valueFactory;
-	}
-	
-	/**
-	 * @return the diagnosticChain
-	 */
-	public DiagnosticChain getDiagnostics() {
-		return diagnostics;
 	}
 	
 	/* (non-Javadoc)
@@ -67,11 +53,18 @@ public class InterpreterContext implements IInterpreterContext {
 		this.canceled = canceled;
 	}
 	
+	/**
+	 * @return the scope
+	 */
+	public IInterpreterScope getScope() {
+		return scope;
+	}
+	
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.language.interpreter.IInterpreterContext#enterScope()
 	 */
 	public void enterScope() {
-		scope = new Scope(scope);
+		scope = new InterpreterScope(scope);
 	}
 	
 	/* (non-Javadoc)
@@ -81,49 +74,4 @@ public class InterpreterContext implements IInterpreterContext {
 		scope = scope.getOuterScope();
 	}
 	
-	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.language.interpreter.IInterpreterContext#addLocalVariable(org.eclipselabs.mscript.language.interpreter.IVariable)
-	 */
-	public void addVariable(IVariable variable) {
-		scope.addVariable(variable);
-	}
-	
-	public IVariable getVariable(VariableDeclaration declaration) {
-		return scope.getVariable(declaration);
-	}
-	
-	private static class Scope {
-
-		private Scope outerScope;
-		private Map<VariableDeclaration, IVariable> variables = new HashMap<VariableDeclaration, IVariable>();
-		
-		/**
-		 * 
-		 */
-		public Scope(Scope outerScope) {
-			this.outerScope = outerScope;
-		}
-		
-		/**
-		 * @return the outerScope
-		 */
-		public Scope getOuterScope() {
-			return outerScope;
-		}
-		
-		public void addVariable(IVariable variable) {
-			variables.put(variable.getDeclaration(), variable);
-		}
-		
-		public IVariable getVariable(VariableDeclaration declaration) {
-			IVariable variable;
-			Scope scope = this;
-			do {
-				variable = scope.variables.get(declaration);
-			} while (variable == null && (scope = scope.outerScope) != null);
-			return variable;
-		}
-		
-	}
-
 }
