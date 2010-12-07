@@ -149,7 +149,7 @@ public class MscriptLaunchConfigurationDelegate extends LaunchConfigurationDeleg
 			args = new String[0];
 		}
 		if (args.length != functionDefinition.getTemplateParameterDeclarations().size()) {
-			throw new CoreException(new Status(IStatus.ERROR, IDECorePlugin.PLUGIN_ID, "Number of template arguments provided in launch configuration does not correspond to number of template arguments in function definition"));
+			throw new CoreException(new Status(IStatus.ERROR, IDECorePlugin.PLUGIN_ID, "Number of template arguments does not correspond to number of template parameters in function definition"));
 		}
 		for (String arg : args) {
 			try {
