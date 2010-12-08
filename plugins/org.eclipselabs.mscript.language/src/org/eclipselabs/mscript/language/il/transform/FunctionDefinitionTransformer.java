@@ -58,6 +58,8 @@ public class FunctionDefinitionTransformer {
 		MultiStatus status = new MultiStatus(LanguagePlugin.PLUGIN_ID, 0, "Function definition transformation errors", null);
 
 		ILFunctionDefinition ilFunctionDefinition = ILFactory.eINSTANCE.createILFunctionDefinition();
+		ilFunctionDefinition.setStateful(functionDescriptor.getDefinition().isStateful());
+		ilFunctionDefinition.setName(functionDescriptor.getDefinition().getName());
 		
 		Map<VariableDescriptor, VariableDeclaration> variableDeclarations = new HashMap<VariableDescriptor, VariableDeclaration>();
 		

@@ -17,6 +17,8 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link org.eclipselabs.mscript.language.il.ILFunctionDefinition#isStateful <em>Stateful</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.il.ILFunctionDefinition#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.il.ILFunctionDefinition#getTemplateVariableDeclarations <em>Template Variable Declarations</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.il.ILFunctionDefinition#getInputVariableDeclarations <em>Input Variable Declarations</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.il.ILFunctionDefinition#getOutputVariableDeclarations <em>Output Variable Declarations</em>}</li>
@@ -31,6 +33,58 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface ILFunctionDefinition extends EObject {
+	/**
+	 * Returns the value of the '<em><b>Stateful</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Stateful</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Stateful</em>' attribute.
+	 * @see #setStateful(boolean)
+	 * @see org.eclipselabs.mscript.language.il.ILPackage#getILFunctionDefinition_Stateful()
+	 * @model required="true"
+	 * @generated
+	 */
+	boolean isStateful();
+
+	/**
+	 * Sets the value of the '{@link org.eclipselabs.mscript.language.il.ILFunctionDefinition#isStateful <em>Stateful</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Stateful</em>' attribute.
+	 * @see #isStateful()
+	 * @generated
+	 */
+	void setStateful(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Name</em>' attribute.
+	 * @see #setName(String)
+	 * @see org.eclipselabs.mscript.language.il.ILPackage#getILFunctionDefinition_Name()
+	 * @model required="true"
+	 * @generated
+	 */
+	String getName();
+
+	/**
+	 * Sets the value of the '{@link org.eclipselabs.mscript.language.il.ILFunctionDefinition#getName <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Name</em>' attribute.
+	 * @see #getName()
+	 * @generated
+	 */
+	void setName(String value);
+
 	/**
 	 * Returns the value of the '<em><b>Template Variable Declarations</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipselabs.mscript.language.il.TemplateVariableDeclaration}.

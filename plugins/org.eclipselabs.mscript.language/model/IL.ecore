@@ -4,6 +4,9 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="il"
     nsURI="http://www.eclipselabs.org/mscript/IL/1.0.0" nsPrefix="il">
   <eClassifiers xsi:type="ecore:EClass" name="ILFunctionDefinition">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="stateful" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="templateVariableDeclarations"
         upperBound="-1" eType="#//TemplateVariableDeclaration" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="inputVariableDeclarations"

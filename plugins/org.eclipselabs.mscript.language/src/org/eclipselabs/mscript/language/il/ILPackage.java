@@ -71,13 +71,31 @@ public interface ILPackage extends EPackage {
 	int IL_FUNCTION_DEFINITION = 0;
 
 	/**
+	 * The feature id for the '<em><b>Stateful</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IL_FUNCTION_DEFINITION__STATEFUL = 0;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IL_FUNCTION_DEFINITION__NAME = 1;
+
+	/**
 	 * The feature id for the '<em><b>Template Variable Declarations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IL_FUNCTION_DEFINITION__TEMPLATE_VARIABLE_DECLARATIONS = 0;
+	int IL_FUNCTION_DEFINITION__TEMPLATE_VARIABLE_DECLARATIONS = 2;
 
 	/**
 	 * The feature id for the '<em><b>Input Variable Declarations</b></em>' containment reference list.
@@ -86,7 +104,7 @@ public interface ILPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int IL_FUNCTION_DEFINITION__INPUT_VARIABLE_DECLARATIONS = 1;
+	int IL_FUNCTION_DEFINITION__INPUT_VARIABLE_DECLARATIONS = 3;
 
 	/**
 	 * The feature id for the '<em><b>Output Variable Declarations</b></em>' containment reference list.
@@ -95,7 +113,7 @@ public interface ILPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int IL_FUNCTION_DEFINITION__OUTPUT_VARIABLE_DECLARATIONS = 2;
+	int IL_FUNCTION_DEFINITION__OUTPUT_VARIABLE_DECLARATIONS = 4;
 
 	/**
 	 * The feature id for the '<em><b>Instance Variable Declarations</b></em>' containment reference list.
@@ -104,7 +122,7 @@ public interface ILPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int IL_FUNCTION_DEFINITION__INSTANCE_VARIABLE_DECLARATIONS = 3;
+	int IL_FUNCTION_DEFINITION__INSTANCE_VARIABLE_DECLARATIONS = 5;
 
 	/**
 	 * The feature id for the '<em><b>Initialization Compound</b></em>' containment reference.
@@ -113,7 +131,7 @@ public interface ILPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int IL_FUNCTION_DEFINITION__INITIALIZATION_COMPOUND = 4;
+	int IL_FUNCTION_DEFINITION__INITIALIZATION_COMPOUND = 6;
 
 	/**
 	 * The feature id for the '<em><b>Computation Compounds</b></em>' containment reference list.
@@ -122,7 +140,7 @@ public interface ILPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int IL_FUNCTION_DEFINITION__COMPUTATION_COMPOUNDS = 5;
+	int IL_FUNCTION_DEFINITION__COMPUTATION_COMPOUNDS = 7;
 
 	/**
 	 * The number of structural features of the '<em>Function Definition</em>' class.
@@ -131,7 +149,7 @@ public interface ILPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int IL_FUNCTION_DEFINITION_FEATURE_COUNT = 6;
+	int IL_FUNCTION_DEFINITION_FEATURE_COUNT = 8;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.language.il.impl.StatementImpl <em>Statement</em>}' class.
@@ -873,6 +891,28 @@ public interface ILPackage extends EPackage {
 	EClass getILFunctionDefinition();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.il.ILFunctionDefinition#isStateful <em>Stateful</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Stateful</em>'.
+	 * @see org.eclipselabs.mscript.language.il.ILFunctionDefinition#isStateful()
+	 * @see #getILFunctionDefinition()
+	 * @generated
+	 */
+	EAttribute getILFunctionDefinition_Stateful();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.il.ILFunctionDefinition#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.eclipselabs.mscript.language.il.ILFunctionDefinition#getName()
+	 * @see #getILFunctionDefinition()
+	 * @generated
+	 */
+	EAttribute getILFunctionDefinition_Name();
+
+	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.il.ILFunctionDefinition#getTemplateVariableDeclarations <em>Template Variable Declarations</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1402,6 +1442,22 @@ public interface ILPackage extends EPackage {
 		 * @generated
 		 */
 		EClass IL_FUNCTION_DEFINITION = eINSTANCE.getILFunctionDefinition();
+
+		/**
+		 * The meta object literal for the '<em><b>Stateful</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute IL_FUNCTION_DEFINITION__STATEFUL = eINSTANCE.getILFunctionDefinition_Stateful();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute IL_FUNCTION_DEFINITION__NAME = eINSTANCE.getILFunctionDefinition_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>Template Variable Declarations</b></em>' containment reference list feature.

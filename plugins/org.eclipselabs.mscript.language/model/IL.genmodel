@@ -8,6 +8,8 @@
   <genPackages prefix="IL" basePackage="org.eclipselabs.mscript.language" disposableProviderFactory="true"
       ecorePackage="IL.ecore#/">
     <genClasses ecoreClass="IL.ecore#//ILFunctionDefinition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute IL.ecore#//ILFunctionDefinition/stateful"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute IL.ecore#//ILFunctionDefinition/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference IL.ecore#//ILFunctionDefinition/templateVariableDeclarations"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference IL.ecore#//ILFunctionDefinition/inputVariableDeclarations"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference IL.ecore#//ILFunctionDefinition/outputVariableDeclarations"/>

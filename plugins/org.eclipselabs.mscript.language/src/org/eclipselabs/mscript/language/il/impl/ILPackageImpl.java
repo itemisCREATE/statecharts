@@ -254,25 +254,25 @@ public class ILPackageImpl extends EPackageImpl implements ILPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getILFunctionDefinition_Stateful() {
+		return (EAttribute)ilFunctionDefinitionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getILFunctionDefinition_Name() {
+		return (EAttribute)ilFunctionDefinitionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EReference getILFunctionDefinition_TemplateVariableDeclarations() {
-		return (EReference)ilFunctionDefinitionEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getILFunctionDefinition_InputVariableDeclarations() {
-		return (EReference)ilFunctionDefinitionEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getILFunctionDefinition_OutputVariableDeclarations() {
 		return (EReference)ilFunctionDefinitionEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -281,7 +281,7 @@ public class ILPackageImpl extends EPackageImpl implements ILPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getILFunctionDefinition_InstanceVariableDeclarations() {
+	public EReference getILFunctionDefinition_InputVariableDeclarations() {
 		return (EReference)ilFunctionDefinitionEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -290,7 +290,7 @@ public class ILPackageImpl extends EPackageImpl implements ILPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getILFunctionDefinition_InitializationCompound() {
+	public EReference getILFunctionDefinition_OutputVariableDeclarations() {
 		return (EReference)ilFunctionDefinitionEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -299,8 +299,26 @@ public class ILPackageImpl extends EPackageImpl implements ILPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getILFunctionDefinition_ComputationCompounds() {
+	public EReference getILFunctionDefinition_InstanceVariableDeclarations() {
 		return (EReference)ilFunctionDefinitionEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getILFunctionDefinition_InitializationCompound() {
+		return (EReference)ilFunctionDefinitionEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getILFunctionDefinition_ComputationCompounds() {
+		return (EReference)ilFunctionDefinitionEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -701,6 +719,8 @@ public class ILPackageImpl extends EPackageImpl implements ILPackage {
 
 		// Create classes and their features
 		ilFunctionDefinitionEClass = createEClass(IL_FUNCTION_DEFINITION);
+		createEAttribute(ilFunctionDefinitionEClass, IL_FUNCTION_DEFINITION__STATEFUL);
+		createEAttribute(ilFunctionDefinitionEClass, IL_FUNCTION_DEFINITION__NAME);
 		createEReference(ilFunctionDefinitionEClass, IL_FUNCTION_DEFINITION__TEMPLATE_VARIABLE_DECLARATIONS);
 		createEReference(ilFunctionDefinitionEClass, IL_FUNCTION_DEFINITION__INPUT_VARIABLE_DECLARATIONS);
 		createEReference(ilFunctionDefinitionEClass, IL_FUNCTION_DEFINITION__OUTPUT_VARIABLE_DECLARATIONS);
@@ -820,6 +840,8 @@ public class ILPackageImpl extends EPackageImpl implements ILPackage {
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(ilFunctionDefinitionEClass, ILFunctionDefinition.class, "ILFunctionDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getILFunctionDefinition_Stateful(), ecorePackage.getEBoolean(), "stateful", null, 1, 1, ILFunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getILFunctionDefinition_Name(), ecorePackage.getEString(), "name", null, 1, 1, ILFunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getILFunctionDefinition_TemplateVariableDeclarations(), this.getTemplateVariableDeclaration(), null, "templateVariableDeclarations", null, 0, -1, ILFunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getILFunctionDefinition_InputVariableDeclarations(), this.getInputVariableDeclaration(), null, "inputVariableDeclarations", null, 0, -1, ILFunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getILFunctionDefinition_OutputVariableDeclarations(), this.getOutputVariableDeclaration(), null, "outputVariableDeclarations", null, 0, -1, ILFunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

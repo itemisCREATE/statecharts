@@ -33,6 +33,8 @@ import org.eclipselabs.mscript.language.il.TemplateVariableDeclaration;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.eclipselabs.mscript.language.il.impl.ILFunctionDefinitionImpl#isStateful <em>Stateful</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.il.impl.ILFunctionDefinitionImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.il.impl.ILFunctionDefinitionImpl#getTemplateVariableDeclarations <em>Template Variable Declarations</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.il.impl.ILFunctionDefinitionImpl#getInputVariableDeclarations <em>Input Variable Declarations</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.il.impl.ILFunctionDefinitionImpl#getOutputVariableDeclarations <em>Output Variable Declarations</em>}</li>
@@ -45,6 +47,46 @@ import org.eclipselabs.mscript.language.il.TemplateVariableDeclaration;
  * @generated
  */
 public class ILFunctionDefinitionImpl extends EObjectImpl implements ILFunctionDefinition {
+	/**
+	 * The default value of the '{@link #isStateful() <em>Stateful</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isStateful()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean STATEFUL_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isStateful() <em>Stateful</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isStateful()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean stateful = STATEFUL_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
 	/**
 	 * The cached value of the '{@link #getTemplateVariableDeclarations() <em>Template Variable Declarations</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -122,6 +164,48 @@ public class ILFunctionDefinitionImpl extends EObjectImpl implements ILFunctionD
 	@Override
 	protected EClass eStaticClass() {
 		return ILPackage.Literals.IL_FUNCTION_DEFINITION;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isStateful() {
+		return stateful;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setStateful(boolean newStateful) {
+		boolean oldStateful = stateful;
+		stateful = newStateful;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ILPackage.IL_FUNCTION_DEFINITION__STATEFUL, oldStateful, stateful));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ILPackage.IL_FUNCTION_DEFINITION__NAME, oldName, name));
 	}
 
 	/**
@@ -259,6 +343,10 @@ public class ILFunctionDefinitionImpl extends EObjectImpl implements ILFunctionD
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case ILPackage.IL_FUNCTION_DEFINITION__STATEFUL:
+				return isStateful();
+			case ILPackage.IL_FUNCTION_DEFINITION__NAME:
+				return getName();
 			case ILPackage.IL_FUNCTION_DEFINITION__TEMPLATE_VARIABLE_DECLARATIONS:
 				return getTemplateVariableDeclarations();
 			case ILPackage.IL_FUNCTION_DEFINITION__INPUT_VARIABLE_DECLARATIONS:
@@ -284,6 +372,12 @@ public class ILFunctionDefinitionImpl extends EObjectImpl implements ILFunctionD
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case ILPackage.IL_FUNCTION_DEFINITION__STATEFUL:
+				setStateful((Boolean)newValue);
+				return;
+			case ILPackage.IL_FUNCTION_DEFINITION__NAME:
+				setName((String)newValue);
+				return;
 			case ILPackage.IL_FUNCTION_DEFINITION__TEMPLATE_VARIABLE_DECLARATIONS:
 				getTemplateVariableDeclarations().clear();
 				getTemplateVariableDeclarations().addAll((Collection<? extends TemplateVariableDeclaration>)newValue);
@@ -319,6 +413,12 @@ public class ILFunctionDefinitionImpl extends EObjectImpl implements ILFunctionD
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case ILPackage.IL_FUNCTION_DEFINITION__STATEFUL:
+				setStateful(STATEFUL_EDEFAULT);
+				return;
+			case ILPackage.IL_FUNCTION_DEFINITION__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 			case ILPackage.IL_FUNCTION_DEFINITION__TEMPLATE_VARIABLE_DECLARATIONS:
 				getTemplateVariableDeclarations().clear();
 				return;
@@ -349,6 +449,10 @@ public class ILFunctionDefinitionImpl extends EObjectImpl implements ILFunctionD
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case ILPackage.IL_FUNCTION_DEFINITION__STATEFUL:
+				return stateful != STATEFUL_EDEFAULT;
+			case ILPackage.IL_FUNCTION_DEFINITION__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case ILPackage.IL_FUNCTION_DEFINITION__TEMPLATE_VARIABLE_DECLARATIONS:
 				return templateVariableDeclarations != null && !templateVariableDeclarations.isEmpty();
 			case ILPackage.IL_FUNCTION_DEFINITION__INPUT_VARIABLE_DECLARATIONS:
@@ -363,6 +467,24 @@ public class ILFunctionDefinitionImpl extends EObjectImpl implements ILFunctionD
 				return computationCompounds != null && !computationCompounds.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (stateful: ");
+		result.append(stateful);
+		result.append(", name: ");
+		result.append(name);
+		result.append(')');
+		return result.toString();
 	}
 
 } //ILFunctionImpl
