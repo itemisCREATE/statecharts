@@ -12,8 +12,6 @@ import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.BeginExpression;
 import org.eclipselabs.mscript.language.ast.EndExpression;
 import org.eclipselabs.mscript.language.ast.FunctionDefinition;
-import org.eclipselabs.mscript.language.ast.FunctorDeclaration;
-import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
 import org.eclipselabs.mscript.language.ast.StateVariableDeclaration;
 import org.eclipselabs.mscript.language.ast.UnitExpressionNumerator;
 import org.eclipselabs.mscript.language.functionmodel.FunctionDescriptor;
@@ -33,14 +31,8 @@ public class MscriptJavaValidator extends AbstractMscriptJavaValidator {
 	@Check
 	public void checkStatelessFunctionDefinition(FunctionDefinition functionDefinition) {
 		if (!functionDefinition.isStateful()) {
-			for (ParameterDeclaration parameterDeclaration : functionDefinition.getTemplateParameterDeclarations()) {
-				error("Stateless functions must not declare template parameters", parameterDeclaration, null);
-			}
 			for (StateVariableDeclaration stateVariableDeclaration : functionDefinition.getStateVariableDeclarations()) {
 				error("Stateless functions must not declare state variables", stateVariableDeclaration, null);
-			}
-			for (FunctorDeclaration functorDeclaration : functionDefinition.getFunctorDeclarations()) {
-				error("Stateless functions must not declare functors", functorDeclaration, null);
 			}
 		}
 	}
