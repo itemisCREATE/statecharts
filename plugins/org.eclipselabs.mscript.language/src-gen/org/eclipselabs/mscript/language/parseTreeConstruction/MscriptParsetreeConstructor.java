@@ -7281,11 +7281,11 @@ protected class LetExpressionVariableDeclaration_AssignedExpressionAssignment_2 
 /************ begin Rule IfExpression ****************
  *
  * IfExpression:
- * 	"if" condition=Expression "then" thenExpression=Expression "else" elseExpression=Expression;
+ * 	static?="static"? "if" condition=Expression "then" thenExpression=Expression "else" elseExpression=Expression;
  *
  **/
 
-// "if" condition=Expression "then" thenExpression=Expression "else" elseExpression=Expression
+// static?="static"? "if" condition=Expression "then" thenExpression=Expression "else" elseExpression=Expression
 protected class IfExpression_Group extends GroupToken {
 	
 	public IfExpression_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7300,7 +7300,7 @@ protected class IfExpression_Group extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new IfExpression_ElseExpressionAssignment_5(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new IfExpression_ElseExpressionAssignment_6(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -7314,16 +7314,16 @@ protected class IfExpression_Group extends GroupToken {
 
 }
 
-// "if"
-protected class IfExpression_IfKeyword_0 extends KeywordToken  {
+// static?="static"?
+protected class IfExpression_StaticAssignment_0 extends AssignmentToken  {
 	
-	public IfExpression_IfKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public IfExpression_StaticAssignment_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
-	public Keyword getGrammarElement() {
-		return grammarAccess.getIfExpressionAccess().getIfKeyword_0();
+	public Assignment getGrammarElement() {
+		return grammarAccess.getIfExpressionAccess().getStaticAssignment_0();
 	}
 
     @Override
@@ -7333,18 +7333,52 @@ protected class IfExpression_IfKeyword_0 extends KeywordToken  {
 		}	
 	}
 
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("static",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("static");
+		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KEYWORD;
+			element = grammarAccess.getIfExpressionAccess().getStaticStaticKeyword_0_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// "if"
+protected class IfExpression_IfKeyword_1 extends KeywordToken  {
+	
+	public IfExpression_IfKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getIfExpressionAccess().getIfKeyword_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new IfExpression_StaticAssignment_0(lastRuleCallOrigin, this, 0, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index - 1, inst);
+		}	
+	}
+
 }
 
 // condition=Expression
-protected class IfExpression_ConditionAssignment_1 extends AssignmentToken  {
+protected class IfExpression_ConditionAssignment_2 extends AssignmentToken  {
 	
-	public IfExpression_ConditionAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public IfExpression_ConditionAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getIfExpressionAccess().getConditionAssignment_1();
+		return grammarAccess.getIfExpressionAccess().getConditionAssignment_2();
 	}
 
     @Override
@@ -7363,7 +7397,7 @@ protected class IfExpression_ConditionAssignment_1 extends AssignmentToken  {
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getExpressionRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getIfExpressionAccess().getConditionExpressionParserRuleCall_1_0(); 
+				element = grammarAccess.getIfExpressionAccess().getConditionExpressionParserRuleCall_2_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -7375,28 +7409,28 @@ protected class IfExpression_ConditionAssignment_1 extends AssignmentToken  {
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new IfExpression_IfKeyword_0(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new IfExpression_IfKeyword_1(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
 // "then"
-protected class IfExpression_ThenKeyword_2 extends KeywordToken  {
+protected class IfExpression_ThenKeyword_3 extends KeywordToken  {
 	
-	public IfExpression_ThenKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public IfExpression_ThenKeyword_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getIfExpressionAccess().getThenKeyword_2();
+		return grammarAccess.getIfExpressionAccess().getThenKeyword_3();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new IfExpression_ConditionAssignment_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new IfExpression_ConditionAssignment_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -7404,15 +7438,15 @@ protected class IfExpression_ThenKeyword_2 extends KeywordToken  {
 }
 
 // thenExpression=Expression
-protected class IfExpression_ThenExpressionAssignment_3 extends AssignmentToken  {
+protected class IfExpression_ThenExpressionAssignment_4 extends AssignmentToken  {
 	
-	public IfExpression_ThenExpressionAssignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public IfExpression_ThenExpressionAssignment_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getIfExpressionAccess().getThenExpressionAssignment_3();
+		return grammarAccess.getIfExpressionAccess().getThenExpressionAssignment_4();
 	}
 
     @Override
@@ -7431,7 +7465,7 @@ protected class IfExpression_ThenExpressionAssignment_3 extends AssignmentToken 
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getExpressionRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getIfExpressionAccess().getThenExpressionExpressionParserRuleCall_3_0(); 
+				element = grammarAccess.getIfExpressionAccess().getThenExpressionExpressionParserRuleCall_4_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -7443,28 +7477,28 @@ protected class IfExpression_ThenExpressionAssignment_3 extends AssignmentToken 
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new IfExpression_ThenKeyword_2(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new IfExpression_ThenKeyword_3(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
 // "else"
-protected class IfExpression_ElseKeyword_4 extends KeywordToken  {
+protected class IfExpression_ElseKeyword_5 extends KeywordToken  {
 	
-	public IfExpression_ElseKeyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public IfExpression_ElseKeyword_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getIfExpressionAccess().getElseKeyword_4();
+		return grammarAccess.getIfExpressionAccess().getElseKeyword_5();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new IfExpression_ThenExpressionAssignment_3(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new IfExpression_ThenExpressionAssignment_4(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -7472,15 +7506,15 @@ protected class IfExpression_ElseKeyword_4 extends KeywordToken  {
 }
 
 // elseExpression=Expression
-protected class IfExpression_ElseExpressionAssignment_5 extends AssignmentToken  {
+protected class IfExpression_ElseExpressionAssignment_6 extends AssignmentToken  {
 	
-	public IfExpression_ElseExpressionAssignment_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public IfExpression_ElseExpressionAssignment_6(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getIfExpressionAccess().getElseExpressionAssignment_5();
+		return grammarAccess.getIfExpressionAccess().getElseExpressionAssignment_6();
 	}
 
     @Override
@@ -7499,7 +7533,7 @@ protected class IfExpression_ElseExpressionAssignment_5 extends AssignmentToken 
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getExpressionRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getIfExpressionAccess().getElseExpressionExpressionParserRuleCall_5_0(); 
+				element = grammarAccess.getIfExpressionAccess().getElseExpressionExpressionParserRuleCall_6_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -7511,7 +7545,7 @@ protected class IfExpression_ElseExpressionAssignment_5 extends AssignmentToken 
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new IfExpression_ElseKeyword_4(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new IfExpression_ElseKeyword_5(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -7524,11 +7558,11 @@ protected class IfExpression_ElseExpressionAssignment_5 extends AssignmentToken 
 /************ begin Rule SwitchExpression ****************
  *
  * SwitchExpression:
- * 	"switch" controlExpression=Expression cases+=SwitchCase* "default" ":" defaultExpression=Expression;
+ * 	static?="static"? "switch" controlExpression=Expression cases+=SwitchCase* "default" ":" defaultExpression=Expression;
  *
  **/
 
-// "switch" controlExpression=Expression cases+=SwitchCase* "default" ":" defaultExpression=Expression
+// static?="static"? "switch" controlExpression=Expression cases+=SwitchCase* "default" ":" defaultExpression=Expression
 protected class SwitchExpression_Group extends GroupToken {
 	
 	public SwitchExpression_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7543,7 +7577,7 @@ protected class SwitchExpression_Group extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new SwitchExpression_DefaultExpressionAssignment_5(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new SwitchExpression_DefaultExpressionAssignment_6(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -7557,16 +7591,16 @@ protected class SwitchExpression_Group extends GroupToken {
 
 }
 
-// "switch"
-protected class SwitchExpression_SwitchKeyword_0 extends KeywordToken  {
+// static?="static"?
+protected class SwitchExpression_StaticAssignment_0 extends AssignmentToken  {
 	
-	public SwitchExpression_SwitchKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public SwitchExpression_StaticAssignment_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
-	public Keyword getGrammarElement() {
-		return grammarAccess.getSwitchExpressionAccess().getSwitchKeyword_0();
+	public Assignment getGrammarElement() {
+		return grammarAccess.getSwitchExpressionAccess().getStaticAssignment_0();
 	}
 
     @Override
@@ -7576,18 +7610,52 @@ protected class SwitchExpression_SwitchKeyword_0 extends KeywordToken  {
 		}	
 	}
 
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("static",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("static");
+		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KEYWORD;
+			element = grammarAccess.getSwitchExpressionAccess().getStaticStaticKeyword_0_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// "switch"
+protected class SwitchExpression_SwitchKeyword_1 extends KeywordToken  {
+	
+	public SwitchExpression_SwitchKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getSwitchExpressionAccess().getSwitchKeyword_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new SwitchExpression_StaticAssignment_0(lastRuleCallOrigin, this, 0, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index - 1, inst);
+		}	
+	}
+
 }
 
 // controlExpression=Expression
-protected class SwitchExpression_ControlExpressionAssignment_1 extends AssignmentToken  {
+protected class SwitchExpression_ControlExpressionAssignment_2 extends AssignmentToken  {
 	
-	public SwitchExpression_ControlExpressionAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public SwitchExpression_ControlExpressionAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getSwitchExpressionAccess().getControlExpressionAssignment_1();
+		return grammarAccess.getSwitchExpressionAccess().getControlExpressionAssignment_2();
 	}
 
     @Override
@@ -7606,7 +7674,7 @@ protected class SwitchExpression_ControlExpressionAssignment_1 extends Assignmen
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getExpressionRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getSwitchExpressionAccess().getControlExpressionExpressionParserRuleCall_1_0(); 
+				element = grammarAccess.getSwitchExpressionAccess().getControlExpressionExpressionParserRuleCall_2_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -7618,22 +7686,22 @@ protected class SwitchExpression_ControlExpressionAssignment_1 extends Assignmen
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new SwitchExpression_SwitchKeyword_0(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new SwitchExpression_SwitchKeyword_1(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
 // cases+=SwitchCase*
-protected class SwitchExpression_CasesAssignment_2 extends AssignmentToken  {
+protected class SwitchExpression_CasesAssignment_3 extends AssignmentToken  {
 	
-	public SwitchExpression_CasesAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public SwitchExpression_CasesAssignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getSwitchExpressionAccess().getCasesAssignment_2();
+		return grammarAccess.getSwitchExpressionAccess().getCasesAssignment_3();
 	}
 
     @Override
@@ -7652,7 +7720,7 @@ protected class SwitchExpression_CasesAssignment_2 extends AssignmentToken  {
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getSwitchCaseRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getSwitchExpressionAccess().getCasesSwitchCaseParserRuleCall_2_0(); 
+				element = grammarAccess.getSwitchExpressionAccess().getCasesSwitchCaseParserRuleCall_3_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -7664,30 +7732,30 @@ protected class SwitchExpression_CasesAssignment_2 extends AssignmentToken  {
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new SwitchExpression_CasesAssignment_2(lastRuleCallOrigin, next, actIndex, consumed);
-			case 1: return new SwitchExpression_ControlExpressionAssignment_1(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new SwitchExpression_CasesAssignment_3(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new SwitchExpression_ControlExpressionAssignment_2(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
 // "default"
-protected class SwitchExpression_DefaultKeyword_3 extends KeywordToken  {
+protected class SwitchExpression_DefaultKeyword_4 extends KeywordToken  {
 	
-	public SwitchExpression_DefaultKeyword_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public SwitchExpression_DefaultKeyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getSwitchExpressionAccess().getDefaultKeyword_3();
+		return grammarAccess.getSwitchExpressionAccess().getDefaultKeyword_4();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new SwitchExpression_CasesAssignment_2(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new SwitchExpression_ControlExpressionAssignment_1(lastRuleCallOrigin, this, 1, inst);
+			case 0: return new SwitchExpression_CasesAssignment_3(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new SwitchExpression_ControlExpressionAssignment_2(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -7695,21 +7763,21 @@ protected class SwitchExpression_DefaultKeyword_3 extends KeywordToken  {
 }
 
 // ":"
-protected class SwitchExpression_ColonKeyword_4 extends KeywordToken  {
+protected class SwitchExpression_ColonKeyword_5 extends KeywordToken  {
 	
-	public SwitchExpression_ColonKeyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public SwitchExpression_ColonKeyword_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getSwitchExpressionAccess().getColonKeyword_4();
+		return grammarAccess.getSwitchExpressionAccess().getColonKeyword_5();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new SwitchExpression_DefaultKeyword_3(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new SwitchExpression_DefaultKeyword_4(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -7717,15 +7785,15 @@ protected class SwitchExpression_ColonKeyword_4 extends KeywordToken  {
 }
 
 // defaultExpression=Expression
-protected class SwitchExpression_DefaultExpressionAssignment_5 extends AssignmentToken  {
+protected class SwitchExpression_DefaultExpressionAssignment_6 extends AssignmentToken  {
 	
-	public SwitchExpression_DefaultExpressionAssignment_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public SwitchExpression_DefaultExpressionAssignment_6(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getSwitchExpressionAccess().getDefaultExpressionAssignment_5();
+		return grammarAccess.getSwitchExpressionAccess().getDefaultExpressionAssignment_6();
 	}
 
     @Override
@@ -7744,7 +7812,7 @@ protected class SwitchExpression_DefaultExpressionAssignment_5 extends Assignmen
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getExpressionRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getSwitchExpressionAccess().getDefaultExpressionExpressionParserRuleCall_5_0(); 
+				element = grammarAccess.getSwitchExpressionAccess().getDefaultExpressionExpressionParserRuleCall_6_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -7756,7 +7824,7 @@ protected class SwitchExpression_DefaultExpressionAssignment_5 extends Assignmen
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new SwitchExpression_ColonKeyword_4(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new SwitchExpression_ColonKeyword_5(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	

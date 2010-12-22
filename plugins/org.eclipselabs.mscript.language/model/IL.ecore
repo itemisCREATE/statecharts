@@ -42,7 +42,9 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="circularBufferSize" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
         defaultValueLiteral="1"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TemplateVariableDeclaration" eSuperTypes="#//VariableDeclaration"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TemplateVariableDeclaration" eSuperTypes="#//VariableDeclaration">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//IValue"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InputVariableDeclaration" eSuperTypes="#//StatefulVariableDeclaration">
     <eStructuralFeatures xsi:type="ecore:EReference" name="feedingCompounds" upperBound="-1"
         eType="#//ComputationCompound" eOpposite="#//ComputationCompound/inputs"/>
@@ -96,4 +98,5 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InvalidExpression" eSuperTypes="../src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="IValue" instanceClassName="org.eclipselabs.mscript.computation.core.value.IValue"/>
 </ecore:EPackage>

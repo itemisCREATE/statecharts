@@ -24,6 +24,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipselabs.mscript.computation.core.value.IValue;
 import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
 import org.eclipselabs.mscript.language.ast.StateVariableDeclaration;
 import org.eclipselabs.mscript.language.functionmodel.EquationDescriptor;
@@ -54,17 +55,17 @@ import org.eclipselabs.mscript.typesystem.DataType;
  */
 public class FunctionDefinitionTransformer {
 	
-	public IFunctionDefinitionTransformerResult transform(FunctionDescriptor functionDescriptor, List<DataType> templateParameterDataTypes, List<DataType> inputParameterDataTypes) {
+	public IFunctionDefinitionTransformerResult transform(FunctionDescriptor functionDescriptor, String functionName, List<IValue> templateArguments, List<DataType> inputParameterDataTypes) {
 		MultiStatus status = new MultiStatus(LanguagePlugin.PLUGIN_ID, 0, "Function definition transformation errors", null);
 
 		ILFunctionDefinition ilFunctionDefinition = ILFactory.eINSTANCE.createILFunctionDefinition();
 		ilFunctionDefinition.setStateful(functionDescriptor.getDefinition().isStateful());
-		ilFunctionDefinition.setName(functionDescriptor.getDefinition().getName());
+		ilFunctionDefinition.setName(functionName != null ? functionName : functionDescriptor.getDefinition().getName());
 		
 		Map<VariableDescriptor, VariableDeclaration> variableDeclarations = new HashMap<VariableDescriptor, VariableDeclaration>();
 		
-		initializeVariableDeclarations(ilFunctionDefinition, functionDescriptor, templateParameterDataTypes, inputParameterDataTypes, variableDeclarations);
-		StatusUtil.merge(status, new AssertionEvaluator().evaluate(ilFunctionDefinition, functionDescriptor, templateParameterDataTypes, inputParameterDataTypes));
+		initializeVariableDeclarations(ilFunctionDefinition, functionDescriptor, templateArguments, inputParameterDataTypes, variableDeclarations);
+		StatusUtil.merge(status, new AssertionEvaluator().evaluate(ilFunctionDefinition, functionDescriptor));
 
 		Collection<List<EquationDescriptor>> equationCompounds = new EquationCompoundHelper().getEquationCompounds(functionDescriptor);
 		
@@ -78,13 +79,15 @@ public class FunctionDefinitionTransformer {
 		return new FunctionDefinitionTransformerResult(ilFunctionDefinition);
 	}
 	
-	private void initializeVariableDeclarations(ILFunctionDefinition ilFunctionDefinition, FunctionDescriptor functionDescriptor, List<DataType> templateParameterDataTypes, List<DataType> inputParameterDataTypes, Map<VariableDescriptor, VariableDeclaration> variableDeclarations) {
-		Iterator<DataType> dataTypeIterator = templateParameterDataTypes.iterator();
+	private void initializeVariableDeclarations(ILFunctionDefinition ilFunctionDefinition, FunctionDescriptor functionDescriptor, List<IValue> templateArguments, List<DataType> inputParameterDataTypes, Map<VariableDescriptor, VariableDeclaration> variableDeclarations) {
+		Iterator<IValue> templateArgumentIterator = templateArguments.iterator();
 		for (ParameterDeclaration parameterDeclaration : functionDescriptor.getDefinition().getTemplateParameterDeclarations()) {
 			TemplateVariableDeclaration templateVariableDeclaration = ILFactory.eINSTANCE.createTemplateVariableDeclaration();
 			templateVariableDeclaration.setName(parameterDeclaration.getName());
-			if (dataTypeIterator.hasNext()) {
-				templateVariableDeclaration.setType(EcoreUtil.copy(dataTypeIterator.next()));
+			if (templateArgumentIterator.hasNext()) {
+				IValue value = templateArgumentIterator.next();
+				templateVariableDeclaration.setType(EcoreUtil.copy(value.getDataType()));
+				templateVariableDeclaration.setValue(value);
 			}
 			VariableDescriptor variableDescriptor = functionDescriptor.getVariableDescriptor(parameterDeclaration.getName());
 			if (variableDescriptor != null) {
@@ -93,12 +96,12 @@ public class FunctionDefinitionTransformer {
 			ilFunctionDefinition.getTemplateVariableDeclarations().add(templateVariableDeclaration);
 		}
 
-		dataTypeIterator = inputParameterDataTypes.iterator();
+		Iterator<DataType> inputParameterDataTypesIterator = inputParameterDataTypes.iterator();
 		for (ParameterDeclaration parameterDeclaration : functionDescriptor.getDefinition().getInputParameterDeclarations()) {
 			InputVariableDeclaration inputVariableDeclaration = ILFactory.eINSTANCE.createInputVariableDeclaration();
 			inputVariableDeclaration.setName(parameterDeclaration.getName());
-			if (dataTypeIterator.hasNext()) {
-				inputVariableDeclaration.setType(EcoreUtil.copy(dataTypeIterator.next()));
+			if (inputParameterDataTypesIterator.hasNext()) {
+				inputVariableDeclaration.setType(EcoreUtil.copy(inputParameterDataTypesIterator.next()));
 			}
 			VariableDescriptor variableDescriptor = functionDescriptor.getVariableDescriptor(parameterDeclaration.getName());
 			if (variableDescriptor != null) {

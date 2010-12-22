@@ -14,10 +14,10 @@ package org.eclipselabs.mscript.language.interpreter;
 import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipselabs.mscript.computation.core.value.IValue;
+import org.eclipselabs.mscript.computation.core.value.UnitValue;
 import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.il.util.ILUtil;
-import org.eclipselabs.mscript.language.interpreter.value.IValue;
-import org.eclipselabs.mscript.language.interpreter.value.UnitValue;
 import org.eclipselabs.mscript.typesystem.DataType;
 import org.eclipselabs.mscript.typesystem.NumericType;
 
@@ -30,12 +30,12 @@ public class UnitFunction implements IFunction {
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.language.interpreter.IBuiltinFunctionBehavior#execute(org.eclipselabs.mscript.language.imperativemodel.BuiltinFunctionCall)
 	 */
-	public IValue call(List<Expression> arguments) {
+	public IValue call(IInterpreterContext context, List<Expression> arguments) {
 		Expression expression = arguments.get(0);
 		DataType dataType = ILUtil.getDataType(expression);
 		if (dataType instanceof NumericType) {
 			NumericType numericType = (NumericType) dataType;
-			return new UnitValue(EcoreUtil.copy(numericType.getUnit()));
+			return new UnitValue(context.getComputationContext(), EcoreUtil.copy(numericType.getUnit()));
 		}
 		return null;
 	}

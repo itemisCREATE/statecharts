@@ -1404,9 +1404,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getIfExpression_Condition()
+  public EAttribute getIfExpression_Static()
   {
-    return (EReference)ifExpressionEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)ifExpressionEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1414,7 +1414,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getIfExpression_ThenExpression()
+  public EReference getIfExpression_Condition()
   {
     return (EReference)ifExpressionEClass.getEStructuralFeatures().get(1);
   }
@@ -1424,9 +1424,19 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getIfExpression_ElseExpression()
+  public EReference getIfExpression_ThenExpression()
   {
     return (EReference)ifExpressionEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getIfExpression_ElseExpression()
+  {
+    return (EReference)ifExpressionEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -1444,9 +1454,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getSwitchExpression_ControlExpression()
+  public EAttribute getSwitchExpression_Static()
   {
-    return (EReference)switchExpressionEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)switchExpressionEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1454,7 +1464,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getSwitchExpression_Cases()
+  public EReference getSwitchExpression_ControlExpression()
   {
     return (EReference)switchExpressionEClass.getEStructuralFeatures().get(1);
   }
@@ -1464,9 +1474,19 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getSwitchExpression_DefaultExpression()
+  public EReference getSwitchExpression_Cases()
   {
     return (EReference)switchExpressionEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getSwitchExpression_DefaultExpression()
+  {
+    return (EReference)switchExpressionEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -2821,11 +2841,13 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     createEReference(letExpressionVariableDeclarationEClass, LET_EXPRESSION_VARIABLE_DECLARATION__ASSIGNED_EXPRESSION);
 
     ifExpressionEClass = createEClass(IF_EXPRESSION);
+    createEAttribute(ifExpressionEClass, IF_EXPRESSION__STATIC);
     createEReference(ifExpressionEClass, IF_EXPRESSION__CONDITION);
     createEReference(ifExpressionEClass, IF_EXPRESSION__THEN_EXPRESSION);
     createEReference(ifExpressionEClass, IF_EXPRESSION__ELSE_EXPRESSION);
 
     switchExpressionEClass = createEClass(SWITCH_EXPRESSION);
+    createEAttribute(switchExpressionEClass, SWITCH_EXPRESSION__STATIC);
     createEReference(switchExpressionEClass, SWITCH_EXPRESSION__CONTROL_EXPRESSION);
     createEReference(switchExpressionEClass, SWITCH_EXPRESSION__CASES);
     createEReference(switchExpressionEClass, SWITCH_EXPRESSION__DEFAULT_EXPRESSION);
@@ -3171,11 +3193,13 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     initEReference(getLetExpressionVariableDeclaration_AssignedExpression(), this.getExpression(), null, "assignedExpression", null, 0, 1, LetExpressionVariableDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(ifExpressionEClass, IfExpression.class, "IfExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getIfExpression_Static(), ecorePackage.getEBoolean(), "static", null, 0, 1, IfExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getIfExpression_Condition(), this.getExpression(), null, "condition", null, 0, 1, IfExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getIfExpression_ThenExpression(), this.getExpression(), null, "thenExpression", null, 0, 1, IfExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getIfExpression_ElseExpression(), this.getExpression(), null, "elseExpression", null, 0, 1, IfExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(switchExpressionEClass, SwitchExpression.class, "SwitchExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getSwitchExpression_Static(), ecorePackage.getEBoolean(), "static", null, 0, 1, SwitchExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getSwitchExpression_ControlExpression(), this.getExpression(), null, "controlExpression", null, 0, 1, SwitchExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getSwitchExpression_Cases(), this.getSwitchCase(), null, "cases", null, 0, -1, SwitchExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getSwitchExpression_DefaultExpression(), this.getExpression(), null, "defaultExpression", null, 0, 1, SwitchExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

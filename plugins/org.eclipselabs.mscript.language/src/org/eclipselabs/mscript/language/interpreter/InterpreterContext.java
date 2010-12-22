@@ -11,7 +11,7 @@
 
 package org.eclipselabs.mscript.language.interpreter;
 
-import org.eclipselabs.mscript.language.interpreter.value.IValueFactory;
+import org.eclipselabs.mscript.computation.core.IComputationContext;
 
 /**
  * @author Andreas Unger
@@ -19,24 +19,24 @@ import org.eclipselabs.mscript.language.interpreter.value.IValueFactory;
  */
 public class InterpreterContext implements IInterpreterContext {
 
+	private IComputationContext computationContext;
+
 	private IInterpreterScope scope = new InterpreterScope(null);
 
-	private IValueFactory valueFactory;
-	
 	private volatile boolean canceled;
 		
 	/**
 	 * 
 	 */
-	public InterpreterContext(IValueFactory valueFactory) {
-		this.valueFactory = valueFactory;
+	public InterpreterContext(IComputationContext computationContext) {
+		this.computationContext = computationContext;
 	}
-	
-	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.interpreter.IInterpreterContext#getValueFactory()
+
+	/**
+	 * @return the computationContext
 	 */
-	public IValueFactory getValueFactory() {
-		return valueFactory;
+	public IComputationContext getComputationContext() {
+		return computationContext;
 	}
 	
 	/* (non-Javadoc)

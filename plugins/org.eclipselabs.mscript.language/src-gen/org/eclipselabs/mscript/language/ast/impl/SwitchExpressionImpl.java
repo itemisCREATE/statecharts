@@ -32,6 +32,7 @@ import org.eclipselabs.mscript.language.ast.SwitchExpression;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.SwitchExpressionImpl#isStatic <em>Static</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.SwitchExpressionImpl#getControlExpression <em>Control Expression</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.SwitchExpressionImpl#getCases <em>Cases</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.SwitchExpressionImpl#getDefaultExpression <em>Default Expression</em>}</li>
@@ -42,6 +43,26 @@ import org.eclipselabs.mscript.language.ast.SwitchExpression;
  */
 public class SwitchExpressionImpl extends ExpressionImpl implements SwitchExpression
 {
+  /**
+   * The default value of the '{@link #isStatic() <em>Static</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isStatic()
+   * @generated
+   * @ordered
+   */
+  protected static final boolean STATIC_EDEFAULT = false;
+
+  /**
+   * The cached value of the '{@link #isStatic() <em>Static</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isStatic()
+   * @generated
+   * @ordered
+   */
+  protected boolean static_ = STATIC_EDEFAULT;
+
   /**
    * The cached value of the '{@link #getControlExpression() <em>Control Expression</em>}' containment reference.
    * <!-- begin-user-doc -->
@@ -91,6 +112,29 @@ public class SwitchExpressionImpl extends ExpressionImpl implements SwitchExpres
   protected EClass eStaticClass()
   {
     return AstPackage.Literals.SWITCH_EXPRESSION;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public boolean isStatic()
+  {
+    return static_;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setStatic(boolean newStatic)
+  {
+    boolean oldStatic = static_;
+    static_ = newStatic;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.SWITCH_EXPRESSION__STATIC, oldStatic, static_));
   }
 
   /**
@@ -233,6 +277,8 @@ public class SwitchExpressionImpl extends ExpressionImpl implements SwitchExpres
   {
     switch (featureID)
     {
+      case AstPackage.SWITCH_EXPRESSION__STATIC:
+        return isStatic();
       case AstPackage.SWITCH_EXPRESSION__CONTROL_EXPRESSION:
         return getControlExpression();
       case AstPackage.SWITCH_EXPRESSION__CASES:
@@ -254,6 +300,9 @@ public class SwitchExpressionImpl extends ExpressionImpl implements SwitchExpres
   {
     switch (featureID)
     {
+      case AstPackage.SWITCH_EXPRESSION__STATIC:
+        setStatic((Boolean)newValue);
+        return;
       case AstPackage.SWITCH_EXPRESSION__CONTROL_EXPRESSION:
         setControlExpression((Expression)newValue);
         return;
@@ -278,6 +327,9 @@ public class SwitchExpressionImpl extends ExpressionImpl implements SwitchExpres
   {
     switch (featureID)
     {
+      case AstPackage.SWITCH_EXPRESSION__STATIC:
+        setStatic(STATIC_EDEFAULT);
+        return;
       case AstPackage.SWITCH_EXPRESSION__CONTROL_EXPRESSION:
         setControlExpression((Expression)null);
         return;
@@ -301,6 +353,8 @@ public class SwitchExpressionImpl extends ExpressionImpl implements SwitchExpres
   {
     switch (featureID)
     {
+      case AstPackage.SWITCH_EXPRESSION__STATIC:
+        return static_ != STATIC_EDEFAULT;
       case AstPackage.SWITCH_EXPRESSION__CONTROL_EXPRESSION:
         return controlExpression != null;
       case AstPackage.SWITCH_EXPRESSION__CASES:
@@ -309,6 +363,23 @@ public class SwitchExpressionImpl extends ExpressionImpl implements SwitchExpres
         return defaultExpression != null;
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (static: ");
+    result.append(static_);
+    result.append(')');
+    return result.toString();
   }
 
 } //SwitchExpressionImpl

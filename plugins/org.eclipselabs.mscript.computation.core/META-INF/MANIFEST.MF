@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Mscript Computation
+Bundle-SymbolicName: org.eclipselabs.mscript.computation.core;singleton:=true
+Bundle-Version: 0.1.0.qualifier
+Bundle-Activator: org.eclipselabs.mscript.computation.core.ComputationPlugin
+Bundle-Vendor: Mscript Project
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipselabs.mscript.typesystem;bundle-version="0.1.0";visibility:=reexport,
+ org.eclipselabs.mscript.computation.computationmodel;bundle-version="0.1.0"
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
+Export-Package: org.eclipselabs.mscript.computation.core,
+ org.eclipselabs.mscript.computation.core.value

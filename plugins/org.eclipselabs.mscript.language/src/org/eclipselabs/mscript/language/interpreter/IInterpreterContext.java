@@ -11,7 +11,7 @@
 
 package org.eclipselabs.mscript.language.interpreter;
 
-import org.eclipselabs.mscript.language.interpreter.value.IValueFactory;
+import org.eclipselabs.mscript.computation.core.IComputationContext;
 
 /**
  * @author Andreas Unger
@@ -21,7 +21,7 @@ import org.eclipselabs.mscript.language.interpreter.value.IValueFactory;
  */
 public interface IInterpreterContext {
 	
-	IValueFactory getValueFactory();
+	IComputationContext getComputationContext();
 
 	IInterpreterScope getScope();
 	void enterScope();

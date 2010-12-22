@@ -13,6 +13,12 @@ package org.eclipselabs.mscript.language.interpreter;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipselabs.mscript.computation.core.value.IBooleanValue;
+import org.eclipselabs.mscript.computation.core.value.IValue;
+import org.eclipselabs.mscript.computation.core.value.InvalidValue;
+import org.eclipselabs.mscript.computation.core.value.StringValue;
+import org.eclipselabs.mscript.computation.core.value.UnitValue;
+import org.eclipselabs.mscript.computation.core.value.ValueFactory;
 import org.eclipselabs.mscript.language.ast.AdditiveExpression;
 import org.eclipselabs.mscript.language.ast.BooleanKind;
 import org.eclipselabs.mscript.language.ast.BooleanLiteral;
@@ -34,11 +40,6 @@ import org.eclipselabs.mscript.language.il.VariableReference;
 import org.eclipselabs.mscript.language.il.util.ILSwitch;
 import org.eclipselabs.mscript.language.internal.interpreter.InvalidUnitExpressionOperandException;
 import org.eclipselabs.mscript.language.internal.interpreter.UnitExpressionHelper;
-import org.eclipselabs.mscript.language.interpreter.value.IBooleanValue;
-import org.eclipselabs.mscript.language.interpreter.value.IValue;
-import org.eclipselabs.mscript.language.interpreter.value.InvalidValue;
-import org.eclipselabs.mscript.language.interpreter.value.StringValue;
-import org.eclipselabs.mscript.language.interpreter.value.UnitValue;
 import org.eclipselabs.mscript.typesystem.DataType;
 import org.eclipselabs.mscript.typesystem.IntegerType;
 import org.eclipselabs.mscript.typesystem.InvalidDataType;
@@ -52,6 +53,8 @@ import org.eclipselabs.mscript.typesystem.util.TypeSystemUtil;
  *
  */
 public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue> {
+	
+	private ValueFactory valueFactory = new ValueFactory();
 
 	private IInterpreterContext context;
 	
@@ -140,12 +143,12 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 		if (value instanceof IBooleanValue) {
 			IBooleanValue booleanResult = (IBooleanValue) value;
 			if (!booleanResult.booleanValue()) {
-				return context.getValueFactory().createBooleanValue(true);
+				return valueFactory.createBooleanValue(context.getComputationContext(), true);
 			}
 			value = doSwitch(impliesExpression.getRightOperand());
 			if (value instanceof IBooleanValue) {
 				booleanResult = (IBooleanValue) value;
-				return context.getValueFactory().createBooleanValue(booleanResult.booleanValue());
+				return valueFactory.createBooleanValue(context.getComputationContext(), booleanResult.booleanValue());
 			}
 		}
 		throw new RuntimeException("Implies expression operands must be boolean");
@@ -161,13 +164,13 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 			if (operandValue instanceof IBooleanValue) {
 				IBooleanValue booleanResult = (IBooleanValue) operandValue;
 				if (!booleanResult.booleanValue()) {
-					return context.getValueFactory().createBooleanValue(false);
+					return valueFactory.createBooleanValue(context.getComputationContext(), false);
 				}
 			} else {
 				throw new RuntimeException("Logical expression operands must be boolean");
 			}
 		}
-		return context.getValueFactory().createBooleanValue(true);
+		return valueFactory.createBooleanValue(context.getComputationContext(), true);
 	}
 	
 	/* (non-Javadoc)
@@ -180,13 +183,13 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 			if (operandValue instanceof IBooleanValue) {
 				IBooleanValue booleanResult = (IBooleanValue) operandValue;
 				if (booleanResult.booleanValue()) {
-					return context.getValueFactory().createBooleanValue(true);
+					return valueFactory.createBooleanValue(context.getComputationContext(), true);
 				}
 			} else {
 				throw new RuntimeException("Logical expression operands must be boolean");
 			}
 		}
-		return context.getValueFactory().createBooleanValue(false);
+		return valueFactory.createBooleanValue(context.getComputationContext(), false);
 	}
 	
 	/* (non-Javadoc)
@@ -246,7 +249,7 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 	public IValue caseTypeTestExpression(TypeTestExpression typeTestExpression) {
 		IValue value = doSwitch(typeTestExpression.getExpression());
 		DataType dataType = new DataTypeSpecifierEvaluator(context).doSwitch(typeTestExpression.getType());
-		return context.getValueFactory().createBooleanValue(dataType.isAssignableFrom(value.getDataType()));
+		return valueFactory.createBooleanValue(context.getComputationContext(), dataType.isAssignableFrom(value.getDataType()));
 	}
 
 	/* (non-Javadoc)
@@ -263,7 +266,7 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 		case LOGICAL_NOT:
 			if (operandValue instanceof IBooleanValue) {
 				IBooleanValue booleanResult = (IBooleanValue) operandValue;
-				result = context.getValueFactory().createBooleanValue(!booleanResult.booleanValue());
+				result = valueFactory.createBooleanValue(context.getComputationContext(), !booleanResult.booleanValue());
 			} else {
 				result = InvalidValue.SINGLETON;
 			}
@@ -320,7 +323,7 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 			if (unitConstructionOperator.getUnit().getNumerator() != null) {
 				unit = new UnitExpressionHelper().evaluate(unitConstructionOperator.getUnit());
 			}
-			return new UnitValue(unit);
+			return new UnitValue(context.getComputationContext(), unit);
 		} catch (InvalidUnitExpressionOperandException e) {
 			throw new RuntimeException("Invalid unit", e);
 		}
@@ -341,7 +344,7 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 		} catch (InvalidUnitExpressionOperandException e) {
 			throw new RuntimeException("Invalid unit", e);
 		}
-		return context.getValueFactory().createRealValue(realType, realLiteral.getValue());
+		return valueFactory.createRealValue(context.getComputationContext(), realType, realLiteral.getValue());
 	}
 
 	/* (non-Javadoc)
@@ -359,7 +362,7 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 		} catch (InvalidUnitExpressionOperandException e) {
 			throw new RuntimeException("Invalid unit", e);
 		}
-		return context.getValueFactory().createIntegerValue(integerType, integerLiteral.getValue());
+		return valueFactory.createIntegerValue(context.getComputationContext(), integerType, integerLiteral.getValue());
 	}
 	
 	/* (non-Javadoc)
@@ -367,7 +370,7 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 	 */
 	@Override
 	public IValue caseBooleanLiteral(BooleanLiteral booleanLiteral) {
-		return context.getValueFactory().createBooleanValue(booleanLiteral.getValue() == BooleanKind.TRUE);
+		return valueFactory.createBooleanValue(context.getComputationContext(), booleanLiteral.getValue() == BooleanKind.TRUE);
 	}
 
 	/* (non-Javadoc)
@@ -375,7 +378,7 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 	 */
 	@Override
 	public IValue caseStringLiteral(StringLiteral stringLiteral) {
-		return new StringValue(stringLiteral.getValue());
+		return new StringValue(context.getComputationContext(), stringLiteral.getValue());
 	}
 	
 	/* (non-Javadoc)
@@ -410,7 +413,7 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 		public IValue caseBuiltinFunctionCall(BuiltinFunctionCall builtinFunctionCall) {
 			IFunction behavior = builtinFunctionLookupTable.getFunction(builtinFunctionCall.getName());
 			if (behavior != null) {
-				return behavior.call(builtinFunctionCall.getArguments());
+				return behavior.call(context, builtinFunctionCall.getArguments());
 			}
 			return super.caseBuiltinFunctionCall(builtinFunctionCall);
 		}

@@ -8,6 +8,7 @@ package org.eclipselabs.mscript.language.il;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipselabs.mscript.language.ast.AstPackage;
@@ -405,13 +406,22 @@ public interface ILPackage extends EPackage {
 	int TEMPLATE_VARIABLE_DECLARATION__TYPE = VARIABLE_DECLARATION__TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_VARIABLE_DECLARATION__VALUE = VARIABLE_DECLARATION_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Template Variable Declaration</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TEMPLATE_VARIABLE_DECLARATION_FEATURE_COUNT = VARIABLE_DECLARATION_FEATURE_COUNT + 0;
+	int TEMPLATE_VARIABLE_DECLARATION_FEATURE_COUNT = VARIABLE_DECLARATION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -881,6 +891,16 @@ public interface ILPackage extends EPackage {
 	int INVALID_EXPRESSION_FEATURE_COUNT = AstPackage.EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
+	 * The meta object id for the '<em>IValue</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipselabs.mscript.computation.core.value.IValue
+	 * @see org.eclipselabs.mscript.language.il.impl.ILPackageImpl#getIValue()
+	 * @generated
+	 */
+	int IVALUE = 19;
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.il.ILFunctionDefinition <em>Function Definition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1060,6 +1080,17 @@ public interface ILPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getTemplateVariableDeclaration();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.il.TemplateVariableDeclaration#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see org.eclipselabs.mscript.language.il.TemplateVariableDeclaration#getValue()
+	 * @see #getTemplateVariableDeclaration()
+	 * @generated
+	 */
+	EAttribute getTemplateVariableDeclaration_Value();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.il.InputVariableDeclaration <em>Input Variable Declaration</em>}'.
@@ -1412,6 +1443,17 @@ public interface ILPackage extends EPackage {
 	EClass getInvalidExpression();
 
 	/**
+	 * Returns the meta object for data type '{@link org.eclipselabs.mscript.computation.core.value.IValue <em>IValue</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>IValue</em>'.
+	 * @see org.eclipselabs.mscript.computation.core.value.IValue
+	 * @model instanceClass="org.eclipselabs.mscript.computation.value.IValue"
+	 * @generated
+	 */
+	EDataType getIValue();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1580,6 +1622,14 @@ public interface ILPackage extends EPackage {
 		 * @generated
 		 */
 		EClass TEMPLATE_VARIABLE_DECLARATION = eINSTANCE.getTemplateVariableDeclaration();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TEMPLATE_VARIABLE_DECLARATION__VALUE = eINSTANCE.getTemplateVariableDeclaration_Value();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.il.impl.InputVariableDeclarationImpl <em>Input Variable Declaration</em>}' class.
@@ -1870,6 +1920,16 @@ public interface ILPackage extends EPackage {
 		 * @generated
 		 */
 		EClass INVALID_EXPRESSION = eINSTANCE.getInvalidExpression();
+
+		/**
+		 * The meta object literal for the '<em>IValue</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipselabs.mscript.computation.core.value.IValue
+		 * @see org.eclipselabs.mscript.language.il.impl.ILPackageImpl#getIValue()
+		 * @generated
+		 */
+		EDataType IVALUE = eINSTANCE.getIValue();
 
 	}
 

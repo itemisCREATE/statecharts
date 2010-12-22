@@ -2783,16 +2783,37 @@ ruleIfExpression returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'if' 
+((
+(
+		lv_static_0_0=	'static' 
     {
-        createLeafNode(grammarAccess.getIfExpressionAccess().getIfKeyword_0(), null); 
+        createLeafNode(grammarAccess.getIfExpressionAccess().getStaticStaticKeyword_0_0(), "static"); 
+    }
+ 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getIfExpressionRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        try {
+	       		set($current, "static", true, "static", lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
+)
+)?	'if' 
+    {
+        createLeafNode(grammarAccess.getIfExpressionAccess().getIfKeyword_1(), null); 
     }
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getIfExpressionAccess().getConditionExpressionParserRuleCall_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getIfExpressionAccess().getConditionExpressionParserRuleCall_2_0(), currentNode); 
 	    }
-		lv_condition_1_0=ruleExpression		{
+		lv_condition_2_0=ruleExpression		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getIfExpressionRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -2801,7 +2822,7 @@ ruleIfExpression returns [EObject current=null]
 	       		set(
 	       			$current, 
 	       			"condition",
-	        		lv_condition_1_0, 
+	        		lv_condition_2_0, 
 	        		"Expression", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
@@ -2813,14 +2834,14 @@ ruleIfExpression returns [EObject current=null]
 )
 )	'then' 
     {
-        createLeafNode(grammarAccess.getIfExpressionAccess().getThenKeyword_2(), null); 
+        createLeafNode(grammarAccess.getIfExpressionAccess().getThenKeyword_3(), null); 
     }
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getIfExpressionAccess().getThenExpressionExpressionParserRuleCall_3_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getIfExpressionAccess().getThenExpressionExpressionParserRuleCall_4_0(), currentNode); 
 	    }
-		lv_thenExpression_3_0=ruleExpression		{
+		lv_thenExpression_4_0=ruleExpression		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getIfExpressionRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -2829,7 +2850,7 @@ ruleIfExpression returns [EObject current=null]
 	       		set(
 	       			$current, 
 	       			"thenExpression",
-	        		lv_thenExpression_3_0, 
+	        		lv_thenExpression_4_0, 
 	        		"Expression", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
@@ -2841,14 +2862,14 @@ ruleIfExpression returns [EObject current=null]
 )
 )	'else' 
     {
-        createLeafNode(grammarAccess.getIfExpressionAccess().getElseKeyword_4(), null); 
+        createLeafNode(grammarAccess.getIfExpressionAccess().getElseKeyword_5(), null); 
     }
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getIfExpressionAccess().getElseExpressionExpressionParserRuleCall_5_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getIfExpressionAccess().getElseExpressionExpressionParserRuleCall_6_0(), currentNode); 
 	    }
-		lv_elseExpression_5_0=ruleExpression		{
+		lv_elseExpression_6_0=ruleExpression		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getIfExpressionRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -2857,7 +2878,7 @@ ruleIfExpression returns [EObject current=null]
 	       		set(
 	       			$current, 
 	       			"elseExpression",
-	        		lv_elseExpression_5_0, 
+	        		lv_elseExpression_6_0, 
 	        		"Expression", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
@@ -2890,16 +2911,37 @@ ruleSwitchExpression returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'switch' 
+((
+(
+		lv_static_0_0=	'static' 
     {
-        createLeafNode(grammarAccess.getSwitchExpressionAccess().getSwitchKeyword_0(), null); 
+        createLeafNode(grammarAccess.getSwitchExpressionAccess().getStaticStaticKeyword_0_0(), "static"); 
+    }
+ 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getSwitchExpressionRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        try {
+	       		set($current, "static", true, "static", lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
+)
+)?	'switch' 
+    {
+        createLeafNode(grammarAccess.getSwitchExpressionAccess().getSwitchKeyword_1(), null); 
     }
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getSwitchExpressionAccess().getControlExpressionExpressionParserRuleCall_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getSwitchExpressionAccess().getControlExpressionExpressionParserRuleCall_2_0(), currentNode); 
 	    }
-		lv_controlExpression_1_0=ruleExpression		{
+		lv_controlExpression_2_0=ruleExpression		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getSwitchExpressionRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -2908,7 +2950,7 @@ ruleSwitchExpression returns [EObject current=null]
 	       		set(
 	       			$current, 
 	       			"controlExpression",
-	        		lv_controlExpression_1_0, 
+	        		lv_controlExpression_2_0, 
 	        		"Expression", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
@@ -2921,9 +2963,9 @@ ruleSwitchExpression returns [EObject current=null]
 )(
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getSwitchExpressionAccess().getCasesSwitchCaseParserRuleCall_2_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getSwitchExpressionAccess().getCasesSwitchCaseParserRuleCall_3_0(), currentNode); 
 	    }
-		lv_cases_2_0=ruleSwitchCase		{
+		lv_cases_3_0=ruleSwitchCase		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getSwitchExpressionRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -2932,7 +2974,7 @@ ruleSwitchExpression returns [EObject current=null]
 	       		add(
 	       			$current, 
 	       			"cases",
-	        		lv_cases_2_0, 
+	        		lv_cases_3_0, 
 	        		"SwitchCase", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
@@ -2944,18 +2986,18 @@ ruleSwitchExpression returns [EObject current=null]
 )
 )*	'default' 
     {
-        createLeafNode(grammarAccess.getSwitchExpressionAccess().getDefaultKeyword_3(), null); 
+        createLeafNode(grammarAccess.getSwitchExpressionAccess().getDefaultKeyword_4(), null); 
     }
 	':' 
     {
-        createLeafNode(grammarAccess.getSwitchExpressionAccess().getColonKeyword_4(), null); 
+        createLeafNode(grammarAccess.getSwitchExpressionAccess().getColonKeyword_5(), null); 
     }
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getSwitchExpressionAccess().getDefaultExpressionExpressionParserRuleCall_5_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getSwitchExpressionAccess().getDefaultExpressionExpressionParserRuleCall_6_0(), currentNode); 
 	    }
-		lv_defaultExpression_5_0=ruleExpression		{
+		lv_defaultExpression_6_0=ruleExpression		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getSwitchExpressionRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -2964,7 +3006,7 @@ ruleSwitchExpression returns [EObject current=null]
 	       		set(
 	       			$current, 
 	       			"defaultExpression",
-	        		lv_defaultExpression_5_0, 
+	        		lv_defaultExpression_6_0, 
 	        		"Expression", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {

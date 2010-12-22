@@ -11,6 +11,9 @@
 
 package org.eclipselabs.mscript.language.interpreter;
 
+import org.eclipselabs.mscript.computation.core.value.IBooleanValue;
+import org.eclipselabs.mscript.computation.core.value.IValue;
+import org.eclipselabs.mscript.computation.core.value.UninitializedValue;
 import org.eclipselabs.mscript.language.il.Assignment;
 import org.eclipselabs.mscript.language.il.Compound;
 import org.eclipselabs.mscript.language.il.ForeachStatement;
@@ -18,9 +21,6 @@ import org.eclipselabs.mscript.language.il.IfStatement;
 import org.eclipselabs.mscript.language.il.LocalVariableDeclaration;
 import org.eclipselabs.mscript.language.il.Statement;
 import org.eclipselabs.mscript.language.il.util.ILSwitch;
-import org.eclipselabs.mscript.language.interpreter.value.IBooleanValue;
-import org.eclipselabs.mscript.language.interpreter.value.IValue;
-import org.eclipselabs.mscript.language.interpreter.value.UninitializedValue;
 
 /**
  * @author Andreas Unger
@@ -96,7 +96,7 @@ public class CompoundInterpreter extends ILSwitch<Boolean> {
 		if (localVariableDeclaration.getInitializer() != null) {
 			value = new ExpressionValueEvaluator(context).doSwitch(localVariableDeclaration.getInitializer());
 		} else {
-			value = new UninitializedValue();
+			value = new UninitializedValue(context.getComputationContext());
 		}
 		IVariable variable = new Variable(localVariableDeclaration, 1);
 		variable.setValue(0, value);

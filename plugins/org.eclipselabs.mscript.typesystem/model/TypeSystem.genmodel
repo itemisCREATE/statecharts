@@ -26,7 +26,8 @@
   </genAnnotations>
   <foreignModel>TypeSystem.uml</foreignModel>
   <genPackages xsi:type="genmodel:GenPackage" prefix="TypeSystem" basePackage="org.eclipselabs.mscript"
-      disposableProviderFactory="true" ecorePackage="TypeSystem.ecore#/" operationsPackage="org.eclipselabs.mscript.typesystem.internal.operations">
+      disposableProviderFactory="true" providerPackageSuffix="edit.provider" presentationPackageSuffix="editor.presentation"
+      ecorePackage="TypeSystem.ecore#/" operationsPackage="org.eclipselabs.mscript.typesystem.internal.operations">
     <genEnums xsi:type="genmodel:GenEnum" typeSafeEnumCompatible="false" ecoreEnum="TypeSystem.ecore#//OperatorKind">
       <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/Addition"/>
       <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/Subtraction"/>

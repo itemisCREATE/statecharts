@@ -12,12 +12,14 @@
 package org.eclipselabs.mscript.language.interpreter;
 
 import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipselabs.mscript.computation.core.ComputationContext;
+import org.eclipselabs.mscript.computation.core.value.AnyValue;
+import org.eclipselabs.mscript.computation.core.value.IBooleanValue;
+import org.eclipselabs.mscript.computation.core.value.IValue;
 import org.eclipselabs.mscript.language.ast.Assertion;
 import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.ast.StringLiteral;
@@ -34,13 +36,8 @@ import org.eclipselabs.mscript.language.il.transform.ExpressionTransformerContex
 import org.eclipselabs.mscript.language.il.transform.IExpressionTransformerContext;
 import org.eclipselabs.mscript.language.internal.LanguagePlugin;
 import org.eclipselabs.mscript.language.internal.util.StatusUtil;
-import org.eclipselabs.mscript.language.interpreter.value.AnyValue;
-import org.eclipselabs.mscript.language.interpreter.value.IBooleanValue;
-import org.eclipselabs.mscript.language.interpreter.value.IValue;
-import org.eclipselabs.mscript.language.interpreter.value.ValueFactory;
 import org.eclipselabs.mscript.language.util.SyntaxStatus;
 import org.eclipselabs.mscript.typesystem.BooleanType;
-import org.eclipselabs.mscript.typesystem.DataType;
 
 /**
  * @author Andreas Unger
@@ -48,7 +45,7 @@ import org.eclipselabs.mscript.typesystem.DataType;
  */
 public class AssertionEvaluator {
 
-	public IStatus evaluate(ILFunctionDefinition functionDefinition, FunctionDescriptor functionDescriptor, List<DataType> templateParameterDataTypes, List<DataType> inputParameterDataTypes) {
+	public IStatus evaluate(ILFunctionDefinition functionDefinition, FunctionDescriptor functionDescriptor) {
 		MultiStatus status = new MultiStatus(LanguagePlugin.PLUGIN_ID, 0, "Assertion failed", null);
 		
 		for (Assertion assertion : functionDescriptor.getDefinition().getAssertions()) {
@@ -77,19 +74,17 @@ public class AssertionEvaluator {
 				continue;
 			}
 			
-			IInterpreterContext interpreterContext = new InterpreterContext(new ValueFactory());
+			IInterpreterContext interpreterContext = new InterpreterContext(new ComputationContext());
 			
-			Iterator<DataType> dataTypeIterator = templateParameterDataTypes.iterator();
 			for (TemplateVariableDeclaration templateVariableDeclaration : functionDefinition.getTemplateVariableDeclarations()) {
-				IValue value = new AnyValue(dataTypeIterator.next());
+				IValue value = templateVariableDeclaration.getValue();
 				IVariable variable = new Variable(templateVariableDeclaration);
 				variable.setValue(0, value);
 				interpreterContext.getScope().add(variable);
 			}
 
-			dataTypeIterator = inputParameterDataTypes.iterator();
 			for (InputVariableDeclaration inputVariableDeclaration : functionDefinition.getInputVariableDeclarations()) {
-				IValue value = new AnyValue(dataTypeIterator.next());
+				IValue value = new AnyValue(interpreterContext.getComputationContext(), inputVariableDeclaration.getType());
 				IVariable variable = new Variable(inputVariableDeclaration);
 				variable.setValue(0, value);
 				interpreterContext.getScope().add(variable);

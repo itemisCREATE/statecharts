@@ -44,6 +44,19 @@ public class AnyDataTypeOperations extends DataTypeOperations {
 	 * @generated NOT
 	 */
 	public static  DataType evaluate(AnyDataType anyDataType, OperatorKind operator, DataType other) {
+		switch (operator) {
+		case IMPLIES:
+		case LOGICAL_OR:
+		case LOGICAL_AND:
+		case LOGICAL_NOT:
+		case GREATER_THAN:
+		case GREATER_THAN_OR_EQUAL_TO:
+		case LESS_THAN:
+		case LESS_THAN_OR_EQUAL_TO:
+		case EQUAL_TO:
+		case NOT_EQUAL_TO:
+			return TypeSystemFactory.eINSTANCE.createBooleanType();
+		}
 		return TypeSystemFactory.eINSTANCE.createAnyDataType();
 	}
 

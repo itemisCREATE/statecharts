@@ -1425,97 +1425,113 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	public class IfExpressionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "IfExpression");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cIfKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cConditionAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cConditionExpressionParserRuleCall_1_0 = (RuleCall)cConditionAssignment_1.eContents().get(0);
-		private final Keyword cThenKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cThenExpressionAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cThenExpressionExpressionParserRuleCall_3_0 = (RuleCall)cThenExpressionAssignment_3.eContents().get(0);
-		private final Keyword cElseKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		private final Assignment cElseExpressionAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final RuleCall cElseExpressionExpressionParserRuleCall_5_0 = (RuleCall)cElseExpressionAssignment_5.eContents().get(0);
+		private final Assignment cStaticAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final Keyword cStaticStaticKeyword_0_0 = (Keyword)cStaticAssignment_0.eContents().get(0);
+		private final Keyword cIfKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cConditionAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cConditionExpressionParserRuleCall_2_0 = (RuleCall)cConditionAssignment_2.eContents().get(0);
+		private final Keyword cThenKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cThenExpressionAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cThenExpressionExpressionParserRuleCall_4_0 = (RuleCall)cThenExpressionAssignment_4.eContents().get(0);
+		private final Keyword cElseKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Assignment cElseExpressionAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final RuleCall cElseExpressionExpressionParserRuleCall_6_0 = (RuleCall)cElseExpressionAssignment_6.eContents().get(0);
 		
 		//IfExpression:
-		//	"if" condition=Expression "then" thenExpression=Expression "else" elseExpression=Expression;
+		//	static?="static"? "if" condition=Expression "then" thenExpression=Expression "else" elseExpression=Expression;
 		public ParserRule getRule() { return rule; }
 
-		//"if" condition=Expression "then" thenExpression=Expression "else" elseExpression=Expression
+		//static?="static"? "if" condition=Expression "then" thenExpression=Expression "else" elseExpression=Expression
 		public Group getGroup() { return cGroup; }
 
+		//static?="static"?
+		public Assignment getStaticAssignment_0() { return cStaticAssignment_0; }
+
+		//"static"
+		public Keyword getStaticStaticKeyword_0_0() { return cStaticStaticKeyword_0_0; }
+
 		//"if"
-		public Keyword getIfKeyword_0() { return cIfKeyword_0; }
+		public Keyword getIfKeyword_1() { return cIfKeyword_1; }
 
 		//condition=Expression
-		public Assignment getConditionAssignment_1() { return cConditionAssignment_1; }
+		public Assignment getConditionAssignment_2() { return cConditionAssignment_2; }
 
 		//Expression
-		public RuleCall getConditionExpressionParserRuleCall_1_0() { return cConditionExpressionParserRuleCall_1_0; }
+		public RuleCall getConditionExpressionParserRuleCall_2_0() { return cConditionExpressionParserRuleCall_2_0; }
 
 		//"then"
-		public Keyword getThenKeyword_2() { return cThenKeyword_2; }
+		public Keyword getThenKeyword_3() { return cThenKeyword_3; }
 
 		//thenExpression=Expression
-		public Assignment getThenExpressionAssignment_3() { return cThenExpressionAssignment_3; }
+		public Assignment getThenExpressionAssignment_4() { return cThenExpressionAssignment_4; }
 
 		//Expression
-		public RuleCall getThenExpressionExpressionParserRuleCall_3_0() { return cThenExpressionExpressionParserRuleCall_3_0; }
+		public RuleCall getThenExpressionExpressionParserRuleCall_4_0() { return cThenExpressionExpressionParserRuleCall_4_0; }
 
 		//"else"
-		public Keyword getElseKeyword_4() { return cElseKeyword_4; }
+		public Keyword getElseKeyword_5() { return cElseKeyword_5; }
 
 		//elseExpression=Expression
-		public Assignment getElseExpressionAssignment_5() { return cElseExpressionAssignment_5; }
+		public Assignment getElseExpressionAssignment_6() { return cElseExpressionAssignment_6; }
 
 		//Expression
-		public RuleCall getElseExpressionExpressionParserRuleCall_5_0() { return cElseExpressionExpressionParserRuleCall_5_0; }
+		public RuleCall getElseExpressionExpressionParserRuleCall_6_0() { return cElseExpressionExpressionParserRuleCall_6_0; }
 	}
 
 	public class SwitchExpressionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SwitchExpression");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cSwitchKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cControlExpressionAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cControlExpressionExpressionParserRuleCall_1_0 = (RuleCall)cControlExpressionAssignment_1.eContents().get(0);
-		private final Assignment cCasesAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cCasesSwitchCaseParserRuleCall_2_0 = (RuleCall)cCasesAssignment_2.eContents().get(0);
-		private final Keyword cDefaultKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		private final Keyword cColonKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		private final Assignment cDefaultExpressionAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final RuleCall cDefaultExpressionExpressionParserRuleCall_5_0 = (RuleCall)cDefaultExpressionAssignment_5.eContents().get(0);
+		private final Assignment cStaticAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final Keyword cStaticStaticKeyword_0_0 = (Keyword)cStaticAssignment_0.eContents().get(0);
+		private final Keyword cSwitchKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cControlExpressionAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cControlExpressionExpressionParserRuleCall_2_0 = (RuleCall)cControlExpressionAssignment_2.eContents().get(0);
+		private final Assignment cCasesAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cCasesSwitchCaseParserRuleCall_3_0 = (RuleCall)cCasesAssignment_3.eContents().get(0);
+		private final Keyword cDefaultKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Keyword cColonKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Assignment cDefaultExpressionAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final RuleCall cDefaultExpressionExpressionParserRuleCall_6_0 = (RuleCall)cDefaultExpressionAssignment_6.eContents().get(0);
 		
 		//SwitchExpression:
-		//	"switch" controlExpression=Expression cases+=SwitchCase* "default" ":" defaultExpression=Expression;
+		//	static?="static"? "switch" controlExpression=Expression cases+=SwitchCase* "default" ":" defaultExpression=Expression;
 		public ParserRule getRule() { return rule; }
 
-		//"switch" controlExpression=Expression cases+=SwitchCase* "default" ":" defaultExpression=Expression
+		//static?="static"? "switch" controlExpression=Expression cases+=SwitchCase* "default" ":" defaultExpression=Expression
 		public Group getGroup() { return cGroup; }
 
+		//static?="static"?
+		public Assignment getStaticAssignment_0() { return cStaticAssignment_0; }
+
+		//"static"
+		public Keyword getStaticStaticKeyword_0_0() { return cStaticStaticKeyword_0_0; }
+
 		//"switch"
-		public Keyword getSwitchKeyword_0() { return cSwitchKeyword_0; }
+		public Keyword getSwitchKeyword_1() { return cSwitchKeyword_1; }
 
 		//controlExpression=Expression
-		public Assignment getControlExpressionAssignment_1() { return cControlExpressionAssignment_1; }
+		public Assignment getControlExpressionAssignment_2() { return cControlExpressionAssignment_2; }
 
 		//Expression
-		public RuleCall getControlExpressionExpressionParserRuleCall_1_0() { return cControlExpressionExpressionParserRuleCall_1_0; }
+		public RuleCall getControlExpressionExpressionParserRuleCall_2_0() { return cControlExpressionExpressionParserRuleCall_2_0; }
 
 		//cases+=SwitchCase*
-		public Assignment getCasesAssignment_2() { return cCasesAssignment_2; }
+		public Assignment getCasesAssignment_3() { return cCasesAssignment_3; }
 
 		//SwitchCase
-		public RuleCall getCasesSwitchCaseParserRuleCall_2_0() { return cCasesSwitchCaseParserRuleCall_2_0; }
+		public RuleCall getCasesSwitchCaseParserRuleCall_3_0() { return cCasesSwitchCaseParserRuleCall_3_0; }
 
 		//"default"
-		public Keyword getDefaultKeyword_3() { return cDefaultKeyword_3; }
+		public Keyword getDefaultKeyword_4() { return cDefaultKeyword_4; }
 
 		//":"
-		public Keyword getColonKeyword_4() { return cColonKeyword_4; }
+		public Keyword getColonKeyword_5() { return cColonKeyword_5; }
 
 		//defaultExpression=Expression
-		public Assignment getDefaultExpressionAssignment_5() { return cDefaultExpressionAssignment_5; }
+		public Assignment getDefaultExpressionAssignment_6() { return cDefaultExpressionAssignment_6; }
 
 		//Expression
-		public RuleCall getDefaultExpressionExpressionParserRuleCall_5_0() { return cDefaultExpressionExpressionParserRuleCall_5_0; }
+		public RuleCall getDefaultExpressionExpressionParserRuleCall_6_0() { return cDefaultExpressionExpressionParserRuleCall_6_0; }
 	}
 
 	public class SwitchCaseElements extends AbstractParserRuleElementFinder {
@@ -3974,7 +3990,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//IfExpression:
-	//	"if" condition=Expression "then" thenExpression=Expression "else" elseExpression=Expression;
+	//	static?="static"? "if" condition=Expression "then" thenExpression=Expression "else" elseExpression=Expression;
 	public IfExpressionElements getIfExpressionAccess() {
 		return (pIfExpression != null) ? pIfExpression : (pIfExpression = new IfExpressionElements());
 	}
@@ -3984,7 +4000,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//SwitchExpression:
-	//	"switch" controlExpression=Expression cases+=SwitchCase* "default" ":" defaultExpression=Expression;
+	//	static?="static"? "switch" controlExpression=Expression cases+=SwitchCase* "default" ":" defaultExpression=Expression;
 	public SwitchExpressionElements getSwitchExpressionAccess() {
 		return (pSwitchExpression != null) ? pSwitchExpression : (pSwitchExpression = new SwitchExpressionElements());
 	}

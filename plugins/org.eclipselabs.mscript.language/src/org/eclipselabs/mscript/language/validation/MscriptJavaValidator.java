@@ -6,6 +6,9 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.validation.Check;
+import org.eclipselabs.mscript.computation.core.ComputationContext;
+import org.eclipselabs.mscript.computation.core.value.AnyValue;
+import org.eclipselabs.mscript.computation.core.value.IValue;
 import org.eclipselabs.mscript.language.ast.ArrayElementAccess;
 import org.eclipselabs.mscript.language.ast.ArraySubscript;
 import org.eclipselabs.mscript.language.ast.AstPackage;
@@ -83,10 +86,11 @@ public class MscriptJavaValidator extends AbstractMscriptJavaValidator {
 			validator.validate(it.next(), getChain(), new HashMap<Object, Object>());
 		}
 
-		List<DataType> templateParameterDataTypes = new ArrayList<DataType>();
+		List<IValue> templateArguments = new ArrayList<IValue>();
 		for (int i = 0, n = functionDefinition.getTemplateParameterDeclarations().size(); i < n; ++i) {
 			AnyDataType type = TypeSystemFactory.eINSTANCE.createAnyDataType();
-			templateParameterDataTypes.add(type);
+			AnyValue value = new AnyValue(new ComputationContext(), type);
+			templateArguments.add(value);
 		}
 
 		List<DataType> inputParameterDataTypes = new ArrayList<DataType>();
@@ -95,7 +99,7 @@ public class MscriptJavaValidator extends AbstractMscriptJavaValidator {
 			inputParameterDataTypes.add(type);
 		}
 
-		IFunctionDefinitionTransformerResult functionDefinitionTransformerResult = new FunctionDefinitionTransformer().transform(functionDescriptor, templateParameterDataTypes, inputParameterDataTypes);
+		IFunctionDefinitionTransformerResult functionDefinitionTransformerResult = new FunctionDefinitionTransformer().transform(functionDescriptor, null, templateArguments, inputParameterDataTypes);
 
 		SyntaxStatus.addAllSyntaxStatusesToDiagnostics(
 				functionDefinitionTransformerResult.getStatus(),

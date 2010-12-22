@@ -13,8 +13,8 @@ package org.eclipselabs.mscript.language.interpreter;
 
 import java.util.ArrayList;
 
+import org.eclipselabs.mscript.computation.core.value.IValue;
 import org.eclipselabs.mscript.language.il.VariableDeclaration;
-import org.eclipselabs.mscript.language.interpreter.value.IValue;
 
 /**
  * @author Andreas Unger

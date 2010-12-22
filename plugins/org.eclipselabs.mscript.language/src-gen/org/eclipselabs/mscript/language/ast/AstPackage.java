@@ -1080,13 +1080,22 @@ public interface AstPackage extends EPackage
   int IF_EXPRESSION = 28;
 
   /**
+   * The feature id for the '<em><b>Static</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int IF_EXPRESSION__STATIC = EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
    * The feature id for the '<em><b>Condition</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int IF_EXPRESSION__CONDITION = EXPRESSION_FEATURE_COUNT + 0;
+  int IF_EXPRESSION__CONDITION = EXPRESSION_FEATURE_COUNT + 1;
 
   /**
    * The feature id for the '<em><b>Then Expression</b></em>' containment reference.
@@ -1095,7 +1104,7 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int IF_EXPRESSION__THEN_EXPRESSION = EXPRESSION_FEATURE_COUNT + 1;
+  int IF_EXPRESSION__THEN_EXPRESSION = EXPRESSION_FEATURE_COUNT + 2;
 
   /**
    * The feature id for the '<em><b>Else Expression</b></em>' containment reference.
@@ -1104,7 +1113,7 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int IF_EXPRESSION__ELSE_EXPRESSION = EXPRESSION_FEATURE_COUNT + 2;
+  int IF_EXPRESSION__ELSE_EXPRESSION = EXPRESSION_FEATURE_COUNT + 3;
 
   /**
    * The number of structural features of the '<em>If Expression</em>' class.
@@ -1113,7 +1122,7 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int IF_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 3;
+  int IF_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 4;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.SwitchExpressionImpl <em>Switch Expression</em>}' class.
@@ -1126,13 +1135,22 @@ public interface AstPackage extends EPackage
   int SWITCH_EXPRESSION = 29;
 
   /**
+   * The feature id for the '<em><b>Static</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SWITCH_EXPRESSION__STATIC = EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
    * The feature id for the '<em><b>Control Expression</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int SWITCH_EXPRESSION__CONTROL_EXPRESSION = EXPRESSION_FEATURE_COUNT + 0;
+  int SWITCH_EXPRESSION__CONTROL_EXPRESSION = EXPRESSION_FEATURE_COUNT + 1;
 
   /**
    * The feature id for the '<em><b>Cases</b></em>' containment reference list.
@@ -1141,7 +1159,7 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int SWITCH_EXPRESSION__CASES = EXPRESSION_FEATURE_COUNT + 1;
+  int SWITCH_EXPRESSION__CASES = EXPRESSION_FEATURE_COUNT + 2;
 
   /**
    * The feature id for the '<em><b>Default Expression</b></em>' containment reference.
@@ -1150,7 +1168,7 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int SWITCH_EXPRESSION__DEFAULT_EXPRESSION = EXPRESSION_FEATURE_COUNT + 2;
+  int SWITCH_EXPRESSION__DEFAULT_EXPRESSION = EXPRESSION_FEATURE_COUNT + 3;
 
   /**
    * The number of structural features of the '<em>Switch Expression</em>' class.
@@ -1159,7 +1177,7 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int SWITCH_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 3;
+  int SWITCH_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 4;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.SwitchCaseImpl <em>Switch Case</em>}' class.
@@ -3440,6 +3458,17 @@ public interface AstPackage extends EPackage
   EClass getIfExpression();
 
   /**
+   * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.ast.IfExpression#isStatic <em>Static</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Static</em>'.
+   * @see org.eclipselabs.mscript.language.ast.IfExpression#isStatic()
+   * @see #getIfExpression()
+   * @generated
+   */
+  EAttribute getIfExpression_Static();
+
+  /**
    * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.IfExpression#getCondition <em>Condition</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -3481,6 +3510,17 @@ public interface AstPackage extends EPackage
    * @generated
    */
   EClass getSwitchExpression();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.ast.SwitchExpression#isStatic <em>Static</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Static</em>'.
+   * @see org.eclipselabs.mscript.language.ast.SwitchExpression#isStatic()
+   * @see #getSwitchExpression()
+   * @generated
+   */
+  EAttribute getSwitchExpression_Static();
 
   /**
    * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.SwitchExpression#getControlExpression <em>Control Expression</em>}'.
@@ -5408,6 +5448,14 @@ public interface AstPackage extends EPackage
     EClass IF_EXPRESSION = eINSTANCE.getIfExpression();
 
     /**
+     * The meta object literal for the '<em><b>Static</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute IF_EXPRESSION__STATIC = eINSTANCE.getIfExpression_Static();
+
+    /**
      * The meta object literal for the '<em><b>Condition</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -5440,6 +5488,14 @@ public interface AstPackage extends EPackage
      * @generated
      */
     EClass SWITCH_EXPRESSION = eINSTANCE.getSwitchExpression();
+
+    /**
+     * The meta object literal for the '<em><b>Static</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute SWITCH_EXPRESSION__STATIC = eINSTANCE.getSwitchExpression_Static();
 
     /**
      * The meta object literal for the '<em><b>Control Expression</b></em>' containment reference feature.

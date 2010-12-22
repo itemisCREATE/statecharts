@@ -7,6 +7,7 @@
   <foreignModel>IL.ecore</foreignModel>
   <genPackages prefix="IL" basePackage="org.eclipselabs.mscript.language" disposableProviderFactory="true"
       ecorePackage="IL.ecore#/">
+    <genDataTypes ecoreDataType="IL.ecore#//IValue"/>
     <genClasses ecoreClass="IL.ecore#//ILFunctionDefinition">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute IL.ecore#//ILFunctionDefinition/stateful"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute IL.ecore#//ILFunctionDefinition/name"/>
@@ -32,7 +33,9 @@
     <genClasses image="false" ecoreClass="IL.ecore#//StatefulVariableDeclaration">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute IL.ecore#//StatefulVariableDeclaration/circularBufferSize"/>
     </genClasses>
-    <genClasses ecoreClass="IL.ecore#//TemplateVariableDeclaration"/>
+    <genClasses ecoreClass="IL.ecore#//TemplateVariableDeclaration">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute IL.ecore#//TemplateVariableDeclaration/value"/>
+    </genClasses>
     <genClasses ecoreClass="IL.ecore#//InputVariableDeclaration">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference IL.ecore#//InputVariableDeclaration/feedingCompounds"/>
     </genClasses>

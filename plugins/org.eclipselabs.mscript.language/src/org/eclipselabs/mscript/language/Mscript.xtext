@@ -150,10 +150,10 @@ LetExpressionVariableDeclaration :
 	(names+=ID | '(' names+=ID (',' names+=ID)+ ')') '=' assignedExpression=Expression;
 	
 IfExpression :
-	'if' condition=Expression 'then' thenExpression=Expression 'else' elseExpression=Expression;
+	(static?='static')? 'if' condition=Expression 'then' thenExpression=Expression 'else' elseExpression=Expression;
 
 SwitchExpression :
-	'switch' controlExpression=Expression
+	(static?='static')? 'switch' controlExpression=Expression
 		(cases+=SwitchCase)*
 		'default' ':' defaultExpression=Expression;
 

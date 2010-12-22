@@ -133,11 +133,13 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//LetExpressionVariableDeclaration/assignedExpression"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//IfExpression">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//IfExpression/static"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//IfExpression/condition"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//IfExpression/thenExpression"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//IfExpression/elseExpression"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//SwitchExpression">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//SwitchExpression/static"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//SwitchExpression/controlExpression"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//SwitchExpression/cases"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//SwitchExpression/defaultExpression"/>

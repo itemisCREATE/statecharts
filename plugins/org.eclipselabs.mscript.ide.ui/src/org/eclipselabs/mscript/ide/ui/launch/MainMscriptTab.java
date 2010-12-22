@@ -52,6 +52,7 @@ public class MainMscriptTab extends AbstractLaunchConfigurationTab {
 	private Text templateArgumentsText;
 	private Text inputFilePathText;
 	private Text outputFilePathText;
+	private Text computationModelText;
 	
 	private final ModifyListener modifyListener = new ModifyListener() {
 		
@@ -156,6 +157,28 @@ public class MainMscriptTab extends AbstractLaunchConfigurationTab {
 				}
 			}
 		});
+
+		new Label(composite, SWT.NONE).setText("Computation model:");
+		computationModelText = new Text(composite, SWT.SINGLE | SWT.BORDER);
+		computationModelText.addModifyListener(modifyListener);
+		computationModelText.setLayoutData(new GridData(GridData.FILL, GridData.BEGINNING, true, false));
+		
+		browseButton = createPushButton(composite, "Browse...", null);
+		browseButton.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				FilteredResourcesSelectionDialog d = new FilteredResourcesSelectionDialog(
+						composite.getShell(),
+						false,
+						ResourcesPlugin.getWorkspace().getRoot(),
+						IResource.FILE);
+				d.setInitialPattern("*.computationmodel");
+				d.open();
+				Object firstResult = d.getFirstResult();
+				if (firstResult instanceof IFile) {
+					computationModelText.setText(((IFile) firstResult).getFullPath().toString());
+				}
+			}
+		});
 	}
 
 	public String getName() {
@@ -169,6 +192,7 @@ public class MainMscriptTab extends AbstractLaunchConfigurationTab {
 			templateArgumentsText.setText(configuration.getAttribute(MscriptLaunchConfigurationDelegate.ATTRIBUTE__TEMPLATE_ARGUMENTS, ""));
 			inputFilePathText.setText(configuration.getAttribute(MscriptLaunchConfigurationDelegate.ATTRIBUTE__INPUT_FILE_PATH, ""));
 			outputFilePathText.setText(configuration.getAttribute(MscriptLaunchConfigurationDelegate.ATTRIBUTE__OUTPUT_FILE_PATH, ""));
+			computationModelText.setText(configuration.getAttribute(MscriptLaunchConfigurationDelegate.ATTRIBUTE__COMPUTATION_MODEL, ""));
 		} catch (CoreException e) {
 			IDEUIPlugin.getDefault().getLog().log(e.getStatus());
 		}
@@ -181,6 +205,7 @@ public class MainMscriptTab extends AbstractLaunchConfigurationTab {
 		configuration.setAttribute(MscriptLaunchConfigurationDelegate.ATTRIBUTE__TEMPLATE_ARGUMENTS, templateArgumentsText.getText());
 		configuration.setAttribute(MscriptLaunchConfigurationDelegate.ATTRIBUTE__INPUT_FILE_PATH, inputFilePathText.getText());
 		configuration.setAttribute(MscriptLaunchConfigurationDelegate.ATTRIBUTE__OUTPUT_FILE_PATH, outputFilePathText.getText());
+		configuration.setAttribute(MscriptLaunchConfigurationDelegate.ATTRIBUTE__COMPUTATION_MODEL, computationModelText.getText());
 		setErrorMessage(errorMessage);
 	}
 
@@ -212,6 +237,9 @@ public class MainMscriptTab extends AbstractLaunchConfigurationTab {
 		configuration.setAttribute(
 				MscriptLaunchConfigurationDelegate.ATTRIBUTE__OUTPUT_FILE_PATH,
 				filePath != null ? filePath.removeFileExtension().addFileExtension("csv").toString() : "");
+		configuration.setAttribute(
+				MscriptLaunchConfigurationDelegate.ATTRIBUTE__COMPUTATION_MODEL,
+				"");
 	}
 
 }

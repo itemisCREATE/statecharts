@@ -13,8 +13,8 @@ package org.eclipselabs.mscript.language.interpreter;
 
 import java.util.List;
 
+import org.eclipselabs.mscript.computation.core.value.IValue;
 import org.eclipselabs.mscript.language.ast.Expression;
-import org.eclipselabs.mscript.language.interpreter.value.IValue;
 
 /**
  * @author Andreas Unger
@@ -24,6 +24,6 @@ import org.eclipselabs.mscript.language.interpreter.value.IValue;
  */
 public interface IFunction {
 
-	IValue call(List<Expression> arguments);
+	IValue call(IInterpreterContext context, List<Expression> arguments);
 	
 }

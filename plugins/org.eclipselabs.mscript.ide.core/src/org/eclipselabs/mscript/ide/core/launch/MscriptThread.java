@@ -21,12 +21,13 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.xtext.util.StringInputStream;
+import org.eclipselabs.mscript.computation.core.value.IRealValue;
+import org.eclipselabs.mscript.computation.core.value.IValue;
+import org.eclipselabs.mscript.computation.core.value.ValueFactory;
 import org.eclipselabs.mscript.ide.core.IDECorePlugin;
 import org.eclipselabs.mscript.language.interpreter.IFunctor;
 import org.eclipselabs.mscript.language.interpreter.IInterpreterContext;
 import org.eclipselabs.mscript.language.interpreter.Interpreter;
-import org.eclipselabs.mscript.language.interpreter.value.INumericValue;
-import org.eclipselabs.mscript.language.interpreter.value.IValue;
 import org.eclipselabs.mscript.typesystem.RealType;
 import org.eclipselabs.mscript.typesystem.TypeSystemFactory;
 import org.eclipselabs.mscript.typesystem.util.TypeSystemUtil;
@@ -68,6 +69,8 @@ public class MscriptThread extends Thread {
 	@Override
 	public void run() {
 		try {
+			ValueFactory valueFactory = new ValueFactory();
+			
 			new Interpreter().initialize(interpreterContext, functor);
 			
 			BufferedReader reader = new BufferedReader(new InputStreamReader(inputFile.getContents()));
@@ -81,7 +84,7 @@ public class MscriptThread extends Thread {
 					double value = Double.parseDouble(stringValue);
 					RealType realType = TypeSystemFactory.eINSTANCE.createRealType();
 					realType.setUnit(TypeSystemUtil.createUnit());
-					inputValues.add(interpreterContext.getValueFactory().createRealValue(realType, value));
+					inputValues.add(valueFactory.createRealValue(interpreterContext.getComputationContext(), realType, value));
 				}
 				StringBuilder sb = new StringBuilder();
 				List<IValue> outputValues = new Interpreter().execute(interpreterContext, functor, inputValues);
@@ -89,8 +92,8 @@ public class MscriptThread extends Thread {
 					if (sb.length() > 0) {
 						sb.append(",");
 					}
-					if (outputValue instanceof INumericValue) {
-						INumericValue numericValue = (INumericValue) outputValue;
+					if (outputValue instanceof IRealValue) {
+						IRealValue numericValue = (IRealValue) outputValue;
 						sb.append(numericValue.doubleValue());
 					} else {
 						sb.append("NaN");

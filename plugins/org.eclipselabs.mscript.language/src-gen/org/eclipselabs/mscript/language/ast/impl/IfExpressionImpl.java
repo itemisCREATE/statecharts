@@ -24,6 +24,7 @@ import org.eclipselabs.mscript.language.ast.IfExpression;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.IfExpressionImpl#isStatic <em>Static</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.IfExpressionImpl#getCondition <em>Condition</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.IfExpressionImpl#getThenExpression <em>Then Expression</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.IfExpressionImpl#getElseExpression <em>Else Expression</em>}</li>
@@ -34,6 +35,26 @@ import org.eclipselabs.mscript.language.ast.IfExpression;
  */
 public class IfExpressionImpl extends ExpressionImpl implements IfExpression
 {
+  /**
+   * The default value of the '{@link #isStatic() <em>Static</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isStatic()
+   * @generated
+   * @ordered
+   */
+  protected static final boolean STATIC_EDEFAULT = false;
+
+  /**
+   * The cached value of the '{@link #isStatic() <em>Static</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isStatic()
+   * @generated
+   * @ordered
+   */
+  protected boolean static_ = STATIC_EDEFAULT;
+
   /**
    * The cached value of the '{@link #getCondition() <em>Condition</em>}' containment reference.
    * <!-- begin-user-doc -->
@@ -83,6 +104,29 @@ public class IfExpressionImpl extends ExpressionImpl implements IfExpression
   protected EClass eStaticClass()
   {
     return AstPackage.Literals.IF_EXPRESSION;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public boolean isStatic()
+  {
+    return static_;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setStatic(boolean newStatic)
+  {
+    boolean oldStatic = static_;
+    static_ = newStatic;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.IF_EXPRESSION__STATIC, oldStatic, static_));
   }
 
   /**
@@ -259,6 +303,8 @@ public class IfExpressionImpl extends ExpressionImpl implements IfExpression
   {
     switch (featureID)
     {
+      case AstPackage.IF_EXPRESSION__STATIC:
+        return isStatic();
       case AstPackage.IF_EXPRESSION__CONDITION:
         return getCondition();
       case AstPackage.IF_EXPRESSION__THEN_EXPRESSION:
@@ -279,6 +325,9 @@ public class IfExpressionImpl extends ExpressionImpl implements IfExpression
   {
     switch (featureID)
     {
+      case AstPackage.IF_EXPRESSION__STATIC:
+        setStatic((Boolean)newValue);
+        return;
       case AstPackage.IF_EXPRESSION__CONDITION:
         setCondition((Expression)newValue);
         return;
@@ -302,6 +351,9 @@ public class IfExpressionImpl extends ExpressionImpl implements IfExpression
   {
     switch (featureID)
     {
+      case AstPackage.IF_EXPRESSION__STATIC:
+        setStatic(STATIC_EDEFAULT);
+        return;
       case AstPackage.IF_EXPRESSION__CONDITION:
         setCondition((Expression)null);
         return;
@@ -325,6 +377,8 @@ public class IfExpressionImpl extends ExpressionImpl implements IfExpression
   {
     switch (featureID)
     {
+      case AstPackage.IF_EXPRESSION__STATIC:
+        return static_ != STATIC_EDEFAULT;
       case AstPackage.IF_EXPRESSION__CONDITION:
         return condition != null;
       case AstPackage.IF_EXPRESSION__THEN_EXPRESSION:
@@ -333,6 +387,23 @@ public class IfExpressionImpl extends ExpressionImpl implements IfExpression
         return elseExpression != null;
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (static: ");
+    result.append(static_);
+    result.append(')');
+    return result.toString();
   }
 
 } //IfExpressionImpl
