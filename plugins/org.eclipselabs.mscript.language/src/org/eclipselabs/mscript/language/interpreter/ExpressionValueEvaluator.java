@@ -402,7 +402,7 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 		 */
 		@Override
 		public IValue caseVariableReference(VariableReference variableReference) {
-			IVariable variable = context.getScope().findInEnclosingScopes(variableReference.getDeclaration());
+			IVariable variable = context.getScope().findInEnclosingScopes(variableReference.getTarget());
 			return variable.getValue(variableReference.getStepIndex());
 		}
 		

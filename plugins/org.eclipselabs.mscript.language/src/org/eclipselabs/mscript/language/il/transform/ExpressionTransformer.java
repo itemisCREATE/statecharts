@@ -156,7 +156,7 @@ public class ExpressionTransformer extends AstSwitch<Expression> {
 		context.getScope().getCompound().getStatements().add(compoundStatement);
 		
 		VariableReference variableReference = ILFactory.eINSTANCE.createVariableReference();
-		variableReference.setDeclaration(localVariableDeclaration);
+		variableReference.setTarget(localVariableDeclaration);
 		variableReference.setStepIndex(0);
 		ILUtil.adaptDataType(variableReference, localVariableDeclaration.getType());
 		return variableReference;
@@ -197,7 +197,7 @@ public class ExpressionTransformer extends AstSwitch<Expression> {
 		context.getScope().getCompound().getStatements().add(ifStatement);
 		
 		VariableReference variableReference = ILFactory.eINSTANCE.createVariableReference();
-		variableReference.setDeclaration(localVariableDeclaration);
+		variableReference.setTarget(localVariableDeclaration);
 		variableReference.setStepIndex(0);
 		ILUtil.adaptDataType(variableReference, localVariableDeclaration.getType());
 		return variableReference;
@@ -246,7 +246,7 @@ public class ExpressionTransformer extends AstSwitch<Expression> {
 			try {
 				StepExpressionResult stepExpressionResult = new StepExpressionHelper().getStepExpression(featureCallPartIterator);
 				VariableReference variableReference = ILFactory.eINSTANCE.createVariableReference();
-				variableReference.setDeclaration(variableDeclaration);
+				variableReference.setTarget(variableDeclaration);
 				variableReference.setStepIndex(stepExpressionResult.getIndex());
 				if (variableDeclaration.getType() == null) {
 					throw new RuntimeException("Data type of variable declaration not set");
@@ -311,7 +311,7 @@ public class ExpressionTransformer extends AstSwitch<Expression> {
 			IIterationCallTransformerResult result = transformer.transform(context, iterationCall, targetExpression);
 			
 			VariableReference variableReference = ILFactory.eINSTANCE.createVariableReference();
-			variableReference.setDeclaration(result.getLocalVariableDeclaration());
+			variableReference.setTarget(result.getLocalVariableDeclaration());
 			variableReference.setStepIndex(0);
 			ILUtil.adaptDataType(variableReference, result.getLocalVariableDeclaration().getType());
 			return variableReference;

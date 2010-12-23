@@ -9,26 +9,21 @@
  *    Andreas Unger - initial API and implementation 
  ****************************************************************************/
 
-package org.eclipselabs.mscript.codegen.c.util;
+package org.eclipselabs.mscript.codegen.c;
 
-import org.eclipselabs.mscript.typesystem.DataType;
-import org.eclipselabs.mscript.typesystem.IntegerType;
-import org.eclipselabs.mscript.typesystem.RealType;
+import java.io.Writer;
+
+import org.eclipselabs.mscript.computation.computationmodel.ComputationModel;
 
 /**
  * @author Andreas Unger
  *
+ * @noextend
+ * @noimplement
  */
-public class GeneratorUtil {
+public interface IGeneratorContext {
 
-	public static String toString(DataType dataType) {
-		if (dataType instanceof RealType) {
-			return "double";
-		}
-		if (dataType instanceof IntegerType) {
-			return "int";
-		}
-		return "void";
-	}
+	ComputationModel getComputationModel();
+	Writer getWriter();
 	
 }

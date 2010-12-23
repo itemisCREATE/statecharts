@@ -29,6 +29,7 @@ import org.eclipselabs.mscript.language.il.OutputVariableDeclaration;
 import org.eclipselabs.mscript.language.il.StatefulVariableDeclaration;
 import org.eclipselabs.mscript.language.il.Statement;
 import org.eclipselabs.mscript.language.il.TemplateVariableDeclaration;
+import org.eclipselabs.mscript.language.il.VariableAccess;
 import org.eclipselabs.mscript.language.il.VariableDeclaration;
 import org.eclipselabs.mscript.language.il.VariableReference;
 
@@ -137,6 +138,10 @@ public class ILAdapterFactory extends AdapterFactoryImpl {
 				return createCompoundStatementAdapter();
 			}
 			@Override
+			public Adapter caseVariableAccess(VariableAccess object) {
+				return createVariableAccessAdapter();
+			}
+			@Override
 			public Adapter caseAssignment(Assignment object) {
 				return createAssignmentAdapter();
 			}
@@ -227,6 +232,20 @@ public class ILAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCompoundStatementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.il.VariableAccess <em>Variable Access</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipselabs.mscript.language.il.VariableAccess
+	 * @generated
+	 */
+	public Adapter createVariableAccessAdapter() {
 		return null;
 	}
 

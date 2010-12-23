@@ -46,9 +46,11 @@
     </genClasses>
     <genClasses image="false" ecoreClass="IL.ecore#//Statement"/>
     <genClasses ecoreClass="IL.ecore#//CompoundStatement"/>
+    <genClasses image="false" ecoreClass="IL.ecore#//VariableAccess">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference IL.ecore#//VariableAccess/target"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute IL.ecore#//VariableAccess/stepIndex"/>
+    </genClasses>
     <genClasses ecoreClass="IL.ecore#//Assignment">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference IL.ecore#//Assignment/target"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute IL.ecore#//Assignment/stepIndex"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference IL.ecore#//Assignment/assignedExpression"/>
     </genClasses>
     <genClasses ecoreClass="IL.ecore#//IfStatement">
@@ -62,8 +64,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference IL.ecore#//ForeachStatement/body"/>
     </genClasses>
     <genClasses ecoreClass="IL.ecore#//VariableReference">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference IL.ecore#//VariableReference/declaration"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute IL.ecore#//VariableReference/stepIndex"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference IL.ecore#//VariableReference/arrayIndices"/>
     </genClasses>
     <genClasses image="false" ecoreClass="IL.ecore#//OperationCall">

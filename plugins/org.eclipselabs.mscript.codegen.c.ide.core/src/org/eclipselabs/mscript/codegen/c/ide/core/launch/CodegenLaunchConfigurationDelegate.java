@@ -17,8 +17,14 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.model.LaunchConfigurationDelegate;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipselabs.mscript.codegen.c.ide.core.CodegenCIDECorePlugin;
+import org.eclipselabs.mscript.computation.computationmodel.ComputationModel;
+import org.eclipselabs.mscript.computation.computationmodel.util.ComputationModelUtil;
 import org.eclipselabs.mscript.computation.core.ComputationContext;
 import org.eclipselabs.mscript.computation.core.value.IValue;
 import org.eclipselabs.mscript.language.ast.DataTypeSpecifier;
@@ -50,6 +56,7 @@ public class CodegenLaunchConfigurationDelegate extends LaunchConfigurationDeleg
 	public static final String ATTRIBUTE__TEMPLATE_ARGUMENTS = "templateArguments";
 	public static final String ATTRIBUTE__INPUT_PARAMETER_DATA_TYPES = "inputParameterDataTypes";
 	public static final String ATTRIBUTE__TARGET_FOLDER_PATH = "targetFolderPath";
+	public static final String ATTRIBUTE__COMPUTATION_MODEL = "computationModel";
 	
 	public void launch(ILaunchConfiguration configuration, String mode, ILaunch launch, IProgressMonitor monitor) throws CoreException {
 		String filePathString = configuration.getAttribute(ATTRIBUTE__FILE_PATH, "");
@@ -76,6 +83,15 @@ public class CodegenLaunchConfigurationDelegate extends LaunchConfigurationDeleg
 			throw new CoreException(new Status(IStatus.ERROR, CodegenCIDECorePlugin.PLUGIN_ID, "No output file specified"));
 		}
 
+		ComputationModel computationModel;
+		
+		String computationModelString = configuration.getAttribute(ATTRIBUTE__COMPUTATION_MODEL, "");
+		if (computationModelString.length() == 0) {
+			computationModel = ComputationModelUtil.constructDefaultComputationModel();
+		} else {
+			computationModel = createComputationModel(computationModelString);
+		}
+
 		IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(filePathString));
 		if (!file.exists()) {
 			throw new CoreException(new Status(IStatus.ERROR, CodegenCIDECorePlugin.PLUGIN_ID, "Mscript file '" + file.getName() + "' does not exist"));
@@ -92,7 +108,7 @@ public class CodegenLaunchConfigurationDelegate extends LaunchConfigurationDeleg
 		
 		ILFunctionDefinition ilFunctionDefinition = createILFunctionDefinition(functionDefinition, targetFunctionName, templateArguments, inputParameterDataTypes, monitor);
 		
-		CodegenProcess process = new CodegenProcess(launch, "C Code Generator", targetFolder, ilFunctionDefinition);
+		CodegenProcess process = new CodegenProcess(launch, "C Code Generator", targetFolder, ilFunctionDefinition, computationModel);
 		process.run();
 	}
 
@@ -100,6 +116,17 @@ public class CodegenLaunchConfigurationDelegate extends LaunchConfigurationDeleg
 		return false;
 	}
 	
+	protected ComputationModel createComputationModel(String computationModelString) throws CoreException {
+		try {
+			URI uri = URI.createPlatformResourceURI(computationModelString, true);
+			ResourceSet resourceSet = new ResourceSetImpl();
+			Resource resource = resourceSet.getResource(uri, true);
+			return (ComputationModel) resource.getContents().get(0);
+		} catch (RuntimeException e) {
+			throw new CoreException(new Status(IStatus.ERROR, CodegenCIDECorePlugin.PLUGIN_ID, "Loading computation model failed", e));
+		}
+	}
+
 	private FunctionDefinition createFunctionDefinition(IFile file, String functionName) throws CoreException {
 		IParseResult parseResult = CodegenCIDECorePlugin.getDefault().getMscriptParser().parse(new InputStreamReader(file.getContents()));
 		if (!parseResult.getParseErrors().isEmpty()) {

@@ -623,14 +623,14 @@ public interface ILPackage extends EPackage {
 	int COMPOUND_STATEMENT_FEATURE_COUNT = COMPOUND_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.eclipselabs.mscript.language.il.impl.AssignmentImpl <em>Assignment</em>}' class.
+	 * The meta object id for the '{@link org.eclipselabs.mscript.language.il.impl.VariableAccessImpl <em>Variable Access</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipselabs.mscript.language.il.impl.AssignmentImpl
-	 * @see org.eclipselabs.mscript.language.il.impl.ILPackageImpl#getAssignment()
+	 * @see org.eclipselabs.mscript.language.il.impl.VariableAccessImpl
+	 * @see org.eclipselabs.mscript.language.il.impl.ILPackageImpl#getVariableAccess()
 	 * @generated
 	 */
-	int ASSIGNMENT = 12;
+	int VARIABLE_ACCESS = 12;
 
 	/**
 	 * The feature id for the '<em><b>Target</b></em>' reference.
@@ -639,7 +639,7 @@ public interface ILPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSIGNMENT__TARGET = STATEMENT_FEATURE_COUNT + 0;
+	int VARIABLE_ACCESS__TARGET = 0;
 
 	/**
 	 * The feature id for the '<em><b>Step Index</b></em>' attribute.
@@ -648,7 +648,44 @@ public interface ILPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSIGNMENT__STEP_INDEX = STATEMENT_FEATURE_COUNT + 1;
+	int VARIABLE_ACCESS__STEP_INDEX = 1;
+
+	/**
+	 * The number of structural features of the '<em>Variable Access</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_ACCESS_FEATURE_COUNT = 2;
+
+	/**
+	 * The meta object id for the '{@link org.eclipselabs.mscript.language.il.impl.AssignmentImpl <em>Assignment</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipselabs.mscript.language.il.impl.AssignmentImpl
+	 * @see org.eclipselabs.mscript.language.il.impl.ILPackageImpl#getAssignment()
+	 * @generated
+	 */
+	int ASSIGNMENT = 13;
+
+	/**
+	 * The feature id for the '<em><b>Target</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSIGNMENT__TARGET = VARIABLE_ACCESS__TARGET;
+
+	/**
+	 * The feature id for the '<em><b>Step Index</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSIGNMENT__STEP_INDEX = VARIABLE_ACCESS__STEP_INDEX;
 
 	/**
 	 * The feature id for the '<em><b>Assigned Expression</b></em>' containment reference.
@@ -657,7 +694,7 @@ public interface ILPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSIGNMENT__ASSIGNED_EXPRESSION = STATEMENT_FEATURE_COUNT + 2;
+	int ASSIGNMENT__ASSIGNED_EXPRESSION = VARIABLE_ACCESS_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Assignment</em>' class.
@@ -666,7 +703,7 @@ public interface ILPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSIGNMENT_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 3;
+	int ASSIGNMENT_FEATURE_COUNT = VARIABLE_ACCESS_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.language.il.impl.IfStatementImpl <em>If Statement</em>}' class.
@@ -676,7 +713,7 @@ public interface ILPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.il.impl.ILPackageImpl#getIfStatement()
 	 * @generated
 	 */
-	int IF_STATEMENT = 13;
+	int IF_STATEMENT = 14;
 
 	/**
 	 * The feature id for the '<em><b>Condition</b></em>' containment reference.
@@ -722,7 +759,7 @@ public interface ILPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.il.impl.ILPackageImpl#getForeachStatement()
 	 * @generated
 	 */
-	int FOREACH_STATEMENT = 14;
+	int FOREACH_STATEMENT = 15;
 
 	/**
 	 * The feature id for the '<em><b>Iteration Variable Declaration</b></em>' containment reference.
@@ -768,16 +805,16 @@ public interface ILPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.il.impl.ILPackageImpl#getVariableReference()
 	 * @generated
 	 */
-	int VARIABLE_REFERENCE = 15;
+	int VARIABLE_REFERENCE = 16;
 
 	/**
-	 * The feature id for the '<em><b>Declaration</b></em>' reference.
+	 * The feature id for the '<em><b>Target</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_REFERENCE__DECLARATION = AstPackage.EXPRESSION_FEATURE_COUNT + 0;
+	int VARIABLE_REFERENCE__TARGET = VARIABLE_ACCESS__TARGET;
 
 	/**
 	 * The feature id for the '<em><b>Step Index</b></em>' attribute.
@@ -786,7 +823,7 @@ public interface ILPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_REFERENCE__STEP_INDEX = AstPackage.EXPRESSION_FEATURE_COUNT + 1;
+	int VARIABLE_REFERENCE__STEP_INDEX = VARIABLE_ACCESS__STEP_INDEX;
 
 	/**
 	 * The feature id for the '<em><b>Array Indices</b></em>' containment reference list.
@@ -795,7 +832,7 @@ public interface ILPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_REFERENCE__ARRAY_INDICES = AstPackage.EXPRESSION_FEATURE_COUNT + 2;
+	int VARIABLE_REFERENCE__ARRAY_INDICES = VARIABLE_ACCESS_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Variable Reference</em>' class.
@@ -804,7 +841,7 @@ public interface ILPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_REFERENCE_FEATURE_COUNT = AstPackage.EXPRESSION_FEATURE_COUNT + 3;
+	int VARIABLE_REFERENCE_FEATURE_COUNT = VARIABLE_ACCESS_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.language.il.impl.OperationCallImpl <em>Operation Call</em>}' class.
@@ -814,7 +851,7 @@ public interface ILPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.il.impl.ILPackageImpl#getOperationCall()
 	 * @generated
 	 */
-	int OPERATION_CALL = 16;
+	int OPERATION_CALL = 17;
 
 	/**
 	 * The feature id for the '<em><b>Arguments</b></em>' containment reference list.
@@ -842,7 +879,7 @@ public interface ILPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.il.impl.ILPackageImpl#getBuiltinFunctionCall()
 	 * @generated
 	 */
-	int BUILTIN_FUNCTION_CALL = 17;
+	int BUILTIN_FUNCTION_CALL = 18;
 
 	/**
 	 * The feature id for the '<em><b>Arguments</b></em>' containment reference list.
@@ -879,7 +916,7 @@ public interface ILPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.il.impl.ILPackageImpl#getInvalidExpression()
 	 * @generated
 	 */
-	int INVALID_EXPRESSION = 18;
+	int INVALID_EXPRESSION = 19;
 
 	/**
 	 * The number of structural features of the '<em>Invalid Expression</em>' class.
@@ -898,7 +935,7 @@ public interface ILPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.il.impl.ILPackageImpl#getIValue()
 	 * @generated
 	 */
-	int IVALUE = 19;
+	int IVALUE = 20;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.il.ILFunctionDefinition <em>Function Definition</em>}'.
@@ -1017,6 +1054,38 @@ public interface ILPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getCompoundStatement();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.il.VariableAccess <em>Variable Access</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Variable Access</em>'.
+	 * @see org.eclipselabs.mscript.language.il.VariableAccess
+	 * @generated
+	 */
+	EClass getVariableAccess();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipselabs.mscript.language.il.VariableAccess#getTarget <em>Target</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Target</em>'.
+	 * @see org.eclipselabs.mscript.language.il.VariableAccess#getTarget()
+	 * @see #getVariableAccess()
+	 * @generated
+	 */
+	EReference getVariableAccess_Target();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.il.VariableAccess#getStepIndex <em>Step Index</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Step Index</em>'.
+	 * @see org.eclipselabs.mscript.language.il.VariableAccess#getStepIndex()
+	 * @see #getVariableAccess()
+	 * @generated
+	 */
+	EAttribute getVariableAccess_StepIndex();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.il.VariableDeclaration <em>Variable Declaration</em>}'.
@@ -1229,28 +1298,6 @@ public interface ILPackage extends EPackage {
 	EClass getAssignment();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipselabs.mscript.language.il.Assignment#getTarget <em>Target</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Target</em>'.
-	 * @see org.eclipselabs.mscript.language.il.Assignment#getTarget()
-	 * @see #getAssignment()
-	 * @generated
-	 */
-	EReference getAssignment_Target();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.il.Assignment#getStepIndex <em>Step Index</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Step Index</em>'.
-	 * @see org.eclipselabs.mscript.language.il.Assignment#getStepIndex()
-	 * @see #getAssignment()
-	 * @generated
-	 */
-	EAttribute getAssignment_StepIndex();
-
-	/**
 	 * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.il.Assignment#getAssignedExpression <em>Assigned Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1358,28 +1405,6 @@ public interface ILPackage extends EPackage {
 	EClass getVariableReference();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipselabs.mscript.language.il.VariableReference#getDeclaration <em>Declaration</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Declaration</em>'.
-	 * @see org.eclipselabs.mscript.language.il.VariableReference#getDeclaration()
-	 * @see #getVariableReference()
-	 * @generated
-	 */
-	EReference getVariableReference_Declaration();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.il.VariableReference#getStepIndex <em>Step Index</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Step Index</em>'.
-	 * @see org.eclipselabs.mscript.language.il.VariableReference#getStepIndex()
-	 * @see #getVariableReference()
-	 * @generated
-	 */
-	EAttribute getVariableReference_StepIndex();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.il.VariableReference#getArrayIndices <em>Array Indices</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1448,7 +1473,7 @@ public interface ILPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @return the meta object for data type '<em>IValue</em>'.
 	 * @see org.eclipselabs.mscript.computation.core.value.IValue
-	 * @model instanceClass="org.eclipselabs.mscript.computation.value.IValue"
+	 * @model instanceClass="org.eclipselabs.mscript.computation.core.value.IValue"
 	 * @generated
 	 */
 	EDataType getIValue();
@@ -1568,6 +1593,32 @@ public interface ILPackage extends EPackage {
 		 * @generated
 		 */
 		EClass COMPOUND_STATEMENT = eINSTANCE.getCompoundStatement();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.il.impl.VariableAccessImpl <em>Variable Access</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipselabs.mscript.language.il.impl.VariableAccessImpl
+		 * @see org.eclipselabs.mscript.language.il.impl.ILPackageImpl#getVariableAccess()
+		 * @generated
+		 */
+		EClass VARIABLE_ACCESS = eINSTANCE.getVariableAccess();
+
+		/**
+		 * The meta object literal for the '<em><b>Target</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference VARIABLE_ACCESS__TARGET = eINSTANCE.getVariableAccess_Target();
+
+		/**
+		 * The meta object literal for the '<em><b>Step Index</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute VARIABLE_ACCESS__STEP_INDEX = eINSTANCE.getVariableAccess_StepIndex();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.il.impl.VariableDeclarationImpl <em>Variable Declaration</em>}' class.
@@ -1750,22 +1801,6 @@ public interface ILPackage extends EPackage {
 		EClass ASSIGNMENT = eINSTANCE.getAssignment();
 
 		/**
-		 * The meta object literal for the '<em><b>Target</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ASSIGNMENT__TARGET = eINSTANCE.getAssignment_Target();
-
-		/**
-		 * The meta object literal for the '<em><b>Step Index</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ASSIGNMENT__STEP_INDEX = eINSTANCE.getAssignment_StepIndex();
-
-		/**
 		 * The meta object literal for the '<em><b>Assigned Expression</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1850,22 +1885,6 @@ public interface ILPackage extends EPackage {
 		 * @generated
 		 */
 		EClass VARIABLE_REFERENCE = eINSTANCE.getVariableReference();
-
-		/**
-		 * The meta object literal for the '<em><b>Declaration</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference VARIABLE_REFERENCE__DECLARATION = eINSTANCE.getVariableReference_Declaration();
-
-		/**
-		 * The meta object literal for the '<em><b>Step Index</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute VARIABLE_REFERENCE__STEP_INDEX = eINSTANCE.getVariableReference_StepIndex();
 
 		/**
 		 * The meta object literal for the '<em><b>Array Indices</b></em>' containment reference list feature.

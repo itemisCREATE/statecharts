@@ -29,6 +29,7 @@ import org.eclipselabs.mscript.language.il.OutputVariableDeclaration;
 import org.eclipselabs.mscript.language.il.StatefulVariableDeclaration;
 import org.eclipselabs.mscript.language.il.Statement;
 import org.eclipselabs.mscript.language.il.TemplateVariableDeclaration;
+import org.eclipselabs.mscript.language.il.VariableAccess;
 import org.eclipselabs.mscript.language.il.VariableDeclaration;
 import org.eclipselabs.mscript.language.il.VariableReference;
 
@@ -191,9 +192,16 @@ public class ILSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case ILPackage.VARIABLE_ACCESS: {
+				VariableAccess variableAccess = (VariableAccess)theEObject;
+				T result = caseVariableAccess(variableAccess);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case ILPackage.ASSIGNMENT: {
 				Assignment assignment = (Assignment)theEObject;
 				T result = caseAssignment(assignment);
+				if (result == null) result = caseVariableAccess(assignment);
 				if (result == null) result = caseStatement(assignment);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -215,6 +223,7 @@ public class ILSwitch<T> {
 			case ILPackage.VARIABLE_REFERENCE: {
 				VariableReference variableReference = (VariableReference)theEObject;
 				T result = caseVariableReference(variableReference);
+				if (result == null) result = caseVariableAccess(variableReference);
 				if (result == null) result = caseExpression(variableReference);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -287,6 +296,21 @@ public class ILSwitch<T> {
 	 * @generated
 	 */
 	public T caseCompoundStatement(CompoundStatement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Variable Access</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Variable Access</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseVariableAccess(VariableAccess object) {
 		return null;
 	}
 

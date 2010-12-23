@@ -34,7 +34,9 @@ import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.model.IProcess;
 import org.eclipse.debug.core.model.IStreamsProxy;
 import org.eclipselabs.mscript.codegen.c.Generator;
+import org.eclipselabs.mscript.codegen.c.GeneratorContext;
 import org.eclipselabs.mscript.codegen.c.ide.core.CodegenCIDECorePlugin;
+import org.eclipselabs.mscript.computation.computationmodel.ComputationModel;
 import org.eclipselabs.mscript.language.il.ILFunctionDefinition;
 
 /**
@@ -48,17 +50,19 @@ public class CodegenProcess implements IProcess {
 	
 	private IFolder targetFolder;
 	private ILFunctionDefinition functionDefinition;
+	private ComputationModel computationModel;
 
 	private boolean terminated;
 
 	/**
 	 * 
 	 */
-	public CodegenProcess(ILaunch launch, String name, IFolder targetFolder, ILFunctionDefinition functionDefinition) {
+	public CodegenProcess(ILaunch launch, String name, IFolder targetFolder, ILFunctionDefinition functionDefinition, ComputationModel computationModel) {
 		this.launch = launch;
 		this.name = name;
 		this.targetFolder = targetFolder;
 		this.functionDefinition = functionDefinition;
+		this.computationModel = computationModel;
 		launch.addProcess(this);
 		fireCreationEvent();
 	}
@@ -216,7 +220,7 @@ public class CodegenProcess implements IProcess {
 	private class HeaderGeneratorThread extends GeneratorThread {
 		
 		public void generate() {
-			Generator generator = new Generator(functionDefinition, writer);
+			Generator generator = new Generator(functionDefinition, new GeneratorContext(computationModel, writer));
 			generator.generateHeaderCode();
 		}
 		
@@ -225,7 +229,7 @@ public class CodegenProcess implements IProcess {
 	private class ImplementationGeneratorThread extends GeneratorThread {
 		
 		public void generate() {
-			Generator generator = new Generator(functionDefinition, writer);
+			Generator generator = new Generator(functionDefinition, new GeneratorContext(computationModel, writer));
 			generator.generateImplementationCode();
 		}
 		

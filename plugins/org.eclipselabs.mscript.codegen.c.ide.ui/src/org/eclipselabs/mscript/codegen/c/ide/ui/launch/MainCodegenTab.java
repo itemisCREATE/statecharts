@@ -54,6 +54,7 @@ public class MainCodegenTab extends AbstractLaunchConfigurationTab {
 	private Text templateArgumentsText;
 	private Text inputParameterDataTypesText;
 	private Text targetFolderPathText;
+	private Text computationModelText;
 	
 	private final ModifyListener modifyListener = new ModifyListener() {
 		
@@ -150,6 +151,28 @@ public class MainCodegenTab extends AbstractLaunchConfigurationTab {
 				}
 			}
 		});
+
+		new Label(composite, SWT.NONE).setText("Computation model:");
+		computationModelText = new Text(composite, SWT.SINGLE | SWT.BORDER);
+		computationModelText.addModifyListener(modifyListener);
+		computationModelText.setLayoutData(new GridData(GridData.FILL, GridData.BEGINNING, true, false));
+		
+		browseButton = createPushButton(composite, "Browse...", null);
+		browseButton.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				FilteredResourcesSelectionDialog d = new FilteredResourcesSelectionDialog(
+						composite.getShell(),
+						false,
+						ResourcesPlugin.getWorkspace().getRoot(),
+						IResource.FILE);
+				d.setInitialPattern("*.computationmodel");
+				d.open();
+				Object firstResult = d.getFirstResult();
+				if (firstResult instanceof IFile) {
+					computationModelText.setText(((IFile) firstResult).getFullPath().toString());
+				}
+			}
+		});
 	}
 
 	public String getName() {
@@ -164,6 +187,7 @@ public class MainCodegenTab extends AbstractLaunchConfigurationTab {
 			inputParameterDataTypesText.setText(configuration.getAttribute(CodegenLaunchConfigurationDelegate.ATTRIBUTE__INPUT_PARAMETER_DATA_TYPES, ""));
 			templateArgumentsText.setText(configuration.getAttribute(CodegenLaunchConfigurationDelegate.ATTRIBUTE__TEMPLATE_ARGUMENTS, ""));
 			targetFolderPathText.setText(configuration.getAttribute(CodegenLaunchConfigurationDelegate.ATTRIBUTE__TARGET_FOLDER_PATH, ""));
+			computationModelText.setText(configuration.getAttribute(CodegenLaunchConfigurationDelegate.ATTRIBUTE__COMPUTATION_MODEL, ""));
 		} catch (CoreException e) {
 			CodegenCIDEUIPlugin.getDefault().getLog().log(e.getStatus());
 		}
@@ -177,6 +201,7 @@ public class MainCodegenTab extends AbstractLaunchConfigurationTab {
 		configuration.setAttribute(CodegenLaunchConfigurationDelegate.ATTRIBUTE__INPUT_PARAMETER_DATA_TYPES, inputParameterDataTypesText.getText());
 		configuration.setAttribute(CodegenLaunchConfigurationDelegate.ATTRIBUTE__TEMPLATE_ARGUMENTS, templateArgumentsText.getText());
 		configuration.setAttribute(CodegenLaunchConfigurationDelegate.ATTRIBUTE__TARGET_FOLDER_PATH, targetFolderPathText.getText());
+		configuration.setAttribute(CodegenLaunchConfigurationDelegate.ATTRIBUTE__COMPUTATION_MODEL, computationModelText.getText());
 		setErrorMessage(errorMessage);
 	}
 
@@ -210,6 +235,9 @@ public class MainCodegenTab extends AbstractLaunchConfigurationTab {
 				"");
 		configuration.setAttribute(
 				CodegenLaunchConfigurationDelegate.ATTRIBUTE__TARGET_FOLDER_PATH,
+				"");
+		configuration.setAttribute(
+				CodegenLaunchConfigurationDelegate.ATTRIBUTE__COMPUTATION_MODEL,
 				"");
 	}
 

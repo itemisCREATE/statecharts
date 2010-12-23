@@ -14,7 +14,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.il.Assignment;
 import org.eclipselabs.mscript.language.il.ILPackage;
-import org.eclipselabs.mscript.language.il.VariableDeclaration;
 
 /**
  * <!-- begin-user-doc -->
@@ -23,45 +22,13 @@ import org.eclipselabs.mscript.language.il.VariableDeclaration;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.il.impl.AssignmentImpl#getTarget <em>Target</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.il.impl.AssignmentImpl#getStepIndex <em>Step Index</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.il.impl.AssignmentImpl#getAssignedExpression <em>Assigned Expression</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class AssignmentImpl extends StatementImpl implements Assignment {
-	/**
-	 * The cached value of the '{@link #getTarget() <em>Target</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTarget()
-	 * @generated
-	 * @ordered
-	 */
-	protected VariableDeclaration target;
-
-	/**
-	 * The default value of the '{@link #getStepIndex() <em>Step Index</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getStepIndex()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final int STEP_INDEX_EDEFAULT = 0;
-
-	/**
-	 * The cached value of the '{@link #getStepIndex() <em>Step Index</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getStepIndex()
-	 * @generated
-	 * @ordered
-	 */
-	protected int stepIndex = STEP_INDEX_EDEFAULT;
-
+public class AssignmentImpl extends VariableAccessImpl implements Assignment {
 	/**
 	 * The cached value of the '{@link #getAssignedExpression() <em>Assigned Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -89,65 +56,6 @@ public class AssignmentImpl extends StatementImpl implements Assignment {
 	@Override
 	protected EClass eStaticClass() {
 		return ILPackage.Literals.ASSIGNMENT;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public VariableDeclaration getTarget() {
-		if (target != null && target.eIsProxy()) {
-			InternalEObject oldTarget = (InternalEObject)target;
-			target = (VariableDeclaration)eResolveProxy(oldTarget);
-			if (target != oldTarget) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ILPackage.ASSIGNMENT__TARGET, oldTarget, target));
-			}
-		}
-		return target;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public VariableDeclaration basicGetTarget() {
-		return target;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setTarget(VariableDeclaration newTarget) {
-		VariableDeclaration oldTarget = target;
-		target = newTarget;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ILPackage.ASSIGNMENT__TARGET, oldTarget, target));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public int getStepIndex() {
-		return stepIndex;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setStepIndex(int newStepIndex) {
-		int oldStepIndex = stepIndex;
-		stepIndex = newStepIndex;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ILPackage.ASSIGNMENT__STEP_INDEX, oldStepIndex, stepIndex));
 	}
 
 	/**
@@ -215,11 +123,6 @@ public class AssignmentImpl extends StatementImpl implements Assignment {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ILPackage.ASSIGNMENT__TARGET:
-				if (resolve) return getTarget();
-				return basicGetTarget();
-			case ILPackage.ASSIGNMENT__STEP_INDEX:
-				return getStepIndex();
 			case ILPackage.ASSIGNMENT__ASSIGNED_EXPRESSION:
 				return getAssignedExpression();
 		}
@@ -234,12 +137,6 @@ public class AssignmentImpl extends StatementImpl implements Assignment {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ILPackage.ASSIGNMENT__TARGET:
-				setTarget((VariableDeclaration)newValue);
-				return;
-			case ILPackage.ASSIGNMENT__STEP_INDEX:
-				setStepIndex((Integer)newValue);
-				return;
 			case ILPackage.ASSIGNMENT__ASSIGNED_EXPRESSION:
 				setAssignedExpression((Expression)newValue);
 				return;
@@ -255,12 +152,6 @@ public class AssignmentImpl extends StatementImpl implements Assignment {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ILPackage.ASSIGNMENT__TARGET:
-				setTarget((VariableDeclaration)null);
-				return;
-			case ILPackage.ASSIGNMENT__STEP_INDEX:
-				setStepIndex(STEP_INDEX_EDEFAULT);
-				return;
 			case ILPackage.ASSIGNMENT__ASSIGNED_EXPRESSION:
 				setAssignedExpression((Expression)null);
 				return;
@@ -276,30 +167,10 @@ public class AssignmentImpl extends StatementImpl implements Assignment {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ILPackage.ASSIGNMENT__TARGET:
-				return target != null;
-			case ILPackage.ASSIGNMENT__STEP_INDEX:
-				return stepIndex != STEP_INDEX_EDEFAULT;
 			case ILPackage.ASSIGNMENT__ASSIGNED_EXPRESSION:
 				return assignedExpression != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (stepIndex: ");
-		result.append(stepIndex);
-		result.append(')');
-		return result.toString();
 	}
 
 } //AssignmentImpl

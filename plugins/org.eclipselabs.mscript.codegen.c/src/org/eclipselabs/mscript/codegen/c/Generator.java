@@ -12,7 +12,7 @@
 package org.eclipselabs.mscript.codegen.c;
 
 import java.io.PrintWriter;
-import java.io.Writer;
+import java.util.List;
 
 import org.eclipselabs.mscript.codegen.c.util.GeneratorUtil;
 import org.eclipselabs.mscript.language.il.ComputationCompound;
@@ -29,14 +29,18 @@ import org.eclipselabs.mscript.language.il.StatefulVariableDeclaration;
 public class Generator {
 	
 	private ILFunctionDefinition functionDefinition;
+	
+	private IGeneratorContext context;
+	
 	private PrintWriter writer;
 	
 	/**
 	 * 
 	 */
-	public Generator(ILFunctionDefinition functionDefinition, Writer writer) {
+	public Generator(ILFunctionDefinition functionDefinition, IGeneratorContext context) {
 		this.functionDefinition = functionDefinition;
-		this.writer = new PrintWriter(writer);
+		this.context = context;
+		this.writer = new PrintWriter(context.getWriter());
 	}
 	
 	public void generateHeaderCode() {
@@ -72,53 +76,18 @@ public class Generator {
 	
 	public void generateFunctionPrototypes() {
 		if (functionDefinition.isStateful()) {
-			writer.printf("void %s_initialize(%s_Context *context);\n", functionDefinition.getName(), functionDefinition.getName());
-			
-			writer.printf("void %s(const %s_Context *context", functionDefinition.getName(), functionDefinition.getName());
-			for (ComputationCompound compound : functionDefinition.getComputationCompounds()) {
-				if (!compound.getOutputs().isEmpty()) {
-					for (InputVariableDeclaration inputVariableDeclaration : compound.getInputs()) {
-						writer.printf(", const %s *%s", GeneratorUtil.toString(inputVariableDeclaration.getType()), inputVariableDeclaration.getName());
-					}
-				}
-			}
-			for (OutputVariableDeclaration outputVariableDeclaration: functionDefinition.getOutputVariableDeclarations()) {
-				writer.printf(", %s *%s", GeneratorUtil.toString(outputVariableDeclaration.getType()), outputVariableDeclaration.getName());
-			}
-			writer.println(");");
-			
-			writer.printf("void %s_update(%s_Context *context", functionDefinition.getName(), functionDefinition.getName());
-			for (ComputationCompound compound : functionDefinition.getComputationCompounds()) {
-				if (compound.getOutputs().isEmpty()) {
-					for (InputVariableDeclaration inputVariableDeclaration : compound.getInputs()) {
-						writer.printf(", const %s *%s", GeneratorUtil.toString(inputVariableDeclaration.getType()), inputVariableDeclaration.getName());
-					}
-				}
-			}
-			writer.println(");");
+			generateInitializeFunctionHeader();
+			writer.println(";");
+			generateComputationFunctionHeader();
+			writer.println(";");
+			generateUpdateFunctionHeader();
+			writer.println(";");
 		} else {
-			writer.printf("void %s(", functionDefinition.getName(), functionDefinition.getName());
-			boolean first = true;
-			for (InputVariableDeclaration inputVariableDeclaration: functionDefinition.getInputVariableDeclarations()) {
-				if (first) {
-					first = false;
-				} else {
-					writer.print(", ");
-				}
-				writer.printf("const %s *%s", GeneratorUtil.toString(inputVariableDeclaration.getType()), inputVariableDeclaration.getName());
-			}
-			for (OutputVariableDeclaration outputVariableDeclaration: functionDefinition.getOutputVariableDeclarations()) {
-				if (first) {
-					first = false;
-				} else {
-					writer.print(", ");
-				}
-				writer.printf("%s *%s", GeneratorUtil.toString(outputVariableDeclaration.getType()), outputVariableDeclaration.getName());
-			}
-			writer.println(");");
+			generateStatelessFunctionHeader();
+			writer.println(";");
 		}
 	}
-	
+
 	public void generateImplementationCode() {
 		generateIncludes();
 		generateFunctionImplementations();
@@ -126,16 +95,137 @@ public class Generator {
 	
 	public void generateIncludes() {
 		writer.printf("#include \"%s.h\"\n", functionDefinition.getName());
+		writer.println();
 	}
 	
 	public void generateFunctionImplementations() {
 		if (functionDefinition.isStateful()) {
-			writer.printf("void %s_initialize(%s_Context *context) {\n", functionDefinition.getName(), functionDefinition.getName());
-			new CompoundGenerator(writer).doSwitch(functionDefinition.getInitializationCompound());
+			generateInitializeFunctionHeader();
+			writer.println(" {");
+			new CompoundGenerator(context).doSwitch(functionDefinition.getInitializationCompound());
+			writer.println("}");
+
+			writer.println();
+
+			generateComputationFunctionHeader();
+			writer.println(" {");
+			for (ComputationCompound compound : functionDefinition.getComputationCompounds()) {
+				if (!compound.getOutputs().isEmpty()) {
+					new CompoundGenerator(context).doSwitch(compound);
+				}
+			}
+			for (InputVariableDeclaration inputVariableDeclaration : functionDefinition.getInputVariableDeclarations()) {
+				if (inputVariableDeclaration.getCircularBufferSize() > 1) {
+					String name = inputVariableDeclaration.getName();
+					writer.printf("context->%s[context->%s_index] = %s;\n", name, name, name);
+				}
+			}
+			for (OutputVariableDeclaration outputVariableDeclaration : functionDefinition.getOutputVariableDeclarations()) {
+				if (outputVariableDeclaration.getCircularBufferSize() > 1) {
+					String name = outputVariableDeclaration.getName();
+					writer.printf("context->%s[context->%s_index] = *%s;\n", name, name, name);
+				}
+			}
+			writer.println("}");
+
+			writer.println();
+
+			generateUpdateFunctionHeader();
+			writer.println(" {");
+			for (ComputationCompound compound : functionDefinition.getComputationCompounds()) {
+				if (compound.getOutputs().isEmpty()) {
+					new CompoundGenerator(context).doSwitch(compound);
+				}
+			}
+			generateUpdateIndexStatements(functionDefinition.getInputVariableDeclarations());
+			generateUpdateIndexStatements(functionDefinition.getOutputVariableDeclarations());
+			generateUpdateIndexStatements(functionDefinition.getInstanceVariableDeclarations());
 			writer.println("}");
 		} else {
-			
+			generateStatelessFunctionHeader();
+			writer.println(" {");
+			for (ComputationCompound compound : functionDefinition.getComputationCompounds()) {
+				new CompoundGenerator(context).doSwitch(compound);
+			}
+			writer.println("}");
 		}
 	}
 
+	/**
+	 * 
+	 */
+	private void generateInitializeFunctionHeader() {
+		writer.printf("void %s_initialize(%s_Context *context)", functionDefinition.getName(), functionDefinition.getName());
+	}
+
+	/**
+	 * 
+	 */
+	private void generateComputationFunctionHeader() {
+		writer.printf("void %s(%s_Context *context", functionDefinition.getName(), functionDefinition.getName());
+		for (ComputationCompound compound : functionDefinition.getComputationCompounds()) {
+			if (!compound.getOutputs().isEmpty()) {
+				for (InputVariableDeclaration inputVariableDeclaration : compound.getInputs()) {
+					writer.printf(", %s %s", GeneratorUtil.toString(inputVariableDeclaration.getType()), inputVariableDeclaration.getName());
+				}
+			}
+		}
+		for (OutputVariableDeclaration outputVariableDeclaration: functionDefinition.getOutputVariableDeclarations()) {
+			writer.printf(", %s *%s", GeneratorUtil.toString(outputVariableDeclaration.getType()), outputVariableDeclaration.getName());
+		}
+		writer.print(")");
+	}
+
+	/**
+	 * 
+	 */
+	private void generateUpdateFunctionHeader() {
+		writer.printf("void %s_update(%s_Context *context", functionDefinition.getName(), functionDefinition.getName());
+		for (ComputationCompound compound : functionDefinition.getComputationCompounds()) {
+			if (compound.getOutputs().isEmpty()) {
+				for (InputVariableDeclaration inputVariableDeclaration : compound.getInputs()) {
+					writer.printf(", %s %s", GeneratorUtil.toString(inputVariableDeclaration.getType()), inputVariableDeclaration.getName());
+				}
+			}
+		}
+		writer.print(")");
+	}
+
+	/**
+	 * 
+	 */
+	private void generateStatelessFunctionHeader() {
+		writer.printf("void %s(", functionDefinition.getName(), functionDefinition.getName());
+		boolean first = true;
+		for (InputVariableDeclaration inputVariableDeclaration: functionDefinition.getInputVariableDeclarations()) {
+			if (first) {
+				first = false;
+			} else {
+				writer.print(", ");
+			}
+			writer.printf("%s %s", GeneratorUtil.toString(inputVariableDeclaration.getType()), inputVariableDeclaration.getName());
+		}
+		for (OutputVariableDeclaration outputVariableDeclaration: functionDefinition.getOutputVariableDeclarations()) {
+			if (first) {
+				first = false;
+			} else {
+				writer.print(", ");
+			}
+			writer.printf("%s *%s", GeneratorUtil.toString(outputVariableDeclaration.getType()), outputVariableDeclaration.getName());
+		}
+		writer.print(")");
+	}
+
+	/**
+	 * 
+	 */
+	private void generateUpdateIndexStatements(List<? extends StatefulVariableDeclaration> statefulVariableDeclarations) {
+		for (StatefulVariableDeclaration statefulVariableDeclaration : statefulVariableDeclarations) {
+			if (statefulVariableDeclaration.getCircularBufferSize() > 1) {
+				String name = statefulVariableDeclaration.getName();
+				writer.printf("context->%s_index = (context->%s_index + 1) %% %d;\n", name, name, statefulVariableDeclaration.getCircularBufferSize());
+			}
+		}
+	}
+	
 }
