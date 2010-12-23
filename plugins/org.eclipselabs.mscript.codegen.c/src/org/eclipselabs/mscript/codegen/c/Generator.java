@@ -102,6 +102,9 @@ public class Generator {
 		if (functionDefinition.isStateful()) {
 			generateInitializeFunctionHeader();
 			writer.println(" {");
+			generateInitializeIndexStatements(functionDefinition.getInputVariableDeclarations());
+			generateInitializeIndexStatements(functionDefinition.getOutputVariableDeclarations());
+			generateInitializeIndexStatements(functionDefinition.getInstanceVariableDeclarations());
 			new CompoundGenerator(context).doSwitch(functionDefinition.getInitializationCompound());
 			writer.println("}");
 
@@ -156,6 +159,14 @@ public class Generator {
 	 */
 	private void generateInitializeFunctionHeader() {
 		writer.printf("void %s_initialize(%s_Context *context)", functionDefinition.getName(), functionDefinition.getName());
+	}
+
+	private void generateInitializeIndexStatements(List<? extends StatefulVariableDeclaration> statefulVariableDeclarations) {
+		for (StatefulVariableDeclaration statefulVariableDeclaration : statefulVariableDeclarations) {
+			if (statefulVariableDeclaration.getCircularBufferSize() > 1) {
+				writer.printf("context->%s_index = 0;\n", statefulVariableDeclaration.getName());
+			}
+		}
 	}
 
 	/**
