@@ -11,9 +11,9 @@
 
 package org.eclipselabs.mscript.language.il.transform;
 
+import org.eclipselabs.mscript.common.internal.util.IScope;
 import org.eclipselabs.mscript.language.il.Compound;
 import org.eclipselabs.mscript.language.il.VariableDeclaration;
-import org.eclipselabs.mscript.language.internal.util.IScope;
 
 /**
  * @author Andreas Unger

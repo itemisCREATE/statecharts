@@ -11,8 +11,8 @@
 
 package org.eclipselabs.mscript.language.interpreter;
 
+import org.eclipselabs.mscript.common.internal.util.IScope;
 import org.eclipselabs.mscript.language.il.VariableDeclaration;
-import org.eclipselabs.mscript.language.internal.util.IScope;
 
 /**
  * @author Andreas Unger

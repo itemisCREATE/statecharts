@@ -155,20 +155,21 @@ public class CompoundGenerator extends ILSwitch<Boolean> {
 		if (collectionArrayType.getDimensionality() != 1) {
 			throw new RuntimeException("Array dimensionality must be 1");
 		}
-		writer.print("{\n");
-		writer.print("int i;\n");
-		writer.print("for (i = 0; i < ");
-		writer.print(collectionArrayType.getDimensions().get(0).getSize());
-		writer.print("; ++i) {\n");
-		writer.print(GeneratorUtil.toString(iterationVariableDeclaration.getType()));
-		writer.print(" ");
-		writer.print(iterationVariableDeclaration.getName());
-		writer.print(" = (");
+		
+		String itVarName = iterationVariableDeclaration.getName();
+		String itVarType = GeneratorUtil.toString(iterationVariableDeclaration.getType());
+		int size = collectionArrayType.getDimensions().get(0).getSize();
+		
+		writer.println("{");
+		writer.printf("int %s_i;\n", itVarName);
+		writer.printf("for (%s_i = 0; %s_i < %d; ++%s_i) {\n", itVarName, itVarName, size, itVarName);
+		writer.printf("%s %s = (", itVarType, itVarName);
 		doSwitch(foreachStatement.getCollectionExpression());
-		writer.print(")[i];\n");
+		writer.printf(")[%s_i];\n", itVarName);
 		doSwitch(foreachStatement.getBody());
-		writer.print("}\n");
-		writer.print("}\n");
+		writer.println("}");
+		writer.println("}");
+		
 		return true;
 	}
 	

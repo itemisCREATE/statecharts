@@ -129,7 +129,6 @@ public class ExpressionTransformer extends AstSwitch<Expression> {
 	@Override
 	public Expression caseLetExpression(LetExpression letExpression) {
 		LocalVariableDeclaration localVariableDeclaration = ILFactory.eINSTANCE.createLocalVariableDeclaration();
-		localVariableDeclaration.setName(createLocalVariableName("letResult"));
 		context.getScope().getCompound().getStatements().add(localVariableDeclaration);
 
 		CompoundStatement compoundStatement = ILFactory.eINSTANCE.createCompoundStatement();
@@ -139,7 +138,7 @@ public class ExpressionTransformer extends AstSwitch<Expression> {
 
 		for (LetExpressionVariableDeclaration letExpressionVariableDeclaration : letExpression.getVariableDeclarations()) {
 			LocalVariableDeclaration letVariableDeclaration = ILFactory.eINSTANCE.createLocalVariableDeclaration();
-			letVariableDeclaration.setName(createLocalVariableName(letExpressionVariableDeclaration.getNames().get(0)));
+			letVariableDeclaration.setName(letExpressionVariableDeclaration.getNames().get(0));
 			Expression assignedExpression = doSwitch(letExpressionVariableDeclaration.getAssignedExpression());
 			letVariableDeclaration.setType(EcoreUtil.copy(ILUtil.getDataType(assignedExpression)));
 			letVariableDeclaration.setInitializer(assignedExpression);
@@ -168,7 +167,6 @@ public class ExpressionTransformer extends AstSwitch<Expression> {
 	@Override
 	public Expression caseIfExpression(IfExpression ifExpression) {
 		LocalVariableDeclaration localVariableDeclaration = ILFactory.eINSTANCE.createLocalVariableDeclaration();
-		localVariableDeclaration.setName(createLocalVariableName("ifResult"));
 		context.getScope().getCompound().getStatements().add(localVariableDeclaration);
 		IfStatement ifStatement = ILFactory.eINSTANCE.createIfStatement();
 		Expression conditionExpression = doSwitch(ifExpression.getCondition());
@@ -646,15 +644,6 @@ public class ExpressionTransformer extends AstSwitch<Expression> {
 		UnitConstructionOperator transformedUnitConstructionOperator = EcoreUtil.copy(unitConstructionOperator);
 		ILUtil.adaptDataType(transformedUnitConstructionOperator, TypeSystemFactory.eINSTANCE.createUnitType());
 		return transformedUnitConstructionOperator;
-	}
-	
-	private String createLocalVariableName(String preferredName) {
-		String name = preferredName;
-		int n = 1;
-		while (context.getScope().findInEnclosingScopes(name) != null) {
-			name = preferredName + ++n;
-		}
-		return name;
 	}
 	
 }

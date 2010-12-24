@@ -11,8 +11,8 @@
 
 package org.eclipselabs.mscript.language.interpreter;
 
+import org.eclipselabs.mscript.common.internal.util.Scope;
 import org.eclipselabs.mscript.language.il.VariableDeclaration;
-import org.eclipselabs.mscript.language.internal.util.Scope;
 
 public class InterpreterScope extends Scope<IInterpreterScope, VariableDeclaration, IVariable> implements IInterpreterScope {
 

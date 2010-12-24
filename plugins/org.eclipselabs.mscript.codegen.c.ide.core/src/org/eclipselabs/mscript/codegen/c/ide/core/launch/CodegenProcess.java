@@ -36,6 +36,7 @@ import org.eclipse.debug.core.model.IStreamsProxy;
 import org.eclipselabs.mscript.codegen.c.Generator;
 import org.eclipselabs.mscript.codegen.c.GeneratorContext;
 import org.eclipselabs.mscript.codegen.c.ide.core.CodegenCIDECorePlugin;
+import org.eclipselabs.mscript.codegen.c.util.NameNormalizer;
 import org.eclipselabs.mscript.computation.computationmodel.ComputationModel;
 import org.eclipselabs.mscript.language.il.ILFunctionDefinition;
 
@@ -80,6 +81,8 @@ public class CodegenProcess implements IProcess {
 			
 			@Override
 			public IStatus runInWorkspace(IProgressMonitor monitor) throws CoreException {
+				new NameNormalizer().normalize(functionDefinition);
+				
 				GeneratorThread thread = new HeaderGeneratorThread();
 				executeGenerator(thread, functionDefinition.getName() + ".h", monitor);
 				

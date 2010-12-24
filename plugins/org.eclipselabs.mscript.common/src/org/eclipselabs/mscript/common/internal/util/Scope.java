@@ -9,7 +9,7 @@
  *    Andreas Unger - initial API and implementation 
  ****************************************************************************/
 
-package org.eclipselabs.mscript.language.internal.util;
+package org.eclipselabs.mscript.common.internal.util;
 
 import java.util.Collection;
 import java.util.Collections;
