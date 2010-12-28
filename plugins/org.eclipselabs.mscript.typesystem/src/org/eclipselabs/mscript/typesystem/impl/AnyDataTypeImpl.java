@@ -72,14 +72,4 @@ public class AnyDataTypeImpl extends DataTypeImpl implements AnyDataType {
 		return AnyDataTypeOperations.isAssignableFrom(this, other);
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public DataType convertTo(DataType other) {
-		return AnyDataTypeOperations.convertTo(this, other);
-	}
-
 } //AnyDataTypeImpl

@@ -66,9 +66,6 @@
     <eOperations name="isAssignableFrom" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eParameters name="other" ordered="false" lowerBound="1" eType="#//DataType"/>
     </eOperations>
-    <eOperations name="convertTo" ordered="false" lowerBound="1" eType="#//DataType">
-      <eParameters name="other" ordered="false" lowerBound="1" eType="#//DataType"/>
-    </eOperations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="OperatorKind">
     <eLiterals name="Addition"/>
@@ -304,11 +301,6 @@
       <contents xsi:type="ecore:EOperation" name="isAssignableFrom" ordered="false"
           lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
         <eAnnotations source="redefines" references="#//DataType/isAssignableFrom"/>
-        <eParameters name="other" ordered="false" lowerBound="1" eType="#//DataType"/>
-      </contents>
-      <contents xsi:type="ecore:EOperation" name="convertTo" ordered="false" lowerBound="1"
-          eType="#//DataType">
-        <eAnnotations source="redefines" references="#//DataType/convertTo"/>
         <eParameters name="other" ordered="false" lowerBound="1" eType="#//DataType"/>
       </contents>
     </eAnnotations>

@@ -132,15 +132,6 @@ public class EnumerationImpl extends NamespaceImpl implements Enumeration {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DataType convertTo(DataType other) {
-		return DataTypeOperations.convertTo(this, other);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EnumerationLiteral getLiteral(String name) {
 		return EnumerationOperations.getLiteral(this, name);
 	}

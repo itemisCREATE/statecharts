@@ -44,12 +44,4 @@ public interface DataType extends Type {
 	 */
 	boolean isAssignableFrom(DataType other);
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model required="true" ordered="false" otherRequired="true" otherOrdered="false"
-	 * @generated
-	 */
-	DataType convertTo(DataType other);
-
 } // DataType

@@ -984,9 +984,6 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 		op = addEOperation(dataTypeEClass, ecorePackage.getEBoolean(), "isAssignableFrom", 1, 1, IS_UNIQUE, !IS_ORDERED);
 		addEParameter(op, this.getDataType(), "other", 1, 1, IS_UNIQUE, !IS_ORDERED);
 
-		op = addEOperation(dataTypeEClass, this.getDataType(), "convertTo", 1, 1, IS_UNIQUE, !IS_ORDERED);
-		addEParameter(op, this.getDataType(), "other", 1, 1, IS_UNIQUE, !IS_ORDERED);
-
 		initEClass(arrayDimensionEClass, ArrayDimension.class, "ArrayDimension", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getArrayDimension_Size(), ecorePackage.getEInt(), "size", null, 1, 1, ArrayDimension.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 

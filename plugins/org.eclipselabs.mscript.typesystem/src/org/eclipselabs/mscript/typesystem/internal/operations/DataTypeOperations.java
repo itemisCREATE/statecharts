@@ -22,7 +22,6 @@ import org.eclipselabs.mscript.typesystem.TypeSystemFactory;
  *   <li>{@link org.eclipselabs.mscript.typesystem.DataType#evaluate(org.eclipselabs.mscript.typesystem.OperatorKind, org.eclipselabs.mscript.typesystem.DataType) <em>Evaluate</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.typesystem.DataType#evaluatePower(int) <em>Evaluate Power</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.typesystem.DataType#isAssignableFrom(org.eclipselabs.mscript.typesystem.DataType) <em>Is Assignable From</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.typesystem.DataType#convertTo(org.eclipselabs.mscript.typesystem.DataType) <em>Convert To</em>}</li>
  * </ul>
  * </p>
  *
@@ -74,17 +73,6 @@ public class DataTypeOperations {
 	 */
 	public static  boolean isAssignableFrom(DataType dataType, DataType other) {
 		return EcoreUtil.equals(dataType, other);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static  DataType convertTo(DataType dataType, DataType other) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
 	}
 
 } // DataTypeOperations

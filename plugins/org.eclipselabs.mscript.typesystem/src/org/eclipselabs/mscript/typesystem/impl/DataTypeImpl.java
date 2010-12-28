@@ -68,13 +68,4 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 		return DataTypeOperations.isAssignableFrom(this, other);
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public DataType convertTo(DataType other) {
-		return DataTypeOperations.convertTo(this, other);
-	}
-
 } //DataTypeImpl

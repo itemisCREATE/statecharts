@@ -242,10 +242,6 @@
         </ownedParameter>
         <ownedParameter xmi:id="_Zt32cX5FEd-92N_8bTdFqA" name="other" type="_FfGmwH3nEd-EWvFDOLE-rQ"/>
       </ownedOperation>
-      <ownedOperation xmi:id="__lmb0H-eEd-8ibE6W-dHMQ" name="convertTo">
-        <ownedParameter xmi:id="_pH7fcH-fEd-8ibE6W-dHMQ" type="_FfGmwH3nEd-EWvFDOLE-rQ" direction="return"/>
-        <ownedParameter xmi:id="_pH7fcX-fEd-8ibE6W-dHMQ" name="other" type="_FfGmwH3nEd-EWvFDOLE-rQ"/>
-      </ownedOperation>
     </packagedElement>
     <packagedElement xmi:type="uml:Enumeration" xmi:id="_1MUB0H3zEd-EWvFDOLE-rQ" name="OperatorKind">
       <ownedLiteral xmi:id="_scrm8KxQEd-ZZ_8ZIavFMA" name="Addition"/>
@@ -420,10 +416,6 @@
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
         </ownedParameter>
         <ownedParameter xmi:id="_C8hFEP_XEd-8X600jmiTLA" name="other" type="_FfGmwH3nEd-EWvFDOLE-rQ"/>
-      </ownedOperation>
-      <ownedOperation xmi:id="_FI5dEP_XEd-8X600jmiTLA" name="convertTo" redefinedOperation="__lmb0H-eEd-8ibE6W-dHMQ">
-        <ownedParameter xmi:id="_FoEFUP_XEd-8X600jmiTLA" type="_FfGmwH3nEd-EWvFDOLE-rQ" direction="return"/>
-        <ownedParameter xmi:id="_FoEsYP_XEd-8X600jmiTLA" name="other" type="_FfGmwH3nEd-EWvFDOLE-rQ"/>
       </ownedOperation>
     </packagedElement>
     <profileApplication xmi:id="_DbDeoHGiEd-Vr_LfGhknIQ">

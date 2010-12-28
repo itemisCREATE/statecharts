@@ -101,9 +101,6 @@
       <genOperations xsi:type="genmodel:GenOperation" ecoreOperation="TypeSystem.ecore#//DataType/isAssignableFrom">
         <genParameters xsi:type="genmodel:GenParameter" ecoreParameter="TypeSystem.ecore#//DataType/isAssignableFrom/other"/>
       </genOperations>
-      <genOperations xsi:type="genmodel:GenOperation" ecoreOperation="TypeSystem.ecore#//DataType/convertTo">
-        <genParameters xsi:type="genmodel:GenParameter" ecoreParameter="TypeSystem.ecore#//DataType/convertTo/other"/>
-      </genOperations>
     </genClasses>
     <genClasses xsi:type="genmodel:GenClass" ecoreClass="TypeSystem.ecore#//ArrayDimension">
       <genFeatures xsi:type="genmodel:GenFeature" property="Readonly" createChild="false"
