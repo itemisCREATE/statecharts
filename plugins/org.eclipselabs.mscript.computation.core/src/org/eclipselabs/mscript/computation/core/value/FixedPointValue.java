@@ -132,9 +132,9 @@ public class FixedPointValue extends AbstractRealValue {
 			getContext().getOverflowMonitor().handleOverflow(new OverflowInfo());
 		}
 		
-		result >>= getNumberFormat().getFractionLength();
+		truncatedResult >>= getNumberFormat().getFractionLength();
 		
-		return createValue(resultDataType, result, FixedPointOperationKind.MULTIPLY);
+		return createValue(resultDataType, truncatedResult, FixedPointOperationKind.MULTIPLY);
 	}
 	
 	/* (non-Javadoc)
@@ -163,9 +163,9 @@ public class FixedPointValue extends AbstractRealValue {
 			getContext().getOverflowMonitor().handleOverflow(new OverflowInfo());
 		}
 		
-		result /= otherFixedPointValue.rawValue;
+		truncatedResult /= otherFixedPointValue.rawValue;
 		
-		return createValue(resultDataType, result, FixedPointOperationKind.DIVIDE);
+		return createValue(resultDataType, truncatedResult, FixedPointOperationKind.DIVIDE);
 	}
 	
 	/* (non-Javadoc)

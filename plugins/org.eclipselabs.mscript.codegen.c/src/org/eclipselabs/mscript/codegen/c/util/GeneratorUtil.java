@@ -11,9 +11,9 @@
 
 package org.eclipselabs.mscript.codegen.c.util;
 
-import org.eclipselabs.mscript.typesystem.DataType;
-import org.eclipselabs.mscript.typesystem.IntegerType;
-import org.eclipselabs.mscript.typesystem.RealType;
+import org.eclipselabs.mscript.computation.computationmodel.FixedPointFormat;
+import org.eclipselabs.mscript.computation.computationmodel.FloatingPointFormat;
+import org.eclipselabs.mscript.computation.computationmodel.NumberFormat;
 
 /**
  * @author Andreas Unger
@@ -21,14 +21,20 @@ import org.eclipselabs.mscript.typesystem.RealType;
  */
 public class GeneratorUtil {
 
-	public static String toString(DataType dataType) {
-		if (dataType instanceof RealType) {
-			return "double";
+	public static String getCDataType(NumberFormat numberFormat) {
+		if (numberFormat instanceof FloatingPointFormat) {
+			FloatingPointFormat floatingPointFormat = (FloatingPointFormat) numberFormat;
+			switch (floatingPointFormat.getKind()) {
+			case BINARY32:
+				return "float";
+			case BINARY64:
+				return "double";
+			}
+		} else if (numberFormat instanceof FixedPointFormat) {
+			FixedPointFormat fixedPointFormat = (FixedPointFormat) numberFormat;
+			return String.format("int%d_t", fixedPointFormat.getWordSize());
 		}
-		if (dataType instanceof IntegerType) {
-			return "int";
-		}
-		return "void";
+		throw new IllegalArgumentException();
 	}
 	
 }

@@ -16,6 +16,7 @@ import org.eclipselabs.mscript.computation.computationmodel.util.ComputationMode
 import org.eclipselabs.mscript.computation.core.IComputationContext;
 import org.eclipselabs.mscript.typesystem.DataType;
 import org.eclipselabs.mscript.typesystem.NumericType;
+import org.eclipselabs.mscript.typesystem.util.TypeSystemUtil;
 
 /**
  * @author Andreas Unger
@@ -102,10 +103,10 @@ public abstract class AbstractRealValue extends AbstractExplicitDataTypeValue im
 	
 	protected IValue doLessThan(IValue other, DataType resultDataType) {
 		AbstractRealValue otherRealValue = (AbstractRealValue) other;
-		NumberFormat numberFormat = ComputationModelUtil.getSuperNumberFormat(getNumberFormat(), otherRealValue.getNumberFormat());
+		NumberFormat widestNumberFormat = getWidestNumberFormat(other);
 		
-		AbstractRealValue leftOperand = cast(numberFormat);
-		AbstractRealValue rightOperand = otherRealValue.cast(numberFormat);
+		AbstractRealValue leftOperand = cast(widestNumberFormat);
+		AbstractRealValue rightOperand = otherRealValue.cast(widestNumberFormat);
 
 		return leftOperand.basicLessThan(rightOperand, resultDataType);
 	}
@@ -114,10 +115,10 @@ public abstract class AbstractRealValue extends AbstractExplicitDataTypeValue im
 
 	protected IValue doLessThanOrEqualTo(IValue other, DataType resultDataType) {
 		AbstractRealValue otherRealValue = (AbstractRealValue) other;
-		NumberFormat numberFormat = ComputationModelUtil.getSuperNumberFormat(getNumberFormat(), otherRealValue.getNumberFormat());
+		NumberFormat widestNumberFormat = getWidestNumberFormat(other);
 		
-		AbstractRealValue leftOperand = cast(numberFormat);
-		AbstractRealValue rightOperand = otherRealValue.cast(numberFormat);
+		AbstractRealValue leftOperand = cast(widestNumberFormat);
+		AbstractRealValue rightOperand = otherRealValue.cast(widestNumberFormat);
 
 		return leftOperand.basicLessThanOrEqualTo(rightOperand, resultDataType);
 	}
@@ -126,10 +127,10 @@ public abstract class AbstractRealValue extends AbstractExplicitDataTypeValue im
 
 	protected IValue doGreaterThan(IValue other, DataType resultDataType) {
 		AbstractRealValue otherRealValue = (AbstractRealValue) other;
-		NumberFormat numberFormat = ComputationModelUtil.getSuperNumberFormat(getNumberFormat(), otherRealValue.getNumberFormat());
+		NumberFormat widestNumberFormat = getWidestNumberFormat(other);
 		
-		AbstractRealValue leftOperand = cast(numberFormat);
-		AbstractRealValue rightOperand = otherRealValue.cast(numberFormat);
+		AbstractRealValue leftOperand = cast(widestNumberFormat);
+		AbstractRealValue rightOperand = otherRealValue.cast(widestNumberFormat);
 
 		return leftOperand.basicGreaterThan(rightOperand, resultDataType);
 	}
@@ -138,10 +139,10 @@ public abstract class AbstractRealValue extends AbstractExplicitDataTypeValue im
 
 	protected IValue doGreaterThanOrEqualTo(IValue other, DataType resultDataType) {
 		AbstractRealValue otherRealValue = (AbstractRealValue) other;
-		NumberFormat numberFormat = ComputationModelUtil.getSuperNumberFormat(getNumberFormat(), otherRealValue.getNumberFormat());
+		NumberFormat widestNumberFormat = getWidestNumberFormat(other);
 		
-		AbstractRealValue leftOperand = cast(numberFormat);
-		AbstractRealValue rightOperand = otherRealValue.cast(numberFormat);
+		AbstractRealValue leftOperand = cast(widestNumberFormat);
+		AbstractRealValue rightOperand = otherRealValue.cast(widestNumberFormat);
 
 		return leftOperand.basicGreaterThanOrEqualTo(rightOperand, resultDataType);
 	}
@@ -150,10 +151,10 @@ public abstract class AbstractRealValue extends AbstractExplicitDataTypeValue im
 
 	protected IValue doEqualTo(IValue other, DataType resultDataType) {
 		AbstractRealValue otherRealValue = (AbstractRealValue) other;
-		NumberFormat numberFormat = ComputationModelUtil.getSuperNumberFormat(getNumberFormat(), otherRealValue.getNumberFormat());
+		NumberFormat widestNumberFormat = getWidestNumberFormat(other);
 		
-		AbstractRealValue leftOperand = cast(numberFormat);
-		AbstractRealValue rightOperand = otherRealValue.cast(numberFormat);
+		AbstractRealValue leftOperand = cast(widestNumberFormat);
+		AbstractRealValue rightOperand = otherRealValue.cast(widestNumberFormat);
 
 		return leftOperand.basicEqualTo(rightOperand, resultDataType);
 	}
@@ -162,10 +163,10 @@ public abstract class AbstractRealValue extends AbstractExplicitDataTypeValue im
 
 	protected IValue doNotEqualToOrEqualTo(IValue other, DataType resultDataType) {
 		AbstractRealValue otherRealValue = (AbstractRealValue) other;
-		NumberFormat numberFormat = ComputationModelUtil.getSuperNumberFormat(getNumberFormat(), otherRealValue.getNumberFormat());
+		NumberFormat widestNumberFormat = getWidestNumberFormat(other);
 		
-		AbstractRealValue leftOperand = cast(numberFormat);
-		AbstractRealValue rightOperand = otherRealValue.cast(numberFormat);
+		AbstractRealValue leftOperand = cast(widestNumberFormat);
+		AbstractRealValue rightOperand = otherRealValue.cast(widestNumberFormat);
 
 		return leftOperand.basicNotEqualToOrEqualTo(rightOperand, resultDataType);
 	}
@@ -173,5 +174,19 @@ public abstract class AbstractRealValue extends AbstractExplicitDataTypeValue im
 	protected abstract IValue basicNotEqualToOrEqualTo(AbstractRealValue other, DataType resultDataType);
 
 	protected abstract AbstractRealValue cast(NumberFormat numberFormat);
+
+	/**
+	 * @param other
+	 * @return
+	 */
+	private NumberFormat getWidestNumberFormat(IValue other) {
+		DataType dataType1 = TypeSystemUtil.getLeftHandDataType(getDataType(), other.getDataType());
+		DataType dataType2 = TypeSystemUtil.getLeftHandDataType(other.getDataType(), getDataType());
+		
+		NumberFormat numberFormat1 = getContext().getComputationModel().getNumberFormat(dataType1);
+		NumberFormat numberFormat2 = getContext().getComputationModel().getNumberFormat(dataType2);
+	
+		return ComputationModelUtil.getWidestNumberFormat(numberFormat1, numberFormat2);
+	}
 	
 }

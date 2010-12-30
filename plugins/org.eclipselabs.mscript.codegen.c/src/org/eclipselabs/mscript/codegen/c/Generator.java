@@ -44,19 +44,38 @@ public class Generator {
 	}
 	
 	public void generateHeaderCode() {
+		writer.printf("#ifndef _%s_H\n", functionDefinition.getName().toUpperCase());
+		writer.printf("#define _%s_H\n", functionDefinition.getName().toUpperCase());
+		writer.println();
+		
+		generateHeaderIncludes();
+		writer.println();
 		if (functionDefinition.isStateful()) {
 			generateContextStructure();
 		}
+
+		writer.println();
 		generateFunctionPrototypes();
+		writer.println();
+
+		writer.printf("#endif /* _%s_H */\n", functionDefinition.getName().toUpperCase());
+	}
+	
+	public void generateHeaderIncludes() {
+		writer.println("#include <stdint.h>");
 	}
 	
 	public void generateContextStructure() {
 		writer.printf("typedef struct {\n");
 		for (InputVariableDeclaration inputVariableDeclaration: functionDefinition.getInputVariableDeclarations()) {
-			writeContextStructureMember(inputVariableDeclaration);
+			if (inputVariableDeclaration.getCircularBufferSize() > 1) {
+				writeContextStructureMember(inputVariableDeclaration);
+			}
 		}
 		for (OutputVariableDeclaration outputVariableDeclaration: functionDefinition.getOutputVariableDeclarations()) {
-			writeContextStructureMember(outputVariableDeclaration);
+			if (outputVariableDeclaration.getCircularBufferSize() > 1) {
+				writeContextStructureMember(outputVariableDeclaration);
+			}
 		}
 		for (InstanceVariableDeclaration instanceVariableDeclaration: functionDefinition.getInstanceVariableDeclarations()) {
 			writeContextStructureMember(instanceVariableDeclaration);
@@ -67,10 +86,15 @@ public class Generator {
 	private void writeContextStructureMember(StatefulVariableDeclaration variableDeclaration) {
 		if (variableDeclaration.getCircularBufferSize() > 1) {
 			writer.printf("%s %s[%d];\n",
-					GeneratorUtil.toString(variableDeclaration.getType()),
+					GeneratorUtil.getCDataType(context.getComputationModel().getNumberFormat(variableDeclaration.getType())),
 					variableDeclaration.getName(),
 					variableDeclaration.getCircularBufferSize());
 			writer.printf("int %s_index;\n", variableDeclaration.getName());
+		} else {
+			writer.printf("%s %s;\n",
+					GeneratorUtil.getCDataType(context.getComputationModel().getNumberFormat(variableDeclaration.getType())),
+					variableDeclaration.getName(),
+					variableDeclaration.getCircularBufferSize());
 		}
 	}
 	
@@ -89,13 +113,14 @@ public class Generator {
 	}
 
 	public void generateImplementationCode() {
-		generateIncludes();
+		generateImplementationIncludes();
+		writer.println();
 		generateFunctionImplementations();
 	}
 	
-	public void generateIncludes() {
+	public void generateImplementationIncludes() {
+		writer.println("#include <math.h>");
 		writer.printf("#include \"%s.h\"\n", functionDefinition.getName());
-		writer.println();
 	}
 	
 	public void generateFunctionImplementations() {
@@ -177,12 +202,12 @@ public class Generator {
 		for (ComputationCompound compound : functionDefinition.getComputationCompounds()) {
 			if (!compound.getOutputs().isEmpty()) {
 				for (InputVariableDeclaration inputVariableDeclaration : compound.getInputs()) {
-					writer.printf(", %s %s", GeneratorUtil.toString(inputVariableDeclaration.getType()), inputVariableDeclaration.getName());
+					writer.printf(", %s %s", GeneratorUtil.getCDataType(context.getComputationModel().getNumberFormat(inputVariableDeclaration.getType())), inputVariableDeclaration.getName());
 				}
 			}
 		}
 		for (OutputVariableDeclaration outputVariableDeclaration: functionDefinition.getOutputVariableDeclarations()) {
-			writer.printf(", %s *%s", GeneratorUtil.toString(outputVariableDeclaration.getType()), outputVariableDeclaration.getName());
+			writer.printf(", %s *%s", GeneratorUtil.getCDataType(context.getComputationModel().getNumberFormat(outputVariableDeclaration.getType())), outputVariableDeclaration.getName());
 		}
 		writer.print(")");
 	}
@@ -195,7 +220,7 @@ public class Generator {
 		for (ComputationCompound compound : functionDefinition.getComputationCompounds()) {
 			if (compound.getOutputs().isEmpty()) {
 				for (InputVariableDeclaration inputVariableDeclaration : compound.getInputs()) {
-					writer.printf(", %s %s", GeneratorUtil.toString(inputVariableDeclaration.getType()), inputVariableDeclaration.getName());
+					writer.printf(", %s %s", GeneratorUtil.getCDataType(context.getComputationModel().getNumberFormat(inputVariableDeclaration.getType())), inputVariableDeclaration.getName());
 				}
 			}
 		}
@@ -214,7 +239,7 @@ public class Generator {
 			} else {
 				writer.print(", ");
 			}
-			writer.printf("%s %s", GeneratorUtil.toString(inputVariableDeclaration.getType()), inputVariableDeclaration.getName());
+			writer.printf("%s %s", GeneratorUtil.getCDataType(context.getComputationModel().getNumberFormat(inputVariableDeclaration.getType())), inputVariableDeclaration.getName());
 		}
 		for (OutputVariableDeclaration outputVariableDeclaration: functionDefinition.getOutputVariableDeclarations()) {
 			if (first) {
@@ -222,7 +247,7 @@ public class Generator {
 			} else {
 				writer.print(", ");
 			}
-			writer.printf("%s *%s", GeneratorUtil.toString(outputVariableDeclaration.getType()), outputVariableDeclaration.getName());
+			writer.printf("%s *%s", GeneratorUtil.getCDataType(context.getComputationModel().getNumberFormat(outputVariableDeclaration.getType())), outputVariableDeclaration.getName());
 		}
 		writer.print(")");
 	}

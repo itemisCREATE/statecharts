@@ -279,7 +279,8 @@ public class ExpressionTransformer extends AstSwitch<Expression> {
 				BuiltinFunctionCall builtinFunctionCall = ILFactory.eINSTANCE.createBuiltinFunctionCall();
 				builtinFunctionCall.setName(featureReference.getName());
 				builtinFunctionCall.getArguments().add(targetExpression);
-				ILUtil.adaptDataType(builtinFunctionCall, TypeSystemFactory.eINSTANCE.createUnitType());
+				List<DataType> outputDataTypes = builtinFunctionDescriptor.getSignature().evaluateOutputDataTypes(Collections.singletonList(ILUtil.getDataType(targetExpression)));
+				ILUtil.adaptDataType(builtinFunctionCall, outputDataTypes.get(0));
 				return builtinFunctionCall;
 			}
 			status.add(new SyntaxStatus(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, 0, "Invalid feature call", featureReference, AstPackage.FEATURE_REFERENCE__NAME));

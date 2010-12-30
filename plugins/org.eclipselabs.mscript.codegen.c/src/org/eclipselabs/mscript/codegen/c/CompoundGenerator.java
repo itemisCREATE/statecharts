@@ -12,9 +12,18 @@
 package org.eclipselabs.mscript.codegen.c;
 
 import java.io.PrintWriter;
+import java.util.List;
+import java.util.ListIterator;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipselabs.mscript.codegen.c.util.GeneratorUtil;
+import org.eclipselabs.mscript.computation.computationmodel.FixedPointFormat;
+import org.eclipselabs.mscript.computation.computationmodel.FixedPointOperation;
+import org.eclipselabs.mscript.computation.computationmodel.FixedPointOperationKind;
+import org.eclipselabs.mscript.computation.computationmodel.FloatingPointFormat;
+import org.eclipselabs.mscript.computation.computationmodel.NumberFormat;
+import org.eclipselabs.mscript.computation.computationmodel.util.ComputationModelSwitch;
+import org.eclipselabs.mscript.computation.computationmodel.util.ComputationModelUtil;
 import org.eclipselabs.mscript.computation.core.value.IIntegerValue;
 import org.eclipselabs.mscript.computation.core.value.IRealValue;
 import org.eclipselabs.mscript.computation.core.value.IValue;
@@ -30,7 +39,6 @@ import org.eclipselabs.mscript.language.ast.LogicalAndExpression;
 import org.eclipselabs.mscript.language.ast.LogicalOrExpression;
 import org.eclipselabs.mscript.language.ast.MultiplicativeExpression;
 import org.eclipselabs.mscript.language.ast.MultiplicativeExpressionPart;
-import org.eclipselabs.mscript.language.ast.MultiplicativeOperator;
 import org.eclipselabs.mscript.language.ast.ParenthesizedExpression;
 import org.eclipselabs.mscript.language.ast.RealLiteral;
 import org.eclipselabs.mscript.language.ast.RelationalExpression;
@@ -55,6 +63,7 @@ import org.eclipselabs.mscript.language.il.util.ILSwitch;
 import org.eclipselabs.mscript.language.il.util.ILUtil;
 import org.eclipselabs.mscript.typesystem.ArrayType;
 import org.eclipselabs.mscript.typesystem.DataType;
+import org.eclipselabs.mscript.typesystem.util.TypeSystemUtil;
 
 /**
  * @author Andreas Unger
@@ -84,7 +93,7 @@ public class CompoundGenerator extends ILSwitch<Boolean> {
 			writer.print("{\n");
 		}
 		for (LocalVariableDeclaration localVariableDeclaration : compound.getLocalVariableDeclarations()) {
-			writer.print(GeneratorUtil.toString(localVariableDeclaration.getType()));
+			writer.print(GeneratorUtil.getCDataType(context.getComputationModel().getNumberFormat(localVariableDeclaration.getType())));
 			writer.print(" ");
 			writer.print(localVariableDeclaration.getName());
 			writer.print(";\n");
@@ -122,7 +131,7 @@ public class CompoundGenerator extends ILSwitch<Boolean> {
 	public Boolean caseAssignment(Assignment assignment) {
 		new VariableAccessGenerator(assignment).generate();
 		writer.print(" = ");
-		doSwitch(assignment.getAssignedExpression());
+		cast(assignment.getAssignedExpression(), context.getComputationModel().getNumberFormat(assignment.getTarget().getType()));
 		writer.print(";\n");
 		return true;
 	}
@@ -157,7 +166,7 @@ public class CompoundGenerator extends ILSwitch<Boolean> {
 		}
 		
 		String itVarName = iterationVariableDeclaration.getName();
-		String itVarType = GeneratorUtil.toString(iterationVariableDeclaration.getType());
+		String itVarType = GeneratorUtil.getCDataType(context.getComputationModel().getNumberFormat(iterationVariableDeclaration.getType()));
 		int size = collectionArrayType.getDimensions().get(0).getSize();
 		
 		writer.println("{");
@@ -184,7 +193,172 @@ public class CompoundGenerator extends ILSwitch<Boolean> {
 		}
 		return super.defaultCase(object);
 	}
+	
+	private void cast(Expression expression, NumberFormat numberFormat) {
+		if (numberFormat instanceof FloatingPointFormat) {
+			new CastToFloatingPointHelper(expression, (FloatingPointFormat) numberFormat).cast();
+		} else if (numberFormat instanceof FixedPointFormat) {
+			FixedPointFormat fixedPointFormat = (FixedPointFormat) numberFormat;
+			new CastToFixedPointHelper(expression, fixedPointFormat.getWordSize(), fixedPointFormat.getFractionLength()).cast();
+		} else {
+			throw new IllegalArgumentException();
+		}
+	}
+	
+	private class CastToFloatingPointHelper extends ComputationModelSwitch<Boolean> {
 		
+		private Expression expression;
+		private FloatingPointFormat targetFloatingPointFormat;
+		
+		/**
+		 * 
+		 */
+		public CastToFloatingPointHelper(Expression expression, FloatingPointFormat targetFloatingPointFormat) {
+			this.expression = expression;
+			this.targetFloatingPointFormat = targetFloatingPointFormat;
+		}
+		
+		public void cast() {
+			DataType dataType = ILUtil.getDataType(expression);
+			NumberFormat numberFormat = context.getComputationModel().getNumberFormat(dataType);
+			doSwitch(numberFormat);
+		}
+		
+		/* (non-Javadoc)
+		 * @see org.eclipselabs.mscript.computation.computationmodel.util.ComputationModelSwitch#caseFloatingPointFormat(org.eclipselabs.mscript.computation.computationmodel.FloatingPointFormat)
+		 */
+		@Override
+		public Boolean caseFloatingPointFormat(FloatingPointFormat floatingPointFormat) {
+			if (floatingPointFormat.getKind() == targetFloatingPointFormat.getKind()) {
+				new ExpressionGenerator().doSwitch(expression);
+			} else {
+				writer.printf("((%s) (", getCDataType());
+				new ExpressionGenerator().doSwitch(expression);
+				writer.print("))");
+			}
+			return true;
+		}
+		
+		/* (non-Javadoc)
+		 * @see org.eclipselabs.mscript.computation.computationmodel.util.ComputationModelSwitch#caseFixedPointFormat(org.eclipselabs.mscript.computation.computationmodel.FixedPointFormat)
+		 */
+		@Override
+		public Boolean caseFixedPointFormat(FixedPointFormat fixedPointFormat) {
+			if (fixedPointFormat.getFractionLength() > 0) {
+				writer.printf("((%s) ((", getCDataType());
+				new ExpressionGenerator().doSwitch(expression);
+				writer.printf(") * pow(2, -%d)))", fixedPointFormat.getFractionLength());
+			} else {
+				writer.printf("((%s) (", getCDataType());
+				new ExpressionGenerator().doSwitch(expression);
+				writer.print("))");
+			}
+			return true;
+		}
+		
+		private String getCDataType() {
+			switch (targetFloatingPointFormat.getKind()) {
+			case BINARY32:
+				return "float";
+			case BINARY64:
+				return "double";
+			default:
+				throw new IllegalArgumentException();
+			}
+		}
+		
+	}
+		
+	private class CastToFixedPointHelper extends ComputationModelSwitch<Boolean> {
+		
+		private Expression expression;
+		private int wordSize;
+		private int fractionLength;
+		
+		/**
+		 * 
+		 */
+		public CastToFixedPointHelper(Expression expression, int wordSize, int fractionLength) {
+			this.expression = expression;
+			this.wordSize = wordSize;
+			this.fractionLength = fractionLength;
+		}
+		
+		public void cast() {
+			DataType dataType = ILUtil.getDataType(expression);
+			NumberFormat numberFormat = context.getComputationModel().getNumberFormat(dataType);
+			doSwitch(numberFormat);
+		}
+		
+		/* (non-Javadoc)
+		 * @see org.eclipselabs.mscript.computation.computationmodel.util.ComputationModelSwitch#caseFloatingPointFormat(org.eclipselabs.mscript.computation.computationmodel.FloatingPointFormat)
+		 */
+		@Override
+		public Boolean caseFloatingPointFormat(FloatingPointFormat floatingPointFormat) {
+			if (fractionLength > 0) {
+				writer.printf("((%s) floor((", getCDataType());
+				new ExpressionGenerator().doSwitch(expression);
+				writer.printf(") * pow(2, %d) + 0.5))", fractionLength);
+			} else {
+				writer.printf("((%s) (", getCDataType());
+				new ExpressionGenerator().doSwitch(expression);
+				writer.print("))");
+			}
+			return true;
+		}
+		
+		/* (non-Javadoc)
+		 * @see org.eclipselabs.mscript.computation.computationmodel.util.ComputationModelSwitch#caseFixedPointFormat(org.eclipselabs.mscript.computation.computationmodel.FixedPointFormat)
+		 */
+		@Override
+		public Boolean caseFixedPointFormat(FixedPointFormat fixedPointFormat) {
+			if (wordSize != fixedPointFormat.getWordSize()) {
+				writer.printf("((%s) (", getCDataType());
+			}
+			if (fractionLength != fixedPointFormat.getFractionLength()) {
+				writer.print("((");
+				new ExpressionGenerator().doSwitch(expression);
+				if (fractionLength > fixedPointFormat.getFractionLength()) {
+					writer.printf(") << %d)", fractionLength - fixedPointFormat.getFractionLength());
+				} else {
+					writer.printf(") >> %d)", fixedPointFormat.getFractionLength() - fractionLength);
+				}
+			} else {
+				new ExpressionGenerator().doSwitch(expression);
+			}
+			if (wordSize != fixedPointFormat.getWordSize()) {
+				writer.print("))");
+			}
+			return true;
+		}
+		
+		private String getCDataType() {
+			return String.format("int%d_t", wordSize);
+		}
+		
+	}
+	
+	private void writeLiteral(DataType dataType, double value) {
+		NumberFormat numberFormat = context.getComputationModel().getNumberFormat(dataType);
+		writer.printf("(%s) ", GeneratorUtil.getCDataType(numberFormat));
+		if (numberFormat instanceof FixedPointFormat) {
+			FixedPointFormat fixedPointFormat = (FixedPointFormat) numberFormat;
+			writer.print(Math.round(value * Math.pow(2, fixedPointFormat.getFractionLength())));
+		} else {
+			writer.print(value);
+		}
+	}
+
+	private void writeLiteral(DataType dataType, long value) {
+		NumberFormat numberFormat = context.getComputationModel().getNumberFormat(dataType);
+		writer.printf("(%s) ", GeneratorUtil.getCDataType(numberFormat));
+		if (numberFormat instanceof FixedPointFormat) {
+			FixedPointFormat fixedPointFormat = (FixedPointFormat) numberFormat;
+			value <<= fixedPointFormat.getFractionLength();
+		}
+		writer.print(value);
+	}
+	
 	private class ExpressionGenerator extends AstSwitch<Boolean> {
 		
 		/* (non-Javadoc)
@@ -239,11 +413,7 @@ public class CompoundGenerator extends ILSwitch<Boolean> {
 		 */
 		@Override
 		public Boolean caseEqualityExpression(EqualityExpression equalityExpression) {
-			doSwitch(equalityExpression.getLeftOperand());
-			writer.print(" ");
-			writer.print(equalityExpression.getOperator().getLiteral());
-			writer.print(" ");
-			doSwitch(equalityExpression.getRightOperand());
+			writeCompareExpression(equalityExpression.getLeftOperand(), equalityExpression.getRightOperand(), equalityExpression.getOperator().getLiteral());
 			return true;
 		}
 		
@@ -252,12 +422,27 @@ public class CompoundGenerator extends ILSwitch<Boolean> {
 		 */
 		@Override
 		public Boolean caseRelationalExpression(RelationalExpression relationalExpression) {
-			doSwitch(relationalExpression.getLeftOperand());
-			writer.print(" ");
-			writer.print(relationalExpression.getOperator().getLiteral());
-			writer.print(" ");
-			doSwitch(relationalExpression.getRightOperand());
+			writeCompareExpression(relationalExpression.getLeftOperand(), relationalExpression.getRightOperand(), relationalExpression.getOperator().getLiteral());
 			return true;
+		}
+		
+		private void writeCompareExpression(Expression leftOperand, Expression rightOperand, String operator) {
+			DataType leftDataType = ILUtil.getDataType(leftOperand);
+			DataType rightDataType = ILUtil.getDataType(rightOperand);
+			
+			DataType dataType1 = TypeSystemUtil.getLeftHandDataType(leftDataType, rightDataType);
+			DataType dataType2 = TypeSystemUtil.getLeftHandDataType(rightDataType, leftDataType);
+			
+			NumberFormat numberFormat1 = context.getComputationModel().getNumberFormat(dataType1);
+			NumberFormat numberFormat2 = context.getComputationModel().getNumberFormat(dataType2);
+			
+			NumberFormat widestNumberFormat = ComputationModelUtil.getWidestNumberFormat(numberFormat1, numberFormat2);
+
+			cast(leftOperand, widestNumberFormat);
+			writer.print(" ");
+			writer.print(operator);
+			writer.print(" ");
+			cast(rightOperand, widestNumberFormat);
 		}
 		
 		/* (non-Javadoc)
@@ -265,13 +450,16 @@ public class CompoundGenerator extends ILSwitch<Boolean> {
 		 */
 		@Override
 		public Boolean caseAdditiveExpression(AdditiveExpression additiveExpression) {
-			doSwitch(additiveExpression.getLeftOperand());
+			NumberFormat numberFormat = context.getComputationModel().getNumberFormat(ILUtil.getDataType(additiveExpression));
+			
+			cast(additiveExpression.getLeftOperand(), numberFormat);
 			for (AdditiveExpressionPart rightPart : additiveExpression.getRightParts()) {
 				writer.print(" ");
 				writer.print(rightPart.getOperator().getLiteral());
 				writer.print(" ");
-				doSwitch(rightPart.getOperand());
+				cast(rightPart.getOperand(), numberFormat);
 			}
+			
 			return true;
 		}
 		
@@ -280,23 +468,142 @@ public class CompoundGenerator extends ILSwitch<Boolean> {
 		 */
 		@Override
 		public Boolean caseMultiplicativeExpression(MultiplicativeExpression multiplicativeExpression) {
-			doSwitch(multiplicativeExpression.getLeftOperand());
-			for (MultiplicativeExpressionPart rightPart : multiplicativeExpression.getRightParts()) {
-				writer.print(" ");
-				writer.print(rightPart.getOperator().getLiteral());
-				if (rightPart.getOperator() == MultiplicativeOperator.DIVISION) {
-					writer.print(" (double) (");
-				} else {
-					writer.print(" ");
-				}
-				doSwitch(rightPart.getOperand());
-				if (rightPart.getOperator() == MultiplicativeOperator.DIVISION) {
-					writer.print(")");
-				}
+			List<MultiplicativeExpressionPart> rightParts = multiplicativeExpression.getRightParts();
+
+			NumberFormat numberFormat = context.getComputationModel().getNumberFormat(ILUtil.getDataType(multiplicativeExpression));
+			if (numberFormat instanceof FloatingPointFormat) {
+				writeFloatingPointMultiplicativeExpression(multiplicativeExpression.getLeftOperand(), rightParts.listIterator(rightParts.size()), (FloatingPointFormat) numberFormat);
+			} else if (numberFormat instanceof FixedPointFormat) {
+				writeFixedPointMultiplicativeExpression(multiplicativeExpression.getLeftOperand(), rightParts.listIterator(rightParts.size()), (FixedPointFormat) numberFormat);
+			} else {
+				throw new IllegalArgumentException();
 			}
+			
 			return true;
 		}
 		
+		private void writeFloatingPointMultiplicativeExpression(Expression leftOperand, ListIterator<MultiplicativeExpressionPart> rightParts, FloatingPointFormat floatingPointFormat) {
+			MultiplicativeExpressionPart part = rightParts.previous();
+			if (rightParts.hasPrevious()) {
+				writeFloatingPointMultiplicativeExpression(leftOperand, rightParts, floatingPointFormat);
+			} else {
+				new CastToFloatingPointHelper(leftOperand, floatingPointFormat).cast();
+			}
+			writer.print(" ");
+			writer.print(part.getOperator().getLiteral());
+			writer.print(" ");
+			new CastToFloatingPointHelper(part.getOperand(), floatingPointFormat).cast();
+		}
+		
+		private void writeFixedPointMultiplicativeExpression(Expression leftOperand, ListIterator<MultiplicativeExpressionPart> rightParts, FixedPointFormat fixedPointFormat) {
+			MultiplicativeExpressionPart part = rightParts.previous();
+			rightParts.next();
+			switch (part.getOperator()) {
+			case MULTIPLICATION:
+				writeFixedPointMultiplicationExpression(leftOperand, rightParts, fixedPointFormat);
+				break;
+			case DIVISION:
+				writeFixedPointDivisionExpression(leftOperand, rightParts, fixedPointFormat);
+				break;
+			default:
+				throw new IllegalArgumentException();
+			}
+		}
+		
+		private void writeFixedPointMultiplicationExpression(Expression leftOperand, ListIterator<MultiplicativeExpressionPart> rightParts, FixedPointFormat fixedPointFormat) {
+			MultiplicativeExpressionPart part = rightParts.previous();
+			FixedPointOperation operation = ComputationModelUtil.getFixedPointOperation(fixedPointFormat, FixedPointOperationKind.MULTIPLY);
+			
+			boolean hasIntermediateWordSize = operation.getIntermediateWordSize() != fixedPointFormat.getWordSize();
+		
+			if (hasIntermediateWordSize) {
+				writer.printf("(int%d_t) ", fixedPointFormat.getWordSize());
+			}
+			
+			if (hasIntermediateWordSize || fixedPointFormat.getFractionLength() > 0) {
+				writer.print("(");
+			}
+			
+			boolean castExplicitly = rightParts.hasPrevious() && hasIntermediateWordSize;
+			
+			if (castExplicitly) {
+				writer.printf("(int%d_t) (", operation.getIntermediateWordSize());
+			}
+
+			if (rightParts.hasPrevious()) {
+				writeFixedPointMultiplicativeExpression(leftOperand, rightParts, fixedPointFormat);
+			} else {
+				new CastToFixedPointHelper(leftOperand, operation.getIntermediateWordSize(), fixedPointFormat.getFractionLength()).cast();
+			}
+			
+			if (castExplicitly) {
+				writer.print(")");
+			}
+			
+			writer.print(" * ");
+			
+			if (fixedPointFormat.getFractionLength() > 0) {
+				writer.print("(");
+			}
+
+			new CastToFixedPointHelper(part.getOperand(), operation.getIntermediateWordSize(), fixedPointFormat.getFractionLength()).cast();
+			
+			if (fixedPointFormat.getFractionLength() > 0) {
+				writer.printf(") >> %d", fixedPointFormat.getFractionLength());
+			}
+
+			if (hasIntermediateWordSize || fixedPointFormat.getFractionLength() > 0) {
+				writer.print(")");
+			}
+		}
+
+		private void writeFixedPointDivisionExpression(Expression leftOperand, ListIterator<MultiplicativeExpressionPart> rightParts, FixedPointFormat fixedPointFormat) {
+			MultiplicativeExpressionPart part = rightParts.previous();
+			FixedPointOperation operation = ComputationModelUtil.getFixedPointOperation(fixedPointFormat, FixedPointOperationKind.DIVIDE);
+			
+			boolean hasIntermediateWordSize = operation.getIntermediateWordSize() != fixedPointFormat.getWordSize();
+		
+			if (hasIntermediateWordSize) {
+				writer.printf("(int%d_t) (", fixedPointFormat.getWordSize());
+			}
+			
+			if (fixedPointFormat.getFractionLength() > 0) {
+				writer.print("(");
+			}
+
+			boolean castExplicitly = rightParts.hasPrevious() && hasIntermediateWordSize;
+			
+			if (castExplicitly) {
+				writer.printf("(int%d_t) ", operation.getIntermediateWordSize());
+			}
+			
+			if (castExplicitly || fixedPointFormat.getFractionLength() > 0) {
+				writer.print("(");
+			}
+
+			if (rightParts.hasPrevious()) {
+				writeFixedPointMultiplicativeExpression(leftOperand, rightParts, fixedPointFormat);
+			} else {
+				new CastToFixedPointHelper(leftOperand, operation.getIntermediateWordSize(), fixedPointFormat.getFractionLength()).cast();
+			}
+			
+			if (castExplicitly || fixedPointFormat.getFractionLength() > 0) {
+				writer.print(")");
+			}
+			
+			if (fixedPointFormat.getFractionLength() > 0) {
+				writer.printf(" << %d)", fixedPointFormat.getFractionLength());
+			}
+
+			writer.print(" / ");
+			
+			new CastToFixedPointHelper(part.getOperand(), operation.getIntermediateWordSize(), fixedPointFormat.getFractionLength()).cast();
+			
+			if (hasIntermediateWordSize) {
+				writer.print(")");
+			}
+		}
+
 		/* (non-Javadoc)
 		 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseParenthesizedExpression(org.eclipselabs.mscript.language.ast.ParenthesizedExpression)
 		 */
@@ -318,20 +625,22 @@ public class CompoundGenerator extends ILSwitch<Boolean> {
 		}
 		
 		/* (non-Javadoc)
-		 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseIntegerLiteral(org.eclipselabs.mscript.language.ast.IntegerLiteral)
-		 */
-		@Override
-		public Boolean caseIntegerLiteral(IntegerLiteral integerLiteral) {
-			writer.print(Long.toString(integerLiteral.getValue()));
-			return true;
-		}
-		
-		/* (non-Javadoc)
 		 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseRealLiteral(org.eclipselabs.mscript.language.ast.RealLiteral)
 		 */
 		@Override
 		public Boolean caseRealLiteral(RealLiteral realLiteral) {
-			writer.print(Double.toString(realLiteral.getValue()));
+			DataType dataType = ILUtil.getDataType(realLiteral);
+			writeLiteral(dataType, realLiteral.getValue());
+			return true;
+		}
+
+		/* (non-Javadoc)
+		 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseIntegerLiteral(org.eclipselabs.mscript.language.ast.IntegerLiteral)
+		 */
+		@Override
+		public Boolean caseIntegerLiteral(IntegerLiteral integerLiteral) {
+			DataType dataType = ILUtil.getDataType(integerLiteral);
+			writeLiteral(dataType, integerLiteral.getValue());
 			return true;
 		}
 		
@@ -394,10 +703,10 @@ public class CompoundGenerator extends ILSwitch<Boolean> {
 			IValue templateArgument = templateVariableDeclaration.getValue();
 			if (templateArgument instanceof IIntegerValue) {
 				IIntegerValue value = (IIntegerValue) templateArgument;
-				writer.print(Long.toString(value.longValue()));
+				writeLiteral(value.getDataType(), value.longValue());
 			} else if (templateArgument instanceof IRealValue) {
 				IRealValue value = (IRealValue) templateArgument;
-				writer.print(Double.toString(value.doubleValue()));
+				writeLiteral(value.getDataType(), value.doubleValue());
 			}
 			return true;
 		}
@@ -449,8 +758,12 @@ public class CompoundGenerator extends ILSwitch<Boolean> {
 		private void writeContextAccess() {
 			String name = variableAccess.getTarget().getName();
 			int circularBufferSize = ((StatefulVariableDeclaration) variableAccess.getTarget()).getCircularBufferSize();
-			writer.printf("context->%s[(context->%s_index + (%d)) %% %d]", name, name, variableAccess.getStepIndex(),
-					circularBufferSize);
+			if (circularBufferSize > 1) {
+				writer.printf("context->%s[(context->%s_index + (%d)) %% %d]", name, name, variableAccess.getStepIndex(),
+						circularBufferSize);
+			} else {
+				writer.printf("context->%s", name);
+			}
 		}
 		
 	}

@@ -63,7 +63,7 @@ public class ComputationModelUtil {
 		return operation;
 	}
 	
-	public static NumberFormat getSuperNumberFormat(NumberFormat numberFormat1, NumberFormat numberFormat2) {
+	public static NumberFormat getWidestNumberFormat(NumberFormat numberFormat1, NumberFormat numberFormat2) {
 		if (numberFormat1 instanceof FloatingPointFormat && numberFormat2 instanceof FloatingPointFormat) {
 			int rank1 = getFloatingPointFormatRank((FloatingPointFormat) numberFormat1);
 			int rank2 = getFloatingPointFormatRank((FloatingPointFormat) numberFormat2);
