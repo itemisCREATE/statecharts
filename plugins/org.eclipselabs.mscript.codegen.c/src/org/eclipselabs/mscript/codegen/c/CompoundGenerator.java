@@ -761,8 +761,17 @@ public class CompoundGenerator extends ILSwitch<Boolean> {
 			String name = variableAccess.getTarget().getName();
 			int circularBufferSize = ((StatefulVariableDeclaration) variableAccess.getTarget()).getCircularBufferSize();
 			if (circularBufferSize > 1) {
-				writer.printf("context->%s[(context->%s_index + (%d)) %% %d]", name, name, variableAccess.getStepIndex(),
-						circularBufferSize);
+				int stepIndex = variableAccess.getStepIndex();
+				if (stepIndex == 0) {
+					writer.printf("context->%s[context->%s_index]", name, name, stepIndex,
+							circularBufferSize);
+				} else if (stepIndex < 0) {
+					writer.printf("context->%s[(context->%s_index - %d) %% %d]", name, name, -stepIndex,
+							circularBufferSize);
+				} else {
+					writer.printf("context->%s[(context->%s_index + %d) %% %d]", name, name, stepIndex,
+							circularBufferSize);
+				}
 			} else {
 				writer.printf("context->%s", name);
 			}
