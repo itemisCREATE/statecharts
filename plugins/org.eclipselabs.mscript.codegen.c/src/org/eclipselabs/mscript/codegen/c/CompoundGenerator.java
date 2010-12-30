@@ -316,7 +316,9 @@ public class CompoundGenerator extends ILSwitch<Boolean> {
 				writer.printf("((%s) (", getCDataType());
 			}
 			if (fractionLength != fixedPointFormat.getFractionLength()) {
-				writer.print("((");
+				if (wordSize == fixedPointFormat.getWordSize()) {
+					writer.print("((");
+				}
 				new ExpressionGenerator().doSwitch(expression);
 				if (fractionLength > fixedPointFormat.getFractionLength()) {
 					writer.printf(") << %d)", fractionLength - fixedPointFormat.getFractionLength());
@@ -325,9 +327,9 @@ public class CompoundGenerator extends ILSwitch<Boolean> {
 				}
 			} else {
 				new ExpressionGenerator().doSwitch(expression);
-			}
-			if (wordSize != fixedPointFormat.getWordSize()) {
-				writer.print("))");
+				if (wordSize != fixedPointFormat.getWordSize()) {
+					writer.print("))");
+				}
 			}
 			return true;
 		}
