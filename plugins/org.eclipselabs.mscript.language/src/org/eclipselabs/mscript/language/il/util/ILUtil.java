@@ -26,8 +26,13 @@ public class ILUtil {
 		return adapter != null ? adapter.getDataType() : null;
 	}
 	
-	public static void adaptDataType(Expression expression, DataType dataType) {
-		expression.eAdapters().add(new DataTypeAdapter(dataType));
+	public static void setDataType(Expression expression, DataType dataType) {
+		DataTypeAdapter adapter = (DataTypeAdapter) EcoreUtil.getAdapter(expression.eAdapters(), DataTypeAdapter.class);
+		if (adapter == null) {
+			adapter = new DataTypeAdapter();
+			expression.eAdapters().add(adapter);
+		}
+		adapter.setDataType(dataType);
 	}
 	
 }

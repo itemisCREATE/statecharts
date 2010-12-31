@@ -43,6 +43,7 @@ import org.eclipselabs.mscript.language.il.OutputVariableDeclaration;
 import org.eclipselabs.mscript.language.il.TemplateVariableDeclaration;
 import org.eclipselabs.mscript.language.il.VariableDeclaration;
 import org.eclipselabs.mscript.language.il.internal.util.EquationCompoundHelper;
+import org.eclipselabs.mscript.language.il.util.DataTypeAdaptor;
 import org.eclipselabs.mscript.language.internal.LanguagePlugin;
 import org.eclipselabs.mscript.language.internal.functionmodel.util.FunctionModelUtil;
 import org.eclipselabs.mscript.language.internal.util.StatusUtil;
@@ -76,6 +77,12 @@ public class FunctionDefinitionTransformer {
 			return new FunctionDefinitionTransformerResult(ilFunctionDefinition, status);
 		}
 		
+		StatusUtil.merge(status, new DataTypeAdaptor().adapt(ilFunctionDefinition));
+		
+		if (!status.isOK()) {
+			return new FunctionDefinitionTransformerResult(ilFunctionDefinition, status);
+		}
+
 		return new FunctionDefinitionTransformerResult(ilFunctionDefinition);
 	}
 	

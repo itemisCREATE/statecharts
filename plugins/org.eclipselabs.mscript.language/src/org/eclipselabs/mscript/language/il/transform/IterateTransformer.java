@@ -14,18 +14,14 @@ package org.eclipselabs.mscript.language.il.transform;
 import java.util.Collections;
 
 import org.eclipse.core.runtime.MultiStatus;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.ast.IterationCall;
 import org.eclipselabs.mscript.language.il.CompoundStatement;
 import org.eclipselabs.mscript.language.il.ForeachStatement;
 import org.eclipselabs.mscript.language.il.ILFactory;
 import org.eclipselabs.mscript.language.il.LocalVariableDeclaration;
-import org.eclipselabs.mscript.language.il.util.ILUtil;
 import org.eclipselabs.mscript.language.internal.LanguagePlugin;
 import org.eclipselabs.mscript.language.internal.util.StatusUtil;
-import org.eclipselabs.mscript.typesystem.ArrayType;
-import org.eclipselabs.mscript.typesystem.DataType;
 
 /**
  * @author Andreas Unger
@@ -46,13 +42,6 @@ public class IterateTransformer implements IIterationCallTransformer {
 		
 		LocalVariableDeclaration iterationVariableDeclaration = ILFactory.eINSTANCE.createLocalVariableDeclaration();
 		iterationVariableDeclaration.setName(iterationCall.getVariables().get(0).getName());
-
-		DataType collectionDataType = ILUtil.getDataType(collectionExpression);
-		if (!(collectionDataType instanceof ArrayType)) {
-			throw new RuntimeException("Collection type must be array type");
-		}
-		ArrayType arrayType = (ArrayType) collectionDataType;
-		iterationVariableDeclaration.setType(EcoreUtil.copy(arrayType.getElementType()));
 
 		StatusUtil.merge(status, new ExpressionTransformer(context).transform(
 				iterationCall.getAccumulator().getInitializer(),

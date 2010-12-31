@@ -64,9 +64,9 @@ public enum BuiltinFunctionDescriptor {
 	/**
 	 * 
 	 */
-	public static BuiltinFunctionDescriptor valueOf(String name, int kind) {
+	public static BuiltinFunctionDescriptor get(String name) {
 		for (BuiltinFunctionDescriptor builtinFunctions : values()) {
-			if (builtinFunctions.name.equals(name) && (builtinFunctions.kind & kind) != 0) {
+			if (builtinFunctions.name.equals(name)) {
 				return builtinFunctions;
 			}
 		}

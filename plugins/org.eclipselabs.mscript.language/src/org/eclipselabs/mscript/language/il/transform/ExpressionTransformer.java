@@ -61,16 +61,13 @@ import org.eclipselabs.mscript.language.il.LocalVariableDeclaration;
 import org.eclipselabs.mscript.language.il.VariableDeclaration;
 import org.eclipselabs.mscript.language.il.VariableReference;
 import org.eclipselabs.mscript.language.il.util.BuiltinFunctionDescriptor;
-import org.eclipselabs.mscript.language.il.util.ILUtil;
 import org.eclipselabs.mscript.language.internal.LanguagePlugin;
 import org.eclipselabs.mscript.language.internal.functionmodel.util.StepExpressionHelper;
 import org.eclipselabs.mscript.language.internal.functionmodel.util.StepExpressionResult;
 import org.eclipselabs.mscript.language.internal.interpreter.InvalidUnitExpressionOperandException;
 import org.eclipselabs.mscript.language.internal.interpreter.UnitExpressionHelper;
 import org.eclipselabs.mscript.language.util.SyntaxStatus;
-import org.eclipselabs.mscript.typesystem.DataType;
 import org.eclipselabs.mscript.typesystem.IntegerType;
-import org.eclipselabs.mscript.typesystem.OperatorKind;
 import org.eclipselabs.mscript.typesystem.RealType;
 import org.eclipselabs.mscript.typesystem.TypeSystemFactory;
 import org.eclipselabs.mscript.typesystem.util.TypeSystemUtil;
@@ -97,22 +94,7 @@ public class ExpressionTransformer extends AstSwitch<Expression> {
 	
 	public IStatus transform(Expression expression, List<ExpressionTarget> targets) {
 		Expression result = doSwitch(expression);
-		DataType dataType = ILUtil.getDataType(result);
-		
-		if (dataType == null) {
-			throw new RuntimeException("Data type not set");
-		}
-
 		ExpressionTarget target = targets.get(0);
-		if (target.getVariableDeclaration().getType() == null) {
-			target.getVariableDeclaration().setType(EcoreUtil.copy(dataType));
-		} else {
-			DataType leftHandDataType = TypeSystemUtil.getLeftHandDataType(target.getVariableDeclaration().getType(), dataType);
-			if (leftHandDataType == null) {
-				throw new RuntimeException("Incompatible data types in assignment");
-			}
-			target.getVariableDeclaration().setType(EcoreUtil.copy(leftHandDataType));
-		}
 
 		Assignment assignment = ILFactory.eINSTANCE.createAssignment();
 		assignment.setAssignedExpression(result);
@@ -140,7 +122,6 @@ public class ExpressionTransformer extends AstSwitch<Expression> {
 			LocalVariableDeclaration letVariableDeclaration = ILFactory.eINSTANCE.createLocalVariableDeclaration();
 			letVariableDeclaration.setName(letExpressionVariableDeclaration.getNames().get(0));
 			Expression assignedExpression = doSwitch(letExpressionVariableDeclaration.getAssignedExpression());
-			letVariableDeclaration.setType(EcoreUtil.copy(ILUtil.getDataType(assignedExpression)));
 			letVariableDeclaration.setInitializer(assignedExpression);
 			compoundStatement.getStatements().add(letVariableDeclaration);
 			context.getScope().add(letVariableDeclaration);
@@ -157,7 +138,6 @@ public class ExpressionTransformer extends AstSwitch<Expression> {
 		VariableReference variableReference = ILFactory.eINSTANCE.createVariableReference();
 		variableReference.setTarget(localVariableDeclaration);
 		variableReference.setStepIndex(0);
-		ILUtil.adaptDataType(variableReference, localVariableDeclaration.getType());
 		return variableReference;
 	}
 	
@@ -197,7 +177,6 @@ public class ExpressionTransformer extends AstSwitch<Expression> {
 		VariableReference variableReference = ILFactory.eINSTANCE.createVariableReference();
 		variableReference.setTarget(localVariableDeclaration);
 		variableReference.setStepIndex(0);
-		ILUtil.adaptDataType(variableReference, localVariableDeclaration.getType());
 		return variableReference;
 	}
 	
@@ -246,10 +225,6 @@ public class ExpressionTransformer extends AstSwitch<Expression> {
 				VariableReference variableReference = ILFactory.eINSTANCE.createVariableReference();
 				variableReference.setTarget(variableDeclaration);
 				variableReference.setStepIndex(stepExpressionResult.getIndex());
-				if (variableDeclaration.getType() == null) {
-					throw new RuntimeException("Data type of variable declaration not set");
-				}
-				ILUtil.adaptDataType(variableReference, variableDeclaration.getType());
 				return variableReference;
 			} catch (CoreException e) {
 				throw new RuntimeException(e);
@@ -274,13 +249,11 @@ public class ExpressionTransformer extends AstSwitch<Expression> {
 		 */
 		@Override
 		public Expression caseFeatureReference(FeatureReference featureReference) {
-			BuiltinFunctionDescriptor builtinFunctionDescriptor = BuiltinFunctionDescriptor.valueOf(featureReference.getName(), BuiltinFunctionDescriptor.PROPERTY);
-			if (builtinFunctionDescriptor != null) {
+			BuiltinFunctionDescriptor builtinFunctionDescriptor = BuiltinFunctionDescriptor.get(featureReference.getName());
+			if (builtinFunctionDescriptor != null && (builtinFunctionDescriptor.getKind() & BuiltinFunctionDescriptor.PROPERTY) != 0) {
 				BuiltinFunctionCall builtinFunctionCall = ILFactory.eINSTANCE.createBuiltinFunctionCall();
 				builtinFunctionCall.setName(featureReference.getName());
 				builtinFunctionCall.getArguments().add(targetExpression);
-				List<DataType> outputDataTypes = builtinFunctionDescriptor.getSignature().evaluateOutputDataTypes(Collections.singletonList(ILUtil.getDataType(targetExpression)));
-				ILUtil.adaptDataType(builtinFunctionCall, outputDataTypes.get(0));
 				return builtinFunctionCall;
 			}
 			status.add(new SyntaxStatus(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, 0, "Invalid feature call", featureReference, AstPackage.FEATURE_REFERENCE__NAME));
@@ -312,7 +285,6 @@ public class ExpressionTransformer extends AstSwitch<Expression> {
 			VariableReference variableReference = ILFactory.eINSTANCE.createVariableReference();
 			variableReference.setTarget(result.getLocalVariableDeclaration());
 			variableReference.setStepIndex(0);
-			ILUtil.adaptDataType(variableReference, result.getLocalVariableDeclaration().getType());
 			return variableReference;
 		}
 		
@@ -320,8 +292,6 @@ public class ExpressionTransformer extends AstSwitch<Expression> {
 		
 	private InvalidExpression createInvalidExpression() {
 		InvalidExpression invalidExpression = ILFactory.eINSTANCE.createInvalidExpression();
-		DataType invalidDataType = TypeSystemFactory.eINSTANCE.createInvalidDataType();
-		ILUtil.adaptDataType(invalidExpression, invalidDataType);
 		return invalidExpression;
 	}
 	
@@ -335,16 +305,9 @@ public class ExpressionTransformer extends AstSwitch<Expression> {
 		Expression leftTransformedExpression = doSwitch(impliesExpression.getLeftOperand());
 		Expression rightTransformedExpression = doSwitch(impliesExpression.getRightOperand());
 		
-		DataType leftDataType = ILUtil.getDataType(leftTransformedExpression);
-		DataType rightDataType = ILUtil.getDataType(rightTransformedExpression);
-		
-		DataType dataType = leftDataType.evaluate(OperatorKind.IMPLIES, rightDataType);
-		
 		transformedImpliesExpression.setLeftOperand(leftTransformedExpression);
 		transformedImpliesExpression.setRightOperand(rightTransformedExpression);
 
-		ILUtil.adaptDataType(transformedImpliesExpression, dataType);
-		
 		return transformedImpliesExpression;
 	}
 	
@@ -354,20 +317,12 @@ public class ExpressionTransformer extends AstSwitch<Expression> {
 	@Override
 	public Expression caseLogicalOrExpression(LogicalOrExpression logicalOrExpression) {
 		LogicalOrExpression transformedExpression = AstFactory.eINSTANCE.createLogicalOrExpression();
-		DataType dataType = null;
 		
 		for (Expression operand : logicalOrExpression.getOperands()) {
 			Expression transformedOperand = doSwitch(operand);
-			DataType operandDataType = ILUtil.getDataType(transformedOperand);
-			if (dataType == null) {
-				dataType = operandDataType;
-			} else {
-				dataType = dataType.evaluate(OperatorKind.LOGICAL_OR, operandDataType);
-			}
 			transformedExpression.getOperands().add(transformedOperand);
 		}
 		
-		ILUtil.adaptDataType(transformedExpression, dataType);
 		return transformedExpression;
 	}
 	
@@ -377,20 +332,12 @@ public class ExpressionTransformer extends AstSwitch<Expression> {
 	@Override
 	public Expression caseLogicalAndExpression(LogicalAndExpression logicalAndExpression) {
 		LogicalAndExpression transformedExpression = AstFactory.eINSTANCE.createLogicalAndExpression();
-		DataType dataType = null;
 		
 		for (Expression operand : logicalAndExpression.getOperands()) {
 			Expression transformedOperand = doSwitch(operand);
-			DataType operandDataType = ILUtil.getDataType(transformedOperand);
-			if (dataType == null) {
-				dataType = operandDataType;
-			} else {
-				dataType = dataType.evaluate(OperatorKind.LOGICAL_AND, operandDataType);
-			}
 			transformedExpression.getOperands().add(transformedOperand);
 		}
 		
-		ILUtil.adaptDataType(transformedExpression, dataType);
 		return transformedExpression;
 	}
 	
@@ -407,22 +354,6 @@ public class ExpressionTransformer extends AstSwitch<Expression> {
 		Expression rightExpression = doSwitch(equalityExpression.getRightOperand());		
 		transformedExpression.setRightOperand(rightExpression);
 		
-		OperatorKind operatorKind;
-		switch (equalityExpression.getOperator()) {
-		case EQUAL_TO:
-			operatorKind = OperatorKind.EQUAL_TO;
-			break;
-		case NOT_EQUAL_TO:
-			operatorKind = OperatorKind.NOT_EQUAL_TO;
-			break;
-		default:
-			throw new IllegalArgumentException();
-		}
-		
-		DataType leftDataType = ILUtil.getDataType(leftExpression);
-		DataType rightDataType = ILUtil.getDataType(rightExpression);
-		DataType transformedDataType = leftDataType.evaluate(operatorKind, rightDataType);
-		ILUtil.adaptDataType(transformedExpression, transformedDataType);
 		return transformedExpression;
 	}
 	
@@ -439,27 +370,6 @@ public class ExpressionTransformer extends AstSwitch<Expression> {
 		Expression rightExpression = doSwitch(relationalExpression.getRightOperand());
 		transformedExpression.setRightOperand(rightExpression);
 		
-		OperatorKind operatorKind;
-		switch (relationalExpression.getOperator()) {
-		case GREATER_THAN:
-			operatorKind = OperatorKind.GREATER_THAN;
-			break;
-		case GREATER_THAN_OR_EQUAL_TO:
-			operatorKind = OperatorKind.GREATER_THAN_OR_EQUAL_TO;
-			break;
-		case LESS_THAN:
-			operatorKind = OperatorKind.LESS_THAN;
-			break;
-		case LESS_THAN_OR_EQUAL_TO:
-			operatorKind = OperatorKind.LESS_THAN_OR_EQUAL_TO;
-			break;
-		default:
-			throw new IllegalArgumentException();
-		}
-		DataType leftDataType = ILUtil.getDataType(leftExpression);
-		DataType rightDataType = ILUtil.getDataType(rightExpression);
-		DataType transformedDataType = leftDataType.evaluate(operatorKind, rightDataType);
-		ILUtil.adaptDataType(transformedExpression, transformedDataType);
 		return transformedExpression;
 	}
 	
@@ -471,27 +381,13 @@ public class ExpressionTransformer extends AstSwitch<Expression> {
 		AdditiveExpression transformedExpression = AstFactory.eINSTANCE.createAdditiveExpression();
 		Expression expression = doSwitch(additiveExpression.getLeftOperand());
 		transformedExpression.setLeftOperand(expression);
-		DataType dataType = ILUtil.getDataType(expression);
 		for (AdditiveExpressionPart rightPart : additiveExpression.getRightParts()) {
 			AdditiveExpressionPart transformedRightPart = AstFactory.eINSTANCE.createAdditiveExpressionPart();
 			transformedRightPart.setOperator(rightPart.getOperator());
 			expression = doSwitch(rightPart.getOperand());
 			transformedRightPart.setOperand(expression);
-			OperatorKind operatorKind;
-			switch (rightPart.getOperator()) {
-			case ADDITION:
-				operatorKind = OperatorKind.ADDITION;
-				break;
-			case SUBTRACTION:
-				operatorKind = OperatorKind.SUBTRACTION;
-				break;
-			default:
-				throw new IllegalArgumentException();
-			}
-			dataType = dataType.evaluate(operatorKind, ILUtil.getDataType(expression));
 			transformedExpression.getRightParts().add(transformedRightPart);
 		}
-		ILUtil.adaptDataType(transformedExpression, dataType);
 		return transformedExpression;
 	}
 	
@@ -503,33 +399,13 @@ public class ExpressionTransformer extends AstSwitch<Expression> {
 		MultiplicativeExpression transformedExpression = AstFactory.eINSTANCE.createMultiplicativeExpression();
 		Expression expression = doSwitch(multiplicativeExpression.getLeftOperand());
 		transformedExpression.setLeftOperand(expression);
-		DataType dataType = ILUtil.getDataType(expression);
 		for (MultiplicativeExpressionPart rightPart : multiplicativeExpression.getRightParts()) {
 			MultiplicativeExpressionPart transformedRightPart = AstFactory.eINSTANCE.createMultiplicativeExpressionPart();
 			transformedRightPart.setOperator(rightPart.getOperator());
 			expression = doSwitch(rightPart.getOperand());
 			transformedRightPart.setOperand(expression);
-			OperatorKind operatorKind;
-			switch (rightPart.getOperator()) {
-			case MULTIPLICATION:
-				operatorKind = OperatorKind.MULTIPLICATION;
-				break;
-			case DIVISION:
-				operatorKind = OperatorKind.DIVISION;
-				break;
-			case ELEMENT_WISE_MULTIPLICATION:
-				operatorKind = OperatorKind.ELEMENT_WISE_MULTIPLICATION;
-				break;
-			case ELEMENT_WISE_DIVISION:
-				operatorKind = OperatorKind.ELEMENT_WISE_DIVISION;
-				break;
-			default:
-				throw new IllegalArgumentException();
-			}
-			dataType = dataType.evaluate(operatorKind, ILUtil.getDataType(expression));
 			transformedExpression.getRightParts().add(transformedRightPart);
 		}
-		ILUtil.adaptDataType(transformedExpression, dataType);
 		return transformedExpression;
 	}
 	
@@ -542,7 +418,6 @@ public class ExpressionTransformer extends AstSwitch<Expression> {
 		Expression expression = doSwitch(typeTestExpression.getExpression());
 		transformedTypeTestExpression.setExpression(expression);
 		transformedTypeTestExpression.setType(EcoreUtil.copy(typeTestExpression.getType()));
-		ILUtil.adaptDataType(transformedTypeTestExpression, TypeSystemFactory.eINSTANCE.createBooleanType());
 		return transformedTypeTestExpression;
 	}
 	
@@ -555,9 +430,6 @@ public class ExpressionTransformer extends AstSwitch<Expression> {
 		transformedExpression.setOperator(unaryExpression.getOperator());
 		Expression expression = doSwitch(unaryExpression.getOperand());
 		transformedExpression.setOperand(expression);
-		DataType dataType = ILUtil.getDataType(expression);
-		DataType transformedDataType = dataType.evaluate(OperatorKind.UNARY_MINUS, null);
-		ILUtil.adaptDataType(transformedExpression, transformedDataType);
 		return transformedExpression;
 	}
 	
@@ -570,8 +442,6 @@ public class ExpressionTransformer extends AstSwitch<Expression> {
 		Expression firstParenthesizedExpression = parenthesizedExpression.getExpressions().get(0);
 		Expression transformedFirstParenthesizedExpression = doSwitch(firstParenthesizedExpression);
 		transformedExpression.getExpressions().add(transformedFirstParenthesizedExpression);
-		DataType dataType = ILUtil.getDataType(transformedFirstParenthesizedExpression);
-		ILUtil.adaptDataType(transformedExpression, dataType);
 		return transformedExpression;
 	}
 	
@@ -592,7 +462,6 @@ public class ExpressionTransformer extends AstSwitch<Expression> {
 		}
 		
 		RealLiteral transformedRealLiteral = EcoreUtil.copy(realLiteral);
-		ILUtil.adaptDataType(transformedRealLiteral, realType);
 		return transformedRealLiteral;
 	}
 	
@@ -613,7 +482,6 @@ public class ExpressionTransformer extends AstSwitch<Expression> {
 		}
 
 		IntegerLiteral transformedIntegerLiteral = EcoreUtil.copy(integerLiteral);
-		ILUtil.adaptDataType(transformedIntegerLiteral, integerType);
 		return transformedIntegerLiteral;
 	}
 	
@@ -623,7 +491,6 @@ public class ExpressionTransformer extends AstSwitch<Expression> {
 	@Override
 	public Expression caseBooleanLiteral(BooleanLiteral booleanLiteral) {
 		BooleanLiteral transformedBooleanLiteral = EcoreUtil.copy(booleanLiteral);
-		ILUtil.adaptDataType(transformedBooleanLiteral, TypeSystemFactory.eINSTANCE.createBooleanType());
 		return transformedBooleanLiteral;
 	}
 	
@@ -633,7 +500,6 @@ public class ExpressionTransformer extends AstSwitch<Expression> {
 	@Override
 	public Expression caseStringLiteral(StringLiteral stringLiteral) {
 		StringLiteral transformedStringLiteral = EcoreUtil.copy(stringLiteral);
-		ILUtil.adaptDataType(transformedStringLiteral, TypeSystemFactory.eINSTANCE.createStringType());
 		return transformedStringLiteral;
 	}
 	
@@ -643,7 +509,6 @@ public class ExpressionTransformer extends AstSwitch<Expression> {
 	@Override
 	public Expression caseUnitConstructionOperator(UnitConstructionOperator unitConstructionOperator) {
 		UnitConstructionOperator transformedUnitConstructionOperator = EcoreUtil.copy(unitConstructionOperator);
-		ILUtil.adaptDataType(transformedUnitConstructionOperator, TypeSystemFactory.eINSTANCE.createUnitType());
 		return transformedUnitConstructionOperator;
 	}
 	

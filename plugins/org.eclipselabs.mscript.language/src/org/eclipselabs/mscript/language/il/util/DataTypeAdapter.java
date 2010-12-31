@@ -23,17 +23,17 @@ public class DataTypeAdapter extends AdapterImpl {
 	private DataType dataType;
 	
 	/**
-	 * 
-	 */
-	public DataTypeAdapter(DataType dataType) {
-		this.dataType = dataType;
-	}
-	
-	/**
 	 * @return the dataType
 	 */
 	public DataType getDataType() {
 		return dataType;
+	}
+	
+	/**
+	 * @param dataType the dataType to set
+	 */
+	public void setDataType(DataType dataType) {
+		this.dataType = dataType;
 	}
 	
 	/* (non-Javadoc)

@@ -34,6 +34,7 @@ import org.eclipselabs.mscript.language.il.transform.ExpressionTarget;
 import org.eclipselabs.mscript.language.il.transform.ExpressionTransformer;
 import org.eclipselabs.mscript.language.il.transform.ExpressionTransformerContext;
 import org.eclipselabs.mscript.language.il.transform.IExpressionTransformerContext;
+import org.eclipselabs.mscript.language.il.util.DataTypeAdaptor;
 import org.eclipselabs.mscript.language.internal.LanguagePlugin;
 import org.eclipselabs.mscript.language.internal.util.StatusUtil;
 import org.eclipselabs.mscript.language.util.SyntaxStatus;
@@ -69,6 +70,13 @@ public class AssertionEvaluator {
 				continue;
 			}
 			
+			IStatus adaptorStatus = new DataTypeAdaptor().adapt(compound);
+			
+			if (!adaptorStatus.isOK()) {
+				StatusUtil.merge(status, adaptorStatus);
+				continue;
+			}
+
 			if (!(assertResultVariableDeclaration.getType() instanceof BooleanType)) {
 				status.add(new SyntaxStatus(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, 0, "Assert condition must result to boolean type", assertion.getCondition()));
 				continue;
