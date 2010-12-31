@@ -85,16 +85,13 @@ public class Generator {
 	
 	private void writeContextStructureMember(StatefulVariableDeclaration variableDeclaration) {
 		if (variableDeclaration.getCircularBufferSize() > 1) {
-			writer.printf("%s %s[%d];\n",
-					GeneratorUtil.getCDataType(context.getComputationModel().getNumberFormat(variableDeclaration.getType())),
-					variableDeclaration.getName(),
+			writer.printf("%s[%d];\n",
+					GeneratorUtil.getCDataType(variableDeclaration.getType(), variableDeclaration.getName(), false, context.getComputationModel()),
 					variableDeclaration.getCircularBufferSize());
 			writer.printf("int %s_index;\n", variableDeclaration.getName());
 		} else {
-			writer.printf("%s %s;\n",
-					GeneratorUtil.getCDataType(context.getComputationModel().getNumberFormat(variableDeclaration.getType())),
-					variableDeclaration.getName(),
-					variableDeclaration.getCircularBufferSize());
+			writer.printf("%s;\n",
+					GeneratorUtil.getCDataType(variableDeclaration.getType(), variableDeclaration.getName(), false, context.getComputationModel()));
 		}
 	}
 	
@@ -202,12 +199,12 @@ public class Generator {
 		for (ComputationCompound compound : functionDefinition.getComputationCompounds()) {
 			if (!compound.getOutputs().isEmpty()) {
 				for (InputVariableDeclaration inputVariableDeclaration : compound.getInputs()) {
-					writer.printf(", %s %s", GeneratorUtil.getCDataType(context.getComputationModel().getNumberFormat(inputVariableDeclaration.getType())), inputVariableDeclaration.getName());
+					writer.printf(", %s", GeneratorUtil.getCDataType(inputVariableDeclaration.getType(), inputVariableDeclaration.getName(), false, context.getComputationModel()));
 				}
 			}
 		}
 		for (OutputVariableDeclaration outputVariableDeclaration: functionDefinition.getOutputVariableDeclarations()) {
-			writer.printf(", %s *%s", GeneratorUtil.getCDataType(context.getComputationModel().getNumberFormat(outputVariableDeclaration.getType())), outputVariableDeclaration.getName());
+			writer.printf(", %s", GeneratorUtil.getCDataType(outputVariableDeclaration.getType(), outputVariableDeclaration.getName(), true, context.getComputationModel()));
 		}
 		writer.print(")");
 	}
@@ -220,7 +217,7 @@ public class Generator {
 		for (ComputationCompound compound : functionDefinition.getComputationCompounds()) {
 			if (compound.getOutputs().isEmpty()) {
 				for (InputVariableDeclaration inputVariableDeclaration : compound.getInputs()) {
-					writer.printf(", %s %s", GeneratorUtil.getCDataType(context.getComputationModel().getNumberFormat(inputVariableDeclaration.getType())), inputVariableDeclaration.getName());
+					writer.printf(", %s", GeneratorUtil.getCDataType(inputVariableDeclaration.getType(), inputVariableDeclaration.getName(), false, context.getComputationModel()));
 				}
 			}
 		}
@@ -239,7 +236,7 @@ public class Generator {
 			} else {
 				writer.print(", ");
 			}
-			writer.printf("%s %s", GeneratorUtil.getCDataType(context.getComputationModel().getNumberFormat(inputVariableDeclaration.getType())), inputVariableDeclaration.getName());
+			writer.print(GeneratorUtil.getCDataType(inputVariableDeclaration.getType(), inputVariableDeclaration.getName(), false, context.getComputationModel()));
 		}
 		for (OutputVariableDeclaration outputVariableDeclaration: functionDefinition.getOutputVariableDeclarations()) {
 			if (first) {
@@ -247,7 +244,7 @@ public class Generator {
 			} else {
 				writer.print(", ");
 			}
-			writer.printf("%s *%s", GeneratorUtil.getCDataType(context.getComputationModel().getNumberFormat(outputVariableDeclaration.getType())), outputVariableDeclaration.getName());
+			writer.print(GeneratorUtil.getCDataType(outputVariableDeclaration.getType(), outputVariableDeclaration.getName(), true, context.getComputationModel()));
 		}
 		writer.print(")");
 	}

@@ -11,15 +11,56 @@
 
 package org.eclipselabs.mscript.codegen.c.util;
 
+import org.eclipselabs.mscript.computation.computationmodel.ComputationModel;
 import org.eclipselabs.mscript.computation.computationmodel.FixedPointFormat;
 import org.eclipselabs.mscript.computation.computationmodel.FloatingPointFormat;
 import org.eclipselabs.mscript.computation.computationmodel.NumberFormat;
+import org.eclipselabs.mscript.typesystem.ArrayDimension;
+import org.eclipselabs.mscript.typesystem.ArrayType;
+import org.eclipselabs.mscript.typesystem.DataType;
 
 /**
  * @author Andreas Unger
  *
  */
 public class GeneratorUtil {
+	
+	public static String getCDataType(DataType dataType, String name, boolean reference, ComputationModel computationModel) {
+		StringBuilder cDataType = new StringBuilder();
+
+		if (dataType instanceof ArrayType) {
+			ArrayType arrayType = (ArrayType) dataType;
+
+			cDataType.append(getCDataType(computationModel.getNumberFormat(arrayType.getElementType())));
+			cDataType.append(" ");
+			if (reference) {
+				cDataType.append("*");
+			}
+			cDataType.append(name);
+			cDataType.append("[");
+			
+			boolean first = true;
+			for (ArrayDimension arrayDimension : arrayType.getDimensions()) {
+				if (first) {
+					first = false;
+				} else {
+					cDataType.append(", ");
+				}
+				cDataType.append(arrayDimension.getSize());
+			}
+			
+			cDataType.append("]");
+		} else {
+			cDataType.append(getCDataType(computationModel.getNumberFormat(dataType)));
+			cDataType.append(" ");
+			if (reference) {
+				cDataType.append("*");
+			}
+			cDataType.append(name);
+		}
+
+		return cDataType.toString();
+	}
 
 	public static String getCDataType(NumberFormat numberFormat) {
 		if (numberFormat instanceof FloatingPointFormat) {

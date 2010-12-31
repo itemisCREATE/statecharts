@@ -51,6 +51,7 @@ import org.eclipselabs.mscript.language.il.VariableReference;
 import org.eclipselabs.mscript.language.internal.LanguagePlugin;
 import org.eclipselabs.mscript.language.internal.interpreter.InvalidUnitExpressionOperandException;
 import org.eclipselabs.mscript.language.internal.interpreter.UnitExpressionHelper;
+import org.eclipselabs.mscript.typesystem.ArrayType;
 import org.eclipselabs.mscript.typesystem.DataType;
 import org.eclipselabs.mscript.typesystem.IntegerType;
 import org.eclipselabs.mscript.typesystem.OperatorKind;
@@ -144,8 +145,19 @@ public class DataTypeAdaptor extends ILSwitch<Boolean> {
 	 */
 	@Override
 	public Boolean caseForeachStatement(ForeachStatement foreachStatement) {
-		expressionAdaptor.doSwitch(foreachStatement.getCollectionExpression());
-		return status.isOK() && doSwitch(foreachStatement.getBody());
+		DataType collectionType = expressionAdaptor.doSwitch(foreachStatement.getCollectionExpression());
+		if (!status.isOK()) {
+			return false;
+		}
+		
+		if (!(collectionType instanceof ArrayType)) {
+			status.add(new Status(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, "Collection type must be array type"));
+			return false;
+		}
+		
+		ArrayType arrayType = (ArrayType) collectionType;
+		
+		return updateDataType(foreachStatement.getIterationVariableDeclaration(), arrayType.getElementType()) && doSwitch(foreachStatement.getBody());
 	}
 		
 	private boolean updateDataType(VariableDeclaration variableDeclaration, DataType dataType) {

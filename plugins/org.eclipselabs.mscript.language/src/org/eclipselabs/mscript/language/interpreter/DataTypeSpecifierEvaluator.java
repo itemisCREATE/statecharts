@@ -11,17 +11,25 @@
 
 package org.eclipselabs.mscript.language.interpreter;
 
+import org.eclipse.emf.ecore.EClass;
+import org.eclipselabs.mscript.language.ast.ArrayDimensionSpecification;
 import org.eclipselabs.mscript.language.ast.BooleanTypeSpecifier;
+import org.eclipselabs.mscript.language.ast.DataTypeSpecifier;
+import org.eclipselabs.mscript.language.ast.IntegerLiteral;
 import org.eclipselabs.mscript.language.ast.IntegerTypeSpecifier;
+import org.eclipselabs.mscript.language.ast.NumericTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.RealTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.StringTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.util.AstSwitch;
 import org.eclipselabs.mscript.language.internal.interpreter.InvalidUnitExpressionOperandException;
 import org.eclipselabs.mscript.language.internal.interpreter.UnitExpressionHelper;
+import org.eclipselabs.mscript.typesystem.ArrayDimension;
+import org.eclipselabs.mscript.typesystem.ArrayType;
 import org.eclipselabs.mscript.typesystem.DataType;
-import org.eclipselabs.mscript.typesystem.IntegerType;
-import org.eclipselabs.mscript.typesystem.RealType;
+import org.eclipselabs.mscript.typesystem.NumericType;
+import org.eclipselabs.mscript.typesystem.TensorType;
 import org.eclipselabs.mscript.typesystem.TypeSystemFactory;
+import org.eclipselabs.mscript.typesystem.TypeSystemPackage;
 import org.eclipselabs.mscript.typesystem.util.TypeSystemUtil;
 
 /**
@@ -44,39 +52,38 @@ public class DataTypeSpecifierEvaluator extends AstSwitch<DataType> {
 	 */
 	@Override
 	public DataType caseRealTypeSpecifier(RealTypeSpecifier realTypeSpecifier) {
-		RealType realType = (RealType) TypeSystemFactory.eINSTANCE.createRealType();
-		if (realTypeSpecifier.getUnit() != null) {
-			if (realTypeSpecifier.getUnit().getNumerator() != null) {
-				try {
-					realType.setUnit(new UnitExpressionHelper().evaluate(realTypeSpecifier.getUnit()));
-				} catch (InvalidUnitExpressionOperandException e) {
-					return TypeSystemFactory.eINSTANCE.createInvalidDataType();
-				}
-			}
-		} else {
-			realType.setUnit(TypeSystemUtil.createUnit());
-		}
-		return realType;
+		return createNumericType(TypeSystemPackage.eINSTANCE.getRealType(), realTypeSpecifier);
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseIntegerTypeSpecifier(org.eclipselabs.mscript.language.ast.IntegerTypeSpecifier)
 	 */
 	@Override
 	public DataType caseIntegerTypeSpecifier(IntegerTypeSpecifier integerTypeSpecifier) {
-		IntegerType integerType = (IntegerType) TypeSystemFactory.eINSTANCE.createIntegerType();
-		if (integerTypeSpecifier.getUnit() != null) {
-			if (integerTypeSpecifier.getUnit().getNumerator() != null) {
+		return createNumericType(TypeSystemPackage.eINSTANCE.getIntegerType(), integerTypeSpecifier);
+	}
+	
+	private DataType createNumericType(EClass eClass, NumericTypeSpecifier numericTypeSpecifier) {
+		NumericType numericType = (NumericType) TypeSystemFactory.eINSTANCE.create(eClass);
+		if (numericTypeSpecifier.getUnit() != null) {
+			if (numericTypeSpecifier.getUnit().getNumerator() != null) {
 				try {
-					integerType.setUnit(new UnitExpressionHelper().evaluate(integerTypeSpecifier.getUnit()));
+					numericType.setUnit(new UnitExpressionHelper().evaluate(numericTypeSpecifier.getUnit()));
 				} catch (InvalidUnitExpressionOperandException e) {
 					return TypeSystemFactory.eINSTANCE.createInvalidDataType();
 				}
 			}
 		} else {
-			integerType.setUnit(TypeSystemUtil.createUnit());
+			numericType.setUnit(TypeSystemUtil.createUnit());
 		}
-		return integerType;
+		
+		if (numericTypeSpecifier.getDimensions() != null) {
+			TensorType tensorType = TypeSystemFactory.eINSTANCE.createTensorType();
+			initializeArrayType(tensorType, numericTypeSpecifier, numericType);
+			return tensorType;
+		}
+		
+		return numericType;
 	}
 	
 	/* (non-Javadoc)
@@ -93,6 +100,18 @@ public class DataTypeSpecifierEvaluator extends AstSwitch<DataType> {
 	@Override
 	public DataType caseStringTypeSpecifier(StringTypeSpecifier object) {
 		return TypeSystemUtil.STRING_TYPE;
+	}
+
+	private void initializeArrayType(ArrayType arrayType, DataTypeSpecifier dataTypeSpecifier, DataType elementType) {
+		for (ArrayDimensionSpecification arrayDimensionSpecification : dataTypeSpecifier.getDimensions()) {
+			ArrayDimension arrayDimension = TypeSystemFactory.eINSTANCE.createArrayDimension();
+			if (arrayDimensionSpecification.getSize() != null && arrayDimensionSpecification.getSize() instanceof IntegerLiteral) {
+				IntegerLiteral integerLiteral = (IntegerLiteral) arrayDimensionSpecification.getSize();
+				arrayDimension.setSize((int) integerLiteral.getValue());
+			}
+			arrayType.getDimensions().add(arrayDimension);
+		}
+		arrayType.setElementType(elementType);
 	}
 
 }
