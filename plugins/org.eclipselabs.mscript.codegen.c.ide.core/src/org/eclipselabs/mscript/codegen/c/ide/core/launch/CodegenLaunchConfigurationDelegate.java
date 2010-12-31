@@ -214,6 +214,10 @@ public class CodegenLaunchConfigurationDelegate extends LaunchConfigurationDeleg
 	private List<IValue> getValues(IInterpreterContext interpreterContext, String valuesString) {
 		List<IValue> values = new ArrayList<IValue>();
 		
+		if (StringUtils.isBlank(valuesString)) {
+			return values;
+		}
+		
 		MscriptParser parser = CodegenCIDECorePlugin.getDefault().getMscriptParser();
 		
 		IParseResult parseResult = parser.parse(parser.getGrammarAccess().getExpressionListRule().getName(), new StringReader(valuesString));
