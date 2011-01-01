@@ -368,6 +368,7 @@ public class DataTypeAdaptor extends ILSwitch<Boolean> {
 		 */
 		@Override
 		public DataType caseTypeTestExpression(TypeTestExpression typeTestExpression) {
+			doSwitch(typeTestExpression.getExpression());
 			DataType dataType = TypeSystemFactory.eINSTANCE.createBooleanType();
 			ILUtil.setDataType(typeTestExpression, dataType);
 			return dataType;
