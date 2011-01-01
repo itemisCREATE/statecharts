@@ -291,18 +291,22 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 	public IValue caseArrayConstructionOperator(ArrayConstructionOperator arrayConstructionOperator) {
 		int size = arrayConstructionOperator.getExpressions().size();
 		
-		IValue[] elementValues = new IValue[size];
+		INumericValue[] elementValues = new INumericValue[size];
 		
 		int i = 0;
 		for (Expression expression : arrayConstructionOperator.getExpressions()) {
-			elementValues[i] = doSwitch(expression);
+			IValue value = doSwitch(expression);
+			if (!(value instanceof INumericValue)) {
+				return InvalidValue.SINGLETON;
+			}
+			elementValues[i] = (INumericValue) value;
 			++i;
 		}
 		
 		DataType arrayType = createArrayType(elementValues);
 		
 		if (arrayType instanceof TensorType) {
-			return new VectorValue(context.getComputationContext(), (TensorType) arrayType, (INumericValue[]) elementValues);
+			return new VectorValue(context.getComputationContext(), (TensorType) arrayType, elementValues);
 		}
 		
 		return InvalidValue.SINGLETON;
@@ -318,7 +322,7 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 				return TypeSystemUtil.INVALID_DATA_TYPE;
 			}
 			
-			if (!EcoreUtil.equals(elementType, dataType)) {
+			if (elementType != null && !EcoreUtil.equals(elementType, dataType)) {
 				DataType leftHandDataType = TypeSystemUtil.getLeftHandDataType(elementType, dataType);
 				if (leftHandDataType == null) {
 					return TypeSystemUtil.INVALID_DATA_TYPE;

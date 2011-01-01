@@ -29,8 +29,11 @@ public class VectorValue extends AbstractExplicitDataTypeValue {
 	 */
 	public VectorValue(IComputationContext context, TensorType dataType, INumericValue[] elements) {
 		super(context, dataType);
-		if (elements.length != dataType.getDimensionality()) {
-			throw new IllegalArgumentException("Array size must be equal to dimensionality of vector");
+		if (!dataType.isVector()) {
+			throw new IllegalArgumentException("Tensor type must be vector");
+		}
+		if (elements.length != dataType.getDimensions().get(0).getSize()) {
+			throw new IllegalArgumentException("Array size must be equal to vector size");
 		}
 		this.elements = elements;
 	}
