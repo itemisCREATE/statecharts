@@ -9,6 +9,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ui;bundle-version="3.6.0",
  org.eclipse.ui.ide;bundle-version="3.6.1",
  org.eclipse.debug.ui;bundle-version="3.6.0",
+ org.eclipselabs.mscript.ide.core;bundle-version="0.1.0",
  org.eclipselabs.mscript.codegen.c.ide.core;bundle-version="0.1.0"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy

@@ -29,7 +29,7 @@ import org.eclipselabs.mscript.typesystem.NumericType;
  * @author Andreas Unger
  *
  */
-public class FixedPointValue extends AbstractRealValue {
+public class FixedPointValue extends AbstractNumericValue implements ISimpleNumericValue {
 
 	private long rawValue;
 	
@@ -53,7 +53,14 @@ public class FixedPointValue extends AbstractRealValue {
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.computation.core.value.AbstractRealValue#getNumberFormat()
+	 * @see org.eclipselabs.mscript.computation.core.value.ISimpleNumericValue#longValue()
+	 */
+	public long longValue() {
+		return rawValue >> getNumberFormat().getFractionLength();
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.computation.core.value.AbstractNumericValue#getNumberFormat()
 	 */
 	@Override
 	protected FixedPointFormat getNumberFormat() {
@@ -65,20 +72,18 @@ public class FixedPointValue extends AbstractRealValue {
 	 */
 	@Override
 	protected IValue doConvert(DataType dataType) {
-//		if (dataType instanceof IntegerType) {
-//			return new FixedPointValue(getContext(), EcoreUtil.copy((IntegerType) dataType), rawValue);
-//		}
-//		if (dataType instanceof RealType) {
-//			return new Binary64Value(getContext(), EcoreUtil.copy((RealType) dataType), rawValue);
-//		}
-		return InvalidValue.SINGLETON;
+		NumberFormat numberFormat = getContext().getComputationModel().getNumberFormat(dataType);
+		if (EcoreUtil.equals(numberFormat, getNumberFormat())) {
+			return new FixedPointValue(getContext(), (NumericType) dataType, getNumberFormat(), rawValue);
+		}
+		return doCast((NumericType) dataType, numberFormat);
 	}
 	
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.interpreter.value.AbstractValue#doAdd(org.eclipselabs.mscript.interpreter.value.IValue, org.eclipselabs.mscript.typesystem.DataType)
 	 */
 	@Override
-	protected AbstractRealValue basicAdd(AbstractRealValue other, NumericType resultDataType) {
+	protected AbstractNumericValue basicAdd(AbstractNumericValue other, NumericType resultDataType) {
 		FixedPointValue otherFixedPointValue = (FixedPointValue) other;
 		
 		if (getNumberFormat().getWordSize() > 32) {
@@ -91,10 +96,10 @@ public class FixedPointValue extends AbstractRealValue {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.computation.core.value.AbstractRealValue#basicSubtract(org.eclipselabs.mscript.computation.core.value.AbstractRealValue, org.eclipselabs.mscript.typesystem.NumericType)
+	 * @see org.eclipselabs.mscript.computation.core.value.AbstractNumericValue#basicSubtract(org.eclipselabs.mscript.computation.core.value.AbstractNumericValue, org.eclipselabs.mscript.typesystem.NumericType)
 	 */
 	@Override
-	protected AbstractRealValue basicSubtract(AbstractRealValue other, NumericType resultDataType) {
+	protected AbstractNumericValue basicSubtract(AbstractNumericValue other, NumericType resultDataType) {
 		FixedPointValue otherFixedPointValue = (FixedPointValue) other;
 		
 		if (getNumberFormat().getWordSize() > 32) {
@@ -107,10 +112,10 @@ public class FixedPointValue extends AbstractRealValue {
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.computation.core.value.AbstractRealValue#basicMultiply(org.eclipselabs.mscript.computation.core.value.AbstractRealValue, org.eclipselabs.mscript.typesystem.NumericType)
+	 * @see org.eclipselabs.mscript.computation.core.value.AbstractNumericValue#basicMultiply(org.eclipselabs.mscript.computation.core.value.AbstractNumericValue, org.eclipselabs.mscript.typesystem.NumericType)
 	 */
 	@Override
-	protected AbstractRealValue basicMultiply(AbstractRealValue other, NumericType resultDataType) {
+	protected AbstractNumericValue basicMultiply(AbstractNumericValue other, NumericType resultDataType) {
 		FixedPointValue otherFixedPointValue = (FixedPointValue) other;
 		
 		long result;
@@ -138,10 +143,10 @@ public class FixedPointValue extends AbstractRealValue {
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.computation.core.value.AbstractRealValue#basicDivide(org.eclipselabs.mscript.computation.core.value.AbstractRealValue, org.eclipselabs.mscript.typesystem.NumericType)
+	 * @see org.eclipselabs.mscript.computation.core.value.AbstractNumericValue#basicDivide(org.eclipselabs.mscript.computation.core.value.AbstractNumericValue, org.eclipselabs.mscript.typesystem.NumericType)
 	 */
 	@Override
-	protected AbstractRealValue basicDivide(AbstractRealValue other, NumericType resultDataType) {
+	protected AbstractNumericValue basicDivide(AbstractNumericValue other, NumericType resultDataType) {
 		FixedPointValue otherFixedPointValue = (FixedPointValue) other;
 
 		long result;
@@ -169,72 +174,75 @@ public class FixedPointValue extends AbstractRealValue {
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.computation.core.value.AbstractRealValue#basicUnaryMinus(org.eclipselabs.mscript.typesystem.NumericType)
+	 * @see org.eclipselabs.mscript.computation.core.value.AbstractNumericValue#basicUnaryMinus(org.eclipselabs.mscript.typesystem.NumericType)
 	 */
 	@Override
-	protected AbstractRealValue basicUnaryMinus(NumericType resultDataType) {
+	protected AbstractNumericValue basicUnaryMinus(NumericType resultDataType) {
 		return new FixedPointValue(getContext(), getDataType(), getNumberFormat(), -rawValue);
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.computation.core.value.AbstractRealValue#basicLessThan(org.eclipselabs.mscript.computation.core.value.AbstractRealValue, org.eclipselabs.mscript.typesystem.DataType)
+	 * @see org.eclipselabs.mscript.computation.core.value.AbstractNumericValue#basicLessThan(org.eclipselabs.mscript.computation.core.value.AbstractNumericValue, org.eclipselabs.mscript.typesystem.DataType)
 	 */
 	@Override
-	protected IValue basicLessThan(AbstractRealValue other, DataType resultDataType) {
+	protected IValue basicLessThan(AbstractNumericValue other, DataType resultDataType) {
 		FixedPointValue otherFixedPointValue = (FixedPointValue) other;
 		return new BooleanValue(getContext(), rawValue < otherFixedPointValue.rawValue);
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.computation.core.value.AbstractRealValue#basicLessThanOrEqualTo(org.eclipselabs.mscript.computation.core.value.AbstractRealValue, org.eclipselabs.mscript.typesystem.DataType)
+	 * @see org.eclipselabs.mscript.computation.core.value.AbstractNumericValue#basicLessThanOrEqualTo(org.eclipselabs.mscript.computation.core.value.AbstractNumericValue, org.eclipselabs.mscript.typesystem.DataType)
 	 */
 	@Override
-	protected IValue basicLessThanOrEqualTo(AbstractRealValue other, DataType resultDataType) {
+	protected IValue basicLessThanOrEqualTo(AbstractNumericValue other, DataType resultDataType) {
 		FixedPointValue otherFixedPointValue = (FixedPointValue) other;
 		return new BooleanValue(getContext(), rawValue <= otherFixedPointValue.rawValue);
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.computation.core.value.AbstractRealValue#basicGreaterThan(org.eclipselabs.mscript.computation.core.value.AbstractRealValue, org.eclipselabs.mscript.typesystem.DataType)
+	 * @see org.eclipselabs.mscript.computation.core.value.AbstractNumericValue#basicGreaterThan(org.eclipselabs.mscript.computation.core.value.AbstractNumericValue, org.eclipselabs.mscript.typesystem.DataType)
 	 */
 	@Override
-	protected IValue basicGreaterThan(AbstractRealValue other, DataType resultDataType) {
+	protected IValue basicGreaterThan(AbstractNumericValue other, DataType resultDataType) {
 		FixedPointValue otherFixedPointValue = (FixedPointValue) other;
 		return new BooleanValue(getContext(), rawValue > otherFixedPointValue.rawValue);
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.computation.core.value.AbstractRealValue#basicGreaterThanOrEqualTo(org.eclipselabs.mscript.computation.core.value.AbstractRealValue, org.eclipselabs.mscript.typesystem.DataType)
+	 * @see org.eclipselabs.mscript.computation.core.value.AbstractNumericValue#basicGreaterThanOrEqualTo(org.eclipselabs.mscript.computation.core.value.AbstractNumericValue, org.eclipselabs.mscript.typesystem.DataType)
 	 */
 	@Override
-	protected IValue basicGreaterThanOrEqualTo(AbstractRealValue other, DataType resultDataType) {
+	protected IValue basicGreaterThanOrEqualTo(AbstractNumericValue other, DataType resultDataType) {
 		FixedPointValue otherFixedPointValue = (FixedPointValue) other;
 		return new BooleanValue(getContext(), rawValue >= otherFixedPointValue.rawValue);
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.computation.core.value.AbstractRealValue#basicEqualTo(org.eclipselabs.mscript.computation.core.value.AbstractRealValue, org.eclipselabs.mscript.typesystem.DataType)
+	 * @see org.eclipselabs.mscript.computation.core.value.AbstractNumericValue#basicEqualTo(org.eclipselabs.mscript.computation.core.value.AbstractNumericValue, org.eclipselabs.mscript.typesystem.DataType)
 	 */
 	@Override
-	protected IValue basicEqualTo(AbstractRealValue other, DataType resultDataType) {
+	protected IValue basicEqualTo(AbstractNumericValue other, DataType resultDataType) {
 		FixedPointValue otherFixedPointValue = (FixedPointValue) other;
 		return new BooleanValue(getContext(), rawValue == otherFixedPointValue.rawValue);
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.computation.core.value.AbstractRealValue#basicNotEqualToOrEqualTo(org.eclipselabs.mscript.computation.core.value.AbstractRealValue, org.eclipselabs.mscript.typesystem.DataType)
+	 * @see org.eclipselabs.mscript.computation.core.value.AbstractNumericValue#basicNotEqualToOrEqualTo(org.eclipselabs.mscript.computation.core.value.AbstractNumericValue, org.eclipselabs.mscript.typesystem.DataType)
 	 */
 	@Override
-	protected IValue basicNotEqualToOrEqualTo(AbstractRealValue other, DataType resultDataType) {
+	protected IValue basicNotEqualToOrEqualTo(AbstractNumericValue other, DataType resultDataType) {
 		FixedPointValue otherFixedPointValue = (FixedPointValue) other;
 		return new BooleanValue(getContext(), rawValue != otherFixedPointValue.rawValue);
 	}
 	
-	protected AbstractRealValue cast(NumberFormat numberFormat) {
+	protected AbstractNumericValue cast(NumberFormat numberFormat) {
 		if (EcoreUtil.equals(numberFormat, getNumberFormat())) {
 			return this;
 		}
-		
+		return doCast(getDataType(), numberFormat);
+	}
+	
+	private AbstractNumericValue doCast(NumericType numericType, NumberFormat numberFormat) {
 		if (numberFormat instanceof FloatingPointFormat) {
 			FloatingPointFormat floatingPointFormat = (FloatingPointFormat) numberFormat;
 			switch (floatingPointFormat.getKind()) {
@@ -242,28 +250,28 @@ public class FixedPointValue extends AbstractRealValue {
 				// TODO;
 				break;
 			case BINARY64:
-				return castToBinary64(floatingPointFormat);
+				return castToBinary64(numericType, floatingPointFormat);
 			}
 		}
 		
 		if (numberFormat instanceof FixedPointFormat) {
 			FixedPointFormat fixedPointFormat = (FixedPointFormat) numberFormat;
-			return castToFixedPoint(fixedPointFormat);
+			return castToFixedPoint(numericType, fixedPointFormat);
 		}
 
 		return null;
 	}
 
-	private AbstractRealValue castToBinary64(FloatingPointFormat floatingPointFormat) {
+	private AbstractNumericValue castToBinary64(NumericType numericType, FloatingPointFormat floatingPointFormat) {
 		double value = rawValue * Math.pow(2, -getNumberFormat().getFractionLength());
-		return new Binary64Value(getContext(), getDataType(), floatingPointFormat, value);
+		return new Binary64Value(getContext(), numericType, floatingPointFormat, value);
 	}
 
 	/**
 	 * @param fixedPointFormat
 	 * @return
 	 */
-	private AbstractRealValue castToFixedPoint(FixedPointFormat fixedPointFormat) {
+	private AbstractNumericValue castToFixedPoint(NumericType numericType, FixedPointFormat fixedPointFormat) {
 		FixedPointOperation operation = ComputationModelUtil.getFixedPointOperation(getNumberFormat(), FixedPointOperationKind.CAST);
 		
 		long truncatedRawValue = truncate(rawValue, operation.getIntermediateWordSize());
@@ -311,7 +319,7 @@ public class FixedPointValue extends AbstractRealValue {
 			}
 		}
 		
-		return new FixedPointValue(getContext(), getDataType(), fixedPointFormat, newRawValue);
+		return new FixedPointValue(getContext(), numericType, fixedPointFormat, newRawValue);
 	}
 	
 	private long truncate(long value, int wordSize) {
@@ -319,14 +327,14 @@ public class FixedPointValue extends AbstractRealValue {
 		return value << shift >> shift;
 	}
 	
-	private AbstractRealValue createValue(NumericType dataType, BigInteger rawValue, FixedPointOperationKind fixedPointOperationKind) {
+	private AbstractNumericValue createValue(NumericType dataType, BigInteger rawValue, FixedPointOperationKind fixedPointOperationKind) {
 		if (rawValue.compareTo(LONG_MIN_VALUE) < 0 || rawValue.compareTo(LONG_MAX_VALUE) > 0) {
 			getContext().getOverflowMonitor().handleOverflow(new OverflowInfo());
 		}
 		return createValue(dataType, rawValue.longValue(), fixedPointOperationKind);
 	}
 	
-	private AbstractRealValue createValue(NumericType dataType, long rawValue, FixedPointOperationKind fixedPointOperationKind) {
+	private AbstractNumericValue createValue(NumericType dataType, long rawValue, FixedPointOperationKind fixedPointOperationKind) {
 		FixedPointOperation operation = ComputationModelUtil.getFixedPointOperation(getNumberFormat(), fixedPointOperationKind);
 
 		long truncatedRawValue = truncate(rawValue, operation.getIntermediateWordSize());

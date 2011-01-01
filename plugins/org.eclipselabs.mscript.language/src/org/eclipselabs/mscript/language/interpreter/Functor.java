@@ -14,10 +14,9 @@ package org.eclipselabs.mscript.language.interpreter;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import org.eclipselabs.mscript.computation.core.value.IValue;
+import org.eclipselabs.mscript.computation.core.value.ValueTransformer;
 import org.eclipselabs.mscript.language.il.ILFunctionDefinition;
 import org.eclipselabs.mscript.language.il.InputVariableDeclaration;
 import org.eclipselabs.mscript.language.il.InstanceVariableDeclaration;
@@ -40,20 +39,16 @@ public class Functor implements IFunctor {
 	private Functor() {
 	}
 	
-	public static IFunctor create(ILFunctionDefinition functionDefinition, List<IValue> templateArguments) {
-		if (functionDefinition.getTemplateVariableDeclarations().size() != templateArguments.size()) {
-			throw new IllegalArgumentException("Number of template arguments must be equal to number of template parameters of function definition");
-		}
-		
+	public static IFunctor create(IInterpreterContext context, ILFunctionDefinition functionDefinition) {
 		Functor functor = new Functor();
 		functor.functionDefinition = functionDefinition;
 		
-		int i = 0;
+		ValueTransformer valueTransformer = new ValueTransformer();
+		
 		for (TemplateVariableDeclaration declaration : functionDefinition.getTemplateVariableDeclarations()) {
-			IVariable variable = new Variable(declaration, 1);
-			variable.setValue(0, templateArguments.get(i));
+			IVariable variable = new Variable(declaration);
+			variable.setValue(0, valueTransformer.transform(context.getComputationContext(), declaration.getValue()));
 			functor.variables.put(declaration, variable);
-			++i;
 		}
 		
 		for (InputVariableDeclaration declaration : functionDefinition.getInputVariableDeclarations()) {

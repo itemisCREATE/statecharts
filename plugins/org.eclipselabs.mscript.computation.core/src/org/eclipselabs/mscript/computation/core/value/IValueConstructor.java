@@ -11,12 +11,18 @@
 
 package org.eclipselabs.mscript.computation.core.value;
 
+import org.eclipselabs.mscript.computation.core.IComputationContext;
+import org.eclipselabs.mscript.typesystem.IntegerType;
+import org.eclipselabs.mscript.typesystem.RealType;
+
 /**
  * @author Andreas Unger
  *
  */
-public interface IRealValue extends IValue {
+public interface IValueConstructor {
 
-	double doubleValue();
+	ISimpleNumericValue createRealValue(IComputationContext context, RealType realType, double value);
+	ISimpleNumericValue createIntegerValue(IComputationContext context, IntegerType integerType, long value);
+	IBooleanValue createBooleanValue(IComputationContext context, boolean value);
 	
 }

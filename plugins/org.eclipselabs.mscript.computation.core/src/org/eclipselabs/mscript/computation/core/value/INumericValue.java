@@ -1,5 +1,5 @@
 /****************************************************************************
- * Copyright (c) 2008, 2010 Andreas Unger and others.
+ * Copyright (c) 2008, 2011 Andreas Unger and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -11,22 +11,14 @@
 
 package org.eclipselabs.mscript.computation.core.value;
 
-import org.eclipselabs.mscript.computation.computationmodel.FixedPointFormat;
-import org.eclipselabs.mscript.computation.core.IComputationContext;
-import org.eclipselabs.mscript.typesystem.IntegerType;
+import org.eclipselabs.mscript.typesystem.NumericType;
 
 /**
  * @author Andreas Unger
  *
  */
-public class IntegerValue extends FixedPointValue implements IIntegerValue {
+public interface INumericValue extends IValue {
 
-	public IntegerValue(IComputationContext context, IntegerType integerType, FixedPointFormat numberFormat, long value) {
-		super(context, integerType, numberFormat, value);
-	}
+	NumericType getDataType();
 	
-	public long longValue() {
-		return getRawValue();
-	}
-
 }

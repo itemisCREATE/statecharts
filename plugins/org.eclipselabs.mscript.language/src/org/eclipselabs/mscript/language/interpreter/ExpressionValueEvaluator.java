@@ -14,12 +14,15 @@ package org.eclipselabs.mscript.language.interpreter;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipselabs.mscript.computation.core.value.IBooleanValue;
+import org.eclipselabs.mscript.computation.core.value.INumericValue;
 import org.eclipselabs.mscript.computation.core.value.IValue;
 import org.eclipselabs.mscript.computation.core.value.InvalidValue;
 import org.eclipselabs.mscript.computation.core.value.StringValue;
 import org.eclipselabs.mscript.computation.core.value.UnitValue;
-import org.eclipselabs.mscript.computation.core.value.ValueFactory;
+import org.eclipselabs.mscript.computation.core.value.ValueConstructor;
+import org.eclipselabs.mscript.computation.core.value.VectorValue;
 import org.eclipselabs.mscript.language.ast.AdditiveExpression;
+import org.eclipselabs.mscript.language.ast.ArrayConstructionOperator;
 import org.eclipselabs.mscript.language.ast.BooleanKind;
 import org.eclipselabs.mscript.language.ast.BooleanLiteral;
 import org.eclipselabs.mscript.language.ast.EqualityExpression;
@@ -44,6 +47,7 @@ import org.eclipselabs.mscript.typesystem.DataType;
 import org.eclipselabs.mscript.typesystem.IntegerType;
 import org.eclipselabs.mscript.typesystem.InvalidDataType;
 import org.eclipselabs.mscript.typesystem.RealType;
+import org.eclipselabs.mscript.typesystem.TensorType;
 import org.eclipselabs.mscript.typesystem.TypeSystemFactory;
 import org.eclipselabs.mscript.typesystem.Unit;
 import org.eclipselabs.mscript.typesystem.util.TypeSystemUtil;
@@ -54,7 +58,7 @@ import org.eclipselabs.mscript.typesystem.util.TypeSystemUtil;
  */
 public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue> {
 	
-	private ValueFactory valueFactory = new ValueFactory();
+	private ValueConstructor valueFactory = new ValueConstructor();
 
 	private IInterpreterContext context;
 	
@@ -280,6 +284,54 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 		return result;
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseArrayConstructionOperator(org.eclipselabs.mscript.language.ast.ArrayConstructionOperator)
+	 */
+	@Override
+	public IValue caseArrayConstructionOperator(ArrayConstructionOperator arrayConstructionOperator) {
+		int size = arrayConstructionOperator.getExpressions().size();
+		
+		IValue[] elementValues = new IValue[size];
+		
+		int i = 0;
+		for (Expression expression : arrayConstructionOperator.getExpressions()) {
+			elementValues[i] = doSwitch(expression);
+			++i;
+		}
+		
+		DataType arrayType = createArrayType(elementValues);
+		
+		if (arrayType instanceof TensorType) {
+			return new VectorValue(context.getComputationContext(), (TensorType) arrayType, (INumericValue[]) elementValues);
+		}
+		
+		return InvalidValue.SINGLETON;
+	}
+	
+	private DataType createArrayType(IValue[] elementValues) {
+		DataType elementType = null;
+		
+		for (IValue elementValue : elementValues) {
+			DataType dataType = elementValue.getDataType();
+			
+			if (dataType == null || dataType instanceof InvalidDataType) {
+				return TypeSystemUtil.INVALID_DATA_TYPE;
+			}
+			
+			if (!EcoreUtil.equals(elementType, dataType)) {
+				DataType leftHandDataType = TypeSystemUtil.getLeftHandDataType(elementType, dataType);
+				if (leftHandDataType == null) {
+					return TypeSystemUtil.INVALID_DATA_TYPE;
+				}
+				dataType = leftHandDataType;
+			}
+			
+			elementType = dataType;
+		}
+		
+		return TypeSystemUtil.createArrayType(elementType, elementValues.length);
+	}
+
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.damos.evaluation.IExpressionEvaluatorStrategy#processMatrix(org.eclipselabs.damos.evaluation.IEvaluationContext, T[][], int, int)
 	 */

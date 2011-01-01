@@ -25,9 +25,9 @@ import org.eclipselabs.mscript.typesystem.RealType;
  * @author Andreas Unger
  *
  */
-public class ValueFactory implements IValueFactory {
+public class ValueConstructor implements IValueConstructor {
 
-	public IRealValue createRealValue(IComputationContext context, RealType realType, double value) {
+	public ISimpleNumericValue createRealValue(IComputationContext context, RealType realType, double value) {
 		NumberFormat numberFormat = context.getComputationModel().getNumberFormat(realType);
 		if (numberFormat instanceof FloatingPointFormat) {
 			FloatingPointFormat floatingPointFormat = (FloatingPointFormat) numberFormat;
@@ -49,11 +49,11 @@ public class ValueFactory implements IValueFactory {
 		throw new IllegalArgumentException();
 	}
 	
-	public IIntegerValue createIntegerValue(IComputationContext context, IntegerType integerType, long value) {
+	public ISimpleNumericValue createIntegerValue(IComputationContext context, IntegerType integerType, long value) {
 		NumberFormat numberFormat = context.getComputationModel().getNumberFormat(integerType);
 		if (numberFormat instanceof FixedPointFormat) {
 			FixedPointFormat fixedPointFormat = (FixedPointFormat) numberFormat;
-			IntegerValue integerValue = new IntegerValue(context, integerType, fixedPointFormat, 0);
+			FixedPointValue integerValue = new FixedPointValue(context, integerType, fixedPointFormat, 0);
 			FixedPointOperation fixedPointOperation = ComputationModelUtil.getFixedPointOperation(fixedPointFormat,
 					FixedPointOperationKind.CONSTRUCT);
 			FixedPointValue.initializeValue(context, integerValue, fixedPointOperation, value);

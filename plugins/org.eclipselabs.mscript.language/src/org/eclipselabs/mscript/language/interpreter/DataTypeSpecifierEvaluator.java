@@ -77,7 +77,7 @@ public class DataTypeSpecifierEvaluator extends AstSwitch<DataType> {
 			numericType.setUnit(TypeSystemUtil.createUnit());
 		}
 		
-		if (numericTypeSpecifier.getDimensions() != null) {
+		if (!numericTypeSpecifier.getDimensions().isEmpty()) {
 			TensorType tensorType = TypeSystemFactory.eINSTANCE.createTensorType();
 			initializeArrayType(tensorType, numericTypeSpecifier, numericType);
 			return tensorType;

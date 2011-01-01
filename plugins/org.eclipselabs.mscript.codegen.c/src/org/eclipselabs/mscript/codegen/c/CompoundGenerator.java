@@ -24,8 +24,7 @@ import org.eclipselabs.mscript.computation.computationmodel.FloatingPointFormat;
 import org.eclipselabs.mscript.computation.computationmodel.NumberFormat;
 import org.eclipselabs.mscript.computation.computationmodel.util.ComputationModelSwitch;
 import org.eclipselabs.mscript.computation.computationmodel.util.ComputationModelUtil;
-import org.eclipselabs.mscript.computation.core.value.IIntegerValue;
-import org.eclipselabs.mscript.computation.core.value.IRealValue;
+import org.eclipselabs.mscript.computation.core.value.ISimpleNumericValue;
 import org.eclipselabs.mscript.computation.core.value.IValue;
 import org.eclipselabs.mscript.language.ast.AdditiveExpression;
 import org.eclipselabs.mscript.language.ast.AdditiveExpressionPart;
@@ -63,6 +62,8 @@ import org.eclipselabs.mscript.language.il.util.ILSwitch;
 import org.eclipselabs.mscript.language.il.util.ILUtil;
 import org.eclipselabs.mscript.typesystem.ArrayType;
 import org.eclipselabs.mscript.typesystem.DataType;
+import org.eclipselabs.mscript.typesystem.IntegerType;
+import org.eclipselabs.mscript.typesystem.RealType;
 import org.eclipselabs.mscript.typesystem.util.TypeSystemUtil;
 
 /**
@@ -703,12 +704,13 @@ public class CompoundGenerator extends ILSwitch<Boolean> {
 		@Override
 		public Boolean caseTemplateVariableDeclaration(TemplateVariableDeclaration templateVariableDeclaration) {
 			IValue templateArgument = templateVariableDeclaration.getValue();
-			if (templateArgument instanceof IIntegerValue) {
-				IIntegerValue value = (IIntegerValue) templateArgument;
-				writeLiteral(value.getDataType(), value.longValue());
-			} else if (templateArgument instanceof IRealValue) {
-				IRealValue value = (IRealValue) templateArgument;
-				writeLiteral(value.getDataType(), value.doubleValue());
+			if (templateArgument instanceof ISimpleNumericValue) {
+				ISimpleNumericValue numericTemplateArgument = (ISimpleNumericValue) templateArgument;
+				if (templateArgument.getDataType() instanceof RealType) {
+					writeLiteral(numericTemplateArgument.getDataType(), numericTemplateArgument.doubleValue());
+				} else if (templateArgument.getDataType() instanceof IntegerType) {
+					writeLiteral(numericTemplateArgument.getDataType(), numericTemplateArgument.longValue());
+				}
 			}
 			return true;
 		}

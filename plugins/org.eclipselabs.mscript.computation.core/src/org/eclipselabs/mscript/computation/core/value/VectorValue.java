@@ -1,0 +1,62 @@
+/****************************************************************************
+ * Copyright (c) 2008, 2010 Andreas Unger and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Andreas Unger - initial API and implementation 
+ ****************************************************************************/
+
+package org.eclipselabs.mscript.computation.core.value;
+
+import org.eclipselabs.mscript.computation.core.IComputationContext;
+import org.eclipselabs.mscript.typesystem.DataType;
+import org.eclipselabs.mscript.typesystem.TensorType;
+
+/**
+ * @author Andreas Unger
+ *
+ */
+public class VectorValue extends AbstractExplicitDataTypeValue {
+
+	private INumericValue[] elements;
+	
+	/**
+	 * @param context
+	 * @param dataType
+	 */
+	public VectorValue(IComputationContext context, TensorType dataType, INumericValue[] elements) {
+		super(context, dataType);
+		if (elements.length != dataType.getDimensionality()) {
+			throw new IllegalArgumentException("Array size must be equal to dimensionality of vector");
+		}
+		this.elements = elements;
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.computation.core.value.AbstractExplicitDataTypeValue#getDataType()
+	 */
+	@Override
+	public TensorType getDataType() {
+		return (TensorType) super.getDataType();
+	}
+
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.computation.core.value.AbstractValue#doConvert(org.eclipselabs.mscript.typesystem.DataType)
+	 */
+	@Override
+	protected IValue doConvert(DataType dataType) {
+		return null;
+	}
+	
+	public INumericValue get(int index) {
+		return elements[index];
+	}
+	
+	public void set(int index, INumericValue elementValue) {
+		elements[index] = elementValue;
+	}
+
+}

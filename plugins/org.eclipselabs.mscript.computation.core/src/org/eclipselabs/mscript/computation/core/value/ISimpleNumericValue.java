@@ -1,5 +1,5 @@
 /****************************************************************************
- * Copyright (c) 2008, 2010 Andreas Unger and others.
+ * Copyright (c) 2008, 2011 Andreas Unger and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -15,8 +15,10 @@ package org.eclipselabs.mscript.computation.core.value;
  * @author Andreas Unger
  *
  */
-public interface IIntegerValue extends IRealValue {
+public interface ISimpleNumericValue extends INumericValue {
 
+	double doubleValue();
+	
 	long longValue();
 
 }

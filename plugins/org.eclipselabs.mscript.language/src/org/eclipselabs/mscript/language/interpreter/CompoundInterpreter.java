@@ -14,13 +14,18 @@ package org.eclipselabs.mscript.language.interpreter;
 import org.eclipselabs.mscript.computation.core.value.IBooleanValue;
 import org.eclipselabs.mscript.computation.core.value.IValue;
 import org.eclipselabs.mscript.computation.core.value.UninitializedValue;
+import org.eclipselabs.mscript.computation.core.value.VectorValue;
 import org.eclipselabs.mscript.language.il.Assignment;
 import org.eclipselabs.mscript.language.il.Compound;
 import org.eclipselabs.mscript.language.il.ForeachStatement;
 import org.eclipselabs.mscript.language.il.IfStatement;
 import org.eclipselabs.mscript.language.il.LocalVariableDeclaration;
 import org.eclipselabs.mscript.language.il.Statement;
+import org.eclipselabs.mscript.language.il.VariableDeclaration;
 import org.eclipselabs.mscript.language.il.util.ILSwitch;
+import org.eclipselabs.mscript.language.il.util.ILUtil;
+import org.eclipselabs.mscript.typesystem.ArrayType;
+import org.eclipselabs.mscript.typesystem.DataType;
 
 /**
  * @author Andreas Unger
@@ -30,11 +35,14 @@ public class CompoundInterpreter extends ILSwitch<Boolean> {
 
 	private IInterpreterContext context;
 	
+	private ExpressionValueEvaluator expressionValueEvaluator;
+	
 	/**
 	 * 
 	 */
 	public CompoundInterpreter(IInterpreterContext context) {
 		this.context = context;
+		expressionValueEvaluator = new ExpressionValueEvaluator(context);
 	}
 	
 	/* (non-Javadoc)
@@ -55,9 +63,9 @@ public class CompoundInterpreter extends ILSwitch<Boolean> {
 	 */
 	@Override
 	public Boolean caseAssignment(Assignment assignment) {
-		IValue value = new ExpressionValueEvaluator(context).doSwitch(assignment.getAssignedExpression());
+		IValue value = expressionValueEvaluator.doSwitch(assignment.getAssignedExpression());
 		IVariable variable = context.getScope().findInEnclosingScopes(assignment.getTarget());
-		variable.setValue(assignment.getStepIndex(), value);
+		variable.setValue(assignment.getStepIndex(), value.convert(assignment.getTarget().getType()));
 		return true;
 	}
 
@@ -66,7 +74,7 @@ public class CompoundInterpreter extends ILSwitch<Boolean> {
 	 */
 	@Override
 	public Boolean caseIfStatement(IfStatement ifStatement) {
-		IValue conditionValue = new ExpressionValueEvaluator(context).doSwitch(ifStatement.getCondition());
+		IValue conditionValue = expressionValueEvaluator.doSwitch(ifStatement.getCondition());
 		if (conditionValue instanceof IBooleanValue) {
 			IBooleanValue booleanConditionValue = (IBooleanValue) conditionValue;
 			if (booleanConditionValue.booleanValue()) {
@@ -82,9 +90,38 @@ public class CompoundInterpreter extends ILSwitch<Boolean> {
 	 * @see org.eclipselabs.mscript.language.imperativemodel.util.ILSwitch#caseForeachStatement(org.eclipselabs.mscript.language.imperativemodel.ForeachStatement)
 	 */
 	@Override
-	public Boolean caseForeachStatement(ForeachStatement object) {
-		// TODO Auto-generated method stub
-		return super.caseForeachStatement(object);
+	public Boolean caseForeachStatement(ForeachStatement foreachStatement) {
+		DataType collectionType = ILUtil.getDataType(foreachStatement.getCollectionExpression());
+		if (!(collectionType instanceof ArrayType)) {
+			throw new RuntimeException("Collection type must be array type");
+		}
+		
+		ArrayType arrayType = (ArrayType) collectionType;
+		if (arrayType.getDimensionality() != 1) {
+			throw new RuntimeException("Array dimensionality must be 1");
+		}
+		
+		IValue value = expressionValueEvaluator.doSwitch(foreachStatement.getCollectionExpression());
+		
+		if (!(value instanceof VectorValue)) {
+			throw new RuntimeException("Value must be tensor value");
+		}
+		
+		VectorValue tensorValue = (VectorValue) value;
+		
+		int size = arrayType.getDimensions().get(0).getSize();
+		
+		VariableDeclaration iterationVariableDeclaration = foreachStatement.getIterationVariableDeclaration();
+		for (int i = 0; i < size; ++i) {
+			context.enterScope();
+			IVariable variable = new Variable(iterationVariableDeclaration, 1);
+			variable.setValue(0, tensorValue.get(i).convert(iterationVariableDeclaration.getType()));
+			context.getScope().add(variable);
+			doSwitch(foreachStatement.getBody());
+			context.leaveScope();
+		}
+
+		return true;
 	}
 	
 	/* (non-Javadoc)
@@ -94,7 +131,7 @@ public class CompoundInterpreter extends ILSwitch<Boolean> {
 	public Boolean caseLocalVariableDeclaration(LocalVariableDeclaration localVariableDeclaration) {
 		IValue value;
 		if (localVariableDeclaration.getInitializer() != null) {
-			value = new ExpressionValueEvaluator(context).doSwitch(localVariableDeclaration.getInitializer());
+			value = expressionValueEvaluator.doSwitch(localVariableDeclaration.getInitializer()).convert(localVariableDeclaration.getType());
 		} else {
 			value = new UninitializedValue(context.getComputationContext());
 		}

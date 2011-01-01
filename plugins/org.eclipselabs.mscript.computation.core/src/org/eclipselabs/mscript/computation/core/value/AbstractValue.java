@@ -13,6 +13,7 @@ package org.eclipselabs.mscript.computation.core.value;
 
 import java.util.List;
 
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipselabs.mscript.computation.core.IComputationContext;
 import org.eclipselabs.mscript.typesystem.DataType;
 import org.eclipselabs.mscript.typesystem.InvalidDataType;
@@ -44,6 +45,9 @@ public abstract class AbstractValue implements IValue {
 	 * @see org.eclipselabs.mscript.interpreter.value.IValue#convert(org.eclipselabs.mscript.typesystem.DataType)
 	 */
 	public IValue convert(DataType dataType) {
+		if (EcoreUtil.equals(dataType, getDataType())) {
+			return this;
+		}
 		if (dataType.isAssignableFrom(getDataType())) {
 			return doConvert(dataType);
 		}

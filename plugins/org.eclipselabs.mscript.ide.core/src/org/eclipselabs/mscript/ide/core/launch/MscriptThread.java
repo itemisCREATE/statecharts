@@ -21,16 +21,13 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.xtext.util.StringInputStream;
-import org.eclipselabs.mscript.computation.core.value.IRealValue;
+import org.eclipselabs.mscript.computation.core.value.ISimpleNumericValue;
 import org.eclipselabs.mscript.computation.core.value.IValue;
-import org.eclipselabs.mscript.computation.core.value.ValueFactory;
 import org.eclipselabs.mscript.ide.core.IDECorePlugin;
+import org.eclipselabs.mscript.ide.core.internal.launch.util.ParseUtil;
 import org.eclipselabs.mscript.language.interpreter.IFunctor;
 import org.eclipselabs.mscript.language.interpreter.IInterpreterContext;
 import org.eclipselabs.mscript.language.interpreter.Interpreter;
-import org.eclipselabs.mscript.typesystem.RealType;
-import org.eclipselabs.mscript.typesystem.TypeSystemFactory;
-import org.eclipselabs.mscript.typesystem.util.TypeSystemUtil;
 
 /**
  * @author Andreas Unger
@@ -69,31 +66,20 @@ public class MscriptThread extends Thread {
 	@Override
 	public void run() {
 		try {
-			ValueFactory valueFactory = new ValueFactory();
-			
-			new Interpreter().initialize(interpreterContext, functor);
+			Interpreter interpreter = new Interpreter();
+			interpreter.initialize(interpreterContext, functor);
 			
 			BufferedReader reader = new BufferedReader(new InputStreamReader(inputFile.getContents()));
 			while (!interpreterContext.isCanceled() && reader.ready()) {
-				List<IValue> inputValues = new ArrayList<IValue>();
-				String[] stringValues = reader.readLine().split(",", 0);
-				if (stringValues[0].length() == 0) {
-					stringValues = new String[0];
-				}
-				for (String stringValue : stringValues) {
-					double value = Double.parseDouble(stringValue);
-					RealType realType = TypeSystemFactory.eINSTANCE.createRealType();
-					realType.setUnit(TypeSystemUtil.createUnit());
-					inputValues.add(valueFactory.createRealValue(interpreterContext.getComputationContext(), realType, value));
-				}
+				List<IValue> inputValues = ParseUtil.parseValues(interpreterContext, reader.readLine());
 				StringBuilder sb = new StringBuilder();
-				List<IValue> outputValues = new Interpreter().execute(interpreterContext, functor, inputValues);
+				List<IValue> outputValues = interpreter.execute(interpreterContext, functor, inputValues);
 				for (IValue outputValue : outputValues) {
 					if (sb.length() > 0) {
 						sb.append(",");
 					}
-					if (outputValue instanceof IRealValue) {
-						IRealValue numericValue = (IRealValue) outputValue;
+					if (outputValue instanceof ISimpleNumericValue) {
+						ISimpleNumericValue numericValue = (ISimpleNumericValue) outputValue;
 						sb.append(numericValue.doubleValue());
 					} else {
 						sb.append("NaN");
