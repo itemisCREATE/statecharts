@@ -60,6 +60,7 @@ import org.eclipselabs.mscript.language.il.VariableDeclaration;
 import org.eclipselabs.mscript.language.il.VariableReference;
 import org.eclipselabs.mscript.language.il.util.ILSwitch;
 import org.eclipselabs.mscript.language.il.util.ILUtil;
+import org.eclipselabs.mscript.typesystem.ArrayDimension;
 import org.eclipselabs.mscript.typesystem.ArrayType;
 import org.eclipselabs.mscript.typesystem.DataType;
 import org.eclipselabs.mscript.typesystem.IntegerType;
@@ -94,9 +95,7 @@ public class CompoundGenerator extends ILSwitch<Boolean> {
 			writer.print("{\n");
 		}
 		for (LocalVariableDeclaration localVariableDeclaration : compound.getLocalVariableDeclarations()) {
-			writer.print(GeneratorUtil.getCDataType(context.getComputationModel().getNumberFormat(localVariableDeclaration.getType())));
-			writer.print(" ");
-			writer.print(localVariableDeclaration.getName());
+			writer.print(GeneratorUtil.getCVariableDeclaration(localVariableDeclaration.getType(), localVariableDeclaration.getName(), false, context.getComputationModel()));
 			writer.print(";\n");
 		}
 		for (Statement statement : compound.getStatements()) {
@@ -114,13 +113,7 @@ public class CompoundGenerator extends ILSwitch<Boolean> {
 	@Override
 	public Boolean caseLocalVariableDeclaration(LocalVariableDeclaration localVariableDeclaration) {
 		if (localVariableDeclaration.getInitializer() != null) {
-			writer.print(localVariableDeclaration.getName());
-			if (localVariableDeclaration.getInitializer() != null) {
-				writer.print(" = ");
-				doSwitch(localVariableDeclaration.getInitializer());
-			}
-			writer.print(";\n");
-			return true;
+			writeAssignment(localVariableDeclaration, localVariableDeclaration.getInitializer());
 		}
 		return true;
 	}
@@ -130,10 +123,7 @@ public class CompoundGenerator extends ILSwitch<Boolean> {
 	 */
 	@Override
 	public Boolean caseAssignment(Assignment assignment) {
-		new VariableAccessGenerator(assignment).generate();
-		writer.print(" = ");
-		cast(assignment.getAssignedExpression(), context.getComputationModel().getNumberFormat(assignment.getTarget().getType()));
-		writer.print(";\n");
+		writeAssignment(assignment.getTarget(), assignment.getStepIndex(), assignment.getAssignedExpression());
 		return true;
 	}
 	
@@ -167,13 +157,13 @@ public class CompoundGenerator extends ILSwitch<Boolean> {
 		}
 		
 		String itVarName = iterationVariableDeclaration.getName();
-		String itVarType = GeneratorUtil.getCDataType(context.getComputationModel().getNumberFormat(iterationVariableDeclaration.getType()));
+		String itVarDecl = GeneratorUtil.getCVariableDeclaration(iterationVariableDeclaration.getType(), itVarName, false, context.getComputationModel());
 		int size = collectionArrayType.getDimensions().get(0).getSize();
 		
 		writer.println("{");
 		writer.printf("int %s_i;\n", itVarName);
 		writer.printf("for (%s_i = 0; %s_i < %d; ++%s_i) {\n", itVarName, itVarName, size, itVarName);
-		writer.printf("%s %s = (", itVarType, itVarName);
+		writer.printf("%s = (", itVarDecl);
 		doSwitch(foreachStatement.getCollectionExpression());
 		writer.printf(")[%s_i];\n", itVarName);
 		doSwitch(foreachStatement.getBody());
@@ -193,6 +183,35 @@ public class CompoundGenerator extends ILSwitch<Boolean> {
 			return true;
 		}
 		return super.defaultCase(object);
+	}
+	
+	private void writeAssignment(VariableDeclaration target, Expression assignedExpression) {
+		writeAssignment(target, 0, assignedExpression);
+	}
+
+	private void writeAssignment(VariableDeclaration target, int stepIndex, Expression assignedExpression) {
+		ArrayType arrayType = null;
+		if (target.getType() instanceof ArrayType) {
+			arrayType = (ArrayType) target.getType();
+		}
+		if (arrayType != null) {
+			writer.print("memcpy(");
+		}
+		new VariableAccessGenerator(target, stepIndex).generate();
+		if (arrayType != null) {
+			writer.print(", ");
+		} else {
+			writer.print(" = ");
+		}
+		doSwitch(assignedExpression);
+		if (arrayType != null) {
+			writer.printf(", sizeof (%s)", GeneratorUtil.getCDataType(context.getComputationModel().getNumberFormat(arrayType.getElementType())));
+			for (ArrayDimension arrayDimension : arrayType.getDimensions()) {
+				writer.printf(" * %d", arrayDimension.getSize());
+			}
+			writer.print(")");
+		}
+		writer.print(";\n");
 	}
 	
 	private void cast(Expression expression, NumberFormat numberFormat) {
@@ -685,17 +704,20 @@ public class CompoundGenerator extends ILSwitch<Boolean> {
 	
 	private class VariableAccessGenerator extends ILSwitch<Boolean> {
 
-		private VariableAccess variableAccess;
+		private VariableDeclaration target;
+		private int stepIndex;
 		
-		/**
-		 * 
-		 */
 		public VariableAccessGenerator(VariableAccess variableAccess) {
-			this.variableAccess = variableAccess;
+			this(variableAccess.getTarget(), variableAccess.getStepIndex());
+		}
+
+		public VariableAccessGenerator(VariableDeclaration target, int stepIndex) {
+			this.target = target;
+			this.stepIndex = stepIndex;
 		}
 		
 		public void generate() {
-			doSwitch(variableAccess.getTarget());
+			doSwitch(target);
 		}
 		
 		/* (non-Javadoc)
@@ -720,7 +742,7 @@ public class CompoundGenerator extends ILSwitch<Boolean> {
 		 */
 		@Override
 		public Boolean caseInputVariableDeclaration(InputVariableDeclaration inputVariableDeclaration) {
-			if (variableAccess.getStepIndex() == 0) {
+			if (stepIndex == 0) {
 				writer.print(inputVariableDeclaration.getName());
 			} else {
 				writeContextAccess();
@@ -733,7 +755,7 @@ public class CompoundGenerator extends ILSwitch<Boolean> {
 		 */
 		@Override
 		public Boolean caseOutputVariableDeclaration(OutputVariableDeclaration outputVariableDeclaration) {
-			if (variableAccess.getStepIndex() == 0) {
+			if (stepIndex == 0) {
 				writer.printf("*%s", outputVariableDeclaration.getName());
 			} else {
 				writeContextAccess();
@@ -760,10 +782,9 @@ public class CompoundGenerator extends ILSwitch<Boolean> {
 		}
 		
 		private void writeContextAccess() {
-			String name = variableAccess.getTarget().getName();
-			int circularBufferSize = ((StatefulVariableDeclaration) variableAccess.getTarget()).getCircularBufferSize();
+			String name = target.getName();
+			int circularBufferSize = ((StatefulVariableDeclaration) target).getCircularBufferSize();
 			if (circularBufferSize > 1) {
-				int stepIndex = variableAccess.getStepIndex();
 				if (stepIndex == 0) {
 					writer.printf("context->%s[context->%s_index]", name, name, stepIndex,
 							circularBufferSize);

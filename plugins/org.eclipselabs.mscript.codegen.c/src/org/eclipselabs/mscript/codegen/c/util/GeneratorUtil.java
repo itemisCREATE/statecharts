@@ -25,7 +25,7 @@ import org.eclipselabs.mscript.typesystem.DataType;
  */
 public class GeneratorUtil {
 	
-	public static String getCDataType(DataType dataType, String name, boolean reference, ComputationModel computationModel) {
+	public static String getCVariableDeclaration(DataType dataType, String name, boolean reference, ComputationModel computationModel) {
 		StringBuilder cDataType = new StringBuilder();
 
 		if (dataType instanceof ArrayType) {
