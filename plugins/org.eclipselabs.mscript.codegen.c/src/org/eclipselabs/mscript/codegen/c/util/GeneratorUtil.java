@@ -11,13 +11,15 @@
 
 package org.eclipselabs.mscript.codegen.c.util;
 
-import org.eclipselabs.mscript.computation.computationmodel.ComputationModel;
+import org.eclipselabs.mscript.codegen.c.IGeneratorContext;
 import org.eclipselabs.mscript.computation.computationmodel.FixedPointFormat;
 import org.eclipselabs.mscript.computation.computationmodel.FloatingPointFormat;
 import org.eclipselabs.mscript.computation.computationmodel.NumberFormat;
 import org.eclipselabs.mscript.typesystem.ArrayDimension;
 import org.eclipselabs.mscript.typesystem.ArrayType;
+import org.eclipselabs.mscript.typesystem.BooleanType;
 import org.eclipselabs.mscript.typesystem.DataType;
+import org.eclipselabs.mscript.typesystem.NumericType;
 
 /**
  * @author Andreas Unger
@@ -25,13 +27,13 @@ import org.eclipselabs.mscript.typesystem.DataType;
  */
 public class GeneratorUtil {
 	
-	public static String getCVariableDeclaration(DataType dataType, String name, boolean reference, ComputationModel computationModel) {
+	public static String getCVariableDeclaration(IGeneratorContext context, DataType dataType, String name, boolean reference) {
 		StringBuilder cDataType = new StringBuilder();
 
 		if (dataType instanceof ArrayType) {
 			ArrayType arrayType = (ArrayType) dataType;
 
-			cDataType.append(getCDataType(computationModel.getNumberFormat(arrayType.getElementType())));
+			cDataType.append(getCDataType(context, arrayType.getElementType()));
 			cDataType.append(" ");
 			if (reference) {
 				cDataType.append("*");
@@ -51,7 +53,7 @@ public class GeneratorUtil {
 			
 			cDataType.append("]");
 		} else {
-			cDataType.append(getCDataType(computationModel.getNumberFormat(dataType)));
+			cDataType.append(getCDataType(context, dataType));
 			cDataType.append(" ");
 			if (reference) {
 				cDataType.append("*");
@@ -62,18 +64,24 @@ public class GeneratorUtil {
 		return cDataType.toString();
 	}
 
-	public static String getCDataType(NumberFormat numberFormat) {
-		if (numberFormat instanceof FloatingPointFormat) {
-			FloatingPointFormat floatingPointFormat = (FloatingPointFormat) numberFormat;
-			switch (floatingPointFormat.getKind()) {
-			case BINARY32:
-				return "float";
-			case BINARY64:
-				return "double";
+	public static String getCDataType(IGeneratorContext context, DataType dataType) {
+		if (dataType instanceof BooleanType) {
+			return "int";
+		}
+		if (dataType instanceof NumericType) {
+			NumberFormat numberFormat = context.getComputationModel().getNumberFormat(dataType);
+			if (numberFormat instanceof FloatingPointFormat) {
+				FloatingPointFormat floatingPointFormat = (FloatingPointFormat) numberFormat;
+				switch (floatingPointFormat.getKind()) {
+				case BINARY32:
+					return "float";
+				case BINARY64:
+					return "double";
+				}
+			} else if (numberFormat instanceof FixedPointFormat) {
+				FixedPointFormat fixedPointFormat = (FixedPointFormat) numberFormat;
+				return String.format("int%d_t", fixedPointFormat.getWordSize());
 			}
-		} else if (numberFormat instanceof FixedPointFormat) {
-			FixedPointFormat fixedPointFormat = (FixedPointFormat) numberFormat;
-			return String.format("int%d_t", fixedPointFormat.getWordSize());
 		}
 		throw new IllegalArgumentException();
 	}

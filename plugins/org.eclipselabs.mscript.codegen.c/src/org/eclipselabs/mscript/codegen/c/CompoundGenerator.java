@@ -64,6 +64,7 @@ import org.eclipselabs.mscript.typesystem.ArrayDimension;
 import org.eclipselabs.mscript.typesystem.ArrayType;
 import org.eclipselabs.mscript.typesystem.DataType;
 import org.eclipselabs.mscript.typesystem.IntegerType;
+import org.eclipselabs.mscript.typesystem.NumericType;
 import org.eclipselabs.mscript.typesystem.RealType;
 import org.eclipselabs.mscript.typesystem.util.TypeSystemUtil;
 
@@ -95,7 +96,7 @@ public class CompoundGenerator extends ILSwitch<Boolean> {
 			writer.print("{\n");
 		}
 		for (LocalVariableDeclaration localVariableDeclaration : compound.getLocalVariableDeclarations()) {
-			writer.print(GeneratorUtil.getCVariableDeclaration(localVariableDeclaration.getType(), localVariableDeclaration.getName(), false, context.getComputationModel()));
+			writer.print(GeneratorUtil.getCVariableDeclaration(context, localVariableDeclaration.getType(), localVariableDeclaration.getName(), false));
 			writer.print(";\n");
 		}
 		for (Statement statement : compound.getStatements()) {
@@ -157,7 +158,7 @@ public class CompoundGenerator extends ILSwitch<Boolean> {
 		}
 		
 		String itVarName = iterationVariableDeclaration.getName();
-		String itVarDecl = GeneratorUtil.getCVariableDeclaration(iterationVariableDeclaration.getType(), itVarName, false, context.getComputationModel());
+		String itVarDecl = GeneratorUtil.getCVariableDeclaration(context, iterationVariableDeclaration.getType(), itVarName, false);
 		int size = collectionArrayType.getDimensions().get(0).getSize();
 		
 		writer.println("{");
@@ -203,14 +204,9 @@ public class CompoundGenerator extends ILSwitch<Boolean> {
 		} else {
 			writer.print(" = ");
 		}
+		cast(target.getType(), assignedExpression);
 		if (arrayType != null) {
-			// TODO: Properly cast array expression
-			doSwitch(assignedExpression);
-		} else {
-			cast(assignedExpression, context.getComputationModel().getNumberFormat(target.getType()));
-		}
-		if (arrayType != null) {
-			writer.printf(", sizeof (%s)", GeneratorUtil.getCDataType(context.getComputationModel().getNumberFormat(arrayType.getElementType())));
+			writer.printf(", sizeof (%s)", GeneratorUtil.getCDataType(context, arrayType.getElementType()));
 			for (ArrayDimension arrayDimension : arrayType.getDimensions()) {
 				writer.printf(" * %d", arrayDimension.getSize());
 			}
@@ -219,7 +215,16 @@ public class CompoundGenerator extends ILSwitch<Boolean> {
 		writer.print(";\n");
 	}
 	
-	private void cast(Expression expression, NumberFormat numberFormat) {
+	private void cast(DataType targetType, Expression expression) {
+		if (targetType instanceof NumericType) {
+			NumberFormat numberFormat = context.getComputationModel().getNumberFormat(targetType);
+			castNumericType(numberFormat, expression);
+		} else {
+			doSwitch(expression);
+		}
+	}
+	
+	private void castNumericType(NumberFormat numberFormat, Expression expression) {
 		if (numberFormat instanceof FloatingPointFormat) {
 			new CastToFloatingPointHelper(expression, (FloatingPointFormat) numberFormat).cast();
 		} else if (numberFormat instanceof FixedPointFormat) {
@@ -229,7 +234,7 @@ public class CompoundGenerator extends ILSwitch<Boolean> {
 			throw new IllegalArgumentException();
 		}
 	}
-	
+
 	private class CastToFloatingPointHelper extends ComputationModelSwitch<Boolean> {
 		
 		private Expression expression;
@@ -367,7 +372,7 @@ public class CompoundGenerator extends ILSwitch<Boolean> {
 	
 	private void writeLiteral(DataType dataType, double value) {
 		NumberFormat numberFormat = context.getComputationModel().getNumberFormat(dataType);
-		writer.printf("(%s) ", GeneratorUtil.getCDataType(numberFormat));
+		writer.printf("(%s) ", GeneratorUtil.getCDataType(context, dataType));
 		if (numberFormat instanceof FixedPointFormat) {
 			FixedPointFormat fixedPointFormat = (FixedPointFormat) numberFormat;
 			writer.print(Math.round(value * Math.pow(2, fixedPointFormat.getFractionLength())));
@@ -378,7 +383,7 @@ public class CompoundGenerator extends ILSwitch<Boolean> {
 
 	private void writeLiteral(DataType dataType, long value) {
 		NumberFormat numberFormat = context.getComputationModel().getNumberFormat(dataType);
-		writer.printf("(%s) ", GeneratorUtil.getCDataType(numberFormat));
+		writer.printf("(%s) ", GeneratorUtil.getCDataType(context, dataType));
 		if (numberFormat instanceof FixedPointFormat) {
 			FixedPointFormat fixedPointFormat = (FixedPointFormat) numberFormat;
 			value <<= fixedPointFormat.getFractionLength();
@@ -457,19 +462,27 @@ public class CompoundGenerator extends ILSwitch<Boolean> {
 			DataType leftDataType = ILUtil.getDataType(leftOperand);
 			DataType rightDataType = ILUtil.getDataType(rightOperand);
 			
-			DataType dataType1 = TypeSystemUtil.getLeftHandDataType(leftDataType, rightDataType);
-			DataType dataType2 = TypeSystemUtil.getLeftHandDataType(rightDataType, leftDataType);
-			
-			NumberFormat numberFormat1 = context.getComputationModel().getNumberFormat(dataType1);
-			NumberFormat numberFormat2 = context.getComputationModel().getNumberFormat(dataType2);
-			
-			NumberFormat widestNumberFormat = ComputationModelUtil.getWidestNumberFormat(numberFormat1, numberFormat2);
+			if (leftDataType instanceof NumericType && rightDataType instanceof NumericType) {
+				DataType dataType1 = TypeSystemUtil.getLeftHandDataType(leftDataType, rightDataType);
+				DataType dataType2 = TypeSystemUtil.getLeftHandDataType(rightDataType, leftDataType);
+				
+				NumberFormat numberFormat1 = context.getComputationModel().getNumberFormat(dataType1);
+				NumberFormat numberFormat2 = context.getComputationModel().getNumberFormat(dataType2);
+				
+				NumberFormat widestNumberFormat = ComputationModelUtil.getWidestNumberFormat(numberFormat1, numberFormat2);
 
-			cast(leftOperand, widestNumberFormat);
-			writer.print(" ");
-			writer.print(operator);
-			writer.print(" ");
-			cast(rightOperand, widestNumberFormat);
+				castNumericType(widestNumberFormat, leftOperand);
+				writer.print(" ");
+				writer.print(operator);
+				writer.print(" ");
+				castNumericType(widestNumberFormat, rightOperand);
+			} else {
+				doSwitch(leftOperand);
+				writer.print(" ");
+				writer.print(operator);
+				writer.print(" ");
+				doSwitch(rightOperand);
+			}
 		}
 		
 		/* (non-Javadoc)
@@ -477,14 +490,14 @@ public class CompoundGenerator extends ILSwitch<Boolean> {
 		 */
 		@Override
 		public Boolean caseAdditiveExpression(AdditiveExpression additiveExpression) {
-			NumberFormat numberFormat = context.getComputationModel().getNumberFormat(ILUtil.getDataType(additiveExpression));
+			DataType dataType = ILUtil.getDataType(additiveExpression);
 			
-			cast(additiveExpression.getLeftOperand(), numberFormat);
+			cast(dataType, additiveExpression.getLeftOperand());
 			for (AdditiveExpressionPart rightPart : additiveExpression.getRightParts()) {
 				writer.print(" ");
 				writer.print(rightPart.getOperator().getLiteral());
 				writer.print(" ");
-				cast(rightPart.getOperand(), numberFormat);
+				cast(dataType, rightPart.getOperand());
 			}
 			
 			return true;

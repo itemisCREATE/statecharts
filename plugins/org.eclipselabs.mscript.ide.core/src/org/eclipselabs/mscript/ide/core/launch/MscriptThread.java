@@ -21,6 +21,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.xtext.util.StringInputStream;
+import org.eclipselabs.mscript.computation.core.value.IBooleanValue;
 import org.eclipselabs.mscript.computation.core.value.ISimpleNumericValue;
 import org.eclipselabs.mscript.computation.core.value.IValue;
 import org.eclipselabs.mscript.ide.core.IDECorePlugin;
@@ -81,8 +82,11 @@ public class MscriptThread extends Thread {
 					if (outputValue instanceof ISimpleNumericValue) {
 						ISimpleNumericValue numericValue = (ISimpleNumericValue) outputValue;
 						sb.append(numericValue.doubleValue());
+					} else if (outputValue instanceof IBooleanValue) {
+						IBooleanValue booleanValue = (IBooleanValue) outputValue;
+						sb.append(booleanValue.booleanValue());
 					} else {
-						sb.append("NaN");
+						sb.append("INVALID");
 					}
 				}
 				sb.append("\n");

@@ -25,8 +25,10 @@ import org.eclipselabs.mscript.language.internal.interpreter.InvalidUnitExpressi
 import org.eclipselabs.mscript.language.internal.interpreter.UnitExpressionHelper;
 import org.eclipselabs.mscript.typesystem.ArrayDimension;
 import org.eclipselabs.mscript.typesystem.ArrayType;
+import org.eclipselabs.mscript.typesystem.BooleanType;
 import org.eclipselabs.mscript.typesystem.DataType;
 import org.eclipselabs.mscript.typesystem.NumericType;
+import org.eclipselabs.mscript.typesystem.StringType;
 import org.eclipselabs.mscript.typesystem.TensorType;
 import org.eclipselabs.mscript.typesystem.TypeSystemFactory;
 import org.eclipselabs.mscript.typesystem.TypeSystemPackage;
@@ -91,15 +93,31 @@ public class DataTypeSpecifierEvaluator extends AstSwitch<DataType> {
 	 */
 	@Override
 	public DataType caseBooleanTypeSpecifier(BooleanTypeSpecifier booleanTypeSpecifier) {
-		return TypeSystemUtil.BOOLEAN_TYPE;
+		BooleanType booleanType = TypeSystemFactory.eINSTANCE.createBooleanType();
+		
+		if (!booleanTypeSpecifier.getDimensions().isEmpty()) {
+			ArrayType arrayType = TypeSystemFactory.eINSTANCE.createArrayType();
+			initializeArrayType(arrayType, booleanTypeSpecifier, booleanType);
+			return arrayType;
+		}
+
+		return booleanType;
 	}
 	
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseStringTypeSpecifier(org.eclipselabs.mscript.language.ast.StringTypeSpecifier)
 	 */
 	@Override
-	public DataType caseStringTypeSpecifier(StringTypeSpecifier object) {
-		return TypeSystemUtil.STRING_TYPE;
+	public DataType caseStringTypeSpecifier(StringTypeSpecifier stringTypeSpecifier) {
+		StringType stringType = TypeSystemFactory.eINSTANCE.createStringType();
+		
+		if (!stringTypeSpecifier.getDimensions().isEmpty()) {
+			ArrayType arrayType = TypeSystemFactory.eINSTANCE.createArrayType();
+			initializeArrayType(arrayType, stringTypeSpecifier, stringType);
+			return arrayType;
+		}
+
+		return stringType;
 	}
 
 	private void initializeArrayType(ArrayType arrayType, DataTypeSpecifier dataTypeSpecifier, DataType elementType) {
