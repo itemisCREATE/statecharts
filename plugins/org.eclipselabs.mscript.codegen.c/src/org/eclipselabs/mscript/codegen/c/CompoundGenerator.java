@@ -203,7 +203,7 @@ public class CompoundGenerator extends ILSwitch<Boolean> {
 		} else {
 			writer.print(" = ");
 		}
-		doSwitch(assignedExpression);
+		cast(assignedExpression, context.getComputationModel().getNumberFormat(target.getType()));
 		if (arrayType != null) {
 			writer.printf(", sizeof (%s)", GeneratorUtil.getCDataType(context.getComputationModel().getNumberFormat(arrayType.getElementType())));
 			for (ArrayDimension arrayDimension : arrayType.getDimensions()) {
