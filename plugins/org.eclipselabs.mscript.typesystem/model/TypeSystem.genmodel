@@ -82,6 +82,8 @@
       <genFeatures xsi:type="genmodel:GenFeature" property="Readonly" createChild="false"
           ecoreFeature="ecore:EAttribute TypeSystem.ecore#//ArrayType/dimensionality"/>
       <genFeatures xsi:type="genmodel:GenFeature" property="Readonly" createChild="false"
+          ecoreFeature="ecore:EAttribute TypeSystem.ecore#//ArrayType/size"/>
+      <genFeatures xsi:type="genmodel:GenFeature" property="Readonly" createChild="false"
           ecoreFeature="ecore:EAttribute TypeSystem.ecore#//ArrayType/rowSize"/>
       <genFeatures xsi:type="genmodel:GenFeature" property="Readonly" createChild="false"
           ecoreFeature="ecore:EAttribute TypeSystem.ecore#//ArrayType/columnSize"/>

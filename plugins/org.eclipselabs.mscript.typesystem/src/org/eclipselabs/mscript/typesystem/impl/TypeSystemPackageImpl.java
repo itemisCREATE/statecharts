@@ -422,7 +422,7 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getArrayType_RowSize() {
+	public EAttribute getArrayType_Size() {
 		return (EAttribute)arrayTypeEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -431,7 +431,7 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getArrayType_ColumnSize() {
+	public EAttribute getArrayType_RowSize() {
 		return (EAttribute)arrayTypeEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -440,7 +440,7 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getArrayType_Dimensional() {
+	public EAttribute getArrayType_ColumnSize() {
 		return (EAttribute)arrayTypeEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -449,8 +449,17 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getArrayType_Multidimensional() {
+	public EAttribute getArrayType_Dimensional() {
 		return (EAttribute)arrayTypeEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getArrayType_Multidimensional() {
+		return (EAttribute)arrayTypeEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -831,6 +840,7 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 		createEReference(arrayTypeEClass, ARRAY_TYPE__ELEMENT_TYPE);
 		createEReference(arrayTypeEClass, ARRAY_TYPE__DIMENSIONS);
 		createEAttribute(arrayTypeEClass, ARRAY_TYPE__DIMENSIONALITY);
+		createEAttribute(arrayTypeEClass, ARRAY_TYPE__SIZE);
 		createEAttribute(arrayTypeEClass, ARRAY_TYPE__ROW_SIZE);
 		createEAttribute(arrayTypeEClass, ARRAY_TYPE__COLUMN_SIZE);
 		createEAttribute(arrayTypeEClass, ARRAY_TYPE__DIMENSIONAL);
@@ -967,6 +977,7 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 		initEReference(getArrayType_ElementType(), this.getDataType(), null, "elementType", null, 1, 1, ArrayType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getArrayType_Dimensions(), this.getArrayDimension(), null, "dimensions", null, 0, -1, ArrayType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEAttribute(getArrayType_Dimensionality(), ecorePackage.getEInt(), "dimensionality", null, 1, 1, ArrayType.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getArrayType_Size(), ecorePackage.getEInt(), "size", null, 1, 1, ArrayType.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, !IS_ORDERED);
 		initEAttribute(getArrayType_RowSize(), ecorePackage.getEInt(), "rowSize", null, 1, 1, ArrayType.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, !IS_ORDERED);
 		initEAttribute(getArrayType_ColumnSize(), ecorePackage.getEInt(), "columnSize", null, 1, 1, ArrayType.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, !IS_ORDERED);
 		initEAttribute(getArrayType_Dimensional(), ecorePackage.getEBoolean(), "dimensional", null, 1, 1, ArrayType.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, !IS_ORDERED);

@@ -159,7 +159,7 @@ public class CompoundGenerator extends ILSwitch<Boolean> {
 		
 		String itVarName = iterationVariableDeclaration.getName();
 		String itVarDecl = GeneratorUtil.getCVariableDeclaration(context, iterationVariableDeclaration.getType(), itVarName, false);
-		int size = collectionArrayType.getDimensions().get(0).getSize();
+		int size = collectionArrayType.getSize();
 		
 		writer.println("{");
 		writer.printf("int %s_i;\n", itVarName);

@@ -11,10 +11,10 @@
 
 package org.eclipselabs.mscript.language.interpreter;
 
+import org.eclipselabs.mscript.computation.core.value.IArrayValue;
 import org.eclipselabs.mscript.computation.core.value.IBooleanValue;
 import org.eclipselabs.mscript.computation.core.value.IValue;
 import org.eclipselabs.mscript.computation.core.value.UninitializedValue;
-import org.eclipselabs.mscript.computation.core.value.VectorValue;
 import org.eclipselabs.mscript.language.il.Assignment;
 import org.eclipselabs.mscript.language.il.Compound;
 import org.eclipselabs.mscript.language.il.ForeachStatement;
@@ -103,19 +103,19 @@ public class CompoundInterpreter extends ILSwitch<Boolean> {
 		
 		IValue value = expressionValueEvaluator.doSwitch(foreachStatement.getCollectionExpression());
 		
-		if (!(value instanceof VectorValue)) {
-			throw new RuntimeException("Value must be tensor value");
+		if (!(value instanceof IArrayValue)) {
+			throw new RuntimeException("Value must be array value");
 		}
 		
-		VectorValue tensorValue = (VectorValue) value;
+		IArrayValue arrayValue = (IArrayValue) value;
 		
-		int size = arrayType.getDimensions().get(0).getSize();
+		int size = arrayType.getSize();
 		
 		VariableDeclaration iterationVariableDeclaration = foreachStatement.getIterationVariableDeclaration();
 		for (int i = 0; i < size; ++i) {
 			context.enterScope();
 			IVariable variable = new Variable(iterationVariableDeclaration, 1);
-			variable.setValue(0, tensorValue.get(i).convert(iterationVariableDeclaration.getType()));
+			variable.setValue(0, arrayValue.get(i).convert(iterationVariableDeclaration.getType()));
 			context.getScope().add(variable);
 			doSwitch(foreachStatement.getBody());
 			context.leaveScope();

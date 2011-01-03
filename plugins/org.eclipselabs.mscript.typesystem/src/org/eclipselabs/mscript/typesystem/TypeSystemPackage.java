@@ -503,13 +503,22 @@ public interface TypeSystemPackage extends EPackage {
 	int ARRAY_TYPE__DIMENSIONALITY = DATA_TYPE_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Size</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARRAY_TYPE__SIZE = DATA_TYPE_FEATURE_COUNT + 3;
+
+	/**
 	 * The feature id for the '<em><b>Row Size</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ARRAY_TYPE__ROW_SIZE = DATA_TYPE_FEATURE_COUNT + 3;
+	int ARRAY_TYPE__ROW_SIZE = DATA_TYPE_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Column Size</b></em>' attribute.
@@ -518,7 +527,7 @@ public interface TypeSystemPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ARRAY_TYPE__COLUMN_SIZE = DATA_TYPE_FEATURE_COUNT + 4;
+	int ARRAY_TYPE__COLUMN_SIZE = DATA_TYPE_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Dimensional</b></em>' attribute.
@@ -527,7 +536,7 @@ public interface TypeSystemPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ARRAY_TYPE__DIMENSIONAL = DATA_TYPE_FEATURE_COUNT + 5;
+	int ARRAY_TYPE__DIMENSIONAL = DATA_TYPE_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Multidimensional</b></em>' attribute.
@@ -536,7 +545,7 @@ public interface TypeSystemPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ARRAY_TYPE__MULTIDIMENSIONAL = DATA_TYPE_FEATURE_COUNT + 6;
+	int ARRAY_TYPE__MULTIDIMENSIONAL = DATA_TYPE_FEATURE_COUNT + 7;
 
 	/**
 	 * The number of structural features of the '<em>Array Type</em>' class.
@@ -545,7 +554,7 @@ public interface TypeSystemPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ARRAY_TYPE_FEATURE_COUNT = DATA_TYPE_FEATURE_COUNT + 7;
+	int ARRAY_TYPE_FEATURE_COUNT = DATA_TYPE_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Size</b></em>' attribute.
@@ -1162,6 +1171,15 @@ public interface TypeSystemPackage extends EPackage {
 	int TENSOR_TYPE__DIMENSIONALITY = ARRAY_TYPE__DIMENSIONALITY;
 
 	/**
+	 * The feature id for the '<em><b>Size</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TENSOR_TYPE__SIZE = ARRAY_TYPE__SIZE;
+
+	/**
 	 * The feature id for the '<em><b>Row Size</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1565,6 +1583,17 @@ public interface TypeSystemPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getArrayType_Dimensionality();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.typesystem.ArrayType#getSize <em>Size</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Size</em>'.
+	 * @see org.eclipselabs.mscript.typesystem.ArrayType#getSize()
+	 * @see #getArrayType()
+	 * @generated
+	 */
+	EAttribute getArrayType_Size();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.typesystem.ArrayType#getRowSize <em>Row Size</em>}'.
@@ -2130,6 +2159,14 @@ public interface TypeSystemPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ARRAY_TYPE__DIMENSIONALITY = eINSTANCE.getArrayType_Dimensionality();
+
+		/**
+		 * The meta object literal for the '<em><b>Size</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ARRAY_TYPE__SIZE = eINSTANCE.getArrayType_Size();
 
 		/**
 		 * The meta object literal for the '<em><b>Row Size</b></em>' attribute feature.

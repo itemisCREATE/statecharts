@@ -14,7 +14,6 @@ package org.eclipselabs.mscript.computation.core.value;
 import org.eclipselabs.mscript.computation.core.IComputationContext;
 import org.eclipselabs.mscript.typesystem.IntegerType;
 import org.eclipselabs.mscript.typesystem.RealType;
-import org.eclipselabs.mscript.typesystem.TensorType;
 
 /**
  * @author Andreas Unger
@@ -34,11 +33,14 @@ public class ValueTransformer {
 		}
 		if (value instanceof VectorValue) {
 			VectorValue vectorValue = (VectorValue) value;
-			TensorType tensorType = (TensorType) vectorValue.getDataType();
-			for (int i = 0; i < tensorType.getRowSize(); ++i) {
-				vectorValue.set(i, (INumericValue) transform(context, vectorValue.get(i)));
+			
+			INumericValue[] elements = new INumericValue[vectorValue.getDataType().getRowSize()];
+			
+			for (int i = 0; i < elements.length; ++i) {
+				elements[i] = (INumericValue) transform(context, vectorValue.get(i));
 			}
-			return vectorValue;
+			
+			return new VectorValue(context, vectorValue.getDataType(), elements);
 		}
 		return value;
 	}

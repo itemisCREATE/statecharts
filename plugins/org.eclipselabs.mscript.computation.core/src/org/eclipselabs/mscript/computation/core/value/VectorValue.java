@@ -19,7 +19,7 @@ import org.eclipselabs.mscript.typesystem.TensorType;
  * @author Andreas Unger
  *
  */
-public class VectorValue extends AbstractExplicitDataTypeValue {
+public class VectorValue extends AbstractExplicitDataTypeValue implements IArrayValue {
 
 	private INumericValue[] elements;
 	
@@ -32,7 +32,7 @@ public class VectorValue extends AbstractExplicitDataTypeValue {
 		if (!dataType.isVector()) {
 			throw new IllegalArgumentException("Tensor type must be vector");
 		}
-		if (elements.length != dataType.getDimensions().get(0).getSize()) {
+		if (elements.length != dataType.getSize()) {
 			throw new IllegalArgumentException("Array size must be equal to vector size");
 		}
 		this.elements = elements;
@@ -54,12 +54,11 @@ public class VectorValue extends AbstractExplicitDataTypeValue {
 		return null;
 	}
 	
-	public INumericValue get(int index) {
-		return elements[index];
+	public INumericValue get(int... index) {
+		if (index.length != 1) {
+			throw new IllegalArgumentException("Index array length must be 1");
+		}
+		return elements[index[0]];
 	}
 	
-	public void set(int index, INumericValue elementValue) {
-		elements[index] = elementValue;
-	}
-
 }

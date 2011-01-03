@@ -54,7 +54,9 @@ public abstract class AbstractValue implements IValue {
 		return InvalidValue.SINGLETON;
 	}
 	
-	protected abstract IValue doConvert(DataType dataType);
+	protected IValue doConvert(DataType dataType) {
+		return InvalidValue.SINGLETON;		
+	}
 
 	public IValue add(IValue other) {
 		DataType dataType = getDataType().evaluate(OperatorKind.ADDITION, other.getDataType());

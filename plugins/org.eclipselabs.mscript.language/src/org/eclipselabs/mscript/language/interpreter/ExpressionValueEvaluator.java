@@ -13,6 +13,7 @@ package org.eclipselabs.mscript.language.interpreter;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipselabs.mscript.computation.core.value.ArrayValue;
 import org.eclipselabs.mscript.computation.core.value.IBooleanValue;
 import org.eclipselabs.mscript.computation.core.value.INumericValue;
 import org.eclipselabs.mscript.computation.core.value.IValue;
@@ -43,6 +44,7 @@ import org.eclipselabs.mscript.language.il.VariableReference;
 import org.eclipselabs.mscript.language.il.util.ILSwitch;
 import org.eclipselabs.mscript.language.internal.interpreter.InvalidUnitExpressionOperandException;
 import org.eclipselabs.mscript.language.internal.interpreter.UnitExpressionHelper;
+import org.eclipselabs.mscript.typesystem.ArrayType;
 import org.eclipselabs.mscript.typesystem.DataType;
 import org.eclipselabs.mscript.typesystem.IntegerType;
 import org.eclipselabs.mscript.typesystem.InvalidDataType;
@@ -291,41 +293,45 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 	public IValue caseArrayConstructionOperator(ArrayConstructionOperator arrayConstructionOperator) {
 		int size = arrayConstructionOperator.getExpressions().size();
 		
-		INumericValue[] elementValues = new INumericValue[size];
+		IValue[] elements = new IValue[size];
 		
 		int i = 0;
 		for (Expression expression : arrayConstructionOperator.getExpressions()) {
 			IValue value = doSwitch(expression);
-			if (!(value instanceof INumericValue)) {
-				return InvalidValue.SINGLETON;
+			if (value instanceof InvalidValue) {
+				return value;
 			}
-			elementValues[i] = (INumericValue) value;
+			elements[i] = value;
 			++i;
 		}
 		
-		DataType arrayType = createArrayType(elementValues);
+		ArrayType arrayType = createArrayType(elements);
 		
-		if (arrayType instanceof TensorType) {
-			return new VectorValue(context.getComputationContext(), (TensorType) arrayType, elementValues);
+		if (arrayType == null) {
+			return InvalidValue.SINGLETON;
 		}
 		
-		return InvalidValue.SINGLETON;
+		if (arrayType instanceof TensorType) {
+			return new VectorValue(context.getComputationContext(), (TensorType) arrayType, (INumericValue[]) elements);
+		}
+		
+		return new ArrayValue(context.getComputationContext(), arrayType, elements);
 	}
 	
-	private DataType createArrayType(IValue[] elementValues) {
+	private ArrayType createArrayType(IValue[] elementValues) {
 		DataType elementType = null;
 		
 		for (IValue elementValue : elementValues) {
 			DataType dataType = elementValue.getDataType();
 			
 			if (dataType == null || dataType instanceof InvalidDataType) {
-				return TypeSystemUtil.INVALID_DATA_TYPE;
+				return null;
 			}
 			
 			if (elementType != null && !EcoreUtil.equals(elementType, dataType)) {
 				DataType leftHandDataType = TypeSystemUtil.getLeftHandDataType(elementType, dataType);
 				if (leftHandDataType == null) {
-					return TypeSystemUtil.INVALID_DATA_TYPE;
+					return null;
 				}
 				dataType = leftHandDataType;
 			}

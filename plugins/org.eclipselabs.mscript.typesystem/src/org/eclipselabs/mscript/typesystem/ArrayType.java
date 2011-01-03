@@ -19,6 +19,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.eclipselabs.mscript.typesystem.ArrayType#getElementType <em>Element Type</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.typesystem.ArrayType#getDimensions <em>Dimensions</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.typesystem.ArrayType#getDimensionality <em>Dimensionality</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.typesystem.ArrayType#getSize <em>Size</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.typesystem.ArrayType#getRowSize <em>Row Size</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.typesystem.ArrayType#getColumnSize <em>Column Size</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.typesystem.ArrayType#isDimensional <em>Dimensional</em>}</li>
@@ -87,6 +88,21 @@ public interface ArrayType extends DataType {
 	 * @generated
 	 */
 	int getDimensionality();
+
+	/**
+	 * Returns the value of the '<em><b>Size</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Size</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Size</em>' attribute.
+	 * @see org.eclipselabs.mscript.typesystem.TypeSystemPackage#getArrayType_Size()
+	 * @model required="true" transient="true" changeable="false" volatile="true" derived="true" ordered="false"
+	 * @generated
+	 */
+	int getSize();
 
 	/**
 	 * Returns the value of the '<em><b>Row Size</b></em>' attribute.

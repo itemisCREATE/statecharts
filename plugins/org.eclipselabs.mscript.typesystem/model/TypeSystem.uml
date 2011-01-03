@@ -26,6 +26,9 @@
       <ownedAttribute xmi:id="_KRij8HITEd-Vr8z_P2IBLw" name="dimensionality" isReadOnly="true" isDerived="true" aggregation="composite">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
       </ownedAttribute>
+      <ownedAttribute xmi:id="_5A9XYBcuEeC0VsZglrAl7w" name="size" isReadOnly="true" isDerived="true" aggregation="composite">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedAttribute>
       <ownedAttribute xmi:id="_tKL90HITEd-Vr8z_P2IBLw" name="rowSize" isReadOnly="true" isDerived="true" aggregation="composite">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
       </ownedAttribute>
@@ -464,4 +467,5 @@
   <Ecore:EAttribute xmi:id="_XscRILRyEd-XzKz8TgAxgw" isTransient="true"/>
   <Ecore:EAttribute xmi:id="_YEPGELRyEd-XzKz8TgAxgw" isTransient="true" base_Property="_QH5hoLRyEd-XzKz8TgAxgw"/>
   <Ecore:EAttribute xmi:id="_9mYZsNSbEd-6Zv_9XpuCAw" isUnsettable="true" base_Property="_ySiCoM4TEd-06tH_5Us_6Q"/>
+  <Ecore:EAttribute xmi:id="_7vuqwBcuEeC0VsZglrAl7w" isTransient="true" base_Property="_5A9XYBcuEeC0VsZglrAl7w"/>
 </xmi:XMI>

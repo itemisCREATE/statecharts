@@ -66,6 +66,7 @@ public class ArrayTypeItemProvider
 
 			addElementTypePropertyDescriptor(object);
 			addDimensionalityPropertyDescriptor(object);
+			addSizePropertyDescriptor(object);
 			addRowSizePropertyDescriptor(object);
 			addColumnSizePropertyDescriptor(object);
 			addDimensionalPropertyDescriptor(object);
@@ -110,6 +111,28 @@ public class ArrayTypeItemProvider
 				 getString("_UI_ArrayType_dimensionality_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_ArrayType_dimensionality_feature", "_UI_ArrayType_type"),
 				 TypeSystemPackage.Literals.ARRAY_TYPE__DIMENSIONALITY,
+				 false,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Size feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addSizePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ArrayType_size_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ArrayType_size_feature", "_UI_ArrayType_type"),
+				 TypeSystemPackage.Literals.ARRAY_TYPE__SIZE,
 				 false,
 				 false,
 				 false,
@@ -274,6 +297,7 @@ public class ArrayTypeItemProvider
 
 		switch (notification.getFeatureID(ArrayType.class)) {
 			case TypeSystemPackage.ARRAY_TYPE__DIMENSIONALITY:
+			case TypeSystemPackage.ARRAY_TYPE__SIZE:
 			case TypeSystemPackage.ARRAY_TYPE__ROW_SIZE:
 			case TypeSystemPackage.ARRAY_TYPE__COLUMN_SIZE:
 			case TypeSystemPackage.ARRAY_TYPE__DIMENSIONAL:

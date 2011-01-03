@@ -32,6 +32,7 @@ import org.eclipselabs.mscript.typesystem.TypeSystemPackage;
  *   <li>{@link org.eclipselabs.mscript.typesystem.impl.ArrayTypeImpl#getElementType <em>Element Type</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.typesystem.impl.ArrayTypeImpl#getDimensions <em>Dimensions</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.typesystem.impl.ArrayTypeImpl#getDimensionality <em>Dimensionality</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.typesystem.impl.ArrayTypeImpl#getSize <em>Size</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.typesystem.impl.ArrayTypeImpl#getRowSize <em>Row Size</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.typesystem.impl.ArrayTypeImpl#getColumnSize <em>Column Size</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.typesystem.impl.ArrayTypeImpl#isDimensional <em>Dimensional</em>}</li>
@@ -71,6 +72,16 @@ public class ArrayTypeImpl extends DataTypeImpl implements ArrayType {
 	 * @ordered
 	 */
 	protected static final int DIMENSIONALITY_EDEFAULT = 0;
+
+	/**
+	 * The default value of the '{@link #getSize() <em>Size</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSize()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int SIZE_EDEFAULT = 0;
 
 	/**
 	 * The default value of the '{@link #getRowSize() <em>Row Size</em>}' attribute.
@@ -202,6 +213,15 @@ public class ArrayTypeImpl extends DataTypeImpl implements ArrayType {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	public int getSize() {
+		return getDimensions().size() > 0 ? getDimensions().get(0).getSize() : 0;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
 	public int getRowSize() {
 		return getDimensions().size() > 0 ? getDimensions().get(0).getSize() : 0;
 	}
@@ -262,6 +282,8 @@ public class ArrayTypeImpl extends DataTypeImpl implements ArrayType {
 				return getDimensions();
 			case TypeSystemPackage.ARRAY_TYPE__DIMENSIONALITY:
 				return getDimensionality();
+			case TypeSystemPackage.ARRAY_TYPE__SIZE:
+				return getSize();
 			case TypeSystemPackage.ARRAY_TYPE__ROW_SIZE:
 				return getRowSize();
 			case TypeSystemPackage.ARRAY_TYPE__COLUMN_SIZE:
@@ -326,6 +348,8 @@ public class ArrayTypeImpl extends DataTypeImpl implements ArrayType {
 				return dimensions != null && !dimensions.isEmpty();
 			case TypeSystemPackage.ARRAY_TYPE__DIMENSIONALITY:
 				return getDimensionality() != DIMENSIONALITY_EDEFAULT;
+			case TypeSystemPackage.ARRAY_TYPE__SIZE:
+				return getSize() != SIZE_EDEFAULT;
 			case TypeSystemPackage.ARRAY_TYPE__ROW_SIZE:
 				return getRowSize() != ROW_SIZE_EDEFAULT;
 			case TypeSystemPackage.ARRAY_TYPE__COLUMN_SIZE:

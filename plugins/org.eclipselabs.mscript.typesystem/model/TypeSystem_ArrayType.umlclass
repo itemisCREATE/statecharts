@@ -238,7 +238,7 @@
     <styles xmi:type="notation:FontStyle" xmi:id="_pVAW4nPSEd-S94eRjnXSAQ" fontName="Sans"/>
     <element xmi:type="uml:Association" href="TypeSystem.uml#_pU1-0HPSEd-S94eRjnXSAQ"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_pVAW43PSEd-S94eRjnXSAQ" points="[121, 16, -144, -20]$[191, 25, -74, -11]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_qLG4cHPSEd-S94eRjnXSAQ" id="(0.9949238578680203,0.6904761904761905)"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_qLG4cHPSEd-S94eRjnXSAQ" id="(0.9695431472081218,0.6381578947368421)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ieXNsIPBEd-CLZ00LeIFXg" id="(0.0106951871657754,0.5096153846153846)"/>
   </edges>
   <edges xmi:type="notation:Edge" xmi:id="_CNBVgIesEd-lNp5-AHWQTA" type="4005" source="_bKtK0HGiEd-Vr_LfGhknIQ" target="_FfY6oH3nEd-EWvFDOLE-rQ">
