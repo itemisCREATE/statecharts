@@ -21,6 +21,7 @@ import org.eclipselabs.mscript.typesystem.ArrayType;
 import org.eclipselabs.mscript.typesystem.DataType;
 import org.eclipselabs.mscript.typesystem.NumericType;
 import org.eclipselabs.mscript.typesystem.TypeSystemPackage;
+import org.eclipselabs.mscript.typesystem.internal.operations.ArrayTypeOperations;
 
 /**
  * <!-- begin-user-doc -->
@@ -251,6 +252,16 @@ public class ArrayTypeImpl extends DataTypeImpl implements ArrayType {
 	 */
 	public boolean isMultidimensional() {
 		return getDimensions().size() > 1;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isAssignableFrom(DataType other) {
+		return ArrayTypeOperations.isAssignableFrom(this, other);
 	}
 
 	/**

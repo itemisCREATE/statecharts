@@ -33,6 +33,9 @@ public class ArrayValue extends AbstractExplicitDataTypeValue implements IArrayV
 			throw new IllegalArgumentException("Array type must not be tensor type");
 		}
 		if (dataType.getDimensionality() == 1) {
+			if (elements.length != dataType.getSize()) {
+				throw new IllegalArgumentException("Number of elements must be equal to array size");
+			}
 			this.elements = elements;
 		} else {
 			throw new IllegalArgumentException("Multi-dimensional array type not supported");

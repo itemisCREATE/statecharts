@@ -293,13 +293,20 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 	public IValue caseArrayConstructionOperator(ArrayConstructionOperator arrayConstructionOperator) {
 		int size = arrayConstructionOperator.getExpressions().size();
 		
-		IValue[] elements = new IValue[size];
+		IValue[] elements = null;
 		
 		int i = 0;
 		for (Expression expression : arrayConstructionOperator.getExpressions()) {
 			IValue value = doSwitch(expression);
 			if (value instanceof InvalidValue) {
 				return value;
+			}
+			if (elements == null) {
+				if (value instanceof INumericValue) {
+					elements = new INumericValue[size];
+				} else {
+					elements = new IValue[size];
+				}
 			}
 			elements[i] = value;
 			++i;
@@ -318,10 +325,10 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 		return new ArrayValue(context.getComputationContext(), arrayType, elements);
 	}
 	
-	private ArrayType createArrayType(IValue[] elementValues) {
+	private ArrayType createArrayType(IValue[] elements) {
 		DataType elementType = null;
 		
-		for (IValue elementValue : elementValues) {
+		for (IValue elementValue : elements) {
 			DataType dataType = elementValue.getDataType();
 			
 			if (dataType == null || dataType instanceof InvalidDataType) {
@@ -339,7 +346,7 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 			elementType = dataType;
 		}
 		
-		return TypeSystemUtil.createArrayType(elementType, elementValues.length);
+		return TypeSystemUtil.createArrayType(elementType, elements.length);
 	}
 
 	/* (non-Javadoc)

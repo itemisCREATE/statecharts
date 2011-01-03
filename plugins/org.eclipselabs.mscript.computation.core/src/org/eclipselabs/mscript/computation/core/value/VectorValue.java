@@ -33,7 +33,7 @@ public class VectorValue extends AbstractExplicitDataTypeValue implements IArray
 			throw new IllegalArgumentException("Tensor type must be vector");
 		}
 		if (elements.length != dataType.getSize()) {
-			throw new IllegalArgumentException("Array size must be equal to vector size");
+			throw new IllegalArgumentException("Number of elements must be equal to vector size");
 		}
 		this.elements = elements;
 	}

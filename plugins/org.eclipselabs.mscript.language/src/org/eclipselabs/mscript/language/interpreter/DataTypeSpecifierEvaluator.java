@@ -126,6 +126,8 @@ public class DataTypeSpecifierEvaluator extends AstSwitch<DataType> {
 			if (arrayDimensionSpecification.getSize() != null && arrayDimensionSpecification.getSize() instanceof IntegerLiteral) {
 				IntegerLiteral integerLiteral = (IntegerLiteral) arrayDimensionSpecification.getSize();
 				arrayDimension.setSize((int) integerLiteral.getValue());
+			} else {
+				arrayDimension.setSize(-1);
 			}
 			arrayType.getDimensions().add(arrayDimension);
 		}

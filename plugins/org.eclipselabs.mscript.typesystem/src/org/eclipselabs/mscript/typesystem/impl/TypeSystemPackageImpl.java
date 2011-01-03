@@ -1133,7 +1133,7 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 		  (getNamespace_OwnedMembers(), 
 		   source, 
 		   new String[] {
-		   });											
+		   });												
 	}
 
 	/**
@@ -1151,7 +1151,7 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 		   },
 		   new URI[] {
 			 URI.createURI(eNS_URI).appendFragment("//Namespace/members")
-		   });								
+		   });									
 		addAnnotation
 		  (getEnumeration_Literals(), 
 		   source, 
@@ -1186,6 +1186,11 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 	 */
 	protected void createDuplicatesAnnotations() {
 		String source = "duplicates";						
+		addAnnotation
+		  (arrayTypeEClass, 
+		   source, 
+		   new String[] {
+		   });		
 		addAnnotation
 		  (primitiveTypeEClass, 
 		   source, 

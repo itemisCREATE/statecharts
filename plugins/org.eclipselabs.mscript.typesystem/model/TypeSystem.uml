@@ -41,6 +41,12 @@
       <ownedAttribute xmi:id="_GQlvoHIWEd-Vr8z_P2IBLw" name="multidimensional" isReadOnly="true" isDerived="true" aggregation="composite">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
       </ownedAttribute>
+      <ownedOperation xmi:id="_GnIjEBc4EeC0VsZglrAl7w" name="isAssignableFrom" redefinedOperation="_UEkroH5FEd-92N_8bTdFqA">
+        <ownedParameter xmi:id="_Hc2qIBc4EeC0VsZglrAl7w" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        </ownedParameter>
+        <ownedParameter xmi:id="_Hc2qIRc4EeC0VsZglrAl7w" name="other" type="_FfGmwH3nEd-EWvFDOLE-rQ"/>
+      </ownedOperation>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_ckY6kHGiEd-Vr_LfGhknIQ" name="PrimitiveType" isAbstract="true">
       <generalization xmi:id="_8CE0AHGjEd-Vr_LfGhknIQ" general="_FfGmwH3nEd-EWvFDOLE-rQ"/>

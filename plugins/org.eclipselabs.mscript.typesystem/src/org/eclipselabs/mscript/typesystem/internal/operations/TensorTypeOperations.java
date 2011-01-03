@@ -29,7 +29,7 @@ import org.eclipselabs.mscript.typesystem.util.TypeSystemUtil;
  *
  * @generated
  */
-public class TensorTypeOperations extends DataTypeOperations {
+public class TensorTypeOperations extends ArrayTypeOperations {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
