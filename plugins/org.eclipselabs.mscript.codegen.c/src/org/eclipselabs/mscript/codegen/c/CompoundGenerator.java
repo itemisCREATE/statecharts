@@ -24,6 +24,7 @@ import org.eclipselabs.mscript.computation.computationmodel.FloatingPointFormat;
 import org.eclipselabs.mscript.computation.computationmodel.NumberFormat;
 import org.eclipselabs.mscript.computation.computationmodel.util.ComputationModelSwitch;
 import org.eclipselabs.mscript.computation.computationmodel.util.ComputationModelUtil;
+import org.eclipselabs.mscript.computation.core.value.IBooleanValue;
 import org.eclipselabs.mscript.computation.core.value.ISimpleNumericValue;
 import org.eclipselabs.mscript.computation.core.value.IValue;
 import org.eclipselabs.mscript.language.ast.AdditiveExpression;
@@ -751,6 +752,9 @@ public class CompoundGenerator extends ILSwitch<Boolean> {
 				} else if (templateArgument.getDataType() instanceof IntegerType) {
 					writeLiteral(numericTemplateArgument.getDataType(), numericTemplateArgument.longValue());
 				}
+			} else if (templateArgument instanceof IBooleanValue){
+				IBooleanValue booleanTemplateArgument = (IBooleanValue) templateArgument;
+				writer.print(booleanTemplateArgument.booleanValue() ? "1" : "0");
 			}
 			return true;
 		}
