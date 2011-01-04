@@ -22,6 +22,6 @@ import org.eclipselabs.mscript.language.ast.IterationCall;
  */
 public interface IIterationCallTransformer {
 
-	IIterationCallTransformerResult transform(IExpressionTransformerContext context, IterationCall iterationCall, Expression collectionExpression);
+	IIterationCallTransformerResult transform(ITransformerContext context, IterationCall iterationCall, Expression collectionExpression);
 	
 }

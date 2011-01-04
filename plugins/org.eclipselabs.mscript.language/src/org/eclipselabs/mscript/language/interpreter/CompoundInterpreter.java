@@ -64,7 +64,7 @@ public class CompoundInterpreter extends ILSwitch<Boolean> {
 	@Override
 	public Boolean caseAssignment(Assignment assignment) {
 		IValue value = expressionValueEvaluator.doSwitch(assignment.getAssignedExpression());
-		IVariable variable = context.getScope().findInEnclosingScopes(assignment.getTarget());
+		IVariable variable = context.getVariable(assignment.getTarget());
 		variable.setValue(assignment.getStepIndex(), value.convert(assignment.getTarget().getType()));
 		return true;
 	}
@@ -116,7 +116,7 @@ public class CompoundInterpreter extends ILSwitch<Boolean> {
 			context.enterScope();
 			IVariable variable = new Variable(iterationVariableDeclaration, 1);
 			variable.setValue(0, arrayValue.get(i).convert(iterationVariableDeclaration.getType()));
-			context.getScope().add(variable);
+			context.addVariable(variable);
 			doSwitch(foreachStatement.getBody());
 			context.leaveScope();
 		}
@@ -137,7 +137,7 @@ public class CompoundInterpreter extends ILSwitch<Boolean> {
 		}
 		IVariable variable = new Variable(localVariableDeclaration, 1);
 		variable.setValue(0, value);
-		context.getScope().add(variable);
+		context.addVariable(variable);
 		return true;
 	}
 

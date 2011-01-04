@@ -32,12 +32,12 @@ public class IterateTransformer implements IIterationCallTransformer {
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.language.imperativemodel.transform.IIterationCallTransformer#transform(org.eclipselabs.mscript.language.ast.IterationCall, org.eclipselabs.mscript.language.imperativemodel.util.ImperativeExpressionTransformer.Scope)
 	 */
-	public IIterationCallTransformerResult transform(IExpressionTransformerContext context, IterationCall iterationCall, Expression collectionExpression) {
+	public IIterationCallTransformerResult transform(ITransformerContext context, IterationCall iterationCall, Expression collectionExpression) {
 		MultiStatus status = new MultiStatus(LanguagePlugin.PLUGIN_ID, 0, "Transform errors", null);
 		
 		LocalVariableDeclaration accumulatorDeclaration = ILFactory.eINSTANCE.createLocalVariableDeclaration();
 		accumulatorDeclaration.setName(iterationCall.getAccumulator().getName());
-		context.getScope().getCompound().getStatements().add(accumulatorDeclaration);
+		context.getCompound().getStatements().add(accumulatorDeclaration);
 		ForeachStatement foreachStatement = ILFactory.eINSTANCE.createForeachStatement();
 		
 		LocalVariableDeclaration iterationVariableDeclaration = ILFactory.eINSTANCE.createLocalVariableDeclaration();
@@ -52,16 +52,16 @@ public class IterateTransformer implements IIterationCallTransformer {
 
 		CompoundStatement body = ILFactory.eINSTANCE.createCompoundStatement();
 		context.enterScope();
-		context.getScope().setCompound(body);
-		context.getScope().add(accumulatorDeclaration);
-		context.getScope().add(iterationVariableDeclaration);
+		context.setCompound(body);
+		context.addVariableDeclaration(accumulatorDeclaration);
+		context.addVariableDeclaration(iterationVariableDeclaration);
 		StatusUtil.merge(status, new ExpressionTransformer(context).transform(
 				iterationCall.getExpression(),
 				Collections.singletonList(new ExpressionTarget(accumulatorDeclaration, 0))));
 		context.leaveScope();
 		foreachStatement.setBody(body);
 
-		context.getScope().getCompound().getStatements().add(foreachStatement);
+		context.getCompound().getStatements().add(foreachStatement);
 		
 		if (!status.isOK()) {
 			return new IterationCallTransformerResult(accumulatorDeclaration, status);

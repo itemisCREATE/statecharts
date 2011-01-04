@@ -12,6 +12,7 @@
 package org.eclipselabs.mscript.language.interpreter;
 
 import org.eclipselabs.mscript.computation.core.IComputationContext;
+import org.eclipselabs.mscript.language.il.VariableDeclaration;
 
 /**
  * @author Andreas Unger
@@ -23,9 +24,11 @@ public interface IInterpreterContext {
 	
 	IComputationContext getComputationContext();
 
-	IInterpreterScope getScope();
 	void enterScope();
 	void leaveScope();
+	
+	IVariable getVariable(VariableDeclaration variableDeclaration);
+	void addVariable(IVariable variable);
 	
 	void setCanceled(boolean canceled);
 	boolean isCanceled();

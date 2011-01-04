@@ -11,21 +11,24 @@
 
 package org.eclipselabs.mscript.language.il.transform;
 
+import org.eclipselabs.mscript.language.il.Compound;
+import org.eclipselabs.mscript.language.il.VariableDeclaration;
+
 /**
  * @author Andreas Unger
  *
  * @noextend
  * @noimplement
  */
-public interface IExpressionTransformerContext {
-
-	/**
-	 * @return the scope
-	 */
-	IExpressionTransformerScope getScope();
+public interface ITransformerContext {
 
 	void enterScope();
-
 	void leaveScope();
+	
+	Compound getCompound();
+	void setCompound(Compound compound);
+	
+	VariableDeclaration getVariableDeclaration(String name);
+	void addVariableDeclaration(VariableDeclaration variableDeclaration);
 
 }

@@ -76,7 +76,7 @@ public class MscriptLaunchConfigurationDelegate extends AbstractMscriptLaunchCon
 		IFunctor functor = Functor.create(context, getILFunctionDefinition());
 
 		for (IVariable variable : functor.getVariables()) {
-			context.getScope().add(variable);
+			context.addVariable(variable);
 		}
 
 		new MscriptProcess(launch, "Mscript Application").run(context, functor, inputFile, outputFile);

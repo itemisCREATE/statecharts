@@ -70,8 +70,9 @@ public class FunctionDefinitionTransformer {
 
 		Collection<List<EquationDescriptor>> equationCompounds = new EquationCompoundHelper().getEquationCompounds(functionDescriptor);
 		
-		StatusUtil.merge(status, constructInitializationCompound(ilFunctionDefinition, equationCompounds, variableDeclarations));
-		StatusUtil.merge(status, constructComputationCompounds(ilFunctionDefinition, equationCompounds, variableDeclarations));
+		FunctionDefinitionTransformerContext context = new FunctionDefinitionTransformerContext(ilFunctionDefinition);
+		StatusUtil.merge(status, constructInitializationCompound(context, equationCompounds, variableDeclarations));
+		StatusUtil.merge(status, constructComputationCompounds(context, equationCompounds, variableDeclarations));
 		
 		if (!status.isOK()) {
 			return new FunctionDefinitionTransformerResult(ilFunctionDefinition, status);
@@ -141,7 +142,7 @@ public class FunctionDefinitionTransformer {
 		}
 	}
 	
-	private IStatus constructInitializationCompound(ILFunctionDefinition ilFunctionDefinition, Collection<List<EquationDescriptor>> equationCompounds, Map<VariableDescriptor, VariableDeclaration> variableDeclarations) {
+	private IStatus constructInitializationCompound(FunctionDefinitionTransformerContext context, Collection<List<EquationDescriptor>> equationCompounds, Map<VariableDescriptor, VariableDeclaration> variableDeclarations) {
 		MultiStatus status = new MultiStatus(LanguagePlugin.PLUGIN_ID, 0, "Initialization compound construction errors", null);
 		
 		Compound compound = ILFactory.eINSTANCE.createCompound();
@@ -151,11 +152,15 @@ public class FunctionDefinitionTransformer {
 			for (EquationDescriptor equationDescriptor : equationDescriptors) {
 				VariableStep lhsVariableStep = FunctionModelUtil.getFirstLeftHandSideVariableStep(equationDescriptor);
 				if (lhsVariableStep != null && lhsVariableStep.isInitial()) {
-					ExpressionTarget target = new ExpressionTarget(variableDeclarations.get(lhsVariableStep.getDescriptor()), lhsVariableStep.getIndex());
-					IExpressionTransformerContext context = new ExpressionTransformerContext();
-					initializeContext(context, ilFunctionDefinition, compound);
+					context.enterScope();
+					context.setCompound(compound);
+
 					ExpressionTransformer transformer = new ExpressionTransformer(context);
+					ExpressionTarget target = new ExpressionTarget(variableDeclarations.get(lhsVariableStep.getDescriptor()), lhsVariableStep.getIndex());
 					StatusUtil.merge(status, transformer.transform(equationDescriptor.getRightHandSide().getExpression(), Collections.singletonList(target)));
+					
+					context.leaveScope();
+
 					processed = true;
 				}
 			}
@@ -163,12 +168,12 @@ public class FunctionDefinitionTransformer {
 				it.remove();
 			}
 		}
-		ilFunctionDefinition.setInitializationCompound(compound);
+		context.getFunctionDefinition().setInitializationCompound(compound);
 		
 		return status.isOK() ? Status.OK_STATUS : status;
 	}
 	
-	private IStatus constructComputationCompounds(ILFunctionDefinition ilFunctionDefinition, Collection<List<EquationDescriptor>> equationCompounds, Map<VariableDescriptor, VariableDeclaration> variableDeclarations) {
+	private IStatus constructComputationCompounds(FunctionDefinitionTransformerContext context, Collection<List<EquationDescriptor>> equationCompounds, Map<VariableDescriptor, VariableDeclaration> variableDeclarations) {
 		MultiStatus status = new MultiStatus(LanguagePlugin.PLUGIN_ID, 0, "Computation compound construction errors", null);
 
 		for (List<EquationDescriptor> equationDescriptors : equationCompounds) {
@@ -177,11 +182,14 @@ public class FunctionDefinitionTransformer {
 			for (EquationDescriptor equationDescriptor : equationDescriptors) {
 				VariableStep lhsVariableStep = FunctionModelUtil.getFirstLeftHandSideVariableStep(equationDescriptor);
 				if (lhsVariableStep != null) {
-					ExpressionTarget target = new ExpressionTarget(variableDeclarations.get(lhsVariableStep.getDescriptor()), lhsVariableStep.getIndex());
-					IExpressionTransformerContext context = new ExpressionTransformerContext();
-					initializeContext(context, ilFunctionDefinition, compound);
+					context.enterScope();
+					context.setCompound(compound);
+					
 					ExpressionTransformer transformer = new ExpressionTransformer(context);
+					ExpressionTarget target = new ExpressionTarget(variableDeclarations.get(lhsVariableStep.getDescriptor()), lhsVariableStep.getIndex());
 					StatusUtil.merge(status, transformer.transform(equationDescriptor.getRightHandSide().getExpression(), Collections.singletonList(target)));
+
+					context.leaveScope();
 
 					for (EquationPart equationPart : equationDescriptor.getRightHandSide().getParts()) {
 						VariableStep rhsVariableStep = equationPart.getVariableStep();
@@ -200,26 +208,10 @@ public class FunctionDefinitionTransformer {
 			for (InputVariableDeclaration input : inputs) {
 				compound.getInputs().add(input);
 			}
-			ilFunctionDefinition.getComputationCompounds().add(compound);
+			context.getFunctionDefinition().getComputationCompounds().add(compound);
 		}
 
 		return status.isOK() ? Status.OK_STATUS : status;
-	}
-	
-	protected void initializeContext(IExpressionTransformerContext context, ILFunctionDefinition ilFunctionDefinition, Compound compound) {
-		context.getScope().setCompound(compound);
-		for (TemplateVariableDeclaration templateVariableDeclaration : ilFunctionDefinition.getTemplateVariableDeclarations()) {
-			context.getScope().add(templateVariableDeclaration);
-		}
-		for (InputVariableDeclaration inputVariableDeclaration : ilFunctionDefinition.getInputVariableDeclarations()) {
-			context.getScope().add(inputVariableDeclaration);
-		}
-		for (OutputVariableDeclaration outputVariableDeclaration : ilFunctionDefinition.getOutputVariableDeclarations()) {
-			context.getScope().add(outputVariableDeclaration);
-		}
-		for (InstanceVariableDeclaration instanceVariableDeclaration : ilFunctionDefinition.getInstanceVariableDeclarations()) {
-			context.getScope().add(instanceVariableDeclaration);
-		}
 	}
 	
 }

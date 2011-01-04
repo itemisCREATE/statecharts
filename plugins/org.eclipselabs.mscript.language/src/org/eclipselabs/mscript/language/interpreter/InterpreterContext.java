@@ -11,7 +11,9 @@
 
 package org.eclipselabs.mscript.language.interpreter;
 
+import org.eclipselabs.mscript.common.internal.util.Scope;
 import org.eclipselabs.mscript.computation.core.IComputationContext;
+import org.eclipselabs.mscript.language.il.VariableDeclaration;
 
 /**
  * @author Andreas Unger
@@ -21,7 +23,7 @@ public class InterpreterContext implements IInterpreterContext {
 
 	private IComputationContext computationContext;
 
-	private IInterpreterScope scope = new InterpreterScope(null);
+	private InterpreterScope scope = new InterpreterScope(null);
 
 	private volatile boolean canceled;
 		
@@ -53,13 +55,6 @@ public class InterpreterContext implements IInterpreterContext {
 		this.canceled = canceled;
 	}
 	
-	/**
-	 * @return the scope
-	 */
-	public IInterpreterScope getScope() {
-		return scope;
-	}
-	
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.language.interpreter.IInterpreterContext#enterScope()
 	 */
@@ -72,6 +67,38 @@ public class InterpreterContext implements IInterpreterContext {
 	 */
 	public void leaveScope() {
 		scope = scope.getOuterScope();
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.language.interpreter.IInterpreterContext#getVariable(org.eclipselabs.mscript.language.il.VariableDeclaration)
+	 */
+	public IVariable getVariable(VariableDeclaration variableDeclaration) {
+		return scope.findInEnclosingScopes(variableDeclaration);
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.language.interpreter.IInterpreterContext#addVariable(org.eclipselabs.mscript.language.il.VariableDeclaration, org.eclipselabs.mscript.language.interpreter.IVariable)
+	 */
+	public void addVariable(IVariable variable) {
+		scope.add(variable);
+	}
+	
+	public static class InterpreterScope extends Scope<InterpreterScope, VariableDeclaration, IVariable> {
+
+		/**
+		 * 
+		 */
+		public InterpreterScope(InterpreterScope outerScope) {
+			super(outerScope);
+		}
+		
+		/* (non-Javadoc)
+		 * @see org.eclipselabs.mscript.language.interpreter.IInterpreterScope#add(org.eclipselabs.mscript.language.interpreter.IVariable)
+		 */
+		public void add(IVariable element) {
+			super.add(element.getDeclaration(), element);
+		}
+		
 	}
 	
 }

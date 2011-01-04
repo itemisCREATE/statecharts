@@ -78,7 +78,7 @@ import org.eclipselabs.mscript.typesystem.util.TypeSystemUtil;
  */
 public class ExpressionTransformer extends AstSwitch<Expression> {
 
-	private IExpressionTransformerContext context;
+	private ITransformerContext context;
 
 	private IterationCallTransformerLookupTable iterationCallTransformerLookupTable = new IterationCallTransformerLookupTable();
 	
@@ -87,7 +87,7 @@ public class ExpressionTransformer extends AstSwitch<Expression> {
 	/**
 	 * 
 	 */
-	public ExpressionTransformer(IExpressionTransformerContext context) {
+	public ExpressionTransformer(ITransformerContext context) {
 		this.context = context;
 		status = new MultiStatus(LanguagePlugin.PLUGIN_ID, 0, "Expression transformer errors", null);
 	}
@@ -100,7 +100,7 @@ public class ExpressionTransformer extends AstSwitch<Expression> {
 		assignment.setAssignedExpression(result);
 		assignment.setTarget(target.getVariableDeclaration());
 		assignment.setStepIndex(target.getStepIndex());
-		context.getScope().getCompound().getStatements().add(assignment);
+		context.getCompound().getStatements().add(assignment);
 		
 		return status.isOK() ? Status.OK_STATUS : status;
 	}
@@ -111,12 +111,12 @@ public class ExpressionTransformer extends AstSwitch<Expression> {
 	@Override
 	public Expression caseLetExpression(LetExpression letExpression) {
 		LocalVariableDeclaration localVariableDeclaration = ILFactory.eINSTANCE.createLocalVariableDeclaration();
-		context.getScope().getCompound().getStatements().add(localVariableDeclaration);
+		context.getCompound().getStatements().add(localVariableDeclaration);
 
 		CompoundStatement compoundStatement = ILFactory.eINSTANCE.createCompoundStatement();
 		context.enterScope();
-		context.getScope().setCompound(compoundStatement);
-		context.getScope().add(localVariableDeclaration);
+		context.setCompound(compoundStatement);
+		context.addVariableDeclaration(localVariableDeclaration);
 
 		for (LetExpressionVariableDeclaration letExpressionVariableDeclaration : letExpression.getVariableDeclarations()) {
 			LocalVariableDeclaration letVariableDeclaration = ILFactory.eINSTANCE.createLocalVariableDeclaration();
@@ -124,7 +124,7 @@ public class ExpressionTransformer extends AstSwitch<Expression> {
 			Expression assignedExpression = doSwitch(letExpressionVariableDeclaration.getAssignedExpression());
 			letVariableDeclaration.setInitializer(assignedExpression);
 			compoundStatement.getStatements().add(letVariableDeclaration);
-			context.getScope().add(letVariableDeclaration);
+			context.addVariableDeclaration(letVariableDeclaration);
 		}
 
 		transform(
@@ -133,7 +133,7 @@ public class ExpressionTransformer extends AstSwitch<Expression> {
 		
 		context.leaveScope();
 		
-		context.getScope().getCompound().getStatements().add(compoundStatement);
+		context.getCompound().getStatements().add(compoundStatement);
 		
 		VariableReference variableReference = ILFactory.eINSTANCE.createVariableReference();
 		variableReference.setTarget(localVariableDeclaration);
@@ -147,15 +147,15 @@ public class ExpressionTransformer extends AstSwitch<Expression> {
 	@Override
 	public Expression caseIfExpression(IfExpression ifExpression) {
 		LocalVariableDeclaration localVariableDeclaration = ILFactory.eINSTANCE.createLocalVariableDeclaration();
-		context.getScope().getCompound().getStatements().add(localVariableDeclaration);
+		context.getCompound().getStatements().add(localVariableDeclaration);
 		IfStatement ifStatement = ILFactory.eINSTANCE.createIfStatement();
 		Expression conditionExpression = doSwitch(ifExpression.getCondition());
 		ifStatement.setCondition(conditionExpression);
 		
 		CompoundStatement thenStatement = ILFactory.eINSTANCE.createCompoundStatement();
 		context.enterScope();
-		context.getScope().setCompound(thenStatement);
-		context.getScope().add(localVariableDeclaration);
+		context.setCompound(thenStatement);
+		context.addVariableDeclaration(localVariableDeclaration);
 		transform(
 				ifExpression.getThenExpression(),
 				Collections.singletonList(new ExpressionTarget(localVariableDeclaration, 0)));
@@ -164,15 +164,15 @@ public class ExpressionTransformer extends AstSwitch<Expression> {
 		
 		CompoundStatement elseStatement = ILFactory.eINSTANCE.createCompoundStatement();
 		context.enterScope();
-		context.getScope().setCompound(elseStatement);
-		context.getScope().add(localVariableDeclaration);
+		context.setCompound(elseStatement);
+		context.addVariableDeclaration(localVariableDeclaration);
 		transform(
 				ifExpression.getElseExpression(),
 				Collections.singletonList(new ExpressionTarget(localVariableDeclaration, 0)));
 		context.leaveScope();
 		ifStatement.setElseStatement(elseStatement);
 		
-		context.getScope().getCompound().getStatements().add(ifStatement);
+		context.getCompound().getStatements().add(ifStatement);
 		
 		VariableReference variableReference = ILFactory.eINSTANCE.createVariableReference();
 		variableReference.setTarget(localVariableDeclaration);
@@ -218,7 +218,7 @@ public class ExpressionTransformer extends AstSwitch<Expression> {
 	}
 	
 	private Expression resolveVariableReference(String variableName, ListIterator<FeatureCallPart> featureCallPartIterator) {
-		VariableDeclaration variableDeclaration = context.getScope().findInEnclosingScopes(variableName);
+		VariableDeclaration variableDeclaration = context.getVariableDeclaration(variableName);
 		if (variableDeclaration != null) {
 			try {
 				StepExpressionResult stepExpressionResult = new StepExpressionHelper().getStepExpression(featureCallPartIterator);
