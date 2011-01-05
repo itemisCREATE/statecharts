@@ -12,7 +12,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.il.Assignment;
-import org.eclipselabs.mscript.language.il.BuiltinFunctionCall;
 import org.eclipselabs.mscript.language.il.Compound;
 import org.eclipselabs.mscript.language.il.CompoundStatement;
 import org.eclipselabs.mscript.language.il.ComputationCompound;
@@ -24,8 +23,10 @@ import org.eclipselabs.mscript.language.il.InputVariableDeclaration;
 import org.eclipselabs.mscript.language.il.InstanceVariableDeclaration;
 import org.eclipselabs.mscript.language.il.InvalidExpression;
 import org.eclipselabs.mscript.language.il.LocalVariableDeclaration;
+import org.eclipselabs.mscript.language.il.MethodCall;
 import org.eclipselabs.mscript.language.il.OperationCall;
 import org.eclipselabs.mscript.language.il.OutputVariableDeclaration;
+import org.eclipselabs.mscript.language.il.PropertyReference;
 import org.eclipselabs.mscript.language.il.StatefulVariableDeclaration;
 import org.eclipselabs.mscript.language.il.Statement;
 import org.eclipselabs.mscript.language.il.TemplateVariableDeclaration;
@@ -235,11 +236,18 @@ public class ILSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ILPackage.BUILTIN_FUNCTION_CALL: {
-				BuiltinFunctionCall builtinFunctionCall = (BuiltinFunctionCall)theEObject;
-				T result = caseBuiltinFunctionCall(builtinFunctionCall);
-				if (result == null) result = caseOperationCall(builtinFunctionCall);
-				if (result == null) result = caseExpression(builtinFunctionCall);
+			case ILPackage.METHOD_CALL: {
+				MethodCall methodCall = (MethodCall)theEObject;
+				T result = caseMethodCall(methodCall);
+				if (result == null) result = caseOperationCall(methodCall);
+				if (result == null) result = caseExpression(methodCall);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ILPackage.PROPERTY_REFERENCE: {
+				PropertyReference propertyReference = (PropertyReference)theEObject;
+				T result = casePropertyReference(propertyReference);
+				if (result == null) result = caseExpression(propertyReference);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -525,17 +533,32 @@ public class ILSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Builtin Function Call</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Method Call</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Builtin Function Call</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Method Call</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseBuiltinFunctionCall(BuiltinFunctionCall object) {
+	public T caseMethodCall(MethodCall object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Property Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Property Reference</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePropertyReference(PropertyReference object) {
 		return null;
 	}
 

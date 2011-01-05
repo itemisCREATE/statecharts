@@ -1597,25 +1597,25 @@ finally {
 
 
 
-// Entry rule entryRuleFeatureReference
-entryRuleFeatureReference 
+// Entry rule entryRuleNameComponent
+entryRuleNameComponent 
 :
-{ before(grammarAccess.getFeatureReferenceRule()); }
-	 ruleFeatureReference
-{ after(grammarAccess.getFeatureReferenceRule()); } 
+{ before(grammarAccess.getNameComponentRule()); }
+	 ruleNameComponent
+{ after(grammarAccess.getNameComponentRule()); } 
 	 EOF 
 ;
 
-// Rule FeatureReference
-ruleFeatureReference
+// Rule NameComponent
+ruleNameComponent
     @init {
 		int stackSize = keepStackSize();
     }
 	:
 (
-{ before(grammarAccess.getFeatureReferenceAccess().getGroup()); }
-(rule__FeatureReference__Group__0)
-{ after(grammarAccess.getFeatureReferenceAccess().getGroup()); }
+{ before(grammarAccess.getNameComponentAccess().getGroup()); }
+(rule__NameComponent__Group__0)
+{ after(grammarAccess.getNameComponentAccess().getGroup()); }
 )
 
 ;
@@ -2772,9 +2772,9 @@ rule__FeatureCallPart__Alternatives
     }
 :
 (
-{ before(grammarAccess.getFeatureCallPartAccess().getFeatureReferenceParserRuleCall_0()); }
-	ruleFeatureReference
-{ after(grammarAccess.getFeatureCallPartAccess().getFeatureReferenceParserRuleCall_0()); }
+{ before(grammarAccess.getFeatureCallPartAccess().getNameComponentParserRuleCall_0()); }
+	ruleNameComponent
+{ after(grammarAccess.getFeatureCallPartAccess().getNameComponentParserRuleCall_0()); }
 )
 
     |(
@@ -2800,23 +2800,23 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__FeatureReference__NameAlternatives_1_0
+rule__NameComponent__IdentifierAlternatives_1_0
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getFeatureReferenceAccess().getNameIDTerminalRuleCall_1_0_0()); }
+{ before(grammarAccess.getNameComponentAccess().getIdentifierIDTerminalRuleCall_1_0_0()); }
 	RULE_ID
-{ after(grammarAccess.getFeatureReferenceAccess().getNameIDTerminalRuleCall_1_0_0()); }
+{ after(grammarAccess.getNameComponentAccess().getIdentifierIDTerminalRuleCall_1_0_0()); }
 )
 
     |(
-{ before(grammarAccess.getFeatureReferenceAccess().getNameUnitKeyword_1_0_1()); }
+{ before(grammarAccess.getNameComponentAccess().getIdentifierUnitKeyword_1_0_1()); }
 
 	'unit' 
 
-{ after(grammarAccess.getFeatureReferenceAccess().getNameUnitKeyword_1_0_1()); }
+{ after(grammarAccess.getNameComponentAccess().getIdentifierUnitKeyword_1_0_1()); }
 )
 
 ;
@@ -11740,29 +11740,29 @@ finally {
 
 
 
-rule__FeatureReference__Group__0
+rule__NameComponent__Group__0
     @init {
 		int stackSize = keepStackSize();
     }
 :
-	rule__FeatureReference__Group__0__Impl
-	rule__FeatureReference__Group__1
+	rule__NameComponent__Group__0__Impl
+	rule__NameComponent__Group__1
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__FeatureReference__Group__0__Impl
+rule__NameComponent__Group__0__Impl
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getFeatureReferenceAccess().getFullStopKeyword_0()); }
+{ before(grammarAccess.getNameComponentAccess().getFullStopKeyword_0()); }
 
 	'.' 
 
-{ after(grammarAccess.getFeatureReferenceAccess().getFullStopKeyword_0()); }
+{ after(grammarAccess.getNameComponentAccess().getFullStopKeyword_0()); }
 )
 
 ;
@@ -11771,26 +11771,26 @@ finally {
 }
 
 
-rule__FeatureReference__Group__1
+rule__NameComponent__Group__1
     @init {
 		int stackSize = keepStackSize();
     }
 :
-	rule__FeatureReference__Group__1__Impl
+	rule__NameComponent__Group__1__Impl
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__FeatureReference__Group__1__Impl
+rule__NameComponent__Group__1__Impl
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getFeatureReferenceAccess().getNameAssignment_1()); }
-(rule__FeatureReference__NameAssignment_1)
-{ after(grammarAccess.getFeatureReferenceAccess().getNameAssignment_1()); }
+{ before(grammarAccess.getNameComponentAccess().getIdentifierAssignment_1()); }
+(rule__NameComponent__IdentifierAssignment_1)
+{ after(grammarAccess.getNameComponentAccess().getIdentifierAssignment_1()); }
 )
 
 ;
@@ -16374,15 +16374,15 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__FeatureReference__NameAssignment_1
+rule__NameComponent__IdentifierAssignment_1
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getFeatureReferenceAccess().getNameAlternatives_1_0()); }
-(rule__FeatureReference__NameAlternatives_1_0)
-{ after(grammarAccess.getFeatureReferenceAccess().getNameAlternatives_1_0()); }
+{ before(grammarAccess.getNameComponentAccess().getIdentifierAlternatives_1_0()); }
+(rule__NameComponent__IdentifierAlternatives_1_0)
+{ after(grammarAccess.getNameComponentAccess().getIdentifierAlternatives_1_0()); }
 )
 
 ;

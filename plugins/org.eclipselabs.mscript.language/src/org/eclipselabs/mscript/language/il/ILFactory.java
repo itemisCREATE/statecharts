@@ -143,13 +143,22 @@ public interface ILFactory extends EFactory {
 	VariableReference createVariableReference();
 
 	/**
-	 * Returns a new object of class '<em>Builtin Function Call</em>'.
+	 * Returns a new object of class '<em>Method Call</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Builtin Function Call</em>'.
+	 * @return a new object of class '<em>Method Call</em>'.
 	 * @generated
 	 */
-	BuiltinFunctionCall createBuiltinFunctionCall();
+	MethodCall createMethodCall();
+
+	/**
+	 * Returns a new object of class '<em>Property Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Property Reference</em>'.
+	 * @generated
+	 */
+	PropertyReference createPropertyReference();
 
 	/**
 	 * Returns a new object of class '<em>Invalid Expression</em>'.

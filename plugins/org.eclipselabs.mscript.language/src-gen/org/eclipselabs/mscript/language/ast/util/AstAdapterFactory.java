@@ -278,9 +278,9 @@ public class AstAdapterFactory extends AdapterFactoryImpl
         return createFeatureCallPartAdapter();
       }
       @Override
-      public Adapter caseFeatureReference(FeatureReference object)
+      public Adapter caseNameComponent(NameComponent object)
       {
-        return createFeatureReferenceAdapter();
+        return createNameComponentAdapter();
       }
       @Override
       public Adapter caseArrayElementAccess(ArrayElementAccess object)
@@ -1075,16 +1075,16 @@ public class AstAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.FeatureReference <em>Feature Reference</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.NameComponent <em>Name Component</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.FeatureReference
+   * @see org.eclipselabs.mscript.language.ast.NameComponent
    * @generated
    */
-  public Adapter createFeatureReferenceAdapter()
+  public Adapter createNameComponentAdapter()
   {
     return null;
   }

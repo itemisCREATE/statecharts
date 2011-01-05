@@ -12,7 +12,6 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.il.Assignment;
-import org.eclipselabs.mscript.language.il.BuiltinFunctionCall;
 import org.eclipselabs.mscript.language.il.Compound;
 import org.eclipselabs.mscript.language.il.CompoundStatement;
 import org.eclipselabs.mscript.language.il.ComputationCompound;
@@ -24,8 +23,10 @@ import org.eclipselabs.mscript.language.il.InputVariableDeclaration;
 import org.eclipselabs.mscript.language.il.InstanceVariableDeclaration;
 import org.eclipselabs.mscript.language.il.InvalidExpression;
 import org.eclipselabs.mscript.language.il.LocalVariableDeclaration;
+import org.eclipselabs.mscript.language.il.MethodCall;
 import org.eclipselabs.mscript.language.il.OperationCall;
 import org.eclipselabs.mscript.language.il.OutputVariableDeclaration;
+import org.eclipselabs.mscript.language.il.PropertyReference;
 import org.eclipselabs.mscript.language.il.StatefulVariableDeclaration;
 import org.eclipselabs.mscript.language.il.Statement;
 import org.eclipselabs.mscript.language.il.TemplateVariableDeclaration;
@@ -162,8 +163,12 @@ public class ILAdapterFactory extends AdapterFactoryImpl {
 				return createOperationCallAdapter();
 			}
 			@Override
-			public Adapter caseBuiltinFunctionCall(BuiltinFunctionCall object) {
-				return createBuiltinFunctionCallAdapter();
+			public Adapter caseMethodCall(MethodCall object) {
+				return createMethodCallAdapter();
+			}
+			@Override
+			public Adapter casePropertyReference(PropertyReference object) {
+				return createPropertyReferenceAdapter();
 			}
 			@Override
 			public Adapter caseInvalidExpression(InvalidExpression object) {
@@ -446,16 +451,30 @@ public class ILAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.il.BuiltinFunctionCall <em>Builtin Function Call</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.il.MethodCall <em>Method Call</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.language.il.BuiltinFunctionCall
+	 * @see org.eclipselabs.mscript.language.il.MethodCall
 	 * @generated
 	 */
-	public Adapter createBuiltinFunctionCallAdapter() {
+	public Adapter createMethodCallAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.il.PropertyReference <em>Property Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipselabs.mscript.language.il.PropertyReference
+	 * @generated
+	 */
+	public Adapter createPropertyReferenceAdapter() {
 		return null;
 	}
 

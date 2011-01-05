@@ -205,8 +205,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FeatureCallPart"/>
-  <eClassifiers xsi:type="ecore:EClass" name="FeatureReference" eSuperTypes="#//FeatureCallPart">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NameComponent" eSuperTypes="#//FeatureCallPart">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="identifier" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ArrayElementAccess" eSuperTypes="#//FeatureCallPart">
     <eStructuralFeatures xsi:type="ecore:EReference" name="subscripts" upperBound="-1"

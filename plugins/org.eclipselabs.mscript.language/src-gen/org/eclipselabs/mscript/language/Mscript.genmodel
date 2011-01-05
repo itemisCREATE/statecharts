@@ -174,8 +174,8 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//StringLiteral/value"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//FeatureCallPart"/>
-    <genClasses ecoreClass="Mscript.ecore#//FeatureReference">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//FeatureReference/name"/>
+    <genClasses ecoreClass="Mscript.ecore#//NameComponent">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//NameComponent/identifier"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//ArrayElementAccess">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ArrayElementAccess/subscripts"/>

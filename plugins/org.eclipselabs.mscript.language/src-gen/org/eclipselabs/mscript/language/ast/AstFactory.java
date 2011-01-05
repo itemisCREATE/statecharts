@@ -386,13 +386,13 @@ public interface AstFactory extends EFactory
   FeatureCallPart createFeatureCallPart();
 
   /**
-   * Returns a new object of class '<em>Feature Reference</em>'.
+   * Returns a new object of class '<em>Name Component</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Feature Reference</em>'.
+   * @return a new object of class '<em>Name Component</em>'.
    * @generated
    */
-  FeatureReference createFeatureReference();
+  NameComponent createNameComponent();
 
   /**
    * Returns a new object of class '<em>Array Element Access</em>'.

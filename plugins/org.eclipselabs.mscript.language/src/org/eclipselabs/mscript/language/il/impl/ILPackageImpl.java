@@ -15,7 +15,6 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipselabs.mscript.computation.core.value.IValue;
 import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.il.Assignment;
-import org.eclipselabs.mscript.language.il.BuiltinFunctionCall;
 import org.eclipselabs.mscript.language.il.Compound;
 import org.eclipselabs.mscript.language.il.CompoundStatement;
 import org.eclipselabs.mscript.language.il.ComputationCompound;
@@ -28,8 +27,10 @@ import org.eclipselabs.mscript.language.il.InputVariableDeclaration;
 import org.eclipselabs.mscript.language.il.InstanceVariableDeclaration;
 import org.eclipselabs.mscript.language.il.InvalidExpression;
 import org.eclipselabs.mscript.language.il.LocalVariableDeclaration;
+import org.eclipselabs.mscript.language.il.MethodCall;
 import org.eclipselabs.mscript.language.il.OperationCall;
 import org.eclipselabs.mscript.language.il.OutputVariableDeclaration;
+import org.eclipselabs.mscript.language.il.PropertyReference;
 import org.eclipselabs.mscript.language.il.StatefulVariableDeclaration;
 import org.eclipselabs.mscript.language.il.Statement;
 import org.eclipselabs.mscript.language.il.TemplateVariableDeclaration;
@@ -176,7 +177,14 @@ public class ILPackageImpl extends EPackageImpl implements ILPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass builtinFunctionCallEClass = null;
+	private EClass methodCallEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass propertyReferenceEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -685,8 +693,8 @@ public class ILPackageImpl extends EPackageImpl implements ILPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getBuiltinFunctionCall() {
-		return builtinFunctionCallEClass;
+	public EClass getMethodCall() {
+		return methodCallEClass;
 	}
 
 	/**
@@ -694,8 +702,44 @@ public class ILPackageImpl extends EPackageImpl implements ILPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getBuiltinFunctionCall_Name() {
-		return (EAttribute)builtinFunctionCallEClass.getEStructuralFeatures().get(0);
+	public EAttribute getMethodCall_Name() {
+		return (EAttribute)methodCallEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMethodCall_Target() {
+		return (EReference)methodCallEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getPropertyReference() {
+		return propertyReferenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPropertyReference_Name() {
+		return (EAttribute)propertyReferenceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getPropertyReference_Target() {
+		return (EReference)propertyReferenceEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -809,8 +853,13 @@ public class ILPackageImpl extends EPackageImpl implements ILPackage {
 		operationCallEClass = createEClass(OPERATION_CALL);
 		createEReference(operationCallEClass, OPERATION_CALL__ARGUMENTS);
 
-		builtinFunctionCallEClass = createEClass(BUILTIN_FUNCTION_CALL);
-		createEAttribute(builtinFunctionCallEClass, BUILTIN_FUNCTION_CALL__NAME);
+		methodCallEClass = createEClass(METHOD_CALL);
+		createEAttribute(methodCallEClass, METHOD_CALL__NAME);
+		createEReference(methodCallEClass, METHOD_CALL__TARGET);
+
+		propertyReferenceEClass = createEClass(PROPERTY_REFERENCE);
+		createEAttribute(propertyReferenceEClass, PROPERTY_REFERENCE__NAME);
+		createEReference(propertyReferenceEClass, PROPERTY_REFERENCE__TARGET);
 
 		invalidExpressionEClass = createEClass(INVALID_EXPRESSION);
 
@@ -867,7 +916,8 @@ public class ILPackageImpl extends EPackageImpl implements ILPackage {
 		variableReferenceEClass.getESuperTypes().add(this.getVariableAccess());
 		variableReferenceEClass.getESuperTypes().add(theAstPackage.getExpression());
 		operationCallEClass.getESuperTypes().add(theAstPackage.getExpression());
-		builtinFunctionCallEClass.getESuperTypes().add(this.getOperationCall());
+		methodCallEClass.getESuperTypes().add(this.getOperationCall());
+		propertyReferenceEClass.getESuperTypes().add(theAstPackage.getExpression());
 		invalidExpressionEClass.getESuperTypes().add(theAstPackage.getExpression());
 
 		// Initialize classes and features; add operations and parameters
@@ -936,8 +986,13 @@ public class ILPackageImpl extends EPackageImpl implements ILPackage {
 		initEClass(operationCallEClass, OperationCall.class, "OperationCall", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getOperationCall_Arguments(), theAstPackage.getExpression(), null, "arguments", null, 0, -1, OperationCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(builtinFunctionCallEClass, BuiltinFunctionCall.class, "BuiltinFunctionCall", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getBuiltinFunctionCall_Name(), ecorePackage.getEString(), "name", null, 1, 1, BuiltinFunctionCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(methodCallEClass, MethodCall.class, "MethodCall", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getMethodCall_Name(), ecorePackage.getEString(), "name", null, 1, 1, MethodCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMethodCall_Target(), theAstPackage.getExpression(), null, "target", null, 1, 1, MethodCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(propertyReferenceEClass, PropertyReference.class, "PropertyReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getPropertyReference_Name(), ecorePackage.getEString(), "name", null, 1, 1, PropertyReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPropertyReference_Target(), theAstPackage.getExpression(), null, "target", null, 1, 1, PropertyReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(invalidExpressionEClass, InvalidExpression.class, "InvalidExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

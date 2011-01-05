@@ -24,13 +24,11 @@ import org.eclipselabs.mscript.language.ast.AdditiveExpression;
 import org.eclipselabs.mscript.language.ast.AdditiveExpressionPart;
 import org.eclipselabs.mscript.language.ast.ArrayElementAccess;
 import org.eclipselabs.mscript.language.ast.AstFactory;
-import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.BooleanLiteral;
 import org.eclipselabs.mscript.language.ast.EqualityExpression;
 import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.ast.FeatureCall;
 import org.eclipselabs.mscript.language.ast.FeatureCallPart;
-import org.eclipselabs.mscript.language.ast.FeatureReference;
 import org.eclipselabs.mscript.language.ast.IfExpression;
 import org.eclipselabs.mscript.language.ast.ImpliesExpression;
 import org.eclipselabs.mscript.language.ast.IntegerLiteral;
@@ -41,6 +39,7 @@ import org.eclipselabs.mscript.language.ast.LogicalAndExpression;
 import org.eclipselabs.mscript.language.ast.LogicalOrExpression;
 import org.eclipselabs.mscript.language.ast.MultiplicativeExpression;
 import org.eclipselabs.mscript.language.ast.MultiplicativeExpressionPart;
+import org.eclipselabs.mscript.language.ast.NameComponent;
 import org.eclipselabs.mscript.language.ast.OperationArgumentList;
 import org.eclipselabs.mscript.language.ast.ParenthesizedExpression;
 import org.eclipselabs.mscript.language.ast.RealLiteral;
@@ -52,15 +51,15 @@ import org.eclipselabs.mscript.language.ast.UnaryExpression;
 import org.eclipselabs.mscript.language.ast.UnitConstructionOperator;
 import org.eclipselabs.mscript.language.ast.util.AstSwitch;
 import org.eclipselabs.mscript.language.il.Assignment;
-import org.eclipselabs.mscript.language.il.BuiltinFunctionCall;
 import org.eclipselabs.mscript.language.il.CompoundStatement;
 import org.eclipselabs.mscript.language.il.ILFactory;
 import org.eclipselabs.mscript.language.il.IfStatement;
 import org.eclipselabs.mscript.language.il.InvalidExpression;
 import org.eclipselabs.mscript.language.il.LocalVariableDeclaration;
+import org.eclipselabs.mscript.language.il.MethodCall;
+import org.eclipselabs.mscript.language.il.PropertyReference;
 import org.eclipselabs.mscript.language.il.VariableDeclaration;
 import org.eclipselabs.mscript.language.il.VariableReference;
-import org.eclipselabs.mscript.language.il.util.BuiltinFunctionDescriptor;
 import org.eclipselabs.mscript.language.internal.LanguagePlugin;
 import org.eclipselabs.mscript.language.internal.functionmodel.util.StepExpressionHelper;
 import org.eclipselabs.mscript.language.internal.functionmodel.util.StepExpressionResult;
@@ -205,7 +204,7 @@ public class ExpressionTransformer extends AstSwitch<Expression> {
 			targetExpression = doSwitch(featureCall.getTarget());
 		}
 		
-		FeatureCallPartTransformer featureCallPartTransformer = new FeatureCallPartTransformer();
+		FeatureCallPartTransformer featureCallPartTransformer = new FeatureCallPartTransformer(featureCallPartIterator);
 		while (featureCallPartIterator.hasNext()) {
 			featureCallPartTransformer.setTargetExpression(targetExpression);
 			targetExpression = featureCallPartTransformer.doSwitch(featureCallPartIterator.next());
@@ -235,8 +234,16 @@ public class ExpressionTransformer extends AstSwitch<Expression> {
 
 	private class FeatureCallPartTransformer extends AstSwitch<Expression> {
 
+		private ListIterator<FeatureCallPart> featureCallPartIterator;
 		private Expression targetExpression;
 	
+		/**
+		 * 
+		 */
+		public FeatureCallPartTransformer(ListIterator<FeatureCallPart> featureCallPartIterator) {
+			this.featureCallPartIterator = featureCallPartIterator;
+		}
+		
 		/**
 		 * @param targetExpression the targetExpression to set
 		 */
@@ -248,16 +255,31 @@ public class ExpressionTransformer extends AstSwitch<Expression> {
 		 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseFeatureReference(org.eclipselabs.mscript.language.ast.FeatureReference)
 		 */
 		@Override
-		public Expression caseFeatureReference(FeatureReference featureReference) {
-			BuiltinFunctionDescriptor builtinFunctionDescriptor = BuiltinFunctionDescriptor.get(featureReference.getName());
-			if (builtinFunctionDescriptor != null && (builtinFunctionDescriptor.getKind() & BuiltinFunctionDescriptor.PROPERTY) != 0) {
-				BuiltinFunctionCall builtinFunctionCall = ILFactory.eINSTANCE.createBuiltinFunctionCall();
-				builtinFunctionCall.setName(featureReference.getName());
-				builtinFunctionCall.getArguments().add(targetExpression);
-				return builtinFunctionCall;
+		public Expression caseNameComponent(NameComponent nameComponent) {
+			OperationArgumentList operationArgumentList = null;
+			if (featureCallPartIterator.hasNext()) {
+				FeatureCallPart next = featureCallPartIterator.next();
+				if (next instanceof OperationArgumentList) {
+					operationArgumentList = (OperationArgumentList) next;
+				} else {
+					featureCallPartIterator.previous();
+				}
 			}
-			status.add(new SyntaxStatus(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, 0, "Invalid feature call", featureReference, AstPackage.FEATURE_REFERENCE__NAME));
-			return createInvalidExpression();
+			
+			if (operationArgumentList != null) {
+				MethodCall methodCall = ILFactory.eINSTANCE.createMethodCall();
+				methodCall.setName(nameComponent.getIdentifier());
+				methodCall.setTarget(targetExpression);
+				// TODO
+//				for (Expression expression : operationArgumentList.getArguments()) {
+//				}
+				return methodCall;
+			}
+
+			PropertyReference propertyReference = ILFactory.eINSTANCE.createPropertyReference();
+			propertyReference.setName(nameComponent.getIdentifier());
+			propertyReference.setTarget(targetExpression);
+			return propertyReference;
 		}
 		
 		/* (non-Javadoc)
@@ -458,7 +480,7 @@ public class ExpressionTransformer extends AstSwitch<Expression> {
 				realType.setUnit(TypeSystemUtil.createUnit());
 			}
 		} catch (InvalidUnitExpressionOperandException e) {
-			throw new RuntimeException("Invalid unit", e);
+			status.add(new SyntaxStatus(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, 0, "Invalid unit", realLiteral.getUnit()));
 		}
 		
 		RealLiteral transformedRealLiteral = EcoreUtil.copy(realLiteral);
@@ -478,7 +500,7 @@ public class ExpressionTransformer extends AstSwitch<Expression> {
 				integerType.setUnit(TypeSystemUtil.createUnit());
 			}
 		} catch (InvalidUnitExpressionOperandException e) {
-			throw new RuntimeException("Invalid unit", e);
+			status.add(new SyntaxStatus(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, 0, "Invalid unit", integerLiteral.getUnit()));
 		}
 
 		IntegerLiteral transformedIntegerLiteral = EcoreUtil.copy(integerLiteral);

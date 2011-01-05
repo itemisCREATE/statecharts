@@ -24,7 +24,6 @@ import org.eclipselabs.mscript.language.il.LocalVariableDeclaration;
 import org.eclipselabs.mscript.language.il.transform.ExpressionTarget;
 import org.eclipselabs.mscript.language.il.transform.ExpressionTransformer;
 import org.eclipselabs.mscript.language.il.transform.ITransformerContext;
-import org.eclipselabs.mscript.language.il.util.DataTypeAdaptor;
 import org.eclipselabs.mscript.language.internal.LanguagePlugin;
 import org.eclipselabs.mscript.language.internal.util.StatusUtil;
 import org.eclipselabs.mscript.language.interpreter.CompoundInterpreter;
@@ -37,8 +36,6 @@ import org.eclipselabs.mscript.language.interpreter.Variable;
  *
  */
 public class ExpressionInterpreterHelper {
-	
-	private DataTypeAdaptor dataTypeAdaptor = new DataTypeAdaptor();
 	
 	private Compound compound;
 	
@@ -78,13 +75,8 @@ public class ExpressionInterpreterHelper {
 				throw new CoreException(status);
 			}
 			
-			IStatus adaptorStatus = dataTypeAdaptor.adapt(compound);
-			
-			if (!adaptorStatus.isOK()) {
-				StatusUtil.merge(status, adaptorStatus);
-				throw new CoreException(status);
-			}
-			
+			preprocessCompound(compound);
+
 			IVariable outputVariable = new Variable(resultVariableDeclaration);
 			interpreterContext.addVariable(outputVariable);
 			
@@ -94,6 +86,9 @@ public class ExpressionInterpreterHelper {
 		} finally {
 			transformerContext.leaveScope();
 		}
+	}
+	
+	protected void preprocessCompound(Compound compound) throws CoreException {
 	}
 
 }

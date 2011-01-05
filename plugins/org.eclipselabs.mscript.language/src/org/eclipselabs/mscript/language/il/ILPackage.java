@@ -872,14 +872,14 @@ public interface ILPackage extends EPackage {
 	int OPERATION_CALL_FEATURE_COUNT = AstPackage.EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.eclipselabs.mscript.language.il.impl.BuiltinFunctionCallImpl <em>Builtin Function Call</em>}' class.
+	 * The meta object id for the '{@link org.eclipselabs.mscript.language.il.impl.MethodCallImpl <em>Method Call</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipselabs.mscript.language.il.impl.BuiltinFunctionCallImpl
-	 * @see org.eclipselabs.mscript.language.il.impl.ILPackageImpl#getBuiltinFunctionCall()
+	 * @see org.eclipselabs.mscript.language.il.impl.MethodCallImpl
+	 * @see org.eclipselabs.mscript.language.il.impl.ILPackageImpl#getMethodCall()
 	 * @generated
 	 */
-	int BUILTIN_FUNCTION_CALL = 18;
+	int METHOD_CALL = 18;
 
 	/**
 	 * The feature id for the '<em><b>Arguments</b></em>' containment reference list.
@@ -888,7 +888,7 @@ public interface ILPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BUILTIN_FUNCTION_CALL__ARGUMENTS = OPERATION_CALL__ARGUMENTS;
+	int METHOD_CALL__ARGUMENTS = OPERATION_CALL__ARGUMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -897,16 +897,62 @@ public interface ILPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BUILTIN_FUNCTION_CALL__NAME = OPERATION_CALL_FEATURE_COUNT + 0;
+	int METHOD_CALL__NAME = OPERATION_CALL_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>Builtin Function Call</em>' class.
+	 * The feature id for the '<em><b>Target</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BUILTIN_FUNCTION_CALL_FEATURE_COUNT = OPERATION_CALL_FEATURE_COUNT + 1;
+	int METHOD_CALL__TARGET = OPERATION_CALL_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Method Call</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METHOD_CALL_FEATURE_COUNT = OPERATION_CALL_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link org.eclipselabs.mscript.language.il.impl.PropertyReferenceImpl <em>Property Reference</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipselabs.mscript.language.il.impl.PropertyReferenceImpl
+	 * @see org.eclipselabs.mscript.language.il.impl.ILPackageImpl#getPropertyReference()
+	 * @generated
+	 */
+	int PROPERTY_REFERENCE = 19;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_REFERENCE__NAME = AstPackage.EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Target</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_REFERENCE__TARGET = AstPackage.EXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Property Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_REFERENCE_FEATURE_COUNT = AstPackage.EXPRESSION_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.language.il.impl.InvalidExpressionImpl <em>Invalid Expression</em>}' class.
@@ -916,7 +962,7 @@ public interface ILPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.il.impl.ILPackageImpl#getInvalidExpression()
 	 * @generated
 	 */
-	int INVALID_EXPRESSION = 19;
+	int INVALID_EXPRESSION = 20;
 
 	/**
 	 * The number of structural features of the '<em>Invalid Expression</em>' class.
@@ -935,7 +981,7 @@ public interface ILPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.language.il.impl.ILPackageImpl#getIValue()
 	 * @generated
 	 */
-	int IVALUE = 20;
+	int IVALUE = 21;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.il.ILFunctionDefinition <em>Function Definition</em>}'.
@@ -1437,25 +1483,68 @@ public interface ILPackage extends EPackage {
 	EReference getOperationCall_Arguments();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.il.BuiltinFunctionCall <em>Builtin Function Call</em>}'.
+	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.il.MethodCall <em>Method Call</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Builtin Function Call</em>'.
-	 * @see org.eclipselabs.mscript.language.il.BuiltinFunctionCall
+	 * @return the meta object for class '<em>Method Call</em>'.
+	 * @see org.eclipselabs.mscript.language.il.MethodCall
 	 * @generated
 	 */
-	EClass getBuiltinFunctionCall();
+	EClass getMethodCall();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.il.BuiltinFunctionCall#getName <em>Name</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.il.MethodCall#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.eclipselabs.mscript.language.il.BuiltinFunctionCall#getName()
-	 * @see #getBuiltinFunctionCall()
+	 * @see org.eclipselabs.mscript.language.il.MethodCall#getName()
+	 * @see #getMethodCall()
 	 * @generated
 	 */
-	EAttribute getBuiltinFunctionCall_Name();
+	EAttribute getMethodCall_Name();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipselabs.mscript.language.il.MethodCall#getTarget <em>Target</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Target</em>'.
+	 * @see org.eclipselabs.mscript.language.il.MethodCall#getTarget()
+	 * @see #getMethodCall()
+	 * @generated
+	 */
+	EReference getMethodCall_Target();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.il.PropertyReference <em>Property Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Property Reference</em>'.
+	 * @see org.eclipselabs.mscript.language.il.PropertyReference
+	 * @generated
+	 */
+	EClass getPropertyReference();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.il.PropertyReference#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.eclipselabs.mscript.language.il.PropertyReference#getName()
+	 * @see #getPropertyReference()
+	 * @generated
+	 */
+	EAttribute getPropertyReference_Name();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipselabs.mscript.language.il.PropertyReference#getTarget <em>Target</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Target</em>'.
+	 * @see org.eclipselabs.mscript.language.il.PropertyReference#getTarget()
+	 * @see #getPropertyReference()
+	 * @generated
+	 */
+	EReference getPropertyReference_Target();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.il.InvalidExpression <em>Invalid Expression</em>}'.
@@ -1913,14 +2002,14 @@ public interface ILPackage extends EPackage {
 		EReference OPERATION_CALL__ARGUMENTS = eINSTANCE.getOperationCall_Arguments();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.il.impl.BuiltinFunctionCallImpl <em>Builtin Function Call</em>}' class.
+		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.il.impl.MethodCallImpl <em>Method Call</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipselabs.mscript.language.il.impl.BuiltinFunctionCallImpl
-		 * @see org.eclipselabs.mscript.language.il.impl.ILPackageImpl#getBuiltinFunctionCall()
+		 * @see org.eclipselabs.mscript.language.il.impl.MethodCallImpl
+		 * @see org.eclipselabs.mscript.language.il.impl.ILPackageImpl#getMethodCall()
 		 * @generated
 		 */
-		EClass BUILTIN_FUNCTION_CALL = eINSTANCE.getBuiltinFunctionCall();
+		EClass METHOD_CALL = eINSTANCE.getMethodCall();
 
 		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -1928,7 +2017,41 @@ public interface ILPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute BUILTIN_FUNCTION_CALL__NAME = eINSTANCE.getBuiltinFunctionCall_Name();
+		EAttribute METHOD_CALL__NAME = eINSTANCE.getMethodCall_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Target</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference METHOD_CALL__TARGET = eINSTANCE.getMethodCall_Target();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.il.impl.PropertyReferenceImpl <em>Property Reference</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipselabs.mscript.language.il.impl.PropertyReferenceImpl
+		 * @see org.eclipselabs.mscript.language.il.impl.ILPackageImpl#getPropertyReference()
+		 * @generated
+		 */
+		EClass PROPERTY_REFERENCE = eINSTANCE.getPropertyReference();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PROPERTY_REFERENCE__NAME = eINSTANCE.getPropertyReference_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Target</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PROPERTY_REFERENCE__TARGET = eINSTANCE.getPropertyReference_Target();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.il.impl.InvalidExpressionImpl <em>Invalid Expression</em>}' class.

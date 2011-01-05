@@ -1514,32 +1514,32 @@ public interface AstPackage extends EPackage
   int FEATURE_CALL_PART_FEATURE_COUNT = 0;
 
   /**
-   * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.FeatureReferenceImpl <em>Feature Reference</em>}' class.
+   * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.NameComponentImpl <em>Name Component</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.eclipselabs.mscript.language.ast.impl.FeatureReferenceImpl
-   * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getFeatureReference()
+   * @see org.eclipselabs.mscript.language.ast.impl.NameComponentImpl
+   * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getNameComponent()
    * @generated
    */
-  int FEATURE_REFERENCE = 40;
+  int NAME_COMPONENT = 40;
 
   /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * The feature id for the '<em><b>Identifier</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int FEATURE_REFERENCE__NAME = FEATURE_CALL_PART_FEATURE_COUNT + 0;
+  int NAME_COMPONENT__IDENTIFIER = FEATURE_CALL_PART_FEATURE_COUNT + 0;
 
   /**
-   * The number of structural features of the '<em>Feature Reference</em>' class.
+   * The number of structural features of the '<em>Name Component</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int FEATURE_REFERENCE_FEATURE_COUNT = FEATURE_CALL_PART_FEATURE_COUNT + 1;
+  int NAME_COMPONENT_FEATURE_COUNT = FEATURE_CALL_PART_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.ArrayElementAccessImpl <em>Array Element Access</em>}' class.
@@ -3788,25 +3788,25 @@ public interface AstPackage extends EPackage
   EClass getFeatureCallPart();
 
   /**
-   * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.FeatureReference <em>Feature Reference</em>}'.
+   * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.NameComponent <em>Name Component</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Feature Reference</em>'.
-   * @see org.eclipselabs.mscript.language.ast.FeatureReference
+   * @return the meta object for class '<em>Name Component</em>'.
+   * @see org.eclipselabs.mscript.language.ast.NameComponent
    * @generated
    */
-  EClass getFeatureReference();
+  EClass getNameComponent();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.ast.FeatureReference#getName <em>Name</em>}'.
+   * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.ast.NameComponent#getIdentifier <em>Identifier</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.eclipselabs.mscript.language.ast.FeatureReference#getName()
-   * @see #getFeatureReference()
+   * @return the meta object for the attribute '<em>Identifier</em>'.
+   * @see org.eclipselabs.mscript.language.ast.NameComponent#getIdentifier()
+   * @see #getNameComponent()
    * @generated
    */
-  EAttribute getFeatureReference_Name();
+  EAttribute getNameComponent_Identifier();
 
   /**
    * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.ArrayElementAccess <em>Array Element Access</em>}'.
@@ -5718,22 +5718,22 @@ public interface AstPackage extends EPackage
     EClass FEATURE_CALL_PART = eINSTANCE.getFeatureCallPart();
 
     /**
-     * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.FeatureReferenceImpl <em>Feature Reference</em>}' class.
+     * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.NameComponentImpl <em>Name Component</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.eclipselabs.mscript.language.ast.impl.FeatureReferenceImpl
-     * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getFeatureReference()
+     * @see org.eclipselabs.mscript.language.ast.impl.NameComponentImpl
+     * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getNameComponent()
      * @generated
      */
-    EClass FEATURE_REFERENCE = eINSTANCE.getFeatureReference();
+    EClass NAME_COMPONENT = eINSTANCE.getNameComponent();
 
     /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Identifier</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute FEATURE_REFERENCE__NAME = eINSTANCE.getFeatureReference_Name();
+    EAttribute NAME_COMPONENT__IDENTIFIER = eINSTANCE.getNameComponent_Identifier();
 
     /**
      * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.ArrayElementAccessImpl <em>Array Element Access</em>}' class.

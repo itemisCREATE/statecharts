@@ -2398,20 +2398,20 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	public class FeatureCallPartElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "FeatureCallPart");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cFeatureReferenceParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cNameComponentParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cArrayElementAccessParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cOperationArgumentListParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		private final RuleCall cIterationCallParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		
 		//FeatureCallPart:
-		//	FeatureReference | ArrayElementAccess | OperationArgumentList | IterationCall;
+		//	NameComponent | ArrayElementAccess | OperationArgumentList | IterationCall;
 		public ParserRule getRule() { return rule; }
 
-		//FeatureReference | ArrayElementAccess | OperationArgumentList | IterationCall
+		//NameComponent | ArrayElementAccess | OperationArgumentList | IterationCall
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//FeatureReference
-		public RuleCall getFeatureReferenceParserRuleCall_0() { return cFeatureReferenceParserRuleCall_0; }
+		//NameComponent
+		public RuleCall getNameComponentParserRuleCall_0() { return cNameComponentParserRuleCall_0; }
 
 		//ArrayElementAccess
 		public RuleCall getArrayElementAccessParserRuleCall_1() { return cArrayElementAccessParserRuleCall_1; }
@@ -2423,36 +2423,36 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getIterationCallParserRuleCall_3() { return cIterationCallParserRuleCall_3; }
 	}
 
-	public class FeatureReferenceElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "FeatureReference");
+	public class NameComponentElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NameComponent");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cFullStopKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final Alternatives cNameAlternatives_1_0 = (Alternatives)cNameAssignment_1.eContents().get(0);
-		private final RuleCall cNameIDTerminalRuleCall_1_0_0 = (RuleCall)cNameAlternatives_1_0.eContents().get(0);
-		private final Keyword cNameUnitKeyword_1_0_1 = (Keyword)cNameAlternatives_1_0.eContents().get(1);
+		private final Assignment cIdentifierAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final Alternatives cIdentifierAlternatives_1_0 = (Alternatives)cIdentifierAssignment_1.eContents().get(0);
+		private final RuleCall cIdentifierIDTerminalRuleCall_1_0_0 = (RuleCall)cIdentifierAlternatives_1_0.eContents().get(0);
+		private final Keyword cIdentifierUnitKeyword_1_0_1 = (Keyword)cIdentifierAlternatives_1_0.eContents().get(1);
 		
-		//FeatureReference:
-		//	"." name=(ID | "unit");
+		//NameComponent:
+		//	"." identifier=(ID | "unit");
 		public ParserRule getRule() { return rule; }
 
-		//"." name=(ID | "unit")
+		//"." identifier=(ID | "unit")
 		public Group getGroup() { return cGroup; }
 
 		//"."
 		public Keyword getFullStopKeyword_0() { return cFullStopKeyword_0; }
 
-		//name=(ID | "unit")
-		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		//identifier=(ID | "unit")
+		public Assignment getIdentifierAssignment_1() { return cIdentifierAssignment_1; }
 
 		//ID | "unit"
-		public Alternatives getNameAlternatives_1_0() { return cNameAlternatives_1_0; }
+		public Alternatives getIdentifierAlternatives_1_0() { return cIdentifierAlternatives_1_0; }
 
 		//ID
-		public RuleCall getNameIDTerminalRuleCall_1_0_0() { return cNameIDTerminalRuleCall_1_0_0; }
+		public RuleCall getIdentifierIDTerminalRuleCall_1_0_0() { return cIdentifierIDTerminalRuleCall_1_0_0; }
 
 		//"unit"
-		public Keyword getNameUnitKeyword_1_0_1() { return cNameUnitKeyword_1_0_1; }
+		public Keyword getIdentifierUnitKeyword_1_0_1() { return cIdentifierUnitKeyword_1_0_1; }
 	}
 
 	public class ArrayElementAccessElements extends AbstractParserRuleElementFinder {
@@ -3627,7 +3627,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	private SimpleNameElements pSimpleName;
 	private FeatureCallElements pFeatureCall;
 	private FeatureCallPartElements pFeatureCallPart;
-	private FeatureReferenceElements pFeatureReference;
+	private NameComponentElements pNameComponent;
 	private ArrayElementAccessElements pArrayElementAccess;
 	private ArraySubscriptElements pArraySubscript;
 	private OperationArgumentListElements pOperationArgumentList;
@@ -4334,7 +4334,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//FeatureCallPart:
-	//	FeatureReference | ArrayElementAccess | OperationArgumentList | IterationCall;
+	//	NameComponent | ArrayElementAccess | OperationArgumentList | IterationCall;
 	public FeatureCallPartElements getFeatureCallPartAccess() {
 		return (pFeatureCallPart != null) ? pFeatureCallPart : (pFeatureCallPart = new FeatureCallPartElements());
 	}
@@ -4343,14 +4343,14 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		return getFeatureCallPartAccess().getRule();
 	}
 
-	//FeatureReference:
-	//	"." name=(ID | "unit");
-	public FeatureReferenceElements getFeatureReferenceAccess() {
-		return (pFeatureReference != null) ? pFeatureReference : (pFeatureReference = new FeatureReferenceElements());
+	//NameComponent:
+	//	"." identifier=(ID | "unit");
+	public NameComponentElements getNameComponentAccess() {
+		return (pNameComponent != null) ? pNameComponent : (pNameComponent = new NameComponentElements());
 	}
 	
-	public ParserRule getFeatureReferenceRule() {
-		return getFeatureReferenceAccess().getRule();
+	public ParserRule getNameComponentRule() {
+		return getNameComponentAccess().getRule();
 	}
 
 	//ArrayElementAccess:

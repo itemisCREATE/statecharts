@@ -108,7 +108,7 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
       case AstPackage.BOOLEAN_LITERAL: return createBooleanLiteral();
       case AstPackage.STRING_LITERAL: return createStringLiteral();
       case AstPackage.FEATURE_CALL_PART: return createFeatureCallPart();
-      case AstPackage.FEATURE_REFERENCE: return createFeatureReference();
+      case AstPackage.NAME_COMPONENT: return createNameComponent();
       case AstPackage.ARRAY_ELEMENT_ACCESS: return createArrayElementAccess();
       case AstPackage.ARRAY_SUBSCRIPT: return createArraySubscript();
       case AstPackage.OPERATION_ARGUMENT_LIST: return createOperationArgumentList();
@@ -659,10 +659,10 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public FeatureReference createFeatureReference()
+  public NameComponent createNameComponent()
   {
-    FeatureReferenceImpl featureReference = new FeatureReferenceImpl();
-    return featureReference;
+    NameComponentImpl nameComponent = new NameComponentImpl();
+    return nameComponent;
   }
 
   /**

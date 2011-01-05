@@ -53,7 +53,7 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getNumericLiteralAccess().getAlternatives(), "rule__NumericLiteral__Alternatives");
 					put(grammarAccess.getFeatureCallAccess().getAlternatives(), "rule__FeatureCall__Alternatives");
 					put(grammarAccess.getFeatureCallPartAccess().getAlternatives(), "rule__FeatureCallPart__Alternatives");
-					put(grammarAccess.getFeatureReferenceAccess().getNameAlternatives_1_0(), "rule__FeatureReference__NameAlternatives_1_0");
+					put(grammarAccess.getNameComponentAccess().getIdentifierAlternatives_1_0(), "rule__NameComponent__IdentifierAlternatives_1_0");
 					put(grammarAccess.getArraySubscriptAccess().getAlternatives(), "rule__ArraySubscript__Alternatives");
 					put(grammarAccess.getArrayConstructionOperatorAccess().getAlternatives_2(), "rule__ArrayConstructionOperator__Alternatives_2");
 					put(grammarAccess.getUnitExpressionNumeratorAccess().getAlternatives(), "rule__UnitExpressionNumerator__Alternatives");
@@ -153,7 +153,7 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getFeatureCallAccess().getGroup_0(), "rule__FeatureCall__Group_0__0");
 					put(grammarAccess.getFeatureCallAccess().getGroup_0_1(), "rule__FeatureCall__Group_0_1__0");
 					put(grammarAccess.getFeatureCallAccess().getGroup_1(), "rule__FeatureCall__Group_1__0");
-					put(grammarAccess.getFeatureReferenceAccess().getGroup(), "rule__FeatureReference__Group__0");
+					put(grammarAccess.getNameComponentAccess().getGroup(), "rule__NameComponent__Group__0");
 					put(grammarAccess.getArrayElementAccessAccess().getGroup(), "rule__ArrayElementAccess__Group__0");
 					put(grammarAccess.getArrayElementAccessAccess().getGroup_2(), "rule__ArrayElementAccess__Group_2__0");
 					put(grammarAccess.getOperationArgumentListAccess().getGroup(), "rule__OperationArgumentList__Group__0");
@@ -294,7 +294,7 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getFeatureCallAccess().getPartsAssignment_0_1_1(), "rule__FeatureCall__PartsAssignment_0_1_1");
 					put(grammarAccess.getFeatureCallAccess().getTargetAssignment_1_1(), "rule__FeatureCall__TargetAssignment_1_1");
 					put(grammarAccess.getFeatureCallAccess().getPartsAssignment_1_2(), "rule__FeatureCall__PartsAssignment_1_2");
-					put(grammarAccess.getFeatureReferenceAccess().getNameAssignment_1(), "rule__FeatureReference__NameAssignment_1");
+					put(grammarAccess.getNameComponentAccess().getIdentifierAssignment_1(), "rule__NameComponent__IdentifierAssignment_1");
 					put(grammarAccess.getArrayElementAccessAccess().getSubscriptsAssignment_1(), "rule__ArrayElementAccess__SubscriptsAssignment_1");
 					put(grammarAccess.getArrayElementAccessAccess().getSubscriptsAssignment_2_1(), "rule__ArrayElementAccess__SubscriptsAssignment_2_1");
 					put(grammarAccess.getArraySubscriptAccess().getSliceAssignment_0(), "rule__ArraySubscript__SliceAssignment_0");

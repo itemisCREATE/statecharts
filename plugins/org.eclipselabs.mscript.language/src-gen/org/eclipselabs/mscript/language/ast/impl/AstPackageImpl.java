@@ -44,7 +44,6 @@ import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.ast.ExpressionList;
 import org.eclipselabs.mscript.language.ast.FeatureCall;
 import org.eclipselabs.mscript.language.ast.FeatureCallPart;
-import org.eclipselabs.mscript.language.ast.FeatureReference;
 import org.eclipselabs.mscript.language.ast.FunctionDefinition;
 import org.eclipselabs.mscript.language.ast.FunctorDeclaration;
 import org.eclipselabs.mscript.language.ast.GaussianTypeSpecifier;
@@ -64,6 +63,7 @@ import org.eclipselabs.mscript.language.ast.Module;
 import org.eclipselabs.mscript.language.ast.MultiplicativeExpression;
 import org.eclipselabs.mscript.language.ast.MultiplicativeExpressionPart;
 import org.eclipselabs.mscript.language.ast.MultiplicativeOperator;
+import org.eclipselabs.mscript.language.ast.NameComponent;
 import org.eclipselabs.mscript.language.ast.NamedTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.NumericLiteral;
 import org.eclipselabs.mscript.language.ast.NumericTypeSpecifier;
@@ -393,7 +393,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass featureReferenceEClass = null;
+  private EClass nameComponentEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -1714,9 +1714,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getFeatureReference()
+  public EClass getNameComponent()
   {
-    return featureReferenceEClass;
+    return nameComponentEClass;
   }
 
   /**
@@ -1724,9 +1724,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getFeatureReference_Name()
+  public EAttribute getNameComponent_Identifier()
   {
-    return (EAttribute)featureReferenceEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)nameComponentEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -2884,8 +2884,8 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
 
     featureCallPartEClass = createEClass(FEATURE_CALL_PART);
 
-    featureReferenceEClass = createEClass(FEATURE_REFERENCE);
-    createEAttribute(featureReferenceEClass, FEATURE_REFERENCE__NAME);
+    nameComponentEClass = createEClass(NAME_COMPONENT);
+    createEAttribute(nameComponentEClass, NAME_COMPONENT__IDENTIFIER);
 
     arrayElementAccessEClass = createEClass(ARRAY_ELEMENT_ACCESS);
     createEReference(arrayElementAccessEClass, ARRAY_ELEMENT_ACCESS__SUBSCRIPTS);
@@ -3075,7 +3075,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     integerLiteralEClass.getESuperTypes().add(this.getNumericLiteral());
     booleanLiteralEClass.getESuperTypes().add(this.getLiteral());
     stringLiteralEClass.getESuperTypes().add(this.getLiteral());
-    featureReferenceEClass.getESuperTypes().add(this.getFeatureCallPart());
+    nameComponentEClass.getESuperTypes().add(this.getFeatureCallPart());
     arrayElementAccessEClass.getESuperTypes().add(this.getFeatureCallPart());
     operationArgumentListEClass.getESuperTypes().add(this.getFeatureCallPart());
     iterationCallEClass.getESuperTypes().add(this.getFeatureCallPart());
@@ -3236,8 +3236,8 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
 
     initEClass(featureCallPartEClass, FeatureCallPart.class, "FeatureCallPart", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-    initEClass(featureReferenceEClass, FeatureReference.class, "FeatureReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getFeatureReference_Name(), ecorePackage.getEString(), "name", null, 0, 1, FeatureReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(nameComponentEClass, NameComponent.class, "NameComponent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getNameComponent_Identifier(), ecorePackage.getEString(), "identifier", null, 0, 1, NameComponent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(arrayElementAccessEClass, ArrayElementAccess.class, "ArrayElementAccess", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getArrayElementAccess_Subscripts(), this.getArraySubscript(), null, "subscripts", null, 0, -1, ArrayElementAccess.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -12,49 +12,49 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipselabs.mscript.language.ast.AstPackage;
-import org.eclipselabs.mscript.language.ast.FeatureReference;
+import org.eclipselabs.mscript.language.ast.NameComponent;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Feature Reference</b></em>'.
+ * An implementation of the model object '<em><b>Name Component</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FeatureReferenceImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.NameComponentImpl#getIdentifier <em>Identifier</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class FeatureReferenceImpl extends FeatureCallPartImpl implements FeatureReference
+public class NameComponentImpl extends FeatureCallPartImpl implements NameComponent
 {
   /**
-   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+   * The default value of the '{@link #getIdentifier() <em>Identifier</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getName()
+   * @see #getIdentifier()
    * @generated
    * @ordered
    */
-  protected static final String NAME_EDEFAULT = null;
+  protected static final String IDENTIFIER_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+   * The cached value of the '{@link #getIdentifier() <em>Identifier</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getName()
+   * @see #getIdentifier()
    * @generated
    * @ordered
    */
-  protected String name = NAME_EDEFAULT;
+  protected String identifier = IDENTIFIER_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected FeatureReferenceImpl()
+  protected NameComponentImpl()
   {
     super();
   }
@@ -67,7 +67,7 @@ public class FeatureReferenceImpl extends FeatureCallPartImpl implements Feature
   @Override
   protected EClass eStaticClass()
   {
-    return AstPackage.Literals.FEATURE_REFERENCE;
+    return AstPackage.Literals.NAME_COMPONENT;
   }
 
   /**
@@ -75,9 +75,9 @@ public class FeatureReferenceImpl extends FeatureCallPartImpl implements Feature
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName()
+  public String getIdentifier()
   {
-    return name;
+    return identifier;
   }
 
   /**
@@ -85,12 +85,12 @@ public class FeatureReferenceImpl extends FeatureCallPartImpl implements Feature
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(String newName)
+  public void setIdentifier(String newIdentifier)
   {
-    String oldName = name;
-    name = newName;
+    String oldIdentifier = identifier;
+    identifier = newIdentifier;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.FEATURE_REFERENCE__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.NAME_COMPONENT__IDENTIFIER, oldIdentifier, identifier));
   }
 
   /**
@@ -103,8 +103,8 @@ public class FeatureReferenceImpl extends FeatureCallPartImpl implements Feature
   {
     switch (featureID)
     {
-      case AstPackage.FEATURE_REFERENCE__NAME:
-        return getName();
+      case AstPackage.NAME_COMPONENT__IDENTIFIER:
+        return getIdentifier();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -119,8 +119,8 @@ public class FeatureReferenceImpl extends FeatureCallPartImpl implements Feature
   {
     switch (featureID)
     {
-      case AstPackage.FEATURE_REFERENCE__NAME:
-        setName((String)newValue);
+      case AstPackage.NAME_COMPONENT__IDENTIFIER:
+        setIdentifier((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -136,8 +136,8 @@ public class FeatureReferenceImpl extends FeatureCallPartImpl implements Feature
   {
     switch (featureID)
     {
-      case AstPackage.FEATURE_REFERENCE__NAME:
-        setName(NAME_EDEFAULT);
+      case AstPackage.NAME_COMPONENT__IDENTIFIER:
+        setIdentifier(IDENTIFIER_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -153,8 +153,8 @@ public class FeatureReferenceImpl extends FeatureCallPartImpl implements Feature
   {
     switch (featureID)
     {
-      case AstPackage.FEATURE_REFERENCE__NAME:
-        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case AstPackage.NAME_COMPONENT__IDENTIFIER:
+        return IDENTIFIER_EDEFAULT == null ? identifier != null : !IDENTIFIER_EDEFAULT.equals(identifier);
     }
     return super.eIsSet(featureID);
   }
@@ -170,10 +170,10 @@ public class FeatureReferenceImpl extends FeatureCallPartImpl implements Feature
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (name: ");
-    result.append(name);
+    result.append(" (identifier: ");
+    result.append(identifier);
     result.append(')');
     return result.toString();
   }
 
-} //FeatureReferenceImpl
+} //NameComponentImpl

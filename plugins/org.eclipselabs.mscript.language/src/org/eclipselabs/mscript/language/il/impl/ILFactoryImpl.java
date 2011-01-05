@@ -14,7 +14,6 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipselabs.mscript.computation.core.value.IValue;
 import org.eclipselabs.mscript.language.il.Assignment;
-import org.eclipselabs.mscript.language.il.BuiltinFunctionCall;
 import org.eclipselabs.mscript.language.il.Compound;
 import org.eclipselabs.mscript.language.il.CompoundStatement;
 import org.eclipselabs.mscript.language.il.ComputationCompound;
@@ -27,7 +26,9 @@ import org.eclipselabs.mscript.language.il.InputVariableDeclaration;
 import org.eclipselabs.mscript.language.il.InstanceVariableDeclaration;
 import org.eclipselabs.mscript.language.il.InvalidExpression;
 import org.eclipselabs.mscript.language.il.LocalVariableDeclaration;
+import org.eclipselabs.mscript.language.il.MethodCall;
 import org.eclipselabs.mscript.language.il.OutputVariableDeclaration;
+import org.eclipselabs.mscript.language.il.PropertyReference;
 import org.eclipselabs.mscript.language.il.TemplateVariableDeclaration;
 import org.eclipselabs.mscript.language.il.VariableReference;
 
@@ -88,7 +89,8 @@ public class ILFactoryImpl extends EFactoryImpl implements ILFactory {
 			case ILPackage.IF_STATEMENT: return createIfStatement();
 			case ILPackage.FOREACH_STATEMENT: return createForeachStatement();
 			case ILPackage.VARIABLE_REFERENCE: return createVariableReference();
-			case ILPackage.BUILTIN_FUNCTION_CALL: return createBuiltinFunctionCall();
+			case ILPackage.METHOD_CALL: return createMethodCall();
+			case ILPackage.PROPERTY_REFERENCE: return createPropertyReference();
 			case ILPackage.INVALID_EXPRESSION: return createInvalidExpression();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -260,9 +262,19 @@ public class ILFactoryImpl extends EFactoryImpl implements ILFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public BuiltinFunctionCall createBuiltinFunctionCall() {
-		BuiltinFunctionCallImpl builtinFunctionCall = new BuiltinFunctionCallImpl();
-		return builtinFunctionCall;
+	public MethodCall createMethodCall() {
+		MethodCallImpl methodCall = new MethodCallImpl();
+		return methodCall;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PropertyReference createPropertyReference() {
+		PropertyReferenceImpl propertyReference = new PropertyReferenceImpl();
+		return propertyReference;
 	}
 
 	/**

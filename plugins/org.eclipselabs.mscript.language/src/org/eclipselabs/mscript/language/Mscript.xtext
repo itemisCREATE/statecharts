@@ -270,10 +270,10 @@ FeatureCall returns Expression :
 	CallablePrimaryExpression ({FeatureCall.target=current} (parts+=FeatureCallPart)+)? | {FeatureCall} target=SimpleName (parts+=FeatureCallPart)*;
 
 FeatureCallPart :
-	FeatureReference | ArrayElementAccess | OperationArgumentList | IterationCall;
+	NameComponent | ArrayElementAccess | OperationArgumentList | IterationCall;
 	
-FeatureReference :
-	'.' name=(ID | 'unit');
+NameComponent :
+	'.' identifier=(ID | 'unit');
 	
 ArrayElementAccess :
 	'[' subscripts+=ArraySubscript (',' subscripts+=ArraySubscript)* ']';

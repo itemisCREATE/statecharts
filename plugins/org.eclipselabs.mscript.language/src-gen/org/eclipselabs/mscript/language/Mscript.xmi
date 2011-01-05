@@ -1208,13 +1208,13 @@
       <elements xsi:type="xtext:RuleCall" rule="//@rules.68"/>
     </alternatives>
   </rules>
-  <rules xsi:type="xtext:ParserRule" name="FeatureReference">
+  <rules xsi:type="xtext:ParserRule" name="NameComponent">
     <type metamodel="//@metamodelDeclarations.0">
-      <classifier xsi:type="ecore:EClass" href="http://www.eclipselabs.org/mscript/AST/1.0.0#//FeatureReference"/>
+      <classifier xsi:type="ecore:EClass" href="http://www.eclipselabs.org/mscript/AST/1.0.0#//NameComponent"/>
     </type>
     <alternatives xsi:type="xtext:Group">
       <elements xsi:type="xtext:Keyword" value="."/>
-      <elements xsi:type="xtext:Assignment" feature="name" operator="=">
+      <elements xsi:type="xtext:Assignment" feature="identifier" operator="=">
         <terminal xsi:type="xtext:Alternatives">
           <elements xsi:type="xtext:RuleCall" rule="//@rules.85"/>
           <elements xsi:type="xtext:Keyword" value="unit"/>

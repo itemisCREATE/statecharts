@@ -92,8 +92,15 @@
         eType="ecore:EClass ../src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="BuiltinFunctionCall" eSuperTypes="#//OperationCall">
+  <eClassifiers xsi:type="ecore:EClass" name="MethodCall" eSuperTypes="#//OperationCall">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="ecore:EClass ../src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PropertyReference" eSuperTypes="../src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="ecore:EClass ../src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InvalidExpression" eSuperTypes="../src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"/>
   <eClassifiers xsi:type="ecore:EDataType" name="IValue" instanceClassName="org.eclipselabs.mscript.computation.core.value.IValue"/>

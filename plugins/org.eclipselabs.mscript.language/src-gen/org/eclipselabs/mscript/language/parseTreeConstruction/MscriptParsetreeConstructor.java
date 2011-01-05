@@ -86,7 +86,7 @@ protected class ThisRootNode extends RootToken {
 			case 52: return new SimpleName_Group(this, this, 52, inst);
 			case 53: return new FeatureCall_Alternatives(this, this, 53, inst);
 			case 54: return new FeatureCallPart_Alternatives(this, this, 54, inst);
-			case 55: return new FeatureReference_Group(this, this, 55, inst);
+			case 55: return new NameComponent_Group(this, this, 55, inst);
 			case 56: return new ArrayElementAccess_Group(this, this, 56, inst);
 			case 57: return new ArraySubscript_Alternatives(this, this, 57, inst);
 			case 58: return new OperationArgumentList_Group(this, this, 58, inst);
@@ -12781,11 +12781,11 @@ protected class FeatureCall_PartsAssignment_1_2 extends AssignmentToken  {
 /************ begin Rule FeatureCallPart ****************
  *
  * FeatureCallPart:
- * 	FeatureReference | ArrayElementAccess | OperationArgumentList | IterationCall;
+ * 	NameComponent | ArrayElementAccess | OperationArgumentList | IterationCall;
  *
  **/
 
-// FeatureReference | ArrayElementAccess | OperationArgumentList | IterationCall
+// NameComponent | ArrayElementAccess | OperationArgumentList | IterationCall
 protected class FeatureCallPart_Alternatives extends AlternativesToken {
 
 	public FeatureCallPart_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -12800,7 +12800,7 @@ protected class FeatureCallPart_Alternatives extends AlternativesToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new FeatureCallPart_FeatureReferenceParserRuleCall_0(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new FeatureCallPart_NameComponentParserRuleCall_0(lastRuleCallOrigin, this, 0, inst);
 			case 1: return new FeatureCallPart_ArrayElementAccessParserRuleCall_1(lastRuleCallOrigin, this, 1, inst);
 			case 2: return new FeatureCallPart_OperationArgumentListParserRuleCall_2(lastRuleCallOrigin, this, 2, inst);
 			case 3: return new FeatureCallPart_IterationCallParserRuleCall_3(lastRuleCallOrigin, this, 3, inst);
@@ -12811,8 +12811,8 @@ protected class FeatureCallPart_Alternatives extends AlternativesToken {
     @Override
 	public IEObjectConsumer tryConsume() {
 		if(getEObject().eClass() != grammarAccess.getArrayElementAccessRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getFeatureReferenceRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getIterationCallRule().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getNameComponentRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getOperationArgumentListAccess().getOperationArgumentListAction_0().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
@@ -12820,31 +12820,31 @@ protected class FeatureCallPart_Alternatives extends AlternativesToken {
 
 }
 
-// FeatureReference
-protected class FeatureCallPart_FeatureReferenceParserRuleCall_0 extends RuleCallToken {
+// NameComponent
+protected class FeatureCallPart_NameComponentParserRuleCall_0 extends RuleCallToken {
 	
-	public FeatureCallPart_FeatureReferenceParserRuleCall_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public FeatureCallPart_NameComponentParserRuleCall_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public RuleCall getGrammarElement() {
-		return grammarAccess.getFeatureCallPartAccess().getFeatureReferenceParserRuleCall_0();
+		return grammarAccess.getFeatureCallPartAccess().getNameComponentParserRuleCall_0();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new FeatureReference_Group(this, this, 0, inst);
+			case 0: return new NameComponent_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getFeatureReferenceRule().getType().getClassifier())
+		if(getEObject().eClass() != grammarAccess.getNameComponentRule().getType().getClassifier())
 			return null;
-		if(checkForRecursion(FeatureReference_Group.class, eObjectConsumer)) return null;
+		if(checkForRecursion(NameComponent_Group.class, eObjectConsumer)) return null;
 		return eObjectConsumer;
 	}
 	
@@ -12968,36 +12968,36 @@ protected class FeatureCallPart_IterationCallParserRuleCall_3 extends RuleCallTo
 /************ end Rule FeatureCallPart ****************/
 
 
-/************ begin Rule FeatureReference ****************
+/************ begin Rule NameComponent ****************
  *
- * FeatureReference:
- * 	"." name=(ID | "unit");
+ * NameComponent:
+ * 	"." identifier=(ID | "unit");
  *
  **/
 
-// "." name=(ID | "unit")
-protected class FeatureReference_Group extends GroupToken {
+// "." identifier=(ID | "unit")
+protected class NameComponent_Group extends GroupToken {
 	
-	public FeatureReference_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public NameComponent_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.getFeatureReferenceAccess().getGroup();
+		return grammarAccess.getNameComponentAccess().getGroup();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new FeatureReference_NameAssignment_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new NameComponent_IdentifierAssignment_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getFeatureReferenceRule().getType().getClassifier())
+		if(getEObject().eClass() != grammarAccess.getNameComponentRule().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
 	}
@@ -13005,15 +13005,15 @@ protected class FeatureReference_Group extends GroupToken {
 }
 
 // "."
-protected class FeatureReference_FullStopKeyword_0 extends KeywordToken  {
+protected class NameComponent_FullStopKeyword_0 extends KeywordToken  {
 	
-	public FeatureReference_FullStopKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public NameComponent_FullStopKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getFeatureReferenceAccess().getFullStopKeyword_0();
+		return grammarAccess.getNameComponentAccess().getFullStopKeyword_0();
 	}
 
     @Override
@@ -13025,38 +13025,38 @@ protected class FeatureReference_FullStopKeyword_0 extends KeywordToken  {
 
 }
 
-// name=(ID | "unit")
-protected class FeatureReference_NameAssignment_1 extends AssignmentToken  {
+// identifier=(ID | "unit")
+protected class NameComponent_IdentifierAssignment_1 extends AssignmentToken  {
 	
-	public FeatureReference_NameAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public NameComponent_IdentifierAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getFeatureReferenceAccess().getNameAssignment_1();
+		return grammarAccess.getNameComponentAccess().getIdentifierAssignment_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new FeatureReference_FullStopKeyword_0(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new NameComponent_FullStopKeyword_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("name",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("name");
-		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getFeatureReferenceAccess().getNameUnitKeyword_1_0_1(), value, null)) {
+		if((value = eObjectConsumer.getConsumable("identifier",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("identifier");
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getNameComponentAccess().getIdentifierUnitKeyword_1_0_1(), value, null)) {
 			type = AssignmentType.KEYWORD;
-			element = grammarAccess.getFeatureReferenceAccess().getNameUnitKeyword_1_0_1();
+			element = grammarAccess.getNameComponentAccess().getIdentifierUnitKeyword_1_0_1();
 			return obj;
 		}
-		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getFeatureReferenceAccess().getNameIDTerminalRuleCall_1_0_0(), value, null)) {
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getNameComponentAccess().getIdentifierIDTerminalRuleCall_1_0_0(), value, null)) {
 			type = AssignmentType.TERMINAL_RULE_CALL;
-			element = grammarAccess.getFeatureReferenceAccess().getNameIDTerminalRuleCall_1_0_0();
+			element = grammarAccess.getNameComponentAccess().getIdentifierIDTerminalRuleCall_1_0_0();
 			return obj;
 		}
 		return null;
@@ -13065,7 +13065,7 @@ protected class FeatureReference_NameAssignment_1 extends AssignmentToken  {
 }
 
 
-/************ end Rule FeatureReference ****************/
+/************ end Rule NameComponent ****************/
 
 
 /************ begin Rule ArrayElementAccess ****************

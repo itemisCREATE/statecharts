@@ -419,11 +419,11 @@ public class AstSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case AstPackage.FEATURE_REFERENCE:
+      case AstPackage.NAME_COMPONENT:
       {
-        FeatureReference featureReference = (FeatureReference)theEObject;
-        T result = caseFeatureReference(featureReference);
-        if (result == null) result = caseFeatureCallPart(featureReference);
+        NameComponent nameComponent = (NameComponent)theEObject;
+        T result = caseNameComponent(nameComponent);
+        if (result == null) result = caseFeatureCallPart(nameComponent);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -1333,17 +1333,17 @@ public class AstSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Feature Reference</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Name Component</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Feature Reference</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Name Component</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseFeatureReference(FeatureReference object)
+  public T caseNameComponent(NameComponent object)
   {
     return null;
   }

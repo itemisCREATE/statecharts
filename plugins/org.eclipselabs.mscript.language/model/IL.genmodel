@@ -69,8 +69,13 @@
     <genClasses image="false" ecoreClass="IL.ecore#//OperationCall">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference IL.ecore#//OperationCall/arguments"/>
     </genClasses>
-    <genClasses ecoreClass="IL.ecore#//BuiltinFunctionCall">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute IL.ecore#//BuiltinFunctionCall/name"/>
+    <genClasses ecoreClass="IL.ecore#//MethodCall">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute IL.ecore#//MethodCall/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference IL.ecore#//MethodCall/target"/>
+    </genClasses>
+    <genClasses ecoreClass="IL.ecore#//PropertyReference">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute IL.ecore#//PropertyReference/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference IL.ecore#//PropertyReference/target"/>
     </genClasses>
     <genClasses ecoreClass="IL.ecore#//InvalidExpression"/>
   </genPackages>

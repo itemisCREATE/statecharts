@@ -11,25 +11,18 @@
 
 package org.eclipselabs.mscript.language.interpreter;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
-import org.eclipselabs.mscript.language.il.util.BuiltinFunctionDescriptor;
+import org.eclipselabs.mscript.computation.core.value.IValue;
 
 /**
  * @author Andreas Unger
  *
+ * @noextend
+ * @noimplement
  */
-public class BuiltinFunctionDescriptorLookupTable {
+public interface IFeature {
 
-	private Map<String, IFunction> functionDescriptors = new HashMap<String, IFunction>();
-	
-	{
-		functionDescriptors.put(BuiltinFunctionDescriptor.UNIT.getName(), new UnitFunction());
-	}
-	
-	public IFunction getFunction(String name) {
-		return functionDescriptors.get(name);
-	}
+	IValue call(IInterpreterContext context, IValue target, List<IValue> arguments);
 	
 }
