@@ -20,11 +20,12 @@ import org.eclipselabs.mscript.computation.core.value.VectorValue;
  * @author Andreas Unger
  *
  */
-public class SumMethod implements IFeature {
+public class SumFunction implements IFunction {
 
-	public IValue call(IInterpreterContext context, IValue target, List<IValue> arguments) {
-		if (target instanceof VectorValue) {
-			VectorValue vectorValue = (VectorValue) target;
+	public IValue call(IInterpreterContext context, List<IValue> arguments) {
+		IValue argument = arguments.get(0);
+		if (argument instanceof VectorValue) {
+			VectorValue vectorValue = (VectorValue) argument;
 			IValue result = null;
 			for (int i = 0; i < vectorValue.getDataType().getSize(); ++i) {
 				if (result == null) {

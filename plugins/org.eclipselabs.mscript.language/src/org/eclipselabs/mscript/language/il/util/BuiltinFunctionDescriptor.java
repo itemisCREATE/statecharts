@@ -22,7 +22,7 @@ import org.eclipselabs.mscript.typesystem.TypeSystemFactory;
  * @author Andreas Unger
  *
  */
-public enum BuiltinFeatureDescriptor {
+public enum BuiltinFunctionDescriptor {
 	
 	UNIT(
 			"unit",
@@ -50,7 +50,7 @@ public enum BuiltinFeatureDescriptor {
 	private String name;
 	private ISignature signature;
 
-	BuiltinFeatureDescriptor(String name, ISignature signature) {
+	BuiltinFunctionDescriptor(String name, ISignature signature) {
 		this.name = name;
 		this.signature = signature;
 	}
@@ -72,8 +72,8 @@ public enum BuiltinFeatureDescriptor {
 	/**
 	 * 
 	 */
-	public static BuiltinFeatureDescriptor get(String name, DataType targetDataType, List<DataType> inputParameterDataTypes) {
-		for (BuiltinFeatureDescriptor descriptor : values()) {
+	public static BuiltinFunctionDescriptor get(String name, DataType targetDataType, List<DataType> inputParameterDataTypes) {
+		for (BuiltinFunctionDescriptor descriptor : values()) {
 			if (descriptor.name.equals(name) && descriptor.signature.evaluateOutputParameterDataTypes(targetDataType, inputParameterDataTypes) != null) {
 				return descriptor;
 			}

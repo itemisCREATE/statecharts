@@ -14,23 +14,23 @@ package org.eclipselabs.mscript.language.interpreter;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.eclipselabs.mscript.language.il.util.BuiltinFeatureDescriptor;
+import org.eclipselabs.mscript.language.il.util.BuiltinFunctionDescriptor;
 
 /**
  * @author Andreas Unger
  *
  */
-public class BuiltinFeatureDescriptorLookupTable {
+public class BuiltinFunctionLookupTable {
 
-	private Map<String, IFeature> featureDescriptors = new HashMap<String, IFeature>();
+	private Map<String, IFunction> functions = new HashMap<String, IFunction>();
 	
 	{
-		featureDescriptors.put(BuiltinFeatureDescriptor.UNIT.getName(), new UnitProperty());
-		featureDescriptors.put(BuiltinFeatureDescriptor.SUM.getName(), new SumMethod());
+		functions.put(BuiltinFunctionDescriptor.UNIT.getName(), new UnitFunction());
+		functions.put(BuiltinFunctionDescriptor.SUM.getName(), new SumFunction());
 	}
 	
-	public IFeature getFunction(String name) {
-		return featureDescriptors.get(name);
+	public IFunction getFunction(String name) {
+		return functions.get(name);
 	}
 	
 }

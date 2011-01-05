@@ -495,7 +495,7 @@ public class DataTypeAdaptor extends ILSwitch<Boolean> {
 			@Override
 			public DataType caseMethodCall(MethodCall methodCall) {
 				DataType targetDataType = ExpressionAdaptor.this.doSwitch(methodCall.getTarget());
-				DataType dataType = getBuiltinFeatureDataType(methodCall.getName(), targetDataType, Collections.<DataType>emptyList());
+				DataType dataType = getBuiltinFunctionDataType(methodCall.getName(), targetDataType, Collections.<DataType>emptyList());
 				ILUtil.setDataType(methodCall, dataType);
 				return dataType;
 			}
@@ -506,13 +506,13 @@ public class DataTypeAdaptor extends ILSwitch<Boolean> {
 			@Override
 			public DataType casePropertyReference(PropertyReference propertyReference) {
 				DataType targetDataType = ExpressionAdaptor.this.doSwitch(propertyReference.getTarget());
-				DataType dataType = getBuiltinFeatureDataType(propertyReference.getName(), targetDataType, null);
+				DataType dataType = getBuiltinFunctionDataType(propertyReference.getName(), targetDataType, null);
 				ILUtil.setDataType(propertyReference, dataType);
 				return dataType;
 			}
 			
-			private DataType getBuiltinFeatureDataType(String name, DataType targetDataType, List<DataType> inputParameterDataTypes) {
-				BuiltinFeatureDescriptor descriptor = BuiltinFeatureDescriptor.get(name, targetDataType, inputParameterDataTypes);
+			private DataType getBuiltinFunctionDataType(String name, DataType targetDataType, List<DataType> inputParameterDataTypes) {
+				BuiltinFunctionDescriptor descriptor = BuiltinFunctionDescriptor.get(name, targetDataType, inputParameterDataTypes);
 				if (descriptor == null) {
 					return TypeSystemFactory.eINSTANCE.createInvalidDataType();
 				}

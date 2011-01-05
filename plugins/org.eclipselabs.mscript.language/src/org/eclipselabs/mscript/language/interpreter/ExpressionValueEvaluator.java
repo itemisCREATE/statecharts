@@ -11,6 +11,8 @@
 
 package org.eclipselabs.mscript.language.interpreter;
 
+import java.util.Collections;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipselabs.mscript.computation.core.value.ArrayValue;
@@ -465,7 +467,7 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 	
 	private class ILExpressionValueEvaluator extends ILSwitch<IValue> {
 		
-		private BuiltinFeatureDescriptorLookupTable builtinFeatureLookupTable = new BuiltinFeatureDescriptorLookupTable();
+		private BuiltinFunctionLookupTable builtinFunctionLookupTable = new BuiltinFunctionLookupTable();
 		
 		/* (non-Javadoc)
 		 * @see org.eclipselabs.mscript.language.imperativemodel.util.ILSwitch#caseVariableReference(org.eclipselabs.mscript.language.imperativemodel.VariableReference)
@@ -481,9 +483,9 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 		 */
 		@Override
 		public IValue casePropertyReference(PropertyReference propertyReference) {
-			IFeature behavior = builtinFeatureLookupTable.getFunction(propertyReference.getName());
+			IFunction behavior = builtinFunctionLookupTable.getFunction(propertyReference.getName());
 			if (behavior != null) {
-				return behavior.call(context, ExpressionValueEvaluator.this.doSwitch(propertyReference.getTarget()), null);
+				return behavior.call(context, Collections.singletonList(ExpressionValueEvaluator.this.doSwitch(propertyReference.getTarget())));
 			}
 			return super.casePropertyReference(propertyReference);
 		}
@@ -493,9 +495,9 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 		 */
 		@Override
 		public IValue caseMethodCall(MethodCall methodCall) {
-			IFeature behavior = builtinFeatureLookupTable.getFunction(methodCall.getName());
+			IFunction behavior = builtinFunctionLookupTable.getFunction(methodCall.getName());
 			if (behavior != null) {
-				return behavior.call(context, ExpressionValueEvaluator.this.doSwitch(methodCall.getTarget()), null);
+				return behavior.call(context, Collections.singletonList(ExpressionValueEvaluator.this.doSwitch(methodCall.getTarget())));
 			}
 			return super.caseMethodCall(methodCall);
 		}

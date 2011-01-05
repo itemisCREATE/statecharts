@@ -13,23 +13,16 @@ package org.eclipselabs.mscript.language.interpreter;
 
 import java.util.List;
 
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipselabs.mscript.computation.core.value.IValue;
-import org.eclipselabs.mscript.computation.core.value.UnitValue;
-import org.eclipselabs.mscript.typesystem.NumericType;
 
 /**
  * @author Andreas Unger
  *
+ * @noextend
+ * @noimplement
  */
-public class UnitProperty implements IFeature {
+public interface IFunction {
 
-	public IValue call(IInterpreterContext context, IValue target, List<IValue> arguments) {
-		if (target.getDataType() instanceof NumericType) {
-			NumericType numericType = (NumericType) target.getDataType();
-			return new UnitValue(context.getComputationContext(), EcoreUtil.copy(numericType.getUnit()));
-		}
-		return null;
-	}
+	IValue call(IInterpreterContext context, List<IValue> arguments);
 	
 }
