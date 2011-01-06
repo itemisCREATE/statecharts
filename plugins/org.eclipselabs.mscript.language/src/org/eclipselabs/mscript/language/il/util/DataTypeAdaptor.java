@@ -380,7 +380,18 @@ public class DataTypeAdaptor extends ILSwitch<Boolean> {
 		 */
 		@Override
 		public DataType caseUnaryExpression(UnaryExpression unaryExpression) {
-			DataType dataType = doSwitch(unaryExpression).evaluate(OperatorKind.UNARY_MINUS, null);
+			OperatorKind operatorKind;
+			switch (unaryExpression.getOperator()) {
+			case MINUS:
+				operatorKind = OperatorKind.UNARY_MINUS;
+				break;
+			case LOGICAL_NOT:
+				operatorKind = OperatorKind.LOGICAL_NOT;
+				break;
+			default:
+				throw new IllegalArgumentException();
+			}
+			DataType dataType = doSwitch(unaryExpression.getOperand()).evaluate(operatorKind, null);
 			ILUtil.setDataType(unaryExpression, dataType);
 			return dataType;
 		}
