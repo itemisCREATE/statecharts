@@ -11,10 +11,13 @@
 
 package org.eclipselabs.mscript.codegen.c.util;
 
+import java.io.PrintWriter;
+
 import org.eclipselabs.mscript.codegen.c.IGeneratorContext;
 import org.eclipselabs.mscript.computation.computationmodel.FixedPointFormat;
 import org.eclipselabs.mscript.computation.computationmodel.FloatingPointFormat;
 import org.eclipselabs.mscript.computation.computationmodel.NumberFormat;
+import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.typesystem.ArrayDimension;
 import org.eclipselabs.mscript.typesystem.ArrayType;
 import org.eclipselabs.mscript.typesystem.BooleanType;
@@ -86,4 +89,38 @@ public class GeneratorUtil {
 		throw new IllegalArgumentException();
 	}
 	
+	public static void writeLiteral(IGeneratorContext context, DataType dataType, double value) {
+		PrintWriter writer = new PrintWriter(context.getWriter());
+		NumberFormat numberFormat = context.getComputationModel().getNumberFormat(dataType);
+		writer.printf("(%s) ", GeneratorUtil.getCDataType(context, dataType));
+		if (numberFormat instanceof FixedPointFormat) {
+			FixedPointFormat fixedPointFormat = (FixedPointFormat) numberFormat;
+			writer.print(Math.round(value * Math.pow(2, fixedPointFormat.getFractionLength())));
+		} else {
+			writer.print(value);
+		}
+	}
+
+	public static void writeLiteral(IGeneratorContext context, DataType dataType, long value) {
+		PrintWriter writer = new PrintWriter(context.getWriter());
+		NumberFormat numberFormat = context.getComputationModel().getNumberFormat(dataType);
+		writer.printf("(%s) ", GeneratorUtil.getCDataType(context, dataType));
+		if (numberFormat instanceof FixedPointFormat) {
+			FixedPointFormat fixedPointFormat = (FixedPointFormat) numberFormat;
+			value <<= fixedPointFormat.getFractionLength();
+		}
+		writer.print(value);
+	}
+
+	public static void castNumericType(IGeneratorContext context, NumberFormat numberFormat, Expression expression) {
+		if (numberFormat instanceof FloatingPointFormat) {
+			new CastToFloatingPointHelper(context, expression, (FloatingPointFormat) numberFormat).cast();
+		} else if (numberFormat instanceof FixedPointFormat) {
+			FixedPointFormat fixedPointFormat = (FixedPointFormat) numberFormat;
+			new CastToFixedPointHelper(context, expression, fixedPointFormat.getWordSize(), fixedPointFormat.getFractionLength()).cast();
+		} else {
+			throw new IllegalArgumentException();
+		}
+	}
+
 }
