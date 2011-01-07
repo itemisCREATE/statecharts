@@ -14,9 +14,9 @@ package org.eclipselabs.mscript.language.interpreter;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.eclipselabs.mscript.computation.core.IComputationContext;
-import org.eclipselabs.mscript.computation.core.value.AnyValue;
-import org.eclipselabs.mscript.computation.core.value.IValue;
+import org.eclipselabs.mscript.computation.engine.IComputationContext;
+import org.eclipselabs.mscript.computation.engine.value.AnyValue;
+import org.eclipselabs.mscript.computation.engine.value.IValue;
 import org.eclipselabs.mscript.language.il.ILFunctionDefinition;
 import org.eclipselabs.mscript.language.il.InputVariableDeclaration;
 import org.eclipselabs.mscript.language.il.TemplateVariableDeclaration;

@@ -16,7 +16,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.eclipselabs.mscript.computation.core.value.ValueTransformer;
+import org.eclipselabs.mscript.computation.engine.value.ValueTransformer;
 import org.eclipselabs.mscript.language.il.ILFunctionDefinition;
 import org.eclipselabs.mscript.language.il.InputVariableDeclaration;
 import org.eclipselabs.mscript.language.il.InstanceVariableDeclaration;

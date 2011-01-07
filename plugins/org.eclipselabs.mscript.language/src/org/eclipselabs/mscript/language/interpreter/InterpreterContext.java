@@ -12,7 +12,7 @@
 package org.eclipselabs.mscript.language.interpreter;
 
 import org.eclipselabs.mscript.common.internal.util.Scope;
-import org.eclipselabs.mscript.computation.core.IComputationContext;
+import org.eclipselabs.mscript.computation.engine.IComputationContext;
 import org.eclipselabs.mscript.language.il.VariableDeclaration;
 
 /**

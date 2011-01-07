@@ -15,15 +15,15 @@ import java.util.Collections;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipselabs.mscript.computation.core.value.ArrayValue;
-import org.eclipselabs.mscript.computation.core.value.IBooleanValue;
-import org.eclipselabs.mscript.computation.core.value.INumericValue;
-import org.eclipselabs.mscript.computation.core.value.IValue;
-import org.eclipselabs.mscript.computation.core.value.InvalidValue;
-import org.eclipselabs.mscript.computation.core.value.StringValue;
-import org.eclipselabs.mscript.computation.core.value.UnitValue;
-import org.eclipselabs.mscript.computation.core.value.ValueConstructor;
-import org.eclipselabs.mscript.computation.core.value.VectorValue;
+import org.eclipselabs.mscript.computation.engine.value.ArrayValue;
+import org.eclipselabs.mscript.computation.engine.value.IBooleanValue;
+import org.eclipselabs.mscript.computation.engine.value.INumericValue;
+import org.eclipselabs.mscript.computation.engine.value.IValue;
+import org.eclipselabs.mscript.computation.engine.value.InvalidValue;
+import org.eclipselabs.mscript.computation.engine.value.StringValue;
+import org.eclipselabs.mscript.computation.engine.value.UnitValue;
+import org.eclipselabs.mscript.computation.engine.value.ValueConstructor;
+import org.eclipselabs.mscript.computation.engine.value.VectorValue;
 import org.eclipselabs.mscript.language.ast.AdditiveExpression;
 import org.eclipselabs.mscript.language.ast.ArrayConstructionOperator;
 import org.eclipselabs.mscript.language.ast.BooleanKind;
@@ -88,16 +88,10 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 		return result;
 	}
 	
-	/* (non-Javadoc)
-	 * @see org.eclipselabs.damos.evaluation.IExpressionEvaluatorStrategy#add(java.lang.Object, java.lang.Object)
-	 */
 	public IValue add(IValue addend1, IValue addend2) {
 		return addend1.add(addend2);
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipselabs.damos.evaluation.IExpressionEvaluatorStrategy#subtract(java.lang.Object, java.lang.Object)
-	 */
 	public IValue subtract(IValue minuend, IValue subtrahend) {
 		return minuend.subtract(subtrahend);
 	}
@@ -114,30 +108,18 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 		return result;
 	}
 	
-	/* (non-Javadoc)
-	 * @see org.eclipselabs.damos.evaluation.IExpressionEvaluatorStrategy#multiply(java.lang.Object, java.lang.Object)
-	 */
 	public IValue multiply(IValue factor1, IValue factor2) {
 		return factor1.multiply(factor2);
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipselabs.damos.evaluation.IExpressionEvaluatorStrategy#divide(java.lang.Object, java.lang.Object)
-	 */
 	public IValue divide(IValue dividend, IValue divisor) {
 		return dividend.divide(divisor);
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipselabs.damos.evaluation.IExpressionEvaluatorStrategy#elementWiseMultiply(java.lang.Object, java.lang.Object)
-	 */
 	public IValue elementWiseMultiply(IValue factor1, IValue factor2) {
 		return factor1.elementWiseMultiply(factor2);
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipselabs.damos.evaluation.IExpressionEvaluatorStrategy#elementWiseDivide(java.lang.Object, java.lang.Object)
-	 */
 	public IValue elementWiseDivide(IValue dividend, IValue divisor) {
 		return dividend.elementWiseDivide(divisor);
 	}
@@ -352,9 +334,6 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 		return TypeSystemUtil.createArrayType(elementType, elements.length);
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipselabs.damos.evaluation.IExpressionEvaluatorStrategy#processMatrix(org.eclipselabs.damos.evaluation.IEvaluationContext, T[][], int, int)
-	 */
 	public IValue processMatrix(IValue[][] matrix, int rowSize, int columnSize) {
 		return InvalidValue.SINGLETON;
 	}

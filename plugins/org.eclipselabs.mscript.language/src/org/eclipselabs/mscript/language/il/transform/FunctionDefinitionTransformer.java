@@ -24,7 +24,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipselabs.mscript.computation.core.value.IValue;
+import org.eclipselabs.mscript.computation.engine.value.IValue;
 import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
 import org.eclipselabs.mscript.language.ast.StateVariableDeclaration;
 import org.eclipselabs.mscript.language.functionmodel.EquationDescriptor;

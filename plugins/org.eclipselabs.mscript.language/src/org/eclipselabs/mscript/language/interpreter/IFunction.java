@@ -13,7 +13,7 @@ package org.eclipselabs.mscript.language.interpreter;
 
 import java.util.List;
 
-import org.eclipselabs.mscript.computation.core.value.IValue;
+import org.eclipselabs.mscript.computation.engine.value.IValue;
 
 /**
  * @author Andreas Unger

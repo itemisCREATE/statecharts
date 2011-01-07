@@ -13,7 +13,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipselabs.mscript.codegen.c.ide.core.CodegenCIDECorePlugin;
-import org.eclipselabs.mscript.computation.core.ComputationContext;
+import org.eclipselabs.mscript.computation.engine.ComputationContext;
 import org.eclipselabs.mscript.ide.core.launch.AbstractMscriptLaunchConfigurationDelegate;
 import org.eclipselabs.mscript.language.interpreter.InterpreterContext;
 import org.eclipselabs.mscript.typesystem.DataType;

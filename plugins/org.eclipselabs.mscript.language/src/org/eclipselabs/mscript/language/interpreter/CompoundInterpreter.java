@@ -11,10 +11,10 @@
 
 package org.eclipselabs.mscript.language.interpreter;
 
-import org.eclipselabs.mscript.computation.core.value.IArrayValue;
-import org.eclipselabs.mscript.computation.core.value.IBooleanValue;
-import org.eclipselabs.mscript.computation.core.value.IValue;
-import org.eclipselabs.mscript.computation.core.value.UninitializedValue;
+import org.eclipselabs.mscript.computation.engine.value.IArrayValue;
+import org.eclipselabs.mscript.computation.engine.value.IBooleanValue;
+import org.eclipselabs.mscript.computation.engine.value.IValue;
+import org.eclipselabs.mscript.computation.engine.value.UninitializedValue;
 import org.eclipselabs.mscript.language.il.Assignment;
 import org.eclipselabs.mscript.language.il.Compound;
 import org.eclipselabs.mscript.language.il.ForeachStatement;

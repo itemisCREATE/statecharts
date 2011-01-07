@@ -11,7 +11,7 @@
 
 package org.eclipselabs.mscript.language.interpreter;
 
-import org.eclipselabs.mscript.computation.core.value.IValue;
+import org.eclipselabs.mscript.computation.engine.value.IValue;
 import org.eclipselabs.mscript.language.il.VariableDeclaration;
 
 /**

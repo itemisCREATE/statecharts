@@ -3,9 +3,9 @@ package org.eclipselabs.mscript.codegen.c;
 import java.io.PrintWriter;
 
 import org.eclipselabs.mscript.codegen.c.util.GeneratorUtil;
-import org.eclipselabs.mscript.computation.core.value.IBooleanValue;
-import org.eclipselabs.mscript.computation.core.value.ISimpleNumericValue;
-import org.eclipselabs.mscript.computation.core.value.IValue;
+import org.eclipselabs.mscript.computation.engine.value.IBooleanValue;
+import org.eclipselabs.mscript.computation.engine.value.ISimpleNumericValue;
+import org.eclipselabs.mscript.computation.engine.value.IValue;
 import org.eclipselabs.mscript.language.il.InputVariableDeclaration;
 import org.eclipselabs.mscript.language.il.InstanceVariableDeclaration;
 import org.eclipselabs.mscript.language.il.LocalVariableDeclaration;

@@ -977,7 +977,7 @@ public interface ILPackage extends EPackage {
 	 * The meta object id for the '<em>IValue</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipselabs.mscript.computation.core.value.IValue
+	 * @see org.eclipselabs.mscript.computation.engine.value.IValue
 	 * @see org.eclipselabs.mscript.language.il.impl.ILPackageImpl#getIValue()
 	 * @generated
 	 */
@@ -1557,12 +1557,12 @@ public interface ILPackage extends EPackage {
 	EClass getInvalidExpression();
 
 	/**
-	 * Returns the meta object for data type '{@link org.eclipselabs.mscript.computation.core.value.IValue <em>IValue</em>}'.
+	 * Returns the meta object for data type '{@link org.eclipselabs.mscript.computation.engine.value.IValue <em>IValue</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for data type '<em>IValue</em>'.
-	 * @see org.eclipselabs.mscript.computation.core.value.IValue
-	 * @model instanceClass="org.eclipselabs.mscript.computation.core.value.IValue"
+	 * @see org.eclipselabs.mscript.computation.engine.value.IValue
+	 * @model instanceClass="org.eclipselabs.mscript.computation.engine.value.IValue"
 	 * @generated
 	 */
 	EDataType getIValue();
@@ -2067,7 +2067,7 @@ public interface ILPackage extends EPackage {
 		 * The meta object literal for the '<em>IValue</em>' data type.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipselabs.mscript.computation.core.value.IValue
+		 * @see org.eclipselabs.mscript.computation.engine.value.IValue
 		 * @see org.eclipselabs.mscript.language.il.impl.ILPackageImpl#getIValue()
 		 * @generated
 		 */

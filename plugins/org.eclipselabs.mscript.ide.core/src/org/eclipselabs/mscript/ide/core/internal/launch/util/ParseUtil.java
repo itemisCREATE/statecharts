@@ -17,7 +17,7 @@ import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.xtext.parser.IParseResult;
-import org.eclipselabs.mscript.computation.core.value.IValue;
+import org.eclipselabs.mscript.computation.engine.value.IValue;
 import org.eclipselabs.mscript.ide.core.IDECorePlugin;
 import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.ast.ExpressionList;
