@@ -3,7 +3,7 @@ package org.eclipselabs.mscript.computation.engine;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
-public class ComputationPlugin implements BundleActivator {
+public class ComputationEnginePlugin implements BundleActivator {
 
 	private static BundleContext context;
 
@@ -16,7 +16,7 @@ public class ComputationPlugin implements BundleActivator {
 	 * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
 	 */
 	public void start(BundleContext bundleContext) throws Exception {
-		ComputationPlugin.context = bundleContext;
+		ComputationEnginePlugin.context = bundleContext;
 	}
 
 	/*
@@ -24,7 +24,7 @@ public class ComputationPlugin implements BundleActivator {
 	 * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
 	 */
 	public void stop(BundleContext bundleContext) throws Exception {
-		ComputationPlugin.context = null;
+		ComputationEnginePlugin.context = null;
 	}
 
 }

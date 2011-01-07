@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Mscript Computation Engine
 Bundle-SymbolicName: org.eclipselabs.mscript.computation.engine;singleton:=true
 Bundle-Version: 0.1.0.qualifier
-Bundle-Activator: org.eclipselabs.mscript.computation.engine.ComputationPlugin
+Bundle-Activator: org.eclipselabs.mscript.computation.engine.ComputationEnginePlugin
 Bundle-Vendor: Mscript Project
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipselabs.mscript.typesystem;bundle-version="0.1.0";visibility:=reexport,
