@@ -61,4 +61,8 @@ public class VectorValue extends AbstractExplicitDataTypeValue implements IArray
 		return elements[index[0]];
 	}
 	
+	public void set(int index, INumericValue value) {
+		elements[index] = value;
+	}
+	
 }
