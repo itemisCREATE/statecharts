@@ -69,11 +69,16 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 	
 	private ILExpressionValueEvaluator ilExpressionValueEvaluator = new ILExpressionValueEvaluator();
 	
+	private DataTypeSpecifierEvaluator dataTypeSpecifierEvaluator;
+	
+	private UnitExpressionHelper unitExpressionHelper = new UnitExpressionHelper();
+	
 	/**
 	 * 
 	 */
 	public ExpressionValueEvaluator(IInterpreterContext context) {
 		this.context = context;
+		dataTypeSpecifierEvaluator = new DataTypeSpecifierEvaluator(context);
 	}
 		
 	/* (non-Javadoc)
@@ -239,7 +244,7 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 	@Override
 	public IValue caseTypeTestExpression(TypeTestExpression typeTestExpression) {
 		IValue value = doSwitch(typeTestExpression.getExpression());
-		DataType dataType = new DataTypeSpecifierEvaluator(context).doSwitch(typeTestExpression.getType());
+		DataType dataType = dataTypeSpecifierEvaluator.doSwitch(typeTestExpression.getType());
 		return valueConstructor.createBooleanValue(context.getComputationContext(), dataType.isAssignableFrom(value.getDataType()));
 	}
 
@@ -372,7 +377,7 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 		try {
 			Unit unit = null;
 			if (unitConstructionOperator.getUnit().getNumerator() != null) {
-				unit = new UnitExpressionHelper().evaluate(unitConstructionOperator.getUnit());
+				unit = unitExpressionHelper.evaluate(unitConstructionOperator.getUnit());
 			}
 			return new UnitValue(context.getComputationContext(), unit);
 		} catch (InvalidUnitExpressionOperandException e) {
@@ -388,7 +393,7 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 		RealType realType = TypeSystemFactory.eINSTANCE.createRealType();
 		try {
 			if (realLiteral.getUnit() != null) {
-				realType.setUnit(new UnitExpressionHelper().evaluate(realLiteral.getUnit()));
+				realType.setUnit(unitExpressionHelper.evaluate(realLiteral.getUnit()));
 			} else {
 				realType.setUnit(TypeSystemUtil.createUnit());
 			}
@@ -406,7 +411,7 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 		IntegerType integerType = TypeSystemFactory.eINSTANCE.createIntegerType();
 		try {
 			if (integerLiteral.getUnit() != null) {
-				integerType.setUnit(new UnitExpressionHelper().evaluate(integerLiteral.getUnit()));
+				integerType.setUnit(unitExpressionHelper.evaluate(integerLiteral.getUnit()));
 			} else {
 				integerType.setUnit(TypeSystemUtil.createUnit());
 			}
