@@ -17,6 +17,16 @@ package org.eclipselabs.mscript.computation.engine.value;
  */
 public interface IArrayValue {
 
-	IValue get(int... index);
+	IValue get(int index);
 	
+	IValue get(int rowIndex, int columnIndex);
+
+	IValue get(int... indices);
+	
+	void set(int index, IValue value);
+
+	void set(int rowIndex, int columnIndex, IValue value);
+	
+	void set(int[] indices, IValue value);
+
 }

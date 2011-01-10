@@ -54,15 +54,43 @@ public class VectorValue extends AbstractExplicitDataTypeValue implements IArray
 		return null;
 	}
 	
-	public INumericValue get(int... index) {
-		if (index.length != 1) {
-			throw new IllegalArgumentException("Index array length must be 1");
-		}
-		return elements[index[0]];
+	public INumericValue get(int index) {
+		return elements[index];
+	}
+
+	public IValue get(int rowIndex, int columnIndex) {
+		throw new UnsupportedOperationException();
 	}
 	
-	public void set(int index, INumericValue value) {
-		elements[index] = value;
+	public INumericValue get(int... indices) {
+		if (indices.length != 1) {
+			throw new IllegalArgumentException("Index array length must be 1");
+		}
+		return elements[indices[0]];
+	}
+	
+	public void set(int index, IValue value) {
+		if (!(value instanceof INumericValue)) {
+			throw new IllegalArgumentException("Value must be numeric");
+		}
+		elements[index] = (INumericValue) value;
+	}
+	
+	public void set(int rowIndex, int columnIndex, IValue value) {
+		throw new UnsupportedOperationException();
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.computation.engine.value.IArrayValue#set(int[], org.eclipselabs.mscript.computation.engine.value.IValue)
+	 */
+	public void set(int[] indices, IValue value) {
+		if (indices.length != 1) {
+			throw new IllegalArgumentException("Index array length must be 1");
+		}
+		if (!(value instanceof INumericValue)) {
+			throw new IllegalArgumentException("Value must be numeric");
+		}
+		elements[indices[0]] = (INumericValue) value;
 	}
 	
 }

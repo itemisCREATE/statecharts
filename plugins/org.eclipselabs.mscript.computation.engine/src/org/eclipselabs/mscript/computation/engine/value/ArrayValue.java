@@ -42,11 +42,34 @@ public class ArrayValue extends AbstractExplicitDataTypeValue implements IArrayV
 		}
 	}
 	
-	public IValue get(int... index) {
-		if (index.length != 1) {
+	public IValue get(int index) {
+		return ((IValue[]) elements)[index];
+	}
+
+	public IValue get(int rowIndex, int columnIndex) {
+		throw new UnsupportedOperationException();
+	}
+
+	public IValue get(int... indices) {
+		if (indices.length != 1) {
 			throw new IllegalArgumentException("Index array length must be 1");
 		}
-		return ((IValue[]) elements)[index[0]];
+		return ((IValue[]) elements)[indices[0]];
+	}
+
+	public void set(int index, IValue value) {
+		((IValue[]) elements)[index] = value;
+	}
+
+	public void set(int rowIndex, int columnIndex, IValue value) {
+		throw new UnsupportedOperationException();
+	}
+
+	public void set(int[] indices, IValue value) {
+		if (indices.length != 1) {
+			throw new IllegalArgumentException("Index array length must be 1");
+		}
+		((IValue[]) elements)[indices[0]] = value;
 	}
 
 }
