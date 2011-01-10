@@ -22,6 +22,8 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipselabs.mscript.language.ast.AdditiveExpression;
 import org.eclipselabs.mscript.language.ast.AdditiveExpressionPart;
+import org.eclipselabs.mscript.language.ast.ArrayConstructionIterationClause;
+import org.eclipselabs.mscript.language.ast.ArrayConstructionOperator;
 import org.eclipselabs.mscript.language.ast.ArrayElementAccess;
 import org.eclipselabs.mscript.language.ast.AstFactory;
 import org.eclipselabs.mscript.language.ast.BooleanLiteral;
@@ -452,6 +454,25 @@ public class ExpressionTransformer extends AstSwitch<Expression> {
 		transformedExpression.setOperator(unaryExpression.getOperator());
 		Expression expression = doSwitch(unaryExpression.getOperand());
 		transformedExpression.setOperand(expression);
+		return transformedExpression;
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseArrayConstructionOperator(org.eclipselabs.mscript.language.ast.ArrayConstructionOperator)
+	 */
+	@Override
+	public Expression caseArrayConstructionOperator(ArrayConstructionOperator arrayConstructionOperator) {
+		ArrayConstructionOperator transformedExpression = AstFactory.eINSTANCE.createArrayConstructionOperator();
+		for (Expression expression : arrayConstructionOperator.getExpressions()) {
+			transformedExpression.getExpressions().add(doSwitch(expression));
+		}
+		for (ArrayConstructionIterationClause iterationClause : arrayConstructionOperator.getIterationClauses()) {
+			Expression transformedCollectionExpression = doSwitch(iterationClause.getCollectionExpression());
+			ArrayConstructionIterationClause transformedIterationClause = AstFactory.eINSTANCE.createArrayConstructionIterationClause();
+			transformedIterationClause.setVariableName(iterationClause.getVariableName());
+			transformedIterationClause.setCollectionExpression(transformedCollectionExpression);
+			transformedExpression.getIterationClauses().add(transformedIterationClause);
+		}
 		return transformedExpression;
 	}
 	

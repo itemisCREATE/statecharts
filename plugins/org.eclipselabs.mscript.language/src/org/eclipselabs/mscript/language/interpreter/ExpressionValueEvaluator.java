@@ -297,6 +297,8 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 				} else {
 					elements = new IValue[size];
 				}
+			} else if (elements instanceof INumericValue[] && !(value instanceof INumericValue)) {
+				return InvalidValue.SINGLETON;
 			}
 			elements[i] = value;
 			++i;

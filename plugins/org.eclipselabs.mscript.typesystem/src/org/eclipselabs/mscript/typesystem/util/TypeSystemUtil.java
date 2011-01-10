@@ -19,6 +19,7 @@ import org.eclipselabs.mscript.typesystem.ArrayDimension;
 import org.eclipselabs.mscript.typesystem.ArrayType;
 import org.eclipselabs.mscript.typesystem.DataType;
 import org.eclipselabs.mscript.typesystem.NumericType;
+import org.eclipselabs.mscript.typesystem.TensorType;
 import org.eclipselabs.mscript.typesystem.TypeSystemFactory;
 import org.eclipselabs.mscript.typesystem.Unit;
 import org.eclipselabs.mscript.typesystem.UnitFactor;
@@ -104,5 +105,13 @@ public class TypeSystemUtil {
 		}
 		return null;
 	}
-				
+	
+	public static boolean isVector(DataType dataType) {
+		if (dataType instanceof TensorType) {
+			TensorType tensorType = (TensorType) dataType;
+			return tensorType.isVector();
+		}
+		return false;
+	}
+	
 }
