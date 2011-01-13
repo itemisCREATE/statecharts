@@ -1215,10 +1215,7 @@
     <alternatives xsi:type="xtext:Group">
       <elements xsi:type="xtext:Keyword" value="."/>
       <elements xsi:type="xtext:Assignment" feature="identifier" operator="=">
-        <terminal xsi:type="xtext:Alternatives">
-          <elements xsi:type="xtext:RuleCall" rule="//@rules.85"/>
-          <elements xsi:type="xtext:Keyword" value="unit"/>
-        </terminal>
+        <terminal xsi:type="xtext:RuleCall" rule="//@rules.85"/>
       </elements>
     </alternatives>
   </rules>
@@ -1417,7 +1414,7 @@
       <classifier xsi:type="ecore:EClass" href="http://www.eclipselabs.org/mscript/AST/1.0.0#//UnitConstructionOperator"/>
     </type>
     <alternatives xsi:type="xtext:Group">
-      <elements xsi:type="xtext:Keyword" value="unit"/>
+      <elements xsi:type="xtext:Keyword" value="$"/>
       <elements xsi:type="xtext:Keyword" value="("/>
       <elements xsi:type="xtext:Assignment" feature="unit" operator="=">
         <terminal xsi:type="xtext:RuleCall" rule="//@rules.80"/>

@@ -2428,31 +2428,23 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cFullStopKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cIdentifierAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final Alternatives cIdentifierAlternatives_1_0 = (Alternatives)cIdentifierAssignment_1.eContents().get(0);
-		private final RuleCall cIdentifierIDTerminalRuleCall_1_0_0 = (RuleCall)cIdentifierAlternatives_1_0.eContents().get(0);
-		private final Keyword cIdentifierUnitKeyword_1_0_1 = (Keyword)cIdentifierAlternatives_1_0.eContents().get(1);
+		private final RuleCall cIdentifierIDTerminalRuleCall_1_0 = (RuleCall)cIdentifierAssignment_1.eContents().get(0);
 		
 		//NameComponent:
-		//	"." identifier=(ID | "unit");
+		//	"." identifier=ID;
 		public ParserRule getRule() { return rule; }
 
-		//"." identifier=(ID | "unit")
+		//"." identifier=ID
 		public Group getGroup() { return cGroup; }
 
 		//"."
 		public Keyword getFullStopKeyword_0() { return cFullStopKeyword_0; }
 
-		//identifier=(ID | "unit")
+		//identifier=ID
 		public Assignment getIdentifierAssignment_1() { return cIdentifierAssignment_1; }
 
-		//ID | "unit"
-		public Alternatives getIdentifierAlternatives_1_0() { return cIdentifierAlternatives_1_0; }
-
 		//ID
-		public RuleCall getIdentifierIDTerminalRuleCall_1_0_0() { return cIdentifierIDTerminalRuleCall_1_0_0; }
-
-		//"unit"
-		public Keyword getIdentifierUnitKeyword_1_0_1() { return cIdentifierUnitKeyword_1_0_1; }
+		public RuleCall getIdentifierIDTerminalRuleCall_1_0() { return cIdentifierIDTerminalRuleCall_1_0; }
 	}
 
 	public class ArrayElementAccessElements extends AbstractParserRuleElementFinder {
@@ -2911,21 +2903,21 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	public class UnitConstructionOperatorElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "UnitConstructionOperator");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cUnitKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cDollarSignKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Keyword cLeftParenthesisKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cUnitAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cUnitUnitExpressionParserRuleCall_2_0 = (RuleCall)cUnitAssignment_2.eContents().get(0);
 		private final Keyword cRightParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//UnitConstructionOperator:
-		//	"unit" "(" unit=UnitExpression ")";
+		//	"$" "(" unit=UnitExpression ")";
 		public ParserRule getRule() { return rule; }
 
-		//"unit" "(" unit=UnitExpression ")"
+		//"$" "(" unit=UnitExpression ")"
 		public Group getGroup() { return cGroup; }
 
-		//"unit"
-		public Keyword getUnitKeyword_0() { return cUnitKeyword_0; }
+		//"$"
+		public Keyword getDollarSignKeyword_0() { return cDollarSignKeyword_0; }
 
 		//"("
 		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
@@ -4344,7 +4336,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//NameComponent:
-	//	"." identifier=(ID | "unit");
+	//	"." identifier=ID;
 	public NameComponentElements getNameComponentAccess() {
 		return (pNameComponent != null) ? pNameComponent : (pNameComponent = new NameComponentElements());
 	}
@@ -4456,7 +4448,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//UnitConstructionOperator:
-	//	"unit" "(" unit=UnitExpression ")";
+	//	"$" "(" unit=UnitExpression ")";
 	public UnitConstructionOperatorElements getUnitConstructionOperatorAccess() {
 		return (pUnitConstructionOperator != null) ? pUnitConstructionOperator : (pUnitConstructionOperator = new UnitConstructionOperatorElements());
 	}

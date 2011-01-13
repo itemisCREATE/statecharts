@@ -53,7 +53,6 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getNumericLiteralAccess().getAlternatives(), "rule__NumericLiteral__Alternatives");
 					put(grammarAccess.getFeatureCallAccess().getAlternatives(), "rule__FeatureCall__Alternatives");
 					put(grammarAccess.getFeatureCallPartAccess().getAlternatives(), "rule__FeatureCallPart__Alternatives");
-					put(grammarAccess.getNameComponentAccess().getIdentifierAlternatives_1_0(), "rule__NameComponent__IdentifierAlternatives_1_0");
 					put(grammarAccess.getArraySubscriptAccess().getAlternatives(), "rule__ArraySubscript__Alternatives");
 					put(grammarAccess.getArrayConstructionOperatorAccess().getAlternatives_2(), "rule__ArrayConstructionOperator__Alternatives_2");
 					put(grammarAccess.getUnitExpressionNumeratorAccess().getAlternatives(), "rule__UnitExpressionNumerator__Alternatives");

@@ -5009,10 +5009,9 @@ ruleNameComponent returns [EObject current=null]
     }
 (
 (
-(
-		lv_identifier_1_1=RULE_ID
+		lv_identifier_1_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getNameComponentAccess().getIdentifierIDTerminalRuleCall_1_0_0(), "identifier"); 
+			createLeafNode(grammarAccess.getNameComponentAccess().getIdentifierIDTerminalRuleCall_1_0(), "identifier"); 
 		}
 		{
 	        if ($current==null) {
@@ -5023,33 +5022,13 @@ ruleNameComponent returns [EObject current=null]
 	       		set(
 	       			$current, 
 	       			"identifier",
-	        		lv_identifier_1_1, 
+	        		lv_identifier_1_0, 
 	        		"ID", 
 	        		lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	    }
-
-    |		lv_identifier_1_2=	'unit' 
-    {
-        createLeafNode(grammarAccess.getNameComponentAccess().getIdentifierUnitKeyword_1_0_1(), "identifier"); 
-    }
- 
-	    {
-	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getNameComponentRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
-	        }
-	        
-	        try {
-	       		set($current, "identifier", lv_identifier_1_2, null, lastConsumedNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	    }
-
-)
 
 )
 ))
@@ -5983,9 +5962,9 @@ ruleUnitConstructionOperator returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'unit' 
+(	'$' 
     {
-        createLeafNode(grammarAccess.getUnitConstructionOperatorAccess().getUnitKeyword_0(), null); 
+        createLeafNode(grammarAccess.getUnitConstructionOperatorAccess().getDollarSignKeyword_0(), null); 
     }
 	'(' 
     {

@@ -12971,11 +12971,11 @@ protected class FeatureCallPart_IterationCallParserRuleCall_3 extends RuleCallTo
 /************ begin Rule NameComponent ****************
  *
  * NameComponent:
- * 	"." identifier=(ID | "unit");
+ * 	"." identifier=ID;
  *
  **/
 
-// "." identifier=(ID | "unit")
+// "." identifier=ID
 protected class NameComponent_Group extends GroupToken {
 	
 	public NameComponent_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -13025,7 +13025,7 @@ protected class NameComponent_FullStopKeyword_0 extends KeywordToken  {
 
 }
 
-// identifier=(ID | "unit")
+// identifier=ID
 protected class NameComponent_IdentifierAssignment_1 extends AssignmentToken  {
 	
 	public NameComponent_IdentifierAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -13049,14 +13049,9 @@ protected class NameComponent_IdentifierAssignment_1 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("identifier",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("identifier");
-		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getNameComponentAccess().getIdentifierUnitKeyword_1_0_1(), value, null)) {
-			type = AssignmentType.KEYWORD;
-			element = grammarAccess.getNameComponentAccess().getIdentifierUnitKeyword_1_0_1();
-			return obj;
-		}
-		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getNameComponentAccess().getIdentifierIDTerminalRuleCall_1_0_0(), value, null)) {
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getNameComponentAccess().getIdentifierIDTerminalRuleCall_1_0(), value, null)) {
 			type = AssignmentType.TERMINAL_RULE_CALL;
-			element = grammarAccess.getNameComponentAccess().getIdentifierIDTerminalRuleCall_1_0_0();
+			element = grammarAccess.getNameComponentAccess().getIdentifierIDTerminalRuleCall_1_0();
 			return obj;
 		}
 		return null;
@@ -15285,11 +15280,11 @@ protected class ExpressionList_ExpressionsAssignment_1_1 extends AssignmentToken
 /************ begin Rule UnitConstructionOperator ****************
  *
  * UnitConstructionOperator:
- * 	"unit" "(" unit=UnitExpression ")";
+ * 	"$" "(" unit=UnitExpression ")";
  *
  **/
 
-// "unit" "(" unit=UnitExpression ")"
+// "$" "(" unit=UnitExpression ")"
 protected class UnitConstructionOperator_Group extends GroupToken {
 	
 	public UnitConstructionOperator_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -15318,16 +15313,16 @@ protected class UnitConstructionOperator_Group extends GroupToken {
 
 }
 
-// "unit"
-protected class UnitConstructionOperator_UnitKeyword_0 extends KeywordToken  {
+// "$"
+protected class UnitConstructionOperator_DollarSignKeyword_0 extends KeywordToken  {
 	
-	public UnitConstructionOperator_UnitKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public UnitConstructionOperator_DollarSignKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getUnitConstructionOperatorAccess().getUnitKeyword_0();
+		return grammarAccess.getUnitConstructionOperatorAccess().getDollarSignKeyword_0();
 	}
 
     @Override
@@ -15354,7 +15349,7 @@ protected class UnitConstructionOperator_LeftParenthesisKeyword_1 extends Keywor
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new UnitConstructionOperator_UnitKeyword_0(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new UnitConstructionOperator_DollarSignKeyword_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}

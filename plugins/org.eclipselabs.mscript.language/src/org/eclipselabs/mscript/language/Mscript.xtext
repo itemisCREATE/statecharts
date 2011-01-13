@@ -273,7 +273,7 @@ FeatureCallPart :
 	NameComponent | ArrayElementAccess | OperationArgumentList | IterationCall;
 	
 NameComponent :
-	'.' identifier=(ID | 'unit');
+	'.' identifier=ID;
 	
 ArrayElementAccess :
 	'[' subscripts+=ArraySubscript (',' subscripts+=ArraySubscript)* ']';
@@ -306,7 +306,7 @@ ExpressionList :
 	expressions+=Expression (',' expressions+=Expression)*;
 	
 UnitConstructionOperator :
-	'unit' '(' unit=UnitExpression ')';
+	'$' '(' unit=UnitExpression ')';
 
 ParenthesizedExpression :
 	'(' expressions+=Expression (',' expressions+=Expression)* ')';

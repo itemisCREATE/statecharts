@@ -2800,30 +2800,6 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__NameComponent__IdentifierAlternatives_1_0
-    @init {
-		int stackSize = keepStackSize();
-    }
-:
-(
-{ before(grammarAccess.getNameComponentAccess().getIdentifierIDTerminalRuleCall_1_0_0()); }
-	RULE_ID
-{ after(grammarAccess.getNameComponentAccess().getIdentifierIDTerminalRuleCall_1_0_0()); }
-)
-
-    |(
-{ before(grammarAccess.getNameComponentAccess().getIdentifierUnitKeyword_1_0_1()); }
-
-	'unit' 
-
-{ after(grammarAccess.getNameComponentAccess().getIdentifierUnitKeyword_1_0_1()); }
-)
-
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
 rule__ArraySubscript__Alternatives
     @init {
 		int stackSize = keepStackSize();
@@ -13525,11 +13501,11 @@ rule__UnitConstructionOperator__Group__0__Impl
     }
 :
 (
-{ before(grammarAccess.getUnitConstructionOperatorAccess().getUnitKeyword_0()); }
+{ before(grammarAccess.getUnitConstructionOperatorAccess().getDollarSignKeyword_0()); }
 
-	'unit' 
+	'$' 
 
-{ after(grammarAccess.getUnitConstructionOperatorAccess().getUnitKeyword_0()); }
+{ after(grammarAccess.getUnitConstructionOperatorAccess().getDollarSignKeyword_0()); }
 )
 
 ;
@@ -16380,9 +16356,8 @@ rule__NameComponent__IdentifierAssignment_1
     }
 :
 (
-{ before(grammarAccess.getNameComponentAccess().getIdentifierAlternatives_1_0()); }
-(rule__NameComponent__IdentifierAlternatives_1_0)
-{ after(grammarAccess.getNameComponentAccess().getIdentifierAlternatives_1_0()); }
+{ before(grammarAccess.getNameComponentAccess().getIdentifierIDTerminalRuleCall_1_0()); }
+	RULE_ID{ after(grammarAccess.getNameComponentAccess().getIdentifierIDTerminalRuleCall_1_0()); }
 )
 
 ;
