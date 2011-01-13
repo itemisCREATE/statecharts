@@ -105,11 +105,25 @@ public class TensorTypeOperations extends ArrayTypeOperations {
 		if (!(other instanceof TensorType)) {
 			return TypeSystemFactory.eINSTANCE.createInvalidDataType();
 		}
+		
 		TensorType otherTensorType = (TensorType) other;
-		if (!tensorType.isMatrix() || !otherTensorType.isMatrix()) {
-			return TypeSystemFactory.eINSTANCE.createInvalidDataType();
-		}
-		if (tensorType.getColumnSize() != otherTensorType.getRowSize()) {
+		
+		int rowSize;
+		int columnSize;
+		
+		if (tensorType.isVector()) {
+			if (!otherTensorType.isVector() || tensorType.getSize() != otherTensorType.getSize()) {
+				return TypeSystemFactory.eINSTANCE.createInvalidDataType();
+			}
+			rowSize = 1;
+			columnSize = 1;
+		} else if (tensorType.isMatrix()) {
+			if (!otherTensorType.isMatrix() || tensorType.getColumnSize() != otherTensorType.getRowSize()) {
+				return TypeSystemFactory.eINSTANCE.createInvalidDataType();
+			}
+			rowSize = tensorType.getRowSize();
+			columnSize = otherTensorType.getColumnSize();
+		} else {
 			return TypeSystemFactory.eINSTANCE.createInvalidDataType();
 		}
 		
@@ -117,13 +131,17 @@ public class TensorTypeOperations extends ArrayTypeOperations {
 		if (elementType instanceof InvalidDataType) {
 			return elementType;
 		}
+		
+		if (rowSize == 1 && columnSize == 1) {
+			return elementType;
+		}
 
 		return TypeSystemUtil.createArrayType(
 				elementType,
-				tensorType.getRowSize(),
-				otherTensorType.getColumnSize());
+				rowSize,
+				columnSize);
 	}
-
+	
 	private static DataType evaluateDivide(TensorType tensorType, DataType other) {
 		if (other instanceof NumericType) {
 			return evaluateElementWiseScalar(tensorType, OperatorKind.DIVISION, (NumericType) other);

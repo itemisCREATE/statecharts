@@ -93,4 +93,47 @@ public class VectorValue extends AbstractExplicitDataTypeValue implements IArray
 		elements[indices[0]] = (INumericValue) value;
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.computation.engine.value.AbstractValue#doMultiply(org.eclipselabs.mscript.computation.engine.value.IValue, org.eclipselabs.mscript.typesystem.DataType)
+	 */
+	@Override
+	protected IValue doMultiply(IValue other, DataType resultDataType) {
+		if (other instanceof INumericValue) {
+			INumericValue otherNumericValue = (INumericValue) other;
+			INumericValue[] resultElements = new INumericValue[elements.length];
+			for (int i = 0; i < elements.length; ++i) {
+				IValue resultElement = elements[i].multiply(otherNumericValue);
+				if (!(resultElement instanceof INumericValue)) {
+					return InvalidValue.SINGLETON;
+				}
+				resultElements[i] = (INumericValue) resultElement;
+			}
+			return new VectorValue(getContext(), (TensorType) resultDataType, resultElements);
+		} else if (other instanceof VectorValue) {
+			VectorValue otherVectorValue = (VectorValue) other;
+			if (elements.length != otherVectorValue.elements.length) {
+				return InvalidValue.SINGLETON;
+			}
+			INumericValue result = null;
+			for (int i = 0; i < elements.length; ++i) {
+				IValue product = elements[i].multiply(otherVectorValue.elements[i]);
+				if (!(product instanceof INumericValue)) {
+					return InvalidValue.SINGLETON;
+				}
+				INumericValue numericProduct = (INumericValue) product;
+				if (result == null) {
+					result = numericProduct;
+				} else {
+					IValue sum = result.add(numericProduct);
+					if (!(sum instanceof INumericValue)) {
+						return InvalidValue.SINGLETON;
+					}
+					result = (INumericValue) sum;
+				}
+			}
+			return result;
+		}
+		return super.doMultiply(other, resultDataType);
+	}
+	
 }
