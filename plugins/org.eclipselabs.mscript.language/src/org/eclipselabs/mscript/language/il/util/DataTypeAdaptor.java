@@ -11,7 +11,7 @@
 
 package org.eclipselabs.mscript.language.il.util;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.runtime.IStatus;
@@ -41,10 +41,11 @@ import org.eclipselabs.mscript.language.il.Assignment;
 import org.eclipselabs.mscript.language.il.Compound;
 import org.eclipselabs.mscript.language.il.ComputationCompound;
 import org.eclipselabs.mscript.language.il.ForeachStatement;
+import org.eclipselabs.mscript.language.il.FunctionCall;
 import org.eclipselabs.mscript.language.il.ILFunctionDefinition;
 import org.eclipselabs.mscript.language.il.IfStatement;
 import org.eclipselabs.mscript.language.il.LocalVariableDeclaration;
-import org.eclipselabs.mscript.language.il.MethodCall;
+import org.eclipselabs.mscript.language.il.Name;
 import org.eclipselabs.mscript.language.il.PropertyReference;
 import org.eclipselabs.mscript.language.il.Statement;
 import org.eclipselabs.mscript.language.il.VariableDeclaration;
@@ -501,14 +502,24 @@ public class DataTypeAdaptor extends ILSwitch<Boolean> {
 			}
 			
 			/* (non-Javadoc)
-			 * @see org.eclipselabs.mscript.language.il.util.ILSwitch#caseMethodCall(org.eclipselabs.mscript.language.il.MethodCall)
+			 * @see org.eclipselabs.mscript.language.il.util.ILSwitch#caseFunctionCall(org.eclipselabs.mscript.language.il.FunctionCall)
 			 */
 			@Override
-			public DataType caseMethodCall(MethodCall methodCall) {
-				DataType targetDataType = ExpressionAdaptor.this.doSwitch(methodCall.getTarget());
-				DataType dataType = getBuiltinFunctionDataType(methodCall.getName(), targetDataType, Collections.<DataType>emptyList());
-				ILUtil.setDataType(methodCall, dataType);
-				return dataType;
+			public DataType caseFunctionCall(FunctionCall functionCall) {
+				Name name = functionCall.getName();
+				if (name.getSegments().size() == 1) {
+					List<DataType> argumentDataTypes = new ArrayList<DataType>();
+					for (Expression argument : functionCall.getArguments()) {
+						argumentDataTypes.add(ExpressionAdaptor.this.doSwitch(argument));
+					}
+					BuiltinFunctionDescriptor descriptor = BuiltinFunctionDescriptor.get(name.getLastSegment(), argumentDataTypes);
+					if (descriptor != null) {
+						DataType dataType = descriptor.getSignature().evaluateOutputParameterDataTypes(argumentDataTypes).get(0);
+						ILUtil.setDataType(functionCall, dataType);
+						return dataType;
+					}
+				}
+				return TypeSystemFactory.eINSTANCE.createInvalidDataType();
 			}
 			
 			/* (non-Javadoc)
@@ -516,18 +527,7 @@ public class DataTypeAdaptor extends ILSwitch<Boolean> {
 			 */
 			@Override
 			public DataType casePropertyReference(PropertyReference propertyReference) {
-				DataType targetDataType = ExpressionAdaptor.this.doSwitch(propertyReference.getTarget());
-				DataType dataType = getBuiltinFunctionDataType(propertyReference.getName(), targetDataType, null);
-				ILUtil.setDataType(propertyReference, dataType);
-				return dataType;
-			}
-			
-			private DataType getBuiltinFunctionDataType(String name, DataType targetDataType, List<DataType> inputParameterDataTypes) {
-				BuiltinFunctionDescriptor descriptor = BuiltinFunctionDescriptor.get(name, targetDataType, inputParameterDataTypes);
-				if (descriptor == null) {
-					return TypeSystemFactory.eINSTANCE.createInvalidDataType();
-				}
-				return descriptor.getSignature().evaluateOutputParameterDataTypes(targetDataType, inputParameterDataTypes).get(0);
+				return TypeSystemFactory.eINSTANCE.createInvalidDataType();
 			}
 			
 		}

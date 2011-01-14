@@ -69,14 +69,17 @@
     <genClasses image="false" ecoreClass="IL.ecore#//OperationCall">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference IL.ecore#//OperationCall/arguments"/>
     </genClasses>
-    <genClasses ecoreClass="IL.ecore#//MethodCall">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute IL.ecore#//MethodCall/name"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference IL.ecore#//MethodCall/target"/>
+    <genClasses ecoreClass="IL.ecore#//FunctionCall">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference IL.ecore#//FunctionCall/name"/>
     </genClasses>
     <genClasses ecoreClass="IL.ecore#//PropertyReference">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute IL.ecore#//PropertyReference/name"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference IL.ecore#//PropertyReference/target"/>
     </genClasses>
     <genClasses ecoreClass="IL.ecore#//InvalidExpression"/>
+    <genClasses ecoreClass="IL.ecore#//Name">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute IL.ecore#//Name/segments"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute IL.ecore#//Name/lastSegment"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

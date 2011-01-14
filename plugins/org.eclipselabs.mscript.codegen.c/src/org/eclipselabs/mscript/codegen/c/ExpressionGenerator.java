@@ -12,7 +12,6 @@
 package org.eclipselabs.mscript.codegen.c;
 
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -44,7 +43,8 @@ import org.eclipselabs.mscript.language.ast.RelationalExpression;
 import org.eclipselabs.mscript.language.ast.StringLiteral;
 import org.eclipselabs.mscript.language.ast.UnaryExpression;
 import org.eclipselabs.mscript.language.ast.util.AstSwitch;
-import org.eclipselabs.mscript.language.il.MethodCall;
+import org.eclipselabs.mscript.language.il.FunctionCall;
+import org.eclipselabs.mscript.language.il.Name;
 import org.eclipselabs.mscript.language.il.PropertyReference;
 import org.eclipselabs.mscript.language.il.VariableReference;
 import org.eclipselabs.mscript.language.il.util.ILSwitch;
@@ -408,17 +408,16 @@ public class ExpressionGenerator extends AstSwitch<Boolean> {
 		}
 		
 		/* (non-Javadoc)
-		 * @see org.eclipselabs.mscript.language.il.util.ILSwitch#caseMethodCall(org.eclipselabs.mscript.language.il.MethodCall)
+		 * @see org.eclipselabs.mscript.language.il.util.ILSwitch#caseFunctionCall(org.eclipselabs.mscript.language.il.FunctionCall)
 		 */
 		@Override
-		public Boolean caseMethodCall(MethodCall methodCall) {
-			List<Expression> arguments = methodCall.getArguments();
-			List<Expression> expressions = new ArrayList<Expression>(arguments.size() + 1);
-			expressions.add(methodCall.getTarget());
-			expressions.addAll(arguments);
-			IFunctionGenerator generator = builtinFunctionGeneratorLookupTable.getFunctionGenerator(methodCall.getName());
-			if (generator != null) {
-				generator.generate(context, expressions);
+		public Boolean caseFunctionCall(FunctionCall functionCall) {
+			Name name = functionCall.getName();
+			if (name.getSegments().size() == 1) {
+				IFunctionGenerator generator = builtinFunctionGeneratorLookupTable.getFunctionGenerator(name.getLastSegment());
+				if (generator != null) {
+					generator.generate(context, functionCall.getArguments());
+				}
 			}
 			return true;
 		}

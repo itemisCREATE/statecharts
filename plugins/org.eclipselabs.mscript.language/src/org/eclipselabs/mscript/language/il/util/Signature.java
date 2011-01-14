@@ -23,19 +23,17 @@ import org.eclipselabs.mscript.typesystem.DataType;
  */
 public class Signature implements ISignature {
 
-	private DataType targetDataType;
 	private List<DataType> inputParameterDataTypes;
 	private List<DataType> outputParameterDataTypes;
 	
-	public Signature(DataType targetDataType, List<DataType> inputDataTypes, DataType outputDataType) {
-		this(targetDataType, inputDataTypes, Collections.singletonList(outputDataType));
+	public Signature(List<DataType> inputDataTypes, DataType outputDataType) {
+		this(inputDataTypes, Collections.singletonList(outputDataType));
 	}
 
 	/**
 	 * 
 	 */
-	public Signature(DataType targetDataType, List<DataType> inputDataTypes, List<DataType> outputDataTypes) {
-		this.targetDataType = targetDataType;
+	public Signature(List<DataType> inputDataTypes, List<DataType> outputDataTypes) {
 		this.inputParameterDataTypes = inputDataTypes;
 		this.outputParameterDataTypes = outputDataTypes;
 	}
@@ -43,10 +41,7 @@ public class Signature implements ISignature {
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.language.imperativemodel.util.ISignature#evaluateOutputDataTypes(java.util.List)
 	 */
-	public List<DataType> evaluateOutputParameterDataTypes(DataType targetDataType, List<DataType> inputParameterDataTypes) {
-		if (!(this.targetDataType == targetDataType || this.targetDataType != null && targetDataType != null && this.targetDataType.isAssignableFrom(targetDataType))) {
-			return null;
-		}
+	public List<DataType> evaluateOutputParameterDataTypes(List<DataType> inputParameterDataTypes) {
 		if (this.inputParameterDataTypes == inputParameterDataTypes) {
 			return outputParameterDataTypes;
 		}

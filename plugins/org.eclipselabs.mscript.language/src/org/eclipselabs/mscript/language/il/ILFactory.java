@@ -143,13 +143,13 @@ public interface ILFactory extends EFactory {
 	VariableReference createVariableReference();
 
 	/**
-	 * Returns a new object of class '<em>Method Call</em>'.
+	 * Returns a new object of class '<em>Function Call</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Method Call</em>'.
+	 * @return a new object of class '<em>Function Call</em>'.
 	 * @generated
 	 */
-	MethodCall createMethodCall();
+	FunctionCall createFunctionCall();
 
 	/**
 	 * Returns a new object of class '<em>Property Reference</em>'.
@@ -168,6 +168,15 @@ public interface ILFactory extends EFactory {
 	 * @generated
 	 */
 	InvalidExpression createInvalidExpression();
+
+	/**
+	 * Returns a new object of class '<em>Name</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Name</em>'.
+	 * @generated
+	 */
+	Name createName();
 
 	/**
 	 * Returns the package supported by this factory.

@@ -16,6 +16,7 @@ import org.eclipselabs.mscript.language.il.Compound;
 import org.eclipselabs.mscript.language.il.CompoundStatement;
 import org.eclipselabs.mscript.language.il.ComputationCompound;
 import org.eclipselabs.mscript.language.il.ForeachStatement;
+import org.eclipselabs.mscript.language.il.FunctionCall;
 import org.eclipselabs.mscript.language.il.ILFunctionDefinition;
 import org.eclipselabs.mscript.language.il.ILPackage;
 import org.eclipselabs.mscript.language.il.IfStatement;
@@ -23,7 +24,7 @@ import org.eclipselabs.mscript.language.il.InputVariableDeclaration;
 import org.eclipselabs.mscript.language.il.InstanceVariableDeclaration;
 import org.eclipselabs.mscript.language.il.InvalidExpression;
 import org.eclipselabs.mscript.language.il.LocalVariableDeclaration;
-import org.eclipselabs.mscript.language.il.MethodCall;
+import org.eclipselabs.mscript.language.il.Name;
 import org.eclipselabs.mscript.language.il.OperationCall;
 import org.eclipselabs.mscript.language.il.OutputVariableDeclaration;
 import org.eclipselabs.mscript.language.il.PropertyReference;
@@ -236,11 +237,11 @@ public class ILSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ILPackage.METHOD_CALL: {
-				MethodCall methodCall = (MethodCall)theEObject;
-				T result = caseMethodCall(methodCall);
-				if (result == null) result = caseOperationCall(methodCall);
-				if (result == null) result = caseExpression(methodCall);
+			case ILPackage.FUNCTION_CALL: {
+				FunctionCall functionCall = (FunctionCall)theEObject;
+				T result = caseFunctionCall(functionCall);
+				if (result == null) result = caseOperationCall(functionCall);
+				if (result == null) result = caseExpression(functionCall);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -255,6 +256,12 @@ public class ILSwitch<T> {
 				InvalidExpression invalidExpression = (InvalidExpression)theEObject;
 				T result = caseInvalidExpression(invalidExpression);
 				if (result == null) result = caseExpression(invalidExpression);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ILPackage.NAME: {
+				Name name = (Name)theEObject;
+				T result = caseName(name);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -533,17 +540,17 @@ public class ILSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Method Call</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Function Call</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Method Call</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Function Call</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseMethodCall(MethodCall object) {
+	public T caseFunctionCall(FunctionCall object) {
 		return null;
 	}
 
@@ -574,6 +581,21 @@ public class ILSwitch<T> {
 	 * @generated
 	 */
 	public T caseInvalidExpression(InvalidExpression object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Name</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Name</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseName(Name object) {
 		return null;
 	}
 

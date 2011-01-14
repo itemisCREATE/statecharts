@@ -11,6 +11,7 @@
 
 package org.eclipselabs.mscript.language.il.util;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipselabs.mscript.typesystem.DataType;
@@ -25,8 +26,7 @@ public enum BuiltinFunctionDescriptor {
 	UNIT(
 			"unit",
 			new Signature(
-					TypeSystemFactory.eINSTANCE.createRealType(),
-					null,
+					Collections.<DataType>singletonList(TypeSystemFactory.eINSTANCE.createRealType()),
 					TypeSystemFactory.eINSTANCE.createUnitType()));
 	
 //	SUM(
@@ -70,9 +70,9 @@ public enum BuiltinFunctionDescriptor {
 	/**
 	 * 
 	 */
-	public static BuiltinFunctionDescriptor get(String name, DataType targetDataType, List<DataType> inputParameterDataTypes) {
+	public static BuiltinFunctionDescriptor get(String name, List<DataType> inputParameterDataTypes) {
 		for (BuiltinFunctionDescriptor descriptor : values()) {
-			if (descriptor.name.equals(name) && descriptor.signature.evaluateOutputParameterDataTypes(targetDataType, inputParameterDataTypes) != null) {
+			if (descriptor.name.equals(name) && descriptor.signature.evaluateOutputParameterDataTypes(inputParameterDataTypes) != null) {
 				return descriptor;
 			}
 		}

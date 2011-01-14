@@ -19,6 +19,7 @@ import org.eclipselabs.mscript.language.il.Compound;
 import org.eclipselabs.mscript.language.il.CompoundStatement;
 import org.eclipselabs.mscript.language.il.ComputationCompound;
 import org.eclipselabs.mscript.language.il.ForeachStatement;
+import org.eclipselabs.mscript.language.il.FunctionCall;
 import org.eclipselabs.mscript.language.il.ILFactory;
 import org.eclipselabs.mscript.language.il.ILFunctionDefinition;
 import org.eclipselabs.mscript.language.il.ILPackage;
@@ -27,7 +28,7 @@ import org.eclipselabs.mscript.language.il.InputVariableDeclaration;
 import org.eclipselabs.mscript.language.il.InstanceVariableDeclaration;
 import org.eclipselabs.mscript.language.il.InvalidExpression;
 import org.eclipselabs.mscript.language.il.LocalVariableDeclaration;
-import org.eclipselabs.mscript.language.il.MethodCall;
+import org.eclipselabs.mscript.language.il.Name;
 import org.eclipselabs.mscript.language.il.OperationCall;
 import org.eclipselabs.mscript.language.il.OutputVariableDeclaration;
 import org.eclipselabs.mscript.language.il.PropertyReference;
@@ -177,7 +178,7 @@ public class ILPackageImpl extends EPackageImpl implements ILPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass methodCallEClass = null;
+	private EClass functionCallEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -192,6 +193,13 @@ public class ILPackageImpl extends EPackageImpl implements ILPackage {
 	 * @generated
 	 */
 	private EClass invalidExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass nameEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -693,8 +701,8 @@ public class ILPackageImpl extends EPackageImpl implements ILPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getMethodCall() {
-		return methodCallEClass;
+	public EClass getFunctionCall() {
+		return functionCallEClass;
 	}
 
 	/**
@@ -702,17 +710,8 @@ public class ILPackageImpl extends EPackageImpl implements ILPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getMethodCall_Name() {
-		return (EAttribute)methodCallEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getMethodCall_Target() {
-		return (EReference)methodCallEClass.getEStructuralFeatures().get(1);
+	public EReference getFunctionCall_Name() {
+		return (EReference)functionCallEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -749,6 +748,33 @@ public class ILPackageImpl extends EPackageImpl implements ILPackage {
 	 */
 	public EClass getInvalidExpression() {
 		return invalidExpressionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getName_() {
+		return nameEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getName_Segments() {
+		return (EAttribute)nameEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getName_LastSegment() {
+		return (EAttribute)nameEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -853,15 +879,18 @@ public class ILPackageImpl extends EPackageImpl implements ILPackage {
 		operationCallEClass = createEClass(OPERATION_CALL);
 		createEReference(operationCallEClass, OPERATION_CALL__ARGUMENTS);
 
-		methodCallEClass = createEClass(METHOD_CALL);
-		createEAttribute(methodCallEClass, METHOD_CALL__NAME);
-		createEReference(methodCallEClass, METHOD_CALL__TARGET);
+		functionCallEClass = createEClass(FUNCTION_CALL);
+		createEReference(functionCallEClass, FUNCTION_CALL__NAME);
 
 		propertyReferenceEClass = createEClass(PROPERTY_REFERENCE);
 		createEAttribute(propertyReferenceEClass, PROPERTY_REFERENCE__NAME);
 		createEReference(propertyReferenceEClass, PROPERTY_REFERENCE__TARGET);
 
 		invalidExpressionEClass = createEClass(INVALID_EXPRESSION);
+
+		nameEClass = createEClass(NAME);
+		createEAttribute(nameEClass, NAME__SEGMENTS);
+		createEAttribute(nameEClass, NAME__LAST_SEGMENT);
 
 		// Create data types
 		iValueEDataType = createEDataType(IVALUE);
@@ -916,7 +945,7 @@ public class ILPackageImpl extends EPackageImpl implements ILPackage {
 		variableReferenceEClass.getESuperTypes().add(this.getVariableAccess());
 		variableReferenceEClass.getESuperTypes().add(theAstPackage.getExpression());
 		operationCallEClass.getESuperTypes().add(theAstPackage.getExpression());
-		methodCallEClass.getESuperTypes().add(this.getOperationCall());
+		functionCallEClass.getESuperTypes().add(this.getOperationCall());
 		propertyReferenceEClass.getESuperTypes().add(theAstPackage.getExpression());
 		invalidExpressionEClass.getESuperTypes().add(theAstPackage.getExpression());
 
@@ -986,15 +1015,18 @@ public class ILPackageImpl extends EPackageImpl implements ILPackage {
 		initEClass(operationCallEClass, OperationCall.class, "OperationCall", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getOperationCall_Arguments(), theAstPackage.getExpression(), null, "arguments", null, 0, -1, OperationCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(methodCallEClass, MethodCall.class, "MethodCall", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getMethodCall_Name(), ecorePackage.getEString(), "name", null, 1, 1, MethodCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getMethodCall_Target(), theAstPackage.getExpression(), null, "target", null, 1, 1, MethodCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(functionCallEClass, FunctionCall.class, "FunctionCall", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getFunctionCall_Name(), this.getName_(), null, "name", null, 1, 1, FunctionCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(propertyReferenceEClass, PropertyReference.class, "PropertyReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPropertyReference_Name(), ecorePackage.getEString(), "name", null, 1, 1, PropertyReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPropertyReference_Target(), theAstPackage.getExpression(), null, "target", null, 1, 1, PropertyReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(invalidExpressionEClass, InvalidExpression.class, "InvalidExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(nameEClass, Name.class, "Name", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getName_Segments(), ecorePackage.getEString(), "segments", null, 1, -1, Name.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getName_LastSegment(), ecorePackage.getEString(), "lastSegment", null, 1, 1, Name.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		// Initialize data types
 		initEDataType(iValueEDataType, IValue.class, "IValue", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

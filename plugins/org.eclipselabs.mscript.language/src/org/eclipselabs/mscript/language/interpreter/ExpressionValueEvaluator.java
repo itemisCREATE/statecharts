@@ -11,7 +11,8 @@
 
 package org.eclipselabs.mscript.language.interpreter;
 
-import java.util.Collections;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -41,7 +42,8 @@ import org.eclipselabs.mscript.language.ast.StringLiteral;
 import org.eclipselabs.mscript.language.ast.TypeTestExpression;
 import org.eclipselabs.mscript.language.ast.UnaryExpression;
 import org.eclipselabs.mscript.language.ast.UnitConstructionOperator;
-import org.eclipselabs.mscript.language.il.MethodCall;
+import org.eclipselabs.mscript.language.il.FunctionCall;
+import org.eclipselabs.mscript.language.il.Name;
 import org.eclipselabs.mscript.language.il.PropertyReference;
 import org.eclipselabs.mscript.language.il.VariableReference;
 import org.eclipselabs.mscript.language.il.util.ILSwitch;
@@ -469,23 +471,26 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 		 */
 		@Override
 		public IValue casePropertyReference(PropertyReference propertyReference) {
-			IFunction behavior = builtinFunctionLookupTable.getFunction(propertyReference.getName());
-			if (behavior != null) {
-				return behavior.call(context, Collections.singletonList(ExpressionValueEvaluator.this.doSwitch(propertyReference.getTarget())));
-			}
-			return super.casePropertyReference(propertyReference);
+			return InvalidValue.SINGLETON;
 		}
 		
 		/* (non-Javadoc)
-		 * @see org.eclipselabs.mscript.language.il.util.ILSwitch#caseMethodCall(org.eclipselabs.mscript.language.il.MethodCall)
+		 * @see org.eclipselabs.mscript.language.il.util.ILSwitch#caseFunctionCall(org.eclipselabs.mscript.language.il.FunctionCall)
 		 */
 		@Override
-		public IValue caseMethodCall(MethodCall methodCall) {
-			IFunction behavior = builtinFunctionLookupTable.getFunction(methodCall.getName());
-			if (behavior != null) {
-				return behavior.call(context, Collections.singletonList(ExpressionValueEvaluator.this.doSwitch(methodCall.getTarget())));
+		public IValue caseFunctionCall(FunctionCall functionCall) {
+			Name name = functionCall.getName();
+			if (name.getSegments().size() == 1) {
+				IFunction behavior = builtinFunctionLookupTable.getFunction(name.getLastSegment());
+				if (behavior != null) {
+					List<IValue> argumentValues = new ArrayList<IValue>();
+					for (Expression argument : functionCall.getArguments()) {
+						argumentValues.add(ExpressionValueEvaluator.this.doSwitch(argument));
+					}
+					return behavior.call(context, argumentValues);
+				}
 			}
-			return super.caseMethodCall(methodCall);
+			return super.caseFunctionCall(functionCall);
 		}
 		
 	}

@@ -21,6 +21,6 @@ import org.eclipselabs.mscript.typesystem.DataType;
  */
 public interface ISignature {
 
-	List<DataType> evaluateOutputParameterDataTypes(DataType targetDataType, List<DataType> inputParameterDataTypes);
+	List<DataType> evaluateOutputParameterDataTypes(List<DataType> inputParameterDataTypes);
 	
 }

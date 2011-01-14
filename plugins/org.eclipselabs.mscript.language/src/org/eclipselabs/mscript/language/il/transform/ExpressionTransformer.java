@@ -54,11 +54,12 @@ import org.eclipselabs.mscript.language.ast.UnitConstructionOperator;
 import org.eclipselabs.mscript.language.ast.util.AstSwitch;
 import org.eclipselabs.mscript.language.il.Assignment;
 import org.eclipselabs.mscript.language.il.CompoundStatement;
+import org.eclipselabs.mscript.language.il.FunctionCall;
 import org.eclipselabs.mscript.language.il.ILFactory;
 import org.eclipselabs.mscript.language.il.IfStatement;
 import org.eclipselabs.mscript.language.il.InvalidExpression;
 import org.eclipselabs.mscript.language.il.LocalVariableDeclaration;
-import org.eclipselabs.mscript.language.il.MethodCall;
+import org.eclipselabs.mscript.language.il.Name;
 import org.eclipselabs.mscript.language.il.PropertyReference;
 import org.eclipselabs.mscript.language.il.VariableDeclaration;
 import org.eclipselabs.mscript.language.il.VariableReference;
@@ -193,6 +194,9 @@ public class ExpressionTransformer extends AstSwitch<Expression> {
 			SimpleName simpleName = (SimpleName) featureCall.getTarget();
 			targetExpression = resolveVariableReference(simpleName.getIdentifier(), featureCallPartIterator);
 			if (targetExpression == null) {
+				targetExpression = resolveOperationCall(simpleName.getIdentifier(), featureCallPartIterator, null);
+			}
+			if (targetExpression == null) {
 				String message;
 				if (featureCallPartIterator.hasNext() && featureCallPartIterator.next() instanceof OperationArgumentList) {
 					message = "The method " + simpleName.getIdentifier() + "(...) is undefined";
@@ -233,6 +237,40 @@ public class ExpressionTransformer extends AstSwitch<Expression> {
 		}
 		return null;
 	}
+	
+	private Expression resolveOperationCall(String operationName, ListIterator<FeatureCallPart> featureCallPartIterator, Expression targetExpression) {
+		OperationArgumentList operationArgumentList = null;
+		if (featureCallPartIterator.hasNext()) {
+			FeatureCallPart next = featureCallPartIterator.next();
+			if (next instanceof OperationArgumentList) {
+				operationArgumentList = (OperationArgumentList) next;
+			} else {
+				featureCallPartIterator.previous();
+			}
+		}
+		
+		if (operationArgumentList == null) {
+			return null;
+		}
+		
+		FunctionCall functionCall = ILFactory.eINSTANCE.createFunctionCall();
+		Name name = ILFactory.eINSTANCE.createName();
+		name.getSegments().add(operationName);
+		functionCall.setName(name);
+		if (targetExpression != null) {
+			functionCall.getArguments().add(targetExpression);
+		}
+		
+		for (Expression expression : operationArgumentList.getArguments()) {
+			Expression transformedExpression = ExpressionTransformer.this.doSwitch(expression);
+			if (transformedExpression instanceof InvalidExpression) {
+				return transformedExpression;
+			}
+			functionCall.getArguments().add(transformedExpression);
+		}
+		
+		return functionCall;
+	}
 
 	private class FeatureCallPartTransformer extends AstSwitch<Expression> {
 
@@ -258,26 +296,11 @@ public class ExpressionTransformer extends AstSwitch<Expression> {
 		 */
 		@Override
 		public Expression caseNameComponent(NameComponent nameComponent) {
-			OperationArgumentList operationArgumentList = null;
-			if (featureCallPartIterator.hasNext()) {
-				FeatureCallPart next = featureCallPartIterator.next();
-				if (next instanceof OperationArgumentList) {
-					operationArgumentList = (OperationArgumentList) next;
-				} else {
-					featureCallPartIterator.previous();
-				}
+			Expression expression = resolveOperationCall(nameComponent.getIdentifier(), featureCallPartIterator, targetExpression);
+			if (expression != null) {
+				return expression;
 			}
 			
-			if (operationArgumentList != null) {
-				MethodCall methodCall = ILFactory.eINSTANCE.createMethodCall();
-				methodCall.setName(nameComponent.getIdentifier());
-				methodCall.setTarget(targetExpression);
-				// TODO
-//				for (Expression expression : operationArgumentList.getArguments()) {
-//				}
-				return methodCall;
-			}
-
 			PropertyReference propertyReference = ILFactory.eINSTANCE.createPropertyReference();
 			propertyReference.setName(nameComponent.getIdentifier());
 			propertyReference.setTarget(targetExpression);
@@ -313,7 +336,7 @@ public class ExpressionTransformer extends AstSwitch<Expression> {
 		}
 		
 	}
-		
+			
 	private InvalidExpression createInvalidExpression() {
 		InvalidExpression invalidExpression = ILFactory.eINSTANCE.createInvalidExpression();
 		return invalidExpression;
