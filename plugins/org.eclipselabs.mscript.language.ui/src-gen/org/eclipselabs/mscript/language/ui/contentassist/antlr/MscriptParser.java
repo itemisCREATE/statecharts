@@ -161,6 +161,7 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getIterationCallAccess().getGroup(), "rule__IterationCall__Group__0");
 					put(grammarAccess.getIterationCallAccess().getGroup_4(), "rule__IterationCall__Group_4__0");
 					put(grammarAccess.getIterationCallAccess().getGroup_5(), "rule__IterationCall__Group_5__0");
+					put(grammarAccess.getIterationCallAccess().getGroup_6(), "rule__IterationCall__Group_6__0");
 					put(grammarAccess.getIterationAccumulatorAccess().getGroup(), "rule__IterationAccumulator__Group__0");
 					put(grammarAccess.getArrayConstructionOperatorAccess().getGroup(), "rule__ArrayConstructionOperator__Group__0");
 					put(grammarAccess.getArrayConstructionOperatorAccess().getGroup_2_0(), "rule__ArrayConstructionOperator__Group_2_0__0");
@@ -304,7 +305,8 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getIterationCallAccess().getVariablesAssignment_3(), "rule__IterationCall__VariablesAssignment_3");
 					put(grammarAccess.getIterationCallAccess().getVariablesAssignment_4_1(), "rule__IterationCall__VariablesAssignment_4_1");
 					put(grammarAccess.getIterationCallAccess().getAccumulatorAssignment_5_1(), "rule__IterationCall__AccumulatorAssignment_5_1");
-					put(grammarAccess.getIterationCallAccess().getExpressionAssignment_7(), "rule__IterationCall__ExpressionAssignment_7");
+					put(grammarAccess.getIterationCallAccess().getBreakConditionAssignment_6_1(), "rule__IterationCall__BreakConditionAssignment_6_1");
+					put(grammarAccess.getIterationCallAccess().getExpressionAssignment_8(), "rule__IterationCall__ExpressionAssignment_8");
 					put(grammarAccess.getIterationVariableAccess().getNameAssignment(), "rule__IterationVariable__NameAssignment");
 					put(grammarAccess.getIterationAccumulatorAccess().getNameAssignment_0(), "rule__IterationAccumulator__NameAssignment_0");
 					put(grammarAccess.getIterationAccumulatorAccess().getInitializerAssignment_2(), "rule__IterationAccumulator__InitializerAssignment_2");

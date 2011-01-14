@@ -18,6 +18,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.eclipselabs.mscript.language.ast.IterationCall#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.IterationCall#getVariables <em>Variables</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.IterationCall#getAccumulator <em>Accumulator</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.IterationCall#getBreakCondition <em>Break Condition</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.IterationCall#getExpression <em>Expression</em>}</li>
  * </ul>
  * </p>
@@ -95,6 +96,32 @@ public interface IterationCall extends FeatureCallPart
    * @generated
    */
   void setAccumulator(IterationAccumulator value);
+
+  /**
+   * Returns the value of the '<em><b>Break Condition</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Break Condition</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Break Condition</em>' containment reference.
+   * @see #setBreakCondition(Expression)
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getIterationCall_BreakCondition()
+   * @model containment="true"
+   * @generated
+   */
+  Expression getBreakCondition();
+
+  /**
+   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.IterationCall#getBreakCondition <em>Break Condition</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Break Condition</em>' containment reference.
+   * @see #getBreakCondition()
+   * @generated
+   */
+  void setBreakCondition(Expression value);
 
   /**
    * Returns the value of the '<em><b>Expression</b></em>' containment reference.

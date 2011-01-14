@@ -36,6 +36,7 @@ import org.eclipselabs.mscript.language.ast.IterationVariable;
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.IterationCallImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.IterationCallImpl#getVariables <em>Variables</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.IterationCallImpl#getAccumulator <em>Accumulator</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.IterationCallImpl#getBreakCondition <em>Break Condition</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.IterationCallImpl#getExpression <em>Expression</em>}</li>
  * </ul>
  * </p>
@@ -83,6 +84,16 @@ public class IterationCallImpl extends FeatureCallPartImpl implements IterationC
    * @ordered
    */
   protected IterationAccumulator accumulator;
+
+  /**
+   * The cached value of the '{@link #getBreakCondition() <em>Break Condition</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getBreakCondition()
+   * @generated
+   * @ordered
+   */
+  protected Expression breakCondition;
 
   /**
    * The cached value of the '{@link #getExpression() <em>Expression</em>}' containment reference.
@@ -205,6 +216,54 @@ public class IterationCallImpl extends FeatureCallPartImpl implements IterationC
    * <!-- end-user-doc -->
    * @generated
    */
+  public Expression getBreakCondition()
+  {
+    return breakCondition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetBreakCondition(Expression newBreakCondition, NotificationChain msgs)
+  {
+    Expression oldBreakCondition = breakCondition;
+    breakCondition = newBreakCondition;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.ITERATION_CALL__BREAK_CONDITION, oldBreakCondition, newBreakCondition);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setBreakCondition(Expression newBreakCondition)
+  {
+    if (newBreakCondition != breakCondition)
+    {
+      NotificationChain msgs = null;
+      if (breakCondition != null)
+        msgs = ((InternalEObject)breakCondition).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.ITERATION_CALL__BREAK_CONDITION, null, msgs);
+      if (newBreakCondition != null)
+        msgs = ((InternalEObject)newBreakCondition).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.ITERATION_CALL__BREAK_CONDITION, null, msgs);
+      msgs = basicSetBreakCondition(newBreakCondition, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.ITERATION_CALL__BREAK_CONDITION, newBreakCondition, newBreakCondition));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public Expression getExpression()
   {
     return expression;
@@ -262,6 +321,8 @@ public class IterationCallImpl extends FeatureCallPartImpl implements IterationC
         return ((InternalEList<?>)getVariables()).basicRemove(otherEnd, msgs);
       case AstPackage.ITERATION_CALL__ACCUMULATOR:
         return basicSetAccumulator(null, msgs);
+      case AstPackage.ITERATION_CALL__BREAK_CONDITION:
+        return basicSetBreakCondition(null, msgs);
       case AstPackage.ITERATION_CALL__EXPRESSION:
         return basicSetExpression(null, msgs);
     }
@@ -284,6 +345,8 @@ public class IterationCallImpl extends FeatureCallPartImpl implements IterationC
         return getVariables();
       case AstPackage.ITERATION_CALL__ACCUMULATOR:
         return getAccumulator();
+      case AstPackage.ITERATION_CALL__BREAK_CONDITION:
+        return getBreakCondition();
       case AstPackage.ITERATION_CALL__EXPRESSION:
         return getExpression();
     }
@@ -311,6 +374,9 @@ public class IterationCallImpl extends FeatureCallPartImpl implements IterationC
       case AstPackage.ITERATION_CALL__ACCUMULATOR:
         setAccumulator((IterationAccumulator)newValue);
         return;
+      case AstPackage.ITERATION_CALL__BREAK_CONDITION:
+        setBreakCondition((Expression)newValue);
+        return;
       case AstPackage.ITERATION_CALL__EXPRESSION:
         setExpression((Expression)newValue);
         return;
@@ -337,6 +403,9 @@ public class IterationCallImpl extends FeatureCallPartImpl implements IterationC
       case AstPackage.ITERATION_CALL__ACCUMULATOR:
         setAccumulator((IterationAccumulator)null);
         return;
+      case AstPackage.ITERATION_CALL__BREAK_CONDITION:
+        setBreakCondition((Expression)null);
+        return;
       case AstPackage.ITERATION_CALL__EXPRESSION:
         setExpression((Expression)null);
         return;
@@ -360,6 +429,8 @@ public class IterationCallImpl extends FeatureCallPartImpl implements IterationC
         return variables != null && !variables.isEmpty();
       case AstPackage.ITERATION_CALL__ACCUMULATOR:
         return accumulator != null;
+      case AstPackage.ITERATION_CALL__BREAK_CONDITION:
+        return breakCondition != null;
       case AstPackage.ITERATION_CALL__EXPRESSION:
         return expression != null;
     }

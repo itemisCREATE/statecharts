@@ -14,8 +14,6 @@ package org.eclipselabs.mscript.codegen.c;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.eclipselabs.mscript.language.il.util.BuiltinFunctionDescriptor;
-
 /**
  * @author Andreas Unger
  *
@@ -25,7 +23,7 @@ public class BuiltinFunctionGeneratorLookupTable {
 	private Map<String, IFunctionGenerator> functionGenerators = new HashMap<String, IFunctionGenerator>();
 	
 	{
-		functionGenerators.put(BuiltinFunctionDescriptor.SUM.getName(), new SumFunctionGenerator());
+//		functionGenerators.put(BuiltinFunctionDescriptor.SUM.getName(), new SumFunctionGenerator());
 	}
 	
 	/**

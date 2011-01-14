@@ -2588,18 +2588,22 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cSemicolonKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
 		private final Assignment cAccumulatorAssignment_5_1 = (Assignment)cGroup_5.eContents().get(1);
 		private final RuleCall cAccumulatorIterationAccumulatorParserRuleCall_5_1_0 = (RuleCall)cAccumulatorAssignment_5_1.eContents().get(0);
-		private final Keyword cVerticalLineKeyword_6 = (Keyword)cGroup.eContents().get(6);
-		private final Assignment cExpressionAssignment_7 = (Assignment)cGroup.eContents().get(7);
-		private final RuleCall cExpressionExpressionParserRuleCall_7_0 = (RuleCall)cExpressionAssignment_7.eContents().get(0);
-		private final Keyword cRightParenthesisKeyword_8 = (Keyword)cGroup.eContents().get(8);
+		private final Group cGroup_6 = (Group)cGroup.eContents().get(6);
+		private final Keyword cSemicolonKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
+		private final Assignment cBreakConditionAssignment_6_1 = (Assignment)cGroup_6.eContents().get(1);
+		private final RuleCall cBreakConditionExpressionParserRuleCall_6_1_0 = (RuleCall)cBreakConditionAssignment_6_1.eContents().get(0);
+		private final Keyword cVerticalLineKeyword_7 = (Keyword)cGroup.eContents().get(7);
+		private final Assignment cExpressionAssignment_8 = (Assignment)cGroup.eContents().get(8);
+		private final RuleCall cExpressionExpressionParserRuleCall_8_0 = (RuleCall)cExpressionAssignment_8.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_9 = (Keyword)cGroup.eContents().get(9);
 		
 		//IterationCall:
 		//	"." name=ID "(" variables+=IterationVariable ("," variables+=IterationVariable)* (";"
-		//	accumulator=IterationAccumulator)? "|" expression=Expression ")";
+		//	accumulator=IterationAccumulator)? (";" breakCondition=Expression)? "|" expression=Expression ")";
 		public ParserRule getRule() { return rule; }
 
 		//"." name=ID "(" variables+=IterationVariable ("," variables+=IterationVariable)* (";" accumulator=IterationAccumulator)?
-		//"|" expression=Expression ")"
+		//(";" breakCondition=Expression)? "|" expression=Expression ")"
 		public Group getGroup() { return cGroup; }
 
 		//"."
@@ -2644,17 +2648,29 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		//IterationAccumulator
 		public RuleCall getAccumulatorIterationAccumulatorParserRuleCall_5_1_0() { return cAccumulatorIterationAccumulatorParserRuleCall_5_1_0; }
 
-		//"|"
-		public Keyword getVerticalLineKeyword_6() { return cVerticalLineKeyword_6; }
+		//(";" breakCondition=Expression)?
+		public Group getGroup_6() { return cGroup_6; }
 
-		//expression=Expression
-		public Assignment getExpressionAssignment_7() { return cExpressionAssignment_7; }
+		//";"
+		public Keyword getSemicolonKeyword_6_0() { return cSemicolonKeyword_6_0; }
+
+		//breakCondition=Expression
+		public Assignment getBreakConditionAssignment_6_1() { return cBreakConditionAssignment_6_1; }
 
 		//Expression
-		public RuleCall getExpressionExpressionParserRuleCall_7_0() { return cExpressionExpressionParserRuleCall_7_0; }
+		public RuleCall getBreakConditionExpressionParserRuleCall_6_1_0() { return cBreakConditionExpressionParserRuleCall_6_1_0; }
+
+		//"|"
+		public Keyword getVerticalLineKeyword_7() { return cVerticalLineKeyword_7; }
+
+		//expression=Expression
+		public Assignment getExpressionAssignment_8() { return cExpressionAssignment_8; }
+
+		//Expression
+		public RuleCall getExpressionExpressionParserRuleCall_8_0() { return cExpressionExpressionParserRuleCall_8_0; }
 
 		//")"
-		public Keyword getRightParenthesisKeyword_8() { return cRightParenthesisKeyword_8; }
+		public Keyword getRightParenthesisKeyword_9() { return cRightParenthesisKeyword_9; }
 	}
 
 	public class IterationVariableElements extends AbstractParserRuleElementFinder {
@@ -4377,7 +4393,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 
 	//IterationCall:
 	//	"." name=ID "(" variables+=IterationVariable ("," variables+=IterationVariable)* (";"
-	//	accumulator=IterationAccumulator)? "|" expression=Expression ")";
+	//	accumulator=IterationAccumulator)? (";" breakCondition=Expression)? "|" expression=Expression ")";
 	public IterationCallElements getIterationCallAccess() {
 		return (pIterationCall != null) ? pIterationCall : (pIterationCall = new IterationCallElements());
 	}

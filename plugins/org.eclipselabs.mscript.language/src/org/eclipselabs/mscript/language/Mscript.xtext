@@ -285,7 +285,7 @@ OperationArgumentList :
 	{OperationArgumentList} '(' (arguments+=Expression (',' arguments+=Expression)*)? ')';
 
 IterationCall :
-	'.' name=ID '(' variables+=IterationVariable (',' variables+=IterationVariable)* (';' accumulator=IterationAccumulator)? '|' expression=Expression ')';
+	'.' name=ID '(' variables+=IterationVariable (',' variables+=IterationVariable)* (';' accumulator=IterationAccumulator)? (';' breakCondition=Expression)? '|' expression=Expression ')';
 
 IterationVariable :
 	name=ID;

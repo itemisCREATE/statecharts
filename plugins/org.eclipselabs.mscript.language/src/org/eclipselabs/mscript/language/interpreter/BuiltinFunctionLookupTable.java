@@ -26,7 +26,7 @@ public class BuiltinFunctionLookupTable {
 	
 	{
 		functions.put(BuiltinFunctionDescriptor.UNIT.getName(), new UnitFunction());
-		functions.put(BuiltinFunctionDescriptor.SUM.getName(), new SumFunction());
+//		functions.put(BuiltinFunctionDescriptor.SUM.getName(), new SumFunction());
 	}
 	
 	public IFunction getFunction(String name) {

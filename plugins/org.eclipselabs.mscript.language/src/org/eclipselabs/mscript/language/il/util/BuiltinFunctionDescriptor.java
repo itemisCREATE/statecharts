@@ -11,11 +11,9 @@
 
 package org.eclipselabs.mscript.language.il.util;
 
-import java.util.Collections;
 import java.util.List;
 
 import org.eclipselabs.mscript.typesystem.DataType;
-import org.eclipselabs.mscript.typesystem.TensorType;
 import org.eclipselabs.mscript.typesystem.TypeSystemFactory;
 
 /**
@@ -29,23 +27,23 @@ public enum BuiltinFunctionDescriptor {
 			new Signature(
 					TypeSystemFactory.eINSTANCE.createRealType(),
 					null,
-					TypeSystemFactory.eINSTANCE.createUnitType())),
+					TypeSystemFactory.eINSTANCE.createUnitType()));
 	
-	SUM(
-			"sum",
-			new ISignature() {
-				
-				public List<DataType> evaluateOutputParameterDataTypes(DataType targetDataType, List<DataType> inputDataTypes) {
-					if (targetDataType instanceof TensorType && inputDataTypes.isEmpty()) {
-						TensorType tensorType = (TensorType) targetDataType;
-						if (tensorType.getDimensionality() == 1) {
-							return Collections.<DataType>singletonList(tensorType.getElementType());
-						}
-					}
-					return null;
-				}
-				
-			});
+//	SUM(
+//			"sum",
+//			new ISignature() {
+//				
+//				public List<DataType> evaluateOutputParameterDataTypes(DataType targetDataType, List<DataType> inputDataTypes) {
+//					if (targetDataType instanceof TensorType && inputDataTypes.isEmpty()) {
+//						TensorType tensorType = (TensorType) targetDataType;
+//						if (tensorType.getDimensionality() == 1) {
+//							return Collections.<DataType>singletonList(tensorType.getElementType());
+//						}
+//					}
+//					return null;
+//				}
+//				
+//			});
 
 	private String name;
 	private ISignature signature;

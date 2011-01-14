@@ -1672,13 +1672,22 @@ public interface AstPackage extends EPackage
   int ITERATION_CALL__ACCUMULATOR = FEATURE_CALL_PART_FEATURE_COUNT + 2;
 
   /**
+   * The feature id for the '<em><b>Break Condition</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ITERATION_CALL__BREAK_CONDITION = FEATURE_CALL_PART_FEATURE_COUNT + 3;
+
+  /**
    * The feature id for the '<em><b>Expression</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ITERATION_CALL__EXPRESSION = FEATURE_CALL_PART_FEATURE_COUNT + 3;
+  int ITERATION_CALL__EXPRESSION = FEATURE_CALL_PART_FEATURE_COUNT + 4;
 
   /**
    * The number of structural features of the '<em>Iteration Call</em>' class.
@@ -1687,7 +1696,7 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ITERATION_CALL_FEATURE_COUNT = FEATURE_CALL_PART_FEATURE_COUNT + 4;
+  int ITERATION_CALL_FEATURE_COUNT = FEATURE_CALL_PART_FEATURE_COUNT + 5;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.IterationVariableImpl <em>Iteration Variable</em>}' class.
@@ -3926,6 +3935,17 @@ public interface AstPackage extends EPackage
   EReference getIterationCall_Accumulator();
 
   /**
+   * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.IterationCall#getBreakCondition <em>Break Condition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Break Condition</em>'.
+   * @see org.eclipselabs.mscript.language.ast.IterationCall#getBreakCondition()
+   * @see #getIterationCall()
+   * @generated
+   */
+  EReference getIterationCall_BreakCondition();
+
+  /**
    * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.IterationCall#getExpression <em>Expression</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -5830,6 +5850,14 @@ public interface AstPackage extends EPackage
      * @generated
      */
     EReference ITERATION_CALL__ACCUMULATOR = eINSTANCE.getIterationCall_Accumulator();
+
+    /**
+     * The meta object literal for the '<em><b>Break Condition</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ITERATION_CALL__BREAK_CONDITION = eINSTANCE.getIterationCall_BreakCondition();
 
     /**
      * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.

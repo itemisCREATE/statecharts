@@ -5412,16 +5412,44 @@ ruleIterationCall returns [EObject current=null]
 	    }
 
 )
-))?	'|' 
+))?(	';' 
     {
-        createLeafNode(grammarAccess.getIterationCallAccess().getVerticalLineKeyword_6(), null); 
+        createLeafNode(grammarAccess.getIterationCallAccess().getSemicolonKeyword_6_0(), null); 
     }
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getIterationCallAccess().getExpressionExpressionParserRuleCall_7_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getIterationCallAccess().getBreakConditionExpressionParserRuleCall_6_1_0(), currentNode); 
 	    }
-		lv_expression_9_0=ruleExpression		{
+		lv_breakCondition_9_0=ruleExpression		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getIterationCallRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        try {
+	       		set(
+	       			$current, 
+	       			"breakCondition",
+	        		lv_breakCondition_9_0, 
+	        		"Expression", 
+	        		currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+
+)
+))?	'|' 
+    {
+        createLeafNode(grammarAccess.getIterationCallAccess().getVerticalLineKeyword_7(), null); 
+    }
+(
+(
+		{ 
+	        currentNode=createCompositeNode(grammarAccess.getIterationCallAccess().getExpressionExpressionParserRuleCall_8_0(), currentNode); 
+	    }
+		lv_expression_11_0=ruleExpression		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getIterationCallRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -5430,7 +5458,7 @@ ruleIterationCall returns [EObject current=null]
 	       		set(
 	       			$current, 
 	       			"expression",
-	        		lv_expression_9_0, 
+	        		lv_expression_11_0, 
 	        		"Expression", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
@@ -5442,7 +5470,7 @@ ruleIterationCall returns [EObject current=null]
 )
 )	')' 
     {
-        createLeafNode(grammarAccess.getIterationCallAccess().getRightParenthesisKeyword_8(), null); 
+        createLeafNode(grammarAccess.getIterationCallAccess().getRightParenthesisKeyword_9(), null); 
     }
 )
 ;
