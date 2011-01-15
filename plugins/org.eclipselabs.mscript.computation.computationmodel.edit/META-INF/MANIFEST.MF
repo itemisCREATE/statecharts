@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipselabs.mscript.computation.computationmodel.edit;singleton:=true
-Bundle-Version: 1.0.0
+Bundle-Version: 1.0.0.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: org.eclipselabs.mscript.computation.computationmodel.edit.ComputationModelEditPlugin$Implementation
 Bundle-Vendor: %providerName
