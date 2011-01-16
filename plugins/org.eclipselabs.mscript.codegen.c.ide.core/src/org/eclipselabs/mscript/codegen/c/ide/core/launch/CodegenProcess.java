@@ -33,8 +33,8 @@ import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.model.IProcess;
 import org.eclipse.debug.core.model.IStreamsProxy;
-import org.eclipselabs.mscript.codegen.c.Generator;
-import org.eclipselabs.mscript.codegen.c.GeneratorContext;
+import org.eclipselabs.mscript.codegen.c.MscriptGenerator;
+import org.eclipselabs.mscript.codegen.c.MscriptGeneratorContext;
 import org.eclipselabs.mscript.codegen.c.ide.core.CodegenCIDECorePlugin;
 import org.eclipselabs.mscript.codegen.c.util.NameNormalizer;
 import org.eclipselabs.mscript.computation.computationmodel.ComputationModel;
@@ -223,7 +223,7 @@ public class CodegenProcess implements IProcess {
 	private class HeaderGeneratorThread extends GeneratorThread {
 		
 		public void generate() {
-			Generator generator = new Generator(functionDefinition, new GeneratorContext(computationModel, writer));
+			MscriptGenerator generator = new MscriptGenerator(functionDefinition, new MscriptGeneratorContext(computationModel, writer));
 			generator.generateHeaderCode();
 		}
 		
@@ -232,7 +232,7 @@ public class CodegenProcess implements IProcess {
 	private class ImplementationGeneratorThread extends GeneratorThread {
 		
 		public void generate() {
-			Generator generator = new Generator(functionDefinition, new GeneratorContext(computationModel, writer));
+			MscriptGenerator generator = new MscriptGenerator(functionDefinition, new MscriptGeneratorContext(computationModel, writer));
 			generator.generateImplementationCode();
 		}
 		

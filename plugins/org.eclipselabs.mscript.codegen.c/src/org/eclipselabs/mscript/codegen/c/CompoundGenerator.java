@@ -37,14 +37,14 @@ import org.eclipselabs.mscript.typesystem.NumericType;
  */
 public class CompoundGenerator extends ILSwitch<Boolean> {
 
-	IGeneratorContext context;
+	IMscriptGeneratorContext context;
 
 	PrintWriter writer;
 	
 	/**
 	 * 
 	 */
-	public CompoundGenerator(IGeneratorContext context) {
+	public CompoundGenerator(IMscriptGeneratorContext context) {
 		this.context = context;
 		this.writer = new PrintWriter(context.getWriter());
 	}

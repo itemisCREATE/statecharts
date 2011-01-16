@@ -21,7 +21,7 @@ import org.eclipselabs.mscript.computation.computationmodel.ComputationModel;
  * @noextend
  * @noimplement
  */
-public interface IGeneratorContext {
+public interface IMscriptGeneratorContext {
 
 	ComputationModel getComputationModel();
 	Writer getWriter();

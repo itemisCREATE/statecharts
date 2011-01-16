@@ -26,18 +26,18 @@ import org.eclipselabs.mscript.language.il.StatefulVariableDeclaration;
  * @author Andreas Unger
  *
  */
-public class Generator {
+public class MscriptGenerator {
 	
 	private ILFunctionDefinition functionDefinition;
 	
-	private IGeneratorContext context;
+	private IMscriptGeneratorContext context;
 	
 	private PrintWriter writer;
 	
 	/**
 	 * 
 	 */
-	public Generator(ILFunctionDefinition functionDefinition, IGeneratorContext context) {
+	public MscriptGenerator(ILFunctionDefinition functionDefinition, IMscriptGeneratorContext context) {
 		this.functionDefinition = functionDefinition;
 		this.context = context;
 		this.writer = new PrintWriter(context.getWriter());

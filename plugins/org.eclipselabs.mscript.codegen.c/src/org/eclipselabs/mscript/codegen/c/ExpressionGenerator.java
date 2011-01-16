@@ -55,14 +55,14 @@ import org.eclipselabs.mscript.typesystem.util.TypeSystemUtil;
 
 public class ExpressionGenerator extends AstSwitch<Boolean> {
 	
-	private IGeneratorContext context;
+	private IMscriptGeneratorContext context;
 	
 	private PrintWriter writer;
 
 	/**
 	 * @param compoundGenerator
 	 */
-	public ExpressionGenerator(IGeneratorContext context) {
+	public ExpressionGenerator(IMscriptGeneratorContext context) {
 		this.context = context;
 		writer = new PrintWriter(context.getWriter());
 	}

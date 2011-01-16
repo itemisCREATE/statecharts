@@ -14,7 +14,7 @@ package org.eclipselabs.mscript.codegen.c.util;
 import java.io.PrintWriter;
 
 import org.eclipselabs.mscript.codegen.c.ExpressionGenerator;
-import org.eclipselabs.mscript.codegen.c.IGeneratorContext;
+import org.eclipselabs.mscript.codegen.c.IMscriptGeneratorContext;
 import org.eclipselabs.mscript.computation.computationmodel.FixedPointFormat;
 import org.eclipselabs.mscript.computation.computationmodel.FloatingPointFormat;
 import org.eclipselabs.mscript.computation.computationmodel.NumberFormat;
@@ -25,7 +25,7 @@ import org.eclipselabs.mscript.typesystem.DataType;
 
 public class CastToFixedPointHelper extends ComputationModelSwitch<Boolean> {
 	
-	private IGeneratorContext context;
+	private IMscriptGeneratorContext context;
 	private Expression expression;
 	private int wordSize;
 	private int fractionLength;
@@ -36,7 +36,7 @@ public class CastToFixedPointHelper extends ComputationModelSwitch<Boolean> {
 	/**
 	 * 
 	 */
-	public CastToFixedPointHelper(IGeneratorContext context, Expression expression, int wordSize, int fractionLength) {
+	public CastToFixedPointHelper(IMscriptGeneratorContext context, Expression expression, int wordSize, int fractionLength) {
 		this.context = context;
 		this.expression = expression;
 		this.wordSize = wordSize;

@@ -13,7 +13,7 @@ package org.eclipselabs.mscript.codegen.c.util;
 
 import java.io.PrintWriter;
 
-import org.eclipselabs.mscript.codegen.c.IGeneratorContext;
+import org.eclipselabs.mscript.codegen.c.IMscriptGeneratorContext;
 import org.eclipselabs.mscript.computation.computationmodel.FixedPointFormat;
 import org.eclipselabs.mscript.computation.computationmodel.FloatingPointFormat;
 import org.eclipselabs.mscript.computation.computationmodel.NumberFormat;
@@ -30,7 +30,7 @@ import org.eclipselabs.mscript.typesystem.NumericType;
  */
 public class GeneratorUtil {
 	
-	public static String getCVariableDeclaration(IGeneratorContext context, DataType dataType, String name, boolean reference) {
+	public static String getCVariableDeclaration(IMscriptGeneratorContext context, DataType dataType, String name, boolean reference) {
 		StringBuilder cDataType = new StringBuilder();
 
 		if (dataType instanceof ArrayType) {
@@ -67,7 +67,7 @@ public class GeneratorUtil {
 		return cDataType.toString();
 	}
 
-	public static String getCDataType(IGeneratorContext context, DataType dataType) {
+	public static String getCDataType(IMscriptGeneratorContext context, DataType dataType) {
 		if (dataType instanceof BooleanType) {
 			return "int";
 		}
@@ -89,7 +89,7 @@ public class GeneratorUtil {
 		throw new IllegalArgumentException();
 	}
 	
-	public static void writeLiteral(IGeneratorContext context, DataType dataType, double value) {
+	public static void writeLiteral(IMscriptGeneratorContext context, DataType dataType, double value) {
 		PrintWriter writer = new PrintWriter(context.getWriter());
 		NumberFormat numberFormat = context.getComputationModel().getNumberFormat(dataType);
 		writer.printf("(%s) ", GeneratorUtil.getCDataType(context, dataType));
@@ -101,7 +101,7 @@ public class GeneratorUtil {
 		}
 	}
 
-	public static void writeLiteral(IGeneratorContext context, DataType dataType, long value) {
+	public static void writeLiteral(IMscriptGeneratorContext context, DataType dataType, long value) {
 		PrintWriter writer = new PrintWriter(context.getWriter());
 		NumberFormat numberFormat = context.getComputationModel().getNumberFormat(dataType);
 		writer.printf("(%s) ", GeneratorUtil.getCDataType(context, dataType));
@@ -112,7 +112,7 @@ public class GeneratorUtil {
 		writer.print(value);
 	}
 
-	public static void castNumericType(IGeneratorContext context, NumberFormat numberFormat, Expression expression) {
+	public static void castNumericType(IMscriptGeneratorContext context, NumberFormat numberFormat, Expression expression) {
 		if (numberFormat instanceof FloatingPointFormat) {
 			new CastToFloatingPointHelper(context, expression, (FloatingPointFormat) numberFormat).cast();
 		} else if (numberFormat instanceof FixedPointFormat) {

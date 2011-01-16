@@ -19,7 +19,7 @@ import org.eclipselabs.mscript.computation.computationmodel.ComputationModel;
  * @author Andreas Unger
  *
  */
-public class GeneratorContext implements IGeneratorContext {
+public class MscriptGeneratorContext implements IMscriptGeneratorContext {
 
 	private ComputationModel computationModel;
 	private Writer writer;
@@ -27,7 +27,7 @@ public class GeneratorContext implements IGeneratorContext {
 	/**
 	 * 
 	 */
-	public GeneratorContext(ComputationModel computationModel, Writer writer) {
+	public MscriptGeneratorContext(ComputationModel computationModel, Writer writer) {
 		this.computationModel = computationModel;
 		this.writer = writer;
 	}

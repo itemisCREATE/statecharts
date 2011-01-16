@@ -21,6 +21,6 @@ import org.eclipselabs.mscript.language.ast.Expression;
  */
 public interface IFunctionGenerator {
 
-	void generate(IGeneratorContext context, List<Expression> arguments);
+	void generate(IMscriptGeneratorContext context, List<Expression> arguments);
 	
 }

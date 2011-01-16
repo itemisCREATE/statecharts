@@ -20,17 +20,17 @@ import org.eclipselabs.mscript.typesystem.RealType;
 
 public class VariableAccessGenerator extends ILSwitch<Boolean> {
 
-	private IGeneratorContext context;
+	private IMscriptGeneratorContext context;
 	private VariableDeclaration target;
 	private int stepIndex;
 	
 	private PrintWriter writer;
 	
-	public VariableAccessGenerator(IGeneratorContext context, VariableAccess variableAccess) {
+	public VariableAccessGenerator(IMscriptGeneratorContext context, VariableAccess variableAccess) {
 		this(context, variableAccess.getTarget(), variableAccess.getStepIndex());
 	}
 
-	public VariableAccessGenerator(IGeneratorContext context, VariableDeclaration target, int stepIndex) {
+	public VariableAccessGenerator(IMscriptGeneratorContext context, VariableDeclaration target, int stepIndex) {
 		this.context = context;
 		this.target = target;
 		this.stepIndex = stepIndex;
