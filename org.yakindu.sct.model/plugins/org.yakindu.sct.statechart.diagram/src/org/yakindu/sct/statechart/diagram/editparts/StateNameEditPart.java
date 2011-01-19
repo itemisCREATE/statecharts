@@ -2,7 +2,7 @@ package org.yakindu.sct.statechart.diagram.editparts;
 
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.gmf.runtime.notation.View;
-import org.yakindu.sct.model.statechart.statechart.StatechartPackage;
+import org.yakindu.model.sct.statechart.StatechartPackage;
 /**
  * 
  * @author Andreas Muelder <a

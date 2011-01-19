@@ -17,8 +17,8 @@ import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.CanonicalConnectionEditPolicy;
-import org.yakindu.sct.model.statechart.statechart.Region;
-import org.yakindu.sct.model.statechart.statechart.Transition;
+import org.yakindu.model.sct.statechart.Region;
+import org.yakindu.model.sct.statechart.Transition;
 import org.yakindu.sct.statechart.diagram.providers.ProviderConstants;
 import org.yakindu.sct.statechart.diagram.utils.SemanticHintUtil;
 
@@ -30,11 +30,13 @@ import org.yakindu.sct.statechart.diagram.utils.SemanticHintUtil;
  */
 public class RegionCompartmentCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	protected List getSemanticChildrenList() {
 		return getSemanticHost().getVertices();
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	protected List getSemanticConnectionsList() {
 		return getSemanticHost().getTransitions();

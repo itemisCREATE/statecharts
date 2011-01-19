@@ -10,10 +10,6 @@
  */
 package org.yakindu.sct.statechart.diagram.editparts;
 
-import org.eclipse.gef.Request;
-import org.eclipse.gef.RequestConstants;
-import org.eclipse.gef.commands.Command;
-import org.eclipse.gef.requests.CreateConnectionRequest;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeCompartmentEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.notation.View;

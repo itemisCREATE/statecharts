@@ -28,8 +28,8 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.views.properties.IPropertySource;
 import org.eclipse.ui.views.properties.IPropertySourceProvider;
-import org.yakindu.sct.model.statechart.statechart.ExpressionElement;
-import org.yakindu.sct.model.statechart.statechart.StatechartPackage;
+import org.yakindu.model.sct.statechart.ExpressionElement;
+import org.yakindu.model.sct.statechart.StatechartPackage;
 
 /**
  * 
