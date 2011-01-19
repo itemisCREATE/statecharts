@@ -19,7 +19,7 @@
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
             uri="http://www.yakindu.org/sct/model/statechart/2.0"
-            class="org.yakindu.sct.model.statechart.statechart.StatechartPackage"
+            class="org.yakindu.model.sct.statechart.StatechartPackage"
             genModel="model/Statechart.genmodel"/>
    </extension>
 

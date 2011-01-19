@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="statechart"
+    nsURI="http:///statechart.ecore" nsPrefix="statechart">
+  <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+    <details key="documentation" value="Author:muelder.&#xA;Created:15.12.10 15:39.&#xA;Title:.&#xA;Comment:.&#xA;"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="Pseudostate" abstract="true" eSuperTypes="#//Vertex"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Vertex" abstract="true" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentRegion" ordered="false"
+        lowerBound="1" eType="#//Region" eOpposite="#//Region/vertices"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="incomingTransitions" ordered="false"
+        upperBound="-1" eType="#//Transition" eOpposite="#//Transition/target"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outgoingTransitions" ordered="false"
+        upperBound="-1" eType="#//Transition" eOpposite="#//Transition/source"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Region" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transitions" ordered="false"
+        upperBound="-1" eType="#//Transition" containment="true" eOpposite="#//Transition/_"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="vertices" ordered="false"
+        upperBound="-1" eType="#//Vertex" containment="true" eOpposite="#//Vertex/parentRegion"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Transition" eSuperTypes="#//ExpressionElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" ordered="false"
+        lowerBound="1" eType="#//Vertex" eOpposite="#//Vertex/incomingTransitions"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" ordered="false"
+        lowerBound="1" eType="#//Vertex" eOpposite="#//Vertex/outgoingTransitions"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="_" ordered="false" lowerBound="1"
+        eType="#//Region" eOpposite="#//Region/transitions"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExpressionElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="expression" ordered="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FinalState" eSuperTypes="#//State"/>
+  <eClassifiers xsi:type="ecore:EClass" name="State" eSuperTypes="#//Vertex #//BehavioredElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subRegions" ordered="false"
+        upperBound="-1" eType="#//Region" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BehavioredElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="events" ordered="false"
+        upperBound="-1" eType="#//Event" containment="true" eOpposite="#//Event/_"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variables" ordered="false"
+        upperBound="-1" eType="#//Variable" containment="true" eOpposite="#//Variable/_"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Event" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="_" ordered="false" lowerBound="1"
+        eType="#//BehavioredElement" eOpposite="#//BehavioredElement/events"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Variable" abstract="true" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="_" ordered="false" lowerBound="1"
+        eType="#//BehavioredElement" eOpposite="#//BehavioredElement/variables"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RealVariableValue">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="_" ordered="false" lowerBound="1"
+        eType="#//RealVariable" eOpposite="#//RealVariable/value"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RealVariable" eSuperTypes="#//Variable">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" ordered="false"
+        lowerBound="1" eType="#//RealVariableValue" containment="true" eOpposite="#//RealVariableValue/_"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ShallowHistoryState" eSuperTypes="#//HistoryState"/>
+  <eClassifiers xsi:type="ecore:EClass" name="HistoryState" eSuperTypes="#//Pseudostate"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Junction" eSuperTypes="#//Pseudostate"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DeepHistoryState" eSuperTypes="#//HistoryState"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BooleanVariable" eSuperTypes="#//Variable">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" ordered="false"
+        lowerBound="1" eType="#//BooleanVariableValue" containment="true" eOpposite="#//BooleanVariableValue/_"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BooleanVariableValue">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" ordered="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="_" ordered="false" lowerBound="1"
+        eType="#//BooleanVariable" eOpposite="#//BooleanVariable/value"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Join" eSuperTypes="#//Pseudostate"/>
+  <eClassifiers xsi:type="ecore:EClass" name="IntegerVariable" eSuperTypes="#//Variable">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" ordered="false"
+        lowerBound="1" eType="#//IntegerVariableValue" containment="true" eOpposite="#//IntegerVariableValue/_"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IntegerVariableValue">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" ordered="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="_" ordered="false" lowerBound="1"
+        eType="#//IntegerVariable" eOpposite="#//IntegerVariable/value"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Choice" eSuperTypes="#//Pseudostate #//ExpressionElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Statechart" eSuperTypes="#//BehavioredElement #//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="regions" ordered="false"
+        lowerBound="1" upperBound="-1" eType="#//Region" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Fork" eSuperTypes="#//Pseudostate"/>
+  <eClassifiers xsi:type="ecore:EClass" name="InitialState" eSuperTypes="#//Pseudostate"/>
+  <eSubpackages name="UMLStandardProfile" nsURI="http:///statechart/UMLStandardProfile.ecore"
+      nsPrefix="statechart.UMLStandardProfile">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="UML Standard Profile contains several popular stereotypes, tag definitions and constraints described in UML  2 Specifications."/>
+    </eAnnotations>
+  </eSubpackages>
+</ecore:EPackage>

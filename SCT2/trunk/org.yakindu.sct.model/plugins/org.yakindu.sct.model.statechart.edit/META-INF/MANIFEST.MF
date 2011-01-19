@@ -8,8 +8,8 @@ Bundle-Activator: org.yakindu.sct.model.statechart.statechart.provider.Statechar
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: org.yakindu.sct.model.statechart.statechart.provider
 Require-Bundle: org.eclipse.core.runtime,
  org.yakindu.sct.model.statechart;visibility:=reexport,
  org.eclipse.emf.edit;visibility:=reexport
 Bundle-ActivationPolicy: lazy
+Export-Package: org.yakindu.model.sct.statechart.provider
