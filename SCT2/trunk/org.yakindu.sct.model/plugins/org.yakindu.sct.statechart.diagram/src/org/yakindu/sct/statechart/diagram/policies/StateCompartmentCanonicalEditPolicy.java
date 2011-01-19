@@ -6,7 +6,7 @@ import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.CanonicalEditPolicy;
-import org.yakindu.sct.model.statechart.statechart.State;
+import org.yakindu.model.sct.statechart.State;
 import org.yakindu.sct.statechart.diagram.utils.SemanticHintUtil;
 
 /**
@@ -15,9 +15,10 @@ import org.yakindu.sct.statechart.diagram.utils.SemanticHintUtil;
  */
 public class StateCompartmentCanonicalEditPolicy extends CanonicalEditPolicy {
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	protected List getSemanticChildrenList() {
-		return getSemanticHost().getRegions();
+		return getSemanticHost().getSubRegions();
 	}
 
 	@Override

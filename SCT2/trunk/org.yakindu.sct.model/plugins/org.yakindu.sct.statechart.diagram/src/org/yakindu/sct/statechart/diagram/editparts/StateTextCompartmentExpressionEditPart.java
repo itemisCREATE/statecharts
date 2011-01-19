@@ -21,10 +21,10 @@ import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.ICellEditorValidator;
 import org.eclipse.swt.SWT;
-import org.yakindu.sct.model.statechart.statechart.StatechartPackage;
+import org.yakindu.model.sct.statechart.StatechartPackage;
 import org.yakindu.sct.statechart.diagram.DiagramActivator;
 import org.yakindu.sct.statechart.diagram.parser.AttributeParser;
-import org.yakindu.sct.statechart.xtextintegration.editors.XTextDirectEditManager;
+import org.yakindu.sct.statechart.diagram.xtext.integration.XTextDirectEditManager;
 
 public class StateTextCompartmentExpressionEditPart extends ShapeNodeEditPart
 		implements ITextAwareEditPart {
@@ -52,7 +52,7 @@ public class StateTextCompartmentExpressionEditPart extends ShapeNodeEditPart
 
 	protected XTextDirectEditManager createDirectEditManager() {
 		return new XTextDirectEditManager(this, DiagramActivator.getDefault()
-				.getDslInjectorForEmbedded(), editorLocator, SWT.MULTI);
+				.getExpressionsInjector(), editorLocator, SWT.MULTI);
 	}
 
 	@Override

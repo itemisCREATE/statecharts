@@ -14,7 +14,7 @@ Require-Bundle: org.yakindu.sct.statechart.expressions;visibility:=reexport,
  org.eclipse.xtext.builder,
  org.antlr.runtime
 Import-Package: org.apache.log4j
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.yakindu.sct.statechart.ui,
  org.yakindu.sct.statechart.ui.contentassist.antlr,
  org.yakindu.sct.statechart.ui.internal

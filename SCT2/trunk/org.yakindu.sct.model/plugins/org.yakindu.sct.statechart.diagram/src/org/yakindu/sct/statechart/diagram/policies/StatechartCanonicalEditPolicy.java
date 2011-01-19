@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.CanonicalEditPolicy;
-import org.yakindu.sct.model.statechart.statechart.Region;
-import org.yakindu.sct.model.statechart.statechart.Statechart;
+import org.yakindu.model.sct.statechart.Region;
+import org.yakindu.model.sct.statechart.Statechart;
 
 /**
  * @author Andreas Muelder <a

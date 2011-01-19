@@ -24,7 +24,6 @@ import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.swt.graphics.Color;
-import org.yakindu.sct.model.statechart.statechart.State;
 import org.yakindu.sct.statechart.diagram.editor.figures.StateFigure;
 import org.yakindu.sct.statechart.diagram.editor.figures.utils.MapModeUtils;
 import org.yakindu.sct.statechart.diagram.policies.RelationshipSemanticEditPolicy;
@@ -96,12 +95,13 @@ public class StateEditPart extends ShapeNodeEditPart implements
 			IFigure compartmentFigure = ((StateFigureCompartmentEditPart) childEditPart)
 					.getFigure();
 			pane.add(compartmentFigure);
-		} else if (childEditPart instanceof StateTextCompartmentEditPart) {
-			IFigure pane = getPrimaryShape().getTextCompartmentPane();
-			pane.setLayoutManager(new StackLayout());
-			IFigure compartmentFigure = ((StateTextCompartmentEditPart) childEditPart)
-					.getFigure();
-			pane.add(compartmentFigure);
+//		} 
+//		else if (childEditPart instanceof StateTextCompartmentEditPart) {
+//			IFigure pane = getPrimaryShape().getTextCompartmentPane();
+//			pane.setLayoutManager(new StackLayout());
+//			IFigure compartmentFigure = ((StateTextCompartmentEditPart) childEditPart)
+//					.getFigure();
+//			pane.add(compartmentFigure);
 		} else if (childEditPart instanceof StateNameEditPart) {
 			((StateNameEditPart) childEditPart).setLabel(getPrimaryShape()
 					.getNameFigure());

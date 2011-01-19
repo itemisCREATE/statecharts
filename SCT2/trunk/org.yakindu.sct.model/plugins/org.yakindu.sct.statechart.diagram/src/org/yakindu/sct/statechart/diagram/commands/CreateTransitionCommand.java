@@ -18,13 +18,13 @@ import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.emf.type.core.commands.EditElementCommand;
 import org.eclipse.gmf.runtime.emf.type.core.requests.CreateElementRequest;
 import org.eclipse.gmf.runtime.emf.type.core.requests.CreateRelationshipRequest;
-import org.yakindu.sct.model.statechart.statechart.FinalState;
-import org.yakindu.sct.model.statechart.statechart.HistoryState;
-import org.yakindu.sct.model.statechart.statechart.InitialState;
-import org.yakindu.sct.model.statechart.statechart.Region;
-import org.yakindu.sct.model.statechart.statechart.StatechartFactory;
-import org.yakindu.sct.model.statechart.statechart.Transition;
-import org.yakindu.sct.model.statechart.statechart.Vertex;
+import org.yakindu.model.sct.statechart.FinalState;
+import org.yakindu.model.sct.statechart.HistoryState;
+import org.yakindu.model.sct.statechart.InitialState;
+import org.yakindu.model.sct.statechart.Region;
+import org.yakindu.model.sct.statechart.StatechartFactory;
+import org.yakindu.model.sct.statechart.Transition;
+import org.yakindu.model.sct.statechart.Vertex;
 
 /**
  * 
@@ -97,8 +97,8 @@ public class CreateTransitionCommand extends EditElementCommand {
 	private static Region setContainer(Vertex source, Vertex target) {
 		if (source == null || target == null)
 			return null;
-		Assert.isTrue(source.getContainingRegion().equals(target.getContainingRegion()));
-		return source.getContainingRegion();
+		Assert.isTrue(source.getParentRegion().equals(target.getParentRegion()));
+		return source.getParentRegion();
 	}
 
 	public Region getContainer() {

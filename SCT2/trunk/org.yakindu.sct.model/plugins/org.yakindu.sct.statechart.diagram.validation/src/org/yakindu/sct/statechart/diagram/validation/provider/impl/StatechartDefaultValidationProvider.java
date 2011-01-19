@@ -4,14 +4,13 @@ import java.util.List;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.xtext.EcoreUtil2;
-import org.yakindu.sct.model.statechart.statechart.FinalState;
-import org.yakindu.sct.model.statechart.statechart.InitialState;
-import org.yakindu.sct.model.statechart.statechart.NamedElement;
-import org.yakindu.sct.model.statechart.statechart.Region;
-import org.yakindu.sct.model.statechart.statechart.Vertex;
+import org.yakindu.model.sct.statechart.FinalState;
+import org.yakindu.model.sct.statechart.InitialState;
+import org.yakindu.model.sct.statechart.NamedElement;
+import org.yakindu.model.sct.statechart.Region;
+import org.yakindu.model.sct.statechart.Vertex;
 import org.yakindu.sct.statechart.diagram.validation.IValidationProvider;
 import org.yakindu.sct.statechart.diagram.validation.provider.AbstractJavaValidationProvider;
-import org.yakindu.sct.statechart.diagram.validation.provider.AbstractJavaValidationProvider.ValidationRule;
 
 /**
  * Implementation of {@link IValidationProvider} that contains common
@@ -45,15 +44,17 @@ public class StatechartDefaultValidationProvider extends
 	@ValidationRule
 	public IStatus validateOutgoingTransitions(Vertex vertex) {
 		if (!(vertex instanceof FinalState)) {
-			if (vertex.getOutgoingTransitions().size() == 0 && !(vertex instanceof FinalState)) {
+			if (vertex.getOutgoingTransitions().size() == 0
+					&& !(vertex instanceof FinalState)) {
 				return createErrorStatus("A state must have at least one outgoing transition!");
 			}
 		}
 		return createOKStatus();
 	}
+
 	@ValidationRule
-	public IStatus validateNameIsNotEmpty(NamedElement namedElement){
-		if(namedElement.getName() == null || namedElement.getName().isEmpty())
+	public IStatus validateNameIsNotEmpty(NamedElement namedElement) {
+		if (namedElement.getName() == null || namedElement.getName().isEmpty())
 			return createErrorStatus("name must not be empty!");
 		return createOKStatus();
 	}

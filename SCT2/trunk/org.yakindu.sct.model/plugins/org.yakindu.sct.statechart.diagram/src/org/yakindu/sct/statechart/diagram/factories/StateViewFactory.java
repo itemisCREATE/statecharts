@@ -37,9 +37,9 @@ public class StateViewFactory extends AbstractShapeViewFactory {
 		}
 		
 		FactoryUtils.createLabel(view, ProviderConstants.STATE_NAME);
-		
-		getViewService().createNode(eObjectAdapter, view, ProviderConstants.STATE_TEXT_COMPARTMENT, ViewUtil.APPEND,
-				true, getPreferencesHint());
+		//TODO
+//		getViewService().createNode(eObjectAdapter, view, ProviderConstants.STATE_TEXT_COMPARTMENT, ViewUtil.APPEND,
+//				true, getPreferencesHint());
 
 		getViewService().createNode(eObjectAdapter, view, ProviderConstants.STATE_FIGURE_COMPARTMENT, ViewUtil.APPEND,
 				true, getPreferencesHint());

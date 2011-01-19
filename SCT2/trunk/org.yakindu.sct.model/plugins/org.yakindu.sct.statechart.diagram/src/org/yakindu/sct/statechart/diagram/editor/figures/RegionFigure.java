@@ -19,7 +19,6 @@ import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 import org.eclipse.gmf.runtime.draw2d.ui.mapmode.IMapMode;
 import org.yakindu.sct.statechart.diagram.editor.figures.utils.GridDataFactory;
-import org.yakindu.sct.statechart.diagram.utils.FontConstants;
 
 public class RegionFigure extends RoundedRectangle {
 
@@ -58,7 +57,6 @@ public class RegionFigure extends RoundedRectangle {
 
 		/** Priority Label **/
 		nameLabel = new WrappingLabel();
-		nameLabel.setFont(FontConstants.DEFAULT);
 		GridData data = GridDataFactory.fillDefaults().align(GridData.CENTER, GridData.CENTER).grab(true, true)
 				.getData();
 		data.heightHint = mapMode.DPtoLP(15);

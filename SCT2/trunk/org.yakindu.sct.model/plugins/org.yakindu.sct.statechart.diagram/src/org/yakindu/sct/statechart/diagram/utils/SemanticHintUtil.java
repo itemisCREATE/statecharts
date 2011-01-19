@@ -22,17 +22,17 @@ import static org.yakindu.sct.statechart.diagram.providers.ProviderConstants.STA
 import static org.yakindu.sct.statechart.diagram.providers.ProviderConstants.TRANSITION;
 
 import org.eclipse.emf.ecore.EObject;
-import org.yakindu.sct.model.statechart.statechart.Choice;
-import org.yakindu.sct.model.statechart.statechart.DeepHistoryState;
-import org.yakindu.sct.model.statechart.statechart.FinalState;
-import org.yakindu.sct.model.statechart.statechart.InitialState;
-import org.yakindu.sct.model.statechart.statechart.Join;
-import org.yakindu.sct.model.statechart.statechart.Junction;
-import org.yakindu.sct.model.statechart.statechart.Region;
-import org.yakindu.sct.model.statechart.statechart.ShallowHistoryState;
-import org.yakindu.sct.model.statechart.statechart.State;
-import org.yakindu.sct.model.statechart.statechart.Transition;
-import org.yakindu.sct.model.statechart.statechart.util.StatechartSwitch;
+import org.yakindu.model.sct.statechart.Choice;
+import org.yakindu.model.sct.statechart.DeepHistoryState;
+import org.yakindu.model.sct.statechart.FinalState;
+import org.yakindu.model.sct.statechart.InitialState;
+import org.yakindu.model.sct.statechart.Join;
+import org.yakindu.model.sct.statechart.Junction;
+import org.yakindu.model.sct.statechart.Region;
+import org.yakindu.model.sct.statechart.ShallowHistoryState;
+import org.yakindu.model.sct.statechart.State;
+import org.yakindu.model.sct.statechart.Transition;
+import org.yakindu.model.sct.statechart.util.StatechartSwitch;
 
 /**
  * 
@@ -54,7 +54,6 @@ public final class SemanticHintUtil {
 	public static String getSemanticHint(EObject semanticElement) {
 		return new StatechartSwitch<String>() {
 
-			
 			public String caseTransition(Transition object) {
 				return TRANSITION;
 			}

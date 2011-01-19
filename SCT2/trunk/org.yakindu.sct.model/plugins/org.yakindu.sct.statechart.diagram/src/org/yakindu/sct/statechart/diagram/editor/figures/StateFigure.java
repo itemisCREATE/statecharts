@@ -10,17 +10,15 @@
  */
 package org.yakindu.sct.statechart.diagram.editor.figures;
 
-import org.eclipse.draw2d.GridData;
-import org.eclipse.draw2d.GridLayout;
+import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.IFigure;
-import org.eclipse.draw2d.RectangleFigure;
+import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.draw2d.RoundedRectangle;
 import org.eclipse.draw2d.geometry.Dimension;
+import org.eclipse.gmf.runtime.draw2d.ui.figures.ConstrainedToolbarLayout;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 import org.eclipse.gmf.runtime.draw2d.ui.mapmode.IMapMode;
-import org.yakindu.sct.model.statechart.statechart.State;
-import org.yakindu.sct.statechart.diagram.editor.figures.utils.GridDataFactory;
-import org.yakindu.sct.statechart.diagram.utils.FontConstants;
+import org.yakindu.model.sct.statechart.State;
 
 /**
  * {@link IFigure} implementation for {@link State}s.
@@ -29,76 +27,50 @@ import org.yakindu.sct.statechart.diagram.utils.FontConstants;
 public class StateFigure extends RoundedRectangle {
 
 	private WrappingLabel nameFigure;
-	private RectangleFigure figureCompartmentPane;
-	private RectangleFigure textCompartmentPane;
-
-	private final IMapMode mapMode;
+	private Figure figureCompartmentPane;
+	//private RectangleFigure textCompartmentPane;
 
 	public StateFigure(IMapMode mapMode) {
-		this.mapMode = mapMode;
-		GridLayout layoutThis = new GridLayout();
-		layoutThis.numColumns = 1;
-		layoutThis.makeColumnsEqualWidth = false;
-		this.setLayoutManager(layoutThis);
-		this.setCornerDimensions(new Dimension(mapMode.DPtoLP(20), mapMode.DPtoLP(20)));
+		ConstrainedToolbarLayout layout = new ConstrainedToolbarLayout(false);
+		layout.setStretchMajorAxis(true);
+		layout.setStretchMinorAxis(true);
+		this.setLayoutManager(layout);
+		this.setCornerDimensions(new Dimension(mapMode.DPtoLP(20), mapMode
+				.DPtoLP(20)));
 		this.setOutline(true);
 		createContents();
 	}
 
 	private void createContents() {
-
-		RectangleFigure labelFigure = new RectangleFigure();
-		labelFigure.setOutline(false);
-		labelFigure.setLineWidth(1);
-		this.add(labelFigure, GridDataFactory.fillDefaults().grab(true, false).getData());
-
-		GridLayout layoutStateLabelRectangle0 = new GridLayout();
-		layoutStateLabelRectangle0.numColumns = 1;
-		layoutStateLabelRectangle0.makeColumnsEqualWidth = false;
-		labelFigure.setLayoutManager(layoutStateLabelRectangle0);
-
+		//Name Label
 		nameFigure = new WrappingLabel();
-		nameFigure.setFont(FontConstants.DEFAULT);
-
-		labelFigure.add(nameFigure, getLabelData());
-		createTextCompartmentFigure();
-		createFigureCompartmentFigure();
+		nameFigure.setAlignment(PositionConstants.CENTER);
+		this.add(nameFigure,0.2);
+		//Figure Compartment
+		figureCompartmentPane = new Figure();
+		this.add(figureCompartmentPane, 0.8);
 
 	}
 
-	private GridData getLabelData() {
-		GridData data = GridDataFactory.fillDefaults().align(GridData.CENTER, GridData.CENTER).grab(true, false)
-				.getData();
-		data.heightHint = mapMode.DPtoLP(15);
-		return data;
-	}
-
-	private void createFigureCompartmentFigure() {
-		figureCompartmentPane = new RectangleFigure();
-		figureCompartmentPane.setOutline(false);
-		GridData data = GridDataFactory.fillDefaults().align(GridData.FILL, GridData.FILL).grab(true, true).getData();
-		data.heightHint = mapMode.DPtoLP(15);
-		this.add(figureCompartmentPane, data);
-	}
-
-	private void createTextCompartmentFigure() {
-		textCompartmentPane = new RectangleFigure();
-		textCompartmentPane.setOutline(false);
-		GridData data = GridDataFactory.fillDefaults().align(GridData.FILL, GridData.FILL).grab(true, true).getData();
-		data.heightHint = mapMode.DPtoLP(15);
-		this.add(textCompartmentPane, data);
-	}
+//	private void createTextCompartmentFigure() {
+//		textCompartmentPane = new RectangleFigure();
+//		textCompartmentPane.setOutline(false);
+//		GridData data = GridDataFactory.fillDefaults()
+//				.align(GridData.FILL, GridData.FILL).grab(true, true).getData();
+//		data.heightHint = mapMode.DPtoLP(15);
+//		this.add(textCompartmentPane, data);
+//	}
 
 	public WrappingLabel getNameFigure() {
 		return nameFigure;
 	}
 
-	public RectangleFigure getFigureCompartmentPane() {
+	public Figure getFigureCompartmentPane() {
 		return figureCompartmentPane;
 	}
 
-	public RectangleFigure getTextCompartmentPane() {
-		return textCompartmentPane;
-	}
+//	public RectangleFigure getTextCompartmentPane() {
+//		return textCompartmentPane;
+//	}
 
 }
