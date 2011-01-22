@@ -48,6 +48,7 @@ public class StateEditPart extends ShapeNodeEditPart implements
 		final NodeFigure figure = new DefaultSizeNodeFigure(
 				MapModeUtils.getDefaultSizeDimension(getMapMode()));
 		figure.setLayoutManager(new StackLayout());
+		figure.setMinimumSize(MapModeUtils.getDefaultSizeDimension(getMapMode()));
 		StateFigure stateFigure = new StateFigure(getMapMode());
 		figure.add(stateFigure);
 		return figure;

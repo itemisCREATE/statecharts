@@ -51,8 +51,10 @@ public class StateTextCompartmentExpressionEditPart extends ShapeNodeEditPart
 	}
 
 	protected XTextDirectEditManager createDirectEditManager() {
-		return new XTextDirectEditManager(this, DiagramActivator.getDefault()
-				.getExpressionsInjector(), editorLocator, SWT.MULTI);
+		//FIXME
+		return null;
+//		return new XTextDirectEditManager(this, DiagramActivator.getDefault()
+//				.getExpressionsInjector(), editorLocator, SWT.MULTI);
 	}
 
 	@Override
