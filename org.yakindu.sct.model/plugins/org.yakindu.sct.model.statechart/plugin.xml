@@ -2,25 +2,22 @@
 <?eclipse version="3.0"?>
 
 <!--
- /**
-  * Copyright (c) 2010 committers of YAKINDU and others.
-  * All rights reserved. This program and the accompanying materials
-  * are made available under the terms of the Eclipse Public License v1.0
-  * which accompanies this distribution, and is available at
-  * http://www.eclipse.org/legal/epl-v10.html
-  *
-  * Contributors:
-  *     committers of YAKINDU - initial API and implementation
-  */
+ Copyright (c) 2010 committers of YAKINDU and others.
+ All rights reserved. This program and the accompanying materials
+ are made available under the terms of the Eclipse Public License v1.0
+ which accompanies this distribution, and is available at
+ http://www.eclipse.org/legal/epl-v10.html
+ Contributors:
+ committers of YAKINDU - initial API and implementation
 -->
 
 <plugin>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
-            uri="http://www.yakindu.org/sct/model/statechart/2.0"
+            uri="http:///statechart.ecore"
             class="org.yakindu.model.sct.statechart.StatechartPackage"
-            genModel="model/Statechart.genmodel"/>
+            genModel="model/emf/Statechart.genmodel"/>
    </extension>
 
 </plugin>

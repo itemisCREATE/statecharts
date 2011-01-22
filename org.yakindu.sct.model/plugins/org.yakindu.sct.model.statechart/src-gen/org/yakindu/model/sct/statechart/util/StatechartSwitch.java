@@ -13,6 +13,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.yakindu.model.sct.statechart.*;
 import org.yakindu.model.sct.statechart.BehavioredElement;
 import org.yakindu.model.sct.statechart.BooleanVariable;
 import org.yakindu.model.sct.statechart.BooleanVariableValue;
