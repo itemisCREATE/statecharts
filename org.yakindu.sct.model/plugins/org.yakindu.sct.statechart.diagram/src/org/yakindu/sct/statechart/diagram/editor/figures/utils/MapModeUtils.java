@@ -9,8 +9,8 @@ public final class MapModeUtils {
 	}
 
 	
-	private static final int DEFAULT_NODE_WIDTH = 40;
-	private static final int DEFAULT_NODE_HEIGHT = 40;
+	private static final int DEFAULT_NODE_WIDTH = 80;
+	private static final int DEFAULT_NODE_HEIGHT = 60;
 
 	public static Dimension getDefaultSizeDimension(IMapMode mode) {
 		return new Dimension(mode.DPtoLP(DEFAULT_NODE_WIDTH), mode.DPtoLP(DEFAULT_NODE_HEIGHT));

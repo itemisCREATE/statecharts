@@ -20,9 +20,12 @@ import org.eclipse.jface.text.source.SourceViewer;
 import org.eclipse.jface.text.source.SourceViewerConfiguration;
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.StructuredViewer;
+import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.BusyIndicator;
 import org.eclipse.swt.custom.StyledText;
+import org.eclipse.swt.events.FocusAdapter;
+import org.eclipse.swt.events.FocusEvent;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.widgets.Composite;
@@ -85,7 +88,17 @@ public class XTextCellEditor extends CellEditor {
 
 		@Override
 		public void keyPressed(KeyEvent e) {
+			//Update the document
 			updateDocument();
+			//If we are single line and *return* key was not in case of code completion, 
+			//execute super keyRelease (that is close the editor)
+			  if (text != null && !text.isDisposed()
+	                    && (text.getStyle() & SWT.MULTI) != 0) {
+	                if ((e.stateMask & SWT.CTRL) != 0) {
+	                	XTextCellEditor.this.keyReleaseOccured(e);
+	                }
+	            }
+			
 			if ((e.character == ' ') && ((e.stateMask & SWT.CTRL) != 0)) {
 				BusyIndicator.showWhile(Display.getDefault(), new Runnable() {
 					public void run() {
@@ -154,6 +167,14 @@ public class XTextCellEditor extends CellEditor {
 
 		text = sourceviewer.getTextWidget();
 		text.addKeyListener(keyListener);
+		text.addFocusListener(new FocusAdapter() {
+            public void focusLost(FocusEvent e) {
+                XTextCellEditor.this.focusLost();
+            }
+        });
+        text.setFont(parent.getFont());
+        text.setBackground(parent.getBackground());
+        text.setText("");
 		return text;
 	}
 

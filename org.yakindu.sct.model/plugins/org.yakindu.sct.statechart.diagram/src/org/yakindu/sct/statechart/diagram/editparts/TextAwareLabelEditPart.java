@@ -12,26 +12,24 @@ package org.yakindu.sct.statechart.diagram.editparts;
 
 import static org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants.REQ_DIRECTEDIT_EXTENDEDDATA_INITIAL_CHAR;
 
-import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.Request;
-import org.eclipse.gef.tools.CellEditorLocator;
 import org.eclipse.gef.tools.DirectEditManager;
 import org.eclipse.gmf.runtime.common.ui.services.parser.IParser;
 import org.eclipse.gmf.runtime.common.ui.services.parser.ParserOptions;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.CompartmentEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ITextAwareEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.LabelDirectEditPolicy;
+import org.eclipse.gmf.runtime.diagram.ui.label.ILabelDelegate;
+import org.eclipse.gmf.runtime.diagram.ui.label.WrappingLabelDelegate;
 import org.eclipse.gmf.runtime.diagram.ui.tools.TextDirectEditManager;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 import org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
-import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.ICellEditorValidator;
-import org.eclipse.swt.widgets.Text;
 import org.yakindu.sct.statechart.diagram.parser.AttributeParser;
 
 /**
@@ -68,12 +66,20 @@ public abstract class TextAwareLabelEditPart extends CompartmentEditPart
 	}
 
 	protected DirectEditManager createDirectEditManager() {
-		return new TextDirectEditManager(this, null, createEditorLocator());
+		return new TextDirectEditManager(this);
+	}
+	
+	@Override
+	public Object getAdapter(@SuppressWarnings("rawtypes") Class key) {
+		if(key.equals(ILabelDelegate.class)){
+			WrappingLabel wrappingLabel = getWrappingLabel();
+			if(wrappingLabel == null)
+				return super.getAdapter(key);
+			return new WrappingLabelDelegate(wrappingLabel);
+		}
+		return super.getAdapter(key);
 	}
 
-	private CellEditorLocator createEditorLocator() {
-		return new DefaultCellEditorLocator();
-	}
 
 	@Override
 	protected void createDefaultEditPolicies() {
@@ -153,22 +159,4 @@ public abstract class TextAwareLabelEditPart extends CompartmentEditPart
 		}
 		super.handleNotificationEvent(event);
 	}
-
-	private class DefaultCellEditorLocator implements CellEditorLocator {
-
-		private static final int minimumWidth = 30;
-
-		@Override
-		public void relocate(CellEditor celleditor) {
-			Text text = (Text) celleditor.getControl();
-			Rectangle textRectangle = getWrappingLabel().getBounds().getCopy();
-			getFigure().translateToAbsolute(textRectangle);
-			
-			
-			
-			text.setBounds(textRectangle.x, textRectangle.y,
-					Math.max(textRectangle.width, minimumWidth),
-					textRectangle.height);
-		}
-	};
 }
