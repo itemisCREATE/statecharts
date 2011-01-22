@@ -18,7 +18,7 @@
    <extension
          point="org.eclipse.gmf.runtime.emf.type.core.elementTypes">
       <metamodel
-            nsURI="http://www.yakindu.org/sct/model/statechart/2.0">
+            nsURI="http:///statechart.ecore">
          <metamodelType
                eclass="Statechart"
                icon="icons/obj16/StatemachineDiagramFile.gif"
