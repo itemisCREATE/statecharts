@@ -28,8 +28,8 @@ public class SumFunctionGenerator implements IFunctionGenerator {
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.codegen.c.IFunctionGenerator#generate(java.util.List)
 	 */
-	public void generate(IMscriptGeneratorContext context, List<Expression> arguments) {
-		ExpressionGenerator expressionGenerator = new ExpressionGenerator(context);
+	public void generate(IMscriptGeneratorContext context, IVariableAccessStrategy variableAccessStrategy, List<Expression> arguments) {
+		ExpressionGenerator expressionGenerator = new ExpressionGenerator(context, variableAccessStrategy);
 		PrintWriter writer = new PrintWriter(context.getWriter());
 		
 		Expression argument = arguments.get(0);

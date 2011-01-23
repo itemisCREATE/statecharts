@@ -1,127 +1,90 @@
 package org.eclipselabs.mscript.codegen.c;
 
-import java.io.PrintWriter;
-
 import org.eclipselabs.mscript.codegen.c.util.GeneratorUtil;
+import org.eclipselabs.mscript.computation.computationmodel.ComputationModel;
+import org.eclipselabs.mscript.computation.engine.value.IArrayValue;
 import org.eclipselabs.mscript.computation.engine.value.IBooleanValue;
 import org.eclipselabs.mscript.computation.engine.value.ISimpleNumericValue;
 import org.eclipselabs.mscript.computation.engine.value.IValue;
-import org.eclipselabs.mscript.language.il.InputVariableDeclaration;
-import org.eclipselabs.mscript.language.il.InstanceVariableDeclaration;
+import org.eclipselabs.mscript.language.ast.Expression;
+import org.eclipselabs.mscript.language.ast.IntegerLiteral;
 import org.eclipselabs.mscript.language.il.LocalVariableDeclaration;
-import org.eclipselabs.mscript.language.il.OutputVariableDeclaration;
 import org.eclipselabs.mscript.language.il.StatefulVariableDeclaration;
 import org.eclipselabs.mscript.language.il.TemplateVariableDeclaration;
 import org.eclipselabs.mscript.language.il.VariableAccess;
-import org.eclipselabs.mscript.language.il.VariableDeclaration;
+import org.eclipselabs.mscript.language.il.VariableReference;
 import org.eclipselabs.mscript.language.il.util.ILSwitch;
 import org.eclipselabs.mscript.typesystem.IntegerType;
 import org.eclipselabs.mscript.typesystem.RealType;
 
-public class VariableAccessGenerator extends ILSwitch<Boolean> {
+public class VariableAccessGenerator extends ILSwitch<String> {
 
-	private IMscriptGeneratorContext context;
-	private VariableDeclaration target;
-	private int stepIndex;
+	private ComputationModel computationModel;
+	private IVariableAccessStrategy variableAccessStrategy;
+	private VariableAccess variableAccess;
 	
-	private PrintWriter writer;
-	
-	public VariableAccessGenerator(IMscriptGeneratorContext context, VariableAccess variableAccess) {
-		this(context, variableAccess.getTarget(), variableAccess.getStepIndex());
+	public VariableAccessGenerator(ComputationModel computationModel, IVariableAccessStrategy variableAccessStrategy, VariableAccess variableAccess) {
+		this.computationModel = computationModel;
+		this.variableAccessStrategy = variableAccessStrategy;
+		this.variableAccess = variableAccess;
 	}
 
-	public VariableAccessGenerator(IMscriptGeneratorContext context, VariableDeclaration target, int stepIndex) {
-		this.context = context;
-		this.target = target;
-		this.stepIndex = stepIndex;
-		writer = new PrintWriter(context.getWriter());
-	}
-	
-	public void generate() {
-		doSwitch(target);
+	public String generate() {
+		return doSwitch(variableAccess.getTarget());
 	}
 	
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.language.il.util.ILSwitch#caseTemplateVariableDeclaration(org.eclipselabs.mscript.language.il.TemplateVariableDeclaration)
 	 */
 	@Override
-	public Boolean caseTemplateVariableDeclaration(TemplateVariableDeclaration templateVariableDeclaration) {
+	public String caseTemplateVariableDeclaration(TemplateVariableDeclaration templateVariableDeclaration) {
 		IValue templateArgument = templateVariableDeclaration.getValue();
-		if (templateArgument instanceof ISimpleNumericValue) {
-			ISimpleNumericValue numericTemplateArgument = (ISimpleNumericValue) templateArgument;
-			if (templateArgument.getDataType() instanceof RealType) {
-				GeneratorUtil.writeLiteral(context, numericTemplateArgument.getDataType(), numericTemplateArgument.doubleValue());
-			} else if (templateArgument.getDataType() instanceof IntegerType) {
-				GeneratorUtil.writeLiteral(context, numericTemplateArgument.getDataType(), numericTemplateArgument.longValue());
+		return writeLiteral(templateArgument);
+	}
+	
+	private String writeLiteral(IValue value) {
+		if (value instanceof ISimpleNumericValue) {
+			ISimpleNumericValue numericTemplateArgument = (ISimpleNumericValue) value;
+			if (value.getDataType() instanceof RealType) {
+				return GeneratorUtil.getLiteralString(computationModel, numericTemplateArgument.getDataType(), numericTemplateArgument.doubleValue());
+			} else if (value.getDataType() instanceof IntegerType) {
+				return GeneratorUtil.getLiteralString(computationModel, numericTemplateArgument.getDataType(), numericTemplateArgument.longValue());
 			}
-		} else if (templateArgument instanceof IBooleanValue){
-			IBooleanValue booleanTemplateArgument = (IBooleanValue) templateArgument;
-			writer.print(booleanTemplateArgument.booleanValue() ? "1" : "0");
+		} else if (value instanceof IBooleanValue){
+			IBooleanValue booleanTemplateArgument = (IBooleanValue) value;
+			return booleanTemplateArgument.booleanValue() ? "1" : "0";
+		} else if (value instanceof IArrayValue && variableAccess instanceof VariableReference) {
+			VariableReference variableReference = (VariableReference) variableAccess;
+			IArrayValue arrayValue = (IArrayValue) value;
+			int[] indices = new int[variableReference.getArrayIndices().size()];
+			for (int i = 0; i < indices.length; ++i) {
+				Expression indexExpression = variableReference.getArrayIndices().get(i);
+				if (indexExpression instanceof IntegerLiteral) {
+					indices[i] = (int) ((IntegerLiteral) indexExpression).getValue();
+				} else {
+					throw new RuntimeException("indexExpression must be IntegerLiteral");
+				}
+			}
+			IValue elementValue = arrayValue.get(indices);
+			return writeLiteral(elementValue);
 		}
-		return true;
+		throw new IllegalArgumentException();
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.language.il.util.ILSwitch#caseInputVariableDeclaration(org.eclipselabs.mscript.language.il.InputVariableDeclaration)
+	 * @see org.eclipselabs.mscript.language.il.util.ILSwitch#caseStatefulVariableDeclaration(org.eclipselabs.mscript.language.il.StatefulVariableDeclaration)
 	 */
 	@Override
-	public Boolean caseInputVariableDeclaration(InputVariableDeclaration inputVariableDeclaration) {
-		if (stepIndex == 0) {
-			writer.print(inputVariableDeclaration.getName());
-		} else {
-			writeContextAccess();
-		}
-		return true;
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.language.il.util.ILSwitch#caseOutputVariableDeclaration(org.eclipselabs.mscript.language.il.OutputVariableDeclaration)
-	 */
-	@Override
-	public Boolean caseOutputVariableDeclaration(OutputVariableDeclaration outputVariableDeclaration) {
-		if (stepIndex == 0) {
-			writer.printf("*%s", outputVariableDeclaration.getName());
-		} else {
-			writeContextAccess();
-		}
-		return true;
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.language.il.util.ILSwitch#caseInstanceVariableDeclaration(org.eclipselabs.mscript.language.il.InstanceVariableDeclaration)
-	 */
-	@Override
-	public Boolean caseInstanceVariableDeclaration(InstanceVariableDeclaration instanceVariableDeclaration) {
-		writeContextAccess();
-		return true;
+	public String caseStatefulVariableDeclaration(StatefulVariableDeclaration statefulVariableDeclaration) {
+		return variableAccessStrategy.getVariableAccessString(variableAccess);
 	}
 	
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.language.il.util.ILSwitch#caseLocalVariableDeclaration(org.eclipselabs.mscript.language.il.LocalVariableDeclaration)
 	 */
 	@Override
-	public Boolean caseLocalVariableDeclaration(LocalVariableDeclaration localVariableDeclaration) {
-		writer.print(localVariableDeclaration.getName());
-		return true;
-	}
-	
-	private void writeContextAccess() {
-		String name = target.getName();
-		int circularBufferSize = ((StatefulVariableDeclaration) target).getCircularBufferSize();
-		if (circularBufferSize > 1) {
-			if (stepIndex == 0) {
-				writer.printf("context->%s[context->%s_index]", name, name, stepIndex,
-						circularBufferSize);
-			} else if (stepIndex < 0) {
-				writer.printf("context->%s[(context->%s_index - %d) %% %d]", name, name, -stepIndex,
-						circularBufferSize);
-			} else {
-				writer.printf("context->%s[(context->%s_index + %d) %% %d]", name, name, stepIndex,
-						circularBufferSize);
-			}
-		} else {
-			writer.printf("context->%s", name);
-		}
+	public String caseLocalVariableDeclaration(LocalVariableDeclaration localVariableDeclaration) {
+		return localVariableDeclaration.getName();
 	}
 	
 }

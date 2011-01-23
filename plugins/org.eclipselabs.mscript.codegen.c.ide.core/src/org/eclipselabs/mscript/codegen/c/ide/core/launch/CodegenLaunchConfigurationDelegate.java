@@ -15,6 +15,8 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipselabs.mscript.codegen.c.ide.core.CodegenCIDECorePlugin;
 import org.eclipselabs.mscript.computation.engine.ComputationContext;
 import org.eclipselabs.mscript.ide.core.launch.AbstractMscriptLaunchConfigurationDelegate;
+import org.eclipselabs.mscript.language.il.Compound;
+import org.eclipselabs.mscript.language.il.transform.ArrayOperationTransformer;
 import org.eclipselabs.mscript.language.interpreter.InterpreterContext;
 import org.eclipselabs.mscript.typesystem.DataType;
 
@@ -50,6 +52,12 @@ public class CodegenLaunchConfigurationDelegate extends AbstractMscriptLaunchCon
 			throw new CoreException(new Status(IStatus.ERROR, CodegenCIDECorePlugin.PLUGIN_ID, "No output file specified"));
 		}
 
+		ArrayOperationTransformer arrayOperationTransformer = new ArrayOperationTransformer();
+		arrayOperationTransformer.doSwitch(getILFunctionDefinition().getInitializationCompound());
+		for (Compound compound : getILFunctionDefinition().getComputationCompounds()) {
+			arrayOperationTransformer.doSwitch(compound);
+		}
+		
 		IFolder targetFolder = ResourcesPlugin.getWorkspace().getRoot().getFolder(new Path(targetFolderPathString));
 		CodegenProcess process = new CodegenProcess(launch, "C Code Generator", targetFolder, getILFunctionDefinition(), getComputationModel());
 		process.run();

@@ -14,6 +14,7 @@ package org.eclipselabs.mscript.codegen.c;
 import java.io.PrintWriter;
 import java.util.List;
 
+import org.eclipselabs.mscript.codegen.c.internal.VariableAccessStrategy;
 import org.eclipselabs.mscript.codegen.c.util.GeneratorUtil;
 import org.eclipselabs.mscript.language.il.ComputationCompound;
 import org.eclipselabs.mscript.language.il.ILFunctionDefinition;
@@ -86,12 +87,12 @@ public class MscriptGenerator {
 	private void writeContextStructureMember(StatefulVariableDeclaration variableDeclaration) {
 		if (variableDeclaration.getCircularBufferSize() > 1) {
 			writer.printf("%s[%d];\n",
-					GeneratorUtil.getCVariableDeclaration(context, variableDeclaration.getType(), variableDeclaration.getName(), false),
+					GeneratorUtil.getCVariableDeclaration(context.getComputationModel(), variableDeclaration.getType(), variableDeclaration.getName(), false),
 					variableDeclaration.getCircularBufferSize());
 			writer.printf("int %s_index;\n", variableDeclaration.getName());
 		} else {
 			writer.printf("%s;\n",
-					GeneratorUtil.getCVariableDeclaration(context, variableDeclaration.getType(), variableDeclaration.getName(), false));
+					GeneratorUtil.getCVariableDeclaration(context.getComputationModel(), variableDeclaration.getType(), variableDeclaration.getName(), false));
 		}
 	}
 	
@@ -122,13 +123,14 @@ public class MscriptGenerator {
 	}
 	
 	public void generateFunctionImplementations() {
+		IVariableAccessStrategy variableAccessStrategy = new VariableAccessStrategy();
 		if (functionDefinition.isStateful()) {
 			generateInitializeFunctionHeader();
 			writer.println(" {");
 			generateInitializeIndexStatements(functionDefinition.getInputVariableDeclarations());
 			generateInitializeIndexStatements(functionDefinition.getOutputVariableDeclarations());
 			generateInitializeIndexStatements(functionDefinition.getInstanceVariableDeclarations());
-			new CompoundGenerator(context).doSwitch(functionDefinition.getInitializationCompound());
+			new CompoundGenerator(context, variableAccessStrategy).doSwitch(functionDefinition.getInitializationCompound());
 			writer.println("}");
 
 			writer.println();
@@ -137,7 +139,7 @@ public class MscriptGenerator {
 			writer.println(" {");
 			for (ComputationCompound compound : functionDefinition.getComputationCompounds()) {
 				if (!compound.getOutputs().isEmpty()) {
-					new CompoundGenerator(context).doSwitch(compound);
+					new CompoundGenerator(context, variableAccessStrategy).doSwitch(compound);
 				}
 			}
 			for (InputVariableDeclaration inputVariableDeclaration : functionDefinition.getInputVariableDeclarations()) {
@@ -160,7 +162,7 @@ public class MscriptGenerator {
 			writer.println(" {");
 			for (ComputationCompound compound : functionDefinition.getComputationCompounds()) {
 				if (compound.getOutputs().isEmpty()) {
-					new CompoundGenerator(context).doSwitch(compound);
+					new CompoundGenerator(context, variableAccessStrategy).doSwitch(compound);
 				}
 			}
 			generateUpdateIndexStatements(functionDefinition.getInputVariableDeclarations());
@@ -171,7 +173,7 @@ public class MscriptGenerator {
 			generateStatelessFunctionHeader();
 			writer.println(" {");
 			for (ComputationCompound compound : functionDefinition.getComputationCompounds()) {
-				new CompoundGenerator(context).doSwitch(compound);
+				new CompoundGenerator(context, variableAccessStrategy).doSwitch(compound);
 			}
 			writer.println("}");
 		}
@@ -200,12 +202,12 @@ public class MscriptGenerator {
 		for (ComputationCompound compound : functionDefinition.getComputationCompounds()) {
 			if (!compound.getOutputs().isEmpty()) {
 				for (InputVariableDeclaration inputVariableDeclaration : compound.getInputs()) {
-					writer.printf(", %s", GeneratorUtil.getCVariableDeclaration(context, inputVariableDeclaration.getType(), inputVariableDeclaration.getName(), false));
+					writer.printf(", %s", GeneratorUtil.getCVariableDeclaration(context.getComputationModel(), inputVariableDeclaration.getType(), inputVariableDeclaration.getName(), false));
 				}
 			}
 		}
 		for (OutputVariableDeclaration outputVariableDeclaration: functionDefinition.getOutputVariableDeclarations()) {
-			writer.printf(", %s", GeneratorUtil.getCVariableDeclaration(context, outputVariableDeclaration.getType(), outputVariableDeclaration.getName(), true));
+			writer.printf(", %s", GeneratorUtil.getCVariableDeclaration(context.getComputationModel(), outputVariableDeclaration.getType(), outputVariableDeclaration.getName(), true));
 		}
 		writer.print(")");
 	}
@@ -218,7 +220,7 @@ public class MscriptGenerator {
 		for (ComputationCompound compound : functionDefinition.getComputationCompounds()) {
 			if (compound.getOutputs().isEmpty()) {
 				for (InputVariableDeclaration inputVariableDeclaration : compound.getInputs()) {
-					writer.printf(", %s", GeneratorUtil.getCVariableDeclaration(context, inputVariableDeclaration.getType(), inputVariableDeclaration.getName(), false));
+					writer.printf(", %s", GeneratorUtil.getCVariableDeclaration(context.getComputationModel(), inputVariableDeclaration.getType(), inputVariableDeclaration.getName(), false));
 				}
 			}
 		}
@@ -237,7 +239,7 @@ public class MscriptGenerator {
 			} else {
 				writer.print(", ");
 			}
-			writer.print(GeneratorUtil.getCVariableDeclaration(context, inputVariableDeclaration.getType(), inputVariableDeclaration.getName(), false));
+			writer.print(GeneratorUtil.getCVariableDeclaration(context.getComputationModel(), inputVariableDeclaration.getType(), inputVariableDeclaration.getName(), false));
 		}
 		for (OutputVariableDeclaration outputVariableDeclaration: functionDefinition.getOutputVariableDeclarations()) {
 			if (first) {
@@ -245,7 +247,7 @@ public class MscriptGenerator {
 			} else {
 				writer.print(", ");
 			}
-			writer.print(GeneratorUtil.getCVariableDeclaration(context, outputVariableDeclaration.getType(), outputVariableDeclaration.getName(), true));
+			writer.print(GeneratorUtil.getCVariableDeclaration(context.getComputationModel(), outputVariableDeclaration.getType(), outputVariableDeclaration.getName(), true));
 		}
 		writer.print(")");
 	}

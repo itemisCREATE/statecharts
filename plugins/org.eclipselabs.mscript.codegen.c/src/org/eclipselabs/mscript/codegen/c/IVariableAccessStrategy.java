@@ -11,16 +11,14 @@
 
 package org.eclipselabs.mscript.codegen.c;
 
-import java.util.List;
-
-import org.eclipselabs.mscript.language.ast.Expression;
+import org.eclipselabs.mscript.language.il.VariableAccess;
 
 /**
  * @author Andreas Unger
  *
  */
-public interface IFunctionGenerator {
+public interface IVariableAccessStrategy {
 
-	void generate(IMscriptGeneratorContext context, IVariableAccessStrategy variableAccessStrategy, List<Expression> arguments);
+	String getVariableAccessString(VariableAccess variableAccess);
 	
 }

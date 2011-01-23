@@ -16,8 +16,8 @@ import java.util.List;
 import java.util.ListIterator;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipselabs.mscript.codegen.c.util.CastToFixedPointHelper;
-import org.eclipselabs.mscript.codegen.c.util.CastToFloatingPointHelper;
+import org.eclipselabs.mscript.codegen.c.internal.util.CastToFixedPointHelper;
+import org.eclipselabs.mscript.codegen.c.internal.util.CastToFloatingPointHelper;
 import org.eclipselabs.mscript.codegen.c.util.GeneratorUtil;
 import org.eclipselabs.mscript.computation.computationmodel.FixedPointFormat;
 import org.eclipselabs.mscript.computation.computationmodel.FixedPointOperation;
@@ -46,6 +46,7 @@ import org.eclipselabs.mscript.language.ast.util.AstSwitch;
 import org.eclipselabs.mscript.language.il.FunctionCall;
 import org.eclipselabs.mscript.language.il.Name;
 import org.eclipselabs.mscript.language.il.PropertyReference;
+import org.eclipselabs.mscript.language.il.TemplateVariableDeclaration;
 import org.eclipselabs.mscript.language.il.VariableReference;
 import org.eclipselabs.mscript.language.il.util.ILSwitch;
 import org.eclipselabs.mscript.language.il.util.ILUtil;
@@ -56,14 +57,13 @@ import org.eclipselabs.mscript.typesystem.util.TypeSystemUtil;
 public class ExpressionGenerator extends AstSwitch<Boolean> {
 	
 	private IMscriptGeneratorContext context;
+	private IVariableAccessStrategy variableAccessStrategy;
 	
 	private PrintWriter writer;
 
-	/**
-	 * @param compoundGenerator
-	 */
-	public ExpressionGenerator(IMscriptGeneratorContext context) {
+	public ExpressionGenerator(IMscriptGeneratorContext context, IVariableAccessStrategy variableAccessStrategy) {
 		this.context = context;
+		this.variableAccessStrategy = variableAccessStrategy;
 		writer = new PrintWriter(context.getWriter());
 	}
 
@@ -145,11 +145,11 @@ public class ExpressionGenerator extends AstSwitch<Boolean> {
 			
 			NumberFormat widestNumberFormat = ComputationModelUtil.getWidestNumberFormat(numberFormat1, numberFormat2);
 
-			GeneratorUtil.castNumericType(context, widestNumberFormat, leftOperand);
+			GeneratorUtil.castNumericType(context, variableAccessStrategy, widestNumberFormat, leftOperand);
 			writer.print(" ");
 			writer.print(operator);
 			writer.print(" ");
-			GeneratorUtil.castNumericType(context, widestNumberFormat, rightOperand);
+			GeneratorUtil.castNumericType(context, variableAccessStrategy, widestNumberFormat, rightOperand);
 		} else {
 			doSwitch(leftOperand);
 			writer.print(" ");
@@ -168,12 +168,12 @@ public class ExpressionGenerator extends AstSwitch<Boolean> {
 		
 		NumberFormat numberFormat = context.getComputationModel().getNumberFormat(dataType);
 
-		GeneratorUtil.castNumericType(context, numberFormat, additiveExpression.getLeftOperand());
+		GeneratorUtil.castNumericType(context, variableAccessStrategy, numberFormat, additiveExpression.getLeftOperand());
 		for (AdditiveExpressionPart rightPart : additiveExpression.getRightParts()) {
 			writer.print(" ");
 			writer.print(rightPart.getOperator().getLiteral());
 			writer.print(" ");
-			GeneratorUtil.castNumericType(context, numberFormat, rightPart.getOperand());
+			GeneratorUtil.castNumericType(context, variableAccessStrategy, numberFormat, rightPart.getOperand());
 		}
 		
 		return true;
@@ -203,12 +203,12 @@ public class ExpressionGenerator extends AstSwitch<Boolean> {
 		if (rightParts.hasPrevious()) {
 			writeFloatingPointMultiplicativeExpression(leftOperand, rightParts, floatingPointFormat);
 		} else {
-			new CastToFloatingPointHelper(context, leftOperand, floatingPointFormat).cast();
+			castToFloatingPoint(leftOperand, floatingPointFormat);
 		}
 		writer.print(" ");
 		writer.print(part.getOperator().getLiteral());
 		writer.print(" ");
-		new CastToFloatingPointHelper(context, part.getOperand(), floatingPointFormat).cast();
+		castToFloatingPoint(part.getOperand(), floatingPointFormat);
 	}
 	
 	private void writeFixedPointMultiplicativeExpression(Expression leftOperand, ListIterator<MultiplicativeExpressionPart> rightParts, FixedPointFormat fixedPointFormat) {
@@ -249,7 +249,7 @@ public class ExpressionGenerator extends AstSwitch<Boolean> {
 		if (rightParts.hasPrevious()) {
 			writeFixedPointMultiplicativeExpression(leftOperand, rightParts, fixedPointFormat);
 		} else {
-			new CastToFixedPointHelper(context, leftOperand, operation.getIntermediateWordSize(), fixedPointFormat.getFractionLength()).cast();
+			castToFixedPoint(leftOperand, operation.getIntermediateWordSize(), fixedPointFormat.getFractionLength());
 		}
 		
 		if (castExplicitly) {
@@ -262,7 +262,7 @@ public class ExpressionGenerator extends AstSwitch<Boolean> {
 			writer.print("(");
 		}
 
-		new CastToFixedPointHelper(context, part.getOperand(), operation.getIntermediateWordSize(), fixedPointFormat.getFractionLength()).cast();
+		castToFixedPoint(part.getOperand(), operation.getIntermediateWordSize(), fixedPointFormat.getFractionLength());
 		
 		if (fixedPointFormat.getFractionLength() > 0) {
 			writer.printf(") >> %d", fixedPointFormat.getFractionLength());
@@ -300,7 +300,7 @@ public class ExpressionGenerator extends AstSwitch<Boolean> {
 		if (rightParts.hasPrevious()) {
 			writeFixedPointMultiplicativeExpression(leftOperand, rightParts, fixedPointFormat);
 		} else {
-			new CastToFixedPointHelper(context, leftOperand, operation.getIntermediateWordSize(), fixedPointFormat.getFractionLength()).cast();
+			castToFixedPoint(leftOperand, operation.getIntermediateWordSize(), fixedPointFormat.getFractionLength());
 		}
 		
 		if (castExplicitly || fixedPointFormat.getFractionLength() > 0) {
@@ -313,11 +313,33 @@ public class ExpressionGenerator extends AstSwitch<Boolean> {
 
 		writer.print(" / ");
 		
-		new CastToFixedPointHelper(context, part.getOperand(), operation.getIntermediateWordSize(), fixedPointFormat.getFractionLength()).cast();
+		castToFixedPoint(part.getOperand(), operation.getIntermediateWordSize(), fixedPointFormat.getFractionLength());
 		
 		if (hasIntermediateWordSize) {
 			writer.print(")");
 		}
+	}
+	
+	private void castToFloatingPoint(final Expression expression, FloatingPointFormat floatingPointFormat) {
+		new CastToFloatingPointHelper(context, ILUtil.getDataType(expression), floatingPointFormat) {
+			
+			@Override
+			protected void writeExpression() {
+				ExpressionGenerator.this.doSwitch(expression);
+			}
+			
+		}.cast();
+	}
+
+	private void castToFixedPoint(final Expression expression, int wordSize, int fractionLength) {
+		new CastToFixedPointHelper(context, ILUtil.getDataType(expression), wordSize, fractionLength) {
+			
+			@Override
+			protected void writeExpression() {
+				ExpressionGenerator.this.doSwitch(expression);
+			}
+			
+		}.cast();
 	}
 
 	/* (non-Javadoc)
@@ -346,7 +368,7 @@ public class ExpressionGenerator extends AstSwitch<Boolean> {
 	@Override
 	public Boolean caseRealLiteral(RealLiteral realLiteral) {
 		DataType dataType = ILUtil.getDataType(realLiteral);
-		GeneratorUtil.writeLiteral(context, dataType, realLiteral.getValue());
+		writer.print(GeneratorUtil.getLiteralString(context.getComputationModel(), dataType, realLiteral.getValue()));
 		return true;
 	}
 
@@ -356,7 +378,7 @@ public class ExpressionGenerator extends AstSwitch<Boolean> {
 	@Override
 	public Boolean caseIntegerLiteral(IntegerLiteral integerLiteral) {
 		DataType dataType = ILUtil.getDataType(integerLiteral);
-		GeneratorUtil.writeLiteral(context, dataType, integerLiteral.getValue());
+		writer.print(GeneratorUtil.getLiteralString(context.getComputationModel(), dataType, integerLiteral.getValue()));
 		return true;
 	}
 	
@@ -394,7 +416,16 @@ public class ExpressionGenerator extends AstSwitch<Boolean> {
 		private BuiltinFunctionGeneratorLookupTable builtinFunctionGeneratorLookupTable = new BuiltinFunctionGeneratorLookupTable();
 		
 		public Boolean caseVariableReference(VariableReference variableReference) {
-			new VariableAccessGenerator(context, variableReference).generate();
+			// TODO: redesign is needed here
+			String variableAccessString = new VariableAccessGenerator(context.getComputationModel(), variableAccessStrategy, variableReference).generate();
+			writer.print(variableAccessString);
+			if (!(variableReference.getTarget() instanceof TemplateVariableDeclaration)) {
+				for (Expression expression : variableReference.getArrayIndices()) {
+					writer.print("[");
+					ExpressionGenerator.this.doSwitch(expression);
+					writer.print("]");
+				}
+			}
 			return true;
 		}
 		
@@ -416,7 +447,7 @@ public class ExpressionGenerator extends AstSwitch<Boolean> {
 			if (name.getSegments().size() == 1) {
 				IFunctionGenerator generator = builtinFunctionGeneratorLookupTable.getFunctionGenerator(name.getLastSegment());
 				if (generator != null) {
-					generator.generate(context, functionCall.getArguments());
+					generator.generate(context, variableAccessStrategy, functionCall.getArguments());
 				}
 			}
 			return true;

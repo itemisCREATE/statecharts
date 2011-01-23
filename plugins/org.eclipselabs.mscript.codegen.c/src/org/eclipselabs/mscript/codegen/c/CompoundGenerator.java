@@ -15,7 +15,6 @@ import java.io.PrintWriter;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipselabs.mscript.codegen.c.util.GeneratorUtil;
-import org.eclipselabs.mscript.computation.computationmodel.NumberFormat;
 import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.il.Assignment;
 import org.eclipselabs.mscript.language.il.Compound;
@@ -29,7 +28,6 @@ import org.eclipselabs.mscript.language.il.util.ILUtil;
 import org.eclipselabs.mscript.typesystem.ArrayDimension;
 import org.eclipselabs.mscript.typesystem.ArrayType;
 import org.eclipselabs.mscript.typesystem.DataType;
-import org.eclipselabs.mscript.typesystem.NumericType;
 
 /**
  * @author Andreas Unger
@@ -37,15 +35,17 @@ import org.eclipselabs.mscript.typesystem.NumericType;
  */
 public class CompoundGenerator extends ILSwitch<Boolean> {
 
-	IMscriptGeneratorContext context;
+	private IMscriptGeneratorContext context;
+	private IVariableAccessStrategy variableAccessStrategy;
 
-	PrintWriter writer;
+	private PrintWriter writer;
 	
 	/**
 	 * 
 	 */
-	public CompoundGenerator(IMscriptGeneratorContext context) {
+	public CompoundGenerator(IMscriptGeneratorContext context, IVariableAccessStrategy variableAccessStrategy) {
 		this.context = context;
+		this.variableAccessStrategy = variableAccessStrategy;
 		this.writer = new PrintWriter(context.getWriter());
 	}
 	
@@ -59,7 +59,7 @@ public class CompoundGenerator extends ILSwitch<Boolean> {
 			writer.print("{\n");
 		}
 		for (LocalVariableDeclaration localVariableDeclaration : compound.getLocalVariableDeclarations()) {
-			writer.print(GeneratorUtil.getCVariableDeclaration(context, localVariableDeclaration.getType(), localVariableDeclaration.getName(), false));
+			writer.print(GeneratorUtil.getCVariableDeclaration(context.getComputationModel(), localVariableDeclaration.getType(), localVariableDeclaration.getName(), false));
 			writer.print(";\n");
 		}
 		for (Statement statement : compound.getStatements()) {
@@ -77,7 +77,7 @@ public class CompoundGenerator extends ILSwitch<Boolean> {
 	@Override
 	public Boolean caseLocalVariableDeclaration(LocalVariableDeclaration localVariableDeclaration) {
 		if (localVariableDeclaration.getInitializer() != null) {
-			writeAssignment(localVariableDeclaration, localVariableDeclaration.getInitializer());
+			writeAssignment(localVariableDeclaration.getType(), localVariableDeclaration.getName(), localVariableDeclaration.getInitializer());
 		}
 		return true;
 	}
@@ -87,7 +87,7 @@ public class CompoundGenerator extends ILSwitch<Boolean> {
 	 */
 	@Override
 	public Boolean caseAssignment(Assignment assignment) {
-		writeAssignment(assignment.getTarget(), assignment.getStepIndex(), assignment.getAssignedExpression());
+		writeAssignment(assignment.getTarget().getType(), new VariableAccessGenerator(context.getComputationModel(), variableAccessStrategy, assignment).generate(), assignment.getAssignedExpression());
 		return true;
 	}
 	
@@ -121,7 +121,7 @@ public class CompoundGenerator extends ILSwitch<Boolean> {
 		}
 		
 		String itVarName = iterationVariableDeclaration.getName();
-		String itVarDecl = GeneratorUtil.getCVariableDeclaration(context, iterationVariableDeclaration.getType(), itVarName, false);
+		String itVarDecl = GeneratorUtil.getCVariableDeclaration(context.getComputationModel(), iterationVariableDeclaration.getType(), itVarName, false);
 		int size = collectionArrayType.getSize();
 		
 		writer.println("{");
@@ -143,33 +143,29 @@ public class CompoundGenerator extends ILSwitch<Boolean> {
 	@Override
 	public Boolean defaultCase(EObject object) {
 		if (object instanceof Expression) {
-			new ExpressionGenerator(context).doSwitch(object);
+			new ExpressionGenerator(context, variableAccessStrategy).doSwitch(object);
 			return true;
 		}
 		return super.defaultCase(object);
 	}
 	
-	private void writeAssignment(VariableDeclaration target, Expression assignedExpression) {
-		writeAssignment(target, 0, assignedExpression);
-	}
-
-	private void writeAssignment(VariableDeclaration target, int stepIndex, Expression assignedExpression) {
+	private void writeAssignment(DataType targetDataType, String target, Expression assignedExpression) {
 		ArrayType arrayType = null;
-		if (target.getType() instanceof ArrayType) {
-			arrayType = (ArrayType) target.getType();
+		if (targetDataType instanceof ArrayType) {
+			arrayType = (ArrayType) targetDataType;
 		}
 		if (arrayType != null) {
 			writer.print("memcpy(");
 		}
-		new VariableAccessGenerator(context, target, stepIndex).generate();
+		writer.print(target);
 		if (arrayType != null) {
 			writer.print(", ");
 		} else {
 			writer.print(" = ");
 		}
-		cast(target.getType(), assignedExpression);
+		cast(targetDataType, assignedExpression);
 		if (arrayType != null) {
-			writer.printf(", sizeof (%s)", GeneratorUtil.getCDataType(context, arrayType.getElementType()));
+			writer.printf(", sizeof (%s)", GeneratorUtil.getCDataType(context.getComputationModel(), arrayType.getElementType()));
 			for (ArrayDimension arrayDimension : arrayType.getDimensions()) {
 				writer.printf(" * %d", arrayDimension.getSize());
 			}
@@ -178,13 +174,8 @@ public class CompoundGenerator extends ILSwitch<Boolean> {
 		writer.print(";\n");
 	}
 	
-	private void cast(DataType targetType, Expression expression) {
-		if (targetType instanceof NumericType) {
-			NumberFormat numberFormat = context.getComputationModel().getNumberFormat(targetType);
-			GeneratorUtil.castNumericType(context, numberFormat, expression);
-		} else {
-			doSwitch(expression);
-		}
+	private void cast(DataType targetDataType, Expression expression) {
+		GeneratorUtil.cast(context, variableAccessStrategy, expression, targetDataType);
 	}
 	
 }

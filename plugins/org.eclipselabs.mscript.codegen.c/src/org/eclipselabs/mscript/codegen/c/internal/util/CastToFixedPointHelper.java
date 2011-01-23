@@ -9,45 +9,43 @@
  *    Andreas Unger - initial API and implementation 
  ****************************************************************************/
 
-package org.eclipselabs.mscript.codegen.c.util;
+package org.eclipselabs.mscript.codegen.c.internal.util;
 
 import java.io.PrintWriter;
 
-import org.eclipselabs.mscript.codegen.c.ExpressionGenerator;
 import org.eclipselabs.mscript.codegen.c.IMscriptGeneratorContext;
 import org.eclipselabs.mscript.computation.computationmodel.FixedPointFormat;
 import org.eclipselabs.mscript.computation.computationmodel.FloatingPointFormat;
 import org.eclipselabs.mscript.computation.computationmodel.NumberFormat;
 import org.eclipselabs.mscript.computation.computationmodel.util.ComputationModelSwitch;
-import org.eclipselabs.mscript.language.ast.Expression;
-import org.eclipselabs.mscript.language.il.util.ILUtil;
 import org.eclipselabs.mscript.typesystem.DataType;
 
-public class CastToFixedPointHelper extends ComputationModelSwitch<Boolean> {
+public abstract class CastToFixedPointHelper extends ComputationModelSwitch<Boolean> {
 	
 	private IMscriptGeneratorContext context;
-	private Expression expression;
+	private DataType expressionDataType;
 	private int wordSize;
 	private int fractionLength;
 	
 	private PrintWriter writer;
-	private ExpressionGenerator expressionGenerator;
 	
 	/**
 	 * 
 	 */
-	public CastToFixedPointHelper(IMscriptGeneratorContext context, Expression expression, int wordSize, int fractionLength) {
+	public CastToFixedPointHelper(IMscriptGeneratorContext context, DataType expressionDataType, int wordSize, int fractionLength) {
 		this.context = context;
-		this.expression = expression;
+		this.expressionDataType = expressionDataType;
 		this.wordSize = wordSize;
 		this.fractionLength = fractionLength;
 		writer = new PrintWriter(context.getWriter());
-		expressionGenerator = new ExpressionGenerator(context);
 	}
 	
+	protected IMscriptGeneratorContext getContext() {
+		return context;
+	}
+
 	public void cast() {
-		DataType dataType = ILUtil.getDataType(expression);
-		NumberFormat numberFormat = context.getComputationModel().getNumberFormat(dataType);
+		NumberFormat numberFormat = context.getComputationModel().getNumberFormat(expressionDataType);
 		doSwitch(numberFormat);
 	}
 	
@@ -58,11 +56,11 @@ public class CastToFixedPointHelper extends ComputationModelSwitch<Boolean> {
 	public Boolean caseFloatingPointFormat(FloatingPointFormat floatingPointFormat) {
 		if (fractionLength > 0) {
 			writer.printf("((%s) floor((", getCDataType());
-			expressionGenerator.doSwitch(expression);
+			writeExpression();
 			writer.printf(") * pow(2, %d) + 0.5))", fractionLength);
 		} else {
 			writer.printf("((%s) (", getCDataType());
-			expressionGenerator.doSwitch(expression);
+			writeExpression();
 			writer.print("))");
 		}
 		return true;
@@ -80,20 +78,22 @@ public class CastToFixedPointHelper extends ComputationModelSwitch<Boolean> {
 			if (wordSize == fixedPointFormat.getWordSize()) {
 				writer.print("((");
 			}
-			expressionGenerator.doSwitch(expression);
+			writeExpression();
 			if (fractionLength > fixedPointFormat.getFractionLength()) {
 				writer.printf(") << %d)", fractionLength - fixedPointFormat.getFractionLength());
 			} else {
 				writer.printf(") >> %d)", fixedPointFormat.getFractionLength() - fractionLength);
 			}
 		} else {
-			expressionGenerator.doSwitch(expression);
+			writeExpression();
 			if (wordSize != fixedPointFormat.getWordSize()) {
 				writer.print("))");
 			}
 		}
 		return true;
 	}
+	
+	protected abstract void writeExpression();
 	
 	private String getCDataType() {
 		return String.format("int%d_t", wordSize);

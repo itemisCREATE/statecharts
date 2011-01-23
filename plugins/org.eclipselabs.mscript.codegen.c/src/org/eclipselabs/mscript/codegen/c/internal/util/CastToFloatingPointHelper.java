@@ -9,43 +9,41 @@
  *    Andreas Unger - initial API and implementation 
  ****************************************************************************/
 
-package org.eclipselabs.mscript.codegen.c.util;
+package org.eclipselabs.mscript.codegen.c.internal.util;
 
 import java.io.PrintWriter;
 
-import org.eclipselabs.mscript.codegen.c.ExpressionGenerator;
 import org.eclipselabs.mscript.codegen.c.IMscriptGeneratorContext;
 import org.eclipselabs.mscript.computation.computationmodel.FixedPointFormat;
 import org.eclipselabs.mscript.computation.computationmodel.FloatingPointFormat;
 import org.eclipselabs.mscript.computation.computationmodel.NumberFormat;
 import org.eclipselabs.mscript.computation.computationmodel.util.ComputationModelSwitch;
-import org.eclipselabs.mscript.language.ast.Expression;
-import org.eclipselabs.mscript.language.il.util.ILUtil;
 import org.eclipselabs.mscript.typesystem.DataType;
 
-public class CastToFloatingPointHelper extends ComputationModelSwitch<Boolean> {
+public abstract class CastToFloatingPointHelper extends ComputationModelSwitch<Boolean> {
 
 	private IMscriptGeneratorContext context;
-	private Expression expression;
+	private DataType expressionDataType;
 	private FloatingPointFormat targetFloatingPointFormat;
 	
 	private PrintWriter writer;
-	private ExpressionGenerator expressionGenerator;
 	
 	/**
 	 * 
 	 */
-	public CastToFloatingPointHelper(IMscriptGeneratorContext context, Expression expression, FloatingPointFormat targetFloatingPointFormat) {
+	public CastToFloatingPointHelper(IMscriptGeneratorContext context, DataType expressionDataType, FloatingPointFormat targetFloatingPointFormat) {
 		this.context = context;
-		this.expression = expression;
+		this.expressionDataType = expressionDataType;
 		this.targetFloatingPointFormat = targetFloatingPointFormat;
 		writer = new PrintWriter(context.getWriter());
-		expressionGenerator = new ExpressionGenerator(context);
+	}
+	
+	protected IMscriptGeneratorContext getContext() {
+		return context;
 	}
 	
 	public void cast() {
-		DataType dataType = ILUtil.getDataType(expression);
-		NumberFormat numberFormat = context.getComputationModel().getNumberFormat(dataType);
+		NumberFormat numberFormat = context.getComputationModel().getNumberFormat(expressionDataType);
 		doSwitch(numberFormat);
 	}
 	
@@ -55,10 +53,10 @@ public class CastToFloatingPointHelper extends ComputationModelSwitch<Boolean> {
 	@Override
 	public Boolean caseFloatingPointFormat(FloatingPointFormat floatingPointFormat) {
 		if (floatingPointFormat.getKind() == targetFloatingPointFormat.getKind()) {
-			expressionGenerator.doSwitch(expression);
+			writeExpression();
 		} else {
 			writer.printf("((%s) (", getCDataType());
-			expressionGenerator.doSwitch(expression);
+			writeExpression();
 			writer.print("))");
 		}
 		return true;
@@ -71,16 +69,18 @@ public class CastToFloatingPointHelper extends ComputationModelSwitch<Boolean> {
 	public Boolean caseFixedPointFormat(FixedPointFormat fixedPointFormat) {
 		if (fixedPointFormat.getFractionLength() > 0) {
 			writer.printf("((%s) ((", getCDataType());
-			expressionGenerator.doSwitch(expression);
+			writeExpression();
 			writer.printf(") * pow(2, -%d)))", fixedPointFormat.getFractionLength());
 		} else {
 			writer.printf("((%s) (", getCDataType());
-			expressionGenerator.doSwitch(expression);
+			writeExpression();
 			writer.print("))");
 		}
 		return true;
 	}
 	
+	protected abstract void writeExpression();
+
 	private String getCDataType() {
 		switch (targetFloatingPointFormat.getKind()) {
 		case BINARY32:
