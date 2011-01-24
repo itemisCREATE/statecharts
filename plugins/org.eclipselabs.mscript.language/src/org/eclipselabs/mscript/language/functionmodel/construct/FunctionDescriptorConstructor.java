@@ -45,8 +45,11 @@ import org.eclipselabs.mscript.language.util.SyntaxStatus;
  * @author Andreas Unger
  *
  */
-public class FunctionDescriptorConstructor {
+public class FunctionDescriptorConstructor implements IFunctionDescriptorConstructor {
 
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.language.functionmodel.construct.IFunctionDescriptorConstructor#construct(org.eclipselabs.mscript.language.ast.FunctionDefinition)
+	 */
 	public IFunctionDescriptorConstructorResult construct(FunctionDefinition functionDefinition) {
 		MultiStatus status = new MultiStatus(LanguagePlugin.PLUGIN_ID, 0, "Function descriptor construction errors", null);
 
