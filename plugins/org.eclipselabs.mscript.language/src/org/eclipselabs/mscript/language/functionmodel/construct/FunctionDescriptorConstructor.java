@@ -9,7 +9,7 @@
  *    Andreas Unger - initial API and implementation 
  ****************************************************************************/
 
-package org.eclipselabs.mscript.language.functionmodel.util;
+package org.eclipselabs.mscript.language.functionmodel.construct;
 
 import java.util.ListIterator;
 
