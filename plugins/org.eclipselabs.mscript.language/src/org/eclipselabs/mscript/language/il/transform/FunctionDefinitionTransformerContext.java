@@ -25,7 +25,7 @@ import org.eclipselabs.mscript.language.il.VariableDeclaration;
  * @author Andreas Unger
  *
  */
-public class FunctionDefinitionTransformerContext extends TransformerContext {
+public class FunctionDefinitionTransformerContext extends TransformerContext implements IFunctionDefinitionTransformerContext {
 
 	private ILFunctionDefinition functionDefinition;
 	
@@ -38,8 +38,8 @@ public class FunctionDefinitionTransformerContext extends TransformerContext {
 		this.functionDefinition = functionDefinition;
 	}
 	
-	/**
-	 * @return the functionDefinition
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.language.il.transform.IFunctionDefinitionTransformerContext#getFunctionDefinition()
 	 */
 	public ILFunctionDefinition getFunctionDefinition() {
 		return functionDefinition;

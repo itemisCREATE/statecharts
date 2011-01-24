@@ -70,7 +70,7 @@ public class FunctionDefinitionTransformer {
 
 		Collection<List<EquationDescriptor>> equationCompounds = new EquationCompoundHelper().getEquationCompounds(functionDescriptor);
 		
-		FunctionDefinitionTransformerContext context = new FunctionDefinitionTransformerContext(ilFunctionDefinition);
+		IFunctionDefinitionTransformerContext context = new FunctionDefinitionTransformerContext(ilFunctionDefinition);
 		StatusUtil.merge(status, constructInitializationCompound(context, equationCompounds, variableDeclarations));
 		StatusUtil.merge(status, constructComputationCompounds(context, equationCompounds, variableDeclarations));
 		
@@ -142,7 +142,7 @@ public class FunctionDefinitionTransformer {
 		}
 	}
 	
-	private IStatus constructInitializationCompound(FunctionDefinitionTransformerContext context, Collection<List<EquationDescriptor>> equationCompounds, Map<VariableDescriptor, VariableDeclaration> variableDeclarations) {
+	private IStatus constructInitializationCompound(IFunctionDefinitionTransformerContext context, Collection<List<EquationDescriptor>> equationCompounds, Map<VariableDescriptor, VariableDeclaration> variableDeclarations) {
 		MultiStatus status = new MultiStatus(LanguagePlugin.PLUGIN_ID, 0, "Initialization compound construction errors", null);
 		
 		Compound compound = ILFactory.eINSTANCE.createCompound();
@@ -173,7 +173,7 @@ public class FunctionDefinitionTransformer {
 		return status.isOK() ? Status.OK_STATUS : status;
 	}
 	
-	private IStatus constructComputationCompounds(FunctionDefinitionTransformerContext context, Collection<List<EquationDescriptor>> equationCompounds, Map<VariableDescriptor, VariableDeclaration> variableDeclarations) {
+	private IStatus constructComputationCompounds(IFunctionDefinitionTransformerContext context, Collection<List<EquationDescriptor>> equationCompounds, Map<VariableDescriptor, VariableDeclaration> variableDeclarations) {
 		MultiStatus status = new MultiStatus(LanguagePlugin.PLUGIN_ID, 0, "Computation compound construction errors", null);
 
 		for (List<EquationDescriptor> equationDescriptors : equationCompounds) {
