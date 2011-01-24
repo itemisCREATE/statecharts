@@ -13,6 +13,7 @@ package org.eclipselabs.mscript.language.il.util;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipselabs.mscript.language.ast.Expression;
+import org.eclipselabs.mscript.language.internal.il.transform.DataTypeAdapter;
 import org.eclipselabs.mscript.typesystem.DataType;
 
 /**

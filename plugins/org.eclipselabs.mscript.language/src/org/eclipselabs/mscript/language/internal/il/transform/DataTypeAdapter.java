@@ -9,7 +9,7 @@
  *    Andreas Unger - initial API and implementation 
  ****************************************************************************/
 
-package org.eclipselabs.mscript.language.il.util;
+package org.eclipselabs.mscript.language.internal.il.transform;
 
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipselabs.mscript.typesystem.DataType;
