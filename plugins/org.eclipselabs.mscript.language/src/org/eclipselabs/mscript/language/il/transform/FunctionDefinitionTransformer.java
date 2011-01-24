@@ -54,8 +54,11 @@ import org.eclipselabs.mscript.typesystem.DataType;
  * @author Andreas Unger
  *
  */
-public class FunctionDefinitionTransformer {
+public class FunctionDefinitionTransformer implements IFunctionDefinitionTransformer {
 	
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.language.il.transform.IFunctionDefinitionTransformer#transform(org.eclipselabs.mscript.language.functionmodel.FunctionDescriptor, java.lang.String, java.util.List, java.util.List)
+	 */
 	public IFunctionDefinitionTransformerResult transform(FunctionDescriptor functionDescriptor, String functionName, List<IValue> templateArguments, List<DataType> inputParameterDataTypes) {
 		MultiStatus status = new MultiStatus(LanguagePlugin.PLUGIN_ID, 0, "Function definition transformation errors", null);
 
