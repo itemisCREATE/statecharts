@@ -78,7 +78,7 @@ import org.eclipselabs.mscript.typesystem.util.TypeSystemUtil;
  * @author Andreas Unger
  *
  */
-public class ExpressionTransformer extends AstSwitch<Expression> {
+public class ExpressionTransformer extends AstSwitch<Expression> implements IExpressionTransformer {
 
 	private ITransformerContext context;
 
@@ -94,6 +94,9 @@ public class ExpressionTransformer extends AstSwitch<Expression> {
 		status = new MultiStatus(LanguagePlugin.PLUGIN_ID, 0, "Expression transformer errors", null);
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.language.il.transform.IExpressionTransformer#transform(org.eclipselabs.mscript.language.ast.Expression, java.util.List)
+	 */
 	public IStatus transform(Expression expression, List<ExpressionTarget> targets) {
 		Expression result = doSwitch(expression);
 		ExpressionTarget target = targets.get(0);

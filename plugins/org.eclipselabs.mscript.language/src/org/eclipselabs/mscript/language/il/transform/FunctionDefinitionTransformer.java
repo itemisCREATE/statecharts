@@ -155,7 +155,7 @@ public class FunctionDefinitionTransformer {
 					context.enterScope();
 					context.setCompound(compound);
 
-					ExpressionTransformer transformer = new ExpressionTransformer(context);
+					IExpressionTransformer transformer = new ExpressionTransformer(context);
 					ExpressionTarget target = new ExpressionTarget(variableDeclarations.get(lhsVariableStep.getDescriptor()), lhsVariableStep.getIndex());
 					StatusUtil.merge(status, transformer.transform(equationDescriptor.getRightHandSide().getExpression(), Collections.singletonList(target)));
 					
@@ -185,7 +185,7 @@ public class FunctionDefinitionTransformer {
 					context.enterScope();
 					context.setCompound(compound);
 					
-					ExpressionTransformer transformer = new ExpressionTransformer(context);
+					IExpressionTransformer transformer = new ExpressionTransformer(context);
 					ExpressionTarget target = new ExpressionTarget(variableDeclarations.get(lhsVariableStep.getDescriptor()), lhsVariableStep.getIndex());
 					StatusUtil.merge(status, transformer.transform(equationDescriptor.getRightHandSide().getExpression(), Collections.singletonList(target)));
 
