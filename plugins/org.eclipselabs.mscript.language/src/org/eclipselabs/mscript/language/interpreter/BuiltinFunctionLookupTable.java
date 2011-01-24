@@ -14,7 +14,7 @@ package org.eclipselabs.mscript.language.interpreter;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.eclipselabs.mscript.language.il.util.BuiltinFunctionDescriptor;
+import org.eclipselabs.mscript.language.il.builtin.BuiltinFunctionDescriptor;
 
 /**
  * @author Andreas Unger

@@ -9,7 +9,7 @@
  *    Andreas Unger - initial API and implementation 
  ****************************************************************************/
 
-package org.eclipselabs.mscript.language.il.util;
+package org.eclipselabs.mscript.language.il.builtin;
 
 import java.util.List;
 
