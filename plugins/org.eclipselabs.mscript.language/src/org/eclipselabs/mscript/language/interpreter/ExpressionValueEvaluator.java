@@ -49,6 +49,8 @@ import org.eclipselabs.mscript.language.il.VariableReference;
 import org.eclipselabs.mscript.language.il.util.ILSwitch;
 import org.eclipselabs.mscript.language.internal.interpreter.InvalidUnitExpressionOperandException;
 import org.eclipselabs.mscript.language.internal.interpreter.UnitExpressionHelper;
+import org.eclipselabs.mscript.language.interpreter.builtin.BuiltinFunctionLookupTable;
+import org.eclipselabs.mscript.language.interpreter.builtin.IFunction;
 import org.eclipselabs.mscript.typesystem.ArrayType;
 import org.eclipselabs.mscript.typesystem.DataType;
 import org.eclipselabs.mscript.typesystem.IntegerType;

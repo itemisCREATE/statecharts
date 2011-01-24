@@ -9,7 +9,7 @@
  *    Andreas Unger - initial API and implementation 
  ****************************************************************************/
 
-package org.eclipselabs.mscript.language.interpreter;
+package org.eclipselabs.mscript.language.interpreter.builtin;
 
 import java.util.HashMap;
 import java.util.Map;
