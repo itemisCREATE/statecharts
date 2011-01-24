@@ -17,7 +17,7 @@ import org.eclipselabs.mscript.language.il.VariableDeclaration;
  * @author Andreas Unger
  *
  */
-public class ExpressionTarget {
+public class ExpressionTarget implements IExpressionTarget {
 
 	private VariableDeclaration variableDeclaration;
 	private int stepIndex;
@@ -30,15 +30,15 @@ public class ExpressionTarget {
 		this.stepIndex = stepIndex;
 	}
 	
-	/**
-	 * @return the variableDeclaration
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.language.il.transform.IExpressionTarget#getVariableDeclaration()
 	 */
 	public VariableDeclaration getVariableDeclaration() {
 		return variableDeclaration;
 	}
 	
-	/**
-	 * @return the stepIndex
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.language.il.transform.IExpressionTarget#getStepIndex()
 	 */
 	public int getStepIndex() {
 		return stepIndex;

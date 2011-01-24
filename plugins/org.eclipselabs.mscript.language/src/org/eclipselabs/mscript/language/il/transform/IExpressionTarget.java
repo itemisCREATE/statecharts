@@ -11,17 +11,22 @@
 
 package org.eclipselabs.mscript.language.il.transform;
 
-import java.util.List;
-
-import org.eclipse.core.runtime.IStatus;
-import org.eclipselabs.mscript.language.ast.Expression;
+import org.eclipselabs.mscript.language.il.VariableDeclaration;
 
 /**
  * @author Andreas Unger
  *
  */
-public interface IExpressionTransformer {
+public interface IExpressionTarget {
 
-	IStatus transform(Expression expression, List<? extends IExpressionTarget> targets);
+	/**
+	 * @return the variableDeclaration
+	 */
+	VariableDeclaration getVariableDeclaration();
+
+	/**
+	 * @return the stepIndex
+	 */
+	int getStepIndex();
 
 }

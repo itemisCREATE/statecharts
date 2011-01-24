@@ -97,9 +97,9 @@ public class ExpressionTransformer extends AstSwitch<Expression> implements IExp
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.language.il.transform.IExpressionTransformer#transform(org.eclipselabs.mscript.language.ast.Expression, java.util.List)
 	 */
-	public IStatus transform(Expression expression, List<ExpressionTarget> targets) {
+	public IStatus transform(Expression expression, List<? extends IExpressionTarget> targets) {
 		Expression result = doSwitch(expression);
-		ExpressionTarget target = targets.get(0);
+		IExpressionTarget target = targets.get(0);
 
 		Assignment assignment = ILFactory.eINSTANCE.createAssignment();
 		assignment.setAssignedExpression(result);
