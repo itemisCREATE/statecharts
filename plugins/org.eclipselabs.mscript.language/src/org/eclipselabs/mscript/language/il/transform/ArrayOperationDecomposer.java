@@ -26,6 +26,7 @@ import org.eclipselabs.mscript.language.ast.MultiplicativeExpressionPart;
 import org.eclipselabs.mscript.language.ast.MultiplicativeOperator;
 import org.eclipselabs.mscript.language.ast.ParenthesizedExpression;
 import org.eclipselabs.mscript.language.ast.util.AstSwitch;
+import org.eclipselabs.mscript.language.il.Compound;
 import org.eclipselabs.mscript.language.il.VariableReference;
 import org.eclipselabs.mscript.language.il.util.ILSwitch;
 import org.eclipselabs.mscript.language.il.util.ILUtil;
@@ -40,9 +41,16 @@ import org.eclipselabs.mscript.typesystem.util.TypeSystemUtil;
  * @author Andreas Unger
  *
  */
-public class ArrayOperationTransformer extends ILSwitch<Boolean> {
+public class ArrayOperationDecomposer extends ILSwitch<Boolean> implements IArrayOperationDecomposer {
 
 	private ArrayExpressionTransformer arrayExpressionTransformer = new ArrayExpressionTransformer();
+	
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.language.il.transform.IArrayOperationDecomposer#decompose(org.eclipselabs.mscript.language.il.Compound)
+	 */
+	public void decompose(Compound compound) {
+		doSwitch(compound);
+	}
 	
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.language.il.util.ILSwitch#defaultCase(org.eclipse.emf.ecore.EObject)
