@@ -19,6 +19,7 @@ import org.eclipselabs.mscript.computation.computationmodel.NumberFormat;
 import org.eclipselabs.mscript.computation.computationmodel.util.ComputationModelUtil;
 import org.eclipselabs.mscript.computation.engine.IComputationContext;
 import org.eclipselabs.mscript.typesystem.IntegerType;
+import org.eclipselabs.mscript.typesystem.NumericType;
 import org.eclipselabs.mscript.typesystem.RealType;
 
 /**
@@ -27,7 +28,24 @@ import org.eclipselabs.mscript.typesystem.RealType;
  */
 public class ValueConstructor implements IValueConstructor {
 
-	public ISimpleNumericValue createRealValue(IComputationContext context, RealType realType, double value) {
+	public ISimpleNumericValue construct(IComputationContext context, NumericType numericType, double value) {
+		if (numericType instanceof RealType) {
+			return constructRealValue(context, (RealType) numericType, value);
+		}
+		throw new IllegalArgumentException("Data type must be real type");
+	}
+	
+	public ISimpleNumericValue construct(IComputationContext context, NumericType numericType, long value) {
+		if (numericType instanceof RealType) {
+			return constructRealValue(context, (RealType) numericType, value);
+		}
+		if (numericType instanceof IntegerType) {
+			return constructIntegerValue(context, (IntegerType) numericType, value);
+		}
+		throw new IllegalArgumentException("Data type must be real type");
+	}
+
+	private ISimpleNumericValue constructRealValue(IComputationContext context, RealType realType, double value) {
 		NumberFormat numberFormat = context.getComputationModel().getNumberFormat(realType);
 		if (numberFormat instanceof FloatingPointFormat) {
 			FloatingPointFormat floatingPointFormat = (FloatingPointFormat) numberFormat;
@@ -49,7 +67,7 @@ public class ValueConstructor implements IValueConstructor {
 		throw new IllegalArgumentException();
 	}
 	
-	public ISimpleNumericValue createIntegerValue(IComputationContext context, IntegerType integerType, long value) {
+	private ISimpleNumericValue constructIntegerValue(IComputationContext context, IntegerType integerType, long value) {
 		NumberFormat numberFormat = context.getComputationModel().getNumberFormat(integerType);
 		if (numberFormat instanceof FixedPointFormat) {
 			FixedPointFormat fixedPointFormat = (FixedPointFormat) numberFormat;
@@ -62,7 +80,7 @@ public class ValueConstructor implements IValueConstructor {
 		throw new IllegalArgumentException();
 	}
 	
-	public IBooleanValue createBooleanValue(IComputationContext context, boolean value) {
+	public IBooleanValue construct(IComputationContext context, boolean value) {
 		return new BooleanValue(context, value);
 	}
 	

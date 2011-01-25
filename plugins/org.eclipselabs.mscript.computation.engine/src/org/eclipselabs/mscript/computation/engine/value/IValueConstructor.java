@@ -12,8 +12,7 @@
 package org.eclipselabs.mscript.computation.engine.value;
 
 import org.eclipselabs.mscript.computation.engine.IComputationContext;
-import org.eclipselabs.mscript.typesystem.IntegerType;
-import org.eclipselabs.mscript.typesystem.RealType;
+import org.eclipselabs.mscript.typesystem.NumericType;
 
 /**
  * @author Andreas Unger
@@ -21,8 +20,8 @@ import org.eclipselabs.mscript.typesystem.RealType;
  */
 public interface IValueConstructor {
 
-	ISimpleNumericValue createRealValue(IComputationContext context, RealType realType, double value);
-	ISimpleNumericValue createIntegerValue(IComputationContext context, IntegerType integerType, long value);
-	IBooleanValue createBooleanValue(IComputationContext context, boolean value);
+	ISimpleNumericValue construct(IComputationContext context, NumericType numericType, double value);
+	ISimpleNumericValue construct(IComputationContext context, NumericType numericType, long value);
+	IBooleanValue construct(IComputationContext context, boolean value);
 	
 }

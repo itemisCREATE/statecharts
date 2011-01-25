@@ -20,6 +20,7 @@ import org.eclipselabs.mscript.computation.engine.value.ArrayValue;
 import org.eclipselabs.mscript.computation.engine.value.IBooleanValue;
 import org.eclipselabs.mscript.computation.engine.value.INumericValue;
 import org.eclipselabs.mscript.computation.engine.value.IValue;
+import org.eclipselabs.mscript.computation.engine.value.IValueConstructor;
 import org.eclipselabs.mscript.computation.engine.value.InvalidValue;
 import org.eclipselabs.mscript.computation.engine.value.StringValue;
 import org.eclipselabs.mscript.computation.engine.value.UnitValue;
@@ -67,7 +68,7 @@ import org.eclipselabs.mscript.typesystem.util.TypeSystemUtil;
  */
 public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue> {
 	
-	private ValueConstructor valueConstructor = new ValueConstructor();
+	private IValueConstructor valueConstructor = new ValueConstructor();
 
 	private IInterpreterContext context;
 	
@@ -143,12 +144,12 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 		if (value instanceof IBooleanValue) {
 			IBooleanValue booleanResult = (IBooleanValue) value;
 			if (!booleanResult.booleanValue()) {
-				return valueConstructor.createBooleanValue(context.getComputationContext(), true);
+				return valueConstructor.construct(context.getComputationContext(), true);
 			}
 			value = doSwitch(impliesExpression.getRightOperand());
 			if (value instanceof IBooleanValue) {
 				booleanResult = (IBooleanValue) value;
-				return valueConstructor.createBooleanValue(context.getComputationContext(), booleanResult.booleanValue());
+				return valueConstructor.construct(context.getComputationContext(), booleanResult.booleanValue());
 			}
 		}
 		throw new RuntimeException("Implies expression operands must be boolean");
@@ -164,13 +165,13 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 			if (operandValue instanceof IBooleanValue) {
 				IBooleanValue booleanResult = (IBooleanValue) operandValue;
 				if (!booleanResult.booleanValue()) {
-					return valueConstructor.createBooleanValue(context.getComputationContext(), false);
+					return valueConstructor.construct(context.getComputationContext(), false);
 				}
 			} else {
 				throw new RuntimeException("Logical expression operands must be boolean");
 			}
 		}
-		return valueConstructor.createBooleanValue(context.getComputationContext(), true);
+		return valueConstructor.construct(context.getComputationContext(), true);
 	}
 	
 	/* (non-Javadoc)
@@ -183,13 +184,13 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 			if (operandValue instanceof IBooleanValue) {
 				IBooleanValue booleanResult = (IBooleanValue) operandValue;
 				if (booleanResult.booleanValue()) {
-					return valueConstructor.createBooleanValue(context.getComputationContext(), true);
+					return valueConstructor.construct(context.getComputationContext(), true);
 				}
 			} else {
 				throw new RuntimeException("Logical expression operands must be boolean");
 			}
 		}
-		return valueConstructor.createBooleanValue(context.getComputationContext(), false);
+		return valueConstructor.construct(context.getComputationContext(), false);
 	}
 	
 	/* (non-Javadoc)
@@ -249,7 +250,7 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 	public IValue caseTypeTestExpression(TypeTestExpression typeTestExpression) {
 		IValue value = doSwitch(typeTestExpression.getExpression());
 		DataType dataType = dataTypeSpecifierEvaluator.doSwitch(typeTestExpression.getType());
-		return valueConstructor.createBooleanValue(context.getComputationContext(), dataType.isAssignableFrom(value.getDataType()));
+		return valueConstructor.construct(context.getComputationContext(), dataType.isAssignableFrom(value.getDataType()));
 	}
 
 	/* (non-Javadoc)
@@ -266,7 +267,7 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 		case LOGICAL_NOT:
 			if (operandValue instanceof IBooleanValue) {
 				IBooleanValue booleanResult = (IBooleanValue) operandValue;
-				result = valueConstructor.createBooleanValue(context.getComputationContext(), !booleanResult.booleanValue());
+				result = valueConstructor.construct(context.getComputationContext(), !booleanResult.booleanValue());
 			} else {
 				result = InvalidValue.SINGLETON;
 			}
@@ -406,7 +407,7 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 		} catch (InvalidUnitExpressionOperandException e) {
 			throw new RuntimeException("Invalid unit", e);
 		}
-		return valueConstructor.createRealValue(context.getComputationContext(), realType, realLiteral.getValue());
+		return valueConstructor.construct(context.getComputationContext(), realType, realLiteral.getValue());
 	}
 
 	/* (non-Javadoc)
@@ -424,7 +425,7 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 		} catch (InvalidUnitExpressionOperandException e) {
 			throw new RuntimeException("Invalid unit", e);
 		}
-		return valueConstructor.createIntegerValue(context.getComputationContext(), integerType, integerLiteral.getValue());
+		return valueConstructor.construct(context.getComputationContext(), integerType, integerLiteral.getValue());
 	}
 	
 	/* (non-Javadoc)
@@ -432,7 +433,7 @@ public class ExpressionValueEvaluator extends AbstractExpressionEvaluator<IValue
 	 */
 	@Override
 	public IValue caseBooleanLiteral(BooleanLiteral booleanLiteral) {
-		return valueConstructor.createBooleanValue(context.getComputationContext(), booleanLiteral.getValue() == BooleanKind.TRUE);
+		return valueConstructor.construct(context.getComputationContext(), booleanLiteral.getValue() == BooleanKind.TRUE);
 	}
 
 	/* (non-Javadoc)

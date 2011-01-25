@@ -25,10 +25,10 @@ public class ValueTransformer {
 		if (value instanceof ISimpleNumericValue) {
 			ISimpleNumericValue numericValue = (ISimpleNumericValue) value;
 			if (numericValue.getDataType() instanceof RealType) {
-				return new ValueConstructor().createRealValue(context, (RealType) value.getDataType(), numericValue.doubleValue());
+				return new ValueConstructor().construct(context, (RealType) value.getDataType(), numericValue.doubleValue());
 			}
 			if (numericValue.getDataType() instanceof IntegerType) {
-				return new ValueConstructor().createIntegerValue(context, (IntegerType) value.getDataType(), numericValue.longValue());
+				return new ValueConstructor().construct(context, (IntegerType) value.getDataType(), numericValue.longValue());
 			}
 		}
 		if (value instanceof VectorValue) {
