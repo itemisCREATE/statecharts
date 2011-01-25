@@ -9,7 +9,7 @@
  *    Andreas Unger - initial API and implementation 
  ****************************************************************************/
 
-package org.eclipselabs.mscript.language.interpreter;
+package org.eclipselabs.mscript.language.internal.il.transform;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
@@ -27,6 +27,8 @@ import org.eclipselabs.mscript.language.il.transform.FunctionDefinitionTransform
 import org.eclipselabs.mscript.language.il.transform.ITransformerContext;
 import org.eclipselabs.mscript.language.internal.LanguagePlugin;
 import org.eclipselabs.mscript.language.internal.util.StatusUtil;
+import org.eclipselabs.mscript.language.interpreter.IInterpreterContext;
+import org.eclipselabs.mscript.language.interpreter.StaticInterpreterContext;
 import org.eclipselabs.mscript.language.interpreter.util.ExpressionInterpreterHelper;
 import org.eclipselabs.mscript.language.util.SyntaxStatus;
 
