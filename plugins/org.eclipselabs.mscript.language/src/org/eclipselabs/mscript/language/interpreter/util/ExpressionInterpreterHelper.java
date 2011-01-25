@@ -80,7 +80,7 @@ public class ExpressionInterpreterHelper {
 			IVariable outputVariable = new Variable(resultVariableDeclaration);
 			interpreterContext.addVariable(outputVariable);
 			
-			new CompoundInterpreter(interpreterContext).doSwitch(compound);
+			new CompoundInterpreter().execute(interpreterContext, compound);
 
 			return outputVariable.getValue(0);
 		} finally {

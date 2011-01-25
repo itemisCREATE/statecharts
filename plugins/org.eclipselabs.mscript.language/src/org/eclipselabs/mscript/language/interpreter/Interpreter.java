@@ -30,7 +30,7 @@ public class Interpreter {
 	public void initialize(IInterpreterContext context, IFunctor functor) {
 		Compound initializationCompound = functor.getFunctionDefinition().getInitializationCompound();
 		if (initializationCompound != null) {
-			new CompoundInterpreter(context).doSwitch(initializationCompound);
+			new CompoundInterpreter().execute(context, initializationCompound);
 		}
 	}
 	
@@ -41,10 +41,10 @@ public class Interpreter {
 			variable.setValue(0, inputValueIterator.next());
 		}
 		
-		CompoundInterpreter compoundInterpreter = new CompoundInterpreter(context);
+		ICompoundInterpreter compoundInterpreter = new CompoundInterpreter();
 		
 		for (ComputationCompound compound : functor.getFunctionDefinition().getComputationCompounds()) {
-			compoundInterpreter.doSwitch(compound);
+			compoundInterpreter.execute(context, compound);
 		}
 		
 		List<IValue> outputValues = new ArrayList<IValue>();
