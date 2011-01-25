@@ -25,8 +25,11 @@ import org.eclipselabs.mscript.language.il.OutputVariableDeclaration;
  * @author Andreas Unger
  *
  */
-public class Interpreter {
+public class Interpreter implements IInterpreter {
 
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.language.interpreter.IInterpreter#initialize(org.eclipselabs.mscript.language.interpreter.IInterpreterContext, org.eclipselabs.mscript.language.interpreter.IFunctor)
+	 */
 	public void initialize(IInterpreterContext context, IFunctor functor) {
 		Compound initializationCompound = functor.getFunctionDefinition().getInitializationCompound();
 		if (initializationCompound != null) {
@@ -34,6 +37,9 @@ public class Interpreter {
 		}
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.language.interpreter.IInterpreter#execute(org.eclipselabs.mscript.language.interpreter.IInterpreterContext, org.eclipselabs.mscript.language.interpreter.IFunctor, java.util.List)
+	 */
 	public List<IValue> execute(IInterpreterContext context, IFunctor functor, List<IValue> inputValues) {
 		Iterator<IValue> inputValueIterator = inputValues.iterator();
 		for (InputVariableDeclaration inputVariableDeclaration : functor.getFunctionDefinition().getInputVariableDeclarations()) {

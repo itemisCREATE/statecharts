@@ -27,6 +27,7 @@ import org.eclipselabs.mscript.computation.engine.value.IValue;
 import org.eclipselabs.mscript.ide.core.IDECorePlugin;
 import org.eclipselabs.mscript.ide.core.internal.launch.util.ParseUtil;
 import org.eclipselabs.mscript.language.interpreter.IFunctor;
+import org.eclipselabs.mscript.language.interpreter.IInterpreter;
 import org.eclipselabs.mscript.language.interpreter.IInterpreterContext;
 import org.eclipselabs.mscript.language.interpreter.Interpreter;
 
@@ -67,7 +68,7 @@ public class MscriptThread extends Thread {
 	@Override
 	public void run() {
 		try {
-			Interpreter interpreter = new Interpreter();
+			IInterpreter interpreter = new Interpreter();
 			interpreter.initialize(interpreterContext, functor);
 			
 			BufferedReader reader = new BufferedReader(new InputStreamReader(inputFile.getContents()));
