@@ -55,10 +55,12 @@ import org.eclipselabs.mscript.language.il.FunctionCall;
 import org.eclipselabs.mscript.language.il.Name;
 import org.eclipselabs.mscript.language.il.PropertyReference;
 import org.eclipselabs.mscript.language.il.VariableReference;
+import org.eclipselabs.mscript.language.il.builtin.BuiltinFunctionDescriptor;
 import org.eclipselabs.mscript.language.il.util.ILSwitch;
 import org.eclipselabs.mscript.language.internal.interpreter.InvalidUnitExpressionOperandException;
 import org.eclipselabs.mscript.language.internal.interpreter.UnitExpressionHelper;
 import org.eclipselabs.mscript.language.interpreter.builtin.BuiltinFunctionLookupTable;
+import org.eclipselabs.mscript.language.interpreter.builtin.IBuiltinFunctionLookupTable;
 import org.eclipselabs.mscript.language.interpreter.builtin.IFunction;
 import org.eclipselabs.mscript.typesystem.ArrayType;
 import org.eclipselabs.mscript.typesystem.DataType;
@@ -489,7 +491,7 @@ public class ExpressionValueEvaluator implements IExpressionValueEvaluator {
 	
 		private class ILExpressionValueEvaluatorSwitch extends ILSwitch<IValue> {
 			
-			private BuiltinFunctionLookupTable builtinFunctionLookupTable = new BuiltinFunctionLookupTable();
+			private IBuiltinFunctionLookupTable builtinFunctionLookupTable = new BuiltinFunctionLookupTable();
 			
 			/* (non-Javadoc)
 			 * @see org.eclipselabs.mscript.language.imperativemodel.util.ILSwitch#caseVariableReference(org.eclipselabs.mscript.language.imperativemodel.VariableReference)
@@ -514,16 +516,26 @@ public class ExpressionValueEvaluator implements IExpressionValueEvaluator {
 			@Override
 			public IValue caseFunctionCall(FunctionCall functionCall) {
 				Name name = functionCall.getName();
+				
+				List<IValue> argumentValues = new ArrayList<IValue>();
+				for (Expression argument : functionCall.getArguments()) {
+					argumentValues.add(ExpressionValueEvaluatorSwitch.this.doSwitch(argument));
+				}
+
 				if (name.getSegments().size() == 1) {
-					IFunction behavior = builtinFunctionLookupTable.getFunction(name.getLastSegment());
-					if (behavior != null) {
-						List<IValue> argumentValues = new ArrayList<IValue>();
-						for (Expression argument : functionCall.getArguments()) {
-							argumentValues.add(ExpressionValueEvaluatorSwitch.this.doSwitch(argument));
+					List<DataType> inputParameterDataTypes = new ArrayList<DataType>();
+					for (IValue argumentValue : argumentValues) {
+						inputParameterDataTypes.add(argumentValue.getDataType());
+					}
+					BuiltinFunctionDescriptor descriptor = BuiltinFunctionDescriptor.get(name.getLastSegment(), inputParameterDataTypes);
+					if (descriptor != null) {
+						IFunction behavior = builtinFunctionLookupTable.getFunction(descriptor);
+						if (behavior != null) {
+							return behavior.call(context, argumentValues);
 						}
-						return behavior.call(context, argumentValues);
 					}
 				}
+				
 				return super.caseFunctionCall(functionCall);
 			}
 			
