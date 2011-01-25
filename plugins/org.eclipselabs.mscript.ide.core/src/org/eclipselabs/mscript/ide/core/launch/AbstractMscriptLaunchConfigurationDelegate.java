@@ -163,7 +163,7 @@ public abstract class AbstractMscriptLaunchConfigurationDelegate extends LaunchC
 				return null;
 			}
 			DataTypeSpecifier dataTypeSpecifier = (DataTypeSpecifier) parseResult.getRootASTElement();
-			DataType dataType = new DataTypeSpecifierEvaluator(interpreterContext).doSwitch(dataTypeSpecifier);
+			DataType dataType = new DataTypeSpecifierEvaluator().evaluate(interpreterContext, dataTypeSpecifier);
 			if (dataType instanceof InvalidDataType) {
 				return null;
 			}

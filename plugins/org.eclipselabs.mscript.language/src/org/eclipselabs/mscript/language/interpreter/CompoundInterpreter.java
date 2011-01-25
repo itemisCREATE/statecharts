@@ -33,14 +33,14 @@ public class CompoundInterpreter extends ILSwitch<Boolean> {
 
 	private IInterpreterContext context;
 	
-	private ExpressionValueEvaluator expressionValueEvaluator;
+	private IExpressionValueEvaluator expressionValueEvaluator;
 	
 	/**
 	 * 
 	 */
 	public CompoundInterpreter(IInterpreterContext context) {
 		this.context = context;
-		expressionValueEvaluator = new ExpressionValueEvaluator(context);
+		expressionValueEvaluator = new ExpressionValueEvaluator();
 	}
 	
 	/* (non-Javadoc)
@@ -61,7 +61,7 @@ public class CompoundInterpreter extends ILSwitch<Boolean> {
 	 */
 	@Override
 	public Boolean caseAssignment(Assignment assignment) {
-		IValue value = expressionValueEvaluator.doSwitch(assignment.getAssignedExpression());
+		IValue value = expressionValueEvaluator.evaluate(context, assignment.getAssignedExpression());
 		IVariable variable = context.getVariable(assignment.getTarget());
 		variable.setValue(assignment.getStepIndex(), value);
 		return true;
@@ -72,7 +72,7 @@ public class CompoundInterpreter extends ILSwitch<Boolean> {
 	 */
 	@Override
 	public Boolean caseIfStatement(IfStatement ifStatement) {
-		IValue conditionValue = expressionValueEvaluator.doSwitch(ifStatement.getCondition());
+		IValue conditionValue = expressionValueEvaluator.evaluate(context, ifStatement.getCondition());
 		if (conditionValue instanceof IBooleanValue) {
 			IBooleanValue booleanConditionValue = (IBooleanValue) conditionValue;
 			if (booleanConditionValue.booleanValue()) {
@@ -89,7 +89,7 @@ public class CompoundInterpreter extends ILSwitch<Boolean> {
 	 */
 	@Override
 	public Boolean caseForeachStatement(ForeachStatement foreachStatement) {
-		IValue value = expressionValueEvaluator.doSwitch(foreachStatement.getCollectionExpression());
+		IValue value = expressionValueEvaluator.evaluate(context, foreachStatement.getCollectionExpression());
 
 		if (!(value.getDataType() instanceof ArrayType)) {
 			throw new RuntimeException("Collection type must be array type");
@@ -128,7 +128,7 @@ public class CompoundInterpreter extends ILSwitch<Boolean> {
 	public Boolean caseLocalVariableDeclaration(LocalVariableDeclaration localVariableDeclaration) {
 		IValue value;
 		if (localVariableDeclaration.getInitializer() != null) {
-			value = expressionValueEvaluator.doSwitch(localVariableDeclaration.getInitializer());
+			value = expressionValueEvaluator.evaluate(context, localVariableDeclaration.getInitializer());
 		} else {
 			value = new UninitializedValue(context.getComputationContext());
 		}
