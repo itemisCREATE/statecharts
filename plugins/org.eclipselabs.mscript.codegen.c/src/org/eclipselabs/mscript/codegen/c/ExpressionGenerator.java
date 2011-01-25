@@ -12,6 +12,7 @@
 package org.eclipselabs.mscript.codegen.c;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -48,6 +49,7 @@ import org.eclipselabs.mscript.language.il.Name;
 import org.eclipselabs.mscript.language.il.PropertyReference;
 import org.eclipselabs.mscript.language.il.TemplateVariableDeclaration;
 import org.eclipselabs.mscript.language.il.VariableReference;
+import org.eclipselabs.mscript.language.il.builtin.BuiltinFunctionDescriptor;
 import org.eclipselabs.mscript.language.il.util.ILSwitch;
 import org.eclipselabs.mscript.language.il.util.ILUtil;
 import org.eclipselabs.mscript.typesystem.DataType;
@@ -413,7 +415,7 @@ public class ExpressionGenerator extends AstSwitch<Boolean> {
 
 	private class ILExpressionGenerator extends ILSwitch<Boolean> {
 		
-		private BuiltinFunctionGeneratorLookupTable builtinFunctionGeneratorLookupTable = new BuiltinFunctionGeneratorLookupTable();
+		private IBuiltinFunctionGeneratorLookupTable builtinFunctionGeneratorLookupTable = new BuiltinFunctionGeneratorLookupTable();
 		
 		public Boolean caseVariableReference(VariableReference variableReference) {
 			// TODO: redesign is needed here
@@ -445,9 +447,16 @@ public class ExpressionGenerator extends AstSwitch<Boolean> {
 		public Boolean caseFunctionCall(FunctionCall functionCall) {
 			Name name = functionCall.getName();
 			if (name.getSegments().size() == 1) {
-				IFunctionGenerator generator = builtinFunctionGeneratorLookupTable.getFunctionGenerator(name.getLastSegment());
-				if (generator != null) {
-					generator.generate(context, variableAccessStrategy, functionCall.getArguments());
+				List<DataType> inputParameterDataTypes = new ArrayList<DataType>();
+				for (Expression argument : functionCall.getArguments()) {
+					inputParameterDataTypes.add(ILUtil.getDataType(argument));
+				}
+				BuiltinFunctionDescriptor descriptor = BuiltinFunctionDescriptor.get(name.getLastSegment(), inputParameterDataTypes);
+				if (descriptor != null) {
+					IFunctionGenerator generator = builtinFunctionGeneratorLookupTable.getFunctionGenerator(descriptor);
+					if (generator != null) {
+						generator.generate(context, variableAccessStrategy, functionCall.getArguments());
+					}
 				}
 			}
 			return true;

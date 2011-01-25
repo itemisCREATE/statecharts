@@ -17,13 +17,8 @@ import org.eclipselabs.mscript.language.il.builtin.BuiltinFunctionDescriptor;
  * @author Andreas Unger
  *
  */
-public class BuiltinFunctionGeneratorLookupTable implements IBuiltinFunctionGeneratorLookupTable {
+public interface IBuiltinFunctionGeneratorLookupTable {
 
-	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.codegen.c.IBuiltinFunctionGeneratorLookupTable#getFunctionGenerator(org.eclipselabs.mscript.language.il.builtin.BuiltinFunctionDescriptor)
-	 */
-	public IFunctionGenerator getFunctionGenerator(BuiltinFunctionDescriptor builtinFunctionDescriptor) {
-		return null;
-	}
-	
+	IFunctionGenerator getFunctionGenerator(BuiltinFunctionDescriptor builtinFunctionDescriptor);
+
 }
