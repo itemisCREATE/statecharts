@@ -15,7 +15,7 @@ import java.io.PrintWriter;
 import java.util.List;
 
 import org.eclipselabs.mscript.codegen.c.internal.VariableAccessStrategy;
-import org.eclipselabs.mscript.codegen.c.util.GeneratorUtil;
+import org.eclipselabs.mscript.codegen.c.util.MscriptGeneratorUtil;
 import org.eclipselabs.mscript.language.il.ComputationCompound;
 import org.eclipselabs.mscript.language.il.ILFunctionDefinition;
 import org.eclipselabs.mscript.language.il.InputVariableDeclaration;
@@ -87,12 +87,12 @@ public class MscriptGenerator {
 	private void writeContextStructureMember(StatefulVariableDeclaration variableDeclaration) {
 		if (variableDeclaration.getCircularBufferSize() > 1) {
 			writer.printf("%s[%d];\n",
-					GeneratorUtil.getCVariableDeclaration(context.getComputationModel(), variableDeclaration.getType(), variableDeclaration.getName(), false),
+					MscriptGeneratorUtil.getCVariableDeclaration(context.getComputationModel(), variableDeclaration.getType(), variableDeclaration.getName(), false),
 					variableDeclaration.getCircularBufferSize());
 			writer.printf("int %s_index;\n", variableDeclaration.getName());
 		} else {
 			writer.printf("%s;\n",
-					GeneratorUtil.getCVariableDeclaration(context.getComputationModel(), variableDeclaration.getType(), variableDeclaration.getName(), false));
+					MscriptGeneratorUtil.getCVariableDeclaration(context.getComputationModel(), variableDeclaration.getType(), variableDeclaration.getName(), false));
 		}
 	}
 	
@@ -202,12 +202,12 @@ public class MscriptGenerator {
 		for (ComputationCompound compound : functionDefinition.getComputationCompounds()) {
 			if (!compound.getOutputs().isEmpty()) {
 				for (InputVariableDeclaration inputVariableDeclaration : compound.getInputs()) {
-					writer.printf(", %s", GeneratorUtil.getCVariableDeclaration(context.getComputationModel(), inputVariableDeclaration.getType(), inputVariableDeclaration.getName(), false));
+					writer.printf(", %s", MscriptGeneratorUtil.getCVariableDeclaration(context.getComputationModel(), inputVariableDeclaration.getType(), inputVariableDeclaration.getName(), false));
 				}
 			}
 		}
 		for (OutputVariableDeclaration outputVariableDeclaration: functionDefinition.getOutputVariableDeclarations()) {
-			writer.printf(", %s", GeneratorUtil.getCVariableDeclaration(context.getComputationModel(), outputVariableDeclaration.getType(), outputVariableDeclaration.getName(), true));
+			writer.printf(", %s", MscriptGeneratorUtil.getCVariableDeclaration(context.getComputationModel(), outputVariableDeclaration.getType(), outputVariableDeclaration.getName(), true));
 		}
 		writer.print(")");
 	}
@@ -220,7 +220,7 @@ public class MscriptGenerator {
 		for (ComputationCompound compound : functionDefinition.getComputationCompounds()) {
 			if (compound.getOutputs().isEmpty()) {
 				for (InputVariableDeclaration inputVariableDeclaration : compound.getInputs()) {
-					writer.printf(", %s", GeneratorUtil.getCVariableDeclaration(context.getComputationModel(), inputVariableDeclaration.getType(), inputVariableDeclaration.getName(), false));
+					writer.printf(", %s", MscriptGeneratorUtil.getCVariableDeclaration(context.getComputationModel(), inputVariableDeclaration.getType(), inputVariableDeclaration.getName(), false));
 				}
 			}
 		}
@@ -239,7 +239,7 @@ public class MscriptGenerator {
 			} else {
 				writer.print(", ");
 			}
-			writer.print(GeneratorUtil.getCVariableDeclaration(context.getComputationModel(), inputVariableDeclaration.getType(), inputVariableDeclaration.getName(), false));
+			writer.print(MscriptGeneratorUtil.getCVariableDeclaration(context.getComputationModel(), inputVariableDeclaration.getType(), inputVariableDeclaration.getName(), false));
 		}
 		for (OutputVariableDeclaration outputVariableDeclaration: functionDefinition.getOutputVariableDeclarations()) {
 			if (first) {
@@ -247,7 +247,7 @@ public class MscriptGenerator {
 			} else {
 				writer.print(", ");
 			}
-			writer.print(GeneratorUtil.getCVariableDeclaration(context.getComputationModel(), outputVariableDeclaration.getType(), outputVariableDeclaration.getName(), true));
+			writer.print(MscriptGeneratorUtil.getCVariableDeclaration(context.getComputationModel(), outputVariableDeclaration.getType(), outputVariableDeclaration.getName(), true));
 		}
 		writer.print(")");
 	}

@@ -34,7 +34,7 @@ import org.eclipselabs.mscript.typesystem.NumericType;
  * @author Andreas Unger
  *
  */
-public class GeneratorUtil {
+public class MscriptGeneratorUtil {
 	
 	public static String getCVariableDeclaration(ComputationModel computationModel, DataType dataType, String name, boolean pointer) {
 		StringBuilder cDataType = new StringBuilder();

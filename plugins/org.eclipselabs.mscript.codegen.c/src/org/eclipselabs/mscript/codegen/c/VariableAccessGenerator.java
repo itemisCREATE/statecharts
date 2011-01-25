@@ -1,6 +1,6 @@
 package org.eclipselabs.mscript.codegen.c;
 
-import org.eclipselabs.mscript.codegen.c.util.GeneratorUtil;
+import org.eclipselabs.mscript.codegen.c.util.MscriptGeneratorUtil;
 import org.eclipselabs.mscript.computation.computationmodel.ComputationModel;
 import org.eclipselabs.mscript.computation.engine.value.IArrayValue;
 import org.eclipselabs.mscript.computation.engine.value.IBooleanValue;
@@ -46,9 +46,9 @@ public class VariableAccessGenerator extends ILSwitch<String> {
 		if (value instanceof ISimpleNumericValue) {
 			ISimpleNumericValue numericTemplateArgument = (ISimpleNumericValue) value;
 			if (value.getDataType() instanceof RealType) {
-				return GeneratorUtil.getLiteralString(computationModel, numericTemplateArgument.getDataType(), numericTemplateArgument.doubleValue());
+				return MscriptGeneratorUtil.getLiteralString(computationModel, numericTemplateArgument.getDataType(), numericTemplateArgument.doubleValue());
 			} else if (value.getDataType() instanceof IntegerType) {
-				return GeneratorUtil.getLiteralString(computationModel, numericTemplateArgument.getDataType(), numericTemplateArgument.longValue());
+				return MscriptGeneratorUtil.getLiteralString(computationModel, numericTemplateArgument.getDataType(), numericTemplateArgument.longValue());
 			}
 		} else if (value instanceof IBooleanValue){
 			IBooleanValue booleanTemplateArgument = (IBooleanValue) value;

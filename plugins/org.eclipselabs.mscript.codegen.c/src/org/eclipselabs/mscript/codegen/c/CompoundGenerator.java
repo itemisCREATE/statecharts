@@ -14,7 +14,7 @@ package org.eclipselabs.mscript.codegen.c;
 import java.io.PrintWriter;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipselabs.mscript.codegen.c.util.GeneratorUtil;
+import org.eclipselabs.mscript.codegen.c.util.MscriptGeneratorUtil;
 import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.il.Assignment;
 import org.eclipselabs.mscript.language.il.Compound;
@@ -59,7 +59,7 @@ public class CompoundGenerator extends ILSwitch<Boolean> {
 			writer.print("{\n");
 		}
 		for (LocalVariableDeclaration localVariableDeclaration : compound.getLocalVariableDeclarations()) {
-			writer.print(GeneratorUtil.getCVariableDeclaration(context.getComputationModel(), localVariableDeclaration.getType(), localVariableDeclaration.getName(), false));
+			writer.print(MscriptGeneratorUtil.getCVariableDeclaration(context.getComputationModel(), localVariableDeclaration.getType(), localVariableDeclaration.getName(), false));
 			writer.print(";\n");
 		}
 		for (Statement statement : compound.getStatements()) {
@@ -121,7 +121,7 @@ public class CompoundGenerator extends ILSwitch<Boolean> {
 		}
 		
 		String itVarName = iterationVariableDeclaration.getName();
-		String itVarDecl = GeneratorUtil.getCVariableDeclaration(context.getComputationModel(), iterationVariableDeclaration.getType(), itVarName, false);
+		String itVarDecl = MscriptGeneratorUtil.getCVariableDeclaration(context.getComputationModel(), iterationVariableDeclaration.getType(), itVarName, false);
 		int size = collectionArrayType.getSize();
 		
 		writer.println("{");
@@ -165,7 +165,7 @@ public class CompoundGenerator extends ILSwitch<Boolean> {
 		}
 		cast(targetDataType, assignedExpression);
 		if (arrayType != null) {
-			writer.printf(", sizeof (%s)", GeneratorUtil.getCDataType(context.getComputationModel(), arrayType.getElementType()));
+			writer.printf(", sizeof (%s)", MscriptGeneratorUtil.getCDataType(context.getComputationModel(), arrayType.getElementType()));
 			for (ArrayDimension arrayDimension : arrayType.getDimensions()) {
 				writer.printf(" * %d", arrayDimension.getSize());
 			}
@@ -175,7 +175,7 @@ public class CompoundGenerator extends ILSwitch<Boolean> {
 	}
 	
 	private void cast(DataType targetDataType, Expression expression) {
-		GeneratorUtil.cast(context, variableAccessStrategy, expression, targetDataType);
+		MscriptGeneratorUtil.cast(context, variableAccessStrategy, expression, targetDataType);
 	}
 	
 }

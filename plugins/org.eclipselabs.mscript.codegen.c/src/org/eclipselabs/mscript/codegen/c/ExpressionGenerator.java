@@ -18,7 +18,7 @@ import java.util.ListIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipselabs.mscript.codegen.c.internal.util.CastToFixedPointHelper;
 import org.eclipselabs.mscript.codegen.c.internal.util.CastToFloatingPointHelper;
-import org.eclipselabs.mscript.codegen.c.util.GeneratorUtil;
+import org.eclipselabs.mscript.codegen.c.util.MscriptGeneratorUtil;
 import org.eclipselabs.mscript.computation.computationmodel.FixedPointFormat;
 import org.eclipselabs.mscript.computation.computationmodel.FixedPointOperation;
 import org.eclipselabs.mscript.computation.computationmodel.FixedPointOperationKind;
@@ -145,11 +145,11 @@ public class ExpressionGenerator extends AstSwitch<Boolean> {
 			
 			NumberFormat widestNumberFormat = ComputationModelUtil.getWidestNumberFormat(numberFormat1, numberFormat2);
 
-			GeneratorUtil.castNumericType(context, variableAccessStrategy, widestNumberFormat, leftOperand);
+			MscriptGeneratorUtil.castNumericType(context, variableAccessStrategy, widestNumberFormat, leftOperand);
 			writer.print(" ");
 			writer.print(operator);
 			writer.print(" ");
-			GeneratorUtil.castNumericType(context, variableAccessStrategy, widestNumberFormat, rightOperand);
+			MscriptGeneratorUtil.castNumericType(context, variableAccessStrategy, widestNumberFormat, rightOperand);
 		} else {
 			doSwitch(leftOperand);
 			writer.print(" ");
@@ -168,12 +168,12 @@ public class ExpressionGenerator extends AstSwitch<Boolean> {
 		
 		NumberFormat numberFormat = context.getComputationModel().getNumberFormat(dataType);
 
-		GeneratorUtil.castNumericType(context, variableAccessStrategy, numberFormat, additiveExpression.getLeftOperand());
+		MscriptGeneratorUtil.castNumericType(context, variableAccessStrategy, numberFormat, additiveExpression.getLeftOperand());
 		for (AdditiveExpressionPart rightPart : additiveExpression.getRightParts()) {
 			writer.print(" ");
 			writer.print(rightPart.getOperator().getLiteral());
 			writer.print(" ");
-			GeneratorUtil.castNumericType(context, variableAccessStrategy, numberFormat, rightPart.getOperand());
+			MscriptGeneratorUtil.castNumericType(context, variableAccessStrategy, numberFormat, rightPart.getOperand());
 		}
 		
 		return true;
@@ -368,7 +368,7 @@ public class ExpressionGenerator extends AstSwitch<Boolean> {
 	@Override
 	public Boolean caseRealLiteral(RealLiteral realLiteral) {
 		DataType dataType = ILUtil.getDataType(realLiteral);
-		writer.print(GeneratorUtil.getLiteralString(context.getComputationModel(), dataType, realLiteral.getValue()));
+		writer.print(MscriptGeneratorUtil.getLiteralString(context.getComputationModel(), dataType, realLiteral.getValue()));
 		return true;
 	}
 
@@ -378,7 +378,7 @@ public class ExpressionGenerator extends AstSwitch<Boolean> {
 	@Override
 	public Boolean caseIntegerLiteral(IntegerLiteral integerLiteral) {
 		DataType dataType = ILUtil.getDataType(integerLiteral);
-		writer.print(GeneratorUtil.getLiteralString(context.getComputationModel(), dataType, integerLiteral.getValue()));
+		writer.print(MscriptGeneratorUtil.getLiteralString(context.getComputationModel(), dataType, integerLiteral.getValue()));
 		return true;
 	}
 	
