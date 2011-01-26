@@ -13,13 +13,17 @@ package org.yakindu.sct.statechart.diagram.editparts;
 import static org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants.REQ_DIRECTEDIT_EXTENDEDDATA_INITIAL_CHAR;
 
 import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.Label;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.tools.DirectEditManager;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.LabelEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.label.ILabelDelegate;
+import org.eclipse.gmf.runtime.diagram.ui.label.LabelExDelegate;
 import org.eclipse.gmf.runtime.diagram.ui.tools.TextDirectEditManager;
-import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
+import org.eclipse.gmf.runtime.draw2d.ui.figures.LabelEx;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.swt.SWT;
 import org.yakindu.model.sct.statechart.StatechartPackage;
@@ -46,7 +50,7 @@ public class TransitionExpressionEditPart extends LabelEditPart implements
 	@Override
 	protected void handleNotificationEvent(Notification notification) {
 		if (notification.getFeature() == feature) {
-			getWrappingLabel().setText(getEditText());
+			getLabel().setText(getEditText());
 		}
 		super.handleNotificationEvent(notification);
 	}
@@ -65,18 +69,18 @@ public class TransitionExpressionEditPart extends LabelEditPart implements
 	@Override
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
-//		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE,
-//				new LabelDirectEditPolicy());
-		// TODO: Add a Feedback role
+		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE,
+				new XTextDirectEditPolicy());
 	}
+	
 
 	@Override
 	public String getEditText() {
-		return getWrappingLabel().getText();
+		return getLabel().getText();
 	}
 
-	public WrappingLabel getWrappingLabel() {
-		return (WrappingLabel) getFigure();
+	public LabelEx getLabel() {
+		return (LabelEx) getFigure();
 	}
 
 
@@ -106,6 +110,11 @@ public class TransitionExpressionEditPart extends LabelEditPart implements
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public EAttribute getTextFeature() {
+		return feature;
 	}
 
 }

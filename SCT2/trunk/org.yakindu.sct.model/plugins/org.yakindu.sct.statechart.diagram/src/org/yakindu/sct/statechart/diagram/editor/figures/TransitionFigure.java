@@ -5,19 +5,23 @@ import org.eclipse.draw2d.PolygonDecoration;
 import org.eclipse.draw2d.RotatableDecoration;
 import org.eclipse.draw2d.geometry.PointList;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx;
-import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 import org.eclipse.gmf.runtime.draw2d.ui.mapmode.IMapMode;
-
+import org.yakindu.sct.statechart.diagram.xtext.integration.StyledLabel;
+/**
+ * 
+ * @author muelder
+ *
+ */
 public class TransitionFigure extends PolylineConnectionEx {
 
 	private final IMapMode mapMode;
 
-	private final WrappingLabel expression;
+	private final StyledLabel expression;
 
 	public TransitionFigure(IMapMode mapMode) {
 		this.mapMode = mapMode;
 		setLineWidth(mapMode.DPtoLP(1));
-		expression = new WrappingLabel();
+		expression = new StyledLabel();
 		this.add(expression);
 		setTargetDecoration(createTargetDecoration());
 	}

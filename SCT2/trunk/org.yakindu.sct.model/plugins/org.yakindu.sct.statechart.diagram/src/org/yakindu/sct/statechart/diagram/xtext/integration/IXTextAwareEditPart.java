@@ -1,6 +1,8 @@
 package org.yakindu.sct.statechart.diagram.xtext.integration;
 
-import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
+import org.eclipse.draw2d.Label;
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.gef.GraphicalEditPart;
 
 /**
  * 
@@ -9,11 +11,19 @@ import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
  * @author muelder
  * 
  */
-public interface IXTextAwareEditPart {
+public interface IXTextAwareEditPart extends GraphicalEditPart {
 	/**
 	 * Returns the text to edit
 	 */
 	String getEditText();
-	
-	WrappingLabel getWrappingLabel();
+
+	/**
+	 * Returns the Wrapping label used for DirectEdititing
+	 */
+	Label getLabel();
+
+	/**
+	 * Returns the {@link EAttribute} where to store the xText expression
+	 */
+	EAttribute getTextFeature();
 }
