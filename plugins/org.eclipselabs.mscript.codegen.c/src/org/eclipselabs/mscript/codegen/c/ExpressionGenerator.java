@@ -360,7 +360,8 @@ public class ExpressionGenerator extends AstSwitch<Boolean> {
 	 */
 	@Override
 	public Boolean caseUnaryExpression(UnaryExpression unaryExpression) {
-		writer.print(unaryExpression.getOperator().getLiteral() + doSwitch(unaryExpression.getOperand()));
+		writer.print(unaryExpression.getOperator().getLiteral());
+		doSwitch(unaryExpression.getOperand());
 		return true;
 	}
 	
