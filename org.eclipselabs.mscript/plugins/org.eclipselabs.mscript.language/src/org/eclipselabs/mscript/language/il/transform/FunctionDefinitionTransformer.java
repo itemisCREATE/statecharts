@@ -116,7 +116,7 @@ public class FunctionDefinitionTransformer implements IFunctionDefinitionTransfo
 			}
 			VariableDescriptor variableDescriptor = functionDescriptor.getVariableDescriptor(parameterDeclaration.getName());
 			if (variableDescriptor != null) {
-				inputVariableDeclaration.setCircularBufferSize(variableDescriptor.getMaximumStep().getIndex() - variableDescriptor.getMinimumStep().getIndex() + 1);
+				inputVariableDeclaration.setCircularBufferSize(getInoutputCircularBufferSize(variableDescriptor));
 				variableDeclarations.put(variableDescriptor, inputVariableDeclaration);
 			}
 			ilFunctionDefinition.getInputVariableDeclarations().add(inputVariableDeclaration);
@@ -127,7 +127,7 @@ public class FunctionDefinitionTransformer implements IFunctionDefinitionTransfo
 			outputVariableDeclaration.setName(parameterDeclaration.getName());
 			VariableDescriptor variableDescriptor = functionDescriptor.getVariableDescriptor(parameterDeclaration.getName());
 			if (variableDescriptor != null) {
-				outputVariableDeclaration.setCircularBufferSize(variableDescriptor.getMaximumStep().getIndex() - variableDescriptor.getMinimumStep().getIndex() + 1);
+				outputVariableDeclaration.setCircularBufferSize(getInoutputCircularBufferSize(variableDescriptor));
 				variableDeclarations.put(variableDescriptor, outputVariableDeclaration);
 			}
 			ilFunctionDefinition.getOutputVariableDeclarations().add(outputVariableDeclaration);
@@ -143,6 +143,18 @@ public class FunctionDefinitionTransformer implements IFunctionDefinitionTransfo
 			}
 			ilFunctionDefinition.getInstanceVariableDeclarations().add(instanceVariableDeclaration);
 		}
+	}
+	
+	private int getInoutputCircularBufferSize(VariableDescriptor variableDescriptor) {
+		int minimumStepIndex = variableDescriptor.getMinimumStep().getIndex();
+		if (minimumStepIndex > 0) {
+			minimumStepIndex = 0;
+		}
+		int maximumStepIndex = variableDescriptor.getMaximumStep().getIndex();
+		if (maximumStepIndex < 0) {
+			maximumStepIndex = 0;
+		}
+		return maximumStepIndex - minimumStepIndex + 1;
 	}
 	
 	private IStatus constructInitializationCompound(IFunctionDefinitionTransformerContext context, Collection<List<EquationDescriptor>> equationCompounds, Map<VariableDescriptor, VariableDeclaration> variableDeclarations) {
