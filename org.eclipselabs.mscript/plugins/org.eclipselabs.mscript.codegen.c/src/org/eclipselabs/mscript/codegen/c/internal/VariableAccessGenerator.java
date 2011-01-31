@@ -1,5 +1,6 @@
-package org.eclipselabs.mscript.codegen.c;
+package org.eclipselabs.mscript.codegen.c.internal;
 
+import org.eclipselabs.mscript.codegen.c.IVariableAccessStrategy;
 import org.eclipselabs.mscript.codegen.c.util.MscriptGeneratorUtil;
 import org.eclipselabs.mscript.computation.computationmodel.ComputationModel;
 import org.eclipselabs.mscript.computation.engine.value.IArrayValue;

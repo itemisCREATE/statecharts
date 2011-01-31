@@ -150,7 +150,7 @@ public class MscriptGeneratorUtil {
 			NumberFormat numberFormat = context.getComputationModel().getNumberFormat(targetDataType);
 			castNumericType(context, variableAccessStrategy, numberFormat, expression);
 		} else {
-			new ExpressionGenerator(context, variableAccessStrategy).doSwitch(expression);
+			new ExpressionGenerator().generate(context, variableAccessStrategy, expression);
 		}
 	}
 
@@ -161,7 +161,7 @@ public class MscriptGeneratorUtil {
 				
 				@Override
 				protected void writeExpression() {
-					new ExpressionGenerator(context, variableAccessStrategy).doSwitch(expression);
+					new ExpressionGenerator().generate(context, variableAccessStrategy, expression);
 				}
 				
 			}.cast();
@@ -171,7 +171,7 @@ public class MscriptGeneratorUtil {
 
 				@Override
 				protected void writeExpression() {
-					new ExpressionGenerator(context, variableAccessStrategy).doSwitch(expression);
+					new ExpressionGenerator().generate(context, variableAccessStrategy, expression);
 				}
 				
 			}.cast();

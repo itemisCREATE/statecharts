@@ -25,11 +25,12 @@ import org.eclipselabs.mscript.typesystem.TensorType;
  */
 public class SumFunctionGenerator implements IFunctionGenerator {
 
+	private final IExpressionGenerator expressionGenerator = new ExpressionGenerator();
+	
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.codegen.c.IFunctionGenerator#generate(java.util.List)
 	 */
 	public void generate(IMscriptGeneratorContext context, IVariableAccessStrategy variableAccessStrategy, List<Expression> arguments) {
-		ExpressionGenerator expressionGenerator = new ExpressionGenerator(context, variableAccessStrategy);
 		PrintWriter writer = new PrintWriter(context.getWriter());
 		
 		Expression argument = arguments.get(0);
@@ -46,7 +47,7 @@ public class SumFunctionGenerator implements IFunctionGenerator {
 				writer.print(" + ");
 			}
 			writer.print("(");
-			expressionGenerator.doSwitch(argument);
+			expressionGenerator.generate(context, variableAccessStrategy, argument);
 			writer.printf(")[%d]", i);
 		}
 	}

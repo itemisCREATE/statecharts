@@ -29,6 +29,8 @@ import org.eclipselabs.mscript.language.il.StatefulVariableDeclaration;
  */
 public class MscriptGenerator {
 	
+	private final ICompoundGenerator compoundGenerator = new CompoundGenerator();
+	
 	private ILFunctionDefinition functionDefinition;
 	
 	private IMscriptGeneratorContext context;
@@ -130,7 +132,7 @@ public class MscriptGenerator {
 			generateInitializeIndexStatements(functionDefinition.getInputVariableDeclarations());
 			generateInitializeIndexStatements(functionDefinition.getOutputVariableDeclarations());
 			generateInitializeIndexStatements(functionDefinition.getInstanceVariableDeclarations());
-			new CompoundGenerator(context, variableAccessStrategy).doSwitch(functionDefinition.getInitializationCompound());
+			compoundGenerator.generate(context, variableAccessStrategy, functionDefinition.getInitializationCompound());
 			writer.println("}");
 
 			writer.println();
@@ -139,7 +141,7 @@ public class MscriptGenerator {
 			writer.println(" {");
 			for (ComputationCompound compound : functionDefinition.getComputationCompounds()) {
 				if (!compound.getOutputs().isEmpty()) {
-					new CompoundGenerator(context, variableAccessStrategy).doSwitch(compound);
+					compoundGenerator.generate(context, variableAccessStrategy, compound);
 				}
 			}
 			for (InputVariableDeclaration inputVariableDeclaration : functionDefinition.getInputVariableDeclarations()) {
@@ -162,7 +164,7 @@ public class MscriptGenerator {
 			writer.println(" {");
 			for (ComputationCompound compound : functionDefinition.getComputationCompounds()) {
 				if (compound.getOutputs().isEmpty()) {
-					new CompoundGenerator(context, variableAccessStrategy).doSwitch(compound);
+					compoundGenerator.generate(context, variableAccessStrategy, compound);
 				}
 			}
 			generateUpdateIndexStatements(functionDefinition.getInputVariableDeclarations());
@@ -173,7 +175,7 @@ public class MscriptGenerator {
 			generateStatelessFunctionHeader();
 			writer.println(" {");
 			for (ComputationCompound compound : functionDefinition.getComputationCompounds()) {
-				new CompoundGenerator(context, variableAccessStrategy).doSwitch(compound);
+				compoundGenerator.generate(context, variableAccessStrategy, compound);
 			}
 			writer.println("}");
 		}
