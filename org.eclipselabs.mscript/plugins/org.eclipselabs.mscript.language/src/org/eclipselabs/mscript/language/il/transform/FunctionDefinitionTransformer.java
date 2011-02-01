@@ -13,18 +13,16 @@ package org.eclipselabs.mscript.language.il.transform;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeSet;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipselabs.mscript.computation.engine.value.IValue;
 import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
@@ -195,10 +193,7 @@ public class FunctionDefinitionTransformer implements IFunctionDefinitionTransfo
 
 		for (List<EquationDescriptor> equationDescriptors : equationCompounds) {
 			ComputationCompound compound = ILFactory.eINSTANCE.createComputationCompound();
-			
-			Set<InputVariableDeclaration> inputs = new InputVariableDeclarationSet();
-			Set<OutputVariableDeclaration> outputs = new OutputVariableDeclarationSet();
-			
+			Set<InputVariableDeclaration> inputs = new HashSet<InputVariableDeclaration>();
 			for (EquationDescriptor equationDescriptor : equationDescriptors) {
 				VariableStep lhsVariableStep = FunctionModelUtil.getFirstLeftHandSideVariableStep(equationDescriptor);
 				if (lhsVariableStep != null) {
@@ -221,80 +216,17 @@ public class FunctionDefinitionTransformer implements IFunctionDefinitionTransfo
 
 					if (lhsVariableStep.getDescriptor().getKind() == VariableKind.OUTPUT_PARAMETER
 							&& lhsVariableStep.getIndex() == 0) {
-						outputs.add((OutputVariableDeclaration) variableDeclarations.get(lhsVariableStep.getDescriptor()));
+						compound.getOutputs().add((OutputVariableDeclaration) variableDeclarations.get(lhsVariableStep.getDescriptor()));
 					}
 				}
 			}
-			
 			for (InputVariableDeclaration input : inputs) {
 				compound.getInputs().add(input);
 			}
-			for (OutputVariableDeclaration output : outputs) {
-				compound.getOutputs().add(output);
-			}
-			
 			context.getFunctionDefinition().getComputationCompounds().add(compound);
 		}
 
 		return status.isOK() ? Status.OK_STATUS : status;
 	}
 	
-	private static class InputVariableDeclarationSet extends TreeSet<InputVariableDeclaration> {
-		
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = 1L;
-		
-		private static final Comparator<InputVariableDeclaration> COMPARATOR = new Comparator<InputVariableDeclaration>() {
-
-			public int compare(InputVariableDeclaration d1, InputVariableDeclaration d2) {
-				EObject container = d1.eContainer();
-				if (container instanceof ILFunctionDefinition) {
-					List<InputVariableDeclaration> declarations = ((ILFunctionDefinition) container).getInputVariableDeclarations();
-					return declarations.indexOf(d1) - declarations.indexOf(d2);
-				}
-				return 0;
-			}
-			
-		};
-		
-		/**
-		 * 
-		 */
-		public InputVariableDeclarationSet() {
-			super(COMPARATOR);
-		}
-		
-	}
-	
-	private static class OutputVariableDeclarationSet extends TreeSet<OutputVariableDeclaration> {
-		
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = 1L;
-		
-		private static final Comparator<OutputVariableDeclaration> COMPARATOR = new Comparator<OutputVariableDeclaration>() {
-
-			public int compare(OutputVariableDeclaration d1, OutputVariableDeclaration d2) {
-				EObject container = d1.eContainer();
-				if (container instanceof ILFunctionDefinition) {
-					List<OutputVariableDeclaration> declarations = ((ILFunctionDefinition) container).getOutputVariableDeclarations();
-					return declarations.indexOf(d1) - declarations.indexOf(d2);
-				}
-				return 0;
-			}
-			
-		};
-		
-		/**
-		 * 
-		 */
-		public OutputVariableDeclarationSet() {
-			super(COMPARATOR);
-		}
-		
-	}
-
 }

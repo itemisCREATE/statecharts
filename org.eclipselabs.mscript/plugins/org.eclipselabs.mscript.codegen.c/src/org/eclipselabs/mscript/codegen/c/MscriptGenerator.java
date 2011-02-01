@@ -70,17 +70,17 @@ public class MscriptGenerator {
 	
 	public void generateContextStructure() {
 		writer.printf("typedef struct {\n");
-		for (InputVariableDeclaration inputVariableDeclaration: functionDefinition.getInputVariableDeclarations()) {
+		for (InputVariableDeclaration inputVariableDeclaration : functionDefinition.getInputVariableDeclarations()) {
 			if (inputVariableDeclaration.getCircularBufferSize() > 1) {
 				writeContextStructureMember(inputVariableDeclaration);
 			}
 		}
-		for (OutputVariableDeclaration outputVariableDeclaration: functionDefinition.getOutputVariableDeclarations()) {
+		for (OutputVariableDeclaration outputVariableDeclaration : functionDefinition.getOutputVariableDeclarations()) {
 			if (outputVariableDeclaration.getCircularBufferSize() > 1) {
 				writeContextStructureMember(outputVariableDeclaration);
 			}
 		}
-		for (InstanceVariableDeclaration instanceVariableDeclaration: functionDefinition.getInstanceVariableDeclarations()) {
+		for (InstanceVariableDeclaration instanceVariableDeclaration : functionDefinition.getInstanceVariableDeclarations()) {
 			writeContextStructureMember(instanceVariableDeclaration);
 		}
 		writer.printf("} %s_Context;\n", functionDefinition.getName());
@@ -102,7 +102,7 @@ public class MscriptGenerator {
 		if (functionDefinition.isStateful()) {
 			generateInitializeFunctionHeader();
 			writer.println(";");
-			generateComputationFunctionHeader();
+			generateComputeOutputsFunctionHeader();
 			writer.println(";");
 			generateUpdateFunctionHeader();
 			writer.println(";");
@@ -127,50 +127,15 @@ public class MscriptGenerator {
 	public void generateFunctionImplementations() {
 		IVariableAccessStrategy variableAccessStrategy = new VariableAccessStrategy();
 		if (functionDefinition.isStateful()) {
-			generateInitializeFunctionHeader();
-			writer.println(" {");
-			generateInitializeIndexStatements(functionDefinition.getInputVariableDeclarations());
-			generateInitializeIndexStatements(functionDefinition.getOutputVariableDeclarations());
-			generateInitializeIndexStatements(functionDefinition.getInstanceVariableDeclarations());
-			compoundGenerator.generate(context, variableAccessStrategy, functionDefinition.getInitializationCompound());
-			writer.println("}");
+			generateInitializeFunctionImplementation(variableAccessStrategy);
 
 			writer.println();
 
-			generateComputationFunctionHeader();
-			writer.println(" {");
-			for (ComputationCompound compound : functionDefinition.getComputationCompounds()) {
-				if (!compound.getOutputs().isEmpty()) {
-					compoundGenerator.generate(context, variableAccessStrategy, compound);
-				}
-			}
-			for (InputVariableDeclaration inputVariableDeclaration : functionDefinition.getInputVariableDeclarations()) {
-				if (inputVariableDeclaration.getCircularBufferSize() > 1) {
-					String name = inputVariableDeclaration.getName();
-					writer.printf("context->%s[context->%s_index] = %s;\n", name, name, name);
-				}
-			}
-			for (OutputVariableDeclaration outputVariableDeclaration : functionDefinition.getOutputVariableDeclarations()) {
-				if (outputVariableDeclaration.getCircularBufferSize() > 1) {
-					String name = outputVariableDeclaration.getName();
-					writer.printf("context->%s[context->%s_index] = *%s;\n", name, name, name);
-				}
-			}
-			writer.println("}");
+			generateComputeOutputsImplementation(variableAccessStrategy);
 
 			writer.println();
 
-			generateUpdateFunctionHeader();
-			writer.println(" {");
-			for (ComputationCompound compound : functionDefinition.getComputationCompounds()) {
-				if (compound.getOutputs().isEmpty()) {
-					compoundGenerator.generate(context, variableAccessStrategy, compound);
-				}
-			}
-			generateUpdateIndexStatements(functionDefinition.getInputVariableDeclarations());
-			generateUpdateIndexStatements(functionDefinition.getOutputVariableDeclarations());
-			generateUpdateIndexStatements(functionDefinition.getInstanceVariableDeclarations());
-			writer.println("}");
+			generateUpdateFunctionImplementation(variableAccessStrategy);
 		} else {
 			generateStatelessFunctionHeader();
 			writer.println(" {");
@@ -188,6 +153,19 @@ public class MscriptGenerator {
 		writer.printf("void %s_initialize(%s_Context *context)", functionDefinition.getName(), functionDefinition.getName());
 	}
 
+	/**
+	 * @param variableAccessStrategy
+	 */
+	private void generateInitializeFunctionImplementation(IVariableAccessStrategy variableAccessStrategy) {
+		generateInitializeFunctionHeader();
+		writer.println(" {");
+		generateInitializeIndexStatements(functionDefinition.getInputVariableDeclarations());
+		generateInitializeIndexStatements(functionDefinition.getOutputVariableDeclarations());
+		generateInitializeIndexStatements(functionDefinition.getInstanceVariableDeclarations());
+		compoundGenerator.generate(context, variableAccessStrategy, functionDefinition.getInitializationCompound());
+		writer.println("}");
+	}
+
 	private void generateInitializeIndexStatements(List<? extends StatefulVariableDeclaration> statefulVariableDeclarations) {
 		for (StatefulVariableDeclaration statefulVariableDeclaration : statefulVariableDeclarations) {
 			if (statefulVariableDeclaration.getCircularBufferSize() > 1) {
@@ -199,13 +177,11 @@ public class MscriptGenerator {
 	/**
 	 * 
 	 */
-	private void generateComputationFunctionHeader() {
+	private void generateComputeOutputsFunctionHeader() {
 		writer.printf("void %s(%s_Context *context", functionDefinition.getName(), functionDefinition.getName());
-		for (ComputationCompound compound : functionDefinition.getComputationCompounds()) {
-			if (!compound.getOutputs().isEmpty()) {
-				for (InputVariableDeclaration inputVariableDeclaration : compound.getInputs()) {
-					writer.printf(", %s", MscriptGeneratorUtil.getCVariableDeclaration(context.getComputationModel(), inputVariableDeclaration.getType(), inputVariableDeclaration.getName(), false));
-				}
+		for (InputVariableDeclaration inputVariableDeclaration : functionDefinition.getInputVariableDeclarations()) {
+			if (consumesInput(inputVariableDeclaration, true)) {
+				writer.printf(", %s", MscriptGeneratorUtil.getCVariableDeclaration(context.getComputationModel(), inputVariableDeclaration.getType(), inputVariableDeclaration.getName(), false));
 			}
 		}
 		for (OutputVariableDeclaration outputVariableDeclaration: functionDefinition.getOutputVariableDeclarations()) {
@@ -215,18 +191,107 @@ public class MscriptGenerator {
 	}
 
 	/**
+	 * @param variableAccessStrategy
+	 */
+	private void generateComputeOutputsImplementation(IVariableAccessStrategy variableAccessStrategy) {
+		generateComputeOutputsFunctionHeader();
+		writer.println(" {");
+		for (ComputationCompound compound : functionDefinition.getComputationCompounds()) {
+			if (!compound.getOutputs().isEmpty()) {
+				compoundGenerator.generate(context, variableAccessStrategy, compound);
+				for (InputVariableDeclaration inputVariableDeclaration : compound.getInputs()) {
+					if (inputVariableDeclaration.getCircularBufferSize() > 1) {
+						generateUpdateInputContextStatement(inputVariableDeclaration);
+					}
+				}
+			}
+		}
+		for (OutputVariableDeclaration outputVariableDeclaration : functionDefinition.getOutputVariableDeclarations()) {
+			if (outputVariableDeclaration.getCircularBufferSize() > 1) {
+				String name = outputVariableDeclaration.getName();
+				writer.printf("context->%s[context->%s_index] = *%s;\n", name, name, name);
+			}
+		}
+		writer.println("}");
+	}
+
+	/**
 	 * 
 	 */
 	private void generateUpdateFunctionHeader() {
 		writer.printf("void %s_update(%s_Context *context", functionDefinition.getName(), functionDefinition.getName());
-		for (ComputationCompound compound : functionDefinition.getComputationCompounds()) {
-			if (compound.getOutputs().isEmpty()) {
-				for (InputVariableDeclaration inputVariableDeclaration : compound.getInputs()) {
-					writer.printf(", %s", MscriptGeneratorUtil.getCVariableDeclaration(context.getComputationModel(), inputVariableDeclaration.getType(), inputVariableDeclaration.getName(), false));
-				}
+		for (InputVariableDeclaration inputVariableDeclaration : functionDefinition.getInputVariableDeclarations()) {
+			if (consumesInput(inputVariableDeclaration, false) || updatesInputContext(inputVariableDeclaration)) {
+				writer.printf(", %s", MscriptGeneratorUtil.getCVariableDeclaration(context.getComputationModel(), inputVariableDeclaration.getType(), inputVariableDeclaration.getName(), false));
 			}
 		}
 		writer.print(")");
+	}
+
+	/**
+	 * @param variableAccessStrategy
+	 */
+	private void generateUpdateFunctionImplementation(IVariableAccessStrategy variableAccessStrategy) {
+		generateUpdateFunctionHeader();
+		writer.println(" {");
+		for (ComputationCompound compound : functionDefinition.getComputationCompounds()) {
+			if (compound.getOutputs().isEmpty()) {
+				compoundGenerator.generate(context, variableAccessStrategy, compound);
+			}
+		}
+		for (InputVariableDeclaration inputVariableDeclaration : functionDefinition.getInputVariableDeclarations()) {
+			if (updatesInputContext(inputVariableDeclaration)) {
+				generateUpdateInputContextStatement(inputVariableDeclaration);
+			}
+		}
+		generateUpdateIndexStatements(functionDefinition.getInputVariableDeclarations());
+		generateUpdateIndexStatements(functionDefinition.getOutputVariableDeclarations());
+		generateUpdateIndexStatements(functionDefinition.getInstanceVariableDeclarations());
+		writer.println("}");
+	}
+	
+	private boolean consumesInput(InputVariableDeclaration inputVariableDeclaration, boolean feedsOutputs) {
+		for (ComputationCompound compound : inputVariableDeclaration.getFeedingCompounds()) {
+			if (compound.getOutputs().isEmpty() != feedsOutputs) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * @param inputVariableDeclaration
+	 * @return
+	 */
+	private boolean updatesInputContext(InputVariableDeclaration inputVariableDeclaration) {
+		if (inputVariableDeclaration.getCircularBufferSize() > 1) {
+			if (inputVariableDeclaration.getFeedingCompounds().isEmpty()) {
+				return true;
+			}
+			for (ComputationCompound compound : functionDefinition.getComputationCompounds()) {
+				if (compound.getOutputs().isEmpty()) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	private void generateUpdateInputContextStatement(InputVariableDeclaration variableDeclaration) {
+		String name = variableDeclaration.getName();
+		writer.printf("context->%s[context->%s_index] = %s;\n", name, name, name);
+	}
+
+	/**
+	 * 
+	 */
+	private void generateUpdateIndexStatements(List<? extends StatefulVariableDeclaration> statefulVariableDeclarations) {
+		for (StatefulVariableDeclaration statefulVariableDeclaration : statefulVariableDeclarations) {
+			if (statefulVariableDeclaration.getCircularBufferSize() > 1) {
+				String name = statefulVariableDeclaration.getName();
+				writer.printf("context->%s_index = (context->%s_index + 1) %% %d;\n", name, name, statefulVariableDeclaration.getCircularBufferSize());
+			}
+		}
 	}
 
 	/**
@@ -252,18 +317,6 @@ public class MscriptGenerator {
 			writer.print(MscriptGeneratorUtil.getCVariableDeclaration(context.getComputationModel(), outputVariableDeclaration.getType(), outputVariableDeclaration.getName(), true));
 		}
 		writer.print(")");
-	}
-
-	/**
-	 * 
-	 */
-	private void generateUpdateIndexStatements(List<? extends StatefulVariableDeclaration> statefulVariableDeclarations) {
-		for (StatefulVariableDeclaration statefulVariableDeclaration : statefulVariableDeclarations) {
-			if (statefulVariableDeclaration.getCircularBufferSize() > 1) {
-				String name = statefulVariableDeclaration.getName();
-				writer.printf("context->%s_index = (context->%s_index + 1) %% %d;\n", name, name, statefulVariableDeclaration.getCircularBufferSize());
-			}
-		}
 	}
 	
 }
