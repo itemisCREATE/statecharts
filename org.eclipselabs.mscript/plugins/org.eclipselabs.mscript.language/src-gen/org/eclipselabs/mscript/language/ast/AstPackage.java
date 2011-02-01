@@ -385,13 +385,13 @@ public interface AstPackage extends EPackage
   int FUNCTION_DEFINITION__ASSERTIONS = DEFINITION_FEATURE_COUNT + 4;
 
   /**
-   * The feature id for the '<em><b>Functor Declarations</b></em>' containment reference list.
+   * The feature id for the '<em><b>Function Object Declarations</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int FUNCTION_DEFINITION__FUNCTOR_DECLARATIONS = DEFINITION_FEATURE_COUNT + 5;
+  int FUNCTION_DEFINITION__FUNCTION_OBJECT_DECLARATIONS = DEFINITION_FEATURE_COUNT + 5;
 
   /**
    * The feature id for the '<em><b>State Variable Declarations</b></em>' containment reference list.
@@ -532,14 +532,14 @@ public interface AstPackage extends EPackage
   int STATE_VARIABLE_DECLARATION_FEATURE_COUNT = 1;
 
   /**
-   * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.FunctorDeclarationImpl <em>Functor Declaration</em>}' class.
+   * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.FunctionObjectDeclarationImpl <em>Function Object Declaration</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.eclipselabs.mscript.language.ast.impl.FunctorDeclarationImpl
-   * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getFunctorDeclaration()
+   * @see org.eclipselabs.mscript.language.ast.impl.FunctionObjectDeclarationImpl
+   * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getFunctionObjectDeclaration()
    * @generated
    */
-  int FUNCTOR_DECLARATION = 12;
+  int FUNCTION_OBJECT_DECLARATION = 12;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -548,7 +548,7 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int FUNCTOR_DECLARATION__NAME = 0;
+  int FUNCTION_OBJECT_DECLARATION__NAME = 0;
 
   /**
    * The feature id for the '<em><b>Function Name</b></em>' containment reference.
@@ -557,7 +557,7 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int FUNCTOR_DECLARATION__FUNCTION_NAME = 1;
+  int FUNCTION_OBJECT_DECLARATION__FUNCTION_NAME = 1;
 
   /**
    * The feature id for the '<em><b>Template Arguments</b></em>' containment reference list.
@@ -566,16 +566,16 @@ public interface AstPackage extends EPackage
    * @generated
    * @ordered
    */
-  int FUNCTOR_DECLARATION__TEMPLATE_ARGUMENTS = 2;
+  int FUNCTION_OBJECT_DECLARATION__TEMPLATE_ARGUMENTS = 2;
 
   /**
-   * The number of structural features of the '<em>Functor Declaration</em>' class.
+   * The number of structural features of the '<em>Function Object Declaration</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int FUNCTOR_DECLARATION_FEATURE_COUNT = 3;
+  int FUNCTION_OBJECT_DECLARATION_FEATURE_COUNT = 3;
 
   /**
    * The meta object id for the '{@link org.eclipselabs.mscript.language.ast.impl.EquationImpl <em>Equation</em>}' class.
@@ -3025,15 +3025,15 @@ public interface AstPackage extends EPackage
   EReference getFunctionDefinition_Assertions();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getFunctorDeclarations <em>Functor Declarations</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getFunctionObjectDeclarations <em>Function Object Declarations</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Functor Declarations</em>'.
-   * @see org.eclipselabs.mscript.language.ast.FunctionDefinition#getFunctorDeclarations()
+   * @return the meta object for the containment reference list '<em>Function Object Declarations</em>'.
+   * @see org.eclipselabs.mscript.language.ast.FunctionDefinition#getFunctionObjectDeclarations()
    * @see #getFunctionDefinition()
    * @generated
    */
-  EReference getFunctionDefinition_FunctorDeclarations();
+  EReference getFunctionDefinition_FunctionObjectDeclarations();
 
   /**
    * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getStateVariableDeclarations <em>State Variable Declarations</em>}'.
@@ -3154,47 +3154,47 @@ public interface AstPackage extends EPackage
   EAttribute getStateVariableDeclaration_Name();
 
   /**
-   * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.FunctorDeclaration <em>Functor Declaration</em>}'.
+   * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.FunctionObjectDeclaration <em>Function Object Declaration</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Functor Declaration</em>'.
-   * @see org.eclipselabs.mscript.language.ast.FunctorDeclaration
+   * @return the meta object for class '<em>Function Object Declaration</em>'.
+   * @see org.eclipselabs.mscript.language.ast.FunctionObjectDeclaration
    * @generated
    */
-  EClass getFunctorDeclaration();
+  EClass getFunctionObjectDeclaration();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.ast.FunctorDeclaration#getName <em>Name</em>}'.
+   * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.ast.FunctionObjectDeclaration#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.eclipselabs.mscript.language.ast.FunctorDeclaration#getName()
-   * @see #getFunctorDeclaration()
+   * @see org.eclipselabs.mscript.language.ast.FunctionObjectDeclaration#getName()
+   * @see #getFunctionObjectDeclaration()
    * @generated
    */
-  EAttribute getFunctorDeclaration_Name();
+  EAttribute getFunctionObjectDeclaration_Name();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.FunctorDeclaration#getFunctionName <em>Function Name</em>}'.
+   * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.language.ast.FunctionObjectDeclaration#getFunctionName <em>Function Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Function Name</em>'.
-   * @see org.eclipselabs.mscript.language.ast.FunctorDeclaration#getFunctionName()
-   * @see #getFunctorDeclaration()
+   * @see org.eclipselabs.mscript.language.ast.FunctionObjectDeclaration#getFunctionName()
+   * @see #getFunctionObjectDeclaration()
    * @generated
    */
-  EReference getFunctorDeclaration_FunctionName();
+  EReference getFunctionObjectDeclaration_FunctionName();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.ast.FunctorDeclaration#getTemplateArguments <em>Template Arguments</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.language.ast.FunctionObjectDeclaration#getTemplateArguments <em>Template Arguments</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference list '<em>Template Arguments</em>'.
-   * @see org.eclipselabs.mscript.language.ast.FunctorDeclaration#getTemplateArguments()
-   * @see #getFunctorDeclaration()
+   * @see org.eclipselabs.mscript.language.ast.FunctionObjectDeclaration#getTemplateArguments()
+   * @see #getFunctionObjectDeclaration()
    * @generated
    */
-  EReference getFunctorDeclaration_TemplateArguments();
+  EReference getFunctionObjectDeclaration_TemplateArguments();
 
   /**
    * Returns the meta object for class '{@link org.eclipselabs.mscript.language.ast.Equation <em>Equation</em>}'.
@@ -5092,12 +5092,12 @@ public interface AstPackage extends EPackage
     EReference FUNCTION_DEFINITION__ASSERTIONS = eINSTANCE.getFunctionDefinition_Assertions();
 
     /**
-     * The meta object literal for the '<em><b>Functor Declarations</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Function Object Declarations</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference FUNCTION_DEFINITION__FUNCTOR_DECLARATIONS = eINSTANCE.getFunctionDefinition_FunctorDeclarations();
+    EReference FUNCTION_DEFINITION__FUNCTION_OBJECT_DECLARATIONS = eINSTANCE.getFunctionDefinition_FunctionObjectDeclarations();
 
     /**
      * The meta object literal for the '<em><b>State Variable Declarations</b></em>' containment reference list feature.
@@ -5194,14 +5194,14 @@ public interface AstPackage extends EPackage
     EAttribute STATE_VARIABLE_DECLARATION__NAME = eINSTANCE.getStateVariableDeclaration_Name();
 
     /**
-     * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.FunctorDeclarationImpl <em>Functor Declaration</em>}' class.
+     * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.FunctionObjectDeclarationImpl <em>Function Object Declaration</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.eclipselabs.mscript.language.ast.impl.FunctorDeclarationImpl
-     * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getFunctorDeclaration()
+     * @see org.eclipselabs.mscript.language.ast.impl.FunctionObjectDeclarationImpl
+     * @see org.eclipselabs.mscript.language.ast.impl.AstPackageImpl#getFunctionObjectDeclaration()
      * @generated
      */
-    EClass FUNCTOR_DECLARATION = eINSTANCE.getFunctorDeclaration();
+    EClass FUNCTION_OBJECT_DECLARATION = eINSTANCE.getFunctionObjectDeclaration();
 
     /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -5209,7 +5209,7 @@ public interface AstPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute FUNCTOR_DECLARATION__NAME = eINSTANCE.getFunctorDeclaration_Name();
+    EAttribute FUNCTION_OBJECT_DECLARATION__NAME = eINSTANCE.getFunctionObjectDeclaration_Name();
 
     /**
      * The meta object literal for the '<em><b>Function Name</b></em>' containment reference feature.
@@ -5217,7 +5217,7 @@ public interface AstPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference FUNCTOR_DECLARATION__FUNCTION_NAME = eINSTANCE.getFunctorDeclaration_FunctionName();
+    EReference FUNCTION_OBJECT_DECLARATION__FUNCTION_NAME = eINSTANCE.getFunctionObjectDeclaration_FunctionName();
 
     /**
      * The meta object literal for the '<em><b>Template Arguments</b></em>' containment reference list feature.
@@ -5225,7 +5225,7 @@ public interface AstPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference FUNCTOR_DECLARATION__TEMPLATE_ARGUMENTS = eINSTANCE.getFunctorDeclaration_TemplateArguments();
+    EReference FUNCTION_OBJECT_DECLARATION__TEMPLATE_ARGUMENTS = eINSTANCE.getFunctionObjectDeclaration_TemplateArguments();
 
     /**
      * The meta object literal for the '{@link org.eclipselabs.mscript.language.ast.impl.EquationImpl <em>Equation</em>}' class.

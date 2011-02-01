@@ -240,8 +240,8 @@ public class EquationDescriptorImpl extends EObjectImpl implements EquationDescr
 					message = "Left-hand side input reference must be negative initial step";
 				}
 				break;
-			case FUNCTOR:
-				message = "Left-hand side must not be functor reference";
+			case FUNCTION_OBJECT:
+				message = "Left-hand side must not be function object reference";
 				break;
 			case CONSTANT:
 				message = "Left-hand side must not be constant reference";

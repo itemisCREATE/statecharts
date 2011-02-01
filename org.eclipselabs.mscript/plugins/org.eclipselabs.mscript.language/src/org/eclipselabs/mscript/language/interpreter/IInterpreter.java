@@ -21,8 +21,8 @@ import org.eclipselabs.mscript.computation.engine.value.IValue;
  */
 public interface IInterpreter {
 
-	void initialize(IInterpreterContext context, IFunctor functor);
+	void initialize(IInterpreterContext context, IFunctionObject functionObject);
 
-	List<IValue> execute(IInterpreterContext context, IFunctor functor, List<IValue> inputValues);
+	List<IValue> execute(IInterpreterContext context, IFunctionObject functionObject, List<IValue> inputValues);
 
 }

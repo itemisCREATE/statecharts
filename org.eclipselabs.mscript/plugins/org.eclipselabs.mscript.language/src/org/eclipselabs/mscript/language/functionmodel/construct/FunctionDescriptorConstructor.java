@@ -188,8 +188,8 @@ public class FunctionDescriptorConstructor implements IFunctionDescriptorConstru
 					message = "Constants cannot be called";
 				}
 				break;
-			case FUNCTOR:
-				message = "Functors not supported yet";
+			case FUNCTION_OBJECT:
+				message = "Function objects not supported yet";
 				break;
 			}
 			

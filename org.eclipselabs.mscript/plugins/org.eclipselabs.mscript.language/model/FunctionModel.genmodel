@@ -14,7 +14,7 @@
       <genEnumLiterals ecoreEnumLiteral="FunctionModel.ecore#//VariableKind/OutputParameter"/>
       <genEnumLiterals ecoreEnumLiteral="FunctionModel.ecore#//VariableKind/StateVariable"/>
       <genEnumLiterals ecoreEnumLiteral="FunctionModel.ecore#//VariableKind/Constant"/>
-      <genEnumLiterals ecoreEnumLiteral="FunctionModel.ecore#//VariableKind/Functor"/>
+      <genEnumLiterals ecoreEnumLiteral="FunctionModel.ecore#//VariableKind/FunctionObject"/>
     </genEnums>
     <genClasses ecoreClass="FunctionModel.ecore#//FunctionDescriptor">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FunctionModel.ecore#//FunctionDescriptor/definition"/>

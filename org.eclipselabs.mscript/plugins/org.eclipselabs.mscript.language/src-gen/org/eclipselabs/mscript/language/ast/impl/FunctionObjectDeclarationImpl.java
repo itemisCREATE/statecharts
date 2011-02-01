@@ -23,25 +23,25 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.Expression;
-import org.eclipselabs.mscript.language.ast.FunctorDeclaration;
+import org.eclipselabs.mscript.language.ast.FunctionObjectDeclaration;
 import org.eclipselabs.mscript.language.ast.QualifiedName;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Functor Declaration</b></em>'.
+ * An implementation of the model object '<em><b>Function Object Declaration</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctorDeclarationImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctorDeclarationImpl#getFunctionName <em>Function Name</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctorDeclarationImpl#getTemplateArguments <em>Template Arguments</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionObjectDeclarationImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionObjectDeclarationImpl#getFunctionName <em>Function Name</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionObjectDeclarationImpl#getTemplateArguments <em>Template Arguments</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class FunctorDeclarationImpl extends MinimalEObjectImpl.Container implements FunctorDeclaration
+public class FunctionObjectDeclarationImpl extends MinimalEObjectImpl.Container implements FunctionObjectDeclaration
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -88,7 +88,7 @@ public class FunctorDeclarationImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  protected FunctorDeclarationImpl()
+  protected FunctionObjectDeclarationImpl()
   {
     super();
   }
@@ -101,7 +101,7 @@ public class FunctorDeclarationImpl extends MinimalEObjectImpl.Container impleme
   @Override
   protected EClass eStaticClass()
   {
-    return AstPackage.Literals.FUNCTOR_DECLARATION;
+    return AstPackage.Literals.FUNCTION_OBJECT_DECLARATION;
   }
 
   /**
@@ -124,7 +124,7 @@ public class FunctorDeclarationImpl extends MinimalEObjectImpl.Container impleme
     String oldName = name;
     name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.FUNCTOR_DECLARATION__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.FUNCTION_OBJECT_DECLARATION__NAME, oldName, name));
   }
 
   /**
@@ -148,7 +148,7 @@ public class FunctorDeclarationImpl extends MinimalEObjectImpl.Container impleme
     functionName = newFunctionName;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.FUNCTOR_DECLARATION__FUNCTION_NAME, oldFunctionName, newFunctionName);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.FUNCTION_OBJECT_DECLARATION__FUNCTION_NAME, oldFunctionName, newFunctionName);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -165,14 +165,14 @@ public class FunctorDeclarationImpl extends MinimalEObjectImpl.Container impleme
     {
       NotificationChain msgs = null;
       if (functionName != null)
-        msgs = ((InternalEObject)functionName).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.FUNCTOR_DECLARATION__FUNCTION_NAME, null, msgs);
+        msgs = ((InternalEObject)functionName).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.FUNCTION_OBJECT_DECLARATION__FUNCTION_NAME, null, msgs);
       if (newFunctionName != null)
-        msgs = ((InternalEObject)newFunctionName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.FUNCTOR_DECLARATION__FUNCTION_NAME, null, msgs);
+        msgs = ((InternalEObject)newFunctionName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.FUNCTION_OBJECT_DECLARATION__FUNCTION_NAME, null, msgs);
       msgs = basicSetFunctionName(newFunctionName, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.FUNCTOR_DECLARATION__FUNCTION_NAME, newFunctionName, newFunctionName));
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.FUNCTION_OBJECT_DECLARATION__FUNCTION_NAME, newFunctionName, newFunctionName));
   }
 
   /**
@@ -184,7 +184,7 @@ public class FunctorDeclarationImpl extends MinimalEObjectImpl.Container impleme
   {
     if (templateArguments == null)
     {
-      templateArguments = new EObjectContainmentEList<Expression>(Expression.class, this, AstPackage.FUNCTOR_DECLARATION__TEMPLATE_ARGUMENTS);
+      templateArguments = new EObjectContainmentEList<Expression>(Expression.class, this, AstPackage.FUNCTION_OBJECT_DECLARATION__TEMPLATE_ARGUMENTS);
     }
     return templateArguments;
   }
@@ -199,9 +199,9 @@ public class FunctorDeclarationImpl extends MinimalEObjectImpl.Container impleme
   {
     switch (featureID)
     {
-      case AstPackage.FUNCTOR_DECLARATION__FUNCTION_NAME:
+      case AstPackage.FUNCTION_OBJECT_DECLARATION__FUNCTION_NAME:
         return basicSetFunctionName(null, msgs);
-      case AstPackage.FUNCTOR_DECLARATION__TEMPLATE_ARGUMENTS:
+      case AstPackage.FUNCTION_OBJECT_DECLARATION__TEMPLATE_ARGUMENTS:
         return ((InternalEList<?>)getTemplateArguments()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -217,11 +217,11 @@ public class FunctorDeclarationImpl extends MinimalEObjectImpl.Container impleme
   {
     switch (featureID)
     {
-      case AstPackage.FUNCTOR_DECLARATION__NAME:
+      case AstPackage.FUNCTION_OBJECT_DECLARATION__NAME:
         return getName();
-      case AstPackage.FUNCTOR_DECLARATION__FUNCTION_NAME:
+      case AstPackage.FUNCTION_OBJECT_DECLARATION__FUNCTION_NAME:
         return getFunctionName();
-      case AstPackage.FUNCTOR_DECLARATION__TEMPLATE_ARGUMENTS:
+      case AstPackage.FUNCTION_OBJECT_DECLARATION__TEMPLATE_ARGUMENTS:
         return getTemplateArguments();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -238,13 +238,13 @@ public class FunctorDeclarationImpl extends MinimalEObjectImpl.Container impleme
   {
     switch (featureID)
     {
-      case AstPackage.FUNCTOR_DECLARATION__NAME:
+      case AstPackage.FUNCTION_OBJECT_DECLARATION__NAME:
         setName((String)newValue);
         return;
-      case AstPackage.FUNCTOR_DECLARATION__FUNCTION_NAME:
+      case AstPackage.FUNCTION_OBJECT_DECLARATION__FUNCTION_NAME:
         setFunctionName((QualifiedName)newValue);
         return;
-      case AstPackage.FUNCTOR_DECLARATION__TEMPLATE_ARGUMENTS:
+      case AstPackage.FUNCTION_OBJECT_DECLARATION__TEMPLATE_ARGUMENTS:
         getTemplateArguments().clear();
         getTemplateArguments().addAll((Collection<? extends Expression>)newValue);
         return;
@@ -262,13 +262,13 @@ public class FunctorDeclarationImpl extends MinimalEObjectImpl.Container impleme
   {
     switch (featureID)
     {
-      case AstPackage.FUNCTOR_DECLARATION__NAME:
+      case AstPackage.FUNCTION_OBJECT_DECLARATION__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case AstPackage.FUNCTOR_DECLARATION__FUNCTION_NAME:
+      case AstPackage.FUNCTION_OBJECT_DECLARATION__FUNCTION_NAME:
         setFunctionName((QualifiedName)null);
         return;
-      case AstPackage.FUNCTOR_DECLARATION__TEMPLATE_ARGUMENTS:
+      case AstPackage.FUNCTION_OBJECT_DECLARATION__TEMPLATE_ARGUMENTS:
         getTemplateArguments().clear();
         return;
     }
@@ -285,11 +285,11 @@ public class FunctorDeclarationImpl extends MinimalEObjectImpl.Container impleme
   {
     switch (featureID)
     {
-      case AstPackage.FUNCTOR_DECLARATION__NAME:
+      case AstPackage.FUNCTION_OBJECT_DECLARATION__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case AstPackage.FUNCTOR_DECLARATION__FUNCTION_NAME:
+      case AstPackage.FUNCTION_OBJECT_DECLARATION__FUNCTION_NAME:
         return functionName != null;
-      case AstPackage.FUNCTOR_DECLARATION__TEMPLATE_ARGUMENTS:
+      case AstPackage.FUNCTION_OBJECT_DECLARATION__TEMPLATE_ARGUMENTS:
         return templateArguments != null && !templateArguments.isEmpty();
     }
     return super.eIsSet(featureID);
@@ -312,4 +312,4 @@ public class FunctorDeclarationImpl extends MinimalEObjectImpl.Container impleme
     return result.toString();
   }
 
-} //FunctorDeclarationImpl
+} //FunctionObjectDeclarationImpl

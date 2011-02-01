@@ -28,7 +28,7 @@ import org.eclipselabs.mscript.language.il.VariableDeclaration;
  * @author Andreas Unger
  *
  */
-public class Functor implements IFunctor {
+public class FunctionObject implements IFunctionObject {
 
 	private ILFunctionDefinition functionDefinition;
 	private Map<VariableDeclaration, IVariable> variables = new HashMap<VariableDeclaration, IVariable>();
@@ -36,59 +36,59 @@ public class Functor implements IFunctor {
 	/**
 	 * 
 	 */
-	private Functor() {
+	private FunctionObject() {
 	}
 	
-	public static IFunctor create(IInterpreterContext context, ILFunctionDefinition functionDefinition) {
-		Functor functor = new Functor();
-		functor.functionDefinition = functionDefinition;
+	public static IFunctionObject create(IInterpreterContext context, ILFunctionDefinition functionDefinition) {
+		FunctionObject functionObject = new FunctionObject();
+		functionObject.functionDefinition = functionDefinition;
 		
 		ValueTransformer valueTransformer = new ValueTransformer();
 		
 		for (TemplateVariableDeclaration declaration : functionDefinition.getTemplateVariableDeclarations()) {
 			IVariable variable = new Variable(declaration);
 			variable.setValue(0, valueTransformer.transform(context.getComputationContext(), declaration.getValue()));
-			functor.variables.put(declaration, variable);
+			functionObject.variables.put(declaration, variable);
 		}
 		
 		for (InputVariableDeclaration declaration : functionDefinition.getInputVariableDeclarations()) {
-			functor.variables.put(declaration, new Variable(declaration, declaration.getCircularBufferSize()));
+			functionObject.variables.put(declaration, new Variable(declaration, declaration.getCircularBufferSize()));
 		}
 		
 		for (OutputVariableDeclaration declaration : functionDefinition.getOutputVariableDeclarations()) {
-			functor.variables.put(declaration, new Variable(declaration, declaration.getCircularBufferSize()));
+			functionObject.variables.put(declaration, new Variable(declaration, declaration.getCircularBufferSize()));
 		}
 		
 		for (InstanceVariableDeclaration declaration : functionDefinition.getInstanceVariableDeclarations()) {
-			functor.variables.put(declaration, new Variable(declaration, declaration.getCircularBufferSize()));
+			functionObject.variables.put(declaration, new Variable(declaration, declaration.getCircularBufferSize()));
 		}
 		
-		return functor;
+		return functionObject;
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.language.interpreter.IFunctor#getFunctionDefinition()
+	 * @see org.eclipselabs.mscript.language.interpreter.IFunctionObject#getFunctionDefinition()
 	 */
 	public ILFunctionDefinition getFunctionDefinition() {
 		return functionDefinition;
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.language.interpreter.IFunctor#getVariables()
+	 * @see org.eclipselabs.mscript.language.interpreter.IFunctionObject#getVariables()
 	 */
 	public Collection<IVariable> getVariables() {
 		return Collections.unmodifiableCollection(variables.values());
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.language.interpreter.IFunctor#getVariable(org.eclipselabs.mscript.language.imperativemodel.VariableDeclaration)
+	 * @see org.eclipselabs.mscript.language.interpreter.IFunctionObject#getVariable(org.eclipselabs.mscript.language.imperativemodel.VariableDeclaration)
 	 */
 	public IVariable getVariable(VariableDeclaration declaration) {
 		return variables.get(declaration);
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.language.interpreter.IFunctor#incrementStepIndex()
+	 * @see org.eclipselabs.mscript.language.interpreter.IFunctionObject#incrementStepIndex()
 	 */
 	public void incrementStepIndex() {
 		for (IVariable variable : variables.values()) {

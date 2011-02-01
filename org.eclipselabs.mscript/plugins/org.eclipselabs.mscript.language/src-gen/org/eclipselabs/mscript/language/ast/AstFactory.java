@@ -134,13 +134,13 @@ public interface AstFactory extends EFactory
   StateVariableDeclaration createStateVariableDeclaration();
 
   /**
-   * Returns a new object of class '<em>Functor Declaration</em>'.
+   * Returns a new object of class '<em>Function Object Declaration</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Functor Declaration</em>'.
+   * @return a new object of class '<em>Function Object Declaration</em>'.
    * @generated
    */
-  FunctorDeclaration createFunctorDeclaration();
+  FunctionObjectDeclaration createFunctionObjectDeclaration();
 
   /**
    * Returns a new object of class '<em>Equation</em>'.

@@ -26,7 +26,7 @@ T27 : '->' ;
 T28 : 'static' ;
 T29 : 'assert' ;
 T30 : 'var' ;
-T31 : 'functor' ;
+T31 : 'fob' ;
 T32 : 'real' ;
 T33 : '[' ;
 T34 : ']' ;

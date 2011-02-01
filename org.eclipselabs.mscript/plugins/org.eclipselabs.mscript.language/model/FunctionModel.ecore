@@ -128,6 +128,6 @@
     <eLiterals name="OutputParameter" value="2"/>
     <eLiterals name="StateVariable" value="3"/>
     <eLiterals name="Constant" value="4"/>
-    <eLiterals name="Functor" value="5"/>
+    <eLiterals name="FunctionObject" value="5"/>
   </eClassifiers>
 </ecore:EPackage>

@@ -24,7 +24,7 @@ import org.eclipselabs.mscript.language.ast.Assertion;
 import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.Equation;
 import org.eclipselabs.mscript.language.ast.FunctionDefinition;
-import org.eclipselabs.mscript.language.ast.FunctorDeclaration;
+import org.eclipselabs.mscript.language.ast.FunctionObjectDeclaration;
 import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
 import org.eclipselabs.mscript.language.ast.StateVariableDeclaration;
 
@@ -40,7 +40,7 @@ import org.eclipselabs.mscript.language.ast.StateVariableDeclaration;
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl#getInputParameterDeclarations <em>Input Parameter Declarations</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl#getOutputParameterDeclarations <em>Output Parameter Declarations</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl#getAssertions <em>Assertions</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl#getFunctorDeclarations <em>Functor Declarations</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl#getFunctionObjectDeclarations <em>Function Object Declarations</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl#getStateVariableDeclarations <em>State Variable Declarations</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.FunctionDefinitionImpl#getEquations <em>Equations</em>}</li>
  * </ul>
@@ -111,14 +111,14 @@ public class FunctionDefinitionImpl extends DefinitionImpl implements FunctionDe
   protected EList<Assertion> assertions;
 
   /**
-   * The cached value of the '{@link #getFunctorDeclarations() <em>Functor Declarations</em>}' containment reference list.
+   * The cached value of the '{@link #getFunctionObjectDeclarations() <em>Function Object Declarations</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getFunctorDeclarations()
+   * @see #getFunctionObjectDeclarations()
    * @generated
    * @ordered
    */
-  protected EList<FunctorDeclaration> functorDeclarations;
+  protected EList<FunctionObjectDeclaration> functionObjectDeclarations;
 
   /**
    * The cached value of the '{@link #getStateVariableDeclarations() <em>State Variable Declarations</em>}' containment reference list.
@@ -245,13 +245,13 @@ public class FunctionDefinitionImpl extends DefinitionImpl implements FunctionDe
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<FunctorDeclaration> getFunctorDeclarations()
+  public EList<FunctionObjectDeclaration> getFunctionObjectDeclarations()
   {
-    if (functorDeclarations == null)
+    if (functionObjectDeclarations == null)
     {
-      functorDeclarations = new EObjectContainmentEList<FunctorDeclaration>(FunctorDeclaration.class, this, AstPackage.FUNCTION_DEFINITION__FUNCTOR_DECLARATIONS);
+      functionObjectDeclarations = new EObjectContainmentEList<FunctionObjectDeclaration>(FunctionObjectDeclaration.class, this, AstPackage.FUNCTION_DEFINITION__FUNCTION_OBJECT_DECLARATIONS);
     }
-    return functorDeclarations;
+    return functionObjectDeclarations;
   }
 
   /**
@@ -300,8 +300,8 @@ public class FunctionDefinitionImpl extends DefinitionImpl implements FunctionDe
         return ((InternalEList<?>)getOutputParameterDeclarations()).basicRemove(otherEnd, msgs);
       case AstPackage.FUNCTION_DEFINITION__ASSERTIONS:
         return ((InternalEList<?>)getAssertions()).basicRemove(otherEnd, msgs);
-      case AstPackage.FUNCTION_DEFINITION__FUNCTOR_DECLARATIONS:
-        return ((InternalEList<?>)getFunctorDeclarations()).basicRemove(otherEnd, msgs);
+      case AstPackage.FUNCTION_DEFINITION__FUNCTION_OBJECT_DECLARATIONS:
+        return ((InternalEList<?>)getFunctionObjectDeclarations()).basicRemove(otherEnd, msgs);
       case AstPackage.FUNCTION_DEFINITION__STATE_VARIABLE_DECLARATIONS:
         return ((InternalEList<?>)getStateVariableDeclarations()).basicRemove(otherEnd, msgs);
       case AstPackage.FUNCTION_DEFINITION__EQUATIONS:
@@ -330,8 +330,8 @@ public class FunctionDefinitionImpl extends DefinitionImpl implements FunctionDe
         return getOutputParameterDeclarations();
       case AstPackage.FUNCTION_DEFINITION__ASSERTIONS:
         return getAssertions();
-      case AstPackage.FUNCTION_DEFINITION__FUNCTOR_DECLARATIONS:
-        return getFunctorDeclarations();
+      case AstPackage.FUNCTION_DEFINITION__FUNCTION_OBJECT_DECLARATIONS:
+        return getFunctionObjectDeclarations();
       case AstPackage.FUNCTION_DEFINITION__STATE_VARIABLE_DECLARATIONS:
         return getStateVariableDeclarations();
       case AstPackage.FUNCTION_DEFINITION__EQUATIONS:
@@ -370,9 +370,9 @@ public class FunctionDefinitionImpl extends DefinitionImpl implements FunctionDe
         getAssertions().clear();
         getAssertions().addAll((Collection<? extends Assertion>)newValue);
         return;
-      case AstPackage.FUNCTION_DEFINITION__FUNCTOR_DECLARATIONS:
-        getFunctorDeclarations().clear();
-        getFunctorDeclarations().addAll((Collection<? extends FunctorDeclaration>)newValue);
+      case AstPackage.FUNCTION_DEFINITION__FUNCTION_OBJECT_DECLARATIONS:
+        getFunctionObjectDeclarations().clear();
+        getFunctionObjectDeclarations().addAll((Collection<? extends FunctionObjectDeclaration>)newValue);
         return;
       case AstPackage.FUNCTION_DEFINITION__STATE_VARIABLE_DECLARATIONS:
         getStateVariableDeclarations().clear();
@@ -411,8 +411,8 @@ public class FunctionDefinitionImpl extends DefinitionImpl implements FunctionDe
       case AstPackage.FUNCTION_DEFINITION__ASSERTIONS:
         getAssertions().clear();
         return;
-      case AstPackage.FUNCTION_DEFINITION__FUNCTOR_DECLARATIONS:
-        getFunctorDeclarations().clear();
+      case AstPackage.FUNCTION_DEFINITION__FUNCTION_OBJECT_DECLARATIONS:
+        getFunctionObjectDeclarations().clear();
         return;
       case AstPackage.FUNCTION_DEFINITION__STATE_VARIABLE_DECLARATIONS:
         getStateVariableDeclarations().clear();
@@ -444,8 +444,8 @@ public class FunctionDefinitionImpl extends DefinitionImpl implements FunctionDe
         return outputParameterDeclarations != null && !outputParameterDeclarations.isEmpty();
       case AstPackage.FUNCTION_DEFINITION__ASSERTIONS:
         return assertions != null && !assertions.isEmpty();
-      case AstPackage.FUNCTION_DEFINITION__FUNCTOR_DECLARATIONS:
-        return functorDeclarations != null && !functorDeclarations.isEmpty();
+      case AstPackage.FUNCTION_DEFINITION__FUNCTION_OBJECT_DECLARATIONS:
+        return functionObjectDeclarations != null && !functionObjectDeclarations.isEmpty();
       case AstPackage.FUNCTION_DEFINITION__STATE_VARIABLE_DECLARATIONS:
         return stateVariableDeclarations != null && !stateVariableDeclarations.isEmpty();
       case AstPackage.FUNCTION_DEFINITION__EQUATIONS:

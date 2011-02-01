@@ -73,7 +73,7 @@ FunctionDefinition :
 			'(' (inputParameterDeclarations+=ParameterDeclaration (',' inputParameterDeclarations+=ParameterDeclaration)*)? ')'
 			'->' outputParameterDeclarations+=ParameterDeclaration (',' outputParameterDeclarations+=ParameterDeclaration)* '{'
 		(assertions+=Assertion |
-		functorDeclarations+=FunctorDeclaration |
+		functionObjectDeclarations+=FunctionObjectDeclaration |
 		stateVariableDeclarations+=StateVariableDeclaration |
 		equations+=Equation)*
 	'}';
@@ -93,8 +93,8 @@ Assertion :
 StateVariableDeclaration :
 	'var' name=ID ';';
 	
-FunctorDeclaration :
-	'functor' name=ID ':' functionName=QualifiedName ('<' templateArguments+=Expression (',' templateArguments+=Expression)* '>')? ';';
+FunctionObjectDeclaration :
+	'fob' name=ID ':' functionName=QualifiedName ('<' templateArguments+=Expression (',' templateArguments+=Expression)* '>')? ';';
 
 Equation :
 	leftHandSide=Expression '=' rightHandSide=Expression ';';

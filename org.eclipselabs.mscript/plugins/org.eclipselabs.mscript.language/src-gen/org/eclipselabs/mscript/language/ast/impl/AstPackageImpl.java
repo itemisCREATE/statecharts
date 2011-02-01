@@ -45,7 +45,7 @@ import org.eclipselabs.mscript.language.ast.ExpressionList;
 import org.eclipselabs.mscript.language.ast.FeatureCall;
 import org.eclipselabs.mscript.language.ast.FeatureCallPart;
 import org.eclipselabs.mscript.language.ast.FunctionDefinition;
-import org.eclipselabs.mscript.language.ast.FunctorDeclaration;
+import org.eclipselabs.mscript.language.ast.FunctionObjectDeclaration;
 import org.eclipselabs.mscript.language.ast.GaussianTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.IfExpression;
 import org.eclipselabs.mscript.language.ast.ImpliesExpression;
@@ -197,7 +197,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass functorDeclarationEClass = null;
+  private EClass functionObjectDeclarationEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -984,7 +984,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getFunctionDefinition_FunctorDeclarations()
+  public EReference getFunctionDefinition_FunctionObjectDeclarations()
   {
     return (EReference)functionDefinitionEClass.getEStructuralFeatures().get(5);
   }
@@ -1104,9 +1104,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getFunctorDeclaration()
+  public EClass getFunctionObjectDeclaration()
   {
-    return functorDeclarationEClass;
+    return functionObjectDeclarationEClass;
   }
 
   /**
@@ -1114,9 +1114,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getFunctorDeclaration_Name()
+  public EAttribute getFunctionObjectDeclaration_Name()
   {
-    return (EAttribute)functorDeclarationEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)functionObjectDeclarationEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1124,9 +1124,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getFunctorDeclaration_FunctionName()
+  public EReference getFunctionObjectDeclaration_FunctionName()
   {
-    return (EReference)functorDeclarationEClass.getEStructuralFeatures().get(1);
+    return (EReference)functionObjectDeclarationEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -1134,9 +1134,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getFunctorDeclaration_TemplateArguments()
+  public EReference getFunctionObjectDeclaration_TemplateArguments()
   {
-    return (EReference)functorDeclarationEClass.getEStructuralFeatures().get(2);
+    return (EReference)functionObjectDeclarationEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -2789,7 +2789,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     createEReference(functionDefinitionEClass, FUNCTION_DEFINITION__INPUT_PARAMETER_DECLARATIONS);
     createEReference(functionDefinitionEClass, FUNCTION_DEFINITION__OUTPUT_PARAMETER_DECLARATIONS);
     createEReference(functionDefinitionEClass, FUNCTION_DEFINITION__ASSERTIONS);
-    createEReference(functionDefinitionEClass, FUNCTION_DEFINITION__FUNCTOR_DECLARATIONS);
+    createEReference(functionDefinitionEClass, FUNCTION_DEFINITION__FUNCTION_OBJECT_DECLARATIONS);
     createEReference(functionDefinitionEClass, FUNCTION_DEFINITION__STATE_VARIABLE_DECLARATIONS);
     createEReference(functionDefinitionEClass, FUNCTION_DEFINITION__EQUATIONS);
 
@@ -2805,10 +2805,10 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     stateVariableDeclarationEClass = createEClass(STATE_VARIABLE_DECLARATION);
     createEAttribute(stateVariableDeclarationEClass, STATE_VARIABLE_DECLARATION__NAME);
 
-    functorDeclarationEClass = createEClass(FUNCTOR_DECLARATION);
-    createEAttribute(functorDeclarationEClass, FUNCTOR_DECLARATION__NAME);
-    createEReference(functorDeclarationEClass, FUNCTOR_DECLARATION__FUNCTION_NAME);
-    createEReference(functorDeclarationEClass, FUNCTOR_DECLARATION__TEMPLATE_ARGUMENTS);
+    functionObjectDeclarationEClass = createEClass(FUNCTION_OBJECT_DECLARATION);
+    createEAttribute(functionObjectDeclarationEClass, FUNCTION_OBJECT_DECLARATION__NAME);
+    createEReference(functionObjectDeclarationEClass, FUNCTION_OBJECT_DECLARATION__FUNCTION_NAME);
+    createEReference(functionObjectDeclarationEClass, FUNCTION_OBJECT_DECLARATION__TEMPLATE_ARGUMENTS);
 
     equationEClass = createEClass(EQUATION);
     createEReference(equationEClass, EQUATION__LEFT_HAND_SIDE);
@@ -3142,7 +3142,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     initEReference(getFunctionDefinition_InputParameterDeclarations(), this.getParameterDeclaration(), null, "inputParameterDeclarations", null, 0, -1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getFunctionDefinition_OutputParameterDeclarations(), this.getParameterDeclaration(), null, "outputParameterDeclarations", null, 0, -1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getFunctionDefinition_Assertions(), this.getAssertion(), null, "assertions", null, 0, -1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getFunctionDefinition_FunctorDeclarations(), this.getFunctorDeclaration(), null, "functorDeclarations", null, 0, -1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getFunctionDefinition_FunctionObjectDeclarations(), this.getFunctionObjectDeclaration(), null, "functionObjectDeclarations", null, 0, -1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getFunctionDefinition_StateVariableDeclarations(), this.getStateVariableDeclaration(), null, "stateVariableDeclarations", null, 0, -1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getFunctionDefinition_Equations(), this.getEquation(), null, "equations", null, 0, -1, FunctionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -3158,10 +3158,10 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     initEClass(stateVariableDeclarationEClass, StateVariableDeclaration.class, "StateVariableDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getStateVariableDeclaration_Name(), ecorePackage.getEString(), "name", null, 0, 1, StateVariableDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(functorDeclarationEClass, FunctorDeclaration.class, "FunctorDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getFunctorDeclaration_Name(), ecorePackage.getEString(), "name", null, 0, 1, FunctorDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getFunctorDeclaration_FunctionName(), this.getQualifiedName(), null, "functionName", null, 0, 1, FunctorDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getFunctorDeclaration_TemplateArguments(), this.getExpression(), null, "templateArguments", null, 0, -1, FunctorDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(functionObjectDeclarationEClass, FunctionObjectDeclaration.class, "FunctionObjectDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getFunctionObjectDeclaration_Name(), ecorePackage.getEString(), "name", null, 0, 1, FunctionObjectDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getFunctionObjectDeclaration_FunctionName(), this.getQualifiedName(), null, "functionName", null, 0, 1, FunctionObjectDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getFunctionObjectDeclaration_TemplateArguments(), this.getExpression(), null, "templateArguments", null, 0, -1, FunctionObjectDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(equationEClass, Equation.class, "Equation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEquation_LeftHandSide(), this.getExpression(), null, "leftHandSide", null, 0, 1, Equation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

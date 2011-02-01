@@ -26,7 +26,7 @@ import org.eclipselabs.mscript.computation.engine.value.ISimpleNumericValue;
 import org.eclipselabs.mscript.computation.engine.value.IValue;
 import org.eclipselabs.mscript.ide.core.IDECorePlugin;
 import org.eclipselabs.mscript.ide.core.internal.launch.util.ParseUtil;
-import org.eclipselabs.mscript.language.interpreter.IFunctor;
+import org.eclipselabs.mscript.language.interpreter.IFunctionObject;
 import org.eclipselabs.mscript.language.interpreter.IInterpreter;
 import org.eclipselabs.mscript.language.interpreter.IInterpreterContext;
 import org.eclipselabs.mscript.language.interpreter.Interpreter;
@@ -38,7 +38,7 @@ import org.eclipselabs.mscript.language.interpreter.Interpreter;
 public class MscriptThread extends Thread {
 
 	private IInterpreterContext interpreterContext;
-	private IFunctor functor;
+	private IFunctionObject functionObject;
 	private IFile inputFile;
 	private IFile outputFile;
 	
@@ -47,10 +47,10 @@ public class MscriptThread extends Thread {
 	/**
 	 * 
 	 */
-	public MscriptThread(IInterpreterContext interpreterContext, IFunctor functor, IFile inputFile, IFile outputFile) {
+	public MscriptThread(IInterpreterContext interpreterContext, IFunctionObject functionObject, IFile inputFile, IFile outputFile) {
 		super("Mscript Application");
 		this.interpreterContext = interpreterContext;
-		this.functor = functor;
+		this.functionObject = functionObject;
 		this.inputFile = inputFile;
 		this.outputFile = outputFile;
 	}
@@ -69,13 +69,13 @@ public class MscriptThread extends Thread {
 	public void run() {
 		try {
 			IInterpreter interpreter = new Interpreter();
-			interpreter.initialize(interpreterContext, functor);
+			interpreter.initialize(interpreterContext, functionObject);
 			
 			BufferedReader reader = new BufferedReader(new InputStreamReader(inputFile.getContents()));
 			while (!interpreterContext.isCanceled() && reader.ready()) {
 				List<IValue> inputValues = ParseUtil.parseValues(interpreterContext, reader.readLine());
 				StringBuilder sb = new StringBuilder();
-				List<IValue> outputValues = interpreter.execute(interpreterContext, functor, inputValues);
+				List<IValue> outputValues = interpreter.execute(interpreterContext, functionObject, inputValues);
 				for (IValue outputValue : outputValues) {
 					if (sb.length() > 0) {
 						sb.append(",");
@@ -92,7 +92,7 @@ public class MscriptThread extends Thread {
 				}
 				sb.append("\n");
 				outputFile.appendContents(new StringInputStream(sb.toString()), false, false, new NullProgressMonitor());
-				functor.incrementStepIndex();
+				functionObject.incrementStepIndex();
 			}
 		} catch (Exception e) {
 			fireMscriptExecutionListener(new MscriptExecutionEvent(this, new Status(IStatus.ERROR, IDECorePlugin.PLUGIN_ID, e.getMessage(), e)));

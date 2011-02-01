@@ -21,8 +21,8 @@ import org.eclipselabs.mscript.computation.engine.ComputationContext;
 import org.eclipselabs.mscript.computation.engine.value.IValue;
 import org.eclipselabs.mscript.ide.core.IDECorePlugin;
 import org.eclipselabs.mscript.ide.core.internal.launch.util.ParseUtil;
-import org.eclipselabs.mscript.language.interpreter.Functor;
-import org.eclipselabs.mscript.language.interpreter.IFunctor;
+import org.eclipselabs.mscript.language.interpreter.FunctionObject;
+import org.eclipselabs.mscript.language.interpreter.IFunctionObject;
 import org.eclipselabs.mscript.language.interpreter.IInterpreterContext;
 import org.eclipselabs.mscript.language.interpreter.IVariable;
 import org.eclipselabs.mscript.language.interpreter.InterpreterContext;
@@ -73,13 +73,13 @@ public class MscriptLaunchConfigurationDelegate extends AbstractMscriptLaunchCon
 			throws CoreException {
 		IInterpreterContext context = new InterpreterContext(new ComputationContext(getComputationModel()));
 
-		IFunctor functor = Functor.create(context, getILFunctionDefinition());
+		IFunctionObject functionObject = FunctionObject.create(context, getILFunctionDefinition());
 
-		for (IVariable variable : functor.getVariables()) {
+		for (IVariable variable : functionObject.getVariables()) {
 			context.addVariable(variable);
 		}
 
-		new MscriptProcess(launch, "Mscript Application").run(context, functor, inputFile, outputFile);
+		new MscriptProcess(launch, "Mscript Application").run(context, functionObject, inputFile, outputFile);
 	}
 
 	@Override

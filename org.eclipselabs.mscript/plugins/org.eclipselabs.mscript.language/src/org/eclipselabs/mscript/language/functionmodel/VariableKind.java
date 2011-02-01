@@ -83,14 +83,14 @@ public enum VariableKind implements Enumerator {
 	CONSTANT(4, "Constant", "Constant"),
 
 	/**
-	 * The '<em><b>Functor</b></em>' literal object.
+	 * The '<em><b>Function Object</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #FUNCTOR_VALUE
+	 * @see #FUNCTION_OBJECT_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	FUNCTOR(5, "Functor", "Functor");
+	FUNCTION_OBJECT(5, "FunctionObject", "FunctionObject");
 
 	/**
 	 * The '<em><b>Unknown</b></em>' literal value.
@@ -183,19 +183,19 @@ public enum VariableKind implements Enumerator {
 	public static final int CONSTANT_VALUE = 4;
 
 	/**
-	 * The '<em><b>Functor</b></em>' literal value.
+	 * The '<em><b>Function Object</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>Functor</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>Function Object</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #FUNCTOR
-	 * @model name="Functor"
+	 * @see #FUNCTION_OBJECT
+	 * @model name="FunctionObject"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int FUNCTOR_VALUE = 5;
+	public static final int FUNCTION_OBJECT_VALUE = 5;
 
 	/**
 	 * An array of all the '<em><b>Variable Kind</b></em>' enumerators.
@@ -211,7 +211,7 @@ public enum VariableKind implements Enumerator {
 			OUTPUT_PARAMETER,
 			STATE_VARIABLE,
 			CONSTANT,
-			FUNCTOR,
+			FUNCTION_OBJECT,
 		};
 
 	/**
@@ -268,7 +268,7 @@ public enum VariableKind implements Enumerator {
 			case OUTPUT_PARAMETER_VALUE: return OUTPUT_PARAMETER;
 			case STATE_VARIABLE_VALUE: return STATE_VARIABLE;
 			case CONSTANT_VALUE: return CONSTANT;
-			case FUNCTOR_VALUE: return FUNCTOR;
+			case FUNCTION_OBJECT_VALUE: return FUNCTION_OBJECT;
 		}
 		return null;
 	}

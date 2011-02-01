@@ -625,7 +625,7 @@ public class FunctionModelPackageImpl extends EPackageImpl implements FunctionMo
 		addEEnumLiteral(variableKindEEnum, VariableKind.OUTPUT_PARAMETER);
 		addEEnumLiteral(variableKindEEnum, VariableKind.STATE_VARIABLE);
 		addEEnumLiteral(variableKindEEnum, VariableKind.CONSTANT);
-		addEEnumLiteral(variableKindEEnum, VariableKind.FUNCTOR);
+		addEEnumLiteral(variableKindEEnum, VariableKind.FUNCTION_OBJECT);
 
 		// Create resource
 		createResource(eNS_URI);

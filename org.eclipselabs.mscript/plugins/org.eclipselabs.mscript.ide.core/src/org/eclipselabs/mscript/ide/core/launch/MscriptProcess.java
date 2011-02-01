@@ -19,7 +19,7 @@ import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.model.IProcess;
 import org.eclipse.debug.core.model.IStreamsProxy;
-import org.eclipselabs.mscript.language.interpreter.IFunctor;
+import org.eclipselabs.mscript.language.interpreter.IFunctionObject;
 import org.eclipselabs.mscript.language.interpreter.IInterpreterContext;
 
 /**
@@ -53,8 +53,8 @@ public class MscriptProcess implements IProcess {
 		return name;
 	}
 
-	public void run(IInterpreterContext interpreterContext, IFunctor functor, IFile inputFile, IFile outputFile) {
-		executionThread = new MscriptThread(interpreterContext, functor, inputFile, outputFile);
+	public void run(IInterpreterContext interpreterContext, IFunctionObject functionObject, IFile inputFile, IFile outputFile) {
+		executionThread = new MscriptThread(interpreterContext, functionObject, inputFile, outputFile);
 		executionThread.addExecutionListener(new IMscriptExecutionListener() {
 			
 			public void handleSimulationEvent(MscriptExecutionEvent event) {

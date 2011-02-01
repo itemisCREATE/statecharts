@@ -20,7 +20,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getInputParameterDeclarations <em>Input Parameter Declarations</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getOutputParameterDeclarations <em>Output Parameter Declarations</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getAssertions <em>Assertions</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getFunctorDeclarations <em>Functor Declarations</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getFunctionObjectDeclarations <em>Function Object Declarations</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getStateVariableDeclarations <em>State Variable Declarations</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionDefinition#getEquations <em>Equations</em>}</li>
  * </ul>
@@ -123,20 +123,20 @@ public interface FunctionDefinition extends Definition
   EList<Assertion> getAssertions();
 
   /**
-   * Returns the value of the '<em><b>Functor Declarations</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipselabs.mscript.language.ast.FunctorDeclaration}.
+   * Returns the value of the '<em><b>Function Object Declarations</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipselabs.mscript.language.ast.FunctionObjectDeclaration}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Functor Declarations</em>' containment reference list isn't clear,
+   * If the meaning of the '<em>Function Object Declarations</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Functor Declarations</em>' containment reference list.
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getFunctionDefinition_FunctorDeclarations()
+   * @return the value of the '<em>Function Object Declarations</em>' containment reference list.
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getFunctionDefinition_FunctionObjectDeclarations()
    * @model containment="true"
    * @generated
    */
-  EList<FunctorDeclaration> getFunctorDeclarations();
+  EList<FunctionObjectDeclaration> getFunctionObjectDeclarations();
 
   /**
    * Returns the value of the '<em><b>State Variable Declarations</b></em>' containment reference list.

@@ -22,7 +22,7 @@ import org.eclipselabs.mscript.language.il.VariableDeclaration;
  * @noextend
  * @noimplement
  */
-public interface IFunctor {
+public interface IFunctionObject {
 
 	ILFunctionDefinition getFunctionDefinition();
 	

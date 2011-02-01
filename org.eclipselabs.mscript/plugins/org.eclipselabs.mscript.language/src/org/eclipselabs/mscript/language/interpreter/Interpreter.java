@@ -28,34 +28,34 @@ import org.eclipselabs.mscript.language.il.OutputVariableDeclaration;
 public class Interpreter implements IInterpreter {
 
 	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.language.interpreter.IInterpreter#initialize(org.eclipselabs.mscript.language.interpreter.IInterpreterContext, org.eclipselabs.mscript.language.interpreter.IFunctor)
+	 * @see org.eclipselabs.mscript.language.interpreter.IInterpreter#initialize(org.eclipselabs.mscript.language.interpreter.IInterpreterContext, org.eclipselabs.mscript.language.interpreter.IFunctionObject)
 	 */
-	public void initialize(IInterpreterContext context, IFunctor functor) {
-		Compound initializationCompound = functor.getFunctionDefinition().getInitializationCompound();
+	public void initialize(IInterpreterContext context, IFunctionObject functionObject) {
+		Compound initializationCompound = functionObject.getFunctionDefinition().getInitializationCompound();
 		if (initializationCompound != null) {
 			new CompoundInterpreter().execute(context, initializationCompound);
 		}
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.language.interpreter.IInterpreter#execute(org.eclipselabs.mscript.language.interpreter.IInterpreterContext, org.eclipselabs.mscript.language.interpreter.IFunctor, java.util.List)
+	 * @see org.eclipselabs.mscript.language.interpreter.IInterpreter#execute(org.eclipselabs.mscript.language.interpreter.IInterpreterContext, org.eclipselabs.mscript.language.interpreter.IFunctionObject, java.util.List)
 	 */
-	public List<IValue> execute(IInterpreterContext context, IFunctor functor, List<IValue> inputValues) {
+	public List<IValue> execute(IInterpreterContext context, IFunctionObject functionObject, List<IValue> inputValues) {
 		Iterator<IValue> inputValueIterator = inputValues.iterator();
-		for (InputVariableDeclaration inputVariableDeclaration : functor.getFunctionDefinition().getInputVariableDeclarations()) {
-			IVariable variable = functor.getVariable(inputVariableDeclaration);
+		for (InputVariableDeclaration inputVariableDeclaration : functionObject.getFunctionDefinition().getInputVariableDeclarations()) {
+			IVariable variable = functionObject.getVariable(inputVariableDeclaration);
 			variable.setValue(0, inputValueIterator.next());
 		}
 		
 		ICompoundInterpreter compoundInterpreter = new CompoundInterpreter();
 		
-		for (ComputationCompound compound : functor.getFunctionDefinition().getComputationCompounds()) {
+		for (ComputationCompound compound : functionObject.getFunctionDefinition().getComputationCompounds()) {
 			compoundInterpreter.execute(context, compound);
 		}
 		
 		List<IValue> outputValues = new ArrayList<IValue>();
-		for (OutputVariableDeclaration outputVariableDeclaration : functor.getFunctionDefinition().getOutputVariableDeclarations()) {
-			outputValues.add(functor.getVariable(outputVariableDeclaration).getValue(0));
+		for (OutputVariableDeclaration outputVariableDeclaration : functionObject.getFunctionDefinition().getOutputVariableDeclarations()) {
+			outputValues.add(functionObject.getVariable(outputVariableDeclaration).getValue(0));
 		}
 		
 		return outputValues;

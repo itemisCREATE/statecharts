@@ -138,9 +138,9 @@ public class AstAdapterFactory extends AdapterFactoryImpl
         return createStateVariableDeclarationAdapter();
       }
       @Override
-      public Adapter caseFunctorDeclaration(FunctorDeclaration object)
+      public Adapter caseFunctionObjectDeclaration(FunctionObjectDeclaration object)
       {
-        return createFunctorDeclarationAdapter();
+        return createFunctionObjectDeclarationAdapter();
       }
       @Override
       public Adapter caseEquation(Equation object)
@@ -655,16 +655,16 @@ public class AstAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.FunctorDeclaration <em>Functor Declaration</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.FunctionObjectDeclaration <em>Function Object Declaration</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipselabs.mscript.language.ast.FunctorDeclaration
+   * @see org.eclipselabs.mscript.language.ast.FunctionObjectDeclaration
    * @generated
    */
-  public Adapter createFunctorDeclarationAdapter()
+  public Adapter createFunctionObjectDeclarationAdapter()
   {
     return null;
   }

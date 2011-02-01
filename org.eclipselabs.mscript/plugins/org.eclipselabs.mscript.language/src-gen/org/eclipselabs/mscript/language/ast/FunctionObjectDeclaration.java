@@ -11,23 +11,23 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Functor Declaration</b></em>'.
+ * A representation of the model object '<em><b>Function Object Declaration</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.FunctorDeclaration#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.FunctorDeclaration#getFunctionName <em>Function Name</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.ast.FunctorDeclaration#getTemplateArguments <em>Template Arguments</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionObjectDeclaration#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionObjectDeclaration#getFunctionName <em>Function Name</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.FunctionObjectDeclaration#getTemplateArguments <em>Template Arguments</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipselabs.mscript.language.ast.AstPackage#getFunctorDeclaration()
+ * @see org.eclipselabs.mscript.language.ast.AstPackage#getFunctionObjectDeclaration()
  * @model
  * @generated
  */
-public interface FunctorDeclaration extends EObject
+public interface FunctionObjectDeclaration extends EObject
 {
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
@@ -39,14 +39,14 @@ public interface FunctorDeclaration extends EObject
    * <!-- end-user-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getFunctorDeclaration_Name()
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getFunctionObjectDeclaration_Name()
    * @model
    * @generated
    */
   String getName();
 
   /**
-   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.FunctorDeclaration#getName <em>Name</em>}' attribute.
+   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.FunctionObjectDeclaration#getName <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Name</em>' attribute.
@@ -65,14 +65,14 @@ public interface FunctorDeclaration extends EObject
    * <!-- end-user-doc -->
    * @return the value of the '<em>Function Name</em>' containment reference.
    * @see #setFunctionName(QualifiedName)
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getFunctorDeclaration_FunctionName()
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getFunctionObjectDeclaration_FunctionName()
    * @model containment="true"
    * @generated
    */
   QualifiedName getFunctionName();
 
   /**
-   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.FunctorDeclaration#getFunctionName <em>Function Name</em>}' containment reference.
+   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.FunctionObjectDeclaration#getFunctionName <em>Function Name</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Function Name</em>' containment reference.
@@ -91,10 +91,10 @@ public interface FunctorDeclaration extends EObject
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Template Arguments</em>' containment reference list.
-   * @see org.eclipselabs.mscript.language.ast.AstPackage#getFunctorDeclaration_TemplateArguments()
+   * @see org.eclipselabs.mscript.language.ast.AstPackage#getFunctionObjectDeclaration_TemplateArguments()
    * @model containment="true"
    * @generated
    */
   EList<Expression> getTemplateArguments();
 
-} // FunctorDeclaration
+} // FunctionObjectDeclaration

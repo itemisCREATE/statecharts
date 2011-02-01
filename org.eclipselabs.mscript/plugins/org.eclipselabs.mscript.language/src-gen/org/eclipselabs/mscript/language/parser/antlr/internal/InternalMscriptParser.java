@@ -25,7 +25,7 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalMscriptParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_REAL", "RULE_INTEGER", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'enum'", "'{'", "','", "'}'", "'type'", "'='", "';'", "'record'", "':'", "'stateful'", "'func'", "'<'", "'>'", "'('", "')'", "'->'", "'static'", "'assert'", "'var'", "'functor'", "'real'", "'['", "']'", "'int'", "'complex'", "'gauss'", "'bool'", "'string'", "'let'", "'in'", "'if'", "'then'", "'else'", "'switch'", "'default'", "'case'", "'=>'", "'||'", "'&&'", "'is'", "'.'", "'|'", "'for'", "'$'", "'begin'", "'end'", "'/'", "'*'", "'^'", "'-'", "'info'", "'warning'", "'error'", "'fatal'", "'=='", "'!='", "'<='", "'>='", "'+'", "'.*'", "'./'", "'.^'", "'!'", "'\\''", "'false'", "'true'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_REAL", "RULE_INTEGER", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'enum'", "'{'", "','", "'}'", "'type'", "'='", "';'", "'record'", "':'", "'stateful'", "'func'", "'<'", "'>'", "'('", "')'", "'->'", "'static'", "'assert'", "'var'", "'fob'", "'real'", "'['", "']'", "'int'", "'complex'", "'gauss'", "'bool'", "'string'", "'let'", "'in'", "'if'", "'then'", "'else'", "'switch'", "'default'", "'case'", "'=>'", "'||'", "'&&'", "'is'", "'.'", "'|'", "'for'", "'$'", "'begin'", "'end'", "'/'", "'*'", "'^'", "'-'", "'info'", "'warning'", "'error'", "'fatal'", "'=='", "'!='", "'<='", "'>='", "'+'", "'.*'", "'./'", "'.^'", "'!'", "'\\''", "'false'", "'true'"
     };
     public static final int RULE_ID=4;
     public static final int RULE_STRING=7;
@@ -1329,7 +1329,7 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleFunctionDefinition
-    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:631:1: ruleFunctionDefinition returns [EObject current=null] : ( ( (lv_stateful_0_0= 'stateful' ) )? 'func' ( (lv_name_2_0= RULE_ID ) ) ( '<' ( (lv_templateParameterDeclarations_4_0= ruleParameterDeclaration ) ) ( ',' ( (lv_templateParameterDeclarations_6_0= ruleParameterDeclaration ) ) )* '>' )? '(' ( ( (lv_inputParameterDeclarations_9_0= ruleParameterDeclaration ) ) ( ',' ( (lv_inputParameterDeclarations_11_0= ruleParameterDeclaration ) ) )* )? ')' '->' ( (lv_outputParameterDeclarations_14_0= ruleParameterDeclaration ) ) ( ',' ( (lv_outputParameterDeclarations_16_0= ruleParameterDeclaration ) ) )* '{' ( ( (lv_assertions_18_0= ruleAssertion ) ) | ( (lv_functorDeclarations_19_0= ruleFunctorDeclaration ) ) | ( (lv_stateVariableDeclarations_20_0= ruleStateVariableDeclaration ) ) | ( (lv_equations_21_0= ruleEquation ) ) )* '}' ) ;
+    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:631:1: ruleFunctionDefinition returns [EObject current=null] : ( ( (lv_stateful_0_0= 'stateful' ) )? 'func' ( (lv_name_2_0= RULE_ID ) ) ( '<' ( (lv_templateParameterDeclarations_4_0= ruleParameterDeclaration ) ) ( ',' ( (lv_templateParameterDeclarations_6_0= ruleParameterDeclaration ) ) )* '>' )? '(' ( ( (lv_inputParameterDeclarations_9_0= ruleParameterDeclaration ) ) ( ',' ( (lv_inputParameterDeclarations_11_0= ruleParameterDeclaration ) ) )* )? ')' '->' ( (lv_outputParameterDeclarations_14_0= ruleParameterDeclaration ) ) ( ',' ( (lv_outputParameterDeclarations_16_0= ruleParameterDeclaration ) ) )* '{' ( ( (lv_assertions_18_0= ruleAssertion ) ) | ( (lv_functionObjectDeclarations_19_0= ruleFunctionObjectDeclaration ) ) | ( (lv_stateVariableDeclarations_20_0= ruleStateVariableDeclaration ) ) | ( (lv_equations_21_0= ruleEquation ) ) )* '}' ) ;
     public final EObject ruleFunctionDefinition() throws RecognitionException {
         EObject current = null;
 
@@ -1349,7 +1349,7 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
         EObject lv_assertions_18_0 = null;
 
-        EObject lv_functorDeclarations_19_0 = null;
+        EObject lv_functionObjectDeclarations_19_0 = null;
 
         EObject lv_stateVariableDeclarations_20_0 = null;
 
@@ -1359,11 +1359,11 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:636:6: ( ( ( (lv_stateful_0_0= 'stateful' ) )? 'func' ( (lv_name_2_0= RULE_ID ) ) ( '<' ( (lv_templateParameterDeclarations_4_0= ruleParameterDeclaration ) ) ( ',' ( (lv_templateParameterDeclarations_6_0= ruleParameterDeclaration ) ) )* '>' )? '(' ( ( (lv_inputParameterDeclarations_9_0= ruleParameterDeclaration ) ) ( ',' ( (lv_inputParameterDeclarations_11_0= ruleParameterDeclaration ) ) )* )? ')' '->' ( (lv_outputParameterDeclarations_14_0= ruleParameterDeclaration ) ) ( ',' ( (lv_outputParameterDeclarations_16_0= ruleParameterDeclaration ) ) )* '{' ( ( (lv_assertions_18_0= ruleAssertion ) ) | ( (lv_functorDeclarations_19_0= ruleFunctorDeclaration ) ) | ( (lv_stateVariableDeclarations_20_0= ruleStateVariableDeclaration ) ) | ( (lv_equations_21_0= ruleEquation ) ) )* '}' ) )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:637:1: ( ( (lv_stateful_0_0= 'stateful' ) )? 'func' ( (lv_name_2_0= RULE_ID ) ) ( '<' ( (lv_templateParameterDeclarations_4_0= ruleParameterDeclaration ) ) ( ',' ( (lv_templateParameterDeclarations_6_0= ruleParameterDeclaration ) ) )* '>' )? '(' ( ( (lv_inputParameterDeclarations_9_0= ruleParameterDeclaration ) ) ( ',' ( (lv_inputParameterDeclarations_11_0= ruleParameterDeclaration ) ) )* )? ')' '->' ( (lv_outputParameterDeclarations_14_0= ruleParameterDeclaration ) ) ( ',' ( (lv_outputParameterDeclarations_16_0= ruleParameterDeclaration ) ) )* '{' ( ( (lv_assertions_18_0= ruleAssertion ) ) | ( (lv_functorDeclarations_19_0= ruleFunctorDeclaration ) ) | ( (lv_stateVariableDeclarations_20_0= ruleStateVariableDeclaration ) ) | ( (lv_equations_21_0= ruleEquation ) ) )* '}' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:636:6: ( ( ( (lv_stateful_0_0= 'stateful' ) )? 'func' ( (lv_name_2_0= RULE_ID ) ) ( '<' ( (lv_templateParameterDeclarations_4_0= ruleParameterDeclaration ) ) ( ',' ( (lv_templateParameterDeclarations_6_0= ruleParameterDeclaration ) ) )* '>' )? '(' ( ( (lv_inputParameterDeclarations_9_0= ruleParameterDeclaration ) ) ( ',' ( (lv_inputParameterDeclarations_11_0= ruleParameterDeclaration ) ) )* )? ')' '->' ( (lv_outputParameterDeclarations_14_0= ruleParameterDeclaration ) ) ( ',' ( (lv_outputParameterDeclarations_16_0= ruleParameterDeclaration ) ) )* '{' ( ( (lv_assertions_18_0= ruleAssertion ) ) | ( (lv_functionObjectDeclarations_19_0= ruleFunctionObjectDeclaration ) ) | ( (lv_stateVariableDeclarations_20_0= ruleStateVariableDeclaration ) ) | ( (lv_equations_21_0= ruleEquation ) ) )* '}' ) )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:637:1: ( ( (lv_stateful_0_0= 'stateful' ) )? 'func' ( (lv_name_2_0= RULE_ID ) ) ( '<' ( (lv_templateParameterDeclarations_4_0= ruleParameterDeclaration ) ) ( ',' ( (lv_templateParameterDeclarations_6_0= ruleParameterDeclaration ) ) )* '>' )? '(' ( ( (lv_inputParameterDeclarations_9_0= ruleParameterDeclaration ) ) ( ',' ( (lv_inputParameterDeclarations_11_0= ruleParameterDeclaration ) ) )* )? ')' '->' ( (lv_outputParameterDeclarations_14_0= ruleParameterDeclaration ) ) ( ',' ( (lv_outputParameterDeclarations_16_0= ruleParameterDeclaration ) ) )* '{' ( ( (lv_assertions_18_0= ruleAssertion ) ) | ( (lv_functionObjectDeclarations_19_0= ruleFunctionObjectDeclaration ) ) | ( (lv_stateVariableDeclarations_20_0= ruleStateVariableDeclaration ) ) | ( (lv_equations_21_0= ruleEquation ) ) )* '}' )
             {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:637:1: ( ( (lv_stateful_0_0= 'stateful' ) )? 'func' ( (lv_name_2_0= RULE_ID ) ) ( '<' ( (lv_templateParameterDeclarations_4_0= ruleParameterDeclaration ) ) ( ',' ( (lv_templateParameterDeclarations_6_0= ruleParameterDeclaration ) ) )* '>' )? '(' ( ( (lv_inputParameterDeclarations_9_0= ruleParameterDeclaration ) ) ( ',' ( (lv_inputParameterDeclarations_11_0= ruleParameterDeclaration ) ) )* )? ')' '->' ( (lv_outputParameterDeclarations_14_0= ruleParameterDeclaration ) ) ( ',' ( (lv_outputParameterDeclarations_16_0= ruleParameterDeclaration ) ) )* '{' ( ( (lv_assertions_18_0= ruleAssertion ) ) | ( (lv_functorDeclarations_19_0= ruleFunctorDeclaration ) ) | ( (lv_stateVariableDeclarations_20_0= ruleStateVariableDeclaration ) ) | ( (lv_equations_21_0= ruleEquation ) ) )* '}' )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:637:2: ( (lv_stateful_0_0= 'stateful' ) )? 'func' ( (lv_name_2_0= RULE_ID ) ) ( '<' ( (lv_templateParameterDeclarations_4_0= ruleParameterDeclaration ) ) ( ',' ( (lv_templateParameterDeclarations_6_0= ruleParameterDeclaration ) ) )* '>' )? '(' ( ( (lv_inputParameterDeclarations_9_0= ruleParameterDeclaration ) ) ( ',' ( (lv_inputParameterDeclarations_11_0= ruleParameterDeclaration ) ) )* )? ')' '->' ( (lv_outputParameterDeclarations_14_0= ruleParameterDeclaration ) ) ( ',' ( (lv_outputParameterDeclarations_16_0= ruleParameterDeclaration ) ) )* '{' ( ( (lv_assertions_18_0= ruleAssertion ) ) | ( (lv_functorDeclarations_19_0= ruleFunctorDeclaration ) ) | ( (lv_stateVariableDeclarations_20_0= ruleStateVariableDeclaration ) ) | ( (lv_equations_21_0= ruleEquation ) ) )* '}'
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:637:1: ( ( (lv_stateful_0_0= 'stateful' ) )? 'func' ( (lv_name_2_0= RULE_ID ) ) ( '<' ( (lv_templateParameterDeclarations_4_0= ruleParameterDeclaration ) ) ( ',' ( (lv_templateParameterDeclarations_6_0= ruleParameterDeclaration ) ) )* '>' )? '(' ( ( (lv_inputParameterDeclarations_9_0= ruleParameterDeclaration ) ) ( ',' ( (lv_inputParameterDeclarations_11_0= ruleParameterDeclaration ) ) )* )? ')' '->' ( (lv_outputParameterDeclarations_14_0= ruleParameterDeclaration ) ) ( ',' ( (lv_outputParameterDeclarations_16_0= ruleParameterDeclaration ) ) )* '{' ( ( (lv_assertions_18_0= ruleAssertion ) ) | ( (lv_functionObjectDeclarations_19_0= ruleFunctionObjectDeclaration ) ) | ( (lv_stateVariableDeclarations_20_0= ruleStateVariableDeclaration ) ) | ( (lv_equations_21_0= ruleEquation ) ) )* '}' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:637:2: ( (lv_stateful_0_0= 'stateful' ) )? 'func' ( (lv_name_2_0= RULE_ID ) ) ( '<' ( (lv_templateParameterDeclarations_4_0= ruleParameterDeclaration ) ) ( ',' ( (lv_templateParameterDeclarations_6_0= ruleParameterDeclaration ) ) )* '>' )? '(' ( ( (lv_inputParameterDeclarations_9_0= ruleParameterDeclaration ) ) ( ',' ( (lv_inputParameterDeclarations_11_0= ruleParameterDeclaration ) ) )* )? ')' '->' ( (lv_outputParameterDeclarations_14_0= ruleParameterDeclaration ) ) ( ',' ( (lv_outputParameterDeclarations_16_0= ruleParameterDeclaration ) ) )* '{' ( ( (lv_assertions_18_0= ruleAssertion ) ) | ( (lv_functionObjectDeclarations_19_0= ruleFunctionObjectDeclaration ) ) | ( (lv_stateVariableDeclarations_20_0= ruleStateVariableDeclaration ) ) | ( (lv_equations_21_0= ruleEquation ) ) )* '}'
             {
             // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:637:2: ( (lv_stateful_0_0= 'stateful' ) )?
             int alt7=2;
@@ -1800,7 +1800,7 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
                     createLeafNode(grammarAccess.getFunctionDefinitionAccess().getLeftCurlyBracketKeyword_10(), null); 
                 
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:866:1: ( ( (lv_assertions_18_0= ruleAssertion ) ) | ( (lv_functorDeclarations_19_0= ruleFunctorDeclaration ) ) | ( (lv_stateVariableDeclarations_20_0= ruleStateVariableDeclaration ) ) | ( (lv_equations_21_0= ruleEquation ) ) )*
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:866:1: ( ( (lv_assertions_18_0= ruleAssertion ) ) | ( (lv_functionObjectDeclarations_19_0= ruleFunctionObjectDeclaration ) ) | ( (lv_stateVariableDeclarations_20_0= ruleStateVariableDeclaration ) ) | ( (lv_equations_21_0= ruleEquation ) ) )*
             loop13:
             do {
                 int alt13=5;
@@ -1902,19 +1902,19 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 2 :
-            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:891:6: ( (lv_functorDeclarations_19_0= ruleFunctorDeclaration ) )
+            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:891:6: ( (lv_functionObjectDeclarations_19_0= ruleFunctionObjectDeclaration ) )
             	    {
-            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:891:6: ( (lv_functorDeclarations_19_0= ruleFunctorDeclaration ) )
-            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:892:1: (lv_functorDeclarations_19_0= ruleFunctorDeclaration )
+            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:891:6: ( (lv_functionObjectDeclarations_19_0= ruleFunctionObjectDeclaration ) )
+            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:892:1: (lv_functionObjectDeclarations_19_0= ruleFunctionObjectDeclaration )
             	    {
-            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:892:1: (lv_functorDeclarations_19_0= ruleFunctorDeclaration )
-            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:893:3: lv_functorDeclarations_19_0= ruleFunctorDeclaration
+            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:892:1: (lv_functionObjectDeclarations_19_0= ruleFunctionObjectDeclaration )
+            	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:893:3: lv_functionObjectDeclarations_19_0= ruleFunctionObjectDeclaration
             	    {
             	     
-            	    	        currentNode=createCompositeNode(grammarAccess.getFunctionDefinitionAccess().getFunctorDeclarationsFunctorDeclarationParserRuleCall_11_1_0(), currentNode); 
+            	    	        currentNode=createCompositeNode(grammarAccess.getFunctionDefinitionAccess().getFunctionObjectDeclarationsFunctionObjectDeclarationParserRuleCall_11_1_0(), currentNode); 
             	    	    
-            	    pushFollow(FOLLOW_ruleFunctorDeclaration_in_ruleFunctionDefinition1505);
-            	    lv_functorDeclarations_19_0=ruleFunctorDeclaration();
+            	    pushFollow(FOLLOW_ruleFunctionObjectDeclaration_in_ruleFunctionDefinition1505);
+            	    lv_functionObjectDeclarations_19_0=ruleFunctionObjectDeclaration();
             	    _fsp--;
 
 
@@ -1925,9 +1925,9 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
             	    	        try {
             	    	       		add(
             	    	       			current, 
-            	    	       			"functorDeclarations",
-            	    	        		lv_functorDeclarations_19_0, 
-            	    	        		"FunctorDeclaration", 
+            	    	       			"functionObjectDeclarations",
+            	    	        		lv_functionObjectDeclarations_19_0, 
+            	    	        		"FunctionObjectDeclaration", 
             	    	        		currentNode);
             	    	        } catch (ValueConverterException vce) {
             	    				handleValueConverterException(vce);
@@ -2512,25 +2512,25 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
     // $ANTLR end ruleStateVariableDeclaration
 
 
-    // $ANTLR start entryRuleFunctorDeclaration
-    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1207:1: entryRuleFunctorDeclaration returns [EObject current=null] : iv_ruleFunctorDeclaration= ruleFunctorDeclaration EOF ;
-    public final EObject entryRuleFunctorDeclaration() throws RecognitionException {
+    // $ANTLR start entryRuleFunctionObjectDeclaration
+    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1207:1: entryRuleFunctionObjectDeclaration returns [EObject current=null] : iv_ruleFunctionObjectDeclaration= ruleFunctionObjectDeclaration EOF ;
+    public final EObject entryRuleFunctionObjectDeclaration() throws RecognitionException {
         EObject current = null;
 
-        EObject iv_ruleFunctorDeclaration = null;
+        EObject iv_ruleFunctionObjectDeclaration = null;
 
 
         try {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1208:2: (iv_ruleFunctorDeclaration= ruleFunctorDeclaration EOF )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1209:2: iv_ruleFunctorDeclaration= ruleFunctorDeclaration EOF
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1208:2: (iv_ruleFunctionObjectDeclaration= ruleFunctionObjectDeclaration EOF )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1209:2: iv_ruleFunctionObjectDeclaration= ruleFunctionObjectDeclaration EOF
             {
-             currentNode = createCompositeNode(grammarAccess.getFunctorDeclarationRule(), currentNode); 
-            pushFollow(FOLLOW_ruleFunctorDeclaration_in_entryRuleFunctorDeclaration2007);
-            iv_ruleFunctorDeclaration=ruleFunctorDeclaration();
+             currentNode = createCompositeNode(grammarAccess.getFunctionObjectDeclarationRule(), currentNode); 
+            pushFollow(FOLLOW_ruleFunctionObjectDeclaration_in_entryRuleFunctionObjectDeclaration2007);
+            iv_ruleFunctionObjectDeclaration=ruleFunctionObjectDeclaration();
             _fsp--;
 
-             current =iv_ruleFunctorDeclaration; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleFunctorDeclaration2017); 
+             current =iv_ruleFunctionObjectDeclaration; 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleFunctionObjectDeclaration2017); 
 
             }
 
@@ -2544,12 +2544,12 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end entryRuleFunctorDeclaration
+    // $ANTLR end entryRuleFunctionObjectDeclaration
 
 
-    // $ANTLR start ruleFunctorDeclaration
-    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1216:1: ruleFunctorDeclaration returns [EObject current=null] : ( 'functor' ( (lv_name_1_0= RULE_ID ) ) ':' ( (lv_functionName_3_0= ruleQualifiedName ) ) ( '<' ( (lv_templateArguments_5_0= ruleExpression ) ) ( ',' ( (lv_templateArguments_7_0= ruleExpression ) ) )* '>' )? ';' ) ;
-    public final EObject ruleFunctorDeclaration() throws RecognitionException {
+    // $ANTLR start ruleFunctionObjectDeclaration
+    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1216:1: ruleFunctionObjectDeclaration returns [EObject current=null] : ( 'fob' ( (lv_name_1_0= RULE_ID ) ) ':' ( (lv_functionName_3_0= ruleQualifiedName ) ) ( '<' ( (lv_templateArguments_5_0= ruleExpression ) ) ( ',' ( (lv_templateArguments_7_0= ruleExpression ) ) )* '>' )? ';' ) ;
+    public final EObject ruleFunctionObjectDeclaration() throws RecognitionException {
         EObject current = null;
 
         Token lv_name_1_0=null;
@@ -2563,15 +2563,15 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1221:6: ( ( 'functor' ( (lv_name_1_0= RULE_ID ) ) ':' ( (lv_functionName_3_0= ruleQualifiedName ) ) ( '<' ( (lv_templateArguments_5_0= ruleExpression ) ) ( ',' ( (lv_templateArguments_7_0= ruleExpression ) ) )* '>' )? ';' ) )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1222:1: ( 'functor' ( (lv_name_1_0= RULE_ID ) ) ':' ( (lv_functionName_3_0= ruleQualifiedName ) ) ( '<' ( (lv_templateArguments_5_0= ruleExpression ) ) ( ',' ( (lv_templateArguments_7_0= ruleExpression ) ) )* '>' )? ';' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1221:6: ( ( 'fob' ( (lv_name_1_0= RULE_ID ) ) ':' ( (lv_functionName_3_0= ruleQualifiedName ) ) ( '<' ( (lv_templateArguments_5_0= ruleExpression ) ) ( ',' ( (lv_templateArguments_7_0= ruleExpression ) ) )* '>' )? ';' ) )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1222:1: ( 'fob' ( (lv_name_1_0= RULE_ID ) ) ':' ( (lv_functionName_3_0= ruleQualifiedName ) ) ( '<' ( (lv_templateArguments_5_0= ruleExpression ) ) ( ',' ( (lv_templateArguments_7_0= ruleExpression ) ) )* '>' )? ';' )
             {
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1222:1: ( 'functor' ( (lv_name_1_0= RULE_ID ) ) ':' ( (lv_functionName_3_0= ruleQualifiedName ) ) ( '<' ( (lv_templateArguments_5_0= ruleExpression ) ) ( ',' ( (lv_templateArguments_7_0= ruleExpression ) ) )* '>' )? ';' )
-            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1222:3: 'functor' ( (lv_name_1_0= RULE_ID ) ) ':' ( (lv_functionName_3_0= ruleQualifiedName ) ) ( '<' ( (lv_templateArguments_5_0= ruleExpression ) ) ( ',' ( (lv_templateArguments_7_0= ruleExpression ) ) )* '>' )? ';'
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1222:1: ( 'fob' ( (lv_name_1_0= RULE_ID ) ) ':' ( (lv_functionName_3_0= ruleQualifiedName ) ) ( '<' ( (lv_templateArguments_5_0= ruleExpression ) ) ( ',' ( (lv_templateArguments_7_0= ruleExpression ) ) )* '>' )? ';' )
+            // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1222:3: 'fob' ( (lv_name_1_0= RULE_ID ) ) ':' ( (lv_functionName_3_0= ruleQualifiedName ) ) ( '<' ( (lv_templateArguments_5_0= ruleExpression ) ) ( ',' ( (lv_templateArguments_7_0= ruleExpression ) ) )* '>' )? ';'
             {
-            match(input,31,FOLLOW_31_in_ruleFunctorDeclaration2052); 
+            match(input,31,FOLLOW_31_in_ruleFunctionObjectDeclaration2052); 
 
-                    createLeafNode(grammarAccess.getFunctorDeclarationAccess().getFunctorKeyword_0(), null); 
+                    createLeafNode(grammarAccess.getFunctionObjectDeclarationAccess().getFobKeyword_0(), null); 
                 
             // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1226:1: ( (lv_name_1_0= RULE_ID ) )
             // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1227:1: (lv_name_1_0= RULE_ID )
@@ -2580,13 +2580,13 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
             // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1228:3: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFunctorDeclaration2069); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFunctionObjectDeclaration2069); 
 
-            			createLeafNode(grammarAccess.getFunctorDeclarationAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+            			createLeafNode(grammarAccess.getFunctionObjectDeclarationAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
             		
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.getFunctorDeclarationRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getFunctionObjectDeclarationRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        try {
@@ -2606,9 +2606,9 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
             }
 
-            match(input,20,FOLLOW_20_in_ruleFunctorDeclaration2084); 
+            match(input,20,FOLLOW_20_in_ruleFunctionObjectDeclaration2084); 
 
-                    createLeafNode(grammarAccess.getFunctorDeclarationAccess().getColonKeyword_2(), null); 
+                    createLeafNode(grammarAccess.getFunctionObjectDeclarationAccess().getColonKeyword_2(), null); 
                 
             // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1254:1: ( (lv_functionName_3_0= ruleQualifiedName ) )
             // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1255:1: (lv_functionName_3_0= ruleQualifiedName )
@@ -2617,15 +2617,15 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
             // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1256:3: lv_functionName_3_0= ruleQualifiedName
             {
              
-            	        currentNode=createCompositeNode(grammarAccess.getFunctorDeclarationAccess().getFunctionNameQualifiedNameParserRuleCall_3_0(), currentNode); 
+            	        currentNode=createCompositeNode(grammarAccess.getFunctionObjectDeclarationAccess().getFunctionNameQualifiedNameParserRuleCall_3_0(), currentNode); 
             	    
-            pushFollow(FOLLOW_ruleQualifiedName_in_ruleFunctorDeclaration2105);
+            pushFollow(FOLLOW_ruleQualifiedName_in_ruleFunctionObjectDeclaration2105);
             lv_functionName_3_0=ruleQualifiedName();
             _fsp--;
 
 
             	        if (current==null) {
-            	            current = factory.create(grammarAccess.getFunctorDeclarationRule().getType().getClassifier());
+            	            current = factory.create(grammarAccess.getFunctionObjectDeclarationRule().getType().getClassifier());
             	            associateNodeWithAstElement(currentNode.getParent(), current);
             	        }
             	        try {
@@ -2657,9 +2657,9 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1278:4: '<' ( (lv_templateArguments_5_0= ruleExpression ) ) ( ',' ( (lv_templateArguments_7_0= ruleExpression ) ) )* '>'
                     {
-                    match(input,23,FOLLOW_23_in_ruleFunctorDeclaration2116); 
+                    match(input,23,FOLLOW_23_in_ruleFunctionObjectDeclaration2116); 
 
-                            createLeafNode(grammarAccess.getFunctorDeclarationAccess().getLessThanSignKeyword_4_0(), null); 
+                            createLeafNode(grammarAccess.getFunctionObjectDeclarationAccess().getLessThanSignKeyword_4_0(), null); 
                         
                     // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1282:1: ( (lv_templateArguments_5_0= ruleExpression ) )
                     // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1283:1: (lv_templateArguments_5_0= ruleExpression )
@@ -2668,15 +2668,15 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
                     // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1284:3: lv_templateArguments_5_0= ruleExpression
                     {
                      
-                    	        currentNode=createCompositeNode(grammarAccess.getFunctorDeclarationAccess().getTemplateArgumentsExpressionParserRuleCall_4_1_0(), currentNode); 
+                    	        currentNode=createCompositeNode(grammarAccess.getFunctionObjectDeclarationAccess().getTemplateArgumentsExpressionParserRuleCall_4_1_0(), currentNode); 
                     	    
-                    pushFollow(FOLLOW_ruleExpression_in_ruleFunctorDeclaration2137);
+                    pushFollow(FOLLOW_ruleExpression_in_ruleFunctionObjectDeclaration2137);
                     lv_templateArguments_5_0=ruleExpression();
                     _fsp--;
 
 
                     	        if (current==null) {
-                    	            current = factory.create(grammarAccess.getFunctorDeclarationRule().getType().getClassifier());
+                    	            current = factory.create(grammarAccess.getFunctionObjectDeclarationRule().getType().getClassifier());
                     	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	        }
                     	        try {
@@ -2712,9 +2712,9 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
                     	case 1 :
                     	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1306:4: ',' ( (lv_templateArguments_7_0= ruleExpression ) )
                     	    {
-                    	    match(input,14,FOLLOW_14_in_ruleFunctorDeclaration2148); 
+                    	    match(input,14,FOLLOW_14_in_ruleFunctionObjectDeclaration2148); 
 
-                    	            createLeafNode(grammarAccess.getFunctorDeclarationAccess().getCommaKeyword_4_2_0(), null); 
+                    	            createLeafNode(grammarAccess.getFunctionObjectDeclarationAccess().getCommaKeyword_4_2_0(), null); 
                     	        
                     	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1310:1: ( (lv_templateArguments_7_0= ruleExpression ) )
                     	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1311:1: (lv_templateArguments_7_0= ruleExpression )
@@ -2723,15 +2723,15 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
                     	    // ../org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/parser/antlr/internal/InternalMscript.g:1312:3: lv_templateArguments_7_0= ruleExpression
                     	    {
                     	     
-                    	    	        currentNode=createCompositeNode(grammarAccess.getFunctorDeclarationAccess().getTemplateArgumentsExpressionParserRuleCall_4_2_1_0(), currentNode); 
+                    	    	        currentNode=createCompositeNode(grammarAccess.getFunctionObjectDeclarationAccess().getTemplateArgumentsExpressionParserRuleCall_4_2_1_0(), currentNode); 
                     	    	    
-                    	    pushFollow(FOLLOW_ruleExpression_in_ruleFunctorDeclaration2169);
+                    	    pushFollow(FOLLOW_ruleExpression_in_ruleFunctionObjectDeclaration2169);
                     	    lv_templateArguments_7_0=ruleExpression();
                     	    _fsp--;
 
 
                     	    	        if (current==null) {
-                    	    	            current = factory.create(grammarAccess.getFunctorDeclarationRule().getType().getClassifier());
+                    	    	            current = factory.create(grammarAccess.getFunctionObjectDeclarationRule().getType().getClassifier());
                     	    	            associateNodeWithAstElement(currentNode.getParent(), current);
                     	    	        }
                     	    	        try {
@@ -2761,9 +2761,9 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
                         }
                     } while (true);
 
-                    match(input,24,FOLLOW_24_in_ruleFunctorDeclaration2181); 
+                    match(input,24,FOLLOW_24_in_ruleFunctionObjectDeclaration2181); 
 
-                            createLeafNode(grammarAccess.getFunctorDeclarationAccess().getGreaterThanSignKeyword_4_3(), null); 
+                            createLeafNode(grammarAccess.getFunctionObjectDeclarationAccess().getGreaterThanSignKeyword_4_3(), null); 
                         
 
                     }
@@ -2771,9 +2771,9 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
 
             }
 
-            match(input,18,FOLLOW_18_in_ruleFunctorDeclaration2193); 
+            match(input,18,FOLLOW_18_in_ruleFunctionObjectDeclaration2193); 
 
-                    createLeafNode(grammarAccess.getFunctorDeclarationAccess().getSemicolonKeyword_5(), null); 
+                    createLeafNode(grammarAccess.getFunctionObjectDeclarationAccess().getSemicolonKeyword_5(), null); 
                 
 
             }
@@ -2794,7 +2794,7 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end ruleFunctorDeclaration
+    // $ANTLR end ruleFunctionObjectDeclaration
 
 
     // $ANTLR start entryRuleEquation
@@ -15928,7 +15928,7 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_ruleParameterDeclaration_in_ruleFunctionDefinition1444 = new BitSet(new long[]{0x0000000000006000L});
     public static final BitSet FOLLOW_13_in_ruleFunctionDefinition1456 = new BitSet(new long[]{0x23802502F200A0F0L,0x0000000000003400L});
     public static final BitSet FOLLOW_ruleAssertion_in_ruleFunctionDefinition1478 = new BitSet(new long[]{0x23802502F200A0F0L,0x0000000000003400L});
-    public static final BitSet FOLLOW_ruleFunctorDeclaration_in_ruleFunctionDefinition1505 = new BitSet(new long[]{0x23802502F200A0F0L,0x0000000000003400L});
+    public static final BitSet FOLLOW_ruleFunctionObjectDeclaration_in_ruleFunctionDefinition1505 = new BitSet(new long[]{0x23802502F200A0F0L,0x0000000000003400L});
     public static final BitSet FOLLOW_ruleStateVariableDeclaration_in_ruleFunctionDefinition1532 = new BitSet(new long[]{0x23802502F200A0F0L,0x0000000000003400L});
     public static final BitSet FOLLOW_ruleEquation_in_ruleFunctionDefinition1559 = new BitSet(new long[]{0x23802502F200A0F0L,0x0000000000003400L});
     public static final BitSet FOLLOW_15_in_ruleFunctionDefinition1571 = new BitSet(new long[]{0x0000000000000002L});
@@ -15949,18 +15949,18 @@ public class InternalMscriptParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_30_in_ruleStateVariableDeclaration1939 = new BitSet(new long[]{0x0000000000000010L});
     public static final BitSet FOLLOW_RULE_ID_in_ruleStateVariableDeclaration1956 = new BitSet(new long[]{0x0000000000040000L});
     public static final BitSet FOLLOW_18_in_ruleStateVariableDeclaration1971 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleFunctorDeclaration_in_entryRuleFunctorDeclaration2007 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleFunctorDeclaration2017 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_31_in_ruleFunctorDeclaration2052 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleFunctorDeclaration2069 = new BitSet(new long[]{0x0000000000100000L});
-    public static final BitSet FOLLOW_20_in_ruleFunctorDeclaration2084 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleQualifiedName_in_ruleFunctorDeclaration2105 = new BitSet(new long[]{0x0000000000840000L});
-    public static final BitSet FOLLOW_23_in_ruleFunctorDeclaration2116 = new BitSet(new long[]{0x23802502120020F0L,0x0000000000003400L});
-    public static final BitSet FOLLOW_ruleExpression_in_ruleFunctorDeclaration2137 = new BitSet(new long[]{0x0000000001004000L});
-    public static final BitSet FOLLOW_14_in_ruleFunctorDeclaration2148 = new BitSet(new long[]{0x23802502120020F0L,0x0000000000003400L});
-    public static final BitSet FOLLOW_ruleExpression_in_ruleFunctorDeclaration2169 = new BitSet(new long[]{0x0000000001004000L});
-    public static final BitSet FOLLOW_24_in_ruleFunctorDeclaration2181 = new BitSet(new long[]{0x0000000000040000L});
-    public static final BitSet FOLLOW_18_in_ruleFunctorDeclaration2193 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleFunctionObjectDeclaration_in_entryRuleFunctionObjectDeclaration2007 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleFunctionObjectDeclaration2017 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_31_in_ruleFunctionObjectDeclaration2052 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleFunctionObjectDeclaration2069 = new BitSet(new long[]{0x0000000000100000L});
+    public static final BitSet FOLLOW_20_in_ruleFunctionObjectDeclaration2084 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleQualifiedName_in_ruleFunctionObjectDeclaration2105 = new BitSet(new long[]{0x0000000000840000L});
+    public static final BitSet FOLLOW_23_in_ruleFunctionObjectDeclaration2116 = new BitSet(new long[]{0x23802502120020F0L,0x0000000000003400L});
+    public static final BitSet FOLLOW_ruleExpression_in_ruleFunctionObjectDeclaration2137 = new BitSet(new long[]{0x0000000001004000L});
+    public static final BitSet FOLLOW_14_in_ruleFunctionObjectDeclaration2148 = new BitSet(new long[]{0x23802502120020F0L,0x0000000000003400L});
+    public static final BitSet FOLLOW_ruleExpression_in_ruleFunctionObjectDeclaration2169 = new BitSet(new long[]{0x0000000001004000L});
+    public static final BitSet FOLLOW_24_in_ruleFunctionObjectDeclaration2181 = new BitSet(new long[]{0x0000000000040000L});
+    public static final BitSet FOLLOW_18_in_ruleFunctionObjectDeclaration2193 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleEquation_in_entryRuleEquation2229 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleEquation2239 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleExpression_in_ruleEquation2285 = new BitSet(new long[]{0x0000000000020000L});
