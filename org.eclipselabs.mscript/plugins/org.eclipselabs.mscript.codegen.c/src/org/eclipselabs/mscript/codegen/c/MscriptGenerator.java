@@ -50,9 +50,13 @@ public class MscriptGenerator {
 		writer.printf("#ifndef _%s_H\n", functionDefinition.getName().toUpperCase());
 		writer.printf("#define _%s_H\n", functionDefinition.getName().toUpperCase());
 		writer.println();
-		
 		generateHeaderIncludes();
 		writer.println();
+		writer.println("#ifdef __cplusplus");
+		writer.println("extern \"C\" {");
+		writer.println("#endif /* __cplusplus */");
+		writer.println();
+		
 		if (functionDefinition.isStateful()) {
 			generateContextStructure();
 		}
@@ -61,6 +65,10 @@ public class MscriptGenerator {
 		generateFunctionPrototypes();
 		writer.println();
 
+		writer.println("#ifdef __cplusplus");
+		writer.println("}");
+		writer.println("#endif /* __cplusplus */");
+		writer.println();
 		writer.printf("#endif /* _%s_H */\n", functionDefinition.getName().toUpperCase());
 	}
 	
