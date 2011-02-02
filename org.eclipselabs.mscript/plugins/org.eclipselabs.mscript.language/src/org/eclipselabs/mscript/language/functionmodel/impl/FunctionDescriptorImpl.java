@@ -183,8 +183,9 @@ public class FunctionDescriptorImpl extends EObjectImpl implements FunctionDescr
 	 * @generated NOT
 	 */
 	public boolean hasNoDuplicateEquations(DiagnosticChain diagnostics, Map<Object, Object> context) {
-		boolean result = true;
+		Set<EquationPart> invalidEquationParts = new HashSet<EquationPart>();
 		Map<VariableDescriptorWrapper, EquationPart> wrappers = new HashMap<VariableDescriptorWrapper, EquationPart>();
+		
 		for (EquationDescriptor equationDescriptor : getEquationDescriptors()) {
 			if (!equationDescriptor.getLeftHandSide().getParts().isEmpty()) {
 				EquationPart equationPart = equationDescriptor.getLeftHandSide().getParts().get(0);
@@ -192,35 +193,35 @@ public class FunctionDescriptorImpl extends EObjectImpl implements FunctionDescr
 				VariableDescriptorWrapper descriptor = new VariableDescriptorWrapper(variableStep.getDescriptor().getName(), variableStep.getIndex());
 				EquationPart previousEquationPart = wrappers.put(descriptor, equationPart);
 				if (previousEquationPart != null) {
-					if (diagnostics != null) {
-						StringBuilder message = new StringBuilder();
-						message.append("Duplicate equation for ");
-						message.append(variableStep.getDescriptor().getName());
-						message.append("(n");
-						if (variableStep.getIndex() >= 0) {
-							message.append("+");
-						}
-						message.append(variableStep.getIndex());
-						message.append(")");
-						
-						if (result) {
-							diagnostics.add(new BasicDiagnostic(Diagnostic.ERROR,
-									FunctionModelValidator.DIAGNOSTIC_SOURCE,
-									FunctionModelValidator.FUNCTION_DESCRIPTOR__HAS_NO_DUPLICATE_EQUATIONS,
-									message.toString(),
-									new Object[] { previousEquationPart.getFeatureCall() }));
-						}
-						diagnostics.add(new BasicDiagnostic(Diagnostic.ERROR,
-								FunctionModelValidator.DIAGNOSTIC_SOURCE,
-								FunctionModelValidator.FUNCTION_DESCRIPTOR__HAS_NO_DUPLICATE_EQUATIONS,
-								message.toString(),
-								new Object[] { equationPart.getFeatureCall() }));
-					}
-					result = false;
+					invalidEquationParts.add(equationPart);
+					invalidEquationParts.add(previousEquationPart);
 				}
 			}
 		}
-		return result;
+		
+		if (diagnostics != null) {
+			for (EquationPart invalidEquationPart : invalidEquationParts) {
+				VariableStep variableStep = invalidEquationPart.getVariableStep();
+
+				StringBuilder message = new StringBuilder();
+				message.append("Duplicate equation for ");
+				message.append(variableStep.getDescriptor().getName());
+				message.append("(n");
+				if (variableStep.getIndex() >= 0) {
+					message.append("+");
+				}
+				message.append(variableStep.getIndex());
+				message.append(")");
+				
+				diagnostics.add(new BasicDiagnostic(Diagnostic.ERROR,
+						FunctionModelValidator.DIAGNOSTIC_SOURCE,
+						FunctionModelValidator.FUNCTION_DESCRIPTOR__HAS_NO_DUPLICATE_EQUATIONS,
+						message.toString(),
+						new Object[] { invalidEquationPart.getFeatureCall() }));
+			}
+		}
+		
+		return invalidEquationParts.isEmpty();
 	}
 
 	/**
