@@ -16,3 +16,4 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ui.ide;visibility:=reexport,
  org.eclipselabs.mscript.typesystem.edit;visibility:=reexport
 Bundle-ActivationPolicy: lazy
+Export-Package: org.eclipselabs.mscript.computation.computationmodel.ui.editor.presentation;x-friends:="org.eclipselabs.damos.execution.executionmodel.ui"
