@@ -15,7 +15,6 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipselabs.mscript.computation.engine.value.IValue;
 import org.eclipselabs.mscript.ide.core.IDECorePlugin;
@@ -36,7 +35,7 @@ public class ParseUtil {
 	public static List<IValue> parseValues(IInterpreterContext interpreterContext, String valuesString) {
 		List<IValue> values = new ArrayList<IValue>();
 		
-		if (StringUtils.isBlank(valuesString)) {
+		if (valuesString == null || valuesString.trim().length() == 0) {
 			return values;
 		}
 		

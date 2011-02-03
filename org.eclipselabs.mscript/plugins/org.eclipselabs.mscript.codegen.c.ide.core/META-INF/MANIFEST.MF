@@ -5,8 +5,7 @@ Bundle-SymbolicName: org.eclipselabs.mscript.codegen.c.ide.core;singleton:=true
 Bundle-Version: 0.1.0.qualifier
 Bundle-Activator: org.eclipselabs.mscript.codegen.c.ide.core.CodegenCIDECorePlugin
 Bundle-Vendor: Mscript Project
-Require-Bundle: org.apache.commons.lang;bundle-version="2.3.0",
- org.eclipse.core.runtime,
+Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.debug.core;bundle-version="3.6.0",
  org.eclipse.xtext;bundle-version="1.0.1",
  org.eclipselabs.mscript.language;bundle-version="0.1.0",

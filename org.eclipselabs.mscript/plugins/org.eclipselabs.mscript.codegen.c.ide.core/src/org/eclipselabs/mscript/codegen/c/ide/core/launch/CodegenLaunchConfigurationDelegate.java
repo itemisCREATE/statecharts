@@ -2,7 +2,6 @@ package org.eclipselabs.mscript.codegen.c.ide.core.launch;
 
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
@@ -38,7 +37,7 @@ public class CodegenLaunchConfigurationDelegate extends AbstractMscriptLaunchCon
 	public boolean preLaunchCheck(ILaunchConfiguration configuration, String mode, IProgressMonitor monitor)
 			throws CoreException {
 		targetFunctionName = configuration.getAttribute(ATTRIBUTE__TARGET_FUNCTION_NAME, "");
-		if (StringUtils.isBlank(targetFunctionName)) {
+		if (targetFunctionName.trim().length() == 0) {
 			targetFunctionName = null;
 		}
 		return super.preLaunchCheck(configuration, mode, monitor);

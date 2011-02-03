@@ -8,7 +8,6 @@ Bundle-Vendor: Mscript Project
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.debug.core;bundle-version="3.5.1",
  org.eclipse.xtext;bundle-version="1.0.0",
- org.apache.commons.lang;bundle-version="2.3.0",
  org.eclipselabs.mscript.common;bundle-version="0.1.0",
  org.eclipselabs.mscript.language;bundle-version="0.1.0",
  org.eclipselabs.mscript.computation.engine;bundle-version="0.1.0",
