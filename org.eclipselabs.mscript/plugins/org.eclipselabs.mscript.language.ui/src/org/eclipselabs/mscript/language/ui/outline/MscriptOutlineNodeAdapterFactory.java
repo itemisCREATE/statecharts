@@ -3,20 +3,20 @@
 */
 package org.eclipselabs.mscript.language.ui.outline;
 
-import org.eclipse.xtext.ui.editor.outline.actions.DefaultContentOutlineNodeAdapterFactory;
+//import org.eclipse.xtext.ui.editor.outline.actions.DefaultContentOutlineNodeAdapterFactory;
 
-public class MscriptOutlineNodeAdapterFactory extends DefaultContentOutlineNodeAdapterFactory {
+public class MscriptOutlineNodeAdapterFactory /*extends DefaultContentOutlineNodeAdapterFactory*/ {
 
-	private static final Class<?>[] types = { 
-		// provide list of classes to adapt to, e.g.:
-		// Entity.class
-		// Service.class
-	};
+//	private static final Class<?>[] types = { 
+//		// provide list of classes to adapt to, e.g.:
+//		// Entity.class
+//		// Service.class
+//	};
 
-	@Override
-	public Class<?>[] getAdapterList() {
-		return types;
-	}
+//	@Override
+//	public Class<?>[] getAdapterList() {
+//		return types;
+//	}
 
 }
 
