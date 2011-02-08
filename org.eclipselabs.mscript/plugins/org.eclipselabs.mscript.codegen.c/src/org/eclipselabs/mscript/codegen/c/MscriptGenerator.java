@@ -22,6 +22,7 @@ import org.eclipselabs.mscript.language.il.InputVariableDeclaration;
 import org.eclipselabs.mscript.language.il.InstanceVariableDeclaration;
 import org.eclipselabs.mscript.language.il.OutputVariableDeclaration;
 import org.eclipselabs.mscript.language.il.StatefulVariableDeclaration;
+import org.eclipselabs.mscript.typesystem.DataType;
 
 /**
  * @author Andreas Unger
@@ -95,14 +96,17 @@ public class MscriptGenerator {
 	}
 	
 	private void writeContextStructureMember(StatefulVariableDeclaration variableDeclaration) {
+		String name = variableDeclaration.getName();
+		DataType dataType = variableDeclaration.getType();
 		if (variableDeclaration.getCircularBufferSize() > 1) {
+			int bufferSize = variableDeclaration.getCircularBufferSize();
 			writer.printf("%s[%d];\n",
-					MscriptGeneratorUtil.getCVariableDeclaration(context.getComputationModel(), variableDeclaration.getType(), variableDeclaration.getName(), false),
-					variableDeclaration.getCircularBufferSize());
-			writer.printf("int %s_index;\n", variableDeclaration.getName());
+					MscriptGeneratorUtil.getCVariableDeclaration(context.getComputationModel(), dataType, name, false),
+					bufferSize);
+			writer.printf("%s %s_index;\n", MscriptGeneratorUtil.getIndexCDataType(context.getComputationModel(), 2 * bufferSize), name);
 		} else {
 			writer.printf("%s;\n",
-					MscriptGeneratorUtil.getCVariableDeclaration(context.getComputationModel(), variableDeclaration.getType(), variableDeclaration.getName(), false));
+					MscriptGeneratorUtil.getCVariableDeclaration(context.getComputationModel(), dataType, name, false));
 		}
 	}
 	

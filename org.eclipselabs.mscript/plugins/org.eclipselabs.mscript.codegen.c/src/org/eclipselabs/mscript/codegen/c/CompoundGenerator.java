@@ -137,7 +137,7 @@ public class CompoundGenerator implements ICompoundGenerator {
 			int size = collectionArrayType.getSize();
 			
 			writer.println("{");
-			writer.printf("int %s_i;\n", itVarName);
+			writer.printf("%s %s_i;\n", MscriptGeneratorUtil.getIndexCDataType(context.getComputationModel(), size), itVarName);
 			writer.printf("for (%s_i = 0; %s_i < %d; ++%s_i) {\n", itVarName, itVarName, size, itVarName);
 			writer.printf("%s = (", itVarDecl);
 			doSwitch(foreachStatement.getCollectionExpression());

@@ -73,9 +73,22 @@ public class MscriptGeneratorUtil {
 		return cDataType.toString();
 	}
 
+	public static String getIndexCDataType(ComputationModel computationModel, long maximumIndex) {
+		if (maximumIndex <= 0xffL) {
+			return "uint_fast8_t";
+		}
+		if (maximumIndex <= 0xffffL) {
+			return "uint_fast16_t";
+		}
+		if (maximumIndex <= 0xffffffffL) {
+			return "uint_fast32_t";
+		}
+		return "uint_fast64_t";
+	}
+
 	public static String getCDataType(ComputationModel computationModel, DataType dataType) {
 		if (dataType instanceof BooleanType) {
-			return "int";
+			return "uint_fast8_t";
 		}
 		if (dataType instanceof NumericType) {
 			NumberFormat numberFormat = computationModel.getNumberFormat(dataType);
