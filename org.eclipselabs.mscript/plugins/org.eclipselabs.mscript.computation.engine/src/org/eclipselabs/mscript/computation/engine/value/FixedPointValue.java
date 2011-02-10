@@ -248,7 +248,7 @@ public class FixedPointValue extends AbstractNumericValue implements ISimpleNume
 		
 		long truncatedShiftedRawValue = truncate(shiftedRawValue, operation.getIntermediateWordSize());
 
-		if (truncatedShiftedRawValue != rawValue) {
+		if (truncatedShiftedRawValue != shiftedRawValue) {
 			getContext().getOverflowMonitor().handleOverflow(new OverflowInfo());
 		}
 		
