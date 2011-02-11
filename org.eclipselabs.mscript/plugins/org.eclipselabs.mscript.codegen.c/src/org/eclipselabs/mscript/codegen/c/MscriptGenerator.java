@@ -48,8 +48,8 @@ public class MscriptGenerator {
 	}
 	
 	public void generateHeaderCode() {
-		writer.printf("#ifndef _%s_H\n", functionDefinition.getName().toUpperCase());
-		writer.printf("#define _%s_H\n", functionDefinition.getName().toUpperCase());
+		writer.printf("#ifndef %s_H_\n", functionDefinition.getName().toUpperCase());
+		writer.printf("#define %s_H_\n", functionDefinition.getName().toUpperCase());
 		writer.println();
 		generateHeaderIncludes();
 		writer.println();
@@ -70,7 +70,7 @@ public class MscriptGenerator {
 		writer.println("}");
 		writer.println("#endif /* __cplusplus */");
 		writer.println();
-		writer.printf("#endif /* _%s_H */\n", functionDefinition.getName().toUpperCase());
+		writer.printf("#endif /* %s_H_ */\n", functionDefinition.getName().toUpperCase());
 	}
 	
 	public void generateHeaderIncludes() {
