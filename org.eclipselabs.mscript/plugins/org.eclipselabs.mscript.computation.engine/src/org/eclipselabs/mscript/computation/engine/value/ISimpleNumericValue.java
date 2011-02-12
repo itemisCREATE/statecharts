@@ -17,6 +17,8 @@ package org.eclipselabs.mscript.computation.engine.value;
  */
 public interface ISimpleNumericValue extends INumericValue {
 
+	IValue round();
+	
 	double doubleValue();
 	
 	long longValue();

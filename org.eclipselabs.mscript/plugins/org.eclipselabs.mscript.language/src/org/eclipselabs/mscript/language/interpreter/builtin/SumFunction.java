@@ -11,6 +11,7 @@
 
 package org.eclipselabs.mscript.language.interpreter.builtin;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipselabs.mscript.computation.engine.value.IValue;
@@ -23,7 +24,7 @@ import org.eclipselabs.mscript.language.interpreter.IInterpreterContext;
  */
 public class SumFunction implements IFunction {
 
-	public IValue call(IInterpreterContext context, List<IValue> arguments) {
+	public List<IValue> call(IInterpreterContext context, List<? extends IValue> arguments) {
 		IValue argument = arguments.get(0);
 		if (argument instanceof VectorValue) {
 			VectorValue vectorValue = (VectorValue) argument;
@@ -35,10 +36,12 @@ public class SumFunction implements IFunction {
 					result = result.add(vectorValue.get(i));
 				}
 			}
-			// TODO: check for null and return 0
-			return result;
+			if (result == null) {
+				throw new IllegalArgumentException();
+			}
+			return Collections.singletonList(result);
 		}
-		return null;
+		throw new IllegalArgumentException();
 	}
 	
 }

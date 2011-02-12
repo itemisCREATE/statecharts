@@ -23,7 +23,9 @@ import org.eclipselabs.mscript.computation.computationmodel.util.ComputationMode
 import org.eclipselabs.mscript.computation.engine.IComputationContext;
 import org.eclipselabs.mscript.computation.engine.OverflowInfo;
 import org.eclipselabs.mscript.typesystem.DataType;
+import org.eclipselabs.mscript.typesystem.IntegerType;
 import org.eclipselabs.mscript.typesystem.NumericType;
+import org.eclipselabs.mscript.typesystem.TypeSystemFactory;
 
 /**
  * @author Andreas Unger
@@ -188,6 +190,34 @@ public class FixedPointValue extends AbstractNumericValue implements ISimpleNume
 	protected IValue basicNotEqualToOrEqualTo(AbstractNumericValue other, DataType resultDataType) {
 		FixedPointValue otherFixedPointValue = (FixedPointValue) other;
 		return new BooleanValue(getContext(), rawValue != otherFixedPointValue.rawValue);
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.computation.engine.value.ISimpleNumericValue#round()
+	 */
+	public IValue round() {
+		/*
+		 *  TODO: This needs to be reworked
+		 */
+		
+		IntegerType resultDataType = TypeSystemFactory.eINSTANCE.createIntegerType();
+		resultDataType.setUnit(EcoreUtil.copy(getDataType().getUnit()));
+		
+		FixedPointValue value;
+
+		int fractionLength = getNumberFormat().getFractionLength();
+		if (fractionLength == 0) {
+			value = this;
+		} else {
+			long resultRawValue = rawValue + (1L << fractionLength - 1); // + 0.5
+			long truncatedResult = truncate(resultRawValue, getNumberFormat().getWordSize());
+			if (truncatedResult != resultRawValue) {
+				getContext().getOverflowMonitor().handleOverflow(new OverflowInfo());
+			}
+			value = new FixedPointValue(getContext(), resultDataType, getNumberFormat(), truncatedResult >> fractionLength << fractionLength);
+		}
+		
+		return value.cast(getContext().getComputationModel().getNumberFormat(resultDataType));
 	}
 	
 	protected AbstractNumericValue cast(NumberFormat numberFormat) {

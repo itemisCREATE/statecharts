@@ -41,7 +41,7 @@ public class Signature implements ISignature {
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.language.imperativemodel.util.ISignature#evaluateOutputDataTypes(java.util.List)
 	 */
-	public List<DataType> evaluateOutputParameterDataTypes(List<DataType> inputParameterDataTypes) {
+	public List<DataType> evaluateOutputParameterDataTypes(List<? extends DataType> inputParameterDataTypes) {
 		if (this.inputParameterDataTypes == inputParameterDataTypes) {
 			return outputParameterDataTypes;
 		}

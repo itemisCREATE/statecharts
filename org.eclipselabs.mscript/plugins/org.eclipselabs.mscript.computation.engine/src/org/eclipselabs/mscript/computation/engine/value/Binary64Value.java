@@ -20,7 +20,9 @@ import org.eclipselabs.mscript.computation.computationmodel.NumberFormat;
 import org.eclipselabs.mscript.computation.computationmodel.util.ComputationModelUtil;
 import org.eclipselabs.mscript.computation.engine.IComputationContext;
 import org.eclipselabs.mscript.typesystem.DataType;
+import org.eclipselabs.mscript.typesystem.IntegerType;
 import org.eclipselabs.mscript.typesystem.NumericType;
+import org.eclipselabs.mscript.typesystem.TypeSystemFactory;
 
 /**
  * @author Andreas Unger
@@ -124,6 +126,17 @@ public class Binary64Value extends AbstractNumericValue implements ISimpleNumeri
 	protected IValue basicNotEqualToOrEqualTo(AbstractNumericValue other, DataType resultDataType) {
 		Binary64Value otherBinary64Value = (Binary64Value) other;
 		return new BooleanValue(getContext(), value != otherBinary64Value.value);
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.computation.engine.value.ISimpleNumericValue#round()
+	 */
+	public IValue round() {
+		IntegerType resultDataType = TypeSystemFactory.eINSTANCE.createIntegerType();
+		resultDataType.setUnit(EcoreUtil.copy(getDataType().getUnit()));
+		
+		NumberFormat numberFormat = getContext().getComputationModel().getNumberFormat(resultDataType);
+		return new Binary64Value(getContext(), resultDataType, getNumberFormat(), Math.round(value)).cast(numberFormat);
 	}
 	
 	protected AbstractNumericValue cast(NumberFormat numberFormat) {

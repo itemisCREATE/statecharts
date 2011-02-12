@@ -531,7 +531,7 @@ public class ExpressionValueEvaluator implements IExpressionValueEvaluator {
 					if (descriptor != null) {
 						IFunction behavior = builtinFunctionLookupTable.getFunction(descriptor);
 						if (behavior != null) {
-							return behavior.call(context, argumentValues);
+							return behavior.call(context, argumentValues).get(0);
 						}
 					}
 				}

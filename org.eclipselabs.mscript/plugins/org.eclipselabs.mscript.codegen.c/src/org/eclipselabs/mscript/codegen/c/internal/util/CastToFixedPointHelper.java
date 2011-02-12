@@ -72,7 +72,11 @@ public abstract class CastToFixedPointHelper extends ComputationModelSwitch<Bool
 	@Override
 	public Boolean caseFixedPointFormat(FixedPointFormat fixedPointFormat) {
 		if (wordSize != fixedPointFormat.getWordSize()) {
-			writer.printf("((%s) (", getCDataType());
+			if (fractionLength < fixedPointFormat.getFractionLength()) {
+				writer.printf("(%s) ((", getCDataType());
+			} else {
+				writer.printf("((%s) (", getCDataType());
+			}
 		}
 		if (fractionLength != fixedPointFormat.getFractionLength()) {
 			if (wordSize == fixedPointFormat.getWordSize()) {

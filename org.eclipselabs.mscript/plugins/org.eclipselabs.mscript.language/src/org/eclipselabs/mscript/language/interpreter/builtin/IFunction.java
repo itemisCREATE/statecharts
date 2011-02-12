@@ -24,6 +24,6 @@ import org.eclipselabs.mscript.language.interpreter.IInterpreterContext;
  */
 public interface IFunction {
 
-	IValue call(IInterpreterContext context, List<IValue> arguments);
+	List<IValue> call(IInterpreterContext context, List<? extends IValue> arguments);
 	
 }

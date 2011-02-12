@@ -9,11 +9,16 @@
  *    Andreas Unger - initial API and implementation 
  ****************************************************************************/
 
-package org.eclipselabs.mscript.codegen.c;
+package org.eclipselabs.mscript.codegen.c.internal;
 
 import java.io.PrintWriter;
 import java.util.List;
 
+import org.eclipselabs.mscript.codegen.c.ExpressionGenerator;
+import org.eclipselabs.mscript.codegen.c.IExpressionGenerator;
+import org.eclipselabs.mscript.codegen.c.IFunctionGenerator;
+import org.eclipselabs.mscript.codegen.c.IMscriptGeneratorContext;
+import org.eclipselabs.mscript.codegen.c.IVariableAccessStrategy;
 import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.il.util.ILUtil;
 import org.eclipselabs.mscript.typesystem.DataType;
@@ -30,7 +35,7 @@ public class SumFunctionGenerator implements IFunctionGenerator {
 	/* (non-Javadoc)
 	 * @see org.eclipselabs.mscript.codegen.c.IFunctionGenerator#generate(java.util.List)
 	 */
-	public void generate(IMscriptGeneratorContext context, IVariableAccessStrategy variableAccessStrategy, List<Expression> arguments) {
+	public void generate(IMscriptGeneratorContext context, IVariableAccessStrategy variableAccessStrategy, List<? extends Expression> arguments) {
 		PrintWriter writer = new PrintWriter(context.getWriter());
 		
 		Expression argument = arguments.get(0);

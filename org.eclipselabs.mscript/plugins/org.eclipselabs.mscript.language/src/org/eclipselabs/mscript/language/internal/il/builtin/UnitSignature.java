@@ -9,18 +9,22 @@
  *    Andreas Unger - initial API and implementation 
  ****************************************************************************/
 
-package org.eclipselabs.mscript.codegen.c;
+package org.eclipselabs.mscript.language.internal.il.builtin;
 
-import java.util.List;
+import java.util.Collections;
 
-import org.eclipselabs.mscript.language.ast.Expression;
+import org.eclipselabs.mscript.language.il.builtin.Signature;
+import org.eclipselabs.mscript.typesystem.DataType;
+import org.eclipselabs.mscript.typesystem.TypeSystemFactory;
 
 /**
  * @author Andreas Unger
  *
  */
-public interface IFunctionGenerator {
+public class UnitSignature extends Signature {
 
-	void generate(IMscriptGeneratorContext context, IVariableAccessStrategy variableAccessStrategy, List<? extends Expression> arguments);
-	
+	public UnitSignature() {
+		super(Collections.<DataType>singletonList(TypeSystemFactory.eINSTANCE.createRealType()), TypeSystemFactory.eINSTANCE.createUnitType());
+	}
+
 }

@@ -11,11 +11,11 @@
 
 package org.eclipselabs.mscript.language.il.builtin;
 
-import java.util.Collections;
 import java.util.List;
 
+import org.eclipselabs.mscript.language.internal.il.builtin.RoundSignature;
+import org.eclipselabs.mscript.language.internal.il.builtin.UnitSignature;
 import org.eclipselabs.mscript.typesystem.DataType;
-import org.eclipselabs.mscript.typesystem.TypeSystemFactory;
 
 /**
  * @author Andreas Unger
@@ -23,28 +23,9 @@ import org.eclipselabs.mscript.typesystem.TypeSystemFactory;
  */
 public enum BuiltinFunctionDescriptor {
 	
-	UNIT(
-			"unit",
-			new Signature(
-					Collections.<DataType>singletonList(TypeSystemFactory.eINSTANCE.createRealType()),
-					TypeSystemFactory.eINSTANCE.createUnitType()));
+	UNIT("unit", new UnitSignature()),
+	ROUND("round", new RoundSignature());
 	
-//	SUM(
-//			"sum",
-//			new ISignature() {
-//				
-//				public List<DataType> evaluateOutputParameterDataTypes(DataType targetDataType, List<DataType> inputDataTypes) {
-//					if (targetDataType instanceof TensorType && inputDataTypes.isEmpty()) {
-//						TensorType tensorType = (TensorType) targetDataType;
-//						if (tensorType.getDimensionality() == 1) {
-//							return Collections.<DataType>singletonList(tensorType.getElementType());
-//						}
-//					}
-//					return null;
-//				}
-//				
-//			});
-
 	private String name;
 	private ISignature signature;
 

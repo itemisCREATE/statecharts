@@ -11,6 +11,7 @@
 
 package org.eclipselabs.mscript.codegen.c;
 
+import org.eclipselabs.mscript.codegen.c.internal.RoundFunctionGenerator;
 import org.eclipselabs.mscript.language.il.builtin.BuiltinFunctionDescriptor;
 
 /**
@@ -23,6 +24,10 @@ public class BuiltinFunctionGeneratorLookupTable implements IBuiltinFunctionGene
 	 * @see org.eclipselabs.mscript.codegen.c.IBuiltinFunctionGeneratorLookupTable#getFunctionGenerator(org.eclipselabs.mscript.language.il.builtin.BuiltinFunctionDescriptor)
 	 */
 	public IFunctionGenerator getFunctionGenerator(BuiltinFunctionDescriptor builtinFunctionDescriptor) {
+		switch (builtinFunctionDescriptor) {
+		case ROUND:
+			return new RoundFunctionGenerator();
+		}
 		return null;
 	}
 	
