@@ -324,13 +324,13 @@ public interface ILPackage extends EPackage {
 	int VARIABLE_DECLARATION__NAME = 0;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * The feature id for the '<em><b>Data Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_DECLARATION__TYPE = 1;
+	int VARIABLE_DECLARATION__DATA_TYPE = 1;
 
 	/**
 	 * The number of structural features of the '<em>Variable Declaration</em>' class.
@@ -351,13 +351,13 @@ public interface ILPackage extends EPackage {
 	int STATEFUL_VARIABLE_DECLARATION__NAME = VARIABLE_DECLARATION__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * The feature id for the '<em><b>Data Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATEFUL_VARIABLE_DECLARATION__TYPE = VARIABLE_DECLARATION__TYPE;
+	int STATEFUL_VARIABLE_DECLARATION__DATA_TYPE = VARIABLE_DECLARATION__DATA_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Circular Buffer Size</b></em>' attribute.
@@ -397,13 +397,13 @@ public interface ILPackage extends EPackage {
 	int TEMPLATE_VARIABLE_DECLARATION__NAME = VARIABLE_DECLARATION__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * The feature id for the '<em><b>Data Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TEMPLATE_VARIABLE_DECLARATION__TYPE = VARIABLE_DECLARATION__TYPE;
+	int TEMPLATE_VARIABLE_DECLARATION__DATA_TYPE = VARIABLE_DECLARATION__DATA_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -433,13 +433,13 @@ public interface ILPackage extends EPackage {
 	int INPUT_VARIABLE_DECLARATION__NAME = STATEFUL_VARIABLE_DECLARATION__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * The feature id for the '<em><b>Data Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INPUT_VARIABLE_DECLARATION__TYPE = STATEFUL_VARIABLE_DECLARATION__TYPE;
+	int INPUT_VARIABLE_DECLARATION__DATA_TYPE = STATEFUL_VARIABLE_DECLARATION__DATA_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Circular Buffer Size</b></em>' attribute.
@@ -478,13 +478,13 @@ public interface ILPackage extends EPackage {
 	int OUTPUT_VARIABLE_DECLARATION__NAME = STATEFUL_VARIABLE_DECLARATION__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * The feature id for the '<em><b>Data Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OUTPUT_VARIABLE_DECLARATION__TYPE = STATEFUL_VARIABLE_DECLARATION__TYPE;
+	int OUTPUT_VARIABLE_DECLARATION__DATA_TYPE = STATEFUL_VARIABLE_DECLARATION__DATA_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Circular Buffer Size</b></em>' attribute.
@@ -524,13 +524,13 @@ public interface ILPackage extends EPackage {
 	int INSTANCE_VARIABLE_DECLARATION__NAME = STATEFUL_VARIABLE_DECLARATION__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * The feature id for the '<em><b>Data Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INSTANCE_VARIABLE_DECLARATION__TYPE = STATEFUL_VARIABLE_DECLARATION__TYPE;
+	int INSTANCE_VARIABLE_DECLARATION__DATA_TYPE = STATEFUL_VARIABLE_DECLARATION__DATA_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Circular Buffer Size</b></em>' attribute.
@@ -560,13 +560,13 @@ public interface ILPackage extends EPackage {
 	int LOCAL_VARIABLE_DECLARATION__NAME = VARIABLE_DECLARATION__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * The feature id for the '<em><b>Data Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LOCAL_VARIABLE_DECLARATION__TYPE = VARIABLE_DECLARATION__TYPE;
+	int LOCAL_VARIABLE_DECLARATION__DATA_TYPE = VARIABLE_DECLARATION__DATA_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Initializer</b></em>' containment reference.
@@ -1183,15 +1183,15 @@ public interface ILPackage extends EPackage {
 	EAttribute getVariableDeclaration_Name();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipselabs.mscript.language.il.VariableDeclaration#getType <em>Type</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipselabs.mscript.language.il.VariableDeclaration#getDataType <em>Data Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Type</em>'.
-	 * @see org.eclipselabs.mscript.language.il.VariableDeclaration#getType()
+	 * @return the meta object for the reference '<em>Data Type</em>'.
+	 * @see org.eclipselabs.mscript.language.il.VariableDeclaration#getDataType()
 	 * @see #getVariableDeclaration()
 	 * @generated
 	 */
-	EReference getVariableDeclaration_Type();
+	EReference getVariableDeclaration_DataType();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.il.StatefulVariableDeclaration <em>Stateful Variable Declaration</em>}'.
@@ -1777,12 +1777,12 @@ public interface ILPackage extends EPackage {
 		EAttribute VARIABLE_DECLARATION__NAME = eINSTANCE.getVariableDeclaration_Name();
 
 		/**
-		 * The meta object literal for the '<em><b>Type</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Data Type</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference VARIABLE_DECLARATION__TYPE = eINSTANCE.getVariableDeclaration_Type();
+		EReference VARIABLE_DECLARATION__DATA_TYPE = eINSTANCE.getVariableDeclaration_DataType();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.il.impl.StatefulVariableDeclarationImpl <em>Stateful Variable Declaration</em>}' class.

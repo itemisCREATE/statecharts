@@ -71,7 +71,7 @@ public class CompoundGenerator implements ICompoundGenerator {
 				writer.print("{\n");
 			}
 			for (LocalVariableDeclaration localVariableDeclaration : compound.getLocalVariableDeclarations()) {
-				writer.print(MscriptGeneratorUtil.getCVariableDeclaration(context.getComputationModel(), localVariableDeclaration.getType(), localVariableDeclaration.getName(), false));
+				writer.print(MscriptGeneratorUtil.getCVariableDeclaration(context.getComputationModel(), localVariableDeclaration.getDataType(), localVariableDeclaration.getName(), false));
 				writer.print(";\n");
 			}
 			for (Statement statement : compound.getStatements()) {
@@ -89,7 +89,7 @@ public class CompoundGenerator implements ICompoundGenerator {
 		@Override
 		public Boolean caseLocalVariableDeclaration(LocalVariableDeclaration localVariableDeclaration) {
 			if (localVariableDeclaration.getInitializer() != null) {
-				writeAssignment(localVariableDeclaration.getType(), localVariableDeclaration.getName(), localVariableDeclaration.getInitializer());
+				writeAssignment(localVariableDeclaration.getDataType(), localVariableDeclaration.getName(), localVariableDeclaration.getInitializer());
 			}
 			return true;
 		}
@@ -99,7 +99,7 @@ public class CompoundGenerator implements ICompoundGenerator {
 		 */
 		@Override
 		public Boolean caseAssignment(Assignment assignment) {
-			writeAssignment(assignment.getTarget().getType(), new VariableAccessGenerator(context.getComputationModel(), variableAccessStrategy, assignment).generate(), assignment.getAssignedExpression());
+			writeAssignment(assignment.getTarget().getDataType(), new VariableAccessGenerator(context.getComputationModel(), variableAccessStrategy, assignment).generate(), assignment.getAssignedExpression());
 			return true;
 		}
 		
@@ -133,7 +133,7 @@ public class CompoundGenerator implements ICompoundGenerator {
 			}
 			
 			String itVarName = iterationVariableDeclaration.getName();
-			String itVarDecl = MscriptGeneratorUtil.getCVariableDeclaration(context.getComputationModel(), iterationVariableDeclaration.getType(), itVarName, false);
+			String itVarDecl = MscriptGeneratorUtil.getCVariableDeclaration(context.getComputationModel(), iterationVariableDeclaration.getDataType(), itVarName, false);
 			int size = collectionArrayType.getSize();
 			
 			writer.println("{");

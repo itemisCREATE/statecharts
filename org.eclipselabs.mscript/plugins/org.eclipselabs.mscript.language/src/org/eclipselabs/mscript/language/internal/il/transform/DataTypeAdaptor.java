@@ -166,23 +166,23 @@ public class DataTypeAdaptor extends ILSwitch<Boolean> {
 	}
 		
 	private boolean updateDataType(VariableDeclaration variableDeclaration, DataType dataType) {
-		if (variableDeclaration.getType() == null) {
-			variableDeclaration.setType(dataType);
+		if (variableDeclaration.getDataType() == null) {
+			variableDeclaration.setDataType(dataType);
 			return true;
 		}
 		
-		if (variableDeclaration.getType() == dataType) {
+		if (variableDeclaration.getDataType() == dataType) {
 			return true;
 		}
 
-		DataType leftHandDataType = TypeSystemUtil.getLeftHandDataType(variableDeclaration.getType(), dataType);
+		DataType leftHandDataType = TypeSystemUtil.getLeftHandDataType(variableDeclaration.getDataType(), dataType);
 		if (leftHandDataType == null) {
 			status.add(new Status(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, "Incompatible data types"));
 			return false;
 		}
 		
 		if (leftHandDataType == dataType) {
-			variableDeclaration.setType(leftHandDataType);
+			variableDeclaration.setDataType(leftHandDataType);
 			return false;
 		}
 		
@@ -496,7 +496,7 @@ public class DataTypeAdaptor extends ILSwitch<Boolean> {
 			 */
 			@Override
 			public DataType caseVariableReference(VariableReference variableReference) {
-				DataType dataType = variableReference.getTarget().getType();
+				DataType dataType = variableReference.getTarget().getDataType();
 				if (dataType == null) {
 					throw new RuntimeException("Data type not set");
 				}

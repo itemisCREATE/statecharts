@@ -97,7 +97,7 @@ public class FunctionDefinitionTransformer implements IFunctionDefinitionTransfo
 			templateVariableDeclaration.setName(parameterDeclaration.getName());
 			if (templateArgumentIterator.hasNext()) {
 				IValue value = templateArgumentIterator.next();
-				templateVariableDeclaration.setType(EcoreUtil.copy(value.getDataType()));
+				templateVariableDeclaration.setDataType(EcoreUtil.copy(value.getDataType()));
 				templateVariableDeclaration.setValue(value);
 			}
 			VariableDescriptor variableDescriptor = functionDescriptor.getVariableDescriptor(parameterDeclaration.getName());
@@ -112,7 +112,7 @@ public class FunctionDefinitionTransformer implements IFunctionDefinitionTransfo
 			InputVariableDeclaration inputVariableDeclaration = ILFactory.eINSTANCE.createInputVariableDeclaration();
 			inputVariableDeclaration.setName(parameterDeclaration.getName());
 			if (inputParameterDataTypesIterator.hasNext()) {
-				inputVariableDeclaration.setType(EcoreUtil.copy(inputParameterDataTypesIterator.next()));
+				inputVariableDeclaration.setDataType(EcoreUtil.copy(inputParameterDataTypesIterator.next()));
 			}
 			VariableDescriptor variableDescriptor = functionDescriptor.getVariableDescriptor(parameterDeclaration.getName());
 			if (variableDescriptor != null) {

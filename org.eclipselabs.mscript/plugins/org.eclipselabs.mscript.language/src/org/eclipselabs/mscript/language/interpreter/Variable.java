@@ -57,8 +57,8 @@ public class Variable implements IVariable {
 	 * @see org.eclipselabs.mscript.execution.IVariable#setValue(org.eclipselabs.mscript.execution.value.IValue)
 	 */
 	public void setValue(int stepIndex, IValue value) {
-		if (declaration != null && declaration.getType() != null) {
-			value = value.convert(declaration.getType());
+		if (declaration != null && declaration.getDataType() != null) {
+			value = value.convert(declaration.getDataType());
 		}
 		values.set(stepIndex, value);
 	}

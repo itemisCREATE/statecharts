@@ -28,7 +28,7 @@
     </genClasses>
     <genClasses ecoreClass="IL.ecore#//VariableDeclaration">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute IL.ecore#//VariableDeclaration/name"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference IL.ecore#//VariableDeclaration/type"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference IL.ecore#//VariableDeclaration/dataType"/>
     </genClasses>
     <genClasses image="false" ecoreClass="IL.ecore#//StatefulVariableDeclaration">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute IL.ecore#//StatefulVariableDeclaration/circularBufferSize"/>

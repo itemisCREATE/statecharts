@@ -70,7 +70,7 @@ public class StaticInterpreterContext extends InterpreterContext {
 			}
 
 			for (InputVariableDeclaration inputVariableDeclaration : functionDefinition.getInputVariableDeclarations()) {
-				IValue value = new AnyValue(getComputationContext(), inputVariableDeclaration.getType());
+				IValue value = new AnyValue(getComputationContext(), inputVariableDeclaration.getDataType());
 				IVariable variable = new Variable(inputVariableDeclaration);
 				variable.setValue(0, value);
 				variables.put(variable.getDeclaration(), variable);

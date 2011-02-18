@@ -23,7 +23,7 @@ import org.eclipselabs.mscript.typesystem.DataType;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipselabs.mscript.language.il.impl.VariableDeclarationImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.language.il.impl.VariableDeclarationImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.il.impl.VariableDeclarationImpl#getDataType <em>Data Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -51,14 +51,14 @@ public abstract class VariableDeclarationImpl extends EObjectImpl implements Var
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
+	 * The cached value of the '{@link #getDataType() <em>Data Type</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getType()
+	 * @see #getDataType()
 	 * @generated
 	 * @ordered
 	 */
-	protected DataType type;
+	protected DataType dataType;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -105,16 +105,16 @@ public abstract class VariableDeclarationImpl extends EObjectImpl implements Var
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DataType getType() {
-		if (type != null && type.eIsProxy()) {
-			InternalEObject oldType = (InternalEObject)type;
-			type = (DataType)eResolveProxy(oldType);
-			if (type != oldType) {
+	public DataType getDataType() {
+		if (dataType != null && dataType.eIsProxy()) {
+			InternalEObject oldDataType = (InternalEObject)dataType;
+			dataType = (DataType)eResolveProxy(oldDataType);
+			if (dataType != oldDataType) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ILPackage.VARIABLE_DECLARATION__TYPE, oldType, type));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ILPackage.VARIABLE_DECLARATION__DATA_TYPE, oldDataType, dataType));
 			}
 		}
-		return type;
+		return dataType;
 	}
 
 	/**
@@ -122,8 +122,8 @@ public abstract class VariableDeclarationImpl extends EObjectImpl implements Var
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DataType basicGetType() {
-		return type;
+	public DataType basicGetDataType() {
+		return dataType;
 	}
 
 	/**
@@ -131,11 +131,11 @@ public abstract class VariableDeclarationImpl extends EObjectImpl implements Var
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setType(DataType newType) {
-		DataType oldType = type;
-		type = newType;
+	public void setDataType(DataType newDataType) {
+		DataType oldDataType = dataType;
+		dataType = newDataType;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ILPackage.VARIABLE_DECLARATION__TYPE, oldType, type));
+			eNotify(new ENotificationImpl(this, Notification.SET, ILPackage.VARIABLE_DECLARATION__DATA_TYPE, oldDataType, dataType));
 	}
 
 	/**
@@ -148,9 +148,9 @@ public abstract class VariableDeclarationImpl extends EObjectImpl implements Var
 		switch (featureID) {
 			case ILPackage.VARIABLE_DECLARATION__NAME:
 				return getName();
-			case ILPackage.VARIABLE_DECLARATION__TYPE:
-				if (resolve) return getType();
-				return basicGetType();
+			case ILPackage.VARIABLE_DECLARATION__DATA_TYPE:
+				if (resolve) return getDataType();
+				return basicGetDataType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -166,8 +166,8 @@ public abstract class VariableDeclarationImpl extends EObjectImpl implements Var
 			case ILPackage.VARIABLE_DECLARATION__NAME:
 				setName((String)newValue);
 				return;
-			case ILPackage.VARIABLE_DECLARATION__TYPE:
-				setType((DataType)newValue);
+			case ILPackage.VARIABLE_DECLARATION__DATA_TYPE:
+				setDataType((DataType)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -184,8 +184,8 @@ public abstract class VariableDeclarationImpl extends EObjectImpl implements Var
 			case ILPackage.VARIABLE_DECLARATION__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case ILPackage.VARIABLE_DECLARATION__TYPE:
-				setType((DataType)null);
+			case ILPackage.VARIABLE_DECLARATION__DATA_TYPE:
+				setDataType((DataType)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -201,8 +201,8 @@ public abstract class VariableDeclarationImpl extends EObjectImpl implements Var
 		switch (featureID) {
 			case ILPackage.VARIABLE_DECLARATION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case ILPackage.VARIABLE_DECLARATION__TYPE:
-				return type != null;
+			case ILPackage.VARIABLE_DECLARATION__DATA_TYPE:
+				return dataType != null;
 		}
 		return super.eIsSet(featureID);
 	}
