@@ -14,6 +14,5 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipselabs.mscript.computation.computationmodel;visibility:=reexport,
  org.eclipse.emf.edit;visibility:=reexport,
  org.eclipselabs.mscript.typesystem;visibility:=reexport,
- org.eclipselabs.mscript.typesystem.edit;visibility:=reexport,
- org.eclipse.uml2.common.edit;visibility:=reexport
+ org.eclipselabs.mscript.typesystem.edit;visibility:=reexport
 Bundle-ActivationPolicy: lazy
