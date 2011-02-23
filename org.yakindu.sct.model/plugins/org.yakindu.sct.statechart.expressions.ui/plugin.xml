@@ -180,5 +180,14 @@
             class="org.yakindu.sct.statechart.ui.ExpressionsExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator">
       </markerResolutionGenerator>
    </extension>
+   
+   <!-- ResourceProvider -->
+   <extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+        <resourceServiceProvider
+           class="org.yakindu.sct.statechart.resources.ExpressionsResourceProvider"
+            uriExtension="sct">
+        </resourceServiceProvider>
+    </extension>
+   
 
 </plugin>

@@ -3,41 +3,12 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="expressions"
     nsURI="http://www.yakindu.org/sct/statechart/Expressions" nsPrefix="expressions">
-  <eClassifiers xsi:type="ecore:EClass" name="StatementModel">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="statements" upperBound="-1"
-        eType="#//Statement" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Statement"/>
-  <eClassifiers xsi:type="ecore:EClass" name="TransitionDefinition" eSuperTypes="#//Statement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="triggers" upperBound="-1"
-        eType="#//Event" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="guardExpression" eType="#//ExpressionRule"
-        containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="VariableDefinition" eSuperTypes="#//Statement">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//Type"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ActionDefinition" eSuperTypes="#//Statement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//ExpressionRule"
-        containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Event" eSuperTypes="#//Statement">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" eType="#//DirectionKind"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="time" eType="#//TimeConstant"
-        containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TimeConstant">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="unit" eType="#//TimeUnit"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExpressionRule">
     <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RaiseEventExpression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="event" eType="#//Event"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="event" eType="ecore:EClass ../../../../../../org.yakindu.sct.model.statechart/model/emf/statechart.ecore#//Event"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Expression"/>
   <eClassifiers xsi:type="ecore:EEnum" name="AdditiveOperator">
@@ -75,6 +46,14 @@
     <eLiterals name="int" literal="int"/>
     <eLiterals name="float" value="1" literal="float"/>
     <eLiterals name="boolean" value="2" literal="boolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CustomTransitionExpression" eSuperTypes="../../../../../../org.yakindu.sct.model.statechart/model/emf/statechart.ecore#//TransitionExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="triggers" unique="false"
+        upperBound="-1" eType="ecore:EClass ../../../../../../org.yakindu.sct.model.statechart/model/emf/statechart.ecore#//Event"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="guardExpression" eType="#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="action" eType="#//ExpressionRule"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LogicalOrExpression" eSuperTypes="#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="#//Expression"
@@ -122,6 +101,6 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PropertyReferenceExpression" eSuperTypes="#//Expression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//VariableDefinition"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass ../../../../../../org.yakindu.sct.model.statechart/model/emf/statechart.ecore#//Variable"/>
   </eClassifiers>
 </ecore:EPackage>

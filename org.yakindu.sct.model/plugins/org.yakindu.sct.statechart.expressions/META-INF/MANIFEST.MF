@@ -16,7 +16,10 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.xtext.util,
  org.eclipse.emf.ecore,
  org.eclipse.emf.common,
- org.antlr.runtime
+ org.antlr.runtime,
+ org.yakindu.sct.model.statechart;bundle-version="1.0.0",
+ org.yakindu.sct.statechart.diagram;bundle-version="1.0.0",
+ org.eclipse.uml2.uml;bundle-version="3.1.1"
 Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.yakindu.sct.statechart,

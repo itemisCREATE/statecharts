@@ -69,16 +69,10 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
   {
     switch (eClass.getClassifierID())
     {
-      case ExpressionsPackage.STATEMENT_MODEL: return createStatementModel();
-      case ExpressionsPackage.STATEMENT: return createStatement();
-      case ExpressionsPackage.TRANSITION_DEFINITION: return createTransitionDefinition();
-      case ExpressionsPackage.VARIABLE_DEFINITION: return createVariableDefinition();
-      case ExpressionsPackage.ACTION_DEFINITION: return createActionDefinition();
-      case ExpressionsPackage.EVENT: return createEvent();
-      case ExpressionsPackage.TIME_CONSTANT: return createTimeConstant();
       case ExpressionsPackage.EXPRESSION_RULE: return createExpressionRule();
       case ExpressionsPackage.RAISE_EVENT_EXPRESSION: return createRaiseEventExpression();
       case ExpressionsPackage.EXPRESSION: return createExpression();
+      case ExpressionsPackage.CUSTOM_TRANSITION_EXPRESSION: return createCustomTransitionExpression();
       case ExpressionsPackage.LOGICAL_OR_EXPRESSION: return createLogicalOrExpression();
       case ExpressionsPackage.LOGICAL_AND_EXPRESSION: return createLogicalAndExpression();
       case ExpressionsPackage.LOGICAL_NOT_EXPRESSION: return createLogicalNotExpression();
@@ -156,83 +150,6 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
    * <!-- end-user-doc -->
    * @generated
    */
-  public StatementModel createStatementModel()
-  {
-    StatementModelImpl statementModel = new StatementModelImpl();
-    return statementModel;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Statement createStatement()
-  {
-    StatementImpl statement = new StatementImpl();
-    return statement;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public TransitionDefinition createTransitionDefinition()
-  {
-    TransitionDefinitionImpl transitionDefinition = new TransitionDefinitionImpl();
-    return transitionDefinition;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public VariableDefinition createVariableDefinition()
-  {
-    VariableDefinitionImpl variableDefinition = new VariableDefinitionImpl();
-    return variableDefinition;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ActionDefinition createActionDefinition()
-  {
-    ActionDefinitionImpl actionDefinition = new ActionDefinitionImpl();
-    return actionDefinition;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Event createEvent()
-  {
-    EventImpl event = new EventImpl();
-    return event;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public TimeConstant createTimeConstant()
-  {
-    TimeConstantImpl timeConstant = new TimeConstantImpl();
-    return timeConstant;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public ExpressionRule createExpressionRule()
   {
     ExpressionRuleImpl expressionRule = new ExpressionRuleImpl();
@@ -259,6 +176,17 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
   {
     ExpressionImpl expression = new ExpressionImpl();
     return expression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public CustomTransitionExpression createCustomTransitionExpression()
+  {
+    CustomTransitionExpressionImpl customTransitionExpression = new CustomTransitionExpressionImpl();
+    return customTransitionExpression;
   }
 
   /**

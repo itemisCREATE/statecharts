@@ -9,7 +9,7 @@ import org.yakindu.model.sct.statechart.InitialState;
 import org.yakindu.model.sct.statechart.NamedElement;
 import org.yakindu.model.sct.statechart.Region;
 import org.yakindu.model.sct.statechart.Vertex;
-import org.yakindu.sct.statechart.diagram.validation.IValidationProvider;
+import org.yakindu.sct.statechart.diagram.extensions.IValidationProvider;
 import org.yakindu.sct.statechart.diagram.validation.provider.AbstractJavaValidationProvider;
 
 /**

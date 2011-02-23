@@ -10,7 +10,7 @@ var projectName = "org.yakindu.sct.statechart.expressions"
 var runtimeProject = "../${projectName}"
 
 Workflow {
-    bean = StandaloneSetup {
+	bean = StandaloneSetup {
 		platformUri = "${runtimeProject}/.."
 	}
 
@@ -36,7 +36,7 @@ Workflow {
 
 			// generates Java API for the generated EPackages 
 			fragment = ecore.EcoreGeneratorFragment {
-			// referencedGenModels = "uri to genmodel, uri to next genmodel"
+				referencedGenModels = "platform:/resource/org.yakindu.sct.model.statechart/model/emf/statechart.genmodel"
 			}
 
 			// the serialization component
@@ -57,8 +57,7 @@ Workflow {
 			// java-based API for validation 
 			fragment = validation.JavaValidatorFragment {
 				composedCheck = "org.eclipse.xtext.validation.ImportUriValidator"
-				composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
-				// registerForImportedPackages = true
+				composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"// registerForImportedPackages = true
 			}
 
 			// scoping and exporting API

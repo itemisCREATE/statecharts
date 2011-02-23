@@ -6,6 +6,7 @@
  */
 package org.yakindu.sct.statechart.expressions;
 
+import org.yakindu.model.sct.statechart.Variable;
 
 /**
  * <!-- begin-user-doc -->
@@ -34,12 +35,12 @@ public interface PropertyReferenceExpression extends Expression
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Value</em>' reference.
-   * @see #setValue(VariableDefinition)
+   * @see #setValue(Variable)
    * @see org.yakindu.sct.statechart.expressions.ExpressionsPackage#getPropertyReferenceExpression_Value()
    * @model
    * @generated
    */
-  VariableDefinition getValue();
+  Variable getValue();
 
   /**
    * Sets the value of the '{@link org.yakindu.sct.statechart.expressions.PropertyReferenceExpression#getValue <em>Value</em>}' reference.
@@ -49,6 +50,6 @@ public interface PropertyReferenceExpression extends Expression
    * @see #getValue()
    * @generated
    */
-  void setValue(VariableDefinition value);
+  void setValue(Variable value);
 
 } // PropertyReferenceExpression

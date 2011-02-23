@@ -17,13 +17,9 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.ui.provider.PropertyDescriptor;
 import org.eclipse.emf.edit.ui.provider.PropertySource;
-import org.eclipse.gmf.runtime.diagram.ui.actions.DiagramAction;
 import org.eclipse.jface.viewers.CellEditor;
-import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.views.properties.IPropertyDescriptor;
-import org.yakindu.sct.statechart.diagram.DiagramActivator;
-import org.yakindu.sct.statechart.diagram.xtext.integration.XTextCellEditor;
 
 /**
  * 
@@ -60,10 +56,12 @@ public class ExpressionsPropertySource extends PropertySource {
 				return new PropertyDescriptor(object, itemPropertyDescriptor) {
 					@Override
 					public CellEditor createPropertyEditor(Composite composite) {
-						XTextCellEditor xTextEditor = new XTextCellEditor(
-								composite, DiagramActivator.getDefault()
-										.getExpressionsInjector(), SWT.SINGLE);
-						return xTextEditor;
+						//FIXME
+						return null;
+//						XTextCellEditor xTextEditor = new XTextCellEditor(
+//								composite, DiagramActivator.getDefault()
+//										.getExpressionsInjector(), SWT.SINGLE);
+//						return xTextEditor;
 					}
 				};
 			}

@@ -14,8 +14,6 @@ import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.osgi.framework.BundleContext;
-import org.yakindu.sct.statechart.ExpressionsRuntimeModule;
-import org.yakindu.sct.statechart.ui.ExpressionsUiModule;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -79,13 +77,5 @@ public class DiagramActivator extends AbstractUIPlugin {
 		return plugin;
 	}
 	
-	public Injector getExpressionsInjector() {
-		Injector injector =  Guice.createInjector(Modules.override(
-				Modules.override(
-						Modules.override(new ExpressionsRuntimeModule()).with(
-								new ExpressionsUiModule(DiagramActivator.getDefault()
-										))).with(
-						new SharedStateModule())).with());
-		return injector;
-	}
+	
 }

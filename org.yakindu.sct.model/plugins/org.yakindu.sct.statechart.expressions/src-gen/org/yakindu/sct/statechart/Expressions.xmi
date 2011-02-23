@@ -4,128 +4,52 @@
     <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="expressions">
       <ePackage href="http://www.yakindu.org/sct/statechart/Expressions#/"/>
     </metamodelDeclarations>
-    <rules xsi:type="xtext:ParserRule" name="StatementModel">
-      <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.yakindu.org/sct/statechart/Expressions#//StatementModel"/>
-      </type>
-      <alternatives xsi:type="xtext:Assignment" cardinality="+" feature="statements" operator="+=">
-        <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
-      </alternatives>
-    </rules>
-    <rules xsi:type="xtext:ParserRule" name="Statement">
-      <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.yakindu.org/sct/statechart/Expressions#//Statement"/>
-      </type>
-      <alternatives xsi:type="xtext:Alternatives">
-        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.3"/>
-        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.6"/>
-        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.4"/>
-        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.2"/>
-      </alternatives>
-    </rules>
-    <rules xsi:type="xtext:ParserRule" name="TransitionDefinition">
-      <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.yakindu.org/sct/statechart/Expressions#//TransitionDefinition"/>
+    <metamodelDeclarations xsi:type="xtext:ReferencedMetamodel" alias="sct">
+      <ePackage href="http:///statechart.ecore#/"/>
+    </metamodelDeclarations>
+    <rules xsi:type="xtext:ParserRule" name="CustomTransitionExpression">
+      <type metamodel="/0/@metamodelDeclarations.1">
+        <classifier xsi:type="ecore:EClass" href="http:///statechart.ecore#//TransitionExpression"/>
       </type>
       <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Action">
+          <type metamodel="/0/@metamodelDeclarations.0">
+            <classifier xsi:type="ecore:EClass" href="http://www.yakindu.org/sct/statechart/Expressions#//CustomTransitionExpression"/>
+          </type>
+        </elements>
         <elements xsi:type="xtext:Group">
           <elements xsi:type="xtext:Assignment" feature="triggers" operator="+=">
-            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.5"/>
+            <terminal xsi:type="xtext:CrossReference">
+              <type metamodel="/0/@metamodelDeclarations.1">
+                <classifier xsi:type="ecore:EClass" href="http:///statechart.ecore#//Event"/>
+              </type>
+              <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+            </terminal>
           </elements>
           <elements xsi:type="xtext:Group" cardinality="*">
             <elements xsi:type="xtext:Keyword" value=","/>
             <elements xsi:type="xtext:Assignment" feature="triggers" operator="+=">
-              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.5"/>
+              <terminal xsi:type="xtext:CrossReference">
+                <type metamodel="/0/@metamodelDeclarations.1">
+                  <classifier xsi:type="ecore:EClass" href="http:///statechart.ecore#//Event"/>
+                </type>
+                <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+              </terminal>
             </elements>
           </elements>
         </elements>
-        <elements xsi:type="xtext:Assignment" cardinality="?" feature="guardExpression" operator="=">
-          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.9"/>
-        </elements>
-      </alternatives>
-    </rules>
-    <rules xsi:type="xtext:ParserRule" name="VariableDefinition">
-      <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.yakindu.org/sct/statechart/Expressions#//VariableDefinition"/>
-      </type>
-      <alternatives xsi:type="xtext:Group">
-        <elements xsi:type="xtext:Keyword" value="var"/>
-        <elements xsi:type="xtext:Assignment" feature="name" operator="=">
-          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-        </elements>
-        <elements xsi:type="xtext:Keyword" value=":"/>
-        <elements xsi:type="xtext:Assignment" feature="type" operator="=">
-          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.25"/>
-        </elements>
-      </alternatives>
-    </rules>
-    <rules xsi:type="xtext:ParserRule" name="ActionDefinition">
-      <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.yakindu.org/sct/statechart/Expressions#//ActionDefinition"/>
-      </type>
-      <alternatives xsi:type="xtext:Group">
-        <elements xsi:type="xtext:Alternatives">
-          <elements xsi:type="xtext:Keyword" value="entry"/>
-          <elements xsi:type="xtext:Group">
-            <elements xsi:type="xtext:Keyword" value="exit"/>
-            <elements xsi:type="xtext:Keyword" value="do"/>
+        <elements xsi:type="xtext:Group" cardinality="?">
+          <elements xsi:type="xtext:Keyword" value="["/>
+          <elements xsi:type="xtext:Assignment" feature="guardExpression" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.3"/>
           </elements>
+          <elements xsi:type="xtext:Keyword" value="]"/>
         </elements>
-        <elements xsi:type="xtext:Keyword" value=":"/>
-        <elements xsi:type="xtext:Assignment" feature="expression" operator="=">
-          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.9"/>
-        </elements>
-        <elements xsi:type="xtext:Keyword" value=";"/>
-      </alternatives>
-    </rules>
-    <rules xsi:type="xtext:ParserRule" name="Event">
-      <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.yakindu.org/sct/statechart/Expressions#//Event"/>
-      </type>
-      <alternatives xsi:type="xtext:Alternatives">
-        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.6"/>
-        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.7"/>
-      </alternatives>
-    </rules>
-    <rules xsi:type="xtext:ParserRule" name="SignalEventDefinition">
-      <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.yakindu.org/sct/statechart/Expressions#//Event"/>
-      </type>
-      <alternatives xsi:type="xtext:Group">
-        <elements xsi:type="xtext:Keyword" value="event"/>
-        <elements xsi:type="xtext:Assignment" feature="name" operator="=">
-          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-        </elements>
-        <elements xsi:type="xtext:Keyword" value=":"/>
-        <elements xsi:type="xtext:Assignment" feature="direction" operator="=">
-          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.23"/>
-        </elements>
-        <elements xsi:type="xtext:Keyword" value=";"/>
-      </alternatives>
-    </rules>
-    <rules xsi:type="xtext:ParserRule" name="TimeEventDefinition">
-      <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.yakindu.org/sct/statechart/Expressions#//Event"/>
-      </type>
-      <alternatives xsi:type="xtext:Group">
-        <elements xsi:type="xtext:Keyword" value="after"/>
-        <elements xsi:type="xtext:Keyword" value="("/>
-        <elements xsi:type="xtext:Assignment" feature="time" operator="=">
-          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.8"/>
-        </elements>
-        <elements xsi:type="xtext:Keyword" value=")"/>
-      </alternatives>
-    </rules>
-    <rules xsi:type="xtext:ParserRule" name="TimeConstant">
-      <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.yakindu.org/sct/statechart/Expressions#//TimeConstant"/>
-      </type>
-      <alternatives xsi:type="xtext:Group">
-        <elements xsi:type="xtext:Assignment" feature="value" operator="=">
-          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.1"/>
-        </elements>
-        <elements xsi:type="xtext:Assignment" cardinality="?" feature="unit" operator="=">
-          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.24"/>
+        <elements xsi:type="xtext:Group" cardinality="?">
+          <elements xsi:type="xtext:Keyword" value="/"/>
+          <elements xsi:type="xtext:Assignment" feature="action" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+          </elements>
         </elements>
       </alternatives>
     </rules>
@@ -135,8 +59,8 @@
       </type>
       <alternatives xsi:type="xtext:Assignment" feature="expression" operator="=">
         <terminal xsi:type="xtext:Alternatives">
-          <elements xsi:type="xtext:RuleCall" rule="/0/@rules.11"/>
-          <elements xsi:type="xtext:RuleCall" rule="/0/@rules.10"/>
+          <elements xsi:type="xtext:RuleCall" rule="/0/@rules.3"/>
+          <elements xsi:type="xtext:RuleCall" rule="/0/@rules.2"/>
         </terminal>
       </alternatives>
     </rules>
@@ -148,8 +72,8 @@
         <elements xsi:type="xtext:Keyword" value="raise"/>
         <elements xsi:type="xtext:Assignment" feature="event" operator="=">
           <terminal xsi:type="xtext:CrossReference">
-            <type metamodel="/0/@metamodelDeclarations.0">
-              <classifier xsi:type="ecore:EClass" href="http://www.yakindu.org/sct/statechart/Expressions#//Event"/>
+            <type metamodel="/0/@metamodelDeclarations.1">
+              <classifier xsi:type="ecore:EClass" href="http:///statechart.ecore#//Event"/>
             </type>
             <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
           </terminal>
@@ -161,7 +85,7 @@
         <classifier xsi:type="ecore:EClass" href="http://www.yakindu.org/sct/statechart/Expressions#//Expression"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.12"/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.4"/>
         <elements xsi:type="xtext:Group" cardinality="*">
           <elements xsi:type="xtext:Action" feature="leftOperand" operator="=">
             <type metamodel="/0/@metamodelDeclarations.0">
@@ -170,7 +94,7 @@
           </elements>
           <elements xsi:type="xtext:Keyword" value="||"/>
           <elements xsi:type="xtext:Assignment" feature="rightOperand" operator="=">
-            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.12"/>
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.4"/>
           </elements>
         </elements>
       </alternatives>
@@ -180,7 +104,7 @@
         <classifier xsi:type="ecore:EClass" href="http://www.yakindu.org/sct/statechart/Expressions#//Expression"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.13"/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.5"/>
         <elements xsi:type="xtext:Group" cardinality="*">
           <elements xsi:type="xtext:Action" feature="leftOperand" operator="=">
             <type metamodel="/0/@metamodelDeclarations.0">
@@ -189,7 +113,7 @@
           </elements>
           <elements xsi:type="xtext:Keyword" value="&amp;&amp;"/>
           <elements xsi:type="xtext:Assignment" feature="rightOperand" operator="=">
-            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.13"/>
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.5"/>
           </elements>
         </elements>
       </alternatives>
@@ -199,7 +123,7 @@
         <classifier xsi:type="ecore:EClass" href="http://www.yakindu.org/sct/statechart/Expressions#//Expression"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
-        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.14"/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.6"/>
         <elements xsi:type="xtext:Group">
           <elements xsi:type="xtext:Action">
             <type metamodel="/0/@metamodelDeclarations.0">
@@ -208,7 +132,7 @@
           </elements>
           <elements xsi:type="xtext:Keyword" value="!"/>
           <elements xsi:type="xtext:Assignment" feature="operand" operator="=">
-            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.14"/>
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.6"/>
           </elements>
         </elements>
       </alternatives>
@@ -218,7 +142,7 @@
         <classifier xsi:type="ecore:EClass" href="http://www.yakindu.org/sct/statechart/Expressions#//Expression"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.15"/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.7"/>
         <elements xsi:type="xtext:Group" cardinality="*">
           <elements xsi:type="xtext:Action" feature="leftOperand" operator="=">
             <type metamodel="/0/@metamodelDeclarations.0">
@@ -226,10 +150,10 @@
             </type>
           </elements>
           <elements xsi:type="xtext:Assignment" feature="operator" operator="=">
-            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.22"/>
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.14"/>
           </elements>
           <elements xsi:type="xtext:Assignment" feature="rightOperand" operator="=">
-            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.15"/>
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.7"/>
           </elements>
         </elements>
       </alternatives>
@@ -239,7 +163,7 @@
         <classifier xsi:type="ecore:EClass" href="http://www.yakindu.org/sct/statechart/Expressions#//Expression"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.16"/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.8"/>
         <elements xsi:type="xtext:Group" cardinality="*">
           <elements xsi:type="xtext:Action" feature="leftOperand" operator="=">
             <type metamodel="/0/@metamodelDeclarations.0">
@@ -247,10 +171,10 @@
             </type>
           </elements>
           <elements xsi:type="xtext:Assignment" feature="operator" operator="=">
-            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.19"/>
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.11"/>
           </elements>
           <elements xsi:type="xtext:Assignment" feature="rightOperand" operator="=">
-            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.16"/>
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.8"/>
           </elements>
         </elements>
       </alternatives>
@@ -260,7 +184,7 @@
         <classifier xsi:type="ecore:EClass" href="http://www.yakindu.org/sct/statechart/Expressions#//Expression"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.17"/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.9"/>
         <elements xsi:type="xtext:Group" cardinality="*">
           <elements xsi:type="xtext:Action" feature="leftOperand" operator="=">
             <type metamodel="/0/@metamodelDeclarations.0">
@@ -268,10 +192,10 @@
             </type>
           </elements>
           <elements xsi:type="xtext:Assignment" feature="operator" operator="=">
-            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.20"/>
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.12"/>
           </elements>
           <elements xsi:type="xtext:Assignment" feature="rightOperand" operator="=">
-            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.17"/>
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.9"/>
           </elements>
         </elements>
       </alternatives>
@@ -281,7 +205,7 @@
         <classifier xsi:type="ecore:EClass" href="http://www.yakindu.org/sct/statechart/Expressions#//Expression"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
-        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.18"/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.10"/>
         <elements xsi:type="xtext:Group">
           <elements xsi:type="xtext:Action">
             <type metamodel="/0/@metamodelDeclarations.0">
@@ -289,10 +213,10 @@
             </type>
           </elements>
           <elements xsi:type="xtext:Assignment" feature="operator" operator="=">
-            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.21"/>
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.13"/>
           </elements>
           <elements xsi:type="xtext:Assignment" feature="operand" operator="=">
-            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.18"/>
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.10"/>
           </elements>
         </elements>
       </alternatives>
@@ -302,10 +226,10 @@
         <classifier xsi:type="ecore:EClass" href="http://www.yakindu.org/sct/statechart/Expressions#//Expression"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
-        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.26"/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.18"/>
         <elements xsi:type="xtext:Group">
           <elements xsi:type="xtext:Keyword" value="("/>
-          <elements xsi:type="xtext:RuleCall" rule="/0/@rules.11"/>
+          <elements xsi:type="xtext:RuleCall" rule="/0/@rules.3"/>
           <elements xsi:type="xtext:Keyword" value=")"/>
         </elements>
       </alternatives>
@@ -452,8 +376,8 @@
         <classifier xsi:type="ecore:EClass" href="http://www.yakindu.org/sct/statechart/Expressions#//Expression"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
-        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.27"/>
-        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.28"/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.19"/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.20"/>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="PrimitiveValueExpression">
@@ -467,7 +391,7 @@
           </type>
         </elements>
         <elements xsi:type="xtext:Assignment" feature="value" operator="=">
-          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.29"/>
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.21"/>
         </elements>
       </alternatives>
     </rules>
@@ -483,8 +407,8 @@
         </elements>
         <elements xsi:type="xtext:Assignment" feature="value" operator="=">
           <terminal xsi:type="xtext:CrossReference">
-            <type metamodel="/0/@metamodelDeclarations.0">
-              <classifier xsi:type="ecore:EClass" href="http://www.yakindu.org/sct/statechart/Expressions#//VariableDefinition"/>
+            <type metamodel="/0/@metamodelDeclarations.1">
+              <classifier xsi:type="ecore:EClass" href="http:///statechart.ecore#//Variable"/>
             </type>
             <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
           </terminal>
@@ -496,10 +420,10 @@
         <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
-        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.30"/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.22"/>
         <elements xsi:type="xtext:RuleCall" rule="/1/@rules.1"/>
         <elements xsi:type="xtext:RuleCall" rule="/1/@rules.2"/>
-        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.31"/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.23"/>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:TerminalRule" name="BOOL">

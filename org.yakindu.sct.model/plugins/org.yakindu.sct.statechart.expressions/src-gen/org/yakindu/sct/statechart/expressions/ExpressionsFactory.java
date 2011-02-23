@@ -27,69 +27,6 @@ public interface ExpressionsFactory extends EFactory
   ExpressionsFactory eINSTANCE = org.yakindu.sct.statechart.expressions.impl.ExpressionsFactoryImpl.init();
 
   /**
-   * Returns a new object of class '<em>Statement Model</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Statement Model</em>'.
-   * @generated
-   */
-  StatementModel createStatementModel();
-
-  /**
-   * Returns a new object of class '<em>Statement</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Statement</em>'.
-   * @generated
-   */
-  Statement createStatement();
-
-  /**
-   * Returns a new object of class '<em>Transition Definition</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Transition Definition</em>'.
-   * @generated
-   */
-  TransitionDefinition createTransitionDefinition();
-
-  /**
-   * Returns a new object of class '<em>Variable Definition</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Variable Definition</em>'.
-   * @generated
-   */
-  VariableDefinition createVariableDefinition();
-
-  /**
-   * Returns a new object of class '<em>Action Definition</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Action Definition</em>'.
-   * @generated
-   */
-  ActionDefinition createActionDefinition();
-
-  /**
-   * Returns a new object of class '<em>Event</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Event</em>'.
-   * @generated
-   */
-  Event createEvent();
-
-  /**
-   * Returns a new object of class '<em>Time Constant</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Time Constant</em>'.
-   * @generated
-   */
-  TimeConstant createTimeConstant();
-
-  /**
    * Returns a new object of class '<em>Expression Rule</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -115,6 +52,15 @@ public interface ExpressionsFactory extends EFactory
    * @generated
    */
   Expression createExpression();
+
+  /**
+   * Returns a new object of class '<em>Custom Transition Expression</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Custom Transition Expression</em>'.
+   * @generated
+   */
+  CustomTransitionExpression createCustomTransitionExpression();
 
   /**
    * Returns a new object of class '<em>Logical Or Expression</em>'.

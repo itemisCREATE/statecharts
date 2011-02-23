@@ -2,6 +2,7 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension-point id="org.yakindu.sct.statechart.diagram.validation.provider" name="org.yakindu.sct.statechart.diagram.validation.provider" schema="schema/org.yakindu.sct.statechart.diagram.validation.provider.exsd"/>
+   <extension-point id="org.yakindu.sct.statechart.diagram.expressions" name="org.yakindu.sct.statechart.diagram.expressions" schema="schema/org.yakindu.sct.statechart.diagram.expressions.exsd"/>
    <extension
          point="org.eclipse.ui.editors">
       <editor
@@ -287,36 +288,8 @@
 
 <!-- Property Tabs -->
 
- <extension point="org.eclipse.ui.views.properties.tabbed.propertyContributor" id="prop-contrib">
-      <propertyContributor
-            contributorId="org.yakindu.sct.statechart.diagram"
-            labelProvider="org.yakindu.sct.statechart.diagram.propertysheets.SheetLabelProvider">
-         <propertyCategory category="domain"/>
-         <propertyCategory category="visual"/>
-         <propertyCategory category="extra"/>
-      </propertyContributor>
-   </extension>
 
- <extension point="org.eclipse.ui.views.properties.tabbed.propertyTabs" id="proptabs">
-      <propertyTabs contributorId="org.yakindu.sct.statechart.diagram">
-          <propertyTab
-             category="domain"
-             id="property.tab.domain"
-             label="Model information"/>
-      </propertyTabs>
-   </extension>
    
-   <extension point="org.eclipse.ui.views.properties.tabbed.propertySections" id="propsections">
-      <propertySections contributorId="org.yakindu.sct.statechart.diagram">
-         <propertySection
-            id="property.section.domain" 
-            tab="property.tab.domain"
-            class="org.yakindu.sct.statechart.diagram.propertysheets.DiagramPropertySection">
-            <input type="org.eclipse.gmf.runtime.notation.View"/>
-            <input type="org.eclipse.gef.EditPart"/>
-         </propertySection>
-      </propertySections>
-   </extension>
    <extension
          point="org.eclipse.gmf.runtime.emf.ui.modelingAssistantProviders">
       <modelingAssistantProvider
