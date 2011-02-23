@@ -20,16 +20,11 @@ import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.ICellEditorValidator;
-import org.eclipse.swt.SWT;
-import org.yakindu.model.sct.statechart.StatechartPackage;
-import org.yakindu.sct.statechart.diagram.DiagramActivator;
-import org.yakindu.sct.statechart.diagram.parser.AttributeParser;
-import org.yakindu.sct.statechart.diagram.xtext.integration.XTextDirectEditManager;
 
 public class StateTextCompartmentExpressionEditPart extends ShapeNodeEditPart
 		implements ITextAwareEditPart {
 
-	private final XTextDirectEditManager manager;
+	//private final XTextDirectEditManager manager;
 
 	private EAttribute feature;
 
@@ -46,16 +41,16 @@ public class StateTextCompartmentExpressionEditPart extends ShapeNodeEditPart
 
 	public StateTextCompartmentExpressionEditPart(View view) {
 		super(view);
-		manager = createDirectEditManager();
-		feature = StatechartPackage.Literals.EXPRESSION_ELEMENT__EXPRESSION;
+	//	manager = createDirectEditManager();
+	//	feature = StatechartPackage.Literals.EXPRESSION_ELEMENT__EXPRESSION;
 	}
 
-	protected XTextDirectEditManager createDirectEditManager() {
-		//FIXME
-		return null;
-//		return new XTextDirectEditManager(this, DiagramActivator.getDefault()
-//				.getExpressionsInjector(), editorLocator, SWT.MULTI);
-	}
+//	protected XTextDirectEditManager createDirectEditManager() {
+//		//FIXME
+//		return null;
+////		return new XTextDirectEditManager(this, DiagramActivator.getDefault()
+////				.getExpressionsInjector(), editorLocator, SWT.MULTI);
+//	}
 
 	@Override
 	public String getEditText() {
@@ -84,8 +79,9 @@ public class StateTextCompartmentExpressionEditPart extends ShapeNodeEditPart
 
 	@Override
 	public IParser getParser() {
-		return new AttributeParser(
-				StatechartPackage.Literals.EXPRESSION_ELEMENT__EXPRESSION);
+		return null;
+//		return new AttributeParser(
+//				StatechartPackage.Literals.EXPRESSION_ELEMENT__EXPRESSION);
 	}
 
 	@Override
@@ -116,29 +112,29 @@ public class StateTextCompartmentExpressionEditPart extends ShapeNodeEditPart
 		getWrappingLabel().setText(getEditText());
 	}
 
-	@Override
-	protected void performDirectEditRequest(Request request) {
-		final Request theRequest = request;
-		try {
-			getEditingDomain().runExclusive(new Runnable() {
-				@Override
-				public void run() {
-					if (isActive()) {
-						if (theRequest.getExtendedData().get(
-								REQ_DIRECTEDIT_EXTENDEDDATA_INITIAL_CHAR) instanceof Character
-								&& manager instanceof XTextDirectEditManager) {
-							Character initialChar = (Character) theRequest
-									.getExtendedData()
-									.get(REQ_DIRECTEDIT_EXTENDEDDATA_INITIAL_CHAR);
-							(manager).show(initialChar);
-						} else {
-							manager.show();
-						}
-					}
-				}
-			});
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
+//	@Override
+//	protected void performDirectEditRequest(Request request) {
+//		final Request theRequest = request;
+//		try {
+//			getEditingDomain().runExclusive(new Runnable() {
+//				@Override
+//				public void run() {
+//					if (isActive()) {
+//						if (theRequest.getExtendedData().get(
+//								REQ_DIRECTEDIT_EXTENDEDDATA_INITIAL_CHAR) instanceof Character
+//								&& manager instanceof XTextDirectEditManager) {
+//							Character initialChar = (Character) theRequest
+//									.getExtendedData()
+//									.get(REQ_DIRECTEDIT_EXTENDEDDATA_INITIAL_CHAR);
+//							(manager).show(initialChar);
+//						} else {
+//							manager.show();
+//						}
+//					}
+//				}
+//			});
+//		} catch (InterruptedException e) {
+//			e.printStackTrace();
+//		}
+//	}
 }

@@ -1,42 +1,20 @@
-grammar org.yakindu.sct.statechart.Expressions with
-org.eclipse.xtext.common.Terminals
+grammar org.yakindu.sct.statechart.Expressions with org.eclipse.xtext.common.Terminals
 
 generate expressions "http://www.yakindu.org/sct/statechart/Expressions"
+import "platform:/resource/org.yakindu.sct.model.statechart/model/emf/statechart.ecore" as sct
 
-StatementModel:
-(statements+=Statement)+;
 
-Statement:
-VariableDefinition | SignalEventDefinition | ActionDefinition |
-TransitionDefinition;
-
-TransitionDefinition:
-(triggers+=(Event) ("," triggers+=Event)*)
-(guardExpression=ExpressionRule)?;
-
-VariableDefinition:
-'var' name=ID ':' type=Type;
-
-ActionDefinition:
-('entry' | 'exit' 'do') ':' expression=ExpressionRule ';';
-
-Event:
-SignalEventDefinition | TimeEventDefinition;
-
-SignalEventDefinition returns Event:
-'event' name=ID ':' direction=DirectionKind ';';
-
-TimeEventDefinition returns Event:
-'after' '('time=TimeConstant')';
-
-TimeConstant
-:  value = INT (unit = TimeUnit)?;
+CustomTransitionExpression returns sct::TransitionExpression : 
+	{CustomTransitionExpression} 
+	(triggers+=[sct::Event] ("," triggers+=[sct::Event])*)
+	('['guardExpression=LogicalOrExpression']')? 
+	('/' action=ExpressionRule)?;
 
 ExpressionRule:
     expression=(LogicalOrExpression | RaiseEventExpression);
 
 RaiseEventExpression:
-'raise' event=[Event];
+'raise' event=[sct::Event];
 
 LogicalOrExpression returns Expression:
     LogicalAndExpression ({LogicalOrExpression.leftOperand=current} '||'
@@ -105,7 +83,7 @@ PrimitiveValueExpression returns Expression:
     {PrimitiveValueExpression} value=Literal;
 
 VariableReferenceExpression returns Expression:
-    {PropertyReferenceExpression} value=[VariableDefinition];
+    {PropertyReferenceExpression} value=[sct::Variable];
 
 Literal:
 BOOL | INT | STRING | FLOAT;

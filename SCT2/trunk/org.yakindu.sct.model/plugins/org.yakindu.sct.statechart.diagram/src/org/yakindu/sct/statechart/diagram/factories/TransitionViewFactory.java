@@ -11,7 +11,9 @@
 package org.yakindu.sct.statechart.diagram.factories;
 
 import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.diagram.ui.view.factories.ConnectionViewFactory;
+import org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter;
 import org.eclipse.gmf.runtime.notation.Location;
 import org.eclipse.gmf.runtime.notation.Node;
 import org.eclipse.gmf.runtime.notation.View;
@@ -19,9 +21,8 @@ import org.yakindu.sct.statechart.diagram.providers.ProviderConstants;
 
 /**
  * 
- * @author Andreas Muelder <a
- *         href="mailto:andreas.muelder@itemis.de">andreas.muelder@itemis.de</a>
- * 
+ * @author muelder
+ *
  */
 public class TransitionViewFactory extends ConnectionViewFactory {
 
@@ -32,6 +33,7 @@ public class TransitionViewFactory extends ConnectionViewFactory {
 		super.decorateView(containerView, view, element, semanticHint, index,
 				persisted);
 
+		
 		Node label = FactoryUtils.createLabel(view, ProviderConstants.TRANSITION_EXPRESSION);
 		Location location = (Location)label.getLayoutConstraint();
 		location.setX(0);

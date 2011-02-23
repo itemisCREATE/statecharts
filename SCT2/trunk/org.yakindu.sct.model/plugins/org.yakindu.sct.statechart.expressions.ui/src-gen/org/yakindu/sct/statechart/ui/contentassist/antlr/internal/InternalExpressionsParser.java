@@ -23,7 +23,7 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalExpressionsParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_BOOL", "RULE_INT", "RULE_STRING", "RULE_FLOAT", "RULE_ID", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'entry'", "'+'", "'-'", "'*'", "'/'", "'%'", "'~'", "'<'", "'<='", "'>'", "'>='", "'=='", "'!='", "'in'", "'out'", "'s'", "'ms'", "'ns'", "'int'", "'float'", "'boolean'", "','", "'var'", "':'", "';'", "'exit'", "'do'", "'event'", "'after'", "'('", "')'", "'raise'", "'||'", "'&&'", "'!'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_BOOL", "RULE_INT", "RULE_STRING", "RULE_FLOAT", "RULE_ID", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'+'", "'-'", "'*'", "'/'", "'%'", "'~'", "'<'", "'<='", "'>'", "'>='", "'=='", "'!='", "','", "'['", "']'", "'raise'", "'||'", "'&&'", "'!'", "'('", "')'"
     };
     public static final int RULE_ID=8;
     public static final int RULE_STRING=6;
@@ -65,20 +65,20 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
 
-    // $ANTLR start entryRuleStatementModel
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:61:1: entryRuleStatementModel : ruleStatementModel EOF ;
-    public final void entryRuleStatementModel() throws RecognitionException {
+    // $ANTLR start entryRuleCustomTransitionExpression
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:61:1: entryRuleCustomTransitionExpression : ruleCustomTransitionExpression EOF ;
+    public final void entryRuleCustomTransitionExpression() throws RecognitionException {
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:62:1: ( ruleStatementModel EOF )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:63:1: ruleStatementModel EOF
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:62:1: ( ruleCustomTransitionExpression EOF )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:63:1: ruleCustomTransitionExpression EOF
             {
-             before(grammarAccess.getStatementModelRule()); 
-            pushFollow(FOLLOW_ruleStatementModel_in_entryRuleStatementModel61);
-            ruleStatementModel();
+             before(grammarAccess.getCustomTransitionExpressionRule()); 
+            pushFollow(FOLLOW_ruleCustomTransitionExpression_in_entryRuleCustomTransitionExpression61);
+            ruleCustomTransitionExpression();
             _fsp--;
 
-             after(grammarAccess.getStatementModelRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleStatementModel68); 
+             after(grammarAccess.getCustomTransitionExpressionRule()); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleCustomTransitionExpression68); 
 
             }
 
@@ -91,76 +91,34 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end entryRuleStatementModel
+    // $ANTLR end entryRuleCustomTransitionExpression
 
 
-    // $ANTLR start ruleStatementModel
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:70:1: ruleStatementModel : ( ( ( rule__StatementModel__StatementsAssignment ) ) ( ( rule__StatementModel__StatementsAssignment )* ) ) ;
-    public final void ruleStatementModel() throws RecognitionException {
+    // $ANTLR start ruleCustomTransitionExpression
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:70:1: ruleCustomTransitionExpression : ( ( rule__CustomTransitionExpression__Group__0 ) ) ;
+    public final void ruleCustomTransitionExpression() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:74:2: ( ( ( ( rule__StatementModel__StatementsAssignment ) ) ( ( rule__StatementModel__StatementsAssignment )* ) ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:75:1: ( ( ( rule__StatementModel__StatementsAssignment ) ) ( ( rule__StatementModel__StatementsAssignment )* ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:74:2: ( ( ( rule__CustomTransitionExpression__Group__0 ) ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:75:1: ( ( rule__CustomTransitionExpression__Group__0 ) )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:75:1: ( ( ( rule__StatementModel__StatementsAssignment ) ) ( ( rule__StatementModel__StatementsAssignment )* ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:76:1: ( ( rule__StatementModel__StatementsAssignment ) ) ( ( rule__StatementModel__StatementsAssignment )* )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:75:1: ( ( rule__CustomTransitionExpression__Group__0 ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:76:1: ( rule__CustomTransitionExpression__Group__0 )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:76:1: ( ( rule__StatementModel__StatementsAssignment ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:77:1: ( rule__StatementModel__StatementsAssignment )
+             before(grammarAccess.getCustomTransitionExpressionAccess().getGroup()); 
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:77:1: ( rule__CustomTransitionExpression__Group__0 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:77:2: rule__CustomTransitionExpression__Group__0
             {
-             before(grammarAccess.getStatementModelAccess().getStatementsAssignment()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:78:1: ( rule__StatementModel__StatementsAssignment )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:78:2: rule__StatementModel__StatementsAssignment
-            {
-            pushFollow(FOLLOW_rule__StatementModel__StatementsAssignment_in_ruleStatementModel96);
-            rule__StatementModel__StatementsAssignment();
+            pushFollow(FOLLOW_rule__CustomTransitionExpression__Group__0_in_ruleCustomTransitionExpression94);
+            rule__CustomTransitionExpression__Group__0();
             _fsp--;
 
 
             }
 
-             after(grammarAccess.getStatementModelAccess().getStatementsAssignment()); 
-
-            }
-
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:81:1: ( ( rule__StatementModel__StatementsAssignment )* )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:82:1: ( rule__StatementModel__StatementsAssignment )*
-            {
-             before(grammarAccess.getStatementModelAccess().getStatementsAssignment()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:83:1: ( rule__StatementModel__StatementsAssignment )*
-            loop1:
-            do {
-                int alt1=2;
-                int LA1_0 = input.LA(1);
-
-                if ( (LA1_0==13||LA1_0==35||LA1_0==38||(LA1_0>=40 && LA1_0<=41)) ) {
-                    alt1=1;
-                }
-
-
-                switch (alt1) {
-            	case 1 :
-            	    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:83:2: rule__StatementModel__StatementsAssignment
-            	    {
-            	    pushFollow(FOLLOW_rule__StatementModel__StatementsAssignment_in_ruleStatementModel108);
-            	    rule__StatementModel__StatementsAssignment();
-            	    _fsp--;
-
-
-            	    }
-            	    break;
-
-            	default :
-            	    break loop1;
-                }
-            } while (true);
-
-             after(grammarAccess.getStatementModelAccess().getStatementsAssignment()); 
-
-            }
-
+             after(grammarAccess.getCustomTransitionExpressionAccess().getGroup()); 
 
             }
 
@@ -179,623 +137,23 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end ruleStatementModel
-
-
-    // $ANTLR start entryRuleStatement
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:96:1: entryRuleStatement : ruleStatement EOF ;
-    public final void entryRuleStatement() throws RecognitionException {
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:97:1: ( ruleStatement EOF )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:98:1: ruleStatement EOF
-            {
-             before(grammarAccess.getStatementRule()); 
-            pushFollow(FOLLOW_ruleStatement_in_entryRuleStatement138);
-            ruleStatement();
-            _fsp--;
-
-             after(grammarAccess.getStatementRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleStatement145); 
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-        }
-        return ;
-    }
-    // $ANTLR end entryRuleStatement
-
-
-    // $ANTLR start ruleStatement
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:105:1: ruleStatement : ( ( rule__Statement__Alternatives ) ) ;
-    public final void ruleStatement() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:109:2: ( ( ( rule__Statement__Alternatives ) ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:110:1: ( ( rule__Statement__Alternatives ) )
-            {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:110:1: ( ( rule__Statement__Alternatives ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:111:1: ( rule__Statement__Alternatives )
-            {
-             before(grammarAccess.getStatementAccess().getAlternatives()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:112:1: ( rule__Statement__Alternatives )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:112:2: rule__Statement__Alternatives
-            {
-            pushFollow(FOLLOW_rule__Statement__Alternatives_in_ruleStatement171);
-            rule__Statement__Alternatives();
-            _fsp--;
-
-
-            }
-
-             after(grammarAccess.getStatementAccess().getAlternatives()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end ruleStatement
-
-
-    // $ANTLR start entryRuleTransitionDefinition
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:124:1: entryRuleTransitionDefinition : ruleTransitionDefinition EOF ;
-    public final void entryRuleTransitionDefinition() throws RecognitionException {
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:125:1: ( ruleTransitionDefinition EOF )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:126:1: ruleTransitionDefinition EOF
-            {
-             before(grammarAccess.getTransitionDefinitionRule()); 
-            pushFollow(FOLLOW_ruleTransitionDefinition_in_entryRuleTransitionDefinition198);
-            ruleTransitionDefinition();
-            _fsp--;
-
-             after(grammarAccess.getTransitionDefinitionRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTransitionDefinition205); 
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-        }
-        return ;
-    }
-    // $ANTLR end entryRuleTransitionDefinition
-
-
-    // $ANTLR start ruleTransitionDefinition
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:133:1: ruleTransitionDefinition : ( ( rule__TransitionDefinition__Group__0 ) ) ;
-    public final void ruleTransitionDefinition() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:137:2: ( ( ( rule__TransitionDefinition__Group__0 ) ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:138:1: ( ( rule__TransitionDefinition__Group__0 ) )
-            {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:138:1: ( ( rule__TransitionDefinition__Group__0 ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:139:1: ( rule__TransitionDefinition__Group__0 )
-            {
-             before(grammarAccess.getTransitionDefinitionAccess().getGroup()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:140:1: ( rule__TransitionDefinition__Group__0 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:140:2: rule__TransitionDefinition__Group__0
-            {
-            pushFollow(FOLLOW_rule__TransitionDefinition__Group__0_in_ruleTransitionDefinition231);
-            rule__TransitionDefinition__Group__0();
-            _fsp--;
-
-
-            }
-
-             after(grammarAccess.getTransitionDefinitionAccess().getGroup()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end ruleTransitionDefinition
-
-
-    // $ANTLR start entryRuleVariableDefinition
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:152:1: entryRuleVariableDefinition : ruleVariableDefinition EOF ;
-    public final void entryRuleVariableDefinition() throws RecognitionException {
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:153:1: ( ruleVariableDefinition EOF )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:154:1: ruleVariableDefinition EOF
-            {
-             before(grammarAccess.getVariableDefinitionRule()); 
-            pushFollow(FOLLOW_ruleVariableDefinition_in_entryRuleVariableDefinition258);
-            ruleVariableDefinition();
-            _fsp--;
-
-             after(grammarAccess.getVariableDefinitionRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleVariableDefinition265); 
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-        }
-        return ;
-    }
-    // $ANTLR end entryRuleVariableDefinition
-
-
-    // $ANTLR start ruleVariableDefinition
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:161:1: ruleVariableDefinition : ( ( rule__VariableDefinition__Group__0 ) ) ;
-    public final void ruleVariableDefinition() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:165:2: ( ( ( rule__VariableDefinition__Group__0 ) ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:166:1: ( ( rule__VariableDefinition__Group__0 ) )
-            {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:166:1: ( ( rule__VariableDefinition__Group__0 ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:167:1: ( rule__VariableDefinition__Group__0 )
-            {
-             before(grammarAccess.getVariableDefinitionAccess().getGroup()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:168:1: ( rule__VariableDefinition__Group__0 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:168:2: rule__VariableDefinition__Group__0
-            {
-            pushFollow(FOLLOW_rule__VariableDefinition__Group__0_in_ruleVariableDefinition291);
-            rule__VariableDefinition__Group__0();
-            _fsp--;
-
-
-            }
-
-             after(grammarAccess.getVariableDefinitionAccess().getGroup()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end ruleVariableDefinition
-
-
-    // $ANTLR start entryRuleActionDefinition
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:180:1: entryRuleActionDefinition : ruleActionDefinition EOF ;
-    public final void entryRuleActionDefinition() throws RecognitionException {
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:181:1: ( ruleActionDefinition EOF )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:182:1: ruleActionDefinition EOF
-            {
-             before(grammarAccess.getActionDefinitionRule()); 
-            pushFollow(FOLLOW_ruleActionDefinition_in_entryRuleActionDefinition318);
-            ruleActionDefinition();
-            _fsp--;
-
-             after(grammarAccess.getActionDefinitionRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleActionDefinition325); 
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-        }
-        return ;
-    }
-    // $ANTLR end entryRuleActionDefinition
-
-
-    // $ANTLR start ruleActionDefinition
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:189:1: ruleActionDefinition : ( ( rule__ActionDefinition__Group__0 ) ) ;
-    public final void ruleActionDefinition() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:193:2: ( ( ( rule__ActionDefinition__Group__0 ) ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:194:1: ( ( rule__ActionDefinition__Group__0 ) )
-            {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:194:1: ( ( rule__ActionDefinition__Group__0 ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:195:1: ( rule__ActionDefinition__Group__0 )
-            {
-             before(grammarAccess.getActionDefinitionAccess().getGroup()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:196:1: ( rule__ActionDefinition__Group__0 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:196:2: rule__ActionDefinition__Group__0
-            {
-            pushFollow(FOLLOW_rule__ActionDefinition__Group__0_in_ruleActionDefinition351);
-            rule__ActionDefinition__Group__0();
-            _fsp--;
-
-
-            }
-
-             after(grammarAccess.getActionDefinitionAccess().getGroup()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end ruleActionDefinition
-
-
-    // $ANTLR start entryRuleEvent
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:208:1: entryRuleEvent : ruleEvent EOF ;
-    public final void entryRuleEvent() throws RecognitionException {
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:209:1: ( ruleEvent EOF )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:210:1: ruleEvent EOF
-            {
-             before(grammarAccess.getEventRule()); 
-            pushFollow(FOLLOW_ruleEvent_in_entryRuleEvent378);
-            ruleEvent();
-            _fsp--;
-
-             after(grammarAccess.getEventRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleEvent385); 
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-        }
-        return ;
-    }
-    // $ANTLR end entryRuleEvent
-
-
-    // $ANTLR start ruleEvent
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:217:1: ruleEvent : ( ( rule__Event__Alternatives ) ) ;
-    public final void ruleEvent() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:221:2: ( ( ( rule__Event__Alternatives ) ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:222:1: ( ( rule__Event__Alternatives ) )
-            {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:222:1: ( ( rule__Event__Alternatives ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:223:1: ( rule__Event__Alternatives )
-            {
-             before(grammarAccess.getEventAccess().getAlternatives()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:224:1: ( rule__Event__Alternatives )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:224:2: rule__Event__Alternatives
-            {
-            pushFollow(FOLLOW_rule__Event__Alternatives_in_ruleEvent411);
-            rule__Event__Alternatives();
-            _fsp--;
-
-
-            }
-
-             after(grammarAccess.getEventAccess().getAlternatives()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end ruleEvent
-
-
-    // $ANTLR start entryRuleSignalEventDefinition
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:236:1: entryRuleSignalEventDefinition : ruleSignalEventDefinition EOF ;
-    public final void entryRuleSignalEventDefinition() throws RecognitionException {
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:237:1: ( ruleSignalEventDefinition EOF )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:238:1: ruleSignalEventDefinition EOF
-            {
-             before(grammarAccess.getSignalEventDefinitionRule()); 
-            pushFollow(FOLLOW_ruleSignalEventDefinition_in_entryRuleSignalEventDefinition438);
-            ruleSignalEventDefinition();
-            _fsp--;
-
-             after(grammarAccess.getSignalEventDefinitionRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleSignalEventDefinition445); 
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-        }
-        return ;
-    }
-    // $ANTLR end entryRuleSignalEventDefinition
-
-
-    // $ANTLR start ruleSignalEventDefinition
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:245:1: ruleSignalEventDefinition : ( ( rule__SignalEventDefinition__Group__0 ) ) ;
-    public final void ruleSignalEventDefinition() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:249:2: ( ( ( rule__SignalEventDefinition__Group__0 ) ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:250:1: ( ( rule__SignalEventDefinition__Group__0 ) )
-            {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:250:1: ( ( rule__SignalEventDefinition__Group__0 ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:251:1: ( rule__SignalEventDefinition__Group__0 )
-            {
-             before(grammarAccess.getSignalEventDefinitionAccess().getGroup()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:252:1: ( rule__SignalEventDefinition__Group__0 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:252:2: rule__SignalEventDefinition__Group__0
-            {
-            pushFollow(FOLLOW_rule__SignalEventDefinition__Group__0_in_ruleSignalEventDefinition471);
-            rule__SignalEventDefinition__Group__0();
-            _fsp--;
-
-
-            }
-
-             after(grammarAccess.getSignalEventDefinitionAccess().getGroup()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end ruleSignalEventDefinition
-
-
-    // $ANTLR start entryRuleTimeEventDefinition
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:264:1: entryRuleTimeEventDefinition : ruleTimeEventDefinition EOF ;
-    public final void entryRuleTimeEventDefinition() throws RecognitionException {
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:265:1: ( ruleTimeEventDefinition EOF )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:266:1: ruleTimeEventDefinition EOF
-            {
-             before(grammarAccess.getTimeEventDefinitionRule()); 
-            pushFollow(FOLLOW_ruleTimeEventDefinition_in_entryRuleTimeEventDefinition498);
-            ruleTimeEventDefinition();
-            _fsp--;
-
-             after(grammarAccess.getTimeEventDefinitionRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTimeEventDefinition505); 
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-        }
-        return ;
-    }
-    // $ANTLR end entryRuleTimeEventDefinition
-
-
-    // $ANTLR start ruleTimeEventDefinition
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:273:1: ruleTimeEventDefinition : ( ( rule__TimeEventDefinition__Group__0 ) ) ;
-    public final void ruleTimeEventDefinition() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:277:2: ( ( ( rule__TimeEventDefinition__Group__0 ) ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:278:1: ( ( rule__TimeEventDefinition__Group__0 ) )
-            {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:278:1: ( ( rule__TimeEventDefinition__Group__0 ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:279:1: ( rule__TimeEventDefinition__Group__0 )
-            {
-             before(grammarAccess.getTimeEventDefinitionAccess().getGroup()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:280:1: ( rule__TimeEventDefinition__Group__0 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:280:2: rule__TimeEventDefinition__Group__0
-            {
-            pushFollow(FOLLOW_rule__TimeEventDefinition__Group__0_in_ruleTimeEventDefinition531);
-            rule__TimeEventDefinition__Group__0();
-            _fsp--;
-
-
-            }
-
-             after(grammarAccess.getTimeEventDefinitionAccess().getGroup()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end ruleTimeEventDefinition
-
-
-    // $ANTLR start entryRuleTimeConstant
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:292:1: entryRuleTimeConstant : ruleTimeConstant EOF ;
-    public final void entryRuleTimeConstant() throws RecognitionException {
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:293:1: ( ruleTimeConstant EOF )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:294:1: ruleTimeConstant EOF
-            {
-             before(grammarAccess.getTimeConstantRule()); 
-            pushFollow(FOLLOW_ruleTimeConstant_in_entryRuleTimeConstant558);
-            ruleTimeConstant();
-            _fsp--;
-
-             after(grammarAccess.getTimeConstantRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTimeConstant565); 
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-        }
-        return ;
-    }
-    // $ANTLR end entryRuleTimeConstant
-
-
-    // $ANTLR start ruleTimeConstant
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:301:1: ruleTimeConstant : ( ( rule__TimeConstant__Group__0 ) ) ;
-    public final void ruleTimeConstant() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:305:2: ( ( ( rule__TimeConstant__Group__0 ) ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:306:1: ( ( rule__TimeConstant__Group__0 ) )
-            {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:306:1: ( ( rule__TimeConstant__Group__0 ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:307:1: ( rule__TimeConstant__Group__0 )
-            {
-             before(grammarAccess.getTimeConstantAccess().getGroup()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:308:1: ( rule__TimeConstant__Group__0 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:308:2: rule__TimeConstant__Group__0
-            {
-            pushFollow(FOLLOW_rule__TimeConstant__Group__0_in_ruleTimeConstant591);
-            rule__TimeConstant__Group__0();
-            _fsp--;
-
-
-            }
-
-             after(grammarAccess.getTimeConstantAccess().getGroup()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end ruleTimeConstant
+    // $ANTLR end ruleCustomTransitionExpression
 
 
     // $ANTLR start entryRuleExpressionRule
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:320:1: entryRuleExpressionRule : ruleExpressionRule EOF ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:89:1: entryRuleExpressionRule : ruleExpressionRule EOF ;
     public final void entryRuleExpressionRule() throws RecognitionException {
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:321:1: ( ruleExpressionRule EOF )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:322:1: ruleExpressionRule EOF
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:90:1: ( ruleExpressionRule EOF )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:91:1: ruleExpressionRule EOF
             {
              before(grammarAccess.getExpressionRuleRule()); 
-            pushFollow(FOLLOW_ruleExpressionRule_in_entryRuleExpressionRule618);
+            pushFollow(FOLLOW_ruleExpressionRule_in_entryRuleExpressionRule121);
             ruleExpressionRule();
             _fsp--;
 
              after(grammarAccess.getExpressionRuleRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleExpressionRule625); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleExpressionRule128); 
 
             }
 
@@ -812,23 +170,23 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start ruleExpressionRule
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:329:1: ruleExpressionRule : ( ( rule__ExpressionRule__ExpressionAssignment ) ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:98:1: ruleExpressionRule : ( ( rule__ExpressionRule__ExpressionAssignment ) ) ;
     public final void ruleExpressionRule() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:333:2: ( ( ( rule__ExpressionRule__ExpressionAssignment ) ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:334:1: ( ( rule__ExpressionRule__ExpressionAssignment ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:102:2: ( ( ( rule__ExpressionRule__ExpressionAssignment ) ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:103:1: ( ( rule__ExpressionRule__ExpressionAssignment ) )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:334:1: ( ( rule__ExpressionRule__ExpressionAssignment ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:335:1: ( rule__ExpressionRule__ExpressionAssignment )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:103:1: ( ( rule__ExpressionRule__ExpressionAssignment ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:104:1: ( rule__ExpressionRule__ExpressionAssignment )
             {
              before(grammarAccess.getExpressionRuleAccess().getExpressionAssignment()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:336:1: ( rule__ExpressionRule__ExpressionAssignment )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:336:2: rule__ExpressionRule__ExpressionAssignment
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:105:1: ( rule__ExpressionRule__ExpressionAssignment )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:105:2: rule__ExpressionRule__ExpressionAssignment
             {
-            pushFollow(FOLLOW_rule__ExpressionRule__ExpressionAssignment_in_ruleExpressionRule651);
+            pushFollow(FOLLOW_rule__ExpressionRule__ExpressionAssignment_in_ruleExpressionRule154);
             rule__ExpressionRule__ExpressionAssignment();
             _fsp--;
 
@@ -858,19 +216,19 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start entryRuleRaiseEventExpression
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:348:1: entryRuleRaiseEventExpression : ruleRaiseEventExpression EOF ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:117:1: entryRuleRaiseEventExpression : ruleRaiseEventExpression EOF ;
     public final void entryRuleRaiseEventExpression() throws RecognitionException {
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:349:1: ( ruleRaiseEventExpression EOF )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:350:1: ruleRaiseEventExpression EOF
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:118:1: ( ruleRaiseEventExpression EOF )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:119:1: ruleRaiseEventExpression EOF
             {
              before(grammarAccess.getRaiseEventExpressionRule()); 
-            pushFollow(FOLLOW_ruleRaiseEventExpression_in_entryRuleRaiseEventExpression678);
+            pushFollow(FOLLOW_ruleRaiseEventExpression_in_entryRuleRaiseEventExpression181);
             ruleRaiseEventExpression();
             _fsp--;
 
              after(grammarAccess.getRaiseEventExpressionRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleRaiseEventExpression685); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleRaiseEventExpression188); 
 
             }
 
@@ -887,23 +245,23 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start ruleRaiseEventExpression
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:357:1: ruleRaiseEventExpression : ( ( rule__RaiseEventExpression__Group__0 ) ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:126:1: ruleRaiseEventExpression : ( ( rule__RaiseEventExpression__Group__0 ) ) ;
     public final void ruleRaiseEventExpression() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:361:2: ( ( ( rule__RaiseEventExpression__Group__0 ) ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:362:1: ( ( rule__RaiseEventExpression__Group__0 ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:130:2: ( ( ( rule__RaiseEventExpression__Group__0 ) ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:131:1: ( ( rule__RaiseEventExpression__Group__0 ) )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:362:1: ( ( rule__RaiseEventExpression__Group__0 ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:363:1: ( rule__RaiseEventExpression__Group__0 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:131:1: ( ( rule__RaiseEventExpression__Group__0 ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:132:1: ( rule__RaiseEventExpression__Group__0 )
             {
              before(grammarAccess.getRaiseEventExpressionAccess().getGroup()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:364:1: ( rule__RaiseEventExpression__Group__0 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:364:2: rule__RaiseEventExpression__Group__0
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:133:1: ( rule__RaiseEventExpression__Group__0 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:133:2: rule__RaiseEventExpression__Group__0
             {
-            pushFollow(FOLLOW_rule__RaiseEventExpression__Group__0_in_ruleRaiseEventExpression711);
+            pushFollow(FOLLOW_rule__RaiseEventExpression__Group__0_in_ruleRaiseEventExpression214);
             rule__RaiseEventExpression__Group__0();
             _fsp--;
 
@@ -933,19 +291,19 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start entryRuleLogicalOrExpression
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:376:1: entryRuleLogicalOrExpression : ruleLogicalOrExpression EOF ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:145:1: entryRuleLogicalOrExpression : ruleLogicalOrExpression EOF ;
     public final void entryRuleLogicalOrExpression() throws RecognitionException {
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:377:1: ( ruleLogicalOrExpression EOF )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:378:1: ruleLogicalOrExpression EOF
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:146:1: ( ruleLogicalOrExpression EOF )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:147:1: ruleLogicalOrExpression EOF
             {
              before(grammarAccess.getLogicalOrExpressionRule()); 
-            pushFollow(FOLLOW_ruleLogicalOrExpression_in_entryRuleLogicalOrExpression738);
+            pushFollow(FOLLOW_ruleLogicalOrExpression_in_entryRuleLogicalOrExpression241);
             ruleLogicalOrExpression();
             _fsp--;
 
              after(grammarAccess.getLogicalOrExpressionRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleLogicalOrExpression745); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleLogicalOrExpression248); 
 
             }
 
@@ -962,23 +320,23 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start ruleLogicalOrExpression
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:385:1: ruleLogicalOrExpression : ( ( rule__LogicalOrExpression__Group__0 ) ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:154:1: ruleLogicalOrExpression : ( ( rule__LogicalOrExpression__Group__0 ) ) ;
     public final void ruleLogicalOrExpression() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:389:2: ( ( ( rule__LogicalOrExpression__Group__0 ) ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:390:1: ( ( rule__LogicalOrExpression__Group__0 ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:158:2: ( ( ( rule__LogicalOrExpression__Group__0 ) ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:159:1: ( ( rule__LogicalOrExpression__Group__0 ) )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:390:1: ( ( rule__LogicalOrExpression__Group__0 ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:391:1: ( rule__LogicalOrExpression__Group__0 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:159:1: ( ( rule__LogicalOrExpression__Group__0 ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:160:1: ( rule__LogicalOrExpression__Group__0 )
             {
              before(grammarAccess.getLogicalOrExpressionAccess().getGroup()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:392:1: ( rule__LogicalOrExpression__Group__0 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:392:2: rule__LogicalOrExpression__Group__0
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:161:1: ( rule__LogicalOrExpression__Group__0 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:161:2: rule__LogicalOrExpression__Group__0
             {
-            pushFollow(FOLLOW_rule__LogicalOrExpression__Group__0_in_ruleLogicalOrExpression771);
+            pushFollow(FOLLOW_rule__LogicalOrExpression__Group__0_in_ruleLogicalOrExpression274);
             rule__LogicalOrExpression__Group__0();
             _fsp--;
 
@@ -1008,19 +366,19 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start entryRuleLogicalAndExpression
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:404:1: entryRuleLogicalAndExpression : ruleLogicalAndExpression EOF ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:173:1: entryRuleLogicalAndExpression : ruleLogicalAndExpression EOF ;
     public final void entryRuleLogicalAndExpression() throws RecognitionException {
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:405:1: ( ruleLogicalAndExpression EOF )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:406:1: ruleLogicalAndExpression EOF
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:174:1: ( ruleLogicalAndExpression EOF )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:175:1: ruleLogicalAndExpression EOF
             {
              before(grammarAccess.getLogicalAndExpressionRule()); 
-            pushFollow(FOLLOW_ruleLogicalAndExpression_in_entryRuleLogicalAndExpression798);
+            pushFollow(FOLLOW_ruleLogicalAndExpression_in_entryRuleLogicalAndExpression301);
             ruleLogicalAndExpression();
             _fsp--;
 
              after(grammarAccess.getLogicalAndExpressionRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleLogicalAndExpression805); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleLogicalAndExpression308); 
 
             }
 
@@ -1037,23 +395,23 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start ruleLogicalAndExpression
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:413:1: ruleLogicalAndExpression : ( ( rule__LogicalAndExpression__Group__0 ) ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:182:1: ruleLogicalAndExpression : ( ( rule__LogicalAndExpression__Group__0 ) ) ;
     public final void ruleLogicalAndExpression() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:417:2: ( ( ( rule__LogicalAndExpression__Group__0 ) ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:418:1: ( ( rule__LogicalAndExpression__Group__0 ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:186:2: ( ( ( rule__LogicalAndExpression__Group__0 ) ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:187:1: ( ( rule__LogicalAndExpression__Group__0 ) )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:418:1: ( ( rule__LogicalAndExpression__Group__0 ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:419:1: ( rule__LogicalAndExpression__Group__0 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:187:1: ( ( rule__LogicalAndExpression__Group__0 ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:188:1: ( rule__LogicalAndExpression__Group__0 )
             {
              before(grammarAccess.getLogicalAndExpressionAccess().getGroup()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:420:1: ( rule__LogicalAndExpression__Group__0 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:420:2: rule__LogicalAndExpression__Group__0
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:189:1: ( rule__LogicalAndExpression__Group__0 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:189:2: rule__LogicalAndExpression__Group__0
             {
-            pushFollow(FOLLOW_rule__LogicalAndExpression__Group__0_in_ruleLogicalAndExpression831);
+            pushFollow(FOLLOW_rule__LogicalAndExpression__Group__0_in_ruleLogicalAndExpression334);
             rule__LogicalAndExpression__Group__0();
             _fsp--;
 
@@ -1083,19 +441,19 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start entryRuleLogicalNotExpression
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:432:1: entryRuleLogicalNotExpression : ruleLogicalNotExpression EOF ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:201:1: entryRuleLogicalNotExpression : ruleLogicalNotExpression EOF ;
     public final void entryRuleLogicalNotExpression() throws RecognitionException {
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:433:1: ( ruleLogicalNotExpression EOF )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:434:1: ruleLogicalNotExpression EOF
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:202:1: ( ruleLogicalNotExpression EOF )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:203:1: ruleLogicalNotExpression EOF
             {
              before(grammarAccess.getLogicalNotExpressionRule()); 
-            pushFollow(FOLLOW_ruleLogicalNotExpression_in_entryRuleLogicalNotExpression858);
+            pushFollow(FOLLOW_ruleLogicalNotExpression_in_entryRuleLogicalNotExpression361);
             ruleLogicalNotExpression();
             _fsp--;
 
              after(grammarAccess.getLogicalNotExpressionRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleLogicalNotExpression865); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleLogicalNotExpression368); 
 
             }
 
@@ -1112,23 +470,23 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start ruleLogicalNotExpression
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:441:1: ruleLogicalNotExpression : ( ( rule__LogicalNotExpression__Alternatives ) ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:210:1: ruleLogicalNotExpression : ( ( rule__LogicalNotExpression__Alternatives ) ) ;
     public final void ruleLogicalNotExpression() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:445:2: ( ( ( rule__LogicalNotExpression__Alternatives ) ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:446:1: ( ( rule__LogicalNotExpression__Alternatives ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:214:2: ( ( ( rule__LogicalNotExpression__Alternatives ) ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:215:1: ( ( rule__LogicalNotExpression__Alternatives ) )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:446:1: ( ( rule__LogicalNotExpression__Alternatives ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:447:1: ( rule__LogicalNotExpression__Alternatives )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:215:1: ( ( rule__LogicalNotExpression__Alternatives ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:216:1: ( rule__LogicalNotExpression__Alternatives )
             {
              before(grammarAccess.getLogicalNotExpressionAccess().getAlternatives()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:448:1: ( rule__LogicalNotExpression__Alternatives )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:448:2: rule__LogicalNotExpression__Alternatives
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:217:1: ( rule__LogicalNotExpression__Alternatives )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:217:2: rule__LogicalNotExpression__Alternatives
             {
-            pushFollow(FOLLOW_rule__LogicalNotExpression__Alternatives_in_ruleLogicalNotExpression891);
+            pushFollow(FOLLOW_rule__LogicalNotExpression__Alternatives_in_ruleLogicalNotExpression394);
             rule__LogicalNotExpression__Alternatives();
             _fsp--;
 
@@ -1158,19 +516,19 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start entryRuleLogicalRelationExpression
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:460:1: entryRuleLogicalRelationExpression : ruleLogicalRelationExpression EOF ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:229:1: entryRuleLogicalRelationExpression : ruleLogicalRelationExpression EOF ;
     public final void entryRuleLogicalRelationExpression() throws RecognitionException {
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:461:1: ( ruleLogicalRelationExpression EOF )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:462:1: ruleLogicalRelationExpression EOF
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:230:1: ( ruleLogicalRelationExpression EOF )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:231:1: ruleLogicalRelationExpression EOF
             {
              before(grammarAccess.getLogicalRelationExpressionRule()); 
-            pushFollow(FOLLOW_ruleLogicalRelationExpression_in_entryRuleLogicalRelationExpression918);
+            pushFollow(FOLLOW_ruleLogicalRelationExpression_in_entryRuleLogicalRelationExpression421);
             ruleLogicalRelationExpression();
             _fsp--;
 
              after(grammarAccess.getLogicalRelationExpressionRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleLogicalRelationExpression925); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleLogicalRelationExpression428); 
 
             }
 
@@ -1187,23 +545,23 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start ruleLogicalRelationExpression
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:469:1: ruleLogicalRelationExpression : ( ( rule__LogicalRelationExpression__Group__0 ) ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:238:1: ruleLogicalRelationExpression : ( ( rule__LogicalRelationExpression__Group__0 ) ) ;
     public final void ruleLogicalRelationExpression() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:473:2: ( ( ( rule__LogicalRelationExpression__Group__0 ) ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:474:1: ( ( rule__LogicalRelationExpression__Group__0 ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:242:2: ( ( ( rule__LogicalRelationExpression__Group__0 ) ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:243:1: ( ( rule__LogicalRelationExpression__Group__0 ) )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:474:1: ( ( rule__LogicalRelationExpression__Group__0 ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:475:1: ( rule__LogicalRelationExpression__Group__0 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:243:1: ( ( rule__LogicalRelationExpression__Group__0 ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:244:1: ( rule__LogicalRelationExpression__Group__0 )
             {
              before(grammarAccess.getLogicalRelationExpressionAccess().getGroup()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:476:1: ( rule__LogicalRelationExpression__Group__0 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:476:2: rule__LogicalRelationExpression__Group__0
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:245:1: ( rule__LogicalRelationExpression__Group__0 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:245:2: rule__LogicalRelationExpression__Group__0
             {
-            pushFollow(FOLLOW_rule__LogicalRelationExpression__Group__0_in_ruleLogicalRelationExpression951);
+            pushFollow(FOLLOW_rule__LogicalRelationExpression__Group__0_in_ruleLogicalRelationExpression454);
             rule__LogicalRelationExpression__Group__0();
             _fsp--;
 
@@ -1233,19 +591,19 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start entryRuleNumericalAddSubtractExpression
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:488:1: entryRuleNumericalAddSubtractExpression : ruleNumericalAddSubtractExpression EOF ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:257:1: entryRuleNumericalAddSubtractExpression : ruleNumericalAddSubtractExpression EOF ;
     public final void entryRuleNumericalAddSubtractExpression() throws RecognitionException {
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:489:1: ( ruleNumericalAddSubtractExpression EOF )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:490:1: ruleNumericalAddSubtractExpression EOF
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:258:1: ( ruleNumericalAddSubtractExpression EOF )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:259:1: ruleNumericalAddSubtractExpression EOF
             {
              before(grammarAccess.getNumericalAddSubtractExpressionRule()); 
-            pushFollow(FOLLOW_ruleNumericalAddSubtractExpression_in_entryRuleNumericalAddSubtractExpression978);
+            pushFollow(FOLLOW_ruleNumericalAddSubtractExpression_in_entryRuleNumericalAddSubtractExpression481);
             ruleNumericalAddSubtractExpression();
             _fsp--;
 
              after(grammarAccess.getNumericalAddSubtractExpressionRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleNumericalAddSubtractExpression985); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleNumericalAddSubtractExpression488); 
 
             }
 
@@ -1262,23 +620,23 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start ruleNumericalAddSubtractExpression
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:497:1: ruleNumericalAddSubtractExpression : ( ( rule__NumericalAddSubtractExpression__Group__0 ) ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:266:1: ruleNumericalAddSubtractExpression : ( ( rule__NumericalAddSubtractExpression__Group__0 ) ) ;
     public final void ruleNumericalAddSubtractExpression() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:501:2: ( ( ( rule__NumericalAddSubtractExpression__Group__0 ) ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:502:1: ( ( rule__NumericalAddSubtractExpression__Group__0 ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:270:2: ( ( ( rule__NumericalAddSubtractExpression__Group__0 ) ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:271:1: ( ( rule__NumericalAddSubtractExpression__Group__0 ) )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:502:1: ( ( rule__NumericalAddSubtractExpression__Group__0 ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:503:1: ( rule__NumericalAddSubtractExpression__Group__0 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:271:1: ( ( rule__NumericalAddSubtractExpression__Group__0 ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:272:1: ( rule__NumericalAddSubtractExpression__Group__0 )
             {
              before(grammarAccess.getNumericalAddSubtractExpressionAccess().getGroup()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:504:1: ( rule__NumericalAddSubtractExpression__Group__0 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:504:2: rule__NumericalAddSubtractExpression__Group__0
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:273:1: ( rule__NumericalAddSubtractExpression__Group__0 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:273:2: rule__NumericalAddSubtractExpression__Group__0
             {
-            pushFollow(FOLLOW_rule__NumericalAddSubtractExpression__Group__0_in_ruleNumericalAddSubtractExpression1011);
+            pushFollow(FOLLOW_rule__NumericalAddSubtractExpression__Group__0_in_ruleNumericalAddSubtractExpression514);
             rule__NumericalAddSubtractExpression__Group__0();
             _fsp--;
 
@@ -1308,19 +666,19 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start entryRuleNumericalMultiplyDivideExpression
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:516:1: entryRuleNumericalMultiplyDivideExpression : ruleNumericalMultiplyDivideExpression EOF ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:285:1: entryRuleNumericalMultiplyDivideExpression : ruleNumericalMultiplyDivideExpression EOF ;
     public final void entryRuleNumericalMultiplyDivideExpression() throws RecognitionException {
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:517:1: ( ruleNumericalMultiplyDivideExpression EOF )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:518:1: ruleNumericalMultiplyDivideExpression EOF
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:286:1: ( ruleNumericalMultiplyDivideExpression EOF )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:287:1: ruleNumericalMultiplyDivideExpression EOF
             {
              before(grammarAccess.getNumericalMultiplyDivideExpressionRule()); 
-            pushFollow(FOLLOW_ruleNumericalMultiplyDivideExpression_in_entryRuleNumericalMultiplyDivideExpression1038);
+            pushFollow(FOLLOW_ruleNumericalMultiplyDivideExpression_in_entryRuleNumericalMultiplyDivideExpression541);
             ruleNumericalMultiplyDivideExpression();
             _fsp--;
 
              after(grammarAccess.getNumericalMultiplyDivideExpressionRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleNumericalMultiplyDivideExpression1045); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleNumericalMultiplyDivideExpression548); 
 
             }
 
@@ -1337,23 +695,23 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start ruleNumericalMultiplyDivideExpression
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:525:1: ruleNumericalMultiplyDivideExpression : ( ( rule__NumericalMultiplyDivideExpression__Group__0 ) ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:294:1: ruleNumericalMultiplyDivideExpression : ( ( rule__NumericalMultiplyDivideExpression__Group__0 ) ) ;
     public final void ruleNumericalMultiplyDivideExpression() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:529:2: ( ( ( rule__NumericalMultiplyDivideExpression__Group__0 ) ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:530:1: ( ( rule__NumericalMultiplyDivideExpression__Group__0 ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:298:2: ( ( ( rule__NumericalMultiplyDivideExpression__Group__0 ) ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:299:1: ( ( rule__NumericalMultiplyDivideExpression__Group__0 ) )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:530:1: ( ( rule__NumericalMultiplyDivideExpression__Group__0 ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:531:1: ( rule__NumericalMultiplyDivideExpression__Group__0 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:299:1: ( ( rule__NumericalMultiplyDivideExpression__Group__0 ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:300:1: ( rule__NumericalMultiplyDivideExpression__Group__0 )
             {
              before(grammarAccess.getNumericalMultiplyDivideExpressionAccess().getGroup()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:532:1: ( rule__NumericalMultiplyDivideExpression__Group__0 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:532:2: rule__NumericalMultiplyDivideExpression__Group__0
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:301:1: ( rule__NumericalMultiplyDivideExpression__Group__0 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:301:2: rule__NumericalMultiplyDivideExpression__Group__0
             {
-            pushFollow(FOLLOW_rule__NumericalMultiplyDivideExpression__Group__0_in_ruleNumericalMultiplyDivideExpression1071);
+            pushFollow(FOLLOW_rule__NumericalMultiplyDivideExpression__Group__0_in_ruleNumericalMultiplyDivideExpression574);
             rule__NumericalMultiplyDivideExpression__Group__0();
             _fsp--;
 
@@ -1383,19 +741,19 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start entryRuleNumericalUnaryExpression
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:544:1: entryRuleNumericalUnaryExpression : ruleNumericalUnaryExpression EOF ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:313:1: entryRuleNumericalUnaryExpression : ruleNumericalUnaryExpression EOF ;
     public final void entryRuleNumericalUnaryExpression() throws RecognitionException {
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:545:1: ( ruleNumericalUnaryExpression EOF )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:546:1: ruleNumericalUnaryExpression EOF
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:314:1: ( ruleNumericalUnaryExpression EOF )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:315:1: ruleNumericalUnaryExpression EOF
             {
              before(grammarAccess.getNumericalUnaryExpressionRule()); 
-            pushFollow(FOLLOW_ruleNumericalUnaryExpression_in_entryRuleNumericalUnaryExpression1098);
+            pushFollow(FOLLOW_ruleNumericalUnaryExpression_in_entryRuleNumericalUnaryExpression601);
             ruleNumericalUnaryExpression();
             _fsp--;
 
              after(grammarAccess.getNumericalUnaryExpressionRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleNumericalUnaryExpression1105); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleNumericalUnaryExpression608); 
 
             }
 
@@ -1412,23 +770,23 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start ruleNumericalUnaryExpression
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:553:1: ruleNumericalUnaryExpression : ( ( rule__NumericalUnaryExpression__Alternatives ) ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:322:1: ruleNumericalUnaryExpression : ( ( rule__NumericalUnaryExpression__Alternatives ) ) ;
     public final void ruleNumericalUnaryExpression() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:557:2: ( ( ( rule__NumericalUnaryExpression__Alternatives ) ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:558:1: ( ( rule__NumericalUnaryExpression__Alternatives ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:326:2: ( ( ( rule__NumericalUnaryExpression__Alternatives ) ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:327:1: ( ( rule__NumericalUnaryExpression__Alternatives ) )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:558:1: ( ( rule__NumericalUnaryExpression__Alternatives ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:559:1: ( rule__NumericalUnaryExpression__Alternatives )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:327:1: ( ( rule__NumericalUnaryExpression__Alternatives ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:328:1: ( rule__NumericalUnaryExpression__Alternatives )
             {
              before(grammarAccess.getNumericalUnaryExpressionAccess().getAlternatives()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:560:1: ( rule__NumericalUnaryExpression__Alternatives )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:560:2: rule__NumericalUnaryExpression__Alternatives
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:329:1: ( rule__NumericalUnaryExpression__Alternatives )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:329:2: rule__NumericalUnaryExpression__Alternatives
             {
-            pushFollow(FOLLOW_rule__NumericalUnaryExpression__Alternatives_in_ruleNumericalUnaryExpression1131);
+            pushFollow(FOLLOW_rule__NumericalUnaryExpression__Alternatives_in_ruleNumericalUnaryExpression634);
             rule__NumericalUnaryExpression__Alternatives();
             _fsp--;
 
@@ -1458,19 +816,19 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start entryRulePrimaryExpression
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:572:1: entryRulePrimaryExpression : rulePrimaryExpression EOF ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:341:1: entryRulePrimaryExpression : rulePrimaryExpression EOF ;
     public final void entryRulePrimaryExpression() throws RecognitionException {
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:573:1: ( rulePrimaryExpression EOF )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:574:1: rulePrimaryExpression EOF
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:342:1: ( rulePrimaryExpression EOF )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:343:1: rulePrimaryExpression EOF
             {
              before(grammarAccess.getPrimaryExpressionRule()); 
-            pushFollow(FOLLOW_rulePrimaryExpression_in_entryRulePrimaryExpression1158);
+            pushFollow(FOLLOW_rulePrimaryExpression_in_entryRulePrimaryExpression661);
             rulePrimaryExpression();
             _fsp--;
 
              after(grammarAccess.getPrimaryExpressionRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRulePrimaryExpression1165); 
+            match(input,EOF,FOLLOW_EOF_in_entryRulePrimaryExpression668); 
 
             }
 
@@ -1487,23 +845,23 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rulePrimaryExpression
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:581:1: rulePrimaryExpression : ( ( rule__PrimaryExpression__Alternatives ) ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:350:1: rulePrimaryExpression : ( ( rule__PrimaryExpression__Alternatives ) ) ;
     public final void rulePrimaryExpression() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:585:2: ( ( ( rule__PrimaryExpression__Alternatives ) ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:586:1: ( ( rule__PrimaryExpression__Alternatives ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:354:2: ( ( ( rule__PrimaryExpression__Alternatives ) ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:355:1: ( ( rule__PrimaryExpression__Alternatives ) )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:586:1: ( ( rule__PrimaryExpression__Alternatives ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:587:1: ( rule__PrimaryExpression__Alternatives )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:355:1: ( ( rule__PrimaryExpression__Alternatives ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:356:1: ( rule__PrimaryExpression__Alternatives )
             {
              before(grammarAccess.getPrimaryExpressionAccess().getAlternatives()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:588:1: ( rule__PrimaryExpression__Alternatives )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:588:2: rule__PrimaryExpression__Alternatives
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:357:1: ( rule__PrimaryExpression__Alternatives )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:357:2: rule__PrimaryExpression__Alternatives
             {
-            pushFollow(FOLLOW_rule__PrimaryExpression__Alternatives_in_rulePrimaryExpression1191);
+            pushFollow(FOLLOW_rule__PrimaryExpression__Alternatives_in_rulePrimaryExpression694);
             rule__PrimaryExpression__Alternatives();
             _fsp--;
 
@@ -1533,19 +891,19 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start entryRuleValueExpression
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:600:1: entryRuleValueExpression : ruleValueExpression EOF ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:369:1: entryRuleValueExpression : ruleValueExpression EOF ;
     public final void entryRuleValueExpression() throws RecognitionException {
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:601:1: ( ruleValueExpression EOF )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:602:1: ruleValueExpression EOF
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:370:1: ( ruleValueExpression EOF )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:371:1: ruleValueExpression EOF
             {
              before(grammarAccess.getValueExpressionRule()); 
-            pushFollow(FOLLOW_ruleValueExpression_in_entryRuleValueExpression1218);
+            pushFollow(FOLLOW_ruleValueExpression_in_entryRuleValueExpression721);
             ruleValueExpression();
             _fsp--;
 
              after(grammarAccess.getValueExpressionRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleValueExpression1225); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleValueExpression728); 
 
             }
 
@@ -1562,23 +920,23 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start ruleValueExpression
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:609:1: ruleValueExpression : ( ( rule__ValueExpression__Alternatives ) ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:378:1: ruleValueExpression : ( ( rule__ValueExpression__Alternatives ) ) ;
     public final void ruleValueExpression() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:613:2: ( ( ( rule__ValueExpression__Alternatives ) ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:614:1: ( ( rule__ValueExpression__Alternatives ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:382:2: ( ( ( rule__ValueExpression__Alternatives ) ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:383:1: ( ( rule__ValueExpression__Alternatives ) )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:614:1: ( ( rule__ValueExpression__Alternatives ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:615:1: ( rule__ValueExpression__Alternatives )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:383:1: ( ( rule__ValueExpression__Alternatives ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:384:1: ( rule__ValueExpression__Alternatives )
             {
              before(grammarAccess.getValueExpressionAccess().getAlternatives()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:616:1: ( rule__ValueExpression__Alternatives )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:616:2: rule__ValueExpression__Alternatives
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:385:1: ( rule__ValueExpression__Alternatives )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:385:2: rule__ValueExpression__Alternatives
             {
-            pushFollow(FOLLOW_rule__ValueExpression__Alternatives_in_ruleValueExpression1251);
+            pushFollow(FOLLOW_rule__ValueExpression__Alternatives_in_ruleValueExpression754);
             rule__ValueExpression__Alternatives();
             _fsp--;
 
@@ -1608,19 +966,19 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start entryRulePrimitiveValueExpression
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:628:1: entryRulePrimitiveValueExpression : rulePrimitiveValueExpression EOF ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:397:1: entryRulePrimitiveValueExpression : rulePrimitiveValueExpression EOF ;
     public final void entryRulePrimitiveValueExpression() throws RecognitionException {
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:629:1: ( rulePrimitiveValueExpression EOF )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:630:1: rulePrimitiveValueExpression EOF
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:398:1: ( rulePrimitiveValueExpression EOF )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:399:1: rulePrimitiveValueExpression EOF
             {
              before(grammarAccess.getPrimitiveValueExpressionRule()); 
-            pushFollow(FOLLOW_rulePrimitiveValueExpression_in_entryRulePrimitiveValueExpression1278);
+            pushFollow(FOLLOW_rulePrimitiveValueExpression_in_entryRulePrimitiveValueExpression781);
             rulePrimitiveValueExpression();
             _fsp--;
 
              after(grammarAccess.getPrimitiveValueExpressionRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRulePrimitiveValueExpression1285); 
+            match(input,EOF,FOLLOW_EOF_in_entryRulePrimitiveValueExpression788); 
 
             }
 
@@ -1637,23 +995,23 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rulePrimitiveValueExpression
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:637:1: rulePrimitiveValueExpression : ( ( rule__PrimitiveValueExpression__Group__0 ) ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:406:1: rulePrimitiveValueExpression : ( ( rule__PrimitiveValueExpression__Group__0 ) ) ;
     public final void rulePrimitiveValueExpression() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:641:2: ( ( ( rule__PrimitiveValueExpression__Group__0 ) ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:642:1: ( ( rule__PrimitiveValueExpression__Group__0 ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:410:2: ( ( ( rule__PrimitiveValueExpression__Group__0 ) ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:411:1: ( ( rule__PrimitiveValueExpression__Group__0 ) )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:642:1: ( ( rule__PrimitiveValueExpression__Group__0 ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:643:1: ( rule__PrimitiveValueExpression__Group__0 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:411:1: ( ( rule__PrimitiveValueExpression__Group__0 ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:412:1: ( rule__PrimitiveValueExpression__Group__0 )
             {
              before(grammarAccess.getPrimitiveValueExpressionAccess().getGroup()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:644:1: ( rule__PrimitiveValueExpression__Group__0 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:644:2: rule__PrimitiveValueExpression__Group__0
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:413:1: ( rule__PrimitiveValueExpression__Group__0 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:413:2: rule__PrimitiveValueExpression__Group__0
             {
-            pushFollow(FOLLOW_rule__PrimitiveValueExpression__Group__0_in_rulePrimitiveValueExpression1311);
+            pushFollow(FOLLOW_rule__PrimitiveValueExpression__Group__0_in_rulePrimitiveValueExpression814);
             rule__PrimitiveValueExpression__Group__0();
             _fsp--;
 
@@ -1683,19 +1041,19 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start entryRuleVariableReferenceExpression
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:656:1: entryRuleVariableReferenceExpression : ruleVariableReferenceExpression EOF ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:425:1: entryRuleVariableReferenceExpression : ruleVariableReferenceExpression EOF ;
     public final void entryRuleVariableReferenceExpression() throws RecognitionException {
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:657:1: ( ruleVariableReferenceExpression EOF )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:658:1: ruleVariableReferenceExpression EOF
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:426:1: ( ruleVariableReferenceExpression EOF )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:427:1: ruleVariableReferenceExpression EOF
             {
              before(grammarAccess.getVariableReferenceExpressionRule()); 
-            pushFollow(FOLLOW_ruleVariableReferenceExpression_in_entryRuleVariableReferenceExpression1338);
+            pushFollow(FOLLOW_ruleVariableReferenceExpression_in_entryRuleVariableReferenceExpression841);
             ruleVariableReferenceExpression();
             _fsp--;
 
              after(grammarAccess.getVariableReferenceExpressionRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleVariableReferenceExpression1345); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleVariableReferenceExpression848); 
 
             }
 
@@ -1712,23 +1070,23 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start ruleVariableReferenceExpression
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:665:1: ruleVariableReferenceExpression : ( ( rule__VariableReferenceExpression__Group__0 ) ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:434:1: ruleVariableReferenceExpression : ( ( rule__VariableReferenceExpression__Group__0 ) ) ;
     public final void ruleVariableReferenceExpression() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:669:2: ( ( ( rule__VariableReferenceExpression__Group__0 ) ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:670:1: ( ( rule__VariableReferenceExpression__Group__0 ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:438:2: ( ( ( rule__VariableReferenceExpression__Group__0 ) ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:439:1: ( ( rule__VariableReferenceExpression__Group__0 ) )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:670:1: ( ( rule__VariableReferenceExpression__Group__0 ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:671:1: ( rule__VariableReferenceExpression__Group__0 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:439:1: ( ( rule__VariableReferenceExpression__Group__0 ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:440:1: ( rule__VariableReferenceExpression__Group__0 )
             {
              before(grammarAccess.getVariableReferenceExpressionAccess().getGroup()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:672:1: ( rule__VariableReferenceExpression__Group__0 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:672:2: rule__VariableReferenceExpression__Group__0
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:441:1: ( rule__VariableReferenceExpression__Group__0 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:441:2: rule__VariableReferenceExpression__Group__0
             {
-            pushFollow(FOLLOW_rule__VariableReferenceExpression__Group__0_in_ruleVariableReferenceExpression1371);
+            pushFollow(FOLLOW_rule__VariableReferenceExpression__Group__0_in_ruleVariableReferenceExpression874);
             rule__VariableReferenceExpression__Group__0();
             _fsp--;
 
@@ -1758,19 +1116,19 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start entryRuleLiteral
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:684:1: entryRuleLiteral : ruleLiteral EOF ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:453:1: entryRuleLiteral : ruleLiteral EOF ;
     public final void entryRuleLiteral() throws RecognitionException {
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:685:1: ( ruleLiteral EOF )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:686:1: ruleLiteral EOF
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:454:1: ( ruleLiteral EOF )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:455:1: ruleLiteral EOF
             {
              before(grammarAccess.getLiteralRule()); 
-            pushFollow(FOLLOW_ruleLiteral_in_entryRuleLiteral1398);
+            pushFollow(FOLLOW_ruleLiteral_in_entryRuleLiteral901);
             ruleLiteral();
             _fsp--;
 
              after(grammarAccess.getLiteralRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleLiteral1405); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleLiteral908); 
 
             }
 
@@ -1787,23 +1145,23 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start ruleLiteral
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:693:1: ruleLiteral : ( ( rule__Literal__Alternatives ) ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:462:1: ruleLiteral : ( ( rule__Literal__Alternatives ) ) ;
     public final void ruleLiteral() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:697:2: ( ( ( rule__Literal__Alternatives ) ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:698:1: ( ( rule__Literal__Alternatives ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:466:2: ( ( ( rule__Literal__Alternatives ) ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:467:1: ( ( rule__Literal__Alternatives ) )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:698:1: ( ( rule__Literal__Alternatives ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:699:1: ( rule__Literal__Alternatives )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:467:1: ( ( rule__Literal__Alternatives ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:468:1: ( rule__Literal__Alternatives )
             {
              before(grammarAccess.getLiteralAccess().getAlternatives()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:700:1: ( rule__Literal__Alternatives )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:700:2: rule__Literal__Alternatives
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:469:1: ( rule__Literal__Alternatives )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:469:2: rule__Literal__Alternatives
             {
-            pushFollow(FOLLOW_rule__Literal__Alternatives_in_ruleLiteral1431);
+            pushFollow(FOLLOW_rule__Literal__Alternatives_in_ruleLiteral934);
             rule__Literal__Alternatives();
             _fsp--;
 
@@ -1833,23 +1191,23 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start ruleAdditiveOperator
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:713:1: ruleAdditiveOperator : ( ( rule__AdditiveOperator__Alternatives ) ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:482:1: ruleAdditiveOperator : ( ( rule__AdditiveOperator__Alternatives ) ) ;
     public final void ruleAdditiveOperator() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:717:1: ( ( ( rule__AdditiveOperator__Alternatives ) ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:718:1: ( ( rule__AdditiveOperator__Alternatives ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:486:1: ( ( ( rule__AdditiveOperator__Alternatives ) ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:487:1: ( ( rule__AdditiveOperator__Alternatives ) )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:718:1: ( ( rule__AdditiveOperator__Alternatives ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:719:1: ( rule__AdditiveOperator__Alternatives )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:487:1: ( ( rule__AdditiveOperator__Alternatives ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:488:1: ( rule__AdditiveOperator__Alternatives )
             {
              before(grammarAccess.getAdditiveOperatorAccess().getAlternatives()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:720:1: ( rule__AdditiveOperator__Alternatives )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:720:2: rule__AdditiveOperator__Alternatives
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:489:1: ( rule__AdditiveOperator__Alternatives )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:489:2: rule__AdditiveOperator__Alternatives
             {
-            pushFollow(FOLLOW_rule__AdditiveOperator__Alternatives_in_ruleAdditiveOperator1468);
+            pushFollow(FOLLOW_rule__AdditiveOperator__Alternatives_in_ruleAdditiveOperator971);
             rule__AdditiveOperator__Alternatives();
             _fsp--;
 
@@ -1879,23 +1237,23 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start ruleMultiplicativeOperator
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:732:1: ruleMultiplicativeOperator : ( ( rule__MultiplicativeOperator__Alternatives ) ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:501:1: ruleMultiplicativeOperator : ( ( rule__MultiplicativeOperator__Alternatives ) ) ;
     public final void ruleMultiplicativeOperator() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:736:1: ( ( ( rule__MultiplicativeOperator__Alternatives ) ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:737:1: ( ( rule__MultiplicativeOperator__Alternatives ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:505:1: ( ( ( rule__MultiplicativeOperator__Alternatives ) ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:506:1: ( ( rule__MultiplicativeOperator__Alternatives ) )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:737:1: ( ( rule__MultiplicativeOperator__Alternatives ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:738:1: ( rule__MultiplicativeOperator__Alternatives )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:506:1: ( ( rule__MultiplicativeOperator__Alternatives ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:507:1: ( rule__MultiplicativeOperator__Alternatives )
             {
              before(grammarAccess.getMultiplicativeOperatorAccess().getAlternatives()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:739:1: ( rule__MultiplicativeOperator__Alternatives )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:739:2: rule__MultiplicativeOperator__Alternatives
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:508:1: ( rule__MultiplicativeOperator__Alternatives )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:508:2: rule__MultiplicativeOperator__Alternatives
             {
-            pushFollow(FOLLOW_rule__MultiplicativeOperator__Alternatives_in_ruleMultiplicativeOperator1504);
+            pushFollow(FOLLOW_rule__MultiplicativeOperator__Alternatives_in_ruleMultiplicativeOperator1007);
             rule__MultiplicativeOperator__Alternatives();
             _fsp--;
 
@@ -1925,23 +1283,23 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start ruleUnaryOperator
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:751:1: ruleUnaryOperator : ( ( rule__UnaryOperator__Alternatives ) ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:520:1: ruleUnaryOperator : ( ( rule__UnaryOperator__Alternatives ) ) ;
     public final void ruleUnaryOperator() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:755:1: ( ( ( rule__UnaryOperator__Alternatives ) ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:756:1: ( ( rule__UnaryOperator__Alternatives ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:524:1: ( ( ( rule__UnaryOperator__Alternatives ) ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:525:1: ( ( rule__UnaryOperator__Alternatives ) )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:756:1: ( ( rule__UnaryOperator__Alternatives ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:757:1: ( rule__UnaryOperator__Alternatives )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:525:1: ( ( rule__UnaryOperator__Alternatives ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:526:1: ( rule__UnaryOperator__Alternatives )
             {
              before(grammarAccess.getUnaryOperatorAccess().getAlternatives()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:758:1: ( rule__UnaryOperator__Alternatives )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:758:2: rule__UnaryOperator__Alternatives
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:527:1: ( rule__UnaryOperator__Alternatives )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:527:2: rule__UnaryOperator__Alternatives
             {
-            pushFollow(FOLLOW_rule__UnaryOperator__Alternatives_in_ruleUnaryOperator1540);
+            pushFollow(FOLLOW_rule__UnaryOperator__Alternatives_in_ruleUnaryOperator1043);
             rule__UnaryOperator__Alternatives();
             _fsp--;
 
@@ -1971,23 +1329,23 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start ruleRelationalOperator
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:770:1: ruleRelationalOperator : ( ( rule__RelationalOperator__Alternatives ) ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:539:1: ruleRelationalOperator : ( ( rule__RelationalOperator__Alternatives ) ) ;
     public final void ruleRelationalOperator() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:774:1: ( ( ( rule__RelationalOperator__Alternatives ) ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:775:1: ( ( rule__RelationalOperator__Alternatives ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:543:1: ( ( ( rule__RelationalOperator__Alternatives ) ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:544:1: ( ( rule__RelationalOperator__Alternatives ) )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:775:1: ( ( rule__RelationalOperator__Alternatives ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:776:1: ( rule__RelationalOperator__Alternatives )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:544:1: ( ( rule__RelationalOperator__Alternatives ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:545:1: ( rule__RelationalOperator__Alternatives )
             {
              before(grammarAccess.getRelationalOperatorAccess().getAlternatives()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:777:1: ( rule__RelationalOperator__Alternatives )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:777:2: rule__RelationalOperator__Alternatives
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:546:1: ( rule__RelationalOperator__Alternatives )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:546:2: rule__RelationalOperator__Alternatives
             {
-            pushFollow(FOLLOW_rule__RelationalOperator__Alternatives_in_ruleRelationalOperator1576);
+            pushFollow(FOLLOW_rule__RelationalOperator__Alternatives_in_ruleRelationalOperator1079);
             rule__RelationalOperator__Alternatives();
             _fsp--;
 
@@ -2016,514 +1374,38 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
     // $ANTLR end ruleRelationalOperator
 
 
-    // $ANTLR start ruleDirectionKind
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:789:1: ruleDirectionKind : ( ( rule__DirectionKind__Alternatives ) ) ;
-    public final void ruleDirectionKind() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:793:1: ( ( ( rule__DirectionKind__Alternatives ) ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:794:1: ( ( rule__DirectionKind__Alternatives ) )
-            {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:794:1: ( ( rule__DirectionKind__Alternatives ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:795:1: ( rule__DirectionKind__Alternatives )
-            {
-             before(grammarAccess.getDirectionKindAccess().getAlternatives()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:796:1: ( rule__DirectionKind__Alternatives )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:796:2: rule__DirectionKind__Alternatives
-            {
-            pushFollow(FOLLOW_rule__DirectionKind__Alternatives_in_ruleDirectionKind1612);
-            rule__DirectionKind__Alternatives();
-            _fsp--;
-
-
-            }
-
-             after(grammarAccess.getDirectionKindAccess().getAlternatives()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end ruleDirectionKind
-
-
-    // $ANTLR start ruleTimeUnit
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:808:1: ruleTimeUnit : ( ( rule__TimeUnit__Alternatives ) ) ;
-    public final void ruleTimeUnit() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:812:1: ( ( ( rule__TimeUnit__Alternatives ) ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:813:1: ( ( rule__TimeUnit__Alternatives ) )
-            {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:813:1: ( ( rule__TimeUnit__Alternatives ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:814:1: ( rule__TimeUnit__Alternatives )
-            {
-             before(grammarAccess.getTimeUnitAccess().getAlternatives()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:815:1: ( rule__TimeUnit__Alternatives )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:815:2: rule__TimeUnit__Alternatives
-            {
-            pushFollow(FOLLOW_rule__TimeUnit__Alternatives_in_ruleTimeUnit1648);
-            rule__TimeUnit__Alternatives();
-            _fsp--;
-
-
-            }
-
-             after(grammarAccess.getTimeUnitAccess().getAlternatives()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end ruleTimeUnit
-
-
-    // $ANTLR start ruleType
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:827:1: ruleType : ( ( rule__Type__Alternatives ) ) ;
-    public final void ruleType() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:831:1: ( ( ( rule__Type__Alternatives ) ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:832:1: ( ( rule__Type__Alternatives ) )
-            {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:832:1: ( ( rule__Type__Alternatives ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:833:1: ( rule__Type__Alternatives )
-            {
-             before(grammarAccess.getTypeAccess().getAlternatives()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:834:1: ( rule__Type__Alternatives )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:834:2: rule__Type__Alternatives
-            {
-            pushFollow(FOLLOW_rule__Type__Alternatives_in_ruleType1684);
-            rule__Type__Alternatives();
-            _fsp--;
-
-
-            }
-
-             after(grammarAccess.getTypeAccess().getAlternatives()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end ruleType
-
-
-    // $ANTLR start rule__Statement__Alternatives
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:845:1: rule__Statement__Alternatives : ( ( ruleVariableDefinition ) | ( ruleSignalEventDefinition ) | ( ruleActionDefinition ) | ( ruleTransitionDefinition ) );
-    public final void rule__Statement__Alternatives() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:849:1: ( ( ruleVariableDefinition ) | ( ruleSignalEventDefinition ) | ( ruleActionDefinition ) | ( ruleTransitionDefinition ) )
-            int alt2=4;
-            switch ( input.LA(1) ) {
-            case 35:
-                {
-                alt2=1;
-                }
-                break;
-            case 40:
-                {
-                int LA2_2 = input.LA(2);
-
-                if ( (LA2_2==RULE_ID) ) {
-                    int LA2_5 = input.LA(3);
-
-                    if ( (LA2_5==36) ) {
-                        int LA2_6 = input.LA(4);
-
-                        if ( (LA2_6==26) ) {
-                            int LA2_7 = input.LA(5);
-
-                            if ( (LA2_7==37) ) {
-                                alt2=2;
-                            }
-                            else {
-                                NoViableAltException nvae =
-                                    new NoViableAltException("845:1: rule__Statement__Alternatives : ( ( ruleVariableDefinition ) | ( ruleSignalEventDefinition ) | ( ruleActionDefinition ) | ( ruleTransitionDefinition ) );", 2, 7, input);
-
-                                throw nvae;
-                            }
-                        }
-                        else if ( (LA2_6==27) ) {
-                            int LA2_8 = input.LA(5);
-
-                            if ( (LA2_8==37) ) {
-                                alt2=2;
-                            }
-                            else {
-                                NoViableAltException nvae =
-                                    new NoViableAltException("845:1: rule__Statement__Alternatives : ( ( ruleVariableDefinition ) | ( ruleSignalEventDefinition ) | ( ruleActionDefinition ) | ( ruleTransitionDefinition ) );", 2, 8, input);
-
-                                throw nvae;
-                            }
-                        }
-                        else {
-                            NoViableAltException nvae =
-                                new NoViableAltException("845:1: rule__Statement__Alternatives : ( ( ruleVariableDefinition ) | ( ruleSignalEventDefinition ) | ( ruleActionDefinition ) | ( ruleTransitionDefinition ) );", 2, 6, input);
-
-                            throw nvae;
-                        }
-                    }
-                    else {
-                        NoViableAltException nvae =
-                            new NoViableAltException("845:1: rule__Statement__Alternatives : ( ( ruleVariableDefinition ) | ( ruleSignalEventDefinition ) | ( ruleActionDefinition ) | ( ruleTransitionDefinition ) );", 2, 5, input);
-
-                        throw nvae;
-                    }
-                }
-                else {
-                    NoViableAltException nvae =
-                        new NoViableAltException("845:1: rule__Statement__Alternatives : ( ( ruleVariableDefinition ) | ( ruleSignalEventDefinition ) | ( ruleActionDefinition ) | ( ruleTransitionDefinition ) );", 2, 2, input);
-
-                    throw nvae;
-                }
-                }
-                break;
-            case 13:
-            case 38:
-                {
-                alt2=3;
-                }
-                break;
-            case 41:
-                {
-                alt2=4;
-                }
-                break;
-            default:
-                NoViableAltException nvae =
-                    new NoViableAltException("845:1: rule__Statement__Alternatives : ( ( ruleVariableDefinition ) | ( ruleSignalEventDefinition ) | ( ruleActionDefinition ) | ( ruleTransitionDefinition ) );", 2, 0, input);
-
-                throw nvae;
-            }
-
-            switch (alt2) {
-                case 1 :
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:850:1: ( ruleVariableDefinition )
-                    {
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:850:1: ( ruleVariableDefinition )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:851:1: ruleVariableDefinition
-                    {
-                     before(grammarAccess.getStatementAccess().getVariableDefinitionParserRuleCall_0()); 
-                    pushFollow(FOLLOW_ruleVariableDefinition_in_rule__Statement__Alternatives1719);
-                    ruleVariableDefinition();
-                    _fsp--;
-
-                     after(grammarAccess.getStatementAccess().getVariableDefinitionParserRuleCall_0()); 
-
-                    }
-
-
-                    }
-                    break;
-                case 2 :
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:856:6: ( ruleSignalEventDefinition )
-                    {
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:856:6: ( ruleSignalEventDefinition )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:857:1: ruleSignalEventDefinition
-                    {
-                     before(grammarAccess.getStatementAccess().getSignalEventDefinitionParserRuleCall_1()); 
-                    pushFollow(FOLLOW_ruleSignalEventDefinition_in_rule__Statement__Alternatives1736);
-                    ruleSignalEventDefinition();
-                    _fsp--;
-
-                     after(grammarAccess.getStatementAccess().getSignalEventDefinitionParserRuleCall_1()); 
-
-                    }
-
-
-                    }
-                    break;
-                case 3 :
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:862:6: ( ruleActionDefinition )
-                    {
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:862:6: ( ruleActionDefinition )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:863:1: ruleActionDefinition
-                    {
-                     before(grammarAccess.getStatementAccess().getActionDefinitionParserRuleCall_2()); 
-                    pushFollow(FOLLOW_ruleActionDefinition_in_rule__Statement__Alternatives1753);
-                    ruleActionDefinition();
-                    _fsp--;
-
-                     after(grammarAccess.getStatementAccess().getActionDefinitionParserRuleCall_2()); 
-
-                    }
-
-
-                    }
-                    break;
-                case 4 :
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:868:6: ( ruleTransitionDefinition )
-                    {
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:868:6: ( ruleTransitionDefinition )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:869:1: ruleTransitionDefinition
-                    {
-                     before(grammarAccess.getStatementAccess().getTransitionDefinitionParserRuleCall_3()); 
-                    pushFollow(FOLLOW_ruleTransitionDefinition_in_rule__Statement__Alternatives1770);
-                    ruleTransitionDefinition();
-                    _fsp--;
-
-                     after(grammarAccess.getStatementAccess().getTransitionDefinitionParserRuleCall_3()); 
-
-                    }
-
-
-                    }
-                    break;
-
-            }
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__Statement__Alternatives
-
-
-    // $ANTLR start rule__ActionDefinition__Alternatives_0
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:879:1: rule__ActionDefinition__Alternatives_0 : ( ( 'entry' ) | ( ( rule__ActionDefinition__Group_0_1__0 ) ) );
-    public final void rule__ActionDefinition__Alternatives_0() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:883:1: ( ( 'entry' ) | ( ( rule__ActionDefinition__Group_0_1__0 ) ) )
-            int alt3=2;
-            int LA3_0 = input.LA(1);
-
-            if ( (LA3_0==13) ) {
-                alt3=1;
-            }
-            else if ( (LA3_0==38) ) {
-                alt3=2;
-            }
-            else {
-                NoViableAltException nvae =
-                    new NoViableAltException("879:1: rule__ActionDefinition__Alternatives_0 : ( ( 'entry' ) | ( ( rule__ActionDefinition__Group_0_1__0 ) ) );", 3, 0, input);
-
-                throw nvae;
-            }
-            switch (alt3) {
-                case 1 :
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:884:1: ( 'entry' )
-                    {
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:884:1: ( 'entry' )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:885:1: 'entry'
-                    {
-                     before(grammarAccess.getActionDefinitionAccess().getEntryKeyword_0_0()); 
-                    match(input,13,FOLLOW_13_in_rule__ActionDefinition__Alternatives_01803); 
-                     after(grammarAccess.getActionDefinitionAccess().getEntryKeyword_0_0()); 
-
-                    }
-
-
-                    }
-                    break;
-                case 2 :
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:892:6: ( ( rule__ActionDefinition__Group_0_1__0 ) )
-                    {
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:892:6: ( ( rule__ActionDefinition__Group_0_1__0 ) )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:893:1: ( rule__ActionDefinition__Group_0_1__0 )
-                    {
-                     before(grammarAccess.getActionDefinitionAccess().getGroup_0_1()); 
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:894:1: ( rule__ActionDefinition__Group_0_1__0 )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:894:2: rule__ActionDefinition__Group_0_1__0
-                    {
-                    pushFollow(FOLLOW_rule__ActionDefinition__Group_0_1__0_in_rule__ActionDefinition__Alternatives_01822);
-                    rule__ActionDefinition__Group_0_1__0();
-                    _fsp--;
-
-
-                    }
-
-                     after(grammarAccess.getActionDefinitionAccess().getGroup_0_1()); 
-
-                    }
-
-
-                    }
-                    break;
-
-            }
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__ActionDefinition__Alternatives_0
-
-
-    // $ANTLR start rule__Event__Alternatives
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:903:1: rule__Event__Alternatives : ( ( ruleSignalEventDefinition ) | ( ruleTimeEventDefinition ) );
-    public final void rule__Event__Alternatives() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:907:1: ( ( ruleSignalEventDefinition ) | ( ruleTimeEventDefinition ) )
-            int alt4=2;
-            int LA4_0 = input.LA(1);
-
-            if ( (LA4_0==40) ) {
-                alt4=1;
-            }
-            else if ( (LA4_0==41) ) {
-                alt4=2;
-            }
-            else {
-                NoViableAltException nvae =
-                    new NoViableAltException("903:1: rule__Event__Alternatives : ( ( ruleSignalEventDefinition ) | ( ruleTimeEventDefinition ) );", 4, 0, input);
-
-                throw nvae;
-            }
-            switch (alt4) {
-                case 1 :
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:908:1: ( ruleSignalEventDefinition )
-                    {
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:908:1: ( ruleSignalEventDefinition )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:909:1: ruleSignalEventDefinition
-                    {
-                     before(grammarAccess.getEventAccess().getSignalEventDefinitionParserRuleCall_0()); 
-                    pushFollow(FOLLOW_ruleSignalEventDefinition_in_rule__Event__Alternatives1855);
-                    ruleSignalEventDefinition();
-                    _fsp--;
-
-                     after(grammarAccess.getEventAccess().getSignalEventDefinitionParserRuleCall_0()); 
-
-                    }
-
-
-                    }
-                    break;
-                case 2 :
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:914:6: ( ruleTimeEventDefinition )
-                    {
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:914:6: ( ruleTimeEventDefinition )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:915:1: ruleTimeEventDefinition
-                    {
-                     before(grammarAccess.getEventAccess().getTimeEventDefinitionParserRuleCall_1()); 
-                    pushFollow(FOLLOW_ruleTimeEventDefinition_in_rule__Event__Alternatives1872);
-                    ruleTimeEventDefinition();
-                    _fsp--;
-
-                     after(grammarAccess.getEventAccess().getTimeEventDefinitionParserRuleCall_1()); 
-
-                    }
-
-
-                    }
-                    break;
-
-            }
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__Event__Alternatives
-
-
     // $ANTLR start rule__ExpressionRule__ExpressionAlternatives_0
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:925:1: rule__ExpressionRule__ExpressionAlternatives_0 : ( ( ruleLogicalOrExpression ) | ( ruleRaiseEventExpression ) );
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:563:1: rule__ExpressionRule__ExpressionAlternatives_0 : ( ( ruleLogicalOrExpression ) | ( ruleRaiseEventExpression ) );
     public final void rule__ExpressionRule__ExpressionAlternatives_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:929:1: ( ( ruleLogicalOrExpression ) | ( ruleRaiseEventExpression ) )
-            int alt5=2;
-            int LA5_0 = input.LA(1);
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:567:1: ( ( ruleLogicalOrExpression ) | ( ruleRaiseEventExpression ) )
+            int alt1=2;
+            int LA1_0 = input.LA(1);
 
-            if ( ((LA5_0>=RULE_BOOL && LA5_0<=RULE_ID)||(LA5_0>=14 && LA5_0<=15)||LA5_0==19||LA5_0==42||LA5_0==47) ) {
-                alt5=1;
+            if ( ((LA1_0>=RULE_BOOL && LA1_0<=RULE_ID)||(LA1_0>=13 && LA1_0<=14)||LA1_0==18||(LA1_0>=31 && LA1_0<=32)) ) {
+                alt1=1;
             }
-            else if ( (LA5_0==44) ) {
-                alt5=2;
+            else if ( (LA1_0==28) ) {
+                alt1=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("925:1: rule__ExpressionRule__ExpressionAlternatives_0 : ( ( ruleLogicalOrExpression ) | ( ruleRaiseEventExpression ) );", 5, 0, input);
+                    new NoViableAltException("563:1: rule__ExpressionRule__ExpressionAlternatives_0 : ( ( ruleLogicalOrExpression ) | ( ruleRaiseEventExpression ) );", 1, 0, input);
 
                 throw nvae;
             }
-            switch (alt5) {
+            switch (alt1) {
                 case 1 :
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:930:1: ( ruleLogicalOrExpression )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:568:1: ( ruleLogicalOrExpression )
                     {
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:930:1: ( ruleLogicalOrExpression )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:931:1: ruleLogicalOrExpression
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:568:1: ( ruleLogicalOrExpression )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:569:1: ruleLogicalOrExpression
                     {
                      before(grammarAccess.getExpressionRuleAccess().getExpressionLogicalOrExpressionParserRuleCall_0_0()); 
-                    pushFollow(FOLLOW_ruleLogicalOrExpression_in_rule__ExpressionRule__ExpressionAlternatives_01904);
+                    pushFollow(FOLLOW_ruleLogicalOrExpression_in_rule__ExpressionRule__ExpressionAlternatives_01120);
                     ruleLogicalOrExpression();
                     _fsp--;
 
@@ -2535,13 +1417,13 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
                     }
                     break;
                 case 2 :
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:936:6: ( ruleRaiseEventExpression )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:574:6: ( ruleRaiseEventExpression )
                     {
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:936:6: ( ruleRaiseEventExpression )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:937:1: ruleRaiseEventExpression
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:574:6: ( ruleRaiseEventExpression )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:575:1: ruleRaiseEventExpression
                     {
                      before(grammarAccess.getExpressionRuleAccess().getExpressionRaiseEventExpressionParserRuleCall_0_1()); 
-                    pushFollow(FOLLOW_ruleRaiseEventExpression_in_rule__ExpressionRule__ExpressionAlternatives_01921);
+                    pushFollow(FOLLOW_ruleRaiseEventExpression_in_rule__ExpressionRule__ExpressionAlternatives_01137);
                     ruleRaiseEventExpression();
                     _fsp--;
 
@@ -2570,37 +1452,37 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__LogicalNotExpression__Alternatives
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:947:1: rule__LogicalNotExpression__Alternatives : ( ( ruleLogicalRelationExpression ) | ( ( rule__LogicalNotExpression__Group_1__0 ) ) );
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:585:1: rule__LogicalNotExpression__Alternatives : ( ( ruleLogicalRelationExpression ) | ( ( rule__LogicalNotExpression__Group_1__0 ) ) );
     public final void rule__LogicalNotExpression__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:951:1: ( ( ruleLogicalRelationExpression ) | ( ( rule__LogicalNotExpression__Group_1__0 ) ) )
-            int alt6=2;
-            int LA6_0 = input.LA(1);
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:589:1: ( ( ruleLogicalRelationExpression ) | ( ( rule__LogicalNotExpression__Group_1__0 ) ) )
+            int alt2=2;
+            int LA2_0 = input.LA(1);
 
-            if ( ((LA6_0>=RULE_BOOL && LA6_0<=RULE_ID)||(LA6_0>=14 && LA6_0<=15)||LA6_0==19||LA6_0==42) ) {
-                alt6=1;
+            if ( ((LA2_0>=RULE_BOOL && LA2_0<=RULE_ID)||(LA2_0>=13 && LA2_0<=14)||LA2_0==18||LA2_0==32) ) {
+                alt2=1;
             }
-            else if ( (LA6_0==47) ) {
-                alt6=2;
+            else if ( (LA2_0==31) ) {
+                alt2=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("947:1: rule__LogicalNotExpression__Alternatives : ( ( ruleLogicalRelationExpression ) | ( ( rule__LogicalNotExpression__Group_1__0 ) ) );", 6, 0, input);
+                    new NoViableAltException("585:1: rule__LogicalNotExpression__Alternatives : ( ( ruleLogicalRelationExpression ) | ( ( rule__LogicalNotExpression__Group_1__0 ) ) );", 2, 0, input);
 
                 throw nvae;
             }
-            switch (alt6) {
+            switch (alt2) {
                 case 1 :
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:952:1: ( ruleLogicalRelationExpression )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:590:1: ( ruleLogicalRelationExpression )
                     {
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:952:1: ( ruleLogicalRelationExpression )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:953:1: ruleLogicalRelationExpression
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:590:1: ( ruleLogicalRelationExpression )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:591:1: ruleLogicalRelationExpression
                     {
                      before(grammarAccess.getLogicalNotExpressionAccess().getLogicalRelationExpressionParserRuleCall_0()); 
-                    pushFollow(FOLLOW_ruleLogicalRelationExpression_in_rule__LogicalNotExpression__Alternatives1953);
+                    pushFollow(FOLLOW_ruleLogicalRelationExpression_in_rule__LogicalNotExpression__Alternatives1169);
                     ruleLogicalRelationExpression();
                     _fsp--;
 
@@ -2612,16 +1494,16 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
                     }
                     break;
                 case 2 :
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:958:6: ( ( rule__LogicalNotExpression__Group_1__0 ) )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:596:6: ( ( rule__LogicalNotExpression__Group_1__0 ) )
                     {
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:958:6: ( ( rule__LogicalNotExpression__Group_1__0 ) )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:959:1: ( rule__LogicalNotExpression__Group_1__0 )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:596:6: ( ( rule__LogicalNotExpression__Group_1__0 ) )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:597:1: ( rule__LogicalNotExpression__Group_1__0 )
                     {
                      before(grammarAccess.getLogicalNotExpressionAccess().getGroup_1()); 
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:960:1: ( rule__LogicalNotExpression__Group_1__0 )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:960:2: rule__LogicalNotExpression__Group_1__0
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:598:1: ( rule__LogicalNotExpression__Group_1__0 )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:598:2: rule__LogicalNotExpression__Group_1__0
                     {
-                    pushFollow(FOLLOW_rule__LogicalNotExpression__Group_1__0_in_rule__LogicalNotExpression__Alternatives1970);
+                    pushFollow(FOLLOW_rule__LogicalNotExpression__Group_1__0_in_rule__LogicalNotExpression__Alternatives1186);
                     rule__LogicalNotExpression__Group_1__0();
                     _fsp--;
 
@@ -2653,37 +1535,37 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__NumericalUnaryExpression__Alternatives
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:969:1: rule__NumericalUnaryExpression__Alternatives : ( ( rulePrimaryExpression ) | ( ( rule__NumericalUnaryExpression__Group_1__0 ) ) );
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:607:1: rule__NumericalUnaryExpression__Alternatives : ( ( rulePrimaryExpression ) | ( ( rule__NumericalUnaryExpression__Group_1__0 ) ) );
     public final void rule__NumericalUnaryExpression__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:973:1: ( ( rulePrimaryExpression ) | ( ( rule__NumericalUnaryExpression__Group_1__0 ) ) )
-            int alt7=2;
-            int LA7_0 = input.LA(1);
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:611:1: ( ( rulePrimaryExpression ) | ( ( rule__NumericalUnaryExpression__Group_1__0 ) ) )
+            int alt3=2;
+            int LA3_0 = input.LA(1);
 
-            if ( ((LA7_0>=RULE_BOOL && LA7_0<=RULE_ID)||LA7_0==42) ) {
-                alt7=1;
+            if ( ((LA3_0>=RULE_BOOL && LA3_0<=RULE_ID)||LA3_0==32) ) {
+                alt3=1;
             }
-            else if ( ((LA7_0>=14 && LA7_0<=15)||LA7_0==19) ) {
-                alt7=2;
+            else if ( ((LA3_0>=13 && LA3_0<=14)||LA3_0==18) ) {
+                alt3=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("969:1: rule__NumericalUnaryExpression__Alternatives : ( ( rulePrimaryExpression ) | ( ( rule__NumericalUnaryExpression__Group_1__0 ) ) );", 7, 0, input);
+                    new NoViableAltException("607:1: rule__NumericalUnaryExpression__Alternatives : ( ( rulePrimaryExpression ) | ( ( rule__NumericalUnaryExpression__Group_1__0 ) ) );", 3, 0, input);
 
                 throw nvae;
             }
-            switch (alt7) {
+            switch (alt3) {
                 case 1 :
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:974:1: ( rulePrimaryExpression )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:612:1: ( rulePrimaryExpression )
                     {
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:974:1: ( rulePrimaryExpression )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:975:1: rulePrimaryExpression
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:612:1: ( rulePrimaryExpression )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:613:1: rulePrimaryExpression
                     {
                      before(grammarAccess.getNumericalUnaryExpressionAccess().getPrimaryExpressionParserRuleCall_0()); 
-                    pushFollow(FOLLOW_rulePrimaryExpression_in_rule__NumericalUnaryExpression__Alternatives2003);
+                    pushFollow(FOLLOW_rulePrimaryExpression_in_rule__NumericalUnaryExpression__Alternatives1219);
                     rulePrimaryExpression();
                     _fsp--;
 
@@ -2695,16 +1577,16 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
                     }
                     break;
                 case 2 :
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:980:6: ( ( rule__NumericalUnaryExpression__Group_1__0 ) )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:618:6: ( ( rule__NumericalUnaryExpression__Group_1__0 ) )
                     {
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:980:6: ( ( rule__NumericalUnaryExpression__Group_1__0 ) )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:981:1: ( rule__NumericalUnaryExpression__Group_1__0 )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:618:6: ( ( rule__NumericalUnaryExpression__Group_1__0 ) )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:619:1: ( rule__NumericalUnaryExpression__Group_1__0 )
                     {
                      before(grammarAccess.getNumericalUnaryExpressionAccess().getGroup_1()); 
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:982:1: ( rule__NumericalUnaryExpression__Group_1__0 )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:982:2: rule__NumericalUnaryExpression__Group_1__0
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:620:1: ( rule__NumericalUnaryExpression__Group_1__0 )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:620:2: rule__NumericalUnaryExpression__Group_1__0
                     {
-                    pushFollow(FOLLOW_rule__NumericalUnaryExpression__Group_1__0_in_rule__NumericalUnaryExpression__Alternatives2020);
+                    pushFollow(FOLLOW_rule__NumericalUnaryExpression__Group_1__0_in_rule__NumericalUnaryExpression__Alternatives1236);
                     rule__NumericalUnaryExpression__Group_1__0();
                     _fsp--;
 
@@ -2736,37 +1618,37 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__PrimaryExpression__Alternatives
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:991:1: rule__PrimaryExpression__Alternatives : ( ( ruleValueExpression ) | ( ( rule__PrimaryExpression__Group_1__0 ) ) );
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:629:1: rule__PrimaryExpression__Alternatives : ( ( ruleValueExpression ) | ( ( rule__PrimaryExpression__Group_1__0 ) ) );
     public final void rule__PrimaryExpression__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:995:1: ( ( ruleValueExpression ) | ( ( rule__PrimaryExpression__Group_1__0 ) ) )
-            int alt8=2;
-            int LA8_0 = input.LA(1);
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:633:1: ( ( ruleValueExpression ) | ( ( rule__PrimaryExpression__Group_1__0 ) ) )
+            int alt4=2;
+            int LA4_0 = input.LA(1);
 
-            if ( ((LA8_0>=RULE_BOOL && LA8_0<=RULE_ID)) ) {
-                alt8=1;
+            if ( ((LA4_0>=RULE_BOOL && LA4_0<=RULE_ID)) ) {
+                alt4=1;
             }
-            else if ( (LA8_0==42) ) {
-                alt8=2;
+            else if ( (LA4_0==32) ) {
+                alt4=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("991:1: rule__PrimaryExpression__Alternatives : ( ( ruleValueExpression ) | ( ( rule__PrimaryExpression__Group_1__0 ) ) );", 8, 0, input);
+                    new NoViableAltException("629:1: rule__PrimaryExpression__Alternatives : ( ( ruleValueExpression ) | ( ( rule__PrimaryExpression__Group_1__0 ) ) );", 4, 0, input);
 
                 throw nvae;
             }
-            switch (alt8) {
+            switch (alt4) {
                 case 1 :
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:996:1: ( ruleValueExpression )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:634:1: ( ruleValueExpression )
                     {
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:996:1: ( ruleValueExpression )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:997:1: ruleValueExpression
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:634:1: ( ruleValueExpression )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:635:1: ruleValueExpression
                     {
                      before(grammarAccess.getPrimaryExpressionAccess().getValueExpressionParserRuleCall_0()); 
-                    pushFollow(FOLLOW_ruleValueExpression_in_rule__PrimaryExpression__Alternatives2053);
+                    pushFollow(FOLLOW_ruleValueExpression_in_rule__PrimaryExpression__Alternatives1269);
                     ruleValueExpression();
                     _fsp--;
 
@@ -2778,16 +1660,16 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
                     }
                     break;
                 case 2 :
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1002:6: ( ( rule__PrimaryExpression__Group_1__0 ) )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:640:6: ( ( rule__PrimaryExpression__Group_1__0 ) )
                     {
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1002:6: ( ( rule__PrimaryExpression__Group_1__0 ) )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1003:1: ( rule__PrimaryExpression__Group_1__0 )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:640:6: ( ( rule__PrimaryExpression__Group_1__0 ) )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:641:1: ( rule__PrimaryExpression__Group_1__0 )
                     {
                      before(grammarAccess.getPrimaryExpressionAccess().getGroup_1()); 
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1004:1: ( rule__PrimaryExpression__Group_1__0 )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1004:2: rule__PrimaryExpression__Group_1__0
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:642:1: ( rule__PrimaryExpression__Group_1__0 )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:642:2: rule__PrimaryExpression__Group_1__0
                     {
-                    pushFollow(FOLLOW_rule__PrimaryExpression__Group_1__0_in_rule__PrimaryExpression__Alternatives2070);
+                    pushFollow(FOLLOW_rule__PrimaryExpression__Group_1__0_in_rule__PrimaryExpression__Alternatives1286);
                     rule__PrimaryExpression__Group_1__0();
                     _fsp--;
 
@@ -2819,37 +1701,37 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__ValueExpression__Alternatives
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1013:1: rule__ValueExpression__Alternatives : ( ( rulePrimitiveValueExpression ) | ( ruleVariableReferenceExpression ) );
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:651:1: rule__ValueExpression__Alternatives : ( ( rulePrimitiveValueExpression ) | ( ruleVariableReferenceExpression ) );
     public final void rule__ValueExpression__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1017:1: ( ( rulePrimitiveValueExpression ) | ( ruleVariableReferenceExpression ) )
-            int alt9=2;
-            int LA9_0 = input.LA(1);
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:655:1: ( ( rulePrimitiveValueExpression ) | ( ruleVariableReferenceExpression ) )
+            int alt5=2;
+            int LA5_0 = input.LA(1);
 
-            if ( ((LA9_0>=RULE_BOOL && LA9_0<=RULE_FLOAT)) ) {
-                alt9=1;
+            if ( ((LA5_0>=RULE_BOOL && LA5_0<=RULE_FLOAT)) ) {
+                alt5=1;
             }
-            else if ( (LA9_0==RULE_ID) ) {
-                alt9=2;
+            else if ( (LA5_0==RULE_ID) ) {
+                alt5=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("1013:1: rule__ValueExpression__Alternatives : ( ( rulePrimitiveValueExpression ) | ( ruleVariableReferenceExpression ) );", 9, 0, input);
+                    new NoViableAltException("651:1: rule__ValueExpression__Alternatives : ( ( rulePrimitiveValueExpression ) | ( ruleVariableReferenceExpression ) );", 5, 0, input);
 
                 throw nvae;
             }
-            switch (alt9) {
+            switch (alt5) {
                 case 1 :
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1018:1: ( rulePrimitiveValueExpression )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:656:1: ( rulePrimitiveValueExpression )
                     {
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1018:1: ( rulePrimitiveValueExpression )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1019:1: rulePrimitiveValueExpression
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:656:1: ( rulePrimitiveValueExpression )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:657:1: rulePrimitiveValueExpression
                     {
                      before(grammarAccess.getValueExpressionAccess().getPrimitiveValueExpressionParserRuleCall_0()); 
-                    pushFollow(FOLLOW_rulePrimitiveValueExpression_in_rule__ValueExpression__Alternatives2103);
+                    pushFollow(FOLLOW_rulePrimitiveValueExpression_in_rule__ValueExpression__Alternatives1319);
                     rulePrimitiveValueExpression();
                     _fsp--;
 
@@ -2861,13 +1743,13 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
                     }
                     break;
                 case 2 :
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1024:6: ( ruleVariableReferenceExpression )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:662:6: ( ruleVariableReferenceExpression )
                     {
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1024:6: ( ruleVariableReferenceExpression )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1025:1: ruleVariableReferenceExpression
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:662:6: ( ruleVariableReferenceExpression )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:663:1: ruleVariableReferenceExpression
                     {
                      before(grammarAccess.getValueExpressionAccess().getVariableReferenceExpressionParserRuleCall_1()); 
-                    pushFollow(FOLLOW_ruleVariableReferenceExpression_in_rule__ValueExpression__Alternatives2120);
+                    pushFollow(FOLLOW_ruleVariableReferenceExpression_in_rule__ValueExpression__Alternatives1336);
                     ruleVariableReferenceExpression();
                     _fsp--;
 
@@ -2896,51 +1778,51 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Literal__Alternatives
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1035:1: rule__Literal__Alternatives : ( ( RULE_BOOL ) | ( RULE_INT ) | ( RULE_STRING ) | ( RULE_FLOAT ) );
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:673:1: rule__Literal__Alternatives : ( ( RULE_BOOL ) | ( RULE_INT ) | ( RULE_STRING ) | ( RULE_FLOAT ) );
     public final void rule__Literal__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1039:1: ( ( RULE_BOOL ) | ( RULE_INT ) | ( RULE_STRING ) | ( RULE_FLOAT ) )
-            int alt10=4;
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:677:1: ( ( RULE_BOOL ) | ( RULE_INT ) | ( RULE_STRING ) | ( RULE_FLOAT ) )
+            int alt6=4;
             switch ( input.LA(1) ) {
             case RULE_BOOL:
                 {
-                alt10=1;
+                alt6=1;
                 }
                 break;
             case RULE_INT:
                 {
-                alt10=2;
+                alt6=2;
                 }
                 break;
             case RULE_STRING:
                 {
-                alt10=3;
+                alt6=3;
                 }
                 break;
             case RULE_FLOAT:
                 {
-                alt10=4;
+                alt6=4;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("1035:1: rule__Literal__Alternatives : ( ( RULE_BOOL ) | ( RULE_INT ) | ( RULE_STRING ) | ( RULE_FLOAT ) );", 10, 0, input);
+                    new NoViableAltException("673:1: rule__Literal__Alternatives : ( ( RULE_BOOL ) | ( RULE_INT ) | ( RULE_STRING ) | ( RULE_FLOAT ) );", 6, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt10) {
+            switch (alt6) {
                 case 1 :
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1040:1: ( RULE_BOOL )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:678:1: ( RULE_BOOL )
                     {
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1040:1: ( RULE_BOOL )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1041:1: RULE_BOOL
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:678:1: ( RULE_BOOL )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:679:1: RULE_BOOL
                     {
                      before(grammarAccess.getLiteralAccess().getBOOLTerminalRuleCall_0()); 
-                    match(input,RULE_BOOL,FOLLOW_RULE_BOOL_in_rule__Literal__Alternatives2152); 
+                    match(input,RULE_BOOL,FOLLOW_RULE_BOOL_in_rule__Literal__Alternatives1368); 
                      after(grammarAccess.getLiteralAccess().getBOOLTerminalRuleCall_0()); 
 
                     }
@@ -2949,13 +1831,13 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
                     }
                     break;
                 case 2 :
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1046:6: ( RULE_INT )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:684:6: ( RULE_INT )
                     {
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1046:6: ( RULE_INT )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1047:1: RULE_INT
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:684:6: ( RULE_INT )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:685:1: RULE_INT
                     {
                      before(grammarAccess.getLiteralAccess().getINTTerminalRuleCall_1()); 
-                    match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__Literal__Alternatives2169); 
+                    match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__Literal__Alternatives1385); 
                      after(grammarAccess.getLiteralAccess().getINTTerminalRuleCall_1()); 
 
                     }
@@ -2964,13 +1846,13 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
                     }
                     break;
                 case 3 :
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1052:6: ( RULE_STRING )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:690:6: ( RULE_STRING )
                     {
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1052:6: ( RULE_STRING )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1053:1: RULE_STRING
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:690:6: ( RULE_STRING )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:691:1: RULE_STRING
                     {
                      before(grammarAccess.getLiteralAccess().getSTRINGTerminalRuleCall_2()); 
-                    match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__Literal__Alternatives2186); 
+                    match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__Literal__Alternatives1402); 
                      after(grammarAccess.getLiteralAccess().getSTRINGTerminalRuleCall_2()); 
 
                     }
@@ -2979,13 +1861,13 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
                     }
                     break;
                 case 4 :
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1058:6: ( RULE_FLOAT )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:696:6: ( RULE_FLOAT )
                     {
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1058:6: ( RULE_FLOAT )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1059:1: RULE_FLOAT
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:696:6: ( RULE_FLOAT )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:697:1: RULE_FLOAT
                     {
                      before(grammarAccess.getLiteralAccess().getFLOATTerminalRuleCall_3()); 
-                    match(input,RULE_FLOAT,FOLLOW_RULE_FLOAT_in_rule__Literal__Alternatives2203); 
+                    match(input,RULE_FLOAT,FOLLOW_RULE_FLOAT_in_rule__Literal__Alternatives1419); 
                      after(grammarAccess.getLiteralAccess().getFLOATTerminalRuleCall_3()); 
 
                     }
@@ -3011,40 +1893,40 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__AdditiveOperator__Alternatives
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1069:1: rule__AdditiveOperator__Alternatives : ( ( ( '+' ) ) | ( ( '-' ) ) );
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:707:1: rule__AdditiveOperator__Alternatives : ( ( ( '+' ) ) | ( ( '-' ) ) );
     public final void rule__AdditiveOperator__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1073:1: ( ( ( '+' ) ) | ( ( '-' ) ) )
-            int alt11=2;
-            int LA11_0 = input.LA(1);
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:711:1: ( ( ( '+' ) ) | ( ( '-' ) ) )
+            int alt7=2;
+            int LA7_0 = input.LA(1);
 
-            if ( (LA11_0==14) ) {
-                alt11=1;
+            if ( (LA7_0==13) ) {
+                alt7=1;
             }
-            else if ( (LA11_0==15) ) {
-                alt11=2;
+            else if ( (LA7_0==14) ) {
+                alt7=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("1069:1: rule__AdditiveOperator__Alternatives : ( ( ( '+' ) ) | ( ( '-' ) ) );", 11, 0, input);
+                    new NoViableAltException("707:1: rule__AdditiveOperator__Alternatives : ( ( ( '+' ) ) | ( ( '-' ) ) );", 7, 0, input);
 
                 throw nvae;
             }
-            switch (alt11) {
+            switch (alt7) {
                 case 1 :
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1074:1: ( ( '+' ) )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:712:1: ( ( '+' ) )
                     {
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1074:1: ( ( '+' ) )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1075:1: ( '+' )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:712:1: ( ( '+' ) )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:713:1: ( '+' )
                     {
                      before(grammarAccess.getAdditiveOperatorAccess().getPlusEnumLiteralDeclaration_0()); 
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1076:1: ( '+' )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1076:3: '+'
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:714:1: ( '+' )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:714:3: '+'
                     {
-                    match(input,14,FOLLOW_14_in_rule__AdditiveOperator__Alternatives2236); 
+                    match(input,13,FOLLOW_13_in_rule__AdditiveOperator__Alternatives1452); 
 
                     }
 
@@ -3056,16 +1938,16 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
                     }
                     break;
                 case 2 :
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1081:6: ( ( '-' ) )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:719:6: ( ( '-' ) )
                     {
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1081:6: ( ( '-' ) )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1082:1: ( '-' )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:719:6: ( ( '-' ) )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:720:1: ( '-' )
                     {
                      before(grammarAccess.getAdditiveOperatorAccess().getMinusEnumLiteralDeclaration_1()); 
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1083:1: ( '-' )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1083:3: '-'
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:721:1: ( '-' )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:721:3: '-'
                     {
-                    match(input,15,FOLLOW_15_in_rule__AdditiveOperator__Alternatives2257); 
+                    match(input,14,FOLLOW_14_in_rule__AdditiveOperator__Alternatives1473); 
 
                     }
 
@@ -3094,49 +1976,49 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__MultiplicativeOperator__Alternatives
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1093:1: rule__MultiplicativeOperator__Alternatives : ( ( ( '*' ) ) | ( ( '/' ) ) | ( ( '%' ) ) );
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:731:1: rule__MultiplicativeOperator__Alternatives : ( ( ( '*' ) ) | ( ( '/' ) ) | ( ( '%' ) ) );
     public final void rule__MultiplicativeOperator__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1097:1: ( ( ( '*' ) ) | ( ( '/' ) ) | ( ( '%' ) ) )
-            int alt12=3;
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:735:1: ( ( ( '*' ) ) | ( ( '/' ) ) | ( ( '%' ) ) )
+            int alt8=3;
             switch ( input.LA(1) ) {
+            case 15:
+                {
+                alt8=1;
+                }
+                break;
             case 16:
                 {
-                alt12=1;
+                alt8=2;
                 }
                 break;
             case 17:
                 {
-                alt12=2;
-                }
-                break;
-            case 18:
-                {
-                alt12=3;
+                alt8=3;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("1093:1: rule__MultiplicativeOperator__Alternatives : ( ( ( '*' ) ) | ( ( '/' ) ) | ( ( '%' ) ) );", 12, 0, input);
+                    new NoViableAltException("731:1: rule__MultiplicativeOperator__Alternatives : ( ( ( '*' ) ) | ( ( '/' ) ) | ( ( '%' ) ) );", 8, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt12) {
+            switch (alt8) {
                 case 1 :
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1098:1: ( ( '*' ) )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:736:1: ( ( '*' ) )
                     {
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1098:1: ( ( '*' ) )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1099:1: ( '*' )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:736:1: ( ( '*' ) )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:737:1: ( '*' )
                     {
                      before(grammarAccess.getMultiplicativeOperatorAccess().getMulEnumLiteralDeclaration_0()); 
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1100:1: ( '*' )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1100:3: '*'
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:738:1: ( '*' )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:738:3: '*'
                     {
-                    match(input,16,FOLLOW_16_in_rule__MultiplicativeOperator__Alternatives2293); 
+                    match(input,15,FOLLOW_15_in_rule__MultiplicativeOperator__Alternatives1509); 
 
                     }
 
@@ -3148,16 +2030,16 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
                     }
                     break;
                 case 2 :
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1105:6: ( ( '/' ) )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:743:6: ( ( '/' ) )
                     {
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1105:6: ( ( '/' ) )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1106:1: ( '/' )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:743:6: ( ( '/' ) )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:744:1: ( '/' )
                     {
                      before(grammarAccess.getMultiplicativeOperatorAccess().getDivEnumLiteralDeclaration_1()); 
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1107:1: ( '/' )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1107:3: '/'
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:745:1: ( '/' )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:745:3: '/'
                     {
-                    match(input,17,FOLLOW_17_in_rule__MultiplicativeOperator__Alternatives2314); 
+                    match(input,16,FOLLOW_16_in_rule__MultiplicativeOperator__Alternatives1530); 
 
                     }
 
@@ -3169,16 +2051,16 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
                     }
                     break;
                 case 3 :
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1112:6: ( ( '%' ) )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:750:6: ( ( '%' ) )
                     {
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1112:6: ( ( '%' ) )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1113:1: ( '%' )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:750:6: ( ( '%' ) )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:751:1: ( '%' )
                     {
                      before(grammarAccess.getMultiplicativeOperatorAccess().getModEnumLiteralDeclaration_2()); 
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1114:1: ( '%' )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1114:3: '%'
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:752:1: ( '%' )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:752:3: '%'
                     {
-                    match(input,18,FOLLOW_18_in_rule__MultiplicativeOperator__Alternatives2335); 
+                    match(input,17,FOLLOW_17_in_rule__MultiplicativeOperator__Alternatives1551); 
 
                     }
 
@@ -3207,49 +2089,49 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__UnaryOperator__Alternatives
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1124:1: rule__UnaryOperator__Alternatives : ( ( ( '+' ) ) | ( ( '-' ) ) | ( ( '~' ) ) );
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:762:1: rule__UnaryOperator__Alternatives : ( ( ( '+' ) ) | ( ( '-' ) ) | ( ( '~' ) ) );
     public final void rule__UnaryOperator__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1128:1: ( ( ( '+' ) ) | ( ( '-' ) ) | ( ( '~' ) ) )
-            int alt13=3;
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:766:1: ( ( ( '+' ) ) | ( ( '-' ) ) | ( ( '~' ) ) )
+            int alt9=3;
             switch ( input.LA(1) ) {
+            case 13:
+                {
+                alt9=1;
+                }
+                break;
             case 14:
                 {
-                alt13=1;
+                alt9=2;
                 }
                 break;
-            case 15:
+            case 18:
                 {
-                alt13=2;
-                }
-                break;
-            case 19:
-                {
-                alt13=3;
+                alt9=3;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("1124:1: rule__UnaryOperator__Alternatives : ( ( ( '+' ) ) | ( ( '-' ) ) | ( ( '~' ) ) );", 13, 0, input);
+                    new NoViableAltException("762:1: rule__UnaryOperator__Alternatives : ( ( ( '+' ) ) | ( ( '-' ) ) | ( ( '~' ) ) );", 9, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt13) {
+            switch (alt9) {
                 case 1 :
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1129:1: ( ( '+' ) )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:767:1: ( ( '+' ) )
                     {
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1129:1: ( ( '+' ) )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1130:1: ( '+' )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:767:1: ( ( '+' ) )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:768:1: ( '+' )
                     {
                      before(grammarAccess.getUnaryOperatorAccess().getPositiveEnumLiteralDeclaration_0()); 
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1131:1: ( '+' )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1131:3: '+'
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:769:1: ( '+' )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:769:3: '+'
                     {
-                    match(input,14,FOLLOW_14_in_rule__UnaryOperator__Alternatives2371); 
+                    match(input,13,FOLLOW_13_in_rule__UnaryOperator__Alternatives1587); 
 
                     }
 
@@ -3261,16 +2143,16 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
                     }
                     break;
                 case 2 :
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1136:6: ( ( '-' ) )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:774:6: ( ( '-' ) )
                     {
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1136:6: ( ( '-' ) )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1137:1: ( '-' )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:774:6: ( ( '-' ) )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:775:1: ( '-' )
                     {
                      before(grammarAccess.getUnaryOperatorAccess().getNegativeEnumLiteralDeclaration_1()); 
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1138:1: ( '-' )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1138:3: '-'
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:776:1: ( '-' )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:776:3: '-'
                     {
-                    match(input,15,FOLLOW_15_in_rule__UnaryOperator__Alternatives2392); 
+                    match(input,14,FOLLOW_14_in_rule__UnaryOperator__Alternatives1608); 
 
                     }
 
@@ -3282,16 +2164,16 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
                     }
                     break;
                 case 3 :
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1143:6: ( ( '~' ) )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:781:6: ( ( '~' ) )
                     {
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1143:6: ( ( '~' ) )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1144:1: ( '~' )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:781:6: ( ( '~' ) )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:782:1: ( '~' )
                     {
                      before(grammarAccess.getUnaryOperatorAccess().getComplementEnumLiteralDeclaration_2()); 
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1145:1: ( '~' )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1145:3: '~'
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:783:1: ( '~' )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:783:3: '~'
                     {
-                    match(input,19,FOLLOW_19_in_rule__UnaryOperator__Alternatives2413); 
+                    match(input,18,FOLLOW_18_in_rule__UnaryOperator__Alternatives1629); 
 
                     }
 
@@ -3320,64 +2202,64 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__RelationalOperator__Alternatives
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1155:1: rule__RelationalOperator__Alternatives : ( ( ( '<' ) ) | ( ( '<=' ) ) | ( ( '>' ) ) | ( ( '>=' ) ) | ( ( '==' ) ) | ( ( '!=' ) ) );
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:793:1: rule__RelationalOperator__Alternatives : ( ( ( '<' ) ) | ( ( '<=' ) ) | ( ( '>' ) ) | ( ( '>=' ) ) | ( ( '==' ) ) | ( ( '!=' ) ) );
     public final void rule__RelationalOperator__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1159:1: ( ( ( '<' ) ) | ( ( '<=' ) ) | ( ( '>' ) ) | ( ( '>=' ) ) | ( ( '==' ) ) | ( ( '!=' ) ) )
-            int alt14=6;
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:797:1: ( ( ( '<' ) ) | ( ( '<=' ) ) | ( ( '>' ) ) | ( ( '>=' ) ) | ( ( '==' ) ) | ( ( '!=' ) ) )
+            int alt10=6;
             switch ( input.LA(1) ) {
+            case 19:
+                {
+                alt10=1;
+                }
+                break;
             case 20:
                 {
-                alt14=1;
+                alt10=2;
                 }
                 break;
             case 21:
                 {
-                alt14=2;
+                alt10=3;
                 }
                 break;
             case 22:
                 {
-                alt14=3;
+                alt10=4;
                 }
                 break;
             case 23:
                 {
-                alt14=4;
+                alt10=5;
                 }
                 break;
             case 24:
                 {
-                alt14=5;
-                }
-                break;
-            case 25:
-                {
-                alt14=6;
+                alt10=6;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("1155:1: rule__RelationalOperator__Alternatives : ( ( ( '<' ) ) | ( ( '<=' ) ) | ( ( '>' ) ) | ( ( '>=' ) ) | ( ( '==' ) ) | ( ( '!=' ) ) );", 14, 0, input);
+                    new NoViableAltException("793:1: rule__RelationalOperator__Alternatives : ( ( ( '<' ) ) | ( ( '<=' ) ) | ( ( '>' ) ) | ( ( '>=' ) ) | ( ( '==' ) ) | ( ( '!=' ) ) );", 10, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt14) {
+            switch (alt10) {
                 case 1 :
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1160:1: ( ( '<' ) )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:798:1: ( ( '<' ) )
                     {
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1160:1: ( ( '<' ) )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1161:1: ( '<' )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:798:1: ( ( '<' ) )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:799:1: ( '<' )
                     {
                      before(grammarAccess.getRelationalOperatorAccess().getSmallerEnumLiteralDeclaration_0()); 
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1162:1: ( '<' )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1162:3: '<'
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:800:1: ( '<' )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:800:3: '<'
                     {
-                    match(input,20,FOLLOW_20_in_rule__RelationalOperator__Alternatives2449); 
+                    match(input,19,FOLLOW_19_in_rule__RelationalOperator__Alternatives1665); 
 
                     }
 
@@ -3389,16 +2271,16 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
                     }
                     break;
                 case 2 :
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1167:6: ( ( '<=' ) )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:805:6: ( ( '<=' ) )
                     {
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1167:6: ( ( '<=' ) )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1168:1: ( '<=' )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:805:6: ( ( '<=' ) )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:806:1: ( '<=' )
                     {
                      before(grammarAccess.getRelationalOperatorAccess().getSmallerEqualEnumLiteralDeclaration_1()); 
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1169:1: ( '<=' )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1169:3: '<='
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:807:1: ( '<=' )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:807:3: '<='
                     {
-                    match(input,21,FOLLOW_21_in_rule__RelationalOperator__Alternatives2470); 
+                    match(input,20,FOLLOW_20_in_rule__RelationalOperator__Alternatives1686); 
 
                     }
 
@@ -3410,16 +2292,16 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
                     }
                     break;
                 case 3 :
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1174:6: ( ( '>' ) )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:812:6: ( ( '>' ) )
                     {
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1174:6: ( ( '>' ) )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1175:1: ( '>' )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:812:6: ( ( '>' ) )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:813:1: ( '>' )
                     {
                      before(grammarAccess.getRelationalOperatorAccess().getGreaterEnumLiteralDeclaration_2()); 
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1176:1: ( '>' )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1176:3: '>'
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:814:1: ( '>' )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:814:3: '>'
                     {
-                    match(input,22,FOLLOW_22_in_rule__RelationalOperator__Alternatives2491); 
+                    match(input,21,FOLLOW_21_in_rule__RelationalOperator__Alternatives1707); 
 
                     }
 
@@ -3431,16 +2313,16 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
                     }
                     break;
                 case 4 :
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1181:6: ( ( '>=' ) )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:819:6: ( ( '>=' ) )
                     {
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1181:6: ( ( '>=' ) )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1182:1: ( '>=' )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:819:6: ( ( '>=' ) )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:820:1: ( '>=' )
                     {
                      before(grammarAccess.getRelationalOperatorAccess().getGreaterEqualEnumLiteralDeclaration_3()); 
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1183:1: ( '>=' )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1183:3: '>='
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:821:1: ( '>=' )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:821:3: '>='
                     {
-                    match(input,23,FOLLOW_23_in_rule__RelationalOperator__Alternatives2512); 
+                    match(input,22,FOLLOW_22_in_rule__RelationalOperator__Alternatives1728); 
 
                     }
 
@@ -3452,16 +2334,16 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
                     }
                     break;
                 case 5 :
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1188:6: ( ( '==' ) )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:826:6: ( ( '==' ) )
                     {
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1188:6: ( ( '==' ) )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1189:1: ( '==' )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:826:6: ( ( '==' ) )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:827:1: ( '==' )
                     {
                      before(grammarAccess.getRelationalOperatorAccess().getEqualsEnumLiteralDeclaration_4()); 
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1190:1: ( '==' )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1190:3: '=='
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:828:1: ( '==' )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:828:3: '=='
                     {
-                    match(input,24,FOLLOW_24_in_rule__RelationalOperator__Alternatives2533); 
+                    match(input,23,FOLLOW_23_in_rule__RelationalOperator__Alternatives1749); 
 
                     }
 
@@ -3473,16 +2355,16 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
                     }
                     break;
                 case 6 :
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1195:6: ( ( '!=' ) )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:833:6: ( ( '!=' ) )
                     {
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1195:6: ( ( '!=' ) )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1196:1: ( '!=' )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:833:6: ( ( '!=' ) )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:834:1: ( '!=' )
                     {
                      before(grammarAccess.getRelationalOperatorAccess().getNotEqualsEnumLiteralDeclaration_5()); 
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1197:1: ( '!=' )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1197:3: '!='
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:835:1: ( '!=' )
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:835:3: '!='
                     {
-                    match(input,25,FOLLOW_25_in_rule__RelationalOperator__Alternatives2554); 
+                    match(input,24,FOLLOW_24_in_rule__RelationalOperator__Alternatives1770); 
 
                     }
 
@@ -3510,331 +2392,22 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
     // $ANTLR end rule__RelationalOperator__Alternatives
 
 
-    // $ANTLR start rule__DirectionKind__Alternatives
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1207:1: rule__DirectionKind__Alternatives : ( ( ( 'in' ) ) | ( ( 'out' ) ) );
-    public final void rule__DirectionKind__Alternatives() throws RecognitionException {
+    // $ANTLR start rule__CustomTransitionExpression__Group__0
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:850:1: rule__CustomTransitionExpression__Group__0 : rule__CustomTransitionExpression__Group__0__Impl rule__CustomTransitionExpression__Group__1 ;
+    public final void rule__CustomTransitionExpression__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1211:1: ( ( ( 'in' ) ) | ( ( 'out' ) ) )
-            int alt15=2;
-            int LA15_0 = input.LA(1);
-
-            if ( (LA15_0==26) ) {
-                alt15=1;
-            }
-            else if ( (LA15_0==27) ) {
-                alt15=2;
-            }
-            else {
-                NoViableAltException nvae =
-                    new NoViableAltException("1207:1: rule__DirectionKind__Alternatives : ( ( ( 'in' ) ) | ( ( 'out' ) ) );", 15, 0, input);
-
-                throw nvae;
-            }
-            switch (alt15) {
-                case 1 :
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1212:1: ( ( 'in' ) )
-                    {
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1212:1: ( ( 'in' ) )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1213:1: ( 'in' )
-                    {
-                     before(grammarAccess.getDirectionKindAccess().getIncomingEnumLiteralDeclaration_0()); 
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1214:1: ( 'in' )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1214:3: 'in'
-                    {
-                    match(input,26,FOLLOW_26_in_rule__DirectionKind__Alternatives2590); 
-
-                    }
-
-                     after(grammarAccess.getDirectionKindAccess().getIncomingEnumLiteralDeclaration_0()); 
-
-                    }
-
-
-                    }
-                    break;
-                case 2 :
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1219:6: ( ( 'out' ) )
-                    {
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1219:6: ( ( 'out' ) )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1220:1: ( 'out' )
-                    {
-                     before(grammarAccess.getDirectionKindAccess().getOutgoingEnumLiteralDeclaration_1()); 
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1221:1: ( 'out' )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1221:3: 'out'
-                    {
-                    match(input,27,FOLLOW_27_in_rule__DirectionKind__Alternatives2611); 
-
-                    }
-
-                     after(grammarAccess.getDirectionKindAccess().getOutgoingEnumLiteralDeclaration_1()); 
-
-                    }
-
-
-                    }
-                    break;
-
-            }
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__DirectionKind__Alternatives
-
-
-    // $ANTLR start rule__TimeUnit__Alternatives
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1231:1: rule__TimeUnit__Alternatives : ( ( ( 's' ) ) | ( ( 'ms' ) ) | ( ( 'ns' ) ) );
-    public final void rule__TimeUnit__Alternatives() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1235:1: ( ( ( 's' ) ) | ( ( 'ms' ) ) | ( ( 'ns' ) ) )
-            int alt16=3;
-            switch ( input.LA(1) ) {
-            case 28:
-                {
-                alt16=1;
-                }
-                break;
-            case 29:
-                {
-                alt16=2;
-                }
-                break;
-            case 30:
-                {
-                alt16=3;
-                }
-                break;
-            default:
-                NoViableAltException nvae =
-                    new NoViableAltException("1231:1: rule__TimeUnit__Alternatives : ( ( ( 's' ) ) | ( ( 'ms' ) ) | ( ( 'ns' ) ) );", 16, 0, input);
-
-                throw nvae;
-            }
-
-            switch (alt16) {
-                case 1 :
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1236:1: ( ( 's' ) )
-                    {
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1236:1: ( ( 's' ) )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1237:1: ( 's' )
-                    {
-                     before(grammarAccess.getTimeUnitAccess().getSecondEnumLiteralDeclaration_0()); 
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1238:1: ( 's' )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1238:3: 's'
-                    {
-                    match(input,28,FOLLOW_28_in_rule__TimeUnit__Alternatives2647); 
-
-                    }
-
-                     after(grammarAccess.getTimeUnitAccess().getSecondEnumLiteralDeclaration_0()); 
-
-                    }
-
-
-                    }
-                    break;
-                case 2 :
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1243:6: ( ( 'ms' ) )
-                    {
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1243:6: ( ( 'ms' ) )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1244:1: ( 'ms' )
-                    {
-                     before(grammarAccess.getTimeUnitAccess().getMillisecondEnumLiteralDeclaration_1()); 
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1245:1: ( 'ms' )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1245:3: 'ms'
-                    {
-                    match(input,29,FOLLOW_29_in_rule__TimeUnit__Alternatives2668); 
-
-                    }
-
-                     after(grammarAccess.getTimeUnitAccess().getMillisecondEnumLiteralDeclaration_1()); 
-
-                    }
-
-
-                    }
-                    break;
-                case 3 :
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1250:6: ( ( 'ns' ) )
-                    {
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1250:6: ( ( 'ns' ) )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1251:1: ( 'ns' )
-                    {
-                     before(grammarAccess.getTimeUnitAccess().getNanosecondEnumLiteralDeclaration_2()); 
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1252:1: ( 'ns' )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1252:3: 'ns'
-                    {
-                    match(input,30,FOLLOW_30_in_rule__TimeUnit__Alternatives2689); 
-
-                    }
-
-                     after(grammarAccess.getTimeUnitAccess().getNanosecondEnumLiteralDeclaration_2()); 
-
-                    }
-
-
-                    }
-                    break;
-
-            }
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__TimeUnit__Alternatives
-
-
-    // $ANTLR start rule__Type__Alternatives
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1262:1: rule__Type__Alternatives : ( ( ( 'int' ) ) | ( ( 'float' ) ) | ( ( 'boolean' ) ) );
-    public final void rule__Type__Alternatives() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1266:1: ( ( ( 'int' ) ) | ( ( 'float' ) ) | ( ( 'boolean' ) ) )
-            int alt17=3;
-            switch ( input.LA(1) ) {
-            case 31:
-                {
-                alt17=1;
-                }
-                break;
-            case 32:
-                {
-                alt17=2;
-                }
-                break;
-            case 33:
-                {
-                alt17=3;
-                }
-                break;
-            default:
-                NoViableAltException nvae =
-                    new NoViableAltException("1262:1: rule__Type__Alternatives : ( ( ( 'int' ) ) | ( ( 'float' ) ) | ( ( 'boolean' ) ) );", 17, 0, input);
-
-                throw nvae;
-            }
-
-            switch (alt17) {
-                case 1 :
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1267:1: ( ( 'int' ) )
-                    {
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1267:1: ( ( 'int' ) )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1268:1: ( 'int' )
-                    {
-                     before(grammarAccess.getTypeAccess().getIntEnumLiteralDeclaration_0()); 
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1269:1: ( 'int' )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1269:3: 'int'
-                    {
-                    match(input,31,FOLLOW_31_in_rule__Type__Alternatives2725); 
-
-                    }
-
-                     after(grammarAccess.getTypeAccess().getIntEnumLiteralDeclaration_0()); 
-
-                    }
-
-
-                    }
-                    break;
-                case 2 :
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1274:6: ( ( 'float' ) )
-                    {
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1274:6: ( ( 'float' ) )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1275:1: ( 'float' )
-                    {
-                     before(grammarAccess.getTypeAccess().getFloatEnumLiteralDeclaration_1()); 
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1276:1: ( 'float' )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1276:3: 'float'
-                    {
-                    match(input,32,FOLLOW_32_in_rule__Type__Alternatives2746); 
-
-                    }
-
-                     after(grammarAccess.getTypeAccess().getFloatEnumLiteralDeclaration_1()); 
-
-                    }
-
-
-                    }
-                    break;
-                case 3 :
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1281:6: ( ( 'boolean' ) )
-                    {
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1281:6: ( ( 'boolean' ) )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1282:1: ( 'boolean' )
-                    {
-                     before(grammarAccess.getTypeAccess().getBooleanEnumLiteralDeclaration_2()); 
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1283:1: ( 'boolean' )
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1283:3: 'boolean'
-                    {
-                    match(input,33,FOLLOW_33_in_rule__Type__Alternatives2767); 
-
-                    }
-
-                     after(grammarAccess.getTypeAccess().getBooleanEnumLiteralDeclaration_2()); 
-
-                    }
-
-
-                    }
-                    break;
-
-            }
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__Type__Alternatives
-
-
-    // $ANTLR start rule__TransitionDefinition__Group__0
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1295:1: rule__TransitionDefinition__Group__0 : rule__TransitionDefinition__Group__0__Impl rule__TransitionDefinition__Group__1 ;
-    public final void rule__TransitionDefinition__Group__0() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1299:1: ( rule__TransitionDefinition__Group__0__Impl rule__TransitionDefinition__Group__1 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1300:2: rule__TransitionDefinition__Group__0__Impl rule__TransitionDefinition__Group__1
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:854:1: ( rule__CustomTransitionExpression__Group__0__Impl rule__CustomTransitionExpression__Group__1 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:855:2: rule__CustomTransitionExpression__Group__0__Impl rule__CustomTransitionExpression__Group__1
             {
-            pushFollow(FOLLOW_rule__TransitionDefinition__Group__0__Impl_in_rule__TransitionDefinition__Group__02800);
-            rule__TransitionDefinition__Group__0__Impl();
+            pushFollow(FOLLOW_rule__CustomTransitionExpression__Group__0__Impl_in_rule__CustomTransitionExpression__Group__01806);
+            rule__CustomTransitionExpression__Group__0__Impl();
             _fsp--;
 
-            pushFollow(FOLLOW_rule__TransitionDefinition__Group__1_in_rule__TransitionDefinition__Group__02803);
-            rule__TransitionDefinition__Group__1();
+            pushFollow(FOLLOW_rule__CustomTransitionExpression__Group__1_in_rule__CustomTransitionExpression__Group__01809);
+            rule__CustomTransitionExpression__Group__1();
             _fsp--;
 
 
@@ -3852,34 +2425,107 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end rule__TransitionDefinition__Group__0
+    // $ANTLR end rule__CustomTransitionExpression__Group__0
 
 
-    // $ANTLR start rule__TransitionDefinition__Group__0__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1307:1: rule__TransitionDefinition__Group__0__Impl : ( ( rule__TransitionDefinition__Group_0__0 ) ) ;
-    public final void rule__TransitionDefinition__Group__0__Impl() throws RecognitionException {
+    // $ANTLR start rule__CustomTransitionExpression__Group__0__Impl
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:862:1: rule__CustomTransitionExpression__Group__0__Impl : ( () ) ;
+    public final void rule__CustomTransitionExpression__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1311:1: ( ( ( rule__TransitionDefinition__Group_0__0 ) ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1312:1: ( ( rule__TransitionDefinition__Group_0__0 ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:866:1: ( ( () ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:867:1: ( () )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1312:1: ( ( rule__TransitionDefinition__Group_0__0 ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1313:1: ( rule__TransitionDefinition__Group_0__0 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:867:1: ( () )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:868:1: ()
             {
-             before(grammarAccess.getTransitionDefinitionAccess().getGroup_0()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1314:1: ( rule__TransitionDefinition__Group_0__0 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1314:2: rule__TransitionDefinition__Group_0__0
+             before(grammarAccess.getCustomTransitionExpressionAccess().getCustomTransitionExpressionAction_0()); 
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:869:1: ()
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:871:1: 
             {
-            pushFollow(FOLLOW_rule__TransitionDefinition__Group_0__0_in_rule__TransitionDefinition__Group__0__Impl2830);
-            rule__TransitionDefinition__Group_0__0();
+            }
+
+             after(grammarAccess.getCustomTransitionExpressionAccess().getCustomTransitionExpressionAction_0()); 
+
+            }
+
+
+            }
+
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__CustomTransitionExpression__Group__0__Impl
+
+
+    // $ANTLR start rule__CustomTransitionExpression__Group__1
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:881:1: rule__CustomTransitionExpression__Group__1 : rule__CustomTransitionExpression__Group__1__Impl rule__CustomTransitionExpression__Group__2 ;
+    public final void rule__CustomTransitionExpression__Group__1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:885:1: ( rule__CustomTransitionExpression__Group__1__Impl rule__CustomTransitionExpression__Group__2 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:886:2: rule__CustomTransitionExpression__Group__1__Impl rule__CustomTransitionExpression__Group__2
+            {
+            pushFollow(FOLLOW_rule__CustomTransitionExpression__Group__1__Impl_in_rule__CustomTransitionExpression__Group__11867);
+            rule__CustomTransitionExpression__Group__1__Impl();
+            _fsp--;
+
+            pushFollow(FOLLOW_rule__CustomTransitionExpression__Group__2_in_rule__CustomTransitionExpression__Group__11870);
+            rule__CustomTransitionExpression__Group__2();
             _fsp--;
 
 
             }
 
-             after(grammarAccess.getTransitionDefinitionAccess().getGroup_0()); 
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__CustomTransitionExpression__Group__1
+
+
+    // $ANTLR start rule__CustomTransitionExpression__Group__1__Impl
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:893:1: rule__CustomTransitionExpression__Group__1__Impl : ( ( rule__CustomTransitionExpression__Group_1__0 ) ) ;
+    public final void rule__CustomTransitionExpression__Group__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:897:1: ( ( ( rule__CustomTransitionExpression__Group_1__0 ) ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:898:1: ( ( rule__CustomTransitionExpression__Group_1__0 ) )
+            {
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:898:1: ( ( rule__CustomTransitionExpression__Group_1__0 ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:899:1: ( rule__CustomTransitionExpression__Group_1__0 )
+            {
+             before(grammarAccess.getCustomTransitionExpressionAccess().getGroup_1()); 
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:900:1: ( rule__CustomTransitionExpression__Group_1__0 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:900:2: rule__CustomTransitionExpression__Group_1__0
+            {
+            pushFollow(FOLLOW_rule__CustomTransitionExpression__Group_1__0_in_rule__CustomTransitionExpression__Group__1__Impl1897);
+            rule__CustomTransitionExpression__Group_1__0();
+            _fsp--;
+
+
+            }
+
+             after(grammarAccess.getCustomTransitionExpressionAccess().getGroup_1()); 
 
             }
 
@@ -3898,21 +2544,25 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end rule__TransitionDefinition__Group__0__Impl
+    // $ANTLR end rule__CustomTransitionExpression__Group__1__Impl
 
 
-    // $ANTLR start rule__TransitionDefinition__Group__1
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1324:1: rule__TransitionDefinition__Group__1 : rule__TransitionDefinition__Group__1__Impl ;
-    public final void rule__TransitionDefinition__Group__1() throws RecognitionException {
+    // $ANTLR start rule__CustomTransitionExpression__Group__2
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:910:1: rule__CustomTransitionExpression__Group__2 : rule__CustomTransitionExpression__Group__2__Impl rule__CustomTransitionExpression__Group__3 ;
+    public final void rule__CustomTransitionExpression__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1328:1: ( rule__TransitionDefinition__Group__1__Impl )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1329:2: rule__TransitionDefinition__Group__1__Impl
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:914:1: ( rule__CustomTransitionExpression__Group__2__Impl rule__CustomTransitionExpression__Group__3 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:915:2: rule__CustomTransitionExpression__Group__2__Impl rule__CustomTransitionExpression__Group__3
             {
-            pushFollow(FOLLOW_rule__TransitionDefinition__Group__1__Impl_in_rule__TransitionDefinition__Group__12860);
-            rule__TransitionDefinition__Group__1__Impl();
+            pushFollow(FOLLOW_rule__CustomTransitionExpression__Group__2__Impl_in_rule__CustomTransitionExpression__Group__21927);
+            rule__CustomTransitionExpression__Group__2__Impl();
+            _fsp--;
+
+            pushFollow(FOLLOW_rule__CustomTransitionExpression__Group__3_in_rule__CustomTransitionExpression__Group__21930);
+            rule__CustomTransitionExpression__Group__3();
             _fsp--;
 
 
@@ -3930,36 +2580,36 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end rule__TransitionDefinition__Group__1
+    // $ANTLR end rule__CustomTransitionExpression__Group__2
 
 
-    // $ANTLR start rule__TransitionDefinition__Group__1__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1335:1: rule__TransitionDefinition__Group__1__Impl : ( ( rule__TransitionDefinition__GuardExpressionAssignment_1 )? ) ;
-    public final void rule__TransitionDefinition__Group__1__Impl() throws RecognitionException {
+    // $ANTLR start rule__CustomTransitionExpression__Group__2__Impl
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:922:1: rule__CustomTransitionExpression__Group__2__Impl : ( ( rule__CustomTransitionExpression__Group_2__0 )? ) ;
+    public final void rule__CustomTransitionExpression__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1339:1: ( ( ( rule__TransitionDefinition__GuardExpressionAssignment_1 )? ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1340:1: ( ( rule__TransitionDefinition__GuardExpressionAssignment_1 )? )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:926:1: ( ( ( rule__CustomTransitionExpression__Group_2__0 )? ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:927:1: ( ( rule__CustomTransitionExpression__Group_2__0 )? )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1340:1: ( ( rule__TransitionDefinition__GuardExpressionAssignment_1 )? )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1341:1: ( rule__TransitionDefinition__GuardExpressionAssignment_1 )?
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:927:1: ( ( rule__CustomTransitionExpression__Group_2__0 )? )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:928:1: ( rule__CustomTransitionExpression__Group_2__0 )?
             {
-             before(grammarAccess.getTransitionDefinitionAccess().getGuardExpressionAssignment_1()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1342:1: ( rule__TransitionDefinition__GuardExpressionAssignment_1 )?
-            int alt18=2;
-            int LA18_0 = input.LA(1);
+             before(grammarAccess.getCustomTransitionExpressionAccess().getGroup_2()); 
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:929:1: ( rule__CustomTransitionExpression__Group_2__0 )?
+            int alt11=2;
+            int LA11_0 = input.LA(1);
 
-            if ( ((LA18_0>=RULE_BOOL && LA18_0<=RULE_ID)||(LA18_0>=14 && LA18_0<=15)||LA18_0==19||LA18_0==42||LA18_0==44||LA18_0==47) ) {
-                alt18=1;
+            if ( (LA11_0==26) ) {
+                alt11=1;
             }
-            switch (alt18) {
+            switch (alt11) {
                 case 1 :
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1342:2: rule__TransitionDefinition__GuardExpressionAssignment_1
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:929:2: rule__CustomTransitionExpression__Group_2__0
                     {
-                    pushFollow(FOLLOW_rule__TransitionDefinition__GuardExpressionAssignment_1_in_rule__TransitionDefinition__Group__1__Impl2887);
-                    rule__TransitionDefinition__GuardExpressionAssignment_1();
+                    pushFollow(FOLLOW_rule__CustomTransitionExpression__Group_2__0_in_rule__CustomTransitionExpression__Group__2__Impl1957);
+                    rule__CustomTransitionExpression__Group_2__0();
                     _fsp--;
 
 
@@ -3968,7 +2618,7 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
             }
 
-             after(grammarAccess.getTransitionDefinitionAccess().getGuardExpressionAssignment_1()); 
+             after(grammarAccess.getCustomTransitionExpressionAccess().getGroup_2()); 
 
             }
 
@@ -3987,25 +2637,21 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end rule__TransitionDefinition__Group__1__Impl
+    // $ANTLR end rule__CustomTransitionExpression__Group__2__Impl
 
 
-    // $ANTLR start rule__TransitionDefinition__Group_0__0
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1356:1: rule__TransitionDefinition__Group_0__0 : rule__TransitionDefinition__Group_0__0__Impl rule__TransitionDefinition__Group_0__1 ;
-    public final void rule__TransitionDefinition__Group_0__0() throws RecognitionException {
+    // $ANTLR start rule__CustomTransitionExpression__Group__3
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:939:1: rule__CustomTransitionExpression__Group__3 : rule__CustomTransitionExpression__Group__3__Impl ;
+    public final void rule__CustomTransitionExpression__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1360:1: ( rule__TransitionDefinition__Group_0__0__Impl rule__TransitionDefinition__Group_0__1 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1361:2: rule__TransitionDefinition__Group_0__0__Impl rule__TransitionDefinition__Group_0__1
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:943:1: ( rule__CustomTransitionExpression__Group__3__Impl )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:944:2: rule__CustomTransitionExpression__Group__3__Impl
             {
-            pushFollow(FOLLOW_rule__TransitionDefinition__Group_0__0__Impl_in_rule__TransitionDefinition__Group_0__02922);
-            rule__TransitionDefinition__Group_0__0__Impl();
-            _fsp--;
-
-            pushFollow(FOLLOW_rule__TransitionDefinition__Group_0__1_in_rule__TransitionDefinition__Group_0__02925);
-            rule__TransitionDefinition__Group_0__1();
+            pushFollow(FOLLOW_rule__CustomTransitionExpression__Group__3__Impl_in_rule__CustomTransitionExpression__Group__31988);
+            rule__CustomTransitionExpression__Group__3__Impl();
             _fsp--;
 
 
@@ -4023,34 +2669,45 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end rule__TransitionDefinition__Group_0__0
+    // $ANTLR end rule__CustomTransitionExpression__Group__3
 
 
-    // $ANTLR start rule__TransitionDefinition__Group_0__0__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1368:1: rule__TransitionDefinition__Group_0__0__Impl : ( ( rule__TransitionDefinition__TriggersAssignment_0_0 ) ) ;
-    public final void rule__TransitionDefinition__Group_0__0__Impl() throws RecognitionException {
+    // $ANTLR start rule__CustomTransitionExpression__Group__3__Impl
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:950:1: rule__CustomTransitionExpression__Group__3__Impl : ( ( rule__CustomTransitionExpression__Group_3__0 )? ) ;
+    public final void rule__CustomTransitionExpression__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1372:1: ( ( ( rule__TransitionDefinition__TriggersAssignment_0_0 ) ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1373:1: ( ( rule__TransitionDefinition__TriggersAssignment_0_0 ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:954:1: ( ( ( rule__CustomTransitionExpression__Group_3__0 )? ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:955:1: ( ( rule__CustomTransitionExpression__Group_3__0 )? )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1373:1: ( ( rule__TransitionDefinition__TriggersAssignment_0_0 ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1374:1: ( rule__TransitionDefinition__TriggersAssignment_0_0 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:955:1: ( ( rule__CustomTransitionExpression__Group_3__0 )? )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:956:1: ( rule__CustomTransitionExpression__Group_3__0 )?
             {
-             before(grammarAccess.getTransitionDefinitionAccess().getTriggersAssignment_0_0()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1375:1: ( rule__TransitionDefinition__TriggersAssignment_0_0 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1375:2: rule__TransitionDefinition__TriggersAssignment_0_0
-            {
-            pushFollow(FOLLOW_rule__TransitionDefinition__TriggersAssignment_0_0_in_rule__TransitionDefinition__Group_0__0__Impl2952);
-            rule__TransitionDefinition__TriggersAssignment_0_0();
-            _fsp--;
+             before(grammarAccess.getCustomTransitionExpressionAccess().getGroup_3()); 
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:957:1: ( rule__CustomTransitionExpression__Group_3__0 )?
+            int alt12=2;
+            int LA12_0 = input.LA(1);
 
+            if ( (LA12_0==16) ) {
+                alt12=1;
+            }
+            switch (alt12) {
+                case 1 :
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:957:2: rule__CustomTransitionExpression__Group_3__0
+                    {
+                    pushFollow(FOLLOW_rule__CustomTransitionExpression__Group_3__0_in_rule__CustomTransitionExpression__Group__3__Impl2015);
+                    rule__CustomTransitionExpression__Group_3__0();
+                    _fsp--;
+
+
+                    }
+                    break;
 
             }
 
-             after(grammarAccess.getTransitionDefinitionAccess().getTriggersAssignment_0_0()); 
+             after(grammarAccess.getCustomTransitionExpressionAccess().getGroup_3()); 
 
             }
 
@@ -4069,21 +2726,25 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end rule__TransitionDefinition__Group_0__0__Impl
+    // $ANTLR end rule__CustomTransitionExpression__Group__3__Impl
 
 
-    // $ANTLR start rule__TransitionDefinition__Group_0__1
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1385:1: rule__TransitionDefinition__Group_0__1 : rule__TransitionDefinition__Group_0__1__Impl ;
-    public final void rule__TransitionDefinition__Group_0__1() throws RecognitionException {
+    // $ANTLR start rule__CustomTransitionExpression__Group_1__0
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:975:1: rule__CustomTransitionExpression__Group_1__0 : rule__CustomTransitionExpression__Group_1__0__Impl rule__CustomTransitionExpression__Group_1__1 ;
+    public final void rule__CustomTransitionExpression__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1389:1: ( rule__TransitionDefinition__Group_0__1__Impl )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1390:2: rule__TransitionDefinition__Group_0__1__Impl
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:979:1: ( rule__CustomTransitionExpression__Group_1__0__Impl rule__CustomTransitionExpression__Group_1__1 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:980:2: rule__CustomTransitionExpression__Group_1__0__Impl rule__CustomTransitionExpression__Group_1__1
             {
-            pushFollow(FOLLOW_rule__TransitionDefinition__Group_0__1__Impl_in_rule__TransitionDefinition__Group_0__12982);
-            rule__TransitionDefinition__Group_0__1__Impl();
+            pushFollow(FOLLOW_rule__CustomTransitionExpression__Group_1__0__Impl_in_rule__CustomTransitionExpression__Group_1__02054);
+            rule__CustomTransitionExpression__Group_1__0__Impl();
+            _fsp--;
+
+            pushFollow(FOLLOW_rule__CustomTransitionExpression__Group_1__1_in_rule__CustomTransitionExpression__Group_1__02057);
+            rule__CustomTransitionExpression__Group_1__1();
             _fsp--;
 
 
@@ -4101,40 +2762,118 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end rule__TransitionDefinition__Group_0__1
+    // $ANTLR end rule__CustomTransitionExpression__Group_1__0
 
 
-    // $ANTLR start rule__TransitionDefinition__Group_0__1__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1396:1: rule__TransitionDefinition__Group_0__1__Impl : ( ( rule__TransitionDefinition__Group_0_1__0 )* ) ;
-    public final void rule__TransitionDefinition__Group_0__1__Impl() throws RecognitionException {
+    // $ANTLR start rule__CustomTransitionExpression__Group_1__0__Impl
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:987:1: rule__CustomTransitionExpression__Group_1__0__Impl : ( ( rule__CustomTransitionExpression__TriggersAssignment_1_0 ) ) ;
+    public final void rule__CustomTransitionExpression__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1400:1: ( ( ( rule__TransitionDefinition__Group_0_1__0 )* ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1401:1: ( ( rule__TransitionDefinition__Group_0_1__0 )* )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:991:1: ( ( ( rule__CustomTransitionExpression__TriggersAssignment_1_0 ) ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:992:1: ( ( rule__CustomTransitionExpression__TriggersAssignment_1_0 ) )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1401:1: ( ( rule__TransitionDefinition__Group_0_1__0 )* )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1402:1: ( rule__TransitionDefinition__Group_0_1__0 )*
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:992:1: ( ( rule__CustomTransitionExpression__TriggersAssignment_1_0 ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:993:1: ( rule__CustomTransitionExpression__TriggersAssignment_1_0 )
             {
-             before(grammarAccess.getTransitionDefinitionAccess().getGroup_0_1()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1403:1: ( rule__TransitionDefinition__Group_0_1__0 )*
-            loop19:
+             before(grammarAccess.getCustomTransitionExpressionAccess().getTriggersAssignment_1_0()); 
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:994:1: ( rule__CustomTransitionExpression__TriggersAssignment_1_0 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:994:2: rule__CustomTransitionExpression__TriggersAssignment_1_0
+            {
+            pushFollow(FOLLOW_rule__CustomTransitionExpression__TriggersAssignment_1_0_in_rule__CustomTransitionExpression__Group_1__0__Impl2084);
+            rule__CustomTransitionExpression__TriggersAssignment_1_0();
+            _fsp--;
+
+
+            }
+
+             after(grammarAccess.getCustomTransitionExpressionAccess().getTriggersAssignment_1_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__CustomTransitionExpression__Group_1__0__Impl
+
+
+    // $ANTLR start rule__CustomTransitionExpression__Group_1__1
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1004:1: rule__CustomTransitionExpression__Group_1__1 : rule__CustomTransitionExpression__Group_1__1__Impl ;
+    public final void rule__CustomTransitionExpression__Group_1__1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1008:1: ( rule__CustomTransitionExpression__Group_1__1__Impl )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1009:2: rule__CustomTransitionExpression__Group_1__1__Impl
+            {
+            pushFollow(FOLLOW_rule__CustomTransitionExpression__Group_1__1__Impl_in_rule__CustomTransitionExpression__Group_1__12114);
+            rule__CustomTransitionExpression__Group_1__1__Impl();
+            _fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__CustomTransitionExpression__Group_1__1
+
+
+    // $ANTLR start rule__CustomTransitionExpression__Group_1__1__Impl
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1015:1: rule__CustomTransitionExpression__Group_1__1__Impl : ( ( rule__CustomTransitionExpression__Group_1_1__0 )* ) ;
+    public final void rule__CustomTransitionExpression__Group_1__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1019:1: ( ( ( rule__CustomTransitionExpression__Group_1_1__0 )* ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1020:1: ( ( rule__CustomTransitionExpression__Group_1_1__0 )* )
+            {
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1020:1: ( ( rule__CustomTransitionExpression__Group_1_1__0 )* )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1021:1: ( rule__CustomTransitionExpression__Group_1_1__0 )*
+            {
+             before(grammarAccess.getCustomTransitionExpressionAccess().getGroup_1_1()); 
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1022:1: ( rule__CustomTransitionExpression__Group_1_1__0 )*
+            loop13:
             do {
-                int alt19=2;
-                int LA19_0 = input.LA(1);
+                int alt13=2;
+                int LA13_0 = input.LA(1);
 
-                if ( (LA19_0==34) ) {
-                    alt19=1;
+                if ( (LA13_0==25) ) {
+                    alt13=1;
                 }
 
 
-                switch (alt19) {
+                switch (alt13) {
             	case 1 :
-            	    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1403:2: rule__TransitionDefinition__Group_0_1__0
+            	    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1022:2: rule__CustomTransitionExpression__Group_1_1__0
             	    {
-            	    pushFollow(FOLLOW_rule__TransitionDefinition__Group_0_1__0_in_rule__TransitionDefinition__Group_0__1__Impl3009);
-            	    rule__TransitionDefinition__Group_0_1__0();
+            	    pushFollow(FOLLOW_rule__CustomTransitionExpression__Group_1_1__0_in_rule__CustomTransitionExpression__Group_1__1__Impl2141);
+            	    rule__CustomTransitionExpression__Group_1_1__0();
             	    _fsp--;
 
 
@@ -4142,11 +2881,11 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
             	    break;
 
             	default :
-            	    break loop19;
+            	    break loop13;
                 }
             } while (true);
 
-             after(grammarAccess.getTransitionDefinitionAccess().getGroup_0_1()); 
+             after(grammarAccess.getCustomTransitionExpressionAccess().getGroup_1_1()); 
 
             }
 
@@ -4165,25 +2904,25 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end rule__TransitionDefinition__Group_0__1__Impl
+    // $ANTLR end rule__CustomTransitionExpression__Group_1__1__Impl
 
 
-    // $ANTLR start rule__TransitionDefinition__Group_0_1__0
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1417:1: rule__TransitionDefinition__Group_0_1__0 : rule__TransitionDefinition__Group_0_1__0__Impl rule__TransitionDefinition__Group_0_1__1 ;
-    public final void rule__TransitionDefinition__Group_0_1__0() throws RecognitionException {
+    // $ANTLR start rule__CustomTransitionExpression__Group_1_1__0
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1036:1: rule__CustomTransitionExpression__Group_1_1__0 : rule__CustomTransitionExpression__Group_1_1__0__Impl rule__CustomTransitionExpression__Group_1_1__1 ;
+    public final void rule__CustomTransitionExpression__Group_1_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1421:1: ( rule__TransitionDefinition__Group_0_1__0__Impl rule__TransitionDefinition__Group_0_1__1 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1422:2: rule__TransitionDefinition__Group_0_1__0__Impl rule__TransitionDefinition__Group_0_1__1
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1040:1: ( rule__CustomTransitionExpression__Group_1_1__0__Impl rule__CustomTransitionExpression__Group_1_1__1 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1041:2: rule__CustomTransitionExpression__Group_1_1__0__Impl rule__CustomTransitionExpression__Group_1_1__1
             {
-            pushFollow(FOLLOW_rule__TransitionDefinition__Group_0_1__0__Impl_in_rule__TransitionDefinition__Group_0_1__03044);
-            rule__TransitionDefinition__Group_0_1__0__Impl();
+            pushFollow(FOLLOW_rule__CustomTransitionExpression__Group_1_1__0__Impl_in_rule__CustomTransitionExpression__Group_1_1__02176);
+            rule__CustomTransitionExpression__Group_1_1__0__Impl();
             _fsp--;
 
-            pushFollow(FOLLOW_rule__TransitionDefinition__Group_0_1__1_in_rule__TransitionDefinition__Group_0_1__03047);
-            rule__TransitionDefinition__Group_0_1__1();
+            pushFollow(FOLLOW_rule__CustomTransitionExpression__Group_1_1__1_in_rule__CustomTransitionExpression__Group_1_1__02179);
+            rule__CustomTransitionExpression__Group_1_1__1();
             _fsp--;
 
 
@@ -4201,25 +2940,25 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end rule__TransitionDefinition__Group_0_1__0
+    // $ANTLR end rule__CustomTransitionExpression__Group_1_1__0
 
 
-    // $ANTLR start rule__TransitionDefinition__Group_0_1__0__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1429:1: rule__TransitionDefinition__Group_0_1__0__Impl : ( ',' ) ;
-    public final void rule__TransitionDefinition__Group_0_1__0__Impl() throws RecognitionException {
+    // $ANTLR start rule__CustomTransitionExpression__Group_1_1__0__Impl
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1048:1: rule__CustomTransitionExpression__Group_1_1__0__Impl : ( ',' ) ;
+    public final void rule__CustomTransitionExpression__Group_1_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1433:1: ( ( ',' ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1434:1: ( ',' )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1052:1: ( ( ',' ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1053:1: ( ',' )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1434:1: ( ',' )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1435:1: ','
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1053:1: ( ',' )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1054:1: ','
             {
-             before(grammarAccess.getTransitionDefinitionAccess().getCommaKeyword_0_1_0()); 
-            match(input,34,FOLLOW_34_in_rule__TransitionDefinition__Group_0_1__0__Impl3075); 
-             after(grammarAccess.getTransitionDefinitionAccess().getCommaKeyword_0_1_0()); 
+             before(grammarAccess.getCustomTransitionExpressionAccess().getCommaKeyword_1_1_0()); 
+            match(input,25,FOLLOW_25_in_rule__CustomTransitionExpression__Group_1_1__0__Impl2207); 
+             after(grammarAccess.getCustomTransitionExpressionAccess().getCommaKeyword_1_1_0()); 
 
             }
 
@@ -4238,21 +2977,21 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end rule__TransitionDefinition__Group_0_1__0__Impl
+    // $ANTLR end rule__CustomTransitionExpression__Group_1_1__0__Impl
 
 
-    // $ANTLR start rule__TransitionDefinition__Group_0_1__1
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1448:1: rule__TransitionDefinition__Group_0_1__1 : rule__TransitionDefinition__Group_0_1__1__Impl ;
-    public final void rule__TransitionDefinition__Group_0_1__1() throws RecognitionException {
+    // $ANTLR start rule__CustomTransitionExpression__Group_1_1__1
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1067:1: rule__CustomTransitionExpression__Group_1_1__1 : rule__CustomTransitionExpression__Group_1_1__1__Impl ;
+    public final void rule__CustomTransitionExpression__Group_1_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1452:1: ( rule__TransitionDefinition__Group_0_1__1__Impl )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1453:2: rule__TransitionDefinition__Group_0_1__1__Impl
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1071:1: ( rule__CustomTransitionExpression__Group_1_1__1__Impl )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1072:2: rule__CustomTransitionExpression__Group_1_1__1__Impl
             {
-            pushFollow(FOLLOW_rule__TransitionDefinition__Group_0_1__1__Impl_in_rule__TransitionDefinition__Group_0_1__13106);
-            rule__TransitionDefinition__Group_0_1__1__Impl();
+            pushFollow(FOLLOW_rule__CustomTransitionExpression__Group_1_1__1__Impl_in_rule__CustomTransitionExpression__Group_1_1__12238);
+            rule__CustomTransitionExpression__Group_1_1__1__Impl();
             _fsp--;
 
 
@@ -4270,34 +3009,34 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end rule__TransitionDefinition__Group_0_1__1
+    // $ANTLR end rule__CustomTransitionExpression__Group_1_1__1
 
 
-    // $ANTLR start rule__TransitionDefinition__Group_0_1__1__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1459:1: rule__TransitionDefinition__Group_0_1__1__Impl : ( ( rule__TransitionDefinition__TriggersAssignment_0_1_1 ) ) ;
-    public final void rule__TransitionDefinition__Group_0_1__1__Impl() throws RecognitionException {
+    // $ANTLR start rule__CustomTransitionExpression__Group_1_1__1__Impl
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1078:1: rule__CustomTransitionExpression__Group_1_1__1__Impl : ( ( rule__CustomTransitionExpression__TriggersAssignment_1_1_1 ) ) ;
+    public final void rule__CustomTransitionExpression__Group_1_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1463:1: ( ( ( rule__TransitionDefinition__TriggersAssignment_0_1_1 ) ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1464:1: ( ( rule__TransitionDefinition__TriggersAssignment_0_1_1 ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1082:1: ( ( ( rule__CustomTransitionExpression__TriggersAssignment_1_1_1 ) ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1083:1: ( ( rule__CustomTransitionExpression__TriggersAssignment_1_1_1 ) )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1464:1: ( ( rule__TransitionDefinition__TriggersAssignment_0_1_1 ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1465:1: ( rule__TransitionDefinition__TriggersAssignment_0_1_1 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1083:1: ( ( rule__CustomTransitionExpression__TriggersAssignment_1_1_1 ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1084:1: ( rule__CustomTransitionExpression__TriggersAssignment_1_1_1 )
             {
-             before(grammarAccess.getTransitionDefinitionAccess().getTriggersAssignment_0_1_1()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1466:1: ( rule__TransitionDefinition__TriggersAssignment_0_1_1 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1466:2: rule__TransitionDefinition__TriggersAssignment_0_1_1
+             before(grammarAccess.getCustomTransitionExpressionAccess().getTriggersAssignment_1_1_1()); 
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1085:1: ( rule__CustomTransitionExpression__TriggersAssignment_1_1_1 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1085:2: rule__CustomTransitionExpression__TriggersAssignment_1_1_1
             {
-            pushFollow(FOLLOW_rule__TransitionDefinition__TriggersAssignment_0_1_1_in_rule__TransitionDefinition__Group_0_1__1__Impl3133);
-            rule__TransitionDefinition__TriggersAssignment_0_1_1();
+            pushFollow(FOLLOW_rule__CustomTransitionExpression__TriggersAssignment_1_1_1_in_rule__CustomTransitionExpression__Group_1_1__1__Impl2265);
+            rule__CustomTransitionExpression__TriggersAssignment_1_1_1();
             _fsp--;
 
 
             }
 
-             after(grammarAccess.getTransitionDefinitionAccess().getTriggersAssignment_0_1_1()); 
+             after(grammarAccess.getCustomTransitionExpressionAccess().getTriggersAssignment_1_1_1()); 
 
             }
 
@@ -4316,25 +3055,25 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end rule__TransitionDefinition__Group_0_1__1__Impl
+    // $ANTLR end rule__CustomTransitionExpression__Group_1_1__1__Impl
 
 
-    // $ANTLR start rule__VariableDefinition__Group__0
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1480:1: rule__VariableDefinition__Group__0 : rule__VariableDefinition__Group__0__Impl rule__VariableDefinition__Group__1 ;
-    public final void rule__VariableDefinition__Group__0() throws RecognitionException {
+    // $ANTLR start rule__CustomTransitionExpression__Group_2__0
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1099:1: rule__CustomTransitionExpression__Group_2__0 : rule__CustomTransitionExpression__Group_2__0__Impl rule__CustomTransitionExpression__Group_2__1 ;
+    public final void rule__CustomTransitionExpression__Group_2__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1484:1: ( rule__VariableDefinition__Group__0__Impl rule__VariableDefinition__Group__1 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1485:2: rule__VariableDefinition__Group__0__Impl rule__VariableDefinition__Group__1
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1103:1: ( rule__CustomTransitionExpression__Group_2__0__Impl rule__CustomTransitionExpression__Group_2__1 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1104:2: rule__CustomTransitionExpression__Group_2__0__Impl rule__CustomTransitionExpression__Group_2__1
             {
-            pushFollow(FOLLOW_rule__VariableDefinition__Group__0__Impl_in_rule__VariableDefinition__Group__03167);
-            rule__VariableDefinition__Group__0__Impl();
+            pushFollow(FOLLOW_rule__CustomTransitionExpression__Group_2__0__Impl_in_rule__CustomTransitionExpression__Group_2__02299);
+            rule__CustomTransitionExpression__Group_2__0__Impl();
             _fsp--;
 
-            pushFollow(FOLLOW_rule__VariableDefinition__Group__1_in_rule__VariableDefinition__Group__03170);
-            rule__VariableDefinition__Group__1();
+            pushFollow(FOLLOW_rule__CustomTransitionExpression__Group_2__1_in_rule__CustomTransitionExpression__Group_2__02302);
+            rule__CustomTransitionExpression__Group_2__1();
             _fsp--;
 
 
@@ -4352,25 +3091,25 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end rule__VariableDefinition__Group__0
+    // $ANTLR end rule__CustomTransitionExpression__Group_2__0
 
 
-    // $ANTLR start rule__VariableDefinition__Group__0__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1492:1: rule__VariableDefinition__Group__0__Impl : ( 'var' ) ;
-    public final void rule__VariableDefinition__Group__0__Impl() throws RecognitionException {
+    // $ANTLR start rule__CustomTransitionExpression__Group_2__0__Impl
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1111:1: rule__CustomTransitionExpression__Group_2__0__Impl : ( '[' ) ;
+    public final void rule__CustomTransitionExpression__Group_2__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1496:1: ( ( 'var' ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1497:1: ( 'var' )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1115:1: ( ( '[' ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1116:1: ( '[' )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1497:1: ( 'var' )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1498:1: 'var'
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1116:1: ( '[' )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1117:1: '['
             {
-             before(grammarAccess.getVariableDefinitionAccess().getVarKeyword_0()); 
-            match(input,35,FOLLOW_35_in_rule__VariableDefinition__Group__0__Impl3198); 
-             after(grammarAccess.getVariableDefinitionAccess().getVarKeyword_0()); 
+             before(grammarAccess.getCustomTransitionExpressionAccess().getLeftSquareBracketKeyword_2_0()); 
+            match(input,26,FOLLOW_26_in_rule__CustomTransitionExpression__Group_2__0__Impl2330); 
+             after(grammarAccess.getCustomTransitionExpressionAccess().getLeftSquareBracketKeyword_2_0()); 
 
             }
 
@@ -4389,25 +3128,25 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end rule__VariableDefinition__Group__0__Impl
+    // $ANTLR end rule__CustomTransitionExpression__Group_2__0__Impl
 
 
-    // $ANTLR start rule__VariableDefinition__Group__1
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1511:1: rule__VariableDefinition__Group__1 : rule__VariableDefinition__Group__1__Impl rule__VariableDefinition__Group__2 ;
-    public final void rule__VariableDefinition__Group__1() throws RecognitionException {
+    // $ANTLR start rule__CustomTransitionExpression__Group_2__1
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1130:1: rule__CustomTransitionExpression__Group_2__1 : rule__CustomTransitionExpression__Group_2__1__Impl rule__CustomTransitionExpression__Group_2__2 ;
+    public final void rule__CustomTransitionExpression__Group_2__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1515:1: ( rule__VariableDefinition__Group__1__Impl rule__VariableDefinition__Group__2 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1516:2: rule__VariableDefinition__Group__1__Impl rule__VariableDefinition__Group__2
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1134:1: ( rule__CustomTransitionExpression__Group_2__1__Impl rule__CustomTransitionExpression__Group_2__2 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1135:2: rule__CustomTransitionExpression__Group_2__1__Impl rule__CustomTransitionExpression__Group_2__2
             {
-            pushFollow(FOLLOW_rule__VariableDefinition__Group__1__Impl_in_rule__VariableDefinition__Group__13229);
-            rule__VariableDefinition__Group__1__Impl();
+            pushFollow(FOLLOW_rule__CustomTransitionExpression__Group_2__1__Impl_in_rule__CustomTransitionExpression__Group_2__12361);
+            rule__CustomTransitionExpression__Group_2__1__Impl();
             _fsp--;
 
-            pushFollow(FOLLOW_rule__VariableDefinition__Group__2_in_rule__VariableDefinition__Group__13232);
-            rule__VariableDefinition__Group__2();
+            pushFollow(FOLLOW_rule__CustomTransitionExpression__Group_2__2_in_rule__CustomTransitionExpression__Group_2__12364);
+            rule__CustomTransitionExpression__Group_2__2();
             _fsp--;
 
 
@@ -4425,34 +3164,34 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end rule__VariableDefinition__Group__1
+    // $ANTLR end rule__CustomTransitionExpression__Group_2__1
 
 
-    // $ANTLR start rule__VariableDefinition__Group__1__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1523:1: rule__VariableDefinition__Group__1__Impl : ( ( rule__VariableDefinition__NameAssignment_1 ) ) ;
-    public final void rule__VariableDefinition__Group__1__Impl() throws RecognitionException {
+    // $ANTLR start rule__CustomTransitionExpression__Group_2__1__Impl
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1142:1: rule__CustomTransitionExpression__Group_2__1__Impl : ( ( rule__CustomTransitionExpression__GuardExpressionAssignment_2_1 ) ) ;
+    public final void rule__CustomTransitionExpression__Group_2__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1527:1: ( ( ( rule__VariableDefinition__NameAssignment_1 ) ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1528:1: ( ( rule__VariableDefinition__NameAssignment_1 ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1146:1: ( ( ( rule__CustomTransitionExpression__GuardExpressionAssignment_2_1 ) ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1147:1: ( ( rule__CustomTransitionExpression__GuardExpressionAssignment_2_1 ) )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1528:1: ( ( rule__VariableDefinition__NameAssignment_1 ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1529:1: ( rule__VariableDefinition__NameAssignment_1 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1147:1: ( ( rule__CustomTransitionExpression__GuardExpressionAssignment_2_1 ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1148:1: ( rule__CustomTransitionExpression__GuardExpressionAssignment_2_1 )
             {
-             before(grammarAccess.getVariableDefinitionAccess().getNameAssignment_1()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1530:1: ( rule__VariableDefinition__NameAssignment_1 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1530:2: rule__VariableDefinition__NameAssignment_1
+             before(grammarAccess.getCustomTransitionExpressionAccess().getGuardExpressionAssignment_2_1()); 
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1149:1: ( rule__CustomTransitionExpression__GuardExpressionAssignment_2_1 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1149:2: rule__CustomTransitionExpression__GuardExpressionAssignment_2_1
             {
-            pushFollow(FOLLOW_rule__VariableDefinition__NameAssignment_1_in_rule__VariableDefinition__Group__1__Impl3259);
-            rule__VariableDefinition__NameAssignment_1();
+            pushFollow(FOLLOW_rule__CustomTransitionExpression__GuardExpressionAssignment_2_1_in_rule__CustomTransitionExpression__Group_2__1__Impl2391);
+            rule__CustomTransitionExpression__GuardExpressionAssignment_2_1();
             _fsp--;
 
 
             }
 
-             after(grammarAccess.getVariableDefinitionAccess().getNameAssignment_1()); 
+             after(grammarAccess.getCustomTransitionExpressionAccess().getGuardExpressionAssignment_2_1()); 
 
             }
 
@@ -4471,25 +3210,21 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end rule__VariableDefinition__Group__1__Impl
+    // $ANTLR end rule__CustomTransitionExpression__Group_2__1__Impl
 
 
-    // $ANTLR start rule__VariableDefinition__Group__2
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1540:1: rule__VariableDefinition__Group__2 : rule__VariableDefinition__Group__2__Impl rule__VariableDefinition__Group__3 ;
-    public final void rule__VariableDefinition__Group__2() throws RecognitionException {
+    // $ANTLR start rule__CustomTransitionExpression__Group_2__2
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1159:1: rule__CustomTransitionExpression__Group_2__2 : rule__CustomTransitionExpression__Group_2__2__Impl ;
+    public final void rule__CustomTransitionExpression__Group_2__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1544:1: ( rule__VariableDefinition__Group__2__Impl rule__VariableDefinition__Group__3 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1545:2: rule__VariableDefinition__Group__2__Impl rule__VariableDefinition__Group__3
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1163:1: ( rule__CustomTransitionExpression__Group_2__2__Impl )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1164:2: rule__CustomTransitionExpression__Group_2__2__Impl
             {
-            pushFollow(FOLLOW_rule__VariableDefinition__Group__2__Impl_in_rule__VariableDefinition__Group__23289);
-            rule__VariableDefinition__Group__2__Impl();
-            _fsp--;
-
-            pushFollow(FOLLOW_rule__VariableDefinition__Group__3_in_rule__VariableDefinition__Group__23292);
-            rule__VariableDefinition__Group__3();
+            pushFollow(FOLLOW_rule__CustomTransitionExpression__Group_2__2__Impl_in_rule__CustomTransitionExpression__Group_2__22421);
+            rule__CustomTransitionExpression__Group_2__2__Impl();
             _fsp--;
 
 
@@ -4507,25 +3242,25 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end rule__VariableDefinition__Group__2
+    // $ANTLR end rule__CustomTransitionExpression__Group_2__2
 
 
-    // $ANTLR start rule__VariableDefinition__Group__2__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1552:1: rule__VariableDefinition__Group__2__Impl : ( ':' ) ;
-    public final void rule__VariableDefinition__Group__2__Impl() throws RecognitionException {
+    // $ANTLR start rule__CustomTransitionExpression__Group_2__2__Impl
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1170:1: rule__CustomTransitionExpression__Group_2__2__Impl : ( ']' ) ;
+    public final void rule__CustomTransitionExpression__Group_2__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1556:1: ( ( ':' ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1557:1: ( ':' )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1174:1: ( ( ']' ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1175:1: ( ']' )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1557:1: ( ':' )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1558:1: ':'
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1175:1: ( ']' )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1176:1: ']'
             {
-             before(grammarAccess.getVariableDefinitionAccess().getColonKeyword_2()); 
-            match(input,36,FOLLOW_36_in_rule__VariableDefinition__Group__2__Impl3320); 
-             after(grammarAccess.getVariableDefinitionAccess().getColonKeyword_2()); 
+             before(grammarAccess.getCustomTransitionExpressionAccess().getRightSquareBracketKeyword_2_2()); 
+            match(input,27,FOLLOW_27_in_rule__CustomTransitionExpression__Group_2__2__Impl2449); 
+             after(grammarAccess.getCustomTransitionExpressionAccess().getRightSquareBracketKeyword_2_2()); 
 
             }
 
@@ -4544,21 +3279,25 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end rule__VariableDefinition__Group__2__Impl
+    // $ANTLR end rule__CustomTransitionExpression__Group_2__2__Impl
 
 
-    // $ANTLR start rule__VariableDefinition__Group__3
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1571:1: rule__VariableDefinition__Group__3 : rule__VariableDefinition__Group__3__Impl ;
-    public final void rule__VariableDefinition__Group__3() throws RecognitionException {
+    // $ANTLR start rule__CustomTransitionExpression__Group_3__0
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1195:1: rule__CustomTransitionExpression__Group_3__0 : rule__CustomTransitionExpression__Group_3__0__Impl rule__CustomTransitionExpression__Group_3__1 ;
+    public final void rule__CustomTransitionExpression__Group_3__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1575:1: ( rule__VariableDefinition__Group__3__Impl )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1576:2: rule__VariableDefinition__Group__3__Impl
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1199:1: ( rule__CustomTransitionExpression__Group_3__0__Impl rule__CustomTransitionExpression__Group_3__1 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1200:2: rule__CustomTransitionExpression__Group_3__0__Impl rule__CustomTransitionExpression__Group_3__1
             {
-            pushFollow(FOLLOW_rule__VariableDefinition__Group__3__Impl_in_rule__VariableDefinition__Group__33351);
-            rule__VariableDefinition__Group__3__Impl();
+            pushFollow(FOLLOW_rule__CustomTransitionExpression__Group_3__0__Impl_in_rule__CustomTransitionExpression__Group_3__02486);
+            rule__CustomTransitionExpression__Group_3__0__Impl();
+            _fsp--;
+
+            pushFollow(FOLLOW_rule__CustomTransitionExpression__Group_3__1_in_rule__CustomTransitionExpression__Group_3__02489);
+            rule__CustomTransitionExpression__Group_3__1();
             _fsp--;
 
 
@@ -4576,34 +3315,25 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end rule__VariableDefinition__Group__3
+    // $ANTLR end rule__CustomTransitionExpression__Group_3__0
 
 
-    // $ANTLR start rule__VariableDefinition__Group__3__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1582:1: rule__VariableDefinition__Group__3__Impl : ( ( rule__VariableDefinition__TypeAssignment_3 ) ) ;
-    public final void rule__VariableDefinition__Group__3__Impl() throws RecognitionException {
+    // $ANTLR start rule__CustomTransitionExpression__Group_3__0__Impl
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1207:1: rule__CustomTransitionExpression__Group_3__0__Impl : ( '/' ) ;
+    public final void rule__CustomTransitionExpression__Group_3__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1586:1: ( ( ( rule__VariableDefinition__TypeAssignment_3 ) ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1587:1: ( ( rule__VariableDefinition__TypeAssignment_3 ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1211:1: ( ( '/' ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1212:1: ( '/' )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1587:1: ( ( rule__VariableDefinition__TypeAssignment_3 ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1588:1: ( rule__VariableDefinition__TypeAssignment_3 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1212:1: ( '/' )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1213:1: '/'
             {
-             before(grammarAccess.getVariableDefinitionAccess().getTypeAssignment_3()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1589:1: ( rule__VariableDefinition__TypeAssignment_3 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1589:2: rule__VariableDefinition__TypeAssignment_3
-            {
-            pushFollow(FOLLOW_rule__VariableDefinition__TypeAssignment_3_in_rule__VariableDefinition__Group__3__Impl3378);
-            rule__VariableDefinition__TypeAssignment_3();
-            _fsp--;
-
-
-            }
-
-             after(grammarAccess.getVariableDefinitionAccess().getTypeAssignment_3()); 
+             before(grammarAccess.getCustomTransitionExpressionAccess().getSolidusKeyword_3_0()); 
+            match(input,16,FOLLOW_16_in_rule__CustomTransitionExpression__Group_3__0__Impl2517); 
+             after(grammarAccess.getCustomTransitionExpressionAccess().getSolidusKeyword_3_0()); 
 
             }
 
@@ -4622,25 +3352,21 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end rule__VariableDefinition__Group__3__Impl
+    // $ANTLR end rule__CustomTransitionExpression__Group_3__0__Impl
 
 
-    // $ANTLR start rule__ActionDefinition__Group__0
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1607:1: rule__ActionDefinition__Group__0 : rule__ActionDefinition__Group__0__Impl rule__ActionDefinition__Group__1 ;
-    public final void rule__ActionDefinition__Group__0() throws RecognitionException {
+    // $ANTLR start rule__CustomTransitionExpression__Group_3__1
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1226:1: rule__CustomTransitionExpression__Group_3__1 : rule__CustomTransitionExpression__Group_3__1__Impl ;
+    public final void rule__CustomTransitionExpression__Group_3__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1611:1: ( rule__ActionDefinition__Group__0__Impl rule__ActionDefinition__Group__1 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1612:2: rule__ActionDefinition__Group__0__Impl rule__ActionDefinition__Group__1
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1230:1: ( rule__CustomTransitionExpression__Group_3__1__Impl )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1231:2: rule__CustomTransitionExpression__Group_3__1__Impl
             {
-            pushFollow(FOLLOW_rule__ActionDefinition__Group__0__Impl_in_rule__ActionDefinition__Group__03416);
-            rule__ActionDefinition__Group__0__Impl();
-            _fsp--;
-
-            pushFollow(FOLLOW_rule__ActionDefinition__Group__1_in_rule__ActionDefinition__Group__03419);
-            rule__ActionDefinition__Group__1();
+            pushFollow(FOLLOW_rule__CustomTransitionExpression__Group_3__1__Impl_in_rule__CustomTransitionExpression__Group_3__12548);
+            rule__CustomTransitionExpression__Group_3__1__Impl();
             _fsp--;
 
 
@@ -4658,34 +3384,34 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end rule__ActionDefinition__Group__0
+    // $ANTLR end rule__CustomTransitionExpression__Group_3__1
 
 
-    // $ANTLR start rule__ActionDefinition__Group__0__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1619:1: rule__ActionDefinition__Group__0__Impl : ( ( rule__ActionDefinition__Alternatives_0 ) ) ;
-    public final void rule__ActionDefinition__Group__0__Impl() throws RecognitionException {
+    // $ANTLR start rule__CustomTransitionExpression__Group_3__1__Impl
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1237:1: rule__CustomTransitionExpression__Group_3__1__Impl : ( ( rule__CustomTransitionExpression__ActionAssignment_3_1 ) ) ;
+    public final void rule__CustomTransitionExpression__Group_3__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1623:1: ( ( ( rule__ActionDefinition__Alternatives_0 ) ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1624:1: ( ( rule__ActionDefinition__Alternatives_0 ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1241:1: ( ( ( rule__CustomTransitionExpression__ActionAssignment_3_1 ) ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1242:1: ( ( rule__CustomTransitionExpression__ActionAssignment_3_1 ) )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1624:1: ( ( rule__ActionDefinition__Alternatives_0 ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1625:1: ( rule__ActionDefinition__Alternatives_0 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1242:1: ( ( rule__CustomTransitionExpression__ActionAssignment_3_1 ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1243:1: ( rule__CustomTransitionExpression__ActionAssignment_3_1 )
             {
-             before(grammarAccess.getActionDefinitionAccess().getAlternatives_0()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1626:1: ( rule__ActionDefinition__Alternatives_0 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1626:2: rule__ActionDefinition__Alternatives_0
+             before(grammarAccess.getCustomTransitionExpressionAccess().getActionAssignment_3_1()); 
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1244:1: ( rule__CustomTransitionExpression__ActionAssignment_3_1 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1244:2: rule__CustomTransitionExpression__ActionAssignment_3_1
             {
-            pushFollow(FOLLOW_rule__ActionDefinition__Alternatives_0_in_rule__ActionDefinition__Group__0__Impl3446);
-            rule__ActionDefinition__Alternatives_0();
+            pushFollow(FOLLOW_rule__CustomTransitionExpression__ActionAssignment_3_1_in_rule__CustomTransitionExpression__Group_3__1__Impl2575);
+            rule__CustomTransitionExpression__ActionAssignment_3_1();
             _fsp--;
 
 
             }
 
-             after(grammarAccess.getActionDefinitionAccess().getAlternatives_0()); 
+             after(grammarAccess.getCustomTransitionExpressionAccess().getActionAssignment_3_1()); 
 
             }
 
@@ -4704,1237 +3430,24 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end rule__ActionDefinition__Group__0__Impl
-
-
-    // $ANTLR start rule__ActionDefinition__Group__1
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1636:1: rule__ActionDefinition__Group__1 : rule__ActionDefinition__Group__1__Impl rule__ActionDefinition__Group__2 ;
-    public final void rule__ActionDefinition__Group__1() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1640:1: ( rule__ActionDefinition__Group__1__Impl rule__ActionDefinition__Group__2 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1641:2: rule__ActionDefinition__Group__1__Impl rule__ActionDefinition__Group__2
-            {
-            pushFollow(FOLLOW_rule__ActionDefinition__Group__1__Impl_in_rule__ActionDefinition__Group__13476);
-            rule__ActionDefinition__Group__1__Impl();
-            _fsp--;
-
-            pushFollow(FOLLOW_rule__ActionDefinition__Group__2_in_rule__ActionDefinition__Group__13479);
-            rule__ActionDefinition__Group__2();
-            _fsp--;
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__ActionDefinition__Group__1
-
-
-    // $ANTLR start rule__ActionDefinition__Group__1__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1648:1: rule__ActionDefinition__Group__1__Impl : ( ':' ) ;
-    public final void rule__ActionDefinition__Group__1__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1652:1: ( ( ':' ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1653:1: ( ':' )
-            {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1653:1: ( ':' )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1654:1: ':'
-            {
-             before(grammarAccess.getActionDefinitionAccess().getColonKeyword_1()); 
-            match(input,36,FOLLOW_36_in_rule__ActionDefinition__Group__1__Impl3507); 
-             after(grammarAccess.getActionDefinitionAccess().getColonKeyword_1()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__ActionDefinition__Group__1__Impl
-
-
-    // $ANTLR start rule__ActionDefinition__Group__2
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1667:1: rule__ActionDefinition__Group__2 : rule__ActionDefinition__Group__2__Impl rule__ActionDefinition__Group__3 ;
-    public final void rule__ActionDefinition__Group__2() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1671:1: ( rule__ActionDefinition__Group__2__Impl rule__ActionDefinition__Group__3 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1672:2: rule__ActionDefinition__Group__2__Impl rule__ActionDefinition__Group__3
-            {
-            pushFollow(FOLLOW_rule__ActionDefinition__Group__2__Impl_in_rule__ActionDefinition__Group__23538);
-            rule__ActionDefinition__Group__2__Impl();
-            _fsp--;
-
-            pushFollow(FOLLOW_rule__ActionDefinition__Group__3_in_rule__ActionDefinition__Group__23541);
-            rule__ActionDefinition__Group__3();
-            _fsp--;
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__ActionDefinition__Group__2
-
-
-    // $ANTLR start rule__ActionDefinition__Group__2__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1679:1: rule__ActionDefinition__Group__2__Impl : ( ( rule__ActionDefinition__ExpressionAssignment_2 ) ) ;
-    public final void rule__ActionDefinition__Group__2__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1683:1: ( ( ( rule__ActionDefinition__ExpressionAssignment_2 ) ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1684:1: ( ( rule__ActionDefinition__ExpressionAssignment_2 ) )
-            {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1684:1: ( ( rule__ActionDefinition__ExpressionAssignment_2 ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1685:1: ( rule__ActionDefinition__ExpressionAssignment_2 )
-            {
-             before(grammarAccess.getActionDefinitionAccess().getExpressionAssignment_2()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1686:1: ( rule__ActionDefinition__ExpressionAssignment_2 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1686:2: rule__ActionDefinition__ExpressionAssignment_2
-            {
-            pushFollow(FOLLOW_rule__ActionDefinition__ExpressionAssignment_2_in_rule__ActionDefinition__Group__2__Impl3568);
-            rule__ActionDefinition__ExpressionAssignment_2();
-            _fsp--;
-
-
-            }
-
-             after(grammarAccess.getActionDefinitionAccess().getExpressionAssignment_2()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__ActionDefinition__Group__2__Impl
-
-
-    // $ANTLR start rule__ActionDefinition__Group__3
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1696:1: rule__ActionDefinition__Group__3 : rule__ActionDefinition__Group__3__Impl ;
-    public final void rule__ActionDefinition__Group__3() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1700:1: ( rule__ActionDefinition__Group__3__Impl )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1701:2: rule__ActionDefinition__Group__3__Impl
-            {
-            pushFollow(FOLLOW_rule__ActionDefinition__Group__3__Impl_in_rule__ActionDefinition__Group__33598);
-            rule__ActionDefinition__Group__3__Impl();
-            _fsp--;
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__ActionDefinition__Group__3
-
-
-    // $ANTLR start rule__ActionDefinition__Group__3__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1707:1: rule__ActionDefinition__Group__3__Impl : ( ';' ) ;
-    public final void rule__ActionDefinition__Group__3__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1711:1: ( ( ';' ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1712:1: ( ';' )
-            {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1712:1: ( ';' )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1713:1: ';'
-            {
-             before(grammarAccess.getActionDefinitionAccess().getSemicolonKeyword_3()); 
-            match(input,37,FOLLOW_37_in_rule__ActionDefinition__Group__3__Impl3626); 
-             after(grammarAccess.getActionDefinitionAccess().getSemicolonKeyword_3()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__ActionDefinition__Group__3__Impl
-
-
-    // $ANTLR start rule__ActionDefinition__Group_0_1__0
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1734:1: rule__ActionDefinition__Group_0_1__0 : rule__ActionDefinition__Group_0_1__0__Impl rule__ActionDefinition__Group_0_1__1 ;
-    public final void rule__ActionDefinition__Group_0_1__0() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1738:1: ( rule__ActionDefinition__Group_0_1__0__Impl rule__ActionDefinition__Group_0_1__1 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1739:2: rule__ActionDefinition__Group_0_1__0__Impl rule__ActionDefinition__Group_0_1__1
-            {
-            pushFollow(FOLLOW_rule__ActionDefinition__Group_0_1__0__Impl_in_rule__ActionDefinition__Group_0_1__03665);
-            rule__ActionDefinition__Group_0_1__0__Impl();
-            _fsp--;
-
-            pushFollow(FOLLOW_rule__ActionDefinition__Group_0_1__1_in_rule__ActionDefinition__Group_0_1__03668);
-            rule__ActionDefinition__Group_0_1__1();
-            _fsp--;
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__ActionDefinition__Group_0_1__0
-
-
-    // $ANTLR start rule__ActionDefinition__Group_0_1__0__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1746:1: rule__ActionDefinition__Group_0_1__0__Impl : ( 'exit' ) ;
-    public final void rule__ActionDefinition__Group_0_1__0__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1750:1: ( ( 'exit' ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1751:1: ( 'exit' )
-            {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1751:1: ( 'exit' )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1752:1: 'exit'
-            {
-             before(grammarAccess.getActionDefinitionAccess().getExitKeyword_0_1_0()); 
-            match(input,38,FOLLOW_38_in_rule__ActionDefinition__Group_0_1__0__Impl3696); 
-             after(grammarAccess.getActionDefinitionAccess().getExitKeyword_0_1_0()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__ActionDefinition__Group_0_1__0__Impl
-
-
-    // $ANTLR start rule__ActionDefinition__Group_0_1__1
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1765:1: rule__ActionDefinition__Group_0_1__1 : rule__ActionDefinition__Group_0_1__1__Impl ;
-    public final void rule__ActionDefinition__Group_0_1__1() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1769:1: ( rule__ActionDefinition__Group_0_1__1__Impl )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1770:2: rule__ActionDefinition__Group_0_1__1__Impl
-            {
-            pushFollow(FOLLOW_rule__ActionDefinition__Group_0_1__1__Impl_in_rule__ActionDefinition__Group_0_1__13727);
-            rule__ActionDefinition__Group_0_1__1__Impl();
-            _fsp--;
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__ActionDefinition__Group_0_1__1
-
-
-    // $ANTLR start rule__ActionDefinition__Group_0_1__1__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1776:1: rule__ActionDefinition__Group_0_1__1__Impl : ( 'do' ) ;
-    public final void rule__ActionDefinition__Group_0_1__1__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1780:1: ( ( 'do' ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1781:1: ( 'do' )
-            {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1781:1: ( 'do' )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1782:1: 'do'
-            {
-             before(grammarAccess.getActionDefinitionAccess().getDoKeyword_0_1_1()); 
-            match(input,39,FOLLOW_39_in_rule__ActionDefinition__Group_0_1__1__Impl3755); 
-             after(grammarAccess.getActionDefinitionAccess().getDoKeyword_0_1_1()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__ActionDefinition__Group_0_1__1__Impl
-
-
-    // $ANTLR start rule__SignalEventDefinition__Group__0
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1799:1: rule__SignalEventDefinition__Group__0 : rule__SignalEventDefinition__Group__0__Impl rule__SignalEventDefinition__Group__1 ;
-    public final void rule__SignalEventDefinition__Group__0() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1803:1: ( rule__SignalEventDefinition__Group__0__Impl rule__SignalEventDefinition__Group__1 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1804:2: rule__SignalEventDefinition__Group__0__Impl rule__SignalEventDefinition__Group__1
-            {
-            pushFollow(FOLLOW_rule__SignalEventDefinition__Group__0__Impl_in_rule__SignalEventDefinition__Group__03790);
-            rule__SignalEventDefinition__Group__0__Impl();
-            _fsp--;
-
-            pushFollow(FOLLOW_rule__SignalEventDefinition__Group__1_in_rule__SignalEventDefinition__Group__03793);
-            rule__SignalEventDefinition__Group__1();
-            _fsp--;
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__SignalEventDefinition__Group__0
-
-
-    // $ANTLR start rule__SignalEventDefinition__Group__0__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1811:1: rule__SignalEventDefinition__Group__0__Impl : ( 'event' ) ;
-    public final void rule__SignalEventDefinition__Group__0__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1815:1: ( ( 'event' ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1816:1: ( 'event' )
-            {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1816:1: ( 'event' )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1817:1: 'event'
-            {
-             before(grammarAccess.getSignalEventDefinitionAccess().getEventKeyword_0()); 
-            match(input,40,FOLLOW_40_in_rule__SignalEventDefinition__Group__0__Impl3821); 
-             after(grammarAccess.getSignalEventDefinitionAccess().getEventKeyword_0()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__SignalEventDefinition__Group__0__Impl
-
-
-    // $ANTLR start rule__SignalEventDefinition__Group__1
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1830:1: rule__SignalEventDefinition__Group__1 : rule__SignalEventDefinition__Group__1__Impl rule__SignalEventDefinition__Group__2 ;
-    public final void rule__SignalEventDefinition__Group__1() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1834:1: ( rule__SignalEventDefinition__Group__1__Impl rule__SignalEventDefinition__Group__2 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1835:2: rule__SignalEventDefinition__Group__1__Impl rule__SignalEventDefinition__Group__2
-            {
-            pushFollow(FOLLOW_rule__SignalEventDefinition__Group__1__Impl_in_rule__SignalEventDefinition__Group__13852);
-            rule__SignalEventDefinition__Group__1__Impl();
-            _fsp--;
-
-            pushFollow(FOLLOW_rule__SignalEventDefinition__Group__2_in_rule__SignalEventDefinition__Group__13855);
-            rule__SignalEventDefinition__Group__2();
-            _fsp--;
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__SignalEventDefinition__Group__1
-
-
-    // $ANTLR start rule__SignalEventDefinition__Group__1__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1842:1: rule__SignalEventDefinition__Group__1__Impl : ( ( rule__SignalEventDefinition__NameAssignment_1 ) ) ;
-    public final void rule__SignalEventDefinition__Group__1__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1846:1: ( ( ( rule__SignalEventDefinition__NameAssignment_1 ) ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1847:1: ( ( rule__SignalEventDefinition__NameAssignment_1 ) )
-            {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1847:1: ( ( rule__SignalEventDefinition__NameAssignment_1 ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1848:1: ( rule__SignalEventDefinition__NameAssignment_1 )
-            {
-             before(grammarAccess.getSignalEventDefinitionAccess().getNameAssignment_1()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1849:1: ( rule__SignalEventDefinition__NameAssignment_1 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1849:2: rule__SignalEventDefinition__NameAssignment_1
-            {
-            pushFollow(FOLLOW_rule__SignalEventDefinition__NameAssignment_1_in_rule__SignalEventDefinition__Group__1__Impl3882);
-            rule__SignalEventDefinition__NameAssignment_1();
-            _fsp--;
-
-
-            }
-
-             after(grammarAccess.getSignalEventDefinitionAccess().getNameAssignment_1()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__SignalEventDefinition__Group__1__Impl
-
-
-    // $ANTLR start rule__SignalEventDefinition__Group__2
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1859:1: rule__SignalEventDefinition__Group__2 : rule__SignalEventDefinition__Group__2__Impl rule__SignalEventDefinition__Group__3 ;
-    public final void rule__SignalEventDefinition__Group__2() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1863:1: ( rule__SignalEventDefinition__Group__2__Impl rule__SignalEventDefinition__Group__3 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1864:2: rule__SignalEventDefinition__Group__2__Impl rule__SignalEventDefinition__Group__3
-            {
-            pushFollow(FOLLOW_rule__SignalEventDefinition__Group__2__Impl_in_rule__SignalEventDefinition__Group__23912);
-            rule__SignalEventDefinition__Group__2__Impl();
-            _fsp--;
-
-            pushFollow(FOLLOW_rule__SignalEventDefinition__Group__3_in_rule__SignalEventDefinition__Group__23915);
-            rule__SignalEventDefinition__Group__3();
-            _fsp--;
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__SignalEventDefinition__Group__2
-
-
-    // $ANTLR start rule__SignalEventDefinition__Group__2__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1871:1: rule__SignalEventDefinition__Group__2__Impl : ( ':' ) ;
-    public final void rule__SignalEventDefinition__Group__2__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1875:1: ( ( ':' ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1876:1: ( ':' )
-            {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1876:1: ( ':' )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1877:1: ':'
-            {
-             before(grammarAccess.getSignalEventDefinitionAccess().getColonKeyword_2()); 
-            match(input,36,FOLLOW_36_in_rule__SignalEventDefinition__Group__2__Impl3943); 
-             after(grammarAccess.getSignalEventDefinitionAccess().getColonKeyword_2()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__SignalEventDefinition__Group__2__Impl
-
-
-    // $ANTLR start rule__SignalEventDefinition__Group__3
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1890:1: rule__SignalEventDefinition__Group__3 : rule__SignalEventDefinition__Group__3__Impl rule__SignalEventDefinition__Group__4 ;
-    public final void rule__SignalEventDefinition__Group__3() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1894:1: ( rule__SignalEventDefinition__Group__3__Impl rule__SignalEventDefinition__Group__4 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1895:2: rule__SignalEventDefinition__Group__3__Impl rule__SignalEventDefinition__Group__4
-            {
-            pushFollow(FOLLOW_rule__SignalEventDefinition__Group__3__Impl_in_rule__SignalEventDefinition__Group__33974);
-            rule__SignalEventDefinition__Group__3__Impl();
-            _fsp--;
-
-            pushFollow(FOLLOW_rule__SignalEventDefinition__Group__4_in_rule__SignalEventDefinition__Group__33977);
-            rule__SignalEventDefinition__Group__4();
-            _fsp--;
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__SignalEventDefinition__Group__3
-
-
-    // $ANTLR start rule__SignalEventDefinition__Group__3__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1902:1: rule__SignalEventDefinition__Group__3__Impl : ( ( rule__SignalEventDefinition__DirectionAssignment_3 ) ) ;
-    public final void rule__SignalEventDefinition__Group__3__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1906:1: ( ( ( rule__SignalEventDefinition__DirectionAssignment_3 ) ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1907:1: ( ( rule__SignalEventDefinition__DirectionAssignment_3 ) )
-            {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1907:1: ( ( rule__SignalEventDefinition__DirectionAssignment_3 ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1908:1: ( rule__SignalEventDefinition__DirectionAssignment_3 )
-            {
-             before(grammarAccess.getSignalEventDefinitionAccess().getDirectionAssignment_3()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1909:1: ( rule__SignalEventDefinition__DirectionAssignment_3 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1909:2: rule__SignalEventDefinition__DirectionAssignment_3
-            {
-            pushFollow(FOLLOW_rule__SignalEventDefinition__DirectionAssignment_3_in_rule__SignalEventDefinition__Group__3__Impl4004);
-            rule__SignalEventDefinition__DirectionAssignment_3();
-            _fsp--;
-
-
-            }
-
-             after(grammarAccess.getSignalEventDefinitionAccess().getDirectionAssignment_3()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__SignalEventDefinition__Group__3__Impl
-
-
-    // $ANTLR start rule__SignalEventDefinition__Group__4
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1919:1: rule__SignalEventDefinition__Group__4 : rule__SignalEventDefinition__Group__4__Impl ;
-    public final void rule__SignalEventDefinition__Group__4() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1923:1: ( rule__SignalEventDefinition__Group__4__Impl )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1924:2: rule__SignalEventDefinition__Group__4__Impl
-            {
-            pushFollow(FOLLOW_rule__SignalEventDefinition__Group__4__Impl_in_rule__SignalEventDefinition__Group__44034);
-            rule__SignalEventDefinition__Group__4__Impl();
-            _fsp--;
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__SignalEventDefinition__Group__4
-
-
-    // $ANTLR start rule__SignalEventDefinition__Group__4__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1930:1: rule__SignalEventDefinition__Group__4__Impl : ( ';' ) ;
-    public final void rule__SignalEventDefinition__Group__4__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1934:1: ( ( ';' ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1935:1: ( ';' )
-            {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1935:1: ( ';' )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1936:1: ';'
-            {
-             before(grammarAccess.getSignalEventDefinitionAccess().getSemicolonKeyword_4()); 
-            match(input,37,FOLLOW_37_in_rule__SignalEventDefinition__Group__4__Impl4062); 
-             after(grammarAccess.getSignalEventDefinitionAccess().getSemicolonKeyword_4()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__SignalEventDefinition__Group__4__Impl
-
-
-    // $ANTLR start rule__TimeEventDefinition__Group__0
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1959:1: rule__TimeEventDefinition__Group__0 : rule__TimeEventDefinition__Group__0__Impl rule__TimeEventDefinition__Group__1 ;
-    public final void rule__TimeEventDefinition__Group__0() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1963:1: ( rule__TimeEventDefinition__Group__0__Impl rule__TimeEventDefinition__Group__1 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1964:2: rule__TimeEventDefinition__Group__0__Impl rule__TimeEventDefinition__Group__1
-            {
-            pushFollow(FOLLOW_rule__TimeEventDefinition__Group__0__Impl_in_rule__TimeEventDefinition__Group__04103);
-            rule__TimeEventDefinition__Group__0__Impl();
-            _fsp--;
-
-            pushFollow(FOLLOW_rule__TimeEventDefinition__Group__1_in_rule__TimeEventDefinition__Group__04106);
-            rule__TimeEventDefinition__Group__1();
-            _fsp--;
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__TimeEventDefinition__Group__0
-
-
-    // $ANTLR start rule__TimeEventDefinition__Group__0__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1971:1: rule__TimeEventDefinition__Group__0__Impl : ( 'after' ) ;
-    public final void rule__TimeEventDefinition__Group__0__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1975:1: ( ( 'after' ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1976:1: ( 'after' )
-            {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1976:1: ( 'after' )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1977:1: 'after'
-            {
-             before(grammarAccess.getTimeEventDefinitionAccess().getAfterKeyword_0()); 
-            match(input,41,FOLLOW_41_in_rule__TimeEventDefinition__Group__0__Impl4134); 
-             after(grammarAccess.getTimeEventDefinitionAccess().getAfterKeyword_0()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__TimeEventDefinition__Group__0__Impl
-
-
-    // $ANTLR start rule__TimeEventDefinition__Group__1
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1990:1: rule__TimeEventDefinition__Group__1 : rule__TimeEventDefinition__Group__1__Impl rule__TimeEventDefinition__Group__2 ;
-    public final void rule__TimeEventDefinition__Group__1() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1994:1: ( rule__TimeEventDefinition__Group__1__Impl rule__TimeEventDefinition__Group__2 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1995:2: rule__TimeEventDefinition__Group__1__Impl rule__TimeEventDefinition__Group__2
-            {
-            pushFollow(FOLLOW_rule__TimeEventDefinition__Group__1__Impl_in_rule__TimeEventDefinition__Group__14165);
-            rule__TimeEventDefinition__Group__1__Impl();
-            _fsp--;
-
-            pushFollow(FOLLOW_rule__TimeEventDefinition__Group__2_in_rule__TimeEventDefinition__Group__14168);
-            rule__TimeEventDefinition__Group__2();
-            _fsp--;
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__TimeEventDefinition__Group__1
-
-
-    // $ANTLR start rule__TimeEventDefinition__Group__1__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2002:1: rule__TimeEventDefinition__Group__1__Impl : ( '(' ) ;
-    public final void rule__TimeEventDefinition__Group__1__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2006:1: ( ( '(' ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2007:1: ( '(' )
-            {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2007:1: ( '(' )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2008:1: '('
-            {
-             before(grammarAccess.getTimeEventDefinitionAccess().getLeftParenthesisKeyword_1()); 
-            match(input,42,FOLLOW_42_in_rule__TimeEventDefinition__Group__1__Impl4196); 
-             after(grammarAccess.getTimeEventDefinitionAccess().getLeftParenthesisKeyword_1()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__TimeEventDefinition__Group__1__Impl
-
-
-    // $ANTLR start rule__TimeEventDefinition__Group__2
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2021:1: rule__TimeEventDefinition__Group__2 : rule__TimeEventDefinition__Group__2__Impl rule__TimeEventDefinition__Group__3 ;
-    public final void rule__TimeEventDefinition__Group__2() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2025:1: ( rule__TimeEventDefinition__Group__2__Impl rule__TimeEventDefinition__Group__3 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2026:2: rule__TimeEventDefinition__Group__2__Impl rule__TimeEventDefinition__Group__3
-            {
-            pushFollow(FOLLOW_rule__TimeEventDefinition__Group__2__Impl_in_rule__TimeEventDefinition__Group__24227);
-            rule__TimeEventDefinition__Group__2__Impl();
-            _fsp--;
-
-            pushFollow(FOLLOW_rule__TimeEventDefinition__Group__3_in_rule__TimeEventDefinition__Group__24230);
-            rule__TimeEventDefinition__Group__3();
-            _fsp--;
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__TimeEventDefinition__Group__2
-
-
-    // $ANTLR start rule__TimeEventDefinition__Group__2__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2033:1: rule__TimeEventDefinition__Group__2__Impl : ( ( rule__TimeEventDefinition__TimeAssignment_2 ) ) ;
-    public final void rule__TimeEventDefinition__Group__2__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2037:1: ( ( ( rule__TimeEventDefinition__TimeAssignment_2 ) ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2038:1: ( ( rule__TimeEventDefinition__TimeAssignment_2 ) )
-            {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2038:1: ( ( rule__TimeEventDefinition__TimeAssignment_2 ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2039:1: ( rule__TimeEventDefinition__TimeAssignment_2 )
-            {
-             before(grammarAccess.getTimeEventDefinitionAccess().getTimeAssignment_2()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2040:1: ( rule__TimeEventDefinition__TimeAssignment_2 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2040:2: rule__TimeEventDefinition__TimeAssignment_2
-            {
-            pushFollow(FOLLOW_rule__TimeEventDefinition__TimeAssignment_2_in_rule__TimeEventDefinition__Group__2__Impl4257);
-            rule__TimeEventDefinition__TimeAssignment_2();
-            _fsp--;
-
-
-            }
-
-             after(grammarAccess.getTimeEventDefinitionAccess().getTimeAssignment_2()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__TimeEventDefinition__Group__2__Impl
-
-
-    // $ANTLR start rule__TimeEventDefinition__Group__3
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2050:1: rule__TimeEventDefinition__Group__3 : rule__TimeEventDefinition__Group__3__Impl ;
-    public final void rule__TimeEventDefinition__Group__3() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2054:1: ( rule__TimeEventDefinition__Group__3__Impl )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2055:2: rule__TimeEventDefinition__Group__3__Impl
-            {
-            pushFollow(FOLLOW_rule__TimeEventDefinition__Group__3__Impl_in_rule__TimeEventDefinition__Group__34287);
-            rule__TimeEventDefinition__Group__3__Impl();
-            _fsp--;
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__TimeEventDefinition__Group__3
-
-
-    // $ANTLR start rule__TimeEventDefinition__Group__3__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2061:1: rule__TimeEventDefinition__Group__3__Impl : ( ')' ) ;
-    public final void rule__TimeEventDefinition__Group__3__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2065:1: ( ( ')' ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2066:1: ( ')' )
-            {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2066:1: ( ')' )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2067:1: ')'
-            {
-             before(grammarAccess.getTimeEventDefinitionAccess().getRightParenthesisKeyword_3()); 
-            match(input,43,FOLLOW_43_in_rule__TimeEventDefinition__Group__3__Impl4315); 
-             after(grammarAccess.getTimeEventDefinitionAccess().getRightParenthesisKeyword_3()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__TimeEventDefinition__Group__3__Impl
-
-
-    // $ANTLR start rule__TimeConstant__Group__0
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2088:1: rule__TimeConstant__Group__0 : rule__TimeConstant__Group__0__Impl rule__TimeConstant__Group__1 ;
-    public final void rule__TimeConstant__Group__0() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2092:1: ( rule__TimeConstant__Group__0__Impl rule__TimeConstant__Group__1 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2093:2: rule__TimeConstant__Group__0__Impl rule__TimeConstant__Group__1
-            {
-            pushFollow(FOLLOW_rule__TimeConstant__Group__0__Impl_in_rule__TimeConstant__Group__04354);
-            rule__TimeConstant__Group__0__Impl();
-            _fsp--;
-
-            pushFollow(FOLLOW_rule__TimeConstant__Group__1_in_rule__TimeConstant__Group__04357);
-            rule__TimeConstant__Group__1();
-            _fsp--;
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__TimeConstant__Group__0
-
-
-    // $ANTLR start rule__TimeConstant__Group__0__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2100:1: rule__TimeConstant__Group__0__Impl : ( ( rule__TimeConstant__ValueAssignment_0 ) ) ;
-    public final void rule__TimeConstant__Group__0__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2104:1: ( ( ( rule__TimeConstant__ValueAssignment_0 ) ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2105:1: ( ( rule__TimeConstant__ValueAssignment_0 ) )
-            {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2105:1: ( ( rule__TimeConstant__ValueAssignment_0 ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2106:1: ( rule__TimeConstant__ValueAssignment_0 )
-            {
-             before(grammarAccess.getTimeConstantAccess().getValueAssignment_0()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2107:1: ( rule__TimeConstant__ValueAssignment_0 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2107:2: rule__TimeConstant__ValueAssignment_0
-            {
-            pushFollow(FOLLOW_rule__TimeConstant__ValueAssignment_0_in_rule__TimeConstant__Group__0__Impl4384);
-            rule__TimeConstant__ValueAssignment_0();
-            _fsp--;
-
-
-            }
-
-             after(grammarAccess.getTimeConstantAccess().getValueAssignment_0()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__TimeConstant__Group__0__Impl
-
-
-    // $ANTLR start rule__TimeConstant__Group__1
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2117:1: rule__TimeConstant__Group__1 : rule__TimeConstant__Group__1__Impl ;
-    public final void rule__TimeConstant__Group__1() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2121:1: ( rule__TimeConstant__Group__1__Impl )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2122:2: rule__TimeConstant__Group__1__Impl
-            {
-            pushFollow(FOLLOW_rule__TimeConstant__Group__1__Impl_in_rule__TimeConstant__Group__14414);
-            rule__TimeConstant__Group__1__Impl();
-            _fsp--;
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__TimeConstant__Group__1
-
-
-    // $ANTLR start rule__TimeConstant__Group__1__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2128:1: rule__TimeConstant__Group__1__Impl : ( ( rule__TimeConstant__UnitAssignment_1 )? ) ;
-    public final void rule__TimeConstant__Group__1__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2132:1: ( ( ( rule__TimeConstant__UnitAssignment_1 )? ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2133:1: ( ( rule__TimeConstant__UnitAssignment_1 )? )
-            {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2133:1: ( ( rule__TimeConstant__UnitAssignment_1 )? )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2134:1: ( rule__TimeConstant__UnitAssignment_1 )?
-            {
-             before(grammarAccess.getTimeConstantAccess().getUnitAssignment_1()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2135:1: ( rule__TimeConstant__UnitAssignment_1 )?
-            int alt20=2;
-            int LA20_0 = input.LA(1);
-
-            if ( ((LA20_0>=28 && LA20_0<=30)) ) {
-                alt20=1;
-            }
-            switch (alt20) {
-                case 1 :
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2135:2: rule__TimeConstant__UnitAssignment_1
-                    {
-                    pushFollow(FOLLOW_rule__TimeConstant__UnitAssignment_1_in_rule__TimeConstant__Group__1__Impl4441);
-                    rule__TimeConstant__UnitAssignment_1();
-                    _fsp--;
-
-
-                    }
-                    break;
-
-            }
-
-             after(grammarAccess.getTimeConstantAccess().getUnitAssignment_1()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__TimeConstant__Group__1__Impl
+    // $ANTLR end rule__CustomTransitionExpression__Group_3__1__Impl
 
 
     // $ANTLR start rule__RaiseEventExpression__Group__0
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2149:1: rule__RaiseEventExpression__Group__0 : rule__RaiseEventExpression__Group__0__Impl rule__RaiseEventExpression__Group__1 ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1258:1: rule__RaiseEventExpression__Group__0 : rule__RaiseEventExpression__Group__0__Impl rule__RaiseEventExpression__Group__1 ;
     public final void rule__RaiseEventExpression__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2153:1: ( rule__RaiseEventExpression__Group__0__Impl rule__RaiseEventExpression__Group__1 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2154:2: rule__RaiseEventExpression__Group__0__Impl rule__RaiseEventExpression__Group__1
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1262:1: ( rule__RaiseEventExpression__Group__0__Impl rule__RaiseEventExpression__Group__1 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1263:2: rule__RaiseEventExpression__Group__0__Impl rule__RaiseEventExpression__Group__1
             {
-            pushFollow(FOLLOW_rule__RaiseEventExpression__Group__0__Impl_in_rule__RaiseEventExpression__Group__04476);
+            pushFollow(FOLLOW_rule__RaiseEventExpression__Group__0__Impl_in_rule__RaiseEventExpression__Group__02609);
             rule__RaiseEventExpression__Group__0__Impl();
             _fsp--;
 
-            pushFollow(FOLLOW_rule__RaiseEventExpression__Group__1_in_rule__RaiseEventExpression__Group__04479);
+            pushFollow(FOLLOW_rule__RaiseEventExpression__Group__1_in_rule__RaiseEventExpression__Group__02612);
             rule__RaiseEventExpression__Group__1();
             _fsp--;
 
@@ -5957,20 +3470,20 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__RaiseEventExpression__Group__0__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2161:1: rule__RaiseEventExpression__Group__0__Impl : ( 'raise' ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1270:1: rule__RaiseEventExpression__Group__0__Impl : ( 'raise' ) ;
     public final void rule__RaiseEventExpression__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2165:1: ( ( 'raise' ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2166:1: ( 'raise' )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1274:1: ( ( 'raise' ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1275:1: ( 'raise' )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2166:1: ( 'raise' )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2167:1: 'raise'
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1275:1: ( 'raise' )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1276:1: 'raise'
             {
              before(grammarAccess.getRaiseEventExpressionAccess().getRaiseKeyword_0()); 
-            match(input,44,FOLLOW_44_in_rule__RaiseEventExpression__Group__0__Impl4507); 
+            match(input,28,FOLLOW_28_in_rule__RaiseEventExpression__Group__0__Impl2640); 
              after(grammarAccess.getRaiseEventExpressionAccess().getRaiseKeyword_0()); 
 
             }
@@ -5994,16 +3507,16 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__RaiseEventExpression__Group__1
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2180:1: rule__RaiseEventExpression__Group__1 : rule__RaiseEventExpression__Group__1__Impl ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1289:1: rule__RaiseEventExpression__Group__1 : rule__RaiseEventExpression__Group__1__Impl ;
     public final void rule__RaiseEventExpression__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2184:1: ( rule__RaiseEventExpression__Group__1__Impl )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2185:2: rule__RaiseEventExpression__Group__1__Impl
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1293:1: ( rule__RaiseEventExpression__Group__1__Impl )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1294:2: rule__RaiseEventExpression__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__RaiseEventExpression__Group__1__Impl_in_rule__RaiseEventExpression__Group__14538);
+            pushFollow(FOLLOW_rule__RaiseEventExpression__Group__1__Impl_in_rule__RaiseEventExpression__Group__12671);
             rule__RaiseEventExpression__Group__1__Impl();
             _fsp--;
 
@@ -6026,23 +3539,23 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__RaiseEventExpression__Group__1__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2191:1: rule__RaiseEventExpression__Group__1__Impl : ( ( rule__RaiseEventExpression__EventAssignment_1 ) ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1300:1: rule__RaiseEventExpression__Group__1__Impl : ( ( rule__RaiseEventExpression__EventAssignment_1 ) ) ;
     public final void rule__RaiseEventExpression__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2195:1: ( ( ( rule__RaiseEventExpression__EventAssignment_1 ) ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2196:1: ( ( rule__RaiseEventExpression__EventAssignment_1 ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1304:1: ( ( ( rule__RaiseEventExpression__EventAssignment_1 ) ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1305:1: ( ( rule__RaiseEventExpression__EventAssignment_1 ) )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2196:1: ( ( rule__RaiseEventExpression__EventAssignment_1 ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2197:1: ( rule__RaiseEventExpression__EventAssignment_1 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1305:1: ( ( rule__RaiseEventExpression__EventAssignment_1 ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1306:1: ( rule__RaiseEventExpression__EventAssignment_1 )
             {
              before(grammarAccess.getRaiseEventExpressionAccess().getEventAssignment_1()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2198:1: ( rule__RaiseEventExpression__EventAssignment_1 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2198:2: rule__RaiseEventExpression__EventAssignment_1
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1307:1: ( rule__RaiseEventExpression__EventAssignment_1 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1307:2: rule__RaiseEventExpression__EventAssignment_1
             {
-            pushFollow(FOLLOW_rule__RaiseEventExpression__EventAssignment_1_in_rule__RaiseEventExpression__Group__1__Impl4565);
+            pushFollow(FOLLOW_rule__RaiseEventExpression__EventAssignment_1_in_rule__RaiseEventExpression__Group__1__Impl2698);
             rule__RaiseEventExpression__EventAssignment_1();
             _fsp--;
 
@@ -6072,20 +3585,20 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__LogicalOrExpression__Group__0
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2212:1: rule__LogicalOrExpression__Group__0 : rule__LogicalOrExpression__Group__0__Impl rule__LogicalOrExpression__Group__1 ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1321:1: rule__LogicalOrExpression__Group__0 : rule__LogicalOrExpression__Group__0__Impl rule__LogicalOrExpression__Group__1 ;
     public final void rule__LogicalOrExpression__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2216:1: ( rule__LogicalOrExpression__Group__0__Impl rule__LogicalOrExpression__Group__1 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2217:2: rule__LogicalOrExpression__Group__0__Impl rule__LogicalOrExpression__Group__1
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1325:1: ( rule__LogicalOrExpression__Group__0__Impl rule__LogicalOrExpression__Group__1 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1326:2: rule__LogicalOrExpression__Group__0__Impl rule__LogicalOrExpression__Group__1
             {
-            pushFollow(FOLLOW_rule__LogicalOrExpression__Group__0__Impl_in_rule__LogicalOrExpression__Group__04599);
+            pushFollow(FOLLOW_rule__LogicalOrExpression__Group__0__Impl_in_rule__LogicalOrExpression__Group__02732);
             rule__LogicalOrExpression__Group__0__Impl();
             _fsp--;
 
-            pushFollow(FOLLOW_rule__LogicalOrExpression__Group__1_in_rule__LogicalOrExpression__Group__04602);
+            pushFollow(FOLLOW_rule__LogicalOrExpression__Group__1_in_rule__LogicalOrExpression__Group__02735);
             rule__LogicalOrExpression__Group__1();
             _fsp--;
 
@@ -6108,20 +3621,20 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__LogicalOrExpression__Group__0__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2224:1: rule__LogicalOrExpression__Group__0__Impl : ( ruleLogicalAndExpression ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1333:1: rule__LogicalOrExpression__Group__0__Impl : ( ruleLogicalAndExpression ) ;
     public final void rule__LogicalOrExpression__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2228:1: ( ( ruleLogicalAndExpression ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2229:1: ( ruleLogicalAndExpression )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1337:1: ( ( ruleLogicalAndExpression ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1338:1: ( ruleLogicalAndExpression )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2229:1: ( ruleLogicalAndExpression )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2230:1: ruleLogicalAndExpression
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1338:1: ( ruleLogicalAndExpression )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1339:1: ruleLogicalAndExpression
             {
              before(grammarAccess.getLogicalOrExpressionAccess().getLogicalAndExpressionParserRuleCall_0()); 
-            pushFollow(FOLLOW_ruleLogicalAndExpression_in_rule__LogicalOrExpression__Group__0__Impl4629);
+            pushFollow(FOLLOW_ruleLogicalAndExpression_in_rule__LogicalOrExpression__Group__0__Impl2762);
             ruleLogicalAndExpression();
             _fsp--;
 
@@ -6148,16 +3661,16 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__LogicalOrExpression__Group__1
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2241:1: rule__LogicalOrExpression__Group__1 : rule__LogicalOrExpression__Group__1__Impl ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1350:1: rule__LogicalOrExpression__Group__1 : rule__LogicalOrExpression__Group__1__Impl ;
     public final void rule__LogicalOrExpression__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2245:1: ( rule__LogicalOrExpression__Group__1__Impl )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2246:2: rule__LogicalOrExpression__Group__1__Impl
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1354:1: ( rule__LogicalOrExpression__Group__1__Impl )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1355:2: rule__LogicalOrExpression__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__LogicalOrExpression__Group__1__Impl_in_rule__LogicalOrExpression__Group__14658);
+            pushFollow(FOLLOW_rule__LogicalOrExpression__Group__1__Impl_in_rule__LogicalOrExpression__Group__12791);
             rule__LogicalOrExpression__Group__1__Impl();
             _fsp--;
 
@@ -6180,35 +3693,35 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__LogicalOrExpression__Group__1__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2252:1: rule__LogicalOrExpression__Group__1__Impl : ( ( rule__LogicalOrExpression__Group_1__0 )* ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1361:1: rule__LogicalOrExpression__Group__1__Impl : ( ( rule__LogicalOrExpression__Group_1__0 )* ) ;
     public final void rule__LogicalOrExpression__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2256:1: ( ( ( rule__LogicalOrExpression__Group_1__0 )* ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2257:1: ( ( rule__LogicalOrExpression__Group_1__0 )* )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1365:1: ( ( ( rule__LogicalOrExpression__Group_1__0 )* ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1366:1: ( ( rule__LogicalOrExpression__Group_1__0 )* )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2257:1: ( ( rule__LogicalOrExpression__Group_1__0 )* )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2258:1: ( rule__LogicalOrExpression__Group_1__0 )*
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1366:1: ( ( rule__LogicalOrExpression__Group_1__0 )* )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1367:1: ( rule__LogicalOrExpression__Group_1__0 )*
             {
              before(grammarAccess.getLogicalOrExpressionAccess().getGroup_1()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2259:1: ( rule__LogicalOrExpression__Group_1__0 )*
-            loop21:
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1368:1: ( rule__LogicalOrExpression__Group_1__0 )*
+            loop14:
             do {
-                int alt21=2;
-                int LA21_0 = input.LA(1);
+                int alt14=2;
+                int LA14_0 = input.LA(1);
 
-                if ( (LA21_0==45) ) {
-                    alt21=1;
+                if ( (LA14_0==29) ) {
+                    alt14=1;
                 }
 
 
-                switch (alt21) {
+                switch (alt14) {
             	case 1 :
-            	    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2259:2: rule__LogicalOrExpression__Group_1__0
+            	    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1368:2: rule__LogicalOrExpression__Group_1__0
             	    {
-            	    pushFollow(FOLLOW_rule__LogicalOrExpression__Group_1__0_in_rule__LogicalOrExpression__Group__1__Impl4685);
+            	    pushFollow(FOLLOW_rule__LogicalOrExpression__Group_1__0_in_rule__LogicalOrExpression__Group__1__Impl2818);
             	    rule__LogicalOrExpression__Group_1__0();
             	    _fsp--;
 
@@ -6217,7 +3730,7 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
             	    break;
 
             	default :
-            	    break loop21;
+            	    break loop14;
                 }
             } while (true);
 
@@ -6244,20 +3757,20 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__LogicalOrExpression__Group_1__0
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2273:1: rule__LogicalOrExpression__Group_1__0 : rule__LogicalOrExpression__Group_1__0__Impl rule__LogicalOrExpression__Group_1__1 ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1382:1: rule__LogicalOrExpression__Group_1__0 : rule__LogicalOrExpression__Group_1__0__Impl rule__LogicalOrExpression__Group_1__1 ;
     public final void rule__LogicalOrExpression__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2277:1: ( rule__LogicalOrExpression__Group_1__0__Impl rule__LogicalOrExpression__Group_1__1 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2278:2: rule__LogicalOrExpression__Group_1__0__Impl rule__LogicalOrExpression__Group_1__1
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1386:1: ( rule__LogicalOrExpression__Group_1__0__Impl rule__LogicalOrExpression__Group_1__1 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1387:2: rule__LogicalOrExpression__Group_1__0__Impl rule__LogicalOrExpression__Group_1__1
             {
-            pushFollow(FOLLOW_rule__LogicalOrExpression__Group_1__0__Impl_in_rule__LogicalOrExpression__Group_1__04720);
+            pushFollow(FOLLOW_rule__LogicalOrExpression__Group_1__0__Impl_in_rule__LogicalOrExpression__Group_1__02853);
             rule__LogicalOrExpression__Group_1__0__Impl();
             _fsp--;
 
-            pushFollow(FOLLOW_rule__LogicalOrExpression__Group_1__1_in_rule__LogicalOrExpression__Group_1__04723);
+            pushFollow(FOLLOW_rule__LogicalOrExpression__Group_1__1_in_rule__LogicalOrExpression__Group_1__02856);
             rule__LogicalOrExpression__Group_1__1();
             _fsp--;
 
@@ -6280,21 +3793,21 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__LogicalOrExpression__Group_1__0__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2285:1: rule__LogicalOrExpression__Group_1__0__Impl : ( () ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1394:1: rule__LogicalOrExpression__Group_1__0__Impl : ( () ) ;
     public final void rule__LogicalOrExpression__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2289:1: ( ( () ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2290:1: ( () )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1398:1: ( ( () ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1399:1: ( () )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2290:1: ( () )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2291:1: ()
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1399:1: ( () )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1400:1: ()
             {
              before(grammarAccess.getLogicalOrExpressionAccess().getLogicalOrExpressionLeftOperandAction_1_0()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2292:1: ()
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2294:1: 
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1401:1: ()
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1403:1: 
             {
             }
 
@@ -6317,20 +3830,20 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__LogicalOrExpression__Group_1__1
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2304:1: rule__LogicalOrExpression__Group_1__1 : rule__LogicalOrExpression__Group_1__1__Impl rule__LogicalOrExpression__Group_1__2 ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1413:1: rule__LogicalOrExpression__Group_1__1 : rule__LogicalOrExpression__Group_1__1__Impl rule__LogicalOrExpression__Group_1__2 ;
     public final void rule__LogicalOrExpression__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2308:1: ( rule__LogicalOrExpression__Group_1__1__Impl rule__LogicalOrExpression__Group_1__2 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2309:2: rule__LogicalOrExpression__Group_1__1__Impl rule__LogicalOrExpression__Group_1__2
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1417:1: ( rule__LogicalOrExpression__Group_1__1__Impl rule__LogicalOrExpression__Group_1__2 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1418:2: rule__LogicalOrExpression__Group_1__1__Impl rule__LogicalOrExpression__Group_1__2
             {
-            pushFollow(FOLLOW_rule__LogicalOrExpression__Group_1__1__Impl_in_rule__LogicalOrExpression__Group_1__14781);
+            pushFollow(FOLLOW_rule__LogicalOrExpression__Group_1__1__Impl_in_rule__LogicalOrExpression__Group_1__12914);
             rule__LogicalOrExpression__Group_1__1__Impl();
             _fsp--;
 
-            pushFollow(FOLLOW_rule__LogicalOrExpression__Group_1__2_in_rule__LogicalOrExpression__Group_1__14784);
+            pushFollow(FOLLOW_rule__LogicalOrExpression__Group_1__2_in_rule__LogicalOrExpression__Group_1__12917);
             rule__LogicalOrExpression__Group_1__2();
             _fsp--;
 
@@ -6353,20 +3866,20 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__LogicalOrExpression__Group_1__1__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2316:1: rule__LogicalOrExpression__Group_1__1__Impl : ( '||' ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1425:1: rule__LogicalOrExpression__Group_1__1__Impl : ( '||' ) ;
     public final void rule__LogicalOrExpression__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2320:1: ( ( '||' ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2321:1: ( '||' )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1429:1: ( ( '||' ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1430:1: ( '||' )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2321:1: ( '||' )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2322:1: '||'
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1430:1: ( '||' )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1431:1: '||'
             {
              before(grammarAccess.getLogicalOrExpressionAccess().getVerticalLineVerticalLineKeyword_1_1()); 
-            match(input,45,FOLLOW_45_in_rule__LogicalOrExpression__Group_1__1__Impl4812); 
+            match(input,29,FOLLOW_29_in_rule__LogicalOrExpression__Group_1__1__Impl2945); 
              after(grammarAccess.getLogicalOrExpressionAccess().getVerticalLineVerticalLineKeyword_1_1()); 
 
             }
@@ -6390,16 +3903,16 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__LogicalOrExpression__Group_1__2
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2335:1: rule__LogicalOrExpression__Group_1__2 : rule__LogicalOrExpression__Group_1__2__Impl ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1444:1: rule__LogicalOrExpression__Group_1__2 : rule__LogicalOrExpression__Group_1__2__Impl ;
     public final void rule__LogicalOrExpression__Group_1__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2339:1: ( rule__LogicalOrExpression__Group_1__2__Impl )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2340:2: rule__LogicalOrExpression__Group_1__2__Impl
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1448:1: ( rule__LogicalOrExpression__Group_1__2__Impl )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1449:2: rule__LogicalOrExpression__Group_1__2__Impl
             {
-            pushFollow(FOLLOW_rule__LogicalOrExpression__Group_1__2__Impl_in_rule__LogicalOrExpression__Group_1__24843);
+            pushFollow(FOLLOW_rule__LogicalOrExpression__Group_1__2__Impl_in_rule__LogicalOrExpression__Group_1__22976);
             rule__LogicalOrExpression__Group_1__2__Impl();
             _fsp--;
 
@@ -6422,23 +3935,23 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__LogicalOrExpression__Group_1__2__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2346:1: rule__LogicalOrExpression__Group_1__2__Impl : ( ( rule__LogicalOrExpression__RightOperandAssignment_1_2 ) ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1455:1: rule__LogicalOrExpression__Group_1__2__Impl : ( ( rule__LogicalOrExpression__RightOperandAssignment_1_2 ) ) ;
     public final void rule__LogicalOrExpression__Group_1__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2350:1: ( ( ( rule__LogicalOrExpression__RightOperandAssignment_1_2 ) ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2351:1: ( ( rule__LogicalOrExpression__RightOperandAssignment_1_2 ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1459:1: ( ( ( rule__LogicalOrExpression__RightOperandAssignment_1_2 ) ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1460:1: ( ( rule__LogicalOrExpression__RightOperandAssignment_1_2 ) )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2351:1: ( ( rule__LogicalOrExpression__RightOperandAssignment_1_2 ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2352:1: ( rule__LogicalOrExpression__RightOperandAssignment_1_2 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1460:1: ( ( rule__LogicalOrExpression__RightOperandAssignment_1_2 ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1461:1: ( rule__LogicalOrExpression__RightOperandAssignment_1_2 )
             {
              before(grammarAccess.getLogicalOrExpressionAccess().getRightOperandAssignment_1_2()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2353:1: ( rule__LogicalOrExpression__RightOperandAssignment_1_2 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2353:2: rule__LogicalOrExpression__RightOperandAssignment_1_2
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1462:1: ( rule__LogicalOrExpression__RightOperandAssignment_1_2 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1462:2: rule__LogicalOrExpression__RightOperandAssignment_1_2
             {
-            pushFollow(FOLLOW_rule__LogicalOrExpression__RightOperandAssignment_1_2_in_rule__LogicalOrExpression__Group_1__2__Impl4870);
+            pushFollow(FOLLOW_rule__LogicalOrExpression__RightOperandAssignment_1_2_in_rule__LogicalOrExpression__Group_1__2__Impl3003);
             rule__LogicalOrExpression__RightOperandAssignment_1_2();
             _fsp--;
 
@@ -6468,20 +3981,20 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__LogicalAndExpression__Group__0
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2369:1: rule__LogicalAndExpression__Group__0 : rule__LogicalAndExpression__Group__0__Impl rule__LogicalAndExpression__Group__1 ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1478:1: rule__LogicalAndExpression__Group__0 : rule__LogicalAndExpression__Group__0__Impl rule__LogicalAndExpression__Group__1 ;
     public final void rule__LogicalAndExpression__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2373:1: ( rule__LogicalAndExpression__Group__0__Impl rule__LogicalAndExpression__Group__1 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2374:2: rule__LogicalAndExpression__Group__0__Impl rule__LogicalAndExpression__Group__1
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1482:1: ( rule__LogicalAndExpression__Group__0__Impl rule__LogicalAndExpression__Group__1 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1483:2: rule__LogicalAndExpression__Group__0__Impl rule__LogicalAndExpression__Group__1
             {
-            pushFollow(FOLLOW_rule__LogicalAndExpression__Group__0__Impl_in_rule__LogicalAndExpression__Group__04906);
+            pushFollow(FOLLOW_rule__LogicalAndExpression__Group__0__Impl_in_rule__LogicalAndExpression__Group__03039);
             rule__LogicalAndExpression__Group__0__Impl();
             _fsp--;
 
-            pushFollow(FOLLOW_rule__LogicalAndExpression__Group__1_in_rule__LogicalAndExpression__Group__04909);
+            pushFollow(FOLLOW_rule__LogicalAndExpression__Group__1_in_rule__LogicalAndExpression__Group__03042);
             rule__LogicalAndExpression__Group__1();
             _fsp--;
 
@@ -6504,20 +4017,20 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__LogicalAndExpression__Group__0__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2381:1: rule__LogicalAndExpression__Group__0__Impl : ( ruleLogicalNotExpression ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1490:1: rule__LogicalAndExpression__Group__0__Impl : ( ruleLogicalNotExpression ) ;
     public final void rule__LogicalAndExpression__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2385:1: ( ( ruleLogicalNotExpression ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2386:1: ( ruleLogicalNotExpression )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1494:1: ( ( ruleLogicalNotExpression ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1495:1: ( ruleLogicalNotExpression )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2386:1: ( ruleLogicalNotExpression )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2387:1: ruleLogicalNotExpression
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1495:1: ( ruleLogicalNotExpression )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1496:1: ruleLogicalNotExpression
             {
              before(grammarAccess.getLogicalAndExpressionAccess().getLogicalNotExpressionParserRuleCall_0()); 
-            pushFollow(FOLLOW_ruleLogicalNotExpression_in_rule__LogicalAndExpression__Group__0__Impl4936);
+            pushFollow(FOLLOW_ruleLogicalNotExpression_in_rule__LogicalAndExpression__Group__0__Impl3069);
             ruleLogicalNotExpression();
             _fsp--;
 
@@ -6544,16 +4057,16 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__LogicalAndExpression__Group__1
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2398:1: rule__LogicalAndExpression__Group__1 : rule__LogicalAndExpression__Group__1__Impl ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1507:1: rule__LogicalAndExpression__Group__1 : rule__LogicalAndExpression__Group__1__Impl ;
     public final void rule__LogicalAndExpression__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2402:1: ( rule__LogicalAndExpression__Group__1__Impl )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2403:2: rule__LogicalAndExpression__Group__1__Impl
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1511:1: ( rule__LogicalAndExpression__Group__1__Impl )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1512:2: rule__LogicalAndExpression__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__LogicalAndExpression__Group__1__Impl_in_rule__LogicalAndExpression__Group__14965);
+            pushFollow(FOLLOW_rule__LogicalAndExpression__Group__1__Impl_in_rule__LogicalAndExpression__Group__13098);
             rule__LogicalAndExpression__Group__1__Impl();
             _fsp--;
 
@@ -6576,35 +4089,35 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__LogicalAndExpression__Group__1__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2409:1: rule__LogicalAndExpression__Group__1__Impl : ( ( rule__LogicalAndExpression__Group_1__0 )* ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1518:1: rule__LogicalAndExpression__Group__1__Impl : ( ( rule__LogicalAndExpression__Group_1__0 )* ) ;
     public final void rule__LogicalAndExpression__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2413:1: ( ( ( rule__LogicalAndExpression__Group_1__0 )* ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2414:1: ( ( rule__LogicalAndExpression__Group_1__0 )* )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1522:1: ( ( ( rule__LogicalAndExpression__Group_1__0 )* ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1523:1: ( ( rule__LogicalAndExpression__Group_1__0 )* )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2414:1: ( ( rule__LogicalAndExpression__Group_1__0 )* )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2415:1: ( rule__LogicalAndExpression__Group_1__0 )*
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1523:1: ( ( rule__LogicalAndExpression__Group_1__0 )* )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1524:1: ( rule__LogicalAndExpression__Group_1__0 )*
             {
              before(grammarAccess.getLogicalAndExpressionAccess().getGroup_1()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2416:1: ( rule__LogicalAndExpression__Group_1__0 )*
-            loop22:
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1525:1: ( rule__LogicalAndExpression__Group_1__0 )*
+            loop15:
             do {
-                int alt22=2;
-                int LA22_0 = input.LA(1);
+                int alt15=2;
+                int LA15_0 = input.LA(1);
 
-                if ( (LA22_0==46) ) {
-                    alt22=1;
+                if ( (LA15_0==30) ) {
+                    alt15=1;
                 }
 
 
-                switch (alt22) {
+                switch (alt15) {
             	case 1 :
-            	    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2416:2: rule__LogicalAndExpression__Group_1__0
+            	    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1525:2: rule__LogicalAndExpression__Group_1__0
             	    {
-            	    pushFollow(FOLLOW_rule__LogicalAndExpression__Group_1__0_in_rule__LogicalAndExpression__Group__1__Impl4992);
+            	    pushFollow(FOLLOW_rule__LogicalAndExpression__Group_1__0_in_rule__LogicalAndExpression__Group__1__Impl3125);
             	    rule__LogicalAndExpression__Group_1__0();
             	    _fsp--;
 
@@ -6613,7 +4126,7 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
             	    break;
 
             	default :
-            	    break loop22;
+            	    break loop15;
                 }
             } while (true);
 
@@ -6640,20 +4153,20 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__LogicalAndExpression__Group_1__0
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2430:1: rule__LogicalAndExpression__Group_1__0 : rule__LogicalAndExpression__Group_1__0__Impl rule__LogicalAndExpression__Group_1__1 ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1539:1: rule__LogicalAndExpression__Group_1__0 : rule__LogicalAndExpression__Group_1__0__Impl rule__LogicalAndExpression__Group_1__1 ;
     public final void rule__LogicalAndExpression__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2434:1: ( rule__LogicalAndExpression__Group_1__0__Impl rule__LogicalAndExpression__Group_1__1 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2435:2: rule__LogicalAndExpression__Group_1__0__Impl rule__LogicalAndExpression__Group_1__1
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1543:1: ( rule__LogicalAndExpression__Group_1__0__Impl rule__LogicalAndExpression__Group_1__1 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1544:2: rule__LogicalAndExpression__Group_1__0__Impl rule__LogicalAndExpression__Group_1__1
             {
-            pushFollow(FOLLOW_rule__LogicalAndExpression__Group_1__0__Impl_in_rule__LogicalAndExpression__Group_1__05027);
+            pushFollow(FOLLOW_rule__LogicalAndExpression__Group_1__0__Impl_in_rule__LogicalAndExpression__Group_1__03160);
             rule__LogicalAndExpression__Group_1__0__Impl();
             _fsp--;
 
-            pushFollow(FOLLOW_rule__LogicalAndExpression__Group_1__1_in_rule__LogicalAndExpression__Group_1__05030);
+            pushFollow(FOLLOW_rule__LogicalAndExpression__Group_1__1_in_rule__LogicalAndExpression__Group_1__03163);
             rule__LogicalAndExpression__Group_1__1();
             _fsp--;
 
@@ -6676,21 +4189,21 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__LogicalAndExpression__Group_1__0__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2442:1: rule__LogicalAndExpression__Group_1__0__Impl : ( () ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1551:1: rule__LogicalAndExpression__Group_1__0__Impl : ( () ) ;
     public final void rule__LogicalAndExpression__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2446:1: ( ( () ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2447:1: ( () )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1555:1: ( ( () ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1556:1: ( () )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2447:1: ( () )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2448:1: ()
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1556:1: ( () )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1557:1: ()
             {
              before(grammarAccess.getLogicalAndExpressionAccess().getLogicalAndExpressionLeftOperandAction_1_0()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2449:1: ()
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2451:1: 
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1558:1: ()
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1560:1: 
             {
             }
 
@@ -6713,20 +4226,20 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__LogicalAndExpression__Group_1__1
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2461:1: rule__LogicalAndExpression__Group_1__1 : rule__LogicalAndExpression__Group_1__1__Impl rule__LogicalAndExpression__Group_1__2 ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1570:1: rule__LogicalAndExpression__Group_1__1 : rule__LogicalAndExpression__Group_1__1__Impl rule__LogicalAndExpression__Group_1__2 ;
     public final void rule__LogicalAndExpression__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2465:1: ( rule__LogicalAndExpression__Group_1__1__Impl rule__LogicalAndExpression__Group_1__2 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2466:2: rule__LogicalAndExpression__Group_1__1__Impl rule__LogicalAndExpression__Group_1__2
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1574:1: ( rule__LogicalAndExpression__Group_1__1__Impl rule__LogicalAndExpression__Group_1__2 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1575:2: rule__LogicalAndExpression__Group_1__1__Impl rule__LogicalAndExpression__Group_1__2
             {
-            pushFollow(FOLLOW_rule__LogicalAndExpression__Group_1__1__Impl_in_rule__LogicalAndExpression__Group_1__15088);
+            pushFollow(FOLLOW_rule__LogicalAndExpression__Group_1__1__Impl_in_rule__LogicalAndExpression__Group_1__13221);
             rule__LogicalAndExpression__Group_1__1__Impl();
             _fsp--;
 
-            pushFollow(FOLLOW_rule__LogicalAndExpression__Group_1__2_in_rule__LogicalAndExpression__Group_1__15091);
+            pushFollow(FOLLOW_rule__LogicalAndExpression__Group_1__2_in_rule__LogicalAndExpression__Group_1__13224);
             rule__LogicalAndExpression__Group_1__2();
             _fsp--;
 
@@ -6749,20 +4262,20 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__LogicalAndExpression__Group_1__1__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2473:1: rule__LogicalAndExpression__Group_1__1__Impl : ( '&&' ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1582:1: rule__LogicalAndExpression__Group_1__1__Impl : ( '&&' ) ;
     public final void rule__LogicalAndExpression__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2477:1: ( ( '&&' ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2478:1: ( '&&' )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1586:1: ( ( '&&' ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1587:1: ( '&&' )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2478:1: ( '&&' )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2479:1: '&&'
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1587:1: ( '&&' )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1588:1: '&&'
             {
              before(grammarAccess.getLogicalAndExpressionAccess().getAmpersandAmpersandKeyword_1_1()); 
-            match(input,46,FOLLOW_46_in_rule__LogicalAndExpression__Group_1__1__Impl5119); 
+            match(input,30,FOLLOW_30_in_rule__LogicalAndExpression__Group_1__1__Impl3252); 
              after(grammarAccess.getLogicalAndExpressionAccess().getAmpersandAmpersandKeyword_1_1()); 
 
             }
@@ -6786,16 +4299,16 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__LogicalAndExpression__Group_1__2
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2492:1: rule__LogicalAndExpression__Group_1__2 : rule__LogicalAndExpression__Group_1__2__Impl ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1601:1: rule__LogicalAndExpression__Group_1__2 : rule__LogicalAndExpression__Group_1__2__Impl ;
     public final void rule__LogicalAndExpression__Group_1__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2496:1: ( rule__LogicalAndExpression__Group_1__2__Impl )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2497:2: rule__LogicalAndExpression__Group_1__2__Impl
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1605:1: ( rule__LogicalAndExpression__Group_1__2__Impl )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1606:2: rule__LogicalAndExpression__Group_1__2__Impl
             {
-            pushFollow(FOLLOW_rule__LogicalAndExpression__Group_1__2__Impl_in_rule__LogicalAndExpression__Group_1__25150);
+            pushFollow(FOLLOW_rule__LogicalAndExpression__Group_1__2__Impl_in_rule__LogicalAndExpression__Group_1__23283);
             rule__LogicalAndExpression__Group_1__2__Impl();
             _fsp--;
 
@@ -6818,23 +4331,23 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__LogicalAndExpression__Group_1__2__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2503:1: rule__LogicalAndExpression__Group_1__2__Impl : ( ( rule__LogicalAndExpression__RightOperandAssignment_1_2 ) ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1612:1: rule__LogicalAndExpression__Group_1__2__Impl : ( ( rule__LogicalAndExpression__RightOperandAssignment_1_2 ) ) ;
     public final void rule__LogicalAndExpression__Group_1__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2507:1: ( ( ( rule__LogicalAndExpression__RightOperandAssignment_1_2 ) ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2508:1: ( ( rule__LogicalAndExpression__RightOperandAssignment_1_2 ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1616:1: ( ( ( rule__LogicalAndExpression__RightOperandAssignment_1_2 ) ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1617:1: ( ( rule__LogicalAndExpression__RightOperandAssignment_1_2 ) )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2508:1: ( ( rule__LogicalAndExpression__RightOperandAssignment_1_2 ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2509:1: ( rule__LogicalAndExpression__RightOperandAssignment_1_2 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1617:1: ( ( rule__LogicalAndExpression__RightOperandAssignment_1_2 ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1618:1: ( rule__LogicalAndExpression__RightOperandAssignment_1_2 )
             {
              before(grammarAccess.getLogicalAndExpressionAccess().getRightOperandAssignment_1_2()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2510:1: ( rule__LogicalAndExpression__RightOperandAssignment_1_2 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2510:2: rule__LogicalAndExpression__RightOperandAssignment_1_2
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1619:1: ( rule__LogicalAndExpression__RightOperandAssignment_1_2 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1619:2: rule__LogicalAndExpression__RightOperandAssignment_1_2
             {
-            pushFollow(FOLLOW_rule__LogicalAndExpression__RightOperandAssignment_1_2_in_rule__LogicalAndExpression__Group_1__2__Impl5177);
+            pushFollow(FOLLOW_rule__LogicalAndExpression__RightOperandAssignment_1_2_in_rule__LogicalAndExpression__Group_1__2__Impl3310);
             rule__LogicalAndExpression__RightOperandAssignment_1_2();
             _fsp--;
 
@@ -6864,20 +4377,20 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__LogicalNotExpression__Group_1__0
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2526:1: rule__LogicalNotExpression__Group_1__0 : rule__LogicalNotExpression__Group_1__0__Impl rule__LogicalNotExpression__Group_1__1 ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1635:1: rule__LogicalNotExpression__Group_1__0 : rule__LogicalNotExpression__Group_1__0__Impl rule__LogicalNotExpression__Group_1__1 ;
     public final void rule__LogicalNotExpression__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2530:1: ( rule__LogicalNotExpression__Group_1__0__Impl rule__LogicalNotExpression__Group_1__1 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2531:2: rule__LogicalNotExpression__Group_1__0__Impl rule__LogicalNotExpression__Group_1__1
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1639:1: ( rule__LogicalNotExpression__Group_1__0__Impl rule__LogicalNotExpression__Group_1__1 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1640:2: rule__LogicalNotExpression__Group_1__0__Impl rule__LogicalNotExpression__Group_1__1
             {
-            pushFollow(FOLLOW_rule__LogicalNotExpression__Group_1__0__Impl_in_rule__LogicalNotExpression__Group_1__05213);
+            pushFollow(FOLLOW_rule__LogicalNotExpression__Group_1__0__Impl_in_rule__LogicalNotExpression__Group_1__03346);
             rule__LogicalNotExpression__Group_1__0__Impl();
             _fsp--;
 
-            pushFollow(FOLLOW_rule__LogicalNotExpression__Group_1__1_in_rule__LogicalNotExpression__Group_1__05216);
+            pushFollow(FOLLOW_rule__LogicalNotExpression__Group_1__1_in_rule__LogicalNotExpression__Group_1__03349);
             rule__LogicalNotExpression__Group_1__1();
             _fsp--;
 
@@ -6900,21 +4413,21 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__LogicalNotExpression__Group_1__0__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2538:1: rule__LogicalNotExpression__Group_1__0__Impl : ( () ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1647:1: rule__LogicalNotExpression__Group_1__0__Impl : ( () ) ;
     public final void rule__LogicalNotExpression__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2542:1: ( ( () ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2543:1: ( () )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1651:1: ( ( () ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1652:1: ( () )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2543:1: ( () )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2544:1: ()
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1652:1: ( () )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1653:1: ()
             {
              before(grammarAccess.getLogicalNotExpressionAccess().getLogicalNotExpressionAction_1_0()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2545:1: ()
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2547:1: 
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1654:1: ()
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1656:1: 
             {
             }
 
@@ -6937,20 +4450,20 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__LogicalNotExpression__Group_1__1
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2557:1: rule__LogicalNotExpression__Group_1__1 : rule__LogicalNotExpression__Group_1__1__Impl rule__LogicalNotExpression__Group_1__2 ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1666:1: rule__LogicalNotExpression__Group_1__1 : rule__LogicalNotExpression__Group_1__1__Impl rule__LogicalNotExpression__Group_1__2 ;
     public final void rule__LogicalNotExpression__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2561:1: ( rule__LogicalNotExpression__Group_1__1__Impl rule__LogicalNotExpression__Group_1__2 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2562:2: rule__LogicalNotExpression__Group_1__1__Impl rule__LogicalNotExpression__Group_1__2
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1670:1: ( rule__LogicalNotExpression__Group_1__1__Impl rule__LogicalNotExpression__Group_1__2 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1671:2: rule__LogicalNotExpression__Group_1__1__Impl rule__LogicalNotExpression__Group_1__2
             {
-            pushFollow(FOLLOW_rule__LogicalNotExpression__Group_1__1__Impl_in_rule__LogicalNotExpression__Group_1__15274);
+            pushFollow(FOLLOW_rule__LogicalNotExpression__Group_1__1__Impl_in_rule__LogicalNotExpression__Group_1__13407);
             rule__LogicalNotExpression__Group_1__1__Impl();
             _fsp--;
 
-            pushFollow(FOLLOW_rule__LogicalNotExpression__Group_1__2_in_rule__LogicalNotExpression__Group_1__15277);
+            pushFollow(FOLLOW_rule__LogicalNotExpression__Group_1__2_in_rule__LogicalNotExpression__Group_1__13410);
             rule__LogicalNotExpression__Group_1__2();
             _fsp--;
 
@@ -6973,20 +4486,20 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__LogicalNotExpression__Group_1__1__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2569:1: rule__LogicalNotExpression__Group_1__1__Impl : ( '!' ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1678:1: rule__LogicalNotExpression__Group_1__1__Impl : ( '!' ) ;
     public final void rule__LogicalNotExpression__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2573:1: ( ( '!' ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2574:1: ( '!' )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1682:1: ( ( '!' ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1683:1: ( '!' )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2574:1: ( '!' )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2575:1: '!'
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1683:1: ( '!' )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1684:1: '!'
             {
              before(grammarAccess.getLogicalNotExpressionAccess().getExclamationMarkKeyword_1_1()); 
-            match(input,47,FOLLOW_47_in_rule__LogicalNotExpression__Group_1__1__Impl5305); 
+            match(input,31,FOLLOW_31_in_rule__LogicalNotExpression__Group_1__1__Impl3438); 
              after(grammarAccess.getLogicalNotExpressionAccess().getExclamationMarkKeyword_1_1()); 
 
             }
@@ -7010,16 +4523,16 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__LogicalNotExpression__Group_1__2
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2588:1: rule__LogicalNotExpression__Group_1__2 : rule__LogicalNotExpression__Group_1__2__Impl ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1697:1: rule__LogicalNotExpression__Group_1__2 : rule__LogicalNotExpression__Group_1__2__Impl ;
     public final void rule__LogicalNotExpression__Group_1__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2592:1: ( rule__LogicalNotExpression__Group_1__2__Impl )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2593:2: rule__LogicalNotExpression__Group_1__2__Impl
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1701:1: ( rule__LogicalNotExpression__Group_1__2__Impl )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1702:2: rule__LogicalNotExpression__Group_1__2__Impl
             {
-            pushFollow(FOLLOW_rule__LogicalNotExpression__Group_1__2__Impl_in_rule__LogicalNotExpression__Group_1__25336);
+            pushFollow(FOLLOW_rule__LogicalNotExpression__Group_1__2__Impl_in_rule__LogicalNotExpression__Group_1__23469);
             rule__LogicalNotExpression__Group_1__2__Impl();
             _fsp--;
 
@@ -7042,23 +4555,23 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__LogicalNotExpression__Group_1__2__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2599:1: rule__LogicalNotExpression__Group_1__2__Impl : ( ( rule__LogicalNotExpression__OperandAssignment_1_2 ) ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1708:1: rule__LogicalNotExpression__Group_1__2__Impl : ( ( rule__LogicalNotExpression__OperandAssignment_1_2 ) ) ;
     public final void rule__LogicalNotExpression__Group_1__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2603:1: ( ( ( rule__LogicalNotExpression__OperandAssignment_1_2 ) ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2604:1: ( ( rule__LogicalNotExpression__OperandAssignment_1_2 ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1712:1: ( ( ( rule__LogicalNotExpression__OperandAssignment_1_2 ) ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1713:1: ( ( rule__LogicalNotExpression__OperandAssignment_1_2 ) )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2604:1: ( ( rule__LogicalNotExpression__OperandAssignment_1_2 ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2605:1: ( rule__LogicalNotExpression__OperandAssignment_1_2 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1713:1: ( ( rule__LogicalNotExpression__OperandAssignment_1_2 ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1714:1: ( rule__LogicalNotExpression__OperandAssignment_1_2 )
             {
              before(grammarAccess.getLogicalNotExpressionAccess().getOperandAssignment_1_2()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2606:1: ( rule__LogicalNotExpression__OperandAssignment_1_2 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2606:2: rule__LogicalNotExpression__OperandAssignment_1_2
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1715:1: ( rule__LogicalNotExpression__OperandAssignment_1_2 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1715:2: rule__LogicalNotExpression__OperandAssignment_1_2
             {
-            pushFollow(FOLLOW_rule__LogicalNotExpression__OperandAssignment_1_2_in_rule__LogicalNotExpression__Group_1__2__Impl5363);
+            pushFollow(FOLLOW_rule__LogicalNotExpression__OperandAssignment_1_2_in_rule__LogicalNotExpression__Group_1__2__Impl3496);
             rule__LogicalNotExpression__OperandAssignment_1_2();
             _fsp--;
 
@@ -7088,20 +4601,20 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__LogicalRelationExpression__Group__0
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2622:1: rule__LogicalRelationExpression__Group__0 : rule__LogicalRelationExpression__Group__0__Impl rule__LogicalRelationExpression__Group__1 ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1731:1: rule__LogicalRelationExpression__Group__0 : rule__LogicalRelationExpression__Group__0__Impl rule__LogicalRelationExpression__Group__1 ;
     public final void rule__LogicalRelationExpression__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2626:1: ( rule__LogicalRelationExpression__Group__0__Impl rule__LogicalRelationExpression__Group__1 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2627:2: rule__LogicalRelationExpression__Group__0__Impl rule__LogicalRelationExpression__Group__1
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1735:1: ( rule__LogicalRelationExpression__Group__0__Impl rule__LogicalRelationExpression__Group__1 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1736:2: rule__LogicalRelationExpression__Group__0__Impl rule__LogicalRelationExpression__Group__1
             {
-            pushFollow(FOLLOW_rule__LogicalRelationExpression__Group__0__Impl_in_rule__LogicalRelationExpression__Group__05399);
+            pushFollow(FOLLOW_rule__LogicalRelationExpression__Group__0__Impl_in_rule__LogicalRelationExpression__Group__03532);
             rule__LogicalRelationExpression__Group__0__Impl();
             _fsp--;
 
-            pushFollow(FOLLOW_rule__LogicalRelationExpression__Group__1_in_rule__LogicalRelationExpression__Group__05402);
+            pushFollow(FOLLOW_rule__LogicalRelationExpression__Group__1_in_rule__LogicalRelationExpression__Group__03535);
             rule__LogicalRelationExpression__Group__1();
             _fsp--;
 
@@ -7124,20 +4637,20 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__LogicalRelationExpression__Group__0__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2634:1: rule__LogicalRelationExpression__Group__0__Impl : ( ruleNumericalAddSubtractExpression ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1743:1: rule__LogicalRelationExpression__Group__0__Impl : ( ruleNumericalAddSubtractExpression ) ;
     public final void rule__LogicalRelationExpression__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2638:1: ( ( ruleNumericalAddSubtractExpression ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2639:1: ( ruleNumericalAddSubtractExpression )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1747:1: ( ( ruleNumericalAddSubtractExpression ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1748:1: ( ruleNumericalAddSubtractExpression )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2639:1: ( ruleNumericalAddSubtractExpression )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2640:1: ruleNumericalAddSubtractExpression
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1748:1: ( ruleNumericalAddSubtractExpression )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1749:1: ruleNumericalAddSubtractExpression
             {
              before(grammarAccess.getLogicalRelationExpressionAccess().getNumericalAddSubtractExpressionParserRuleCall_0()); 
-            pushFollow(FOLLOW_ruleNumericalAddSubtractExpression_in_rule__LogicalRelationExpression__Group__0__Impl5429);
+            pushFollow(FOLLOW_ruleNumericalAddSubtractExpression_in_rule__LogicalRelationExpression__Group__0__Impl3562);
             ruleNumericalAddSubtractExpression();
             _fsp--;
 
@@ -7164,16 +4677,16 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__LogicalRelationExpression__Group__1
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2651:1: rule__LogicalRelationExpression__Group__1 : rule__LogicalRelationExpression__Group__1__Impl ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1760:1: rule__LogicalRelationExpression__Group__1 : rule__LogicalRelationExpression__Group__1__Impl ;
     public final void rule__LogicalRelationExpression__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2655:1: ( rule__LogicalRelationExpression__Group__1__Impl )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2656:2: rule__LogicalRelationExpression__Group__1__Impl
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1764:1: ( rule__LogicalRelationExpression__Group__1__Impl )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1765:2: rule__LogicalRelationExpression__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__LogicalRelationExpression__Group__1__Impl_in_rule__LogicalRelationExpression__Group__15458);
+            pushFollow(FOLLOW_rule__LogicalRelationExpression__Group__1__Impl_in_rule__LogicalRelationExpression__Group__13591);
             rule__LogicalRelationExpression__Group__1__Impl();
             _fsp--;
 
@@ -7196,35 +4709,35 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__LogicalRelationExpression__Group__1__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2662:1: rule__LogicalRelationExpression__Group__1__Impl : ( ( rule__LogicalRelationExpression__Group_1__0 )* ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1771:1: rule__LogicalRelationExpression__Group__1__Impl : ( ( rule__LogicalRelationExpression__Group_1__0 )* ) ;
     public final void rule__LogicalRelationExpression__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2666:1: ( ( ( rule__LogicalRelationExpression__Group_1__0 )* ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2667:1: ( ( rule__LogicalRelationExpression__Group_1__0 )* )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1775:1: ( ( ( rule__LogicalRelationExpression__Group_1__0 )* ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1776:1: ( ( rule__LogicalRelationExpression__Group_1__0 )* )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2667:1: ( ( rule__LogicalRelationExpression__Group_1__0 )* )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2668:1: ( rule__LogicalRelationExpression__Group_1__0 )*
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1776:1: ( ( rule__LogicalRelationExpression__Group_1__0 )* )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1777:1: ( rule__LogicalRelationExpression__Group_1__0 )*
             {
              before(grammarAccess.getLogicalRelationExpressionAccess().getGroup_1()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2669:1: ( rule__LogicalRelationExpression__Group_1__0 )*
-            loop23:
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1778:1: ( rule__LogicalRelationExpression__Group_1__0 )*
+            loop16:
             do {
-                int alt23=2;
-                int LA23_0 = input.LA(1);
+                int alt16=2;
+                int LA16_0 = input.LA(1);
 
-                if ( ((LA23_0>=20 && LA23_0<=25)) ) {
-                    alt23=1;
+                if ( ((LA16_0>=19 && LA16_0<=24)) ) {
+                    alt16=1;
                 }
 
 
-                switch (alt23) {
+                switch (alt16) {
             	case 1 :
-            	    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2669:2: rule__LogicalRelationExpression__Group_1__0
+            	    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1778:2: rule__LogicalRelationExpression__Group_1__0
             	    {
-            	    pushFollow(FOLLOW_rule__LogicalRelationExpression__Group_1__0_in_rule__LogicalRelationExpression__Group__1__Impl5485);
+            	    pushFollow(FOLLOW_rule__LogicalRelationExpression__Group_1__0_in_rule__LogicalRelationExpression__Group__1__Impl3618);
             	    rule__LogicalRelationExpression__Group_1__0();
             	    _fsp--;
 
@@ -7233,7 +4746,7 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
             	    break;
 
             	default :
-            	    break loop23;
+            	    break loop16;
                 }
             } while (true);
 
@@ -7260,20 +4773,20 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__LogicalRelationExpression__Group_1__0
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2683:1: rule__LogicalRelationExpression__Group_1__0 : rule__LogicalRelationExpression__Group_1__0__Impl rule__LogicalRelationExpression__Group_1__1 ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1792:1: rule__LogicalRelationExpression__Group_1__0 : rule__LogicalRelationExpression__Group_1__0__Impl rule__LogicalRelationExpression__Group_1__1 ;
     public final void rule__LogicalRelationExpression__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2687:1: ( rule__LogicalRelationExpression__Group_1__0__Impl rule__LogicalRelationExpression__Group_1__1 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2688:2: rule__LogicalRelationExpression__Group_1__0__Impl rule__LogicalRelationExpression__Group_1__1
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1796:1: ( rule__LogicalRelationExpression__Group_1__0__Impl rule__LogicalRelationExpression__Group_1__1 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1797:2: rule__LogicalRelationExpression__Group_1__0__Impl rule__LogicalRelationExpression__Group_1__1
             {
-            pushFollow(FOLLOW_rule__LogicalRelationExpression__Group_1__0__Impl_in_rule__LogicalRelationExpression__Group_1__05520);
+            pushFollow(FOLLOW_rule__LogicalRelationExpression__Group_1__0__Impl_in_rule__LogicalRelationExpression__Group_1__03653);
             rule__LogicalRelationExpression__Group_1__0__Impl();
             _fsp--;
 
-            pushFollow(FOLLOW_rule__LogicalRelationExpression__Group_1__1_in_rule__LogicalRelationExpression__Group_1__05523);
+            pushFollow(FOLLOW_rule__LogicalRelationExpression__Group_1__1_in_rule__LogicalRelationExpression__Group_1__03656);
             rule__LogicalRelationExpression__Group_1__1();
             _fsp--;
 
@@ -7296,21 +4809,21 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__LogicalRelationExpression__Group_1__0__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2695:1: rule__LogicalRelationExpression__Group_1__0__Impl : ( () ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1804:1: rule__LogicalRelationExpression__Group_1__0__Impl : ( () ) ;
     public final void rule__LogicalRelationExpression__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2699:1: ( ( () ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2700:1: ( () )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1808:1: ( ( () ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1809:1: ( () )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2700:1: ( () )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2701:1: ()
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1809:1: ( () )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1810:1: ()
             {
              before(grammarAccess.getLogicalRelationExpressionAccess().getLogicalRelationExpressionLeftOperandAction_1_0()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2702:1: ()
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2704:1: 
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1811:1: ()
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1813:1: 
             {
             }
 
@@ -7333,20 +4846,20 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__LogicalRelationExpression__Group_1__1
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2714:1: rule__LogicalRelationExpression__Group_1__1 : rule__LogicalRelationExpression__Group_1__1__Impl rule__LogicalRelationExpression__Group_1__2 ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1823:1: rule__LogicalRelationExpression__Group_1__1 : rule__LogicalRelationExpression__Group_1__1__Impl rule__LogicalRelationExpression__Group_1__2 ;
     public final void rule__LogicalRelationExpression__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2718:1: ( rule__LogicalRelationExpression__Group_1__1__Impl rule__LogicalRelationExpression__Group_1__2 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2719:2: rule__LogicalRelationExpression__Group_1__1__Impl rule__LogicalRelationExpression__Group_1__2
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1827:1: ( rule__LogicalRelationExpression__Group_1__1__Impl rule__LogicalRelationExpression__Group_1__2 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1828:2: rule__LogicalRelationExpression__Group_1__1__Impl rule__LogicalRelationExpression__Group_1__2
             {
-            pushFollow(FOLLOW_rule__LogicalRelationExpression__Group_1__1__Impl_in_rule__LogicalRelationExpression__Group_1__15581);
+            pushFollow(FOLLOW_rule__LogicalRelationExpression__Group_1__1__Impl_in_rule__LogicalRelationExpression__Group_1__13714);
             rule__LogicalRelationExpression__Group_1__1__Impl();
             _fsp--;
 
-            pushFollow(FOLLOW_rule__LogicalRelationExpression__Group_1__2_in_rule__LogicalRelationExpression__Group_1__15584);
+            pushFollow(FOLLOW_rule__LogicalRelationExpression__Group_1__2_in_rule__LogicalRelationExpression__Group_1__13717);
             rule__LogicalRelationExpression__Group_1__2();
             _fsp--;
 
@@ -7369,23 +4882,23 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__LogicalRelationExpression__Group_1__1__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2726:1: rule__LogicalRelationExpression__Group_1__1__Impl : ( ( rule__LogicalRelationExpression__OperatorAssignment_1_1 ) ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1835:1: rule__LogicalRelationExpression__Group_1__1__Impl : ( ( rule__LogicalRelationExpression__OperatorAssignment_1_1 ) ) ;
     public final void rule__LogicalRelationExpression__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2730:1: ( ( ( rule__LogicalRelationExpression__OperatorAssignment_1_1 ) ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2731:1: ( ( rule__LogicalRelationExpression__OperatorAssignment_1_1 ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1839:1: ( ( ( rule__LogicalRelationExpression__OperatorAssignment_1_1 ) ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1840:1: ( ( rule__LogicalRelationExpression__OperatorAssignment_1_1 ) )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2731:1: ( ( rule__LogicalRelationExpression__OperatorAssignment_1_1 ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2732:1: ( rule__LogicalRelationExpression__OperatorAssignment_1_1 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1840:1: ( ( rule__LogicalRelationExpression__OperatorAssignment_1_1 ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1841:1: ( rule__LogicalRelationExpression__OperatorAssignment_1_1 )
             {
              before(grammarAccess.getLogicalRelationExpressionAccess().getOperatorAssignment_1_1()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2733:1: ( rule__LogicalRelationExpression__OperatorAssignment_1_1 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2733:2: rule__LogicalRelationExpression__OperatorAssignment_1_1
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1842:1: ( rule__LogicalRelationExpression__OperatorAssignment_1_1 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1842:2: rule__LogicalRelationExpression__OperatorAssignment_1_1
             {
-            pushFollow(FOLLOW_rule__LogicalRelationExpression__OperatorAssignment_1_1_in_rule__LogicalRelationExpression__Group_1__1__Impl5611);
+            pushFollow(FOLLOW_rule__LogicalRelationExpression__OperatorAssignment_1_1_in_rule__LogicalRelationExpression__Group_1__1__Impl3744);
             rule__LogicalRelationExpression__OperatorAssignment_1_1();
             _fsp--;
 
@@ -7415,16 +4928,16 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__LogicalRelationExpression__Group_1__2
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2743:1: rule__LogicalRelationExpression__Group_1__2 : rule__LogicalRelationExpression__Group_1__2__Impl ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1852:1: rule__LogicalRelationExpression__Group_1__2 : rule__LogicalRelationExpression__Group_1__2__Impl ;
     public final void rule__LogicalRelationExpression__Group_1__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2747:1: ( rule__LogicalRelationExpression__Group_1__2__Impl )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2748:2: rule__LogicalRelationExpression__Group_1__2__Impl
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1856:1: ( rule__LogicalRelationExpression__Group_1__2__Impl )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1857:2: rule__LogicalRelationExpression__Group_1__2__Impl
             {
-            pushFollow(FOLLOW_rule__LogicalRelationExpression__Group_1__2__Impl_in_rule__LogicalRelationExpression__Group_1__25641);
+            pushFollow(FOLLOW_rule__LogicalRelationExpression__Group_1__2__Impl_in_rule__LogicalRelationExpression__Group_1__23774);
             rule__LogicalRelationExpression__Group_1__2__Impl();
             _fsp--;
 
@@ -7447,23 +4960,23 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__LogicalRelationExpression__Group_1__2__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2754:1: rule__LogicalRelationExpression__Group_1__2__Impl : ( ( rule__LogicalRelationExpression__RightOperandAssignment_1_2 ) ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1863:1: rule__LogicalRelationExpression__Group_1__2__Impl : ( ( rule__LogicalRelationExpression__RightOperandAssignment_1_2 ) ) ;
     public final void rule__LogicalRelationExpression__Group_1__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2758:1: ( ( ( rule__LogicalRelationExpression__RightOperandAssignment_1_2 ) ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2759:1: ( ( rule__LogicalRelationExpression__RightOperandAssignment_1_2 ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1867:1: ( ( ( rule__LogicalRelationExpression__RightOperandAssignment_1_2 ) ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1868:1: ( ( rule__LogicalRelationExpression__RightOperandAssignment_1_2 ) )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2759:1: ( ( rule__LogicalRelationExpression__RightOperandAssignment_1_2 ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2760:1: ( rule__LogicalRelationExpression__RightOperandAssignment_1_2 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1868:1: ( ( rule__LogicalRelationExpression__RightOperandAssignment_1_2 ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1869:1: ( rule__LogicalRelationExpression__RightOperandAssignment_1_2 )
             {
              before(grammarAccess.getLogicalRelationExpressionAccess().getRightOperandAssignment_1_2()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2761:1: ( rule__LogicalRelationExpression__RightOperandAssignment_1_2 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2761:2: rule__LogicalRelationExpression__RightOperandAssignment_1_2
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1870:1: ( rule__LogicalRelationExpression__RightOperandAssignment_1_2 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1870:2: rule__LogicalRelationExpression__RightOperandAssignment_1_2
             {
-            pushFollow(FOLLOW_rule__LogicalRelationExpression__RightOperandAssignment_1_2_in_rule__LogicalRelationExpression__Group_1__2__Impl5668);
+            pushFollow(FOLLOW_rule__LogicalRelationExpression__RightOperandAssignment_1_2_in_rule__LogicalRelationExpression__Group_1__2__Impl3801);
             rule__LogicalRelationExpression__RightOperandAssignment_1_2();
             _fsp--;
 
@@ -7493,20 +5006,20 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__NumericalAddSubtractExpression__Group__0
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2777:1: rule__NumericalAddSubtractExpression__Group__0 : rule__NumericalAddSubtractExpression__Group__0__Impl rule__NumericalAddSubtractExpression__Group__1 ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1886:1: rule__NumericalAddSubtractExpression__Group__0 : rule__NumericalAddSubtractExpression__Group__0__Impl rule__NumericalAddSubtractExpression__Group__1 ;
     public final void rule__NumericalAddSubtractExpression__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2781:1: ( rule__NumericalAddSubtractExpression__Group__0__Impl rule__NumericalAddSubtractExpression__Group__1 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2782:2: rule__NumericalAddSubtractExpression__Group__0__Impl rule__NumericalAddSubtractExpression__Group__1
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1890:1: ( rule__NumericalAddSubtractExpression__Group__0__Impl rule__NumericalAddSubtractExpression__Group__1 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1891:2: rule__NumericalAddSubtractExpression__Group__0__Impl rule__NumericalAddSubtractExpression__Group__1
             {
-            pushFollow(FOLLOW_rule__NumericalAddSubtractExpression__Group__0__Impl_in_rule__NumericalAddSubtractExpression__Group__05704);
+            pushFollow(FOLLOW_rule__NumericalAddSubtractExpression__Group__0__Impl_in_rule__NumericalAddSubtractExpression__Group__03837);
             rule__NumericalAddSubtractExpression__Group__0__Impl();
             _fsp--;
 
-            pushFollow(FOLLOW_rule__NumericalAddSubtractExpression__Group__1_in_rule__NumericalAddSubtractExpression__Group__05707);
+            pushFollow(FOLLOW_rule__NumericalAddSubtractExpression__Group__1_in_rule__NumericalAddSubtractExpression__Group__03840);
             rule__NumericalAddSubtractExpression__Group__1();
             _fsp--;
 
@@ -7529,20 +5042,20 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__NumericalAddSubtractExpression__Group__0__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2789:1: rule__NumericalAddSubtractExpression__Group__0__Impl : ( ruleNumericalMultiplyDivideExpression ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1898:1: rule__NumericalAddSubtractExpression__Group__0__Impl : ( ruleNumericalMultiplyDivideExpression ) ;
     public final void rule__NumericalAddSubtractExpression__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2793:1: ( ( ruleNumericalMultiplyDivideExpression ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2794:1: ( ruleNumericalMultiplyDivideExpression )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1902:1: ( ( ruleNumericalMultiplyDivideExpression ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1903:1: ( ruleNumericalMultiplyDivideExpression )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2794:1: ( ruleNumericalMultiplyDivideExpression )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2795:1: ruleNumericalMultiplyDivideExpression
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1903:1: ( ruleNumericalMultiplyDivideExpression )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1904:1: ruleNumericalMultiplyDivideExpression
             {
              before(grammarAccess.getNumericalAddSubtractExpressionAccess().getNumericalMultiplyDivideExpressionParserRuleCall_0()); 
-            pushFollow(FOLLOW_ruleNumericalMultiplyDivideExpression_in_rule__NumericalAddSubtractExpression__Group__0__Impl5734);
+            pushFollow(FOLLOW_ruleNumericalMultiplyDivideExpression_in_rule__NumericalAddSubtractExpression__Group__0__Impl3867);
             ruleNumericalMultiplyDivideExpression();
             _fsp--;
 
@@ -7569,16 +5082,16 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__NumericalAddSubtractExpression__Group__1
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2806:1: rule__NumericalAddSubtractExpression__Group__1 : rule__NumericalAddSubtractExpression__Group__1__Impl ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1915:1: rule__NumericalAddSubtractExpression__Group__1 : rule__NumericalAddSubtractExpression__Group__1__Impl ;
     public final void rule__NumericalAddSubtractExpression__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2810:1: ( rule__NumericalAddSubtractExpression__Group__1__Impl )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2811:2: rule__NumericalAddSubtractExpression__Group__1__Impl
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1919:1: ( rule__NumericalAddSubtractExpression__Group__1__Impl )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1920:2: rule__NumericalAddSubtractExpression__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__NumericalAddSubtractExpression__Group__1__Impl_in_rule__NumericalAddSubtractExpression__Group__15763);
+            pushFollow(FOLLOW_rule__NumericalAddSubtractExpression__Group__1__Impl_in_rule__NumericalAddSubtractExpression__Group__13896);
             rule__NumericalAddSubtractExpression__Group__1__Impl();
             _fsp--;
 
@@ -7601,35 +5114,35 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__NumericalAddSubtractExpression__Group__1__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2817:1: rule__NumericalAddSubtractExpression__Group__1__Impl : ( ( rule__NumericalAddSubtractExpression__Group_1__0 )* ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1926:1: rule__NumericalAddSubtractExpression__Group__1__Impl : ( ( rule__NumericalAddSubtractExpression__Group_1__0 )* ) ;
     public final void rule__NumericalAddSubtractExpression__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2821:1: ( ( ( rule__NumericalAddSubtractExpression__Group_1__0 )* ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2822:1: ( ( rule__NumericalAddSubtractExpression__Group_1__0 )* )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1930:1: ( ( ( rule__NumericalAddSubtractExpression__Group_1__0 )* ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1931:1: ( ( rule__NumericalAddSubtractExpression__Group_1__0 )* )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2822:1: ( ( rule__NumericalAddSubtractExpression__Group_1__0 )* )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2823:1: ( rule__NumericalAddSubtractExpression__Group_1__0 )*
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1931:1: ( ( rule__NumericalAddSubtractExpression__Group_1__0 )* )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1932:1: ( rule__NumericalAddSubtractExpression__Group_1__0 )*
             {
              before(grammarAccess.getNumericalAddSubtractExpressionAccess().getGroup_1()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2824:1: ( rule__NumericalAddSubtractExpression__Group_1__0 )*
-            loop24:
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1933:1: ( rule__NumericalAddSubtractExpression__Group_1__0 )*
+            loop17:
             do {
-                int alt24=2;
-                int LA24_0 = input.LA(1);
+                int alt17=2;
+                int LA17_0 = input.LA(1);
 
-                if ( ((LA24_0>=14 && LA24_0<=15)) ) {
-                    alt24=1;
+                if ( ((LA17_0>=13 && LA17_0<=14)) ) {
+                    alt17=1;
                 }
 
 
-                switch (alt24) {
+                switch (alt17) {
             	case 1 :
-            	    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2824:2: rule__NumericalAddSubtractExpression__Group_1__0
+            	    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1933:2: rule__NumericalAddSubtractExpression__Group_1__0
             	    {
-            	    pushFollow(FOLLOW_rule__NumericalAddSubtractExpression__Group_1__0_in_rule__NumericalAddSubtractExpression__Group__1__Impl5790);
+            	    pushFollow(FOLLOW_rule__NumericalAddSubtractExpression__Group_1__0_in_rule__NumericalAddSubtractExpression__Group__1__Impl3923);
             	    rule__NumericalAddSubtractExpression__Group_1__0();
             	    _fsp--;
 
@@ -7638,7 +5151,7 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
             	    break;
 
             	default :
-            	    break loop24;
+            	    break loop17;
                 }
             } while (true);
 
@@ -7665,20 +5178,20 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__NumericalAddSubtractExpression__Group_1__0
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2838:1: rule__NumericalAddSubtractExpression__Group_1__0 : rule__NumericalAddSubtractExpression__Group_1__0__Impl rule__NumericalAddSubtractExpression__Group_1__1 ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1947:1: rule__NumericalAddSubtractExpression__Group_1__0 : rule__NumericalAddSubtractExpression__Group_1__0__Impl rule__NumericalAddSubtractExpression__Group_1__1 ;
     public final void rule__NumericalAddSubtractExpression__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2842:1: ( rule__NumericalAddSubtractExpression__Group_1__0__Impl rule__NumericalAddSubtractExpression__Group_1__1 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2843:2: rule__NumericalAddSubtractExpression__Group_1__0__Impl rule__NumericalAddSubtractExpression__Group_1__1
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1951:1: ( rule__NumericalAddSubtractExpression__Group_1__0__Impl rule__NumericalAddSubtractExpression__Group_1__1 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1952:2: rule__NumericalAddSubtractExpression__Group_1__0__Impl rule__NumericalAddSubtractExpression__Group_1__1
             {
-            pushFollow(FOLLOW_rule__NumericalAddSubtractExpression__Group_1__0__Impl_in_rule__NumericalAddSubtractExpression__Group_1__05825);
+            pushFollow(FOLLOW_rule__NumericalAddSubtractExpression__Group_1__0__Impl_in_rule__NumericalAddSubtractExpression__Group_1__03958);
             rule__NumericalAddSubtractExpression__Group_1__0__Impl();
             _fsp--;
 
-            pushFollow(FOLLOW_rule__NumericalAddSubtractExpression__Group_1__1_in_rule__NumericalAddSubtractExpression__Group_1__05828);
+            pushFollow(FOLLOW_rule__NumericalAddSubtractExpression__Group_1__1_in_rule__NumericalAddSubtractExpression__Group_1__03961);
             rule__NumericalAddSubtractExpression__Group_1__1();
             _fsp--;
 
@@ -7701,21 +5214,21 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__NumericalAddSubtractExpression__Group_1__0__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2850:1: rule__NumericalAddSubtractExpression__Group_1__0__Impl : ( () ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1959:1: rule__NumericalAddSubtractExpression__Group_1__0__Impl : ( () ) ;
     public final void rule__NumericalAddSubtractExpression__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2854:1: ( ( () ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2855:1: ( () )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1963:1: ( ( () ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1964:1: ( () )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2855:1: ( () )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2856:1: ()
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1964:1: ( () )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1965:1: ()
             {
              before(grammarAccess.getNumericalAddSubtractExpressionAccess().getNumericalAddSubtractExpressionLeftOperandAction_1_0()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2857:1: ()
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2859:1: 
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1966:1: ()
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1968:1: 
             {
             }
 
@@ -7738,20 +5251,20 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__NumericalAddSubtractExpression__Group_1__1
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2869:1: rule__NumericalAddSubtractExpression__Group_1__1 : rule__NumericalAddSubtractExpression__Group_1__1__Impl rule__NumericalAddSubtractExpression__Group_1__2 ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1978:1: rule__NumericalAddSubtractExpression__Group_1__1 : rule__NumericalAddSubtractExpression__Group_1__1__Impl rule__NumericalAddSubtractExpression__Group_1__2 ;
     public final void rule__NumericalAddSubtractExpression__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2873:1: ( rule__NumericalAddSubtractExpression__Group_1__1__Impl rule__NumericalAddSubtractExpression__Group_1__2 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2874:2: rule__NumericalAddSubtractExpression__Group_1__1__Impl rule__NumericalAddSubtractExpression__Group_1__2
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1982:1: ( rule__NumericalAddSubtractExpression__Group_1__1__Impl rule__NumericalAddSubtractExpression__Group_1__2 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1983:2: rule__NumericalAddSubtractExpression__Group_1__1__Impl rule__NumericalAddSubtractExpression__Group_1__2
             {
-            pushFollow(FOLLOW_rule__NumericalAddSubtractExpression__Group_1__1__Impl_in_rule__NumericalAddSubtractExpression__Group_1__15886);
+            pushFollow(FOLLOW_rule__NumericalAddSubtractExpression__Group_1__1__Impl_in_rule__NumericalAddSubtractExpression__Group_1__14019);
             rule__NumericalAddSubtractExpression__Group_1__1__Impl();
             _fsp--;
 
-            pushFollow(FOLLOW_rule__NumericalAddSubtractExpression__Group_1__2_in_rule__NumericalAddSubtractExpression__Group_1__15889);
+            pushFollow(FOLLOW_rule__NumericalAddSubtractExpression__Group_1__2_in_rule__NumericalAddSubtractExpression__Group_1__14022);
             rule__NumericalAddSubtractExpression__Group_1__2();
             _fsp--;
 
@@ -7774,23 +5287,23 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__NumericalAddSubtractExpression__Group_1__1__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2881:1: rule__NumericalAddSubtractExpression__Group_1__1__Impl : ( ( rule__NumericalAddSubtractExpression__OperatorAssignment_1_1 ) ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1990:1: rule__NumericalAddSubtractExpression__Group_1__1__Impl : ( ( rule__NumericalAddSubtractExpression__OperatorAssignment_1_1 ) ) ;
     public final void rule__NumericalAddSubtractExpression__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2885:1: ( ( ( rule__NumericalAddSubtractExpression__OperatorAssignment_1_1 ) ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2886:1: ( ( rule__NumericalAddSubtractExpression__OperatorAssignment_1_1 ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1994:1: ( ( ( rule__NumericalAddSubtractExpression__OperatorAssignment_1_1 ) ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1995:1: ( ( rule__NumericalAddSubtractExpression__OperatorAssignment_1_1 ) )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2886:1: ( ( rule__NumericalAddSubtractExpression__OperatorAssignment_1_1 ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2887:1: ( rule__NumericalAddSubtractExpression__OperatorAssignment_1_1 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1995:1: ( ( rule__NumericalAddSubtractExpression__OperatorAssignment_1_1 ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1996:1: ( rule__NumericalAddSubtractExpression__OperatorAssignment_1_1 )
             {
              before(grammarAccess.getNumericalAddSubtractExpressionAccess().getOperatorAssignment_1_1()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2888:1: ( rule__NumericalAddSubtractExpression__OperatorAssignment_1_1 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2888:2: rule__NumericalAddSubtractExpression__OperatorAssignment_1_1
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1997:1: ( rule__NumericalAddSubtractExpression__OperatorAssignment_1_1 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1997:2: rule__NumericalAddSubtractExpression__OperatorAssignment_1_1
             {
-            pushFollow(FOLLOW_rule__NumericalAddSubtractExpression__OperatorAssignment_1_1_in_rule__NumericalAddSubtractExpression__Group_1__1__Impl5916);
+            pushFollow(FOLLOW_rule__NumericalAddSubtractExpression__OperatorAssignment_1_1_in_rule__NumericalAddSubtractExpression__Group_1__1__Impl4049);
             rule__NumericalAddSubtractExpression__OperatorAssignment_1_1();
             _fsp--;
 
@@ -7820,16 +5333,16 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__NumericalAddSubtractExpression__Group_1__2
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2898:1: rule__NumericalAddSubtractExpression__Group_1__2 : rule__NumericalAddSubtractExpression__Group_1__2__Impl ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2007:1: rule__NumericalAddSubtractExpression__Group_1__2 : rule__NumericalAddSubtractExpression__Group_1__2__Impl ;
     public final void rule__NumericalAddSubtractExpression__Group_1__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2902:1: ( rule__NumericalAddSubtractExpression__Group_1__2__Impl )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2903:2: rule__NumericalAddSubtractExpression__Group_1__2__Impl
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2011:1: ( rule__NumericalAddSubtractExpression__Group_1__2__Impl )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2012:2: rule__NumericalAddSubtractExpression__Group_1__2__Impl
             {
-            pushFollow(FOLLOW_rule__NumericalAddSubtractExpression__Group_1__2__Impl_in_rule__NumericalAddSubtractExpression__Group_1__25946);
+            pushFollow(FOLLOW_rule__NumericalAddSubtractExpression__Group_1__2__Impl_in_rule__NumericalAddSubtractExpression__Group_1__24079);
             rule__NumericalAddSubtractExpression__Group_1__2__Impl();
             _fsp--;
 
@@ -7852,23 +5365,23 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__NumericalAddSubtractExpression__Group_1__2__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2909:1: rule__NumericalAddSubtractExpression__Group_1__2__Impl : ( ( rule__NumericalAddSubtractExpression__RightOperandAssignment_1_2 ) ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2018:1: rule__NumericalAddSubtractExpression__Group_1__2__Impl : ( ( rule__NumericalAddSubtractExpression__RightOperandAssignment_1_2 ) ) ;
     public final void rule__NumericalAddSubtractExpression__Group_1__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2913:1: ( ( ( rule__NumericalAddSubtractExpression__RightOperandAssignment_1_2 ) ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2914:1: ( ( rule__NumericalAddSubtractExpression__RightOperandAssignment_1_2 ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2022:1: ( ( ( rule__NumericalAddSubtractExpression__RightOperandAssignment_1_2 ) ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2023:1: ( ( rule__NumericalAddSubtractExpression__RightOperandAssignment_1_2 ) )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2914:1: ( ( rule__NumericalAddSubtractExpression__RightOperandAssignment_1_2 ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2915:1: ( rule__NumericalAddSubtractExpression__RightOperandAssignment_1_2 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2023:1: ( ( rule__NumericalAddSubtractExpression__RightOperandAssignment_1_2 ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2024:1: ( rule__NumericalAddSubtractExpression__RightOperandAssignment_1_2 )
             {
              before(grammarAccess.getNumericalAddSubtractExpressionAccess().getRightOperandAssignment_1_2()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2916:1: ( rule__NumericalAddSubtractExpression__RightOperandAssignment_1_2 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2916:2: rule__NumericalAddSubtractExpression__RightOperandAssignment_1_2
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2025:1: ( rule__NumericalAddSubtractExpression__RightOperandAssignment_1_2 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2025:2: rule__NumericalAddSubtractExpression__RightOperandAssignment_1_2
             {
-            pushFollow(FOLLOW_rule__NumericalAddSubtractExpression__RightOperandAssignment_1_2_in_rule__NumericalAddSubtractExpression__Group_1__2__Impl5973);
+            pushFollow(FOLLOW_rule__NumericalAddSubtractExpression__RightOperandAssignment_1_2_in_rule__NumericalAddSubtractExpression__Group_1__2__Impl4106);
             rule__NumericalAddSubtractExpression__RightOperandAssignment_1_2();
             _fsp--;
 
@@ -7898,20 +5411,20 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__NumericalMultiplyDivideExpression__Group__0
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2932:1: rule__NumericalMultiplyDivideExpression__Group__0 : rule__NumericalMultiplyDivideExpression__Group__0__Impl rule__NumericalMultiplyDivideExpression__Group__1 ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2041:1: rule__NumericalMultiplyDivideExpression__Group__0 : rule__NumericalMultiplyDivideExpression__Group__0__Impl rule__NumericalMultiplyDivideExpression__Group__1 ;
     public final void rule__NumericalMultiplyDivideExpression__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2936:1: ( rule__NumericalMultiplyDivideExpression__Group__0__Impl rule__NumericalMultiplyDivideExpression__Group__1 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2937:2: rule__NumericalMultiplyDivideExpression__Group__0__Impl rule__NumericalMultiplyDivideExpression__Group__1
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2045:1: ( rule__NumericalMultiplyDivideExpression__Group__0__Impl rule__NumericalMultiplyDivideExpression__Group__1 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2046:2: rule__NumericalMultiplyDivideExpression__Group__0__Impl rule__NumericalMultiplyDivideExpression__Group__1
             {
-            pushFollow(FOLLOW_rule__NumericalMultiplyDivideExpression__Group__0__Impl_in_rule__NumericalMultiplyDivideExpression__Group__06009);
+            pushFollow(FOLLOW_rule__NumericalMultiplyDivideExpression__Group__0__Impl_in_rule__NumericalMultiplyDivideExpression__Group__04142);
             rule__NumericalMultiplyDivideExpression__Group__0__Impl();
             _fsp--;
 
-            pushFollow(FOLLOW_rule__NumericalMultiplyDivideExpression__Group__1_in_rule__NumericalMultiplyDivideExpression__Group__06012);
+            pushFollow(FOLLOW_rule__NumericalMultiplyDivideExpression__Group__1_in_rule__NumericalMultiplyDivideExpression__Group__04145);
             rule__NumericalMultiplyDivideExpression__Group__1();
             _fsp--;
 
@@ -7934,20 +5447,20 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__NumericalMultiplyDivideExpression__Group__0__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2944:1: rule__NumericalMultiplyDivideExpression__Group__0__Impl : ( ruleNumericalUnaryExpression ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2053:1: rule__NumericalMultiplyDivideExpression__Group__0__Impl : ( ruleNumericalUnaryExpression ) ;
     public final void rule__NumericalMultiplyDivideExpression__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2948:1: ( ( ruleNumericalUnaryExpression ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2949:1: ( ruleNumericalUnaryExpression )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2057:1: ( ( ruleNumericalUnaryExpression ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2058:1: ( ruleNumericalUnaryExpression )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2949:1: ( ruleNumericalUnaryExpression )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2950:1: ruleNumericalUnaryExpression
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2058:1: ( ruleNumericalUnaryExpression )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2059:1: ruleNumericalUnaryExpression
             {
              before(grammarAccess.getNumericalMultiplyDivideExpressionAccess().getNumericalUnaryExpressionParserRuleCall_0()); 
-            pushFollow(FOLLOW_ruleNumericalUnaryExpression_in_rule__NumericalMultiplyDivideExpression__Group__0__Impl6039);
+            pushFollow(FOLLOW_ruleNumericalUnaryExpression_in_rule__NumericalMultiplyDivideExpression__Group__0__Impl4172);
             ruleNumericalUnaryExpression();
             _fsp--;
 
@@ -7974,16 +5487,16 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__NumericalMultiplyDivideExpression__Group__1
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2961:1: rule__NumericalMultiplyDivideExpression__Group__1 : rule__NumericalMultiplyDivideExpression__Group__1__Impl ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2070:1: rule__NumericalMultiplyDivideExpression__Group__1 : rule__NumericalMultiplyDivideExpression__Group__1__Impl ;
     public final void rule__NumericalMultiplyDivideExpression__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2965:1: ( rule__NumericalMultiplyDivideExpression__Group__1__Impl )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2966:2: rule__NumericalMultiplyDivideExpression__Group__1__Impl
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2074:1: ( rule__NumericalMultiplyDivideExpression__Group__1__Impl )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2075:2: rule__NumericalMultiplyDivideExpression__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__NumericalMultiplyDivideExpression__Group__1__Impl_in_rule__NumericalMultiplyDivideExpression__Group__16068);
+            pushFollow(FOLLOW_rule__NumericalMultiplyDivideExpression__Group__1__Impl_in_rule__NumericalMultiplyDivideExpression__Group__14201);
             rule__NumericalMultiplyDivideExpression__Group__1__Impl();
             _fsp--;
 
@@ -8006,35 +5519,35 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__NumericalMultiplyDivideExpression__Group__1__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2972:1: rule__NumericalMultiplyDivideExpression__Group__1__Impl : ( ( rule__NumericalMultiplyDivideExpression__Group_1__0 )* ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2081:1: rule__NumericalMultiplyDivideExpression__Group__1__Impl : ( ( rule__NumericalMultiplyDivideExpression__Group_1__0 )* ) ;
     public final void rule__NumericalMultiplyDivideExpression__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2976:1: ( ( ( rule__NumericalMultiplyDivideExpression__Group_1__0 )* ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2977:1: ( ( rule__NumericalMultiplyDivideExpression__Group_1__0 )* )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2085:1: ( ( ( rule__NumericalMultiplyDivideExpression__Group_1__0 )* ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2086:1: ( ( rule__NumericalMultiplyDivideExpression__Group_1__0 )* )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2977:1: ( ( rule__NumericalMultiplyDivideExpression__Group_1__0 )* )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2978:1: ( rule__NumericalMultiplyDivideExpression__Group_1__0 )*
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2086:1: ( ( rule__NumericalMultiplyDivideExpression__Group_1__0 )* )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2087:1: ( rule__NumericalMultiplyDivideExpression__Group_1__0 )*
             {
              before(grammarAccess.getNumericalMultiplyDivideExpressionAccess().getGroup_1()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2979:1: ( rule__NumericalMultiplyDivideExpression__Group_1__0 )*
-            loop25:
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2088:1: ( rule__NumericalMultiplyDivideExpression__Group_1__0 )*
+            loop18:
             do {
-                int alt25=2;
-                int LA25_0 = input.LA(1);
+                int alt18=2;
+                int LA18_0 = input.LA(1);
 
-                if ( ((LA25_0>=16 && LA25_0<=18)) ) {
-                    alt25=1;
+                if ( ((LA18_0>=15 && LA18_0<=17)) ) {
+                    alt18=1;
                 }
 
 
-                switch (alt25) {
+                switch (alt18) {
             	case 1 :
-            	    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2979:2: rule__NumericalMultiplyDivideExpression__Group_1__0
+            	    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2088:2: rule__NumericalMultiplyDivideExpression__Group_1__0
             	    {
-            	    pushFollow(FOLLOW_rule__NumericalMultiplyDivideExpression__Group_1__0_in_rule__NumericalMultiplyDivideExpression__Group__1__Impl6095);
+            	    pushFollow(FOLLOW_rule__NumericalMultiplyDivideExpression__Group_1__0_in_rule__NumericalMultiplyDivideExpression__Group__1__Impl4228);
             	    rule__NumericalMultiplyDivideExpression__Group_1__0();
             	    _fsp--;
 
@@ -8043,7 +5556,7 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
             	    break;
 
             	default :
-            	    break loop25;
+            	    break loop18;
                 }
             } while (true);
 
@@ -8070,20 +5583,20 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__NumericalMultiplyDivideExpression__Group_1__0
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2993:1: rule__NumericalMultiplyDivideExpression__Group_1__0 : rule__NumericalMultiplyDivideExpression__Group_1__0__Impl rule__NumericalMultiplyDivideExpression__Group_1__1 ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2102:1: rule__NumericalMultiplyDivideExpression__Group_1__0 : rule__NumericalMultiplyDivideExpression__Group_1__0__Impl rule__NumericalMultiplyDivideExpression__Group_1__1 ;
     public final void rule__NumericalMultiplyDivideExpression__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2997:1: ( rule__NumericalMultiplyDivideExpression__Group_1__0__Impl rule__NumericalMultiplyDivideExpression__Group_1__1 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2998:2: rule__NumericalMultiplyDivideExpression__Group_1__0__Impl rule__NumericalMultiplyDivideExpression__Group_1__1
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2106:1: ( rule__NumericalMultiplyDivideExpression__Group_1__0__Impl rule__NumericalMultiplyDivideExpression__Group_1__1 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2107:2: rule__NumericalMultiplyDivideExpression__Group_1__0__Impl rule__NumericalMultiplyDivideExpression__Group_1__1
             {
-            pushFollow(FOLLOW_rule__NumericalMultiplyDivideExpression__Group_1__0__Impl_in_rule__NumericalMultiplyDivideExpression__Group_1__06130);
+            pushFollow(FOLLOW_rule__NumericalMultiplyDivideExpression__Group_1__0__Impl_in_rule__NumericalMultiplyDivideExpression__Group_1__04263);
             rule__NumericalMultiplyDivideExpression__Group_1__0__Impl();
             _fsp--;
 
-            pushFollow(FOLLOW_rule__NumericalMultiplyDivideExpression__Group_1__1_in_rule__NumericalMultiplyDivideExpression__Group_1__06133);
+            pushFollow(FOLLOW_rule__NumericalMultiplyDivideExpression__Group_1__1_in_rule__NumericalMultiplyDivideExpression__Group_1__04266);
             rule__NumericalMultiplyDivideExpression__Group_1__1();
             _fsp--;
 
@@ -8106,21 +5619,21 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__NumericalMultiplyDivideExpression__Group_1__0__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3005:1: rule__NumericalMultiplyDivideExpression__Group_1__0__Impl : ( () ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2114:1: rule__NumericalMultiplyDivideExpression__Group_1__0__Impl : ( () ) ;
     public final void rule__NumericalMultiplyDivideExpression__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3009:1: ( ( () ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3010:1: ( () )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2118:1: ( ( () ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2119:1: ( () )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3010:1: ( () )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3011:1: ()
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2119:1: ( () )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2120:1: ()
             {
              before(grammarAccess.getNumericalMultiplyDivideExpressionAccess().getNumericalMultiplyDivideExpressionLeftOperandAction_1_0()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3012:1: ()
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3014:1: 
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2121:1: ()
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2123:1: 
             {
             }
 
@@ -8143,20 +5656,20 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__NumericalMultiplyDivideExpression__Group_1__1
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3024:1: rule__NumericalMultiplyDivideExpression__Group_1__1 : rule__NumericalMultiplyDivideExpression__Group_1__1__Impl rule__NumericalMultiplyDivideExpression__Group_1__2 ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2133:1: rule__NumericalMultiplyDivideExpression__Group_1__1 : rule__NumericalMultiplyDivideExpression__Group_1__1__Impl rule__NumericalMultiplyDivideExpression__Group_1__2 ;
     public final void rule__NumericalMultiplyDivideExpression__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3028:1: ( rule__NumericalMultiplyDivideExpression__Group_1__1__Impl rule__NumericalMultiplyDivideExpression__Group_1__2 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3029:2: rule__NumericalMultiplyDivideExpression__Group_1__1__Impl rule__NumericalMultiplyDivideExpression__Group_1__2
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2137:1: ( rule__NumericalMultiplyDivideExpression__Group_1__1__Impl rule__NumericalMultiplyDivideExpression__Group_1__2 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2138:2: rule__NumericalMultiplyDivideExpression__Group_1__1__Impl rule__NumericalMultiplyDivideExpression__Group_1__2
             {
-            pushFollow(FOLLOW_rule__NumericalMultiplyDivideExpression__Group_1__1__Impl_in_rule__NumericalMultiplyDivideExpression__Group_1__16191);
+            pushFollow(FOLLOW_rule__NumericalMultiplyDivideExpression__Group_1__1__Impl_in_rule__NumericalMultiplyDivideExpression__Group_1__14324);
             rule__NumericalMultiplyDivideExpression__Group_1__1__Impl();
             _fsp--;
 
-            pushFollow(FOLLOW_rule__NumericalMultiplyDivideExpression__Group_1__2_in_rule__NumericalMultiplyDivideExpression__Group_1__16194);
+            pushFollow(FOLLOW_rule__NumericalMultiplyDivideExpression__Group_1__2_in_rule__NumericalMultiplyDivideExpression__Group_1__14327);
             rule__NumericalMultiplyDivideExpression__Group_1__2();
             _fsp--;
 
@@ -8179,23 +5692,23 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__NumericalMultiplyDivideExpression__Group_1__1__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3036:1: rule__NumericalMultiplyDivideExpression__Group_1__1__Impl : ( ( rule__NumericalMultiplyDivideExpression__OperatorAssignment_1_1 ) ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2145:1: rule__NumericalMultiplyDivideExpression__Group_1__1__Impl : ( ( rule__NumericalMultiplyDivideExpression__OperatorAssignment_1_1 ) ) ;
     public final void rule__NumericalMultiplyDivideExpression__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3040:1: ( ( ( rule__NumericalMultiplyDivideExpression__OperatorAssignment_1_1 ) ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3041:1: ( ( rule__NumericalMultiplyDivideExpression__OperatorAssignment_1_1 ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2149:1: ( ( ( rule__NumericalMultiplyDivideExpression__OperatorAssignment_1_1 ) ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2150:1: ( ( rule__NumericalMultiplyDivideExpression__OperatorAssignment_1_1 ) )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3041:1: ( ( rule__NumericalMultiplyDivideExpression__OperatorAssignment_1_1 ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3042:1: ( rule__NumericalMultiplyDivideExpression__OperatorAssignment_1_1 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2150:1: ( ( rule__NumericalMultiplyDivideExpression__OperatorAssignment_1_1 ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2151:1: ( rule__NumericalMultiplyDivideExpression__OperatorAssignment_1_1 )
             {
              before(grammarAccess.getNumericalMultiplyDivideExpressionAccess().getOperatorAssignment_1_1()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3043:1: ( rule__NumericalMultiplyDivideExpression__OperatorAssignment_1_1 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3043:2: rule__NumericalMultiplyDivideExpression__OperatorAssignment_1_1
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2152:1: ( rule__NumericalMultiplyDivideExpression__OperatorAssignment_1_1 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2152:2: rule__NumericalMultiplyDivideExpression__OperatorAssignment_1_1
             {
-            pushFollow(FOLLOW_rule__NumericalMultiplyDivideExpression__OperatorAssignment_1_1_in_rule__NumericalMultiplyDivideExpression__Group_1__1__Impl6221);
+            pushFollow(FOLLOW_rule__NumericalMultiplyDivideExpression__OperatorAssignment_1_1_in_rule__NumericalMultiplyDivideExpression__Group_1__1__Impl4354);
             rule__NumericalMultiplyDivideExpression__OperatorAssignment_1_1();
             _fsp--;
 
@@ -8225,16 +5738,16 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__NumericalMultiplyDivideExpression__Group_1__2
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3053:1: rule__NumericalMultiplyDivideExpression__Group_1__2 : rule__NumericalMultiplyDivideExpression__Group_1__2__Impl ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2162:1: rule__NumericalMultiplyDivideExpression__Group_1__2 : rule__NumericalMultiplyDivideExpression__Group_1__2__Impl ;
     public final void rule__NumericalMultiplyDivideExpression__Group_1__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3057:1: ( rule__NumericalMultiplyDivideExpression__Group_1__2__Impl )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3058:2: rule__NumericalMultiplyDivideExpression__Group_1__2__Impl
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2166:1: ( rule__NumericalMultiplyDivideExpression__Group_1__2__Impl )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2167:2: rule__NumericalMultiplyDivideExpression__Group_1__2__Impl
             {
-            pushFollow(FOLLOW_rule__NumericalMultiplyDivideExpression__Group_1__2__Impl_in_rule__NumericalMultiplyDivideExpression__Group_1__26251);
+            pushFollow(FOLLOW_rule__NumericalMultiplyDivideExpression__Group_1__2__Impl_in_rule__NumericalMultiplyDivideExpression__Group_1__24384);
             rule__NumericalMultiplyDivideExpression__Group_1__2__Impl();
             _fsp--;
 
@@ -8257,23 +5770,23 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__NumericalMultiplyDivideExpression__Group_1__2__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3064:1: rule__NumericalMultiplyDivideExpression__Group_1__2__Impl : ( ( rule__NumericalMultiplyDivideExpression__RightOperandAssignment_1_2 ) ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2173:1: rule__NumericalMultiplyDivideExpression__Group_1__2__Impl : ( ( rule__NumericalMultiplyDivideExpression__RightOperandAssignment_1_2 ) ) ;
     public final void rule__NumericalMultiplyDivideExpression__Group_1__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3068:1: ( ( ( rule__NumericalMultiplyDivideExpression__RightOperandAssignment_1_2 ) ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3069:1: ( ( rule__NumericalMultiplyDivideExpression__RightOperandAssignment_1_2 ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2177:1: ( ( ( rule__NumericalMultiplyDivideExpression__RightOperandAssignment_1_2 ) ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2178:1: ( ( rule__NumericalMultiplyDivideExpression__RightOperandAssignment_1_2 ) )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3069:1: ( ( rule__NumericalMultiplyDivideExpression__RightOperandAssignment_1_2 ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3070:1: ( rule__NumericalMultiplyDivideExpression__RightOperandAssignment_1_2 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2178:1: ( ( rule__NumericalMultiplyDivideExpression__RightOperandAssignment_1_2 ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2179:1: ( rule__NumericalMultiplyDivideExpression__RightOperandAssignment_1_2 )
             {
              before(grammarAccess.getNumericalMultiplyDivideExpressionAccess().getRightOperandAssignment_1_2()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3071:1: ( rule__NumericalMultiplyDivideExpression__RightOperandAssignment_1_2 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3071:2: rule__NumericalMultiplyDivideExpression__RightOperandAssignment_1_2
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2180:1: ( rule__NumericalMultiplyDivideExpression__RightOperandAssignment_1_2 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2180:2: rule__NumericalMultiplyDivideExpression__RightOperandAssignment_1_2
             {
-            pushFollow(FOLLOW_rule__NumericalMultiplyDivideExpression__RightOperandAssignment_1_2_in_rule__NumericalMultiplyDivideExpression__Group_1__2__Impl6278);
+            pushFollow(FOLLOW_rule__NumericalMultiplyDivideExpression__RightOperandAssignment_1_2_in_rule__NumericalMultiplyDivideExpression__Group_1__2__Impl4411);
             rule__NumericalMultiplyDivideExpression__RightOperandAssignment_1_2();
             _fsp--;
 
@@ -8303,20 +5816,20 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__NumericalUnaryExpression__Group_1__0
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3087:1: rule__NumericalUnaryExpression__Group_1__0 : rule__NumericalUnaryExpression__Group_1__0__Impl rule__NumericalUnaryExpression__Group_1__1 ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2196:1: rule__NumericalUnaryExpression__Group_1__0 : rule__NumericalUnaryExpression__Group_1__0__Impl rule__NumericalUnaryExpression__Group_1__1 ;
     public final void rule__NumericalUnaryExpression__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3091:1: ( rule__NumericalUnaryExpression__Group_1__0__Impl rule__NumericalUnaryExpression__Group_1__1 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3092:2: rule__NumericalUnaryExpression__Group_1__0__Impl rule__NumericalUnaryExpression__Group_1__1
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2200:1: ( rule__NumericalUnaryExpression__Group_1__0__Impl rule__NumericalUnaryExpression__Group_1__1 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2201:2: rule__NumericalUnaryExpression__Group_1__0__Impl rule__NumericalUnaryExpression__Group_1__1
             {
-            pushFollow(FOLLOW_rule__NumericalUnaryExpression__Group_1__0__Impl_in_rule__NumericalUnaryExpression__Group_1__06314);
+            pushFollow(FOLLOW_rule__NumericalUnaryExpression__Group_1__0__Impl_in_rule__NumericalUnaryExpression__Group_1__04447);
             rule__NumericalUnaryExpression__Group_1__0__Impl();
             _fsp--;
 
-            pushFollow(FOLLOW_rule__NumericalUnaryExpression__Group_1__1_in_rule__NumericalUnaryExpression__Group_1__06317);
+            pushFollow(FOLLOW_rule__NumericalUnaryExpression__Group_1__1_in_rule__NumericalUnaryExpression__Group_1__04450);
             rule__NumericalUnaryExpression__Group_1__1();
             _fsp--;
 
@@ -8339,21 +5852,21 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__NumericalUnaryExpression__Group_1__0__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3099:1: rule__NumericalUnaryExpression__Group_1__0__Impl : ( () ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2208:1: rule__NumericalUnaryExpression__Group_1__0__Impl : ( () ) ;
     public final void rule__NumericalUnaryExpression__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3103:1: ( ( () ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3104:1: ( () )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2212:1: ( ( () ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2213:1: ( () )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3104:1: ( () )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3105:1: ()
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2213:1: ( () )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2214:1: ()
             {
              before(grammarAccess.getNumericalUnaryExpressionAccess().getNumericalUnaryExpressionAction_1_0()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3106:1: ()
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3108:1: 
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2215:1: ()
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2217:1: 
             {
             }
 
@@ -8376,20 +5889,20 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__NumericalUnaryExpression__Group_1__1
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3118:1: rule__NumericalUnaryExpression__Group_1__1 : rule__NumericalUnaryExpression__Group_1__1__Impl rule__NumericalUnaryExpression__Group_1__2 ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2227:1: rule__NumericalUnaryExpression__Group_1__1 : rule__NumericalUnaryExpression__Group_1__1__Impl rule__NumericalUnaryExpression__Group_1__2 ;
     public final void rule__NumericalUnaryExpression__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3122:1: ( rule__NumericalUnaryExpression__Group_1__1__Impl rule__NumericalUnaryExpression__Group_1__2 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3123:2: rule__NumericalUnaryExpression__Group_1__1__Impl rule__NumericalUnaryExpression__Group_1__2
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2231:1: ( rule__NumericalUnaryExpression__Group_1__1__Impl rule__NumericalUnaryExpression__Group_1__2 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2232:2: rule__NumericalUnaryExpression__Group_1__1__Impl rule__NumericalUnaryExpression__Group_1__2
             {
-            pushFollow(FOLLOW_rule__NumericalUnaryExpression__Group_1__1__Impl_in_rule__NumericalUnaryExpression__Group_1__16375);
+            pushFollow(FOLLOW_rule__NumericalUnaryExpression__Group_1__1__Impl_in_rule__NumericalUnaryExpression__Group_1__14508);
             rule__NumericalUnaryExpression__Group_1__1__Impl();
             _fsp--;
 
-            pushFollow(FOLLOW_rule__NumericalUnaryExpression__Group_1__2_in_rule__NumericalUnaryExpression__Group_1__16378);
+            pushFollow(FOLLOW_rule__NumericalUnaryExpression__Group_1__2_in_rule__NumericalUnaryExpression__Group_1__14511);
             rule__NumericalUnaryExpression__Group_1__2();
             _fsp--;
 
@@ -8412,23 +5925,23 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__NumericalUnaryExpression__Group_1__1__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3130:1: rule__NumericalUnaryExpression__Group_1__1__Impl : ( ( rule__NumericalUnaryExpression__OperatorAssignment_1_1 ) ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2239:1: rule__NumericalUnaryExpression__Group_1__1__Impl : ( ( rule__NumericalUnaryExpression__OperatorAssignment_1_1 ) ) ;
     public final void rule__NumericalUnaryExpression__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3134:1: ( ( ( rule__NumericalUnaryExpression__OperatorAssignment_1_1 ) ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3135:1: ( ( rule__NumericalUnaryExpression__OperatorAssignment_1_1 ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2243:1: ( ( ( rule__NumericalUnaryExpression__OperatorAssignment_1_1 ) ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2244:1: ( ( rule__NumericalUnaryExpression__OperatorAssignment_1_1 ) )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3135:1: ( ( rule__NumericalUnaryExpression__OperatorAssignment_1_1 ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3136:1: ( rule__NumericalUnaryExpression__OperatorAssignment_1_1 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2244:1: ( ( rule__NumericalUnaryExpression__OperatorAssignment_1_1 ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2245:1: ( rule__NumericalUnaryExpression__OperatorAssignment_1_1 )
             {
              before(grammarAccess.getNumericalUnaryExpressionAccess().getOperatorAssignment_1_1()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3137:1: ( rule__NumericalUnaryExpression__OperatorAssignment_1_1 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3137:2: rule__NumericalUnaryExpression__OperatorAssignment_1_1
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2246:1: ( rule__NumericalUnaryExpression__OperatorAssignment_1_1 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2246:2: rule__NumericalUnaryExpression__OperatorAssignment_1_1
             {
-            pushFollow(FOLLOW_rule__NumericalUnaryExpression__OperatorAssignment_1_1_in_rule__NumericalUnaryExpression__Group_1__1__Impl6405);
+            pushFollow(FOLLOW_rule__NumericalUnaryExpression__OperatorAssignment_1_1_in_rule__NumericalUnaryExpression__Group_1__1__Impl4538);
             rule__NumericalUnaryExpression__OperatorAssignment_1_1();
             _fsp--;
 
@@ -8458,16 +5971,16 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__NumericalUnaryExpression__Group_1__2
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3147:1: rule__NumericalUnaryExpression__Group_1__2 : rule__NumericalUnaryExpression__Group_1__2__Impl ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2256:1: rule__NumericalUnaryExpression__Group_1__2 : rule__NumericalUnaryExpression__Group_1__2__Impl ;
     public final void rule__NumericalUnaryExpression__Group_1__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3151:1: ( rule__NumericalUnaryExpression__Group_1__2__Impl )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3152:2: rule__NumericalUnaryExpression__Group_1__2__Impl
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2260:1: ( rule__NumericalUnaryExpression__Group_1__2__Impl )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2261:2: rule__NumericalUnaryExpression__Group_1__2__Impl
             {
-            pushFollow(FOLLOW_rule__NumericalUnaryExpression__Group_1__2__Impl_in_rule__NumericalUnaryExpression__Group_1__26435);
+            pushFollow(FOLLOW_rule__NumericalUnaryExpression__Group_1__2__Impl_in_rule__NumericalUnaryExpression__Group_1__24568);
             rule__NumericalUnaryExpression__Group_1__2__Impl();
             _fsp--;
 
@@ -8490,23 +6003,23 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__NumericalUnaryExpression__Group_1__2__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3158:1: rule__NumericalUnaryExpression__Group_1__2__Impl : ( ( rule__NumericalUnaryExpression__OperandAssignment_1_2 ) ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2267:1: rule__NumericalUnaryExpression__Group_1__2__Impl : ( ( rule__NumericalUnaryExpression__OperandAssignment_1_2 ) ) ;
     public final void rule__NumericalUnaryExpression__Group_1__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3162:1: ( ( ( rule__NumericalUnaryExpression__OperandAssignment_1_2 ) ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3163:1: ( ( rule__NumericalUnaryExpression__OperandAssignment_1_2 ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2271:1: ( ( ( rule__NumericalUnaryExpression__OperandAssignment_1_2 ) ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2272:1: ( ( rule__NumericalUnaryExpression__OperandAssignment_1_2 ) )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3163:1: ( ( rule__NumericalUnaryExpression__OperandAssignment_1_2 ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3164:1: ( rule__NumericalUnaryExpression__OperandAssignment_1_2 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2272:1: ( ( rule__NumericalUnaryExpression__OperandAssignment_1_2 ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2273:1: ( rule__NumericalUnaryExpression__OperandAssignment_1_2 )
             {
              before(grammarAccess.getNumericalUnaryExpressionAccess().getOperandAssignment_1_2()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3165:1: ( rule__NumericalUnaryExpression__OperandAssignment_1_2 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3165:2: rule__NumericalUnaryExpression__OperandAssignment_1_2
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2274:1: ( rule__NumericalUnaryExpression__OperandAssignment_1_2 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2274:2: rule__NumericalUnaryExpression__OperandAssignment_1_2
             {
-            pushFollow(FOLLOW_rule__NumericalUnaryExpression__OperandAssignment_1_2_in_rule__NumericalUnaryExpression__Group_1__2__Impl6462);
+            pushFollow(FOLLOW_rule__NumericalUnaryExpression__OperandAssignment_1_2_in_rule__NumericalUnaryExpression__Group_1__2__Impl4595);
             rule__NumericalUnaryExpression__OperandAssignment_1_2();
             _fsp--;
 
@@ -8536,20 +6049,20 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__PrimaryExpression__Group_1__0
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3181:1: rule__PrimaryExpression__Group_1__0 : rule__PrimaryExpression__Group_1__0__Impl rule__PrimaryExpression__Group_1__1 ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2290:1: rule__PrimaryExpression__Group_1__0 : rule__PrimaryExpression__Group_1__0__Impl rule__PrimaryExpression__Group_1__1 ;
     public final void rule__PrimaryExpression__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3185:1: ( rule__PrimaryExpression__Group_1__0__Impl rule__PrimaryExpression__Group_1__1 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3186:2: rule__PrimaryExpression__Group_1__0__Impl rule__PrimaryExpression__Group_1__1
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2294:1: ( rule__PrimaryExpression__Group_1__0__Impl rule__PrimaryExpression__Group_1__1 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2295:2: rule__PrimaryExpression__Group_1__0__Impl rule__PrimaryExpression__Group_1__1
             {
-            pushFollow(FOLLOW_rule__PrimaryExpression__Group_1__0__Impl_in_rule__PrimaryExpression__Group_1__06498);
+            pushFollow(FOLLOW_rule__PrimaryExpression__Group_1__0__Impl_in_rule__PrimaryExpression__Group_1__04631);
             rule__PrimaryExpression__Group_1__0__Impl();
             _fsp--;
 
-            pushFollow(FOLLOW_rule__PrimaryExpression__Group_1__1_in_rule__PrimaryExpression__Group_1__06501);
+            pushFollow(FOLLOW_rule__PrimaryExpression__Group_1__1_in_rule__PrimaryExpression__Group_1__04634);
             rule__PrimaryExpression__Group_1__1();
             _fsp--;
 
@@ -8572,20 +6085,20 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__PrimaryExpression__Group_1__0__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3193:1: rule__PrimaryExpression__Group_1__0__Impl : ( '(' ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2302:1: rule__PrimaryExpression__Group_1__0__Impl : ( '(' ) ;
     public final void rule__PrimaryExpression__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3197:1: ( ( '(' ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3198:1: ( '(' )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2306:1: ( ( '(' ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2307:1: ( '(' )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3198:1: ( '(' )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3199:1: '('
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2307:1: ( '(' )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2308:1: '('
             {
              before(grammarAccess.getPrimaryExpressionAccess().getLeftParenthesisKeyword_1_0()); 
-            match(input,42,FOLLOW_42_in_rule__PrimaryExpression__Group_1__0__Impl6529); 
+            match(input,32,FOLLOW_32_in_rule__PrimaryExpression__Group_1__0__Impl4662); 
              after(grammarAccess.getPrimaryExpressionAccess().getLeftParenthesisKeyword_1_0()); 
 
             }
@@ -8609,20 +6122,20 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__PrimaryExpression__Group_1__1
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3212:1: rule__PrimaryExpression__Group_1__1 : rule__PrimaryExpression__Group_1__1__Impl rule__PrimaryExpression__Group_1__2 ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2321:1: rule__PrimaryExpression__Group_1__1 : rule__PrimaryExpression__Group_1__1__Impl rule__PrimaryExpression__Group_1__2 ;
     public final void rule__PrimaryExpression__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3216:1: ( rule__PrimaryExpression__Group_1__1__Impl rule__PrimaryExpression__Group_1__2 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3217:2: rule__PrimaryExpression__Group_1__1__Impl rule__PrimaryExpression__Group_1__2
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2325:1: ( rule__PrimaryExpression__Group_1__1__Impl rule__PrimaryExpression__Group_1__2 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2326:2: rule__PrimaryExpression__Group_1__1__Impl rule__PrimaryExpression__Group_1__2
             {
-            pushFollow(FOLLOW_rule__PrimaryExpression__Group_1__1__Impl_in_rule__PrimaryExpression__Group_1__16560);
+            pushFollow(FOLLOW_rule__PrimaryExpression__Group_1__1__Impl_in_rule__PrimaryExpression__Group_1__14693);
             rule__PrimaryExpression__Group_1__1__Impl();
             _fsp--;
 
-            pushFollow(FOLLOW_rule__PrimaryExpression__Group_1__2_in_rule__PrimaryExpression__Group_1__16563);
+            pushFollow(FOLLOW_rule__PrimaryExpression__Group_1__2_in_rule__PrimaryExpression__Group_1__14696);
             rule__PrimaryExpression__Group_1__2();
             _fsp--;
 
@@ -8645,20 +6158,20 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__PrimaryExpression__Group_1__1__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3224:1: rule__PrimaryExpression__Group_1__1__Impl : ( ruleLogicalOrExpression ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2333:1: rule__PrimaryExpression__Group_1__1__Impl : ( ruleLogicalOrExpression ) ;
     public final void rule__PrimaryExpression__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3228:1: ( ( ruleLogicalOrExpression ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3229:1: ( ruleLogicalOrExpression )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2337:1: ( ( ruleLogicalOrExpression ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2338:1: ( ruleLogicalOrExpression )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3229:1: ( ruleLogicalOrExpression )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3230:1: ruleLogicalOrExpression
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2338:1: ( ruleLogicalOrExpression )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2339:1: ruleLogicalOrExpression
             {
              before(grammarAccess.getPrimaryExpressionAccess().getLogicalOrExpressionParserRuleCall_1_1()); 
-            pushFollow(FOLLOW_ruleLogicalOrExpression_in_rule__PrimaryExpression__Group_1__1__Impl6590);
+            pushFollow(FOLLOW_ruleLogicalOrExpression_in_rule__PrimaryExpression__Group_1__1__Impl4723);
             ruleLogicalOrExpression();
             _fsp--;
 
@@ -8685,16 +6198,16 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__PrimaryExpression__Group_1__2
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3241:1: rule__PrimaryExpression__Group_1__2 : rule__PrimaryExpression__Group_1__2__Impl ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2350:1: rule__PrimaryExpression__Group_1__2 : rule__PrimaryExpression__Group_1__2__Impl ;
     public final void rule__PrimaryExpression__Group_1__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3245:1: ( rule__PrimaryExpression__Group_1__2__Impl )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3246:2: rule__PrimaryExpression__Group_1__2__Impl
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2354:1: ( rule__PrimaryExpression__Group_1__2__Impl )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2355:2: rule__PrimaryExpression__Group_1__2__Impl
             {
-            pushFollow(FOLLOW_rule__PrimaryExpression__Group_1__2__Impl_in_rule__PrimaryExpression__Group_1__26619);
+            pushFollow(FOLLOW_rule__PrimaryExpression__Group_1__2__Impl_in_rule__PrimaryExpression__Group_1__24752);
             rule__PrimaryExpression__Group_1__2__Impl();
             _fsp--;
 
@@ -8717,20 +6230,20 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__PrimaryExpression__Group_1__2__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3252:1: rule__PrimaryExpression__Group_1__2__Impl : ( ')' ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2361:1: rule__PrimaryExpression__Group_1__2__Impl : ( ')' ) ;
     public final void rule__PrimaryExpression__Group_1__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3256:1: ( ( ')' ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3257:1: ( ')' )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2365:1: ( ( ')' ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2366:1: ( ')' )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3257:1: ( ')' )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3258:1: ')'
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2366:1: ( ')' )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2367:1: ')'
             {
              before(grammarAccess.getPrimaryExpressionAccess().getRightParenthesisKeyword_1_2()); 
-            match(input,43,FOLLOW_43_in_rule__PrimaryExpression__Group_1__2__Impl6647); 
+            match(input,33,FOLLOW_33_in_rule__PrimaryExpression__Group_1__2__Impl4780); 
              after(grammarAccess.getPrimaryExpressionAccess().getRightParenthesisKeyword_1_2()); 
 
             }
@@ -8754,20 +6267,20 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__PrimitiveValueExpression__Group__0
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3277:1: rule__PrimitiveValueExpression__Group__0 : rule__PrimitiveValueExpression__Group__0__Impl rule__PrimitiveValueExpression__Group__1 ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2386:1: rule__PrimitiveValueExpression__Group__0 : rule__PrimitiveValueExpression__Group__0__Impl rule__PrimitiveValueExpression__Group__1 ;
     public final void rule__PrimitiveValueExpression__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3281:1: ( rule__PrimitiveValueExpression__Group__0__Impl rule__PrimitiveValueExpression__Group__1 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3282:2: rule__PrimitiveValueExpression__Group__0__Impl rule__PrimitiveValueExpression__Group__1
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2390:1: ( rule__PrimitiveValueExpression__Group__0__Impl rule__PrimitiveValueExpression__Group__1 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2391:2: rule__PrimitiveValueExpression__Group__0__Impl rule__PrimitiveValueExpression__Group__1
             {
-            pushFollow(FOLLOW_rule__PrimitiveValueExpression__Group__0__Impl_in_rule__PrimitiveValueExpression__Group__06684);
+            pushFollow(FOLLOW_rule__PrimitiveValueExpression__Group__0__Impl_in_rule__PrimitiveValueExpression__Group__04817);
             rule__PrimitiveValueExpression__Group__0__Impl();
             _fsp--;
 
-            pushFollow(FOLLOW_rule__PrimitiveValueExpression__Group__1_in_rule__PrimitiveValueExpression__Group__06687);
+            pushFollow(FOLLOW_rule__PrimitiveValueExpression__Group__1_in_rule__PrimitiveValueExpression__Group__04820);
             rule__PrimitiveValueExpression__Group__1();
             _fsp--;
 
@@ -8790,21 +6303,21 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__PrimitiveValueExpression__Group__0__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3289:1: rule__PrimitiveValueExpression__Group__0__Impl : ( () ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2398:1: rule__PrimitiveValueExpression__Group__0__Impl : ( () ) ;
     public final void rule__PrimitiveValueExpression__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3293:1: ( ( () ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3294:1: ( () )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2402:1: ( ( () ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2403:1: ( () )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3294:1: ( () )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3295:1: ()
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2403:1: ( () )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2404:1: ()
             {
              before(grammarAccess.getPrimitiveValueExpressionAccess().getPrimitiveValueExpressionAction_0()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3296:1: ()
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3298:1: 
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2405:1: ()
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2407:1: 
             {
             }
 
@@ -8827,16 +6340,16 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__PrimitiveValueExpression__Group__1
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3308:1: rule__PrimitiveValueExpression__Group__1 : rule__PrimitiveValueExpression__Group__1__Impl ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2417:1: rule__PrimitiveValueExpression__Group__1 : rule__PrimitiveValueExpression__Group__1__Impl ;
     public final void rule__PrimitiveValueExpression__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3312:1: ( rule__PrimitiveValueExpression__Group__1__Impl )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3313:2: rule__PrimitiveValueExpression__Group__1__Impl
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2421:1: ( rule__PrimitiveValueExpression__Group__1__Impl )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2422:2: rule__PrimitiveValueExpression__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__PrimitiveValueExpression__Group__1__Impl_in_rule__PrimitiveValueExpression__Group__16745);
+            pushFollow(FOLLOW_rule__PrimitiveValueExpression__Group__1__Impl_in_rule__PrimitiveValueExpression__Group__14878);
             rule__PrimitiveValueExpression__Group__1__Impl();
             _fsp--;
 
@@ -8859,23 +6372,23 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__PrimitiveValueExpression__Group__1__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3319:1: rule__PrimitiveValueExpression__Group__1__Impl : ( ( rule__PrimitiveValueExpression__ValueAssignment_1 ) ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2428:1: rule__PrimitiveValueExpression__Group__1__Impl : ( ( rule__PrimitiveValueExpression__ValueAssignment_1 ) ) ;
     public final void rule__PrimitiveValueExpression__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3323:1: ( ( ( rule__PrimitiveValueExpression__ValueAssignment_1 ) ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3324:1: ( ( rule__PrimitiveValueExpression__ValueAssignment_1 ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2432:1: ( ( ( rule__PrimitiveValueExpression__ValueAssignment_1 ) ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2433:1: ( ( rule__PrimitiveValueExpression__ValueAssignment_1 ) )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3324:1: ( ( rule__PrimitiveValueExpression__ValueAssignment_1 ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3325:1: ( rule__PrimitiveValueExpression__ValueAssignment_1 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2433:1: ( ( rule__PrimitiveValueExpression__ValueAssignment_1 ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2434:1: ( rule__PrimitiveValueExpression__ValueAssignment_1 )
             {
              before(grammarAccess.getPrimitiveValueExpressionAccess().getValueAssignment_1()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3326:1: ( rule__PrimitiveValueExpression__ValueAssignment_1 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3326:2: rule__PrimitiveValueExpression__ValueAssignment_1
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2435:1: ( rule__PrimitiveValueExpression__ValueAssignment_1 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2435:2: rule__PrimitiveValueExpression__ValueAssignment_1
             {
-            pushFollow(FOLLOW_rule__PrimitiveValueExpression__ValueAssignment_1_in_rule__PrimitiveValueExpression__Group__1__Impl6772);
+            pushFollow(FOLLOW_rule__PrimitiveValueExpression__ValueAssignment_1_in_rule__PrimitiveValueExpression__Group__1__Impl4905);
             rule__PrimitiveValueExpression__ValueAssignment_1();
             _fsp--;
 
@@ -8905,20 +6418,20 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__VariableReferenceExpression__Group__0
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3340:1: rule__VariableReferenceExpression__Group__0 : rule__VariableReferenceExpression__Group__0__Impl rule__VariableReferenceExpression__Group__1 ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2449:1: rule__VariableReferenceExpression__Group__0 : rule__VariableReferenceExpression__Group__0__Impl rule__VariableReferenceExpression__Group__1 ;
     public final void rule__VariableReferenceExpression__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3344:1: ( rule__VariableReferenceExpression__Group__0__Impl rule__VariableReferenceExpression__Group__1 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3345:2: rule__VariableReferenceExpression__Group__0__Impl rule__VariableReferenceExpression__Group__1
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2453:1: ( rule__VariableReferenceExpression__Group__0__Impl rule__VariableReferenceExpression__Group__1 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2454:2: rule__VariableReferenceExpression__Group__0__Impl rule__VariableReferenceExpression__Group__1
             {
-            pushFollow(FOLLOW_rule__VariableReferenceExpression__Group__0__Impl_in_rule__VariableReferenceExpression__Group__06806);
+            pushFollow(FOLLOW_rule__VariableReferenceExpression__Group__0__Impl_in_rule__VariableReferenceExpression__Group__04939);
             rule__VariableReferenceExpression__Group__0__Impl();
             _fsp--;
 
-            pushFollow(FOLLOW_rule__VariableReferenceExpression__Group__1_in_rule__VariableReferenceExpression__Group__06809);
+            pushFollow(FOLLOW_rule__VariableReferenceExpression__Group__1_in_rule__VariableReferenceExpression__Group__04942);
             rule__VariableReferenceExpression__Group__1();
             _fsp--;
 
@@ -8941,21 +6454,21 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__VariableReferenceExpression__Group__0__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3352:1: rule__VariableReferenceExpression__Group__0__Impl : ( () ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2461:1: rule__VariableReferenceExpression__Group__0__Impl : ( () ) ;
     public final void rule__VariableReferenceExpression__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3356:1: ( ( () ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3357:1: ( () )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2465:1: ( ( () ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2466:1: ( () )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3357:1: ( () )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3358:1: ()
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2466:1: ( () )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2467:1: ()
             {
              before(grammarAccess.getVariableReferenceExpressionAccess().getPropertyReferenceExpressionAction_0()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3359:1: ()
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3361:1: 
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2468:1: ()
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2470:1: 
             {
             }
 
@@ -8978,16 +6491,16 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__VariableReferenceExpression__Group__1
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3371:1: rule__VariableReferenceExpression__Group__1 : rule__VariableReferenceExpression__Group__1__Impl ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2480:1: rule__VariableReferenceExpression__Group__1 : rule__VariableReferenceExpression__Group__1__Impl ;
     public final void rule__VariableReferenceExpression__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3375:1: ( rule__VariableReferenceExpression__Group__1__Impl )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3376:2: rule__VariableReferenceExpression__Group__1__Impl
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2484:1: ( rule__VariableReferenceExpression__Group__1__Impl )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2485:2: rule__VariableReferenceExpression__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__VariableReferenceExpression__Group__1__Impl_in_rule__VariableReferenceExpression__Group__16867);
+            pushFollow(FOLLOW_rule__VariableReferenceExpression__Group__1__Impl_in_rule__VariableReferenceExpression__Group__15000);
             rule__VariableReferenceExpression__Group__1__Impl();
             _fsp--;
 
@@ -9010,23 +6523,23 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__VariableReferenceExpression__Group__1__Impl
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3382:1: rule__VariableReferenceExpression__Group__1__Impl : ( ( rule__VariableReferenceExpression__ValueAssignment_1 ) ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2491:1: rule__VariableReferenceExpression__Group__1__Impl : ( ( rule__VariableReferenceExpression__ValueAssignment_1 ) ) ;
     public final void rule__VariableReferenceExpression__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3386:1: ( ( ( rule__VariableReferenceExpression__ValueAssignment_1 ) ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3387:1: ( ( rule__VariableReferenceExpression__ValueAssignment_1 ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2495:1: ( ( ( rule__VariableReferenceExpression__ValueAssignment_1 ) ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2496:1: ( ( rule__VariableReferenceExpression__ValueAssignment_1 ) )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3387:1: ( ( rule__VariableReferenceExpression__ValueAssignment_1 ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3388:1: ( rule__VariableReferenceExpression__ValueAssignment_1 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2496:1: ( ( rule__VariableReferenceExpression__ValueAssignment_1 ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2497:1: ( rule__VariableReferenceExpression__ValueAssignment_1 )
             {
              before(grammarAccess.getVariableReferenceExpressionAccess().getValueAssignment_1()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3389:1: ( rule__VariableReferenceExpression__ValueAssignment_1 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3389:2: rule__VariableReferenceExpression__ValueAssignment_1
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2498:1: ( rule__VariableReferenceExpression__ValueAssignment_1 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2498:2: rule__VariableReferenceExpression__ValueAssignment_1
             {
-            pushFollow(FOLLOW_rule__VariableReferenceExpression__ValueAssignment_1_in_rule__VariableReferenceExpression__Group__1__Impl6894);
+            pushFollow(FOLLOW_rule__VariableReferenceExpression__ValueAssignment_1_in_rule__VariableReferenceExpression__Group__1__Impl5027);
             rule__VariableReferenceExpression__ValueAssignment_1();
             _fsp--;
 
@@ -9055,25 +6568,30 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
     // $ANTLR end rule__VariableReferenceExpression__Group__1__Impl
 
 
-    // $ANTLR start rule__StatementModel__StatementsAssignment
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3404:1: rule__StatementModel__StatementsAssignment : ( ruleStatement ) ;
-    public final void rule__StatementModel__StatementsAssignment() throws RecognitionException {
+    // $ANTLR start rule__CustomTransitionExpression__TriggersAssignment_1_0
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2513:1: rule__CustomTransitionExpression__TriggersAssignment_1_0 : ( ( RULE_ID ) ) ;
+    public final void rule__CustomTransitionExpression__TriggersAssignment_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3408:1: ( ( ruleStatement ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3409:1: ( ruleStatement )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2517:1: ( ( ( RULE_ID ) ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2518:1: ( ( RULE_ID ) )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3409:1: ( ruleStatement )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3410:1: ruleStatement
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2518:1: ( ( RULE_ID ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2519:1: ( RULE_ID )
             {
-             before(grammarAccess.getStatementModelAccess().getStatementsStatementParserRuleCall_0()); 
-            pushFollow(FOLLOW_ruleStatement_in_rule__StatementModel__StatementsAssignment6933);
-            ruleStatement();
-            _fsp--;
+             before(grammarAccess.getCustomTransitionExpressionAccess().getTriggersEventCrossReference_1_0_0()); 
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2520:1: ( RULE_ID )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2521:1: RULE_ID
+            {
+             before(grammarAccess.getCustomTransitionExpressionAccess().getTriggersEventIDTerminalRuleCall_1_0_0_1()); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__CustomTransitionExpression__TriggersAssignment_1_05070); 
+             after(grammarAccess.getCustomTransitionExpressionAccess().getTriggersEventIDTerminalRuleCall_1_0_0_1()); 
 
-             after(grammarAccess.getStatementModelAccess().getStatementsStatementParserRuleCall_0()); 
+            }
+
+             after(grammarAccess.getCustomTransitionExpressionAccess().getTriggersEventCrossReference_1_0_0()); 
 
             }
 
@@ -9092,28 +6610,33 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end rule__StatementModel__StatementsAssignment
+    // $ANTLR end rule__CustomTransitionExpression__TriggersAssignment_1_0
 
 
-    // $ANTLR start rule__TransitionDefinition__TriggersAssignment_0_0
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3419:1: rule__TransitionDefinition__TriggersAssignment_0_0 : ( ruleEvent ) ;
-    public final void rule__TransitionDefinition__TriggersAssignment_0_0() throws RecognitionException {
+    // $ANTLR start rule__CustomTransitionExpression__TriggersAssignment_1_1_1
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2532:1: rule__CustomTransitionExpression__TriggersAssignment_1_1_1 : ( ( RULE_ID ) ) ;
+    public final void rule__CustomTransitionExpression__TriggersAssignment_1_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3423:1: ( ( ruleEvent ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3424:1: ( ruleEvent )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2536:1: ( ( ( RULE_ID ) ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2537:1: ( ( RULE_ID ) )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3424:1: ( ruleEvent )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3425:1: ruleEvent
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2537:1: ( ( RULE_ID ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2538:1: ( RULE_ID )
             {
-             before(grammarAccess.getTransitionDefinitionAccess().getTriggersEventParserRuleCall_0_0_0()); 
-            pushFollow(FOLLOW_ruleEvent_in_rule__TransitionDefinition__TriggersAssignment_0_06964);
-            ruleEvent();
-            _fsp--;
+             before(grammarAccess.getCustomTransitionExpressionAccess().getTriggersEventCrossReference_1_1_1_0()); 
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2539:1: ( RULE_ID )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2540:1: RULE_ID
+            {
+             before(grammarAccess.getCustomTransitionExpressionAccess().getTriggersEventIDTerminalRuleCall_1_1_1_0_1()); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__CustomTransitionExpression__TriggersAssignment_1_1_15109); 
+             after(grammarAccess.getCustomTransitionExpressionAccess().getTriggersEventIDTerminalRuleCall_1_1_1_0_1()); 
 
-             after(grammarAccess.getTransitionDefinitionAccess().getTriggersEventParserRuleCall_0_0_0()); 
+            }
+
+             after(grammarAccess.getCustomTransitionExpressionAccess().getTriggersEventCrossReference_1_1_1_0()); 
 
             }
 
@@ -9132,28 +6655,28 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end rule__TransitionDefinition__TriggersAssignment_0_0
+    // $ANTLR end rule__CustomTransitionExpression__TriggersAssignment_1_1_1
 
 
-    // $ANTLR start rule__TransitionDefinition__TriggersAssignment_0_1_1
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3434:1: rule__TransitionDefinition__TriggersAssignment_0_1_1 : ( ruleEvent ) ;
-    public final void rule__TransitionDefinition__TriggersAssignment_0_1_1() throws RecognitionException {
+    // $ANTLR start rule__CustomTransitionExpression__GuardExpressionAssignment_2_1
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2551:1: rule__CustomTransitionExpression__GuardExpressionAssignment_2_1 : ( ruleLogicalOrExpression ) ;
+    public final void rule__CustomTransitionExpression__GuardExpressionAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3438:1: ( ( ruleEvent ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3439:1: ( ruleEvent )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2555:1: ( ( ruleLogicalOrExpression ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2556:1: ( ruleLogicalOrExpression )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3439:1: ( ruleEvent )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3440:1: ruleEvent
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2556:1: ( ruleLogicalOrExpression )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2557:1: ruleLogicalOrExpression
             {
-             before(grammarAccess.getTransitionDefinitionAccess().getTriggersEventParserRuleCall_0_1_1_0()); 
-            pushFollow(FOLLOW_ruleEvent_in_rule__TransitionDefinition__TriggersAssignment_0_1_16995);
-            ruleEvent();
+             before(grammarAccess.getCustomTransitionExpressionAccess().getGuardExpressionLogicalOrExpressionParserRuleCall_2_1_0()); 
+            pushFollow(FOLLOW_ruleLogicalOrExpression_in_rule__CustomTransitionExpression__GuardExpressionAssignment_2_15144);
+            ruleLogicalOrExpression();
             _fsp--;
 
-             after(grammarAccess.getTransitionDefinitionAccess().getTriggersEventParserRuleCall_0_1_1_0()); 
+             after(grammarAccess.getCustomTransitionExpressionAccess().getGuardExpressionLogicalOrExpressionParserRuleCall_2_1_0()); 
 
             }
 
@@ -9172,28 +6695,28 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end rule__TransitionDefinition__TriggersAssignment_0_1_1
+    // $ANTLR end rule__CustomTransitionExpression__GuardExpressionAssignment_2_1
 
 
-    // $ANTLR start rule__TransitionDefinition__GuardExpressionAssignment_1
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3449:1: rule__TransitionDefinition__GuardExpressionAssignment_1 : ( ruleExpressionRule ) ;
-    public final void rule__TransitionDefinition__GuardExpressionAssignment_1() throws RecognitionException {
+    // $ANTLR start rule__CustomTransitionExpression__ActionAssignment_3_1
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2566:1: rule__CustomTransitionExpression__ActionAssignment_3_1 : ( ruleExpressionRule ) ;
+    public final void rule__CustomTransitionExpression__ActionAssignment_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3453:1: ( ( ruleExpressionRule ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3454:1: ( ruleExpressionRule )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2570:1: ( ( ruleExpressionRule ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2571:1: ( ruleExpressionRule )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3454:1: ( ruleExpressionRule )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3455:1: ruleExpressionRule
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2571:1: ( ruleExpressionRule )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2572:1: ruleExpressionRule
             {
-             before(grammarAccess.getTransitionDefinitionAccess().getGuardExpressionExpressionRuleParserRuleCall_1_0()); 
-            pushFollow(FOLLOW_ruleExpressionRule_in_rule__TransitionDefinition__GuardExpressionAssignment_17026);
+             before(grammarAccess.getCustomTransitionExpressionAccess().getActionExpressionRuleParserRuleCall_3_1_0()); 
+            pushFollow(FOLLOW_ruleExpressionRule_in_rule__CustomTransitionExpression__ActionAssignment_3_15175);
             ruleExpressionRule();
             _fsp--;
 
-             after(grammarAccess.getTransitionDefinitionAccess().getGuardExpressionExpressionRuleParserRuleCall_1_0()); 
+             after(grammarAccess.getCustomTransitionExpressionAccess().getActionExpressionRuleParserRuleCall_3_1_0()); 
 
             }
 
@@ -9212,338 +6735,27 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end rule__TransitionDefinition__GuardExpressionAssignment_1
-
-
-    // $ANTLR start rule__VariableDefinition__NameAssignment_1
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3464:1: rule__VariableDefinition__NameAssignment_1 : ( RULE_ID ) ;
-    public final void rule__VariableDefinition__NameAssignment_1() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3468:1: ( ( RULE_ID ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3469:1: ( RULE_ID )
-            {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3469:1: ( RULE_ID )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3470:1: RULE_ID
-            {
-             before(grammarAccess.getVariableDefinitionAccess().getNameIDTerminalRuleCall_1_0()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__VariableDefinition__NameAssignment_17057); 
-             after(grammarAccess.getVariableDefinitionAccess().getNameIDTerminalRuleCall_1_0()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__VariableDefinition__NameAssignment_1
-
-
-    // $ANTLR start rule__VariableDefinition__TypeAssignment_3
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3479:1: rule__VariableDefinition__TypeAssignment_3 : ( ruleType ) ;
-    public final void rule__VariableDefinition__TypeAssignment_3() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3483:1: ( ( ruleType ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3484:1: ( ruleType )
-            {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3484:1: ( ruleType )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3485:1: ruleType
-            {
-             before(grammarAccess.getVariableDefinitionAccess().getTypeTypeEnumRuleCall_3_0()); 
-            pushFollow(FOLLOW_ruleType_in_rule__VariableDefinition__TypeAssignment_37088);
-            ruleType();
-            _fsp--;
-
-             after(grammarAccess.getVariableDefinitionAccess().getTypeTypeEnumRuleCall_3_0()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__VariableDefinition__TypeAssignment_3
-
-
-    // $ANTLR start rule__ActionDefinition__ExpressionAssignment_2
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3494:1: rule__ActionDefinition__ExpressionAssignment_2 : ( ruleExpressionRule ) ;
-    public final void rule__ActionDefinition__ExpressionAssignment_2() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3498:1: ( ( ruleExpressionRule ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3499:1: ( ruleExpressionRule )
-            {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3499:1: ( ruleExpressionRule )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3500:1: ruleExpressionRule
-            {
-             before(grammarAccess.getActionDefinitionAccess().getExpressionExpressionRuleParserRuleCall_2_0()); 
-            pushFollow(FOLLOW_ruleExpressionRule_in_rule__ActionDefinition__ExpressionAssignment_27119);
-            ruleExpressionRule();
-            _fsp--;
-
-             after(grammarAccess.getActionDefinitionAccess().getExpressionExpressionRuleParserRuleCall_2_0()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__ActionDefinition__ExpressionAssignment_2
-
-
-    // $ANTLR start rule__SignalEventDefinition__NameAssignment_1
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3509:1: rule__SignalEventDefinition__NameAssignment_1 : ( RULE_ID ) ;
-    public final void rule__SignalEventDefinition__NameAssignment_1() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3513:1: ( ( RULE_ID ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3514:1: ( RULE_ID )
-            {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3514:1: ( RULE_ID )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3515:1: RULE_ID
-            {
-             before(grammarAccess.getSignalEventDefinitionAccess().getNameIDTerminalRuleCall_1_0()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__SignalEventDefinition__NameAssignment_17150); 
-             after(grammarAccess.getSignalEventDefinitionAccess().getNameIDTerminalRuleCall_1_0()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__SignalEventDefinition__NameAssignment_1
-
-
-    // $ANTLR start rule__SignalEventDefinition__DirectionAssignment_3
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3524:1: rule__SignalEventDefinition__DirectionAssignment_3 : ( ruleDirectionKind ) ;
-    public final void rule__SignalEventDefinition__DirectionAssignment_3() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3528:1: ( ( ruleDirectionKind ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3529:1: ( ruleDirectionKind )
-            {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3529:1: ( ruleDirectionKind )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3530:1: ruleDirectionKind
-            {
-             before(grammarAccess.getSignalEventDefinitionAccess().getDirectionDirectionKindEnumRuleCall_3_0()); 
-            pushFollow(FOLLOW_ruleDirectionKind_in_rule__SignalEventDefinition__DirectionAssignment_37181);
-            ruleDirectionKind();
-            _fsp--;
-
-             after(grammarAccess.getSignalEventDefinitionAccess().getDirectionDirectionKindEnumRuleCall_3_0()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__SignalEventDefinition__DirectionAssignment_3
-
-
-    // $ANTLR start rule__TimeEventDefinition__TimeAssignment_2
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3539:1: rule__TimeEventDefinition__TimeAssignment_2 : ( ruleTimeConstant ) ;
-    public final void rule__TimeEventDefinition__TimeAssignment_2() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3543:1: ( ( ruleTimeConstant ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3544:1: ( ruleTimeConstant )
-            {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3544:1: ( ruleTimeConstant )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3545:1: ruleTimeConstant
-            {
-             before(grammarAccess.getTimeEventDefinitionAccess().getTimeTimeConstantParserRuleCall_2_0()); 
-            pushFollow(FOLLOW_ruleTimeConstant_in_rule__TimeEventDefinition__TimeAssignment_27212);
-            ruleTimeConstant();
-            _fsp--;
-
-             after(grammarAccess.getTimeEventDefinitionAccess().getTimeTimeConstantParserRuleCall_2_0()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__TimeEventDefinition__TimeAssignment_2
-
-
-    // $ANTLR start rule__TimeConstant__ValueAssignment_0
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3554:1: rule__TimeConstant__ValueAssignment_0 : ( RULE_INT ) ;
-    public final void rule__TimeConstant__ValueAssignment_0() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3558:1: ( ( RULE_INT ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3559:1: ( RULE_INT )
-            {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3559:1: ( RULE_INT )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3560:1: RULE_INT
-            {
-             before(grammarAccess.getTimeConstantAccess().getValueINTTerminalRuleCall_0_0()); 
-            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__TimeConstant__ValueAssignment_07243); 
-             after(grammarAccess.getTimeConstantAccess().getValueINTTerminalRuleCall_0_0()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__TimeConstant__ValueAssignment_0
-
-
-    // $ANTLR start rule__TimeConstant__UnitAssignment_1
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3569:1: rule__TimeConstant__UnitAssignment_1 : ( ruleTimeUnit ) ;
-    public final void rule__TimeConstant__UnitAssignment_1() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3573:1: ( ( ruleTimeUnit ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3574:1: ( ruleTimeUnit )
-            {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3574:1: ( ruleTimeUnit )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3575:1: ruleTimeUnit
-            {
-             before(grammarAccess.getTimeConstantAccess().getUnitTimeUnitEnumRuleCall_1_0()); 
-            pushFollow(FOLLOW_ruleTimeUnit_in_rule__TimeConstant__UnitAssignment_17274);
-            ruleTimeUnit();
-            _fsp--;
-
-             after(grammarAccess.getTimeConstantAccess().getUnitTimeUnitEnumRuleCall_1_0()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__TimeConstant__UnitAssignment_1
+    // $ANTLR end rule__CustomTransitionExpression__ActionAssignment_3_1
 
 
     // $ANTLR start rule__ExpressionRule__ExpressionAssignment
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3584:1: rule__ExpressionRule__ExpressionAssignment : ( ( rule__ExpressionRule__ExpressionAlternatives_0 ) ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2581:1: rule__ExpressionRule__ExpressionAssignment : ( ( rule__ExpressionRule__ExpressionAlternatives_0 ) ) ;
     public final void rule__ExpressionRule__ExpressionAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3588:1: ( ( ( rule__ExpressionRule__ExpressionAlternatives_0 ) ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3589:1: ( ( rule__ExpressionRule__ExpressionAlternatives_0 ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2585:1: ( ( ( rule__ExpressionRule__ExpressionAlternatives_0 ) ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2586:1: ( ( rule__ExpressionRule__ExpressionAlternatives_0 ) )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3589:1: ( ( rule__ExpressionRule__ExpressionAlternatives_0 ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3590:1: ( rule__ExpressionRule__ExpressionAlternatives_0 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2586:1: ( ( rule__ExpressionRule__ExpressionAlternatives_0 ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2587:1: ( rule__ExpressionRule__ExpressionAlternatives_0 )
             {
              before(grammarAccess.getExpressionRuleAccess().getExpressionAlternatives_0()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3591:1: ( rule__ExpressionRule__ExpressionAlternatives_0 )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3591:2: rule__ExpressionRule__ExpressionAlternatives_0
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2588:1: ( rule__ExpressionRule__ExpressionAlternatives_0 )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2588:2: rule__ExpressionRule__ExpressionAlternatives_0
             {
-            pushFollow(FOLLOW_rule__ExpressionRule__ExpressionAlternatives_0_in_rule__ExpressionRule__ExpressionAssignment7305);
+            pushFollow(FOLLOW_rule__ExpressionRule__ExpressionAlternatives_0_in_rule__ExpressionRule__ExpressionAssignment5206);
             rule__ExpressionRule__ExpressionAlternatives_0();
             _fsp--;
 
@@ -9573,24 +6785,24 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__RaiseEventExpression__EventAssignment_1
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3600:1: rule__RaiseEventExpression__EventAssignment_1 : ( ( RULE_ID ) ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2597:1: rule__RaiseEventExpression__EventAssignment_1 : ( ( RULE_ID ) ) ;
     public final void rule__RaiseEventExpression__EventAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3604:1: ( ( ( RULE_ID ) ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3605:1: ( ( RULE_ID ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2601:1: ( ( ( RULE_ID ) ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2602:1: ( ( RULE_ID ) )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3605:1: ( ( RULE_ID ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3606:1: ( RULE_ID )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2602:1: ( ( RULE_ID ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2603:1: ( RULE_ID )
             {
              before(grammarAccess.getRaiseEventExpressionAccess().getEventEventCrossReference_1_0()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3607:1: ( RULE_ID )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3608:1: RULE_ID
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2604:1: ( RULE_ID )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2605:1: RULE_ID
             {
              before(grammarAccess.getRaiseEventExpressionAccess().getEventEventIDTerminalRuleCall_1_0_1()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__RaiseEventExpression__EventAssignment_17342); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__RaiseEventExpression__EventAssignment_15243); 
              after(grammarAccess.getRaiseEventExpressionAccess().getEventEventIDTerminalRuleCall_1_0_1()); 
 
             }
@@ -9618,20 +6830,20 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__LogicalOrExpression__RightOperandAssignment_1_2
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3619:1: rule__LogicalOrExpression__RightOperandAssignment_1_2 : ( ruleLogicalAndExpression ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2616:1: rule__LogicalOrExpression__RightOperandAssignment_1_2 : ( ruleLogicalAndExpression ) ;
     public final void rule__LogicalOrExpression__RightOperandAssignment_1_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3623:1: ( ( ruleLogicalAndExpression ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3624:1: ( ruleLogicalAndExpression )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2620:1: ( ( ruleLogicalAndExpression ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2621:1: ( ruleLogicalAndExpression )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3624:1: ( ruleLogicalAndExpression )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3625:1: ruleLogicalAndExpression
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2621:1: ( ruleLogicalAndExpression )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2622:1: ruleLogicalAndExpression
             {
              before(grammarAccess.getLogicalOrExpressionAccess().getRightOperandLogicalAndExpressionParserRuleCall_1_2_0()); 
-            pushFollow(FOLLOW_ruleLogicalAndExpression_in_rule__LogicalOrExpression__RightOperandAssignment_1_27377);
+            pushFollow(FOLLOW_ruleLogicalAndExpression_in_rule__LogicalOrExpression__RightOperandAssignment_1_25278);
             ruleLogicalAndExpression();
             _fsp--;
 
@@ -9658,20 +6870,20 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__LogicalAndExpression__RightOperandAssignment_1_2
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3634:1: rule__LogicalAndExpression__RightOperandAssignment_1_2 : ( ruleLogicalNotExpression ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2631:1: rule__LogicalAndExpression__RightOperandAssignment_1_2 : ( ruleLogicalNotExpression ) ;
     public final void rule__LogicalAndExpression__RightOperandAssignment_1_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3638:1: ( ( ruleLogicalNotExpression ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3639:1: ( ruleLogicalNotExpression )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2635:1: ( ( ruleLogicalNotExpression ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2636:1: ( ruleLogicalNotExpression )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3639:1: ( ruleLogicalNotExpression )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3640:1: ruleLogicalNotExpression
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2636:1: ( ruleLogicalNotExpression )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2637:1: ruleLogicalNotExpression
             {
              before(grammarAccess.getLogicalAndExpressionAccess().getRightOperandLogicalNotExpressionParserRuleCall_1_2_0()); 
-            pushFollow(FOLLOW_ruleLogicalNotExpression_in_rule__LogicalAndExpression__RightOperandAssignment_1_27408);
+            pushFollow(FOLLOW_ruleLogicalNotExpression_in_rule__LogicalAndExpression__RightOperandAssignment_1_25309);
             ruleLogicalNotExpression();
             _fsp--;
 
@@ -9698,20 +6910,20 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__LogicalNotExpression__OperandAssignment_1_2
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3649:1: rule__LogicalNotExpression__OperandAssignment_1_2 : ( ruleLogicalRelationExpression ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2646:1: rule__LogicalNotExpression__OperandAssignment_1_2 : ( ruleLogicalRelationExpression ) ;
     public final void rule__LogicalNotExpression__OperandAssignment_1_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3653:1: ( ( ruleLogicalRelationExpression ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3654:1: ( ruleLogicalRelationExpression )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2650:1: ( ( ruleLogicalRelationExpression ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2651:1: ( ruleLogicalRelationExpression )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3654:1: ( ruleLogicalRelationExpression )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3655:1: ruleLogicalRelationExpression
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2651:1: ( ruleLogicalRelationExpression )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2652:1: ruleLogicalRelationExpression
             {
              before(grammarAccess.getLogicalNotExpressionAccess().getOperandLogicalRelationExpressionParserRuleCall_1_2_0()); 
-            pushFollow(FOLLOW_ruleLogicalRelationExpression_in_rule__LogicalNotExpression__OperandAssignment_1_27439);
+            pushFollow(FOLLOW_ruleLogicalRelationExpression_in_rule__LogicalNotExpression__OperandAssignment_1_25340);
             ruleLogicalRelationExpression();
             _fsp--;
 
@@ -9738,20 +6950,20 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__LogicalRelationExpression__OperatorAssignment_1_1
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3664:1: rule__LogicalRelationExpression__OperatorAssignment_1_1 : ( ruleRelationalOperator ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2661:1: rule__LogicalRelationExpression__OperatorAssignment_1_1 : ( ruleRelationalOperator ) ;
     public final void rule__LogicalRelationExpression__OperatorAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3668:1: ( ( ruleRelationalOperator ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3669:1: ( ruleRelationalOperator )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2665:1: ( ( ruleRelationalOperator ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2666:1: ( ruleRelationalOperator )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3669:1: ( ruleRelationalOperator )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3670:1: ruleRelationalOperator
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2666:1: ( ruleRelationalOperator )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2667:1: ruleRelationalOperator
             {
              before(grammarAccess.getLogicalRelationExpressionAccess().getOperatorRelationalOperatorEnumRuleCall_1_1_0()); 
-            pushFollow(FOLLOW_ruleRelationalOperator_in_rule__LogicalRelationExpression__OperatorAssignment_1_17470);
+            pushFollow(FOLLOW_ruleRelationalOperator_in_rule__LogicalRelationExpression__OperatorAssignment_1_15371);
             ruleRelationalOperator();
             _fsp--;
 
@@ -9778,20 +6990,20 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__LogicalRelationExpression__RightOperandAssignment_1_2
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3679:1: rule__LogicalRelationExpression__RightOperandAssignment_1_2 : ( ruleNumericalAddSubtractExpression ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2676:1: rule__LogicalRelationExpression__RightOperandAssignment_1_2 : ( ruleNumericalAddSubtractExpression ) ;
     public final void rule__LogicalRelationExpression__RightOperandAssignment_1_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3683:1: ( ( ruleNumericalAddSubtractExpression ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3684:1: ( ruleNumericalAddSubtractExpression )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2680:1: ( ( ruleNumericalAddSubtractExpression ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2681:1: ( ruleNumericalAddSubtractExpression )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3684:1: ( ruleNumericalAddSubtractExpression )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3685:1: ruleNumericalAddSubtractExpression
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2681:1: ( ruleNumericalAddSubtractExpression )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2682:1: ruleNumericalAddSubtractExpression
             {
              before(grammarAccess.getLogicalRelationExpressionAccess().getRightOperandNumericalAddSubtractExpressionParserRuleCall_1_2_0()); 
-            pushFollow(FOLLOW_ruleNumericalAddSubtractExpression_in_rule__LogicalRelationExpression__RightOperandAssignment_1_27501);
+            pushFollow(FOLLOW_ruleNumericalAddSubtractExpression_in_rule__LogicalRelationExpression__RightOperandAssignment_1_25402);
             ruleNumericalAddSubtractExpression();
             _fsp--;
 
@@ -9818,20 +7030,20 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__NumericalAddSubtractExpression__OperatorAssignment_1_1
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3694:1: rule__NumericalAddSubtractExpression__OperatorAssignment_1_1 : ( ruleAdditiveOperator ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2691:1: rule__NumericalAddSubtractExpression__OperatorAssignment_1_1 : ( ruleAdditiveOperator ) ;
     public final void rule__NumericalAddSubtractExpression__OperatorAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3698:1: ( ( ruleAdditiveOperator ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3699:1: ( ruleAdditiveOperator )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2695:1: ( ( ruleAdditiveOperator ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2696:1: ( ruleAdditiveOperator )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3699:1: ( ruleAdditiveOperator )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3700:1: ruleAdditiveOperator
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2696:1: ( ruleAdditiveOperator )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2697:1: ruleAdditiveOperator
             {
              before(grammarAccess.getNumericalAddSubtractExpressionAccess().getOperatorAdditiveOperatorEnumRuleCall_1_1_0()); 
-            pushFollow(FOLLOW_ruleAdditiveOperator_in_rule__NumericalAddSubtractExpression__OperatorAssignment_1_17532);
+            pushFollow(FOLLOW_ruleAdditiveOperator_in_rule__NumericalAddSubtractExpression__OperatorAssignment_1_15433);
             ruleAdditiveOperator();
             _fsp--;
 
@@ -9858,20 +7070,20 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__NumericalAddSubtractExpression__RightOperandAssignment_1_2
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3709:1: rule__NumericalAddSubtractExpression__RightOperandAssignment_1_2 : ( ruleNumericalMultiplyDivideExpression ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2706:1: rule__NumericalAddSubtractExpression__RightOperandAssignment_1_2 : ( ruleNumericalMultiplyDivideExpression ) ;
     public final void rule__NumericalAddSubtractExpression__RightOperandAssignment_1_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3713:1: ( ( ruleNumericalMultiplyDivideExpression ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3714:1: ( ruleNumericalMultiplyDivideExpression )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2710:1: ( ( ruleNumericalMultiplyDivideExpression ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2711:1: ( ruleNumericalMultiplyDivideExpression )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3714:1: ( ruleNumericalMultiplyDivideExpression )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3715:1: ruleNumericalMultiplyDivideExpression
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2711:1: ( ruleNumericalMultiplyDivideExpression )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2712:1: ruleNumericalMultiplyDivideExpression
             {
              before(grammarAccess.getNumericalAddSubtractExpressionAccess().getRightOperandNumericalMultiplyDivideExpressionParserRuleCall_1_2_0()); 
-            pushFollow(FOLLOW_ruleNumericalMultiplyDivideExpression_in_rule__NumericalAddSubtractExpression__RightOperandAssignment_1_27563);
+            pushFollow(FOLLOW_ruleNumericalMultiplyDivideExpression_in_rule__NumericalAddSubtractExpression__RightOperandAssignment_1_25464);
             ruleNumericalMultiplyDivideExpression();
             _fsp--;
 
@@ -9898,20 +7110,20 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__NumericalMultiplyDivideExpression__OperatorAssignment_1_1
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3724:1: rule__NumericalMultiplyDivideExpression__OperatorAssignment_1_1 : ( ruleMultiplicativeOperator ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2721:1: rule__NumericalMultiplyDivideExpression__OperatorAssignment_1_1 : ( ruleMultiplicativeOperator ) ;
     public final void rule__NumericalMultiplyDivideExpression__OperatorAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3728:1: ( ( ruleMultiplicativeOperator ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3729:1: ( ruleMultiplicativeOperator )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2725:1: ( ( ruleMultiplicativeOperator ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2726:1: ( ruleMultiplicativeOperator )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3729:1: ( ruleMultiplicativeOperator )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3730:1: ruleMultiplicativeOperator
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2726:1: ( ruleMultiplicativeOperator )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2727:1: ruleMultiplicativeOperator
             {
              before(grammarAccess.getNumericalMultiplyDivideExpressionAccess().getOperatorMultiplicativeOperatorEnumRuleCall_1_1_0()); 
-            pushFollow(FOLLOW_ruleMultiplicativeOperator_in_rule__NumericalMultiplyDivideExpression__OperatorAssignment_1_17594);
+            pushFollow(FOLLOW_ruleMultiplicativeOperator_in_rule__NumericalMultiplyDivideExpression__OperatorAssignment_1_15495);
             ruleMultiplicativeOperator();
             _fsp--;
 
@@ -9938,20 +7150,20 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__NumericalMultiplyDivideExpression__RightOperandAssignment_1_2
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3739:1: rule__NumericalMultiplyDivideExpression__RightOperandAssignment_1_2 : ( ruleNumericalUnaryExpression ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2736:1: rule__NumericalMultiplyDivideExpression__RightOperandAssignment_1_2 : ( ruleNumericalUnaryExpression ) ;
     public final void rule__NumericalMultiplyDivideExpression__RightOperandAssignment_1_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3743:1: ( ( ruleNumericalUnaryExpression ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3744:1: ( ruleNumericalUnaryExpression )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2740:1: ( ( ruleNumericalUnaryExpression ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2741:1: ( ruleNumericalUnaryExpression )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3744:1: ( ruleNumericalUnaryExpression )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3745:1: ruleNumericalUnaryExpression
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2741:1: ( ruleNumericalUnaryExpression )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2742:1: ruleNumericalUnaryExpression
             {
              before(grammarAccess.getNumericalMultiplyDivideExpressionAccess().getRightOperandNumericalUnaryExpressionParserRuleCall_1_2_0()); 
-            pushFollow(FOLLOW_ruleNumericalUnaryExpression_in_rule__NumericalMultiplyDivideExpression__RightOperandAssignment_1_27625);
+            pushFollow(FOLLOW_ruleNumericalUnaryExpression_in_rule__NumericalMultiplyDivideExpression__RightOperandAssignment_1_25526);
             ruleNumericalUnaryExpression();
             _fsp--;
 
@@ -9978,20 +7190,20 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__NumericalUnaryExpression__OperatorAssignment_1_1
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3754:1: rule__NumericalUnaryExpression__OperatorAssignment_1_1 : ( ruleUnaryOperator ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2751:1: rule__NumericalUnaryExpression__OperatorAssignment_1_1 : ( ruleUnaryOperator ) ;
     public final void rule__NumericalUnaryExpression__OperatorAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3758:1: ( ( ruleUnaryOperator ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3759:1: ( ruleUnaryOperator )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2755:1: ( ( ruleUnaryOperator ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2756:1: ( ruleUnaryOperator )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3759:1: ( ruleUnaryOperator )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3760:1: ruleUnaryOperator
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2756:1: ( ruleUnaryOperator )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2757:1: ruleUnaryOperator
             {
              before(grammarAccess.getNumericalUnaryExpressionAccess().getOperatorUnaryOperatorEnumRuleCall_1_1_0()); 
-            pushFollow(FOLLOW_ruleUnaryOperator_in_rule__NumericalUnaryExpression__OperatorAssignment_1_17656);
+            pushFollow(FOLLOW_ruleUnaryOperator_in_rule__NumericalUnaryExpression__OperatorAssignment_1_15557);
             ruleUnaryOperator();
             _fsp--;
 
@@ -10018,20 +7230,20 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__NumericalUnaryExpression__OperandAssignment_1_2
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3769:1: rule__NumericalUnaryExpression__OperandAssignment_1_2 : ( rulePrimaryExpression ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2766:1: rule__NumericalUnaryExpression__OperandAssignment_1_2 : ( rulePrimaryExpression ) ;
     public final void rule__NumericalUnaryExpression__OperandAssignment_1_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3773:1: ( ( rulePrimaryExpression ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3774:1: ( rulePrimaryExpression )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2770:1: ( ( rulePrimaryExpression ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2771:1: ( rulePrimaryExpression )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3774:1: ( rulePrimaryExpression )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3775:1: rulePrimaryExpression
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2771:1: ( rulePrimaryExpression )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2772:1: rulePrimaryExpression
             {
              before(grammarAccess.getNumericalUnaryExpressionAccess().getOperandPrimaryExpressionParserRuleCall_1_2_0()); 
-            pushFollow(FOLLOW_rulePrimaryExpression_in_rule__NumericalUnaryExpression__OperandAssignment_1_27687);
+            pushFollow(FOLLOW_rulePrimaryExpression_in_rule__NumericalUnaryExpression__OperandAssignment_1_25588);
             rulePrimaryExpression();
             _fsp--;
 
@@ -10058,20 +7270,20 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__PrimitiveValueExpression__ValueAssignment_1
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3784:1: rule__PrimitiveValueExpression__ValueAssignment_1 : ( ruleLiteral ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2781:1: rule__PrimitiveValueExpression__ValueAssignment_1 : ( ruleLiteral ) ;
     public final void rule__PrimitiveValueExpression__ValueAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3788:1: ( ( ruleLiteral ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3789:1: ( ruleLiteral )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2785:1: ( ( ruleLiteral ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2786:1: ( ruleLiteral )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3789:1: ( ruleLiteral )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3790:1: ruleLiteral
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2786:1: ( ruleLiteral )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2787:1: ruleLiteral
             {
              before(grammarAccess.getPrimitiveValueExpressionAccess().getValueLiteralParserRuleCall_1_0()); 
-            pushFollow(FOLLOW_ruleLiteral_in_rule__PrimitiveValueExpression__ValueAssignment_17718);
+            pushFollow(FOLLOW_ruleLiteral_in_rule__PrimitiveValueExpression__ValueAssignment_15619);
             ruleLiteral();
             _fsp--;
 
@@ -10098,29 +7310,29 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__VariableReferenceExpression__ValueAssignment_1
-    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3799:1: rule__VariableReferenceExpression__ValueAssignment_1 : ( ( RULE_ID ) ) ;
+    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2796:1: rule__VariableReferenceExpression__ValueAssignment_1 : ( ( RULE_ID ) ) ;
     public final void rule__VariableReferenceExpression__ValueAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3803:1: ( ( ( RULE_ID ) ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3804:1: ( ( RULE_ID ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2800:1: ( ( ( RULE_ID ) ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2801:1: ( ( RULE_ID ) )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3804:1: ( ( RULE_ID ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3805:1: ( RULE_ID )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2801:1: ( ( RULE_ID ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2802:1: ( RULE_ID )
             {
-             before(grammarAccess.getVariableReferenceExpressionAccess().getValueVariableDefinitionCrossReference_1_0()); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3806:1: ( RULE_ID )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:3807:1: RULE_ID
+             before(grammarAccess.getVariableReferenceExpressionAccess().getValueVariableCrossReference_1_0()); 
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2803:1: ( RULE_ID )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:2804:1: RULE_ID
             {
-             before(grammarAccess.getVariableReferenceExpressionAccess().getValueVariableDefinitionIDTerminalRuleCall_1_0_1()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__VariableReferenceExpression__ValueAssignment_17753); 
-             after(grammarAccess.getVariableReferenceExpressionAccess().getValueVariableDefinitionIDTerminalRuleCall_1_0_1()); 
+             before(grammarAccess.getVariableReferenceExpressionAccess().getValueVariableIDTerminalRuleCall_1_0_1()); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__VariableReferenceExpression__ValueAssignment_15654); 
+             after(grammarAccess.getVariableReferenceExpressionAccess().getValueVariableIDTerminalRuleCall_1_0_1()); 
 
             }
 
-             after(grammarAccess.getVariableReferenceExpressionAccess().getValueVariableDefinitionCrossReference_1_0()); 
+             after(grammarAccess.getVariableReferenceExpressionAccess().getValueVariableCrossReference_1_0()); 
 
             }
 
@@ -10144,320 +7356,229 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
 
  
 
-    public static final BitSet FOLLOW_ruleStatementModel_in_entryRuleStatementModel61 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleStatementModel68 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__StatementModel__StatementsAssignment_in_ruleStatementModel96 = new BitSet(new long[]{0x0000034800002002L});
-    public static final BitSet FOLLOW_rule__StatementModel__StatementsAssignment_in_ruleStatementModel108 = new BitSet(new long[]{0x0000034800002002L});
-    public static final BitSet FOLLOW_ruleStatement_in_entryRuleStatement138 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleStatement145 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statement__Alternatives_in_ruleStatement171 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTransitionDefinition_in_entryRuleTransitionDefinition198 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTransitionDefinition205 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TransitionDefinition__Group__0_in_ruleTransitionDefinition231 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleVariableDefinition_in_entryRuleVariableDefinition258 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleVariableDefinition265 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__VariableDefinition__Group__0_in_ruleVariableDefinition291 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleActionDefinition_in_entryRuleActionDefinition318 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleActionDefinition325 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ActionDefinition__Group__0_in_ruleActionDefinition351 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEvent_in_entryRuleEvent378 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleEvent385 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Event__Alternatives_in_ruleEvent411 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSignalEventDefinition_in_entryRuleSignalEventDefinition438 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleSignalEventDefinition445 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SignalEventDefinition__Group__0_in_ruleSignalEventDefinition471 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTimeEventDefinition_in_entryRuleTimeEventDefinition498 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTimeEventDefinition505 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TimeEventDefinition__Group__0_in_ruleTimeEventDefinition531 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTimeConstant_in_entryRuleTimeConstant558 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTimeConstant565 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TimeConstant__Group__0_in_ruleTimeConstant591 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpressionRule_in_entryRuleExpressionRule618 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleExpressionRule625 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ExpressionRule__ExpressionAssignment_in_ruleExpressionRule651 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRaiseEventExpression_in_entryRuleRaiseEventExpression678 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleRaiseEventExpression685 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__RaiseEventExpression__Group__0_in_ruleRaiseEventExpression711 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLogicalOrExpression_in_entryRuleLogicalOrExpression738 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleLogicalOrExpression745 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__LogicalOrExpression__Group__0_in_ruleLogicalOrExpression771 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLogicalAndExpression_in_entryRuleLogicalAndExpression798 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleLogicalAndExpression805 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__LogicalAndExpression__Group__0_in_ruleLogicalAndExpression831 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLogicalNotExpression_in_entryRuleLogicalNotExpression858 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleLogicalNotExpression865 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__LogicalNotExpression__Alternatives_in_ruleLogicalNotExpression891 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLogicalRelationExpression_in_entryRuleLogicalRelationExpression918 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleLogicalRelationExpression925 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__LogicalRelationExpression__Group__0_in_ruleLogicalRelationExpression951 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNumericalAddSubtractExpression_in_entryRuleNumericalAddSubtractExpression978 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleNumericalAddSubtractExpression985 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__NumericalAddSubtractExpression__Group__0_in_ruleNumericalAddSubtractExpression1011 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNumericalMultiplyDivideExpression_in_entryRuleNumericalMultiplyDivideExpression1038 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleNumericalMultiplyDivideExpression1045 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__NumericalMultiplyDivideExpression__Group__0_in_ruleNumericalMultiplyDivideExpression1071 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNumericalUnaryExpression_in_entryRuleNumericalUnaryExpression1098 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleNumericalUnaryExpression1105 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__NumericalUnaryExpression__Alternatives_in_ruleNumericalUnaryExpression1131 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePrimaryExpression_in_entryRulePrimaryExpression1158 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRulePrimaryExpression1165 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PrimaryExpression__Alternatives_in_rulePrimaryExpression1191 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValueExpression_in_entryRuleValueExpression1218 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleValueExpression1225 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ValueExpression__Alternatives_in_ruleValueExpression1251 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePrimitiveValueExpression_in_entryRulePrimitiveValueExpression1278 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRulePrimitiveValueExpression1285 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PrimitiveValueExpression__Group__0_in_rulePrimitiveValueExpression1311 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleVariableReferenceExpression_in_entryRuleVariableReferenceExpression1338 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleVariableReferenceExpression1345 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__VariableReferenceExpression__Group__0_in_ruleVariableReferenceExpression1371 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLiteral_in_entryRuleLiteral1398 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleLiteral1405 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Literal__Alternatives_in_ruleLiteral1431 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__AdditiveOperator__Alternatives_in_ruleAdditiveOperator1468 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__MultiplicativeOperator__Alternatives_in_ruleMultiplicativeOperator1504 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__UnaryOperator__Alternatives_in_ruleUnaryOperator1540 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__RelationalOperator__Alternatives_in_ruleRelationalOperator1576 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__DirectionKind__Alternatives_in_ruleDirectionKind1612 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TimeUnit__Alternatives_in_ruleTimeUnit1648 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Type__Alternatives_in_ruleType1684 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleVariableDefinition_in_rule__Statement__Alternatives1719 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSignalEventDefinition_in_rule__Statement__Alternatives1736 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleActionDefinition_in_rule__Statement__Alternatives1753 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTransitionDefinition_in_rule__Statement__Alternatives1770 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_13_in_rule__ActionDefinition__Alternatives_01803 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ActionDefinition__Group_0_1__0_in_rule__ActionDefinition__Alternatives_01822 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSignalEventDefinition_in_rule__Event__Alternatives1855 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTimeEventDefinition_in_rule__Event__Alternatives1872 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLogicalOrExpression_in_rule__ExpressionRule__ExpressionAlternatives_01904 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRaiseEventExpression_in_rule__ExpressionRule__ExpressionAlternatives_01921 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLogicalRelationExpression_in_rule__LogicalNotExpression__Alternatives1953 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__LogicalNotExpression__Group_1__0_in_rule__LogicalNotExpression__Alternatives1970 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePrimaryExpression_in_rule__NumericalUnaryExpression__Alternatives2003 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__NumericalUnaryExpression__Group_1__0_in_rule__NumericalUnaryExpression__Alternatives2020 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValueExpression_in_rule__PrimaryExpression__Alternatives2053 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PrimaryExpression__Group_1__0_in_rule__PrimaryExpression__Alternatives2070 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePrimitiveValueExpression_in_rule__ValueExpression__Alternatives2103 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleVariableReferenceExpression_in_rule__ValueExpression__Alternatives2120 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_BOOL_in_rule__Literal__Alternatives2152 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_in_rule__Literal__Alternatives2169 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_STRING_in_rule__Literal__Alternatives2186 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_FLOAT_in_rule__Literal__Alternatives2203 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_14_in_rule__AdditiveOperator__Alternatives2236 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_15_in_rule__AdditiveOperator__Alternatives2257 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_16_in_rule__MultiplicativeOperator__Alternatives2293 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_17_in_rule__MultiplicativeOperator__Alternatives2314 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_18_in_rule__MultiplicativeOperator__Alternatives2335 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_14_in_rule__UnaryOperator__Alternatives2371 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_15_in_rule__UnaryOperator__Alternatives2392 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_19_in_rule__UnaryOperator__Alternatives2413 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_20_in_rule__RelationalOperator__Alternatives2449 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_21_in_rule__RelationalOperator__Alternatives2470 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_22_in_rule__RelationalOperator__Alternatives2491 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_23_in_rule__RelationalOperator__Alternatives2512 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_24_in_rule__RelationalOperator__Alternatives2533 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_25_in_rule__RelationalOperator__Alternatives2554 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_26_in_rule__DirectionKind__Alternatives2590 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_27_in_rule__DirectionKind__Alternatives2611 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_28_in_rule__TimeUnit__Alternatives2647 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_29_in_rule__TimeUnit__Alternatives2668 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_30_in_rule__TimeUnit__Alternatives2689 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_31_in_rule__Type__Alternatives2725 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_32_in_rule__Type__Alternatives2746 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_33_in_rule__Type__Alternatives2767 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TransitionDefinition__Group__0__Impl_in_rule__TransitionDefinition__Group__02800 = new BitSet(new long[]{0x000094000008C1F2L});
-    public static final BitSet FOLLOW_rule__TransitionDefinition__Group__1_in_rule__TransitionDefinition__Group__02803 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TransitionDefinition__Group_0__0_in_rule__TransitionDefinition__Group__0__Impl2830 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TransitionDefinition__Group__1__Impl_in_rule__TransitionDefinition__Group__12860 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TransitionDefinition__GuardExpressionAssignment_1_in_rule__TransitionDefinition__Group__1__Impl2887 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TransitionDefinition__Group_0__0__Impl_in_rule__TransitionDefinition__Group_0__02922 = new BitSet(new long[]{0x0000000400000002L});
-    public static final BitSet FOLLOW_rule__TransitionDefinition__Group_0__1_in_rule__TransitionDefinition__Group_0__02925 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TransitionDefinition__TriggersAssignment_0_0_in_rule__TransitionDefinition__Group_0__0__Impl2952 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TransitionDefinition__Group_0__1__Impl_in_rule__TransitionDefinition__Group_0__12982 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TransitionDefinition__Group_0_1__0_in_rule__TransitionDefinition__Group_0__1__Impl3009 = new BitSet(new long[]{0x0000000400000002L});
-    public static final BitSet FOLLOW_rule__TransitionDefinition__Group_0_1__0__Impl_in_rule__TransitionDefinition__Group_0_1__03044 = new BitSet(new long[]{0x0000030000000000L});
-    public static final BitSet FOLLOW_rule__TransitionDefinition__Group_0_1__1_in_rule__TransitionDefinition__Group_0_1__03047 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_34_in_rule__TransitionDefinition__Group_0_1__0__Impl3075 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TransitionDefinition__Group_0_1__1__Impl_in_rule__TransitionDefinition__Group_0_1__13106 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TransitionDefinition__TriggersAssignment_0_1_1_in_rule__TransitionDefinition__Group_0_1__1__Impl3133 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__VariableDefinition__Group__0__Impl_in_rule__VariableDefinition__Group__03167 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_rule__VariableDefinition__Group__1_in_rule__VariableDefinition__Group__03170 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_35_in_rule__VariableDefinition__Group__0__Impl3198 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__VariableDefinition__Group__1__Impl_in_rule__VariableDefinition__Group__13229 = new BitSet(new long[]{0x0000001000000000L});
-    public static final BitSet FOLLOW_rule__VariableDefinition__Group__2_in_rule__VariableDefinition__Group__13232 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__VariableDefinition__NameAssignment_1_in_rule__VariableDefinition__Group__1__Impl3259 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__VariableDefinition__Group__2__Impl_in_rule__VariableDefinition__Group__23289 = new BitSet(new long[]{0x0000000380000000L});
-    public static final BitSet FOLLOW_rule__VariableDefinition__Group__3_in_rule__VariableDefinition__Group__23292 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_36_in_rule__VariableDefinition__Group__2__Impl3320 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__VariableDefinition__Group__3__Impl_in_rule__VariableDefinition__Group__33351 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__VariableDefinition__TypeAssignment_3_in_rule__VariableDefinition__Group__3__Impl3378 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ActionDefinition__Group__0__Impl_in_rule__ActionDefinition__Group__03416 = new BitSet(new long[]{0x0000001000000000L});
-    public static final BitSet FOLLOW_rule__ActionDefinition__Group__1_in_rule__ActionDefinition__Group__03419 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ActionDefinition__Alternatives_0_in_rule__ActionDefinition__Group__0__Impl3446 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ActionDefinition__Group__1__Impl_in_rule__ActionDefinition__Group__13476 = new BitSet(new long[]{0x000094000008C1F0L});
-    public static final BitSet FOLLOW_rule__ActionDefinition__Group__2_in_rule__ActionDefinition__Group__13479 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_36_in_rule__ActionDefinition__Group__1__Impl3507 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ActionDefinition__Group__2__Impl_in_rule__ActionDefinition__Group__23538 = new BitSet(new long[]{0x0000002000000000L});
-    public static final BitSet FOLLOW_rule__ActionDefinition__Group__3_in_rule__ActionDefinition__Group__23541 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ActionDefinition__ExpressionAssignment_2_in_rule__ActionDefinition__Group__2__Impl3568 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ActionDefinition__Group__3__Impl_in_rule__ActionDefinition__Group__33598 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_37_in_rule__ActionDefinition__Group__3__Impl3626 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ActionDefinition__Group_0_1__0__Impl_in_rule__ActionDefinition__Group_0_1__03665 = new BitSet(new long[]{0x0000008000000000L});
-    public static final BitSet FOLLOW_rule__ActionDefinition__Group_0_1__1_in_rule__ActionDefinition__Group_0_1__03668 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_38_in_rule__ActionDefinition__Group_0_1__0__Impl3696 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ActionDefinition__Group_0_1__1__Impl_in_rule__ActionDefinition__Group_0_1__13727 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_39_in_rule__ActionDefinition__Group_0_1__1__Impl3755 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SignalEventDefinition__Group__0__Impl_in_rule__SignalEventDefinition__Group__03790 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_rule__SignalEventDefinition__Group__1_in_rule__SignalEventDefinition__Group__03793 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_40_in_rule__SignalEventDefinition__Group__0__Impl3821 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SignalEventDefinition__Group__1__Impl_in_rule__SignalEventDefinition__Group__13852 = new BitSet(new long[]{0x0000001000000000L});
-    public static final BitSet FOLLOW_rule__SignalEventDefinition__Group__2_in_rule__SignalEventDefinition__Group__13855 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SignalEventDefinition__NameAssignment_1_in_rule__SignalEventDefinition__Group__1__Impl3882 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SignalEventDefinition__Group__2__Impl_in_rule__SignalEventDefinition__Group__23912 = new BitSet(new long[]{0x000000000C000000L});
-    public static final BitSet FOLLOW_rule__SignalEventDefinition__Group__3_in_rule__SignalEventDefinition__Group__23915 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_36_in_rule__SignalEventDefinition__Group__2__Impl3943 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SignalEventDefinition__Group__3__Impl_in_rule__SignalEventDefinition__Group__33974 = new BitSet(new long[]{0x0000002000000000L});
-    public static final BitSet FOLLOW_rule__SignalEventDefinition__Group__4_in_rule__SignalEventDefinition__Group__33977 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SignalEventDefinition__DirectionAssignment_3_in_rule__SignalEventDefinition__Group__3__Impl4004 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SignalEventDefinition__Group__4__Impl_in_rule__SignalEventDefinition__Group__44034 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_37_in_rule__SignalEventDefinition__Group__4__Impl4062 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TimeEventDefinition__Group__0__Impl_in_rule__TimeEventDefinition__Group__04103 = new BitSet(new long[]{0x0000040000000000L});
-    public static final BitSet FOLLOW_rule__TimeEventDefinition__Group__1_in_rule__TimeEventDefinition__Group__04106 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_41_in_rule__TimeEventDefinition__Group__0__Impl4134 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TimeEventDefinition__Group__1__Impl_in_rule__TimeEventDefinition__Group__14165 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_rule__TimeEventDefinition__Group__2_in_rule__TimeEventDefinition__Group__14168 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_42_in_rule__TimeEventDefinition__Group__1__Impl4196 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TimeEventDefinition__Group__2__Impl_in_rule__TimeEventDefinition__Group__24227 = new BitSet(new long[]{0x0000080000000000L});
-    public static final BitSet FOLLOW_rule__TimeEventDefinition__Group__3_in_rule__TimeEventDefinition__Group__24230 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TimeEventDefinition__TimeAssignment_2_in_rule__TimeEventDefinition__Group__2__Impl4257 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TimeEventDefinition__Group__3__Impl_in_rule__TimeEventDefinition__Group__34287 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_43_in_rule__TimeEventDefinition__Group__3__Impl4315 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TimeConstant__Group__0__Impl_in_rule__TimeConstant__Group__04354 = new BitSet(new long[]{0x0000000070000002L});
-    public static final BitSet FOLLOW_rule__TimeConstant__Group__1_in_rule__TimeConstant__Group__04357 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TimeConstant__ValueAssignment_0_in_rule__TimeConstant__Group__0__Impl4384 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TimeConstant__Group__1__Impl_in_rule__TimeConstant__Group__14414 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TimeConstant__UnitAssignment_1_in_rule__TimeConstant__Group__1__Impl4441 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__RaiseEventExpression__Group__0__Impl_in_rule__RaiseEventExpression__Group__04476 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_rule__RaiseEventExpression__Group__1_in_rule__RaiseEventExpression__Group__04479 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_44_in_rule__RaiseEventExpression__Group__0__Impl4507 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__RaiseEventExpression__Group__1__Impl_in_rule__RaiseEventExpression__Group__14538 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__RaiseEventExpression__EventAssignment_1_in_rule__RaiseEventExpression__Group__1__Impl4565 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__LogicalOrExpression__Group__0__Impl_in_rule__LogicalOrExpression__Group__04599 = new BitSet(new long[]{0x0000200000000002L});
-    public static final BitSet FOLLOW_rule__LogicalOrExpression__Group__1_in_rule__LogicalOrExpression__Group__04602 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLogicalAndExpression_in_rule__LogicalOrExpression__Group__0__Impl4629 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__LogicalOrExpression__Group__1__Impl_in_rule__LogicalOrExpression__Group__14658 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__LogicalOrExpression__Group_1__0_in_rule__LogicalOrExpression__Group__1__Impl4685 = new BitSet(new long[]{0x0000200000000002L});
-    public static final BitSet FOLLOW_rule__LogicalOrExpression__Group_1__0__Impl_in_rule__LogicalOrExpression__Group_1__04720 = new BitSet(new long[]{0x0000200000000000L});
-    public static final BitSet FOLLOW_rule__LogicalOrExpression__Group_1__1_in_rule__LogicalOrExpression__Group_1__04723 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__LogicalOrExpression__Group_1__1__Impl_in_rule__LogicalOrExpression__Group_1__14781 = new BitSet(new long[]{0x000084000008C1F0L});
-    public static final BitSet FOLLOW_rule__LogicalOrExpression__Group_1__2_in_rule__LogicalOrExpression__Group_1__14784 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_45_in_rule__LogicalOrExpression__Group_1__1__Impl4812 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__LogicalOrExpression__Group_1__2__Impl_in_rule__LogicalOrExpression__Group_1__24843 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__LogicalOrExpression__RightOperandAssignment_1_2_in_rule__LogicalOrExpression__Group_1__2__Impl4870 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__LogicalAndExpression__Group__0__Impl_in_rule__LogicalAndExpression__Group__04906 = new BitSet(new long[]{0x0000400000000002L});
-    public static final BitSet FOLLOW_rule__LogicalAndExpression__Group__1_in_rule__LogicalAndExpression__Group__04909 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLogicalNotExpression_in_rule__LogicalAndExpression__Group__0__Impl4936 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__LogicalAndExpression__Group__1__Impl_in_rule__LogicalAndExpression__Group__14965 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__LogicalAndExpression__Group_1__0_in_rule__LogicalAndExpression__Group__1__Impl4992 = new BitSet(new long[]{0x0000400000000002L});
-    public static final BitSet FOLLOW_rule__LogicalAndExpression__Group_1__0__Impl_in_rule__LogicalAndExpression__Group_1__05027 = new BitSet(new long[]{0x0000400000000000L});
-    public static final BitSet FOLLOW_rule__LogicalAndExpression__Group_1__1_in_rule__LogicalAndExpression__Group_1__05030 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__LogicalAndExpression__Group_1__1__Impl_in_rule__LogicalAndExpression__Group_1__15088 = new BitSet(new long[]{0x000084000008C1F0L});
-    public static final BitSet FOLLOW_rule__LogicalAndExpression__Group_1__2_in_rule__LogicalAndExpression__Group_1__15091 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_46_in_rule__LogicalAndExpression__Group_1__1__Impl5119 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__LogicalAndExpression__Group_1__2__Impl_in_rule__LogicalAndExpression__Group_1__25150 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__LogicalAndExpression__RightOperandAssignment_1_2_in_rule__LogicalAndExpression__Group_1__2__Impl5177 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__LogicalNotExpression__Group_1__0__Impl_in_rule__LogicalNotExpression__Group_1__05213 = new BitSet(new long[]{0x0000800000000000L});
-    public static final BitSet FOLLOW_rule__LogicalNotExpression__Group_1__1_in_rule__LogicalNotExpression__Group_1__05216 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__LogicalNotExpression__Group_1__1__Impl_in_rule__LogicalNotExpression__Group_1__15274 = new BitSet(new long[]{0x000004000008C1F0L});
-    public static final BitSet FOLLOW_rule__LogicalNotExpression__Group_1__2_in_rule__LogicalNotExpression__Group_1__15277 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_47_in_rule__LogicalNotExpression__Group_1__1__Impl5305 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__LogicalNotExpression__Group_1__2__Impl_in_rule__LogicalNotExpression__Group_1__25336 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__LogicalNotExpression__OperandAssignment_1_2_in_rule__LogicalNotExpression__Group_1__2__Impl5363 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__LogicalRelationExpression__Group__0__Impl_in_rule__LogicalRelationExpression__Group__05399 = new BitSet(new long[]{0x0000000003F00002L});
-    public static final BitSet FOLLOW_rule__LogicalRelationExpression__Group__1_in_rule__LogicalRelationExpression__Group__05402 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNumericalAddSubtractExpression_in_rule__LogicalRelationExpression__Group__0__Impl5429 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__LogicalRelationExpression__Group__1__Impl_in_rule__LogicalRelationExpression__Group__15458 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__LogicalRelationExpression__Group_1__0_in_rule__LogicalRelationExpression__Group__1__Impl5485 = new BitSet(new long[]{0x0000000003F00002L});
-    public static final BitSet FOLLOW_rule__LogicalRelationExpression__Group_1__0__Impl_in_rule__LogicalRelationExpression__Group_1__05520 = new BitSet(new long[]{0x0000000003F00000L});
-    public static final BitSet FOLLOW_rule__LogicalRelationExpression__Group_1__1_in_rule__LogicalRelationExpression__Group_1__05523 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__LogicalRelationExpression__Group_1__1__Impl_in_rule__LogicalRelationExpression__Group_1__15581 = new BitSet(new long[]{0x000004000008C1F0L});
-    public static final BitSet FOLLOW_rule__LogicalRelationExpression__Group_1__2_in_rule__LogicalRelationExpression__Group_1__15584 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__LogicalRelationExpression__OperatorAssignment_1_1_in_rule__LogicalRelationExpression__Group_1__1__Impl5611 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__LogicalRelationExpression__Group_1__2__Impl_in_rule__LogicalRelationExpression__Group_1__25641 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__LogicalRelationExpression__RightOperandAssignment_1_2_in_rule__LogicalRelationExpression__Group_1__2__Impl5668 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__NumericalAddSubtractExpression__Group__0__Impl_in_rule__NumericalAddSubtractExpression__Group__05704 = new BitSet(new long[]{0x000000000000C002L});
-    public static final BitSet FOLLOW_rule__NumericalAddSubtractExpression__Group__1_in_rule__NumericalAddSubtractExpression__Group__05707 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNumericalMultiplyDivideExpression_in_rule__NumericalAddSubtractExpression__Group__0__Impl5734 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__NumericalAddSubtractExpression__Group__1__Impl_in_rule__NumericalAddSubtractExpression__Group__15763 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__NumericalAddSubtractExpression__Group_1__0_in_rule__NumericalAddSubtractExpression__Group__1__Impl5790 = new BitSet(new long[]{0x000000000000C002L});
-    public static final BitSet FOLLOW_rule__NumericalAddSubtractExpression__Group_1__0__Impl_in_rule__NumericalAddSubtractExpression__Group_1__05825 = new BitSet(new long[]{0x000000000000C000L});
-    public static final BitSet FOLLOW_rule__NumericalAddSubtractExpression__Group_1__1_in_rule__NumericalAddSubtractExpression__Group_1__05828 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__NumericalAddSubtractExpression__Group_1__1__Impl_in_rule__NumericalAddSubtractExpression__Group_1__15886 = new BitSet(new long[]{0x000004000008C1F0L});
-    public static final BitSet FOLLOW_rule__NumericalAddSubtractExpression__Group_1__2_in_rule__NumericalAddSubtractExpression__Group_1__15889 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__NumericalAddSubtractExpression__OperatorAssignment_1_1_in_rule__NumericalAddSubtractExpression__Group_1__1__Impl5916 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__NumericalAddSubtractExpression__Group_1__2__Impl_in_rule__NumericalAddSubtractExpression__Group_1__25946 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__NumericalAddSubtractExpression__RightOperandAssignment_1_2_in_rule__NumericalAddSubtractExpression__Group_1__2__Impl5973 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__NumericalMultiplyDivideExpression__Group__0__Impl_in_rule__NumericalMultiplyDivideExpression__Group__06009 = new BitSet(new long[]{0x0000000000070002L});
-    public static final BitSet FOLLOW_rule__NumericalMultiplyDivideExpression__Group__1_in_rule__NumericalMultiplyDivideExpression__Group__06012 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNumericalUnaryExpression_in_rule__NumericalMultiplyDivideExpression__Group__0__Impl6039 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__NumericalMultiplyDivideExpression__Group__1__Impl_in_rule__NumericalMultiplyDivideExpression__Group__16068 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__NumericalMultiplyDivideExpression__Group_1__0_in_rule__NumericalMultiplyDivideExpression__Group__1__Impl6095 = new BitSet(new long[]{0x0000000000070002L});
-    public static final BitSet FOLLOW_rule__NumericalMultiplyDivideExpression__Group_1__0__Impl_in_rule__NumericalMultiplyDivideExpression__Group_1__06130 = new BitSet(new long[]{0x0000000000070000L});
-    public static final BitSet FOLLOW_rule__NumericalMultiplyDivideExpression__Group_1__1_in_rule__NumericalMultiplyDivideExpression__Group_1__06133 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__NumericalMultiplyDivideExpression__Group_1__1__Impl_in_rule__NumericalMultiplyDivideExpression__Group_1__16191 = new BitSet(new long[]{0x000004000008C1F0L});
-    public static final BitSet FOLLOW_rule__NumericalMultiplyDivideExpression__Group_1__2_in_rule__NumericalMultiplyDivideExpression__Group_1__16194 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__NumericalMultiplyDivideExpression__OperatorAssignment_1_1_in_rule__NumericalMultiplyDivideExpression__Group_1__1__Impl6221 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__NumericalMultiplyDivideExpression__Group_1__2__Impl_in_rule__NumericalMultiplyDivideExpression__Group_1__26251 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__NumericalMultiplyDivideExpression__RightOperandAssignment_1_2_in_rule__NumericalMultiplyDivideExpression__Group_1__2__Impl6278 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__NumericalUnaryExpression__Group_1__0__Impl_in_rule__NumericalUnaryExpression__Group_1__06314 = new BitSet(new long[]{0x000000000008C000L});
-    public static final BitSet FOLLOW_rule__NumericalUnaryExpression__Group_1__1_in_rule__NumericalUnaryExpression__Group_1__06317 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__NumericalUnaryExpression__Group_1__1__Impl_in_rule__NumericalUnaryExpression__Group_1__16375 = new BitSet(new long[]{0x00000400000001F0L});
-    public static final BitSet FOLLOW_rule__NumericalUnaryExpression__Group_1__2_in_rule__NumericalUnaryExpression__Group_1__16378 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__NumericalUnaryExpression__OperatorAssignment_1_1_in_rule__NumericalUnaryExpression__Group_1__1__Impl6405 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__NumericalUnaryExpression__Group_1__2__Impl_in_rule__NumericalUnaryExpression__Group_1__26435 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__NumericalUnaryExpression__OperandAssignment_1_2_in_rule__NumericalUnaryExpression__Group_1__2__Impl6462 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PrimaryExpression__Group_1__0__Impl_in_rule__PrimaryExpression__Group_1__06498 = new BitSet(new long[]{0x000084000008C1F0L});
-    public static final BitSet FOLLOW_rule__PrimaryExpression__Group_1__1_in_rule__PrimaryExpression__Group_1__06501 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_42_in_rule__PrimaryExpression__Group_1__0__Impl6529 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PrimaryExpression__Group_1__1__Impl_in_rule__PrimaryExpression__Group_1__16560 = new BitSet(new long[]{0x0000080000000000L});
-    public static final BitSet FOLLOW_rule__PrimaryExpression__Group_1__2_in_rule__PrimaryExpression__Group_1__16563 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLogicalOrExpression_in_rule__PrimaryExpression__Group_1__1__Impl6590 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PrimaryExpression__Group_1__2__Impl_in_rule__PrimaryExpression__Group_1__26619 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_43_in_rule__PrimaryExpression__Group_1__2__Impl6647 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PrimitiveValueExpression__Group__0__Impl_in_rule__PrimitiveValueExpression__Group__06684 = new BitSet(new long[]{0x00000000000000F0L});
-    public static final BitSet FOLLOW_rule__PrimitiveValueExpression__Group__1_in_rule__PrimitiveValueExpression__Group__06687 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PrimitiveValueExpression__Group__1__Impl_in_rule__PrimitiveValueExpression__Group__16745 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PrimitiveValueExpression__ValueAssignment_1_in_rule__PrimitiveValueExpression__Group__1__Impl6772 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__VariableReferenceExpression__Group__0__Impl_in_rule__VariableReferenceExpression__Group__06806 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_rule__VariableReferenceExpression__Group__1_in_rule__VariableReferenceExpression__Group__06809 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__VariableReferenceExpression__Group__1__Impl_in_rule__VariableReferenceExpression__Group__16867 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__VariableReferenceExpression__ValueAssignment_1_in_rule__VariableReferenceExpression__Group__1__Impl6894 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleStatement_in_rule__StatementModel__StatementsAssignment6933 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEvent_in_rule__TransitionDefinition__TriggersAssignment_0_06964 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEvent_in_rule__TransitionDefinition__TriggersAssignment_0_1_16995 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpressionRule_in_rule__TransitionDefinition__GuardExpressionAssignment_17026 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__VariableDefinition__NameAssignment_17057 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleType_in_rule__VariableDefinition__TypeAssignment_37088 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpressionRule_in_rule__ActionDefinition__ExpressionAssignment_27119 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__SignalEventDefinition__NameAssignment_17150 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDirectionKind_in_rule__SignalEventDefinition__DirectionAssignment_37181 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTimeConstant_in_rule__TimeEventDefinition__TimeAssignment_27212 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_in_rule__TimeConstant__ValueAssignment_07243 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTimeUnit_in_rule__TimeConstant__UnitAssignment_17274 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ExpressionRule__ExpressionAlternatives_0_in_rule__ExpressionRule__ExpressionAssignment7305 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__RaiseEventExpression__EventAssignment_17342 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLogicalAndExpression_in_rule__LogicalOrExpression__RightOperandAssignment_1_27377 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLogicalNotExpression_in_rule__LogicalAndExpression__RightOperandAssignment_1_27408 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLogicalRelationExpression_in_rule__LogicalNotExpression__OperandAssignment_1_27439 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRelationalOperator_in_rule__LogicalRelationExpression__OperatorAssignment_1_17470 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNumericalAddSubtractExpression_in_rule__LogicalRelationExpression__RightOperandAssignment_1_27501 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAdditiveOperator_in_rule__NumericalAddSubtractExpression__OperatorAssignment_1_17532 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNumericalMultiplyDivideExpression_in_rule__NumericalAddSubtractExpression__RightOperandAssignment_1_27563 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleMultiplicativeOperator_in_rule__NumericalMultiplyDivideExpression__OperatorAssignment_1_17594 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNumericalUnaryExpression_in_rule__NumericalMultiplyDivideExpression__RightOperandAssignment_1_27625 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleUnaryOperator_in_rule__NumericalUnaryExpression__OperatorAssignment_1_17656 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePrimaryExpression_in_rule__NumericalUnaryExpression__OperandAssignment_1_27687 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLiteral_in_rule__PrimitiveValueExpression__ValueAssignment_17718 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__VariableReferenceExpression__ValueAssignment_17753 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleCustomTransitionExpression_in_entryRuleCustomTransitionExpression61 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleCustomTransitionExpression68 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__CustomTransitionExpression__Group__0_in_ruleCustomTransitionExpression94 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpressionRule_in_entryRuleExpressionRule121 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleExpressionRule128 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ExpressionRule__ExpressionAssignment_in_ruleExpressionRule154 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleRaiseEventExpression_in_entryRuleRaiseEventExpression181 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleRaiseEventExpression188 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__RaiseEventExpression__Group__0_in_ruleRaiseEventExpression214 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLogicalOrExpression_in_entryRuleLogicalOrExpression241 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleLogicalOrExpression248 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__LogicalOrExpression__Group__0_in_ruleLogicalOrExpression274 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLogicalAndExpression_in_entryRuleLogicalAndExpression301 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleLogicalAndExpression308 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__LogicalAndExpression__Group__0_in_ruleLogicalAndExpression334 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLogicalNotExpression_in_entryRuleLogicalNotExpression361 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleLogicalNotExpression368 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__LogicalNotExpression__Alternatives_in_ruleLogicalNotExpression394 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLogicalRelationExpression_in_entryRuleLogicalRelationExpression421 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleLogicalRelationExpression428 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__LogicalRelationExpression__Group__0_in_ruleLogicalRelationExpression454 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNumericalAddSubtractExpression_in_entryRuleNumericalAddSubtractExpression481 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleNumericalAddSubtractExpression488 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__NumericalAddSubtractExpression__Group__0_in_ruleNumericalAddSubtractExpression514 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNumericalMultiplyDivideExpression_in_entryRuleNumericalMultiplyDivideExpression541 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleNumericalMultiplyDivideExpression548 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__NumericalMultiplyDivideExpression__Group__0_in_ruleNumericalMultiplyDivideExpression574 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNumericalUnaryExpression_in_entryRuleNumericalUnaryExpression601 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleNumericalUnaryExpression608 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__NumericalUnaryExpression__Alternatives_in_ruleNumericalUnaryExpression634 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePrimaryExpression_in_entryRulePrimaryExpression661 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRulePrimaryExpression668 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PrimaryExpression__Alternatives_in_rulePrimaryExpression694 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValueExpression_in_entryRuleValueExpression721 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleValueExpression728 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ValueExpression__Alternatives_in_ruleValueExpression754 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePrimitiveValueExpression_in_entryRulePrimitiveValueExpression781 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRulePrimitiveValueExpression788 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PrimitiveValueExpression__Group__0_in_rulePrimitiveValueExpression814 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleVariableReferenceExpression_in_entryRuleVariableReferenceExpression841 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleVariableReferenceExpression848 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__VariableReferenceExpression__Group__0_in_ruleVariableReferenceExpression874 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLiteral_in_entryRuleLiteral901 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleLiteral908 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Literal__Alternatives_in_ruleLiteral934 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__AdditiveOperator__Alternatives_in_ruleAdditiveOperator971 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__MultiplicativeOperator__Alternatives_in_ruleMultiplicativeOperator1007 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__UnaryOperator__Alternatives_in_ruleUnaryOperator1043 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__RelationalOperator__Alternatives_in_ruleRelationalOperator1079 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLogicalOrExpression_in_rule__ExpressionRule__ExpressionAlternatives_01120 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleRaiseEventExpression_in_rule__ExpressionRule__ExpressionAlternatives_01137 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLogicalRelationExpression_in_rule__LogicalNotExpression__Alternatives1169 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__LogicalNotExpression__Group_1__0_in_rule__LogicalNotExpression__Alternatives1186 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePrimaryExpression_in_rule__NumericalUnaryExpression__Alternatives1219 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__NumericalUnaryExpression__Group_1__0_in_rule__NumericalUnaryExpression__Alternatives1236 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValueExpression_in_rule__PrimaryExpression__Alternatives1269 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PrimaryExpression__Group_1__0_in_rule__PrimaryExpression__Alternatives1286 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePrimitiveValueExpression_in_rule__ValueExpression__Alternatives1319 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleVariableReferenceExpression_in_rule__ValueExpression__Alternatives1336 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_BOOL_in_rule__Literal__Alternatives1368 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_INT_in_rule__Literal__Alternatives1385 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_STRING_in_rule__Literal__Alternatives1402 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_FLOAT_in_rule__Literal__Alternatives1419 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_13_in_rule__AdditiveOperator__Alternatives1452 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_14_in_rule__AdditiveOperator__Alternatives1473 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_15_in_rule__MultiplicativeOperator__Alternatives1509 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_16_in_rule__MultiplicativeOperator__Alternatives1530 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_17_in_rule__MultiplicativeOperator__Alternatives1551 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_13_in_rule__UnaryOperator__Alternatives1587 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_14_in_rule__UnaryOperator__Alternatives1608 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_18_in_rule__UnaryOperator__Alternatives1629 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_19_in_rule__RelationalOperator__Alternatives1665 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_20_in_rule__RelationalOperator__Alternatives1686 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_21_in_rule__RelationalOperator__Alternatives1707 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_22_in_rule__RelationalOperator__Alternatives1728 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_23_in_rule__RelationalOperator__Alternatives1749 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_24_in_rule__RelationalOperator__Alternatives1770 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__CustomTransitionExpression__Group__0__Impl_in_rule__CustomTransitionExpression__Group__01806 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_rule__CustomTransitionExpression__Group__1_in_rule__CustomTransitionExpression__Group__01809 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__CustomTransitionExpression__Group__1__Impl_in_rule__CustomTransitionExpression__Group__11867 = new BitSet(new long[]{0x0000000004010002L});
+    public static final BitSet FOLLOW_rule__CustomTransitionExpression__Group__2_in_rule__CustomTransitionExpression__Group__11870 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__CustomTransitionExpression__Group_1__0_in_rule__CustomTransitionExpression__Group__1__Impl1897 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__CustomTransitionExpression__Group__2__Impl_in_rule__CustomTransitionExpression__Group__21927 = new BitSet(new long[]{0x0000000000010002L});
+    public static final BitSet FOLLOW_rule__CustomTransitionExpression__Group__3_in_rule__CustomTransitionExpression__Group__21930 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__CustomTransitionExpression__Group_2__0_in_rule__CustomTransitionExpression__Group__2__Impl1957 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__CustomTransitionExpression__Group__3__Impl_in_rule__CustomTransitionExpression__Group__31988 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__CustomTransitionExpression__Group_3__0_in_rule__CustomTransitionExpression__Group__3__Impl2015 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__CustomTransitionExpression__Group_1__0__Impl_in_rule__CustomTransitionExpression__Group_1__02054 = new BitSet(new long[]{0x0000000002000002L});
+    public static final BitSet FOLLOW_rule__CustomTransitionExpression__Group_1__1_in_rule__CustomTransitionExpression__Group_1__02057 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__CustomTransitionExpression__TriggersAssignment_1_0_in_rule__CustomTransitionExpression__Group_1__0__Impl2084 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__CustomTransitionExpression__Group_1__1__Impl_in_rule__CustomTransitionExpression__Group_1__12114 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__CustomTransitionExpression__Group_1_1__0_in_rule__CustomTransitionExpression__Group_1__1__Impl2141 = new BitSet(new long[]{0x0000000002000002L});
+    public static final BitSet FOLLOW_rule__CustomTransitionExpression__Group_1_1__0__Impl_in_rule__CustomTransitionExpression__Group_1_1__02176 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_rule__CustomTransitionExpression__Group_1_1__1_in_rule__CustomTransitionExpression__Group_1_1__02179 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_25_in_rule__CustomTransitionExpression__Group_1_1__0__Impl2207 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__CustomTransitionExpression__Group_1_1__1__Impl_in_rule__CustomTransitionExpression__Group_1_1__12238 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__CustomTransitionExpression__TriggersAssignment_1_1_1_in_rule__CustomTransitionExpression__Group_1_1__1__Impl2265 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__CustomTransitionExpression__Group_2__0__Impl_in_rule__CustomTransitionExpression__Group_2__02299 = new BitSet(new long[]{0x00000001800461F0L});
+    public static final BitSet FOLLOW_rule__CustomTransitionExpression__Group_2__1_in_rule__CustomTransitionExpression__Group_2__02302 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_26_in_rule__CustomTransitionExpression__Group_2__0__Impl2330 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__CustomTransitionExpression__Group_2__1__Impl_in_rule__CustomTransitionExpression__Group_2__12361 = new BitSet(new long[]{0x0000000008000000L});
+    public static final BitSet FOLLOW_rule__CustomTransitionExpression__Group_2__2_in_rule__CustomTransitionExpression__Group_2__12364 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__CustomTransitionExpression__GuardExpressionAssignment_2_1_in_rule__CustomTransitionExpression__Group_2__1__Impl2391 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__CustomTransitionExpression__Group_2__2__Impl_in_rule__CustomTransitionExpression__Group_2__22421 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_27_in_rule__CustomTransitionExpression__Group_2__2__Impl2449 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__CustomTransitionExpression__Group_3__0__Impl_in_rule__CustomTransitionExpression__Group_3__02486 = new BitSet(new long[]{0x00000001900461F0L});
+    public static final BitSet FOLLOW_rule__CustomTransitionExpression__Group_3__1_in_rule__CustomTransitionExpression__Group_3__02489 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_16_in_rule__CustomTransitionExpression__Group_3__0__Impl2517 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__CustomTransitionExpression__Group_3__1__Impl_in_rule__CustomTransitionExpression__Group_3__12548 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__CustomTransitionExpression__ActionAssignment_3_1_in_rule__CustomTransitionExpression__Group_3__1__Impl2575 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__RaiseEventExpression__Group__0__Impl_in_rule__RaiseEventExpression__Group__02609 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_rule__RaiseEventExpression__Group__1_in_rule__RaiseEventExpression__Group__02612 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_28_in_rule__RaiseEventExpression__Group__0__Impl2640 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__RaiseEventExpression__Group__1__Impl_in_rule__RaiseEventExpression__Group__12671 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__RaiseEventExpression__EventAssignment_1_in_rule__RaiseEventExpression__Group__1__Impl2698 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__LogicalOrExpression__Group__0__Impl_in_rule__LogicalOrExpression__Group__02732 = new BitSet(new long[]{0x0000000020000002L});
+    public static final BitSet FOLLOW_rule__LogicalOrExpression__Group__1_in_rule__LogicalOrExpression__Group__02735 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLogicalAndExpression_in_rule__LogicalOrExpression__Group__0__Impl2762 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__LogicalOrExpression__Group__1__Impl_in_rule__LogicalOrExpression__Group__12791 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__LogicalOrExpression__Group_1__0_in_rule__LogicalOrExpression__Group__1__Impl2818 = new BitSet(new long[]{0x0000000020000002L});
+    public static final BitSet FOLLOW_rule__LogicalOrExpression__Group_1__0__Impl_in_rule__LogicalOrExpression__Group_1__02853 = new BitSet(new long[]{0x0000000020000000L});
+    public static final BitSet FOLLOW_rule__LogicalOrExpression__Group_1__1_in_rule__LogicalOrExpression__Group_1__02856 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__LogicalOrExpression__Group_1__1__Impl_in_rule__LogicalOrExpression__Group_1__12914 = new BitSet(new long[]{0x00000001800461F0L});
+    public static final BitSet FOLLOW_rule__LogicalOrExpression__Group_1__2_in_rule__LogicalOrExpression__Group_1__12917 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_29_in_rule__LogicalOrExpression__Group_1__1__Impl2945 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__LogicalOrExpression__Group_1__2__Impl_in_rule__LogicalOrExpression__Group_1__22976 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__LogicalOrExpression__RightOperandAssignment_1_2_in_rule__LogicalOrExpression__Group_1__2__Impl3003 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__LogicalAndExpression__Group__0__Impl_in_rule__LogicalAndExpression__Group__03039 = new BitSet(new long[]{0x0000000040000002L});
+    public static final BitSet FOLLOW_rule__LogicalAndExpression__Group__1_in_rule__LogicalAndExpression__Group__03042 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLogicalNotExpression_in_rule__LogicalAndExpression__Group__0__Impl3069 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__LogicalAndExpression__Group__1__Impl_in_rule__LogicalAndExpression__Group__13098 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__LogicalAndExpression__Group_1__0_in_rule__LogicalAndExpression__Group__1__Impl3125 = new BitSet(new long[]{0x0000000040000002L});
+    public static final BitSet FOLLOW_rule__LogicalAndExpression__Group_1__0__Impl_in_rule__LogicalAndExpression__Group_1__03160 = new BitSet(new long[]{0x0000000040000000L});
+    public static final BitSet FOLLOW_rule__LogicalAndExpression__Group_1__1_in_rule__LogicalAndExpression__Group_1__03163 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__LogicalAndExpression__Group_1__1__Impl_in_rule__LogicalAndExpression__Group_1__13221 = new BitSet(new long[]{0x00000001800461F0L});
+    public static final BitSet FOLLOW_rule__LogicalAndExpression__Group_1__2_in_rule__LogicalAndExpression__Group_1__13224 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_30_in_rule__LogicalAndExpression__Group_1__1__Impl3252 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__LogicalAndExpression__Group_1__2__Impl_in_rule__LogicalAndExpression__Group_1__23283 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__LogicalAndExpression__RightOperandAssignment_1_2_in_rule__LogicalAndExpression__Group_1__2__Impl3310 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__LogicalNotExpression__Group_1__0__Impl_in_rule__LogicalNotExpression__Group_1__03346 = new BitSet(new long[]{0x0000000080000000L});
+    public static final BitSet FOLLOW_rule__LogicalNotExpression__Group_1__1_in_rule__LogicalNotExpression__Group_1__03349 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__LogicalNotExpression__Group_1__1__Impl_in_rule__LogicalNotExpression__Group_1__13407 = new BitSet(new long[]{0x00000001000461F0L});
+    public static final BitSet FOLLOW_rule__LogicalNotExpression__Group_1__2_in_rule__LogicalNotExpression__Group_1__13410 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_31_in_rule__LogicalNotExpression__Group_1__1__Impl3438 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__LogicalNotExpression__Group_1__2__Impl_in_rule__LogicalNotExpression__Group_1__23469 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__LogicalNotExpression__OperandAssignment_1_2_in_rule__LogicalNotExpression__Group_1__2__Impl3496 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__LogicalRelationExpression__Group__0__Impl_in_rule__LogicalRelationExpression__Group__03532 = new BitSet(new long[]{0x0000000001F80002L});
+    public static final BitSet FOLLOW_rule__LogicalRelationExpression__Group__1_in_rule__LogicalRelationExpression__Group__03535 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNumericalAddSubtractExpression_in_rule__LogicalRelationExpression__Group__0__Impl3562 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__LogicalRelationExpression__Group__1__Impl_in_rule__LogicalRelationExpression__Group__13591 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__LogicalRelationExpression__Group_1__0_in_rule__LogicalRelationExpression__Group__1__Impl3618 = new BitSet(new long[]{0x0000000001F80002L});
+    public static final BitSet FOLLOW_rule__LogicalRelationExpression__Group_1__0__Impl_in_rule__LogicalRelationExpression__Group_1__03653 = new BitSet(new long[]{0x0000000001F80000L});
+    public static final BitSet FOLLOW_rule__LogicalRelationExpression__Group_1__1_in_rule__LogicalRelationExpression__Group_1__03656 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__LogicalRelationExpression__Group_1__1__Impl_in_rule__LogicalRelationExpression__Group_1__13714 = new BitSet(new long[]{0x00000001000461F0L});
+    public static final BitSet FOLLOW_rule__LogicalRelationExpression__Group_1__2_in_rule__LogicalRelationExpression__Group_1__13717 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__LogicalRelationExpression__OperatorAssignment_1_1_in_rule__LogicalRelationExpression__Group_1__1__Impl3744 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__LogicalRelationExpression__Group_1__2__Impl_in_rule__LogicalRelationExpression__Group_1__23774 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__LogicalRelationExpression__RightOperandAssignment_1_2_in_rule__LogicalRelationExpression__Group_1__2__Impl3801 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__NumericalAddSubtractExpression__Group__0__Impl_in_rule__NumericalAddSubtractExpression__Group__03837 = new BitSet(new long[]{0x0000000000006002L});
+    public static final BitSet FOLLOW_rule__NumericalAddSubtractExpression__Group__1_in_rule__NumericalAddSubtractExpression__Group__03840 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNumericalMultiplyDivideExpression_in_rule__NumericalAddSubtractExpression__Group__0__Impl3867 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__NumericalAddSubtractExpression__Group__1__Impl_in_rule__NumericalAddSubtractExpression__Group__13896 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__NumericalAddSubtractExpression__Group_1__0_in_rule__NumericalAddSubtractExpression__Group__1__Impl3923 = new BitSet(new long[]{0x0000000000006002L});
+    public static final BitSet FOLLOW_rule__NumericalAddSubtractExpression__Group_1__0__Impl_in_rule__NumericalAddSubtractExpression__Group_1__03958 = new BitSet(new long[]{0x0000000000006000L});
+    public static final BitSet FOLLOW_rule__NumericalAddSubtractExpression__Group_1__1_in_rule__NumericalAddSubtractExpression__Group_1__03961 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__NumericalAddSubtractExpression__Group_1__1__Impl_in_rule__NumericalAddSubtractExpression__Group_1__14019 = new BitSet(new long[]{0x00000001000461F0L});
+    public static final BitSet FOLLOW_rule__NumericalAddSubtractExpression__Group_1__2_in_rule__NumericalAddSubtractExpression__Group_1__14022 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__NumericalAddSubtractExpression__OperatorAssignment_1_1_in_rule__NumericalAddSubtractExpression__Group_1__1__Impl4049 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__NumericalAddSubtractExpression__Group_1__2__Impl_in_rule__NumericalAddSubtractExpression__Group_1__24079 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__NumericalAddSubtractExpression__RightOperandAssignment_1_2_in_rule__NumericalAddSubtractExpression__Group_1__2__Impl4106 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__NumericalMultiplyDivideExpression__Group__0__Impl_in_rule__NumericalMultiplyDivideExpression__Group__04142 = new BitSet(new long[]{0x0000000000038002L});
+    public static final BitSet FOLLOW_rule__NumericalMultiplyDivideExpression__Group__1_in_rule__NumericalMultiplyDivideExpression__Group__04145 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNumericalUnaryExpression_in_rule__NumericalMultiplyDivideExpression__Group__0__Impl4172 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__NumericalMultiplyDivideExpression__Group__1__Impl_in_rule__NumericalMultiplyDivideExpression__Group__14201 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__NumericalMultiplyDivideExpression__Group_1__0_in_rule__NumericalMultiplyDivideExpression__Group__1__Impl4228 = new BitSet(new long[]{0x0000000000038002L});
+    public static final BitSet FOLLOW_rule__NumericalMultiplyDivideExpression__Group_1__0__Impl_in_rule__NumericalMultiplyDivideExpression__Group_1__04263 = new BitSet(new long[]{0x0000000000038000L});
+    public static final BitSet FOLLOW_rule__NumericalMultiplyDivideExpression__Group_1__1_in_rule__NumericalMultiplyDivideExpression__Group_1__04266 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__NumericalMultiplyDivideExpression__Group_1__1__Impl_in_rule__NumericalMultiplyDivideExpression__Group_1__14324 = new BitSet(new long[]{0x00000001000461F0L});
+    public static final BitSet FOLLOW_rule__NumericalMultiplyDivideExpression__Group_1__2_in_rule__NumericalMultiplyDivideExpression__Group_1__14327 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__NumericalMultiplyDivideExpression__OperatorAssignment_1_1_in_rule__NumericalMultiplyDivideExpression__Group_1__1__Impl4354 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__NumericalMultiplyDivideExpression__Group_1__2__Impl_in_rule__NumericalMultiplyDivideExpression__Group_1__24384 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__NumericalMultiplyDivideExpression__RightOperandAssignment_1_2_in_rule__NumericalMultiplyDivideExpression__Group_1__2__Impl4411 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__NumericalUnaryExpression__Group_1__0__Impl_in_rule__NumericalUnaryExpression__Group_1__04447 = new BitSet(new long[]{0x0000000000046000L});
+    public static final BitSet FOLLOW_rule__NumericalUnaryExpression__Group_1__1_in_rule__NumericalUnaryExpression__Group_1__04450 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__NumericalUnaryExpression__Group_1__1__Impl_in_rule__NumericalUnaryExpression__Group_1__14508 = new BitSet(new long[]{0x00000001000001F0L});
+    public static final BitSet FOLLOW_rule__NumericalUnaryExpression__Group_1__2_in_rule__NumericalUnaryExpression__Group_1__14511 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__NumericalUnaryExpression__OperatorAssignment_1_1_in_rule__NumericalUnaryExpression__Group_1__1__Impl4538 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__NumericalUnaryExpression__Group_1__2__Impl_in_rule__NumericalUnaryExpression__Group_1__24568 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__NumericalUnaryExpression__OperandAssignment_1_2_in_rule__NumericalUnaryExpression__Group_1__2__Impl4595 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PrimaryExpression__Group_1__0__Impl_in_rule__PrimaryExpression__Group_1__04631 = new BitSet(new long[]{0x00000001800461F0L});
+    public static final BitSet FOLLOW_rule__PrimaryExpression__Group_1__1_in_rule__PrimaryExpression__Group_1__04634 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_32_in_rule__PrimaryExpression__Group_1__0__Impl4662 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PrimaryExpression__Group_1__1__Impl_in_rule__PrimaryExpression__Group_1__14693 = new BitSet(new long[]{0x0000000200000000L});
+    public static final BitSet FOLLOW_rule__PrimaryExpression__Group_1__2_in_rule__PrimaryExpression__Group_1__14696 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLogicalOrExpression_in_rule__PrimaryExpression__Group_1__1__Impl4723 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PrimaryExpression__Group_1__2__Impl_in_rule__PrimaryExpression__Group_1__24752 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_33_in_rule__PrimaryExpression__Group_1__2__Impl4780 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PrimitiveValueExpression__Group__0__Impl_in_rule__PrimitiveValueExpression__Group__04817 = new BitSet(new long[]{0x00000000000000F0L});
+    public static final BitSet FOLLOW_rule__PrimitiveValueExpression__Group__1_in_rule__PrimitiveValueExpression__Group__04820 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PrimitiveValueExpression__Group__1__Impl_in_rule__PrimitiveValueExpression__Group__14878 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PrimitiveValueExpression__ValueAssignment_1_in_rule__PrimitiveValueExpression__Group__1__Impl4905 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__VariableReferenceExpression__Group__0__Impl_in_rule__VariableReferenceExpression__Group__04939 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_rule__VariableReferenceExpression__Group__1_in_rule__VariableReferenceExpression__Group__04942 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__VariableReferenceExpression__Group__1__Impl_in_rule__VariableReferenceExpression__Group__15000 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__VariableReferenceExpression__ValueAssignment_1_in_rule__VariableReferenceExpression__Group__1__Impl5027 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__CustomTransitionExpression__TriggersAssignment_1_05070 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__CustomTransitionExpression__TriggersAssignment_1_1_15109 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLogicalOrExpression_in_rule__CustomTransitionExpression__GuardExpressionAssignment_2_15144 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpressionRule_in_rule__CustomTransitionExpression__ActionAssignment_3_15175 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ExpressionRule__ExpressionAlternatives_0_in_rule__ExpressionRule__ExpressionAssignment5206 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__RaiseEventExpression__EventAssignment_15243 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLogicalAndExpression_in_rule__LogicalOrExpression__RightOperandAssignment_1_25278 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLogicalNotExpression_in_rule__LogicalAndExpression__RightOperandAssignment_1_25309 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLogicalRelationExpression_in_rule__LogicalNotExpression__OperandAssignment_1_25340 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleRelationalOperator_in_rule__LogicalRelationExpression__OperatorAssignment_1_15371 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNumericalAddSubtractExpression_in_rule__LogicalRelationExpression__RightOperandAssignment_1_25402 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAdditiveOperator_in_rule__NumericalAddSubtractExpression__OperatorAssignment_1_15433 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNumericalMultiplyDivideExpression_in_rule__NumericalAddSubtractExpression__RightOperandAssignment_1_25464 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleMultiplicativeOperator_in_rule__NumericalMultiplyDivideExpression__OperatorAssignment_1_15495 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNumericalUnaryExpression_in_rule__NumericalMultiplyDivideExpression__RightOperandAssignment_1_25526 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleUnaryOperator_in_rule__NumericalUnaryExpression__OperatorAssignment_1_15557 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePrimaryExpression_in_rule__NumericalUnaryExpression__OperandAssignment_1_25588 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLiteral_in_rule__PrimitiveValueExpression__ValueAssignment_15619 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__VariableReferenceExpression__ValueAssignment_15654 = new BitSet(new long[]{0x0000000000000002L});
 
 }

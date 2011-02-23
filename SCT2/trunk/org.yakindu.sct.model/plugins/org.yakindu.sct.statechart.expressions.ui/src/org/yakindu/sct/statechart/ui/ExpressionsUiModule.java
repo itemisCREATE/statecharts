@@ -12,4 +12,5 @@ public class ExpressionsUiModule extends org.yakindu.sct.statechart.ui.AbstractE
 	public ExpressionsUiModule(AbstractUIPlugin plugin) {
 		super(plugin);
 	}
+	
 }

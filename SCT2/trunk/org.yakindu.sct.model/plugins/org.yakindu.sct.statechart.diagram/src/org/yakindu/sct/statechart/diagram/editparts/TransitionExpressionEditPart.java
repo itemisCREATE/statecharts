@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2010 committers of YAKINDU and others.
+ * Copyright (c) 2011 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -10,53 +10,46 @@
  */
 package org.yakindu.sct.statechart.diagram.editparts;
 
-import static org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants.REQ_DIRECTEDIT_EXTENDEDDATA_INITIAL_CHAR;
-
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.gef.EditPolicy;
-import org.eclipse.gef.Request;
-import org.eclipse.gef.tools.DirectEditManager;
-import org.eclipse.gmf.runtime.diagram.ui.editparts.LabelEditPart;
-import org.eclipse.gmf.runtime.diagram.ui.tools.TextDirectEditManager;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.LabelEx;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.swt.SWT;
+import org.eclipse.xtext.parsetree.reconstr.Serializer;
 import org.yakindu.model.sct.statechart.StatechartPackage;
-import org.yakindu.sct.statechart.diagram.DiagramActivator;
-import org.yakindu.sct.statechart.diagram.policies.XTextDirectEditPolicy;
-import org.yakindu.sct.statechart.diagram.xtext.integration.IXTextAwareEditPart;
-import org.yakindu.sct.statechart.diagram.xtext.integration.XTextDirectEditManager;
+import org.yakindu.model.sct.statechart.Transition;
+import org.yakindu.sct.statechart.diagram.extensions.Extensions;
+import org.yakindu.sct.statechart.diagram.extensions.IExpressionsProvider;
+import org.yakindu.sct.statechart.diagram.policies.TransitionExpressionEditPolicy;
+
+import com.google.inject.Injector;
+
+import de.itemis.xtext.utils.gmf.directedit.IXTextAwareEditPart;
+import de.itemis.xtext.utils.gmf.directedit.XTextDirectEditManager;
+import de.itemis.xtext.utils.gmf.directedit.XTextLabelEditPart;
 
 /**
  * @author Andreas Muelder <a
  *         href="mailto:andreas.muelder@itemis.de">andreas.muelder@itemis.de</a>
  * 
  */
-public class TransitionExpressionEditPart extends LabelEditPart implements
+public class TransitionExpressionEditPart extends XTextLabelEditPart implements
 		IXTextAwareEditPart {
 
-	private DirectEditManager manager;
+	private static Injector injector;
 
-	private static final EAttribute feature = StatechartPackage.Literals.EXPRESSION_ELEMENT__EXPRESSION;
+	private static final String EXPRESSIONS_EXTENSION = "org.yakindu.sct.statechart.diagram.expressions";
 
 	public TransitionExpressionEditPart(View view) {
 		super(view);
-	}
-
-	@Override
-	protected void handleNotificationEvent(Notification notification) {
-		if (notification.getFeature() == feature) {
-			getLabel().setText(getEditText());
+		if (injector == null) {
+			createInjector();
 		}
-		super.handleNotificationEvent(notification);
 	}
 
 	public void setLabel(IFigure figure) {
 		setFigure(figure);
-		manager = new XTextDirectEditManager(this, DiagramActivator
-				.getDefault().getExpressionsInjector(), SWT.SINGLE);
 	}
 
 	@Override
@@ -68,51 +61,61 @@ public class TransitionExpressionEditPart extends LabelEditPart implements
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
 		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE,
-				new XTextDirectEditPolicy());
+				new TransitionExpressionEditPolicy());
 	}
-	
 
 	@Override
 	public String getEditText() {
-		return getLabel().getText();
+		System.out.println("Edit Text");
+		//FIXME: If the passed String is not valid, we should save the invalid string instead
+		if (resolveSemanticElement().getExpression() != null) {
+			Serializer serializer = injector.getInstance(Serializer.class);
+			String expression = serializer.serialize(resolveSemanticElement()
+					.getExpression());
+			System.out.println(expression);
+			return expression;
+		}
+		return "";
 	}
 
 	public LabelEx getLabel() {
 		return (LabelEx) getFigure();
 	}
 
-
 	@Override
-	protected void performDirectEditRequest(Request request) {
-		final Request theRequest = request;
-		try {
-			getEditingDomain().runExclusive(new Runnable() {
-				@Override
-				public void run() {
-					if (isActive()) {
-						if (theRequest.getExtendedData().get(
-								REQ_DIRECTEDIT_EXTENDEDDATA_INITIAL_CHAR) instanceof Character
-								&& manager instanceof TextDirectEditManager) {
-							Character initialChar = (Character) theRequest
-									.getExtendedData()
-									.get(REQ_DIRECTEDIT_EXTENDEDDATA_INITIAL_CHAR);
-
-							((TextDirectEditManager) manager).show(initialChar);
-
-						} else {
-							manager.show();
-						}
-					}
-				}
-			});
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+	public void setLabelText(String text) {
+		getLabel().setText(text);
 	}
 
 	@Override
-	public EAttribute getTextFeature() {
-		return feature;
+	protected void refreshVisuals() {
+		super.refreshVisuals();
+		System.out.println("Refresh Visuals");
+		getLabel().setText(getEditText());
+	}
+
+	@Override
+	protected XTextDirectEditManager createXTextDirectEditManager() {
+		return new XTextDirectEditManager(this, injector, SWT.SINGLE);
+	}
+
+	private void createInjector() {
+		Extensions<IExpressionsProvider> extensions = new Extensions<IExpressionsProvider>(
+				EXPRESSIONS_EXTENSION);
+		IExpressionsProvider registeredProvider = extensions
+				.getRegisteredProvider(resolveSemanticElement());
+		injector = registeredProvider.getInjector();
+	}
+
+	@Override
+	public Transition resolveSemanticElement() {
+		return (Transition) super.resolveSemanticElement();
+	}
+	@Override
+	protected void handleNotificationEvent(Notification notification) {
+		super.handleNotificationEvent(notification);
+		if(notification.getFeature() == StatechartPackage.Literals.TRANSITION__EXPRESSION)
+			refreshVisuals();
 	}
 
 }

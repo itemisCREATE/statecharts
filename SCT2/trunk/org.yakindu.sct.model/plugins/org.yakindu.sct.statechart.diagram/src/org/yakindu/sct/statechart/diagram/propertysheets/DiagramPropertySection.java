@@ -28,8 +28,6 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.views.properties.IPropertySource;
 import org.eclipse.ui.views.properties.IPropertySourceProvider;
-import org.yakindu.model.sct.statechart.ExpressionElement;
-import org.yakindu.model.sct.statechart.StatechartPackage;
 
 /**
  * 
@@ -50,12 +48,13 @@ public class DiagramPropertySection extends AdvancedPropertySection implements
 			IItemPropertySource ips = (IItemPropertySource) af.adapt(object,
 					IItemPropertySource.class);
 			if (ips != null) {
-				if (object instanceof ExpressionElement) {
-					return new ExpressionsPropertySource(
-							object,
-							ips,
-							StatechartPackage.Literals.EXPRESSION_ELEMENT__EXPRESSION);
-				}
+//				if (object instanceof ExpressionElement) {
+//					//FIXME
+////					return new ExpressionsPropertySource(
+////							object,
+////							ips,
+////							StatechartPackage.Literals.EXPRESSION_ELEMENT__EXPRESSION);
+//				}
 				return new PropertySource(object, ips);
 			}
 		}

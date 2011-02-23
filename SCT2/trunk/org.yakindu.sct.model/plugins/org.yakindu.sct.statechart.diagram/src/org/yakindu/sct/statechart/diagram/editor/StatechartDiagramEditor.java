@@ -13,7 +13,9 @@ package org.yakindu.sct.statechart.diagram.editor;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.gmf.runtime.common.ui.services.marker.MarkerNavigationService;
+import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.ide.IGotoMarker;
@@ -34,10 +36,6 @@ public class StatechartDiagramEditor extends DiagramDocumentEditor implements IG
 		super(true);
 	}
 
-	@Override
-	public String getContributorId() {
-		return DiagramActivator.PLUGIN_ID;
-	}
 
 	@Override
 	public void doSave(IProgressMonitor progressMonitor) {
@@ -50,13 +48,14 @@ public class StatechartDiagramEditor extends DiagramDocumentEditor implements IG
 		super.doSave(progressMonitor);
 	}
 	
-	@Override
-	public void setInput(IEditorInput input) {
-		
-		super.setInput(input);
-	}
 	
 	public void gotoMarker(IMarker marker) {
 		MarkerNavigationService.getInstance().gotoMarker(this, marker);
+	}
+	
+
+	@Override
+	protected PreferencesHint getPreferencesHint() {
+		return DiagramActivator.DIAGRAM_PREFERENCES_HINT;
 	}
 }

@@ -15,7 +15,7 @@ import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
-import org.yakindu.sct.statechart.diagram.validation.IValidationProvider;
+import org.yakindu.sct.statechart.diagram.extensions.IValidationProvider;
 import org.yakindu.sct.statechart.diagram.validation.ValidationActivator;
 
 import com.google.common.collect.Sets;

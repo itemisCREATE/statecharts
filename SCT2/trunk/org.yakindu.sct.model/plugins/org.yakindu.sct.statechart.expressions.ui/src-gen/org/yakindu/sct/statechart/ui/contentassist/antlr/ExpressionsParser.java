@@ -37,9 +37,6 @@ public class ExpressionsParser extends AbstractContentAssistParser {
 			nameMappings = new HashMap<AbstractElement, String>() {
 				private static final long serialVersionUID = 1L;
 				{
-					put(grammarAccess.getStatementAccess().getAlternatives(), "rule__Statement__Alternatives");
-					put(grammarAccess.getActionDefinitionAccess().getAlternatives_0(), "rule__ActionDefinition__Alternatives_0");
-					put(grammarAccess.getEventAccess().getAlternatives(), "rule__Event__Alternatives");
 					put(grammarAccess.getExpressionRuleAccess().getExpressionAlternatives_0(), "rule__ExpressionRule__ExpressionAlternatives_0");
 					put(grammarAccess.getLogicalNotExpressionAccess().getAlternatives(), "rule__LogicalNotExpression__Alternatives");
 					put(grammarAccess.getNumericalUnaryExpressionAccess().getAlternatives(), "rule__NumericalUnaryExpression__Alternatives");
@@ -53,15 +50,11 @@ public class ExpressionsParser extends AbstractContentAssistParser {
 					put(grammarAccess.getDirectionKindAccess().getAlternatives(), "rule__DirectionKind__Alternatives");
 					put(grammarAccess.getTimeUnitAccess().getAlternatives(), "rule__TimeUnit__Alternatives");
 					put(grammarAccess.getTypeAccess().getAlternatives(), "rule__Type__Alternatives");
-					put(grammarAccess.getTransitionDefinitionAccess().getGroup(), "rule__TransitionDefinition__Group__0");
-					put(grammarAccess.getTransitionDefinitionAccess().getGroup_0(), "rule__TransitionDefinition__Group_0__0");
-					put(grammarAccess.getTransitionDefinitionAccess().getGroup_0_1(), "rule__TransitionDefinition__Group_0_1__0");
-					put(grammarAccess.getVariableDefinitionAccess().getGroup(), "rule__VariableDefinition__Group__0");
-					put(grammarAccess.getActionDefinitionAccess().getGroup(), "rule__ActionDefinition__Group__0");
-					put(grammarAccess.getActionDefinitionAccess().getGroup_0_1(), "rule__ActionDefinition__Group_0_1__0");
-					put(grammarAccess.getSignalEventDefinitionAccess().getGroup(), "rule__SignalEventDefinition__Group__0");
-					put(grammarAccess.getTimeEventDefinitionAccess().getGroup(), "rule__TimeEventDefinition__Group__0");
-					put(grammarAccess.getTimeConstantAccess().getGroup(), "rule__TimeConstant__Group__0");
+					put(grammarAccess.getCustomTransitionExpressionAccess().getGroup(), "rule__CustomTransitionExpression__Group__0");
+					put(grammarAccess.getCustomTransitionExpressionAccess().getGroup_1(), "rule__CustomTransitionExpression__Group_1__0");
+					put(grammarAccess.getCustomTransitionExpressionAccess().getGroup_1_1(), "rule__CustomTransitionExpression__Group_1_1__0");
+					put(grammarAccess.getCustomTransitionExpressionAccess().getGroup_2(), "rule__CustomTransitionExpression__Group_2__0");
+					put(grammarAccess.getCustomTransitionExpressionAccess().getGroup_3(), "rule__CustomTransitionExpression__Group_3__0");
 					put(grammarAccess.getRaiseEventExpressionAccess().getGroup(), "rule__RaiseEventExpression__Group__0");
 					put(grammarAccess.getLogicalOrExpressionAccess().getGroup(), "rule__LogicalOrExpression__Group__0");
 					put(grammarAccess.getLogicalOrExpressionAccess().getGroup_1(), "rule__LogicalOrExpression__Group_1__0");
@@ -78,18 +71,10 @@ public class ExpressionsParser extends AbstractContentAssistParser {
 					put(grammarAccess.getPrimaryExpressionAccess().getGroup_1(), "rule__PrimaryExpression__Group_1__0");
 					put(grammarAccess.getPrimitiveValueExpressionAccess().getGroup(), "rule__PrimitiveValueExpression__Group__0");
 					put(grammarAccess.getVariableReferenceExpressionAccess().getGroup(), "rule__VariableReferenceExpression__Group__0");
-					put(grammarAccess.getStatementModelAccess().getStatementsAssignment(), "rule__StatementModel__StatementsAssignment");
-					put(grammarAccess.getTransitionDefinitionAccess().getTriggersAssignment_0_0(), "rule__TransitionDefinition__TriggersAssignment_0_0");
-					put(grammarAccess.getTransitionDefinitionAccess().getTriggersAssignment_0_1_1(), "rule__TransitionDefinition__TriggersAssignment_0_1_1");
-					put(grammarAccess.getTransitionDefinitionAccess().getGuardExpressionAssignment_1(), "rule__TransitionDefinition__GuardExpressionAssignment_1");
-					put(grammarAccess.getVariableDefinitionAccess().getNameAssignment_1(), "rule__VariableDefinition__NameAssignment_1");
-					put(grammarAccess.getVariableDefinitionAccess().getTypeAssignment_3(), "rule__VariableDefinition__TypeAssignment_3");
-					put(grammarAccess.getActionDefinitionAccess().getExpressionAssignment_2(), "rule__ActionDefinition__ExpressionAssignment_2");
-					put(grammarAccess.getSignalEventDefinitionAccess().getNameAssignment_1(), "rule__SignalEventDefinition__NameAssignment_1");
-					put(grammarAccess.getSignalEventDefinitionAccess().getDirectionAssignment_3(), "rule__SignalEventDefinition__DirectionAssignment_3");
-					put(grammarAccess.getTimeEventDefinitionAccess().getTimeAssignment_2(), "rule__TimeEventDefinition__TimeAssignment_2");
-					put(grammarAccess.getTimeConstantAccess().getValueAssignment_0(), "rule__TimeConstant__ValueAssignment_0");
-					put(grammarAccess.getTimeConstantAccess().getUnitAssignment_1(), "rule__TimeConstant__UnitAssignment_1");
+					put(grammarAccess.getCustomTransitionExpressionAccess().getTriggersAssignment_1_0(), "rule__CustomTransitionExpression__TriggersAssignment_1_0");
+					put(grammarAccess.getCustomTransitionExpressionAccess().getTriggersAssignment_1_1_1(), "rule__CustomTransitionExpression__TriggersAssignment_1_1_1");
+					put(grammarAccess.getCustomTransitionExpressionAccess().getGuardExpressionAssignment_2_1(), "rule__CustomTransitionExpression__GuardExpressionAssignment_2_1");
+					put(grammarAccess.getCustomTransitionExpressionAccess().getActionAssignment_3_1(), "rule__CustomTransitionExpression__ActionAssignment_3_1");
 					put(grammarAccess.getExpressionRuleAccess().getExpressionAssignment(), "rule__ExpressionRule__ExpressionAssignment");
 					put(grammarAccess.getRaiseEventExpressionAccess().getEventAssignment_1(), "rule__RaiseEventExpression__EventAssignment_1");
 					put(grammarAccess.getLogicalOrExpressionAccess().getRightOperandAssignment_1_2(), "rule__LogicalOrExpression__RightOperandAssignment_1_2");
@@ -115,7 +100,7 @@ public class ExpressionsParser extends AbstractContentAssistParser {
 	protected Collection<FollowElement> getFollowElements(AbstractInternalContentAssistParser parser) {
 		try {
 			org.yakindu.sct.statechart.ui.contentassist.antlr.internal.InternalExpressionsParser typedParser = (org.yakindu.sct.statechart.ui.contentassist.antlr.internal.InternalExpressionsParser) parser;
-			typedParser.entryRuleStatementModel();
+			typedParser.entryRuleCustomTransitionExpression();
 			return typedParser.getFollowElements();
 		} catch(RecognitionException ex) {
 			throw new RuntimeException(ex);

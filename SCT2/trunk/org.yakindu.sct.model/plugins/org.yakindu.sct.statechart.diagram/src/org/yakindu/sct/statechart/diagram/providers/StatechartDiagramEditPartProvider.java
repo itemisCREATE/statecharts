@@ -10,7 +10,6 @@
  */
 package org.yakindu.sct.statechart.diagram.providers;
 
-import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,7 +17,24 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.services.editpart.AbstractEditPartProvider;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.statechart.diagram.editor.StatechartDiagramEditor;
+import org.yakindu.sct.statechart.diagram.editparts.ChoiceEditPart;
+import org.yakindu.sct.statechart.diagram.editparts.DeepHistoryEditPart;
+import org.yakindu.sct.statechart.diagram.editparts.FinalStateEditPart;
+import org.yakindu.sct.statechart.diagram.editparts.InitialStateEditPart;
+import org.yakindu.sct.statechart.diagram.editparts.JoinEditPart;
+import org.yakindu.sct.statechart.diagram.editparts.JunctionEditPart;
+import org.yakindu.sct.statechart.diagram.editparts.RegionCompartmentEditPart;
+import org.yakindu.sct.statechart.diagram.editparts.RegionEditPart;
+import org.yakindu.sct.statechart.diagram.editparts.RegionNameEditPart;
+import org.yakindu.sct.statechart.diagram.editparts.ShallowHistoryEditPart;
+import org.yakindu.sct.statechart.diagram.editparts.StateEditPart;
+import org.yakindu.sct.statechart.diagram.editparts.StateFigureCompartmentEditPart;
+import org.yakindu.sct.statechart.diagram.editparts.StateNameEditPart;
+import org.yakindu.sct.statechart.diagram.editparts.StateTextCompartmentEditPart;
+import org.yakindu.sct.statechart.diagram.editparts.StateTextCompartmentExpressionEditPart;
 import org.yakindu.sct.statechart.diagram.editparts.StatechartDiagramEditPart;
+import org.yakindu.sct.statechart.diagram.editparts.TransitionEditPart;
+import org.yakindu.sct.statechart.diagram.editparts.TransitionExpressionEditPart;
 
 /**
  * 
@@ -26,41 +42,44 @@ import org.yakindu.sct.statechart.diagram.editparts.StatechartDiagramEditPart;
  *         href="mailto:andreas.muelder@itemis.de">andreas.muelder@itemis.de</a>
  * 
  */
-public class StatechartDiagramEditPartProvider extends AbstractEditPartProvider {
+public class StatechartDiagramEditPartProvider extends AbstractEditPartProvider
+		implements ProviderConstants {
 
 	public final Map<String, Class<? extends IGraphicalEditPart>> editParts;
-
-	private static final String EDITPART_PACKAGE = "org.yakindu.sct.statechart.diagram.editparts.";
 
 	public StatechartDiagramEditPartProvider() {
 		editParts = new HashMap<String, Class<? extends IGraphicalEditPart>>();
 		init();
 	}
 
-	@SuppressWarnings("unchecked")
 	private void init() {
-		editParts.put(StatechartDiagramEditor.ID, StatechartDiagramEditPart.class);
-		Field[] elements = ProviderConstants.class.getFields();
-		for (Field field : elements) {
-			String elementName = null;
-			try {
-				elementName = (String) field.get(null);
-				editParts.put(elementName,
-						(Class<IGraphicalEditPart>) Class.forName(EDITPART_PACKAGE + elementName + "EditPart"));
-			} catch (Exception e) {
-				e.printStackTrace();
-				throw new ProviderException("EditPart for ProviderConstant " + elementName + " not found");
-			}
-		}
+		editParts.put(StatechartDiagramEditor.ID,
+				StatechartDiagramEditPart.class);
+		editParts.put(CHOICE, ChoiceEditPart.class);
+		editParts.put(DEEPHISTORY, DeepHistoryEditPart.class);
+		editParts.put(FINALSTATE, FinalStateEditPart.class);
+		editParts.put(INITIALSTATE, InitialStateEditPart.class);
+		editParts.put(JOIN, JoinEditPart.class);
+		editParts.put(JUNCTION, JunctionEditPart.class);
+		editParts.put(REGION_COMPARTMENT, RegionCompartmentEditPart.class);
+		editParts.put(REGION, RegionEditPart.class);
+		editParts.put(REGION_NAME, RegionNameEditPart.class);
+		editParts.put(SHALLOWHISTORY, ShallowHistoryEditPart.class);
+		editParts.put(STATE, StateEditPart.class);
+		editParts.put(STATE_FIGURE_COMPARTMENT,
+				StateFigureCompartmentEditPart.class);
+		editParts.put(STATE_NAME, StateNameEditPart.class);
+		editParts.put(STATE_TEXT_COMPARTMENT,
+				StateTextCompartmentEditPart.class);
+		editParts.put(STATE_TEXT_COMPARTMENT_EXPRESSION,
+				StateTextCompartmentExpressionEditPart.class);
+		editParts.put(TRANSITION, TransitionEditPart.class);
+		editParts
+				.put(TRANSITION_EXPRESSION, TransitionExpressionEditPart.class);
 	}
 
 	private Class<? extends IGraphicalEditPart> getClass(String semanticHint) {
-		Class<? extends IGraphicalEditPart> editPart = editParts.get(semanticHint);
-		if (editPart == null) {
-			System.err.println("No EditPart found for semanticHint " + semanticHint);
-			throw new ProviderException("No EditPart found for semanticHint " + semanticHint);
-		}
-		return editPart;
+		return editParts.get(semanticHint);
 	}
 
 	@Override
@@ -69,7 +88,8 @@ public class StatechartDiagramEditPartProvider extends AbstractEditPartProvider 
 	}
 
 	@Override
-	protected Class<? extends IGraphicalEditPart> getDiagramEditPartClass(View view) {
+	protected Class<? extends IGraphicalEditPart> getDiagramEditPartClass(
+			View view) {
 		return getClass(view.getType());
 	}
 

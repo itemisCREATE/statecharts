@@ -14,10 +14,11 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
-import org.yakindu.sct.statechart.expressions.ActionDefinition;
+import org.yakindu.model.sct.statechart.StatechartPackage;
+
 import org.yakindu.sct.statechart.expressions.AdditiveOperator;
+import org.yakindu.sct.statechart.expressions.CustomTransitionExpression;
 import org.yakindu.sct.statechart.expressions.DirectionKind;
-import org.yakindu.sct.statechart.expressions.Event;
 import org.yakindu.sct.statechart.expressions.Expression;
 import org.yakindu.sct.statechart.expressions.ExpressionRule;
 import org.yakindu.sct.statechart.expressions.ExpressionsFactory;
@@ -34,14 +35,9 @@ import org.yakindu.sct.statechart.expressions.PrimitiveValueExpression;
 import org.yakindu.sct.statechart.expressions.PropertyReferenceExpression;
 import org.yakindu.sct.statechart.expressions.RaiseEventExpression;
 import org.yakindu.sct.statechart.expressions.RelationalOperator;
-import org.yakindu.sct.statechart.expressions.Statement;
-import org.yakindu.sct.statechart.expressions.StatementModel;
-import org.yakindu.sct.statechart.expressions.TimeConstant;
 import org.yakindu.sct.statechart.expressions.TimeUnit;
-import org.yakindu.sct.statechart.expressions.TransitionDefinition;
 import org.yakindu.sct.statechart.expressions.Type;
 import org.yakindu.sct.statechart.expressions.UnaryOperator;
-import org.yakindu.sct.statechart.expressions.VariableDefinition;
 
 /**
  * <!-- begin-user-doc -->
@@ -51,55 +47,6 @@ import org.yakindu.sct.statechart.expressions.VariableDefinition;
  */
 public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsPackage
 {
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass statementModelEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass statementEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass transitionDefinitionEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass variableDefinitionEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass actionDefinitionEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass eventEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass timeConstantEClass = null;
-
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -120,6 +67,13 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
    * @generated
    */
   private EClass expressionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass customTransitionExpressionEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -281,6 +235,9 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 
     isInited = true;
 
+    // Initialize simple dependencies
+    StatechartPackage.eINSTANCE.eClass();
+
     // Create package meta-data objects
     theExpressionsPackage.createPackageContents();
 
@@ -294,186 +251,6 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(ExpressionsPackage.eNS_URI, theExpressionsPackage);
     return theExpressionsPackage;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getStatementModel()
-  {
-    return statementModelEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getStatementModel_Statements()
-  {
-    return (EReference)statementModelEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getStatement()
-  {
-    return statementEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getTransitionDefinition()
-  {
-    return transitionDefinitionEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getTransitionDefinition_Triggers()
-  {
-    return (EReference)transitionDefinitionEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getTransitionDefinition_GuardExpression()
-  {
-    return (EReference)transitionDefinitionEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getVariableDefinition()
-  {
-    return variableDefinitionEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getVariableDefinition_Name()
-  {
-    return (EAttribute)variableDefinitionEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getVariableDefinition_Type()
-  {
-    return (EAttribute)variableDefinitionEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getActionDefinition()
-  {
-    return actionDefinitionEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getActionDefinition_Expression()
-  {
-    return (EReference)actionDefinitionEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getEvent()
-  {
-    return eventEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getEvent_Name()
-  {
-    return (EAttribute)eventEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getEvent_Direction()
-  {
-    return (EAttribute)eventEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getEvent_Time()
-  {
-    return (EReference)eventEClass.getEStructuralFeatures().get(2);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getTimeConstant()
-  {
-    return timeConstantEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getTimeConstant_Value()
-  {
-    return (EAttribute)timeConstantEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getTimeConstant_Unit()
-  {
-    return (EAttribute)timeConstantEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -524,6 +301,46 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
   public EClass getExpression()
   {
     return expressionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getCustomTransitionExpression()
+  {
+    return customTransitionExpressionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getCustomTransitionExpression_Triggers()
+  {
+    return (EReference)customTransitionExpressionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getCustomTransitionExpression_GuardExpression()
+  {
+    return (EReference)customTransitionExpressionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getCustomTransitionExpression_Action()
+  {
+    return (EReference)customTransitionExpressionEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -896,31 +713,6 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
     isCreated = true;
 
     // Create classes and their features
-    statementModelEClass = createEClass(STATEMENT_MODEL);
-    createEReference(statementModelEClass, STATEMENT_MODEL__STATEMENTS);
-
-    statementEClass = createEClass(STATEMENT);
-
-    transitionDefinitionEClass = createEClass(TRANSITION_DEFINITION);
-    createEReference(transitionDefinitionEClass, TRANSITION_DEFINITION__TRIGGERS);
-    createEReference(transitionDefinitionEClass, TRANSITION_DEFINITION__GUARD_EXPRESSION);
-
-    variableDefinitionEClass = createEClass(VARIABLE_DEFINITION);
-    createEAttribute(variableDefinitionEClass, VARIABLE_DEFINITION__NAME);
-    createEAttribute(variableDefinitionEClass, VARIABLE_DEFINITION__TYPE);
-
-    actionDefinitionEClass = createEClass(ACTION_DEFINITION);
-    createEReference(actionDefinitionEClass, ACTION_DEFINITION__EXPRESSION);
-
-    eventEClass = createEClass(EVENT);
-    createEAttribute(eventEClass, EVENT__NAME);
-    createEAttribute(eventEClass, EVENT__DIRECTION);
-    createEReference(eventEClass, EVENT__TIME);
-
-    timeConstantEClass = createEClass(TIME_CONSTANT);
-    createEAttribute(timeConstantEClass, TIME_CONSTANT__VALUE);
-    createEAttribute(timeConstantEClass, TIME_CONSTANT__UNIT);
-
     expressionRuleEClass = createEClass(EXPRESSION_RULE);
     createEReference(expressionRuleEClass, EXPRESSION_RULE__EXPRESSION);
 
@@ -928,6 +720,11 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
     createEReference(raiseEventExpressionEClass, RAISE_EVENT_EXPRESSION__EVENT);
 
     expressionEClass = createEClass(EXPRESSION);
+
+    customTransitionExpressionEClass = createEClass(CUSTOM_TRANSITION_EXPRESSION);
+    createEReference(customTransitionExpressionEClass, CUSTOM_TRANSITION_EXPRESSION__TRIGGERS);
+    createEReference(customTransitionExpressionEClass, CUSTOM_TRANSITION_EXPRESSION__GUARD_EXPRESSION);
+    createEReference(customTransitionExpressionEClass, CUSTOM_TRANSITION_EXPRESSION__ACTION);
 
     logicalOrExpressionEClass = createEClass(LOGICAL_OR_EXPRESSION);
     createEReference(logicalOrExpressionEClass, LOGICAL_OR_EXPRESSION__LEFT_OPERAND);
@@ -999,15 +796,15 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
     setNsPrefix(eNS_PREFIX);
     setNsURI(eNS_URI);
 
+    // Obtain other dependent packages
+    StatechartPackage theStatechartPackage = (StatechartPackage)EPackage.Registry.INSTANCE.getEPackage(StatechartPackage.eNS_URI);
+
     // Create type parameters
 
     // Set bounds for type parameters
 
     // Add supertypes to classes
-    transitionDefinitionEClass.getESuperTypes().add(this.getStatement());
-    variableDefinitionEClass.getESuperTypes().add(this.getStatement());
-    actionDefinitionEClass.getESuperTypes().add(this.getStatement());
-    eventEClass.getESuperTypes().add(this.getStatement());
+    customTransitionExpressionEClass.getESuperTypes().add(theStatechartPackage.getTransitionExpression());
     logicalOrExpressionEClass.getESuperTypes().add(this.getExpression());
     logicalAndExpressionEClass.getESuperTypes().add(this.getExpression());
     logicalNotExpressionEClass.getESuperTypes().add(this.getExpression());
@@ -1019,38 +816,18 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
     propertyReferenceExpressionEClass.getESuperTypes().add(this.getExpression());
 
     // Initialize classes and features; add operations and parameters
-    initEClass(statementModelEClass, StatementModel.class, "StatementModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getStatementModel_Statements(), this.getStatement(), null, "statements", null, 0, -1, StatementModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(statementEClass, Statement.class, "Statement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-    initEClass(transitionDefinitionEClass, TransitionDefinition.class, "TransitionDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getTransitionDefinition_Triggers(), this.getEvent(), null, "triggers", null, 0, -1, TransitionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getTransitionDefinition_GuardExpression(), this.getExpressionRule(), null, "guardExpression", null, 0, 1, TransitionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(variableDefinitionEClass, VariableDefinition.class, "VariableDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getVariableDefinition_Name(), ecorePackage.getEString(), "name", null, 0, 1, VariableDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getVariableDefinition_Type(), this.getType(), "type", null, 0, 1, VariableDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(actionDefinitionEClass, ActionDefinition.class, "ActionDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getActionDefinition_Expression(), this.getExpressionRule(), null, "expression", null, 0, 1, ActionDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(eventEClass, Event.class, "Event", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getEvent_Name(), ecorePackage.getEString(), "name", null, 0, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEvent_Direction(), this.getDirectionKind(), "direction", null, 0, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEvent_Time(), this.getTimeConstant(), null, "time", null, 0, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(timeConstantEClass, TimeConstant.class, "TimeConstant", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getTimeConstant_Value(), ecorePackage.getEInt(), "value", null, 0, 1, TimeConstant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getTimeConstant_Unit(), this.getTimeUnit(), "unit", null, 0, 1, TimeConstant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
     initEClass(expressionRuleEClass, ExpressionRule.class, "ExpressionRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getExpressionRule_Expression(), ecorePackage.getEObject(), null, "expression", null, 0, 1, ExpressionRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(raiseEventExpressionEClass, RaiseEventExpression.class, "RaiseEventExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getRaiseEventExpression_Event(), this.getEvent(), null, "event", null, 0, 1, RaiseEventExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getRaiseEventExpression_Event(), theStatechartPackage.getEvent(), null, "event", null, 0, 1, RaiseEventExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(expressionEClass, Expression.class, "Expression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(customTransitionExpressionEClass, CustomTransitionExpression.class, "CustomTransitionExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getCustomTransitionExpression_Triggers(), theStatechartPackage.getEvent(), null, "triggers", null, 0, -1, CustomTransitionExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getCustomTransitionExpression_GuardExpression(), this.getExpression(), null, "guardExpression", null, 0, 1, CustomTransitionExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getCustomTransitionExpression_Action(), this.getExpressionRule(), null, "action", null, 0, 1, CustomTransitionExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(logicalOrExpressionEClass, LogicalOrExpression.class, "LogicalOrExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getLogicalOrExpression_LeftOperand(), this.getExpression(), null, "leftOperand", null, 0, 1, LogicalOrExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1086,7 +863,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
     initEAttribute(getPrimitiveValueExpression_Value(), ecorePackage.getEString(), "value", null, 0, 1, PrimitiveValueExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(propertyReferenceExpressionEClass, PropertyReferenceExpression.class, "PropertyReferenceExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getPropertyReferenceExpression_Value(), this.getVariableDefinition(), null, "value", null, 0, 1, PropertyReferenceExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getPropertyReferenceExpression_Value(), theStatechartPackage.getVariable(), null, "value", null, 0, 1, PropertyReferenceExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Initialize enums and add enum literals
     initEEnum(additiveOperatorEEnum, AdditiveOperator.class, "AdditiveOperator");

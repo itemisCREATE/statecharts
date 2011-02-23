@@ -19,7 +19,10 @@ import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.Node;
 import org.eclipse.gmf.runtime.notation.NotationFactory;
 import org.eclipse.gmf.runtime.notation.View;
+import org.yakindu.model.sct.statechart.BooleanVariable;
+import org.yakindu.model.sct.statechart.Event;
 import org.yakindu.model.sct.statechart.InitialState;
+import org.yakindu.model.sct.statechart.IntegerVariable;
 import org.yakindu.model.sct.statechart.Region;
 import org.yakindu.model.sct.statechart.Statechart;
 import org.yakindu.model.sct.statechart.StatechartFactory;
@@ -85,6 +88,22 @@ public final class FactoryUtils {
 		Node initialStateView = ViewService.createNode(getRegionCompartmentView(regionView),
 				ProviderConstants.INITIALSTATE, DiagramActivator.DIAGRAM_PREFERENCES_HINT);
 		setInitialStateViewLayoutConstraint(initialStateView);
+		//FIXME: Test Events
+				 Event event = StatechartFactory.eINSTANCE.createEvent();
+		 event.setName("TestEvent1");
+		 Event event2 = StatechartFactory.eINSTANCE.createEvent();
+		 event2.setName("TestEvent2");
+		 statechart.getEvents().add(event);
+		 statechart.getEvents().add(event2);
+		 //FIXME: Test Variablen
+		 IntegerVariable integerVariable = StatechartFactory.eINSTANCE.createIntegerVariable();
+		 integerVariable.setName("integer1");
+		 BooleanVariable booleanVariable = StatechartFactory.eINSTANCE.createBooleanVariable();
+		 booleanVariable.setName("bool1");
+		 statechart.getVariables().add(integerVariable);
+		 statechart.getVariables().add(booleanVariable);
+		 
+		 
 	}
 
 	private static void setInitialStateViewLayoutConstraint(Node initialStateView) {
