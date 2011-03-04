@@ -38,6 +38,7 @@
     </genClasses>
     <genClasses ecoreClass="IL.ecore#//InputVariableDeclaration">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference IL.ecore#//InputVariableDeclaration/feedingCompounds"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute IL.ecore#//InputVariableDeclaration/directFeedthrough"/>
     </genClasses>
     <genClasses ecoreClass="IL.ecore#//OutputVariableDeclaration"/>
     <genClasses ecoreClass="IL.ecore#//InstanceVariableDeclaration"/>

@@ -11,8 +11,13 @@
 
 package org.eclipselabs.mscript.language.il.util;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipselabs.mscript.language.ast.Expression;
+import org.eclipselabs.mscript.language.il.ILFunctionDefinition;
+import org.eclipselabs.mscript.language.il.InputVariableDeclaration;
 import org.eclipselabs.mscript.language.internal.il.transform.DataTypeAdapter;
 import org.eclipselabs.mscript.typesystem.DataType;
 
@@ -36,4 +41,14 @@ public class ILUtil {
 		adapter.setDataType(dataType);
 	}
 	
+	public static List<InputVariableDeclaration> getDirectFeedthroughInputs(ILFunctionDefinition functionDefinition) {
+		List<InputVariableDeclaration> inputs = new ArrayList<InputVariableDeclaration>();
+		for (InputVariableDeclaration inputVariableDeclaration : functionDefinition.getInputVariableDeclarations()) {
+			if (inputVariableDeclaration.isDirectFeedthrough()) {
+				inputs.add(inputVariableDeclaration);
+			}
+		}
+		return inputs;
+	}
+
 }

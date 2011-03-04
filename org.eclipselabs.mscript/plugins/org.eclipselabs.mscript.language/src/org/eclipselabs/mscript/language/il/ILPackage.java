@@ -460,13 +460,22 @@ public interface ILPackage extends EPackage {
 	int INPUT_VARIABLE_DECLARATION__FEEDING_COMPOUNDS = STATEFUL_VARIABLE_DECLARATION_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Direct Feedthrough</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_VARIABLE_DECLARATION__DIRECT_FEEDTHROUGH = STATEFUL_VARIABLE_DECLARATION_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Input Variable Declaration</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INPUT_VARIABLE_DECLARATION_FEATURE_COUNT = STATEFUL_VARIABLE_DECLARATION_FEATURE_COUNT + 1;
+	int INPUT_VARIABLE_DECLARATION_FEATURE_COUNT = STATEFUL_VARIABLE_DECLARATION_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1257,6 +1266,17 @@ public interface ILPackage extends EPackage {
 	EReference getInputVariableDeclaration_FeedingCompounds();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.language.il.InputVariableDeclaration#isDirectFeedthrough <em>Direct Feedthrough</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Direct Feedthrough</em>'.
+	 * @see org.eclipselabs.mscript.language.il.InputVariableDeclaration#isDirectFeedthrough()
+	 * @see #getInputVariableDeclaration()
+	 * @generated
+	 */
+	EAttribute getInputVariableDeclaration_DirectFeedthrough();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipselabs.mscript.language.il.OutputVariableDeclaration <em>Output Variable Declaration</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1837,6 +1857,14 @@ public interface ILPackage extends EPackage {
 		 * @generated
 		 */
 		EReference INPUT_VARIABLE_DECLARATION__FEEDING_COMPOUNDS = eINSTANCE.getInputVariableDeclaration_FeedingCompounds();
+
+		/**
+		 * The meta object literal for the '<em><b>Direct Feedthrough</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute INPUT_VARIABLE_DECLARATION__DIRECT_FEEDTHROUGH = eINSTANCE.getInputVariableDeclaration_DirectFeedthrough();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipselabs.mscript.language.il.impl.OutputVariableDeclarationImpl <em>Output Variable Declaration</em>}' class.

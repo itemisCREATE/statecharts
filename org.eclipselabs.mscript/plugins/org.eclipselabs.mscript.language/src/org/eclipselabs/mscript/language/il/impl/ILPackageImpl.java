@@ -485,6 +485,15 @@ public class ILPackageImpl extends EPackageImpl implements ILPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getInputVariableDeclaration_DirectFeedthrough() {
+		return (EAttribute)inputVariableDeclarationEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getOutputVariableDeclaration() {
 		return outputVariableDeclarationEClass;
 	}
@@ -844,6 +853,7 @@ public class ILPackageImpl extends EPackageImpl implements ILPackage {
 
 		inputVariableDeclarationEClass = createEClass(INPUT_VARIABLE_DECLARATION);
 		createEReference(inputVariableDeclarationEClass, INPUT_VARIABLE_DECLARATION__FEEDING_COMPOUNDS);
+		createEAttribute(inputVariableDeclarationEClass, INPUT_VARIABLE_DECLARATION__DIRECT_FEEDTHROUGH);
 
 		outputVariableDeclarationEClass = createEClass(OUTPUT_VARIABLE_DECLARATION);
 
@@ -980,6 +990,7 @@ public class ILPackageImpl extends EPackageImpl implements ILPackage {
 
 		initEClass(inputVariableDeclarationEClass, InputVariableDeclaration.class, "InputVariableDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getInputVariableDeclaration_FeedingCompounds(), this.getComputationCompound(), this.getComputationCompound_Inputs(), "feedingCompounds", null, 0, -1, InputVariableDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getInputVariableDeclaration_DirectFeedthrough(), ecorePackage.getEBoolean(), "directFeedthrough", null, 1, 1, InputVariableDeclaration.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(outputVariableDeclarationEClass, OutputVariableDeclaration.class, "OutputVariableDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

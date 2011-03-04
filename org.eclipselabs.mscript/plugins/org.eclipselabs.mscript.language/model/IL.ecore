@@ -48,6 +48,9 @@
   <eClassifiers xsi:type="ecore:EClass" name="InputVariableDeclaration" eSuperTypes="#//StatefulVariableDeclaration">
     <eStructuralFeatures xsi:type="ecore:EReference" name="feedingCompounds" upperBound="-1"
         eType="#//ComputationCompound" eOpposite="#//ComputationCompound/inputs"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="directFeedthrough" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" changeable="false"
+        volatile="true" transient="true" derived="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OutputVariableDeclaration" eSuperTypes="#//StatefulVariableDeclaration"/>
   <eClassifiers xsi:type="ecore:EClass" name="InstanceVariableDeclaration" eSuperTypes="#//StatefulVariableDeclaration"/>
