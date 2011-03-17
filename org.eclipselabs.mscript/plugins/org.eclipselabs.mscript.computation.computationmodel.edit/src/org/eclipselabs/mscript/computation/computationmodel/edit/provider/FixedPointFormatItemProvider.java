@@ -183,8 +183,19 @@ public class FixedPointFormatItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		FixedPointFormat fixedPointFormat = (FixedPointFormat)object;
-		return getString("_UI_FixedPointFormat_type") + " Q" + fixedPointFormat.getIntegerLength() + "." + fixedPointFormat.getFractionLength();
+		FixedPointFormat fixedPointFormat = (FixedPointFormat) object;
+		StringBuilder sb = new StringBuilder();
+		if (fixedPointFormat.getFractionLength() == 0) {
+			sb.append(fixedPointFormat.getIntegerLength() + 1);
+			sb.append("-bit Integer");
+		} else {
+			sb.append("Q");
+			sb.append(fixedPointFormat.getIntegerLength());
+			sb.append(".");
+			sb.append(fixedPointFormat.getFractionLength());
+			sb.append(" Fixed Point");
+		}
+		return  sb.toString();
 	}
 
 	/**

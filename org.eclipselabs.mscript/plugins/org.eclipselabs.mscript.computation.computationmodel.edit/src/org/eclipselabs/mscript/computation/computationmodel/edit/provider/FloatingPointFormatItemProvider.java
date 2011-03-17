@@ -102,15 +102,13 @@ public class FloatingPointFormatItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
-		FloatingPointFormatKind labelValue = ((FloatingPointFormat)object).getKind();
+		FloatingPointFormatKind labelValue = ((FloatingPointFormat) object).getKind();
 		String label = labelValue == null ? null : labelValue.toString();
-		return label == null || label.length() == 0 ?
-			getString("_UI_FloatingPointFormat_type") :
-			getString("_UI_FloatingPointFormat_type") + " " + label;
+		return label + " Floating Point";
 	}
 
 	/**

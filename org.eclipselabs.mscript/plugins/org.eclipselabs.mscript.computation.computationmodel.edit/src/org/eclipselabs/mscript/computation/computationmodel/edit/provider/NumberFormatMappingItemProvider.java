@@ -10,6 +10,7 @@ package org.eclipselabs.mscript.computation.computationmodel.edit.provider;
 import java.util.Collection;
 import java.util.List;
 
+import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
@@ -27,6 +28,7 @@ import org.eclipselabs.mscript.computation.computationmodel.ComputationModelPack
 import org.eclipselabs.mscript.computation.computationmodel.NumberFormatMapping;
 import org.eclipselabs.mscript.computation.computationmodel.edit.ComputationModelEditPlugin;
 import org.eclipselabs.mscript.typesystem.TypeSystemFactory;
+import org.eclipselabs.mscript.typesystem.edit.provider.TypeSystemItemProviderAdapterFactory;
 
 /**
  * This is the item provider adapter for a {@link org.eclipselabs.mscript.computation.computationmodel.NumberFormatMapping} object.
@@ -135,11 +137,25 @@ public class NumberFormatMappingItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_NumberFormatMapping_type");
+		NumberFormatMapping mapping = (NumberFormatMapping) object;
+		StringBuilder sb = new StringBuilder(getString("_UI_NumberFormatMapping_type"));
+		if (mapping.getDataType() != null && mapping.getNumberFormat() != null) {
+			sb.append(" ");
+			Adapter dataTypeAdapter = new TypeSystemItemProviderAdapterFactory().createAdapter(mapping.getDataType());
+			Adapter numberFormatAdapter = new ComputationModelItemProviderAdapterFactory().createAdapter(mapping.getNumberFormat());
+			if (dataTypeAdapter instanceof IItemLabelProvider && numberFormatAdapter instanceof IItemLabelProvider) {
+				sb.append("[");
+				sb.append(((ItemProviderAdapter) dataTypeAdapter).getText(mapping.getDataType()));
+				sb.append(" -> ");
+				sb.append(((ItemProviderAdapter) numberFormatAdapter).getText(mapping.getNumberFormat()));
+				sb.append("]");
+			}
+		}
+		return sb.toString();
 	}
 
 	/**

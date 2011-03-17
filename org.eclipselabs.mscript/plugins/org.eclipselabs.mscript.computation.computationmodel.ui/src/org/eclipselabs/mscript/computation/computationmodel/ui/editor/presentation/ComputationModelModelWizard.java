@@ -43,9 +43,15 @@ import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.dialogs.WizardNewFileCreationPage;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.part.ISetSelectionTarget;
+import org.eclipselabs.mscript.computation.computationmodel.ComputationModel;
 import org.eclipselabs.mscript.computation.computationmodel.ComputationModelFactory;
 import org.eclipselabs.mscript.computation.computationmodel.ComputationModelPackage;
+import org.eclipselabs.mscript.computation.computationmodel.FixedPointFormat;
+import org.eclipselabs.mscript.computation.computationmodel.FloatingPointFormat;
+import org.eclipselabs.mscript.computation.computationmodel.FloatingPointFormatKind;
+import org.eclipselabs.mscript.computation.computationmodel.NumberFormatMapping;
 import org.eclipselabs.mscript.computation.computationmodel.ui.ComputationModelUIPlugin;
+import org.eclipselabs.mscript.typesystem.TypeSystemFactory;
 
 
 /**
@@ -133,7 +139,27 @@ public class ComputationModelModelWizard extends Wizard implements INewWizard {
 	 * @generated NOT
 	 */
 	protected EObject createInitialModel() {
-		return computationModelFactory.createComputationModel();
+		ComputationModel computationModel = ComputationModelFactory.eINSTANCE.createComputationModel();
+		
+		FloatingPointFormat floatingPointFormat = ComputationModelFactory.eINSTANCE.createFloatingPointFormat();
+		floatingPointFormat.setKind(FloatingPointFormatKind.BINARY64);
+		computationModel.getNumberFormats().add(floatingPointFormat);
+		
+		FixedPointFormat fixedPointFormat = ComputationModelFactory.eINSTANCE.createFixedPointFormat();
+		fixedPointFormat.setIntegerLength(31);
+		computationModel.getNumberFormats().add(fixedPointFormat);
+		
+		NumberFormatMapping mapping = ComputationModelFactory.eINSTANCE.createNumberFormatMapping();
+		mapping.setDataType(TypeSystemFactory.eINSTANCE.createRealType());
+		mapping.setNumberFormat(floatingPointFormat);
+		computationModel.getNumberFormatMappings().add(mapping);
+
+		mapping = ComputationModelFactory.eINSTANCE.createNumberFormatMapping();
+		mapping.setDataType(TypeSystemFactory.eINSTANCE.createIntegerType());
+		mapping.setNumberFormat(fixedPointFormat);
+		computationModel.getNumberFormatMappings().add(mapping);
+
+		return computationModel;
 	}
 
 	/**
