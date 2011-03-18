@@ -184,7 +184,7 @@ public class FixedPointFormatImpl extends NumberFormatImpl implements FixedPoint
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public FixedPointOperation getOperation(FixedPointOperationKind kind) {
 		return FixedPointFormatOperations.getOperation(this, kind);

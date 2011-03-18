@@ -103,7 +103,7 @@ public class ComputationModelImpl extends EObjectImpl implements ComputationMode
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public NumberFormat getNumberFormat(DataType dataType) {
 		return ComputationModelOperations.getNumberFormat(this, dataType);
