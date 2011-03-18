@@ -22,7 +22,6 @@ public class ExpressionsResourceProvider extends
 	public IResourceDescription.Manager getResourceDescriptionManager() {
 		return new IResourceDescription.Manager() {
 
-			@Override
 			public boolean isAffected(Collection<Delta> deltas,
 					IResourceDescription candidate,
 					IResourceDescriptions context)
@@ -30,14 +29,12 @@ public class ExpressionsResourceProvider extends
 				return false;
 			}
 
-			@Override
 			public boolean isAffected(Delta delta,
 					IResourceDescription candidate)
 					throws IllegalArgumentException {
 				return false;
 			}
 
-			@Override
 			public IResourceDescription getResourceDescription(Resource resource) {
 				return new ExpressionsResourceDescription(resource);
 			}
