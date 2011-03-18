@@ -40,12 +40,12 @@ public class ComputationModelUtil {
 		computationModel.getNumberFormats().add(fixedPointFormat);
 		
 		NumberFormatMapping mapping = ComputationModelFactory.eINSTANCE.createNumberFormatMapping();
-		mapping.setDataType(TypeSystemFactory.eINSTANCE.createRealType());
+		mapping.setOwnedDataType(TypeSystemFactory.eINSTANCE.createRealType());
 		mapping.setNumberFormat(floatingPointFormat);
 		computationModel.getNumberFormatMappings().add(mapping);
 
 		mapping = ComputationModelFactory.eINSTANCE.createNumberFormatMapping();
-		mapping.setDataType(TypeSystemFactory.eINSTANCE.createIntegerType());
+		mapping.setOwnedDataType(TypeSystemFactory.eINSTANCE.createIntegerType());
 		mapping.setNumberFormat(fixedPointFormat);
 		computationModel.getNumberFormatMappings().add(mapping);
 
