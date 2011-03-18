@@ -23,10 +23,8 @@
     <genClasses ecoreClass="statechart.ecore#//Transition">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference statechart.ecore#//Transition/target"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference statechart.ecore#//Transition/source"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference statechart.ecore#//Transition/expression"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference statechart.ecore#//Transition/region"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="statechart.ecore#//TransitionExpression"/>
     <genClasses ecoreClass="statechart.ecore#//FinalState"/>
     <genClasses ecoreClass="statechart.ecore#//State">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference statechart.ecore#//State/subRegions"/>
@@ -69,5 +67,8 @@
     <genClasses image="false" ecoreClass="statechart.ecore#//Trigger"/>
     <genClasses image="false" ecoreClass="statechart.ecore#//Effect"/>
     <genClasses ecoreClass="statechart.ecore#//TimeEvent"/>
+    <genClasses ecoreClass="statechart.ecore#//ExpressionElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute statechart.ecore#//ExpressionElement/expression"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

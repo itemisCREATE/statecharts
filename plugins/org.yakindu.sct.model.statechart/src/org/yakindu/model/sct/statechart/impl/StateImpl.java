@@ -12,16 +12,15 @@ package org.yakindu.model.sct.statechart.impl;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
+import org.yakindu.model.sct.statechart.ExpressionElement;
 import org.yakindu.model.sct.statechart.Region;
 import org.yakindu.model.sct.statechart.State;
 import org.yakindu.model.sct.statechart.StatechartPackage;
@@ -33,6 +32,7 @@ import org.yakindu.model.sct.statechart.StatechartPackage;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.yakindu.model.sct.statechart.impl.StateImpl#getExpression <em>Expression</em>}</li>
  *   <li>{@link org.yakindu.model.sct.statechart.impl.StateImpl#getSubRegions <em>Sub Regions</em>}</li>
  * </ul>
  * </p>
@@ -46,6 +46,26 @@ public class StateImpl extends VertexImpl implements State {
 	 * @generated
 	 */
 	public static final String copyright = "Copyright (c) 2011 committers of YAKINDU and others.\r\nAll rights reserved. This program and the accompanying materials\r\nare made available under the terms of the Eclipse Public License v1.0\r\nwhich accompanies this distribution, and is available at\r\nhttp://www.eclipse.org/legal/epl-v10.html\r\nContributors:\r\ncommitters of YAKINDU - initial API and implementation\r\n";
+
+	/**
+	 * The default value of the '{@link #getExpression() <em>Expression</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExpression()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String EXPRESSION_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getExpression() <em>Expression</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExpression()
+	 * @generated
+	 * @ordered
+	 */
+	protected String expression = EXPRESSION_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getSubRegions() <em>Sub Regions</em>}' containment reference list.
@@ -74,6 +94,27 @@ public class StateImpl extends VertexImpl implements State {
 	@Override
 	protected EClass eStaticClass() {
 		return StatechartPackage.Literals.STATE;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getExpression() {
+		return expression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setExpression(String newExpression) {
+		String oldExpression = expression;
+		expression = newExpression;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, StatechartPackage.STATE__EXPRESSION, oldExpression, expression));
 	}
 
 	/**
@@ -110,6 +151,8 @@ public class StateImpl extends VertexImpl implements State {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case StatechartPackage.STATE__EXPRESSION:
+				return getExpression();
 			case StatechartPackage.STATE__SUB_REGIONS:
 				return getSubRegions();
 		}
@@ -125,6 +168,9 @@ public class StateImpl extends VertexImpl implements State {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case StatechartPackage.STATE__EXPRESSION:
+				setExpression((String)newValue);
+				return;
 			case StatechartPackage.STATE__SUB_REGIONS:
 				getSubRegions().clear();
 				getSubRegions().addAll((Collection<? extends Region>)newValue);
@@ -141,6 +187,9 @@ public class StateImpl extends VertexImpl implements State {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case StatechartPackage.STATE__EXPRESSION:
+				setExpression(EXPRESSION_EDEFAULT);
+				return;
 			case StatechartPackage.STATE__SUB_REGIONS:
 				getSubRegions().clear();
 				return;
@@ -156,10 +205,60 @@ public class StateImpl extends VertexImpl implements State {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case StatechartPackage.STATE__EXPRESSION:
+				return EXPRESSION_EDEFAULT == null ? expression != null : !EXPRESSION_EDEFAULT.equals(expression);
 			case StatechartPackage.STATE__SUB_REGIONS:
 				return subRegions != null && !subRegions.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == ExpressionElement.class) {
+			switch (derivedFeatureID) {
+				case StatechartPackage.STATE__EXPRESSION: return StatechartPackage.EXPRESSION_ELEMENT__EXPRESSION;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == ExpressionElement.class) {
+			switch (baseFeatureID) {
+				case StatechartPackage.EXPRESSION_ELEMENT__EXPRESSION: return StatechartPackage.STATE__EXPRESSION;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (expression: ");
+		result.append(expression);
+		result.append(')');
+		return result.toString();
 	}
 
 } //StateImpl

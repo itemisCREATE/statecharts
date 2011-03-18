@@ -11,9 +11,7 @@
 package org.yakindu.model.sct.statechart.impl;
 
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.yakindu.model.sct.statechart.Effect;
 import org.yakindu.model.sct.statechart.StatechartPackage;
 

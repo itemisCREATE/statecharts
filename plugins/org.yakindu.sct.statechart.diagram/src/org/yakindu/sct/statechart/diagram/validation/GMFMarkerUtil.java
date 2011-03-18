@@ -7,6 +7,7 @@ import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
 import org.eclipse.gmf.runtime.emf.core.util.EMFCoreUtil;
 import org.eclipse.gmf.runtime.notation.Diagram;
@@ -27,12 +28,12 @@ public final class GMFMarkerUtil {
 	}
 
 	public static void createMarker(IFile target, IStatus validationStatus,
-			DiagramEditPart diagramEditPart, String markerType,
+			Diagram diagram, String markerType,
 			EObject semanticTarget) {
 		if (validationStatus.isOK()) {
 			return;
 		}
-		View view = findNotationView(diagramEditPart.getDiagramView(),
+		View view = findNotationView(diagram,
 				semanticTarget);
 		addMarker(target, view.eResource().getURIFragment(view),
 				EMFCoreUtil.getQualifiedName(semanticTarget, true),
@@ -53,6 +54,13 @@ public final class GMFMarkerUtil {
 		}
 		return null;
 
+	}
+	
+	public static IFile getTargetFile(View view) {
+		IFile target = view.eResource() != null ? WorkspaceSynchronizer
+				.getFile(view.eResource().getResourceSet().getResources()
+						.get(0)) : null;
+		return target;
 	}
 
 	private static IMarker addMarker(IFile file, String elementId,

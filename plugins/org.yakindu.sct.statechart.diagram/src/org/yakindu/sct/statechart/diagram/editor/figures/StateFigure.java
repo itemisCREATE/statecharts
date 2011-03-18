@@ -11,29 +11,28 @@
 package org.yakindu.sct.statechart.diagram.editor.figures;
 
 import org.eclipse.draw2d.Figure;
-import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.GridData;
+import org.eclipse.draw2d.GridLayout;
 import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.draw2d.RoundedRectangle;
 import org.eclipse.draw2d.geometry.Dimension;
-import org.eclipse.gmf.runtime.draw2d.ui.figures.ConstrainedToolbarLayout;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 import org.eclipse.gmf.runtime.draw2d.ui.mapmode.IMapMode;
-import org.yakindu.model.sct.statechart.State;
+import org.yakindu.sct.statechart.diagram.editor.figures.utils.GridDataFactory;
 
 /**
- * {@link IFigure} implementation for {@link State}s.
+ * 
+ * @author muelder
  * 
  */
 public class StateFigure extends RoundedRectangle {
 
 	private WrappingLabel nameFigure;
 	private Figure figureCompartmentPane;
-	//private RectangleFigure textCompartmentPane;
+	private Figure textCompartmentPane;
 
 	public StateFigure(IMapMode mapMode) {
-		ConstrainedToolbarLayout layout = new ConstrainedToolbarLayout(false);
-		layout.setStretchMajorAxis(true);
-		layout.setStretchMinorAxis(true);
+		GridLayout layout = new GridLayout(1, false);
 		this.setLayoutManager(layout);
 		this.setCornerDimensions(new Dimension(mapMode.DPtoLP(20), mapMode
 				.DPtoLP(20)));
@@ -42,24 +41,21 @@ public class StateFigure extends RoundedRectangle {
 	}
 
 	private void createContents() {
-		//Name Label
+		// Name Label
 		nameFigure = new WrappingLabel();
 		nameFigure.setAlignment(PositionConstants.CENTER);
-		this.add(nameFigure,0.2);
-		//Figure Compartment
+		this.add(nameFigure, GridDataFactory.fillDefaults().align(GridData.CENTER, GridData.CENTER).grab(true, false)
+				.getData());
+		// Text compartment
+		textCompartmentPane = new Figure();
+		this.add(textCompartmentPane,
+				GridDataFactory.fillDefaults().getData());
+		// Figure Compartment
 		figureCompartmentPane = new Figure();
-		this.add(figureCompartmentPane, 0.8);
+		this.add(figureCompartmentPane,
+				GridDataFactory.fillDefaults().getData());
 
 	}
-
-//	private void createTextCompartmentFigure() {
-//		textCompartmentPane = new RectangleFigure();
-//		textCompartmentPane.setOutline(false);
-//		GridData data = GridDataFactory.fillDefaults()
-//				.align(GridData.FILL, GridData.FILL).grab(true, true).getData();
-//		data.heightHint = mapMode.DPtoLP(15);
-//		this.add(textCompartmentPane, data);
-//	}
 
 	public WrappingLabel getNameFigure() {
 		return nameFigure;
@@ -69,8 +65,8 @@ public class StateFigure extends RoundedRectangle {
 		return figureCompartmentPane;
 	}
 
-//	public RectangleFigure getTextCompartmentPane() {
-//		return textCompartmentPane;
-//	}
+	public Figure getTextCompartmentPane() {
+		return textCompartmentPane;
+	}
 
 }

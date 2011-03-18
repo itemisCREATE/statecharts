@@ -30,11 +30,9 @@ import org.yakindu.sct.statechart.diagram.policies.RelationshipSemanticEditPolic
 import org.yakindu.sct.statechart.diagram.preferences.StatechartPreferenceManager;
 
 /**
- * The {@link StateEditPart} for {@link State} model elements.
  * 
- * @author Andreas Muelder <a
- *         href="mailto:andreas.muelder@itemis.de">andreas.muelder@itemis.de</a>
- * 
+ * @author muelder
+ *
  */
 public class StateEditPart extends ShapeNodeEditPart implements
 		IPrimaryEditPart {
@@ -74,7 +72,7 @@ public class StateEditPart extends ShapeNodeEditPart implements
 					@Override
 					protected Command getCreateElementAndViewCommand(
 							CreateViewAndElementRequest request) {
-						return UnexecutableCommand.INSTANCE;
+		 				return UnexecutableCommand.INSTANCE;
 					}
 				});
 	}
@@ -96,13 +94,12 @@ public class StateEditPart extends ShapeNodeEditPart implements
 			IFigure compartmentFigure = ((StateFigureCompartmentEditPart) childEditPart)
 					.getFigure();
 			pane.add(compartmentFigure);
-//		} 
-//		else if (childEditPart instanceof StateTextCompartmentEditPart) {
-//			IFigure pane = getPrimaryShape().getTextCompartmentPane();
-//			pane.setLayoutManager(new StackLayout());
-//			IFigure compartmentFigure = ((StateTextCompartmentEditPart) childEditPart)
-//					.getFigure();
-//			pane.add(compartmentFigure);
+		} else if (childEditPart instanceof StateTextCompartmentEditPart) {
+			IFigure pane = getPrimaryShape().getTextCompartmentPane();
+			pane.setLayoutManager(new StackLayout());
+			IFigure compartmentFigure = ((StateTextCompartmentEditPart) childEditPart)
+					.getFigure();
+			pane.add(compartmentFigure);
 		} else if (childEditPart instanceof StateNameEditPart) {
 			((StateNameEditPart) childEditPart).setLabel(getPrimaryShape()
 					.getNameFigure());

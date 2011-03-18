@@ -15,9 +15,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.gmf.runtime.common.ui.services.marker.MarkerNavigationService;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
-import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.ide.IGotoMarker;
 import org.yakindu.sct.statechart.diagram.DiagramActivator;
 import org.yakindu.sct.statechart.diagram.validation.ValidationAction;
@@ -42,7 +40,9 @@ public class StatechartDiagramEditor extends DiagramDocumentEditor implements IG
 		Display.getDefault().asyncExec(new Runnable() {
 			@Override
 			public void run() {
+				if(getDiagram() != null){
 				ValidationAction.validate(getDiagramEditPart(), getDiagram());
+				}
 			}
 		});
 		super.doSave(progressMonitor);

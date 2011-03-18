@@ -25,19 +25,16 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="vertices" ordered="false"
         upperBound="-1" eType="#//Vertex" containment="true" eOpposite="#//Vertex/parentRegion"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Transition">
+  <eClassifiers xsi:type="ecore:EClass" name="Transition" eSuperTypes="#//ExpressionElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" ordered="false"
         lowerBound="1" eType="#//Vertex" eOpposite="#//Vertex/incomingTransitions"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" ordered="false"
         lowerBound="1" eType="#//Vertex" eOpposite="#//Vertex/outgoingTransitions"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" ordered="false"
-        lowerBound="1" eType="#//TransitionExpression" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="region" ordered="false"
         lowerBound="1" eType="#//Region" eOpposite="#//Region/transitions"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TransitionExpression"/>
   <eClassifiers xsi:type="ecore:EClass" name="FinalState" eSuperTypes="#//State"/>
-  <eClassifiers xsi:type="ecore:EClass" name="State" eSuperTypes="#//Vertex">
+  <eClassifiers xsi:type="ecore:EClass" name="State" eSuperTypes="#//Vertex #//ExpressionElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="subRegions" ordered="false"
         upperBound="-1" eType="#//Region" containment="true"/>
   </eClassifiers>
@@ -77,7 +74,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Event" eSuperTypes="#//NamedElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="Choice" eSuperTypes="#//Pseudostate"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Statechart" eSuperTypes="#//NamedElement">
+  <eClassifiers xsi:type="ecore:EClass" name="Statechart" eSuperTypes="#//NamedElement #//ExpressionElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="regions" ordered="false"
         lowerBound="1" upperBound="-1" eType="#//Region" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="variables" ordered="false"
@@ -90,4 +87,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="Trigger" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="Effect" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="TimeEvent"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ExpressionElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="expression" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
 </ecore:EPackage>

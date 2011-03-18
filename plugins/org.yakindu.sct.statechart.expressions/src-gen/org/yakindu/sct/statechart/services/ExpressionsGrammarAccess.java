@@ -17,6 +17,150 @@ import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
+	public class EntryRuleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EntryRule");
+		private final Assignment cEntryAssignment = (Assignment)rule.eContents().get(1);
+		private final Alternatives cEntryAlternatives_0 = (Alternatives)cEntryAssignment.eContents().get(0);
+		private final RuleCall cEntryStateExpressionParserRuleCall_0_0 = (RuleCall)cEntryAlternatives_0.eContents().get(0);
+		private final RuleCall cEntryCustomTransitionExpressionParserRuleCall_0_1 = (RuleCall)cEntryAlternatives_0.eContents().get(1);
+		private final RuleCall cEntryElementDefinitionParserRuleCall_0_2 = (RuleCall)cEntryAlternatives_0.eContents().get(2);
+		
+		//EntryRule:
+		//	entry=(StateExpression | CustomTransitionExpression | ElementDefinition);
+		public ParserRule getRule() { return rule; }
+
+		//entry=(StateExpression | CustomTransitionExpression | ElementDefinition)
+		public Assignment getEntryAssignment() { return cEntryAssignment; }
+
+		//StateExpression | CustomTransitionExpression | ElementDefinition
+		public Alternatives getEntryAlternatives_0() { return cEntryAlternatives_0; }
+
+		//StateExpression
+		public RuleCall getEntryStateExpressionParserRuleCall_0_0() { return cEntryStateExpressionParserRuleCall_0_0; }
+
+		//CustomTransitionExpression
+		public RuleCall getEntryCustomTransitionExpressionParserRuleCall_0_1() { return cEntryCustomTransitionExpressionParserRuleCall_0_1; }
+
+		//ElementDefinition
+		public RuleCall getEntryElementDefinitionParserRuleCall_0_2() { return cEntryElementDefinitionParserRuleCall_0_2; }
+	}
+
+	public class StateExpressionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "StateExpression");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cStateExpressionAction_0 = (Action)cGroup.eContents().get(0);
+		private final Assignment cEntryExpressionAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cEntryExpressionEntryExpressionParserRuleCall_1_0 = (RuleCall)cEntryExpressionAssignment_1.eContents().get(0);
+		private final Assignment cExitExpressionAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cExitExpressionExitExpressionParserRuleCall_2_0 = (RuleCall)cExitExpressionAssignment_2.eContents().get(0);
+		private final Assignment cOntickExpressionAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cOntickExpressionOnTickExpressionParserRuleCall_3_0 = (RuleCall)cOntickExpressionAssignment_3.eContents().get(0);
+		
+		//// ****************
+		//// State Expression
+		//// ****************
+		//StateExpression:
+		//	{StateExpression} entryExpression+=EntryExpression* exitExpression+=ExitExpression*
+		//	ontickExpression+=OnTickExpression*;
+		public ParserRule getRule() { return rule; }
+
+		//{StateExpression} entryExpression+=EntryExpression* exitExpression+=ExitExpression* ontickExpression+=OnTickExpression*
+		public Group getGroup() { return cGroup; }
+
+		//{StateExpression}
+		public Action getStateExpressionAction_0() { return cStateExpressionAction_0; }
+
+		//entryExpression+=EntryExpression*
+		public Assignment getEntryExpressionAssignment_1() { return cEntryExpressionAssignment_1; }
+
+		//EntryExpression
+		public RuleCall getEntryExpressionEntryExpressionParserRuleCall_1_0() { return cEntryExpressionEntryExpressionParserRuleCall_1_0; }
+
+		//exitExpression+=ExitExpression*
+		public Assignment getExitExpressionAssignment_2() { return cExitExpressionAssignment_2; }
+
+		//ExitExpression
+		public RuleCall getExitExpressionExitExpressionParserRuleCall_2_0() { return cExitExpressionExitExpressionParserRuleCall_2_0; }
+
+		//ontickExpression+=OnTickExpression*
+		public Assignment getOntickExpressionAssignment_3() { return cOntickExpressionAssignment_3; }
+
+		//OnTickExpression
+		public RuleCall getOntickExpressionOnTickExpressionParserRuleCall_3_0() { return cOntickExpressionOnTickExpressionParserRuleCall_3_0; }
+	}
+
+	public class EntryExpressionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EntryExpression");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cEntryKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cExpressionAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cExpressionExpressionRuleParserRuleCall_1_0 = (RuleCall)cExpressionAssignment_1.eContents().get(0);
+		
+		//EntryExpression:
+		//	"entry:" expression=ExpressionRule;
+		public ParserRule getRule() { return rule; }
+
+		//"entry:" expression=ExpressionRule
+		public Group getGroup() { return cGroup; }
+
+		//"entry:"
+		public Keyword getEntryKeyword_0() { return cEntryKeyword_0; }
+
+		//expression=ExpressionRule
+		public Assignment getExpressionAssignment_1() { return cExpressionAssignment_1; }
+
+		//ExpressionRule
+		public RuleCall getExpressionExpressionRuleParserRuleCall_1_0() { return cExpressionExpressionRuleParserRuleCall_1_0; }
+	}
+
+	public class ExitExpressionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ExitExpression");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cExitKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cExpressionAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cExpressionExpressionRuleParserRuleCall_1_0 = (RuleCall)cExpressionAssignment_1.eContents().get(0);
+		
+		//ExitExpression:
+		//	"exit:" expression=ExpressionRule;
+		public ParserRule getRule() { return rule; }
+
+		//"exit:" expression=ExpressionRule
+		public Group getGroup() { return cGroup; }
+
+		//"exit:"
+		public Keyword getExitKeyword_0() { return cExitKeyword_0; }
+
+		//expression=ExpressionRule
+		public Assignment getExpressionAssignment_1() { return cExpressionAssignment_1; }
+
+		//ExpressionRule
+		public RuleCall getExpressionExpressionRuleParserRuleCall_1_0() { return cExpressionExpressionRuleParserRuleCall_1_0; }
+	}
+
+	public class OnTickExpressionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "OnTickExpression");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cDoKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cExpressionAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cExpressionExpressionRuleParserRuleCall_1_0 = (RuleCall)cExpressionAssignment_1.eContents().get(0);
+		
+		//OnTickExpression:
+		//	"do:" expression=ExpressionRule;
+		public ParserRule getRule() { return rule; }
+
+		//"do:" expression=ExpressionRule
+		public Group getGroup() { return cGroup; }
+
+		//"do:"
+		public Keyword getDoKeyword_0() { return cDoKeyword_0; }
+
+		//expression=ExpressionRule
+		public Assignment getExpressionAssignment_1() { return cExpressionAssignment_1; }
+
+		//ExpressionRule
+		public RuleCall getExpressionExpressionRuleParserRuleCall_1_0() { return cExpressionExpressionRuleParserRuleCall_1_0; }
+	}
+
 	public class CustomTransitionExpressionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "CustomTransitionExpression");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -40,7 +184,10 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cActionAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
 		private final RuleCall cActionExpressionRuleParserRuleCall_3_1_0 = (RuleCall)cActionAssignment_3_1.eContents().get(0);
 		
-		//CustomTransitionExpression returns sct::TransitionExpression:
+		//// ****************
+		//// Transition Expression
+		//// ****************
+		//CustomTransitionExpression:
 		//	{CustomTransitionExpression} (triggers+=[sct::Event] ("," triggers+=[sct::Event])*) ("["
 		//	guardExpression=LogicalOrExpression "]")? ("/" action=ExpressionRule)?;
 		public ParserRule getRule() { return rule; }
@@ -107,6 +254,109 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getActionExpressionRuleParserRuleCall_3_1_0() { return cActionExpressionRuleParserRuleCall_3_1_0; }
 	}
 
+	public class ElementDefinitionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ElementDefinition");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cElementDefinitionAction_0 = (Action)cGroup.eContents().get(0);
+		private final Assignment cVariablesAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cVariablesVariableDefinitionParserRuleCall_1_0 = (RuleCall)cVariablesAssignment_1.eContents().get(0);
+		private final Assignment cEventsAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cEventsEventDefinitionParserRuleCall_2_0 = (RuleCall)cEventsAssignment_2.eContents().get(0);
+		
+		//// ****************
+		//// Statechart Expression
+		//// ****************
+		//ElementDefinition:
+		//	{ElementDefinition} variables+=VariableDefinition* events+=EventDefinition*;
+		public ParserRule getRule() { return rule; }
+
+		//{ElementDefinition} variables+=VariableDefinition* events+=EventDefinition*
+		public Group getGroup() { return cGroup; }
+
+		//{ElementDefinition}
+		public Action getElementDefinitionAction_0() { return cElementDefinitionAction_0; }
+
+		//variables+=VariableDefinition*
+		public Assignment getVariablesAssignment_1() { return cVariablesAssignment_1; }
+
+		//VariableDefinition
+		public RuleCall getVariablesVariableDefinitionParserRuleCall_1_0() { return cVariablesVariableDefinitionParserRuleCall_1_0; }
+
+		//events+=EventDefinition*
+		public Assignment getEventsAssignment_2() { return cEventsAssignment_2; }
+
+		//EventDefinition
+		public RuleCall getEventsEventDefinitionParserRuleCall_2_0() { return cEventsEventDefinitionParserRuleCall_2_0; }
+	}
+
+	public class VariableDefinitionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "VariableDefinition");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cVarKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cTypeAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cTypeTypeEnumRuleCall_1_0 = (RuleCall)cTypeAssignment_1.eContents().get(0);
+		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
+		private final Keyword cEqualsSignKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cValueAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cValueLiteralParserRuleCall_4_0 = (RuleCall)cValueAssignment_4.eContents().get(0);
+		
+		//VariableDefinition:
+		//	"var" type=Type name=ID "=" value=Literal;
+		public ParserRule getRule() { return rule; }
+
+		//"var" type=Type name=ID "=" value=Literal
+		public Group getGroup() { return cGroup; }
+
+		//"var"
+		public Keyword getVarKeyword_0() { return cVarKeyword_0; }
+
+		//type=Type
+		public Assignment getTypeAssignment_1() { return cTypeAssignment_1; }
+
+		//Type
+		public RuleCall getTypeTypeEnumRuleCall_1_0() { return cTypeTypeEnumRuleCall_1_0; }
+
+		//name=ID
+		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
+
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
+
+		//"="
+		public Keyword getEqualsSignKeyword_3() { return cEqualsSignKeyword_3; }
+
+		//value=Literal
+		public Assignment getValueAssignment_4() { return cValueAssignment_4; }
+
+		//Literal
+		public RuleCall getValueLiteralParserRuleCall_4_0() { return cValueLiteralParserRuleCall_4_0; }
+	}
+
+	public class EventDefinitionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EventDefinition");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cEventKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		
+		//EventDefinition:
+		//	"event" name=ID;
+		public ParserRule getRule() { return rule; }
+
+		//"event" name=ID
+		public Group getGroup() { return cGroup; }
+
+		//"event"
+		public Keyword getEventKeyword_0() { return cEventKeyword_0; }
+
+		//name=ID
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+	}
+
 	public class ExpressionRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ExpressionRule");
 		private final Assignment cExpressionAssignment = (Assignment)rule.eContents().get(1);
@@ -114,6 +364,9 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cExpressionLogicalOrExpressionParserRuleCall_0_0 = (RuleCall)cExpressionAlternatives_0.eContents().get(0);
 		private final RuleCall cExpressionRaiseEventExpressionParserRuleCall_0_1 = (RuleCall)cExpressionAlternatives_0.eContents().get(1);
 		
+		//// ****************
+		//// Expression Grammar
+		//// ****************
 		//ExpressionRule:
 		//	expression=(LogicalOrExpression | RaiseEventExpression);
 		public ParserRule getRule() { return rule; }
@@ -829,7 +1082,15 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 		public Keyword getBooleanBooleanKeyword_2_0() { return cBooleanBooleanKeyword_2_0; }
 	}
 	
+	private EntryRuleElements pEntryRule;
+	private StateExpressionElements pStateExpression;
+	private EntryExpressionElements pEntryExpression;
+	private ExitExpressionElements pExitExpression;
+	private OnTickExpressionElements pOnTickExpression;
 	private CustomTransitionExpressionElements pCustomTransitionExpression;
+	private ElementDefinitionElements pElementDefinition;
+	private VariableDefinitionElements pVariableDefinition;
+	private EventDefinitionElements pEventDefinition;
 	private ExpressionRuleElements pExpressionRule;
 	private RaiseEventExpressionElements pRaiseEventExpression;
 	private LogicalOrExpressionElements pLogicalOrExpression;
@@ -875,7 +1136,64 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	
-	//CustomTransitionExpression returns sct::TransitionExpression:
+	//EntryRule:
+	//	entry=(StateExpression | CustomTransitionExpression | ElementDefinition);
+	public EntryRuleElements getEntryRuleAccess() {
+		return (pEntryRule != null) ? pEntryRule : (pEntryRule = new EntryRuleElements());
+	}
+	
+	public ParserRule getEntryRuleRule() {
+		return getEntryRuleAccess().getRule();
+	}
+
+	//// ****************
+	//// State Expression
+	//// ****************
+	//StateExpression:
+	//	{StateExpression} entryExpression+=EntryExpression* exitExpression+=ExitExpression*
+	//	ontickExpression+=OnTickExpression*;
+	public StateExpressionElements getStateExpressionAccess() {
+		return (pStateExpression != null) ? pStateExpression : (pStateExpression = new StateExpressionElements());
+	}
+	
+	public ParserRule getStateExpressionRule() {
+		return getStateExpressionAccess().getRule();
+	}
+
+	//EntryExpression:
+	//	"entry:" expression=ExpressionRule;
+	public EntryExpressionElements getEntryExpressionAccess() {
+		return (pEntryExpression != null) ? pEntryExpression : (pEntryExpression = new EntryExpressionElements());
+	}
+	
+	public ParserRule getEntryExpressionRule() {
+		return getEntryExpressionAccess().getRule();
+	}
+
+	//ExitExpression:
+	//	"exit:" expression=ExpressionRule;
+	public ExitExpressionElements getExitExpressionAccess() {
+		return (pExitExpression != null) ? pExitExpression : (pExitExpression = new ExitExpressionElements());
+	}
+	
+	public ParserRule getExitExpressionRule() {
+		return getExitExpressionAccess().getRule();
+	}
+
+	//OnTickExpression:
+	//	"do:" expression=ExpressionRule;
+	public OnTickExpressionElements getOnTickExpressionAccess() {
+		return (pOnTickExpression != null) ? pOnTickExpression : (pOnTickExpression = new OnTickExpressionElements());
+	}
+	
+	public ParserRule getOnTickExpressionRule() {
+		return getOnTickExpressionAccess().getRule();
+	}
+
+	//// ****************
+	//// Transition Expression
+	//// ****************
+	//CustomTransitionExpression:
 	//	{CustomTransitionExpression} (triggers+=[sct::Event] ("," triggers+=[sct::Event])*) ("["
 	//	guardExpression=LogicalOrExpression "]")? ("/" action=ExpressionRule)?;
 	public CustomTransitionExpressionElements getCustomTransitionExpressionAccess() {
@@ -886,6 +1204,42 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 		return getCustomTransitionExpressionAccess().getRule();
 	}
 
+	//// ****************
+	//// Statechart Expression
+	//// ****************
+	//ElementDefinition:
+	//	{ElementDefinition} variables+=VariableDefinition* events+=EventDefinition*;
+	public ElementDefinitionElements getElementDefinitionAccess() {
+		return (pElementDefinition != null) ? pElementDefinition : (pElementDefinition = new ElementDefinitionElements());
+	}
+	
+	public ParserRule getElementDefinitionRule() {
+		return getElementDefinitionAccess().getRule();
+	}
+
+	//VariableDefinition:
+	//	"var" type=Type name=ID "=" value=Literal;
+	public VariableDefinitionElements getVariableDefinitionAccess() {
+		return (pVariableDefinition != null) ? pVariableDefinition : (pVariableDefinition = new VariableDefinitionElements());
+	}
+	
+	public ParserRule getVariableDefinitionRule() {
+		return getVariableDefinitionAccess().getRule();
+	}
+
+	//EventDefinition:
+	//	"event" name=ID;
+	public EventDefinitionElements getEventDefinitionAccess() {
+		return (pEventDefinition != null) ? pEventDefinition : (pEventDefinition = new EventDefinitionElements());
+	}
+	
+	public ParserRule getEventDefinitionRule() {
+		return getEventDefinitionAccess().getRule();
+	}
+
+	//// ****************
+	//// Expression Grammar
+	//// ****************
 	//ExpressionRule:
 	//	expression=(LogicalOrExpression | RaiseEventExpression);
 	public ExpressionRuleElements getExpressionRuleAccess() {

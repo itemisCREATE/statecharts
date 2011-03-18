@@ -17,12 +17,11 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 import org.yakindu.model.sct.statechart.Event;
-
-import org.yakindu.model.sct.statechart.impl.TransitionExpressionImpl;
 
 import org.yakindu.sct.statechart.expressions.CustomTransitionExpression;
 import org.yakindu.sct.statechart.expressions.Expression;
@@ -44,7 +43,7 @@ import org.yakindu.sct.statechart.expressions.ExpressionsPackage;
  *
  * @generated
  */
-public class CustomTransitionExpressionImpl extends TransitionExpressionImpl implements CustomTransitionExpression
+public class CustomTransitionExpressionImpl extends MinimalEObjectImpl.Container implements CustomTransitionExpression
 {
   /**
    * The cached value of the '{@link #getTriggers() <em>Triggers</em>}' reference list.

@@ -14,15 +14,14 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import org.yakindu.model.sct.statechart.BooleanVariable;
 import org.yakindu.model.sct.statechart.BooleanVariableValue;
 import org.yakindu.model.sct.statechart.Choice;
 import org.yakindu.model.sct.statechart.DeepHistoryState;
 import org.yakindu.model.sct.statechart.Effect;
 import org.yakindu.model.sct.statechart.Event;
+import org.yakindu.model.sct.statechart.ExpressionElement;
 import org.yakindu.model.sct.statechart.FinalState;
 import org.yakindu.model.sct.statechart.Fork;
 import org.yakindu.model.sct.statechart.HistoryState;
@@ -43,7 +42,6 @@ import org.yakindu.model.sct.statechart.StatechartFactory;
 import org.yakindu.model.sct.statechart.StatechartPackage;
 import org.yakindu.model.sct.statechart.TimeEvent;
 import org.yakindu.model.sct.statechart.Transition;
-import org.yakindu.model.sct.statechart.TransitionExpression;
 import org.yakindu.model.sct.statechart.Trigger;
 import org.yakindu.model.sct.statechart.Variable;
 import org.yakindu.model.sct.statechart.Vertex;
@@ -96,13 +94,6 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * @generated
 	 */
 	private EClass transitionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass transitionExpressionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -257,6 +248,13 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * @generated
 	 */
 	private EClass timeEventEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass expressionElementEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -441,26 +439,8 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTransition_Expression() {
-		return (EReference)transitionEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getTransition_Region() {
-		return (EReference)transitionEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getTransitionExpression() {
-		return transitionExpressionEClass;
+		return (EReference)transitionEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -774,6 +754,24 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getExpressionElement() {
+		return expressionElementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getExpressionElement_Expression() {
+		return (EAttribute)expressionElementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public StatechartFactory getStatechartFactory() {
 		return (StatechartFactory)getEFactoryInstance();
 	}
@@ -814,10 +812,7 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 		transitionEClass = createEClass(TRANSITION);
 		createEReference(transitionEClass, TRANSITION__TARGET);
 		createEReference(transitionEClass, TRANSITION__SOURCE);
-		createEReference(transitionEClass, TRANSITION__EXPRESSION);
 		createEReference(transitionEClass, TRANSITION__REGION);
-
-		transitionExpressionEClass = createEClass(TRANSITION_EXPRESSION);
 
 		finalStateEClass = createEClass(FINAL_STATE);
 
@@ -874,6 +869,9 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 		effectEClass = createEClass(EFFECT);
 
 		timeEventEClass = createEClass(TIME_EVENT);
+
+		expressionElementEClass = createEClass(EXPRESSION_ELEMENT);
+		createEAttribute(expressionElementEClass, EXPRESSION_ELEMENT__EXPRESSION);
 	}
 
 	/**
@@ -907,8 +905,10 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 		pseudostateEClass.getESuperTypes().add(this.getVertex());
 		vertexEClass.getESuperTypes().add(this.getNamedElement());
 		regionEClass.getESuperTypes().add(this.getNamedElement());
+		transitionEClass.getESuperTypes().add(this.getExpressionElement());
 		finalStateEClass.getESuperTypes().add(this.getState());
 		stateEClass.getESuperTypes().add(this.getVertex());
+		stateEClass.getESuperTypes().add(this.getExpressionElement());
 		realVariableEClass.getESuperTypes().add(this.getVariable());
 		variableEClass.getESuperTypes().add(this.getNamedElement());
 		shallowHistoryStateEClass.getESuperTypes().add(this.getHistoryState());
@@ -921,6 +921,7 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 		eventEClass.getESuperTypes().add(this.getNamedElement());
 		choiceEClass.getESuperTypes().add(this.getPseudostate());
 		statechartEClass.getESuperTypes().add(this.getNamedElement());
+		statechartEClass.getESuperTypes().add(this.getExpressionElement());
 		forkEClass.getESuperTypes().add(this.getPseudostate());
 		initialStateEClass.getESuperTypes().add(this.getPseudostate());
 
@@ -942,10 +943,7 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 		initEClass(transitionEClass, Transition.class, "Transition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTransition_Target(), this.getVertex(), this.getVertex_IncomingTransitions(), "target", null, 1, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getTransition_Source(), this.getVertex(), this.getVertex_OutgoingTransitions(), "source", null, 1, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getTransition_Expression(), this.getTransitionExpression(), null, "expression", null, 1, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getTransition_Region(), this.getRegion(), this.getRegion_Transitions(), "region", null, 1, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-
-		initEClass(transitionExpressionEClass, TransitionExpression.class, "TransitionExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(finalStateEClass, FinalState.class, "FinalState", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1002,6 +1000,9 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 		initEClass(effectEClass, Effect.class, "Effect", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(timeEventEClass, TimeEvent.class, "TimeEvent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(expressionElementEClass, ExpressionElement.class, "ExpressionElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getExpressionElement_Expression(), ecorePackage.getEString(), "expression", null, 0, 1, ExpressionElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

@@ -17,19 +17,13 @@ import org.eclipse.gmf.runtime.notation.View;
 
 /**
  * 
- * @author Andreas Muelder <a
- *         href="mailto:andreas.muelder@itemis.de">andreas.muelder@itemis.de</a>
- * 
+ * @author muelder
+ *
  */
 public class StateTextCompartmentEditPart extends ShapeCompartmentEditPart {
 
 	public StateTextCompartmentEditPart(View view) {
 		super(view);
-	}
-	
-	@Override
-	protected void createDefaultEditPolicies() {
-		super.createDefaultEditPolicies();
 	}
 
 	@Override

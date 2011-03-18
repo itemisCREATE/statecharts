@@ -3,94 +3,129 @@ grammar org.yakindu.sct.statechart.Expressions with org.eclipse.xtext.common.Ter
 generate expressions "http://www.yakindu.org/sct/statechart/Expressions"
 import "platform:/resource/org.yakindu.sct.model.statechart/model/emf/statechart.ecore" as sct
 
+EntryRule:
+	entry=(StateExpression | CustomTransitionExpression | ElementDefinition);
 
-CustomTransitionExpression returns sct::TransitionExpression : 
-	{CustomTransitionExpression} 
+	//****************
+// State Expression
+//****************
+StateExpression:
+	{StateExpression} (entryExpression+=EntryExpression)* (exitExpression+=ExitExpression)*
+	(ontickExpression+=OnTickExpression)*;
+
+EntryExpression:
+	'entry:' expression=ExpressionRule;
+
+ExitExpression:
+	'exit:' expression=ExpressionRule;
+
+OnTickExpression:
+	'do:' expression=ExpressionRule;
+
+	//****************
+// Transition Expression
+//****************
+CustomTransitionExpression:
+	{CustomTransitionExpression}
 	(triggers+=[sct::Event] ("," triggers+=[sct::Event])*)
-	('['guardExpression=LogicalOrExpression']')? 
+	('[' guardExpression=LogicalOrExpression ']')?
 	('/' action=ExpressionRule)?;
 
+	//****************
+// Statechart Expression
+//****************
+ElementDefinition:
+	{ElementDefinition} (variables+=VariableDefinition)* (events+=EventDefinition)*;
+
+VariableDefinition:
+	'var' type=Type name=ID '=' value=Literal;
+
+EventDefinition:
+	'event' name=ID;
+	//****************
+// Expression Grammar
+//****************
 ExpressionRule:
-    expression=(LogicalOrExpression | RaiseEventExpression);
+	expression=(LogicalOrExpression | RaiseEventExpression);
 
 RaiseEventExpression:
-'raise' event=[sct::Event];
+	'raise' event=[sct::Event];
 
 LogicalOrExpression returns Expression:
-    LogicalAndExpression ({LogicalOrExpression.leftOperand=current} '||'
-rightOperand=LogicalAndExpression)*;
+	LogicalAndExpression ({LogicalOrExpression.leftOperand=current} '||'
+	rightOperand=LogicalAndExpression)*;
 
 LogicalAndExpression returns Expression:
-    LogicalNotExpression ({LogicalAndExpression.leftOperand=current}
-'&&' rightOperand=LogicalNotExpression)*;
+	LogicalNotExpression ({LogicalAndExpression.leftOperand=current}
+	'&&' rightOperand=LogicalNotExpression)*;
 
 LogicalNotExpression returns Expression:
-    LogicalRelationExpression | {LogicalNotExpression} '!'
-operand=LogicalRelationExpression;
+	LogicalRelationExpression | {LogicalNotExpression} '!'
+	operand=LogicalRelationExpression;
 
 LogicalRelationExpression returns Expression:
-    NumericalAddSubtractExpression
-({LogicalRelationExpression.leftOperand=current} operator=RelationalOperator
-    rightOperand=NumericalAddSubtractExpression)*;
+	NumericalAddSubtractExpression
+	({LogicalRelationExpression.leftOperand=current} operator=RelationalOperator
+	rightOperand=NumericalAddSubtractExpression)*;
 
 NumericalAddSubtractExpression returns Expression:
-    NumericalMultiplyDivideExpression
-({NumericalAddSubtractExpression.leftOperand=current}
-operator=AdditiveOperator
-    rightOperand=NumericalMultiplyDivideExpression)*;
+	NumericalMultiplyDivideExpression
+	({NumericalAddSubtractExpression.leftOperand=current}
+	operator=AdditiveOperator
+	rightOperand=NumericalMultiplyDivideExpression)*;
 
 NumericalMultiplyDivideExpression returns Expression:
-    NumericalUnaryExpression
-({NumericalMultiplyDivideExpression.leftOperand=current}
-operator=MultiplicativeOperator
-    rightOperand=NumericalUnaryExpression)*;
+	NumericalUnaryExpression
+	({NumericalMultiplyDivideExpression.leftOperand=current}
+	operator=MultiplicativeOperator
+	rightOperand=NumericalUnaryExpression)*;
 
 NumericalUnaryExpression returns Expression:
-    PrimaryExpression | {NumericalUnaryExpression}
-operator=UnaryOperator operand=PrimaryExpression;
-    
+	PrimaryExpression | {NumericalUnaryExpression}
+	operator=UnaryOperator operand=PrimaryExpression;
+
 PrimaryExpression returns Expression:
-    ValueExpression | '(' LogicalOrExpression ')';
+	ValueExpression | '(' LogicalOrExpression ')';
 
 enum AdditiveOperator:
-    plus='+' | minus='-';
+	plus='+' | minus='-';
 
 enum MultiplicativeOperator:
-    mul='*' | div='/' | mod='%';
+	mul='*' | div='/' | mod='%';
 
 enum UnaryOperator:
-    positive='+' | negative='-' | complement='~';
+	positive='+' | negative='-' | complement='~';
 
 enum RelationalOperator:
-    smaller='<' | smallerEqual='<=' | greater='>' | greaterEqual='>=' |
-    equals='==' | notEquals='!=';
+	smaller='<' | smallerEqual='<=' | greater='>' | greaterEqual='>=' |
+	equals='==' | notEquals='!=';
 
 enum DirectionKind:
-incoming = 'in' | outgoing ='out';
+	incoming='in' | outgoing='out';
 
-enum TimeUnit
-:     second = 's'
-|   millisecond = 'ms'
-|   nanosecond = 'ns';
+enum TimeUnit:
+	second='s'
+	| millisecond='ms'
+	| nanosecond='ns';
 
 enum Type:
-int ='int' | float='float' | boolean='boolean';
+	int='int' | float='float' | boolean='boolean';
 
 ValueExpression returns Expression:
-    PrimitiveValueExpression | VariableReferenceExpression;
+	PrimitiveValueExpression | VariableReferenceExpression;
 
 PrimitiveValueExpression returns Expression:
-    {PrimitiveValueExpression} value=Literal;
+	{PrimitiveValueExpression} value=Literal;
 
 VariableReferenceExpression returns Expression:
-    {PropertyReferenceExpression} value=[sct::Variable];
+	{PropertyReferenceExpression} value=[sct::Variable];
 
 Literal:
-BOOL | INT | STRING | FLOAT;
+	BOOL | INT | STRING | FLOAT;
 
 terminal BOOL:
-    'true' | 'false';
+	'true' | 'false';
 
 terminal FLOAT:
-    ('-' | '+')? (INT '.' INT) ('e' ('-' | '+') INT)?;
+	('-' | '+')? (INT '.' INT) ('e' ('-' | '+') INT)?;
 

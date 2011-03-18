@@ -19,16 +19,13 @@ import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.Node;
 import org.eclipse.gmf.runtime.notation.NotationFactory;
 import org.eclipse.gmf.runtime.notation.View;
-import org.yakindu.model.sct.statechart.BooleanVariable;
-import org.yakindu.model.sct.statechart.Event;
 import org.yakindu.model.sct.statechart.InitialState;
-import org.yakindu.model.sct.statechart.IntegerVariable;
 import org.yakindu.model.sct.statechart.Region;
 import org.yakindu.model.sct.statechart.Statechart;
 import org.yakindu.model.sct.statechart.StatechartFactory;
 import org.yakindu.sct.statechart.diagram.DiagramActivator;
 import org.yakindu.sct.statechart.diagram.editor.StatechartDiagramEditor;
-import org.yakindu.sct.statechart.diagram.providers.ProviderConstants;
+import org.yakindu.sct.statechart.diagram.providers.SemanticHints;
 
 /**
  * Convenience methods for semantic and notation model element creation.
@@ -42,6 +39,10 @@ public final class FactoryUtils {
 	private static final int INITIAL_REGION_WIDTH = 800;
 	private static final int INITIAL_REGION_HEIGHT = 600;
 	private static final String INITIAL_REGION_NAME = "main region";
+	private static final int INITIAL_TEXT_COMPARTMENT_HEIGHT = 600;
+	private static final int INITIAL_TEXT_COMPARTMENT_WIDTH = 200;
+	
+	private static final int SPACING = 50;
 
 	private FactoryUtils() {
 	}
@@ -54,10 +55,12 @@ public final class FactoryUtils {
 	 * @return
 	 */
 	public static Node createLabel(View owner, String hint) {
-		DecorationNode nameLabel = NotationFactory.eINSTANCE.createDecorationNode();
+		DecorationNode nameLabel = NotationFactory.eINSTANCE
+				.createDecorationNode();
 		nameLabel.setType(hint);
 		ViewUtil.insertChildView(owner, nameLabel, ViewUtil.APPEND, true);
-		nameLabel.setLayoutConstraint(NotationFactory.eINSTANCE.createLocation());
+		nameLabel.setLayoutConstraint(NotationFactory.eINSTANCE
+				.createLocation());
 		return nameLabel;
 	}
 
@@ -69,7 +72,8 @@ public final class FactoryUtils {
 	public static void createStatechartModel(Resource resource) {
 		// Create a statechart
 		Statechart statechart = StatechartFactory.eINSTANCE.createStatechart();
-		Diagram diagram = ViewService.createDiagram(statechart, StatechartDiagramEditor.ID,
+		Diagram diagram = ViewService.createDiagram(statechart,
+				StatechartDiagramEditor.ID,
 				DiagramActivator.DIAGRAM_PREFERENCES_HINT);
 		diagram.setElement(statechart);
 		// Add to resource
@@ -79,34 +83,30 @@ public final class FactoryUtils {
 		Region region = StatechartFactory.eINSTANCE.createRegion();
 		region.setName(INITIAL_REGION_NAME);
 		statechart.getRegions().add(region);
-		Node regionView = ViewService.createNode(diagram, region, ProviderConstants.REGION,
+		Node regionView = ViewService.createNode(diagram, region,
+				SemanticHints.REGION,
 				DiagramActivator.DIAGRAM_PREFERENCES_HINT);
 		setRegionViewLayoutConstraint(regionView);
 		// // Create an initial state
-		InitialState initialState = StatechartFactory.eINSTANCE.createInitialState();
+		InitialState initialState = StatechartFactory.eINSTANCE
+				.createInitialState();
 		region.getVertices().add(initialState);
-		Node initialStateView = ViewService.createNode(getRegionCompartmentView(regionView),
-				ProviderConstants.INITIALSTATE, DiagramActivator.DIAGRAM_PREFERENCES_HINT);
+		Node initialStateView = ViewService.createNode(
+				getRegionCompartmentView(regionView),
+				SemanticHints.INITIALSTATE,
+				DiagramActivator.DIAGRAM_PREFERENCES_HINT);
 		setInitialStateViewLayoutConstraint(initialStateView);
-		//FIXME: Test Events
-				 Event event = StatechartFactory.eINSTANCE.createEvent();
-		 event.setName("TestEvent1");
-		 Event event2 = StatechartFactory.eINSTANCE.createEvent();
-		 event2.setName("TestEvent2");
-		 statechart.getEvents().add(event);
-		 statechart.getEvents().add(event2);
-		 //FIXME: Test Variablen
-		 IntegerVariable integerVariable = StatechartFactory.eINSTANCE.createIntegerVariable();
-		 integerVariable.setName("integer1");
-		 BooleanVariable booleanVariable = StatechartFactory.eINSTANCE.createBooleanVariable();
-		 booleanVariable.setName("bool1");
-		 statechart.getVariables().add(integerVariable);
-		 statechart.getVariables().add(booleanVariable);
-		 
-		 
+		//Create the textcompartment for events / variables
+		Node textCompartment = ViewService.createNode(diagram,statechart,
+				SemanticHints.STATECHART_TEXT,
+				DiagramActivator.DIAGRAM_PREFERENCES_HINT);
+		setTextCompartmentLayoutConstraint(textCompartment);
+		
 	}
 
-	private static void setInitialStateViewLayoutConstraint(Node initialStateView) {
+
+	private static void setInitialStateViewLayoutConstraint(
+			Node initialStateView) {
 		Bounds bounds = NotationFactory.eINSTANCE.createBounds();
 		bounds.setX(40);
 		bounds.setY(40);
@@ -116,9 +116,17 @@ public final class FactoryUtils {
 	private static View getRegionCompartmentView(View regionView) {
 		return (View) regionView.getChildren().get(1);
 	}
+	
+	private static void setTextCompartmentLayoutConstraint(Node textCompartment) {
+		Bounds bounds = NotationFactory.eINSTANCE.createBounds();
+		bounds.setHeight(INITIAL_TEXT_COMPARTMENT_HEIGHT);
+		bounds.setWidth(INITIAL_TEXT_COMPARTMENT_WIDTH);
+		textCompartment.setLayoutConstraint(bounds);
+	}
 
 	private static void setRegionViewLayoutConstraint(Node regionView) {
 		Bounds bounds = NotationFactory.eINSTANCE.createBounds();
+		bounds.setX(INITIAL_TEXT_COMPARTMENT_WIDTH + SPACING);
 		bounds.setHeight(INITIAL_REGION_HEIGHT);
 		bounds.setWidth(INITIAL_REGION_WIDTH);
 		regionView.setLayoutConstraint(bounds);

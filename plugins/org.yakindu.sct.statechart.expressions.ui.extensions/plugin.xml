@@ -4,7 +4,14 @@
    <extension
          point="org.yakindu.sct.statechart.diagram.expressions">
       <ExpressionProvider
-            class="org.yakindu.sct.statechart.expressions.ui.extensions.TransitionExpressionProvider"></ExpressionProvider>
+            class="org.yakindu.sct.statechart.expressions.ui.extensions.TransitionExpressionProvider">
+      </ExpressionProvider>
+      <ExpressionProvider
+            class="org.yakindu.sct.statechart.expressions.ui.extensions.StateExpressionProvider">
+      </ExpressionProvider>
+      <ExpressionProvider
+            class="org.yakindu.sct.statechart.expressions.ui.extensions.StatechartExpressionProvider">
+      </ExpressionProvider>
    </extension>
 
 </plugin>

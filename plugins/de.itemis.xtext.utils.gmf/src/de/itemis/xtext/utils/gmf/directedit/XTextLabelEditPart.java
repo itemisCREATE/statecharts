@@ -2,16 +2,16 @@ package de.itemis.xtext.utils.gmf.directedit;
 
 import static org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants.REQ_DIRECTEDIT_EXTENDEDDATA_INITIAL_CHAR;
 
+import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.tools.DirectEditManager;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.LabelEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.tools.TextDirectEditManager;
+import org.eclipse.gmf.runtime.draw2d.ui.figures.LabelEx;
 import org.eclipse.gmf.runtime.notation.View;
 
-import com.google.inject.Module;
-
 /**
- * 
  * @author muelder
  * 
  */
@@ -24,7 +24,31 @@ public abstract class XTextLabelEditPart extends LabelEditPart implements
 		super(view);
 	}
 
-	protected abstract XTextDirectEditManager createXTextDirectEditManager();
+	@Override
+	protected IFigure createFigure() {
+		LabelEx label = new LabelEx();
+		label.setLabelAlignment(PositionConstants.LEFT);
+		label.setTextAlignment(PositionConstants.TOP);
+		return label;
+	}
+
+	@Override
+	public LabelEx getFigure() {
+		return (LabelEx) super.getFigure();
+	}
+
+	@Override
+	public void setLabelText(String text) {
+		getFigure().setText(text);
+	}
+
+	@Override
+	protected void refreshVisuals() {
+		super.refreshVisuals();
+		getFigure().setText(getEditText());
+	}
+
+	protected abstract DirectEditManager createXTextDirectEditManager();
 
 	@Override
 	protected void performDirectEditRequest(Request request) {

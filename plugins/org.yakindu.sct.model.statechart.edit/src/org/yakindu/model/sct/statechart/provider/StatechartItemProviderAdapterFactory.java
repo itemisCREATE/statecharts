@@ -16,7 +16,6 @@ import java.util.Collection;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.edit.provider.ChangeNotifier;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
@@ -28,7 +27,6 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.INotifyChangedListener;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-
 import org.yakindu.model.sct.statechart.util.StatechartAdapterFactory;
 
 /**
@@ -130,29 +128,6 @@ public class StatechartItemProviderAdapterFactory extends StatechartAdapterFacto
 		}
 
 		return transitionItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.yakindu.model.sct.statechart.TransitionExpression} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected TransitionExpressionItemProvider transitionExpressionItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.yakindu.model.sct.statechart.TransitionExpression}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createTransitionExpressionAdapter() {
-		if (transitionExpressionItemProvider == null) {
-			transitionExpressionItemProvider = new TransitionExpressionItemProvider(this);
-		}
-
-		return transitionExpressionItemProvider;
 	}
 
 	/**
@@ -593,6 +568,29 @@ public class StatechartItemProviderAdapterFactory extends StatechartAdapterFacto
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.model.sct.statechart.ExpressionElement} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ExpressionElementItemProvider expressionElementItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.model.sct.statechart.ExpressionElement}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createExpressionElementAdapter() {
+		if (expressionElementItemProvider == null) {
+			expressionElementItemProvider = new ExpressionElementItemProvider(this);
+		}
+
+		return expressionElementItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -693,7 +691,6 @@ public class StatechartItemProviderAdapterFactory extends StatechartAdapterFacto
 	public void dispose() {
 		if (regionItemProvider != null) regionItemProvider.dispose();
 		if (transitionItemProvider != null) transitionItemProvider.dispose();
-		if (transitionExpressionItemProvider != null) transitionExpressionItemProvider.dispose();
 		if (finalStateItemProvider != null) finalStateItemProvider.dispose();
 		if (stateItemProvider != null) stateItemProvider.dispose();
 		if (realVariableValueItemProvider != null) realVariableValueItemProvider.dispose();
@@ -713,6 +710,7 @@ public class StatechartItemProviderAdapterFactory extends StatechartAdapterFacto
 		if (forkItemProvider != null) forkItemProvider.dispose();
 		if (initialStateItemProvider != null) initialStateItemProvider.dispose();
 		if (timeEventItemProvider != null) timeEventItemProvider.dispose();
+		if (expressionElementItemProvider != null) expressionElementItemProvider.dispose();
 	}
 
 }

@@ -19,6 +19,11 @@ import org.yakindu.model.sct.statechart.StatechartPackage;
 import org.yakindu.sct.statechart.expressions.AdditiveOperator;
 import org.yakindu.sct.statechart.expressions.CustomTransitionExpression;
 import org.yakindu.sct.statechart.expressions.DirectionKind;
+import org.yakindu.sct.statechart.expressions.ElementDefinition;
+import org.yakindu.sct.statechart.expressions.EntryExpression;
+import org.yakindu.sct.statechart.expressions.EntryRule;
+import org.yakindu.sct.statechart.expressions.EventDefinition;
+import org.yakindu.sct.statechart.expressions.ExitExpression;
 import org.yakindu.sct.statechart.expressions.Expression;
 import org.yakindu.sct.statechart.expressions.ExpressionRule;
 import org.yakindu.sct.statechart.expressions.ExpressionsFactory;
@@ -31,13 +36,16 @@ import org.yakindu.sct.statechart.expressions.MultiplicativeOperator;
 import org.yakindu.sct.statechart.expressions.NumericalAddSubtractExpression;
 import org.yakindu.sct.statechart.expressions.NumericalMultiplyDivideExpression;
 import org.yakindu.sct.statechart.expressions.NumericalUnaryExpression;
+import org.yakindu.sct.statechart.expressions.OnTickExpression;
 import org.yakindu.sct.statechart.expressions.PrimitiveValueExpression;
 import org.yakindu.sct.statechart.expressions.PropertyReferenceExpression;
 import org.yakindu.sct.statechart.expressions.RaiseEventExpression;
 import org.yakindu.sct.statechart.expressions.RelationalOperator;
+import org.yakindu.sct.statechart.expressions.StateExpression;
 import org.yakindu.sct.statechart.expressions.TimeUnit;
 import org.yakindu.sct.statechart.expressions.Type;
 import org.yakindu.sct.statechart.expressions.UnaryOperator;
+import org.yakindu.sct.statechart.expressions.VariableDefinition;
 
 /**
  * <!-- begin-user-doc -->
@@ -47,6 +55,69 @@ import org.yakindu.sct.statechart.expressions.UnaryOperator;
  */
 public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsPackage
 {
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass entryRuleEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass stateExpressionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass entryExpressionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass exitExpressionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass onTickExpressionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass customTransitionExpressionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass elementDefinitionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass variableDefinitionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eventDefinitionEClass = null;
+
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -67,13 +138,6 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
    * @generated
    */
   private EClass expressionEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass customTransitionExpressionEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -258,6 +322,256 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getEntryRule()
+  {
+    return entryRuleEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getEntryRule_Entry()
+  {
+    return (EReference)entryRuleEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getStateExpression()
+  {
+    return stateExpressionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getStateExpression_EntryExpression()
+  {
+    return (EReference)stateExpressionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getStateExpression_ExitExpression()
+  {
+    return (EReference)stateExpressionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getStateExpression_OntickExpression()
+  {
+    return (EReference)stateExpressionEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getEntryExpression()
+  {
+    return entryExpressionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getEntryExpression_Expression()
+  {
+    return (EReference)entryExpressionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getExitExpression()
+  {
+    return exitExpressionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getExitExpression_Expression()
+  {
+    return (EReference)exitExpressionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getOnTickExpression()
+  {
+    return onTickExpressionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getOnTickExpression_Expression()
+  {
+    return (EReference)onTickExpressionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getCustomTransitionExpression()
+  {
+    return customTransitionExpressionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getCustomTransitionExpression_Triggers()
+  {
+    return (EReference)customTransitionExpressionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getCustomTransitionExpression_GuardExpression()
+  {
+    return (EReference)customTransitionExpressionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getCustomTransitionExpression_Action()
+  {
+    return (EReference)customTransitionExpressionEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getElementDefinition()
+  {
+    return elementDefinitionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getElementDefinition_Variables()
+  {
+    return (EReference)elementDefinitionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getElementDefinition_Events()
+  {
+    return (EReference)elementDefinitionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getVariableDefinition()
+  {
+    return variableDefinitionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getVariableDefinition_Type()
+  {
+    return (EAttribute)variableDefinitionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getVariableDefinition_Name()
+  {
+    return (EAttribute)variableDefinitionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getVariableDefinition_Value()
+  {
+    return (EAttribute)variableDefinitionEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getEventDefinition()
+  {
+    return eventDefinitionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getEventDefinition_Name()
+  {
+    return (EAttribute)eventDefinitionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getExpressionRule()
   {
     return expressionRuleEClass;
@@ -301,46 +615,6 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
   public EClass getExpression()
   {
     return expressionEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getCustomTransitionExpression()
-  {
-    return customTransitionExpressionEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getCustomTransitionExpression_Triggers()
-  {
-    return (EReference)customTransitionExpressionEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getCustomTransitionExpression_GuardExpression()
-  {
-    return (EReference)customTransitionExpressionEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getCustomTransitionExpression_Action()
-  {
-    return (EReference)customTransitionExpressionEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -713,6 +987,40 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
     isCreated = true;
 
     // Create classes and their features
+    entryRuleEClass = createEClass(ENTRY_RULE);
+    createEReference(entryRuleEClass, ENTRY_RULE__ENTRY);
+
+    stateExpressionEClass = createEClass(STATE_EXPRESSION);
+    createEReference(stateExpressionEClass, STATE_EXPRESSION__ENTRY_EXPRESSION);
+    createEReference(stateExpressionEClass, STATE_EXPRESSION__EXIT_EXPRESSION);
+    createEReference(stateExpressionEClass, STATE_EXPRESSION__ONTICK_EXPRESSION);
+
+    entryExpressionEClass = createEClass(ENTRY_EXPRESSION);
+    createEReference(entryExpressionEClass, ENTRY_EXPRESSION__EXPRESSION);
+
+    exitExpressionEClass = createEClass(EXIT_EXPRESSION);
+    createEReference(exitExpressionEClass, EXIT_EXPRESSION__EXPRESSION);
+
+    onTickExpressionEClass = createEClass(ON_TICK_EXPRESSION);
+    createEReference(onTickExpressionEClass, ON_TICK_EXPRESSION__EXPRESSION);
+
+    customTransitionExpressionEClass = createEClass(CUSTOM_TRANSITION_EXPRESSION);
+    createEReference(customTransitionExpressionEClass, CUSTOM_TRANSITION_EXPRESSION__TRIGGERS);
+    createEReference(customTransitionExpressionEClass, CUSTOM_TRANSITION_EXPRESSION__GUARD_EXPRESSION);
+    createEReference(customTransitionExpressionEClass, CUSTOM_TRANSITION_EXPRESSION__ACTION);
+
+    elementDefinitionEClass = createEClass(ELEMENT_DEFINITION);
+    createEReference(elementDefinitionEClass, ELEMENT_DEFINITION__VARIABLES);
+    createEReference(elementDefinitionEClass, ELEMENT_DEFINITION__EVENTS);
+
+    variableDefinitionEClass = createEClass(VARIABLE_DEFINITION);
+    createEAttribute(variableDefinitionEClass, VARIABLE_DEFINITION__TYPE);
+    createEAttribute(variableDefinitionEClass, VARIABLE_DEFINITION__NAME);
+    createEAttribute(variableDefinitionEClass, VARIABLE_DEFINITION__VALUE);
+
+    eventDefinitionEClass = createEClass(EVENT_DEFINITION);
+    createEAttribute(eventDefinitionEClass, EVENT_DEFINITION__NAME);
+
     expressionRuleEClass = createEClass(EXPRESSION_RULE);
     createEReference(expressionRuleEClass, EXPRESSION_RULE__EXPRESSION);
 
@@ -720,11 +1028,6 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
     createEReference(raiseEventExpressionEClass, RAISE_EVENT_EXPRESSION__EVENT);
 
     expressionEClass = createEClass(EXPRESSION);
-
-    customTransitionExpressionEClass = createEClass(CUSTOM_TRANSITION_EXPRESSION);
-    createEReference(customTransitionExpressionEClass, CUSTOM_TRANSITION_EXPRESSION__TRIGGERS);
-    createEReference(customTransitionExpressionEClass, CUSTOM_TRANSITION_EXPRESSION__GUARD_EXPRESSION);
-    createEReference(customTransitionExpressionEClass, CUSTOM_TRANSITION_EXPRESSION__ACTION);
 
     logicalOrExpressionEClass = createEClass(LOGICAL_OR_EXPRESSION);
     createEReference(logicalOrExpressionEClass, LOGICAL_OR_EXPRESSION__LEFT_OPERAND);
@@ -804,7 +1107,6 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
     // Set bounds for type parameters
 
     // Add supertypes to classes
-    customTransitionExpressionEClass.getESuperTypes().add(theStatechartPackage.getTransitionExpression());
     logicalOrExpressionEClass.getESuperTypes().add(this.getExpression());
     logicalAndExpressionEClass.getESuperTypes().add(this.getExpression());
     logicalNotExpressionEClass.getESuperTypes().add(this.getExpression());
@@ -816,6 +1118,40 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
     propertyReferenceExpressionEClass.getESuperTypes().add(this.getExpression());
 
     // Initialize classes and features; add operations and parameters
+    initEClass(entryRuleEClass, EntryRule.class, "EntryRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getEntryRule_Entry(), ecorePackage.getEObject(), null, "entry", null, 0, 1, EntryRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(stateExpressionEClass, StateExpression.class, "StateExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getStateExpression_EntryExpression(), this.getEntryExpression(), null, "entryExpression", null, 0, -1, StateExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getStateExpression_ExitExpression(), this.getExitExpression(), null, "exitExpression", null, 0, -1, StateExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getStateExpression_OntickExpression(), this.getOnTickExpression(), null, "ontickExpression", null, 0, -1, StateExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(entryExpressionEClass, EntryExpression.class, "EntryExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getEntryExpression_Expression(), this.getExpressionRule(), null, "expression", null, 0, 1, EntryExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(exitExpressionEClass, ExitExpression.class, "ExitExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getExitExpression_Expression(), this.getExpressionRule(), null, "expression", null, 0, 1, ExitExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(onTickExpressionEClass, OnTickExpression.class, "OnTickExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getOnTickExpression_Expression(), this.getExpressionRule(), null, "expression", null, 0, 1, OnTickExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(customTransitionExpressionEClass, CustomTransitionExpression.class, "CustomTransitionExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getCustomTransitionExpression_Triggers(), theStatechartPackage.getEvent(), null, "triggers", null, 0, -1, CustomTransitionExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getCustomTransitionExpression_GuardExpression(), this.getExpression(), null, "guardExpression", null, 0, 1, CustomTransitionExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getCustomTransitionExpression_Action(), this.getExpressionRule(), null, "action", null, 0, 1, CustomTransitionExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(elementDefinitionEClass, ElementDefinition.class, "ElementDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getElementDefinition_Variables(), this.getVariableDefinition(), null, "variables", null, 0, -1, ElementDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getElementDefinition_Events(), this.getEventDefinition(), null, "events", null, 0, -1, ElementDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(variableDefinitionEClass, VariableDefinition.class, "VariableDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getVariableDefinition_Type(), this.getType(), "type", null, 0, 1, VariableDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getVariableDefinition_Name(), ecorePackage.getEString(), "name", null, 0, 1, VariableDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getVariableDefinition_Value(), ecorePackage.getEString(), "value", null, 0, 1, VariableDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eventDefinitionEClass, EventDefinition.class, "EventDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getEventDefinition_Name(), ecorePackage.getEString(), "name", null, 0, 1, EventDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
     initEClass(expressionRuleEClass, ExpressionRule.class, "ExpressionRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getExpressionRule_Expression(), ecorePackage.getEObject(), null, "expression", null, 0, 1, ExpressionRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -823,11 +1159,6 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
     initEReference(getRaiseEventExpression_Event(), theStatechartPackage.getEvent(), null, "event", null, 0, 1, RaiseEventExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(expressionEClass, Expression.class, "Expression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-    initEClass(customTransitionExpressionEClass, CustomTransitionExpression.class, "CustomTransitionExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getCustomTransitionExpression_Triggers(), theStatechartPackage.getEvent(), null, "triggers", null, 0, -1, CustomTransitionExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getCustomTransitionExpression_GuardExpression(), this.getExpression(), null, "guardExpression", null, 0, 1, CustomTransitionExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getCustomTransitionExpression_Action(), this.getExpressionRule(), null, "action", null, 0, 1, CustomTransitionExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(logicalOrExpressionEClass, LogicalOrExpression.class, "LogicalOrExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getLogicalOrExpression_LeftOperand(), this.getExpression(), null, "leftOperand", null, 0, 1, LogicalOrExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
