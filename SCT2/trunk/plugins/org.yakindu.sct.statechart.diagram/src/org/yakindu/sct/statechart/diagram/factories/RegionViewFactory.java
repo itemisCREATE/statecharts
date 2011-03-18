@@ -11,11 +11,10 @@ import org.eclipse.gmf.runtime.diagram.ui.view.factories.AbstractShapeViewFactor
 import org.eclipse.gmf.runtime.draw2d.ui.figures.FigureUtilities;
 import org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter;
 import org.eclipse.gmf.runtime.notation.NotationFactory;
-import org.eclipse.gmf.runtime.notation.Shape;
 import org.eclipse.gmf.runtime.notation.ShapeStyle;
 import org.eclipse.gmf.runtime.notation.Style;
 import org.eclipse.gmf.runtime.notation.View;
-import org.yakindu.sct.statechart.diagram.providers.ProviderConstants;
+import org.yakindu.sct.statechart.diagram.providers.SemanticHints;
 
 /**
  * 
@@ -38,10 +37,10 @@ public class RegionViewFactory extends AbstractShapeViewFactory {
 		if (eObject != null) {
 			eObjectAdapter = new EObjectAdapter(eObject);
 		}
-		FactoryUtils.createLabel(view, ProviderConstants.REGION_NAME);
+		FactoryUtils.createLabel(view, SemanticHints.REGION_NAME);
 
 		getViewService().createNode(eObjectAdapter, view,
-				ProviderConstants.REGION_COMPARTMENT, ViewUtil.APPEND, true,
+				SemanticHints.REGION_COMPARTMENT, ViewUtil.APPEND, true,
 				getPreferencesHint());
 	}
 

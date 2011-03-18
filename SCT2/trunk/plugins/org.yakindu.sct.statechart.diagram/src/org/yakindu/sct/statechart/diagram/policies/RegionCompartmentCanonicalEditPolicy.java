@@ -19,7 +19,7 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.CanonicalConnectionEditPolicy;
 import org.yakindu.model.sct.statechart.Region;
 import org.yakindu.model.sct.statechart.Transition;
-import org.yakindu.sct.statechart.diagram.providers.ProviderConstants;
+import org.yakindu.sct.statechart.diagram.providers.SemanticHints;
 import org.yakindu.sct.statechart.diagram.utils.SemanticHintUtil;
 
 /**
@@ -76,6 +76,6 @@ public class RegionCompartmentCanonicalEditPolicy extends CanonicalConnectionEdi
 	
 	@Override
 	protected String getDefaultFactoryHint() {
-		return ProviderConstants.TRANSITION;
+		return SemanticHints.TRANSITION;
 	}
 }

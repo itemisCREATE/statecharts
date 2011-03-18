@@ -32,19 +32,26 @@ public class TransitionEditPart extends ConnectionNodeEditPart {
 	protected Connection createConnectionFigure() {
 		return new TransitionFigure(getMapMode());
 	}
-	
-	
-	private TransitionFigure getPrimaryShape(){
+
+	private TransitionFigure getPrimaryShape() {
 		return (TransitionFigure) getFigure();
 	}
-	
+
 	@Override
 	protected void addChildVisual(EditPart childEditPart, int index) {
-		if(childEditPart instanceof TransitionExpressionEditPart){
-			((TransitionExpressionEditPart) childEditPart).setLabel(getPrimaryShape().getExpressionLabel());
-		}
-		else
-		super.addChildVisual(childEditPart, index);
+		if (childEditPart instanceof TransitionExpressionEditPart) {
+			getPrimaryShape().add(
+					((TransitionExpressionEditPart) childEditPart).getFigure());
+		} else
+			super.addChildVisual(childEditPart, index);
 	}
-	
+
+	@Override
+	protected void removeChildVisual(EditPart childEditPart) {
+		if (childEditPart instanceof TransitionExpressionEditPart) {
+			getPrimaryShape().remove(
+					((TransitionExpressionEditPart) childEditPart).getFigure());
+		}
+	}
+
 }

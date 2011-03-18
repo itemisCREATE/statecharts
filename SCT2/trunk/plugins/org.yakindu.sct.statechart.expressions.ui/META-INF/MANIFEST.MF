@@ -19,5 +19,6 @@ Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.yakindu.sct.statechart.ui,
  org.yakindu.sct.statechart.ui.contentassist.antlr,
+ org.yakindu.sct.statechart.ui.contentassist.antlr.internal,
  org.yakindu.sct.statechart.ui.internal
 Bundle-Activator: org.yakindu.sct.statechart.ui.internal.ExpressionsActivator

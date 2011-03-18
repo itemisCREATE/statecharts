@@ -14,12 +14,15 @@ import org.eclipse.draw2d.GridData;
 import org.eclipse.draw2d.GridLayout;
 import org.eclipse.draw2d.RectangleFigure;
 import org.eclipse.draw2d.RoundedRectangle;
-import org.eclipse.draw2d.XYLayout;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 import org.eclipse.gmf.runtime.draw2d.ui.mapmode.IMapMode;
 import org.yakindu.sct.statechart.diagram.editor.figures.utils.GridDataFactory;
-
+/**
+ * 
+ * @author muelder
+ *
+ */
 public class RegionFigure extends RoundedRectangle {
 
 	private WrappingLabel nameLabel;
@@ -30,11 +33,8 @@ public class RegionFigure extends RoundedRectangle {
 
 	public RegionFigure(IMapMode mapMode) {
 		this.mapMode = mapMode;
-		setLayoutManager(new XYLayout());
 
-		GridLayout layoutThis = new GridLayout();
-		layoutThis.numColumns = 1;
-		layoutThis.makeColumnsEqualWidth = true;
+		GridLayout layoutThis = new GridLayout(1,false);
 		layoutThis.verticalSpacing = 2;
 		this.setLayoutManager(layoutThis);
 

@@ -12,19 +12,13 @@ package org.yakindu.model.sct.statechart.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EcoreUtil;
-
 import org.yakindu.model.sct.statechart.Region;
 import org.yakindu.model.sct.statechart.StatechartPackage;
 import org.yakindu.model.sct.statechart.Transition;
-import org.yakindu.model.sct.statechart.TransitionExpression;
 import org.yakindu.model.sct.statechart.Vertex;
 
 /**
@@ -36,14 +30,13 @@ import org.yakindu.model.sct.statechart.Vertex;
  * <ul>
  *   <li>{@link org.yakindu.model.sct.statechart.impl.TransitionImpl#getTarget <em>Target</em>}</li>
  *   <li>{@link org.yakindu.model.sct.statechart.impl.TransitionImpl#getSource <em>Source</em>}</li>
- *   <li>{@link org.yakindu.model.sct.statechart.impl.TransitionImpl#getExpression <em>Expression</em>}</li>
  *   <li>{@link org.yakindu.model.sct.statechart.impl.TransitionImpl#getRegion <em>Region</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class TransitionImpl extends EObjectImpl implements Transition {
+public class TransitionImpl extends ExpressionElementImpl implements Transition {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -70,16 +63,6 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 	 * @ordered
 	 */
 	protected Vertex source;
-
-	/**
-	 * The cached value of the '{@link #getExpression() <em>Expression</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getExpression()
-	 * @generated
-	 * @ordered
-	 */
-	protected TransitionExpression expression;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -225,49 +208,6 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TransitionExpression getExpression() {
-		return expression;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetExpression(TransitionExpression newExpression, NotificationChain msgs) {
-		TransitionExpression oldExpression = expression;
-		expression = newExpression;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, StatechartPackage.TRANSITION__EXPRESSION, oldExpression, newExpression);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setExpression(TransitionExpression newExpression) {
-		if (newExpression != expression) {
-			NotificationChain msgs = null;
-			if (expression != null)
-				msgs = ((InternalEObject)expression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - StatechartPackage.TRANSITION__EXPRESSION, null, msgs);
-			if (newExpression != null)
-				msgs = ((InternalEObject)newExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - StatechartPackage.TRANSITION__EXPRESSION, null, msgs);
-			msgs = basicSetExpression(newExpression, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, StatechartPackage.TRANSITION__EXPRESSION, newExpression, newExpression));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public Region getRegion() {
 		if (eContainerFeatureID() != StatechartPackage.TRANSITION__REGION) return null;
 		return (Region)eContainer();
@@ -340,8 +280,6 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 				return basicSetTarget(null, msgs);
 			case StatechartPackage.TRANSITION__SOURCE:
 				return basicSetSource(null, msgs);
-			case StatechartPackage.TRANSITION__EXPRESSION:
-				return basicSetExpression(null, msgs);
 			case StatechartPackage.TRANSITION__REGION:
 				return basicSetRegion(null, msgs);
 		}
@@ -376,8 +314,6 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 			case StatechartPackage.TRANSITION__SOURCE:
 				if (resolve) return getSource();
 				return basicGetSource();
-			case StatechartPackage.TRANSITION__EXPRESSION:
-				return getExpression();
 			case StatechartPackage.TRANSITION__REGION:
 				return getRegion();
 		}
@@ -397,9 +333,6 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 				return;
 			case StatechartPackage.TRANSITION__SOURCE:
 				setSource((Vertex)newValue);
-				return;
-			case StatechartPackage.TRANSITION__EXPRESSION:
-				setExpression((TransitionExpression)newValue);
 				return;
 			case StatechartPackage.TRANSITION__REGION:
 				setRegion((Region)newValue);
@@ -422,9 +355,6 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 			case StatechartPackage.TRANSITION__SOURCE:
 				setSource((Vertex)null);
 				return;
-			case StatechartPackage.TRANSITION__EXPRESSION:
-				setExpression((TransitionExpression)null);
-				return;
 			case StatechartPackage.TRANSITION__REGION:
 				setRegion((Region)null);
 				return;
@@ -444,8 +374,6 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 				return target != null;
 			case StatechartPackage.TRANSITION__SOURCE:
 				return source != null;
-			case StatechartPackage.TRANSITION__EXPRESSION:
-				return expression != null;
 			case StatechartPackage.TRANSITION__REGION:
 				return getRegion() != null;
 		}

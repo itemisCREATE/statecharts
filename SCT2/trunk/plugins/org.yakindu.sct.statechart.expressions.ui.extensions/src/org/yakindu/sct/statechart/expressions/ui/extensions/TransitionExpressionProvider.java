@@ -1,10 +1,15 @@
 package org.yakindu.sct.statechart.expressions.ui.extensions;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.yakindu.model.sct.statechart.StatechartPackage;
 import org.yakindu.sct.statechart.diagram.extensions.IExpressionsProvider;
+import org.yakindu.sct.statechart.expressions.ui.extensions.modules.TransitionRuntimeModule;
+import org.yakindu.sct.statechart.expressions.ui.extensions.modules.TransitionUIModule;
 
+import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.google.inject.util.Modules;
 
 /**
  * 
@@ -21,7 +26,10 @@ public class TransitionExpressionProvider implements IExpressionsProvider {
 
 	@Override
 	public Injector getInjector() {
-		return ExtensionsActivator.getDefault().getExpressionsInjector();
+		return Guice.createInjector(Modules.override(
+				Modules.override(new TransitionRuntimeModule())
+						.with(new TransitionUIModule(ExtensionsActivator
+								.getDefault()))).with(new SharedStateModule()));
 	}
 
 }

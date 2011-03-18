@@ -12,16 +12,18 @@ package org.yakindu.sct.statechart.diagram.providers;
 
 /**
  * 
- * @author Andreas Muelder <a
- *         href="mailto:andreas.muelder@itemis.de">andreas.muelder@itemis.de</a>
+ * @author muelder
  * 
  */
-public interface ProviderConstants {
-	
+public interface SemanticHints {
+
+	String STATECHART_TEXT = "StatechartText";
+	String STATECHART_TEXT_EXPRESSION = "StatechartTextExpression";
+
 	String REGION = "Region";
 	String REGION_NAME = "RegionName";
 	String REGION_COMPARTMENT = "RegionCompartment";
-	
+
 	String TRANSITION = "Transition";
 	String TRANSITION_EXPRESSION = "TransitionExpression";
 
@@ -34,14 +36,14 @@ public interface ProviderConstants {
 	String CHOICE = "Choice";
 
 	String DEEPHISTORY = "DeepHistory";
-	
+
 	String SHALLOWHISTORY = "ShallowHistory";
-	
+
 	String INITIALSTATE = "InitialState";
-	
+
 	String FINALSTATE = "FinalState";
-	
+
 	String JOIN = "Join";
-	
+
 	String JUNCTION = "Junction";
 }

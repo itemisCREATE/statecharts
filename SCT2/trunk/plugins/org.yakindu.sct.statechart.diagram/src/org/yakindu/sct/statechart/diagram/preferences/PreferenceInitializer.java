@@ -20,24 +20,25 @@ import org.yakindu.sct.statechart.diagram.DiagramActivator;
 
 /**
  * 
- * @author Andreas Muelder <a
- *         href="mailto:andreas.muelder@itemis.de">andreas.muelder@itemis.de</a>
- * 
+ * @author muelder
+ *
  */
-public class PreferenceInitializer extends DiagramPreferenceInitializer implements StatechartColorConstants{
+public class PreferenceInitializer extends DiagramPreferenceInitializer
+		implements StatechartColorConstants {
 
 	public void initializeDefaultPreferences() {
 		super.initializeDefaultPreferences();
-		//Custom Colors
+		// Custom Colors
 		PreferenceConverter.setDefault(getPreferenceStore(),
 				PreferenceConstants.STATE_COLOR, state_color.getRGB());
 		PreferenceConverter.setDefault(getPreferenceStore(),
 				PreferenceConstants.REGION_COLOR, region_color.getRGB());
-		
-		//Line colors
-		Color lineColor = DiagramColorConstants.black;
+
+		// Line colors
+		Color lineColor = DiagramColorConstants.darkGray;
 		PreferenceConverter.setDefault(getPreferenceStore(),
 				IPreferenceConstants.PREF_LINE_COLOR, lineColor.getRGB());
+
 	}
 
 	@Override

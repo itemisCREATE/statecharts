@@ -27,6 +27,87 @@ public interface ExpressionsFactory extends EFactory
   ExpressionsFactory eINSTANCE = org.yakindu.sct.statechart.expressions.impl.ExpressionsFactoryImpl.init();
 
   /**
+   * Returns a new object of class '<em>Entry Rule</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Entry Rule</em>'.
+   * @generated
+   */
+  EntryRule createEntryRule();
+
+  /**
+   * Returns a new object of class '<em>State Expression</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>State Expression</em>'.
+   * @generated
+   */
+  StateExpression createStateExpression();
+
+  /**
+   * Returns a new object of class '<em>Entry Expression</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Entry Expression</em>'.
+   * @generated
+   */
+  EntryExpression createEntryExpression();
+
+  /**
+   * Returns a new object of class '<em>Exit Expression</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Exit Expression</em>'.
+   * @generated
+   */
+  ExitExpression createExitExpression();
+
+  /**
+   * Returns a new object of class '<em>On Tick Expression</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>On Tick Expression</em>'.
+   * @generated
+   */
+  OnTickExpression createOnTickExpression();
+
+  /**
+   * Returns a new object of class '<em>Custom Transition Expression</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Custom Transition Expression</em>'.
+   * @generated
+   */
+  CustomTransitionExpression createCustomTransitionExpression();
+
+  /**
+   * Returns a new object of class '<em>Element Definition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Element Definition</em>'.
+   * @generated
+   */
+  ElementDefinition createElementDefinition();
+
+  /**
+   * Returns a new object of class '<em>Variable Definition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Variable Definition</em>'.
+   * @generated
+   */
+  VariableDefinition createVariableDefinition();
+
+  /**
+   * Returns a new object of class '<em>Event Definition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Event Definition</em>'.
+   * @generated
+   */
+  EventDefinition createEventDefinition();
+
+  /**
    * Returns a new object of class '<em>Expression Rule</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -52,15 +133,6 @@ public interface ExpressionsFactory extends EFactory
    * @generated
    */
   Expression createExpression();
-
-  /**
-   * Returns a new object of class '<em>Custom Transition Expression</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Custom Transition Expression</em>'.
-   * @generated
-   */
-  CustomTransitionExpression createCustomTransitionExpression();
 
   /**
    * Returns a new object of class '<em>Logical Or Expression</em>'.

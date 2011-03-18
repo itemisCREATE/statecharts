@@ -12,12 +12,37 @@ package org.yakindu.model.sct.statechart.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
-
-import org.yakindu.model.sct.statechart.*;
+import org.yakindu.model.sct.statechart.BooleanVariable;
+import org.yakindu.model.sct.statechart.BooleanVariableValue;
+import org.yakindu.model.sct.statechart.Choice;
+import org.yakindu.model.sct.statechart.DeepHistoryState;
+import org.yakindu.model.sct.statechart.Effect;
+import org.yakindu.model.sct.statechart.Event;
+import org.yakindu.model.sct.statechart.ExpressionElement;
+import org.yakindu.model.sct.statechart.FinalState;
+import org.yakindu.model.sct.statechart.Fork;
+import org.yakindu.model.sct.statechart.HistoryState;
+import org.yakindu.model.sct.statechart.InitialState;
+import org.yakindu.model.sct.statechart.IntegerVariable;
+import org.yakindu.model.sct.statechart.IntegerVariableValue;
+import org.yakindu.model.sct.statechart.Join;
+import org.yakindu.model.sct.statechart.Junction;
+import org.yakindu.model.sct.statechart.NamedElement;
+import org.yakindu.model.sct.statechart.Pseudostate;
+import org.yakindu.model.sct.statechart.RealVariable;
+import org.yakindu.model.sct.statechart.RealVariableValue;
+import org.yakindu.model.sct.statechart.Region;
+import org.yakindu.model.sct.statechart.ShallowHistoryState;
+import org.yakindu.model.sct.statechart.State;
+import org.yakindu.model.sct.statechart.Statechart;
+import org.yakindu.model.sct.statechart.StatechartPackage;
+import org.yakindu.model.sct.statechart.TimeEvent;
+import org.yakindu.model.sct.statechart.Transition;
+import org.yakindu.model.sct.statechart.Trigger;
+import org.yakindu.model.sct.statechart.Variable;
+import org.yakindu.model.sct.statechart.Vertex;
 
 /**
  * <!-- begin-user-doc -->
@@ -101,10 +126,6 @@ public class StatechartAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseTransition(Transition object) {
 				return createTransitionAdapter();
-			}
-			@Override
-			public Adapter caseTransitionExpression(TransitionExpression object) {
-				return createTransitionExpressionAdapter();
 			}
 			@Override
 			public Adapter caseFinalState(FinalState object) {
@@ -195,6 +216,10 @@ public class StatechartAdapterFactory extends AdapterFactoryImpl {
 				return createTimeEventAdapter();
 			}
 			@Override
+			public Adapter caseExpressionElement(ExpressionElement object) {
+				return createExpressionElementAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -281,20 +306,6 @@ public class StatechartAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTransitionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.yakindu.model.sct.statechart.TransitionExpression <em>Transition Expression</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.yakindu.model.sct.statechart.TransitionExpression
-	 * @generated
-	 */
-	public Adapter createTransitionExpressionAdapter() {
 		return null;
 	}
 
@@ -603,6 +614,20 @@ public class StatechartAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTimeEventAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.model.sct.statechart.ExpressionElement <em>Expression Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.model.sct.statechart.ExpressionElement
+	 * @generated
+	 */
+	public Adapter createExpressionElementAdapter() {
 		return null;
 	}
 

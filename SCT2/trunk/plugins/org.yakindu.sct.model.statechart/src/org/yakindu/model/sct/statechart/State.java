@@ -28,7 +28,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface State extends Vertex {
+public interface State extends Vertex, ExpressionElement {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

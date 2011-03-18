@@ -1,14 +1,10 @@
 package org.yakindu.sct.statechart.diagram.editor.figures;
 
-import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.PolygonDecoration;
 import org.eclipse.draw2d.RotatableDecoration;
 import org.eclipse.draw2d.geometry.PointList;
-import org.eclipse.gmf.runtime.draw2d.ui.figures.LabelEx;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx;
 import org.eclipse.gmf.runtime.draw2d.ui.mapmode.IMapMode;
-
-import de.itemis.xtext.utils.gmf.directedit.StyledLabel;
 /**
  * 
  * @author muelder
@@ -18,16 +14,11 @@ public class TransitionFigure extends PolylineConnectionEx {
 
 	private final IMapMode mapMode;
 
-	private final LabelEx expression;
-
 	public TransitionFigure(IMapMode mapMode) {
 		this.mapMode = mapMode;
 		setLineWidth(mapMode.DPtoLP(1));
-		expression = new LabelEx();
-		this.add(expression);
 		setTargetDecoration(createTargetDecoration());
 	}
-
 	protected IMapMode getMapMode() {
 		return mapMode;
 	}
@@ -43,9 +34,4 @@ public class TransitionFigure extends PolylineConnectionEx {
 		df.setTemplate(pl);
 		return df;
 	}
-
-	public IFigure getExpressionLabel() {
-		return expression;
-	}
-
 }

@@ -24,32 +24,37 @@ import org.yakindu.sct.statechart.diagram.factories.RegionViewFactory;
 import org.yakindu.sct.statechart.diagram.factories.StateTextCompartmentViewFactory;
 import org.yakindu.sct.statechart.diagram.factories.StateViewFactory;
 import org.yakindu.sct.statechart.diagram.factories.StatechartDiagramViewFactory;
+import org.yakindu.sct.statechart.diagram.factories.StatechartTextFactory;
 import org.yakindu.sct.statechart.diagram.factories.TransitionViewFactory;
 import org.yakindu.sct.statechart.diagram.utils.SemanticHintUtil;
 
 /**
  * 
- * @author Andreas Muelder <a
- *         href="mailto:andreas.muelder@itemis.de">andreas.muelder@itemis.de</a>
+ * @author muelder
  * 
  */
-public class StatechartDiagramViewProvider extends AbstractViewProvider implements ProviderConstants {
+public class StatechartDiagramViewProvider extends AbstractViewProvider
+		implements SemanticHints {
 
-	private final Map<String, Class<?>> factories;
-
-	public StatechartDiagramViewProvider() {
+	private static final Map<String, Class<?>> factories;
+	static {
 		factories = new HashMap<String, Class<?>>();
 		init();
 	}
 
-	private void init() {
-		factories.put(StatechartDiagramEditor.ID, StatechartDiagramViewFactory.class);
+	private static void init() {
+		factories.put(StatechartDiagramEditor.ID,
+				StatechartDiagramViewFactory.class);
+		factories.put(STATECHART_TEXT, StatechartTextFactory.class);
+		factories.put(STATECHART_TEXT_EXPRESSION, ShapeViewFactory.class);
 		factories.put(REGION, RegionViewFactory.class);
 		factories.put(REGION_COMPARTMENT, ShapeViewFactory.class);
 		factories.put(STATE, StateViewFactory.class);
 		factories.put(STATE_FIGURE_COMPARTMENT, CompartmentViewFactory.class);
-		factories.put(STATE_TEXT_COMPARTMENT, StateTextCompartmentViewFactory.class);
-		factories.put(STATE_TEXT_COMPARTMENT_EXPRESSION, ShapeViewFactory.class);
+		factories.put(STATE_TEXT_COMPARTMENT,
+				StateTextCompartmentViewFactory.class);
+		factories
+				.put(STATE_TEXT_COMPARTMENT_EXPRESSION, ShapeViewFactory.class);
 		factories.put(TRANSITION, TransitionViewFactory.class);
 		factories.put(CHOICE, ShapeViewFactory.class);
 		factories.put(INITIALSTATE, ShapeViewFactory.class);
@@ -65,22 +70,29 @@ public class StatechartDiagramViewProvider extends AbstractViewProvider implemen
 	}
 
 	@Override
-	protected Class<?> getDiagramViewClass(IAdaptable semanticAdapter, String diagramKind) {
+	protected Class<?> getDiagramViewClass(IAdaptable semanticAdapter,
+			String diagramKind) {
 		return getClass(diagramKind);
 	}
 
 	@Override
-	protected Class<?> getEdgeViewClass(IAdaptable semanticAdapter, View containerView, String semanticHint) {
-		if(semanticHint == null || semanticHint.isEmpty()){
-			semanticHint = SemanticHintUtil.getSemanticHint((EObject)semanticAdapter.getAdapter(EObject.class));
+	protected Class<?> getEdgeViewClass(IAdaptable semanticAdapter,
+			View containerView, String semanticHint) {
+		if (semanticHint == null || semanticHint.isEmpty()) {
+			semanticHint = SemanticHintUtil
+					.getSemanticHint((EObject) semanticAdapter
+							.getAdapter(EObject.class));
 		}
 		return getClass(semanticHint);
 	}
 
 	@Override
-	protected Class<?> getNodeViewClass(IAdaptable semanticAdapter, View containerView, String semanticHint) {
-		if(semanticHint == null || semanticHint.isEmpty()){
-			semanticHint = SemanticHintUtil.getSemanticHint((EObject)semanticAdapter.getAdapter(EObject.class));
+	protected Class<?> getNodeViewClass(IAdaptable semanticAdapter,
+			View containerView, String semanticHint) {
+		if (semanticHint == null || semanticHint.isEmpty()) {
+			semanticHint = SemanticHintUtil
+					.getSemanticHint((EObject) semanticAdapter
+							.getAdapter(EObject.class));
 		}
 		return getClass(semanticHint);
 	}

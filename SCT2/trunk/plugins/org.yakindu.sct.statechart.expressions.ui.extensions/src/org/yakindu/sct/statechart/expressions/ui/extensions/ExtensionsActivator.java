@@ -1,14 +1,7 @@
 package org.yakindu.sct.statechart.expressions.ui.extensions;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
-import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.osgi.framework.BundleContext;
-import org.yakindu.sct.statechart.ExpressionsRuntimeModule;
-import org.yakindu.sct.statechart.ui.ExpressionsUiModule;
-
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-import com.google.inject.util.Modules;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -20,13 +13,8 @@ public class ExtensionsActivator extends AbstractUIPlugin {
 
 	// The shared instance
 	private static ExtensionsActivator plugin;
-	
-	/**
-	 * The constructor
-	 */
-	public ExtensionsActivator() {
-	}
 
+	
 	/*
 	 * (non-Javadoc)
 	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext)
@@ -54,13 +42,5 @@ public class ExtensionsActivator extends AbstractUIPlugin {
 		return plugin;
 	}
 	
-	public Injector getExpressionsInjector() {
-		Injector injector =  Guice.createInjector(Modules.override(
-				Modules.override(
-						Modules.override(new ExpressionsRuntimeModule()).with(
-								new ExpressionsUiModule(this))).with(
-						new SharedStateModule())).with());
-		return injector;
-	}
 
 }

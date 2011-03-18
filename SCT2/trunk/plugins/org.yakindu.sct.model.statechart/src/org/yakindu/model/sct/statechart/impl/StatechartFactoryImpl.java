@@ -13,12 +13,32 @@ package org.yakindu.model.sct.statechart.impl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-
-import org.yakindu.model.sct.statechart.*;
+import org.yakindu.model.sct.statechart.BooleanVariable;
+import org.yakindu.model.sct.statechart.BooleanVariableValue;
+import org.yakindu.model.sct.statechart.Choice;
+import org.yakindu.model.sct.statechart.DeepHistoryState;
+import org.yakindu.model.sct.statechart.Event;
+import org.yakindu.model.sct.statechart.ExpressionElement;
+import org.yakindu.model.sct.statechart.FinalState;
+import org.yakindu.model.sct.statechart.Fork;
+import org.yakindu.model.sct.statechart.HistoryState;
+import org.yakindu.model.sct.statechart.InitialState;
+import org.yakindu.model.sct.statechart.IntegerVariable;
+import org.yakindu.model.sct.statechart.IntegerVariableValue;
+import org.yakindu.model.sct.statechart.Join;
+import org.yakindu.model.sct.statechart.Junction;
+import org.yakindu.model.sct.statechart.RealVariable;
+import org.yakindu.model.sct.statechart.RealVariableValue;
+import org.yakindu.model.sct.statechart.Region;
+import org.yakindu.model.sct.statechart.ShallowHistoryState;
+import org.yakindu.model.sct.statechart.State;
+import org.yakindu.model.sct.statechart.Statechart;
+import org.yakindu.model.sct.statechart.StatechartFactory;
+import org.yakindu.model.sct.statechart.StatechartPackage;
+import org.yakindu.model.sct.statechart.TimeEvent;
+import org.yakindu.model.sct.statechart.Transition;
 
 /**
  * <!-- begin-user-doc -->
@@ -73,7 +93,6 @@ public class StatechartFactoryImpl extends EFactoryImpl implements StatechartFac
 		switch (eClass.getClassifierID()) {
 			case StatechartPackage.REGION: return createRegion();
 			case StatechartPackage.TRANSITION: return createTransition();
-			case StatechartPackage.TRANSITION_EXPRESSION: return createTransitionExpression();
 			case StatechartPackage.FINAL_STATE: return createFinalState();
 			case StatechartPackage.STATE: return createState();
 			case StatechartPackage.REAL_VARIABLE_VALUE: return createRealVariableValue();
@@ -93,6 +112,7 @@ public class StatechartFactoryImpl extends EFactoryImpl implements StatechartFac
 			case StatechartPackage.FORK: return createFork();
 			case StatechartPackage.INITIAL_STATE: return createInitialState();
 			case StatechartPackage.TIME_EVENT: return createTimeEvent();
+			case StatechartPackage.EXPRESSION_ELEMENT: return createExpressionElement();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -116,16 +136,6 @@ public class StatechartFactoryImpl extends EFactoryImpl implements StatechartFac
 	public Transition createTransition() {
 		TransitionImpl transition = new TransitionImpl();
 		return transition;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public TransitionExpression createTransitionExpression() {
-		TransitionExpressionImpl transitionExpression = new TransitionExpressionImpl();
-		return transitionExpression;
 	}
 
 	/**
@@ -316,6 +326,16 @@ public class StatechartFactoryImpl extends EFactoryImpl implements StatechartFac
 	public TimeEvent createTimeEvent() {
 		TimeEventImpl timeEvent = new TimeEventImpl();
 		return timeEvent;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ExpressionElement createExpressionElement() {
+		ExpressionElementImpl expressionElement = new ExpressionElementImpl();
+		return expressionElement;
 	}
 
 	/**

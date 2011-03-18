@@ -14,8 +14,35 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-
-import org.yakindu.model.sct.statechart.*;
+import org.yakindu.model.sct.statechart.BooleanVariable;
+import org.yakindu.model.sct.statechart.BooleanVariableValue;
+import org.yakindu.model.sct.statechart.Choice;
+import org.yakindu.model.sct.statechart.DeepHistoryState;
+import org.yakindu.model.sct.statechart.Effect;
+import org.yakindu.model.sct.statechart.Event;
+import org.yakindu.model.sct.statechart.ExpressionElement;
+import org.yakindu.model.sct.statechart.FinalState;
+import org.yakindu.model.sct.statechart.Fork;
+import org.yakindu.model.sct.statechart.HistoryState;
+import org.yakindu.model.sct.statechart.InitialState;
+import org.yakindu.model.sct.statechart.IntegerVariable;
+import org.yakindu.model.sct.statechart.IntegerVariableValue;
+import org.yakindu.model.sct.statechart.Join;
+import org.yakindu.model.sct.statechart.Junction;
+import org.yakindu.model.sct.statechart.NamedElement;
+import org.yakindu.model.sct.statechart.Pseudostate;
+import org.yakindu.model.sct.statechart.RealVariable;
+import org.yakindu.model.sct.statechart.RealVariableValue;
+import org.yakindu.model.sct.statechart.Region;
+import org.yakindu.model.sct.statechart.ShallowHistoryState;
+import org.yakindu.model.sct.statechart.State;
+import org.yakindu.model.sct.statechart.Statechart;
+import org.yakindu.model.sct.statechart.StatechartPackage;
+import org.yakindu.model.sct.statechart.TimeEvent;
+import org.yakindu.model.sct.statechart.Transition;
+import org.yakindu.model.sct.statechart.Trigger;
+import org.yakindu.model.sct.statechart.Variable;
+import org.yakindu.model.sct.statechart.Vertex;
 
 /**
  * <!-- begin-user-doc -->
@@ -129,12 +156,7 @@ public class StatechartSwitch<T> {
 			case StatechartPackage.TRANSITION: {
 				Transition transition = (Transition)theEObject;
 				T result = caseTransition(transition);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case StatechartPackage.TRANSITION_EXPRESSION: {
-				TransitionExpression transitionExpression = (TransitionExpression)theEObject;
-				T result = caseTransitionExpression(transitionExpression);
+				if (result == null) result = caseExpressionElement(transition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -143,6 +165,7 @@ public class StatechartSwitch<T> {
 				T result = caseFinalState(finalState);
 				if (result == null) result = caseState(finalState);
 				if (result == null) result = caseVertex(finalState);
+				if (result == null) result = caseExpressionElement(finalState);
 				if (result == null) result = caseNamedElement(finalState);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -151,6 +174,7 @@ public class StatechartSwitch<T> {
 				State state = (State)theEObject;
 				T result = caseState(state);
 				if (result == null) result = caseVertex(state);
+				if (result == null) result = caseExpressionElement(state);
 				if (result == null) result = caseNamedElement(state);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -271,6 +295,7 @@ public class StatechartSwitch<T> {
 				Statechart statechart = (Statechart)theEObject;
 				T result = caseStatechart(statechart);
 				if (result == null) result = caseNamedElement(statechart);
+				if (result == null) result = caseExpressionElement(statechart);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -307,6 +332,12 @@ public class StatechartSwitch<T> {
 			case StatechartPackage.TIME_EVENT: {
 				TimeEvent timeEvent = (TimeEvent)theEObject;
 				T result = caseTimeEvent(timeEvent);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StatechartPackage.EXPRESSION_ELEMENT: {
+				ExpressionElement expressionElement = (ExpressionElement)theEObject;
+				T result = caseExpressionElement(expressionElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -386,21 +417,6 @@ public class StatechartSwitch<T> {
 	 * @generated
 	 */
 	public T caseTransition(Transition object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Transition Expression</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Transition Expression</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseTransitionExpression(TransitionExpression object) {
 		return null;
 	}
 
@@ -731,6 +747,21 @@ public class StatechartSwitch<T> {
 	 * @generated
 	 */
 	public T caseTimeEvent(TimeEvent object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Expression Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Expression Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseExpressionElement(ExpressionElement object) {
 		return null;
 	}
 

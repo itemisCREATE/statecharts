@@ -55,15 +55,6 @@ public interface StatechartFactory extends EFactory {
 	Transition createTransition();
 
 	/**
-	 * Returns a new object of class '<em>Transition Expression</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Transition Expression</em>'.
-	 * @generated
-	 */
-	TransitionExpression createTransitionExpression();
-
-	/**
 	 * Returns a new object of class '<em>Final State</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -233,6 +224,15 @@ public interface StatechartFactory extends EFactory {
 	 * @generated
 	 */
 	TimeEvent createTimeEvent();
+
+	/**
+	 * Returns a new object of class '<em>Expression Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Expression Element</em>'.
+	 * @generated
+	 */
+	ExpressionElement createExpressionElement();
 
 	/**
 	 * Returns the package supported by this factory.

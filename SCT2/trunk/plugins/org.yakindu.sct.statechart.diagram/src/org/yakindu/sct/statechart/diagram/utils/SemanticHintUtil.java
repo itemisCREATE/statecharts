@@ -10,16 +10,16 @@
  */
 package org.yakindu.sct.statechart.diagram.utils;
 
-import static org.yakindu.sct.statechart.diagram.providers.ProviderConstants.CHOICE;
-import static org.yakindu.sct.statechart.diagram.providers.ProviderConstants.DEEPHISTORY;
-import static org.yakindu.sct.statechart.diagram.providers.ProviderConstants.FINALSTATE;
-import static org.yakindu.sct.statechart.diagram.providers.ProviderConstants.INITIALSTATE;
-import static org.yakindu.sct.statechart.diagram.providers.ProviderConstants.JOIN;
-import static org.yakindu.sct.statechart.diagram.providers.ProviderConstants.JUNCTION;
-import static org.yakindu.sct.statechart.diagram.providers.ProviderConstants.REGION;
-import static org.yakindu.sct.statechart.diagram.providers.ProviderConstants.SHALLOWHISTORY;
-import static org.yakindu.sct.statechart.diagram.providers.ProviderConstants.STATE;
-import static org.yakindu.sct.statechart.diagram.providers.ProviderConstants.TRANSITION;
+import static org.yakindu.sct.statechart.diagram.providers.SemanticHints.CHOICE;
+import static org.yakindu.sct.statechart.diagram.providers.SemanticHints.DEEPHISTORY;
+import static org.yakindu.sct.statechart.diagram.providers.SemanticHints.FINALSTATE;
+import static org.yakindu.sct.statechart.diagram.providers.SemanticHints.INITIALSTATE;
+import static org.yakindu.sct.statechart.diagram.providers.SemanticHints.JOIN;
+import static org.yakindu.sct.statechart.diagram.providers.SemanticHints.JUNCTION;
+import static org.yakindu.sct.statechart.diagram.providers.SemanticHints.REGION;
+import static org.yakindu.sct.statechart.diagram.providers.SemanticHints.SHALLOWHISTORY;
+import static org.yakindu.sct.statechart.diagram.providers.SemanticHints.STATE;
+import static org.yakindu.sct.statechart.diagram.providers.SemanticHints.TRANSITION;
 
 import org.eclipse.emf.ecore.EObject;
 import org.yakindu.model.sct.statechart.Choice;

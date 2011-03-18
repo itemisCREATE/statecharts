@@ -4,9 +4,8 @@ import org.eclipse.draw2d.GridData;
 
 /**
  * 
- * @author Andreas Muelder <a
- *         href="mailto:andreas.muelder@itemis.de">andreas.muelder@itemis.de</a>
- * 
+ * @author muelder
+ *
  */
 public class GridDataFactory {
 

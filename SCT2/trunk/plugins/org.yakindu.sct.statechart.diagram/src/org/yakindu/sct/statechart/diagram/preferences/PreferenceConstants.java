@@ -18,7 +18,6 @@ package org.yakindu.sct.statechart.diagram.preferences;
  */
 public class PreferenceConstants {
 
-
 	public static final String REGION_COLOR = "Region_Color";
 	
 	public static final String STATE_COLOR = "State_Color";

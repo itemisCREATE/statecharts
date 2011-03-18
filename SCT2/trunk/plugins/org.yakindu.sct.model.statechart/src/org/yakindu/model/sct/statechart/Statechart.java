@@ -30,7 +30,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface Statechart extends NamedElement {
+public interface Statechart extends NamedElement, ExpressionElement {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

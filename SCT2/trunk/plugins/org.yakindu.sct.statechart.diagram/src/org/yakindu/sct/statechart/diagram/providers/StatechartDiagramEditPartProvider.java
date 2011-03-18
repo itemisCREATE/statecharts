@@ -33,28 +33,31 @@ import org.yakindu.sct.statechart.diagram.editparts.StateNameEditPart;
 import org.yakindu.sct.statechart.diagram.editparts.StateTextCompartmentEditPart;
 import org.yakindu.sct.statechart.diagram.editparts.StateTextCompartmentExpressionEditPart;
 import org.yakindu.sct.statechart.diagram.editparts.StatechartDiagramEditPart;
+import org.yakindu.sct.statechart.diagram.editparts.StatechartTextEditPart;
+import org.yakindu.sct.statechart.diagram.editparts.StatechartTextExpressionEditPart;
 import org.yakindu.sct.statechart.diagram.editparts.TransitionEditPart;
 import org.yakindu.sct.statechart.diagram.editparts.TransitionExpressionEditPart;
 
 /**
  * 
- * @author Andreas Muelder <a
- *         href="mailto:andreas.muelder@itemis.de">andreas.muelder@itemis.de</a>
+ * @author muelder
  * 
  */
 public class StatechartDiagramEditPartProvider extends AbstractEditPartProvider
-		implements ProviderConstants {
+		implements SemanticHints {
 
-	public final Map<String, Class<? extends IGraphicalEditPart>> editParts;
-
-	public StatechartDiagramEditPartProvider() {
+	public static final Map<String, Class<? extends IGraphicalEditPart>> editParts;
+	static {
 		editParts = new HashMap<String, Class<? extends IGraphicalEditPart>>();
 		init();
 	}
 
-	private void init() {
+	private static void init() {
 		editParts.put(StatechartDiagramEditor.ID,
 				StatechartDiagramEditPart.class);
+		editParts.put(STATECHART_TEXT, StatechartTextEditPart.class);
+		editParts.put(STATECHART_TEXT_EXPRESSION,
+				StatechartTextExpressionEditPart.class);
 		editParts.put(CHOICE, ChoiceEditPart.class);
 		editParts.put(DEEPHISTORY, DeepHistoryEditPart.class);
 		editParts.put(FINALSTATE, FinalStateEditPart.class);

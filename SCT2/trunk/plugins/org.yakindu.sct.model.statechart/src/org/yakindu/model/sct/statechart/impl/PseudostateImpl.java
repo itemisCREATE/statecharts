@@ -11,7 +11,6 @@
 package org.yakindu.model.sct.statechart.impl;
 
 import org.eclipse.emf.ecore.EClass;
-
 import org.yakindu.model.sct.statechart.Pseudostate;
 import org.yakindu.model.sct.statechart.StatechartPackage;
 

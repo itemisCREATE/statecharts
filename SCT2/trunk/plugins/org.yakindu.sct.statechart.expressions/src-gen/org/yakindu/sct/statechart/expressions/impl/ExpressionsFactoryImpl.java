@@ -69,10 +69,18 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
   {
     switch (eClass.getClassifierID())
     {
+      case ExpressionsPackage.ENTRY_RULE: return createEntryRule();
+      case ExpressionsPackage.STATE_EXPRESSION: return createStateExpression();
+      case ExpressionsPackage.ENTRY_EXPRESSION: return createEntryExpression();
+      case ExpressionsPackage.EXIT_EXPRESSION: return createExitExpression();
+      case ExpressionsPackage.ON_TICK_EXPRESSION: return createOnTickExpression();
+      case ExpressionsPackage.CUSTOM_TRANSITION_EXPRESSION: return createCustomTransitionExpression();
+      case ExpressionsPackage.ELEMENT_DEFINITION: return createElementDefinition();
+      case ExpressionsPackage.VARIABLE_DEFINITION: return createVariableDefinition();
+      case ExpressionsPackage.EVENT_DEFINITION: return createEventDefinition();
       case ExpressionsPackage.EXPRESSION_RULE: return createExpressionRule();
       case ExpressionsPackage.RAISE_EVENT_EXPRESSION: return createRaiseEventExpression();
       case ExpressionsPackage.EXPRESSION: return createExpression();
-      case ExpressionsPackage.CUSTOM_TRANSITION_EXPRESSION: return createCustomTransitionExpression();
       case ExpressionsPackage.LOGICAL_OR_EXPRESSION: return createLogicalOrExpression();
       case ExpressionsPackage.LOGICAL_AND_EXPRESSION: return createLogicalAndExpression();
       case ExpressionsPackage.LOGICAL_NOT_EXPRESSION: return createLogicalNotExpression();
@@ -150,6 +158,105 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
    * <!-- end-user-doc -->
    * @generated
    */
+  public EntryRule createEntryRule()
+  {
+    EntryRuleImpl entryRule = new EntryRuleImpl();
+    return entryRule;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public StateExpression createStateExpression()
+  {
+    StateExpressionImpl stateExpression = new StateExpressionImpl();
+    return stateExpression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EntryExpression createEntryExpression()
+  {
+    EntryExpressionImpl entryExpression = new EntryExpressionImpl();
+    return entryExpression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ExitExpression createExitExpression()
+  {
+    ExitExpressionImpl exitExpression = new ExitExpressionImpl();
+    return exitExpression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public OnTickExpression createOnTickExpression()
+  {
+    OnTickExpressionImpl onTickExpression = new OnTickExpressionImpl();
+    return onTickExpression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public CustomTransitionExpression createCustomTransitionExpression()
+  {
+    CustomTransitionExpressionImpl customTransitionExpression = new CustomTransitionExpressionImpl();
+    return customTransitionExpression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ElementDefinition createElementDefinition()
+  {
+    ElementDefinitionImpl elementDefinition = new ElementDefinitionImpl();
+    return elementDefinition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public VariableDefinition createVariableDefinition()
+  {
+    VariableDefinitionImpl variableDefinition = new VariableDefinitionImpl();
+    return variableDefinition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EventDefinition createEventDefinition()
+  {
+    EventDefinitionImpl eventDefinition = new EventDefinitionImpl();
+    return eventDefinition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public ExpressionRule createExpressionRule()
   {
     ExpressionRuleImpl expressionRule = new ExpressionRuleImpl();
@@ -176,17 +283,6 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
   {
     ExpressionImpl expression = new ExpressionImpl();
     return expression;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public CustomTransitionExpression createCustomTransitionExpression()
-  {
-    CustomTransitionExpressionImpl customTransitionExpression = new CustomTransitionExpressionImpl();
-    return customTransitionExpression;
   }
 
   /**

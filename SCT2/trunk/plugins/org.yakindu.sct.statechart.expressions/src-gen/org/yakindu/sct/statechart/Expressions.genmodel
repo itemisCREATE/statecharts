@@ -45,6 +45,40 @@
       <genEnumLiterals ecoreEnumLiteral="Expressions.ecore#//Type/float"/>
       <genEnumLiterals ecoreEnumLiteral="Expressions.ecore#//Type/boolean"/>
     </genEnums>
+    <genClasses ecoreClass="Expressions.ecore#//EntryRule">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//EntryRule/entry"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//StateExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//StateExpression/entryExpression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//StateExpression/exitExpression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//StateExpression/ontickExpression"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//EntryExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//EntryExpression/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//ExitExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//ExitExpression/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//OnTickExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//OnTickExpression/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//CustomTransitionExpression">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Expressions.ecore#//CustomTransitionExpression/triggers"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//CustomTransitionExpression/guardExpression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//CustomTransitionExpression/action"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//ElementDefinition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//ElementDefinition/variables"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//ElementDefinition/events"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//VariableDefinition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//VariableDefinition/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//VariableDefinition/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//VariableDefinition/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//EventDefinition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//EventDefinition/name"/>
+    </genClasses>
     <genClasses ecoreClass="Expressions.ecore#//ExpressionRule">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//ExpressionRule/expression"/>
     </genClasses>
@@ -52,11 +86,6 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Expressions.ecore#//RaiseEventExpression/event"/>
     </genClasses>
     <genClasses ecoreClass="Expressions.ecore#//Expression"/>
-    <genClasses ecoreClass="Expressions.ecore#//CustomTransitionExpression">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Expressions.ecore#//CustomTransitionExpression/triggers"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//CustomTransitionExpression/guardExpression"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//CustomTransitionExpression/action"/>
-    </genClasses>
     <genClasses ecoreClass="Expressions.ecore#//LogicalOrExpression">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//LogicalOrExpression/leftOperand"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//LogicalOrExpression/rightOperand"/>
