@@ -301,7 +301,7 @@ public class ComputationModelPackageImpl extends EPackageImpl implements Computa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getNumberFormatMapping_DataType() {
+	public EReference getNumberFormatMapping_OwnedDataType() {
 		return (EReference)numberFormatMappingEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -310,8 +310,17 @@ public class ComputationModelPackageImpl extends EPackageImpl implements Computa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getNumberFormatMapping_NumberFormat() {
+	public EReference getNumberFormatMapping_DataType() {
 		return (EReference)numberFormatMappingEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getNumberFormatMapping_NumberFormat() {
+		return (EReference)numberFormatMappingEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -381,6 +390,7 @@ public class ComputationModelPackageImpl extends EPackageImpl implements Computa
 		createEReference(computationModelEClass, COMPUTATION_MODEL__NUMBER_FORMAT_MAPPINGS);
 
 		numberFormatMappingEClass = createEClass(NUMBER_FORMAT_MAPPING);
+		createEReference(numberFormatMappingEClass, NUMBER_FORMAT_MAPPING__OWNED_DATA_TYPE);
 		createEReference(numberFormatMappingEClass, NUMBER_FORMAT_MAPPING__DATA_TYPE);
 		createEReference(numberFormatMappingEClass, NUMBER_FORMAT_MAPPING__NUMBER_FORMAT);
 
@@ -451,7 +461,8 @@ public class ComputationModelPackageImpl extends EPackageImpl implements Computa
 		addEParameter(op, theTypeSystemPackage.getDataType(), "dataType", 1, 1, IS_UNIQUE, !IS_ORDERED);
 
 		initEClass(numberFormatMappingEClass, NumberFormatMapping.class, "NumberFormatMapping", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getNumberFormatMapping_DataType(), theTypeSystemPackage.getDataType(), null, "dataType", null, 1, 1, NumberFormatMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getNumberFormatMapping_OwnedDataType(), theTypeSystemPackage.getDataType(), null, "ownedDataType", null, 0, 1, NumberFormatMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getNumberFormatMapping_DataType(), theTypeSystemPackage.getDataType(), null, "dataType", null, 1, 1, NumberFormatMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getNumberFormatMapping_NumberFormat(), this.getNumberFormat(), null, "numberFormat", null, 1, 1, NumberFormatMapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		// Initialize enums and add enum literals

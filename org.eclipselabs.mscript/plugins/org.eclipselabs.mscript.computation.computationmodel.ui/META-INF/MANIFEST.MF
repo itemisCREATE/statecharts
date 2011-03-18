@@ -14,6 +14,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore.xmi;visibility:=reexport,
  org.eclipse.emf.edit.ui;visibility:=reexport,
  org.eclipse.ui.ide;visibility:=reexport,
+ org.eclipse.ui.forms;bundle-version="3.5.2",
  org.eclipselabs.mscript.typesystem.edit;visibility:=reexport
 Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipselabs.mscript.computation.computationmodel.ui.editor.presentation;x-friends:="org.eclipselabs.damos.execution.executionmodel.ui"

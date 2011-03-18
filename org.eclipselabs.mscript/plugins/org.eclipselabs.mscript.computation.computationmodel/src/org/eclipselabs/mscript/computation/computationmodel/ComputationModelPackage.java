@@ -256,13 +256,22 @@ public interface ComputationModelPackage extends EPackage {
 	int NUMBER_FORMAT_MAPPING = 5;
 
 	/**
-	 * The feature id for the '<em><b>Data Type</b></em>' containment reference.
+	 * The feature id for the '<em><b>Owned Data Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NUMBER_FORMAT_MAPPING__DATA_TYPE = 0;
+	int NUMBER_FORMAT_MAPPING__OWNED_DATA_TYPE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Data Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NUMBER_FORMAT_MAPPING__DATA_TYPE = 1;
 
 	/**
 	 * The feature id for the '<em><b>Number Format</b></em>' reference.
@@ -271,7 +280,7 @@ public interface ComputationModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NUMBER_FORMAT_MAPPING__NUMBER_FORMAT = 1;
+	int NUMBER_FORMAT_MAPPING__NUMBER_FORMAT = 2;
 
 	/**
 	 * The number of structural features of the '<em>Number Format Mapping</em>' class.
@@ -280,7 +289,7 @@ public interface ComputationModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NUMBER_FORMAT_MAPPING_FEATURE_COUNT = 2;
+	int NUMBER_FORMAT_MAPPING_FEATURE_COUNT = 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.computation.computationmodel.FloatingPointFormatKind <em>Floating Point Format Kind</em>}' enum.
@@ -474,10 +483,21 @@ public interface ComputationModelPackage extends EPackage {
 	EClass getNumberFormatMapping();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.computation.computationmodel.NumberFormatMapping#getDataType <em>Data Type</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipselabs.mscript.computation.computationmodel.NumberFormatMapping#getOwnedDataType <em>Owned Data Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Data Type</em>'.
+	 * @return the meta object for the containment reference '<em>Owned Data Type</em>'.
+	 * @see org.eclipselabs.mscript.computation.computationmodel.NumberFormatMapping#getOwnedDataType()
+	 * @see #getNumberFormatMapping()
+	 * @generated
+	 */
+	EReference getNumberFormatMapping_OwnedDataType();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipselabs.mscript.computation.computationmodel.NumberFormatMapping#getDataType <em>Data Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Data Type</em>'.
 	 * @see org.eclipselabs.mscript.computation.computationmodel.NumberFormatMapping#getDataType()
 	 * @see #getNumberFormatMapping()
 	 * @generated
@@ -678,7 +698,15 @@ public interface ComputationModelPackage extends EPackage {
 		EClass NUMBER_FORMAT_MAPPING = eINSTANCE.getNumberFormatMapping();
 
 		/**
-		 * The meta object literal for the '<em><b>Data Type</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Owned Data Type</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference NUMBER_FORMAT_MAPPING__OWNED_DATA_TYPE = eINSTANCE.getNumberFormatMapping_OwnedDataType();
+
+		/**
+		 * The meta object literal for the '<em><b>Data Type</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

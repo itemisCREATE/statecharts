@@ -7,11 +7,8 @@
 package org.eclipselabs.mscript.computation.computationmodel.ui;
 
 import org.eclipse.emf.common.EMFPlugin;
-
 import org.eclipse.emf.common.ui.EclipseUIPlugin;
-
 import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipselabs.mscript.typesystem.edit.TypeSystemEditPlugin;
 
 /**

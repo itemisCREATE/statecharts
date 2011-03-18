@@ -13,7 +13,7 @@
   <foreignModel>ComputationModel.ecore</foreignModel>
   <genPackages prefix="ComputationModel" basePackage="org.eclipselabs.mscript.computation"
       disposableProviderFactory="true" providerPackageSuffix="edit.provider" presentationPackageSuffix="ui.editor.presentation"
-      contentTypeIdentifier="" ecorePackage="ComputationModel.ecore#/">
+      multipleEditorPages="false" contentTypeIdentifier="" ecorePackage="ComputationModel.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="ComputationModel.ecore#//FloatingPointFormatKind">
       <genEnumLiterals ecoreEnumLiteral="ComputationModel.ecore#//FloatingPointFormatKind/Binary16"/>
       <genEnumLiterals ecoreEnumLiteral="ComputationModel.ecore#//FloatingPointFormatKind/Binary32"/>
@@ -57,7 +57,8 @@
       </genOperations>
     </genClasses>
     <genClasses ecoreClass="ComputationModel.ecore#//NumberFormatMapping">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ComputationModel.ecore#//NumberFormatMapping/dataType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ComputationModel.ecore#//NumberFormatMapping/ownedDataType"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ComputationModel.ecore#//NumberFormatMapping/dataType"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ComputationModel.ecore#//NumberFormatMapping/numberFormat"/>
     </genClasses>
   </genPackages>

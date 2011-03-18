@@ -17,6 +17,7 @@ import org.eclipselabs.mscript.typesystem.DataType;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link org.eclipselabs.mscript.computation.computationmodel.NumberFormatMapping#getOwnedDataType <em>Owned Data Type</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.computation.computationmodel.NumberFormatMapping#getDataType <em>Data Type</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.computation.computationmodel.NumberFormatMapping#getNumberFormat <em>Number Format</em>}</li>
  * </ul>
@@ -28,26 +29,52 @@ import org.eclipselabs.mscript.typesystem.DataType;
  */
 public interface NumberFormatMapping extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Data Type</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Owned Data Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Owned Data Type</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Owned Data Type</em>' containment reference.
+	 * @see #setOwnedDataType(DataType)
+	 * @see org.eclipselabs.mscript.computation.computationmodel.ComputationModelPackage#getNumberFormatMapping_OwnedDataType()
+	 * @model containment="true" ordered="false"
+	 * @generated
+	 */
+	DataType getOwnedDataType();
+
+	/**
+	 * Sets the value of the '{@link org.eclipselabs.mscript.computation.computationmodel.NumberFormatMapping#getOwnedDataType <em>Owned Data Type</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Owned Data Type</em>' containment reference.
+	 * @see #getOwnedDataType()
+	 * @generated
+	 */
+	void setOwnedDataType(DataType value);
+
+	/**
+	 * Returns the value of the '<em><b>Data Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Data Type</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Data Type</em>' containment reference.
+	 * @return the value of the '<em>Data Type</em>' reference.
 	 * @see #setDataType(DataType)
 	 * @see org.eclipselabs.mscript.computation.computationmodel.ComputationModelPackage#getNumberFormatMapping_DataType()
-	 * @model containment="true" required="true" ordered="false"
+	 * @model required="true" ordered="false"
 	 * @generated
 	 */
 	DataType getDataType();
 
 	/**
-	 * Sets the value of the '{@link org.eclipselabs.mscript.computation.computationmodel.NumberFormatMapping#getDataType <em>Data Type</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipselabs.mscript.computation.computationmodel.NumberFormatMapping#getDataType <em>Data Type</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Data Type</em>' containment reference.
+	 * @param value the new value of the '<em>Data Type</em>' reference.
 	 * @see #getDataType()
 	 * @generated
 	 */

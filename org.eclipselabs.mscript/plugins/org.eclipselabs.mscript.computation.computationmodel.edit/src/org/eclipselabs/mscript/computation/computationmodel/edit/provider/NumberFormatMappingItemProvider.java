@@ -65,9 +65,32 @@ public class NumberFormatMappingItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addDataTypePropertyDescriptor(object);
 			addNumberFormatPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Data Type feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addDataTypePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_NumberFormatMapping_dataType_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_NumberFormatMapping_dataType_feature", "_UI_NumberFormatMapping_type"),
+				 ComputationModelPackage.Literals.NUMBER_FORMAT_MAPPING__DATA_TYPE,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
 	}
 
 	/**
@@ -104,7 +127,7 @@ public class NumberFormatMappingItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(ComputationModelPackage.Literals.NUMBER_FORMAT_MAPPING__DATA_TYPE);
+			childrenFeatures.add(ComputationModelPackage.Literals.NUMBER_FORMAT_MAPPING__OWNED_DATA_TYPE);
 		}
 		return childrenFeatures;
 	}
@@ -170,7 +193,7 @@ public class NumberFormatMappingItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(NumberFormatMapping.class)) {
-			case ComputationModelPackage.NUMBER_FORMAT_MAPPING__DATA_TYPE:
+			case ComputationModelPackage.NUMBER_FORMAT_MAPPING__OWNED_DATA_TYPE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -190,57 +213,57 @@ public class NumberFormatMappingItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ComputationModelPackage.Literals.NUMBER_FORMAT_MAPPING__DATA_TYPE,
+				(ComputationModelPackage.Literals.NUMBER_FORMAT_MAPPING__OWNED_DATA_TYPE,
 				 TypeSystemFactory.eINSTANCE.createArrayType()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ComputationModelPackage.Literals.NUMBER_FORMAT_MAPPING__DATA_TYPE,
+				(ComputationModelPackage.Literals.NUMBER_FORMAT_MAPPING__OWNED_DATA_TYPE,
 				 TypeSystemFactory.eINSTANCE.createRealType()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ComputationModelPackage.Literals.NUMBER_FORMAT_MAPPING__DATA_TYPE,
+				(ComputationModelPackage.Literals.NUMBER_FORMAT_MAPPING__OWNED_DATA_TYPE,
 				 TypeSystemFactory.eINSTANCE.createIntegerType()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ComputationModelPackage.Literals.NUMBER_FORMAT_MAPPING__DATA_TYPE,
+				(ComputationModelPackage.Literals.NUMBER_FORMAT_MAPPING__OWNED_DATA_TYPE,
 				 TypeSystemFactory.eINSTANCE.createBooleanType()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ComputationModelPackage.Literals.NUMBER_FORMAT_MAPPING__DATA_TYPE,
+				(ComputationModelPackage.Literals.NUMBER_FORMAT_MAPPING__OWNED_DATA_TYPE,
 				 TypeSystemFactory.eINSTANCE.createStringType()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ComputationModelPackage.Literals.NUMBER_FORMAT_MAPPING__DATA_TYPE,
+				(ComputationModelPackage.Literals.NUMBER_FORMAT_MAPPING__OWNED_DATA_TYPE,
 				 TypeSystemFactory.eINSTANCE.createEnumeration()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ComputationModelPackage.Literals.NUMBER_FORMAT_MAPPING__DATA_TYPE,
+				(ComputationModelPackage.Literals.NUMBER_FORMAT_MAPPING__OWNED_DATA_TYPE,
 				 TypeSystemFactory.eINSTANCE.createInvalidDataType()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ComputationModelPackage.Literals.NUMBER_FORMAT_MAPPING__DATA_TYPE,
+				(ComputationModelPackage.Literals.NUMBER_FORMAT_MAPPING__OWNED_DATA_TYPE,
 				 TypeSystemFactory.eINSTANCE.createTensorType()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ComputationModelPackage.Literals.NUMBER_FORMAT_MAPPING__DATA_TYPE,
+				(ComputationModelPackage.Literals.NUMBER_FORMAT_MAPPING__OWNED_DATA_TYPE,
 				 TypeSystemFactory.eINSTANCE.createRecord()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ComputationModelPackage.Literals.NUMBER_FORMAT_MAPPING__DATA_TYPE,
+				(ComputationModelPackage.Literals.NUMBER_FORMAT_MAPPING__OWNED_DATA_TYPE,
 				 TypeSystemFactory.eINSTANCE.createUnitType()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(ComputationModelPackage.Literals.NUMBER_FORMAT_MAPPING__DATA_TYPE,
+				(ComputationModelPackage.Literals.NUMBER_FORMAT_MAPPING__OWNED_DATA_TYPE,
 				 TypeSystemFactory.eINSTANCE.createAnyDataType()));
 	}
 

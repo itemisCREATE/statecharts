@@ -57,9 +57,11 @@
         upperBound="-1" eType="#//NumberFormatMapping" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NumberFormatMapping">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="dataType" ordered="false"
-        lowerBound="1" eType="ecore:EClass ../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//DataType"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedDataType" ordered="false"
+        eType="ecore:EClass ../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//DataType"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dataType" ordered="false"
+        lowerBound="1" eType="ecore:EClass ../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//DataType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="numberFormat" ordered="false"
         lowerBound="1" eType="#//NumberFormat"/>
   </eClassifiers>
