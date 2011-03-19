@@ -10,20 +10,25 @@
  */
 package org.yakindu.sct.statechart.diagram.editor.figures;
 
+import static org.yakindu.sct.statechart.diagram.editor.figures.utils.GraphicsUtil.fillVerticalGradientRectangle;
+import static org.yakindu.sct.statechart.diagram.editor.figures.utils.GraphicsUtil.mixColor;
+
+import org.eclipse.draw2d.ColorConstants;
+import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.GridData;
 import org.eclipse.draw2d.GridLayout;
 import org.eclipse.draw2d.RectangleFigure;
-import org.eclipse.draw2d.RoundedRectangle;
-import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 import org.eclipse.gmf.runtime.draw2d.ui.mapmode.IMapMode;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Color;
 import org.yakindu.sct.statechart.diagram.editor.figures.utils.GridDataFactory;
 /**
  * 
  * @author muelder
  *
  */
-public class RegionFigure extends RoundedRectangle {
+public class RegionFigure extends RectangleFigure {
 
 	private WrappingLabel nameLabel;
 
@@ -38,7 +43,7 @@ public class RegionFigure extends RoundedRectangle {
 		layoutThis.verticalSpacing = 2;
 		this.setLayoutManager(layoutThis);
 
-		this.setCornerDimensions(new Dimension(mapMode.DPtoLP(20), mapMode.DPtoLP(20)));
+		//this.setCornerDimensions(new Dimension(mapMode.DPtoLP(20), mapMode.DPtoLP(20)));
 		this.setLineWidth(mapMode.DPtoLP(1));
 		createContents();
 	}
@@ -47,7 +52,8 @@ public class RegionFigure extends RoundedRectangle {
 
 		RectangleFigure labelFigure = new RectangleFigure();
 		labelFigure.setOutline(false);
-		this.add(labelFigure, GridDataFactory.fillDefaults().align(GridData.CENTER, GridData.CENTER).grab(true, false)
+		labelFigure.setFill(false);
+		this.add(labelFigure, GridDataFactory.fillDefaults().align(GridData.CENTER, SWT.END).grab(true, false)
 				.getData());
 		GridLayout layout = new GridLayout();
 		layout.verticalSpacing = 2;
@@ -69,6 +75,7 @@ public class RegionFigure extends RoundedRectangle {
 		compartmentLayout.numColumns = 1;
 		compartmentLayout.makeColumnsEqualWidth = true;
 		compartmentPane.setLayoutManager(compartmentLayout);
+		compartmentPane.setFill(false);
 		this.add(compartmentPane, GridDataFactory.fillDefaults().grab(true, true).getData());
 	}
 
@@ -79,5 +86,19 @@ public class RegionFigure extends RoundedRectangle {
 	public RectangleFigure getCompartmentPane() {
 		return compartmentPane;
 	}
+
+	//========= drawing related methods ============================
+
+	
+	/**
+	 * Fill the shape with a vertical color gradient. The gradient mixes a white into the configured background color. 
+	 */
+	@Override
+	protected void fillShape(Graphics graphics) {
+		Color c=mixColor(getBackgroundColor(), ColorConstants.white, 220);
+		fillVerticalGradientRectangle(graphics, getBounds(), getBackgroundColor(), c);
+		c.dispose();
+	}
+
 
 }

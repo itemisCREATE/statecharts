@@ -17,7 +17,7 @@ import org.eclipse.draw2d.geometry.Dimension;
 public class DeepHistoryFigure extends Ellipse {
 
 	public DeepHistoryFigure() {
-		this.setSize(new Dimension(15, 15));
+		this.setSize(new Dimension(10, 10));
 		this.setForegroundColor(org.eclipse.draw2d.ColorConstants.black);
 		this.setBackgroundColor(org.eclipse.draw2d.ColorConstants.white);
 	}

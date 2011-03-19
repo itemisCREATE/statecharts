@@ -1,12 +1,14 @@
 /**
- * Copyright (c) 2006-2009 committers of mda4e and others.
+ * Copyright (c) 2011 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *     committers of mda4e (http://www.mda4e.org/) - initial API and implementation
+ *     committers of YAKINDU - initial API and implementation
+ *     
+ *     Axel Terfloth
  *
  */
 package org.yakindu.sct.statechart.diagram.editor.figures.utils;
@@ -22,6 +24,30 @@ import org.eclipse.swt.graphics.Path;
  * @author Axel Terfloth
  */
 public class GraphicsUtil {
+
+	
+	/**
+	 * This function fills a rectangle with a vertical gradient. This implementation does not use the 
+	 * gradient mechanism based on background patterns since they do not work stable on all systems.
+	 *   
+	 * @param graphics
+	 * @param bounds
+	 * @param c1
+	 * @param c2
+	 */
+	public static void fillVerticalGradientRectangle(Graphics graphics, Rectangle bounds, Color c1, Color c2) {
+		
+		graphics.pushState();
+		
+		graphics.setForegroundColor(c2);
+		graphics.setBackgroundColor(c1);
+				
+		graphics.fillGradient(bounds.x, bounds.y, bounds.width, bounds.height, true);
+						
+		graphics.popState();
+	}
+
+	
 
 	/**
 	 * This function fills a rounded rectangle with a vertical gradient. This
