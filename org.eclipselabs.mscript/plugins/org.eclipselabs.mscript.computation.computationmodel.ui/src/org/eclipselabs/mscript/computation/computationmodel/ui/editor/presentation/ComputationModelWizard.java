@@ -60,7 +60,7 @@ import org.eclipselabs.mscript.typesystem.TypeSystemFactory;
  * <!-- end-user-doc -->
  * @generated NOT
  */
-public class ComputationModelModelWizard extends Wizard implements INewWizard {
+public class ComputationModelWizard extends Wizard implements INewWizard {
 	/**
 	 * The supported extensions for created files.
 	 * <!-- begin-user-doc -->
@@ -101,7 +101,7 @@ public class ComputationModelModelWizard extends Wizard implements INewWizard {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ComputationModelModelWizardNewFileCreationPage newFileCreationPage;
+	protected ComputationModelWizardNewFileCreationPage newFileCreationPage;
 
 	/**
 	 * Remember the selection during initialization for populating the default container.
@@ -257,16 +257,16 @@ public class ComputationModelModelWizard extends Wizard implements INewWizard {
 	 * This is the one page of the wizard.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-	public class ComputationModelModelWizardNewFileCreationPage extends WizardNewFileCreationPage {
+	public class ComputationModelWizardNewFileCreationPage extends WizardNewFileCreationPage {
 		/**
 		 * Pass in the selection.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public ComputationModelModelWizardNewFileCreationPage(String pageId, IStructuredSelection selection) {
+		public ComputationModelWizardNewFileCreationPage(String pageId, IStructuredSelection selection) {
 			super(pageId, selection);
 		}
 
@@ -310,9 +310,9 @@ public class ComputationModelModelWizard extends Wizard implements INewWizard {
 	public void addPages() {
 		// Create a page, set the title, and the initial model file name.
 		//
-		newFileCreationPage = new ComputationModelModelWizardNewFileCreationPage("Whatever", selection);
-		newFileCreationPage.setTitle(ComputationModelUIPlugin.INSTANCE.getString("_UI_ComputationModelModelWizard_label"));
-		newFileCreationPage.setDescription(ComputationModelUIPlugin.INSTANCE.getString("_UI_ComputationModelModelWizard_description"));
+		newFileCreationPage = new ComputationModelWizardNewFileCreationPage("Whatever", selection);
+		newFileCreationPage.setTitle(ComputationModelUIPlugin.INSTANCE.getString("_UI_ComputationModelWizard_label"));
+		newFileCreationPage.setDescription(ComputationModelUIPlugin.INSTANCE.getString("_UI_ComputationModelWizard_description"));
 		newFileCreationPage.setFileName(ComputationModelUIPlugin.INSTANCE.getString("_UI_ComputationModelEditorFilenameDefaultBase") + "." + FILE_EXTENSIONS.get(0));
 		addPage(newFileCreationPage);
 

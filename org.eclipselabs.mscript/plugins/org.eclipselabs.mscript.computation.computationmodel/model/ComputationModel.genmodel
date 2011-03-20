@@ -13,7 +13,8 @@
   <foreignModel>ComputationModel.ecore</foreignModel>
   <genPackages prefix="ComputationModel" basePackage="org.eclipselabs.mscript.computation"
       disposableProviderFactory="true" providerPackageSuffix="edit.provider" presentationPackageSuffix="ui.editor.presentation"
-      multipleEditorPages="false" contentTypeIdentifier="" ecorePackage="ComputationModel.ecore#/">
+      multipleEditorPages="false" generateModelWizard="false" contentTypeIdentifier=""
+      ecorePackage="ComputationModel.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="ComputationModel.ecore#//FloatingPointFormatKind">
       <genEnumLiterals ecoreEnumLiteral="ComputationModel.ecore#//FloatingPointFormatKind/Binary16"/>
       <genEnumLiterals ecoreEnumLiteral="ComputationModel.ecore#//FloatingPointFormatKind/Binary32"/>
