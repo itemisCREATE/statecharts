@@ -79,6 +79,11 @@ public abstract class AbstractExpressionsRuntimeModule extends DefaultRuntimeMod
 		return org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
+	public Class<? extends org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper> bindIUnorderedGroupHelper() {
+		return org.eclipse.xtext.parser.antlr.UnorderedGroupHelper.class;
+	}
+
 	// contributed by org.eclipse.xtext.generator.validation.JavaValidatorFragment
 	@org.eclipse.xtext.service.SingletonBinding(eager=true)	public Class<? extends org.yakindu.sct.statechart.validation.ExpressionsJavaValidator> bindExpressionsJavaValidator() {
 		return org.yakindu.sct.statechart.validation.ExpressionsJavaValidator.class;

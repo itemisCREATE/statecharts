@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
-
  */
 package org.yakindu.sct.statechart.expressions.impl;
 
@@ -20,10 +19,9 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.yakindu.sct.statechart.expressions.DefinitionScope;
 import org.yakindu.sct.statechart.expressions.ElementDefinition;
-import org.yakindu.sct.statechart.expressions.EventDefinition;
 import org.yakindu.sct.statechart.expressions.ExpressionsPackage;
-import org.yakindu.sct.statechart.expressions.VariableDefinition;
 
 /**
  * <!-- begin-user-doc -->
@@ -32,8 +30,7 @@ import org.yakindu.sct.statechart.expressions.VariableDefinition;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.yakindu.sct.statechart.expressions.impl.ElementDefinitionImpl#getVariables <em>Variables</em>}</li>
- *   <li>{@link org.yakindu.sct.statechart.expressions.impl.ElementDefinitionImpl#getEvents <em>Events</em>}</li>
+ *   <li>{@link org.yakindu.sct.statechart.expressions.impl.ElementDefinitionImpl#getDefinitionScopes <em>Definition Scopes</em>}</li>
  * </ul>
  * </p>
  *
@@ -42,24 +39,14 @@ import org.yakindu.sct.statechart.expressions.VariableDefinition;
 public class ElementDefinitionImpl extends MinimalEObjectImpl.Container implements ElementDefinition
 {
   /**
-   * The cached value of the '{@link #getVariables() <em>Variables</em>}' containment reference list.
+   * The cached value of the '{@link #getDefinitionScopes() <em>Definition Scopes</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getVariables()
+   * @see #getDefinitionScopes()
    * @generated
    * @ordered
    */
-  protected EList<VariableDefinition> variables;
-
-  /**
-   * The cached value of the '{@link #getEvents() <em>Events</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getEvents()
-   * @generated
-   * @ordered
-   */
-  protected EList<EventDefinition> events;
+  protected EList<DefinitionScope> definitionScopes;
 
   /**
    * <!-- begin-user-doc -->
@@ -87,27 +74,13 @@ public class ElementDefinitionImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<VariableDefinition> getVariables()
+  public EList<DefinitionScope> getDefinitionScopes()
   {
-    if (variables == null)
+    if (definitionScopes == null)
     {
-      variables = new EObjectContainmentEList<VariableDefinition>(VariableDefinition.class, this, ExpressionsPackage.ELEMENT_DEFINITION__VARIABLES);
+      definitionScopes = new EObjectContainmentEList<DefinitionScope>(DefinitionScope.class, this, ExpressionsPackage.ELEMENT_DEFINITION__DEFINITION_SCOPES);
     }
-    return variables;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EList<EventDefinition> getEvents()
-  {
-    if (events == null)
-    {
-      events = new EObjectContainmentEList<EventDefinition>(EventDefinition.class, this, ExpressionsPackage.ELEMENT_DEFINITION__EVENTS);
-    }
-    return events;
+    return definitionScopes;
   }
 
   /**
@@ -120,10 +93,8 @@ public class ElementDefinitionImpl extends MinimalEObjectImpl.Container implemen
   {
     switch (featureID)
     {
-      case ExpressionsPackage.ELEMENT_DEFINITION__VARIABLES:
-        return ((InternalEList<?>)getVariables()).basicRemove(otherEnd, msgs);
-      case ExpressionsPackage.ELEMENT_DEFINITION__EVENTS:
-        return ((InternalEList<?>)getEvents()).basicRemove(otherEnd, msgs);
+      case ExpressionsPackage.ELEMENT_DEFINITION__DEFINITION_SCOPES:
+        return ((InternalEList<?>)getDefinitionScopes()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -138,10 +109,8 @@ public class ElementDefinitionImpl extends MinimalEObjectImpl.Container implemen
   {
     switch (featureID)
     {
-      case ExpressionsPackage.ELEMENT_DEFINITION__VARIABLES:
-        return getVariables();
-      case ExpressionsPackage.ELEMENT_DEFINITION__EVENTS:
-        return getEvents();
+      case ExpressionsPackage.ELEMENT_DEFINITION__DEFINITION_SCOPES:
+        return getDefinitionScopes();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -157,13 +126,9 @@ public class ElementDefinitionImpl extends MinimalEObjectImpl.Container implemen
   {
     switch (featureID)
     {
-      case ExpressionsPackage.ELEMENT_DEFINITION__VARIABLES:
-        getVariables().clear();
-        getVariables().addAll((Collection<? extends VariableDefinition>)newValue);
-        return;
-      case ExpressionsPackage.ELEMENT_DEFINITION__EVENTS:
-        getEvents().clear();
-        getEvents().addAll((Collection<? extends EventDefinition>)newValue);
+      case ExpressionsPackage.ELEMENT_DEFINITION__DEFINITION_SCOPES:
+        getDefinitionScopes().clear();
+        getDefinitionScopes().addAll((Collection<? extends DefinitionScope>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -179,11 +144,8 @@ public class ElementDefinitionImpl extends MinimalEObjectImpl.Container implemen
   {
     switch (featureID)
     {
-      case ExpressionsPackage.ELEMENT_DEFINITION__VARIABLES:
-        getVariables().clear();
-        return;
-      case ExpressionsPackage.ELEMENT_DEFINITION__EVENTS:
-        getEvents().clear();
+      case ExpressionsPackage.ELEMENT_DEFINITION__DEFINITION_SCOPES:
+        getDefinitionScopes().clear();
         return;
     }
     super.eUnset(featureID);
@@ -199,10 +161,8 @@ public class ElementDefinitionImpl extends MinimalEObjectImpl.Container implemen
   {
     switch (featureID)
     {
-      case ExpressionsPackage.ELEMENT_DEFINITION__VARIABLES:
-        return variables != null && !variables.isEmpty();
-      case ExpressionsPackage.ELEMENT_DEFINITION__EVENTS:
-        return events != null && !events.isEmpty();
+      case ExpressionsPackage.ELEMENT_DEFINITION__DEFINITION_SCOPES:
+        return definitionScopes != null && !definitionScopes.isEmpty();
     }
     return super.eIsSet(featureID);
   }

@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
-
  */
 package org.yakindu.sct.statechart.expressions;
 
@@ -18,8 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.yakindu.sct.statechart.expressions.ElementDefinition#getVariables <em>Variables</em>}</li>
- *   <li>{@link org.yakindu.sct.statechart.expressions.ElementDefinition#getEvents <em>Events</em>}</li>
+ *   <li>{@link org.yakindu.sct.statechart.expressions.ElementDefinition#getDefinitionScopes <em>Definition Scopes</em>}</li>
  * </ul>
  * </p>
  *
@@ -30,35 +28,19 @@ import org.eclipse.emf.ecore.EObject;
 public interface ElementDefinition extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Variables</b></em>' containment reference list.
-   * The list contents are of type {@link org.yakindu.sct.statechart.expressions.VariableDefinition}.
+   * Returns the value of the '<em><b>Definition Scopes</b></em>' containment reference list.
+   * The list contents are of type {@link org.yakindu.sct.statechart.expressions.DefinitionScope}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Variables</em>' containment reference list isn't clear,
+   * If the meaning of the '<em>Definition Scopes</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Variables</em>' containment reference list.
-   * @see org.yakindu.sct.statechart.expressions.ExpressionsPackage#getElementDefinition_Variables()
+   * @return the value of the '<em>Definition Scopes</em>' containment reference list.
+   * @see org.yakindu.sct.statechart.expressions.ExpressionsPackage#getElementDefinition_DefinitionScopes()
    * @model containment="true"
    * @generated
    */
-  EList<VariableDefinition> getVariables();
-
-  /**
-   * Returns the value of the '<em><b>Events</b></em>' containment reference list.
-   * The list contents are of type {@link org.yakindu.sct.statechart.expressions.EventDefinition}.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Events</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Events</em>' containment reference list.
-   * @see org.yakindu.sct.statechart.expressions.ExpressionsPackage#getElementDefinition_Events()
-   * @model containment="true"
-   * @generated
-   */
-  EList<EventDefinition> getEvents();
+  EList<DefinitionScope> getDefinitionScopes();
 
 } // ElementDefinition

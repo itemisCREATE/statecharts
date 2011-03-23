@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
-
  */
 package org.yakindu.sct.statechart.expressions;
 
@@ -24,24 +23,34 @@ import org.eclipse.emf.common.util.Enumerator;
 public enum Type implements Enumerator
 {
   /**
-   * The '<em><b>Int</b></em>' literal object.
+   * The '<em><b>Void</b></em>' literal object.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #INT_VALUE
+   * @see #VOID_VALUE
    * @generated
    * @ordered
    */
-  INT(0, "int", "int"),
+  VOID(0, "void", "void"),
 
   /**
-   * The '<em><b>Float</b></em>' literal object.
+   * The '<em><b>Integer</b></em>' literal object.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #FLOAT_VALUE
+   * @see #INTEGER_VALUE
    * @generated
    * @ordered
    */
-  FLOAT(1, "float", "float"),
+  INTEGER(1, "integer", "integer"),
+
+  /**
+   * The '<em><b>Real</b></em>' literal object.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #REAL_VALUE
+   * @generated
+   * @ordered
+   */
+  REAL(2, "real", "real"),
 
   /**
    * The '<em><b>Boolean</b></em>' literal object.
@@ -51,37 +60,62 @@ public enum Type implements Enumerator
    * @generated
    * @ordered
    */
-  BOOLEAN(2, "boolean", "boolean");
+  BOOLEAN(3, "boolean", "boolean"),
 
   /**
-   * The '<em><b>Int</b></em>' literal value.
+   * The '<em><b>String</b></em>' literal object.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of '<em><b>Int</b></em>' literal object isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
-   * @see #INT
-   * @model name="int"
+   * @see #STRING_VALUE
    * @generated
    * @ordered
    */
-  public static final int INT_VALUE = 0;
+  STRING(4, "string", "string");
 
   /**
-   * The '<em><b>Float</b></em>' literal value.
+   * The '<em><b>Void</b></em>' literal value.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of '<em><b>Float</b></em>' literal object isn't clear,
+   * If the meaning of '<em><b>Void</b></em>' literal object isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @see #FLOAT
-   * @model name="float"
+   * @see #VOID
+   * @model name="void"
    * @generated
    * @ordered
    */
-  public static final int FLOAT_VALUE = 1;
+  public static final int VOID_VALUE = 0;
+
+  /**
+   * The '<em><b>Integer</b></em>' literal value.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of '<em><b>Integer</b></em>' literal object isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @see #INTEGER
+   * @model name="integer"
+   * @generated
+   * @ordered
+   */
+  public static final int INTEGER_VALUE = 1;
+
+  /**
+   * The '<em><b>Real</b></em>' literal value.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of '<em><b>Real</b></em>' literal object isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @see #REAL
+   * @model name="real"
+   * @generated
+   * @ordered
+   */
+  public static final int REAL_VALUE = 2;
 
   /**
    * The '<em><b>Boolean</b></em>' literal value.
@@ -96,7 +130,22 @@ public enum Type implements Enumerator
    * @generated
    * @ordered
    */
-  public static final int BOOLEAN_VALUE = 2;
+  public static final int BOOLEAN_VALUE = 3;
+
+  /**
+   * The '<em><b>String</b></em>' literal value.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of '<em><b>String</b></em>' literal object isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @see #STRING
+   * @model name="string"
+   * @generated
+   * @ordered
+   */
+  public static final int STRING_VALUE = 4;
 
   /**
    * An array of all the '<em><b>Type</b></em>' enumerators.
@@ -107,9 +156,11 @@ public enum Type implements Enumerator
   private static final Type[] VALUES_ARRAY =
     new Type[]
     {
-      INT,
-      FLOAT,
+      VOID,
+      INTEGER,
+      REAL,
       BOOLEAN,
+      STRING,
     };
 
   /**
@@ -168,9 +219,11 @@ public enum Type implements Enumerator
   {
     switch (value)
     {
-      case INT_VALUE: return INT;
-      case FLOAT_VALUE: return FLOAT;
+      case VOID_VALUE: return VOID;
+      case INTEGER_VALUE: return INTEGER;
+      case REAL_VALUE: return REAL;
       case BOOLEAN_VALUE: return BOOLEAN;
+      case STRING_VALUE: return STRING;
     }
     return null;
   }

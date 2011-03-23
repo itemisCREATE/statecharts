@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
-
  */
 package org.yakindu.sct.statechart.expressions.impl;
 
@@ -17,17 +16,26 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.yakindu.model.sct.statechart.StatechartPackage;
 
 import org.yakindu.sct.statechart.expressions.AdditiveOperator;
+import org.yakindu.sct.statechart.expressions.Clock;
 import org.yakindu.sct.statechart.expressions.CustomTransitionExpression;
+import org.yakindu.sct.statechart.expressions.Definition;
+import org.yakindu.sct.statechart.expressions.DefinitionScope;
+import org.yakindu.sct.statechart.expressions.Direction;
 import org.yakindu.sct.statechart.expressions.DirectionKind;
 import org.yakindu.sct.statechart.expressions.ElementDefinition;
 import org.yakindu.sct.statechart.expressions.EntryExpression;
 import org.yakindu.sct.statechart.expressions.EntryRule;
+import org.yakindu.sct.statechart.expressions.Entrypoint;
 import org.yakindu.sct.statechart.expressions.EventDefinition;
+import org.yakindu.sct.statechart.expressions.EventDerivation;
 import org.yakindu.sct.statechart.expressions.ExitExpression;
+import org.yakindu.sct.statechart.expressions.Exitpoint;
 import org.yakindu.sct.statechart.expressions.Expression;
 import org.yakindu.sct.statechart.expressions.ExpressionRule;
 import org.yakindu.sct.statechart.expressions.ExpressionsFactory;
 import org.yakindu.sct.statechart.expressions.ExpressionsPackage;
+import org.yakindu.sct.statechart.expressions.InterfaceScope;
+import org.yakindu.sct.statechart.expressions.InternalScope;
 import org.yakindu.sct.statechart.expressions.LogicalAndExpression;
 import org.yakindu.sct.statechart.expressions.LogicalNotExpression;
 import org.yakindu.sct.statechart.expressions.LogicalOrExpression;
@@ -37,6 +45,7 @@ import org.yakindu.sct.statechart.expressions.NumericalAddSubtractExpression;
 import org.yakindu.sct.statechart.expressions.NumericalMultiplyDivideExpression;
 import org.yakindu.sct.statechart.expressions.NumericalUnaryExpression;
 import org.yakindu.sct.statechart.expressions.OnTickExpression;
+import org.yakindu.sct.statechart.expressions.Operation;
 import org.yakindu.sct.statechart.expressions.PrimitiveValueExpression;
 import org.yakindu.sct.statechart.expressions.PropertyReferenceExpression;
 import org.yakindu.sct.statechart.expressions.RaiseEventExpression;
@@ -109,6 +118,34 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass definitionScopeEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass interfaceScopeEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass internalScopeEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass definitionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass variableDefinitionEClass = null;
 
   /**
@@ -117,6 +154,41 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
    * @generated
    */
   private EClass eventDefinitionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eventDerivationEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass operationEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass entrypointEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass exitpointEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass clockEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -201,6 +273,13 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
    * @generated
    */
   private EClass propertyReferenceExpressionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EEnum directionEEnum = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -492,7 +571,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getElementDefinition_Variables()
+  public EReference getElementDefinition_DefinitionScopes()
   {
     return (EReference)elementDefinitionEClass.getEStructuralFeatures().get(0);
   }
@@ -502,9 +581,59 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getElementDefinition_Events()
+  public EClass getDefinitionScope()
   {
-    return (EReference)elementDefinitionEClass.getEStructuralFeatures().get(1);
+    return definitionScopeEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getDefinitionScope_Definitions()
+  {
+    return (EReference)definitionScopeEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getInterfaceScope()
+  {
+    return interfaceScopeEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getInterfaceScope_Name()
+  {
+    return (EAttribute)interfaceScopeEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getInternalScope()
+  {
+    return internalScopeEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getDefinition()
+  {
+    return definitionEClass;
   }
 
   /**
@@ -522,7 +651,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getVariableDefinition_Type()
+  public EAttribute getVariableDefinition_Readonly()
   {
     return (EAttribute)variableDefinitionEClass.getEStructuralFeatures().get(0);
   }
@@ -532,7 +661,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getVariableDefinition_Name()
+  public EAttribute getVariableDefinition_External()
   {
     return (EAttribute)variableDefinitionEClass.getEStructuralFeatures().get(1);
   }
@@ -542,9 +671,29 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getVariableDefinition_Value()
+  public EAttribute getVariableDefinition_Name()
   {
     return (EAttribute)variableDefinitionEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getVariableDefinition_Type()
+  {
+    return (EAttribute)variableDefinitionEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getVariableDefinition_Value()
+  {
+    return (EAttribute)variableDefinitionEClass.getEStructuralFeatures().get(4);
   }
 
   /**
@@ -562,9 +711,169 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getEventDefinition_Name()
+  public EAttribute getEventDefinition_Direction()
   {
     return (EAttribute)eventDefinitionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getEventDefinition_Name()
+  {
+    return (EAttribute)eventDefinitionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getEventDefinition_Type()
+  {
+    return (EAttribute)eventDefinitionEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getEventDefinition_Derivation()
+  {
+    return (EReference)eventDefinitionEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getEventDerivation()
+  {
+    return eventDerivationEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getEventDerivation_Condition()
+  {
+    return (EReference)eventDerivationEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getEventDerivation_Value()
+  {
+    return (EReference)eventDerivationEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getOperation()
+  {
+    return operationEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getOperation_Name()
+  {
+    return (EAttribute)operationEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getOperation_ParamTypes()
+  {
+    return (EAttribute)operationEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getOperation_Type()
+  {
+    return (EAttribute)operationEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getEntrypoint()
+  {
+    return entrypointEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getEntrypoint_Name()
+  {
+    return (EAttribute)entrypointEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getExitpoint()
+  {
+    return exitpointEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getExitpoint_Name()
+  {
+    return (EAttribute)exitpointEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getClock()
+  {
+    return clockEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getClock_Name()
+  {
+    return (EAttribute)clockEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -892,6 +1201,16 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
    * <!-- end-user-doc -->
    * @generated
    */
+  public EEnum getDirection()
+  {
+    return directionEEnum;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EEnum getAdditiveOperator()
   {
     return additiveOperatorEEnum;
@@ -1010,16 +1329,48 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
     createEReference(customTransitionExpressionEClass, CUSTOM_TRANSITION_EXPRESSION__ACTION);
 
     elementDefinitionEClass = createEClass(ELEMENT_DEFINITION);
-    createEReference(elementDefinitionEClass, ELEMENT_DEFINITION__VARIABLES);
-    createEReference(elementDefinitionEClass, ELEMENT_DEFINITION__EVENTS);
+    createEReference(elementDefinitionEClass, ELEMENT_DEFINITION__DEFINITION_SCOPES);
+
+    definitionScopeEClass = createEClass(DEFINITION_SCOPE);
+    createEReference(definitionScopeEClass, DEFINITION_SCOPE__DEFINITIONS);
+
+    interfaceScopeEClass = createEClass(INTERFACE_SCOPE);
+    createEAttribute(interfaceScopeEClass, INTERFACE_SCOPE__NAME);
+
+    internalScopeEClass = createEClass(INTERNAL_SCOPE);
+
+    definitionEClass = createEClass(DEFINITION);
 
     variableDefinitionEClass = createEClass(VARIABLE_DEFINITION);
-    createEAttribute(variableDefinitionEClass, VARIABLE_DEFINITION__TYPE);
+    createEAttribute(variableDefinitionEClass, VARIABLE_DEFINITION__READONLY);
+    createEAttribute(variableDefinitionEClass, VARIABLE_DEFINITION__EXTERNAL);
     createEAttribute(variableDefinitionEClass, VARIABLE_DEFINITION__NAME);
+    createEAttribute(variableDefinitionEClass, VARIABLE_DEFINITION__TYPE);
     createEAttribute(variableDefinitionEClass, VARIABLE_DEFINITION__VALUE);
 
     eventDefinitionEClass = createEClass(EVENT_DEFINITION);
+    createEAttribute(eventDefinitionEClass, EVENT_DEFINITION__DIRECTION);
     createEAttribute(eventDefinitionEClass, EVENT_DEFINITION__NAME);
+    createEAttribute(eventDefinitionEClass, EVENT_DEFINITION__TYPE);
+    createEReference(eventDefinitionEClass, EVENT_DEFINITION__DERIVATION);
+
+    eventDerivationEClass = createEClass(EVENT_DERIVATION);
+    createEReference(eventDerivationEClass, EVENT_DERIVATION__CONDITION);
+    createEReference(eventDerivationEClass, EVENT_DERIVATION__VALUE);
+
+    operationEClass = createEClass(OPERATION);
+    createEAttribute(operationEClass, OPERATION__NAME);
+    createEAttribute(operationEClass, OPERATION__PARAM_TYPES);
+    createEAttribute(operationEClass, OPERATION__TYPE);
+
+    entrypointEClass = createEClass(ENTRYPOINT);
+    createEAttribute(entrypointEClass, ENTRYPOINT__NAME);
+
+    exitpointEClass = createEClass(EXITPOINT);
+    createEAttribute(exitpointEClass, EXITPOINT__NAME);
+
+    clockEClass = createEClass(CLOCK);
+    createEAttribute(clockEClass, CLOCK__NAME);
 
     expressionRuleEClass = createEClass(EXPRESSION_RULE);
     createEReference(expressionRuleEClass, EXPRESSION_RULE__EXPRESSION);
@@ -1066,6 +1417,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
     createEReference(propertyReferenceExpressionEClass, PROPERTY_REFERENCE_EXPRESSION__VALUE);
 
     // Create enums
+    directionEEnum = createEEnum(DIRECTION);
     additiveOperatorEEnum = createEEnum(ADDITIVE_OPERATOR);
     multiplicativeOperatorEEnum = createEEnum(MULTIPLICATIVE_OPERATOR);
     unaryOperatorEEnum = createEEnum(UNARY_OPERATOR);
@@ -1107,6 +1459,15 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
     // Set bounds for type parameters
 
     // Add supertypes to classes
+    customTransitionExpressionEClass.getESuperTypes().add(this.getDefinition());
+    interfaceScopeEClass.getESuperTypes().add(this.getDefinitionScope());
+    internalScopeEClass.getESuperTypes().add(this.getDefinitionScope());
+    variableDefinitionEClass.getESuperTypes().add(this.getDefinition());
+    eventDefinitionEClass.getESuperTypes().add(this.getDefinition());
+    operationEClass.getESuperTypes().add(this.getDefinition());
+    entrypointEClass.getESuperTypes().add(this.getDefinition());
+    exitpointEClass.getESuperTypes().add(this.getDefinition());
+    clockEClass.getESuperTypes().add(this.getDefinition());
     logicalOrExpressionEClass.getESuperTypes().add(this.getExpression());
     logicalAndExpressionEClass.getESuperTypes().add(this.getExpression());
     logicalNotExpressionEClass.getESuperTypes().add(this.getExpression());
@@ -1141,16 +1502,48 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
     initEReference(getCustomTransitionExpression_Action(), this.getExpressionRule(), null, "action", null, 0, 1, CustomTransitionExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(elementDefinitionEClass, ElementDefinition.class, "ElementDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getElementDefinition_Variables(), this.getVariableDefinition(), null, "variables", null, 0, -1, ElementDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getElementDefinition_Events(), this.getEventDefinition(), null, "events", null, 0, -1, ElementDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getElementDefinition_DefinitionScopes(), this.getDefinitionScope(), null, "definitionScopes", null, 0, -1, ElementDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(definitionScopeEClass, DefinitionScope.class, "DefinitionScope", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getDefinitionScope_Definitions(), this.getDefinition(), null, "definitions", null, 0, -1, DefinitionScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(interfaceScopeEClass, InterfaceScope.class, "InterfaceScope", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getInterfaceScope_Name(), ecorePackage.getEString(), "name", null, 0, 1, InterfaceScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(internalScopeEClass, InternalScope.class, "InternalScope", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(definitionEClass, Definition.class, "Definition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(variableDefinitionEClass, VariableDefinition.class, "VariableDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getVariableDefinition_Type(), this.getType(), "type", null, 0, 1, VariableDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getVariableDefinition_Readonly(), ecorePackage.getEBoolean(), "readonly", null, 0, 1, VariableDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getVariableDefinition_External(), ecorePackage.getEBoolean(), "external", null, 0, 1, VariableDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getVariableDefinition_Name(), ecorePackage.getEString(), "name", null, 0, 1, VariableDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getVariableDefinition_Type(), this.getType(), "type", null, 0, 1, VariableDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getVariableDefinition_Value(), ecorePackage.getEString(), "value", null, 0, 1, VariableDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eventDefinitionEClass, EventDefinition.class, "EventDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getEventDefinition_Direction(), this.getDirection(), "direction", null, 0, 1, EventDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getEventDefinition_Name(), ecorePackage.getEString(), "name", null, 0, 1, EventDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getEventDefinition_Type(), this.getType(), "type", null, 0, 1, EventDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEventDefinition_Derivation(), this.getEventDerivation(), null, "derivation", null, 0, 1, EventDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eventDerivationEClass, EventDerivation.class, "EventDerivation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getEventDerivation_Condition(), this.getExpressionRule(), null, "condition", null, 0, 1, EventDerivation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEventDerivation_Value(), this.getExpressionRule(), null, "value", null, 0, 1, EventDerivation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(operationEClass, Operation.class, "Operation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getOperation_Name(), ecorePackage.getEString(), "name", null, 0, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getOperation_ParamTypes(), this.getType(), "paramTypes", null, 0, -1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getOperation_Type(), this.getType(), "type", null, 0, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(entrypointEClass, Entrypoint.class, "Entrypoint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getEntrypoint_Name(), ecorePackage.getEString(), "name", null, 0, 1, Entrypoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(exitpointEClass, Exitpoint.class, "Exitpoint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getExitpoint_Name(), ecorePackage.getEString(), "name", null, 0, 1, Exitpoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(clockEClass, Clock.class, "Clock", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getClock_Name(), ecorePackage.getEString(), "name", null, 0, 1, Clock.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(expressionRuleEClass, ExpressionRule.class, "ExpressionRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getExpressionRule_Expression(), ecorePackage.getEObject(), null, "expression", null, 0, 1, ExpressionRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1197,6 +1590,10 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
     initEReference(getPropertyReferenceExpression_Value(), theStatechartPackage.getVariable(), null, "value", null, 0, 1, PropertyReferenceExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Initialize enums and add enum literals
+    initEEnum(directionEEnum, Direction.class, "Direction");
+    addEEnumLiteral(directionEEnum, Direction.IN);
+    addEEnumLiteral(directionEEnum, Direction.OUT);
+
     initEEnum(additiveOperatorEEnum, AdditiveOperator.class, "AdditiveOperator");
     addEEnumLiteral(additiveOperatorEEnum, AdditiveOperator.PLUS);
     addEEnumLiteral(additiveOperatorEEnum, AdditiveOperator.MINUS);
@@ -1229,9 +1626,11 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
     addEEnumLiteral(timeUnitEEnum, TimeUnit.NANOSECOND);
 
     initEEnum(typeEEnum, Type.class, "Type");
-    addEEnumLiteral(typeEEnum, Type.INT);
-    addEEnumLiteral(typeEEnum, Type.FLOAT);
+    addEEnumLiteral(typeEEnum, Type.VOID);
+    addEEnumLiteral(typeEEnum, Type.INTEGER);
+    addEEnumLiteral(typeEEnum, Type.REAL);
     addEEnumLiteral(typeEEnum, Type.BOOLEAN);
+    addEEnumLiteral(typeEEnum, Type.STRING);
 
     // Create resource
     createResource(eNS_URI);

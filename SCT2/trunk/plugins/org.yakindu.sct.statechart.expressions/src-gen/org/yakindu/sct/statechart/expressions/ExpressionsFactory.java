@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
-
  */
 package org.yakindu.sct.statechart.expressions;
 
@@ -90,6 +89,42 @@ public interface ExpressionsFactory extends EFactory
   ElementDefinition createElementDefinition();
 
   /**
+   * Returns a new object of class '<em>Definition Scope</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Definition Scope</em>'.
+   * @generated
+   */
+  DefinitionScope createDefinitionScope();
+
+  /**
+   * Returns a new object of class '<em>Interface Scope</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Interface Scope</em>'.
+   * @generated
+   */
+  InterfaceScope createInterfaceScope();
+
+  /**
+   * Returns a new object of class '<em>Internal Scope</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Internal Scope</em>'.
+   * @generated
+   */
+  InternalScope createInternalScope();
+
+  /**
+   * Returns a new object of class '<em>Definition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Definition</em>'.
+   * @generated
+   */
+  Definition createDefinition();
+
+  /**
    * Returns a new object of class '<em>Variable Definition</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -106,6 +141,51 @@ public interface ExpressionsFactory extends EFactory
    * @generated
    */
   EventDefinition createEventDefinition();
+
+  /**
+   * Returns a new object of class '<em>Event Derivation</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Event Derivation</em>'.
+   * @generated
+   */
+  EventDerivation createEventDerivation();
+
+  /**
+   * Returns a new object of class '<em>Operation</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Operation</em>'.
+   * @generated
+   */
+  Operation createOperation();
+
+  /**
+   * Returns a new object of class '<em>Entrypoint</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Entrypoint</em>'.
+   * @generated
+   */
+  Entrypoint createEntrypoint();
+
+  /**
+   * Returns a new object of class '<em>Exitpoint</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Exitpoint</em>'.
+   * @generated
+   */
+  Exitpoint createExitpoint();
+
+  /**
+   * Returns a new object of class '<em>Clock</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Clock</em>'.
+   * @generated
+   */
+  Clock createClock();
 
   /**
    * Returns a new object of class '<em>Expression Rule</em>'.

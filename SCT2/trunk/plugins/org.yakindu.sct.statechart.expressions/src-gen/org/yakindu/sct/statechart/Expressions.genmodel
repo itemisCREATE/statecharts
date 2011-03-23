@@ -9,6 +9,10 @@
     editorPluginID="org.yakindu.sct.statechart.expressions.editor" usedGenPackages="../../../../../../org.yakindu.sct.model.statechart/model/emf/statechart.genmodel#//statechart">
   <genPackages prefix="Expressions" basePackage="org.yakindu.sct.statechart" disposableProviderFactory="true"
       ecorePackage="Expressions.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Expressions.ecore#//Direction">
+      <genEnumLiterals ecoreEnumLiteral="Expressions.ecore#//Direction/IN"/>
+      <genEnumLiterals ecoreEnumLiteral="Expressions.ecore#//Direction/OUT"/>
+    </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="Expressions.ecore#//AdditiveOperator">
       <genEnumLiterals ecoreEnumLiteral="Expressions.ecore#//AdditiveOperator/plus"/>
       <genEnumLiterals ecoreEnumLiteral="Expressions.ecore#//AdditiveOperator/minus"/>
@@ -41,9 +45,11 @@
       <genEnumLiterals ecoreEnumLiteral="Expressions.ecore#//TimeUnit/nanosecond"/>
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="Expressions.ecore#//Type">
-      <genEnumLiterals ecoreEnumLiteral="Expressions.ecore#//Type/int"/>
-      <genEnumLiterals ecoreEnumLiteral="Expressions.ecore#//Type/float"/>
+      <genEnumLiterals ecoreEnumLiteral="Expressions.ecore#//Type/void"/>
+      <genEnumLiterals ecoreEnumLiteral="Expressions.ecore#//Type/integer"/>
+      <genEnumLiterals ecoreEnumLiteral="Expressions.ecore#//Type/real"/>
       <genEnumLiterals ecoreEnumLiteral="Expressions.ecore#//Type/boolean"/>
+      <genEnumLiterals ecoreEnumLiteral="Expressions.ecore#//Type/string"/>
     </genEnums>
     <genClasses ecoreClass="Expressions.ecore#//EntryRule">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//EntryRule/entry"/>
@@ -68,16 +74,46 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//CustomTransitionExpression/action"/>
     </genClasses>
     <genClasses ecoreClass="Expressions.ecore#//ElementDefinition">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//ElementDefinition/variables"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//ElementDefinition/events"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//ElementDefinition/definitionScopes"/>
     </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//DefinitionScope">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//DefinitionScope/definitions"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//InterfaceScope">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//InterfaceScope/name"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//InternalScope"/>
+    <genClasses ecoreClass="Expressions.ecore#//Definition"/>
     <genClasses ecoreClass="Expressions.ecore#//VariableDefinition">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//VariableDefinition/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//VariableDefinition/readonly"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//VariableDefinition/external"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//VariableDefinition/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//VariableDefinition/type"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//VariableDefinition/value"/>
     </genClasses>
     <genClasses ecoreClass="Expressions.ecore#//EventDefinition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//EventDefinition/direction"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//EventDefinition/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//EventDefinition/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//EventDefinition/derivation"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//EventDerivation">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//EventDerivation/condition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//EventDerivation/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//Operation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//Operation/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//Operation/paramTypes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//Operation/type"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//Entrypoint">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//Entrypoint/name"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//Exitpoint">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//Exitpoint/name"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//Clock">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//Clock/name"/>
     </genClasses>
     <genClasses ecoreClass="Expressions.ecore#//ExpressionRule">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//ExpressionRule/expression"/>
