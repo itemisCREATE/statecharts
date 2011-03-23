@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
-
  */
 package org.yakindu.sct.statechart.expressions;
 
@@ -220,6 +219,25 @@ public interface ExpressionsPackage extends EPackage
   int ON_TICK_EXPRESSION_FEATURE_COUNT = 1;
 
   /**
+   * The meta object id for the '{@link org.yakindu.sct.statechart.expressions.impl.DefinitionImpl <em>Definition</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.yakindu.sct.statechart.expressions.impl.DefinitionImpl
+   * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getDefinition()
+   * @generated
+   */
+  int DEFINITION = 10;
+
+  /**
+   * The number of structural features of the '<em>Definition</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DEFINITION_FEATURE_COUNT = 0;
+
+  /**
    * The meta object id for the '{@link org.yakindu.sct.statechart.expressions.impl.CustomTransitionExpressionImpl <em>Custom Transition Expression</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -236,7 +254,7 @@ public interface ExpressionsPackage extends EPackage
    * @generated
    * @ordered
    */
-  int CUSTOM_TRANSITION_EXPRESSION__TRIGGERS = 0;
+  int CUSTOM_TRANSITION_EXPRESSION__TRIGGERS = DEFINITION_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Guard Expression</b></em>' containment reference.
@@ -245,7 +263,7 @@ public interface ExpressionsPackage extends EPackage
    * @generated
    * @ordered
    */
-  int CUSTOM_TRANSITION_EXPRESSION__GUARD_EXPRESSION = 1;
+  int CUSTOM_TRANSITION_EXPRESSION__GUARD_EXPRESSION = DEFINITION_FEATURE_COUNT + 1;
 
   /**
    * The feature id for the '<em><b>Action</b></em>' containment reference.
@@ -254,7 +272,7 @@ public interface ExpressionsPackage extends EPackage
    * @generated
    * @ordered
    */
-  int CUSTOM_TRANSITION_EXPRESSION__ACTION = 2;
+  int CUSTOM_TRANSITION_EXPRESSION__ACTION = DEFINITION_FEATURE_COUNT + 2;
 
   /**
    * The number of structural features of the '<em>Custom Transition Expression</em>' class.
@@ -263,7 +281,7 @@ public interface ExpressionsPackage extends EPackage
    * @generated
    * @ordered
    */
-  int CUSTOM_TRANSITION_EXPRESSION_FEATURE_COUNT = 3;
+  int CUSTOM_TRANSITION_EXPRESSION_FEATURE_COUNT = DEFINITION_FEATURE_COUNT + 3;
 
   /**
    * The meta object id for the '{@link org.yakindu.sct.statechart.expressions.impl.ElementDefinitionImpl <em>Element Definition</em>}' class.
@@ -276,22 +294,13 @@ public interface ExpressionsPackage extends EPackage
   int ELEMENT_DEFINITION = 6;
 
   /**
-   * The feature id for the '<em><b>Variables</b></em>' containment reference list.
+   * The feature id for the '<em><b>Definition Scopes</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ELEMENT_DEFINITION__VARIABLES = 0;
-
-  /**
-   * The feature id for the '<em><b>Events</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ELEMENT_DEFINITION__EVENTS = 1;
+  int ELEMENT_DEFINITION__DEFINITION_SCOPES = 0;
 
   /**
    * The number of structural features of the '<em>Element Definition</em>' class.
@@ -300,7 +309,100 @@ public interface ExpressionsPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ELEMENT_DEFINITION_FEATURE_COUNT = 2;
+  int ELEMENT_DEFINITION_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.yakindu.sct.statechart.expressions.impl.DefinitionScopeImpl <em>Definition Scope</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.yakindu.sct.statechart.expressions.impl.DefinitionScopeImpl
+   * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getDefinitionScope()
+   * @generated
+   */
+  int DEFINITION_SCOPE = 7;
+
+  /**
+   * The feature id for the '<em><b>Definitions</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DEFINITION_SCOPE__DEFINITIONS = 0;
+
+  /**
+   * The number of structural features of the '<em>Definition Scope</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DEFINITION_SCOPE_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.yakindu.sct.statechart.expressions.impl.InterfaceScopeImpl <em>Interface Scope</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.yakindu.sct.statechart.expressions.impl.InterfaceScopeImpl
+   * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getInterfaceScope()
+   * @generated
+   */
+  int INTERFACE_SCOPE = 8;
+
+  /**
+   * The feature id for the '<em><b>Definitions</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int INTERFACE_SCOPE__DEFINITIONS = DEFINITION_SCOPE__DEFINITIONS;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int INTERFACE_SCOPE__NAME = DEFINITION_SCOPE_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Interface Scope</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int INTERFACE_SCOPE_FEATURE_COUNT = DEFINITION_SCOPE_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.yakindu.sct.statechart.expressions.impl.InternalScopeImpl <em>Internal Scope</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.yakindu.sct.statechart.expressions.impl.InternalScopeImpl
+   * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getInternalScope()
+   * @generated
+   */
+  int INTERNAL_SCOPE = 9;
+
+  /**
+   * The feature id for the '<em><b>Definitions</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int INTERNAL_SCOPE__DEFINITIONS = DEFINITION_SCOPE__DEFINITIONS;
+
+  /**
+   * The number of structural features of the '<em>Internal Scope</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int INTERNAL_SCOPE_FEATURE_COUNT = DEFINITION_SCOPE_FEATURE_COUNT + 0;
 
   /**
    * The meta object id for the '{@link org.yakindu.sct.statechart.expressions.impl.VariableDefinitionImpl <em>Variable Definition</em>}' class.
@@ -310,16 +412,25 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getVariableDefinition()
    * @generated
    */
-  int VARIABLE_DEFINITION = 7;
+  int VARIABLE_DEFINITION = 11;
 
   /**
-   * The feature id for the '<em><b>Type</b></em>' attribute.
+   * The feature id for the '<em><b>Readonly</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int VARIABLE_DEFINITION__TYPE = 0;
+  int VARIABLE_DEFINITION__READONLY = DEFINITION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>External</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VARIABLE_DEFINITION__EXTERNAL = DEFINITION_FEATURE_COUNT + 1;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -328,7 +439,16 @@ public interface ExpressionsPackage extends EPackage
    * @generated
    * @ordered
    */
-  int VARIABLE_DEFINITION__NAME = 1;
+  int VARIABLE_DEFINITION__NAME = DEFINITION_FEATURE_COUNT + 2;
+
+  /**
+   * The feature id for the '<em><b>Type</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VARIABLE_DEFINITION__TYPE = DEFINITION_FEATURE_COUNT + 3;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -337,7 +457,7 @@ public interface ExpressionsPackage extends EPackage
    * @generated
    * @ordered
    */
-  int VARIABLE_DEFINITION__VALUE = 2;
+  int VARIABLE_DEFINITION__VALUE = DEFINITION_FEATURE_COUNT + 4;
 
   /**
    * The number of structural features of the '<em>Variable Definition</em>' class.
@@ -346,7 +466,7 @@ public interface ExpressionsPackage extends EPackage
    * @generated
    * @ordered
    */
-  int VARIABLE_DEFINITION_FEATURE_COUNT = 3;
+  int VARIABLE_DEFINITION_FEATURE_COUNT = DEFINITION_FEATURE_COUNT + 5;
 
   /**
    * The meta object id for the '{@link org.yakindu.sct.statechart.expressions.impl.EventDefinitionImpl <em>Event Definition</em>}' class.
@@ -356,7 +476,16 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getEventDefinition()
    * @generated
    */
-  int EVENT_DEFINITION = 8;
+  int EVENT_DEFINITION = 12;
+
+  /**
+   * The feature id for the '<em><b>Direction</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EVENT_DEFINITION__DIRECTION = DEFINITION_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -365,7 +494,25 @@ public interface ExpressionsPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EVENT_DEFINITION__NAME = 0;
+  int EVENT_DEFINITION__NAME = DEFINITION_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Type</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EVENT_DEFINITION__TYPE = DEFINITION_FEATURE_COUNT + 2;
+
+  /**
+   * The feature id for the '<em><b>Derivation</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EVENT_DEFINITION__DERIVATION = DEFINITION_FEATURE_COUNT + 3;
 
   /**
    * The number of structural features of the '<em>Event Definition</em>' class.
@@ -374,7 +521,174 @@ public interface ExpressionsPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EVENT_DEFINITION_FEATURE_COUNT = 1;
+  int EVENT_DEFINITION_FEATURE_COUNT = DEFINITION_FEATURE_COUNT + 4;
+
+  /**
+   * The meta object id for the '{@link org.yakindu.sct.statechart.expressions.impl.EventDerivationImpl <em>Event Derivation</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.yakindu.sct.statechart.expressions.impl.EventDerivationImpl
+   * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getEventDerivation()
+   * @generated
+   */
+  int EVENT_DERIVATION = 13;
+
+  /**
+   * The feature id for the '<em><b>Condition</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EVENT_DERIVATION__CONDITION = 0;
+
+  /**
+   * The feature id for the '<em><b>Value</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EVENT_DERIVATION__VALUE = 1;
+
+  /**
+   * The number of structural features of the '<em>Event Derivation</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EVENT_DERIVATION_FEATURE_COUNT = 2;
+
+  /**
+   * The meta object id for the '{@link org.yakindu.sct.statechart.expressions.impl.OperationImpl <em>Operation</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.yakindu.sct.statechart.expressions.impl.OperationImpl
+   * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getOperation()
+   * @generated
+   */
+  int OPERATION = 14;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OPERATION__NAME = DEFINITION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Param Types</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OPERATION__PARAM_TYPES = DEFINITION_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Type</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OPERATION__TYPE = DEFINITION_FEATURE_COUNT + 2;
+
+  /**
+   * The number of structural features of the '<em>Operation</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OPERATION_FEATURE_COUNT = DEFINITION_FEATURE_COUNT + 3;
+
+  /**
+   * The meta object id for the '{@link org.yakindu.sct.statechart.expressions.impl.EntrypointImpl <em>Entrypoint</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.yakindu.sct.statechart.expressions.impl.EntrypointImpl
+   * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getEntrypoint()
+   * @generated
+   */
+  int ENTRYPOINT = 15;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ENTRYPOINT__NAME = DEFINITION_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Entrypoint</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ENTRYPOINT_FEATURE_COUNT = DEFINITION_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.yakindu.sct.statechart.expressions.impl.ExitpointImpl <em>Exitpoint</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.yakindu.sct.statechart.expressions.impl.ExitpointImpl
+   * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getExitpoint()
+   * @generated
+   */
+  int EXITPOINT = 16;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EXITPOINT__NAME = DEFINITION_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Exitpoint</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EXITPOINT_FEATURE_COUNT = DEFINITION_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.yakindu.sct.statechart.expressions.impl.ClockImpl <em>Clock</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.yakindu.sct.statechart.expressions.impl.ClockImpl
+   * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getClock()
+   * @generated
+   */
+  int CLOCK = 17;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CLOCK__NAME = DEFINITION_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Clock</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CLOCK_FEATURE_COUNT = DEFINITION_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.yakindu.sct.statechart.expressions.impl.ExpressionRuleImpl <em>Expression Rule</em>}' class.
@@ -384,7 +698,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getExpressionRule()
    * @generated
    */
-  int EXPRESSION_RULE = 9;
+  int EXPRESSION_RULE = 18;
 
   /**
    * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -412,7 +726,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getRaiseEventExpression()
    * @generated
    */
-  int RAISE_EVENT_EXPRESSION = 10;
+  int RAISE_EVENT_EXPRESSION = 19;
 
   /**
    * The feature id for the '<em><b>Event</b></em>' reference.
@@ -440,7 +754,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getExpression()
    * @generated
    */
-  int EXPRESSION = 11;
+  int EXPRESSION = 20;
 
   /**
    * The number of structural features of the '<em>Expression</em>' class.
@@ -459,7 +773,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getLogicalOrExpression()
    * @generated
    */
-  int LOGICAL_OR_EXPRESSION = 12;
+  int LOGICAL_OR_EXPRESSION = 21;
 
   /**
    * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -496,7 +810,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getLogicalAndExpression()
    * @generated
    */
-  int LOGICAL_AND_EXPRESSION = 13;
+  int LOGICAL_AND_EXPRESSION = 22;
 
   /**
    * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -533,7 +847,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getLogicalNotExpression()
    * @generated
    */
-  int LOGICAL_NOT_EXPRESSION = 14;
+  int LOGICAL_NOT_EXPRESSION = 23;
 
   /**
    * The feature id for the '<em><b>Operand</b></em>' containment reference.
@@ -561,7 +875,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getLogicalRelationExpression()
    * @generated
    */
-  int LOGICAL_RELATION_EXPRESSION = 15;
+  int LOGICAL_RELATION_EXPRESSION = 24;
 
   /**
    * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -607,7 +921,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getNumericalAddSubtractExpression()
    * @generated
    */
-  int NUMERICAL_ADD_SUBTRACT_EXPRESSION = 16;
+  int NUMERICAL_ADD_SUBTRACT_EXPRESSION = 25;
 
   /**
    * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -653,7 +967,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getNumericalMultiplyDivideExpression()
    * @generated
    */
-  int NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION = 17;
+  int NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION = 26;
 
   /**
    * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -699,7 +1013,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getNumericalUnaryExpression()
    * @generated
    */
-  int NUMERICAL_UNARY_EXPRESSION = 18;
+  int NUMERICAL_UNARY_EXPRESSION = 27;
 
   /**
    * The feature id for the '<em><b>Operator</b></em>' attribute.
@@ -736,7 +1050,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getPrimitiveValueExpression()
    * @generated
    */
-  int PRIMITIVE_VALUE_EXPRESSION = 19;
+  int PRIMITIVE_VALUE_EXPRESSION = 28;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -764,7 +1078,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getPropertyReferenceExpression()
    * @generated
    */
-  int PROPERTY_REFERENCE_EXPRESSION = 20;
+  int PROPERTY_REFERENCE_EXPRESSION = 29;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' reference.
@@ -785,6 +1099,16 @@ public interface ExpressionsPackage extends EPackage
   int PROPERTY_REFERENCE_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
 
   /**
+   * The meta object id for the '{@link org.yakindu.sct.statechart.expressions.Direction <em>Direction</em>}' enum.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.yakindu.sct.statechart.expressions.Direction
+   * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getDirection()
+   * @generated
+   */
+  int DIRECTION = 30;
+
+  /**
    * The meta object id for the '{@link org.yakindu.sct.statechart.expressions.AdditiveOperator <em>Additive Operator</em>}' enum.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -792,7 +1116,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getAdditiveOperator()
    * @generated
    */
-  int ADDITIVE_OPERATOR = 21;
+  int ADDITIVE_OPERATOR = 31;
 
   /**
    * The meta object id for the '{@link org.yakindu.sct.statechart.expressions.MultiplicativeOperator <em>Multiplicative Operator</em>}' enum.
@@ -802,7 +1126,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getMultiplicativeOperator()
    * @generated
    */
-  int MULTIPLICATIVE_OPERATOR = 22;
+  int MULTIPLICATIVE_OPERATOR = 32;
 
   /**
    * The meta object id for the '{@link org.yakindu.sct.statechart.expressions.UnaryOperator <em>Unary Operator</em>}' enum.
@@ -812,7 +1136,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getUnaryOperator()
    * @generated
    */
-  int UNARY_OPERATOR = 23;
+  int UNARY_OPERATOR = 33;
 
   /**
    * The meta object id for the '{@link org.yakindu.sct.statechart.expressions.RelationalOperator <em>Relational Operator</em>}' enum.
@@ -822,7 +1146,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getRelationalOperator()
    * @generated
    */
-  int RELATIONAL_OPERATOR = 24;
+  int RELATIONAL_OPERATOR = 34;
 
   /**
    * The meta object id for the '{@link org.yakindu.sct.statechart.expressions.DirectionKind <em>Direction Kind</em>}' enum.
@@ -832,7 +1156,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getDirectionKind()
    * @generated
    */
-  int DIRECTION_KIND = 25;
+  int DIRECTION_KIND = 35;
 
   /**
    * The meta object id for the '{@link org.yakindu.sct.statechart.expressions.TimeUnit <em>Time Unit</em>}' enum.
@@ -842,7 +1166,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getTimeUnit()
    * @generated
    */
-  int TIME_UNIT = 26;
+  int TIME_UNIT = 36;
 
   /**
    * The meta object id for the '{@link org.yakindu.sct.statechart.expressions.Type <em>Type</em>}' enum.
@@ -852,7 +1176,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getType()
    * @generated
    */
-  int TYPE = 27;
+  int TYPE = 37;
 
 
   /**
@@ -1036,26 +1360,77 @@ public interface ExpressionsPackage extends EPackage
   EClass getElementDefinition();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.yakindu.sct.statechart.expressions.ElementDefinition#getVariables <em>Variables</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.yakindu.sct.statechart.expressions.ElementDefinition#getDefinitionScopes <em>Definition Scopes</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Variables</em>'.
-   * @see org.yakindu.sct.statechart.expressions.ElementDefinition#getVariables()
+   * @return the meta object for the containment reference list '<em>Definition Scopes</em>'.
+   * @see org.yakindu.sct.statechart.expressions.ElementDefinition#getDefinitionScopes()
    * @see #getElementDefinition()
    * @generated
    */
-  EReference getElementDefinition_Variables();
+  EReference getElementDefinition_DefinitionScopes();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.yakindu.sct.statechart.expressions.ElementDefinition#getEvents <em>Events</em>}'.
+   * Returns the meta object for class '{@link org.yakindu.sct.statechart.expressions.DefinitionScope <em>Definition Scope</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Events</em>'.
-   * @see org.yakindu.sct.statechart.expressions.ElementDefinition#getEvents()
-   * @see #getElementDefinition()
+   * @return the meta object for class '<em>Definition Scope</em>'.
+   * @see org.yakindu.sct.statechart.expressions.DefinitionScope
    * @generated
    */
-  EReference getElementDefinition_Events();
+  EClass getDefinitionScope();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.yakindu.sct.statechart.expressions.DefinitionScope#getDefinitions <em>Definitions</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Definitions</em>'.
+   * @see org.yakindu.sct.statechart.expressions.DefinitionScope#getDefinitions()
+   * @see #getDefinitionScope()
+   * @generated
+   */
+  EReference getDefinitionScope_Definitions();
+
+  /**
+   * Returns the meta object for class '{@link org.yakindu.sct.statechart.expressions.InterfaceScope <em>Interface Scope</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Interface Scope</em>'.
+   * @see org.yakindu.sct.statechart.expressions.InterfaceScope
+   * @generated
+   */
+  EClass getInterfaceScope();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.yakindu.sct.statechart.expressions.InterfaceScope#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.yakindu.sct.statechart.expressions.InterfaceScope#getName()
+   * @see #getInterfaceScope()
+   * @generated
+   */
+  EAttribute getInterfaceScope_Name();
+
+  /**
+   * Returns the meta object for class '{@link org.yakindu.sct.statechart.expressions.InternalScope <em>Internal Scope</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Internal Scope</em>'.
+   * @see org.yakindu.sct.statechart.expressions.InternalScope
+   * @generated
+   */
+  EClass getInternalScope();
+
+  /**
+   * Returns the meta object for class '{@link org.yakindu.sct.statechart.expressions.Definition <em>Definition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Definition</em>'.
+   * @see org.yakindu.sct.statechart.expressions.Definition
+   * @generated
+   */
+  EClass getDefinition();
 
   /**
    * Returns the meta object for class '{@link org.yakindu.sct.statechart.expressions.VariableDefinition <em>Variable Definition</em>}'.
@@ -1068,15 +1443,26 @@ public interface ExpressionsPackage extends EPackage
   EClass getVariableDefinition();
 
   /**
-   * Returns the meta object for the attribute '{@link org.yakindu.sct.statechart.expressions.VariableDefinition#getType <em>Type</em>}'.
+   * Returns the meta object for the attribute '{@link org.yakindu.sct.statechart.expressions.VariableDefinition#isReadonly <em>Readonly</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Type</em>'.
-   * @see org.yakindu.sct.statechart.expressions.VariableDefinition#getType()
+   * @return the meta object for the attribute '<em>Readonly</em>'.
+   * @see org.yakindu.sct.statechart.expressions.VariableDefinition#isReadonly()
    * @see #getVariableDefinition()
    * @generated
    */
-  EAttribute getVariableDefinition_Type();
+  EAttribute getVariableDefinition_Readonly();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.yakindu.sct.statechart.expressions.VariableDefinition#isExternal <em>External</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>External</em>'.
+   * @see org.yakindu.sct.statechart.expressions.VariableDefinition#isExternal()
+   * @see #getVariableDefinition()
+   * @generated
+   */
+  EAttribute getVariableDefinition_External();
 
   /**
    * Returns the meta object for the attribute '{@link org.yakindu.sct.statechart.expressions.VariableDefinition#getName <em>Name</em>}'.
@@ -1088,6 +1474,17 @@ public interface ExpressionsPackage extends EPackage
    * @generated
    */
   EAttribute getVariableDefinition_Name();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.yakindu.sct.statechart.expressions.VariableDefinition#getType <em>Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Type</em>'.
+   * @see org.yakindu.sct.statechart.expressions.VariableDefinition#getType()
+   * @see #getVariableDefinition()
+   * @generated
+   */
+  EAttribute getVariableDefinition_Type();
 
   /**
    * Returns the meta object for the attribute '{@link org.yakindu.sct.statechart.expressions.VariableDefinition#getValue <em>Value</em>}'.
@@ -1111,6 +1508,17 @@ public interface ExpressionsPackage extends EPackage
   EClass getEventDefinition();
 
   /**
+   * Returns the meta object for the attribute '{@link org.yakindu.sct.statechart.expressions.EventDefinition#getDirection <em>Direction</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Direction</em>'.
+   * @see org.yakindu.sct.statechart.expressions.EventDefinition#getDirection()
+   * @see #getEventDefinition()
+   * @generated
+   */
+  EAttribute getEventDefinition_Direction();
+
+  /**
    * Returns the meta object for the attribute '{@link org.yakindu.sct.statechart.expressions.EventDefinition#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1120,6 +1528,166 @@ public interface ExpressionsPackage extends EPackage
    * @generated
    */
   EAttribute getEventDefinition_Name();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.yakindu.sct.statechart.expressions.EventDefinition#getType <em>Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Type</em>'.
+   * @see org.yakindu.sct.statechart.expressions.EventDefinition#getType()
+   * @see #getEventDefinition()
+   * @generated
+   */
+  EAttribute getEventDefinition_Type();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.yakindu.sct.statechart.expressions.EventDefinition#getDerivation <em>Derivation</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Derivation</em>'.
+   * @see org.yakindu.sct.statechart.expressions.EventDefinition#getDerivation()
+   * @see #getEventDefinition()
+   * @generated
+   */
+  EReference getEventDefinition_Derivation();
+
+  /**
+   * Returns the meta object for class '{@link org.yakindu.sct.statechart.expressions.EventDerivation <em>Event Derivation</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Event Derivation</em>'.
+   * @see org.yakindu.sct.statechart.expressions.EventDerivation
+   * @generated
+   */
+  EClass getEventDerivation();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.yakindu.sct.statechart.expressions.EventDerivation#getCondition <em>Condition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Condition</em>'.
+   * @see org.yakindu.sct.statechart.expressions.EventDerivation#getCondition()
+   * @see #getEventDerivation()
+   * @generated
+   */
+  EReference getEventDerivation_Condition();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.yakindu.sct.statechart.expressions.EventDerivation#getValue <em>Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Value</em>'.
+   * @see org.yakindu.sct.statechart.expressions.EventDerivation#getValue()
+   * @see #getEventDerivation()
+   * @generated
+   */
+  EReference getEventDerivation_Value();
+
+  /**
+   * Returns the meta object for class '{@link org.yakindu.sct.statechart.expressions.Operation <em>Operation</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Operation</em>'.
+   * @see org.yakindu.sct.statechart.expressions.Operation
+   * @generated
+   */
+  EClass getOperation();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.yakindu.sct.statechart.expressions.Operation#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.yakindu.sct.statechart.expressions.Operation#getName()
+   * @see #getOperation()
+   * @generated
+   */
+  EAttribute getOperation_Name();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.yakindu.sct.statechart.expressions.Operation#getParamTypes <em>Param Types</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Param Types</em>'.
+   * @see org.yakindu.sct.statechart.expressions.Operation#getParamTypes()
+   * @see #getOperation()
+   * @generated
+   */
+  EAttribute getOperation_ParamTypes();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.yakindu.sct.statechart.expressions.Operation#getType <em>Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Type</em>'.
+   * @see org.yakindu.sct.statechart.expressions.Operation#getType()
+   * @see #getOperation()
+   * @generated
+   */
+  EAttribute getOperation_Type();
+
+  /**
+   * Returns the meta object for class '{@link org.yakindu.sct.statechart.expressions.Entrypoint <em>Entrypoint</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Entrypoint</em>'.
+   * @see org.yakindu.sct.statechart.expressions.Entrypoint
+   * @generated
+   */
+  EClass getEntrypoint();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.yakindu.sct.statechart.expressions.Entrypoint#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.yakindu.sct.statechart.expressions.Entrypoint#getName()
+   * @see #getEntrypoint()
+   * @generated
+   */
+  EAttribute getEntrypoint_Name();
+
+  /**
+   * Returns the meta object for class '{@link org.yakindu.sct.statechart.expressions.Exitpoint <em>Exitpoint</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Exitpoint</em>'.
+   * @see org.yakindu.sct.statechart.expressions.Exitpoint
+   * @generated
+   */
+  EClass getExitpoint();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.yakindu.sct.statechart.expressions.Exitpoint#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.yakindu.sct.statechart.expressions.Exitpoint#getName()
+   * @see #getExitpoint()
+   * @generated
+   */
+  EAttribute getExitpoint_Name();
+
+  /**
+   * Returns the meta object for class '{@link org.yakindu.sct.statechart.expressions.Clock <em>Clock</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Clock</em>'.
+   * @see org.yakindu.sct.statechart.expressions.Clock
+   * @generated
+   */
+  EClass getClock();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.yakindu.sct.statechart.expressions.Clock#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.yakindu.sct.statechart.expressions.Clock#getName()
+   * @see #getClock()
+   * @generated
+   */
+  EAttribute getClock_Name();
 
   /**
    * Returns the meta object for class '{@link org.yakindu.sct.statechart.expressions.ExpressionRule <em>Expression Rule</em>}'.
@@ -1462,6 +2030,16 @@ public interface ExpressionsPackage extends EPackage
   EReference getPropertyReferenceExpression_Value();
 
   /**
+   * Returns the meta object for enum '{@link org.yakindu.sct.statechart.expressions.Direction <em>Direction</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for enum '<em>Direction</em>'.
+   * @see org.yakindu.sct.statechart.expressions.Direction
+   * @generated
+   */
+  EEnum getDirection();
+
+  /**
    * Returns the meta object for enum '{@link org.yakindu.sct.statechart.expressions.AdditiveOperator <em>Additive Operator</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1705,20 +2283,68 @@ public interface ExpressionsPackage extends EPackage
     EClass ELEMENT_DEFINITION = eINSTANCE.getElementDefinition();
 
     /**
-     * The meta object literal for the '<em><b>Variables</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Definition Scopes</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference ELEMENT_DEFINITION__VARIABLES = eINSTANCE.getElementDefinition_Variables();
+    EReference ELEMENT_DEFINITION__DEFINITION_SCOPES = eINSTANCE.getElementDefinition_DefinitionScopes();
 
     /**
-     * The meta object literal for the '<em><b>Events</b></em>' containment reference list feature.
+     * The meta object literal for the '{@link org.yakindu.sct.statechart.expressions.impl.DefinitionScopeImpl <em>Definition Scope</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.yakindu.sct.statechart.expressions.impl.DefinitionScopeImpl
+     * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getDefinitionScope()
+     * @generated
+     */
+    EClass DEFINITION_SCOPE = eINSTANCE.getDefinitionScope();
+
+    /**
+     * The meta object literal for the '<em><b>Definitions</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference ELEMENT_DEFINITION__EVENTS = eINSTANCE.getElementDefinition_Events();
+    EReference DEFINITION_SCOPE__DEFINITIONS = eINSTANCE.getDefinitionScope_Definitions();
+
+    /**
+     * The meta object literal for the '{@link org.yakindu.sct.statechart.expressions.impl.InterfaceScopeImpl <em>Interface Scope</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.yakindu.sct.statechart.expressions.impl.InterfaceScopeImpl
+     * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getInterfaceScope()
+     * @generated
+     */
+    EClass INTERFACE_SCOPE = eINSTANCE.getInterfaceScope();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute INTERFACE_SCOPE__NAME = eINSTANCE.getInterfaceScope_Name();
+
+    /**
+     * The meta object literal for the '{@link org.yakindu.sct.statechart.expressions.impl.InternalScopeImpl <em>Internal Scope</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.yakindu.sct.statechart.expressions.impl.InternalScopeImpl
+     * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getInternalScope()
+     * @generated
+     */
+    EClass INTERNAL_SCOPE = eINSTANCE.getInternalScope();
+
+    /**
+     * The meta object literal for the '{@link org.yakindu.sct.statechart.expressions.impl.DefinitionImpl <em>Definition</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.yakindu.sct.statechart.expressions.impl.DefinitionImpl
+     * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getDefinition()
+     * @generated
+     */
+    EClass DEFINITION = eINSTANCE.getDefinition();
 
     /**
      * The meta object literal for the '{@link org.yakindu.sct.statechart.expressions.impl.VariableDefinitionImpl <em>Variable Definition</em>}' class.
@@ -1731,12 +2357,20 @@ public interface ExpressionsPackage extends EPackage
     EClass VARIABLE_DEFINITION = eINSTANCE.getVariableDefinition();
 
     /**
-     * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Readonly</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute VARIABLE_DEFINITION__TYPE = eINSTANCE.getVariableDefinition_Type();
+    EAttribute VARIABLE_DEFINITION__READONLY = eINSTANCE.getVariableDefinition_Readonly();
+
+    /**
+     * The meta object literal for the '<em><b>External</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute VARIABLE_DEFINITION__EXTERNAL = eINSTANCE.getVariableDefinition_External();
 
     /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -1745,6 +2379,14 @@ public interface ExpressionsPackage extends EPackage
      * @generated
      */
     EAttribute VARIABLE_DEFINITION__NAME = eINSTANCE.getVariableDefinition_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute VARIABLE_DEFINITION__TYPE = eINSTANCE.getVariableDefinition_Type();
 
     /**
      * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
@@ -1765,12 +2407,150 @@ public interface ExpressionsPackage extends EPackage
     EClass EVENT_DEFINITION = eINSTANCE.getEventDefinition();
 
     /**
+     * The meta object literal for the '<em><b>Direction</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute EVENT_DEFINITION__DIRECTION = eINSTANCE.getEventDefinition_Direction();
+
+    /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
     EAttribute EVENT_DEFINITION__NAME = eINSTANCE.getEventDefinition_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute EVENT_DEFINITION__TYPE = eINSTANCE.getEventDefinition_Type();
+
+    /**
+     * The meta object literal for the '<em><b>Derivation</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EVENT_DEFINITION__DERIVATION = eINSTANCE.getEventDefinition_Derivation();
+
+    /**
+     * The meta object literal for the '{@link org.yakindu.sct.statechart.expressions.impl.EventDerivationImpl <em>Event Derivation</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.yakindu.sct.statechart.expressions.impl.EventDerivationImpl
+     * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getEventDerivation()
+     * @generated
+     */
+    EClass EVENT_DERIVATION = eINSTANCE.getEventDerivation();
+
+    /**
+     * The meta object literal for the '<em><b>Condition</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EVENT_DERIVATION__CONDITION = eINSTANCE.getEventDerivation_Condition();
+
+    /**
+     * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EVENT_DERIVATION__VALUE = eINSTANCE.getEventDerivation_Value();
+
+    /**
+     * The meta object literal for the '{@link org.yakindu.sct.statechart.expressions.impl.OperationImpl <em>Operation</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.yakindu.sct.statechart.expressions.impl.OperationImpl
+     * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getOperation()
+     * @generated
+     */
+    EClass OPERATION = eINSTANCE.getOperation();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute OPERATION__NAME = eINSTANCE.getOperation_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Param Types</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute OPERATION__PARAM_TYPES = eINSTANCE.getOperation_ParamTypes();
+
+    /**
+     * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute OPERATION__TYPE = eINSTANCE.getOperation_Type();
+
+    /**
+     * The meta object literal for the '{@link org.yakindu.sct.statechart.expressions.impl.EntrypointImpl <em>Entrypoint</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.yakindu.sct.statechart.expressions.impl.EntrypointImpl
+     * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getEntrypoint()
+     * @generated
+     */
+    EClass ENTRYPOINT = eINSTANCE.getEntrypoint();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ENTRYPOINT__NAME = eINSTANCE.getEntrypoint_Name();
+
+    /**
+     * The meta object literal for the '{@link org.yakindu.sct.statechart.expressions.impl.ExitpointImpl <em>Exitpoint</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.yakindu.sct.statechart.expressions.impl.ExitpointImpl
+     * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getExitpoint()
+     * @generated
+     */
+    EClass EXITPOINT = eINSTANCE.getExitpoint();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute EXITPOINT__NAME = eINSTANCE.getExitpoint_Name();
+
+    /**
+     * The meta object literal for the '{@link org.yakindu.sct.statechart.expressions.impl.ClockImpl <em>Clock</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.yakindu.sct.statechart.expressions.impl.ClockImpl
+     * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getClock()
+     * @generated
+     */
+    EClass CLOCK = eINSTANCE.getClock();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute CLOCK__NAME = eINSTANCE.getClock_Name();
 
     /**
      * The meta object literal for the '{@link org.yakindu.sct.statechart.expressions.impl.ExpressionRuleImpl <em>Expression Rule</em>}' class.
@@ -2051,6 +2831,16 @@ public interface ExpressionsPackage extends EPackage
      * @generated
      */
     EReference PROPERTY_REFERENCE_EXPRESSION__VALUE = eINSTANCE.getPropertyReferenceExpression_Value();
+
+    /**
+     * The meta object literal for the '{@link org.yakindu.sct.statechart.expressions.Direction <em>Direction</em>}' enum.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.yakindu.sct.statechart.expressions.Direction
+     * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getDirection()
+     * @generated
+     */
+    EEnum DIRECTION = eINSTANCE.getDirection();
 
     /**
      * The meta object literal for the '{@link org.yakindu.sct.statechart.expressions.AdditiveOperator <em>Additive Operator</em>}' enum.

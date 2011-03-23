@@ -6,7 +6,7 @@ import "platform:/resource/org.yakindu.sct.model.statechart/model/emf/statechart
 EntryRule:
 	entry=(StateExpression | CustomTransitionExpression | ElementDefinition);
 
-	//****************
+//****************
 // State Expression
 //****************
 StateExpression:
@@ -22,7 +22,7 @@ ExitExpression:
 OnTickExpression:
 	'do:' expression=ExpressionRule;
 
-	//****************
+//****************
 // Transition Expression
 //****************
 CustomTransitionExpression:
@@ -31,18 +31,45 @@ CustomTransitionExpression:
 	('[' guardExpression=LogicalOrExpression ']')?
 	('/' action=ExpressionRule)?;
 
-	//****************
+
+//****************
 // Statechart Expression
 //****************
 ElementDefinition:
-	{ElementDefinition} (variables+=VariableDefinition)* (events+=EventDefinition)*;
+	{ElementDefinition} (definitionScopes+=DefinitionScope)*;
+	
+DefinitionScope: InterfaceScope | InternalScope;
+
+InterfaceScope: {InterfaceScope} 'interface' (name=ID)? ':' (definitions+=Definition)*;
+
+InternalScope:  {InternalScope} 'internal' ':' (definitions+=Definition)*;
+
+Definition: VariableDefinition | EventDefinition | Operation | Entrypoint | Exitpoint | Clock | CustomTransitionExpression ;
+
 
 VariableDefinition:
-	'var' type=Type name=ID '=' value=Literal;
+	 'var' ((readonly?='readonly')? & (external?='external')?) name=ID ':' type=Type ('=' value=Literal)?;
+
+//VariableModifier: (readonly?='readonly')? & (external?='external')?;
 
 EventDefinition:
-	'event' name=ID;
-	//****************
+	(direction=Direction)? 'event' name=ID (':' type=Type)? (derivation=EventDerivation)?;
+	
+EventDerivation:
+	'=' condition=ExpressionRule (':' value=ExpressionRule)?; 
+	
+enum Direction: IN='in' | OUT='out';
+
+
+Operation: 'operation' name=ID '(' (paramTypes+=Type (',' paramTypes+= Type)*)?')' (':' type=Type)? ;
+	
+Entrypoint: 'entrypoint' name=ID;
+
+Exitpoint: 'exitpoint' name=ID;
+
+Clock: 'clock' name=ID;
+
+//****************
 // Expression Grammar
 //****************
 ExpressionRule:
@@ -109,7 +136,7 @@ enum TimeUnit:
 	| nanosecond='ns';
 
 enum Type:
-	int='int' | float='float' | boolean='boolean';
+	void | integer | real | boolean | string;
 
 ValueExpression returns Expression:
 	PrimitiveValueExpression | VariableReferenceExpression;

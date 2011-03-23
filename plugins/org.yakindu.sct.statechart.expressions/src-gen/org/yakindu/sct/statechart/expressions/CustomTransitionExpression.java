@@ -2,13 +2,10 @@
  * <copyright>
  * </copyright>
  *
-
  */
 package org.yakindu.sct.statechart.expressions;
 
 import org.eclipse.emf.common.util.EList;
-
-import org.eclipse.emf.ecore.EObject;
 
 import org.yakindu.model.sct.statechart.Event;
 
@@ -30,7 +27,7 @@ import org.yakindu.model.sct.statechart.Event;
  * @model
  * @generated
  */
-public interface CustomTransitionExpression extends EObject
+public interface CustomTransitionExpression extends Definition
 {
   /**
    * Returns the value of the '<em><b>Triggers</b></em>' reference list.

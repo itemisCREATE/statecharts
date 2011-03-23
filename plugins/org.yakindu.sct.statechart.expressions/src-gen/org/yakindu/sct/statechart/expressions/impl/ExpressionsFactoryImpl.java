@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
-
  */
 package org.yakindu.sct.statechart.expressions.impl;
 
@@ -76,8 +75,17 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
       case ExpressionsPackage.ON_TICK_EXPRESSION: return createOnTickExpression();
       case ExpressionsPackage.CUSTOM_TRANSITION_EXPRESSION: return createCustomTransitionExpression();
       case ExpressionsPackage.ELEMENT_DEFINITION: return createElementDefinition();
+      case ExpressionsPackage.DEFINITION_SCOPE: return createDefinitionScope();
+      case ExpressionsPackage.INTERFACE_SCOPE: return createInterfaceScope();
+      case ExpressionsPackage.INTERNAL_SCOPE: return createInternalScope();
+      case ExpressionsPackage.DEFINITION: return createDefinition();
       case ExpressionsPackage.VARIABLE_DEFINITION: return createVariableDefinition();
       case ExpressionsPackage.EVENT_DEFINITION: return createEventDefinition();
+      case ExpressionsPackage.EVENT_DERIVATION: return createEventDerivation();
+      case ExpressionsPackage.OPERATION: return createOperation();
+      case ExpressionsPackage.ENTRYPOINT: return createEntrypoint();
+      case ExpressionsPackage.EXITPOINT: return createExitpoint();
+      case ExpressionsPackage.CLOCK: return createClock();
       case ExpressionsPackage.EXPRESSION_RULE: return createExpressionRule();
       case ExpressionsPackage.RAISE_EVENT_EXPRESSION: return createRaiseEventExpression();
       case ExpressionsPackage.EXPRESSION: return createExpression();
@@ -105,6 +113,8 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
   {
     switch (eDataType.getClassifierID())
     {
+      case ExpressionsPackage.DIRECTION:
+        return createDirectionFromString(eDataType, initialValue);
       case ExpressionsPackage.ADDITIVE_OPERATOR:
         return createAdditiveOperatorFromString(eDataType, initialValue);
       case ExpressionsPackage.MULTIPLICATIVE_OPERATOR:
@@ -134,6 +144,8 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
   {
     switch (eDataType.getClassifierID())
     {
+      case ExpressionsPackage.DIRECTION:
+        return convertDirectionToString(eDataType, instanceValue);
       case ExpressionsPackage.ADDITIVE_OPERATOR:
         return convertAdditiveOperatorToString(eDataType, instanceValue);
       case ExpressionsPackage.MULTIPLICATIVE_OPERATOR:
@@ -235,6 +247,50 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
    * <!-- end-user-doc -->
    * @generated
    */
+  public DefinitionScope createDefinitionScope()
+  {
+    DefinitionScopeImpl definitionScope = new DefinitionScopeImpl();
+    return definitionScope;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public InterfaceScope createInterfaceScope()
+  {
+    InterfaceScopeImpl interfaceScope = new InterfaceScopeImpl();
+    return interfaceScope;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public InternalScope createInternalScope()
+  {
+    InternalScopeImpl internalScope = new InternalScopeImpl();
+    return internalScope;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Definition createDefinition()
+  {
+    DefinitionImpl definition = new DefinitionImpl();
+    return definition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public VariableDefinition createVariableDefinition()
   {
     VariableDefinitionImpl variableDefinition = new VariableDefinitionImpl();
@@ -250,6 +306,61 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
   {
     EventDefinitionImpl eventDefinition = new EventDefinitionImpl();
     return eventDefinition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EventDerivation createEventDerivation()
+  {
+    EventDerivationImpl eventDerivation = new EventDerivationImpl();
+    return eventDerivation;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Operation createOperation()
+  {
+    OperationImpl operation = new OperationImpl();
+    return operation;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Entrypoint createEntrypoint()
+  {
+    EntrypointImpl entrypoint = new EntrypointImpl();
+    return entrypoint;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Exitpoint createExitpoint()
+  {
+    ExitpointImpl exitpoint = new ExitpointImpl();
+    return exitpoint;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Clock createClock()
+  {
+    ClockImpl clock = new ClockImpl();
+    return clock;
   }
 
   /**
@@ -382,6 +493,28 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
   {
     PropertyReferenceExpressionImpl propertyReferenceExpression = new PropertyReferenceExpressionImpl();
     return propertyReferenceExpression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Direction createDirectionFromString(EDataType eDataType, String initialValue)
+  {
+    Direction result = Direction.get(initialValue);
+    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+    return result;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String convertDirectionToString(EDataType eDataType, Object instanceValue)
+  {
+    return instanceValue == null ? null : instanceValue.toString();
   }
 
   /**
