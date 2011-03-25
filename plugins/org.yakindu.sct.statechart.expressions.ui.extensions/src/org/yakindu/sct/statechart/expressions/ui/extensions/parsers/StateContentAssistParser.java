@@ -18,7 +18,7 @@ public class StateContentAssistParser extends ExpressionsParser   {
 			AbstractInternalContentAssistParser parser) {
 		try {
 			org.yakindu.sct.statechart.ui.contentassist.antlr.internal.InternalExpressionsParser typedParser = (org.yakindu.sct.statechart.ui.contentassist.antlr.internal.InternalExpressionsParser) parser;
-			typedParser.entryRuleStateExpression();
+			typedParser.entryRuleStateDefinition();
 			return typedParser.getFollowElements();
 		} catch(RecognitionException ex) {
 			throw new RuntimeException(ex);

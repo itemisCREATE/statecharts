@@ -27,7 +27,7 @@ import org.yakindu.sct.statechart.expressions.InterfaceScope;
  *
  * @generated
  */
-public class InterfaceScopeImpl extends DefinitionScopeImpl implements InterfaceScope
+public class InterfaceScopeImpl extends StatechartScopeImpl implements InterfaceScope
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.

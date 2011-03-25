@@ -3,8 +3,130 @@ grammar org.yakindu.sct.statechart.Expressions with org.eclipse.xtext.common.Ter
 generate expressions "http://www.yakindu.org/sct/statechart/Expressions"
 import "platform:/resource/org.yakindu.sct.model.statechart/model/emf/statechart.ecore" as sct
 
-EntryRule:
-	entry=(StateExpression | CustomTransitionExpression | ElementDefinition);
+
+/* ---- root rules ----
+These root rules are not relevant for the grammar integration in the statechart. They just integrate the different start rules consistently 
+into a single grammar. 
+*/ 
+
+Root:	
+	(roots+=DefRoot )*;
+
+DefRoot: 
+	StatechartRoot | StateRoot | TransitionRoot;
+
+StatechartRoot:
+	'@@statechart@@' def=StatechartDefinition;
+	
+StateRoot: 
+	'@@state@@' def=StateDefinition;
+	
+TransitionRoot: 
+	'@@transition@@' def=TransitionStatement;
+
+	
+
+/* ---- start rules ----
+Define the starting points used by the statechart integration. These rules hook in the concrete rules of the specific grammar.
+*/
+
+StatechartDefinition: {StatechartDefinition} (definitionScopes+=StatechartScope)*;
+
+StateDefinition: SimpleScope;
+
+TransitionStatement: Reaction;
+
+
+
+/* ---- scope rules ----
+Defines different kinds of scopes that contain element definitions. Scopes are used for element definitions in statechart, regions, and state 
+*/
+
+Scope returns Scope: (SimpleScope | StatechartScope);
+
+// a SimpleScope is used for states and regions
+SimpleScope: {SimpleScope} (definitions+=Definition)*;
+
+// defines the poosible scopes for statecharts
+StatechartScope: InterfaceScope | InternalScope;
+
+InterfaceScope: {InterfaceScope} 'interface' (name=ID)? ':' (definitions+=Definition)*;
+
+InternalScope:  {InternalScope} 'internal' ':' (definitions+=Definition)*;
+
+
+
+/* ---- definitions ----
+a definition is a top level element of a definition scope. */ 
+Definition: EventDefinition | VariableDefinition | Clock | Operation | Reaction | Entrypoint | Exitpoint;
+
+
+/* ---- event definition ---- */
+
+SCTEvent returns sct::Event: EventDefinition;  // hook EventDefinition into statechart inheritance hiearchy
+
+EventDefinition:
+	(direction=Direction)? 'event' name=ID (':' type=Type)? (derivation=EventDerivation)?;
+	
+EventDerivation:
+	'=' condition=ExpressionRule (':' value=ExpressionRule)?; 
+	
+enum Direction: IN='in' | OUT='out';
+
+
+/* ---- variable definition ---- */
+
+SCTVariable returns sct::Variable: VariableDefinition; // hook VariableDefinition into statechart inheritance hiearchy
+
+VariableDefinition:
+	 'var' ((readonly?='readonly')? & (external?='external')?) name=ID ':' type=Type ('=' value=Literal)?;
+
+
+/* ---- clock definition ---- */
+Clock: 'clock' name=ID;
+
+
+/* ---- clock definition ---- */
+Operation: 'operation' name=ID '(' (paramTypes+=Type (',' paramTypes+= Type)*)?')' (':' type=Type)? ;
+
+
+/* ---- entrypoint definition ---- */
+Entrypoint: 'entrypoint' name=ID;
+
+
+/* ---- exitpoint definition ---- */
+Exitpoint: 'exitpoint' name=ID;
+
+
+/* ---- reaction rules ----
+Define the structure of reactions that are central for describing the statecharts behavior. 
+*/
+
+Reaction: 
+	(trigger=ReactionTrigger) ('/' action=Action)? ('#' properties=ReactionProperties)?;
+
+ReactionTrigger:	
+	(triggers+=[sct::Event] ("," triggers+=[sct::Event])*)
+	('[' guardExpression=LogicalOrExpression ']')?;
+	
+Action:	
+	action=ExpressionRule;
+	
+ReactionProperties: 
+	{ReactionProperties} (properties+=ReactionProperty)*;
+
+ReactionProperty: ReactionPriority | EntryPointSpec | ExitPointSpec;
+
+ReactionPriority: priority=INT;
+
+EntryPointSpec: 
+	'>' entrypoint=[Entrypoint];
+	
+ExitPointSpec:
+	exitpoint=[Exitpoint] '>';
+
+
+	
 
 //****************
 // State Expression
@@ -22,52 +144,8 @@ ExitExpression:
 OnTickExpression:
 	'do:' expression=ExpressionRule;
 
-//****************
-// Transition Expression
-//****************
-CustomTransitionExpression:
-	{CustomTransitionExpression}
-	(triggers+=[sct::Event] ("," triggers+=[sct::Event])*)
-	('[' guardExpression=LogicalOrExpression ']')?
-	('/' action=ExpressionRule)?;
 
-
-//****************
-// Statechart Expression
-//****************
-ElementDefinition:
-	{ElementDefinition} (definitionScopes+=DefinitionScope)*;
 	
-DefinitionScope: InterfaceScope | InternalScope;
-
-InterfaceScope: {InterfaceScope} 'interface' (name=ID)? ':' (definitions+=Definition)*;
-
-InternalScope:  {InternalScope} 'internal' ':' (definitions+=Definition)*;
-
-Definition: VariableDefinition | EventDefinition | Operation | Entrypoint | Exitpoint | Clock | CustomTransitionExpression ;
-
-
-VariableDefinition:
-	 'var' ((readonly?='readonly')? & (external?='external')?) name=ID ':' type=Type ('=' value=Literal)?;
-
-//VariableModifier: (readonly?='readonly')? & (external?='external')?;
-
-EventDefinition:
-	(direction=Direction)? 'event' name=ID (':' type=Type)? (derivation=EventDerivation)?;
-	
-EventDerivation:
-	'=' condition=ExpressionRule (':' value=ExpressionRule)?; 
-	
-enum Direction: IN='in' | OUT='out';
-
-
-Operation: 'operation' name=ID '(' (paramTypes+=Type (',' paramTypes+= Type)*)?')' (':' type=Type)? ;
-	
-Entrypoint: 'entrypoint' name=ID;
-
-Exitpoint: 'exitpoint' name=ID;
-
-Clock: 'clock' name=ID;
 
 //****************
 // Expression Grammar

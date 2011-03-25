@@ -51,8 +51,87 @@
       <genEnumLiterals ecoreEnumLiteral="Expressions.ecore#//Type/boolean"/>
       <genEnumLiterals ecoreEnumLiteral="Expressions.ecore#//Type/string"/>
     </genEnums>
-    <genClasses ecoreClass="Expressions.ecore#//EntryRule">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//EntryRule/entry"/>
+    <genClasses ecoreClass="Expressions.ecore#//Root">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//Root/roots"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//DefRoot"/>
+    <genClasses ecoreClass="Expressions.ecore#//StatechartRoot">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//StatechartRoot/def"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//StateRoot">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//StateRoot/def"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//TransitionRoot">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//TransitionRoot/def"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//StatechartDefinition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//StatechartDefinition/definitionScopes"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//StateDefinition"/>
+    <genClasses ecoreClass="Expressions.ecore#//TransitionStatement"/>
+    <genClasses ecoreClass="Expressions.ecore#//Scope">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//Scope/definitions"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//SimpleScope"/>
+    <genClasses ecoreClass="Expressions.ecore#//StatechartScope"/>
+    <genClasses ecoreClass="Expressions.ecore#//InterfaceScope">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//InterfaceScope/name"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//InternalScope"/>
+    <genClasses ecoreClass="Expressions.ecore#//Definition"/>
+    <genClasses ecoreClass="Expressions.ecore#//EventDefinition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//EventDefinition/direction"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//EventDefinition/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//EventDefinition/derivation"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//EventDerivation">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//EventDerivation/condition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//EventDerivation/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//VariableDefinition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//VariableDefinition/readonly"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//VariableDefinition/external"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//VariableDefinition/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//VariableDefinition/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//Clock">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//Clock/name"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//Operation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//Operation/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//Operation/paramTypes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//Operation/type"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//Entrypoint">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//Entrypoint/name"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//Exitpoint">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//Exitpoint/name"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//Reaction">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//Reaction/trigger"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//Reaction/action"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//Reaction/properties"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//ReactionTrigger">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Expressions.ecore#//ReactionTrigger/triggers"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//ReactionTrigger/guardExpression"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//Action">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//Action/action"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//ReactionProperties">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//ReactionProperties/properties"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//ReactionProperty"/>
+    <genClasses ecoreClass="Expressions.ecore#//ReactionPriority">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//ReactionPriority/priority"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//EntryPointSpec">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Expressions.ecore#//EntryPointSpec/entrypoint"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//ExitPointSpec">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Expressions.ecore#//ExitPointSpec/exitpoint"/>
     </genClasses>
     <genClasses ecoreClass="Expressions.ecore#//StateExpression">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//StateExpression/entryExpression"/>
@@ -67,53 +146,6 @@
     </genClasses>
     <genClasses ecoreClass="Expressions.ecore#//OnTickExpression">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//OnTickExpression/expression"/>
-    </genClasses>
-    <genClasses ecoreClass="Expressions.ecore#//CustomTransitionExpression">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Expressions.ecore#//CustomTransitionExpression/triggers"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//CustomTransitionExpression/guardExpression"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//CustomTransitionExpression/action"/>
-    </genClasses>
-    <genClasses ecoreClass="Expressions.ecore#//ElementDefinition">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//ElementDefinition/definitionScopes"/>
-    </genClasses>
-    <genClasses ecoreClass="Expressions.ecore#//DefinitionScope">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//DefinitionScope/definitions"/>
-    </genClasses>
-    <genClasses ecoreClass="Expressions.ecore#//InterfaceScope">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//InterfaceScope/name"/>
-    </genClasses>
-    <genClasses ecoreClass="Expressions.ecore#//InternalScope"/>
-    <genClasses ecoreClass="Expressions.ecore#//Definition"/>
-    <genClasses ecoreClass="Expressions.ecore#//VariableDefinition">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//VariableDefinition/readonly"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//VariableDefinition/external"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//VariableDefinition/name"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//VariableDefinition/type"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//VariableDefinition/value"/>
-    </genClasses>
-    <genClasses ecoreClass="Expressions.ecore#//EventDefinition">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//EventDefinition/direction"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//EventDefinition/name"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//EventDefinition/type"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//EventDefinition/derivation"/>
-    </genClasses>
-    <genClasses ecoreClass="Expressions.ecore#//EventDerivation">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//EventDerivation/condition"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//EventDerivation/value"/>
-    </genClasses>
-    <genClasses ecoreClass="Expressions.ecore#//Operation">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//Operation/name"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//Operation/paramTypes"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//Operation/type"/>
-    </genClasses>
-    <genClasses ecoreClass="Expressions.ecore#//Entrypoint">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//Entrypoint/name"/>
-    </genClasses>
-    <genClasses ecoreClass="Expressions.ecore#//Exitpoint">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//Exitpoint/name"/>
-    </genClasses>
-    <genClasses ecoreClass="Expressions.ecore#//Clock">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//Clock/name"/>
     </genClasses>
     <genClasses ecoreClass="Expressions.ecore#//ExpressionRule">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//ExpressionRule/expression"/>

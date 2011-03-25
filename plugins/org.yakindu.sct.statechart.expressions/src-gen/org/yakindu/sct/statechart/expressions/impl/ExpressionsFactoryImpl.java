@@ -68,24 +68,39 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
   {
     switch (eClass.getClassifierID())
     {
-      case ExpressionsPackage.ENTRY_RULE: return createEntryRule();
+      case ExpressionsPackage.ROOT: return createRoot();
+      case ExpressionsPackage.DEF_ROOT: return createDefRoot();
+      case ExpressionsPackage.STATECHART_ROOT: return createStatechartRoot();
+      case ExpressionsPackage.STATE_ROOT: return createStateRoot();
+      case ExpressionsPackage.TRANSITION_ROOT: return createTransitionRoot();
+      case ExpressionsPackage.STATECHART_DEFINITION: return createStatechartDefinition();
+      case ExpressionsPackage.STATE_DEFINITION: return createStateDefinition();
+      case ExpressionsPackage.TRANSITION_STATEMENT: return createTransitionStatement();
+      case ExpressionsPackage.SCOPE: return createScope();
+      case ExpressionsPackage.SIMPLE_SCOPE: return createSimpleScope();
+      case ExpressionsPackage.STATECHART_SCOPE: return createStatechartScope();
+      case ExpressionsPackage.INTERFACE_SCOPE: return createInterfaceScope();
+      case ExpressionsPackage.INTERNAL_SCOPE: return createInternalScope();
+      case ExpressionsPackage.DEFINITION: return createDefinition();
+      case ExpressionsPackage.EVENT_DEFINITION: return createEventDefinition();
+      case ExpressionsPackage.EVENT_DERIVATION: return createEventDerivation();
+      case ExpressionsPackage.VARIABLE_DEFINITION: return createVariableDefinition();
+      case ExpressionsPackage.CLOCK: return createClock();
+      case ExpressionsPackage.OPERATION: return createOperation();
+      case ExpressionsPackage.ENTRYPOINT: return createEntrypoint();
+      case ExpressionsPackage.EXITPOINT: return createExitpoint();
+      case ExpressionsPackage.REACTION: return createReaction();
+      case ExpressionsPackage.REACTION_TRIGGER: return createReactionTrigger();
+      case ExpressionsPackage.ACTION: return createAction();
+      case ExpressionsPackage.REACTION_PROPERTIES: return createReactionProperties();
+      case ExpressionsPackage.REACTION_PROPERTY: return createReactionProperty();
+      case ExpressionsPackage.REACTION_PRIORITY: return createReactionPriority();
+      case ExpressionsPackage.ENTRY_POINT_SPEC: return createEntryPointSpec();
+      case ExpressionsPackage.EXIT_POINT_SPEC: return createExitPointSpec();
       case ExpressionsPackage.STATE_EXPRESSION: return createStateExpression();
       case ExpressionsPackage.ENTRY_EXPRESSION: return createEntryExpression();
       case ExpressionsPackage.EXIT_EXPRESSION: return createExitExpression();
       case ExpressionsPackage.ON_TICK_EXPRESSION: return createOnTickExpression();
-      case ExpressionsPackage.CUSTOM_TRANSITION_EXPRESSION: return createCustomTransitionExpression();
-      case ExpressionsPackage.ELEMENT_DEFINITION: return createElementDefinition();
-      case ExpressionsPackage.DEFINITION_SCOPE: return createDefinitionScope();
-      case ExpressionsPackage.INTERFACE_SCOPE: return createInterfaceScope();
-      case ExpressionsPackage.INTERNAL_SCOPE: return createInternalScope();
-      case ExpressionsPackage.DEFINITION: return createDefinition();
-      case ExpressionsPackage.VARIABLE_DEFINITION: return createVariableDefinition();
-      case ExpressionsPackage.EVENT_DEFINITION: return createEventDefinition();
-      case ExpressionsPackage.EVENT_DERIVATION: return createEventDerivation();
-      case ExpressionsPackage.OPERATION: return createOperation();
-      case ExpressionsPackage.ENTRYPOINT: return createEntrypoint();
-      case ExpressionsPackage.EXITPOINT: return createExitpoint();
-      case ExpressionsPackage.CLOCK: return createClock();
       case ExpressionsPackage.EXPRESSION_RULE: return createExpressionRule();
       case ExpressionsPackage.RAISE_EVENT_EXPRESSION: return createRaiseEventExpression();
       case ExpressionsPackage.EXPRESSION: return createExpression();
@@ -170,10 +185,318 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
    * <!-- end-user-doc -->
    * @generated
    */
-  public EntryRule createEntryRule()
+  public Root createRoot()
   {
-    EntryRuleImpl entryRule = new EntryRuleImpl();
-    return entryRule;
+    RootImpl root = new RootImpl();
+    return root;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public DefRoot createDefRoot()
+  {
+    DefRootImpl defRoot = new DefRootImpl();
+    return defRoot;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public StatechartRoot createStatechartRoot()
+  {
+    StatechartRootImpl statechartRoot = new StatechartRootImpl();
+    return statechartRoot;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public StateRoot createStateRoot()
+  {
+    StateRootImpl stateRoot = new StateRootImpl();
+    return stateRoot;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public TransitionRoot createTransitionRoot()
+  {
+    TransitionRootImpl transitionRoot = new TransitionRootImpl();
+    return transitionRoot;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public StatechartDefinition createStatechartDefinition()
+  {
+    StatechartDefinitionImpl statechartDefinition = new StatechartDefinitionImpl();
+    return statechartDefinition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public StateDefinition createStateDefinition()
+  {
+    StateDefinitionImpl stateDefinition = new StateDefinitionImpl();
+    return stateDefinition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public TransitionStatement createTransitionStatement()
+  {
+    TransitionStatementImpl transitionStatement = new TransitionStatementImpl();
+    return transitionStatement;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Scope createScope()
+  {
+    ScopeImpl scope = new ScopeImpl();
+    return scope;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public SimpleScope createSimpleScope()
+  {
+    SimpleScopeImpl simpleScope = new SimpleScopeImpl();
+    return simpleScope;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public StatechartScope createStatechartScope()
+  {
+    StatechartScopeImpl statechartScope = new StatechartScopeImpl();
+    return statechartScope;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public InterfaceScope createInterfaceScope()
+  {
+    InterfaceScopeImpl interfaceScope = new InterfaceScopeImpl();
+    return interfaceScope;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public InternalScope createInternalScope()
+  {
+    InternalScopeImpl internalScope = new InternalScopeImpl();
+    return internalScope;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Definition createDefinition()
+  {
+    DefinitionImpl definition = new DefinitionImpl();
+    return definition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EventDefinition createEventDefinition()
+  {
+    EventDefinitionImpl eventDefinition = new EventDefinitionImpl();
+    return eventDefinition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EventDerivation createEventDerivation()
+  {
+    EventDerivationImpl eventDerivation = new EventDerivationImpl();
+    return eventDerivation;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public VariableDefinition createVariableDefinition()
+  {
+    VariableDefinitionImpl variableDefinition = new VariableDefinitionImpl();
+    return variableDefinition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Clock createClock()
+  {
+    ClockImpl clock = new ClockImpl();
+    return clock;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Operation createOperation()
+  {
+    OperationImpl operation = new OperationImpl();
+    return operation;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Entrypoint createEntrypoint()
+  {
+    EntrypointImpl entrypoint = new EntrypointImpl();
+    return entrypoint;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Exitpoint createExitpoint()
+  {
+    ExitpointImpl exitpoint = new ExitpointImpl();
+    return exitpoint;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Reaction createReaction()
+  {
+    ReactionImpl reaction = new ReactionImpl();
+    return reaction;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ReactionTrigger createReactionTrigger()
+  {
+    ReactionTriggerImpl reactionTrigger = new ReactionTriggerImpl();
+    return reactionTrigger;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Action createAction()
+  {
+    ActionImpl action = new ActionImpl();
+    return action;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ReactionProperties createReactionProperties()
+  {
+    ReactionPropertiesImpl reactionProperties = new ReactionPropertiesImpl();
+    return reactionProperties;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ReactionProperty createReactionProperty()
+  {
+    ReactionPropertyImpl reactionProperty = new ReactionPropertyImpl();
+    return reactionProperty;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ReactionPriority createReactionPriority()
+  {
+    ReactionPriorityImpl reactionPriority = new ReactionPriorityImpl();
+    return reactionPriority;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EntryPointSpec createEntryPointSpec()
+  {
+    EntryPointSpecImpl entryPointSpec = new EntryPointSpecImpl();
+    return entryPointSpec;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ExitPointSpec createExitPointSpec()
+  {
+    ExitPointSpecImpl exitPointSpec = new ExitPointSpecImpl();
+    return exitPointSpec;
   }
 
   /**
@@ -218,149 +541,6 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
   {
     OnTickExpressionImpl onTickExpression = new OnTickExpressionImpl();
     return onTickExpression;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public CustomTransitionExpression createCustomTransitionExpression()
-  {
-    CustomTransitionExpressionImpl customTransitionExpression = new CustomTransitionExpressionImpl();
-    return customTransitionExpression;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ElementDefinition createElementDefinition()
-  {
-    ElementDefinitionImpl elementDefinition = new ElementDefinitionImpl();
-    return elementDefinition;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public DefinitionScope createDefinitionScope()
-  {
-    DefinitionScopeImpl definitionScope = new DefinitionScopeImpl();
-    return definitionScope;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public InterfaceScope createInterfaceScope()
-  {
-    InterfaceScopeImpl interfaceScope = new InterfaceScopeImpl();
-    return interfaceScope;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public InternalScope createInternalScope()
-  {
-    InternalScopeImpl internalScope = new InternalScopeImpl();
-    return internalScope;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Definition createDefinition()
-  {
-    DefinitionImpl definition = new DefinitionImpl();
-    return definition;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public VariableDefinition createVariableDefinition()
-  {
-    VariableDefinitionImpl variableDefinition = new VariableDefinitionImpl();
-    return variableDefinition;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EventDefinition createEventDefinition()
-  {
-    EventDefinitionImpl eventDefinition = new EventDefinitionImpl();
-    return eventDefinition;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EventDerivation createEventDerivation()
-  {
-    EventDerivationImpl eventDerivation = new EventDerivationImpl();
-    return eventDerivation;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Operation createOperation()
-  {
-    OperationImpl operation = new OperationImpl();
-    return operation;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Entrypoint createEntrypoint()
-  {
-    EntrypointImpl entrypoint = new EntrypointImpl();
-    return entrypoint;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Exitpoint createExitpoint()
-  {
-    ExitpointImpl exitpoint = new ExitpointImpl();
-    return exitpoint;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Clock createClock()
-  {
-    ClockImpl clock = new ClockImpl();
-    return clock;
   }
 
   /**

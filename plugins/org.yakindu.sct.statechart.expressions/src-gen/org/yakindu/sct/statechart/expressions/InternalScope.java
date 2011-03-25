@@ -16,6 +16,6 @@ package org.yakindu.sct.statechart.expressions;
  * @model
  * @generated
  */
-public interface InternalScope extends DefinitionScope
+public interface InternalScope extends StatechartScope
 {
 } // InternalScope
