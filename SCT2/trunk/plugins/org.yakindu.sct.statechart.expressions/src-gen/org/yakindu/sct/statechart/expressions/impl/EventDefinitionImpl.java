@@ -13,6 +13,10 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.yakindu.model.sct.statechart.Event;
+import org.yakindu.model.sct.statechart.NamedElement;
+import org.yakindu.model.sct.statechart.StatechartPackage;
+
 import org.yakindu.sct.statechart.expressions.Direction;
 import org.yakindu.sct.statechart.expressions.EventDefinition;
 import org.yakindu.sct.statechart.expressions.EventDerivation;
@@ -26,8 +30,8 @@ import org.yakindu.sct.statechart.expressions.Type;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.yakindu.sct.statechart.expressions.impl.EventDefinitionImpl#getDirection <em>Direction</em>}</li>
  *   <li>{@link org.yakindu.sct.statechart.expressions.impl.EventDefinitionImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.yakindu.sct.statechart.expressions.impl.EventDefinitionImpl#getDirection <em>Direction</em>}</li>
  *   <li>{@link org.yakindu.sct.statechart.expressions.impl.EventDefinitionImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.yakindu.sct.statechart.expressions.impl.EventDefinitionImpl#getDerivation <em>Derivation</em>}</li>
  * </ul>
@@ -37,26 +41,6 @@ import org.yakindu.sct.statechart.expressions.Type;
  */
 public class EventDefinitionImpl extends DefinitionImpl implements EventDefinition
 {
-  /**
-   * The default value of the '{@link #getDirection() <em>Direction</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getDirection()
-   * @generated
-   * @ordered
-   */
-  protected static final Direction DIRECTION_EDEFAULT = Direction.IN;
-
-  /**
-   * The cached value of the '{@link #getDirection() <em>Direction</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getDirection()
-   * @generated
-   * @ordered
-   */
-  protected Direction direction = DIRECTION_EDEFAULT;
-
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
@@ -76,6 +60,26 @@ public class EventDefinitionImpl extends DefinitionImpl implements EventDefiniti
    * @ordered
    */
   protected String name = NAME_EDEFAULT;
+
+  /**
+   * The default value of the '{@link #getDirection() <em>Direction</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getDirection()
+   * @generated
+   * @ordered
+   */
+  protected static final Direction DIRECTION_EDEFAULT = Direction.IN;
+
+  /**
+   * The cached value of the '{@link #getDirection() <em>Direction</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getDirection()
+   * @generated
+   * @ordered
+   */
+  protected Direction direction = DIRECTION_EDEFAULT;
 
   /**
    * The default value of the '{@link #getType() <em>Type</em>}' attribute.
@@ -133,29 +137,6 @@ public class EventDefinitionImpl extends DefinitionImpl implements EventDefiniti
    * <!-- end-user-doc -->
    * @generated
    */
-  public Direction getDirection()
-  {
-    return direction;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setDirection(Direction newDirection)
-  {
-    Direction oldDirection = direction;
-    direction = newDirection == null ? DIRECTION_EDEFAULT : newDirection;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.EVENT_DEFINITION__DIRECTION, oldDirection, direction));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public String getName()
   {
     return name;
@@ -172,6 +153,29 @@ public class EventDefinitionImpl extends DefinitionImpl implements EventDefiniti
     name = newName;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.EVENT_DEFINITION__NAME, oldName, name));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Direction getDirection()
+  {
+    return direction;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setDirection(Direction newDirection)
+  {
+    Direction oldDirection = direction;
+    direction = newDirection == null ? DIRECTION_EDEFAULT : newDirection;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.EVENT_DEFINITION__DIRECTION, oldDirection, direction));
   }
 
   /**
@@ -271,10 +275,10 @@ public class EventDefinitionImpl extends DefinitionImpl implements EventDefiniti
   {
     switch (featureID)
     {
-      case ExpressionsPackage.EVENT_DEFINITION__DIRECTION:
-        return getDirection();
       case ExpressionsPackage.EVENT_DEFINITION__NAME:
         return getName();
+      case ExpressionsPackage.EVENT_DEFINITION__DIRECTION:
+        return getDirection();
       case ExpressionsPackage.EVENT_DEFINITION__TYPE:
         return getType();
       case ExpressionsPackage.EVENT_DEFINITION__DERIVATION:
@@ -293,11 +297,11 @@ public class EventDefinitionImpl extends DefinitionImpl implements EventDefiniti
   {
     switch (featureID)
     {
-      case ExpressionsPackage.EVENT_DEFINITION__DIRECTION:
-        setDirection((Direction)newValue);
-        return;
       case ExpressionsPackage.EVENT_DEFINITION__NAME:
         setName((String)newValue);
+        return;
+      case ExpressionsPackage.EVENT_DEFINITION__DIRECTION:
+        setDirection((Direction)newValue);
         return;
       case ExpressionsPackage.EVENT_DEFINITION__TYPE:
         setType((Type)newValue);
@@ -319,11 +323,11 @@ public class EventDefinitionImpl extends DefinitionImpl implements EventDefiniti
   {
     switch (featureID)
     {
-      case ExpressionsPackage.EVENT_DEFINITION__DIRECTION:
-        setDirection(DIRECTION_EDEFAULT);
-        return;
       case ExpressionsPackage.EVENT_DEFINITION__NAME:
         setName(NAME_EDEFAULT);
+        return;
+      case ExpressionsPackage.EVENT_DEFINITION__DIRECTION:
+        setDirection(DIRECTION_EDEFAULT);
         return;
       case ExpressionsPackage.EVENT_DEFINITION__TYPE:
         setType(TYPE_EDEFAULT);
@@ -345,10 +349,10 @@ public class EventDefinitionImpl extends DefinitionImpl implements EventDefiniti
   {
     switch (featureID)
     {
-      case ExpressionsPackage.EVENT_DEFINITION__DIRECTION:
-        return direction != DIRECTION_EDEFAULT;
       case ExpressionsPackage.EVENT_DEFINITION__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case ExpressionsPackage.EVENT_DEFINITION__DIRECTION:
+        return direction != DIRECTION_EDEFAULT;
       case ExpressionsPackage.EVENT_DEFINITION__TYPE:
         return type != TYPE_EDEFAULT;
       case ExpressionsPackage.EVENT_DEFINITION__DERIVATION:
@@ -363,15 +367,67 @@ public class EventDefinitionImpl extends DefinitionImpl implements EventDefiniti
    * @generated
    */
   @Override
+  public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass)
+  {
+    if (baseClass == NamedElement.class)
+    {
+      switch (derivedFeatureID)
+      {
+        case ExpressionsPackage.EVENT_DEFINITION__NAME: return StatechartPackage.NAMED_ELEMENT__NAME;
+        default: return -1;
+      }
+    }
+    if (baseClass == Event.class)
+    {
+      switch (derivedFeatureID)
+      {
+        default: return -1;
+      }
+    }
+    return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass)
+  {
+    if (baseClass == NamedElement.class)
+    {
+      switch (baseFeatureID)
+      {
+        case StatechartPackage.NAMED_ELEMENT__NAME: return ExpressionsPackage.EVENT_DEFINITION__NAME;
+        default: return -1;
+      }
+    }
+    if (baseClass == Event.class)
+    {
+      switch (baseFeatureID)
+      {
+        default: return -1;
+      }
+    }
+    return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public String toString()
   {
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (direction: ");
-    result.append(direction);
-    result.append(", name: ");
+    result.append(" (name: ");
     result.append(name);
+    result.append(", direction: ");
+    result.append(direction);
     result.append(", type: ");
     result.append(type);
     result.append(')');

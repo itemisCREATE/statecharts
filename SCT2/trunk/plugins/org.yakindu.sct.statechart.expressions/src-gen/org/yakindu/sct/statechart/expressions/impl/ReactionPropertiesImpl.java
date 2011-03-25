@@ -19,41 +19,41 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.yakindu.sct.statechart.expressions.Definition;
-import org.yakindu.sct.statechart.expressions.DefinitionScope;
 import org.yakindu.sct.statechart.expressions.ExpressionsPackage;
+import org.yakindu.sct.statechart.expressions.ReactionProperties;
+import org.yakindu.sct.statechart.expressions.ReactionProperty;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Definition Scope</b></em>'.
+ * An implementation of the model object '<em><b>Reaction Properties</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.yakindu.sct.statechart.expressions.impl.DefinitionScopeImpl#getDefinitions <em>Definitions</em>}</li>
+ *   <li>{@link org.yakindu.sct.statechart.expressions.impl.ReactionPropertiesImpl#getProperties <em>Properties</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class DefinitionScopeImpl extends MinimalEObjectImpl.Container implements DefinitionScope
+public class ReactionPropertiesImpl extends MinimalEObjectImpl.Container implements ReactionProperties
 {
   /**
-   * The cached value of the '{@link #getDefinitions() <em>Definitions</em>}' containment reference list.
+   * The cached value of the '{@link #getProperties() <em>Properties</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getDefinitions()
+   * @see #getProperties()
    * @generated
    * @ordered
    */
-  protected EList<Definition> definitions;
+  protected EList<ReactionProperty> properties;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected DefinitionScopeImpl()
+  protected ReactionPropertiesImpl()
   {
     super();
   }
@@ -66,7 +66,7 @@ public class DefinitionScopeImpl extends MinimalEObjectImpl.Container implements
   @Override
   protected EClass eStaticClass()
   {
-    return ExpressionsPackage.Literals.DEFINITION_SCOPE;
+    return ExpressionsPackage.Literals.REACTION_PROPERTIES;
   }
 
   /**
@@ -74,13 +74,13 @@ public class DefinitionScopeImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Definition> getDefinitions()
+  public EList<ReactionProperty> getProperties()
   {
-    if (definitions == null)
+    if (properties == null)
     {
-      definitions = new EObjectContainmentEList<Definition>(Definition.class, this, ExpressionsPackage.DEFINITION_SCOPE__DEFINITIONS);
+      properties = new EObjectContainmentEList<ReactionProperty>(ReactionProperty.class, this, ExpressionsPackage.REACTION_PROPERTIES__PROPERTIES);
     }
-    return definitions;
+    return properties;
   }
 
   /**
@@ -93,8 +93,8 @@ public class DefinitionScopeImpl extends MinimalEObjectImpl.Container implements
   {
     switch (featureID)
     {
-      case ExpressionsPackage.DEFINITION_SCOPE__DEFINITIONS:
-        return ((InternalEList<?>)getDefinitions()).basicRemove(otherEnd, msgs);
+      case ExpressionsPackage.REACTION_PROPERTIES__PROPERTIES:
+        return ((InternalEList<?>)getProperties()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -109,8 +109,8 @@ public class DefinitionScopeImpl extends MinimalEObjectImpl.Container implements
   {
     switch (featureID)
     {
-      case ExpressionsPackage.DEFINITION_SCOPE__DEFINITIONS:
-        return getDefinitions();
+      case ExpressionsPackage.REACTION_PROPERTIES__PROPERTIES:
+        return getProperties();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -126,9 +126,9 @@ public class DefinitionScopeImpl extends MinimalEObjectImpl.Container implements
   {
     switch (featureID)
     {
-      case ExpressionsPackage.DEFINITION_SCOPE__DEFINITIONS:
-        getDefinitions().clear();
-        getDefinitions().addAll((Collection<? extends Definition>)newValue);
+      case ExpressionsPackage.REACTION_PROPERTIES__PROPERTIES:
+        getProperties().clear();
+        getProperties().addAll((Collection<? extends ReactionProperty>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -144,8 +144,8 @@ public class DefinitionScopeImpl extends MinimalEObjectImpl.Container implements
   {
     switch (featureID)
     {
-      case ExpressionsPackage.DEFINITION_SCOPE__DEFINITIONS:
-        getDefinitions().clear();
+      case ExpressionsPackage.REACTION_PROPERTIES__PROPERTIES:
+        getProperties().clear();
         return;
     }
     super.eUnset(featureID);
@@ -161,10 +161,10 @@ public class DefinitionScopeImpl extends MinimalEObjectImpl.Container implements
   {
     switch (featureID)
     {
-      case ExpressionsPackage.DEFINITION_SCOPE__DEFINITIONS:
-        return definitions != null && !definitions.isEmpty();
+      case ExpressionsPackage.REACTION_PROPERTIES__PROPERTIES:
+        return properties != null && !properties.isEmpty();
     }
     return super.eIsSet(featureID);
   }
 
-} //DefinitionScopeImpl
+} //ReactionPropertiesImpl

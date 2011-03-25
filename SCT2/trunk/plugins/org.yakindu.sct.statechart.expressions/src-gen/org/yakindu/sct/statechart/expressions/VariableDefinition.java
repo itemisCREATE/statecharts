@@ -5,6 +5,7 @@
  */
 package org.yakindu.sct.statechart.expressions;
 
+import org.yakindu.model.sct.statechart.Variable;
 
 /**
  * <!-- begin-user-doc -->
@@ -16,7 +17,6 @@ package org.yakindu.sct.statechart.expressions;
  * <ul>
  *   <li>{@link org.yakindu.sct.statechart.expressions.VariableDefinition#isReadonly <em>Readonly</em>}</li>
  *   <li>{@link org.yakindu.sct.statechart.expressions.VariableDefinition#isExternal <em>External</em>}</li>
- *   <li>{@link org.yakindu.sct.statechart.expressions.VariableDefinition#getName <em>Name</em>}</li>
  *   <li>{@link org.yakindu.sct.statechart.expressions.VariableDefinition#getType <em>Type</em>}</li>
  *   <li>{@link org.yakindu.sct.statechart.expressions.VariableDefinition#getValue <em>Value</em>}</li>
  * </ul>
@@ -26,7 +26,7 @@ package org.yakindu.sct.statechart.expressions;
  * @model
  * @generated
  */
-public interface VariableDefinition extends Definition
+public interface VariableDefinition extends Definition, Variable
 {
   /**
    * Returns the value of the '<em><b>Readonly</b></em>' attribute.
@@ -79,32 +79,6 @@ public interface VariableDefinition extends Definition
    * @generated
    */
   void setExternal(boolean value);
-
-  /**
-   * Returns the value of the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Name</em>' attribute.
-   * @see #setName(String)
-   * @see org.yakindu.sct.statechart.expressions.ExpressionsPackage#getVariableDefinition_Name()
-   * @model
-   * @generated
-   */
-  String getName();
-
-  /**
-   * Sets the value of the '{@link org.yakindu.sct.statechart.expressions.VariableDefinition#getName <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Name</em>' attribute.
-   * @see #getName()
-   * @generated
-   */
-  void setName(String value);
 
   /**
    * Returns the value of the '<em><b>Type</b></em>' attribute.

@@ -19,7 +19,7 @@ public class TransitionContentAssistParser extends ExpressionsParser {
 			AbstractInternalContentAssistParser parser) {
 		try {
 			org.yakindu.sct.statechart.ui.contentassist.antlr.internal.InternalExpressionsParser typedParser = (org.yakindu.sct.statechart.ui.contentassist.antlr.internal.InternalExpressionsParser) parser;
-			typedParser.entryRuleCustomTransitionExpression();
+			typedParser.entryRuleTransitionStatement();
 			return typedParser.getFollowElements();
 		} catch (RecognitionException ex) {
 			throw new RuntimeException(ex);

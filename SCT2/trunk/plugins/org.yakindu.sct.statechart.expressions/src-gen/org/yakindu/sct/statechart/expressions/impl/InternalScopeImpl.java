@@ -19,7 +19,7 @@ import org.yakindu.sct.statechart.expressions.InternalScope;
  *
  * @generated
  */
-public class InternalScopeImpl extends DefinitionScopeImpl implements InternalScope
+public class InternalScopeImpl extends StatechartScopeImpl implements InternalScope
 {
   /**
    * <!-- begin-user-doc -->

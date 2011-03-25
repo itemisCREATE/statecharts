@@ -11,21 +11,21 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Definition Scope</b></em>'.
+ * A representation of the model object '<em><b>Scope</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.yakindu.sct.statechart.expressions.DefinitionScope#getDefinitions <em>Definitions</em>}</li>
+ *   <li>{@link org.yakindu.sct.statechart.expressions.Scope#getDefinitions <em>Definitions</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.yakindu.sct.statechart.expressions.ExpressionsPackage#getDefinitionScope()
+ * @see org.yakindu.sct.statechart.expressions.ExpressionsPackage#getScope()
  * @model
  * @generated
  */
-public interface DefinitionScope extends EObject
+public interface Scope extends EObject
 {
   /**
    * Returns the value of the '<em><b>Definitions</b></em>' containment reference list.
@@ -37,10 +37,10 @@ public interface DefinitionScope extends EObject
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Definitions</em>' containment reference list.
-   * @see org.yakindu.sct.statechart.expressions.ExpressionsPackage#getDefinitionScope_Definitions()
+   * @see org.yakindu.sct.statechart.expressions.ExpressionsPackage#getScope_Definitions()
    * @model containment="true"
    * @generated
    */
   EList<Definition> getDefinitions();
 
-} // DefinitionScope
+} // Scope

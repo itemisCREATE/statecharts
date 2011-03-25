@@ -26,13 +26,265 @@ public interface ExpressionsFactory extends EFactory
   ExpressionsFactory eINSTANCE = org.yakindu.sct.statechart.expressions.impl.ExpressionsFactoryImpl.init();
 
   /**
-   * Returns a new object of class '<em>Entry Rule</em>'.
+   * Returns a new object of class '<em>Root</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Entry Rule</em>'.
+   * @return a new object of class '<em>Root</em>'.
    * @generated
    */
-  EntryRule createEntryRule();
+  Root createRoot();
+
+  /**
+   * Returns a new object of class '<em>Def Root</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Def Root</em>'.
+   * @generated
+   */
+  DefRoot createDefRoot();
+
+  /**
+   * Returns a new object of class '<em>Statechart Root</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Statechart Root</em>'.
+   * @generated
+   */
+  StatechartRoot createStatechartRoot();
+
+  /**
+   * Returns a new object of class '<em>State Root</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>State Root</em>'.
+   * @generated
+   */
+  StateRoot createStateRoot();
+
+  /**
+   * Returns a new object of class '<em>Transition Root</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Transition Root</em>'.
+   * @generated
+   */
+  TransitionRoot createTransitionRoot();
+
+  /**
+   * Returns a new object of class '<em>Statechart Definition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Statechart Definition</em>'.
+   * @generated
+   */
+  StatechartDefinition createStatechartDefinition();
+
+  /**
+   * Returns a new object of class '<em>State Definition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>State Definition</em>'.
+   * @generated
+   */
+  StateDefinition createStateDefinition();
+
+  /**
+   * Returns a new object of class '<em>Transition Statement</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Transition Statement</em>'.
+   * @generated
+   */
+  TransitionStatement createTransitionStatement();
+
+  /**
+   * Returns a new object of class '<em>Scope</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Scope</em>'.
+   * @generated
+   */
+  Scope createScope();
+
+  /**
+   * Returns a new object of class '<em>Simple Scope</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Simple Scope</em>'.
+   * @generated
+   */
+  SimpleScope createSimpleScope();
+
+  /**
+   * Returns a new object of class '<em>Statechart Scope</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Statechart Scope</em>'.
+   * @generated
+   */
+  StatechartScope createStatechartScope();
+
+  /**
+   * Returns a new object of class '<em>Interface Scope</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Interface Scope</em>'.
+   * @generated
+   */
+  InterfaceScope createInterfaceScope();
+
+  /**
+   * Returns a new object of class '<em>Internal Scope</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Internal Scope</em>'.
+   * @generated
+   */
+  InternalScope createInternalScope();
+
+  /**
+   * Returns a new object of class '<em>Definition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Definition</em>'.
+   * @generated
+   */
+  Definition createDefinition();
+
+  /**
+   * Returns a new object of class '<em>Event Definition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Event Definition</em>'.
+   * @generated
+   */
+  EventDefinition createEventDefinition();
+
+  /**
+   * Returns a new object of class '<em>Event Derivation</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Event Derivation</em>'.
+   * @generated
+   */
+  EventDerivation createEventDerivation();
+
+  /**
+   * Returns a new object of class '<em>Variable Definition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Variable Definition</em>'.
+   * @generated
+   */
+  VariableDefinition createVariableDefinition();
+
+  /**
+   * Returns a new object of class '<em>Clock</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Clock</em>'.
+   * @generated
+   */
+  Clock createClock();
+
+  /**
+   * Returns a new object of class '<em>Operation</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Operation</em>'.
+   * @generated
+   */
+  Operation createOperation();
+
+  /**
+   * Returns a new object of class '<em>Entrypoint</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Entrypoint</em>'.
+   * @generated
+   */
+  Entrypoint createEntrypoint();
+
+  /**
+   * Returns a new object of class '<em>Exitpoint</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Exitpoint</em>'.
+   * @generated
+   */
+  Exitpoint createExitpoint();
+
+  /**
+   * Returns a new object of class '<em>Reaction</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Reaction</em>'.
+   * @generated
+   */
+  Reaction createReaction();
+
+  /**
+   * Returns a new object of class '<em>Reaction Trigger</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Reaction Trigger</em>'.
+   * @generated
+   */
+  ReactionTrigger createReactionTrigger();
+
+  /**
+   * Returns a new object of class '<em>Action</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Action</em>'.
+   * @generated
+   */
+  Action createAction();
+
+  /**
+   * Returns a new object of class '<em>Reaction Properties</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Reaction Properties</em>'.
+   * @generated
+   */
+  ReactionProperties createReactionProperties();
+
+  /**
+   * Returns a new object of class '<em>Reaction Property</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Reaction Property</em>'.
+   * @generated
+   */
+  ReactionProperty createReactionProperty();
+
+  /**
+   * Returns a new object of class '<em>Reaction Priority</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Reaction Priority</em>'.
+   * @generated
+   */
+  ReactionPriority createReactionPriority();
+
+  /**
+   * Returns a new object of class '<em>Entry Point Spec</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Entry Point Spec</em>'.
+   * @generated
+   */
+  EntryPointSpec createEntryPointSpec();
+
+  /**
+   * Returns a new object of class '<em>Exit Point Spec</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Exit Point Spec</em>'.
+   * @generated
+   */
+  ExitPointSpec createExitPointSpec();
 
   /**
    * Returns a new object of class '<em>State Expression</em>'.
@@ -69,123 +321,6 @@ public interface ExpressionsFactory extends EFactory
    * @generated
    */
   OnTickExpression createOnTickExpression();
-
-  /**
-   * Returns a new object of class '<em>Custom Transition Expression</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Custom Transition Expression</em>'.
-   * @generated
-   */
-  CustomTransitionExpression createCustomTransitionExpression();
-
-  /**
-   * Returns a new object of class '<em>Element Definition</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Element Definition</em>'.
-   * @generated
-   */
-  ElementDefinition createElementDefinition();
-
-  /**
-   * Returns a new object of class '<em>Definition Scope</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Definition Scope</em>'.
-   * @generated
-   */
-  DefinitionScope createDefinitionScope();
-
-  /**
-   * Returns a new object of class '<em>Interface Scope</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Interface Scope</em>'.
-   * @generated
-   */
-  InterfaceScope createInterfaceScope();
-
-  /**
-   * Returns a new object of class '<em>Internal Scope</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Internal Scope</em>'.
-   * @generated
-   */
-  InternalScope createInternalScope();
-
-  /**
-   * Returns a new object of class '<em>Definition</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Definition</em>'.
-   * @generated
-   */
-  Definition createDefinition();
-
-  /**
-   * Returns a new object of class '<em>Variable Definition</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Variable Definition</em>'.
-   * @generated
-   */
-  VariableDefinition createVariableDefinition();
-
-  /**
-   * Returns a new object of class '<em>Event Definition</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Event Definition</em>'.
-   * @generated
-   */
-  EventDefinition createEventDefinition();
-
-  /**
-   * Returns a new object of class '<em>Event Derivation</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Event Derivation</em>'.
-   * @generated
-   */
-  EventDerivation createEventDerivation();
-
-  /**
-   * Returns a new object of class '<em>Operation</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Operation</em>'.
-   * @generated
-   */
-  Operation createOperation();
-
-  /**
-   * Returns a new object of class '<em>Entrypoint</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Entrypoint</em>'.
-   * @generated
-   */
-  Entrypoint createEntrypoint();
-
-  /**
-   * Returns a new object of class '<em>Exitpoint</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Exitpoint</em>'.
-   * @generated
-   */
-  Exitpoint createExitpoint();
-
-  /**
-   * Returns a new object of class '<em>Clock</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Clock</em>'.
-   * @generated
-   */
-  Clock createClock();
 
   /**
    * Returns a new object of class '<em>Expression Rule</em>'.

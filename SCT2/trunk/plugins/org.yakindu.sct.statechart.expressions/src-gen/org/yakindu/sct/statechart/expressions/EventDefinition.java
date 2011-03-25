@@ -5,6 +5,7 @@
  */
 package org.yakindu.sct.statechart.expressions;
 
+import org.yakindu.model.sct.statechart.Event;
 
 /**
  * <!-- begin-user-doc -->
@@ -15,7 +16,6 @@ package org.yakindu.sct.statechart.expressions;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.yakindu.sct.statechart.expressions.EventDefinition#getDirection <em>Direction</em>}</li>
- *   <li>{@link org.yakindu.sct.statechart.expressions.EventDefinition#getName <em>Name</em>}</li>
  *   <li>{@link org.yakindu.sct.statechart.expressions.EventDefinition#getType <em>Type</em>}</li>
  *   <li>{@link org.yakindu.sct.statechart.expressions.EventDefinition#getDerivation <em>Derivation</em>}</li>
  * </ul>
@@ -25,7 +25,7 @@ package org.yakindu.sct.statechart.expressions;
  * @model
  * @generated
  */
-public interface EventDefinition extends Definition
+public interface EventDefinition extends Definition, Event
 {
   /**
    * Returns the value of the '<em><b>Direction</b></em>' attribute.
@@ -55,32 +55,6 @@ public interface EventDefinition extends Definition
    * @generated
    */
   void setDirection(Direction value);
-
-  /**
-   * Returns the value of the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Name</em>' attribute.
-   * @see #setName(String)
-   * @see org.yakindu.sct.statechart.expressions.ExpressionsPackage#getEventDefinition_Name()
-   * @model
-   * @generated
-   */
-  String getName();
-
-  /**
-   * Sets the value of the '{@link org.yakindu.sct.statechart.expressions.EventDefinition#getName <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Name</em>' attribute.
-   * @see #getName()
-   * @generated
-   */
-  void setName(String value);
 
   /**
    * Returns the value of the '<em><b>Type</b></em>' attribute.

@@ -19,41 +19,41 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.yakindu.sct.statechart.expressions.DefinitionScope;
-import org.yakindu.sct.statechart.expressions.ElementDefinition;
+import org.yakindu.sct.statechart.expressions.DefRoot;
 import org.yakindu.sct.statechart.expressions.ExpressionsPackage;
+import org.yakindu.sct.statechart.expressions.Root;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Element Definition</b></em>'.
+ * An implementation of the model object '<em><b>Root</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.yakindu.sct.statechart.expressions.impl.ElementDefinitionImpl#getDefinitionScopes <em>Definition Scopes</em>}</li>
+ *   <li>{@link org.yakindu.sct.statechart.expressions.impl.RootImpl#getRoots <em>Roots</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ElementDefinitionImpl extends MinimalEObjectImpl.Container implements ElementDefinition
+public class RootImpl extends MinimalEObjectImpl.Container implements Root
 {
   /**
-   * The cached value of the '{@link #getDefinitionScopes() <em>Definition Scopes</em>}' containment reference list.
+   * The cached value of the '{@link #getRoots() <em>Roots</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getDefinitionScopes()
+   * @see #getRoots()
    * @generated
    * @ordered
    */
-  protected EList<DefinitionScope> definitionScopes;
+  protected EList<DefRoot> roots;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ElementDefinitionImpl()
+  protected RootImpl()
   {
     super();
   }
@@ -66,7 +66,7 @@ public class ElementDefinitionImpl extends MinimalEObjectImpl.Container implemen
   @Override
   protected EClass eStaticClass()
   {
-    return ExpressionsPackage.Literals.ELEMENT_DEFINITION;
+    return ExpressionsPackage.Literals.ROOT;
   }
 
   /**
@@ -74,13 +74,13 @@ public class ElementDefinitionImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<DefinitionScope> getDefinitionScopes()
+  public EList<DefRoot> getRoots()
   {
-    if (definitionScopes == null)
+    if (roots == null)
     {
-      definitionScopes = new EObjectContainmentEList<DefinitionScope>(DefinitionScope.class, this, ExpressionsPackage.ELEMENT_DEFINITION__DEFINITION_SCOPES);
+      roots = new EObjectContainmentEList<DefRoot>(DefRoot.class, this, ExpressionsPackage.ROOT__ROOTS);
     }
-    return definitionScopes;
+    return roots;
   }
 
   /**
@@ -93,8 +93,8 @@ public class ElementDefinitionImpl extends MinimalEObjectImpl.Container implemen
   {
     switch (featureID)
     {
-      case ExpressionsPackage.ELEMENT_DEFINITION__DEFINITION_SCOPES:
-        return ((InternalEList<?>)getDefinitionScopes()).basicRemove(otherEnd, msgs);
+      case ExpressionsPackage.ROOT__ROOTS:
+        return ((InternalEList<?>)getRoots()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -109,8 +109,8 @@ public class ElementDefinitionImpl extends MinimalEObjectImpl.Container implemen
   {
     switch (featureID)
     {
-      case ExpressionsPackage.ELEMENT_DEFINITION__DEFINITION_SCOPES:
-        return getDefinitionScopes();
+      case ExpressionsPackage.ROOT__ROOTS:
+        return getRoots();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -126,9 +126,9 @@ public class ElementDefinitionImpl extends MinimalEObjectImpl.Container implemen
   {
     switch (featureID)
     {
-      case ExpressionsPackage.ELEMENT_DEFINITION__DEFINITION_SCOPES:
-        getDefinitionScopes().clear();
-        getDefinitionScopes().addAll((Collection<? extends DefinitionScope>)newValue);
+      case ExpressionsPackage.ROOT__ROOTS:
+        getRoots().clear();
+        getRoots().addAll((Collection<? extends DefRoot>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -144,8 +144,8 @@ public class ElementDefinitionImpl extends MinimalEObjectImpl.Container implemen
   {
     switch (featureID)
     {
-      case ExpressionsPackage.ELEMENT_DEFINITION__DEFINITION_SCOPES:
-        getDefinitionScopes().clear();
+      case ExpressionsPackage.ROOT__ROOTS:
+        getRoots().clear();
         return;
     }
     super.eUnset(featureID);
@@ -161,10 +161,10 @@ public class ElementDefinitionImpl extends MinimalEObjectImpl.Container implemen
   {
     switch (featureID)
     {
-      case ExpressionsPackage.ELEMENT_DEFINITION__DEFINITION_SCOPES:
-        return definitionScopes != null && !definitionScopes.isEmpty();
+      case ExpressionsPackage.ROOT__ROOTS:
+        return roots != null && !roots.isEmpty();
     }
     return super.eIsSet(featureID);
   }
 
-} //ElementDefinitionImpl
+} //RootImpl

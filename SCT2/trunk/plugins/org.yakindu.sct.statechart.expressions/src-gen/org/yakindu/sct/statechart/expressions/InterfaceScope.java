@@ -22,7 +22,7 @@ package org.yakindu.sct.statechart.expressions;
  * @model
  * @generated
  */
-public interface InterfaceScope extends DefinitionScope
+public interface InterfaceScope extends StatechartScope
 {
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
