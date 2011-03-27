@@ -104,10 +104,6 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
       case ExpressionsPackage.ENTER_EVENT: return createEnterEvent();
       case ExpressionsPackage.EXIT_EVENT: return createExitEvent();
       case ExpressionsPackage.ON_CYCLE_EVENT: return createOnCycleEvent();
-      case ExpressionsPackage.STATE_EXPRESSION: return createStateExpression();
-      case ExpressionsPackage.ENTRY_EXPRESSION: return createEntryExpression();
-      case ExpressionsPackage.EXIT_EXPRESSION: return createExitExpression();
-      case ExpressionsPackage.ON_TICK_EXPRESSION: return createOnTickExpression();
       case ExpressionsPackage.EXPRESSION_RULE: return createExpressionRule();
       case ExpressionsPackage.RAISE_EVENT_EXPRESSION: return createRaiseEventExpression();
       case ExpressionsPackage.EXPRESSION: return createExpression();
@@ -581,50 +577,6 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
   {
     OnCycleEventImpl onCycleEvent = new OnCycleEventImpl();
     return onCycleEvent;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public StateExpression createStateExpression()
-  {
-    StateExpressionImpl stateExpression = new StateExpressionImpl();
-    return stateExpression;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EntryExpression createEntryExpression()
-  {
-    EntryExpressionImpl entryExpression = new EntryExpressionImpl();
-    return entryExpression;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ExitExpression createExitExpression()
-  {
-    ExitExpressionImpl exitExpression = new ExitExpressionImpl();
-    return exitExpression;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public OnTickExpression createOnTickExpression()
-  {
-    OnTickExpressionImpl onTickExpression = new OnTickExpressionImpl();
-    return onTickExpression;
   }
 
   /**

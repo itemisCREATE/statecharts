@@ -118,26 +118,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="EnterEvent" eSuperTypes="#//BuiltinEventSpec"/>
   <eClassifiers xsi:type="ecore:EClass" name="ExitEvent" eSuperTypes="#//BuiltinEventSpec"/>
   <eClassifiers xsi:type="ecore:EClass" name="OnCycleEvent" eSuperTypes="#//BuiltinEventSpec"/>
-  <eClassifiers xsi:type="ecore:EClass" name="StateExpression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="entryExpression" upperBound="-1"
-        eType="#//EntryExpression" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="exitExpression" upperBound="-1"
-        eType="#//ExitExpression" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ontickExpression" upperBound="-1"
-        eType="#//OnTickExpression" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EntryExpression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//ExpressionRule"
-        containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ExitExpression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//ExpressionRule"
-        containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="OnTickExpression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//ExpressionRule"
-        containment="true"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExpressionRule">
     <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"
         containment="true"/>
