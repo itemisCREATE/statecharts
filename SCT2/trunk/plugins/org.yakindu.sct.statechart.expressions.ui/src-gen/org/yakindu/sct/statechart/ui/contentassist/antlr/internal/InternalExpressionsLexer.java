@@ -23,7 +23,6 @@ public class InternalExpressionsLexer extends Lexer {
     public static final int T45=45;
     public static final int T20=20;
     public static final int T34=34;
-    public static final int T64=64;
     public static final int T25=25;
     public static final int T18=18;
     public static final int T37=37;
@@ -52,12 +51,10 @@ public class InternalExpressionsLexer extends Lexer {
     public static final int T23=23;
     public static final int T28=28;
     public static final int T42=42;
-    public static final int T66=66;
     public static final int T40=40;
     public static final int T63=63;
     public static final int T57=57;
     public static final int T13=13;
-    public static final int T65=65;
     public static final int T56=56;
     public static final int T59=59;
     public static final int RULE_WS=11;
@@ -67,7 +64,7 @@ public class InternalExpressionsLexer extends Lexer {
     public static final int EOF=-1;
     public static final int T47=47;
     public static final int RULE_BOOL=4;
-    public static final int Tokens=67;
+    public static final int Tokens=64;
     public static final int T53=53;
     public static final int T60=60;
     public static final int RULE_ANY_OTHER=12;
@@ -925,10 +922,10 @@ public class InternalExpressionsLexer extends Lexer {
     public final void mT58() throws RecognitionException {
         try {
             int _type = T58;
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:55:5: ( 'entry:' )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:55:7: 'entry:'
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:55:5: ( 'raise' )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:55:7: 'raise'
             {
-            match("entry:"); 
+            match("raise"); 
 
 
             }
@@ -944,10 +941,10 @@ public class InternalExpressionsLexer extends Lexer {
     public final void mT59() throws RecognitionException {
         try {
             int _type = T59;
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:56:5: ( 'exit:' )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:56:7: 'exit:'
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:56:5: ( '||' )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:56:7: '||'
             {
-            match("exit:"); 
+            match("||"); 
 
 
             }
@@ -963,10 +960,10 @@ public class InternalExpressionsLexer extends Lexer {
     public final void mT60() throws RecognitionException {
         try {
             int _type = T60;
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:57:5: ( 'do:' )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:57:7: 'do:'
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:57:5: ( '&&' )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:57:7: '&&'
             {
-            match("do:"); 
+            match("&&"); 
 
 
             }
@@ -982,11 +979,10 @@ public class InternalExpressionsLexer extends Lexer {
     public final void mT61() throws RecognitionException {
         try {
             int _type = T61;
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:58:5: ( 'raise' )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:58:7: 'raise'
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:58:5: ( '!' )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:58:7: '!'
             {
-            match("raise"); 
-
+            match('!'); 
 
             }
 
@@ -1001,10 +997,10 @@ public class InternalExpressionsLexer extends Lexer {
     public final void mT62() throws RecognitionException {
         try {
             int _type = T62;
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:59:5: ( '||' )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:59:7: '||'
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:59:5: ( 'readonly' )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:59:7: 'readonly'
             {
-            match("||"); 
+            match("readonly"); 
 
 
             }
@@ -1020,64 +1016,8 @@ public class InternalExpressionsLexer extends Lexer {
     public final void mT63() throws RecognitionException {
         try {
             int _type = T63;
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:60:5: ( '&&' )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:60:7: '&&'
-            {
-            match("&&"); 
-
-
-            }
-
-            this.type = _type;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end T63
-
-    // $ANTLR start T64
-    public final void mT64() throws RecognitionException {
-        try {
-            int _type = T64;
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:61:5: ( '!' )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:61:7: '!'
-            {
-            match('!'); 
-
-            }
-
-            this.type = _type;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end T64
-
-    // $ANTLR start T65
-    public final void mT65() throws RecognitionException {
-        try {
-            int _type = T65;
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:62:5: ( 'readonly' )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:62:7: 'readonly'
-            {
-            match("readonly"); 
-
-
-            }
-
-            this.type = _type;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end T65
-
-    // $ANTLR start T66
-    public final void mT66() throws RecognitionException {
-        try {
-            int _type = T66;
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:63:5: ( 'external' )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:63:7: 'external'
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:60:5: ( 'external' )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:60:7: 'external'
             {
             match("external"); 
 
@@ -1089,16 +1029,16 @@ public class InternalExpressionsLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end T66
+    // $ANTLR end T63
 
     // $ANTLR start RULE_BOOL
     public final void mRULE_BOOL() throws RecognitionException {
         try {
             int _type = RULE_BOOL;
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7475:11: ( ( 'true' | 'false' ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7475:13: ( 'true' | 'false' )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7151:11: ( ( 'true' | 'false' ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7151:13: ( 'true' | 'false' )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7475:13: ( 'true' | 'false' )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7151:13: ( 'true' | 'false' )
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -1110,13 +1050,13 @@ public class InternalExpressionsLexer extends Lexer {
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("7475:13: ( 'true' | 'false' )", 1, 0, input);
+                    new NoViableAltException("7151:13: ( 'true' | 'false' )", 1, 0, input);
 
                 throw nvae;
             }
             switch (alt1) {
                 case 1 :
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7475:14: 'true'
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7151:14: 'true'
                     {
                     match("true"); 
 
@@ -1124,7 +1064,7 @@ public class InternalExpressionsLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7475:21: 'false'
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7151:21: 'false'
                     {
                     match("false"); 
 
@@ -1148,10 +1088,10 @@ public class InternalExpressionsLexer extends Lexer {
     public final void mRULE_FLOAT() throws RecognitionException {
         try {
             int _type = RULE_FLOAT;
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7477:12: ( ( '-' | '+' )? RULE_INT '.' RULE_INT ( 'e' ( '-' | '+' ) RULE_INT )? )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7477:14: ( '-' | '+' )? RULE_INT '.' RULE_INT ( 'e' ( '-' | '+' ) RULE_INT )?
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7153:12: ( ( '-' | '+' )? RULE_INT '.' RULE_INT ( 'e' ( '-' | '+' ) RULE_INT )? )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7153:14: ( '-' | '+' )? RULE_INT '.' RULE_INT ( 'e' ( '-' | '+' ) RULE_INT )?
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7477:14: ( '-' | '+' )?
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7153:14: ( '-' | '+' )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -1181,7 +1121,7 @@ public class InternalExpressionsLexer extends Lexer {
             mRULE_INT(); 
             match('.'); 
             mRULE_INT(); 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7477:47: ( 'e' ( '-' | '+' ) RULE_INT )?
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7153:47: ( 'e' ( '-' | '+' ) RULE_INT )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -1190,7 +1130,7 @@ public class InternalExpressionsLexer extends Lexer {
             }
             switch (alt3) {
                 case 1 :
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7477:48: 'e' ( '-' | '+' ) RULE_INT
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7153:48: 'e' ( '-' | '+' ) RULE_INT
                     {
                     match('e'); 
                     if ( input.LA(1)=='+'||input.LA(1)=='-' ) {
@@ -1224,10 +1164,10 @@ public class InternalExpressionsLexer extends Lexer {
     public final void mRULE_ID() throws RecognitionException {
         try {
             int _type = RULE_ID;
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7479:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7479:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7155:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7155:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7479:11: ( '^' )?
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7155:11: ( '^' )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -1236,7 +1176,7 @@ public class InternalExpressionsLexer extends Lexer {
             }
             switch (alt4) {
                 case 1 :
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7479:11: '^'
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7155:11: '^'
                     {
                     match('^'); 
 
@@ -1255,7 +1195,7 @@ public class InternalExpressionsLexer extends Lexer {
                 recover(mse);    throw mse;
             }
 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7479:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7155:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop5:
             do {
                 int alt5=2;
@@ -1303,10 +1243,10 @@ public class InternalExpressionsLexer extends Lexer {
     public final void mRULE_INT() throws RecognitionException {
         try {
             int _type = RULE_INT;
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7481:10: ( ( '0' .. '9' )+ )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7481:12: ( '0' .. '9' )+
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7157:10: ( ( '0' .. '9' )+ )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7157:12: ( '0' .. '9' )+
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7481:12: ( '0' .. '9' )+
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7157:12: ( '0' .. '9' )+
             int cnt6=0;
             loop6:
             do {
@@ -1320,7 +1260,7 @@ public class InternalExpressionsLexer extends Lexer {
 
                 switch (alt6) {
             	case 1 :
-            	    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7481:13: '0' .. '9'
+            	    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7157:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -1350,10 +1290,10 @@ public class InternalExpressionsLexer extends Lexer {
     public final void mRULE_STRING() throws RecognitionException {
         try {
             int _type = RULE_STRING;
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7483:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7483:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7159:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7159:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7483:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7159:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt9=2;
             int LA9_0 = input.LA(1);
 
@@ -1365,16 +1305,16 @@ public class InternalExpressionsLexer extends Lexer {
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("7483:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )", 9, 0, input);
+                    new NoViableAltException("7159:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )", 9, 0, input);
 
                 throw nvae;
             }
             switch (alt9) {
                 case 1 :
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7483:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7159:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7483:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7159:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop7:
                     do {
                         int alt7=3;
@@ -1390,7 +1330,7 @@ public class InternalExpressionsLexer extends Lexer {
 
                         switch (alt7) {
                     	case 1 :
-                    	    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7483:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7159:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t' ) {
@@ -1407,7 +1347,7 @@ public class InternalExpressionsLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7483:62: ~ ( ( '\\\\' | '\"' ) )
+                    	    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7159:62: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFE') ) {
                     	        input.consume();
@@ -1433,10 +1373,10 @@ public class InternalExpressionsLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7483:82: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7159:82: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7483:87: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7159:87: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop8:
                     do {
                         int alt8=3;
@@ -1452,7 +1392,7 @@ public class InternalExpressionsLexer extends Lexer {
 
                         switch (alt8) {
                     	case 1 :
-                    	    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7483:88: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7159:88: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t' ) {
@@ -1469,7 +1409,7 @@ public class InternalExpressionsLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7483:129: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7159:129: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFE') ) {
                     	        input.consume();
@@ -1511,12 +1451,12 @@ public class InternalExpressionsLexer extends Lexer {
     public final void mRULE_ML_COMMENT() throws RecognitionException {
         try {
             int _type = RULE_ML_COMMENT;
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7485:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7485:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7161:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7161:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7485:24: ( options {greedy=false; } : . )*
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7161:24: ( options {greedy=false; } : . )*
             loop10:
             do {
                 int alt10=2;
@@ -1541,7 +1481,7 @@ public class InternalExpressionsLexer extends Lexer {
 
                 switch (alt10) {
             	case 1 :
-            	    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7485:52: .
+            	    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7161:52: .
             	    {
             	    matchAny(); 
 
@@ -1569,12 +1509,12 @@ public class InternalExpressionsLexer extends Lexer {
     public final void mRULE_SL_COMMENT() throws RecognitionException {
         try {
             int _type = RULE_SL_COMMENT;
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7487:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7487:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7163:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7163:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7487:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7163:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop11:
             do {
                 int alt11=2;
@@ -1587,7 +1527,7 @@ public class InternalExpressionsLexer extends Lexer {
 
                 switch (alt11) {
             	case 1 :
-            	    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7487:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7163:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFE') ) {
             	        input.consume();
@@ -1608,7 +1548,7 @@ public class InternalExpressionsLexer extends Lexer {
                 }
             } while (true);
 
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7487:40: ( ( '\\r' )? '\\n' )?
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7163:40: ( ( '\\r' )? '\\n' )?
             int alt13=2;
             int LA13_0 = input.LA(1);
 
@@ -1617,9 +1557,9 @@ public class InternalExpressionsLexer extends Lexer {
             }
             switch (alt13) {
                 case 1 :
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7487:41: ( '\\r' )? '\\n'
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7163:41: ( '\\r' )? '\\n'
                     {
-                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7487:41: ( '\\r' )?
+                    // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7163:41: ( '\\r' )?
                     int alt12=2;
                     int LA12_0 = input.LA(1);
 
@@ -1628,7 +1568,7 @@ public class InternalExpressionsLexer extends Lexer {
                     }
                     switch (alt12) {
                         case 1 :
-                            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7487:41: '\\r'
+                            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7163:41: '\\r'
                             {
                             match('\r'); 
 
@@ -1658,10 +1598,10 @@ public class InternalExpressionsLexer extends Lexer {
     public final void mRULE_WS() throws RecognitionException {
         try {
             int _type = RULE_WS;
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7489:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7489:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7165:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7165:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7489:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7165:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt14=0;
             loop14:
             do {
@@ -1714,8 +1654,8 @@ public class InternalExpressionsLexer extends Lexer {
     public final void mRULE_ANY_OTHER() throws RecognitionException {
         try {
             int _type = RULE_ANY_OTHER;
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7491:16: ( . )
-            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7491:18: .
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7167:16: ( . )
+            // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:7167:18: .
             {
             matchAny(); 
 
@@ -1729,8 +1669,8 @@ public class InternalExpressionsLexer extends Lexer {
     // $ANTLR end RULE_ANY_OTHER
 
     public void mTokens() throws RecognitionException {
-        // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1:8: ( T13 | T14 | T15 | T16 | T17 | T18 | T19 | T20 | T21 | T22 | T23 | T24 | T25 | T26 | T27 | T28 | T29 | T30 | T31 | T32 | T33 | T34 | T35 | T36 | T37 | T38 | T39 | T40 | T41 | T42 | T43 | T44 | T45 | T46 | T47 | T48 | T49 | T50 | T51 | T52 | T53 | T54 | T55 | T56 | T57 | T58 | T59 | T60 | T61 | T62 | T63 | T64 | T65 | T66 | RULE_BOOL | RULE_FLOAT | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
-        int alt15=63;
+        // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1:8: ( T13 | T14 | T15 | T16 | T17 | T18 | T19 | T20 | T21 | T22 | T23 | T24 | T25 | T26 | T27 | T28 | T29 | T30 | T31 | T32 | T33 | T34 | T35 | T36 | T37 | T38 | T39 | T40 | T41 | T42 | T43 | T44 | T45 | T46 | T47 | T48 | T49 | T50 | T51 | T52 | T53 | T54 | T55 | T56 | T57 | T58 | T59 | T60 | T61 | T62 | T63 | RULE_BOOL | RULE_FLOAT | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
+        int alt15=60;
         alt15 = dfa15.predict(input);
         switch (alt15) {
             case 1 :
@@ -2091,84 +2031,63 @@ public class InternalExpressionsLexer extends Lexer {
                 }
                 break;
             case 52 :
-                // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1:214: T64
-                {
-                mT64(); 
-
-                }
-                break;
-            case 53 :
-                // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1:218: T65
-                {
-                mT65(); 
-
-                }
-                break;
-            case 54 :
-                // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1:222: T66
-                {
-                mT66(); 
-
-                }
-                break;
-            case 55 :
-                // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1:226: RULE_BOOL
+                // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1:214: RULE_BOOL
                 {
                 mRULE_BOOL(); 
 
                 }
                 break;
-            case 56 :
-                // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1:236: RULE_FLOAT
+            case 53 :
+                // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1:224: RULE_FLOAT
                 {
                 mRULE_FLOAT(); 
 
                 }
                 break;
-            case 57 :
-                // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1:247: RULE_ID
+            case 54 :
+                // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1:235: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
-            case 58 :
-                // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1:255: RULE_INT
+            case 55 :
+                // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1:243: RULE_INT
                 {
                 mRULE_INT(); 
 
                 }
                 break;
-            case 59 :
-                // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1:264: RULE_STRING
+            case 56 :
+                // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1:252: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
-            case 60 :
-                // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1:276: RULE_ML_COMMENT
+            case 57 :
+                // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1:264: RULE_ML_COMMENT
                 {
                 mRULE_ML_COMMENT(); 
 
                 }
                 break;
-            case 61 :
-                // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1:292: RULE_SL_COMMENT
+            case 58 :
+                // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1:280: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
                 }
                 break;
-            case 62 :
-                // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1:308: RULE_WS
+            case 59 :
+                // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1:296: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
-            case 63 :
-                // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1:316: RULE_ANY_OTHER
+            case 60 :
+                // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:1:304: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 
@@ -2182,292 +2101,283 @@ public class InternalExpressionsLexer extends Lexer {
 
     protected DFA15 dfa15 = new DFA15(this);
     static final String DFA15_eotS =
-        "\1\uffff\2\53\1\57\1\61\1\uffff\1\65\2\uffff\1\71\1\73\1\75\1\77"+
-        "\1\101\5\53\1\51\1\uffff\2\53\6\uffff\2\53\2\51\2\53\1\133\1\51"+
-        "\1\uffff\2\51\2\uffff\1\140\1\uffff\3\53\21\uffff\1\53\1\uffff\1"+
-        "\145\1\146\5\53\2\uffff\4\53\6\uffff\2\53\2\uffff\2\53\1\uffff\1"+
-        "\133\2\uffff\1\53\1\uffff\1\170\3\53\2\uffff\1\174\4\53\2\uffff"+
-        "\6\53\1\uffff\3\53\1\uffff\3\53\1\uffff\1\u0091\2\53\1\u0094\1\53"+
-        "\1\uffff\1\u0099\6\53\1\u00a0\6\53\1\uffff\1\u00a8\1\53\1\uffff"+
-        "\1\53\2\uffff\1\53\1\uffff\1\53\1\u00ae\1\53\1\u00b1\1\u00b2\1\u00b3"+
-        "\1\uffff\1\u00a0\5\53\1\u00b9\1\uffff\2\53\1\uffff\2\53\2\uffff"+
-        "\1\53\3\uffff\2\53\1\u00c2\1\53\1\u00c4\1\uffff\1\53\1\u00c6\1\uffff"+
-        "\3\53\1\u00cc\1\53\1\uffff\1\53\1\uffff\1\u00cf\3\uffff\1\53\1\u00d1"+
-        "\1\53\1\uffff\1\u00d3\1\u00d4\1\uffff\1\u00d5\1\uffff\1\53\3\uffff"+
-        "\1\u00d7\1\uffff";
+        "\1\uffff\2\52\1\56\1\60\1\uffff\1\64\2\uffff\1\70\1\72\1\74\1\76"+
+        "\1\100\5\52\1\50\1\uffff\2\52\6\uffff\1\52\2\50\2\52\1\131\1\50"+
+        "\1\uffff\2\50\2\uffff\1\136\1\uffff\3\52\21\uffff\1\52\1\uffff\1"+
+        "\143\1\144\5\52\2\uffff\4\52\6\uffff\1\52\2\uffff\2\52\1\uffff\1"+
+        "\131\2\uffff\1\52\1\uffff\1\52\1\166\2\52\2\uffff\1\52\1\172\3\52"+
+        "\2\uffff\12\52\1\uffff\2\52\1\u008e\1\uffff\2\52\1\u0091\1\52\1"+
+        "\uffff\3\52\1\u0098\3\52\1\u009c\6\52\1\uffff\1\u00a4\1\52\1\uffff"+
+        "\1\52\1\uffff\1\u00a8\1\52\1\u00aa\1\52\1\uffff\1\52\1\u00ad\1\u00ae"+
+        "\1\uffff\1\u009c\5\52\1\u00b4\1\uffff\2\52\2\uffff\1\52\1\uffff"+
+        "\2\52\2\uffff\2\52\1\u00bd\1\u00be\1\52\1\uffff\1\52\1\u00c1\1\uffff"+
+        "\3\52\1\u00c7\1\52\2\uffff\1\52\1\u00ca\3\uffff\2\52\1\u00cd\1\uffff"+
+        "\1\u00ce\1\u00cf\1\uffff\1\52\1\u00d1\3\uffff\1\u00d2\2\uffff";
     static final String DFA15_eofS =
-        "\u00d8\uffff";
+        "\u00d3\uffff";
     static final String DFA15_minS =
         "\1\0\2\156\2\60\1\uffff\1\52\2\uffff\4\75\1\60\2\163\2\141\1\157"+
-        "\1\100\1\uffff\1\156\1\154\6\uffff\1\146\1\157\1\174\1\46\1\162"+
-        "\1\141\1\56\1\101\1\uffff\2\0\2\uffff\1\60\1\uffff\1\164\1\145\1"+
-        "\143\21\uffff\1\162\1\uffff\2\60\1\162\2\151\1\141\1\157\1\163\1"+
-        "\uffff\1\151\1\164\1\145\1\157\6\uffff\1\164\1\72\2\uffff\1\165"+
-        "\1\154\1\uffff\1\56\2\uffff\1\145\1\uffff\1\60\1\162\1\171\1\151"+
-        "\2\uffff\1\60\1\144\1\163\1\144\1\154\1\164\1\uffff\1\164\2\145"+
-        "\1\156\1\143\1\145\1\uffff\1\145\1\163\1\147\1\uffff\1\141\1\143"+
-        "\1\156\1\uffff\1\60\1\145\1\157\1\60\1\145\1\141\1\60\2\162\1\171"+
-        "\1\164\1\153\1\162\1\60\1\145\1\146\1\145\1\164\1\154\1\147\1\uffff"+
-        "\1\60\1\156\1\uffff\1\141\1\164\1\uffff\1\157\1\uffff\1\156\1\60"+
-        "\1\72\3\60\1\uffff\1\60\2\141\1\162\1\151\1\145\1\60\1\uffff\1\154"+
-        "\1\156\1\145\1\151\1\141\2\uffff\1\157\3\uffff\1\154\1\143\1\60"+
-        "\1\157\1\60\1\uffff\1\171\1\60\1\100\1\156\1\154\1\151\1\60\1\145"+
-        "\1\uffff\1\156\1\uffff\1\60\3\uffff\1\164\1\60\1\156\1\uffff\2\60"+
-        "\1\uffff\1\60\1\uffff\1\164\3\uffff\1\60\1\uffff";
+        "\1\100\1\uffff\1\156\1\154\6\uffff\1\146\1\174\1\46\1\162\1\141"+
+        "\1\56\1\101\1\uffff\2\0\2\uffff\1\60\1\uffff\1\143\1\164\1\145\21"+
+        "\uffff\1\162\1\uffff\2\60\1\151\1\162\1\151\1\141\1\157\1\163\1"+
+        "\uffff\1\145\1\164\1\151\1\157\6\uffff\1\164\2\uffff\1\165\1\154"+
+        "\1\uffff\1\56\2\uffff\1\145\1\uffff\1\171\1\60\1\162\1\151\2\uffff"+
+        "\1\144\1\60\1\163\1\144\1\154\1\164\1\uffff\1\156\1\145\1\164\1"+
+        "\145\1\143\2\145\1\163\1\147\1\143\1\uffff\1\141\1\156\1\60\1\uffff"+
+        "\1\145\1\157\1\60\1\145\1\141\1\164\1\171\1\162\1\60\1\162\1\153"+
+        "\1\162\1\60\1\145\1\146\1\145\1\154\1\164\1\147\1\uffff\1\60\1\156"+
+        "\1\uffff\1\141\1\164\1\60\1\160\1\60\1\157\1\uffff\1\156\2\60\1"+
+        "\uffff\1\60\2\141\1\162\1\145\1\151\1\60\1\uffff\1\154\1\156\1\145"+
+        "\1\uffff\1\157\1\uffff\1\151\1\141\2\uffff\1\154\1\143\2\60\1\157"+
+        "\1\uffff\1\171\1\60\1\100\1\151\1\156\1\154\1\60\1\145\2\uffff\1"+
+        "\156\1\60\3\uffff\1\156\1\164\1\60\1\uffff\2\60\1\uffff\1\164\1"+
+        "\60\3\uffff\1\60\2\uffff";
     static final String DFA15_maxS =
         "\1\ufffe\1\156\1\165\2\71\1\uffff\1\57\2\uffff\4\75\1\172\2\163"+
-        "\1\157\1\145\1\157\1\100\1\uffff\1\170\1\154\6\uffff\1\146\1\157"+
-        "\1\174\1\46\1\162\1\141\1\71\1\172\1\uffff\2\ufffe\2\uffff\1\172"+
-        "\1\uffff\1\164\1\145\1\143\21\uffff\1\162\1\uffff\2\172\1\162\2"+
-        "\151\1\141\1\157\1\164\1\uffff\2\164\1\145\1\157\6\uffff\1\164\1"+
-        "\72\2\uffff\1\165\1\154\1\uffff\1\71\2\uffff\1\145\1\uffff\1\172"+
-        "\1\162\1\171\1\151\2\uffff\1\172\1\144\1\163\2\154\1\164\1\uffff"+
-        "\1\164\1\145\1\162\1\156\1\143\1\145\1\uffff\1\145\1\163\1\162\1"+
-        "\uffff\1\141\1\143\1\156\1\uffff\1\172\1\145\1\157\1\172\1\145\1"+
-        "\141\1\172\2\162\1\171\1\164\1\153\1\162\1\172\1\145\1\156\1\145"+
-        "\1\164\1\154\1\147\1\uffff\1\172\1\156\1\uffff\1\141\1\164\1\uffff"+
-        "\1\157\1\uffff\1\156\1\172\1\160\3\172\1\uffff\1\172\2\141\1\162"+
-        "\1\151\1\145\1\172\1\uffff\1\154\1\156\1\145\1\151\1\141\2\uffff"+
-        "\1\157\3\uffff\1\154\1\143\1\172\1\157\1\172\1\uffff\1\171\1\172"+
-        "\1\143\1\156\1\154\1\151\1\172\1\145\1\uffff\1\156\1\uffff\1\172"+
-        "\3\uffff\1\164\1\172\1\156\1\uffff\2\172\1\uffff\1\172\1\uffff\1"+
-        "\164\3\uffff\1\172\1\uffff";
+        "\1\157\1\145\1\157\1\100\1\uffff\1\170\1\154\6\uffff\1\146\1\174"+
+        "\1\46\1\162\1\141\1\71\1\172\1\uffff\2\ufffe\2\uffff\1\172\1\uffff"+
+        "\1\143\1\164\1\145\21\uffff\1\162\1\uffff\2\172\1\151\1\162\1\151"+
+        "\1\141\1\157\1\164\1\uffff\1\145\2\164\1\157\6\uffff\1\164\2\uffff"+
+        "\1\165\1\154\1\uffff\1\71\2\uffff\1\145\1\uffff\1\171\1\172\1\162"+
+        "\1\151\2\uffff\1\144\1\172\1\163\2\154\1\164\1\uffff\1\156\1\162"+
+        "\1\164\1\145\1\143\2\145\1\163\1\162\1\143\1\uffff\1\141\1\156\1"+
+        "\172\1\uffff\1\145\1\157\1\172\1\145\1\141\1\164\1\171\1\162\1\172"+
+        "\1\162\1\153\1\162\1\172\1\145\1\156\1\145\1\154\1\164\1\147\1\uffff"+
+        "\1\172\1\156\1\uffff\1\141\1\164\1\172\1\160\1\172\1\157\1\uffff"+
+        "\1\156\2\172\1\uffff\1\172\2\141\1\162\1\145\1\151\1\172\1\uffff"+
+        "\1\154\1\156\1\145\1\uffff\1\157\1\uffff\1\151\1\141\2\uffff\1\154"+
+        "\1\143\2\172\1\157\1\uffff\1\171\1\172\1\143\1\151\1\156\1\154\1"+
+        "\172\1\145\2\uffff\1\156\1\172\3\uffff\1\156\1\164\1\172\1\uffff"+
+        "\2\172\1\uffff\1\164\1\172\3\uffff\1\172\2\uffff";
     static final String DFA15_acceptS =
         "\5\uffff\1\5\1\uffff\1\7\1\10\13\uffff\1\33\2\uffff\1\42\1\43\1"+
-        "\44\1\47\1\50\1\51\10\uffff\1\71\2\uffff\1\76\1\77\1\uffff\1\71"+
-        "\3\uffff\1\3\1\70\1\4\1\5\1\75\1\74\1\6\1\7\1\10\1\12\1\11\1\14"+
-        "\1\13\1\15\1\36\1\16\1\64\1\uffff\1\17\10\uffff\1\33\4\uffff\1\42"+
-        "\1\43\1\44\1\47\1\50\1\51\2\uffff\1\62\1\63\2\uffff\1\72\1\uffff"+
-        "\1\73\1\76\1\uffff\1\1\4\uffff\1\20\1\21\6\uffff\1\31\6\uffff\1"+
-        "\60\3\uffff\1\2\3\uffff\1\37\24\uffff\1\22\2\uffff\1\24\2\uffff"+
-        "\1\57\1\uffff\1\54\6\uffff\1\67\7\uffff\1\61\5\uffff\1\53\1\56\1"+
-        "\uffff\1\35\1\40\1\52\5\uffff\1\26\10\uffff\1\23\1\uffff\1\55\1"+
-        "\uffff\1\25\1\30\1\27\3\uffff\1\34\2\uffff\1\65\1\uffff\1\66\1\uffff"+
-        "\1\32\1\41\1\46\1\uffff\1\45";
+        "\44\1\47\1\50\1\51\7\uffff\1\66\2\uffff\1\73\1\74\1\uffff\1\66\3"+
+        "\uffff\1\3\1\65\1\4\1\5\1\71\1\72\1\6\1\7\1\10\1\12\1\11\1\14\1"+
+        "\13\1\15\1\36\1\16\1\61\1\uffff\1\17\10\uffff\1\33\4\uffff\1\42"+
+        "\1\43\1\44\1\47\1\50\1\51\1\uffff\1\57\1\60\2\uffff\1\67\1\uffff"+
+        "\1\70\1\73\1\uffff\1\1\4\uffff\1\20\1\21\6\uffff\1\31\12\uffff\1"+
+        "\2\3\uffff\1\37\23\uffff\1\22\2\uffff\1\24\6\uffff\1\54\3\uffff"+
+        "\1\64\7\uffff\1\56\3\uffff\1\35\1\uffff\1\53\2\uffff\1\40\1\52\5"+
+        "\uffff\1\26\10\uffff\1\23\1\55\2\uffff\1\25\1\30\1\27\3\uffff\1"+
+        "\34\2\uffff\1\62\2\uffff\1\63\1\32\1\41\1\uffff\1\46\1\45";
     static final String DFA15_specialS =
-        "\u00d8\uffff}>";
+        "\u00d3\uffff}>";
     static final String[] DFA15_transitionS = {
-            "\11\51\2\50\2\51\1\50\22\51\1\50\1\14\1\46\1\32\1\51\1\7\1\40"+
-            "\1\47\1\27\1\30\1\5\1\3\1\31\1\4\1\51\1\6\12\43\1\24\1\51\1"+
-            "\11\1\13\1\12\1\51\1\23\32\45\1\33\1\51\1\34\1\44\1\45\1\51"+
-            "\1\35\1\22\1\26\1\36\1\25\1\42\2\45\1\1\3\45\1\16\1\17\1\2\2"+
-            "\45\1\21\1\15\1\41\1\45\1\20\4\45\1\51\1\37\1\51\1\10\uff80"+
-            "\51",
-            "\1\52",
-            "\1\56\1\uffff\1\55\4\uffff\1\54",
-            "\12\60",
-            "\12\60",
+            "\11\50\2\47\2\50\1\47\22\50\1\47\1\14\1\45\1\32\1\50\1\7\1\37"+
+            "\1\46\1\27\1\30\1\5\1\3\1\31\1\4\1\50\1\6\12\42\1\24\1\50\1"+
+            "\11\1\13\1\12\1\50\1\23\32\44\1\33\1\50\1\34\1\43\1\44\1\50"+
+            "\1\35\1\22\1\26\1\44\1\25\1\41\2\44\1\1\3\44\1\16\1\17\1\2\2"+
+            "\44\1\21\1\15\1\40\1\44\1\20\4\44\1\50\1\36\1\50\1\10\uff80"+
+            "\50",
+            "\1\51",
+            "\1\53\1\uffff\1\55\4\uffff\1\54",
+            "\12\57",
+            "\12\57",
             "",
-            "\1\64\4\uffff\1\63",
+            "\1\62\4\uffff\1\63",
             "",
             "",
-            "\1\70",
-            "\1\72",
-            "\1\74",
-            "\1\76",
-            "\12\53\7\uffff\32\53\4\uffff\1\53\1\uffff\23\53\1\100\6\53",
+            "\1\67",
+            "\1\71",
+            "\1\73",
+            "\1\75",
+            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\23\52\1\77\6\52",
+            "\1\101",
             "\1\102",
-            "\1\103",
-            "\1\104\15\uffff\1\105",
-            "\1\106\3\uffff\1\107",
+            "\1\104\15\uffff\1\103",
+            "\1\105\3\uffff\1\106",
+            "\1\107",
             "\1\110",
-            "\1\111",
             "",
-            "\1\114\7\uffff\1\115\1\uffff\1\113",
-            "\1\116",
-            "",
+            "\1\113\7\uffff\1\112\1\uffff\1\114",
+            "\1\115",
             "",
             "",
             "",
             "",
             "",
+            "",
+            "\1\124",
             "\1\125",
             "\1\126",
             "\1\127",
             "\1\130",
-            "\1\131",
-            "\1\132",
-            "\1\60\1\uffff\12\134",
-            "\32\53\4\uffff\1\53\1\uffff\32\53",
+            "\1\57\1\uffff\12\132",
+            "\32\52\4\uffff\1\52\1\uffff\32\52",
             "",
-            "\uffff\135",
-            "\uffff\135",
+            "\uffff\133",
+            "\uffff\133",
             "",
             "",
-            "\12\53\7\uffff\32\53\4\uffff\1\53\1\uffff\23\53\1\137\6\53",
+            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\23\52\1\135\6\52",
             "",
+            "\1\137",
+            "\1\140",
             "\1\141",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
             "\1\142",
-            "\1\143",
             "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "\1\144",
-            "",
-            "\12\53\7\uffff\32\53\4\uffff\1\53\1\uffff\32\53",
-            "\12\53\7\uffff\32\53\4\uffff\1\53\1\uffff\32\53",
+            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
+            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
+            "\1\145",
+            "\1\146",
             "\1\147",
             "\1\150",
             "\1\151",
-            "\1\152",
-            "\1\153",
-            "\1\154\1\155",
+            "\1\152\1\153",
             "",
+            "\1\154",
+            "\1\155",
             "\1\156\12\uffff\1\157",
             "\1\160",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
             "\1\161",
+            "",
+            "",
             "\1\162",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
             "\1\163",
+            "",
+            "\1\57\1\uffff\12\132",
+            "",
+            "",
             "\1\164",
             "",
-            "",
             "\1\165",
-            "\1\166",
-            "",
-            "\1\60\1\uffff\12\134",
-            "",
-            "",
+            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
             "\1\167",
+            "\1\170",
             "",
-            "\12\53\7\uffff\32\53\4\uffff\1\53\1\uffff\32\53",
+            "",
             "\1\171",
-            "\1\172",
+            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
             "\1\173",
-            "",
-            "",
-            "\12\53\7\uffff\32\53\4\uffff\1\53\1\uffff\32\53",
-            "\1\175",
+            "\1\174\7\uffff\1\175",
             "\1\176",
-            "\1\177\7\uffff\1\u0080",
-            "\1\u0081",
-            "\1\u0082",
+            "\1\177",
             "",
+            "\1\u0080",
+            "\1\u0082\14\uffff\1\u0081",
             "\1\u0083",
             "\1\u0084",
-            "\1\u0085\14\uffff\1\u0086",
+            "\1\u0085",
+            "\1\u0086",
             "\1\u0087",
             "\1\u0088",
-            "\1\u0089",
-            "",
-            "\1\u008a",
+            "\1\u008a\12\uffff\1\u0089",
             "\1\u008b",
-            "\1\u008d\12\uffff\1\u008c",
             "",
-            "\1\u008e",
+            "\1\u008c",
+            "\1\u008d",
+            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
+            "",
             "\1\u008f",
             "\1\u0090",
-            "",
-            "\12\53\7\uffff\32\53\4\uffff\1\53\1\uffff\32\53",
+            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
             "\1\u0092",
             "\1\u0093",
-            "\12\53\7\uffff\32\53\4\uffff\1\53\1\uffff\32\53",
+            "\1\u0094",
             "\1\u0095",
             "\1\u0096",
-            "\12\53\1\u0097\6\uffff\32\53\4\uffff\1\53\1\uffff\17\53\1\u0098"+
-            "\12\53",
+            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\17\52\1\u0097\12\52",
+            "\1\u0099",
             "\1\u009a",
             "\1\u009b",
-            "\1\u009c",
+            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
             "\1\u009d",
-            "\1\u009e",
-            "\1\u009f",
-            "\12\53\7\uffff\32\53\4\uffff\1\53\1\uffff\32\53",
+            "\1\u009f\7\uffff\1\u009e",
+            "\1\u00a0",
             "\1\u00a1",
-            "\1\u00a3\7\uffff\1\u00a2",
-            "\1\u00a4",
+            "\1\u00a2",
+            "\1\u00a3",
+            "",
+            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
             "\1\u00a5",
+            "",
             "\1\u00a6",
             "\1\u00a7",
-            "",
-            "\12\53\7\uffff\32\53\4\uffff\1\53\1\uffff\32\53",
+            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
             "\1\u00a9",
-            "",
-            "\1\u00aa",
+            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
             "\1\u00ab",
             "",
             "\1\u00ac",
+            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
+            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
             "",
-            "\1\u00ad",
-            "\12\53\7\uffff\32\53\4\uffff\1\53\1\uffff\32\53",
-            "\1\u00af\65\uffff\1\u00b0",
-            "\12\53\7\uffff\32\53\4\uffff\1\53\1\uffff\32\53",
-            "\12\53\7\uffff\32\53\4\uffff\1\53\1\uffff\32\53",
-            "\12\53\7\uffff\32\53\4\uffff\1\53\1\uffff\32\53",
+            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
+            "\1\u00af",
+            "\1\u00b0",
+            "\1\u00b1",
+            "\1\u00b2",
+            "\1\u00b3",
+            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
             "",
-            "\12\53\7\uffff\32\53\4\uffff\1\53\1\uffff\32\53",
-            "\1\u00b4",
             "\1\u00b5",
             "\1\u00b6",
             "\1\u00b7",
-            "\1\u00b8",
-            "\12\53\7\uffff\32\53\4\uffff\1\53\1\uffff\32\53",
             "",
+            "\1\u00b8",
+            "",
+            "\1\u00b9",
             "\1\u00ba",
+            "",
+            "",
             "\1\u00bb",
             "\1\u00bc",
-            "\1\u00bd",
-            "\1\u00be",
-            "",
-            "",
+            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
+            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
             "\1\u00bf",
             "",
-            "",
-            "",
             "\1\u00c0",
-            "\1\u00c1",
-            "\12\53\7\uffff\32\53\4\uffff\1\53\1\uffff\32\53",
-            "\1\u00c3",
-            "\12\53\7\uffff\32\53\4\uffff\1\53\1\uffff\32\53",
-            "",
+            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
+            "\1\u00c2\42\uffff\1\u00c3",
+            "\1\u00c4",
             "\1\u00c5",
-            "\12\53\7\uffff\32\53\4\uffff\1\53\1\uffff\32\53",
-            "\1\u00c7\42\uffff\1\u00c8",
+            "\1\u00c6",
+            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
+            "\1\u00c8",
+            "",
+            "",
             "\1\u00c9",
-            "\1\u00ca",
+            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
+            "",
+            "",
+            "",
             "\1\u00cb",
-            "\12\53\7\uffff\32\53\4\uffff\1\53\1\uffff\32\53",
-            "\1\u00cd",
+            "\1\u00cc",
+            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
             "",
-            "\1\u00ce",
-            "",
-            "\12\53\7\uffff\32\53\4\uffff\1\53\1\uffff\32\53",
-            "",
-            "",
+            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
+            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
             "",
             "\1\u00d0",
-            "\12\53\7\uffff\32\53\4\uffff\1\53\1\uffff\32\53",
-            "\1\u00d2",
-            "",
-            "\12\53\7\uffff\32\53\4\uffff\1\53\1\uffff\32\53",
-            "\12\53\7\uffff\32\53\4\uffff\1\53\1\uffff\32\53",
-            "",
-            "\12\53\7\uffff\32\53\4\uffff\1\53\1\uffff\32\53",
-            "",
-            "\1\u00d6",
+            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
             "",
             "",
             "",
-            "\12\53\7\uffff\32\53\4\uffff\1\53\1\uffff\32\53",
+            "\12\52\7\uffff\32\52\4\uffff\1\52\1\uffff\32\52",
+            "",
             ""
     };
 
@@ -2501,7 +2411,7 @@ public class InternalExpressionsLexer extends Lexer {
             this.transition = DFA15_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( T13 | T14 | T15 | T16 | T17 | T18 | T19 | T20 | T21 | T22 | T23 | T24 | T25 | T26 | T27 | T28 | T29 | T30 | T31 | T32 | T33 | T34 | T35 | T36 | T37 | T38 | T39 | T40 | T41 | T42 | T43 | T44 | T45 | T46 | T47 | T48 | T49 | T50 | T51 | T52 | T53 | T54 | T55 | T56 | T57 | T58 | T59 | T60 | T61 | T62 | T63 | T64 | T65 | T66 | RULE_BOOL | RULE_FLOAT | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );";
+            return "1:1: Tokens : ( T13 | T14 | T15 | T16 | T17 | T18 | T19 | T20 | T21 | T22 | T23 | T24 | T25 | T26 | T27 | T28 | T29 | T30 | T31 | T32 | T33 | T34 | T35 | T36 | T37 | T38 | T39 | T40 | T41 | T42 | T43 | T44 | T45 | T46 | T47 | T48 | T49 | T50 | T51 | T52 | T53 | T54 | T55 | T56 | T57 | T58 | T59 | T60 | T61 | T62 | T63 | RULE_BOOL | RULE_FLOAT | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );";
         }
     }
  

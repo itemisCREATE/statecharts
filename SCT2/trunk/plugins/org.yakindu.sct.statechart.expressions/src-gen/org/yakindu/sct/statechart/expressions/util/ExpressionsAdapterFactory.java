@@ -262,26 +262,6 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl
         return createOnCycleEventAdapter();
       }
       @Override
-      public Adapter caseStateExpression(StateExpression object)
-      {
-        return createStateExpressionAdapter();
-      }
-      @Override
-      public Adapter caseEntryExpression(EntryExpression object)
-      {
-        return createEntryExpressionAdapter();
-      }
-      @Override
-      public Adapter caseExitExpression(ExitExpression object)
-      {
-        return createExitExpressionAdapter();
-      }
-      @Override
-      public Adapter caseOnTickExpression(OnTickExpression object)
-      {
-        return createOnTickExpressionAdapter();
-      }
-      @Override
       public Adapter caseExpressionRule(ExpressionRule object)
       {
         return createExpressionRuleAdapter();
@@ -914,66 +894,6 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createOnCycleEventAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.StateExpression <em>State Expression</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.yakindu.sct.statechart.expressions.StateExpression
-   * @generated
-   */
-  public Adapter createStateExpressionAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.EntryExpression <em>Entry Expression</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.yakindu.sct.statechart.expressions.EntryExpression
-   * @generated
-   */
-  public Adapter createEntryExpressionAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.ExitExpression <em>Exit Expression</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.yakindu.sct.statechart.expressions.ExitExpression
-   * @generated
-   */
-  public Adapter createExitExpressionAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.OnTickExpression <em>On Tick Expression</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.yakindu.sct.statechart.expressions.OnTickExpression
-   * @generated
-   */
-  public Adapter createOnTickExpressionAdapter()
   {
     return null;
   }

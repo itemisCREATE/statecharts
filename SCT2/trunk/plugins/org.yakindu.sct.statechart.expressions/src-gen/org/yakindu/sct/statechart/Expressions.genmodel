@@ -145,20 +145,6 @@
     <genClasses ecoreClass="Expressions.ecore#//EnterEvent"/>
     <genClasses ecoreClass="Expressions.ecore#//ExitEvent"/>
     <genClasses ecoreClass="Expressions.ecore#//OnCycleEvent"/>
-    <genClasses ecoreClass="Expressions.ecore#//StateExpression">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//StateExpression/entryExpression"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//StateExpression/exitExpression"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//StateExpression/ontickExpression"/>
-    </genClasses>
-    <genClasses ecoreClass="Expressions.ecore#//EntryExpression">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//EntryExpression/expression"/>
-    </genClasses>
-    <genClasses ecoreClass="Expressions.ecore#//ExitExpression">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//ExitExpression/expression"/>
-    </genClasses>
-    <genClasses ecoreClass="Expressions.ecore#//OnTickExpression">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//OnTickExpression/expression"/>
-    </genClasses>
     <genClasses ecoreClass="Expressions.ecore#//ExpressionRule">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//ExpressionRule/expression"/>
     </genClasses>

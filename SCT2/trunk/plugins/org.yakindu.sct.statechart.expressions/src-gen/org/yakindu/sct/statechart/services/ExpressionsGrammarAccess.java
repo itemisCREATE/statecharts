@@ -1008,6 +1008,7 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cUnitAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cUnitTimeUnitEnumRuleCall_2_0 = (RuleCall)cUnitAssignment_2.eContents().get(0);
 		
+		//// TODO: redefine after trigger - we need to use it with clocks
 		//TimeEventSpec:
 		//	"after" value=INT unit=TimeUnit?;
 		public ParserRule getRule() { return rule; }
@@ -1038,6 +1039,7 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cExitEventParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cOnCycleEventParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
+		//// TODO: add dereived events like in(state), entered(state)	
 		//BuiltinEventSpec:
 		//	EnterEvent | ExitEvent | OnCycleEvent;
 		public ParserRule getRule() { return rule; }
@@ -1113,122 +1115,6 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 
 		//"oncycle"
 		public Keyword getOncycleKeyword_1() { return cOncycleKeyword_1; }
-	}
-
-	public class StateExpressionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "StateExpression");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cStateExpressionAction_0 = (Action)cGroup.eContents().get(0);
-		private final Assignment cEntryExpressionAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cEntryExpressionEntryExpressionParserRuleCall_1_0 = (RuleCall)cEntryExpressionAssignment_1.eContents().get(0);
-		private final Assignment cExitExpressionAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cExitExpressionExitExpressionParserRuleCall_2_0 = (RuleCall)cExitExpressionAssignment_2.eContents().get(0);
-		private final Assignment cOntickExpressionAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cOntickExpressionOnTickExpressionParserRuleCall_3_0 = (RuleCall)cOntickExpressionAssignment_3.eContents().get(0);
-		
-		//// ****************
-		//// State Expression
-		//// ****************
-		//StateExpression:
-		//	{StateExpression} entryExpression+=EntryExpression* exitExpression+=ExitExpression*
-		//	ontickExpression+=OnTickExpression*;
-		public ParserRule getRule() { return rule; }
-
-		//{StateExpression} entryExpression+=EntryExpression* exitExpression+=ExitExpression* ontickExpression+=OnTickExpression*
-		public Group getGroup() { return cGroup; }
-
-		//{StateExpression}
-		public Action getStateExpressionAction_0() { return cStateExpressionAction_0; }
-
-		//entryExpression+=EntryExpression*
-		public Assignment getEntryExpressionAssignment_1() { return cEntryExpressionAssignment_1; }
-
-		//EntryExpression
-		public RuleCall getEntryExpressionEntryExpressionParserRuleCall_1_0() { return cEntryExpressionEntryExpressionParserRuleCall_1_0; }
-
-		//exitExpression+=ExitExpression*
-		public Assignment getExitExpressionAssignment_2() { return cExitExpressionAssignment_2; }
-
-		//ExitExpression
-		public RuleCall getExitExpressionExitExpressionParserRuleCall_2_0() { return cExitExpressionExitExpressionParserRuleCall_2_0; }
-
-		//ontickExpression+=OnTickExpression*
-		public Assignment getOntickExpressionAssignment_3() { return cOntickExpressionAssignment_3; }
-
-		//OnTickExpression
-		public RuleCall getOntickExpressionOnTickExpressionParserRuleCall_3_0() { return cOntickExpressionOnTickExpressionParserRuleCall_3_0; }
-	}
-
-	public class EntryExpressionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EntryExpression");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cEntryKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cExpressionAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cExpressionExpressionRuleParserRuleCall_1_0 = (RuleCall)cExpressionAssignment_1.eContents().get(0);
-		
-		//EntryExpression:
-		//	"entry:" expression=ExpressionRule;
-		public ParserRule getRule() { return rule; }
-
-		//"entry:" expression=ExpressionRule
-		public Group getGroup() { return cGroup; }
-
-		//"entry:"
-		public Keyword getEntryKeyword_0() { return cEntryKeyword_0; }
-
-		//expression=ExpressionRule
-		public Assignment getExpressionAssignment_1() { return cExpressionAssignment_1; }
-
-		//ExpressionRule
-		public RuleCall getExpressionExpressionRuleParserRuleCall_1_0() { return cExpressionExpressionRuleParserRuleCall_1_0; }
-	}
-
-	public class ExitExpressionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ExitExpression");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cExitKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cExpressionAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cExpressionExpressionRuleParserRuleCall_1_0 = (RuleCall)cExpressionAssignment_1.eContents().get(0);
-		
-		//ExitExpression:
-		//	"exit:" expression=ExpressionRule;
-		public ParserRule getRule() { return rule; }
-
-		//"exit:" expression=ExpressionRule
-		public Group getGroup() { return cGroup; }
-
-		//"exit:"
-		public Keyword getExitKeyword_0() { return cExitKeyword_0; }
-
-		//expression=ExpressionRule
-		public Assignment getExpressionAssignment_1() { return cExpressionAssignment_1; }
-
-		//ExpressionRule
-		public RuleCall getExpressionExpressionRuleParserRuleCall_1_0() { return cExpressionExpressionRuleParserRuleCall_1_0; }
-	}
-
-	public class OnTickExpressionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "OnTickExpression");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cDoKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cExpressionAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cExpressionExpressionRuleParserRuleCall_1_0 = (RuleCall)cExpressionAssignment_1.eContents().get(0);
-		
-		//OnTickExpression:
-		//	"do:" expression=ExpressionRule;
-		public ParserRule getRule() { return rule; }
-
-		//"do:" expression=ExpressionRule
-		public Group getGroup() { return cGroup; }
-
-		//"do:"
-		public Keyword getDoKeyword_0() { return cDoKeyword_0; }
-
-		//expression=ExpressionRule
-		public Assignment getExpressionAssignment_1() { return cExpressionAssignment_1; }
-
-		//ExpressionRule
-		public RuleCall getExpressionExpressionRuleParserRuleCall_1_0() { return cExpressionExpressionRuleParserRuleCall_1_0; }
 	}
 
 	public class ExpressionRuleElements extends AbstractParserRuleElementFinder {
@@ -2039,10 +1925,6 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 	private EnterEventElements pEnterEvent;
 	private ExitEventElements pExitEvent;
 	private OnCycleEventElements pOnCycleEvent;
-	private StateExpressionElements pStateExpression;
-	private EntryExpressionElements pEntryExpression;
-	private ExitExpressionElements pExitExpression;
-	private OnTickExpressionElements pOnTickExpression;
 	private ExpressionRuleElements pExpressionRule;
 	private RaiseEventExpressionElements pRaiseEventExpression;
 	private LogicalOrExpressionElements pLogicalOrExpression;
@@ -2442,6 +2324,7 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 		return getRegularEventSpecAccess().getRule();
 	}
 
+	//// TODO: redefine after trigger - we need to use it with clocks
 	//TimeEventSpec:
 	//	"after" value=INT unit=TimeUnit?;
 	public TimeEventSpecElements getTimeEventSpecAccess() {
@@ -2452,6 +2335,7 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 		return getTimeEventSpecAccess().getRule();
 	}
 
+	//// TODO: add dereived events like in(state), entered(state)	
 	//BuiltinEventSpec:
 	//	EnterEvent | ExitEvent | OnCycleEvent;
 	public BuiltinEventSpecElements getBuiltinEventSpecAccess() {
@@ -2490,50 +2374,6 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getOnCycleEventRule() {
 		return getOnCycleEventAccess().getRule();
-	}
-
-	//// ****************
-	//// State Expression
-	//// ****************
-	//StateExpression:
-	//	{StateExpression} entryExpression+=EntryExpression* exitExpression+=ExitExpression*
-	//	ontickExpression+=OnTickExpression*;
-	public StateExpressionElements getStateExpressionAccess() {
-		return (pStateExpression != null) ? pStateExpression : (pStateExpression = new StateExpressionElements());
-	}
-	
-	public ParserRule getStateExpressionRule() {
-		return getStateExpressionAccess().getRule();
-	}
-
-	//EntryExpression:
-	//	"entry:" expression=ExpressionRule;
-	public EntryExpressionElements getEntryExpressionAccess() {
-		return (pEntryExpression != null) ? pEntryExpression : (pEntryExpression = new EntryExpressionElements());
-	}
-	
-	public ParserRule getEntryExpressionRule() {
-		return getEntryExpressionAccess().getRule();
-	}
-
-	//ExitExpression:
-	//	"exit:" expression=ExpressionRule;
-	public ExitExpressionElements getExitExpressionAccess() {
-		return (pExitExpression != null) ? pExitExpression : (pExitExpression = new ExitExpressionElements());
-	}
-	
-	public ParserRule getExitExpressionRule() {
-		return getExitExpressionAccess().getRule();
-	}
-
-	//OnTickExpression:
-	//	"do:" expression=ExpressionRule;
-	public OnTickExpressionElements getOnTickExpressionAccess() {
-		return (pOnTickExpression != null) ? pOnTickExpression : (pOnTickExpression = new OnTickExpressionElements());
-	}
-	
-	public ParserRule getOnTickExpressionRule() {
-		return getOnTickExpressionAccess().getRule();
 	}
 
 	//// ****************

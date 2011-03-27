@@ -92,10 +92,6 @@ public class ExpressionsParser extends AbstractContentAssistParser {
 					put(grammarAccess.getEnterEventAccess().getGroup(), "rule__EnterEvent__Group__0");
 					put(grammarAccess.getExitEventAccess().getGroup(), "rule__ExitEvent__Group__0");
 					put(grammarAccess.getOnCycleEventAccess().getGroup(), "rule__OnCycleEvent__Group__0");
-					put(grammarAccess.getStateExpressionAccess().getGroup(), "rule__StateExpression__Group__0");
-					put(grammarAccess.getEntryExpressionAccess().getGroup(), "rule__EntryExpression__Group__0");
-					put(grammarAccess.getExitExpressionAccess().getGroup(), "rule__ExitExpression__Group__0");
-					put(grammarAccess.getOnTickExpressionAccess().getGroup(), "rule__OnTickExpression__Group__0");
 					put(grammarAccess.getRaiseEventExpressionAccess().getGroup(), "rule__RaiseEventExpression__Group__0");
 					put(grammarAccess.getLogicalOrExpressionAccess().getGroup(), "rule__LogicalOrExpression__Group__0");
 					put(grammarAccess.getLogicalOrExpressionAccess().getGroup_1(), "rule__LogicalOrExpression__Group_1__0");
@@ -153,12 +149,6 @@ public class ExpressionsParser extends AbstractContentAssistParser {
 					put(grammarAccess.getRegularEventSpecAccess().getEventAssignment(), "rule__RegularEventSpec__EventAssignment");
 					put(grammarAccess.getTimeEventSpecAccess().getValueAssignment_1(), "rule__TimeEventSpec__ValueAssignment_1");
 					put(grammarAccess.getTimeEventSpecAccess().getUnitAssignment_2(), "rule__TimeEventSpec__UnitAssignment_2");
-					put(grammarAccess.getStateExpressionAccess().getEntryExpressionAssignment_1(), "rule__StateExpression__EntryExpressionAssignment_1");
-					put(grammarAccess.getStateExpressionAccess().getExitExpressionAssignment_2(), "rule__StateExpression__ExitExpressionAssignment_2");
-					put(grammarAccess.getStateExpressionAccess().getOntickExpressionAssignment_3(), "rule__StateExpression__OntickExpressionAssignment_3");
-					put(grammarAccess.getEntryExpressionAccess().getExpressionAssignment_1(), "rule__EntryExpression__ExpressionAssignment_1");
-					put(grammarAccess.getExitExpressionAccess().getExpressionAssignment_1(), "rule__ExitExpression__ExpressionAssignment_1");
-					put(grammarAccess.getOnTickExpressionAccess().getExpressionAssignment_1(), "rule__OnTickExpression__ExpressionAssignment_1");
 					put(grammarAccess.getExpressionRuleAccess().getExpressionAssignment(), "rule__ExpressionRule__ExpressionAssignment");
 					put(grammarAccess.getRaiseEventExpressionAccess().getEventAssignment_1(), "rule__RaiseEventExpression__EventAssignment_1");
 					put(grammarAccess.getLogicalOrExpressionAccess().getRightOperandAssignment_1_2(), "rule__LogicalOrExpression__RightOperandAssignment_1_2");

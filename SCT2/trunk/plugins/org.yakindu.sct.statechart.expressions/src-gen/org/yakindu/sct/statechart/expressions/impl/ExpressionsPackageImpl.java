@@ -24,14 +24,12 @@ import org.yakindu.sct.statechart.expressions.Definition;
 import org.yakindu.sct.statechart.expressions.Direction;
 import org.yakindu.sct.statechart.expressions.DirectionKind;
 import org.yakindu.sct.statechart.expressions.EnterEvent;
-import org.yakindu.sct.statechart.expressions.EntryExpression;
 import org.yakindu.sct.statechart.expressions.EntryPointSpec;
 import org.yakindu.sct.statechart.expressions.Entrypoint;
 import org.yakindu.sct.statechart.expressions.EventDefinition;
 import org.yakindu.sct.statechart.expressions.EventDerivation;
 import org.yakindu.sct.statechart.expressions.EventSpec;
 import org.yakindu.sct.statechart.expressions.ExitEvent;
-import org.yakindu.sct.statechart.expressions.ExitExpression;
 import org.yakindu.sct.statechart.expressions.ExitPointSpec;
 import org.yakindu.sct.statechart.expressions.Exitpoint;
 import org.yakindu.sct.statechart.expressions.Expression;
@@ -49,7 +47,6 @@ import org.yakindu.sct.statechart.expressions.NumericalAddSubtractExpression;
 import org.yakindu.sct.statechart.expressions.NumericalMultiplyDivideExpression;
 import org.yakindu.sct.statechart.expressions.NumericalUnaryExpression;
 import org.yakindu.sct.statechart.expressions.OnCycleEvent;
-import org.yakindu.sct.statechart.expressions.OnTickExpression;
 import org.yakindu.sct.statechart.expressions.Operation;
 import org.yakindu.sct.statechart.expressions.PrimitiveValueExpression;
 import org.yakindu.sct.statechart.expressions.PropertyReferenceExpression;
@@ -65,7 +62,6 @@ import org.yakindu.sct.statechart.expressions.Root;
 import org.yakindu.sct.statechart.expressions.Scope;
 import org.yakindu.sct.statechart.expressions.SimpleScope;
 import org.yakindu.sct.statechart.expressions.StateDefinition;
-import org.yakindu.sct.statechart.expressions.StateExpression;
 import org.yakindu.sct.statechart.expressions.StateRoot;
 import org.yakindu.sct.statechart.expressions.StatechartDefinition;
 import org.yakindu.sct.statechart.expressions.StatechartRoot;
@@ -337,34 +333,6 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
    * @generated
    */
   private EClass onCycleEventEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass stateExpressionEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass entryExpressionEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass exitExpressionEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass onTickExpressionEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -1287,106 +1255,6 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getStateExpression()
-  {
-    return stateExpressionEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getStateExpression_EntryExpression()
-  {
-    return (EReference)stateExpressionEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getStateExpression_ExitExpression()
-  {
-    return (EReference)stateExpressionEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getStateExpression_OntickExpression()
-  {
-    return (EReference)stateExpressionEClass.getEStructuralFeatures().get(2);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getEntryExpression()
-  {
-    return entryExpressionEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getEntryExpression_Expression()
-  {
-    return (EReference)entryExpressionEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getExitExpression()
-  {
-    return exitExpressionEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getExitExpression_Expression()
-  {
-    return (EReference)exitExpressionEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getOnTickExpression()
-  {
-    return onTickExpressionEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getOnTickExpression_Expression()
-  {
-    return (EReference)onTickExpressionEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EClass getExpressionRule()
   {
     return expressionRuleEClass;
@@ -1919,20 +1787,6 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 
     onCycleEventEClass = createEClass(ON_CYCLE_EVENT);
 
-    stateExpressionEClass = createEClass(STATE_EXPRESSION);
-    createEReference(stateExpressionEClass, STATE_EXPRESSION__ENTRY_EXPRESSION);
-    createEReference(stateExpressionEClass, STATE_EXPRESSION__EXIT_EXPRESSION);
-    createEReference(stateExpressionEClass, STATE_EXPRESSION__ONTICK_EXPRESSION);
-
-    entryExpressionEClass = createEClass(ENTRY_EXPRESSION);
-    createEReference(entryExpressionEClass, ENTRY_EXPRESSION__EXPRESSION);
-
-    exitExpressionEClass = createEClass(EXIT_EXPRESSION);
-    createEReference(exitExpressionEClass, EXIT_EXPRESSION__EXPRESSION);
-
-    onTickExpressionEClass = createEClass(ON_TICK_EXPRESSION);
-    createEReference(onTickExpressionEClass, ON_TICK_EXPRESSION__EXPRESSION);
-
     expressionRuleEClass = createEClass(EXPRESSION_RULE);
     createEReference(expressionRuleEClass, EXPRESSION_RULE__EXPRESSION);
 
@@ -2164,20 +2018,6 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
     initEClass(exitEventEClass, ExitEvent.class, "ExitEvent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(onCycleEventEClass, OnCycleEvent.class, "OnCycleEvent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-    initEClass(stateExpressionEClass, StateExpression.class, "StateExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getStateExpression_EntryExpression(), this.getEntryExpression(), null, "entryExpression", null, 0, -1, StateExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getStateExpression_ExitExpression(), this.getExitExpression(), null, "exitExpression", null, 0, -1, StateExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getStateExpression_OntickExpression(), this.getOnTickExpression(), null, "ontickExpression", null, 0, -1, StateExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(entryExpressionEClass, EntryExpression.class, "EntryExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getEntryExpression_Expression(), this.getExpressionRule(), null, "expression", null, 0, 1, EntryExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(exitExpressionEClass, ExitExpression.class, "ExitExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getExitExpression_Expression(), this.getExpressionRule(), null, "expression", null, 0, 1, ExitExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(onTickExpressionEClass, OnTickExpression.class, "OnTickExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getOnTickExpression_Expression(), this.getExpressionRule(), null, "expression", null, 0, 1, OnTickExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(expressionRuleEClass, ExpressionRule.class, "ExpressionRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getExpressionRule_Expression(), ecorePackage.getEObject(), null, "expression", null, 0, 1, ExpressionRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

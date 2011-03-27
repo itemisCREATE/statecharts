@@ -139,25 +139,6 @@ EnterEvent: {EnterEvent} 'enter';
 ExitEvent: {ExitEvent} 'exit';
 OnCycleEvent: {OnCycleEvent} 'oncycle';
 
-
-
-//****************
-// State Expression
-//****************
-StateExpression:
-	{StateExpression} (entryExpression+=EntryExpression)* (exitExpression+=ExitExpression)*
-	(ontickExpression+=OnTickExpression)*;
-
-EntryExpression:
-	'entry:' expression=ExpressionRule;
-
-ExitExpression:
-	'exit:' expression=ExpressionRule;
-
-OnTickExpression:
-	'do:' expression=ExpressionRule;
-
-
 	
 
 //****************

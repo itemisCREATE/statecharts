@@ -350,42 +350,6 @@ public interface ExpressionsFactory extends EFactory
   OnCycleEvent createOnCycleEvent();
 
   /**
-   * Returns a new object of class '<em>State Expression</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>State Expression</em>'.
-   * @generated
-   */
-  StateExpression createStateExpression();
-
-  /**
-   * Returns a new object of class '<em>Entry Expression</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Entry Expression</em>'.
-   * @generated
-   */
-  EntryExpression createEntryExpression();
-
-  /**
-   * Returns a new object of class '<em>Exit Expression</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Exit Expression</em>'.
-   * @generated
-   */
-  ExitExpression createExitExpression();
-
-  /**
-   * Returns a new object of class '<em>On Tick Expression</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>On Tick Expression</em>'.
-   * @generated
-   */
-  OnTickExpression createOnTickExpression();
-
-  /**
    * Returns a new object of class '<em>Expression Rule</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

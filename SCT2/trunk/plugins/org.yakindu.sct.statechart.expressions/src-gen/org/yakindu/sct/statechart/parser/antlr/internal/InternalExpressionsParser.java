@@ -25,7 +25,7 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalExpressionsParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_BOOL", "RULE_STRING", "RULE_FLOAT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'@@statechart@@'", "'@@state@@'", "'@@transition@@'", "'interface'", "':'", "'internal'", "'event'", "'='", "'var'", "'readonly'", "'external'", "'clock'", "'operation'", "'('", "','", "')'", "'entrypoint'", "'exitpoint'", "'/'", "'#'", "'['", "']'", "'>'", "'after'", "'enter'", "'exit'", "'oncycle'", "'entry:'", "'exit:'", "'do:'", "'raise'", "'||'", "'&&'", "'!'", "'in'", "'out'", "'+'", "'-'", "'*'", "'%'", "'~'", "'<'", "'<='", "'>='", "'=='", "'!='", "'s'", "'ms'", "'ns'", "'void'", "'integer'", "'real'", "'boolean'", "'string'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_BOOL", "RULE_STRING", "RULE_FLOAT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'@@statechart@@'", "'@@state@@'", "'@@transition@@'", "'interface'", "':'", "'internal'", "'event'", "'='", "'var'", "'readonly'", "'external'", "'clock'", "'operation'", "'('", "','", "')'", "'entrypoint'", "'exitpoint'", "'/'", "'#'", "'['", "']'", "'>'", "'after'", "'enter'", "'exit'", "'oncycle'", "'raise'", "'||'", "'&&'", "'!'", "'in'", "'out'", "'+'", "'-'", "'*'", "'%'", "'~'", "'<'", "'<='", "'>='", "'=='", "'!='", "'s'", "'ms'", "'ns'", "'void'", "'integer'", "'real'", "'boolean'", "'string'"
     };
     public static final int RULE_ML_COMMENT=9;
     public static final int RULE_ID=4;
@@ -1067,7 +1067,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                 int alt4=2;
                 int LA4_0 = input.LA(1);
 
-                if ( (LA4_0==RULE_ID||LA4_0==19||LA4_0==21||(LA4_0>=24 && LA4_0<=25)||(LA4_0>=29 && LA4_0<=30)||(LA4_0>=36 && LA4_0<=39)||(LA4_0>=47 && LA4_0<=48)) ) {
+                if ( (LA4_0==RULE_ID||LA4_0==19||LA4_0==21||(LA4_0>=24 && LA4_0<=25)||(LA4_0>=29 && LA4_0<=30)||(LA4_0>=36 && LA4_0<=39)||(LA4_0>=44 && LA4_0<=45)) ) {
                     alt4=1;
                 }
 
@@ -1388,7 +1388,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                 int alt7=2;
                 int LA7_0 = input.LA(1);
 
-                if ( (LA7_0==RULE_ID||LA7_0==19||LA7_0==21||(LA7_0>=24 && LA7_0<=25)||(LA7_0>=29 && LA7_0<=30)||(LA7_0>=36 && LA7_0<=39)||(LA7_0>=47 && LA7_0<=48)) ) {
+                if ( (LA7_0==RULE_ID||LA7_0==19||LA7_0==21||(LA7_0>=24 && LA7_0<=25)||(LA7_0>=29 && LA7_0<=30)||(LA7_0>=36 && LA7_0<=39)||(LA7_0>=44 && LA7_0<=45)) ) {
                     alt7=1;
                 }
 
@@ -1540,7 +1540,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                 int alt8=2;
                 int LA8_0 = input.LA(1);
 
-                if ( (LA8_0==RULE_ID||LA8_0==19||LA8_0==21||(LA8_0>=24 && LA8_0<=25)||(LA8_0>=29 && LA8_0<=30)||(LA8_0>=36 && LA8_0<=39)||(LA8_0>=47 && LA8_0<=48)) ) {
+                if ( (LA8_0==RULE_ID||LA8_0==19||LA8_0==21||(LA8_0>=24 && LA8_0<=25)||(LA8_0>=29 && LA8_0<=30)||(LA8_0>=36 && LA8_0<=39)||(LA8_0>=44 && LA8_0<=45)) ) {
                     alt8=1;
                 }
 
@@ -1675,8 +1675,8 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
             int alt9=7;
             switch ( input.LA(1) ) {
             case 19:
-            case 47:
-            case 48:
+            case 44:
+            case 45:
                 {
                 alt9=1;
                 }
@@ -1925,7 +1925,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
             int alt10=2;
             int LA10_0 = input.LA(1);
 
-            if ( ((LA10_0>=47 && LA10_0<=48)) ) {
+            if ( ((LA10_0>=44 && LA10_0<=45)) ) {
                 alt10=1;
             }
             switch (alt10) {
@@ -2886,7 +2886,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
             int alt17=2;
             int LA17_0 = input.LA(1);
 
-            if ( ((LA17_0>=62 && LA17_0<=66)) ) {
+            if ( ((LA17_0>=59 && LA17_0<=63)) ) {
                 alt17=1;
             }
             switch (alt17) {
@@ -4813,7 +4813,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
             int alt26=2;
             int LA26_0 = input.LA(1);
 
-            if ( ((LA26_0>=59 && LA26_0<=61)) ) {
+            if ( ((LA26_0>=56 && LA26_0<=58)) ) {
                 alt26=1;
             }
             switch (alt26) {
@@ -5303,350 +5303,8 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
     // $ANTLR end ruleOnCycleEvent
 
 
-    // $ANTLR start entryRuleEntryExpression
-    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2321:1: entryRuleEntryExpression returns [EObject current=null] : iv_ruleEntryExpression= ruleEntryExpression EOF ;
-    public final EObject entryRuleEntryExpression() throws RecognitionException {
-        EObject current = null;
-
-        EObject iv_ruleEntryExpression = null;
-
-
-        try {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2322:2: (iv_ruleEntryExpression= ruleEntryExpression EOF )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2323:2: iv_ruleEntryExpression= ruleEntryExpression EOF
-            {
-             currentNode = createCompositeNode(grammarAccess.getEntryExpressionRule(), currentNode); 
-            pushFollow(FOLLOW_ruleEntryExpression_in_entryRuleEntryExpression4585);
-            iv_ruleEntryExpression=ruleEntryExpression();
-            _fsp--;
-
-             current =iv_ruleEntryExpression; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleEntryExpression4595); 
-
-            }
-
-        }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
-                appendSkippedTokens();
-            } 
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end entryRuleEntryExpression
-
-
-    // $ANTLR start ruleEntryExpression
-    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2330:1: ruleEntryExpression returns [EObject current=null] : ( 'entry:' ( (lv_expression_1_0= ruleExpressionRule ) ) ) ;
-    public final EObject ruleEntryExpression() throws RecognitionException {
-        EObject current = null;
-
-        EObject lv_expression_1_0 = null;
-
-
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2335:6: ( ( 'entry:' ( (lv_expression_1_0= ruleExpressionRule ) ) ) )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2336:1: ( 'entry:' ( (lv_expression_1_0= ruleExpressionRule ) ) )
-            {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2336:1: ( 'entry:' ( (lv_expression_1_0= ruleExpressionRule ) ) )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2336:3: 'entry:' ( (lv_expression_1_0= ruleExpressionRule ) )
-            {
-            match(input,40,FOLLOW_40_in_ruleEntryExpression4630); 
-
-                    createLeafNode(grammarAccess.getEntryExpressionAccess().getEntryKeyword_0(), null); 
-                
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2340:1: ( (lv_expression_1_0= ruleExpressionRule ) )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2341:1: (lv_expression_1_0= ruleExpressionRule )
-            {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2341:1: (lv_expression_1_0= ruleExpressionRule )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2342:3: lv_expression_1_0= ruleExpressionRule
-            {
-             
-            	        currentNode=createCompositeNode(grammarAccess.getEntryExpressionAccess().getExpressionExpressionRuleParserRuleCall_1_0(), currentNode); 
-            	    
-            pushFollow(FOLLOW_ruleExpressionRule_in_ruleEntryExpression4651);
-            lv_expression_1_0=ruleExpressionRule();
-            _fsp--;
-
-
-            	        if (current==null) {
-            	            current = factory.create(grammarAccess.getEntryExpressionRule().getType().getClassifier());
-            	            associateNodeWithAstElement(currentNode.getParent(), current);
-            	        }
-            	        try {
-            	       		set(
-            	       			current, 
-            	       			"expression",
-            	        		lv_expression_1_0, 
-            	        		"ExpressionRule", 
-            	        		currentNode);
-            	        } catch (ValueConverterException vce) {
-            				handleValueConverterException(vce);
-            	        }
-            	        currentNode = currentNode.getParent();
-            	    
-
-            }
-
-
-            }
-
-
-            }
-
-
-            }
-
-             resetLookahead(); 
-                	lastConsumedNode = currentNode;
-                
-        }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
-                appendSkippedTokens();
-            } 
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end ruleEntryExpression
-
-
-    // $ANTLR start entryRuleExitExpression
-    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2372:1: entryRuleExitExpression returns [EObject current=null] : iv_ruleExitExpression= ruleExitExpression EOF ;
-    public final EObject entryRuleExitExpression() throws RecognitionException {
-        EObject current = null;
-
-        EObject iv_ruleExitExpression = null;
-
-
-        try {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2373:2: (iv_ruleExitExpression= ruleExitExpression EOF )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2374:2: iv_ruleExitExpression= ruleExitExpression EOF
-            {
-             currentNode = createCompositeNode(grammarAccess.getExitExpressionRule(), currentNode); 
-            pushFollow(FOLLOW_ruleExitExpression_in_entryRuleExitExpression4687);
-            iv_ruleExitExpression=ruleExitExpression();
-            _fsp--;
-
-             current =iv_ruleExitExpression; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleExitExpression4697); 
-
-            }
-
-        }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
-                appendSkippedTokens();
-            } 
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end entryRuleExitExpression
-
-
-    // $ANTLR start ruleExitExpression
-    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2381:1: ruleExitExpression returns [EObject current=null] : ( 'exit:' ( (lv_expression_1_0= ruleExpressionRule ) ) ) ;
-    public final EObject ruleExitExpression() throws RecognitionException {
-        EObject current = null;
-
-        EObject lv_expression_1_0 = null;
-
-
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2386:6: ( ( 'exit:' ( (lv_expression_1_0= ruleExpressionRule ) ) ) )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2387:1: ( 'exit:' ( (lv_expression_1_0= ruleExpressionRule ) ) )
-            {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2387:1: ( 'exit:' ( (lv_expression_1_0= ruleExpressionRule ) ) )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2387:3: 'exit:' ( (lv_expression_1_0= ruleExpressionRule ) )
-            {
-            match(input,41,FOLLOW_41_in_ruleExitExpression4732); 
-
-                    createLeafNode(grammarAccess.getExitExpressionAccess().getExitKeyword_0(), null); 
-                
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2391:1: ( (lv_expression_1_0= ruleExpressionRule ) )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2392:1: (lv_expression_1_0= ruleExpressionRule )
-            {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2392:1: (lv_expression_1_0= ruleExpressionRule )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2393:3: lv_expression_1_0= ruleExpressionRule
-            {
-             
-            	        currentNode=createCompositeNode(grammarAccess.getExitExpressionAccess().getExpressionExpressionRuleParserRuleCall_1_0(), currentNode); 
-            	    
-            pushFollow(FOLLOW_ruleExpressionRule_in_ruleExitExpression4753);
-            lv_expression_1_0=ruleExpressionRule();
-            _fsp--;
-
-
-            	        if (current==null) {
-            	            current = factory.create(grammarAccess.getExitExpressionRule().getType().getClassifier());
-            	            associateNodeWithAstElement(currentNode.getParent(), current);
-            	        }
-            	        try {
-            	       		set(
-            	       			current, 
-            	       			"expression",
-            	        		lv_expression_1_0, 
-            	        		"ExpressionRule", 
-            	        		currentNode);
-            	        } catch (ValueConverterException vce) {
-            				handleValueConverterException(vce);
-            	        }
-            	        currentNode = currentNode.getParent();
-            	    
-
-            }
-
-
-            }
-
-
-            }
-
-
-            }
-
-             resetLookahead(); 
-                	lastConsumedNode = currentNode;
-                
-        }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
-                appendSkippedTokens();
-            } 
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end ruleExitExpression
-
-
-    // $ANTLR start entryRuleOnTickExpression
-    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2423:1: entryRuleOnTickExpression returns [EObject current=null] : iv_ruleOnTickExpression= ruleOnTickExpression EOF ;
-    public final EObject entryRuleOnTickExpression() throws RecognitionException {
-        EObject current = null;
-
-        EObject iv_ruleOnTickExpression = null;
-
-
-        try {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2424:2: (iv_ruleOnTickExpression= ruleOnTickExpression EOF )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2425:2: iv_ruleOnTickExpression= ruleOnTickExpression EOF
-            {
-             currentNode = createCompositeNode(grammarAccess.getOnTickExpressionRule(), currentNode); 
-            pushFollow(FOLLOW_ruleOnTickExpression_in_entryRuleOnTickExpression4789);
-            iv_ruleOnTickExpression=ruleOnTickExpression();
-            _fsp--;
-
-             current =iv_ruleOnTickExpression; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleOnTickExpression4799); 
-
-            }
-
-        }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
-                appendSkippedTokens();
-            } 
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end entryRuleOnTickExpression
-
-
-    // $ANTLR start ruleOnTickExpression
-    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2432:1: ruleOnTickExpression returns [EObject current=null] : ( 'do:' ( (lv_expression_1_0= ruleExpressionRule ) ) ) ;
-    public final EObject ruleOnTickExpression() throws RecognitionException {
-        EObject current = null;
-
-        EObject lv_expression_1_0 = null;
-
-
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
-            
-        try {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2437:6: ( ( 'do:' ( (lv_expression_1_0= ruleExpressionRule ) ) ) )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2438:1: ( 'do:' ( (lv_expression_1_0= ruleExpressionRule ) ) )
-            {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2438:1: ( 'do:' ( (lv_expression_1_0= ruleExpressionRule ) ) )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2438:3: 'do:' ( (lv_expression_1_0= ruleExpressionRule ) )
-            {
-            match(input,42,FOLLOW_42_in_ruleOnTickExpression4834); 
-
-                    createLeafNode(grammarAccess.getOnTickExpressionAccess().getDoKeyword_0(), null); 
-                
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2442:1: ( (lv_expression_1_0= ruleExpressionRule ) )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2443:1: (lv_expression_1_0= ruleExpressionRule )
-            {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2443:1: (lv_expression_1_0= ruleExpressionRule )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2444:3: lv_expression_1_0= ruleExpressionRule
-            {
-             
-            	        currentNode=createCompositeNode(grammarAccess.getOnTickExpressionAccess().getExpressionExpressionRuleParserRuleCall_1_0(), currentNode); 
-            	    
-            pushFollow(FOLLOW_ruleExpressionRule_in_ruleOnTickExpression4855);
-            lv_expression_1_0=ruleExpressionRule();
-            _fsp--;
-
-
-            	        if (current==null) {
-            	            current = factory.create(grammarAccess.getOnTickExpressionRule().getType().getClassifier());
-            	            associateNodeWithAstElement(currentNode.getParent(), current);
-            	        }
-            	        try {
-            	       		set(
-            	       			current, 
-            	       			"expression",
-            	        		lv_expression_1_0, 
-            	        		"ExpressionRule", 
-            	        		currentNode);
-            	        } catch (ValueConverterException vce) {
-            				handleValueConverterException(vce);
-            	        }
-            	        currentNode = currentNode.getParent();
-            	    
-
-            }
-
-
-            }
-
-
-            }
-
-
-            }
-
-             resetLookahead(); 
-                	lastConsumedNode = currentNode;
-                
-        }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
-                appendSkippedTokens();
-            } 
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end ruleOnTickExpression
-
-
     // $ANTLR start entryRuleExpressionRule
-    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2474:1: entryRuleExpressionRule returns [EObject current=null] : iv_ruleExpressionRule= ruleExpressionRule EOF ;
+    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2319:1: entryRuleExpressionRule returns [EObject current=null] : iv_ruleExpressionRule= ruleExpressionRule EOF ;
     public final EObject entryRuleExpressionRule() throws RecognitionException {
         EObject current = null;
 
@@ -5654,16 +5312,16 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2475:2: (iv_ruleExpressionRule= ruleExpressionRule EOF )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2476:2: iv_ruleExpressionRule= ruleExpressionRule EOF
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2320:2: (iv_ruleExpressionRule= ruleExpressionRule EOF )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2321:2: iv_ruleExpressionRule= ruleExpressionRule EOF
             {
              currentNode = createCompositeNode(grammarAccess.getExpressionRuleRule(), currentNode); 
-            pushFollow(FOLLOW_ruleExpressionRule_in_entryRuleExpressionRule4891);
+            pushFollow(FOLLOW_ruleExpressionRule_in_entryRuleExpressionRule4583);
             iv_ruleExpressionRule=ruleExpressionRule();
             _fsp--;
 
              current =iv_ruleExpressionRule; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleExpressionRule4901); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleExpressionRule4593); 
 
             }
 
@@ -5681,7 +5339,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleExpressionRule
-    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2483:1: ruleExpressionRule returns [EObject current=null] : ( ( (lv_expression_0_1= ruleLogicalOrExpression | lv_expression_0_2= ruleRaiseEventExpression ) ) ) ;
+    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2328:1: ruleExpressionRule returns [EObject current=null] : ( ( (lv_expression_0_1= ruleLogicalOrExpression | lv_expression_0_2= ruleRaiseEventExpression ) ) ) ;
     public final EObject ruleExpressionRule() throws RecognitionException {
         EObject current = null;
 
@@ -5693,39 +5351,39 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2488:6: ( ( ( (lv_expression_0_1= ruleLogicalOrExpression | lv_expression_0_2= ruleRaiseEventExpression ) ) ) )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2489:1: ( ( (lv_expression_0_1= ruleLogicalOrExpression | lv_expression_0_2= ruleRaiseEventExpression ) ) )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2333:6: ( ( ( (lv_expression_0_1= ruleLogicalOrExpression | lv_expression_0_2= ruleRaiseEventExpression ) ) ) )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2334:1: ( ( (lv_expression_0_1= ruleLogicalOrExpression | lv_expression_0_2= ruleRaiseEventExpression ) ) )
             {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2489:1: ( ( (lv_expression_0_1= ruleLogicalOrExpression | lv_expression_0_2= ruleRaiseEventExpression ) ) )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2490:1: ( (lv_expression_0_1= ruleLogicalOrExpression | lv_expression_0_2= ruleRaiseEventExpression ) )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2334:1: ( ( (lv_expression_0_1= ruleLogicalOrExpression | lv_expression_0_2= ruleRaiseEventExpression ) ) )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2335:1: ( (lv_expression_0_1= ruleLogicalOrExpression | lv_expression_0_2= ruleRaiseEventExpression ) )
             {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2490:1: ( (lv_expression_0_1= ruleLogicalOrExpression | lv_expression_0_2= ruleRaiseEventExpression ) )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2491:1: (lv_expression_0_1= ruleLogicalOrExpression | lv_expression_0_2= ruleRaiseEventExpression )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2335:1: ( (lv_expression_0_1= ruleLogicalOrExpression | lv_expression_0_2= ruleRaiseEventExpression ) )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2336:1: (lv_expression_0_1= ruleLogicalOrExpression | lv_expression_0_2= ruleRaiseEventExpression )
             {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2491:1: (lv_expression_0_1= ruleLogicalOrExpression | lv_expression_0_2= ruleRaiseEventExpression )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2336:1: (lv_expression_0_1= ruleLogicalOrExpression | lv_expression_0_2= ruleRaiseEventExpression )
             int alt28=2;
             int LA28_0 = input.LA(1);
 
-            if ( ((LA28_0>=RULE_ID && LA28_0<=RULE_FLOAT)||LA28_0==26||LA28_0==46||(LA28_0>=49 && LA28_0<=50)||LA28_0==53) ) {
+            if ( ((LA28_0>=RULE_ID && LA28_0<=RULE_FLOAT)||LA28_0==26||LA28_0==43||(LA28_0>=46 && LA28_0<=47)||LA28_0==50) ) {
                 alt28=1;
             }
-            else if ( (LA28_0==43) ) {
+            else if ( (LA28_0==40) ) {
                 alt28=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("2491:1: (lv_expression_0_1= ruleLogicalOrExpression | lv_expression_0_2= ruleRaiseEventExpression )", 28, 0, input);
+                    new NoViableAltException("2336:1: (lv_expression_0_1= ruleLogicalOrExpression | lv_expression_0_2= ruleRaiseEventExpression )", 28, 0, input);
 
                 throw nvae;
             }
             switch (alt28) {
                 case 1 :
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2492:3: lv_expression_0_1= ruleLogicalOrExpression
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2337:3: lv_expression_0_1= ruleLogicalOrExpression
                     {
                      
                     	        currentNode=createCompositeNode(grammarAccess.getExpressionRuleAccess().getExpressionLogicalOrExpressionParserRuleCall_0_0(), currentNode); 
                     	    
-                    pushFollow(FOLLOW_ruleLogicalOrExpression_in_ruleExpressionRule4948);
+                    pushFollow(FOLLOW_ruleLogicalOrExpression_in_ruleExpressionRule4640);
                     lv_expression_0_1=ruleLogicalOrExpression();
                     _fsp--;
 
@@ -5750,12 +5408,12 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2513:8: lv_expression_0_2= ruleRaiseEventExpression
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2358:8: lv_expression_0_2= ruleRaiseEventExpression
                     {
                      
                     	        currentNode=createCompositeNode(grammarAccess.getExpressionRuleAccess().getExpressionRaiseEventExpressionParserRuleCall_0_1(), currentNode); 
                     	    
-                    pushFollow(FOLLOW_ruleRaiseEventExpression_in_ruleExpressionRule4967);
+                    pushFollow(FOLLOW_ruleRaiseEventExpression_in_ruleExpressionRule4659);
                     lv_expression_0_2=ruleRaiseEventExpression();
                     _fsp--;
 
@@ -5808,7 +5466,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start entryRuleRaiseEventExpression
-    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2545:1: entryRuleRaiseEventExpression returns [EObject current=null] : iv_ruleRaiseEventExpression= ruleRaiseEventExpression EOF ;
+    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2390:1: entryRuleRaiseEventExpression returns [EObject current=null] : iv_ruleRaiseEventExpression= ruleRaiseEventExpression EOF ;
     public final EObject entryRuleRaiseEventExpression() throws RecognitionException {
         EObject current = null;
 
@@ -5816,16 +5474,16 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2546:2: (iv_ruleRaiseEventExpression= ruleRaiseEventExpression EOF )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2547:2: iv_ruleRaiseEventExpression= ruleRaiseEventExpression EOF
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2391:2: (iv_ruleRaiseEventExpression= ruleRaiseEventExpression EOF )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2392:2: iv_ruleRaiseEventExpression= ruleRaiseEventExpression EOF
             {
              currentNode = createCompositeNode(grammarAccess.getRaiseEventExpressionRule(), currentNode); 
-            pushFollow(FOLLOW_ruleRaiseEventExpression_in_entryRuleRaiseEventExpression5005);
+            pushFollow(FOLLOW_ruleRaiseEventExpression_in_entryRuleRaiseEventExpression4697);
             iv_ruleRaiseEventExpression=ruleRaiseEventExpression();
             _fsp--;
 
              current =iv_ruleRaiseEventExpression; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleRaiseEventExpression5015); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleRaiseEventExpression4707); 
 
             }
 
@@ -5843,28 +5501,28 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleRaiseEventExpression
-    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2554:1: ruleRaiseEventExpression returns [EObject current=null] : ( 'raise' ( ( RULE_ID ) ) ) ;
+    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2399:1: ruleRaiseEventExpression returns [EObject current=null] : ( 'raise' ( ( RULE_ID ) ) ) ;
     public final EObject ruleRaiseEventExpression() throws RecognitionException {
         EObject current = null;
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2559:6: ( ( 'raise' ( ( RULE_ID ) ) ) )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2560:1: ( 'raise' ( ( RULE_ID ) ) )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2404:6: ( ( 'raise' ( ( RULE_ID ) ) ) )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2405:1: ( 'raise' ( ( RULE_ID ) ) )
             {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2560:1: ( 'raise' ( ( RULE_ID ) ) )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2560:3: 'raise' ( ( RULE_ID ) )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2405:1: ( 'raise' ( ( RULE_ID ) ) )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2405:3: 'raise' ( ( RULE_ID ) )
             {
-            match(input,43,FOLLOW_43_in_ruleRaiseEventExpression5050); 
+            match(input,40,FOLLOW_40_in_ruleRaiseEventExpression4742); 
 
                     createLeafNode(grammarAccess.getRaiseEventExpressionAccess().getRaiseKeyword_0(), null); 
                 
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2564:1: ( ( RULE_ID ) )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2565:1: ( RULE_ID )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2409:1: ( ( RULE_ID ) )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2410:1: ( RULE_ID )
             {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2565:1: ( RULE_ID )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2566:3: RULE_ID
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2410:1: ( RULE_ID )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2411:3: RULE_ID
             {
 
             			if (current==null) {
@@ -5872,7 +5530,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
             	            associateNodeWithAstElement(currentNode, current);
             	        }
                     
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleRaiseEventExpression5068); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleRaiseEventExpression4760); 
 
             		createLeafNode(grammarAccess.getRaiseEventExpressionAccess().getEventEventCrossReference_1_0(), "event"); 
             	
@@ -5905,7 +5563,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start entryRuleLogicalOrExpression
-    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2586:1: entryRuleLogicalOrExpression returns [EObject current=null] : iv_ruleLogicalOrExpression= ruleLogicalOrExpression EOF ;
+    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2431:1: entryRuleLogicalOrExpression returns [EObject current=null] : iv_ruleLogicalOrExpression= ruleLogicalOrExpression EOF ;
     public final EObject entryRuleLogicalOrExpression() throws RecognitionException {
         EObject current = null;
 
@@ -5913,16 +5571,16 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2587:2: (iv_ruleLogicalOrExpression= ruleLogicalOrExpression EOF )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2588:2: iv_ruleLogicalOrExpression= ruleLogicalOrExpression EOF
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2432:2: (iv_ruleLogicalOrExpression= ruleLogicalOrExpression EOF )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2433:2: iv_ruleLogicalOrExpression= ruleLogicalOrExpression EOF
             {
              currentNode = createCompositeNode(grammarAccess.getLogicalOrExpressionRule(), currentNode); 
-            pushFollow(FOLLOW_ruleLogicalOrExpression_in_entryRuleLogicalOrExpression5104);
+            pushFollow(FOLLOW_ruleLogicalOrExpression_in_entryRuleLogicalOrExpression4796);
             iv_ruleLogicalOrExpression=ruleLogicalOrExpression();
             _fsp--;
 
              current =iv_ruleLogicalOrExpression; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleLogicalOrExpression5114); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleLogicalOrExpression4806); 
 
             }
 
@@ -5940,7 +5598,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleLogicalOrExpression
-    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2595:1: ruleLogicalOrExpression returns [EObject current=null] : (this_LogicalAndExpression_0= ruleLogicalAndExpression ( () '||' ( (lv_rightOperand_3_0= ruleLogicalAndExpression ) ) )* ) ;
+    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2440:1: ruleLogicalOrExpression returns [EObject current=null] : (this_LogicalAndExpression_0= ruleLogicalAndExpression ( () '||' ( (lv_rightOperand_3_0= ruleLogicalAndExpression ) ) )* ) ;
     public final EObject ruleLogicalOrExpression() throws RecognitionException {
         EObject current = null;
 
@@ -5952,16 +5610,16 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2600:6: ( (this_LogicalAndExpression_0= ruleLogicalAndExpression ( () '||' ( (lv_rightOperand_3_0= ruleLogicalAndExpression ) ) )* ) )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2601:1: (this_LogicalAndExpression_0= ruleLogicalAndExpression ( () '||' ( (lv_rightOperand_3_0= ruleLogicalAndExpression ) ) )* )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2445:6: ( (this_LogicalAndExpression_0= ruleLogicalAndExpression ( () '||' ( (lv_rightOperand_3_0= ruleLogicalAndExpression ) ) )* ) )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2446:1: (this_LogicalAndExpression_0= ruleLogicalAndExpression ( () '||' ( (lv_rightOperand_3_0= ruleLogicalAndExpression ) ) )* )
             {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2601:1: (this_LogicalAndExpression_0= ruleLogicalAndExpression ( () '||' ( (lv_rightOperand_3_0= ruleLogicalAndExpression ) ) )* )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2602:5: this_LogicalAndExpression_0= ruleLogicalAndExpression ( () '||' ( (lv_rightOperand_3_0= ruleLogicalAndExpression ) ) )*
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2446:1: (this_LogicalAndExpression_0= ruleLogicalAndExpression ( () '||' ( (lv_rightOperand_3_0= ruleLogicalAndExpression ) ) )* )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2447:5: this_LogicalAndExpression_0= ruleLogicalAndExpression ( () '||' ( (lv_rightOperand_3_0= ruleLogicalAndExpression ) ) )*
             {
              
                     currentNode=createCompositeNode(grammarAccess.getLogicalOrExpressionAccess().getLogicalAndExpressionParserRuleCall_0(), currentNode); 
                 
-            pushFollow(FOLLOW_ruleLogicalAndExpression_in_ruleLogicalOrExpression5161);
+            pushFollow(FOLLOW_ruleLogicalAndExpression_in_ruleLogicalOrExpression4853);
             this_LogicalAndExpression_0=ruleLogicalAndExpression();
             _fsp--;
 
@@ -5969,23 +5627,23 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                     current = this_LogicalAndExpression_0; 
                     currentNode = currentNode.getParent();
                 
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2610:1: ( () '||' ( (lv_rightOperand_3_0= ruleLogicalAndExpression ) ) )*
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2455:1: ( () '||' ( (lv_rightOperand_3_0= ruleLogicalAndExpression ) ) )*
             loop29:
             do {
                 int alt29=2;
                 int LA29_0 = input.LA(1);
 
-                if ( (LA29_0==44) ) {
+                if ( (LA29_0==41) ) {
                     alt29=1;
                 }
 
 
                 switch (alt29) {
             	case 1 :
-            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2610:2: () '||' ( (lv_rightOperand_3_0= ruleLogicalAndExpression ) )
+            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2455:2: () '||' ( (lv_rightOperand_3_0= ruleLogicalAndExpression ) )
             	    {
-            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2610:2: ()
-            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2611:5: 
+            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2455:2: ()
+            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2456:5: 
             	    {
             	     
             	            temp=factory.create(grammarAccess.getLogicalOrExpressionAccess().getLogicalOrExpressionLeftOperandAction_1_0().getType().getClassifier());
@@ -6005,20 +5663,20 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
             	    }
 
-            	    match(input,44,FOLLOW_44_in_ruleLogicalOrExpression5180); 
+            	    match(input,41,FOLLOW_41_in_ruleLogicalOrExpression4872); 
 
             	            createLeafNode(grammarAccess.getLogicalOrExpressionAccess().getVerticalLineVerticalLineKeyword_1_1(), null); 
             	        
-            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2630:1: ( (lv_rightOperand_3_0= ruleLogicalAndExpression ) )
-            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2631:1: (lv_rightOperand_3_0= ruleLogicalAndExpression )
+            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2475:1: ( (lv_rightOperand_3_0= ruleLogicalAndExpression ) )
+            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2476:1: (lv_rightOperand_3_0= ruleLogicalAndExpression )
             	    {
-            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2631:1: (lv_rightOperand_3_0= ruleLogicalAndExpression )
-            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2632:3: lv_rightOperand_3_0= ruleLogicalAndExpression
+            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2476:1: (lv_rightOperand_3_0= ruleLogicalAndExpression )
+            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2477:3: lv_rightOperand_3_0= ruleLogicalAndExpression
             	    {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.getLogicalOrExpressionAccess().getRightOperandLogicalAndExpressionParserRuleCall_1_2_0(), currentNode); 
             	    	    
-            	    pushFollow(FOLLOW_ruleLogicalAndExpression_in_ruleLogicalOrExpression5201);
+            	    pushFollow(FOLLOW_ruleLogicalAndExpression_in_ruleLogicalOrExpression4893);
             	    lv_rightOperand_3_0=ruleLogicalAndExpression();
             	    _fsp--;
 
@@ -6077,7 +5735,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start entryRuleLogicalAndExpression
-    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2662:1: entryRuleLogicalAndExpression returns [EObject current=null] : iv_ruleLogicalAndExpression= ruleLogicalAndExpression EOF ;
+    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2507:1: entryRuleLogicalAndExpression returns [EObject current=null] : iv_ruleLogicalAndExpression= ruleLogicalAndExpression EOF ;
     public final EObject entryRuleLogicalAndExpression() throws RecognitionException {
         EObject current = null;
 
@@ -6085,16 +5743,16 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2663:2: (iv_ruleLogicalAndExpression= ruleLogicalAndExpression EOF )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2664:2: iv_ruleLogicalAndExpression= ruleLogicalAndExpression EOF
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2508:2: (iv_ruleLogicalAndExpression= ruleLogicalAndExpression EOF )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2509:2: iv_ruleLogicalAndExpression= ruleLogicalAndExpression EOF
             {
              currentNode = createCompositeNode(grammarAccess.getLogicalAndExpressionRule(), currentNode); 
-            pushFollow(FOLLOW_ruleLogicalAndExpression_in_entryRuleLogicalAndExpression5239);
+            pushFollow(FOLLOW_ruleLogicalAndExpression_in_entryRuleLogicalAndExpression4931);
             iv_ruleLogicalAndExpression=ruleLogicalAndExpression();
             _fsp--;
 
              current =iv_ruleLogicalAndExpression; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleLogicalAndExpression5249); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleLogicalAndExpression4941); 
 
             }
 
@@ -6112,7 +5770,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleLogicalAndExpression
-    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2671:1: ruleLogicalAndExpression returns [EObject current=null] : (this_LogicalNotExpression_0= ruleLogicalNotExpression ( () '&&' ( (lv_rightOperand_3_0= ruleLogicalNotExpression ) ) )* ) ;
+    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2516:1: ruleLogicalAndExpression returns [EObject current=null] : (this_LogicalNotExpression_0= ruleLogicalNotExpression ( () '&&' ( (lv_rightOperand_3_0= ruleLogicalNotExpression ) ) )* ) ;
     public final EObject ruleLogicalAndExpression() throws RecognitionException {
         EObject current = null;
 
@@ -6124,16 +5782,16 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2676:6: ( (this_LogicalNotExpression_0= ruleLogicalNotExpression ( () '&&' ( (lv_rightOperand_3_0= ruleLogicalNotExpression ) ) )* ) )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2677:1: (this_LogicalNotExpression_0= ruleLogicalNotExpression ( () '&&' ( (lv_rightOperand_3_0= ruleLogicalNotExpression ) ) )* )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2521:6: ( (this_LogicalNotExpression_0= ruleLogicalNotExpression ( () '&&' ( (lv_rightOperand_3_0= ruleLogicalNotExpression ) ) )* ) )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2522:1: (this_LogicalNotExpression_0= ruleLogicalNotExpression ( () '&&' ( (lv_rightOperand_3_0= ruleLogicalNotExpression ) ) )* )
             {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2677:1: (this_LogicalNotExpression_0= ruleLogicalNotExpression ( () '&&' ( (lv_rightOperand_3_0= ruleLogicalNotExpression ) ) )* )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2678:5: this_LogicalNotExpression_0= ruleLogicalNotExpression ( () '&&' ( (lv_rightOperand_3_0= ruleLogicalNotExpression ) ) )*
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2522:1: (this_LogicalNotExpression_0= ruleLogicalNotExpression ( () '&&' ( (lv_rightOperand_3_0= ruleLogicalNotExpression ) ) )* )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2523:5: this_LogicalNotExpression_0= ruleLogicalNotExpression ( () '&&' ( (lv_rightOperand_3_0= ruleLogicalNotExpression ) ) )*
             {
              
                     currentNode=createCompositeNode(grammarAccess.getLogicalAndExpressionAccess().getLogicalNotExpressionParserRuleCall_0(), currentNode); 
                 
-            pushFollow(FOLLOW_ruleLogicalNotExpression_in_ruleLogicalAndExpression5296);
+            pushFollow(FOLLOW_ruleLogicalNotExpression_in_ruleLogicalAndExpression4988);
             this_LogicalNotExpression_0=ruleLogicalNotExpression();
             _fsp--;
 
@@ -6141,23 +5799,23 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                     current = this_LogicalNotExpression_0; 
                     currentNode = currentNode.getParent();
                 
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2686:1: ( () '&&' ( (lv_rightOperand_3_0= ruleLogicalNotExpression ) ) )*
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2531:1: ( () '&&' ( (lv_rightOperand_3_0= ruleLogicalNotExpression ) ) )*
             loop30:
             do {
                 int alt30=2;
                 int LA30_0 = input.LA(1);
 
-                if ( (LA30_0==45) ) {
+                if ( (LA30_0==42) ) {
                     alt30=1;
                 }
 
 
                 switch (alt30) {
             	case 1 :
-            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2686:2: () '&&' ( (lv_rightOperand_3_0= ruleLogicalNotExpression ) )
+            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2531:2: () '&&' ( (lv_rightOperand_3_0= ruleLogicalNotExpression ) )
             	    {
-            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2686:2: ()
-            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2687:5: 
+            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2531:2: ()
+            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2532:5: 
             	    {
             	     
             	            temp=factory.create(grammarAccess.getLogicalAndExpressionAccess().getLogicalAndExpressionLeftOperandAction_1_0().getType().getClassifier());
@@ -6177,20 +5835,20 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
             	    }
 
-            	    match(input,45,FOLLOW_45_in_ruleLogicalAndExpression5315); 
+            	    match(input,42,FOLLOW_42_in_ruleLogicalAndExpression5007); 
 
             	            createLeafNode(grammarAccess.getLogicalAndExpressionAccess().getAmpersandAmpersandKeyword_1_1(), null); 
             	        
-            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2706:1: ( (lv_rightOperand_3_0= ruleLogicalNotExpression ) )
-            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2707:1: (lv_rightOperand_3_0= ruleLogicalNotExpression )
+            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2551:1: ( (lv_rightOperand_3_0= ruleLogicalNotExpression ) )
+            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2552:1: (lv_rightOperand_3_0= ruleLogicalNotExpression )
             	    {
-            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2707:1: (lv_rightOperand_3_0= ruleLogicalNotExpression )
-            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2708:3: lv_rightOperand_3_0= ruleLogicalNotExpression
+            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2552:1: (lv_rightOperand_3_0= ruleLogicalNotExpression )
+            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2553:3: lv_rightOperand_3_0= ruleLogicalNotExpression
             	    {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.getLogicalAndExpressionAccess().getRightOperandLogicalNotExpressionParserRuleCall_1_2_0(), currentNode); 
             	    	    
-            	    pushFollow(FOLLOW_ruleLogicalNotExpression_in_ruleLogicalAndExpression5336);
+            	    pushFollow(FOLLOW_ruleLogicalNotExpression_in_ruleLogicalAndExpression5028);
             	    lv_rightOperand_3_0=ruleLogicalNotExpression();
             	    _fsp--;
 
@@ -6249,7 +5907,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start entryRuleLogicalNotExpression
-    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2738:1: entryRuleLogicalNotExpression returns [EObject current=null] : iv_ruleLogicalNotExpression= ruleLogicalNotExpression EOF ;
+    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2583:1: entryRuleLogicalNotExpression returns [EObject current=null] : iv_ruleLogicalNotExpression= ruleLogicalNotExpression EOF ;
     public final EObject entryRuleLogicalNotExpression() throws RecognitionException {
         EObject current = null;
 
@@ -6257,16 +5915,16 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2739:2: (iv_ruleLogicalNotExpression= ruleLogicalNotExpression EOF )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2740:2: iv_ruleLogicalNotExpression= ruleLogicalNotExpression EOF
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2584:2: (iv_ruleLogicalNotExpression= ruleLogicalNotExpression EOF )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2585:2: iv_ruleLogicalNotExpression= ruleLogicalNotExpression EOF
             {
              currentNode = createCompositeNode(grammarAccess.getLogicalNotExpressionRule(), currentNode); 
-            pushFollow(FOLLOW_ruleLogicalNotExpression_in_entryRuleLogicalNotExpression5374);
+            pushFollow(FOLLOW_ruleLogicalNotExpression_in_entryRuleLogicalNotExpression5066);
             iv_ruleLogicalNotExpression=ruleLogicalNotExpression();
             _fsp--;
 
              current =iv_ruleLogicalNotExpression; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleLogicalNotExpression5384); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleLogicalNotExpression5076); 
 
             }
 
@@ -6284,7 +5942,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleLogicalNotExpression
-    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2747:1: ruleLogicalNotExpression returns [EObject current=null] : (this_LogicalRelationExpression_0= ruleLogicalRelationExpression | ( () '!' ( (lv_operand_3_0= ruleLogicalRelationExpression ) ) ) ) ;
+    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2592:1: ruleLogicalNotExpression returns [EObject current=null] : (this_LogicalRelationExpression_0= ruleLogicalRelationExpression | ( () '!' ( (lv_operand_3_0= ruleLogicalRelationExpression ) ) ) ) ;
     public final EObject ruleLogicalNotExpression() throws RecognitionException {
         EObject current = null;
 
@@ -6296,33 +5954,33 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2752:6: ( (this_LogicalRelationExpression_0= ruleLogicalRelationExpression | ( () '!' ( (lv_operand_3_0= ruleLogicalRelationExpression ) ) ) ) )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2753:1: (this_LogicalRelationExpression_0= ruleLogicalRelationExpression | ( () '!' ( (lv_operand_3_0= ruleLogicalRelationExpression ) ) ) )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2597:6: ( (this_LogicalRelationExpression_0= ruleLogicalRelationExpression | ( () '!' ( (lv_operand_3_0= ruleLogicalRelationExpression ) ) ) ) )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2598:1: (this_LogicalRelationExpression_0= ruleLogicalRelationExpression | ( () '!' ( (lv_operand_3_0= ruleLogicalRelationExpression ) ) ) )
             {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2753:1: (this_LogicalRelationExpression_0= ruleLogicalRelationExpression | ( () '!' ( (lv_operand_3_0= ruleLogicalRelationExpression ) ) ) )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2598:1: (this_LogicalRelationExpression_0= ruleLogicalRelationExpression | ( () '!' ( (lv_operand_3_0= ruleLogicalRelationExpression ) ) ) )
             int alt31=2;
             int LA31_0 = input.LA(1);
 
-            if ( ((LA31_0>=RULE_ID && LA31_0<=RULE_FLOAT)||LA31_0==26||(LA31_0>=49 && LA31_0<=50)||LA31_0==53) ) {
+            if ( ((LA31_0>=RULE_ID && LA31_0<=RULE_FLOAT)||LA31_0==26||(LA31_0>=46 && LA31_0<=47)||LA31_0==50) ) {
                 alt31=1;
             }
-            else if ( (LA31_0==46) ) {
+            else if ( (LA31_0==43) ) {
                 alt31=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("2753:1: (this_LogicalRelationExpression_0= ruleLogicalRelationExpression | ( () '!' ( (lv_operand_3_0= ruleLogicalRelationExpression ) ) ) )", 31, 0, input);
+                    new NoViableAltException("2598:1: (this_LogicalRelationExpression_0= ruleLogicalRelationExpression | ( () '!' ( (lv_operand_3_0= ruleLogicalRelationExpression ) ) ) )", 31, 0, input);
 
                 throw nvae;
             }
             switch (alt31) {
                 case 1 :
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2754:5: this_LogicalRelationExpression_0= ruleLogicalRelationExpression
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2599:5: this_LogicalRelationExpression_0= ruleLogicalRelationExpression
                     {
                      
                             currentNode=createCompositeNode(grammarAccess.getLogicalNotExpressionAccess().getLogicalRelationExpressionParserRuleCall_0(), currentNode); 
                         
-                    pushFollow(FOLLOW_ruleLogicalRelationExpression_in_ruleLogicalNotExpression5431);
+                    pushFollow(FOLLOW_ruleLogicalRelationExpression_in_ruleLogicalNotExpression5123);
                     this_LogicalRelationExpression_0=ruleLogicalRelationExpression();
                     _fsp--;
 
@@ -6334,13 +5992,13 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2763:6: ( () '!' ( (lv_operand_3_0= ruleLogicalRelationExpression ) ) )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2608:6: ( () '!' ( (lv_operand_3_0= ruleLogicalRelationExpression ) ) )
                     {
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2763:6: ( () '!' ( (lv_operand_3_0= ruleLogicalRelationExpression ) ) )
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2763:7: () '!' ( (lv_operand_3_0= ruleLogicalRelationExpression ) )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2608:6: ( () '!' ( (lv_operand_3_0= ruleLogicalRelationExpression ) ) )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2608:7: () '!' ( (lv_operand_3_0= ruleLogicalRelationExpression ) )
                     {
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2763:7: ()
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2764:5: 
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2608:7: ()
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2609:5: 
                     {
                      
                             temp=factory.create(grammarAccess.getLogicalNotExpressionAccess().getLogicalNotExpressionAction_1_0().getType().getClassifier());
@@ -6355,20 +6013,20 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    match(input,46,FOLLOW_46_in_ruleLogicalNotExpression5456); 
+                    match(input,43,FOLLOW_43_in_ruleLogicalNotExpression5148); 
 
                             createLeafNode(grammarAccess.getLogicalNotExpressionAccess().getExclamationMarkKeyword_1_1(), null); 
                         
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2778:1: ( (lv_operand_3_0= ruleLogicalRelationExpression ) )
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2779:1: (lv_operand_3_0= ruleLogicalRelationExpression )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2623:1: ( (lv_operand_3_0= ruleLogicalRelationExpression ) )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2624:1: (lv_operand_3_0= ruleLogicalRelationExpression )
                     {
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2779:1: (lv_operand_3_0= ruleLogicalRelationExpression )
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2780:3: lv_operand_3_0= ruleLogicalRelationExpression
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2624:1: (lv_operand_3_0= ruleLogicalRelationExpression )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2625:3: lv_operand_3_0= ruleLogicalRelationExpression
                     {
                      
                     	        currentNode=createCompositeNode(grammarAccess.getLogicalNotExpressionAccess().getOperandLogicalRelationExpressionParserRuleCall_1_2_0(), currentNode); 
                     	    
-                    pushFollow(FOLLOW_ruleLogicalRelationExpression_in_ruleLogicalNotExpression5477);
+                    pushFollow(FOLLOW_ruleLogicalRelationExpression_in_ruleLogicalNotExpression5169);
                     lv_operand_3_0=ruleLogicalRelationExpression();
                     _fsp--;
 
@@ -6424,7 +6082,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start entryRuleLogicalRelationExpression
-    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2810:1: entryRuleLogicalRelationExpression returns [EObject current=null] : iv_ruleLogicalRelationExpression= ruleLogicalRelationExpression EOF ;
+    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2655:1: entryRuleLogicalRelationExpression returns [EObject current=null] : iv_ruleLogicalRelationExpression= ruleLogicalRelationExpression EOF ;
     public final EObject entryRuleLogicalRelationExpression() throws RecognitionException {
         EObject current = null;
 
@@ -6432,16 +6090,16 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2811:2: (iv_ruleLogicalRelationExpression= ruleLogicalRelationExpression EOF )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2812:2: iv_ruleLogicalRelationExpression= ruleLogicalRelationExpression EOF
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2656:2: (iv_ruleLogicalRelationExpression= ruleLogicalRelationExpression EOF )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2657:2: iv_ruleLogicalRelationExpression= ruleLogicalRelationExpression EOF
             {
              currentNode = createCompositeNode(grammarAccess.getLogicalRelationExpressionRule(), currentNode); 
-            pushFollow(FOLLOW_ruleLogicalRelationExpression_in_entryRuleLogicalRelationExpression5514);
+            pushFollow(FOLLOW_ruleLogicalRelationExpression_in_entryRuleLogicalRelationExpression5206);
             iv_ruleLogicalRelationExpression=ruleLogicalRelationExpression();
             _fsp--;
 
              current =iv_ruleLogicalRelationExpression; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleLogicalRelationExpression5524); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleLogicalRelationExpression5216); 
 
             }
 
@@ -6459,7 +6117,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleLogicalRelationExpression
-    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2819:1: ruleLogicalRelationExpression returns [EObject current=null] : (this_NumericalAddSubtractExpression_0= ruleNumericalAddSubtractExpression ( () ( (lv_operator_2_0= ruleRelationalOperator ) ) ( (lv_rightOperand_3_0= ruleNumericalAddSubtractExpression ) ) )* ) ;
+    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2664:1: ruleLogicalRelationExpression returns [EObject current=null] : (this_NumericalAddSubtractExpression_0= ruleNumericalAddSubtractExpression ( () ( (lv_operator_2_0= ruleRelationalOperator ) ) ( (lv_rightOperand_3_0= ruleNumericalAddSubtractExpression ) ) )* ) ;
     public final EObject ruleLogicalRelationExpression() throws RecognitionException {
         EObject current = null;
 
@@ -6473,16 +6131,16 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2824:6: ( (this_NumericalAddSubtractExpression_0= ruleNumericalAddSubtractExpression ( () ( (lv_operator_2_0= ruleRelationalOperator ) ) ( (lv_rightOperand_3_0= ruleNumericalAddSubtractExpression ) ) )* ) )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2825:1: (this_NumericalAddSubtractExpression_0= ruleNumericalAddSubtractExpression ( () ( (lv_operator_2_0= ruleRelationalOperator ) ) ( (lv_rightOperand_3_0= ruleNumericalAddSubtractExpression ) ) )* )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2669:6: ( (this_NumericalAddSubtractExpression_0= ruleNumericalAddSubtractExpression ( () ( (lv_operator_2_0= ruleRelationalOperator ) ) ( (lv_rightOperand_3_0= ruleNumericalAddSubtractExpression ) ) )* ) )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2670:1: (this_NumericalAddSubtractExpression_0= ruleNumericalAddSubtractExpression ( () ( (lv_operator_2_0= ruleRelationalOperator ) ) ( (lv_rightOperand_3_0= ruleNumericalAddSubtractExpression ) ) )* )
             {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2825:1: (this_NumericalAddSubtractExpression_0= ruleNumericalAddSubtractExpression ( () ( (lv_operator_2_0= ruleRelationalOperator ) ) ( (lv_rightOperand_3_0= ruleNumericalAddSubtractExpression ) ) )* )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2826:5: this_NumericalAddSubtractExpression_0= ruleNumericalAddSubtractExpression ( () ( (lv_operator_2_0= ruleRelationalOperator ) ) ( (lv_rightOperand_3_0= ruleNumericalAddSubtractExpression ) ) )*
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2670:1: (this_NumericalAddSubtractExpression_0= ruleNumericalAddSubtractExpression ( () ( (lv_operator_2_0= ruleRelationalOperator ) ) ( (lv_rightOperand_3_0= ruleNumericalAddSubtractExpression ) ) )* )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2671:5: this_NumericalAddSubtractExpression_0= ruleNumericalAddSubtractExpression ( () ( (lv_operator_2_0= ruleRelationalOperator ) ) ( (lv_rightOperand_3_0= ruleNumericalAddSubtractExpression ) ) )*
             {
              
                     currentNode=createCompositeNode(grammarAccess.getLogicalRelationExpressionAccess().getNumericalAddSubtractExpressionParserRuleCall_0(), currentNode); 
                 
-            pushFollow(FOLLOW_ruleNumericalAddSubtractExpression_in_ruleLogicalRelationExpression5571);
+            pushFollow(FOLLOW_ruleNumericalAddSubtractExpression_in_ruleLogicalRelationExpression5263);
             this_NumericalAddSubtractExpression_0=ruleNumericalAddSubtractExpression();
             _fsp--;
 
@@ -6490,23 +6148,23 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                     current = this_NumericalAddSubtractExpression_0; 
                     currentNode = currentNode.getParent();
                 
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2834:1: ( () ( (lv_operator_2_0= ruleRelationalOperator ) ) ( (lv_rightOperand_3_0= ruleNumericalAddSubtractExpression ) ) )*
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2679:1: ( () ( (lv_operator_2_0= ruleRelationalOperator ) ) ( (lv_rightOperand_3_0= ruleNumericalAddSubtractExpression ) ) )*
             loop32:
             do {
                 int alt32=2;
                 int LA32_0 = input.LA(1);
 
-                if ( (LA32_0==35||(LA32_0>=54 && LA32_0<=58)) ) {
+                if ( (LA32_0==35||(LA32_0>=51 && LA32_0<=55)) ) {
                     alt32=1;
                 }
 
 
                 switch (alt32) {
             	case 1 :
-            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2834:2: () ( (lv_operator_2_0= ruleRelationalOperator ) ) ( (lv_rightOperand_3_0= ruleNumericalAddSubtractExpression ) )
+            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2679:2: () ( (lv_operator_2_0= ruleRelationalOperator ) ) ( (lv_rightOperand_3_0= ruleNumericalAddSubtractExpression ) )
             	    {
-            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2834:2: ()
-            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2835:5: 
+            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2679:2: ()
+            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2680:5: 
             	    {
             	     
             	            temp=factory.create(grammarAccess.getLogicalRelationExpressionAccess().getLogicalRelationExpressionLeftOperandAction_1_0().getType().getClassifier());
@@ -6526,16 +6184,16 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
             	    }
 
-            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2850:2: ( (lv_operator_2_0= ruleRelationalOperator ) )
-            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2851:1: (lv_operator_2_0= ruleRelationalOperator )
+            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2695:2: ( (lv_operator_2_0= ruleRelationalOperator ) )
+            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2696:1: (lv_operator_2_0= ruleRelationalOperator )
             	    {
-            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2851:1: (lv_operator_2_0= ruleRelationalOperator )
-            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2852:3: lv_operator_2_0= ruleRelationalOperator
+            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2696:1: (lv_operator_2_0= ruleRelationalOperator )
+            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2697:3: lv_operator_2_0= ruleRelationalOperator
             	    {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.getLogicalRelationExpressionAccess().getOperatorRelationalOperatorEnumRuleCall_1_1_0(), currentNode); 
             	    	    
-            	    pushFollow(FOLLOW_ruleRelationalOperator_in_ruleLogicalRelationExpression5601);
+            	    pushFollow(FOLLOW_ruleRelationalOperator_in_ruleLogicalRelationExpression5293);
             	    lv_operator_2_0=ruleRelationalOperator();
             	    _fsp--;
 
@@ -6562,16 +6220,16 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
             	    }
 
-            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2874:2: ( (lv_rightOperand_3_0= ruleNumericalAddSubtractExpression ) )
-            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2875:1: (lv_rightOperand_3_0= ruleNumericalAddSubtractExpression )
+            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2719:2: ( (lv_rightOperand_3_0= ruleNumericalAddSubtractExpression ) )
+            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2720:1: (lv_rightOperand_3_0= ruleNumericalAddSubtractExpression )
             	    {
-            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2875:1: (lv_rightOperand_3_0= ruleNumericalAddSubtractExpression )
-            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2876:3: lv_rightOperand_3_0= ruleNumericalAddSubtractExpression
+            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2720:1: (lv_rightOperand_3_0= ruleNumericalAddSubtractExpression )
+            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2721:3: lv_rightOperand_3_0= ruleNumericalAddSubtractExpression
             	    {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.getLogicalRelationExpressionAccess().getRightOperandNumericalAddSubtractExpressionParserRuleCall_1_2_0(), currentNode); 
             	    	    
-            	    pushFollow(FOLLOW_ruleNumericalAddSubtractExpression_in_ruleLogicalRelationExpression5622);
+            	    pushFollow(FOLLOW_ruleNumericalAddSubtractExpression_in_ruleLogicalRelationExpression5314);
             	    lv_rightOperand_3_0=ruleNumericalAddSubtractExpression();
             	    _fsp--;
 
@@ -6630,7 +6288,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start entryRuleNumericalAddSubtractExpression
-    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2906:1: entryRuleNumericalAddSubtractExpression returns [EObject current=null] : iv_ruleNumericalAddSubtractExpression= ruleNumericalAddSubtractExpression EOF ;
+    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2751:1: entryRuleNumericalAddSubtractExpression returns [EObject current=null] : iv_ruleNumericalAddSubtractExpression= ruleNumericalAddSubtractExpression EOF ;
     public final EObject entryRuleNumericalAddSubtractExpression() throws RecognitionException {
         EObject current = null;
 
@@ -6638,16 +6296,16 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2907:2: (iv_ruleNumericalAddSubtractExpression= ruleNumericalAddSubtractExpression EOF )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2908:2: iv_ruleNumericalAddSubtractExpression= ruleNumericalAddSubtractExpression EOF
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2752:2: (iv_ruleNumericalAddSubtractExpression= ruleNumericalAddSubtractExpression EOF )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2753:2: iv_ruleNumericalAddSubtractExpression= ruleNumericalAddSubtractExpression EOF
             {
              currentNode = createCompositeNode(grammarAccess.getNumericalAddSubtractExpressionRule(), currentNode); 
-            pushFollow(FOLLOW_ruleNumericalAddSubtractExpression_in_entryRuleNumericalAddSubtractExpression5660);
+            pushFollow(FOLLOW_ruleNumericalAddSubtractExpression_in_entryRuleNumericalAddSubtractExpression5352);
             iv_ruleNumericalAddSubtractExpression=ruleNumericalAddSubtractExpression();
             _fsp--;
 
              current =iv_ruleNumericalAddSubtractExpression; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleNumericalAddSubtractExpression5670); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleNumericalAddSubtractExpression5362); 
 
             }
 
@@ -6665,7 +6323,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleNumericalAddSubtractExpression
-    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2915:1: ruleNumericalAddSubtractExpression returns [EObject current=null] : (this_NumericalMultiplyDivideExpression_0= ruleNumericalMultiplyDivideExpression ( () ( (lv_operator_2_0= ruleAdditiveOperator ) ) ( (lv_rightOperand_3_0= ruleNumericalMultiplyDivideExpression ) ) )* ) ;
+    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2760:1: ruleNumericalAddSubtractExpression returns [EObject current=null] : (this_NumericalMultiplyDivideExpression_0= ruleNumericalMultiplyDivideExpression ( () ( (lv_operator_2_0= ruleAdditiveOperator ) ) ( (lv_rightOperand_3_0= ruleNumericalMultiplyDivideExpression ) ) )* ) ;
     public final EObject ruleNumericalAddSubtractExpression() throws RecognitionException {
         EObject current = null;
 
@@ -6679,16 +6337,16 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2920:6: ( (this_NumericalMultiplyDivideExpression_0= ruleNumericalMultiplyDivideExpression ( () ( (lv_operator_2_0= ruleAdditiveOperator ) ) ( (lv_rightOperand_3_0= ruleNumericalMultiplyDivideExpression ) ) )* ) )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2921:1: (this_NumericalMultiplyDivideExpression_0= ruleNumericalMultiplyDivideExpression ( () ( (lv_operator_2_0= ruleAdditiveOperator ) ) ( (lv_rightOperand_3_0= ruleNumericalMultiplyDivideExpression ) ) )* )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2765:6: ( (this_NumericalMultiplyDivideExpression_0= ruleNumericalMultiplyDivideExpression ( () ( (lv_operator_2_0= ruleAdditiveOperator ) ) ( (lv_rightOperand_3_0= ruleNumericalMultiplyDivideExpression ) ) )* ) )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2766:1: (this_NumericalMultiplyDivideExpression_0= ruleNumericalMultiplyDivideExpression ( () ( (lv_operator_2_0= ruleAdditiveOperator ) ) ( (lv_rightOperand_3_0= ruleNumericalMultiplyDivideExpression ) ) )* )
             {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2921:1: (this_NumericalMultiplyDivideExpression_0= ruleNumericalMultiplyDivideExpression ( () ( (lv_operator_2_0= ruleAdditiveOperator ) ) ( (lv_rightOperand_3_0= ruleNumericalMultiplyDivideExpression ) ) )* )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2922:5: this_NumericalMultiplyDivideExpression_0= ruleNumericalMultiplyDivideExpression ( () ( (lv_operator_2_0= ruleAdditiveOperator ) ) ( (lv_rightOperand_3_0= ruleNumericalMultiplyDivideExpression ) ) )*
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2766:1: (this_NumericalMultiplyDivideExpression_0= ruleNumericalMultiplyDivideExpression ( () ( (lv_operator_2_0= ruleAdditiveOperator ) ) ( (lv_rightOperand_3_0= ruleNumericalMultiplyDivideExpression ) ) )* )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2767:5: this_NumericalMultiplyDivideExpression_0= ruleNumericalMultiplyDivideExpression ( () ( (lv_operator_2_0= ruleAdditiveOperator ) ) ( (lv_rightOperand_3_0= ruleNumericalMultiplyDivideExpression ) ) )*
             {
              
                     currentNode=createCompositeNode(grammarAccess.getNumericalAddSubtractExpressionAccess().getNumericalMultiplyDivideExpressionParserRuleCall_0(), currentNode); 
                 
-            pushFollow(FOLLOW_ruleNumericalMultiplyDivideExpression_in_ruleNumericalAddSubtractExpression5717);
+            pushFollow(FOLLOW_ruleNumericalMultiplyDivideExpression_in_ruleNumericalAddSubtractExpression5409);
             this_NumericalMultiplyDivideExpression_0=ruleNumericalMultiplyDivideExpression();
             _fsp--;
 
@@ -6696,23 +6354,23 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                     current = this_NumericalMultiplyDivideExpression_0; 
                     currentNode = currentNode.getParent();
                 
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2930:1: ( () ( (lv_operator_2_0= ruleAdditiveOperator ) ) ( (lv_rightOperand_3_0= ruleNumericalMultiplyDivideExpression ) ) )*
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2775:1: ( () ( (lv_operator_2_0= ruleAdditiveOperator ) ) ( (lv_rightOperand_3_0= ruleNumericalMultiplyDivideExpression ) ) )*
             loop33:
             do {
                 int alt33=2;
                 int LA33_0 = input.LA(1);
 
-                if ( ((LA33_0>=49 && LA33_0<=50)) ) {
+                if ( ((LA33_0>=46 && LA33_0<=47)) ) {
                     alt33=1;
                 }
 
 
                 switch (alt33) {
             	case 1 :
-            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2930:2: () ( (lv_operator_2_0= ruleAdditiveOperator ) ) ( (lv_rightOperand_3_0= ruleNumericalMultiplyDivideExpression ) )
+            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2775:2: () ( (lv_operator_2_0= ruleAdditiveOperator ) ) ( (lv_rightOperand_3_0= ruleNumericalMultiplyDivideExpression ) )
             	    {
-            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2930:2: ()
-            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2931:5: 
+            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2775:2: ()
+            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2776:5: 
             	    {
             	     
             	            temp=factory.create(grammarAccess.getNumericalAddSubtractExpressionAccess().getNumericalAddSubtractExpressionLeftOperandAction_1_0().getType().getClassifier());
@@ -6732,16 +6390,16 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
             	    }
 
-            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2946:2: ( (lv_operator_2_0= ruleAdditiveOperator ) )
-            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2947:1: (lv_operator_2_0= ruleAdditiveOperator )
+            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2791:2: ( (lv_operator_2_0= ruleAdditiveOperator ) )
+            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2792:1: (lv_operator_2_0= ruleAdditiveOperator )
             	    {
-            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2947:1: (lv_operator_2_0= ruleAdditiveOperator )
-            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2948:3: lv_operator_2_0= ruleAdditiveOperator
+            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2792:1: (lv_operator_2_0= ruleAdditiveOperator )
+            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2793:3: lv_operator_2_0= ruleAdditiveOperator
             	    {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.getNumericalAddSubtractExpressionAccess().getOperatorAdditiveOperatorEnumRuleCall_1_1_0(), currentNode); 
             	    	    
-            	    pushFollow(FOLLOW_ruleAdditiveOperator_in_ruleNumericalAddSubtractExpression5747);
+            	    pushFollow(FOLLOW_ruleAdditiveOperator_in_ruleNumericalAddSubtractExpression5439);
             	    lv_operator_2_0=ruleAdditiveOperator();
             	    _fsp--;
 
@@ -6768,16 +6426,16 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
             	    }
 
-            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2970:2: ( (lv_rightOperand_3_0= ruleNumericalMultiplyDivideExpression ) )
-            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2971:1: (lv_rightOperand_3_0= ruleNumericalMultiplyDivideExpression )
+            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2815:2: ( (lv_rightOperand_3_0= ruleNumericalMultiplyDivideExpression ) )
+            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2816:1: (lv_rightOperand_3_0= ruleNumericalMultiplyDivideExpression )
             	    {
-            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2971:1: (lv_rightOperand_3_0= ruleNumericalMultiplyDivideExpression )
-            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2972:3: lv_rightOperand_3_0= ruleNumericalMultiplyDivideExpression
+            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2816:1: (lv_rightOperand_3_0= ruleNumericalMultiplyDivideExpression )
+            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2817:3: lv_rightOperand_3_0= ruleNumericalMultiplyDivideExpression
             	    {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.getNumericalAddSubtractExpressionAccess().getRightOperandNumericalMultiplyDivideExpressionParserRuleCall_1_2_0(), currentNode); 
             	    	    
-            	    pushFollow(FOLLOW_ruleNumericalMultiplyDivideExpression_in_ruleNumericalAddSubtractExpression5768);
+            	    pushFollow(FOLLOW_ruleNumericalMultiplyDivideExpression_in_ruleNumericalAddSubtractExpression5460);
             	    lv_rightOperand_3_0=ruleNumericalMultiplyDivideExpression();
             	    _fsp--;
 
@@ -6836,7 +6494,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start entryRuleNumericalMultiplyDivideExpression
-    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3002:1: entryRuleNumericalMultiplyDivideExpression returns [EObject current=null] : iv_ruleNumericalMultiplyDivideExpression= ruleNumericalMultiplyDivideExpression EOF ;
+    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2847:1: entryRuleNumericalMultiplyDivideExpression returns [EObject current=null] : iv_ruleNumericalMultiplyDivideExpression= ruleNumericalMultiplyDivideExpression EOF ;
     public final EObject entryRuleNumericalMultiplyDivideExpression() throws RecognitionException {
         EObject current = null;
 
@@ -6844,16 +6502,16 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3003:2: (iv_ruleNumericalMultiplyDivideExpression= ruleNumericalMultiplyDivideExpression EOF )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3004:2: iv_ruleNumericalMultiplyDivideExpression= ruleNumericalMultiplyDivideExpression EOF
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2848:2: (iv_ruleNumericalMultiplyDivideExpression= ruleNumericalMultiplyDivideExpression EOF )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2849:2: iv_ruleNumericalMultiplyDivideExpression= ruleNumericalMultiplyDivideExpression EOF
             {
              currentNode = createCompositeNode(grammarAccess.getNumericalMultiplyDivideExpressionRule(), currentNode); 
-            pushFollow(FOLLOW_ruleNumericalMultiplyDivideExpression_in_entryRuleNumericalMultiplyDivideExpression5806);
+            pushFollow(FOLLOW_ruleNumericalMultiplyDivideExpression_in_entryRuleNumericalMultiplyDivideExpression5498);
             iv_ruleNumericalMultiplyDivideExpression=ruleNumericalMultiplyDivideExpression();
             _fsp--;
 
              current =iv_ruleNumericalMultiplyDivideExpression; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleNumericalMultiplyDivideExpression5816); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleNumericalMultiplyDivideExpression5508); 
 
             }
 
@@ -6871,7 +6529,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleNumericalMultiplyDivideExpression
-    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3011:1: ruleNumericalMultiplyDivideExpression returns [EObject current=null] : (this_NumericalUnaryExpression_0= ruleNumericalUnaryExpression ( () ( (lv_operator_2_0= ruleMultiplicativeOperator ) ) ( (lv_rightOperand_3_0= ruleNumericalUnaryExpression ) ) )* ) ;
+    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2856:1: ruleNumericalMultiplyDivideExpression returns [EObject current=null] : (this_NumericalUnaryExpression_0= ruleNumericalUnaryExpression ( () ( (lv_operator_2_0= ruleMultiplicativeOperator ) ) ( (lv_rightOperand_3_0= ruleNumericalUnaryExpression ) ) )* ) ;
     public final EObject ruleNumericalMultiplyDivideExpression() throws RecognitionException {
         EObject current = null;
 
@@ -6885,16 +6543,16 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3016:6: ( (this_NumericalUnaryExpression_0= ruleNumericalUnaryExpression ( () ( (lv_operator_2_0= ruleMultiplicativeOperator ) ) ( (lv_rightOperand_3_0= ruleNumericalUnaryExpression ) ) )* ) )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3017:1: (this_NumericalUnaryExpression_0= ruleNumericalUnaryExpression ( () ( (lv_operator_2_0= ruleMultiplicativeOperator ) ) ( (lv_rightOperand_3_0= ruleNumericalUnaryExpression ) ) )* )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2861:6: ( (this_NumericalUnaryExpression_0= ruleNumericalUnaryExpression ( () ( (lv_operator_2_0= ruleMultiplicativeOperator ) ) ( (lv_rightOperand_3_0= ruleNumericalUnaryExpression ) ) )* ) )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2862:1: (this_NumericalUnaryExpression_0= ruleNumericalUnaryExpression ( () ( (lv_operator_2_0= ruleMultiplicativeOperator ) ) ( (lv_rightOperand_3_0= ruleNumericalUnaryExpression ) ) )* )
             {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3017:1: (this_NumericalUnaryExpression_0= ruleNumericalUnaryExpression ( () ( (lv_operator_2_0= ruleMultiplicativeOperator ) ) ( (lv_rightOperand_3_0= ruleNumericalUnaryExpression ) ) )* )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3018:5: this_NumericalUnaryExpression_0= ruleNumericalUnaryExpression ( () ( (lv_operator_2_0= ruleMultiplicativeOperator ) ) ( (lv_rightOperand_3_0= ruleNumericalUnaryExpression ) ) )*
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2862:1: (this_NumericalUnaryExpression_0= ruleNumericalUnaryExpression ( () ( (lv_operator_2_0= ruleMultiplicativeOperator ) ) ( (lv_rightOperand_3_0= ruleNumericalUnaryExpression ) ) )* )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2863:5: this_NumericalUnaryExpression_0= ruleNumericalUnaryExpression ( () ( (lv_operator_2_0= ruleMultiplicativeOperator ) ) ( (lv_rightOperand_3_0= ruleNumericalUnaryExpression ) ) )*
             {
              
                     currentNode=createCompositeNode(grammarAccess.getNumericalMultiplyDivideExpressionAccess().getNumericalUnaryExpressionParserRuleCall_0(), currentNode); 
                 
-            pushFollow(FOLLOW_ruleNumericalUnaryExpression_in_ruleNumericalMultiplyDivideExpression5863);
+            pushFollow(FOLLOW_ruleNumericalUnaryExpression_in_ruleNumericalMultiplyDivideExpression5555);
             this_NumericalUnaryExpression_0=ruleNumericalUnaryExpression();
             _fsp--;
 
@@ -6902,23 +6560,23 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                     current = this_NumericalUnaryExpression_0; 
                     currentNode = currentNode.getParent();
                 
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3026:1: ( () ( (lv_operator_2_0= ruleMultiplicativeOperator ) ) ( (lv_rightOperand_3_0= ruleNumericalUnaryExpression ) ) )*
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2871:1: ( () ( (lv_operator_2_0= ruleMultiplicativeOperator ) ) ( (lv_rightOperand_3_0= ruleNumericalUnaryExpression ) ) )*
             loop34:
             do {
                 int alt34=2;
                 int LA34_0 = input.LA(1);
 
-                if ( (LA34_0==31||(LA34_0>=51 && LA34_0<=52)) ) {
+                if ( (LA34_0==31||(LA34_0>=48 && LA34_0<=49)) ) {
                     alt34=1;
                 }
 
 
                 switch (alt34) {
             	case 1 :
-            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3026:2: () ( (lv_operator_2_0= ruleMultiplicativeOperator ) ) ( (lv_rightOperand_3_0= ruleNumericalUnaryExpression ) )
+            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2871:2: () ( (lv_operator_2_0= ruleMultiplicativeOperator ) ) ( (lv_rightOperand_3_0= ruleNumericalUnaryExpression ) )
             	    {
-            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3026:2: ()
-            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3027:5: 
+            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2871:2: ()
+            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2872:5: 
             	    {
             	     
             	            temp=factory.create(grammarAccess.getNumericalMultiplyDivideExpressionAccess().getNumericalMultiplyDivideExpressionLeftOperandAction_1_0().getType().getClassifier());
@@ -6938,16 +6596,16 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
             	    }
 
-            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3042:2: ( (lv_operator_2_0= ruleMultiplicativeOperator ) )
-            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3043:1: (lv_operator_2_0= ruleMultiplicativeOperator )
+            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2887:2: ( (lv_operator_2_0= ruleMultiplicativeOperator ) )
+            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2888:1: (lv_operator_2_0= ruleMultiplicativeOperator )
             	    {
-            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3043:1: (lv_operator_2_0= ruleMultiplicativeOperator )
-            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3044:3: lv_operator_2_0= ruleMultiplicativeOperator
+            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2888:1: (lv_operator_2_0= ruleMultiplicativeOperator )
+            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2889:3: lv_operator_2_0= ruleMultiplicativeOperator
             	    {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.getNumericalMultiplyDivideExpressionAccess().getOperatorMultiplicativeOperatorEnumRuleCall_1_1_0(), currentNode); 
             	    	    
-            	    pushFollow(FOLLOW_ruleMultiplicativeOperator_in_ruleNumericalMultiplyDivideExpression5893);
+            	    pushFollow(FOLLOW_ruleMultiplicativeOperator_in_ruleNumericalMultiplyDivideExpression5585);
             	    lv_operator_2_0=ruleMultiplicativeOperator();
             	    _fsp--;
 
@@ -6974,16 +6632,16 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
             	    }
 
-            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3066:2: ( (lv_rightOperand_3_0= ruleNumericalUnaryExpression ) )
-            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3067:1: (lv_rightOperand_3_0= ruleNumericalUnaryExpression )
+            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2911:2: ( (lv_rightOperand_3_0= ruleNumericalUnaryExpression ) )
+            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2912:1: (lv_rightOperand_3_0= ruleNumericalUnaryExpression )
             	    {
-            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3067:1: (lv_rightOperand_3_0= ruleNumericalUnaryExpression )
-            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3068:3: lv_rightOperand_3_0= ruleNumericalUnaryExpression
+            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2912:1: (lv_rightOperand_3_0= ruleNumericalUnaryExpression )
+            	    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2913:3: lv_rightOperand_3_0= ruleNumericalUnaryExpression
             	    {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.getNumericalMultiplyDivideExpressionAccess().getRightOperandNumericalUnaryExpressionParserRuleCall_1_2_0(), currentNode); 
             	    	    
-            	    pushFollow(FOLLOW_ruleNumericalUnaryExpression_in_ruleNumericalMultiplyDivideExpression5914);
+            	    pushFollow(FOLLOW_ruleNumericalUnaryExpression_in_ruleNumericalMultiplyDivideExpression5606);
             	    lv_rightOperand_3_0=ruleNumericalUnaryExpression();
             	    _fsp--;
 
@@ -7042,7 +6700,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start entryRuleNumericalUnaryExpression
-    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3098:1: entryRuleNumericalUnaryExpression returns [EObject current=null] : iv_ruleNumericalUnaryExpression= ruleNumericalUnaryExpression EOF ;
+    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2943:1: entryRuleNumericalUnaryExpression returns [EObject current=null] : iv_ruleNumericalUnaryExpression= ruleNumericalUnaryExpression EOF ;
     public final EObject entryRuleNumericalUnaryExpression() throws RecognitionException {
         EObject current = null;
 
@@ -7050,16 +6708,16 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3099:2: (iv_ruleNumericalUnaryExpression= ruleNumericalUnaryExpression EOF )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3100:2: iv_ruleNumericalUnaryExpression= ruleNumericalUnaryExpression EOF
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2944:2: (iv_ruleNumericalUnaryExpression= ruleNumericalUnaryExpression EOF )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2945:2: iv_ruleNumericalUnaryExpression= ruleNumericalUnaryExpression EOF
             {
              currentNode = createCompositeNode(grammarAccess.getNumericalUnaryExpressionRule(), currentNode); 
-            pushFollow(FOLLOW_ruleNumericalUnaryExpression_in_entryRuleNumericalUnaryExpression5952);
+            pushFollow(FOLLOW_ruleNumericalUnaryExpression_in_entryRuleNumericalUnaryExpression5644);
             iv_ruleNumericalUnaryExpression=ruleNumericalUnaryExpression();
             _fsp--;
 
              current =iv_ruleNumericalUnaryExpression; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleNumericalUnaryExpression5962); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleNumericalUnaryExpression5654); 
 
             }
 
@@ -7077,7 +6735,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleNumericalUnaryExpression
-    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3107:1: ruleNumericalUnaryExpression returns [EObject current=null] : (this_PrimaryExpression_0= rulePrimaryExpression | ( () ( (lv_operator_2_0= ruleUnaryOperator ) ) ( (lv_operand_3_0= rulePrimaryExpression ) ) ) ) ;
+    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2952:1: ruleNumericalUnaryExpression returns [EObject current=null] : (this_PrimaryExpression_0= rulePrimaryExpression | ( () ( (lv_operator_2_0= ruleUnaryOperator ) ) ( (lv_operand_3_0= rulePrimaryExpression ) ) ) ) ;
     public final EObject ruleNumericalUnaryExpression() throws RecognitionException {
         EObject current = null;
 
@@ -7091,33 +6749,33 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3112:6: ( (this_PrimaryExpression_0= rulePrimaryExpression | ( () ( (lv_operator_2_0= ruleUnaryOperator ) ) ( (lv_operand_3_0= rulePrimaryExpression ) ) ) ) )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3113:1: (this_PrimaryExpression_0= rulePrimaryExpression | ( () ( (lv_operator_2_0= ruleUnaryOperator ) ) ( (lv_operand_3_0= rulePrimaryExpression ) ) ) )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2957:6: ( (this_PrimaryExpression_0= rulePrimaryExpression | ( () ( (lv_operator_2_0= ruleUnaryOperator ) ) ( (lv_operand_3_0= rulePrimaryExpression ) ) ) ) )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2958:1: (this_PrimaryExpression_0= rulePrimaryExpression | ( () ( (lv_operator_2_0= ruleUnaryOperator ) ) ( (lv_operand_3_0= rulePrimaryExpression ) ) ) )
             {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3113:1: (this_PrimaryExpression_0= rulePrimaryExpression | ( () ( (lv_operator_2_0= ruleUnaryOperator ) ) ( (lv_operand_3_0= rulePrimaryExpression ) ) ) )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2958:1: (this_PrimaryExpression_0= rulePrimaryExpression | ( () ( (lv_operator_2_0= ruleUnaryOperator ) ) ( (lv_operand_3_0= rulePrimaryExpression ) ) ) )
             int alt35=2;
             int LA35_0 = input.LA(1);
 
             if ( ((LA35_0>=RULE_ID && LA35_0<=RULE_FLOAT)||LA35_0==26) ) {
                 alt35=1;
             }
-            else if ( ((LA35_0>=49 && LA35_0<=50)||LA35_0==53) ) {
+            else if ( ((LA35_0>=46 && LA35_0<=47)||LA35_0==50) ) {
                 alt35=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("3113:1: (this_PrimaryExpression_0= rulePrimaryExpression | ( () ( (lv_operator_2_0= ruleUnaryOperator ) ) ( (lv_operand_3_0= rulePrimaryExpression ) ) ) )", 35, 0, input);
+                    new NoViableAltException("2958:1: (this_PrimaryExpression_0= rulePrimaryExpression | ( () ( (lv_operator_2_0= ruleUnaryOperator ) ) ( (lv_operand_3_0= rulePrimaryExpression ) ) ) )", 35, 0, input);
 
                 throw nvae;
             }
             switch (alt35) {
                 case 1 :
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3114:5: this_PrimaryExpression_0= rulePrimaryExpression
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2959:5: this_PrimaryExpression_0= rulePrimaryExpression
                     {
                      
                             currentNode=createCompositeNode(grammarAccess.getNumericalUnaryExpressionAccess().getPrimaryExpressionParserRuleCall_0(), currentNode); 
                         
-                    pushFollow(FOLLOW_rulePrimaryExpression_in_ruleNumericalUnaryExpression6009);
+                    pushFollow(FOLLOW_rulePrimaryExpression_in_ruleNumericalUnaryExpression5701);
                     this_PrimaryExpression_0=rulePrimaryExpression();
                     _fsp--;
 
@@ -7129,13 +6787,13 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3123:6: ( () ( (lv_operator_2_0= ruleUnaryOperator ) ) ( (lv_operand_3_0= rulePrimaryExpression ) ) )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2968:6: ( () ( (lv_operator_2_0= ruleUnaryOperator ) ) ( (lv_operand_3_0= rulePrimaryExpression ) ) )
                     {
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3123:6: ( () ( (lv_operator_2_0= ruleUnaryOperator ) ) ( (lv_operand_3_0= rulePrimaryExpression ) ) )
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3123:7: () ( (lv_operator_2_0= ruleUnaryOperator ) ) ( (lv_operand_3_0= rulePrimaryExpression ) )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2968:6: ( () ( (lv_operator_2_0= ruleUnaryOperator ) ) ( (lv_operand_3_0= rulePrimaryExpression ) ) )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2968:7: () ( (lv_operator_2_0= ruleUnaryOperator ) ) ( (lv_operand_3_0= rulePrimaryExpression ) )
                     {
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3123:7: ()
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3124:5: 
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2968:7: ()
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2969:5: 
                     {
                      
                             temp=factory.create(grammarAccess.getNumericalUnaryExpressionAccess().getNumericalUnaryExpressionAction_1_0().getType().getClassifier());
@@ -7150,16 +6808,16 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3134:2: ( (lv_operator_2_0= ruleUnaryOperator ) )
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3135:1: (lv_operator_2_0= ruleUnaryOperator )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2979:2: ( (lv_operator_2_0= ruleUnaryOperator ) )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2980:1: (lv_operator_2_0= ruleUnaryOperator )
                     {
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3135:1: (lv_operator_2_0= ruleUnaryOperator )
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3136:3: lv_operator_2_0= ruleUnaryOperator
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2980:1: (lv_operator_2_0= ruleUnaryOperator )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:2981:3: lv_operator_2_0= ruleUnaryOperator
                     {
                      
                     	        currentNode=createCompositeNode(grammarAccess.getNumericalUnaryExpressionAccess().getOperatorUnaryOperatorEnumRuleCall_1_1_0(), currentNode); 
                     	    
-                    pushFollow(FOLLOW_ruleUnaryOperator_in_ruleNumericalUnaryExpression6045);
+                    pushFollow(FOLLOW_ruleUnaryOperator_in_ruleNumericalUnaryExpression5737);
                     lv_operator_2_0=ruleUnaryOperator();
                     _fsp--;
 
@@ -7186,16 +6844,16 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3158:2: ( (lv_operand_3_0= rulePrimaryExpression ) )
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3159:1: (lv_operand_3_0= rulePrimaryExpression )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3003:2: ( (lv_operand_3_0= rulePrimaryExpression ) )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3004:1: (lv_operand_3_0= rulePrimaryExpression )
                     {
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3159:1: (lv_operand_3_0= rulePrimaryExpression )
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3160:3: lv_operand_3_0= rulePrimaryExpression
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3004:1: (lv_operand_3_0= rulePrimaryExpression )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3005:3: lv_operand_3_0= rulePrimaryExpression
                     {
                      
                     	        currentNode=createCompositeNode(grammarAccess.getNumericalUnaryExpressionAccess().getOperandPrimaryExpressionParserRuleCall_1_2_0(), currentNode); 
                     	    
-                    pushFollow(FOLLOW_rulePrimaryExpression_in_ruleNumericalUnaryExpression6066);
+                    pushFollow(FOLLOW_rulePrimaryExpression_in_ruleNumericalUnaryExpression5758);
                     lv_operand_3_0=rulePrimaryExpression();
                     _fsp--;
 
@@ -7251,7 +6909,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start entryRulePrimaryExpression
-    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3190:1: entryRulePrimaryExpression returns [EObject current=null] : iv_rulePrimaryExpression= rulePrimaryExpression EOF ;
+    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3035:1: entryRulePrimaryExpression returns [EObject current=null] : iv_rulePrimaryExpression= rulePrimaryExpression EOF ;
     public final EObject entryRulePrimaryExpression() throws RecognitionException {
         EObject current = null;
 
@@ -7259,16 +6917,16 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3191:2: (iv_rulePrimaryExpression= rulePrimaryExpression EOF )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3192:2: iv_rulePrimaryExpression= rulePrimaryExpression EOF
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3036:2: (iv_rulePrimaryExpression= rulePrimaryExpression EOF )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3037:2: iv_rulePrimaryExpression= rulePrimaryExpression EOF
             {
              currentNode = createCompositeNode(grammarAccess.getPrimaryExpressionRule(), currentNode); 
-            pushFollow(FOLLOW_rulePrimaryExpression_in_entryRulePrimaryExpression6103);
+            pushFollow(FOLLOW_rulePrimaryExpression_in_entryRulePrimaryExpression5795);
             iv_rulePrimaryExpression=rulePrimaryExpression();
             _fsp--;
 
              current =iv_rulePrimaryExpression; 
-            match(input,EOF,FOLLOW_EOF_in_entryRulePrimaryExpression6113); 
+            match(input,EOF,FOLLOW_EOF_in_entryRulePrimaryExpression5805); 
 
             }
 
@@ -7286,7 +6944,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start rulePrimaryExpression
-    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3199:1: rulePrimaryExpression returns [EObject current=null] : (this_ValueExpression_0= ruleValueExpression | ( '(' this_LogicalOrExpression_2= ruleLogicalOrExpression ')' ) ) ;
+    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3044:1: rulePrimaryExpression returns [EObject current=null] : (this_ValueExpression_0= ruleValueExpression | ( '(' this_LogicalOrExpression_2= ruleLogicalOrExpression ')' ) ) ;
     public final EObject rulePrimaryExpression() throws RecognitionException {
         EObject current = null;
 
@@ -7298,10 +6956,10 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3204:6: ( (this_ValueExpression_0= ruleValueExpression | ( '(' this_LogicalOrExpression_2= ruleLogicalOrExpression ')' ) ) )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3205:1: (this_ValueExpression_0= ruleValueExpression | ( '(' this_LogicalOrExpression_2= ruleLogicalOrExpression ')' ) )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3049:6: ( (this_ValueExpression_0= ruleValueExpression | ( '(' this_LogicalOrExpression_2= ruleLogicalOrExpression ')' ) ) )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3050:1: (this_ValueExpression_0= ruleValueExpression | ( '(' this_LogicalOrExpression_2= ruleLogicalOrExpression ')' ) )
             {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3205:1: (this_ValueExpression_0= ruleValueExpression | ( '(' this_LogicalOrExpression_2= ruleLogicalOrExpression ')' ) )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3050:1: (this_ValueExpression_0= ruleValueExpression | ( '(' this_LogicalOrExpression_2= ruleLogicalOrExpression ')' ) )
             int alt36=2;
             int LA36_0 = input.LA(1);
 
@@ -7313,18 +6971,18 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("3205:1: (this_ValueExpression_0= ruleValueExpression | ( '(' this_LogicalOrExpression_2= ruleLogicalOrExpression ')' ) )", 36, 0, input);
+                    new NoViableAltException("3050:1: (this_ValueExpression_0= ruleValueExpression | ( '(' this_LogicalOrExpression_2= ruleLogicalOrExpression ')' ) )", 36, 0, input);
 
                 throw nvae;
             }
             switch (alt36) {
                 case 1 :
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3206:5: this_ValueExpression_0= ruleValueExpression
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3051:5: this_ValueExpression_0= ruleValueExpression
                     {
                      
                             currentNode=createCompositeNode(grammarAccess.getPrimaryExpressionAccess().getValueExpressionParserRuleCall_0(), currentNode); 
                         
-                    pushFollow(FOLLOW_ruleValueExpression_in_rulePrimaryExpression6160);
+                    pushFollow(FOLLOW_ruleValueExpression_in_rulePrimaryExpression5852);
                     this_ValueExpression_0=ruleValueExpression();
                     _fsp--;
 
@@ -7336,19 +6994,19 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3215:6: ( '(' this_LogicalOrExpression_2= ruleLogicalOrExpression ')' )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3060:6: ( '(' this_LogicalOrExpression_2= ruleLogicalOrExpression ')' )
                     {
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3215:6: ( '(' this_LogicalOrExpression_2= ruleLogicalOrExpression ')' )
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3215:8: '(' this_LogicalOrExpression_2= ruleLogicalOrExpression ')'
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3060:6: ( '(' this_LogicalOrExpression_2= ruleLogicalOrExpression ')' )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3060:8: '(' this_LogicalOrExpression_2= ruleLogicalOrExpression ')'
                     {
-                    match(input,26,FOLLOW_26_in_rulePrimaryExpression6176); 
+                    match(input,26,FOLLOW_26_in_rulePrimaryExpression5868); 
 
                             createLeafNode(grammarAccess.getPrimaryExpressionAccess().getLeftParenthesisKeyword_1_0(), null); 
                         
                      
                             currentNode=createCompositeNode(grammarAccess.getPrimaryExpressionAccess().getLogicalOrExpressionParserRuleCall_1_1(), currentNode); 
                         
-                    pushFollow(FOLLOW_ruleLogicalOrExpression_in_rulePrimaryExpression6198);
+                    pushFollow(FOLLOW_ruleLogicalOrExpression_in_rulePrimaryExpression5890);
                     this_LogicalOrExpression_2=ruleLogicalOrExpression();
                     _fsp--;
 
@@ -7356,7 +7014,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                             current = this_LogicalOrExpression_2; 
                             currentNode = currentNode.getParent();
                         
-                    match(input,28,FOLLOW_28_in_rulePrimaryExpression6207); 
+                    match(input,28,FOLLOW_28_in_rulePrimaryExpression5899); 
 
                             createLeafNode(grammarAccess.getPrimaryExpressionAccess().getRightParenthesisKeyword_1_2(), null); 
                         
@@ -7389,7 +7047,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start entryRuleValueExpression
-    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3240:1: entryRuleValueExpression returns [EObject current=null] : iv_ruleValueExpression= ruleValueExpression EOF ;
+    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3085:1: entryRuleValueExpression returns [EObject current=null] : iv_ruleValueExpression= ruleValueExpression EOF ;
     public final EObject entryRuleValueExpression() throws RecognitionException {
         EObject current = null;
 
@@ -7397,16 +7055,16 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3241:2: (iv_ruleValueExpression= ruleValueExpression EOF )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3242:2: iv_ruleValueExpression= ruleValueExpression EOF
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3086:2: (iv_ruleValueExpression= ruleValueExpression EOF )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3087:2: iv_ruleValueExpression= ruleValueExpression EOF
             {
              currentNode = createCompositeNode(grammarAccess.getValueExpressionRule(), currentNode); 
-            pushFollow(FOLLOW_ruleValueExpression_in_entryRuleValueExpression6244);
+            pushFollow(FOLLOW_ruleValueExpression_in_entryRuleValueExpression5936);
             iv_ruleValueExpression=ruleValueExpression();
             _fsp--;
 
              current =iv_ruleValueExpression; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleValueExpression6254); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleValueExpression5946); 
 
             }
 
@@ -7424,7 +7082,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleValueExpression
-    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3249:1: ruleValueExpression returns [EObject current=null] : (this_PrimitiveValueExpression_0= rulePrimitiveValueExpression | this_VariableReferenceExpression_1= ruleVariableReferenceExpression ) ;
+    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3094:1: ruleValueExpression returns [EObject current=null] : (this_PrimitiveValueExpression_0= rulePrimitiveValueExpression | this_VariableReferenceExpression_1= ruleVariableReferenceExpression ) ;
     public final EObject ruleValueExpression() throws RecognitionException {
         EObject current = null;
 
@@ -7436,10 +7094,10 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3254:6: ( (this_PrimitiveValueExpression_0= rulePrimitiveValueExpression | this_VariableReferenceExpression_1= ruleVariableReferenceExpression ) )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3255:1: (this_PrimitiveValueExpression_0= rulePrimitiveValueExpression | this_VariableReferenceExpression_1= ruleVariableReferenceExpression )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3099:6: ( (this_PrimitiveValueExpression_0= rulePrimitiveValueExpression | this_VariableReferenceExpression_1= ruleVariableReferenceExpression ) )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3100:1: (this_PrimitiveValueExpression_0= rulePrimitiveValueExpression | this_VariableReferenceExpression_1= ruleVariableReferenceExpression )
             {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3255:1: (this_PrimitiveValueExpression_0= rulePrimitiveValueExpression | this_VariableReferenceExpression_1= ruleVariableReferenceExpression )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3100:1: (this_PrimitiveValueExpression_0= rulePrimitiveValueExpression | this_VariableReferenceExpression_1= ruleVariableReferenceExpression )
             int alt37=2;
             int LA37_0 = input.LA(1);
 
@@ -7451,18 +7109,18 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("3255:1: (this_PrimitiveValueExpression_0= rulePrimitiveValueExpression | this_VariableReferenceExpression_1= ruleVariableReferenceExpression )", 37, 0, input);
+                    new NoViableAltException("3100:1: (this_PrimitiveValueExpression_0= rulePrimitiveValueExpression | this_VariableReferenceExpression_1= ruleVariableReferenceExpression )", 37, 0, input);
 
                 throw nvae;
             }
             switch (alt37) {
                 case 1 :
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3256:5: this_PrimitiveValueExpression_0= rulePrimitiveValueExpression
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3101:5: this_PrimitiveValueExpression_0= rulePrimitiveValueExpression
                     {
                      
                             currentNode=createCompositeNode(grammarAccess.getValueExpressionAccess().getPrimitiveValueExpressionParserRuleCall_0(), currentNode); 
                         
-                    pushFollow(FOLLOW_rulePrimitiveValueExpression_in_ruleValueExpression6301);
+                    pushFollow(FOLLOW_rulePrimitiveValueExpression_in_ruleValueExpression5993);
                     this_PrimitiveValueExpression_0=rulePrimitiveValueExpression();
                     _fsp--;
 
@@ -7474,12 +7132,12 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3266:5: this_VariableReferenceExpression_1= ruleVariableReferenceExpression
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3111:5: this_VariableReferenceExpression_1= ruleVariableReferenceExpression
                     {
                      
                             currentNode=createCompositeNode(grammarAccess.getValueExpressionAccess().getVariableReferenceExpressionParserRuleCall_1(), currentNode); 
                         
-                    pushFollow(FOLLOW_ruleVariableReferenceExpression_in_ruleValueExpression6328);
+                    pushFollow(FOLLOW_ruleVariableReferenceExpression_in_ruleValueExpression6020);
                     this_VariableReferenceExpression_1=ruleVariableReferenceExpression();
                     _fsp--;
 
@@ -7513,7 +7171,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start entryRulePrimitiveValueExpression
-    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3282:1: entryRulePrimitiveValueExpression returns [EObject current=null] : iv_rulePrimitiveValueExpression= rulePrimitiveValueExpression EOF ;
+    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3127:1: entryRulePrimitiveValueExpression returns [EObject current=null] : iv_rulePrimitiveValueExpression= rulePrimitiveValueExpression EOF ;
     public final EObject entryRulePrimitiveValueExpression() throws RecognitionException {
         EObject current = null;
 
@@ -7521,16 +7179,16 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3283:2: (iv_rulePrimitiveValueExpression= rulePrimitiveValueExpression EOF )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3284:2: iv_rulePrimitiveValueExpression= rulePrimitiveValueExpression EOF
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3128:2: (iv_rulePrimitiveValueExpression= rulePrimitiveValueExpression EOF )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3129:2: iv_rulePrimitiveValueExpression= rulePrimitiveValueExpression EOF
             {
              currentNode = createCompositeNode(grammarAccess.getPrimitiveValueExpressionRule(), currentNode); 
-            pushFollow(FOLLOW_rulePrimitiveValueExpression_in_entryRulePrimitiveValueExpression6363);
+            pushFollow(FOLLOW_rulePrimitiveValueExpression_in_entryRulePrimitiveValueExpression6055);
             iv_rulePrimitiveValueExpression=rulePrimitiveValueExpression();
             _fsp--;
 
              current =iv_rulePrimitiveValueExpression; 
-            match(input,EOF,FOLLOW_EOF_in_entryRulePrimitiveValueExpression6373); 
+            match(input,EOF,FOLLOW_EOF_in_entryRulePrimitiveValueExpression6065); 
 
             }
 
@@ -7548,7 +7206,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start rulePrimitiveValueExpression
-    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3291:1: rulePrimitiveValueExpression returns [EObject current=null] : ( () ( (lv_value_1_0= ruleLiteral ) ) ) ;
+    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3136:1: rulePrimitiveValueExpression returns [EObject current=null] : ( () ( (lv_value_1_0= ruleLiteral ) ) ) ;
     public final EObject rulePrimitiveValueExpression() throws RecognitionException {
         EObject current = null;
 
@@ -7558,14 +7216,14 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3296:6: ( ( () ( (lv_value_1_0= ruleLiteral ) ) ) )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3297:1: ( () ( (lv_value_1_0= ruleLiteral ) ) )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3141:6: ( ( () ( (lv_value_1_0= ruleLiteral ) ) ) )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3142:1: ( () ( (lv_value_1_0= ruleLiteral ) ) )
             {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3297:1: ( () ( (lv_value_1_0= ruleLiteral ) ) )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3297:2: () ( (lv_value_1_0= ruleLiteral ) )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3142:1: ( () ( (lv_value_1_0= ruleLiteral ) ) )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3142:2: () ( (lv_value_1_0= ruleLiteral ) )
             {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3297:2: ()
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3298:5: 
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3142:2: ()
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3143:5: 
             {
              
                     temp=factory.create(grammarAccess.getPrimitiveValueExpressionAccess().getPrimitiveValueExpressionAction_0().getType().getClassifier());
@@ -7580,16 +7238,16 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3308:2: ( (lv_value_1_0= ruleLiteral ) )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3309:1: (lv_value_1_0= ruleLiteral )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3153:2: ( (lv_value_1_0= ruleLiteral ) )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3154:1: (lv_value_1_0= ruleLiteral )
             {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3309:1: (lv_value_1_0= ruleLiteral )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3310:3: lv_value_1_0= ruleLiteral
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3154:1: (lv_value_1_0= ruleLiteral )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3155:3: lv_value_1_0= ruleLiteral
             {
              
             	        currentNode=createCompositeNode(grammarAccess.getPrimitiveValueExpressionAccess().getValueLiteralParserRuleCall_1_0(), currentNode); 
             	    
-            pushFollow(FOLLOW_ruleLiteral_in_rulePrimitiveValueExpression6428);
+            pushFollow(FOLLOW_ruleLiteral_in_rulePrimitiveValueExpression6120);
             lv_value_1_0=ruleLiteral();
             _fsp--;
 
@@ -7639,7 +7297,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start entryRuleVariableReferenceExpression
-    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3340:1: entryRuleVariableReferenceExpression returns [EObject current=null] : iv_ruleVariableReferenceExpression= ruleVariableReferenceExpression EOF ;
+    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3185:1: entryRuleVariableReferenceExpression returns [EObject current=null] : iv_ruleVariableReferenceExpression= ruleVariableReferenceExpression EOF ;
     public final EObject entryRuleVariableReferenceExpression() throws RecognitionException {
         EObject current = null;
 
@@ -7647,16 +7305,16 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3341:2: (iv_ruleVariableReferenceExpression= ruleVariableReferenceExpression EOF )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3342:2: iv_ruleVariableReferenceExpression= ruleVariableReferenceExpression EOF
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3186:2: (iv_ruleVariableReferenceExpression= ruleVariableReferenceExpression EOF )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3187:2: iv_ruleVariableReferenceExpression= ruleVariableReferenceExpression EOF
             {
              currentNode = createCompositeNode(grammarAccess.getVariableReferenceExpressionRule(), currentNode); 
-            pushFollow(FOLLOW_ruleVariableReferenceExpression_in_entryRuleVariableReferenceExpression6464);
+            pushFollow(FOLLOW_ruleVariableReferenceExpression_in_entryRuleVariableReferenceExpression6156);
             iv_ruleVariableReferenceExpression=ruleVariableReferenceExpression();
             _fsp--;
 
              current =iv_ruleVariableReferenceExpression; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleVariableReferenceExpression6474); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleVariableReferenceExpression6166); 
 
             }
 
@@ -7674,21 +7332,21 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleVariableReferenceExpression
-    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3349:1: ruleVariableReferenceExpression returns [EObject current=null] : ( () ( ( RULE_ID ) ) ) ;
+    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3194:1: ruleVariableReferenceExpression returns [EObject current=null] : ( () ( ( RULE_ID ) ) ) ;
     public final EObject ruleVariableReferenceExpression() throws RecognitionException {
         EObject current = null;
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3354:6: ( ( () ( ( RULE_ID ) ) ) )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3355:1: ( () ( ( RULE_ID ) ) )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3199:6: ( ( () ( ( RULE_ID ) ) ) )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3200:1: ( () ( ( RULE_ID ) ) )
             {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3355:1: ( () ( ( RULE_ID ) ) )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3355:2: () ( ( RULE_ID ) )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3200:1: ( () ( ( RULE_ID ) ) )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3200:2: () ( ( RULE_ID ) )
             {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3355:2: ()
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3356:5: 
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3200:2: ()
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3201:5: 
             {
              
                     temp=factory.create(grammarAccess.getVariableReferenceExpressionAccess().getPropertyReferenceExpressionAction_0().getType().getClassifier());
@@ -7703,11 +7361,11 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3366:2: ( ( RULE_ID ) )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3367:1: ( RULE_ID )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3211:2: ( ( RULE_ID ) )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3212:1: ( RULE_ID )
             {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3367:1: ( RULE_ID )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3368:3: RULE_ID
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3212:1: ( RULE_ID )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3213:3: RULE_ID
             {
 
             			if (current==null) {
@@ -7715,7 +7373,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
             	            associateNodeWithAstElement(currentNode, current);
             	        }
                     
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleVariableReferenceExpression6526); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleVariableReferenceExpression6218); 
 
             		createLeafNode(grammarAccess.getVariableReferenceExpressionAccess().getValueVariableCrossReference_1_0(), "value"); 
             	
@@ -7748,7 +7406,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start entryRuleLiteral
-    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3388:1: entryRuleLiteral returns [String current=null] : iv_ruleLiteral= ruleLiteral EOF ;
+    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3233:1: entryRuleLiteral returns [String current=null] : iv_ruleLiteral= ruleLiteral EOF ;
     public final String entryRuleLiteral() throws RecognitionException {
         String current = null;
 
@@ -7756,16 +7414,16 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3389:2: (iv_ruleLiteral= ruleLiteral EOF )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3390:2: iv_ruleLiteral= ruleLiteral EOF
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3234:2: (iv_ruleLiteral= ruleLiteral EOF )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3235:2: iv_ruleLiteral= ruleLiteral EOF
             {
              currentNode = createCompositeNode(grammarAccess.getLiteralRule(), currentNode); 
-            pushFollow(FOLLOW_ruleLiteral_in_entryRuleLiteral6563);
+            pushFollow(FOLLOW_ruleLiteral_in_entryRuleLiteral6255);
             iv_ruleLiteral=ruleLiteral();
             _fsp--;
 
              current =iv_ruleLiteral.getText(); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleLiteral6574); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleLiteral6266); 
 
             }
 
@@ -7783,7 +7441,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleLiteral
-    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3397:1: ruleLiteral returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_BOOL_0= RULE_BOOL | this_INT_1= RULE_INT | this_STRING_2= RULE_STRING | this_FLOAT_3= RULE_FLOAT ) ;
+    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3242:1: ruleLiteral returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_BOOL_0= RULE_BOOL | this_INT_1= RULE_INT | this_STRING_2= RULE_STRING | this_FLOAT_3= RULE_FLOAT ) ;
     public final AntlrDatatypeRuleToken ruleLiteral() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -7795,10 +7453,10 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
          setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3402:6: ( (this_BOOL_0= RULE_BOOL | this_INT_1= RULE_INT | this_STRING_2= RULE_STRING | this_FLOAT_3= RULE_FLOAT ) )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3403:1: (this_BOOL_0= RULE_BOOL | this_INT_1= RULE_INT | this_STRING_2= RULE_STRING | this_FLOAT_3= RULE_FLOAT )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3247:6: ( (this_BOOL_0= RULE_BOOL | this_INT_1= RULE_INT | this_STRING_2= RULE_STRING | this_FLOAT_3= RULE_FLOAT ) )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3248:1: (this_BOOL_0= RULE_BOOL | this_INT_1= RULE_INT | this_STRING_2= RULE_STRING | this_FLOAT_3= RULE_FLOAT )
             {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3403:1: (this_BOOL_0= RULE_BOOL | this_INT_1= RULE_INT | this_STRING_2= RULE_STRING | this_FLOAT_3= RULE_FLOAT )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3248:1: (this_BOOL_0= RULE_BOOL | this_INT_1= RULE_INT | this_STRING_2= RULE_STRING | this_FLOAT_3= RULE_FLOAT )
             int alt38=4;
             switch ( input.LA(1) ) {
             case RULE_BOOL:
@@ -7823,17 +7481,17 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("3403:1: (this_BOOL_0= RULE_BOOL | this_INT_1= RULE_INT | this_STRING_2= RULE_STRING | this_FLOAT_3= RULE_FLOAT )", 38, 0, input);
+                    new NoViableAltException("3248:1: (this_BOOL_0= RULE_BOOL | this_INT_1= RULE_INT | this_STRING_2= RULE_STRING | this_FLOAT_3= RULE_FLOAT )", 38, 0, input);
 
                 throw nvae;
             }
 
             switch (alt38) {
                 case 1 :
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3403:6: this_BOOL_0= RULE_BOOL
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3248:6: this_BOOL_0= RULE_BOOL
                     {
                     this_BOOL_0=(Token)input.LT(1);
-                    match(input,RULE_BOOL,FOLLOW_RULE_BOOL_in_ruleLiteral6614); 
+                    match(input,RULE_BOOL,FOLLOW_RULE_BOOL_in_ruleLiteral6306); 
 
                     		current.merge(this_BOOL_0);
                         
@@ -7844,10 +7502,10 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3411:10: this_INT_1= RULE_INT
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3256:10: this_INT_1= RULE_INT
                     {
                     this_INT_1=(Token)input.LT(1);
-                    match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleLiteral6640); 
+                    match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleLiteral6332); 
 
                     		current.merge(this_INT_1);
                         
@@ -7858,10 +7516,10 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3419:10: this_STRING_2= RULE_STRING
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3264:10: this_STRING_2= RULE_STRING
                     {
                     this_STRING_2=(Token)input.LT(1);
-                    match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleLiteral6666); 
+                    match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleLiteral6358); 
 
                     		current.merge(this_STRING_2);
                         
@@ -7872,10 +7530,10 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3427:10: this_FLOAT_3= RULE_FLOAT
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3272:10: this_FLOAT_3= RULE_FLOAT
                     {
                     this_FLOAT_3=(Token)input.LT(1);
-                    match(input,RULE_FLOAT,FOLLOW_RULE_FLOAT_in_ruleLiteral6692); 
+                    match(input,RULE_FLOAT,FOLLOW_RULE_FLOAT_in_ruleLiteral6384); 
 
                     		current.merge(this_FLOAT_3);
                         
@@ -7908,39 +7566,39 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleDirection
-    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3442:1: ruleDirection returns [Enumerator current=null] : ( ( 'in' ) | ( 'out' ) ) ;
+    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3287:1: ruleDirection returns [Enumerator current=null] : ( ( 'in' ) | ( 'out' ) ) ;
     public final Enumerator ruleDirection() throws RecognitionException {
         Enumerator current = null;
 
          setCurrentLookahead(); resetLookahead(); 
         try {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3446:6: ( ( ( 'in' ) | ( 'out' ) ) )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3447:1: ( ( 'in' ) | ( 'out' ) )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3291:6: ( ( ( 'in' ) | ( 'out' ) ) )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3292:1: ( ( 'in' ) | ( 'out' ) )
             {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3447:1: ( ( 'in' ) | ( 'out' ) )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3292:1: ( ( 'in' ) | ( 'out' ) )
             int alt39=2;
             int LA39_0 = input.LA(1);
 
-            if ( (LA39_0==47) ) {
+            if ( (LA39_0==44) ) {
                 alt39=1;
             }
-            else if ( (LA39_0==48) ) {
+            else if ( (LA39_0==45) ) {
                 alt39=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("3447:1: ( ( 'in' ) | ( 'out' ) )", 39, 0, input);
+                    new NoViableAltException("3292:1: ( ( 'in' ) | ( 'out' ) )", 39, 0, input);
 
                 throw nvae;
             }
             switch (alt39) {
                 case 1 :
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3447:2: ( 'in' )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3292:2: ( 'in' )
                     {
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3447:2: ( 'in' )
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3447:4: 'in'
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3292:2: ( 'in' )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3292:4: 'in'
                     {
-                    match(input,47,FOLLOW_47_in_ruleDirection6749); 
+                    match(input,44,FOLLOW_44_in_ruleDirection6441); 
 
                             current = grammarAccess.getDirectionAccess().getINEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
                             createLeafNode(grammarAccess.getDirectionAccess().getINEnumLiteralDeclaration_0(), null); 
@@ -7952,12 +7610,12 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3453:6: ( 'out' )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3298:6: ( 'out' )
                     {
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3453:6: ( 'out' )
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3453:8: 'out'
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3298:6: ( 'out' )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3298:8: 'out'
                     {
-                    match(input,48,FOLLOW_48_in_ruleDirection6764); 
+                    match(input,45,FOLLOW_45_in_ruleDirection6456); 
 
                             current = grammarAccess.getDirectionAccess().getOUTEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
                             createLeafNode(grammarAccess.getDirectionAccess().getOUTEnumLiteralDeclaration_1(), null); 
@@ -7991,39 +7649,39 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleAdditiveOperator
-    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3463:1: ruleAdditiveOperator returns [Enumerator current=null] : ( ( '+' ) | ( '-' ) ) ;
+    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3308:1: ruleAdditiveOperator returns [Enumerator current=null] : ( ( '+' ) | ( '-' ) ) ;
     public final Enumerator ruleAdditiveOperator() throws RecognitionException {
         Enumerator current = null;
 
          setCurrentLookahead(); resetLookahead(); 
         try {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3467:6: ( ( ( '+' ) | ( '-' ) ) )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3468:1: ( ( '+' ) | ( '-' ) )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3312:6: ( ( ( '+' ) | ( '-' ) ) )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3313:1: ( ( '+' ) | ( '-' ) )
             {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3468:1: ( ( '+' ) | ( '-' ) )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3313:1: ( ( '+' ) | ( '-' ) )
             int alt40=2;
             int LA40_0 = input.LA(1);
 
-            if ( (LA40_0==49) ) {
+            if ( (LA40_0==46) ) {
                 alt40=1;
             }
-            else if ( (LA40_0==50) ) {
+            else if ( (LA40_0==47) ) {
                 alt40=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("3468:1: ( ( '+' ) | ( '-' ) )", 40, 0, input);
+                    new NoViableAltException("3313:1: ( ( '+' ) | ( '-' ) )", 40, 0, input);
 
                 throw nvae;
             }
             switch (alt40) {
                 case 1 :
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3468:2: ( '+' )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3313:2: ( '+' )
                     {
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3468:2: ( '+' )
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3468:4: '+'
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3313:2: ( '+' )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3313:4: '+'
                     {
-                    match(input,49,FOLLOW_49_in_ruleAdditiveOperator6807); 
+                    match(input,46,FOLLOW_46_in_ruleAdditiveOperator6499); 
 
                             current = grammarAccess.getAdditiveOperatorAccess().getPlusEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
                             createLeafNode(grammarAccess.getAdditiveOperatorAccess().getPlusEnumLiteralDeclaration_0(), null); 
@@ -8035,12 +7693,12 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3474:6: ( '-' )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3319:6: ( '-' )
                     {
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3474:6: ( '-' )
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3474:8: '-'
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3319:6: ( '-' )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3319:8: '-'
                     {
-                    match(input,50,FOLLOW_50_in_ruleAdditiveOperator6822); 
+                    match(input,47,FOLLOW_47_in_ruleAdditiveOperator6514); 
 
                             current = grammarAccess.getAdditiveOperatorAccess().getMinusEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
                             createLeafNode(grammarAccess.getAdditiveOperatorAccess().getMinusEnumLiteralDeclaration_1(), null); 
@@ -8074,19 +7732,19 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleMultiplicativeOperator
-    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3484:1: ruleMultiplicativeOperator returns [Enumerator current=null] : ( ( '*' ) | ( '/' ) | ( '%' ) ) ;
+    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3329:1: ruleMultiplicativeOperator returns [Enumerator current=null] : ( ( '*' ) | ( '/' ) | ( '%' ) ) ;
     public final Enumerator ruleMultiplicativeOperator() throws RecognitionException {
         Enumerator current = null;
 
          setCurrentLookahead(); resetLookahead(); 
         try {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3488:6: ( ( ( '*' ) | ( '/' ) | ( '%' ) ) )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3489:1: ( ( '*' ) | ( '/' ) | ( '%' ) )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3333:6: ( ( ( '*' ) | ( '/' ) | ( '%' ) ) )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3334:1: ( ( '*' ) | ( '/' ) | ( '%' ) )
             {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3489:1: ( ( '*' ) | ( '/' ) | ( '%' ) )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3334:1: ( ( '*' ) | ( '/' ) | ( '%' ) )
             int alt41=3;
             switch ( input.LA(1) ) {
-            case 51:
+            case 48:
                 {
                 alt41=1;
                 }
@@ -8096,26 +7754,26 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                 alt41=2;
                 }
                 break;
-            case 52:
+            case 49:
                 {
                 alt41=3;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("3489:1: ( ( '*' ) | ( '/' ) | ( '%' ) )", 41, 0, input);
+                    new NoViableAltException("3334:1: ( ( '*' ) | ( '/' ) | ( '%' ) )", 41, 0, input);
 
                 throw nvae;
             }
 
             switch (alt41) {
                 case 1 :
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3489:2: ( '*' )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3334:2: ( '*' )
                     {
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3489:2: ( '*' )
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3489:4: '*'
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3334:2: ( '*' )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3334:4: '*'
                     {
-                    match(input,51,FOLLOW_51_in_ruleMultiplicativeOperator6865); 
+                    match(input,48,FOLLOW_48_in_ruleMultiplicativeOperator6557); 
 
                             current = grammarAccess.getMultiplicativeOperatorAccess().getMulEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
                             createLeafNode(grammarAccess.getMultiplicativeOperatorAccess().getMulEnumLiteralDeclaration_0(), null); 
@@ -8127,12 +7785,12 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3495:6: ( '/' )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3340:6: ( '/' )
                     {
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3495:6: ( '/' )
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3495:8: '/'
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3340:6: ( '/' )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3340:8: '/'
                     {
-                    match(input,31,FOLLOW_31_in_ruleMultiplicativeOperator6880); 
+                    match(input,31,FOLLOW_31_in_ruleMultiplicativeOperator6572); 
 
                             current = grammarAccess.getMultiplicativeOperatorAccess().getDivEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
                             createLeafNode(grammarAccess.getMultiplicativeOperatorAccess().getDivEnumLiteralDeclaration_1(), null); 
@@ -8144,12 +7802,12 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3501:6: ( '%' )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3346:6: ( '%' )
                     {
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3501:6: ( '%' )
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3501:8: '%'
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3346:6: ( '%' )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3346:8: '%'
                     {
-                    match(input,52,FOLLOW_52_in_ruleMultiplicativeOperator6895); 
+                    match(input,49,FOLLOW_49_in_ruleMultiplicativeOperator6587); 
 
                             current = grammarAccess.getMultiplicativeOperatorAccess().getModEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
                             createLeafNode(grammarAccess.getMultiplicativeOperatorAccess().getModEnumLiteralDeclaration_2(), null); 
@@ -8183,48 +7841,48 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleUnaryOperator
-    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3511:1: ruleUnaryOperator returns [Enumerator current=null] : ( ( '+' ) | ( '-' ) | ( '~' ) ) ;
+    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3356:1: ruleUnaryOperator returns [Enumerator current=null] : ( ( '+' ) | ( '-' ) | ( '~' ) ) ;
     public final Enumerator ruleUnaryOperator() throws RecognitionException {
         Enumerator current = null;
 
          setCurrentLookahead(); resetLookahead(); 
         try {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3515:6: ( ( ( '+' ) | ( '-' ) | ( '~' ) ) )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3516:1: ( ( '+' ) | ( '-' ) | ( '~' ) )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3360:6: ( ( ( '+' ) | ( '-' ) | ( '~' ) ) )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3361:1: ( ( '+' ) | ( '-' ) | ( '~' ) )
             {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3516:1: ( ( '+' ) | ( '-' ) | ( '~' ) )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3361:1: ( ( '+' ) | ( '-' ) | ( '~' ) )
             int alt42=3;
             switch ( input.LA(1) ) {
-            case 49:
+            case 46:
                 {
                 alt42=1;
                 }
                 break;
-            case 50:
+            case 47:
                 {
                 alt42=2;
                 }
                 break;
-            case 53:
+            case 50:
                 {
                 alt42=3;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("3516:1: ( ( '+' ) | ( '-' ) | ( '~' ) )", 42, 0, input);
+                    new NoViableAltException("3361:1: ( ( '+' ) | ( '-' ) | ( '~' ) )", 42, 0, input);
 
                 throw nvae;
             }
 
             switch (alt42) {
                 case 1 :
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3516:2: ( '+' )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3361:2: ( '+' )
                     {
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3516:2: ( '+' )
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3516:4: '+'
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3361:2: ( '+' )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3361:4: '+'
                     {
-                    match(input,49,FOLLOW_49_in_ruleUnaryOperator6938); 
+                    match(input,46,FOLLOW_46_in_ruleUnaryOperator6630); 
 
                             current = grammarAccess.getUnaryOperatorAccess().getPositiveEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
                             createLeafNode(grammarAccess.getUnaryOperatorAccess().getPositiveEnumLiteralDeclaration_0(), null); 
@@ -8236,12 +7894,12 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3522:6: ( '-' )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3367:6: ( '-' )
                     {
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3522:6: ( '-' )
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3522:8: '-'
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3367:6: ( '-' )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3367:8: '-'
                     {
-                    match(input,50,FOLLOW_50_in_ruleUnaryOperator6953); 
+                    match(input,47,FOLLOW_47_in_ruleUnaryOperator6645); 
 
                             current = grammarAccess.getUnaryOperatorAccess().getNegativeEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
                             createLeafNode(grammarAccess.getUnaryOperatorAccess().getNegativeEnumLiteralDeclaration_1(), null); 
@@ -8253,12 +7911,12 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3528:6: ( '~' )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3373:6: ( '~' )
                     {
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3528:6: ( '~' )
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3528:8: '~'
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3373:6: ( '~' )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3373:8: '~'
                     {
-                    match(input,53,FOLLOW_53_in_ruleUnaryOperator6968); 
+                    match(input,50,FOLLOW_50_in_ruleUnaryOperator6660); 
 
                             current = grammarAccess.getUnaryOperatorAccess().getComplementEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
                             createLeafNode(grammarAccess.getUnaryOperatorAccess().getComplementEnumLiteralDeclaration_2(), null); 
@@ -8292,24 +7950,24 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleRelationalOperator
-    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3538:1: ruleRelationalOperator returns [Enumerator current=null] : ( ( '<' ) | ( '<=' ) | ( '>' ) | ( '>=' ) | ( '==' ) | ( '!=' ) ) ;
+    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3383:1: ruleRelationalOperator returns [Enumerator current=null] : ( ( '<' ) | ( '<=' ) | ( '>' ) | ( '>=' ) | ( '==' ) | ( '!=' ) ) ;
     public final Enumerator ruleRelationalOperator() throws RecognitionException {
         Enumerator current = null;
 
          setCurrentLookahead(); resetLookahead(); 
         try {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3542:6: ( ( ( '<' ) | ( '<=' ) | ( '>' ) | ( '>=' ) | ( '==' ) | ( '!=' ) ) )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3543:1: ( ( '<' ) | ( '<=' ) | ( '>' ) | ( '>=' ) | ( '==' ) | ( '!=' ) )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3387:6: ( ( ( '<' ) | ( '<=' ) | ( '>' ) | ( '>=' ) | ( '==' ) | ( '!=' ) ) )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3388:1: ( ( '<' ) | ( '<=' ) | ( '>' ) | ( '>=' ) | ( '==' ) | ( '!=' ) )
             {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3543:1: ( ( '<' ) | ( '<=' ) | ( '>' ) | ( '>=' ) | ( '==' ) | ( '!=' ) )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3388:1: ( ( '<' ) | ( '<=' ) | ( '>' ) | ( '>=' ) | ( '==' ) | ( '!=' ) )
             int alt43=6;
             switch ( input.LA(1) ) {
-            case 54:
+            case 51:
                 {
                 alt43=1;
                 }
                 break;
-            case 55:
+            case 52:
                 {
                 alt43=2;
                 }
@@ -8319,36 +7977,36 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                 alt43=3;
                 }
                 break;
-            case 56:
+            case 53:
                 {
                 alt43=4;
                 }
                 break;
-            case 57:
+            case 54:
                 {
                 alt43=5;
                 }
                 break;
-            case 58:
+            case 55:
                 {
                 alt43=6;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("3543:1: ( ( '<' ) | ( '<=' ) | ( '>' ) | ( '>=' ) | ( '==' ) | ( '!=' ) )", 43, 0, input);
+                    new NoViableAltException("3388:1: ( ( '<' ) | ( '<=' ) | ( '>' ) | ( '>=' ) | ( '==' ) | ( '!=' ) )", 43, 0, input);
 
                 throw nvae;
             }
 
             switch (alt43) {
                 case 1 :
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3543:2: ( '<' )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3388:2: ( '<' )
                     {
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3543:2: ( '<' )
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3543:4: '<'
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3388:2: ( '<' )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3388:4: '<'
                     {
-                    match(input,54,FOLLOW_54_in_ruleRelationalOperator7011); 
+                    match(input,51,FOLLOW_51_in_ruleRelationalOperator6703); 
 
                             current = grammarAccess.getRelationalOperatorAccess().getSmallerEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
                             createLeafNode(grammarAccess.getRelationalOperatorAccess().getSmallerEnumLiteralDeclaration_0(), null); 
@@ -8360,12 +8018,12 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3549:6: ( '<=' )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3394:6: ( '<=' )
                     {
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3549:6: ( '<=' )
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3549:8: '<='
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3394:6: ( '<=' )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3394:8: '<='
                     {
-                    match(input,55,FOLLOW_55_in_ruleRelationalOperator7026); 
+                    match(input,52,FOLLOW_52_in_ruleRelationalOperator6718); 
 
                             current = grammarAccess.getRelationalOperatorAccess().getSmallerEqualEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
                             createLeafNode(grammarAccess.getRelationalOperatorAccess().getSmallerEqualEnumLiteralDeclaration_1(), null); 
@@ -8377,12 +8035,12 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3555:6: ( '>' )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3400:6: ( '>' )
                     {
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3555:6: ( '>' )
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3555:8: '>'
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3400:6: ( '>' )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3400:8: '>'
                     {
-                    match(input,35,FOLLOW_35_in_ruleRelationalOperator7041); 
+                    match(input,35,FOLLOW_35_in_ruleRelationalOperator6733); 
 
                             current = grammarAccess.getRelationalOperatorAccess().getGreaterEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
                             createLeafNode(grammarAccess.getRelationalOperatorAccess().getGreaterEnumLiteralDeclaration_2(), null); 
@@ -8394,12 +8052,12 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3561:6: ( '>=' )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3406:6: ( '>=' )
                     {
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3561:6: ( '>=' )
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3561:8: '>='
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3406:6: ( '>=' )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3406:8: '>='
                     {
-                    match(input,56,FOLLOW_56_in_ruleRelationalOperator7056); 
+                    match(input,53,FOLLOW_53_in_ruleRelationalOperator6748); 
 
                             current = grammarAccess.getRelationalOperatorAccess().getGreaterEqualEnumLiteralDeclaration_3().getEnumLiteral().getInstance();
                             createLeafNode(grammarAccess.getRelationalOperatorAccess().getGreaterEqualEnumLiteralDeclaration_3(), null); 
@@ -8411,12 +8069,12 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 5 :
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3567:6: ( '==' )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3412:6: ( '==' )
                     {
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3567:6: ( '==' )
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3567:8: '=='
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3412:6: ( '==' )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3412:8: '=='
                     {
-                    match(input,57,FOLLOW_57_in_ruleRelationalOperator7071); 
+                    match(input,54,FOLLOW_54_in_ruleRelationalOperator6763); 
 
                             current = grammarAccess.getRelationalOperatorAccess().getEqualsEnumLiteralDeclaration_4().getEnumLiteral().getInstance();
                             createLeafNode(grammarAccess.getRelationalOperatorAccess().getEqualsEnumLiteralDeclaration_4(), null); 
@@ -8428,12 +8086,12 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 6 :
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3573:6: ( '!=' )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3418:6: ( '!=' )
                     {
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3573:6: ( '!=' )
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3573:8: '!='
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3418:6: ( '!=' )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3418:8: '!='
                     {
-                    match(input,58,FOLLOW_58_in_ruleRelationalOperator7086); 
+                    match(input,55,FOLLOW_55_in_ruleRelationalOperator6778); 
 
                             current = grammarAccess.getRelationalOperatorAccess().getNotEqualsEnumLiteralDeclaration_5().getEnumLiteral().getInstance();
                             createLeafNode(grammarAccess.getRelationalOperatorAccess().getNotEqualsEnumLiteralDeclaration_5(), null); 
@@ -8467,48 +8125,48 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleTimeUnit
-    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3585:1: ruleTimeUnit returns [Enumerator current=null] : ( ( 's' ) | ( 'ms' ) | ( 'ns' ) ) ;
+    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3430:1: ruleTimeUnit returns [Enumerator current=null] : ( ( 's' ) | ( 'ms' ) | ( 'ns' ) ) ;
     public final Enumerator ruleTimeUnit() throws RecognitionException {
         Enumerator current = null;
 
          setCurrentLookahead(); resetLookahead(); 
         try {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3589:6: ( ( ( 's' ) | ( 'ms' ) | ( 'ns' ) ) )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3590:1: ( ( 's' ) | ( 'ms' ) | ( 'ns' ) )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3434:6: ( ( ( 's' ) | ( 'ms' ) | ( 'ns' ) ) )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3435:1: ( ( 's' ) | ( 'ms' ) | ( 'ns' ) )
             {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3590:1: ( ( 's' ) | ( 'ms' ) | ( 'ns' ) )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3435:1: ( ( 's' ) | ( 'ms' ) | ( 'ns' ) )
             int alt44=3;
             switch ( input.LA(1) ) {
-            case 59:
+            case 56:
                 {
                 alt44=1;
                 }
                 break;
-            case 60:
+            case 57:
                 {
                 alt44=2;
                 }
                 break;
-            case 61:
+            case 58:
                 {
                 alt44=3;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("3590:1: ( ( 's' ) | ( 'ms' ) | ( 'ns' ) )", 44, 0, input);
+                    new NoViableAltException("3435:1: ( ( 's' ) | ( 'ms' ) | ( 'ns' ) )", 44, 0, input);
 
                 throw nvae;
             }
 
             switch (alt44) {
                 case 1 :
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3590:2: ( 's' )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3435:2: ( 's' )
                     {
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3590:2: ( 's' )
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3590:4: 's'
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3435:2: ( 's' )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3435:4: 's'
                     {
-                    match(input,59,FOLLOW_59_in_ruleTimeUnit7131); 
+                    match(input,56,FOLLOW_56_in_ruleTimeUnit6823); 
 
                             current = grammarAccess.getTimeUnitAccess().getSecondEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
                             createLeafNode(grammarAccess.getTimeUnitAccess().getSecondEnumLiteralDeclaration_0(), null); 
@@ -8520,12 +8178,12 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3596:6: ( 'ms' )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3441:6: ( 'ms' )
                     {
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3596:6: ( 'ms' )
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3596:8: 'ms'
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3441:6: ( 'ms' )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3441:8: 'ms'
                     {
-                    match(input,60,FOLLOW_60_in_ruleTimeUnit7146); 
+                    match(input,57,FOLLOW_57_in_ruleTimeUnit6838); 
 
                             current = grammarAccess.getTimeUnitAccess().getMillisecondEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
                             createLeafNode(grammarAccess.getTimeUnitAccess().getMillisecondEnumLiteralDeclaration_1(), null); 
@@ -8537,12 +8195,12 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3602:6: ( 'ns' )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3447:6: ( 'ns' )
                     {
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3602:6: ( 'ns' )
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3602:8: 'ns'
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3447:6: ( 'ns' )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3447:8: 'ns'
                     {
-                    match(input,61,FOLLOW_61_in_ruleTimeUnit7161); 
+                    match(input,58,FOLLOW_58_in_ruleTimeUnit6853); 
 
                             current = grammarAccess.getTimeUnitAccess().getNanosecondEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
                             createLeafNode(grammarAccess.getTimeUnitAccess().getNanosecondEnumLiteralDeclaration_2(), null); 
@@ -8576,58 +8234,58 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleType
-    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3612:1: ruleType returns [Enumerator current=null] : ( ( 'void' ) | ( 'integer' ) | ( 'real' ) | ( 'boolean' ) | ( 'string' ) ) ;
+    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3457:1: ruleType returns [Enumerator current=null] : ( ( 'void' ) | ( 'integer' ) | ( 'real' ) | ( 'boolean' ) | ( 'string' ) ) ;
     public final Enumerator ruleType() throws RecognitionException {
         Enumerator current = null;
 
          setCurrentLookahead(); resetLookahead(); 
         try {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3616:6: ( ( ( 'void' ) | ( 'integer' ) | ( 'real' ) | ( 'boolean' ) | ( 'string' ) ) )
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3617:1: ( ( 'void' ) | ( 'integer' ) | ( 'real' ) | ( 'boolean' ) | ( 'string' ) )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3461:6: ( ( ( 'void' ) | ( 'integer' ) | ( 'real' ) | ( 'boolean' ) | ( 'string' ) ) )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3462:1: ( ( 'void' ) | ( 'integer' ) | ( 'real' ) | ( 'boolean' ) | ( 'string' ) )
             {
-            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3617:1: ( ( 'void' ) | ( 'integer' ) | ( 'real' ) | ( 'boolean' ) | ( 'string' ) )
+            // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3462:1: ( ( 'void' ) | ( 'integer' ) | ( 'real' ) | ( 'boolean' ) | ( 'string' ) )
             int alt45=5;
             switch ( input.LA(1) ) {
-            case 62:
+            case 59:
                 {
                 alt45=1;
                 }
                 break;
-            case 63:
+            case 60:
                 {
                 alt45=2;
                 }
                 break;
-            case 64:
+            case 61:
                 {
                 alt45=3;
                 }
                 break;
-            case 65:
+            case 62:
                 {
                 alt45=4;
                 }
                 break;
-            case 66:
+            case 63:
                 {
                 alt45=5;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("3617:1: ( ( 'void' ) | ( 'integer' ) | ( 'real' ) | ( 'boolean' ) | ( 'string' ) )", 45, 0, input);
+                    new NoViableAltException("3462:1: ( ( 'void' ) | ( 'integer' ) | ( 'real' ) | ( 'boolean' ) | ( 'string' ) )", 45, 0, input);
 
                 throw nvae;
             }
 
             switch (alt45) {
                 case 1 :
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3617:2: ( 'void' )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3462:2: ( 'void' )
                     {
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3617:2: ( 'void' )
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3617:4: 'void'
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3462:2: ( 'void' )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3462:4: 'void'
                     {
-                    match(input,62,FOLLOW_62_in_ruleType7204); 
+                    match(input,59,FOLLOW_59_in_ruleType6896); 
 
                             current = grammarAccess.getTypeAccess().getVoidEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
                             createLeafNode(grammarAccess.getTypeAccess().getVoidEnumLiteralDeclaration_0(), null); 
@@ -8639,12 +8297,12 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3623:6: ( 'integer' )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3468:6: ( 'integer' )
                     {
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3623:6: ( 'integer' )
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3623:8: 'integer'
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3468:6: ( 'integer' )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3468:8: 'integer'
                     {
-                    match(input,63,FOLLOW_63_in_ruleType7219); 
+                    match(input,60,FOLLOW_60_in_ruleType6911); 
 
                             current = grammarAccess.getTypeAccess().getIntegerEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
                             createLeafNode(grammarAccess.getTypeAccess().getIntegerEnumLiteralDeclaration_1(), null); 
@@ -8656,12 +8314,12 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3629:6: ( 'real' )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3474:6: ( 'real' )
                     {
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3629:6: ( 'real' )
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3629:8: 'real'
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3474:6: ( 'real' )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3474:8: 'real'
                     {
-                    match(input,64,FOLLOW_64_in_ruleType7234); 
+                    match(input,61,FOLLOW_61_in_ruleType6926); 
 
                             current = grammarAccess.getTypeAccess().getRealEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
                             createLeafNode(grammarAccess.getTypeAccess().getRealEnumLiteralDeclaration_2(), null); 
@@ -8673,12 +8331,12 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3635:6: ( 'boolean' )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3480:6: ( 'boolean' )
                     {
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3635:6: ( 'boolean' )
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3635:8: 'boolean'
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3480:6: ( 'boolean' )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3480:8: 'boolean'
                     {
-                    match(input,65,FOLLOW_65_in_ruleType7249); 
+                    match(input,62,FOLLOW_62_in_ruleType6941); 
 
                             current = grammarAccess.getTypeAccess().getBooleanEnumLiteralDeclaration_3().getEnumLiteral().getInstance();
                             createLeafNode(grammarAccess.getTypeAccess().getBooleanEnumLiteralDeclaration_3(), null); 
@@ -8690,12 +8348,12 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 5 :
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3641:6: ( 'string' )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3486:6: ( 'string' )
                     {
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3641:6: ( 'string' )
-                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3641:8: 'string'
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3486:6: ( 'string' )
+                    // ../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g:3486:8: 'string'
                     {
-                    match(input,66,FOLLOW_66_in_ruleType7264); 
+                    match(input,63,FOLLOW_63_in_ruleType6956); 
 
                             current = grammarAccess.getTypeAccess().getStringEnumLiteralDeclaration_4().getEnumLiteral().getInstance();
                             createLeafNode(grammarAccess.getTypeAccess().getStringEnumLiteralDeclaration_4(), null); 
@@ -8744,7 +8402,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_ruleStatechartDefinition_in_ruleStatechartRoot378 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleStateRoot_in_entryRuleStateRoot414 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleStateRoot424 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_14_in_ruleStateRoot459 = new BitSet(new long[]{0x000180F063280012L});
+    public static final BitSet FOLLOW_14_in_ruleStateRoot459 = new BitSet(new long[]{0x000030F063280012L});
     public static final BitSet FOLLOW_ruleStateDefinition_in_ruleStateRoot480 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleTransitionRoot_in_entryRuleTransitionRoot516 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleTransitionRoot526 = new BitSet(new long[]{0x0000000000000002L});
@@ -8761,7 +8419,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_ruleReaction_in_ruleTransitionStatement866 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleSimpleScope_in_entryRuleSimpleScope902 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleSimpleScope912 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDefinition_in_ruleSimpleScope967 = new BitSet(new long[]{0x000180F063280012L});
+    public static final BitSet FOLLOW_ruleDefinition_in_ruleSimpleScope967 = new BitSet(new long[]{0x000030F063280012L});
     public static final BitSet FOLLOW_ruleStatechartScope_in_entryRuleStatechartScope1004 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleStatechartScope1014 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleInterfaceScope_in_ruleStatechartScope1061 = new BitSet(new long[]{0x0000000000000002L});
@@ -8770,13 +8428,13 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_EOF_in_entryRuleInterfaceScope1133 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_16_in_ruleInterfaceScope1177 = new BitSet(new long[]{0x0000000000020010L});
     public static final BitSet FOLLOW_RULE_ID_in_ruleInterfaceScope1194 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_17_in_ruleInterfaceScope1210 = new BitSet(new long[]{0x000180F063280012L});
-    public static final BitSet FOLLOW_ruleDefinition_in_ruleInterfaceScope1231 = new BitSet(new long[]{0x000180F063280012L});
+    public static final BitSet FOLLOW_17_in_ruleInterfaceScope1210 = new BitSet(new long[]{0x000030F063280012L});
+    public static final BitSet FOLLOW_ruleDefinition_in_ruleInterfaceScope1231 = new BitSet(new long[]{0x000030F063280012L});
     public static final BitSet FOLLOW_ruleInternalScope_in_entryRuleInternalScope1268 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleInternalScope1278 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_18_in_ruleInternalScope1322 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_17_in_ruleInternalScope1332 = new BitSet(new long[]{0x000180F063280012L});
-    public static final BitSet FOLLOW_ruleDefinition_in_ruleInternalScope1353 = new BitSet(new long[]{0x000180F063280012L});
+    public static final BitSet FOLLOW_17_in_ruleInternalScope1332 = new BitSet(new long[]{0x000030F063280012L});
+    public static final BitSet FOLLOW_ruleDefinition_in_ruleInternalScope1353 = new BitSet(new long[]{0x000030F063280012L});
     public static final BitSet FOLLOW_ruleDefinition_in_entryRuleDefinition1390 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleDefinition1400 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleEventDefinition_in_ruleDefinition1447 = new BitSet(new long[]{0x0000000000000002L});
@@ -8791,14 +8449,14 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_ruleDirection_in_ruleEventDefinition1702 = new BitSet(new long[]{0x0000000000080000L});
     public static final BitSet FOLLOW_19_in_ruleEventDefinition1713 = new BitSet(new long[]{0x0000000000000010L});
     public static final BitSet FOLLOW_RULE_ID_in_ruleEventDefinition1730 = new BitSet(new long[]{0x0000000000120002L});
-    public static final BitSet FOLLOW_17_in_ruleEventDefinition1746 = new BitSet(new long[]{0xC000000000000000L,0x0000000000000007L});
+    public static final BitSet FOLLOW_17_in_ruleEventDefinition1746 = new BitSet(new long[]{0xF800000000000000L});
     public static final BitSet FOLLOW_ruleType_in_ruleEventDefinition1767 = new BitSet(new long[]{0x0000000000100002L});
     public static final BitSet FOLLOW_ruleEventDerivation_in_ruleEventDefinition1790 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleEventDerivation_in_entryRuleEventDerivation1827 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleEventDerivation1837 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_20_in_ruleEventDerivation1872 = new BitSet(new long[]{0x00264800040001F0L});
+    public static final BitSet FOLLOW_20_in_ruleEventDerivation1872 = new BitSet(new long[]{0x0004C900040001F0L});
     public static final BitSet FOLLOW_ruleExpressionRule_in_ruleEventDerivation1893 = new BitSet(new long[]{0x0000000000020002L});
-    public static final BitSet FOLLOW_17_in_ruleEventDerivation1904 = new BitSet(new long[]{0x00264800040001F0L});
+    public static final BitSet FOLLOW_17_in_ruleEventDerivation1904 = new BitSet(new long[]{0x0004C900040001F0L});
     public static final BitSet FOLLOW_ruleExpressionRule_in_ruleEventDerivation1925 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleVariableDefinition_in_entryRuleVariableDefinition1965 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleVariableDefinition1975 = new BitSet(new long[]{0x0000000000000002L});
@@ -8806,7 +8464,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_22_in_ruleVariableDefinition2070 = new BitSet(new long[]{0x0000000000C00010L});
     public static final BitSet FOLLOW_23_in_ruleVariableDefinition2151 = new BitSet(new long[]{0x0000000000C00010L});
     public static final BitSet FOLLOW_RULE_ID_in_ruleVariableDefinition2220 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_17_in_ruleVariableDefinition2235 = new BitSet(new long[]{0xC000000000000000L,0x0000000000000007L});
+    public static final BitSet FOLLOW_17_in_ruleVariableDefinition2235 = new BitSet(new long[]{0xF800000000000000L});
     public static final BitSet FOLLOW_ruleType_in_ruleVariableDefinition2256 = new BitSet(new long[]{0x0000000000100002L});
     public static final BitSet FOLLOW_20_in_ruleVariableDefinition2267 = new BitSet(new long[]{0x00000000000001E0L});
     public static final BitSet FOLLOW_ruleLiteral_in_ruleVariableDefinition2288 = new BitSet(new long[]{0x0000000000000002L});
@@ -8818,12 +8476,12 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_EOF_in_entryRuleOperation2439 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_25_in_ruleOperation2474 = new BitSet(new long[]{0x0000000000000010L});
     public static final BitSet FOLLOW_RULE_ID_in_ruleOperation2491 = new BitSet(new long[]{0x0000000004000000L});
-    public static final BitSet FOLLOW_26_in_ruleOperation2506 = new BitSet(new long[]{0xC000000010000000L,0x0000000000000007L});
+    public static final BitSet FOLLOW_26_in_ruleOperation2506 = new BitSet(new long[]{0xF800000010000000L});
     public static final BitSet FOLLOW_ruleType_in_ruleOperation2528 = new BitSet(new long[]{0x0000000018000000L});
-    public static final BitSet FOLLOW_27_in_ruleOperation2539 = new BitSet(new long[]{0xC000000000000000L,0x0000000000000007L});
+    public static final BitSet FOLLOW_27_in_ruleOperation2539 = new BitSet(new long[]{0xF800000000000000L});
     public static final BitSet FOLLOW_ruleType_in_ruleOperation2560 = new BitSet(new long[]{0x0000000018000000L});
     public static final BitSet FOLLOW_28_in_ruleOperation2574 = new BitSet(new long[]{0x0000000000020002L});
-    public static final BitSet FOLLOW_17_in_ruleOperation2585 = new BitSet(new long[]{0xC000000000000000L,0x0000000000000007L});
+    public static final BitSet FOLLOW_17_in_ruleOperation2585 = new BitSet(new long[]{0xF800000000000000L});
     public static final BitSet FOLLOW_ruleType_in_ruleOperation2606 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleEntrypoint_in_entryRuleEntrypoint2644 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleEntrypoint2654 = new BitSet(new long[]{0x0000000000000002L});
@@ -8836,7 +8494,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_ruleReaction_in_entryRuleReaction2850 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleReaction2860 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleReactionTrigger_in_ruleReaction2906 = new BitSet(new long[]{0x0000000180000002L});
-    public static final BitSet FOLLOW_31_in_ruleReaction2917 = new BitSet(new long[]{0x00264800040001F0L});
+    public static final BitSet FOLLOW_31_in_ruleReaction2917 = new BitSet(new long[]{0x0004C900040001F0L});
     public static final BitSet FOLLOW_ruleAction_in_ruleReaction2938 = new BitSet(new long[]{0x0000000100000002L});
     public static final BitSet FOLLOW_32_in_ruleReaction2951 = new BitSet(new long[]{0x0000000800000032L});
     public static final BitSet FOLLOW_ruleReactionProperties_in_ruleReaction2972 = new BitSet(new long[]{0x0000000000000002L});
@@ -8845,7 +8503,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_ruleEventSpec_in_ruleReactionTrigger3067 = new BitSet(new long[]{0x0000000208000002L});
     public static final BitSet FOLLOW_27_in_ruleReactionTrigger3078 = new BitSet(new long[]{0x000000F000000010L});
     public static final BitSet FOLLOW_ruleEventSpec_in_ruleReactionTrigger3099 = new BitSet(new long[]{0x0000000208000002L});
-    public static final BitSet FOLLOW_33_in_ruleReactionTrigger3113 = new BitSet(new long[]{0x00264000040001F0L});
+    public static final BitSet FOLLOW_33_in_ruleReactionTrigger3113 = new BitSet(new long[]{0x0004C800040001F0L});
     public static final BitSet FOLLOW_ruleLogicalOrExpression_in_ruleReactionTrigger3134 = new BitSet(new long[]{0x0000000400000000L});
     public static final BitSet FOLLOW_34_in_ruleReactionTrigger3144 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleAction_in_entryRuleAction3182 = new BitSet(new long[]{0x0000000000000000L});
@@ -8881,7 +8539,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_ruleTimeEventSpec_in_entryRuleTimeEventSpec4042 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleTimeEventSpec4052 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_36_in_ruleTimeEventSpec4087 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleTimeEventSpec4104 = new BitSet(new long[]{0x3800000000000002L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleTimeEventSpec4104 = new BitSet(new long[]{0x0700000000000002L});
     public static final BitSet FOLLOW_ruleTimeUnit_in_ruleTimeEventSpec4130 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleBuiltinEventSpec_in_entryRuleBuiltinEventSpec4167 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleBuiltinEventSpec4177 = new BitSet(new long[]{0x0000000000000002L});
@@ -8897,106 +8555,94 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_ruleOnCycleEvent_in_entryRuleOnCycleEvent4493 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleOnCycleEvent4503 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_39_in_ruleOnCycleEvent4547 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEntryExpression_in_entryRuleEntryExpression4585 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleEntryExpression4595 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_40_in_ruleEntryExpression4630 = new BitSet(new long[]{0x00264800040001F0L});
-    public static final BitSet FOLLOW_ruleExpressionRule_in_ruleEntryExpression4651 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExitExpression_in_entryRuleExitExpression4687 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleExitExpression4697 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_41_in_ruleExitExpression4732 = new BitSet(new long[]{0x00264800040001F0L});
-    public static final BitSet FOLLOW_ruleExpressionRule_in_ruleExitExpression4753 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOnTickExpression_in_entryRuleOnTickExpression4789 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleOnTickExpression4799 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_42_in_ruleOnTickExpression4834 = new BitSet(new long[]{0x00264800040001F0L});
-    public static final BitSet FOLLOW_ruleExpressionRule_in_ruleOnTickExpression4855 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpressionRule_in_entryRuleExpressionRule4891 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleExpressionRule4901 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLogicalOrExpression_in_ruleExpressionRule4948 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRaiseEventExpression_in_ruleExpressionRule4967 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRaiseEventExpression_in_entryRuleRaiseEventExpression5005 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleRaiseEventExpression5015 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_43_in_ruleRaiseEventExpression5050 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleRaiseEventExpression5068 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLogicalOrExpression_in_entryRuleLogicalOrExpression5104 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleLogicalOrExpression5114 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLogicalAndExpression_in_ruleLogicalOrExpression5161 = new BitSet(new long[]{0x0000100000000002L});
-    public static final BitSet FOLLOW_44_in_ruleLogicalOrExpression5180 = new BitSet(new long[]{0x00264000040001F0L});
-    public static final BitSet FOLLOW_ruleLogicalAndExpression_in_ruleLogicalOrExpression5201 = new BitSet(new long[]{0x0000100000000002L});
-    public static final BitSet FOLLOW_ruleLogicalAndExpression_in_entryRuleLogicalAndExpression5239 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleLogicalAndExpression5249 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLogicalNotExpression_in_ruleLogicalAndExpression5296 = new BitSet(new long[]{0x0000200000000002L});
-    public static final BitSet FOLLOW_45_in_ruleLogicalAndExpression5315 = new BitSet(new long[]{0x00264000040001F0L});
-    public static final BitSet FOLLOW_ruleLogicalNotExpression_in_ruleLogicalAndExpression5336 = new BitSet(new long[]{0x0000200000000002L});
-    public static final BitSet FOLLOW_ruleLogicalNotExpression_in_entryRuleLogicalNotExpression5374 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleLogicalNotExpression5384 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLogicalRelationExpression_in_ruleLogicalNotExpression5431 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_46_in_ruleLogicalNotExpression5456 = new BitSet(new long[]{0x00260000040001F0L});
-    public static final BitSet FOLLOW_ruleLogicalRelationExpression_in_ruleLogicalNotExpression5477 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLogicalRelationExpression_in_entryRuleLogicalRelationExpression5514 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleLogicalRelationExpression5524 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNumericalAddSubtractExpression_in_ruleLogicalRelationExpression5571 = new BitSet(new long[]{0x07C0000800000002L});
-    public static final BitSet FOLLOW_ruleRelationalOperator_in_ruleLogicalRelationExpression5601 = new BitSet(new long[]{0x00260000040001F0L});
-    public static final BitSet FOLLOW_ruleNumericalAddSubtractExpression_in_ruleLogicalRelationExpression5622 = new BitSet(new long[]{0x07C0000800000002L});
-    public static final BitSet FOLLOW_ruleNumericalAddSubtractExpression_in_entryRuleNumericalAddSubtractExpression5660 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleNumericalAddSubtractExpression5670 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNumericalMultiplyDivideExpression_in_ruleNumericalAddSubtractExpression5717 = new BitSet(new long[]{0x0006000000000002L});
-    public static final BitSet FOLLOW_ruleAdditiveOperator_in_ruleNumericalAddSubtractExpression5747 = new BitSet(new long[]{0x00260000040001F0L});
-    public static final BitSet FOLLOW_ruleNumericalMultiplyDivideExpression_in_ruleNumericalAddSubtractExpression5768 = new BitSet(new long[]{0x0006000000000002L});
-    public static final BitSet FOLLOW_ruleNumericalMultiplyDivideExpression_in_entryRuleNumericalMultiplyDivideExpression5806 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleNumericalMultiplyDivideExpression5816 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNumericalUnaryExpression_in_ruleNumericalMultiplyDivideExpression5863 = new BitSet(new long[]{0x0018000080000002L});
-    public static final BitSet FOLLOW_ruleMultiplicativeOperator_in_ruleNumericalMultiplyDivideExpression5893 = new BitSet(new long[]{0x00260000040001F0L});
-    public static final BitSet FOLLOW_ruleNumericalUnaryExpression_in_ruleNumericalMultiplyDivideExpression5914 = new BitSet(new long[]{0x0018000080000002L});
-    public static final BitSet FOLLOW_ruleNumericalUnaryExpression_in_entryRuleNumericalUnaryExpression5952 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleNumericalUnaryExpression5962 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePrimaryExpression_in_ruleNumericalUnaryExpression6009 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleUnaryOperator_in_ruleNumericalUnaryExpression6045 = new BitSet(new long[]{0x00000000040001F0L});
-    public static final BitSet FOLLOW_rulePrimaryExpression_in_ruleNumericalUnaryExpression6066 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePrimaryExpression_in_entryRulePrimaryExpression6103 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRulePrimaryExpression6113 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValueExpression_in_rulePrimaryExpression6160 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_26_in_rulePrimaryExpression6176 = new BitSet(new long[]{0x00264000040001F0L});
-    public static final BitSet FOLLOW_ruleLogicalOrExpression_in_rulePrimaryExpression6198 = new BitSet(new long[]{0x0000000010000000L});
-    public static final BitSet FOLLOW_28_in_rulePrimaryExpression6207 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleValueExpression_in_entryRuleValueExpression6244 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleValueExpression6254 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePrimitiveValueExpression_in_ruleValueExpression6301 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleVariableReferenceExpression_in_ruleValueExpression6328 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePrimitiveValueExpression_in_entryRulePrimitiveValueExpression6363 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRulePrimitiveValueExpression6373 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLiteral_in_rulePrimitiveValueExpression6428 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleVariableReferenceExpression_in_entryRuleVariableReferenceExpression6464 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleVariableReferenceExpression6474 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleVariableReferenceExpression6526 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLiteral_in_entryRuleLiteral6563 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleLiteral6574 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_BOOL_in_ruleLiteral6614 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleLiteral6640 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleLiteral6666 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_FLOAT_in_ruleLiteral6692 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_47_in_ruleDirection6749 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_48_in_ruleDirection6764 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_49_in_ruleAdditiveOperator6807 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_50_in_ruleAdditiveOperator6822 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_51_in_ruleMultiplicativeOperator6865 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_31_in_ruleMultiplicativeOperator6880 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_52_in_ruleMultiplicativeOperator6895 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_49_in_ruleUnaryOperator6938 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_50_in_ruleUnaryOperator6953 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_53_in_ruleUnaryOperator6968 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_54_in_ruleRelationalOperator7011 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_55_in_ruleRelationalOperator7026 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_35_in_ruleRelationalOperator7041 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_56_in_ruleRelationalOperator7056 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_57_in_ruleRelationalOperator7071 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_58_in_ruleRelationalOperator7086 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_59_in_ruleTimeUnit7131 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_60_in_ruleTimeUnit7146 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_61_in_ruleTimeUnit7161 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_62_in_ruleType7204 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_63_in_ruleType7219 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_64_in_ruleType7234 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_65_in_ruleType7249 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_66_in_ruleType7264 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpressionRule_in_entryRuleExpressionRule4583 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleExpressionRule4593 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLogicalOrExpression_in_ruleExpressionRule4640 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleRaiseEventExpression_in_ruleExpressionRule4659 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleRaiseEventExpression_in_entryRuleRaiseEventExpression4697 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleRaiseEventExpression4707 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_40_in_ruleRaiseEventExpression4742 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleRaiseEventExpression4760 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLogicalOrExpression_in_entryRuleLogicalOrExpression4796 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleLogicalOrExpression4806 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLogicalAndExpression_in_ruleLogicalOrExpression4853 = new BitSet(new long[]{0x0000020000000002L});
+    public static final BitSet FOLLOW_41_in_ruleLogicalOrExpression4872 = new BitSet(new long[]{0x0004C800040001F0L});
+    public static final BitSet FOLLOW_ruleLogicalAndExpression_in_ruleLogicalOrExpression4893 = new BitSet(new long[]{0x0000020000000002L});
+    public static final BitSet FOLLOW_ruleLogicalAndExpression_in_entryRuleLogicalAndExpression4931 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleLogicalAndExpression4941 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLogicalNotExpression_in_ruleLogicalAndExpression4988 = new BitSet(new long[]{0x0000040000000002L});
+    public static final BitSet FOLLOW_42_in_ruleLogicalAndExpression5007 = new BitSet(new long[]{0x0004C800040001F0L});
+    public static final BitSet FOLLOW_ruleLogicalNotExpression_in_ruleLogicalAndExpression5028 = new BitSet(new long[]{0x0000040000000002L});
+    public static final BitSet FOLLOW_ruleLogicalNotExpression_in_entryRuleLogicalNotExpression5066 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleLogicalNotExpression5076 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLogicalRelationExpression_in_ruleLogicalNotExpression5123 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_43_in_ruleLogicalNotExpression5148 = new BitSet(new long[]{0x0004C000040001F0L});
+    public static final BitSet FOLLOW_ruleLogicalRelationExpression_in_ruleLogicalNotExpression5169 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLogicalRelationExpression_in_entryRuleLogicalRelationExpression5206 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleLogicalRelationExpression5216 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNumericalAddSubtractExpression_in_ruleLogicalRelationExpression5263 = new BitSet(new long[]{0x00F8000800000002L});
+    public static final BitSet FOLLOW_ruleRelationalOperator_in_ruleLogicalRelationExpression5293 = new BitSet(new long[]{0x0004C000040001F0L});
+    public static final BitSet FOLLOW_ruleNumericalAddSubtractExpression_in_ruleLogicalRelationExpression5314 = new BitSet(new long[]{0x00F8000800000002L});
+    public static final BitSet FOLLOW_ruleNumericalAddSubtractExpression_in_entryRuleNumericalAddSubtractExpression5352 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleNumericalAddSubtractExpression5362 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNumericalMultiplyDivideExpression_in_ruleNumericalAddSubtractExpression5409 = new BitSet(new long[]{0x0000C00000000002L});
+    public static final BitSet FOLLOW_ruleAdditiveOperator_in_ruleNumericalAddSubtractExpression5439 = new BitSet(new long[]{0x0004C000040001F0L});
+    public static final BitSet FOLLOW_ruleNumericalMultiplyDivideExpression_in_ruleNumericalAddSubtractExpression5460 = new BitSet(new long[]{0x0000C00000000002L});
+    public static final BitSet FOLLOW_ruleNumericalMultiplyDivideExpression_in_entryRuleNumericalMultiplyDivideExpression5498 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleNumericalMultiplyDivideExpression5508 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNumericalUnaryExpression_in_ruleNumericalMultiplyDivideExpression5555 = new BitSet(new long[]{0x0003000080000002L});
+    public static final BitSet FOLLOW_ruleMultiplicativeOperator_in_ruleNumericalMultiplyDivideExpression5585 = new BitSet(new long[]{0x0004C000040001F0L});
+    public static final BitSet FOLLOW_ruleNumericalUnaryExpression_in_ruleNumericalMultiplyDivideExpression5606 = new BitSet(new long[]{0x0003000080000002L});
+    public static final BitSet FOLLOW_ruleNumericalUnaryExpression_in_entryRuleNumericalUnaryExpression5644 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleNumericalUnaryExpression5654 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePrimaryExpression_in_ruleNumericalUnaryExpression5701 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleUnaryOperator_in_ruleNumericalUnaryExpression5737 = new BitSet(new long[]{0x00000000040001F0L});
+    public static final BitSet FOLLOW_rulePrimaryExpression_in_ruleNumericalUnaryExpression5758 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePrimaryExpression_in_entryRulePrimaryExpression5795 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRulePrimaryExpression5805 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValueExpression_in_rulePrimaryExpression5852 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_26_in_rulePrimaryExpression5868 = new BitSet(new long[]{0x0004C800040001F0L});
+    public static final BitSet FOLLOW_ruleLogicalOrExpression_in_rulePrimaryExpression5890 = new BitSet(new long[]{0x0000000010000000L});
+    public static final BitSet FOLLOW_28_in_rulePrimaryExpression5899 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleValueExpression_in_entryRuleValueExpression5936 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleValueExpression5946 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePrimitiveValueExpression_in_ruleValueExpression5993 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleVariableReferenceExpression_in_ruleValueExpression6020 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePrimitiveValueExpression_in_entryRulePrimitiveValueExpression6055 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRulePrimitiveValueExpression6065 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLiteral_in_rulePrimitiveValueExpression6120 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleVariableReferenceExpression_in_entryRuleVariableReferenceExpression6156 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleVariableReferenceExpression6166 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleVariableReferenceExpression6218 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLiteral_in_entryRuleLiteral6255 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleLiteral6266 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_BOOL_in_ruleLiteral6306 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleLiteral6332 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleLiteral6358 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_FLOAT_in_ruleLiteral6384 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_44_in_ruleDirection6441 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_45_in_ruleDirection6456 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_46_in_ruleAdditiveOperator6499 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_47_in_ruleAdditiveOperator6514 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_48_in_ruleMultiplicativeOperator6557 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_31_in_ruleMultiplicativeOperator6572 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_49_in_ruleMultiplicativeOperator6587 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_46_in_ruleUnaryOperator6630 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_47_in_ruleUnaryOperator6645 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_50_in_ruleUnaryOperator6660 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_51_in_ruleRelationalOperator6703 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_52_in_ruleRelationalOperator6718 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_35_in_ruleRelationalOperator6733 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_53_in_ruleRelationalOperator6748 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_54_in_ruleRelationalOperator6763 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_55_in_ruleRelationalOperator6778 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_56_in_ruleTimeUnit6823 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_57_in_ruleTimeUnit6838 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_58_in_ruleTimeUnit6853 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_59_in_ruleType6896 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_60_in_ruleType6911 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_61_in_ruleType6926 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_62_in_ruleType6941 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_63_in_ruleType6956 = new BitSet(new long[]{0x0000000000000002L});
 
 }
