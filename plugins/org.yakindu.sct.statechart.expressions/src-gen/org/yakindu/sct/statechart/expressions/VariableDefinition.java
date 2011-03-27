@@ -18,7 +18,7 @@ import org.yakindu.model.sct.statechart.Variable;
  *   <li>{@link org.yakindu.sct.statechart.expressions.VariableDefinition#isReadonly <em>Readonly</em>}</li>
  *   <li>{@link org.yakindu.sct.statechart.expressions.VariableDefinition#isExternal <em>External</em>}</li>
  *   <li>{@link org.yakindu.sct.statechart.expressions.VariableDefinition#getType <em>Type</em>}</li>
- *   <li>{@link org.yakindu.sct.statechart.expressions.VariableDefinition#getValue <em>Value</em>}</li>
+ *   <li>{@link org.yakindu.sct.statechart.expressions.VariableDefinition#getInitialValue <em>Initial Value</em>}</li>
  * </ul>
  * </p>
  *
@@ -110,29 +110,29 @@ public interface VariableDefinition extends Definition, Variable
   void setType(Type value);
 
   /**
-   * Returns the value of the '<em><b>Value</b></em>' attribute.
+   * Returns the value of the '<em><b>Initial Value</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Value</em>' attribute isn't clear,
+   * If the meaning of the '<em>Initial Value</em>' attribute isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Value</em>' attribute.
-   * @see #setValue(String)
-   * @see org.yakindu.sct.statechart.expressions.ExpressionsPackage#getVariableDefinition_Value()
+   * @return the value of the '<em>Initial Value</em>' attribute.
+   * @see #setInitialValue(String)
+   * @see org.yakindu.sct.statechart.expressions.ExpressionsPackage#getVariableDefinition_InitialValue()
    * @model
    * @generated
    */
-  String getValue();
+  String getInitialValue();
 
   /**
-   * Sets the value of the '{@link org.yakindu.sct.statechart.expressions.VariableDefinition#getValue <em>Value</em>}' attribute.
+   * Sets the value of the '{@link org.yakindu.sct.statechart.expressions.VariableDefinition#getInitialValue <em>Initial Value</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Value</em>' attribute.
-   * @see #getValue()
+   * @param value the new value of the '<em>Initial Value</em>' attribute.
+   * @see #getInitialValue()
    * @generated
    */
-  void setValue(String value);
+  void setInitialValue(String value);
 
 } // VariableDefinition

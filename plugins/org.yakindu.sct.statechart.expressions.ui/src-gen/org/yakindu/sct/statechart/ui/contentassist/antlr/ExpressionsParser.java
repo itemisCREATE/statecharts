@@ -42,6 +42,8 @@ public class ExpressionsParser extends AbstractContentAssistParser {
 					put(grammarAccess.getStatechartScopeAccess().getAlternatives(), "rule__StatechartScope__Alternatives");
 					put(grammarAccess.getDefinitionAccess().getAlternatives(), "rule__Definition__Alternatives");
 					put(grammarAccess.getReactionPropertyAccess().getAlternatives(), "rule__ReactionProperty__Alternatives");
+					put(grammarAccess.getEventSpecAccess().getAlternatives(), "rule__EventSpec__Alternatives");
+					put(grammarAccess.getBuiltinEventSpecAccess().getAlternatives(), "rule__BuiltinEventSpec__Alternatives");
 					put(grammarAccess.getExpressionRuleAccess().getExpressionAlternatives_0(), "rule__ExpressionRule__ExpressionAlternatives_0");
 					put(grammarAccess.getLogicalNotExpressionAccess().getAlternatives(), "rule__LogicalNotExpression__Alternatives");
 					put(grammarAccess.getNumericalUnaryExpressionAccess().getAlternatives(), "rule__NumericalUnaryExpression__Alternatives");
@@ -86,6 +88,10 @@ public class ExpressionsParser extends AbstractContentAssistParser {
 					put(grammarAccess.getReactionPropertiesAccess().getGroup(), "rule__ReactionProperties__Group__0");
 					put(grammarAccess.getEntryPointSpecAccess().getGroup(), "rule__EntryPointSpec__Group__0");
 					put(grammarAccess.getExitPointSpecAccess().getGroup(), "rule__ExitPointSpec__Group__0");
+					put(grammarAccess.getTimeEventSpecAccess().getGroup(), "rule__TimeEventSpec__Group__0");
+					put(grammarAccess.getEnterEventAccess().getGroup(), "rule__EnterEvent__Group__0");
+					put(grammarAccess.getExitEventAccess().getGroup(), "rule__ExitEvent__Group__0");
+					put(grammarAccess.getOnCycleEventAccess().getGroup(), "rule__OnCycleEvent__Group__0");
 					put(grammarAccess.getStateExpressionAccess().getGroup(), "rule__StateExpression__Group__0");
 					put(grammarAccess.getEntryExpressionAccess().getGroup(), "rule__EntryExpression__Group__0");
 					put(grammarAccess.getExitExpressionAccess().getGroup(), "rule__ExitExpression__Group__0");
@@ -125,7 +131,7 @@ public class ExpressionsParser extends AbstractContentAssistParser {
 					put(grammarAccess.getVariableDefinitionAccess().getExternalAssignment_1_1(), "rule__VariableDefinition__ExternalAssignment_1_1");
 					put(grammarAccess.getVariableDefinitionAccess().getNameAssignment_2(), "rule__VariableDefinition__NameAssignment_2");
 					put(grammarAccess.getVariableDefinitionAccess().getTypeAssignment_4(), "rule__VariableDefinition__TypeAssignment_4");
-					put(grammarAccess.getVariableDefinitionAccess().getValueAssignment_5_1(), "rule__VariableDefinition__ValueAssignment_5_1");
+					put(grammarAccess.getVariableDefinitionAccess().getInitialValueAssignment_5_1(), "rule__VariableDefinition__InitialValueAssignment_5_1");
 					put(grammarAccess.getClockAccess().getNameAssignment_1(), "rule__Clock__NameAssignment_1");
 					put(grammarAccess.getOperationAccess().getNameAssignment_1(), "rule__Operation__NameAssignment_1");
 					put(grammarAccess.getOperationAccess().getParamTypesAssignment_3_0(), "rule__Operation__ParamTypesAssignment_3_0");
@@ -144,6 +150,9 @@ public class ExpressionsParser extends AbstractContentAssistParser {
 					put(grammarAccess.getReactionPriorityAccess().getPriorityAssignment(), "rule__ReactionPriority__PriorityAssignment");
 					put(grammarAccess.getEntryPointSpecAccess().getEntrypointAssignment_1(), "rule__EntryPointSpec__EntrypointAssignment_1");
 					put(grammarAccess.getExitPointSpecAccess().getExitpointAssignment_0(), "rule__ExitPointSpec__ExitpointAssignment_0");
+					put(grammarAccess.getRegularEventSpecAccess().getEventAssignment(), "rule__RegularEventSpec__EventAssignment");
+					put(grammarAccess.getTimeEventSpecAccess().getValueAssignment_1(), "rule__TimeEventSpec__ValueAssignment_1");
+					put(grammarAccess.getTimeEventSpecAccess().getUnitAssignment_2(), "rule__TimeEventSpec__UnitAssignment_2");
 					put(grammarAccess.getStateExpressionAccess().getEntryExpressionAssignment_1(), "rule__StateExpression__EntryExpressionAssignment_1");
 					put(grammarAccess.getStateExpressionAccess().getExitExpressionAssignment_2(), "rule__StateExpression__ExitExpressionAssignment_2");
 					put(grammarAccess.getStateExpressionAccess().getOntickExpressionAssignment_3(), "rule__StateExpression__OntickExpressionAssignment_3");

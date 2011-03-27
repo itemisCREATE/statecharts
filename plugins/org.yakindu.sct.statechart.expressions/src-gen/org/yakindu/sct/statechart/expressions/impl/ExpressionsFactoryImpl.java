@@ -97,6 +97,13 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
       case ExpressionsPackage.REACTION_PRIORITY: return createReactionPriority();
       case ExpressionsPackage.ENTRY_POINT_SPEC: return createEntryPointSpec();
       case ExpressionsPackage.EXIT_POINT_SPEC: return createExitPointSpec();
+      case ExpressionsPackage.EVENT_SPEC: return createEventSpec();
+      case ExpressionsPackage.REGULAR_EVENT_SPEC: return createRegularEventSpec();
+      case ExpressionsPackage.TIME_EVENT_SPEC: return createTimeEventSpec();
+      case ExpressionsPackage.BUILTIN_EVENT_SPEC: return createBuiltinEventSpec();
+      case ExpressionsPackage.ENTER_EVENT: return createEnterEvent();
+      case ExpressionsPackage.EXIT_EVENT: return createExitEvent();
+      case ExpressionsPackage.ON_CYCLE_EVENT: return createOnCycleEvent();
       case ExpressionsPackage.STATE_EXPRESSION: return createStateExpression();
       case ExpressionsPackage.ENTRY_EXPRESSION: return createEntryExpression();
       case ExpressionsPackage.EXIT_EXPRESSION: return createExitExpression();
@@ -497,6 +504,83 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
   {
     ExitPointSpecImpl exitPointSpec = new ExitPointSpecImpl();
     return exitPointSpec;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EventSpec createEventSpec()
+  {
+    EventSpecImpl eventSpec = new EventSpecImpl();
+    return eventSpec;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public RegularEventSpec createRegularEventSpec()
+  {
+    RegularEventSpecImpl regularEventSpec = new RegularEventSpecImpl();
+    return regularEventSpec;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public TimeEventSpec createTimeEventSpec()
+  {
+    TimeEventSpecImpl timeEventSpec = new TimeEventSpecImpl();
+    return timeEventSpec;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public BuiltinEventSpec createBuiltinEventSpec()
+  {
+    BuiltinEventSpecImpl builtinEventSpec = new BuiltinEventSpecImpl();
+    return builtinEventSpec;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EnterEvent createEnterEvent()
+  {
+    EnterEventImpl enterEvent = new EnterEventImpl();
+    return enterEvent;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ExitEvent createExitEvent()
+  {
+    ExitEventImpl exitEvent = new ExitEventImpl();
+    return exitEvent;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public OnCycleEvent createOnCycleEvent()
+  {
+    OnCycleEventImpl onCycleEvent = new OnCycleEventImpl();
+    return onCycleEvent;
   }
 
   /**

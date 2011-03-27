@@ -9,8 +9,6 @@ import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EObject;
 
-import org.yakindu.model.sct.statechart.Event;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Reaction Trigger</b></em>'.
@@ -31,20 +29,20 @@ import org.yakindu.model.sct.statechart.Event;
 public interface ReactionTrigger extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Triggers</b></em>' reference list.
-   * The list contents are of type {@link org.yakindu.model.sct.statechart.Event}.
+   * Returns the value of the '<em><b>Triggers</b></em>' containment reference list.
+   * The list contents are of type {@link org.yakindu.sct.statechart.expressions.EventSpec}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Triggers</em>' reference list isn't clear,
+   * If the meaning of the '<em>Triggers</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Triggers</em>' reference list.
+   * @return the value of the '<em>Triggers</em>' containment reference list.
    * @see org.yakindu.sct.statechart.expressions.ExpressionsPackage#getReactionTrigger_Triggers()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  EList<Event> getTriggers();
+  EList<EventSpec> getTriggers();
 
   /**
    * Returns the value of the '<em><b>Guard Expression</b></em>' containment reference.

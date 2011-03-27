@@ -287,6 +287,69 @@ public interface ExpressionsFactory extends EFactory
   ExitPointSpec createExitPointSpec();
 
   /**
+   * Returns a new object of class '<em>Event Spec</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Event Spec</em>'.
+   * @generated
+   */
+  EventSpec createEventSpec();
+
+  /**
+   * Returns a new object of class '<em>Regular Event Spec</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Regular Event Spec</em>'.
+   * @generated
+   */
+  RegularEventSpec createRegularEventSpec();
+
+  /**
+   * Returns a new object of class '<em>Time Event Spec</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Time Event Spec</em>'.
+   * @generated
+   */
+  TimeEventSpec createTimeEventSpec();
+
+  /**
+   * Returns a new object of class '<em>Builtin Event Spec</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Builtin Event Spec</em>'.
+   * @generated
+   */
+  BuiltinEventSpec createBuiltinEventSpec();
+
+  /**
+   * Returns a new object of class '<em>Enter Event</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Enter Event</em>'.
+   * @generated
+   */
+  EnterEvent createEnterEvent();
+
+  /**
+   * Returns a new object of class '<em>Exit Event</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Exit Event</em>'.
+   * @generated
+   */
+  ExitEvent createExitEvent();
+
+  /**
+   * Returns a new object of class '<em>On Cycle Event</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>On Cycle Event</em>'.
+   * @generated
+   */
+  OnCycleEvent createOnCycleEvent();
+
+  /**
    * Returns a new object of class '<em>State Expression</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

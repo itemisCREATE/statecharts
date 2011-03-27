@@ -17,16 +17,20 @@ import org.yakindu.model.sct.statechart.StatechartPackage;
 
 import org.yakindu.sct.statechart.expressions.Action;
 import org.yakindu.sct.statechart.expressions.AdditiveOperator;
+import org.yakindu.sct.statechart.expressions.BuiltinEventSpec;
 import org.yakindu.sct.statechart.expressions.Clock;
 import org.yakindu.sct.statechart.expressions.DefRoot;
 import org.yakindu.sct.statechart.expressions.Definition;
 import org.yakindu.sct.statechart.expressions.Direction;
 import org.yakindu.sct.statechart.expressions.DirectionKind;
+import org.yakindu.sct.statechart.expressions.EnterEvent;
 import org.yakindu.sct.statechart.expressions.EntryExpression;
 import org.yakindu.sct.statechart.expressions.EntryPointSpec;
 import org.yakindu.sct.statechart.expressions.Entrypoint;
 import org.yakindu.sct.statechart.expressions.EventDefinition;
 import org.yakindu.sct.statechart.expressions.EventDerivation;
+import org.yakindu.sct.statechart.expressions.EventSpec;
+import org.yakindu.sct.statechart.expressions.ExitEvent;
 import org.yakindu.sct.statechart.expressions.ExitExpression;
 import org.yakindu.sct.statechart.expressions.ExitPointSpec;
 import org.yakindu.sct.statechart.expressions.Exitpoint;
@@ -44,6 +48,7 @@ import org.yakindu.sct.statechart.expressions.MultiplicativeOperator;
 import org.yakindu.sct.statechart.expressions.NumericalAddSubtractExpression;
 import org.yakindu.sct.statechart.expressions.NumericalMultiplyDivideExpression;
 import org.yakindu.sct.statechart.expressions.NumericalUnaryExpression;
+import org.yakindu.sct.statechart.expressions.OnCycleEvent;
 import org.yakindu.sct.statechart.expressions.OnTickExpression;
 import org.yakindu.sct.statechart.expressions.Operation;
 import org.yakindu.sct.statechart.expressions.PrimitiveValueExpression;
@@ -54,6 +59,7 @@ import org.yakindu.sct.statechart.expressions.ReactionPriority;
 import org.yakindu.sct.statechart.expressions.ReactionProperties;
 import org.yakindu.sct.statechart.expressions.ReactionProperty;
 import org.yakindu.sct.statechart.expressions.ReactionTrigger;
+import org.yakindu.sct.statechart.expressions.RegularEventSpec;
 import org.yakindu.sct.statechart.expressions.RelationalOperator;
 import org.yakindu.sct.statechart.expressions.Root;
 import org.yakindu.sct.statechart.expressions.Scope;
@@ -64,6 +70,7 @@ import org.yakindu.sct.statechart.expressions.StateRoot;
 import org.yakindu.sct.statechart.expressions.StatechartDefinition;
 import org.yakindu.sct.statechart.expressions.StatechartRoot;
 import org.yakindu.sct.statechart.expressions.StatechartScope;
+import org.yakindu.sct.statechart.expressions.TimeEventSpec;
 import org.yakindu.sct.statechart.expressions.TimeUnit;
 import org.yakindu.sct.statechart.expressions.TransitionRoot;
 import org.yakindu.sct.statechart.expressions.TransitionStatement;
@@ -281,6 +288,55 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
    * @generated
    */
   private EClass exitPointSpecEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eventSpecEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass regularEventSpecEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass timeEventSpecEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass builtinEventSpecEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass enterEventEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass exitEventEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass onCycleEventEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -841,7 +897,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getVariableDefinition_Value()
+  public EAttribute getVariableDefinition_InitialValue()
   {
     return (EAttribute)variableDefinitionEClass.getEStructuralFeatures().get(3);
   }
@@ -1124,6 +1180,106 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
   public EReference getExitPointSpec_Exitpoint()
   {
     return (EReference)exitPointSpecEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getEventSpec()
+  {
+    return eventSpecEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getRegularEventSpec()
+  {
+    return regularEventSpecEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getRegularEventSpec_Event()
+  {
+    return (EReference)regularEventSpecEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getTimeEventSpec()
+  {
+    return timeEventSpecEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getTimeEventSpec_Value()
+  {
+    return (EAttribute)timeEventSpecEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getTimeEventSpec_Unit()
+  {
+    return (EAttribute)timeEventSpecEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getBuiltinEventSpec()
+  {
+    return builtinEventSpecEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getEnterEvent()
+  {
+    return enterEventEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getExitEvent()
+  {
+    return exitEventEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getOnCycleEvent()
+  {
+    return onCycleEventEClass;
   }
 
   /**
@@ -1704,7 +1860,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
     createEAttribute(variableDefinitionEClass, VARIABLE_DEFINITION__READONLY);
     createEAttribute(variableDefinitionEClass, VARIABLE_DEFINITION__EXTERNAL);
     createEAttribute(variableDefinitionEClass, VARIABLE_DEFINITION__TYPE);
-    createEAttribute(variableDefinitionEClass, VARIABLE_DEFINITION__VALUE);
+    createEAttribute(variableDefinitionEClass, VARIABLE_DEFINITION__INITIAL_VALUE);
 
     clockEClass = createEClass(CLOCK);
     createEAttribute(clockEClass, CLOCK__NAME);
@@ -1745,6 +1901,23 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 
     exitPointSpecEClass = createEClass(EXIT_POINT_SPEC);
     createEReference(exitPointSpecEClass, EXIT_POINT_SPEC__EXITPOINT);
+
+    eventSpecEClass = createEClass(EVENT_SPEC);
+
+    regularEventSpecEClass = createEClass(REGULAR_EVENT_SPEC);
+    createEReference(regularEventSpecEClass, REGULAR_EVENT_SPEC__EVENT);
+
+    timeEventSpecEClass = createEClass(TIME_EVENT_SPEC);
+    createEAttribute(timeEventSpecEClass, TIME_EVENT_SPEC__VALUE);
+    createEAttribute(timeEventSpecEClass, TIME_EVENT_SPEC__UNIT);
+
+    builtinEventSpecEClass = createEClass(BUILTIN_EVENT_SPEC);
+
+    enterEventEClass = createEClass(ENTER_EVENT);
+
+    exitEventEClass = createEClass(EXIT_EVENT);
+
+    onCycleEventEClass = createEClass(ON_CYCLE_EVENT);
 
     stateExpressionEClass = createEClass(STATE_EXPRESSION);
     createEReference(stateExpressionEClass, STATE_EXPRESSION__ENTRY_EXPRESSION);
@@ -1868,6 +2041,12 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
     reactionPriorityEClass.getESuperTypes().add(this.getReactionProperty());
     entryPointSpecEClass.getESuperTypes().add(this.getReactionProperty());
     exitPointSpecEClass.getESuperTypes().add(this.getReactionProperty());
+    regularEventSpecEClass.getESuperTypes().add(this.getEventSpec());
+    timeEventSpecEClass.getESuperTypes().add(this.getEventSpec());
+    builtinEventSpecEClass.getESuperTypes().add(this.getEventSpec());
+    enterEventEClass.getESuperTypes().add(this.getBuiltinEventSpec());
+    exitEventEClass.getESuperTypes().add(this.getBuiltinEventSpec());
+    onCycleEventEClass.getESuperTypes().add(this.getBuiltinEventSpec());
     logicalOrExpressionEClass.getESuperTypes().add(this.getExpression());
     logicalAndExpressionEClass.getESuperTypes().add(this.getExpression());
     logicalNotExpressionEClass.getESuperTypes().add(this.getExpression());
@@ -1927,7 +2106,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
     initEAttribute(getVariableDefinition_Readonly(), ecorePackage.getEBoolean(), "readonly", null, 0, 1, VariableDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getVariableDefinition_External(), ecorePackage.getEBoolean(), "external", null, 0, 1, VariableDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getVariableDefinition_Type(), this.getType(), "type", null, 0, 1, VariableDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getVariableDefinition_Value(), ecorePackage.getEString(), "value", null, 0, 1, VariableDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getVariableDefinition_InitialValue(), ecorePackage.getEString(), "initialValue", null, 0, 1, VariableDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(clockEClass, Clock.class, "Clock", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getClock_Name(), ecorePackage.getEString(), "name", null, 0, 1, Clock.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1949,7 +2128,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
     initEReference(getReaction_Properties(), this.getReactionProperties(), null, "properties", null, 0, 1, Reaction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(reactionTriggerEClass, ReactionTrigger.class, "ReactionTrigger", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getReactionTrigger_Triggers(), theStatechartPackage.getEvent(), null, "triggers", null, 0, -1, ReactionTrigger.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getReactionTrigger_Triggers(), this.getEventSpec(), null, "triggers", null, 0, -1, ReactionTrigger.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getReactionTrigger_GuardExpression(), this.getExpression(), null, "guardExpression", null, 0, 1, ReactionTrigger.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(actionEClass, Action.class, "Action", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1968,6 +2147,23 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 
     initEClass(exitPointSpecEClass, ExitPointSpec.class, "ExitPointSpec", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getExitPointSpec_Exitpoint(), this.getExitpoint(), null, "exitpoint", null, 0, 1, ExitPointSpec.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eventSpecEClass, EventSpec.class, "EventSpec", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(regularEventSpecEClass, RegularEventSpec.class, "RegularEventSpec", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getRegularEventSpec_Event(), theStatechartPackage.getEvent(), null, "event", null, 0, 1, RegularEventSpec.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(timeEventSpecEClass, TimeEventSpec.class, "TimeEventSpec", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getTimeEventSpec_Value(), ecorePackage.getEInt(), "value", null, 0, 1, TimeEventSpec.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getTimeEventSpec_Unit(), this.getTimeUnit(), "unit", null, 0, 1, TimeEventSpec.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(builtinEventSpecEClass, BuiltinEventSpec.class, "BuiltinEventSpec", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(enterEventEClass, EnterEvent.class, "EnterEvent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(exitEventEClass, ExitEvent.class, "ExitEvent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(onCycleEventEClass, OnCycleEvent.class, "OnCycleEvent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(stateExpressionEClass, StateExpression.class, "StateExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getStateExpression_EntryExpression(), this.getEntryExpression(), null, "entryExpression", null, 0, -1, StateExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

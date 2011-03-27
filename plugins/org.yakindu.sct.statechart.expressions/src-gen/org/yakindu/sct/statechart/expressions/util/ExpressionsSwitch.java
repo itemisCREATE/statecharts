@@ -327,6 +327,64 @@ public class ExpressionsSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case ExpressionsPackage.EVENT_SPEC:
+      {
+        EventSpec eventSpec = (EventSpec)theEObject;
+        T result = caseEventSpec(eventSpec);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ExpressionsPackage.REGULAR_EVENT_SPEC:
+      {
+        RegularEventSpec regularEventSpec = (RegularEventSpec)theEObject;
+        T result = caseRegularEventSpec(regularEventSpec);
+        if (result == null) result = caseEventSpec(regularEventSpec);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ExpressionsPackage.TIME_EVENT_SPEC:
+      {
+        TimeEventSpec timeEventSpec = (TimeEventSpec)theEObject;
+        T result = caseTimeEventSpec(timeEventSpec);
+        if (result == null) result = caseEventSpec(timeEventSpec);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ExpressionsPackage.BUILTIN_EVENT_SPEC:
+      {
+        BuiltinEventSpec builtinEventSpec = (BuiltinEventSpec)theEObject;
+        T result = caseBuiltinEventSpec(builtinEventSpec);
+        if (result == null) result = caseEventSpec(builtinEventSpec);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ExpressionsPackage.ENTER_EVENT:
+      {
+        EnterEvent enterEvent = (EnterEvent)theEObject;
+        T result = caseEnterEvent(enterEvent);
+        if (result == null) result = caseBuiltinEventSpec(enterEvent);
+        if (result == null) result = caseEventSpec(enterEvent);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ExpressionsPackage.EXIT_EVENT:
+      {
+        ExitEvent exitEvent = (ExitEvent)theEObject;
+        T result = caseExitEvent(exitEvent);
+        if (result == null) result = caseBuiltinEventSpec(exitEvent);
+        if (result == null) result = caseEventSpec(exitEvent);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ExpressionsPackage.ON_CYCLE_EVENT:
+      {
+        OnCycleEvent onCycleEvent = (OnCycleEvent)theEObject;
+        T result = caseOnCycleEvent(onCycleEvent);
+        if (result == null) result = caseBuiltinEventSpec(onCycleEvent);
+        if (result == null) result = caseEventSpec(onCycleEvent);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case ExpressionsPackage.STATE_EXPRESSION:
       {
         StateExpression stateExpression = (StateExpression)theEObject;
@@ -912,6 +970,118 @@ public class ExpressionsSwitch<T>
    * @generated
    */
   public T caseExitPointSpec(ExitPointSpec object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Event Spec</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Event Spec</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEventSpec(EventSpec object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Regular Event Spec</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Regular Event Spec</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseRegularEventSpec(RegularEventSpec object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Time Event Spec</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Time Event Spec</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseTimeEventSpec(TimeEventSpec object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Builtin Event Spec</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Builtin Event Spec</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseBuiltinEventSpec(BuiltinEventSpec object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Enter Event</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Enter Event</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEnterEvent(EnterEvent object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Exit Event</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Exit Event</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseExitEvent(ExitEvent object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>On Cycle Event</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>On Cycle Event</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseOnCycleEvent(OnCycleEvent object)
   {
     return null;
   }

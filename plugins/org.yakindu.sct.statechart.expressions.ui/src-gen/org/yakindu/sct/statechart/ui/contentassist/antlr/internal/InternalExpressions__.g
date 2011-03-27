@@ -21,65 +21,72 @@ T23 : '>' ;
 T24 : '>=' ;
 T25 : '==' ;
 T26 : '!=' ;
-T27 : 'void' ;
-T28 : 'integer' ;
-T29 : 'real' ;
-T30 : 'boolean' ;
-T31 : 'string' ;
-T32 : '@@statechart@@' ;
-T33 : '@@state@@' ;
-T34 : '@@transition@@' ;
-T35 : 'interface' ;
-T36 : ':' ;
-T37 : 'internal' ;
-T38 : 'event' ;
-T39 : '=' ;
-T40 : 'var' ;
-T41 : 'clock' ;
-T42 : 'operation' ;
-T43 : '(' ;
-T44 : ')' ;
-T45 : ',' ;
-T46 : 'entrypoint' ;
-T47 : 'exitpoint' ;
-T48 : '#' ;
-T49 : '[' ;
-T50 : ']' ;
-T51 : 'entry:' ;
-T52 : 'exit:' ;
-T53 : 'do:' ;
-T54 : 'raise' ;
-T55 : '||' ;
-T56 : '&&' ;
-T57 : '!' ;
-T58 : 'readonly' ;
-T59 : 'external' ;
+T27 : 's' ;
+T28 : 'ms' ;
+T29 : 'ns' ;
+T30 : 'void' ;
+T31 : 'integer' ;
+T32 : 'real' ;
+T33 : 'boolean' ;
+T34 : 'string' ;
+T35 : '@@statechart@@' ;
+T36 : '@@state@@' ;
+T37 : '@@transition@@' ;
+T38 : 'interface' ;
+T39 : ':' ;
+T40 : 'internal' ;
+T41 : 'event' ;
+T42 : '=' ;
+T43 : 'var' ;
+T44 : 'clock' ;
+T45 : 'operation' ;
+T46 : '(' ;
+T47 : ')' ;
+T48 : ',' ;
+T49 : 'entrypoint' ;
+T50 : 'exitpoint' ;
+T51 : '#' ;
+T52 : '[' ;
+T53 : ']' ;
+T54 : 'after' ;
+T55 : 'enter' ;
+T56 : 'exit' ;
+T57 : 'oncycle' ;
+T58 : 'entry:' ;
+T59 : 'exit:' ;
+T60 : 'do:' ;
+T61 : 'raise' ;
+T62 : '||' ;
+T63 : '&&' ;
+T64 : '!' ;
+T65 : 'readonly' ;
+T66 : 'external' ;
 
-// $ANTLR src "../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g" 6846
+// $ANTLR src "../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g" 7475
 RULE_BOOL : ('true'|'false');
 
-// $ANTLR src "../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g" 6848
+// $ANTLR src "../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g" 7477
 RULE_FLOAT : ('-'|'+')? RULE_INT '.' RULE_INT ('e' ('-'|'+') RULE_INT)?;
 
-// $ANTLR src "../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g" 6850
+// $ANTLR src "../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g" 7479
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
-// $ANTLR src "../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g" 6852
+// $ANTLR src "../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g" 7481
 RULE_INT : ('0'..'9')+;
 
-// $ANTLR src "../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g" 6854
+// $ANTLR src "../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g" 7483
 RULE_STRING : ('"' ('\\' ('b'|'t'|'n'|'f'|'r'|'"'|'\''|'\\')|~(('\\'|'"')))* '"'|'\'' ('\\' ('b'|'t'|'n'|'f'|'r'|'"'|'\''|'\\')|~(('\\'|'\'')))* '\'');
 
-// $ANTLR src "../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g" 6856
+// $ANTLR src "../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g" 7485
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
-// $ANTLR src "../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g" 6858
+// $ANTLR src "../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g" 7487
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 
-// $ANTLR src "../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g" 6860
+// $ANTLR src "../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g" 7489
 RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
-// $ANTLR src "../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g" 6862
+// $ANTLR src "../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g" 7491
 RULE_ANY_OTHER : .;
 
 
