@@ -172,14 +172,14 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 
 	public class TransitionStatementElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TransitionStatement");
-		private final RuleCall cReactionParserRuleCall = (RuleCall)rule.eContents().get(1);
+		private final RuleCall cTransitionReactionParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
 		//TransitionStatement:
-		//	Reaction;
+		//	TransitionReaction;
 		public ParserRule getRule() { return rule; }
 
-		//Reaction
-		public RuleCall getReactionParserRuleCall() { return cReactionParserRuleCall; }
+		//TransitionReaction
+		public RuleCall getTransitionReactionParserRuleCall() { return cTransitionReactionParserRuleCall; }
 	}
 
 	public class ScopeElements extends AbstractParserRuleElementFinder {
@@ -329,16 +329,16 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cVariableDefinitionParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cClockParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		private final RuleCall cOperationParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
-		private final RuleCall cReactionParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
+		private final RuleCall cLocalReactionParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
 		private final RuleCall cEntrypointParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
 		private final RuleCall cExitpointParserRuleCall_6 = (RuleCall)cAlternatives.eContents().get(6);
 		
 		/// * ---- definitions ----
 		//a definition is a top level element of a definition scope. * /Definition:
-		//	EventDefinition | VariableDefinition | Clock | Operation | Reaction | Entrypoint | Exitpoint;
+		//	EventDefinition | VariableDefinition | Clock | Operation | LocalReaction | Entrypoint | Exitpoint;
 		public ParserRule getRule() { return rule; }
 
-		//EventDefinition | VariableDefinition | Clock | Operation | Reaction | Entrypoint | Exitpoint
+		//EventDefinition | VariableDefinition | Clock | Operation | LocalReaction | Entrypoint | Exitpoint
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//EventDefinition
@@ -353,8 +353,8 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 		//Operation
 		public RuleCall getOperationParserRuleCall_3() { return cOperationParserRuleCall_3; }
 
-		//Reaction
-		public RuleCall getReactionParserRuleCall_4() { return cReactionParserRuleCall_4; }
+		//LocalReaction
+		public RuleCall getLocalReactionParserRuleCall_4() { return cLocalReactionParserRuleCall_4; }
 
 		//Entrypoint
 		public RuleCall getEntrypointParserRuleCall_5() { return cEntrypointParserRuleCall_5; }
@@ -707,6 +707,28 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 
 	public class ReactionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Reaction");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cLocalReactionParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cTransitionReactionParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		/// * ---- reaction rules ----
+		//Define the structure of reactions that are central for describing the statecharts behavior. 
+		// * /Reaction:
+		//	LocalReaction | TransitionReaction;
+		public ParserRule getRule() { return rule; }
+
+		//LocalReaction | TransitionReaction
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//LocalReaction
+		public RuleCall getLocalReactionParserRuleCall_0() { return cLocalReactionParserRuleCall_0; }
+
+		//TransitionReaction
+		public RuleCall getTransitionReactionParserRuleCall_1() { return cTransitionReactionParserRuleCall_1; }
+	}
+
+	public class LocalReactionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "LocalReaction");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cTriggerAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cTriggerReactionTriggerParserRuleCall_0_0 = (RuleCall)cTriggerAssignment_0.eContents().get(0);
@@ -719,9 +741,7 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cPropertiesAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
 		private final RuleCall cPropertiesReactionPropertiesParserRuleCall_2_1_0 = (RuleCall)cPropertiesAssignment_2_1.eContents().get(0);
 		
-		/// * ---- reaction rules ----
-		//Define the structure of reactions that are central for describing the statecharts behavior. 
-		// * /Reaction:
+		//LocalReaction:
 		//	trigger=ReactionTrigger ("/" action=Action)? ("#" properties=ReactionProperties)?;
 		public ParserRule getRule() { return rule; }
 
@@ -757,6 +777,62 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 
 		//ReactionProperties
 		public RuleCall getPropertiesReactionPropertiesParserRuleCall_2_1_0() { return cPropertiesReactionPropertiesParserRuleCall_2_1_0; }
+	}
+
+	public class TransitionReactionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TransitionReaction");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cTransitionReactionAction_0 = (Action)cGroup.eContents().get(0);
+		private final Assignment cTriggerAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cTriggerReactionTriggerParserRuleCall_1_0 = (RuleCall)cTriggerAssignment_1.eContents().get(0);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Keyword cSolidusKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Assignment cActionAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final RuleCall cActionActionParserRuleCall_2_1_0 = (RuleCall)cActionAssignment_2_1.eContents().get(0);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Keyword cNumberSignKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Assignment cPropertiesAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
+		private final RuleCall cPropertiesReactionPropertiesParserRuleCall_3_1_0 = (RuleCall)cPropertiesAssignment_3_1.eContents().get(0);
+		
+		//TransitionReaction:
+		//	{TransitionReaction} trigger=ReactionTrigger? ("/" action=Action)? ("#" properties=ReactionProperties)?;
+		public ParserRule getRule() { return rule; }
+
+		//{TransitionReaction} trigger=ReactionTrigger? ("/" action=Action)? ("#" properties=ReactionProperties)?
+		public Group getGroup() { return cGroup; }
+
+		//{TransitionReaction}
+		public Action getTransitionReactionAction_0() { return cTransitionReactionAction_0; }
+
+		//trigger=ReactionTrigger?
+		public Assignment getTriggerAssignment_1() { return cTriggerAssignment_1; }
+
+		//ReactionTrigger
+		public RuleCall getTriggerReactionTriggerParserRuleCall_1_0() { return cTriggerReactionTriggerParserRuleCall_1_0; }
+
+		//("/" action=Action)?
+		public Group getGroup_2() { return cGroup_2; }
+
+		//"/"
+		public Keyword getSolidusKeyword_2_0() { return cSolidusKeyword_2_0; }
+
+		//action=Action
+		public Assignment getActionAssignment_2_1() { return cActionAssignment_2_1; }
+
+		//Action
+		public RuleCall getActionActionParserRuleCall_2_1_0() { return cActionActionParserRuleCall_2_1_0; }
+
+		//("#" properties=ReactionProperties)?
+		public Group getGroup_3() { return cGroup_3; }
+
+		//"#"
+		public Keyword getNumberSignKeyword_3_0() { return cNumberSignKeyword_3_0; }
+
+		//properties=ReactionProperties
+		public Assignment getPropertiesAssignment_3_1() { return cPropertiesAssignment_3_1; }
+
+		//ReactionProperties
+		public RuleCall getPropertiesReactionPropertiesParserRuleCall_3_1_0() { return cPropertiesReactionPropertiesParserRuleCall_3_1_0; }
 	}
 
 	public class ReactionTriggerElements extends AbstractParserRuleElementFinder {
@@ -1038,13 +1114,14 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cEnterEventParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cExitEventParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cOnCycleEventParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cAlwaysEventParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		
 		//// TODO: add dereived events like in(state), entered(state)	
 		//BuiltinEventSpec:
-		//	EnterEvent | ExitEvent | OnCycleEvent;
+		//	EnterEvent | ExitEvent | OnCycleEvent | AlwaysEvent;
 		public ParserRule getRule() { return rule; }
 
-		//EnterEvent | ExitEvent | OnCycleEvent
+		//EnterEvent | ExitEvent | OnCycleEvent | AlwaysEvent
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//EnterEvent
@@ -1055,6 +1132,9 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 
 		//OnCycleEvent
 		public RuleCall getOnCycleEventParserRuleCall_2() { return cOnCycleEventParserRuleCall_2; }
+
+		//AlwaysEvent
+		public RuleCall getAlwaysEventParserRuleCall_3() { return cAlwaysEventParserRuleCall_3; }
 	}
 
 	public class EnterEventElements extends AbstractParserRuleElementFinder {
@@ -1117,6 +1197,26 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 		public Keyword getOncycleKeyword_1() { return cOncycleKeyword_1; }
 	}
 
+	public class AlwaysEventElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AlwaysEvent");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cAlwaysEventAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cAlwaysKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		
+		//AlwaysEvent:
+		//	{AlwaysEvent} "always";
+		public ParserRule getRule() { return rule; }
+
+		//{AlwaysEvent} "always"
+		public Group getGroup() { return cGroup; }
+
+		//{AlwaysEvent}
+		public Action getAlwaysEventAction_0() { return cAlwaysEventAction_0; }
+
+		//"always"
+		public Keyword getAlwaysKeyword_1() { return cAlwaysKeyword_1; }
+	}
+
 	public class ExpressionRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ExpressionRule");
 		private final Assignment cExpressionAssignment = (Assignment)rule.eContents().get(1);
@@ -1124,6 +1224,9 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cExpressionLogicalOrExpressionParserRuleCall_0_0 = (RuleCall)cExpressionAlternatives_0.eContents().get(0);
 		private final RuleCall cExpressionRaiseEventExpressionParserRuleCall_0_1 = (RuleCall)cExpressionAlternatives_0.eContents().get(1);
 		
+		/// * --- statements --- * / // variable assignment
+		//// raise events
+		//// operation call
 		//// ****************
 		//// Expression Grammar
 		//// ****************
@@ -1911,6 +2014,8 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 	private EntrypointElements pEntrypoint;
 	private ExitpointElements pExitpoint;
 	private ReactionElements pReaction;
+	private LocalReactionElements pLocalReaction;
+	private TransitionReactionElements pTransitionReaction;
 	private ReactionTriggerElements pReactionTrigger;
 	private ActionElements pAction;
 	private ReactionPropertiesElements pReactionProperties;
@@ -1925,6 +2030,7 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 	private EnterEventElements pEnterEvent;
 	private ExitEventElements pExitEvent;
 	private OnCycleEventElements pOnCycleEvent;
+	private AlwaysEventElements pAlwaysEvent;
 	private ExpressionRuleElements pExpressionRule;
 	private RaiseEventExpressionElements pRaiseEventExpression;
 	private LogicalOrExpressionElements pLogicalOrExpression;
@@ -2046,7 +2152,7 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//TransitionStatement:
-	//	Reaction;
+	//	TransitionReaction;
 	public TransitionStatementElements getTransitionStatementAccess() {
 		return (pTransitionStatement != null) ? pTransitionStatement : (pTransitionStatement = new TransitionStatementElements());
 	}
@@ -2111,7 +2217,7 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 
 	/// * ---- definitions ----
 	//a definition is a top level element of a definition scope. * /Definition:
-	//	EventDefinition | VariableDefinition | Clock | Operation | Reaction | Entrypoint | Exitpoint;
+	//	EventDefinition | VariableDefinition | Clock | Operation | LocalReaction | Entrypoint | Exitpoint;
 	public DefinitionElements getDefinitionAccess() {
 		return (pDefinition != null) ? pDefinition : (pDefinition = new DefinitionElements());
 	}
@@ -2225,13 +2331,33 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 	/// * ---- reaction rules ----
 	//Define the structure of reactions that are central for describing the statecharts behavior. 
 	// * /Reaction:
-	//	trigger=ReactionTrigger ("/" action=Action)? ("#" properties=ReactionProperties)?;
+	//	LocalReaction | TransitionReaction;
 	public ReactionElements getReactionAccess() {
 		return (pReaction != null) ? pReaction : (pReaction = new ReactionElements());
 	}
 	
 	public ParserRule getReactionRule() {
 		return getReactionAccess().getRule();
+	}
+
+	//LocalReaction:
+	//	trigger=ReactionTrigger ("/" action=Action)? ("#" properties=ReactionProperties)?;
+	public LocalReactionElements getLocalReactionAccess() {
+		return (pLocalReaction != null) ? pLocalReaction : (pLocalReaction = new LocalReactionElements());
+	}
+	
+	public ParserRule getLocalReactionRule() {
+		return getLocalReactionAccess().getRule();
+	}
+
+	//TransitionReaction:
+	//	{TransitionReaction} trigger=ReactionTrigger? ("/" action=Action)? ("#" properties=ReactionProperties)?;
+	public TransitionReactionElements getTransitionReactionAccess() {
+		return (pTransitionReaction != null) ? pTransitionReaction : (pTransitionReaction = new TransitionReactionElements());
+	}
+	
+	public ParserRule getTransitionReactionRule() {
+		return getTransitionReactionAccess().getRule();
 	}
 
 	//ReactionTrigger:
@@ -2337,7 +2463,7 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 
 	//// TODO: add dereived events like in(state), entered(state)	
 	//BuiltinEventSpec:
-	//	EnterEvent | ExitEvent | OnCycleEvent;
+	//	EnterEvent | ExitEvent | OnCycleEvent | AlwaysEvent;
 	public BuiltinEventSpecElements getBuiltinEventSpecAccess() {
 		return (pBuiltinEventSpec != null) ? pBuiltinEventSpec : (pBuiltinEventSpec = new BuiltinEventSpecElements());
 	}
@@ -2376,6 +2502,19 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 		return getOnCycleEventAccess().getRule();
 	}
 
+	//AlwaysEvent:
+	//	{AlwaysEvent} "always";
+	public AlwaysEventElements getAlwaysEventAccess() {
+		return (pAlwaysEvent != null) ? pAlwaysEvent : (pAlwaysEvent = new AlwaysEventElements());
+	}
+	
+	public ParserRule getAlwaysEventRule() {
+		return getAlwaysEventAccess().getRule();
+	}
+
+	/// * --- statements --- * / // variable assignment
+	//// raise events
+	//// operation call
 	//// ****************
 	//// Expression Grammar
 	//// ****************

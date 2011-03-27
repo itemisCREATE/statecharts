@@ -12,30 +12,30 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.yakindu.sct.statechart.expressions.Action;
 import org.yakindu.sct.statechart.expressions.ExpressionsPackage;
+import org.yakindu.sct.statechart.expressions.LocalReaction;
 import org.yakindu.sct.statechart.expressions.Reaction;
 import org.yakindu.sct.statechart.expressions.ReactionProperties;
 import org.yakindu.sct.statechart.expressions.ReactionTrigger;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Reaction</b></em>'.
+ * An implementation of the model object '<em><b>Local Reaction</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.yakindu.sct.statechart.expressions.impl.ReactionImpl#getTrigger <em>Trigger</em>}</li>
- *   <li>{@link org.yakindu.sct.statechart.expressions.impl.ReactionImpl#getAction <em>Action</em>}</li>
- *   <li>{@link org.yakindu.sct.statechart.expressions.impl.ReactionImpl#getProperties <em>Properties</em>}</li>
+ *   <li>{@link org.yakindu.sct.statechart.expressions.impl.LocalReactionImpl#getTrigger <em>Trigger</em>}</li>
+ *   <li>{@link org.yakindu.sct.statechart.expressions.impl.LocalReactionImpl#getAction <em>Action</em>}</li>
+ *   <li>{@link org.yakindu.sct.statechart.expressions.impl.LocalReactionImpl#getProperties <em>Properties</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ReactionImpl extends MinimalEObjectImpl.Container implements Reaction
+public class LocalReactionImpl extends DefinitionImpl implements LocalReaction
 {
   /**
    * The cached value of the '{@link #getTrigger() <em>Trigger</em>}' containment reference.
@@ -72,7 +72,7 @@ public class ReactionImpl extends MinimalEObjectImpl.Container implements Reacti
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ReactionImpl()
+  protected LocalReactionImpl()
   {
     super();
   }
@@ -85,7 +85,7 @@ public class ReactionImpl extends MinimalEObjectImpl.Container implements Reacti
   @Override
   protected EClass eStaticClass()
   {
-    return ExpressionsPackage.Literals.REACTION;
+    return ExpressionsPackage.Literals.LOCAL_REACTION;
   }
 
   /**
@@ -109,7 +109,7 @@ public class ReactionImpl extends MinimalEObjectImpl.Container implements Reacti
     trigger = newTrigger;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ExpressionsPackage.REACTION__TRIGGER, oldTrigger, newTrigger);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ExpressionsPackage.LOCAL_REACTION__TRIGGER, oldTrigger, newTrigger);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -126,14 +126,14 @@ public class ReactionImpl extends MinimalEObjectImpl.Container implements Reacti
     {
       NotificationChain msgs = null;
       if (trigger != null)
-        msgs = ((InternalEObject)trigger).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ExpressionsPackage.REACTION__TRIGGER, null, msgs);
+        msgs = ((InternalEObject)trigger).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ExpressionsPackage.LOCAL_REACTION__TRIGGER, null, msgs);
       if (newTrigger != null)
-        msgs = ((InternalEObject)newTrigger).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ExpressionsPackage.REACTION__TRIGGER, null, msgs);
+        msgs = ((InternalEObject)newTrigger).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ExpressionsPackage.LOCAL_REACTION__TRIGGER, null, msgs);
       msgs = basicSetTrigger(newTrigger, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.REACTION__TRIGGER, newTrigger, newTrigger));
+      eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.LOCAL_REACTION__TRIGGER, newTrigger, newTrigger));
   }
 
   /**
@@ -157,7 +157,7 @@ public class ReactionImpl extends MinimalEObjectImpl.Container implements Reacti
     action = newAction;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ExpressionsPackage.REACTION__ACTION, oldAction, newAction);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ExpressionsPackage.LOCAL_REACTION__ACTION, oldAction, newAction);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -174,14 +174,14 @@ public class ReactionImpl extends MinimalEObjectImpl.Container implements Reacti
     {
       NotificationChain msgs = null;
       if (action != null)
-        msgs = ((InternalEObject)action).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ExpressionsPackage.REACTION__ACTION, null, msgs);
+        msgs = ((InternalEObject)action).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ExpressionsPackage.LOCAL_REACTION__ACTION, null, msgs);
       if (newAction != null)
-        msgs = ((InternalEObject)newAction).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ExpressionsPackage.REACTION__ACTION, null, msgs);
+        msgs = ((InternalEObject)newAction).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ExpressionsPackage.LOCAL_REACTION__ACTION, null, msgs);
       msgs = basicSetAction(newAction, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.REACTION__ACTION, newAction, newAction));
+      eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.LOCAL_REACTION__ACTION, newAction, newAction));
   }
 
   /**
@@ -205,7 +205,7 @@ public class ReactionImpl extends MinimalEObjectImpl.Container implements Reacti
     properties = newProperties;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ExpressionsPackage.REACTION__PROPERTIES, oldProperties, newProperties);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ExpressionsPackage.LOCAL_REACTION__PROPERTIES, oldProperties, newProperties);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -222,14 +222,14 @@ public class ReactionImpl extends MinimalEObjectImpl.Container implements Reacti
     {
       NotificationChain msgs = null;
       if (properties != null)
-        msgs = ((InternalEObject)properties).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ExpressionsPackage.REACTION__PROPERTIES, null, msgs);
+        msgs = ((InternalEObject)properties).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ExpressionsPackage.LOCAL_REACTION__PROPERTIES, null, msgs);
       if (newProperties != null)
-        msgs = ((InternalEObject)newProperties).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ExpressionsPackage.REACTION__PROPERTIES, null, msgs);
+        msgs = ((InternalEObject)newProperties).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ExpressionsPackage.LOCAL_REACTION__PROPERTIES, null, msgs);
       msgs = basicSetProperties(newProperties, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.REACTION__PROPERTIES, newProperties, newProperties));
+      eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.LOCAL_REACTION__PROPERTIES, newProperties, newProperties));
   }
 
   /**
@@ -242,11 +242,11 @@ public class ReactionImpl extends MinimalEObjectImpl.Container implements Reacti
   {
     switch (featureID)
     {
-      case ExpressionsPackage.REACTION__TRIGGER:
+      case ExpressionsPackage.LOCAL_REACTION__TRIGGER:
         return basicSetTrigger(null, msgs);
-      case ExpressionsPackage.REACTION__ACTION:
+      case ExpressionsPackage.LOCAL_REACTION__ACTION:
         return basicSetAction(null, msgs);
-      case ExpressionsPackage.REACTION__PROPERTIES:
+      case ExpressionsPackage.LOCAL_REACTION__PROPERTIES:
         return basicSetProperties(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -262,11 +262,11 @@ public class ReactionImpl extends MinimalEObjectImpl.Container implements Reacti
   {
     switch (featureID)
     {
-      case ExpressionsPackage.REACTION__TRIGGER:
+      case ExpressionsPackage.LOCAL_REACTION__TRIGGER:
         return getTrigger();
-      case ExpressionsPackage.REACTION__ACTION:
+      case ExpressionsPackage.LOCAL_REACTION__ACTION:
         return getAction();
-      case ExpressionsPackage.REACTION__PROPERTIES:
+      case ExpressionsPackage.LOCAL_REACTION__PROPERTIES:
         return getProperties();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -282,13 +282,13 @@ public class ReactionImpl extends MinimalEObjectImpl.Container implements Reacti
   {
     switch (featureID)
     {
-      case ExpressionsPackage.REACTION__TRIGGER:
+      case ExpressionsPackage.LOCAL_REACTION__TRIGGER:
         setTrigger((ReactionTrigger)newValue);
         return;
-      case ExpressionsPackage.REACTION__ACTION:
+      case ExpressionsPackage.LOCAL_REACTION__ACTION:
         setAction((Action)newValue);
         return;
-      case ExpressionsPackage.REACTION__PROPERTIES:
+      case ExpressionsPackage.LOCAL_REACTION__PROPERTIES:
         setProperties((ReactionProperties)newValue);
         return;
     }
@@ -305,13 +305,13 @@ public class ReactionImpl extends MinimalEObjectImpl.Container implements Reacti
   {
     switch (featureID)
     {
-      case ExpressionsPackage.REACTION__TRIGGER:
+      case ExpressionsPackage.LOCAL_REACTION__TRIGGER:
         setTrigger((ReactionTrigger)null);
         return;
-      case ExpressionsPackage.REACTION__ACTION:
+      case ExpressionsPackage.LOCAL_REACTION__ACTION:
         setAction((Action)null);
         return;
-      case ExpressionsPackage.REACTION__PROPERTIES:
+      case ExpressionsPackage.LOCAL_REACTION__PROPERTIES:
         setProperties((ReactionProperties)null);
         return;
     }
@@ -328,14 +328,56 @@ public class ReactionImpl extends MinimalEObjectImpl.Container implements Reacti
   {
     switch (featureID)
     {
-      case ExpressionsPackage.REACTION__TRIGGER:
+      case ExpressionsPackage.LOCAL_REACTION__TRIGGER:
         return trigger != null;
-      case ExpressionsPackage.REACTION__ACTION:
+      case ExpressionsPackage.LOCAL_REACTION__ACTION:
         return action != null;
-      case ExpressionsPackage.REACTION__PROPERTIES:
+      case ExpressionsPackage.LOCAL_REACTION__PROPERTIES:
         return properties != null;
     }
     return super.eIsSet(featureID);
   }
 
-} //ReactionImpl
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass)
+  {
+    if (baseClass == Reaction.class)
+    {
+      switch (derivedFeatureID)
+      {
+        case ExpressionsPackage.LOCAL_REACTION__TRIGGER: return ExpressionsPackage.REACTION__TRIGGER;
+        case ExpressionsPackage.LOCAL_REACTION__ACTION: return ExpressionsPackage.REACTION__ACTION;
+        case ExpressionsPackage.LOCAL_REACTION__PROPERTIES: return ExpressionsPackage.REACTION__PROPERTIES;
+        default: return -1;
+      }
+    }
+    return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass)
+  {
+    if (baseClass == Reaction.class)
+    {
+      switch (baseFeatureID)
+      {
+        case ExpressionsPackage.REACTION__TRIGGER: return ExpressionsPackage.LOCAL_REACTION__TRIGGER;
+        case ExpressionsPackage.REACTION__ACTION: return ExpressionsPackage.LOCAL_REACTION__ACTION;
+        case ExpressionsPackage.REACTION__PROPERTIES: return ExpressionsPackage.LOCAL_REACTION__PROPERTIES;
+        default: return -1;
+      }
+    }
+    return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+  }
+
+} //LocalReactionImpl

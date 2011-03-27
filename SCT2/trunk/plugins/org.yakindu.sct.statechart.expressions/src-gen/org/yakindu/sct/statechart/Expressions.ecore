@@ -74,7 +74,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="Exitpoint" eSuperTypes="#//Definition">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Reaction" eSuperTypes="#//TransitionStatement #//Definition">
+  <eClassifiers xsi:type="ecore:EClass" name="Reaction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="trigger" eType="#//ReactionTrigger"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="action" eType="#//Action"
@@ -82,6 +82,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="properties" eType="#//ReactionProperties"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LocalReaction" eSuperTypes="#//Definition #//Reaction"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TransitionReaction" eSuperTypes="#//TransitionStatement #//Reaction"/>
   <eClassifiers xsi:type="ecore:EClass" name="ReactionTrigger">
     <eStructuralFeatures xsi:type="ecore:EReference" name="triggers" upperBound="-1"
         eType="#//EventSpec" containment="true"/>
@@ -118,6 +120,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="EnterEvent" eSuperTypes="#//BuiltinEventSpec"/>
   <eClassifiers xsi:type="ecore:EClass" name="ExitEvent" eSuperTypes="#//BuiltinEventSpec"/>
   <eClassifiers xsi:type="ecore:EClass" name="OnCycleEvent" eSuperTypes="#//BuiltinEventSpec"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AlwaysEvent" eSuperTypes="#//BuiltinEventSpec"/>
   <eClassifiers xsi:type="ecore:EClass" name="ExpressionRule">
     <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"
         containment="true"/>

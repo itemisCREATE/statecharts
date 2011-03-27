@@ -434,11 +434,11 @@ ruleTransitionStatement returns [EObject current=null]
     }:
 
     { 
-        currentNode=createCompositeNode(grammarAccess.getTransitionStatementAccess().getReactionParserRuleCall(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getTransitionStatementAccess().getTransitionReactionParserRuleCall(), currentNode); 
     }
-    this_Reaction_0=ruleReaction
+    this_TransitionReaction_0=ruleTransitionReaction
     { 
-        $current = $this_Reaction_0.current; 
+        $current = $this_TransitionReaction_0.current; 
         currentNode = currentNode.getParent();
     }
 
@@ -764,11 +764,11 @@ ruleDefinition returns [EObject current=null]
 
     |
     { 
-        currentNode=createCompositeNode(grammarAccess.getDefinitionAccess().getReactionParserRuleCall_4(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getDefinitionAccess().getLocalReactionParserRuleCall_4(), currentNode); 
     }
-    this_Reaction_4=ruleReaction
+    this_LocalReaction_4=ruleLocalReaction
     { 
-        $current = $this_Reaction_4.current; 
+        $current = $this_LocalReaction_4.current; 
         currentNode = currentNode.getParent();
     }
 
@@ -1489,17 +1489,19 @@ ruleExitpoint returns [EObject current=null]
 
 
 
-// Entry rule entryRuleReaction
-entryRuleReaction returns [EObject current=null] 
+
+
+// Entry rule entryRuleLocalReaction
+entryRuleLocalReaction returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getReactionRule(), currentNode); }
-	 iv_ruleReaction=ruleReaction 
-	 { $current=$iv_ruleReaction.current; } 
+	{ currentNode = createCompositeNode(grammarAccess.getLocalReactionRule(), currentNode); }
+	 iv_ruleLocalReaction=ruleLocalReaction 
+	 { $current=$iv_ruleLocalReaction.current; } 
 	 EOF 
 ;
 
-// Rule Reaction
-ruleReaction returns [EObject current=null] 
+// Rule LocalReaction
+ruleLocalReaction returns [EObject current=null] 
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
@@ -1508,11 +1510,11 @@ ruleReaction returns [EObject current=null]
 ((
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getReactionAccess().getTriggerReactionTriggerParserRuleCall_0_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getLocalReactionAccess().getTriggerReactionTriggerParserRuleCall_0_0(), currentNode); 
 	    }
 		lv_trigger_0_0=ruleReactionTrigger		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getReactionRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getLocalReactionRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        try {
@@ -1531,16 +1533,16 @@ ruleReaction returns [EObject current=null]
 )
 )(	'/' 
     {
-        createLeafNode(grammarAccess.getReactionAccess().getSolidusKeyword_1_0(), null); 
+        createLeafNode(grammarAccess.getLocalReactionAccess().getSolidusKeyword_1_0(), null); 
     }
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getReactionAccess().getActionActionParserRuleCall_1_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getLocalReactionAccess().getActionActionParserRuleCall_1_1_0(), currentNode); 
 	    }
 		lv_action_2_0=ruleAction		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getReactionRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getLocalReactionRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        try {
@@ -1559,16 +1561,16 @@ ruleReaction returns [EObject current=null]
 )
 ))?(	'#' 
     {
-        createLeafNode(grammarAccess.getReactionAccess().getNumberSignKeyword_2_0(), null); 
+        createLeafNode(grammarAccess.getLocalReactionAccess().getNumberSignKeyword_2_0(), null); 
     }
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getReactionAccess().getPropertiesReactionPropertiesParserRuleCall_2_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getLocalReactionAccess().getPropertiesReactionPropertiesParserRuleCall_2_1_0(), currentNode); 
 	    }
 		lv_properties_4_0=ruleReactionProperties		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getReactionRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getLocalReactionRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        try {
@@ -1576,6 +1578,120 @@ ruleReaction returns [EObject current=null]
 	       			$current, 
 	       			"properties",
 	        		lv_properties_4_0, 
+	        		"ReactionProperties", 
+	        		currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+
+)
+))?)
+;
+
+
+
+
+
+// Entry rule entryRuleTransitionReaction
+entryRuleTransitionReaction returns [EObject current=null] 
+	:
+	{ currentNode = createCompositeNode(grammarAccess.getTransitionReactionRule(), currentNode); }
+	 iv_ruleTransitionReaction=ruleTransitionReaction 
+	 { $current=$iv_ruleTransitionReaction.current; } 
+	 EOF 
+;
+
+// Rule TransitionReaction
+ruleTransitionReaction returns [EObject current=null] 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+((
+    { 
+        temp=factory.create(grammarAccess.getTransitionReactionAccess().getTransitionReactionAction_0().getType().getClassifier());
+        $current = temp; 
+        temp = null;
+        CompositeNode newNode = createCompositeNode(grammarAccess.getTransitionReactionAccess().getTransitionReactionAction_0(), currentNode.getParent());
+    newNode.getChildren().add(currentNode);
+    moveLookaheadInfo(currentNode, newNode);
+    currentNode = newNode; 
+        associateNodeWithAstElement(currentNode, $current); 
+    }
+)(
+(
+		{ 
+	        currentNode=createCompositeNode(grammarAccess.getTransitionReactionAccess().getTriggerReactionTriggerParserRuleCall_1_0(), currentNode); 
+	    }
+		lv_trigger_1_0=ruleReactionTrigger		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getTransitionReactionRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        try {
+	       		set(
+	       			$current, 
+	       			"trigger",
+	        		lv_trigger_1_0, 
+	        		"ReactionTrigger", 
+	        		currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+
+)
+)?(	'/' 
+    {
+        createLeafNode(grammarAccess.getTransitionReactionAccess().getSolidusKeyword_2_0(), null); 
+    }
+(
+(
+		{ 
+	        currentNode=createCompositeNode(grammarAccess.getTransitionReactionAccess().getActionActionParserRuleCall_2_1_0(), currentNode); 
+	    }
+		lv_action_3_0=ruleAction		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getTransitionReactionRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        try {
+	       		set(
+	       			$current, 
+	       			"action",
+	        		lv_action_3_0, 
+	        		"Action", 
+	        		currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+
+)
+))?(	'#' 
+    {
+        createLeafNode(grammarAccess.getTransitionReactionAccess().getNumberSignKeyword_3_0(), null); 
+    }
+(
+(
+		{ 
+	        currentNode=createCompositeNode(grammarAccess.getTransitionReactionAccess().getPropertiesReactionPropertiesParserRuleCall_3_1_0(), currentNode); 
+	    }
+		lv_properties_5_0=ruleReactionProperties		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getTransitionReactionRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        try {
+	       		set(
+	       			$current, 
+	       			"properties",
+	        		lv_properties_5_0, 
 	        		"ReactionProperties", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
@@ -2194,6 +2310,16 @@ ruleBuiltinEventSpec returns [EObject current=null]
         $current = $this_OnCycleEvent_2.current; 
         currentNode = currentNode.getParent();
     }
+
+    |
+    { 
+        currentNode=createCompositeNode(grammarAccess.getBuiltinEventSpecAccess().getAlwaysEventParserRuleCall_3(), currentNode); 
+    }
+    this_AlwaysEvent_3=ruleAlwaysEvent
+    { 
+        $current = $this_AlwaysEvent_3.current; 
+        currentNode = currentNode.getParent();
+    }
 )
 ;
 
@@ -2307,6 +2433,44 @@ ruleOnCycleEvent returns [EObject current=null]
 )	'oncycle' 
     {
         createLeafNode(grammarAccess.getOnCycleEventAccess().getOncycleKeyword_1(), null); 
+    }
+)
+;
+
+
+
+
+
+// Entry rule entryRuleAlwaysEvent
+entryRuleAlwaysEvent returns [EObject current=null] 
+	:
+	{ currentNode = createCompositeNode(grammarAccess.getAlwaysEventRule(), currentNode); }
+	 iv_ruleAlwaysEvent=ruleAlwaysEvent 
+	 { $current=$iv_ruleAlwaysEvent.current; } 
+	 EOF 
+;
+
+// Rule AlwaysEvent
+ruleAlwaysEvent returns [EObject current=null] 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+((
+    { 
+        temp=factory.create(grammarAccess.getAlwaysEventAccess().getAlwaysEventAction_0().getType().getClassifier());
+        $current = temp; 
+        temp = null;
+        CompositeNode newNode = createCompositeNode(grammarAccess.getAlwaysEventAccess().getAlwaysEventAction_0(), currentNode.getParent());
+    newNode.getChildren().add(currentNode);
+    moveLookaheadInfo(currentNode, newNode);
+    currentNode = newNode; 
+        associateNodeWithAstElement(currentNode, $current); 
+    }
+)	'always' 
+    {
+        createLeafNode(grammarAccess.getAlwaysEventAccess().getAlwaysKeyword_1(), null); 
     }
 )
 ;

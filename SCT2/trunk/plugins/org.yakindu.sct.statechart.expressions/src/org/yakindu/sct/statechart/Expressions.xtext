@@ -34,7 +34,7 @@ StatechartDefinition: {StatechartDefinition} (definitionScopes+=StatechartScope)
 
 StateDefinition: SimpleScope;
 
-TransitionStatement: Reaction;
+TransitionStatement: TransitionReaction;
 
 
 
@@ -58,7 +58,7 @@ InternalScope:  {InternalScope} 'internal' ':' (definitions+=Definition)*;
 
 /* ---- definitions ----
 a definition is a top level element of a definition scope. */ 
-Definition: EventDefinition | VariableDefinition | Clock | Operation | Reaction | Entrypoint | Exitpoint;
+Definition: EventDefinition | VariableDefinition | Clock | Operation | LocalReaction | Entrypoint | Exitpoint;
 
 
 /* ---- event definition ---- */
@@ -101,9 +101,13 @@ Exitpoint: 'exitpoint' name=ID;
 /* ---- reaction rules ----
 Define the structure of reactions that are central for describing the statecharts behavior. 
 */
+Reaction: LocalReaction | TransitionReaction;
 
-Reaction: 
+LocalReaction:
 	(trigger=ReactionTrigger) ('/' action=Action)? ('#' properties=ReactionProperties)?;
+
+TransitionReaction: 
+	{TransitionReaction} (trigger=ReactionTrigger)? ('/' action=Action)? ('#' properties=ReactionProperties)?;
 
 ReactionTrigger:	
 	(triggers+=EventSpec ("," triggers+=EventSpec)*)
@@ -133,13 +137,23 @@ RegularEventSpec: event=[sct::Event];
 TimeEventSpec: 'after' value = INT (unit = TimeUnit)?;
 
 // TODO: add dereived events like in(state), entered(state)	
-BuiltinEventSpec: EnterEvent | ExitEvent | OnCycleEvent;
+BuiltinEventSpec: EnterEvent | ExitEvent | OnCycleEvent | AlwaysEvent;
 
 EnterEvent: {EnterEvent} 'enter';
 ExitEvent: {ExitEvent} 'exit';
 OnCycleEvent: {OnCycleEvent} 'oncycle';
+AlwaysEvent: {AlwaysEvent} 'always';
 
 	
+/* --- statements --- */
+
+// variable assignment
+
+// raise events
+
+// operation call
+
+ 
 
 //****************
 // Expression Grammar

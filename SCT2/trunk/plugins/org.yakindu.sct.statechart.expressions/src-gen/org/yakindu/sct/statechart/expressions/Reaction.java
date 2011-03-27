@@ -5,6 +5,7 @@
  */
 package org.yakindu.sct.statechart.expressions;
 
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -24,7 +25,7 @@ package org.yakindu.sct.statechart.expressions;
  * @model
  * @generated
  */
-public interface Reaction extends TransitionStatement, Definition
+public interface Reaction extends EObject
 {
   /**
    * Returns the value of the '<em><b>Trigger</b></em>' containment reference.

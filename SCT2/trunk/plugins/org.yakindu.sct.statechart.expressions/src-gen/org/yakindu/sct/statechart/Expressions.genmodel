@@ -113,6 +113,8 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//Reaction/action"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//Reaction/properties"/>
     </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//LocalReaction"/>
+    <genClasses ecoreClass="Expressions.ecore#//TransitionReaction"/>
     <genClasses ecoreClass="Expressions.ecore#//ReactionTrigger">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//ReactionTrigger/triggers"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//ReactionTrigger/guardExpression"/>
@@ -145,6 +147,7 @@
     <genClasses ecoreClass="Expressions.ecore#//EnterEvent"/>
     <genClasses ecoreClass="Expressions.ecore#//ExitEvent"/>
     <genClasses ecoreClass="Expressions.ecore#//OnCycleEvent"/>
+    <genClasses ecoreClass="Expressions.ecore#//AlwaysEvent"/>
     <genClasses ecoreClass="Expressions.ecore#//ExpressionRule">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//ExpressionRule/expression"/>
     </genClasses>

@@ -41,6 +41,7 @@ public class ExpressionsParser extends AbstractContentAssistParser {
 					put(grammarAccess.getScopeAccess().getAlternatives(), "rule__Scope__Alternatives");
 					put(grammarAccess.getStatechartScopeAccess().getAlternatives(), "rule__StatechartScope__Alternatives");
 					put(grammarAccess.getDefinitionAccess().getAlternatives(), "rule__Definition__Alternatives");
+					put(grammarAccess.getReactionAccess().getAlternatives(), "rule__Reaction__Alternatives");
 					put(grammarAccess.getReactionPropertyAccess().getAlternatives(), "rule__ReactionProperty__Alternatives");
 					put(grammarAccess.getEventSpecAccess().getAlternatives(), "rule__EventSpec__Alternatives");
 					put(grammarAccess.getBuiltinEventSpecAccess().getAlternatives(), "rule__BuiltinEventSpec__Alternatives");
@@ -78,9 +79,12 @@ public class ExpressionsParser extends AbstractContentAssistParser {
 					put(grammarAccess.getOperationAccess().getGroup_5(), "rule__Operation__Group_5__0");
 					put(grammarAccess.getEntrypointAccess().getGroup(), "rule__Entrypoint__Group__0");
 					put(grammarAccess.getExitpointAccess().getGroup(), "rule__Exitpoint__Group__0");
-					put(grammarAccess.getReactionAccess().getGroup(), "rule__Reaction__Group__0");
-					put(grammarAccess.getReactionAccess().getGroup_1(), "rule__Reaction__Group_1__0");
-					put(grammarAccess.getReactionAccess().getGroup_2(), "rule__Reaction__Group_2__0");
+					put(grammarAccess.getLocalReactionAccess().getGroup(), "rule__LocalReaction__Group__0");
+					put(grammarAccess.getLocalReactionAccess().getGroup_1(), "rule__LocalReaction__Group_1__0");
+					put(grammarAccess.getLocalReactionAccess().getGroup_2(), "rule__LocalReaction__Group_2__0");
+					put(grammarAccess.getTransitionReactionAccess().getGroup(), "rule__TransitionReaction__Group__0");
+					put(grammarAccess.getTransitionReactionAccess().getGroup_2(), "rule__TransitionReaction__Group_2__0");
+					put(grammarAccess.getTransitionReactionAccess().getGroup_3(), "rule__TransitionReaction__Group_3__0");
 					put(grammarAccess.getReactionTriggerAccess().getGroup(), "rule__ReactionTrigger__Group__0");
 					put(grammarAccess.getReactionTriggerAccess().getGroup_0(), "rule__ReactionTrigger__Group_0__0");
 					put(grammarAccess.getReactionTriggerAccess().getGroup_0_1(), "rule__ReactionTrigger__Group_0_1__0");
@@ -92,6 +96,7 @@ public class ExpressionsParser extends AbstractContentAssistParser {
 					put(grammarAccess.getEnterEventAccess().getGroup(), "rule__EnterEvent__Group__0");
 					put(grammarAccess.getExitEventAccess().getGroup(), "rule__ExitEvent__Group__0");
 					put(grammarAccess.getOnCycleEventAccess().getGroup(), "rule__OnCycleEvent__Group__0");
+					put(grammarAccess.getAlwaysEventAccess().getGroup(), "rule__AlwaysEvent__Group__0");
 					put(grammarAccess.getRaiseEventExpressionAccess().getGroup(), "rule__RaiseEventExpression__Group__0");
 					put(grammarAccess.getLogicalOrExpressionAccess().getGroup(), "rule__LogicalOrExpression__Group__0");
 					put(grammarAccess.getLogicalOrExpressionAccess().getGroup_1(), "rule__LogicalOrExpression__Group_1__0");
@@ -135,9 +140,12 @@ public class ExpressionsParser extends AbstractContentAssistParser {
 					put(grammarAccess.getOperationAccess().getTypeAssignment_5_1(), "rule__Operation__TypeAssignment_5_1");
 					put(grammarAccess.getEntrypointAccess().getNameAssignment_1(), "rule__Entrypoint__NameAssignment_1");
 					put(grammarAccess.getExitpointAccess().getNameAssignment_1(), "rule__Exitpoint__NameAssignment_1");
-					put(grammarAccess.getReactionAccess().getTriggerAssignment_0(), "rule__Reaction__TriggerAssignment_0");
-					put(grammarAccess.getReactionAccess().getActionAssignment_1_1(), "rule__Reaction__ActionAssignment_1_1");
-					put(grammarAccess.getReactionAccess().getPropertiesAssignment_2_1(), "rule__Reaction__PropertiesAssignment_2_1");
+					put(grammarAccess.getLocalReactionAccess().getTriggerAssignment_0(), "rule__LocalReaction__TriggerAssignment_0");
+					put(grammarAccess.getLocalReactionAccess().getActionAssignment_1_1(), "rule__LocalReaction__ActionAssignment_1_1");
+					put(grammarAccess.getLocalReactionAccess().getPropertiesAssignment_2_1(), "rule__LocalReaction__PropertiesAssignment_2_1");
+					put(grammarAccess.getTransitionReactionAccess().getTriggerAssignment_1(), "rule__TransitionReaction__TriggerAssignment_1");
+					put(grammarAccess.getTransitionReactionAccess().getActionAssignment_2_1(), "rule__TransitionReaction__ActionAssignment_2_1");
+					put(grammarAccess.getTransitionReactionAccess().getPropertiesAssignment_3_1(), "rule__TransitionReaction__PropertiesAssignment_3_1");
 					put(grammarAccess.getReactionTriggerAccess().getTriggersAssignment_0_0(), "rule__ReactionTrigger__TriggersAssignment_0_0");
 					put(grammarAccess.getReactionTriggerAccess().getTriggersAssignment_0_1_1(), "rule__ReactionTrigger__TriggersAssignment_0_1_1");
 					put(grammarAccess.getReactionTriggerAccess().getGuardExpressionAssignment_1_1(), "rule__ReactionTrigger__GuardExpressionAssignment_1_1");
