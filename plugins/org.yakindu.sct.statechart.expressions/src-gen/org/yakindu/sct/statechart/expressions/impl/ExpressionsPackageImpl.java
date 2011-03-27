@@ -17,6 +17,7 @@ import org.yakindu.model.sct.statechart.StatechartPackage;
 
 import org.yakindu.sct.statechart.expressions.Action;
 import org.yakindu.sct.statechart.expressions.AdditiveOperator;
+import org.yakindu.sct.statechart.expressions.AlwaysEvent;
 import org.yakindu.sct.statechart.expressions.BuiltinEventSpec;
 import org.yakindu.sct.statechart.expressions.Clock;
 import org.yakindu.sct.statechart.expressions.DefRoot;
@@ -38,6 +39,7 @@ import org.yakindu.sct.statechart.expressions.ExpressionsFactory;
 import org.yakindu.sct.statechart.expressions.ExpressionsPackage;
 import org.yakindu.sct.statechart.expressions.InterfaceScope;
 import org.yakindu.sct.statechart.expressions.InternalScope;
+import org.yakindu.sct.statechart.expressions.LocalReaction;
 import org.yakindu.sct.statechart.expressions.LogicalAndExpression;
 import org.yakindu.sct.statechart.expressions.LogicalNotExpression;
 import org.yakindu.sct.statechart.expressions.LogicalOrExpression;
@@ -68,6 +70,7 @@ import org.yakindu.sct.statechart.expressions.StatechartRoot;
 import org.yakindu.sct.statechart.expressions.StatechartScope;
 import org.yakindu.sct.statechart.expressions.TimeEventSpec;
 import org.yakindu.sct.statechart.expressions.TimeUnit;
+import org.yakindu.sct.statechart.expressions.TransitionReaction;
 import org.yakindu.sct.statechart.expressions.TransitionRoot;
 import org.yakindu.sct.statechart.expressions.TransitionStatement;
 import org.yakindu.sct.statechart.expressions.Type;
@@ -241,6 +244,20 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass localReactionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass transitionReactionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass reactionTriggerEClass = null;
 
   /**
@@ -333,6 +350,13 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
    * @generated
    */
   private EClass onCycleEventEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass alwaysEventEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -1015,6 +1039,26 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getLocalReaction()
+  {
+    return localReactionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getTransitionReaction()
+  {
+    return transitionReactionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getReactionTrigger()
   {
     return reactionTriggerEClass;
@@ -1248,6 +1292,16 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
   public EClass getOnCycleEvent()
   {
     return onCycleEventEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getAlwaysEvent()
+  {
+    return alwaysEventEClass;
   }
 
   /**
@@ -1749,6 +1803,10 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
     createEReference(reactionEClass, REACTION__ACTION);
     createEReference(reactionEClass, REACTION__PROPERTIES);
 
+    localReactionEClass = createEClass(LOCAL_REACTION);
+
+    transitionReactionEClass = createEClass(TRANSITION_REACTION);
+
     reactionTriggerEClass = createEClass(REACTION_TRIGGER);
     createEReference(reactionTriggerEClass, REACTION_TRIGGER__TRIGGERS);
     createEReference(reactionTriggerEClass, REACTION_TRIGGER__GUARD_EXPRESSION);
@@ -1786,6 +1844,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
     exitEventEClass = createEClass(EXIT_EVENT);
 
     onCycleEventEClass = createEClass(ON_CYCLE_EVENT);
+
+    alwaysEventEClass = createEClass(ALWAYS_EVENT);
 
     expressionRuleEClass = createEClass(EXPRESSION_RULE);
     createEReference(expressionRuleEClass, EXPRESSION_RULE__EXPRESSION);
@@ -1890,8 +1950,10 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
     operationEClass.getESuperTypes().add(this.getDefinition());
     entrypointEClass.getESuperTypes().add(this.getDefinition());
     exitpointEClass.getESuperTypes().add(this.getDefinition());
-    reactionEClass.getESuperTypes().add(this.getTransitionStatement());
-    reactionEClass.getESuperTypes().add(this.getDefinition());
+    localReactionEClass.getESuperTypes().add(this.getDefinition());
+    localReactionEClass.getESuperTypes().add(this.getReaction());
+    transitionReactionEClass.getESuperTypes().add(this.getTransitionStatement());
+    transitionReactionEClass.getESuperTypes().add(this.getReaction());
     reactionPriorityEClass.getESuperTypes().add(this.getReactionProperty());
     entryPointSpecEClass.getESuperTypes().add(this.getReactionProperty());
     exitPointSpecEClass.getESuperTypes().add(this.getReactionProperty());
@@ -1901,6 +1963,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
     enterEventEClass.getESuperTypes().add(this.getBuiltinEventSpec());
     exitEventEClass.getESuperTypes().add(this.getBuiltinEventSpec());
     onCycleEventEClass.getESuperTypes().add(this.getBuiltinEventSpec());
+    alwaysEventEClass.getESuperTypes().add(this.getBuiltinEventSpec());
     logicalOrExpressionEClass.getESuperTypes().add(this.getExpression());
     logicalAndExpressionEClass.getESuperTypes().add(this.getExpression());
     logicalNotExpressionEClass.getESuperTypes().add(this.getExpression());
@@ -1981,6 +2044,10 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
     initEReference(getReaction_Action(), this.getAction(), null, "action", null, 0, 1, Reaction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getReaction_Properties(), this.getReactionProperties(), null, "properties", null, 0, 1, Reaction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+    initEClass(localReactionEClass, LocalReaction.class, "LocalReaction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(transitionReactionEClass, TransitionReaction.class, "TransitionReaction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
     initEClass(reactionTriggerEClass, ReactionTrigger.class, "ReactionTrigger", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getReactionTrigger_Triggers(), this.getEventSpec(), null, "triggers", null, 0, -1, ReactionTrigger.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getReactionTrigger_GuardExpression(), this.getExpression(), null, "guardExpression", null, 0, 1, ReactionTrigger.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2018,6 +2085,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
     initEClass(exitEventEClass, ExitEvent.class, "ExitEvent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(onCycleEventEClass, OnCycleEvent.class, "OnCycleEvent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(alwaysEventEClass, AlwaysEvent.class, "AlwaysEvent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(expressionRuleEClass, ExpressionRule.class, "ExpressionRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getExpressionRule_Expression(), ecorePackage.getEObject(), null, "expression", null, 0, 1, ExpressionRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

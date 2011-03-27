@@ -270,8 +270,24 @@ public class ExpressionsSwitch<T>
       {
         Reaction reaction = (Reaction)theEObject;
         T result = caseReaction(reaction);
-        if (result == null) result = caseTransitionStatement(reaction);
-        if (result == null) result = caseDefinition(reaction);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ExpressionsPackage.LOCAL_REACTION:
+      {
+        LocalReaction localReaction = (LocalReaction)theEObject;
+        T result = caseLocalReaction(localReaction);
+        if (result == null) result = caseDefinition(localReaction);
+        if (result == null) result = caseReaction(localReaction);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ExpressionsPackage.TRANSITION_REACTION:
+      {
+        TransitionReaction transitionReaction = (TransitionReaction)theEObject;
+        T result = caseTransitionReaction(transitionReaction);
+        if (result == null) result = caseTransitionStatement(transitionReaction);
+        if (result == null) result = caseReaction(transitionReaction);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -382,6 +398,15 @@ public class ExpressionsSwitch<T>
         T result = caseOnCycleEvent(onCycleEvent);
         if (result == null) result = caseBuiltinEventSpec(onCycleEvent);
         if (result == null) result = caseEventSpec(onCycleEvent);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ExpressionsPackage.ALWAYS_EVENT:
+      {
+        AlwaysEvent alwaysEvent = (AlwaysEvent)theEObject;
+        T result = caseAlwaysEvent(alwaysEvent);
+        if (result == null) result = caseBuiltinEventSpec(alwaysEvent);
+        if (result == null) result = caseEventSpec(alwaysEvent);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -835,6 +860,38 @@ public class ExpressionsSwitch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>Local Reaction</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Local Reaction</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseLocalReaction(LocalReaction object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Transition Reaction</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Transition Reaction</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseTransitionReaction(TransitionReaction object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>Reaction Trigger</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -1054,6 +1111,22 @@ public class ExpressionsSwitch<T>
    * @generated
    */
   public T caseOnCycleEvent(OnCycleEvent object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Always Event</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Always Event</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAlwaysEvent(AlwaysEvent object)
   {
     return null;
   }

@@ -90,6 +90,8 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
       case ExpressionsPackage.ENTRYPOINT: return createEntrypoint();
       case ExpressionsPackage.EXITPOINT: return createExitpoint();
       case ExpressionsPackage.REACTION: return createReaction();
+      case ExpressionsPackage.LOCAL_REACTION: return createLocalReaction();
+      case ExpressionsPackage.TRANSITION_REACTION: return createTransitionReaction();
       case ExpressionsPackage.REACTION_TRIGGER: return createReactionTrigger();
       case ExpressionsPackage.ACTION: return createAction();
       case ExpressionsPackage.REACTION_PROPERTIES: return createReactionProperties();
@@ -104,6 +106,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
       case ExpressionsPackage.ENTER_EVENT: return createEnterEvent();
       case ExpressionsPackage.EXIT_EVENT: return createExitEvent();
       case ExpressionsPackage.ON_CYCLE_EVENT: return createOnCycleEvent();
+      case ExpressionsPackage.ALWAYS_EVENT: return createAlwaysEvent();
       case ExpressionsPackage.EXPRESSION_RULE: return createExpressionRule();
       case ExpressionsPackage.RAISE_EVENT_EXPRESSION: return createRaiseEventExpression();
       case ExpressionsPackage.EXPRESSION: return createExpression();
@@ -430,6 +433,28 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
    * <!-- end-user-doc -->
    * @generated
    */
+  public LocalReaction createLocalReaction()
+  {
+    LocalReactionImpl localReaction = new LocalReactionImpl();
+    return localReaction;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public TransitionReaction createTransitionReaction()
+  {
+    TransitionReactionImpl transitionReaction = new TransitionReactionImpl();
+    return transitionReaction;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public ReactionTrigger createReactionTrigger()
   {
     ReactionTriggerImpl reactionTrigger = new ReactionTriggerImpl();
@@ -577,6 +602,17 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
   {
     OnCycleEventImpl onCycleEvent = new OnCycleEventImpl();
     return onCycleEvent;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public AlwaysEvent createAlwaysEvent()
+  {
+    AlwaysEventImpl alwaysEvent = new AlwaysEventImpl();
+    return alwaysEvent;
   }
 
   /**

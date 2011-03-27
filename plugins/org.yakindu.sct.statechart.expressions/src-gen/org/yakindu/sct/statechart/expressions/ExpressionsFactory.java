@@ -224,6 +224,24 @@ public interface ExpressionsFactory extends EFactory
   Reaction createReaction();
 
   /**
+   * Returns a new object of class '<em>Local Reaction</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Local Reaction</em>'.
+   * @generated
+   */
+  LocalReaction createLocalReaction();
+
+  /**
+   * Returns a new object of class '<em>Transition Reaction</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Transition Reaction</em>'.
+   * @generated
+   */
+  TransitionReaction createTransitionReaction();
+
+  /**
    * Returns a new object of class '<em>Reaction Trigger</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -348,6 +366,15 @@ public interface ExpressionsFactory extends EFactory
    * @generated
    */
   OnCycleEvent createOnCycleEvent();
+
+  /**
+   * Returns a new object of class '<em>Always Event</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Always Event</em>'.
+   * @generated
+   */
+  AlwaysEvent createAlwaysEvent();
 
   /**
    * Returns a new object of class '<em>Expression Rule</em>'.
