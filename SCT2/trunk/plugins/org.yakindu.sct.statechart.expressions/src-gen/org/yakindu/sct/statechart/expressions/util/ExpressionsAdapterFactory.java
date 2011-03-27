@@ -227,6 +227,41 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl
         return createExitPointSpecAdapter();
       }
       @Override
+      public Adapter caseEventSpec(EventSpec object)
+      {
+        return createEventSpecAdapter();
+      }
+      @Override
+      public Adapter caseRegularEventSpec(RegularEventSpec object)
+      {
+        return createRegularEventSpecAdapter();
+      }
+      @Override
+      public Adapter caseTimeEventSpec(TimeEventSpec object)
+      {
+        return createTimeEventSpecAdapter();
+      }
+      @Override
+      public Adapter caseBuiltinEventSpec(BuiltinEventSpec object)
+      {
+        return createBuiltinEventSpecAdapter();
+      }
+      @Override
+      public Adapter caseEnterEvent(EnterEvent object)
+      {
+        return createEnterEventAdapter();
+      }
+      @Override
+      public Adapter caseExitEvent(ExitEvent object)
+      {
+        return createExitEventAdapter();
+      }
+      @Override
+      public Adapter caseOnCycleEvent(OnCycleEvent object)
+      {
+        return createOnCycleEventAdapter();
+      }
+      @Override
       public Adapter caseStateExpression(StateExpression object)
       {
         return createStateExpressionAdapter();
@@ -774,6 +809,111 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createExitPointSpecAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.EventSpec <em>Event Spec</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.yakindu.sct.statechart.expressions.EventSpec
+   * @generated
+   */
+  public Adapter createEventSpecAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.RegularEventSpec <em>Regular Event Spec</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.yakindu.sct.statechart.expressions.RegularEventSpec
+   * @generated
+   */
+  public Adapter createRegularEventSpecAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.TimeEventSpec <em>Time Event Spec</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.yakindu.sct.statechart.expressions.TimeEventSpec
+   * @generated
+   */
+  public Adapter createTimeEventSpecAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.BuiltinEventSpec <em>Builtin Event Spec</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.yakindu.sct.statechart.expressions.BuiltinEventSpec
+   * @generated
+   */
+  public Adapter createBuiltinEventSpecAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.EnterEvent <em>Enter Event</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.yakindu.sct.statechart.expressions.EnterEvent
+   * @generated
+   */
+  public Adapter createEnterEventAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.ExitEvent <em>Exit Event</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.yakindu.sct.statechart.expressions.ExitEvent
+   * @generated
+   */
+  public Adapter createExitEventAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.OnCycleEvent <em>On Cycle Event</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.yakindu.sct.statechart.expressions.OnCycleEvent
+   * @generated
+   */
+  public Adapter createOnCycleEventAdapter()
   {
     return null;
   }

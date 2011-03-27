@@ -92,7 +92,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//VariableDefinition/readonly"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//VariableDefinition/external"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//VariableDefinition/type"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//VariableDefinition/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//VariableDefinition/initialValue"/>
     </genClasses>
     <genClasses ecoreClass="Expressions.ecore#//Clock">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//Clock/name"/>
@@ -114,7 +114,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//Reaction/properties"/>
     </genClasses>
     <genClasses ecoreClass="Expressions.ecore#//ReactionTrigger">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Expressions.ecore#//ReactionTrigger/triggers"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//ReactionTrigger/triggers"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//ReactionTrigger/guardExpression"/>
     </genClasses>
     <genClasses ecoreClass="Expressions.ecore#//Action">
@@ -133,6 +133,18 @@
     <genClasses ecoreClass="Expressions.ecore#//ExitPointSpec">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Expressions.ecore#//ExitPointSpec/exitpoint"/>
     </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//EventSpec"/>
+    <genClasses ecoreClass="Expressions.ecore#//RegularEventSpec">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Expressions.ecore#//RegularEventSpec/event"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//TimeEventSpec">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//TimeEventSpec/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//TimeEventSpec/unit"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//BuiltinEventSpec"/>
+    <genClasses ecoreClass="Expressions.ecore#//EnterEvent"/>
+    <genClasses ecoreClass="Expressions.ecore#//ExitEvent"/>
+    <genClasses ecoreClass="Expressions.ecore#//OnCycleEvent"/>
     <genClasses ecoreClass="Expressions.ecore#//StateExpression">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//StateExpression/entryExpression"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//StateExpression/exitExpression"/>

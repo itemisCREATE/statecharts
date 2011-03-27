@@ -501,14 +501,14 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cTypeTypeEnumRuleCall_4_0 = (RuleCall)cTypeAssignment_4.eContents().get(0);
 		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
 		private final Keyword cEqualsSignKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
-		private final Assignment cValueAssignment_5_1 = (Assignment)cGroup_5.eContents().get(1);
-		private final RuleCall cValueLiteralParserRuleCall_5_1_0 = (RuleCall)cValueAssignment_5_1.eContents().get(0);
+		private final Assignment cInitialValueAssignment_5_1 = (Assignment)cGroup_5.eContents().get(1);
+		private final RuleCall cInitialValueLiteralParserRuleCall_5_1_0 = (RuleCall)cInitialValueAssignment_5_1.eContents().get(0);
 		
 		//VariableDefinition:
-		//	"var" (readonly?="readonly"? & external?="external"?) name=ID ":" type=Type ("=" value=Literal)?;
+		//	"var" (readonly?="readonly"? & external?="external"?) name=ID ":" type=Type ("=" initialValue=Literal)?;
 		public ParserRule getRule() { return rule; }
 
-		//"var" (readonly?="readonly"? & external?="external"?) name=ID ":" type=Type ("=" value=Literal)?
+		//"var" (readonly?="readonly"? & external?="external"?) name=ID ":" type=Type ("=" initialValue=Literal)?
 		public Group getGroup() { return cGroup; }
 
 		//"var"
@@ -544,17 +544,17 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 		//Type
 		public RuleCall getTypeTypeEnumRuleCall_4_0() { return cTypeTypeEnumRuleCall_4_0; }
 
-		//("=" value=Literal)?
+		//("=" initialValue=Literal)?
 		public Group getGroup_5() { return cGroup_5; }
 
 		//"="
 		public Keyword getEqualsSignKeyword_5_0() { return cEqualsSignKeyword_5_0; }
 
-		//value=Literal
-		public Assignment getValueAssignment_5_1() { return cValueAssignment_5_1; }
+		//initialValue=Literal
+		public Assignment getInitialValueAssignment_5_1() { return cInitialValueAssignment_5_1; }
 
 		//Literal
-		public RuleCall getValueLiteralParserRuleCall_5_1_0() { return cValueLiteralParserRuleCall_5_1_0; }
+		public RuleCall getInitialValueLiteralParserRuleCall_5_1_0() { return cInitialValueLiteralParserRuleCall_5_1_0; }
 	}
 
 	public class ClockElements extends AbstractParserRuleElementFinder {
@@ -764,13 +764,11 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group cGroup_0 = (Group)cGroup.eContents().get(0);
 		private final Assignment cTriggersAssignment_0_0 = (Assignment)cGroup_0.eContents().get(0);
-		private final CrossReference cTriggersEventCrossReference_0_0_0 = (CrossReference)cTriggersAssignment_0_0.eContents().get(0);
-		private final RuleCall cTriggersEventIDTerminalRuleCall_0_0_0_1 = (RuleCall)cTriggersEventCrossReference_0_0_0.eContents().get(1);
+		private final RuleCall cTriggersEventSpecParserRuleCall_0_0_0 = (RuleCall)cTriggersAssignment_0_0.eContents().get(0);
 		private final Group cGroup_0_1 = (Group)cGroup_0.eContents().get(1);
 		private final Keyword cCommaKeyword_0_1_0 = (Keyword)cGroup_0_1.eContents().get(0);
 		private final Assignment cTriggersAssignment_0_1_1 = (Assignment)cGroup_0_1.eContents().get(1);
-		private final CrossReference cTriggersEventCrossReference_0_1_1_0 = (CrossReference)cTriggersAssignment_0_1_1.eContents().get(0);
-		private final RuleCall cTriggersEventIDTerminalRuleCall_0_1_1_0_1 = (RuleCall)cTriggersEventCrossReference_0_1_1_0.eContents().get(1);
+		private final RuleCall cTriggersEventSpecParserRuleCall_0_1_1_0 = (RuleCall)cTriggersAssignment_0_1_1.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
 		private final Keyword cLeftSquareBracketKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
 		private final Assignment cGuardExpressionAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
@@ -778,38 +776,32 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightSquareBracketKeyword_1_2 = (Keyword)cGroup_1.eContents().get(2);
 		
 		//ReactionTrigger:
-		//	(triggers+=[sct::Event] ("," triggers+=[sct::Event])*) ("[" guardExpression=LogicalOrExpression "]")?;
+		//	(triggers+=EventSpec ("," triggers+=EventSpec)*) ("[" guardExpression=LogicalOrExpression "]")?;
 		public ParserRule getRule() { return rule; }
 
-		//(triggers+=[sct::Event] ("," triggers+=[sct::Event])*) ("[" guardExpression=LogicalOrExpression "]")?
+		//(triggers+=EventSpec ("," triggers+=EventSpec)*) ("[" guardExpression=LogicalOrExpression "]")?
 		public Group getGroup() { return cGroup; }
 
-		//triggers+=[sct::Event] ("," triggers+=[sct::Event])*
+		//triggers+=EventSpec ("," triggers+=EventSpec)*
 		public Group getGroup_0() { return cGroup_0; }
 
-		//triggers+=[sct::Event]
+		//triggers+=EventSpec
 		public Assignment getTriggersAssignment_0_0() { return cTriggersAssignment_0_0; }
 
-		//[sct::Event]
-		public CrossReference getTriggersEventCrossReference_0_0_0() { return cTriggersEventCrossReference_0_0_0; }
+		//EventSpec
+		public RuleCall getTriggersEventSpecParserRuleCall_0_0_0() { return cTriggersEventSpecParserRuleCall_0_0_0; }
 
-		//ID
-		public RuleCall getTriggersEventIDTerminalRuleCall_0_0_0_1() { return cTriggersEventIDTerminalRuleCall_0_0_0_1; }
-
-		//("," triggers+=[sct::Event])*
+		//("," triggers+=EventSpec)*
 		public Group getGroup_0_1() { return cGroup_0_1; }
 
 		//","
 		public Keyword getCommaKeyword_0_1_0() { return cCommaKeyword_0_1_0; }
 
-		//triggers+=[sct::Event]
+		//triggers+=EventSpec
 		public Assignment getTriggersAssignment_0_1_1() { return cTriggersAssignment_0_1_1; }
 
-		//[sct::Event]
-		public CrossReference getTriggersEventCrossReference_0_1_1_0() { return cTriggersEventCrossReference_0_1_1_0; }
-
-		//ID
-		public RuleCall getTriggersEventIDTerminalRuleCall_0_1_1_0_1() { return cTriggersEventIDTerminalRuleCall_0_1_1_0_1; }
+		//EventSpec
+		public RuleCall getTriggersEventSpecParserRuleCall_0_1_1_0() { return cTriggersEventSpecParserRuleCall_0_1_1_0; }
 
 		//("[" guardExpression=LogicalOrExpression "]")?
 		public Group getGroup_1() { return cGroup_1; }
@@ -961,6 +953,166 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 
 		//">"
 		public Keyword getGreaterThanSignKeyword_1() { return cGreaterThanSignKeyword_1; }
+	}
+
+	public class EventSpecElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EventSpec");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cRegularEventSpecParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cTimeEventSpecParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cBuiltinEventSpecParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		
+		//EventSpec:
+		//	RegularEventSpec | TimeEventSpec | BuiltinEventSpec;
+		public ParserRule getRule() { return rule; }
+
+		//RegularEventSpec | TimeEventSpec | BuiltinEventSpec
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//RegularEventSpec
+		public RuleCall getRegularEventSpecParserRuleCall_0() { return cRegularEventSpecParserRuleCall_0; }
+
+		//TimeEventSpec
+		public RuleCall getTimeEventSpecParserRuleCall_1() { return cTimeEventSpecParserRuleCall_1; }
+
+		//BuiltinEventSpec
+		public RuleCall getBuiltinEventSpecParserRuleCall_2() { return cBuiltinEventSpecParserRuleCall_2; }
+	}
+
+	public class RegularEventSpecElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "RegularEventSpec");
+		private final Assignment cEventAssignment = (Assignment)rule.eContents().get(1);
+		private final CrossReference cEventEventCrossReference_0 = (CrossReference)cEventAssignment.eContents().get(0);
+		private final RuleCall cEventEventIDTerminalRuleCall_0_1 = (RuleCall)cEventEventCrossReference_0.eContents().get(1);
+		
+		//RegularEventSpec:
+		//	event=[sct::Event];
+		public ParserRule getRule() { return rule; }
+
+		//event=[sct::Event]
+		public Assignment getEventAssignment() { return cEventAssignment; }
+
+		//[sct::Event]
+		public CrossReference getEventEventCrossReference_0() { return cEventEventCrossReference_0; }
+
+		//ID
+		public RuleCall getEventEventIDTerminalRuleCall_0_1() { return cEventEventIDTerminalRuleCall_0_1; }
+	}
+
+	public class TimeEventSpecElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TimeEventSpec");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cAfterKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cValueAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cValueINTTerminalRuleCall_1_0 = (RuleCall)cValueAssignment_1.eContents().get(0);
+		private final Assignment cUnitAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cUnitTimeUnitEnumRuleCall_2_0 = (RuleCall)cUnitAssignment_2.eContents().get(0);
+		
+		//TimeEventSpec:
+		//	"after" value=INT unit=TimeUnit?;
+		public ParserRule getRule() { return rule; }
+
+		//"after" value=INT unit=TimeUnit?
+		public Group getGroup() { return cGroup; }
+
+		//"after"
+		public Keyword getAfterKeyword_0() { return cAfterKeyword_0; }
+
+		//value=INT
+		public Assignment getValueAssignment_1() { return cValueAssignment_1; }
+
+		//INT
+		public RuleCall getValueINTTerminalRuleCall_1_0() { return cValueINTTerminalRuleCall_1_0; }
+
+		//unit=TimeUnit?
+		public Assignment getUnitAssignment_2() { return cUnitAssignment_2; }
+
+		//TimeUnit
+		public RuleCall getUnitTimeUnitEnumRuleCall_2_0() { return cUnitTimeUnitEnumRuleCall_2_0; }
+	}
+
+	public class BuiltinEventSpecElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "BuiltinEventSpec");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cEnterEventParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cExitEventParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cOnCycleEventParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		
+		//BuiltinEventSpec:
+		//	EnterEvent | ExitEvent | OnCycleEvent;
+		public ParserRule getRule() { return rule; }
+
+		//EnterEvent | ExitEvent | OnCycleEvent
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//EnterEvent
+		public RuleCall getEnterEventParserRuleCall_0() { return cEnterEventParserRuleCall_0; }
+
+		//ExitEvent
+		public RuleCall getExitEventParserRuleCall_1() { return cExitEventParserRuleCall_1; }
+
+		//OnCycleEvent
+		public RuleCall getOnCycleEventParserRuleCall_2() { return cOnCycleEventParserRuleCall_2; }
+	}
+
+	public class EnterEventElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EnterEvent");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cEnterEventAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cEnterKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		
+		//EnterEvent:
+		//	{EnterEvent} "enter";
+		public ParserRule getRule() { return rule; }
+
+		//{EnterEvent} "enter"
+		public Group getGroup() { return cGroup; }
+
+		//{EnterEvent}
+		public Action getEnterEventAction_0() { return cEnterEventAction_0; }
+
+		//"enter"
+		public Keyword getEnterKeyword_1() { return cEnterKeyword_1; }
+	}
+
+	public class ExitEventElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ExitEvent");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cExitEventAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cExitKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		
+		//ExitEvent:
+		//	{ExitEvent} "exit";
+		public ParserRule getRule() { return rule; }
+
+		//{ExitEvent} "exit"
+		public Group getGroup() { return cGroup; }
+
+		//{ExitEvent}
+		public Action getExitEventAction_0() { return cExitEventAction_0; }
+
+		//"exit"
+		public Keyword getExitKeyword_1() { return cExitKeyword_1; }
+	}
+
+	public class OnCycleEventElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "OnCycleEvent");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cOnCycleEventAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cOncycleKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		
+		//OnCycleEvent:
+		//	{OnCycleEvent} "oncycle";
+		public ParserRule getRule() { return rule; }
+
+		//{OnCycleEvent} "oncycle"
+		public Group getGroup() { return cGroup; }
+
+		//{OnCycleEvent}
+		public Action getOnCycleEventAction_0() { return cOnCycleEventAction_0; }
+
+		//"oncycle"
+		public Keyword getOncycleKeyword_1() { return cOncycleKeyword_1; }
 	}
 
 	public class StateExpressionElements extends AbstractParserRuleElementFinder {
@@ -1880,6 +2032,13 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 	private ReactionPriorityElements pReactionPriority;
 	private EntryPointSpecElements pEntryPointSpec;
 	private ExitPointSpecElements pExitPointSpec;
+	private EventSpecElements pEventSpec;
+	private RegularEventSpecElements pRegularEventSpec;
+	private TimeEventSpecElements pTimeEventSpec;
+	private BuiltinEventSpecElements pBuiltinEventSpec;
+	private EnterEventElements pEnterEvent;
+	private ExitEventElements pExitEvent;
+	private OnCycleEventElements pOnCycleEvent;
 	private StateExpressionElements pStateExpression;
 	private EntryExpressionElements pEntryExpression;
 	private ExitExpressionElements pExitExpression;
@@ -2132,7 +2291,7 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//VariableDefinition:
-	//	"var" (readonly?="readonly"? & external?="external"?) name=ID ":" type=Type ("=" value=Literal)?;
+	//	"var" (readonly?="readonly"? & external?="external"?) name=ID ":" type=Type ("=" initialValue=Literal)?;
 	public VariableDefinitionElements getVariableDefinitionAccess() {
 		return (pVariableDefinition != null) ? pVariableDefinition : (pVariableDefinition = new VariableDefinitionElements());
 	}
@@ -2194,7 +2353,7 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ReactionTrigger:
-	//	(triggers+=[sct::Event] ("," triggers+=[sct::Event])*) ("[" guardExpression=LogicalOrExpression "]")?;
+	//	(triggers+=EventSpec ("," triggers+=EventSpec)*) ("[" guardExpression=LogicalOrExpression "]")?;
 	public ReactionTriggerElements getReactionTriggerAccess() {
 		return (pReactionTrigger != null) ? pReactionTrigger : (pReactionTrigger = new ReactionTriggerElements());
 	}
@@ -2261,6 +2420,76 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getExitPointSpecRule() {
 		return getExitPointSpecAccess().getRule();
+	}
+
+	//EventSpec:
+	//	RegularEventSpec | TimeEventSpec | BuiltinEventSpec;
+	public EventSpecElements getEventSpecAccess() {
+		return (pEventSpec != null) ? pEventSpec : (pEventSpec = new EventSpecElements());
+	}
+	
+	public ParserRule getEventSpecRule() {
+		return getEventSpecAccess().getRule();
+	}
+
+	//RegularEventSpec:
+	//	event=[sct::Event];
+	public RegularEventSpecElements getRegularEventSpecAccess() {
+		return (pRegularEventSpec != null) ? pRegularEventSpec : (pRegularEventSpec = new RegularEventSpecElements());
+	}
+	
+	public ParserRule getRegularEventSpecRule() {
+		return getRegularEventSpecAccess().getRule();
+	}
+
+	//TimeEventSpec:
+	//	"after" value=INT unit=TimeUnit?;
+	public TimeEventSpecElements getTimeEventSpecAccess() {
+		return (pTimeEventSpec != null) ? pTimeEventSpec : (pTimeEventSpec = new TimeEventSpecElements());
+	}
+	
+	public ParserRule getTimeEventSpecRule() {
+		return getTimeEventSpecAccess().getRule();
+	}
+
+	//BuiltinEventSpec:
+	//	EnterEvent | ExitEvent | OnCycleEvent;
+	public BuiltinEventSpecElements getBuiltinEventSpecAccess() {
+		return (pBuiltinEventSpec != null) ? pBuiltinEventSpec : (pBuiltinEventSpec = new BuiltinEventSpecElements());
+	}
+	
+	public ParserRule getBuiltinEventSpecRule() {
+		return getBuiltinEventSpecAccess().getRule();
+	}
+
+	//EnterEvent:
+	//	{EnterEvent} "enter";
+	public EnterEventElements getEnterEventAccess() {
+		return (pEnterEvent != null) ? pEnterEvent : (pEnterEvent = new EnterEventElements());
+	}
+	
+	public ParserRule getEnterEventRule() {
+		return getEnterEventAccess().getRule();
+	}
+
+	//ExitEvent:
+	//	{ExitEvent} "exit";
+	public ExitEventElements getExitEventAccess() {
+		return (pExitEvent != null) ? pExitEvent : (pExitEvent = new ExitEventElements());
+	}
+	
+	public ParserRule getExitEventRule() {
+		return getExitEventAccess().getRule();
+	}
+
+	//OnCycleEvent:
+	//	{OnCycleEvent} "oncycle";
+	public OnCycleEventElements getOnCycleEventAccess() {
+		return (pOnCycleEvent != null) ? pOnCycleEvent : (pOnCycleEvent = new OnCycleEventElements());
+	}
+	
+	public ParserRule getOnCycleEventRule() {
+		return getOnCycleEventAccess().getRule();
 	}
 
 	//// ****************

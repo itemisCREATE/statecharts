@@ -18,10 +18,10 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.yakindu.model.sct.statechart.Event;
-
+import org.yakindu.sct.statechart.expressions.EventSpec;
 import org.yakindu.sct.statechart.expressions.Expression;
 import org.yakindu.sct.statechart.expressions.ExpressionsPackage;
 import org.yakindu.sct.statechart.expressions.ReactionTrigger;
@@ -43,14 +43,14 @@ import org.yakindu.sct.statechart.expressions.ReactionTrigger;
 public class ReactionTriggerImpl extends MinimalEObjectImpl.Container implements ReactionTrigger
 {
   /**
-   * The cached value of the '{@link #getTriggers() <em>Triggers</em>}' reference list.
+   * The cached value of the '{@link #getTriggers() <em>Triggers</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getTriggers()
    * @generated
    * @ordered
    */
-  protected EList<Event> triggers;
+  protected EList<EventSpec> triggers;
 
   /**
    * The cached value of the '{@link #getGuardExpression() <em>Guard Expression</em>}' containment reference.
@@ -88,11 +88,11 @@ public class ReactionTriggerImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Event> getTriggers()
+  public EList<EventSpec> getTriggers()
   {
     if (triggers == null)
     {
-      triggers = new EObjectResolvingEList<Event>(Event.class, this, ExpressionsPackage.REACTION_TRIGGER__TRIGGERS);
+      triggers = new EObjectContainmentEList<EventSpec>(EventSpec.class, this, ExpressionsPackage.REACTION_TRIGGER__TRIGGERS);
     }
     return triggers;
   }
@@ -155,6 +155,8 @@ public class ReactionTriggerImpl extends MinimalEObjectImpl.Container implements
   {
     switch (featureID)
     {
+      case ExpressionsPackage.REACTION_TRIGGER__TRIGGERS:
+        return ((InternalEList<?>)getTriggers()).basicRemove(otherEnd, msgs);
       case ExpressionsPackage.REACTION_TRIGGER__GUARD_EXPRESSION:
         return basicSetGuardExpression(null, msgs);
     }
@@ -192,7 +194,7 @@ public class ReactionTriggerImpl extends MinimalEObjectImpl.Container implements
     {
       case ExpressionsPackage.REACTION_TRIGGER__TRIGGERS:
         getTriggers().clear();
-        getTriggers().addAll((Collection<? extends Event>)newValue);
+        getTriggers().addAll((Collection<? extends EventSpec>)newValue);
         return;
       case ExpressionsPackage.REACTION_TRIGGER__GUARD_EXPRESSION:
         setGuardExpression((Expression)newValue);

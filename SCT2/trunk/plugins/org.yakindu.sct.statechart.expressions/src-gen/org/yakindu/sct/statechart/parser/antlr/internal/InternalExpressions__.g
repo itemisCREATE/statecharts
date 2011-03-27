@@ -30,56 +30,63 @@ T32 : '#' ;
 T33 : '[' ;
 T34 : ']' ;
 T35 : '>' ;
-T36 : 'entry:' ;
-T37 : 'exit:' ;
-T38 : 'do:' ;
-T39 : 'raise' ;
-T40 : '||' ;
-T41 : '&&' ;
-T42 : '!' ;
-T43 : 'in' ;
-T44 : 'out' ;
-T45 : '+' ;
-T46 : '-' ;
-T47 : '*' ;
-T48 : '%' ;
-T49 : '~' ;
-T50 : '<' ;
-T51 : '<=' ;
-T52 : '>=' ;
-T53 : '==' ;
-T54 : '!=' ;
-T55 : 'void' ;
-T56 : 'integer' ;
-T57 : 'real' ;
-T58 : 'boolean' ;
-T59 : 'string' ;
+T36 : 'after' ;
+T37 : 'enter' ;
+T38 : 'exit' ;
+T39 : 'oncycle' ;
+T40 : 'entry:' ;
+T41 : 'exit:' ;
+T42 : 'do:' ;
+T43 : 'raise' ;
+T44 : '||' ;
+T45 : '&&' ;
+T46 : '!' ;
+T47 : 'in' ;
+T48 : 'out' ;
+T49 : '+' ;
+T50 : '-' ;
+T51 : '*' ;
+T52 : '%' ;
+T53 : '~' ;
+T54 : '<' ;
+T55 : '<=' ;
+T56 : '>=' ;
+T57 : '==' ;
+T58 : '!=' ;
+T59 : 's' ;
+T60 : 'ms' ;
+T61 : 'ns' ;
+T62 : 'void' ;
+T63 : 'integer' ;
+T64 : 'real' ;
+T65 : 'boolean' ;
+T66 : 'string' ;
 
-// $ANTLR src "../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g" 3275
+// $ANTLR src "../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g" 3650
 RULE_BOOL : ('true'|'false');
 
-// $ANTLR src "../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g" 3277
+// $ANTLR src "../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g" 3652
 RULE_FLOAT : ('-'|'+')? RULE_INT '.' RULE_INT ('e' ('-'|'+') RULE_INT)?;
 
-// $ANTLR src "../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g" 3279
+// $ANTLR src "../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g" 3654
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
-// $ANTLR src "../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g" 3281
+// $ANTLR src "../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g" 3656
 RULE_INT : ('0'..'9')+;
 
-// $ANTLR src "../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g" 3283
+// $ANTLR src "../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g" 3658
 RULE_STRING : ('"' ('\\' ('b'|'t'|'n'|'f'|'r'|'"'|'\''|'\\')|~(('\\'|'"')))* '"'|'\'' ('\\' ('b'|'t'|'n'|'f'|'r'|'"'|'\''|'\\')|~(('\\'|'\'')))* '\'');
 
-// $ANTLR src "../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g" 3285
+// $ANTLR src "../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g" 3660
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
-// $ANTLR src "../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g" 3287
+// $ANTLR src "../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g" 3662
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 
-// $ANTLR src "../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g" 3289
+// $ANTLR src "../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g" 3664
 RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
-// $ANTLR src "../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g" 3291
+// $ANTLR src "../org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/parser/antlr/internal/InternalExpressions.g" 3666
 RULE_ANY_OTHER : .;
 
 

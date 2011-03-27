@@ -79,7 +79,7 @@ enum Direction: IN='in' | OUT='out';
 SCTVariable returns sct::Variable: VariableDefinition; // hook VariableDefinition into statechart inheritance hiearchy
 
 VariableDefinition:
-	 'var' ((readonly?='readonly')? & (external?='external')?) name=ID ':' type=Type ('=' value=Literal)?;
+	 'var' ((readonly?='readonly')? & (external?='external')?) name=ID ':' type=Type ('=' initialValue=Literal)?;
 
 
 /* ---- clock definition ---- */
@@ -106,7 +106,7 @@ Reaction:
 	(trigger=ReactionTrigger) ('/' action=Action)? ('#' properties=ReactionProperties)?;
 
 ReactionTrigger:	
-	(triggers+=[sct::Event] ("," triggers+=[sct::Event])*)
+	(triggers+=EventSpec ("," triggers+=EventSpec)*)
 	('[' guardExpression=LogicalOrExpression ']')?;
 	
 Action:	
@@ -125,8 +125,21 @@ EntryPointSpec:
 ExitPointSpec:
 	exitpoint=[Exitpoint] '>';
 
+EventSpec: RegularEventSpec | TimeEventSpec | BuiltinEventSpec;
 
-	
+RegularEventSpec: event=[sct::Event];
+
+// TODO: redefine after trigger - we need to use it with clocks
+TimeEventSpec: 'after' value = INT (unit = TimeUnit)?;
+
+// TODO: add dereived events like in(state), entered(state)	
+BuiltinEventSpec: EnterEvent | ExitEvent | OnCycleEvent;
+
+EnterEvent: {EnterEvent} 'enter';
+ExitEvent: {ExitEvent} 'exit';
+OnCycleEvent: {OnCycleEvent} 'oncycle';
+
+
 
 //****************
 // State Expression
