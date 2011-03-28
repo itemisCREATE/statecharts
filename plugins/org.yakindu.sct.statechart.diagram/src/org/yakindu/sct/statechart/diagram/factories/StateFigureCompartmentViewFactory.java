@@ -1,14 +1,23 @@
+/**
+ * Copyright (c) 2010 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * Contributors:
+ * 	committers of YAKINDU - initial API and implementation
+ * 
+ */
 package org.yakindu.sct.statechart.diagram.factories;
 
-import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.gmf.runtime.diagram.ui.view.factories.optimal.CompartmentViewFactory;
-import org.eclipse.gmf.runtime.notation.Compartment;
-import org.eclipse.gmf.runtime.notation.LayoutConstraint;
-import org.eclipse.gmf.runtime.notation.NotationFactory;
-import org.eclipse.gmf.runtime.notation.Ratio;
 import org.eclipse.gmf.runtime.notation.View;
-
+/**
+ * 
+ * @author muelder
+ *
+ */
 public class StateFigureCompartmentViewFactory extends CompartmentViewFactory {
 
 	@Override
@@ -18,14 +27,6 @@ public class StateFigureCompartmentViewFactory extends CompartmentViewFactory {
 		super.decorateView(containerView, view, semanticAdapter, semanticHint,
 				index, persisted);
 
-		Assert.isTrue(view instanceof Compartment);
-	}
-
-	@Override
-	protected LayoutConstraint createLayoutConstraint() {
-		Ratio ratio = NotationFactory.eINSTANCE.createRatio();
-		ratio.setValue(0.5);
-		return ratio;
 	}
 	
 }

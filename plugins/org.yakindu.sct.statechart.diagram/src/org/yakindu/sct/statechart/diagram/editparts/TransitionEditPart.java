@@ -18,9 +18,8 @@ import org.yakindu.sct.statechart.diagram.editor.figures.TransitionFigure;
 
 /**
  * 
- * @author Andreas Muelder <a
- *         href="mailto:andreas.muelder@itemis.de">andreas.muelder@itemis.de</a>
- * 
+ * @author muelder
+ *
  */
 public class TransitionEditPart extends ConnectionNodeEditPart {
 

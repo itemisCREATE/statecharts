@@ -4,8 +4,8 @@
  */
 package org.yakindu.sct.statechart.ui;
 
-import org.eclipse.xtext.ui.DefaultUiModule;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.ui.DefaultUiModule;
 
 /**
  * Manual modifications go to {org.yakindu.sct.statechart.ui.ExpressionsUiModule}

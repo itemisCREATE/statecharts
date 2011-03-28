@@ -10,6 +10,8 @@
  */
 package org.yakindu.sct.statechart.diagram.factories;
 
+import java.util.List;
+
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.emf.ecore.EObject;
@@ -17,9 +19,12 @@ import org.eclipse.gmf.runtime.diagram.core.util.ViewUtil;
 import org.eclipse.gmf.runtime.diagram.ui.view.factories.AbstractShapeViewFactory;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.FigureUtilities;
 import org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter;
+import org.eclipse.gmf.runtime.notation.NotationFactory;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.ShapeStyle;
+import org.eclipse.gmf.runtime.notation.Style;
 import org.eclipse.gmf.runtime.notation.View;
+import org.yakindu.sct.statechart.diagram.preferences.StatechartColorConstants;
 import org.yakindu.sct.statechart.diagram.providers.SemanticHints;
 
 /**
@@ -40,20 +45,34 @@ public class StateViewFactory extends AbstractShapeViewFactory {
 		if (eObject != null) {
 			eObjectAdapter = new EObjectAdapter(eObject);
 		}
+		// Create text and figure compartment
 
 		FactoryUtils.createLabel(view, SemanticHints.STATE_NAME);
 		getViewService().createNode(eObjectAdapter, view,
 				SemanticHints.STATE_TEXT_COMPARTMENT, ViewUtil.APPEND, true,
 				getPreferencesHint());
+		
 
 		getViewService().createNode(eObjectAdapter, view,
 				SemanticHints.STATE_FIGURE_COMPARTMENT, ViewUtil.APPEND, true,
 				getPreferencesHint());
 
-		ShapeStyle style = (ShapeStyle) view.getStyle(NotationPackage.eINSTANCE
-				.getShapeStyle());
-		style.setLineColor(FigureUtilities.RGBToInteger(ColorConstants.darkGray
-				.getRGB()));
+		// Create states default styles
+		ShapeStyle style = (ShapeStyle) view
+				.getStyle(NotationPackage.Literals.SHAPE_STYLE);
+		style.setFillColor(FigureUtilities
+				.RGBToInteger(StatechartColorConstants.STATE_BG_COLOR.getRGB()));
+		style.setLineColor(FigureUtilities
+				.RGBToInteger(ColorConstants.lightGray.getRGB()));
+		
+	}
+	
+	@Override
+	protected List<Style> createStyles(View view) {
+		@SuppressWarnings("unchecked")
+		List<Style> styles = super.createStyles(view);
+		styles.add(NotationFactory.eINSTANCE.createFontStyle());
+		return styles;
 	}
 
 }

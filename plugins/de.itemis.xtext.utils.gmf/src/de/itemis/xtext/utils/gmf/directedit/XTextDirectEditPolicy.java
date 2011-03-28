@@ -23,6 +23,8 @@ public abstract class XTextDirectEditPolicy<T extends EObject> extends DirectEdi
 	protected Command getDirectEditCommand(DirectEditRequest edit) {
 		Assert.isTrue(edit.getCellEditor() instanceof XTextCellEditor);
 		XTextCellEditor cellEditor = (XTextCellEditor) edit.getCellEditor();
+		//TODO: We have to create Problem Markers for errors 
+		@SuppressWarnings("unused")
 		List<Diagnostic> diagnostics = cellEditor.getDiagnostics();
 		IParseResult result = cellEditor.getParseResult();
 		return getDirectEditCommand(edit, (T)result.getRootASTElement());

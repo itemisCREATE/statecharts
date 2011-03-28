@@ -2,21 +2,18 @@
  * <copyright>
  * </copyright>
  *
+
  */
 package org.yakindu.sct.statechart.expressions.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.yakindu.model.sct.statechart.Event;
 import org.yakindu.model.sct.statechart.NamedElement;
 import org.yakindu.model.sct.statechart.StatechartPackage;
-
 import org.yakindu.sct.statechart.expressions.Direction;
 import org.yakindu.sct.statechart.expressions.EventDefinition;
 import org.yakindu.sct.statechart.expressions.EventDerivation;

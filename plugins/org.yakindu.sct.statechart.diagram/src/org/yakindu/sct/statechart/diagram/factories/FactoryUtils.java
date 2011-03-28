@@ -10,14 +10,17 @@
  */
 package org.yakindu.sct.statechart.diagram.factories;
 
+import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.gmf.runtime.diagram.core.services.ViewService;
 import org.eclipse.gmf.runtime.diagram.core.util.ViewUtil;
+import org.eclipse.gmf.runtime.draw2d.ui.figures.FigureUtilities;
 import org.eclipse.gmf.runtime.notation.Bounds;
 import org.eclipse.gmf.runtime.notation.DecorationNode;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.Node;
 import org.eclipse.gmf.runtime.notation.NotationFactory;
+import org.eclipse.gmf.runtime.notation.ShapeStyle;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.model.sct.statechart.InitialState;
 import org.yakindu.model.sct.statechart.Region;
@@ -30,8 +33,7 @@ import org.yakindu.sct.statechart.diagram.providers.SemanticHints;
 /**
  * Convenience methods for semantic and notation model element creation.
  * 
- * @author Andreas Muelder <a
- *         href="mailto:andreas.muelder@itemis.de">andreas.muelder@itemis.de</a>
+ * @author muelder
  * 
  */
 public final class FactoryUtils {
@@ -41,7 +43,7 @@ public final class FactoryUtils {
 	private static final String INITIAL_REGION_NAME = "main region";
 	private static final int INITIAL_TEXT_COMPARTMENT_HEIGHT = 600;
 	private static final int INITIAL_TEXT_COMPARTMENT_WIDTH = 200;
-	
+
 	private static final int SPACING = 50;
 
 	private FactoryUtils() {
@@ -54,10 +56,17 @@ public final class FactoryUtils {
 	 * @param hint
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public static Node createLabel(View owner, String hint) {
 		DecorationNode nameLabel = NotationFactory.eINSTANCE
 				.createDecorationNode();
 		nameLabel.setType(hint);
+
+		ShapeStyle style = NotationFactory.eINSTANCE.createShapeStyle();
+		style.setFontColor(FigureUtilities.RGBToInteger(ColorConstants.black
+				.getRGB()));
+		nameLabel.getStyles().add(style);
+
 		ViewUtil.insertChildView(owner, nameLabel, ViewUtil.APPEND, true);
 		nameLabel.setLayoutConstraint(NotationFactory.eINSTANCE
 				.createLocation());
@@ -83,9 +92,9 @@ public final class FactoryUtils {
 		Region region = StatechartFactory.eINSTANCE.createRegion();
 		region.setName(INITIAL_REGION_NAME);
 		statechart.getRegions().add(region);
-		Node regionView = ViewService.createNode(diagram, region,
-				SemanticHints.REGION,
-				DiagramActivator.DIAGRAM_PREFERENCES_HINT);
+		Node regionView = ViewService
+				.createNode(diagram, region, SemanticHints.REGION,
+						DiagramActivator.DIAGRAM_PREFERENCES_HINT);
 		setRegionViewLayoutConstraint(regionView);
 		// // Create an initial state
 		InitialState initialState = StatechartFactory.eINSTANCE
@@ -96,14 +105,13 @@ public final class FactoryUtils {
 				SemanticHints.INITIALSTATE,
 				DiagramActivator.DIAGRAM_PREFERENCES_HINT);
 		setInitialStateViewLayoutConstraint(initialStateView);
-		//Create the textcompartment for events / variables
-		Node textCompartment = ViewService.createNode(diagram,statechart,
+		// Create the textcompartment for events / variables
+		Node textCompartment = ViewService.createNode(diagram, statechart,
 				SemanticHints.STATECHART_TEXT,
 				DiagramActivator.DIAGRAM_PREFERENCES_HINT);
 		setTextCompartmentLayoutConstraint(textCompartment);
-		
-	}
 
+	}
 
 	private static void setInitialStateViewLayoutConstraint(
 			Node initialStateView) {
@@ -116,7 +124,7 @@ public final class FactoryUtils {
 	private static View getRegionCompartmentView(View regionView) {
 		return (View) regionView.getChildren().get(1);
 	}
-	
+
 	private static void setTextCompartmentLayoutConstraint(Node textCompartment) {
 		Bounds bounds = NotationFactory.eINSTANCE.createBounds();
 		bounds.setHeight(INITIAL_TEXT_COMPARTMENT_HEIGHT);

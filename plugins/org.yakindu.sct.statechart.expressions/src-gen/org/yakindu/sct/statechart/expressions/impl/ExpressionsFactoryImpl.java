@@ -2,6 +2,7 @@
  * <copyright>
  * </copyright>
  *
+
  */
 package org.yakindu.sct.statechart.expressions.impl;
 
@@ -9,12 +10,69 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-
-import org.yakindu.sct.statechart.expressions.*;
+import org.yakindu.sct.statechart.expressions.Action;
+import org.yakindu.sct.statechart.expressions.AdditiveOperator;
+import org.yakindu.sct.statechart.expressions.AlwaysEvent;
+import org.yakindu.sct.statechart.expressions.BuiltinEventSpec;
+import org.yakindu.sct.statechart.expressions.Clock;
+import org.yakindu.sct.statechart.expressions.DefRoot;
+import org.yakindu.sct.statechart.expressions.Definition;
+import org.yakindu.sct.statechart.expressions.Direction;
+import org.yakindu.sct.statechart.expressions.DirectionKind;
+import org.yakindu.sct.statechart.expressions.EnterEvent;
+import org.yakindu.sct.statechart.expressions.EntryPointSpec;
+import org.yakindu.sct.statechart.expressions.Entrypoint;
+import org.yakindu.sct.statechart.expressions.EventDefinition;
+import org.yakindu.sct.statechart.expressions.EventDerivation;
+import org.yakindu.sct.statechart.expressions.EventSpec;
+import org.yakindu.sct.statechart.expressions.ExitEvent;
+import org.yakindu.sct.statechart.expressions.ExitPointSpec;
+import org.yakindu.sct.statechart.expressions.Exitpoint;
+import org.yakindu.sct.statechart.expressions.Expression;
+import org.yakindu.sct.statechart.expressions.ExpressionRule;
+import org.yakindu.sct.statechart.expressions.ExpressionsFactory;
+import org.yakindu.sct.statechart.expressions.ExpressionsPackage;
+import org.yakindu.sct.statechart.expressions.InterfaceScope;
+import org.yakindu.sct.statechart.expressions.InternalScope;
+import org.yakindu.sct.statechart.expressions.LocalReaction;
+import org.yakindu.sct.statechart.expressions.LogicalAndExpression;
+import org.yakindu.sct.statechart.expressions.LogicalNotExpression;
+import org.yakindu.sct.statechart.expressions.LogicalOrExpression;
+import org.yakindu.sct.statechart.expressions.LogicalRelationExpression;
+import org.yakindu.sct.statechart.expressions.MultiplicativeOperator;
+import org.yakindu.sct.statechart.expressions.NumericalAddSubtractExpression;
+import org.yakindu.sct.statechart.expressions.NumericalMultiplyDivideExpression;
+import org.yakindu.sct.statechart.expressions.NumericalUnaryExpression;
+import org.yakindu.sct.statechart.expressions.OnCycleEvent;
+import org.yakindu.sct.statechart.expressions.Operation;
+import org.yakindu.sct.statechart.expressions.PrimitiveValueExpression;
+import org.yakindu.sct.statechart.expressions.PropertyReferenceExpression;
+import org.yakindu.sct.statechart.expressions.RaiseEventExpression;
+import org.yakindu.sct.statechart.expressions.Reaction;
+import org.yakindu.sct.statechart.expressions.ReactionPriority;
+import org.yakindu.sct.statechart.expressions.ReactionProperties;
+import org.yakindu.sct.statechart.expressions.ReactionProperty;
+import org.yakindu.sct.statechart.expressions.ReactionTrigger;
+import org.yakindu.sct.statechart.expressions.RegularEventSpec;
+import org.yakindu.sct.statechart.expressions.RelationalOperator;
+import org.yakindu.sct.statechart.expressions.Root;
+import org.yakindu.sct.statechart.expressions.Scope;
+import org.yakindu.sct.statechart.expressions.SimpleScope;
+import org.yakindu.sct.statechart.expressions.StateDefinition;
+import org.yakindu.sct.statechart.expressions.StateRoot;
+import org.yakindu.sct.statechart.expressions.StatechartDefinition;
+import org.yakindu.sct.statechart.expressions.StatechartRoot;
+import org.yakindu.sct.statechart.expressions.StatechartScope;
+import org.yakindu.sct.statechart.expressions.TimeEventSpec;
+import org.yakindu.sct.statechart.expressions.TimeUnit;
+import org.yakindu.sct.statechart.expressions.TransitionReaction;
+import org.yakindu.sct.statechart.expressions.TransitionRoot;
+import org.yakindu.sct.statechart.expressions.TransitionStatement;
+import org.yakindu.sct.statechart.expressions.Type;
+import org.yakindu.sct.statechart.expressions.UnaryOperator;
+import org.yakindu.sct.statechart.expressions.VariableDefinition;
 
 /**
  * <!-- begin-user-doc -->

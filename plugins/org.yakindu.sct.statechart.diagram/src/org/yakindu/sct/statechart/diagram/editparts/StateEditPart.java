@@ -23,11 +23,9 @@ import org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewAndElementRequest;
 import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.View;
-import org.eclipse.swt.graphics.Color;
 import org.yakindu.sct.statechart.diagram.editor.figures.StateFigure;
 import org.yakindu.sct.statechart.diagram.editor.figures.utils.MapModeUtils;
 import org.yakindu.sct.statechart.diagram.policies.RelationshipSemanticEditPolicy;
-import org.yakindu.sct.statechart.diagram.preferences.StatechartPreferenceManager;
 
 /**
  * 
@@ -53,15 +51,6 @@ public class StateEditPart extends ShapeNodeEditPart implements
 	}
 
 	@Override
-	public IFigure getFigure() {
-		IFigure figure = super.getFigure();
-		Color stateColor = StatechartPreferenceManager.getInstance()
-				.getStateColor();
-		figure.setBackgroundColor(stateColor);
-		return figure;
-	}
-
-	@Override
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
 		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE,
@@ -76,13 +65,14 @@ public class StateEditPart extends ShapeNodeEditPart implements
 					}
 				});
 	}
+	
 
 	@Override
 	public IFigure getContentPane() {
 		return getPrimaryShape().getFigureCompartmentPane();
 	}
 
-	private StateFigure getPrimaryShape() {
+	public StateFigure getPrimaryShape() {
 		return (StateFigure) getFigure().getChildren().get(0);
 	}
 

@@ -1,25 +1,20 @@
 package org.yakindu.sct.statechart.diagram.factories;
 
-import java.util.Collections;
-import java.util.List;
-
 import org.eclipse.core.runtime.IAdaptable;
-import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.diagram.core.util.ViewUtil;
 import org.eclipse.gmf.runtime.diagram.ui.view.factories.AbstractShapeViewFactory;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.FigureUtilities;
 import org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter;
-import org.eclipse.gmf.runtime.notation.NotationFactory;
+import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.ShapeStyle;
-import org.eclipse.gmf.runtime.notation.Style;
 import org.eclipse.gmf.runtime.notation.View;
+import org.yakindu.sct.statechart.diagram.preferences.StatechartColorConstants;
 import org.yakindu.sct.statechart.diagram.providers.SemanticHints;
 
 /**
  * 
- * @author Andreas Muelder <a
- *         href="mailto:andreas.muelder@itemis.de">andreas.muelder@itemis.de</a>
+ * @author muelder
  * 
  */
 public class RegionViewFactory extends AbstractShapeViewFactory {
@@ -32,6 +27,7 @@ public class RegionViewFactory extends AbstractShapeViewFactory {
 		super.decorateView(containerView, view, semanticAdapter, semanticHint,
 				index, persisted);
 
+		// Create the region compartment
 		IAdaptable eObjectAdapter = null;
 		EObject eObject = (EObject) semanticAdapter.getAdapter(EObject.class);
 		if (eObject != null) {
@@ -42,14 +38,11 @@ public class RegionViewFactory extends AbstractShapeViewFactory {
 		getViewService().createNode(eObjectAdapter, view,
 				SemanticHints.REGION_COMPARTMENT, ViewUtil.APPEND, true,
 				getPreferencesHint());
-	}
 
-	@Override
-	protected List<Style> createStyles(View view) {
-		ShapeStyle style = NotationFactory.eINSTANCE.createShapeStyle();
-		style.setLineColor(FigureUtilities.RGBToInteger(ColorConstants.darkGray
-				.getRGB()));
-		return Collections.singletonList((Style) style);
+		// Create regions default style
+		ShapeStyle style = (ShapeStyle) view
+				.getStyle(NotationPackage.Literals.SHAPE_STYLE);
+		style.setFillColor(FigureUtilities
+				.RGBToInteger(StatechartColorConstants.REGION_BG_COLOR.getRGB()));
 	}
-
 }
