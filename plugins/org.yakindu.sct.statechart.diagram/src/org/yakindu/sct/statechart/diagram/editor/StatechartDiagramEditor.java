@@ -38,7 +38,7 @@ public class StatechartDiagramEditor extends DiagramDocumentEditor implements IG
 	@Override
 	public void doSave(IProgressMonitor progressMonitor) {
 		Display.getDefault().asyncExec(new Runnable() {
-			@Override
+			
 			public void run() {
 				if(getDiagram() != null){
 				ValidationAction.validate(getDiagramEditPart(), getDiagram());

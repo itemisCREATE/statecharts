@@ -27,7 +27,7 @@ import org.eclipse.swt.graphics.Image;
  */
 public class SheetLabelProvider extends BaseLabelProvider implements ILabelProvider {
 
-	@Override
+	
 	public String getText(Object element) {
 		element = unwrap(element);
 		if (element instanceof IGraphicalEditPart) {
@@ -38,7 +38,7 @@ public class SheetLabelProvider extends BaseLabelProvider implements ILabelProvi
 		return null;
 	}
 
-	@Override
+	
 	public Image getImage(Object element) {
 		element = unwrap(element);
 		// TODO

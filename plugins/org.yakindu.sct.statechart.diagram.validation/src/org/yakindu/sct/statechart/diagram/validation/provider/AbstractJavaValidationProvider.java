@@ -57,7 +57,7 @@ public abstract class AbstractJavaValidationProvider implements
 		}
 	}
 
-	@Override
+	
 	public final boolean isProviderFor(EObject semanticElement) {
 		return getValidationsForClass(semanticElement.getClass()).size() > 0;
 	}
@@ -73,7 +73,7 @@ public abstract class AbstractJavaValidationProvider implements
 		return validationMethods;
 	}
 
-	@Override
+	
 	public final Set<IStatus> validate(EObject semanticElement) {
 		Set<IStatus> status = Sets.newHashSet();
 		List<Method> validationMethods = getValidationsForClass(semanticElement

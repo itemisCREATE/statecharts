@@ -68,7 +68,7 @@ public class ExpressionDirectEditPolicy extends DirectEditPolicy implements
 		final String elementId = getHost().getNotationView().eResource()
 				.getURIFragment(getHost().getNotationView());
 		IDiagnosticConverter.Acceptor acceptor = new IDiagnosticConverter.Acceptor() {
-			@Override
+			
 			public void accept(Issue issue) {
 				if (issue == null)
 					return;

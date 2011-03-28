@@ -129,13 +129,13 @@ public abstract class XtextAntlrParserDelegate implements IParser {
 		return new SetValueCommand(request);
 	}
 
-	@Override
+	
 	public String getPrintString(IAdaptable element, int flags) {
 		// by default, assume edit and print string are identical.
 		return getEditString(element, flags);
 	}
 
-	@Override
+	
 	public IContentAssistProcessor getCompletionProcessor(IAdaptable element) {
 		// NOT NEEDED HERE
 		return null;

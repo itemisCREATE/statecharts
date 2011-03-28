@@ -69,7 +69,7 @@ public abstract class PlugableXTextLabelEditPart extends XTextLabelEditPart {
 			refreshVisuals();
 	}
 
-	@Override
+	
 	public String getEditText() {
 		String exp = resolveSemanticElement().getExpression();
 		return exp != null ? exp : "";

@@ -18,13 +18,13 @@ import com.google.inject.util.Modules;
  */
 public class TransitionExpressionProvider implements IExpressionsProvider {
 
-	@Override
+	
 	public boolean isProviderFor(EObject semanticElement) {
 		return StatechartPackage.TRANSITION == semanticElement.eClass()
 				.getClassifierID();
 	}
 
-	@Override
+	
 	public Injector getInjector() {
 		return Guice.createInjector(Modules.override(
 				Modules.override(new TransitionRuntimeModule())

@@ -72,7 +72,7 @@ public final class StatechartPreferenceManager implements
 				.getString(PreferenceConstants.STATE_COLOR));
 	}
 
-	@Override
+	
 	public void propertyChange(PropertyChangeEvent event) {
 		if (PreferenceConstants.REGION_COLOR.equals(event.getProperty())
 				|| PreferenceConstants.STATE_COLOR.equals(event.getProperty())) {

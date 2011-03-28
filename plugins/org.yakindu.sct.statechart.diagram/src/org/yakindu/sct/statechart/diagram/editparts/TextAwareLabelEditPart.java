@@ -89,13 +89,13 @@ public abstract class TextAwareLabelEditPart extends CompartmentEditPart
 		// TODO: Add a Feedback role
 	}
 
-	@Override
+	
 	public String getEditText() {
 		return getParser().getEditString(
 				new EObjectAdapter(resolveSemanticElement()), -1);
 	}
 
-	@Override
+	
 	public void setLabelText(String text) {
 		getWrappingLabel().setText(text);
 
@@ -105,22 +105,22 @@ public abstract class TextAwareLabelEditPart extends CompartmentEditPart
 		return (WrappingLabel) getFigure();
 	}
 
-	@Override
+	
 	public ICellEditorValidator getEditTextValidator() {
 		return null;
 	}
 
-	@Override
+	
 	public ParserOptions getParserOptions() {
 		return ParserOptions.NONE;
 	}
 
-	@Override
+	
 	public IParser getParser() {
 		return new AttributeParser(feature);
 	}
 
-	@Override
+	
 	public IContentAssistProcessor getCompletionProcessor() {
 		return null;
 	}
@@ -130,7 +130,7 @@ public abstract class TextAwareLabelEditPart extends CompartmentEditPart
 		final Request theRequest = request;
 		try {
 			getEditingDomain().runExclusive(new Runnable() {
-				@Override
+				
 				public void run() {
 					if (isActive()) {
 						if (theRequest.getExtendedData().get(

@@ -37,7 +37,7 @@ public abstract class XTextLabelEditPart extends LabelEditPart implements
 		return (LabelEx) super.getFigure();
 	}
 
-	@Override
+	 
 	public void setLabelText(String text) {
 		getFigure().setText(text);
 	}
@@ -58,7 +58,7 @@ public abstract class XTextLabelEditPart extends LabelEditPart implements
 		final Request theRequest = request;
 		try {
 			getEditingDomain().runExclusive(new Runnable() {
-				@Override
+
 				public void run() {
 					if (isActive()) {
 						if (theRequest.getExtendedData().get(

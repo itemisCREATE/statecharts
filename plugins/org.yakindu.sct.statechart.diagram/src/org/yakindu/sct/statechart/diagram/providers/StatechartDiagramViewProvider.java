@@ -75,10 +75,10 @@ public class StatechartDiagramViewProvider extends AbstractViewProvider
 		return getClass(diagramKind);
 	}
 
-	@Override
+	
 	protected Class<?> getEdgeViewClass(IAdaptable semanticAdapter,
 			View containerView, String semanticHint) {
-		if (semanticHint == null || semanticHint.isEmpty()) {
+		if (semanticHint == null || "".equals(semanticHint)) {
 			semanticHint = SemanticHintUtil
 					.getSemanticHint((EObject) semanticAdapter
 							.getAdapter(EObject.class));
@@ -86,10 +86,10 @@ public class StatechartDiagramViewProvider extends AbstractViewProvider
 		return getClass(semanticHint);
 	}
 
-	@Override
+	
 	protected Class<?> getNodeViewClass(IAdaptable semanticAdapter,
 			View containerView, String semanticHint) {
-		if (semanticHint == null || semanticHint.isEmpty()) {
+		if (semanticHint == null || "".equals(semanticHint)) {
 			semanticHint = SemanticHintUtil
 					.getSemanticHint((EObject) semanticAdapter
 							.getAdapter(EObject.class));
