@@ -28,8 +28,8 @@ public class TransitionFigure extends PolylineConnectionEx {
 		df.setFill(true);
 		df.setLineWidth(getMapMode().DPtoLP(1));
 		PointList pl = new PointList();
-		pl.addPoint(getMapMode().DPtoLP(-2), getMapMode().DPtoLP(-1));
-		pl.addPoint(getMapMode().DPtoLP(-2), getMapMode().DPtoLP(1));
+		pl.addPoint(getMapMode().DPtoLP(-1), getMapMode().DPtoLP(-1));
+		pl.addPoint(getMapMode().DPtoLP(-1), getMapMode().DPtoLP(1));
 		pl.addPoint(getMapMode().DPtoLP(0), getMapMode().DPtoLP(0));
 		df.setTemplate(pl);
 		return df;
