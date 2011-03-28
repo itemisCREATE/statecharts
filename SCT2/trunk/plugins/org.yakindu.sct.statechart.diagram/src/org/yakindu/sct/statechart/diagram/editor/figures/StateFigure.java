@@ -85,7 +85,6 @@ public class StateFigure extends RoundedRectangle {
 	
 	@Override
 	public void paintFigure(Graphics graphics) {
-		setForegroundColor(ColorConstants.lightGray);
 		drawBlurredShadow(graphics);
 		super.paintFigure(graphics);
 	}

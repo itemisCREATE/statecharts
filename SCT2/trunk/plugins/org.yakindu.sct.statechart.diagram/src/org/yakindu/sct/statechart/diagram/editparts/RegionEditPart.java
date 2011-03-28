@@ -17,15 +17,12 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.View;
-import org.eclipse.swt.graphics.Color;
 import org.yakindu.sct.statechart.diagram.editor.figures.RegionFigure;
-import org.yakindu.sct.statechart.diagram.preferences.StatechartPreferenceManager;
 
 /**
  * 
- * @author Andreas Muelder <a
- *         href="mailto:andreas.muelder@itemis.de">andreas.muelder@itemis.de</a>
- * 
+ * @author muelder
+ *
  */
 public class RegionEditPart extends ShapeNodeEditPart {
 
@@ -41,13 +38,6 @@ public class RegionEditPart extends ShapeNodeEditPart {
 		return figure;
 	}
 	
-	@Override
-	public IFigure getFigure() {
-		IFigure figure = super.getFigure();
-		Color regionColor = StatechartPreferenceManager.getInstance().getRegionColor();
-		figure.setBackgroundColor(regionColor);
-		return figure;
-	}
 
 	@Override
 	public IFigure getContentPane() {

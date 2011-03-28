@@ -23,7 +23,6 @@ StateRoot:
 	
 TransitionRoot: 
 	'@@transition@@' def=TransitionStatement;
-
 	
 
 /* ---- start rules ----

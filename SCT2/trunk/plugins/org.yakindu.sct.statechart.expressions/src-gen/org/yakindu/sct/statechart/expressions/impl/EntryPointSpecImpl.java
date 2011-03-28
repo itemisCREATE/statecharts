@@ -2,16 +2,14 @@
  * <copyright>
  * </copyright>
  *
+
  */
 package org.yakindu.sct.statechart.expressions.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.yakindu.sct.statechart.expressions.EntryPointSpec;
 import org.yakindu.sct.statechart.expressions.Entrypoint;
 import org.yakindu.sct.statechart.expressions.ExpressionsPackage;

@@ -8,10 +8,9 @@ import org.antlr.runtime.TokenSource;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.ParseException;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.yakindu.sct.statechart.services.ExpressionsGrammarAccess;
 
 import com.google.inject.Inject;
-
-import org.yakindu.sct.statechart.services.ExpressionsGrammarAccess;
 
 public class ExpressionsParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
 	

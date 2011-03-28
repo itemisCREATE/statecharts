@@ -5,8 +5,7 @@ import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.model.sct.statechart.StatechartPackage;
 /**
  * 
- * @author Andreas Muelder <a
- *         href="mailto:andreas.muelder@itemis.de">andreas.muelder@itemis.de</a>
+ * @author muelder
  *
  */
 public class StateNameEditPart extends TextAwareLabelEditPart {
@@ -19,12 +18,11 @@ public class StateNameEditPart extends TextAwareLabelEditPart {
 	public void setLabel(IFigure label) {
 		setFigure(label);
 	}
-
+	
 	@Override
 	protected IFigure createFigure() {
 		//Figure is set from parent addChild
 		return null;
 	}
-
 
 }

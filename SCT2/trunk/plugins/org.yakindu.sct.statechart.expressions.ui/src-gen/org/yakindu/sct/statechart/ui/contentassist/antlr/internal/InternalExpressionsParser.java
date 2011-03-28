@@ -1,40 +1,29 @@
 package org.yakindu.sct.statechart.ui.contentassist.antlr.internal; 
 
-import java.io.InputStream;
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.parser.*;
-import org.eclipse.xtext.parser.impl.*;
-import org.eclipse.xtext.parsetree.*;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.parser.antlr.XtextTokenStream;
-import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
+import org.antlr.runtime.BitSet;
+import org.antlr.runtime.FailedPredicateException;
+import org.antlr.runtime.NoViableAltException;
+import org.antlr.runtime.RecognitionException;
+import org.antlr.runtime.TokenStream;
+import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
-import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.DFA;
 import org.yakindu.sct.statechart.services.ExpressionsGrammarAccess;
-
-
-
-import org.antlr.runtime.*;
-import java.util.Stack;
-import java.util.List;
-import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalExpressionsParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_BOOL", "RULE_INT", "RULE_STRING", "RULE_FLOAT", "RULE_ID", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'in'", "'out'", "'+'", "'-'", "'*'", "'/'", "'%'", "'~'", "'<'", "'<='", "'>'", "'>='", "'=='", "'!='", "'s'", "'ms'", "'ns'", "'void'", "'integer'", "'real'", "'boolean'", "'string'", "'@@statechart@@'", "'@@state@@'", "'@@transition@@'", "'interface'", "':'", "'internal'", "'event'", "'='", "'var'", "'clock'", "'operation'", "'('", "')'", "','", "'entrypoint'", "'exitpoint'", "'#'", "'['", "']'", "'after'", "'enter'", "'exit'", "'oncycle'", "'always'", "'raise'", "'||'", "'&&'", "'!'", "'readonly'", "'external'"
     };
-    public static final int RULE_ML_COMMENT=9;
     public static final int RULE_ID=8;
-    public static final int RULE_WS=11;
-    public static final int EOF=-1;
-    public static final int RULE_INT=5;
     public static final int RULE_STRING=6;
-    public static final int RULE_BOOL=4;
     public static final int RULE_ANY_OTHER=12;
+    public static final int RULE_BOOL=4;
+    public static final int RULE_INT=5;
+    public static final int RULE_WS=11;
     public static final int RULE_FLOAT=7;
     public static final int RULE_SL_COMMENT=10;
+    public static final int EOF=-1;
+    public static final int RULE_ML_COMMENT=9;
 
         public InternalExpressionsParser(TokenStream input) {
             super(input);

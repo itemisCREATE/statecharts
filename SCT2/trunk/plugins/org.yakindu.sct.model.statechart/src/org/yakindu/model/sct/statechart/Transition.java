@@ -10,7 +10,6 @@
  */
 package org.yakindu.model.sct.statechart;
 
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->

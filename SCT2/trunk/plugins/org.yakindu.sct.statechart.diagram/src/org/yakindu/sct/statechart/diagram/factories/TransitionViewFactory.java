@@ -20,7 +20,7 @@ import org.yakindu.sct.statechart.diagram.providers.SemanticHints;
 /**
  * 
  * @author muelder
- *
+ * 
  */
 public class TransitionViewFactory extends ConnectionViewFactory {
 
@@ -31,10 +31,11 @@ public class TransitionViewFactory extends ConnectionViewFactory {
 		super.decorateView(containerView, view, element, semanticHint, index,
 				persisted);
 
-		
-		Node label = FactoryUtils.createLabel(view, SemanticHints.TRANSITION_EXPRESSION);
-		Location location = (Location)label.getLayoutConstraint();
+		Node label = FactoryUtils.createLabel(view,
+				SemanticHints.TRANSITION_EXPRESSION);
+		Location location = (Location) label.getLayoutConstraint();
 		location.setX(0);
 		location.setY(40);
+		
 	}
 }

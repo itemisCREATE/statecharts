@@ -27,9 +27,11 @@ import org.eclipse.gmf.runtime.diagram.ui.label.WrappingLabelDelegate;
 import org.eclipse.gmf.runtime.diagram.ui.tools.TextDirectEditManager;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 import org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter;
+import org.eclipse.gmf.runtime.notation.ShapeStyle;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.viewers.ICellEditorValidator;
+import org.eclipse.swt.graphics.Color;
 import org.yakindu.sct.statechart.diagram.parser.AttributeParser;
 
 /**
@@ -37,8 +39,7 @@ import org.yakindu.sct.statechart.diagram.parser.AttributeParser;
  * {@link ITextAwareEditPart}.
  * 
  * 
- * @author Andreas Muelder <a
- *         href="mailto:andreas.muelder@itemis.de">andreas.muelder@itemis.de</a>
+ * @author muelder
  * 
  */
 public abstract class TextAwareLabelEditPart extends CompartmentEditPart
@@ -48,17 +49,16 @@ public abstract class TextAwareLabelEditPart extends CompartmentEditPart
 
 	private final EAttribute feature;
 
-
 	public TextAwareLabelEditPart(View view, EAttribute feature) {
 		super(view);
 		this.feature = feature;
 		manager = createDirectEditManager();
 	}
-	
+
 	private void updateLabelText() {
 		getWrappingLabel().setText(getEditText());
 	}
-	
+
 	@Override
 	public void activate() {
 		super.activate();
@@ -68,18 +68,17 @@ public abstract class TextAwareLabelEditPart extends CompartmentEditPart
 	protected DirectEditManager createDirectEditManager() {
 		return new TextDirectEditManager(this);
 	}
-	
+
 	@Override
 	public Object getAdapter(@SuppressWarnings("rawtypes") Class key) {
-		if(key.equals(ILabelDelegate.class)){
+		if (key.equals(ILabelDelegate.class)) {
 			WrappingLabel wrappingLabel = getWrappingLabel();
-			if(wrappingLabel == null)
+			if (wrappingLabel == null)
 				return super.getAdapter(key);
 			return new WrappingLabelDelegate(wrappingLabel);
 		}
 		return super.getAdapter(key);
 	}
-
 
 	@Override
 	protected void createDefaultEditPolicies() {
@@ -89,13 +88,24 @@ public abstract class TextAwareLabelEditPart extends CompartmentEditPart
 		// TODO: Add a Feedback role
 	}
 
-	
+	@Override
+	protected void refreshVisuals() {
+		super.refreshVisuals();
+		refreshFont();
+		refreshFontColor();
+	}
+
+	@Override
+	protected void setFontColor(Color color) {
+		getWrappingLabel().setForegroundColor(color);
+		getWrappingLabel().invalidate();
+	}
+
 	public String getEditText() {
 		return getParser().getEditString(
 				new EObjectAdapter(resolveSemanticElement()), -1);
 	}
 
-	
 	public void setLabelText(String text) {
 		getWrappingLabel().setText(text);
 
@@ -105,22 +115,18 @@ public abstract class TextAwareLabelEditPart extends CompartmentEditPart
 		return (WrappingLabel) getFigure();
 	}
 
-	
 	public ICellEditorValidator getEditTextValidator() {
 		return null;
 	}
 
-	
 	public ParserOptions getParserOptions() {
 		return ParserOptions.NONE;
 	}
 
-	
 	public IParser getParser() {
 		return new AttributeParser(feature);
 	}
 
-	
 	public IContentAssistProcessor getCompletionProcessor() {
 		return null;
 	}
@@ -130,7 +136,7 @@ public abstract class TextAwareLabelEditPart extends CompartmentEditPart
 		final Request theRequest = request;
 		try {
 			getEditingDomain().runExclusive(new Runnable() {
-				
+
 				public void run() {
 					if (isActive()) {
 						if (theRequest.getExtendedData().get(
@@ -152,10 +158,28 @@ public abstract class TextAwareLabelEditPart extends CompartmentEditPart
 			e.printStackTrace();
 		}
 	}
+
+	// We want to get notified about changes to the primary view, the refresh
+	// the visuals when the parent Shape style changes.
+	@Override
+	protected void addNotationalListeners() {
+		super.addNotationalListeners();
+		addListenerFilter("parentview", this, getPrimaryView());
+	}
+
+	@Override
+	protected void removeNotationalListeners() {
+		super.removeNotationalListeners();
+		removeListenerFilter("parentview");
+	}
+
 	@Override
 	protected void handleNotificationEvent(Notification event) {
 		if (event.getFeature() == feature) {
 			updateLabelText();
+		}
+		if (event.getNotifier() instanceof ShapeStyle) {
+			refreshVisuals();
 		}
 		super.handleNotificationEvent(event);
 	}
