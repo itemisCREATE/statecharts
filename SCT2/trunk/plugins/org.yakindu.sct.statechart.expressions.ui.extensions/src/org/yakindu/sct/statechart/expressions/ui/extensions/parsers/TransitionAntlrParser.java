@@ -8,6 +8,6 @@ import org.yakindu.sct.statechart.parser.antlr.ExpressionsParser;
 public class TransitionAntlrParser extends ExpressionsParser {
 	@Override
 	protected String getDefaultRuleName() {
-		return "CustomTransitionExpression";
+		return "TransitionStatement";
 	}
 }

@@ -10,6 +10,6 @@ import org.yakindu.sct.statechart.parser.antlr.ExpressionsParser;
 public class StateAntlrParser extends ExpressionsParser {
 	@Override
 	protected String getDefaultRuleName() {
-		return "StateExpression";
+		return "StateDefinition";
 	}
 }
