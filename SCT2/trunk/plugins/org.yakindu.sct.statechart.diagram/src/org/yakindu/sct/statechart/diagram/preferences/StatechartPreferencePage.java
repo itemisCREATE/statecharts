@@ -38,7 +38,7 @@ public class StatechartPreferencePage extends FieldEditorPreferencePage
 				"&State color:", getFieldEditorParent()));
 	}
 
-	@Override
+	
 	public void init(IWorkbench arg0) {
 		// Nothing to do
 	}

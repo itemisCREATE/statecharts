@@ -31,7 +31,7 @@ public class AttributeParser implements IParser {
 		this.attribute = attribute;
 	}
 
-	@Override
+	
 	public String getEditString(IAdaptable adapter, int flags) {
 		EObject element = (EObject) adapter.getAdapter(EObject.class);
 		if (element.eGet(attribute) != null) {
@@ -41,12 +41,12 @@ public class AttributeParser implements IParser {
 		}
 	}
 
-	@Override
+	
 	public IParserEditStatus isValidEditString(IAdaptable element, String editString) {
 		return new ParserEditStatus(DiagramActivator.PLUGIN_ID, IParserEditStatus.OK, "");
 	}
 
-	@Override
+	
 	public ICommand getParseCommand(IAdaptable adapter, String newString, int flags) {
 		if (newString == null) {
 			return UnexecutableCommand.INSTANCE;
@@ -60,13 +60,13 @@ public class AttributeParser implements IParser {
 		return new SetValueCommand(request);
 	}
 
-	@Override
+	
 	public String getPrintString(IAdaptable adapter, int flags) {
 		EObject element = (EObject) adapter.getAdapter(EObject.class);
 		return String.valueOf(element.eGet(attribute));
 	}
 
-	@Override
+	
 	public boolean isAffectingEvent(Object event, int flags) {
 		if (event instanceof Notification) {
 			return (((Notification) event).getFeature() == attribute);
@@ -74,7 +74,7 @@ public class AttributeParser implements IParser {
 		return false;
 	}
 
-	@Override
+	
 	public IContentAssistProcessor getCompletionProcessor(IAdaptable element) {
 		return null;
 	}

@@ -57,7 +57,6 @@ public class CreationWizard extends Wizard implements INewWizard {
 
 	private final boolean openOnCreate = false;
 
-	@Override
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		this.selection = selection;
 		setWindowTitle("New YAKINDU Statechart");

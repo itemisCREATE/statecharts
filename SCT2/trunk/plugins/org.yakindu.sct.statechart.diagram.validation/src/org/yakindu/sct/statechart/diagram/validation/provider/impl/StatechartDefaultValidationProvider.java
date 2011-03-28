@@ -54,7 +54,7 @@ public class StatechartDefaultValidationProvider extends
 
 	@ValidationRule
 	public IStatus validateNameIsNotEmpty(NamedElement namedElement) {
-		if (namedElement.getName() == null || namedElement.getName().isEmpty())
+		if (namedElement.getName() == null || "".equals(namedElement.getName()))
 			return createErrorStatus("name must not be empty!");
 		return createOKStatus();
 	}

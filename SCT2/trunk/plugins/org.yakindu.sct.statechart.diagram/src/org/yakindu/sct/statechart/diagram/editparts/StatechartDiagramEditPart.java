@@ -37,12 +37,12 @@ public class StatechartDiagramEditPart extends DiagramEditPart implements IDiagr
 		super.createDefaultEditPolicies();
 	}
 
-	@Override
+	
 	public void setPreferencesHint(PreferencesHint preferenceHint) {
 		this.preferenceHint = preferenceHint;
 	}
 
-	@Override
+	
 	public PreferencesHint getPreferencesHint() {
 		return preferenceHint;
 	}

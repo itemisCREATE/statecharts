@@ -17,13 +17,13 @@ import com.google.inject.util.Modules;
  */
 public class StatechartExpressionProvider implements IExpressionsProvider {
 
-	@Override
+	
 	public boolean isProviderFor(EObject semanticElement) {
 		return StatechartPackage.STATECHART == semanticElement.eClass()
 				.getClassifierID();
 	}
 
-	@Override
+	
 	public Injector getInjector() {
 		return Guice.createInjector(Modules.override(
 				Modules.override(new StatechartRuntimeModule()).with(

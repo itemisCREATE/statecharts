@@ -82,13 +82,11 @@ public class XTextCellEditor extends CellEditor {
 	 */
 	private final KeyListener keyListener = new KeyListener() {
 
-		@Override
 		public void keyReleased(KeyEvent e) {
 			// TODO
 			// XTextCellEditor.this.keyReleaseOccured(e);
 		}
 
-		@Override
 		public void keyPressed(KeyEvent e) {
 			XTextCellEditor.this.valueChanged(true, true);
 			//CONTENTASSIST_PROPOSALS
@@ -263,7 +261,7 @@ public class XTextCellEditor extends CellEditor {
 	protected void setResourceUri(final XtextResource resource) {
 		// TODO: This should be moved outside the CellEditor
 		Display.getDefault().syncExec(new Runnable() {
-			@Override
+
 			public void run() {
 				IWorkbenchWindow activeWorkbenchWindow = PlatformUI
 						.getWorkbench().getActiveWorkbenchWindow();
@@ -293,7 +291,7 @@ public class XTextCellEditor extends CellEditor {
 	public IParseResult getParseResult() {
 		return document
 				.readOnly(new IUnitOfWork<IParseResult, XtextResource>() {
-					@Override
+
 					public IParseResult exec(XtextResource state)
 							throws Exception {
 						return state.getParseResult();
@@ -305,7 +303,7 @@ public class XTextCellEditor extends CellEditor {
 	{
 		return document
 		.readOnly(new IUnitOfWork<List<Diagnostic>, XtextResource>() {
-			@Override
+
 			public List<Diagnostic> exec(XtextResource state)
 					throws Exception {
 				return state.getErrors();
