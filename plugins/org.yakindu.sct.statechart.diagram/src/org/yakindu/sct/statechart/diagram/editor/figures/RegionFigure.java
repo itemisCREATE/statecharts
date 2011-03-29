@@ -42,8 +42,6 @@ public class RegionFigure extends RectangleFigure {
 		GridLayout layoutThis = new GridLayout(1,false);
 		layoutThis.verticalSpacing = 2;
 		this.setLayoutManager(layoutThis);
-
-		//this.setCornerDimensions(new Dimension(mapMode.DPtoLP(20), mapMode.DPtoLP(20)));
 		this.setLineWidth(mapMode.DPtoLP(1));
 		createContents();
 	}
