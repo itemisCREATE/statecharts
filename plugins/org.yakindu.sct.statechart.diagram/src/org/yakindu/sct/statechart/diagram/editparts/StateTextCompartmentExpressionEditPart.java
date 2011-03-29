@@ -2,7 +2,6 @@ package org.yakindu.sct.statechart.diagram.editparts;
 
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.swt.SWT;
-import org.yakindu.model.sct.statechart.State;
 
 import de.itemis.xtext.utils.gmf.directedit.IXTextAwareEditPart;
 
@@ -18,11 +17,6 @@ public class StateTextCompartmentExpressionEditPart extends
 		super(view);
 	}
 
-
-	@Override
-	public State resolveSemanticElement() {
-		return (State) super.resolveSemanticElement();
-	}
 
 	@Override
 	protected int getEditorStyles() {

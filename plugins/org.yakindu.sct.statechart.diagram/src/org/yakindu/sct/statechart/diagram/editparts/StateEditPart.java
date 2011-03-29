@@ -80,13 +80,11 @@ public class StateEditPart extends ShapeNodeEditPart implements
 	protected void addChildVisual(EditPart childEditPart, int index) {
 		if (childEditPart instanceof StateFigureCompartmentEditPart) {
 			IFigure pane = getPrimaryShape().getFigureCompartmentPane();
-			pane.setLayoutManager(new StackLayout());
 			IFigure compartmentFigure = ((StateFigureCompartmentEditPart) childEditPart)
 					.getFigure();
 			pane.add(compartmentFigure);
 		} else if (childEditPart instanceof StateTextCompartmentEditPart) {
 			IFigure pane = getPrimaryShape().getTextCompartmentPane();
-			pane.setLayoutManager(new StackLayout());
 			IFigure compartmentFigure = ((StateTextCompartmentEditPart) childEditPart)
 					.getFigure();
 			pane.add(compartmentFigure);

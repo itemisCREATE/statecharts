@@ -12,7 +12,6 @@ package org.yakindu.sct.statechart.diagram.editparts;
 
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.swt.SWT;
-import org.yakindu.model.sct.statechart.Transition;
 
 import de.itemis.xtext.utils.gmf.directedit.IXTextAwareEditPart;
 
@@ -27,12 +26,6 @@ public class TransitionExpressionEditPart extends PlugableXTextLabelEditPart imp
 
 	public TransitionExpressionEditPart(View view) {
 		super(view);
-	}
-
-
-	@Override
-	public Transition resolveSemanticElement() {
-		return (Transition) super.resolveSemanticElement();
 	}
 
 	@Override

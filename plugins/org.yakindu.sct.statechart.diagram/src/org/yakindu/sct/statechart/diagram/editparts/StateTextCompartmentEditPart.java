@@ -10,29 +10,29 @@
  */
 package org.yakindu.sct.statechart.diagram.editparts;
 
-import org.eclipse.draw2d.LayoutManager;
+import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.StackLayout;
-import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeCompartmentEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.ResizableCompartmentEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.figures.ResizableCompartmentFigure;
 import org.eclipse.gmf.runtime.notation.View;
 
 /**
  * 
  * @author muelder
- *
+ * 
  */
-public class StateTextCompartmentEditPart extends ShapeCompartmentEditPart {
+public class StateTextCompartmentEditPart extends ResizableCompartmentEditPart {
 
 	public StateTextCompartmentEditPart(View view) {
 		super(view);
 	}
 
 	@Override
-	public boolean isSelectable() {
-		return false;
+	protected IFigure createFigure() {
+		ResizableCompartmentFigure figure = (ResizableCompartmentFigure) super
+				.createFigure();
+		figure.getContentPane().setLayoutManager(new StackLayout());
+		return figure;
 	}
 
-	@Override
-	protected LayoutManager getLayoutManager() {
-		return new StackLayout();
-	}
 }

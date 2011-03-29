@@ -20,6 +20,7 @@ import org.eclipse.draw2d.GridData;
 import org.eclipse.draw2d.GridLayout;
 import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.draw2d.RoundedRectangle;
+import org.eclipse.draw2d.StackLayout;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
@@ -58,12 +59,14 @@ public class StateFigure extends RoundedRectangle {
 				.getData());
 		// Text compartment
 		textCompartmentPane = new Figure();
+		textCompartmentPane.setLayoutManager(new StackLayout());
 		this.add(textCompartmentPane,
-				GridDataFactory.fillDefaults().getData());
+				GridDataFactory.fillDefaults().grab(true, true).getData());
 		// Figure Compartment
 		figureCompartmentPane = new Figure();
+		figureCompartmentPane.setLayoutManager(new StackLayout());
 		this.add(figureCompartmentPane,
-				GridDataFactory.fillDefaults().getData());
+				GridDataFactory.fillDefaults().grab(true, true).getData());
 
 	}
 
