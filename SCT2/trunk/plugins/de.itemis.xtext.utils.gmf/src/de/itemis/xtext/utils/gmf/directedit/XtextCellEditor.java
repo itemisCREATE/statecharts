@@ -1,12 +1,14 @@
-/*******************************************************************************
- * Copyright (c) 2011 itemis AG (http://www.itemis.com) and others.
+/**
+ * Copyright (c) 2011 itemis AG and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
- *******************************************************************************/
-
+ * 
+ * Contributors:
+ * 	itemis AG - initial API and implementation
+ * 
+ */
 package de.itemis.xtext.utils.gmf.directedit;
 
 import java.util.List;
@@ -75,7 +77,7 @@ import com.google.inject.Injector;
  */
 
 @SuppressWarnings("restriction")
-public class XTextCellEditor extends CellEditor {
+public class XtextCellEditor extends CellEditor {
 
 	/**
 	 * Key listener executed content assist operation on CTRL+Space
@@ -88,7 +90,7 @@ public class XTextCellEditor extends CellEditor {
 		}
 
 		public void keyPressed(KeyEvent e) {
-			XTextCellEditor.this.valueChanged(true, true);
+			XtextCellEditor.this.valueChanged(true, true);
 			//CONTENTASSIST_PROPOSALS
 			if ((e.keyCode == 32) && ((e.stateMask & SWT.CTRL) != 0)) {
 				BusyIndicator.showWhile(Display.getDefault(), new Runnable() {
@@ -137,7 +139,7 @@ public class XTextCellEditor extends CellEditor {
 	 * C'tor to create a new Instance.
 	 * 
 	 */
-	public XTextCellEditor(Composite parent, Injector injector, int style) {
+	public XtextCellEditor(Composite parent, Injector injector, int style) {
 		this.injector = injector;
 		setStyle(style);
 		create(parent);
@@ -178,7 +180,7 @@ public class XTextCellEditor extends CellEditor {
 
 		text.addFocusListener(new FocusAdapter() {
 			public void focusLost(FocusEvent e) {
-				XTextCellEditor.this.focusLost();
+				XtextCellEditor.this.focusLost();
 			}
 		});
 		text.setFont(parent.getFont());

@@ -1,3 +1,14 @@
+/**
+ * Copyright (c) 2011 itemis AG and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ * 	itemis AG - initial API and implementation
+ * 
+ */
 package de.itemis.xtext.utils.gmf.directedit;
 
 import static org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants.REQ_DIRECTEDIT_EXTENDEDDATA_INITIAL_CHAR;
@@ -12,15 +23,18 @@ import org.eclipse.gmf.runtime.draw2d.ui.figures.LabelEx;
 import org.eclipse.gmf.runtime.notation.View;
 
 /**
+ * Abstract base implementation for all LabelEditParts that use Xtext for direct
+ * editing.
+ * 
  * @author muelder
  * 
  */
-public abstract class XTextLabelEditPart extends LabelEditPart implements
-		IXTextAwareEditPart {
+public abstract class XtextLabelEditPart extends LabelEditPart implements
+		IXtextAwareEditPart {
 
 	private DirectEditManager manager;
 
-	public XTextLabelEditPart(View view) {
+	public XtextLabelEditPart(View view) {
 		super(view);
 	}
 
@@ -37,7 +51,6 @@ public abstract class XTextLabelEditPart extends LabelEditPart implements
 		return (LabelEx) super.getFigure();
 	}
 
-	 
 	public void setLabelText(String text) {
 		getFigure().setText(text);
 	}

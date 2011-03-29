@@ -1,4 +1,4 @@
-package de.itemis.xtext.utils.gmf.directedit;
+package de.itemis.xtext.utils.gmf.experimental;
 
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Graphics;
