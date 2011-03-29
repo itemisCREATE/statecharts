@@ -3,7 +3,7 @@ package org.yakindu.sct.statechart.diagram.editparts;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.swt.SWT;
 
-import de.itemis.xtext.utils.gmf.directedit.IXTextAwareEditPart;
+import de.itemis.xtext.utils.gmf.directedit.IXtextAwareEditPart;
 
 /**
  * 
@@ -11,7 +11,7 @@ import de.itemis.xtext.utils.gmf.directedit.IXTextAwareEditPart;
  * 
  */
 public class StateTextCompartmentExpressionEditPart extends
-		PlugableXTextLabelEditPart implements IXTextAwareEditPart {
+		PlugableXTextLabelEditPart implements IXtextAwareEditPart {
 
 	public StateTextCompartmentExpressionEditPart(View view) {
 		super(view);

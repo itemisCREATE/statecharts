@@ -11,15 +11,15 @@ import org.yakindu.sct.statechart.diagram.policies.ExpressionDirectEditPolicy;
 
 import com.google.inject.Injector;
 
-import de.itemis.xtext.utils.gmf.directedit.XTextDirectEditManager;
-import de.itemis.xtext.utils.gmf.directedit.XTextLabelEditPart;
+import de.itemis.xtext.utils.gmf.directedit.XtextDirectEditManager;
+import de.itemis.xtext.utils.gmf.directedit.XtextLabelEditPart;
 
 /**
  * 
  * @author muelder
  * 
  */
-public abstract class PlugableXTextLabelEditPart extends XTextLabelEditPart {
+public abstract class PlugableXTextLabelEditPart extends XtextLabelEditPart {
 
 	private static final String EXPRESSIONS_EXTENSION = "org.yakindu.sct.statechart.diagram.expressions";
 	private Injector injector;
@@ -51,8 +51,8 @@ public abstract class PlugableXTextLabelEditPart extends XTextLabelEditPart {
 	}
 
 	@Override
-	protected XTextDirectEditManager createXTextDirectEditManager() {
-		return new XTextDirectEditManager(this, injector, getEditorStyles());
+	protected XtextDirectEditManager createXTextDirectEditManager() {
+		return new XtextDirectEditManager(this, injector, getEditorStyles());
 	}
 
 	public Injector getInjector() {
