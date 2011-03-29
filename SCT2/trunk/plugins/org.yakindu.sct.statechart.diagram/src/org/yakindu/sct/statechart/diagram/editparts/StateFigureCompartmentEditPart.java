@@ -18,9 +18,8 @@ import org.yakindu.sct.statechart.diagram.policies.StateCompartmentCanonicalEdit
 
 /**
  * 
- * @author Andreas Muelder <a
- *         href="mailto:andreas.muelder@itemis.de">andreas.muelder@itemis.de</a>
- * 
+ * @author muelder
+ *
  */
 public class StateFigureCompartmentEditPart extends ShapeCompartmentEditPart {
 
@@ -31,8 +30,10 @@ public class StateFigureCompartmentEditPart extends ShapeCompartmentEditPart {
 	@Override
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
-		installEditPolicy(EditPolicyRoles.CREATION_ROLE, new CompartmentCreationEditPolicy());
-		installEditPolicy(EditPolicyRoles.CANONICAL_ROLE, new StateCompartmentCanonicalEditPolicy());
+		installEditPolicy(EditPolicyRoles.CREATION_ROLE,
+				new CompartmentCreationEditPolicy());
+		installEditPolicy(EditPolicyRoles.CANONICAL_ROLE,
+				new StateCompartmentCanonicalEditPolicy());
 	}
 
 	@Override

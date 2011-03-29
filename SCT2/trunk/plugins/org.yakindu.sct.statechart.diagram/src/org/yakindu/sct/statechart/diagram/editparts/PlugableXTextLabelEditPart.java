@@ -46,6 +46,8 @@ public abstract class PlugableXTextLabelEditPart extends XTextLabelEditPart {
 		injector.injectMembers(expressionDirectEditPolicy);
 		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE,
 				expressionDirectEditPolicy);
+		
+		removeEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE);		
 	}
 
 	@Override
@@ -69,11 +71,9 @@ public abstract class PlugableXTextLabelEditPart extends XTextLabelEditPart {
 			refreshVisuals();
 	}
 
-	
 	public String getEditText() {
 		String exp = resolveSemanticElement().getExpression();
 		return exp != null ? exp : "";
 	}
-	
 
 }
