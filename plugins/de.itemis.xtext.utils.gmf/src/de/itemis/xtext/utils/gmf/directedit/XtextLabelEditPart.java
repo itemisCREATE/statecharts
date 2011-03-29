@@ -15,16 +15,20 @@ import static org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants.REQ_D
 
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.PositionConstants;
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.tools.DirectEditManager;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.LabelEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.tools.TextDirectEditManager;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.LabelEx;
+import org.eclipse.gmf.runtime.notation.ShapeStyle;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.swt.graphics.Color;
 
 /**
- * Abstract base implementation for all LabelEditParts that use Xtext for direct
- * editing.
+ * Abstract base implementation for all {@link LabelEditPart}s that use Xtext
+ * for direct editing.
+ * 
  * 
  * @author muelder
  * 
@@ -33,6 +37,8 @@ public abstract class XtextLabelEditPart extends LabelEditPart implements
 		IXtextAwareEditPart {
 
 	private DirectEditManager manager;
+
+	protected abstract DirectEditManager createXTextDirectEditManager();
 
 	public XtextLabelEditPart(View view) {
 		super(view);
@@ -58,10 +64,27 @@ public abstract class XtextLabelEditPart extends LabelEditPart implements
 	@Override
 	protected void refreshVisuals() {
 		super.refreshVisuals();
+		refreshFont();
+		refreshFontColor();
+		updateLabelText();
+	}
+
+	private void updateLabelText() {
 		getFigure().setText(getEditText());
 	}
 
-	protected abstract DirectEditManager createXTextDirectEditManager();
+	@Override
+	protected void setFontColor(Color color) {
+		getFigure().setForegroundColor(color);
+	}
+
+	@Override
+	protected void handleNotificationEvent(Notification notification) {
+		if (notification.getNotifier() instanceof ShapeStyle) {
+			refreshVisuals();
+		}
+		super.handleNotificationEvent(notification);
+	}
 
 	@Override
 	protected void performDirectEditRequest(Request request) {

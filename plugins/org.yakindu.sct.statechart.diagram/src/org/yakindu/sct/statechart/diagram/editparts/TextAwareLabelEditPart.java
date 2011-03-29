@@ -98,7 +98,6 @@ public abstract class TextAwareLabelEditPart extends CompartmentEditPart
 	@Override
 	protected void setFontColor(Color color) {
 		getWrappingLabel().setForegroundColor(color);
-		getWrappingLabel().invalidate();
 	}
 
 	public String getEditText() {

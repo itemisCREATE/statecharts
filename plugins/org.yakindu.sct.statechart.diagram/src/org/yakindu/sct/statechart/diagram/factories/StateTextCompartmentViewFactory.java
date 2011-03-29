@@ -21,14 +21,16 @@ import org.yakindu.sct.statechart.diagram.providers.SemanticHints;
 /**
  * 
  * @author muelder
- *
+ * 
  */
 public class StateTextCompartmentViewFactory extends CompartmentViewFactory {
 
 	@Override
-	protected void decorateView(View containerView, View view, IAdaptable semanticAdapter, String semanticHint,
-			int index, boolean persisted) {
-		super.decorateView(containerView, view, semanticAdapter, semanticHint, index, persisted);
+	protected void decorateView(View containerView, View view,
+			IAdaptable semanticAdapter, String semanticHint, int index,
+			boolean persisted) {
+		super.decorateView(containerView, view, semanticAdapter, semanticHint,
+				index, persisted);
 
 		IAdaptable eObjectAdapter = null;
 		EObject eObject = (EObject) semanticAdapter.getAdapter(EObject.class);
@@ -37,9 +39,8 @@ public class StateTextCompartmentViewFactory extends CompartmentViewFactory {
 		}
 		getViewService().createNode(eObjectAdapter, view,
 				SemanticHints.STATE_TEXT_COMPARTMENT_EXPRESSION,
-			ViewUtil.APPEND, true, getPreferencesHint());
-	
+				ViewUtil.APPEND, true, getPreferencesHint());
+
 	}
-	
-	
+
 }
