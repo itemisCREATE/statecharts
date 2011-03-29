@@ -21,12 +21,12 @@ import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.views.properties.IPropertyDescriptor;
 
-import de.itemis.xtext.utils.gmf.directedit.XTextCellEditor;
+import de.itemis.xtext.utils.gmf.directedit.XtextCellEditor;
 
 /**
  * 
  * 
- * Creates an {@link XTextCellEditor} for the given {@link EAttribute}s of the
+ * Creates an {@link XtextCellEditor} for the given {@link EAttribute}s of the
  * {@link PropertySource}.
  * 
  * @author Andreas Muelder <a

@@ -24,8 +24,8 @@ import org.yakindu.sct.statechart.diagram.validation.XTextMarkerCreator;
 
 import com.google.inject.Inject;
 
-import de.itemis.xtext.utils.gmf.directedit.IXTextAwareEditPart;
-import de.itemis.xtext.utils.gmf.directedit.XTextCellEditor;
+import de.itemis.xtext.utils.gmf.directedit.IXtextAwareEditPart;
+import de.itemis.xtext.utils.gmf.directedit.XtextCellEditor;
 
 /**
  * 
@@ -40,8 +40,8 @@ public class ExpressionDirectEditPolicy extends DirectEditPolicy implements
 
 	@Override
 	protected Command getDirectEditCommand(DirectEditRequest request) {
-		Assert.isTrue(request.getCellEditor() instanceof XTextCellEditor);
-		XTextCellEditor cellEditor = (XTextCellEditor) request.getCellEditor();
+		Assert.isTrue(request.getCellEditor() instanceof XtextCellEditor);
+		XtextCellEditor cellEditor = (XtextCellEditor) request.getCellEditor();
 		createMarkers(cellEditor.getDiagnostics());
 		SetValueCommand command = new SetValueCommand(new SetRequest(getHost()
 				.resolveSemanticElement(),
@@ -91,7 +91,7 @@ public class ExpressionDirectEditPolicy extends DirectEditPolicy implements
 	@Override
 	protected void showCurrentEditValue(DirectEditRequest request) {
 		String value = (String) request.getCellEditor().getValue();
-		((IXTextAwareEditPart) getHost()).setLabelText(value);
+		((IXtextAwareEditPart) getHost()).setLabelText(value);
 	}
 
 }
