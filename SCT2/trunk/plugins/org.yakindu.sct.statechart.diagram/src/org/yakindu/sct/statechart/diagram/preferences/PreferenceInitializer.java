@@ -33,6 +33,10 @@ public class PreferenceInitializer extends DiagramPreferenceInitializer
 		Color lineColor = DiagramColorConstants.black;
 		PreferenceConverter.setDefault(getPreferenceStore(),
 				IPreferenceConstants.PREF_LINE_COLOR, lineColor.getRGB());
+
+		// rulers and grid defaults
+		getPreferenceStore().setDefault(IPreferenceConstants.PREF_SNAP_TO_GEOMETRY, true);
+
 	}
 
 	@Override
