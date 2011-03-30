@@ -10,42 +10,40 @@
  */
 package org.yakindu.sct.statechart.diagram.propertysheets;
 
-import java.util.Arrays;
-
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.ui.provider.PropertyDescriptor;
 import org.eclipse.emf.edit.ui.provider.PropertySource;
 import org.eclipse.jface.viewers.CellEditor;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.views.properties.IPropertyDescriptor;
+import org.yakindu.model.sct.statechart.ExpressionElement;
+import org.yakindu.model.sct.statechart.StatechartPackage;
+import org.yakindu.sct.statechart.diagram.extensions.Extensions;
+import org.yakindu.sct.statechart.diagram.extensions.IExpressionsProvider;
+
+import com.google.inject.Injector;
 
 import de.itemis.xtext.utils.gmf.directedit.XtextCellEditor;
 
 /**
+ * Creates an {@link XtextCellEditor} for all {@link ExpressionElement}s for the Property Page.
  * 
+ * @author muelder
  * 
- * Creates an {@link XtextCellEditor} for the given {@link EAttribute}s of the
- * {@link PropertySource}.
- * 
- * @author Andreas Muelder <a
- *         href="mailto:andreas.muelder@itemis.de">andreas.muelder@itemis.de</a>
  */
-public class ExpressionsPropertySource extends PropertySource {
+public class ExpressionElementPropertySource extends PropertySource {
 
-	private final EAttribute[] attributes;
+	private static final String EXPRESSIONS_EXTENSION = "org.yakindu.sct.statechart.diagram.expressions";
 
-	/**
-	 * 
-	 * @param object
-	 * @param itemPropertySource
-	 * @param attributes
-	 */
-	public ExpressionsPropertySource(Object object,
-			IItemPropertySource itemPropertySource, EAttribute... attributes) {
+	private final ExpressionElement element;
+
+	public ExpressionElementPropertySource(Object object,
+			IItemPropertySource itemPropertySource) {
 		super(object, itemPropertySource);
-		this.attributes = attributes;
+		element = (ExpressionElement) object;
 	}
 
 	@Override
@@ -54,21 +52,27 @@ public class ExpressionsPropertySource extends PropertySource {
 		if (itemPropertyDescriptor.getFeature(object) instanceof EAttribute) {
 			EAttribute attribute = (EAttribute) itemPropertyDescriptor
 					.getFeature(object);
-			if (Arrays.asList(attributes).contains(attribute)) {
+			if (StatechartPackage.Literals.EXPRESSION_ELEMENT__EXPRESSION
+					.equals(attribute)) {
 				return new PropertyDescriptor(object, itemPropertyDescriptor) {
 					@Override
 					public CellEditor createPropertyEditor(Composite composite) {
-						//FIXME
-						return null;
-//						XTextCellEditor xTextEditor = new XTextCellEditor(
-//								composite, DiagramActivator.getDefault()
-//										.getExpressionsInjector(), SWT.SINGLE);
-//						return xTextEditor;
+						XtextCellEditor xTextEditor = new XtextCellEditor(
+								composite, getInjector(), SWT.SINGLE);
+						return xTextEditor;
 					}
 				};
 			}
 		}
 		return super.createPropertyDescriptor(itemPropertyDescriptor);
+	}
+
+	protected Injector getInjector() {
+		Extensions<IExpressionsProvider> extensions = new Extensions<IExpressionsProvider>(
+				EXPRESSIONS_EXTENSION);
+		IExpressionsProvider registeredProvider = extensions
+				.getRegisteredProvider(element);
+		return registeredProvider.getInjector();
 	}
 
 }

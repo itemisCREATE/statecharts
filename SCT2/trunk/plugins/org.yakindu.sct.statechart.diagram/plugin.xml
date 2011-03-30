@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
+	<!-- Extension Points -->
+	
    <extension-point id="org.yakindu.sct.statechart.diagram.validation.provider" name="org.yakindu.sct.statechart.diagram.validation.provider" schema="schema/org.yakindu.sct.statechart.diagram.validation.provider.exsd"/>
    <extension-point id="org.yakindu.sct.statechart.diagram.expressions" name="org.yakindu.sct.statechart.diagram.expressions" schema="schema/org.yakindu.sct.statechart.diagram.expressions.exsd"/>
+  
+    <!-- Editor -->
+  
    <extension
          point="org.eclipse.ui.editors">
       <editor
@@ -16,6 +21,9 @@
             name="YAKINDU Statechart Editor">
       </editor>
    </extension>
+   
+     <!-- Element Types -->
+   
    <extension
          point="org.eclipse.gmf.runtime.emf.type.core.elementTypes">
       <metamodel
@@ -140,6 +148,9 @@
             type="sct">
       </parser>
    </extension>
+   
+     <!-- View Provider -->
+   
    <extension
          point="org.eclipse.gmf.runtime.diagram.core.viewProviders">
       <viewProvider
@@ -149,6 +160,9 @@
          </Priority>
       </viewProvider>
    </extension>
+   
+   <!-- EditPart Provider -->
+   
    <extension
          point="org.eclipse.gmf.runtime.diagram.ui.editpartProviders">
       <editpartProvider
@@ -169,6 +183,9 @@
             project="false">
       </wizard>
    </extension>
+   
+   <!-- Palette Provider -->
+   
    <extension
          point="org.eclipse.gmf.runtime.diagram.ui.paletteProviders">
       <paletteProvider
@@ -182,12 +199,6 @@
                   path="/">
                    <expand
                          force="true">
-
-                           <content>
-
-
-                           </content>
-
                      </expand>
             </entry>
              <entry
@@ -288,7 +299,66 @@
 
 <!-- Property Tabs -->
 
+<extension point="org.eclipse.ui.views.properties.tabbed.propertyContributor" id="prop-contrib">
+      <propertyContributor
+            contributorId="org.yakindu.sct.statechart.diagram.StatechartDiagramEditor"
+            labelProvider="org.yakindu.sct.statechart.diagram.propertysheets.SheetLabelProvider">
+         <propertyCategory category="domain"/>
+         <propertyCategory category="visual"/>
+         <propertyCategory category="extra"/>
+      </propertyContributor>
+   </extension>
 
+ <extension point="org.eclipse.ui.views.properties.tabbed.propertyTabs" id="proptabs">
+      <propertyTabs contributorId="org.yakindu.sct.statechart.diagram.StatechartDiagramEditor">
+          <propertyTab
+             category="domain"
+             id="property.tab.domain"
+             label="Model"/>
+          <propertyTab
+             category="visual"
+             id="property.tab.AppearancePropertySection"
+             label="Appearance"/>
+          <propertyTab
+             category="visual"
+             id="property.tab.DiagramPropertySection"
+             label="Diagram"/>
+      </propertyTabs>
+   </extension>
+   
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertySections" id="propsections">
+      <propertySections contributorId="org.yakindu.sct.statechart.diagram.StatechartDiagramEditor">
+         <propertySection
+            id="property.section.domain" 
+            tab="property.tab.domain"
+            class="org.yakindu.sct.statechart.diagram.propertysheets.DiagramPropertySection">
+            <input type="org.eclipse.gmf.runtime.notation.View"/>
+            <input type="org.eclipse.gef.EditPart"/>
+         </propertySection>
+         <propertySection id="property.section.ConnectorAppearancePropertySection" 
+            filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.ConnectionEditPartPropertySectionFilter" 
+            class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.appearance.ConnectionAppearancePropertySection" 
+            tab="property.tab.AppearancePropertySection">
+         </propertySection>
+         <propertySection id="property.section.ShapeColorAndFontPropertySection" 
+            filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.ShapeEditPartPropertySectionFilter" 
+            class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.appearance.ShapeColorsAndFontsPropertySection" 
+            tab="property.tab.AppearancePropertySection">
+         </propertySection> 
+         <propertySection id="property.section.DiagramColorsAndFontsPropertySection" 
+            filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.DiagramEditPartPropertySectionFilter" 
+            class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.appearance.DiagramColorsAndFontsPropertySection" 
+            tab="property.tab.AppearancePropertySection">
+         </propertySection>     
+         <propertySection id="property.section.RulerGridPropertySection" 
+            filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.DiagramEditPartPropertySectionFilter" 
+            class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.grid.RulerGridPropertySection" 
+            tab="property.tab.DiagramPropertySection">
+         </propertySection>     
+      </propertySections>
+   </extension>
+
+   <!-- Modeling Assistant -->
    
    <extension
          point="org.eclipse.gmf.runtime.emf.ui.modelingAssistantProviders">
