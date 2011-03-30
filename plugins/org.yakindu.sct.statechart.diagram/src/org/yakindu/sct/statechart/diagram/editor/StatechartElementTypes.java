@@ -19,13 +19,13 @@ import org.eclipse.gmf.runtime.emf.type.core.IElementType;
  * Helper class with {@link IElementType}s for the semantic elements and some
  * convenience methods.
  * 
- * @author Andreas Muelder <a
- *         href="mailto:andreas.muelder@itemis.de">andreas.muelder@itemis.de</a>
+ * @author muelder
  * 
  */
 public final class StatechartElementTypes extends AbstractElementTypeEnumerator {
 
 	private StatechartElementTypes() {
+		// only static methods
 	}
 
 	/** Element Types **/
@@ -50,10 +50,12 @@ public final class StatechartElementTypes extends AbstractElementTypeEnumerator 
 	 */
 	public static IElementType fromSemanticId(String semanticId) {
 		try {
-			Field field = StatechartElementTypes.class.getField(semanticId.toUpperCase());
+			Field field = StatechartElementTypes.class.getField(semanticId
+					.toUpperCase());
 			return (IElementType) field.get(StatechartElementTypes.class);
 		} catch (Exception e) {
-			throw new RuntimeException("No IElementType found for semanticHint " + semanticId);
+			throw new RuntimeException(
+					"No IElementType found for semanticHint " + semanticId);
 		}
 	}
 }

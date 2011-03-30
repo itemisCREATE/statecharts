@@ -14,34 +14,63 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.emf.type.core.ElementTypeRegistry;
 import org.eclipse.gmf.runtime.emf.type.core.IElementType;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.BaseLabelProvider;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.graphics.Image;
+import org.yakindu.model.sct.statechart.NamedElement;
+import org.yakindu.sct.statechart.diagram.DiagramActivator;
 
 /**
  * 
- * @author Andreas Muelder <a
- *         href="mailto:andreas.muelder@itemis.de">andreas.muelder@itemis.de</a>
+ * @author muelder
  * 
  */
-public class SheetLabelProvider extends BaseLabelProvider implements ILabelProvider {
+public class SheetLabelProvider extends BaseLabelProvider implements
+		ILabelProvider {
 
-	
 	public String getText(Object element) {
 		element = unwrap(element);
 		if (element instanceof IGraphicalEditPart) {
-			EObject semanticElement = ((IGraphicalEditPart) element).resolveSemanticElement();
-			IElementType elementType = ElementTypeRegistry.getInstance().getElementType(semanticElement);
-			return elementType.getDisplayName();
+			EObject semanticElement = ((IGraphicalEditPart) element)
+					.resolveSemanticElement();
+			IElementType elementType = ElementTypeRegistry.getInstance()
+					.getElementType(semanticElement);
+			StringBuilder builder = new StringBuilder();
+			builder.append(elementType.getDisplayName());
+			if (semanticElement instanceof NamedElement
+					&& ((NamedElement) semanticElement).getName() != null) {
+				builder.append(' ');
+				builder.append(((NamedElement) semanticElement).getName());
+			}
+			return builder.toString();
 		}
 		return null;
 	}
 
-	
 	public Image getImage(Object element) {
 		element = unwrap(element);
-		// TODO
+		if (element instanceof IGraphicalEditPart) {
+			EObject semanticElement = ((IGraphicalEditPart) element)
+					.resolveSemanticElement();
+			IElementType elementType = ElementTypeRegistry.getInstance()
+					.getElementType(semanticElement);
+			Image image = DiagramActivator.getDefault().getImageRegistry()
+					.get(elementType.getIconURL().toString());
+			if (image == null) {
+				ImageDescriptor desc = ImageDescriptor
+						.createFromURL(elementType.getIconURL());
+				DiagramActivator
+						.getDefault()
+						.getImageRegistry()
+						.put(elementType.getIconURL().toString(),
+								desc.createImage());
+				return DiagramActivator.getDefault().getImageRegistry()
+						.get(elementType.getIconURL().toString());
+			}
+			return image;
+		}
 		return null;
 	}
 

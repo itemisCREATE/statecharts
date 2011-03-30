@@ -22,9 +22,8 @@ import org.yakindu.sct.statechart.diagram.validation.ValidationAction;
 
 /**
  * 
- * @author Andreas Muelder <a
- *         href="mailto:andreas.muelder@itemis.de">andreas.muelder@itemis.de</a>
- * 
+ * @author muelder
+ *
  */
 public class StatechartDiagramEditor extends DiagramDocumentEditor implements IGotoMarker {
 
@@ -32,6 +31,12 @@ public class StatechartDiagramEditor extends DiagramDocumentEditor implements IG
 
 	public StatechartDiagramEditor() {
 		super(true);
+	}
+	
+	@Override
+	public String getContributorId() {
+		//This is for property sheet page registration
+		return ID;
 	}
 
 

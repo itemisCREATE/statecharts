@@ -4,12 +4,12 @@ Bundle-Name: %pluginName
 Bundle-SymbolicName: org.yakindu.sct.model.statechart.edit;singleton:=true
 Bundle-Version: 1.0.0
 Bundle-ClassPath: .
-Bundle-Activator: org.yakindu.sct.model.statechart.statechart.provider.StatechartEditPlugin$Implementation
+Bundle-Activator: org.yakindu.model.sct.statechart.provider.StatechartEditPlugin$Implementation
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.yakindu.model.sct.statechart.provider
 Require-Bundle: org.eclipse.core.runtime,
  org.yakindu.sct.model.statechart;visibility:=reexport,
  org.eclipse.emf.edit;visibility:=reexport
 Bundle-ActivationPolicy: lazy
-Export-Package: org.yakindu.model.sct.statechart.provider
