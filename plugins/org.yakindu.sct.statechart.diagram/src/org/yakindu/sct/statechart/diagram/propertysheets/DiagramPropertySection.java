@@ -29,7 +29,6 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.views.properties.IPropertySource;
 import org.eclipse.ui.views.properties.IPropertySourceProvider;
 import org.yakindu.model.sct.statechart.ExpressionElement;
-import org.yakindu.model.sct.statechart.StatechartPackage;
 
 /**
  * 
