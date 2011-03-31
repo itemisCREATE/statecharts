@@ -6,11 +6,8 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.xtext.EcoreUtil2;
 import org.yakindu.model.sct.statechart.FinalState;
 import org.yakindu.model.sct.statechart.InitialState;
-import org.yakindu.model.sct.statechart.NamedElement;
 import org.yakindu.model.sct.statechart.Region;
 import org.yakindu.model.sct.statechart.State;
-import org.yakindu.model.sct.statechart.StatechartFactory;
-import org.yakindu.model.sct.statechart.StatechartPackage;
 import org.yakindu.model.sct.statechart.Vertex;
 import org.yakindu.sct.statechart.diagram.extensions.IValidationProvider;
 import org.yakindu.sct.statechart.diagram.validation.provider.AbstractJavaValidationProvider;
@@ -35,7 +32,7 @@ public class StatechartDefaultValidationProvider extends
 	}
 
 	@ValidationRule
-	public IStatus validateIncomingTransitions(Vertex vertex) {
+	public IStatus ¯(Vertex vertex) {
 		if (vertex.getIncomingTransitions().size() == 0
 				&& !(vertex instanceof InitialState)) {
 			return createErrorStatus("A state must have at least one incoming transition!");
