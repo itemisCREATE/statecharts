@@ -8,6 +8,9 @@ import org.yakindu.model.sct.statechart.FinalState;
 import org.yakindu.model.sct.statechart.InitialState;
 import org.yakindu.model.sct.statechart.NamedElement;
 import org.yakindu.model.sct.statechart.Region;
+import org.yakindu.model.sct.statechart.State;
+import org.yakindu.model.sct.statechart.StatechartFactory;
+import org.yakindu.model.sct.statechart.StatechartPackage;
 import org.yakindu.model.sct.statechart.Vertex;
 import org.yakindu.sct.statechart.diagram.extensions.IValidationProvider;
 import org.yakindu.sct.statechart.diagram.validation.provider.AbstractJavaValidationProvider;
@@ -24,8 +27,7 @@ public class StatechartDefaultValidationProvider extends
 
 	@ValidationRule
 	public IStatus validateExactlyOneInitialState(Region region) {
-		List<InitialState> initialStates = EcoreUtil2.getAllContentsOfType(
-				region, InitialState.class);
+		List<InitialState> initialStates = EcoreUtil2.typeSelect(region.getVertices(), InitialState.class);
 		if (initialStates.size() != 1) {
 			return createErrorStatus("A region must contain exactly one initial state!");
 		}
@@ -42,20 +44,19 @@ public class StatechartDefaultValidationProvider extends
 	}
 
 	@ValidationRule
-	public IStatus validateOutgoingTransitions(Vertex vertex) {
+	public IStatus validateOutgoingTransitions(State vertex) {
 		if (!(vertex instanceof FinalState)) {
-			if (vertex.getOutgoingTransitions().size() == 0
-					&& !(vertex instanceof FinalState)) {
-				return createErrorStatus("A state must have at least one outgoing transition!");
+			if (vertex.getOutgoingTransitions().size() == 0) {
+				return createWarningStatus("A state should have at least one outgoing transition.");
 			}
 		}
 		return createOKStatus();
 	}
 
 	@ValidationRule
-	public IStatus validateNameIsNotEmpty(NamedElement namedElement) {
-		if (namedElement.getName() == null || "".equals(namedElement.getName()))
-			return createErrorStatus("name must not be empty!");
+	public IStatus validateNameIsNotEmpty(State state) {
+		if ( !(state instanceof FinalState) && (state.getName() == null || "".equals(state.getName())))
+			return createErrorStatus("A state must have a name!");
 		return createOKStatus();
 	}
 
