@@ -13,15 +13,17 @@ package org.yakindu.sct.statechart.diagram.editparts;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
+import org.eclipse.gmf.runtime.diagram.ui.handles.ConnectionHandle.HandleDirection;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.statechart.diagram.editor.figures.InitialStateFigure;
 import org.yakindu.sct.statechart.diagram.editor.figures.utils.MapModeUtils;
+import org.yakindu.sct.statechart.diagram.policies.OneWayConnectionHandlesEditPolicy;
 import org.yakindu.sct.statechart.diagram.policies.RelationshipSemanticEditPolicy;
 
 /**
  * 
- * @author Andreas Muelder <ahref="mailto:andreas.muelder@itemis.de">andreas.muelder@itemis.de</a>
- * 
+ * @author muelder
+ *
  */
 public class InitialStateEditPart extends FixedSizeShapeNodeEditPart {
 
@@ -32,15 +34,18 @@ public class InitialStateEditPart extends FixedSizeShapeNodeEditPart {
 	@Override
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
-		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE, new RelationshipSemanticEditPolicy());
+		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE,
+				new RelationshipSemanticEditPolicy());
+		installEditPolicy(EditPolicyRoles.CONNECTION_HANDLES_ROLE,
+				new OneWayConnectionHandlesEditPolicy(HandleDirection.OUTGOING));
 	}
 
 	@Override
 	public Dimension getDefaultSize() {
-		return MapModeUtils.getMappedDimensions(getMapMode(), MapModeUtils.DEFAULT_SMALL_NODE_DIMENSION);
+		return MapModeUtils.getMappedDimensions(getMapMode(),
+				MapModeUtils.DEFAULT_SMALL_NODE_DIMENSION);
 	}
 
-	
 	@Override
 	public IFigure getPrimaryShape() {
 		return new InitialStateFigure();

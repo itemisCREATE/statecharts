@@ -14,6 +14,7 @@ import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.StackLayout;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.View;
@@ -22,7 +23,7 @@ import org.yakindu.sct.statechart.diagram.editor.figures.RegionFigure;
 /**
  * 
  * @author muelder
- *
+ * 
  */
 public class RegionEditPart extends ShapeNodeEditPart {
 
@@ -37,7 +38,12 @@ public class RegionEditPart extends ShapeNodeEditPart {
 		figure.add(new RegionFigure(getMapMode()));
 		return figure;
 	}
-	
+
+	@Override
+	protected void createDefaultEditPolicies() {
+		super.createDefaultEditPolicies();
+		removeEditPolicy(EditPolicyRoles.CONNECTION_HANDLES_ROLE);
+	}
 
 	@Override
 	public IFigure getContentPane() {
@@ -56,8 +62,9 @@ public class RegionEditPart extends ShapeNodeEditPart {
 			IFigure figure2 = ((RegionCompartmentEditPart) childEditPart)
 					.getFigure();
 			pane.add(figure2);
-		}else if(childEditPart instanceof RegionNameEditPart){
-			((RegionNameEditPart) childEditPart).setLabel(getPrimaryShape().getNameLabel());
+		} else if (childEditPart instanceof RegionNameEditPart) {
+			((RegionNameEditPart) childEditPart).setLabel(getPrimaryShape()
+					.getNameLabel());
 		} else
 			super.addChildVisual(childEditPart, index);
 	}
