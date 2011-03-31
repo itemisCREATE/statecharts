@@ -27,7 +27,7 @@ public class ValidationAction implements IMarkerType {
 		IFile target = GMFMarkerUtil.getTargetFile(view);
 		if (target != null) {
 			try {
-				target.deleteMarkers(MARKER_TYPE, true, IResource.DEPTH_ZERO);
+				target.deleteMarkers(DIAGRAM_MARKER_TYPE, true, IResource.DEPTH_ZERO);
 			} catch (CoreException e) {
 				e.printStackTrace();
 			}
@@ -48,7 +48,7 @@ public class ValidationAction implements IMarkerType {
 						for (IStatus validationStatus : status) {
 							GMFMarkerUtil.createMarker(target,
 									validationStatus, diagramEditPart.getDiagramView(),
-									MARKER_TYPE, current);
+									DIAGRAM_MARKER_TYPE, current);
 						}
 					}
 				}

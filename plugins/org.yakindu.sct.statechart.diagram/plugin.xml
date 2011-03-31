@@ -407,7 +407,13 @@
    </extension>
    
    <!-- marker && validation -->
-    <extension id="diagnostic" name="Statechart Plugin problems" point="org.eclipse.core.resources.markers">
+    <extension id="org.yakindu.sct.statechart.diagram.diagnostic" name="Statechart Diagram problems" point="org.eclipse.core.resources.markers">
+      <super type="org.eclipse.core.resources.problemmarker"/>
+      <super type="org.eclipse.gmf.runtime.common.ui.services.marker"/>
+      <persistent value="true"/>
+   </extension>   
+   
+    <extension id="org.yakindu.sct.statechart.diagram.xtext.diagnostic" name="Statechart Expression problems" point="org.eclipse.core.resources.markers">
       <super type="org.eclipse.core.resources.problemmarker"/>
       <super type="org.eclipse.gmf.runtime.common.ui.services.marker"/>
       <persistent value="true"/>
@@ -416,7 +422,8 @@
    <extension point="org.eclipse.gmf.runtime.common.ui.services.markerNavigationProviders" id="markers-navigation">
       <MarkerNavigationProvider class="org.yakindu.sct.statechart.diagram.providers.StatechartMarkerNavigationProvider">
          <MarkerType name="org.yakindu.sct.statechart.diagram.diagnostic"/>
-         <Priority name="Highest"/>
+           <MarkerType name="org.yakindu.sct.statechart.diagram.xtext.diagnostic"/>
+         <Priority name="Medium"/>
       </MarkerNavigationProvider>
    </extension>
    

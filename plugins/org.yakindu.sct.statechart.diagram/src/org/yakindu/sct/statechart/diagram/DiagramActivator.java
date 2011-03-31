@@ -16,9 +16,8 @@ import org.osgi.framework.BundleContext;
 
 /**
  * 
- * @author Andreas Muelder <a
- *         href="mailto:andreas.muelder@itemis.de">andreas.muelder@itemis.de</a>
- * 
+ * @author muelder
+ *
  */
 public class DiagramActivator extends AbstractUIPlugin {
 

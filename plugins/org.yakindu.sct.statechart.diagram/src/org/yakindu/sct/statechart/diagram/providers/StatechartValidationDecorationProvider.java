@@ -1,6 +1,7 @@
 package org.yakindu.sct.statechart.diagram.providers;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -40,6 +41,8 @@ import org.yakindu.model.sct.statechart.FinalState;
 import org.yakindu.model.sct.statechart.Pseudostate;
 import org.yakindu.sct.statechart.diagram.editor.StatechartDiagramEditor;
 import org.yakindu.sct.statechart.diagram.validation.IMarkerType;
+
+import com.google.common.collect.Lists;
 
 /**
  * This class is copied from GMF Generator code...
@@ -168,19 +171,21 @@ public class StatechartValidationDecorationProvider extends AbstractProvider
 			if (resource == null || !resource.exists()) {
 				return;
 			}
-			IMarker[] markers = null;
+			List<IMarker> markers = Lists.newArrayList();
 			try {
-				markers = resource.findMarkers(MARKER_TYPE, true,
-						IResource.DEPTH_INFINITE);
+				markers.addAll(Arrays.asList(resource.findMarkers(
+						DIAGRAM_MARKER_TYPE, true, IResource.DEPTH_INFINITE)));
+				markers.addAll(Arrays.asList(resource.findMarkers(
+						XTEXT_MARKER_TYPE, true, IResource.DEPTH_INFINITE)));
 			} catch (CoreException e) {
 				e.printStackTrace();
 			}
-			if (markers == null || markers.length == 0) {
+			if (markers == null || markers.size() == 0) {
 				return;
 			}
 			Label toolTip = null;
-			for (int i = 0; i < markers.length; i++) {
-				IMarker marker = markers[i];
+			for (int i = 0; i < markers.size(); i++) {
+				IMarker marker = markers.get(i);
 				String attribute = marker
 						.getAttribute(
 								org.eclipse.gmf.runtime.common.ui.resources.IMarker.ELEMENT_ID,
@@ -344,7 +349,8 @@ public class StatechartValidationDecorationProvider extends AbstractProvider
 		}
 
 		public void handleMarkerChanged(IMarker marker) {
-			if (!MARKER_TYPE.equals(getType(marker))) {
+			if (!DIAGRAM_MARKER_TYPE.equals(getType(marker))
+					&& !XTEXT_MARKER_TYPE.equals(getType(marker))) {
 				return;
 			}
 			String viewId = marker

@@ -4,12 +4,15 @@ import org.yakindu.sct.statechart.diagram.DiagramActivator;
 
 /**
  * 
- * @author Andreas Muelder <a
- *         href="mailto:andreas.muelder@itemis.de">andreas.muelder@itemis.de</a>
+ * @author Lev0r
  * 
  */
 public interface IMarkerType {
 
-	public static final String MARKER_TYPE = DiagramActivator.PLUGIN_ID + ".diagnostic";
+	public static final String DIAGRAM_MARKER_TYPE = DiagramActivator.PLUGIN_ID
+			+ ".diagnostic";
+
+	public static final String XTEXT_MARKER_TYPE = DiagramActivator.PLUGIN_ID
+			+ ".xtext.diagnostic";
 
 }
