@@ -24,9 +24,9 @@ public class JunctionFigure extends Ellipse {
 	private void init() {
 		this.setOutline(true);
 		this.setLineWidth(0);
-		this.setSize(new Dimension(10, 10));
+		this.setSize(new Dimension(8, 8));
 		this.setBorder(new MarginBorder(2, 2, 2, 2));
-		this.setBackgroundColor(ColorConstants.white);
+		this.setBackgroundColor(ColorConstants.gray);
 		this.setForegroundColor(ColorConstants.black);
 	}
 
