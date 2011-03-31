@@ -149,7 +149,21 @@
       </parser>
    </extension>
    
-     <!-- View Provider -->
+   <!-- Contribution Item Provider -->
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.action.contributionItemProviders">
+      <contributionItemProvider
+            class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContributionItemProvider"
+            checkPluginLoaded="false">
+         <Priority name="Low"/>
+         <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
+            <popupStructuredContributionCriteria objectClass="org.yakindu.sct.statechart.diagram.editparts.StatechartTextEditPart"/>
+            <popupStructuredContributionCriteria objectClass="org.yakindu.sct.statechart.diagram.editparts.StatechartTextExpressionEditPart"/>
+            <popupPredefinedItem id="editGroup" remove="true"/>
+         </popupContribution>
+      </contributionItemProvider>
+   </extension>
+   
+  <!-- View Provider -->
    
    <extension
          point="org.eclipse.gmf.runtime.diagram.core.viewProviders">

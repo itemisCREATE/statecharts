@@ -46,8 +46,6 @@ public abstract class PlugableXTextLabelEditPart extends XtextLabelEditPart {
 		injector.injectMembers(expressionDirectEditPolicy);
 		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE,
 				expressionDirectEditPolicy);
-		
-		removeEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE);		
 	}
 
 	@Override

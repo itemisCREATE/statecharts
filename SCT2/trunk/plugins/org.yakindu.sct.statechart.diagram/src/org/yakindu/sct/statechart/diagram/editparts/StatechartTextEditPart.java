@@ -3,6 +3,8 @@ package org.yakindu.sct.statechart.diagram.editparts;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.StackLayout;
 import org.eclipse.gef.EditPart;
+import org.eclipse.gef.EditPolicy;
+import org.eclipse.gef.editpolicies.RootComponentEditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IPrimaryEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
@@ -27,6 +29,14 @@ public class StatechartTextEditPart extends ShapeNodeEditPart implements
 		figure.setLayoutManager(new StackLayout());
 		figure.add(new StatechartTextFigure(getMapMode()));
 		return figure;
+	}
+
+	@Override
+	protected void createDefaultEditPolicies() {
+		super.createDefaultEditPolicies();
+		// Disables deletion of the text compartment view via keyboard
+		installEditPolicy(EditPolicy.COMPONENT_ROLE,
+				new RootComponentEditPolicy());
 	}
 
 	@Override
@@ -55,5 +65,4 @@ public class StatechartTextEditPart extends ShapeNodeEditPart implements
 	private StatechartTextFigure getPrimaryShape() {
 		return (StatechartTextFigure) getFigure().getChildren().get(0);
 	}
-
 }
