@@ -34,7 +34,11 @@ public final class GMFMarkerUtil {
 		}
 		View view = findNotationView(diagram,
 				semanticTarget);
-		addMarker(target, view.eResource().getURIFragment(view),
+		String uriFragment = view.eResource().getURIFragment(view);
+		
+		System.out.println("URI Fragment " + uriFragment);
+		
+		addMarker(target, uriFragment,
 				EMFCoreUtil.getQualifiedName(semanticTarget, true),
 				validationStatus.getMessage(), validationStatus.getSeverity(),
 				markerType);

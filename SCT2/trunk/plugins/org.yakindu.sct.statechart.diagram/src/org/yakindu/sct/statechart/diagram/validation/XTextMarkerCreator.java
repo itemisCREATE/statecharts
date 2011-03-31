@@ -22,9 +22,9 @@ public class XTextMarkerCreator {
 		marker.setAttribute(IMarker.MESSAGE, issue.getMessage());
 		marker.setAttribute(IMarker.SEVERITY, getSeverity(issue));
 		marker.setAttribute(Issue.CODE_KEY, issue.getCode());
-		marker.setAttribute(
-				org.eclipse.gmf.runtime.common.ui.resources.IMarker.ELEMENT_ID,
-		elementId);
+//		marker.setAttribute(
+//				org.eclipse.gmf.runtime.common.ui.resources.IMarker.ELEMENT_ID,
+//		elementId);
 		if (issue.getUriToProblem()!=null) 
 			marker.setAttribute(Issue.URI_KEY, issue.getUriToProblem().toString());
 		if(issue.getData() != null && issue.getData().length > 0) {
