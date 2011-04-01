@@ -32,7 +32,7 @@ public class StatechartDefaultValidationProvider extends
 	}
 
 	@ValidationRule
-	public IStatus ¯(Vertex vertex) {
+	public IStatus validateIncomingTransition(Vertex vertex) {
 		if (vertex.getIncomingTransitions().size() == 0
 				&& !(vertex instanceof InitialState)) {
 			return createErrorStatus("A state must have at least one incoming transition!");
