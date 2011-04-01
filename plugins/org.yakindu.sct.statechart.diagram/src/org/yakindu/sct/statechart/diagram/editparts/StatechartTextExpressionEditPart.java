@@ -3,7 +3,6 @@ package org.yakindu.sct.statechart.diagram.editparts;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.editpolicies.RootComponentEditPolicy;
 import org.eclipse.gmf.runtime.notation.View;
-import org.eclipse.swt.SWT;
 
 /**
  * 
@@ -26,9 +25,5 @@ public class StatechartTextExpressionEditPart extends
 		removeEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE);	
 	}
 
-	@Override
-	protected int getEditorStyles() {
-		return SWT.MULTI;
-	}
 
 }
