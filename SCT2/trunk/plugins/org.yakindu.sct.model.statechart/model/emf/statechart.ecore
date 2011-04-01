@@ -13,15 +13,13 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="incomingTransitions" ordered="false"
         upperBound="-1" eType="#//Transition" eOpposite="#//Transition/target"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="outgoingTransitions" ordered="false"
-        upperBound="-1" eType="#//Transition" eOpposite="#//Transition/source"/>
+        upperBound="-1" eType="#//Transition" containment="true" eOpposite="#//Transition/source"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Region" eSuperTypes="#//NamedElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="transitions" ordered="false"
-        upperBound="-1" eType="#//Transition" containment="true" eOpposite="#//Transition/region"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="vertices" ordered="false"
         upperBound="-1" eType="#//Vertex" containment="true" eOpposite="#//Vertex/parentRegion"/>
   </eClassifiers>
@@ -31,7 +29,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" ordered="false"
         lowerBound="1" eType="#//Vertex" eOpposite="#//Vertex/outgoingTransitions"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="region" ordered="false"
-        lowerBound="1" eType="#//Region" eOpposite="#//Region/transitions"/>
+        lowerBound="1" eType="#//Region"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FinalState" eSuperTypes="#//State"/>
   <eClassifiers xsi:type="ecore:EClass" name="State" eSuperTypes="#//Vertex #//ExpressionElement">

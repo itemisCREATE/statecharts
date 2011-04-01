@@ -14,21 +14,25 @@ import java.util.List;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.CanonicalConnectionEditPolicy;
 import org.yakindu.model.sct.statechart.Region;
 import org.yakindu.model.sct.statechart.Transition;
+import org.yakindu.model.sct.statechart.Vertex;
 import org.yakindu.sct.statechart.diagram.providers.SemanticHints;
 import org.yakindu.sct.statechart.diagram.utils.SemanticHintUtil;
 
+import com.google.common.collect.Lists;
+
 /**
  * 
- * @author Andreas Muelder <a
- *         href="mailto:andreas.muelder@itemis.de">andreas.muelder@itemis.de</a>
+ * @author muelder
  * 
  */
-public class RegionCompartmentCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
+public class RegionCompartmentCanonicalEditPolicy extends
+		CanonicalConnectionEditPolicy {
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
@@ -39,7 +43,12 @@ public class RegionCompartmentCanonicalEditPolicy extends CanonicalConnectionEdi
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	protected List getSemanticConnectionsList() {
-		return getSemanticHost().getTransitions();
+		List<Transition> transitions = Lists.newArrayList();
+		EList<Vertex> vertices = getSemanticHost().getVertices();
+		for (Vertex vertex : vertices) {
+			transitions.addAll(vertex.getOutgoingTransitions());
+		}
+		return transitions;
 	}
 
 	@Override
@@ -55,7 +64,6 @@ public class RegionCompartmentCanonicalEditPolicy extends CanonicalConnectionEdi
 		Transition transition = (Transition) relationship;
 		return transition.getTarget();
 	}
-	
 
 	@Override
 	public Region getSemanticHost() {
@@ -69,11 +77,12 @@ public class RegionCompartmentCanonicalEditPolicy extends CanonicalConnectionEdi
 
 	@Override
 	protected String getFactoryHint(IAdaptable elementAdapter) {
-		EObject modelElement = (EObject) elementAdapter.getAdapter(EObject.class);
-		String factoryHint =  SemanticHintUtil.getSemanticHint(modelElement);
+		EObject modelElement = (EObject) elementAdapter
+				.getAdapter(EObject.class);
+		String factoryHint = SemanticHintUtil.getSemanticHint(modelElement);
 		return factoryHint;
 	}
-	
+
 	@Override
 	protected String getDefaultFactoryHint() {
 		return SemanticHints.TRANSITION;
