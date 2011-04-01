@@ -23,20 +23,20 @@ public abstract class PlugableXTextLabelEditPart extends XtextLabelEditPart {
 
 	private static final String EXPRESSIONS_EXTENSION = "org.yakindu.sct.statechart.diagram.expressions";
 	private Injector injector;
-
-	protected abstract int getEditorStyles();
+	private int editorStyle;
 
 	public PlugableXTextLabelEditPart(View view) {
 		super(view);
-		createInjector();
+		init();
 	}
 
-	private void createInjector() {
+	private void init() {
 		Extensions<IExpressionsProvider> extensions = new Extensions<IExpressionsProvider>(
 				EXPRESSIONS_EXTENSION);
 		IExpressionsProvider registeredProvider = extensions
 				.getRegisteredProvider(resolveSemanticElement());
 		injector = registeredProvider.getInjector();
+		editorStyle = registeredProvider.getStyle();
 	}
 
 	@Override
@@ -51,10 +51,6 @@ public abstract class PlugableXTextLabelEditPart extends XtextLabelEditPart {
 	@Override
 	protected XtextDirectEditManager createXTextDirectEditManager() {
 		return new XtextDirectEditManager(this, injector, getEditorStyles());
-	}
-
-	public Injector getInjector() {
-		return injector;
 	}
 
 	@Override
@@ -73,5 +69,14 @@ public abstract class PlugableXTextLabelEditPart extends XtextLabelEditPart {
 		String exp = resolveSemanticElement().getExpression();
 		return exp != null ? exp : "";
 	}
+	
+	protected int getEditorStyles() {
+		return editorStyle;
+	}
+
+	public Injector getInjector() {
+		return injector;
+	}
+
 
 }

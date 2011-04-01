@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2010 committers of YAKINDU and others.
+ * Copyright (c) 2011 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -16,7 +16,6 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.ui.provider.PropertyDescriptor;
 import org.eclipse.emf.edit.ui.provider.PropertySource;
 import org.eclipse.jface.viewers.CellEditor;
-import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.views.properties.IPropertyDescriptor;
 import org.yakindu.model.sct.statechart.ExpressionElement;
@@ -24,12 +23,14 @@ import org.yakindu.model.sct.statechart.StatechartPackage;
 import org.yakindu.sct.statechart.diagram.extensions.Extensions;
 import org.yakindu.sct.statechart.diagram.extensions.IExpressionsProvider;
 
-import com.google.inject.Injector;
-
 import de.itemis.xtext.utils.gmf.directedit.XtextCellEditor;
 
 /**
- * Creates an {@link XtextCellEditor} for all {@link ExpressionElement}s for the Property Page.
+ * Creates an {@link XtextCellEditor} for all {@link ExpressionElement}s for the
+ * Property Page. The Language provider is loaded via
+ * org.yakindu.sct.statechart.diagram.expressions extension point.
+ * 
+ * 
  * 
  * @author muelder
  * 
@@ -57,22 +58,26 @@ public class ExpressionElementPropertySource extends PropertySource {
 				return new PropertyDescriptor(object, itemPropertyDescriptor) {
 					@Override
 					public CellEditor createPropertyEditor(Composite composite) {
-						XtextCellEditor xTextEditor = new XtextCellEditor(
-								composite, getInjector(), SWT.SINGLE);
+						final XtextCellEditor xTextEditor = new XtextCellEditor(
+								composite, getExpressionsProvider()
+										.getInjector(),
+								getExpressionsProvider().getStyle());
 						return xTextEditor;
+
 					}
 				};
 			}
 		}
+		;
 		return super.createPropertyDescriptor(itemPropertyDescriptor);
 	}
 
-	protected Injector getInjector() {
+	protected IExpressionsProvider getExpressionsProvider() {
 		Extensions<IExpressionsProvider> extensions = new Extensions<IExpressionsProvider>(
 				EXPRESSIONS_EXTENSION);
 		IExpressionsProvider registeredProvider = extensions
 				.getRegisteredProvider(element);
-		return registeredProvider.getInjector();
+		return registeredProvider;
 	}
 
 }
