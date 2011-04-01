@@ -30,7 +30,6 @@ import org.yakindu.model.sct.statechart.Vertex;
  * <ul>
  *   <li>{@link org.yakindu.model.sct.statechart.impl.TransitionImpl#getTarget <em>Target</em>}</li>
  *   <li>{@link org.yakindu.model.sct.statechart.impl.TransitionImpl#getSource <em>Source</em>}</li>
- *   <li>{@link org.yakindu.model.sct.statechart.impl.TransitionImpl#getRegion <em>Region</em>}</li>
  * </ul>
  * </p>
  *
@@ -53,16 +52,6 @@ public class TransitionImpl extends ExpressionElementImpl implements Transition 
 	 * @ordered
 	 */
 	protected Vertex target;
-
-	/**
-	 * The cached value of the '{@link #getRegion() <em>Region</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getRegion()
-	 * @generated
-	 * @ordered
-	 */
-	protected Region region;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -189,44 +178,6 @@ public class TransitionImpl extends ExpressionElementImpl implements Transition 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Region getRegion() {
-		if (region != null && region.eIsProxy()) {
-			InternalEObject oldRegion = (InternalEObject)region;
-			region = (Region)eResolveProxy(oldRegion);
-			if (region != oldRegion) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, StatechartPackage.TRANSITION__REGION, oldRegion, region));
-			}
-		}
-		return region;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Region basicGetRegion() {
-		return region;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setRegion(Region newRegion) {
-		Region oldRegion = region;
-		region = newRegion;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, StatechartPackage.TRANSITION__REGION, oldRegion, region));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -285,9 +236,6 @@ public class TransitionImpl extends ExpressionElementImpl implements Transition 
 				return basicGetTarget();
 			case StatechartPackage.TRANSITION__SOURCE:
 				return getSource();
-			case StatechartPackage.TRANSITION__REGION:
-				if (resolve) return getRegion();
-				return basicGetRegion();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -305,9 +253,6 @@ public class TransitionImpl extends ExpressionElementImpl implements Transition 
 				return;
 			case StatechartPackage.TRANSITION__SOURCE:
 				setSource((Vertex)newValue);
-				return;
-			case StatechartPackage.TRANSITION__REGION:
-				setRegion((Region)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -327,9 +272,6 @@ public class TransitionImpl extends ExpressionElementImpl implements Transition 
 			case StatechartPackage.TRANSITION__SOURCE:
 				setSource((Vertex)null);
 				return;
-			case StatechartPackage.TRANSITION__REGION:
-				setRegion((Region)null);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -346,8 +288,6 @@ public class TransitionImpl extends ExpressionElementImpl implements Transition 
 				return target != null;
 			case StatechartPackage.TRANSITION__SOURCE:
 				return getSource() != null;
-			case StatechartPackage.TRANSITION__REGION:
-				return region != null;
 		}
 		return super.eIsSet(featureID);
 	}

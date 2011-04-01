@@ -18,14 +18,17 @@ import org.eclipse.gmf.runtime.draw2d.ui.figures.FigureUtilities;
 import org.eclipse.gmf.runtime.notation.Bounds;
 import org.eclipse.gmf.runtime.notation.DecorationNode;
 import org.eclipse.gmf.runtime.notation.Diagram;
+import org.eclipse.gmf.runtime.notation.Edge;
 import org.eclipse.gmf.runtime.notation.Node;
 import org.eclipse.gmf.runtime.notation.NotationFactory;
 import org.eclipse.gmf.runtime.notation.ShapeStyle;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.model.sct.statechart.InitialState;
 import org.yakindu.model.sct.statechart.Region;
+import org.yakindu.model.sct.statechart.State;
 import org.yakindu.model.sct.statechart.Statechart;
 import org.yakindu.model.sct.statechart.StatechartFactory;
+import org.yakindu.model.sct.statechart.Transition;
 import org.yakindu.sct.statechart.diagram.DiagramActivator;
 import org.yakindu.sct.statechart.diagram.editor.StatechartDiagramEditor;
 import org.yakindu.sct.statechart.diagram.providers.SemanticHints;
@@ -105,6 +108,20 @@ public final class FactoryUtils {
 				SemanticHints.INITIALSTATE,
 				DiagramActivator.DIAGRAM_PREFERENCES_HINT);
 		setInitialStateViewLayoutConstraint(initialStateView);
+		// Create the first state
+		State state = StatechartFactory.eINSTANCE.createState();
+		region.getVertices().add(state);
+		Node stateNode = ViewService.createNode(
+				getRegionCompartmentView(regionView), SemanticHints.STATE,
+				DiagramActivator.DIAGRAM_PREFERENCES_HINT);
+		// Create the transition from Initial State to State
+		Transition transition = StatechartFactory.eINSTANCE.createTransition();
+		transition.setSource(initialState);
+		transition.setTarget(state);
+		initialState.getOutgoingTransitions().add(transition);
+		Edge transitionView = ViewService.createEdge(initialStateView,
+				stateNode, SemanticHints.TRANSITION,
+				DiagramActivator.DIAGRAM_PREFERENCES_HINT);
 		// Create the textcompartment for events / variables
 		Node textCompartment = ViewService.createNode(diagram, statechart,
 				SemanticHints.STATECHART_TEXT,
