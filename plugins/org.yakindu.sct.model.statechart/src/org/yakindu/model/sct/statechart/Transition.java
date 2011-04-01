@@ -66,7 +66,7 @@ public interface Transition extends ExpressionElement {
 	void setTarget(Vertex value);
 
 	/**
-	 * Returns the value of the '<em><b>Source</b></em>' reference.
+	 * Returns the value of the '<em><b>Source</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link org.yakindu.model.sct.statechart.Vertex#getOutgoingTransitions <em>Outgoing Transitions</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -74,48 +74,46 @@ public interface Transition extends ExpressionElement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Source</em>' reference.
+	 * @return the value of the '<em>Source</em>' container reference.
 	 * @see #setSource(Vertex)
 	 * @see org.yakindu.model.sct.statechart.StatechartPackage#getTransition_Source()
 	 * @see org.yakindu.model.sct.statechart.Vertex#getOutgoingTransitions
-	 * @model opposite="outgoingTransitions" required="true" ordered="false"
+	 * @model opposite="outgoingTransitions" required="true" transient="false" ordered="false"
 	 * @generated
 	 */
 	Vertex getSource();
 
 	/**
-	 * Sets the value of the '{@link org.yakindu.model.sct.statechart.Transition#getSource <em>Source</em>}' reference.
+	 * Sets the value of the '{@link org.yakindu.model.sct.statechart.Transition#getSource <em>Source</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Source</em>' reference.
+	 * @param value the new value of the '<em>Source</em>' container reference.
 	 * @see #getSource()
 	 * @generated
 	 */
 	void setSource(Vertex value);
 
 	/**
-	 * Returns the value of the '<em><b>Region</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link org.yakindu.model.sct.statechart.Region#getTransitions <em>Transitions</em>}'.
+	 * Returns the value of the '<em><b>Region</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Region</em>' container reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Region</em>' container reference.
+	 * @return the value of the '<em>Region</em>' reference.
 	 * @see #setRegion(Region)
 	 * @see org.yakindu.model.sct.statechart.StatechartPackage#getTransition_Region()
-	 * @see org.yakindu.model.sct.statechart.Region#getTransitions
-	 * @model opposite="transitions" required="true" transient="false" ordered="false"
+	 * @model required="true" ordered="false"
 	 * @generated
 	 */
 	Region getRegion();
 
 	/**
-	 * Sets the value of the '{@link org.yakindu.model.sct.statechart.Transition#getRegion <em>Region</em>}' container reference.
+	 * Sets the value of the '{@link org.yakindu.model.sct.statechart.Transition#getRegion <em>Region</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Region</em>' container reference.
+	 * @param value the new value of the '<em>Region</em>' reference.
 	 * @see #getRegion()
 	 * @generated
 	 */

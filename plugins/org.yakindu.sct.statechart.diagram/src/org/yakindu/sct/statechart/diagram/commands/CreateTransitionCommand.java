@@ -28,9 +28,8 @@ import org.yakindu.model.sct.statechart.Vertex;
 
 /**
  * 
- * @author Andreas Muelder <a
- *         href="mailto:andreas.muelder@itemis.de">andreas.muelder@itemis.de</a>
- * 
+ * @author muelder
+ *
  */
 public class CreateTransitionCommand extends EditElementCommand {
 
@@ -83,7 +82,7 @@ public class CreateTransitionCommand extends EditElementCommand {
 		}
 		if (getSource() != null && getTarget() != null) {
 			Transition transition = StatechartFactory.eINSTANCE.createTransition();
-			getContainer().getTransitions().add(transition);
+			source.getOutgoingTransitions().add(transition);
 			transition.setSource(source);
 			transition.setTarget(target);
 			source.getOutgoingTransitions().add(transition);

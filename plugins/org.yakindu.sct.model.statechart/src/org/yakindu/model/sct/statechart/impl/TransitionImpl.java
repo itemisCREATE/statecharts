@@ -55,14 +55,14 @@ public class TransitionImpl extends ExpressionElementImpl implements Transition 
 	protected Vertex target;
 
 	/**
-	 * The cached value of the '{@link #getSource() <em>Source</em>}' reference.
+	 * The cached value of the '{@link #getRegion() <em>Region</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSource()
+	 * @see #getRegion()
 	 * @generated
 	 * @ordered
 	 */
-	protected Vertex source;
+	protected Region region;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -149,24 +149,8 @@ public class TransitionImpl extends ExpressionElementImpl implements Transition 
 	 * @generated
 	 */
 	public Vertex getSource() {
-		if (source != null && source.eIsProxy()) {
-			InternalEObject oldSource = (InternalEObject)source;
-			source = (Vertex)eResolveProxy(oldSource);
-			if (source != oldSource) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, StatechartPackage.TRANSITION__SOURCE, oldSource, source));
-			}
-		}
-		return source;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Vertex basicGetSource() {
-		return source;
+		if (eContainerFeatureID() != StatechartPackage.TRANSITION__SOURCE) return null;
+		return (Vertex)eContainer();
 	}
 
 	/**
@@ -175,12 +159,7 @@ public class TransitionImpl extends ExpressionElementImpl implements Transition 
 	 * @generated
 	 */
 	public NotificationChain basicSetSource(Vertex newSource, NotificationChain msgs) {
-		Vertex oldSource = source;
-		source = newSource;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, StatechartPackage.TRANSITION__SOURCE, oldSource, newSource);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
+		msgs = eBasicSetContainer((InternalEObject)newSource, StatechartPackage.TRANSITION__SOURCE, msgs);
 		return msgs;
 	}
 
@@ -190,10 +169,12 @@ public class TransitionImpl extends ExpressionElementImpl implements Transition 
 	 * @generated
 	 */
 	public void setSource(Vertex newSource) {
-		if (newSource != source) {
+		if (newSource != eInternalContainer() || (eContainerFeatureID() != StatechartPackage.TRANSITION__SOURCE && newSource != null)) {
+			if (EcoreUtil.isAncestor(this, newSource))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
-			if (source != null)
-				msgs = ((InternalEObject)source).eInverseRemove(this, StatechartPackage.VERTEX__OUTGOING_TRANSITIONS, Vertex.class, msgs);
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
 			if (newSource != null)
 				msgs = ((InternalEObject)newSource).eInverseAdd(this, StatechartPackage.VERTEX__OUTGOING_TRANSITIONS, Vertex.class, msgs);
 			msgs = basicSetSource(newSource, msgs);
@@ -209,8 +190,15 @@ public class TransitionImpl extends ExpressionElementImpl implements Transition 
 	 * @generated
 	 */
 	public Region getRegion() {
-		if (eContainerFeatureID() != StatechartPackage.TRANSITION__REGION) return null;
-		return (Region)eContainer();
+		if (region != null && region.eIsProxy()) {
+			InternalEObject oldRegion = (InternalEObject)region;
+			region = (Region)eResolveProxy(oldRegion);
+			if (region != oldRegion) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, StatechartPackage.TRANSITION__REGION, oldRegion, region));
+			}
+		}
+		return region;
 	}
 
 	/**
@@ -218,9 +206,8 @@ public class TransitionImpl extends ExpressionElementImpl implements Transition 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetRegion(Region newRegion, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newRegion, StatechartPackage.TRANSITION__REGION, msgs);
-		return msgs;
+	public Region basicGetRegion() {
+		return region;
 	}
 
 	/**
@@ -229,19 +216,10 @@ public class TransitionImpl extends ExpressionElementImpl implements Transition 
 	 * @generated
 	 */
 	public void setRegion(Region newRegion) {
-		if (newRegion != eInternalContainer() || (eContainerFeatureID() != StatechartPackage.TRANSITION__REGION && newRegion != null)) {
-			if (EcoreUtil.isAncestor(this, newRegion))
-				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
-			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
-			if (newRegion != null)
-				msgs = ((InternalEObject)newRegion).eInverseAdd(this, StatechartPackage.REGION__TRANSITIONS, Region.class, msgs);
-			msgs = basicSetRegion(newRegion, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, StatechartPackage.TRANSITION__REGION, newRegion, newRegion));
+		Region oldRegion = region;
+		region = newRegion;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, StatechartPackage.TRANSITION__REGION, oldRegion, region));
 	}
 
 	/**
@@ -257,13 +235,9 @@ public class TransitionImpl extends ExpressionElementImpl implements Transition 
 					msgs = ((InternalEObject)target).eInverseRemove(this, StatechartPackage.VERTEX__INCOMING_TRANSITIONS, Vertex.class, msgs);
 				return basicSetTarget((Vertex)otherEnd, msgs);
 			case StatechartPackage.TRANSITION__SOURCE:
-				if (source != null)
-					msgs = ((InternalEObject)source).eInverseRemove(this, StatechartPackage.VERTEX__OUTGOING_TRANSITIONS, Vertex.class, msgs);
-				return basicSetSource((Vertex)otherEnd, msgs);
-			case StatechartPackage.TRANSITION__REGION:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetRegion((Region)otherEnd, msgs);
+				return basicSetSource((Vertex)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -280,8 +254,6 @@ public class TransitionImpl extends ExpressionElementImpl implements Transition 
 				return basicSetTarget(null, msgs);
 			case StatechartPackage.TRANSITION__SOURCE:
 				return basicSetSource(null, msgs);
-			case StatechartPackage.TRANSITION__REGION:
-				return basicSetRegion(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -294,8 +266,8 @@ public class TransitionImpl extends ExpressionElementImpl implements Transition 
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case StatechartPackage.TRANSITION__REGION:
-				return eInternalContainer().eInverseRemove(this, StatechartPackage.REGION__TRANSITIONS, Region.class, msgs);
+			case StatechartPackage.TRANSITION__SOURCE:
+				return eInternalContainer().eInverseRemove(this, StatechartPackage.VERTEX__OUTGOING_TRANSITIONS, Vertex.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -312,10 +284,10 @@ public class TransitionImpl extends ExpressionElementImpl implements Transition 
 				if (resolve) return getTarget();
 				return basicGetTarget();
 			case StatechartPackage.TRANSITION__SOURCE:
-				if (resolve) return getSource();
-				return basicGetSource();
+				return getSource();
 			case StatechartPackage.TRANSITION__REGION:
-				return getRegion();
+				if (resolve) return getRegion();
+				return basicGetRegion();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -373,9 +345,9 @@ public class TransitionImpl extends ExpressionElementImpl implements Transition 
 			case StatechartPackage.TRANSITION__TARGET:
 				return target != null;
 			case StatechartPackage.TRANSITION__SOURCE:
-				return source != null;
+				return getSource() != null;
 			case StatechartPackage.TRANSITION__REGION:
-				return getRegion() != null;
+				return region != null;
 		}
 		return super.eIsSet(featureID);
 	}

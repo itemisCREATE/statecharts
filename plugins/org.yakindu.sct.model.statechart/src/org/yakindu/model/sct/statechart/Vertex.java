@@ -85,7 +85,7 @@ public interface Vertex extends NamedElement {
 	EList<Transition> getIncomingTransitions();
 
 	/**
-	 * Returns the value of the '<em><b>Outgoing Transitions</b></em>' reference list.
+	 * Returns the value of the '<em><b>Outgoing Transitions</b></em>' containment reference list.
 	 * The list contents are of type {@link org.yakindu.model.sct.statechart.Transition}.
 	 * It is bidirectional and its opposite is '{@link org.yakindu.model.sct.statechart.Transition#getSource <em>Source</em>}'.
 	 * <!-- begin-user-doc -->
@@ -94,10 +94,10 @@ public interface Vertex extends NamedElement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Outgoing Transitions</em>' reference list.
+	 * @return the value of the '<em>Outgoing Transitions</em>' containment reference list.
 	 * @see org.yakindu.model.sct.statechart.StatechartPackage#getVertex_OutgoingTransitions()
 	 * @see org.yakindu.model.sct.statechart.Transition#getSource
-	 * @model opposite="source" ordered="false"
+	 * @model opposite="source" containment="true" ordered="false"
 	 * @generated
 	 */
 	EList<Transition> getOutgoingTransitions();

@@ -143,7 +143,7 @@ public interface StatechartPackage extends EPackage {
 	int VERTEX__INCOMING_TRANSITIONS = NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Outgoing Transitions</b></em>' reference list.
+	 * The feature id for the '<em><b>Outgoing Transitions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -198,7 +198,7 @@ public interface StatechartPackage extends EPackage {
 	int PSEUDOSTATE__INCOMING_TRANSITIONS = VERTEX__INCOMING_TRANSITIONS;
 
 	/**
-	 * The feature id for the '<em><b>Outgoing Transitions</b></em>' reference list.
+	 * The feature id for the '<em><b>Outgoing Transitions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -235,22 +235,13 @@ public interface StatechartPackage extends EPackage {
 	int REGION__NAME = NAMED_ELEMENT__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Transitions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REGION__TRANSITIONS = NAMED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Vertices</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REGION__VERTICES = NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int REGION__VERTICES = NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Region</em>' class.
@@ -259,7 +250,7 @@ public interface StatechartPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REGION_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 2;
+	int REGION_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.model.sct.statechart.impl.ExpressionElementImpl <em>Expression Element</em>}' class.
@@ -318,7 +309,7 @@ public interface StatechartPackage extends EPackage {
 	int TRANSITION__TARGET = EXPRESSION_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Source</b></em>' reference.
+	 * The feature id for the '<em><b>Source</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -327,7 +318,7 @@ public interface StatechartPackage extends EPackage {
 	int TRANSITION__SOURCE = EXPRESSION_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Region</b></em>' container reference.
+	 * The feature id for the '<em><b>Region</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -382,7 +373,7 @@ public interface StatechartPackage extends EPackage {
 	int STATE__INCOMING_TRANSITIONS = VERTEX__INCOMING_TRANSITIONS;
 
 	/**
-	 * The feature id for the '<em><b>Outgoing Transitions</b></em>' reference list.
+	 * The feature id for the '<em><b>Outgoing Transitions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -455,7 +446,7 @@ public interface StatechartPackage extends EPackage {
 	int FINAL_STATE__INCOMING_TRANSITIONS = STATE__INCOMING_TRANSITIONS;
 
 	/**
-	 * The feature id for the '<em><b>Outgoing Transitions</b></em>' reference list.
+	 * The feature id for the '<em><b>Outgoing Transitions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -621,7 +612,7 @@ public interface StatechartPackage extends EPackage {
 	int HISTORY_STATE__INCOMING_TRANSITIONS = PSEUDOSTATE__INCOMING_TRANSITIONS;
 
 	/**
-	 * The feature id for the '<em><b>Outgoing Transitions</b></em>' reference list.
+	 * The feature id for the '<em><b>Outgoing Transitions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -676,7 +667,7 @@ public interface StatechartPackage extends EPackage {
 	int SHALLOW_HISTORY_STATE__INCOMING_TRANSITIONS = HISTORY_STATE__INCOMING_TRANSITIONS;
 
 	/**
-	 * The feature id for the '<em><b>Outgoing Transitions</b></em>' reference list.
+	 * The feature id for the '<em><b>Outgoing Transitions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -731,7 +722,7 @@ public interface StatechartPackage extends EPackage {
 	int JUNCTION__INCOMING_TRANSITIONS = PSEUDOSTATE__INCOMING_TRANSITIONS;
 
 	/**
-	 * The feature id for the '<em><b>Outgoing Transitions</b></em>' reference list.
+	 * The feature id for the '<em><b>Outgoing Transitions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -786,7 +777,7 @@ public interface StatechartPackage extends EPackage {
 	int DEEP_HISTORY_STATE__INCOMING_TRANSITIONS = HISTORY_STATE__INCOMING_TRANSITIONS;
 
 	/**
-	 * The feature id for the '<em><b>Outgoing Transitions</b></em>' reference list.
+	 * The feature id for the '<em><b>Outgoing Transitions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -915,7 +906,7 @@ public interface StatechartPackage extends EPackage {
 	int JOIN__INCOMING_TRANSITIONS = PSEUDOSTATE__INCOMING_TRANSITIONS;
 
 	/**
-	 * The feature id for the '<em><b>Outgoing Transitions</b></em>' reference list.
+	 * The feature id for the '<em><b>Outgoing Transitions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1072,7 +1063,7 @@ public interface StatechartPackage extends EPackage {
 	int CHOICE__INCOMING_TRANSITIONS = PSEUDOSTATE__INCOMING_TRANSITIONS;
 
 	/**
-	 * The feature id for the '<em><b>Outgoing Transitions</b></em>' reference list.
+	 * The feature id for the '<em><b>Outgoing Transitions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1191,7 +1182,7 @@ public interface StatechartPackage extends EPackage {
 	int FORK__INCOMING_TRANSITIONS = PSEUDOSTATE__INCOMING_TRANSITIONS;
 
 	/**
-	 * The feature id for the '<em><b>Outgoing Transitions</b></em>' reference list.
+	 * The feature id for the '<em><b>Outgoing Transitions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1246,7 +1237,7 @@ public interface StatechartPackage extends EPackage {
 	int INITIAL_STATE__INCOMING_TRANSITIONS = PSEUDOSTATE__INCOMING_TRANSITIONS;
 
 	/**
-	 * The feature id for the '<em><b>Outgoing Transitions</b></em>' reference list.
+	 * The feature id for the '<em><b>Outgoing Transitions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1364,10 +1355,10 @@ public interface StatechartPackage extends EPackage {
 	EReference getVertex_IncomingTransitions();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.yakindu.model.sct.statechart.Vertex#getOutgoingTransitions <em>Outgoing Transitions</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.yakindu.model.sct.statechart.Vertex#getOutgoingTransitions <em>Outgoing Transitions</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Outgoing Transitions</em>'.
+	 * @return the meta object for the containment reference list '<em>Outgoing Transitions</em>'.
 	 * @see org.yakindu.model.sct.statechart.Vertex#getOutgoingTransitions()
 	 * @see #getVertex()
 	 * @generated
@@ -1406,17 +1397,6 @@ public interface StatechartPackage extends EPackage {
 	EClass getRegion();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.yakindu.model.sct.statechart.Region#getTransitions <em>Transitions</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Transitions</em>'.
-	 * @see org.yakindu.model.sct.statechart.Region#getTransitions()
-	 * @see #getRegion()
-	 * @generated
-	 */
-	EReference getRegion_Transitions();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link org.yakindu.model.sct.statechart.Region#getVertices <em>Vertices</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1449,10 +1429,10 @@ public interface StatechartPackage extends EPackage {
 	EReference getTransition_Target();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.yakindu.model.sct.statechart.Transition#getSource <em>Source</em>}'.
+	 * Returns the meta object for the container reference '{@link org.yakindu.model.sct.statechart.Transition#getSource <em>Source</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Source</em>'.
+	 * @return the meta object for the container reference '<em>Source</em>'.
 	 * @see org.yakindu.model.sct.statechart.Transition#getSource()
 	 * @see #getTransition()
 	 * @generated
@@ -1460,10 +1440,10 @@ public interface StatechartPackage extends EPackage {
 	EReference getTransition_Source();
 
 	/**
-	 * Returns the meta object for the container reference '{@link org.yakindu.model.sct.statechart.Transition#getRegion <em>Region</em>}'.
+	 * Returns the meta object for the reference '{@link org.yakindu.model.sct.statechart.Transition#getRegion <em>Region</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Region</em>'.
+	 * @return the meta object for the reference '<em>Region</em>'.
 	 * @see org.yakindu.model.sct.statechart.Transition#getRegion()
 	 * @see #getTransition()
 	 * @generated
@@ -1902,7 +1882,7 @@ public interface StatechartPackage extends EPackage {
 		EReference VERTEX__INCOMING_TRANSITIONS = eINSTANCE.getVertex_IncomingTransitions();
 
 		/**
-		 * The meta object literal for the '<em><b>Outgoing Transitions</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Outgoing Transitions</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -1938,14 +1918,6 @@ public interface StatechartPackage extends EPackage {
 		EClass REGION = eINSTANCE.getRegion();
 
 		/**
-		 * The meta object literal for the '<em><b>Transitions</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference REGION__TRANSITIONS = eINSTANCE.getRegion_Transitions();
-
-		/**
 		 * The meta object literal for the '<em><b>Vertices</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1972,7 +1944,7 @@ public interface StatechartPackage extends EPackage {
 		EReference TRANSITION__TARGET = eINSTANCE.getTransition_Target();
 
 		/**
-		 * The meta object literal for the '<em><b>Source</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Source</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -1980,7 +1952,7 @@ public interface StatechartPackage extends EPackage {
 		EReference TRANSITION__SOURCE = eINSTANCE.getTransition_Source();
 
 		/**
-		 * The meta object literal for the '<em><b>Region</b></em>' container reference feature.
+		 * The meta object literal for the '<em><b>Region</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

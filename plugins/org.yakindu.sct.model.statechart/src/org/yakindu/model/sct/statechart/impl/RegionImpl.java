@@ -30,7 +30,6 @@ import org.yakindu.model.sct.statechart.Vertex;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.yakindu.model.sct.statechart.impl.RegionImpl#getTransitions <em>Transitions</em>}</li>
  *   <li>{@link org.yakindu.model.sct.statechart.impl.RegionImpl#getVertices <em>Vertices</em>}</li>
  * </ul>
  * </p>
@@ -44,16 +43,6 @@ public class RegionImpl extends NamedElementImpl implements Region {
 	 * @generated
 	 */
 	public static final String copyright = "Copyright (c) 2011 committers of YAKINDU and others.\r\nAll rights reserved. This program and the accompanying materials\r\nare made available under the terms of the Eclipse Public License v1.0\r\nwhich accompanies this distribution, and is available at\r\nhttp://www.eclipse.org/legal/epl-v10.html\r\nContributors:\r\ncommitters of YAKINDU - initial API and implementation\r\n";
-
-	/**
-	 * The cached value of the '{@link #getTransitions() <em>Transitions</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTransitions()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Transition> transitions;
 
 	/**
 	 * The cached value of the '{@link #getVertices() <em>Vertices</em>}' containment reference list.
@@ -89,18 +78,6 @@ public class RegionImpl extends NamedElementImpl implements Region {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Transition> getTransitions() {
-		if (transitions == null) {
-			transitions = new EObjectContainmentWithInverseEList<Transition>(Transition.class, this, StatechartPackage.REGION__TRANSITIONS, StatechartPackage.TRANSITION__REGION);
-		}
-		return transitions;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<Vertex> getVertices() {
 		if (vertices == null) {
 			vertices = new EObjectContainmentWithInverseEList<Vertex>(Vertex.class, this, StatechartPackage.REGION__VERTICES, StatechartPackage.VERTEX__PARENT_REGION);
@@ -117,8 +94,6 @@ public class RegionImpl extends NamedElementImpl implements Region {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case StatechartPackage.REGION__TRANSITIONS:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getTransitions()).basicAdd(otherEnd, msgs);
 			case StatechartPackage.REGION__VERTICES:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getVertices()).basicAdd(otherEnd, msgs);
 		}
@@ -133,8 +108,6 @@ public class RegionImpl extends NamedElementImpl implements Region {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case StatechartPackage.REGION__TRANSITIONS:
-				return ((InternalEList<?>)getTransitions()).basicRemove(otherEnd, msgs);
 			case StatechartPackage.REGION__VERTICES:
 				return ((InternalEList<?>)getVertices()).basicRemove(otherEnd, msgs);
 		}
@@ -149,8 +122,6 @@ public class RegionImpl extends NamedElementImpl implements Region {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case StatechartPackage.REGION__TRANSITIONS:
-				return getTransitions();
 			case StatechartPackage.REGION__VERTICES:
 				return getVertices();
 		}
@@ -166,10 +137,6 @@ public class RegionImpl extends NamedElementImpl implements Region {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case StatechartPackage.REGION__TRANSITIONS:
-				getTransitions().clear();
-				getTransitions().addAll((Collection<? extends Transition>)newValue);
-				return;
 			case StatechartPackage.REGION__VERTICES:
 				getVertices().clear();
 				getVertices().addAll((Collection<? extends Vertex>)newValue);
@@ -186,9 +153,6 @@ public class RegionImpl extends NamedElementImpl implements Region {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case StatechartPackage.REGION__TRANSITIONS:
-				getTransitions().clear();
-				return;
 			case StatechartPackage.REGION__VERTICES:
 				getVertices().clear();
 				return;
@@ -204,8 +168,6 @@ public class RegionImpl extends NamedElementImpl implements Region {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case StatechartPackage.REGION__TRANSITIONS:
-				return transitions != null && !transitions.isEmpty();
 			case StatechartPackage.REGION__VERTICES:
 				return vertices != null && !vertices.isEmpty();
 		}

@@ -18,6 +18,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -60,7 +61,7 @@ public abstract class VertexImpl extends NamedElementImpl implements Vertex {
 	protected EList<Transition> incomingTransitions;
 
 	/**
-	 * The cached value of the '{@link #getOutgoingTransitions() <em>Outgoing Transitions</em>}' reference list.
+	 * The cached value of the '{@link #getOutgoingTransitions() <em>Outgoing Transitions</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getOutgoingTransitions()
@@ -148,7 +149,7 @@ public abstract class VertexImpl extends NamedElementImpl implements Vertex {
 	 */
 	public EList<Transition> getOutgoingTransitions() {
 		if (outgoingTransitions == null) {
-			outgoingTransitions = new EObjectWithInverseResolvingEList<Transition>(Transition.class, this, StatechartPackage.VERTEX__OUTGOING_TRANSITIONS, StatechartPackage.TRANSITION__SOURCE);
+			outgoingTransitions = new EObjectContainmentWithInverseEList<Transition>(Transition.class, this, StatechartPackage.VERTEX__OUTGOING_TRANSITIONS, StatechartPackage.TRANSITION__SOURCE);
 		}
 		return outgoingTransitions;
 	}
