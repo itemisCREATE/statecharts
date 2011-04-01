@@ -21,7 +21,6 @@ package org.yakindu.model.sct.statechart;
  * <ul>
  *   <li>{@link org.yakindu.model.sct.statechart.Transition#getTarget <em>Target</em>}</li>
  *   <li>{@link org.yakindu.model.sct.statechart.Transition#getSource <em>Source</em>}</li>
- *   <li>{@link org.yakindu.model.sct.statechart.Transition#getRegion <em>Region</em>}</li>
  * </ul>
  * </p>
  *
@@ -92,31 +91,5 @@ public interface Transition extends ExpressionElement {
 	 * @generated
 	 */
 	void setSource(Vertex value);
-
-	/**
-	 * Returns the value of the '<em><b>Region</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Region</em>' container reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Region</em>' reference.
-	 * @see #setRegion(Region)
-	 * @see org.yakindu.model.sct.statechart.StatechartPackage#getTransition_Region()
-	 * @model required="true" ordered="false"
-	 * @generated
-	 */
-	Region getRegion();
-
-	/**
-	 * Sets the value of the '{@link org.yakindu.model.sct.statechart.Transition#getRegion <em>Region</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Region</em>' reference.
-	 * @see #getRegion()
-	 * @generated
-	 */
-	void setRegion(Region value);
 
 } // Transition

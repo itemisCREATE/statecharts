@@ -318,22 +318,13 @@ public interface StatechartPackage extends EPackage {
 	int TRANSITION__SOURCE = EXPRESSION_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Region</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRANSITION__REGION = EXPRESSION_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
 	 * The number of structural features of the '<em>Transition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION_FEATURE_COUNT = EXPRESSION_ELEMENT_FEATURE_COUNT + 3;
+	int TRANSITION_FEATURE_COUNT = EXPRESSION_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.model.sct.statechart.impl.StateImpl <em>State</em>}' class.
@@ -1440,17 +1431,6 @@ public interface StatechartPackage extends EPackage {
 	EReference getTransition_Source();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.yakindu.model.sct.statechart.Transition#getRegion <em>Region</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Region</em>'.
-	 * @see org.yakindu.model.sct.statechart.Transition#getRegion()
-	 * @see #getTransition()
-	 * @generated
-	 */
-	EReference getTransition_Region();
-
-	/**
 	 * Returns the meta object for class '{@link org.yakindu.model.sct.statechart.FinalState <em>Final State</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1950,14 +1930,6 @@ public interface StatechartPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TRANSITION__SOURCE = eINSTANCE.getTransition_Source();
-
-		/**
-		 * The meta object literal for the '<em><b>Region</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TRANSITION__REGION = eINSTANCE.getTransition_Region();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.model.sct.statechart.impl.FinalStateImpl <em>Final State</em>}' class.

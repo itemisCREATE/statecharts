@@ -28,8 +28,6 @@
         lowerBound="1" eType="#//Vertex" eOpposite="#//Vertex/incomingTransitions"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" ordered="false"
         lowerBound="1" eType="#//Vertex" eOpposite="#//Vertex/outgoingTransitions"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="region" ordered="false"
-        lowerBound="1" eType="#//Region"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FinalState" eSuperTypes="#//State"/>
   <eClassifiers xsi:type="ecore:EClass" name="State" eSuperTypes="#//Vertex #//ExpressionElement">
