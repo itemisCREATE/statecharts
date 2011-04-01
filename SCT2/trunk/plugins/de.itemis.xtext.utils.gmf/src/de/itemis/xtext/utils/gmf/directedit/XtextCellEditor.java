@@ -13,6 +13,7 @@ package de.itemis.xtext.utils.gmf.directedit;
 
 import java.util.List;
 
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.jface.text.source.AnnotationModel;
@@ -59,7 +60,9 @@ import org.eclipse.xtext.ui.editor.validation.ValidationJob;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
+import org.eclipse.xtext.validation.Issue;
 
+import com.google.common.collect.Lists;
 import com.google.inject.Injector;
 
 /**
@@ -91,7 +94,7 @@ public class XtextCellEditor extends CellEditor {
 
 		public void keyPressed(KeyEvent e) {
 			XtextCellEditor.this.valueChanged(true, true);
-			//CONTENTASSIST_PROPOSALS
+			// CONTENTASSIST_PROPOSALS
 			if ((e.keyCode == 32) && ((e.stateMask & SWT.CTRL) != 0)) {
 				BusyIndicator.showWhile(Display.getDefault(), new Runnable() {
 					public void run() {
@@ -100,12 +103,11 @@ public class XtextCellEditor extends CellEditor {
 					}
 				});
 			}
-			//QUICK_ASSIST
+			// QUICK_ASSIST
 			if ((e.keyCode == 49) && ((e.stateMask & SWT.CTRL) != 0)) {
 				BusyIndicator.showWhile(Display.getDefault(), new Runnable() {
 					public void run() {
-						sourceviewer
-								.doOperation(ISourceViewer.QUICK_ASSIST);
+						sourceviewer.doOperation(ISourceViewer.QUICK_ASSIST);
 					}
 				});
 			}
@@ -127,13 +129,14 @@ public class XtextCellEditor extends CellEditor {
 	 * the xText document the sourceViewer uses
 	 */
 	private XtextDocument document;
-	
 
 	/**
 	 * The sourceViewer, that provides additional functions to the styled text
 	 * widget
 	 */
 	private XtextSourceViewer sourceviewer;
+
+	private ValidationJob validationJob;
 
 	/**
 	 * C'tor to create a new Instance.
@@ -159,7 +162,6 @@ public class XtextCellEditor extends CellEditor {
 		sourceviewer.configure(configuration);
 		document = createDocument(injector);
 
-		IResourceValidator validator = createResourceValidator();
 		sourceviewer.setDocument(document, new AnnotationModel());
 
 		SourceViewerDecorationSupport support = new SourceViewerDecorationSupport(
@@ -167,12 +169,7 @@ public class XtextCellEditor extends CellEditor {
 				EditorsPlugin.getDefault().getSharedTextColors());
 		configureSourceViewerDecorationSupport(support);
 
-		IssueResolutionProvider resolutionProvider = injector
-				.getInstance(IssueResolutionProvider.class);
-		ValidationJob validationJob = new ValidationJob(validator, document,
-				new AnnotationIssueProcessor(document, sourceviewer
-						.getAnnotationModel(), resolutionProvider),
-				CheckMode.ALL);
+		validationJob = createValidationJob();
 		document.setValidationJob(validationJob);
 
 		text = sourceviewer.getTextWidget();
@@ -187,6 +184,16 @@ public class XtextCellEditor extends CellEditor {
 		text.setBackground(parent.getBackground());
 		text.setText("");
 		return text;
+	}
+
+	private ValidationJob createValidationJob() {
+		IssueResolutionProvider resolutionProvider = injector
+				.getInstance(IssueResolutionProvider.class);
+		IResourceValidator validator = createResourceValidator();
+		return new ValidationJob(validator, document,
+				new AnnotationIssueProcessor(document, sourceviewer
+						.getAnnotationModel(), resolutionProvider),
+				CheckMode.ALL);
 	}
 
 	/**
@@ -248,7 +255,6 @@ public class XtextCellEditor extends CellEditor {
 		XtextResourceSet resourceSet = injector
 				.getInstance(XtextResourceSet.class);
 		resourceSet.getResources().add(resource);
-		// resource.setParser(injector.getInstance(IAntlrParser.class));
 		setResourceUri(resource);
 		document.setInput(resource);
 		return document;
@@ -284,7 +290,6 @@ public class XtextCellEditor extends CellEditor {
 		});
 	}
 
-
 	@Override
 	protected Object doGetValue() {
 		return text.getText();
@@ -300,20 +305,10 @@ public class XtextCellEditor extends CellEditor {
 					}
 				});
 	}
-	
-	public List<Diagnostic> getDiagnostics()
-	{
-		return document
-		.readOnly(new IUnitOfWork<List<Diagnostic>, XtextResource>() {
 
-			public List<Diagnostic> exec(XtextResource state)
-					throws Exception {
-				return state.getErrors();
-			}
-		});
+	public List<Issue> getIssues() {
+		return validationJob.createIssues(new NullProgressMonitor());
 	}
-	
-	
 
 	@Override
 	protected void doSetFocus() {
@@ -335,7 +330,7 @@ public class XtextCellEditor extends CellEditor {
 			}
 		});
 	}
-	
+
 	public XtextDocument getDocument() {
 		return document;
 	}

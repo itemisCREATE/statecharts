@@ -36,8 +36,6 @@ public final class GMFMarkerUtil {
 				semanticTarget);
 		String uriFragment = view.eResource().getURIFragment(view);
 		
-		System.out.println("URI Fragment " + uriFragment);
-		
 		addMarker(target, uriFragment,
 				EMFCoreUtil.getQualifiedName(semanticTarget, true),
 				validationStatus.getMessage(), validationStatus.getSeverity(),
@@ -74,6 +72,8 @@ public final class GMFMarkerUtil {
 			marker = file.createMarker(markerType);
 			marker.setAttribute(IMarker.MESSAGE, message);
 			marker.setAttribute(IMarker.LOCATION, location);
+			org.eclipse.core.runtime.Assert.isNotNull(elementId);
+			org.eclipse.core.runtime.Assert.isTrue(elementId.length() > 0);
 			marker.setAttribute(
 					org.eclipse.gmf.runtime.common.ui.resources.IMarker.ELEMENT_ID,
 			elementId);

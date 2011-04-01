@@ -9,7 +9,6 @@ import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.editpolicies.DirectEditPolicy;
 import org.eclipse.gef.requests.DirectEditRequest;
@@ -18,6 +17,7 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.emf.core.util.EMFCoreUtil;
 import org.eclipse.gmf.runtime.emf.type.core.commands.SetValueCommand;
 import org.eclipse.gmf.runtime.emf.type.core.requests.SetRequest;
+import org.eclipse.xtext.validation.Issue;
 import org.yakindu.model.sct.statechart.StatechartPackage;
 import org.yakindu.sct.statechart.diagram.DiagramActivator;
 import org.yakindu.sct.statechart.diagram.validation.GMFMarkerUtil;
@@ -38,7 +38,7 @@ public class ExpressionDirectEditPolicy extends DirectEditPolicy implements
 	protected Command getDirectEditCommand(DirectEditRequest request) {
 		Assert.isTrue(request.getCellEditor() instanceof XtextCellEditor);
 		XtextCellEditor cellEditor = (XtextCellEditor) request.getCellEditor();
-		handleDiagnostics(cellEditor.getDiagnostics());
+		handleIssues(cellEditor.getIssues());
 		SetValueCommand command = new SetValueCommand(new SetRequest(getHost()
 				.resolveSemanticElement(),
 				StatechartPackage.Literals.EXPRESSION_ELEMENT__EXPRESSION,
@@ -46,20 +46,32 @@ public class ExpressionDirectEditPolicy extends DirectEditPolicy implements
 		return new ICommandProxy(command);
 	}
 
-	private void handleDiagnostics(List<Diagnostic> diagnostics) {
+	private void handleIssues(List<Issue> issues) {
 		deleteOldMarkers();
-		createNewMarkers(diagnostics);
+		createNewMarkers(issues);
 	}
 
-	private void createNewMarkers(List<Diagnostic> diagnostics) {
+	private void createNewMarkers(List<Issue> diagnostics) {
 		IFile target = GMFMarkerUtil.getTargetFile(getHost().getNotationView());
-		for (Diagnostic diagnostic : diagnostics) {
-			GMFMarkerUtil.createMarker(target, new Status(IStatus.ERROR,
-					DiagramActivator.PLUGIN_ID, diagnostic.getMessage()),
+		for (Issue issue : diagnostics) {
+			GMFMarkerUtil.createMarker(target, new Status(getSeverity(issue),
+					DiagramActivator.PLUGIN_ID, issue.getMessage()),
 					getHost().getNotationView().getDiagram(),
 					XTEXT_MARKER_TYPE, getHost().resolveSemanticElement());
 		}
 
+	}
+	
+	private static int getSeverity(Issue issue) {
+		switch (issue.getSeverity()) {
+			case ERROR : 
+				return IStatus.ERROR;
+			case WARNING : 
+				return IStatus.WARNING;
+			case INFO : 
+				return IStatus.INFO;
+		}
+		throw new IllegalArgumentException();
 	}
 
 	private void deleteOldMarkers() {
