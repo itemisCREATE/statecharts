@@ -45,7 +45,7 @@ public class StatechartTextFigure extends RectangleFigure {
 		title.setAlignment(PositionConstants.EAST);
 		title.setText("declarations");
 		GridData data = GridDataFactory.fillDefaults()
-				.align(GridData.CENTER, GridData.END).grab(true, false)
+				.align(GridData.CENTER, GridData.CENTER).grab(true, false)
 				.getData();
 		this.add(title, data);
 		

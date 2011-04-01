@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
@@ -66,9 +67,10 @@ public class StatechartValidationDecorationProvider extends AbstractProvider
 			Object model = editPart.getModel();
 			if ((model instanceof View)) {
 				View view = (View) model;
-				if (!(view instanceof Edge) && !view.isSetElement()) {
-					return;
-				}
+				//FIXME
+//				if (!(view instanceof Edge) && !view.isSetElement()) {
+//					return;
+//				}
 			}
 			EditDomain ed = editPart.getViewer().getEditDomain();
 			if (!(ed instanceof DiagramEditDomain)) {

@@ -30,6 +30,7 @@
             nsURI="http:///statechart.ecore">
          <metamodelType
                eclass="Statechart"
+               edithelper="org.yakindu.sct.statechart.diagram.edithelper.StatechartEditHelper"
                icon="icons/obj16/StatemachineDiagramFile.gif"
                id="org.yakindu.sct.statechart.diagram.Statechart"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
@@ -53,6 +54,7 @@
          </metamodelType>
          <metamodelType
                eclass="State"
+               edithelper="org.yakindu.sct.statechart.diagram.edithelper.StateEditHelper"
                icon="icons/obj16/state_16x16.png"
                id="org.yakindu.sct.statechart.diagram.State"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
