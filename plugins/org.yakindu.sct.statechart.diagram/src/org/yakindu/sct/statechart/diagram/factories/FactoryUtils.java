@@ -41,13 +41,16 @@ import org.yakindu.sct.statechart.diagram.providers.SemanticHints;
  */
 public final class FactoryUtils {
 
-	private static final int INITIAL_REGION_WIDTH = 800;
-	private static final int INITIAL_REGION_HEIGHT = 600;
+	private static final int INITIAL_REGION_WIDTH = 400;
+	private static final int INITIAL_REGION_HEIGHT = 400;
 	private static final String INITIAL_REGION_NAME = "main region";
-	private static final int INITIAL_TEXT_COMPARTMENT_HEIGHT = 600;
+	
+	private static final int INITIAL_TEXT_COMPARTMENT_X = 10; 
+	private static final int INITIAL_TEXT_COMPARTMENT_Y = 10; 
+	private static final int INITIAL_TEXT_COMPARTMENT_HEIGHT = 400;
 	private static final int INITIAL_TEXT_COMPARTMENT_WIDTH = 200;
 
-	private static final int SPACING = 50;
+	private static final int SPACING = 10;
 
 	private FactoryUtils() {
 	}
@@ -144,6 +147,8 @@ public final class FactoryUtils {
 
 	private static void setTextCompartmentLayoutConstraint(Node textCompartment) {
 		Bounds bounds = NotationFactory.eINSTANCE.createBounds();
+		bounds.setX(INITIAL_TEXT_COMPARTMENT_X);
+		bounds.setY(INITIAL_TEXT_COMPARTMENT_Y);
 		bounds.setHeight(INITIAL_TEXT_COMPARTMENT_HEIGHT);
 		bounds.setWidth(INITIAL_TEXT_COMPARTMENT_WIDTH);
 		textCompartment.setLayoutConstraint(bounds);
@@ -151,7 +156,8 @@ public final class FactoryUtils {
 
 	private static void setRegionViewLayoutConstraint(Node regionView) {
 		Bounds bounds = NotationFactory.eINSTANCE.createBounds();
-		bounds.setX(INITIAL_TEXT_COMPARTMENT_WIDTH + SPACING);
+		bounds.setX(INITIAL_TEXT_COMPARTMENT_WIDTH + INITIAL_TEXT_COMPARTMENT_X+ SPACING);
+		bounds.setY(INITIAL_TEXT_COMPARTMENT_Y);
 		bounds.setHeight(INITIAL_REGION_HEIGHT);
 		bounds.setWidth(INITIAL_REGION_WIDTH);
 		regionView.setLayoutConstraint(bounds);
