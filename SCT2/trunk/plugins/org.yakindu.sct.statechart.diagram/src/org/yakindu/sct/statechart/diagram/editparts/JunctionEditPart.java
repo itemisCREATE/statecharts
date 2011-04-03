@@ -26,7 +26,7 @@ import org.yakindu.sct.statechart.diagram.policies.RelationshipSemanticEditPolic
  */
 public class JunctionEditPart extends FixedSizeShapeNodeEditPart {
 
-	private static final Dimension DIMENSION = new Dimension(8, 8);
+	private static final Dimension DIMENSION = new Dimension(10, 10);
 	
 	
 	public JunctionEditPart(View view) {
