@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
-
  */
 package org.yakindu.sct.statechart.expressions.impl;
 
@@ -10,69 +9,12 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
+
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.yakindu.sct.statechart.expressions.Action;
-import org.yakindu.sct.statechart.expressions.AdditiveOperator;
-import org.yakindu.sct.statechart.expressions.AlwaysEvent;
-import org.yakindu.sct.statechart.expressions.BuiltinEventSpec;
-import org.yakindu.sct.statechart.expressions.Clock;
-import org.yakindu.sct.statechart.expressions.DefRoot;
-import org.yakindu.sct.statechart.expressions.Definition;
-import org.yakindu.sct.statechart.expressions.Direction;
-import org.yakindu.sct.statechart.expressions.DirectionKind;
-import org.yakindu.sct.statechart.expressions.EnterEvent;
-import org.yakindu.sct.statechart.expressions.EntryPointSpec;
-import org.yakindu.sct.statechart.expressions.Entrypoint;
-import org.yakindu.sct.statechart.expressions.EventDefinition;
-import org.yakindu.sct.statechart.expressions.EventDerivation;
-import org.yakindu.sct.statechart.expressions.EventSpec;
-import org.yakindu.sct.statechart.expressions.ExitEvent;
-import org.yakindu.sct.statechart.expressions.ExitPointSpec;
-import org.yakindu.sct.statechart.expressions.Exitpoint;
-import org.yakindu.sct.statechart.expressions.Expression;
-import org.yakindu.sct.statechart.expressions.ExpressionRule;
-import org.yakindu.sct.statechart.expressions.ExpressionsFactory;
-import org.yakindu.sct.statechart.expressions.ExpressionsPackage;
-import org.yakindu.sct.statechart.expressions.InterfaceScope;
-import org.yakindu.sct.statechart.expressions.InternalScope;
-import org.yakindu.sct.statechart.expressions.LocalReaction;
-import org.yakindu.sct.statechart.expressions.LogicalAndExpression;
-import org.yakindu.sct.statechart.expressions.LogicalNotExpression;
-import org.yakindu.sct.statechart.expressions.LogicalOrExpression;
-import org.yakindu.sct.statechart.expressions.LogicalRelationExpression;
-import org.yakindu.sct.statechart.expressions.MultiplicativeOperator;
-import org.yakindu.sct.statechart.expressions.NumericalAddSubtractExpression;
-import org.yakindu.sct.statechart.expressions.NumericalMultiplyDivideExpression;
-import org.yakindu.sct.statechart.expressions.NumericalUnaryExpression;
-import org.yakindu.sct.statechart.expressions.OnCycleEvent;
-import org.yakindu.sct.statechart.expressions.Operation;
-import org.yakindu.sct.statechart.expressions.PrimitiveValueExpression;
-import org.yakindu.sct.statechart.expressions.PropertyReferenceExpression;
-import org.yakindu.sct.statechart.expressions.RaiseEventExpression;
-import org.yakindu.sct.statechart.expressions.Reaction;
-import org.yakindu.sct.statechart.expressions.ReactionPriority;
-import org.yakindu.sct.statechart.expressions.ReactionProperties;
-import org.yakindu.sct.statechart.expressions.ReactionProperty;
-import org.yakindu.sct.statechart.expressions.ReactionTrigger;
-import org.yakindu.sct.statechart.expressions.RegularEventSpec;
-import org.yakindu.sct.statechart.expressions.RelationalOperator;
-import org.yakindu.sct.statechart.expressions.Root;
-import org.yakindu.sct.statechart.expressions.Scope;
-import org.yakindu.sct.statechart.expressions.SimpleScope;
-import org.yakindu.sct.statechart.expressions.StateDefinition;
-import org.yakindu.sct.statechart.expressions.StateRoot;
-import org.yakindu.sct.statechart.expressions.StatechartDefinition;
-import org.yakindu.sct.statechart.expressions.StatechartRoot;
-import org.yakindu.sct.statechart.expressions.StatechartScope;
-import org.yakindu.sct.statechart.expressions.TimeEventSpec;
-import org.yakindu.sct.statechart.expressions.TimeUnit;
-import org.yakindu.sct.statechart.expressions.TransitionReaction;
-import org.yakindu.sct.statechart.expressions.TransitionRoot;
-import org.yakindu.sct.statechart.expressions.TransitionStatement;
-import org.yakindu.sct.statechart.expressions.Type;
-import org.yakindu.sct.statechart.expressions.UnaryOperator;
-import org.yakindu.sct.statechart.expressions.VariableDefinition;
+
+import org.yakindu.sct.statechart.expressions.*;
 
 /**
  * <!-- begin-user-doc -->
@@ -140,6 +82,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
       case ExpressionsPackage.INTERFACE_SCOPE: return createInterfaceScope();
       case ExpressionsPackage.INTERNAL_SCOPE: return createInternalScope();
       case ExpressionsPackage.DEFINITION: return createDefinition();
+      case ExpressionsPackage.DATA_ELEMENT: return createDataElement();
       case ExpressionsPackage.EVENT_DEFINITION: return createEventDefinition();
       case ExpressionsPackage.EVENT_DERIVATION: return createEventDerivation();
       case ExpressionsPackage.VARIABLE_DEFINITION: return createVariableDefinition();
@@ -151,7 +94,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
       case ExpressionsPackage.LOCAL_REACTION: return createLocalReaction();
       case ExpressionsPackage.TRANSITION_REACTION: return createTransitionReaction();
       case ExpressionsPackage.REACTION_TRIGGER: return createReactionTrigger();
-      case ExpressionsPackage.ACTION: return createAction();
+      case ExpressionsPackage.EFFECT: return createEffect();
       case ExpressionsPackage.REACTION_PROPERTIES: return createReactionProperties();
       case ExpressionsPackage.REACTION_PROPERTY: return createReactionProperty();
       case ExpressionsPackage.REACTION_PRIORITY: return createReactionPriority();
@@ -165,8 +108,9 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
       case ExpressionsPackage.EXIT_EVENT: return createExitEvent();
       case ExpressionsPackage.ON_CYCLE_EVENT: return createOnCycleEvent();
       case ExpressionsPackage.ALWAYS_EVENT: return createAlwaysEvent();
-      case ExpressionsPackage.EXPRESSION_RULE: return createExpressionRule();
-      case ExpressionsPackage.RAISE_EVENT_EXPRESSION: return createRaiseEventExpression();
+      case ExpressionsPackage.STATEMENT: return createStatement();
+      case ExpressionsPackage.ASSIGNMENT: return createAssignment();
+      case ExpressionsPackage.EVENT_RAISING: return createEventRaising();
       case ExpressionsPackage.EXPRESSION: return createExpression();
       case ExpressionsPackage.LOGICAL_OR_EXPRESSION: return createLogicalOrExpression();
       case ExpressionsPackage.LOGICAL_AND_EXPRESSION: return createLogicalAndExpression();
@@ -403,6 +347,17 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
    * <!-- end-user-doc -->
    * @generated
    */
+  public DataElement createDataElement()
+  {
+    DataElementImpl dataElement = new DataElementImpl();
+    return dataElement;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EventDefinition createEventDefinition()
   {
     EventDefinitionImpl eventDefinition = new EventDefinitionImpl();
@@ -524,10 +479,10 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
    * <!-- end-user-doc -->
    * @generated
    */
-  public Action createAction()
+  public Effect createEffect()
   {
-    ActionImpl action = new ActionImpl();
-    return action;
+    EffectImpl effect = new EffectImpl();
+    return effect;
   }
 
   /**
@@ -678,10 +633,10 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
    * <!-- end-user-doc -->
    * @generated
    */
-  public ExpressionRule createExpressionRule()
+  public Statement createStatement()
   {
-    ExpressionRuleImpl expressionRule = new ExpressionRuleImpl();
-    return expressionRule;
+    StatementImpl statement = new StatementImpl();
+    return statement;
   }
 
   /**
@@ -689,10 +644,21 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
    * <!-- end-user-doc -->
    * @generated
    */
-  public RaiseEventExpression createRaiseEventExpression()
+  public Assignment createAssignment()
   {
-    RaiseEventExpressionImpl raiseEventExpression = new RaiseEventExpressionImpl();
-    return raiseEventExpression;
+    AssignmentImpl assignment = new AssignmentImpl();
+    return assignment;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EventRaising createEventRaising()
+  {
+    EventRaisingImpl eventRaising = new EventRaisingImpl();
+    return eventRaising;
   }
 
   /**

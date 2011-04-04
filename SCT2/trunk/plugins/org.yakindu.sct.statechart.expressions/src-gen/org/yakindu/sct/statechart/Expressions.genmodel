@@ -79,6 +79,7 @@
     </genClasses>
     <genClasses ecoreClass="Expressions.ecore#//InternalScope"/>
     <genClasses ecoreClass="Expressions.ecore#//Definition"/>
+    <genClasses ecoreClass="Expressions.ecore#//DataElement"/>
     <genClasses ecoreClass="Expressions.ecore#//EventDefinition">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//EventDefinition/direction"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//EventDefinition/type"/>
@@ -110,7 +111,7 @@
     </genClasses>
     <genClasses ecoreClass="Expressions.ecore#//Reaction">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//Reaction/trigger"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//Reaction/action"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//Reaction/effect"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//Reaction/properties"/>
     </genClasses>
     <genClasses ecoreClass="Expressions.ecore#//LocalReaction"/>
@@ -119,8 +120,8 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//ReactionTrigger/triggers"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//ReactionTrigger/guardExpression"/>
     </genClasses>
-    <genClasses ecoreClass="Expressions.ecore#//Action">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//Action/action"/>
+    <genClasses ecoreClass="Expressions.ecore#//Effect">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//Effect/actions"/>
     </genClasses>
     <genClasses ecoreClass="Expressions.ecore#//ReactionProperties">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//ReactionProperties/properties"/>
@@ -148,11 +149,14 @@
     <genClasses ecoreClass="Expressions.ecore#//ExitEvent"/>
     <genClasses ecoreClass="Expressions.ecore#//OnCycleEvent"/>
     <genClasses ecoreClass="Expressions.ecore#//AlwaysEvent"/>
-    <genClasses ecoreClass="Expressions.ecore#//ExpressionRule">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//ExpressionRule/expression"/>
+    <genClasses ecoreClass="Expressions.ecore#//Statement"/>
+    <genClasses ecoreClass="Expressions.ecore#//Assignment">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Expressions.ecore#//Assignment/varRef"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//Assignment/expression"/>
     </genClasses>
-    <genClasses ecoreClass="Expressions.ecore#//RaiseEventExpression">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Expressions.ecore#//RaiseEventExpression/event"/>
+    <genClasses ecoreClass="Expressions.ecore#//EventRaising">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Expressions.ecore#//EventRaising/event"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//EventRaising/value"/>
     </genClasses>
     <genClasses ecoreClass="Expressions.ecore#//Expression"/>
     <genClasses ecoreClass="Expressions.ecore#//LogicalOrExpression">
