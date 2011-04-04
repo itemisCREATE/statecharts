@@ -59,6 +59,7 @@ InternalScope:  {InternalScope} 'internal' ':' (definitions+=Definition)*;
 a definition is a top level element of a definition scope. */ 
 Definition: EventDefinition | VariableDefinition | Clock | Operation | LocalReaction | Entrypoint | Exitpoint;
 
+DataElement: EventDefinition | VariableDefinition;
 
 /* ---- event definition ---- */
 
@@ -68,7 +69,7 @@ EventDefinition:
 	(direction=Direction)? 'event' name=ID (':' type=Type)? (derivation=EventDerivation)?;
 	
 EventDerivation:
-	'=' condition=ExpressionRule (':' value=ExpressionRule)?; 
+	'=' condition=LogicalOrExpression (':' value=LogicalOrExpression)?; 
 	
 enum Direction: IN='in' | OUT='out';
 
@@ -103,17 +104,17 @@ Define the structure of reactions that are central for describing the statechart
 Reaction: LocalReaction | TransitionReaction;
 
 LocalReaction:
-	(trigger=ReactionTrigger) ('/' action=Action)? ('#' properties=ReactionProperties)?;
+	(trigger=ReactionTrigger) ('/' effect=Effect)? ('#' properties=ReactionProperties)?;
 
 TransitionReaction: 
-	{TransitionReaction} (trigger=ReactionTrigger)? ('/' action=Action)? ('#' properties=ReactionProperties)?;
+	{TransitionReaction} (trigger=ReactionTrigger)? ('/' effect=Effect)? ('#' properties=ReactionProperties)?;
 
 ReactionTrigger:	
 	(triggers+=EventSpec ("," triggers+=EventSpec)*)
 	('[' guardExpression=LogicalOrExpression ']')?;
 	
-Action:	
-	action=ExpressionRule;
+Effect:	
+	(actions+=Statement ';')+ ;
 	
 ReactionProperties: 
 	{ReactionProperties} (properties+=ReactionProperty)*;
@@ -140,12 +141,22 @@ BuiltinEventSpec: EnterEvent | ExitEvent | OnCycleEvent | AlwaysEvent;
 
 EnterEvent: {EnterEvent} 'enter';
 ExitEvent: {ExitEvent} 'exit';
-OnCycleEvent: {OnCycleEvent} 'oncycle';
+OnCycleEvent: {OnCycleEvent} 'oncycle'; // TODO: ?!? better 'ontick' ?!?
 AlwaysEvent: {AlwaysEvent} 'always';
 
 	
 /* --- statements --- */
 
+Statement:
+	(Assignment | EventRaising );
+	
+Assignment:
+	varRef=[sct::Variable] "=" expression=LogicalOrExpression;
+	
+EventRaising:
+	'raise' event=[sct::Event] (':' value=LogicalOrExpression)?;
+	
+	
 // variable assignment
 
 // raise events
@@ -157,11 +168,9 @@ AlwaysEvent: {AlwaysEvent} 'always';
 //****************
 // Expression Grammar
 //****************
-ExpressionRule:
-	expression=(LogicalOrExpression | RaiseEventExpression);
+//ExpressionRule:
+//	expression=(LogicalOrExpression | RaiseEventExpression);
 
-RaiseEventExpression:
-	'raise' event=[sct::Event];
 
 LogicalOrExpression returns Expression:
 	LogicalAndExpression ({LogicalOrExpression.leftOperand=current} '||'
@@ -230,7 +239,7 @@ PrimitiveValueExpression returns Expression:
 	{PrimitiveValueExpression} value=Literal;
 
 VariableReferenceExpression returns Expression:
-	{PropertyReferenceExpression} value=[sct::Variable];
+	{PropertyReferenceExpression} value=[DataElement];
 
 Literal:
 	BOOL | INT | STRING | FLOAT;

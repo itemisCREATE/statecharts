@@ -2,18 +2,20 @@
  * <copyright>
  * </copyright>
  *
-
  */
 package org.yakindu.sct.statechart.expressions.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
 import org.yakindu.sct.statechart.expressions.EventDerivation;
-import org.yakindu.sct.statechart.expressions.ExpressionRule;
+import org.yakindu.sct.statechart.expressions.Expression;
 import org.yakindu.sct.statechart.expressions.ExpressionsPackage;
 
 /**
@@ -40,7 +42,7 @@ public class EventDerivationImpl extends MinimalEObjectImpl.Container implements
    * @generated
    * @ordered
    */
-  protected ExpressionRule condition;
+  protected Expression condition;
 
   /**
    * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
@@ -50,7 +52,7 @@ public class EventDerivationImpl extends MinimalEObjectImpl.Container implements
    * @generated
    * @ordered
    */
-  protected ExpressionRule value;
+  protected Expression value;
 
   /**
    * <!-- begin-user-doc -->
@@ -78,7 +80,7 @@ public class EventDerivationImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public ExpressionRule getCondition()
+  public Expression getCondition()
   {
     return condition;
   }
@@ -88,9 +90,9 @@ public class EventDerivationImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetCondition(ExpressionRule newCondition, NotificationChain msgs)
+  public NotificationChain basicSetCondition(Expression newCondition, NotificationChain msgs)
   {
-    ExpressionRule oldCondition = condition;
+    Expression oldCondition = condition;
     condition = newCondition;
     if (eNotificationRequired())
     {
@@ -105,7 +107,7 @@ public class EventDerivationImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setCondition(ExpressionRule newCondition)
+  public void setCondition(Expression newCondition)
   {
     if (newCondition != condition)
     {
@@ -126,7 +128,7 @@ public class EventDerivationImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public ExpressionRule getValue()
+  public Expression getValue()
   {
     return value;
   }
@@ -136,9 +138,9 @@ public class EventDerivationImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetValue(ExpressionRule newValue, NotificationChain msgs)
+  public NotificationChain basicSetValue(Expression newValue, NotificationChain msgs)
   {
-    ExpressionRule oldValue = value;
+    Expression oldValue = value;
     value = newValue;
     if (eNotificationRequired())
     {
@@ -153,7 +155,7 @@ public class EventDerivationImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setValue(ExpressionRule newValue)
+  public void setValue(Expression newValue)
   {
     if (newValue != value)
     {
@@ -216,10 +218,10 @@ public class EventDerivationImpl extends MinimalEObjectImpl.Container implements
     switch (featureID)
     {
       case ExpressionsPackage.EVENT_DERIVATION__CONDITION:
-        setCondition((ExpressionRule)newValue);
+        setCondition((Expression)newValue);
         return;
       case ExpressionsPackage.EVENT_DERIVATION__VALUE:
-        setValue((ExpressionRule)newValue);
+        setValue((Expression)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -236,10 +238,10 @@ public class EventDerivationImpl extends MinimalEObjectImpl.Container implements
     switch (featureID)
     {
       case ExpressionsPackage.EVENT_DERIVATION__CONDITION:
-        setCondition((ExpressionRule)null);
+        setCondition((Expression)null);
         return;
       case ExpressionsPackage.EVENT_DERIVATION__VALUE:
-        setValue((ExpressionRule)null);
+        setValue((Expression)null);
         return;
     }
     super.eUnset(featureID);

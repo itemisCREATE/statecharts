@@ -37,23 +37,24 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InternalScope" eSuperTypes="#//StatechartScope"/>
   <eClassifiers xsi:type="ecore:EClass" name="Definition"/>
-  <eClassifiers xsi:type="ecore:EClass" name="EventDefinition" eSuperTypes="#//Definition ../../../../../../org.yakindu.sct.model.statechart/model/emf/statechart.ecore#//Event">
+  <eClassifiers xsi:type="ecore:EClass" name="DataElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EventDefinition" eSuperTypes="#//Definition #//DataElement ../../../../../../org.yakindu.sct.model.statechart/model/emf/statechart.ecore#//Event">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" eType="#//Direction"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//Type"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="derivation" eType="#//EventDerivation"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EventDerivation">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="condition" eType="#//ExpressionRule"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="condition" eType="#//Expression"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//ExpressionRule"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Expression"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="Direction">
     <eLiterals name="IN" literal="in"/>
     <eLiterals name="OUT" value="1" literal="out"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="VariableDefinition" eSuperTypes="#//Definition ../../../../../../org.yakindu.sct.model.statechart/model/emf/statechart.ecore#//Variable">
+  <eClassifiers xsi:type="ecore:EClass" name="VariableDefinition" eSuperTypes="#//Definition #//DataElement ../../../../../../org.yakindu.sct.model.statechart/model/emf/statechart.ecore#//Variable">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="readonly" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="external" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//Type"/>
@@ -77,7 +78,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="Reaction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="trigger" eType="#//ReactionTrigger"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="action" eType="#//Action"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="effect" eType="#//Effect"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="properties" eType="#//ReactionProperties"
         containment="true"/>
@@ -90,9 +91,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="guardExpression" eType="#//Expression"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Action">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="action" eType="#//ExpressionRule"
-        containment="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Effect">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actions" upperBound="-1"
+        eType="#//Statement" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ReactionProperties">
     <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
@@ -121,12 +122,16 @@
   <eClassifiers xsi:type="ecore:EClass" name="ExitEvent" eSuperTypes="#//BuiltinEventSpec"/>
   <eClassifiers xsi:type="ecore:EClass" name="OnCycleEvent" eSuperTypes="#//BuiltinEventSpec"/>
   <eClassifiers xsi:type="ecore:EClass" name="AlwaysEvent" eSuperTypes="#//BuiltinEventSpec"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ExpressionRule">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"
+  <eClassifiers xsi:type="ecore:EClass" name="Statement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Assignment" eSuperTypes="#//Statement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="varRef" eType="ecore:EClass ../../../../../../org.yakindu.sct.model.statechart/model/emf/statechart.ecore#//Variable"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//Expression"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RaiseEventExpression">
+  <eClassifiers xsi:type="ecore:EClass" name="EventRaising" eSuperTypes="#//Statement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="event" eType="ecore:EClass ../../../../../../org.yakindu.sct.model.statechart/model/emf/statechart.ecore#//Event"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Expression"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Expression"/>
   <eClassifiers xsi:type="ecore:EEnum" name="AdditiveOperator">
@@ -213,6 +218,6 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PropertyReferenceExpression" eSuperTypes="#//Expression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass ../../../../../../org.yakindu.sct.model.statechart/model/emf/statechart.ecore#//Variable"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//DataElement"/>
   </eClassifiers>
 </ecore:EPackage>

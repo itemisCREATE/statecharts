@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
-
  */
 package org.yakindu.sct.statechart.expressions;
 
@@ -36,12 +35,12 @@ public interface EventDerivation extends EObject
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Condition</em>' containment reference.
-   * @see #setCondition(ExpressionRule)
+   * @see #setCondition(Expression)
    * @see org.yakindu.sct.statechart.expressions.ExpressionsPackage#getEventDerivation_Condition()
    * @model containment="true"
    * @generated
    */
-  ExpressionRule getCondition();
+  Expression getCondition();
 
   /**
    * Sets the value of the '{@link org.yakindu.sct.statechart.expressions.EventDerivation#getCondition <em>Condition</em>}' containment reference.
@@ -51,7 +50,7 @@ public interface EventDerivation extends EObject
    * @see #getCondition()
    * @generated
    */
-  void setCondition(ExpressionRule value);
+  void setCondition(Expression value);
 
   /**
    * Returns the value of the '<em><b>Value</b></em>' containment reference.
@@ -62,12 +61,12 @@ public interface EventDerivation extends EObject
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Value</em>' containment reference.
-   * @see #setValue(ExpressionRule)
+   * @see #setValue(Expression)
    * @see org.yakindu.sct.statechart.expressions.ExpressionsPackage#getEventDerivation_Value()
    * @model containment="true"
    * @generated
    */
-  ExpressionRule getValue();
+  Expression getValue();
 
   /**
    * Sets the value of the '{@link org.yakindu.sct.statechart.expressions.EventDerivation#getValue <em>Value</em>}' containment reference.
@@ -77,6 +76,6 @@ public interface EventDerivation extends EObject
    * @see #getValue()
    * @generated
    */
-  void setValue(ExpressionRule value);
+  void setValue(Expression value);
 
 } // EventDerivation

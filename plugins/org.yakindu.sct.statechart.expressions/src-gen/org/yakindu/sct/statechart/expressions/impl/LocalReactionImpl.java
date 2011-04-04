@@ -2,16 +2,18 @@
  * <copyright>
  * </copyright>
  *
-
  */
 package org.yakindu.sct.statechart.expressions.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.yakindu.sct.statechart.expressions.Action;
+
+import org.yakindu.sct.statechart.expressions.Effect;
 import org.yakindu.sct.statechart.expressions.ExpressionsPackage;
 import org.yakindu.sct.statechart.expressions.LocalReaction;
 import org.yakindu.sct.statechart.expressions.Reaction;
@@ -26,7 +28,7 @@ import org.yakindu.sct.statechart.expressions.ReactionTrigger;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.yakindu.sct.statechart.expressions.impl.LocalReactionImpl#getTrigger <em>Trigger</em>}</li>
- *   <li>{@link org.yakindu.sct.statechart.expressions.impl.LocalReactionImpl#getAction <em>Action</em>}</li>
+ *   <li>{@link org.yakindu.sct.statechart.expressions.impl.LocalReactionImpl#getEffect <em>Effect</em>}</li>
  *   <li>{@link org.yakindu.sct.statechart.expressions.impl.LocalReactionImpl#getProperties <em>Properties</em>}</li>
  * </ul>
  * </p>
@@ -46,14 +48,14 @@ public class LocalReactionImpl extends DefinitionImpl implements LocalReaction
   protected ReactionTrigger trigger;
 
   /**
-   * The cached value of the '{@link #getAction() <em>Action</em>}' containment reference.
+   * The cached value of the '{@link #getEffect() <em>Effect</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getAction()
+   * @see #getEffect()
    * @generated
    * @ordered
    */
-  protected Action action;
+  protected Effect effect;
 
   /**
    * The cached value of the '{@link #getProperties() <em>Properties</em>}' containment reference.
@@ -139,9 +141,9 @@ public class LocalReactionImpl extends DefinitionImpl implements LocalReaction
    * <!-- end-user-doc -->
    * @generated
    */
-  public Action getAction()
+  public Effect getEffect()
   {
-    return action;
+    return effect;
   }
 
   /**
@@ -149,13 +151,13 @@ public class LocalReactionImpl extends DefinitionImpl implements LocalReaction
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetAction(Action newAction, NotificationChain msgs)
+  public NotificationChain basicSetEffect(Effect newEffect, NotificationChain msgs)
   {
-    Action oldAction = action;
-    action = newAction;
+    Effect oldEffect = effect;
+    effect = newEffect;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ExpressionsPackage.LOCAL_REACTION__ACTION, oldAction, newAction);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ExpressionsPackage.LOCAL_REACTION__EFFECT, oldEffect, newEffect);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -166,20 +168,20 @@ public class LocalReactionImpl extends DefinitionImpl implements LocalReaction
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setAction(Action newAction)
+  public void setEffect(Effect newEffect)
   {
-    if (newAction != action)
+    if (newEffect != effect)
     {
       NotificationChain msgs = null;
-      if (action != null)
-        msgs = ((InternalEObject)action).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ExpressionsPackage.LOCAL_REACTION__ACTION, null, msgs);
-      if (newAction != null)
-        msgs = ((InternalEObject)newAction).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ExpressionsPackage.LOCAL_REACTION__ACTION, null, msgs);
-      msgs = basicSetAction(newAction, msgs);
+      if (effect != null)
+        msgs = ((InternalEObject)effect).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ExpressionsPackage.LOCAL_REACTION__EFFECT, null, msgs);
+      if (newEffect != null)
+        msgs = ((InternalEObject)newEffect).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ExpressionsPackage.LOCAL_REACTION__EFFECT, null, msgs);
+      msgs = basicSetEffect(newEffect, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.LOCAL_REACTION__ACTION, newAction, newAction));
+      eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.LOCAL_REACTION__EFFECT, newEffect, newEffect));
   }
 
   /**
@@ -242,8 +244,8 @@ public class LocalReactionImpl extends DefinitionImpl implements LocalReaction
     {
       case ExpressionsPackage.LOCAL_REACTION__TRIGGER:
         return basicSetTrigger(null, msgs);
-      case ExpressionsPackage.LOCAL_REACTION__ACTION:
-        return basicSetAction(null, msgs);
+      case ExpressionsPackage.LOCAL_REACTION__EFFECT:
+        return basicSetEffect(null, msgs);
       case ExpressionsPackage.LOCAL_REACTION__PROPERTIES:
         return basicSetProperties(null, msgs);
     }
@@ -262,8 +264,8 @@ public class LocalReactionImpl extends DefinitionImpl implements LocalReaction
     {
       case ExpressionsPackage.LOCAL_REACTION__TRIGGER:
         return getTrigger();
-      case ExpressionsPackage.LOCAL_REACTION__ACTION:
-        return getAction();
+      case ExpressionsPackage.LOCAL_REACTION__EFFECT:
+        return getEffect();
       case ExpressionsPackage.LOCAL_REACTION__PROPERTIES:
         return getProperties();
     }
@@ -283,8 +285,8 @@ public class LocalReactionImpl extends DefinitionImpl implements LocalReaction
       case ExpressionsPackage.LOCAL_REACTION__TRIGGER:
         setTrigger((ReactionTrigger)newValue);
         return;
-      case ExpressionsPackage.LOCAL_REACTION__ACTION:
-        setAction((Action)newValue);
+      case ExpressionsPackage.LOCAL_REACTION__EFFECT:
+        setEffect((Effect)newValue);
         return;
       case ExpressionsPackage.LOCAL_REACTION__PROPERTIES:
         setProperties((ReactionProperties)newValue);
@@ -306,8 +308,8 @@ public class LocalReactionImpl extends DefinitionImpl implements LocalReaction
       case ExpressionsPackage.LOCAL_REACTION__TRIGGER:
         setTrigger((ReactionTrigger)null);
         return;
-      case ExpressionsPackage.LOCAL_REACTION__ACTION:
-        setAction((Action)null);
+      case ExpressionsPackage.LOCAL_REACTION__EFFECT:
+        setEffect((Effect)null);
         return;
       case ExpressionsPackage.LOCAL_REACTION__PROPERTIES:
         setProperties((ReactionProperties)null);
@@ -328,8 +330,8 @@ public class LocalReactionImpl extends DefinitionImpl implements LocalReaction
     {
       case ExpressionsPackage.LOCAL_REACTION__TRIGGER:
         return trigger != null;
-      case ExpressionsPackage.LOCAL_REACTION__ACTION:
-        return action != null;
+      case ExpressionsPackage.LOCAL_REACTION__EFFECT:
+        return effect != null;
       case ExpressionsPackage.LOCAL_REACTION__PROPERTIES:
         return properties != null;
     }
@@ -349,7 +351,7 @@ public class LocalReactionImpl extends DefinitionImpl implements LocalReaction
       switch (derivedFeatureID)
       {
         case ExpressionsPackage.LOCAL_REACTION__TRIGGER: return ExpressionsPackage.REACTION__TRIGGER;
-        case ExpressionsPackage.LOCAL_REACTION__ACTION: return ExpressionsPackage.REACTION__ACTION;
+        case ExpressionsPackage.LOCAL_REACTION__EFFECT: return ExpressionsPackage.REACTION__EFFECT;
         case ExpressionsPackage.LOCAL_REACTION__PROPERTIES: return ExpressionsPackage.REACTION__PROPERTIES;
         default: return -1;
       }
@@ -370,7 +372,7 @@ public class LocalReactionImpl extends DefinitionImpl implements LocalReaction
       switch (baseFeatureID)
       {
         case ExpressionsPackage.REACTION__TRIGGER: return ExpressionsPackage.LOCAL_REACTION__TRIGGER;
-        case ExpressionsPackage.REACTION__ACTION: return ExpressionsPackage.LOCAL_REACTION__ACTION;
+        case ExpressionsPackage.REACTION__EFFECT: return ExpressionsPackage.LOCAL_REACTION__EFFECT;
         case ExpressionsPackage.REACTION__PROPERTIES: return ExpressionsPackage.LOCAL_REACTION__PROPERTIES;
         default: return -1;
       }

@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
-
  */
 package org.yakindu.sct.statechart.expressions;
 
@@ -17,7 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.yakindu.sct.statechart.expressions.Reaction#getTrigger <em>Trigger</em>}</li>
- *   <li>{@link org.yakindu.sct.statechart.expressions.Reaction#getAction <em>Action</em>}</li>
+ *   <li>{@link org.yakindu.sct.statechart.expressions.Reaction#getEffect <em>Effect</em>}</li>
  *   <li>{@link org.yakindu.sct.statechart.expressions.Reaction#getProperties <em>Properties</em>}</li>
  * </ul>
  * </p>
@@ -55,30 +54,30 @@ public interface Reaction extends EObject
   void setTrigger(ReactionTrigger value);
 
   /**
-   * Returns the value of the '<em><b>Action</b></em>' containment reference.
+   * Returns the value of the '<em><b>Effect</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Action</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Effect</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Action</em>' containment reference.
-   * @see #setAction(Action)
-   * @see org.yakindu.sct.statechart.expressions.ExpressionsPackage#getReaction_Action()
+   * @return the value of the '<em>Effect</em>' containment reference.
+   * @see #setEffect(Effect)
+   * @see org.yakindu.sct.statechart.expressions.ExpressionsPackage#getReaction_Effect()
    * @model containment="true"
    * @generated
    */
-  Action getAction();
+  Effect getEffect();
 
   /**
-   * Sets the value of the '{@link org.yakindu.sct.statechart.expressions.Reaction#getAction <em>Action</em>}' containment reference.
+   * Sets the value of the '{@link org.yakindu.sct.statechart.expressions.Reaction#getEffect <em>Effect</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Action</em>' containment reference.
-   * @see #getAction()
+   * @param value the new value of the '<em>Effect</em>' containment reference.
+   * @see #getEffect()
    * @generated
    */
-  void setAction(Action value);
+  void setEffect(Effect value);
 
   /**
    * Returns the value of the '<em><b>Properties</b></em>' containment reference.

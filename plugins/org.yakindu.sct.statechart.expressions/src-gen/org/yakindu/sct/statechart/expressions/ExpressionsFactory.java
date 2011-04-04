@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
-
  */
 package org.yakindu.sct.statechart.expressions;
 
@@ -153,6 +152,15 @@ public interface ExpressionsFactory extends EFactory
   Definition createDefinition();
 
   /**
+   * Returns a new object of class '<em>Data Element</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Data Element</em>'.
+   * @generated
+   */
+  DataElement createDataElement();
+
+  /**
    * Returns a new object of class '<em>Event Definition</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -252,13 +260,13 @@ public interface ExpressionsFactory extends EFactory
   ReactionTrigger createReactionTrigger();
 
   /**
-   * Returns a new object of class '<em>Action</em>'.
+   * Returns a new object of class '<em>Effect</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Action</em>'.
+   * @return a new object of class '<em>Effect</em>'.
    * @generated
    */
-  Action createAction();
+  Effect createEffect();
 
   /**
    * Returns a new object of class '<em>Reaction Properties</em>'.
@@ -378,22 +386,31 @@ public interface ExpressionsFactory extends EFactory
   AlwaysEvent createAlwaysEvent();
 
   /**
-   * Returns a new object of class '<em>Expression Rule</em>'.
+   * Returns a new object of class '<em>Statement</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Expression Rule</em>'.
+   * @return a new object of class '<em>Statement</em>'.
    * @generated
    */
-  ExpressionRule createExpressionRule();
+  Statement createStatement();
 
   /**
-   * Returns a new object of class '<em>Raise Event Expression</em>'.
+   * Returns a new object of class '<em>Assignment</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Raise Event Expression</em>'.
+   * @return a new object of class '<em>Assignment</em>'.
    * @generated
    */
-  RaiseEventExpression createRaiseEventExpression();
+  Assignment createAssignment();
+
+  /**
+   * Returns a new object of class '<em>Event Raising</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Event Raising</em>'.
+   * @generated
+   */
+  EventRaising createEventRaising();
 
   /**
    * Returns a new object of class '<em>Expression</em>'.

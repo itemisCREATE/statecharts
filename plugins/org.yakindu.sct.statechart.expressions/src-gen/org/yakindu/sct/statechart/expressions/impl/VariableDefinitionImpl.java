@@ -2,16 +2,20 @@
  * <copyright>
  * </copyright>
  *
-
  */
 package org.yakindu.sct.statechart.expressions.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.ecore.EClass;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.yakindu.model.sct.statechart.NamedElement;
 import org.yakindu.model.sct.statechart.StatechartPackage;
 import org.yakindu.model.sct.statechart.Variable;
+
+import org.yakindu.sct.statechart.expressions.DataElement;
 import org.yakindu.sct.statechart.expressions.ExpressionsPackage;
 import org.yakindu.sct.statechart.expressions.Type;
 import org.yakindu.sct.statechart.expressions.VariableDefinition;
@@ -385,6 +389,13 @@ public class VariableDefinitionImpl extends DefinitionImpl implements VariableDe
   @Override
   public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass)
   {
+    if (baseClass == DataElement.class)
+    {
+      switch (derivedFeatureID)
+      {
+        default: return -1;
+      }
+    }
     if (baseClass == NamedElement.class)
     {
       switch (derivedFeatureID)
@@ -411,6 +422,13 @@ public class VariableDefinitionImpl extends DefinitionImpl implements VariableDe
   @Override
   public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass)
   {
+    if (baseClass == DataElement.class)
+    {
+      switch (baseFeatureID)
+      {
+        default: return -1;
+      }
+    }
     if (baseClass == NamedElement.class)
     {
       switch (baseFeatureID)

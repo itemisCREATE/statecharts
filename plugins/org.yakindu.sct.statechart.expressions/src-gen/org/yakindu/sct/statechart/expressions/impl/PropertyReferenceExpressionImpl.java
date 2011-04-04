@@ -2,15 +2,17 @@
  * <copyright>
  * </copyright>
  *
-
  */
 package org.yakindu.sct.statechart.expressions.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.yakindu.model.sct.statechart.Variable;
+
+import org.yakindu.sct.statechart.expressions.DataElement;
 import org.yakindu.sct.statechart.expressions.ExpressionsPackage;
 import org.yakindu.sct.statechart.expressions.PropertyReferenceExpression;
 
@@ -37,7 +39,7 @@ public class PropertyReferenceExpressionImpl extends ExpressionImpl implements P
    * @generated
    * @ordered
    */
-  protected Variable value;
+  protected DataElement value;
 
   /**
    * <!-- begin-user-doc -->
@@ -65,12 +67,12 @@ public class PropertyReferenceExpressionImpl extends ExpressionImpl implements P
    * <!-- end-user-doc -->
    * @generated
    */
-  public Variable getValue()
+  public DataElement getValue()
   {
     if (value != null && value.eIsProxy())
     {
       InternalEObject oldValue = (InternalEObject)value;
-      value = (Variable)eResolveProxy(oldValue);
+      value = (DataElement)eResolveProxy(oldValue);
       if (value != oldValue)
       {
         if (eNotificationRequired())
@@ -85,7 +87,7 @@ public class PropertyReferenceExpressionImpl extends ExpressionImpl implements P
    * <!-- end-user-doc -->
    * @generated
    */
-  public Variable basicGetValue()
+  public DataElement basicGetValue()
   {
     return value;
   }
@@ -95,9 +97,9 @@ public class PropertyReferenceExpressionImpl extends ExpressionImpl implements P
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setValue(Variable newValue)
+  public void setValue(DataElement newValue)
   {
-    Variable oldValue = value;
+    DataElement oldValue = value;
     value = newValue;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.PROPERTY_REFERENCE_EXPRESSION__VALUE, oldValue, value));
@@ -131,7 +133,7 @@ public class PropertyReferenceExpressionImpl extends ExpressionImpl implements P
     switch (featureID)
     {
       case ExpressionsPackage.PROPERTY_REFERENCE_EXPRESSION__VALUE:
-        setValue((Variable)newValue);
+        setValue((DataElement)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -148,7 +150,7 @@ public class PropertyReferenceExpressionImpl extends ExpressionImpl implements P
     switch (featureID)
     {
       case ExpressionsPackage.PROPERTY_REFERENCE_EXPRESSION__VALUE:
-        setValue((Variable)null);
+        setValue((DataElement)null);
         return;
     }
     super.eUnset(featureID);
