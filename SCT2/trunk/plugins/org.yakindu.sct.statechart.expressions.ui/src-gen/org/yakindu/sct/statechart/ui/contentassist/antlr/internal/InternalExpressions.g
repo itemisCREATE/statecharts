@@ -425,8 +425,6 @@ finally {
 
 
 
-
-
 // Entry rule entryRuleEventDefinition
 entryRuleEventDefinition 
 :
@@ -1768,7 +1766,6 @@ rule__Definition__Alternatives
 finally {
 	restoreStackSize(stackSize);
 }
-
 
 
 rule__ReactionProperty__Alternatives

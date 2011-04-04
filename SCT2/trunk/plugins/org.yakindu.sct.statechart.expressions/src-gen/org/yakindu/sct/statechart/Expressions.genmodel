@@ -79,7 +79,6 @@
     </genClasses>
     <genClasses ecoreClass="Expressions.ecore#//InternalScope"/>
     <genClasses ecoreClass="Expressions.ecore#//Definition"/>
-    <genClasses ecoreClass="Expressions.ecore#//DataElement"/>
     <genClasses ecoreClass="Expressions.ecore#//EventDefinition">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//EventDefinition/direction"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//EventDefinition/type"/>

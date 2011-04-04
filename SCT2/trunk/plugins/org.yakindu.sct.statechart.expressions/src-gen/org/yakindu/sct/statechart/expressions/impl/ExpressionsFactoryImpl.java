@@ -82,7 +82,6 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
       case ExpressionsPackage.INTERFACE_SCOPE: return createInterfaceScope();
       case ExpressionsPackage.INTERNAL_SCOPE: return createInternalScope();
       case ExpressionsPackage.DEFINITION: return createDefinition();
-      case ExpressionsPackage.DATA_ELEMENT: return createDataElement();
       case ExpressionsPackage.EVENT_DEFINITION: return createEventDefinition();
       case ExpressionsPackage.EVENT_DERIVATION: return createEventDerivation();
       case ExpressionsPackage.VARIABLE_DEFINITION: return createVariableDefinition();
@@ -340,17 +339,6 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
   {
     DefinitionImpl definition = new DefinitionImpl();
     return definition;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public DataElement createDataElement()
-  {
-    DataElementImpl dataElement = new DataElementImpl();
-    return dataElement;
   }
 
   /**

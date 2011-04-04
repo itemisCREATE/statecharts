@@ -5,6 +5,7 @@
  */
 package org.yakindu.sct.statechart.expressions;
 
+import org.yakindu.model.sct.statechart.DataElement;
 
 /**
  * <!-- begin-user-doc -->

@@ -42,7 +42,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" ordered="false"
         lowerBound="1" eType="#//RealVariableValue" containment="true" eOpposite="#//RealVariableValue/_"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Variable" abstract="true" eSuperTypes="#//NamedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Variable" abstract="true" eSuperTypes="#//DataElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="ShallowHistoryState" eSuperTypes="#//HistoryState"/>
   <eClassifiers xsi:type="ecore:EClass" name="HistoryState" eSuperTypes="#//Pseudostate"/>
   <eClassifiers xsi:type="ecore:EClass" name="Junction" eSuperTypes="#//Pseudostate"/>
@@ -68,7 +68,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="_" ordered="false" lowerBound="1"
         eType="#//IntegerVariable" eOpposite="#//IntegerVariable/value"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Event" eSuperTypes="#//NamedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Event" eSuperTypes="#//DataElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="Choice" eSuperTypes="#//Pseudostate"/>
   <eClassifiers xsi:type="ecore:EClass" name="Statechart" eSuperTypes="#//NamedElement #//ExpressionElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="regions" ordered="false"
@@ -86,4 +86,5 @@
   <eClassifiers xsi:type="ecore:EClass" name="ExpressionElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="expression" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataElement" eSuperTypes="#//NamedElement"/>
 </ecore:EPackage>

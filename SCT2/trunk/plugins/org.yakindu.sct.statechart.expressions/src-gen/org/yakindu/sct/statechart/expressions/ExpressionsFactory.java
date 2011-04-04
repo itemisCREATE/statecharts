@@ -152,15 +152,6 @@ public interface ExpressionsFactory extends EFactory
   Definition createDefinition();
 
   /**
-   * Returns a new object of class '<em>Data Element</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Data Element</em>'.
-   * @generated
-   */
-  DataElement createDataElement();
-
-  /**
    * Returns a new object of class '<em>Event Definition</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

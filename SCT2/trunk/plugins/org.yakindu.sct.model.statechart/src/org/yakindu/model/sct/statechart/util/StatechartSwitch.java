@@ -190,6 +190,7 @@ public class StatechartSwitch<T> {
 				RealVariable realVariable = (RealVariable)theEObject;
 				T result = caseRealVariable(realVariable);
 				if (result == null) result = caseVariable(realVariable);
+				if (result == null) result = caseDataElement(realVariable);
 				if (result == null) result = caseNamedElement(realVariable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -197,6 +198,7 @@ public class StatechartSwitch<T> {
 			case StatechartPackage.VARIABLE: {
 				Variable variable = (Variable)theEObject;
 				T result = caseVariable(variable);
+				if (result == null) result = caseDataElement(variable);
 				if (result == null) result = caseNamedElement(variable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -243,6 +245,7 @@ public class StatechartSwitch<T> {
 				BooleanVariable booleanVariable = (BooleanVariable)theEObject;
 				T result = caseBooleanVariable(booleanVariable);
 				if (result == null) result = caseVariable(booleanVariable);
+				if (result == null) result = caseDataElement(booleanVariable);
 				if (result == null) result = caseNamedElement(booleanVariable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -266,6 +269,7 @@ public class StatechartSwitch<T> {
 				IntegerVariable integerVariable = (IntegerVariable)theEObject;
 				T result = caseIntegerVariable(integerVariable);
 				if (result == null) result = caseVariable(integerVariable);
+				if (result == null) result = caseDataElement(integerVariable);
 				if (result == null) result = caseNamedElement(integerVariable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -279,6 +283,7 @@ public class StatechartSwitch<T> {
 			case StatechartPackage.EVENT: {
 				Event event = (Event)theEObject;
 				T result = caseEvent(event);
+				if (result == null) result = caseDataElement(event);
 				if (result == null) result = caseNamedElement(event);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -339,6 +344,13 @@ public class StatechartSwitch<T> {
 			case StatechartPackage.EXPRESSION_ELEMENT: {
 				ExpressionElement expressionElement = (ExpressionElement)theEObject;
 				T result = caseExpressionElement(expressionElement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StatechartPackage.DATA_ELEMENT: {
+				DataElement dataElement = (DataElement)theEObject;
+				T result = caseDataElement(dataElement);
+				if (result == null) result = caseNamedElement(dataElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -763,6 +775,21 @@ public class StatechartSwitch<T> {
 	 * @generated
 	 */
 	public T caseExpressionElement(ExpressionElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Data Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Data Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDataElement(DataElement object) {
 		return null;
 	}
 

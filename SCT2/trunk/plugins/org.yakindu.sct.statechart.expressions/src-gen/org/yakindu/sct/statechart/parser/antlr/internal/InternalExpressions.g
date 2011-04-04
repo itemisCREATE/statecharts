@@ -800,8 +800,6 @@ ruleDefinition returns [EObject current=null]
 
 
 
-
-
 // Entry rule entryRuleEventDefinition
 entryRuleEventDefinition returns [EObject current=null] 
 	:

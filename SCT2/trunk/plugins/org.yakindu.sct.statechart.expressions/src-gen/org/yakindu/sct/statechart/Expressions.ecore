@@ -37,8 +37,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InternalScope" eSuperTypes="#//StatechartScope"/>
   <eClassifiers xsi:type="ecore:EClass" name="Definition"/>
-  <eClassifiers xsi:type="ecore:EClass" name="DataElement"/>
-  <eClassifiers xsi:type="ecore:EClass" name="EventDefinition" eSuperTypes="#//Definition #//DataElement ../../../../../../org.yakindu.sct.model.statechart/model/emf/statechart.ecore#//Event">
+  <eClassifiers xsi:type="ecore:EClass" name="EventDefinition" eSuperTypes="#//Definition ../../../../../../org.yakindu.sct.model.statechart/model/emf/statechart.ecore#//Event">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" eType="#//Direction"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//Type"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="derivation" eType="#//EventDerivation"
@@ -54,7 +53,7 @@
     <eLiterals name="IN" literal="in"/>
     <eLiterals name="OUT" value="1" literal="out"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="VariableDefinition" eSuperTypes="#//Definition #//DataElement ../../../../../../org.yakindu.sct.model.statechart/model/emf/statechart.ecore#//Variable">
+  <eClassifiers xsi:type="ecore:EClass" name="VariableDefinition" eSuperTypes="#//Definition ../../../../../../org.yakindu.sct.model.statechart/model/emf/statechart.ecore#//Variable">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="readonly" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="external" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//Type"/>
@@ -218,6 +217,6 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PropertyReferenceExpression" eSuperTypes="#//Expression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//DataElement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass ../../../../../../org.yakindu.sct.model.statechart/model/emf/statechart.ecore#//DataElement"/>
   </eClassifiers>
 </ecore:EPackage>

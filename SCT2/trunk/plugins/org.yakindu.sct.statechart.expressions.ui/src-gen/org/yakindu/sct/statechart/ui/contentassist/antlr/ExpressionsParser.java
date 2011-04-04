@@ -41,7 +41,6 @@ public class ExpressionsParser extends AbstractContentAssistParser {
 					put(grammarAccess.getScopeAccess().getAlternatives(), "rule__Scope__Alternatives");
 					put(grammarAccess.getStatechartScopeAccess().getAlternatives(), "rule__StatechartScope__Alternatives");
 					put(grammarAccess.getDefinitionAccess().getAlternatives(), "rule__Definition__Alternatives");
-					put(grammarAccess.getDataElementAccess().getAlternatives(), "rule__DataElement__Alternatives");
 					put(grammarAccess.getReactionAccess().getAlternatives(), "rule__Reaction__Alternatives");
 					put(grammarAccess.getReactionPropertyAccess().getAlternatives(), "rule__ReactionProperty__Alternatives");
 					put(grammarAccess.getEventSpecAccess().getAlternatives(), "rule__EventSpec__Alternatives");

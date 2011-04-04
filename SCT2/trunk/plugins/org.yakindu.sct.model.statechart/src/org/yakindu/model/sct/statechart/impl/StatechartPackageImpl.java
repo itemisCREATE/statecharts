@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.yakindu.model.sct.statechart.BooleanVariable;
 import org.yakindu.model.sct.statechart.BooleanVariableValue;
 import org.yakindu.model.sct.statechart.Choice;
+import org.yakindu.model.sct.statechart.DataElement;
 import org.yakindu.model.sct.statechart.DeepHistoryState;
 import org.yakindu.model.sct.statechart.Effect;
 import org.yakindu.model.sct.statechart.Event;
@@ -255,6 +256,13 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * @generated
 	 */
 	private EClass expressionElementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass dataElementEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -754,6 +762,15 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getDataElement() {
+		return dataElementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public StatechartFactory getStatechartFactory() {
 		return (StatechartFactory)getEFactoryInstance();
 	}
@@ -852,6 +869,8 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 
 		expressionElementEClass = createEClass(EXPRESSION_ELEMENT);
 		createEAttribute(expressionElementEClass, EXPRESSION_ELEMENT__EXPRESSION);
+
+		dataElementEClass = createEClass(DATA_ELEMENT);
 	}
 
 	/**
@@ -890,7 +909,7 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 		stateEClass.getESuperTypes().add(this.getVertex());
 		stateEClass.getESuperTypes().add(this.getExpressionElement());
 		realVariableEClass.getESuperTypes().add(this.getVariable());
-		variableEClass.getESuperTypes().add(this.getNamedElement());
+		variableEClass.getESuperTypes().add(this.getDataElement());
 		shallowHistoryStateEClass.getESuperTypes().add(this.getHistoryState());
 		historyStateEClass.getESuperTypes().add(this.getPseudostate());
 		junctionEClass.getESuperTypes().add(this.getPseudostate());
@@ -898,12 +917,13 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 		booleanVariableEClass.getESuperTypes().add(this.getVariable());
 		joinEClass.getESuperTypes().add(this.getPseudostate());
 		integerVariableEClass.getESuperTypes().add(this.getVariable());
-		eventEClass.getESuperTypes().add(this.getNamedElement());
+		eventEClass.getESuperTypes().add(this.getDataElement());
 		choiceEClass.getESuperTypes().add(this.getPseudostate());
 		statechartEClass.getESuperTypes().add(this.getNamedElement());
 		statechartEClass.getESuperTypes().add(this.getExpressionElement());
 		forkEClass.getESuperTypes().add(this.getPseudostate());
 		initialStateEClass.getESuperTypes().add(this.getPseudostate());
+		dataElementEClass.getESuperTypes().add(this.getNamedElement());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(pseudostateEClass, Pseudostate.class, "Pseudostate", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -981,6 +1001,8 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 
 		initEClass(expressionElementEClass, ExpressionElement.class, "ExpressionElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getExpressionElement_Expression(), ecorePackage.getEString(), "expression", null, 0, 1, ExpressionElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(dataElementEClass, DataElement.class, "DataElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);
