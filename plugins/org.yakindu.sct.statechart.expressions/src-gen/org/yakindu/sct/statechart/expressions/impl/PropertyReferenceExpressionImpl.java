@@ -12,7 +12,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.yakindu.sct.statechart.expressions.DataElement;
+import org.yakindu.model.sct.statechart.DataElement;
+
 import org.yakindu.sct.statechart.expressions.ExpressionsPackage;
 import org.yakindu.sct.statechart.expressions.PropertyReferenceExpression;
 

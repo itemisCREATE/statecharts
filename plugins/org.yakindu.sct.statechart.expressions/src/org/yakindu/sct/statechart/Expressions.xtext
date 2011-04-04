@@ -59,7 +59,7 @@ InternalScope:  {InternalScope} 'internal' ':' (definitions+=Definition)*;
 a definition is a top level element of a definition scope. */ 
 Definition: EventDefinition | VariableDefinition | Clock | Operation | LocalReaction | Entrypoint | Exitpoint;
 
-DataElement: EventDefinition | VariableDefinition;
+// DataElement: EventDefinition | VariableDefinition;
 
 /* ---- event definition ---- */
 
@@ -239,7 +239,7 @@ PrimitiveValueExpression returns Expression:
 	{PrimitiveValueExpression} value=Literal;
 
 VariableReferenceExpression returns Expression:
-	{PropertyReferenceExpression} value=[DataElement];
+	{PropertyReferenceExpression} value=[sct::DataElement];
 
 Literal:
 	BOOL | INT | STRING | FLOAT;

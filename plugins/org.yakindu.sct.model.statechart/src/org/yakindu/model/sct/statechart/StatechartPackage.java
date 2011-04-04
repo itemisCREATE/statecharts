@@ -501,6 +501,34 @@ public interface StatechartPackage extends EPackage {
 	int REAL_VARIABLE_VALUE_FEATURE_COUNT = 1;
 
 	/**
+	 * The meta object id for the '{@link org.yakindu.model.sct.statechart.impl.DataElementImpl <em>Data Element</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.model.sct.statechart.impl.DataElementImpl
+	 * @see org.yakindu.model.sct.statechart.impl.StatechartPackageImpl#getDataElement()
+	 * @generated
+	 */
+	int DATA_ELEMENT = 28;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_ELEMENT__NAME = NAMED_ELEMENT__NAME;
+
+	/**
+	 * The number of structural features of the '<em>Data Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_ELEMENT_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link org.yakindu.model.sct.statechart.impl.VariableImpl <em>Variable</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -517,7 +545,7 @@ public interface StatechartPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE__NAME = NAMED_ELEMENT__NAME;
+	int VARIABLE__NAME = DATA_ELEMENT__NAME;
 
 	/**
 	 * The number of structural features of the '<em>Variable</em>' class.
@@ -526,7 +554,7 @@ public interface StatechartPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 0;
+	int VARIABLE_FEATURE_COUNT = DATA_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.model.sct.statechart.impl.RealVariableImpl <em>Real Variable</em>}' class.
@@ -1005,7 +1033,7 @@ public interface StatechartPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT__NAME = NAMED_ELEMENT__NAME;
+	int EVENT__NAME = DATA_ELEMENT__NAME;
 
 	/**
 	 * The number of structural features of the '<em>Event</em>' class.
@@ -1014,7 +1042,7 @@ public interface StatechartPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 0;
+	int EVENT_FEATURE_COUNT = DATA_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.model.sct.statechart.impl.ChoiceImpl <em>Choice</em>}' class.
@@ -1804,6 +1832,16 @@ public interface StatechartPackage extends EPackage {
 	EAttribute getExpressionElement_Expression();
 
 	/**
+	 * Returns the meta object for class '{@link org.yakindu.model.sct.statechart.DataElement <em>Data Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Data Element</em>'.
+	 * @see org.yakindu.model.sct.statechart.DataElement
+	 * @generated
+	 */
+	EClass getDataElement();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2264,6 +2302,16 @@ public interface StatechartPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute EXPRESSION_ELEMENT__EXPRESSION = eINSTANCE.getExpressionElement_Expression();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.model.sct.statechart.impl.DataElementImpl <em>Data Element</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.model.sct.statechart.impl.DataElementImpl
+		 * @see org.yakindu.model.sct.statechart.impl.StatechartPackageImpl#getDataElement()
+		 * @generated
+		 */
+		EClass DATA_ELEMENT = eINSTANCE.getDataElement();
 
 	}
 

@@ -10,6 +10,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
+import org.yakindu.model.sct.statechart.DataElement;
 import org.yakindu.model.sct.statechart.Event;
 import org.yakindu.model.sct.statechart.NamedElement;
 import org.yakindu.model.sct.statechart.Variable;
@@ -207,20 +208,13 @@ public class ExpressionsSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case ExpressionsPackage.DATA_ELEMENT:
-      {
-        DataElement dataElement = (DataElement)theEObject;
-        T result = caseDataElement(dataElement);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case ExpressionsPackage.EVENT_DEFINITION:
       {
         EventDefinition eventDefinition = (EventDefinition)theEObject;
         T result = caseEventDefinition(eventDefinition);
         if (result == null) result = caseDefinition(eventDefinition);
-        if (result == null) result = caseDataElement(eventDefinition);
         if (result == null) result = caseEvent(eventDefinition);
+        if (result == null) result = caseDataElement(eventDefinition);
         if (result == null) result = caseNamedElement(eventDefinition);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -237,8 +231,8 @@ public class ExpressionsSwitch<T>
         VariableDefinition variableDefinition = (VariableDefinition)theEObject;
         T result = caseVariableDefinition(variableDefinition);
         if (result == null) result = caseDefinition(variableDefinition);
-        if (result == null) result = caseDataElement(variableDefinition);
         if (result == null) result = caseVariable(variableDefinition);
+        if (result == null) result = caseDataElement(variableDefinition);
         if (result == null) result = caseNamedElement(variableDefinition);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -745,22 +739,6 @@ public class ExpressionsSwitch<T>
    * @generated
    */
   public T caseDefinition(Definition object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Data Element</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Data Element</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseDataElement(DataElement object)
   {
     return null;
   }
@@ -1385,6 +1363,22 @@ public class ExpressionsSwitch<T>
    * @generated
    */
   public T caseNamedElement(NamedElement object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Data Element</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Data Element</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseDataElement(DataElement object)
   {
     return null;
   }

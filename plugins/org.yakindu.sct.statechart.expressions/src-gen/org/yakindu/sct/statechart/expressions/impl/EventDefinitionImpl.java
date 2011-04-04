@@ -13,11 +13,11 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.yakindu.model.sct.statechart.DataElement;
 import org.yakindu.model.sct.statechart.Event;
 import org.yakindu.model.sct.statechart.NamedElement;
 import org.yakindu.model.sct.statechart.StatechartPackage;
 
-import org.yakindu.sct.statechart.expressions.DataElement;
 import org.yakindu.sct.statechart.expressions.Direction;
 import org.yakindu.sct.statechart.expressions.EventDefinition;
 import org.yakindu.sct.statechart.expressions.EventDerivation;
@@ -370,18 +370,18 @@ public class EventDefinitionImpl extends DefinitionImpl implements EventDefiniti
   @Override
   public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass)
   {
-    if (baseClass == DataElement.class)
-    {
-      switch (derivedFeatureID)
-      {
-        default: return -1;
-      }
-    }
     if (baseClass == NamedElement.class)
     {
       switch (derivedFeatureID)
       {
         case ExpressionsPackage.EVENT_DEFINITION__NAME: return StatechartPackage.NAMED_ELEMENT__NAME;
+        default: return -1;
+      }
+    }
+    if (baseClass == DataElement.class)
+    {
+      switch (derivedFeatureID)
+      {
         default: return -1;
       }
     }
@@ -403,18 +403,18 @@ public class EventDefinitionImpl extends DefinitionImpl implements EventDefiniti
   @Override
   public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass)
   {
-    if (baseClass == DataElement.class)
-    {
-      switch (baseFeatureID)
-      {
-        default: return -1;
-      }
-    }
     if (baseClass == NamedElement.class)
     {
       switch (baseFeatureID)
       {
         case StatechartPackage.NAMED_ELEMENT__NAME: return ExpressionsPackage.EVENT_DEFINITION__NAME;
+        default: return -1;
+      }
+    }
+    if (baseClass == DataElement.class)
+    {
+      switch (baseFeatureID)
+      {
         default: return -1;
       }
     }

@@ -221,6 +221,10 @@ public class StatechartAdapterFactory extends AdapterFactoryImpl {
 				return createExpressionElementAdapter();
 			}
 			@Override
+			public Adapter caseDataElement(DataElement object) {
+				return createDataElementAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -629,6 +633,20 @@ public class StatechartAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createExpressionElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.model.sct.statechart.DataElement <em>Data Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.model.sct.statechart.DataElement
+	 * @generated
+	 */
+	public Adapter createDataElementAdapter() {
 		return null;
 	}
 

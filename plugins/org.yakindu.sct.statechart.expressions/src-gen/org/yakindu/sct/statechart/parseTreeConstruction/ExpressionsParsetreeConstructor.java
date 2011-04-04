@@ -45,48 +45,47 @@ protected class ThisRootNode extends RootToken {
 			case 11: return new InterfaceScope_Group(this, this, 11, inst);
 			case 12: return new InternalScope_Group(this, this, 12, inst);
 			case 13: return new Definition_Alternatives(this, this, 13, inst);
-			case 14: return new DataElement_Alternatives(this, this, 14, inst);
-			case 15: return new SCTEvent_EventDefinitionParserRuleCall(this, this, 15, inst);
-			case 16: return new EventDefinition_Group(this, this, 16, inst);
-			case 17: return new EventDerivation_Group(this, this, 17, inst);
-			case 18: return new SCTVariable_VariableDefinitionParserRuleCall(this, this, 18, inst);
-			case 19: return new VariableDefinition_Group(this, this, 19, inst);
-			case 20: return new Clock_Group(this, this, 20, inst);
-			case 21: return new Operation_Group(this, this, 21, inst);
-			case 22: return new Entrypoint_Group(this, this, 22, inst);
-			case 23: return new Exitpoint_Group(this, this, 23, inst);
-			case 24: return new Reaction_Alternatives(this, this, 24, inst);
-			case 25: return new LocalReaction_Group(this, this, 25, inst);
-			case 26: return new TransitionReaction_Group(this, this, 26, inst);
-			case 27: return new ReactionTrigger_Group(this, this, 27, inst);
-			case 28: return new Effect_Group(this, this, 28, inst);
-			case 29: return new ReactionProperties_Group(this, this, 29, inst);
-			case 30: return new ReactionProperty_Alternatives(this, this, 30, inst);
-			case 31: return new ReactionPriority_PriorityAssignment(this, this, 31, inst);
-			case 32: return new EntryPointSpec_Group(this, this, 32, inst);
-			case 33: return new ExitPointSpec_Group(this, this, 33, inst);
-			case 34: return new EventSpec_Alternatives(this, this, 34, inst);
-			case 35: return new RegularEventSpec_EventAssignment(this, this, 35, inst);
-			case 36: return new TimeEventSpec_Group(this, this, 36, inst);
-			case 37: return new BuiltinEventSpec_Alternatives(this, this, 37, inst);
-			case 38: return new EnterEvent_Group(this, this, 38, inst);
-			case 39: return new ExitEvent_Group(this, this, 39, inst);
-			case 40: return new OnCycleEvent_Group(this, this, 40, inst);
-			case 41: return new AlwaysEvent_Group(this, this, 41, inst);
-			case 42: return new Statement_Alternatives(this, this, 42, inst);
-			case 43: return new Assignment_Group(this, this, 43, inst);
-			case 44: return new EventRaising_Group(this, this, 44, inst);
-			case 45: return new LogicalOrExpression_Group(this, this, 45, inst);
-			case 46: return new LogicalAndExpression_Group(this, this, 46, inst);
-			case 47: return new LogicalNotExpression_Alternatives(this, this, 47, inst);
-			case 48: return new LogicalRelationExpression_Group(this, this, 48, inst);
-			case 49: return new NumericalAddSubtractExpression_Group(this, this, 49, inst);
-			case 50: return new NumericalMultiplyDivideExpression_Group(this, this, 50, inst);
-			case 51: return new NumericalUnaryExpression_Alternatives(this, this, 51, inst);
-			case 52: return new PrimaryExpression_Alternatives(this, this, 52, inst);
-			case 53: return new ValueExpression_Alternatives(this, this, 53, inst);
-			case 54: return new PrimitiveValueExpression_Group(this, this, 54, inst);
-			case 55: return new VariableReferenceExpression_Group(this, this, 55, inst);
+			case 14: return new SCTEvent_EventDefinitionParserRuleCall(this, this, 14, inst);
+			case 15: return new EventDefinition_Group(this, this, 15, inst);
+			case 16: return new EventDerivation_Group(this, this, 16, inst);
+			case 17: return new SCTVariable_VariableDefinitionParserRuleCall(this, this, 17, inst);
+			case 18: return new VariableDefinition_Group(this, this, 18, inst);
+			case 19: return new Clock_Group(this, this, 19, inst);
+			case 20: return new Operation_Group(this, this, 20, inst);
+			case 21: return new Entrypoint_Group(this, this, 21, inst);
+			case 22: return new Exitpoint_Group(this, this, 22, inst);
+			case 23: return new Reaction_Alternatives(this, this, 23, inst);
+			case 24: return new LocalReaction_Group(this, this, 24, inst);
+			case 25: return new TransitionReaction_Group(this, this, 25, inst);
+			case 26: return new ReactionTrigger_Group(this, this, 26, inst);
+			case 27: return new Effect_Group(this, this, 27, inst);
+			case 28: return new ReactionProperties_Group(this, this, 28, inst);
+			case 29: return new ReactionProperty_Alternatives(this, this, 29, inst);
+			case 30: return new ReactionPriority_PriorityAssignment(this, this, 30, inst);
+			case 31: return new EntryPointSpec_Group(this, this, 31, inst);
+			case 32: return new ExitPointSpec_Group(this, this, 32, inst);
+			case 33: return new EventSpec_Alternatives(this, this, 33, inst);
+			case 34: return new RegularEventSpec_EventAssignment(this, this, 34, inst);
+			case 35: return new TimeEventSpec_Group(this, this, 35, inst);
+			case 36: return new BuiltinEventSpec_Alternatives(this, this, 36, inst);
+			case 37: return new EnterEvent_Group(this, this, 37, inst);
+			case 38: return new ExitEvent_Group(this, this, 38, inst);
+			case 39: return new OnCycleEvent_Group(this, this, 39, inst);
+			case 40: return new AlwaysEvent_Group(this, this, 40, inst);
+			case 41: return new Statement_Alternatives(this, this, 41, inst);
+			case 42: return new Assignment_Group(this, this, 42, inst);
+			case 43: return new EventRaising_Group(this, this, 43, inst);
+			case 44: return new LogicalOrExpression_Group(this, this, 44, inst);
+			case 45: return new LogicalAndExpression_Group(this, this, 45, inst);
+			case 46: return new LogicalNotExpression_Alternatives(this, this, 46, inst);
+			case 47: return new LogicalRelationExpression_Group(this, this, 47, inst);
+			case 48: return new NumericalAddSubtractExpression_Group(this, this, 48, inst);
+			case 49: return new NumericalMultiplyDivideExpression_Group(this, this, 49, inst);
+			case 50: return new NumericalUnaryExpression_Alternatives(this, this, 50, inst);
+			case 51: return new PrimaryExpression_Alternatives(this, this, 51, inst);
+			case 52: return new ValueExpression_Alternatives(this, this, 52, inst);
+			case 53: return new PrimitiveValueExpression_Group(this, this, 53, inst);
+			case 54: return new VariableReferenceExpression_Group(this, this, 54, inst);
 			default: return null;
 		}	
 	}	
@@ -1837,122 +1836,9 @@ protected class Definition_ExitpointParserRuleCall_6 extends RuleCallToken {
 /************ end Rule Definition ****************/
 
 
-/************ begin Rule DataElement ****************
- *
- * DataElement:
- * 	EventDefinition | VariableDefinition;
- *
- **/
-
-// EventDefinition | VariableDefinition
-protected class DataElement_Alternatives extends AlternativesToken {
-
-	public DataElement_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
-		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
-	}
-	
-	@Override
-	public Alternatives getGrammarElement() {
-		return grammarAccess.getDataElementAccess().getAlternatives();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
-		switch(index) {
-			case 0: return new DataElement_EventDefinitionParserRuleCall_0(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new DataElement_VariableDefinitionParserRuleCall_1(lastRuleCallOrigin, this, 1, inst);
-			default: return null;
-		}	
-	}
-
-    @Override
-	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getEventDefinitionRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getVariableDefinitionRule().getType().getClassifier())
-			return null;
-		return eObjectConsumer;
-	}
-
-}
-
-// EventDefinition
-protected class DataElement_EventDefinitionParserRuleCall_0 extends RuleCallToken {
-	
-	public DataElement_EventDefinitionParserRuleCall_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
-		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
-	}
-	
-	@Override
-	public RuleCall getGrammarElement() {
-		return grammarAccess.getDataElementAccess().getEventDefinitionParserRuleCall_0();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
-		switch(index) {
-			case 0: return new EventDefinition_Group(this, this, 0, inst);
-			default: return null;
-		}	
-	}
-
-    @Override
-	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getEventDefinitionRule().getType().getClassifier())
-			return null;
-		if(checkForRecursion(EventDefinition_Group.class, eObjectConsumer)) return null;
-		return eObjectConsumer;
-	}
-	
-    @Override
-	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
-		switch(index) {
-			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, inst);
-		}	
-	}	
-}
-
-// VariableDefinition
-protected class DataElement_VariableDefinitionParserRuleCall_1 extends RuleCallToken {
-	
-	public DataElement_VariableDefinitionParserRuleCall_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
-		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
-	}
-	
-	@Override
-	public RuleCall getGrammarElement() {
-		return grammarAccess.getDataElementAccess().getVariableDefinitionParserRuleCall_1();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
-		switch(index) {
-			case 0: return new VariableDefinition_Group(this, this, 0, inst);
-			default: return null;
-		}	
-	}
-
-    @Override
-	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getVariableDefinitionRule().getType().getClassifier())
-			return null;
-		if(checkForRecursion(VariableDefinition_Group.class, eObjectConsumer)) return null;
-		return eObjectConsumer;
-	}
-	
-    @Override
-	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
-		switch(index) {
-			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, inst);
-		}	
-	}	
-}
-
-
-/************ end Rule DataElement ****************/
-
-
 /************ begin Rule SCTEvent ****************
  *
+ * // DataElement: EventDefinition | VariableDefinition;
  * / * ---- event definition ---- * / // hook EventDefinition into statechart inheritance hiearchy
  * SCTEvent returns sct::Event:
  * 	EventDefinition;
@@ -8345,11 +8231,11 @@ protected class PrimitiveValueExpression_ValueAssignment_1 extends AssignmentTok
 /************ begin Rule VariableReferenceExpression ****************
  *
  * VariableReferenceExpression returns Expression:
- * 	{PropertyReferenceExpression} value=[DataElement];
+ * 	{PropertyReferenceExpression} value=[sct::DataElement];
  *
  **/
 
-// {PropertyReferenceExpression} value=[DataElement]
+// {PropertyReferenceExpression} value=[sct::DataElement]
 protected class VariableReferenceExpression_Group extends GroupToken {
 	
 	public VariableReferenceExpression_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -8404,7 +8290,7 @@ protected class VariableReferenceExpression_PropertyReferenceExpressionAction_0 
 	}
 }
 
-// value=[DataElement]
+// value=[sct::DataElement]
 protected class VariableReferenceExpression_ValueAssignment_1 extends AssignmentToken  {
 	
 	public VariableReferenceExpression_ValueAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

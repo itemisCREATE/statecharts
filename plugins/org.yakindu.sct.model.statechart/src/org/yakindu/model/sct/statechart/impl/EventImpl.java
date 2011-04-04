@@ -23,7 +23,7 @@ import org.yakindu.model.sct.statechart.StatechartPackage;
  *
  * @generated
  */
-public class EventImpl extends NamedElementImpl implements Event {
+public class EventImpl extends DataElementImpl implements Event {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

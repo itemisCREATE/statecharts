@@ -31,7 +31,7 @@ import org.yakindu.model.sct.statechart.Variable;
  * @generated
  */
 public class VariableItemProvider
-	extends NamedElementItemProvider
+	extends DataElementItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,

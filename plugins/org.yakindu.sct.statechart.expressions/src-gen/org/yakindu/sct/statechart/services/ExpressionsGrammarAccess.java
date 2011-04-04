@@ -363,30 +363,11 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getExitpointParserRuleCall_6() { return cExitpointParserRuleCall_6; }
 	}
 
-	public class DataElementElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DataElement");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cEventDefinitionParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cVariableDefinitionParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		
-		//DataElement:
-		//	EventDefinition | VariableDefinition;
-		public ParserRule getRule() { return rule; }
-
-		//EventDefinition | VariableDefinition
-		public Alternatives getAlternatives() { return cAlternatives; }
-
-		//EventDefinition
-		public RuleCall getEventDefinitionParserRuleCall_0() { return cEventDefinitionParserRuleCall_0; }
-
-		//VariableDefinition
-		public RuleCall getVariableDefinitionParserRuleCall_1() { return cVariableDefinitionParserRuleCall_1; }
-	}
-
 	public class SCTEventElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SCTEvent");
 		private final RuleCall cEventDefinitionParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
+		//// DataElement: EventDefinition | VariableDefinition;
 		/// * ---- event definition ---- * / // hook EventDefinition into statechart inheritance hiearchy
 		//SCTEvent returns sct::Event:
 		//	EventDefinition;
@@ -1716,19 +1697,19 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cValueDataElementIDTerminalRuleCall_1_0_1 = (RuleCall)cValueDataElementCrossReference_1_0.eContents().get(1);
 		
 		//VariableReferenceExpression returns Expression:
-		//	{PropertyReferenceExpression} value=[DataElement];
+		//	{PropertyReferenceExpression} value=[sct::DataElement];
 		public ParserRule getRule() { return rule; }
 
-		//{PropertyReferenceExpression} value=[DataElement]
+		//{PropertyReferenceExpression} value=[sct::DataElement]
 		public Group getGroup() { return cGroup; }
 
 		//{PropertyReferenceExpression}
 		public Action getPropertyReferenceExpressionAction_0() { return cPropertyReferenceExpressionAction_0; }
 
-		//value=[DataElement]
+		//value=[sct::DataElement]
 		public Assignment getValueAssignment_1() { return cValueAssignment_1; }
 
-		//[DataElement]
+		//[sct::DataElement]
 		public CrossReference getValueDataElementCrossReference_1_0() { return cValueDataElementCrossReference_1_0; }
 
 		//ID
@@ -2082,7 +2063,6 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 	private InterfaceScopeElements pInterfaceScope;
 	private InternalScopeElements pInternalScope;
 	private DefinitionElements pDefinition;
-	private DataElementElements pDataElement;
 	private SCTEventElements pSCTEvent;
 	private EventDefinitionElements pEventDefinition;
 	private EventDerivationElements pEventDerivation;
@@ -2307,16 +2287,7 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 		return getDefinitionAccess().getRule();
 	}
 
-	//DataElement:
-	//	EventDefinition | VariableDefinition;
-	public DataElementElements getDataElementAccess() {
-		return (pDataElement != null) ? pDataElement : (pDataElement = new DataElementElements());
-	}
-	
-	public ParserRule getDataElementRule() {
-		return getDataElementAccess().getRule();
-	}
-
+	//// DataElement: EventDefinition | VariableDefinition;
 	/// * ---- event definition ---- * / // hook EventDefinition into statechart inheritance hiearchy
 	//SCTEvent returns sct::Event:
 	//	EventDefinition;
@@ -2816,7 +2787,7 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//VariableReferenceExpression returns Expression:
-	//	{PropertyReferenceExpression} value=[DataElement];
+	//	{PropertyReferenceExpression} value=[sct::DataElement];
 	public VariableReferenceExpressionElements getVariableReferenceExpressionAccess() {
 		return (pVariableReferenceExpression != null) ? pVariableReferenceExpression : (pVariableReferenceExpression = new VariableReferenceExpressionElements());
 	}

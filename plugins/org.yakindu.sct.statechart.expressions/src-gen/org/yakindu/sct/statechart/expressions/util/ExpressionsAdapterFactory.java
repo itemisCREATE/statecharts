@@ -12,6 +12,7 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
 
+import org.yakindu.model.sct.statechart.DataElement;
 import org.yakindu.model.sct.statechart.Event;
 import org.yakindu.model.sct.statechart.NamedElement;
 import org.yakindu.model.sct.statechart.Variable;
@@ -150,11 +151,6 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl
       public Adapter caseDefinition(Definition object)
       {
         return createDefinitionAdapter();
-      }
-      @Override
-      public Adapter caseDataElement(DataElement object)
-      {
-        return createDataElementAdapter();
       }
       @Override
       public Adapter caseEventDefinition(EventDefinition object)
@@ -350,6 +346,11 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl
       public Adapter caseNamedElement(NamedElement object)
       {
         return createNamedElementAdapter();
+      }
+      @Override
+      public Adapter caseDataElement(DataElement object)
+      {
+        return createDataElementAdapter();
       }
       @Override
       public Adapter caseEvent(Event object)
@@ -589,21 +590,6 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createDefinitionAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.DataElement <em>Data Element</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.yakindu.sct.statechart.expressions.DataElement
-   * @generated
-   */
-  public Adapter createDataElementAdapter()
   {
     return null;
   }
@@ -1189,6 +1175,21 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createNamedElementAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.yakindu.model.sct.statechart.DataElement <em>Data Element</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.yakindu.model.sct.statechart.DataElement
+   * @generated
+   */
+  public Adapter createDataElementAdapter()
   {
     return null;
   }

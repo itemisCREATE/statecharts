@@ -11,11 +11,11 @@ import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.yakindu.model.sct.statechart.DataElement;
 import org.yakindu.model.sct.statechart.NamedElement;
 import org.yakindu.model.sct.statechart.StatechartPackage;
 import org.yakindu.model.sct.statechart.Variable;
 
-import org.yakindu.sct.statechart.expressions.DataElement;
 import org.yakindu.sct.statechart.expressions.ExpressionsPackage;
 import org.yakindu.sct.statechart.expressions.Type;
 import org.yakindu.sct.statechart.expressions.VariableDefinition;
@@ -389,18 +389,18 @@ public class VariableDefinitionImpl extends DefinitionImpl implements VariableDe
   @Override
   public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass)
   {
-    if (baseClass == DataElement.class)
-    {
-      switch (derivedFeatureID)
-      {
-        default: return -1;
-      }
-    }
     if (baseClass == NamedElement.class)
     {
       switch (derivedFeatureID)
       {
         case ExpressionsPackage.VARIABLE_DEFINITION__NAME: return StatechartPackage.NAMED_ELEMENT__NAME;
+        default: return -1;
+      }
+    }
+    if (baseClass == DataElement.class)
+    {
+      switch (derivedFeatureID)
+      {
         default: return -1;
       }
     }
@@ -422,18 +422,18 @@ public class VariableDefinitionImpl extends DefinitionImpl implements VariableDe
   @Override
   public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass)
   {
-    if (baseClass == DataElement.class)
-    {
-      switch (baseFeatureID)
-      {
-        default: return -1;
-      }
-    }
     if (baseClass == NamedElement.class)
     {
       switch (baseFeatureID)
       {
         case StatechartPackage.NAMED_ELEMENT__NAME: return ExpressionsPackage.VARIABLE_DEFINITION__NAME;
+        default: return -1;
+      }
+    }
+    if (baseClass == DataElement.class)
+    {
+      switch (baseFeatureID)
+      {
         default: return -1;
       }
     }

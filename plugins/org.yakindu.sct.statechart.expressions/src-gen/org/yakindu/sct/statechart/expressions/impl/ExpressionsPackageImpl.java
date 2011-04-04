@@ -20,7 +20,6 @@ import org.yakindu.sct.statechart.expressions.AlwaysEvent;
 import org.yakindu.sct.statechart.expressions.Assignment;
 import org.yakindu.sct.statechart.expressions.BuiltinEventSpec;
 import org.yakindu.sct.statechart.expressions.Clock;
-import org.yakindu.sct.statechart.expressions.DataElement;
 import org.yakindu.sct.statechart.expressions.DefRoot;
 import org.yakindu.sct.statechart.expressions.Definition;
 import org.yakindu.sct.statechart.expressions.Direction;
@@ -184,13 +183,6 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
    * @generated
    */
   private EClass definitionEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass dataElementEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -788,16 +780,6 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
   public EClass getDefinition()
   {
     return definitionEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getDataElement()
-  {
-    return dataElementEClass;
   }
 
   /**
@@ -1825,8 +1807,6 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 
     definitionEClass = createEClass(DEFINITION);
 
-    dataElementEClass = createEClass(DATA_ELEMENT);
-
     eventDefinitionEClass = createEClass(EVENT_DEFINITION);
     createEAttribute(eventDefinitionEClass, EVENT_DEFINITION__DIRECTION);
     createEAttribute(eventDefinitionEClass, EVENT_DEFINITION__TYPE);
@@ -2005,10 +1985,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
     interfaceScopeEClass.getESuperTypes().add(this.getStatechartScope());
     internalScopeEClass.getESuperTypes().add(this.getStatechartScope());
     eventDefinitionEClass.getESuperTypes().add(this.getDefinition());
-    eventDefinitionEClass.getESuperTypes().add(this.getDataElement());
     eventDefinitionEClass.getESuperTypes().add(theStatechartPackage.getEvent());
     variableDefinitionEClass.getESuperTypes().add(this.getDefinition());
-    variableDefinitionEClass.getESuperTypes().add(this.getDataElement());
     variableDefinitionEClass.getESuperTypes().add(theStatechartPackage.getVariable());
     clockEClass.getESuperTypes().add(this.getDefinition());
     operationEClass.getESuperTypes().add(this.getDefinition());
@@ -2075,8 +2053,6 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
     initEClass(internalScopeEClass, InternalScope.class, "InternalScope", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(definitionEClass, Definition.class, "Definition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-    initEClass(dataElementEClass, DataElement.class, "DataElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(eventDefinitionEClass, EventDefinition.class, "EventDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEventDefinition_Direction(), this.getDirection(), "direction", null, 0, 1, EventDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2202,7 +2178,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
     initEAttribute(getPrimitiveValueExpression_Value(), ecorePackage.getEString(), "value", null, 0, 1, PrimitiveValueExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(propertyReferenceExpressionEClass, PropertyReferenceExpression.class, "PropertyReferenceExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getPropertyReferenceExpression_Value(), this.getDataElement(), null, "value", null, 0, 1, PropertyReferenceExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getPropertyReferenceExpression_Value(), theStatechartPackage.getDataElement(), null, "value", null, 0, 1, PropertyReferenceExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Initialize enums and add enum literals
     initEEnum(directionEEnum, Direction.class, "Direction");

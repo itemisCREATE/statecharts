@@ -591,6 +591,29 @@ public class StatechartItemProviderAdapterFactory extends StatechartAdapterFacto
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.model.sct.statechart.DataElement} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected DataElementItemProvider dataElementItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.model.sct.statechart.DataElement}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createDataElementAdapter() {
+		if (dataElementItemProvider == null) {
+			dataElementItemProvider = new DataElementItemProvider(this);
+		}
+
+		return dataElementItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -711,6 +734,7 @@ public class StatechartItemProviderAdapterFactory extends StatechartAdapterFacto
 		if (initialStateItemProvider != null) initialStateItemProvider.dispose();
 		if (timeEventItemProvider != null) timeEventItemProvider.dispose();
 		if (expressionElementItemProvider != null) expressionElementItemProvider.dispose();
+		if (dataElementItemProvider != null) dataElementItemProvider.dispose();
 	}
 
 }
