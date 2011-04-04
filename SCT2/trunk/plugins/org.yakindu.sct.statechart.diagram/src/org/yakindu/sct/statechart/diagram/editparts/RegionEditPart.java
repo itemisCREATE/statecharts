@@ -12,10 +12,10 @@ package org.yakindu.sct.statechart.diagram.editparts;
 
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.StackLayout;
+import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
-import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.statechart.diagram.editor.figures.RegionFigure;
@@ -33,8 +33,9 @@ public class RegionEditPart extends ShapeNodeEditPart {
 
 	@Override
 	protected NodeFigure createNodeFigure() {
-		final NodeFigure figure = new DefaultSizeNodeFigure(40, 40);
+		final NodeFigure figure = new NodeFigure();
 		figure.setLayoutManager(new StackLayout());
+		figure.setMinimumSize(new Dimension(0,0));
 		figure.add(new RegionFigure(getMapMode()));
 		return figure;
 	}
@@ -67,5 +68,15 @@ public class RegionEditPart extends ShapeNodeEditPart {
 					.getNameLabel());
 		} else
 			super.addChildVisual(childEditPart, index);
+	}
+	@Override
+	protected void removeChildVisual(EditPart childEditPart) {
+		if (childEditPart instanceof RegionCompartmentEditPart) {
+			IFigure pane = getPrimaryShape().getCompartmentPane();
+			IFigure figure = ((RegionCompartmentEditPart) childEditPart)
+			.getFigure();
+			pane.remove(figure);
+		}  else
+		super.removeChildVisual(childEditPart);
 	}
 }
