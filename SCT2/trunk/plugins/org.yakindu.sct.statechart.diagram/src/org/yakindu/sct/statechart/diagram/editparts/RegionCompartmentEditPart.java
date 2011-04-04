@@ -11,7 +11,10 @@
 package org.yakindu.sct.statechart.diagram.editparts;
 
 import org.eclipse.draw2d.IFigure;
+import org.eclipse.gef.Request;
+import org.eclipse.gef.commands.Command;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeCompartmentEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editpolicies.DragDropEditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.diagram.ui.figures.ShapeCompartmentFigure;
 import org.eclipse.gmf.runtime.notation.View;
@@ -19,10 +22,7 @@ import org.yakindu.sct.statechart.diagram.policies.CompartmentCreationEditPolicy
 import org.yakindu.sct.statechart.diagram.policies.RegionCompartmentCanonicalEditPolicy;
 
 /**
- * 
- * @author Andreas Muelder <a
- *         href="mailto:andreas.muelder@itemis.de">andreas.muelder@itemis.de</a>
- * 
+ * @author muelder
  */
 public class RegionCompartmentEditPart extends ShapeCompartmentEditPart {
 
@@ -35,6 +35,7 @@ public class RegionCompartmentEditPart extends ShapeCompartmentEditPart {
 		super.createDefaultEditPolicies();
 		installEditPolicy(EditPolicyRoles.CREATION_ROLE, new CompartmentCreationEditPolicy());
 		installEditPolicy(EditPolicyRoles.CANONICAL_ROLE, new RegionCompartmentCanonicalEditPolicy());
+		installEditPolicy(EditPolicyRoles.DRAG_DROP_ROLE, new DragDropEditPolicy());
 	}
 
 	@Override
@@ -46,4 +47,5 @@ public class RegionCompartmentEditPart extends ShapeCompartmentEditPart {
 	public boolean isSelectable() {
 		return false;
 	}
+	
 }
