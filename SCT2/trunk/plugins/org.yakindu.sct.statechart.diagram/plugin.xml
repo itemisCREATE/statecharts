@@ -64,6 +64,7 @@
          </metamodelType>
          <metamodelType
                eclass="Transition"
+               edithelper="org.yakindu.sct.statechart.diagram.edithelper.TransitionEditHelper"
                icon="icons/obj16/transition_16x16.png"
                id="org.yakindu.sct.statechart.diagram.Transition"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
