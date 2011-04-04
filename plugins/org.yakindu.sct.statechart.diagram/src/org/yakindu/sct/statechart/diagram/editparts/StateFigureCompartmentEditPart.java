@@ -11,6 +11,7 @@
 package org.yakindu.sct.statechart.diagram.editparts;
 
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeCompartmentEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editpolicies.DragDropEditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.statechart.diagram.policies.CompartmentCreationEditPolicy;
@@ -19,7 +20,7 @@ import org.yakindu.sct.statechart.diagram.policies.StateCompartmentCanonicalEdit
 /**
  * 
  * @author muelder
- *
+ * 
  */
 public class StateFigureCompartmentEditPart extends ShapeCompartmentEditPart {
 
@@ -34,6 +35,8 @@ public class StateFigureCompartmentEditPart extends ShapeCompartmentEditPart {
 				new CompartmentCreationEditPolicy());
 		installEditPolicy(EditPolicyRoles.CANONICAL_ROLE,
 				new StateCompartmentCanonicalEditPolicy());
+		installEditPolicy(EditPolicyRoles.DRAG_DROP_ROLE,
+				new DragDropEditPolicy());
 	}
 
 	@Override
