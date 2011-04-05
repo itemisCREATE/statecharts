@@ -35,10 +35,6 @@
       <genEnumLiterals ecoreEnumLiteral="Expressions.ecore#//RelationalOperator/equals"/>
       <genEnumLiterals ecoreEnumLiteral="Expressions.ecore#//RelationalOperator/notEquals"/>
     </genEnums>
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Expressions.ecore#//DirectionKind">
-      <genEnumLiterals ecoreEnumLiteral="Expressions.ecore#//DirectionKind/incoming"/>
-      <genEnumLiterals ecoreEnumLiteral="Expressions.ecore#//DirectionKind/outgoing"/>
-    </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="Expressions.ecore#//TimeUnit">
       <genEnumLiterals ecoreEnumLiteral="Expressions.ecore#//TimeUnit/second"/>
       <genEnumLiterals ecoreEnumLiteral="Expressions.ecore#//TimeUnit/millisecond"/>
@@ -144,7 +140,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//TimeEventSpec/unit"/>
     </genClasses>
     <genClasses ecoreClass="Expressions.ecore#//BuiltinEventSpec"/>
-    <genClasses ecoreClass="Expressions.ecore#//EnterEvent"/>
+    <genClasses ecoreClass="Expressions.ecore#//EntryEvent"/>
     <genClasses ecoreClass="Expressions.ecore#//ExitEvent"/>
     <genClasses ecoreClass="Expressions.ecore#//OnCycleEvent"/>
     <genClasses ecoreClass="Expressions.ecore#//AlwaysEvent"/>
@@ -158,6 +154,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//EventRaising/value"/>
     </genClasses>
     <genClasses ecoreClass="Expressions.ecore#//Expression"/>
+    <genClasses ecoreClass="Expressions.ecore#//EnterEvent"/>
     <genClasses ecoreClass="Expressions.ecore#//LogicalOrExpression">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//LogicalOrExpression/leftOperand"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//LogicalOrExpression/rightOperand"/>
@@ -191,8 +188,12 @@
     <genClasses ecoreClass="Expressions.ecore#//PrimitiveValueExpression">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//PrimitiveValueExpression/value"/>
     </genClasses>
-    <genClasses ecoreClass="Expressions.ecore#//PropertyReferenceExpression">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Expressions.ecore#//PropertyReferenceExpression/value"/>
+    <genClasses ecoreClass="Expressions.ecore#//ElementReferenceExpression">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Expressions.ecore#//ElementReferenceExpression/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//OperationCall">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Expressions.ecore#//OperationCall/operation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//OperationCall/args"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

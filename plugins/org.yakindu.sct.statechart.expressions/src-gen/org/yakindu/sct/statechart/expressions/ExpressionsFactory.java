@@ -341,13 +341,13 @@ public interface ExpressionsFactory extends EFactory
   BuiltinEventSpec createBuiltinEventSpec();
 
   /**
-   * Returns a new object of class '<em>Enter Event</em>'.
+   * Returns a new object of class '<em>Entry Event</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Enter Event</em>'.
+   * @return a new object of class '<em>Entry Event</em>'.
    * @generated
    */
-  EnterEvent createEnterEvent();
+  EntryEvent createEntryEvent();
 
   /**
    * Returns a new object of class '<em>Exit Event</em>'.
@@ -411,6 +411,15 @@ public interface ExpressionsFactory extends EFactory
    * @generated
    */
   Expression createExpression();
+
+  /**
+   * Returns a new object of class '<em>Enter Event</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Enter Event</em>'.
+   * @generated
+   */
+  EnterEvent createEnterEvent();
 
   /**
    * Returns a new object of class '<em>Logical Or Expression</em>'.
@@ -485,13 +494,22 @@ public interface ExpressionsFactory extends EFactory
   PrimitiveValueExpression createPrimitiveValueExpression();
 
   /**
-   * Returns a new object of class '<em>Property Reference Expression</em>'.
+   * Returns a new object of class '<em>Element Reference Expression</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Property Reference Expression</em>'.
+   * @return a new object of class '<em>Element Reference Expression</em>'.
    * @generated
    */
-  PropertyReferenceExpression createPropertyReferenceExpression();
+  ElementReferenceExpression createElementReferenceExpression();
+
+  /**
+   * Returns a new object of class '<em>Operation Call</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Operation Call</em>'.
+   * @generated
+   */
+  OperationCall createOperationCall();
 
   /**
    * Returns the package supported by this factory.

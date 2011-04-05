@@ -103,7 +103,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
       case ExpressionsPackage.REGULAR_EVENT_SPEC: return createRegularEventSpec();
       case ExpressionsPackage.TIME_EVENT_SPEC: return createTimeEventSpec();
       case ExpressionsPackage.BUILTIN_EVENT_SPEC: return createBuiltinEventSpec();
-      case ExpressionsPackage.ENTER_EVENT: return createEnterEvent();
+      case ExpressionsPackage.ENTRY_EVENT: return createEntryEvent();
       case ExpressionsPackage.EXIT_EVENT: return createExitEvent();
       case ExpressionsPackage.ON_CYCLE_EVENT: return createOnCycleEvent();
       case ExpressionsPackage.ALWAYS_EVENT: return createAlwaysEvent();
@@ -111,6 +111,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
       case ExpressionsPackage.ASSIGNMENT: return createAssignment();
       case ExpressionsPackage.EVENT_RAISING: return createEventRaising();
       case ExpressionsPackage.EXPRESSION: return createExpression();
+      case ExpressionsPackage.ENTER_EVENT: return createEnterEvent();
       case ExpressionsPackage.LOGICAL_OR_EXPRESSION: return createLogicalOrExpression();
       case ExpressionsPackage.LOGICAL_AND_EXPRESSION: return createLogicalAndExpression();
       case ExpressionsPackage.LOGICAL_NOT_EXPRESSION: return createLogicalNotExpression();
@@ -119,7 +120,8 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
       case ExpressionsPackage.NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION: return createNumericalMultiplyDivideExpression();
       case ExpressionsPackage.NUMERICAL_UNARY_EXPRESSION: return createNumericalUnaryExpression();
       case ExpressionsPackage.PRIMITIVE_VALUE_EXPRESSION: return createPrimitiveValueExpression();
-      case ExpressionsPackage.PROPERTY_REFERENCE_EXPRESSION: return createPropertyReferenceExpression();
+      case ExpressionsPackage.ELEMENT_REFERENCE_EXPRESSION: return createElementReferenceExpression();
+      case ExpressionsPackage.OPERATION_CALL: return createOperationCall();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -145,8 +147,6 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
         return createUnaryOperatorFromString(eDataType, initialValue);
       case ExpressionsPackage.RELATIONAL_OPERATOR:
         return createRelationalOperatorFromString(eDataType, initialValue);
-      case ExpressionsPackage.DIRECTION_KIND:
-        return createDirectionKindFromString(eDataType, initialValue);
       case ExpressionsPackage.TIME_UNIT:
         return createTimeUnitFromString(eDataType, initialValue);
       case ExpressionsPackage.TYPE:
@@ -176,8 +176,6 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
         return convertUnaryOperatorToString(eDataType, instanceValue);
       case ExpressionsPackage.RELATIONAL_OPERATOR:
         return convertRelationalOperatorToString(eDataType, instanceValue);
-      case ExpressionsPackage.DIRECTION_KIND:
-        return convertDirectionKindToString(eDataType, instanceValue);
       case ExpressionsPackage.TIME_UNIT:
         return convertTimeUnitToString(eDataType, instanceValue);
       case ExpressionsPackage.TYPE:
@@ -577,10 +575,10 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
    * <!-- end-user-doc -->
    * @generated
    */
-  public EnterEvent createEnterEvent()
+  public EntryEvent createEntryEvent()
   {
-    EnterEventImpl enterEvent = new EnterEventImpl();
-    return enterEvent;
+    EntryEventImpl entryEvent = new EntryEventImpl();
+    return entryEvent;
   }
 
   /**
@@ -658,6 +656,17 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
   {
     ExpressionImpl expression = new ExpressionImpl();
     return expression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EnterEvent createEnterEvent()
+  {
+    EnterEventImpl enterEvent = new EnterEventImpl();
+    return enterEvent;
   }
 
   /**
@@ -753,10 +762,21 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
    * <!-- end-user-doc -->
    * @generated
    */
-  public PropertyReferenceExpression createPropertyReferenceExpression()
+  public ElementReferenceExpression createElementReferenceExpression()
   {
-    PropertyReferenceExpressionImpl propertyReferenceExpression = new PropertyReferenceExpressionImpl();
-    return propertyReferenceExpression;
+    ElementReferenceExpressionImpl elementReferenceExpression = new ElementReferenceExpressionImpl();
+    return elementReferenceExpression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public OperationCall createOperationCall()
+  {
+    OperationCallImpl operationCall = new OperationCallImpl();
+    return operationCall;
   }
 
   /**
@@ -865,28 +885,6 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
    * @generated
    */
   public String convertRelationalOperatorToString(EDataType eDataType, Object instanceValue)
-  {
-    return instanceValue == null ? null : instanceValue.toString();
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public DirectionKind createDirectionKindFromString(EDataType eDataType, String initialValue)
-  {
-    DirectionKind result = DirectionKind.get(initialValue);
-    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-    return result;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public String convertDirectionKindToString(EDataType eDataType, Object instanceValue)
   {
     return instanceValue == null ? null : instanceValue.toString();
   }

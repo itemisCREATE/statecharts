@@ -1149,23 +1149,23 @@ public interface ExpressionsPackage extends EPackage
   int BUILTIN_EVENT_SPEC_FEATURE_COUNT = EVENT_SPEC_FEATURE_COUNT + 0;
 
   /**
-   * The meta object id for the '{@link org.yakindu.sct.statechart.expressions.impl.EnterEventImpl <em>Enter Event</em>}' class.
+   * The meta object id for the '{@link org.yakindu.sct.statechart.expressions.impl.EntryEventImpl <em>Entry Event</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.yakindu.sct.statechart.expressions.impl.EnterEventImpl
-   * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getEnterEvent()
+   * @see org.yakindu.sct.statechart.expressions.impl.EntryEventImpl
+   * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getEntryEvent()
    * @generated
    */
-  int ENTER_EVENT = 35;
+  int ENTRY_EVENT = 35;
 
   /**
-   * The number of structural features of the '<em>Enter Event</em>' class.
+   * The number of structural features of the '<em>Entry Event</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ENTER_EVENT_FEATURE_COUNT = BUILTIN_EVENT_SPEC_FEATURE_COUNT + 0;
+  int ENTRY_EVENT_FEATURE_COUNT = BUILTIN_EVENT_SPEC_FEATURE_COUNT + 0;
 
   /**
    * The meta object id for the '{@link org.yakindu.sct.statechart.expressions.impl.ExitEventImpl <em>Exit Event</em>}' class.
@@ -1337,6 +1337,25 @@ public interface ExpressionsPackage extends EPackage
   int EXPRESSION_FEATURE_COUNT = 0;
 
   /**
+   * The meta object id for the '{@link org.yakindu.sct.statechart.expressions.impl.EnterEventImpl <em>Enter Event</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.yakindu.sct.statechart.expressions.impl.EnterEventImpl
+   * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getEnterEvent()
+   * @generated
+   */
+  int ENTER_EVENT = 43;
+
+  /**
+   * The number of structural features of the '<em>Enter Event</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ENTER_EVENT_FEATURE_COUNT = ENTRY_EVENT_FEATURE_COUNT + 0;
+
+  /**
    * The meta object id for the '{@link org.yakindu.sct.statechart.expressions.impl.LogicalOrExpressionImpl <em>Logical Or Expression</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1344,7 +1363,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getLogicalOrExpression()
    * @generated
    */
-  int LOGICAL_OR_EXPRESSION = 43;
+  int LOGICAL_OR_EXPRESSION = 44;
 
   /**
    * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -1381,7 +1400,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getLogicalAndExpression()
    * @generated
    */
-  int LOGICAL_AND_EXPRESSION = 44;
+  int LOGICAL_AND_EXPRESSION = 45;
 
   /**
    * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -1418,7 +1437,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getLogicalNotExpression()
    * @generated
    */
-  int LOGICAL_NOT_EXPRESSION = 45;
+  int LOGICAL_NOT_EXPRESSION = 46;
 
   /**
    * The feature id for the '<em><b>Operand</b></em>' containment reference.
@@ -1446,7 +1465,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getLogicalRelationExpression()
    * @generated
    */
-  int LOGICAL_RELATION_EXPRESSION = 46;
+  int LOGICAL_RELATION_EXPRESSION = 47;
 
   /**
    * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -1492,7 +1511,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getNumericalAddSubtractExpression()
    * @generated
    */
-  int NUMERICAL_ADD_SUBTRACT_EXPRESSION = 47;
+  int NUMERICAL_ADD_SUBTRACT_EXPRESSION = 48;
 
   /**
    * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -1538,7 +1557,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getNumericalMultiplyDivideExpression()
    * @generated
    */
-  int NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION = 48;
+  int NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION = 49;
 
   /**
    * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -1584,7 +1603,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getNumericalUnaryExpression()
    * @generated
    */
-  int NUMERICAL_UNARY_EXPRESSION = 49;
+  int NUMERICAL_UNARY_EXPRESSION = 50;
 
   /**
    * The feature id for the '<em><b>Operator</b></em>' attribute.
@@ -1621,7 +1640,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getPrimitiveValueExpression()
    * @generated
    */
-  int PRIMITIVE_VALUE_EXPRESSION = 50;
+  int PRIMITIVE_VALUE_EXPRESSION = 51;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1642,14 +1661,14 @@ public interface ExpressionsPackage extends EPackage
   int PRIMITIVE_VALUE_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
 
   /**
-   * The meta object id for the '{@link org.yakindu.sct.statechart.expressions.impl.PropertyReferenceExpressionImpl <em>Property Reference Expression</em>}' class.
+   * The meta object id for the '{@link org.yakindu.sct.statechart.expressions.impl.ElementReferenceExpressionImpl <em>Element Reference Expression</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.yakindu.sct.statechart.expressions.impl.PropertyReferenceExpressionImpl
-   * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getPropertyReferenceExpression()
+   * @see org.yakindu.sct.statechart.expressions.impl.ElementReferenceExpressionImpl
+   * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getElementReferenceExpression()
    * @generated
    */
-  int PROPERTY_REFERENCE_EXPRESSION = 51;
+  int ELEMENT_REFERENCE_EXPRESSION = 52;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' reference.
@@ -1658,16 +1677,53 @@ public interface ExpressionsPackage extends EPackage
    * @generated
    * @ordered
    */
-  int PROPERTY_REFERENCE_EXPRESSION__VALUE = EXPRESSION_FEATURE_COUNT + 0;
+  int ELEMENT_REFERENCE_EXPRESSION__VALUE = EXPRESSION_FEATURE_COUNT + 0;
 
   /**
-   * The number of structural features of the '<em>Property Reference Expression</em>' class.
+   * The number of structural features of the '<em>Element Reference Expression</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int PROPERTY_REFERENCE_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
+  int ELEMENT_REFERENCE_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.yakindu.sct.statechart.expressions.impl.OperationCallImpl <em>Operation Call</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.yakindu.sct.statechart.expressions.impl.OperationCallImpl
+   * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getOperationCall()
+   * @generated
+   */
+  int OPERATION_CALL = 53;
+
+  /**
+   * The feature id for the '<em><b>Operation</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OPERATION_CALL__OPERATION = EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Args</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OPERATION_CALL__ARGS = EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Operation Call</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OPERATION_CALL_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
 
   /**
    * The meta object id for the '{@link org.yakindu.sct.statechart.expressions.Direction <em>Direction</em>}' enum.
@@ -1677,7 +1733,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getDirection()
    * @generated
    */
-  int DIRECTION = 52;
+  int DIRECTION = 54;
 
   /**
    * The meta object id for the '{@link org.yakindu.sct.statechart.expressions.AdditiveOperator <em>Additive Operator</em>}' enum.
@@ -1687,7 +1743,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getAdditiveOperator()
    * @generated
    */
-  int ADDITIVE_OPERATOR = 53;
+  int ADDITIVE_OPERATOR = 55;
 
   /**
    * The meta object id for the '{@link org.yakindu.sct.statechart.expressions.MultiplicativeOperator <em>Multiplicative Operator</em>}' enum.
@@ -1697,7 +1753,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getMultiplicativeOperator()
    * @generated
    */
-  int MULTIPLICATIVE_OPERATOR = 54;
+  int MULTIPLICATIVE_OPERATOR = 56;
 
   /**
    * The meta object id for the '{@link org.yakindu.sct.statechart.expressions.UnaryOperator <em>Unary Operator</em>}' enum.
@@ -1707,7 +1763,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getUnaryOperator()
    * @generated
    */
-  int UNARY_OPERATOR = 55;
+  int UNARY_OPERATOR = 57;
 
   /**
    * The meta object id for the '{@link org.yakindu.sct.statechart.expressions.RelationalOperator <em>Relational Operator</em>}' enum.
@@ -1717,17 +1773,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getRelationalOperator()
    * @generated
    */
-  int RELATIONAL_OPERATOR = 56;
-
-  /**
-   * The meta object id for the '{@link org.yakindu.sct.statechart.expressions.DirectionKind <em>Direction Kind</em>}' enum.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.yakindu.sct.statechart.expressions.DirectionKind
-   * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getDirectionKind()
-   * @generated
-   */
-  int DIRECTION_KIND = 57;
+  int RELATIONAL_OPERATOR = 58;
 
   /**
    * The meta object id for the '{@link org.yakindu.sct.statechart.expressions.TimeUnit <em>Time Unit</em>}' enum.
@@ -1737,7 +1783,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getTimeUnit()
    * @generated
    */
-  int TIME_UNIT = 58;
+  int TIME_UNIT = 59;
 
   /**
    * The meta object id for the '{@link org.yakindu.sct.statechart.expressions.Type <em>Type</em>}' enum.
@@ -1747,7 +1793,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getType()
    * @generated
    */
-  int TYPE = 59;
+  int TYPE = 60;
 
 
   /**
@@ -2486,14 +2532,14 @@ public interface ExpressionsPackage extends EPackage
   EClass getBuiltinEventSpec();
 
   /**
-   * Returns the meta object for class '{@link org.yakindu.sct.statechart.expressions.EnterEvent <em>Enter Event</em>}'.
+   * Returns the meta object for class '{@link org.yakindu.sct.statechart.expressions.EntryEvent <em>Entry Event</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Enter Event</em>'.
-   * @see org.yakindu.sct.statechart.expressions.EnterEvent
+   * @return the meta object for class '<em>Entry Event</em>'.
+   * @see org.yakindu.sct.statechart.expressions.EntryEvent
    * @generated
    */
-  EClass getEnterEvent();
+  EClass getEntryEvent();
 
   /**
    * Returns the meta object for class '{@link org.yakindu.sct.statechart.expressions.ExitEvent <em>Exit Event</em>}'.
@@ -2608,6 +2654,16 @@ public interface ExpressionsPackage extends EPackage
    * @generated
    */
   EClass getExpression();
+
+  /**
+   * Returns the meta object for class '{@link org.yakindu.sct.statechart.expressions.EnterEvent <em>Enter Event</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Enter Event</em>'.
+   * @see org.yakindu.sct.statechart.expressions.EnterEvent
+   * @generated
+   */
+  EClass getEnterEvent();
 
   /**
    * Returns the meta object for class '{@link org.yakindu.sct.statechart.expressions.LogicalOrExpression <em>Logical Or Expression</em>}'.
@@ -2877,25 +2933,57 @@ public interface ExpressionsPackage extends EPackage
   EAttribute getPrimitiveValueExpression_Value();
 
   /**
-   * Returns the meta object for class '{@link org.yakindu.sct.statechart.expressions.PropertyReferenceExpression <em>Property Reference Expression</em>}'.
+   * Returns the meta object for class '{@link org.yakindu.sct.statechart.expressions.ElementReferenceExpression <em>Element Reference Expression</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Property Reference Expression</em>'.
-   * @see org.yakindu.sct.statechart.expressions.PropertyReferenceExpression
+   * @return the meta object for class '<em>Element Reference Expression</em>'.
+   * @see org.yakindu.sct.statechart.expressions.ElementReferenceExpression
    * @generated
    */
-  EClass getPropertyReferenceExpression();
+  EClass getElementReferenceExpression();
 
   /**
-   * Returns the meta object for the reference '{@link org.yakindu.sct.statechart.expressions.PropertyReferenceExpression#getValue <em>Value</em>}'.
+   * Returns the meta object for the reference '{@link org.yakindu.sct.statechart.expressions.ElementReferenceExpression#getValue <em>Value</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the reference '<em>Value</em>'.
-   * @see org.yakindu.sct.statechart.expressions.PropertyReferenceExpression#getValue()
-   * @see #getPropertyReferenceExpression()
+   * @see org.yakindu.sct.statechart.expressions.ElementReferenceExpression#getValue()
+   * @see #getElementReferenceExpression()
    * @generated
    */
-  EReference getPropertyReferenceExpression_Value();
+  EReference getElementReferenceExpression_Value();
+
+  /**
+   * Returns the meta object for class '{@link org.yakindu.sct.statechart.expressions.OperationCall <em>Operation Call</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Operation Call</em>'.
+   * @see org.yakindu.sct.statechart.expressions.OperationCall
+   * @generated
+   */
+  EClass getOperationCall();
+
+  /**
+   * Returns the meta object for the reference '{@link org.yakindu.sct.statechart.expressions.OperationCall#getOperation <em>Operation</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Operation</em>'.
+   * @see org.yakindu.sct.statechart.expressions.OperationCall#getOperation()
+   * @see #getOperationCall()
+   * @generated
+   */
+  EReference getOperationCall_Operation();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.yakindu.sct.statechart.expressions.OperationCall#getArgs <em>Args</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Args</em>'.
+   * @see org.yakindu.sct.statechart.expressions.OperationCall#getArgs()
+   * @see #getOperationCall()
+   * @generated
+   */
+  EReference getOperationCall_Args();
 
   /**
    * Returns the meta object for enum '{@link org.yakindu.sct.statechart.expressions.Direction <em>Direction</em>}'.
@@ -2946,16 +3034,6 @@ public interface ExpressionsPackage extends EPackage
    * @generated
    */
   EEnum getRelationalOperator();
-
-  /**
-   * Returns the meta object for enum '{@link org.yakindu.sct.statechart.expressions.DirectionKind <em>Direction Kind</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for enum '<em>Direction Kind</em>'.
-   * @see org.yakindu.sct.statechart.expressions.DirectionKind
-   * @generated
-   */
-  EEnum getDirectionKind();
 
   /**
    * Returns the meta object for enum '{@link org.yakindu.sct.statechart.expressions.TimeUnit <em>Time Unit</em>}'.
@@ -3631,14 +3709,14 @@ public interface ExpressionsPackage extends EPackage
     EClass BUILTIN_EVENT_SPEC = eINSTANCE.getBuiltinEventSpec();
 
     /**
-     * The meta object literal for the '{@link org.yakindu.sct.statechart.expressions.impl.EnterEventImpl <em>Enter Event</em>}' class.
+     * The meta object literal for the '{@link org.yakindu.sct.statechart.expressions.impl.EntryEventImpl <em>Entry Event</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.yakindu.sct.statechart.expressions.impl.EnterEventImpl
-     * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getEnterEvent()
+     * @see org.yakindu.sct.statechart.expressions.impl.EntryEventImpl
+     * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getEntryEvent()
      * @generated
      */
-    EClass ENTER_EVENT = eINSTANCE.getEnterEvent();
+    EClass ENTRY_EVENT = eINSTANCE.getEntryEvent();
 
     /**
      * The meta object literal for the '{@link org.yakindu.sct.statechart.expressions.impl.ExitEventImpl <em>Exit Event</em>}' class.
@@ -3741,6 +3819,16 @@ public interface ExpressionsPackage extends EPackage
      * @generated
      */
     EClass EXPRESSION = eINSTANCE.getExpression();
+
+    /**
+     * The meta object literal for the '{@link org.yakindu.sct.statechart.expressions.impl.EnterEventImpl <em>Enter Event</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.yakindu.sct.statechart.expressions.impl.EnterEventImpl
+     * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getEnterEvent()
+     * @generated
+     */
+    EClass ENTER_EVENT = eINSTANCE.getEnterEvent();
 
     /**
      * The meta object literal for the '{@link org.yakindu.sct.statechart.expressions.impl.LogicalOrExpressionImpl <em>Logical Or Expression</em>}' class.
@@ -3959,14 +4047,14 @@ public interface ExpressionsPackage extends EPackage
     EAttribute PRIMITIVE_VALUE_EXPRESSION__VALUE = eINSTANCE.getPrimitiveValueExpression_Value();
 
     /**
-     * The meta object literal for the '{@link org.yakindu.sct.statechart.expressions.impl.PropertyReferenceExpressionImpl <em>Property Reference Expression</em>}' class.
+     * The meta object literal for the '{@link org.yakindu.sct.statechart.expressions.impl.ElementReferenceExpressionImpl <em>Element Reference Expression</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.yakindu.sct.statechart.expressions.impl.PropertyReferenceExpressionImpl
-     * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getPropertyReferenceExpression()
+     * @see org.yakindu.sct.statechart.expressions.impl.ElementReferenceExpressionImpl
+     * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getElementReferenceExpression()
      * @generated
      */
-    EClass PROPERTY_REFERENCE_EXPRESSION = eINSTANCE.getPropertyReferenceExpression();
+    EClass ELEMENT_REFERENCE_EXPRESSION = eINSTANCE.getElementReferenceExpression();
 
     /**
      * The meta object literal for the '<em><b>Value</b></em>' reference feature.
@@ -3974,7 +4062,33 @@ public interface ExpressionsPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference PROPERTY_REFERENCE_EXPRESSION__VALUE = eINSTANCE.getPropertyReferenceExpression_Value();
+    EReference ELEMENT_REFERENCE_EXPRESSION__VALUE = eINSTANCE.getElementReferenceExpression_Value();
+
+    /**
+     * The meta object literal for the '{@link org.yakindu.sct.statechart.expressions.impl.OperationCallImpl <em>Operation Call</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.yakindu.sct.statechart.expressions.impl.OperationCallImpl
+     * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getOperationCall()
+     * @generated
+     */
+    EClass OPERATION_CALL = eINSTANCE.getOperationCall();
+
+    /**
+     * The meta object literal for the '<em><b>Operation</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference OPERATION_CALL__OPERATION = eINSTANCE.getOperationCall_Operation();
+
+    /**
+     * The meta object literal for the '<em><b>Args</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference OPERATION_CALL__ARGS = eINSTANCE.getOperationCall_Args();
 
     /**
      * The meta object literal for the '{@link org.yakindu.sct.statechart.expressions.Direction <em>Direction</em>}' enum.
@@ -4025,16 +4139,6 @@ public interface ExpressionsPackage extends EPackage
      * @generated
      */
     EEnum RELATIONAL_OPERATOR = eINSTANCE.getRelationalOperator();
-
-    /**
-     * The meta object literal for the '{@link org.yakindu.sct.statechart.expressions.DirectionKind <em>Direction Kind</em>}' enum.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.yakindu.sct.statechart.expressions.DirectionKind
-     * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getDirectionKind()
-     * @generated
-     */
-    EEnum DIRECTION_KIND = eINSTANCE.getDirectionKind();
 
     /**
      * The meta object literal for the '{@link org.yakindu.sct.statechart.expressions.TimeUnit <em>Time Unit</em>}' enum.

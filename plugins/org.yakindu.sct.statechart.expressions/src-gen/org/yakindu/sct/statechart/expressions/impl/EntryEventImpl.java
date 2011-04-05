@@ -7,26 +7,26 @@ package org.yakindu.sct.statechart.expressions.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.yakindu.sct.statechart.expressions.EnterEvent;
+import org.yakindu.sct.statechart.expressions.EntryEvent;
 import org.yakindu.sct.statechart.expressions.ExpressionsPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Enter Event</b></em>'.
+ * An implementation of the model object '<em><b>Entry Event</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public class EnterEventImpl extends EntryEventImpl implements EnterEvent
+public class EntryEventImpl extends BuiltinEventSpecImpl implements EntryEvent
 {
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected EnterEventImpl()
+  protected EntryEventImpl()
   {
     super();
   }
@@ -39,7 +39,7 @@ public class EnterEventImpl extends EntryEventImpl implements EnterEvent
   @Override
   protected EClass eStaticClass()
   {
-    return ExpressionsPackage.Literals.ENTER_EVENT;
+    return ExpressionsPackage.Literals.ENTRY_EVENT;
   }
 
-} //EnterEventImpl
+} //EntryEventImpl
