@@ -56,7 +56,6 @@ public class ExpressionsParser extends AbstractContentAssistParser {
 					put(grammarAccess.getMultiplicativeOperatorAccess().getAlternatives(), "rule__MultiplicativeOperator__Alternatives");
 					put(grammarAccess.getUnaryOperatorAccess().getAlternatives(), "rule__UnaryOperator__Alternatives");
 					put(grammarAccess.getRelationalOperatorAccess().getAlternatives(), "rule__RelationalOperator__Alternatives");
-					put(grammarAccess.getDirectionKindAccess().getAlternatives(), "rule__DirectionKind__Alternatives");
 					put(grammarAccess.getTimeUnitAccess().getAlternatives(), "rule__TimeUnit__Alternatives");
 					put(grammarAccess.getTypeAccess().getAlternatives(), "rule__Type__Alternatives");
 					put(grammarAccess.getStatechartRootAccess().getGroup(), "rule__StatechartRoot__Group__0");
@@ -94,7 +93,7 @@ public class ExpressionsParser extends AbstractContentAssistParser {
 					put(grammarAccess.getEntryPointSpecAccess().getGroup(), "rule__EntryPointSpec__Group__0");
 					put(grammarAccess.getExitPointSpecAccess().getGroup(), "rule__ExitPointSpec__Group__0");
 					put(grammarAccess.getTimeEventSpecAccess().getGroup(), "rule__TimeEventSpec__Group__0");
-					put(grammarAccess.getEnterEventAccess().getGroup(), "rule__EnterEvent__Group__0");
+					put(grammarAccess.getEntryEventAccess().getGroup(), "rule__EntryEvent__Group__0");
 					put(grammarAccess.getExitEventAccess().getGroup(), "rule__ExitEvent__Group__0");
 					put(grammarAccess.getOnCycleEventAccess().getGroup(), "rule__OnCycleEvent__Group__0");
 					put(grammarAccess.getAlwaysEventAccess().getGroup(), "rule__AlwaysEvent__Group__0");
@@ -115,7 +114,10 @@ public class ExpressionsParser extends AbstractContentAssistParser {
 					put(grammarAccess.getNumericalUnaryExpressionAccess().getGroup_1(), "rule__NumericalUnaryExpression__Group_1__0");
 					put(grammarAccess.getPrimaryExpressionAccess().getGroup_1(), "rule__PrimaryExpression__Group_1__0");
 					put(grammarAccess.getPrimitiveValueExpressionAccess().getGroup(), "rule__PrimitiveValueExpression__Group__0");
-					put(grammarAccess.getVariableReferenceExpressionAccess().getGroup(), "rule__VariableReferenceExpression__Group__0");
+					put(grammarAccess.getElementReferenceExpressionAccess().getGroup(), "rule__ElementReferenceExpression__Group__0");
+					put(grammarAccess.getOperationCallAccess().getGroup(), "rule__OperationCall__Group__0");
+					put(grammarAccess.getOperationCallAccess().getGroup_3(), "rule__OperationCall__Group_3__0");
+					put(grammarAccess.getOperationCallAccess().getGroup_3_1(), "rule__OperationCall__Group_3_1__0");
 					put(grammarAccess.getRootAccess().getRootsAssignment(), "rule__Root__RootsAssignment");
 					put(grammarAccess.getStatechartRootAccess().getDefAssignment_1(), "rule__StatechartRoot__DefAssignment_1");
 					put(grammarAccess.getStateRootAccess().getDefAssignment_1(), "rule__StateRoot__DefAssignment_1");
@@ -176,7 +178,10 @@ public class ExpressionsParser extends AbstractContentAssistParser {
 					put(grammarAccess.getNumericalUnaryExpressionAccess().getOperatorAssignment_1_1(), "rule__NumericalUnaryExpression__OperatorAssignment_1_1");
 					put(grammarAccess.getNumericalUnaryExpressionAccess().getOperandAssignment_1_2(), "rule__NumericalUnaryExpression__OperandAssignment_1_2");
 					put(grammarAccess.getPrimitiveValueExpressionAccess().getValueAssignment_1(), "rule__PrimitiveValueExpression__ValueAssignment_1");
-					put(grammarAccess.getVariableReferenceExpressionAccess().getValueAssignment_1(), "rule__VariableReferenceExpression__ValueAssignment_1");
+					put(grammarAccess.getElementReferenceExpressionAccess().getValueAssignment_1(), "rule__ElementReferenceExpression__ValueAssignment_1");
+					put(grammarAccess.getOperationCallAccess().getOperationAssignment_1(), "rule__OperationCall__OperationAssignment_1");
+					put(grammarAccess.getOperationCallAccess().getArgsAssignment_3_0(), "rule__OperationCall__ArgsAssignment_3_0");
+					put(grammarAccess.getOperationCallAccess().getArgsAssignment_3_1_1(), "rule__OperationCall__ArgsAssignment_3_1_1");
 					put(grammarAccess.getVariableDefinitionAccess().getUnorderedGroup_1(), "rule__VariableDefinition__UnorderedGroup_1");
 				}
 			};

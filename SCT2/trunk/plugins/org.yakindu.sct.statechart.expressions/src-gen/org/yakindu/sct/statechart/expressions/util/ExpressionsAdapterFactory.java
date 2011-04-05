@@ -258,9 +258,9 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl
         return createBuiltinEventSpecAdapter();
       }
       @Override
-      public Adapter caseEnterEvent(EnterEvent object)
+      public Adapter caseEntryEvent(EntryEvent object)
       {
-        return createEnterEventAdapter();
+        return createEntryEventAdapter();
       }
       @Override
       public Adapter caseExitEvent(ExitEvent object)
@@ -296,6 +296,11 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl
       public Adapter caseExpression(Expression object)
       {
         return createExpressionAdapter();
+      }
+      @Override
+      public Adapter caseEnterEvent(EnterEvent object)
+      {
+        return createEnterEventAdapter();
       }
       @Override
       public Adapter caseLogicalOrExpression(LogicalOrExpression object)
@@ -338,9 +343,14 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl
         return createPrimitiveValueExpressionAdapter();
       }
       @Override
-      public Adapter casePropertyReferenceExpression(PropertyReferenceExpression object)
+      public Adapter caseElementReferenceExpression(ElementReferenceExpression object)
       {
-        return createPropertyReferenceExpressionAdapter();
+        return createElementReferenceExpressionAdapter();
+      }
+      @Override
+      public Adapter caseOperationCall(OperationCall object)
+      {
+        return createOperationCallAdapter();
       }
       @Override
       public Adapter caseNamedElement(NamedElement object)
@@ -910,16 +920,16 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.EnterEvent <em>Enter Event</em>}'.
+   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.EntryEvent <em>Entry Event</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.yakindu.sct.statechart.expressions.EnterEvent
+   * @see org.yakindu.sct.statechart.expressions.EntryEvent
    * @generated
    */
-  public Adapter createEnterEventAdapter()
+  public Adapter createEntryEventAdapter()
   {
     return null;
   }
@@ -1025,6 +1035,21 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createExpressionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.EnterEvent <em>Enter Event</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.yakindu.sct.statechart.expressions.EnterEvent
+   * @generated
+   */
+  public Adapter createEnterEventAdapter()
   {
     return null;
   }
@@ -1150,16 +1175,31 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.PropertyReferenceExpression <em>Property Reference Expression</em>}'.
+   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.ElementReferenceExpression <em>Element Reference Expression</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.yakindu.sct.statechart.expressions.PropertyReferenceExpression
+   * @see org.yakindu.sct.statechart.expressions.ElementReferenceExpression
    * @generated
    */
-  public Adapter createPropertyReferenceExpressionAdapter()
+  public Adapter createElementReferenceExpressionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.OperationCall <em>Operation Call</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.yakindu.sct.statechart.expressions.OperationCall
+   * @generated
+   */
+  public Adapter createOperationCallAdapter()
   {
     return null;
   }

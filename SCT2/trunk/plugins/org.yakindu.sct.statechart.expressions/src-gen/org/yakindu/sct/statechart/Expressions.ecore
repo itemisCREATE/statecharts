@@ -117,7 +117,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="unit" eType="#//TimeUnit"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BuiltinEventSpec" eSuperTypes="#//EventSpec"/>
-  <eClassifiers xsi:type="ecore:EClass" name="EnterEvent" eSuperTypes="#//BuiltinEventSpec"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EntryEvent" eSuperTypes="#//BuiltinEventSpec"/>
   <eClassifiers xsi:type="ecore:EClass" name="ExitEvent" eSuperTypes="#//BuiltinEventSpec"/>
   <eClassifiers xsi:type="ecore:EClass" name="OnCycleEvent" eSuperTypes="#//BuiltinEventSpec"/>
   <eClassifiers xsi:type="ecore:EClass" name="AlwaysEvent" eSuperTypes="#//BuiltinEventSpec"/>
@@ -155,10 +155,6 @@
     <eLiterals name="equals" value="4" literal="=="/>
     <eLiterals name="notEquals" value="5" literal="!="/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="DirectionKind">
-    <eLiterals name="incoming" literal="in"/>
-    <eLiterals name="outgoing" value="1" literal="out"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="TimeUnit">
     <eLiterals name="second" literal="s"/>
     <eLiterals name="millisecond" value="1" literal="ms"/>
@@ -171,6 +167,7 @@
     <eLiterals name="boolean" value="3" literal="boolean"/>
     <eLiterals name="string" value="4" literal="string"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EnterEvent" eSuperTypes="#//EntryEvent"/>
   <eClassifiers xsi:type="ecore:EClass" name="LogicalOrExpression" eSuperTypes="#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="#//Expression"
         containment="true"/>
@@ -216,7 +213,12 @@
   <eClassifiers xsi:type="ecore:EClass" name="PrimitiveValueExpression" eSuperTypes="#//Expression">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="PropertyReferenceExpression" eSuperTypes="#//Expression">
+  <eClassifiers xsi:type="ecore:EClass" name="ElementReferenceExpression" eSuperTypes="#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass ../../../../../../org.yakindu.sct.model.statechart/model/emf/statechart.ecore#//DataElement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OperationCall" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operation" eType="#//Operation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="args" upperBound="-1" eType="#//Expression"
+        containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

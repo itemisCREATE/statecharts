@@ -14,23 +14,23 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.yakindu.model.sct.statechart.DataElement;
 
+import org.yakindu.sct.statechart.expressions.ElementReferenceExpression;
 import org.yakindu.sct.statechart.expressions.ExpressionsPackage;
-import org.yakindu.sct.statechart.expressions.PropertyReferenceExpression;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Property Reference Expression</b></em>'.
+ * An implementation of the model object '<em><b>Element Reference Expression</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.yakindu.sct.statechart.expressions.impl.PropertyReferenceExpressionImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link org.yakindu.sct.statechart.expressions.impl.ElementReferenceExpressionImpl#getValue <em>Value</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class PropertyReferenceExpressionImpl extends ExpressionImpl implements PropertyReferenceExpression
+public class ElementReferenceExpressionImpl extends ExpressionImpl implements ElementReferenceExpression
 {
   /**
    * The cached value of the '{@link #getValue() <em>Value</em>}' reference.
@@ -47,7 +47,7 @@ public class PropertyReferenceExpressionImpl extends ExpressionImpl implements P
    * <!-- end-user-doc -->
    * @generated
    */
-  protected PropertyReferenceExpressionImpl()
+  protected ElementReferenceExpressionImpl()
   {
     super();
   }
@@ -60,7 +60,7 @@ public class PropertyReferenceExpressionImpl extends ExpressionImpl implements P
   @Override
   protected EClass eStaticClass()
   {
-    return ExpressionsPackage.Literals.PROPERTY_REFERENCE_EXPRESSION;
+    return ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION;
   }
 
   /**
@@ -77,7 +77,7 @@ public class PropertyReferenceExpressionImpl extends ExpressionImpl implements P
       if (value != oldValue)
       {
         if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExpressionsPackage.PROPERTY_REFERENCE_EXPRESSION__VALUE, oldValue, value));
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExpressionsPackage.ELEMENT_REFERENCE_EXPRESSION__VALUE, oldValue, value));
       }
     }
     return value;
@@ -103,7 +103,7 @@ public class PropertyReferenceExpressionImpl extends ExpressionImpl implements P
     DataElement oldValue = value;
     value = newValue;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.PROPERTY_REFERENCE_EXPRESSION__VALUE, oldValue, value));
+      eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.ELEMENT_REFERENCE_EXPRESSION__VALUE, oldValue, value));
   }
 
   /**
@@ -116,7 +116,7 @@ public class PropertyReferenceExpressionImpl extends ExpressionImpl implements P
   {
     switch (featureID)
     {
-      case ExpressionsPackage.PROPERTY_REFERENCE_EXPRESSION__VALUE:
+      case ExpressionsPackage.ELEMENT_REFERENCE_EXPRESSION__VALUE:
         if (resolve) return getValue();
         return basicGetValue();
     }
@@ -133,7 +133,7 @@ public class PropertyReferenceExpressionImpl extends ExpressionImpl implements P
   {
     switch (featureID)
     {
-      case ExpressionsPackage.PROPERTY_REFERENCE_EXPRESSION__VALUE:
+      case ExpressionsPackage.ELEMENT_REFERENCE_EXPRESSION__VALUE:
         setValue((DataElement)newValue);
         return;
     }
@@ -150,7 +150,7 @@ public class PropertyReferenceExpressionImpl extends ExpressionImpl implements P
   {
     switch (featureID)
     {
-      case ExpressionsPackage.PROPERTY_REFERENCE_EXPRESSION__VALUE:
+      case ExpressionsPackage.ELEMENT_REFERENCE_EXPRESSION__VALUE:
         setValue((DataElement)null);
         return;
     }
@@ -167,10 +167,10 @@ public class PropertyReferenceExpressionImpl extends ExpressionImpl implements P
   {
     switch (featureID)
     {
-      case ExpressionsPackage.PROPERTY_REFERENCE_EXPRESSION__VALUE:
+      case ExpressionsPackage.ELEMENT_REFERENCE_EXPRESSION__VALUE:
         return value != null;
     }
     return super.eIsSet(featureID);
   }
 
-} //PropertyReferenceExpressionImpl
+} //ElementReferenceExpressionImpl

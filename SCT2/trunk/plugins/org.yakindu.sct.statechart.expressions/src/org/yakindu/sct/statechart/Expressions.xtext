@@ -3,7 +3,6 @@ grammar org.yakindu.sct.statechart.Expressions with org.eclipse.xtext.common.Ter
 generate expressions "http://www.yakindu.org/sct/statechart/Expressions"
 import "platform:/resource/org.yakindu.sct.model.statechart/model/emf/statechart.ecore" as sct
 
-
 /* ---- root rules ----
 These root rules are not relevant for the grammar integration in the statechart. They just integrate the different start rules consistently 
 into a single grammar. 
@@ -69,7 +68,7 @@ EventDefinition:
 	(direction=Direction)? 'event' name=ID (':' type=Type)? (derivation=EventDerivation)?;
 	
 EventDerivation:
-	'=' condition=LogicalOrExpression (':' value=LogicalOrExpression)?; 
+	'=' condition=Expression (':' value=Expression)?; 
 	
 enum Direction: IN='in' | OUT='out';
 
@@ -111,7 +110,7 @@ TransitionReaction:
 
 ReactionTrigger:	
 	(triggers+=EventSpec ("," triggers+=EventSpec)*)
-	('[' guardExpression=LogicalOrExpression ']')?;
+	('[' guardExpression=Expression ']')?;
 	
 Effect:	
 	(actions+=Statement ';')+ ;
@@ -137,9 +136,9 @@ RegularEventSpec: event=[sct::Event];
 TimeEventSpec: 'after' value = INT (unit = TimeUnit)?;
 
 // TODO: add dereived events like in(state), entered(state)	
-BuiltinEventSpec: EnterEvent | ExitEvent | OnCycleEvent | AlwaysEvent;
+BuiltinEventSpec: EntryEvent | ExitEvent | OnCycleEvent | AlwaysEvent;
 
-EnterEvent: {EnterEvent} 'enter';
+EntryEvent: {EnterEvent} 'entry';
 ExitEvent: {ExitEvent} 'exit';
 OnCycleEvent: {OnCycleEvent} 'oncycle'; // TODO: ?!? better 'ontick' ?!?
 AlwaysEvent: {AlwaysEvent} 'always';
@@ -148,15 +147,16 @@ AlwaysEvent: {AlwaysEvent} 'always';
 /* --- statements --- */
 
 Statement:
-	(Assignment | EventRaising );
+	Assignment | EventRaising ;
 	
 Assignment:
-	varRef=[sct::Variable] "=" expression=LogicalOrExpression;
+	varRef=[sct::Variable] "=" expression=Expression;
 	
 EventRaising:
-	'raise' event=[sct::Event] (':' value=LogicalOrExpression)?;
+	'raise' event=[sct::Event] (':' value=Expression)?;
 	
-	
+
+
 // variable assignment
 
 // raise events
@@ -171,6 +171,7 @@ EventRaising:
 //ExpressionRule:
 //	expression=(LogicalOrExpression | RaiseEventExpression);
 
+Expression returns Expression: LogicalOrExpression;
 
 LogicalOrExpression returns Expression:
 	LogicalAndExpression ({LogicalOrExpression.leftOperand=current} '||'
@@ -206,7 +207,7 @@ NumericalUnaryExpression returns Expression:
 	operator=UnaryOperator operand=PrimaryExpression;
 
 PrimaryExpression returns Expression:
-	ValueExpression | '(' LogicalOrExpression ')';
+	ValueExpression | '(' Expression ')';
 
 enum AdditiveOperator:
 	plus='+' | minus='-';
@@ -221,9 +222,6 @@ enum RelationalOperator:
 	smaller='<' | smallerEqual='<=' | greater='>' | greaterEqual='>=' |
 	equals='==' | notEquals='!=';
 
-enum DirectionKind:
-	incoming='in' | outgoing='out';
-
 enum TimeUnit:
 	second='s'
 	| millisecond='ms'
@@ -233,13 +231,16 @@ enum Type:
 	void | integer | real | boolean | string;
 
 ValueExpression returns Expression:
-	PrimitiveValueExpression | VariableReferenceExpression;
+	PrimitiveValueExpression | ElementReferenceExpression | OperationCall;
 
 PrimitiveValueExpression returns Expression:
 	{PrimitiveValueExpression} value=Literal;
 
-VariableReferenceExpression returns Expression:
-	{PropertyReferenceExpression} value=[sct::DataElement];
+ElementReferenceExpression returns Expression:
+	{ElementReferenceExpression} value=[sct::DataElement];
+
+OperationCall returns Expression:
+	{OperationCall} operation=[Operation] '(' (args+=Expression (',' args+=Expression)* )?')';
 
 Literal:
 	BOOL | INT | STRING | FLOAT;

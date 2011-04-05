@@ -23,9 +23,10 @@ import org.yakindu.sct.statechart.expressions.Clock;
 import org.yakindu.sct.statechart.expressions.DefRoot;
 import org.yakindu.sct.statechart.expressions.Definition;
 import org.yakindu.sct.statechart.expressions.Direction;
-import org.yakindu.sct.statechart.expressions.DirectionKind;
 import org.yakindu.sct.statechart.expressions.Effect;
+import org.yakindu.sct.statechart.expressions.ElementReferenceExpression;
 import org.yakindu.sct.statechart.expressions.EnterEvent;
+import org.yakindu.sct.statechart.expressions.EntryEvent;
 import org.yakindu.sct.statechart.expressions.EntryPointSpec;
 import org.yakindu.sct.statechart.expressions.Entrypoint;
 import org.yakindu.sct.statechart.expressions.EventDefinition;
@@ -51,8 +52,8 @@ import org.yakindu.sct.statechart.expressions.NumericalMultiplyDivideExpression;
 import org.yakindu.sct.statechart.expressions.NumericalUnaryExpression;
 import org.yakindu.sct.statechart.expressions.OnCycleEvent;
 import org.yakindu.sct.statechart.expressions.Operation;
+import org.yakindu.sct.statechart.expressions.OperationCall;
 import org.yakindu.sct.statechart.expressions.PrimitiveValueExpression;
-import org.yakindu.sct.statechart.expressions.PropertyReferenceExpression;
 import org.yakindu.sct.statechart.expressions.Reaction;
 import org.yakindu.sct.statechart.expressions.ReactionPriority;
 import org.yakindu.sct.statechart.expressions.ReactionProperties;
@@ -336,7 +337,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass enterEventEClass = null;
+  private EClass entryEventEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -386,6 +387,13 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
    * @generated
    */
   private EClass expressionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass enterEventEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -448,7 +456,14 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass propertyReferenceExpressionEClass = null;
+  private EClass elementReferenceExpressionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass operationCallEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -484,13 +499,6 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
    * @generated
    */
   private EEnum relationalOperatorEEnum = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EEnum directionKindEEnum = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -1277,9 +1285,9 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getEnterEvent()
+  public EClass getEntryEvent()
   {
-    return enterEventEClass;
+    return entryEventEClass;
   }
 
   /**
@@ -1390,6 +1398,16 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
   public EClass getExpression()
   {
     return expressionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getEnterEvent()
+  {
+    return enterEventEClass;
   }
 
   /**
@@ -1647,9 +1665,9 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getPropertyReferenceExpression()
+  public EClass getElementReferenceExpression()
   {
-    return propertyReferenceExpressionEClass;
+    return elementReferenceExpressionEClass;
   }
 
   /**
@@ -1657,9 +1675,39 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getPropertyReferenceExpression_Value()
+  public EReference getElementReferenceExpression_Value()
   {
-    return (EReference)propertyReferenceExpressionEClass.getEStructuralFeatures().get(0);
+    return (EReference)elementReferenceExpressionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getOperationCall()
+  {
+    return operationCallEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getOperationCall_Operation()
+  {
+    return (EReference)operationCallEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getOperationCall_Args()
+  {
+    return (EReference)operationCallEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -1710,16 +1758,6 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
   public EEnum getRelationalOperator()
   {
     return relationalOperatorEEnum;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EEnum getDirectionKind()
-  {
-    return directionKindEEnum;
   }
 
   /**
@@ -1877,7 +1915,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 
     builtinEventSpecEClass = createEClass(BUILTIN_EVENT_SPEC);
 
-    enterEventEClass = createEClass(ENTER_EVENT);
+    entryEventEClass = createEClass(ENTRY_EVENT);
 
     exitEventEClass = createEClass(EXIT_EVENT);
 
@@ -1896,6 +1934,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
     createEReference(eventRaisingEClass, EVENT_RAISING__VALUE);
 
     expressionEClass = createEClass(EXPRESSION);
+
+    enterEventEClass = createEClass(ENTER_EVENT);
 
     logicalOrExpressionEClass = createEClass(LOGICAL_OR_EXPRESSION);
     createEReference(logicalOrExpressionEClass, LOGICAL_OR_EXPRESSION__LEFT_OPERAND);
@@ -1930,8 +1970,12 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
     primitiveValueExpressionEClass = createEClass(PRIMITIVE_VALUE_EXPRESSION);
     createEAttribute(primitiveValueExpressionEClass, PRIMITIVE_VALUE_EXPRESSION__VALUE);
 
-    propertyReferenceExpressionEClass = createEClass(PROPERTY_REFERENCE_EXPRESSION);
-    createEReference(propertyReferenceExpressionEClass, PROPERTY_REFERENCE_EXPRESSION__VALUE);
+    elementReferenceExpressionEClass = createEClass(ELEMENT_REFERENCE_EXPRESSION);
+    createEReference(elementReferenceExpressionEClass, ELEMENT_REFERENCE_EXPRESSION__VALUE);
+
+    operationCallEClass = createEClass(OPERATION_CALL);
+    createEReference(operationCallEClass, OPERATION_CALL__OPERATION);
+    createEReference(operationCallEClass, OPERATION_CALL__ARGS);
 
     // Create enums
     directionEEnum = createEEnum(DIRECTION);
@@ -1939,7 +1983,6 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
     multiplicativeOperatorEEnum = createEEnum(MULTIPLICATIVE_OPERATOR);
     unaryOperatorEEnum = createEEnum(UNARY_OPERATOR);
     relationalOperatorEEnum = createEEnum(RELATIONAL_OPERATOR);
-    directionKindEEnum = createEEnum(DIRECTION_KIND);
     timeUnitEEnum = createEEnum(TIME_UNIT);
     typeEEnum = createEEnum(TYPE);
   }
@@ -2002,12 +2045,13 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
     regularEventSpecEClass.getESuperTypes().add(this.getEventSpec());
     timeEventSpecEClass.getESuperTypes().add(this.getEventSpec());
     builtinEventSpecEClass.getESuperTypes().add(this.getEventSpec());
-    enterEventEClass.getESuperTypes().add(this.getBuiltinEventSpec());
+    entryEventEClass.getESuperTypes().add(this.getBuiltinEventSpec());
     exitEventEClass.getESuperTypes().add(this.getBuiltinEventSpec());
     onCycleEventEClass.getESuperTypes().add(this.getBuiltinEventSpec());
     alwaysEventEClass.getESuperTypes().add(this.getBuiltinEventSpec());
     assignmentEClass.getESuperTypes().add(this.getStatement());
     eventRaisingEClass.getESuperTypes().add(this.getStatement());
+    enterEventEClass.getESuperTypes().add(this.getEntryEvent());
     logicalOrExpressionEClass.getESuperTypes().add(this.getExpression());
     logicalAndExpressionEClass.getESuperTypes().add(this.getExpression());
     logicalNotExpressionEClass.getESuperTypes().add(this.getExpression());
@@ -2016,7 +2060,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
     numericalMultiplyDivideExpressionEClass.getESuperTypes().add(this.getExpression());
     numericalUnaryExpressionEClass.getESuperTypes().add(this.getExpression());
     primitiveValueExpressionEClass.getESuperTypes().add(this.getExpression());
-    propertyReferenceExpressionEClass.getESuperTypes().add(this.getExpression());
+    elementReferenceExpressionEClass.getESuperTypes().add(this.getExpression());
+    operationCallEClass.getESuperTypes().add(this.getExpression());
 
     // Initialize classes and features; add operations and parameters
     initEClass(rootEClass, Root.class, "Root", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -2124,7 +2169,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 
     initEClass(builtinEventSpecEClass, BuiltinEventSpec.class, "BuiltinEventSpec", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-    initEClass(enterEventEClass, EnterEvent.class, "EnterEvent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEClass(entryEventEClass, EntryEvent.class, "EntryEvent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(exitEventEClass, ExitEvent.class, "ExitEvent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -2143,6 +2188,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
     initEReference(getEventRaising_Value(), this.getExpression(), null, "value", null, 0, 1, EventRaising.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(expressionEClass, Expression.class, "Expression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(enterEventEClass, EnterEvent.class, "EnterEvent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(logicalOrExpressionEClass, LogicalOrExpression.class, "LogicalOrExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getLogicalOrExpression_LeftOperand(), this.getExpression(), null, "leftOperand", null, 0, 1, LogicalOrExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2177,8 +2224,12 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
     initEClass(primitiveValueExpressionEClass, PrimitiveValueExpression.class, "PrimitiveValueExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getPrimitiveValueExpression_Value(), ecorePackage.getEString(), "value", null, 0, 1, PrimitiveValueExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(propertyReferenceExpressionEClass, PropertyReferenceExpression.class, "PropertyReferenceExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getPropertyReferenceExpression_Value(), theStatechartPackage.getDataElement(), null, "value", null, 0, 1, PropertyReferenceExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(elementReferenceExpressionEClass, ElementReferenceExpression.class, "ElementReferenceExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getElementReferenceExpression_Value(), theStatechartPackage.getDataElement(), null, "value", null, 0, 1, ElementReferenceExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(operationCallEClass, OperationCall.class, "OperationCall", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getOperationCall_Operation(), this.getOperation(), null, "operation", null, 0, 1, OperationCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getOperationCall_Args(), this.getExpression(), null, "args", null, 0, -1, OperationCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Initialize enums and add enum literals
     initEEnum(directionEEnum, Direction.class, "Direction");
@@ -2206,10 +2257,6 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
     addEEnumLiteral(relationalOperatorEEnum, RelationalOperator.GREATER_EQUAL);
     addEEnumLiteral(relationalOperatorEEnum, RelationalOperator.EQUALS);
     addEEnumLiteral(relationalOperatorEEnum, RelationalOperator.NOT_EQUALS);
-
-    initEEnum(directionKindEEnum, DirectionKind.class, "DirectionKind");
-    addEEnumLiteral(directionKindEEnum, DirectionKind.INCOMING);
-    addEEnumLiteral(directionKindEEnum, DirectionKind.OUTGOING);
 
     initEEnum(timeUnitEEnum, TimeUnit.class, "TimeUnit");
     addEEnumLiteral(timeUnitEEnum, TimeUnit.SECOND);

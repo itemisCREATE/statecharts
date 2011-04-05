@@ -9,21 +9,21 @@ import org.yakindu.model.sct.statechart.DataElement;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Property Reference Expression</b></em>'.
+ * A representation of the model object '<em><b>Element Reference Expression</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.yakindu.sct.statechart.expressions.PropertyReferenceExpression#getValue <em>Value</em>}</li>
+ *   <li>{@link org.yakindu.sct.statechart.expressions.ElementReferenceExpression#getValue <em>Value</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.yakindu.sct.statechart.expressions.ExpressionsPackage#getPropertyReferenceExpression()
+ * @see org.yakindu.sct.statechart.expressions.ExpressionsPackage#getElementReferenceExpression()
  * @model
  * @generated
  */
-public interface PropertyReferenceExpression extends Expression
+public interface ElementReferenceExpression extends Expression
 {
   /**
    * Returns the value of the '<em><b>Value</b></em>' reference.
@@ -35,14 +35,14 @@ public interface PropertyReferenceExpression extends Expression
    * <!-- end-user-doc -->
    * @return the value of the '<em>Value</em>' reference.
    * @see #setValue(DataElement)
-   * @see org.yakindu.sct.statechart.expressions.ExpressionsPackage#getPropertyReferenceExpression_Value()
+   * @see org.yakindu.sct.statechart.expressions.ExpressionsPackage#getElementReferenceExpression_Value()
    * @model
    * @generated
    */
   DataElement getValue();
 
   /**
-   * Sets the value of the '{@link org.yakindu.sct.statechart.expressions.PropertyReferenceExpression#getValue <em>Value</em>}' reference.
+   * Sets the value of the '{@link org.yakindu.sct.statechart.expressions.ElementReferenceExpression#getValue <em>Value</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Value</em>' reference.
@@ -51,4 +51,4 @@ public interface PropertyReferenceExpression extends Expression
    */
   void setValue(DataElement value);
 
-} // PropertyReferenceExpression
+} // ElementReferenceExpression

@@ -16,6 +16,6 @@ package org.yakindu.sct.statechart.expressions;
  * @model
  * @generated
  */
-public interface EnterEvent extends BuiltinEventSpec
+public interface EnterEvent extends EntryEvent
 {
 } // EnterEvent

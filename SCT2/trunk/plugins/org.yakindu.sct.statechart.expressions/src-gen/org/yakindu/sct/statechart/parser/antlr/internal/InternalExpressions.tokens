@@ -26,6 +26,7 @@ RULE_SL_COMMENT=10
 '||'=43
 '<='=54
 '='=20
+'entry'=38
 'void'=61
 ':'=17
 '#'=32
@@ -47,7 +48,6 @@ RULE_SL_COMMENT=10
 '/'=31
 '@@transition@@'=15
 'always'=41
-'enter'=38
 ')'=28
 'after'=37
 'clock'=24

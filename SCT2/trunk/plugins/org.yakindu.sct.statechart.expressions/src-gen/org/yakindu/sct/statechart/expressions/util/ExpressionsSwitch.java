@@ -377,12 +377,12 @@ public class ExpressionsSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case ExpressionsPackage.ENTER_EVENT:
+      case ExpressionsPackage.ENTRY_EVENT:
       {
-        EnterEvent enterEvent = (EnterEvent)theEObject;
-        T result = caseEnterEvent(enterEvent);
-        if (result == null) result = caseBuiltinEventSpec(enterEvent);
-        if (result == null) result = caseEventSpec(enterEvent);
+        EntryEvent entryEvent = (EntryEvent)theEObject;
+        T result = caseEntryEvent(entryEvent);
+        if (result == null) result = caseBuiltinEventSpec(entryEvent);
+        if (result == null) result = caseEventSpec(entryEvent);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -440,6 +440,16 @@ public class ExpressionsSwitch<T>
       {
         Expression expression = (Expression)theEObject;
         T result = caseExpression(expression);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ExpressionsPackage.ENTER_EVENT:
+      {
+        EnterEvent enterEvent = (EnterEvent)theEObject;
+        T result = caseEnterEvent(enterEvent);
+        if (result == null) result = caseEntryEvent(enterEvent);
+        if (result == null) result = caseBuiltinEventSpec(enterEvent);
+        if (result == null) result = caseEventSpec(enterEvent);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -507,11 +517,19 @@ public class ExpressionsSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case ExpressionsPackage.PROPERTY_REFERENCE_EXPRESSION:
+      case ExpressionsPackage.ELEMENT_REFERENCE_EXPRESSION:
       {
-        PropertyReferenceExpression propertyReferenceExpression = (PropertyReferenceExpression)theEObject;
-        T result = casePropertyReferenceExpression(propertyReferenceExpression);
-        if (result == null) result = caseExpression(propertyReferenceExpression);
+        ElementReferenceExpression elementReferenceExpression = (ElementReferenceExpression)theEObject;
+        T result = caseElementReferenceExpression(elementReferenceExpression);
+        if (result == null) result = caseExpression(elementReferenceExpression);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ExpressionsPackage.OPERATION_CALL:
+      {
+        OperationCall operationCall = (OperationCall)theEObject;
+        T result = caseOperationCall(operationCall);
+        if (result == null) result = caseExpression(operationCall);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -1080,17 +1098,17 @@ public class ExpressionsSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Enter Event</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Entry Event</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Enter Event</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Entry Event</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseEnterEvent(EnterEvent object)
+  public T caseEntryEvent(EntryEvent object)
   {
     return null;
   }
@@ -1203,6 +1221,22 @@ public class ExpressionsSwitch<T>
    * @generated
    */
   public T caseExpression(Expression object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Enter Event</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Enter Event</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEnterEvent(EnterEvent object)
   {
     return null;
   }
@@ -1336,17 +1370,33 @@ public class ExpressionsSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Property Reference Expression</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Element Reference Expression</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Property Reference Expression</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Element Reference Expression</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T casePropertyReferenceExpression(PropertyReferenceExpression object)
+  public T caseElementReferenceExpression(ElementReferenceExpression object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Operation Call</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Operation Call</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseOperationCall(OperationCall object)
   {
     return null;
   }
