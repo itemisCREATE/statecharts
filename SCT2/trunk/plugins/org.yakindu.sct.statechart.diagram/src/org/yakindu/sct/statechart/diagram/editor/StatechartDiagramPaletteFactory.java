@@ -15,6 +15,7 @@ import org.eclipse.gmf.runtime.diagram.ui.services.palette.PaletteFactory;
 import org.eclipse.gmf.runtime.diagram.ui.tools.ConnectionCreationTool;
 import org.eclipse.gmf.runtime.diagram.ui.tools.CreationTool;
 import org.eclipse.gmf.runtime.emf.type.core.IElementType;
+import org.eclipse.swt.SWT;
 
 /**
  * 
@@ -31,9 +32,27 @@ public class StatechartDiagramPaletteFactory extends PaletteFactory.Adapter {
 			throw new IllegalStateException("No Tool for toolId " + toolId
 					+ " found!");
 		if (toolId.equals("Transition")) {
-			return new ConnectionCreationTool(elementType);
+			return new ConnectionCreationTool(elementType){
+				//https://bugs.eclipse.org/bugs/show_bug.cgi?id=341893
+				protected void handleFinished() {
+			        if (!getCurrentInput().isModKeyDown(SWT.MOD1)) {
+			            super.handleFinished();
+			        } else {
+			            reactivate();
+			        }
+			    }
+			};
 		} else
-			return new CreationTool(elementType);
+			return new CreationTool(elementType) {
+			//https://bugs.eclipse.org/bugs/show_bug.cgi?id=341893
+			protected void handleFinished() {
+		        if (!getCurrentInput().isModKeyDown(SWT.MOD1)) {
+		            super.handleFinished();
+		        } else {
+		            reactivate();
+		        }
+		    }
+		};
 	}
 
 }
