@@ -18,7 +18,6 @@ import org.eclipse.gmf.runtime.draw2d.ui.figures.FigureUtilities;
 import org.eclipse.gmf.runtime.notation.Bounds;
 import org.eclipse.gmf.runtime.notation.DecorationNode;
 import org.eclipse.gmf.runtime.notation.Diagram;
-import org.eclipse.gmf.runtime.notation.Edge;
 import org.eclipse.gmf.runtime.notation.Node;
 import org.eclipse.gmf.runtime.notation.NotationFactory;
 import org.eclipse.gmf.runtime.notation.ShapeStyle;
@@ -44,9 +43,9 @@ public final class FactoryUtils {
 	private static final int INITIAL_REGION_WIDTH = 400;
 	private static final int INITIAL_REGION_HEIGHT = 400;
 	private static final String INITIAL_REGION_NAME = "main region";
-	
-	private static final int INITIAL_TEXT_COMPARTMENT_X = 10; 
-	private static final int INITIAL_TEXT_COMPARTMENT_Y = 10; 
+
+	private static final int INITIAL_TEXT_COMPARTMENT_X = 10;
+	private static final int INITIAL_TEXT_COMPARTMENT_Y = 10;
 	private static final int INITIAL_TEXT_COMPARTMENT_HEIGHT = 400;
 	private static final int INITIAL_TEXT_COMPARTMENT_WIDTH = 200;
 
@@ -107,7 +106,7 @@ public final class FactoryUtils {
 				.createInitialState();
 		region.getVertices().add(initialState);
 		Node initialStateView = ViewService.createNode(
-				getRegionCompartmentView(regionView),
+				getRegionCompartmentView(regionView), initialState,
 				SemanticHints.INITIALSTATE,
 				DiagramActivator.DIAGRAM_PREFERENCES_HINT);
 		setInitialStateViewLayoutConstraint(initialStateView);
@@ -115,15 +114,16 @@ public final class FactoryUtils {
 		State state = StatechartFactory.eINSTANCE.createState();
 		region.getVertices().add(state);
 		Node stateNode = ViewService.createNode(
-				getRegionCompartmentView(regionView), SemanticHints.STATE,
-				DiagramActivator.DIAGRAM_PREFERENCES_HINT);
+				getRegionCompartmentView(regionView), state,
+				SemanticHints.STATE, DiagramActivator.DIAGRAM_PREFERENCES_HINT);
+		setStateViewLayoutConstraint(stateNode);
 		// Create the transition from Initial State to State
 		Transition transition = StatechartFactory.eINSTANCE.createTransition();
 		transition.setSource(initialState);
 		transition.setTarget(state);
 		initialState.getOutgoingTransitions().add(transition);
-		Edge transitionView = ViewService.createEdge(initialStateView,
-				stateNode, SemanticHints.TRANSITION,
+		ViewService.createEdge(initialStateView, stateNode, transition,
+				SemanticHints.TRANSITION,
 				DiagramActivator.DIAGRAM_PREFERENCES_HINT);
 		// Create the textcompartment for events / variables
 		Node textCompartment = ViewService.createNode(diagram, statechart,
@@ -133,11 +133,18 @@ public final class FactoryUtils {
 
 	}
 
+	private static void setStateViewLayoutConstraint(Node stateNode) {
+		Bounds bounds = NotationFactory.eINSTANCE.createBounds();
+		bounds.setX(10);
+		bounds.setY(80);
+		stateNode.setLayoutConstraint(bounds);
+	}
+
 	private static void setInitialStateViewLayoutConstraint(
 			Node initialStateView) {
 		Bounds bounds = NotationFactory.eINSTANCE.createBounds();
-		bounds.setX(40);
-		bounds.setY(40);
+		bounds.setX(20);
+		bounds.setY(20);
 		initialStateView.setLayoutConstraint(bounds);
 	}
 
@@ -156,7 +163,8 @@ public final class FactoryUtils {
 
 	private static void setRegionViewLayoutConstraint(Node regionView) {
 		Bounds bounds = NotationFactory.eINSTANCE.createBounds();
-		bounds.setX(INITIAL_TEXT_COMPARTMENT_WIDTH + INITIAL_TEXT_COMPARTMENT_X+ SPACING);
+		bounds.setX(INITIAL_TEXT_COMPARTMENT_WIDTH + INITIAL_TEXT_COMPARTMENT_X
+				+ SPACING);
 		bounds.setY(INITIAL_TEXT_COMPARTMENT_Y);
 		bounds.setHeight(INITIAL_REGION_HEIGHT);
 		bounds.setWidth(INITIAL_REGION_WIDTH);
