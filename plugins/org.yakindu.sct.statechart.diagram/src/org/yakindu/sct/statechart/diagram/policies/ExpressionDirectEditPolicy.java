@@ -30,7 +30,7 @@ import org.yakindu.sct.statechart.diagram.validation.GMFMarkerUtil;
 import org.yakindu.sct.statechart.diagram.validation.IMarkerType;
 
 import de.itemis.xtext.utils.gmf.directedit.IXtextAwareEditPart;
-import de.itemis.xtext.utils.gmf.directedit.XtextCellEditor;
+import de.itemis.xtext.utils.gmf.viewers.XtextCellEditor;
 
 /**
  * 
@@ -49,7 +49,7 @@ public class ExpressionDirectEditPolicy extends DirectEditPolicy implements
 		List<Event> events = EcoreUtil2.getAllContentsOfType(astRoot, Event.class);
 		List<Variable> vars =  EcoreUtil2.getAllContentsOfType(astRoot, Variable.class);
 		EObject semanticElem = (getHost().resolveSemanticElement());
-		
+		 
 		SetValueCommand eventCommand = new SetValueCommand(new SetRequest(semanticElem,
 				StatechartPackage.Literals.STATECHART__EVENTS,
 				events));

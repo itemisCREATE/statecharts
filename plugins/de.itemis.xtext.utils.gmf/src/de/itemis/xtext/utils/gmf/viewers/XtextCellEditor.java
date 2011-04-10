@@ -9,17 +9,15 @@
  * 	itemis AG - initial API and implementation
  * 
  */
-package de.itemis.xtext.utils.gmf.directedit;
+package de.itemis.xtext.utils.gmf.viewers;
 
 import java.util.List;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.jface.text.source.AnnotationModel;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.SourceViewer;
-import org.eclipse.jface.text.source.SourceViewerConfiguration;
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.StructuredViewer;
 import org.eclipse.swt.SWT;
@@ -62,8 +60,8 @@ import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
 
-import com.google.common.collect.Lists;
-import com.google.inject.Injector;
+import com.google.inject.Inject;
+
 
 /**
  * This class integrates xText Features into a {@link CellEditor} and can be
@@ -80,17 +78,13 @@ import com.google.inject.Injector;
  */
 
 @SuppressWarnings("restriction")
-public class XtextCellEditor extends CellEditor {
+public class XtextCellEditor extends StyledTextCellEditor {
 
 	/**
 	 * Key listener executed content assist operation on CTRL+Space
 	 */
 	private final KeyListener keyListener = new KeyListener() {
 
-		public void keyReleased(KeyEvent e) {
-			// TODO
-			// XTextCellEditor.this.keyReleaseOccured(e);
-		}
 
 		public void keyPressed(KeyEvent e) {
 			XtextCellEditor.this.valueChanged(true, true);
@@ -103,32 +97,13 @@ public class XtextCellEditor extends CellEditor {
 					}
 				});
 			}
-			// QUICK_ASSIST
-			if ((e.keyCode == 49) && ((e.stateMask & SWT.CTRL) != 0)) {
-				BusyIndicator.showWhile(Display.getDefault(), new Runnable() {
-					public void run() {
-						sourceviewer.doOperation(ISourceViewer.QUICK_ASSIST);
-					}
-				});
-			}
+		}
+		public void keyReleased(KeyEvent e) {
 		}
 
 	};
 
-	/**
-	 * the SWT Control the cell editor works with
-	 */
-	private StyledText text;
-	/**
-	 * the google guice injector used to create the required instances via the
-	 * xText generated modules
-	 */
-	private Injector injector;
-
-	/**
-	 * the xText document the sourceViewer uses
-	 */
-	private XtextDocument document;
+	
 
 	/**
 	 * The sourceViewer, that provides additional functions to the styled text
@@ -137,17 +112,36 @@ public class XtextCellEditor extends CellEditor {
 	private XtextSourceViewer sourceviewer;
 
 	private ValidationJob validationJob;
+	/**
+	 * the xText document the sourceViewer uses
+	 */
+	@Inject
+	private XtextDocument document;
+	@Inject
+	private IssueResolutionProvider resolutionProvider;
+	@Inject
+	private IPreferenceStoreAccess preferenceStoreAccess;
+	@Inject
+	private CharacterPairMatcher characterPairMatcher;
+	@Inject
+	private XtextSourceViewerConfiguration configuration;
+	@Inject
+	private Factory sourceViewerFactory;
+	@Inject
+	private XtextResource resource;
+	@Inject
+	private IResourceValidator validator;
+
+
 
 	/**
 	 * C'tor to create a new Instance.
 	 * 
 	 */
-	public XtextCellEditor(Composite parent, Injector injector, int style) {
-		this.injector = injector;
+	public XtextCellEditor(int style) {
 		setStyle(style);
-		create(parent);
 	}
-
+	
 	/**
 	 * Creates an {@link SourceViewer} and returns the {@link StyledText} widget
 	 * of the viewer as the cell editors control. Some code is copied from
@@ -155,13 +149,16 @@ public class XtextCellEditor extends CellEditor {
 	 */
 	@Override
 	protected Control createControl(Composite parent) {
-		Factory sourceViewerFactory = createSourceViewerFactory();
 		sourceviewer = sourceViewerFactory.createSourceViewer(parent, null,
 				null, false, getStyle());
-		final SourceViewerConfiguration configuration = createSourceViewerConfiguration();
 		sourceviewer.configure(configuration);
-		document = createDocument(injector);
-
+		
+		//'dummy' document for the sourceviewer
+		XtextResourceSet resourceSet = new XtextResourceSet();
+		resourceSet.getResources().add(resource);
+		setResourceUri(resource);
+		document.setInput(resource);
+		
 		sourceviewer.setDocument(document, new AnnotationModel());
 
 		SourceViewerDecorationSupport support = new SourceViewerDecorationSupport(
@@ -186,10 +183,26 @@ public class XtextCellEditor extends CellEditor {
 		return text;
 	}
 
+
+	@Override
+	protected StyledText createStyledText(Composite parent) {
+		sourceviewer = sourceViewerFactory.createSourceViewer(parent, null,
+				null, false, getStyle());
+		sourceviewer.configure(configuration);
+		sourceviewer.setDocument(document, new AnnotationModel());
+
+		SourceViewerDecorationSupport support = new SourceViewerDecorationSupport(
+				sourceviewer, null, new DefaultMarkerAnnotationAccess(),
+				EditorsPlugin.getDefault().getSharedTextColors());
+		configureSourceViewerDecorationSupport(support);
+
+		validationJob = createValidationJob();
+		document.setValidationJob(validationJob);
+
+		return sourceviewer.getTextWidget();
+	}
+
 	private ValidationJob createValidationJob() {
-		IssueResolutionProvider resolutionProvider = injector
-				.getInstance(IssueResolutionProvider.class);
-		IResourceValidator validator = createResourceValidator();
 		return new ValidationJob(validator, document,
 				new AnnotationIssueProcessor(document, sourceviewer
 						.getAnnotationModel(), resolutionProvider),
@@ -212,53 +225,15 @@ public class XtextCellEditor extends CellEditor {
 			support.setAnnotationPreference(annotationPreference);
 		}
 
-		CharacterPairMatcher characterPairMatcher = injector
-				.getInstance(CharacterPairMatcher.class);
-		if (characterPairMatcher != null) {
-			support.setCharacterPairMatcher(characterPairMatcher);
-			support.setMatchingCharacterPainterPreferenceKeys(
-					BracketMatchingPreferencesInitializer.IS_ACTIVE_KEY,
-					BracketMatchingPreferencesInitializer.COLOR_KEY);
+		support.setCharacterPairMatcher(characterPairMatcher);
+		support.setMatchingCharacterPainterPreferenceKeys(
+				BracketMatchingPreferencesInitializer.IS_ACTIVE_KEY,
+				BracketMatchingPreferencesInitializer.COLOR_KEY);
 
-			IPreferenceStoreAccess instance = injector
-					.getInstance(IPreferenceStoreAccess.class);
-			support.install(instance.getPreferenceStore());
-		}
+		support.install(preferenceStoreAccess.getPreferenceStore());
 
 	}
 
-	private IResourceValidator createResourceValidator() {
-		IResourceValidator validator = injector
-				.getInstance(IResourceValidator.class);
-		return validator;
-	}
-
-	private SourceViewerConfiguration createSourceViewerConfiguration() {
-		SourceViewerConfiguration configuration = injector
-				.getInstance(XtextSourceViewerConfiguration.class);
-		return configuration;
-	}
-
-	private Factory createSourceViewerFactory() {
-		Factory sourceViewerFactory = injector
-				.getInstance(XtextSourceViewer.Factory.class);
-		return sourceViewerFactory;
-	}
-
-	/**
-	 * Creates a "dummy" Document that the source viewer can use
-	 * 
-	 */
-	public XtextDocument createDocument(Injector injector) {
-		XtextDocument document = injector.getInstance(XtextDocument.class);
-		XtextResource resource = injector.getInstance(XtextResource.class);
-		XtextResourceSet resourceSet = injector
-				.getInstance(XtextResourceSet.class);
-		resourceSet.getResources().add(resource);
-		setResourceUri(resource);
-		document.setInput(resource);
-		return document;
-	}
 
 	/**
 	 * Sets the resource uri. From the resource uris project name the global
@@ -290,10 +265,6 @@ public class XtextCellEditor extends CellEditor {
 		});
 	}
 
-	@Override
-	protected Object doGetValue() {
-		return text.getText();
-	}
 
 	public IParseResult getParseResult() {
 		return document
@@ -308,31 +279,6 @@ public class XtextCellEditor extends CellEditor {
 
 	public List<Issue> getIssues() {
 		return validationJob.createIssues(new NullProgressMonitor());
-	}
-
-	@Override
-	protected void doSetFocus() {
-		text.setFocus();
-	}
-
-	@Override
-	protected void doSetValue(Object value) {
-		text.setText((String) value == null ? "" : (String) value);
-		formatText();
-
-	}
-
-	private void formatText() {
-		BusyIndicator.showWhile(Display.getDefault(), new Runnable() {
-			public void run() {
-				// sourceviewer
-				// .doOperation(ISourceViewer.FORMAT);
-			}
-		});
-	}
-
-	public XtextDocument getDocument() {
-		return document;
 	}
 
 	@Override

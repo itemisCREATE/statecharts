@@ -23,7 +23,7 @@ import org.yakindu.model.sct.statechart.StatechartPackage;
 import org.yakindu.sct.statechart.diagram.extensions.Extensions;
 import org.yakindu.sct.statechart.diagram.extensions.IExpressionsProvider;
 
-import de.itemis.xtext.utils.gmf.directedit.XtextCellEditor;
+import de.itemis.xtext.utils.gmf.viewers.XtextCellEditor;
 
 /**
  * Creates an {@link XtextCellEditor} for all {@link ExpressionElement}s for the
@@ -59,9 +59,10 @@ public class ExpressionElementPropertySource extends PropertySource {
 					@Override
 					public CellEditor createPropertyEditor(Composite composite) {
 						final XtextCellEditor xTextEditor = new XtextCellEditor(
-								composite, getExpressionsProvider()
-										.getInjector(),
 								getExpressionsProvider().getStyle());
+						getExpressionsProvider().getInjector().injectMembers(
+								xTextEditor);
+						xTextEditor.create(composite);
 						return xTextEditor;
 
 					}
