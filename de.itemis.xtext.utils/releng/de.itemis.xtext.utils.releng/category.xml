@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/de.itemis.xtext.utils.jface_1.0.0.qualifier.jar" id="de.itemis.xtext.utils.jface" version="1.0.0.qualifier">
+      <category name="Xtext Integration Utilities"/>
+   </feature>
+   <feature url="features/de.itemis.xtext.utils.gmf_1.0.0.qualifier.jar" id="de.itemis.xtext.utils.gmf" version="1.0.0.qualifier">
+      <category name="Xtext Integration Utilities"/>
+   </feature>
+   <category-def name="Xtext Integration Utilities" label="Xtext Integration Utilities">
+      <description>
+         Utilities for integrating Xtext with JFace and GMF Runtime.
+      </description>
+   </category-def>
+</site>
