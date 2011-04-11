@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="de.itemis.xtext.utils.jface"
+      id="de.itemis.xtext.utils.gmf"
       label="Xtext GMF Integration (XGI)"
       version="1.0.0.qualifier"
       provider-name="itemis AG">
@@ -21,8 +21,12 @@
          id="de.itemis.xtext.utils.jface.source"
          version="0.0.0"/>
 
+   <requires>
+      <import feature="de.itemis.xtext.utils.jface" version="1.0.0" match="compatible"/>
+   </requires>
+
    <plugin
-         id="de.itemis.xtext.utils.jface"
+         id="de.itemis.xtext.utils.gmf"
          download-size="0"
          install-size="0"
          version="0.0.0"
