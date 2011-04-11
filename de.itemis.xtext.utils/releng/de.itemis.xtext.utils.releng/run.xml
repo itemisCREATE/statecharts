@@ -51,13 +51,13 @@
 		<echo message="Preparing repositories ..." />
 
 		<!-- project updates -->
-		<p2.mirror source="http://download.eclipse.org/eclipse/updates/3.6" destination="file:${repoBaseLocation}/eclipse_updates_3_6">
+		<p2.mirror source="${downloadMirror}/eclipse/updates/3.6" destination="file:${repoBaseLocation}/eclipse_updates_3_6">
 			<iu id="org.eclipse.platform.ide" />
 			<slicingOptions includeOptional="false" includeNonGreedy="false" followStrict="true" />
 		</p2.mirror>
 
 		<!-- helios releases -->
-		<p2.mirror source="http://download.eclipse.org/releases/helios" destination="file:${repoBaseLocation}/releases_helios">
+		<p2.mirror source="${downloadMirror}/releases/helios" destination="file:${repoBaseLocation}/releases_helios">
 			<iu id="org.eclipse.emf.sdk.feature.group" />
 			<iu id="org.eclipse.gmf.runtime.notation.sdk.feature.group" />
 			<iu id="org.eclipse.gmf.runtime.sdk.feature.group" />
