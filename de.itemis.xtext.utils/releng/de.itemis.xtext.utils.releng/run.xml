@@ -110,14 +110,16 @@
 
 		<!-- build the XJI feature -->
 		<ant antfile="build.xml" dir="build" target="all" inheritall="true">
-			<property name="build.script.name" value="build.xml" />
+			<property name="builder" value="${basedir}/buildConfiguration" />
+			<property name="libs" value="${basedir}/lib" />
 			<property name="topLevelElementType" value="feature" />
 			<property name="topLevelElementId" value="de.itemis.xtext.utils.jface" />
 		</ant>
 
 		<!-- build the XGI feature -->
 		<ant antfile="build.xml" dir="build" target="all" inheritall="true">
-			<property name="build.script.name" value="build.xml" />
+			<property name="builder" value="${basedir}/buildConfiguration" />
+			<property name="libs" value="${basedir}/lib" />
 			<property name="topLevelElementType" value="feature" />
 			<property name="topLevelElementId" value="de.itemis.xtext.utils.gmf" />
 		</ant>

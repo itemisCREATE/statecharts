@@ -6,11 +6,11 @@
 	<!--<taskdef resource="net/sf/ant4eclipse/antlib.xml" classpath="../lib/ant4eclipse-0.6.0.jar" />-->
 	<taskdef resource="net/sf/antcontrib/antcontrib.properties" classpath="${libs}/ant-contrib-1.0b3.jar" />
 
+	<!-- change this property if the build.properties is placed in another folder -->
+	<property name="${builder}" value="${basedir}" />
+	
 	<!-- load the property configurations -->
 	<property file="${builder}/build.properties" />
-
-	<target name="prepare">
-	</target>
 
 	<target name="pde-build">
 		<property name="compilerArg" value="-encoding UTF-8" />
@@ -27,17 +27,9 @@
 		<ant antfile="${pde.build.script.path}" >
 			<property name="builder" value="${builder}" />
 		</ant>
-
-		<!-- gather compile logs -->
-		<unzip dest="${compileLogsDirectory}" overwrite="true">
-			<fileset dir="${buildDirectory}/features">
-				<include name="**/*.log.zip" />
-			</fileset>
-		</unzip>
 	</target>
 
 	<target name="all">
-		<antcall target="prepare" />
 		<antcall target="pde-build" />
 	</target>
 </project>
