@@ -5,9 +5,6 @@
 	<target name="p2.director">
 		<echo message="Installing ${p2.installIU} in version ${p2.version} from ${p2.artifact.repo} into ${p2.install.path}" />
 
-		<property name="p2.director.workspace" value="${p2.builder.workspace}" />
-		<mkdir dir="${p2.director.workspace}" />
-
 		<!-- see if a version was specified or not -->
 		<var name="installIU" value="${p2.installIU}"/>
 		<if>
@@ -26,7 +23,7 @@
 		<exec executable="${p2.builder}/eclipse" dir="${p2.builder}" failonerror="true">
 			<!--<arg line="-vm ${JavaSE-1.6-dir}/bin/java" />-->
 			<arg line="-application org.eclipse.equinox.p2.director" />
-			<arg line="-data ${p2.director.workspace}" />
+			<arg line="-data ${p2.builder.workspace}" />
 			<arg line="-clean" />
 			<arg line="-nosplash" />
 			<arg line="-debug" />
@@ -52,7 +49,7 @@
 		<!-- delete the metadata cache as well as the artifacts for unzipped bundles -->
 		<delete failonerror="false" includeEmptyDirs="true" dir="${p2.install.path}/p2/org.eclipse.equinox.p2.core/cache" />
 
-		<delete dir="${p2.director.workspace}" />
+		<delete dir="${p2.builder.workspace}" />
 		<echo message="done." />
 	</target>
 
