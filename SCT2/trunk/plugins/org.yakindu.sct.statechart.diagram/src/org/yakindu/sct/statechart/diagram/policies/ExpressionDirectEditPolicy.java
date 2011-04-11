@@ -30,7 +30,7 @@ import org.yakindu.sct.statechart.diagram.validation.GMFMarkerUtil;
 import org.yakindu.sct.statechart.diagram.validation.IMarkerType;
 
 import de.itemis.xtext.utils.gmf.directedit.IXtextAwareEditPart;
-import de.itemis.xtext.utils.gmf.viewers.XtextCellEditor;
+import de.itemis.xtext.utils.jface.viewers.XtextCellEditor;
 
 /**
  * 

@@ -11,6 +11,8 @@
 
 package de.itemis.xtext.utils.gmf.viewers;
 
+import de.itemis.xtext.utils.jface.viewers.XtextCellEditor;
+
 
 
 /**
