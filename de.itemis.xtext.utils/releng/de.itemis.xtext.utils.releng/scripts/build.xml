@@ -1,0 +1,43 @@
+<project name="run.xml" default="all" basedir=".">
+
+	<property environment="env" />
+
+	<!-- include additional libraries -->
+	<!--<taskdef resource="net/sf/ant4eclipse/antlib.xml" classpath="../lib/ant4eclipse-0.6.0.jar" />-->
+	<taskdef resource="net/sf/antcontrib/antcontrib.properties" classpath="${libs}/ant-contrib-1.0b3.jar" />
+
+	<!-- load the property configurations -->
+	<property file="${builder}/build.properties" />
+
+	<target name="prepare">
+	</target>
+
+	<target name="pde-build">
+		<property name="compilerArg" value="-encoding UTF-8" />
+		
+		<!-- call PDE build script -->
+		<path id="pde.build.script.path">
+			<fileset dir="${launcherLocation}/plugins">
+				<include name="org.eclipse.pde.build_*/scripts/build.xml" />
+			</fileset>
+		</path>
+		<property name="pde.build.script.path" refid="pde.build.script.path" />
+		
+		<echo message="Calling pde build script: ${pde.build.script.path} with builder ${builder}" />
+		<ant antfile="${pde.build.script.path}" >
+			<property name="builder" value="${builder}" />
+		</ant>
+
+		<!-- gather compile logs -->
+		<unzip dest="${compileLogsDirectory}" overwrite="true">
+			<fileset dir="${buildDirectory}/features">
+				<include name="**/*.log.zip" />
+			</fileset>
+		</unzip>
+	</target>
+
+	<target name="all">
+		<antcall target="prepare" />
+		<antcall target="pde-build" />
+	</target>
+</project>
