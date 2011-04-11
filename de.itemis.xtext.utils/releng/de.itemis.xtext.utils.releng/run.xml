@@ -74,8 +74,7 @@
 		<!-- Copy plugins -->
 		<echo>Copy plugins from ${repository} to ${buildDirectory}/plugins</echo>
 		<copy todir="${buildDirectory}/plugins">
-			<fileset dir="${buildWorkspace}/xji_repository/plugins" />
-			<fileset dir="${buildWorkspace}/xgi_repository/plugins" />
+			<fileset dir="${buildWorkspace}/XtextUtils_repository/plugins" />
 		</copy>
 	</target>
 
@@ -85,8 +84,7 @@
 		<!-- Copy features -->
 		<echo>Copy features from ${repository} to ${buildDirectory}/features</echo>
 		<copy todir="${buildDirectory}/features">
-			<fileset dir="${buildWorkspace}/xji_repository/features" />
-			<fileset dir="${buildWorkspace}/xgi_repository/features" />
+			<fileset dir="${buildWorkspace}/XtextUtils_repository/features" />
 		</copy>
 
 		<!-- remove the "-feature" suffix of all feature projects in the features folder -->
