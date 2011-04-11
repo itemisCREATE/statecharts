@@ -35,7 +35,8 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.xtext.ui;bundle-version="1.0.1",
  org.eclipse.xtext.ui.shared;bundle-version="1.0.1",
  de.itemis.xtext.utils.gmf;bundle-version="1.0.0",
- org.yakindu.sct.model.statechart.edit;bundle-version="1.0.0"
+ org.yakindu.sct.model.statechart.edit;bundle-version="1.0.0",
+ de.itemis.xtext.utils.jface;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.yakindu.sct.statechart.diagram,

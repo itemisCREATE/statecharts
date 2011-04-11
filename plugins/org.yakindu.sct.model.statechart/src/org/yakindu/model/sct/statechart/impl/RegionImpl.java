@@ -20,7 +20,6 @@ import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.model.sct.statechart.Region;
 import org.yakindu.model.sct.statechart.StatechartPackage;
-import org.yakindu.model.sct.statechart.Transition;
 import org.yakindu.model.sct.statechart.Vertex;
 
 /**

@@ -23,7 +23,7 @@ import org.yakindu.model.sct.statechart.StatechartPackage;
 import org.yakindu.sct.statechart.diagram.extensions.Extensions;
 import org.yakindu.sct.statechart.diagram.extensions.IExpressionsProvider;
 
-import de.itemis.xtext.utils.gmf.viewers.XtextCellEditor;
+import de.itemis.xtext.utils.jface.viewers.XtextCellEditor;
 
 /**
  * Creates an {@link XtextCellEditor} for all {@link ExpressionElement}s for the
