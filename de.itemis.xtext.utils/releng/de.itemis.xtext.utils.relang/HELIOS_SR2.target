@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde version="3.6"?>
+
+<target name="HELIOS_SR2">
+<locations>
+<location includeAllPlatforms="false" includeMode="planner" type="InstallableUnit">
+<unit id="org.eclipse.platform.ide" version="3.6.2.M20110210-1200"/>
+<repository location="http://download.eclipse.org/eclipse/updates/3.6"/>
+</location>
+<location includeAllPlatforms="false" includeMode="planner" type="InstallableUnit">
+<unit id="org.eclipse.emf.sdk.feature.group" version="2.6.1.v20100914-1218"/>
+<unit id="org.eclipse.gmf.runtime.notation.sdk.feature.group" version="1.4.1.v20100909-1000-47B28xGC7DxS9Q69KFQ3AHJL9t84"/>
+<unit id="org.eclipse.gmf.runtime.sdk.feature.group" version="1.4.2.v20110201-1000-67G49E9QYBfkXgwmVt5ksk7w9Vqi"/>
+<unit id="org.eclipse.xtext.sdk.feature.group" version="1.0.2.v201102150722"/>
+<repository location="http://download.eclipse.org/releases/helios/"/>
+</location>
+</locations>
+</target>
