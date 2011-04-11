@@ -18,7 +18,7 @@
    </license>
 
    <includes
-         id="de.itemis.xtext.utils.jface.source"
+         id="de.itemis.xtext.utils.gmf.source"
          version="0.0.0"/>
 
    <requires>
