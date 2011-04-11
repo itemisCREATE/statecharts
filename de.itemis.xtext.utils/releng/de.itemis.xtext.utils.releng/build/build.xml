@@ -1,11 +1,9 @@
 <project name="run.xml" default="all" basedir=".">
 
-	<property environment="env" />
-
 	<!-- include additional libraries -->
-	<!--<taskdef resource="net/sf/ant4eclipse/antlib.xml" classpath="../lib/ant4eclipse-0.6.0.jar" />-->
 	<taskdef resource="net/sf/antcontrib/antcontrib.properties" classpath="${libs}/ant-contrib-1.0b3.jar" />
 
+	<property environment="env" />
 	<!-- change this property if the build.properties is placed in another folder -->
 	<property name="${builder}" value="${basedir}" />
 	
