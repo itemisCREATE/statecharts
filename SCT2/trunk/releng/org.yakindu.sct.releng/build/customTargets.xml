@@ -77,6 +77,10 @@
 	<!-- Steps to do before the repositories are being processed -->
 	<!-- ===================================================================== -->
 	<target name="preProcessRepos">
+		<p2.mirror source="https://builds.itemis.de/jenkins/job/XTEXT_UTILS/lastSuccessfulBuild/artifact/buildDirectory/build_local_repository/" destination="file:${repoBaseLocation}/xtextutils">
+			<iu id="de.itemis.xtext.utils.jface.feature.group" />
+			<iu id="de.itemis.xtext.utils.gmf.feature.group" />
+		</p2.mirror>
 	</target>
 
 	<!-- ===================================================================== -->
