@@ -106,6 +106,8 @@
 	<target name="all">
 		<echo message="Preparing build directory ${buildDirectory}" />
 		<antcall target="prepareBuildDirectory" />
+		
+		<echo message="Using buildWorspace ${buildWorkspace}" />
 
 		<ant antfile="build.xml" dir="build" target="all" inheritall="true">
 			<property name="builder" value="${basedir}/build" />
