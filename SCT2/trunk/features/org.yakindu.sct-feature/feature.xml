@@ -20,6 +20,10 @@
    <requires>
       <import feature="de.itemis.xtext.utils.gmf" version="1.0.0" match="compatible"/>
    </requires>
+   
+    <includes
+         id="org.yakindu.sct.source"
+         version="0.0.0"/>
 
    <plugin
          id="org.yakindu.sct.model.statechart"
