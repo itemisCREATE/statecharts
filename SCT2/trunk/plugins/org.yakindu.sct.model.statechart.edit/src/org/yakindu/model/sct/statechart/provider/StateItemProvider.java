@@ -73,6 +73,7 @@ public class StateItemProvider
 			super.getPropertyDescriptors(object);
 
 			addExpressionPropertyDescriptor(object);
+			addReactionsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -100,6 +101,28 @@ public class StateItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Reactions feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addReactionsPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ReactiveElement_reactions_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ReactiveElement_reactions_feature", "_UI_ReactiveElement_type"),
+				 StatechartPackage.Literals.REACTIVE_ELEMENT__REACTIONS,
+				 false,
+				 false,
+				 false,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -111,6 +134,8 @@ public class StateItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
+			childrenFeatures.add(StatechartPackage.Literals.REACTIVE_ELEMENT__LOCAL_REACTIONS);
+			childrenFeatures.add(StatechartPackage.Literals.SCOPED_ELEMENT__SCOPES);
 			childrenFeatures.add(StatechartPackage.Literals.STATE__SUB_REGIONS);
 		}
 		return childrenFeatures;
@@ -169,6 +194,8 @@ public class StateItemProvider
 			case StatechartPackage.STATE__EXPRESSION:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
+			case StatechartPackage.STATE__LOCAL_REACTIONS:
+			case StatechartPackage.STATE__SCOPES:
 			case StatechartPackage.STATE__SUB_REGIONS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -186,6 +213,21 @@ public class StateItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StatechartPackage.Literals.REACTIVE_ELEMENT__LOCAL_REACTIONS,
+				 StatechartFactory.eINSTANCE.createReaction()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StatechartPackage.Literals.REACTIVE_ELEMENT__LOCAL_REACTIONS,
+				 StatechartFactory.eINSTANCE.createTransition()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StatechartPackage.Literals.SCOPED_ELEMENT__SCOPES,
+				 StatechartFactory.eINSTANCE.createScope()));
 
 		newChildDescriptors.add
 			(createChildParameter

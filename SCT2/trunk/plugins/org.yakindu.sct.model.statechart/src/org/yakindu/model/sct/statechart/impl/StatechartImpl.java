@@ -19,10 +19,15 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.model.sct.statechart.Event;
 import org.yakindu.model.sct.statechart.ExpressionElement;
+import org.yakindu.model.sct.statechart.Reaction;
+import org.yakindu.model.sct.statechart.ReactiveElement;
 import org.yakindu.model.sct.statechart.Region;
+import org.yakindu.model.sct.statechart.Scope;
+import org.yakindu.model.sct.statechart.ScopedElement;
 import org.yakindu.model.sct.statechart.Statechart;
 import org.yakindu.model.sct.statechart.StatechartPackage;
 import org.yakindu.model.sct.statechart.Variable;
@@ -35,9 +40,10 @@ import org.yakindu.model.sct.statechart.Variable;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.yakindu.model.sct.statechart.impl.StatechartImpl#getExpression <em>Expression</em>}</li>
+ *   <li>{@link org.yakindu.model.sct.statechart.impl.StatechartImpl#getReactions <em>Reactions</em>}</li>
+ *   <li>{@link org.yakindu.model.sct.statechart.impl.StatechartImpl#getLocalReactions <em>Local Reactions</em>}</li>
+ *   <li>{@link org.yakindu.model.sct.statechart.impl.StatechartImpl#getScopes <em>Scopes</em>}</li>
  *   <li>{@link org.yakindu.model.sct.statechart.impl.StatechartImpl#getRegions <em>Regions</em>}</li>
- *   <li>{@link org.yakindu.model.sct.statechart.impl.StatechartImpl#getVariables <em>Variables</em>}</li>
- *   <li>{@link org.yakindu.model.sct.statechart.impl.StatechartImpl#getEvents <em>Events</em>}</li>
  * </ul>
  * </p>
  *
@@ -72,6 +78,36 @@ public class StatechartImpl extends NamedElementImpl implements Statechart {
 	protected String expression = EXPRESSION_EDEFAULT;
 
 	/**
+	 * The cached value of the '{@link #getReactions() <em>Reactions</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReactions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Reaction> reactions;
+
+	/**
+	 * The cached value of the '{@link #getLocalReactions() <em>Local Reactions</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLocalReactions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Reaction> localReactions;
+
+	/**
+	 * The cached value of the '{@link #getScopes() <em>Scopes</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getScopes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Scope> scopes;
+
+	/**
 	 * The cached value of the '{@link #getRegions() <em>Regions</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -80,26 +116,6 @@ public class StatechartImpl extends NamedElementImpl implements Statechart {
 	 * @ordered
 	 */
 	protected EList<Region> regions;
-
-	/**
-	 * The cached value of the '{@link #getVariables() <em>Variables</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getVariables()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Variable> variables;
-
-	/**
-	 * The cached value of the '{@link #getEvents() <em>Events</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getEvents()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Event> events;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -146,6 +162,42 @@ public class StatechartImpl extends NamedElementImpl implements Statechart {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Reaction> getReactions() {
+		if (reactions == null) {
+			reactions = new EObjectResolvingEList<Reaction>(Reaction.class, this, StatechartPackage.STATECHART__REACTIONS);
+		}
+		return reactions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Reaction> getLocalReactions() {
+		if (localReactions == null) {
+			localReactions = new EObjectContainmentEList<Reaction>(Reaction.class, this, StatechartPackage.STATECHART__LOCAL_REACTIONS);
+		}
+		return localReactions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Scope> getScopes() {
+		if (scopes == null) {
+			scopes = new EObjectContainmentEList<Scope>(Scope.class, this, StatechartPackage.STATECHART__SCOPES);
+		}
+		return scopes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<Region> getRegions() {
 		if (regions == null) {
 			regions = new EObjectContainmentEList<Region>(Region.class, this, StatechartPackage.STATECHART__REGIONS);
@@ -158,39 +210,15 @@ public class StatechartImpl extends NamedElementImpl implements Statechart {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Variable> getVariables() {
-		if (variables == null) {
-			variables = new EObjectContainmentEList<Variable>(Variable.class, this, StatechartPackage.STATECHART__VARIABLES);
-		}
-		return variables;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<Event> getEvents() {
-		if (events == null) {
-			events = new EObjectContainmentEList<Event>(Event.class, this, StatechartPackage.STATECHART__EVENTS);
-		}
-		return events;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case StatechartPackage.STATECHART__LOCAL_REACTIONS:
+				return ((InternalEList<?>)getLocalReactions()).basicRemove(otherEnd, msgs);
+			case StatechartPackage.STATECHART__SCOPES:
+				return ((InternalEList<?>)getScopes()).basicRemove(otherEnd, msgs);
 			case StatechartPackage.STATECHART__REGIONS:
 				return ((InternalEList<?>)getRegions()).basicRemove(otherEnd, msgs);
-			case StatechartPackage.STATECHART__VARIABLES:
-				return ((InternalEList<?>)getVariables()).basicRemove(otherEnd, msgs);
-			case StatechartPackage.STATECHART__EVENTS:
-				return ((InternalEList<?>)getEvents()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -205,12 +233,14 @@ public class StatechartImpl extends NamedElementImpl implements Statechart {
 		switch (featureID) {
 			case StatechartPackage.STATECHART__EXPRESSION:
 				return getExpression();
+			case StatechartPackage.STATECHART__REACTIONS:
+				return getReactions();
+			case StatechartPackage.STATECHART__LOCAL_REACTIONS:
+				return getLocalReactions();
+			case StatechartPackage.STATECHART__SCOPES:
+				return getScopes();
 			case StatechartPackage.STATECHART__REGIONS:
 				return getRegions();
-			case StatechartPackage.STATECHART__VARIABLES:
-				return getVariables();
-			case StatechartPackage.STATECHART__EVENTS:
-				return getEvents();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -227,17 +257,17 @@ public class StatechartImpl extends NamedElementImpl implements Statechart {
 			case StatechartPackage.STATECHART__EXPRESSION:
 				setExpression((String)newValue);
 				return;
+			case StatechartPackage.STATECHART__LOCAL_REACTIONS:
+				getLocalReactions().clear();
+				getLocalReactions().addAll((Collection<? extends Reaction>)newValue);
+				return;
+			case StatechartPackage.STATECHART__SCOPES:
+				getScopes().clear();
+				getScopes().addAll((Collection<? extends Scope>)newValue);
+				return;
 			case StatechartPackage.STATECHART__REGIONS:
 				getRegions().clear();
 				getRegions().addAll((Collection<? extends Region>)newValue);
-				return;
-			case StatechartPackage.STATECHART__VARIABLES:
-				getVariables().clear();
-				getVariables().addAll((Collection<? extends Variable>)newValue);
-				return;
-			case StatechartPackage.STATECHART__EVENTS:
-				getEvents().clear();
-				getEvents().addAll((Collection<? extends Event>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -254,14 +284,14 @@ public class StatechartImpl extends NamedElementImpl implements Statechart {
 			case StatechartPackage.STATECHART__EXPRESSION:
 				setExpression(EXPRESSION_EDEFAULT);
 				return;
+			case StatechartPackage.STATECHART__LOCAL_REACTIONS:
+				getLocalReactions().clear();
+				return;
+			case StatechartPackage.STATECHART__SCOPES:
+				getScopes().clear();
+				return;
 			case StatechartPackage.STATECHART__REGIONS:
 				getRegions().clear();
-				return;
-			case StatechartPackage.STATECHART__VARIABLES:
-				getVariables().clear();
-				return;
-			case StatechartPackage.STATECHART__EVENTS:
-				getEvents().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -277,12 +307,14 @@ public class StatechartImpl extends NamedElementImpl implements Statechart {
 		switch (featureID) {
 			case StatechartPackage.STATECHART__EXPRESSION:
 				return EXPRESSION_EDEFAULT == null ? expression != null : !EXPRESSION_EDEFAULT.equals(expression);
+			case StatechartPackage.STATECHART__REACTIONS:
+				return reactions != null && !reactions.isEmpty();
+			case StatechartPackage.STATECHART__LOCAL_REACTIONS:
+				return localReactions != null && !localReactions.isEmpty();
+			case StatechartPackage.STATECHART__SCOPES:
+				return scopes != null && !scopes.isEmpty();
 			case StatechartPackage.STATECHART__REGIONS:
 				return regions != null && !regions.isEmpty();
-			case StatechartPackage.STATECHART__VARIABLES:
-				return variables != null && !variables.isEmpty();
-			case StatechartPackage.STATECHART__EVENTS:
-				return events != null && !events.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -300,6 +332,19 @@ public class StatechartImpl extends NamedElementImpl implements Statechart {
 				default: return -1;
 			}
 		}
+		if (baseClass == ReactiveElement.class) {
+			switch (derivedFeatureID) {
+				case StatechartPackage.STATECHART__REACTIONS: return StatechartPackage.REACTIVE_ELEMENT__REACTIONS;
+				case StatechartPackage.STATECHART__LOCAL_REACTIONS: return StatechartPackage.REACTIVE_ELEMENT__LOCAL_REACTIONS;
+				default: return -1;
+			}
+		}
+		if (baseClass == ScopedElement.class) {
+			switch (derivedFeatureID) {
+				case StatechartPackage.STATECHART__SCOPES: return StatechartPackage.SCOPED_ELEMENT__SCOPES;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -313,6 +358,19 @@ public class StatechartImpl extends NamedElementImpl implements Statechart {
 		if (baseClass == ExpressionElement.class) {
 			switch (baseFeatureID) {
 				case StatechartPackage.EXPRESSION_ELEMENT__EXPRESSION: return StatechartPackage.STATECHART__EXPRESSION;
+				default: return -1;
+			}
+		}
+		if (baseClass == ReactiveElement.class) {
+			switch (baseFeatureID) {
+				case StatechartPackage.REACTIVE_ELEMENT__REACTIONS: return StatechartPackage.STATECHART__REACTIONS;
+				case StatechartPackage.REACTIVE_ELEMENT__LOCAL_REACTIONS: return StatechartPackage.STATECHART__LOCAL_REACTIONS;
+				default: return -1;
+			}
+		}
+		if (baseClass == ScopedElement.class) {
+			switch (baseFeatureID) {
+				case StatechartPackage.SCOPED_ELEMENT__SCOPES: return StatechartPackage.STATECHART__SCOPES;
 				default: return -1;
 			}
 		}

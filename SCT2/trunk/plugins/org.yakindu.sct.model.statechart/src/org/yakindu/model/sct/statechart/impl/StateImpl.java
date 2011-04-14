@@ -19,9 +19,14 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.model.sct.statechart.ExpressionElement;
+import org.yakindu.model.sct.statechart.Reaction;
+import org.yakindu.model.sct.statechart.ReactiveElement;
 import org.yakindu.model.sct.statechart.Region;
+import org.yakindu.model.sct.statechart.Scope;
+import org.yakindu.model.sct.statechart.ScopedElement;
 import org.yakindu.model.sct.statechart.State;
 import org.yakindu.model.sct.statechart.StatechartPackage;
 
@@ -33,6 +38,9 @@ import org.yakindu.model.sct.statechart.StatechartPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.yakindu.model.sct.statechart.impl.StateImpl#getExpression <em>Expression</em>}</li>
+ *   <li>{@link org.yakindu.model.sct.statechart.impl.StateImpl#getReactions <em>Reactions</em>}</li>
+ *   <li>{@link org.yakindu.model.sct.statechart.impl.StateImpl#getLocalReactions <em>Local Reactions</em>}</li>
+ *   <li>{@link org.yakindu.model.sct.statechart.impl.StateImpl#getScopes <em>Scopes</em>}</li>
  *   <li>{@link org.yakindu.model.sct.statechart.impl.StateImpl#getSubRegions <em>Sub Regions</em>}</li>
  * </ul>
  * </p>
@@ -66,6 +74,36 @@ public class StateImpl extends VertexImpl implements State {
 	 * @ordered
 	 */
 	protected String expression = EXPRESSION_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getReactions() <em>Reactions</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReactions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Reaction> reactions;
+
+	/**
+	 * The cached value of the '{@link #getLocalReactions() <em>Local Reactions</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLocalReactions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Reaction> localReactions;
+
+	/**
+	 * The cached value of the '{@link #getScopes() <em>Scopes</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getScopes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Scope> scopes;
 
 	/**
 	 * The cached value of the '{@link #getSubRegions() <em>Sub Regions</em>}' containment reference list.
@@ -122,6 +160,42 @@ public class StateImpl extends VertexImpl implements State {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Reaction> getReactions() {
+		if (reactions == null) {
+			reactions = new EObjectResolvingEList<Reaction>(Reaction.class, this, StatechartPackage.STATE__REACTIONS);
+		}
+		return reactions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Reaction> getLocalReactions() {
+		if (localReactions == null) {
+			localReactions = new EObjectContainmentEList<Reaction>(Reaction.class, this, StatechartPackage.STATE__LOCAL_REACTIONS);
+		}
+		return localReactions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Scope> getScopes() {
+		if (scopes == null) {
+			scopes = new EObjectContainmentEList<Scope>(Scope.class, this, StatechartPackage.STATE__SCOPES);
+		}
+		return scopes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<Region> getSubRegions() {
 		if (subRegions == null) {
 			subRegions = new EObjectContainmentEList<Region>(Region.class, this, StatechartPackage.STATE__SUB_REGIONS);
@@ -137,6 +211,10 @@ public class StateImpl extends VertexImpl implements State {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case StatechartPackage.STATE__LOCAL_REACTIONS:
+				return ((InternalEList<?>)getLocalReactions()).basicRemove(otherEnd, msgs);
+			case StatechartPackage.STATE__SCOPES:
+				return ((InternalEList<?>)getScopes()).basicRemove(otherEnd, msgs);
 			case StatechartPackage.STATE__SUB_REGIONS:
 				return ((InternalEList<?>)getSubRegions()).basicRemove(otherEnd, msgs);
 		}
@@ -153,6 +231,12 @@ public class StateImpl extends VertexImpl implements State {
 		switch (featureID) {
 			case StatechartPackage.STATE__EXPRESSION:
 				return getExpression();
+			case StatechartPackage.STATE__REACTIONS:
+				return getReactions();
+			case StatechartPackage.STATE__LOCAL_REACTIONS:
+				return getLocalReactions();
+			case StatechartPackage.STATE__SCOPES:
+				return getScopes();
 			case StatechartPackage.STATE__SUB_REGIONS:
 				return getSubRegions();
 		}
@@ -170,6 +254,14 @@ public class StateImpl extends VertexImpl implements State {
 		switch (featureID) {
 			case StatechartPackage.STATE__EXPRESSION:
 				setExpression((String)newValue);
+				return;
+			case StatechartPackage.STATE__LOCAL_REACTIONS:
+				getLocalReactions().clear();
+				getLocalReactions().addAll((Collection<? extends Reaction>)newValue);
+				return;
+			case StatechartPackage.STATE__SCOPES:
+				getScopes().clear();
+				getScopes().addAll((Collection<? extends Scope>)newValue);
 				return;
 			case StatechartPackage.STATE__SUB_REGIONS:
 				getSubRegions().clear();
@@ -190,6 +282,12 @@ public class StateImpl extends VertexImpl implements State {
 			case StatechartPackage.STATE__EXPRESSION:
 				setExpression(EXPRESSION_EDEFAULT);
 				return;
+			case StatechartPackage.STATE__LOCAL_REACTIONS:
+				getLocalReactions().clear();
+				return;
+			case StatechartPackage.STATE__SCOPES:
+				getScopes().clear();
+				return;
 			case StatechartPackage.STATE__SUB_REGIONS:
 				getSubRegions().clear();
 				return;
@@ -207,6 +305,12 @@ public class StateImpl extends VertexImpl implements State {
 		switch (featureID) {
 			case StatechartPackage.STATE__EXPRESSION:
 				return EXPRESSION_EDEFAULT == null ? expression != null : !EXPRESSION_EDEFAULT.equals(expression);
+			case StatechartPackage.STATE__REACTIONS:
+				return reactions != null && !reactions.isEmpty();
+			case StatechartPackage.STATE__LOCAL_REACTIONS:
+				return localReactions != null && !localReactions.isEmpty();
+			case StatechartPackage.STATE__SCOPES:
+				return scopes != null && !scopes.isEmpty();
 			case StatechartPackage.STATE__SUB_REGIONS:
 				return subRegions != null && !subRegions.isEmpty();
 		}
@@ -226,6 +330,19 @@ public class StateImpl extends VertexImpl implements State {
 				default: return -1;
 			}
 		}
+		if (baseClass == ReactiveElement.class) {
+			switch (derivedFeatureID) {
+				case StatechartPackage.STATE__REACTIONS: return StatechartPackage.REACTIVE_ELEMENT__REACTIONS;
+				case StatechartPackage.STATE__LOCAL_REACTIONS: return StatechartPackage.REACTIVE_ELEMENT__LOCAL_REACTIONS;
+				default: return -1;
+			}
+		}
+		if (baseClass == ScopedElement.class) {
+			switch (derivedFeatureID) {
+				case StatechartPackage.STATE__SCOPES: return StatechartPackage.SCOPED_ELEMENT__SCOPES;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -239,6 +356,19 @@ public class StateImpl extends VertexImpl implements State {
 		if (baseClass == ExpressionElement.class) {
 			switch (baseFeatureID) {
 				case StatechartPackage.EXPRESSION_ELEMENT__EXPRESSION: return StatechartPackage.STATE__EXPRESSION;
+				default: return -1;
+			}
+		}
+		if (baseClass == ReactiveElement.class) {
+			switch (baseFeatureID) {
+				case StatechartPackage.REACTIVE_ELEMENT__REACTIONS: return StatechartPackage.STATE__REACTIONS;
+				case StatechartPackage.REACTIVE_ELEMENT__LOCAL_REACTIONS: return StatechartPackage.STATE__LOCAL_REACTIONS;
+				default: return -1;
+			}
+		}
+		if (baseClass == ScopedElement.class) {
+			switch (baseFeatureID) {
+				case StatechartPackage.SCOPED_ELEMENT__SCOPES: return StatechartPackage.STATE__SCOPES;
 				default: return -1;
 			}
 		}

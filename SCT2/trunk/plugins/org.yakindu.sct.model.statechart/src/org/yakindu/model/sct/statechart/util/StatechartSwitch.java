@@ -15,31 +15,25 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.yakindu.model.sct.statechart.*;
-import org.yakindu.model.sct.statechart.BooleanVariable;
-import org.yakindu.model.sct.statechart.BooleanVariableValue;
 import org.yakindu.model.sct.statechart.Choice;
-import org.yakindu.model.sct.statechart.DeepHistoryState;
+import org.yakindu.model.sct.statechart.Declaration;
 import org.yakindu.model.sct.statechart.Effect;
+import org.yakindu.model.sct.statechart.Entry;
 import org.yakindu.model.sct.statechart.Event;
+import org.yakindu.model.sct.statechart.Exit;
 import org.yakindu.model.sct.statechart.ExpressionElement;
 import org.yakindu.model.sct.statechart.FinalState;
-import org.yakindu.model.sct.statechart.Fork;
-import org.yakindu.model.sct.statechart.HistoryState;
-import org.yakindu.model.sct.statechart.InitialState;
-import org.yakindu.model.sct.statechart.IntegerVariable;
-import org.yakindu.model.sct.statechart.IntegerVariableValue;
-import org.yakindu.model.sct.statechart.Join;
 import org.yakindu.model.sct.statechart.Junction;
 import org.yakindu.model.sct.statechart.NamedElement;
 import org.yakindu.model.sct.statechart.Pseudostate;
-import org.yakindu.model.sct.statechart.RealVariable;
-import org.yakindu.model.sct.statechart.RealVariableValue;
+import org.yakindu.model.sct.statechart.Reaction;
+import org.yakindu.model.sct.statechart.ReactiveElement;
 import org.yakindu.model.sct.statechart.Region;
-import org.yakindu.model.sct.statechart.ShallowHistoryState;
+import org.yakindu.model.sct.statechart.Scope;
+import org.yakindu.model.sct.statechart.ScopedElement;
 import org.yakindu.model.sct.statechart.State;
 import org.yakindu.model.sct.statechart.Statechart;
 import org.yakindu.model.sct.statechart.StatechartPackage;
-import org.yakindu.model.sct.statechart.TimeEvent;
 import org.yakindu.model.sct.statechart.Transition;
 import org.yakindu.model.sct.statechart.Trigger;
 import org.yakindu.model.sct.statechart.Variable;
@@ -157,6 +151,7 @@ public class StatechartSwitch<T> {
 			case StatechartPackage.TRANSITION: {
 				Transition transition = (Transition)theEObject;
 				T result = caseTransition(transition);
+				if (result == null) result = caseReaction(transition);
 				if (result == null) result = caseExpressionElement(transition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -167,6 +162,8 @@ public class StatechartSwitch<T> {
 				if (result == null) result = caseState(finalState);
 				if (result == null) result = caseVertex(finalState);
 				if (result == null) result = caseExpressionElement(finalState);
+				if (result == null) result = caseReactiveElement(finalState);
+				if (result == null) result = caseScopedElement(finalState);
 				if (result == null) result = caseNamedElement(finalState);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -176,49 +173,17 @@ public class StatechartSwitch<T> {
 				T result = caseState(state);
 				if (result == null) result = caseVertex(state);
 				if (result == null) result = caseExpressionElement(state);
+				if (result == null) result = caseReactiveElement(state);
+				if (result == null) result = caseScopedElement(state);
 				if (result == null) result = caseNamedElement(state);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case StatechartPackage.REAL_VARIABLE_VALUE: {
-				RealVariableValue realVariableValue = (RealVariableValue)theEObject;
-				T result = caseRealVariableValue(realVariableValue);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case StatechartPackage.REAL_VARIABLE: {
-				RealVariable realVariable = (RealVariable)theEObject;
-				T result = caseRealVariable(realVariable);
-				if (result == null) result = caseVariable(realVariable);
-				if (result == null) result = caseDataElement(realVariable);
-				if (result == null) result = caseNamedElement(realVariable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case StatechartPackage.VARIABLE: {
 				Variable variable = (Variable)theEObject;
 				T result = caseVariable(variable);
-				if (result == null) result = caseDataElement(variable);
+				if (result == null) result = caseDeclaration(variable);
 				if (result == null) result = caseNamedElement(variable);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case StatechartPackage.SHALLOW_HISTORY_STATE: {
-				ShallowHistoryState shallowHistoryState = (ShallowHistoryState)theEObject;
-				T result = caseShallowHistoryState(shallowHistoryState);
-				if (result == null) result = caseHistoryState(shallowHistoryState);
-				if (result == null) result = casePseudostate(shallowHistoryState);
-				if (result == null) result = caseVertex(shallowHistoryState);
-				if (result == null) result = caseNamedElement(shallowHistoryState);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case StatechartPackage.HISTORY_STATE: {
-				HistoryState historyState = (HistoryState)theEObject;
-				T result = caseHistoryState(historyState);
-				if (result == null) result = casePseudostate(historyState);
-				if (result == null) result = caseVertex(historyState);
-				if (result == null) result = caseNamedElement(historyState);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -231,59 +196,10 @@ public class StatechartSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case StatechartPackage.DEEP_HISTORY_STATE: {
-				DeepHistoryState deepHistoryState = (DeepHistoryState)theEObject;
-				T result = caseDeepHistoryState(deepHistoryState);
-				if (result == null) result = caseHistoryState(deepHistoryState);
-				if (result == null) result = casePseudostate(deepHistoryState);
-				if (result == null) result = caseVertex(deepHistoryState);
-				if (result == null) result = caseNamedElement(deepHistoryState);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case StatechartPackage.BOOLEAN_VARIABLE: {
-				BooleanVariable booleanVariable = (BooleanVariable)theEObject;
-				T result = caseBooleanVariable(booleanVariable);
-				if (result == null) result = caseVariable(booleanVariable);
-				if (result == null) result = caseDataElement(booleanVariable);
-				if (result == null) result = caseNamedElement(booleanVariable);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case StatechartPackage.BOOLEAN_VARIABLE_VALUE: {
-				BooleanVariableValue booleanVariableValue = (BooleanVariableValue)theEObject;
-				T result = caseBooleanVariableValue(booleanVariableValue);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case StatechartPackage.JOIN: {
-				Join join = (Join)theEObject;
-				T result = caseJoin(join);
-				if (result == null) result = casePseudostate(join);
-				if (result == null) result = caseVertex(join);
-				if (result == null) result = caseNamedElement(join);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case StatechartPackage.INTEGER_VARIABLE: {
-				IntegerVariable integerVariable = (IntegerVariable)theEObject;
-				T result = caseIntegerVariable(integerVariable);
-				if (result == null) result = caseVariable(integerVariable);
-				if (result == null) result = caseDataElement(integerVariable);
-				if (result == null) result = caseNamedElement(integerVariable);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case StatechartPackage.INTEGER_VARIABLE_VALUE: {
-				IntegerVariableValue integerVariableValue = (IntegerVariableValue)theEObject;
-				T result = caseIntegerVariableValue(integerVariableValue);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case StatechartPackage.EVENT: {
 				Event event = (Event)theEObject;
 				T result = caseEvent(event);
-				if (result == null) result = caseDataElement(event);
+				if (result == null) result = caseDeclaration(event);
 				if (result == null) result = caseNamedElement(event);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -302,24 +218,17 @@ public class StatechartSwitch<T> {
 				T result = caseStatechart(statechart);
 				if (result == null) result = caseNamedElement(statechart);
 				if (result == null) result = caseExpressionElement(statechart);
+				if (result == null) result = caseReactiveElement(statechart);
+				if (result == null) result = caseScopedElement(statechart);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case StatechartPackage.FORK: {
-				Fork fork = (Fork)theEObject;
-				T result = caseFork(fork);
-				if (result == null) result = casePseudostate(fork);
-				if (result == null) result = caseVertex(fork);
-				if (result == null) result = caseNamedElement(fork);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case StatechartPackage.INITIAL_STATE: {
-				InitialState initialState = (InitialState)theEObject;
-				T result = caseInitialState(initialState);
-				if (result == null) result = casePseudostate(initialState);
-				if (result == null) result = caseVertex(initialState);
-				if (result == null) result = caseNamedElement(initialState);
+			case StatechartPackage.ENTRY: {
+				Entry entry = (Entry)theEObject;
+				T result = caseEntry(entry);
+				if (result == null) result = casePseudostate(entry);
+				if (result == null) result = caseVertex(entry);
+				if (result == null) result = caseNamedElement(entry);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -335,22 +244,49 @@ public class StatechartSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case StatechartPackage.TIME_EVENT: {
-				TimeEvent timeEvent = (TimeEvent)theEObject;
-				T result = caseTimeEvent(timeEvent);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case StatechartPackage.EXPRESSION_ELEMENT: {
 				ExpressionElement expressionElement = (ExpressionElement)theEObject;
 				T result = caseExpressionElement(expressionElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case StatechartPackage.DATA_ELEMENT: {
-				DataElement dataElement = (DataElement)theEObject;
-				T result = caseDataElement(dataElement);
-				if (result == null) result = caseNamedElement(dataElement);
+			case StatechartPackage.DECLARATION: {
+				Declaration declaration = (Declaration)theEObject;
+				T result = caseDeclaration(declaration);
+				if (result == null) result = caseNamedElement(declaration);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StatechartPackage.REACTION: {
+				Reaction reaction = (Reaction)theEObject;
+				T result = caseReaction(reaction);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StatechartPackage.REACTIVE_ELEMENT: {
+				ReactiveElement reactiveElement = (ReactiveElement)theEObject;
+				T result = caseReactiveElement(reactiveElement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StatechartPackage.EXIT: {
+				Exit exit = (Exit)theEObject;
+				T result = caseExit(exit);
+				if (result == null) result = casePseudostate(exit);
+				if (result == null) result = caseVertex(exit);
+				if (result == null) result = caseNamedElement(exit);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StatechartPackage.SCOPE: {
+				Scope scope = (Scope)theEObject;
+				T result = caseScope(scope);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StatechartPackage.SCOPED_ELEMENT: {
+				ScopedElement scopedElement = (ScopedElement)theEObject;
+				T result = caseScopedElement(scopedElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -464,36 +400,6 @@ public class StatechartSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Real Variable Value</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Real Variable Value</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseRealVariableValue(RealVariableValue object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Real Variable</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Real Variable</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseRealVariable(RealVariable object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Variable</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -509,36 +415,6 @@ public class StatechartSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Shallow History State</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Shallow History State</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseShallowHistoryState(ShallowHistoryState object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>History State</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>History State</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseHistoryState(HistoryState object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Junction</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -550,96 +426,6 @@ public class StatechartSwitch<T> {
 	 * @generated
 	 */
 	public T caseJunction(Junction object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Deep History State</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Deep History State</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseDeepHistoryState(DeepHistoryState object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Boolean Variable</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Boolean Variable</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseBooleanVariable(BooleanVariable object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Boolean Variable Value</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Boolean Variable Value</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseBooleanVariableValue(BooleanVariableValue object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Join</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Join</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseJoin(Join object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Integer Variable</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Integer Variable</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseIntegerVariable(IntegerVariable object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Integer Variable Value</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Integer Variable Value</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseIntegerVariableValue(IntegerVariableValue object) {
 		return null;
 	}
 
@@ -689,32 +475,17 @@ public class StatechartSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Fork</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Entry</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Fork</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Entry</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseFork(Fork object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Initial State</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Initial State</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseInitialState(InitialState object) {
+	public T caseEntry(Entry object) {
 		return null;
 	}
 
@@ -749,21 +520,6 @@ public class StatechartSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Time Event</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Time Event</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseTimeEvent(TimeEvent object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Expression Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -779,17 +535,92 @@ public class StatechartSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Data Element</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Declaration</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Data Element</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Declaration</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseDataElement(DataElement object) {
+	public T caseDeclaration(Declaration object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Reaction</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Reaction</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseReaction(Reaction object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Reactive Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Reactive Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseReactiveElement(ReactiveElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Exit</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Exit</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseExit(Exit object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Scope</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Scope</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseScope(Scope object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Scoped Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Scoped Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseScopedElement(ScopedElement object) {
 		return null;
 	}
 

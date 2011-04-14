@@ -172,27 +172,7 @@ public class RegionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StatechartPackage.Literals.REGION__VERTICES,
-				 StatechartFactory.eINSTANCE.createHistoryState()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StatechartPackage.Literals.REGION__VERTICES,
-				 StatechartFactory.eINSTANCE.createShallowHistoryState()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StatechartPackage.Literals.REGION__VERTICES,
 				 StatechartFactory.eINSTANCE.createJunction()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StatechartPackage.Literals.REGION__VERTICES,
-				 StatechartFactory.eINSTANCE.createDeepHistoryState()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StatechartPackage.Literals.REGION__VERTICES,
-				 StatechartFactory.eINSTANCE.createJoin()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -202,12 +182,12 @@ public class RegionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StatechartPackage.Literals.REGION__VERTICES,
-				 StatechartFactory.eINSTANCE.createFork()));
+				 StatechartFactory.eINSTANCE.createEntry()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(StatechartPackage.Literals.REGION__VERTICES,
-				 StatechartFactory.eINSTANCE.createInitialState()));
+				 StatechartFactory.eINSTANCE.createExit()));
 	}
 
 }

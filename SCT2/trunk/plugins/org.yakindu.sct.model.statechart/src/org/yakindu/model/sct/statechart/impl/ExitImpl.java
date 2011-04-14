@@ -12,19 +12,19 @@ package org.yakindu.model.sct.statechart.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.yakindu.model.sct.statechart.DataElement;
+import org.yakindu.model.sct.statechart.Exit;
 import org.yakindu.model.sct.statechart.StatechartPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Data Element</b></em>'.
+ * An implementation of the model object '<em><b>Exit</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public class DataElementImpl extends NamedElementImpl implements DataElement {
+public class ExitImpl extends PseudostateImpl implements Exit {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -37,7 +37,7 @@ public class DataElementImpl extends NamedElementImpl implements DataElement {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected DataElementImpl() {
+	protected ExitImpl() {
 		super();
 	}
 
@@ -48,7 +48,7 @@ public class DataElementImpl extends NamedElementImpl implements DataElement {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return StatechartPackage.Literals.DATA_ELEMENT;
+		return StatechartPackage.Literals.EXIT;
 	}
 
-} //DataElementImpl
+} //ExitImpl

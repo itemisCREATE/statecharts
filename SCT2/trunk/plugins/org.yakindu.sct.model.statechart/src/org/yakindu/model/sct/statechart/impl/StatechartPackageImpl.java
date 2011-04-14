@@ -12,36 +12,31 @@ package org.yakindu.model.sct.statechart.impl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-import org.yakindu.model.sct.statechart.BooleanVariable;
-import org.yakindu.model.sct.statechart.BooleanVariableValue;
 import org.yakindu.model.sct.statechart.Choice;
-import org.yakindu.model.sct.statechart.DataElement;
-import org.yakindu.model.sct.statechart.DeepHistoryState;
+import org.yakindu.model.sct.statechart.Declaration;
 import org.yakindu.model.sct.statechart.Effect;
+import org.yakindu.model.sct.statechart.Entry;
+import org.yakindu.model.sct.statechart.EntryKind;
 import org.yakindu.model.sct.statechart.Event;
+import org.yakindu.model.sct.statechart.Exit;
 import org.yakindu.model.sct.statechart.ExpressionElement;
 import org.yakindu.model.sct.statechart.FinalState;
-import org.yakindu.model.sct.statechart.Fork;
-import org.yakindu.model.sct.statechart.HistoryState;
-import org.yakindu.model.sct.statechart.InitialState;
-import org.yakindu.model.sct.statechart.IntegerVariable;
-import org.yakindu.model.sct.statechart.IntegerVariableValue;
-import org.yakindu.model.sct.statechart.Join;
 import org.yakindu.model.sct.statechart.Junction;
 import org.yakindu.model.sct.statechart.NamedElement;
 import org.yakindu.model.sct.statechart.Pseudostate;
-import org.yakindu.model.sct.statechart.RealVariable;
-import org.yakindu.model.sct.statechart.RealVariableValue;
+import org.yakindu.model.sct.statechart.Reaction;
+import org.yakindu.model.sct.statechart.ReactiveElement;
 import org.yakindu.model.sct.statechart.Region;
-import org.yakindu.model.sct.statechart.ShallowHistoryState;
+import org.yakindu.model.sct.statechart.Scope;
+import org.yakindu.model.sct.statechart.ScopedElement;
 import org.yakindu.model.sct.statechart.State;
 import org.yakindu.model.sct.statechart.Statechart;
 import org.yakindu.model.sct.statechart.StatechartFactory;
 import org.yakindu.model.sct.statechart.StatechartPackage;
-import org.yakindu.model.sct.statechart.TimeEvent;
 import org.yakindu.model.sct.statechart.Transition;
 import org.yakindu.model.sct.statechart.Trigger;
 import org.yakindu.model.sct.statechart.Variable;
@@ -115,20 +110,6 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass realVariableValueEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass realVariableEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass variableEClass = null;
 
 	/**
@@ -136,63 +117,7 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass shallowHistoryStateEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass historyStateEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass junctionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass deepHistoryStateEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass booleanVariableEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass booleanVariableValueEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass joinEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass integerVariableEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass integerVariableValueEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -220,14 +145,7 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass forkEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass initialStateEClass = null;
+	private EClass entryEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -248,13 +166,6 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass timeEventEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass expressionElementEClass = null;
 
 	/**
@@ -262,7 +173,49 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass dataElementEClass = null;
+	private EClass declarationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass reactionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass reactiveElementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass exitEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass scopeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass scopedElementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum entryKindEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -465,42 +418,6 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getRealVariableValue() {
-		return realVariableValueEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getRealVariableValue__() {
-		return (EReference)realVariableValueEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getRealVariable() {
-		return realVariableEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getRealVariable_Value() {
-		return (EReference)realVariableEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getVariable() {
 		return variableEClass;
 	}
@@ -510,134 +427,8 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getShallowHistoryState() {
-		return shallowHistoryStateEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getHistoryState() {
-		return historyStateEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getJunction() {
 		return junctionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getDeepHistoryState() {
-		return deepHistoryStateEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getBooleanVariable() {
-		return booleanVariableEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getBooleanVariable_Value() {
-		return (EReference)booleanVariableEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getBooleanVariableValue() {
-		return booleanVariableValueEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getBooleanVariableValue_Value() {
-		return (EAttribute)booleanVariableValueEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getBooleanVariableValue__() {
-		return (EReference)booleanVariableValueEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getJoin() {
-		return joinEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getIntegerVariable() {
-		return integerVariableEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getIntegerVariable_Value() {
-		return (EReference)integerVariableEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getIntegerVariableValue() {
-		return integerVariableValueEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getIntegerVariableValue_Value() {
-		return (EAttribute)integerVariableValueEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getIntegerVariableValue__() {
-		return (EReference)integerVariableValueEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -681,8 +472,8 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getStatechart_Variables() {
-		return (EReference)statechartEClass.getEStructuralFeatures().get(1);
+	public EClass getEntry() {
+		return entryEClass;
 	}
 
 	/**
@@ -690,26 +481,8 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getStatechart_Events() {
-		return (EReference)statechartEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getFork() {
-		return forkEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getInitialState() {
-		return initialStateEClass;
+	public EAttribute getEntry_Kind() {
+		return (EAttribute)entryEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -735,15 +508,6 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getTimeEvent() {
-		return timeEventEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getExpressionElement() {
 		return expressionElementEClass;
 	}
@@ -762,8 +526,134 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getDataElement() {
-		return dataElementEClass;
+	public EClass getDeclaration() {
+		return declarationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getReaction() {
+		return reactionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getReaction_Trigger() {
+		return (EReference)reactionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getReaction_Effect() {
+		return (EReference)reactionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getReactiveElement() {
+		return reactiveElementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getReactiveElement_Reactions() {
+		return (EReference)reactiveElementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getReactiveElement_LocalReactions() {
+		return (EReference)reactiveElementEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getExit() {
+		return exitEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getScope() {
+		return scopeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getScope_Declarations() {
+		return (EReference)scopeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getScope_Events() {
+		return (EReference)scopeEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getScope_Variables() {
+		return (EReference)scopeEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getScopedElement() {
+		return scopedElementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getScopedElement_Scopes() {
+		return (EReference)scopedElementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getEntryKind() {
+		return entryKindEEnum;
 	}
 
 	/**
@@ -816,37 +706,9 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 		stateEClass = createEClass(STATE);
 		createEReference(stateEClass, STATE__SUB_REGIONS);
 
-		realVariableValueEClass = createEClass(REAL_VARIABLE_VALUE);
-		createEReference(realVariableValueEClass, REAL_VARIABLE_VALUE__);
-
-		realVariableEClass = createEClass(REAL_VARIABLE);
-		createEReference(realVariableEClass, REAL_VARIABLE__VALUE);
-
 		variableEClass = createEClass(VARIABLE);
 
-		shallowHistoryStateEClass = createEClass(SHALLOW_HISTORY_STATE);
-
-		historyStateEClass = createEClass(HISTORY_STATE);
-
 		junctionEClass = createEClass(JUNCTION);
-
-		deepHistoryStateEClass = createEClass(DEEP_HISTORY_STATE);
-
-		booleanVariableEClass = createEClass(BOOLEAN_VARIABLE);
-		createEReference(booleanVariableEClass, BOOLEAN_VARIABLE__VALUE);
-
-		booleanVariableValueEClass = createEClass(BOOLEAN_VARIABLE_VALUE);
-		createEAttribute(booleanVariableValueEClass, BOOLEAN_VARIABLE_VALUE__VALUE);
-		createEReference(booleanVariableValueEClass, BOOLEAN_VARIABLE_VALUE__);
-
-		joinEClass = createEClass(JOIN);
-
-		integerVariableEClass = createEClass(INTEGER_VARIABLE);
-		createEReference(integerVariableEClass, INTEGER_VARIABLE__VALUE);
-
-		integerVariableValueEClass = createEClass(INTEGER_VARIABLE_VALUE);
-		createEAttribute(integerVariableValueEClass, INTEGER_VARIABLE_VALUE__VALUE);
-		createEReference(integerVariableValueEClass, INTEGER_VARIABLE_VALUE__);
 
 		eventEClass = createEClass(EVENT);
 
@@ -854,23 +716,39 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 
 		statechartEClass = createEClass(STATECHART);
 		createEReference(statechartEClass, STATECHART__REGIONS);
-		createEReference(statechartEClass, STATECHART__VARIABLES);
-		createEReference(statechartEClass, STATECHART__EVENTS);
 
-		forkEClass = createEClass(FORK);
-
-		initialStateEClass = createEClass(INITIAL_STATE);
+		entryEClass = createEClass(ENTRY);
+		createEAttribute(entryEClass, ENTRY__KIND);
 
 		triggerEClass = createEClass(TRIGGER);
 
 		effectEClass = createEClass(EFFECT);
 
-		timeEventEClass = createEClass(TIME_EVENT);
-
 		expressionElementEClass = createEClass(EXPRESSION_ELEMENT);
 		createEAttribute(expressionElementEClass, EXPRESSION_ELEMENT__EXPRESSION);
 
-		dataElementEClass = createEClass(DATA_ELEMENT);
+		declarationEClass = createEClass(DECLARATION);
+
+		reactionEClass = createEClass(REACTION);
+		createEReference(reactionEClass, REACTION__TRIGGER);
+		createEReference(reactionEClass, REACTION__EFFECT);
+
+		reactiveElementEClass = createEClass(REACTIVE_ELEMENT);
+		createEReference(reactiveElementEClass, REACTIVE_ELEMENT__REACTIONS);
+		createEReference(reactiveElementEClass, REACTIVE_ELEMENT__LOCAL_REACTIONS);
+
+		exitEClass = createEClass(EXIT);
+
+		scopeEClass = createEClass(SCOPE);
+		createEReference(scopeEClass, SCOPE__DECLARATIONS);
+		createEReference(scopeEClass, SCOPE__EVENTS);
+		createEReference(scopeEClass, SCOPE__VARIABLES);
+
+		scopedElementEClass = createEClass(SCOPED_ELEMENT);
+		createEReference(scopedElementEClass, SCOPED_ELEMENT__SCOPES);
+
+		// Create enums
+		entryKindEEnum = createEEnum(ENTRY_KIND);
 	}
 
 	/**
@@ -904,26 +782,24 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 		pseudostateEClass.getESuperTypes().add(this.getVertex());
 		vertexEClass.getESuperTypes().add(this.getNamedElement());
 		regionEClass.getESuperTypes().add(this.getNamedElement());
+		transitionEClass.getESuperTypes().add(this.getReaction());
 		transitionEClass.getESuperTypes().add(this.getExpressionElement());
 		finalStateEClass.getESuperTypes().add(this.getState());
 		stateEClass.getESuperTypes().add(this.getVertex());
 		stateEClass.getESuperTypes().add(this.getExpressionElement());
-		realVariableEClass.getESuperTypes().add(this.getVariable());
-		variableEClass.getESuperTypes().add(this.getDataElement());
-		shallowHistoryStateEClass.getESuperTypes().add(this.getHistoryState());
-		historyStateEClass.getESuperTypes().add(this.getPseudostate());
+		stateEClass.getESuperTypes().add(this.getReactiveElement());
+		stateEClass.getESuperTypes().add(this.getScopedElement());
+		variableEClass.getESuperTypes().add(this.getDeclaration());
 		junctionEClass.getESuperTypes().add(this.getPseudostate());
-		deepHistoryStateEClass.getESuperTypes().add(this.getHistoryState());
-		booleanVariableEClass.getESuperTypes().add(this.getVariable());
-		joinEClass.getESuperTypes().add(this.getPseudostate());
-		integerVariableEClass.getESuperTypes().add(this.getVariable());
-		eventEClass.getESuperTypes().add(this.getDataElement());
+		eventEClass.getESuperTypes().add(this.getDeclaration());
 		choiceEClass.getESuperTypes().add(this.getPseudostate());
 		statechartEClass.getESuperTypes().add(this.getNamedElement());
 		statechartEClass.getESuperTypes().add(this.getExpressionElement());
-		forkEClass.getESuperTypes().add(this.getPseudostate());
-		initialStateEClass.getESuperTypes().add(this.getPseudostate());
-		dataElementEClass.getESuperTypes().add(this.getNamedElement());
+		statechartEClass.getESuperTypes().add(this.getReactiveElement());
+		statechartEClass.getESuperTypes().add(this.getScopedElement());
+		entryEClass.getESuperTypes().add(this.getPseudostate());
+		declarationEClass.getESuperTypes().add(this.getNamedElement());
+		exitEClass.getESuperTypes().add(this.getPseudostate());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(pseudostateEClass, Pseudostate.class, "Pseudostate", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -948,37 +824,9 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 		initEClass(stateEClass, State.class, "State", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getState_SubRegions(), this.getRegion(), null, "subRegions", null, 0, -1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
-		initEClass(realVariableValueEClass, RealVariableValue.class, "RealVariableValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getRealVariableValue__(), this.getRealVariable(), this.getRealVariable_Value(), "_", null, 1, 1, RealVariableValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-
-		initEClass(realVariableEClass, RealVariable.class, "RealVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getRealVariable_Value(), this.getRealVariableValue(), this.getRealVariableValue__(), "value", null, 1, 1, RealVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-
 		initEClass(variableEClass, Variable.class, "Variable", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(shallowHistoryStateEClass, ShallowHistoryState.class, "ShallowHistoryState", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(historyStateEClass, HistoryState.class, "HistoryState", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
 		initEClass(junctionEClass, Junction.class, "Junction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(deepHistoryStateEClass, DeepHistoryState.class, "DeepHistoryState", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(booleanVariableEClass, BooleanVariable.class, "BooleanVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getBooleanVariable_Value(), this.getBooleanVariableValue(), this.getBooleanVariableValue__(), "value", null, 1, 1, BooleanVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-
-		initEClass(booleanVariableValueEClass, BooleanVariableValue.class, "BooleanVariableValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getBooleanVariableValue_Value(), ecorePackage.getEBoolean(), "value", null, 1, 1, BooleanVariableValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getBooleanVariableValue__(), this.getBooleanVariable(), this.getBooleanVariable_Value(), "_", null, 1, 1, BooleanVariableValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-
-		initEClass(joinEClass, Join.class, "Join", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(integerVariableEClass, IntegerVariable.class, "IntegerVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getIntegerVariable_Value(), this.getIntegerVariableValue(), this.getIntegerVariableValue__(), "value", null, 1, 1, IntegerVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-
-		initEClass(integerVariableValueEClass, IntegerVariableValue.class, "IntegerVariableValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getIntegerVariableValue_Value(), ecorePackage.getEInt(), "value", null, 1, 1, IntegerVariableValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getIntegerVariableValue__(), this.getIntegerVariable(), this.getIntegerVariable_Value(), "_", null, 1, 1, IntegerVariableValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(eventEClass, Event.class, "Event", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -986,23 +834,42 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 
 		initEClass(statechartEClass, Statechart.class, "Statechart", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getStatechart_Regions(), this.getRegion(), null, "regions", null, 1, -1, Statechart.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getStatechart_Variables(), this.getVariable(), null, "variables", null, 0, -1, Statechart.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getStatechart_Events(), this.getEvent(), null, "events", null, 0, -1, Statechart.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
-		initEClass(forkEClass, Fork.class, "Fork", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(initialStateEClass, InitialState.class, "InitialState", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(entryEClass, Entry.class, "Entry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getEntry_Kind(), this.getEntryKind(), "kind", null, 0, 1, Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(triggerEClass, Trigger.class, "Trigger", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(effectEClass, Effect.class, "Effect", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(timeEventEClass, TimeEvent.class, "TimeEvent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(expressionElementEClass, ExpressionElement.class, "ExpressionElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(expressionElementEClass, ExpressionElement.class, "ExpressionElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getExpressionElement_Expression(), ecorePackage.getEString(), "expression", null, 0, 1, ExpressionElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(dataElementEClass, DataElement.class, "DataElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(declarationEClass, Declaration.class, "Declaration", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(reactionEClass, Reaction.class, "Reaction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getReaction_Trigger(), this.getTrigger(), null, "trigger", null, 0, 1, Reaction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getReaction_Effect(), this.getEffect(), null, "effect", null, 0, 1, Reaction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(reactiveElementEClass, ReactiveElement.class, "ReactiveElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getReactiveElement_Reactions(), this.getReaction(), null, "reactions", null, 0, -1, ReactiveElement.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getReactiveElement_LocalReactions(), this.getReaction(), null, "localReactions", null, 0, -1, ReactiveElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(exitEClass, Exit.class, "Exit", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(scopeEClass, Scope.class, "Scope", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getScope_Declarations(), this.getDeclaration(), null, "declarations", null, 0, -1, Scope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getScope_Events(), this.getEvent(), null, "events", null, 0, -1, Scope.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getScope_Variables(), this.getVariable(), null, "variables", null, 0, -1, Scope.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+
+		initEClass(scopedElementEClass, ScopedElement.class, "ScopedElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getScopedElement_Scopes(), this.getScope(), null, "scopes", null, 0, -1, ScopedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		// Initialize enums and add enum literals
+		initEEnum(entryKindEEnum, EntryKind.class, "EntryKind");
+		addEEnumLiteral(entryKindEEnum, EntryKind.INITIAL);
+		addEEnumLiteral(entryKindEEnum, EntryKind.SHALLOW_HISTORY);
+		addEEnumLiteral(entryKindEEnum, EntryKind.DEEP_HISTORY);
 
 		// Create resource
 		createResource(eNS_URI);

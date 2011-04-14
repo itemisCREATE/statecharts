@@ -25,7 +25,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  *
  * @see org.yakindu.model.sct.statechart.StatechartPackage#getExpressionElement()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface ExpressionElement extends EObject {

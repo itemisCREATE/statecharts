@@ -23,7 +23,7 @@ import org.yakindu.model.sct.statechart.Variable;
  *
  * @generated
  */
-public abstract class VariableImpl extends DataElementImpl implements Variable {
+public abstract class VariableImpl extends DeclarationImpl implements Variable {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

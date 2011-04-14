@@ -21,7 +21,7 @@ package org.yakindu.model.sct.statechart;
  * @model abstract="true"
  * @generated
  */
-public interface Variable extends DataElement {
+public interface Variable extends Declaration {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
