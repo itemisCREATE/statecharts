@@ -2,10 +2,8 @@
 <ecore:EPackage xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="statechart"
-    nsURI="http:///statechart.ecore" nsPrefix="statechart">
-  <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-    <details key="documentation" value="Author:muelder.&#xA;Created:15.12.10 15:39.&#xA;Title:.&#xA;Comment:.&#xA;"/>
-  </eAnnotations>
+    nsURI="http://www.yakindu.org/sct/2.0.0" nsPrefix="statechart">
+  <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel"/>
   <eClassifiers xsi:type="ecore:EClass" name="Pseudostate" abstract="true" eSuperTypes="#//Vertex"/>
   <eClassifiers xsi:type="ecore:EClass" name="Vertex" abstract="true" eSuperTypes="#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="parentRegion" ordered="false"
@@ -23,68 +21,62 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="vertices" ordered="false"
         upperBound="-1" eType="#//Vertex" containment="true" eOpposite="#//Vertex/parentRegion"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Transition" eSuperTypes="#//ExpressionElement">
+  <eClassifiers xsi:type="ecore:EClass" name="Transition" eSuperTypes="#//Reaction #//ExpressionElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" ordered="false"
         lowerBound="1" eType="#//Vertex" eOpposite="#//Vertex/incomingTransitions"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" ordered="false"
         lowerBound="1" eType="#//Vertex" eOpposite="#//Vertex/outgoingTransitions"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FinalState" eSuperTypes="#//State"/>
-  <eClassifiers xsi:type="ecore:EClass" name="State" eSuperTypes="#//Vertex #//ExpressionElement">
+  <eClassifiers xsi:type="ecore:EClass" name="State" eSuperTypes="#//Vertex #//ExpressionElement #//ReactiveElement #//ScopedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="subRegions" ordered="false"
         upperBound="-1" eType="#//Region" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RealVariableValue">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="_" ordered="false" lowerBound="1"
-        eType="#//RealVariable" eOpposite="#//RealVariable/value"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RealVariable" eSuperTypes="#//Variable">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value" ordered="false"
-        lowerBound="1" eType="#//RealVariableValue" containment="true" eOpposite="#//RealVariableValue/_"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Variable" abstract="true" eSuperTypes="#//DataElement"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ShallowHistoryState" eSuperTypes="#//HistoryState"/>
-  <eClassifiers xsi:type="ecore:EClass" name="HistoryState" eSuperTypes="#//Pseudostate"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Variable" abstract="true" eSuperTypes="#//Declaration"/>
   <eClassifiers xsi:type="ecore:EClass" name="Junction" eSuperTypes="#//Pseudostate"/>
-  <eClassifiers xsi:type="ecore:EClass" name="DeepHistoryState" eSuperTypes="#//HistoryState"/>
-  <eClassifiers xsi:type="ecore:EClass" name="BooleanVariable" eSuperTypes="#//Variable">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value" ordered="false"
-        lowerBound="1" eType="#//BooleanVariableValue" containment="true" eOpposite="#//BooleanVariableValue/_"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="BooleanVariableValue">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" ordered="false"
-        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="_" ordered="false" lowerBound="1"
-        eType="#//BooleanVariable" eOpposite="#//BooleanVariable/value"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Join" eSuperTypes="#//Pseudostate"/>
-  <eClassifiers xsi:type="ecore:EClass" name="IntegerVariable" eSuperTypes="#//Variable">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value" ordered="false"
-        lowerBound="1" eType="#//IntegerVariableValue" containment="true" eOpposite="#//IntegerVariableValue/_"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="IntegerVariableValue">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" ordered="false"
-        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="_" ordered="false" lowerBound="1"
-        eType="#//IntegerVariable" eOpposite="#//IntegerVariable/value"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Event" eSuperTypes="#//DataElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Event" eSuperTypes="#//Declaration"/>
   <eClassifiers xsi:type="ecore:EClass" name="Choice" eSuperTypes="#//Pseudostate"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Statechart" eSuperTypes="#//NamedElement #//ExpressionElement">
+  <eClassifiers xsi:type="ecore:EClass" name="Statechart" eSuperTypes="#//NamedElement #//ExpressionElement #//ReactiveElement #//ScopedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="regions" ordered="false"
         lowerBound="1" upperBound="-1" eType="#//Region" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="variables" ordered="false"
-        upperBound="-1" eType="#//Variable" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="events" ordered="false"
-        upperBound="-1" eType="#//Event" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Fork" eSuperTypes="#//Pseudostate"/>
-  <eClassifiers xsi:type="ecore:EClass" name="InitialState" eSuperTypes="#//Pseudostate"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Entry" eSuperTypes="#//Pseudostate">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" eType="#//EntryKind"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Trigger" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="Effect" abstract="true"/>
-  <eClassifiers xsi:type="ecore:EClass" name="TimeEvent"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ExpressionElement">
+  <eClassifiers xsi:type="ecore:EClass" name="ExpressionElement" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="expression" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DataElement" eSuperTypes="#//NamedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Declaration" abstract="true" eSuperTypes="#//NamedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Reaction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="trigger" eType="#//Trigger"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="effect" eType="#//Effect"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="EntryKind">
+    <eLiterals name="initial" literal="INITIAL"/>
+    <eLiterals name="shallowHistory" value="1" literal="SHALLOW_HISTORY"/>
+    <eLiterals name="deepHistory" value="2" literal="DEEP_HISTORY"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ReactiveElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reactions" upperBound="-1"
+        eType="#//Reaction" changeable="false" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="localReactions" upperBound="-1"
+        eType="#//Reaction" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Exit" eSuperTypes="#//Pseudostate"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Scope">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="declarations" upperBound="-1"
+        eType="#//Declaration" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="events" upperBound="-1"
+        eType="#//Event" changeable="false" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variables" upperBound="-1"
+        eType="#//Variable" changeable="false" volatile="true" transient="true" derived="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ScopedElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="scopes" upperBound="-1"
+        eType="#//Scope" containment="true"/>
+  </eClassifiers>
 </ecore:EPackage>

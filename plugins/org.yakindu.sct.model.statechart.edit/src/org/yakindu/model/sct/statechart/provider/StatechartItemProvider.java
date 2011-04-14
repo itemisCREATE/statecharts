@@ -73,6 +73,7 @@ public class StatechartItemProvider
 			super.getPropertyDescriptors(object);
 
 			addExpressionPropertyDescriptor(object);
+			addReactionsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -100,6 +101,28 @@ public class StatechartItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Reactions feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addReactionsPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ReactiveElement_reactions_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ReactiveElement_reactions_feature", "_UI_ReactiveElement_type"),
+				 StatechartPackage.Literals.REACTIVE_ELEMENT__REACTIONS,
+				 false,
+				 false,
+				 false,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -111,9 +134,9 @@ public class StatechartItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
+			childrenFeatures.add(StatechartPackage.Literals.REACTIVE_ELEMENT__LOCAL_REACTIONS);
+			childrenFeatures.add(StatechartPackage.Literals.SCOPED_ELEMENT__SCOPES);
 			childrenFeatures.add(StatechartPackage.Literals.STATECHART__REGIONS);
-			childrenFeatures.add(StatechartPackage.Literals.STATECHART__VARIABLES);
-			childrenFeatures.add(StatechartPackage.Literals.STATECHART__EVENTS);
 		}
 		return childrenFeatures;
 	}
@@ -171,9 +194,9 @@ public class StatechartItemProvider
 			case StatechartPackage.STATECHART__EXPRESSION:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
+			case StatechartPackage.STATECHART__LOCAL_REACTIONS:
+			case StatechartPackage.STATECHART__SCOPES:
 			case StatechartPackage.STATECHART__REGIONS:
-			case StatechartPackage.STATECHART__VARIABLES:
-			case StatechartPackage.STATECHART__EVENTS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -193,28 +216,23 @@ public class StatechartItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(StatechartPackage.Literals.REACTIVE_ELEMENT__LOCAL_REACTIONS,
+				 StatechartFactory.eINSTANCE.createReaction()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StatechartPackage.Literals.REACTIVE_ELEMENT__LOCAL_REACTIONS,
+				 StatechartFactory.eINSTANCE.createTransition()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StatechartPackage.Literals.SCOPED_ELEMENT__SCOPES,
+				 StatechartFactory.eINSTANCE.createScope()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(StatechartPackage.Literals.STATECHART__REGIONS,
 				 StatechartFactory.eINSTANCE.createRegion()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StatechartPackage.Literals.STATECHART__VARIABLES,
-				 StatechartFactory.eINSTANCE.createRealVariable()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StatechartPackage.Literals.STATECHART__VARIABLES,
-				 StatechartFactory.eINSTANCE.createBooleanVariable()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StatechartPackage.Literals.STATECHART__VARIABLES,
-				 StatechartFactory.eINSTANCE.createIntegerVariable()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StatechartPackage.Literals.STATECHART__EVENTS,
-				 StatechartFactory.eINSTANCE.createEvent()));
 	}
 
 }

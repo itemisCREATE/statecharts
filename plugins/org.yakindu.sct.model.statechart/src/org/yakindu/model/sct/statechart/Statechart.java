@@ -21,8 +21,6 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.yakindu.model.sct.statechart.Statechart#getRegions <em>Regions</em>}</li>
- *   <li>{@link org.yakindu.model.sct.statechart.Statechart#getVariables <em>Variables</em>}</li>
- *   <li>{@link org.yakindu.model.sct.statechart.Statechart#getEvents <em>Events</em>}</li>
  * </ul>
  * </p>
  *
@@ -30,7 +28,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface Statechart extends NamedElement, ExpressionElement {
+public interface Statechart extends NamedElement, ExpressionElement, ReactiveElement, ScopedElement {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -53,37 +51,5 @@ public interface Statechart extends NamedElement, ExpressionElement {
 	 * @generated
 	 */
 	EList<Region> getRegions();
-
-	/**
-	 * Returns the value of the '<em><b>Variables</b></em>' containment reference list.
-	 * The list contents are of type {@link org.yakindu.model.sct.statechart.Variable}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Variables</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Variables</em>' containment reference list.
-	 * @see org.yakindu.model.sct.statechart.StatechartPackage#getStatechart_Variables()
-	 * @model containment="true" ordered="false"
-	 * @generated
-	 */
-	EList<Variable> getVariables();
-
-	/**
-	 * Returns the value of the '<em><b>Events</b></em>' containment reference list.
-	 * The list contents are of type {@link org.yakindu.model.sct.statechart.Event}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Events</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Events</em>' containment reference list.
-	 * @see org.yakindu.model.sct.statechart.StatechartPackage#getStatechart_Events()
-	 * @model containment="true" ordered="false"
-	 * @generated
-	 */
-	EList<Event> getEvents();
 
 } // Statechart

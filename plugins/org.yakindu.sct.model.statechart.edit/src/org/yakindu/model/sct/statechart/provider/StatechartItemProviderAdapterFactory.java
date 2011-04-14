@@ -177,98 +177,6 @@ public class StatechartItemProviderAdapterFactory extends StatechartAdapterFacto
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.yakindu.model.sct.statechart.RealVariableValue} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected RealVariableValueItemProvider realVariableValueItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.yakindu.model.sct.statechart.RealVariableValue}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createRealVariableValueAdapter() {
-		if (realVariableValueItemProvider == null) {
-			realVariableValueItemProvider = new RealVariableValueItemProvider(this);
-		}
-
-		return realVariableValueItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.yakindu.model.sct.statechart.RealVariable} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected RealVariableItemProvider realVariableItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.yakindu.model.sct.statechart.RealVariable}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createRealVariableAdapter() {
-		if (realVariableItemProvider == null) {
-			realVariableItemProvider = new RealVariableItemProvider(this);
-		}
-
-		return realVariableItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.yakindu.model.sct.statechart.ShallowHistoryState} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected ShallowHistoryStateItemProvider shallowHistoryStateItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.yakindu.model.sct.statechart.ShallowHistoryState}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createShallowHistoryStateAdapter() {
-		if (shallowHistoryStateItemProvider == null) {
-			shallowHistoryStateItemProvider = new ShallowHistoryStateItemProvider(this);
-		}
-
-		return shallowHistoryStateItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.yakindu.model.sct.statechart.HistoryState} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected HistoryStateItemProvider historyStateItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.yakindu.model.sct.statechart.HistoryState}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createHistoryStateAdapter() {
-		if (historyStateItemProvider == null) {
-			historyStateItemProvider = new HistoryStateItemProvider(this);
-		}
-
-		return historyStateItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link org.yakindu.model.sct.statechart.Junction} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -289,144 +197,6 @@ public class StatechartItemProviderAdapterFactory extends StatechartAdapterFacto
 		}
 
 		return junctionItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.yakindu.model.sct.statechart.DeepHistoryState} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected DeepHistoryStateItemProvider deepHistoryStateItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.yakindu.model.sct.statechart.DeepHistoryState}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createDeepHistoryStateAdapter() {
-		if (deepHistoryStateItemProvider == null) {
-			deepHistoryStateItemProvider = new DeepHistoryStateItemProvider(this);
-		}
-
-		return deepHistoryStateItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.yakindu.model.sct.statechart.BooleanVariable} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected BooleanVariableItemProvider booleanVariableItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.yakindu.model.sct.statechart.BooleanVariable}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createBooleanVariableAdapter() {
-		if (booleanVariableItemProvider == null) {
-			booleanVariableItemProvider = new BooleanVariableItemProvider(this);
-		}
-
-		return booleanVariableItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.yakindu.model.sct.statechart.BooleanVariableValue} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected BooleanVariableValueItemProvider booleanVariableValueItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.yakindu.model.sct.statechart.BooleanVariableValue}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createBooleanVariableValueAdapter() {
-		if (booleanVariableValueItemProvider == null) {
-			booleanVariableValueItemProvider = new BooleanVariableValueItemProvider(this);
-		}
-
-		return booleanVariableValueItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.yakindu.model.sct.statechart.Join} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected JoinItemProvider joinItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.yakindu.model.sct.statechart.Join}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createJoinAdapter() {
-		if (joinItemProvider == null) {
-			joinItemProvider = new JoinItemProvider(this);
-		}
-
-		return joinItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.yakindu.model.sct.statechart.IntegerVariable} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected IntegerVariableItemProvider integerVariableItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.yakindu.model.sct.statechart.IntegerVariable}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createIntegerVariableAdapter() {
-		if (integerVariableItemProvider == null) {
-			integerVariableItemProvider = new IntegerVariableItemProvider(this);
-		}
-
-		return integerVariableItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.yakindu.model.sct.statechart.IntegerVariableValue} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected IntegerVariableValueItemProvider integerVariableValueItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.yakindu.model.sct.statechart.IntegerVariableValue}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createIntegerVariableValueAdapter() {
-		if (integerVariableValueItemProvider == null) {
-			integerVariableValueItemProvider = new IntegerVariableValueItemProvider(this);
-		}
-
-		return integerVariableValueItemProvider;
 	}
 
 	/**
@@ -499,118 +269,95 @@ public class StatechartItemProviderAdapterFactory extends StatechartAdapterFacto
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.yakindu.model.sct.statechart.Fork} instances.
+	 * This keeps track of the one adapter used for all {@link org.yakindu.model.sct.statechart.Entry} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ForkItemProvider forkItemProvider;
+	protected EntryItemProvider entryItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.yakindu.model.sct.statechart.Fork}.
+	 * This creates an adapter for a {@link org.yakindu.model.sct.statechart.Entry}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createForkAdapter() {
-		if (forkItemProvider == null) {
-			forkItemProvider = new ForkItemProvider(this);
+	public Adapter createEntryAdapter() {
+		if (entryItemProvider == null) {
+			entryItemProvider = new EntryItemProvider(this);
 		}
 
-		return forkItemProvider;
+		return entryItemProvider;
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.yakindu.model.sct.statechart.InitialState} instances.
+	 * This keeps track of the one adapter used for all {@link org.yakindu.model.sct.statechart.Reaction} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected InitialStateItemProvider initialStateItemProvider;
+	protected ReactionItemProvider reactionItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.yakindu.model.sct.statechart.InitialState}.
+	 * This creates an adapter for a {@link org.yakindu.model.sct.statechart.Reaction}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createInitialStateAdapter() {
-		if (initialStateItemProvider == null) {
-			initialStateItemProvider = new InitialStateItemProvider(this);
+	public Adapter createReactionAdapter() {
+		if (reactionItemProvider == null) {
+			reactionItemProvider = new ReactionItemProvider(this);
 		}
 
-		return initialStateItemProvider;
+		return reactionItemProvider;
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.yakindu.model.sct.statechart.TimeEvent} instances.
+	 * This keeps track of the one adapter used for all {@link org.yakindu.model.sct.statechart.Exit} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected TimeEventItemProvider timeEventItemProvider;
+	protected ExitItemProvider exitItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.yakindu.model.sct.statechart.TimeEvent}.
+	 * This creates an adapter for a {@link org.yakindu.model.sct.statechart.Exit}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createTimeEventAdapter() {
-		if (timeEventItemProvider == null) {
-			timeEventItemProvider = new TimeEventItemProvider(this);
+	public Adapter createExitAdapter() {
+		if (exitItemProvider == null) {
+			exitItemProvider = new ExitItemProvider(this);
 		}
 
-		return timeEventItemProvider;
+		return exitItemProvider;
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.yakindu.model.sct.statechart.ExpressionElement} instances.
+	 * This keeps track of the one adapter used for all {@link org.yakindu.model.sct.statechart.Scope} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ExpressionElementItemProvider expressionElementItemProvider;
+	protected ScopeItemProvider scopeItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.yakindu.model.sct.statechart.ExpressionElement}.
+	 * This creates an adapter for a {@link org.yakindu.model.sct.statechart.Scope}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createExpressionElementAdapter() {
-		if (expressionElementItemProvider == null) {
-			expressionElementItemProvider = new ExpressionElementItemProvider(this);
+	public Adapter createScopeAdapter() {
+		if (scopeItemProvider == null) {
+			scopeItemProvider = new ScopeItemProvider(this);
 		}
 
-		return expressionElementItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.yakindu.model.sct.statechart.DataElement} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected DataElementItemProvider dataElementItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.yakindu.model.sct.statechart.DataElement}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createDataElementAdapter() {
-		if (dataElementItemProvider == null) {
-			dataElementItemProvider = new DataElementItemProvider(this);
-		}
-
-		return dataElementItemProvider;
+		return scopeItemProvider;
 	}
 
 	/**
@@ -716,25 +463,14 @@ public class StatechartItemProviderAdapterFactory extends StatechartAdapterFacto
 		if (transitionItemProvider != null) transitionItemProvider.dispose();
 		if (finalStateItemProvider != null) finalStateItemProvider.dispose();
 		if (stateItemProvider != null) stateItemProvider.dispose();
-		if (realVariableValueItemProvider != null) realVariableValueItemProvider.dispose();
-		if (realVariableItemProvider != null) realVariableItemProvider.dispose();
-		if (shallowHistoryStateItemProvider != null) shallowHistoryStateItemProvider.dispose();
-		if (historyStateItemProvider != null) historyStateItemProvider.dispose();
 		if (junctionItemProvider != null) junctionItemProvider.dispose();
-		if (deepHistoryStateItemProvider != null) deepHistoryStateItemProvider.dispose();
-		if (booleanVariableItemProvider != null) booleanVariableItemProvider.dispose();
-		if (booleanVariableValueItemProvider != null) booleanVariableValueItemProvider.dispose();
-		if (joinItemProvider != null) joinItemProvider.dispose();
-		if (integerVariableItemProvider != null) integerVariableItemProvider.dispose();
-		if (integerVariableValueItemProvider != null) integerVariableValueItemProvider.dispose();
 		if (eventItemProvider != null) eventItemProvider.dispose();
 		if (choiceItemProvider != null) choiceItemProvider.dispose();
 		if (statechartItemProvider != null) statechartItemProvider.dispose();
-		if (forkItemProvider != null) forkItemProvider.dispose();
-		if (initialStateItemProvider != null) initialStateItemProvider.dispose();
-		if (timeEventItemProvider != null) timeEventItemProvider.dispose();
-		if (expressionElementItemProvider != null) expressionElementItemProvider.dispose();
-		if (dataElementItemProvider != null) dataElementItemProvider.dispose();
+		if (entryItemProvider != null) entryItemProvider.dispose();
+		if (reactionItemProvider != null) reactionItemProvider.dispose();
+		if (exitItemProvider != null) exitItemProvider.dispose();
+		if (scopeItemProvider != null) scopeItemProvider.dispose();
 	}
 
 }

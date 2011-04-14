@@ -21,7 +21,7 @@ package org.yakindu.model.sct.statechart;
  * @model
  * @generated
  */
-public interface Event extends DataElement {
+public interface Event extends Declaration {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

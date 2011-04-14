@@ -30,7 +30,7 @@ import org.yakindu.model.sct.statechart.StatechartPackage;
  *
  * @generated
  */
-public class ExpressionElementImpl extends EObjectImpl implements ExpressionElement {
+public abstract class ExpressionElementImpl extends EObjectImpl implements ExpressionElement {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

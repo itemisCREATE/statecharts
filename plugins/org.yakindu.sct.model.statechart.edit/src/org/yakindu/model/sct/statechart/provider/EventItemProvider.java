@@ -31,7 +31,7 @@ import org.yakindu.model.sct.statechart.Event;
  * @generated
  */
 public class EventItemProvider
-	extends DataElementItemProvider
+	extends DeclarationItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,

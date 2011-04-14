@@ -73,42 +73,6 @@ public interface StatechartFactory extends EFactory {
 	State createState();
 
 	/**
-	 * Returns a new object of class '<em>Real Variable Value</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Real Variable Value</em>'.
-	 * @generated
-	 */
-	RealVariableValue createRealVariableValue();
-
-	/**
-	 * Returns a new object of class '<em>Real Variable</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Real Variable</em>'.
-	 * @generated
-	 */
-	RealVariable createRealVariable();
-
-	/**
-	 * Returns a new object of class '<em>Shallow History State</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Shallow History State</em>'.
-	 * @generated
-	 */
-	ShallowHistoryState createShallowHistoryState();
-
-	/**
-	 * Returns a new object of class '<em>History State</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>History State</em>'.
-	 * @generated
-	 */
-	HistoryState createHistoryState();
-
-	/**
 	 * Returns a new object of class '<em>Junction</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -116,60 +80,6 @@ public interface StatechartFactory extends EFactory {
 	 * @generated
 	 */
 	Junction createJunction();
-
-	/**
-	 * Returns a new object of class '<em>Deep History State</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Deep History State</em>'.
-	 * @generated
-	 */
-	DeepHistoryState createDeepHistoryState();
-
-	/**
-	 * Returns a new object of class '<em>Boolean Variable</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Boolean Variable</em>'.
-	 * @generated
-	 */
-	BooleanVariable createBooleanVariable();
-
-	/**
-	 * Returns a new object of class '<em>Boolean Variable Value</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Boolean Variable Value</em>'.
-	 * @generated
-	 */
-	BooleanVariableValue createBooleanVariableValue();
-
-	/**
-	 * Returns a new object of class '<em>Join</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Join</em>'.
-	 * @generated
-	 */
-	Join createJoin();
-
-	/**
-	 * Returns a new object of class '<em>Integer Variable</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Integer Variable</em>'.
-	 * @generated
-	 */
-	IntegerVariable createIntegerVariable();
-
-	/**
-	 * Returns a new object of class '<em>Integer Variable Value</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Integer Variable Value</em>'.
-	 * @generated
-	 */
-	IntegerVariableValue createIntegerVariableValue();
 
 	/**
 	 * Returns a new object of class '<em>Event</em>'.
@@ -199,49 +109,40 @@ public interface StatechartFactory extends EFactory {
 	Statechart createStatechart();
 
 	/**
-	 * Returns a new object of class '<em>Fork</em>'.
+	 * Returns a new object of class '<em>Entry</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Fork</em>'.
+	 * @return a new object of class '<em>Entry</em>'.
 	 * @generated
 	 */
-	Fork createFork();
+	Entry createEntry();
 
 	/**
-	 * Returns a new object of class '<em>Initial State</em>'.
+	 * Returns a new object of class '<em>Reaction</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Initial State</em>'.
+	 * @return a new object of class '<em>Reaction</em>'.
 	 * @generated
 	 */
-	InitialState createInitialState();
+	Reaction createReaction();
 
 	/**
-	 * Returns a new object of class '<em>Time Event</em>'.
+	 * Returns a new object of class '<em>Exit</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Time Event</em>'.
+	 * @return a new object of class '<em>Exit</em>'.
 	 * @generated
 	 */
-	TimeEvent createTimeEvent();
+	Exit createExit();
 
 	/**
-	 * Returns a new object of class '<em>Expression Element</em>'.
+	 * Returns a new object of class '<em>Scope</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Expression Element</em>'.
+	 * @return a new object of class '<em>Scope</em>'.
 	 * @generated
 	 */
-	ExpressionElement createExpressionElement();
-
-	/**
-	 * Returns a new object of class '<em>Data Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Data Element</em>'.
-	 * @generated
-	 */
-	DataElement createDataElement();
+	Scope createScope();
 
 	/**
 	 * Returns the package supported by this factory.

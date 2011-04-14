@@ -11,34 +11,26 @@
 package org.yakindu.model.sct.statechart.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.yakindu.model.sct.statechart.*;
-import org.yakindu.model.sct.statechart.BooleanVariable;
-import org.yakindu.model.sct.statechart.BooleanVariableValue;
 import org.yakindu.model.sct.statechart.Choice;
-import org.yakindu.model.sct.statechart.DeepHistoryState;
+import org.yakindu.model.sct.statechart.Entry;
+import org.yakindu.model.sct.statechart.EntryKind;
 import org.yakindu.model.sct.statechart.Event;
-import org.yakindu.model.sct.statechart.ExpressionElement;
+import org.yakindu.model.sct.statechart.Exit;
 import org.yakindu.model.sct.statechart.FinalState;
-import org.yakindu.model.sct.statechart.Fork;
-import org.yakindu.model.sct.statechart.HistoryState;
-import org.yakindu.model.sct.statechart.InitialState;
-import org.yakindu.model.sct.statechart.IntegerVariable;
-import org.yakindu.model.sct.statechart.IntegerVariableValue;
-import org.yakindu.model.sct.statechart.Join;
 import org.yakindu.model.sct.statechart.Junction;
-import org.yakindu.model.sct.statechart.RealVariable;
-import org.yakindu.model.sct.statechart.RealVariableValue;
+import org.yakindu.model.sct.statechart.Reaction;
 import org.yakindu.model.sct.statechart.Region;
-import org.yakindu.model.sct.statechart.ShallowHistoryState;
+import org.yakindu.model.sct.statechart.Scope;
 import org.yakindu.model.sct.statechart.State;
 import org.yakindu.model.sct.statechart.Statechart;
 import org.yakindu.model.sct.statechart.StatechartFactory;
 import org.yakindu.model.sct.statechart.StatechartPackage;
-import org.yakindu.model.sct.statechart.TimeEvent;
 import org.yakindu.model.sct.statechart.Transition;
 
 /**
@@ -63,7 +55,7 @@ public class StatechartFactoryImpl extends EFactoryImpl implements StatechartFac
 	 */
 	public static StatechartFactory init() {
 		try {
-			StatechartFactory theStatechartFactory = (StatechartFactory)EPackage.Registry.INSTANCE.getEFactory("http:///statechart.ecore"); 
+			StatechartFactory theStatechartFactory = (StatechartFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.yakindu.org/sct/2.0.0"); 
 			if (theStatechartFactory != null) {
 				return theStatechartFactory;
 			}
@@ -96,27 +88,46 @@ public class StatechartFactoryImpl extends EFactoryImpl implements StatechartFac
 			case StatechartPackage.TRANSITION: return createTransition();
 			case StatechartPackage.FINAL_STATE: return createFinalState();
 			case StatechartPackage.STATE: return createState();
-			case StatechartPackage.REAL_VARIABLE_VALUE: return createRealVariableValue();
-			case StatechartPackage.REAL_VARIABLE: return createRealVariable();
-			case StatechartPackage.SHALLOW_HISTORY_STATE: return createShallowHistoryState();
-			case StatechartPackage.HISTORY_STATE: return createHistoryState();
 			case StatechartPackage.JUNCTION: return createJunction();
-			case StatechartPackage.DEEP_HISTORY_STATE: return createDeepHistoryState();
-			case StatechartPackage.BOOLEAN_VARIABLE: return createBooleanVariable();
-			case StatechartPackage.BOOLEAN_VARIABLE_VALUE: return createBooleanVariableValue();
-			case StatechartPackage.JOIN: return createJoin();
-			case StatechartPackage.INTEGER_VARIABLE: return createIntegerVariable();
-			case StatechartPackage.INTEGER_VARIABLE_VALUE: return createIntegerVariableValue();
 			case StatechartPackage.EVENT: return createEvent();
 			case StatechartPackage.CHOICE: return createChoice();
 			case StatechartPackage.STATECHART: return createStatechart();
-			case StatechartPackage.FORK: return createFork();
-			case StatechartPackage.INITIAL_STATE: return createInitialState();
-			case StatechartPackage.TIME_EVENT: return createTimeEvent();
-			case StatechartPackage.EXPRESSION_ELEMENT: return createExpressionElement();
-			case StatechartPackage.DATA_ELEMENT: return createDataElement();
+			case StatechartPackage.ENTRY: return createEntry();
+			case StatechartPackage.REACTION: return createReaction();
+			case StatechartPackage.EXIT: return createExit();
+			case StatechartPackage.SCOPE: return createScope();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object createFromString(EDataType eDataType, String initialValue) {
+		switch (eDataType.getClassifierID()) {
+			case StatechartPackage.ENTRY_KIND:
+				return createEntryKindFromString(eDataType, initialValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String convertToString(EDataType eDataType, Object instanceValue) {
+		switch (eDataType.getClassifierID()) {
+			case StatechartPackage.ENTRY_KIND:
+				return convertEntryKindToString(eDataType, instanceValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
 	}
 
@@ -165,109 +176,9 @@ public class StatechartFactoryImpl extends EFactoryImpl implements StatechartFac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RealVariableValue createRealVariableValue() {
-		RealVariableValueImpl realVariableValue = new RealVariableValueImpl();
-		return realVariableValue;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public RealVariable createRealVariable() {
-		RealVariableImpl realVariable = new RealVariableImpl();
-		return realVariable;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ShallowHistoryState createShallowHistoryState() {
-		ShallowHistoryStateImpl shallowHistoryState = new ShallowHistoryStateImpl();
-		return shallowHistoryState;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public HistoryState createHistoryState() {
-		HistoryStateImpl historyState = new HistoryStateImpl();
-		return historyState;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public Junction createJunction() {
 		JunctionImpl junction = new JunctionImpl();
 		return junction;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public DeepHistoryState createDeepHistoryState() {
-		DeepHistoryStateImpl deepHistoryState = new DeepHistoryStateImpl();
-		return deepHistoryState;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public BooleanVariable createBooleanVariable() {
-		BooleanVariableImpl booleanVariable = new BooleanVariableImpl();
-		return booleanVariable;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public BooleanVariableValue createBooleanVariableValue() {
-		BooleanVariableValueImpl booleanVariableValue = new BooleanVariableValueImpl();
-		return booleanVariableValue;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Join createJoin() {
-		JoinImpl join = new JoinImpl();
-		return join;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public IntegerVariable createIntegerVariable() {
-		IntegerVariableImpl integerVariable = new IntegerVariableImpl();
-		return integerVariable;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public IntegerVariableValue createIntegerVariableValue() {
-		IntegerVariableValueImpl integerVariableValue = new IntegerVariableValueImpl();
-		return integerVariableValue;
 	}
 
 	/**
@@ -305,9 +216,9 @@ public class StatechartFactoryImpl extends EFactoryImpl implements StatechartFac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Fork createFork() {
-		ForkImpl fork = new ForkImpl();
-		return fork;
+	public Entry createEntry() {
+		EntryImpl entry = new EntryImpl();
+		return entry;
 	}
 
 	/**
@@ -315,9 +226,9 @@ public class StatechartFactoryImpl extends EFactoryImpl implements StatechartFac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public InitialState createInitialState() {
-		InitialStateImpl initialState = new InitialStateImpl();
-		return initialState;
+	public Reaction createReaction() {
+		ReactionImpl reaction = new ReactionImpl();
+		return reaction;
 	}
 
 	/**
@@ -325,9 +236,9 @@ public class StatechartFactoryImpl extends EFactoryImpl implements StatechartFac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TimeEvent createTimeEvent() {
-		TimeEventImpl timeEvent = new TimeEventImpl();
-		return timeEvent;
+	public Exit createExit() {
+		ExitImpl exit = new ExitImpl();
+		return exit;
 	}
 
 	/**
@@ -335,9 +246,9 @@ public class StatechartFactoryImpl extends EFactoryImpl implements StatechartFac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ExpressionElement createExpressionElement() {
-		ExpressionElementImpl expressionElement = new ExpressionElementImpl();
-		return expressionElement;
+	public Scope createScope() {
+		ScopeImpl scope = new ScopeImpl();
+		return scope;
 	}
 
 	/**
@@ -345,9 +256,19 @@ public class StatechartFactoryImpl extends EFactoryImpl implements StatechartFac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DataElement createDataElement() {
-		DataElementImpl dataElement = new DataElementImpl();
-		return dataElement;
+	public EntryKind createEntryKindFromString(EDataType eDataType, String initialValue) {
+		EntryKind result = EntryKind.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertEntryKindToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**

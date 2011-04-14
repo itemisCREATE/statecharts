@@ -15,31 +15,25 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.yakindu.model.sct.statechart.*;
-import org.yakindu.model.sct.statechart.BooleanVariable;
-import org.yakindu.model.sct.statechart.BooleanVariableValue;
 import org.yakindu.model.sct.statechart.Choice;
-import org.yakindu.model.sct.statechart.DeepHistoryState;
+import org.yakindu.model.sct.statechart.Declaration;
 import org.yakindu.model.sct.statechart.Effect;
+import org.yakindu.model.sct.statechart.Entry;
 import org.yakindu.model.sct.statechart.Event;
+import org.yakindu.model.sct.statechart.Exit;
 import org.yakindu.model.sct.statechart.ExpressionElement;
 import org.yakindu.model.sct.statechart.FinalState;
-import org.yakindu.model.sct.statechart.Fork;
-import org.yakindu.model.sct.statechart.HistoryState;
-import org.yakindu.model.sct.statechart.InitialState;
-import org.yakindu.model.sct.statechart.IntegerVariable;
-import org.yakindu.model.sct.statechart.IntegerVariableValue;
-import org.yakindu.model.sct.statechart.Join;
 import org.yakindu.model.sct.statechart.Junction;
 import org.yakindu.model.sct.statechart.NamedElement;
 import org.yakindu.model.sct.statechart.Pseudostate;
-import org.yakindu.model.sct.statechart.RealVariable;
-import org.yakindu.model.sct.statechart.RealVariableValue;
+import org.yakindu.model.sct.statechart.Reaction;
+import org.yakindu.model.sct.statechart.ReactiveElement;
 import org.yakindu.model.sct.statechart.Region;
-import org.yakindu.model.sct.statechart.ShallowHistoryState;
+import org.yakindu.model.sct.statechart.Scope;
+import org.yakindu.model.sct.statechart.ScopedElement;
 import org.yakindu.model.sct.statechart.State;
 import org.yakindu.model.sct.statechart.Statechart;
 import org.yakindu.model.sct.statechart.StatechartPackage;
-import org.yakindu.model.sct.statechart.TimeEvent;
 import org.yakindu.model.sct.statechart.Transition;
 import org.yakindu.model.sct.statechart.Trigger;
 import org.yakindu.model.sct.statechart.Variable;
@@ -137,52 +131,12 @@ public class StatechartAdapterFactory extends AdapterFactoryImpl {
 				return createStateAdapter();
 			}
 			@Override
-			public Adapter caseRealVariableValue(RealVariableValue object) {
-				return createRealVariableValueAdapter();
-			}
-			@Override
-			public Adapter caseRealVariable(RealVariable object) {
-				return createRealVariableAdapter();
-			}
-			@Override
 			public Adapter caseVariable(Variable object) {
 				return createVariableAdapter();
 			}
 			@Override
-			public Adapter caseShallowHistoryState(ShallowHistoryState object) {
-				return createShallowHistoryStateAdapter();
-			}
-			@Override
-			public Adapter caseHistoryState(HistoryState object) {
-				return createHistoryStateAdapter();
-			}
-			@Override
 			public Adapter caseJunction(Junction object) {
 				return createJunctionAdapter();
-			}
-			@Override
-			public Adapter caseDeepHistoryState(DeepHistoryState object) {
-				return createDeepHistoryStateAdapter();
-			}
-			@Override
-			public Adapter caseBooleanVariable(BooleanVariable object) {
-				return createBooleanVariableAdapter();
-			}
-			@Override
-			public Adapter caseBooleanVariableValue(BooleanVariableValue object) {
-				return createBooleanVariableValueAdapter();
-			}
-			@Override
-			public Adapter caseJoin(Join object) {
-				return createJoinAdapter();
-			}
-			@Override
-			public Adapter caseIntegerVariable(IntegerVariable object) {
-				return createIntegerVariableAdapter();
-			}
-			@Override
-			public Adapter caseIntegerVariableValue(IntegerVariableValue object) {
-				return createIntegerVariableValueAdapter();
 			}
 			@Override
 			public Adapter caseEvent(Event object) {
@@ -197,12 +151,8 @@ public class StatechartAdapterFactory extends AdapterFactoryImpl {
 				return createStatechartAdapter();
 			}
 			@Override
-			public Adapter caseFork(Fork object) {
-				return createForkAdapter();
-			}
-			@Override
-			public Adapter caseInitialState(InitialState object) {
-				return createInitialStateAdapter();
+			public Adapter caseEntry(Entry object) {
+				return createEntryAdapter();
 			}
 			@Override
 			public Adapter caseTrigger(Trigger object) {
@@ -213,16 +163,32 @@ public class StatechartAdapterFactory extends AdapterFactoryImpl {
 				return createEffectAdapter();
 			}
 			@Override
-			public Adapter caseTimeEvent(TimeEvent object) {
-				return createTimeEventAdapter();
-			}
-			@Override
 			public Adapter caseExpressionElement(ExpressionElement object) {
 				return createExpressionElementAdapter();
 			}
 			@Override
-			public Adapter caseDataElement(DataElement object) {
-				return createDataElementAdapter();
+			public Adapter caseDeclaration(Declaration object) {
+				return createDeclarationAdapter();
+			}
+			@Override
+			public Adapter caseReaction(Reaction object) {
+				return createReactionAdapter();
+			}
+			@Override
+			public Adapter caseReactiveElement(ReactiveElement object) {
+				return createReactiveElementAdapter();
+			}
+			@Override
+			public Adapter caseExit(Exit object) {
+				return createExitAdapter();
+			}
+			@Override
+			public Adapter caseScope(Scope object) {
+				return createScopeAdapter();
+			}
+			@Override
+			public Adapter caseScopedElement(ScopedElement object) {
+				return createScopedElementAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -343,34 +309,6 @@ public class StatechartAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.yakindu.model.sct.statechart.RealVariableValue <em>Real Variable Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.yakindu.model.sct.statechart.RealVariableValue
-	 * @generated
-	 */
-	public Adapter createRealVariableValueAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.yakindu.model.sct.statechart.RealVariable <em>Real Variable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.yakindu.model.sct.statechart.RealVariable
-	 * @generated
-	 */
-	public Adapter createRealVariableAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.yakindu.model.sct.statechart.Variable <em>Variable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -385,34 +323,6 @@ public class StatechartAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.yakindu.model.sct.statechart.ShallowHistoryState <em>Shallow History State</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.yakindu.model.sct.statechart.ShallowHistoryState
-	 * @generated
-	 */
-	public Adapter createShallowHistoryStateAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.yakindu.model.sct.statechart.HistoryState <em>History State</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.yakindu.model.sct.statechart.HistoryState
-	 * @generated
-	 */
-	public Adapter createHistoryStateAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.yakindu.model.sct.statechart.Junction <em>Junction</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -423,90 +333,6 @@ public class StatechartAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createJunctionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.yakindu.model.sct.statechart.DeepHistoryState <em>Deep History State</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.yakindu.model.sct.statechart.DeepHistoryState
-	 * @generated
-	 */
-	public Adapter createDeepHistoryStateAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.yakindu.model.sct.statechart.BooleanVariable <em>Boolean Variable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.yakindu.model.sct.statechart.BooleanVariable
-	 * @generated
-	 */
-	public Adapter createBooleanVariableAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.yakindu.model.sct.statechart.BooleanVariableValue <em>Boolean Variable Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.yakindu.model.sct.statechart.BooleanVariableValue
-	 * @generated
-	 */
-	public Adapter createBooleanVariableValueAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.yakindu.model.sct.statechart.Join <em>Join</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.yakindu.model.sct.statechart.Join
-	 * @generated
-	 */
-	public Adapter createJoinAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.yakindu.model.sct.statechart.IntegerVariable <em>Integer Variable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.yakindu.model.sct.statechart.IntegerVariable
-	 * @generated
-	 */
-	public Adapter createIntegerVariableAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.yakindu.model.sct.statechart.IntegerVariableValue <em>Integer Variable Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.yakindu.model.sct.statechart.IntegerVariableValue
-	 * @generated
-	 */
-	public Adapter createIntegerVariableValueAdapter() {
 		return null;
 	}
 
@@ -553,30 +379,16 @@ public class StatechartAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.yakindu.model.sct.statechart.Fork <em>Fork</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.yakindu.model.sct.statechart.Entry <em>Entry</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.yakindu.model.sct.statechart.Fork
+	 * @see org.yakindu.model.sct.statechart.Entry
 	 * @generated
 	 */
-	public Adapter createForkAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.yakindu.model.sct.statechart.InitialState <em>Initial State</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.yakindu.model.sct.statechart.InitialState
-	 * @generated
-	 */
-	public Adapter createInitialStateAdapter() {
+	public Adapter createEntryAdapter() {
 		return null;
 	}
 
@@ -609,20 +421,6 @@ public class StatechartAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.yakindu.model.sct.statechart.TimeEvent <em>Time Event</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.yakindu.model.sct.statechart.TimeEvent
-	 * @generated
-	 */
-	public Adapter createTimeEventAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.yakindu.model.sct.statechart.ExpressionElement <em>Expression Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -637,16 +435,86 @@ public class StatechartAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.yakindu.model.sct.statechart.DataElement <em>Data Element</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.yakindu.model.sct.statechart.Declaration <em>Declaration</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.yakindu.model.sct.statechart.DataElement
+	 * @see org.yakindu.model.sct.statechart.Declaration
 	 * @generated
 	 */
-	public Adapter createDataElementAdapter() {
+	public Adapter createDeclarationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.model.sct.statechart.Reaction <em>Reaction</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.model.sct.statechart.Reaction
+	 * @generated
+	 */
+	public Adapter createReactionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.model.sct.statechart.ReactiveElement <em>Reactive Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.model.sct.statechart.ReactiveElement
+	 * @generated
+	 */
+	public Adapter createReactiveElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.model.sct.statechart.Exit <em>Exit</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.model.sct.statechart.Exit
+	 * @generated
+	 */
+	public Adapter createExitAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.model.sct.statechart.Scope <em>Scope</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.model.sct.statechart.Scope
+	 * @generated
+	 */
+	public Adapter createScopeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.model.sct.statechart.ScopedElement <em>Scoped Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.model.sct.statechart.ScopedElement
+	 * @generated
+	 */
+	public Adapter createScopedElementAdapter() {
 		return null;
 	}
 
