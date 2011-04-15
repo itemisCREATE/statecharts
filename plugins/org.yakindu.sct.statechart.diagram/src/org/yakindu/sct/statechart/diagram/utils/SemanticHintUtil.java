@@ -11,25 +11,19 @@
 package org.yakindu.sct.statechart.diagram.utils;
 
 import static org.yakindu.sct.statechart.diagram.providers.SemanticHints.CHOICE;
-import static org.yakindu.sct.statechart.diagram.providers.SemanticHints.DEEPHISTORY;
+import static org.yakindu.sct.statechart.diagram.providers.SemanticHints.ENTRY;
 import static org.yakindu.sct.statechart.diagram.providers.SemanticHints.FINALSTATE;
-import static org.yakindu.sct.statechart.diagram.providers.SemanticHints.INITIALSTATE;
-import static org.yakindu.sct.statechart.diagram.providers.SemanticHints.JOIN;
 import static org.yakindu.sct.statechart.diagram.providers.SemanticHints.JUNCTION;
 import static org.yakindu.sct.statechart.diagram.providers.SemanticHints.REGION;
-import static org.yakindu.sct.statechart.diagram.providers.SemanticHints.SHALLOWHISTORY;
 import static org.yakindu.sct.statechart.diagram.providers.SemanticHints.STATE;
 import static org.yakindu.sct.statechart.diagram.providers.SemanticHints.TRANSITION;
 
 import org.eclipse.emf.ecore.EObject;
 import org.yakindu.model.sct.statechart.Choice;
-import org.yakindu.model.sct.statechart.DeepHistoryState;
+import org.yakindu.model.sct.statechart.Entry;
 import org.yakindu.model.sct.statechart.FinalState;
-import org.yakindu.model.sct.statechart.InitialState;
-import org.yakindu.model.sct.statechart.Join;
 import org.yakindu.model.sct.statechart.Junction;
 import org.yakindu.model.sct.statechart.Region;
-import org.yakindu.model.sct.statechart.ShallowHistoryState;
 import org.yakindu.model.sct.statechart.State;
 import org.yakindu.model.sct.statechart.Transition;
 import org.yakindu.model.sct.statechart.util.StatechartSwitch;
@@ -73,24 +67,12 @@ public final class SemanticHintUtil {
 				return JUNCTION;
 			}
 
-			@Override
-			public String caseShallowHistoryState(ShallowHistoryState object) {
-				return SHALLOWHISTORY;
-			}
+
+
 
 			@Override
-			public String caseDeepHistoryState(DeepHistoryState object) {
-				return DEEPHISTORY;
-			}
-
-			@Override
-			public String caseJoin(Join object) {
-				return JOIN;
-			}
-
-			@Override
-			public String caseInitialState(InitialState object) {
-				return INITIALSTATE;
+			public String caseEntry(Entry object) {
+				return ENTRY;
 			}
 
 			@Override

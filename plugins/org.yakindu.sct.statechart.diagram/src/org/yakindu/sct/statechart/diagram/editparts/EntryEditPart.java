@@ -23,11 +23,11 @@ import org.yakindu.sct.statechart.diagram.policies.RelationshipSemanticEditPolic
 /**
  * 
  * @author muelder
- *
+ *	TODO Check for entry kinds
  */
-public class InitialStateEditPart extends FixedSizeShapeNodeEditPart {
+public class EntryEditPart extends FixedSizeShapeNodeEditPart {
 
-	public InitialStateEditPart(View view) {
+	public EntryEditPart(View view) {
 		super(view);
 	}
 

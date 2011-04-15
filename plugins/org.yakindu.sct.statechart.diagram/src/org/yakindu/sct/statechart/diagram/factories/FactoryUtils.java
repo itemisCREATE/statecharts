@@ -22,7 +22,8 @@ import org.eclipse.gmf.runtime.notation.Node;
 import org.eclipse.gmf.runtime.notation.NotationFactory;
 import org.eclipse.gmf.runtime.notation.ShapeStyle;
 import org.eclipse.gmf.runtime.notation.View;
-import org.yakindu.model.sct.statechart.InitialState;
+import org.yakindu.model.sct.statechart.Entry;
+import org.yakindu.model.sct.statechart.EntryKind;
 import org.yakindu.model.sct.statechart.Region;
 import org.yakindu.model.sct.statechart.State;
 import org.yakindu.model.sct.statechart.Statechart;
@@ -102,12 +103,13 @@ public final class FactoryUtils {
 						DiagramActivator.DIAGRAM_PREFERENCES_HINT);
 		setRegionViewLayoutConstraint(regionView);
 		// // Create an initial state
-		InitialState initialState = StatechartFactory.eINSTANCE
-				.createInitialState();
+		Entry initialState = StatechartFactory.eINSTANCE
+				.createEntry();
+		initialState.setKind(EntryKind.INITIAL);
 		region.getVertices().add(initialState);
 		Node initialStateView = ViewService.createNode(
 				getRegionCompartmentView(regionView), initialState,
-				SemanticHints.INITIALSTATE,
+				SemanticHints.ENTRY,
 				DiagramActivator.DIAGRAM_PREFERENCES_HINT);
 		setInitialStateViewLayoutConstraint(initialStateView);
 		// Create the first state

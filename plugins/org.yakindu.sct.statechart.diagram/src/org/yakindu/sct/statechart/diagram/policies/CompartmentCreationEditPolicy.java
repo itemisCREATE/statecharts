@@ -29,9 +29,8 @@ import com.google.common.collect.ImmutableList;
 public class CompartmentCreationEditPolicy extends CreationEditPolicy {
 
 	private static final ImmutableList<IElementType> fixedSizeElements = ImmutableList.of(
-			StatechartElementTypes.CHOICE, StatechartElementTypes.JUNCTION, StatechartElementTypes.INITIALSTATE,
-			StatechartElementTypes.FINALSTATE, StatechartElementTypes.DEEPHISTORY,
-			StatechartElementTypes.SHALLOWHISTORY);
+			StatechartElementTypes.CHOICE, StatechartElementTypes.JUNCTION, StatechartElementTypes.ENTRY,
+			StatechartElementTypes.FINALSTATE, StatechartElementTypes.ENTRY);
 
 	@Override
 	protected Command getCreateElementAndViewCommand(CreateViewAndElementRequest request) {

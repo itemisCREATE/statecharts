@@ -16,7 +16,7 @@
 
    <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
       <factory
-            uri="http:///statechart.ecore"
+            uri="http://www.yakindu.org/sct/2.0.0"
             class="org.yakindu.model.sct.statechart.provider.StatechartItemProviderAdapterFactory"
             supportedTypes=
               "org.eclipse.emf.edit.provider.IEditingDomainItemProvider

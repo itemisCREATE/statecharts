@@ -27,7 +27,7 @@
    <extension
          point="org.eclipse.gmf.runtime.emf.type.core.elementTypes">
       <metamodel
-            nsURI="http:///statechart.ecore">
+            nsURI="http://www.yakindu.org/sct/2.0.0">
          <metamodelType
                eclass="Statechart"
                icon="icons/obj16/StatemachineDiagramFile.gif"
@@ -86,14 +86,14 @@
             </param>
          </metamodelType>
          <metamodelType
-               eclass="InitialState"
+               eclass="Entry"
                icon="icons/obj16/initial_state_16x16.png"
-               id="org.yakindu.sct.statechart.diagram.InitialState"
+               id="org.yakindu.sct.statechart.diagram.Entry"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               name="InitialState">
+               name="Entry">
             <param
                   name="semanticHint"
-                  value="InitialState">
+                  value="Entry">
             </param>
          </metamodelType>
          <metamodelType
@@ -118,29 +118,7 @@
                   value="Junction">
             </param>
          </metamodelType>
-         <metamodelType
-               eclass="ShallowHistoryState"
-               icon="icons/obj16/shallow_history_16x16.png"
-               id="org.yakindu.sct.statechart.diagram.ShallowHistoryState"
-               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               name="ShallowHistory">
-            <param
-                  name="semanticHint"
-                  value="ShallowHistory">
-            </param>
-         </metamodelType>
-         <metamodelType
-               eclass="DeepHistoryState"
-               icon="icons/obj16/deep_history_16x16.png"
-               id="org.yakindu.sct.statechart.diagram.DeepHistoryState"
-               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               name="DeepHistory">
-            <param
-                  name="semanticHint"
-                  value="DeepHistory">
-            </param>
-         </metamodelType>
-      </metamodel>
+         </metamodel>
    </extension>
    <extension
          point="org.eclipse.emf.ecore.extension_parser">
@@ -268,7 +246,7 @@
              </entry>
              <entry
                    description="Creates an Initial State"
-                   id="InitialState"
+                   id="Entry"
                    kind="tool"
                    label="Initial State"
                    large_icon="icons/obj16/initial_state_16x16.png"
@@ -283,24 +261,6 @@
                    large_icon="icons/obj16/final_state_16x16.png"
                    path="/tools/"
                    small_icon="icons/obj16/final_state_16x16.png">
-             </entry>
-             <entry
-                   description="Creates a shallow history"
-                   id="ShallowHistory"
-                   kind="tool"
-                   label="Shallow History"
-                   large_icon="icons/obj16/shallow_history_16x16.png"
-                   path="/tools/"
-                   small_icon="icons/obj16/shallow_history_16x16.png">
-             </entry>
-             <entry
-                   description="Creates a Deep History"
-                   id="DeepHistory"
-                   kind="tool"
-                   label="Deep History"
-                   large_icon="icons/obj16/deep_history_16x16.png"
-                   path="/tools/"
-                   small_icon="icons/obj16/deep_history_16x16.png">
              </entry>
          </contribution>
          <Priority
