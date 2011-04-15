@@ -17,9 +17,8 @@ import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.emf.type.core.commands.EditElementCommand;
 import org.eclipse.gmf.runtime.emf.type.core.requests.CreateElementRequest;
 import org.eclipse.gmf.runtime.emf.type.core.requests.CreateRelationshipRequest;
+import org.yakindu.model.sct.statechart.Entry;
 import org.yakindu.model.sct.statechart.FinalState;
-import org.yakindu.model.sct.statechart.HistoryState;
-import org.yakindu.model.sct.statechart.InitialState;
 import org.yakindu.model.sct.statechart.StatechartFactory;
 import org.yakindu.model.sct.statechart.Transition;
 import org.yakindu.model.sct.statechart.Vertex;
@@ -57,12 +56,13 @@ public class CreateTransitionCommand extends EditElementCommand {
 	private boolean checkConstraints() {
 		if (source instanceof FinalState)
 			return false;
-		if (target instanceof InitialState)
+		if (target instanceof Entry)
 			return false;
-		if (source instanceof HistoryState)
-			return false;
-		if (source instanceof InitialState && ((InitialState) source).getOutgoingTransitions().size() > 0)
-			return false;
+//FIXME
+//		if (source instanceof HistoryState)
+//			return false;
+//		if (source instanceof InitialState && ((InitialState) source).getOutgoingTransitions().size() > 0)
+//			return false;
 
 		return true;
 	}

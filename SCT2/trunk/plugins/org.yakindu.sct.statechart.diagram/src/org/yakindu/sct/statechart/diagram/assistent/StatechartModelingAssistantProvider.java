@@ -11,12 +11,10 @@
 package org.yakindu.sct.statechart.diagram.assistent;
 
 import static org.yakindu.sct.statechart.diagram.editor.StatechartElementTypes.CHOICE;
-import static org.yakindu.sct.statechart.diagram.editor.StatechartElementTypes.DEEPHISTORY;
+import static org.yakindu.sct.statechart.diagram.editor.StatechartElementTypes.ENTRY;
 import static org.yakindu.sct.statechart.diagram.editor.StatechartElementTypes.FINALSTATE;
-import static org.yakindu.sct.statechart.diagram.editor.StatechartElementTypes.INITIALSTATE;
 import static org.yakindu.sct.statechart.diagram.editor.StatechartElementTypes.JUNCTION;
 import static org.yakindu.sct.statechart.diagram.editor.StatechartElementTypes.REGION;
-import static org.yakindu.sct.statechart.diagram.editor.StatechartElementTypes.SHALLOWHISTORY;
 import static org.yakindu.sct.statechart.diagram.editor.StatechartElementTypes.STATE;
 import static org.yakindu.sct.statechart.diagram.editor.StatechartElementTypes.TRANSITION;
 
@@ -50,8 +48,8 @@ public class StatechartModelingAssistantProvider extends
 
 		if (editPart instanceof RegionEditPart
 				|| editPart instanceof RegionCompartmentEditPart)
-			return Lists.newArrayList(INITIALSTATE, STATE, FINALSTATE,
-					DEEPHISTORY, SHALLOWHISTORY, JUNCTION, CHOICE);
+			return Lists.newArrayList(ENTRY, STATE, FINALSTATE,
+					ENTRY,JUNCTION, CHOICE);
 
 		if (editPart instanceof StateEditPart
 				|| editPart instanceof StateFigureCompartmentEditPart)

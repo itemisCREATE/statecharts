@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.xtext.EcoreUtil2;
+import org.yakindu.model.sct.statechart.Entry;
 import org.yakindu.model.sct.statechart.FinalState;
-import org.yakindu.model.sct.statechart.InitialState;
 import org.yakindu.model.sct.statechart.Region;
 import org.yakindu.model.sct.statechart.State;
 import org.yakindu.model.sct.statechart.Vertex;
@@ -24,7 +24,8 @@ public class StatechartDefaultValidationProvider extends
 
 	@ValidationRule
 	public IStatus validateExactlyOneInitialState(Region region) {
-		List<InitialState> initialStates = EcoreUtil2.typeSelect(region.getVertices(), InitialState.class);
+		//FIXME: Check for Initial kind only
+		List<Entry> initialStates = EcoreUtil2.typeSelect(region.getVertices(), Entry.class);
 		if (initialStates.size() != 1) {
 			return createErrorStatus("A region must contain exactly one initial state!");
 		}
@@ -34,7 +35,7 @@ public class StatechartDefaultValidationProvider extends
 	@ValidationRule
 	public IStatus validateIncomingTransition(Vertex vertex) {
 		if (vertex.getIncomingTransitions().size() == 0
-				&& !(vertex instanceof InitialState)) {
+				&& !(vertex instanceof Entry)) {
 			return createErrorStatus("A state must have at least one incoming transition!");
 		}
 		return createOKStatus();

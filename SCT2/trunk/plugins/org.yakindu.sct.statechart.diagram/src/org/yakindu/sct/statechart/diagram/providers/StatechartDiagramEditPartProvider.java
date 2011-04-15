@@ -18,15 +18,12 @@ import org.eclipse.gmf.runtime.diagram.ui.services.editpart.AbstractEditPartProv
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.statechart.diagram.editor.StatechartDiagramEditor;
 import org.yakindu.sct.statechart.diagram.editparts.ChoiceEditPart;
-import org.yakindu.sct.statechart.diagram.editparts.DeepHistoryEditPart;
+import org.yakindu.sct.statechart.diagram.editparts.EntryEditPart;
 import org.yakindu.sct.statechart.diagram.editparts.FinalStateEditPart;
-import org.yakindu.sct.statechart.diagram.editparts.InitialStateEditPart;
-import org.yakindu.sct.statechart.diagram.editparts.JoinEditPart;
 import org.yakindu.sct.statechart.diagram.editparts.JunctionEditPart;
 import org.yakindu.sct.statechart.diagram.editparts.RegionCompartmentEditPart;
 import org.yakindu.sct.statechart.diagram.editparts.RegionEditPart;
 import org.yakindu.sct.statechart.diagram.editparts.RegionNameEditPart;
-import org.yakindu.sct.statechart.diagram.editparts.ShallowHistoryEditPart;
 import org.yakindu.sct.statechart.diagram.editparts.StateEditPart;
 import org.yakindu.sct.statechart.diagram.editparts.StateFigureCompartmentEditPart;
 import org.yakindu.sct.statechart.diagram.editparts.StateNameEditPart;
@@ -59,15 +56,12 @@ public class StatechartDiagramEditPartProvider extends AbstractEditPartProvider
 		editParts.put(STATECHART_TEXT_EXPRESSION,
 				StatechartTextExpressionEditPart.class);
 		editParts.put(CHOICE, ChoiceEditPart.class);
-		editParts.put(DEEPHISTORY, DeepHistoryEditPart.class);
 		editParts.put(FINALSTATE, FinalStateEditPart.class);
-		editParts.put(INITIALSTATE, InitialStateEditPart.class);
-		editParts.put(JOIN, JoinEditPart.class);
+		editParts.put(ENTRY, EntryEditPart.class);
 		editParts.put(JUNCTION, JunctionEditPart.class);
 		editParts.put(REGION_COMPARTMENT, RegionCompartmentEditPart.class);
 		editParts.put(REGION, RegionEditPart.class);
 		editParts.put(REGION_NAME, RegionNameEditPart.class);
-		editParts.put(SHALLOWHISTORY, ShallowHistoryEditPart.class);
 		editParts.put(STATE, StateEditPart.class);
 		editParts.put(STATE_FIGURE_COMPARTMENT,
 				StateFigureCompartmentEditPart.class);

@@ -49,14 +49,14 @@ public class ExpressionDirectEditPolicy extends DirectEditPolicy implements
 		List<Event> events = EcoreUtil2.getAllContentsOfType(astRoot, Event.class);
 		List<Variable> vars =  EcoreUtil2.getAllContentsOfType(astRoot, Variable.class);
 		EObject semanticElem = (getHost().resolveSemanticElement());
-		 
-		SetValueCommand eventCommand = new SetValueCommand(new SetRequest(semanticElem,
-				StatechartPackage.Literals.STATECHART__EVENTS,
-				events));
-
-		SetValueCommand variableCommand = new SetValueCommand(new SetRequest(semanticElem,
-				StatechartPackage.Literals.STATECHART__VARIABLES,
-				vars));
+//FIXME	 
+//		SetValueCommand eventCommand = new SetValueCommand(new SetRequest(semanticElem,
+//				StatechartPackage.Literals.STATECHART__EVENTS,
+//				events));
+//
+//		SetValueCommand variableCommand = new SetValueCommand(new SetRequest(semanticElem,
+//				StatechartPackage.Literals.STATECHART__VARIABLES,
+//				vars));
 
 		SetValueCommand command = new SetValueCommand(new SetRequest(getHost()
 				.resolveSemanticElement(),
@@ -65,10 +65,10 @@ public class ExpressionDirectEditPolicy extends DirectEditPolicy implements
 		
 		CompoundCommand compoundCommand = new CompoundCommand();
 		
-		if (semanticElem instanceof Statechart) {
-			compoundCommand.add(new ICommandProxy(eventCommand));
-			compoundCommand.add(new ICommandProxy(variableCommand));
-		}
+//		if (semanticElem instanceof Statechart) {
+//			compoundCommand.add(new ICommandProxy(eventCommand));
+//			compoundCommand.add(new ICommandProxy(variableCommand));
+//		}
 		
 		compoundCommand.add(new ICommandProxy(command));
 		
