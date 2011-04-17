@@ -12,10 +12,15 @@ package org.yakindu.sct.statechart.diagram.editparts;
 
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.geometry.Dimension;
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.diagram.ui.handles.ConnectionHandle.HandleDirection;
 import org.eclipse.gmf.runtime.notation.View;
+import org.yakindu.model.sct.statechart.Entry;
+import org.yakindu.model.sct.statechart.StatechartPackage;
+import org.yakindu.sct.statechart.diagram.editor.figures.DeepHistoryFigure;
 import org.yakindu.sct.statechart.diagram.editor.figures.InitialStateFigure;
+import org.yakindu.sct.statechart.diagram.editor.figures.ShallowHistoryFigure;
 import org.yakindu.sct.statechart.diagram.editor.figures.utils.MapModeUtils;
 import org.yakindu.sct.statechart.diagram.policies.OneWayConnectionHandlesEditPolicy;
 import org.yakindu.sct.statechart.diagram.policies.RelationshipSemanticEditPolicy;
@@ -23,7 +28,6 @@ import org.yakindu.sct.statechart.diagram.policies.RelationshipSemanticEditPolic
 /**
  * 
  * @author muelder
- *	TODO Check for entry kinds
  */
 public class EntryEditPart extends FixedSizeShapeNodeEditPart {
 
@@ -47,8 +51,32 @@ public class EntryEditPart extends FixedSizeShapeNodeEditPart {
 	}
 
 	@Override
+	public Entry resolveSemanticElement() {
+		return (Entry) super.resolveSemanticElement();
+	}
+
+	@Override
 	public IFigure getPrimaryShape() {
-		return new InitialStateFigure();
+		switch (resolveSemanticElement().getKind()) {
+		case DEEP_HISTORY:
+			return new DeepHistoryFigure();
+		case SHALLOW_HISTORY:
+			return new ShallowHistoryFigure();
+		case INITIAL:
+			return new InitialStateFigure();
+		}
+		throw new IllegalStateException();
+	}
+
+	@Override
+	protected void handleNotificationEvent(Notification notification) {
+		//We have to update the primary shape when the entry kind changes
+		if (StatechartPackage.eINSTANCE.getEntry_Kind().equals(
+				notification.getFeature())) {
+			getFigure().remove((IFigure)getFigure().getChildren().get(0));
+			getFigure().add(getPrimaryShape());
+		}
+		super.handleNotificationEvent(notification);
 	}
 
 }

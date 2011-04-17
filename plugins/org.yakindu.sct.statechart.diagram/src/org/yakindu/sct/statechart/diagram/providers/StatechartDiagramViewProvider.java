@@ -58,6 +58,8 @@ public class StatechartDiagramViewProvider extends AbstractViewProvider
 		factories.put(TRANSITION, TransitionViewFactory.class);
 		factories.put(CHOICE, ShapeViewFactory.class);
 		factories.put(ENTRY, ShapeViewFactory.class);
+		factories.put(SHALLOWHISTORY, ShapeViewFactory.class);
+		factories.put(DEEPHISTORY, ShapeViewFactory.class);
 		factories.put(FINALSTATE, ShapeViewFactory.class);
 		factories.put(JUNCTION, ShapeViewFactory.class);
 	}

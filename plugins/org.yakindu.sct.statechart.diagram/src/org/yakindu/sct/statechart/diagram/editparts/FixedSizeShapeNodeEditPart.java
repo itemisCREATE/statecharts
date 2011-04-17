@@ -24,8 +24,7 @@ import org.eclipse.gmf.runtime.notation.View;
 /**
  * EditPart fpr Shapes that should not be resized.
  * 
- * @author Andreas Muelder <a
- *         href="mailto:andreas.muelder@itemis.de">andreas.muelder@itemis.de</a>
+ * @author muelder
  * 
  */
 public abstract class FixedSizeShapeNodeEditPart extends ShapeNodeEditPart {
