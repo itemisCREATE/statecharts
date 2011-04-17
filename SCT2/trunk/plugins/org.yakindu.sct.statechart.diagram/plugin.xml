@@ -87,6 +87,7 @@
          </metamodelType>
          <metamodelType
                eclass="Entry"
+               edithelper="org.yakindu.sct.statechart.diagram.edithelper.EntryEditHelper"
                icon="icons/obj16/initial_state_16x16.png"
                id="org.yakindu.sct.statechart.diagram.Entry"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
@@ -94,6 +95,30 @@
             <param
                   name="semanticHint"
                   value="Entry">
+            </param>
+         </metamodelType>
+         <metamodelType
+               eclass="Entry"
+               edithelper="org.yakindu.sct.statechart.diagram.edithelper.EntryEditHelper"
+               icon="icons/obj16/shallow_history_16x16.png"
+               id="org.yakindu.sct.statechart.diagram.ShallowHistory"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               name="ShallowHistory">
+            <param
+                  name="semanticHint"
+                  value="ShallowHistory">
+            </param>
+         </metamodelType>
+         <metamodelType
+               eclass="Entry"
+               edithelper="org.yakindu.sct.statechart.diagram.edithelper.EntryEditHelper"
+               icon="icons/obj16/deep_history_16x16.png"
+               id="org.yakindu.sct.statechart.diagram.DeepHistory"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               name="DeepHistory">
+            <param
+                  name="semanticHint"
+                  value="DeepHistory">
             </param>
          </metamodelType>
          <metamodelType
@@ -252,6 +277,24 @@
                    large_icon="icons/obj16/initial_state_16x16.png"
                    path="/tools/"
                    small_icon="icons/obj16/initial_state_16x16.png">
+             </entry>
+              <entry
+                   description="Creates a shallow history"
+                   id="ShallowHistory"
+                   kind="tool"
+                   label="Shallow History"
+                   large_icon="icons/obj16/shallow_history_16x16.png"
+                   path="/tools/"
+                   small_icon="icons/obj16/shallow_history_16x16.png">
+             </entry>
+             <entry
+                   description="Creates a Deep History"
+                   id="DeepHistory"
+                   kind="tool"
+                   label="Deep History"
+                   large_icon="icons/obj16/deep_history_16x16.png"
+                   path="/tools/"
+                   small_icon="icons/obj16/deep_history_16x16.png">
              </entry>
              <entry
                    description="Create a Final State"

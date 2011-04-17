@@ -35,9 +35,15 @@ public interface SemanticHints {
 
 	String CHOICE = "Choice";
 
+	String DEEPHISTORY = "DeepHistory";
+
+	String SHALLOWHISTORY = "ShallowHistory";
+
 	String ENTRY = "Entry";
 
 	String FINALSTATE = "FinalState";
+
+	String JOIN = "Join";
 
 	String JUNCTION = "Junction";
 }

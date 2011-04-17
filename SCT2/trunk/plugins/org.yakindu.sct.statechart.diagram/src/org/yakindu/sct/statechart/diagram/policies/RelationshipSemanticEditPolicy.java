@@ -20,8 +20,7 @@ import org.yakindu.sct.statechart.diagram.commands.CreateTransitionCommand;
 /**
  * {@link SemanticEditPolicy} for creation of Transitions between Vertices.
  * 
- * @author Andreas Muelder <a
- *         href="mailto:andreas.muelder@itemis.de">andreas.muelder@itemis.de</a>
+ * @author muelder
  * 
  */
 public class RelationshipSemanticEditPolicy extends SemanticEditPolicy {

@@ -36,6 +36,8 @@ public final class StatechartElementTypes extends AbstractElementTypeEnumerator 
 	public static final IElementType CHOICE = getElementType("org.yakindu.sct.statechart.diagram.Choice");
 	public static final IElementType JUNCTION = getElementType("org.yakindu.sct.statechart.diagram.Junction");
 	public static final IElementType ENTRY = getElementType("org.yakindu.sct.statechart.diagram.Entry");
+	public static final IElementType DEEPHISTORY = getElementType("org.yakindu.sct.statechart.diagram.DeepHistory");
+	public static final IElementType SHALLOWHISTORY = getElementType("org.yakindu.sct.statechart.diagram.ShallowHistory");
 	public static final IElementType FINALSTATE = getElementType("org.yakindu.sct.statechart.diagram.FinalState");
 
 	/**

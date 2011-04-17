@@ -22,15 +22,15 @@ import com.google.common.collect.ImmutableList;
 /**
  * Disallows custom size for the given model elements on creation.
  * 
- * @author Andreas Muelder <a
- *         href="mailto:andreas.muelder@itemis.de">andreas.muelder@itemis.de</a>
+ * @author muelder
  * 
  */
 public class CompartmentCreationEditPolicy extends CreationEditPolicy {
 
 	private static final ImmutableList<IElementType> fixedSizeElements = ImmutableList.of(
 			StatechartElementTypes.CHOICE, StatechartElementTypes.JUNCTION, StatechartElementTypes.ENTRY,
-			StatechartElementTypes.FINALSTATE, StatechartElementTypes.ENTRY);
+			StatechartElementTypes.FINALSTATE, StatechartElementTypes.DEEPHISTORY,
+			StatechartElementTypes.SHALLOWHISTORY);
 
 	@Override
 	protected Command getCreateElementAndViewCommand(CreateViewAndElementRequest request) {

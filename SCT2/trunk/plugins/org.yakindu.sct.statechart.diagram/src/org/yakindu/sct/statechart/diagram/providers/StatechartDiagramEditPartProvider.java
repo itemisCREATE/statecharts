@@ -58,6 +58,8 @@ public class StatechartDiagramEditPartProvider extends AbstractEditPartProvider
 		editParts.put(CHOICE, ChoiceEditPart.class);
 		editParts.put(FINALSTATE, FinalStateEditPart.class);
 		editParts.put(ENTRY, EntryEditPart.class);
+		editParts.put(SHALLOWHISTORY, EntryEditPart.class);
+		editParts.put(DEEPHISTORY, EntryEditPart.class);
 		editParts.put(JUNCTION, JunctionEditPart.class);
 		editParts.put(REGION_COMPARTMENT, RegionCompartmentEditPart.class);
 		editParts.put(REGION, RegionEditPart.class);
