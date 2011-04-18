@@ -187,7 +187,7 @@ public class FixedPointValue extends AbstractNumericValue implements ISimpleNume
 	}
 	
 	@Override
-	protected IValue basicNotEqualToOrEqualTo(AbstractNumericValue other, DataType resultDataType) {
+	protected IValue basicNotEqualTo(AbstractNumericValue other, DataType resultDataType) {
 		FixedPointValue otherFixedPointValue = (FixedPointValue) other;
 		return new BooleanValue(getContext(), rawValue != otherFixedPointValue.rawValue);
 	}

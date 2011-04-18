@@ -123,7 +123,7 @@ public class Binary64Value extends AbstractNumericValue implements ISimpleNumeri
 	}
 	
 	@Override
-	protected IValue basicNotEqualToOrEqualTo(AbstractNumericValue other, DataType resultDataType) {
+	protected IValue basicNotEqualTo(AbstractNumericValue other, DataType resultDataType) {
 		Binary64Value otherBinary64Value = (Binary64Value) other;
 		return new BooleanValue(getContext(), value != otherBinary64Value.value);
 	}

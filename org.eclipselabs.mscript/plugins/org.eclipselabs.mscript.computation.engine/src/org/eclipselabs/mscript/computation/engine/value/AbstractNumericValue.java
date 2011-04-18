@@ -161,17 +161,17 @@ public abstract class AbstractNumericValue extends AbstractExplicitDataTypeValue
 
 	protected abstract IValue basicEqualTo(AbstractNumericValue other, DataType resultDataType);
 
-	protected IValue doNotEqualToOrEqualTo(IValue other, DataType resultDataType) {
+	protected IValue doNotEqualTo(IValue other, DataType resultDataType) {
 		AbstractNumericValue otherRealValue = (AbstractNumericValue) other;
 		NumberFormat widestNumberFormat = getWidestNumberFormat(other);
 		
 		AbstractNumericValue leftOperand = cast(widestNumberFormat);
 		AbstractNumericValue rightOperand = otherRealValue.cast(widestNumberFormat);
 
-		return leftOperand.basicNotEqualToOrEqualTo(rightOperand, resultDataType);
+		return leftOperand.basicNotEqualTo(rightOperand, resultDataType);
 	}
 
-	protected abstract IValue basicNotEqualToOrEqualTo(AbstractNumericValue other, DataType resultDataType);
+	protected abstract IValue basicNotEqualTo(AbstractNumericValue other, DataType resultDataType);
 
 	protected abstract AbstractNumericValue cast(NumberFormat numberFormat);
 
