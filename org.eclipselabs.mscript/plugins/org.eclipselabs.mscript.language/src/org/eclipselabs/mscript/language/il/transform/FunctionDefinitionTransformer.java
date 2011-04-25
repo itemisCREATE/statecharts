@@ -46,7 +46,7 @@ import org.eclipselabs.mscript.language.il.internal.util.EquationCompoundHelper;
 import org.eclipselabs.mscript.language.internal.LanguagePlugin;
 import org.eclipselabs.mscript.language.internal.functionmodel.util.FunctionModelUtil;
 import org.eclipselabs.mscript.language.internal.il.transform.AssertionEvaluator;
-import org.eclipselabs.mscript.language.internal.il.transform.DataTypeAdaptor;
+import org.eclipselabs.mscript.language.internal.util.DataTypeAdaptor;
 import org.eclipselabs.mscript.language.internal.util.StatusUtil;
 import org.eclipselabs.mscript.typesystem.DataType;
 

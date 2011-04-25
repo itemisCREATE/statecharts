@@ -1,5 +1,5 @@
 /****************************************************************************
- * Copyright (c) 2008, 2010 Andreas Unger and others.
+ * Copyright (c) 2008, 2011 Andreas Unger and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,13 +9,12 @@
  *    Andreas Unger - initial API and implementation 
  ****************************************************************************/
 
-package org.eclipselabs.mscript.language.internal.il.transform;
+package org.eclipselabs.mscript.language.il.util;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipselabs.mscript.language.ast.AdditiveExpression;
@@ -37,26 +36,13 @@ import org.eclipselabs.mscript.language.ast.TypeTestExpression;
 import org.eclipselabs.mscript.language.ast.UnaryExpression;
 import org.eclipselabs.mscript.language.ast.UnitConstructionOperator;
 import org.eclipselabs.mscript.language.ast.util.AstSwitch;
-import org.eclipselabs.mscript.language.il.Assignment;
-import org.eclipselabs.mscript.language.il.Compound;
-import org.eclipselabs.mscript.language.il.ComputationCompound;
-import org.eclipselabs.mscript.language.il.ForeachStatement;
 import org.eclipselabs.mscript.language.il.FunctionCall;
-import org.eclipselabs.mscript.language.il.ILFunctionDefinition;
-import org.eclipselabs.mscript.language.il.IfStatement;
-import org.eclipselabs.mscript.language.il.LocalVariableDeclaration;
 import org.eclipselabs.mscript.language.il.Name;
 import org.eclipselabs.mscript.language.il.PropertyReference;
-import org.eclipselabs.mscript.language.il.Statement;
-import org.eclipselabs.mscript.language.il.VariableDeclaration;
 import org.eclipselabs.mscript.language.il.VariableReference;
 import org.eclipselabs.mscript.language.il.builtin.BuiltinFunctionDescriptor;
-import org.eclipselabs.mscript.language.il.util.ILSwitch;
-import org.eclipselabs.mscript.language.il.util.ILUtil;
-import org.eclipselabs.mscript.language.internal.LanguagePlugin;
 import org.eclipselabs.mscript.language.internal.interpreter.InvalidUnitExpressionOperandException;
 import org.eclipselabs.mscript.language.internal.interpreter.UnitExpressionHelper;
-import org.eclipselabs.mscript.typesystem.ArrayType;
 import org.eclipselabs.mscript.typesystem.DataType;
 import org.eclipselabs.mscript.typesystem.IntegerType;
 import org.eclipselabs.mscript.typesystem.OperatorKind;
@@ -64,135 +50,22 @@ import org.eclipselabs.mscript.typesystem.RealType;
 import org.eclipselabs.mscript.typesystem.TypeSystemFactory;
 import org.eclipselabs.mscript.typesystem.util.TypeSystemUtil;
 
-/**
- * @author Andreas Unger
- *
- */
-public class DataTypeAdaptor extends ILSwitch<Boolean> {
+public class ExpressionDataTypeAdaptor implements IExpressionDataTypeAdaptor {
 	
-	private ExpressionAdaptor expressionAdaptor = new ExpressionAdaptor();
+	private final ExpressionAdaptorSwitch expressionAdaptorSwitch = new ExpressionAdaptorSwitch();
 	
-	private MultiStatus status = new MultiStatus(LanguagePlugin.PLUGIN_ID, 0, "Data type adaptor errors", null);
-	
-	public IStatus adapt(ILFunctionDefinition functionDefinition) {
-		boolean finished;
-		
-		do {
-			finished = doSwitch(functionDefinition.getInitializationCompound());
-			if (finished) {
-				for (ComputationCompound compound : functionDefinition.getComputationCompounds()) {
-					finished = doSwitch(compound);
-					if (!finished) {
-						break;
-					}
-				}
-			}
-		} while (!finished && status.isOK());
-		
-		return status;
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.language.il.util.IExpressionDataTypeAdaptor#adapt(org.eclipselabs.mscript.language.ast.Expression)
+	 */
+	public IStatus adapt(Expression expression) {
+		expressionAdaptorSwitch.doSwitch(expression);
+		return Status.OK_STATUS;
 	}
+	
+	private static class ExpressionAdaptorSwitch extends AstSwitch<DataType> {
 
-	public IStatus adapt(Compound compound) {
-		boolean finished;
-		
-		do {
-			finished = doSwitch(compound);
-		} while (!finished && status.isOK());
-		
-		return status;
-	}
+		private final ILExpressionAdaptor ilExpressionAdaptor = new ILExpressionAdaptor();
 
-	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.language.il.util.ILSwitch#caseCompound(org.eclipselabs.mscript.language.il.Compound)
-	 */
-	@Override
-	public Boolean caseCompound(Compound compound) {
-		for (Statement statement : compound.getStatements()) {
-			if (!doSwitch(statement)) {
-				return false;
-			}
-		}
-		return true;
-	}
-		
-	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.language.il.util.ILSwitch#caseLocalVariableDeclaration(org.eclipselabs.mscript.language.il.LocalVariableDeclaration)
-	 */
-	@Override
-	public Boolean caseLocalVariableDeclaration(LocalVariableDeclaration localVariableDeclaration) {
-		if (localVariableDeclaration.getInitializer() != null) {
-			DataType dataType = expressionAdaptor.doSwitch(localVariableDeclaration.getInitializer());
-			return updateDataType(localVariableDeclaration, dataType);
-		}
-		return true;
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.language.il.util.ILSwitch#caseAssignment(org.eclipselabs.mscript.language.il.Assignment)
-	 */
-	@Override
-	public Boolean caseAssignment(Assignment assignment) {
-		DataType dataType = expressionAdaptor.doSwitch(assignment.getAssignedExpression());
-		return updateDataType(assignment.getTarget(), dataType);
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.language.il.util.ILSwitch#caseIfStatement(org.eclipselabs.mscript.language.il.IfStatement)
-	 */
-	@Override
-	public Boolean caseIfStatement(IfStatement ifStatement) {
-		expressionAdaptor.doSwitch(ifStatement.getCondition());
-		return status.isOK() && doSwitch(ifStatement.getThenStatement()) && doSwitch(ifStatement.getElseStatement());
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.language.il.util.ILSwitch#caseForeachStatement(org.eclipselabs.mscript.language.il.ForeachStatement)
-	 */
-	@Override
-	public Boolean caseForeachStatement(ForeachStatement foreachStatement) {
-		DataType collectionType = expressionAdaptor.doSwitch(foreachStatement.getCollectionExpression());
-		if (!status.isOK()) {
-			return false;
-		}
-		
-		if (!(collectionType instanceof ArrayType)) {
-			status.add(new Status(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, "Collection type must be array type"));
-			return false;
-		}
-		
-		ArrayType arrayType = (ArrayType) collectionType;
-		
-		return updateDataType(foreachStatement.getIterationVariableDeclaration(), arrayType.getElementType()) && doSwitch(foreachStatement.getBody());
-	}
-		
-	private boolean updateDataType(VariableDeclaration variableDeclaration, DataType dataType) {
-		if (variableDeclaration.getDataType() == null) {
-			variableDeclaration.setDataType(dataType);
-			return true;
-		}
-		
-		if (variableDeclaration.getDataType() == dataType) {
-			return true;
-		}
-
-		DataType leftHandDataType = TypeSystemUtil.getLeftHandDataType(variableDeclaration.getDataType(), dataType);
-		if (leftHandDataType == null) {
-			status.add(new Status(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, "Incompatible data types"));
-			return false;
-		}
-		
-		if (leftHandDataType == dataType) {
-			variableDeclaration.setDataType(leftHandDataType);
-			return false;
-		}
-		
-		return true;
-	}
-	
-	private class ExpressionAdaptor extends AstSwitch<DataType> {
-		
-		private ILExpressionAdaptor ilExpressionAdaptor = new ILExpressionAdaptor();
-		
 		/* (non-Javadoc)
 		 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseImpliesExpression(org.eclipselabs.mscript.language.ast.ImpliesExpression)
 		 */
@@ -225,7 +98,7 @@ public class DataTypeAdaptor extends ILSwitch<Boolean> {
 			}
 			
 			ILUtil.setDataType(logicalOrExpression, dataType);
-
+	
 			return dataType;
 		}
 		
@@ -246,7 +119,7 @@ public class DataTypeAdaptor extends ILSwitch<Boolean> {
 			}
 			
 			ILUtil.setDataType(logicalAndExpression, dataType);
-
+	
 			return dataType;
 		}
 		
@@ -513,7 +386,7 @@ public class DataTypeAdaptor extends ILSwitch<Boolean> {
 				if (name.getSegments().size() == 1) {
 					List<DataType> argumentDataTypes = new ArrayList<DataType>();
 					for (Expression argument : functionCall.getArguments()) {
-						argumentDataTypes.add(ExpressionAdaptor.this.doSwitch(argument));
+						argumentDataTypes.add(doSwitch(argument));
 					}
 					BuiltinFunctionDescriptor descriptor = BuiltinFunctionDescriptor.get(name.getLastSegment(), argumentDataTypes);
 					if (descriptor != null) {
@@ -534,7 +407,7 @@ public class DataTypeAdaptor extends ILSwitch<Boolean> {
 			}
 			
 		}
-
+	
 	}
-			
+	
 }
