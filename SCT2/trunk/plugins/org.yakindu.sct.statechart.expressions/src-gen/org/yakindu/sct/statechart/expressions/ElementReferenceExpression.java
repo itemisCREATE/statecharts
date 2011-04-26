@@ -5,7 +5,7 @@
  */
 package org.yakindu.sct.statechart.expressions;
 
-import org.yakindu.model.sct.statechart.DataElement;
+import org.yakindu.model.sct.statechart.Declaration;
 
 /**
  * <!-- begin-user-doc -->
@@ -34,12 +34,12 @@ public interface ElementReferenceExpression extends Expression
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Value</em>' reference.
-   * @see #setValue(DataElement)
+   * @see #setValue(Declaration)
    * @see org.yakindu.sct.statechart.expressions.ExpressionsPackage#getElementReferenceExpression_Value()
    * @model
    * @generated
    */
-  DataElement getValue();
+  Declaration getValue();
 
   /**
    * Sets the value of the '{@link org.yakindu.sct.statechart.expressions.ElementReferenceExpression#getValue <em>Value</em>}' reference.
@@ -49,6 +49,6 @@ public interface ElementReferenceExpression extends Expression
    * @see #getValue()
    * @generated
    */
-  void setValue(DataElement value);
+  void setValue(Declaration value);
 
 } // ElementReferenceExpression

@@ -8058,7 +8058,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                     
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleElementReferenceExpression6796); 
 
-            		createLeafNode(grammarAccess.getElementReferenceExpressionAccess().getValueDataElementCrossReference_1_0(), "value"); 
+            		createLeafNode(grammarAccess.getElementReferenceExpressionAccess().getValueDeclarationCrossReference_1_0(), "value"); 
             	
 
             }

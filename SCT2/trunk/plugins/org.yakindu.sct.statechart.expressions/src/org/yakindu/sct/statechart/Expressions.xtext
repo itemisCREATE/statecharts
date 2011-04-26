@@ -237,7 +237,7 @@ PrimitiveValueExpression returns Expression:
 	{PrimitiveValueExpression} value=Literal;
 
 ElementReferenceExpression returns Expression:
-	{ElementReferenceExpression} value=[sct::DataElement];
+	{ElementReferenceExpression} value=[sct::Declaration];
 
 OperationCall returns Expression:
 	{OperationCall} operation=[Operation] '(' (args+=Expression (',' args+=Expression)* )?')';
