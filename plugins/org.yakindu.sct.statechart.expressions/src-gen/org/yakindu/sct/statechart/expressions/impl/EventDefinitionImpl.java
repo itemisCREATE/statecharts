@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.yakindu.model.sct.statechart.DataElement;
+import org.yakindu.model.sct.statechart.Declaration;
 import org.yakindu.model.sct.statechart.Event;
 import org.yakindu.model.sct.statechart.NamedElement;
 import org.yakindu.model.sct.statechart.StatechartPackage;
@@ -378,7 +378,7 @@ public class EventDefinitionImpl extends DefinitionImpl implements EventDefiniti
         default: return -1;
       }
     }
-    if (baseClass == DataElement.class)
+    if (baseClass == Declaration.class)
     {
       switch (derivedFeatureID)
       {
@@ -411,7 +411,7 @@ public class EventDefinitionImpl extends DefinitionImpl implements EventDefiniti
         default: return -1;
       }
     }
-    if (baseClass == DataElement.class)
+    if (baseClass == Declaration.class)
     {
       switch (baseFeatureID)
       {

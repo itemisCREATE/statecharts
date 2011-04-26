@@ -3492,7 +3492,7 @@ ruleElementReferenceExpression returns [EObject current=null]
         }
 	RULE_ID
 	{
-		createLeafNode(grammarAccess.getElementReferenceExpressionAccess().getValueDataElementCrossReference_1_0(), "value"); 
+		createLeafNode(grammarAccess.getElementReferenceExpressionAccess().getValueDeclarationCrossReference_1_0(), "value"); 
 	}
 
 )

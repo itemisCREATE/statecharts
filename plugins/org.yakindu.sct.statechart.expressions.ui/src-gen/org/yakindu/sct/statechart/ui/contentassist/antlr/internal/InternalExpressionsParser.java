@@ -21576,17 +21576,17 @@ public class InternalExpressionsParser extends AbstractInternalContentAssistPars
             // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:8224:1: ( ( RULE_ID ) )
             // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:8225:1: ( RULE_ID )
             {
-             before(grammarAccess.getElementReferenceExpressionAccess().getValueDataElementCrossReference_1_0()); 
+             before(grammarAccess.getElementReferenceExpressionAccess().getValueDeclarationCrossReference_1_0()); 
             // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:8226:1: ( RULE_ID )
             // ../org.yakindu.sct.statechart.expressions.ui/src-gen/org/yakindu/sct/statechart/ui/contentassist/antlr/internal/InternalExpressions.g:8227:1: RULE_ID
             {
-             before(grammarAccess.getElementReferenceExpressionAccess().getValueDataElementIDTerminalRuleCall_1_0_1()); 
+             before(grammarAccess.getElementReferenceExpressionAccess().getValueDeclarationIDTerminalRuleCall_1_0_1()); 
             match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__ElementReferenceExpression__ValueAssignment_116804); 
-             after(grammarAccess.getElementReferenceExpressionAccess().getValueDataElementIDTerminalRuleCall_1_0_1()); 
+             after(grammarAccess.getElementReferenceExpressionAccess().getValueDeclarationIDTerminalRuleCall_1_0_1()); 
 
             }
 
-             after(grammarAccess.getElementReferenceExpressionAccess().getValueDataElementCrossReference_1_0()); 
+             after(grammarAccess.getElementReferenceExpressionAccess().getValueDeclarationCrossReference_1_0()); 
 
             }
 

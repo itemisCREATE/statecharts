@@ -10,7 +10,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
-import org.yakindu.model.sct.statechart.DataElement;
+import org.yakindu.model.sct.statechart.Declaration;
 import org.yakindu.model.sct.statechart.Event;
 import org.yakindu.model.sct.statechart.NamedElement;
 import org.yakindu.model.sct.statechart.Variable;
@@ -214,7 +214,7 @@ public class ExpressionsSwitch<T>
         T result = caseEventDefinition(eventDefinition);
         if (result == null) result = caseDefinition(eventDefinition);
         if (result == null) result = caseEvent(eventDefinition);
-        if (result == null) result = caseDataElement(eventDefinition);
+        if (result == null) result = caseDeclaration(eventDefinition);
         if (result == null) result = caseNamedElement(eventDefinition);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -232,7 +232,7 @@ public class ExpressionsSwitch<T>
         T result = caseVariableDefinition(variableDefinition);
         if (result == null) result = caseDefinition(variableDefinition);
         if (result == null) result = caseVariable(variableDefinition);
-        if (result == null) result = caseDataElement(variableDefinition);
+        if (result == null) result = caseDeclaration(variableDefinition);
         if (result == null) result = caseNamedElement(variableDefinition);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -1418,17 +1418,17 @@ public class ExpressionsSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Data Element</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Declaration</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Data Element</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Declaration</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseDataElement(DataElement object)
+  public T caseDeclaration(Declaration object)
   {
     return null;
   }

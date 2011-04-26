@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.yakindu.model.sct.statechart.DataElement;
+import org.yakindu.model.sct.statechart.Declaration;
 import org.yakindu.model.sct.statechart.NamedElement;
 import org.yakindu.model.sct.statechart.StatechartPackage;
 import org.yakindu.model.sct.statechart.Variable;
@@ -397,7 +397,7 @@ public class VariableDefinitionImpl extends DefinitionImpl implements VariableDe
         default: return -1;
       }
     }
-    if (baseClass == DataElement.class)
+    if (baseClass == Declaration.class)
     {
       switch (derivedFeatureID)
       {
@@ -430,7 +430,7 @@ public class VariableDefinitionImpl extends DefinitionImpl implements VariableDe
         default: return -1;
       }
     }
-    if (baseClass == DataElement.class)
+    if (baseClass == Declaration.class)
     {
       switch (baseFeatureID)
       {

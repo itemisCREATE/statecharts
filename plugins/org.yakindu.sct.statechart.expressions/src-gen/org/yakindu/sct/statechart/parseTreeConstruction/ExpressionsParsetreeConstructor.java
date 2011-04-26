@@ -8335,11 +8335,11 @@ protected class PrimitiveValueExpression_ValueAssignment_1 extends AssignmentTok
 /************ begin Rule ElementReferenceExpression ****************
  *
  * ElementReferenceExpression returns Expression:
- * 	{ElementReferenceExpression} value=[sct::DataElement];
+ * 	{ElementReferenceExpression} value=[sct::Declaration];
  *
  **/
 
-// {ElementReferenceExpression} value=[sct::DataElement]
+// {ElementReferenceExpression} value=[sct::Declaration]
 protected class ElementReferenceExpression_Group extends GroupToken {
 	
 	public ElementReferenceExpression_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -8394,7 +8394,7 @@ protected class ElementReferenceExpression_ElementReferenceExpressionAction_0 ex
 	}
 }
 
-// value=[sct::DataElement]
+// value=[sct::Declaration]
 protected class ElementReferenceExpression_ValueAssignment_1 extends AssignmentToken  {
 	
 	public ElementReferenceExpression_ValueAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -8420,9 +8420,9 @@ protected class ElementReferenceExpression_ValueAssignment_1 extends AssignmentT
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("value");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getElementReferenceExpressionAccess().getValueDataElementCrossReference_1_0().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getElementReferenceExpressionAccess().getValueDeclarationCrossReference_1_0().getType().getClassifier())) {
 				type = AssignmentType.CROSS_REFERENCE;
-				element = grammarAccess.getElementReferenceExpressionAccess().getValueDataElementCrossReference_1_0(); 
+				element = grammarAccess.getElementReferenceExpressionAccess().getValueDeclarationCrossReference_1_0(); 
 				return obj;
 			}
 		}

@@ -8222,12 +8222,12 @@ rule__ElementReferenceExpression__ValueAssignment_1
     }
 :
 (
-{ before(grammarAccess.getElementReferenceExpressionAccess().getValueDataElementCrossReference_1_0()); }
+{ before(grammarAccess.getElementReferenceExpressionAccess().getValueDeclarationCrossReference_1_0()); }
 (
-{ before(grammarAccess.getElementReferenceExpressionAccess().getValueDataElementIDTerminalRuleCall_1_0_1()); }
-	RULE_ID{ after(grammarAccess.getElementReferenceExpressionAccess().getValueDataElementIDTerminalRuleCall_1_0_1()); }
+{ before(grammarAccess.getElementReferenceExpressionAccess().getValueDeclarationIDTerminalRuleCall_1_0_1()); }
+	RULE_ID{ after(grammarAccess.getElementReferenceExpressionAccess().getValueDeclarationIDTerminalRuleCall_1_0_1()); }
 )
-{ after(grammarAccess.getElementReferenceExpressionAccess().getValueDataElementCrossReference_1_0()); }
+{ after(grammarAccess.getElementReferenceExpressionAccess().getValueDeclarationCrossReference_1_0()); }
 )
 
 ;

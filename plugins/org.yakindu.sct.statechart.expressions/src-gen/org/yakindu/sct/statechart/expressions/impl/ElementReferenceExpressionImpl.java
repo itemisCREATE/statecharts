@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.yakindu.model.sct.statechart.DataElement;
+import org.yakindu.model.sct.statechart.Declaration;
 
 import org.yakindu.sct.statechart.expressions.ElementReferenceExpression;
 import org.yakindu.sct.statechart.expressions.ExpressionsPackage;
@@ -40,7 +40,7 @@ public class ElementReferenceExpressionImpl extends ExpressionImpl implements El
    * @generated
    * @ordered
    */
-  protected DataElement value;
+  protected Declaration value;
 
   /**
    * <!-- begin-user-doc -->
@@ -68,12 +68,12 @@ public class ElementReferenceExpressionImpl extends ExpressionImpl implements El
    * <!-- end-user-doc -->
    * @generated
    */
-  public DataElement getValue()
+  public Declaration getValue()
   {
     if (value != null && value.eIsProxy())
     {
       InternalEObject oldValue = (InternalEObject)value;
-      value = (DataElement)eResolveProxy(oldValue);
+      value = (Declaration)eResolveProxy(oldValue);
       if (value != oldValue)
       {
         if (eNotificationRequired())
@@ -88,7 +88,7 @@ public class ElementReferenceExpressionImpl extends ExpressionImpl implements El
    * <!-- end-user-doc -->
    * @generated
    */
-  public DataElement basicGetValue()
+  public Declaration basicGetValue()
   {
     return value;
   }
@@ -98,9 +98,9 @@ public class ElementReferenceExpressionImpl extends ExpressionImpl implements El
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setValue(DataElement newValue)
+  public void setValue(Declaration newValue)
   {
-    DataElement oldValue = value;
+    Declaration oldValue = value;
     value = newValue;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.ELEMENT_REFERENCE_EXPRESSION__VALUE, oldValue, value));
@@ -134,7 +134,7 @@ public class ElementReferenceExpressionImpl extends ExpressionImpl implements El
     switch (featureID)
     {
       case ExpressionsPackage.ELEMENT_REFERENCE_EXPRESSION__VALUE:
-        setValue((DataElement)newValue);
+        setValue((Declaration)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -151,7 +151,7 @@ public class ElementReferenceExpressionImpl extends ExpressionImpl implements El
     switch (featureID)
     {
       case ExpressionsPackage.ELEMENT_REFERENCE_EXPRESSION__VALUE:
-        setValue((DataElement)null);
+        setValue((Declaration)null);
         return;
     }
     super.eUnset(featureID);

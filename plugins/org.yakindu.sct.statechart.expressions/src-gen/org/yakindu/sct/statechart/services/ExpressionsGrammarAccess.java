@@ -1709,27 +1709,27 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cElementReferenceExpressionAction_0 = (Action)cGroup.eContents().get(0);
 		private final Assignment cValueAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final CrossReference cValueDataElementCrossReference_1_0 = (CrossReference)cValueAssignment_1.eContents().get(0);
-		private final RuleCall cValueDataElementIDTerminalRuleCall_1_0_1 = (RuleCall)cValueDataElementCrossReference_1_0.eContents().get(1);
+		private final CrossReference cValueDeclarationCrossReference_1_0 = (CrossReference)cValueAssignment_1.eContents().get(0);
+		private final RuleCall cValueDeclarationIDTerminalRuleCall_1_0_1 = (RuleCall)cValueDeclarationCrossReference_1_0.eContents().get(1);
 		
 		//ElementReferenceExpression returns Expression:
-		//	{ElementReferenceExpression} value=[sct::DataElement];
+		//	{ElementReferenceExpression} value=[sct::Declaration];
 		public ParserRule getRule() { return rule; }
 
-		//{ElementReferenceExpression} value=[sct::DataElement]
+		//{ElementReferenceExpression} value=[sct::Declaration]
 		public Group getGroup() { return cGroup; }
 
 		//{ElementReferenceExpression}
 		public Action getElementReferenceExpressionAction_0() { return cElementReferenceExpressionAction_0; }
 
-		//value=[sct::DataElement]
+		//value=[sct::Declaration]
 		public Assignment getValueAssignment_1() { return cValueAssignment_1; }
 
-		//[sct::DataElement]
-		public CrossReference getValueDataElementCrossReference_1_0() { return cValueDataElementCrossReference_1_0; }
+		//[sct::Declaration]
+		public CrossReference getValueDeclarationCrossReference_1_0() { return cValueDeclarationCrossReference_1_0; }
 
 		//ID
-		public RuleCall getValueDataElementIDTerminalRuleCall_1_0_1() { return cValueDataElementIDTerminalRuleCall_1_0_1; }
+		public RuleCall getValueDeclarationIDTerminalRuleCall_1_0_1() { return cValueDeclarationIDTerminalRuleCall_1_0_1; }
 	}
 
 	public class OperationCallElements extends AbstractParserRuleElementFinder {
@@ -2840,7 +2840,7 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ElementReferenceExpression returns Expression:
-	//	{ElementReferenceExpression} value=[sct::DataElement];
+	//	{ElementReferenceExpression} value=[sct::Declaration];
 	public ElementReferenceExpressionElements getElementReferenceExpressionAccess() {
 		return (pElementReferenceExpression != null) ? pElementReferenceExpression : (pElementReferenceExpression = new ElementReferenceExpressionElements());
 	}
