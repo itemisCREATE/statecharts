@@ -184,6 +184,7 @@ public class StateEditPart extends ShapeNodeEditPart implements
 			super.addChildVisual(childEditPart, index);
 		}
 	}
+	//TODO: removeChildvisual
 
 	@Override
 	protected void addNotationalListeners() {

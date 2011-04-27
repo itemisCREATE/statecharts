@@ -41,7 +41,10 @@ public class StatechartTextEditPart extends ShapeNodeEditPart implements
 
 	@Override
 	protected void addChildVisual(EditPart childEditPart, int index) {
-		if (childEditPart instanceof StatechartTextExpressionEditPart) {
+		if (childEditPart instanceof StatechartNameEditPart) {
+			((StatechartNameEditPart) childEditPart).setLabel(getPrimaryShape()
+					.getName());
+		} else if (childEditPart instanceof StatechartTextExpressionEditPart) {
 			IFigure pane = getPrimaryShape().getCompartment();
 			pane.setLayoutManager(new StackLayout());
 			IFigure compartmentFigure = ((StatechartTextExpressionEditPart) childEditPart)
