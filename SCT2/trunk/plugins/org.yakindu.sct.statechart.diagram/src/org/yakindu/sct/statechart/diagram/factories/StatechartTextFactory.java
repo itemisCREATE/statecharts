@@ -19,7 +19,8 @@ import org.yakindu.sct.statechart.diagram.providers.SemanticHints;
  * @author muelder
  * 
  */
-public class StatechartTextFactory extends ShapeViewFactory {
+public class StatechartTextFactory extends ShapeViewFactory implements
+		SemanticHints {
 
 	@Override
 	protected void decorateView(View containerView, View view,
@@ -33,15 +34,16 @@ public class StatechartTextFactory extends ShapeViewFactory {
 		if (eObject != null) {
 			eObjectAdapter = new EObjectAdapter(eObject);
 		}
-
-		Node textCompartment = getViewService().createNode(eObjectAdapter, view,
-				SemanticHints.STATECHART_TEXT_EXPRESSION, ViewUtil.APPEND,
-				true, getPreferencesHint());
-		Assert.isNotNull(textCompartment);		
+		//Create the statechart name label
+		FactoryUtils.createLabel(view, STATECHART_NAME);
+		//create the expressions compartment
+		Node textCompartment = getViewService().createNode(eObjectAdapter,
+				view, STATECHART_TEXT_EXPRESSION, ViewUtil.APPEND, true,
+				getPreferencesHint());
+		Assert.isNotNull(textCompartment);
 		ShapeStyle style = (ShapeStyle) view.getStyle(NotationPackage.eINSTANCE
 				.getShapeStyle());
 		style.setFillColor(FigureUtilities.RGBToInteger(ColorConstants.white
 				.getRGB()));
-		
 	}
 }

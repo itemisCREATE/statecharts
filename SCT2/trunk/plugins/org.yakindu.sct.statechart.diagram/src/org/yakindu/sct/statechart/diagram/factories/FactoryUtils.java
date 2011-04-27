@@ -87,6 +87,11 @@ public final class FactoryUtils {
 	public static void createStatechartModel(Resource resource) {
 		// Create a statechart
 		Statechart statechart = StatechartFactory.eINSTANCE.createStatechart();
+		String lastSegment = resource.getURI().lastSegment();
+		String statechartName = lastSegment.substring(0,
+				lastSegment.indexOf('.'));
+		statechart.setName(statechartName);
+
 		Diagram diagram = ViewService.createDiagram(statechart,
 				StatechartDiagramEditor.ID,
 				DiagramActivator.DIAGRAM_PREFERENCES_HINT);
@@ -103,14 +108,12 @@ public final class FactoryUtils {
 						DiagramActivator.DIAGRAM_PREFERENCES_HINT);
 		setRegionViewLayoutConstraint(regionView);
 		// // Create an initial state
-		Entry initialState = StatechartFactory.eINSTANCE
-				.createEntry();
+		Entry initialState = StatechartFactory.eINSTANCE.createEntry();
 		initialState.setKind(EntryKind.INITIAL);
 		region.getVertices().add(initialState);
 		Node initialStateView = ViewService.createNode(
 				getRegionCompartmentView(regionView), initialState,
-				SemanticHints.ENTRY,
-				DiagramActivator.DIAGRAM_PREFERENCES_HINT);
+				SemanticHints.ENTRY, DiagramActivator.DIAGRAM_PREFERENCES_HINT);
 		setInitialStateViewLayoutConstraint(initialStateView);
 		// Create the first state
 		State state = StatechartFactory.eINSTANCE.createState();

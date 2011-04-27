@@ -46,6 +46,7 @@ public class StatechartDiagramViewProvider extends AbstractViewProvider
 		factories.put(StatechartDiagramEditor.ID,
 				StatechartDiagramViewFactory.class);
 		factories.put(STATECHART_TEXT, StatechartTextFactory.class);
+		factories.put(STATECHART_NAME, ShapeViewFactory.class);
 		factories.put(STATECHART_TEXT_EXPRESSION, ShapeViewFactory.class);
 		factories.put(REGION, RegionViewFactory.class);
 		factories.put(REGION_COMPARTMENT, ShapeViewFactory.class);
@@ -75,7 +76,6 @@ public class StatechartDiagramViewProvider extends AbstractViewProvider
 		return getClass(diagramKind);
 	}
 
-	
 	protected Class<?> getEdgeViewClass(IAdaptable semanticAdapter,
 			View containerView, String semanticHint) {
 		if (semanticHint == null || "".equals(semanticHint)) {
@@ -86,7 +86,6 @@ public class StatechartDiagramViewProvider extends AbstractViewProvider
 		return getClass(semanticHint);
 	}
 
-	
 	protected Class<?> getNodeViewClass(IAdaptable semanticAdapter,
 			View containerView, String semanticHint) {
 		if (semanticHint == null || "".equals(semanticHint)) {

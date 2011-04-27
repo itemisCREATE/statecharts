@@ -30,6 +30,7 @@ import org.yakindu.sct.statechart.diagram.editparts.StateNameEditPart;
 import org.yakindu.sct.statechart.diagram.editparts.StateTextCompartmentEditPart;
 import org.yakindu.sct.statechart.diagram.editparts.StateTextCompartmentExpressionEditPart;
 import org.yakindu.sct.statechart.diagram.editparts.StatechartDiagramEditPart;
+import org.yakindu.sct.statechart.diagram.editparts.StatechartNameEditPart;
 import org.yakindu.sct.statechart.diagram.editparts.StatechartTextEditPart;
 import org.yakindu.sct.statechart.diagram.editparts.StatechartTextExpressionEditPart;
 import org.yakindu.sct.statechart.diagram.editparts.TransitionEditPart;
@@ -53,6 +54,7 @@ public class StatechartDiagramEditPartProvider extends AbstractEditPartProvider
 		editParts.put(StatechartDiagramEditor.ID,
 				StatechartDiagramEditPart.class);
 		editParts.put(STATECHART_TEXT, StatechartTextEditPart.class);
+		editParts.put(STATECHART_NAME, StatechartNameEditPart.class);
 		editParts.put(STATECHART_TEXT_EXPRESSION,
 				StatechartTextExpressionEditPart.class);
 		editParts.put(CHOICE, ChoiceEditPart.class);

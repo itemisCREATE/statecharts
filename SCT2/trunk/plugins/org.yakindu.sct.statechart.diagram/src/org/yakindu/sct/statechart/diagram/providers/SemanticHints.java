@@ -11,6 +11,7 @@
 package org.yakindu.sct.statechart.diagram.providers;
 
 /**
+ * The semantic hints for the factories.
  * 
  * @author muelder
  * 
@@ -18,6 +19,7 @@ package org.yakindu.sct.statechart.diagram.providers;
 public interface SemanticHints {
 
 	String STATECHART_TEXT = "StatechartText";
+	String STATECHART_NAME = "StatechartName";
 	String STATECHART_TEXT_EXPRESSION = "StatechartTextExpression";
 
 	String REGION = "Region";

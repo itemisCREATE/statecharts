@@ -69,6 +69,7 @@ public abstract class TextAwareLabelEditPart extends CompartmentEditPart
 		return new TextDirectEditManager(this);
 	}
 
+	
 	@Override
 	public Object getAdapter(@SuppressWarnings("rawtypes") Class key) {
 		if (key.equals(ILabelDelegate.class)) {

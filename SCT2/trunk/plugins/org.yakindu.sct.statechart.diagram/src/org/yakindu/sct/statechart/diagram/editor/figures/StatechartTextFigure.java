@@ -13,8 +13,8 @@ package org.yakindu.sct.statechart.diagram.editor.figures;
 import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.GridData;
 import org.eclipse.draw2d.GridLayout;
-import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.draw2d.RectangleFigure;
+import org.eclipse.draw2d.StackLayout;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 import org.eclipse.gmf.runtime.draw2d.ui.mapmode.IMapMode;
 import org.yakindu.sct.statechart.diagram.editor.figures.utils.GridDataFactory;
@@ -27,8 +27,13 @@ import org.yakindu.sct.statechart.diagram.editor.figures.utils.GridDataFactory;
  */
 public class StatechartTextFigure extends RectangleFigure {
 
-	private WrappingLabel title;
-
+	/**
+	 * The Name of the statechart
+	 */
+	private WrappingLabel name;
+	/**
+	 * The text compartment for statechart expressions
+	 */
 	private Figure compartment;
 
 	public StatechartTextFigure(IMapMode mapMode) {
@@ -41,14 +46,12 @@ public class StatechartTextFigure extends RectangleFigure {
 
 	private void createContents() {
 		// Name Label
-		title = new WrappingLabel();
-		title.setAlignment(PositionConstants.EAST);
-		title.setText("declarations");
+		name = new WrappingLabel();
+		name.setLayoutManager(new StackLayout());
 		GridData data = GridDataFactory.fillDefaults()
 				.align(GridData.CENTER, GridData.CENTER).grab(true, false)
 				.getData();
-		this.add(title, data);
-		
+		this.add(name, data);
 		// Text compartment
 		compartment = new Figure();
 		this.add(compartment, GridDataFactory.fillDefaults().grab(true, true)
@@ -57,6 +60,10 @@ public class StatechartTextFigure extends RectangleFigure {
 
 	public Figure getCompartment() {
 		return compartment;
+	}
+
+	public WrappingLabel getName() {
+		return name;
 	}
 
 }
