@@ -50,6 +50,11 @@ public class StateFigure extends RoundedRectangle {
 		this.setOutline(true);
 		createContents();
 	}
+	@Override
+	public void invalidate() {
+		// TODO Auto-generated method stub
+		super.invalidate();
+	}
 
 	private void createContents() {
 		// Name Label
@@ -61,7 +66,7 @@ public class StateFigure extends RoundedRectangle {
 		textCompartmentPane = new Figure();
 		textCompartmentPane.setLayoutManager(new StackLayout());
 		this.add(textCompartmentPane,
-				GridDataFactory.fillDefaults().grab(true, true).getData());
+				GridDataFactory.fillDefaults().grab(true, false).getData());
 		// Figure Compartment
 		figureCompartmentPane = new Figure();
 		figureCompartmentPane.setLayoutManager(new StackLayout());
