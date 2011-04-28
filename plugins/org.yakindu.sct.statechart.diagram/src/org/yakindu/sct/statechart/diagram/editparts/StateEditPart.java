@@ -92,18 +92,21 @@ public class StateEditPart extends ShapeNodeEditPart implements
 					getPrimaryShape().getTextCompartmentPane(),
 					getCollapsedData());
 		} else {
+			GridData expandedData = getExpandedData();
+			if (!getFigureCompartment().isCollapsed())
+				expandedData.grabExcessVerticalSpace = false;
 			getPrimaryShape().setConstraint(
-					getPrimaryShape().getTextCompartmentPane(),
-					getExpandedData());
+					getPrimaryShape().getTextCompartmentPane(), expandedData);
 		}
 		if (getFigureCompartment().isCollapsed()) {
 			getPrimaryShape().setConstraint(
 					getPrimaryShape().getFigureCompartmentPane(),
 					getCollapsedData());
 		} else {
+			GridData expandedData = getExpandedData();
+
 			getPrimaryShape().setConstraint(
-					getPrimaryShape().getFigureCompartmentPane(),
-					getExpandedData());
+					getPrimaryShape().getFigureCompartmentPane(), expandedData);
 		}
 	}
 
@@ -184,7 +187,8 @@ public class StateEditPart extends ShapeNodeEditPart implements
 			super.addChildVisual(childEditPart, index);
 		}
 	}
-	//TODO: removeChildvisual
+
+	// TODO: removeChildvisual
 
 	@Override
 	protected void addNotationalListeners() {
