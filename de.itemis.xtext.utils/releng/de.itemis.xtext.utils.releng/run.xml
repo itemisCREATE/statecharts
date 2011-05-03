@@ -56,16 +56,12 @@
 			<slicingOptions includeOptional="false" includeNonGreedy="false" followStrict="true" />
 		</p2.mirror>
 
-		<!-- helios releases -->
-		<p2.mirror source="${downloadMirror}/releases/helios" destination="file:${repoBaseLocation}/releases_helios">
-			<iu id="org.eclipse.emf.sdk.feature.group" />
-			<iu id="org.eclipse.gmf.runtime.notation.sdk.feature.group" />
-			<iu id="org.eclipse.gmf.runtime.sdk.feature.group" />
-			<!--<slicingOptions includeOptional="false" includeNonGreedy="false" followStrict="true" />-->
-		</p2.mirror>
 
 			<!-- indigo releases -->
 		<p2.mirror source="${downloadMirror}/releases/indigo" destination="file:${repoBaseLocation}/releases_indigo">
+			<iu id="org.eclipse.emf.sdk.feature.group" />
+			<iu id="org.eclipse.gmf.runtime.notation.sdk.feature.group" />
+			<iu id="org.eclipse.gmf.runtime.sdk.feature.group" />
 			<iu id="org.eclipse.xtext.sdk.feature.group" />
 			<!--<slicingOptions includeOptional="false" includeNonGreedy="false" followStrict="true" />-->
 		</p2.mirror>
