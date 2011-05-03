@@ -16,6 +16,7 @@ import java.util.List;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.text.source.AnnotationModel;
+import org.eclipse.jface.text.source.ICharacterPairMatcher;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.SourceViewer;
 import org.eclipse.jface.viewers.CellEditor;
@@ -49,7 +50,6 @@ import org.eclipse.xtext.ui.editor.XtextSourceViewer;
 import org.eclipse.xtext.ui.editor.XtextSourceViewer.Factory;
 import org.eclipse.xtext.ui.editor.XtextSourceViewerConfiguration;
 import org.eclipse.xtext.ui.editor.bracketmatching.BracketMatchingPreferencesInitializer;
-import org.eclipse.xtext.ui.editor.bracketmatching.CharacterPairMatcher;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider;
@@ -61,7 +61,6 @@ import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
 
 import com.google.inject.Inject;
-
 
 /**
  * This class integrates xText Features into a {@link CellEditor} and can be
@@ -85,7 +84,6 @@ public class XtextCellEditor extends StyledTextCellEditor {
 	 */
 	private final KeyListener keyListener = new KeyListener() {
 
-
 		public void keyPressed(KeyEvent e) {
 			XtextCellEditor.this.valueChanged(true, true);
 			// CONTENTASSIST_PROPOSALS
@@ -98,12 +96,11 @@ public class XtextCellEditor extends StyledTextCellEditor {
 				});
 			}
 		}
+
 		public void keyReleased(KeyEvent e) {
 		}
 
 	};
-
-	
 
 	/**
 	 * The sourceViewer, that provides additional functions to the styled text
@@ -117,12 +114,12 @@ public class XtextCellEditor extends StyledTextCellEditor {
 	 */
 	@Inject
 	private XtextDocument document;
-	@Inject
-	private IssueResolutionProvider resolutionProvider;
+	// @Inject
+	private IssueResolutionProvider resolutionProvider = new IssueResolutionProvider.NullImpl();
 	@Inject
 	private IPreferenceStoreAccess preferenceStoreAccess;
 	@Inject
-	private CharacterPairMatcher characterPairMatcher;
+	private ICharacterPairMatcher characterPairMatcher;
 	@Inject
 	private XtextSourceViewerConfiguration configuration;
 	@Inject
@@ -132,8 +129,6 @@ public class XtextCellEditor extends StyledTextCellEditor {
 	@Inject
 	private IResourceValidator validator;
 
-
-
 	/**
 	 * C'tor to create a new Instance.
 	 * 
@@ -141,7 +136,7 @@ public class XtextCellEditor extends StyledTextCellEditor {
 	public XtextCellEditor(int style) {
 		setStyle(style);
 	}
-	
+
 	/**
 	 * Creates an {@link SourceViewer} and returns the {@link StyledText} widget
 	 * of the viewer as the cell editors control. Some code is copied from
@@ -152,13 +147,13 @@ public class XtextCellEditor extends StyledTextCellEditor {
 		sourceviewer = sourceViewerFactory.createSourceViewer(parent, null,
 				null, false, getStyle());
 		sourceviewer.configure(configuration);
-		
-		//'dummy' document for the sourceviewer
+
+		// 'dummy' document for the sourceviewer
 		XtextResourceSet resourceSet = new XtextResourceSet();
 		resourceSet.getResources().add(resource);
 		setResourceUri(resource);
 		document.setInput(resource);
-		
+
 		sourceviewer.setDocument(document, new AnnotationModel());
 
 		SourceViewerDecorationSupport support = new SourceViewerDecorationSupport(
@@ -182,7 +177,6 @@ public class XtextCellEditor extends StyledTextCellEditor {
 		text.setText("");
 		return text;
 	}
-
 
 	@Override
 	protected StyledText createStyledText(Composite parent) {
@@ -234,7 +228,6 @@ public class XtextCellEditor extends StyledTextCellEditor {
 
 	}
 
-
 	/**
 	 * Sets the resource uri. From the resource uris project name the global
 	 * scope is determined.
@@ -243,7 +236,7 @@ public class XtextCellEditor extends StyledTextCellEditor {
 	 */
 	protected void setResourceUri(final XtextResource resource) {
 		// TODO: This should be moved outside the CellEditor
-		//TODO: Remove dependency to IFileEditorInput
+		// TODO: Remove dependency to IFileEditorInput
 		Display.getDefault().syncExec(new Runnable() {
 
 			public void run() {
@@ -265,7 +258,6 @@ public class XtextCellEditor extends StyledTextCellEditor {
 			}
 		});
 	}
-
 
 	public IParseResult getParseResult() {
 		return document
