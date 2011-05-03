@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="expressions"
+    nsURI="http://www.yakindu.org/sct/statechart/Expressions" nsPrefix="expressions">
+  <eClassifiers xsi:type="ecore:EClass" name="Root">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="roots" upperBound="-1"
+        eType="ecore:EClass platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//DefRoot"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DefRoot"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StatechartRoot" eSuperTypes="platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//DefRoot">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="def" eType="ecore:EClass platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//StatechartDefinition"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StateRoot" eSuperTypes="platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//DefRoot">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="def" eType="ecore:EClass platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//StateDefinition"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TransitionRoot" eSuperTypes="platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//DefRoot">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="def" eType="ecore:EClass platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//TransitionStatement"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StatechartDefinition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="definitionScopes" upperBound="-1"
+        eType="ecore:EClass platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//StatechartScope"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StateDefinition"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TransitionStatement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Scope">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="definitions" upperBound="-1"
+        eType="ecore:EClass platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Definition"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SimpleScope" eSuperTypes="platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//StateDefinition platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Scope"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StatechartScope" eSuperTypes="platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Scope"/>
+  <eClassifiers xsi:type="ecore:EClass" name="InterfaceScope" eSuperTypes="platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//StatechartScope">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InternalScope" eSuperTypes="platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//StatechartScope"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Definition"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EventDefinition" eSuperTypes="platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Definition platform:/resource/org.yakindu.sct.model.statechart/model/emf/statechart.ecore#//Event">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" eType="ecore:EEnum platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Direction"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EEnum platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Type"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="derivation" eType="ecore:EClass platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//EventDerivation"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EventDerivation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="condition" eType="ecore:EClass platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Direction">
+    <eLiterals name="IN" literal="in"/>
+    <eLiterals name="OUT" value="1" literal="out"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VariableDefinition" eSuperTypes="platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Definition platform:/resource/org.yakindu.sct.model.statechart/model/emf/statechart.ecore#//Variable">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="readonly" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="external" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EEnum platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Type"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="initialValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Clock" eSuperTypes="platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Definition">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Operation" eSuperTypes="platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Definition">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="paramTypes" unique="false"
+        upperBound="-1" eType="ecore:EEnum platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Type"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EEnum platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Type"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Entrypoint" eSuperTypes="platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Definition">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Exitpoint" eSuperTypes="platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Definition">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Reaction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="trigger" eType="ecore:EClass platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//ReactionTrigger"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="effect" eType="ecore:EClass platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Effect"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="properties" eType="ecore:EClass platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//ReactionProperties"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LocalReaction" eSuperTypes="platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Definition platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Reaction"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TransitionReaction" eSuperTypes="platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//TransitionStatement platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Reaction"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ReactionTrigger">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="triggers" upperBound="-1"
+        eType="ecore:EClass platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//EventSpec"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="guardExpression" eType="ecore:EClass platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Effect">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actions" upperBound="-1"
+        eType="ecore:EClass platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Statement"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ReactionProperties">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
+        eType="ecore:EClass platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//ReactionProperty"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ReactionProperty"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ReactionPriority" eSuperTypes="platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//ReactionProperty">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="priority" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EntryPointSpec" eSuperTypes="platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//ReactionProperty">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="entrypoint" eType="ecore:EClass platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Entrypoint"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExitPointSpec" eSuperTypes="platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//ReactionProperty">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exitpoint" eType="ecore:EClass platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Exitpoint"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EventSpec"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RegularEventSpec" eSuperTypes="platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//EventSpec">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="event" eType="ecore:EClass platform:/resource/org.yakindu.sct.model.statechart/model/emf/statechart.ecore#//Event"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TimeEventSpec" eSuperTypes="platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//EventSpec">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="unit" eType="ecore:EEnum platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//TimeUnit"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BuiltinEventSpec" eSuperTypes="platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//EventSpec"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EntryEvent" eSuperTypes="platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//BuiltinEventSpec"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ExitEvent" eSuperTypes="platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//BuiltinEventSpec"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OnCycleEvent" eSuperTypes="platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//BuiltinEventSpec"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AlwaysEvent" eSuperTypes="platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//BuiltinEventSpec"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Statement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Assignment" eSuperTypes="platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Statement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="varRef" eType="ecore:EClass platform:/resource/org.yakindu.sct.model.statechart/model/emf/statechart.ecore#//Variable"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="ecore:EClass platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EventRaising" eSuperTypes="platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Statement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="event" eType="ecore:EClass platform:/resource/org.yakindu.sct.model.statechart/model/emf/statechart.ecore#//Event"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Expression"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="AdditiveOperator">
+    <eLiterals name="plus" literal="+"/>
+    <eLiterals name="minus" value="1" literal="-"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="MultiplicativeOperator">
+    <eLiterals name="mul" literal="*"/>
+    <eLiterals name="div" value="1" literal="/"/>
+    <eLiterals name="mod" value="2" literal="%"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="UnaryOperator">
+    <eLiterals name="positive" literal="+"/>
+    <eLiterals name="negative" value="1" literal="-"/>
+    <eLiterals name="complement" value="2" literal="~"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="RelationalOperator">
+    <eLiterals name="smaller" literal="&lt;"/>
+    <eLiterals name="smallerEqual" value="1" literal="&lt;="/>
+    <eLiterals name="greater" value="2" literal=">"/>
+    <eLiterals name="greaterEqual" value="3" literal=">="/>
+    <eLiterals name="equals" value="4" literal="=="/>
+    <eLiterals name="notEquals" value="5" literal="!="/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TimeUnit">
+    <eLiterals name="second" literal="s"/>
+    <eLiterals name="millisecond" value="1" literal="ms"/>
+    <eLiterals name="nanosecond" value="2" literal="ns"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Type">
+    <eLiterals name="void" literal="void"/>
+    <eLiterals name="integer" value="1" literal="integer"/>
+    <eLiterals name="real" value="2" literal="real"/>
+    <eLiterals name="boolean" value="3" literal="boolean"/>
+    <eLiterals name="string" value="4" literal="string"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EnterEvent" eSuperTypes="platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//EntryEvent"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LogicalOrExpression" eSuperTypes="platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="ecore:EClass platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" eType="ecore:EClass platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LogicalAndExpression" eSuperTypes="platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="ecore:EClass platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" eType="ecore:EClass platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LogicalNotExpression" eSuperTypes="platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operand" eType="ecore:EClass platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LogicalRelationExpression" eSuperTypes="platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="ecore:EClass platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="ecore:EEnum platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//RelationalOperator"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" eType="ecore:EClass platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NumericalAddSubtractExpression" eSuperTypes="platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="ecore:EClass platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="ecore:EEnum platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//AdditiveOperator"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" eType="ecore:EClass platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NumericalMultiplyDivideExpression" eSuperTypes="platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="ecore:EClass platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="ecore:EEnum platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//MultiplicativeOperator"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" eType="ecore:EClass platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NumericalUnaryExpression" eSuperTypes="platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="ecore:EEnum platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//UnaryOperator"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operand" eType="ecore:EClass platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PrimitiveValueExpression" eSuperTypes="platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ElementReferenceExpression" eSuperTypes="platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass platform:/resource/org.yakindu.sct.model.statechart/model/emf/statechart.ecore#//Declaration"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OperationCall" eSuperTypes="platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operation" eType="ecore:EClass platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Operation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="args" upperBound="-1" eType="ecore:EClass platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Expression"
+        containment="true"/>
+  </eClassifiers>
+</ecore:EPackage>
