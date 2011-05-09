@@ -29,7 +29,7 @@
 				</ant>
 			</try>
 			<catch>
-				<echo message="PDE Build failed: ${errorMsg}" />
+				<fail message="PDE Build failed: ${errorMsg}" />
 			</catch>
 		</trycatch>
 	</target>
