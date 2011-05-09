@@ -32,7 +32,7 @@
 				</not>
 			</or>
 			<then>
-				<trycatch>
+				<trycatch property="errorMessage" >
 					<try>
 						<mkdir dir="${repoBaseLocation}" />
 						<antcall target="prepareRepositories" />
@@ -40,7 +40,7 @@
 					<catch>
 						<echo message="Preparing repositories failed. Cleaning up..." />
 						<delete dir="${repoBaseLocation}" />
-						<echo message="Done." />
+						<fail message="Preparing repositories failed: ${errorMessage}" />
 					</catch>
 				</trycatch>
 			</then>
@@ -56,8 +56,7 @@
 			<slicingOptions includeOptional="false" includeNonGreedy="false" followStrict="true" />
 		</p2.mirror>
 
-
-			<!-- indigo releases -->
+		<!-- indigo releases -->
 		<p2.mirror source="${downloadMirror}/releases/indigo" destination="file:${repoBaseLocation}/releases_indigo">
 			<iu id="org.eclipse.emf.sdk.feature.group" />
 			<iu id="org.eclipse.gmf.runtime.notation.sdk.feature.group" />
