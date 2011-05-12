@@ -19,6 +19,8 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.tools.DirectEditManager;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.LabelEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.label.ILabelDelegate;
+import org.eclipse.gmf.runtime.diagram.ui.label.LabelExDelegate;
 import org.eclipse.gmf.runtime.diagram.ui.tools.TextDirectEditManager;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.LabelEx;
 import org.eclipse.gmf.runtime.notation.ShapeStyle;
@@ -40,13 +42,13 @@ public abstract class XtextLabelEditPart extends LabelEditPart implements
 
 	protected abstract DirectEditManager createXTextDirectEditManager();
 
-	public XtextLabelEditPart(View view) {
+	public XtextLabelEditPart(final View view) {
 		super(view);
 	}
 
 	@Override
 	protected IFigure createFigure() {
-		LabelEx label = new LabelEx();
+		final LabelEx label = new LabelEx();
 		label.setLabelAlignment(PositionConstants.LEFT);
 		label.setTextAlignment(PositionConstants.TOP);
 		return label;
@@ -57,7 +59,7 @@ public abstract class XtextLabelEditPart extends LabelEditPart implements
 		return (LabelEx) super.getFigure();
 	}
 
-	public void setLabelText(String text) {
+	public void setLabelText(final String text) {
 		getFigure().setText(text);
 	}
 
@@ -74,12 +76,12 @@ public abstract class XtextLabelEditPart extends LabelEditPart implements
 	}
 
 	@Override
-	protected void setFontColor(Color color) {
+	protected void setFontColor(final Color color) {
 		getFigure().setForegroundColor(color);
 	}
 
 	@Override
-	protected void handleNotificationEvent(Notification notification) {
+	protected void handleNotificationEvent(final Notification notification) {
 		if (notification.getNotifier() instanceof ShapeStyle) {
 			refreshVisuals();
 		}
@@ -87,7 +89,15 @@ public abstract class XtextLabelEditPart extends LabelEditPart implements
 	}
 
 	@Override
-	protected void performDirectEditRequest(Request request) {
+	public Object getAdapter(@SuppressWarnings("rawtypes") final Class key) {
+		if (key.equals(ILabelDelegate.class)) {
+			return new LabelExDelegate(getFigure());
+		}
+		return super.getAdapter(key);
+	}
+
+	@Override
+	protected void performDirectEditRequest(final Request request) {
 		if (manager == null) {
 			manager = createXTextDirectEditManager();
 		}
@@ -100,7 +110,7 @@ public abstract class XtextLabelEditPart extends LabelEditPart implements
 						if (theRequest.getExtendedData().get(
 								REQ_DIRECTEDIT_EXTENDEDDATA_INITIAL_CHAR) instanceof Character
 								&& manager instanceof TextDirectEditManager) {
-							Character initialChar = (Character) theRequest
+							final Character initialChar = (Character) theRequest
 									.getExtendedData()
 									.get(REQ_DIRECTEDIT_EXTENDEDDATA_INITIAL_CHAR);
 
@@ -112,7 +122,7 @@ public abstract class XtextLabelEditPart extends LabelEditPart implements
 					}
 				}
 			});
-		} catch (InterruptedException e) {
+		} catch (final InterruptedException e) {
 			e.printStackTrace();
 		}
 	}
