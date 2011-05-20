@@ -77,10 +77,10 @@
 	<!-- Steps to do before the repositories are being processed -->
 	<!-- ===================================================================== -->
 	<target name="preProcessRepos">
-		<!-- project updates -->
-		<p2.mirror source="${downloadMirror}/eclipse/updates/3.6" destination="file:${repoBaseLocation}/eclipse_updates_3_6">
-			<iu id="org.eclipse.platform.ide" />
-			<slicingOptions includeOptional="false" includeNonGreedy="false" followStrict="true" />
+		<!-- xtext utils -->
+		<p2.mirror source="https://builds.itemis.de/jenkins/job/XTEXT_UTILS/lastSuccessfulBuild/artifact/buildDirectory/build_local_repository/" destination="file:${repoBaseLocation}/xtext_utils_repository">
+			<iu id="de.itemis.xtext.utils.jface.feature.group" />
+			<iu id="de.itemis.xtext.utils.gmf.feature.group" />
 		</p2.mirror>
 	</target>
 
