@@ -8,6 +8,8 @@ package org.yakindu.sct.statechart.expressions.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
+import org.yakindu.model.sct.statechart.impl.ScopeImpl;
+
 import org.yakindu.sct.statechart.expressions.ExpressionsPackage;
 import org.yakindu.sct.statechart.expressions.InternalScope;
 
@@ -20,7 +22,7 @@ import org.yakindu.sct.statechart.expressions.InternalScope;
  *
  * @generated
  */
-public class InternalScopeImpl extends StatechartScopeImpl implements InternalScope
+public class InternalScopeImpl extends ScopeImpl implements InternalScope
 {
   /**
    * <!-- begin-user-doc -->

@@ -81,13 +81,13 @@ public interface ExpressionsFactory extends EFactory
   StatechartDefinition createStatechartDefinition();
 
   /**
-   * Returns a new object of class '<em>State Definition</em>'.
+   * Returns a new object of class '<em>State Declaration</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>State Definition</em>'.
+   * @return a new object of class '<em>State Declaration</em>'.
    * @generated
    */
-  StateDefinition createStateDefinition();
+  StateDeclaration createStateDeclaration();
 
   /**
    * Returns a new object of class '<em>Transition Statement</em>'.
@@ -99,69 +99,6 @@ public interface ExpressionsFactory extends EFactory
   TransitionStatement createTransitionStatement();
 
   /**
-   * Returns a new object of class '<em>Scope</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Scope</em>'.
-   * @generated
-   */
-  Scope createScope();
-
-  /**
-   * Returns a new object of class '<em>Simple Scope</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Simple Scope</em>'.
-   * @generated
-   */
-  SimpleScope createSimpleScope();
-
-  /**
-   * Returns a new object of class '<em>Statechart Scope</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Statechart Scope</em>'.
-   * @generated
-   */
-  StatechartScope createStatechartScope();
-
-  /**
-   * Returns a new object of class '<em>Interface Scope</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Interface Scope</em>'.
-   * @generated
-   */
-  InterfaceScope createInterfaceScope();
-
-  /**
-   * Returns a new object of class '<em>Internal Scope</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Internal Scope</em>'.
-   * @generated
-   */
-  InternalScope createInternalScope();
-
-  /**
-   * Returns a new object of class '<em>Definition</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Definition</em>'.
-   * @generated
-   */
-  Definition createDefinition();
-
-  /**
-   * Returns a new object of class '<em>Event Definition</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Event Definition</em>'.
-   * @generated
-   */
-  EventDefinition createEventDefinition();
-
-  /**
    * Returns a new object of class '<em>Event Derivation</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -169,51 +106,6 @@ public interface ExpressionsFactory extends EFactory
    * @generated
    */
   EventDerivation createEventDerivation();
-
-  /**
-   * Returns a new object of class '<em>Variable Definition</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Variable Definition</em>'.
-   * @generated
-   */
-  VariableDefinition createVariableDefinition();
-
-  /**
-   * Returns a new object of class '<em>Clock</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Clock</em>'.
-   * @generated
-   */
-  Clock createClock();
-
-  /**
-   * Returns a new object of class '<em>Operation</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Operation</em>'.
-   * @generated
-   */
-  Operation createOperation();
-
-  /**
-   * Returns a new object of class '<em>Entrypoint</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Entrypoint</em>'.
-   * @generated
-   */
-  Entrypoint createEntrypoint();
-
-  /**
-   * Returns a new object of class '<em>Exitpoint</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Exitpoint</em>'.
-   * @generated
-   */
-  Exitpoint createExitpoint();
 
   /**
    * Returns a new object of class '<em>Reaction</em>'.
@@ -241,24 +133,6 @@ public interface ExpressionsFactory extends EFactory
    * @generated
    */
   TransitionReaction createTransitionReaction();
-
-  /**
-   * Returns a new object of class '<em>Reaction Trigger</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Reaction Trigger</em>'.
-   * @generated
-   */
-  ReactionTrigger createReactionTrigger();
-
-  /**
-   * Returns a new object of class '<em>Effect</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Effect</em>'.
-   * @generated
-   */
-  Effect createEffect();
 
   /**
    * Returns a new object of class '<em>Reaction Properties</em>'.
@@ -412,6 +286,96 @@ public interface ExpressionsFactory extends EFactory
    * @generated
    */
   Expression createExpression();
+
+  /**
+   * Returns a new object of class '<em>Simple Scope</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Simple Scope</em>'.
+   * @generated
+   */
+  SimpleScope createSimpleScope();
+
+  /**
+   * Returns a new object of class '<em>Interface Scope</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Interface Scope</em>'.
+   * @generated
+   */
+  InterfaceScope createInterfaceScope();
+
+  /**
+   * Returns a new object of class '<em>Internal Scope</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Internal Scope</em>'.
+   * @generated
+   */
+  InternalScope createInternalScope();
+
+  /**
+   * Returns a new object of class '<em>Event Definition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Event Definition</em>'.
+   * @generated
+   */
+  EventDefinition createEventDefinition();
+
+  /**
+   * Returns a new object of class '<em>Variable Definition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Variable Definition</em>'.
+   * @generated
+   */
+  VariableDefinition createVariableDefinition();
+
+  /**
+   * Returns a new object of class '<em>Operation</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Operation</em>'.
+   * @generated
+   */
+  Operation createOperation();
+
+  /**
+   * Returns a new object of class '<em>Entrypoint</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Entrypoint</em>'.
+   * @generated
+   */
+  Entrypoint createEntrypoint();
+
+  /**
+   * Returns a new object of class '<em>Exitpoint</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Exitpoint</em>'.
+   * @generated
+   */
+  Exitpoint createExitpoint();
+
+  /**
+   * Returns a new object of class '<em>Reaction Trigger</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Reaction Trigger</em>'.
+   * @generated
+   */
+  ReactionTrigger createReactionTrigger();
+
+  /**
+   * Returns a new object of class '<em>Reaction Effect</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Reaction Effect</em>'.
+   * @generated
+   */
+  ReactionEffect createReactionEffect();
 
   /**
    * Returns a new object of class '<em>Enter Event</em>'.

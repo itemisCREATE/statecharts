@@ -8,6 +8,9 @@ package org.yakindu.sct.statechart.expressions;
 
 import org.eclipse.emf.ecore.EObject;
 
+import org.yakindu.model.sct.statechart.Effect;
+import org.yakindu.model.sct.statechart.Trigger;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Reaction</b></em>'.
@@ -37,12 +40,12 @@ public interface Reaction extends EObject
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Trigger</em>' containment reference.
-   * @see #setTrigger(ReactionTrigger)
+   * @see #setTrigger(Trigger)
    * @see org.yakindu.sct.statechart.expressions.ExpressionsPackage#getReaction_Trigger()
    * @model containment="true"
    * @generated
    */
-  ReactionTrigger getTrigger();
+  Trigger getTrigger();
 
   /**
    * Sets the value of the '{@link org.yakindu.sct.statechart.expressions.Reaction#getTrigger <em>Trigger</em>}' containment reference.
@@ -52,7 +55,7 @@ public interface Reaction extends EObject
    * @see #getTrigger()
    * @generated
    */
-  void setTrigger(ReactionTrigger value);
+  void setTrigger(Trigger value);
 
   /**
    * Returns the value of the '<em><b>Effect</b></em>' containment reference.

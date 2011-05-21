@@ -26,7 +26,7 @@ import org.yakindu.model.sct.statechart.Event;
  * @model
  * @generated
  */
-public interface EventDefinition extends Definition, Event
+public interface EventDefinition extends Event
 {
   /**
    * Returns the value of the '<em><b>Direction</b></em>' attribute.

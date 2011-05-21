@@ -8,7 +8,7 @@ package org.yakindu.sct.statechart.expressions;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.emf.ecore.EObject;
+import org.yakindu.model.sct.statechart.Trigger;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,7 +27,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface ReactionTrigger extends EObject
+public interface ReactionTrigger extends Trigger
 {
   /**
    * Returns the value of the '<em><b>Triggers</b></em>' containment reference list.

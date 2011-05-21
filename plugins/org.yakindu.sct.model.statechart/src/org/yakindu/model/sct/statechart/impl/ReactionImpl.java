@@ -12,13 +12,10 @@ package org.yakindu.model.sct.statechart.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.yakindu.model.sct.statechart.Effect;
 import org.yakindu.model.sct.statechart.Reaction;
 import org.yakindu.model.sct.statechart.StatechartPackage;
@@ -38,7 +35,7 @@ import org.yakindu.model.sct.statechart.Trigger;
  *
  * @generated
  */
-public class ReactionImpl extends EObjectImpl implements Reaction {
+public abstract class ReactionImpl extends EObjectImpl implements Reaction {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

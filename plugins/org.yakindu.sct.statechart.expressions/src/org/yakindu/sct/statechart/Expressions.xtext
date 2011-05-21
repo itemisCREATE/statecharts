@@ -6,172 +6,175 @@ import "platform:/resource/org.yakindu.sct.model.statechart/model/emf/statechart
 /* ---- root rules ----
 These root rules are not relevant for the grammar integration in the statechart. They just integrate the different start rules consistently 
 into a single grammar. 
-*/ 
+*/
+Root:
+	(roots+=DefRoot)*;
 
-Root:	
-	(roots+=DefRoot )*;
-
-DefRoot: 
+DefRoot:
 	StatechartRoot | StateRoot | TransitionRoot;
 
 StatechartRoot:
 	'@@statechart@@' def=StatechartDefinition;
-	
-StateRoot: 
-	'@@state@@' def=StateDefinition;
-	
-TransitionRoot: 
-	'@@transition@@' def=TransitionStatement;
-	
 
-/* ---- start rules ----
+StateRoot:
+	'@@state@@' def=StateDeclaration;
+
+TransitionRoot:
+	'@@transition@@' def=TransitionStatement;
+
+	/* ---- start rules ----
 Define the starting points used by the statechart integration. These rules hook in the concrete rules of the specific grammar.
 */
+StatechartDefinition:
+	{StatechartDefinition} (definitionScopes+=StatechartScope)*;
 
-StatechartDefinition: {StatechartDefinition} (definitionScopes+=StatechartScope)*;
+StateDeclaration:
+	scope=SimpleScope;
 
-StateDefinition: SimpleScope;
+TransitionStatement:
+	TransitionReaction;
 
-TransitionStatement: TransitionReaction;
-
-
-
-/* ---- scope rules ----
+	/* ---- scope rules ----
 Defines different kinds of scopes that contain element definitions. Scopes are used for element definitions in statechart, regions, and state 
 */
+Scope returns sct::Scope:
+	(SimpleScope | StatechartScope);
 
-Scope returns Scope: (SimpleScope | StatechartScope);
+	// a SimpleScope is used for states and regions
+SimpleScope returns sct::Scope:
+	{SimpleScope} (declarations+=Declaration)*;
 
-// a SimpleScope is used for states and regions
-SimpleScope: {SimpleScope} (definitions+=Definition)*;
+	// defines the poosible scopes for statecharts
+StatechartScope returns sct::Scope:
+	InterfaceScope | InternalScope;
 
-// defines the poosible scopes for statecharts
-StatechartScope: InterfaceScope | InternalScope;
+InterfaceScope returns sct::Scope:
+	{InterfaceScope} 'interface' (name=ID)? ':' (declarations+=Declaration)*;
 
-InterfaceScope: {InterfaceScope} 'interface' (name=ID)? ':' (definitions+=Definition)*;
+InternalScope returns sct::Scope:
+	{InternalScope} 'internal' ':' (declarations+=Declaration)*;
 
-InternalScope:  {InternalScope} 'internal' ':' (definitions+=Definition)*;
+	/* ---- declarations ----
+a definition is a top level element of a definition scope. */
+Declaration returns sct::Declaration:
+	EventDefinition | VariableDefinition | Clock | Operation | LocalReaction | Entrypoint | Exitpoint;
 
-
-
-/* ---- definitions ----
-a definition is a top level element of a definition scope. */ 
-Definition: EventDefinition | VariableDefinition | Clock | Operation | LocalReaction | Entrypoint | Exitpoint;
-
-// DataElement: EventDefinition | VariableDefinition;
+	// DataElement: EventDefinition | VariableDefinition;
 
 /* ---- event definition ---- */
+EventDefinition returns sct::Event:
+	{EventDefinition} (direction=Direction)? 'event' name=ID (':' type=Type)? (derivation=EventDerivation)?;
 
-SCTEvent returns sct::Event: EventDefinition;  // hook EventDefinition into statechart inheritance hiearchy
-
-EventDefinition:
-	(direction=Direction)? 'event' name=ID (':' type=Type)? (derivation=EventDerivation)?;
-	
 EventDerivation:
-	'=' condition=Expression (':' value=Expression)?; 
-	
-enum Direction: IN='in' | OUT='out';
+	'=' condition=Expression (':' value=Expression)?;
 
+enum Direction:
+	IN='in' | OUT='out';
 
 /* ---- variable definition ---- */
-
-SCTVariable returns sct::Variable: VariableDefinition; // hook VariableDefinition into statechart inheritance hiearchy
-
-VariableDefinition:
-	 'var' ((readonly?='readonly')? & (external?='external')?) name=ID ':' type=Type ('=' initialValue=Literal)?;
-
+VariableDefinition returns sct::Variable:
+	{VariableDefinition} 'var' ((readonly?='readonly')? & (external?='external')?) name=ID ':' type=Type ('='
+	initialValue=Literal)?;
 
 /* ---- clock definition ---- */
-Clock: 'clock' name=ID;
-
+Clock returns sct::Declaration:
+	'clock' name=ID;
 
 /* ---- clock definition ---- */
-Operation: 'operation' name=ID '(' (paramTypes+=Type (',' paramTypes+= Type)*)?')' (':' type=Type)? ;
-
+Operation returns sct::Declaration:
+	{Operation} 'operation' name=ID '(' (paramTypes+=Type (',' paramTypes+=Type)*)? ')' (':' type=Type)?;
 
 /* ---- entrypoint definition ---- */
-Entrypoint: 'entrypoint' name=ID;
-
+Entrypoint returns sct::Declaration:
+	{Entrypoint} 'entrypoint' name=ID;
 
 /* ---- exitpoint definition ---- */
-Exitpoint: 'exitpoint' name=ID;
+Exitpoint returns sct::Declaration:
+	{Exitpoint} 'exitpoint' name=ID;
 
-
-/* ---- reaction rules ----
+	/* ---- reaction rules ----
 Define the structure of reactions that are central for describing the statecharts behavior. 
 */
-Reaction: LocalReaction | TransitionReaction;
+Reaction:
+	LocalReaction | TransitionReaction;
 
 LocalReaction:
-	(trigger=ReactionTrigger) ('/' effect=Effect)? ('#' properties=ReactionProperties)?;
+	(trigger=ReactionTrigger) ('/' effect=ReactionEffect)? ('#' properties=ReactionProperties)?;
 
-TransitionReaction: 
-	{TransitionReaction} (trigger=ReactionTrigger)? ('/' effect=Effect)? ('#' properties=ReactionProperties)?;
+TransitionReaction:
+	{TransitionReaction} (trigger=ReactionTrigger)? ('/' effect=ReactionEffect)? ('#' properties=ReactionProperties)?;
 
-ReactionTrigger:	
-	(triggers+=EventSpec ("," triggers+=EventSpec)*)
+ReactionTrigger returns sct::Trigger:
+	{ReactionTrigger} (triggers+=EventSpec ("," triggers+=EventSpec)*)
 	('[' guardExpression=Expression ']')?;
-	
-Effect:	
-	(actions+=Statement ';')+ ;
-	
-ReactionProperties: 
+
+ReactionEffect returns sct::Effect:
+	{ReactionEffect} (actions+=Statement ';')+;
+
+ReactionProperties:
 	{ReactionProperties} (properties+=ReactionProperty)*;
 
-ReactionProperty: ReactionPriority | EntryPointSpec | ExitPointSpec;
+ReactionProperty:
+	ReactionPriority | EntryPointSpec | ExitPointSpec;
 
-ReactionPriority: priority=INT;
+ReactionPriority:
+	priority=INT;
 
-EntryPointSpec: 
+EntryPointSpec:
 	'>' entrypoint=[Entrypoint];
-	
+
 ExitPointSpec:
 	exitpoint=[Exitpoint] '>';
 
-EventSpec: RegularEventSpec | TimeEventSpec | BuiltinEventSpec;
+EventSpec:
+	RegularEventSpec | TimeEventSpec | BuiltinEventSpec;
 
-RegularEventSpec: event=[sct::Event];
+RegularEventSpec:
+	event=[sct::Event];
 
-// TODO: redefine after trigger - we need to use it with clocks
-TimeEventSpec: 'after' value = INT (unit = TimeUnit)?;
+	// TODO: redefine after trigger - we need to use it with clocks
+TimeEventSpec:
+	'after' value=INT (unit=TimeUnit)?;
 
-// TODO: add dereived events like in(state), entered(state)	
-BuiltinEventSpec: EntryEvent | ExitEvent | OnCycleEvent | AlwaysEvent;
+	// TODO: add dereived events like in(state), entered(state)	
+BuiltinEventSpec:
+	EntryEvent | ExitEvent | OnCycleEvent | AlwaysEvent;
 
-EntryEvent: {EnterEvent} 'entry';
-ExitEvent: {ExitEvent} 'exit';
-OnCycleEvent: {OnCycleEvent} 'oncycle'; // TODO: ?!? better 'ontick' ?!?
-AlwaysEvent: {AlwaysEvent} 'always';
+EntryEvent:
+	{EnterEvent} 'entry';
 
-	
+ExitEvent:
+	{ExitEvent} 'exit';
+
+OnCycleEvent:
+	{OnCycleEvent} 'oncycle'; // TODO: ?!? better 'ontick' ?!?
+AlwaysEvent:
+	{AlwaysEvent} 'always';
+
 /* --- statements --- */
-
 Statement:
-	Assignment | EventRaising ;
-	
+	Assignment | EventRaising;
+
 Assignment:
 	varRef=[sct::Variable] "=" expression=Expression;
-	
+
 EventRaising:
 	'raise' event=[sct::Event] (':' value=Expression)?;
-	
 
-
-// variable assignment
+	// variable assignment
 
 // raise events
 
 // operation call
 
- 
 
 //****************
 // Expression Grammar
 //****************
 //ExpressionRule:
 //	expression=(LogicalOrExpression | RaiseEventExpression);
-
-Expression returns Expression: LogicalOrExpression;
+Expression returns Expression:
+	LogicalOrExpression;
 
 LogicalOrExpression returns Expression:
 	LogicalAndExpression ({LogicalOrExpression.leftOperand=current} '||'
@@ -240,7 +243,7 @@ ElementReferenceExpression returns Expression:
 	{ElementReferenceExpression} value=[sct::Declaration];
 
 OperationCall returns Expression:
-	{OperationCall} operation=[Operation] '(' (args+=Expression (',' args+=Expression)* )?')';
+	{OperationCall} operation=[Operation] '(' (args+=Expression (',' args+=Expression)*)? ')';
 
 Literal:
 	BOOL | INT | STRING | FLOAT;

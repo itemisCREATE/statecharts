@@ -16,9 +16,11 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.yakindu.model.sct.statechart.ExpressionElement;
+import org.yakindu.model.sct.statechart.Effect;
+import org.yakindu.model.sct.statechart.Reaction;
 import org.yakindu.model.sct.statechart.StatechartPackage;
 import org.yakindu.model.sct.statechart.Transition;
+import org.yakindu.model.sct.statechart.Trigger;
 import org.yakindu.model.sct.statechart.Vertex;
 
 /**
@@ -28,7 +30,8 @@ import org.yakindu.model.sct.statechart.Vertex;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.yakindu.model.sct.statechart.impl.TransitionImpl#getExpression <em>Expression</em>}</li>
+ *   <li>{@link org.yakindu.model.sct.statechart.impl.TransitionImpl#getTrigger <em>Trigger</em>}</li>
+ *   <li>{@link org.yakindu.model.sct.statechart.impl.TransitionImpl#getEffect <em>Effect</em>}</li>
  *   <li>{@link org.yakindu.model.sct.statechart.impl.TransitionImpl#getTarget <em>Target</em>}</li>
  *   <li>{@link org.yakindu.model.sct.statechart.impl.TransitionImpl#getSource <em>Source</em>}</li>
  * </ul>
@@ -36,7 +39,7 @@ import org.yakindu.model.sct.statechart.Vertex;
  *
  * @generated
  */
-public class TransitionImpl extends ReactionImpl implements Transition {
+public class TransitionImpl extends ExpressionElementImpl implements Transition {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -45,24 +48,24 @@ public class TransitionImpl extends ReactionImpl implements Transition {
 	public static final String copyright = "Copyright (c) 2011 committers of YAKINDU and others.\r\nAll rights reserved. This program and the accompanying materials\r\nare made available under the terms of the Eclipse Public License v1.0\r\nwhich accompanies this distribution, and is available at\r\nhttp://www.eclipse.org/legal/epl-v10.html\r\nContributors:\r\ncommitters of YAKINDU - initial API and implementation\r\n";
 
 	/**
-	 * The default value of the '{@link #getExpression() <em>Expression</em>}' attribute.
+	 * The cached value of the '{@link #getTrigger() <em>Trigger</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getExpression()
+	 * @see #getTrigger()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String EXPRESSION_EDEFAULT = null;
+	protected Trigger trigger;
 
 	/**
-	 * The cached value of the '{@link #getExpression() <em>Expression</em>}' attribute.
+	 * The cached value of the '{@link #getEffect() <em>Effect</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getExpression()
+	 * @see #getEffect()
 	 * @generated
 	 * @ordered
 	 */
-	protected String expression = EXPRESSION_EDEFAULT;
+	protected Effect effect;
 
 	/**
 	 * The cached value of the '{@link #getTarget() <em>Target</em>}' reference.
@@ -98,8 +101,8 @@ public class TransitionImpl extends ReactionImpl implements Transition {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getExpression() {
-		return expression;
+	public Trigger getTrigger() {
+		return trigger;
 	}
 
 	/**
@@ -107,11 +110,76 @@ public class TransitionImpl extends ReactionImpl implements Transition {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setExpression(String newExpression) {
-		String oldExpression = expression;
-		expression = newExpression;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, StatechartPackage.TRANSITION__EXPRESSION, oldExpression, expression));
+	public NotificationChain basicSetTrigger(Trigger newTrigger, NotificationChain msgs) {
+		Trigger oldTrigger = trigger;
+		trigger = newTrigger;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, StatechartPackage.TRANSITION__TRIGGER, oldTrigger, newTrigger);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTrigger(Trigger newTrigger) {
+		if (newTrigger != trigger) {
+			NotificationChain msgs = null;
+			if (trigger != null)
+				msgs = ((InternalEObject)trigger).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - StatechartPackage.TRANSITION__TRIGGER, null, msgs);
+			if (newTrigger != null)
+				msgs = ((InternalEObject)newTrigger).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - StatechartPackage.TRANSITION__TRIGGER, null, msgs);
+			msgs = basicSetTrigger(newTrigger, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, StatechartPackage.TRANSITION__TRIGGER, newTrigger, newTrigger));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Effect getEffect() {
+		return effect;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetEffect(Effect newEffect, NotificationChain msgs) {
+		Effect oldEffect = effect;
+		effect = newEffect;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, StatechartPackage.TRANSITION__EFFECT, oldEffect, newEffect);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setEffect(Effect newEffect) {
+		if (newEffect != effect) {
+			NotificationChain msgs = null;
+			if (effect != null)
+				msgs = ((InternalEObject)effect).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - StatechartPackage.TRANSITION__EFFECT, null, msgs);
+			if (newEffect != null)
+				msgs = ((InternalEObject)newEffect).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - StatechartPackage.TRANSITION__EFFECT, null, msgs);
+			msgs = basicSetEffect(newEffect, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, StatechartPackage.TRANSITION__EFFECT, newEffect, newEffect));
 	}
 
 	/**
@@ -243,6 +311,10 @@ public class TransitionImpl extends ReactionImpl implements Transition {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case StatechartPackage.TRANSITION__TRIGGER:
+				return basicSetTrigger(null, msgs);
+			case StatechartPackage.TRANSITION__EFFECT:
+				return basicSetEffect(null, msgs);
 			case StatechartPackage.TRANSITION__TARGET:
 				return basicSetTarget(null, msgs);
 			case StatechartPackage.TRANSITION__SOURCE:
@@ -273,8 +345,10 @@ public class TransitionImpl extends ReactionImpl implements Transition {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case StatechartPackage.TRANSITION__EXPRESSION:
-				return getExpression();
+			case StatechartPackage.TRANSITION__TRIGGER:
+				return getTrigger();
+			case StatechartPackage.TRANSITION__EFFECT:
+				return getEffect();
 			case StatechartPackage.TRANSITION__TARGET:
 				if (resolve) return getTarget();
 				return basicGetTarget();
@@ -292,8 +366,11 @@ public class TransitionImpl extends ReactionImpl implements Transition {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case StatechartPackage.TRANSITION__EXPRESSION:
-				setExpression((String)newValue);
+			case StatechartPackage.TRANSITION__TRIGGER:
+				setTrigger((Trigger)newValue);
+				return;
+			case StatechartPackage.TRANSITION__EFFECT:
+				setEffect((Effect)newValue);
 				return;
 			case StatechartPackage.TRANSITION__TARGET:
 				setTarget((Vertex)newValue);
@@ -313,8 +390,11 @@ public class TransitionImpl extends ReactionImpl implements Transition {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case StatechartPackage.TRANSITION__EXPRESSION:
-				setExpression(EXPRESSION_EDEFAULT);
+			case StatechartPackage.TRANSITION__TRIGGER:
+				setTrigger((Trigger)null);
+				return;
+			case StatechartPackage.TRANSITION__EFFECT:
+				setEffect((Effect)null);
 				return;
 			case StatechartPackage.TRANSITION__TARGET:
 				setTarget((Vertex)null);
@@ -334,8 +414,10 @@ public class TransitionImpl extends ReactionImpl implements Transition {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case StatechartPackage.TRANSITION__EXPRESSION:
-				return EXPRESSION_EDEFAULT == null ? expression != null : !EXPRESSION_EDEFAULT.equals(expression);
+			case StatechartPackage.TRANSITION__TRIGGER:
+				return trigger != null;
+			case StatechartPackage.TRANSITION__EFFECT:
+				return effect != null;
 			case StatechartPackage.TRANSITION__TARGET:
 				return target != null;
 			case StatechartPackage.TRANSITION__SOURCE:
@@ -351,9 +433,10 @@ public class TransitionImpl extends ReactionImpl implements Transition {
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == ExpressionElement.class) {
+		if (baseClass == Reaction.class) {
 			switch (derivedFeatureID) {
-				case StatechartPackage.TRANSITION__EXPRESSION: return StatechartPackage.EXPRESSION_ELEMENT__EXPRESSION;
+				case StatechartPackage.TRANSITION__TRIGGER: return StatechartPackage.REACTION__TRIGGER;
+				case StatechartPackage.TRANSITION__EFFECT: return StatechartPackage.REACTION__EFFECT;
 				default: return -1;
 			}
 		}
@@ -367,29 +450,14 @@ public class TransitionImpl extends ReactionImpl implements Transition {
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == ExpressionElement.class) {
+		if (baseClass == Reaction.class) {
 			switch (baseFeatureID) {
-				case StatechartPackage.EXPRESSION_ELEMENT__EXPRESSION: return StatechartPackage.TRANSITION__EXPRESSION;
+				case StatechartPackage.REACTION__TRIGGER: return StatechartPackage.TRANSITION__TRIGGER;
+				case StatechartPackage.REACTION__EFFECT: return StatechartPackage.TRANSITION__EFFECT;
 				default: return -1;
 			}
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (expression: ");
-		result.append(expression);
-		result.append(')');
-		return result.toString();
 	}
 
 } //TransitionImpl

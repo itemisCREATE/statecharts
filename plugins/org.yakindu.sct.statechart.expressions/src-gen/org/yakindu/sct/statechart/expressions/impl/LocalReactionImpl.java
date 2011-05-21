@@ -14,12 +14,15 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.yakindu.sct.statechart.expressions.Effect;
+import org.yakindu.model.sct.statechart.Effect;
+import org.yakindu.model.sct.statechart.Trigger;
+
+import org.yakindu.model.sct.statechart.impl.DeclarationImpl;
+
 import org.yakindu.sct.statechart.expressions.ExpressionsPackage;
 import org.yakindu.sct.statechart.expressions.LocalReaction;
 import org.yakindu.sct.statechart.expressions.Reaction;
 import org.yakindu.sct.statechart.expressions.ReactionProperties;
-import org.yakindu.sct.statechart.expressions.ReactionTrigger;
 
 /**
  * <!-- begin-user-doc -->
@@ -36,7 +39,7 @@ import org.yakindu.sct.statechart.expressions.ReactionTrigger;
  *
  * @generated
  */
-public class LocalReactionImpl extends DefinitionImpl implements LocalReaction
+public class LocalReactionImpl extends DeclarationImpl implements LocalReaction
 {
   /**
    * The cached value of the '{@link #getTrigger() <em>Trigger</em>}' containment reference.
@@ -46,7 +49,7 @@ public class LocalReactionImpl extends DefinitionImpl implements LocalReaction
    * @generated
    * @ordered
    */
-  protected ReactionTrigger trigger;
+  protected Trigger trigger;
 
   /**
    * The cached value of the '{@link #getEffect() <em>Effect</em>}' containment reference.
@@ -94,7 +97,7 @@ public class LocalReactionImpl extends DefinitionImpl implements LocalReaction
    * <!-- end-user-doc -->
    * @generated
    */
-  public ReactionTrigger getTrigger()
+  public Trigger getTrigger()
   {
     return trigger;
   }
@@ -104,9 +107,9 @@ public class LocalReactionImpl extends DefinitionImpl implements LocalReaction
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetTrigger(ReactionTrigger newTrigger, NotificationChain msgs)
+  public NotificationChain basicSetTrigger(Trigger newTrigger, NotificationChain msgs)
   {
-    ReactionTrigger oldTrigger = trigger;
+    Trigger oldTrigger = trigger;
     trigger = newTrigger;
     if (eNotificationRequired())
     {
@@ -121,7 +124,7 @@ public class LocalReactionImpl extends DefinitionImpl implements LocalReaction
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setTrigger(ReactionTrigger newTrigger)
+  public void setTrigger(Trigger newTrigger)
   {
     if (newTrigger != trigger)
     {
@@ -284,7 +287,7 @@ public class LocalReactionImpl extends DefinitionImpl implements LocalReaction
     switch (featureID)
     {
       case ExpressionsPackage.LOCAL_REACTION__TRIGGER:
-        setTrigger((ReactionTrigger)newValue);
+        setTrigger((Trigger)newValue);
         return;
       case ExpressionsPackage.LOCAL_REACTION__EFFECT:
         setEffect((Effect)newValue);
@@ -307,7 +310,7 @@ public class LocalReactionImpl extends DefinitionImpl implements LocalReaction
     switch (featureID)
     {
       case ExpressionsPackage.LOCAL_REACTION__TRIGGER:
-        setTrigger((ReactionTrigger)null);
+        setTrigger((Trigger)null);
         return;
       case ExpressionsPackage.LOCAL_REACTION__EFFECT:
         setEffect((Effect)null);

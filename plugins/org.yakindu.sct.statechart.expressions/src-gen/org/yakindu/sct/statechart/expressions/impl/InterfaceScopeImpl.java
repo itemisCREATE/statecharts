@@ -12,6 +12,8 @@ import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.yakindu.model.sct.statechart.impl.ScopeImpl;
+
 import org.yakindu.sct.statechart.expressions.ExpressionsPackage;
 import org.yakindu.sct.statechart.expressions.InterfaceScope;
 
@@ -28,7 +30,7 @@ import org.yakindu.sct.statechart.expressions.InterfaceScope;
  *
  * @generated
  */
-public class InterfaceScopeImpl extends StatechartScopeImpl implements InterfaceScope
+public class InterfaceScopeImpl extends ScopeImpl implements InterfaceScope
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.

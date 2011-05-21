@@ -27,7 +27,7 @@ import org.yakindu.model.sct.statechart.Variable;
  * @model
  * @generated
  */
-public interface VariableDefinition extends Definition, Variable
+public interface VariableDefinition extends Variable
 {
   /**
    * Returns the value of the '<em><b>Readonly</b></em>' attribute.

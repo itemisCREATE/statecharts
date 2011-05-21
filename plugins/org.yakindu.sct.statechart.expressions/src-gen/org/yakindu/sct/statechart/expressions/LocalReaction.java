@@ -6,6 +6,7 @@
  */
 package org.yakindu.sct.statechart.expressions;
 
+import org.yakindu.model.sct.statechart.Declaration;
 
 /**
  * <!-- begin-user-doc -->
@@ -17,6 +18,6 @@ package org.yakindu.sct.statechart.expressions;
  * @model
  * @generated
  */
-public interface LocalReaction extends Definition, Reaction
+public interface LocalReaction extends Declaration, Reaction
 {
 } // LocalReaction

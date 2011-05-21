@@ -58,12 +58,13 @@ public class ExpressionElementPropertySource extends PropertySource {
 				return new PropertyDescriptor(object, itemPropertyDescriptor) {
 					@Override
 					public CellEditor createPropertyEditor(Composite composite) {
-						final XtextCellEditor xTextEditor = new XtextCellEditor(
-								getExpressionsProvider().getStyle());
-						getExpressionsProvider().getInjector().injectMembers(
-								xTextEditor);
-						xTextEditor.create(composite);
-						return xTextEditor;
+						//FIXME
+//						final XtextCellEditor xTextEditor = new XtextCellEditor(
+//								getExpressionsProvider().getStyle());
+//						getExpressionsProvider().getInjector().injectMembers(
+//								xTextEditor);
+//						xTextEditor.create(composite);
+						return null;
 
 					}
 				};

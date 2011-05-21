@@ -217,11 +217,6 @@ public class StatechartItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StatechartPackage.Literals.REACTIVE_ELEMENT__LOCAL_REACTIONS,
-				 StatechartFactory.eINSTANCE.createReaction()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StatechartPackage.Literals.REACTIVE_ELEMENT__LOCAL_REACTIONS,
 				 StatechartFactory.eINSTANCE.createTransition()));
 
 		newChildDescriptors.add

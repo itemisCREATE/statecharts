@@ -15,47 +15,46 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.yakindu.model.sct.statechart.Scope;
+import org.yakindu.model.sct.statechart.impl.EffectImpl;
 
 import org.yakindu.sct.statechart.expressions.ExpressionsPackage;
-import org.yakindu.sct.statechart.expressions.StatechartDefinition;
+import org.yakindu.sct.statechart.expressions.ReactionEffect;
+import org.yakindu.sct.statechart.expressions.Statement;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Statechart Definition</b></em>'.
+ * An implementation of the model object '<em><b>Reaction Effect</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.yakindu.sct.statechart.expressions.impl.StatechartDefinitionImpl#getDefinitionScopes <em>Definition Scopes</em>}</li>
+ *   <li>{@link org.yakindu.sct.statechart.expressions.impl.ReactionEffectImpl#getActions <em>Actions</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class StatechartDefinitionImpl extends MinimalEObjectImpl.Container implements StatechartDefinition
+public class ReactionEffectImpl extends EffectImpl implements ReactionEffect
 {
   /**
-   * The cached value of the '{@link #getDefinitionScopes() <em>Definition Scopes</em>}' containment reference list.
+   * The cached value of the '{@link #getActions() <em>Actions</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getDefinitionScopes()
+   * @see #getActions()
    * @generated
    * @ordered
    */
-  protected EList<Scope> definitionScopes;
+  protected EList<Statement> actions;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected StatechartDefinitionImpl()
+  protected ReactionEffectImpl()
   {
     super();
   }
@@ -68,7 +67,7 @@ public class StatechartDefinitionImpl extends MinimalEObjectImpl.Container imple
   @Override
   protected EClass eStaticClass()
   {
-    return ExpressionsPackage.Literals.STATECHART_DEFINITION;
+    return ExpressionsPackage.Literals.REACTION_EFFECT;
   }
 
   /**
@@ -76,13 +75,13 @@ public class StatechartDefinitionImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Scope> getDefinitionScopes()
+  public EList<Statement> getActions()
   {
-    if (definitionScopes == null)
+    if (actions == null)
     {
-      definitionScopes = new EObjectContainmentEList<Scope>(Scope.class, this, ExpressionsPackage.STATECHART_DEFINITION__DEFINITION_SCOPES);
+      actions = new EObjectContainmentEList<Statement>(Statement.class, this, ExpressionsPackage.REACTION_EFFECT__ACTIONS);
     }
-    return definitionScopes;
+    return actions;
   }
 
   /**
@@ -95,8 +94,8 @@ public class StatechartDefinitionImpl extends MinimalEObjectImpl.Container imple
   {
     switch (featureID)
     {
-      case ExpressionsPackage.STATECHART_DEFINITION__DEFINITION_SCOPES:
-        return ((InternalEList<?>)getDefinitionScopes()).basicRemove(otherEnd, msgs);
+      case ExpressionsPackage.REACTION_EFFECT__ACTIONS:
+        return ((InternalEList<?>)getActions()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -111,8 +110,8 @@ public class StatechartDefinitionImpl extends MinimalEObjectImpl.Container imple
   {
     switch (featureID)
     {
-      case ExpressionsPackage.STATECHART_DEFINITION__DEFINITION_SCOPES:
-        return getDefinitionScopes();
+      case ExpressionsPackage.REACTION_EFFECT__ACTIONS:
+        return getActions();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -128,9 +127,9 @@ public class StatechartDefinitionImpl extends MinimalEObjectImpl.Container imple
   {
     switch (featureID)
     {
-      case ExpressionsPackage.STATECHART_DEFINITION__DEFINITION_SCOPES:
-        getDefinitionScopes().clear();
-        getDefinitionScopes().addAll((Collection<? extends Scope>)newValue);
+      case ExpressionsPackage.REACTION_EFFECT__ACTIONS:
+        getActions().clear();
+        getActions().addAll((Collection<? extends Statement>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -146,8 +145,8 @@ public class StatechartDefinitionImpl extends MinimalEObjectImpl.Container imple
   {
     switch (featureID)
     {
-      case ExpressionsPackage.STATECHART_DEFINITION__DEFINITION_SCOPES:
-        getDefinitionScopes().clear();
+      case ExpressionsPackage.REACTION_EFFECT__ACTIONS:
+        getActions().clear();
         return;
     }
     super.eUnset(featureID);
@@ -163,10 +162,10 @@ public class StatechartDefinitionImpl extends MinimalEObjectImpl.Container imple
   {
     switch (featureID)
     {
-      case ExpressionsPackage.STATECHART_DEFINITION__DEFINITION_SCOPES:
-        return definitionScopes != null && !definitionScopes.isEmpty();
+      case ExpressionsPackage.REACTION_EFFECT__ACTIONS:
+        return actions != null && !actions.isEmpty();
     }
     return super.eIsSet(featureID);
   }
 
-} //StatechartDefinitionImpl
+} //ReactionEffectImpl

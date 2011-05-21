@@ -34,12 +34,12 @@ public interface StateRoot extends DefRoot
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Def</em>' containment reference.
-   * @see #setDef(StateDefinition)
+   * @see #setDef(StateDeclaration)
    * @see org.yakindu.sct.statechart.expressions.ExpressionsPackage#getStateRoot_Def()
    * @model containment="true"
    * @generated
    */
-  StateDefinition getDef();
+  StateDeclaration getDef();
 
   /**
    * Sets the value of the '{@link org.yakindu.sct.statechart.expressions.StateRoot#getDef <em>Def</em>}' containment reference.
@@ -49,6 +49,6 @@ public interface StateRoot extends DefRoot
    * @see #getDef()
    * @generated
    */
-  void setDef(StateDefinition value);
+  void setDef(StateDeclaration value);
 
 } // StateRoot

@@ -10,37 +10,22 @@
  */
 package org.yakindu.model.sct.statechart.impl;
 
+import java.io.IOException;
+import java.net.URL;
+
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-import org.yakindu.model.sct.statechart.Choice;
-import org.yakindu.model.sct.statechart.Declaration;
-import org.yakindu.model.sct.statechart.Effect;
-import org.yakindu.model.sct.statechart.Entry;
-import org.yakindu.model.sct.statechart.EntryKind;
-import org.yakindu.model.sct.statechart.Event;
-import org.yakindu.model.sct.statechart.Exit;
-import org.yakindu.model.sct.statechart.ExpressionElement;
-import org.yakindu.model.sct.statechart.FinalState;
-import org.yakindu.model.sct.statechart.Junction;
-import org.yakindu.model.sct.statechart.NamedElement;
-import org.yakindu.model.sct.statechart.Pseudostate;
-import org.yakindu.model.sct.statechart.Reaction;
-import org.yakindu.model.sct.statechart.ReactiveElement;
-import org.yakindu.model.sct.statechart.Region;
-import org.yakindu.model.sct.statechart.Scope;
-import org.yakindu.model.sct.statechart.ScopedElement;
-import org.yakindu.model.sct.statechart.State;
-import org.yakindu.model.sct.statechart.Statechart;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.yakindu.model.sct.statechart.StatechartFactory;
 import org.yakindu.model.sct.statechart.StatechartPackage;
-import org.yakindu.model.sct.statechart.Transition;
-import org.yakindu.model.sct.statechart.Trigger;
-import org.yakindu.model.sct.statechart.Variable;
-import org.yakindu.model.sct.statechart.Vertex;
 
 /**
  * <!-- begin-user-doc -->
@@ -55,6 +40,13 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * @generated
 	 */
 	public static final String copyright = "Copyright (c) 2011 committers of YAKINDU and others.\r\nAll rights reserved. This program and the accompanying materials\r\nare made available under the terms of the Eclipse Public License v1.0\r\nwhich accompanies this distribution, and is available at\r\nhttp://www.eclipse.org/legal/epl-v10.html\r\nContributors:\r\ncommitters of YAKINDU - initial API and implementation\r\n";
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected String packageFilename = "statechart.ecore";
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -251,8 +243,6 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #eNS_URI
-	 * @see #createPackageContents()
-	 * @see #initializePackageContents()
 	 * @generated
 	 */
 	public static StatechartPackage init() {
@@ -263,11 +253,11 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 
 		isInited = true;
 
-		// Create package meta-data objects
-		theStatechartPackage.createPackageContents();
+		// Load packages
+		theStatechartPackage.loadPackage();
 
-		// Initialize created meta-data
-		theStatechartPackage.initializePackageContents();
+		// Fix loaded packages
+		theStatechartPackage.fixPackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theStatechartPackage.freeze();
@@ -284,6 +274,9 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * @generated
 	 */
 	public EClass getPseudostate() {
+		if (pseudostateEClass == null) {
+			pseudostateEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(StatechartPackage.eNS_URI).getEClassifiers().get(0);
+		}
 		return pseudostateEClass;
 	}
 
@@ -293,6 +286,9 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * @generated
 	 */
 	public EClass getVertex() {
+		if (vertexEClass == null) {
+			vertexEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(StatechartPackage.eNS_URI).getEClassifiers().get(1);
+		}
 		return vertexEClass;
 	}
 
@@ -302,7 +298,7 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * @generated
 	 */
 	public EReference getVertex_ParentRegion() {
-		return (EReference)vertexEClass.getEStructuralFeatures().get(0);
+        return (EReference)getVertex().getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -311,7 +307,7 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * @generated
 	 */
 	public EReference getVertex_IncomingTransitions() {
-		return (EReference)vertexEClass.getEStructuralFeatures().get(1);
+        return (EReference)getVertex().getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -320,7 +316,7 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * @generated
 	 */
 	public EReference getVertex_OutgoingTransitions() {
-		return (EReference)vertexEClass.getEStructuralFeatures().get(2);
+        return (EReference)getVertex().getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -329,6 +325,9 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * @generated
 	 */
 	public EClass getNamedElement() {
+		if (namedElementEClass == null) {
+			namedElementEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(StatechartPackage.eNS_URI).getEClassifiers().get(2);
+		}
 		return namedElementEClass;
 	}
 
@@ -338,7 +337,7 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * @generated
 	 */
 	public EAttribute getNamedElement_Name() {
-		return (EAttribute)namedElementEClass.getEStructuralFeatures().get(0);
+        return (EAttribute)getNamedElement().getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -347,6 +346,9 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * @generated
 	 */
 	public EClass getRegion() {
+		if (regionEClass == null) {
+			regionEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(StatechartPackage.eNS_URI).getEClassifiers().get(3);
+		}
 		return regionEClass;
 	}
 
@@ -356,7 +358,7 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * @generated
 	 */
 	public EReference getRegion_Vertices() {
-		return (EReference)regionEClass.getEStructuralFeatures().get(0);
+        return (EReference)getRegion().getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -365,6 +367,9 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * @generated
 	 */
 	public EClass getTransition() {
+		if (transitionEClass == null) {
+			transitionEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(StatechartPackage.eNS_URI).getEClassifiers().get(4);
+		}
 		return transitionEClass;
 	}
 
@@ -374,7 +379,7 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * @generated
 	 */
 	public EReference getTransition_Target() {
-		return (EReference)transitionEClass.getEStructuralFeatures().get(0);
+        return (EReference)getTransition().getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -383,7 +388,7 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * @generated
 	 */
 	public EReference getTransition_Source() {
-		return (EReference)transitionEClass.getEStructuralFeatures().get(1);
+        return (EReference)getTransition().getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -392,6 +397,9 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * @generated
 	 */
 	public EClass getFinalState() {
+		if (finalStateEClass == null) {
+			finalStateEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(StatechartPackage.eNS_URI).getEClassifiers().get(5);
+		}
 		return finalStateEClass;
 	}
 
@@ -401,6 +409,9 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * @generated
 	 */
 	public EClass getState() {
+		if (stateEClass == null) {
+			stateEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(StatechartPackage.eNS_URI).getEClassifiers().get(6);
+		}
 		return stateEClass;
 	}
 
@@ -410,7 +421,7 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * @generated
 	 */
 	public EReference getState_SubRegions() {
-		return (EReference)stateEClass.getEStructuralFeatures().get(0);
+        return (EReference)getState().getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -419,6 +430,9 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * @generated
 	 */
 	public EClass getVariable() {
+		if (variableEClass == null) {
+			variableEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(StatechartPackage.eNS_URI).getEClassifiers().get(7);
+		}
 		return variableEClass;
 	}
 
@@ -428,6 +442,9 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * @generated
 	 */
 	public EClass getJunction() {
+		if (junctionEClass == null) {
+			junctionEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(StatechartPackage.eNS_URI).getEClassifiers().get(8);
+		}
 		return junctionEClass;
 	}
 
@@ -437,6 +454,9 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * @generated
 	 */
 	public EClass getEvent() {
+		if (eventEClass == null) {
+			eventEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(StatechartPackage.eNS_URI).getEClassifiers().get(9);
+		}
 		return eventEClass;
 	}
 
@@ -446,6 +466,9 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * @generated
 	 */
 	public EClass getChoice() {
+		if (choiceEClass == null) {
+			choiceEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(StatechartPackage.eNS_URI).getEClassifiers().get(10);
+		}
 		return choiceEClass;
 	}
 
@@ -455,6 +478,9 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * @generated
 	 */
 	public EClass getStatechart() {
+		if (statechartEClass == null) {
+			statechartEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(StatechartPackage.eNS_URI).getEClassifiers().get(11);
+		}
 		return statechartEClass;
 	}
 
@@ -464,7 +490,7 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * @generated
 	 */
 	public EReference getStatechart_Regions() {
-		return (EReference)statechartEClass.getEStructuralFeatures().get(0);
+        return (EReference)getStatechart().getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -473,6 +499,9 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * @generated
 	 */
 	public EClass getEntry() {
+		if (entryEClass == null) {
+			entryEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(StatechartPackage.eNS_URI).getEClassifiers().get(12);
+		}
 		return entryEClass;
 	}
 
@@ -482,7 +511,7 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * @generated
 	 */
 	public EAttribute getEntry_Kind() {
-		return (EAttribute)entryEClass.getEStructuralFeatures().get(0);
+        return (EAttribute)getEntry().getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -491,6 +520,9 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * @generated
 	 */
 	public EClass getTrigger() {
+		if (triggerEClass == null) {
+			triggerEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(StatechartPackage.eNS_URI).getEClassifiers().get(13);
+		}
 		return triggerEClass;
 	}
 
@@ -500,6 +532,9 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * @generated
 	 */
 	public EClass getEffect() {
+		if (effectEClass == null) {
+			effectEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(StatechartPackage.eNS_URI).getEClassifiers().get(14);
+		}
 		return effectEClass;
 	}
 
@@ -509,6 +544,9 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * @generated
 	 */
 	public EClass getExpressionElement() {
+		if (expressionElementEClass == null) {
+			expressionElementEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(StatechartPackage.eNS_URI).getEClassifiers().get(15);
+		}
 		return expressionElementEClass;
 	}
 
@@ -518,7 +556,7 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * @generated
 	 */
 	public EAttribute getExpressionElement_Expression() {
-		return (EAttribute)expressionElementEClass.getEStructuralFeatures().get(0);
+        return (EAttribute)getExpressionElement().getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -527,6 +565,9 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * @generated
 	 */
 	public EClass getDeclaration() {
+		if (declarationEClass == null) {
+			declarationEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(StatechartPackage.eNS_URI).getEClassifiers().get(16);
+		}
 		return declarationEClass;
 	}
 
@@ -536,6 +577,9 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * @generated
 	 */
 	public EClass getReaction() {
+		if (reactionEClass == null) {
+			reactionEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(StatechartPackage.eNS_URI).getEClassifiers().get(17);
+		}
 		return reactionEClass;
 	}
 
@@ -545,7 +589,7 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * @generated
 	 */
 	public EReference getReaction_Trigger() {
-		return (EReference)reactionEClass.getEStructuralFeatures().get(0);
+        return (EReference)getReaction().getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -554,7 +598,7 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * @generated
 	 */
 	public EReference getReaction_Effect() {
-		return (EReference)reactionEClass.getEStructuralFeatures().get(1);
+        return (EReference)getReaction().getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -563,6 +607,9 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * @generated
 	 */
 	public EClass getReactiveElement() {
+		if (reactiveElementEClass == null) {
+			reactiveElementEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(StatechartPackage.eNS_URI).getEClassifiers().get(19);
+		}
 		return reactiveElementEClass;
 	}
 
@@ -572,7 +619,7 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * @generated
 	 */
 	public EReference getReactiveElement_Reactions() {
-		return (EReference)reactiveElementEClass.getEStructuralFeatures().get(0);
+        return (EReference)getReactiveElement().getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -581,7 +628,7 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * @generated
 	 */
 	public EReference getReactiveElement_LocalReactions() {
-		return (EReference)reactiveElementEClass.getEStructuralFeatures().get(1);
+        return (EReference)getReactiveElement().getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -590,6 +637,9 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * @generated
 	 */
 	public EClass getExit() {
+		if (exitEClass == null) {
+			exitEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(StatechartPackage.eNS_URI).getEClassifiers().get(20);
+		}
 		return exitEClass;
 	}
 
@@ -599,6 +649,9 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * @generated
 	 */
 	public EClass getScope() {
+		if (scopeEClass == null) {
+			scopeEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(StatechartPackage.eNS_URI).getEClassifiers().get(21);
+		}
 		return scopeEClass;
 	}
 
@@ -608,7 +661,7 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * @generated
 	 */
 	public EReference getScope_Declarations() {
-		return (EReference)scopeEClass.getEStructuralFeatures().get(0);
+        return (EReference)getScope().getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -617,7 +670,7 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * @generated
 	 */
 	public EReference getScope_Events() {
-		return (EReference)scopeEClass.getEStructuralFeatures().get(1);
+        return (EReference)getScope().getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -626,7 +679,7 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * @generated
 	 */
 	public EReference getScope_Variables() {
-		return (EReference)scopeEClass.getEStructuralFeatures().get(2);
+        return (EReference)getScope().getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -635,6 +688,9 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * @generated
 	 */
 	public EClass getScopedElement() {
+		if (scopedElementEClass == null) {
+			scopedElementEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(StatechartPackage.eNS_URI).getEClassifiers().get(22);
+		}
 		return scopedElementEClass;
 	}
 
@@ -644,7 +700,7 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * @generated
 	 */
 	public EReference getScopedElement_Scopes() {
-		return (EReference)scopedElementEClass.getEStructuralFeatures().get(0);
+        return (EReference)getScopedElement().getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -653,6 +709,9 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * @generated
 	 */
 	public EEnum getEntryKind() {
+		if (entryKindEEnum == null) {
+			entryKindEEnum = (EEnum)EPackage.Registry.INSTANCE.getEPackage(StatechartPackage.eNS_URI).getEClassifiers().get(18);
+		}
 		return entryKindEEnum;
 	}
 
@@ -670,85 +729,32 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private boolean isCreated = false;
+	private boolean isLoaded = false;
 
 	/**
-	 * Creates the meta-model objects for the package.  This method is
-	 * guarded to have no affect on any invocation but its first.
+	 * Laods the package and any sub-packages from their serialized form.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void createPackageContents() {
-		if (isCreated) return;
-		isCreated = true;
+	public void loadPackage() {
+		if (isLoaded) return;
+		isLoaded = true;
 
-		// Create classes and their features
-		pseudostateEClass = createEClass(PSEUDOSTATE);
-
-		vertexEClass = createEClass(VERTEX);
-		createEReference(vertexEClass, VERTEX__PARENT_REGION);
-		createEReference(vertexEClass, VERTEX__INCOMING_TRANSITIONS);
-		createEReference(vertexEClass, VERTEX__OUTGOING_TRANSITIONS);
-
-		namedElementEClass = createEClass(NAMED_ELEMENT);
-		createEAttribute(namedElementEClass, NAMED_ELEMENT__NAME);
-
-		regionEClass = createEClass(REGION);
-		createEReference(regionEClass, REGION__VERTICES);
-
-		transitionEClass = createEClass(TRANSITION);
-		createEReference(transitionEClass, TRANSITION__TARGET);
-		createEReference(transitionEClass, TRANSITION__SOURCE);
-
-		finalStateEClass = createEClass(FINAL_STATE);
-
-		stateEClass = createEClass(STATE);
-		createEReference(stateEClass, STATE__SUB_REGIONS);
-
-		variableEClass = createEClass(VARIABLE);
-
-		junctionEClass = createEClass(JUNCTION);
-
-		eventEClass = createEClass(EVENT);
-
-		choiceEClass = createEClass(CHOICE);
-
-		statechartEClass = createEClass(STATECHART);
-		createEReference(statechartEClass, STATECHART__REGIONS);
-
-		entryEClass = createEClass(ENTRY);
-		createEAttribute(entryEClass, ENTRY__KIND);
-
-		triggerEClass = createEClass(TRIGGER);
-
-		effectEClass = createEClass(EFFECT);
-
-		expressionElementEClass = createEClass(EXPRESSION_ELEMENT);
-		createEAttribute(expressionElementEClass, EXPRESSION_ELEMENT__EXPRESSION);
-
-		declarationEClass = createEClass(DECLARATION);
-
-		reactionEClass = createEClass(REACTION);
-		createEReference(reactionEClass, REACTION__TRIGGER);
-		createEReference(reactionEClass, REACTION__EFFECT);
-
-		reactiveElementEClass = createEClass(REACTIVE_ELEMENT);
-		createEReference(reactiveElementEClass, REACTIVE_ELEMENT__REACTIONS);
-		createEReference(reactiveElementEClass, REACTIVE_ELEMENT__LOCAL_REACTIONS);
-
-		exitEClass = createEClass(EXIT);
-
-		scopeEClass = createEClass(SCOPE);
-		createEReference(scopeEClass, SCOPE__DECLARATIONS);
-		createEReference(scopeEClass, SCOPE__EVENTS);
-		createEReference(scopeEClass, SCOPE__VARIABLES);
-
-		scopedElementEClass = createEClass(SCOPED_ELEMENT);
-		createEReference(scopedElementEClass, SCOPED_ELEMENT__SCOPES);
-
-		// Create enums
-		entryKindEEnum = createEEnum(ENTRY_KIND);
+		URL url = getClass().getResource(packageFilename);
+		if (url == null) {
+			throw new RuntimeException("Missing serialized package: " + packageFilename);
+		}
+		URI uri = URI.createURI(url.toString());
+		Resource resource = new EcoreResourceFactoryImpl().createResource(uri);
+		try {
+			resource.load(null);
+		}
+		catch (IOException exception) {
+			throw new WrappedException(exception);
+		}
+		initializeFromLoadedEPackage(this, (EPackage)resource.getContents().get(0));
+		createResource(eNS_URI);
 	}
 
 	/**
@@ -756,123 +762,32 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private boolean isInitialized = false;
+	private boolean isFixed = false;
 
 	/**
-	 * Complete the initialization of the package and its meta-model.  This
-	 * method is guarded to have no affect on any invocation but its first.
+	 * Fixes up the loaded package, to make it appear as if it had been programmatically built.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void initializePackageContents() {
-		if (isInitialized) return;
-		isInitialized = true;
+	public void fixPackageContents() {
+		if (isFixed) return;
+		isFixed = true;
+		fixEClassifiers();
+	}
 
-		// Initialize package
-		setName(eNAME);
-		setNsPrefix(eNS_PREFIX);
-		setNsURI(eNS_URI);
-
-		// Create type parameters
-
-		// Set bounds for type parameters
-
-		// Add supertypes to classes
-		pseudostateEClass.getESuperTypes().add(this.getVertex());
-		vertexEClass.getESuperTypes().add(this.getNamedElement());
-		regionEClass.getESuperTypes().add(this.getNamedElement());
-		transitionEClass.getESuperTypes().add(this.getReaction());
-		transitionEClass.getESuperTypes().add(this.getExpressionElement());
-		finalStateEClass.getESuperTypes().add(this.getState());
-		stateEClass.getESuperTypes().add(this.getVertex());
-		stateEClass.getESuperTypes().add(this.getExpressionElement());
-		stateEClass.getESuperTypes().add(this.getReactiveElement());
-		stateEClass.getESuperTypes().add(this.getScopedElement());
-		variableEClass.getESuperTypes().add(this.getDeclaration());
-		junctionEClass.getESuperTypes().add(this.getPseudostate());
-		eventEClass.getESuperTypes().add(this.getDeclaration());
-		choiceEClass.getESuperTypes().add(this.getPseudostate());
-		statechartEClass.getESuperTypes().add(this.getNamedElement());
-		statechartEClass.getESuperTypes().add(this.getExpressionElement());
-		statechartEClass.getESuperTypes().add(this.getReactiveElement());
-		statechartEClass.getESuperTypes().add(this.getScopedElement());
-		entryEClass.getESuperTypes().add(this.getPseudostate());
-		declarationEClass.getESuperTypes().add(this.getNamedElement());
-		exitEClass.getESuperTypes().add(this.getPseudostate());
-
-		// Initialize classes and features; add operations and parameters
-		initEClass(pseudostateEClass, Pseudostate.class, "Pseudostate", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(vertexEClass, Vertex.class, "Vertex", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getVertex_ParentRegion(), this.getRegion(), this.getRegion_Vertices(), "parentRegion", null, 1, 1, Vertex.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getVertex_IncomingTransitions(), this.getTransition(), this.getTransition_Target(), "incomingTransitions", null, 0, -1, Vertex.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getVertex_OutgoingTransitions(), this.getTransition(), this.getTransition_Source(), "outgoingTransitions", null, 0, -1, Vertex.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-
-		initEClass(namedElementEClass, NamedElement.class, "NamedElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getNamedElement_Name(), ecorePackage.getEString(), "name", null, 1, 1, NamedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-
-		initEClass(regionEClass, Region.class, "Region", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getRegion_Vertices(), this.getVertex(), this.getVertex_ParentRegion(), "vertices", null, 0, -1, Region.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-
-		initEClass(transitionEClass, Transition.class, "Transition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTransition_Target(), this.getVertex(), this.getVertex_IncomingTransitions(), "target", null, 1, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getTransition_Source(), this.getVertex(), this.getVertex_OutgoingTransitions(), "source", null, 1, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-
-		initEClass(finalStateEClass, FinalState.class, "FinalState", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(stateEClass, State.class, "State", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getState_SubRegions(), this.getRegion(), null, "subRegions", null, 0, -1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-
-		initEClass(variableEClass, Variable.class, "Variable", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(junctionEClass, Junction.class, "Junction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(eventEClass, Event.class, "Event", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(choiceEClass, Choice.class, "Choice", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(statechartEClass, Statechart.class, "Statechart", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getStatechart_Regions(), this.getRegion(), null, "regions", null, 1, -1, Statechart.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-
-		initEClass(entryEClass, Entry.class, "Entry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getEntry_Kind(), this.getEntryKind(), "kind", null, 0, 1, Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(triggerEClass, Trigger.class, "Trigger", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(effectEClass, Effect.class, "Effect", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(expressionElementEClass, ExpressionElement.class, "ExpressionElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getExpressionElement_Expression(), ecorePackage.getEString(), "expression", null, 0, 1, ExpressionElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(declarationEClass, Declaration.class, "Declaration", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(reactionEClass, Reaction.class, "Reaction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getReaction_Trigger(), this.getTrigger(), null, "trigger", null, 0, 1, Reaction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getReaction_Effect(), this.getEffect(), null, "effect", null, 0, 1, Reaction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(reactiveElementEClass, ReactiveElement.class, "ReactiveElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getReactiveElement_Reactions(), this.getReaction(), null, "reactions", null, 0, -1, ReactiveElement.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEReference(getReactiveElement_LocalReactions(), this.getReaction(), null, "localReactions", null, 0, -1, ReactiveElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(exitEClass, Exit.class, "Exit", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(scopeEClass, Scope.class, "Scope", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getScope_Declarations(), this.getDeclaration(), null, "declarations", null, 0, -1, Scope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getScope_Events(), this.getEvent(), null, "events", null, 0, -1, Scope.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEReference(getScope_Variables(), this.getVariable(), null, "variables", null, 0, -1, Scope.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-
-		initEClass(scopedElementEClass, ScopedElement.class, "ScopedElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getScopedElement_Scopes(), this.getScope(), null, "scopes", null, 0, -1, ScopedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		// Initialize enums and add enum literals
-		initEEnum(entryKindEEnum, EntryKind.class, "EntryKind");
-		addEEnumLiteral(entryKindEEnum, EntryKind.INITIAL);
-		addEEnumLiteral(entryKindEEnum, EntryKind.SHALLOW_HISTORY);
-		addEEnumLiteral(entryKindEEnum, EntryKind.DEEP_HISTORY);
-
-		// Create resource
-		createResource(eNS_URI);
+	/**
+	 * Sets the instance class on the given classifier.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected void fixInstanceClass(EClassifier eClassifier) {
+		if (eClassifier.getInstanceClassName() == null) {
+			eClassifier.setInstanceClassName("org.yakindu.model.sct.statechart." + eClassifier.getName());
+			setGeneratedClassName(eClassifier);
+		}
 	}
 
 } //StatechartPackageImpl

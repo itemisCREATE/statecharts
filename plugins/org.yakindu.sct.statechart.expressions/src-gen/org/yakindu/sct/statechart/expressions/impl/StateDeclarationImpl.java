@@ -13,42 +13,44 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
+import org.yakindu.model.sct.statechart.Scope;
 
 import org.yakindu.sct.statechart.expressions.ExpressionsPackage;
 import org.yakindu.sct.statechart.expressions.StateDeclaration;
-import org.yakindu.sct.statechart.expressions.StateRoot;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>State Root</b></em>'.
+ * An implementation of the model object '<em><b>State Declaration</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.yakindu.sct.statechart.expressions.impl.StateRootImpl#getDef <em>Def</em>}</li>
+ *   <li>{@link org.yakindu.sct.statechart.expressions.impl.StateDeclarationImpl#getScope <em>Scope</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class StateRootImpl extends DefRootImpl implements StateRoot
+public class StateDeclarationImpl extends MinimalEObjectImpl.Container implements StateDeclaration
 {
   /**
-   * The cached value of the '{@link #getDef() <em>Def</em>}' containment reference.
+   * The cached value of the '{@link #getScope() <em>Scope</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getDef()
+   * @see #getScope()
    * @generated
    * @ordered
    */
-  protected StateDeclaration def;
+  protected Scope scope;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected StateRootImpl()
+  protected StateDeclarationImpl()
   {
     super();
   }
@@ -61,7 +63,7 @@ public class StateRootImpl extends DefRootImpl implements StateRoot
   @Override
   protected EClass eStaticClass()
   {
-    return ExpressionsPackage.Literals.STATE_ROOT;
+    return ExpressionsPackage.Literals.STATE_DECLARATION;
   }
 
   /**
@@ -69,9 +71,9 @@ public class StateRootImpl extends DefRootImpl implements StateRoot
    * <!-- end-user-doc -->
    * @generated
    */
-  public StateDeclaration getDef()
+  public Scope getScope()
   {
-    return def;
+    return scope;
   }
 
   /**
@@ -79,13 +81,13 @@ public class StateRootImpl extends DefRootImpl implements StateRoot
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetDef(StateDeclaration newDef, NotificationChain msgs)
+  public NotificationChain basicSetScope(Scope newScope, NotificationChain msgs)
   {
-    StateDeclaration oldDef = def;
-    def = newDef;
+    Scope oldScope = scope;
+    scope = newScope;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ExpressionsPackage.STATE_ROOT__DEF, oldDef, newDef);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ExpressionsPackage.STATE_DECLARATION__SCOPE, oldScope, newScope);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -96,20 +98,20 @@ public class StateRootImpl extends DefRootImpl implements StateRoot
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setDef(StateDeclaration newDef)
+  public void setScope(Scope newScope)
   {
-    if (newDef != def)
+    if (newScope != scope)
     {
       NotificationChain msgs = null;
-      if (def != null)
-        msgs = ((InternalEObject)def).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ExpressionsPackage.STATE_ROOT__DEF, null, msgs);
-      if (newDef != null)
-        msgs = ((InternalEObject)newDef).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ExpressionsPackage.STATE_ROOT__DEF, null, msgs);
-      msgs = basicSetDef(newDef, msgs);
+      if (scope != null)
+        msgs = ((InternalEObject)scope).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ExpressionsPackage.STATE_DECLARATION__SCOPE, null, msgs);
+      if (newScope != null)
+        msgs = ((InternalEObject)newScope).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ExpressionsPackage.STATE_DECLARATION__SCOPE, null, msgs);
+      msgs = basicSetScope(newScope, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.STATE_ROOT__DEF, newDef, newDef));
+      eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.STATE_DECLARATION__SCOPE, newScope, newScope));
   }
 
   /**
@@ -122,8 +124,8 @@ public class StateRootImpl extends DefRootImpl implements StateRoot
   {
     switch (featureID)
     {
-      case ExpressionsPackage.STATE_ROOT__DEF:
-        return basicSetDef(null, msgs);
+      case ExpressionsPackage.STATE_DECLARATION__SCOPE:
+        return basicSetScope(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -138,8 +140,8 @@ public class StateRootImpl extends DefRootImpl implements StateRoot
   {
     switch (featureID)
     {
-      case ExpressionsPackage.STATE_ROOT__DEF:
-        return getDef();
+      case ExpressionsPackage.STATE_DECLARATION__SCOPE:
+        return getScope();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -154,8 +156,8 @@ public class StateRootImpl extends DefRootImpl implements StateRoot
   {
     switch (featureID)
     {
-      case ExpressionsPackage.STATE_ROOT__DEF:
-        setDef((StateDeclaration)newValue);
+      case ExpressionsPackage.STATE_DECLARATION__SCOPE:
+        setScope((Scope)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -171,8 +173,8 @@ public class StateRootImpl extends DefRootImpl implements StateRoot
   {
     switch (featureID)
     {
-      case ExpressionsPackage.STATE_ROOT__DEF:
-        setDef((StateDeclaration)null);
+      case ExpressionsPackage.STATE_DECLARATION__SCOPE:
+        setScope((Scope)null);
         return;
     }
     super.eUnset(featureID);
@@ -188,10 +190,10 @@ public class StateRootImpl extends DefRootImpl implements StateRoot
   {
     switch (featureID)
     {
-      case ExpressionsPackage.STATE_ROOT__DEF:
-        return def != null;
+      case ExpressionsPackage.STATE_DECLARATION__SCOPE:
+        return scope != null;
     }
     return super.eIsSet(featureID);
   }
 
-} //StateRootImpl
+} //StateDeclarationImpl

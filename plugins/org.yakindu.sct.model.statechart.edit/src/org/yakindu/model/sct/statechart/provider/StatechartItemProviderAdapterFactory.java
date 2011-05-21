@@ -292,29 +292,6 @@ public class StatechartItemProviderAdapterFactory extends StatechartAdapterFacto
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.yakindu.model.sct.statechart.Reaction} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected ReactionItemProvider reactionItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.yakindu.model.sct.statechart.Reaction}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createReactionAdapter() {
-		if (reactionItemProvider == null) {
-			reactionItemProvider = new ReactionItemProvider(this);
-		}
-
-		return reactionItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link org.yakindu.model.sct.statechart.Exit} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -468,7 +445,6 @@ public class StatechartItemProviderAdapterFactory extends StatechartAdapterFacto
 		if (choiceItemProvider != null) choiceItemProvider.dispose();
 		if (statechartItemProvider != null) statechartItemProvider.dispose();
 		if (entryItemProvider != null) entryItemProvider.dispose();
-		if (reactionItemProvider != null) reactionItemProvider.dispose();
 		if (exitItemProvider != null) exitItemProvider.dispose();
 		if (scopeItemProvider != null) scopeItemProvider.dispose();
 	}

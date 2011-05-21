@@ -6,6 +6,7 @@
  */
 package org.yakindu.sct.statechart.expressions;
 
+import org.yakindu.model.sct.statechart.Scope;
 
 /**
  * <!-- begin-user-doc -->
@@ -17,6 +18,6 @@ package org.yakindu.sct.statechart.expressions;
  * @model
  * @generated
  */
-public interface SimpleScope extends StateDefinition, Scope
+public interface SimpleScope extends Scope
 {
 } // SimpleScope

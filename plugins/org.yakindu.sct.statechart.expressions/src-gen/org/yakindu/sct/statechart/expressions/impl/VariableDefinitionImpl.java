@@ -12,10 +12,7 @@ import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.yakindu.model.sct.statechart.Declaration;
-import org.yakindu.model.sct.statechart.NamedElement;
-import org.yakindu.model.sct.statechart.StatechartPackage;
-import org.yakindu.model.sct.statechart.Variable;
+import org.yakindu.model.sct.statechart.impl.VariableImpl;
 
 import org.yakindu.sct.statechart.expressions.ExpressionsPackage;
 import org.yakindu.sct.statechart.expressions.Type;
@@ -28,7 +25,6 @@ import org.yakindu.sct.statechart.expressions.VariableDefinition;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.yakindu.sct.statechart.expressions.impl.VariableDefinitionImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.yakindu.sct.statechart.expressions.impl.VariableDefinitionImpl#isReadonly <em>Readonly</em>}</li>
  *   <li>{@link org.yakindu.sct.statechart.expressions.impl.VariableDefinitionImpl#isExternal <em>External</em>}</li>
  *   <li>{@link org.yakindu.sct.statechart.expressions.impl.VariableDefinitionImpl#getType <em>Type</em>}</li>
@@ -38,28 +34,8 @@ import org.yakindu.sct.statechart.expressions.VariableDefinition;
  *
  * @generated
  */
-public class VariableDefinitionImpl extends DefinitionImpl implements VariableDefinition
+public class VariableDefinitionImpl extends VariableImpl implements VariableDefinition
 {
-  /**
-   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
-  protected static final String NAME_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
-  protected String name = NAME_EDEFAULT;
-
   /**
    * The default value of the '{@link #isReadonly() <em>Readonly</em>}' attribute.
    * <!-- begin-user-doc -->
@@ -166,29 +142,6 @@ public class VariableDefinitionImpl extends DefinitionImpl implements VariableDe
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName()
-  {
-    return name;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setName(String newName)
-  {
-    String oldName = name;
-    name = newName;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.VARIABLE_DEFINITION__NAME, oldName, name));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public boolean isReadonly()
   {
     return readonly;
@@ -286,8 +239,6 @@ public class VariableDefinitionImpl extends DefinitionImpl implements VariableDe
   {
     switch (featureID)
     {
-      case ExpressionsPackage.VARIABLE_DEFINITION__NAME:
-        return getName();
       case ExpressionsPackage.VARIABLE_DEFINITION__READONLY:
         return isReadonly();
       case ExpressionsPackage.VARIABLE_DEFINITION__EXTERNAL:
@@ -310,9 +261,6 @@ public class VariableDefinitionImpl extends DefinitionImpl implements VariableDe
   {
     switch (featureID)
     {
-      case ExpressionsPackage.VARIABLE_DEFINITION__NAME:
-        setName((String)newValue);
-        return;
       case ExpressionsPackage.VARIABLE_DEFINITION__READONLY:
         setReadonly((Boolean)newValue);
         return;
@@ -339,9 +287,6 @@ public class VariableDefinitionImpl extends DefinitionImpl implements VariableDe
   {
     switch (featureID)
     {
-      case ExpressionsPackage.VARIABLE_DEFINITION__NAME:
-        setName(NAME_EDEFAULT);
-        return;
       case ExpressionsPackage.VARIABLE_DEFINITION__READONLY:
         setReadonly(READONLY_EDEFAULT);
         return;
@@ -368,8 +313,6 @@ public class VariableDefinitionImpl extends DefinitionImpl implements VariableDe
   {
     switch (featureID)
     {
-      case ExpressionsPackage.VARIABLE_DEFINITION__NAME:
-        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case ExpressionsPackage.VARIABLE_DEFINITION__READONLY:
         return readonly != READONLY_EDEFAULT;
       case ExpressionsPackage.VARIABLE_DEFINITION__EXTERNAL:
@@ -388,80 +331,12 @@ public class VariableDefinitionImpl extends DefinitionImpl implements VariableDe
    * @generated
    */
   @Override
-  public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass)
-  {
-    if (baseClass == NamedElement.class)
-    {
-      switch (derivedFeatureID)
-      {
-        case ExpressionsPackage.VARIABLE_DEFINITION__NAME: return StatechartPackage.NAMED_ELEMENT__NAME;
-        default: return -1;
-      }
-    }
-    if (baseClass == Declaration.class)
-    {
-      switch (derivedFeatureID)
-      {
-        default: return -1;
-      }
-    }
-    if (baseClass == Variable.class)
-    {
-      switch (derivedFeatureID)
-      {
-        default: return -1;
-      }
-    }
-    return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass)
-  {
-    if (baseClass == NamedElement.class)
-    {
-      switch (baseFeatureID)
-      {
-        case StatechartPackage.NAMED_ELEMENT__NAME: return ExpressionsPackage.VARIABLE_DEFINITION__NAME;
-        default: return -1;
-      }
-    }
-    if (baseClass == Declaration.class)
-    {
-      switch (baseFeatureID)
-      {
-        default: return -1;
-      }
-    }
-    if (baseClass == Variable.class)
-    {
-      switch (baseFeatureID)
-      {
-        default: return -1;
-      }
-    }
-    return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public String toString()
   {
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (name: ");
-    result.append(name);
-    result.append(", readonly: ");
+    result.append(" (readonly: ");
     result.append(readonly);
     result.append(", external: ");
     result.append(external);
