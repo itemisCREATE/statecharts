@@ -15,6 +15,7 @@ import java.util.List;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.text.source.AnnotationModel;
 import org.eclipse.jface.text.source.ICharacterPairMatcher;
 import org.eclipse.jface.text.source.ISourceViewer;
@@ -42,6 +43,7 @@ import org.eclipse.ui.texteditor.AnnotationPreference;
 import org.eclipse.ui.texteditor.DefaultMarkerAnnotationAccess;
 import org.eclipse.ui.texteditor.MarkerAnnotationPreferences;
 import org.eclipse.ui.texteditor.SourceViewerDecorationSupport;
+import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -61,6 +63,7 @@ import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
 
 import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 /**
  * This class integrates xText Features into a {@link CellEditor} and can be
@@ -129,6 +132,14 @@ public class XtextCellEditor extends StyledTextCellEditor {
 	@Inject
 	private IResourceValidator validator;
 
+	@Inject
+	private @Named(Constants.FILE_EXTENSIONS)
+	String fileExtension;
+
+
+	private XtextResourceSet resourceSet;
+
+
 	/**
 	 * C'tor to create a new Instance.
 	 * 
@@ -148,8 +159,7 @@ public class XtextCellEditor extends StyledTextCellEditor {
 				null, false, getStyle());
 		sourceviewer.configure(configuration);
 
-		// 'dummy' document for the sourceviewer
-		XtextResourceSet resourceSet = new XtextResourceSet();
+		resourceSet = new XtextResourceSet();
 		resourceSet.getResources().add(resource);
 		setResourceUri(resource);
 		document.setInput(resource);
@@ -252,7 +262,7 @@ public class XtextCellEditor extends StyledTextCellEditor {
 						String activeProject = input.getFile().getProject()
 								.getName();
 						resource.setURI(URI.createURI("platform:/resource/"
-								+ activeProject + "/embedded"));
+								+ activeProject + "/embedded." + fileExtension));
 					}
 				}
 			}
