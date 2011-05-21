@@ -6,7 +6,7 @@
     modelName="Statechart" importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0">
   <foreignModel>statechart.ecore</foreignModel>
   <genPackages prefix="Statechart" basePackage="org.yakindu.model.sct" disposableProviderFactory="true"
-      ecorePackage="statechart.ecore#/">
+      loadInitialization="true" ecorePackage="statechart.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="statechart.ecore#//EntryKind">
       <genEnumLiterals ecoreEnumLiteral="statechart.ecore#//EntryKind/initial"/>
       <genEnumLiterals ecoreEnumLiteral="statechart.ecore#//EntryKind/shallowHistory"/>

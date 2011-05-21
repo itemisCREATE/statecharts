@@ -26,7 +26,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  *
  * @see org.yakindu.model.sct.statechart.StatechartPackage#getReaction()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface Reaction extends EObject {

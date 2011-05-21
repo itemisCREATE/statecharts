@@ -18,6 +18,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EDataTypeEList;
 
+import org.yakindu.model.sct.statechart.impl.DeclarationImpl;
+
 import org.yakindu.sct.statechart.expressions.ExpressionsPackage;
 import org.yakindu.sct.statechart.expressions.Operation;
 import org.yakindu.sct.statechart.expressions.Type;
@@ -29,7 +31,6 @@ import org.yakindu.sct.statechart.expressions.Type;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.yakindu.sct.statechart.expressions.impl.OperationImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.yakindu.sct.statechart.expressions.impl.OperationImpl#getParamTypes <em>Param Types</em>}</li>
  *   <li>{@link org.yakindu.sct.statechart.expressions.impl.OperationImpl#getType <em>Type</em>}</li>
  * </ul>
@@ -37,28 +38,8 @@ import org.yakindu.sct.statechart.expressions.Type;
  *
  * @generated
  */
-public class OperationImpl extends DefinitionImpl implements Operation
+public class OperationImpl extends DeclarationImpl implements Operation
 {
-  /**
-   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
-  protected static final String NAME_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
-  protected String name = NAME_EDEFAULT;
-
   /**
    * The cached value of the '{@link #getParamTypes() <em>Param Types</em>}' attribute list.
    * <!-- begin-user-doc -->
@@ -115,29 +96,6 @@ public class OperationImpl extends DefinitionImpl implements Operation
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName()
-  {
-    return name;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setName(String newName)
-  {
-    String oldName = name;
-    name = newName;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.OPERATION__NAME, oldName, name));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EList<Type> getParamTypes()
   {
     if (paramTypes == null)
@@ -180,8 +138,6 @@ public class OperationImpl extends DefinitionImpl implements Operation
   {
     switch (featureID)
     {
-      case ExpressionsPackage.OPERATION__NAME:
-        return getName();
       case ExpressionsPackage.OPERATION__PARAM_TYPES:
         return getParamTypes();
       case ExpressionsPackage.OPERATION__TYPE:
@@ -201,9 +157,6 @@ public class OperationImpl extends DefinitionImpl implements Operation
   {
     switch (featureID)
     {
-      case ExpressionsPackage.OPERATION__NAME:
-        setName((String)newValue);
-        return;
       case ExpressionsPackage.OPERATION__PARAM_TYPES:
         getParamTypes().clear();
         getParamTypes().addAll((Collection<? extends Type>)newValue);
@@ -225,9 +178,6 @@ public class OperationImpl extends DefinitionImpl implements Operation
   {
     switch (featureID)
     {
-      case ExpressionsPackage.OPERATION__NAME:
-        setName(NAME_EDEFAULT);
-        return;
       case ExpressionsPackage.OPERATION__PARAM_TYPES:
         getParamTypes().clear();
         return;
@@ -248,8 +198,6 @@ public class OperationImpl extends DefinitionImpl implements Operation
   {
     switch (featureID)
     {
-      case ExpressionsPackage.OPERATION__NAME:
-        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case ExpressionsPackage.OPERATION__PARAM_TYPES:
         return paramTypes != null && !paramTypes.isEmpty();
       case ExpressionsPackage.OPERATION__TYPE:
@@ -269,9 +217,7 @@ public class OperationImpl extends DefinitionImpl implements Operation
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (name: ");
-    result.append(name);
-    result.append(", paramTypes: ");
+    result.append(" (paramTypes: ");
     result.append(paramTypes);
     result.append(", type: ");
     result.append(type);

@@ -211,6 +211,12 @@
          </command>
       </menuContribution>
    </extension>
-
+ <!-- ResourceProvider -->
+   <extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+        <resourceServiceProvider
+           class="org.yakindu.sct.statechart.ui.ExpressionsExecutableExtensionFactory:org.yakindu.sct.statechart.ui.resourceprovider.ExpressionsResourceProvider"
+            uriExtension="sct">
+        </resourceServiceProvider>
+    </extension>
 
 </plugin>

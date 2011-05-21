@@ -21,7 +21,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.yakindu.model.sct.statechart.Event;
 import org.yakindu.model.sct.statechart.ExpressionElement;
 import org.yakindu.model.sct.statechart.Reaction;
 import org.yakindu.model.sct.statechart.ReactiveElement;
@@ -30,7 +29,6 @@ import org.yakindu.model.sct.statechart.Scope;
 import org.yakindu.model.sct.statechart.ScopedElement;
 import org.yakindu.model.sct.statechart.Statechart;
 import org.yakindu.model.sct.statechart.StatechartPackage;
-import org.yakindu.model.sct.statechart.Variable;
 
 /**
  * <!-- begin-user-doc -->

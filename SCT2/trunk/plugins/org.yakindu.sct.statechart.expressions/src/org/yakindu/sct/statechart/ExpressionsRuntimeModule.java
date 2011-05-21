@@ -3,10 +3,22 @@
  */
 package org.yakindu.sct.statechart;
 
-/**
- * Use this class to register components to be used at runtime / without the Equinox extension registry.
- */
-public class ExpressionsRuntimeModule extends org.yakindu.sct.statechart.AbstractExpressionsRuntimeModule {
+import org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider;
+import org.eclipse.xtext.scoping.impl.ResourceSetGlobalScopeProvider;
 
-	
+/**
+ * Use this class to register components to be used at runtime / without the
+ * Equinox extension registry.
+ */
+public class ExpressionsRuntimeModule extends
+		org.yakindu.sct.statechart.AbstractExpressionsRuntimeModule {
+
+	public Class<? extends org.eclipse.xtext.scoping.IGlobalScopeProvider> bindIGlobalScopeProvider() {
+		return MyGlobalScopeProvider.class;
+	}
+
+	public static class MyGlobalScopeProvider extends
+			DefaultGlobalScopeProvider {
+
+	}
 }

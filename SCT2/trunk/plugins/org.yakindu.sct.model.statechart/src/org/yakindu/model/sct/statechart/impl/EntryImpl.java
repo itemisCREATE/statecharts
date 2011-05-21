@@ -11,11 +11,8 @@
 package org.yakindu.model.sct.statechart.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.yakindu.model.sct.statechart.Entry;
 import org.yakindu.model.sct.statechart.EntryKind;
 import org.yakindu.model.sct.statechart.StatechartPackage;

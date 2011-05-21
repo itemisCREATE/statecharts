@@ -2,7 +2,6 @@
 <?eclipse version="3.0"?>
 
 <plugin>
-
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://www.yakindu.org/sct/statechart/Expressions" 
@@ -10,9 +9,4 @@
        genModel = "org/yakindu/sct/statechart/Expressions.genmodel" /> 
 	
   </extension>
-
-
-
-
-
 </plugin>

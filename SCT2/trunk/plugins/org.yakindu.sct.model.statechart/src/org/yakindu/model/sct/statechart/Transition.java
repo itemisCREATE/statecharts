@@ -28,7 +28,7 @@ package org.yakindu.model.sct.statechart;
  * @model
  * @generated
  */
-public interface Transition extends Reaction, ExpressionElement {
+public interface Transition extends ExpressionElement, Reaction {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

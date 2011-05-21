@@ -257,33 +257,6 @@ public interface StatechartPackage extends EPackage {
 	int REACTION = 17;
 
 	/**
-	 * The feature id for the '<em><b>Trigger</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REACTION__TRIGGER = 0;
-
-	/**
-	 * The feature id for the '<em><b>Effect</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REACTION__EFFECT = 1;
-
-	/**
-	 * The number of structural features of the '<em>Reaction</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REACTION_FEATURE_COUNT = 2;
-
-	/**
 	 * The meta object id for the '{@link org.yakindu.model.sct.statechart.impl.ExpressionElementImpl <em>Expression Element</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -354,60 +327,6 @@ public interface StatechartPackage extends EPackage {
 	int TRANSITION = 4;
 
 	/**
-	 * The feature id for the '<em><b>Trigger</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRANSITION__TRIGGER = REACTION__TRIGGER;
-
-	/**
-	 * The feature id for the '<em><b>Effect</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRANSITION__EFFECT = REACTION__EFFECT;
-
-	/**
-	 * The feature id for the '<em><b>Expression</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRANSITION__EXPRESSION = REACTION_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Target</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRANSITION__TARGET = REACTION_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Source</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRANSITION__SOURCE = REACTION_FEATURE_COUNT + 2;
-
-	/**
-	 * The number of structural features of the '<em>Transition</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRANSITION_FEATURE_COUNT = REACTION_FEATURE_COUNT + 3;
-
-	/**
 	 * The meta object id for the '{@link org.yakindu.model.sct.statechart.impl.StateImpl <em>State</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -416,6 +335,178 @@ public interface StatechartPackage extends EPackage {
 	 * @generated
 	 */
 	int STATE = 6;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.model.sct.statechart.impl.FinalStateImpl <em>Final State</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.model.sct.statechart.impl.FinalStateImpl
+	 * @see org.yakindu.model.sct.statechart.impl.StatechartPackageImpl#getFinalState()
+	 * @generated
+	 */
+	int FINAL_STATE = 5;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.model.sct.statechart.impl.DeclarationImpl <em>Declaration</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.model.sct.statechart.impl.DeclarationImpl
+	 * @see org.yakindu.model.sct.statechart.impl.StatechartPackageImpl#getDeclaration()
+	 * @generated
+	 */
+	int DECLARATION = 16;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.model.sct.statechart.impl.VariableImpl <em>Variable</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.model.sct.statechart.impl.VariableImpl
+	 * @see org.yakindu.model.sct.statechart.impl.StatechartPackageImpl#getVariable()
+	 * @generated
+	 */
+	int VARIABLE = 7;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.model.sct.statechart.impl.JunctionImpl <em>Junction</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.model.sct.statechart.impl.JunctionImpl
+	 * @see org.yakindu.model.sct.statechart.impl.StatechartPackageImpl#getJunction()
+	 * @generated
+	 */
+	int JUNCTION = 8;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.model.sct.statechart.impl.EventImpl <em>Event</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.model.sct.statechart.impl.EventImpl
+	 * @see org.yakindu.model.sct.statechart.impl.StatechartPackageImpl#getEvent()
+	 * @generated
+	 */
+	int EVENT = 9;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.model.sct.statechart.impl.ChoiceImpl <em>Choice</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.model.sct.statechart.impl.ChoiceImpl
+	 * @see org.yakindu.model.sct.statechart.impl.StatechartPackageImpl#getChoice()
+	 * @generated
+	 */
+	int CHOICE = 10;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.model.sct.statechart.impl.StatechartImpl <em>Statechart</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.model.sct.statechart.impl.StatechartImpl
+	 * @see org.yakindu.model.sct.statechart.impl.StatechartPackageImpl#getStatechart()
+	 * @generated
+	 */
+	int STATECHART = 11;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.model.sct.statechart.impl.EntryImpl <em>Entry</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.model.sct.statechart.impl.EntryImpl
+	 * @see org.yakindu.model.sct.statechart.impl.StatechartPackageImpl#getEntry()
+	 * @generated
+	 */
+	int ENTRY = 12;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.model.sct.statechart.impl.TriggerImpl <em>Trigger</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.model.sct.statechart.impl.TriggerImpl
+	 * @see org.yakindu.model.sct.statechart.impl.StatechartPackageImpl#getTrigger()
+	 * @generated
+	 */
+	int TRIGGER = 13;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.model.sct.statechart.impl.EffectImpl <em>Effect</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.model.sct.statechart.impl.EffectImpl
+	 * @see org.yakindu.model.sct.statechart.impl.StatechartPackageImpl#getEffect()
+	 * @generated
+	 */
+	int EFFECT = 14;
+
+	/**
+	 * The feature id for the '<em><b>Expression</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPRESSION_ELEMENT__EXPRESSION = 0;
+
+	/**
+	 * The number of structural features of the '<em>Expression Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPRESSION_ELEMENT_FEATURE_COUNT = 1;
+
+	/**
+	 * The feature id for the '<em><b>Expression</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSITION__EXPRESSION = EXPRESSION_ELEMENT__EXPRESSION;
+
+	/**
+	 * The feature id for the '<em><b>Trigger</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSITION__TRIGGER = EXPRESSION_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Effect</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSITION__EFFECT = EXPRESSION_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Target</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSITION__TARGET = EXPRESSION_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Source</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSITION__SOURCE = EXPRESSION_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of structural features of the '<em>Transition</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSITION_FEATURE_COUNT = EXPRESSION_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -508,16 +599,6 @@ public interface StatechartPackage extends EPackage {
 	int STATE_FEATURE_COUNT = VERTEX_FEATURE_COUNT + 5;
 
 	/**
-	 * The meta object id for the '{@link org.yakindu.model.sct.statechart.impl.FinalStateImpl <em>Final State</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.model.sct.statechart.impl.FinalStateImpl
-	 * @see org.yakindu.model.sct.statechart.impl.StatechartPackageImpl#getFinalState()
-	 * @generated
-	 */
-	int FINAL_STATE = 5;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -608,16 +689,6 @@ public interface StatechartPackage extends EPackage {
 	int FINAL_STATE_FEATURE_COUNT = STATE_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.yakindu.model.sct.statechart.impl.DeclarationImpl <em>Declaration</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.model.sct.statechart.impl.DeclarationImpl
-	 * @see org.yakindu.model.sct.statechart.impl.StatechartPackageImpl#getDeclaration()
-	 * @generated
-	 */
-	int DECLARATION = 16;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -636,16 +707,6 @@ public interface StatechartPackage extends EPackage {
 	int DECLARATION_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.yakindu.model.sct.statechart.impl.VariableImpl <em>Variable</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.model.sct.statechart.impl.VariableImpl
-	 * @see org.yakindu.model.sct.statechart.impl.StatechartPackageImpl#getVariable()
-	 * @generated
-	 */
-	int VARIABLE = 7;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -662,16 +723,6 @@ public interface StatechartPackage extends EPackage {
 	 * @ordered
 	 */
 	int VARIABLE_FEATURE_COUNT = DECLARATION_FEATURE_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link org.yakindu.model.sct.statechart.impl.JunctionImpl <em>Junction</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.model.sct.statechart.impl.JunctionImpl
-	 * @see org.yakindu.model.sct.statechart.impl.StatechartPackageImpl#getJunction()
-	 * @generated
-	 */
-	int JUNCTION = 8;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -719,16 +770,6 @@ public interface StatechartPackage extends EPackage {
 	int JUNCTION_FEATURE_COUNT = PSEUDOSTATE_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.yakindu.model.sct.statechart.impl.EventImpl <em>Event</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.model.sct.statechart.impl.EventImpl
-	 * @see org.yakindu.model.sct.statechart.impl.StatechartPackageImpl#getEvent()
-	 * @generated
-	 */
-	int EVENT = 9;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -745,16 +786,6 @@ public interface StatechartPackage extends EPackage {
 	 * @ordered
 	 */
 	int EVENT_FEATURE_COUNT = DECLARATION_FEATURE_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link org.yakindu.model.sct.statechart.impl.ChoiceImpl <em>Choice</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.model.sct.statechart.impl.ChoiceImpl
-	 * @see org.yakindu.model.sct.statechart.impl.StatechartPackageImpl#getChoice()
-	 * @generated
-	 */
-	int CHOICE = 10;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -800,16 +831,6 @@ public interface StatechartPackage extends EPackage {
 	 * @ordered
 	 */
 	int CHOICE_FEATURE_COUNT = PSEUDOSTATE_FEATURE_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link org.yakindu.model.sct.statechart.impl.StatechartImpl <em>Statechart</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.model.sct.statechart.impl.StatechartImpl
-	 * @see org.yakindu.model.sct.statechart.impl.StatechartPackageImpl#getStatechart()
-	 * @generated
-	 */
-	int STATECHART = 11;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -875,16 +896,6 @@ public interface StatechartPackage extends EPackage {
 	int STATECHART_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
-	 * The meta object id for the '{@link org.yakindu.model.sct.statechart.impl.EntryImpl <em>Entry</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.model.sct.statechart.impl.EntryImpl
-	 * @see org.yakindu.model.sct.statechart.impl.StatechartPackageImpl#getEntry()
-	 * @generated
-	 */
-	int ENTRY = 12;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -939,16 +950,6 @@ public interface StatechartPackage extends EPackage {
 	int ENTRY_FEATURE_COUNT = PSEUDOSTATE_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.yakindu.model.sct.statechart.impl.TriggerImpl <em>Trigger</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.model.sct.statechart.impl.TriggerImpl
-	 * @see org.yakindu.model.sct.statechart.impl.StatechartPackageImpl#getTrigger()
-	 * @generated
-	 */
-	int TRIGGER = 13;
-
-	/**
 	 * The number of structural features of the '<em>Trigger</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -956,16 +957,6 @@ public interface StatechartPackage extends EPackage {
 	 * @ordered
 	 */
 	int TRIGGER_FEATURE_COUNT = 0;
-
-	/**
-	 * The meta object id for the '{@link org.yakindu.model.sct.statechart.impl.EffectImpl <em>Effect</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.model.sct.statechart.impl.EffectImpl
-	 * @see org.yakindu.model.sct.statechart.impl.StatechartPackageImpl#getEffect()
-	 * @generated
-	 */
-	int EFFECT = 14;
 
 	/**
 	 * The number of structural features of the '<em>Effect</em>' class.
@@ -977,22 +968,31 @@ public interface StatechartPackage extends EPackage {
 	int EFFECT_FEATURE_COUNT = 0;
 
 	/**
-	 * The feature id for the '<em><b>Expression</b></em>' attribute.
+	 * The feature id for the '<em><b>Trigger</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXPRESSION_ELEMENT__EXPRESSION = 0;
+	int REACTION__TRIGGER = 0;
 
 	/**
-	 * The number of structural features of the '<em>Expression Element</em>' class.
+	 * The feature id for the '<em><b>Effect</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXPRESSION_ELEMENT_FEATURE_COUNT = 1;
+	int REACTION__EFFECT = 1;
+
+	/**
+	 * The number of structural features of the '<em>Reaction</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REACTION_FEATURE_COUNT = 2;
 
 	/**
 	 * The feature id for the '<em><b>Reactions</b></em>' reference list.

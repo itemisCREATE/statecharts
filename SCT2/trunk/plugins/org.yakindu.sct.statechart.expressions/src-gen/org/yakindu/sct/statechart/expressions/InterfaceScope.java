@@ -6,6 +6,7 @@
  */
 package org.yakindu.sct.statechart.expressions;
 
+import org.yakindu.model.sct.statechart.Scope;
 
 /**
  * <!-- begin-user-doc -->
@@ -23,7 +24,7 @@ package org.yakindu.sct.statechart.expressions;
  * @model
  * @generated
  */
-public interface InterfaceScope extends StatechartScope
+public interface InterfaceScope extends Scope
 {
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
