@@ -16,6 +16,7 @@ import java.util.List;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.text.source.AnnotationModel;
 import org.eclipse.jface.text.source.ICharacterPairMatcher;
 import org.eclipse.jface.text.source.ISourceViewer;
@@ -135,10 +136,8 @@ public class XtextCellEditor extends StyledTextCellEditor {
 	@Inject
 	private @Named(Constants.FILE_EXTENSIONS)
 	String fileExtension;
-
-
-	private XtextResourceSet resourceSet;
-
+	
+	private Resource context;
 
 	/**
 	 * C'tor to create a new Instance.
@@ -159,8 +158,8 @@ public class XtextCellEditor extends StyledTextCellEditor {
 				null, false, getStyle());
 		sourceviewer.configure(configuration);
 
-		resourceSet = new XtextResourceSet();
-		resourceSet.getResources().add(resource);
+		createResourceSet();
+		
 		setResourceUri(resource);
 		document.setInput(resource);
 
@@ -186,6 +185,19 @@ public class XtextCellEditor extends StyledTextCellEditor {
 		text.setBackground(parent.getBackground());
 		text.setText("");
 		return text;
+	}
+
+	private XtextResourceSet createResourceSet() {
+		XtextResourceSet resourceSet = new XtextResourceSet();
+		resourceSet.getResources().add(resource);
+		if (context != null) {
+			Resource contextResource = resourceSet.createResource(context
+					.getURI());
+			contextResource.getContents().addAll(
+					EcoreUtil.copyAll(context.getContents()));
+			resourceSet.getResources().add(contextResource);
+		}
+		return resourceSet;
 	}
 
 	@Override
@@ -289,5 +301,13 @@ public class XtextCellEditor extends StyledTextCellEditor {
 		text.removeKeyListener(keyListener);
 		document.disposeInput();
 		super.dispose();
+	}
+
+	public Resource getContext() {
+		return context;
+	}
+
+	public void setContext(Resource context) {
+		this.context = context;
 	}
 }

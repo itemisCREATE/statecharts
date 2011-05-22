@@ -264,6 +264,7 @@ public class XtextDirectEditManager extends DirectEditManager {
 
 		XtextCellEditorEx editor = new XtextCellEditorEx(style);
 		injector.injectMembers(editor);
+		editor.setContext(getEditPart().resolveSemanticElement().eResource());
 		editor.create(composite);
 		return editor;
 	}
