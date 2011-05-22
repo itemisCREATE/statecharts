@@ -40,10 +40,6 @@ public class StateInjectionService extends
 		localScope.getDeclarations().addAll(declarations);
 		original.getScopes().clear();
 		original.getScopes().add(localScope);
-		System.out.println("Setting features");
-		System.out.println("Declaratinos " + localScope.getDeclarations());
-		System.out.println("Events " + localScope.getEvents());
-		System.out.println(" Variables " + localScope.getVariables());
 	}
 
 	public boolean isServiceFor(EObject object) {

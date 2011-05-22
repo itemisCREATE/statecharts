@@ -20,7 +20,6 @@ public class InjectMembersResourceFactory extends XMIResourceFactoryImpl {
 	@Override
 	public Resource createResource(URI uri) {
 		InjectMembersResource resource = new InjectMembersResource(uri);
-		System.out.println("Execute factory");
 		ExpressionsRuntimeModule module = new ExpressionsRuntimeModule();
 		Injector injector = Guice.createInjector(module);
 		// Add a Transition service
