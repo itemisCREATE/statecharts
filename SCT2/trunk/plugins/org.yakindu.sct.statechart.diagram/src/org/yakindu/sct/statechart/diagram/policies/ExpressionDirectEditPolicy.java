@@ -42,84 +42,60 @@ public class ExpressionDirectEditPolicy extends DirectEditPolicy implements
 
 	@Override
 	protected Command getDirectEditCommand(DirectEditRequest request) {
-		Assert.isTrue(request.getCellEditor() instanceof XtextCellEditor);
-		XtextCellEditor cellEditor = (XtextCellEditor) request.getCellEditor();
-		handleIssues(cellEditor.getIssues());
-		EObject astRoot = cellEditor.getParseResult().getRootASTElement();
-		List<Event> events = EcoreUtil2.getAllContentsOfType(astRoot, Event.class);
-		List<Variable> vars =  EcoreUtil2.getAllContentsOfType(astRoot, Variable.class);
-		EObject semanticElem = (getHost().resolveSemanticElement());
-//FIXME	 
-//		SetValueCommand eventCommand = new SetValueCommand(new SetRequest(semanticElem,
-//				StatechartPackage.Literals.STATECHART__EVENTS,
-//				events));
-//
-//		SetValueCommand variableCommand = new SetValueCommand(new SetRequest(semanticElem,
-//				StatechartPackage.Literals.STATECHART__VARIABLES,
-//				vars));
-
-		SetValueCommand command = new SetValueCommand(new SetRequest(getHost()
+		SetRequest setRequest = new SetRequest(getHost()
 				.resolveSemanticElement(),
 				StatechartPackage.Literals.EXPRESSION_ELEMENT__EXPRESSION,
-				cellEditor.getValue()));
-		
-		CompoundCommand compoundCommand = new CompoundCommand();
-		
-//		if (semanticElem instanceof Statechart) {
-//			compoundCommand.add(new ICommandProxy(eventCommand));
-//			compoundCommand.add(new ICommandProxy(variableCommand));
+				request.getCellEditor().getValue());
+	//	setRequest.setEditingDomain(getHost().getEditingDomain());
+		SetValueCommand setCommand = new SetValueCommand(setRequest);
+		return new ICommandProxy(setCommand);
+	}
+
+//	private void handleIssues(List<Issue> issues) {
+//		deleteOldMarkers();
+//		createNewMarkers(issues);
+//	}
+
+//	private void createNewMarkers(List<Issue> diagnostics) {
+//		IFile target = GMFMarkerUtil.getTargetFile(getHost().getNotationView());
+//		for (Issue issue : diagnostics) {
+//			GMFMarkerUtil.createMarker(target, new Status(getSeverity(issue),
+//					DiagramActivator.PLUGIN_ID, issue.getMessage()),
+//					getHost().getNotationView().getDiagram(),
+//					XTEXT_MARKER_TYPE, getHost().resolveSemanticElement());
 //		}
-		
-		compoundCommand.add(new ICommandProxy(command));
-		
-		return compoundCommand;
-	}
-
-	private void handleIssues(List<Issue> issues) {
-		deleteOldMarkers();
-		createNewMarkers(issues);
-	}
-
-	private void createNewMarkers(List<Issue> diagnostics) {
-		IFile target = GMFMarkerUtil.getTargetFile(getHost().getNotationView());
-		for (Issue issue : diagnostics) {
-			GMFMarkerUtil.createMarker(target, new Status(getSeverity(issue),
-					DiagramActivator.PLUGIN_ID, issue.getMessage()),
-					getHost().getNotationView().getDiagram(),
-					XTEXT_MARKER_TYPE, getHost().resolveSemanticElement());
-		}
-
-	}
-	
-	private static int getSeverity(Issue issue) {
-		switch (issue.getSeverity()) {
-			case ERROR : 
-				return IStatus.ERROR;
-			case WARNING : 
-				return IStatus.WARNING;
-			case INFO : 
-				return IStatus.INFO;
-		}
-		throw new IllegalArgumentException();
-	}
-
-	private void deleteOldMarkers() {
-		final IFile target = GMFMarkerUtil.getTargetFile(getHost()
-				.getNotationView());
-		try {
-			IMarker[] markers = target.findMarkers(XTEXT_MARKER_TYPE, true,
-					IResource.DEPTH_ZERO);
-			for (IMarker iMarker : markers) {
-				if (iMarker.getAttribute(IMarker.LOCATION).equals(
-						EMFCoreUtil.getQualifiedName(getHost()
-								.resolveSemanticElement(), true))) {
-					iMarker.delete();
-				}
-			}
-		} catch (CoreException e) {
-			e.printStackTrace();
-		}
-	}
+//
+//	}
+//	
+//	private static int getSeverity(Issue issue) {
+//		switch (issue.getSeverity()) {
+//			case ERROR : 
+//				return IStatus.ERROR;
+//			case WARNING : 
+//				return IStatus.WARNING;
+//			case INFO : 
+//				return IStatus.INFO;
+//		}
+//		throw new IllegalArgumentException();
+//	}
+//
+//	private void deleteOldMarkers() {
+//		final IFile target = GMFMarkerUtil.getTargetFile(getHost()
+//				.getNotationView());
+//		try {
+//			IMarker[] markers = target.findMarkers(XTEXT_MARKER_TYPE, true,
+//					IResource.DEPTH_ZERO);
+//			for (IMarker iMarker : markers) {
+//				if (iMarker.getAttribute(IMarker.LOCATION).equals(
+//						EMFCoreUtil.getQualifiedName(getHost()
+//								.resolveSemanticElement(), true))) {
+//					iMarker.delete();
+//				}
+//			}
+//		} catch (CoreException e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	@Override
 	public IGraphicalEditPart getHost() {

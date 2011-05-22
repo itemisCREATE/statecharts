@@ -3,7 +3,6 @@
  */
 package org.yakindu.sct.statechart;
 
-import org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.ResourceSetGlobalScopeProvider;
 
 /**
@@ -14,11 +13,7 @@ public class ExpressionsRuntimeModule extends
 		org.yakindu.sct.statechart.AbstractExpressionsRuntimeModule {
 
 	public Class<? extends org.eclipse.xtext.scoping.IGlobalScopeProvider> bindIGlobalScopeProvider() {
-		return MyGlobalScopeProvider.class;
+		return ResourceSetGlobalScopeProvider.class;
 	}
 
-	public static class MyGlobalScopeProvider extends
-			DefaultGlobalScopeProvider {
-
-	}
 }

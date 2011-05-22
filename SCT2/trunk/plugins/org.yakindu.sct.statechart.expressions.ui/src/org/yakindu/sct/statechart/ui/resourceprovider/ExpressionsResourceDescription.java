@@ -45,7 +45,6 @@ public class ExpressionsResourceDescription extends AbstractResourceDescription
 			if (eObject instanceof NamedElement) {
 				String name = ((NamedElement) eObject).getName();
 				if (name != null) {
-					System.out.println("Export object " + name);
 					result.add(new EObjectDescription(QualifiedName
 							.create(name), eObject, userData));
 				}
