@@ -3,7 +3,10 @@
  */
 package org.yakindu.sct.statechart;
 
+import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.scoping.impl.ResourceSetGlobalScopeProvider;
+
+import de.itemis.xtext.utils.gmf.resource.InjectMembersLazyLinker;
 
 /**
  * Use this class to register components to be used at runtime / without the
@@ -15,5 +18,10 @@ public class ExpressionsRuntimeModule extends
 	public Class<? extends org.eclipse.xtext.scoping.IGlobalScopeProvider> bindIGlobalScopeProvider() {
 		return ResourceSetGlobalScopeProvider.class;
 	}
-
+	
+	@Override
+	public Class<? extends ILinker> bindILinker() {
+		return InjectMembersLazyLinker.class;
+	}
+	
 }
