@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.diagnostics.Severity;
-import org.eclipse.xtext.linking.impl.Linker;
+import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
@@ -49,11 +49,9 @@ public abstract class AbstractXtextMemberInjectionService<S extends EObject, T e
 
 	@Inject
 	private IParser parser;
-	//Injects a Linker (not an ILinker, this would lead to a LazyLinker)  
 	@Inject
-	private Linker linker;
+	private ILinker linker;
 
-	
 	/**
 	 * The ParserRule that should be invoked sith the expression
 	 * 
@@ -102,6 +100,7 @@ public abstract class AbstractXtextMemberInjectionService<S extends EObject, T e
 		linker.linkModel(object, consumer);
 		errors.addAll(consumer.getResult(Severity.ERROR));
 		warnings.addAll(consumer.getResult(Severity.WARNING));
+		System.out.println("Linking errors: " + errors);
 	}
 
 	private void addSyntaxErrors(IParseResult result) {
