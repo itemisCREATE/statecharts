@@ -145,13 +145,6 @@
          </metamodelType>
          </metamodel>
    </extension>
-   <extension
-         point="org.eclipse.emf.ecore.extension_parser">
-      <parser
-            class="org.eclipse.gmf.runtime.emf.core.resources.GMFResourceFactory"
-            type="sct">
-      </parser>
-   </extension>
    
    <!-- Contribution Item Provider -->
    <extension point="org.eclipse.gmf.runtime.common.ui.services.action.contributionItemProviders">
