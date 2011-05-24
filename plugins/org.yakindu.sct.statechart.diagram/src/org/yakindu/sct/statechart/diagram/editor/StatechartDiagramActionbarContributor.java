@@ -31,5 +31,6 @@ public class StatechartDiagramActionbarContributor extends
 	protected Class<StatechartDiagramEditor> getEditorClass() {
 		return StatechartDiagramEditor.class;
 	}
+	
 
 }
