@@ -17,13 +17,13 @@
       [Enter License Description here.]
    </license>
 
+   <includes
+         id="org.yakindu.sct.source"
+         version="0.0.0"/>
+
    <requires>
       <import feature="de.itemis.xtext.utils.gmf" version="1.0.0" match="compatible"/>
    </requires>
-   
-    <includes
-         id="org.yakindu.sct.source"
-         version="0.0.0"/>
 
    <plugin
          id="org.yakindu.sct.model.statechart"
@@ -69,6 +69,13 @@
 
    <plugin
          id="org.yakindu.sct.statechart.expressions.ui.extensions"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.yakindu.sct.statechart.core.resource"
          download-size="0"
          install-size="0"
          version="0.0.0"
