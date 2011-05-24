@@ -38,6 +38,7 @@ public class StatechartDiagramEditor extends DiagramDocumentEditor implements IG
 		//This is for property sheet page registration
 		return ID;
 	}
+	
 
 
 	@Override

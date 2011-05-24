@@ -12,6 +12,7 @@ import org.eclipse.gmf.runtime.diagram.core.util.ViewUtil;
 import org.eclipse.gmf.runtime.emf.commands.core.commands.RepositionEObjectCommand;
 import org.eclipse.gmf.runtime.notation.View;
 
+@SuppressWarnings("rawtypes")
 public class CompartmentRepositionEObjectCommand extends RepositionEObjectCommand {
 
 	EditPart childToMove = null;
