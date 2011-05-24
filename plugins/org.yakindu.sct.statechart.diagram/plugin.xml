@@ -431,5 +431,44 @@
          <context decoratorTargets="PRIMARY_VIEW"/>
       </decoratorProvider>
    </extension>
+   
+   <!-- context menu contribution -->
+     <extension point="org.eclipse.ui.commands">
+	<command description="Change Flow Kind" id="org.yakindu.sct.statechart.diagram.Entry" name="Change Entry Kind">
+	</command>
+</extension>
+   
+   <extension point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="false"
+            id="org.yakindu.sct.statechart.diagram.Entry"
+            objectClass="org.yakindu.sct.statechart.diagram.editparts.EntryEditPart">
+         <menu 
+            id="Entry" label="Change Entry Kind" path="additions"> 
+            <separator name="group1"/>
+         </menu>
+          <action
+               class="org.yakindu.sct.statechart.diagram.actions.SetDeepHistoryEntryKindCommand"
+               definitionId="org.yakindu.sct.statechart.diagram.Entry"
+               id="org.yakindu.sct.statechart.diagram.DeepHistory"
+               label="DeepHistory"
+               menubarPath="Entry/group1">
+         </action>
+           <action
+               class="org.yakindu.sct.statechart.diagram.actions.SetShallowHistoryEntryKindCommand"
+               definitionId="org.yakindu.sct.statechart.diagram.Entry"
+               id="org.yakindu.sct.statechart.diagram.ShallowHistory"
+               label="ShallowHistory"
+               menubarPath="Entry/group1">
+         </action>
+           <action
+               class="org.yakindu.sct.statechart.diagram.actions.SetInitialEntryKindCommand"
+               definitionId="org.yakindu.sct.statechart.diagram.Entry"
+               id="org.yakindu.sct.statechart.diagram.Initial"
+               label="Initial"
+               menubarPath="Entry/group1">
+         </action>
+      </objectContribution>                    
+</extension>
 
 </plugin>
