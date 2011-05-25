@@ -11,6 +11,7 @@
 package org.yakindu.sct.statechart.diagram.editor;
 
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramActionBarContributor;
+import org.eclipse.ui.IActionBars;
 /**
  * 
  * @author Andreas Muelder <a href="mailto:andreas.muelder@itemis.de">andreas.muelder@itemis.de</a>
@@ -19,9 +20,14 @@ import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramActionBarContributor;
 public class StatechartDiagramActionbarContributor extends
 		DiagramActionBarContributor {
 
-	public StatechartDiagramActionbarContributor() {
-	}
 
+	@Override
+	public void init(IActionBars bars) {
+		super.init(bars);
+		//workaround for https://bugs.eclipse.org/bugs/show_bug.cgi?id=346648
+		bars.clearGlobalActionHandlers();
+	}
+	
 	@Override
 	protected String getEditorId() {
 		return StatechartDiagramEditor.ID;
