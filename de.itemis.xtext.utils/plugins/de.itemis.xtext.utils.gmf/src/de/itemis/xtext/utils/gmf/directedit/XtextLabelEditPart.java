@@ -19,7 +19,6 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.tools.DirectEditManager;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.CompartmentEditPart;
-import org.eclipse.gmf.runtime.diagram.ui.editparts.LabelEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.label.ILabelDelegate;
 import org.eclipse.gmf.runtime.diagram.ui.label.LabelExDelegate;
 import org.eclipse.gmf.runtime.diagram.ui.tools.TextDirectEditManager;
@@ -29,8 +28,8 @@ import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.swt.graphics.Color;
 
 /**
- * Abstract base implementation for all {@link LabelEditPart}s that use Xtext
- * for direct editing.
+ * Abstract base implementation for all Labels that that use Xtext for direct
+ * editing.
  * 
  * 
  * @author muelder
@@ -46,7 +45,6 @@ public abstract class XtextLabelEditPart extends CompartmentEditPart implements
 	public XtextLabelEditPart(final View view) {
 		super(view);
 	}
-
 
 	@Override
 	protected IFigure createFigure() {
