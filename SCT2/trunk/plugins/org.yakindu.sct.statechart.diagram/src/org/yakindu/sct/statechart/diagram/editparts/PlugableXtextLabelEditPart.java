@@ -19,13 +19,13 @@ import de.itemis.xtext.utils.gmf.directedit.XtextLabelEditPart;
  * @author muelder
  * 
  */
-public abstract class PlugableXTextLabelEditPart extends XtextLabelEditPart {
+public abstract class PlugableXtextLabelEditPart extends XtextLabelEditPart {
 
 	private static final String EXPRESSIONS_EXTENSION = "org.yakindu.sct.statechart.diagram.expressions";
 	private Injector injector;
 	private int editorStyle;
 
-	public PlugableXTextLabelEditPart(View view) {
+	public PlugableXtextLabelEditPart(View view) {
 		super(view);
 		init();
 	}

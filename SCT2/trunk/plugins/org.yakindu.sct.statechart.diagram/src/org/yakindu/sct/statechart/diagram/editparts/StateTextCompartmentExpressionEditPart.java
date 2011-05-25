@@ -11,7 +11,7 @@ import de.itemis.xtext.utils.gmf.directedit.IXtextAwareEditPart;
  * 
  */
 public class StateTextCompartmentExpressionEditPart extends
-		PlugableXTextLabelEditPart implements IXtextAwareEditPart {
+		PlugableXtextLabelEditPart implements IXtextAwareEditPart {
 
 	public StateTextCompartmentExpressionEditPart(View view) {
 		super(view);

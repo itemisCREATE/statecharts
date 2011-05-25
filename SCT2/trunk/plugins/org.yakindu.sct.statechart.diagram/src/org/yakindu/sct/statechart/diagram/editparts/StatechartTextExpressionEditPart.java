@@ -10,7 +10,7 @@ import org.eclipse.gmf.runtime.notation.View;
  * 
  */
 public class StatechartTextExpressionEditPart extends
-		PlugableXTextLabelEditPart {
+		PlugableXtextLabelEditPart {
 
 	public StatechartTextExpressionEditPart(View view) {
 		super(view);

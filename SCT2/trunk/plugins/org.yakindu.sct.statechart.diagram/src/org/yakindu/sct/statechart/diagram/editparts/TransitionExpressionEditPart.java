@@ -19,7 +19,7 @@ import de.itemis.xtext.utils.gmf.directedit.IXtextAwareEditPart;
  * @author muelder
  *
  */
-public class TransitionExpressionEditPart extends PlugableXTextLabelEditPart implements
+public class TransitionExpressionEditPart extends PlugableExternalXtextLabelEditPart implements
 		IXtextAwareEditPart {
 
 
