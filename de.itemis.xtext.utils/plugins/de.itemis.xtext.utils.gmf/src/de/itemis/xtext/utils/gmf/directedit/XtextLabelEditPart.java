@@ -18,7 +18,10 @@ import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.tools.DirectEditManager;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.CompartmentEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.LabelEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.label.ILabelDelegate;
+import org.eclipse.gmf.runtime.diagram.ui.label.LabelExDelegate;
 import org.eclipse.gmf.runtime.diagram.ui.tools.TextDirectEditManager;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.LabelEx;
 import org.eclipse.gmf.runtime.notation.ShapeStyle;
@@ -33,7 +36,7 @@ import org.eclipse.swt.graphics.Color;
  * @author muelder
  * 
  */
-public abstract class XtextLabelEditPart extends LabelEditPart implements
+public abstract class XtextLabelEditPart extends CompartmentEditPart implements
 		IXtextAwareEditPart {
 
 	private DirectEditManager manager;
@@ -43,6 +46,7 @@ public abstract class XtextLabelEditPart extends LabelEditPart implements
 	public XtextLabelEditPart(final View view) {
 		super(view);
 	}
+
 
 	@Override
 	protected IFigure createFigure() {
@@ -85,14 +89,14 @@ public abstract class XtextLabelEditPart extends LabelEditPart implements
 		}
 		super.handleNotificationEvent(notification);
 	}
-//
-//	@Override
-//	public Object getAdapter(@SuppressWarnings("rawtypes") final Class key) {
-//		if (key.equals(ILabelDelegate.class)) {
-//			return new LabelExDelegate(getFigure());
-//		}
-//		return super.getAdapter(key);
-//	}
+
+	@Override
+	public Object getAdapter(@SuppressWarnings("rawtypes") final Class key) {
+		if (key.equals(ILabelDelegate.class)) {
+			return new LabelExDelegate(getFigure());
+		}
+		return super.getAdapter(key);
+	}
 
 	@Override
 	protected void performDirectEditRequest(final Request request) {
