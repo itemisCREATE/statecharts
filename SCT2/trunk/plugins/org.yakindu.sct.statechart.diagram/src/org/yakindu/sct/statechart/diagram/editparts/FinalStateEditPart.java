@@ -25,7 +25,7 @@ import org.yakindu.sct.statechart.diagram.policies.RelationshipSemanticEditPolic
  * @author muelder
  * 
  */
-public class FinalStateEditPart extends FixedSizeShapeNodeEditPart {
+public class FinalStateEditPart extends EllipseFixedSizeShapeNodeEditPart {
 
 	public FinalStateEditPart(View view) {
 		super(view);
