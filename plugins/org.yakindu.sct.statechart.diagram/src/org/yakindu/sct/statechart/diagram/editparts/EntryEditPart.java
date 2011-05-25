@@ -29,7 +29,7 @@ import org.yakindu.sct.statechart.diagram.policies.RelationshipSemanticEditPolic
  * 
  * @author muelder
  */
-public class EntryEditPart extends FixedSizeShapeNodeEditPart {
+public class EntryEditPart extends EllipseFixedSizeShapeNodeEditPart {
 
 	public EntryEditPart(View view) {
 		super(view);
