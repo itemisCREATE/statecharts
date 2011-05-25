@@ -19,8 +19,6 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.tools.DirectEditManager;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.CompartmentEditPart;
-import org.eclipse.gmf.runtime.diagram.ui.label.ILabelDelegate;
-import org.eclipse.gmf.runtime.diagram.ui.label.LabelExDelegate;
 import org.eclipse.gmf.runtime.diagram.ui.tools.TextDirectEditManager;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.LabelEx;
 import org.eclipse.gmf.runtime.notation.ShapeStyle;
@@ -88,13 +86,6 @@ public abstract class XtextLabelEditPart extends CompartmentEditPart implements
 		super.handleNotificationEvent(notification);
 	}
 
-	@Override
-	public Object getAdapter(@SuppressWarnings("rawtypes") final Class key) {
-		if (key.equals(ILabelDelegate.class)) {
-			return new LabelExDelegate(getFigure());
-		}
-		return super.getAdapter(key);
-	}
 
 	@Override
 	protected void performDirectEditRequest(final Request request) {
