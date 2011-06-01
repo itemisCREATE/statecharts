@@ -21,11 +21,13 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.yakindu.model.sct.statechart.StatechartFactory;
 import org.yakindu.model.sct.statechart.StatechartPackage;
+import org.yakindu.model.sct.statechart.util.StatechartValidator;
 
 /**
  * <!-- begin-user-doc -->
@@ -258,6 +260,15 @@ public class StatechartPackageImpl extends EPackageImpl implements StatechartPac
 
 		// Fix loaded packages
 		theStatechartPackage.fixPackageContents();
+
+		// Register package validator
+		EValidator.Registry.INSTANCE.put
+			(theStatechartPackage, 
+			 new EValidator.Descriptor() {
+				 public EValidator getEValidator() {
+					 return StatechartValidator.INSTANCE;
+				 }
+			 });
 
 		// Mark meta-data to indicate it can't be changed
 		theStatechartPackage.freeze();

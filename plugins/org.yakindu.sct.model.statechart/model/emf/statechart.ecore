@@ -6,6 +6,9 @@
   <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel"/>
   <eClassifiers xsi:type="ecore:EClass" name="Pseudostate" abstract="true" eSuperTypes="#//Vertex"/>
   <eClassifiers xsi:type="ecore:EClass" name="Vertex" abstract="true" eSuperTypes="#//NamedElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="IncomingTransitionCount OutgoingTransitionCount"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parentRegion" ordered="false"
         lowerBound="1" eType="#//Region" eOpposite="#//Region/vertices"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="incomingTransitions" ordered="false"
@@ -14,10 +17,12 @@
         upperBound="-1" eType="#//Transition" containment="true" eOpposite="#//Transition/source"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Region" eSuperTypes="#//NamedElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="ExactlyOneInitialState"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="vertices" ordered="false"
         upperBound="-1" eType="#//Vertex" containment="true" eOpposite="#//Vertex/parentRegion"/>
   </eClassifiers>
@@ -31,6 +36,9 @@
   <eClassifiers xsi:type="ecore:EClass" name="FinalState" eSuperTypes="#//State"/>
   <eClassifiers xsi:type="ecore:EClass" name="State" eSuperTypes="#//Vertex #//ExpressionElement #//ReactiveElement #//ScopedElement">
     <eAnnotations source="InjectMembers"/>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="NameIsNotEmpty"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="subRegions" ordered="false"
         upperBound="-1" eType="#//Region" containment="true"/>
   </eClassifiers>

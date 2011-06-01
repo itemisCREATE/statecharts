@@ -17,6 +17,7 @@ import org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.statechart.diagram.commands.CompartmentRepositionEObjectCommand;
 
+//TODO: Move to commons
 public class CompartmentEditPolicy extends
 		org.eclipse.gef.editpolicies.FlowLayoutEditPolicy {
 
@@ -38,6 +39,7 @@ public class CompartmentEditPolicy extends
 		return policy;
 	}
 
+	@SuppressWarnings("rawtypes")
 	protected Command createMoveChildCommand(EditPart child, EditPart after) {
 
 		int newIndex;

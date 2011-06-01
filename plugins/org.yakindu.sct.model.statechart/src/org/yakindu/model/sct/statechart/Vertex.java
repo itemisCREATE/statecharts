@@ -28,6 +28,7 @@ import org.eclipse.emf.common.util.EList;
  *
  * @see org.yakindu.model.sct.statechart.StatechartPackage#getVertex()
  * @model abstract="true"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='IncomingTransitionCount OutgoingTransitionCount'"
  * @generated
  */
 public interface Vertex extends NamedElement {

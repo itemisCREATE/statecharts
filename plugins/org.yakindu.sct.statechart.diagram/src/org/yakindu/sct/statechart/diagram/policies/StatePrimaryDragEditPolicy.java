@@ -19,12 +19,6 @@ public class StatePrimaryDragEditPolicy extends ResizableEditPolicyEx {
 		req.setResizeDirection(request.getResizeDirection());
 		return getHost().getParent().getCommand(req);
 		
-//		List<Compartment> notationCompartmentChildren = getHost().getNotationCompartmentChildren();
-//		for (Compartment compartment : notationCompartmentChildren) {
-//			Double ratio = (Double) ViewUtil.getStructuralFeatureValue(
-//					compartment,
-//					NotationPackage.eINSTANCE.getRatio_Value());
-//		}
 	}
 	
 	@Override

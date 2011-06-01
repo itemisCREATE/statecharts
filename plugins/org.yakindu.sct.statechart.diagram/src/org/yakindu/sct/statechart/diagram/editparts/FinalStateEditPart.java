@@ -10,7 +10,7 @@
  */
 package org.yakindu.sct.statechart.diagram.editparts;
 
-import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.Ellipse;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.diagram.ui.handles.ConnectionHandle.HandleDirection;
@@ -47,7 +47,7 @@ public class FinalStateEditPart extends EllipseFixedSizeShapeNodeEditPart {
 	}
 
 	@Override
-	public IFigure getPrimaryShape() {
+	public Ellipse getPrimaryShape() {
 		return new FinalStateFigure(getMapMode());
 	}
 

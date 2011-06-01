@@ -10,6 +10,7 @@
  */
 package org.yakindu.sct.statechart.diagram.editor;
 
+import org.eclipse.gmf.runtime.common.ui.action.global.GlobalActionId;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramActionBarContributor;
 import org.eclipse.ui.IActionBars;
 /**
@@ -25,7 +26,7 @@ public class StatechartDiagramActionbarContributor extends
 	public void init(IActionBars bars) {
 		super.init(bars);
 		//workaround for https://bugs.eclipse.org/bugs/show_bug.cgi?id=346648
-		bars.clearGlobalActionHandlers();
+		bars.setGlobalActionHandler(GlobalActionId.SAVE, null);
 	}
 	
 	@Override

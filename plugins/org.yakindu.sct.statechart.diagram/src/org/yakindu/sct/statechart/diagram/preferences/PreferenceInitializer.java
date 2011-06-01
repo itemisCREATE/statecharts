@@ -21,21 +21,21 @@ import org.yakindu.sct.statechart.diagram.DiagramActivator;
 /**
  * 
  * @author muelder
- *
+ * 
  */
 public class PreferenceInitializer extends DiagramPreferenceInitializer
 		implements StatechartColorConstants {
 
 	public void initializeDefaultPreferences() {
 		super.initializeDefaultPreferences();
-	
 		// Line colors
 		Color lineColor = DiagramColorConstants.black;
 		PreferenceConverter.setDefault(getPreferenceStore(),
 				IPreferenceConstants.PREF_LINE_COLOR, lineColor.getRGB());
 
 		// rulers and grid defaults
-		getPreferenceStore().setDefault(IPreferenceConstants.PREF_SNAP_TO_GEOMETRY, true);
+		getPreferenceStore().setDefault(
+				IPreferenceConstants.PREF_SNAP_TO_GEOMETRY, true);
 
 	}
 

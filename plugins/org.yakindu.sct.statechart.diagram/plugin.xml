@@ -3,7 +3,6 @@
 <plugin>
 	<!-- Extension Points -->
 	
-   <extension-point id="org.yakindu.sct.statechart.diagram.validation.provider" name="org.yakindu.sct.statechart.diagram.validation.provider" schema="schema/org.yakindu.sct.statechart.diagram.validation.provider.exsd"/>
    <extension-point id="org.yakindu.sct.statechart.diagram.expressions" name="org.yakindu.sct.statechart.diagram.expressions" schema="schema/org.yakindu.sct.statechart.diagram.expressions.exsd"/>
   
     <!-- Editor -->
