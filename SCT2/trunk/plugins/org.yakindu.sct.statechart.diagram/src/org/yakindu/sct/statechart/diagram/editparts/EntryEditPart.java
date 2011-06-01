@@ -10,6 +10,7 @@
  */
 package org.yakindu.sct.statechart.diagram.editparts;
 
+import org.eclipse.draw2d.Ellipse;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.emf.common.notify.Notification;
@@ -56,7 +57,7 @@ public class EntryEditPart extends EllipseFixedSizeShapeNodeEditPart {
 	}
 
 	@Override
-	public IFigure getPrimaryShape() {
+	public Ellipse getPrimaryShape() {
 		switch (resolveSemanticElement().getKind()) {
 		case DEEP_HISTORY:
 			return new DeepHistoryFigure();

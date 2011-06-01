@@ -13,7 +13,6 @@ import com.google.inject.Injector;
 
 import de.itemis.xtext.utils.gmf.directedit.ExternalXtextLabelEditPart;
 import de.itemis.xtext.utils.gmf.directedit.XtextDirectEditManager;
-import de.itemis.xtext.utils.gmf.directedit.XtextLabelEditPart;
 
 /**
  * 

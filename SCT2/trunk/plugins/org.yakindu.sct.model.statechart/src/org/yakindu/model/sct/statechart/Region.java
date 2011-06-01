@@ -25,7 +25,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see org.yakindu.model.sct.statechart.StatechartPackage#getRegion()
- * @model
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='ExactlyOneInitialState'"
  * @generated
  */
 public interface Region extends NamedElement {

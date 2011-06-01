@@ -1,5 +1,6 @@
 package org.yakindu.sct.statechart.diagram.editparts;
 
+import org.eclipse.draw2d.Ellipse;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.statechart.diagram.editor.figures.EllipseAnchorDefaultSizeNodeFigure;
@@ -24,5 +25,7 @@ public abstract class EllipseFixedSizeShapeNodeEditPart extends
 		figure.add(getPrimaryShape());
 		return figure;
 	}
+	
+	public abstract Ellipse getPrimaryShape();
 
 }

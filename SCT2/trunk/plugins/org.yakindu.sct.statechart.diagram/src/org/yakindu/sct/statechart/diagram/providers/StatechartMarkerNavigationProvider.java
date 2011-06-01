@@ -78,64 +78,6 @@ public class StatechartMarkerNavigationProvider extends
 
 	}
 
-	// public void gotoMarker(IMarker marker) {
-	// if (fIsUpdatingMarkerViews)
-	// return;
-	//
-	// if (getSourceViewer() == null)
-	// return;
-	//
-	// int start= MarkerUtilities.getCharStart(marker);
-	// int end= MarkerUtilities.getCharEnd(marker);
-	//
-	// boolean selectLine= start < 0 || end < 0;
-	//
-	// // look up the current range of the marker when the document has been
-	// edited
-	// IAnnotationModel model=
-	// getDocumentProvider().getAnnotationModel(getEditorInput());
-	// if (model instanceof AbstractMarkerAnnotationModel) {
-	//
-	// AbstractMarkerAnnotationModel markerModel=
-	// (AbstractMarkerAnnotationModel) model;
-	// Position pos= markerModel.getMarkerPosition(marker);
-	// if (pos != null && !pos.isDeleted()) {
-	// // use position instead of marker values
-	// start= pos.getOffset();
-	// end= pos.getOffset() + pos.getLength();
-	// }
-	//
-	// if (pos != null && pos.isDeleted()) {
-	// // do nothing if position has been deleted
-	// return;
-	// }
-	// }
-
-	// IDocument document= getDocumentProvider().getDocument(getEditorInput());
-	//
-	// if (selectLine) {
-	// int line;
-	// try {
-	// if (start >= 0)
-	// line= document.getLineOfOffset(start);
-	// else {
-	// line= MarkerUtilities.getLineNumber(marker);
-	// // Marker line numbers are 1-based
-	// -- line;
-	// start= document.getLineOffset(line);
-	// }
-	// end= start + document.getLineLength(line) - 1;
-	// } catch (BadLocationException e) {
-	// return;
-	// }
-	// }
-	//
-	// int length= document.getLength();
-	// if (end <= length && start <= length) {
-	// fIsComingFromGotoMarker= true;
-	// selectAndReveal(start, end - start);
-	// }
-	// }
 
 	public static void selectElementsInDiagram(
 			IDiagramWorkbenchPart diagramPart, List<EditPart> editParts) {

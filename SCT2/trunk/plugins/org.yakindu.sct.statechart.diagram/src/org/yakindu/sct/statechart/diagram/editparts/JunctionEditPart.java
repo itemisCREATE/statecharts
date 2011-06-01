@@ -10,6 +10,7 @@
  */
 package org.yakindu.sct.statechart.diagram.editparts;
 
+import org.eclipse.draw2d.Ellipse;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
@@ -24,7 +25,7 @@ import org.yakindu.sct.statechart.diagram.policies.RelationshipSemanticEditPolic
  *         href="mailto:andreas.muelder@itemis.de">andreas.muelder@itemis.de</a>
  * 
  */
-public class JunctionEditPart extends FixedSizeShapeNodeEditPart {
+public class JunctionEditPart extends EllipseFixedSizeShapeNodeEditPart {
 
 	private static final Dimension DIMENSION = new Dimension(10, 10);
 	
@@ -45,7 +46,7 @@ public class JunctionEditPart extends FixedSizeShapeNodeEditPart {
 	}
 
 	@Override
-	public IFigure getPrimaryShape() {
+	public Ellipse getPrimaryShape() {
 		return new JunctionFigure();
 	}
 

@@ -25,7 +25,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see org.yakindu.model.sct.statechart.StatechartPackage#getState()
- * @model
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='NameIsNotEmpty'"
  * @generated
  */
 public interface State extends Vertex, ExpressionElement, ReactiveElement, ScopedElement {

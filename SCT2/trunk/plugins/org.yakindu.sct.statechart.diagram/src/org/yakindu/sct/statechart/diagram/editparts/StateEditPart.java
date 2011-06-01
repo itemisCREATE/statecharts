@@ -20,6 +20,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.GraphicalEditPart;
+import org.eclipse.gef.Request;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.commands.UnexecutableCommand;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IPrimaryEditPart;
@@ -41,14 +42,31 @@ import org.yakindu.sct.statechart.diagram.editor.figures.utils.MapModeUtils;
 import org.yakindu.sct.statechart.diagram.policies.RelationshipSemanticEditPolicy;
 
 /**
- * @author muelder
+ * The EditPart for the State.
+ * 
+ * 
+ * @author andreas muelder
  * 
  */
 public class StateEditPart extends ShapeNodeEditPart implements
 		IPrimaryEditPart {
+	
+	private EditPart figureCompartmentEditPart;
 
 	public StateEditPart(View view) {
 		super(view);
+	}
+
+	/**
+	 * Delegates all {@link CreateViewAndElementRequest}s to the figure
+	 * compartment.
+	 */
+	@Override
+	public EditPart getTargetEditPart(Request request) {
+		if (request instanceof CreateViewAndElementRequest) {
+			return figureCompartmentEditPart;
+		}
+		return super.getTargetEditPart(request);
 	}
 
 	@Override
@@ -171,6 +189,7 @@ public class StateEditPart extends ShapeNodeEditPart implements
 	@Override
 	protected void addChildVisual(EditPart childEditPart, int index) {
 		if (childEditPart instanceof StateFigureCompartmentEditPart) {
+			figureCompartmentEditPart = childEditPart;
 			IFigure pane = getPrimaryShape().getFigureCompartmentPane();
 			IFigure compartmentFigure = ((StateFigureCompartmentEditPart) childEditPart)
 					.getFigure();

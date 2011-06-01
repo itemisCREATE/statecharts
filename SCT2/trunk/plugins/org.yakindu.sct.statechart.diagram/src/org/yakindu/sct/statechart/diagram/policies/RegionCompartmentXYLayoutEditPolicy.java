@@ -2,7 +2,10 @@ package org.yakindu.sct.statechart.diagram.policies;
 
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.EditPart;
+import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.commands.Command;
+import org.eclipse.gef.requests.ChangeBoundsRequest;
+import org.eclipse.gef.requests.CreateRequest;
 import org.eclipse.gmf.runtime.common.core.command.ICommand;
 import org.eclipse.gmf.runtime.diagram.core.util.ViewUtil;
 import org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy;
@@ -14,6 +17,7 @@ import org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.statechart.diagram.editparts.RegionCompartmentEditPart;
+import org.yakindu.sct.statechart.diagram.editparts.RegionEditPart;
 import org.yakindu.sct.statechart.diagram.editparts.StateEditPart;
 
 /**
@@ -53,6 +57,7 @@ public class RegionCompartmentXYLayoutEditPolicy extends XYLayoutEditPolicy {
 		}
 	}
 
+	
 	@Override
 	public IGraphicalEditPart getHost() {
 		return (IGraphicalEditPart) super.getHost();

@@ -13,6 +13,7 @@ package org.yakindu.model.sct.statechart.util;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
+import org.yakindu.model.sct.statechart.*;
 import org.yakindu.model.sct.statechart.Choice;
 import org.yakindu.model.sct.statechart.Declaration;
 import org.yakindu.model.sct.statechart.Effect;
