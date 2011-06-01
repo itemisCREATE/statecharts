@@ -2,26 +2,28 @@ package de.itemis.xtext.utils.gmf.resource;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
+import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.gmf.runtime.emf.core.resources.GMFResource;
 
 import com.google.inject.internal.Lists;
 
 /**
- * Implementation of {@link Resource} that handles Xtext mixins.
+ * Implementation of Resource that handles Xtext mixins.
  * 
  * @author andreas muelder
  * 
@@ -30,11 +32,17 @@ public class InjectMembersResource extends GMFResource {
 
 	private static final String INJECT_MEMBERS = "InjectMembers";
 
+	List<org.eclipse.emf.common.util.Diagnostic> diagnostics = new ArrayList<org.eclipse.emf.common.util.Diagnostic>();
+
 	private List<IMemberInjectionService> services;
 
 	public InjectMembersResource(URI uri) {
 		super(uri);
 		services = Lists.newArrayList();
+	}
+
+	public List<org.eclipse.emf.common.util.Diagnostic> getDiagnostics() {
+		return diagnostics;
 	}
 
 	@Override
@@ -66,12 +74,22 @@ public class InjectMembersResource extends GMFResource {
 	}
 
 	private void reparse(IMemberInjectionService service, EObject currentObject) {
+		clearOldDiagnostics(currentObject);
 		service.injectMembers(currentObject);
 		registerReparseAdapter(service, currentObject);
-		List<Diagnostic> errors = service.getErrors();
-		getErrors().addAll(errors);
-		List<Diagnostic> warnings = service.getWarnings();
-		getWarnings().addAll(warnings);
+		diagnostics.addAll(service.getDiagnostics());
+	}
+
+	private void clearOldDiagnostics(EObject currentObject) {
+		Iterator<org.eclipse.emf.common.util.Diagnostic> iterator = diagnostics
+				.iterator();
+		while (iterator.hasNext()) {
+			org.eclipse.emf.common.util.Diagnostic next = iterator.next();
+			if (next.getData().get(0) == currentObject) {
+				iterator.remove();
+			}
+		}
+
 	}
 
 	/**
@@ -130,6 +148,12 @@ public class InjectMembersResource extends GMFResource {
 			return ReparseAdapter.class == type;
 		}
 
+	}
+
+	@Override
+	public EList<Diagnostic> getErrors() {
+		System.out.println("Get errors called " + super.getErrors().size());
+		return super.getErrors();
 	}
 
 }

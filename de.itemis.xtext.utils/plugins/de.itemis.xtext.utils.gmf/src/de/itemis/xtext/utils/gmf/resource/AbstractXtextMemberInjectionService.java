@@ -1,9 +1,11 @@
 package de.itemis.xtext.utils.gmf.resource;
 
 import java.io.StringReader;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -19,7 +21,6 @@ import org.eclipse.xtext.resource.XtextSyntaxDiagnostic;
 import org.eclipse.xtext.resource.impl.ListBasedDiagnosticConsumer;
 
 import com.google.inject.Inject;
-import com.google.inject.internal.Lists;
 
 /**
  * 
@@ -43,9 +44,7 @@ import com.google.inject.internal.Lists;
 public abstract class AbstractXtextMemberInjectionService<S extends EObject, T extends EObject>
 		implements IMemberInjectionService {
 
-	private List<Diagnostic> errors = Lists.newArrayList();
-
-	private List<Diagnostic> warnings = Lists.newArrayList();
+	List<org.eclipse.emf.common.util.Diagnostic> diagnostics = new ArrayList<org.eclipse.emf.common.util.Diagnostic>();
 
 	@Inject
 	private IParser parser;
@@ -91,35 +90,46 @@ public abstract class AbstractXtextMemberInjectionService<S extends EObject, T e
 		String expression = getExpression(object);
 		IParseResult result = parser.parse(parserRule, new StringReader(
 				expression != null ? expression : ""));
-		addSyntaxErrors(result);
+		addSyntaxErrors(result, object);
 		return (S) result.getRootASTElement();
 	}
 
 	protected void doLinking(EObject object) {
 		final ListBasedDiagnosticConsumer consumer = new ListBasedDiagnosticConsumer();
 		linker.linkModel(object, consumer);
-		errors.addAll(consumer.getResult(Severity.ERROR));
-		warnings.addAll(consumer.getResult(Severity.WARNING));
-		System.out.println("Linking errors: " + errors);
+		List<org.eclipse.xtext.diagnostics.Diagnostic> errors = consumer.getResult(Severity.ERROR);
+		for (Diagnostic diagnostic : errors) {
+			diagnostics.add(new BasicDiagnostic(
+					org.eclipse.emf.common.util.Diagnostic.ERROR, "source", 0,
+					diagnostic.getMessage(),
+					new Object[] { object }));
+		}
+		List<org.eclipse.xtext.diagnostics.Diagnostic> warnings = consumer.getResult(Severity.WARNING);
+		for (Diagnostic diagnostic : warnings) {
+			diagnostics.add(new BasicDiagnostic(
+					org.eclipse.emf.common.util.Diagnostic.WARNING, "source", 0,
+					diagnostic.getMessage(),
+					new Object[] { object }));
+		}
+
 	}
 
-	private void addSyntaxErrors(IParseResult result) {
+	private void addSyntaxErrors(IParseResult result, final EObject object) {
 		for (INode error : result.getSyntaxErrors()) {
-			errors.add(new XtextSyntaxDiagnostic(error));
+			diagnostics.add(new BasicDiagnostic(
+					org.eclipse.emf.common.util.Diagnostic.ERROR, "source", 0,
+					error.getSyntaxErrorMessage().getMessage(),
+					new Object[] { object }));
 		}
 	}
 
+
 	private void clearInternalState() {
-		errors.clear();
-		warnings.clear();
+		diagnostics.clear();
 	}
 
-	public List<Diagnostic> getErrors() {
-		return Collections.unmodifiableList(errors);
-	}
-
-	public List<Diagnostic> getWarnings() {
-		return Collections.unmodifiableList(warnings);
+	public List<org.eclipse.emf.common.util.Diagnostic> getDiagnostics() {
+		return diagnostics;
 	}
 
 }

@@ -2,9 +2,9 @@ package de.itemis.xtext.utils.gmf.resource;
 
 import java.util.List;
 
+import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 
 /**
  * interface for a injection service, that the {@link InjectMembersResource}
@@ -39,14 +39,9 @@ public interface IMemberInjectionService {
 	public EStructuralFeature getSourceFeature();
 
 	/**
-	 * returns a List of Diagnostic errors
+	 * returns a List of Diagnostics
 	 */
-	public List<Diagnostic> getErrors();
+	public List<Diagnostic> getDiagnostics();
 
-	/**
-	 * returns a List of diagnostic Warnings.
-	 * 
-	 */
-	public List<Diagnostic> getWarnings();
 
 }

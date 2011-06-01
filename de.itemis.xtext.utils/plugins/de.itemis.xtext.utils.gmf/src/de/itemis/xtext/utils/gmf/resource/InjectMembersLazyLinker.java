@@ -17,6 +17,7 @@ import org.eclipse.xtext.nodemodel.impl.CompositeNodeWithSemanticElement;
  */
 public class InjectMembersLazyLinker extends Linker {
 
+
 	@Override
 	protected void clearReference(EObject obj, EReference ref) {
 		// If the CompositeNodeWithSemanticElement adapter exists, we know that
@@ -26,4 +27,5 @@ public class InjectMembersLazyLinker extends Linker {
 			super.clearReference(obj, ref);
 		}
 	}
+
 }
