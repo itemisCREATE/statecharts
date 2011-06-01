@@ -47,13 +47,6 @@
          unpack="false"/>
 
    <plugin
-         id="org.yakindu.sct.statechart.diagram.validation"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="org.yakindu.sct.statechart.expressions"
          download-size="0"
          install-size="0"
