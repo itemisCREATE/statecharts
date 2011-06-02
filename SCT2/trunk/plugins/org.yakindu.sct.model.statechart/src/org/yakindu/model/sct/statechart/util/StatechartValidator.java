@@ -19,7 +19,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.EObjectValidator;
-import org.yakindu.model.sct.statechart.*;
 import org.yakindu.model.sct.statechart.Choice;
 import org.yakindu.model.sct.statechart.Declaration;
 import org.yakindu.model.sct.statechart.Effect;
@@ -369,25 +368,16 @@ public class StatechartValidator extends EObjectValidator {
 	 * Validates the NameIsNotEmpty constraint of '<em>State</em>'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @generated
+	 * @generated NOT
 	 */
 	public boolean validateState_NameIsNotEmpty(State state,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		// TODO implement the constraint
-		// -> specify the condition that violates the constraint
-		// -> verify the diagnostic details, including severity, code, and message
-		// Ensure that you remove @generated or mark it @generated NOT
-		if (false) {
+		if (state.getName() == null || state.getName().length() == 0) {
 			if (diagnostics != null) {
-				diagnostics.add
-					(createDiagnostic
-						(Diagnostic.ERROR,
-						 DIAGNOSTIC_SOURCE,
-						 0,
-						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "NameIsNotEmpty", getObjectLabel(state, context) },
-						 new Object[] { state },
-						 context));
+				diagnostics.add(new BasicDiagnostic(Diagnostic.WARNING,
+						DIAGNOSTIC_SOURCE, 0,
+						"A state should have a name.",
+						new Object[] { state }));
 			}
 			return false;
 		}
