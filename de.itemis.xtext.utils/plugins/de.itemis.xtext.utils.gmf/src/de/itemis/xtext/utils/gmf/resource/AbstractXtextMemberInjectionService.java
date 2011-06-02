@@ -2,7 +2,6 @@ package de.itemis.xtext.utils.gmf.resource;
 
 import java.io.StringReader;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.common.util.BasicDiagnostic;
@@ -18,7 +17,6 @@ import org.eclipse.xtext.linking.impl.XtextLinkingDiagnostic;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
-import org.eclipse.xtext.resource.XtextSyntaxDiagnostic;
 import org.eclipse.xtext.resource.impl.ListBasedDiagnosticConsumer;
 
 import com.google.inject.Inject;
