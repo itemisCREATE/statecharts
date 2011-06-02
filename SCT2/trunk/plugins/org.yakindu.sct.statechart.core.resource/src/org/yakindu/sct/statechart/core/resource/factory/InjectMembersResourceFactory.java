@@ -1,3 +1,13 @@
+/**
+ * Copyright (c) 2011 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * Contributors:
+ * 	committers of YAKINDU - initial API and implementation
+ * 
+ */
 package org.yakindu.sct.statechart.core.resource.factory;
 
 import org.eclipse.emf.common.util.URI;
@@ -12,8 +22,10 @@ import com.google.inject.Inject;
 import de.itemis.xtext.utils.gmf.resource.InjectMembersResource;
 
 /**
+ * ResourceFactory for the {@link InjectMembersResource} with services for the
+ * statechart model.
  * 
- * @author andreas muelder (andreas.muelder@itemis.de)
+ * @author andreas muelder
  * 
  */
 public class InjectMembersResourceFactory extends XMIResourceFactoryImpl {
@@ -28,11 +40,8 @@ public class InjectMembersResourceFactory extends XMIResourceFactoryImpl {
 	@Override
 	public Resource createResource(URI uri) {
 		InjectMembersResource resource = new InjectMembersResource(uri);
-		// Add a Transition service
 		resource.getServices().add(transitionService);
-		// Add a State service
 		resource.getServices().add(stateService);
-		// Add a Statechart service
 		resource.getServices().add(statechartService);
 		return resource;
 	}
