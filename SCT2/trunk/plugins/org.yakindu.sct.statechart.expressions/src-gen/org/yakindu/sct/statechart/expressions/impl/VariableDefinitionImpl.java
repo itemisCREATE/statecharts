@@ -7,13 +7,9 @@
 package org.yakindu.sct.statechart.expressions.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.yakindu.model.sct.statechart.impl.VariableImpl;
-
 import org.yakindu.sct.statechart.expressions.ExpressionsPackage;
 import org.yakindu.sct.statechart.expressions.Type;
 import org.yakindu.sct.statechart.expressions.VariableDefinition;

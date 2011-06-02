@@ -11,11 +11,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import org.yakindu.model.sct.statechart.StatechartPackage;
-
 import org.yakindu.sct.statechart.expressions.AdditiveOperator;
 import org.yakindu.sct.statechart.expressions.AlwaysEvent;
 import org.yakindu.sct.statechart.expressions.Assignment;

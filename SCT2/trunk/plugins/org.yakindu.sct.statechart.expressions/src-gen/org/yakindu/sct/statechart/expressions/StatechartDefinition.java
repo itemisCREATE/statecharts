@@ -7,9 +7,7 @@
 package org.yakindu.sct.statechart.expressions;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
-
 import org.yakindu.model.sct.statechart.Scope;
 
 /**

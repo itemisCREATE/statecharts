@@ -3,7 +3,6 @@
 */
 package org.yakindu.sct.statechart.ui.contentassist;
 
-import org.yakindu.sct.statechart.ui.contentassist.AbstractExpressionsProposalProvider;
 /**
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#contentAssist on how to customize content assistant
  */

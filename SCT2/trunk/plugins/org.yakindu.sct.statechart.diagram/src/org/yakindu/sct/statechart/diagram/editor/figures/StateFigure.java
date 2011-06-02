@@ -31,7 +31,7 @@ import org.yakindu.sct.statechart.diagram.editor.figures.utils.GridDataFactory;
 
 /**
  * 
- * @author muelder
+ * @author andreas muelder
  * 
  */
 public class StateFigure extends RoundedRectangle {
@@ -49,11 +49,6 @@ public class StateFigure extends RoundedRectangle {
 				.DPtoLP(15)));
 		this.setOutline(true);
 		createContents();
-	}
-	@Override
-	public void invalidate() {
-		// TODO Auto-generated method stub
-		super.invalidate();
 	}
 
 	private void createContents() {
@@ -104,7 +99,7 @@ public class StateFigure extends RoundedRectangle {
 	@Override
 	protected void fillShape(Graphics graphics) {
 		Color c=mixColor(getBackgroundColor(), ColorConstants.white, 224);
-		fillVerticalGradientRoundedRectangle(graphics, getBounds(), corner, getBackgroundColor(), c);
+		fillVerticalGradientRoundedRectangle(graphics, getBounds(), getCornerDimensions(), getBackgroundColor(), c);
 		c.dispose();
 	}
 	

@@ -7,7 +7,6 @@
 package org.yakindu.sct.statechart.expressions;
 
 import org.eclipse.emf.ecore.EObject;
-
 import org.yakindu.model.sct.statechart.Effect;
 import org.yakindu.model.sct.statechart.Trigger;
 

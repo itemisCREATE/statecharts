@@ -3,10 +3,10 @@
 */
 package org.yakindu.sct.statechart.parser.antlr;
 
-import com.google.inject.Inject;
-
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.yakindu.sct.statechart.services.ExpressionsGrammarAccess;
+
+import com.google.inject.Inject;
 
 public class ExpressionsParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
 	
