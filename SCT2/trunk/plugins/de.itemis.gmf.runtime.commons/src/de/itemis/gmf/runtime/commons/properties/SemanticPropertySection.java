@@ -41,7 +41,6 @@ import org.eclipse.ui.views.properties.IPropertySourceProvider;
 public class SemanticPropertySection extends AdvancedPropertySection implements
 		IPropertySourceProvider {
 
-	@Override
 	public IPropertySource getPropertySource(final Object object) {
 		if (object instanceof IPropertySource) {
 			return (IPropertySource) object;
