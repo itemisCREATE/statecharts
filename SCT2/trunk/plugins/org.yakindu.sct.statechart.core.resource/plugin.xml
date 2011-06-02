@@ -2,13 +2,20 @@
 <?eclipse version="3.4"?>
 <plugin>
 
-<!-- Resource   -->
-  <extension
+<!-- Resource  -->
+ <extension
          point="org.eclipse.emf.ecore.extension_parser">
       <parser
-            class="org.yakindu.sct.statechart.core.resource.InjectMembersResourceFactory"
+            class="org.yakindu.sct.statechart.core.resource.factory.ExpressionsExecutableExtensionFactory:org.yakindu.sct.statechart.core.resource.factory.InjectMembersResourceFactory"
             type="sct">
       </parser>
    </extension>
 
+   <!-- Resource Provider -->
+   <extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+        <resourceServiceProvider
+           class="org.yakindu.sct.statechart.core.resource.factory.ExpressionsExecutableExtensionFactory:org.yakindu.sct.statechart.core.resource.provider.StatechartResourceProvider"
+            uriExtension="sct">
+        </resourceServiceProvider>
+    </extension>
 </plugin>

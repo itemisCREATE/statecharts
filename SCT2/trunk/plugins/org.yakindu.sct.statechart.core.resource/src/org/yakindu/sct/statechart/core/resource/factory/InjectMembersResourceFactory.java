@@ -1,12 +1,13 @@
-package org.yakindu.sct.statechart.core.resource;
+package org.yakindu.sct.statechart.core.resource.factory;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.yakindu.sct.statechart.ExpressionsRuntimeModule;
+import org.yakindu.sct.statechart.core.resource.services.StateInjectionService;
+import org.yakindu.sct.statechart.core.resource.services.StatechartInjectionService;
+import org.yakindu.sct.statechart.core.resource.services.TransitionInjectionService;
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
+import com.google.inject.Inject;
 
 import de.itemis.xtext.utils.gmf.resource.InjectMembersResource;
 
@@ -17,22 +18,21 @@ import de.itemis.xtext.utils.gmf.resource.InjectMembersResource;
  */
 public class InjectMembersResourceFactory extends XMIResourceFactoryImpl {
 
+	@Inject
+	TransitionInjectionService transitionService;
+	@Inject
+	StateInjectionService stateService;
+	@Inject
+	StatechartInjectionService statechartService;
+
 	@Override
 	public Resource createResource(URI uri) {
 		InjectMembersResource resource = new InjectMembersResource(uri);
-		ExpressionsRuntimeModule module = new ExpressionsRuntimeModule();
-		Injector injector = Guice.createInjector(module);
 		// Add a Transition service
-		TransitionInjectionService transitionService = new TransitionInjectionService();
-		injector.injectMembers(transitionService);
 		resource.getServices().add(transitionService);
 		// Add a State service
-		StateInjectionService stateService = new StateInjectionService();
-		injector.injectMembers(stateService);
 		resource.getServices().add(stateService);
 		// Add a Statechart service
-		StatechartInjectionService statechartService = new StatechartInjectionService();
-		injector.injectMembers(statechartService);
 		resource.getServices().add(statechartService);
 		return resource;
 	}
