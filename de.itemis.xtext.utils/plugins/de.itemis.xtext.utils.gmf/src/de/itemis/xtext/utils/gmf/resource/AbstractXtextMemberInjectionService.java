@@ -14,6 +14,7 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.linking.ILinker;
+import org.eclipse.xtext.linking.impl.XtextLinkingDiagnostic;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
@@ -99,6 +100,7 @@ public abstract class AbstractXtextMemberInjectionService<S extends EObject, T e
 		linker.linkModel(object, consumer);
 		List<org.eclipse.xtext.diagnostics.Diagnostic> errors = consumer.getResult(Severity.ERROR);
 		for (Diagnostic diagnostic : errors) {
+			XtextLinkingDiagnostic diag = (XtextLinkingDiagnostic)diagnostic;
 			diagnostics.add(new BasicDiagnostic(
 					org.eclipse.emf.common.util.Diagnostic.ERROR, "source", 0,
 					diagnostic.getMessage(),

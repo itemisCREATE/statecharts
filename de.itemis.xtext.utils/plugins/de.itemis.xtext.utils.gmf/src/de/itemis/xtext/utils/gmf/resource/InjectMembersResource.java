@@ -38,7 +38,7 @@ public class InjectMembersResource extends GMFResource {
 
 	public InjectMembersResource(URI uri) {
 		super(uri);
-		services = Lists.newArrayList();
+		services = new ArrayList<IMemberInjectionService>();
 	}
 
 	public List<org.eclipse.emf.common.util.Diagnostic> getDiagnostics() {
@@ -49,6 +49,12 @@ public class InjectMembersResource extends GMFResource {
 	public void doLoad(InputStream inputStream, Map<?, ?> options)
 			throws IOException {
 		super.doLoad(inputStream, options);
+		parseAll();
+	}
+
+	private void parseAll() {
+		diagnostics.clear();
+		long t = System.currentTimeMillis();
 		TreeIterator<EObject> iter = getAllContents();
 		while (iter.hasNext()) {
 			EObject currentObject = iter.next();
@@ -59,6 +65,7 @@ public class InjectMembersResource extends GMFResource {
 				reparse(service, currentObject);
 			}
 		}
+		System.out.println("Reparsing Took " + (System.currentTimeMillis() - t));
 	}
 
 	private IMemberInjectionService receiveInjectionService(
@@ -74,23 +81,13 @@ public class InjectMembersResource extends GMFResource {
 	}
 
 	private void reparse(IMemberInjectionService service, EObject currentObject) {
-		clearOldDiagnostics(currentObject);
 		service.injectMembers(currentObject);
 		registerReparseAdapter(service, currentObject);
 		diagnostics.addAll(service.getDiagnostics());
 	}
+	
+	
 
-	private void clearOldDiagnostics(EObject currentObject) {
-		Iterator<org.eclipse.emf.common.util.Diagnostic> iterator = diagnostics
-				.iterator();
-		while (iterator.hasNext()) {
-			org.eclipse.emf.common.util.Diagnostic next = iterator.next();
-			if (next.getData().get(0) == currentObject) {
-				iterator.remove();
-			}
-		}
-
-	}
 
 	/**
 	 * Adds a reparseAdapter that observes the source feature and reparses the
@@ -125,21 +122,17 @@ public class InjectMembersResource extends GMFResource {
 	 */
 	private final class ReparseAdapter extends AdapterImpl {
 		public final EStructuralFeature expressionFeature;
-		private final EObject currentObject;
-		private final IMemberInjectionService service;
 
 		private ReparseAdapter(EObject currentObject,
 				EStructuralFeature expressionFeature,
 				IMemberInjectionService service) {
-			this.currentObject = currentObject;
 			this.expressionFeature = expressionFeature;
-			this.service = service;
 		}
 
 		@Override
 		public void notifyChanged(Notification msg) {
 			if (msg.getFeature() == expressionFeature) {
-				reparse(service, currentObject);
+				parseAll();
 			}
 		}
 
@@ -152,7 +145,6 @@ public class InjectMembersResource extends GMFResource {
 
 	@Override
 	public EList<Diagnostic> getErrors() {
-		System.out.println("Get errors called " + super.getErrors().size());
 		return super.getErrors();
 	}
 
