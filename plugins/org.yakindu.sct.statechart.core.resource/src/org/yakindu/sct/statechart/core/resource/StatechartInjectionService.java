@@ -41,5 +41,6 @@ public class StatechartInjectionService extends
 	public String getParserRule() {
 		return StatechartDefinition.class.getSimpleName();
 	}
+	
 
 }
