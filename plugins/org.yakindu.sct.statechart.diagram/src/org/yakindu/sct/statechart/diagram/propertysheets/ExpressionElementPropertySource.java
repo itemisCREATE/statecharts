@@ -11,6 +11,7 @@
 package org.yakindu.sct.statechart.diagram.propertysheets;
 
 import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.ui.provider.PropertyDescriptor;
@@ -58,13 +59,13 @@ public class ExpressionElementPropertySource extends PropertySource {
 				return new PropertyDescriptor(object, itemPropertyDescriptor) {
 					@Override
 					public CellEditor createPropertyEditor(Composite composite) {
-						//FIXME
-//						final XtextCellEditor xTextEditor = new XtextCellEditor(
-//								getExpressionsProvider().getStyle());
-//						getExpressionsProvider().getInjector().injectMembers(
-//								xTextEditor);
-//						xTextEditor.create(composite);
-						return null;
+						final XtextCellEditor xTextEditor = new XtextCellEditor(
+								getExpressionsProvider().getStyle());
+						getExpressionsProvider().getInjector().injectMembers(
+								xTextEditor);
+						xTextEditor.setContext(((EObject)object).eResource());
+						xTextEditor.create(composite);
+						return xTextEditor;
 
 					}
 				};
