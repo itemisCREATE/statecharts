@@ -13,13 +13,11 @@ package de.itemis.xtext.utils.gmf.viewers;
 
 import de.itemis.xtext.utils.jface.viewers.XtextCellEditor;
 
-
-
 /**
  * This is a copy of TextCellEditorEx, only the super class has been changed to
  * {@link XtextCellEditor}
  * 
- * @author muelder
+ * @author andreas muelder
  * 
  */
 public class XtextCellEditorEx extends XtextCellEditor {
@@ -66,6 +64,7 @@ public class XtextCellEditorEx extends XtextCellEditor {
 	 * 
 	 * @see org.eclipse.jface.viewers.CellEditor#doSetValue(java.lang.Object)
 	 */
+	@Override
 	protected void doSetValue(Object value) {
 		if (originalValue == null)
 			originalValue = value;
@@ -88,6 +87,7 @@ public class XtextCellEditorEx extends XtextCellEditor {
 	 * 
 	 * @see org.eclipse.jface.viewers.CellEditor#deactivate()
 	 */
+	@Override
 	public void deactivate() {
 		if (!isDeactivationLocked())
 			super.deactivate();

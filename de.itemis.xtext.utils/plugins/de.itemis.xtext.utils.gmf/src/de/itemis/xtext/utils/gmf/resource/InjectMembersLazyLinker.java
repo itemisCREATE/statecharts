@@ -1,11 +1,21 @@
+/**
+ * Copyright (c) 2011 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * Contributors:
+ * 	committers of YAKINDU - initial API and implementation
+ * 
+ */
 package de.itemis.xtext.utils.gmf.resource;
 
-import java.util.Iterator;
+import java.util.List;
 
+import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
 import org.eclipse.xtext.diagnostics.IDiagnosticProducer;
 import org.eclipse.xtext.linking.impl.Linker;
 import org.eclipse.xtext.nodemodel.impl.CompositeNodeWithSemanticElement;
@@ -19,15 +29,9 @@ import org.eclipse.xtext.nodemodel.impl.CompositeNodeWithSemanticElement;
  * @author andreas muelder
  * 
  */
-public class InjectMembersLazyLinker extends Linker {
+public class InjectMembersLazyLinker extends Linker implements
+		IInjectMembersResourceAnnotations {
 
-
-	@Override
-	public void linkModel(EObject model, IDiagnosticConsumer diagnosticsConsumer) {
-		System.out.println("Linking  " + model);
-		super.linkModel(model, diagnosticsConsumer);
-	}
-	
 	@Override
 	protected void clearReference(EObject obj, EReference ref) {
 		// If the CompositeNodeWithSemanticElement adapter exists, we know that
@@ -37,12 +41,25 @@ public class InjectMembersLazyLinker extends Linker {
 			super.clearReference(obj, ref);
 		}
 	}
-		//TODO
-	protected void ensureModelLinked(EObject model, final IDiagnosticProducer producer) {
+
+	@Override
+	protected void ensureModelLinked(EObject model,
+			final IDiagnosticProducer producer) {
 		ensureLinked(model, producer);
-		final Iterator<EObject> allContents = model.eAllContents();
-		while (allContents.hasNext())
-			ensureLinked(allContents.next(), producer);
+		// The default implementation checks the whole eAllContents. We only
+		// want to check the cross references for all successors that do not
+		// have a parent with an inject annotation. Theses successors are linked
+		// afterwards. If we would not override this method here, we would have
+		// multiple problem markers in the diagram for broken references.
+		List<EObject> contents = model.eContents();
+		for (EObject current : contents) {
+			EAnnotation eAnnotation = current.eClass().getEAnnotation(
+					INJECT_MEMBERS);
+			if (eAnnotation == null) {
+				ensureLinked(current, producer);
+				ensureModelLinked(current, producer);
+			}
+		}
 	}
 
 }

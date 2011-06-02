@@ -1,3 +1,13 @@
+/**
+ * Copyright (c) 2011 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * Contributors:
+ * 	committers of YAKINDU - initial API and implementation
+ * 
+ */
 package de.itemis.xtext.utils.gmf.resource;
 
 import java.io.IOException;
@@ -19,14 +29,16 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.gmf.runtime.emf.core.resources.GMFResource;
 
 /**
- * Implementation of Resource that handles Xtext mixins.
+ * Implementation of Resource that handles different kind of model mixins, i.e.
+ * textual.
  * 
  * @author andreas muelder
  * 
  */
-public class InjectMembersResource extends GMFResource {
+public class InjectMembersResource extends GMFResource implements
+		IInjectMembersResourceAnnotations {
 
-	private static final String INJECT_MEMBERS = "InjectMembers";
+	private static final boolean isDebug = true;
 
 	List<org.eclipse.emf.common.util.Diagnostic> diagnostics = new ArrayList<org.eclipse.emf.common.util.Diagnostic>();
 
@@ -61,7 +73,9 @@ public class InjectMembersResource extends GMFResource {
 				reparse(service, currentObject);
 			}
 		}
-		System.out.println("Reparsing Took " + (System.currentTimeMillis() - t));
+		if (isDebug)
+			System.out.println("Reparsing Took "
+					+ (System.currentTimeMillis() - t));
 	}
 
 	private IMemberInjectionService receiveInjectionService(
@@ -81,9 +95,6 @@ public class InjectMembersResource extends GMFResource {
 		registerReparseAdapter(service, currentObject);
 		diagnostics.addAll(service.getDiagnostics());
 	}
-	
-	
-
 
 	/**
 	 * Adds a reparseAdapter that observes the source feature and reparses the
@@ -111,7 +122,7 @@ public class InjectMembersResource extends GMFResource {
 	}
 
 	/**
-	 * ReparseAdapter listens for feature changes and reloads the textual part
+	 * ReparseAdapter listens for feature changes and reparses the whole model.
 	 * 
 	 * @author andreas muelder
 	 * 
