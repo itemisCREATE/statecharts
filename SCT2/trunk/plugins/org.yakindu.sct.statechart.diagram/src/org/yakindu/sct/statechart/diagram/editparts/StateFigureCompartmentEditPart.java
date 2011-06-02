@@ -21,8 +21,10 @@ import org.eclipse.gmf.runtime.draw2d.ui.figures.ConstrainedToolbarLayout;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.model.sct.statechart.StatechartPackage;
 import org.yakindu.sct.statechart.diagram.policies.CompartmentCreationEditPolicy;
-import org.yakindu.sct.statechart.diagram.policies.CompartmentEditPolicy;
 import org.yakindu.sct.statechart.diagram.policies.StateCompartmentCanonicalEditPolicy;
+
+import de.itemis.gmf.runtime.commons.editpolicies.CompartmentEditPolicy;
+
 
 /**
  * 

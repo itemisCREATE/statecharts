@@ -18,17 +18,17 @@ import org.yakindu.sct.statechart.diagram.editor.figures.JunctionFigure;
 import org.yakindu.sct.statechart.diagram.editor.figures.utils.MapModeUtils;
 import org.yakindu.sct.statechart.diagram.policies.RelationshipSemanticEditPolicy;
 
+import de.itemis.gmf.runtime.commons.editparts.EllipseFixedSizeShapeNodeEditPart;
+
 /**
  * 
- * @author Andreas Muelder <a
- *         href="mailto:andreas.muelder@itemis.de">andreas.muelder@itemis.de</a>
+ * @author andreas muelder
  * 
  */
 public class JunctionEditPart extends EllipseFixedSizeShapeNodeEditPart {
 
 	private static final Dimension DIMENSION = new Dimension(10, 10);
-	
-	
+
 	public JunctionEditPart(View view) {
 		super(view);
 	}
@@ -36,7 +36,8 @@ public class JunctionEditPart extends EllipseFixedSizeShapeNodeEditPart {
 	@Override
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
-		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE, new RelationshipSemanticEditPolicy());
+		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE,
+				new RelationshipSemanticEditPolicy());
 	}
 
 	@Override

@@ -1,3 +1,13 @@
+/**
+ * Copyright (c) 2011 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * Contributors:
+ * 	committers of YAKINDU - initial API and implementation
+ * 
+ */
 package org.yakindu.sct.statechart.diagram.policies;
 
 import java.util.List;
@@ -10,8 +20,7 @@ import org.yakindu.model.sct.statechart.State;
 import org.yakindu.sct.statechart.diagram.utils.SemanticHintUtil;
 
 /**
- * @author Andreas Muelder <a
- *         href="mailto:andreas.muelder@itemis.de">andreas.muelder@itemis.de</a>
+ * @author andreas muelder
  */
 public class StateCompartmentCanonicalEditPolicy extends CanonicalEditPolicy {
 
@@ -33,8 +42,9 @@ public class StateCompartmentCanonicalEditPolicy extends CanonicalEditPolicy {
 
 	@Override
 	protected String getFactoryHint(IAdaptable elementAdapter) {
-		EObject modelElement = (EObject) elementAdapter.getAdapter(EObject.class);
-		String factoryHint =  SemanticHintUtil.getSemanticHint(modelElement);
+		EObject modelElement = (EObject) elementAdapter
+				.getAdapter(EObject.class);
+		String factoryHint = SemanticHintUtil.getSemanticHint(modelElement);
 		return factoryHint;
 	}
 }

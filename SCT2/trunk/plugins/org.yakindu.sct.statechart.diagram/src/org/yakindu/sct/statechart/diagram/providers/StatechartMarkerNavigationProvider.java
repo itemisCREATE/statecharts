@@ -1,3 +1,13 @@
+/**
+ * Copyright (c) 2010 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * Contributors:
+ * 	committers of YAKINDU - initial API and implementation
+ * 
+ */
 package org.yakindu.sct.statechart.diagram.providers;
 
 import java.util.Arrays;
@@ -23,13 +33,15 @@ import org.yakindu.sct.statechart.diagram.validation.IMarkerType;
 import de.itemis.xtext.utils.gmf.directedit.IXtextAwareEditPart;
 
 /**
+ * TODO: Move common code to gmf.runtime.commons
  * 
- * @author muelder
+ * @author andreas muelder
  * 
  */
 public class StatechartMarkerNavigationProvider extends
 		AbstractModelMarkerNavigationProvider implements IMarkerType {
 
+	@Override
 	@SuppressWarnings("rawtypes")
 	protected void doGotoMarker(IMarker marker) {
 
@@ -57,17 +69,17 @@ public class StatechartMarkerNavigationProvider extends
 		try {
 			String type = marker.getType();
 			if (type.equals(XTEXT_MARKER_TYPE)) {
-				DirectEditRequest request = new DirectEditRequest();
+				final DirectEditRequest request = new DirectEditRequest();
 				request.setDirectEditFeature(StatechartPackage.eINSTANCE
 						.getExpressionElement_Expression());
 				List<EObject> allNotationElements = EcoreUtil2
 						.eAllContentsAsList(targetView);
 				for (EObject eObject : allNotationElements) {
-					if(eObject instanceof View){
-						IGraphicalEditPart editPart = (IGraphicalEditPart)editPartRegistry.get((View)eObject);
-						if(editPart instanceof IXtextAwareEditPart){
+					if (eObject instanceof View) {
+						IGraphicalEditPart editPart = (IGraphicalEditPart) editPartRegistry
+								.get(eObject);
+						if (editPart instanceof IXtextAwareEditPart) {
 							editPart.performRequest(request);
-							//TODO: Select range
 						}
 					}
 				}
@@ -78,21 +90,20 @@ public class StatechartMarkerNavigationProvider extends
 
 	}
 
-
 	public static void selectElementsInDiagram(
 			IDiagramWorkbenchPart diagramPart, List<EditPart> editParts) {
 		diagramPart.getDiagramGraphicalViewer().deselectAll();
 
 		EditPart firstPrimary = null;
 		for (Iterator<EditPart> it = editParts.iterator(); it.hasNext();) {
-			EditPart nextPart = (EditPart) it.next();
+			EditPart nextPart = it.next();
 			diagramPart.getDiagramGraphicalViewer().appendSelection(nextPart);
 			if (firstPrimary == null && nextPart instanceof IPrimaryEditPart) {
 				firstPrimary = nextPart;
 			}
 		}
 		if (!editParts.isEmpty()) {
-			//TODO animation
+			// TODO animation
 			diagramPart.getDiagramGraphicalViewer().reveal(
 					firstPrimary != null ? firstPrimary : (EditPart) editParts
 							.get(0));

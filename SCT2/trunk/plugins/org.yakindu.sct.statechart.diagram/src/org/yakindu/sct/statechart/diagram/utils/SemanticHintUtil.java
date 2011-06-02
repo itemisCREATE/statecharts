@@ -30,8 +30,7 @@ import org.yakindu.model.sct.statechart.util.StatechartSwitch;
 
 /**
  * 
- * @author Andreas Muelder <a
- *         href="mailto:andreas.muelder@itemis.de">andreas.muelder@itemis.de</a>
+ * @author andreas muelder
  * 
  */
 public final class SemanticHintUtil {
@@ -48,6 +47,7 @@ public final class SemanticHintUtil {
 	public static String getSemanticHint(EObject semanticElement) {
 		return new StatechartSwitch<String>() {
 
+			@Override
 			public String caseTransition(Transition object) {
 				return TRANSITION;
 			}
@@ -66,9 +66,6 @@ public final class SemanticHintUtil {
 			public String caseJunction(Junction object) {
 				return JUNCTION;
 			}
-
-
-
 
 			@Override
 			public String caseEntry(Entry object) {

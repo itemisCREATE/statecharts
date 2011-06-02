@@ -45,8 +45,10 @@ import org.yakindu.sct.statechart.diagram.validation.IMarkerType;
 import com.google.common.collect.Lists;
 
 /**
+ * 
  * This class is copied from GMF Generator code...
  * 
+ * TODO: Move common code to gmf.runtime.commons
  */
 @SuppressWarnings("all")
 public class StatechartValidationDecorationProvider extends AbstractProvider
@@ -66,10 +68,10 @@ public class StatechartValidationDecorationProvider extends AbstractProvider
 			Object model = editPart.getModel();
 			if ((model instanceof View)) {
 				View view = (View) model;
-				//FIXME
-//				if (!(view instanceof Edge) && !view.isSetElement()) {
-//					return;
-//				}
+				// FIXME
+				// if (!(view instanceof Edge) && !view.isSetElement()) {
+				// return;
+				// }
 			}
 			EditDomain ed = editPart.getViewer().getEditDomain();
 			if (!(ed instanceof DiagramEditDomain)) {
@@ -316,7 +318,7 @@ public class StatechartValidationDecorationProvider extends AbstractProvider
 
 	static class MarkerObserver implements IFileObserver {
 
-		private Diagram diagram;
+		private final Diagram diagram;
 
 		private MarkerObserver(Diagram diagram) {
 			this.diagram = diagram;

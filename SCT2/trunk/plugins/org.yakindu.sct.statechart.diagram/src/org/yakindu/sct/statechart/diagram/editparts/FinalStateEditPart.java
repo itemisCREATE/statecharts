@@ -17,12 +17,14 @@ import org.eclipse.gmf.runtime.diagram.ui.handles.ConnectionHandle.HandleDirecti
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.statechart.diagram.editor.figures.FinalStateFigure;
 import org.yakindu.sct.statechart.diagram.editor.figures.utils.MapModeUtils;
-import org.yakindu.sct.statechart.diagram.policies.OneWayConnectionHandlesEditPolicy;
 import org.yakindu.sct.statechart.diagram.policies.RelationshipSemanticEditPolicy;
+
+import de.itemis.gmf.runtime.commons.editparts.EllipseFixedSizeShapeNodeEditPart;
+import de.itemis.gmf.runtime.commons.editpolicies.OneWayConnectionHandlesEditPolicy;
 
 /**
  * 
- * @author muelder
+ * @author andreas muelder
  * 
  */
 public class FinalStateEditPart extends EllipseFixedSizeShapeNodeEditPart {

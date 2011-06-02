@@ -20,12 +20,13 @@ import org.yakindu.sct.statechart.diagram.DiagramActivator;
 
 /**
  * 
- * @author muelder
+ * @author andreas muelder
  * 
  */
 public class PreferenceInitializer extends DiagramPreferenceInitializer
 		implements StatechartColorConstants {
 
+	@Override
 	public void initializeDefaultPreferences() {
 		super.initializeDefaultPreferences();
 		// Line colors
