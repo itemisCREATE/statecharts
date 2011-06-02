@@ -1,9 +1,20 @@
+/**
+ * Copyright (c) 2011 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * Contributors:
+ * 	committers of YAKINDU - initial API and implementation
+ * 
+ */
 package org.yakindu.sct.statechart.diagram.validation;
 
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.ecore.EObject;
@@ -16,8 +27,7 @@ import org.eclipse.xtext.EcoreUtil2;
 /**
  * Utility class to create GMF specific {@link IMarker}s
  * 
- * @author Andreas Muelder <a
- *         href="mailto:andreas.muelder@itemis.de">andreas.muelder@itemis.de</a>
+ * @author andreas muelder
  * 
  */
 public final class GMFMarkerUtil {
@@ -26,16 +36,28 @@ public final class GMFMarkerUtil {
 		// Not to be instantiated
 	}
 
+	/**
+	 * Creates an marker with additional GMF specific attributes.
+	 * 
+	 * @param target
+	 *            The {@link IResource} where to create the marker
+	 * @param validationStatus
+	 *            Can be ERROR, WARNING, INFO
+	 * @param diagram
+	 *            the GMF Notation model diagram
+	 * @param markerType
+	 *            marker type
+	 * @param semanticTarget
+	 *            the semantic object where the problem occured
+	 */
 	public static void createMarker(IFile target, IStatus validationStatus,
-			Diagram diagram, String markerType,
-			EObject semanticTarget) {
+			Diagram diagram, String markerType, EObject semanticTarget) {
 		if (validationStatus.isOK()) {
 			return;
 		}
-		View view = findNotationView(diagram,
-				semanticTarget);
+		View view = findNotationView(diagram, semanticTarget);
 		String uriFragment = view.eResource().getURIFragment(view);
-		
+
 		addMarker(target, uriFragment,
 				EMFCoreUtil.getQualifiedName(semanticTarget, true),
 				validationStatus.getMessage(), validationStatus.getSeverity(),
@@ -56,7 +78,7 @@ public final class GMFMarkerUtil {
 		return null;
 
 	}
-	
+
 	public static IFile getTargetFile(View view) {
 		IFile target = view.eResource() != null ? WorkspaceSynchronizer
 				.getFile(view.eResource().getResourceSet().getResources()
@@ -76,7 +98,7 @@ public final class GMFMarkerUtil {
 			org.eclipse.core.runtime.Assert.isTrue(elementId.length() > 0);
 			marker.setAttribute(
 					org.eclipse.gmf.runtime.common.ui.resources.IMarker.ELEMENT_ID,
-			elementId);
+					elementId);
 			int markerSeverity = IMarker.SEVERITY_INFO;
 			if (statusSeverity == IStatus.WARNING) {
 				markerSeverity = IMarker.SEVERITY_WARNING;

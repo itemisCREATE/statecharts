@@ -23,12 +23,14 @@ import org.yakindu.sct.statechart.diagram.editor.figures.DeepHistoryFigure;
 import org.yakindu.sct.statechart.diagram.editor.figures.InitialStateFigure;
 import org.yakindu.sct.statechart.diagram.editor.figures.ShallowHistoryFigure;
 import org.yakindu.sct.statechart.diagram.editor.figures.utils.MapModeUtils;
-import org.yakindu.sct.statechart.diagram.policies.OneWayConnectionHandlesEditPolicy;
 import org.yakindu.sct.statechart.diagram.policies.RelationshipSemanticEditPolicy;
+
+import de.itemis.gmf.runtime.commons.editparts.EllipseFixedSizeShapeNodeEditPart;
+import de.itemis.gmf.runtime.commons.editpolicies.OneWayConnectionHandlesEditPolicy;
 
 /**
  * 
- * @author muelder
+ * @author andreas muelder
  */
 public class EntryEditPart extends EllipseFixedSizeShapeNodeEditPart {
 
@@ -71,10 +73,10 @@ public class EntryEditPart extends EllipseFixedSizeShapeNodeEditPart {
 
 	@Override
 	protected void handleNotificationEvent(Notification notification) {
-		//We have to update the primary shape when the entry kind changes
+		// We have to update the primary shape when the entry kind changes
 		if (StatechartPackage.eINSTANCE.getEntry_Kind().equals(
 				notification.getFeature())) {
-			getFigure().remove((IFigure)getFigure().getChildren().get(0));
+			getFigure().remove((IFigure) getFigure().getChildren().get(0));
 			getFigure().add(getPrimaryShape());
 		}
 		super.handleNotificationEvent(notification);

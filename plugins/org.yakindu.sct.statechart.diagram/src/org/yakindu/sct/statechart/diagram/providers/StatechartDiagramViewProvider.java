@@ -30,7 +30,7 @@ import org.yakindu.sct.statechart.diagram.utils.SemanticHintUtil;
 
 /**
  * 
- * @author muelder
+ * @author andreas muelder
  * 
  */
 public class StatechartDiagramViewProvider extends AbstractViewProvider
@@ -76,6 +76,7 @@ public class StatechartDiagramViewProvider extends AbstractViewProvider
 		return getClass(diagramKind);
 	}
 
+	@Override
 	protected Class<?> getEdgeViewClass(IAdaptable semanticAdapter,
 			View containerView, String semanticHint) {
 		if (semanticHint == null || "".equals(semanticHint)) {
@@ -86,6 +87,7 @@ public class StatechartDiagramViewProvider extends AbstractViewProvider
 		return getClass(semanticHint);
 	}
 
+	@Override
 	protected Class<?> getNodeViewClass(IAdaptable semanticAdapter,
 			View containerView, String semanticHint) {
 		if (semanticHint == null || "".equals(semanticHint)) {

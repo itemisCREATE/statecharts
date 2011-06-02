@@ -21,6 +21,7 @@ import org.yakindu.sct.statechart.diagram.policies.CompartmentCreationEditPolicy
 import org.yakindu.sct.statechart.diagram.policies.RegionCompartmentCanonicalEditPolicy;
 import org.yakindu.sct.statechart.diagram.policies.RegionCompartmentXYLayoutEditPolicy;
 
+
 /**
  * @author muelder
  */

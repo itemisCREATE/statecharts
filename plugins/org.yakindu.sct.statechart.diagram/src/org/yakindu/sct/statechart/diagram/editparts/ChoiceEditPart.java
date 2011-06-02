@@ -18,10 +18,11 @@ import org.yakindu.sct.statechart.diagram.editor.figures.ChoiceFigure;
 import org.yakindu.sct.statechart.diagram.editor.figures.utils.MapModeUtils;
 import org.yakindu.sct.statechart.diagram.policies.RelationshipSemanticEditPolicy;
 
+import de.itemis.gmf.runtime.commons.editparts.FixedSizeShapeNodeEditPart;
+
 /**
  * 
- * @author Andreas Muelder <a
- *         href="mailto:andreas.muelder@itemis.de">andreas.muelder@itemis.de</a>
+ * @author andreas muelder
  * 
  */
 public class ChoiceEditPart extends FixedSizeShapeNodeEditPart {
@@ -33,12 +34,14 @@ public class ChoiceEditPart extends FixedSizeShapeNodeEditPart {
 	@Override
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
-		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE, new RelationshipSemanticEditPolicy());
+		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE,
+				new RelationshipSemanticEditPolicy());
 	}
 
 	@Override
 	public Dimension getDefaultSize() {
-		return MapModeUtils.getMappedDimensions(getMapMode(), MapModeUtils.DEFAULT_SMALL_NODE_DIMENSION);
+		return MapModeUtils.getMappedDimensions(getMapMode(),
+				MapModeUtils.DEFAULT_SMALL_NODE_DIMENSION);
 	}
 
 	@Override
