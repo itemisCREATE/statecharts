@@ -7,7 +7,6 @@
 package org.yakindu.sct.statechart.expressions;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.yakindu.model.sct.statechart.Effect;
 
 /**

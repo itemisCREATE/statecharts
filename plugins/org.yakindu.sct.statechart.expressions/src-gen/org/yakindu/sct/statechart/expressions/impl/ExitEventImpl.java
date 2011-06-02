@@ -7,7 +7,6 @@
 package org.yakindu.sct.statechart.expressions.impl;
 
 import org.eclipse.emf.ecore.EClass;
-
 import org.yakindu.sct.statechart.expressions.ExitEvent;
 import org.yakindu.sct.statechart.expressions.ExpressionsPackage;
 

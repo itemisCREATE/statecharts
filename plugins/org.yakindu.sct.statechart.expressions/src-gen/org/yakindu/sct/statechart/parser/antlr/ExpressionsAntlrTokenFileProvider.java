@@ -4,6 +4,7 @@
 package org.yakindu.sct.statechart.parser.antlr;
 
 import java.io.InputStream;
+
 import org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider;
 
 public class ExpressionsAntlrTokenFileProvider implements IAntlrTokenFileProvider {

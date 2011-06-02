@@ -25,7 +25,6 @@ public class ChoiceFigure extends Shape {
 		setLineWidth(2);
 	}
 
-	
 	/**
 	 * @see org.eclipse.draw2d.Shape#fillShape(org.eclipse.draw2d.Graphics)
 	 */
@@ -47,10 +46,10 @@ public class ChoiceFigure extends Shape {
 	protected void outlineShape(Graphics graphics) {
 		Rectangle f = Rectangle.SINGLETON;
 		Rectangle r = getBounds();
-		f.x = r.x + lineWidth / 2;
-		f.y = r.y + lineWidth / 2;
-		f.width = r.width - lineWidth -1;
-		f.height = r.height - lineWidth -1;
+		f.x = r.x + getLineWidth() / 2;
+		f.y = r.y + getLineWidth() / 2;
+		f.width = r.width - getLineWidth() - 1;
+		f.height = r.height - getLineWidth() - 1;
 
 		PointList pl = new PointList();
 		pl.addPoint(f.getTop());
