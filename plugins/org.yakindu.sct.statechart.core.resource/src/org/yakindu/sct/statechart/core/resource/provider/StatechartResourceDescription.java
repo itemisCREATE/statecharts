@@ -1,4 +1,4 @@
-package org.yakindu.sct.statechart.ui.resourceprovider;
+package org.yakindu.sct.statechart.core.resource.provider;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -23,14 +23,14 @@ import com.google.common.collect.Lists;
  * @author andreas muelder
  * 
  */
-public class ExpressionsResourceDescription extends AbstractResourceDescription
+public class StatechartResourceDescription extends AbstractResourceDescription
 		implements IResourceDescription {
 
 	private final Resource resource;
 
 	private final URI uri;
 
-	public ExpressionsResourceDescription(Resource resource) {
+	public StatechartResourceDescription(Resource resource) {
 		this.resource = resource;
 		this.uri = getNormalizedURI(resource);
 	}

@@ -136,16 +136,6 @@
             uriExtension="exp">
         </resourceServiceProvider>
     </extension>
-
-
-
-   <extension
-         point="org.eclipse.xtext.builder.participant">
-      <participant
-            class="org.yakindu.sct.statechart.ui.ExpressionsExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant">
-      </participant>
-   </extension>
-
 	<!-- Quick Outline -->
 	<extension
 		point="org.eclipse.ui.handlers">
@@ -211,12 +201,4 @@
          </command>
       </menuContribution>
    </extension>
- <!-- ResourceProvider -->
-   <extension point="org.eclipse.xtext.extension_resourceServiceProvider">
-        <resourceServiceProvider
-           class="org.yakindu.sct.statechart.ui.ExpressionsExecutableExtensionFactory:org.yakindu.sct.statechart.ui.resourceprovider.ExpressionsResourceProvider"
-            uriExtension="sct">
-        </resourceServiceProvider>
-    </extension>
-
 </plugin>
