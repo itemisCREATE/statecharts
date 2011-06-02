@@ -21,7 +21,6 @@ public class FixedConnectionAnchor extends AbstractConnectionAnchor {
 		this.yOffset = yOffset;
 	}
 
-	@Override
 	public Point getLocation(Point point) {
 		return getLocation();
 	}
