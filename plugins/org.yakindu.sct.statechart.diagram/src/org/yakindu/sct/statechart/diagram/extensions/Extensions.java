@@ -1,13 +1,12 @@
 package org.yakindu.sct.statechart.diagram.extensions;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.ecore.EObject;
-
-import com.google.inject.internal.Lists;
 
 /**
  * 
@@ -36,7 +35,7 @@ public class Extensions<T extends ISCTProvider> {
 	}
 
 	public List<T> loadRegisteredProvider() {
-		List<T> providers = Lists.newArrayList();
+		List<T> providers = new ArrayList<T>();
 		IConfigurationElement[] configurationElements = Platform
 				.getExtensionRegistry().getConfigurationElementsFor(
 						extensionPointId);
