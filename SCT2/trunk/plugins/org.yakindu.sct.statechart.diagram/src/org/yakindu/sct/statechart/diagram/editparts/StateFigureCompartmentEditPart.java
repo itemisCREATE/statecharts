@@ -71,6 +71,8 @@ public class StateFigureCompartmentEditPart extends
 			ConstrainedToolbarLayout {
 		public StateFigureCompartmentLayout() {
 			super(true);
+			setSpacing(-1); // make lines overlap so it looks like a shared line 
+			setHorizontal(false);
 		}
 
 		@Override

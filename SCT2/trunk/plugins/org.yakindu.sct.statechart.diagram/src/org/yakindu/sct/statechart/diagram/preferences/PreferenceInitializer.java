@@ -30,7 +30,7 @@ public class PreferenceInitializer extends DiagramPreferenceInitializer
 	public void initializeDefaultPreferences() {
 		super.initializeDefaultPreferences();
 		// Line colors
-		Color lineColor = DiagramColorConstants.black;
+		Color lineColor = DiagramColorConstants.darkGray;
 		PreferenceConverter.setDefault(getPreferenceStore(),
 				IPreferenceConstants.PREF_LINE_COLOR, lineColor.getRGB());
 
