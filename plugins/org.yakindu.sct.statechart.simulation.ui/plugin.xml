@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.core.runtime.adapters">
+      <factory
+            adaptableType="org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor"
+            class="org.yakindu.sct.statechart.simulation.ui.adapter.IHighlightingSupportAdapterFactory">
+         <adapter
+               type="de.itemis.gmf.runtime.commons.highlighting.IHighlightingSupport">
+         </adapter>
+      </factory>
+   </extension>
+
+</plugin>
