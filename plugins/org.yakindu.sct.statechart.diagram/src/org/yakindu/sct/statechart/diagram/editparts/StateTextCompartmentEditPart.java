@@ -32,6 +32,7 @@ public class StateTextCompartmentEditPart extends ResizableCompartmentEditPart {
 		ResizableCompartmentFigure figure = (ResizableCompartmentFigure) super
 				.createFigure();
 		figure.getContentPane().setLayoutManager(new StackLayout());
+		figure.setBorder(null);
 		return figure;
 	}
 

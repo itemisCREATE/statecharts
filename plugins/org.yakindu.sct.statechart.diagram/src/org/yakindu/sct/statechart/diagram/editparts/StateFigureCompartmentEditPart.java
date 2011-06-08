@@ -63,6 +63,7 @@ public class StateFigureCompartmentEditPart extends
 				.createFigure();
 		figure.getContentPane().setLayoutManager(
 				new StateFigureCompartmentLayout());
+		figure.setBorder(null);
 		return figure;
 	}
 
