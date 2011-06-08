@@ -48,6 +48,7 @@ public class RegionCompartmentEditPart extends ShapeCompartmentEditPart {
 	protected IFigure createFigure() {
 		ShapeCompartmentFigure figure = (ShapeCompartmentFigure) super
 				.createFigure();
+		figure.setBorder(null);
 		return figure;
 	}
 
