@@ -17,7 +17,9 @@ import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.GridData;
 import org.eclipse.draw2d.GridLayout;
+import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.draw2d.RectangleFigure;
+import org.eclipse.draw2d.StackLayout;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 import org.eclipse.gmf.runtime.draw2d.ui.mapmode.IMapMode;
 import org.eclipse.swt.SWT;
@@ -26,6 +28,7 @@ import org.yakindu.sct.statechart.diagram.editor.figures.utils.GridDataFactory;
 /**
  * 
  * @author muelder
+ * @author terfloth
  *
  */
 public class RegionFigure extends RectangleFigure {
@@ -40,7 +43,10 @@ public class RegionFigure extends RectangleFigure {
 		this.mapMode = mapMode;
 
 		GridLayout layoutThis = new GridLayout(1,false);
+//		StackLayout layoutThis = new StackLayout();
 		layoutThis.verticalSpacing = 2;
+		//layoutThis.marginHeight = 2;
+		//layoutThis.marginWidth = 2;
 		this.setLayoutManager(layoutThis);
 		this.setLineWidth(mapMode.DPtoLP(1));
 		createContents();
@@ -51,20 +57,21 @@ public class RegionFigure extends RectangleFigure {
 		RectangleFigure labelFigure = new RectangleFigure();
 		labelFigure.setOutline(false);
 		labelFigure.setFill(false);
-		this.add(labelFigure, GridDataFactory.fillDefaults().align(GridData.CENTER, SWT.END).grab(true, false)
-				.getData());
+//		this.add(labelFigure, GridDataFactory.fillDefaults().align(GridData.CENTER, SWT.END).grab(true, false)
+//				.getData());
 		GridLayout layout = new GridLayout();
 		layout.verticalSpacing = 2;
 		layout.numColumns = 1;
 		layout.makeColumnsEqualWidth = true;
 		labelFigure.setLayoutManager(layout);
 
-		/** Priority Label **/
+		/** name Label **/
 		nameLabel = new WrappingLabel();
-		GridData data = GridDataFactory.fillDefaults().align(GridData.CENTER, GridData.CENTER).grab(true, true)
+		nameLabel.setAlignment(PositionConstants.WEST);
+		GridData data = GridDataFactory.fillDefaults().align(GridData.CENTER, GridData.BEGINNING).grab(true, false)
 				.getData();
-		data.heightHint = mapMode.DPtoLP(15);
-		labelFigure.add(nameLabel, data);
+		//data.heightHint = mapMode.DPtoLP(10);
+		this.add(nameLabel, data);
 
 		/** Compartment container **/
 		compartmentPane = new RectangleFigure();

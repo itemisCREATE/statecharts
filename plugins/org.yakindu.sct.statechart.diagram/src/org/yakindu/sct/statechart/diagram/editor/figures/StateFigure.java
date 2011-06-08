@@ -32,6 +32,7 @@ import org.yakindu.sct.statechart.diagram.editor.figures.utils.GridDataFactory;
 /**
  * 
  * @author andreas muelder
+ * @author axel terfloth
  * 
  */
 public class StateFigure extends RoundedRectangle {
