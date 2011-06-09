@@ -55,7 +55,7 @@ public class CreationWizard extends Wizard implements INewWizard {
 
 	protected Resource diagram;
 
-	private final boolean openOnCreate = false;
+	private final boolean openOnCreate = true;
 
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		this.selection = selection;
