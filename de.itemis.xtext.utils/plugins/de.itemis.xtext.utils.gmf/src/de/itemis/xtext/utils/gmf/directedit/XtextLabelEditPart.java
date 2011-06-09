@@ -19,7 +19,6 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.tools.DirectEditManager;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.CompartmentEditPart;
-import org.eclipse.gmf.runtime.diagram.ui.tools.TextDirectEditManager;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.LabelEx;
 import org.eclipse.gmf.runtime.notation.ShapeStyle;
 import org.eclipse.gmf.runtime.notation.View;
@@ -100,12 +99,12 @@ public abstract class XtextLabelEditPart extends CompartmentEditPart implements
 					if (isActive()) {
 						if (theRequest.getExtendedData().get(
 								REQ_DIRECTEDIT_EXTENDEDDATA_INITIAL_CHAR) instanceof Character
-								&& manager instanceof TextDirectEditManager) {
+								&& manager instanceof XtextDirectEditManager) {
 							final Character initialChar = (Character) theRequest
 									.getExtendedData()
 									.get(REQ_DIRECTEDIT_EXTENDEDDATA_INITIAL_CHAR);
 
-							((TextDirectEditManager) manager).show(initialChar);
+							((XtextDirectEditManager) manager).show(initialChar);
 
 						} else {
 							manager.show();
