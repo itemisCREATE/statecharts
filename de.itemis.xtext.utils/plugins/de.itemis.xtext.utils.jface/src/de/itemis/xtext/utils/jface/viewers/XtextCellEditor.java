@@ -17,6 +17,7 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jface.text.IDocumentPartitioner;
 import org.eclipse.jface.text.source.AnnotationModel;
 import org.eclipse.jface.text.source.ICharacterPairMatcher;
 import org.eclipse.jface.text.source.ISourceViewer;
@@ -64,6 +65,7 @@ import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.google.inject.name.Named;
 
 /**
@@ -79,7 +81,8 @@ import com.google.inject.name.Named;
  * @author andreas.muelder@itemis.de
  * @author alexander.nyssen@itemis.de
  */
-
+// TODO: Check if we can use the XTextDocumentProvider instead of creating own
+// XTextDocument + setup
 @SuppressWarnings("restriction")
 public class XtextCellEditor extends StyledTextCellEditor {
 
@@ -113,12 +116,7 @@ public class XtextCellEditor extends StyledTextCellEditor {
 	private XtextSourceViewer sourceviewer;
 
 	private ValidationJob validationJob;
-	/**
-	 * the xText document the sourceViewer uses
-	 */
-	@Inject
-	private XtextDocument document;
-	// @Inject
+
 	private IssueResolutionProvider resolutionProvider = new IssueResolutionProvider.NullImpl();
 	@Inject
 	private IPreferenceStoreAccess preferenceStoreAccess;
@@ -132,11 +130,14 @@ public class XtextCellEditor extends StyledTextCellEditor {
 	private XtextResource resource;
 	@Inject
 	private IResourceValidator validator;
-
+	@Inject
+	private Provider<IDocumentPartitioner> documentPartitioner;
 	@Inject
 	private @Named(Constants.FILE_EXTENSIONS)
 	String fileExtension;
-	
+	@Inject
+	private XtextDocument document;
+
 	private Resource context;
 
 	/**
@@ -159,9 +160,14 @@ public class XtextCellEditor extends StyledTextCellEditor {
 		sourceviewer.configure(configuration);
 
 		createResourceSet();
-		
+
 		setResourceUri(resource);
+
 		document.setInput(resource);
+
+		IDocumentPartitioner partitioner = documentPartitioner.get();
+		partitioner.connect(document);
+		document.setDocumentPartitioner(partitioner);
 
 		sourceviewer.setDocument(document, new AnnotationModel());
 
