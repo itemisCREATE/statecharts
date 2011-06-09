@@ -52,6 +52,11 @@ import org.yakindu.model.sct.statechart.Vertex;
  * @generated
  */
 public class StatechartValidator extends EObjectValidator {
+
+	public static final String ISSUE_NO_INCOMING_TRANSITION = "No incoming transition.";
+	public static final String ISSUE_FINAL_STATE_OUTGOING_TRANSITION = "A final state should have no outgoing transition.";
+	public static final String ISSUE_STATE_WITHOUT_OUTGOING_TRANSITION = "A state should have at least one outgoing transition.";
+
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
@@ -90,6 +95,9 @@ public class StatechartValidator extends EObjectValidator {
 	 */
 	protected static final int DIAGNOSTIC_CODE_COUNT = GENERATED_DIAGNOSTIC_CODE_COUNT;
 
+	
+	
+	
 	/**
 	 * Creates an instance of the switch.
 	 * <!-- begin-user-doc --> <!--
@@ -219,16 +227,11 @@ public class StatechartValidator extends EObjectValidator {
 	 */
 	public boolean validateVertex_IncomingTransitionCount(Vertex vertex,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (vertex.getIncomingTransitions().size() == 0
-				&& !(vertex instanceof Entry)) {
-			if (diagnostics != null) {
-				diagnostics.add(new BasicDiagnostic(Diagnostic.ERROR,
-						DIAGNOSTIC_SOURCE, 0,
-						"A state must have at least one outgoing transition!",
-						new Object[] { vertex }));
-			}
-			return false;
+		
+		if (vertex.getIncomingTransitions().size() == 0 && !(vertex instanceof Entry)) {
+			return error(vertex, diagnostics, ISSUE_NO_INCOMING_TRANSITION);
 		}
+		
 		return true;
 	}
 
@@ -241,21 +244,18 @@ public class StatechartValidator extends EObjectValidator {
 	public boolean validateVertex_OutgoingTransitionCount(Vertex vertex,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
 
-		if (vertex.getOutgoingTransitions().size() == 0
-				&& !(vertex instanceof FinalState)) {
-			if (diagnostics != null) {
-				diagnostics
-						.add(new BasicDiagnostic(
-								Diagnostic.WARNING,
-								DIAGNOSTIC_SOURCE,
-								0,
-								"A state should have at least one outgoing transition.",
-								new Object[] { vertex }));
-			}
-			return false;
+		if (vertex.getOutgoingTransitions().size() == 0 && !(vertex instanceof FinalState)) {
+			return warning(vertex, diagnostics, ISSUE_STATE_WITHOUT_OUTGOING_TRANSITION);
+		} 
+		
+		if ((vertex.getOutgoingTransitions().size() > 0) && (vertex instanceof FinalState)) {
+			return warning(vertex, diagnostics, ISSUE_FINAL_STATE_OUTGOING_TRANSITION);
 		}
+		
 		return true;
 	}
+
+
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -372,7 +372,8 @@ public class StatechartValidator extends EObjectValidator {
 	 */
 	public boolean validateState_NameIsNotEmpty(State state,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (state.getName() == null || state.getName().length() == 0) {
+		if ( (state.getName() == null || state.getName().length() == 0) 
+				&& !(state instanceof FinalState)) {
 			if (diagnostics != null) {
 				diagnostics.add(new BasicDiagnostic(Diagnostic.WARNING,
 						DIAGNOSTIC_SOURCE, 0,
@@ -585,5 +586,34 @@ public class StatechartValidator extends EObjectValidator {
 		// Ensure that you remove @generated or mark it @generated NOT
 		return super.getResourceLocator();
 	}
+	
+	
+	protected boolean warning(Vertex vertex, DiagnosticChain diagnostics, String messagen) {
+		if (diagnostics != null) {
+			diagnostics
+					.add(new BasicDiagnostic(
+							Diagnostic.WARNING,
+							DIAGNOSTIC_SOURCE,
+							0,
+							messagen,
+							new Object[] { vertex }));
+		}
+		return false;
+	}
+
+	
+	protected boolean error(Vertex vertex, DiagnosticChain diagnostics, String messagen) {
+		if (diagnostics != null) {
+			diagnostics
+					.add(new BasicDiagnostic(
+							Diagnostic.ERROR,
+							DIAGNOSTIC_SOURCE,
+							0,
+							messagen,
+							new Object[] { vertex }));
+		}
+		return false;
+	}
+
 
 } // StatechartValidator
