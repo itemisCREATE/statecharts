@@ -35,6 +35,10 @@ public class SheetLabelProvider extends BaseLabelProvider implements
 		if (element instanceof IGraphicalEditPart) {
 			EObject semanticElement = ((IGraphicalEditPart) element)
 					.resolveSemanticElement();
+			
+			if(semanticElement == null)
+				return null;
+			
 			IElementType elementType = ElementTypeRegistry.getInstance()
 					.getElementType(semanticElement);
 			StringBuilder builder = new StringBuilder();
@@ -54,6 +58,10 @@ public class SheetLabelProvider extends BaseLabelProvider implements
 		if (element instanceof IGraphicalEditPart) {
 			EObject semanticElement = ((IGraphicalEditPart) element)
 					.resolveSemanticElement();
+			
+			if(semanticElement == null)
+				return null;
+			
 			IElementType elementType = ElementTypeRegistry.getInstance()
 					.getElementType(semanticElement);
 			Image image = DiagramActivator.getDefault().getImageRegistry()

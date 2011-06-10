@@ -14,23 +14,24 @@ import org.eclipse.gef.Tool;
 import org.eclipse.gmf.runtime.diagram.ui.services.palette.PaletteFactory;
 import org.eclipse.gmf.runtime.diagram.ui.tools.ConnectionCreationTool;
 import org.eclipse.gmf.runtime.diagram.ui.tools.CreationTool;
+import org.eclipse.gmf.runtime.emf.type.core.ElementTypeRegistry;
 import org.eclipse.gmf.runtime.emf.type.core.IElementType;
 
 /**
  * 
- * @author muelder
+ * @author andreas muelder
  * 
  */
 public class StatechartDiagramPaletteFactory extends PaletteFactory.Adapter {
 
 	@Override
 	public Tool createTool(String toolId) {
-		IElementType elementType = StatechartElementTypes
-				.fromSemanticId(toolId);
+		IElementType elementType = ElementTypeRegistry.getInstance().getType(
+				toolId);
 		if (elementType == null)
 			throw new IllegalStateException("No Tool for toolId " + toolId
 					+ " found!");
-		if (toolId.equals("Transition")) {
+		if (toolId.equals(StatechartElementTypes.TRANSITION.getId())) {
 			return new ConnectionCreationTool(elementType);
 		} else
 			return new CreationTool(elementType);

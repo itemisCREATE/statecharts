@@ -14,6 +14,7 @@ import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.CreationEditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewAndElementRequest;
+import org.eclipse.gmf.runtime.emf.type.core.ElementTypeRegistry;
 import org.eclipse.gmf.runtime.emf.type.core.IElementType;
 import org.yakindu.sct.statechart.diagram.editor.StatechartElementTypes;
 
@@ -27,15 +28,21 @@ import com.google.common.collect.ImmutableList;
  */
 public class CompartmentCreationEditPolicy extends CreationEditPolicy {
 
-	private static final ImmutableList<IElementType> fixedSizeElements = ImmutableList.of(
-			StatechartElementTypes.CHOICE, StatechartElementTypes.JUNCTION, StatechartElementTypes.ENTRY,
-			StatechartElementTypes.FINALSTATE, StatechartElementTypes.DEEPHISTORY,
-			StatechartElementTypes.SHALLOWHISTORY, StatechartElementTypes.EXIT);
+	private static final ImmutableList<IElementType> fixedSizeElements = ImmutableList
+			.of(StatechartElementTypes.CHOICE, StatechartElementTypes.JUNCTION,
+					StatechartElementTypes.ENTRY,
+					StatechartElementTypes.FINALSTATE,
+					StatechartElementTypes.DEEPHISTORY,
+					StatechartElementTypes.SHALLOWHISTORY,
+					StatechartElementTypes.EXIT);
 
 	@Override
-	protected Command getCreateElementAndViewCommand(CreateViewAndElementRequest request) {
-		String semanticHint = request.getViewAndElementDescriptor().getSemanticHint();
-		IElementType elementType = StatechartElementTypes.fromSemanticId(semanticHint);
+	protected Command getCreateElementAndViewCommand(
+			CreateViewAndElementRequest request) {
+		String semanticHint = request.getViewAndElementDescriptor()
+				.getSemanticHint();
+		IElementType elementType = ElementTypeRegistry.getInstance().getType(
+				semanticHint);
 		if (fixedSizeElements.contains(elementType))
 			request.setSize(new Dimension(-1, -1));
 		return super.getCreateElementAndViewCommand(request);
