@@ -53,7 +53,8 @@ import org.yakindu.model.sct.statechart.Vertex;
  */
 public class StatechartValidator extends EObjectValidator {
 
-	public static final String ISSUE_NO_INCOMING_TRANSITION = "No incoming transition.";
+	public static final String ISSUE_STATE_WITHOUT_NAME = "A state must have a name.";
+	public static final String ISSUE_NODE_NOT_REACHABLE = "Node is not reachable due to missing incoming transition.";
 	public static final String ISSUE_FINAL_STATE_OUTGOING_TRANSITION = "A final state should have no outgoing transition.";
 	public static final String ISSUE_STATE_WITHOUT_OUTGOING_TRANSITION = "A state should have at least one outgoing transition.";
 
@@ -229,7 +230,7 @@ public class StatechartValidator extends EObjectValidator {
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
 		
 		if (vertex.getIncomingTransitions().size() == 0 && !(vertex instanceof Entry)) {
-			return error(vertex, diagnostics, ISSUE_NO_INCOMING_TRANSITION);
+			return error(vertex, diagnostics, ISSUE_NODE_NOT_REACHABLE);
 		}
 		
 		return true;
@@ -244,9 +245,9 @@ public class StatechartValidator extends EObjectValidator {
 	public boolean validateVertex_OutgoingTransitionCount(Vertex vertex,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
 
-		if (vertex.getOutgoingTransitions().size() == 0 && !(vertex instanceof FinalState)) {
-			return warning(vertex, diagnostics, ISSUE_STATE_WITHOUT_OUTGOING_TRANSITION);
-		} 
+//		if (vertex.getOutgoingTransitions().size() == 0 && !(vertex instanceof FinalState)) {
+//			return warning(vertex, diagnostics, ISSUE_STATE_WITHOUT_OUTGOING_TRANSITION);
+//		} 
 		
 		if ((vertex.getOutgoingTransitions().size() > 0) && (vertex instanceof FinalState)) {
 			return warning(vertex, diagnostics, ISSUE_FINAL_STATE_OUTGOING_TRANSITION);
@@ -372,15 +373,9 @@ public class StatechartValidator extends EObjectValidator {
 	 */
 	public boolean validateState_NameIsNotEmpty(State state,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if ( (state.getName() == null || state.getName().length() == 0) 
+		if ( (state.getName() == null || state.getName().trim().length() == 0) 
 				&& !(state instanceof FinalState)) {
-			if (diagnostics != null) {
-				diagnostics.add(new BasicDiagnostic(Diagnostic.WARNING,
-						DIAGNOSTIC_SOURCE, 0,
-						"A state should have a name.",
-						new Object[] { state }));
-			}
-			return false;
+			return error(state, diagnostics, ISSUE_STATE_WITHOUT_NAME);
 		}
 		return true;
 	}
