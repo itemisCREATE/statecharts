@@ -39,6 +39,8 @@ public final class StatechartElementTypes extends AbstractElementTypeEnumerator 
 	public static final IElementType DEEPHISTORY = getElementType("org.yakindu.sct.statechart.diagram.DeepHistory");
 	public static final IElementType SHALLOWHISTORY = getElementType("org.yakindu.sct.statechart.diagram.ShallowHistory");
 	public static final IElementType FINALSTATE = getElementType("org.yakindu.sct.statechart.diagram.FinalState");
+	public static final IElementType EXIT = getElementType("org.yakindu.sct.statechart.diagram.Exit");
+
 
 	/**
 	 * Helper method that returns the {@link IElementType} for a given semantic

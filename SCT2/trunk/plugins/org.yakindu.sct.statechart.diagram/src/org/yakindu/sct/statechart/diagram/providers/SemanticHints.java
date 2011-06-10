@@ -44,6 +44,7 @@ public interface SemanticHints {
 	String ENTRY = "Entry";
 
 	String FINALSTATE = "FinalState";
+	String EXIT = "Exit";
 
 	String JOIN = "Join";
 

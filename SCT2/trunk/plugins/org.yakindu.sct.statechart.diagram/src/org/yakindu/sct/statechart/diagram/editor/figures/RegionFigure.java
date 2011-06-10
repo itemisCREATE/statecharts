@@ -19,17 +19,16 @@ import org.eclipse.draw2d.GridData;
 import org.eclipse.draw2d.GridLayout;
 import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.draw2d.RectangleFigure;
-import org.eclipse.draw2d.StackLayout;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 import org.eclipse.gmf.runtime.draw2d.ui.mapmode.IMapMode;
-import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.yakindu.sct.statechart.diagram.editor.figures.utils.GridDataFactory;
+
 /**
  * 
  * @author muelder
  * @author terfloth
- *
+ * 
  */
 public class RegionFigure extends RectangleFigure {
 
@@ -42,11 +41,11 @@ public class RegionFigure extends RectangleFigure {
 	public RegionFigure(IMapMode mapMode) {
 		this.mapMode = mapMode;
 
-		GridLayout layoutThis = new GridLayout(1,false);
-//		StackLayout layoutThis = new StackLayout();
+		GridLayout layoutThis = new GridLayout(1, false);
+		// StackLayout layoutThis = new StackLayout();
 		layoutThis.verticalSpacing = 2;
-		//layoutThis.marginHeight = 2;
-		//layoutThis.marginWidth = 2;
+		// layoutThis.marginHeight = 2;
+		// layoutThis.marginWidth = 2;
 		this.setLayoutManager(layoutThis);
 		this.setLineWidth(mapMode.DPtoLP(1));
 		createContents();
@@ -57,8 +56,10 @@ public class RegionFigure extends RectangleFigure {
 		RectangleFigure labelFigure = new RectangleFigure();
 		labelFigure.setOutline(false);
 		labelFigure.setFill(false);
-//		this.add(labelFigure, GridDataFactory.fillDefaults().align(GridData.CENTER, SWT.END).grab(true, false)
-//				.getData());
+		// this.add(labelFigure,
+		// GridDataFactory.fillDefaults().align(GridData.CENTER,
+		// SWT.END).grab(true, false)
+		// .getData());
 		GridLayout layout = new GridLayout();
 		layout.verticalSpacing = 2;
 		layout.numColumns = 1;
@@ -68,9 +69,10 @@ public class RegionFigure extends RectangleFigure {
 		/** name Label **/
 		nameLabel = new WrappingLabel();
 		nameLabel.setAlignment(PositionConstants.WEST);
-		GridData data = GridDataFactory.fillDefaults().align(GridData.CENTER, GridData.BEGINNING).grab(true, false)
+		GridData data = GridDataFactory.fillDefaults()
+				.align(GridData.CENTER, GridData.BEGINNING).grab(true, false)
 				.getData();
-		//data.heightHint = mapMode.DPtoLP(10);
+		// data.heightHint = mapMode.DPtoLP(10);
 		this.add(nameLabel, data);
 
 		/** Compartment container **/
@@ -81,7 +83,8 @@ public class RegionFigure extends RectangleFigure {
 		compartmentLayout.makeColumnsEqualWidth = true;
 		compartmentPane.setLayoutManager(compartmentLayout);
 		compartmentPane.setFill(false);
-		this.add(compartmentPane, GridDataFactory.fillDefaults().grab(true, true).getData());
+		this.add(compartmentPane,
+				GridDataFactory.fillDefaults().grab(true, true).getData());
 	}
 
 	public WrappingLabel getNameLabel() {
@@ -92,18 +95,22 @@ public class RegionFigure extends RectangleFigure {
 		return compartmentPane;
 	}
 
-	//========= drawing related methods ============================
+	// ========= drawing related methods ============================
 
-	
 	/**
-	 * Fill the shape with a vertical color gradient. The gradient mixes a white into the configured background color. 
+	 * Fill the shape with a vertical color gradient. The gradient mixes a white
+	 * into the configured background color.
 	 */
 	@Override
 	protected void fillShape(Graphics graphics) {
-		Color c=mixColor(getBackgroundColor(), ColorConstants.white, 220);
-		fillVerticalGradientRectangle(graphics, getBounds(), getBackgroundColor(), c);
+		Color c = mixColor(getBackgroundColor(), ColorConstants.white, 220);
+		fillVerticalGradientRectangle(graphics, getBounds(),
+				getBackgroundColor(), c);
 		c.dispose();
 	}
 
+	public IMapMode getMapMode() {
+		return mapMode;
+	}
 
 }

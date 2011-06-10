@@ -131,6 +131,17 @@
                   value="FinalState">
             </param>
          </metamodelType>
+          <metamodelType
+               eclass="Exit"
+               icon="icons/obj16/exit_point_16x16.png"
+               id="org.yakindu.sct.statechart.diagram.Exit"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               name="Exit">
+            <param
+                  name="semanticHint"
+                  value="Exit">
+            </param>
+         </metamodelType>
          <metamodelType
                eclass="Junction"
                icon="icons/obj16/junction_16x16.png"
@@ -235,7 +246,7 @@
                    small_icon="icons/obj16/region_16x16.png">
              </entry>
              <entry
-                   description="Creates a Transition"
+                   description="Creates a transition"
                    id="Transition"
                    kind="tool"
                    label="Transition"
@@ -244,7 +255,7 @@
                    small_icon="icons/obj16/transition_16x16.png">
              </entry>
              <entry
-                   description="Creates a Choice"
+                   description="Creates a choice"
                    id="Choice"
                    kind="tool"
                    label="Choice"
@@ -253,7 +264,7 @@
                    small_icon="icons/obj16/choice_16x16.png">
              </entry>
              <entry
-                   description="Creates a Junction"
+                   description="Creates a junction"
                    id="Junction"
                    kind="tool"
                    label="Junction"
@@ -262,7 +273,7 @@
                    small_icon="icons/obj16/junction_16x16.png">
              </entry>
              <entry
-                   description="Creates an Initial State"
+                   description="Creates an initial state"
                    id="Entry"
                    kind="tool"
                    label="Initial State"
@@ -280,7 +291,7 @@
                    small_icon="icons/obj16/shallow_history_16x16.png">
              </entry>
              <entry
-                   description="Creates a Deep History"
+                   description="Creates a deep history"
                    id="DeepHistory"
                    kind="tool"
                    label="Deep History"
@@ -289,13 +300,22 @@
                    small_icon="icons/obj16/deep_history_16x16.png">
              </entry>
              <entry
-                   description="Create a Final State"
+                   description="Creates a final state"
                    id="FinalState"
                    kind="tool"
                    label="Final State"
                    large_icon="icons/obj16/final_state_16x16.png"
                    path="/tools/"
                    small_icon="icons/obj16/final_state_16x16.png">
+             </entry>
+               <entry
+                   description="Creates an exit point"
+                   id="Exit"
+                   kind="tool"
+                   label="Exit Point"
+                   large_icon="icons/obj16/exit_point_16x16.png"
+                   path="/tools/"
+                   small_icon="icons/obj16/exit_point_16x16.png">
              </entry>
          </contribution>
          <Priority
