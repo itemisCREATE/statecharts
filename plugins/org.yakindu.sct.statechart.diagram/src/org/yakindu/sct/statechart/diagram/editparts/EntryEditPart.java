@@ -11,11 +11,11 @@
 package org.yakindu.sct.statechart.diagram.editparts;
 
 import org.eclipse.draw2d.Ellipse;
-import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.diagram.ui.handles.ConnectionHandle.HandleDirection;
+import org.eclipse.gmf.runtime.notation.Node;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.model.sct.statechart.Entry;
 import org.yakindu.model.sct.statechart.StatechartPackage;
@@ -76,10 +76,16 @@ public class EntryEditPart extends EllipseFixedSizeShapeNodeEditPart {
 		// We have to update the primary shape when the entry kind changes
 		if (StatechartPackage.eINSTANCE.getEntry_Kind().equals(
 				notification.getFeature())) {
-			getFigure().remove((IFigure) getFigure().getChildren().get(0));
-			getFigure().add(getPrimaryShape());
+			// TODO: We have to remove the old figure, this does not work
+			// currently because the connections get broken then.
+			getNodeFigure().add(getPrimaryShape());
 		}
 		super.handleNotificationEvent(notification);
+	}
+
+	@Override
+	public Node getNotationView() {
+		return (Node) super.getNotationView();
 	}
 
 }

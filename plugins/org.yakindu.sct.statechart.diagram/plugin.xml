@@ -224,7 +224,7 @@
             </entry>
              <entry
                   description="Creates a state"
-                  id="State"
+                  id="org.yakindu.sct.statechart.diagram.State"
                   kind="tool"
                   label="State"
                   large_icon="icons/obj16/state_16x16.png"
@@ -238,7 +238,7 @@
             </entry>
              <entry
                    description="Creates a region"
-                   id="Region"
+                   id="org.yakindu.sct.statechart.diagram.Region"
                    kind="tool"
                    label="Region"
                    large_icon="icons/obj16/region_16x16.png"
@@ -247,7 +247,7 @@
              </entry>
              <entry
                    description="Creates a transition"
-                   id="Transition"
+                   id="org.yakindu.sct.statechart.diagram.Transition"
                    kind="tool"
                    label="Transition"
                    large_icon="icons/obj16/transition_16x16.png"
@@ -256,7 +256,7 @@
              </entry>
              <entry
                    description="Creates a choice"
-                   id="Choice"
+                   id="org.yakindu.sct.statechart.diagram.Choice"
                    kind="tool"
                    label="Choice"
                    large_icon="icons/obj16/choice_16x16.png"
@@ -265,7 +265,7 @@
              </entry>
              <entry
                    description="Creates a junction"
-                   id="Junction"
+                   id="org.yakindu.sct.statechart.diagram.Junction"
                    kind="tool"
                    label="Junction"
                    large_icon="icons/obj16/junction_16x16.png"
@@ -274,7 +274,7 @@
              </entry>
              <entry
                    description="Creates an initial state"
-                   id="Entry"
+                   id="org.yakindu.sct.statechart.diagram.Entry"
                    kind="tool"
                    label="Initial State"
                    large_icon="icons/obj16/initial_state_16x16.png"
@@ -283,7 +283,7 @@
              </entry>
               <entry
                    description="Creates a shallow history"
-                   id="ShallowHistory"
+                   id="org.yakindu.sct.statechart.diagram.ShallowHistory"
                    kind="tool"
                    label="Shallow History"
                    large_icon="icons/obj16/shallow_history_16x16.png"
@@ -292,7 +292,7 @@
              </entry>
              <entry
                    description="Creates a deep history"
-                   id="DeepHistory"
+                   id="org.yakindu.sct.statechart.diagram.DeepHistory"
                    kind="tool"
                    label="Deep History"
                    large_icon="icons/obj16/deep_history_16x16.png"
@@ -301,7 +301,7 @@
              </entry>
              <entry
                    description="Creates a final state"
-                   id="FinalState"
+                   id="org.yakindu.sct.statechart.diagram.FinalState"
                    kind="tool"
                    label="Final State"
                    large_icon="icons/obj16/final_state_16x16.png"
@@ -310,7 +310,7 @@
              </entry>
                <entry
                    description="Creates an exit point"
-                   id="Exit"
+                   id="org.yakindu.sct.statechart.diagram.Exit"
                    kind="tool"
                    label="Exit Point"
                    large_icon="icons/obj16/exit_point_16x16.png"

@@ -10,8 +10,6 @@
  */
 package org.yakindu.sct.statechart.diagram.editor;
 
-import java.lang.reflect.Field;
-
 import org.eclipse.gmf.runtime.emf.type.core.AbstractElementTypeEnumerator;
 import org.eclipse.gmf.runtime.emf.type.core.IElementType;
 
@@ -23,10 +21,6 @@ import org.eclipse.gmf.runtime.emf.type.core.IElementType;
  * 
  */
 public final class StatechartElementTypes extends AbstractElementTypeEnumerator {
-
-	private StatechartElementTypes() {
-		// only static methods
-	}
 
 	/** Element Types **/
 	public static final IElementType STATECHART = getElementType("org.yakindu.sct.statechart.diagram.Statechart");
@@ -41,23 +35,4 @@ public final class StatechartElementTypes extends AbstractElementTypeEnumerator 
 	public static final IElementType FINALSTATE = getElementType("org.yakindu.sct.statechart.diagram.FinalState");
 	public static final IElementType EXIT = getElementType("org.yakindu.sct.statechart.diagram.Exit");
 
-
-	/**
-	 * Helper method that returns the {@link IElementType} for a given semantic
-	 * id per naming convention.
-	 * 
-	 * @param semanticId
-	 *            the semantic id
-	 * @return the matching {@link IElementType}
-	 */
-	public static IElementType fromSemanticId(String semanticId) {
-		try {
-			Field field = StatechartElementTypes.class.getField(semanticId
-					.toUpperCase());
-			return (IElementType) field.get(StatechartElementTypes.class);
-		} catch (Exception e) {
-			throw new RuntimeException(
-					"No IElementType found for semanticHint " + semanticId);
-		}
-	}
 }
