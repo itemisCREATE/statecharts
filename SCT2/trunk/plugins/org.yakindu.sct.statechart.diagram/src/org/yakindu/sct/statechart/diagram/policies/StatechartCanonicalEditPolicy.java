@@ -12,6 +12,7 @@ package org.yakindu.sct.statechart.diagram.policies;
 
 import java.util.List;
 
+import org.eclipse.gmf.runtime.diagram.core.util.ViewType;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.CanonicalEditPolicy;
 import org.eclipse.gmf.runtime.notation.View;
@@ -43,6 +44,12 @@ public class StatechartCanonicalEditPolicy extends CanonicalEditPolicy {
 
 	@Override
 	protected boolean shouldDeleteView(View view) {
+		//TODO: This should be GMFs default behaviour -> create a ticket
+		if (ViewType.NOTE.equals(view.getType())
+				| ViewType.NOTEATTACHMENT.equals(view.getType())
+				|| ViewType.TEXT.equals(view.getType())) {
+			return false;
+		}
 		// We do not want to delete the fixed Text compartment view
 		if (SemanticHints.STATECHART_TEXT.equals(view.getType())) {
 			return false;
