@@ -10,6 +10,7 @@
  */
 package org.yakindu.sct.statechart.diagram.editparts;
 
+import org.eclipse.gef.EditPolicy;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IDiagramPreferenceSupport;
@@ -18,32 +19,37 @@ import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.statechart.diagram.policies.StatechartCanonicalEditPolicy;
 
+import de.itemis.gmf.runtime.commons.editparts.FixedXYLayoutEditPolicy;
+
 /**
  * 
- * @author muelder
- *
+ * @author andreas muelder
+ * 
  */
-public class StatechartDiagramEditPart extends DiagramEditPart implements IDiagramPreferenceSupport{
+public class StatechartDiagramEditPart extends DiagramEditPart implements
+		IDiagramPreferenceSupport {
 
 	private PreferencesHint preferenceHint;
-	
+
 	public StatechartDiagramEditPart(View diagramView) {
 		super(diagramView);
 	}
 
 	@Override
 	protected void createDefaultEditPolicies() {
-		installEditPolicy(EditPolicyRoles.CANONICAL_ROLE, new StatechartCanonicalEditPolicy());
+		installEditPolicy(EditPolicyRoles.CANONICAL_ROLE,
+				new StatechartCanonicalEditPolicy());
 		super.createDefaultEditPolicies();
-		installEditPolicy(EditPolicyRoles.DRAG_DROP_ROLE, new DragDropEditPolicy());
+		installEditPolicy(EditPolicyRoles.DRAG_DROP_ROLE,
+				new DragDropEditPolicy());
+		// TODO: This is a workaround for GMF bug #349042
+		installEditPolicy(EditPolicy.LAYOUT_ROLE, new FixedXYLayoutEditPolicy());
 	}
 
-	
 	public void setPreferencesHint(PreferencesHint preferenceHint) {
 		this.preferenceHint = preferenceHint;
 	}
 
-	
 	public PreferencesHint getPreferencesHint() {
 		return preferenceHint;
 	}
