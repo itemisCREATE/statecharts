@@ -70,9 +70,8 @@ public class StateFigureCompartmentEditPart extends
 	private static final class StateFigureCompartmentLayout extends
 			ConstrainedToolbarLayout {
 		public StateFigureCompartmentLayout() {
-			super(true);
+			super(false);
 			setSpacing(-1); // make lines overlap so it looks like a shared line 
-			setHorizontal(false);
 		}
 
 		@Override

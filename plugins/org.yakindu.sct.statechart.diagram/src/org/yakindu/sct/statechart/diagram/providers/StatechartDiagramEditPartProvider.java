@@ -19,6 +19,7 @@ import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.statechart.diagram.editor.StatechartDiagramEditor;
 import org.yakindu.sct.statechart.diagram.editparts.ChoiceEditPart;
 import org.yakindu.sct.statechart.diagram.editparts.EntryEditPart;
+import org.yakindu.sct.statechart.diagram.editparts.ExitEditPart;
 import org.yakindu.sct.statechart.diagram.editparts.FinalStateEditPart;
 import org.yakindu.sct.statechart.diagram.editparts.JunctionEditPart;
 import org.yakindu.sct.statechart.diagram.editparts.RegionCompartmentEditPart;
@@ -77,6 +78,7 @@ public class StatechartDiagramEditPartProvider extends AbstractEditPartProvider
 		editParts.put(TRANSITION, TransitionEditPart.class);
 		editParts
 				.put(TRANSITION_EXPRESSION, TransitionExpressionEditPart.class);
+		editParts.put(EXIT, ExitEditPart.class);
 	}
 
 	private Class<? extends IGraphicalEditPart> getClass(String semanticHint) {

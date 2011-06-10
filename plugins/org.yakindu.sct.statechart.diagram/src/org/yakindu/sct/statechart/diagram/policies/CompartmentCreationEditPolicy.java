@@ -30,7 +30,7 @@ public class CompartmentCreationEditPolicy extends CreationEditPolicy {
 	private static final ImmutableList<IElementType> fixedSizeElements = ImmutableList.of(
 			StatechartElementTypes.CHOICE, StatechartElementTypes.JUNCTION, StatechartElementTypes.ENTRY,
 			StatechartElementTypes.FINALSTATE, StatechartElementTypes.DEEPHISTORY,
-			StatechartElementTypes.SHALLOWHISTORY);
+			StatechartElementTypes.SHALLOWHISTORY, StatechartElementTypes.EXIT);
 
 	@Override
 	protected Command getCreateElementAndViewCommand(CreateViewAndElementRequest request) {

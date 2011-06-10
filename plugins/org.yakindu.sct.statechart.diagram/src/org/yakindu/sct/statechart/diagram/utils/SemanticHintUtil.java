@@ -10,30 +10,24 @@
  */
 package org.yakindu.sct.statechart.diagram.utils;
 
-import static org.yakindu.sct.statechart.diagram.providers.SemanticHints.CHOICE;
-import static org.yakindu.sct.statechart.diagram.providers.SemanticHints.ENTRY;
-import static org.yakindu.sct.statechart.diagram.providers.SemanticHints.FINALSTATE;
-import static org.yakindu.sct.statechart.diagram.providers.SemanticHints.JUNCTION;
-import static org.yakindu.sct.statechart.diagram.providers.SemanticHints.REGION;
-import static org.yakindu.sct.statechart.diagram.providers.SemanticHints.STATE;
-import static org.yakindu.sct.statechart.diagram.providers.SemanticHints.TRANSITION;
-
 import org.eclipse.emf.ecore.EObject;
 import org.yakindu.model.sct.statechart.Choice;
 import org.yakindu.model.sct.statechart.Entry;
+import org.yakindu.model.sct.statechart.Exit;
 import org.yakindu.model.sct.statechart.FinalState;
 import org.yakindu.model.sct.statechart.Junction;
 import org.yakindu.model.sct.statechart.Region;
 import org.yakindu.model.sct.statechart.State;
 import org.yakindu.model.sct.statechart.Transition;
 import org.yakindu.model.sct.statechart.util.StatechartSwitch;
+import org.yakindu.sct.statechart.diagram.providers.SemanticHints;
 
 /**
  * 
  * @author andreas muelder
  * 
  */
-public final class SemanticHintUtil {
+public final class SemanticHintUtil implements SemanticHints {
 
 	private SemanticHintUtil() {
 	}
@@ -76,6 +70,10 @@ public final class SemanticHintUtil {
 			public String caseFinalState(FinalState object) {
 				return FINALSTATE;
 			}
+
+			public String caseExit(Exit object) {
+				return EXIT;
+			};
 
 			@Override
 			public String caseChoice(Choice object) {
