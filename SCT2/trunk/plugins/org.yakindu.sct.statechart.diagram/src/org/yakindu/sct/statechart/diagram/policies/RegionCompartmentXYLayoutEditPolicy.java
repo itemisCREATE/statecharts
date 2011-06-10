@@ -12,7 +12,9 @@ package org.yakindu.sct.statechart.diagram.policies;
 
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.EditPart;
+import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.commands.Command;
+import org.eclipse.gef.requests.ChangeBoundsRequest;
 import org.eclipse.gmf.runtime.common.core.command.ICommand;
 import org.eclipse.gmf.runtime.diagram.core.util.ViewUtil;
 import org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy;
@@ -68,4 +70,24 @@ public class RegionCompartmentXYLayoutEditPolicy extends XYLayoutEditPolicy {
 	public IGraphicalEditPart getHost() {
 		return (IGraphicalEditPart) super.getHost();
 	}
+	/**
+	 * TODO
+	 * This is a workaround for GMF bug #349042
+	 * This method can be removed entirely if the provided patch
+	 * is applied in GMF
+	 */
+	@Override
+	protected Object getConstraintFor(
+			ChangeBoundsRequest request,
+			GraphicalEditPart child) {
+			Rectangle rect = (Rectangle) super.getConstraintFor(request, child);
+			Rectangle cons = getCurrentConstraintFor(child);
+			if(cons != null){
+				if (request.getSizeDelta().width == 0)
+					rect.width = cons.width;
+				if (request.getSizeDelta().height == 0)
+					rect.height = cons.height;
+			}
+			return rect;
+		}
 }
