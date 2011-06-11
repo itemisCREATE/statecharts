@@ -39,12 +39,13 @@ public class StatechartCanonicalEditPolicy extends CanonicalEditPolicy {
 
 	@Override
 	public IGraphicalEditPart getHost() {
-		return (IGraphicalEditPart) super.getHost();
+		return (IGraphicalEditPart) super.getHost
+		();
 	}
 
 	@Override
 	protected boolean shouldDeleteView(View view) {
-		//TODO: This should be GMFs default behaviour -> create a ticket
+		//#Bug 349119 
 		if (ViewType.NOTE.equals(view.getType())
 				| ViewType.NOTEATTACHMENT.equals(view.getType())
 				|| ViewType.TEXT.equals(view.getType())) {
