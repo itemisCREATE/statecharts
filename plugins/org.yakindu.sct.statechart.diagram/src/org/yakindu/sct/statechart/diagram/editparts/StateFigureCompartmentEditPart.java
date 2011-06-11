@@ -12,12 +12,15 @@ package org.yakindu.sct.statechart.diagram.editparts;
 
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.geometry.Dimension;
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ResizableCompartmentEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.DragDropEditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.diagram.ui.figures.ResizableCompartmentFigure;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.ConstrainedToolbarLayout;
+import org.eclipse.gmf.runtime.notation.BooleanValueStyle;
+import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.model.sct.statechart.StatechartPackage;
 import org.yakindu.sct.statechart.diagram.policies.CompartmentCreationEditPolicy;
@@ -25,17 +28,31 @@ import org.yakindu.sct.statechart.diagram.policies.StateCompartmentCanonicalEdit
 
 import de.itemis.gmf.runtime.commons.editpolicies.CompartmentEditPolicy;
 
-
 /**
  * 
- * @author muelder
+ * @author andreas muelder
  * 
  */
 public class StateFigureCompartmentEditPart extends
 		ResizableCompartmentEditPart {
 
+	private static final String PARENT_VIEW = "parent_view";
+
 	public StateFigureCompartmentEditPart(View view) {
 		super(view);
+	}
+
+	// Listeners for the parent view to get notified when layout is changed
+	@Override
+	protected void addNotationalListeners() {
+		addListenerFilter(PARENT_VIEW, this, getParent().getNotationView());
+		super.addNotationalListeners();
+	}
+
+	@Override
+	protected void removeNotationalListeners() {
+		removeListenerFilter(PARENT_VIEW);
+		super.removeNotationalListeners();
 	}
 
 	@Override
@@ -62,16 +79,47 @@ public class StateFigureCompartmentEditPart extends
 		ResizableCompartmentFigure figure = (ResizableCompartmentFigure) super
 				.createFigure();
 		figure.getContentPane().setLayoutManager(
-				new StateFigureCompartmentLayout());
+				new StateFigureCompartmentLayout(getAlignment()));
 		figure.setBorder(null);
 		return figure;
 	}
 
+	@Override
+	public ResizableCompartmentFigure getFigure() {
+		return (ResizableCompartmentFigure) super.getFigure();
+	}
+
+	@Override
+	public StateEditPart getParent() {
+		return (StateEditPart) super.getParent();
+	}
+
+	protected boolean getAlignment() {
+		// We use a BooleanValueStyle to carry the alignment value
+		BooleanValueStyle style = (BooleanValueStyle) getParent()
+				.getNotationView().getStyle(
+						NotationPackage.Literals.BOOLEAN_VALUE_STYLE);
+		return style.isBooleanValue();
+	}
+
+	@Override
+	protected void handleNotificationEvent(Notification event) {
+		if (event.getFeature() == NotationPackage.Literals.BOOLEAN_VALUE_STYLE__BOOLEAN_VALUE) {
+			updateLayout();
+		}
+		super.handleNotificationEvent(event);
+	}
+
+	private void updateLayout() {
+		getFigure().getContentPane().setLayoutManager(
+				new StateFigureCompartmentLayout(getAlignment()));
+	}
+
 	private static final class StateFigureCompartmentLayout extends
 			ConstrainedToolbarLayout {
-		public StateFigureCompartmentLayout() {
-			super(false);
-			setSpacing(-1); // make lines overlap so it looks like a shared line 
+		public StateFigureCompartmentLayout(boolean alignment) {
+			super(alignment);
+			setSpacing(-1); // make lines overlap so it looks like a shared line
 		}
 
 		@Override
@@ -79,6 +127,5 @@ public class StateFigureCompartmentEditPart extends
 				int wHint, int hHint) {
 			return new Dimension(1, 1);
 		}
-
 	}
 }

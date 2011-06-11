@@ -19,6 +19,7 @@ import org.eclipse.gmf.runtime.diagram.core.util.ViewUtil;
 import org.eclipse.gmf.runtime.diagram.ui.view.factories.AbstractShapeViewFactory;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.FigureUtilities;
 import org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter;
+import org.eclipse.gmf.runtime.notation.BooleanValueStyle;
 import org.eclipse.gmf.runtime.notation.NotationFactory;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.ShapeStyle;
@@ -34,6 +35,7 @@ import org.yakindu.sct.statechart.diagram.providers.SemanticHints;
  */
 public class StateViewFactory extends AbstractShapeViewFactory {
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void decorateView(View containerView, View view,
 			IAdaptable semanticAdapter, String semanticHint, int index,
@@ -51,7 +53,6 @@ public class StateViewFactory extends AbstractShapeViewFactory {
 		getViewService().createNode(eObjectAdapter, view,
 				SemanticHints.STATE_TEXT_COMPARTMENT, ViewUtil.APPEND, true,
 				getPreferencesHint());
-		
 
 		getViewService().createNode(eObjectAdapter, view,
 				SemanticHints.STATE_FIGURE_COMPARTMENT, ViewUtil.APPEND, true,
@@ -64,9 +65,16 @@ public class StateViewFactory extends AbstractShapeViewFactory {
 				.RGBToInteger(StatechartColorConstants.STATE_BG_COLOR.getRGB()));
 		style.setLineColor(FigureUtilities
 				.RGBToInteger(ColorConstants.lightGray.getRGB()));
-		
+
+		// Create a boolean value style that indicates the alignment of
+		// subregions
+		BooleanValueStyle layout = (BooleanValueStyle) NotationFactory.eINSTANCE
+				.createBooleanValueStyle();
+		layout.setBooleanValue(false);
+		view.getStyles().add(layout);
+
 	}
-	
+
 	@Override
 	protected List<Style> createStyles(View view) {
 		@SuppressWarnings("unchecked")

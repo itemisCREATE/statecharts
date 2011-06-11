@@ -487,7 +487,19 @@
                label="Initial"
                menubarPath="Entry/group1">
          </action>
-      </objectContribution>                    
+      </objectContribution>       
+      <objectContribution
+            adaptable="false"
+            id="org.yakindu.sct.statechart.diagram.regionLayout"
+            objectClass="org.yakindu.sct.statechart.diagram.editparts.StateEditPart">
+          <action
+               class="org.yakindu.sct.statechart.diagram.actions.ToggleSubRegionLayoutCommand"
+               definitionId="org.yakindu.sct.statechart.diagram.regionLayout"
+               id="org.yakindu.sct.statechart.diagram.regionLayout"
+               label="Toggle subregion alignment"
+               menubarPath="additions">
+         </action>    
+      </objectContribution>           
 </extension>
 
 </plugin>
