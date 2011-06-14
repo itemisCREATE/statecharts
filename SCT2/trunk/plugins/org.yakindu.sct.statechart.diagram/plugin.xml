@@ -451,6 +451,20 @@
       </decoratorProvider>
    </extension>
    
+   <!-- Global Print Action handler -->
+    <extension point="org.eclipse.gmf.runtime.common.ui.services.action.globalActionHandlerProviders" id="global-actions">
+      <GlobalActionHandlerProvider
+         class="org.eclipse.gmf.runtime.diagram.ui.printing.render.providers.DiagramWithPrintGlobalActionHandlerProvider"
+         id="Print handler">
+         <Priority name="Lowest"/>
+         <ViewId id="org.yakindu.sct.statechart.diagram.StatechartDiagramEditor">
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+               <GlobalActionId actionId="print"/>
+            </ElementType>
+         </ViewId>
+      </GlobalActionHandlerProvider>
+      </extension>
+   
    <!-- context menu contribution -->
      <extension point="org.eclipse.ui.commands">
 	<command description="Change Flow Kind" id="org.yakindu.sct.statechart.diagram.Entry" name="Change Entry Kind">
