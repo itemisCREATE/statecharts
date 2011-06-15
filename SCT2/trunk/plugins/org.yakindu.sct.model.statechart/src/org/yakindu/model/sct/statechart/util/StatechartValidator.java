@@ -57,7 +57,9 @@ public class StatechartValidator extends EObjectValidator {
 	public static final String ISSUE_NODE_NOT_REACHABLE = "Node is not reachable due to missing incoming transition.";
 	public static final String ISSUE_FINAL_STATE_OUTGOING_TRANSITION = "A final state should have no outgoing transition.";
 	public static final String ISSUE_STATE_WITHOUT_OUTGOING_TRANSITION = "A state should have at least one outgoing transition.";
-
+	public static final String ISSUE_INITIAL_ENTRY_WITH_IN_TRANS = "Initial entry should have no incoming transition.";
+	public static final String ISSUE_INITIAL_ENTRY_WITHOUT_OUT_TRANS = "Initial entry should have a single outgoing transition";
+	public final static String ISSUE_ENTRY_WITH_MULTIPLE_OUT_TRANS = "Entries must not have more than one outgoing transition";
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
@@ -232,7 +234,12 @@ public class StatechartValidator extends EObjectValidator {
 		if (vertex.getIncomingTransitions().size() == 0 && !(vertex instanceof Entry)) {
 			return error(vertex, diagnostics, ISSUE_NODE_NOT_REACHABLE);
 		}
+
+		if (vertex.getIncomingTransitions().size() > 0 && vertex instanceof Entry && ((Entry)vertex).getKind().equals(EntryKind.INITIAL)) {
+			return warning(vertex, diagnostics, ISSUE_INITIAL_ENTRY_WITH_IN_TRANS);
+		}
 		
+
 		return true;
 	}
 
@@ -245,14 +252,20 @@ public class StatechartValidator extends EObjectValidator {
 	public boolean validateVertex_OutgoingTransitionCount(Vertex vertex,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
 
-//		if (vertex.getOutgoingTransitions().size() == 0 && !(vertex instanceof FinalState)) {
-//			return warning(vertex, diagnostics, ISSUE_STATE_WITHOUT_OUTGOING_TRANSITION);
-//		} 
 		
 		if ((vertex.getOutgoingTransitions().size() > 0) && (vertex instanceof FinalState)) {
 			return warning(vertex, diagnostics, ISSUE_FINAL_STATE_OUTGOING_TRANSITION);
 		}
 		
+		if (vertex.getOutgoingTransitions().size() == 0 && vertex instanceof Entry && ((Entry)vertex).getKind().equals(EntryKind.INITIAL)) {
+			return warning(vertex, diagnostics, ISSUE_INITIAL_ENTRY_WITHOUT_OUT_TRANS);
+		} 
+
+		if (vertex.getOutgoingTransitions().size() > 1 && vertex instanceof Entry) {
+			return error(vertex, diagnostics, ISSUE_ENTRY_WITH_MULTIPLE_OUT_TRANS);
+		} 
+
+
 		return true;
 	}
 
@@ -295,22 +308,22 @@ public class StatechartValidator extends EObjectValidator {
 	public boolean validateRegion_ExactlyOneInitialState(Region region,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
 
-		int entryCount = 0;
-		EList<Vertex> vertices = region.getVertices();
-		for (Vertex vertex : vertices) {
-			if (vertex instanceof Entry) {
-				entryCount++;
-			}
-		}
-		if (entryCount != 1) {
-			if (diagnostics != null) {
-				diagnostics.add(new BasicDiagnostic(Diagnostic.WARNING,
-						DIAGNOSTIC_SOURCE, 0,
-						"A region must contain exactly one initial state!",
-						new Object[] { region }));
-			}
-			return false;
-		}
+//		int entryCount = 0;
+//		EList<Vertex> vertices = region.getVertices();
+//		for (Vertex vertex : vertices) {
+//			if (vertex instanceof Entry) {
+//				entryCount++;
+//			}
+//		}
+//		if (entryCount != 1) {
+//			if (diagnostics != null) {
+//				diagnostics.add(new BasicDiagnostic(Diagnostic.WARNING,
+//						DIAGNOSTIC_SOURCE, 0,
+//						"A region must contain exactly one initial state!",
+//						new Object[] { region }));
+//			}
+//			return false;
+//		}
 		return true;
 	}
 

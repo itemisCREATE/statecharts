@@ -54,11 +54,10 @@ public class CreateTransitionCommand extends EditElementCommand {
 	}
 
 	private boolean checkConstraints() {
-		if (source instanceof FinalState)
-			return false;
-		if (target instanceof Entry)
-			return false;
-//FIXME
+//		if (source instanceof FinalState)
+//			return false;
+//		if (target instanceof Entry)
+//			return false;
 //		if (source instanceof HistoryState)
 //			return false;
 //		if (source instanceof InitialState && ((InitialState) source).getOutgoingTransitions().size() > 0)

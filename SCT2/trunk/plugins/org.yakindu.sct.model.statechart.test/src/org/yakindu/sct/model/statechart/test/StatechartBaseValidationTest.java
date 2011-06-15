@@ -17,6 +17,7 @@ import junit.framework.TestCase;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.yakindu.model.sct.statechart.Entry;
+import org.yakindu.model.sct.statechart.EntryKind;
 import org.yakindu.model.sct.statechart.FinalState;
 import org.yakindu.model.sct.statechart.Region;
 import org.yakindu.model.sct.statechart.State;
@@ -136,12 +137,89 @@ public class StatechartBaseValidationTest extends TestCase {
 	public void testValidState() {
 		prepareStateTest();
 		Entry entry = factory.createEntry();
+		region.getVertices().add(entry);
 		createTransition(entry, state);
 				
 		assertTrue(validator.validate(state,  diagnostics, new HashMap<Object,Object>()));
 		assertIssueCount(diagnostics, 0);
 	}
 
+	
+	/**
+	 * An initial entry should have no incoming transition
+	 */
+	public void testInitialEntryWithIncomingTransition() {
+		prepareStateTest();
+		
+		Entry entry = factory.createEntry();
+		region.getVertices().add(entry);
+		createTransition(state, entry);
+
+		assertEquals(EntryKind.INITIAL, entry.getKind());
+		assertFalse(validator.validate(entry,  diagnostics, new HashMap<Object,Object>()));		
+		assertWarning(diagnostics, ISSUE_INITIAL_ENTRY_WITH_IN_TRANS);
+	}
+	
+	
+	/**
+	 * A valid entry should have No issues
+	 */
+	public void testValidInitialEntry() {
+		prepareStateTest();
+		
+		Entry entry = factory.createEntry();
+		region.getVertices().add(entry);
+		createTransition(entry, state);
+
+		assertEquals(EntryKind.INITIAL, entry.getKind());
+		assertTrue(validator.validate(entry,  diagnostics, new HashMap<Object,Object>()));		
+		assertIssueCount(diagnostics, 0);
+	}
+	
+	
+	/**
+	 * An initial entry should have an outgoing transition
+	 */
+	public void testInitialEntryWithoutOutTransition() {
+		prepareStateTest();
+		
+		Entry entry = factory.createEntry();
+		region.getVertices().add(entry);
+		
+		assertEquals(EntryKind.INITIAL, entry.getKind());
+		assertFalse(validator.validate(entry,  diagnostics, new HashMap<Object,Object>()));		
+		assertWarning(diagnostics, ISSUE_INITIAL_ENTRY_WITHOUT_OUT_TRANS);
+	}
+	
+	/**
+	 * An entry should not have more than one outgoing transition
+	 */
+	public void testEntryMultipleOutTransition() {
+		prepareStateTest();
+		
+		Entry entry = factory.createEntry();
+		region.getVertices().add(entry);
+		createTransition(entry,	state);
+		createTransition(entry, state);
+		
+		assertEquals(EntryKind.INITIAL, entry.getKind());
+		assertFalse(validator.validate(entry,  diagnostics, new HashMap<Object,Object>()));		
+		assertError(diagnostics, ISSUE_ENTRY_WITH_MULTIPLE_OUT_TRANS);
+		
+		entry.setKind(EntryKind.SHALLOW_HISTORY);
+		
+		diagnostics = new BasicDiagnostic();
+		assertFalse(validator.validate(entry,  diagnostics, new HashMap<Object,Object>()));		
+		assertError(diagnostics, ISSUE_ENTRY_WITH_MULTIPLE_OUT_TRANS);
+		
+		entry.setKind(EntryKind.DEEP_HISTORY);
+		
+		diagnostics = new BasicDiagnostic();
+		assertFalse(validator.validate(entry,  diagnostics, new HashMap<Object,Object>()));		
+		assertError(diagnostics, ISSUE_ENTRY_WITH_MULTIPLE_OUT_TRANS);
+		
+
+	}
 	
 	
 	/**
