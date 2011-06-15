@@ -9,6 +9,7 @@ import org.eclipse.gef.Request;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.requests.CreateRequest;
 import org.eclipse.gmf.runtime.diagram.core.commands.AddCommand;
+import org.eclipse.gmf.runtime.diagram.core.util.ViewUtil;
 import org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.ResizableEditPolicyEx;
@@ -29,12 +30,12 @@ public class CompartmentEditPolicy extends
 
 	@Override
 	protected Command createAddCommand(EditPart child, EditPart after) {
-		int index = getHost().getChildren().indexOf(after);
+	//	int index = getHost().getChildren().indexOf(after);
 		TransactionalEditingDomain editingDomain = ((IGraphicalEditPart) getHost())
 				.getEditingDomain();
 		AddCommand command = new AddCommand(editingDomain, new EObjectAdapter(
 				(View) getHost().getModel()), new EObjectAdapter(
-				(View) child.getModel()), index);
+				(View) child.getModel()), ViewUtil.APPEND);
 		return new ICommandProxy(command);
 	}
 
