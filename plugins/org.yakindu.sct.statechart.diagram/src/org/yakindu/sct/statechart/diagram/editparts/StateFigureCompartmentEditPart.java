@@ -99,7 +99,7 @@ public class StateFigureCompartmentEditPart extends
 		BooleanValueStyle style = (BooleanValueStyle) getParent()
 				.getNotationView().getStyle(
 						NotationPackage.Literals.BOOLEAN_VALUE_STYLE);
-		return style.isBooleanValue();
+		return (style != null) ? style.isBooleanValue() : true;
 	}
 
 	@Override
