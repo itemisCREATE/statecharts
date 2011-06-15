@@ -11,6 +11,8 @@
 package org.yakindu.sct.statechart.diagram.actions;
 
 import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.commands.operations.IOperationHistory;
+import org.eclipse.core.commands.operations.OperationHistoryFactory;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.gmf.runtime.emf.type.core.commands.SetValueCommand;
 import org.eclipse.gmf.runtime.emf.type.core.requests.SetRequest;
@@ -51,12 +53,15 @@ public abstract class ChangeEntryKindCommand implements IActionDelegate {
 	}
 
 	public void run(IAction action) {
+
 		if (entry == null)
 			return;
 		SetValueCommand setCommand = new SetValueCommand(new SetRequest(entry,
 				StatechartPackage.Literals.ENTRY__KIND, getEntryKind()));
+		IOperationHistory history = OperationHistoryFactory
+				.getOperationHistory();
 		try {
-			setCommand.execute(new NullProgressMonitor(), null);
+			history.execute(setCommand, new NullProgressMonitor(), null);
 		} catch (ExecutionException e) {
 			e.printStackTrace();
 		}
