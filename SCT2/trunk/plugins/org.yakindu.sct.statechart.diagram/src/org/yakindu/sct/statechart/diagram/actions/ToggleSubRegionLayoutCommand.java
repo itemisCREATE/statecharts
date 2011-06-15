@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.commands.operations.OperationHistoryFactory;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -12,8 +13,6 @@ import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
-import org.eclipse.gmf.runtime.diagram.ui.commands.CommandProxy;
-import org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy;
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
 import org.eclipse.gmf.runtime.notation.BooleanValueStyle;
 import org.eclipse.gmf.runtime.notation.NotationFactory;
@@ -38,26 +37,13 @@ public class ToggleSubRegionLayoutCommand implements IActionDelegate {
 
 	public void run(IAction arg0) {
 		TransactionalEditingDomain editingDomain = TransactionUtil.getEditingDomain(view);
-		Command toggleCommand = new Command(editingDomain, view);
+		ToggleCommand toggleCommand = new ToggleCommand(editingDomain, view);
 		
 		try {
-			toggleCommand.execute(new NullProgressMonitor(), null);
+			OperationHistoryFactory.getOperationHistory().execute(toggleCommand, new NullProgressMonitor(), null);
 		} catch (ExecutionException e) {
 			e.printStackTrace();
 		}
-
-//		BooleanValueStyle style = (BooleanValueStyle) view
-//				.getStyle(NotationPackage.Literals.BOOLEAN_VALUE_STYLE);
-//		boolean isHorizontal = (style != null) ? style.isBooleanValue() : true;
-//
-//		SetValueCommand setCommand = new SetValueCommand(new SetRequest(style,
-//				NotationPackage.Literals.BOOLEAN_VALUE_STYLE__BOOLEAN_VALUE,
-//				!isHorizontal));
-//		try {
-//			setCommand.execute(new NullProgressMonitor(), null);
-//		} catch (ExecutionException e) {
-//			e.printStackTrace();
-//		}
 
 	}
 
@@ -74,13 +60,18 @@ public class ToggleSubRegionLayoutCommand implements IActionDelegate {
 	}
 
 	
-	protected static class Command extends AbstractTransactionalCommand {
+	/**
+	 * GMF command class...
+	 * 
+	 * @author terfloth
+	 */
+	protected static class ToggleCommand extends AbstractTransactionalCommand {
 		
 		protected static final String TOGGLE_REGION_ALIGNMENT = "Toggle Region Alignment";
 
 		protected View view; 
 		
-		public Command(TransactionalEditingDomain editingDomain, View view) {
+		public ToggleCommand(TransactionalEditingDomain editingDomain, View view) {
 			super(editingDomain, TOGGLE_REGION_ALIGNMENT, null);
 			this.view = view;
 		}
