@@ -1,10 +1,22 @@
 package org.yakindu.sct.statechart.diagram.actions;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.gmf.runtime.emf.type.core.commands.SetValueCommand;
-import org.eclipse.gmf.runtime.emf.type.core.requests.SetRequest;
+import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.emf.transaction.util.TransactionUtil;
+import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
+import org.eclipse.gmf.runtime.common.core.command.CommandResult;
+import org.eclipse.gmf.runtime.diagram.ui.commands.CommandProxy;
+import org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy;
+import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
 import org.eclipse.gmf.runtime.notation.BooleanValueStyle;
+import org.eclipse.gmf.runtime.notation.NotationFactory;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.jface.action.IAction;
@@ -17,6 +29,7 @@ import org.yakindu.sct.statechart.diagram.editparts.StateEditPart;
  * Action that toggles the alignment flag in the notation view element
  * 
  * @author andreas muelder
+ * @author terfloth
  * 
  */
 public class ToggleSubRegionLayoutCommand implements IActionDelegate {
@@ -24,16 +37,27 @@ public class ToggleSubRegionLayoutCommand implements IActionDelegate {
 	private View view;
 
 	public void run(IAction arg0) {
-		BooleanValueStyle style = (BooleanValueStyle) view
-				.getStyle(NotationPackage.Literals.BOOLEAN_VALUE_STYLE);
-		SetValueCommand setCommand = new SetValueCommand(new SetRequest(style,
-				NotationPackage.Literals.BOOLEAN_VALUE_STYLE__BOOLEAN_VALUE,
-				!style.isBooleanValue()));
+		TransactionalEditingDomain editingDomain = TransactionUtil.getEditingDomain(view);
+		Command toggleCommand = new Command(editingDomain, view);
+		
 		try {
-			setCommand.execute(new NullProgressMonitor(), null);
+			toggleCommand.execute(new NullProgressMonitor(), null);
 		} catch (ExecutionException e) {
 			e.printStackTrace();
 		}
+
+//		BooleanValueStyle style = (BooleanValueStyle) view
+//				.getStyle(NotationPackage.Literals.BOOLEAN_VALUE_STYLE);
+//		boolean isHorizontal = (style != null) ? style.isBooleanValue() : true;
+//
+//		SetValueCommand setCommand = new SetValueCommand(new SetRequest(style,
+//				NotationPackage.Literals.BOOLEAN_VALUE_STYLE__BOOLEAN_VALUE,
+//				!isHorizontal));
+//		try {
+//			setCommand.execute(new NullProgressMonitor(), null);
+//		} catch (ExecutionException e) {
+//			e.printStackTrace();
+//		}
 
 	}
 
@@ -49,4 +73,62 @@ public class ToggleSubRegionLayoutCommand implements IActionDelegate {
 		view = unwrap(selection);
 	}
 
+	
+	protected static class Command extends AbstractTransactionalCommand {
+		
+		protected static final String TOGGLE_REGION_ALIGNMENT = "Toggle Region Alignment";
+
+		protected View view; 
+		
+		public Command(TransactionalEditingDomain editingDomain, View view) {
+			super(editingDomain, TOGGLE_REGION_ALIGNMENT, null);
+			this.view = view;
+		}
+
+	    @SuppressWarnings({ "rawtypes", "unchecked" })
+		public List getAffectedFiles() {
+	    	
+	        if (view != null) {
+	            List result = new ArrayList();
+	            IFile file = WorkspaceSynchronizer.getFile(view.eResource());
+	            
+	            if (file != null) {
+	                result.add(file);
+	            }
+	            return result;
+	        }
+	        
+	        return super.getAffectedFiles();
+	    }
+
+		/** 
+		 * Executes the command that switches the subregion layout orientation.
+		 */
+		@SuppressWarnings("unchecked")
+		protected CommandResult doExecuteWithResult(IProgressMonitor monitor,
+	            IAdaptable info)
+	        throws ExecutionException {
+	        
+			BooleanValueStyle style = (BooleanValueStyle) view
+					.getStyle(NotationPackage.Literals.BOOLEAN_VALUE_STYLE);
+			
+			if (style == null) {
+				style = NotationFactory.eINSTANCE.createBooleanValueStyle();
+				style.setBooleanValue(true);
+				view.getStyles().add(style);
+			} else {
+				style.setBooleanValue(! style.isBooleanValue());
+			}
+			
+			return CommandResult.newOKCommandResult(view);
+		}
+
+		/* (non-Javadoc)
+		 * @see org.eclipse.gmf.runtime.common.core.command.ICommand#getLabel()
+		 */
+		public String getLabel() {
+			return TOGGLE_REGION_ALIGNMENT;
+		}
+		
+	}
 }
