@@ -15,7 +15,9 @@ import org.eclipse.gmf.runtime.diagram.ui.preferences.DiagramPreferenceInitializ
 import org.eclipse.gmf.runtime.diagram.ui.preferences.IPreferenceConstants;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.PreferenceConverter;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.FontData;
 import org.yakindu.sct.statechart.diagram.DiagramActivator;
 
 /**
@@ -38,6 +40,12 @@ public class PreferenceInitializer extends DiagramPreferenceInitializer
 		getPreferenceStore().setDefault(
 				IPreferenceConstants.PREF_SNAP_TO_GEOMETRY, true);
 
+		// set default font
+		FontData defaultFont = new FontData("Arial", 8, SWT.NONE);
+		PreferenceConverter.setDefault(getPreferenceStore(),
+				IPreferenceConstants.PREF_DEFAULT_FONT, defaultFont);
+		
+		
 	}
 
 	@Override
