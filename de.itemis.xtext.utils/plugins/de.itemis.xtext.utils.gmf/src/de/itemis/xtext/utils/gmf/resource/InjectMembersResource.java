@@ -38,7 +38,7 @@ import org.eclipse.gmf.runtime.emf.core.resources.GMFResource;
 public class InjectMembersResource extends GMFResource implements
 		IInjectMembersResourceAnnotations {
 
-	private static final boolean isDebug = true;
+	private static final boolean isDebug = false;
 
 	List<org.eclipse.emf.common.util.Diagnostic> diagnostics = new ArrayList<org.eclipse.emf.common.util.Diagnostic>();
 
