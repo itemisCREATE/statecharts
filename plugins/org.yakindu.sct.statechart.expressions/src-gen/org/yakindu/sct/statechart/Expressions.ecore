@@ -90,6 +90,10 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Expression"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OperationCallStatement" eSuperTypes="platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Statement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="call" eType="ecore:EClass platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Expression"
+        containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Expression"/>
   <eClassifiers xsi:type="ecore:EEnum" name="AdditiveOperator">
     <eLiterals name="plus" literal="+"/>

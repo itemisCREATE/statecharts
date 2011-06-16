@@ -113,6 +113,9 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//EventRaising/event"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//EventRaising/value"/>
     </genClasses>
+    <genClasses ecoreClass="platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//OperationCallStatement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//OperationCallStatement/call"/>
+    </genClasses>
     <genClasses ecoreClass="platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Expression"/>
     <genClasses ecoreClass="platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//SimpleScope"/>
     <genClasses ecoreClass="platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//InterfaceScope">

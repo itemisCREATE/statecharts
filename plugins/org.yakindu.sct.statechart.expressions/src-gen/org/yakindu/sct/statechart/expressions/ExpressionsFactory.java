@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
-
  */
 package org.yakindu.sct.statechart.expressions;
 
@@ -277,6 +276,15 @@ public interface ExpressionsFactory extends EFactory
    * @generated
    */
   EventRaising createEventRaising();
+
+  /**
+   * Returns a new object of class '<em>Operation Call Statement</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Operation Call Statement</em>'.
+   * @generated
+   */
+  OperationCallStatement createOperationCallStatement();
 
   /**
    * Returns a new object of class '<em>Expression</em>'.

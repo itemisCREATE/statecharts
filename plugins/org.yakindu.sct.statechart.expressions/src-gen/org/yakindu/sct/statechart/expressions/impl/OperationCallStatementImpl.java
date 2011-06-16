@@ -13,41 +13,41 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.yakindu.sct.statechart.expressions.Expression;
 import org.yakindu.sct.statechart.expressions.ExpressionsPackage;
-import org.yakindu.sct.statechart.expressions.StatechartDefinition;
-import org.yakindu.sct.statechart.expressions.StatechartRoot;
+import org.yakindu.sct.statechart.expressions.OperationCallStatement;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Statechart Root</b></em>'.
+ * An implementation of the model object '<em><b>Operation Call Statement</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.yakindu.sct.statechart.expressions.impl.StatechartRootImpl#getDef <em>Def</em>}</li>
+ *   <li>{@link org.yakindu.sct.statechart.expressions.impl.OperationCallStatementImpl#getCall <em>Call</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class StatechartRootImpl extends DefRootImpl implements StatechartRoot
+public class OperationCallStatementImpl extends StatementImpl implements OperationCallStatement
 {
   /**
-   * The cached value of the '{@link #getDef() <em>Def</em>}' containment reference.
+   * The cached value of the '{@link #getCall() <em>Call</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getDef()
+   * @see #getCall()
    * @generated
    * @ordered
    */
-  protected StatechartDefinition def;
+  protected Expression call;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected StatechartRootImpl()
+  protected OperationCallStatementImpl()
   {
     super();
   }
@@ -60,7 +60,7 @@ public class StatechartRootImpl extends DefRootImpl implements StatechartRoot
   @Override
   protected EClass eStaticClass()
   {
-    return ExpressionsPackage.Literals.STATECHART_ROOT;
+    return ExpressionsPackage.Literals.OPERATION_CALL_STATEMENT;
   }
 
   /**
@@ -68,9 +68,9 @@ public class StatechartRootImpl extends DefRootImpl implements StatechartRoot
    * <!-- end-user-doc -->
    * @generated
    */
-  public StatechartDefinition getDef()
+  public Expression getCall()
   {
-    return def;
+    return call;
   }
 
   /**
@@ -78,13 +78,13 @@ public class StatechartRootImpl extends DefRootImpl implements StatechartRoot
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetDef(StatechartDefinition newDef, NotificationChain msgs)
+  public NotificationChain basicSetCall(Expression newCall, NotificationChain msgs)
   {
-    StatechartDefinition oldDef = def;
-    def = newDef;
+    Expression oldCall = call;
+    call = newCall;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ExpressionsPackage.STATECHART_ROOT__DEF, oldDef, newDef);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ExpressionsPackage.OPERATION_CALL_STATEMENT__CALL, oldCall, newCall);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -95,20 +95,20 @@ public class StatechartRootImpl extends DefRootImpl implements StatechartRoot
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setDef(StatechartDefinition newDef)
+  public void setCall(Expression newCall)
   {
-    if (newDef != def)
+    if (newCall != call)
     {
       NotificationChain msgs = null;
-      if (def != null)
-        msgs = ((InternalEObject)def).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ExpressionsPackage.STATECHART_ROOT__DEF, null, msgs);
-      if (newDef != null)
-        msgs = ((InternalEObject)newDef).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ExpressionsPackage.STATECHART_ROOT__DEF, null, msgs);
-      msgs = basicSetDef(newDef, msgs);
+      if (call != null)
+        msgs = ((InternalEObject)call).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ExpressionsPackage.OPERATION_CALL_STATEMENT__CALL, null, msgs);
+      if (newCall != null)
+        msgs = ((InternalEObject)newCall).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ExpressionsPackage.OPERATION_CALL_STATEMENT__CALL, null, msgs);
+      msgs = basicSetCall(newCall, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.STATECHART_ROOT__DEF, newDef, newDef));
+      eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.OPERATION_CALL_STATEMENT__CALL, newCall, newCall));
   }
 
   /**
@@ -121,8 +121,8 @@ public class StatechartRootImpl extends DefRootImpl implements StatechartRoot
   {
     switch (featureID)
     {
-      case ExpressionsPackage.STATECHART_ROOT__DEF:
-        return basicSetDef(null, msgs);
+      case ExpressionsPackage.OPERATION_CALL_STATEMENT__CALL:
+        return basicSetCall(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -137,8 +137,8 @@ public class StatechartRootImpl extends DefRootImpl implements StatechartRoot
   {
     switch (featureID)
     {
-      case ExpressionsPackage.STATECHART_ROOT__DEF:
-        return getDef();
+      case ExpressionsPackage.OPERATION_CALL_STATEMENT__CALL:
+        return getCall();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -153,8 +153,8 @@ public class StatechartRootImpl extends DefRootImpl implements StatechartRoot
   {
     switch (featureID)
     {
-      case ExpressionsPackage.STATECHART_ROOT__DEF:
-        setDef((StatechartDefinition)newValue);
+      case ExpressionsPackage.OPERATION_CALL_STATEMENT__CALL:
+        setCall((Expression)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -170,8 +170,8 @@ public class StatechartRootImpl extends DefRootImpl implements StatechartRoot
   {
     switch (featureID)
     {
-      case ExpressionsPackage.STATECHART_ROOT__DEF:
-        setDef((StatechartDefinition)null);
+      case ExpressionsPackage.OPERATION_CALL_STATEMENT__CALL:
+        setCall((Expression)null);
         return;
     }
     super.eUnset(featureID);
@@ -187,10 +187,10 @@ public class StatechartRootImpl extends DefRootImpl implements StatechartRoot
   {
     switch (featureID)
     {
-      case ExpressionsPackage.STATECHART_ROOT__DEF:
-        return def != null;
+      case ExpressionsPackage.OPERATION_CALL_STATEMENT__CALL:
+        return call != null;
     }
     return super.eIsSet(featureID);
   }
 
-} //StatechartRootImpl
+} //OperationCallStatementImpl

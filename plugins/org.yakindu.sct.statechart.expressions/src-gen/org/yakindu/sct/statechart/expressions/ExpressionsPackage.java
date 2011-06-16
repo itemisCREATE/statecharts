@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
-
  */
 package org.yakindu.sct.statechart.expressions;
 
@@ -11,6 +10,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+
 import org.yakindu.model.sct.statechart.StatechartPackage;
 
 /**
@@ -856,6 +856,34 @@ public interface ExpressionsPackage extends EPackage
   int EVENT_RAISING_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 2;
 
   /**
+   * The meta object id for the '{@link org.yakindu.sct.statechart.expressions.impl.OperationCallStatementImpl <em>Operation Call Statement</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.yakindu.sct.statechart.expressions.impl.OperationCallStatementImpl
+   * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getOperationCallStatement()
+   * @generated
+   */
+  int OPERATION_CALL_STATEMENT = 28;
+
+  /**
+   * The feature id for the '<em><b>Call</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OPERATION_CALL_STATEMENT__CALL = STATEMENT_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Operation Call Statement</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OPERATION_CALL_STATEMENT_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 1;
+
+  /**
    * The meta object id for the '{@link org.yakindu.sct.statechart.expressions.impl.ExpressionImpl <em>Expression</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -863,7 +891,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getExpression()
    * @generated
    */
-  int EXPRESSION = 28;
+  int EXPRESSION = 29;
 
   /**
    * The number of structural features of the '<em>Expression</em>' class.
@@ -882,7 +910,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getSimpleScope()
    * @generated
    */
-  int SIMPLE_SCOPE = 29;
+  int SIMPLE_SCOPE = 30;
 
   /**
    * The feature id for the '<em><b>Declarations</b></em>' containment reference list.
@@ -928,7 +956,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getInterfaceScope()
    * @generated
    */
-  int INTERFACE_SCOPE = 30;
+  int INTERFACE_SCOPE = 31;
 
   /**
    * The feature id for the '<em><b>Declarations</b></em>' containment reference list.
@@ -983,7 +1011,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getInternalScope()
    * @generated
    */
-  int INTERNAL_SCOPE = 31;
+  int INTERNAL_SCOPE = 32;
 
   /**
    * The feature id for the '<em><b>Declarations</b></em>' containment reference list.
@@ -1029,7 +1057,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getEventDefinition()
    * @generated
    */
-  int EVENT_DEFINITION = 32;
+  int EVENT_DEFINITION = 33;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1084,7 +1112,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getVariableDefinition()
    * @generated
    */
-  int VARIABLE_DEFINITION = 33;
+  int VARIABLE_DEFINITION = 34;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1148,7 +1176,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getOperation()
    * @generated
    */
-  int OPERATION = 34;
+  int OPERATION = 35;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1194,7 +1222,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getEntrypoint()
    * @generated
    */
-  int ENTRYPOINT = 35;
+  int ENTRYPOINT = 36;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1222,7 +1250,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getExitpoint()
    * @generated
    */
-  int EXITPOINT = 36;
+  int EXITPOINT = 37;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1250,7 +1278,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getReactionTrigger()
    * @generated
    */
-  int REACTION_TRIGGER = 37;
+  int REACTION_TRIGGER = 38;
 
   /**
    * The feature id for the '<em><b>Triggers</b></em>' containment reference list.
@@ -1287,7 +1315,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getReactionEffect()
    * @generated
    */
-  int REACTION_EFFECT = 38;
+  int REACTION_EFFECT = 39;
 
   /**
    * The feature id for the '<em><b>Actions</b></em>' containment reference list.
@@ -1315,7 +1343,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getEnterEvent()
    * @generated
    */
-  int ENTER_EVENT = 39;
+  int ENTER_EVENT = 40;
 
   /**
    * The number of structural features of the '<em>Enter Event</em>' class.
@@ -1334,7 +1362,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getLogicalOrExpression()
    * @generated
    */
-  int LOGICAL_OR_EXPRESSION = 40;
+  int LOGICAL_OR_EXPRESSION = 41;
 
   /**
    * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -1371,7 +1399,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getLogicalAndExpression()
    * @generated
    */
-  int LOGICAL_AND_EXPRESSION = 41;
+  int LOGICAL_AND_EXPRESSION = 42;
 
   /**
    * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -1408,7 +1436,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getLogicalNotExpression()
    * @generated
    */
-  int LOGICAL_NOT_EXPRESSION = 42;
+  int LOGICAL_NOT_EXPRESSION = 43;
 
   /**
    * The feature id for the '<em><b>Operand</b></em>' containment reference.
@@ -1436,7 +1464,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getLogicalRelationExpression()
    * @generated
    */
-  int LOGICAL_RELATION_EXPRESSION = 43;
+  int LOGICAL_RELATION_EXPRESSION = 44;
 
   /**
    * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -1482,7 +1510,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getNumericalAddSubtractExpression()
    * @generated
    */
-  int NUMERICAL_ADD_SUBTRACT_EXPRESSION = 44;
+  int NUMERICAL_ADD_SUBTRACT_EXPRESSION = 45;
 
   /**
    * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -1528,7 +1556,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getNumericalMultiplyDivideExpression()
    * @generated
    */
-  int NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION = 45;
+  int NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION = 46;
 
   /**
    * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -1574,7 +1602,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getNumericalUnaryExpression()
    * @generated
    */
-  int NUMERICAL_UNARY_EXPRESSION = 46;
+  int NUMERICAL_UNARY_EXPRESSION = 47;
 
   /**
    * The feature id for the '<em><b>Operator</b></em>' attribute.
@@ -1611,7 +1639,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getPrimitiveValueExpression()
    * @generated
    */
-  int PRIMITIVE_VALUE_EXPRESSION = 47;
+  int PRIMITIVE_VALUE_EXPRESSION = 48;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1639,7 +1667,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getElementReferenceExpression()
    * @generated
    */
-  int ELEMENT_REFERENCE_EXPRESSION = 48;
+  int ELEMENT_REFERENCE_EXPRESSION = 49;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' reference.
@@ -1667,7 +1695,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getOperationCall()
    * @generated
    */
-  int OPERATION_CALL = 49;
+  int OPERATION_CALL = 50;
 
   /**
    * The feature id for the '<em><b>Operation</b></em>' reference.
@@ -1704,7 +1732,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getDirection()
    * @generated
    */
-  int DIRECTION = 50;
+  int DIRECTION = 51;
 
   /**
    * The meta object id for the '{@link org.yakindu.sct.statechart.expressions.AdditiveOperator <em>Additive Operator</em>}' enum.
@@ -1714,7 +1742,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getAdditiveOperator()
    * @generated
    */
-  int ADDITIVE_OPERATOR = 51;
+  int ADDITIVE_OPERATOR = 52;
 
   /**
    * The meta object id for the '{@link org.yakindu.sct.statechart.expressions.MultiplicativeOperator <em>Multiplicative Operator</em>}' enum.
@@ -1724,7 +1752,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getMultiplicativeOperator()
    * @generated
    */
-  int MULTIPLICATIVE_OPERATOR = 52;
+  int MULTIPLICATIVE_OPERATOR = 53;
 
   /**
    * The meta object id for the '{@link org.yakindu.sct.statechart.expressions.UnaryOperator <em>Unary Operator</em>}' enum.
@@ -1734,7 +1762,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getUnaryOperator()
    * @generated
    */
-  int UNARY_OPERATOR = 53;
+  int UNARY_OPERATOR = 54;
 
   /**
    * The meta object id for the '{@link org.yakindu.sct.statechart.expressions.RelationalOperator <em>Relational Operator</em>}' enum.
@@ -1744,7 +1772,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getRelationalOperator()
    * @generated
    */
-  int RELATIONAL_OPERATOR = 54;
+  int RELATIONAL_OPERATOR = 55;
 
   /**
    * The meta object id for the '{@link org.yakindu.sct.statechart.expressions.TimeUnit <em>Time Unit</em>}' enum.
@@ -1754,7 +1782,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getTimeUnit()
    * @generated
    */
-  int TIME_UNIT = 55;
+  int TIME_UNIT = 56;
 
   /**
    * The meta object id for the '{@link org.yakindu.sct.statechart.expressions.Type <em>Type</em>}' enum.
@@ -1764,7 +1792,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getType()
    * @generated
    */
-  int TYPE = 56;
+  int TYPE = 57;
 
 
   /**
@@ -2288,6 +2316,27 @@ public interface ExpressionsPackage extends EPackage
    * @generated
    */
   EReference getEventRaising_Value();
+
+  /**
+   * Returns the meta object for class '{@link org.yakindu.sct.statechart.expressions.OperationCallStatement <em>Operation Call Statement</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Operation Call Statement</em>'.
+   * @see org.yakindu.sct.statechart.expressions.OperationCallStatement
+   * @generated
+   */
+  EClass getOperationCallStatement();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.yakindu.sct.statechart.expressions.OperationCallStatement#getCall <em>Call</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Call</em>'.
+   * @see org.yakindu.sct.statechart.expressions.OperationCallStatement#getCall()
+   * @see #getOperationCallStatement()
+   * @generated
+   */
+  EReference getOperationCallStatement_Call();
 
   /**
    * Returns the meta object for class '{@link org.yakindu.sct.statechart.expressions.Expression <em>Expression</em>}'.
@@ -3420,6 +3469,24 @@ public interface ExpressionsPackage extends EPackage
      * @generated
      */
     EReference EVENT_RAISING__VALUE = eINSTANCE.getEventRaising_Value();
+
+    /**
+     * The meta object literal for the '{@link org.yakindu.sct.statechart.expressions.impl.OperationCallStatementImpl <em>Operation Call Statement</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.yakindu.sct.statechart.expressions.impl.OperationCallStatementImpl
+     * @see org.yakindu.sct.statechart.expressions.impl.ExpressionsPackageImpl#getOperationCallStatement()
+     * @generated
+     */
+    EClass OPERATION_CALL_STATEMENT = eINSTANCE.getOperationCallStatement();
+
+    /**
+     * The meta object literal for the '<em><b>Call</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference OPERATION_CALL_STATEMENT__CALL = eINSTANCE.getOperationCallStatement_Call();
 
     /**
      * The meta object literal for the '{@link org.yakindu.sct.statechart.expressions.impl.ExpressionImpl <em>Expression</em>}' class.
