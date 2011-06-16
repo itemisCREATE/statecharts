@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2010 committers of YAKINDU and others.
+ * Copyright (c) 2011 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -20,8 +20,8 @@ import org.eclipse.gef.Request;
 import org.eclipse.gef.tools.DirectEditManager;
 import org.eclipse.gmf.runtime.common.ui.services.parser.IParser;
 import org.eclipse.gmf.runtime.common.ui.services.parser.ParserOptions;
-import org.eclipse.gmf.runtime.diagram.ui.editparts.CompartmentEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ITextAwareEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.LabelEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.LabelDirectEditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.label.ILabelDelegate;
 import org.eclipse.gmf.runtime.diagram.ui.label.WrappingLabelDelegate;
@@ -37,17 +37,16 @@ import org.eclipse.swt.graphics.Color;
 import de.itemis.gmf.runtime.commons.parsers.AttributeParser;
 
 /**
- * This is a common abstract base class for all Label which are
+ * This is a common abstract base class for all {@link LabelEditPart} which are
  * {@link ITextAwareEditPart}.
  * 
- * * This edit part is only to be used for labels inside a figure! for external
- * labels, use {@link TextAwareExternalLabelEditPart}
- * 
+ * This edit part is only to be used for external labels, i.e. Connection
+ * labels. For Labels inside of a Figure use {@link TextAwareLabelEditPart}
  * 
  * @author andreas muelder
  * 
  */
-public abstract class TextAwareLabelEditPart extends CompartmentEditPart
+public abstract class TextAwareExternalLabelEditPart extends LabelEditPart
 		implements ITextAwareEditPart {
 
 	private final DirectEditManager manager;
@@ -56,7 +55,8 @@ public abstract class TextAwareLabelEditPart extends CompartmentEditPart
 
 	private final String pluginId;
 
-	public TextAwareLabelEditPart(View view, EAttribute feature, String pluginId) {
+	public TextAwareExternalLabelEditPart(View view, EAttribute feature,
+			String pluginId) {
 		super(view);
 		this.feature = feature;
 		this.pluginId = pluginId;
