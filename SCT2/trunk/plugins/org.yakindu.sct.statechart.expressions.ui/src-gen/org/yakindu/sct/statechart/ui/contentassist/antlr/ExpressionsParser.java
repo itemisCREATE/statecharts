@@ -4,17 +4,18 @@
 package org.yakindu.sct.statechart.ui.contentassist.antlr;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.HashMap;
 
 import org.antlr.runtime.RecognitionException;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.AbstractContentAssistParser;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.FollowElement;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
-import org.yakindu.sct.statechart.services.ExpressionsGrammarAccess;
 
 import com.google.inject.Inject;
+
+import org.yakindu.sct.statechart.services.ExpressionsGrammarAccess;
 
 public class ExpressionsParser extends AbstractContentAssistParser {
 	
@@ -167,6 +168,7 @@ public class ExpressionsParser extends AbstractContentAssistParser {
 					put(grammarAccess.getAssignmentAccess().getExpressionAssignment_2(), "rule__Assignment__ExpressionAssignment_2");
 					put(grammarAccess.getEventRaisingAccess().getEventAssignment_1(), "rule__EventRaising__EventAssignment_1");
 					put(grammarAccess.getEventRaisingAccess().getValueAssignment_2_1(), "rule__EventRaising__ValueAssignment_2_1");
+					put(grammarAccess.getOperationCallStatementAccess().getCallAssignment(), "rule__OperationCallStatement__CallAssignment");
 					put(grammarAccess.getLogicalOrExpressionAccess().getRightOperandAssignment_1_2(), "rule__LogicalOrExpression__RightOperandAssignment_1_2");
 					put(grammarAccess.getLogicalAndExpressionAccess().getRightOperandAssignment_1_2(), "rule__LogicalAndExpression__RightOperandAssignment_1_2");
 					put(grammarAccess.getLogicalNotExpressionAccess().getOperandAssignment_1_2(), "rule__LogicalNotExpression__OperandAssignment_1_2");

@@ -2,12 +2,13 @@
  * <copyright>
  * </copyright>
  *
-
  */
 package org.yakindu.sct.statechart.expressions.impl;
 
 import org.eclipse.emf.ecore.EClass;
+
 import org.yakindu.model.sct.statechart.impl.DeclarationImpl;
+
 import org.yakindu.sct.statechart.expressions.Entrypoint;
 import org.yakindu.sct.statechart.expressions.ExpressionsPackage;
 

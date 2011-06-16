@@ -2180,6 +2180,16 @@ ruleStatement returns [EObject current=null]
         $current = $this_EventRaising_1.current; 
         afterParserOrEnumRuleCall();
     }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getStatementAccess().getOperationCallStatementParserRuleCall_2()); 
+    }
+    this_OperationCallStatement_2=ruleOperationCallStatement
+    { 
+        $current = $this_OperationCallStatement_2.current; 
+        afterParserOrEnumRuleCall();
+    }
 )
 ;
 
@@ -2297,6 +2307,45 @@ ruleEventRaising returns [EObject current=null]
 
 )
 ))?)
+;
+
+
+
+
+
+// Entry rule entryRuleOperationCallStatement
+entryRuleOperationCallStatement returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getOperationCallStatementRule()); }
+	 iv_ruleOperationCallStatement=ruleOperationCallStatement 
+	 { $current=$iv_ruleOperationCallStatement.current; } 
+	 EOF 
+;
+
+// Rule OperationCallStatement
+ruleOperationCallStatement returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getOperationCallStatementAccess().getCallOperationCallParserRuleCall_0()); 
+	    }
+		lv_call_0_0=ruleOperationCall		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getOperationCallStatementRule());
+	        }
+       		set(
+       			$current, 
+       			"call",
+        		lv_call_0_0, 
+        		"OperationCall");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)
 ;
 
 
@@ -2838,7 +2887,17 @@ rulePrimaryExpression returns [EObject current=null]
     {
     	newLeafNode(otherlv_3, grammarAccess.getPrimaryExpressionAccess().getRightParenthesisKeyword_1_2());
     }
-))
+)
+    |
+    { 
+        newCompositeNode(grammarAccess.getPrimaryExpressionAccess().getOperationCallParserRuleCall_2()); 
+    }
+    this_OperationCall_4=ruleOperationCall
+    { 
+        $current = $this_OperationCall_4.current; 
+        afterParserOrEnumRuleCall();
+    }
+)
 ;
 
 
@@ -2876,16 +2935,6 @@ ruleValueExpression returns [EObject current=null]
     this_ElementReferenceExpression_1=ruleElementReferenceExpression
     { 
         $current = $this_ElementReferenceExpression_1.current; 
-        afterParserOrEnumRuleCall();
-    }
-
-    |
-    { 
-        newCompositeNode(grammarAccess.getValueExpressionAccess().getOperationCallParserRuleCall_2()); 
-    }
-    this_OperationCall_2=ruleOperationCall
-    { 
-        $current = $this_OperationCall_2.current; 
         afterParserOrEnumRuleCall();
     }
 )

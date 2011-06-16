@@ -2,13 +2,14 @@
  * <copyright>
  * </copyright>
  *
-
  */
 package org.yakindu.sct.statechart.expressions.util;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+
 import org.eclipse.emf.ecore.util.Switch;
+
 import org.yakindu.model.sct.statechart.Declaration;
 import org.yakindu.model.sct.statechart.Effect;
 import org.yakindu.model.sct.statechart.Event;
@@ -16,57 +17,8 @@ import org.yakindu.model.sct.statechart.NamedElement;
 import org.yakindu.model.sct.statechart.Scope;
 import org.yakindu.model.sct.statechart.Trigger;
 import org.yakindu.model.sct.statechart.Variable;
-import org.yakindu.sct.statechart.expressions.AlwaysEvent;
-import org.yakindu.sct.statechart.expressions.Assignment;
-import org.yakindu.sct.statechart.expressions.BuiltinEventSpec;
-import org.yakindu.sct.statechart.expressions.DefRoot;
-import org.yakindu.sct.statechart.expressions.ElementReferenceExpression;
-import org.yakindu.sct.statechart.expressions.EnterEvent;
-import org.yakindu.sct.statechart.expressions.EntryEvent;
-import org.yakindu.sct.statechart.expressions.EntryPointSpec;
-import org.yakindu.sct.statechart.expressions.Entrypoint;
-import org.yakindu.sct.statechart.expressions.EventDefinition;
-import org.yakindu.sct.statechart.expressions.EventDerivation;
-import org.yakindu.sct.statechart.expressions.EventRaising;
-import org.yakindu.sct.statechart.expressions.EventSpec;
-import org.yakindu.sct.statechart.expressions.ExitEvent;
-import org.yakindu.sct.statechart.expressions.ExitPointSpec;
-import org.yakindu.sct.statechart.expressions.Exitpoint;
-import org.yakindu.sct.statechart.expressions.Expression;
-import org.yakindu.sct.statechart.expressions.ExpressionsPackage;
-import org.yakindu.sct.statechart.expressions.InterfaceScope;
-import org.yakindu.sct.statechart.expressions.InternalScope;
-import org.yakindu.sct.statechart.expressions.LocalReaction;
-import org.yakindu.sct.statechart.expressions.LogicalAndExpression;
-import org.yakindu.sct.statechart.expressions.LogicalNotExpression;
-import org.yakindu.sct.statechart.expressions.LogicalOrExpression;
-import org.yakindu.sct.statechart.expressions.LogicalRelationExpression;
-import org.yakindu.sct.statechart.expressions.NumericalAddSubtractExpression;
-import org.yakindu.sct.statechart.expressions.NumericalMultiplyDivideExpression;
-import org.yakindu.sct.statechart.expressions.NumericalUnaryExpression;
-import org.yakindu.sct.statechart.expressions.OnCycleEvent;
-import org.yakindu.sct.statechart.expressions.Operation;
-import org.yakindu.sct.statechart.expressions.OperationCall;
-import org.yakindu.sct.statechart.expressions.PrimitiveValueExpression;
-import org.yakindu.sct.statechart.expressions.Reaction;
-import org.yakindu.sct.statechart.expressions.ReactionEffect;
-import org.yakindu.sct.statechart.expressions.ReactionPriority;
-import org.yakindu.sct.statechart.expressions.ReactionProperties;
-import org.yakindu.sct.statechart.expressions.ReactionProperty;
-import org.yakindu.sct.statechart.expressions.ReactionTrigger;
-import org.yakindu.sct.statechart.expressions.RegularEventSpec;
-import org.yakindu.sct.statechart.expressions.Root;
-import org.yakindu.sct.statechart.expressions.SimpleScope;
-import org.yakindu.sct.statechart.expressions.StateDeclaration;
-import org.yakindu.sct.statechart.expressions.StateRoot;
-import org.yakindu.sct.statechart.expressions.StatechartDefinition;
-import org.yakindu.sct.statechart.expressions.StatechartRoot;
-import org.yakindu.sct.statechart.expressions.Statement;
-import org.yakindu.sct.statechart.expressions.TimeEventSpec;
-import org.yakindu.sct.statechart.expressions.TransitionReaction;
-import org.yakindu.sct.statechart.expressions.TransitionRoot;
-import org.yakindu.sct.statechart.expressions.TransitionStatement;
-import org.yakindu.sct.statechart.expressions.VariableDefinition;
+
+import org.yakindu.sct.statechart.expressions.*;
 
 /**
  * <!-- begin-user-doc -->
@@ -348,6 +300,14 @@ public class ExpressionsSwitch<T> extends Switch<T>
         EventRaising eventRaising = (EventRaising)theEObject;
         T result = caseEventRaising(eventRaising);
         if (result == null) result = caseStatement(eventRaising);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ExpressionsPackage.OPERATION_CALL_STATEMENT:
+      {
+        OperationCallStatement operationCallStatement = (OperationCallStatement)theEObject;
+        T result = caseOperationCallStatement(operationCallStatement);
+        if (result == null) result = caseStatement(operationCallStatement);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -983,6 +943,22 @@ public class ExpressionsSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseEventRaising(EventRaising object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Operation Call Statement</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Operation Call Statement</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseOperationCallStatement(OperationCallStatement object)
   {
     return null;
   }

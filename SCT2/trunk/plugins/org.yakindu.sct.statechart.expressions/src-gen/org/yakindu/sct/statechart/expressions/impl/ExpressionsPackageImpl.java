@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
-
  */
 package org.yakindu.sct.statechart.expressions.impl;
 
@@ -11,8 +10,11 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+
 import org.yakindu.model.sct.statechart.StatechartPackage;
+
 import org.yakindu.sct.statechart.expressions.AdditiveOperator;
 import org.yakindu.sct.statechart.expressions.AlwaysEvent;
 import org.yakindu.sct.statechart.expressions.Assignment;
@@ -48,6 +50,7 @@ import org.yakindu.sct.statechart.expressions.NumericalUnaryExpression;
 import org.yakindu.sct.statechart.expressions.OnCycleEvent;
 import org.yakindu.sct.statechart.expressions.Operation;
 import org.yakindu.sct.statechart.expressions.OperationCall;
+import org.yakindu.sct.statechart.expressions.OperationCallStatement;
 import org.yakindu.sct.statechart.expressions.PrimitiveValueExpression;
 import org.yakindu.sct.statechart.expressions.Reaction;
 import org.yakindu.sct.statechart.expressions.ReactionEffect;
@@ -276,6 +279,13 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
    * @generated
    */
   private EClass eventRaisingEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass operationCallStatementEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -1051,6 +1061,26 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getOperationCallStatement()
+  {
+    return operationCallStatementEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getOperationCallStatement_Call()
+  {
+    return (EReference)operationCallStatementEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getExpression()
   {
     return expressionEClass;
@@ -1774,6 +1804,9 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
     createEReference(eventRaisingEClass, EVENT_RAISING__EVENT);
     createEReference(eventRaisingEClass, EVENT_RAISING__VALUE);
 
+    operationCallStatementEClass = createEClass(OPERATION_CALL_STATEMENT);
+    createEReference(operationCallStatementEClass, OPERATION_CALL_STATEMENT__CALL);
+
     expressionEClass = createEClass(EXPRESSION);
 
     simpleScopeEClass = createEClass(SIMPLE_SCOPE);
@@ -1912,6 +1945,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
     alwaysEventEClass.getESuperTypes().add(this.getBuiltinEventSpec());
     assignmentEClass.getESuperTypes().add(this.getStatement());
     eventRaisingEClass.getESuperTypes().add(this.getStatement());
+    operationCallStatementEClass.getESuperTypes().add(this.getStatement());
     simpleScopeEClass.getESuperTypes().add(theStatechartPackage.getScope());
     interfaceScopeEClass.getESuperTypes().add(theStatechartPackage.getScope());
     internalScopeEClass.getESuperTypes().add(theStatechartPackage.getScope());
@@ -2012,6 +2046,9 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
     initEClass(eventRaisingEClass, EventRaising.class, "EventRaising", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEventRaising_Event(), theStatechartPackage.getEvent(), null, "event", null, 0, 1, EventRaising.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEventRaising_Value(), this.getExpression(), null, "value", null, 0, 1, EventRaising.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(operationCallStatementEClass, OperationCallStatement.class, "OperationCallStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getOperationCallStatement_Call(), this.getExpression(), null, "call", null, 0, 1, OperationCallStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(expressionEClass, Expression.class, "Expression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

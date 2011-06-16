@@ -148,12 +148,13 @@ ExitEvent:
 
 OnCycleEvent:
 	{OnCycleEvent} 'oncycle'; // TODO: ?!? better 'ontick' ?!?
+	
 AlwaysEvent:
 	{AlwaysEvent} 'always';
 
 /* --- statements --- */
 Statement:
-	Assignment | EventRaising;
+	Assignment | EventRaising | OperationCallStatement;
 
 Assignment:
 	varRef=[sct::Variable] "=" expression=Expression;
@@ -161,11 +162,9 @@ Assignment:
 EventRaising:
 	'raise' event=[sct::Event] (':' value=Expression)?;
 
-	// variable assignment
+OperationCallStatement:
+	call=OperationCall;
 
-// raise events
-
-// operation call
 
 
 //****************
@@ -210,7 +209,8 @@ NumericalUnaryExpression returns Expression:
 	operator=UnaryOperator operand=PrimaryExpression;
 
 PrimaryExpression returns Expression:
-	ValueExpression | '(' Expression ')';
+	ValueExpression | '(' Expression ')' | OperationCall ;
+	
 
 enum AdditiveOperator:
 	plus='+' | minus='-';
@@ -234,7 +234,7 @@ enum Type:
 	void | integer | real | boolean | string;
 
 ValueExpression returns Expression:
-	PrimitiveValueExpression | ElementReferenceExpression | OperationCall;
+	PrimitiveValueExpression | ElementReferenceExpression;
 
 PrimitiveValueExpression returns Expression:
 	{PrimitiveValueExpression} value=Literal;
