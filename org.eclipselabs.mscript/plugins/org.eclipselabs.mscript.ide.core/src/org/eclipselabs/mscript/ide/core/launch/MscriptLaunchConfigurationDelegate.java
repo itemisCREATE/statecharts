@@ -114,6 +114,7 @@ public class MscriptLaunchConfigurationDelegate extends AbstractMscriptLaunchCon
 									+ inputFile.getName() + "'"));
 						}
 					}
+					++i;
 				}
 			}
 		} catch (IOException e) {
