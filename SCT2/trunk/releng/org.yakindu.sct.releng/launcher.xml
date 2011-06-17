@@ -85,10 +85,6 @@
 			</then>
 		</if>
 
-		<echo message="Cleaning up report directory ${reportDirectory}" />
-		<delete dir="${reportDirectory}" />
-		<mkdir dir="${reportDirectory}" />
-
 		<echo message="Preparing Launcher and Provisioner" />
 		<antcall target="prepareLauncherAndProvisionerDirectory" />
 
