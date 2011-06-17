@@ -19,8 +19,7 @@
 	</target>
 
 	<target name="push_merged_repo">
-		<!--<scp todir="${local.update.site}" keyfile="${yakindu.keyFile}" failonerror="${scp.fail_on_error}" passphrase="${yakindu.passphrase}" trust="true" file="${update.site.scp}" sftp="true">
-		</scp>-->
+		<scp file="${local.update.site}" keyfile="${yakindu.keyFile}" failonerror="${scp.fail_on_error}" passphrase="${yakindu.passphrase}" trust="true" toDir="${update.site.scp}" sftp="true" />
 	</target>
 
 	<target name="promote">
