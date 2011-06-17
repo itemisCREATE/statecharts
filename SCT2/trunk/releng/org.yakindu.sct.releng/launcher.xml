@@ -88,7 +88,7 @@
 		<echo message="Preparing Launcher and Provisioner" />
 		<antcall target="prepareLauncherAndProvisionerDirectory" />
 
-		<echo message="Starting PDE build with launcher: ${launcherLocation}" />
+		<echo message="Starting build with launcher: ${launcherLocation}" />
 		<java classname="org.eclipse.equinox.launcher.Main" fork="true" failonerror="true">
 			<arg value="-application" />
 			<arg value="org.eclipse.ant.core.antRunner" />
