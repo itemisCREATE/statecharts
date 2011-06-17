@@ -5,18 +5,8 @@
 
 	<property environment="env" />
 	<property file="run.properties" />
-	
-	<!-- define build file to use (may be run.xml or promote.xml) -->
-	<if>
-		<isset property="env.buildFile"/>
-		<then>
-			<property name="buildFile" value="${env.buildFile}" />
-		</then>
-		<else>
-			<property name="buildFile" value="run.xml" />
-		</else>
-	</if>
-	
+	<property name="buildFile" value="run.xml" />
+
 
 	<target name="prepareLauncherAndProvisionerDirectory">
 		<if>
