@@ -5,10 +5,13 @@ import org.eclipse.swt.SWT;
 import com.google.inject.Injector;
 
 /**
- * @author muelder
+ * @author andreas muelder
  * 
  */
 public interface IExpressionsProvider extends ISCTProvider {
+
+	String EXPRESSIONS_EXTENSION = "org.yakindu.sct.statechart.diagram.expressions";
+
 	/**
 	 * 
 	 * @return the Injector
