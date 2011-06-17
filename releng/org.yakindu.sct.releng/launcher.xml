@@ -5,8 +5,6 @@
 
 	<property environment="env" />
 	<property file="run.properties" />
-	<property file="buildConfiguration/build.properties" />
-	<property file="testConfiguration/test.properties" />
 
 	<target name="prepareLauncherAndProvisionerDirectory">
 		<if>
