@@ -29,7 +29,7 @@
 		<echo message="Fetching existing update-site from ${env.promotionTarget} to local update site ..." />
 		<antcall target="fetch_old_repo" />
 
-		<echo message="Merging {env.promotionTarget} into local upate site ..." />
+		<echo message="Merging ${env.promotionTarget} into local upate site ..." />
 		<antcall target="merge" />
 
 		<echo message="Promoting merged local update site to ${env.promotionTarget}" />
