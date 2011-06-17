@@ -5,6 +5,18 @@
 
 	<property environment="env" />
 	<property file="run.properties" />
+	
+	<!-- define build file to use (may be run.xml or promote.xml) -->
+	<if>
+		<isset property="env.buildFile"/>
+		<then>
+			<property name="buildFile" value="${env.buildFile}" />
+		</then>
+		<else>
+			<property name="buildFile" value="run.xml" />
+		</else>
+	</if>
+	
 
 	<target name="prepareLauncherAndProvisionerDirectory">
 		<if>
@@ -103,7 +115,7 @@
 			<arg value="-data" />
 			<arg value="${launcherWorkspace}" />
 			<arg value="-buildfile" />
-			<arg value="run.xml" />
+			<arg value="${buildFile}" />
 			<classpath>
 				<fileset dir="${launcherLocation}/plugins">
 					<include name="org.eclipse.equinox.launcher_*.jar" />

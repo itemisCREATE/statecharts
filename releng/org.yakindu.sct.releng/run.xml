@@ -77,8 +77,8 @@
 			<fileset dir="${buildWorkspace}/svn_repository/plugins" />
 		</copy>
 		<copy todir="${buildDirectory}/plugins">
-					<fileset dir="${buildWorkspace}/gmf_utils_repository/plugins" />
-				</copy>
+			<fileset dir="${buildWorkspace}/gmf_utils_repository/plugins" />
+		</copy>
 	</target>
 
 	<target name="prepareFeatures">
