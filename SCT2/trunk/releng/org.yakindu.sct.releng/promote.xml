@@ -11,15 +11,17 @@
 	</target>
 	
 	<target name="mirror" >
-		<echo message="Mirroring update site from ${promotionTarget}" />
+		<echo message="Mirroring update site from ${env.promotionSource} tp" />
 	</target>
 
 	<target name="promote">
-		<echo message="Fetch to local update site ..." />
+		<echo message="Fetching existing update-site from ${env.promotionTarget} to local update site ..." />
 		<antcall target="fetch_old_repo"/>
 	
-	    <echo message="Mirror promoted update site into local upate site ..." />
+	    <echo message="Mirroring ${env.promotionTarget} into local upate site ..." />
 		<antcall target="mirror"/>
+		
+		<echo message="Promoting merged local update site to ${env.promotionTarget}" />
 	</target>
 
 </project>
