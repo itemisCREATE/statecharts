@@ -7,7 +7,6 @@
 	<property file="run.properties" />
 	<property name="buildFile" value="run.xml" />
 
-
 	<target name="prepareLauncherAndProvisionerDirectory">
 		<if>
 			<not>
