@@ -13,6 +13,7 @@
 		<p2.mirror>
 			<repository location="file:${local.update.site}" name="Yakindu SCT 2 upate-site" />
 			<source>
+				<repository location="${env.promotionSource}artifact/repoBase/xtext_utils_repository/" />
 				<repository location="${env.promotionSource}artifact/buildDirectory/build_local_repository/" />
 			</source>
 		</p2.mirror>
