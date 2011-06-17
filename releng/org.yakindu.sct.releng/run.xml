@@ -112,6 +112,10 @@
 		<antcall target="prepareBuildDirectory" />
 
 		<echo message="Using buildWorspace ${buildWorkspace}" />
+		
+		<echo message="Cleaning up report directory ${reportDirectory}" />
+				<delete dir="${reportDirectory}" />
+				<mkdir dir="${reportDirectory}" />
 
 		<ant antfile="build.xml" dir="build" target="all" inheritall="true">
 			<property name="builder" value="${basedir}/build" />
