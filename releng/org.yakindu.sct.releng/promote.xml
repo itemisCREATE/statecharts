@@ -10,11 +10,11 @@
 		</scp>
 	</target>
 
-	<target name="merge">
+	<target name="merge_repos">
 		<p2.mirror>
 			<repository location="file:/${local.update.site}" name="Yakindu SCT 2 upate-site" />
 			<source>
-				<repository location="file:/${env.promotionSource}/artifact/buildDirectory/build_local_repository/" />
+				<repository location="${env.promotionSource}/artifact/buildDirectory/build_local_repository/" />
 			</source>
 		</p2.mirror>
 	</target>
@@ -29,7 +29,7 @@
 		<antcall target="fetch_old_repo" />
 
 		<echo message="Merging ${env.promotionTarget} into local upate site ..." />
-		<antcall target="merge" />
+		<antcall target="merge_repos" />
 
 		<echo message="Promoting merged local update site to ${env.promotionTarget}" />
 		<antcall target="push_merged_repo" />
