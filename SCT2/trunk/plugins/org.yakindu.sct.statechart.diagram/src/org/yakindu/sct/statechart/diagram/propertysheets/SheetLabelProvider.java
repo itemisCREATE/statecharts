@@ -24,7 +24,7 @@ import org.yakindu.sct.statechart.diagram.DiagramActivator;
 
 /**
  * 
- * @author muelder
+ * @author andreas muelder
  * 
  */
 public class SheetLabelProvider extends BaseLabelProvider implements

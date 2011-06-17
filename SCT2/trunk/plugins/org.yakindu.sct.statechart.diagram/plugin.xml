@@ -358,13 +358,28 @@
    
    <extension point="org.eclipse.ui.views.properties.tabbed.propertySections" id="propsections">
       <propertySections contributorId="org.yakindu.sct.statechart.diagram.StatechartDiagramEditor">
+		<!-- State model section -->         
          <propertySection
-            id="property.section.domain" 
+            id="property.section.domain.state" 
             tab="property.tab.domain"
-            class="org.yakindu.sct.statechart.diagram.propertysheets.DiagramPropertySection">
-            <input type="org.eclipse.gmf.runtime.notation.View"/>
-            <input type="org.eclipse.gef.EditPart"/>
+            class="org.yakindu.sct.statechart.diagram.propertysheets.StatePropertySection">
+            <input type="org.yakindu.sct.statechart.diagram.editparts.StateEditPart"/>
          </propertySection>
+        <!-- Statechart model section -->         
+         <propertySection
+            id="property.section.domain.statechart" 
+            tab="property.tab.domain"
+            class="org.yakindu.sct.statechart.diagram.propertysheets.StatechartPropertySection">
+            <input type="org.yakindu.sct.statechart.diagram.editparts.StatechartTextEditPart"/>
+         </propertySection>
+        <!-- Transition model section -->         
+         <propertySection
+            id="property.section.domain.transition" 
+            tab="property.tab.domain"
+            class="org.yakindu.sct.statechart.diagram.propertysheets.TransitionPropertySection">
+            <input type="org.yakindu.sct.statechart.diagram.editparts.TransitionEditPart"/>
+         </propertySection>
+         
          <propertySection id="property.section.ConnectorAppearancePropertySection" 
             filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.ConnectionEditPartPropertySectionFilter" 
             class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.appearance.ConnectionAppearancePropertySection" 
