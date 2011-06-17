@@ -11,13 +11,12 @@
 	</target>
 
 	<target name="merge">
-		<p2.composite.repository>
+		<p2.mirror>
 			<repository location="file:/${local.update.site}" name="Yakindu SCT 2 upate-site" />
-			<add>
-				<repository location="${env.promotionSource}/artifact/buildDirectory/build_local_repository/" kind="M" />
-				<repository location="${env.promotionSource}/artifact/buildDirectory/build_local_repository/" kind="A" />
-			</add>
-		</p2.composite.repository>
+			<source>
+				<repository location="${env.promotionSource}/artifact/buildDirectory/build_local_repository/" />
+			</source>
+		</p2.mirror>
 	</target>
 
 	<target name="push_merged_repo">
