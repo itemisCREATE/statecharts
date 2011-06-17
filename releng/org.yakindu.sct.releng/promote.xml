@@ -9,19 +9,31 @@
 		<scp todir="${local.update.site}" keyfile="${yakindu.keyFile}" failonerror="${scp.fail_on_error}" passphrase="${yakindu.passphrase}" trust="true" file="${update.site.scp}" sftp="true">
 		</scp>
 	</target>
-	
-	<target name="mirror" >
-		<echo message="Mirroring update site from ${env.promotionSource} tp" />
+
+	<target name="merge">
+		<p2.composite.repository>
+			<repository location="file:/${local.update.site}" name="Yakindu SCT 2 upate-site" />
+			<add>
+				<repository location="${env.promotionSource}/artifact/buildDirectory/build_local_repository/" kind="M" />
+				<repository location="${env.promotionSource}/artifact/buildDirectory/build_local_repository/" kind="A" />
+			</add>
+		</p2.composite.repository>
+	</target>
+
+	<target name="push_merged_repo">
+		<!--<scp todir="${local.update.site}" keyfile="${yakindu.keyFile}" failonerror="${scp.fail_on_error}" passphrase="${yakindu.passphrase}" trust="true" file="${update.site.scp}" sftp="true">
+		</scp>-->
 	</target>
 
 	<target name="promote">
 		<echo message="Fetching existing update-site from ${env.promotionTarget} to local update site ..." />
-		<antcall target="fetch_old_repo"/>
-	
-	    <echo message="Mirroring ${env.promotionTarget} into local upate site ..." />
-		<antcall target="mirror"/>
-		
+		<antcall target="fetch_old_repo" />
+
+		<echo message="Merging {env.promotionTarget} into local upate site ..." />
+		<antcall target="merge" />
+
 		<echo message="Promoting merged local update site to ${env.promotionTarget}" />
+		<antcall target="push_merged_repo" />
 	</target>
 
 </project>
