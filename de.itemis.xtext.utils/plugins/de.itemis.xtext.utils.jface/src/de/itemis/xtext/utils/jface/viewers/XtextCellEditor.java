@@ -13,9 +13,11 @@ package de.itemis.xtext.utils.jface.viewers;
 
 import java.util.List;
 
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.text.IDocumentPartitioner;
 import org.eclipse.jface.text.source.AnnotationModel;
@@ -48,7 +50,6 @@ import org.eclipse.ui.texteditor.SourceViewerDecorationSupport;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.XtextSourceViewer;
 import org.eclipse.xtext.ui.editor.XtextSourceViewer.Factory;
@@ -59,6 +60,7 @@ import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider;
 import org.eclipse.xtext.ui.editor.validation.AnnotationIssueProcessor;
 import org.eclipse.xtext.ui.editor.validation.ValidationJob;
+import org.eclipse.xtext.ui.resource.XtextResourceSetProvider;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
@@ -137,6 +139,8 @@ public class XtextCellEditor extends StyledTextCellEditor {
 	String fileExtension;
 	@Inject
 	private XtextDocument document;
+	@Inject
+	private Provider<XtextResourceSetProvider> resourceSetProvider;
 
 	private Resource context;
 
@@ -159,7 +163,7 @@ public class XtextCellEditor extends StyledTextCellEditor {
 				null, false, getStyle());
 		sourceviewer.configure(configuration);
 
-		createResourceSet();
+		initResourceSet();
 
 		setResourceUri(resource);
 
@@ -193,8 +197,33 @@ public class XtextCellEditor extends StyledTextCellEditor {
 		return text;
 	}
 
-	private XtextResourceSet createResourceSet() {
-		XtextResourceSet resourceSet = new XtextResourceSet();
+	private IProject activeProject;
+
+	protected IProject getActiveProject() {
+		if (activeProject == null) {
+			Display.getDefault().syncExec(new Runnable() {
+				public void run() {
+					IWorkbenchWindow activeWorkbenchWindow = PlatformUI
+							.getWorkbench().getActiveWorkbenchWindow();
+					IWorkbenchPage activePage = activeWorkbenchWindow
+							.getActivePage();
+					if (activePage != null) {
+						IEditorInput editorInput = activePage.getActiveEditor()
+								.getEditorInput();
+						if (editorInput instanceof IFileEditorInput) {
+							IFileEditorInput input = (IFileEditorInput) editorInput;
+							activeProject = input.getFile().getProject();
+						}
+					}
+				}
+			});
+		}
+		return activeProject;
+	}
+
+	private ResourceSet initResourceSet() {
+		ResourceSet resourceSet = resourceSetProvider.get().get(
+				getActiveProject());
 		resourceSet.getResources().add(resource);
 		if (context != null) {
 			Resource contextResource = resourceSet.createResource(context
@@ -263,28 +292,13 @@ public class XtextCellEditor extends StyledTextCellEditor {
 	 * @param resource
 	 */
 	protected void setResourceUri(final XtextResource resource) {
-		// TODO: This should be moved outside the CellEditor
-		// TODO: Remove dependency to IFileEditorInput
-		Display.getDefault().syncExec(new Runnable() {
-
-			public void run() {
-				IWorkbenchWindow activeWorkbenchWindow = PlatformUI
-						.getWorkbench().getActiveWorkbenchWindow();
-				IWorkbenchPage activePage = activeWorkbenchWindow
-						.getActivePage();
-				if (activePage != null) {
-					IEditorInput editorInput = activePage.getActiveEditor()
-							.getEditorInput();
-					if (editorInput instanceof IFileEditorInput) {
-						IFileEditorInput input = (IFileEditorInput) editorInput;
-						String activeProject = input.getFile().getProject()
-								.getName();
-						resource.setURI(URI.createURI("platform:/resource/"
-								+ activeProject + "/embedded." + fileExtension));
-					}
-				}
-			}
-		});
+		if (context != null) {
+			resource.setURI(context.getURI());
+		} else {
+			String activeProject = getActiveProject().getName();
+			resource.setURI(URI.createURI("platform:/resource/" + activeProject
+					+ "/embedded." + fileExtension));
+		}
 	}
 
 	public IParseResult getParseResult() {
