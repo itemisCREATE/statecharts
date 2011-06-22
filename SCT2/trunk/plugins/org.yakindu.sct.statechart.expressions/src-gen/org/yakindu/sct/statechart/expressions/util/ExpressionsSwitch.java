@@ -2,6 +2,7 @@
  * <copyright>
  * </copyright>
  *
+
  */
 package org.yakindu.sct.statechart.expressions.util;
 
@@ -359,6 +360,15 @@ public class ExpressionsSwitch<T> extends Switch<T>
         if (result == null) result = caseVariable(variableDefinition);
         if (result == null) result = caseDeclaration(variableDefinition);
         if (result == null) result = caseNamedElement(variableDefinition);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ExpressionsPackage.CLOCK:
+      {
+        Clock clock = (Clock)theEObject;
+        T result = caseClock(clock);
+        if (result == null) result = caseDeclaration(clock);
+        if (result == null) result = caseNamedElement(clock);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -1055,6 +1065,22 @@ public class ExpressionsSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseVariableDefinition(VariableDefinition object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Clock</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Clock</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseClock(Clock object)
   {
     return null;
   }

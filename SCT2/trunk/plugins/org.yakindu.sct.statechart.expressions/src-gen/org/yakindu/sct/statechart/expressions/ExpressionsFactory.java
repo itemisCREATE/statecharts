@@ -2,6 +2,7 @@
  * <copyright>
  * </copyright>
  *
+
  */
 package org.yakindu.sct.statechart.expressions;
 
@@ -339,6 +340,15 @@ public interface ExpressionsFactory extends EFactory
    * @generated
    */
   VariableDefinition createVariableDefinition();
+
+  /**
+   * Returns a new object of class '<em>Clock</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Clock</em>'.
+   * @generated
+   */
+  Clock createClock();
 
   /**
    * Returns a new object of class '<em>Operation</em>'.

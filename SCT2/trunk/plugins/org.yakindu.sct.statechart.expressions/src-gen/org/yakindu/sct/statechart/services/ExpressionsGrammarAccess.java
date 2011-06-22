@@ -549,25 +549,29 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 	public class ClockElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Clock");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cClockKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Action cClockAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cClockKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		
 		/// * ---- clock definition ---- * / Clock returns sct::Declaration:
-		//	"clock" name=ID;
+		//	{Clock} "clock" name=ID;
 		public ParserRule getRule() { return rule; }
 
-		//"clock" name=ID
+		//{Clock} "clock" name=ID
 		public Group getGroup() { return cGroup; }
 
+		//{Clock}
+		public Action getClockAction_0() { return cClockAction_0; }
+
 		//"clock"
-		public Keyword getClockKeyword_0() { return cClockKeyword_0; }
+		public Keyword getClockKeyword_1() { return cClockKeyword_1; }
 
 		//name=ID
-		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
 
 		//ID
-		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 	}
 
 	public class OperationElements extends AbstractParserRuleElementFinder {
@@ -1363,7 +1367,6 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Expression");
 		private final RuleCall cLogicalOrExpressionParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
-		//// operation call
 		//// ****************
 		//// Expression Grammar
 		//// ****************
@@ -2412,7 +2415,7 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	/// * ---- clock definition ---- * / Clock returns sct::Declaration:
-	//	"clock" name=ID;
+	//	{Clock} "clock" name=ID;
 	public ClockElements getClockAccess() {
 		return (pClock != null) ? pClock : (pClock = new ClockElements());
 	}
@@ -2676,7 +2679,6 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 		return getOperationCallStatementAccess().getRule();
 	}
 
-	//// operation call
 	//// ****************
 	//// Expression Grammar
 	//// ****************

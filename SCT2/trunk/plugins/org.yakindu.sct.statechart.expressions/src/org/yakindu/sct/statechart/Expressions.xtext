@@ -78,7 +78,7 @@ VariableDefinition returns sct::Variable:
 
 /* ---- clock definition ---- */
 Clock returns sct::Declaration:
-	'clock' name=ID;
+	{Clock}'clock' name=ID;
 
 /* ---- clock definition ---- */
 Operation returns sct::Declaration:

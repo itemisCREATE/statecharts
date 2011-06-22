@@ -3641,11 +3641,11 @@ rule__Clock__Group__0__Impl
     }
 :
 (
-{ before(grammarAccess.getClockAccess().getClockKeyword_0()); }
+{ before(grammarAccess.getClockAccess().getClockAction_0()); }
+(
 
-	'clock' 
-
-{ after(grammarAccess.getClockAccess().getClockKeyword_0()); }
+)
+{ after(grammarAccess.getClockAccess().getClockAction_0()); }
 )
 
 ;
@@ -3660,6 +3660,7 @@ rule__Clock__Group__1
     }
 :
 	rule__Clock__Group__1__Impl
+	rule__Clock__Group__2
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -3671,15 +3672,47 @@ rule__Clock__Group__1__Impl
     }
 :
 (
-{ before(grammarAccess.getClockAccess().getNameAssignment_1()); }
-(rule__Clock__NameAssignment_1)
-{ after(grammarAccess.getClockAccess().getNameAssignment_1()); }
+{ before(grammarAccess.getClockAccess().getClockKeyword_1()); }
+
+	'clock' 
+
+{ after(grammarAccess.getClockAccess().getClockKeyword_1()); }
 )
 
 ;
 finally {
 	restoreStackSize(stackSize);
 }
+
+
+rule__Clock__Group__2
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__Clock__Group__2__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__Clock__Group__2__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getClockAccess().getNameAssignment_2()); }
+(rule__Clock__NameAssignment_2)
+{ after(grammarAccess.getClockAccess().getNameAssignment_2()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
 
 
 
@@ -7902,14 +7935,14 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__Clock__NameAssignment_1
+rule__Clock__NameAssignment_2
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getClockAccess().getNameIDTerminalRuleCall_1_0()); }
-	RULE_ID{ after(grammarAccess.getClockAccess().getNameIDTerminalRuleCall_1_0()); }
+{ before(grammarAccess.getClockAccess().getNameIDTerminalRuleCall_2_0()); }
+	RULE_ID{ after(grammarAccess.getClockAccess().getNameIDTerminalRuleCall_2_0()); }
 )
 
 ;

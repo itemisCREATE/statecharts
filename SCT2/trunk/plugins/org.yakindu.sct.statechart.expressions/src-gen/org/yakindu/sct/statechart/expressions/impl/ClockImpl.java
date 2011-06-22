@@ -8,28 +8,28 @@ package org.yakindu.sct.statechart.expressions.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+import org.yakindu.model.sct.statechart.impl.DeclarationImpl;
 
-import org.yakindu.sct.statechart.expressions.Expression;
+import org.yakindu.sct.statechart.expressions.Clock;
 import org.yakindu.sct.statechart.expressions.ExpressionsPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Expression</b></em>'.
+ * An implementation of the model object '<em><b>Clock</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public class ExpressionImpl extends MinimalEObjectImpl.Container implements Expression
+public class ClockImpl extends DeclarationImpl implements Clock
 {
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ExpressionImpl()
+  protected ClockImpl()
   {
     super();
   }
@@ -42,7 +42,7 @@ public class ExpressionImpl extends MinimalEObjectImpl.Container implements Expr
   @Override
   protected EClass eStaticClass()
   {
-    return ExpressionsPackage.Literals.EXPRESSION;
+    return ExpressionsPackage.Literals.CLOCK;
   }
 
-} //ExpressionImpl
+} //ClockImpl

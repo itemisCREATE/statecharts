@@ -146,6 +146,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EEnum platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Type"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="initialValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Clock" eSuperTypes="platform:/resource/org.yakindu.sct.model.statechart/model/emf/statechart.ecore#//Declaration"/>
   <eClassifiers xsi:type="ecore:EClass" name="Operation" eSuperTypes="platform:/resource/org.yakindu.sct.model.statechart/model/emf/statechart.ecore#//Declaration">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="paramTypes" unique="false"
         upperBound="-1" eType="ecore:EEnum platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Type"/>

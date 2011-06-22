@@ -1579,7 +1579,7 @@ protected class Declaration_Alternatives extends AlternativesToken {
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getClockRule().getType().getClassifier() && 
+		if(getEObject().eClass() != grammarAccess.getClockAccess().getClockAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getEntrypointAccess().getEntrypointAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getEventDefinitionAccess().getEventDefinitionAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getExitpointAccess().getExitpointAction_0().getType().getClassifier() && 
@@ -1686,7 +1686,7 @@ protected class Declaration_ClockParserRuleCall_2 extends RuleCallToken {
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getClockRule().getType().getClassifier())
+		if(getEObject().eClass() != grammarAccess.getClockAccess().getClockAction_0().getType().getClassifier())
 			return null;
 		if(checkForRecursion(Clock_Group.class, eObjectConsumer)) return null;
 		return eObjectConsumer;
@@ -2690,11 +2690,11 @@ protected class VariableDefinition_InitialValueAssignment_6_1 extends Assignment
 /************ begin Rule Clock ****************
  *
  * / * ---- clock definition ---- * / Clock returns sct::Declaration:
- * 	"clock" name=ID;
+ * 	{Clock} "clock" name=ID;
  *
  **/
 
-// "clock" name=ID
+// {Clock} "clock" name=ID
 protected class Clock_Group extends GroupToken {
 	
 	public Clock_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2709,30 +2709,30 @@ protected class Clock_Group extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Clock_NameAssignment_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new Clock_NameAssignment_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getClockRule().getType().getClassifier())
+		if(getEObject().eClass() != grammarAccess.getClockAccess().getClockAction_0().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
 	}
 
 }
 
-// "clock"
-protected class Clock_ClockKeyword_0 extends KeywordToken  {
-	
-	public Clock_ClockKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+// {Clock}
+protected class Clock_ClockAction_0 extends ActionToken  {
+
+	public Clock_ClockAction_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
-	public Keyword getGrammarElement() {
-		return grammarAccess.getClockAccess().getClockKeyword_0();
+	public Action getGrammarElement() {
+		return grammarAccess.getClockAccess().getClockAction_0();
 	}
 
     @Override
@@ -2742,24 +2742,51 @@ protected class Clock_ClockKeyword_0 extends KeywordToken  {
 		}	
 	}
 
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(!eObjectConsumer.isConsumed()) return null;
+		return eObjectConsumer;
+	}
 }
 
-// name=ID
-protected class Clock_NameAssignment_1 extends AssignmentToken  {
+// "clock"
+protected class Clock_ClockKeyword_1 extends KeywordToken  {
 	
-	public Clock_NameAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Clock_ClockKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
-	public Assignment getGrammarElement() {
-		return grammarAccess.getClockAccess().getNameAssignment_1();
+	public Keyword getGrammarElement() {
+		return grammarAccess.getClockAccess().getClockKeyword_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Clock_ClockKeyword_0(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new Clock_ClockAction_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// name=ID
+protected class Clock_NameAssignment_2 extends AssignmentToken  {
+	
+	public Clock_NameAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getClockAccess().getNameAssignment_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Clock_ClockKeyword_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -2768,9 +2795,9 @@ protected class Clock_NameAssignment_1 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("name",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("name");
-		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getClockAccess().getNameIDTerminalRuleCall_1_0(), value, null)) {
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getClockAccess().getNameIDTerminalRuleCall_2_0(), value, null)) {
 			type = AssignmentType.TERMINAL_RULE_CALL;
-			element = grammarAccess.getClockAccess().getNameIDTerminalRuleCall_1_0();
+			element = grammarAccess.getClockAccess().getNameIDTerminalRuleCall_2_0();
 			return obj;
 		}
 		return null;
@@ -6530,7 +6557,6 @@ protected class OperationCallStatement_CallAssignment extends AssignmentToken  {
 
 /************ begin Rule Expression ****************
  *
- * // operation call
  * // ****************
  * // Expression Grammar
  * // ****************
