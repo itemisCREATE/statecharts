@@ -1046,15 +1046,21 @@ ruleClock returns [EObject current=null]
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-(	otherlv_0='clock' 
+((
     {
-    	newLeafNode(otherlv_0, grammarAccess.getClockAccess().getClockKeyword_0());
+        $current = forceCreateModelElement(
+            grammarAccess.getClockAccess().getClockAction_0(),
+            $current);
+    }
+)	otherlv_1='clock' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getClockAccess().getClockKeyword_1());
     }
 (
 (
-		lv_name_1_0=RULE_ID
+		lv_name_2_0=RULE_ID
 		{
-			newLeafNode(lv_name_1_0, grammarAccess.getClockAccess().getNameIDTerminalRuleCall_1_0()); 
+			newLeafNode(lv_name_2_0, grammarAccess.getClockAccess().getNameIDTerminalRuleCall_2_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -1063,7 +1069,7 @@ ruleClock returns [EObject current=null]
        		setWithLastConsumed(
        			$current, 
        			"name",
-        		lv_name_1_0, 
+        		lv_name_2_0, 
         		"ID");
 	    }
 

@@ -10,14 +10,14 @@ import org.yakindu.model.sct.statechart.Declaration;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Local Reaction</b></em>'.
+ * A representation of the model object '<em><b>Clock</b></em>'.
  * <!-- end-user-doc -->
  *
  *
- * @see org.yakindu.sct.statechart.expressions.ExpressionsPackage#getLocalReaction()
+ * @see org.yakindu.sct.statechart.expressions.ExpressionsPackage#getClock()
  * @model
  * @generated
  */
-public interface LocalReaction extends Declaration, Reaction
+public interface Clock extends Declaration
 {
-} // LocalReaction
+} // Clock

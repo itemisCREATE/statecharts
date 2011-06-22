@@ -2,6 +2,7 @@
  * <copyright>
  * </copyright>
  *
+
  */
 package org.yakindu.sct.statechart.expressions.util;
 
@@ -259,6 +260,11 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl
       public Adapter caseVariableDefinition(VariableDefinition object)
       {
         return createVariableDefinitionAdapter();
+      }
+      @Override
+      public Adapter caseClock(Clock object)
+      {
+        return createClockAdapter();
       }
       @Override
       public Adapter caseOperation(Operation object)
@@ -918,6 +924,21 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createVariableDefinitionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.yakindu.sct.statechart.expressions.Clock <em>Clock</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.yakindu.sct.statechart.expressions.Clock
+   * @generated
+   */
+  public Adapter createClockAdapter()
   {
     return null;
   }

@@ -133,6 +133,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//VariableDefinition/type"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//VariableDefinition/initialValue"/>
     </genClasses>
+    <genClasses ecoreClass="platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Clock"/>
     <genClasses ecoreClass="platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Operation">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Operation/paramTypes"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.yakindu.sct.statechart.expressions/src-gen/org/yakindu/sct/statechart/Expressions.ecore#//Operation/type"/>

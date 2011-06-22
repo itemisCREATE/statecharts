@@ -2,6 +2,7 @@
  * <copyright>
  * </copyright>
  *
+
  */
 package org.yakindu.sct.statechart.expressions.impl;
 
@@ -103,6 +104,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
       case ExpressionsPackage.INTERNAL_SCOPE: return createInternalScope();
       case ExpressionsPackage.EVENT_DEFINITION: return createEventDefinition();
       case ExpressionsPackage.VARIABLE_DEFINITION: return createVariableDefinition();
+      case ExpressionsPackage.CLOCK: return createClock();
       case ExpressionsPackage.OPERATION: return createOperation();
       case ExpressionsPackage.ENTRYPOINT: return createEntrypoint();
       case ExpressionsPackage.EXITPOINT: return createExitpoint();
@@ -565,6 +567,17 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
   {
     VariableDefinitionImpl variableDefinition = new VariableDefinitionImpl();
     return variableDefinition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Clock createClock()
+  {
+    ClockImpl clock = new ClockImpl();
+    return clock;
   }
 
   /**

@@ -2,6 +2,7 @@
  * <copyright>
  * </copyright>
  *
+
  */
 package org.yakindu.sct.statechart.expressions.impl;
 
@@ -19,6 +20,7 @@ import org.yakindu.sct.statechart.expressions.AdditiveOperator;
 import org.yakindu.sct.statechart.expressions.AlwaysEvent;
 import org.yakindu.sct.statechart.expressions.Assignment;
 import org.yakindu.sct.statechart.expressions.BuiltinEventSpec;
+import org.yakindu.sct.statechart.expressions.Clock;
 import org.yakindu.sct.statechart.expressions.DefRoot;
 import org.yakindu.sct.statechart.expressions.Direction;
 import org.yakindu.sct.statechart.expressions.ElementReferenceExpression;
@@ -328,6 +330,13 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
    * @generated
    */
   private EClass variableDefinitionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass clockEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -1221,6 +1230,16 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getClock()
+  {
+    return clockEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getOperation()
   {
     return operationEClass;
@@ -1827,6 +1846,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
     createEAttribute(variableDefinitionEClass, VARIABLE_DEFINITION__TYPE);
     createEAttribute(variableDefinitionEClass, VARIABLE_DEFINITION__INITIAL_VALUE);
 
+    clockEClass = createEClass(CLOCK);
+
     operationEClass = createEClass(OPERATION);
     createEAttribute(operationEClass, OPERATION__PARAM_TYPES);
     createEAttribute(operationEClass, OPERATION__TYPE);
@@ -1951,6 +1972,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
     internalScopeEClass.getESuperTypes().add(theStatechartPackage.getScope());
     eventDefinitionEClass.getESuperTypes().add(theStatechartPackage.getEvent());
     variableDefinitionEClass.getESuperTypes().add(theStatechartPackage.getVariable());
+    clockEClass.getESuperTypes().add(theStatechartPackage.getDeclaration());
     operationEClass.getESuperTypes().add(theStatechartPackage.getDeclaration());
     entrypointEClass.getESuperTypes().add(theStatechartPackage.getDeclaration());
     exitpointEClass.getESuperTypes().add(theStatechartPackage.getDeclaration());
@@ -2069,6 +2091,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
     initEAttribute(getVariableDefinition_External(), ecorePackage.getEBoolean(), "external", null, 0, 1, VariableDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getVariableDefinition_Type(), this.getType(), "type", null, 0, 1, VariableDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getVariableDefinition_InitialValue(), ecorePackage.getEString(), "initialValue", null, 0, 1, VariableDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(clockEClass, Clock.class, "Clock", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(operationEClass, Operation.class, "Operation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getOperation_ParamTypes(), this.getType(), "paramTypes", null, 0, -1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

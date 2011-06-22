@@ -140,7 +140,7 @@ public class ExpressionsParser extends AbstractContentAssistParser {
 					put(grammarAccess.getVariableDefinitionAccess().getNameAssignment_3(), "rule__VariableDefinition__NameAssignment_3");
 					put(grammarAccess.getVariableDefinitionAccess().getTypeAssignment_5(), "rule__VariableDefinition__TypeAssignment_5");
 					put(grammarAccess.getVariableDefinitionAccess().getInitialValueAssignment_6_1(), "rule__VariableDefinition__InitialValueAssignment_6_1");
-					put(grammarAccess.getClockAccess().getNameAssignment_1(), "rule__Clock__NameAssignment_1");
+					put(grammarAccess.getClockAccess().getNameAssignment_2(), "rule__Clock__NameAssignment_2");
 					put(grammarAccess.getOperationAccess().getNameAssignment_2(), "rule__Operation__NameAssignment_2");
 					put(grammarAccess.getOperationAccess().getParamTypesAssignment_4_0(), "rule__Operation__ParamTypesAssignment_4_0");
 					put(grammarAccess.getOperationAccess().getParamTypesAssignment_4_1_1(), "rule__Operation__ParamTypesAssignment_4_1_1");
