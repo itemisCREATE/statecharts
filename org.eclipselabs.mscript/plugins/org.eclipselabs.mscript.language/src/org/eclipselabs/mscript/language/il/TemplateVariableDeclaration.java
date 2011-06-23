@@ -6,7 +6,7 @@
  */
 package org.eclipselabs.mscript.language.il;
 
-import org.eclipselabs.mscript.computation.engine.value.IValue;
+import org.eclipselabs.mscript.computation.core.value.IValue;
 
 
 /**

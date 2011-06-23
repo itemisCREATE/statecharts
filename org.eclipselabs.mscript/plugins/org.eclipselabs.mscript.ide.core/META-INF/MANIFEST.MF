@@ -10,7 +10,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.xtext;bundle-version="1.0.0",
  org.eclipselabs.mscript.common;bundle-version="0.1.0",
  org.eclipselabs.mscript.language;bundle-version="0.1.0",
- org.eclipselabs.mscript.computation.engine;bundle-version="0.1.0",
+ org.eclipselabs.mscript.computation.core;bundle-version="0.1.0",
  org.eclipselabs.mscript.computation.computationmodel;bundle-version="0.1.0"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy

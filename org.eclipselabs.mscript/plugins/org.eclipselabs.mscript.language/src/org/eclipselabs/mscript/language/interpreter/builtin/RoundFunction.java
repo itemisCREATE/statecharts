@@ -14,8 +14,8 @@ package org.eclipselabs.mscript.language.interpreter.builtin;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipselabs.mscript.computation.engine.value.ISimpleNumericValue;
-import org.eclipselabs.mscript.computation.engine.value.IValue;
+import org.eclipselabs.mscript.computation.core.value.ISimpleNumericValue;
+import org.eclipselabs.mscript.computation.core.value.IValue;
 import org.eclipselabs.mscript.language.interpreter.IInterpreterContext;
 
 /**

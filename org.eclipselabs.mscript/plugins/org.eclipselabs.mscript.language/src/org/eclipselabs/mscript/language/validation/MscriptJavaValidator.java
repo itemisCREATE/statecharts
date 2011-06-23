@@ -6,9 +6,9 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.validation.Check;
-import org.eclipselabs.mscript.computation.engine.ComputationContext;
-import org.eclipselabs.mscript.computation.engine.value.AnyValue;
-import org.eclipselabs.mscript.computation.engine.value.IValue;
+import org.eclipselabs.mscript.computation.core.ComputationContext;
+import org.eclipselabs.mscript.computation.core.value.AnyValue;
+import org.eclipselabs.mscript.computation.core.value.IValue;
 import org.eclipselabs.mscript.language.ast.ArrayElementAccess;
 import org.eclipselabs.mscript.language.ast.ArraySubscript;
 import org.eclipselabs.mscript.language.ast.AstPackage;

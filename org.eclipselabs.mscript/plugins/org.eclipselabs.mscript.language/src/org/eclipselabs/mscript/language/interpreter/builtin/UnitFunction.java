@@ -15,8 +15,8 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipselabs.mscript.computation.engine.value.IValue;
-import org.eclipselabs.mscript.computation.engine.value.UnitValue;
+import org.eclipselabs.mscript.computation.core.value.IValue;
+import org.eclipselabs.mscript.computation.core.value.UnitValue;
 import org.eclipselabs.mscript.language.interpreter.IInterpreterContext;
 import org.eclipselabs.mscript.typesystem.NumericType;
 

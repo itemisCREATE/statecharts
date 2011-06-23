@@ -111,5 +111,5 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" changeable="false"
         volatile="true" transient="true" derived="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EDataType" name="IValue" instanceClassName="org.eclipselabs.mscript.computation.engine.value.IValue"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="IValue" instanceClassName="org.eclipselabs.mscript.computation.core.value.IValue"/>
 </ecore:EPackage>
