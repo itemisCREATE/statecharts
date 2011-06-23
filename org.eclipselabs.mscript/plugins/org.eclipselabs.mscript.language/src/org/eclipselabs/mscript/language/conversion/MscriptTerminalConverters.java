@@ -16,7 +16,7 @@ import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.ValueConverter;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.conversion.impl.AbstractNullSafeConverter;
-import org.eclipse.xtext.parsetree.AbstractNode;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.util.Strings;
 
 /**
@@ -29,7 +29,7 @@ public class MscriptTerminalConverters extends DefaultTerminalConverters {
 	public IValueConverter<String> IDENT() {
 		return new AbstractNullSafeConverter<String>() {
 			@Override
-			protected String internalToValue(String string, AbstractNode node) {
+			protected String internalToValue(String string, INode node) {
 				if (string.startsWith("'") && string.endsWith("'")) {
 					return Strings.convertFromJavaString(string.substring(1, string.length() - 1), false);
 				}
@@ -50,7 +50,7 @@ public class MscriptTerminalConverters extends DefaultTerminalConverters {
 	public IValueConverter<Double> REAL() {
 		return new IValueConverter<Double>() {
 			
-			public Double toValue(String string, AbstractNode node) {
+			public Double toValue(String string, INode node) {
 				if (Strings.isEmpty(string))
 					throw new ValueConverterException("Couldn't convert empty string to double", node, null);
 				try {
@@ -71,7 +71,7 @@ public class MscriptTerminalConverters extends DefaultTerminalConverters {
 	public IValueConverter<Long> INTEGER() {
 		return new IValueConverter<Long>() {
 			
-			public Long toValue(String string, AbstractNode node) {
+			public Long toValue(String string, INode node) {
 				if (Strings.isEmpty(string))
 					throw new ValueConverterException("Couldn't convert empty string to long", node, null);
 				try {

@@ -5,48 +5,58 @@
     nsURI="http://www.eclipselabs.org/mscript/AST/1.0.0" nsPrefix="ast">
   <eClassifiers xsi:type="ecore:EClass" name="Module">
     <eStructuralFeatures xsi:type="ecore:EReference" name="definitions" upperBound="-1"
-        eType="#//Definition" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Definition"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Definition">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DataTypeDefinition" eSuperTypes="#//Definition"/>
-  <eClassifiers xsi:type="ecore:EClass" name="EnumerationDefinition" eSuperTypes="#//DataTypeDefinition">
+  <eClassifiers xsi:type="ecore:EClass" name="DataTypeDefinition" eSuperTypes="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Definition"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EnumerationDefinition" eSuperTypes="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//DataTypeDefinition">
     <eStructuralFeatures xsi:type="ecore:EReference" name="literalDeclarations" upperBound="-1"
-        eType="#//EnumerationLiteralDeclaration" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//EnumerationLiteralDeclaration"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EnumerationLiteralDeclaration">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TypeAliasDefinition" eSuperTypes="#//DataTypeDefinition">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//PrimitiveTypeSpecifier"
+  <eClassifiers xsi:type="ecore:EClass" name="TypeAliasDefinition" eSuperTypes="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//DataTypeDefinition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//PrimitiveTypeSpecifier"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RecordDefinition" eSuperTypes="#//DataTypeDefinition">
+  <eClassifiers xsi:type="ecore:EClass" name="RecordDefinition" eSuperTypes="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//DataTypeDefinition">
     <eStructuralFeatures xsi:type="ecore:EReference" name="fieldDeclarations" upperBound="-1"
-        eType="#//RecordFieldDeclaration" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//RecordFieldDeclaration"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RecordFieldDeclaration">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//DataTypeSpecifier"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//DataTypeSpecifier"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FunctionDefinition" eSuperTypes="#//Definition">
+  <eClassifiers xsi:type="ecore:EClass" name="FunctionDefinition" eSuperTypes="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Definition">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="stateful" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="templateParameterDeclarations"
-        upperBound="-1" eType="#//ParameterDeclaration" containment="true"/>
+        upperBound="-1" eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//ParameterDeclaration"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="inputParameterDeclarations"
-        upperBound="-1" eType="#//ParameterDeclaration" containment="true"/>
+        upperBound="-1" eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//ParameterDeclaration"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="outputParameterDeclarations"
-        upperBound="-1" eType="#//ParameterDeclaration" containment="true"/>
+        upperBound="-1" eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//ParameterDeclaration"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="assertions" upperBound="-1"
-        eType="#//Assertion" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Assertion"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="functionObjectDeclarations"
-        upperBound="-1" eType="#//FunctionObjectDeclaration" containment="true"/>
+        upperBound="-1" eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//FunctionObjectDeclaration"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="stateVariableDeclarations"
-        upperBound="-1" eType="#//StateVariableDeclaration" containment="true"/>
+        upperBound="-1" eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//StateVariableDeclaration"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="equations" upperBound="-1"
-        eType="#//Equation" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Equation"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ParameterDeclaration">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -59,10 +69,10 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Assertion">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="static" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="condition" eType="#//Expression"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="condition" eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="statusKind" eType="#//AssertionStatusKind"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="message" eType="#//Expression"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="statusKind" eType="ecore:EEnum platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//AssertionStatusKind"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="message" eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StateVariableDeclaration">
@@ -70,75 +80,79 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FunctionObjectDeclaration">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="functionName" eType="#//QualifiedName"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="functionName" eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//QualifiedName"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="templateArguments" upperBound="-1"
-        eType="#//Expression" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Equation">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="leftHandSide" eType="#//Expression"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftHandSide" eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="rightHandSide" eType="#//Expression"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightHandSide" eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DataTypeSpecifier">
     <eStructuralFeatures xsi:type="ecore:EReference" name="dimensions" upperBound="-1"
-        eType="#//ArrayDimensionSpecification" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="PrimitiveTypeSpecifier" eSuperTypes="#//DataTypeSpecifier"/>
-  <eClassifiers xsi:type="ecore:EClass" name="NumericTypeSpecifier" eSuperTypes="#//PrimitiveTypeSpecifier">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="unit" eType="#//UnitExpression"
+        eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//ArrayDimensionSpecification"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RealTypeSpecifier" eSuperTypes="#//NumericTypeSpecifier"/>
-  <eClassifiers xsi:type="ecore:EClass" name="IntegerTypeSpecifier" eSuperTypes="#//NumericTypeSpecifier"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ComplexTypeSpecifier" eSuperTypes="#//NumericTypeSpecifier"/>
-  <eClassifiers xsi:type="ecore:EClass" name="GaussianTypeSpecifier" eSuperTypes="#//NumericTypeSpecifier"/>
-  <eClassifiers xsi:type="ecore:EClass" name="BooleanTypeSpecifier" eSuperTypes="#//PrimitiveTypeSpecifier"/>
-  <eClassifiers xsi:type="ecore:EClass" name="StringTypeSpecifier" eSuperTypes="#//PrimitiveTypeSpecifier"/>
-  <eClassifiers xsi:type="ecore:EClass" name="NamedTypeSpecifier" eSuperTypes="#//DataTypeSpecifier">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="typeReference" eType="#//QualifiedName"
+  <eClassifiers xsi:type="ecore:EClass" name="PrimitiveTypeSpecifier" eSuperTypes="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//DataTypeSpecifier"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NumericTypeSpecifier" eSuperTypes="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//PrimitiveTypeSpecifier">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="unit" eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//UnitExpression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RealTypeSpecifier" eSuperTypes="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//NumericTypeSpecifier"/>
+  <eClassifiers xsi:type="ecore:EClass" name="IntegerTypeSpecifier" eSuperTypes="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//NumericTypeSpecifier"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ComplexTypeSpecifier" eSuperTypes="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//NumericTypeSpecifier"/>
+  <eClassifiers xsi:type="ecore:EClass" name="GaussianTypeSpecifier" eSuperTypes="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//NumericTypeSpecifier"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BooleanTypeSpecifier" eSuperTypes="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//PrimitiveTypeSpecifier"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StringTypeSpecifier" eSuperTypes="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//PrimitiveTypeSpecifier"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NamedTypeSpecifier" eSuperTypes="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//DataTypeSpecifier">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typeReference" eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//QualifiedName"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ArrayDimensionSpecification">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="size" eType="#//Expression"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="size" eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Expression"/>
-  <eClassifiers xsi:type="ecore:EClass" name="LetExpression" eSuperTypes="#//Expression">
+  <eClassifiers xsi:type="ecore:EClass" name="LetExpression" eSuperTypes="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="variableDeclarations" upperBound="-1"
-        eType="#//LetExpressionVariableDeclaration" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="targetExpression" eType="#//Expression"
+        eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//LetExpressionVariableDeclaration"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targetExpression" eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LetExpressionVariableDeclaration">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="names" unique="false" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="assignedExpression" eType="#//Expression"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="assignedExpression" eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="IfExpression" eSuperTypes="#//Expression">
+  <eClassifiers xsi:type="ecore:EClass" name="IfExpression" eSuperTypes="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="static" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="condition" eType="#//Expression"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="condition" eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="thenExpression" eType="#//Expression"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="thenExpression" eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="elseExpression" eType="#//Expression"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elseExpression" eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SwitchExpression" eSuperTypes="#//Expression">
+  <eClassifiers xsi:type="ecore:EClass" name="SwitchExpression" eSuperTypes="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="static" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="controlExpression" eType="#//Expression"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="controlExpression" eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="cases" upperBound="-1"
-        eType="#//SwitchCase" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="defaultExpression" eType="#//Expression"
+        eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//SwitchCase"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="defaultExpression" eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SwitchCase">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="caseExpression" eType="#//Expression"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="caseExpression" eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="resultExpression" eType="#//Expression"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="resultExpression" eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="EqualityOperator">
@@ -152,8 +166,8 @@
     <eLiterals name="GreaterThanOrEqualTo" value="3" literal=">="/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AdditiveExpressionPart">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//AdditiveOperator"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="operand" eType="#//Expression"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="ecore:EEnum platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//AdditiveOperator"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operand" eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="AdditiveOperator">
@@ -161,8 +175,8 @@
     <eLiterals name="Subtraction" value="1" literal="-"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MultiplicativeExpressionPart">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//MultiplicativeOperator"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="operand" eType="#//Expression"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="ecore:EEnum platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//MultiplicativeOperator"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operand" eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="MultiplicativeOperator">
@@ -182,54 +196,57 @@
   <eClassifiers xsi:type="ecore:EEnum" name="PostfixOperator">
     <eLiterals name="Transpose" literal="'"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Literal" eSuperTypes="#//Expression"/>
-  <eClassifiers xsi:type="ecore:EClass" name="NumericLiteral" eSuperTypes="#//Literal">
+  <eClassifiers xsi:type="ecore:EClass" name="Literal" eSuperTypes="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NumericLiteral" eSuperTypes="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Literal">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="modifier" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="unit" eType="#//UnitExpression"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="unit" eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//UnitExpression"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RealLiteral" eSuperTypes="#//NumericLiteral">
+  <eClassifiers xsi:type="ecore:EClass" name="RealLiteral" eSuperTypes="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//NumericLiteral">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="IntegerLiteral" eSuperTypes="#//NumericLiteral">
+  <eClassifiers xsi:type="ecore:EClass" name="IntegerLiteral" eSuperTypes="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//NumericLiteral">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="BooleanLiteral" eSuperTypes="#//Literal">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//BooleanKind"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BooleanLiteral" eSuperTypes="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Literal">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EEnum platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//BooleanKind"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="BooleanKind">
     <eLiterals name="False" literal="false"/>
     <eLiterals name="True" value="1" literal="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="StringLiteral" eSuperTypes="#//Literal">
+  <eClassifiers xsi:type="ecore:EClass" name="StringLiteral" eSuperTypes="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Literal">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FeatureCallPart"/>
-  <eClassifiers xsi:type="ecore:EClass" name="NameComponent" eSuperTypes="#//FeatureCallPart">
+  <eClassifiers xsi:type="ecore:EClass" name="NameComponent" eSuperTypes="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//FeatureCallPart">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="identifier" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ArrayElementAccess" eSuperTypes="#//FeatureCallPart">
+  <eClassifiers xsi:type="ecore:EClass" name="ArrayElementAccess" eSuperTypes="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//FeatureCallPart">
     <eStructuralFeatures xsi:type="ecore:EReference" name="subscripts" upperBound="-1"
-        eType="#//ArraySubscript" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//ArraySubscript"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ArraySubscript">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="slice" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//Expression"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="OperationArgumentList" eSuperTypes="#//FeatureCallPart">
+  <eClassifiers xsi:type="ecore:EClass" name="OperationArgumentList" eSuperTypes="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//FeatureCallPart">
     <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
-        eType="#//Expression" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"
+        containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="IterationCall" eSuperTypes="#//FeatureCallPart">
+  <eClassifiers xsi:type="ecore:EClass" name="IterationCall" eSuperTypes="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//FeatureCallPart">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="variables" upperBound="-1"
-        eType="#//IterationVariable" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="accumulator" eType="#//IterationAccumulator"
+        eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//IterationVariable"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="breakCondition" eType="#//Expression"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="accumulator" eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//IterationAccumulator"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//Expression"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="breakCondition" eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="IterationVariable">
@@ -237,140 +254,152 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="IterationAccumulator">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="initializer" eType="#//Expression"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="initializer" eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ArrayConstructionOperator" eSuperTypes="#//Expression">
+  <eClassifiers xsi:type="ecore:EClass" name="ArrayConstructionOperator" eSuperTypes="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="expressions" upperBound="-1"
-        eType="#//Expression" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="iterationClauses" upperBound="-1"
-        eType="#//ArrayConstructionIterationClause" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//ArrayConstructionIterationClause"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ArrayConstructionIterationClause">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="variableName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="collectionExpression" eType="#//Expression"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="collectionExpression" eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ArrayConcatenationOperator" eSuperTypes="#//Expression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="rows" upperBound="-1" eType="#//ExpressionList"
+  <eClassifiers xsi:type="ecore:EClass" name="ArrayConcatenationOperator" eSuperTypes="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rows" upperBound="-1" eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//ExpressionList"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExpressionList">
     <eStructuralFeatures xsi:type="ecore:EReference" name="expressions" upperBound="-1"
-        eType="#//Expression" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="UnitConstructionOperator" eSuperTypes="#//Expression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="unit" eType="#//UnitExpression"
+        eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ParenthesizedExpression" eSuperTypes="#//Expression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="expressions" upperBound="-1"
-        eType="#//Expression" containment="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UnitConstructionOperator" eSuperTypes="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="unit" eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//UnitExpression"
+        containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="BeginExpression" eSuperTypes="#//Expression"/>
-  <eClassifiers xsi:type="ecore:EClass" name="EndExpression" eSuperTypes="#//Expression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ParenthesizedExpression" eSuperTypes="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expressions" upperBound="-1"
+        eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BeginExpression" eSuperTypes="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EndExpression" eSuperTypes="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"/>
   <eClassifiers xsi:type="ecore:EClass" name="QualifiedName">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="identifiers" unique="false"
         upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="UnitExpression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="numerator" eType="#//UnitExpressionNumerator"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="numerator" eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//UnitExpressionNumerator"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="denominator" eType="#//UnitExpressionDenominator"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="denominator" eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//UnitExpressionDenominator"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="UnitExpressionNumerator">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="one" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="factors" upperBound="-1"
-        eType="#//UnitExpressionFactor" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//UnitExpressionFactor"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="UnitExpressionDenominator">
     <eStructuralFeatures xsi:type="ecore:EReference" name="factors" upperBound="-1"
-        eType="#//UnitExpressionFactor" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//UnitExpressionFactor"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="UnitExpressionFactor">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="operand" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="exponent" eType="#//UnitExpressionExponent"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exponent" eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//UnitExpressionExponent"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="UnitExpressionExponent">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="negative" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RangeExpression" eSuperTypes="#//Expression">
+  <eClassifiers xsi:type="ecore:EClass" name="RangeExpression" eSuperTypes="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="operands" upperBound="-1"
-        eType="#//Expression" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ImpliesExpression" eSuperTypes="#//Expression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="#//Expression"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" eType="#//Expression"
+        eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="LogicalOrExpression" eSuperTypes="#//Expression">
+  <eClassifiers xsi:type="ecore:EClass" name="ImpliesExpression" eSuperTypes="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LogicalOrExpression" eSuperTypes="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="operands" upperBound="-1"
-        eType="#//Expression" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"
+        containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="LogicalAndExpression" eSuperTypes="#//Expression">
+  <eClassifiers xsi:type="ecore:EClass" name="LogicalAndExpression" eSuperTypes="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="operands" upperBound="-1"
-        eType="#//Expression" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EqualityExpression" eSuperTypes="#//Expression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="#//Expression"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//EqualityOperator"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" eType="#//Expression"
+        eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RelationalExpression" eSuperTypes="#//Expression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="#//Expression"
+  <eClassifiers xsi:type="ecore:EClass" name="EqualityExpression" eSuperTypes="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//RelationalOperator"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" eType="#//Expression"
-        containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TypeTestExpression" eSuperTypes="#//Expression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//Expression"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//DataTypeSpecifier"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="ecore:EEnum platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//EqualityOperator"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AdditiveExpression" eSuperTypes="#//Expression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="#//Expression"
+  <eClassifiers xsi:type="ecore:EClass" name="RelationalExpression" eSuperTypes="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="ecore:EEnum platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//RelationalOperator"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TypeTestExpression" eSuperTypes="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//DataTypeSpecifier"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AdditiveExpression" eSuperTypes="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="rightParts" upperBound="-1"
-        eType="#//AdditiveExpressionPart" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//AdditiveExpressionPart"
+        containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="MultiplicativeExpression" eSuperTypes="#//Expression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="#//Expression"
+  <eClassifiers xsi:type="ecore:EClass" name="MultiplicativeExpression" eSuperTypes="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="rightParts" upperBound="-1"
-        eType="#//MultiplicativeExpressionPart" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="PowerExpression" eSuperTypes="#//Expression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="operand" eType="#//Expression"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//PowerOperator"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="exponent" eType="#//Expression"
+        eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//MultiplicativeExpressionPart"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="UnaryExpression" eSuperTypes="#//Expression">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//UnaryOperator"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="operand" eType="#//Expression"
+  <eClassifiers xsi:type="ecore:EClass" name="PowerExpression" eSuperTypes="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operand" eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="ecore:EEnum platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//PowerOperator"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exponent" eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="PostfixExpression" eSuperTypes="#//Expression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="operand" eType="#//Expression"
+  <eClassifiers xsi:type="ecore:EClass" name="UnaryExpression" eSuperTypes="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="ecore:EEnum platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//UnaryOperator"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operand" eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//PostfixOperator"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SimpleName" eSuperTypes="#//Expression">
+  <eClassifiers xsi:type="ecore:EClass" name="PostfixExpression" eSuperTypes="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operand" eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="ecore:EEnum platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//PostfixOperator"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SimpleName" eSuperTypes="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="identifier" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FeatureCall" eSuperTypes="#//Expression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//Expression"
+  <eClassifiers xsi:type="ecore:EClass" name="FeatureCall" eSuperTypes="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parts" upperBound="-1"
-        eType="#//FeatureCallPart" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//FeatureCallPart"
+        containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

@@ -22,7 +22,7 @@
    </url>
 
    <requires>
-      <import feature="org.eclipse.xtext.runtime" version="1.0.0"/>
+      <import feature="org.eclipse.xtext.runtime" version="2.0.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin

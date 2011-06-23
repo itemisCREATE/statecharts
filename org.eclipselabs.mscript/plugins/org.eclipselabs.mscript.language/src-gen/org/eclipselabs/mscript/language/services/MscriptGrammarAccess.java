@@ -61,7 +61,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		
 		/// *
 		// * DataTypeDefinition
-		// * /DataTypeDefinition:
+		// * / DataTypeDefinition:
 		//	EnumerationDefinition | RecordDefinition | TypeAliasDefinition;
 		public ParserRule getRule() { return rule; }
 
@@ -96,7 +96,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		
 		/// *
 		// * Enumeration
-		// * /EnumerationDefinition:
+		// * / EnumerationDefinition:
 		//	"enum" name=ID "{" (literalDeclarations+=EnumerationLiteralDeclaration (","
 		//	literalDeclarations+=EnumerationLiteralDeclaration)*)? "}";
 		public ParserRule getRule() { return rule; }
@@ -171,7 +171,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		
 		/// *
 		// * TypeAlias
-		// * /TypeAliasDefinition:
+		// * / TypeAliasDefinition:
 		//	"type" name=ID "=" type=PrimitiveTypeSpecifier ";";
 		public ParserRule getRule() { return rule; }
 
@@ -213,7 +213,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		
 		/// *
 		// * Record
-		// * /RecordDefinition:
+		// * / RecordDefinition:
 		//	"record" name=ID "{" fieldDeclarations+=RecordFieldDeclaration* "}";
 		public ParserRule getRule() { return rule; }
 
@@ -325,7 +325,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		
 		/// *
 		// * Function
-		// * /FunctionDefinition:
+		// * / FunctionDefinition:
 		//	stateful?="stateful"? "func" name=ID ("<" templateParameterDeclarations+=ParameterDeclaration (","
 		//	templateParameterDeclarations+=ParameterDeclaration)* ">")? "(" (inputParameterDeclarations+=ParameterDeclaration (","
 		//	inputParameterDeclarations+=ParameterDeclaration)*)? ")" "->" outputParameterDeclarations+=ParameterDeclaration (","
@@ -690,7 +690,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		
 		/// *
 		// * Data type specifier
-		// * /DataTypeSpecifier:
+		// * / DataTypeSpecifier:
 		//	PrimitiveTypeSpecifier | NamedTypeSpecifier;
 		public ParserRule getRule() { return rule; }
 
@@ -1276,7 +1276,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		
 		/// *
 		// * Expressions
-		// * /Expression:
+		// * / Expression:
 		//	LetExpression | IfExpression | SwitchExpression | RangeExpression;
 		public ParserRule getRule() { return rule; }
 
@@ -3082,7 +3082,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		
 		/// *
 		// * Unit expressions
-		// * /UnitExpression:
+		// * / UnitExpression:
 		//	{UnitExpression} (numerator=UnitExpressionNumerator ("/" denominator=UnitExpressionDenominator)?)?;
 		public ParserRule getRule() { return rule; }
 
@@ -3700,7 +3700,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 
 	/// *
 	// * DataTypeDefinition
-	// * /DataTypeDefinition:
+	// * / DataTypeDefinition:
 	//	EnumerationDefinition | RecordDefinition | TypeAliasDefinition;
 	public DataTypeDefinitionElements getDataTypeDefinitionAccess() {
 		return (pDataTypeDefinition != null) ? pDataTypeDefinition : (pDataTypeDefinition = new DataTypeDefinitionElements());
@@ -3712,7 +3712,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 
 	/// *
 	// * Enumeration
-	// * /EnumerationDefinition:
+	// * / EnumerationDefinition:
 	//	"enum" name=ID "{" (literalDeclarations+=EnumerationLiteralDeclaration (","
 	//	literalDeclarations+=EnumerationLiteralDeclaration)*)? "}";
 	public EnumerationDefinitionElements getEnumerationDefinitionAccess() {
@@ -3735,7 +3735,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 
 	/// *
 	// * TypeAlias
-	// * /TypeAliasDefinition:
+	// * / TypeAliasDefinition:
 	//	"type" name=ID "=" type=PrimitiveTypeSpecifier ";";
 	public TypeAliasDefinitionElements getTypeAliasDefinitionAccess() {
 		return (pTypeAliasDefinition != null) ? pTypeAliasDefinition : (pTypeAliasDefinition = new TypeAliasDefinitionElements());
@@ -3747,7 +3747,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 
 	/// *
 	// * Record
-	// * /RecordDefinition:
+	// * / RecordDefinition:
 	//	"record" name=ID "{" fieldDeclarations+=RecordFieldDeclaration* "}";
 	public RecordDefinitionElements getRecordDefinitionAccess() {
 		return (pRecordDefinition != null) ? pRecordDefinition : (pRecordDefinition = new RecordDefinitionElements());
@@ -3769,7 +3769,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 
 	/// *
 	// * Function
-	// * /FunctionDefinition:
+	// * / FunctionDefinition:
 	//	stateful?="stateful"? "func" name=ID ("<" templateParameterDeclarations+=ParameterDeclaration (","
 	//	templateParameterDeclarations+=ParameterDeclaration)* ">")? "(" (inputParameterDeclarations+=ParameterDeclaration (","
 	//	inputParameterDeclarations+=ParameterDeclaration)*)? ")" "->" outputParameterDeclarations+=ParameterDeclaration (","
@@ -3847,7 +3847,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 
 	/// *
 	// * Data type specifier
-	// * /DataTypeSpecifier:
+	// * / DataTypeSpecifier:
 	//	PrimitiveTypeSpecifier | NamedTypeSpecifier;
 	public DataTypeSpecifierElements getDataTypeSpecifierAccess() {
 		return (pDataTypeSpecifier != null) ? pDataTypeSpecifier : (pDataTypeSpecifier = new DataTypeSpecifierElements());
@@ -3966,7 +3966,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 
 	/// *
 	// * Expressions
-	// * /Expression:
+	// * / Expression:
 	//	LetExpression | IfExpression | SwitchExpression | RangeExpression;
 	public ExpressionElements getExpressionAccess() {
 		return (pExpression != null) ? pExpression : (pExpression = new ExpressionElements());
@@ -4515,7 +4515,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 
 	/// *
 	// * Unit expressions
-	// * /UnitExpression:
+	// * / UnitExpression:
 	//	{UnitExpression} (numerator=UnitExpressionNumerator ("/" denominator=UnitExpressionDenominator)?)?;
 	public UnitExpressionElements getUnitExpressionAccess() {
 		return (pUnitExpression != null) ? pUnitExpression : (pUnitExpression = new UnitExpressionElements());
@@ -4567,7 +4567,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 
 	/// *
 	// * Terminals
-	// * /terminal ID:
+	// * / terminal ID:
 	//	("_" | "a".."z" | "A".."Z") ("0".."9" | "_" | "a".."z" | "A".."Z")*;
 	public TerminalRule getIDRule() {
 		return (tID != null) ? tID : (tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ID"));

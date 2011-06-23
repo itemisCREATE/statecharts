@@ -23,6 +23,8 @@ import org.eclipselabs.mscript.typesystem.NumericType;
 import org.eclipselabs.mscript.typesystem.RealType;
 
 /**
+ * TODO: Make this class a static class 'Values' with methods 'valueOf()'
+ * 
  * @author Andreas Unger
  *
  */

@@ -41,8 +41,8 @@ public class ParseUtil {
 		
 		MscriptParser parser = IDECorePlugin.getDefault().getMscriptParser();
 		
-		IParseResult parseResult = parser.parse(parser.getGrammarAccess().getExpressionListRule().getName(), new StringReader(valuesString));
-		if (!parseResult.getParseErrors().isEmpty()) {
+		IParseResult parseResult = parser.parse(parser.getGrammarAccess().getExpressionListRule(), new StringReader(valuesString));
+		if (parseResult.hasSyntaxErrors()) {
 			return null;
 		}
 		ExpressionList expressionList = (ExpressionList) parseResult.getRootASTElement();

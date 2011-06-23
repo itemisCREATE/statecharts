@@ -158,8 +158,8 @@ public abstract class AbstractMscriptLaunchConfigurationDelegate extends LaunchC
 		MscriptParser parser = IDECorePlugin.getDefault().getMscriptParser();
 		
 		for (String dataTypeString : dataTypeStrings) {
-			IParseResult parseResult = parser.parse(parser.getGrammarAccess().getDataTypeSpecifierRule().getName(), new StringReader(dataTypeString));
-			if (!parseResult.getParseErrors().isEmpty()) {
+			IParseResult parseResult = parser.parse(parser.getGrammarAccess().getDataTypeSpecifierRule(), new StringReader(dataTypeString));
+			if (parseResult.hasSyntaxErrors()) {
 				return null;
 			}
 			DataTypeSpecifier dataTypeSpecifier = (DataTypeSpecifier) parseResult.getRootASTElement();
@@ -187,7 +187,7 @@ public abstract class AbstractMscriptLaunchConfigurationDelegate extends LaunchC
 
 	private FunctionDefinition createFunctionDefinition(IFile file, String functionName) throws CoreException {
 		IParseResult parseResult = IDECorePlugin.getDefault().getMscriptParser().parse(new InputStreamReader(file.getContents()));
-		if (!parseResult.getParseErrors().isEmpty()) {
+		if (parseResult.hasSyntaxErrors()) {
 			throw new CoreException(new Status(IStatus.ERROR, IDECorePlugin.PLUGIN_ID, "Parse errors"));
 		}
 			

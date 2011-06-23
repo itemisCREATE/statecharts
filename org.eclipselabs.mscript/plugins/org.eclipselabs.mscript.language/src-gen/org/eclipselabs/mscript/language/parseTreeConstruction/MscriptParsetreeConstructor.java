@@ -291,7 +291,7 @@ protected class Definition_FunctionDefinitionParserRuleCall_1 extends RuleCallTo
  *
  * / *
  *  * DataTypeDefinition
- *  * /DataTypeDefinition:
+ *  * / DataTypeDefinition:
  * 	EnumerationDefinition | RecordDefinition | TypeAliasDefinition;
  *
  **/
@@ -445,7 +445,7 @@ protected class DataTypeDefinition_TypeAliasDefinitionParserRuleCall_2 extends R
  *
  * / *
  *  * Enumeration
- *  * /EnumerationDefinition:
+ *  * / EnumerationDefinition:
  * 	"enum" name=ID "{" (literalDeclarations+=EnumerationLiteralDeclaration (","
  * 	literalDeclarations+=EnumerationLiteralDeclaration)*)? "}";
  *
@@ -796,7 +796,7 @@ protected class EnumerationLiteralDeclaration_NameAssignment extends AssignmentT
  *
  * / *
  *  * TypeAlias
- *  * /TypeAliasDefinition:
+ *  * / TypeAliasDefinition:
  * 	"type" name=ID "=" type=PrimitiveTypeSpecifier ";";
  *
  **/
@@ -983,7 +983,7 @@ protected class TypeAliasDefinition_SemicolonKeyword_4 extends KeywordToken  {
  *
  * / *
  *  * Record
- *  * /RecordDefinition:
+ *  * / RecordDefinition:
  * 	"record" name=ID "{" fieldDeclarations+=RecordFieldDeclaration* "}";
  *
  **/
@@ -1335,7 +1335,7 @@ protected class RecordFieldDeclaration_SemicolonKeyword_3 extends KeywordToken  
  *
  * / *
  *  * Function
- *  * /FunctionDefinition:
+ *  * / FunctionDefinition:
  * 	stateful?="stateful"? "func" name=ID ("<" templateParameterDeclarations+=ParameterDeclaration (","
  * 	templateParameterDeclarations+=ParameterDeclaration)* ">")? "(" (inputParameterDeclarations+=ParameterDeclaration (","
  * 	inputParameterDeclarations+=ParameterDeclaration)*)? ")" "->" outputParameterDeclarations+=ParameterDeclaration (","
@@ -3308,7 +3308,7 @@ protected class Equation_SemicolonKeyword_3 extends KeywordToken  {
  *
  * / *
  *  * Data type specifier
- *  * /DataTypeSpecifier:
+ *  * / DataTypeSpecifier:
  * 	PrimitiveTypeSpecifier | NamedTypeSpecifier;
  *
  **/
@@ -6431,7 +6431,7 @@ protected class ArrayDimensionSpecification_SizeAssignment_1 extends AssignmentT
  *
  * / *
  *  * Expressions
- *  * /Expression:
+ *  * / Expression:
  * 	LetExpression | IfExpression | SwitchExpression | RangeExpression;
  *
  **/
@@ -16078,7 +16078,7 @@ protected class QualifiedName_IdentifiersAssignment_1_1 extends AssignmentToken 
  *
  * / *
  *  * Unit expressions
- *  * /UnitExpression:
+ *  * / UnitExpression:
  * 	{UnitExpression} (numerator=UnitExpressionNumerator ("/" denominator=UnitExpressionDenominator)?)?;
  *
  **/

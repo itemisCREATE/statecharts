@@ -35,7 +35,7 @@ public class MscriptJavaValidator extends AbstractMscriptJavaValidator {
 	public void checkStatelessFunctionDefinition(FunctionDefinition functionDefinition) {
 		if (!functionDefinition.isStateful()) {
 			for (StateVariableDeclaration stateVariableDeclaration : functionDefinition.getStateVariableDeclarations()) {
-				error("Stateless functions must not declare state variables", stateVariableDeclaration, null);
+				error("Stateless functions must not declare state variables", stateVariableDeclaration, null, -1);
 			}
 		}
 	}
@@ -43,14 +43,14 @@ public class MscriptJavaValidator extends AbstractMscriptJavaValidator {
 	@Check
 	public void checkBeginExpressionMustBeInsideArraySubscript(BeginExpression beginExpression) {
 		if (!isInsideArraySubscript(beginExpression)) {
-			error("'begin' may only appear inside array subscripts", AstPackage.BEGIN_EXPRESSION);
+			error("'begin' may only appear inside array subscripts", null);
 		}
 	}
 
 	@Check
 	public void checkEndExpressionMustBeInsideArraySubscript(EndExpression endExpression) {
 		if (!isInsideArraySubscript(endExpression)) {
-			error("'end' may only appear inside array subscripts", AstPackage.END_EXPRESSION);
+			error("'end' may only appear inside array subscripts", null);
 		}
 	}
 	
@@ -67,7 +67,7 @@ public class MscriptJavaValidator extends AbstractMscriptJavaValidator {
 	@Check
 	public void checkUnitExpressionNumeratorMustConsistOfSymbolsOrOne(UnitExpressionNumerator numerator) {
 		if (numerator.getFactors().isEmpty() && numerator.getOne() != 1) {
-			error("Invalid unit numerator", AstPackage.UNIT_EXPRESSION_NUMERATOR__ONE);
+			error("Invalid unit numerator", AstPackage.eINSTANCE.getUnitExpressionNumerator_One());
 		}
 	}
 	

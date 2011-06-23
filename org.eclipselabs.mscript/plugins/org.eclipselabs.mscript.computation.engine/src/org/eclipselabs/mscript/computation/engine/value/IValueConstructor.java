@@ -15,6 +15,8 @@ import org.eclipselabs.mscript.computation.engine.IComputationContext;
 import org.eclipselabs.mscript.typesystem.NumericType;
 
 /**
+ * TODO: Remove this interface
+ * 
  * @author Andreas Unger
  *
  */

@@ -8,297 +8,297 @@
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipselabs.mscript.language.edit"
     editorPluginID="org.eclipselabs.mscript.language.editor">
   <genPackages prefix="Ast" basePackage="org.eclipselabs.mscript.language" disposableProviderFactory="true"
-      ecorePackage="Mscript.ecore#/">
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Mscript.ecore#//AssertionStatusKind">
-      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//AssertionStatusKind/Info"/>
-      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//AssertionStatusKind/Warning"/>
-      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//AssertionStatusKind/Error"/>
-      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//AssertionStatusKind/Fatal"/>
+      ecorePackage="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//AssertionStatusKind">
+      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//AssertionStatusKind/Info"/>
+      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//AssertionStatusKind/Warning"/>
+      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//AssertionStatusKind/Error"/>
+      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//AssertionStatusKind/Fatal"/>
     </genEnums>
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Mscript.ecore#//EqualityOperator">
-      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//EqualityOperator/EqualTo"/>
-      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//EqualityOperator/NotEqualTo"/>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//EqualityOperator">
+      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//EqualityOperator/EqualTo"/>
+      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//EqualityOperator/NotEqualTo"/>
     </genEnums>
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Mscript.ecore#//RelationalOperator">
-      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//RelationalOperator/LessThan"/>
-      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//RelationalOperator/LessThanOrEqualTo"/>
-      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//RelationalOperator/GreaterThan"/>
-      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//RelationalOperator/GreaterThanOrEqualTo"/>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//RelationalOperator">
+      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//RelationalOperator/LessThan"/>
+      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//RelationalOperator/LessThanOrEqualTo"/>
+      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//RelationalOperator/GreaterThan"/>
+      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//RelationalOperator/GreaterThanOrEqualTo"/>
     </genEnums>
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Mscript.ecore#//AdditiveOperator">
-      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//AdditiveOperator/Addition"/>
-      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//AdditiveOperator/Subtraction"/>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//AdditiveOperator">
+      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//AdditiveOperator/Addition"/>
+      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//AdditiveOperator/Subtraction"/>
     </genEnums>
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Mscript.ecore#//MultiplicativeOperator">
-      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//MultiplicativeOperator/Multiplication"/>
-      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//MultiplicativeOperator/Division"/>
-      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//MultiplicativeOperator/ElementWiseMultiplication"/>
-      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//MultiplicativeOperator/ElementWiseDivision"/>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//MultiplicativeOperator">
+      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//MultiplicativeOperator/Multiplication"/>
+      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//MultiplicativeOperator/Division"/>
+      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//MultiplicativeOperator/ElementWiseMultiplication"/>
+      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//MultiplicativeOperator/ElementWiseDivision"/>
     </genEnums>
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Mscript.ecore#//PowerOperator">
-      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//PowerOperator/Power"/>
-      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//PowerOperator/ElementWisePower"/>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//PowerOperator">
+      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//PowerOperator/Power"/>
+      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//PowerOperator/ElementWisePower"/>
     </genEnums>
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Mscript.ecore#//UnaryOperator">
-      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//UnaryOperator/Minus"/>
-      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//UnaryOperator/LogicalNot"/>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//UnaryOperator">
+      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//UnaryOperator/Minus"/>
+      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//UnaryOperator/LogicalNot"/>
     </genEnums>
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Mscript.ecore#//PostfixOperator">
-      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//PostfixOperator/Transpose"/>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//PostfixOperator">
+      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//PostfixOperator/Transpose"/>
     </genEnums>
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Mscript.ecore#//BooleanKind">
-      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//BooleanKind/False"/>
-      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//BooleanKind/True"/>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//BooleanKind">
+      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//BooleanKind/False"/>
+      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//BooleanKind/True"/>
     </genEnums>
-    <genClasses ecoreClass="Mscript.ecore#//Module">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//Module/definitions"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Module">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Module/definitions"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//Definition">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//Definition/name"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Definition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Definition/name"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//DataTypeDefinition"/>
-    <genClasses ecoreClass="Mscript.ecore#//EnumerationDefinition">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//EnumerationDefinition/literalDeclarations"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//DataTypeDefinition"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//EnumerationDefinition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//EnumerationDefinition/literalDeclarations"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//EnumerationLiteralDeclaration">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//EnumerationLiteralDeclaration/name"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//EnumerationLiteralDeclaration">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//EnumerationLiteralDeclaration/name"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//TypeAliasDefinition">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//TypeAliasDefinition/type"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//TypeAliasDefinition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//TypeAliasDefinition/type"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//RecordDefinition">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//RecordDefinition/fieldDeclarations"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//RecordDefinition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//RecordDefinition/fieldDeclarations"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//RecordFieldDeclaration">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//RecordFieldDeclaration/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//RecordFieldDeclaration/type"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//RecordFieldDeclaration">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//RecordFieldDeclaration/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//RecordFieldDeclaration/type"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//FunctionDefinition">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//FunctionDefinition/stateful"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//FunctionDefinition/templateParameterDeclarations"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//FunctionDefinition/inputParameterDeclarations"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//FunctionDefinition/outputParameterDeclarations"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//FunctionDefinition/assertions"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//FunctionDefinition/functionObjectDeclarations"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//FunctionDefinition/stateVariableDeclarations"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//FunctionDefinition/equations"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//FunctionDefinition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//FunctionDefinition/stateful"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//FunctionDefinition/templateParameterDeclarations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//FunctionDefinition/inputParameterDeclarations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//FunctionDefinition/outputParameterDeclarations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//FunctionDefinition/assertions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//FunctionDefinition/functionObjectDeclarations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//FunctionDefinition/stateVariableDeclarations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//FunctionDefinition/equations"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//ParameterDeclaration">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//ParameterDeclaration/name"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//ParameterDeclaration">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//ParameterDeclaration/name"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//Assertion">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//Assertion/static"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//Assertion/condition"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//Assertion/statusKind"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//Assertion/message"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Assertion">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Assertion/static"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Assertion/condition"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Assertion/statusKind"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Assertion/message"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//StateVariableDeclaration">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//StateVariableDeclaration/name"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//StateVariableDeclaration">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//StateVariableDeclaration/name"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//FunctionObjectDeclaration">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//FunctionObjectDeclaration/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//FunctionObjectDeclaration/functionName"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//FunctionObjectDeclaration/templateArguments"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//FunctionObjectDeclaration">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//FunctionObjectDeclaration/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//FunctionObjectDeclaration/functionName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//FunctionObjectDeclaration/templateArguments"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//Equation">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//Equation/leftHandSide"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//Equation/rightHandSide"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Equation">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Equation/leftHandSide"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Equation/rightHandSide"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//DataTypeSpecifier">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//DataTypeSpecifier/dimensions"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//DataTypeSpecifier">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//DataTypeSpecifier/dimensions"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//PrimitiveTypeSpecifier"/>
-    <genClasses ecoreClass="Mscript.ecore#//NumericTypeSpecifier">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//NumericTypeSpecifier/unit"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//PrimitiveTypeSpecifier"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//NumericTypeSpecifier">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//NumericTypeSpecifier/unit"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//RealTypeSpecifier"/>
-    <genClasses ecoreClass="Mscript.ecore#//IntegerTypeSpecifier"/>
-    <genClasses ecoreClass="Mscript.ecore#//ComplexTypeSpecifier"/>
-    <genClasses ecoreClass="Mscript.ecore#//GaussianTypeSpecifier"/>
-    <genClasses ecoreClass="Mscript.ecore#//BooleanTypeSpecifier"/>
-    <genClasses ecoreClass="Mscript.ecore#//StringTypeSpecifier"/>
-    <genClasses ecoreClass="Mscript.ecore#//NamedTypeSpecifier">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//NamedTypeSpecifier/typeReference"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//RealTypeSpecifier"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//IntegerTypeSpecifier"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//ComplexTypeSpecifier"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//GaussianTypeSpecifier"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//BooleanTypeSpecifier"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//StringTypeSpecifier"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//NamedTypeSpecifier">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//NamedTypeSpecifier/typeReference"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//ArrayDimensionSpecification">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ArrayDimensionSpecification/size"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//ArrayDimensionSpecification">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//ArrayDimensionSpecification/size"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//Expression"/>
-    <genClasses ecoreClass="Mscript.ecore#//LetExpression">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//LetExpression/variableDeclarations"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//LetExpression/targetExpression"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Expression"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//LetExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//LetExpression/variableDeclarations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//LetExpression/targetExpression"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//LetExpressionVariableDeclaration">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//LetExpressionVariableDeclaration/names"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//LetExpressionVariableDeclaration/assignedExpression"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//LetExpressionVariableDeclaration">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//LetExpressionVariableDeclaration/names"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//LetExpressionVariableDeclaration/assignedExpression"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//IfExpression">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//IfExpression/static"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//IfExpression/condition"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//IfExpression/thenExpression"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//IfExpression/elseExpression"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//IfExpression">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//IfExpression/static"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//IfExpression/condition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//IfExpression/thenExpression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//IfExpression/elseExpression"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//SwitchExpression">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//SwitchExpression/static"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//SwitchExpression/controlExpression"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//SwitchExpression/cases"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//SwitchExpression/defaultExpression"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//SwitchExpression">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//SwitchExpression/static"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//SwitchExpression/controlExpression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//SwitchExpression/cases"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//SwitchExpression/defaultExpression"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//SwitchCase">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//SwitchCase/caseExpression"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//SwitchCase/resultExpression"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//SwitchCase">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//SwitchCase/caseExpression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//SwitchCase/resultExpression"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//AdditiveExpressionPart">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//AdditiveExpressionPart/operator"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//AdditiveExpressionPart/operand"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//AdditiveExpressionPart">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//AdditiveExpressionPart/operator"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//AdditiveExpressionPart/operand"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//MultiplicativeExpressionPart">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//MultiplicativeExpressionPart/operator"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//MultiplicativeExpressionPart/operand"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//MultiplicativeExpressionPart">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//MultiplicativeExpressionPart/operator"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//MultiplicativeExpressionPart/operand"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//Literal"/>
-    <genClasses ecoreClass="Mscript.ecore#//NumericLiteral">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//NumericLiteral/modifier"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//NumericLiteral/unit"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Literal"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//NumericLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//NumericLiteral/modifier"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//NumericLiteral/unit"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//RealLiteral">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//RealLiteral/value"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//RealLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//RealLiteral/value"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//IntegerLiteral">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//IntegerLiteral/value"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//IntegerLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//IntegerLiteral/value"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//BooleanLiteral">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//BooleanLiteral/value"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//BooleanLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//BooleanLiteral/value"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//StringLiteral">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//StringLiteral/value"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//StringLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//StringLiteral/value"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//FeatureCallPart"/>
-    <genClasses ecoreClass="Mscript.ecore#//NameComponent">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//NameComponent/identifier"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//FeatureCallPart"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//NameComponent">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//NameComponent/identifier"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//ArrayElementAccess">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ArrayElementAccess/subscripts"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//ArrayElementAccess">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//ArrayElementAccess/subscripts"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//ArraySubscript">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//ArraySubscript/slice"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ArraySubscript/expression"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//ArraySubscript">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//ArraySubscript/slice"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//ArraySubscript/expression"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//OperationArgumentList">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//OperationArgumentList/arguments"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//OperationArgumentList">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//OperationArgumentList/arguments"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//IterationCall">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//IterationCall/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//IterationCall/variables"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//IterationCall/accumulator"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//IterationCall/breakCondition"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//IterationCall/expression"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//IterationCall">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//IterationCall/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//IterationCall/variables"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//IterationCall/accumulator"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//IterationCall/breakCondition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//IterationCall/expression"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//IterationVariable">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//IterationVariable/name"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//IterationVariable">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//IterationVariable/name"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//IterationAccumulator">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//IterationAccumulator/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//IterationAccumulator/initializer"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//IterationAccumulator">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//IterationAccumulator/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//IterationAccumulator/initializer"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//ArrayConstructionOperator">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ArrayConstructionOperator/expressions"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ArrayConstructionOperator/iterationClauses"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//ArrayConstructionOperator">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//ArrayConstructionOperator/expressions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//ArrayConstructionOperator/iterationClauses"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//ArrayConstructionIterationClause">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//ArrayConstructionIterationClause/variableName"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ArrayConstructionIterationClause/collectionExpression"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//ArrayConstructionIterationClause">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//ArrayConstructionIterationClause/variableName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//ArrayConstructionIterationClause/collectionExpression"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//ArrayConcatenationOperator">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ArrayConcatenationOperator/rows"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//ArrayConcatenationOperator">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//ArrayConcatenationOperator/rows"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//ExpressionList">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ExpressionList/expressions"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//ExpressionList">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//ExpressionList/expressions"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//UnitConstructionOperator">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//UnitConstructionOperator/unit"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//UnitConstructionOperator">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//UnitConstructionOperator/unit"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//ParenthesizedExpression">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ParenthesizedExpression/expressions"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//ParenthesizedExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//ParenthesizedExpression/expressions"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//BeginExpression"/>
-    <genClasses ecoreClass="Mscript.ecore#//EndExpression"/>
-    <genClasses ecoreClass="Mscript.ecore#//QualifiedName">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//QualifiedName/identifiers"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//BeginExpression"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//EndExpression"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//QualifiedName">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//QualifiedName/identifiers"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//UnitExpression">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//UnitExpression/numerator"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//UnitExpression/denominator"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//UnitExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//UnitExpression/numerator"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//UnitExpression/denominator"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//UnitExpressionNumerator">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//UnitExpressionNumerator/one"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//UnitExpressionNumerator/factors"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//UnitExpressionNumerator">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//UnitExpressionNumerator/one"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//UnitExpressionNumerator/factors"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//UnitExpressionDenominator">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//UnitExpressionDenominator/factors"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//UnitExpressionDenominator">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//UnitExpressionDenominator/factors"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//UnitExpressionFactor">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//UnitExpressionFactor/operand"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//UnitExpressionFactor/exponent"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//UnitExpressionFactor">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//UnitExpressionFactor/operand"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//UnitExpressionFactor/exponent"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//UnitExpressionExponent">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//UnitExpressionExponent/negative"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//UnitExpressionExponent/value"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//UnitExpressionExponent">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//UnitExpressionExponent/negative"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//UnitExpressionExponent/value"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//RangeExpression">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//RangeExpression/operands"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//RangeExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//RangeExpression/operands"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//ImpliesExpression">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ImpliesExpression/leftOperand"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//ImpliesExpression/rightOperand"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//ImpliesExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//ImpliesExpression/leftOperand"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//ImpliesExpression/rightOperand"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//LogicalOrExpression">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//LogicalOrExpression/operands"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//LogicalOrExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//LogicalOrExpression/operands"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//LogicalAndExpression">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//LogicalAndExpression/operands"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//LogicalAndExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//LogicalAndExpression/operands"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//EqualityExpression">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//EqualityExpression/leftOperand"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//EqualityExpression/operator"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//EqualityExpression/rightOperand"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//EqualityExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//EqualityExpression/leftOperand"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//EqualityExpression/operator"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//EqualityExpression/rightOperand"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//RelationalExpression">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//RelationalExpression/leftOperand"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//RelationalExpression/operator"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//RelationalExpression/rightOperand"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//RelationalExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//RelationalExpression/leftOperand"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//RelationalExpression/operator"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//RelationalExpression/rightOperand"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//TypeTestExpression">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//TypeTestExpression/expression"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//TypeTestExpression/type"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//TypeTestExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//TypeTestExpression/expression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//TypeTestExpression/type"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//AdditiveExpression">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//AdditiveExpression/leftOperand"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//AdditiveExpression/rightParts"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//AdditiveExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//AdditiveExpression/leftOperand"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//AdditiveExpression/rightParts"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//MultiplicativeExpression">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//MultiplicativeExpression/leftOperand"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//MultiplicativeExpression/rightParts"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//MultiplicativeExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//MultiplicativeExpression/leftOperand"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//MultiplicativeExpression/rightParts"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//PowerExpression">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//PowerExpression/operand"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//PowerExpression/operator"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//PowerExpression/exponent"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//PowerExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//PowerExpression/operand"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//PowerExpression/operator"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//PowerExpression/exponent"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//UnaryExpression">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//UnaryExpression/operator"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//UnaryExpression/operand"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//UnaryExpression">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//UnaryExpression/operator"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//UnaryExpression/operand"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//PostfixExpression">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//PostfixExpression/operand"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//PostfixExpression/operator"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//PostfixExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//PostfixExpression/operand"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//PostfixExpression/operator"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//SimpleName">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//SimpleName/identifier"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//SimpleName">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//SimpleName/identifier"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//FeatureCall">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//FeatureCall/target"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//FeatureCall/parts"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//FeatureCall">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//FeatureCall/target"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//FeatureCall/parts"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
