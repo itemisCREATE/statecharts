@@ -20,7 +20,6 @@ import org.yakindu.sct.statechart.diagram.extensions.IExpressionsProvider;
 
 import com.google.inject.Injector;
 
-import de.itemis.gmf.runtime.commons.properties.GenericFormBasedPropertySection;
 import de.itemis.gmf.runtime.commons.properties.descriptors.IFormPropertyDescriptor;
 import de.itemis.gmf.runtime.commons.properties.descriptors.TextPropertyDescriptor;
 /**
@@ -31,15 +30,12 @@ import de.itemis.gmf.runtime.commons.properties.descriptors.TextPropertyDescript
  * @author andreas muelder
  *
  */
-public class StatePropertySection extends GenericFormBasedPropertySection {
+public class StatePropertySection extends NamePropertySection {
 
 	@Override
 	protected void createPropertyDescriptors(
 			List<IFormPropertyDescriptor> descriptors) {
-		
-		TextPropertyDescriptor nameDescriptor = new TextPropertyDescriptor(
-				StatechartPackage.Literals.NAMED_ELEMENT__NAME, "Name: ");
-		descriptors.add(nameDescriptor);
+		super.createPropertyDescriptors(descriptors);
 
 		XtextPropertyDescriptor expressionsDescriptor = new XtextPropertyDescriptor(
 				StatechartPackage.Literals.EXPRESSION_ELEMENT__EXPRESSION,
