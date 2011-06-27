@@ -57,8 +57,8 @@ public abstract class AbstractPropertyDescriptor implements
 	/**
 	 * Hook method, clients may override if another layouting is needed
 	 */
-	protected void applyLayout(Label label) {
-		GridDataFactory.fillDefaults().applyTo(label);
+	protected void applyLayout(Control control) {
+		GridDataFactory.fillDefaults().applyTo(control);
 	}
 
 	public Control getControl() {
