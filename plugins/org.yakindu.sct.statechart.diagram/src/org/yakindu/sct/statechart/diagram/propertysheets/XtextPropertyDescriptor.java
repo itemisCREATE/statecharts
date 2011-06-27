@@ -42,7 +42,7 @@ public class XtextPropertyDescriptor extends AbstractPropertyDescriptor {
 				| SWT.V_SCROLL) {
 			@Override
 			protected void focusLost() {
-				// super.focusLost();
+				// Default implementation disposes control on focus lost
 			}
 		};
 		getInjector().injectMembers(editor);

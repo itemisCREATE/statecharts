@@ -379,6 +379,20 @@
             class="org.yakindu.sct.statechart.diagram.propertysheets.TransitionPropertySection">
             <input type="org.yakindu.sct.statechart.diagram.editparts.TransitionEditPart"/>
          </propertySection>
+           <!-- Entry model section -->         
+         <propertySection
+            id="property.section.domain.entry" 
+            tab="property.tab.domain"
+            class="org.yakindu.sct.statechart.diagram.propertysheets.EntryPropertySection">
+            <input type="org.yakindu.sct.statechart.diagram.editparts.EntryEditPart"/>
+         </propertySection>
+            <!-- Region model section -->         
+         <propertySection
+            id="property.section.domain.region" 
+            tab="property.tab.domain"
+            class="org.yakindu.sct.statechart.diagram.propertysheets.RegionPropertySection">
+            <input type="org.yakindu.sct.statechart.diagram.editparts.RegionEditPart"/>
+         </propertySection>
          
          <propertySection id="property.section.ConnectorAppearancePropertySection" 
             filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.ConnectionEditPartPropertySectionFilter" 
