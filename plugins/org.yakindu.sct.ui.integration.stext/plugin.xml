@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.yakindu.sct.ui.editor.expressions">
+      <ExpressionProvider
+            class="org.yakindu.sct.ui.integration.stext.TransitionExpressionProvider">
+      </ExpressionProvider>
+      <ExpressionProvider
+            class="org.yakindu.sct.ui.integration.stext.StateExpressionProvider">
+      </ExpressionProvider>
+      <ExpressionProvider
+            class="org.yakindu.sct.ui.integration.stext.StatechartExpressionProvider">
+      </ExpressionProvider>
+   </extension>
+
+</plugin>
