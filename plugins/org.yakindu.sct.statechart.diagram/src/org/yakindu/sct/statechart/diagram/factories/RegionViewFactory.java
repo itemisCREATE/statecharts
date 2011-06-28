@@ -1,7 +1,6 @@
 package org.yakindu.sct.statechart.diagram.factories;
 
 import org.eclipse.core.runtime.IAdaptable;
-import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.diagram.core.util.ViewUtil;
 import org.eclipse.gmf.runtime.diagram.ui.view.factories.AbstractShapeViewFactory;
@@ -46,7 +45,7 @@ public class RegionViewFactory extends AbstractShapeViewFactory {
 		style.setFillColor(FigureUtilities
 				.RGBToInteger(StatechartColorConstants.REGION_BG_COLOR.getRGB()));
 		style.setLineColor(FigureUtilities
-				.RGBToInteger(ColorConstants.lightGray.getRGB()));
+				.RGBToInteger(StatechartColorConstants.REGION_LINE_COLOR.getRGB()));
 
 	}
 }

@@ -17,6 +17,7 @@ import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.GraphicalEditPart;
@@ -30,6 +31,7 @@ import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.NonResizableEditPolicyEx;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.ResizableEditPolicyEx;
 import org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewAndElementRequest;
+import org.eclipse.gmf.runtime.draw2d.ui.figures.FigureUtilities;
 import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.Compartment;
@@ -40,6 +42,7 @@ import org.yakindu.sct.statechart.diagram.editor.figures.StateFigure;
 import org.yakindu.sct.statechart.diagram.editor.figures.utils.GridDataFactory;
 import org.yakindu.sct.statechart.diagram.editor.figures.utils.MapModeUtils;
 import org.yakindu.sct.statechart.diagram.policies.RelationshipSemanticEditPolicy;
+import org.yakindu.sct.statechart.diagram.preferences.StatechartColorConstants;
 
 /**
  * The EditPart for the State.
@@ -50,7 +53,7 @@ import org.yakindu.sct.statechart.diagram.policies.RelationshipSemanticEditPolic
  */
 public class StateEditPart extends ShapeNodeEditPart implements
 		IPrimaryEditPart {
-	
+
 	private EditPart figureCompartmentEditPart;
 
 	public StateEditPart(View view) {
@@ -231,5 +234,23 @@ public class StateEditPart extends ShapeNodeEditPart implements
 			refreshVisuals();
 		}
 		super.handleNotificationEvent(notification);
+	}
+
+	/**
+	 * Returns the default background color for states
+	 */
+	@Override
+	public Object getPreferredValue(EStructuralFeature feature) {
+		if (feature == NotationPackage.eINSTANCE.getLineStyle_LineColor()) {
+			return FigureUtilities
+					.RGBToInteger(StatechartColorConstants.STATE_LINE_COLOR
+							.getRGB());
+		} else if (feature == NotationPackage.eINSTANCE
+				.getFillStyle_FillColor()) {
+			return FigureUtilities
+					.RGBToInteger(StatechartColorConstants.STATE_BG_COLOR
+							.getRGB());
+		}
+		return super.getPreferredValue(feature);
 	}
 }
