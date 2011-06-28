@@ -1,0 +1,548 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+	<!-- Extension Points -->
+	
+   <extension-point id="org.yakindu.sct.ui.editor.expressions" name="org.yakindu.sct.ui.editor.expressions" schema="schema/org.yakindu.sct.ui.editor.expressions.exsd"/>
+  
+    <!-- Editor -->
+  
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor"
+            contributorClass="org.yakindu.sct.ui.editor.editor.StatechartDiagramActionbarContributor"
+            default="true"
+            extensions="sct"
+            icon="icons/obj16/StatemachineDiagramFile.gif"
+            id="org.yakindu.sct.ui.editor.StatechartDiagramEditor"
+            matchingStrategy="org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditorMatchingStrategy"
+            name="YAKINDU Statechart Editor">
+      </editor>
+   </extension>
+   
+     <!-- Element Types -->
+   
+   <extension
+         point="org.eclipse.gmf.runtime.emf.type.core.elementTypes">
+      <metamodel
+            nsURI="http://www.yakindu.org/sct/2.0.0">
+         <metamodelType
+               eclass="Statechart"
+               icon="icons/obj16/StatemachineDiagramFile.gif"
+               id="org.yakindu.sct.ui.editor.Statechart"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               name="Statechart">
+            <param
+                  name="semanticHint"
+                  value="Statechart">
+            </param>
+               
+         </metamodelType>
+         <metamodelType
+               eclass="Region"
+               icon="icons/obj16/region_16x16.png"
+               id="org.yakindu.sct.ui.editor.Region"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               name="Region">
+            <param
+                  name="semanticHint"
+                  value="Region">
+            </param>
+         </metamodelType>
+         <metamodelType
+               eclass="State"
+               icon="icons/obj16/state_16x16.png"
+               id="org.yakindu.sct.ui.editor.State"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               name="State">
+            <param
+                  name="semanticHint"
+                  value="State">
+            </param>
+         </metamodelType>
+         <metamodelType
+               eclass="Transition"
+               edithelper="org.yakindu.sct.ui.editor.edithelper.TransitionEditHelper"
+               icon="icons/obj16/transition_16x16.png"
+               id="org.yakindu.sct.ui.editor.Transition"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               name="Transition">
+            <param
+                  name="semanticHint"
+                  value="Transition">
+            </param>
+         </metamodelType>
+         <metamodelType
+               eclass="Choice"
+               icon="icons/obj16/choice_16x16.png"
+               id="org.yakindu.sct.ui.editor.Choice"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               name="Choice">
+            <param
+                  name="semanticHint"
+                  value="Choice">
+            </param>
+         </metamodelType>
+         <metamodelType
+               eclass="Entry"
+               edithelper="org.yakindu.sct.ui.editor.edithelper.EntryEditHelper"
+               icon="icons/obj16/initial_state_16x16.png"
+               id="org.yakindu.sct.ui.editor.Entry"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               name="Entry">
+            <param
+                  name="semanticHint"
+                  value="Entry">
+            </param>
+         </metamodelType>
+         <metamodelType
+               eclass="Entry"
+               edithelper="org.yakindu.sct.ui.editor.edithelper.EntryEditHelper"
+               icon="icons/obj16/shallow_history_16x16.png"
+               id="org.yakindu.sct.ui.editor.ShallowHistory"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               name="ShallowHistory">
+            <param
+                  name="semanticHint"
+                  value="ShallowHistory">
+            </param>
+         </metamodelType>
+         <metamodelType
+               eclass="Entry"
+               edithelper="org.yakindu.sct.ui.editor.edithelper.EntryEditHelper"
+               icon="icons/obj16/deep_history_16x16.png"
+               id="org.yakindu.sct.ui.editor.DeepHistory"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               name="DeepHistory">
+            <param
+                  name="semanticHint"
+                  value="DeepHistory">
+            </param>
+         </metamodelType>
+         <metamodelType
+               eclass="FinalState"
+               icon="icons/obj16/final_state_16x16.png"
+               id="org.yakindu.sct.ui.editor.FinalState"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               name="FinalState">
+            <param
+                  name="semanticHint"
+                  value="FinalState">
+            </param>
+         </metamodelType>
+          <metamodelType
+               eclass="Exit"
+               icon="icons/obj16/exit_point_16x16.png"
+               id="org.yakindu.sct.ui.editor.Exit"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               name="Exit">
+            <param
+                  name="semanticHint"
+                  value="Exit">
+            </param>
+         </metamodelType>
+         <metamodelType
+               eclass="Junction"
+               icon="icons/obj16/junction_16x16.png"
+               id="org.yakindu.sct.ui.editor.Junction"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               name="Junction">
+            <param
+                  name="semanticHint"
+                  value="Junction">
+            </param>
+         </metamodelType>
+         </metamodel>
+   </extension>
+   
+   <!-- Contribution Item Provider -->
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.action.contributionItemProviders">
+      <contributionItemProvider
+            class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContributionItemProvider"
+            checkPluginLoaded="false">
+         <Priority name="Low"/>
+         <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
+            <popupStructuredContributionCriteria objectClass="org.yakindu.sct.ui.editor.editparts.StatechartTextEditPart"/>
+            <popupStructuredContributionCriteria objectClass="org.yakindu.sct.ui.editor.editparts.StatechartTextExpressionEditPart"/>
+            <popupPredefinedItem id="editGroup" remove="true"/>
+         </popupContribution>
+      </contributionItemProvider>
+   </extension>
+   
+  <!-- View Provider -->
+   
+   <extension
+         point="org.eclipse.gmf.runtime.diagram.core.viewProviders">
+      <viewProvider
+            class="org.yakindu.sct.ui.editor.providers.StatechartDiagramViewProvider">
+         <Priority
+               name="Highest">
+         </Priority>
+      </viewProvider>
+   </extension>
+   
+   <!-- EditPart Provider -->
+   
+   <extension
+         point="org.eclipse.gmf.runtime.diagram.ui.editpartProviders">
+      <editpartProvider
+            class="org.yakindu.sct.ui.editor.providers.StatechartDiagramEditPartProvider">
+         <Priority
+               name="Lowest">
+         </Priority>
+      </editpartProvider>
+   </extension>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <wizard
+            category="YAKINDU"
+            class="org.yakindu.sct.ui.editor.wizards.CreationWizard"
+            icon="icons/obj16/StatemachineDiagramFile.gif"
+            id="org.yakindu.sct.ui.editor.StatechartDiagramWizard"
+            name="YAKINDU Statechart Diagram"
+            project="false">
+      </wizard>
+   </extension>
+   
+   <!-- Palette Provider -->
+   
+   <extension
+         point="org.eclipse.gmf.runtime.diagram.ui.paletteProviders">
+      <paletteProvider
+            class="org.eclipse.gmf.runtime.diagram.ui.providers.DefaultPaletteProvider">
+         <contribution
+               factoryClass="org.yakindu.sct.ui.editor.editor.StatechartDiagramPaletteFactory">
+            <entry
+                  id="tools"
+                  kind="drawer"
+                  label="Tools"
+                  path="/">
+                   <expand
+                         force="true">
+                     </expand>
+            </entry>
+             <entry
+                  description="Creates a state"
+                  id="org.yakindu.sct.ui.editor.State"
+                  kind="tool"
+                  label="State"
+                  large_icon="icons/obj16/state_16x16.png"
+                  path="/tools/"
+                  small_icon="icons/obj16/state_16x16.png">
+                   <expand
+                         force="true">
+                           <content>
+                           </content>
+                     </expand>
+            </entry>
+             <entry
+                   description="Creates a region"
+                   id="org.yakindu.sct.ui.editor.Region"
+                   kind="tool"
+                   label="Region"
+                   large_icon="icons/obj16/region_16x16.png"
+                   path="/tools/"
+                   small_icon="icons/obj16/region_16x16.png">
+             </entry>
+             <entry
+                   description="Creates a transition"
+                   id="org.yakindu.sct.ui.editor.Transition"
+                   kind="tool"
+                   label="Transition"
+                   large_icon="icons/obj16/transition_16x16.png"
+                   path="/tools/"
+                   small_icon="icons/obj16/transition_16x16.png">
+             </entry>
+             <entry
+                   description="Creates a choice"
+                   id="org.yakindu.sct.ui.editor.Choice"
+                   kind="tool"
+                   label="Choice"
+                   large_icon="icons/obj16/choice_16x16.png"
+                   path="/tools/"
+                   small_icon="icons/obj16/choice_16x16.png">
+             </entry>
+             <entry
+                   description="Creates a junction"
+                   id="org.yakindu.sct.ui.editor.Junction"
+                   kind="tool"
+                   label="Junction"
+                   large_icon="icons/obj16/junction_16x16.png"
+                   path="/tools/"
+                   small_icon="icons/obj16/junction_16x16.png">
+             </entry>
+             <entry
+                   description="Creates an initial state"
+                   id="org.yakindu.sct.ui.editor.Entry"
+                   kind="tool"
+                   label="Initial State"
+                   large_icon="icons/obj16/initial_state_16x16.png"
+                   path="/tools/"
+                   small_icon="icons/obj16/initial_state_16x16.png">
+             </entry>
+              <entry
+                   description="Creates a shallow history"
+                   id="org.yakindu.sct.ui.editor.ShallowHistory"
+                   kind="tool"
+                   label="Shallow History"
+                   large_icon="icons/obj16/shallow_history_16x16.png"
+                   path="/tools/"
+                   small_icon="icons/obj16/shallow_history_16x16.png">
+             </entry>
+             <entry
+                   description="Creates a deep history"
+                   id="org.yakindu.sct.ui.editor.DeepHistory"
+                   kind="tool"
+                   label="Deep History"
+                   large_icon="icons/obj16/deep_history_16x16.png"
+                   path="/tools/"
+                   small_icon="icons/obj16/deep_history_16x16.png">
+             </entry>
+             <entry
+                   description="Creates a final state"
+                   id="org.yakindu.sct.ui.editor.FinalState"
+                   kind="tool"
+                   label="Final State"
+                   large_icon="icons/obj16/final_state_16x16.png"
+                   path="/tools/"
+                   small_icon="icons/obj16/final_state_16x16.png">
+             </entry>
+               <entry
+                   description="Creates an exit point"
+                   id="org.yakindu.sct.ui.editor.Exit"
+                   kind="tool"
+                   label="Exit Point"
+                   large_icon="icons/obj16/exit_point_16x16.png"
+                   path="/tools/"
+                   small_icon="icons/obj16/exit_point_16x16.png">
+             </entry>
+         </contribution>
+         <Priority
+               name="Highest">
+         </Priority>
+         <editor
+               class="org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor">
+         </editor>
+      </paletteProvider>
+   </extension>
+
+<!-- Property Tabs -->
+
+<extension point="org.eclipse.ui.views.properties.tabbed.propertyContributor" id="prop-contrib">
+      <propertyContributor
+            contributorId="org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor"
+            labelProvider="org.yakindu.sct.ui.editor.propertysheets.SheetLabelProvider">
+         <propertyCategory category="domain"/>
+         <propertyCategory category="visual"/>
+         <propertyCategory category="extra"/>
+      </propertyContributor>
+   </extension>
+
+ <extension point="org.eclipse.ui.views.properties.tabbed.propertyTabs" id="proptabs">
+      <propertyTabs contributorId="org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor">
+          <propertyTab
+             category="domain"
+             id="property.tab.domain"
+             label="Model"/>
+          <propertyTab
+             category="visual"
+             id="property.tab.AppearancePropertySection"
+             label="Appearance"/>
+          <propertyTab
+             category="visual"
+             id="property.tab.DiagramPropertySection"
+             label="Diagram"/>
+      </propertyTabs>
+   </extension>
+   
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertySections" id="propsections">
+      <propertySections contributorId="org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor">
+		<!-- State model section -->         
+         <propertySection
+            id="property.section.domain.state" 
+            tab="property.tab.domain"
+            class="org.yakindu.sct.ui.editor.propertysheets.StatePropertySection">
+            <input type="org.yakindu.sct.ui.editor.editparts.StateEditPart"/>
+         </propertySection>
+        <!-- Statechart model section -->         
+         <propertySection
+            id="property.section.domain.statechart" 
+            tab="property.tab.domain"
+            class="org.yakindu.sct.ui.editor.propertysheets.StatechartPropertySection">
+            <input type="org.yakindu.sct.ui.editor.editparts.StatechartTextEditPart"/>
+         </propertySection>
+        <!-- Transition model section -->         
+         <propertySection
+            id="property.section.domain.transition" 
+            tab="property.tab.domain"
+            class="org.yakindu.sct.ui.editor.propertysheets.TransitionPropertySection">
+            <input type="org.yakindu.sct.ui.editor.editparts.TransitionEditPart"/>
+         </propertySection>
+           <!-- Entry model section -->         
+         <propertySection
+            id="property.section.domain.entry" 
+            tab="property.tab.domain"
+            class="org.yakindu.sct.ui.editor.propertysheets.EntryPropertySection">
+            <input type="org.yakindu.sct.ui.editor.editparts.EntryEditPart"/>
+         </propertySection>
+            <!-- Region model section -->         
+         <propertySection
+            id="property.section.domain.region" 
+            tab="property.tab.domain"
+            class="org.yakindu.sct.ui.editor.propertysheets.RegionPropertySection">
+            <input type="org.yakindu.sct.ui.editor.editparts.RegionEditPart"/>
+         </propertySection>
+         
+         <propertySection id="property.section.ConnectorAppearancePropertySection" 
+            filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.ConnectionEditPartPropertySectionFilter" 
+            class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.appearance.ConnectionAppearancePropertySection" 
+            tab="property.tab.AppearancePropertySection">
+         </propertySection>
+         <propertySection id="property.section.ShapeColorAndFontPropertySection" 
+            filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.ShapeEditPartPropertySectionFilter" 
+            class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.appearance.ShapeColorsAndFontsPropertySection" 
+            tab="property.tab.AppearancePropertySection">
+         </propertySection> 
+         <propertySection id="property.section.DiagramColorsAndFontsPropertySection" 
+            filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.DiagramEditPartPropertySectionFilter" 
+            class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.appearance.DiagramColorsAndFontsPropertySection" 
+            tab="property.tab.AppearancePropertySection">
+         </propertySection>     
+         <propertySection id="property.section.RulerGridPropertySection" 
+            filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.DiagramEditPartPropertySectionFilter" 
+            class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.grid.RulerGridPropertySection" 
+            tab="property.tab.DiagramPropertySection">
+         </propertySection>     
+      </propertySections>
+   </extension>
+
+   <!-- Modeling Assistant -->
+   
+   <extension
+         point="org.eclipse.gmf.runtime.emf.ui.modelingAssistantProviders">
+      <modelingAssistantProvider
+            class="org.yakindu.sct.ui.editor.assistent.StatechartModelingAssistantProvider">
+         <Priority
+               name="Lowest">
+         </Priority>
+         <object
+               class="org.yakindu.sct.ui.editor.editparts.RegionEditPart"
+               id="Region">
+         </object>
+         <object
+               class="org.yakindu.sct.ui.editor.editparts.StateEditPart"
+               id="State">
+         </object>
+         <object
+               class="org.yakindu.sct.ui.editor.editparts.RegionCompartmentEditPart"
+               id="Region_Compartment">
+         </object>
+         <object
+               class="org.yakindu.sct.ui.editor.editparts.StateCompartmentEditPart"
+               id="State_Compartment">
+         </object>
+      </modelingAssistantProvider>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="org.yakindu.sct.ui.editor.preferences.PreferenceInitializer">
+      </initializer>
+   </extension>
+   
+   <!-- marker && validation -->
+    <extension id="org.yakindu.sct.ui.editor.diagnostic" name="Statechart Diagram problems" point="org.eclipse.core.resources.markers">
+      <super type="org.eclipse.core.resources.problemmarker"/>
+      <super type="org.eclipse.gmf.runtime.common.ui.services.marker"/>
+      <persistent value="true"/>
+   </extension>   
+   
+    <extension id="org.yakindu.sct.ui.editor.xtext.diagnostic" name="Statechart Expression problems" point="org.eclipse.core.resources.markers">
+      <super type="org.eclipse.core.resources.problemmarker"/>
+      <super type="org.eclipse.gmf.runtime.common.ui.services.marker"/>
+      <persistent value="true"/>
+   </extension>   
+  
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.markerNavigationProviders" id="markers-navigation">
+      <MarkerNavigationProvider class="org.yakindu.sct.ui.editor.providers.StatechartMarkerNavigationProvider">
+         <MarkerType name="org.yakindu.sct.ui.editor.diagnostic"/>
+           <MarkerType name="org.yakindu.sct.ui.editor.xtext.diagnostic"/>
+         <Priority name="Medium"/>
+      </MarkerNavigationProvider>
+   </extension>
+   
+   <extension id="validationDecoratorProvider" name="ValidationDecorations" point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders">
+      <decoratorProvider class="org.yakindu.sct.ui.editor.providers.StatechartValidationDecorationProvider">
+         <Priority name="Lowest"/>
+         <object class="org.eclipse.gmf.runtime.diagram.ui.editparts.IPrimaryEditPart(org.eclipse.gmf.runtime.diagram.ui)" id="PRIMARY_VIEW"/>
+         <context decoratorTargets="PRIMARY_VIEW"/>
+      </decoratorProvider>
+   </extension>
+   
+   <!-- Global Print Action handler -->
+    <extension point="org.eclipse.gmf.runtime.common.ui.services.action.globalActionHandlerProviders" id="global-actions">
+      <GlobalActionHandlerProvider
+         class="org.eclipse.gmf.runtime.diagram.ui.printing.render.providers.DiagramWithPrintGlobalActionHandlerProvider"
+         id="Print handler">
+         <Priority name="Lowest"/>
+         <ViewId id="org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor">
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+               <GlobalActionId actionId="print"/>
+            </ElementType>
+         </ViewId>
+      </GlobalActionHandlerProvider>
+      </extension>
+   
+   <!-- context menu contribution -->
+     <extension point="org.eclipse.ui.commands">
+	<command description="Change Flow Kind" id="org.yakindu.sct.ui.editor.Entry" name="Change Entry Kind">
+	</command>
+</extension>
+   
+   <extension point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="false"
+            id="org.yakindu.sct.ui.editor.Entry"
+            objectClass="org.yakindu.sct.ui.editor.editparts.EntryEditPart">
+         <menu 
+            id="Entry" label="Change Entry Kind" path="additions"> 
+            <separator name="group1"/>
+         </menu>
+          <action
+               class="org.yakindu.sct.ui.editor.actions.SetDeepHistoryEntryKindCommand"
+               definitionId="org.yakindu.sct.ui.editor.Entry"
+               id="org.yakindu.sct.ui.editor.DeepHistory"
+               label="DeepHistory"
+               menubarPath="Entry/group1">
+         </action>
+           <action
+               class="org.yakindu.sct.ui.editor.actions.SetShallowHistoryEntryKindCommand"
+               definitionId="org.yakindu.sct.ui.editor.Entry"
+               id="org.yakindu.sct.ui.editor.ShallowHistory"
+               label="ShallowHistory"
+               menubarPath="Entry/group1">
+         </action>
+           <action
+               class="org.yakindu.sct.ui.editor.actions.SetInitialEntryKindCommand"
+               definitionId="org.yakindu.sct.ui.editor.Entry"
+               id="org.yakindu.sct.ui.editor.Initial"
+               label="Initial"
+               menubarPath="Entry/group1">
+         </action>
+      </objectContribution>       
+      <objectContribution
+            adaptable="false"
+            id="org.yakindu.sct.ui.editor.regionLayout"
+            objectClass="org.yakindu.sct.ui.editor.editparts.StateEditPart">
+          <action
+               class="org.yakindu.sct.ui.editor.actions.ToggleSubRegionLayoutCommand"
+               definitionId="org.yakindu.sct.ui.editor.regionLayout"
+               id="org.yakindu.sct.ui.editor.regionLayout.toggle"
+               label="Toggle subregion alignment"
+               menubarPath="additions">
+         </action>    
+      </objectContribution>           
+</extension>
+
+</plugin>

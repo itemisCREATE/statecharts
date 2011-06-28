@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright (c) 2011 committers of YAKINDU and others.&#xD;&#xA;All rights reserved. This program and the accompanying materials&#xD;&#xA;are made available under the terms of the Eclipse Public License v1.0&#xD;&#xA;which accompanies this distribution, and is available at&#xD;&#xA;http://www.eclipse.org/legal/epl-v10.html&#xD;&#xA;Contributors:&#xD;&#xA;committers of YAKINDU - initial API and implementation&#xD;&#xA;"
+    modelDirectory="/org.yakindu.sct.model.sgraph/src" modelPluginID="org.yakindu.sct.model.sgraph"
+    modelName="SGraph" importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0">
+  <foreignModel>sgraph.ecore</foreignModel>
+  <genPackages prefix="SGraph" basePackage="org.yakindu.sct.model" disposableProviderFactory="true"
+      loadInitialization="true" ecorePackage="sgraph.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="sgraph.ecore#//EntryKind">
+      <genEnumLiterals ecoreEnumLiteral="sgraph.ecore#//EntryKind/initial"/>
+      <genEnumLiterals ecoreEnumLiteral="sgraph.ecore#//EntryKind/shallowHistory"/>
+      <genEnumLiterals ecoreEnumLiteral="sgraph.ecore#//EntryKind/deepHistory"/>
+    </genEnums>
+    <genClasses image="false" ecoreClass="sgraph.ecore#//Pseudostate"/>
+    <genClasses image="false" ecoreClass="sgraph.ecore#//Vertex">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference sgraph.ecore#//Vertex/parentRegion"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sgraph.ecore#//Vertex/incomingTransitions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sgraph.ecore#//Vertex/outgoingTransitions"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="sgraph.ecore#//NamedElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//NamedElement/name"/>
+    </genClasses>
+    <genClasses ecoreClass="sgraph.ecore#//Region">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sgraph.ecore#//Region/vertices"/>
+    </genClasses>
+    <genClasses ecoreClass="sgraph.ecore#//Transition">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sgraph.ecore#//Transition/target"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference sgraph.ecore#//Transition/source"/>
+    </genClasses>
+    <genClasses ecoreClass="sgraph.ecore#//FinalState"/>
+    <genClasses ecoreClass="sgraph.ecore#//State">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sgraph.ecore#//State/subRegions"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="sgraph.ecore#//Variable"/>
+    <genClasses ecoreClass="sgraph.ecore#//Junction"/>
+    <genClasses ecoreClass="sgraph.ecore#//Event"/>
+    <genClasses ecoreClass="sgraph.ecore#//Choice"/>
+    <genClasses ecoreClass="sgraph.ecore#//Statechart">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sgraph.ecore#//Statechart/regions"/>
+    </genClasses>
+    <genClasses ecoreClass="sgraph.ecore#//Entry">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//Entry/kind"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="sgraph.ecore#//Trigger"/>
+    <genClasses image="false" ecoreClass="sgraph.ecore#//Effect"/>
+    <genClasses image="false" ecoreClass="sgraph.ecore#//ExpressionElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//ExpressionElement/expression"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="sgraph.ecore#//Declaration"/>
+    <genClasses image="false" ecoreClass="sgraph.ecore#//Reaction">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sgraph.ecore#//Reaction/trigger"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sgraph.ecore#//Reaction/effect"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="sgraph.ecore#//ReactiveElement">
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference sgraph.ecore#//ReactiveElement/reactions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sgraph.ecore#//ReactiveElement/localReactions"/>
+    </genClasses>
+    <genClasses ecoreClass="sgraph.ecore#//Exit"/>
+    <genClasses ecoreClass="sgraph.ecore#//Scope">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sgraph.ecore#//Scope/declarations"/>
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference sgraph.ecore#//Scope/events"/>
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference sgraph.ecore#//Scope/variables"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="sgraph.ecore#//ScopedElement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sgraph.ecore#//ScopedElement/scopes"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
