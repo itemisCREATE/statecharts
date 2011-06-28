@@ -13,14 +13,18 @@ package org.yakindu.sct.statechart.diagram.editparts;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.StackLayout;
 import org.eclipse.draw2d.geometry.Dimension;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.ResizableEditPolicyEx;
+import org.eclipse.gmf.runtime.draw2d.ui.figures.FigureUtilities;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
+import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.statechart.diagram.editor.figures.RegionFigure;
+import org.yakindu.sct.statechart.diagram.preferences.StatechartColorConstants;
 
 /**
  * 
@@ -37,7 +41,7 @@ public class RegionEditPart extends ShapeNodeEditPart {
 	protected NodeFigure createNodeFigure() {
 		final NodeFigure figure = new NodeFigure();
 		figure.setLayoutManager(new StackLayout());
-		figure.setMinimumSize(new Dimension(0,0));
+		figure.setMinimumSize(new Dimension(0, 0));
 		figure.add(new RegionFigure(getMapMode()));
 		return figure;
 	}
@@ -46,7 +50,8 @@ public class RegionEditPart extends ShapeNodeEditPart {
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
 		removeEditPolicy(EditPolicyRoles.CONNECTION_HANDLES_ROLE);
-		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE, new ResizableEditPolicyEx());
+		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE,
+				new ResizableEditPolicyEx());
 	}
 
 	@Override
@@ -72,14 +77,33 @@ public class RegionEditPart extends ShapeNodeEditPart {
 		} else
 			super.addChildVisual(childEditPart, index);
 	}
+
 	@Override
 	protected void removeChildVisual(EditPart childEditPart) {
 		if (childEditPart instanceof RegionCompartmentEditPart) {
 			IFigure pane = getPrimaryShape().getCompartmentPane();
 			IFigure figure = ((RegionCompartmentEditPart) childEditPart)
-			.getFigure();
+					.getFigure();
 			pane.remove(figure);
-		}  else
-		super.removeChildVisual(childEditPart);
+		} else
+			super.removeChildVisual(childEditPart);
+	}
+
+	/**
+	 * Returns the default background color for states
+	 */
+	@Override
+	public Object getPreferredValue(EStructuralFeature feature) {
+		if (feature == NotationPackage.eINSTANCE.getLineStyle_LineColor()) {
+			return FigureUtilities
+					.RGBToInteger(StatechartColorConstants.REGION_LINE_COLOR
+							.getRGB());
+		} else if (feature == NotationPackage.eINSTANCE
+				.getFillStyle_FillColor()) {
+			return FigureUtilities
+					.RGBToInteger(StatechartColorConstants.REGION_BG_COLOR
+							.getRGB());
+		}
+		return super.getPreferredValue(feature);
 	}
 }

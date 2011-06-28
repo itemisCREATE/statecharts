@@ -17,8 +17,6 @@ import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.emf.type.core.commands.EditElementCommand;
 import org.eclipse.gmf.runtime.emf.type.core.requests.CreateElementRequest;
 import org.eclipse.gmf.runtime.emf.type.core.requests.CreateRelationshipRequest;
-import org.yakindu.model.sct.statechart.Entry;
-import org.yakindu.model.sct.statechart.FinalState;
 import org.yakindu.model.sct.statechart.StatechartFactory;
 import org.yakindu.model.sct.statechart.Transition;
 import org.yakindu.model.sct.statechart.Vertex;
