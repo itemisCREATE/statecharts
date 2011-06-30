@@ -153,6 +153,16 @@
                   value="Junction">
             </param>
          </metamodelType>
+          <metamodelType
+               eclass="Synchronization"
+               id="org.yakindu.sct.ui.editor.Synchronization"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               name="Junction">
+            <param
+                  name="semanticHint"
+                  value="Synchronization">
+            </param>
+         </metamodelType>
          </metamodel>
    </extension>
    
@@ -316,6 +326,15 @@
                    large_icon="icons/obj16/junction_16x16.png"
                    path="/tools/"
                    small_icon="icons/obj16/junction_16x16.png">
+             </entry>
+             <entry
+                   description="Creates a synchronization"
+                   id="org.yakindu.sct.ui.editor.Synchronization"
+                   kind="tool"
+                   label="Synchronization"
+                   large_icon="TODO"
+                   path="/tools/"
+                   small_icon="TODO">
              </entry>
          </contribution>
          <Priority

@@ -34,6 +34,7 @@ import org.yakindu.sct.ui.editor.editparts.StatechartDiagramEditPart;
 import org.yakindu.sct.ui.editor.editparts.StatechartNameEditPart;
 import org.yakindu.sct.ui.editor.editparts.StatechartTextEditPart;
 import org.yakindu.sct.ui.editor.editparts.StatechartTextExpressionEditPart;
+import org.yakindu.sct.ui.editor.editparts.SynchronizationEditPart;
 import org.yakindu.sct.ui.editor.editparts.TransitionEditPart;
 import org.yakindu.sct.ui.editor.editparts.TransitionExpressionEditPart;
 
@@ -79,6 +80,7 @@ public class StatechartDiagramEditPartProvider extends AbstractEditPartProvider
 		editParts
 				.put(TRANSITION_EXPRESSION, TransitionExpressionEditPart.class);
 		editParts.put(EXIT, ExitEditPart.class);
+		editParts.put(SYNCHRONIZATION, SynchronizationEditPart.class);
 	}
 
 	private Class<? extends IGraphicalEditPart> getClass(String semanticHint) {
