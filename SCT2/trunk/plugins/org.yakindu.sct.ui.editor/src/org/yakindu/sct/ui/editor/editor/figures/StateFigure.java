@@ -10,6 +10,9 @@
  */
 package org.yakindu.sct.ui.editor.editor.figures;
 
+import static org.yakindu.sct.ui.editor.editor.figures.utils.GraphicsUtil.fillVerticalGradientRoundedRectangle;
+import static org.yakindu.sct.ui.editor.editor.figures.utils.GraphicsUtil.mixColor;
+
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.Graphics;
@@ -25,7 +28,6 @@ import org.eclipse.gmf.runtime.draw2d.ui.mapmode.IMapMode;
 import org.eclipse.gmf.runtime.draw2d.ui.mapmode.MapModeUtil;
 import org.eclipse.swt.graphics.Color;
 import org.yakindu.sct.ui.editor.editor.figures.utils.GridDataFactory;
-import static org.yakindu.sct.ui.editor.editor.figures.utils.GraphicsUtil.*;
 /**
  * 
  * @author andreas muelder

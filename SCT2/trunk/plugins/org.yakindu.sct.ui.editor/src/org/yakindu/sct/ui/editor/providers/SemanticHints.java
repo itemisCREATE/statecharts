@@ -49,4 +49,6 @@ public interface SemanticHints {
 	String JOIN = "Join";
 
 	String JUNCTION = "Junction";
+	
+	String SYNCHRONIZATION = "Synchronization";
 }
