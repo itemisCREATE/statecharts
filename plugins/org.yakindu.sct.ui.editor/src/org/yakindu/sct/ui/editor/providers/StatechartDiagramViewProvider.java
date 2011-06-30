@@ -20,6 +20,8 @@ import org.eclipse.gmf.runtime.diagram.ui.view.factories.optimal.CompartmentView
 import org.eclipse.gmf.runtime.diagram.ui.view.factories.optimal.ShapeViewFactory;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor;
+import org.yakindu.sct.ui.editor.factories.EntryBorderItemViewFactory;
+import org.yakindu.sct.ui.editor.factories.EntryViewFactory;
 import org.yakindu.sct.ui.editor.factories.RegionViewFactory;
 import org.yakindu.sct.ui.editor.factories.StateTextCompartmentViewFactory;
 import org.yakindu.sct.ui.editor.factories.StateViewFactory;
@@ -58,7 +60,8 @@ public class StatechartDiagramViewProvider extends AbstractViewProvider
 				.put(STATE_TEXT_COMPARTMENT_EXPRESSION, ShapeViewFactory.class);
 		factories.put(TRANSITION, TransitionViewFactory.class);
 		factories.put(CHOICE, ShapeViewFactory.class);
-		factories.put(ENTRY, ShapeViewFactory.class);
+		factories.put(ENTRY, EntryViewFactory.class);
+		factories.put(ENTRY_BORDER_ITEM, EntryBorderItemViewFactory.class);
 		factories.put(SHALLOWHISTORY, ShapeViewFactory.class);
 		factories.put(DEEPHISTORY, ShapeViewFactory.class);
 		factories.put(FINALSTATE, ShapeViewFactory.class);

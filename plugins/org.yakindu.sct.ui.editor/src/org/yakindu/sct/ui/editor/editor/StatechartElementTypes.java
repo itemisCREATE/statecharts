@@ -34,5 +34,6 @@ public final class StatechartElementTypes extends AbstractElementTypeEnumerator 
 	public static final IElementType SHALLOWHISTORY = getElementType("org.yakindu.sct.ui.editor.ShallowHistory");
 	public static final IElementType FINALSTATE = getElementType("org.yakindu.sct.ui.editor.FinalState");
 	public static final IElementType EXIT = getElementType("org.yakindu.sct.ui.editor.Exit");
+	public static final IElementType SYNCHRONIZATION = getElementType("org.yakindu.sct.ui.editor.Synchronization");
 
 }
