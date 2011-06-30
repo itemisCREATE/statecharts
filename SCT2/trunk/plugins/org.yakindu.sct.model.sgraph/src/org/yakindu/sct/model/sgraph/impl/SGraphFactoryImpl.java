@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.yakindu.sct.model.sgraph.*;
 import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.EntryKind;
@@ -93,6 +94,7 @@ public class SGraphFactoryImpl extends EFactoryImpl implements SGraphFactory {
 			case SGraphPackage.ENTRY: return createEntry();
 			case SGraphPackage.EXIT: return createExit();
 			case SGraphPackage.SCOPE: return createScope();
+			case SGraphPackage.SYNCHRONIZATION: return createSynchronization();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -236,6 +238,16 @@ public class SGraphFactoryImpl extends EFactoryImpl implements SGraphFactory {
 	public Scope createScope() {
 		ScopeImpl scope = new ScopeImpl();
 		return scope;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Synchronization createSynchronization() {
+		SynchronizationImpl synchronization = new SynchronizationImpl();
+		return synchronization;
 	}
 
 	/**

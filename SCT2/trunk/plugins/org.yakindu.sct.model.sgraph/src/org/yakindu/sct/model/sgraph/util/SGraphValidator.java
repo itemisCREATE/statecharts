@@ -18,6 +18,7 @@ import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.EObjectValidator;
+import org.yakindu.sct.model.sgraph.*;
 import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.Declaration;
 import org.yakindu.sct.model.sgraph.Effect;
@@ -174,6 +175,8 @@ public class SGraphValidator extends EObjectValidator {
 				return validateScope((Scope)value, diagnostics, context);
 			case SGraphPackage.SCOPED_ELEMENT:
 				return validateScopedElement((ScopedElement)value, diagnostics, context);
+			case SGraphPackage.SYNCHRONIZATION:
+				return validateSynchronization((Synchronization)value, diagnostics, context);
 			case SGraphPackage.ENTRY_KIND:
 				return validateEntryKind((EntryKind)value, diagnostics, context);
 			default:
@@ -570,6 +573,26 @@ public class SGraphValidator extends EObjectValidator {
 	public boolean validateScopedElement(ScopedElement scopedElement,
 			DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(scopedElement, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateSynchronization(Synchronization synchronization, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (!validate_NoCircularContainment(synchronization, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms(synchronization, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(synchronization, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(synchronization, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(synchronization, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(synchronization, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(synchronization, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(synchronization, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(synchronization, diagnostics, context);
+		if (result || diagnostics != null) result &= validateVertex_IncomingTransitionCount(synchronization, diagnostics, context);
+		if (result || diagnostics != null) result &= validateVertex_OutgoingTransitionCount(synchronization, diagnostics, context);
+		return result;
 	}
 
 	/**
