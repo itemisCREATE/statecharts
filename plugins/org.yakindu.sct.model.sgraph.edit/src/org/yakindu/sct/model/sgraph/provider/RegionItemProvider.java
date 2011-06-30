@@ -188,6 +188,11 @@ public class RegionItemProvider
 			(createChildParameter
 				(SGraphPackage.Literals.REGION__VERTICES,
 				 SGraphFactory.eINSTANCE.createExit()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.REGION__VERTICES,
+				 SGraphFactory.eINSTANCE.createSynchronization()));
 	}
 
 }

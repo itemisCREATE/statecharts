@@ -338,6 +338,29 @@ public class SGraphItemProviderAdapterFactory extends SGraphAdapterFactory imple
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sgraph.Synchronization} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected SynchronizationItemProvider synchronizationItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.sct.model.sgraph.Synchronization}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createSynchronizationAdapter() {
+		if (synchronizationItemProvider == null) {
+			synchronizationItemProvider = new SynchronizationItemProvider(this);
+		}
+
+		return synchronizationItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -447,6 +470,7 @@ public class SGraphItemProviderAdapterFactory extends SGraphAdapterFactory imple
 		if (entryItemProvider != null) entryItemProvider.dispose();
 		if (exitItemProvider != null) exitItemProvider.dispose();
 		if (scopeItemProvider != null) scopeItemProvider.dispose();
+		if (synchronizationItemProvider != null) synchronizationItemProvider.dispose();
 	}
 
 }

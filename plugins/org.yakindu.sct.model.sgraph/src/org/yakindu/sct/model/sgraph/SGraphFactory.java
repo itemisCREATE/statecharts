@@ -136,6 +136,15 @@ public interface SGraphFactory extends EFactory {
 	Scope createScope();
 
 	/**
+	 * Returns a new object of class '<em>Synchronization</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Synchronization</em>'.
+	 * @generated
+	 */
+	Synchronization createSynchronization();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

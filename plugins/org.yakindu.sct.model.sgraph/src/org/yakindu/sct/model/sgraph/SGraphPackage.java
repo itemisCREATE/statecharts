@@ -1111,6 +1111,61 @@ public interface SGraphPackage extends EPackage {
 	int SCOPED_ELEMENT_FEATURE_COUNT = 1;
 
 	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.SynchronizationImpl <em>Synchronization</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sgraph.impl.SynchronizationImpl
+	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getSynchronization()
+	 * @generated
+	 */
+	int SYNCHRONIZATION = 22;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SYNCHRONIZATION__NAME = PSEUDOSTATE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Parent Region</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SYNCHRONIZATION__PARENT_REGION = PSEUDOSTATE__PARENT_REGION;
+
+	/**
+	 * The feature id for the '<em><b>Incoming Transitions</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SYNCHRONIZATION__INCOMING_TRANSITIONS = PSEUDOSTATE__INCOMING_TRANSITIONS;
+
+	/**
+	 * The feature id for the '<em><b>Outgoing Transitions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SYNCHRONIZATION__OUTGOING_TRANSITIONS = PSEUDOSTATE__OUTGOING_TRANSITIONS;
+
+	/**
+	 * The number of structural features of the '<em>Synchronization</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SYNCHRONIZATION_FEATURE_COUNT = PSEUDOSTATE_FEATURE_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.EntryKind <em>Entry Kind</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1118,7 +1173,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getEntryKind()
 	 * @generated
 	 */
-	int ENTRY_KIND = 22;
+	int ENTRY_KIND = 23;
 
 
 	/**
@@ -1551,6 +1606,16 @@ public interface SGraphPackage extends EPackage {
 	EReference getScopedElement_Scopes();
 
 	/**
+	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgraph.Synchronization <em>Synchronization</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Synchronization</em>'.
+	 * @see org.yakindu.sct.model.sgraph.Synchronization
+	 * @generated
+	 */
+	EClass getSynchronization();
+
+	/**
 	 * Returns the meta object for enum '{@link org.yakindu.sct.model.sgraph.EntryKind <em>Entry Kind</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1953,6 +2018,16 @@ public interface SGraphPackage extends EPackage {
 		 * @generated
 		 */
 		EReference SCOPED_ELEMENT__SCOPES = eINSTANCE.getScopedElement_Scopes();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.sct.model.sgraph.impl.SynchronizationImpl <em>Synchronization</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.sct.model.sgraph.impl.SynchronizationImpl
+		 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getSynchronization()
+		 * @generated
+		 */
+		EClass SYNCHRONIZATION = eINSTANCE.getSynchronization();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sgraph.EntryKind <em>Entry Kind</em>}' enum.

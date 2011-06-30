@@ -13,6 +13,7 @@ package org.yakindu.sct.model.sgraph.util;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
+import org.yakindu.sct.model.sgraph.*;
 import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.Declaration;
 import org.yakindu.sct.model.sgraph.Effect;
@@ -268,6 +269,15 @@ public class SGraphSwitch<T> extends Switch<T> {
 			case SGraphPackage.SCOPED_ELEMENT: {
 				ScopedElement scopedElement = (ScopedElement)theEObject;
 				T result = caseScopedElement(scopedElement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SGraphPackage.SYNCHRONIZATION: {
+				Synchronization synchronization = (Synchronization)theEObject;
+				T result = caseSynchronization(synchronization);
+				if (result == null) result = casePseudostate(synchronization);
+				if (result == null) result = caseVertex(synchronization);
+				if (result == null) result = caseNamedElement(synchronization);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -602,6 +612,21 @@ public class SGraphSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseScopedElement(ScopedElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Synchronization</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Synchronization</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSynchronization(Synchronization object) {
 		return null;
 	}
 
