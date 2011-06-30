@@ -15,7 +15,7 @@
             default="true"
             extensions="sct"
             icon="icons/obj16/StatemachineDiagramFile.gif"
-            id="org.yakindu.sct.ui.editor.StatechartDiagramEditor"
+            id="org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor"
             matchingStrategy="org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditorMatchingStrategy"
             name="YAKINDU Statechart Editor">
       </editor>
