@@ -15,8 +15,10 @@ import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.StackLayout;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.gef.Request;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.AbstractBorderedShapeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IBorderItemEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.diagram.ui.figures.BorderItemLocator;
 import org.eclipse.gmf.runtime.diagram.ui.handles.ConnectionHandle.HandleDirection;
@@ -40,6 +42,7 @@ import de.itemis.gmf.runtime.commons.editpolicies.OneWayConnectionHandlesEditPol
  */
 public class EntryEditPart extends AbstractBorderedShapeEditPart {
 
+	private IGraphicalEditPart primaryChildEditPart;
 
 	public EntryEditPart(View view) {
 		super(view);
@@ -78,7 +81,7 @@ public class EntryEditPart extends AbstractBorderedShapeEditPart {
 				notification.getFeature())) {
 			// TODO: We have to remove the old figure, this does not work
 			// currently because the connections get broken then.
-			getNodeFigure().add(getPrimaryShape());
+			getMainFigure().add(getPrimaryShape());
 		}
 		super.handleNotificationEvent(notification);
 	}
@@ -88,12 +91,12 @@ public class EntryEditPart extends AbstractBorderedShapeEditPart {
 		return (Node) super.getNotationView();
 	}
 
-	public IFigure getMainFigure() {
-		return getFigure();
-	}
 
 	protected void addBorderItem(IFigure borderItemContainer,
 			IBorderItemEditPart borderItemEditPart) {
+		if (primaryChildEditPart == null) {
+			primaryChildEditPart = borderItemEditPart;
+		}
 		BorderItemLocator locator = new BorderItemLocator(getMainFigure()) {
 			protected Rectangle getParentBorder() {
 				Rectangle bounds = getParentFigure().getBounds().getCopy();
@@ -112,4 +115,10 @@ public class EntryEditPart extends AbstractBorderedShapeEditPart {
 		figure.add(getPrimaryShape());
 		return figure;
 	}
+
+	@Override
+	protected void performDirectEditRequest(Request request) {
+		primaryChildEditPart.performRequest(request);
+	}
+
 }
