@@ -223,6 +223,15 @@
                      </expand>
             </entry>
              <entry
+                   description="Creates a transition"
+                   id="org.yakindu.sct.ui.editor.Transition"
+                   kind="tool"
+                   label="Transition"
+                   large_icon="icons/obj16/transition_16x16.png"
+                   path="/tools/"
+                   small_icon="icons/obj16/transition_16x16.png">
+             </entry>
+             <entry
                   description="Creates a state"
                   id="org.yakindu.sct.ui.editor.State"
                   kind="tool"
@@ -244,33 +253,6 @@
                    large_icon="icons/obj16/region_16x16.png"
                    path="/tools/"
                    small_icon="icons/obj16/region_16x16.png">
-             </entry>
-             <entry
-                   description="Creates a transition"
-                   id="org.yakindu.sct.ui.editor.Transition"
-                   kind="tool"
-                   label="Transition"
-                   large_icon="icons/obj16/transition_16x16.png"
-                   path="/tools/"
-                   small_icon="icons/obj16/transition_16x16.png">
-             </entry>
-             <entry
-                   description="Creates a choice"
-                   id="org.yakindu.sct.ui.editor.Choice"
-                   kind="tool"
-                   label="Choice"
-                   large_icon="icons/obj16/choice_16x16.png"
-                   path="/tools/"
-                   small_icon="icons/obj16/choice_16x16.png">
-             </entry>
-             <entry
-                   description="Creates a junction"
-                   id="org.yakindu.sct.ui.editor.Junction"
-                   kind="tool"
-                   label="Junction"
-                   large_icon="icons/obj16/junction_16x16.png"
-                   path="/tools/"
-                   small_icon="icons/obj16/junction_16x16.png">
              </entry>
              <entry
                    description="Creates an initial state"
@@ -316,6 +298,24 @@
                    large_icon="icons/obj16/exit_point_16x16.png"
                    path="/tools/"
                    small_icon="icons/obj16/exit_point_16x16.png">
+             </entry>
+             <entry
+                   description="Creates a choice"
+                   id="org.yakindu.sct.ui.editor.Choice"
+                   kind="tool"
+                   label="Choice"
+                   large_icon="icons/obj16/choice_16x16.png"
+                   path="/tools/"
+                   small_icon="icons/obj16/choice_16x16.png">
+             </entry>
+             <entry
+                   description="Creates a junction"
+                   id="org.yakindu.sct.ui.editor.Junction"
+                   kind="tool"
+                   label="Junction"
+                   large_icon="icons/obj16/junction_16x16.png"
+                   path="/tools/"
+                   small_icon="icons/obj16/junction_16x16.png">
              </entry>
          </contribution>
          <Priority
