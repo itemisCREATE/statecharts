@@ -12,9 +12,12 @@ package org.yakindu.sct.ui.editor.editparts;
 
 import org.eclipse.draw2d.StackLayout;
 import org.eclipse.gef.EditPart;
+import org.eclipse.gef.EditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.AbstractBorderItemEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.View;
+
 /**
  * 
  * @author andreas muelder
@@ -26,6 +29,14 @@ public class EntryBorderItemEditPart extends AbstractBorderItemEditPart {
 		super(view);
 	}
 
+	@Override
+	protected void createDefaultEditPolicies() {
+		super.createDefaultEditPolicies();
+		removeEditPolicy(EditPolicyRoles.SORT_FILTER_ROLE);
+		removeEditPolicy(EditPolicyRoles.CONNECTION_HANDLES_ROLE);
+		removeEditPolicy(EditPolicy.CONTAINER_ROLE);
+		removeEditPolicy(EditPolicy.COMPONENT_ROLE);
+	}
 	@Override
 	protected NodeFigure createNodeFigure() {
 		NodeFigure figure = new NodeFigure();
@@ -44,9 +55,16 @@ public class EntryBorderItemEditPart extends AbstractBorderItemEditPart {
 	@Override
 	protected void removeChildVisual(EditPart childEditPart) {
 		if (childEditPart instanceof EntryLabelEditPart) {
-			getFigure().remove(((EntryLabelEditPart) childEditPart).getFigure());
+			getFigure()
+					.remove(((EntryLabelEditPart) childEditPart).getFigure());
 		} else
 			super.removeChildVisual(childEditPart);
+	}
+
+	public EditPart getPrimaryChildEditPart() {
+		if (getChildren().size() > 0)
+			return (EditPart) getChildren().get(0);
+		return null;
 	}
 
 }
