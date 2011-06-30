@@ -29,7 +29,7 @@ public class SynchronizationFigure extends RoundedRectangle {
          this.setForegroundColor(ColorConstants.black);
          this.setBackgroundColor(ColorConstants.black);
          this.setPreferredSize(new Dimension(getMapMode().DPtoLP(6),
-                         getMapMode().DPtoLP(6)));
+                 getMapMode().DPtoLP(6)));
  }
 
  public IMapMode getMapMode() {

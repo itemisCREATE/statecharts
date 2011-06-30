@@ -10,26 +10,43 @@
  */
 package org.yakindu.sct.ui.editor.editparts;
 
-import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.StackLayout;
+import org.eclipse.gef.EditPolicy;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
+import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
+import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.ui.editor.editor.figures.SynchronizationFigure;
 
-import de.itemis.gmf.runtime.commons.editparts.BarEditPart;
+import de.itemis.gmf.runtime.commons.editpolicies.BarResizeEditPolicy;
 
 /**
  * 
  * @author andreas muelder
  * 
  */
-public class SynchronizationEditPart extends BarEditPart {
+public class SynchronizationEditPart extends ShapeNodeEditPart {
+
+	private static final int DEFAULT_WIDTH = 6;
+	private static final int DEFAULT_HEIGHT = 24;
 
 	public SynchronizationEditPart(View view) {
 		super(view);
 	}
 
 	@Override
-	public IFigure createPrimaryFigure() {
-		return new SynchronizationFigure(getMapMode());
+	protected NodeFigure createNodeFigure() {
+		final DefaultSizeNodeFigure nodeFigure = new DefaultSizeNodeFigure(
+				getMapMode().DPtoLP(DEFAULT_WIDTH), getMapMode().DPtoLP(
+						DEFAULT_HEIGHT));
+		nodeFigure.setLayoutManager(new StackLayout());
+		nodeFigure.add(new SynchronizationFigure(getMapMode()));
+		return nodeFigure;
+	}
+
+	@Override
+	public EditPolicy getPrimaryDragEditPolicy() {
+		return new BarResizeEditPolicy();
 	}
 
 }

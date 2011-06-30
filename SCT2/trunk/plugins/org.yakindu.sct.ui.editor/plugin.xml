@@ -155,9 +155,10 @@
          </metamodelType>
           <metamodelType
                eclass="Synchronization"
+               icon = "icons/obj16/synchronization_16x16.png"
                id="org.yakindu.sct.ui.editor.Synchronization"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               name="Junction">
+               name="Synchronization">
             <param
                   name="semanticHint"
                   value="Synchronization">
@@ -332,9 +333,9 @@
                    id="org.yakindu.sct.ui.editor.Synchronization"
                    kind="tool"
                    label="Synchronization"
-                   large_icon="TODO"
+                   large_icon="icons/obj16/synchronization_16x16.png"
                    path="/tools/"
-                   small_icon="TODO">
+                   small_icon="icons/obj16/synchronization_16x16.png">
              </entry>
          </contribution>
          <Priority

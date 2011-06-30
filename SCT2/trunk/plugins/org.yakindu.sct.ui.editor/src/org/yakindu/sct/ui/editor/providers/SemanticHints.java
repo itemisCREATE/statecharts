@@ -42,6 +42,8 @@ public interface SemanticHints {
 	String SHALLOWHISTORY = "ShallowHistory";
 
 	String ENTRY = "Entry";
+	String ENTRY_BORDER_ITEM = "EntryBorderItem";
+	String ENTRY_LABEL = "EntryLabel";
 
 	String FINALSTATE = "FinalState";
 	String EXIT = "Exit";
@@ -51,4 +53,5 @@ public interface SemanticHints {
 	String JUNCTION = "Junction";
 	
 	String SYNCHRONIZATION = "Synchronization";
+	
 }
