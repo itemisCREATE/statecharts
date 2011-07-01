@@ -12,8 +12,6 @@ package org.yakindu.sct.ui.editor.clipboard;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.gmf.runtime.emf.clipboard.core.AbstractClipboardSupport;
 import org.eclipse.gmf.runtime.emf.clipboard.core.PasteAction;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
@@ -34,8 +32,4 @@ public class StatechartClipboardSupport extends AbstractClipboardSupport {
 		return PasteAction.CLONE;
 	}
 
-	public boolean isCopyAlways(EObject context, EReference eReference,
-			Object value) {
-		return true;
-	}
 }
