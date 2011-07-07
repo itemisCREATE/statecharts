@@ -23,31 +23,36 @@ import org.eclipselabs.mscript.typesystem.NumericType;
 import org.eclipselabs.mscript.typesystem.RealType;
 
 /**
- * TODO: Make this class a static class 'Values' with methods 'valueOf()'
- * 
  * @author Andreas Unger
  *
  */
-public class ValueConstructor implements IValueConstructor {
+public class Values {
+	
+	/**
+	 * 
+	 */
+	private Values() {
+		// Hide constructor
+	}
 
-	public ISimpleNumericValue construct(IComputationContext context, NumericType numericType, double value) {
+	public static ISimpleNumericValue valueOf(IComputationContext context, NumericType numericType, double value) {
 		if (numericType instanceof RealType) {
-			return constructRealValue(context, (RealType) numericType, value);
+			return createRealValue(context, (RealType) numericType, value);
 		}
 		throw new IllegalArgumentException("Data type must be real type");
 	}
 	
-	public ISimpleNumericValue construct(IComputationContext context, NumericType numericType, long value) {
+	public static ISimpleNumericValue valueOf(IComputationContext context, NumericType numericType, long value) {
 		if (numericType instanceof RealType) {
-			return constructRealValue(context, (RealType) numericType, value);
+			return createRealValue(context, (RealType) numericType, value);
 		}
 		if (numericType instanceof IntegerType) {
-			return constructIntegerValue(context, (IntegerType) numericType, value);
+			return createIntegerValue(context, (IntegerType) numericType, value);
 		}
 		throw new IllegalArgumentException("Data type must be real type");
 	}
 
-	private ISimpleNumericValue constructRealValue(IComputationContext context, RealType realType, double value) {
+	private static ISimpleNumericValue createRealValue(IComputationContext context, RealType realType, double value) {
 		NumberFormat numberFormat = context.getComputationModel().getNumberFormat(realType);
 		if (numberFormat instanceof FloatingPointFormat) {
 			FloatingPointFormat floatingPointFormat = (FloatingPointFormat) numberFormat;
@@ -69,7 +74,7 @@ public class ValueConstructor implements IValueConstructor {
 		throw new IllegalArgumentException();
 	}
 	
-	private ISimpleNumericValue constructIntegerValue(IComputationContext context, IntegerType integerType, long value) {
+	private static ISimpleNumericValue createIntegerValue(IComputationContext context, IntegerType integerType, long value) {
 		NumberFormat numberFormat = context.getComputationModel().getNumberFormat(integerType);
 		if (numberFormat instanceof FixedPointFormat) {
 			FixedPointFormat fixedPointFormat = (FixedPointFormat) numberFormat;
@@ -82,8 +87,32 @@ public class ValueConstructor implements IValueConstructor {
 		throw new IllegalArgumentException();
 	}
 	
-	public IBooleanValue construct(IComputationContext context, boolean value) {
+	public static IBooleanValue valueOf(IComputationContext context, boolean value) {
 		return new BooleanValue(context, value);
 	}
 	
+	public static IValue transform(IComputationContext context, IValue value) {
+		if (value instanceof ISimpleNumericValue) {
+			ISimpleNumericValue numericValue = (ISimpleNumericValue) value;
+			if (numericValue.getDataType() instanceof RealType) {
+				return Values.valueOf(context, (RealType) value.getDataType(), numericValue.doubleValue());
+			}
+			if (numericValue.getDataType() instanceof IntegerType) {
+				return Values.valueOf(context, (IntegerType) value.getDataType(), numericValue.longValue());
+			}
+		}
+		if (value instanceof VectorValue) {
+			VectorValue vectorValue = (VectorValue) value;
+			
+			INumericValue[] elements = new INumericValue[vectorValue.getDataType().getRowSize()];
+			
+			for (int i = 0; i < elements.length; ++i) {
+				elements[i] = (INumericValue) transform(context, vectorValue.get(i));
+			}
+			
+			return new VectorValue(context, vectorValue.getDataType(), elements);
+		}
+		return value;
+	}
+
 }

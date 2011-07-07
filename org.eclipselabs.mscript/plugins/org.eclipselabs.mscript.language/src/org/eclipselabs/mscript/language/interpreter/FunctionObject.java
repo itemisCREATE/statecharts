@@ -16,7 +16,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.eclipselabs.mscript.computation.core.value.ValueTransformer;
+import org.eclipselabs.mscript.computation.core.value.Values;
 import org.eclipselabs.mscript.language.il.ILFunctionDefinition;
 import org.eclipselabs.mscript.language.il.InputVariableDeclaration;
 import org.eclipselabs.mscript.language.il.InstanceVariableDeclaration;
@@ -43,11 +43,9 @@ public class FunctionObject implements IFunctionObject {
 		FunctionObject functionObject = new FunctionObject();
 		functionObject.functionDefinition = functionDefinition;
 		
-		ValueTransformer valueTransformer = new ValueTransformer();
-		
 		for (TemplateVariableDeclaration declaration : functionDefinition.getTemplateVariableDeclarations()) {
 			IVariable variable = new Variable(declaration);
-			variable.setValue(0, valueTransformer.transform(context.getComputationContext(), declaration.getValue()));
+			variable.setValue(0, Values.transform(context.getComputationContext(), declaration.getValue()));
 			functionObject.variables.put(declaration, variable);
 		}
 		
