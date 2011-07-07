@@ -45,7 +45,7 @@ public class AnyDataTypeImpl extends DataTypeImpl implements AnyDataType {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public DataType evaluate(OperatorKind operator, DataType other) {
@@ -55,7 +55,7 @@ public class AnyDataTypeImpl extends DataTypeImpl implements AnyDataType {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public DataType evaluatePower(int exponent) {
@@ -65,7 +65,7 @@ public class AnyDataTypeImpl extends DataTypeImpl implements AnyDataType {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public boolean isAssignableFrom(DataType other) {

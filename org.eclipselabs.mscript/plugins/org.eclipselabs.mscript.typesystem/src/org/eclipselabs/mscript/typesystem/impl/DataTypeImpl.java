@@ -44,7 +44,7 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public DataType evaluate(OperatorKind operator, DataType other) {
 		return DataTypeOperations.evaluate(this, operator, other);
@@ -53,7 +53,7 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public DataType evaluatePower(int exponent) {
 		return DataTypeOperations.evaluatePower(this, exponent);
@@ -62,7 +62,7 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public boolean isAssignableFrom(DataType other) {
 		return DataTypeOperations.isAssignableFrom(this, other);

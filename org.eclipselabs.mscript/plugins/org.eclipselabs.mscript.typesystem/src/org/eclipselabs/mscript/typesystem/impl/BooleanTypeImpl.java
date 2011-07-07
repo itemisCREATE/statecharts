@@ -45,7 +45,7 @@ public class BooleanTypeImpl extends PrimitiveTypeImpl implements BooleanType {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public DataType evaluate(OperatorKind operator, DataType other) {
@@ -55,7 +55,7 @@ public class BooleanTypeImpl extends PrimitiveTypeImpl implements BooleanType {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public boolean isAssignableFrom(DataType other) {

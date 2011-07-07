@@ -103,7 +103,7 @@ public class EnumerationImpl extends NamespaceImpl implements Enumeration {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public DataType evaluate(OperatorKind operator, DataType other) {
 		return DataTypeOperations.evaluate(this, operator, other);
@@ -112,7 +112,7 @@ public class EnumerationImpl extends NamespaceImpl implements Enumeration {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public DataType evaluatePower(int exponent) {
 		return DataTypeOperations.evaluatePower(this, exponent);
@@ -121,7 +121,7 @@ public class EnumerationImpl extends NamespaceImpl implements Enumeration {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public boolean isAssignableFrom(DataType other) {
 		return DataTypeOperations.isAssignableFrom(this, other);
@@ -130,7 +130,7 @@ public class EnumerationImpl extends NamespaceImpl implements Enumeration {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public EnumerationLiteral getLiteral(String name) {
 		return EnumerationOperations.getLiteral(this, name);

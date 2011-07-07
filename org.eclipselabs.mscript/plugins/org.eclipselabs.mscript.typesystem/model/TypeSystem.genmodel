@@ -1,186 +1,145 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <genmodel:GenModel xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:genmodel="http://www.eclipse.org/uml2/2.2.0/GenModel" modelDirectory="/org.eclipselabs.mscript.typesystem/src"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipselabs.mscript.typesystem/src"
     modelPluginID="org.eclipselabs.mscript.typesystem" modelName="TypeSystem" modelPluginClass="org.eclipselabs.mscript.typesystem.TypeSystemPlugin"
     editPluginClass="org.eclipselabs.mscript.typesystem.edit.TypeSystemEditPlugin"
     editorPluginClass="org.eclipselabs.mscript.typesystem.editor.TypeSystemEditorPlugin"
-    importerID="org.eclipse.uml2.uml.ecore.importer" complianceLevel="5.0" copyrightFields="false">
-  <genAnnotations source="http://www.eclipse.org/emf/2002/GenModel/importer/org.eclipse.uml2.uml.ecore.importer">
-    <details key="ECORE_TAGGED_VALUES" value="PROCESS"/>
-    <details key="UNION_PROPERTIES" value="PROCESS"/>
-    <details key="DUPLICATE_FEATURES" value="PROCESS"/>
-    <details key="SUBSETTING_PROPERTIES" value="PROCESS"/>
-    <details key="COMMENTS" value="PROCESS"/>
-    <details key="DUPLICATE_FEATURE_INHERITANCE" value="PROCESS"/>
-    <details key="DUPLICATE_OPERATIONS" value="PROCESS"/>
-    <details key="INVARIANT_CONSTRAINTS" value="PROCESS"/>
-    <details key="REDEFINING_PROPERTIES" value="PROCESS"/>
-    <details key="ANNOTATION_DETAILS" value="PROCESS"/>
-    <details key="DUPLICATE_OPERATION_INHERITANCE" value="PROCESS"/>
-    <details key="REDEFINING_OPERATIONS" value="PROCESS"/>
-    <details key="DERIVED_FEATURES" value="PROCESS"/>
-    <details key="OPERATION_BODIES" value="IGNORE"/>
-    <details key="CAMEL_CASE_NAMES" value="IGNORE"/>
-    <details key="SUPER_CLASS_ORDER" value="PROCESS"/>
-  </genAnnotations>
-  <foreignModel>TypeSystem.uml</foreignModel>
-  <genPackages xsi:type="genmodel:GenPackage" prefix="TypeSystem" basePackage="org.eclipselabs.mscript"
-      disposableProviderFactory="true" providerPackageSuffix="edit.provider" presentationPackageSuffix="editor.presentation"
-      ecorePackage="TypeSystem.ecore#/" operationsPackage="org.eclipselabs.mscript.typesystem.internal.operations">
-    <genEnums xsi:type="genmodel:GenEnum" typeSafeEnumCompatible="false" ecoreEnum="TypeSystem.ecore#//OperatorKind">
-      <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/Addition"/>
-      <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/Subtraction"/>
-      <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/Multiplication"/>
-      <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/Division"/>
-      <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/ElementWiseMultiplication"/>
-      <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/ElementWiseDivision"/>
-      <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/UnaryMinus"/>
-      <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/LogicalAnd"/>
-      <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/LogicalOr"/>
-      <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/LogicalNot"/>
-      <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/Implies"/>
-      <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/LessThan"/>
-      <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/LessThanOrEqualTo"/>
-      <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/GreaterThan"/>
-      <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/GreaterThanOrEqualTo"/>
-      <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/EqualTo"/>
-      <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/NotEqualTo"/>
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" copyrightFields="false">
+  <foreignModel>TypeSystem.ecore</foreignModel>
+  <genPackages prefix="TypeSystem" basePackage="org.eclipselabs.mscript" disposableProviderFactory="true"
+      providerPackageSuffix="edit.provider" presentationPackageSuffix="editor.presentation"
+      ecorePackage="TypeSystem.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="TypeSystem.ecore#//OperatorKind">
+      <genEnumLiterals ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/Addition"/>
+      <genEnumLiterals ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/Subtraction"/>
+      <genEnumLiterals ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/Multiplication"/>
+      <genEnumLiterals ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/Division"/>
+      <genEnumLiterals ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/ElementWiseMultiplication"/>
+      <genEnumLiterals ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/ElementWiseDivision"/>
+      <genEnumLiterals ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/UnaryMinus"/>
+      <genEnumLiterals ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/LogicalAnd"/>
+      <genEnumLiterals ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/LogicalOr"/>
+      <genEnumLiterals ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/LogicalNot"/>
+      <genEnumLiterals ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/Implies"/>
+      <genEnumLiterals ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/LessThan"/>
+      <genEnumLiterals ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/LessThanOrEqualTo"/>
+      <genEnumLiterals ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/GreaterThan"/>
+      <genEnumLiterals ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/GreaterThanOrEqualTo"/>
+      <genEnumLiterals ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/EqualTo"/>
+      <genEnumLiterals ecoreEnumLiteral="TypeSystem.ecore#//OperatorKind/NotEqualTo"/>
     </genEnums>
-    <genEnums xsi:type="genmodel:GenEnum" typeSafeEnumCompatible="false" ecoreEnum="TypeSystem.ecore#//UnitSymbol">
-      <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//UnitSymbol/Meter"/>
-      <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//UnitSymbol/Kilogram"/>
-      <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//UnitSymbol/Second"/>
-      <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//UnitSymbol/Ampere"/>
-      <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//UnitSymbol/Kelvin"/>
-      <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//UnitSymbol/Mole"/>
-      <genEnumLiterals xsi:type="genmodel:GenEnumLiteral" ecoreEnumLiteral="TypeSystem.ecore#//UnitSymbol/Candela"/>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="TypeSystem.ecore#//UnitSymbol">
+      <genEnumLiterals ecoreEnumLiteral="TypeSystem.ecore#//UnitSymbol/Meter"/>
+      <genEnumLiterals ecoreEnumLiteral="TypeSystem.ecore#//UnitSymbol/Kilogram"/>
+      <genEnumLiterals ecoreEnumLiteral="TypeSystem.ecore#//UnitSymbol/Second"/>
+      <genEnumLiterals ecoreEnumLiteral="TypeSystem.ecore#//UnitSymbol/Ampere"/>
+      <genEnumLiterals ecoreEnumLiteral="TypeSystem.ecore#//UnitSymbol/Kelvin"/>
+      <genEnumLiterals ecoreEnumLiteral="TypeSystem.ecore#//UnitSymbol/Mole"/>
+      <genEnumLiterals ecoreEnumLiteral="TypeSystem.ecore#//UnitSymbol/Candela"/>
     </genEnums>
-    <genClasses xsi:type="genmodel:GenClass" image="false" ecoreClass="TypeSystem.ecore#//Type"/>
-    <genClasses xsi:type="genmodel:GenClass" image="false" ecoreClass="TypeSystem.ecore#//PackageableElement"/>
-    <genClasses xsi:type="genmodel:GenClass" image="false" ecoreClass="TypeSystem.ecore#//NamedElement">
-      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute TypeSystem.ecore#//NamedElement/name"/>
-      <genFeatures xsi:type="genmodel:GenFeature" property="Readonly" createChild="false"
-          ecoreFeature="ecore:EAttribute TypeSystem.ecore#//NamedElement/qualifiedName"/>
-      <genFeatures xsi:type="genmodel:GenFeature" property="Readonly" notify="false"
-          createChild="false" ecoreFeature="ecore:EReference TypeSystem.ecore#//NamedElement/namespace"/>
+    <genClasses image="false" ecoreClass="TypeSystem.ecore#//Type"/>
+    <genClasses image="false" ecoreClass="TypeSystem.ecore#//PackageableElement"/>
+    <genClasses image="false" ecoreClass="TypeSystem.ecore#//NamedElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TypeSystem.ecore#//NamedElement/name"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute TypeSystem.ecore#//NamedElement/qualifiedName"/>
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference TypeSystem.ecore#//NamedElement/namespace"/>
     </genClasses>
-    <genClasses xsi:type="genmodel:GenClass" image="false" ecoreClass="TypeSystem.ecore#//Namespace">
-      <genFeatures xsi:type="genmodel:GenFeature" property="Readonly" notify="false"
-          createChild="false" ecoreFeature="ecore:EReference TypeSystem.ecore#//Namespace/members"/>
-      <genFeatures xsi:type="genmodel:GenFeature" property="Readonly" notify="false"
-          createChild="false" ecoreFeature="ecore:EReference TypeSystem.ecore#//Namespace/ownedMembers"/>
-      <genOperations xsi:type="genmodel:GenOperation" ecoreOperation="TypeSystem.ecore#//Namespace/getMember">
-        <genParameters xsi:type="genmodel:GenParameter" ecoreParameter="TypeSystem.ecore#//Namespace/getMember/name"/>
+    <genClasses image="false" ecoreClass="TypeSystem.ecore#//Namespace">
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference TypeSystem.ecore#//Namespace/members"/>
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference TypeSystem.ecore#//Namespace/ownedMembers"/>
+      <genOperations ecoreOperation="TypeSystem.ecore#//Namespace/getMember">
+        <genParameters ecoreParameter="TypeSystem.ecore#//Namespace/getMember/name"/>
       </genOperations>
     </genClasses>
-    <genClasses xsi:type="genmodel:GenClass" ecoreClass="TypeSystem.ecore#//ArrayType">
-      <genFeatures xsi:type="genmodel:GenFeature" notify="false" createChild="false"
-          propertySortChoices="true" ecoreFeature="ecore:EReference TypeSystem.ecore#//ArrayType/elementType"/>
-      <genFeatures xsi:type="genmodel:GenFeature" property="None" children="true"
-          createChild="true" ecoreFeature="ecore:EReference TypeSystem.ecore#//ArrayType/dimensions"/>
-      <genFeatures xsi:type="genmodel:GenFeature" property="Readonly" createChild="false"
-          ecoreFeature="ecore:EAttribute TypeSystem.ecore#//ArrayType/dimensionality"/>
-      <genFeatures xsi:type="genmodel:GenFeature" property="Readonly" createChild="false"
-          ecoreFeature="ecore:EAttribute TypeSystem.ecore#//ArrayType/size"/>
-      <genFeatures xsi:type="genmodel:GenFeature" property="Readonly" createChild="false"
-          ecoreFeature="ecore:EAttribute TypeSystem.ecore#//ArrayType/rowSize"/>
-      <genFeatures xsi:type="genmodel:GenFeature" property="Readonly" createChild="false"
-          ecoreFeature="ecore:EAttribute TypeSystem.ecore#//ArrayType/columnSize"/>
-      <genFeatures xsi:type="genmodel:GenFeature" property="Readonly" createChild="false"
-          ecoreFeature="ecore:EAttribute TypeSystem.ecore#//ArrayType/dimensional"/>
-      <genFeatures xsi:type="genmodel:GenFeature" property="Readonly" createChild="false"
-          ecoreFeature="ecore:EAttribute TypeSystem.ecore#//ArrayType/multidimensional"/>
+    <genClasses ecoreClass="TypeSystem.ecore#//ArrayType">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference TypeSystem.ecore#//ArrayType/elementType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TypeSystem.ecore#//ArrayType/dimensions"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute TypeSystem.ecore#//ArrayType/dimensionality"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute TypeSystem.ecore#//ArrayType/size"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute TypeSystem.ecore#//ArrayType/rowSize"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute TypeSystem.ecore#//ArrayType/columnSize"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute TypeSystem.ecore#//ArrayType/dimensional"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute TypeSystem.ecore#//ArrayType/multidimensional"/>
     </genClasses>
-    <genClasses xsi:type="genmodel:GenClass" image="false" ecoreClass="TypeSystem.ecore#//DataType">
-      <genOperations xsi:type="genmodel:GenOperation" ecoreOperation="TypeSystem.ecore#//DataType/evaluate">
-        <genParameters xsi:type="genmodel:GenParameter" ecoreParameter="TypeSystem.ecore#//DataType/evaluate/operator"/>
-        <genParameters xsi:type="genmodel:GenParameter" ecoreParameter="TypeSystem.ecore#//DataType/evaluate/other"/>
+    <genClasses image="false" ecoreClass="TypeSystem.ecore#//DataType">
+      <genOperations ecoreOperation="TypeSystem.ecore#//DataType/evaluate">
+        <genParameters ecoreParameter="TypeSystem.ecore#//DataType/evaluate/operator"/>
+        <genParameters ecoreParameter="TypeSystem.ecore#//DataType/evaluate/other"/>
       </genOperations>
-      <genOperations xsi:type="genmodel:GenOperation" ecoreOperation="TypeSystem.ecore#//DataType/evaluatePower">
-        <genParameters xsi:type="genmodel:GenParameter" ecoreParameter="TypeSystem.ecore#//DataType/evaluatePower/exponent"/>
+      <genOperations ecoreOperation="TypeSystem.ecore#//DataType/evaluatePower">
+        <genParameters ecoreParameter="TypeSystem.ecore#//DataType/evaluatePower/exponent"/>
       </genOperations>
-      <genOperations xsi:type="genmodel:GenOperation" ecoreOperation="TypeSystem.ecore#//DataType/isAssignableFrom">
-        <genParameters xsi:type="genmodel:GenParameter" ecoreParameter="TypeSystem.ecore#//DataType/isAssignableFrom/other"/>
+      <genOperations ecoreOperation="TypeSystem.ecore#//DataType/isAssignableFrom">
+        <genParameters ecoreParameter="TypeSystem.ecore#//DataType/isAssignableFrom/other"/>
       </genOperations>
     </genClasses>
-    <genClasses xsi:type="genmodel:GenClass" ecoreClass="TypeSystem.ecore#//ArrayDimension">
-      <genFeatures xsi:type="genmodel:GenFeature" property="Readonly" createChild="false"
-          ecoreFeature="ecore:EAttribute TypeSystem.ecore#//ArrayDimension/size"/>
+    <genClasses ecoreClass="TypeSystem.ecore#//ArrayDimension">
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute TypeSystem.ecore#//ArrayDimension/size"/>
     </genClasses>
-    <genClasses xsi:type="genmodel:GenClass" image="false" ecoreClass="TypeSystem.ecore#//PrimitiveType"/>
-    <genClasses xsi:type="genmodel:GenClass" ecoreClass="TypeSystem.ecore#//RealType"/>
-    <genClasses xsi:type="genmodel:GenClass" image="false" ecoreClass="TypeSystem.ecore#//NumericType">
-      <genFeatures xsi:type="genmodel:GenFeature" property="None" children="true"
-          createChild="true" ecoreFeature="ecore:EReference TypeSystem.ecore#//NumericType/unit"/>
+    <genClasses image="false" ecoreClass="TypeSystem.ecore#//PrimitiveType"/>
+    <genClasses ecoreClass="TypeSystem.ecore#//RealType"/>
+    <genClasses image="false" ecoreClass="TypeSystem.ecore#//NumericType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TypeSystem.ecore#//NumericType/unit"/>
     </genClasses>
-    <genClasses xsi:type="genmodel:GenClass" ecoreClass="TypeSystem.ecore#//Unit">
-      <genFeatures xsi:type="genmodel:GenFeature" property="None" children="true"
-          createChild="true" ecoreFeature="ecore:EReference TypeSystem.ecore#//Unit/factors"/>
-      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute TypeSystem.ecore#//Unit/scale"/>
-      <genOperations xsi:type="genmodel:GenOperation" ecoreOperation="TypeSystem.ecore#//Unit/getFactor">
-        <genParameters xsi:type="genmodel:GenParameter" ecoreParameter="TypeSystem.ecore#//Unit/getFactor/symbol"/>
+    <genClasses ecoreClass="TypeSystem.ecore#//Unit">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TypeSystem.ecore#//Unit/factors"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TypeSystem.ecore#//Unit/scale"/>
+      <genOperations ecoreOperation="TypeSystem.ecore#//Unit/getFactor">
+        <genParameters ecoreParameter="TypeSystem.ecore#//Unit/getFactor/symbol"/>
       </genOperations>
-      <genOperations xsi:type="genmodel:GenOperation" ecoreOperation="TypeSystem.ecore#//Unit/multiply">
-        <genParameters xsi:type="genmodel:GenParameter" ecoreParameter="TypeSystem.ecore#//Unit/multiply/other"/>
+      <genOperations ecoreOperation="TypeSystem.ecore#//Unit/multiply">
+        <genParameters ecoreParameter="TypeSystem.ecore#//Unit/multiply/other"/>
       </genOperations>
-      <genOperations xsi:type="genmodel:GenOperation" ecoreOperation="TypeSystem.ecore#//Unit/divide">
-        <genParameters xsi:type="genmodel:GenParameter" ecoreParameter="TypeSystem.ecore#//Unit/divide/other"/>
+      <genOperations ecoreOperation="TypeSystem.ecore#//Unit/divide">
+        <genParameters ecoreParameter="TypeSystem.ecore#//Unit/divide/other"/>
       </genOperations>
-      <genOperations xsi:type="genmodel:GenOperation" ecoreOperation="TypeSystem.ecore#//Unit/power">
-        <genParameters xsi:type="genmodel:GenParameter" ecoreParameter="TypeSystem.ecore#//Unit/power/exponent"/>
+      <genOperations ecoreOperation="TypeSystem.ecore#//Unit/power">
+        <genParameters ecoreParameter="TypeSystem.ecore#//Unit/power/exponent"/>
       </genOperations>
-      <genOperations xsi:type="genmodel:GenOperation" ecoreOperation="TypeSystem.ecore#//Unit/isSameAs">
-        <genParameters xsi:type="genmodel:GenParameter" ecoreParameter="TypeSystem.ecore#//Unit/isSameAs/other"/>
-        <genParameters xsi:type="genmodel:GenParameter" ecoreParameter="TypeSystem.ecore#//Unit/isSameAs/ignoreScale"/>
+      <genOperations ecoreOperation="TypeSystem.ecore#//Unit/isSameAs">
+        <genParameters ecoreParameter="TypeSystem.ecore#//Unit/isSameAs/other"/>
+        <genParameters ecoreParameter="TypeSystem.ecore#//Unit/isSameAs/ignoreScale"/>
       </genOperations>
     </genClasses>
-    <genClasses xsi:type="genmodel:GenClass" ecoreClass="TypeSystem.ecore#//UnitFactor">
-      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute TypeSystem.ecore#//UnitFactor/symbol"/>
-      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute TypeSystem.ecore#//UnitFactor/exponent"/>
+    <genClasses ecoreClass="TypeSystem.ecore#//UnitFactor">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TypeSystem.ecore#//UnitFactor/symbol"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TypeSystem.ecore#//UnitFactor/exponent"/>
     </genClasses>
-    <genClasses xsi:type="genmodel:GenClass" ecoreClass="TypeSystem.ecore#//IntegerType"/>
-    <genClasses xsi:type="genmodel:GenClass" ecoreClass="TypeSystem.ecore#//BooleanType"/>
-    <genClasses xsi:type="genmodel:GenClass" ecoreClass="TypeSystem.ecore#//StringType"/>
-    <genClasses xsi:type="genmodel:GenClass" ecoreClass="TypeSystem.ecore#//Enumeration">
-      <genFeatures xsi:type="genmodel:GenFeature" property="None" children="true"
-          createChild="true" ecoreFeature="ecore:EReference TypeSystem.ecore#//Enumeration/literals"/>
-      <genOperations xsi:type="genmodel:GenOperation" ecoreOperation="TypeSystem.ecore#//Enumeration/getLiteral">
-        <genParameters xsi:type="genmodel:GenParameter" ecoreParameter="TypeSystem.ecore#//Enumeration/getLiteral/name"/>
+    <genClasses ecoreClass="TypeSystem.ecore#//IntegerType"/>
+    <genClasses ecoreClass="TypeSystem.ecore#//BooleanType"/>
+    <genClasses ecoreClass="TypeSystem.ecore#//StringType"/>
+    <genClasses ecoreClass="TypeSystem.ecore#//Enumeration">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TypeSystem.ecore#//Enumeration/literals"/>
+      <genOperations ecoreOperation="TypeSystem.ecore#//Enumeration/getLiteral">
+        <genParameters ecoreParameter="TypeSystem.ecore#//Enumeration/getLiteral/name"/>
       </genOperations>
     </genClasses>
-    <genClasses xsi:type="genmodel:GenClass" ecoreClass="TypeSystem.ecore#//EnumerationLiteral">
-      <genFeatures xsi:type="genmodel:GenFeature" property="None" notify="false" createChild="false"
-          ecoreFeature="ecore:EReference TypeSystem.ecore#//EnumerationLiteral/enumeration"/>
+    <genClasses ecoreClass="TypeSystem.ecore#//EnumerationLiteral">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference TypeSystem.ecore#//EnumerationLiteral/enumeration"/>
     </genClasses>
-    <genClasses xsi:type="genmodel:GenClass" ecoreClass="TypeSystem.ecore#//InvalidDataType"/>
-    <genClasses xsi:type="genmodel:GenClass" ecoreClass="TypeSystem.ecore#//TypeSystem">
-      <genFeatures xsi:type="genmodel:GenFeature" property="None" children="true"
-          createChild="true" ecoreFeature="ecore:EReference TypeSystem.ecore#//TypeSystem/topLevelElements"/>
-      <genOperations xsi:type="genmodel:GenOperation" ecoreOperation="TypeSystem.ecore#//TypeSystem/getElement">
-        <genParameters xsi:type="genmodel:GenParameter" ecoreParameter="TypeSystem.ecore#//TypeSystem/getElement/qualifiedName"/>
+    <genClasses ecoreClass="TypeSystem.ecore#//InvalidDataType"/>
+    <genClasses ecoreClass="TypeSystem.ecore#//TypeSystem">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TypeSystem.ecore#//TypeSystem/topLevelElements"/>
+      <genOperations ecoreOperation="TypeSystem.ecore#//TypeSystem/getElement">
+        <genParameters ecoreParameter="TypeSystem.ecore#//TypeSystem/getElement/qualifiedName"/>
       </genOperations>
     </genClasses>
-    <genClasses xsi:type="genmodel:GenClass" ecoreClass="TypeSystem.ecore#//Package">
-      <genFeatures xsi:type="genmodel:GenFeature" property="None" children="true"
-          createChild="true" ecoreFeature="ecore:EReference TypeSystem.ecore#//Package/packagedElements"/>
+    <genClasses ecoreClass="TypeSystem.ecore#//Package">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TypeSystem.ecore#//Package/packagedElements"/>
     </genClasses>
-    <genClasses xsi:type="genmodel:GenClass" ecoreClass="TypeSystem.ecore#//TensorType">
-      <genFeatures xsi:type="genmodel:GenFeature" property="Readonly" createChild="false"
-          ecoreFeature="ecore:EAttribute TypeSystem.ecore#//TensorType/vector"/>
-      <genFeatures xsi:type="genmodel:GenFeature" property="Readonly" createChild="false"
-          ecoreFeature="ecore:EAttribute TypeSystem.ecore#//TensorType/matrix"/>
+    <genClasses ecoreClass="TypeSystem.ecore#//TensorType">
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute TypeSystem.ecore#//TensorType/vector"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute TypeSystem.ecore#//TensorType/matrix"/>
     </genClasses>
-    <genClasses xsi:type="genmodel:GenClass" ecoreClass="TypeSystem.ecore#//Record">
-      <genFeatures xsi:type="genmodel:GenFeature" property="None" children="true"
-          createChild="true" ecoreFeature="ecore:EReference TypeSystem.ecore#//Record/fields"/>
+    <genClasses ecoreClass="TypeSystem.ecore#//Record">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TypeSystem.ecore#//Record/fields"/>
     </genClasses>
-    <genClasses xsi:type="genmodel:GenClass" ecoreClass="TypeSystem.ecore#//RecordField">
-      <genFeatures xsi:type="genmodel:GenFeature" notify="false" createChild="false"
-          propertySortChoices="true" ecoreFeature="ecore:EReference TypeSystem.ecore#//RecordField/type"/>
-      <genFeatures xsi:type="genmodel:GenFeature" createChild="false" ecoreFeature="ecore:EAttribute TypeSystem.ecore#//RecordField/name"/>
+    <genClasses ecoreClass="TypeSystem.ecore#//RecordField">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference TypeSystem.ecore#//RecordField/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TypeSystem.ecore#//RecordField/name"/>
     </genClasses>
-    <genClasses xsi:type="genmodel:GenClass" ecoreClass="TypeSystem.ecore#//UnitType"/>
-    <genClasses xsi:type="genmodel:GenClass" ecoreClass="TypeSystem.ecore#//AnyDataType"/>
+    <genClasses ecoreClass="TypeSystem.ecore#//UnitType"/>
+    <genClasses ecoreClass="TypeSystem.ecore#//AnyDataType"/>
   </genPackages>
 </genmodel:GenModel>

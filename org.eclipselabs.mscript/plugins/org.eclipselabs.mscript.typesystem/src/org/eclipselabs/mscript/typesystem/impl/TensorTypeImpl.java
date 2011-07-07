@@ -152,7 +152,7 @@ public class TensorTypeImpl extends ArrayTypeImpl implements TensorType {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public DataType evaluate(OperatorKind operator, DataType other) {

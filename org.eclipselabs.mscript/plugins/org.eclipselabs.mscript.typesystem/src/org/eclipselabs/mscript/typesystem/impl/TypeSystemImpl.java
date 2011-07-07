@@ -78,7 +78,7 @@ public class TypeSystemImpl extends EObjectImpl implements TypeSystem {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public NamedElement getElement(String qualifiedName) {
 		return TypeSystemOperations.getElement(this, qualifiedName);

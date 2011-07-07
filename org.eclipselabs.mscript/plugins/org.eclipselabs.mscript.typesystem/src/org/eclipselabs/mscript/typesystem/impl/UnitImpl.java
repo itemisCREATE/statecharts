@@ -122,7 +122,7 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public UnitFactor getFactor(UnitSymbol symbol) {
 		return UnitOperations.getFactor(this, symbol);
@@ -131,7 +131,7 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public Unit multiply(Unit other) {
 		return UnitOperations.multiply(this, other);
@@ -140,7 +140,7 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public Unit divide(Unit other) {
 		return UnitOperations.divide(this, other);
@@ -149,7 +149,7 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public Unit power(int exponent) {
 		return UnitOperations.power(this, exponent);
@@ -158,7 +158,7 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public boolean isSameAs(Unit other, boolean ignoreScale) {
 		return UnitOperations.isSameAs(this, other, ignoreScale);

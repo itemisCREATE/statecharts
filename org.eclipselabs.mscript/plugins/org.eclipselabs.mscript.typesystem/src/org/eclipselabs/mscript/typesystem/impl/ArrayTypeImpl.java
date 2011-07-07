@@ -257,7 +257,7 @@ public class ArrayTypeImpl extends DataTypeImpl implements ArrayType {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public boolean isAssignableFrom(DataType other) {

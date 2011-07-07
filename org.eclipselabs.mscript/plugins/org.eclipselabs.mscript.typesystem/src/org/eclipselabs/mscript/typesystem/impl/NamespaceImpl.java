@@ -79,7 +79,7 @@ public abstract class NamespaceImpl extends NamedElementImpl implements Namespac
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public NamedElement getMember(String name) {
 		return NamespaceOperations.getMember(this, name);

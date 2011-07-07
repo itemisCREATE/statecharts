@@ -44,7 +44,7 @@ public class StringTypeImpl extends PrimitiveTypeImpl implements StringType {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public boolean isAssignableFrom(DataType other) {

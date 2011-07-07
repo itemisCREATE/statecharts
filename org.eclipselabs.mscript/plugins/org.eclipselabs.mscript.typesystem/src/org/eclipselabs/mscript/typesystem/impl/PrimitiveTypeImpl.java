@@ -45,7 +45,7 @@ public abstract class PrimitiveTypeImpl extends DataTypeImpl implements Primitiv
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public DataType evaluate(OperatorKind operator, DataType other) {
@@ -55,7 +55,7 @@ public abstract class PrimitiveTypeImpl extends DataTypeImpl implements Primitiv
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public DataType evaluatePower(int exponent) {
