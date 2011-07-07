@@ -20,8 +20,6 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
-import org.eclipselabs.mscript.typesystem.StringType;
-
 /**
  * This is the item provider adapter for a {@link org.eclipselabs.mscript.typesystem.StringType} object.
  * <!-- begin-user-doc -->
@@ -80,10 +78,7 @@ public class StringTypeItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((StringType)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_StringType_type") :
-			getString("_UI_StringType_type") + " " + label;
+		return getString("_UI_StringType_type");
 	}
 
 	/**

@@ -61,36 +61,6 @@ public interface TypeSystemPackage extends EPackage {
 	TypeSystemPackage eINSTANCE = org.eclipselabs.mscript.typesystem.impl.TypeSystemPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link org.eclipselabs.mscript.typesystem.impl.NamedElementImpl <em>Named Element</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipselabs.mscript.typesystem.impl.NamedElementImpl
-	 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemPackageImpl#getNamedElement()
-	 * @generated
-	 */
-	int NAMED_ELEMENT = 2;
-
-	/**
-	 * The meta object id for the '{@link org.eclipselabs.mscript.typesystem.impl.PackageableElementImpl <em>Packageable Element</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipselabs.mscript.typesystem.impl.PackageableElementImpl
-	 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemPackageImpl#getPackageableElement()
-	 * @generated
-	 */
-	int PACKAGEABLE_ELEMENT = 1;
-
-	/**
-	 * The meta object id for the '{@link org.eclipselabs.mscript.typesystem.impl.NamespaceImpl <em>Namespace</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipselabs.mscript.typesystem.impl.NamespaceImpl
-	 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemPackageImpl#getNamespace()
-	 * @generated
-	 */
-	int NAMESPACE = 3;
-
-	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.typesystem.impl.DataTypeImpl <em>Data Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -98,7 +68,7 @@ public interface TypeSystemPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemPackageImpl#getDataType()
 	 * @generated
 	 */
-	int DATA_TYPE = 5;
+	int DATA_TYPE = 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.typesystem.impl.ArrayTypeImpl <em>Array Type</em>}' class.
@@ -108,7 +78,7 @@ public interface TypeSystemPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemPackageImpl#getArrayType()
 	 * @generated
 	 */
-	int ARRAY_TYPE = 4;
+	int ARRAY_TYPE = 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.typesystem.impl.ArrayDimensionImpl <em>Array Dimension</em>}' class.
@@ -118,7 +88,7 @@ public interface TypeSystemPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemPackageImpl#getArrayDimension()
 	 * @generated
 	 */
-	int ARRAY_DIMENSION = 6;
+	int ARRAY_DIMENSION = 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.typesystem.impl.PrimitiveTypeImpl <em>Primitive Type</em>}' class.
@@ -128,7 +98,7 @@ public interface TypeSystemPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemPackageImpl#getPrimitiveType()
 	 * @generated
 	 */
-	int PRIMITIVE_TYPE = 7;
+	int PRIMITIVE_TYPE = 4;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.typesystem.impl.RealTypeImpl <em>Real Type</em>}' class.
@@ -138,7 +108,7 @@ public interface TypeSystemPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemPackageImpl#getRealType()
 	 * @generated
 	 */
-	int REAL_TYPE = 8;
+	int REAL_TYPE = 5;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.typesystem.impl.UnitImpl <em>Unit</em>}' class.
@@ -148,7 +118,7 @@ public interface TypeSystemPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemPackageImpl#getUnit()
 	 * @generated
 	 */
-	int UNIT = 10;
+	int UNIT = 7;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.typesystem.impl.UnitFactorImpl <em>Unit Factor</em>}' class.
@@ -158,7 +128,7 @@ public interface TypeSystemPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemPackageImpl#getUnitFactor()
 	 * @generated
 	 */
-	int UNIT_FACTOR = 11;
+	int UNIT_FACTOR = 8;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.typesystem.impl.IntegerTypeImpl <em>Integer Type</em>}' class.
@@ -168,7 +138,7 @@ public interface TypeSystemPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemPackageImpl#getIntegerType()
 	 * @generated
 	 */
-	int INTEGER_TYPE = 12;
+	int INTEGER_TYPE = 9;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.typesystem.impl.BooleanTypeImpl <em>Boolean Type</em>}' class.
@@ -178,7 +148,7 @@ public interface TypeSystemPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemPackageImpl#getBooleanType()
 	 * @generated
 	 */
-	int BOOLEAN_TYPE = 13;
+	int BOOLEAN_TYPE = 10;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.typesystem.impl.StringTypeImpl <em>String Type</em>}' class.
@@ -188,63 +158,7 @@ public interface TypeSystemPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemPackageImpl#getStringType()
 	 * @generated
 	 */
-	int STRING_TYPE = 14;
-
-	/**
-	 * The meta object id for the '{@link org.eclipselabs.mscript.typesystem.impl.EnumerationImpl <em>Enumeration</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipselabs.mscript.typesystem.impl.EnumerationImpl
-	 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemPackageImpl#getEnumeration()
-	 * @generated
-	 */
-	int ENUMERATION = 15;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAMED_ELEMENT__NAME = 0;
-
-	/**
-	 * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAMED_ELEMENT__QUALIFIED_NAME = 1;
-
-	/**
-	 * The feature id for the '<em><b>Namespace</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAMED_ELEMENT__NAMESPACE = 2;
-
-	/**
-	 * The number of structural features of the '<em>Named Element</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAMED_ELEMENT_FEATURE_COUNT = 3;
-
-	/**
-	 * The meta object id for the '{@link org.eclipselabs.mscript.typesystem.impl.EnumerationLiteralImpl <em>Enumeration Literal</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipselabs.mscript.typesystem.impl.EnumerationLiteralImpl
-	 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemPackageImpl#getEnumerationLiteral()
-	 * @generated
-	 */
-	int ENUMERATION_LITERAL = 16;
+	int STRING_TYPE = 11;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.typesystem.impl.InvalidDataTypeImpl <em>Invalid Data Type</em>}' class.
@@ -254,63 +168,7 @@ public interface TypeSystemPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemPackageImpl#getInvalidDataType()
 	 * @generated
 	 */
-	int INVALID_DATA_TYPE = 17;
-
-	/**
-	 * The meta object id for the '{@link org.eclipselabs.mscript.typesystem.impl.TypeSystemImpl <em>Type System</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemImpl
-	 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemPackageImpl#getTypeSystem()
-	 * @generated
-	 */
-	int TYPE_SYSTEM = 18;
-
-	/**
-	 * The meta object id for the '{@link org.eclipselabs.mscript.typesystem.impl.PackageImpl <em>Package</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipselabs.mscript.typesystem.impl.PackageImpl
-	 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemPackageImpl#getPackage()
-	 * @generated
-	 */
-	int PACKAGE = 19;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PACKAGEABLE_ELEMENT__NAME = NAMED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PACKAGEABLE_ELEMENT__QUALIFIED_NAME = NAMED_ELEMENT__QUALIFIED_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Namespace</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PACKAGEABLE_ELEMENT__NAMESPACE = NAMED_ELEMENT__NAMESPACE;
-
-	/**
-	 * The number of structural features of the '<em>Packageable Element</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PACKAGEABLE_ELEMENT_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 0;
+	int INVALID_DATA_TYPE = 12;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.typesystem.impl.TypeImpl <em>Type</em>}' class.
@@ -323,121 +181,13 @@ public interface TypeSystemPackage extends EPackage {
 	int TYPE = 0;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE__NAME = PACKAGEABLE_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE__QUALIFIED_NAME = PACKAGEABLE_ELEMENT__QUALIFIED_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Namespace</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE__NAMESPACE = PACKAGEABLE_ELEMENT__NAMESPACE;
-
-	/**
 	 * The number of structural features of the '<em>Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_FEATURE_COUNT = PACKAGEABLE_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAMESPACE__NAME = NAMED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAMESPACE__QUALIFIED_NAME = NAMED_ELEMENT__QUALIFIED_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Namespace</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAMESPACE__NAMESPACE = NAMED_ELEMENT__NAMESPACE;
-
-	/**
-	 * The feature id for the '<em><b>Members</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAMESPACE__MEMBERS = NAMED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Owned Members</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAMESPACE__OWNED_MEMBERS = NAMED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of structural features of the '<em>Namespace</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAMESPACE_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_TYPE__NAME = TYPE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_TYPE__QUALIFIED_NAME = TYPE__QUALIFIED_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Namespace</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_TYPE__NAMESPACE = TYPE__NAMESPACE;
+	int TYPE_FEATURE_COUNT = 0;
 
 	/**
 	 * The number of structural features of the '<em>Data Type</em>' class.
@@ -447,33 +197,6 @@ public interface TypeSystemPackage extends EPackage {
 	 * @ordered
 	 */
 	int DATA_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARRAY_TYPE__NAME = DATA_TYPE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARRAY_TYPE__QUALIFIED_NAME = DATA_TYPE__QUALIFIED_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Namespace</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARRAY_TYPE__NAMESPACE = DATA_TYPE__NAMESPACE;
 
 	/**
 	 * The feature id for the '<em><b>Element Type</b></em>' reference.
@@ -575,33 +298,6 @@ public interface TypeSystemPackage extends EPackage {
 	int ARRAY_DIMENSION_FEATURE_COUNT = 1;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PRIMITIVE_TYPE__NAME = DATA_TYPE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PRIMITIVE_TYPE__QUALIFIED_NAME = DATA_TYPE__QUALIFIED_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Namespace</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PRIMITIVE_TYPE__NAMESPACE = DATA_TYPE__NAMESPACE;
-
-	/**
 	 * The number of structural features of the '<em>Primitive Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -618,34 +314,7 @@ public interface TypeSystemPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemPackageImpl#getNumericType()
 	 * @generated
 	 */
-	int NUMERIC_TYPE = 9;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NUMERIC_TYPE__NAME = PRIMITIVE_TYPE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NUMERIC_TYPE__QUALIFIED_NAME = PRIMITIVE_TYPE__QUALIFIED_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Namespace</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NUMERIC_TYPE__NAMESPACE = PRIMITIVE_TYPE__NAMESPACE;
+	int NUMERIC_TYPE = 6;
 
 	/**
 	 * The feature id for the '<em><b>Unit</b></em>' containment reference.
@@ -664,33 +333,6 @@ public interface TypeSystemPackage extends EPackage {
 	 * @ordered
 	 */
 	int NUMERIC_TYPE_FEATURE_COUNT = PRIMITIVE_TYPE_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REAL_TYPE__NAME = NUMERIC_TYPE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REAL_TYPE__QUALIFIED_NAME = NUMERIC_TYPE__QUALIFIED_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Namespace</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REAL_TYPE__NAMESPACE = NUMERIC_TYPE__NAMESPACE;
 
 	/**
 	 * The feature id for the '<em><b>Unit</b></em>' containment reference.
@@ -765,33 +407,6 @@ public interface TypeSystemPackage extends EPackage {
 	int UNIT_FACTOR_FEATURE_COUNT = 2;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INTEGER_TYPE__NAME = NUMERIC_TYPE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INTEGER_TYPE__QUALIFIED_NAME = NUMERIC_TYPE__QUALIFIED_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Namespace</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INTEGER_TYPE__NAMESPACE = NUMERIC_TYPE__NAMESPACE;
-
-	/**
 	 * The feature id for the '<em><b>Unit</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -810,33 +425,6 @@ public interface TypeSystemPackage extends EPackage {
 	int INTEGER_TYPE_FEATURE_COUNT = NUMERIC_TYPE_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOOLEAN_TYPE__NAME = PRIMITIVE_TYPE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOOLEAN_TYPE__QUALIFIED_NAME = PRIMITIVE_TYPE__QUALIFIED_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Namespace</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOOLEAN_TYPE__NAMESPACE = PRIMITIVE_TYPE__NAMESPACE;
-
-	/**
 	 * The number of structural features of the '<em>Boolean Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -844,33 +432,6 @@ public interface TypeSystemPackage extends EPackage {
 	 * @ordered
 	 */
 	int BOOLEAN_TYPE_FEATURE_COUNT = PRIMITIVE_TYPE_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRING_TYPE__NAME = PRIMITIVE_TYPE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRING_TYPE__QUALIFIED_NAME = PRIMITIVE_TYPE__QUALIFIED_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Namespace</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRING_TYPE__NAMESPACE = PRIMITIVE_TYPE__NAMESPACE;
 
 	/**
 	 * The number of structural features of the '<em>String Type</em>' class.
@@ -882,141 +443,6 @@ public interface TypeSystemPackage extends EPackage {
 	int STRING_TYPE_FEATURE_COUNT = PRIMITIVE_TYPE_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENUMERATION__NAME = NAMESPACE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENUMERATION__QUALIFIED_NAME = NAMESPACE__QUALIFIED_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Namespace</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENUMERATION__NAMESPACE = NAMESPACE__NAMESPACE;
-
-	/**
-	 * The feature id for the '<em><b>Members</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENUMERATION__MEMBERS = NAMESPACE__MEMBERS;
-
-	/**
-	 * The feature id for the '<em><b>Owned Members</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENUMERATION__OWNED_MEMBERS = NAMESPACE__OWNED_MEMBERS;
-
-	/**
-	 * The feature id for the '<em><b>Literals</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENUMERATION__LITERALS = NAMESPACE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Enumeration</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENUMERATION_FEATURE_COUNT = NAMESPACE_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENUMERATION_LITERAL__NAME = NAMED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENUMERATION_LITERAL__QUALIFIED_NAME = NAMED_ELEMENT__QUALIFIED_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Namespace</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENUMERATION_LITERAL__NAMESPACE = NAMED_ELEMENT__NAMESPACE;
-
-	/**
-	 * The feature id for the '<em><b>Enumeration</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENUMERATION_LITERAL__ENUMERATION = NAMED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Enumeration Literal</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENUMERATION_LITERAL_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INVALID_DATA_TYPE__NAME = DATA_TYPE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INVALID_DATA_TYPE__QUALIFIED_NAME = DATA_TYPE__QUALIFIED_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Namespace</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INVALID_DATA_TYPE__NAMESPACE = DATA_TYPE__NAMESPACE;
-
-	/**
 	 * The number of structural features of the '<em>Invalid Data Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1026,87 +452,6 @@ public interface TypeSystemPackage extends EPackage {
 	int INVALID_DATA_TYPE_FEATURE_COUNT = DATA_TYPE_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Top Level Elements</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_SYSTEM__TOP_LEVEL_ELEMENTS = 0;
-
-	/**
-	 * The number of structural features of the '<em>Type System</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_SYSTEM_FEATURE_COUNT = 1;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PACKAGE__NAME = NAMESPACE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PACKAGE__QUALIFIED_NAME = NAMESPACE__QUALIFIED_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Namespace</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PACKAGE__NAMESPACE = NAMESPACE__NAMESPACE;
-
-	/**
-	 * The feature id for the '<em><b>Members</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PACKAGE__MEMBERS = NAMESPACE__MEMBERS;
-
-	/**
-	 * The feature id for the '<em><b>Owned Members</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PACKAGE__OWNED_MEMBERS = NAMESPACE__OWNED_MEMBERS;
-
-	/**
-	 * The feature id for the '<em><b>Packaged Elements</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PACKAGE__PACKAGED_ELEMENTS = NAMESPACE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Package</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PACKAGE_FEATURE_COUNT = NAMESPACE_FEATURE_COUNT + 1;
-
-	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.typesystem.impl.TensorTypeImpl <em>Tensor Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1114,34 +459,7 @@ public interface TypeSystemPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemPackageImpl#getTensorType()
 	 * @generated
 	 */
-	int TENSOR_TYPE = 20;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TENSOR_TYPE__NAME = ARRAY_TYPE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TENSOR_TYPE__QUALIFIED_NAME = ARRAY_TYPE__QUALIFIED_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Namespace</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TENSOR_TYPE__NAMESPACE = ARRAY_TYPE__NAMESPACE;
+	int TENSOR_TYPE = 13;
 
 	/**
 	 * The feature id for the '<em><b>Element Type</b></em>' reference.
@@ -1250,34 +568,7 @@ public interface TypeSystemPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemPackageImpl#getRecord()
 	 * @generated
 	 */
-	int RECORD = 21;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RECORD__NAME = DATA_TYPE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RECORD__QUALIFIED_NAME = DATA_TYPE__QUALIFIED_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Namespace</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RECORD__NAMESPACE = DATA_TYPE__NAMESPACE;
+	int RECORD = 14;
 
 	/**
 	 * The feature id for the '<em><b>Fields</b></em>' containment reference list.
@@ -1305,7 +596,7 @@ public interface TypeSystemPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemPackageImpl#getRecordField()
 	 * @generated
 	 */
-	int RECORD_FIELD = 22;
+	int RECORD_FIELD = 15;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -1342,34 +633,7 @@ public interface TypeSystemPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemPackageImpl#getUnitType()
 	 * @generated
 	 */
-	int UNIT_TYPE = 23;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNIT_TYPE__NAME = DATA_TYPE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNIT_TYPE__QUALIFIED_NAME = DATA_TYPE__QUALIFIED_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Namespace</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNIT_TYPE__NAMESPACE = DATA_TYPE__NAMESPACE;
+	int UNIT_TYPE = 16;
 
 	/**
 	 * The number of structural features of the '<em>Unit Type</em>' class.
@@ -1388,34 +652,7 @@ public interface TypeSystemPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemPackageImpl#getAnyDataType()
 	 * @generated
 	 */
-	int ANY_DATA_TYPE = 24;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ANY_DATA_TYPE__NAME = DATA_TYPE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ANY_DATA_TYPE__QUALIFIED_NAME = DATA_TYPE__QUALIFIED_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Namespace</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ANY_DATA_TYPE__NAMESPACE = DATA_TYPE__NAMESPACE;
+	int ANY_DATA_TYPE = 17;
 
 	/**
 	 * The number of structural features of the '<em>Any Data Type</em>' class.
@@ -1434,7 +671,7 @@ public interface TypeSystemPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemPackageImpl#getOperatorKind()
 	 * @generated
 	 */
-	int OPERATOR_KIND = 25;
+	int OPERATOR_KIND = 18;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.typesystem.UnitSymbol <em>Unit Symbol</em>}' enum.
@@ -1444,7 +681,7 @@ public interface TypeSystemPackage extends EPackage {
 	 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemPackageImpl#getUnitSymbol()
 	 * @generated
 	 */
-	int UNIT_SYMBOL = 26;
+	int UNIT_SYMBOL = 19;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipselabs.mscript.typesystem.Type <em>Type</em>}'.
@@ -1455,91 +692,6 @@ public interface TypeSystemPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getType();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipselabs.mscript.typesystem.PackageableElement <em>Packageable Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Packageable Element</em>'.
-	 * @see org.eclipselabs.mscript.typesystem.PackageableElement
-	 * @generated
-	 */
-	EClass getPackageableElement();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipselabs.mscript.typesystem.NamedElement <em>Named Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Named Element</em>'.
-	 * @see org.eclipselabs.mscript.typesystem.NamedElement
-	 * @generated
-	 */
-	EClass getNamedElement();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.typesystem.NamedElement#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.eclipselabs.mscript.typesystem.NamedElement#getName()
-	 * @see #getNamedElement()
-	 * @generated
-	 */
-	EAttribute getNamedElement_Name();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipselabs.mscript.typesystem.NamedElement#getQualifiedName <em>Qualified Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Qualified Name</em>'.
-	 * @see org.eclipselabs.mscript.typesystem.NamedElement#getQualifiedName()
-	 * @see #getNamedElement()
-	 * @generated
-	 */
-	EAttribute getNamedElement_QualifiedName();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipselabs.mscript.typesystem.NamedElement#getNamespace <em>Namespace</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Namespace</em>'.
-	 * @see org.eclipselabs.mscript.typesystem.NamedElement#getNamespace()
-	 * @see #getNamedElement()
-	 * @generated
-	 */
-	EReference getNamedElement_Namespace();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipselabs.mscript.typesystem.Namespace <em>Namespace</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Namespace</em>'.
-	 * @see org.eclipselabs.mscript.typesystem.Namespace
-	 * @generated
-	 */
-	EClass getNamespace();
-
-	/**
-	 * Returns the meta object for the reference list '{@link org.eclipselabs.mscript.typesystem.Namespace#getMembers <em>Members</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Members</em>'.
-	 * @see org.eclipselabs.mscript.typesystem.Namespace#getMembers()
-	 * @see #getNamespace()
-	 * @generated
-	 */
-	EReference getNamespace_Members();
-
-	/**
-	 * Returns the meta object for the reference list '{@link org.eclipselabs.mscript.typesystem.Namespace#getOwnedMembers <em>Owned Members</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Owned Members</em>'.
-	 * @see org.eclipselabs.mscript.typesystem.Namespace#getOwnedMembers()
-	 * @see #getNamespace()
-	 * @generated
-	 */
-	EReference getNamespace_OwnedMembers();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipselabs.mscript.typesystem.ArrayType <em>Array Type</em>}'.
@@ -1806,48 +958,6 @@ public interface TypeSystemPackage extends EPackage {
 	EClass getStringType();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipselabs.mscript.typesystem.Enumeration <em>Enumeration</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Enumeration</em>'.
-	 * @see org.eclipselabs.mscript.typesystem.Enumeration
-	 * @generated
-	 */
-	EClass getEnumeration();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.typesystem.Enumeration#getLiterals <em>Literals</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Literals</em>'.
-	 * @see org.eclipselabs.mscript.typesystem.Enumeration#getLiterals()
-	 * @see #getEnumeration()
-	 * @generated
-	 */
-	EReference getEnumeration_Literals();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipselabs.mscript.typesystem.EnumerationLiteral <em>Enumeration Literal</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Enumeration Literal</em>'.
-	 * @see org.eclipselabs.mscript.typesystem.EnumerationLiteral
-	 * @generated
-	 */
-	EClass getEnumerationLiteral();
-
-	/**
-	 * Returns the meta object for the container reference '{@link org.eclipselabs.mscript.typesystem.EnumerationLiteral#getEnumeration <em>Enumeration</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Enumeration</em>'.
-	 * @see org.eclipselabs.mscript.typesystem.EnumerationLiteral#getEnumeration()
-	 * @see #getEnumerationLiteral()
-	 * @generated
-	 */
-	EReference getEnumerationLiteral_Enumeration();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipselabs.mscript.typesystem.InvalidDataType <em>Invalid Data Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1856,48 +966,6 @@ public interface TypeSystemPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getInvalidDataType();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipselabs.mscript.typesystem.TypeSystem <em>Type System</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Type System</em>'.
-	 * @see org.eclipselabs.mscript.typesystem.TypeSystem
-	 * @generated
-	 */
-	EClass getTypeSystem();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.typesystem.TypeSystem#getTopLevelElements <em>Top Level Elements</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Top Level Elements</em>'.
-	 * @see org.eclipselabs.mscript.typesystem.TypeSystem#getTopLevelElements()
-	 * @see #getTypeSystem()
-	 * @generated
-	 */
-	EReference getTypeSystem_TopLevelElements();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipselabs.mscript.typesystem.Package <em>Package</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Package</em>'.
-	 * @see org.eclipselabs.mscript.typesystem.Package
-	 * @generated
-	 */
-	EClass getPackage();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipselabs.mscript.typesystem.Package#getPackagedElements <em>Packaged Elements</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Packaged Elements</em>'.
-	 * @see org.eclipselabs.mscript.typesystem.Package#getPackagedElements()
-	 * @see #getPackage()
-	 * @generated
-	 */
-	EReference getPackage_PackagedElements();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipselabs.mscript.typesystem.TensorType <em>Tensor Type</em>}'.
@@ -2055,76 +1123,6 @@ public interface TypeSystemPackage extends EPackage {
 		 * @generated
 		 */
 		EClass TYPE = eINSTANCE.getType();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipselabs.mscript.typesystem.impl.PackageableElementImpl <em>Packageable Element</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipselabs.mscript.typesystem.impl.PackageableElementImpl
-		 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemPackageImpl#getPackageableElement()
-		 * @generated
-		 */
-		EClass PACKAGEABLE_ELEMENT = eINSTANCE.getPackageableElement();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipselabs.mscript.typesystem.impl.NamedElementImpl <em>Named Element</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipselabs.mscript.typesystem.impl.NamedElementImpl
-		 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemPackageImpl#getNamedElement()
-		 * @generated
-		 */
-		EClass NAMED_ELEMENT = eINSTANCE.getNamedElement();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute NAMED_ELEMENT__NAME = eINSTANCE.getNamedElement_Name();
-
-		/**
-		 * The meta object literal for the '<em><b>Qualified Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute NAMED_ELEMENT__QUALIFIED_NAME = eINSTANCE.getNamedElement_QualifiedName();
-
-		/**
-		 * The meta object literal for the '<em><b>Namespace</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference NAMED_ELEMENT__NAMESPACE = eINSTANCE.getNamedElement_Namespace();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipselabs.mscript.typesystem.impl.NamespaceImpl <em>Namespace</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipselabs.mscript.typesystem.impl.NamespaceImpl
-		 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemPackageImpl#getNamespace()
-		 * @generated
-		 */
-		EClass NAMESPACE = eINSTANCE.getNamespace();
-
-		/**
-		 * The meta object literal for the '<em><b>Members</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference NAMESPACE__MEMBERS = eINSTANCE.getNamespace_Members();
-
-		/**
-		 * The meta object literal for the '<em><b>Owned Members</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference NAMESPACE__OWNED_MEMBERS = eINSTANCE.getNamespace_OwnedMembers();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipselabs.mscript.typesystem.impl.ArrayTypeImpl <em>Array Type</em>}' class.
@@ -2349,42 +1347,6 @@ public interface TypeSystemPackage extends EPackage {
 		EClass STRING_TYPE = eINSTANCE.getStringType();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipselabs.mscript.typesystem.impl.EnumerationImpl <em>Enumeration</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipselabs.mscript.typesystem.impl.EnumerationImpl
-		 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemPackageImpl#getEnumeration()
-		 * @generated
-		 */
-		EClass ENUMERATION = eINSTANCE.getEnumeration();
-
-		/**
-		 * The meta object literal for the '<em><b>Literals</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ENUMERATION__LITERALS = eINSTANCE.getEnumeration_Literals();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipselabs.mscript.typesystem.impl.EnumerationLiteralImpl <em>Enumeration Literal</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipselabs.mscript.typesystem.impl.EnumerationLiteralImpl
-		 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemPackageImpl#getEnumerationLiteral()
-		 * @generated
-		 */
-		EClass ENUMERATION_LITERAL = eINSTANCE.getEnumerationLiteral();
-
-		/**
-		 * The meta object literal for the '<em><b>Enumeration</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ENUMERATION_LITERAL__ENUMERATION = eINSTANCE.getEnumerationLiteral_Enumeration();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipselabs.mscript.typesystem.impl.InvalidDataTypeImpl <em>Invalid Data Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2393,42 +1355,6 @@ public interface TypeSystemPackage extends EPackage {
 		 * @generated
 		 */
 		EClass INVALID_DATA_TYPE = eINSTANCE.getInvalidDataType();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipselabs.mscript.typesystem.impl.TypeSystemImpl <em>Type System</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemImpl
-		 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemPackageImpl#getTypeSystem()
-		 * @generated
-		 */
-		EClass TYPE_SYSTEM = eINSTANCE.getTypeSystem();
-
-		/**
-		 * The meta object literal for the '<em><b>Top Level Elements</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TYPE_SYSTEM__TOP_LEVEL_ELEMENTS = eINSTANCE.getTypeSystem_TopLevelElements();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipselabs.mscript.typesystem.impl.PackageImpl <em>Package</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipselabs.mscript.typesystem.impl.PackageImpl
-		 * @see org.eclipselabs.mscript.typesystem.impl.TypeSystemPackageImpl#getPackage()
-		 * @generated
-		 */
-		EClass PACKAGE = eINSTANCE.getPackage();
-
-		/**
-		 * The meta object literal for the '<em><b>Packaged Elements</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference PACKAGE__PACKAGED_ELEMENTS = eINSTANCE.getPackage_PackagedElements();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipselabs.mscript.typesystem.impl.TensorTypeImpl <em>Tensor Type</em>}' class.

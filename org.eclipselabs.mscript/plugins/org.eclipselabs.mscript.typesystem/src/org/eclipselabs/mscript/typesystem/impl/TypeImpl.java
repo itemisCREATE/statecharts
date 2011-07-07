@@ -7,6 +7,7 @@
 package org.eclipselabs.mscript.typesystem.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipselabs.mscript.typesystem.Type;
 import org.eclipselabs.mscript.typesystem.TypeSystemPackage;
 
@@ -19,7 +20,7 @@ import org.eclipselabs.mscript.typesystem.TypeSystemPackage;
  *
  * @generated
  */
-public abstract class TypeImpl extends PackageableElementImpl implements Type {
+public abstract class TypeImpl extends EObjectImpl implements Type {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -37,16 +38,6 @@ public abstract class TypeImpl extends PackageableElementImpl implements Type {
 	@Override
 	protected EClass eStaticClass() {
 		return TypeSystemPackage.Literals.TYPE;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public String getQualifiedName() {
-		// TODO: Return qualified name using namespaces.
-		return getName();
 	}
 
 } //TypeImpl

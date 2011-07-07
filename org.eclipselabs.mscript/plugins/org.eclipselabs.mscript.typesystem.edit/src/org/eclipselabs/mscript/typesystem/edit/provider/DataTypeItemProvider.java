@@ -20,8 +20,6 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
-import org.eclipselabs.mscript.typesystem.DataType;
-
 /**
  * This is the item provider adapter for a {@link org.eclipselabs.mscript.typesystem.DataType} object.
  * <!-- begin-user-doc -->
@@ -69,10 +67,7 @@ public class DataTypeItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((DataType)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_DataType_type") :
-			getString("_UI_DataType_type") + " " + label;
+		return getString("_UI_DataType_type");
 	}
 
 	/**

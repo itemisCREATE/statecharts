@@ -16,8 +16,6 @@ import org.eclipselabs.mscript.typesystem.AnyDataType;
 import org.eclipselabs.mscript.typesystem.ArrayDimension;
 import org.eclipselabs.mscript.typesystem.ArrayType;
 import org.eclipselabs.mscript.typesystem.BooleanType;
-import org.eclipselabs.mscript.typesystem.Enumeration;
-import org.eclipselabs.mscript.typesystem.EnumerationLiteral;
 import org.eclipselabs.mscript.typesystem.IntegerType;
 import org.eclipselabs.mscript.typesystem.InvalidDataType;
 import org.eclipselabs.mscript.typesystem.OperatorKind;
@@ -26,7 +24,6 @@ import org.eclipselabs.mscript.typesystem.Record;
 import org.eclipselabs.mscript.typesystem.RecordField;
 import org.eclipselabs.mscript.typesystem.StringType;
 import org.eclipselabs.mscript.typesystem.TensorType;
-import org.eclipselabs.mscript.typesystem.TypeSystem;
 import org.eclipselabs.mscript.typesystem.TypeSystemFactory;
 import org.eclipselabs.mscript.typesystem.TypeSystemPackage;
 import org.eclipselabs.mscript.typesystem.Unit;
@@ -86,11 +83,7 @@ public class TypeSystemFactoryImpl extends EFactoryImpl implements TypeSystemFac
 			case TypeSystemPackage.INTEGER_TYPE: return createIntegerType();
 			case TypeSystemPackage.BOOLEAN_TYPE: return createBooleanType();
 			case TypeSystemPackage.STRING_TYPE: return createStringType();
-			case TypeSystemPackage.ENUMERATION: return createEnumeration();
-			case TypeSystemPackage.ENUMERATION_LITERAL: return createEnumerationLiteral();
 			case TypeSystemPackage.INVALID_DATA_TYPE: return createInvalidDataType();
-			case TypeSystemPackage.TYPE_SYSTEM: return createTypeSystem();
-			case TypeSystemPackage.PACKAGE: return createPackage();
 			case TypeSystemPackage.TENSOR_TYPE: return createTensorType();
 			case TypeSystemPackage.RECORD: return createRecord();
 			case TypeSystemPackage.RECORD_FIELD: return createRecordField();
@@ -220,49 +213,9 @@ public class TypeSystemFactoryImpl extends EFactoryImpl implements TypeSystemFac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Enumeration createEnumeration() {
-		EnumerationImpl enumeration = new EnumerationImpl();
-		return enumeration;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EnumerationLiteral createEnumerationLiteral() {
-		EnumerationLiteralImpl enumerationLiteral = new EnumerationLiteralImpl();
-		return enumerationLiteral;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public InvalidDataType createInvalidDataType() {
 		InvalidDataTypeImpl invalidDataType = new InvalidDataTypeImpl();
 		return invalidDataType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public TypeSystem createTypeSystem() {
-		TypeSystemImpl typeSystem = new TypeSystemImpl();
-		return typeSystem;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public org.eclipselabs.mscript.typesystem.Package createPackage() {
-		PackageImpl package_ = new PackageImpl();
-		return package_;
 	}
 
 	/**

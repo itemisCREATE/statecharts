@@ -6,10 +6,7 @@
  */
 package org.eclipselabs.mscript.typesystem.impl;
 
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipselabs.mscript.typesystem.DataType;
 import org.eclipselabs.mscript.typesystem.NumericType;
 import org.eclipselabs.mscript.typesystem.OperatorKind;
@@ -26,7 +23,6 @@ import org.eclipselabs.mscript.typesystem.internal.operations.TensorTypeOperatio
  * <ul>
  *   <li>{@link org.eclipselabs.mscript.typesystem.impl.TensorTypeImpl#isVector <em>Vector</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.typesystem.impl.TensorTypeImpl#isMatrix <em>Matrix</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.typesystem.impl.TensorTypeImpl#getElementType <em>Element Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -90,63 +86,14 @@ public class TensorTypeImpl extends ArrayTypeImpl implements TensorType {
 	}
 
 	public NumericType getElementType() {
-		return (NumericType) getElementTypeGen();
+		return (NumericType) super.getElementType();
 	}
 	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public DataType getElementTypeGen() {
-		if (elementType != null && elementType.eIsProxy()) {
-			InternalEObject oldElementType = (InternalEObject)elementType;
-			elementType = (DataType)eResolveProxy(oldElementType);
-			if (elementType != oldElementType) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TypeSystemPackage.TENSOR_TYPE__ELEMENT_TYPE, oldElementType, elementType));
-			}
-		}
-		return elementType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public DataType basicGetElementType() {
-		return elementType;
-	}
-
 	public void setElementType(DataType newElementType) {
 		if (!(newElementType instanceof NumericType)) {
 			throw new IllegalArgumentException("New element type must be NumericType");
 		}
 		setElementTypeGen(newElementType);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setElementTypeGen(DataType newElementType) {
-		DataType oldElementType = elementType;
-		elementType = newElementType;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypeSystemPackage.TENSOR_TYPE__ELEMENT_TYPE, oldElementType, elementType));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isSetElementType() {
-		return elementType != null;
 	}
 
 	/**

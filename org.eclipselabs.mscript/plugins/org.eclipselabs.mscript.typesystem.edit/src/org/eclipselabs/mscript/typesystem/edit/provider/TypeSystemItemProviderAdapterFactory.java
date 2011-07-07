@@ -260,52 +260,6 @@ public class TypeSystemItemProviderAdapterFactory extends TypeSystemAdapterFacto
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipselabs.mscript.typesystem.Enumeration} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected EnumerationItemProvider enumerationItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.eclipselabs.mscript.typesystem.Enumeration}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createEnumerationAdapter() {
-		if (enumerationItemProvider == null) {
-			enumerationItemProvider = new EnumerationItemProvider(this);
-		}
-
-		return enumerationItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipselabs.mscript.typesystem.EnumerationLiteral} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected EnumerationLiteralItemProvider enumerationLiteralItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.eclipselabs.mscript.typesystem.EnumerationLiteral}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createEnumerationLiteralAdapter() {
-		if (enumerationLiteralItemProvider == null) {
-			enumerationLiteralItemProvider = new EnumerationLiteralItemProvider(this);
-		}
-
-		return enumerationLiteralItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link org.eclipselabs.mscript.typesystem.InvalidDataType} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -326,52 +280,6 @@ public class TypeSystemItemProviderAdapterFactory extends TypeSystemAdapterFacto
 		}
 
 		return invalidDataTypeItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipselabs.mscript.typesystem.TypeSystem} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected TypeSystemItemProvider typeSystemItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.eclipselabs.mscript.typesystem.TypeSystem}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createTypeSystemAdapter() {
-		if (typeSystemItemProvider == null) {
-			typeSystemItemProvider = new TypeSystemItemProvider(this);
-		}
-
-		return typeSystemItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipselabs.mscript.typesystem.Package} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected PackageItemProvider packageItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.eclipselabs.mscript.typesystem.Package}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createPackageAdapter() {
-		if (packageItemProvider == null) {
-			packageItemProvider = new PackageItemProvider(this);
-		}
-
-		return packageItemProvider;
 	}
 
 	/**
@@ -596,11 +504,7 @@ public class TypeSystemItemProviderAdapterFactory extends TypeSystemAdapterFacto
 		if (integerTypeItemProvider != null) integerTypeItemProvider.dispose();
 		if (booleanTypeItemProvider != null) booleanTypeItemProvider.dispose();
 		if (stringTypeItemProvider != null) stringTypeItemProvider.dispose();
-		if (enumerationItemProvider != null) enumerationItemProvider.dispose();
-		if (enumerationLiteralItemProvider != null) enumerationLiteralItemProvider.dispose();
 		if (invalidDataTypeItemProvider != null) invalidDataTypeItemProvider.dispose();
-		if (typeSystemItemProvider != null) typeSystemItemProvider.dispose();
-		if (packageItemProvider != null) packageItemProvider.dispose();
 		if (tensorTypeItemProvider != null) tensorTypeItemProvider.dispose();
 		if (recordItemProvider != null) recordItemProvider.dispose();
 		if (recordFieldItemProvider != null) recordFieldItemProvider.dispose();

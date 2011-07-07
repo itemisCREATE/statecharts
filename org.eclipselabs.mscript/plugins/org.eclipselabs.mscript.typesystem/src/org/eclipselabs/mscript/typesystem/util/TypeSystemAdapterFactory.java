@@ -15,14 +15,9 @@ import org.eclipselabs.mscript.typesystem.ArrayDimension;
 import org.eclipselabs.mscript.typesystem.ArrayType;
 import org.eclipselabs.mscript.typesystem.BooleanType;
 import org.eclipselabs.mscript.typesystem.DataType;
-import org.eclipselabs.mscript.typesystem.Enumeration;
-import org.eclipselabs.mscript.typesystem.EnumerationLiteral;
 import org.eclipselabs.mscript.typesystem.IntegerType;
 import org.eclipselabs.mscript.typesystem.InvalidDataType;
-import org.eclipselabs.mscript.typesystem.NamedElement;
-import org.eclipselabs.mscript.typesystem.Namespace;
 import org.eclipselabs.mscript.typesystem.NumericType;
-import org.eclipselabs.mscript.typesystem.PackageableElement;
 import org.eclipselabs.mscript.typesystem.PrimitiveType;
 import org.eclipselabs.mscript.typesystem.RealType;
 import org.eclipselabs.mscript.typesystem.Record;
@@ -30,7 +25,6 @@ import org.eclipselabs.mscript.typesystem.RecordField;
 import org.eclipselabs.mscript.typesystem.StringType;
 import org.eclipselabs.mscript.typesystem.TensorType;
 import org.eclipselabs.mscript.typesystem.Type;
-import org.eclipselabs.mscript.typesystem.TypeSystem;
 import org.eclipselabs.mscript.typesystem.TypeSystemPackage;
 import org.eclipselabs.mscript.typesystem.Unit;
 import org.eclipselabs.mscript.typesystem.UnitFactor;
@@ -97,18 +91,6 @@ public class TypeSystemAdapterFactory extends AdapterFactoryImpl {
 				return createTypeAdapter();
 			}
 			@Override
-			public Adapter casePackageableElement(PackageableElement object) {
-				return createPackageableElementAdapter();
-			}
-			@Override
-			public Adapter caseNamedElement(NamedElement object) {
-				return createNamedElementAdapter();
-			}
-			@Override
-			public Adapter caseNamespace(Namespace object) {
-				return createNamespaceAdapter();
-			}
-			@Override
 			public Adapter caseArrayType(ArrayType object) {
 				return createArrayTypeAdapter();
 			}
@@ -153,24 +135,8 @@ public class TypeSystemAdapterFactory extends AdapterFactoryImpl {
 				return createStringTypeAdapter();
 			}
 			@Override
-			public Adapter caseEnumeration(Enumeration object) {
-				return createEnumerationAdapter();
-			}
-			@Override
-			public Adapter caseEnumerationLiteral(EnumerationLiteral object) {
-				return createEnumerationLiteralAdapter();
-			}
-			@Override
 			public Adapter caseInvalidDataType(InvalidDataType object) {
 				return createInvalidDataTypeAdapter();
-			}
-			@Override
-			public Adapter caseTypeSystem(TypeSystem object) {
-				return createTypeSystemAdapter();
-			}
-			@Override
-			public Adapter casePackage(org.eclipselabs.mscript.typesystem.Package object) {
-				return createPackageAdapter();
 			}
 			@Override
 			public Adapter caseTensorType(TensorType object) {
@@ -223,48 +189,6 @@ public class TypeSystemAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTypeAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.typesystem.PackageableElement <em>Packageable Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.typesystem.PackageableElement
-	 * @generated
-	 */
-	public Adapter createPackageableElementAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.typesystem.NamedElement <em>Named Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.typesystem.NamedElement
-	 * @generated
-	 */
-	public Adapter createNamedElementAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.typesystem.Namespace <em>Namespace</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.typesystem.Namespace
-	 * @generated
-	 */
-	public Adapter createNamespaceAdapter() {
 		return null;
 	}
 
@@ -423,34 +347,6 @@ public class TypeSystemAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.typesystem.Enumeration <em>Enumeration</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.typesystem.Enumeration
-	 * @generated
-	 */
-	public Adapter createEnumerationAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.typesystem.EnumerationLiteral <em>Enumeration Literal</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.typesystem.EnumerationLiteral
-	 * @generated
-	 */
-	public Adapter createEnumerationLiteralAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.typesystem.InvalidDataType <em>Invalid Data Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -461,34 +357,6 @@ public class TypeSystemAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createInvalidDataTypeAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.typesystem.TypeSystem <em>Type System</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.typesystem.TypeSystem
-	 * @generated
-	 */
-	public Adapter createTypeSystemAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.typesystem.Package <em>Package</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.typesystem.Package
-	 * @generated
-	 */
-	public Adapter createPackageAdapter() {
 		return null;
 	}
 

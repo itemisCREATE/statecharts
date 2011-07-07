@@ -20,8 +20,6 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
-import org.eclipselabs.mscript.typesystem.UnitType;
-
 /**
  * This is the item provider adapter for a {@link org.eclipselabs.mscript.typesystem.UnitType} object.
  * <!-- begin-user-doc -->
@@ -80,10 +78,7 @@ public class UnitTypeItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((UnitType)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_UnitType_type") :
-			getString("_UI_UnitType_type") + " " + label;
+		return getString("_UI_UnitType_type");
 	}
 
 	/**

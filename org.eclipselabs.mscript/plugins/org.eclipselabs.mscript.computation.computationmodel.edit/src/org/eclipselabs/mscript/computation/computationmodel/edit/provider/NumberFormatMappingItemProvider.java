@@ -239,11 +239,6 @@ public class NumberFormatMappingItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ComputationModelPackage.Literals.NUMBER_FORMAT_MAPPING__OWNED_DATA_TYPE,
-				 TypeSystemFactory.eINSTANCE.createEnumeration()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ComputationModelPackage.Literals.NUMBER_FORMAT_MAPPING__OWNED_DATA_TYPE,
 				 TypeSystemFactory.eINSTANCE.createInvalidDataType()));
 
 		newChildDescriptors.add

@@ -98,24 +98,6 @@ public interface TypeSystemFactory extends EFactory {
 	StringType createStringType();
 
 	/**
-	 * Returns a new object of class '<em>Enumeration</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Enumeration</em>'.
-	 * @generated
-	 */
-	Enumeration createEnumeration();
-
-	/**
-	 * Returns a new object of class '<em>Enumeration Literal</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Enumeration Literal</em>'.
-	 * @generated
-	 */
-	EnumerationLiteral createEnumerationLiteral();
-
-	/**
 	 * Returns a new object of class '<em>Invalid Data Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -123,24 +105,6 @@ public interface TypeSystemFactory extends EFactory {
 	 * @generated
 	 */
 	InvalidDataType createInvalidDataType();
-
-	/**
-	 * Returns a new object of class '<em>Type System</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Type System</em>'.
-	 * @generated
-	 */
-	TypeSystem createTypeSystem();
-
-	/**
-	 * Returns a new object of class '<em>Package</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Package</em>'.
-	 * @generated
-	 */
-	Package createPackage();
 
 	/**
 	 * Returns a new object of class '<em>Tensor Type</em>'.

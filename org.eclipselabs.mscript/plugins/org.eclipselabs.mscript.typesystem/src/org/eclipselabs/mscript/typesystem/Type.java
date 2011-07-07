@@ -6,6 +6,8 @@
  */
 package org.eclipselabs.mscript.typesystem;
 
+import org.eclipse.emf.ecore.EObject;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -17,6 +19,6 @@ package org.eclipselabs.mscript.typesystem;
  * @model abstract="true"
  * @generated
  */
-public interface Type extends PackageableElement {
+public interface Type extends EObject {
 
 } // Type

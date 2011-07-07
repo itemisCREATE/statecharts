@@ -39,19 +39,6 @@
       <genEnumLiterals ecoreEnumLiteral="TypeSystem.ecore#//UnitSymbol/Candela"/>
     </genEnums>
     <genClasses image="false" ecoreClass="TypeSystem.ecore#//Type"/>
-    <genClasses image="false" ecoreClass="TypeSystem.ecore#//PackageableElement"/>
-    <genClasses image="false" ecoreClass="TypeSystem.ecore#//NamedElement">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TypeSystem.ecore#//NamedElement/name"/>
-      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute TypeSystem.ecore#//NamedElement/qualifiedName"/>
-      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference TypeSystem.ecore#//NamedElement/namespace"/>
-    </genClasses>
-    <genClasses image="false" ecoreClass="TypeSystem.ecore#//Namespace">
-      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference TypeSystem.ecore#//Namespace/members"/>
-      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference TypeSystem.ecore#//Namespace/ownedMembers"/>
-      <genOperations ecoreOperation="TypeSystem.ecore#//Namespace/getMember">
-        <genParameters ecoreParameter="TypeSystem.ecore#//Namespace/getMember/name"/>
-      </genOperations>
-    </genClasses>
     <genClasses ecoreClass="TypeSystem.ecore#//ArrayType">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference TypeSystem.ecore#//ArrayType/elementType"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TypeSystem.ecore#//ArrayType/dimensions"/>
@@ -109,25 +96,7 @@
     <genClasses ecoreClass="TypeSystem.ecore#//IntegerType"/>
     <genClasses ecoreClass="TypeSystem.ecore#//BooleanType"/>
     <genClasses ecoreClass="TypeSystem.ecore#//StringType"/>
-    <genClasses ecoreClass="TypeSystem.ecore#//Enumeration">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TypeSystem.ecore#//Enumeration/literals"/>
-      <genOperations ecoreOperation="TypeSystem.ecore#//Enumeration/getLiteral">
-        <genParameters ecoreParameter="TypeSystem.ecore#//Enumeration/getLiteral/name"/>
-      </genOperations>
-    </genClasses>
-    <genClasses ecoreClass="TypeSystem.ecore#//EnumerationLiteral">
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference TypeSystem.ecore#//EnumerationLiteral/enumeration"/>
-    </genClasses>
     <genClasses ecoreClass="TypeSystem.ecore#//InvalidDataType"/>
-    <genClasses ecoreClass="TypeSystem.ecore#//TypeSystem">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TypeSystem.ecore#//TypeSystem/topLevelElements"/>
-      <genOperations ecoreOperation="TypeSystem.ecore#//TypeSystem/getElement">
-        <genParameters ecoreParameter="TypeSystem.ecore#//TypeSystem/getElement/qualifiedName"/>
-      </genOperations>
-    </genClasses>
-    <genClasses ecoreClass="TypeSystem.ecore#//Package">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TypeSystem.ecore#//Package/packagedElements"/>
-    </genClasses>
     <genClasses ecoreClass="TypeSystem.ecore#//TensorType">
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute TypeSystem.ecore#//TensorType/vector"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute TypeSystem.ecore#//TensorType/matrix"/>

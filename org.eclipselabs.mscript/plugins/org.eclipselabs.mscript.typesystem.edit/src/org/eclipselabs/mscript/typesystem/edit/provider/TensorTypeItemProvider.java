@@ -130,10 +130,8 @@ public class TensorTypeItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((TensorType)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_TensorType_type") :
-			getString("_UI_TensorType_type") + " " + label;
+		TensorType tensorType = (TensorType)object;
+		return getString("_UI_TensorType_type") + " " + tensorType.getDimensionality();
 	}
 
 	/**

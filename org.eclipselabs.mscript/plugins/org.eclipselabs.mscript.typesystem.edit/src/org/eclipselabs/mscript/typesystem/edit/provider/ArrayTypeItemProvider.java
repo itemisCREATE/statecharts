@@ -278,10 +278,8 @@ public class ArrayTypeItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((ArrayType)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_ArrayType_type") :
-			getString("_UI_ArrayType_type") + " " + label;
+		ArrayType arrayType = (ArrayType)object;
+		return getString("_UI_ArrayType_type") + " " + arrayType.getDimensionality();
 	}
 
 	/**

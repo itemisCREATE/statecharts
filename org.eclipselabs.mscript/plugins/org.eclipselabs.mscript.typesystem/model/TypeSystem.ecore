@@ -3,37 +3,7 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="typesystem"
     nsURI="http://www.eclipselabs.org/mscript/TypeSystem/1.0.0" nsPrefix="typesystem">
-  <eClassifiers xsi:type="ecore:EClass" name="Type" abstract="true" eSuperTypes="#//PackageableElement"/>
-  <eClassifiers xsi:type="ecore:EClass" name="PackageableElement" abstract="true"
-      eSuperTypes="#//NamedElement"/>
-  <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        unsettable="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="qualifiedName" ordered="false"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" changeable="false"
-        volatile="true" transient="true" derived="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="namespace" ordered="false"
-        eType="#//Namespace" changeable="false" volatile="true" transient="true" derived="true"
-        eOpposite="#//Namespace/ownedMembers">
-      <eAnnotations source="union"/>
-    </eStructuralFeatures>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Namespace" abstract="true" eSuperTypes="#//NamedElement">
-    <eOperations name="getMember" ordered="false" lowerBound="1" eType="#//NamedElement">
-      <eParameters name="name" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="members" ordered="false"
-        upperBound="-1" eType="#//NamedElement" changeable="false" volatile="true"
-        transient="true" derived="true">
-      <eAnnotations source="union"/>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedMembers" ordered="false"
-        upperBound="-1" eType="#//NamedElement" changeable="false" volatile="true"
-        transient="true" derived="true" eOpposite="#//NamedElement/namespace">
-      <eAnnotations source="subsets" references="#//Namespace/members"/>
-      <eAnnotations source="union"/>
-    </eStructuralFeatures>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Type" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="ArrayType" eSuperTypes="#//DataType">
     <eStructuralFeatures xsi:type="ecore:EReference" name="elementType" ordered="false"
         lowerBound="1" eType="#//DataType"/>
@@ -140,29 +110,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="IntegerType" eSuperTypes="#//NumericType"/>
   <eClassifiers xsi:type="ecore:EClass" name="BooleanType" eSuperTypes="#//PrimitiveType"/>
   <eClassifiers xsi:type="ecore:EClass" name="StringType" eSuperTypes="#//PrimitiveType"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Enumeration" eSuperTypes="#//Namespace #//DataType">
-    <eOperations name="getLiteral" ordered="false" eType="#//EnumerationLiteral">
-      <eParameters name="name" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="literals" upperBound="-1"
-        eType="#//EnumerationLiteral" containment="true" eOpposite="#//EnumerationLiteral/enumeration"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EnumerationLiteral" eSuperTypes="#//NamedElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="enumeration" ordered="false"
-        lowerBound="1" eType="#//Enumeration" eOpposite="#//Enumeration/literals"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InvalidDataType" eSuperTypes="#//DataType"/>
-  <eClassifiers xsi:type="ecore:EClass" name="TypeSystem">
-    <eOperations name="getElement" ordered="false" lowerBound="1" eType="#//NamedElement">
-      <eParameters name="qualifiedName" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="topLevelElements" ordered="false"
-        upperBound="-1" eType="#//NamedElement" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Package" eSuperTypes="#//Namespace #//PackageableElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="packagedElements" ordered="false"
-        upperBound="-1" eType="#//PackageableElement" containment="true"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TensorType" eSuperTypes="#//ArrayType">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="vector" ordered="false"
         lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"

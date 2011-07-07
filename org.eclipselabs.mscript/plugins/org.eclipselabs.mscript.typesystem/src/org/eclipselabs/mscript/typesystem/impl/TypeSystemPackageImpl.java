@@ -6,7 +6,6 @@
  */
 package org.eclipselabs.mscript.typesystem.impl;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
@@ -19,15 +18,10 @@ import org.eclipselabs.mscript.typesystem.ArrayDimension;
 import org.eclipselabs.mscript.typesystem.ArrayType;
 import org.eclipselabs.mscript.typesystem.BooleanType;
 import org.eclipselabs.mscript.typesystem.DataType;
-import org.eclipselabs.mscript.typesystem.Enumeration;
-import org.eclipselabs.mscript.typesystem.EnumerationLiteral;
 import org.eclipselabs.mscript.typesystem.IntegerType;
 import org.eclipselabs.mscript.typesystem.InvalidDataType;
-import org.eclipselabs.mscript.typesystem.NamedElement;
-import org.eclipselabs.mscript.typesystem.Namespace;
 import org.eclipselabs.mscript.typesystem.NumericType;
 import org.eclipselabs.mscript.typesystem.OperatorKind;
-import org.eclipselabs.mscript.typesystem.PackageableElement;
 import org.eclipselabs.mscript.typesystem.PrimitiveType;
 import org.eclipselabs.mscript.typesystem.RealType;
 import org.eclipselabs.mscript.typesystem.Record;
@@ -35,7 +29,6 @@ import org.eclipselabs.mscript.typesystem.RecordField;
 import org.eclipselabs.mscript.typesystem.StringType;
 import org.eclipselabs.mscript.typesystem.TensorType;
 import org.eclipselabs.mscript.typesystem.Type;
-import org.eclipselabs.mscript.typesystem.TypeSystem;
 import org.eclipselabs.mscript.typesystem.TypeSystemFactory;
 import org.eclipselabs.mscript.typesystem.TypeSystemPackage;
 import org.eclipselabs.mscript.typesystem.Unit;
@@ -56,27 +49,6 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 	 * @generated
 	 */
 	private EClass typeEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass packageableElementEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass namedElementEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass namespaceEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -160,35 +132,7 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass enumerationEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass enumerationLiteralEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass invalidDataTypeEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass typeSystemEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass packageEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -307,78 +251,6 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 	 */
 	public EClass getType() {
 		return typeEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getPackageableElement() {
-		return packageableElementEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getNamedElement() {
-		return namedElementEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getNamedElement_Name() {
-		return (EAttribute)namedElementEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getNamedElement_QualifiedName() {
-		return (EAttribute)namedElementEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getNamedElement_Namespace() {
-		return (EReference)namedElementEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getNamespace() {
-		return namespaceEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getNamespace_Members() {
-		return (EReference)namespaceEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getNamespace_OwnedMembers() {
-		return (EReference)namespaceEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -611,80 +483,8 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getEnumeration() {
-		return enumerationEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getEnumeration_Literals() {
-		return (EReference)enumerationEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getEnumerationLiteral() {
-		return enumerationLiteralEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getEnumerationLiteral_Enumeration() {
-		return (EReference)enumerationLiteralEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getInvalidDataType() {
 		return invalidDataTypeEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getTypeSystem() {
-		return typeSystemEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getTypeSystem_TopLevelElements() {
-		return (EReference)typeSystemEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getPackage() {
-		return packageEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getPackage_PackagedElements() {
-		return (EReference)packageEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -825,17 +625,6 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 		// Create classes and their features
 		typeEClass = createEClass(TYPE);
 
-		packageableElementEClass = createEClass(PACKAGEABLE_ELEMENT);
-
-		namedElementEClass = createEClass(NAMED_ELEMENT);
-		createEAttribute(namedElementEClass, NAMED_ELEMENT__NAME);
-		createEAttribute(namedElementEClass, NAMED_ELEMENT__QUALIFIED_NAME);
-		createEReference(namedElementEClass, NAMED_ELEMENT__NAMESPACE);
-
-		namespaceEClass = createEClass(NAMESPACE);
-		createEReference(namespaceEClass, NAMESPACE__MEMBERS);
-		createEReference(namespaceEClass, NAMESPACE__OWNED_MEMBERS);
-
 		arrayTypeEClass = createEClass(ARRAY_TYPE);
 		createEReference(arrayTypeEClass, ARRAY_TYPE__ELEMENT_TYPE);
 		createEReference(arrayTypeEClass, ARRAY_TYPE__DIMENSIONS);
@@ -872,19 +661,7 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 
 		stringTypeEClass = createEClass(STRING_TYPE);
 
-		enumerationEClass = createEClass(ENUMERATION);
-		createEReference(enumerationEClass, ENUMERATION__LITERALS);
-
-		enumerationLiteralEClass = createEClass(ENUMERATION_LITERAL);
-		createEReference(enumerationLiteralEClass, ENUMERATION_LITERAL__ENUMERATION);
-
 		invalidDataTypeEClass = createEClass(INVALID_DATA_TYPE);
-
-		typeSystemEClass = createEClass(TYPE_SYSTEM);
-		createEReference(typeSystemEClass, TYPE_SYSTEM__TOP_LEVEL_ELEMENTS);
-
-		packageEClass = createEClass(PACKAGE);
-		createEReference(packageEClass, PACKAGE__PACKAGED_ELEMENTS);
 
 		tensorTypeEClass = createEClass(TENSOR_TYPE);
 		createEAttribute(tensorTypeEClass, TENSOR_TYPE__VECTOR);
@@ -934,9 +711,6 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		typeEClass.getESuperTypes().add(this.getPackageableElement());
-		packageableElementEClass.getESuperTypes().add(this.getNamedElement());
-		namespaceEClass.getESuperTypes().add(this.getNamedElement());
 		arrayTypeEClass.getESuperTypes().add(this.getDataType());
 		dataTypeEClass.getESuperTypes().add(this.getType());
 		primitiveTypeEClass.getESuperTypes().add(this.getDataType());
@@ -945,12 +719,7 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 		integerTypeEClass.getESuperTypes().add(this.getNumericType());
 		booleanTypeEClass.getESuperTypes().add(this.getPrimitiveType());
 		stringTypeEClass.getESuperTypes().add(this.getPrimitiveType());
-		enumerationEClass.getESuperTypes().add(this.getNamespace());
-		enumerationEClass.getESuperTypes().add(this.getDataType());
-		enumerationLiteralEClass.getESuperTypes().add(this.getNamedElement());
 		invalidDataTypeEClass.getESuperTypes().add(this.getDataType());
-		packageEClass.getESuperTypes().add(this.getNamespace());
-		packageEClass.getESuperTypes().add(this.getPackageableElement());
 		tensorTypeEClass.getESuperTypes().add(this.getArrayType());
 		recordEClass.getESuperTypes().add(this.getDataType());
 		unitTypeEClass.getESuperTypes().add(this.getDataType());
@@ -958,20 +727,6 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(typeEClass, Type.class, "Type", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(packageableElementEClass, PackageableElement.class, "PackageableElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(namedElementEClass, NamedElement.class, "NamedElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getNamedElement_Name(), ecorePackage.getEString(), "name", null, 0, 1, NamedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEAttribute(getNamedElement_QualifiedName(), ecorePackage.getEString(), "qualifiedName", null, 0, 1, NamedElement.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, !IS_ORDERED);
-		initEReference(getNamedElement_Namespace(), this.getNamespace(), this.getNamespace_OwnedMembers(), "namespace", null, 0, 1, NamedElement.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, !IS_ORDERED);
-
-		initEClass(namespaceEClass, Namespace.class, "Namespace", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getNamespace_Members(), this.getNamedElement(), null, "members", null, 0, -1, Namespace.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, !IS_ORDERED);
-		initEReference(getNamespace_OwnedMembers(), this.getNamedElement(), this.getNamedElement_Namespace(), "ownedMembers", null, 0, -1, Namespace.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, !IS_ORDERED);
-
-		EOperation op = addEOperation(namespaceEClass, this.getNamedElement(), "getMember", 1, 1, IS_UNIQUE, !IS_ORDERED);
-		addEParameter(op, ecorePackage.getEString(), "name", 1, 1, IS_UNIQUE, !IS_ORDERED);
 
 		initEClass(arrayTypeEClass, ArrayType.class, "ArrayType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getArrayType_ElementType(), this.getDataType(), null, "elementType", null, 1, 1, ArrayType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
@@ -985,7 +740,7 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 
 		initEClass(dataTypeEClass, DataType.class, "DataType", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		op = addEOperation(dataTypeEClass, this.getDataType(), "evaluate", 1, 1, IS_UNIQUE, !IS_ORDERED);
+		EOperation op = addEOperation(dataTypeEClass, this.getDataType(), "evaluate", 1, 1, IS_UNIQUE, !IS_ORDERED);
 		addEParameter(op, this.getOperatorKind(), "operator", 1, 1, IS_UNIQUE, !IS_ORDERED);
 		addEParameter(op, this.getDataType(), "other", 0, 1, IS_UNIQUE, !IS_ORDERED);
 
@@ -1035,25 +790,7 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 
 		initEClass(stringTypeEClass, StringType.class, "StringType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(enumerationEClass, Enumeration.class, "Enumeration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getEnumeration_Literals(), this.getEnumerationLiteral(), this.getEnumerationLiteral_Enumeration(), "literals", null, 0, -1, Enumeration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		op = addEOperation(enumerationEClass, this.getEnumerationLiteral(), "getLiteral", 0, 1, IS_UNIQUE, !IS_ORDERED);
-		addEParameter(op, ecorePackage.getEString(), "name", 1, 1, IS_UNIQUE, !IS_ORDERED);
-
-		initEClass(enumerationLiteralEClass, EnumerationLiteral.class, "EnumerationLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getEnumerationLiteral_Enumeration(), this.getEnumeration(), this.getEnumeration_Literals(), "enumeration", null, 1, 1, EnumerationLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-
 		initEClass(invalidDataTypeEClass, InvalidDataType.class, "InvalidDataType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(typeSystemEClass, TypeSystem.class, "TypeSystem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTypeSystem_TopLevelElements(), this.getNamedElement(), null, "topLevelElements", null, 0, -1, TypeSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-
-		op = addEOperation(typeSystemEClass, this.getNamedElement(), "getElement", 1, 1, IS_UNIQUE, !IS_ORDERED);
-		addEParameter(op, ecorePackage.getEString(), "qualifiedName", 1, 1, IS_UNIQUE, !IS_ORDERED);
-
-		initEClass(packageEClass, org.eclipselabs.mscript.typesystem.Package.class, "Package", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getPackage_PackagedElements(), this.getPackageableElement(), null, "packagedElements", null, 0, -1, org.eclipselabs.mscript.typesystem.Package.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(tensorTypeEClass, TensorType.class, "TensorType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTensorType_Vector(), ecorePackage.getEBoolean(), "vector", null, 1, 1, TensorType.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, !IS_ORDERED);
@@ -1101,136 +838,6 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 
 		// Create resource
 		createResource(eNS_URI);
-
-		// Create annotations
-		// union
-		createUnionAnnotations();
-		// subsets
-		createSubsetsAnnotations();
-		// duplicates
-		createDuplicatesAnnotations();
-	}
-
-	/**
-	 * Initializes the annotations for <b>union</b>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void createUnionAnnotations() {
-		String source = "union";		
-		addAnnotation
-		  (getNamedElement_Namespace(), 
-		   source, 
-		   new String[] {
-		   });		
-		addAnnotation
-		  (getNamespace_Members(), 
-		   source, 
-		   new String[] {
-		   });			
-		addAnnotation
-		  (getNamespace_OwnedMembers(), 
-		   source, 
-		   new String[] {
-		   });												
-	}
-
-	/**
-	 * Initializes the annotations for <b>subsets</b>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void createSubsetsAnnotations() {
-		String source = "subsets";				
-		addAnnotation
-		  (getNamespace_OwnedMembers(), 
-		   source, 
-		   new String[] {
-		   },
-		   new URI[] {
-			 URI.createURI(eNS_URI).appendFragment("//Namespace/members")
-		   });									
-		addAnnotation
-		  (getEnumeration_Literals(), 
-		   source, 
-		   new String[] {
-		   },
-		   new URI[] {
-			 URI.createURI(eNS_URI).appendFragment("//Namespace/ownedMembers")
-		   });		
-		addAnnotation
-		  (getEnumerationLiteral_Enumeration(), 
-		   source, 
-		   new String[] {
-		   },
-		   new URI[] {
-			 URI.createURI(eNS_URI).appendFragment("//NamedElement/namespace")
-		   });		
-		addAnnotation
-		  (getPackage_PackagedElements(), 
-		   source, 
-		   new String[] {
-		   },
-		   new URI[] {
-			 URI.createURI(eNS_URI).appendFragment("//Namespace/ownedMembers")
-		   });			
-	}
-
-	/**
-	 * Initializes the annotations for <b>duplicates</b>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void createDuplicatesAnnotations() {
-		String source = "duplicates";						
-		addAnnotation
-		  (arrayTypeEClass, 
-		   source, 
-		   new String[] {
-		   });		
-		addAnnotation
-		  (primitiveTypeEClass, 
-		   source, 
-		   new String[] {
-		   });		
-		addAnnotation
-		  (realTypeEClass, 
-		   source, 
-		   new String[] {
-		   });		
-		addAnnotation
-		  (integerTypeEClass, 
-		   source, 
-		   new String[] {
-		   });		
-		addAnnotation
-		  (booleanTypeEClass, 
-		   source, 
-		   new String[] {
-		   });		
-		addAnnotation
-		  (stringTypeEClass, 
-		   source, 
-		   new String[] {
-		   });					
-		addAnnotation
-		  (tensorTypeEClass, 
-		   source, 
-		   new String[] {
-		   });		
-		addAnnotation
-		  (unitTypeEClass, 
-		   source, 
-		   new String[] {
-		   });		
-		addAnnotation
-		  (anyDataTypeEClass, 
-		   source, 
-		   new String[] {
-		   });
 	}
 
 } //TypeSystemPackageImpl
