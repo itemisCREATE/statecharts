@@ -27,9 +27,10 @@ public class StatechartLaunchConfigurationDelegate implements
 	@Override
 	public void launch(ILaunchConfiguration configuration, String mode,
 			ILaunch launch, IProgressMonitor monitor) throws CoreException {
+		String filename = configuration.getAttribute(
+				IStatechartLaunchParameters.FILE_NAME, "");
 
-		System.out.println("Launching simulation.....");
-		
+		System.out.println("Launching simulation for file " + filename);
 	}
 
 }
