@@ -10,10 +10,6 @@
  */
 package org.yakindu.sct.ui.editor.editparts;
 
-import java.util.List;
-import java.util.Set;
-
-import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.GridData;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.StackLayout;
@@ -54,6 +50,7 @@ import org.yakindu.sct.ui.editor.preferences.StatechartColorConstants;
  * 
  * 
  * @author andreas muelder
+ * @author alexander nyssen
  * 
  */
 public class StateEditPart extends ShapeNodeEditPart implements
