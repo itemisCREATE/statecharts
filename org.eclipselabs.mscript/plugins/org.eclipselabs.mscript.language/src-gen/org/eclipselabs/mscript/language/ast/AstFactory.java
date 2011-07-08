@@ -161,6 +161,15 @@ public interface AstFactory extends EFactory
   DataTypeSpecifier createDataTypeSpecifier();
 
   /**
+   * Returns a new object of class '<em>Scalar Type Specifier</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Scalar Type Specifier</em>'.
+   * @generated
+   */
+  ScalarTypeSpecifier createScalarTypeSpecifier();
+
+  /**
    * Returns a new object of class '<em>Primitive Type Specifier</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -240,6 +249,24 @@ public interface AstFactory extends EFactory
    * @generated
    */
   NamedTypeSpecifier createNamedTypeSpecifier();
+
+  /**
+   * Returns a new object of class '<em>Array Type Specifier</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Array Type Specifier</em>'.
+   * @generated
+   */
+  ArrayTypeSpecifier createArrayTypeSpecifier();
+
+  /**
+   * Returns a new object of class '<em>Tensor Type Specifier</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Tensor Type Specifier</em>'.
+   * @generated
+   */
+  TensorTypeSpecifier createTensorTypeSpecifier();
 
   /**
    * Returns a new object of class '<em>Array Dimension Specification</em>'.
@@ -564,15 +591,6 @@ public interface AstFactory extends EFactory
    * @generated
    */
   UnitExpressionFactor createUnitExpressionFactor();
-
-  /**
-   * Returns a new object of class '<em>Unit Expression Exponent</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Unit Expression Exponent</em>'.
-   * @generated
-   */
-  UnitExpressionExponent createUnitExpressionExponent();
 
   /**
    * Returns a new object of class '<em>Range Expression</em>'.

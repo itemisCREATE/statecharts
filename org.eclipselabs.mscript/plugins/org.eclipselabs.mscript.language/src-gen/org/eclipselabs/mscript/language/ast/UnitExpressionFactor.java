@@ -53,29 +53,29 @@ public interface UnitExpressionFactor extends EObject
   void setOperand(String value);
 
   /**
-   * Returns the value of the '<em><b>Exponent</b></em>' containment reference.
+   * Returns the value of the '<em><b>Exponent</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Exponent</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Exponent</em>' attribute isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Exponent</em>' containment reference.
-   * @see #setExponent(UnitExpressionExponent)
+   * @return the value of the '<em>Exponent</em>' attribute.
+   * @see #setExponent(int)
    * @see org.eclipselabs.mscript.language.ast.AstPackage#getUnitExpressionFactor_Exponent()
-   * @model containment="true"
+   * @model
    * @generated
    */
-  UnitExpressionExponent getExponent();
+  int getExponent();
 
   /**
-   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.UnitExpressionFactor#getExponent <em>Exponent</em>}' containment reference.
+   * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.UnitExpressionFactor#getExponent <em>Exponent</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Exponent</em>' containment reference.
+   * @param value the new value of the '<em>Exponent</em>' attribute.
    * @see #getExponent()
    * @generated
    */
-  void setExponent(UnitExpressionExponent value);
+  void setExponent(int value);
 
 } // UnitExpressionFactor

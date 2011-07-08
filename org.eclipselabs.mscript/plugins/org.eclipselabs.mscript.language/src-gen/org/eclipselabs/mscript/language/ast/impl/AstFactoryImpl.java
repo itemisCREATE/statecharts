@@ -83,6 +83,7 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
       case AstPackage.FUNCTION_OBJECT_DECLARATION: return createFunctionObjectDeclaration();
       case AstPackage.EQUATION: return createEquation();
       case AstPackage.DATA_TYPE_SPECIFIER: return createDataTypeSpecifier();
+      case AstPackage.SCALAR_TYPE_SPECIFIER: return createScalarTypeSpecifier();
       case AstPackage.PRIMITIVE_TYPE_SPECIFIER: return createPrimitiveTypeSpecifier();
       case AstPackage.NUMERIC_TYPE_SPECIFIER: return createNumericTypeSpecifier();
       case AstPackage.REAL_TYPE_SPECIFIER: return createRealTypeSpecifier();
@@ -92,6 +93,8 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
       case AstPackage.BOOLEAN_TYPE_SPECIFIER: return createBooleanTypeSpecifier();
       case AstPackage.STRING_TYPE_SPECIFIER: return createStringTypeSpecifier();
       case AstPackage.NAMED_TYPE_SPECIFIER: return createNamedTypeSpecifier();
+      case AstPackage.ARRAY_TYPE_SPECIFIER: return createArrayTypeSpecifier();
+      case AstPackage.TENSOR_TYPE_SPECIFIER: return createTensorTypeSpecifier();
       case AstPackage.ARRAY_DIMENSION_SPECIFICATION: return createArrayDimensionSpecification();
       case AstPackage.EXPRESSION: return createExpression();
       case AstPackage.LET_EXPRESSION: return createLetExpression();
@@ -128,7 +131,6 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
       case AstPackage.UNIT_EXPRESSION_NUMERATOR: return createUnitExpressionNumerator();
       case AstPackage.UNIT_EXPRESSION_DENOMINATOR: return createUnitExpressionDenominator();
       case AstPackage.UNIT_EXPRESSION_FACTOR: return createUnitExpressionFactor();
-      case AstPackage.UNIT_EXPRESSION_EXPONENT: return createUnitExpressionExponent();
       case AstPackage.RANGE_EXPRESSION: return createRangeExpression();
       case AstPackage.IMPLIES_EXPRESSION: return createImpliesExpression();
       case AstPackage.LOGICAL_OR_EXPRESSION: return createLogicalOrExpression();
@@ -384,6 +386,17 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  public ScalarTypeSpecifier createScalarTypeSpecifier()
+  {
+    ScalarTypeSpecifierImpl scalarTypeSpecifier = new ScalarTypeSpecifierImpl();
+    return scalarTypeSpecifier;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public PrimitiveTypeSpecifier createPrimitiveTypeSpecifier()
   {
     PrimitiveTypeSpecifierImpl primitiveTypeSpecifier = new PrimitiveTypeSpecifierImpl();
@@ -476,6 +489,28 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
   {
     NamedTypeSpecifierImpl namedTypeSpecifier = new NamedTypeSpecifierImpl();
     return namedTypeSpecifier;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ArrayTypeSpecifier createArrayTypeSpecifier()
+  {
+    ArrayTypeSpecifierImpl arrayTypeSpecifier = new ArrayTypeSpecifierImpl();
+    return arrayTypeSpecifier;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public TensorTypeSpecifier createTensorTypeSpecifier()
+  {
+    TensorTypeSpecifierImpl tensorTypeSpecifier = new TensorTypeSpecifierImpl();
+    return tensorTypeSpecifier;
   }
 
   /**
@@ -872,17 +907,6 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory
   {
     UnitExpressionFactorImpl unitExpressionFactor = new UnitExpressionFactorImpl();
     return unitExpressionFactor;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public UnitExpressionExponent createUnitExpressionExponent()
-  {
-    UnitExpressionExponentImpl unitExpressionExponent = new UnitExpressionExponentImpl();
-    return unitExpressionExponent;
   }
 
   /**

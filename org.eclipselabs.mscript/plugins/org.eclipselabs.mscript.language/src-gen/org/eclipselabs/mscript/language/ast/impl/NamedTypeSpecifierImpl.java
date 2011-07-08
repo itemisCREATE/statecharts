@@ -30,7 +30,7 @@ import org.eclipselabs.mscript.language.ast.QualifiedName;
  *
  * @generated
  */
-public class NamedTypeSpecifierImpl extends DataTypeSpecifierImpl implements NamedTypeSpecifier
+public class NamedTypeSpecifierImpl extends ScalarTypeSpecifierImpl implements NamedTypeSpecifier
 {
   /**
    * The cached value of the '{@link #getTypeReference() <em>Type Reference</em>}' containment reference.

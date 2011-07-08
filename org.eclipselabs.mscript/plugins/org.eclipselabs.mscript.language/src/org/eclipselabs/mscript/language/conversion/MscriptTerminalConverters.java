@@ -88,4 +88,25 @@ public class MscriptTerminalConverters extends DefaultTerminalConverters {
 		};
 	}
 
+	@ValueConverter(rule = "UnitExpressionExponent")
+	public IValueConverter<Integer> UnitExpressionExponent() {
+		return new IValueConverter<Integer>() {
+			
+			public Integer toValue(String string, INode node) {
+				if (Strings.isEmpty(string))
+					throw new ValueConverterException("Couldn't convert empty string to int", node, null);
+				try {
+					return Integer.valueOf(string);
+				} catch (NumberFormatException e) {
+					throw new ValueConverterException("Couldn't convert '" + string + "' to int", node, e);
+				}
+			}
+
+			public String toString(Integer value) {
+				return value.toString();
+			}
+
+		};
+	}
+
 }

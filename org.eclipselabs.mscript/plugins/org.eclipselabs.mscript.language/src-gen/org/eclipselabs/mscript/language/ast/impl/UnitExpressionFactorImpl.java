@@ -6,16 +6,13 @@
 package org.eclipselabs.mscript.language.ast.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipselabs.mscript.language.ast.AstPackage;
-import org.eclipselabs.mscript.language.ast.UnitExpressionExponent;
 import org.eclipselabs.mscript.language.ast.UnitExpressionFactor;
 
 /**
@@ -55,14 +52,24 @@ public class UnitExpressionFactorImpl extends MinimalEObjectImpl.Container imple
   protected String operand = OPERAND_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getExponent() <em>Exponent</em>}' containment reference.
+   * The default value of the '{@link #getExponent() <em>Exponent</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getExponent()
    * @generated
    * @ordered
    */
-  protected UnitExpressionExponent exponent;
+  protected static final int EXPONENT_EDEFAULT = 0;
+
+  /**
+   * The cached value of the '{@link #getExponent() <em>Exponent</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getExponent()
+   * @generated
+   * @ordered
+   */
+  protected int exponent = EXPONENT_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -113,7 +120,7 @@ public class UnitExpressionFactorImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public UnitExpressionExponent getExponent()
+  public int getExponent()
   {
     return exponent;
   }
@@ -123,53 +130,12 @@ public class UnitExpressionFactorImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetExponent(UnitExpressionExponent newExponent, NotificationChain msgs)
+  public void setExponent(int newExponent)
   {
-    UnitExpressionExponent oldExponent = exponent;
+    int oldExponent = exponent;
     exponent = newExponent;
     if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.UNIT_EXPRESSION_FACTOR__EXPONENT, oldExponent, newExponent);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setExponent(UnitExpressionExponent newExponent)
-  {
-    if (newExponent != exponent)
-    {
-      NotificationChain msgs = null;
-      if (exponent != null)
-        msgs = ((InternalEObject)exponent).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.UNIT_EXPRESSION_FACTOR__EXPONENT, null, msgs);
-      if (newExponent != null)
-        msgs = ((InternalEObject)newExponent).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.UNIT_EXPRESSION_FACTOR__EXPONENT, null, msgs);
-      msgs = basicSetExponent(newExponent, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.UNIT_EXPRESSION_FACTOR__EXPONENT, newExponent, newExponent));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-  {
-    switch (featureID)
-    {
-      case AstPackage.UNIT_EXPRESSION_FACTOR__EXPONENT:
-        return basicSetExponent(null, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
+      eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.UNIT_EXPRESSION_FACTOR__EXPONENT, oldExponent, exponent));
   }
 
   /**
@@ -204,7 +170,7 @@ public class UnitExpressionFactorImpl extends MinimalEObjectImpl.Container imple
         setOperand((String)newValue);
         return;
       case AstPackage.UNIT_EXPRESSION_FACTOR__EXPONENT:
-        setExponent((UnitExpressionExponent)newValue);
+        setExponent((Integer)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -224,7 +190,7 @@ public class UnitExpressionFactorImpl extends MinimalEObjectImpl.Container imple
         setOperand(OPERAND_EDEFAULT);
         return;
       case AstPackage.UNIT_EXPRESSION_FACTOR__EXPONENT:
-        setExponent((UnitExpressionExponent)null);
+        setExponent(EXPONENT_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -243,7 +209,7 @@ public class UnitExpressionFactorImpl extends MinimalEObjectImpl.Container imple
       case AstPackage.UNIT_EXPRESSION_FACTOR__OPERAND:
         return OPERAND_EDEFAULT == null ? operand != null : !OPERAND_EDEFAULT.equals(operand);
       case AstPackage.UNIT_EXPRESSION_FACTOR__EXPONENT:
-        return exponent != null;
+        return exponent != EXPONENT_EDEFAULT;
     }
     return super.eIsSet(featureID);
   }
@@ -261,6 +227,8 @@ public class UnitExpressionFactorImpl extends MinimalEObjectImpl.Container imple
     StringBuffer result = new StringBuffer(super.toString());
     result.append(" (operand: ");
     result.append(operand);
+    result.append(", exponent: ");
+    result.append(exponent);
     result.append(')');
     return result.toString();
   }

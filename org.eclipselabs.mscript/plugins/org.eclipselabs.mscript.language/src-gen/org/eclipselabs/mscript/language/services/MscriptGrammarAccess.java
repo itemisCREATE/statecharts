@@ -685,12 +685,32 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	public class DataTypeSpecifierElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DataTypeSpecifier");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cPrimitiveTypeSpecifierParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cNamedTypeSpecifierParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cScalarTypeSpecifierParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cArrayTypeSpecifierParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		/// *
 		// * Data type specifier
 		// * / DataTypeSpecifier:
+		//	ScalarTypeSpecifier | ArrayTypeSpecifier;
+		public ParserRule getRule() { return rule; }
+
+		//ScalarTypeSpecifier | ArrayTypeSpecifier
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//ScalarTypeSpecifier
+		public RuleCall getScalarTypeSpecifierParserRuleCall_0() { return cScalarTypeSpecifierParserRuleCall_0; }
+
+		//ArrayTypeSpecifier
+		public RuleCall getArrayTypeSpecifierParserRuleCall_1() { return cArrayTypeSpecifierParserRuleCall_1; }
+	}
+
+	public class ScalarTypeSpecifierElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ScalarTypeSpecifier");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cPrimitiveTypeSpecifierParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cNamedTypeSpecifierParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//ScalarTypeSpecifier:
 		//	PrimitiveTypeSpecifier | NamedTypeSpecifier;
 		public ParserRule getRule() { return rule; }
 
@@ -766,23 +786,12 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cUnitAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
 		private final RuleCall cUnitUnitExpressionParserRuleCall_2_1_0 = (RuleCall)cUnitAssignment_2_1.eContents().get(0);
 		private final Keyword cRightParenthesisKeyword_2_2 = (Keyword)cGroup_2.eContents().get(2);
-		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
-		private final Keyword cLeftSquareBracketKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
-		private final Assignment cDimensionsAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
-		private final RuleCall cDimensionsArrayDimensionSpecificationParserRuleCall_3_1_0 = (RuleCall)cDimensionsAssignment_3_1.eContents().get(0);
-		private final Group cGroup_3_2 = (Group)cGroup_3.eContents().get(2);
-		private final Keyword cCommaKeyword_3_2_0 = (Keyword)cGroup_3_2.eContents().get(0);
-		private final Assignment cDimensionsAssignment_3_2_1 = (Assignment)cGroup_3_2.eContents().get(1);
-		private final RuleCall cDimensionsArrayDimensionSpecificationParserRuleCall_3_2_1_0 = (RuleCall)cDimensionsAssignment_3_2_1.eContents().get(0);
-		private final Keyword cRightSquareBracketKeyword_3_3 = (Keyword)cGroup_3.eContents().get(3);
 		
 		//RealTypeSpecifier:
-		//	{RealTypeSpecifier} "real" ("(" unit=UnitExpression ")")? ("[" dimensions+=ArrayDimensionSpecification (","
-		//	dimensions+=ArrayDimensionSpecification)* "]")?;
+		//	{RealTypeSpecifier} "real" ("(" unit=UnitExpression ")")?;
 		public ParserRule getRule() { return rule; }
 
-		//{RealTypeSpecifier} "real" ("(" unit=UnitExpression ")")? ("[" dimensions+=ArrayDimensionSpecification (","
-		//dimensions+=ArrayDimensionSpecification)* "]")?
+		//{RealTypeSpecifier} "real" ("(" unit=UnitExpression ")")?
 		public Group getGroup() { return cGroup; }
 
 		//{RealTypeSpecifier}
@@ -805,33 +814,6 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 
 		//")"
 		public Keyword getRightParenthesisKeyword_2_2() { return cRightParenthesisKeyword_2_2; }
-
-		//("[" dimensions+=ArrayDimensionSpecification ("," dimensions+=ArrayDimensionSpecification)* "]")?
-		public Group getGroup_3() { return cGroup_3; }
-
-		//"["
-		public Keyword getLeftSquareBracketKeyword_3_0() { return cLeftSquareBracketKeyword_3_0; }
-
-		//dimensions+=ArrayDimensionSpecification
-		public Assignment getDimensionsAssignment_3_1() { return cDimensionsAssignment_3_1; }
-
-		//ArrayDimensionSpecification
-		public RuleCall getDimensionsArrayDimensionSpecificationParserRuleCall_3_1_0() { return cDimensionsArrayDimensionSpecificationParserRuleCall_3_1_0; }
-
-		//("," dimensions+=ArrayDimensionSpecification)*
-		public Group getGroup_3_2() { return cGroup_3_2; }
-
-		//","
-		public Keyword getCommaKeyword_3_2_0() { return cCommaKeyword_3_2_0; }
-
-		//dimensions+=ArrayDimensionSpecification
-		public Assignment getDimensionsAssignment_3_2_1() { return cDimensionsAssignment_3_2_1; }
-
-		//ArrayDimensionSpecification
-		public RuleCall getDimensionsArrayDimensionSpecificationParserRuleCall_3_2_1_0() { return cDimensionsArrayDimensionSpecificationParserRuleCall_3_2_1_0; }
-
-		//"]"
-		public Keyword getRightSquareBracketKeyword_3_3() { return cRightSquareBracketKeyword_3_3; }
 	}
 
 	public class IntegerTypeSpecifierElements extends AbstractParserRuleElementFinder {
@@ -844,23 +826,12 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cUnitAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
 		private final RuleCall cUnitUnitExpressionParserRuleCall_2_1_0 = (RuleCall)cUnitAssignment_2_1.eContents().get(0);
 		private final Keyword cRightParenthesisKeyword_2_2 = (Keyword)cGroup_2.eContents().get(2);
-		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
-		private final Keyword cLeftSquareBracketKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
-		private final Assignment cDimensionsAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
-		private final RuleCall cDimensionsArrayDimensionSpecificationParserRuleCall_3_1_0 = (RuleCall)cDimensionsAssignment_3_1.eContents().get(0);
-		private final Group cGroup_3_2 = (Group)cGroup_3.eContents().get(2);
-		private final Keyword cCommaKeyword_3_2_0 = (Keyword)cGroup_3_2.eContents().get(0);
-		private final Assignment cDimensionsAssignment_3_2_1 = (Assignment)cGroup_3_2.eContents().get(1);
-		private final RuleCall cDimensionsArrayDimensionSpecificationParserRuleCall_3_2_1_0 = (RuleCall)cDimensionsAssignment_3_2_1.eContents().get(0);
-		private final Keyword cRightSquareBracketKeyword_3_3 = (Keyword)cGroup_3.eContents().get(3);
 		
 		//IntegerTypeSpecifier:
-		//	{IntegerTypeSpecifier} "int" ("(" unit=UnitExpression ")")? ("[" dimensions+=ArrayDimensionSpecification (","
-		//	dimensions+=ArrayDimensionSpecification)* "]")?;
+		//	{IntegerTypeSpecifier} "int" ("(" unit=UnitExpression ")")?;
 		public ParserRule getRule() { return rule; }
 
-		//{IntegerTypeSpecifier} "int" ("(" unit=UnitExpression ")")? ("[" dimensions+=ArrayDimensionSpecification (","
-		//dimensions+=ArrayDimensionSpecification)* "]")?
+		//{IntegerTypeSpecifier} "int" ("(" unit=UnitExpression ")")?
 		public Group getGroup() { return cGroup; }
 
 		//{IntegerTypeSpecifier}
@@ -883,33 +854,6 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 
 		//")"
 		public Keyword getRightParenthesisKeyword_2_2() { return cRightParenthesisKeyword_2_2; }
-
-		//("[" dimensions+=ArrayDimensionSpecification ("," dimensions+=ArrayDimensionSpecification)* "]")?
-		public Group getGroup_3() { return cGroup_3; }
-
-		//"["
-		public Keyword getLeftSquareBracketKeyword_3_0() { return cLeftSquareBracketKeyword_3_0; }
-
-		//dimensions+=ArrayDimensionSpecification
-		public Assignment getDimensionsAssignment_3_1() { return cDimensionsAssignment_3_1; }
-
-		//ArrayDimensionSpecification
-		public RuleCall getDimensionsArrayDimensionSpecificationParserRuleCall_3_1_0() { return cDimensionsArrayDimensionSpecificationParserRuleCall_3_1_0; }
-
-		//("," dimensions+=ArrayDimensionSpecification)*
-		public Group getGroup_3_2() { return cGroup_3_2; }
-
-		//","
-		public Keyword getCommaKeyword_3_2_0() { return cCommaKeyword_3_2_0; }
-
-		//dimensions+=ArrayDimensionSpecification
-		public Assignment getDimensionsAssignment_3_2_1() { return cDimensionsAssignment_3_2_1; }
-
-		//ArrayDimensionSpecification
-		public RuleCall getDimensionsArrayDimensionSpecificationParserRuleCall_3_2_1_0() { return cDimensionsArrayDimensionSpecificationParserRuleCall_3_2_1_0; }
-
-		//"]"
-		public Keyword getRightSquareBracketKeyword_3_3() { return cRightSquareBracketKeyword_3_3; }
 	}
 
 	public class ComplexTypeSpecifierElements extends AbstractParserRuleElementFinder {
@@ -922,23 +866,12 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cUnitAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
 		private final RuleCall cUnitUnitExpressionParserRuleCall_2_1_0 = (RuleCall)cUnitAssignment_2_1.eContents().get(0);
 		private final Keyword cRightParenthesisKeyword_2_2 = (Keyword)cGroup_2.eContents().get(2);
-		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
-		private final Keyword cLeftSquareBracketKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
-		private final Assignment cDimensionsAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
-		private final RuleCall cDimensionsArrayDimensionSpecificationParserRuleCall_3_1_0 = (RuleCall)cDimensionsAssignment_3_1.eContents().get(0);
-		private final Group cGroup_3_2 = (Group)cGroup_3.eContents().get(2);
-		private final Keyword cCommaKeyword_3_2_0 = (Keyword)cGroup_3_2.eContents().get(0);
-		private final Assignment cDimensionsAssignment_3_2_1 = (Assignment)cGroup_3_2.eContents().get(1);
-		private final RuleCall cDimensionsArrayDimensionSpecificationParserRuleCall_3_2_1_0 = (RuleCall)cDimensionsAssignment_3_2_1.eContents().get(0);
-		private final Keyword cRightSquareBracketKeyword_3_3 = (Keyword)cGroup_3.eContents().get(3);
 		
 		//ComplexTypeSpecifier:
-		//	{ComplexTypeSpecifier} "complex" ("(" unit=UnitExpression ")")? ("[" dimensions+=ArrayDimensionSpecification (","
-		//	dimensions+=ArrayDimensionSpecification)* "]")?;
+		//	{ComplexTypeSpecifier} "complex" ("(" unit=UnitExpression ")")?;
 		public ParserRule getRule() { return rule; }
 
-		//{ComplexTypeSpecifier} "complex" ("(" unit=UnitExpression ")")? ("[" dimensions+=ArrayDimensionSpecification (","
-		//dimensions+=ArrayDimensionSpecification)* "]")?
+		//{ComplexTypeSpecifier} "complex" ("(" unit=UnitExpression ")")?
 		public Group getGroup() { return cGroup; }
 
 		//{ComplexTypeSpecifier}
@@ -961,33 +894,6 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 
 		//")"
 		public Keyword getRightParenthesisKeyword_2_2() { return cRightParenthesisKeyword_2_2; }
-
-		//("[" dimensions+=ArrayDimensionSpecification ("," dimensions+=ArrayDimensionSpecification)* "]")?
-		public Group getGroup_3() { return cGroup_3; }
-
-		//"["
-		public Keyword getLeftSquareBracketKeyword_3_0() { return cLeftSquareBracketKeyword_3_0; }
-
-		//dimensions+=ArrayDimensionSpecification
-		public Assignment getDimensionsAssignment_3_1() { return cDimensionsAssignment_3_1; }
-
-		//ArrayDimensionSpecification
-		public RuleCall getDimensionsArrayDimensionSpecificationParserRuleCall_3_1_0() { return cDimensionsArrayDimensionSpecificationParserRuleCall_3_1_0; }
-
-		//("," dimensions+=ArrayDimensionSpecification)*
-		public Group getGroup_3_2() { return cGroup_3_2; }
-
-		//","
-		public Keyword getCommaKeyword_3_2_0() { return cCommaKeyword_3_2_0; }
-
-		//dimensions+=ArrayDimensionSpecification
-		public Assignment getDimensionsAssignment_3_2_1() { return cDimensionsAssignment_3_2_1; }
-
-		//ArrayDimensionSpecification
-		public RuleCall getDimensionsArrayDimensionSpecificationParserRuleCall_3_2_1_0() { return cDimensionsArrayDimensionSpecificationParserRuleCall_3_2_1_0; }
-
-		//"]"
-		public Keyword getRightSquareBracketKeyword_3_3() { return cRightSquareBracketKeyword_3_3; }
 	}
 
 	public class GaussianTypeSpecifierElements extends AbstractParserRuleElementFinder {
@@ -1000,23 +906,12 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cUnitAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
 		private final RuleCall cUnitUnitExpressionParserRuleCall_2_1_0 = (RuleCall)cUnitAssignment_2_1.eContents().get(0);
 		private final Keyword cRightParenthesisKeyword_2_2 = (Keyword)cGroup_2.eContents().get(2);
-		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
-		private final Keyword cLeftSquareBracketKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
-		private final Assignment cDimensionsAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
-		private final RuleCall cDimensionsArrayDimensionSpecificationParserRuleCall_3_1_0 = (RuleCall)cDimensionsAssignment_3_1.eContents().get(0);
-		private final Group cGroup_3_2 = (Group)cGroup_3.eContents().get(2);
-		private final Keyword cCommaKeyword_3_2_0 = (Keyword)cGroup_3_2.eContents().get(0);
-		private final Assignment cDimensionsAssignment_3_2_1 = (Assignment)cGroup_3_2.eContents().get(1);
-		private final RuleCall cDimensionsArrayDimensionSpecificationParserRuleCall_3_2_1_0 = (RuleCall)cDimensionsAssignment_3_2_1.eContents().get(0);
-		private final Keyword cRightSquareBracketKeyword_3_3 = (Keyword)cGroup_3.eContents().get(3);
 		
 		//GaussianTypeSpecifier:
-		//	{GaussianTypeSpecifier} "gauss" ("(" unit=UnitExpression ")")? ("[" dimensions+=ArrayDimensionSpecification (","
-		//	dimensions+=ArrayDimensionSpecification)* "]")?;
+		//	{GaussianTypeSpecifier} "gauss" ("(" unit=UnitExpression ")")?;
 		public ParserRule getRule() { return rule; }
 
-		//{GaussianTypeSpecifier} "gauss" ("(" unit=UnitExpression ")")? ("[" dimensions+=ArrayDimensionSpecification (","
-		//dimensions+=ArrayDimensionSpecification)* "]")?
+		//{GaussianTypeSpecifier} "gauss" ("(" unit=UnitExpression ")")?
 		public Group getGroup() { return cGroup; }
 
 		//{GaussianTypeSpecifier}
@@ -1039,33 +934,6 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 
 		//")"
 		public Keyword getRightParenthesisKeyword_2_2() { return cRightParenthesisKeyword_2_2; }
-
-		//("[" dimensions+=ArrayDimensionSpecification ("," dimensions+=ArrayDimensionSpecification)* "]")?
-		public Group getGroup_3() { return cGroup_3; }
-
-		//"["
-		public Keyword getLeftSquareBracketKeyword_3_0() { return cLeftSquareBracketKeyword_3_0; }
-
-		//dimensions+=ArrayDimensionSpecification
-		public Assignment getDimensionsAssignment_3_1() { return cDimensionsAssignment_3_1; }
-
-		//ArrayDimensionSpecification
-		public RuleCall getDimensionsArrayDimensionSpecificationParserRuleCall_3_1_0() { return cDimensionsArrayDimensionSpecificationParserRuleCall_3_1_0; }
-
-		//("," dimensions+=ArrayDimensionSpecification)*
-		public Group getGroup_3_2() { return cGroup_3_2; }
-
-		//","
-		public Keyword getCommaKeyword_3_2_0() { return cCommaKeyword_3_2_0; }
-
-		//dimensions+=ArrayDimensionSpecification
-		public Assignment getDimensionsAssignment_3_2_1() { return cDimensionsAssignment_3_2_1; }
-
-		//ArrayDimensionSpecification
-		public RuleCall getDimensionsArrayDimensionSpecificationParserRuleCall_3_2_1_0() { return cDimensionsArrayDimensionSpecificationParserRuleCall_3_2_1_0; }
-
-		//"]"
-		public Keyword getRightSquareBracketKeyword_3_3() { return cRightSquareBracketKeyword_3_3; }
 	}
 
 	public class BooleanTypeSpecifierElements extends AbstractParserRuleElementFinder {
@@ -1073,23 +941,12 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cBooleanTypeSpecifierAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cBoolKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
-		private final Keyword cLeftSquareBracketKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
-		private final Assignment cDimensionsAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final RuleCall cDimensionsArrayDimensionSpecificationParserRuleCall_2_1_0 = (RuleCall)cDimensionsAssignment_2_1.eContents().get(0);
-		private final Group cGroup_2_2 = (Group)cGroup_2.eContents().get(2);
-		private final Keyword cCommaKeyword_2_2_0 = (Keyword)cGroup_2_2.eContents().get(0);
-		private final Assignment cDimensionsAssignment_2_2_1 = (Assignment)cGroup_2_2.eContents().get(1);
-		private final RuleCall cDimensionsArrayDimensionSpecificationParserRuleCall_2_2_1_0 = (RuleCall)cDimensionsAssignment_2_2_1.eContents().get(0);
-		private final Keyword cRightSquareBracketKeyword_2_3 = (Keyword)cGroup_2.eContents().get(3);
 		
 		//BooleanTypeSpecifier:
-		//	{BooleanTypeSpecifier} "bool" ("[" dimensions+=ArrayDimensionSpecification (","
-		//	dimensions+=ArrayDimensionSpecification)* "]")?;
+		//	{BooleanTypeSpecifier} "bool";
 		public ParserRule getRule() { return rule; }
 
-		//{BooleanTypeSpecifier} "bool" ("[" dimensions+=ArrayDimensionSpecification (","
-		//dimensions+=ArrayDimensionSpecification)* "]")?
+		//{BooleanTypeSpecifier} "bool"
 		public Group getGroup() { return cGroup; }
 
 		//{BooleanTypeSpecifier}
@@ -1097,33 +954,6 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 
 		//"bool"
 		public Keyword getBoolKeyword_1() { return cBoolKeyword_1; }
-
-		//("[" dimensions+=ArrayDimensionSpecification ("," dimensions+=ArrayDimensionSpecification)* "]")?
-		public Group getGroup_2() { return cGroup_2; }
-
-		//"["
-		public Keyword getLeftSquareBracketKeyword_2_0() { return cLeftSquareBracketKeyword_2_0; }
-
-		//dimensions+=ArrayDimensionSpecification
-		public Assignment getDimensionsAssignment_2_1() { return cDimensionsAssignment_2_1; }
-
-		//ArrayDimensionSpecification
-		public RuleCall getDimensionsArrayDimensionSpecificationParserRuleCall_2_1_0() { return cDimensionsArrayDimensionSpecificationParserRuleCall_2_1_0; }
-
-		//("," dimensions+=ArrayDimensionSpecification)*
-		public Group getGroup_2_2() { return cGroup_2_2; }
-
-		//","
-		public Keyword getCommaKeyword_2_2_0() { return cCommaKeyword_2_2_0; }
-
-		//dimensions+=ArrayDimensionSpecification
-		public Assignment getDimensionsAssignment_2_2_1() { return cDimensionsAssignment_2_2_1; }
-
-		//ArrayDimensionSpecification
-		public RuleCall getDimensionsArrayDimensionSpecificationParserRuleCall_2_2_1_0() { return cDimensionsArrayDimensionSpecificationParserRuleCall_2_2_1_0; }
-
-		//"]"
-		public Keyword getRightSquareBracketKeyword_2_3() { return cRightSquareBracketKeyword_2_3; }
 	}
 
 	public class StringTypeSpecifierElements extends AbstractParserRuleElementFinder {
@@ -1131,23 +961,12 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cStringTypeSpecifierAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cStringKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
-		private final Keyword cLeftSquareBracketKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
-		private final Assignment cDimensionsAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final RuleCall cDimensionsArrayDimensionSpecificationParserRuleCall_2_1_0 = (RuleCall)cDimensionsAssignment_2_1.eContents().get(0);
-		private final Group cGroup_2_2 = (Group)cGroup_2.eContents().get(2);
-		private final Keyword cCommaKeyword_2_2_0 = (Keyword)cGroup_2_2.eContents().get(0);
-		private final Assignment cDimensionsAssignment_2_2_1 = (Assignment)cGroup_2_2.eContents().get(1);
-		private final RuleCall cDimensionsArrayDimensionSpecificationParserRuleCall_2_2_1_0 = (RuleCall)cDimensionsAssignment_2_2_1.eContents().get(0);
-		private final Keyword cRightSquareBracketKeyword_2_3 = (Keyword)cGroup_2.eContents().get(3);
 		
 		//StringTypeSpecifier:
-		//	{StringTypeSpecifier} "string" ("[" dimensions+=ArrayDimensionSpecification (","
-		//	dimensions+=ArrayDimensionSpecification)* "]")?;
+		//	{StringTypeSpecifier} "string";
 		public ParserRule getRule() { return rule; }
 
-		//{StringTypeSpecifier} "string" ("[" dimensions+=ArrayDimensionSpecification (","
-		//dimensions+=ArrayDimensionSpecification)* "]")?
+		//{StringTypeSpecifier} "string"
 		public Group getGroup() { return cGroup; }
 
 		//{StringTypeSpecifier}
@@ -1155,91 +974,139 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 
 		//"string"
 		public Keyword getStringKeyword_1() { return cStringKeyword_1; }
-
-		//("[" dimensions+=ArrayDimensionSpecification ("," dimensions+=ArrayDimensionSpecification)* "]")?
-		public Group getGroup_2() { return cGroup_2; }
-
-		//"["
-		public Keyword getLeftSquareBracketKeyword_2_0() { return cLeftSquareBracketKeyword_2_0; }
-
-		//dimensions+=ArrayDimensionSpecification
-		public Assignment getDimensionsAssignment_2_1() { return cDimensionsAssignment_2_1; }
-
-		//ArrayDimensionSpecification
-		public RuleCall getDimensionsArrayDimensionSpecificationParserRuleCall_2_1_0() { return cDimensionsArrayDimensionSpecificationParserRuleCall_2_1_0; }
-
-		//("," dimensions+=ArrayDimensionSpecification)*
-		public Group getGroup_2_2() { return cGroup_2_2; }
-
-		//","
-		public Keyword getCommaKeyword_2_2_0() { return cCommaKeyword_2_2_0; }
-
-		//dimensions+=ArrayDimensionSpecification
-		public Assignment getDimensionsAssignment_2_2_1() { return cDimensionsAssignment_2_2_1; }
-
-		//ArrayDimensionSpecification
-		public RuleCall getDimensionsArrayDimensionSpecificationParserRuleCall_2_2_1_0() { return cDimensionsArrayDimensionSpecificationParserRuleCall_2_2_1_0; }
-
-		//"]"
-		public Keyword getRightSquareBracketKeyword_2_3() { return cRightSquareBracketKeyword_2_3; }
 	}
 
 	public class NamedTypeSpecifierElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NamedTypeSpecifier");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cTypeReferenceAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cTypeReferenceQualifiedNameParserRuleCall_0_0 = (RuleCall)cTypeReferenceAssignment_0.eContents().get(0);
-		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
-		private final Keyword cLeftSquareBracketKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
-		private final Assignment cDimensionsAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
-		private final RuleCall cDimensionsArrayDimensionSpecificationParserRuleCall_1_1_0 = (RuleCall)cDimensionsAssignment_1_1.eContents().get(0);
-		private final Group cGroup_1_2 = (Group)cGroup_1.eContents().get(2);
-		private final Keyword cCommaKeyword_1_2_0 = (Keyword)cGroup_1_2.eContents().get(0);
-		private final Assignment cDimensionsAssignment_1_2_1 = (Assignment)cGroup_1_2.eContents().get(1);
-		private final RuleCall cDimensionsArrayDimensionSpecificationParserRuleCall_1_2_1_0 = (RuleCall)cDimensionsAssignment_1_2_1.eContents().get(0);
-		private final Keyword cRightSquareBracketKeyword_1_3 = (Keyword)cGroup_1.eContents().get(3);
+		private final Assignment cTypeReferenceAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cTypeReferenceQualifiedNameParserRuleCall_0 = (RuleCall)cTypeReferenceAssignment.eContents().get(0);
 		
 		//NamedTypeSpecifier:
-		//	typeReference=QualifiedName ("[" dimensions+=ArrayDimensionSpecification (","
-		//	dimensions+=ArrayDimensionSpecification)* "]")?;
+		//	typeReference=QualifiedName;
 		public ParserRule getRule() { return rule; }
 
-		//typeReference=QualifiedName ("[" dimensions+=ArrayDimensionSpecification ("," dimensions+=ArrayDimensionSpecification)*
-		//"]")?
-		public Group getGroup() { return cGroup; }
-
 		//typeReference=QualifiedName
-		public Assignment getTypeReferenceAssignment_0() { return cTypeReferenceAssignment_0; }
+		public Assignment getTypeReferenceAssignment() { return cTypeReferenceAssignment; }
 
 		//QualifiedName
-		public RuleCall getTypeReferenceQualifiedNameParserRuleCall_0_0() { return cTypeReferenceQualifiedNameParserRuleCall_0_0; }
+		public RuleCall getTypeReferenceQualifiedNameParserRuleCall_0() { return cTypeReferenceQualifiedNameParserRuleCall_0; }
+	}
 
-		//("[" dimensions+=ArrayDimensionSpecification ("," dimensions+=ArrayDimensionSpecification)* "]")?
+	public class ArrayTypeSpecifierElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ArrayTypeSpecifier");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cTensorTypeSpecifierParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
+		private final Assignment cElementTypeAssignment_1_0 = (Assignment)cGroup_1.eContents().get(0);
+		private final RuleCall cElementTypeScalarTypeSpecifierParserRuleCall_1_0_0 = (RuleCall)cElementTypeAssignment_1_0.eContents().get(0);
+		private final Keyword cLeftSquareBracketKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
+		private final Assignment cDimensionsAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
+		private final RuleCall cDimensionsArrayDimensionSpecificationParserRuleCall_1_2_0 = (RuleCall)cDimensionsAssignment_1_2.eContents().get(0);
+		private final Group cGroup_1_3 = (Group)cGroup_1.eContents().get(3);
+		private final Keyword cCommaKeyword_1_3_0 = (Keyword)cGroup_1_3.eContents().get(0);
+		private final Assignment cDimensionsAssignment_1_3_1 = (Assignment)cGroup_1_3.eContents().get(1);
+		private final RuleCall cDimensionsArrayDimensionSpecificationParserRuleCall_1_3_1_0 = (RuleCall)cDimensionsAssignment_1_3_1.eContents().get(0);
+		private final Keyword cRightSquareBracketKeyword_1_4 = (Keyword)cGroup_1.eContents().get(4);
+		
+		//ArrayTypeSpecifier:
+		//	TensorTypeSpecifier | => elementType=ScalarTypeSpecifier "[" dimensions+=ArrayDimensionSpecification (","
+		//	dimensions+=ArrayDimensionSpecification)* "]";
+		public ParserRule getRule() { return rule; }
+
+		//TensorTypeSpecifier | => elementType=ScalarTypeSpecifier "[" dimensions+=ArrayDimensionSpecification (","
+		//dimensions+=ArrayDimensionSpecification)* "]"
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//TensorTypeSpecifier
+		public RuleCall getTensorTypeSpecifierParserRuleCall_0() { return cTensorTypeSpecifierParserRuleCall_0; }
+
+		//=> elementType=ScalarTypeSpecifier "[" dimensions+=ArrayDimensionSpecification (","
+		//dimensions+=ArrayDimensionSpecification)* "]"
 		public Group getGroup_1() { return cGroup_1; }
 
+		//=> elementType=ScalarTypeSpecifier
+		public Assignment getElementTypeAssignment_1_0() { return cElementTypeAssignment_1_0; }
+
+		//ScalarTypeSpecifier
+		public RuleCall getElementTypeScalarTypeSpecifierParserRuleCall_1_0_0() { return cElementTypeScalarTypeSpecifierParserRuleCall_1_0_0; }
+
 		//"["
-		public Keyword getLeftSquareBracketKeyword_1_0() { return cLeftSquareBracketKeyword_1_0; }
+		public Keyword getLeftSquareBracketKeyword_1_1() { return cLeftSquareBracketKeyword_1_1; }
 
 		//dimensions+=ArrayDimensionSpecification
-		public Assignment getDimensionsAssignment_1_1() { return cDimensionsAssignment_1_1; }
+		public Assignment getDimensionsAssignment_1_2() { return cDimensionsAssignment_1_2; }
 
 		//ArrayDimensionSpecification
-		public RuleCall getDimensionsArrayDimensionSpecificationParserRuleCall_1_1_0() { return cDimensionsArrayDimensionSpecificationParserRuleCall_1_1_0; }
+		public RuleCall getDimensionsArrayDimensionSpecificationParserRuleCall_1_2_0() { return cDimensionsArrayDimensionSpecificationParserRuleCall_1_2_0; }
 
 		//("," dimensions+=ArrayDimensionSpecification)*
-		public Group getGroup_1_2() { return cGroup_1_2; }
+		public Group getGroup_1_3() { return cGroup_1_3; }
 
 		//","
-		public Keyword getCommaKeyword_1_2_0() { return cCommaKeyword_1_2_0; }
+		public Keyword getCommaKeyword_1_3_0() { return cCommaKeyword_1_3_0; }
 
 		//dimensions+=ArrayDimensionSpecification
-		public Assignment getDimensionsAssignment_1_2_1() { return cDimensionsAssignment_1_2_1; }
+		public Assignment getDimensionsAssignment_1_3_1() { return cDimensionsAssignment_1_3_1; }
 
 		//ArrayDimensionSpecification
-		public RuleCall getDimensionsArrayDimensionSpecificationParserRuleCall_1_2_1_0() { return cDimensionsArrayDimensionSpecificationParserRuleCall_1_2_1_0; }
+		public RuleCall getDimensionsArrayDimensionSpecificationParserRuleCall_1_3_1_0() { return cDimensionsArrayDimensionSpecificationParserRuleCall_1_3_1_0; }
 
 		//"]"
-		public Keyword getRightSquareBracketKeyword_1_3() { return cRightSquareBracketKeyword_1_3; }
+		public Keyword getRightSquareBracketKeyword_1_4() { return cRightSquareBracketKeyword_1_4; }
+	}
+
+	public class TensorTypeSpecifierElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TensorTypeSpecifier");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cElementTypeAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cElementTypeNumericTypeSpecifierParserRuleCall_0_0 = (RuleCall)cElementTypeAssignment_0.eContents().get(0);
+		private final Keyword cLeftSquareBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cDimensionsAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cDimensionsArrayDimensionSpecificationParserRuleCall_2_0 = (RuleCall)cDimensionsAssignment_2.eContents().get(0);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Keyword cCommaKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Assignment cDimensionsAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
+		private final RuleCall cDimensionsArrayDimensionSpecificationParserRuleCall_3_1_0 = (RuleCall)cDimensionsAssignment_3_1.eContents().get(0);
+		private final Keyword cRightSquareBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		
+		//TensorTypeSpecifier:
+		//	elementType=NumericTypeSpecifier "[" dimensions+=ArrayDimensionSpecification (","
+		//	dimensions+=ArrayDimensionSpecification)* "]";
+		public ParserRule getRule() { return rule; }
+
+		//elementType=NumericTypeSpecifier "[" dimensions+=ArrayDimensionSpecification (","
+		//dimensions+=ArrayDimensionSpecification)* "]"
+		public Group getGroup() { return cGroup; }
+
+		//elementType=NumericTypeSpecifier
+		public Assignment getElementTypeAssignment_0() { return cElementTypeAssignment_0; }
+
+		//NumericTypeSpecifier
+		public RuleCall getElementTypeNumericTypeSpecifierParserRuleCall_0_0() { return cElementTypeNumericTypeSpecifierParserRuleCall_0_0; }
+
+		//"["
+		public Keyword getLeftSquareBracketKeyword_1() { return cLeftSquareBracketKeyword_1; }
+
+		//dimensions+=ArrayDimensionSpecification
+		public Assignment getDimensionsAssignment_2() { return cDimensionsAssignment_2; }
+
+		//ArrayDimensionSpecification
+		public RuleCall getDimensionsArrayDimensionSpecificationParserRuleCall_2_0() { return cDimensionsArrayDimensionSpecificationParserRuleCall_2_0; }
+
+		//("," dimensions+=ArrayDimensionSpecification)*
+		public Group getGroup_3() { return cGroup_3; }
+
+		//","
+		public Keyword getCommaKeyword_3_0() { return cCommaKeyword_3_0; }
+
+		//dimensions+=ArrayDimensionSpecification
+		public Assignment getDimensionsAssignment_3_1() { return cDimensionsAssignment_3_1; }
+
+		//ArrayDimensionSpecification
+		public RuleCall getDimensionsArrayDimensionSpecificationParserRuleCall_3_1_0() { return cDimensionsArrayDimensionSpecificationParserRuleCall_3_1_0; }
+
+		//"]"
+		public Keyword getRightSquareBracketKeyword_4() { return cRightSquareBracketKeyword_4; }
 	}
 
 	public class ArrayDimensionSpecificationElements extends AbstractParserRuleElementFinder {
@@ -3257,29 +3124,21 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	public class UnitExpressionExponentElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "UnitExpressionExponent");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cNegativeAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final Keyword cNegativeHyphenMinusKeyword_0_0 = (Keyword)cNegativeAssignment_0.eContents().get(0);
-		private final Assignment cValueAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cValueINTEGERTerminalRuleCall_1_0 = (RuleCall)cValueAssignment_1.eContents().get(0);
+		private final Keyword cHyphenMinusKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final RuleCall cINTEGERTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		
-		//UnitExpressionExponent:
-		//	negative?="-"? value=INTEGER;
+		//UnitExpressionExponent returns ecore::EInt:
+		//	"-"? INTEGER;
 		public ParserRule getRule() { return rule; }
 
-		//negative?="-"? value=INTEGER
+		//"-"? INTEGER
 		public Group getGroup() { return cGroup; }
 
-		//negative?="-"?
-		public Assignment getNegativeAssignment_0() { return cNegativeAssignment_0; }
-
-		//"-"
-		public Keyword getNegativeHyphenMinusKeyword_0_0() { return cNegativeHyphenMinusKeyword_0_0; }
-
-		//value=INTEGER
-		public Assignment getValueAssignment_1() { return cValueAssignment_1; }
+		//"-"?
+		public Keyword getHyphenMinusKeyword_0() { return cHyphenMinusKeyword_0; }
 
 		//INTEGER
-		public RuleCall getValueINTEGERTerminalRuleCall_1_0() { return cValueINTEGERTerminalRuleCall_1_0; }
+		public RuleCall getINTEGERTerminalRuleCall_1() { return cINTEGERTerminalRuleCall_1; }
 	}
 	
 	
@@ -3587,6 +3446,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	private FunctionObjectDeclarationElements pFunctionObjectDeclaration;
 	private EquationElements pEquation;
 	private DataTypeSpecifierElements pDataTypeSpecifier;
+	private ScalarTypeSpecifierElements pScalarTypeSpecifier;
 	private PrimitiveTypeSpecifierElements pPrimitiveTypeSpecifier;
 	private NumericTypeSpecifierElements pNumericTypeSpecifier;
 	private RealTypeSpecifierElements pRealTypeSpecifier;
@@ -3596,6 +3456,8 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	private BooleanTypeSpecifierElements pBooleanTypeSpecifier;
 	private StringTypeSpecifierElements pStringTypeSpecifier;
 	private NamedTypeSpecifierElements pNamedTypeSpecifier;
+	private ArrayTypeSpecifierElements pArrayTypeSpecifier;
+	private TensorTypeSpecifierElements pTensorTypeSpecifier;
 	private ArrayDimensionSpecificationElements pArrayDimensionSpecification;
 	private ExpressionElements pExpression;
 	private LetExpressionElements pLetExpression;
@@ -3848,13 +3710,23 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	/// *
 	// * Data type specifier
 	// * / DataTypeSpecifier:
-	//	PrimitiveTypeSpecifier | NamedTypeSpecifier;
+	//	ScalarTypeSpecifier | ArrayTypeSpecifier;
 	public DataTypeSpecifierElements getDataTypeSpecifierAccess() {
 		return (pDataTypeSpecifier != null) ? pDataTypeSpecifier : (pDataTypeSpecifier = new DataTypeSpecifierElements());
 	}
 	
 	public ParserRule getDataTypeSpecifierRule() {
 		return getDataTypeSpecifierAccess().getRule();
+	}
+
+	//ScalarTypeSpecifier:
+	//	PrimitiveTypeSpecifier | NamedTypeSpecifier;
+	public ScalarTypeSpecifierElements getScalarTypeSpecifierAccess() {
+		return (pScalarTypeSpecifier != null) ? pScalarTypeSpecifier : (pScalarTypeSpecifier = new ScalarTypeSpecifierElements());
+	}
+	
+	public ParserRule getScalarTypeSpecifierRule() {
+		return getScalarTypeSpecifierAccess().getRule();
 	}
 
 	//PrimitiveTypeSpecifier:
@@ -3878,8 +3750,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//RealTypeSpecifier:
-	//	{RealTypeSpecifier} "real" ("(" unit=UnitExpression ")")? ("[" dimensions+=ArrayDimensionSpecification (","
-	//	dimensions+=ArrayDimensionSpecification)* "]")?;
+	//	{RealTypeSpecifier} "real" ("(" unit=UnitExpression ")")?;
 	public RealTypeSpecifierElements getRealTypeSpecifierAccess() {
 		return (pRealTypeSpecifier != null) ? pRealTypeSpecifier : (pRealTypeSpecifier = new RealTypeSpecifierElements());
 	}
@@ -3889,8 +3760,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//IntegerTypeSpecifier:
-	//	{IntegerTypeSpecifier} "int" ("(" unit=UnitExpression ")")? ("[" dimensions+=ArrayDimensionSpecification (","
-	//	dimensions+=ArrayDimensionSpecification)* "]")?;
+	//	{IntegerTypeSpecifier} "int" ("(" unit=UnitExpression ")")?;
 	public IntegerTypeSpecifierElements getIntegerTypeSpecifierAccess() {
 		return (pIntegerTypeSpecifier != null) ? pIntegerTypeSpecifier : (pIntegerTypeSpecifier = new IntegerTypeSpecifierElements());
 	}
@@ -3900,8 +3770,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ComplexTypeSpecifier:
-	//	{ComplexTypeSpecifier} "complex" ("(" unit=UnitExpression ")")? ("[" dimensions+=ArrayDimensionSpecification (","
-	//	dimensions+=ArrayDimensionSpecification)* "]")?;
+	//	{ComplexTypeSpecifier} "complex" ("(" unit=UnitExpression ")")?;
 	public ComplexTypeSpecifierElements getComplexTypeSpecifierAccess() {
 		return (pComplexTypeSpecifier != null) ? pComplexTypeSpecifier : (pComplexTypeSpecifier = new ComplexTypeSpecifierElements());
 	}
@@ -3911,8 +3780,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//GaussianTypeSpecifier:
-	//	{GaussianTypeSpecifier} "gauss" ("(" unit=UnitExpression ")")? ("[" dimensions+=ArrayDimensionSpecification (","
-	//	dimensions+=ArrayDimensionSpecification)* "]")?;
+	//	{GaussianTypeSpecifier} "gauss" ("(" unit=UnitExpression ")")?;
 	public GaussianTypeSpecifierElements getGaussianTypeSpecifierAccess() {
 		return (pGaussianTypeSpecifier != null) ? pGaussianTypeSpecifier : (pGaussianTypeSpecifier = new GaussianTypeSpecifierElements());
 	}
@@ -3922,8 +3790,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//BooleanTypeSpecifier:
-	//	{BooleanTypeSpecifier} "bool" ("[" dimensions+=ArrayDimensionSpecification (","
-	//	dimensions+=ArrayDimensionSpecification)* "]")?;
+	//	{BooleanTypeSpecifier} "bool";
 	public BooleanTypeSpecifierElements getBooleanTypeSpecifierAccess() {
 		return (pBooleanTypeSpecifier != null) ? pBooleanTypeSpecifier : (pBooleanTypeSpecifier = new BooleanTypeSpecifierElements());
 	}
@@ -3933,8 +3800,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//StringTypeSpecifier:
-	//	{StringTypeSpecifier} "string" ("[" dimensions+=ArrayDimensionSpecification (","
-	//	dimensions+=ArrayDimensionSpecification)* "]")?;
+	//	{StringTypeSpecifier} "string";
 	public StringTypeSpecifierElements getStringTypeSpecifierAccess() {
 		return (pStringTypeSpecifier != null) ? pStringTypeSpecifier : (pStringTypeSpecifier = new StringTypeSpecifierElements());
 	}
@@ -3944,14 +3810,35 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//NamedTypeSpecifier:
-	//	typeReference=QualifiedName ("[" dimensions+=ArrayDimensionSpecification (","
-	//	dimensions+=ArrayDimensionSpecification)* "]")?;
+	//	typeReference=QualifiedName;
 	public NamedTypeSpecifierElements getNamedTypeSpecifierAccess() {
 		return (pNamedTypeSpecifier != null) ? pNamedTypeSpecifier : (pNamedTypeSpecifier = new NamedTypeSpecifierElements());
 	}
 	
 	public ParserRule getNamedTypeSpecifierRule() {
 		return getNamedTypeSpecifierAccess().getRule();
+	}
+
+	//ArrayTypeSpecifier:
+	//	TensorTypeSpecifier | => elementType=ScalarTypeSpecifier "[" dimensions+=ArrayDimensionSpecification (","
+	//	dimensions+=ArrayDimensionSpecification)* "]";
+	public ArrayTypeSpecifierElements getArrayTypeSpecifierAccess() {
+		return (pArrayTypeSpecifier != null) ? pArrayTypeSpecifier : (pArrayTypeSpecifier = new ArrayTypeSpecifierElements());
+	}
+	
+	public ParserRule getArrayTypeSpecifierRule() {
+		return getArrayTypeSpecifierAccess().getRule();
+	}
+
+	//TensorTypeSpecifier:
+	//	elementType=NumericTypeSpecifier "[" dimensions+=ArrayDimensionSpecification (","
+	//	dimensions+=ArrayDimensionSpecification)* "]";
+	public TensorTypeSpecifierElements getTensorTypeSpecifierAccess() {
+		return (pTensorTypeSpecifier != null) ? pTensorTypeSpecifier : (pTensorTypeSpecifier = new TensorTypeSpecifierElements());
+	}
+	
+	public ParserRule getTensorTypeSpecifierRule() {
+		return getTensorTypeSpecifierAccess().getRule();
 	}
 
 	//ArrayDimensionSpecification:
@@ -4555,8 +4442,8 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		return getUnitExpressionFactorAccess().getRule();
 	}
 
-	//UnitExpressionExponent:
-	//	negative?="-"? value=INTEGER;
+	//UnitExpressionExponent returns ecore::EInt:
+	//	"-"? INTEGER;
 	public UnitExpressionExponentElements getUnitExpressionExponentAccess() {
 		return (pUnitExpressionExponent != null) ? pUnitExpressionExponent : (pUnitExpressionExponent = new UnitExpressionExponentElements());
 	}

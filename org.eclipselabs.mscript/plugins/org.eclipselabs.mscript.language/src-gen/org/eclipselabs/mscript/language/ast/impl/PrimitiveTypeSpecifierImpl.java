@@ -19,7 +19,7 @@ import org.eclipselabs.mscript.language.ast.PrimitiveTypeSpecifier;
  *
  * @generated
  */
-public class PrimitiveTypeSpecifierImpl extends DataTypeSpecifierImpl implements PrimitiveTypeSpecifier
+public class PrimitiveTypeSpecifierImpl extends ScalarTypeSpecifierImpl implements PrimitiveTypeSpecifier
 {
   /**
    * <!-- begin-user-doc -->

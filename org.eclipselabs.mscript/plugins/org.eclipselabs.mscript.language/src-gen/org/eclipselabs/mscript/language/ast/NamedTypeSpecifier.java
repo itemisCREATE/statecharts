@@ -22,7 +22,7 @@ package org.eclipselabs.mscript.language.ast;
  * @model
  * @generated
  */
-public interface NamedTypeSpecifier extends DataTypeSpecifier
+public interface NamedTypeSpecifier extends ScalarTypeSpecifier
 {
   /**
    * Returns the value of the '<em><b>Type Reference</b></em>' containment reference.

@@ -22,6 +22,7 @@ import org.eclipselabs.mscript.language.ast.ArrayConstructionOperator;
 import org.eclipselabs.mscript.language.ast.ArrayDimensionSpecification;
 import org.eclipselabs.mscript.language.ast.ArrayElementAccess;
 import org.eclipselabs.mscript.language.ast.ArraySubscript;
+import org.eclipselabs.mscript.language.ast.ArrayTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.Assertion;
 import org.eclipselabs.mscript.language.ast.AssertionStatusKind;
 import org.eclipselabs.mscript.language.ast.AstFactory;
@@ -83,12 +84,14 @@ import org.eclipselabs.mscript.language.ast.RecordDefinition;
 import org.eclipselabs.mscript.language.ast.RecordFieldDeclaration;
 import org.eclipselabs.mscript.language.ast.RelationalExpression;
 import org.eclipselabs.mscript.language.ast.RelationalOperator;
+import org.eclipselabs.mscript.language.ast.ScalarTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.SimpleName;
 import org.eclipselabs.mscript.language.ast.StateVariableDeclaration;
 import org.eclipselabs.mscript.language.ast.StringLiteral;
 import org.eclipselabs.mscript.language.ast.StringTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.SwitchCase;
 import org.eclipselabs.mscript.language.ast.SwitchExpression;
+import org.eclipselabs.mscript.language.ast.TensorTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.TypeAliasDefinition;
 import org.eclipselabs.mscript.language.ast.TypeTestExpression;
 import org.eclipselabs.mscript.language.ast.UnaryExpression;
@@ -96,7 +99,6 @@ import org.eclipselabs.mscript.language.ast.UnaryOperator;
 import org.eclipselabs.mscript.language.ast.UnitConstructionOperator;
 import org.eclipselabs.mscript.language.ast.UnitExpression;
 import org.eclipselabs.mscript.language.ast.UnitExpressionDenominator;
-import org.eclipselabs.mscript.language.ast.UnitExpressionExponent;
 import org.eclipselabs.mscript.language.ast.UnitExpressionFactor;
 import org.eclipselabs.mscript.language.ast.UnitExpressionNumerator;
 
@@ -218,6 +220,13 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass scalarTypeSpecifierEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass primitiveTypeSpecifierEClass = null;
 
   /**
@@ -275,6 +284,20 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * @generated
    */
   private EClass namedTypeSpecifierEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass arrayTypeSpecifierEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass tensorTypeSpecifierEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -527,13 +550,6 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * @generated
    */
   private EClass unitExpressionFactorEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass unitExpressionExponentEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -1184,9 +1200,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getDataTypeSpecifier_Dimensions()
+  public EClass getScalarTypeSpecifier()
   {
-    return (EReference)dataTypeSpecifierEClass.getEStructuralFeatures().get(0);
+    return scalarTypeSpecifierEClass;
   }
 
   /**
@@ -1297,6 +1313,46 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
   public EReference getNamedTypeSpecifier_TypeReference()
   {
     return (EReference)namedTypeSpecifierEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getArrayTypeSpecifier()
+  {
+    return arrayTypeSpecifierEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getArrayTypeSpecifier_ElementType()
+  {
+    return (EReference)arrayTypeSpecifierEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getArrayTypeSpecifier_Dimensions()
+  {
+    return (EReference)arrayTypeSpecifierEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getTensorTypeSpecifier()
+  {
+    return tensorTypeSpecifierEClass;
   }
 
   /**
@@ -2194,39 +2250,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getUnitExpressionFactor_Exponent()
+  public EAttribute getUnitExpressionFactor_Exponent()
   {
-    return (EReference)unitExpressionFactorEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getUnitExpressionExponent()
-  {
-    return unitExpressionExponentEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getUnitExpressionExponent_Negative()
-  {
-    return (EAttribute)unitExpressionExponentEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getUnitExpressionExponent_Value()
-  {
-    return (EAttribute)unitExpressionExponentEClass.getEStructuralFeatures().get(1);
+    return (EAttribute)unitExpressionFactorEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -2815,7 +2841,8 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     createEReference(equationEClass, EQUATION__RIGHT_HAND_SIDE);
 
     dataTypeSpecifierEClass = createEClass(DATA_TYPE_SPECIFIER);
-    createEReference(dataTypeSpecifierEClass, DATA_TYPE_SPECIFIER__DIMENSIONS);
+
+    scalarTypeSpecifierEClass = createEClass(SCALAR_TYPE_SPECIFIER);
 
     primitiveTypeSpecifierEClass = createEClass(PRIMITIVE_TYPE_SPECIFIER);
 
@@ -2836,6 +2863,12 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
 
     namedTypeSpecifierEClass = createEClass(NAMED_TYPE_SPECIFIER);
     createEReference(namedTypeSpecifierEClass, NAMED_TYPE_SPECIFIER__TYPE_REFERENCE);
+
+    arrayTypeSpecifierEClass = createEClass(ARRAY_TYPE_SPECIFIER);
+    createEReference(arrayTypeSpecifierEClass, ARRAY_TYPE_SPECIFIER__ELEMENT_TYPE);
+    createEReference(arrayTypeSpecifierEClass, ARRAY_TYPE_SPECIFIER__DIMENSIONS);
+
+    tensorTypeSpecifierEClass = createEClass(TENSOR_TYPE_SPECIFIER);
 
     arrayDimensionSpecificationEClass = createEClass(ARRAY_DIMENSION_SPECIFICATION);
     createEReference(arrayDimensionSpecificationEClass, ARRAY_DIMENSION_SPECIFICATION__SIZE);
@@ -2961,11 +2994,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
 
     unitExpressionFactorEClass = createEClass(UNIT_EXPRESSION_FACTOR);
     createEAttribute(unitExpressionFactorEClass, UNIT_EXPRESSION_FACTOR__OPERAND);
-    createEReference(unitExpressionFactorEClass, UNIT_EXPRESSION_FACTOR__EXPONENT);
-
-    unitExpressionExponentEClass = createEClass(UNIT_EXPRESSION_EXPONENT);
-    createEAttribute(unitExpressionExponentEClass, UNIT_EXPRESSION_EXPONENT__NEGATIVE);
-    createEAttribute(unitExpressionExponentEClass, UNIT_EXPRESSION_EXPONENT__VALUE);
+    createEAttribute(unitExpressionFactorEClass, UNIT_EXPRESSION_FACTOR__EXPONENT);
 
     rangeExpressionEClass = createEClass(RANGE_EXPRESSION);
     createEReference(rangeExpressionEClass, RANGE_EXPRESSION__OPERANDS);
@@ -3068,7 +3097,8 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     typeAliasDefinitionEClass.getESuperTypes().add(this.getDataTypeDefinition());
     recordDefinitionEClass.getESuperTypes().add(this.getDataTypeDefinition());
     functionDefinitionEClass.getESuperTypes().add(this.getDefinition());
-    primitiveTypeSpecifierEClass.getESuperTypes().add(this.getDataTypeSpecifier());
+    scalarTypeSpecifierEClass.getESuperTypes().add(this.getDataTypeSpecifier());
+    primitiveTypeSpecifierEClass.getESuperTypes().add(this.getScalarTypeSpecifier());
     numericTypeSpecifierEClass.getESuperTypes().add(this.getPrimitiveTypeSpecifier());
     realTypeSpecifierEClass.getESuperTypes().add(this.getNumericTypeSpecifier());
     integerTypeSpecifierEClass.getESuperTypes().add(this.getNumericTypeSpecifier());
@@ -3076,7 +3106,9 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     gaussianTypeSpecifierEClass.getESuperTypes().add(this.getNumericTypeSpecifier());
     booleanTypeSpecifierEClass.getESuperTypes().add(this.getPrimitiveTypeSpecifier());
     stringTypeSpecifierEClass.getESuperTypes().add(this.getPrimitiveTypeSpecifier());
-    namedTypeSpecifierEClass.getESuperTypes().add(this.getDataTypeSpecifier());
+    namedTypeSpecifierEClass.getESuperTypes().add(this.getScalarTypeSpecifier());
+    arrayTypeSpecifierEClass.getESuperTypes().add(this.getDataTypeSpecifier());
+    tensorTypeSpecifierEClass.getESuperTypes().add(this.getArrayTypeSpecifier());
     letExpressionEClass.getESuperTypes().add(this.getExpression());
     ifExpressionEClass.getESuperTypes().add(this.getExpression());
     switchExpressionEClass.getESuperTypes().add(this.getExpression());
@@ -3168,7 +3200,8 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
     initEReference(getEquation_RightHandSide(), this.getExpression(), null, "rightHandSide", null, 0, 1, Equation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(dataTypeSpecifierEClass, DataTypeSpecifier.class, "DataTypeSpecifier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getDataTypeSpecifier_Dimensions(), this.getArrayDimensionSpecification(), null, "dimensions", null, 0, -1, DataTypeSpecifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(scalarTypeSpecifierEClass, ScalarTypeSpecifier.class, "ScalarTypeSpecifier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(primitiveTypeSpecifierEClass, PrimitiveTypeSpecifier.class, "PrimitiveTypeSpecifier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -3189,6 +3222,12 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
 
     initEClass(namedTypeSpecifierEClass, NamedTypeSpecifier.class, "NamedTypeSpecifier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getNamedTypeSpecifier_TypeReference(), this.getQualifiedName(), null, "typeReference", null, 0, 1, NamedTypeSpecifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(arrayTypeSpecifierEClass, ArrayTypeSpecifier.class, "ArrayTypeSpecifier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getArrayTypeSpecifier_ElementType(), this.getScalarTypeSpecifier(), null, "elementType", null, 0, 1, ArrayTypeSpecifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getArrayTypeSpecifier_Dimensions(), this.getArrayDimensionSpecification(), null, "dimensions", null, 0, -1, ArrayTypeSpecifier.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(tensorTypeSpecifierEClass, TensorTypeSpecifier.class, "TensorTypeSpecifier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(arrayDimensionSpecificationEClass, ArrayDimensionSpecification.class, "ArrayDimensionSpecification", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getArrayDimensionSpecification_Size(), this.getExpression(), null, "size", null, 0, 1, ArrayDimensionSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3314,11 +3353,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage
 
     initEClass(unitExpressionFactorEClass, UnitExpressionFactor.class, "UnitExpressionFactor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getUnitExpressionFactor_Operand(), ecorePackage.getEString(), "operand", null, 0, 1, UnitExpressionFactor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getUnitExpressionFactor_Exponent(), this.getUnitExpressionExponent(), null, "exponent", null, 0, 1, UnitExpressionFactor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(unitExpressionExponentEClass, UnitExpressionExponent.class, "UnitExpressionExponent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getUnitExpressionExponent_Negative(), ecorePackage.getEBoolean(), "negative", null, 0, 1, UnitExpressionExponent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getUnitExpressionExponent_Value(), ecorePackage.getELong(), "value", null, 0, 1, UnitExpressionExponent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getUnitExpressionFactor_Exponent(), ecorePackage.getEInt(), "exponent", null, 0, 1, UnitExpressionFactor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(rangeExpressionEClass, RangeExpression.class, "RangeExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getRangeExpression_Operands(), this.getExpression(), null, "operands", null, 0, -1, RangeExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

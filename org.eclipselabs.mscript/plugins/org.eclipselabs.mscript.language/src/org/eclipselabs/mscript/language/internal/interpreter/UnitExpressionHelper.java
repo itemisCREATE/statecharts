@@ -96,12 +96,10 @@ public class UnitExpressionHelper {
 			}
 		}
 				
-		int exponent = 1;
-		if (factor.getExponent() != null) {
-			exponent = (int) factor.getExponent().getValue();
-			if (factor.getExponent().isNegative()) {
-				exponent = -exponent;
-			}
+		// TODO: use factor.isSetExponent() after switching to imported Ecore model
+		int exponent = factor.getExponent();
+		if (exponent == 0) {
+			exponent = 1;
 		}
 		
 		if (reciprocal) {

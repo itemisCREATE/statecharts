@@ -13,6 +13,7 @@ package org.eclipselabs.mscript.language.interpreter;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipselabs.mscript.language.ast.ArrayDimensionSpecification;
+import org.eclipselabs.mscript.language.ast.ArrayTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.BooleanTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.DataTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.IntegerLiteral;
@@ -20,16 +21,14 @@ import org.eclipselabs.mscript.language.ast.IntegerTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.NumericTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.RealTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.StringTypeSpecifier;
+import org.eclipselabs.mscript.language.ast.TensorTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.util.AstSwitch;
 import org.eclipselabs.mscript.language.internal.interpreter.InvalidUnitExpressionOperandException;
 import org.eclipselabs.mscript.language.internal.interpreter.UnitExpressionHelper;
 import org.eclipselabs.mscript.typesystem.ArrayDimension;
 import org.eclipselabs.mscript.typesystem.ArrayType;
-import org.eclipselabs.mscript.typesystem.BooleanType;
 import org.eclipselabs.mscript.typesystem.DataType;
 import org.eclipselabs.mscript.typesystem.NumericType;
-import org.eclipselabs.mscript.typesystem.StringType;
-import org.eclipselabs.mscript.typesystem.TensorType;
 import org.eclipselabs.mscript.typesystem.TypeSystemFactory;
 import org.eclipselabs.mscript.typesystem.TypeSystemPackage;
 import org.eclipselabs.mscript.typesystem.util.TypeSystemUtil;
@@ -81,12 +80,6 @@ public class DataTypeSpecifierEvaluator implements IDataTypeSpecifierEvaluator {
 				numericType.setUnit(TypeSystemUtil.createUnit());
 			}
 			
-			if (!numericTypeSpecifier.getDimensions().isEmpty()) {
-				TensorType tensorType = TypeSystemFactory.eINSTANCE.createTensorType();
-				initializeArrayType(tensorType, numericTypeSpecifier, numericType);
-				return tensorType;
-			}
-			
 			return numericType;
 		}
 		
@@ -95,15 +88,7 @@ public class DataTypeSpecifierEvaluator implements IDataTypeSpecifierEvaluator {
 		 */
 		@Override
 		public DataType caseBooleanTypeSpecifier(BooleanTypeSpecifier booleanTypeSpecifier) {
-			BooleanType booleanType = TypeSystemFactory.eINSTANCE.createBooleanType();
-			
-			if (!booleanTypeSpecifier.getDimensions().isEmpty()) {
-				ArrayType arrayType = TypeSystemFactory.eINSTANCE.createArrayType();
-				initializeArrayType(arrayType, booleanTypeSpecifier, booleanType);
-				return arrayType;
-			}
-	
-			return booleanType;
+			return TypeSystemFactory.eINSTANCE.createBooleanType();
 		}
 		
 		/* (non-Javadoc)
@@ -111,19 +96,31 @@ public class DataTypeSpecifierEvaluator implements IDataTypeSpecifierEvaluator {
 		 */
 		@Override
 		public DataType caseStringTypeSpecifier(StringTypeSpecifier stringTypeSpecifier) {
-			StringType stringType = TypeSystemFactory.eINSTANCE.createStringType();
-			
-			if (!stringTypeSpecifier.getDimensions().isEmpty()) {
-				ArrayType arrayType = TypeSystemFactory.eINSTANCE.createArrayType();
-				initializeArrayType(arrayType, stringTypeSpecifier, stringType);
-				return arrayType;
-			}
-	
-			return stringType;
+			return TypeSystemFactory.eINSTANCE.createStringType();
+		}
+		
+		/* (non-Javadoc)
+		 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseArrayTypeSpecifier(org.eclipselabs.mscript.language.ast.ArrayTypeSpecifier)
+		 */
+		@Override
+		public DataType caseArrayTypeSpecifier(ArrayTypeSpecifier arrayTypeSpecifier) {
+			ArrayType arrayType = TypeSystemFactory.eINSTANCE.createArrayType();
+			initializeArrayType(arrayType, arrayTypeSpecifier);
+			return arrayType;
+		}
+		
+		/* (non-Javadoc)
+		 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseTensorTypeSpecifier(org.eclipselabs.mscript.language.ast.TensorTypeSpecifier)
+		 */
+		@Override
+		public DataType caseTensorTypeSpecifier(TensorTypeSpecifier tensorTypeSpecifier) {
+			ArrayType arrayType = TypeSystemFactory.eINSTANCE.createTensorType();
+			initializeArrayType(arrayType, tensorTypeSpecifier);
+			return arrayType;
 		}
 	
-		private void initializeArrayType(ArrayType arrayType, DataTypeSpecifier dataTypeSpecifier, DataType elementType) {
-			for (ArrayDimensionSpecification arrayDimensionSpecification : dataTypeSpecifier.getDimensions()) {
+		private void initializeArrayType(ArrayType arrayType, ArrayTypeSpecifier arrayTypeSpecifier) {
+			for (ArrayDimensionSpecification arrayDimensionSpecification : arrayTypeSpecifier.getDimensions()) {
 				ArrayDimension arrayDimension = TypeSystemFactory.eINSTANCE.createArrayDimension();
 				if (arrayDimensionSpecification.getSize() != null && arrayDimensionSpecification.getSize() instanceof IntegerLiteral) {
 					IntegerLiteral integerLiteral = (IntegerLiteral) arrayDimensionSpecification.getSize();
@@ -133,7 +130,7 @@ public class DataTypeSpecifierEvaluator implements IDataTypeSpecifierEvaluator {
 				}
 				arrayType.getDimensions().add(arrayDimension);
 			}
-			arrayType.setElementType(elementType);
+			arrayType.setElementType(doSwitch(arrayTypeSpecifier.getElementType()));
 		}
 
 	}

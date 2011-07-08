@@ -104,9 +104,8 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Equation/leftHandSide"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//Equation/rightHandSide"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//DataTypeSpecifier">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//DataTypeSpecifier/dimensions"/>
-    </genClasses>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//DataTypeSpecifier"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//ScalarTypeSpecifier"/>
     <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//PrimitiveTypeSpecifier"/>
     <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//NumericTypeSpecifier">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//NumericTypeSpecifier/unit"/>
@@ -120,6 +119,11 @@
     <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//NamedTypeSpecifier">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//NamedTypeSpecifier/typeReference"/>
     </genClasses>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//ArrayTypeSpecifier">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//ArrayTypeSpecifier/elementType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//ArrayTypeSpecifier/dimensions"/>
+    </genClasses>
+    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//TensorTypeSpecifier"/>
     <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//ArrayDimensionSpecification">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//ArrayDimensionSpecification/size"/>
     </genClasses>
@@ -239,11 +243,7 @@
     </genClasses>
     <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//UnitExpressionFactor">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//UnitExpressionFactor/operand"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//UnitExpressionFactor/exponent"/>
-    </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//UnitExpressionExponent">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//UnitExpressionExponent/negative"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//UnitExpressionExponent/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//UnitExpressionFactor/exponent"/>
     </genClasses>
     <genClasses ecoreClass="platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//RangeExpression">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipselabs.mscript.language/src-gen/org/eclipselabs/mscript/language/Mscript.ecore#//RangeExpression/operands"/>

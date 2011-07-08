@@ -104,6 +104,9 @@ Equation :
  */
 
 DataTypeSpecifier :
+	ScalarTypeSpecifier | ArrayTypeSpecifier;
+	
+ScalarTypeSpecifier:
 	PrimitiveTypeSpecifier | NamedTypeSpecifier;
 	
 PrimitiveTypeSpecifier :
@@ -113,29 +116,35 @@ NumericTypeSpecifier :
 	RealTypeSpecifier | IntegerTypeSpecifier | ComplexTypeSpecifier | GaussianTypeSpecifier;
 	
 RealTypeSpecifier :
-	{RealTypeSpecifier} 'real' ('(' unit=UnitExpression ')')? ('[' dimensions+=ArrayDimensionSpecification (',' dimensions+=ArrayDimensionSpecification)* ']')?;
+	{RealTypeSpecifier} 'real' ('(' unit=UnitExpression ')')?;
 	
 IntegerTypeSpecifier :
-	{IntegerTypeSpecifier} 'int' ('(' unit=UnitExpression ')')? ('[' dimensions+=ArrayDimensionSpecification (',' dimensions+=ArrayDimensionSpecification)* ']')?;
+	{IntegerTypeSpecifier} 'int' ('(' unit=UnitExpression ')')?;
 	
 ComplexTypeSpecifier :
-	{ComplexTypeSpecifier} 'complex' ('(' unit=UnitExpression ')')? ('[' dimensions+=ArrayDimensionSpecification (',' dimensions+=ArrayDimensionSpecification)* ']')?;
+	{ComplexTypeSpecifier} 'complex' ('(' unit=UnitExpression ')')?;
 
 GaussianTypeSpecifier :
-	{GaussianTypeSpecifier} 'gauss' ('(' unit=UnitExpression ')')? ('[' dimensions+=ArrayDimensionSpecification (',' dimensions+=ArrayDimensionSpecification)* ']')?;
+	{GaussianTypeSpecifier} 'gauss' ('(' unit=UnitExpression ')')?;
 
 BooleanTypeSpecifier :
-	{BooleanTypeSpecifier} 'bool' ('[' dimensions+=ArrayDimensionSpecification (',' dimensions+=ArrayDimensionSpecification)* ']')?;
+	{BooleanTypeSpecifier} 'bool';
 	
 StringTypeSpecifier :
-	{StringTypeSpecifier} 'string' ('[' dimensions+=ArrayDimensionSpecification (',' dimensions+=ArrayDimensionSpecification)* ']')?;
+	{StringTypeSpecifier} 'string';
 	
 NamedTypeSpecifier :
-	typeReference=QualifiedName ('[' dimensions+=ArrayDimensionSpecification (',' dimensions+=ArrayDimensionSpecification)* ']')?;
+	typeReference=QualifiedName;
+	
+ArrayTypeSpecifier :
+	TensorTypeSpecifier | =>elementType=ScalarTypeSpecifier '[' dimensions+=ArrayDimensionSpecification (',' dimensions+=ArrayDimensionSpecification)* ']';
+	
+TensorTypeSpecifier :
+	elementType=NumericTypeSpecifier '[' dimensions+=ArrayDimensionSpecification (',' dimensions+=ArrayDimensionSpecification)* ']';
 	
 ArrayDimensionSpecification :
 	{ArrayDimensionSpecification} (size=Expression)?;
-	
+
 /*
  * Expressions
  */
@@ -336,8 +345,8 @@ UnitExpressionDenominator :
 UnitExpressionFactor :
 	operand=ID ('^' exponent=UnitExpressionExponent)?;
 
-UnitExpressionExponent :
-	(negative?='-')? value=INTEGER;
+UnitExpressionExponent returns ecore::EInt :
+	('-')? INTEGER;
 
 /*
  * Terminals

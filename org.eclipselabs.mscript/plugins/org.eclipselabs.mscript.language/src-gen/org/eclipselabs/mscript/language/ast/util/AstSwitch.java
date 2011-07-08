@@ -188,10 +188,19 @@ public class AstSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case AstPackage.SCALAR_TYPE_SPECIFIER:
+      {
+        ScalarTypeSpecifier scalarTypeSpecifier = (ScalarTypeSpecifier)theEObject;
+        T result = caseScalarTypeSpecifier(scalarTypeSpecifier);
+        if (result == null) result = caseDataTypeSpecifier(scalarTypeSpecifier);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case AstPackage.PRIMITIVE_TYPE_SPECIFIER:
       {
         PrimitiveTypeSpecifier primitiveTypeSpecifier = (PrimitiveTypeSpecifier)theEObject;
         T result = casePrimitiveTypeSpecifier(primitiveTypeSpecifier);
+        if (result == null) result = caseScalarTypeSpecifier(primitiveTypeSpecifier);
         if (result == null) result = caseDataTypeSpecifier(primitiveTypeSpecifier);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -201,6 +210,7 @@ public class AstSwitch<T> extends Switch<T>
         NumericTypeSpecifier numericTypeSpecifier = (NumericTypeSpecifier)theEObject;
         T result = caseNumericTypeSpecifier(numericTypeSpecifier);
         if (result == null) result = casePrimitiveTypeSpecifier(numericTypeSpecifier);
+        if (result == null) result = caseScalarTypeSpecifier(numericTypeSpecifier);
         if (result == null) result = caseDataTypeSpecifier(numericTypeSpecifier);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -211,6 +221,7 @@ public class AstSwitch<T> extends Switch<T>
         T result = caseRealTypeSpecifier(realTypeSpecifier);
         if (result == null) result = caseNumericTypeSpecifier(realTypeSpecifier);
         if (result == null) result = casePrimitiveTypeSpecifier(realTypeSpecifier);
+        if (result == null) result = caseScalarTypeSpecifier(realTypeSpecifier);
         if (result == null) result = caseDataTypeSpecifier(realTypeSpecifier);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -221,6 +232,7 @@ public class AstSwitch<T> extends Switch<T>
         T result = caseIntegerTypeSpecifier(integerTypeSpecifier);
         if (result == null) result = caseNumericTypeSpecifier(integerTypeSpecifier);
         if (result == null) result = casePrimitiveTypeSpecifier(integerTypeSpecifier);
+        if (result == null) result = caseScalarTypeSpecifier(integerTypeSpecifier);
         if (result == null) result = caseDataTypeSpecifier(integerTypeSpecifier);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -231,6 +243,7 @@ public class AstSwitch<T> extends Switch<T>
         T result = caseComplexTypeSpecifier(complexTypeSpecifier);
         if (result == null) result = caseNumericTypeSpecifier(complexTypeSpecifier);
         if (result == null) result = casePrimitiveTypeSpecifier(complexTypeSpecifier);
+        if (result == null) result = caseScalarTypeSpecifier(complexTypeSpecifier);
         if (result == null) result = caseDataTypeSpecifier(complexTypeSpecifier);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -241,6 +254,7 @@ public class AstSwitch<T> extends Switch<T>
         T result = caseGaussianTypeSpecifier(gaussianTypeSpecifier);
         if (result == null) result = caseNumericTypeSpecifier(gaussianTypeSpecifier);
         if (result == null) result = casePrimitiveTypeSpecifier(gaussianTypeSpecifier);
+        if (result == null) result = caseScalarTypeSpecifier(gaussianTypeSpecifier);
         if (result == null) result = caseDataTypeSpecifier(gaussianTypeSpecifier);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -250,6 +264,7 @@ public class AstSwitch<T> extends Switch<T>
         BooleanTypeSpecifier booleanTypeSpecifier = (BooleanTypeSpecifier)theEObject;
         T result = caseBooleanTypeSpecifier(booleanTypeSpecifier);
         if (result == null) result = casePrimitiveTypeSpecifier(booleanTypeSpecifier);
+        if (result == null) result = caseScalarTypeSpecifier(booleanTypeSpecifier);
         if (result == null) result = caseDataTypeSpecifier(booleanTypeSpecifier);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -259,6 +274,7 @@ public class AstSwitch<T> extends Switch<T>
         StringTypeSpecifier stringTypeSpecifier = (StringTypeSpecifier)theEObject;
         T result = caseStringTypeSpecifier(stringTypeSpecifier);
         if (result == null) result = casePrimitiveTypeSpecifier(stringTypeSpecifier);
+        if (result == null) result = caseScalarTypeSpecifier(stringTypeSpecifier);
         if (result == null) result = caseDataTypeSpecifier(stringTypeSpecifier);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -267,7 +283,25 @@ public class AstSwitch<T> extends Switch<T>
       {
         NamedTypeSpecifier namedTypeSpecifier = (NamedTypeSpecifier)theEObject;
         T result = caseNamedTypeSpecifier(namedTypeSpecifier);
+        if (result == null) result = caseScalarTypeSpecifier(namedTypeSpecifier);
         if (result == null) result = caseDataTypeSpecifier(namedTypeSpecifier);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AstPackage.ARRAY_TYPE_SPECIFIER:
+      {
+        ArrayTypeSpecifier arrayTypeSpecifier = (ArrayTypeSpecifier)theEObject;
+        T result = caseArrayTypeSpecifier(arrayTypeSpecifier);
+        if (result == null) result = caseDataTypeSpecifier(arrayTypeSpecifier);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case AstPackage.TENSOR_TYPE_SPECIFIER:
+      {
+        TensorTypeSpecifier tensorTypeSpecifier = (TensorTypeSpecifier)theEObject;
+        T result = caseTensorTypeSpecifier(tensorTypeSpecifier);
+        if (result == null) result = caseArrayTypeSpecifier(tensorTypeSpecifier);
+        if (result == null) result = caseDataTypeSpecifier(tensorTypeSpecifier);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -546,13 +580,6 @@ public class AstSwitch<T> extends Switch<T>
       {
         UnitExpressionFactor unitExpressionFactor = (UnitExpressionFactor)theEObject;
         T result = caseUnitExpressionFactor(unitExpressionFactor);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case AstPackage.UNIT_EXPRESSION_EXPONENT:
-      {
-        UnitExpressionExponent unitExpressionExponent = (UnitExpressionExponent)theEObject;
-        T result = caseUnitExpressionExponent(unitExpressionExponent);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -913,6 +940,22 @@ public class AstSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>Scalar Type Specifier</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Scalar Type Specifier</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseScalarTypeSpecifier(ScalarTypeSpecifier object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>Primitive Type Specifier</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -1052,6 +1095,38 @@ public class AstSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseNamedTypeSpecifier(NamedTypeSpecifier object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Array Type Specifier</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Array Type Specifier</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseArrayTypeSpecifier(ArrayTypeSpecifier object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Tensor Type Specifier</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Tensor Type Specifier</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseTensorTypeSpecifier(TensorTypeSpecifier object)
   {
     return null;
   }
@@ -1628,22 +1703,6 @@ public class AstSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseUnitExpressionFactor(UnitExpressionFactor object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Unit Expression Exponent</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Unit Expression Exponent</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseUnitExpressionExponent(UnitExpressionExponent object)
   {
     return null;
   }
