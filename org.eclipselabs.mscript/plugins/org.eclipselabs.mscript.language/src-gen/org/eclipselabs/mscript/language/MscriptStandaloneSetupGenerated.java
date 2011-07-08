@@ -35,9 +35,6 @@ public class MscriptStandaloneSetupGenerated implements ISetup {
 	}
 	
 	public void register(Injector injector) {
-	if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipselabs.org/mscript/AST/1.0.0")) {
-		EPackage.Registry.INSTANCE.put("http://www.eclipselabs.org/mscript/AST/1.0.0", org.eclipselabs.mscript.language.ast.AstPackage.eINSTANCE);
-	}
 
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
 		org.eclipse.xtext.resource.IResourceServiceProvider serviceProvider = injector.getInstance(org.eclipse.xtext.resource.IResourceServiceProvider.class);

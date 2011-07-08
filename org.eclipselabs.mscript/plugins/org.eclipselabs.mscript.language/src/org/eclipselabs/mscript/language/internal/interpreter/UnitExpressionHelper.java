@@ -96,11 +96,7 @@ public class UnitExpressionHelper {
 			}
 		}
 				
-		// TODO: use factor.isSetExponent() after switching to imported Ecore model
-		int exponent = factor.getExponent();
-		if (exponent == 0) {
-			exponent = 1;
-		}
+		int exponent = factor.isSetExponent() ? factor.getExponent() : 1;
 		
 		if (reciprocal) {
 			exponent = -exponent;
