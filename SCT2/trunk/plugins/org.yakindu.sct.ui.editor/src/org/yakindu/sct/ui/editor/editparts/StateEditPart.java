@@ -10,6 +10,10 @@
  */
 package org.yakindu.sct.ui.editor.editparts;
 
+import java.util.List;
+import java.util.Set;
+
+import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.GridData;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.StackLayout;
@@ -142,18 +146,16 @@ public class StateEditPart extends ShapeNodeEditPart implements
 
 	@Override
 	protected void refreshBounds() {
-		// mark area covered by blur shadow as dirty (an update is forced at the
-		// end of this method to ensure the area gets repainted)
-		// TODO: this is a simple workaround that only handles the case that the
-		// blur shadow area lies completely within the direct parent figure; we
-		// would have to perform an intersection testing which all figures
-		// covered by the bounds to fix completely
+		// mark all figures covered by the blur shadow extended bounds as dirty
+		// (an update is enforced at the end of this method to ensure the area
+		// gets repainted)
 		NodeFigure nodeFigure = getNodeFigure();
 		Rectangle extendedBlurShadowBounds = nodeFigure.getBounds()
 				.getExpanded(new Insets(StateFigure.BLUR_SHADOW_WIDTH));
-		nodeFigure.getParent().translateToParent(extendedBlurShadowBounds);
-		nodeFigure.getUpdateManager().addDirtyRegion(
-				getNodeFigure().getParent(), extendedBlurShadowBounds);
+		nodeFigure.translateToAbsolute(extendedBlurShadowBounds);
+		markDirtyIfIntersecting(
+				org.eclipse.draw2d.FigureUtilities.getRoot(nodeFigure),
+				extendedBlurShadowBounds);
 
 		int width = ((Integer) getStructuralFeatureValue(NotationPackage.eINSTANCE
 				.getSize_Width())).intValue();
@@ -180,8 +182,33 @@ public class StateEditPart extends ShapeNodeEditPart implements
 					new ResizableEditPolicyEx());
 		}
 
-		// ensure repaint is performed (so blur shadow is overpainted)
+		// ensure repaint is performed (so blur shadow covered area is
+		// repainted)
 		nodeFigure.getUpdateManager().performUpdate();
+	}
+
+	/**
+	 * Helper method which descends the figure tree beginning with the given
+	 * figure and marks all figures dirty, whose bounds intersect with the given
+	 * absolute bounds.
+	 * 
+	 * @param figure
+	 *            The figure whose (transitive) children will be processed
+	 * @param absoluteBounds
+	 *            The bounds used for intersection testing in absolute
+	 *            coordinates
+	 */
+	private void markDirtyIfIntersecting(IFigure figure,
+			Rectangle absoluteBounds) {
+		Rectangle translatedBounds = absoluteBounds;
+		figure.translateToRelative(translatedBounds);
+		if (figure.getBounds().intersects(translatedBounds)) {
+			figure.getUpdateManager().addDirtyRegion(figure, translatedBounds);
+		}
+		// process all children transitively
+		for (Object child : figure.getChildren()) {
+			markDirtyIfIntersecting((IFigure) child, absoluteBounds);
+		}
 	}
 
 	private Compartment getFigureCompartment() {
