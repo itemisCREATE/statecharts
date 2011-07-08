@@ -14,6 +14,7 @@ import org.eclipse.draw2d.GridData;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.StackLayout;
 import org.eclipse.draw2d.geometry.Dimension;
+import org.eclipse.draw2d.geometry.Insets;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.common.notify.Notification;
@@ -141,6 +142,19 @@ public class StateEditPart extends ShapeNodeEditPart implements
 
 	@Override
 	protected void refreshBounds() {
+		// mark area covered by blur shadow as dirty (an update is forced at the
+		// end of this method to ensure the area gets repainted)
+		// TODO: this is a simple workaround that only handles the case that the
+		// blur shadow area lies completely within the direct parent figure; we
+		// would have to perform an intersection testing which all figures
+		// covered by the bounds to fix completely
+		NodeFigure nodeFigure = getNodeFigure();
+		Rectangle extendedBlurShadowBounds = nodeFigure.getBounds()
+				.getExpanded(new Insets(StateFigure.BLUR_SHADOW_WIDTH));
+		nodeFigure.getParent().translateToParent(extendedBlurShadowBounds);
+		nodeFigure.getUpdateManager().addDirtyRegion(
+				getNodeFigure().getParent(), extendedBlurShadowBounds);
+
 		int width = ((Integer) getStructuralFeatureValue(NotationPackage.eINSTANCE
 				.getSize_Width())).intValue();
 		int height = ((Integer) getStructuralFeatureValue(NotationPackage.eINSTANCE
@@ -165,6 +179,9 @@ public class StateEditPart extends ShapeNodeEditPart implements
 			installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE,
 					new ResizableEditPolicyEx());
 		}
+
+		// ensure repaint is performed (so blur shadow is overpainted)
+		nodeFigure.getUpdateManager().performUpdate();
 	}
 
 	private Compartment getFigureCompartment() {

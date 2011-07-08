@@ -36,7 +36,7 @@ import org.yakindu.sct.ui.editor.editor.figures.utils.GridDataFactory;
  */
 public class StateFigure extends RoundedRectangle {
 
-	private static final int BLUR_SHADOW_WIDTH = 5;
+	public static final int BLUR_SHADOW_WIDTH = 5;
 
 	private WrappingLabel nameFigure;
 	private Figure figureCompartmentPane;
