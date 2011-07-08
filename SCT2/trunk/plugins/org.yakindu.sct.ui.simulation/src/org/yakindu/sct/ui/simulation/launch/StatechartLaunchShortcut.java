@@ -25,6 +25,7 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IEditorPart;
 import org.yakindu.sct.core.simulation.launch.IStatechartLaunchConfigurationType;
+import org.yakindu.sct.core.simulation.launch.IStatechartLaunchParameters;
 
 /**
  * 
@@ -32,7 +33,7 @@ import org.yakindu.sct.core.simulation.launch.IStatechartLaunchConfigurationType
  * 
  */
 public class StatechartLaunchShortcut implements ILaunchShortcut,
-		IStatechartLaunchConfigurationType {
+		IStatechartLaunchConfigurationType, IStatechartLaunchParameters {
 
 	public void launch(ISelection selection, String mode) {
 		if (selection instanceof IStructuredSelection) {
@@ -67,7 +68,10 @@ public class StatechartLaunchShortcut implements ILaunchShortcut,
 			ILaunchConfigurationWorkingCopy newConfig = configType.newInstance(
 					null, launchManager.generateLaunchConfigurationName(file
 							.getName()));
+
+			newConfig.setAttribute(FILE_NAME, file.getFullPath().toFile().getAbsolutePath());
 			return newConfig.doSave();
+			
 		} catch (CoreException e) {
 			e.printStackTrace();
 		}
