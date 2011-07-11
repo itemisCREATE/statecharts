@@ -14,6 +14,7 @@ package org.eclipselabs.mscript.computation.core.value;
 import org.eclipselabs.mscript.computation.core.IComputationContext;
 import org.eclipselabs.mscript.typesystem.ArrayType;
 import org.eclipselabs.mscript.typesystem.TensorType;
+import org.eclipselabs.mscript.typesystem.util.TypeSystemUtil;
 
 /**
  * @author Andreas Unger
@@ -33,7 +34,7 @@ public class ArrayValue extends AbstractExplicitDataTypeValue implements IArrayV
 			throw new IllegalArgumentException("Array type must not be tensor type");
 		}
 		if (dataType.getDimensionality() == 1) {
-			if (elements.length != dataType.getSize()) {
+			if (elements.length != TypeSystemUtil.getArraySize(dataType)) {
 				throw new IllegalArgumentException("Number of elements must be equal to array size");
 			}
 			this.elements = elements;

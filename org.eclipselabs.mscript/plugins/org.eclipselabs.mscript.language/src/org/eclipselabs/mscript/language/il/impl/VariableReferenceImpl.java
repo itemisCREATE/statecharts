@@ -14,9 +14,9 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.il.ILPackage;
 import org.eclipselabs.mscript.language.il.VariableReference;
+import org.eclipselabs.mscript.typesystem.Expression;
 
 /**
  * <!-- begin-user-doc -->

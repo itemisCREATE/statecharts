@@ -12,8 +12,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipselabs.mscript.language.ast.AstPackage;
-import org.eclipselabs.mscript.language.ast.PrimitiveTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.TypeAliasDefinition;
+import org.eclipselabs.mscript.typesystem.PrimitiveType;
 
 /**
  * <!-- begin-user-doc -->
@@ -37,7 +37,7 @@ public class TypeAliasDefinitionImpl extends DataTypeDefinitionImpl implements T
 	 * @generated
 	 * @ordered
 	 */
-	protected PrimitiveTypeSpecifier type;
+	protected PrimitiveType type;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -63,7 +63,7 @@ public class TypeAliasDefinitionImpl extends DataTypeDefinitionImpl implements T
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public PrimitiveTypeSpecifier getType() {
+	public PrimitiveType getType() {
 		return type;
 	}
 
@@ -72,8 +72,8 @@ public class TypeAliasDefinitionImpl extends DataTypeDefinitionImpl implements T
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetType(PrimitiveTypeSpecifier newType, NotificationChain msgs) {
-		PrimitiveTypeSpecifier oldType = type;
+	public NotificationChain basicSetType(PrimitiveType newType, NotificationChain msgs) {
+		PrimitiveType oldType = type;
 		type = newType;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.TYPE_ALIAS_DEFINITION__TYPE, oldType, newType);
@@ -87,7 +87,7 @@ public class TypeAliasDefinitionImpl extends DataTypeDefinitionImpl implements T
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setType(PrimitiveTypeSpecifier newType) {
+	public void setType(PrimitiveType newType) {
 		if (newType != type) {
 			NotificationChain msgs = null;
 			if (type != null)
@@ -138,7 +138,7 @@ public class TypeAliasDefinitionImpl extends DataTypeDefinitionImpl implements T
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case AstPackage.TYPE_ALIAS_DEFINITION__TYPE:
-				setType((PrimitiveTypeSpecifier)newValue);
+				setType((PrimitiveType)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -153,7 +153,7 @@ public class TypeAliasDefinitionImpl extends DataTypeDefinitionImpl implements T
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case AstPackage.TYPE_ALIAS_DEFINITION__TYPE:
-				setType((PrimitiveTypeSpecifier)null);
+				setType((PrimitiveType)null);
 				return;
 		}
 		super.eUnset(featureID);

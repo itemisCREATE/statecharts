@@ -10,7 +10,7 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Unit Factor</b></em>'.
+ * A representation of the model object '<em><b>Unit Expression Factor</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
@@ -28,7 +28,6 @@ import org.eclipse.emf.ecore.EObject;
 public interface UnitFactor extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Symbol</b></em>' attribute.
-	 * The literals are from the enumeration {@link org.eclipselabs.mscript.typesystem.UnitSymbol}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Symbol</em>' attribute isn't clear,
@@ -36,27 +35,26 @@ public interface UnitFactor extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Symbol</em>' attribute.
-	 * @see org.eclipselabs.mscript.typesystem.UnitSymbol
-	 * @see #setSymbol(UnitSymbol)
+	 * @see #setSymbol(String)
 	 * @see org.eclipselabs.mscript.typesystem.TypeSystemPackage#getUnitFactor_Symbol()
-	 * @model required="true" ordered="false"
+	 * @model
 	 * @generated
 	 */
-	UnitSymbol getSymbol();
+	String getSymbol();
 
 	/**
 	 * Sets the value of the '{@link org.eclipselabs.mscript.typesystem.UnitFactor#getSymbol <em>Symbol</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Symbol</em>' attribute.
-	 * @see org.eclipselabs.mscript.typesystem.UnitSymbol
 	 * @see #getSymbol()
 	 * @generated
 	 */
-	void setSymbol(UnitSymbol value);
+	void setSymbol(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Exponent</b></em>' attribute.
+	 * The default value is <code>"1"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Exponent</em>' attribute isn't clear,
@@ -66,7 +64,7 @@ public interface UnitFactor extends EObject {
 	 * @return the value of the '<em>Exponent</em>' attribute.
 	 * @see #setExponent(int)
 	 * @see org.eclipselabs.mscript.typesystem.TypeSystemPackage#getUnitFactor_Exponent()
-	 * @model required="true" ordered="false"
+	 * @model default="1"
 	 * @generated
 	 */
 	int getExponent();
@@ -81,4 +79,4 @@ public interface UnitFactor extends EObject {
 	 */
 	void setExponent(int value);
 
-} // UnitFactor
+} // UnitExpressionFactor

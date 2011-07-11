@@ -66,9 +66,6 @@ public class ArrayTypeItemProvider
 
 			addElementTypePropertyDescriptor(object);
 			addDimensionalityPropertyDescriptor(object);
-			addSizePropertyDescriptor(object);
-			addRowSizePropertyDescriptor(object);
-			addColumnSizePropertyDescriptor(object);
 			addDimensionalPropertyDescriptor(object);
 			addMultidimensionalPropertyDescriptor(object);
 		}
@@ -111,72 +108,6 @@ public class ArrayTypeItemProvider
 				 getString("_UI_ArrayType_dimensionality_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_ArrayType_dimensionality_feature", "_UI_ArrayType_type"),
 				 TypeSystemPackage.Literals.ARRAY_TYPE__DIMENSIONALITY,
-				 false,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Size feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addSizePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_ArrayType_size_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ArrayType_size_feature", "_UI_ArrayType_type"),
-				 TypeSystemPackage.Literals.ARRAY_TYPE__SIZE,
-				 false,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Row Size feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addRowSizePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_ArrayType_rowSize_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ArrayType_rowSize_feature", "_UI_ArrayType_type"),
-				 TypeSystemPackage.Literals.ARRAY_TYPE__ROW_SIZE,
-				 false,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Column Size feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addColumnSizePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_ArrayType_columnSize_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ArrayType_columnSize_feature", "_UI_ArrayType_type"),
-				 TypeSystemPackage.Literals.ARRAY_TYPE__COLUMN_SIZE,
 				 false,
 				 false,
 				 false,
@@ -241,6 +172,7 @@ public class ArrayTypeItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
+			childrenFeatures.add(TypeSystemPackage.Literals.ARRAY_TYPE__DEFINED_ELEMENT_TYPE);
 			childrenFeatures.add(TypeSystemPackage.Literals.ARRAY_TYPE__DIMENSIONS);
 		}
 		return childrenFeatures;
@@ -295,13 +227,11 @@ public class ArrayTypeItemProvider
 
 		switch (notification.getFeatureID(ArrayType.class)) {
 			case TypeSystemPackage.ARRAY_TYPE__DIMENSIONALITY:
-			case TypeSystemPackage.ARRAY_TYPE__SIZE:
-			case TypeSystemPackage.ARRAY_TYPE__ROW_SIZE:
-			case TypeSystemPackage.ARRAY_TYPE__COLUMN_SIZE:
 			case TypeSystemPackage.ARRAY_TYPE__DIMENSIONAL:
 			case TypeSystemPackage.ARRAY_TYPE__MULTIDIMENSIONAL:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
+			case TypeSystemPackage.ARRAY_TYPE__DEFINED_ELEMENT_TYPE:
 			case TypeSystemPackage.ARRAY_TYPE__DIMENSIONS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -319,6 +249,71 @@ public class ArrayTypeItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypeSystemPackage.Literals.ARRAY_TYPE__DEFINED_ELEMENT_TYPE,
+				 TypeSystemFactory.eINSTANCE.createInvalidDataType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypeSystemPackage.Literals.ARRAY_TYPE__DEFINED_ELEMENT_TYPE,
+				 TypeSystemFactory.eINSTANCE.createAnyDataType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypeSystemPackage.Literals.ARRAY_TYPE__DEFINED_ELEMENT_TYPE,
+				 TypeSystemFactory.eINSTANCE.createUnitType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypeSystemPackage.Literals.ARRAY_TYPE__DEFINED_ELEMENT_TYPE,
+				 TypeSystemFactory.eINSTANCE.createPrimitiveType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypeSystemPackage.Literals.ARRAY_TYPE__DEFINED_ELEMENT_TYPE,
+				 TypeSystemFactory.eINSTANCE.createNumericType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypeSystemPackage.Literals.ARRAY_TYPE__DEFINED_ELEMENT_TYPE,
+				 TypeSystemFactory.eINSTANCE.createRealType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypeSystemPackage.Literals.ARRAY_TYPE__DEFINED_ELEMENT_TYPE,
+				 TypeSystemFactory.eINSTANCE.createIntegerType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypeSystemPackage.Literals.ARRAY_TYPE__DEFINED_ELEMENT_TYPE,
+				 TypeSystemFactory.eINSTANCE.createComplexType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypeSystemPackage.Literals.ARRAY_TYPE__DEFINED_ELEMENT_TYPE,
+				 TypeSystemFactory.eINSTANCE.createGaussianType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypeSystemPackage.Literals.ARRAY_TYPE__DEFINED_ELEMENT_TYPE,
+				 TypeSystemFactory.eINSTANCE.createBooleanType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypeSystemPackage.Literals.ARRAY_TYPE__DEFINED_ELEMENT_TYPE,
+				 TypeSystemFactory.eINSTANCE.createStringType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypeSystemPackage.Literals.ARRAY_TYPE__DEFINED_ELEMENT_TYPE,
+				 TypeSystemFactory.eINSTANCE.createArrayType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypeSystemPackage.Literals.ARRAY_TYPE__DEFINED_ELEMENT_TYPE,
+				 TypeSystemFactory.eINSTANCE.createTensorType()));
 
 		newChildDescriptors.add
 			(createChildParameter

@@ -11,7 +11,7 @@
 
 package org.eclipselabs.mscript.codegen.c;
 
-import org.eclipselabs.mscript.language.ast.Expression;
+import org.eclipselabs.mscript.typesystem.Expression;
 
 /**
  * @author Andreas Unger

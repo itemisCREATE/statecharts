@@ -17,7 +17,7 @@ import org.eclipselabs.mscript.typesystem.Unit;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Numeric Type</b></em>'.
+ * An implementation of the model object '<em><b>Numeric Type Specifier</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
@@ -28,7 +28,7 @@ import org.eclipselabs.mscript.typesystem.Unit;
  *
  * @generated
  */
-public abstract class NumericTypeImpl extends PrimitiveTypeImpl implements NumericType {
+public class NumericTypeImpl extends PrimitiveTypeImpl implements NumericType {
 	/**
 	 * The cached value of the '{@link #getUnit() <em>Unit</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -38,15 +38,6 @@ public abstract class NumericTypeImpl extends PrimitiveTypeImpl implements Numer
 	 * @ordered
 	 */
 	protected Unit unit;
-
-	/**
-	 * This is true if the Unit containment reference has been set.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean unitESet;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -84,10 +75,8 @@ public abstract class NumericTypeImpl extends PrimitiveTypeImpl implements Numer
 	public NotificationChain basicSetUnit(Unit newUnit, NotificationChain msgs) {
 		Unit oldUnit = unit;
 		unit = newUnit;
-		boolean oldUnitESet = unitESet;
-		unitESet = true;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TypeSystemPackage.NUMERIC_TYPE__UNIT, oldUnit, newUnit, !oldUnitESet);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TypeSystemPackage.NUMERIC_TYPE__UNIT, oldUnit, newUnit);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -108,58 +97,8 @@ public abstract class NumericTypeImpl extends PrimitiveTypeImpl implements Numer
 			msgs = basicSetUnit(newUnit, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
-		else {
-			boolean oldUnitESet = unitESet;
-			unitESet = true;
-			if (eNotificationRequired())
-				eNotify(new ENotificationImpl(this, Notification.SET, TypeSystemPackage.NUMERIC_TYPE__UNIT, newUnit, newUnit, !oldUnitESet));
-		}
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicUnsetUnit(NotificationChain msgs) {
-		Unit oldUnit = unit;
-		unit = null;
-		boolean oldUnitESet = unitESet;
-		unitESet = false;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.UNSET, TypeSystemPackage.NUMERIC_TYPE__UNIT, oldUnit, null, oldUnitESet);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void unsetUnit() {
-		if (unit != null) {
-			NotificationChain msgs = null;
-			msgs = ((InternalEObject)unit).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TypeSystemPackage.NUMERIC_TYPE__UNIT, null, msgs);
-			msgs = basicUnsetUnit(msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else {
-			boolean oldUnitESet = unitESet;
-			unitESet = false;
-			if (eNotificationRequired())
-				eNotify(new ENotificationImpl(this, Notification.UNSET, TypeSystemPackage.NUMERIC_TYPE__UNIT, null, null, oldUnitESet));
-		}
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isSetUnit() {
-		return unitESet;
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TypeSystemPackage.NUMERIC_TYPE__UNIT, newUnit, newUnit));
 	}
 
 	/**
@@ -171,7 +110,7 @@ public abstract class NumericTypeImpl extends PrimitiveTypeImpl implements Numer
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case TypeSystemPackage.NUMERIC_TYPE__UNIT:
-				return basicUnsetUnit(msgs);
+				return basicSetUnit(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -214,7 +153,7 @@ public abstract class NumericTypeImpl extends PrimitiveTypeImpl implements Numer
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case TypeSystemPackage.NUMERIC_TYPE__UNIT:
-				unsetUnit();
+				setUnit((Unit)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -229,9 +168,9 @@ public abstract class NumericTypeImpl extends PrimitiveTypeImpl implements Numer
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case TypeSystemPackage.NUMERIC_TYPE__UNIT:
-				return isSetUnit();
+				return unit != null;
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //NumericTypeImpl
+} //NumericTypeSpecifierImpl

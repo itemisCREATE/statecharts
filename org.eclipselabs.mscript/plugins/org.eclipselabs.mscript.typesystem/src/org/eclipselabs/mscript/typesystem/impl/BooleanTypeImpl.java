@@ -15,7 +15,7 @@ import org.eclipselabs.mscript.typesystem.internal.operations.BooleanTypeOperati
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Boolean Type</b></em>'.
+ * An implementation of the model object '<em><b>Boolean Type Specifier</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
@@ -41,25 +41,21 @@ public class BooleanTypeImpl extends PrimitiveTypeImpl implements BooleanType {
 	protected EClass eStaticClass() {
 		return TypeSystemPackage.Literals.BOOLEAN_TYPE;
 	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
+	
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.typesystem.impl.DataTypeImpl#evaluate(org.eclipselabs.mscript.typesystem.OperatorKind, org.eclipselabs.mscript.typesystem.DataType)
 	 */
 	@Override
 	public DataType evaluate(OperatorKind operator, DataType other) {
 		return BooleanTypeOperations.evaluate(this, operator, other);
 	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
+	
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.typesystem.impl.DataTypeImpl#isAssignableFrom(org.eclipselabs.mscript.typesystem.DataType)
 	 */
 	@Override
 	public boolean isAssignableFrom(DataType other) {
 		return BooleanTypeOperations.isAssignableFrom(this, other);
 	}
 
-} //BooleanTypeImpl
+} //BooleanTypeSpecifierImpl

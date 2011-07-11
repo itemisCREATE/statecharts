@@ -1,9 +1,14 @@
-/**
- * <copyright>
- * </copyright>
+/****************************************************************************
+ * Copyright (c) 2008, 2011 Andreas Unger and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  *
- * $Id$
- */
+ * Contributors:
+ *    Andreas Unger - initial API and implementation 
+ ****************************************************************************/
+
 package org.eclipselabs.mscript.typesystem.internal.operations;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -15,50 +20,23 @@ import org.eclipselabs.mscript.typesystem.TensorType;
 import org.eclipselabs.mscript.typesystem.TypeSystemFactory;
 import org.eclipselabs.mscript.typesystem.util.TypeSystemUtil;
 
-/**
- * <!-- begin-user-doc -->
- * A static utility class that provides operations related to '<em><b>Tensor Type</b></em>' model objects.
- * <!-- end-user-doc -->
- *
- * <p>
- * The following operations are supported:
- * <ul>
- *   <li>{@link org.eclipselabs.mscript.typesystem.TensorType#evaluate(org.eclipselabs.mscript.typesystem.OperatorKind, org.eclipselabs.mscript.typesystem.DataType) <em>Evaluate</em>}</li>
- * </ul>
- * </p>
- *
- * @generated
- */
 public class TensorTypeOperations extends ArrayTypeOperations {
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected TensorTypeOperations() {
-		super();
-	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public static  DataType evaluate(TensorType tensorType, OperatorKind operator, DataType other) {
+	public static DataType evaluate(TensorType tensorType, OperatorKind operator, DataType other) {
 		switch (operator) {
-		case ADDITION:
+		case ADD:
 			return evaluateElementWise(tensorType, operator, other);
-		case SUBTRACTION:
+		case SUBTRACT:
 			return evaluateElementWise(tensorType, operator, other);
-		case MULTIPLICATION:
+		case MULTIPLY:
 			return evaluateMultiply(tensorType, other);
-		case DIVISION:
+		case DIVIDE:
 			return evaluateDivide(tensorType, other);
-		case ELEMENT_WISE_MULTIPLICATION:
+		case ELEMENT_WISE_MULTIPLY:
 			return evaluateElementWise(tensorType, operator, other);
-		case ELEMENT_WISE_DIVISION:
+		case ELEMENT_WISE_DIVIDE:
 			return evaluateElementWise(tensorType, operator, other);
-		case UNARY_MINUS:
+		case NEGATE:
 			return EcoreUtil.copy(tensorType);
 		}
 		return TypeSystemFactory.eINSTANCE.createInvalidDataType();
@@ -66,7 +44,7 @@ public class TensorTypeOperations extends ArrayTypeOperations {
 	
 	private static DataType evaluateElementWise(TensorType tensorType, OperatorKind operator, DataType other) {
 		if (other instanceof NumericType) {
-			if (operator == OperatorKind.ELEMENT_WISE_MULTIPLICATION || operator == OperatorKind.ELEMENT_WISE_DIVISION) {
+			if (operator == OperatorKind.ELEMENT_WISE_MULTIPLY || operator == OperatorKind.ELEMENT_WISE_DIVIDE) {
 				return evaluateElementWiseScalar(tensorType, operator, (NumericType) other);
 			}
 		} else if (other instanceof TensorType) {
@@ -100,7 +78,7 @@ public class TensorTypeOperations extends ArrayTypeOperations {
 	
 	private static DataType evaluateMultiply(TensorType tensorType, DataType other) {
 		if (other instanceof NumericType) {
-			return evaluateElementWiseScalar(tensorType, OperatorKind.MULTIPLICATION, (NumericType) other);
+			return evaluateElementWiseScalar(tensorType, OperatorKind.MULTIPLY, (NumericType) other);
 		}
 		if (!(other instanceof TensorType)) {
 			return TypeSystemFactory.eINSTANCE.createInvalidDataType();
@@ -112,22 +90,22 @@ public class TensorTypeOperations extends ArrayTypeOperations {
 		int columnSize;
 		
 		if (tensorType.isVector()) {
-			if (!otherTensorType.isVector() || tensorType.getSize() != otherTensorType.getSize()) {
+			if (!otherTensorType.isVector() || TypeSystemUtil.getArraySize(tensorType) != TypeSystemUtil.getArraySize(otherTensorType)) {
 				return TypeSystemFactory.eINSTANCE.createInvalidDataType();
 			}
 			rowSize = 1;
 			columnSize = 1;
 		} else if (tensorType.isMatrix()) {
-			if (!otherTensorType.isMatrix() || tensorType.getColumnSize() != otherTensorType.getRowSize()) {
+			if (!otherTensorType.isMatrix() || TypeSystemUtil.getArrayColumnSize(tensorType) !=  TypeSystemUtil.getArrayRowSize(otherTensorType)) {
 				return TypeSystemFactory.eINSTANCE.createInvalidDataType();
 			}
-			rowSize = tensorType.getRowSize();
-			columnSize = otherTensorType.getColumnSize();
+			rowSize =  TypeSystemUtil.getArrayRowSize(tensorType);
+			columnSize = TypeSystemUtil.getArrayColumnSize(otherTensorType);
 		} else {
 			return TypeSystemFactory.eINSTANCE.createInvalidDataType();
 		}
 		
-		DataType elementType = tensorType.getElementType().evaluate(OperatorKind.MULTIPLICATION, otherTensorType.getElementType());
+		DataType elementType = tensorType.getElementType().evaluate(OperatorKind.MULTIPLY, otherTensorType.getElementType());
 		if (elementType instanceof InvalidDataType) {
 			return elementType;
 		}
@@ -144,10 +122,10 @@ public class TensorTypeOperations extends ArrayTypeOperations {
 	
 	private static DataType evaluateDivide(TensorType tensorType, DataType other) {
 		if (other instanceof NumericType) {
-			return evaluateElementWiseScalar(tensorType, OperatorKind.DIVISION, (NumericType) other);
+			return evaluateElementWiseScalar(tensorType, OperatorKind.DIVIDE, (NumericType) other);
 		}
 		// TODO
 		return TypeSystemFactory.eINSTANCE.createInvalidDataType();
 	}
 
-} // TensorTypeOperations
+}

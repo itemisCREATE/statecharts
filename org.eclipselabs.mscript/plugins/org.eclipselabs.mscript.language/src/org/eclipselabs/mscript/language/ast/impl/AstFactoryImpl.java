@@ -18,19 +18,13 @@ import org.eclipselabs.mscript.language.ast.AdditiveOperator;
 import org.eclipselabs.mscript.language.ast.ArrayConcatenationOperator;
 import org.eclipselabs.mscript.language.ast.ArrayConstructionIterationClause;
 import org.eclipselabs.mscript.language.ast.ArrayConstructionOperator;
-import org.eclipselabs.mscript.language.ast.ArrayDimensionSpecification;
 import org.eclipselabs.mscript.language.ast.ArrayElementAccess;
 import org.eclipselabs.mscript.language.ast.ArraySubscript;
-import org.eclipselabs.mscript.language.ast.ArrayTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.Assertion;
 import org.eclipselabs.mscript.language.ast.AssertionStatusKind;
 import org.eclipselabs.mscript.language.ast.AstFactory;
 import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.BeginExpression;
-import org.eclipselabs.mscript.language.ast.BooleanKind;
-import org.eclipselabs.mscript.language.ast.BooleanLiteral;
-import org.eclipselabs.mscript.language.ast.BooleanTypeSpecifier;
-import org.eclipselabs.mscript.language.ast.ComplexTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.DataTypeDefinition;
 import org.eclipselabs.mscript.language.ast.DataTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.Definition;
@@ -40,23 +34,18 @@ import org.eclipselabs.mscript.language.ast.EnumerationLiteralDeclaration;
 import org.eclipselabs.mscript.language.ast.EqualityExpression;
 import org.eclipselabs.mscript.language.ast.EqualityOperator;
 import org.eclipselabs.mscript.language.ast.Equation;
-import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.ast.ExpressionList;
 import org.eclipselabs.mscript.language.ast.FeatureCall;
 import org.eclipselabs.mscript.language.ast.FeatureCallPart;
 import org.eclipselabs.mscript.language.ast.FunctionDefinition;
 import org.eclipselabs.mscript.language.ast.FunctionObjectDeclaration;
-import org.eclipselabs.mscript.language.ast.GaussianTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.IfExpression;
 import org.eclipselabs.mscript.language.ast.ImpliesExpression;
-import org.eclipselabs.mscript.language.ast.IntegerLiteral;
-import org.eclipselabs.mscript.language.ast.IntegerTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.IterationAccumulator;
 import org.eclipselabs.mscript.language.ast.IterationCall;
 import org.eclipselabs.mscript.language.ast.IterationVariable;
 import org.eclipselabs.mscript.language.ast.LetExpression;
 import org.eclipselabs.mscript.language.ast.LetExpressionVariableDeclaration;
-import org.eclipselabs.mscript.language.ast.Literal;
 import org.eclipselabs.mscript.language.ast.LogicalAndExpression;
 import org.eclipselabs.mscript.language.ast.LogicalOrExpression;
 import org.eclipselabs.mscript.language.ast.Module;
@@ -64,9 +53,6 @@ import org.eclipselabs.mscript.language.ast.MultiplicativeExpression;
 import org.eclipselabs.mscript.language.ast.MultiplicativeExpressionPart;
 import org.eclipselabs.mscript.language.ast.MultiplicativeOperator;
 import org.eclipselabs.mscript.language.ast.NameComponent;
-import org.eclipselabs.mscript.language.ast.NamedTypeSpecifier;
-import org.eclipselabs.mscript.language.ast.NumericLiteral;
-import org.eclipselabs.mscript.language.ast.NumericTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.OperationArgumentList;
 import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
 import org.eclipselabs.mscript.language.ast.ParenthesizedExpression;
@@ -74,32 +60,21 @@ import org.eclipselabs.mscript.language.ast.PostfixExpression;
 import org.eclipselabs.mscript.language.ast.PostfixOperator;
 import org.eclipselabs.mscript.language.ast.PowerExpression;
 import org.eclipselabs.mscript.language.ast.PowerOperator;
-import org.eclipselabs.mscript.language.ast.PrimitiveTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.QualifiedName;
 import org.eclipselabs.mscript.language.ast.RangeExpression;
-import org.eclipselabs.mscript.language.ast.RealLiteral;
-import org.eclipselabs.mscript.language.ast.RealTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.RecordDefinition;
 import org.eclipselabs.mscript.language.ast.RecordFieldDeclaration;
 import org.eclipselabs.mscript.language.ast.RelationalExpression;
 import org.eclipselabs.mscript.language.ast.RelationalOperator;
-import org.eclipselabs.mscript.language.ast.ScalarTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.SimpleName;
 import org.eclipselabs.mscript.language.ast.StateVariableDeclaration;
-import org.eclipselabs.mscript.language.ast.StringLiteral;
-import org.eclipselabs.mscript.language.ast.StringTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.SwitchCase;
 import org.eclipselabs.mscript.language.ast.SwitchExpression;
-import org.eclipselabs.mscript.language.ast.TensorTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.TypeAliasDefinition;
 import org.eclipselabs.mscript.language.ast.TypeTestExpression;
 import org.eclipselabs.mscript.language.ast.UnaryExpression;
 import org.eclipselabs.mscript.language.ast.UnaryOperator;
 import org.eclipselabs.mscript.language.ast.UnitConstructionOperator;
-import org.eclipselabs.mscript.language.ast.UnitExpression;
-import org.eclipselabs.mscript.language.ast.UnitExpressionDenominator;
-import org.eclipselabs.mscript.language.ast.UnitExpressionFactor;
-import org.eclipselabs.mscript.language.ast.UnitExpressionNumerator;
 
 /**
  * <!-- begin-user-doc -->
@@ -160,20 +135,6 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory {
 			case AstPackage.FUNCTION_OBJECT_DECLARATION: return createFunctionObjectDeclaration();
 			case AstPackage.EQUATION: return createEquation();
 			case AstPackage.DATA_TYPE_SPECIFIER: return createDataTypeSpecifier();
-			case AstPackage.SCALAR_TYPE_SPECIFIER: return createScalarTypeSpecifier();
-			case AstPackage.PRIMITIVE_TYPE_SPECIFIER: return createPrimitiveTypeSpecifier();
-			case AstPackage.NUMERIC_TYPE_SPECIFIER: return createNumericTypeSpecifier();
-			case AstPackage.REAL_TYPE_SPECIFIER: return createRealTypeSpecifier();
-			case AstPackage.INTEGER_TYPE_SPECIFIER: return createIntegerTypeSpecifier();
-			case AstPackage.COMPLEX_TYPE_SPECIFIER: return createComplexTypeSpecifier();
-			case AstPackage.GAUSSIAN_TYPE_SPECIFIER: return createGaussianTypeSpecifier();
-			case AstPackage.BOOLEAN_TYPE_SPECIFIER: return createBooleanTypeSpecifier();
-			case AstPackage.STRING_TYPE_SPECIFIER: return createStringTypeSpecifier();
-			case AstPackage.NAMED_TYPE_SPECIFIER: return createNamedTypeSpecifier();
-			case AstPackage.ARRAY_TYPE_SPECIFIER: return createArrayTypeSpecifier();
-			case AstPackage.TENSOR_TYPE_SPECIFIER: return createTensorTypeSpecifier();
-			case AstPackage.ARRAY_DIMENSION_SPECIFICATION: return createArrayDimensionSpecification();
-			case AstPackage.EXPRESSION: return createExpression();
 			case AstPackage.LET_EXPRESSION: return createLetExpression();
 			case AstPackage.LET_EXPRESSION_VARIABLE_DECLARATION: return createLetExpressionVariableDeclaration();
 			case AstPackage.IF_EXPRESSION: return createIfExpression();
@@ -181,12 +142,6 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory {
 			case AstPackage.SWITCH_CASE: return createSwitchCase();
 			case AstPackage.ADDITIVE_EXPRESSION_PART: return createAdditiveExpressionPart();
 			case AstPackage.MULTIPLICATIVE_EXPRESSION_PART: return createMultiplicativeExpressionPart();
-			case AstPackage.LITERAL: return createLiteral();
-			case AstPackage.NUMERIC_LITERAL: return createNumericLiteral();
-			case AstPackage.REAL_LITERAL: return createRealLiteral();
-			case AstPackage.INTEGER_LITERAL: return createIntegerLiteral();
-			case AstPackage.BOOLEAN_LITERAL: return createBooleanLiteral();
-			case AstPackage.STRING_LITERAL: return createStringLiteral();
 			case AstPackage.FEATURE_CALL_PART: return createFeatureCallPart();
 			case AstPackage.NAME_COMPONENT: return createNameComponent();
 			case AstPackage.ARRAY_ELEMENT_ACCESS: return createArrayElementAccess();
@@ -204,10 +159,6 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory {
 			case AstPackage.BEGIN_EXPRESSION: return createBeginExpression();
 			case AstPackage.END_EXPRESSION: return createEndExpression();
 			case AstPackage.QUALIFIED_NAME: return createQualifiedName();
-			case AstPackage.UNIT_EXPRESSION: return createUnitExpression();
-			case AstPackage.UNIT_EXPRESSION_NUMERATOR: return createUnitExpressionNumerator();
-			case AstPackage.UNIT_EXPRESSION_DENOMINATOR: return createUnitExpressionDenominator();
-			case AstPackage.UNIT_EXPRESSION_FACTOR: return createUnitExpressionFactor();
 			case AstPackage.RANGE_EXPRESSION: return createRangeExpression();
 			case AstPackage.IMPLIES_EXPRESSION: return createImpliesExpression();
 			case AstPackage.LOGICAL_OR_EXPRESSION: return createLogicalOrExpression();
@@ -251,8 +202,6 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory {
 				return createUnaryOperatorFromString(eDataType, initialValue);
 			case AstPackage.POSTFIX_OPERATOR:
 				return createPostfixOperatorFromString(eDataType, initialValue);
-			case AstPackage.BOOLEAN_KIND:
-				return createBooleanKindFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -282,8 +231,6 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory {
 				return convertUnaryOperatorToString(eDataType, instanceValue);
 			case AstPackage.POSTFIX_OPERATOR:
 				return convertPostfixOperatorToString(eDataType, instanceValue);
-			case AstPackage.BOOLEAN_KIND:
-				return convertBooleanKindToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -444,146 +391,6 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ScalarTypeSpecifier createScalarTypeSpecifier() {
-		ScalarTypeSpecifierImpl scalarTypeSpecifier = new ScalarTypeSpecifierImpl();
-		return scalarTypeSpecifier;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public PrimitiveTypeSpecifier createPrimitiveTypeSpecifier() {
-		PrimitiveTypeSpecifierImpl primitiveTypeSpecifier = new PrimitiveTypeSpecifierImpl();
-		return primitiveTypeSpecifier;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NumericTypeSpecifier createNumericTypeSpecifier() {
-		NumericTypeSpecifierImpl numericTypeSpecifier = new NumericTypeSpecifierImpl();
-		return numericTypeSpecifier;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public RealTypeSpecifier createRealTypeSpecifier() {
-		RealTypeSpecifierImpl realTypeSpecifier = new RealTypeSpecifierImpl();
-		return realTypeSpecifier;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public IntegerTypeSpecifier createIntegerTypeSpecifier() {
-		IntegerTypeSpecifierImpl integerTypeSpecifier = new IntegerTypeSpecifierImpl();
-		return integerTypeSpecifier;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ComplexTypeSpecifier createComplexTypeSpecifier() {
-		ComplexTypeSpecifierImpl complexTypeSpecifier = new ComplexTypeSpecifierImpl();
-		return complexTypeSpecifier;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public GaussianTypeSpecifier createGaussianTypeSpecifier() {
-		GaussianTypeSpecifierImpl gaussianTypeSpecifier = new GaussianTypeSpecifierImpl();
-		return gaussianTypeSpecifier;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public BooleanTypeSpecifier createBooleanTypeSpecifier() {
-		BooleanTypeSpecifierImpl booleanTypeSpecifier = new BooleanTypeSpecifierImpl();
-		return booleanTypeSpecifier;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public StringTypeSpecifier createStringTypeSpecifier() {
-		StringTypeSpecifierImpl stringTypeSpecifier = new StringTypeSpecifierImpl();
-		return stringTypeSpecifier;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NamedTypeSpecifier createNamedTypeSpecifier() {
-		NamedTypeSpecifierImpl namedTypeSpecifier = new NamedTypeSpecifierImpl();
-		return namedTypeSpecifier;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ArrayTypeSpecifier createArrayTypeSpecifier() {
-		ArrayTypeSpecifierImpl arrayTypeSpecifier = new ArrayTypeSpecifierImpl();
-		return arrayTypeSpecifier;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public TensorTypeSpecifier createTensorTypeSpecifier() {
-		TensorTypeSpecifierImpl tensorTypeSpecifier = new TensorTypeSpecifierImpl();
-		return tensorTypeSpecifier;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ArrayDimensionSpecification createArrayDimensionSpecification() {
-		ArrayDimensionSpecificationImpl arrayDimensionSpecification = new ArrayDimensionSpecificationImpl();
-		return arrayDimensionSpecification;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Expression createExpression() {
-		ExpressionImpl expression = new ExpressionImpl();
-		return expression;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public LetExpression createLetExpression() {
 		LetExpressionImpl letExpression = new LetExpressionImpl();
 		return letExpression;
@@ -647,66 +454,6 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory {
 	public MultiplicativeExpressionPart createMultiplicativeExpressionPart() {
 		MultiplicativeExpressionPartImpl multiplicativeExpressionPart = new MultiplicativeExpressionPartImpl();
 		return multiplicativeExpressionPart;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Literal createLiteral() {
-		LiteralImpl literal = new LiteralImpl();
-		return literal;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NumericLiteral createNumericLiteral() {
-		NumericLiteralImpl numericLiteral = new NumericLiteralImpl();
-		return numericLiteral;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public RealLiteral createRealLiteral() {
-		RealLiteralImpl realLiteral = new RealLiteralImpl();
-		return realLiteral;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public IntegerLiteral createIntegerLiteral() {
-		IntegerLiteralImpl integerLiteral = new IntegerLiteralImpl();
-		return integerLiteral;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public BooleanLiteral createBooleanLiteral() {
-		BooleanLiteralImpl booleanLiteral = new BooleanLiteralImpl();
-		return booleanLiteral;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public StringLiteral createStringLiteral() {
-		StringLiteralImpl stringLiteral = new StringLiteralImpl();
-		return stringLiteral;
 	}
 
 	/**
@@ -877,46 +624,6 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory {
 	public QualifiedName createQualifiedName() {
 		QualifiedNameImpl qualifiedName = new QualifiedNameImpl();
 		return qualifiedName;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public UnitExpression createUnitExpression() {
-		UnitExpressionImpl unitExpression = new UnitExpressionImpl();
-		return unitExpression;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public UnitExpressionNumerator createUnitExpressionNumerator() {
-		UnitExpressionNumeratorImpl unitExpressionNumerator = new UnitExpressionNumeratorImpl();
-		return unitExpressionNumerator;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public UnitExpressionDenominator createUnitExpressionDenominator() {
-		UnitExpressionDenominatorImpl unitExpressionDenominator = new UnitExpressionDenominatorImpl();
-		return unitExpressionDenominator;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public UnitExpressionFactor createUnitExpressionFactor() {
-		UnitExpressionFactorImpl unitExpressionFactor = new UnitExpressionFactorImpl();
-		return unitExpressionFactor;
 	}
 
 	/**
@@ -1216,26 +923,6 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory {
 	 * @generated
 	 */
 	public String convertPostfixOperatorToString(EDataType eDataType, Object instanceValue) {
-		return instanceValue == null ? null : instanceValue.toString();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public BooleanKind createBooleanKindFromString(EDataType eDataType, String initialValue) {
-		BooleanKind result = BooleanKind.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String convertBooleanKindToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

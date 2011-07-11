@@ -7,7 +7,6 @@
 package org.eclipselabs.mscript.typesystem.edit;
 
 import org.eclipse.emf.common.EMFPlugin;
-
 import org.eclipse.emf.common.util.ResourceLocator;
 
 /**

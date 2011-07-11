@@ -7,14 +7,14 @@ import org.eclipselabs.mscript.computation.core.value.IArrayValue;
 import org.eclipselabs.mscript.computation.core.value.IBooleanValue;
 import org.eclipselabs.mscript.computation.core.value.ISimpleNumericValue;
 import org.eclipselabs.mscript.computation.core.value.IValue;
-import org.eclipselabs.mscript.language.ast.Expression;
-import org.eclipselabs.mscript.language.ast.IntegerLiteral;
 import org.eclipselabs.mscript.language.il.LocalVariableDeclaration;
 import org.eclipselabs.mscript.language.il.StatefulVariableDeclaration;
 import org.eclipselabs.mscript.language.il.TemplateVariableDeclaration;
 import org.eclipselabs.mscript.language.il.VariableAccess;
 import org.eclipselabs.mscript.language.il.VariableReference;
 import org.eclipselabs.mscript.language.il.util.ILSwitch;
+import org.eclipselabs.mscript.typesystem.Expression;
+import org.eclipselabs.mscript.typesystem.IntegerLiteral;
 import org.eclipselabs.mscript.typesystem.IntegerType;
 import org.eclipselabs.mscript.typesystem.RealType;
 

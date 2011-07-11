@@ -12,9 +12,10 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipselabs.mscript.language.ast.AstPackage;
-import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.ast.RelationalExpression;
 import org.eclipselabs.mscript.language.ast.RelationalOperator;
+import org.eclipselabs.mscript.typesystem.Expression;
+import org.eclipselabs.mscript.typesystem.impl.ExpressionImpl;
 
 /**
  * <!-- begin-user-doc -->

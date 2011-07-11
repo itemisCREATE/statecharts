@@ -11,12 +11,10 @@ import org.eclipselabs.mscript.computation.core.value.AnyValue;
 import org.eclipselabs.mscript.computation.core.value.IValue;
 import org.eclipselabs.mscript.language.ast.ArrayElementAccess;
 import org.eclipselabs.mscript.language.ast.ArraySubscript;
-import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.BeginExpression;
 import org.eclipselabs.mscript.language.ast.EndExpression;
 import org.eclipselabs.mscript.language.ast.FunctionDefinition;
 import org.eclipselabs.mscript.language.ast.StateVariableDeclaration;
-import org.eclipselabs.mscript.language.ast.UnitExpressionNumerator;
 import org.eclipselabs.mscript.language.functionmodel.FunctionDescriptor;
 import org.eclipselabs.mscript.language.functionmodel.construct.FunctionDescriptorConstructor;
 import org.eclipselabs.mscript.language.functionmodel.construct.IFunctionDescriptorConstructorResult;
@@ -62,13 +60,6 @@ public class MscriptJavaValidator extends AbstractMscriptJavaValidator {
 		}
 		
 		return container instanceof ArraySubscript && ((ArraySubscript) container).eContainer() instanceof ArrayElementAccess;
-	}
-
-	@Check
-	public void checkUnitExpressionNumeratorMustConsistOfSymbolsOrOne(UnitExpressionNumerator numerator) {
-		if (numerator.getFactors().isEmpty() && numerator.getOne() != 1) {
-			error("Invalid unit numerator", AstPackage.eINSTANCE.getUnitExpressionNumerator_One());
-		}
 	}
 	
 	@Check

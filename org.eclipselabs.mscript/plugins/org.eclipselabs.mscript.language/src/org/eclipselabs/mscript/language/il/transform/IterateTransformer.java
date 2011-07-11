@@ -14,7 +14,6 @@ package org.eclipselabs.mscript.language.il.transform;
 import java.util.Collections;
 
 import org.eclipse.core.runtime.MultiStatus;
-import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.ast.IterationCall;
 import org.eclipselabs.mscript.language.il.CompoundStatement;
 import org.eclipselabs.mscript.language.il.ForeachStatement;
@@ -22,6 +21,7 @@ import org.eclipselabs.mscript.language.il.ILFactory;
 import org.eclipselabs.mscript.language.il.LocalVariableDeclaration;
 import org.eclipselabs.mscript.language.internal.LanguagePlugin;
 import org.eclipselabs.mscript.language.internal.util.StatusUtil;
+import org.eclipselabs.mscript.typesystem.Expression;
 
 /**
  * @author Andreas Unger

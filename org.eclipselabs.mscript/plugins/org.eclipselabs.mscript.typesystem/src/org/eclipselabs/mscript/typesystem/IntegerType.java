@@ -7,9 +7,10 @@
 package org.eclipselabs.mscript.typesystem;
 
 
+
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Integer Type</b></em>'.
+ * A representation of the model object '<em><b>Integer Type Specifier</b></em>'.
  * <!-- end-user-doc -->
  *
  *
@@ -18,5 +19,4 @@ package org.eclipselabs.mscript.typesystem;
  * @generated
  */
 public interface IntegerType extends NumericType {
-
-} // IntegerType
+} // IntegerTypeSpecifier

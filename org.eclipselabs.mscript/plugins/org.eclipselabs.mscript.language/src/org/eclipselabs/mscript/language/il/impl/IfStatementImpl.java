@@ -11,10 +11,10 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.il.ILPackage;
 import org.eclipselabs.mscript.language.il.IfStatement;
 import org.eclipselabs.mscript.language.il.Statement;
+import org.eclipselabs.mscript.typesystem.Expression;
 
 /**
  * <!-- begin-user-doc -->

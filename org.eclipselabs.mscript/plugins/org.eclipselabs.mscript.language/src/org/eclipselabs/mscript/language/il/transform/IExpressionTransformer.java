@@ -14,7 +14,7 @@ package org.eclipselabs.mscript.language.il.transform;
 import java.util.List;
 
 import org.eclipse.core.runtime.IStatus;
-import org.eclipselabs.mscript.language.ast.Expression;
+import org.eclipselabs.mscript.typesystem.Expression;
 
 /**
  * @author Andreas Unger

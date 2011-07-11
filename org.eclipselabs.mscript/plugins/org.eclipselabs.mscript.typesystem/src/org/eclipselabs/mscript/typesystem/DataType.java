@@ -6,8 +6,7 @@
  */
 package org.eclipselabs.mscript.typesystem;
 
-
-
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -19,11 +18,12 @@ package org.eclipselabs.mscript.typesystem;
  * @model abstract="true"
  * @generated
  */
-public interface DataType extends Type {
+public interface DataType extends EObject {
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model required="true" ordered="false" operatorRequired="true" operatorOrdered="false" otherOrdered="false"
+	 * @model required="true" operatorRequired="true"
 	 * @generated
 	 */
 	DataType evaluate(OperatorKind operator, DataType other);
@@ -31,17 +31,24 @@ public interface DataType extends Type {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model required="true" ordered="false" exponentRequired="true" exponentOrdered="false"
+	 * @model required="true" operatorRequired="true" nRequired="true"
 	 * @generated
 	 */
-	DataType evaluatePower(int exponent);
+	DataType evaluate(OperatorKind operator, int n);
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model required="true" ordered="false" otherRequired="true" otherOrdered="false"
+	 * @model required="true" otherRequired="true"
 	 * @generated
 	 */
 	boolean isAssignableFrom(DataType other);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model required="true" otherRequired="true"
+	 * @generated
+	 */
+	boolean isEquivalentTo(DataType other);
 } // DataType

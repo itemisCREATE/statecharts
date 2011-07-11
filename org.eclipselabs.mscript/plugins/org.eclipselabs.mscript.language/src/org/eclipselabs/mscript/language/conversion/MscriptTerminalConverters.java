@@ -46,8 +46,8 @@ public class MscriptTerminalConverters extends DefaultTerminalConverters {
 		};
 	}
 
-	@ValueConverter(rule = "REAL")
-	public IValueConverter<Double> REAL() {
+	@ValueConverter(rule = "ValidReal")
+	public IValueConverter<Double> ValidReal() {
 		return new IValueConverter<Double>() {
 			
 			public Double toValue(String string, INode node) {
@@ -67,8 +67,8 @@ public class MscriptTerminalConverters extends DefaultTerminalConverters {
 		};
 	}
 
-	@ValueConverter(rule = "INTEGER")
-	public IValueConverter<Long> INTEGER() {
+	@ValueConverter(rule = "ValidInteger")
+	public IValueConverter<Long> ValidInteger() {
 		return new IValueConverter<Long>() {
 			
 			public Long toValue(String string, INode node) {

@@ -1,45 +1,24 @@
-/**
- * <copyright>
- * </copyright>
+/****************************************************************************
+ * Copyright (c) 2008, 2011 Andreas Unger and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  *
- * $Id$
- */
+ * Contributors:
+ *    Andreas Unger - initial API and implementation 
+ ****************************************************************************/
+
 package org.eclipselabs.mscript.typesystem.internal.operations;
 
 import org.eclipselabs.mscript.typesystem.DataType;
 import org.eclipselabs.mscript.typesystem.StringType;
 
-/**
- * <!-- begin-user-doc -->
- * A static utility class that provides operations related to '<em><b>String Type</b></em>' model objects.
- * <!-- end-user-doc -->
- *
- * <p>
- * The following operations are supported:
- * <ul>
- *   <li>{@link org.eclipselabs.mscript.typesystem.StringType#isAssignableFrom(org.eclipselabs.mscript.typesystem.DataType) <em>Is Assignable From</em>}</li>
- * </ul>
- * </p>
- *
- * @generated
- */
-public class StringTypeOperations extends PrimitiveTypeOperations {
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected StringTypeOperations() {
-		super();
-	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public static  boolean isAssignableFrom(StringType stringType, DataType other) {
+public class StringTypeOperations extends PrimitiveTypeOperations {
+
+	public static boolean isAssignableFrom(StringType stringType, DataType other) {
 		return other instanceof StringType;
 	}
 
-} // StringTypeOperations
+}

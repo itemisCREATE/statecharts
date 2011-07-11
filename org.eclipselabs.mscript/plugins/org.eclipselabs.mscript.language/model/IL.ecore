@@ -55,7 +55,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="OutputVariableDeclaration" eSuperTypes="#//StatefulVariableDeclaration"/>
   <eClassifiers xsi:type="ecore:EClass" name="InstanceVariableDeclaration" eSuperTypes="#//StatefulVariableDeclaration"/>
   <eClassifiers xsi:type="ecore:EClass" name="LocalVariableDeclaration" eSuperTypes="#//VariableDeclaration #//Statement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="initializer" eType="ecore:EClass Mscript.ecore#//Expression"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="initializer" eType="ecore:EClass ../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Statement" abstract="true"/>
@@ -65,12 +65,12 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="stepIndex" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Assignment" eSuperTypes="#//VariableAccess #//Statement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="assignedExpression" eType="ecore:EClass Mscript.ecore#//Expression"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="assignedExpression" eType="ecore:EClass ../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="IfStatement" eSuperTypes="#//Statement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="condition" lowerBound="1"
-        eType="ecore:EClass Mscript.ecore#//Expression"
+        eType="ecore:EClass ../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="thenStatement" eType="#//Statement"
         containment="true"/>
@@ -80,30 +80,30 @@
   <eClassifiers xsi:type="ecore:EClass" name="ForeachStatement" eSuperTypes="#//Statement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="iterationVariableDeclaration"
         eType="#//VariableDeclaration" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="collectionExpression" eType="ecore:EClass Mscript.ecore#//Expression"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="collectionExpression" eType="ecore:EClass ../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//Compound"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="VariableReference" eSuperTypes="#//VariableAccess Mscript.ecore#//Expression">
+  <eClassifiers xsi:type="ecore:EClass" name="VariableReference" eSuperTypes="#//VariableAccess ../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="arrayIndices" upperBound="-1"
-        eType="ecore:EClass Mscript.ecore#//Expression"
+        eType="ecore:EClass ../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="OperationCall" abstract="true" eSuperTypes="Mscript.ecore#//Expression">
+  <eClassifiers xsi:type="ecore:EClass" name="OperationCall" abstract="true" eSuperTypes="../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
-        eType="ecore:EClass Mscript.ecore#//Expression"
+        eType="ecore:EClass ../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FunctionCall" eSuperTypes="#//OperationCall">
     <eStructuralFeatures xsi:type="ecore:EReference" name="name" lowerBound="1" eType="#//Name"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="PropertyReference" eSuperTypes="Mscript.ecore#//Expression">
+  <eClassifiers xsi:type="ecore:EClass" name="PropertyReference" eSuperTypes="../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
-        eType="ecore:EClass Mscript.ecore#//Expression"/>
+        eType="ecore:EClass ../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="InvalidExpression" eSuperTypes="Mscript.ecore#//Expression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="InvalidExpression" eSuperTypes="../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression"/>
   <eClassifiers xsi:type="ecore:EClass" name="Name">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="segments" lowerBound="1"
         upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

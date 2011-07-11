@@ -18,6 +18,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipselabs.mscript.computation.computationmodel.ComputationModel;
 import org.eclipselabs.mscript.computation.computationmodel.util.ComputationModelUtil;
@@ -33,7 +34,6 @@ import org.eclipselabs.mscript.language.functionmodel.construct.IFunctionDescrip
 import org.eclipselabs.mscript.language.il.ILFunctionDefinition;
 import org.eclipselabs.mscript.language.il.transform.FunctionDefinitionTransformer;
 import org.eclipselabs.mscript.language.il.transform.IFunctionDefinitionTransformerResult;
-import org.eclipselabs.mscript.language.interpreter.DataTypeSpecifierEvaluator;
 import org.eclipselabs.mscript.language.interpreter.IInterpreterContext;
 import org.eclipselabs.mscript.language.interpreter.InterpreterContext;
 import org.eclipselabs.mscript.language.parser.antlr.MscriptParser;
@@ -163,7 +163,7 @@ public abstract class AbstractMscriptLaunchConfigurationDelegate extends LaunchC
 				return null;
 			}
 			DataTypeSpecifier dataTypeSpecifier = (DataTypeSpecifier) parseResult.getRootASTElement();
-			DataType dataType = new DataTypeSpecifierEvaluator().evaluate(interpreterContext, dataTypeSpecifier);
+			DataType dataType = EcoreUtil.copy(dataTypeSpecifier.getType());
 			if (dataType instanceof InvalidDataType) {
 				return null;
 			}

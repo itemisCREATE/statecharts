@@ -14,10 +14,10 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipselabs.mscript.language.ast.Expression;
-import org.eclipselabs.mscript.language.ast.impl.ExpressionImpl;
 import org.eclipselabs.mscript.language.il.ILPackage;
 import org.eclipselabs.mscript.language.il.OperationCall;
+import org.eclipselabs.mscript.typesystem.Expression;
+import org.eclipselabs.mscript.typesystem.impl.ExpressionImpl;
 
 /**
  * <!-- begin-user-doc -->

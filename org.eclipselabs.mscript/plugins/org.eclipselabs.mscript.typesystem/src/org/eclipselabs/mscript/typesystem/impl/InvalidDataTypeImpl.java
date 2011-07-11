@@ -7,8 +7,10 @@
 package org.eclipselabs.mscript.typesystem.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipselabs.mscript.typesystem.DataType;
 import org.eclipselabs.mscript.typesystem.InvalidDataType;
 import org.eclipselabs.mscript.typesystem.TypeSystemPackage;
+import org.eclipselabs.mscript.typesystem.internal.operations.InvalidDataTypeOperations;
 
 /**
  * <!-- begin-user-doc -->
@@ -37,6 +39,14 @@ public class InvalidDataTypeImpl extends DataTypeImpl implements InvalidDataType
 	@Override
 	protected EClass eStaticClass() {
 		return TypeSystemPackage.Literals.INVALID_DATA_TYPE;
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.typesystem.impl.DataTypeImpl#isAssignableFrom(org.eclipselabs.mscript.typesystem.DataType)
+	 */
+	@Override
+	public boolean isAssignableFrom(DataType other) {
+		return InvalidDataTypeOperations.isAssignableFrom(this, other);
 	}
 
 } //InvalidDataTypeImpl

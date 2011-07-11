@@ -15,7 +15,7 @@ import org.eclipselabs.mscript.typesystem.internal.operations.RealTypeOperations
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Real Type</b></em>'.
+ * An implementation of the model object '<em><b>Real Type Specifier</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
@@ -41,35 +41,29 @@ public class RealTypeImpl extends NumericTypeImpl implements RealType {
 	protected EClass eStaticClass() {
 		return TypeSystemPackage.Literals.REAL_TYPE;
 	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
+	
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.typesystem.impl.DataTypeImpl#evaluate(org.eclipselabs.mscript.typesystem.OperatorKind, org.eclipselabs.mscript.typesystem.DataType)
 	 */
 	@Override
 	public DataType evaluate(OperatorKind operator, DataType other) {
 		return RealTypeOperations.evaluate(this, operator, other);
 	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
+	
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.typesystem.impl.DataTypeImpl#evaluate(org.eclipselabs.mscript.typesystem.OperatorKind, int)
 	 */
 	@Override
-	public DataType evaluatePower(int exponent) {
-		return RealTypeOperations.evaluatePower(this, exponent);
+	public DataType evaluate(OperatorKind operator, int n) {
+		return RealTypeOperations.evaluate(this, operator, n);
 	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
+	
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.typesystem.impl.DataTypeImpl#isAssignableFrom(org.eclipselabs.mscript.typesystem.DataType)
 	 */
 	@Override
 	public boolean isAssignableFrom(DataType other) {
 		return RealTypeOperations.isAssignableFrom(this, other);
 	}
 
-} //RealTypeImpl
+} //RealTypeSpecifierImpl

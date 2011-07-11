@@ -13,7 +13,6 @@ package org.eclipselabs.mscript.computation.core.value;
 
 import java.util.List;
 
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipselabs.mscript.computation.core.IComputationContext;
 import org.eclipselabs.mscript.typesystem.DataType;
 import org.eclipselabs.mscript.typesystem.InvalidDataType;
@@ -42,7 +41,7 @@ public abstract class AbstractValue implements IValue {
 	}
 	
 	public IValue convert(DataType dataType) {
-		if (EcoreUtil.equals(dataType, getDataType())) {
+		if (dataType.isEquivalentTo(getDataType())) {
 			return this;
 		}
 		if (dataType.isAssignableFrom(getDataType())) {
@@ -56,7 +55,7 @@ public abstract class AbstractValue implements IValue {
 	}
 
 	public IValue add(IValue other) {
-		DataType dataType = getDataType().evaluate(OperatorKind.ADDITION, other.getDataType());
+		DataType dataType = getDataType().evaluate(OperatorKind.ADD, other.getDataType());
 		if (dataType instanceof InvalidDataType) { 
 			return InvalidValue.SINGLETON;
 		}
@@ -78,7 +77,7 @@ public abstract class AbstractValue implements IValue {
 	}
 
 	public IValue subtract(IValue other) {
-		DataType dataType = getDataType().evaluate(OperatorKind.SUBTRACTION, other.getDataType());
+		DataType dataType = getDataType().evaluate(OperatorKind.SUBTRACT, other.getDataType());
 		if (dataType instanceof InvalidDataType) { 
 			return InvalidValue.SINGLETON;
 		}
@@ -96,7 +95,7 @@ public abstract class AbstractValue implements IValue {
 	}
 
 	public IValue multiply(IValue other) {
-		DataType dataType = getDataType().evaluate(OperatorKind.MULTIPLICATION, other.getDataType());
+		DataType dataType = getDataType().evaluate(OperatorKind.MULTIPLY, other.getDataType());
 		if (dataType instanceof InvalidDataType) { 
 			return InvalidValue.SINGLETON;
 		}
@@ -114,7 +113,7 @@ public abstract class AbstractValue implements IValue {
 	}
 	
 	public IValue divide(IValue other) {
-		DataType dataType = getDataType().evaluate(OperatorKind.DIVISION, other.getDataType());
+		DataType dataType = getDataType().evaluate(OperatorKind.DIVIDE, other.getDataType());
 		if (dataType instanceof InvalidDataType) { 
 			return InvalidValue.SINGLETON;
 		}
@@ -132,7 +131,7 @@ public abstract class AbstractValue implements IValue {
 	}
 
 	public IValue elementWiseMultiply(IValue other) {
-		DataType dataType = getDataType().evaluate(OperatorKind.ELEMENT_WISE_MULTIPLICATION, other.getDataType());
+		DataType dataType = getDataType().evaluate(OperatorKind.ELEMENT_WISE_MULTIPLY, other.getDataType());
 		if (dataType instanceof InvalidDataType) { 
 			return InvalidValue.SINGLETON;
 		}
@@ -150,7 +149,7 @@ public abstract class AbstractValue implements IValue {
 	}
 
 	public IValue elementWiseDivide(IValue other) {
-		DataType dataType = getDataType().evaluate(OperatorKind.ELEMENT_WISE_DIVISION, other.getDataType());
+		DataType dataType = getDataType().evaluate(OperatorKind.ELEMENT_WISE_DIVIDE, other.getDataType());
 		if (dataType instanceof InvalidDataType) { 
 			return InvalidValue.SINGLETON;
 		}
@@ -172,7 +171,7 @@ public abstract class AbstractValue implements IValue {
 	}
 
 	public IValue unaryMinus() {
-		DataType dataType = getDataType().evaluate(OperatorKind.UNARY_MINUS, null);
+		DataType dataType = getDataType().evaluate(OperatorKind.NEGATE, null);
 		if (dataType instanceof InvalidDataType) { 
 			return InvalidValue.SINGLETON;
 		}

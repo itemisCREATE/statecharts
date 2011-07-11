@@ -24,6 +24,7 @@ import org.eclipselabs.mscript.language.il.Statement;
 import org.eclipselabs.mscript.language.il.VariableDeclaration;
 import org.eclipselabs.mscript.language.il.util.ILSwitch;
 import org.eclipselabs.mscript.typesystem.ArrayType;
+import org.eclipselabs.mscript.typesystem.util.TypeSystemUtil;
 
 /**
  * @author Andreas Unger
@@ -114,7 +115,7 @@ public class CompoundInterpreter implements ICompoundInterpreter {
 			
 			IArrayValue arrayValue = (IArrayValue) value;
 			
-			int size = arrayType.getSize();
+			int size = TypeSystemUtil.getArraySize(arrayType);
 			
 			VariableDeclaration iterationVariableDeclaration = foreachStatement.getIterationVariableDeclaration();
 			for (int i = 0; i < size; ++i) {

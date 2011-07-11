@@ -15,18 +15,19 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.util.ResourceLocator;
 
-import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
+import org.eclipse.emf.ecore.EStructuralFeature;
+
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import org.eclipselabs.mscript.typesystem.ArrayDimension;
+import org.eclipselabs.mscript.typesystem.TypeSystemFactory;
 import org.eclipselabs.mscript.typesystem.TypeSystemPackage;
 
 import org.eclipselabs.mscript.typesystem.edit.TypeSystemEditPlugin;
@@ -66,31 +67,38 @@ public class ArrayDimensionItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addSizePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Size feature.
+	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
+	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addSizePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_ArrayDimension_size_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ArrayDimension_size_feature", "_UI_ArrayDimension_type"),
-				 TypeSystemPackage.Literals.ARRAY_DIMENSION__SIZE,
-				 false,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
-				 null,
-				 null));
+	@Override
+	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
+		if (childrenFeatures == null) {
+			super.getChildrenFeatures(object);
+			childrenFeatures.add(TypeSystemPackage.Literals.ARRAY_DIMENSION__SIZE);
+		}
+		return childrenFeatures;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EStructuralFeature getChildFeature(Object object, Object child) {
+		// Check the type of the specified child object and return the proper feature to use for
+		// adding (see {@link AddCommand}) it as a child.
+
+		return super.getChildFeature(object, child);
 	}
 
 	/**
@@ -112,8 +120,7 @@ public class ArrayDimensionItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		ArrayDimension arrayDimension = (ArrayDimension)object;
-		return getString("_UI_ArrayDimension_type") + " " + arrayDimension.getSize();
+		return getString("_UI_ArrayDimension_type");
 	}
 
 	/**
@@ -129,7 +136,7 @@ public class ArrayDimensionItemProvider
 
 		switch (notification.getFeatureID(ArrayDimension.class)) {
 			case TypeSystemPackage.ARRAY_DIMENSION__SIZE:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
 		super.notifyChanged(notification);
@@ -145,6 +152,41 @@ public class ArrayDimensionItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypeSystemPackage.Literals.ARRAY_DIMENSION__SIZE,
+				 TypeSystemFactory.eINSTANCE.createExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypeSystemPackage.Literals.ARRAY_DIMENSION__SIZE,
+				 TypeSystemFactory.eINSTANCE.createLiteral()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypeSystemPackage.Literals.ARRAY_DIMENSION__SIZE,
+				 TypeSystemFactory.eINSTANCE.createNumericLiteral()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypeSystemPackage.Literals.ARRAY_DIMENSION__SIZE,
+				 TypeSystemFactory.eINSTANCE.createRealLiteral()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypeSystemPackage.Literals.ARRAY_DIMENSION__SIZE,
+				 TypeSystemFactory.eINSTANCE.createIntegerLiteral()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypeSystemPackage.Literals.ARRAY_DIMENSION__SIZE,
+				 TypeSystemFactory.eINSTANCE.createBooleanLiteral()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypeSystemPackage.Literals.ARRAY_DIMENSION__SIZE,
+				 TypeSystemFactory.eINSTANCE.createStringLiteral()));
 	}
 
 	/**

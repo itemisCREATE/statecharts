@@ -12,10 +12,13 @@
 package org.eclipselabs.mscript.language.internal.il.builtin;
 
 import java.util.Collections;
+import java.util.List;
 
 import org.eclipselabs.mscript.language.il.builtin.Signature;
 import org.eclipselabs.mscript.typesystem.DataType;
+import org.eclipselabs.mscript.typesystem.RealType;
 import org.eclipselabs.mscript.typesystem.TypeSystemFactory;
+import org.eclipselabs.mscript.typesystem.util.TypeSystemUtil;
 
 /**
  * @author Andreas Unger
@@ -24,7 +27,13 @@ import org.eclipselabs.mscript.typesystem.TypeSystemFactory;
 public class UnitSignature extends Signature {
 
 	public UnitSignature() {
-		super(Collections.<DataType>singletonList(TypeSystemFactory.eINSTANCE.createRealType()), TypeSystemFactory.eINSTANCE.createUnitType());
+		super(createInputDataTypes(), TypeSystemFactory.eINSTANCE.createUnitType());
+	}
+	
+	private static List<DataType> createInputDataTypes() {
+		RealType realType = TypeSystemFactory.eINSTANCE.createRealType();
+		realType.setUnit(TypeSystemUtil.createUnit());
+		return Collections.<DataType>singletonList(realType);
 	}
 
 }

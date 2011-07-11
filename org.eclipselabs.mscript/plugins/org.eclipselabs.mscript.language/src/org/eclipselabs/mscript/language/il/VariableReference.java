@@ -7,7 +7,7 @@
 package org.eclipselabs.mscript.language.il;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipselabs.mscript.language.ast.Expression;
+import org.eclipselabs.mscript.typesystem.Expression;
 
 /**
  * <!-- begin-user-doc -->
@@ -28,7 +28,7 @@ import org.eclipselabs.mscript.language.ast.Expression;
 public interface VariableReference extends VariableAccess, Expression {
 	/**
 	 * Returns the value of the '<em><b>Array Indices</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipselabs.mscript.language.ast.Expression}.
+	 * The list contents are of type {@link org.eclipselabs.mscript.typesystem.Expression}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Array Indices</em>' containment reference list isn't clear,

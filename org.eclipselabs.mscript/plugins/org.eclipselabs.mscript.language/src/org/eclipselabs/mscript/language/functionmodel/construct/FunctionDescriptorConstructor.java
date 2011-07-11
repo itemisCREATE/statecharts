@@ -18,7 +18,6 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipselabs.mscript.language.ast.Equation;
-import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.ast.FeatureCall;
 import org.eclipselabs.mscript.language.ast.FeatureCallPart;
 import org.eclipselabs.mscript.language.ast.FunctionDefinition;
@@ -40,6 +39,7 @@ import org.eclipselabs.mscript.language.internal.functionmodel.util.StepExpressi
 import org.eclipselabs.mscript.language.internal.functionmodel.util.StepExpressionResult;
 import org.eclipselabs.mscript.language.internal.util.StatusUtil;
 import org.eclipselabs.mscript.language.util.SyntaxStatus;
+import org.eclipselabs.mscript.typesystem.Expression;
 
 /**
  * @author Andreas Unger

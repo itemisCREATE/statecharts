@@ -16,7 +16,7 @@ import org.eclipselabs.mscript.typesystem.internal.operations.TensorTypeOperatio
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Tensor Type</b></em>'.
+ * An implementation of the model object '<em><b>Tensor Type Specifier</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
@@ -67,6 +67,22 @@ public class TensorTypeImpl extends ArrayTypeImpl implements TensorType {
 		return TypeSystemPackage.Literals.TENSOR_TYPE;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.typesystem.impl.ArrayTypeImpl#getElementType()
+	 */
+	@Override
+	public NumericType getElementType() {
+		return (NumericType) super.getElementType();
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.typesystem.impl.ArrayTypeImpl#evaluate(org.eclipselabs.mscript.typesystem.OperatorKind, org.eclipselabs.mscript.typesystem.DataType)
+	 */
+	@Override
+	public DataType evaluate(OperatorKind operator, DataType other) {
+		return TensorTypeOperations.evaluate(this, operator, other);
+	}
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -84,28 +100,7 @@ public class TensorTypeImpl extends ArrayTypeImpl implements TensorType {
 	public boolean isMatrix() {
 		return getDimensions().size() == 2;
 	}
-
-	public NumericType getElementType() {
-		return (NumericType) super.getElementType();
-	}
 	
-	public void setElementType(DataType newElementType) {
-		if (!(newElementType instanceof NumericType)) {
-			throw new IllegalArgumentException("New element type must be NumericType");
-		}
-		setElementTypeGen(newElementType);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	@Override
-	public DataType evaluate(OperatorKind operator, DataType other) {
-		return TensorTypeOperations.evaluate(this, operator, other);
-	}
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -138,4 +133,4 @@ public class TensorTypeImpl extends ArrayTypeImpl implements TensorType {
 		return super.eIsSet(featureID);
 	}
 
-} //TensorTypeImpl
+} //TensorTypeSpecifierImpl

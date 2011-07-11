@@ -6,32 +6,30 @@
  */
 package org.eclipselabs.mscript.typesystem.impl;
 
-import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipselabs.mscript.typesystem.OperatorKind;
 import org.eclipselabs.mscript.typesystem.TypeSystemPackage;
 import org.eclipselabs.mscript.typesystem.Unit;
-import org.eclipselabs.mscript.typesystem.UnitFactor;
-import org.eclipselabs.mscript.typesystem.UnitSymbol;
+import org.eclipselabs.mscript.typesystem.UnitDenominator;
+import org.eclipselabs.mscript.typesystem.UnitNumerator;
 import org.eclipselabs.mscript.typesystem.internal.operations.UnitOperations;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Unit</b></em>'.
+ * An implementation of the model object '<em><b>Unit Expression</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.typesystem.impl.UnitImpl#getFactors <em>Factors</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.typesystem.impl.UnitImpl#getNumerator <em>Numerator</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.typesystem.impl.UnitImpl#getDenominator <em>Denominator</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.typesystem.impl.UnitImpl#getScale <em>Scale</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.typesystem.impl.UnitImpl#isWildcard <em>Wildcard</em>}</li>
  * </ul>
  * </p>
  *
@@ -39,14 +37,24 @@ import org.eclipselabs.mscript.typesystem.internal.operations.UnitOperations;
  */
 public class UnitImpl extends EObjectImpl implements Unit {
 	/**
-	 * The cached value of the '{@link #getFactors() <em>Factors</em>}' containment reference list.
+	 * The cached value of the '{@link #getNumerator() <em>Numerator</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getFactors()
+	 * @see #getNumerator()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<UnitFactor> factors;
+	protected UnitNumerator numerator;
+
+	/**
+	 * The cached value of the '{@link #getDenominator() <em>Denominator</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDenominator()
+	 * @generated
+	 * @ordered
+	 */
+	protected UnitDenominator denominator;
 
 	/**
 	 * The default value of the '{@link #getScale() <em>Scale</em>}' attribute.
@@ -57,6 +65,7 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	 * @ordered
 	 */
 	protected static final int SCALE_EDEFAULT = 0;
+
 	/**
 	 * The cached value of the '{@link #getScale() <em>Scale</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -66,6 +75,16 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	 * @ordered
 	 */
 	protected int scale = SCALE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isWildcard() <em>Wildcard</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isWildcard()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean WILDCARD_EDEFAULT = false;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -91,11 +110,85 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<UnitFactor> getFactors() {
-		if (factors == null) {
-			factors = new EObjectContainmentEList<UnitFactor>(UnitFactor.class, this, TypeSystemPackage.UNIT__FACTORS);
+	public UnitNumerator getNumerator() {
+		return numerator;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetNumerator(UnitNumerator newNumerator, NotificationChain msgs) {
+		UnitNumerator oldNumerator = numerator;
+		numerator = newNumerator;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TypeSystemPackage.UNIT__NUMERATOR, oldNumerator, newNumerator);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
-		return factors;
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setNumerator(UnitNumerator newNumerator) {
+		if (newNumerator != numerator) {
+			NotificationChain msgs = null;
+			if (numerator != null)
+				msgs = ((InternalEObject)numerator).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TypeSystemPackage.UNIT__NUMERATOR, null, msgs);
+			if (newNumerator != null)
+				msgs = ((InternalEObject)newNumerator).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TypeSystemPackage.UNIT__NUMERATOR, null, msgs);
+			msgs = basicSetNumerator(newNumerator, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TypeSystemPackage.UNIT__NUMERATOR, newNumerator, newNumerator));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public UnitDenominator getDenominator() {
+		return denominator;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetDenominator(UnitDenominator newDenominator, NotificationChain msgs) {
+		UnitDenominator oldDenominator = denominator;
+		denominator = newDenominator;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TypeSystemPackage.UNIT__DENOMINATOR, oldDenominator, newDenominator);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDenominator(UnitDenominator newDenominator) {
+		if (newDenominator != denominator) {
+			NotificationChain msgs = null;
+			if (denominator != null)
+				msgs = ((InternalEObject)denominator).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TypeSystemPackage.UNIT__DENOMINATOR, null, msgs);
+			if (newDenominator != null)
+				msgs = ((InternalEObject)newDenominator).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TypeSystemPackage.UNIT__DENOMINATOR, null, msgs);
+			msgs = basicSetDenominator(newDenominator, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TypeSystemPackage.UNIT__DENOMINATOR, newDenominator, newDenominator));
 	}
 
 	/**
@@ -124,8 +217,8 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public UnitFactor getFactor(UnitSymbol symbol) {
-		return UnitOperations.getFactor(this, symbol);
+	public boolean isWildcard() {
+		return getNumerator() == null;
 	}
 
 	/**
@@ -133,8 +226,8 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public Unit multiply(Unit other) {
-		return UnitOperations.multiply(this, other);
+	public Unit getNormalized() {
+		return UnitOperations.getNormalized(this);
 	}
 
 	/**
@@ -142,8 +235,8 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public Unit divide(Unit other) {
-		return UnitOperations.divide(this, other);
+	public Unit evaluate(OperatorKind operator, Unit other) {
+		return UnitOperations.evaluate(this, operator, other);
 	}
 
 	/**
@@ -151,8 +244,8 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public Unit power(int exponent) {
-		return UnitOperations.power(this, exponent);
+	public Unit evaluate(OperatorKind operator, int n) {
+		return UnitOperations.evaluate(this, operator, n);
 	}
 
 	/**
@@ -160,8 +253,8 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public boolean isSameAs(Unit other, boolean ignoreScale) {
-		return UnitOperations.isSameAs(this, other, ignoreScale);
+	public boolean isEquivalentTo(Unit other, boolean ignoreScale) {
+		return UnitOperations.isEquivalentTo(this, other, ignoreScale);
 	}
 
 	/**
@@ -172,8 +265,10 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TypeSystemPackage.UNIT__FACTORS:
-				return ((InternalEList<?>)getFactors()).basicRemove(otherEnd, msgs);
+			case TypeSystemPackage.UNIT__NUMERATOR:
+				return basicSetNumerator(null, msgs);
+			case TypeSystemPackage.UNIT__DENOMINATOR:
+				return basicSetDenominator(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -186,10 +281,14 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TypeSystemPackage.UNIT__FACTORS:
-				return getFactors();
+			case TypeSystemPackage.UNIT__NUMERATOR:
+				return getNumerator();
+			case TypeSystemPackage.UNIT__DENOMINATOR:
+				return getDenominator();
 			case TypeSystemPackage.UNIT__SCALE:
 				return getScale();
+			case TypeSystemPackage.UNIT__WILDCARD:
+				return isWildcard();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -199,13 +298,14 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TypeSystemPackage.UNIT__FACTORS:
-				getFactors().clear();
-				getFactors().addAll((Collection<? extends UnitFactor>)newValue);
+			case TypeSystemPackage.UNIT__NUMERATOR:
+				setNumerator((UnitNumerator)newValue);
+				return;
+			case TypeSystemPackage.UNIT__DENOMINATOR:
+				setDenominator((UnitDenominator)newValue);
 				return;
 			case TypeSystemPackage.UNIT__SCALE:
 				setScale((Integer)newValue);
@@ -222,8 +322,11 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TypeSystemPackage.UNIT__FACTORS:
-				getFactors().clear();
+			case TypeSystemPackage.UNIT__NUMERATOR:
+				setNumerator((UnitNumerator)null);
+				return;
+			case TypeSystemPackage.UNIT__DENOMINATOR:
+				setDenominator((UnitDenominator)null);
 				return;
 			case TypeSystemPackage.UNIT__SCALE:
 				setScale(SCALE_EDEFAULT);
@@ -240,10 +343,14 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TypeSystemPackage.UNIT__FACTORS:
-				return factors != null && !factors.isEmpty();
+			case TypeSystemPackage.UNIT__NUMERATOR:
+				return numerator != null;
+			case TypeSystemPackage.UNIT__DENOMINATOR:
+				return denominator != null;
 			case TypeSystemPackage.UNIT__SCALE:
 				return scale != SCALE_EDEFAULT;
+			case TypeSystemPackage.UNIT__WILDCARD:
+				return isWildcard() != WILDCARD_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -264,4 +371,4 @@ public class UnitImpl extends EObjectImpl implements Unit {
 		return result.toString();
 	}
 
-} //UnitImpl
+} //UnitExpressionImpl

@@ -8,7 +8,7 @@ package org.eclipselabs.mscript.language.functionmodel;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipselabs.mscript.language.ast.Expression;
+import org.eclipselabs.mscript.typesystem.Expression;
 
 /**
  * <!-- begin-user-doc -->

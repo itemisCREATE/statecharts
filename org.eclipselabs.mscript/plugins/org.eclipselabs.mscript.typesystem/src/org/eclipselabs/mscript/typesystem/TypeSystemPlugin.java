@@ -16,9 +16,6 @@ import org.eclipse.emf.common.util.ResourceLocator;
  * @generated
  */
 public final class TypeSystemPlugin extends EMFPlugin {
-	
-	public static final String PLUGIN_ID = "org.eclipselabs.mscript.typesystem";
-	
 	/**
 	 * Keep track of the singleton.
 	 * <!-- begin-user-doc -->

@@ -8,6 +8,7 @@ package org.eclipselabs.mscript.language.ast;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipselabs.mscript.typesystem.Expression;
 
 /**
  * <!-- begin-user-doc -->
@@ -82,7 +83,7 @@ public interface FunctionObjectDeclaration extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Template Arguments</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipselabs.mscript.language.ast.Expression}.
+	 * The list contents are of type {@link org.eclipselabs.mscript.typesystem.Expression}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Template Arguments</em>' containment reference list isn't clear,

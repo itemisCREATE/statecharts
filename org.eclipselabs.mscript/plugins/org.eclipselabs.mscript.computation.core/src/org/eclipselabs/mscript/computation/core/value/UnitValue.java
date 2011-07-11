@@ -13,6 +13,7 @@ package org.eclipselabs.mscript.computation.core.value;
 
 import org.eclipselabs.mscript.computation.core.IComputationContext;
 import org.eclipselabs.mscript.typesystem.DataType;
+import org.eclipselabs.mscript.typesystem.OperatorKind;
 import org.eclipselabs.mscript.typesystem.Unit;
 import org.eclipselabs.mscript.typesystem.util.TypeSystemUtil;
 
@@ -61,7 +62,7 @@ public class UnitValue extends AbstractValue {
 	@Override
 	protected IValue doMultiply(IValue other, DataType resultDataType) {
 		if (other instanceof Unit) {
-			return new UnitValue(getContext(), value.multiply(((UnitValue) other).value));
+			return new UnitValue(getContext(), value.evaluate(OperatorKind.MULTIPLY, ((UnitValue) other).value));
 		}
 		return InvalidValue.SINGLETON;
 	}
@@ -72,7 +73,7 @@ public class UnitValue extends AbstractValue {
 	@Override
 	protected IValue doDivide(IValue other, DataType resultDataType) {
 		if (other instanceof Unit) {
-			return new UnitValue(getContext(), value.divide(((UnitValue) other).value));
+			return new UnitValue(getContext(), value.evaluate(OperatorKind.MULTIPLY, ((UnitValue) other).value));
 		}
 		return InvalidValue.SINGLETON;
 	}
@@ -89,7 +90,7 @@ public class UnitValue extends AbstractValue {
 		if (value == null || otherUnitValue == null) {
 			return new BooleanValue(getContext(), false);
 		}
-		return new BooleanValue(getContext(), value.isSameAs(otherUnitValue.value, false));
+		return new BooleanValue(getContext(), value.isEquivalentTo(otherUnitValue.value, false));
 	}
 
 	/* (non-Javadoc)
@@ -104,7 +105,7 @@ public class UnitValue extends AbstractValue {
 		if (value == null || otherUnitValue == null) {
 			return new BooleanValue(getContext(), true);
 		}
-		return new BooleanValue(getContext(), !value.isSameAs(otherUnitValue.value, false));
+		return new BooleanValue(getContext(), !value.isEquivalentTo(otherUnitValue.value, false));
 	}
 	
 }

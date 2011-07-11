@@ -7,6 +7,7 @@
 package org.eclipselabs.mscript.language.ast;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipselabs.mscript.typesystem.Expression;
 
 /**
  * <!-- begin-user-doc -->

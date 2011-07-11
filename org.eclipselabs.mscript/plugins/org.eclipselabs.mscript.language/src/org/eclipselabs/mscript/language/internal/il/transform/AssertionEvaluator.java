@@ -19,8 +19,6 @@ import org.eclipselabs.mscript.computation.core.ComputationContext;
 import org.eclipselabs.mscript.computation.core.value.IBooleanValue;
 import org.eclipselabs.mscript.computation.core.value.IValue;
 import org.eclipselabs.mscript.language.ast.Assertion;
-import org.eclipselabs.mscript.language.ast.Expression;
-import org.eclipselabs.mscript.language.ast.StringLiteral;
 import org.eclipselabs.mscript.language.functionmodel.FunctionDescriptor;
 import org.eclipselabs.mscript.language.il.ILFunctionDefinition;
 import org.eclipselabs.mscript.language.il.transform.FunctionDefinitionTransformerContext;
@@ -31,6 +29,8 @@ import org.eclipselabs.mscript.language.interpreter.IInterpreterContext;
 import org.eclipselabs.mscript.language.interpreter.StaticInterpreterContext;
 import org.eclipselabs.mscript.language.interpreter.util.ExpressionInterpreterHelper;
 import org.eclipselabs.mscript.language.util.SyntaxStatus;
+import org.eclipselabs.mscript.typesystem.Expression;
+import org.eclipselabs.mscript.typesystem.StringLiteral;
 
 /**
  * @author Andreas Unger

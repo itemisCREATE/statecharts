@@ -15,7 +15,7 @@ import org.eclipselabs.mscript.typesystem.internal.operations.IntegerTypeOperati
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Integer Type</b></em>'.
+ * An implementation of the model object '<em><b>Integer Type Specifier</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
@@ -41,35 +41,29 @@ public class IntegerTypeImpl extends NumericTypeImpl implements IntegerType {
 	protected EClass eStaticClass() {
 		return TypeSystemPackage.Literals.INTEGER_TYPE;
 	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
+	
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.typesystem.impl.DataTypeImpl#evaluate(org.eclipselabs.mscript.typesystem.OperatorKind, org.eclipselabs.mscript.typesystem.DataType)
 	 */
 	@Override
 	public DataType evaluate(OperatorKind operator, DataType other) {
 		return IntegerTypeOperations.evaluate(this, operator, other);
 	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
+	
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.typesystem.impl.DataTypeImpl#evaluate(org.eclipselabs.mscript.typesystem.OperatorKind, int)
 	 */
 	@Override
-	public DataType evaluatePower(int exponent) {
-		return IntegerTypeOperations.evaluatePower(this, exponent);
+	public DataType evaluate(OperatorKind operator, int n) {
+		return IntegerTypeOperations.evaluate(this, operator, n);
 	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
+	
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.typesystem.impl.DataTypeImpl#isAssignableFrom(org.eclipselabs.mscript.typesystem.DataType)
 	 */
 	@Override
 	public boolean isAssignableFrom(DataType other) {
 		return IntegerTypeOperations.isAssignableFrom(this, other);
 	}
 
-} //IntegerTypeImpl
+} //IntegerTypeSpecifierImpl

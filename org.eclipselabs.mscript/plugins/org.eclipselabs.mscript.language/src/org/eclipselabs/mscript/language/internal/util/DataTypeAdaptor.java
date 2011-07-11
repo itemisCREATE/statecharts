@@ -15,7 +15,6 @@ package org.eclipselabs.mscript.language.internal.util;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.il.Assignment;
 import org.eclipselabs.mscript.language.il.Compound;
 import org.eclipselabs.mscript.language.il.ComputationCompound;
@@ -32,6 +31,7 @@ import org.eclipselabs.mscript.language.il.util.ILUtil;
 import org.eclipselabs.mscript.language.internal.LanguagePlugin;
 import org.eclipselabs.mscript.typesystem.ArrayType;
 import org.eclipselabs.mscript.typesystem.DataType;
+import org.eclipselabs.mscript.typesystem.Expression;
 import org.eclipselabs.mscript.typesystem.util.TypeSystemUtil;
 
 /**

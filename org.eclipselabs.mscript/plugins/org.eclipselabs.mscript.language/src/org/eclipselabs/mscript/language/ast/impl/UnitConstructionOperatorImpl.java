@@ -13,7 +13,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.UnitConstructionOperator;
-import org.eclipselabs.mscript.language.ast.UnitExpression;
+import org.eclipselabs.mscript.typesystem.Unit;
+import org.eclipselabs.mscript.typesystem.impl.ExpressionImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -37,7 +38,7 @@ public class UnitConstructionOperatorImpl extends ExpressionImpl implements Unit
 	 * @generated
 	 * @ordered
 	 */
-	protected UnitExpression unit;
+	protected Unit unit;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -63,7 +64,7 @@ public class UnitConstructionOperatorImpl extends ExpressionImpl implements Unit
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public UnitExpression getUnit() {
+	public Unit getUnit() {
 		return unit;
 	}
 
@@ -72,8 +73,8 @@ public class UnitConstructionOperatorImpl extends ExpressionImpl implements Unit
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetUnit(UnitExpression newUnit, NotificationChain msgs) {
-		UnitExpression oldUnit = unit;
+	public NotificationChain basicSetUnit(Unit newUnit, NotificationChain msgs) {
+		Unit oldUnit = unit;
 		unit = newUnit;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.UNIT_CONSTRUCTION_OPERATOR__UNIT, oldUnit, newUnit);
@@ -87,7 +88,7 @@ public class UnitConstructionOperatorImpl extends ExpressionImpl implements Unit
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setUnit(UnitExpression newUnit) {
+	public void setUnit(Unit newUnit) {
 		if (newUnit != unit) {
 			NotificationChain msgs = null;
 			if (unit != null)
@@ -138,7 +139,7 @@ public class UnitConstructionOperatorImpl extends ExpressionImpl implements Unit
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case AstPackage.UNIT_CONSTRUCTION_OPERATOR__UNIT:
-				setUnit((UnitExpression)newValue);
+				setUnit((Unit)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -153,7 +154,7 @@ public class UnitConstructionOperatorImpl extends ExpressionImpl implements Unit
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case AstPackage.UNIT_CONSTRUCTION_OPERATOR__UNIT:
-				setUnit((UnitExpression)null);
+				setUnit((Unit)null);
 				return;
 		}
 		super.eUnset(featureID);

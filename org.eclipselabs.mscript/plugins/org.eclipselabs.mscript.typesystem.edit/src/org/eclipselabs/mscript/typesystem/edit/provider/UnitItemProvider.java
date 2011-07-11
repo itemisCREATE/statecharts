@@ -70,6 +70,7 @@ public class UnitItemProvider
 			super.getPropertyDescriptors(object);
 
 			addScalePropertyDescriptor(object);
+			addWildcardPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -97,6 +98,28 @@ public class UnitItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Wildcard feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addWildcardPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Unit_wildcard_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Unit_wildcard_feature", "_UI_Unit_type"),
+				 TypeSystemPackage.Literals.UNIT__WILDCARD,
+				 false,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -108,7 +131,8 @@ public class UnitItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(TypeSystemPackage.Literals.UNIT__FACTORS);
+			childrenFeatures.add(TypeSystemPackage.Literals.UNIT__NUMERATOR);
+			childrenFeatures.add(TypeSystemPackage.Literals.UNIT__DENOMINATOR);
 		}
 		return childrenFeatures;
 	}
@@ -162,9 +186,11 @@ public class UnitItemProvider
 
 		switch (notification.getFeatureID(Unit.class)) {
 			case TypeSystemPackage.UNIT__SCALE:
+			case TypeSystemPackage.UNIT__WILDCARD:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case TypeSystemPackage.UNIT__FACTORS:
+			case TypeSystemPackage.UNIT__NUMERATOR:
+			case TypeSystemPackage.UNIT__DENOMINATOR:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -184,8 +210,13 @@ public class UnitItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TypeSystemPackage.Literals.UNIT__FACTORS,
-				 TypeSystemFactory.eINSTANCE.createUnitFactor()));
+				(TypeSystemPackage.Literals.UNIT__NUMERATOR,
+				 TypeSystemFactory.eINSTANCE.createUnitNumerator()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypeSystemPackage.Literals.UNIT__DENOMINATOR,
+				 TypeSystemFactory.eINSTANCE.createUnitDenominator()));
 	}
 
 	/**

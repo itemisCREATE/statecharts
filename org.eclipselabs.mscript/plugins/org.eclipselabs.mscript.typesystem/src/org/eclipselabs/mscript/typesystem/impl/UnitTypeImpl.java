@@ -41,25 +41,29 @@ public class UnitTypeImpl extends DataTypeImpl implements UnitType {
 	protected EClass eStaticClass() {
 		return TypeSystemPackage.Literals.UNIT_TYPE;
 	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
+	
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.typesystem.impl.DataTypeImpl#evaluate(org.eclipselabs.mscript.typesystem.OperatorKind, org.eclipselabs.mscript.typesystem.DataType)
 	 */
 	@Override
 	public DataType evaluate(OperatorKind operator, DataType other) {
 		return UnitTypeOperations.evaluate(this, operator, other);
 	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
+	
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.typesystem.impl.DataTypeImpl#evaluate(org.eclipselabs.mscript.typesystem.OperatorKind, int)
 	 */
 	@Override
-	public DataType evaluatePower(int exponent) {
-		return UnitTypeOperations.evaluatePower(this, exponent);
+	public DataType evaluate(OperatorKind operator, int n) {
+		return UnitTypeOperations.evaluate(this, operator, n);
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.typesystem.impl.DataTypeImpl#isAssignableFrom(org.eclipselabs.mscript.typesystem.DataType)
+	 */
+	@Override
+	public boolean isAssignableFrom(DataType other) {
+		return UnitTypeOperations.isAssignableFrom(this, other);
 	}
 
 } //UnitTypeImpl

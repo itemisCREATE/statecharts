@@ -16,24 +16,33 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipselabs.mscript.typesystem.AnyDataType;
 import org.eclipselabs.mscript.typesystem.ArrayDimension;
 import org.eclipselabs.mscript.typesystem.ArrayType;
+import org.eclipselabs.mscript.typesystem.BooleanKind;
+import org.eclipselabs.mscript.typesystem.BooleanLiteral;
 import org.eclipselabs.mscript.typesystem.BooleanType;
+import org.eclipselabs.mscript.typesystem.ComplexType;
 import org.eclipselabs.mscript.typesystem.DataType;
+import org.eclipselabs.mscript.typesystem.Expression;
+import org.eclipselabs.mscript.typesystem.GaussianType;
+import org.eclipselabs.mscript.typesystem.IntegerLiteral;
 import org.eclipselabs.mscript.typesystem.IntegerType;
 import org.eclipselabs.mscript.typesystem.InvalidDataType;
+import org.eclipselabs.mscript.typesystem.Literal;
+import org.eclipselabs.mscript.typesystem.NumericLiteral;
 import org.eclipselabs.mscript.typesystem.NumericType;
 import org.eclipselabs.mscript.typesystem.OperatorKind;
 import org.eclipselabs.mscript.typesystem.PrimitiveType;
+import org.eclipselabs.mscript.typesystem.RealLiteral;
 import org.eclipselabs.mscript.typesystem.RealType;
-import org.eclipselabs.mscript.typesystem.Record;
-import org.eclipselabs.mscript.typesystem.RecordField;
+import org.eclipselabs.mscript.typesystem.StringLiteral;
 import org.eclipselabs.mscript.typesystem.StringType;
 import org.eclipselabs.mscript.typesystem.TensorType;
-import org.eclipselabs.mscript.typesystem.Type;
 import org.eclipselabs.mscript.typesystem.TypeSystemFactory;
 import org.eclipselabs.mscript.typesystem.TypeSystemPackage;
 import org.eclipselabs.mscript.typesystem.Unit;
+import org.eclipselabs.mscript.typesystem.UnitDenominator;
 import org.eclipselabs.mscript.typesystem.UnitFactor;
-import org.eclipselabs.mscript.typesystem.UnitSymbol;
+import org.eclipselabs.mscript.typesystem.UnitNumerator;
+import org.eclipselabs.mscript.typesystem.UnitProduct;
 import org.eclipselabs.mscript.typesystem.UnitType;
 
 /**
@@ -48,20 +57,6 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass typeEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass arrayTypeEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass dataTypeEClass = null;
 
 	/**
@@ -69,7 +64,21 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass arrayDimensionEClass = null;
+	private EClass invalidDataTypeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass anyDataTypeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass unitTypeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -83,13 +92,6 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass realTypeEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass numericTypeEClass = null;
 
 	/**
@@ -97,14 +99,7 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass unitEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass unitFactorEClass = null;
+	private EClass realTypeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -112,6 +107,20 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 	 * @generated
 	 */
 	private EClass integerTypeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass complexTypeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass gaussianTypeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -132,7 +141,7 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass invalidDataTypeEClass = null;
+	private EClass arrayTypeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -146,28 +155,91 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass recordEClass = null;
+	private EClass arrayDimensionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass recordFieldEClass = null;
+	private EClass expressionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass unitTypeEClass = null;
+	private EClass unitEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass anyDataTypeEClass = null;
+	private EClass unitProductEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass unitNumeratorEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass unitDenominatorEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass unitFactorEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass literalEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass numericLiteralEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass realLiteralEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass integerLiteralEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass booleanLiteralEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass stringLiteralEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -181,7 +253,7 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EEnum unitSymbolEEnum = null;
+	private EEnum booleanKindEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -249,96 +321,6 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getType() {
-		return typeEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getArrayType() {
-		return arrayTypeEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getArrayType_ElementType() {
-		return (EReference)arrayTypeEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getArrayType_Dimensions() {
-		return (EReference)arrayTypeEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getArrayType_Dimensionality() {
-		return (EAttribute)arrayTypeEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getArrayType_Size() {
-		return (EAttribute)arrayTypeEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getArrayType_RowSize() {
-		return (EAttribute)arrayTypeEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getArrayType_ColumnSize() {
-		return (EAttribute)arrayTypeEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getArrayType_Dimensional() {
-		return (EAttribute)arrayTypeEClass.getEStructuralFeatures().get(6);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getArrayType_Multidimensional() {
-		return (EAttribute)arrayTypeEClass.getEStructuralFeatures().get(7);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getDataType() {
 		return dataTypeEClass;
 	}
@@ -348,8 +330,8 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getArrayDimension() {
-		return arrayDimensionEClass;
+	public EClass getInvalidDataType() {
+		return invalidDataTypeEClass;
 	}
 
 	/**
@@ -357,8 +339,17 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getArrayDimension_Size() {
-		return (EAttribute)arrayDimensionEClass.getEStructuralFeatures().get(0);
+	public EClass getAnyDataType() {
+		return anyDataTypeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getUnitType() {
+		return unitTypeEClass;
 	}
 
 	/**
@@ -368,15 +359,6 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 	 */
 	public EClass getPrimitiveType() {
 		return primitiveTypeEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getRealType() {
-		return realTypeEClass;
 	}
 
 	/**
@@ -402,53 +384,8 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getUnit() {
-		return unitEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getUnit_Factors() {
-		return (EReference)unitEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getUnit_Scale() {
-		return (EAttribute)unitEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getUnitFactor() {
-		return unitFactorEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getUnitFactor_Symbol() {
-		return (EAttribute)unitFactorEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getUnitFactor_Exponent() {
-		return (EAttribute)unitFactorEClass.getEStructuralFeatures().get(1);
+	public EClass getRealType() {
+		return realTypeEClass;
 	}
 
 	/**
@@ -458,6 +395,24 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 	 */
 	public EClass getIntegerType() {
 		return integerTypeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getComplexType() {
+		return complexTypeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getGaussianType() {
+		return gaussianTypeEClass;
 	}
 
 	/**
@@ -483,8 +438,62 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getInvalidDataType() {
-		return invalidDataTypeEClass;
+	public EClass getArrayType() {
+		return arrayTypeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getArrayType_ElementType() {
+		return (EReference)arrayTypeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getArrayType_DefinedElementType() {
+		return (EReference)arrayTypeEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getArrayType_Dimensions() {
+		return (EReference)arrayTypeEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getArrayType_Dimensionality() {
+		return (EAttribute)arrayTypeEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getArrayType_Dimensional() {
+		return (EAttribute)arrayTypeEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getArrayType_Multidimensional() {
+		return (EAttribute)arrayTypeEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -519,8 +528,8 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getRecord() {
-		return recordEClass;
+	public EClass getArrayDimension() {
+		return arrayDimensionEClass;
 	}
 
 	/**
@@ -528,8 +537,8 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getRecord_Fields() {
-		return (EReference)recordEClass.getEStructuralFeatures().get(0);
+	public EReference getArrayDimension_Size() {
+		return (EReference)arrayDimensionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -537,8 +546,8 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getRecordField() {
-		return recordFieldEClass;
+	public EClass getExpression() {
+		return expressionEClass;
 	}
 
 	/**
@@ -546,8 +555,8 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getRecordField_Type() {
-		return (EReference)recordFieldEClass.getEStructuralFeatures().get(0);
+	public EClass getUnit() {
+		return unitEClass;
 	}
 
 	/**
@@ -555,8 +564,8 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getRecordField_Name() {
-		return (EAttribute)recordFieldEClass.getEStructuralFeatures().get(1);
+	public EReference getUnit_Numerator() {
+		return (EReference)unitEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -564,8 +573,8 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getUnitType() {
-		return unitTypeEClass;
+	public EReference getUnit_Denominator() {
+		return (EReference)unitEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -573,8 +582,188 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getAnyDataType() {
-		return anyDataTypeEClass;
+	public EAttribute getUnit_Scale() {
+		return (EAttribute)unitEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getUnit_Wildcard() {
+		return (EAttribute)unitEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getUnitProduct() {
+		return unitProductEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getUnitProduct_Factors() {
+		return (EReference)unitProductEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getUnitNumerator() {
+		return unitNumeratorEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getUnitDenominator() {
+		return unitDenominatorEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getUnitFactor() {
+		return unitFactorEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getUnitFactor_Symbol() {
+		return (EAttribute)unitFactorEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getUnitFactor_Exponent() {
+		return (EAttribute)unitFactorEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getLiteral() {
+		return literalEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getNumericLiteral() {
+		return numericLiteralEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getNumericLiteral_Modifier() {
+		return (EAttribute)numericLiteralEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getNumericLiteral_Unit() {
+		return (EReference)numericLiteralEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getRealLiteral() {
+		return realLiteralEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getRealLiteral_Value() {
+		return (EAttribute)realLiteralEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getIntegerLiteral() {
+		return integerLiteralEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getIntegerLiteral_Value() {
+		return (EAttribute)integerLiteralEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getBooleanLiteral() {
+		return booleanLiteralEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBooleanLiteral_Value() {
+		return (EAttribute)booleanLiteralEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getStringLiteral() {
+		return stringLiteralEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getStringLiteral_Value() {
+		return (EAttribute)stringLiteralEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -591,8 +780,8 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EEnum getUnitSymbol() {
-		return unitSymbolEEnum;
+	public EEnum getBooleanKind() {
+		return booleanKindEEnum;
 	}
 
 	/**
@@ -623,64 +812,86 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 		isCreated = true;
 
 		// Create classes and their features
-		typeEClass = createEClass(TYPE);
-
-		arrayTypeEClass = createEClass(ARRAY_TYPE);
-		createEReference(arrayTypeEClass, ARRAY_TYPE__ELEMENT_TYPE);
-		createEReference(arrayTypeEClass, ARRAY_TYPE__DIMENSIONS);
-		createEAttribute(arrayTypeEClass, ARRAY_TYPE__DIMENSIONALITY);
-		createEAttribute(arrayTypeEClass, ARRAY_TYPE__SIZE);
-		createEAttribute(arrayTypeEClass, ARRAY_TYPE__ROW_SIZE);
-		createEAttribute(arrayTypeEClass, ARRAY_TYPE__COLUMN_SIZE);
-		createEAttribute(arrayTypeEClass, ARRAY_TYPE__DIMENSIONAL);
-		createEAttribute(arrayTypeEClass, ARRAY_TYPE__MULTIDIMENSIONAL);
-
 		dataTypeEClass = createEClass(DATA_TYPE);
 
-		arrayDimensionEClass = createEClass(ARRAY_DIMENSION);
-		createEAttribute(arrayDimensionEClass, ARRAY_DIMENSION__SIZE);
+		invalidDataTypeEClass = createEClass(INVALID_DATA_TYPE);
+
+		anyDataTypeEClass = createEClass(ANY_DATA_TYPE);
+
+		unitTypeEClass = createEClass(UNIT_TYPE);
 
 		primitiveTypeEClass = createEClass(PRIMITIVE_TYPE);
-
-		realTypeEClass = createEClass(REAL_TYPE);
 
 		numericTypeEClass = createEClass(NUMERIC_TYPE);
 		createEReference(numericTypeEClass, NUMERIC_TYPE__UNIT);
 
-		unitEClass = createEClass(UNIT);
-		createEReference(unitEClass, UNIT__FACTORS);
-		createEAttribute(unitEClass, UNIT__SCALE);
-
-		unitFactorEClass = createEClass(UNIT_FACTOR);
-		createEAttribute(unitFactorEClass, UNIT_FACTOR__SYMBOL);
-		createEAttribute(unitFactorEClass, UNIT_FACTOR__EXPONENT);
+		realTypeEClass = createEClass(REAL_TYPE);
 
 		integerTypeEClass = createEClass(INTEGER_TYPE);
+
+		complexTypeEClass = createEClass(COMPLEX_TYPE);
+
+		gaussianTypeEClass = createEClass(GAUSSIAN_TYPE);
 
 		booleanTypeEClass = createEClass(BOOLEAN_TYPE);
 
 		stringTypeEClass = createEClass(STRING_TYPE);
 
-		invalidDataTypeEClass = createEClass(INVALID_DATA_TYPE);
+		arrayTypeEClass = createEClass(ARRAY_TYPE);
+		createEReference(arrayTypeEClass, ARRAY_TYPE__ELEMENT_TYPE);
+		createEReference(arrayTypeEClass, ARRAY_TYPE__DEFINED_ELEMENT_TYPE);
+		createEReference(arrayTypeEClass, ARRAY_TYPE__DIMENSIONS);
+		createEAttribute(arrayTypeEClass, ARRAY_TYPE__DIMENSIONALITY);
+		createEAttribute(arrayTypeEClass, ARRAY_TYPE__DIMENSIONAL);
+		createEAttribute(arrayTypeEClass, ARRAY_TYPE__MULTIDIMENSIONAL);
 
 		tensorTypeEClass = createEClass(TENSOR_TYPE);
 		createEAttribute(tensorTypeEClass, TENSOR_TYPE__VECTOR);
 		createEAttribute(tensorTypeEClass, TENSOR_TYPE__MATRIX);
 
-		recordEClass = createEClass(RECORD);
-		createEReference(recordEClass, RECORD__FIELDS);
+		arrayDimensionEClass = createEClass(ARRAY_DIMENSION);
+		createEReference(arrayDimensionEClass, ARRAY_DIMENSION__SIZE);
 
-		recordFieldEClass = createEClass(RECORD_FIELD);
-		createEReference(recordFieldEClass, RECORD_FIELD__TYPE);
-		createEAttribute(recordFieldEClass, RECORD_FIELD__NAME);
+		expressionEClass = createEClass(EXPRESSION);
 
-		unitTypeEClass = createEClass(UNIT_TYPE);
+		unitEClass = createEClass(UNIT);
+		createEReference(unitEClass, UNIT__NUMERATOR);
+		createEReference(unitEClass, UNIT__DENOMINATOR);
+		createEAttribute(unitEClass, UNIT__SCALE);
+		createEAttribute(unitEClass, UNIT__WILDCARD);
 
-		anyDataTypeEClass = createEClass(ANY_DATA_TYPE);
+		unitProductEClass = createEClass(UNIT_PRODUCT);
+		createEReference(unitProductEClass, UNIT_PRODUCT__FACTORS);
+
+		unitNumeratorEClass = createEClass(UNIT_NUMERATOR);
+
+		unitDenominatorEClass = createEClass(UNIT_DENOMINATOR);
+
+		unitFactorEClass = createEClass(UNIT_FACTOR);
+		createEAttribute(unitFactorEClass, UNIT_FACTOR__SYMBOL);
+		createEAttribute(unitFactorEClass, UNIT_FACTOR__EXPONENT);
+
+		literalEClass = createEClass(LITERAL);
+
+		numericLiteralEClass = createEClass(NUMERIC_LITERAL);
+		createEAttribute(numericLiteralEClass, NUMERIC_LITERAL__MODIFIER);
+		createEReference(numericLiteralEClass, NUMERIC_LITERAL__UNIT);
+
+		realLiteralEClass = createEClass(REAL_LITERAL);
+		createEAttribute(realLiteralEClass, REAL_LITERAL__VALUE);
+
+		integerLiteralEClass = createEClass(INTEGER_LITERAL);
+		createEAttribute(integerLiteralEClass, INTEGER_LITERAL__VALUE);
+
+		booleanLiteralEClass = createEClass(BOOLEAN_LITERAL);
+		createEAttribute(booleanLiteralEClass, BOOLEAN_LITERAL__VALUE);
+
+		stringLiteralEClass = createEClass(STRING_LITERAL);
+		createEAttribute(stringLiteralEClass, STRING_LITERAL__VALUE);
 
 		// Create enums
 		operatorKindEEnum = createEEnum(OPERATOR_KIND);
-		unitSymbolEEnum = createEEnum(UNIT_SYMBOL);
+		booleanKindEEnum = createEEnum(BOOLEAN_KIND);
 	}
 
 	/**
@@ -711,111 +922,148 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		arrayTypeEClass.getESuperTypes().add(this.getDataType());
-		dataTypeEClass.getESuperTypes().add(this.getType());
+		invalidDataTypeEClass.getESuperTypes().add(this.getDataType());
+		anyDataTypeEClass.getESuperTypes().add(this.getDataType());
+		unitTypeEClass.getESuperTypes().add(this.getDataType());
 		primitiveTypeEClass.getESuperTypes().add(this.getDataType());
-		realTypeEClass.getESuperTypes().add(this.getNumericType());
 		numericTypeEClass.getESuperTypes().add(this.getPrimitiveType());
+		realTypeEClass.getESuperTypes().add(this.getNumericType());
 		integerTypeEClass.getESuperTypes().add(this.getNumericType());
+		complexTypeEClass.getESuperTypes().add(this.getNumericType());
+		gaussianTypeEClass.getESuperTypes().add(this.getNumericType());
 		booleanTypeEClass.getESuperTypes().add(this.getPrimitiveType());
 		stringTypeEClass.getESuperTypes().add(this.getPrimitiveType());
-		invalidDataTypeEClass.getESuperTypes().add(this.getDataType());
+		arrayTypeEClass.getESuperTypes().add(this.getDataType());
 		tensorTypeEClass.getESuperTypes().add(this.getArrayType());
-		recordEClass.getESuperTypes().add(this.getDataType());
-		unitTypeEClass.getESuperTypes().add(this.getDataType());
-		anyDataTypeEClass.getESuperTypes().add(this.getDataType());
+		unitNumeratorEClass.getESuperTypes().add(this.getUnitProduct());
+		unitDenominatorEClass.getESuperTypes().add(this.getUnitProduct());
+		literalEClass.getESuperTypes().add(this.getExpression());
+		numericLiteralEClass.getESuperTypes().add(this.getLiteral());
+		realLiteralEClass.getESuperTypes().add(this.getNumericLiteral());
+		integerLiteralEClass.getESuperTypes().add(this.getNumericLiteral());
+		booleanLiteralEClass.getESuperTypes().add(this.getLiteral());
+		stringLiteralEClass.getESuperTypes().add(this.getLiteral());
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(typeEClass, Type.class, "Type", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(arrayTypeEClass, ArrayType.class, "ArrayType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getArrayType_ElementType(), this.getDataType(), null, "elementType", null, 1, 1, ArrayType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getArrayType_Dimensions(), this.getArrayDimension(), null, "dimensions", null, 0, -1, ArrayType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEAttribute(getArrayType_Dimensionality(), ecorePackage.getEInt(), "dimensionality", null, 1, 1, ArrayType.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, !IS_ORDERED);
-		initEAttribute(getArrayType_Size(), ecorePackage.getEInt(), "size", null, 1, 1, ArrayType.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, !IS_ORDERED);
-		initEAttribute(getArrayType_RowSize(), ecorePackage.getEInt(), "rowSize", null, 1, 1, ArrayType.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, !IS_ORDERED);
-		initEAttribute(getArrayType_ColumnSize(), ecorePackage.getEInt(), "columnSize", null, 1, 1, ArrayType.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, !IS_ORDERED);
-		initEAttribute(getArrayType_Dimensional(), ecorePackage.getEBoolean(), "dimensional", null, 1, 1, ArrayType.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, !IS_ORDERED);
-		initEAttribute(getArrayType_Multidimensional(), ecorePackage.getEBoolean(), "multidimensional", null, 1, 1, ArrayType.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, !IS_ORDERED);
-
 		initEClass(dataTypeEClass, DataType.class, "DataType", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		EOperation op = addEOperation(dataTypeEClass, this.getDataType(), "evaluate", 1, 1, IS_UNIQUE, !IS_ORDERED);
-		addEParameter(op, this.getOperatorKind(), "operator", 1, 1, IS_UNIQUE, !IS_ORDERED);
-		addEParameter(op, this.getDataType(), "other", 0, 1, IS_UNIQUE, !IS_ORDERED);
+		EOperation op = addEOperation(dataTypeEClass, this.getDataType(), "evaluate", 1, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getOperatorKind(), "operator", 1, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getDataType(), "other", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(dataTypeEClass, this.getDataType(), "evaluatePower", 1, 1, IS_UNIQUE, !IS_ORDERED);
-		addEParameter(op, ecorePackage.getEInt(), "exponent", 1, 1, IS_UNIQUE, !IS_ORDERED);
+		op = addEOperation(dataTypeEClass, this.getDataType(), "evaluate", 1, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getOperatorKind(), "operator", 1, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEInt(), "n", 1, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(dataTypeEClass, ecorePackage.getEBoolean(), "isAssignableFrom", 1, 1, IS_UNIQUE, !IS_ORDERED);
-		addEParameter(op, this.getDataType(), "other", 1, 1, IS_UNIQUE, !IS_ORDERED);
+		op = addEOperation(dataTypeEClass, ecorePackage.getEBoolean(), "isAssignableFrom", 1, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getDataType(), "other", 1, 1, IS_UNIQUE, IS_ORDERED);
 
-		initEClass(arrayDimensionEClass, ArrayDimension.class, "ArrayDimension", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getArrayDimension_Size(), ecorePackage.getEInt(), "size", null, 1, 1, ArrayDimension.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		op = addEOperation(dataTypeEClass, ecorePackage.getEBoolean(), "isEquivalentTo", 1, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getDataType(), "other", 1, 1, IS_UNIQUE, IS_ORDERED);
 
-		initEClass(primitiveTypeEClass, PrimitiveType.class, "PrimitiveType", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(invalidDataTypeEClass, InvalidDataType.class, "InvalidDataType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(anyDataTypeEClass, AnyDataType.class, "AnyDataType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(unitTypeEClass, UnitType.class, "UnitType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(primitiveTypeEClass, PrimitiveType.class, "PrimitiveType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(numericTypeEClass, NumericType.class, "NumericType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getNumericType_Unit(), this.getUnit(), null, "unit", null, 1, 1, NumericType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(realTypeEClass, RealType.class, "RealType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(numericTypeEClass, NumericType.class, "NumericType", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getNumericType_Unit(), this.getUnit(), null, "unit", null, 0, 1, NumericType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-
-		initEClass(unitEClass, Unit.class, "Unit", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getUnit_Factors(), this.getUnitFactor(), null, "factors", null, 0, -1, Unit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEAttribute(getUnit_Scale(), ecorePackage.getEInt(), "scale", "0", 1, 1, Unit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-
-		op = addEOperation(unitEClass, this.getUnitFactor(), "getFactor", 0, 1, IS_UNIQUE, !IS_ORDERED);
-		addEParameter(op, this.getUnitSymbol(), "symbol", 1, 1, IS_UNIQUE, !IS_ORDERED);
-
-		op = addEOperation(unitEClass, this.getUnit(), "multiply", 1, 1, IS_UNIQUE, !IS_ORDERED);
-		addEParameter(op, this.getUnit(), "other", 1, 1, IS_UNIQUE, !IS_ORDERED);
-
-		op = addEOperation(unitEClass, this.getUnit(), "divide", 1, 1, IS_UNIQUE, !IS_ORDERED);
-		addEParameter(op, this.getUnit(), "other", 1, 1, IS_UNIQUE, !IS_ORDERED);
-
-		op = addEOperation(unitEClass, this.getUnit(), "power", 1, 1, IS_UNIQUE, !IS_ORDERED);
-		addEParameter(op, ecorePackage.getEInt(), "exponent", 1, 1, IS_UNIQUE, !IS_ORDERED);
-
-		op = addEOperation(unitEClass, ecorePackage.getEBoolean(), "isSameAs", 1, 1, IS_UNIQUE, !IS_ORDERED);
-		addEParameter(op, this.getUnit(), "other", 1, 1, IS_UNIQUE, !IS_ORDERED);
-		addEParameter(op, ecorePackage.getEBoolean(), "ignoreScale", 1, 1, IS_UNIQUE, !IS_ORDERED);
-
-		initEClass(unitFactorEClass, UnitFactor.class, "UnitFactor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getUnitFactor_Symbol(), this.getUnitSymbol(), "symbol", null, 1, 1, UnitFactor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEAttribute(getUnitFactor_Exponent(), ecorePackage.getEInt(), "exponent", null, 1, 1, UnitFactor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-
 		initEClass(integerTypeEClass, IntegerType.class, "IntegerType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(complexTypeEClass, ComplexType.class, "ComplexType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(gaussianTypeEClass, GaussianType.class, "GaussianType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(booleanTypeEClass, BooleanType.class, "BooleanType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(stringTypeEClass, StringType.class, "StringType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(invalidDataTypeEClass, InvalidDataType.class, "InvalidDataType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(arrayTypeEClass, ArrayType.class, "ArrayType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getArrayType_ElementType(), this.getDataType(), null, "elementType", null, 0, 1, ArrayType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getArrayType_DefinedElementType(), this.getDataType(), null, "definedElementType", null, 0, 1, ArrayType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getArrayType_Dimensions(), this.getArrayDimension(), null, "dimensions", null, 0, -1, ArrayType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getArrayType_Dimensionality(), ecorePackage.getEInt(), "dimensionality", null, 1, 1, ArrayType.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getArrayType_Dimensional(), ecorePackage.getEBoolean(), "dimensional", null, 1, 1, ArrayType.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getArrayType_Multidimensional(), ecorePackage.getEBoolean(), "multidimensional", null, 1, 1, ArrayType.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(tensorTypeEClass, TensorType.class, "TensorType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getTensorType_Vector(), ecorePackage.getEBoolean(), "vector", null, 1, 1, TensorType.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, !IS_ORDERED);
-		initEAttribute(getTensorType_Matrix(), ecorePackage.getEBoolean(), "matrix", null, 1, 1, TensorType.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getTensorType_Vector(), ecorePackage.getEBoolean(), "vector", null, 1, 1, TensorType.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTensorType_Matrix(), ecorePackage.getEBoolean(), "matrix", null, 1, 1, TensorType.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
-		initEClass(recordEClass, Record.class, "Record", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getRecord_Fields(), this.getRecordField(), null, "fields", null, 1, -1, Record.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(arrayDimensionEClass, ArrayDimension.class, "ArrayDimension", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getArrayDimension_Size(), this.getExpression(), null, "size", null, 0, 1, ArrayDimension.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(recordFieldEClass, RecordField.class, "RecordField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getRecordField_Type(), this.getDataType(), null, "type", null, 1, 1, RecordField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEAttribute(getRecordField_Name(), ecorePackage.getEString(), "name", null, 0, 1, RecordField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEClass(expressionEClass, Expression.class, "Expression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(unitTypeEClass, UnitType.class, "UnitType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(unitEClass, Unit.class, "Unit", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getUnit_Numerator(), this.getUnitNumerator(), null, "numerator", null, 0, 1, Unit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getUnit_Denominator(), this.getUnitDenominator(), null, "denominator", null, 0, 1, Unit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getUnit_Scale(), ecorePackage.getEInt(), "scale", null, 1, 1, Unit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getUnit_Wildcard(), ecorePackage.getEBoolean(), "wildcard", null, 1, 1, Unit.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
-		initEClass(anyDataTypeEClass, AnyDataType.class, "AnyDataType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		addEOperation(unitEClass, this.getUnit(), "getNormalized", 1, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(unitEClass, this.getUnit(), "evaluate", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getOperatorKind(), "operator", 1, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getUnit(), "other", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(unitEClass, this.getUnit(), "evaluate", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getOperatorKind(), "operator", 1, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEInt(), "n", 1, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(unitEClass, ecorePackage.getEBoolean(), "isEquivalentTo", 1, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getUnit(), "other", 1, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEBoolean(), "ignoreScale", 1, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(unitProductEClass, UnitProduct.class, "UnitProduct", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getUnitProduct_Factors(), this.getUnitFactor(), null, "factors", null, 0, -1, UnitProduct.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		op = addEOperation(unitProductEClass, this.getUnitFactor(), "getFactor", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "symbol", 1, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(unitNumeratorEClass, UnitNumerator.class, "UnitNumerator", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(unitDenominatorEClass, UnitDenominator.class, "UnitDenominator", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(unitFactorEClass, UnitFactor.class, "UnitFactor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getUnitFactor_Symbol(), ecorePackage.getEString(), "symbol", null, 0, 1, UnitFactor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getUnitFactor_Exponent(), ecorePackage.getEInt(), "exponent", "1", 0, 1, UnitFactor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(literalEClass, Literal.class, "Literal", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(numericLiteralEClass, NumericLiteral.class, "NumericLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getNumericLiteral_Modifier(), ecorePackage.getEString(), "modifier", null, 0, 1, NumericLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getNumericLiteral_Unit(), this.getUnit(), null, "unit", null, 1, 1, NumericLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(realLiteralEClass, RealLiteral.class, "RealLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getRealLiteral_Value(), ecorePackage.getEDouble(), "value", null, 0, 1, RealLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(integerLiteralEClass, IntegerLiteral.class, "IntegerLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getIntegerLiteral_Value(), ecorePackage.getELong(), "value", null, 0, 1, IntegerLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(booleanLiteralEClass, BooleanLiteral.class, "BooleanLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getBooleanLiteral_Value(), this.getBooleanKind(), "value", null, 0, 1, BooleanLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(stringLiteralEClass, StringLiteral.class, "StringLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getStringLiteral_Value(), ecorePackage.getEString(), "value", null, 0, 1, StringLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(operatorKindEEnum, OperatorKind.class, "OperatorKind");
-		addEEnumLiteral(operatorKindEEnum, OperatorKind.ADDITION);
-		addEEnumLiteral(operatorKindEEnum, OperatorKind.SUBTRACTION);
-		addEEnumLiteral(operatorKindEEnum, OperatorKind.MULTIPLICATION);
-		addEEnumLiteral(operatorKindEEnum, OperatorKind.DIVISION);
-		addEEnumLiteral(operatorKindEEnum, OperatorKind.ELEMENT_WISE_MULTIPLICATION);
-		addEEnumLiteral(operatorKindEEnum, OperatorKind.ELEMENT_WISE_DIVISION);
-		addEEnumLiteral(operatorKindEEnum, OperatorKind.UNARY_MINUS);
+		addEEnumLiteral(operatorKindEEnum, OperatorKind.ADD);
+		addEEnumLiteral(operatorKindEEnum, OperatorKind.SUBTRACT);
+		addEEnumLiteral(operatorKindEEnum, OperatorKind.MULTIPLY);
+		addEEnumLiteral(operatorKindEEnum, OperatorKind.DIVIDE);
+		addEEnumLiteral(operatorKindEEnum, OperatorKind.ELEMENT_WISE_MULTIPLY);
+		addEEnumLiteral(operatorKindEEnum, OperatorKind.ELEMENT_WISE_DIVIDE);
+		addEEnumLiteral(operatorKindEEnum, OperatorKind.NEGATE);
+		addEEnumLiteral(operatorKindEEnum, OperatorKind.POWER);
+		addEEnumLiteral(operatorKindEEnum, OperatorKind.ROOT);
 		addEEnumLiteral(operatorKindEEnum, OperatorKind.LOGICAL_AND);
 		addEEnumLiteral(operatorKindEEnum, OperatorKind.LOGICAL_OR);
 		addEEnumLiteral(operatorKindEEnum, OperatorKind.LOGICAL_NOT);
@@ -827,14 +1075,9 @@ public class TypeSystemPackageImpl extends EPackageImpl implements TypeSystemPac
 		addEEnumLiteral(operatorKindEEnum, OperatorKind.EQUAL_TO);
 		addEEnumLiteral(operatorKindEEnum, OperatorKind.NOT_EQUAL_TO);
 
-		initEEnum(unitSymbolEEnum, UnitSymbol.class, "UnitSymbol");
-		addEEnumLiteral(unitSymbolEEnum, UnitSymbol.METER);
-		addEEnumLiteral(unitSymbolEEnum, UnitSymbol.KILOGRAM);
-		addEEnumLiteral(unitSymbolEEnum, UnitSymbol.SECOND);
-		addEEnumLiteral(unitSymbolEEnum, UnitSymbol.AMPERE);
-		addEEnumLiteral(unitSymbolEEnum, UnitSymbol.KELVIN);
-		addEEnumLiteral(unitSymbolEEnum, UnitSymbol.MOLE);
-		addEEnumLiteral(unitSymbolEEnum, UnitSymbol.CANDELA);
+		initEEnum(booleanKindEEnum, BooleanKind.class, "BooleanKind");
+		addEEnumLiteral(booleanKindEEnum, BooleanKind.FALSE);
+		addEEnumLiteral(booleanKindEEnum, BooleanKind.TRUE);
 
 		// Create resource
 		createResource(eNS_URI);

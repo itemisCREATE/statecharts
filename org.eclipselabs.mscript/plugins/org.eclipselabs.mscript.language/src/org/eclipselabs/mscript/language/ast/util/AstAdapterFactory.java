@@ -15,16 +15,11 @@ import org.eclipselabs.mscript.language.ast.AdditiveExpressionPart;
 import org.eclipselabs.mscript.language.ast.ArrayConcatenationOperator;
 import org.eclipselabs.mscript.language.ast.ArrayConstructionIterationClause;
 import org.eclipselabs.mscript.language.ast.ArrayConstructionOperator;
-import org.eclipselabs.mscript.language.ast.ArrayDimensionSpecification;
 import org.eclipselabs.mscript.language.ast.ArrayElementAccess;
 import org.eclipselabs.mscript.language.ast.ArraySubscript;
-import org.eclipselabs.mscript.language.ast.ArrayTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.Assertion;
 import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.BeginExpression;
-import org.eclipselabs.mscript.language.ast.BooleanLiteral;
-import org.eclipselabs.mscript.language.ast.BooleanTypeSpecifier;
-import org.eclipselabs.mscript.language.ast.ComplexTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.DataTypeDefinition;
 import org.eclipselabs.mscript.language.ast.DataTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.Definition;
@@ -33,61 +28,43 @@ import org.eclipselabs.mscript.language.ast.EnumerationDefinition;
 import org.eclipselabs.mscript.language.ast.EnumerationLiteralDeclaration;
 import org.eclipselabs.mscript.language.ast.EqualityExpression;
 import org.eclipselabs.mscript.language.ast.Equation;
-import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.ast.ExpressionList;
 import org.eclipselabs.mscript.language.ast.FeatureCall;
 import org.eclipselabs.mscript.language.ast.FeatureCallPart;
 import org.eclipselabs.mscript.language.ast.FunctionDefinition;
 import org.eclipselabs.mscript.language.ast.FunctionObjectDeclaration;
-import org.eclipselabs.mscript.language.ast.GaussianTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.IfExpression;
 import org.eclipselabs.mscript.language.ast.ImpliesExpression;
-import org.eclipselabs.mscript.language.ast.IntegerLiteral;
-import org.eclipselabs.mscript.language.ast.IntegerTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.IterationAccumulator;
 import org.eclipselabs.mscript.language.ast.IterationCall;
 import org.eclipselabs.mscript.language.ast.IterationVariable;
 import org.eclipselabs.mscript.language.ast.LetExpression;
 import org.eclipselabs.mscript.language.ast.LetExpressionVariableDeclaration;
-import org.eclipselabs.mscript.language.ast.Literal;
 import org.eclipselabs.mscript.language.ast.LogicalAndExpression;
 import org.eclipselabs.mscript.language.ast.LogicalOrExpression;
 import org.eclipselabs.mscript.language.ast.Module;
 import org.eclipselabs.mscript.language.ast.MultiplicativeExpression;
 import org.eclipselabs.mscript.language.ast.MultiplicativeExpressionPart;
 import org.eclipselabs.mscript.language.ast.NameComponent;
-import org.eclipselabs.mscript.language.ast.NamedTypeSpecifier;
-import org.eclipselabs.mscript.language.ast.NumericLiteral;
-import org.eclipselabs.mscript.language.ast.NumericTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.OperationArgumentList;
 import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
 import org.eclipselabs.mscript.language.ast.ParenthesizedExpression;
 import org.eclipselabs.mscript.language.ast.PostfixExpression;
 import org.eclipselabs.mscript.language.ast.PowerExpression;
-import org.eclipselabs.mscript.language.ast.PrimitiveTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.QualifiedName;
 import org.eclipselabs.mscript.language.ast.RangeExpression;
-import org.eclipselabs.mscript.language.ast.RealLiteral;
-import org.eclipselabs.mscript.language.ast.RealTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.RecordDefinition;
 import org.eclipselabs.mscript.language.ast.RecordFieldDeclaration;
 import org.eclipselabs.mscript.language.ast.RelationalExpression;
-import org.eclipselabs.mscript.language.ast.ScalarTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.SimpleName;
 import org.eclipselabs.mscript.language.ast.StateVariableDeclaration;
-import org.eclipselabs.mscript.language.ast.StringLiteral;
-import org.eclipselabs.mscript.language.ast.StringTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.SwitchCase;
 import org.eclipselabs.mscript.language.ast.SwitchExpression;
-import org.eclipselabs.mscript.language.ast.TensorTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.TypeAliasDefinition;
 import org.eclipselabs.mscript.language.ast.TypeTestExpression;
 import org.eclipselabs.mscript.language.ast.UnaryExpression;
 import org.eclipselabs.mscript.language.ast.UnitConstructionOperator;
-import org.eclipselabs.mscript.language.ast.UnitExpression;
-import org.eclipselabs.mscript.language.ast.UnitExpressionDenominator;
-import org.eclipselabs.mscript.language.ast.UnitExpressionFactor;
-import org.eclipselabs.mscript.language.ast.UnitExpressionNumerator;
+import org.eclipselabs.mscript.typesystem.Expression;
 
 /**
  * <!-- begin-user-doc -->
@@ -206,62 +183,6 @@ public class AstAdapterFactory extends AdapterFactoryImpl {
 				return createDataTypeSpecifierAdapter();
 			}
 			@Override
-			public Adapter caseScalarTypeSpecifier(ScalarTypeSpecifier object) {
-				return createScalarTypeSpecifierAdapter();
-			}
-			@Override
-			public Adapter casePrimitiveTypeSpecifier(PrimitiveTypeSpecifier object) {
-				return createPrimitiveTypeSpecifierAdapter();
-			}
-			@Override
-			public Adapter caseNumericTypeSpecifier(NumericTypeSpecifier object) {
-				return createNumericTypeSpecifierAdapter();
-			}
-			@Override
-			public Adapter caseRealTypeSpecifier(RealTypeSpecifier object) {
-				return createRealTypeSpecifierAdapter();
-			}
-			@Override
-			public Adapter caseIntegerTypeSpecifier(IntegerTypeSpecifier object) {
-				return createIntegerTypeSpecifierAdapter();
-			}
-			@Override
-			public Adapter caseComplexTypeSpecifier(ComplexTypeSpecifier object) {
-				return createComplexTypeSpecifierAdapter();
-			}
-			@Override
-			public Adapter caseGaussianTypeSpecifier(GaussianTypeSpecifier object) {
-				return createGaussianTypeSpecifierAdapter();
-			}
-			@Override
-			public Adapter caseBooleanTypeSpecifier(BooleanTypeSpecifier object) {
-				return createBooleanTypeSpecifierAdapter();
-			}
-			@Override
-			public Adapter caseStringTypeSpecifier(StringTypeSpecifier object) {
-				return createStringTypeSpecifierAdapter();
-			}
-			@Override
-			public Adapter caseNamedTypeSpecifier(NamedTypeSpecifier object) {
-				return createNamedTypeSpecifierAdapter();
-			}
-			@Override
-			public Adapter caseArrayTypeSpecifier(ArrayTypeSpecifier object) {
-				return createArrayTypeSpecifierAdapter();
-			}
-			@Override
-			public Adapter caseTensorTypeSpecifier(TensorTypeSpecifier object) {
-				return createTensorTypeSpecifierAdapter();
-			}
-			@Override
-			public Adapter caseArrayDimensionSpecification(ArrayDimensionSpecification object) {
-				return createArrayDimensionSpecificationAdapter();
-			}
-			@Override
-			public Adapter caseExpression(Expression object) {
-				return createExpressionAdapter();
-			}
-			@Override
 			public Adapter caseLetExpression(LetExpression object) {
 				return createLetExpressionAdapter();
 			}
@@ -288,30 +209,6 @@ public class AstAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseMultiplicativeExpressionPart(MultiplicativeExpressionPart object) {
 				return createMultiplicativeExpressionPartAdapter();
-			}
-			@Override
-			public Adapter caseLiteral(Literal object) {
-				return createLiteralAdapter();
-			}
-			@Override
-			public Adapter caseNumericLiteral(NumericLiteral object) {
-				return createNumericLiteralAdapter();
-			}
-			@Override
-			public Adapter caseRealLiteral(RealLiteral object) {
-				return createRealLiteralAdapter();
-			}
-			@Override
-			public Adapter caseIntegerLiteral(IntegerLiteral object) {
-				return createIntegerLiteralAdapter();
-			}
-			@Override
-			public Adapter caseBooleanLiteral(BooleanLiteral object) {
-				return createBooleanLiteralAdapter();
-			}
-			@Override
-			public Adapter caseStringLiteral(StringLiteral object) {
-				return createStringLiteralAdapter();
 			}
 			@Override
 			public Adapter caseFeatureCallPart(FeatureCallPart object) {
@@ -382,22 +279,6 @@ public class AstAdapterFactory extends AdapterFactoryImpl {
 				return createQualifiedNameAdapter();
 			}
 			@Override
-			public Adapter caseUnitExpression(UnitExpression object) {
-				return createUnitExpressionAdapter();
-			}
-			@Override
-			public Adapter caseUnitExpressionNumerator(UnitExpressionNumerator object) {
-				return createUnitExpressionNumeratorAdapter();
-			}
-			@Override
-			public Adapter caseUnitExpressionDenominator(UnitExpressionDenominator object) {
-				return createUnitExpressionDenominatorAdapter();
-			}
-			@Override
-			public Adapter caseUnitExpressionFactor(UnitExpressionFactor object) {
-				return createUnitExpressionFactorAdapter();
-			}
-			@Override
 			public Adapter caseRangeExpression(RangeExpression object) {
 				return createRangeExpressionAdapter();
 			}
@@ -452,6 +333,10 @@ public class AstAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseFeatureCall(FeatureCall object) {
 				return createFeatureCallAdapter();
+			}
+			@Override
+			public Adapter caseExpression(Expression object) {
+				return createExpressionAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -684,195 +569,13 @@ public class AstAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.ScalarTypeSpecifier <em>Scalar Type Specifier</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.typesystem.Expression <em>Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.language.ast.ScalarTypeSpecifier
-	 * @generated
-	 */
-	public Adapter createScalarTypeSpecifierAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.PrimitiveTypeSpecifier <em>Primitive Type Specifier</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.language.ast.PrimitiveTypeSpecifier
-	 * @generated
-	 */
-	public Adapter createPrimitiveTypeSpecifierAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.NumericTypeSpecifier <em>Numeric Type Specifier</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.language.ast.NumericTypeSpecifier
-	 * @generated
-	 */
-	public Adapter createNumericTypeSpecifierAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.RealTypeSpecifier <em>Real Type Specifier</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.language.ast.RealTypeSpecifier
-	 * @generated
-	 */
-	public Adapter createRealTypeSpecifierAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.IntegerTypeSpecifier <em>Integer Type Specifier</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.language.ast.IntegerTypeSpecifier
-	 * @generated
-	 */
-	public Adapter createIntegerTypeSpecifierAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.ComplexTypeSpecifier <em>Complex Type Specifier</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.language.ast.ComplexTypeSpecifier
-	 * @generated
-	 */
-	public Adapter createComplexTypeSpecifierAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.GaussianTypeSpecifier <em>Gaussian Type Specifier</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.language.ast.GaussianTypeSpecifier
-	 * @generated
-	 */
-	public Adapter createGaussianTypeSpecifierAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.BooleanTypeSpecifier <em>Boolean Type Specifier</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.language.ast.BooleanTypeSpecifier
-	 * @generated
-	 */
-	public Adapter createBooleanTypeSpecifierAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.StringTypeSpecifier <em>String Type Specifier</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.language.ast.StringTypeSpecifier
-	 * @generated
-	 */
-	public Adapter createStringTypeSpecifierAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.NamedTypeSpecifier <em>Named Type Specifier</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.language.ast.NamedTypeSpecifier
-	 * @generated
-	 */
-	public Adapter createNamedTypeSpecifierAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.ArrayTypeSpecifier <em>Array Type Specifier</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.language.ast.ArrayTypeSpecifier
-	 * @generated
-	 */
-	public Adapter createArrayTypeSpecifierAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.TensorTypeSpecifier <em>Tensor Type Specifier</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.language.ast.TensorTypeSpecifier
-	 * @generated
-	 */
-	public Adapter createTensorTypeSpecifierAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.ArrayDimensionSpecification <em>Array Dimension Specification</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.language.ast.ArrayDimensionSpecification
-	 * @generated
-	 */
-	public Adapter createArrayDimensionSpecificationAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.Expression <em>Expression</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.language.ast.Expression
+	 * @see org.eclipselabs.mscript.typesystem.Expression
 	 * @generated
 	 */
 	public Adapter createExpressionAdapter() {
@@ -974,90 +677,6 @@ public class AstAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createMultiplicativeExpressionPartAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.Literal <em>Literal</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.language.ast.Literal
-	 * @generated
-	 */
-	public Adapter createLiteralAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.NumericLiteral <em>Numeric Literal</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.language.ast.NumericLiteral
-	 * @generated
-	 */
-	public Adapter createNumericLiteralAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.RealLiteral <em>Real Literal</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.language.ast.RealLiteral
-	 * @generated
-	 */
-	public Adapter createRealLiteralAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.IntegerLiteral <em>Integer Literal</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.language.ast.IntegerLiteral
-	 * @generated
-	 */
-	public Adapter createIntegerLiteralAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.BooleanLiteral <em>Boolean Literal</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.language.ast.BooleanLiteral
-	 * @generated
-	 */
-	public Adapter createBooleanLiteralAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.StringLiteral <em>String Literal</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.language.ast.StringLiteral
-	 * @generated
-	 */
-	public Adapter createStringLiteralAdapter() {
 		return null;
 	}
 
@@ -1296,62 +915,6 @@ public class AstAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createQualifiedNameAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.UnitExpression <em>Unit Expression</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.language.ast.UnitExpression
-	 * @generated
-	 */
-	public Adapter createUnitExpressionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.UnitExpressionNumerator <em>Unit Expression Numerator</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.language.ast.UnitExpressionNumerator
-	 * @generated
-	 */
-	public Adapter createUnitExpressionNumeratorAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.UnitExpressionDenominator <em>Unit Expression Denominator</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.language.ast.UnitExpressionDenominator
-	 * @generated
-	 */
-	public Adapter createUnitExpressionDenominatorAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.UnitExpressionFactor <em>Unit Expression Factor</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.language.ast.UnitExpressionFactor
-	 * @generated
-	 */
-	public Adapter createUnitExpressionFactorAdapter() {
 		return null;
 	}
 

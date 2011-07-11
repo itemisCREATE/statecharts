@@ -28,7 +28,6 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import org.eclipselabs.mscript.typesystem.TypeSystemPackage;
 import org.eclipselabs.mscript.typesystem.UnitFactor;
-import org.eclipselabs.mscript.typesystem.UnitSymbol;
 
 import org.eclipselabs.mscript.typesystem.edit.TypeSystemEditPlugin;
 
@@ -136,8 +135,7 @@ public class UnitFactorItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		UnitSymbol labelValue = ((UnitFactor)object).getSymbol();
-		String label = labelValue == null ? null : labelValue.toString();
+		String label = ((UnitFactor)object).getSymbol();
 		return label == null || label.length() == 0 ?
 			getString("_UI_UnitFactor_type") :
 			getString("_UI_UnitFactor_type") + " " + label;

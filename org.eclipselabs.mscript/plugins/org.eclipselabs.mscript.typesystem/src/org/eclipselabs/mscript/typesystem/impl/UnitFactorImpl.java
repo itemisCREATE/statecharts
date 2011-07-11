@@ -12,11 +12,10 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipselabs.mscript.typesystem.TypeSystemPackage;
 import org.eclipselabs.mscript.typesystem.UnitFactor;
-import org.eclipselabs.mscript.typesystem.UnitSymbol;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Unit Factor</b></em>'.
+ * An implementation of the model object '<em><b>Unit Expression Factor</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
@@ -37,7 +36,7 @@ public class UnitFactorImpl extends EObjectImpl implements UnitFactor {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final UnitSymbol SYMBOL_EDEFAULT = UnitSymbol.METER;
+	protected static final String SYMBOL_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getSymbol() <em>Symbol</em>}' attribute.
@@ -47,7 +46,7 @@ public class UnitFactorImpl extends EObjectImpl implements UnitFactor {
 	 * @generated
 	 * @ordered
 	 */
-	protected UnitSymbol symbol = SYMBOL_EDEFAULT;
+	protected String symbol = SYMBOL_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getExponent() <em>Exponent</em>}' attribute.
@@ -57,7 +56,7 @@ public class UnitFactorImpl extends EObjectImpl implements UnitFactor {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int EXPONENT_EDEFAULT = 0;
+	protected static final int EXPONENT_EDEFAULT = 1;
 
 	/**
 	 * The cached value of the '{@link #getExponent() <em>Exponent</em>}' attribute.
@@ -93,7 +92,7 @@ public class UnitFactorImpl extends EObjectImpl implements UnitFactor {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public UnitSymbol getSymbol() {
+	public String getSymbol() {
 		return symbol;
 	}
 
@@ -102,9 +101,9 @@ public class UnitFactorImpl extends EObjectImpl implements UnitFactor {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setSymbol(UnitSymbol newSymbol) {
-		UnitSymbol oldSymbol = symbol;
-		symbol = newSymbol == null ? SYMBOL_EDEFAULT : newSymbol;
+	public void setSymbol(String newSymbol) {
+		String oldSymbol = symbol;
+		symbol = newSymbol;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TypeSystemPackage.UNIT_FACTOR__SYMBOL, oldSymbol, symbol));
 	}
@@ -155,7 +154,7 @@ public class UnitFactorImpl extends EObjectImpl implements UnitFactor {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case TypeSystemPackage.UNIT_FACTOR__SYMBOL:
-				setSymbol((UnitSymbol)newValue);
+				setSymbol((String)newValue);
 				return;
 			case TypeSystemPackage.UNIT_FACTOR__EXPONENT:
 				setExponent((Integer)newValue);
@@ -191,7 +190,7 @@ public class UnitFactorImpl extends EObjectImpl implements UnitFactor {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case TypeSystemPackage.UNIT_FACTOR__SYMBOL:
-				return symbol != SYMBOL_EDEFAULT;
+				return SYMBOL_EDEFAULT == null ? symbol != null : !SYMBOL_EDEFAULT.equals(symbol);
 			case TypeSystemPackage.UNIT_FACTOR__EXPONENT:
 				return exponent != EXPONENT_EDEFAULT;
 		}
@@ -216,4 +215,4 @@ public class UnitFactorImpl extends EObjectImpl implements UnitFactor {
 		return result.toString();
 	}
 
-} //UnitFactorImpl
+} //UnitExpressionFactorImpl

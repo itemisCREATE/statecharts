@@ -6,7 +6,6 @@
  */
 package org.eclipselabs.mscript.typesystem;
 
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Numeric Type</b></em>'.
@@ -20,7 +19,7 @@ package org.eclipselabs.mscript.typesystem;
  * </p>
  *
  * @see org.eclipselabs.mscript.typesystem.TypeSystemPackage#getNumericType()
- * @model abstract="true"
+ * @model
  * @generated
  */
 public interface NumericType extends PrimitiveType {
@@ -33,11 +32,9 @@ public interface NumericType extends PrimitiveType {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Unit</em>' containment reference.
-	 * @see #isSetUnit()
-	 * @see #unsetUnit()
 	 * @see #setUnit(Unit)
 	 * @see org.eclipselabs.mscript.typesystem.TypeSystemPackage#getNumericType_Unit()
-	 * @model containment="true" unsettable="true" ordered="false"
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
 	Unit getUnit();
@@ -47,34 +44,9 @@ public interface NumericType extends PrimitiveType {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Unit</em>' containment reference.
-	 * @see #isSetUnit()
-	 * @see #unsetUnit()
 	 * @see #getUnit()
 	 * @generated
 	 */
 	void setUnit(Unit value);
-
-	/**
-	 * Unsets the value of the '{@link org.eclipselabs.mscript.typesystem.NumericType#getUnit <em>Unit</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isSetUnit()
-	 * @see #getUnit()
-	 * @see #setUnit(Unit)
-	 * @generated
-	 */
-	void unsetUnit();
-
-	/**
-	 * Returns whether the value of the '{@link org.eclipselabs.mscript.typesystem.NumericType#getUnit <em>Unit</em>}' containment reference is set.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return whether the value of the '<em>Unit</em>' containment reference is set.
-	 * @see #unsetUnit()
-	 * @see #getUnit()
-	 * @see #setUnit(Unit)
-	 * @generated
-	 */
-	boolean isSetUnit();
 
 } // NumericType

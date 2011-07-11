@@ -7,15 +7,18 @@
 package org.eclipselabs.mscript.typesystem.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipselabs.mscript.typesystem.ArrayDimension;
+import org.eclipselabs.mscript.typesystem.Expression;
 import org.eclipselabs.mscript.typesystem.TypeSystemPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Array Dimension</b></em>'.
+ * An implementation of the model object '<em><b>Array Dimension Specification</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
@@ -28,24 +31,14 @@ import org.eclipselabs.mscript.typesystem.TypeSystemPackage;
  */
 public class ArrayDimensionImpl extends EObjectImpl implements ArrayDimension {
 	/**
-	 * The default value of the '{@link #getSize() <em>Size</em>}' attribute.
+	 * The cached value of the '{@link #getSize() <em>Size</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getSize()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int SIZE_EDEFAULT = 0;
-
-	/**
-	 * The cached value of the '{@link #getSize() <em>Size</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSize()
-	 * @generated
-	 * @ordered
-	 */
-	protected int size = SIZE_EDEFAULT;
+	protected Expression size;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -71,7 +64,7 @@ public class ArrayDimensionImpl extends EObjectImpl implements ArrayDimension {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int getSize() {
+	public Expression getSize() {
 		return size;
 	}
 
@@ -80,11 +73,47 @@ public class ArrayDimensionImpl extends EObjectImpl implements ArrayDimension {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setSize(int newSize) {
-		int oldSize = size;
+	public NotificationChain basicSetSize(Expression newSize, NotificationChain msgs) {
+		Expression oldSize = size;
 		size = newSize;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypeSystemPackage.ARRAY_DIMENSION__SIZE, oldSize, size));
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TypeSystemPackage.ARRAY_DIMENSION__SIZE, oldSize, newSize);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSize(Expression newSize) {
+		if (newSize != size) {
+			NotificationChain msgs = null;
+			if (size != null)
+				msgs = ((InternalEObject)size).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TypeSystemPackage.ARRAY_DIMENSION__SIZE, null, msgs);
+			if (newSize != null)
+				msgs = ((InternalEObject)newSize).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TypeSystemPackage.ARRAY_DIMENSION__SIZE, null, msgs);
+			msgs = basicSetSize(newSize, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TypeSystemPackage.ARRAY_DIMENSION__SIZE, newSize, newSize));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case TypeSystemPackage.ARRAY_DIMENSION__SIZE:
+				return basicSetSize(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -110,7 +139,7 @@ public class ArrayDimensionImpl extends EObjectImpl implements ArrayDimension {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case TypeSystemPackage.ARRAY_DIMENSION__SIZE:
-				setSize((Integer)newValue);
+				setSize((Expression)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -125,7 +154,7 @@ public class ArrayDimensionImpl extends EObjectImpl implements ArrayDimension {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case TypeSystemPackage.ARRAY_DIMENSION__SIZE:
-				setSize(SIZE_EDEFAULT);
+				setSize((Expression)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -140,25 +169,9 @@ public class ArrayDimensionImpl extends EObjectImpl implements ArrayDimension {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case TypeSystemPackage.ARRAY_DIMENSION__SIZE:
-				return size != SIZE_EDEFAULT;
+				return size != null;
 		}
 		return super.eIsSet(featureID);
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (size: ");
-		result.append(size);
-		result.append(')');
-		return result.toString();
-	}
-
-} //ArrayDimensionImpl
+} //ArrayDimensionSpecificationImpl

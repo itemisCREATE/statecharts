@@ -21,6 +21,7 @@ import org.eclipselabs.mscript.computation.core.IComputationContext;
 import org.eclipselabs.mscript.typesystem.IntegerType;
 import org.eclipselabs.mscript.typesystem.NumericType;
 import org.eclipselabs.mscript.typesystem.RealType;
+import org.eclipselabs.mscript.typesystem.util.TypeSystemUtil;
 
 /**
  * @author Andreas Unger
@@ -104,7 +105,7 @@ public class Values {
 		if (value instanceof VectorValue) {
 			VectorValue vectorValue = (VectorValue) value;
 			
-			INumericValue[] elements = new INumericValue[vectorValue.getDataType().getRowSize()];
+			INumericValue[] elements = new INumericValue[TypeSystemUtil.getArrayRowSize(vectorValue.getDataType())];
 			
 			for (int i = 0; i < elements.length; ++i) {
 				elements[i] = (INumericValue) transform(context, vectorValue.get(i));

@@ -1,9 +1,14 @@
-/**
- * <copyright>
- * </copyright>
+/****************************************************************************
+ * Copyright (c) 2008, 2011 Andreas Unger and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  *
- * $Id$
- */
+ * Contributors:
+ *    Andreas Unger - initial API and implementation 
+ ****************************************************************************/
+
 package org.eclipselabs.mscript.typesystem.internal.operations;
 
 import org.eclipselabs.mscript.typesystem.AnyDataType;
@@ -11,38 +16,10 @@ import org.eclipselabs.mscript.typesystem.DataType;
 import org.eclipselabs.mscript.typesystem.OperatorKind;
 import org.eclipselabs.mscript.typesystem.TypeSystemFactory;
 
-/**
- * <!-- begin-user-doc -->
- * A static utility class that provides operations related to '<em><b>Any Data Type</b></em>' model objects.
- * <!-- end-user-doc -->
- *
- * <p>
- * The following operations are supported:
- * <ul>
- *   <li>{@link org.eclipselabs.mscript.typesystem.AnyDataType#evaluate(org.eclipselabs.mscript.typesystem.OperatorKind, org.eclipselabs.mscript.typesystem.DataType) <em>Evaluate</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.typesystem.AnyDataType#evaluatePower(int) <em>Evaluate Power</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.typesystem.AnyDataType#isAssignableFrom(org.eclipselabs.mscript.typesystem.DataType) <em>Is Assignable From</em>}</li>
- * </ul>
- * </p>
- *
- * @generated
- */
-public class AnyDataTypeOperations extends DataTypeOperations {
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected AnyDataTypeOperations() {
-		super();
-	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public static  DataType evaluate(AnyDataType anyDataType, OperatorKind operator, DataType other) {
+public class AnyDataTypeOperations extends DataTypeOperations {
+
+	public static DataType evaluate(AnyDataType anyDataType, OperatorKind operator, DataType other) {
 		switch (operator) {
 		case IMPLIES:
 		case LOGICAL_OR:
@@ -56,25 +33,15 @@ public class AnyDataTypeOperations extends DataTypeOperations {
 		case NOT_EQUAL_TO:
 			return TypeSystemFactory.eINSTANCE.createBooleanType();
 		}
+		return TypeSystemFactory.eINSTANCE.createInvalidDataType();
+	}
+
+	public static  DataType evaluate(AnyDataType anyDataType, int n) {
 		return TypeSystemFactory.eINSTANCE.createAnyDataType();
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public static  DataType evaluatePower(AnyDataType anyDataType, int exponent) {
-		return TypeSystemFactory.eINSTANCE.createAnyDataType();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
 	public static  boolean isAssignableFrom(AnyDataType anyDataType, DataType other) {
 		return true;
 	}
 
-} // AnyDataTypeOperations
+}

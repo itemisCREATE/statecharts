@@ -17,6 +17,7 @@ import java.util.List;
 import org.eclipselabs.mscript.computation.core.value.IValue;
 import org.eclipselabs.mscript.computation.core.value.VectorValue;
 import org.eclipselabs.mscript.language.interpreter.IInterpreterContext;
+import org.eclipselabs.mscript.typesystem.util.TypeSystemUtil;
 
 /**
  * @author Andreas Unger
@@ -29,7 +30,8 @@ public class SumFunction implements IFunction {
 		if (argument instanceof VectorValue) {
 			VectorValue vectorValue = (VectorValue) argument;
 			IValue result = null;
-			for (int i = 0; i < vectorValue.getDataType().getSize(); ++i) {
+			int arraySize = TypeSystemUtil.getArraySize(vectorValue.getDataType());
+			for (int i = 0; i < arraySize; ++i) {
 				if (result == null) {
 					result = vectorValue.get(i);
 				} else {

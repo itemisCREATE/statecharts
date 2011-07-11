@@ -19,6 +19,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipselabs.mscript.language.ast.AdditiveExpression;
 import org.eclipselabs.mscript.language.ast.AdditiveExpressionPart;
@@ -26,14 +27,11 @@ import org.eclipselabs.mscript.language.ast.ArrayConstructionIterationClause;
 import org.eclipselabs.mscript.language.ast.ArrayConstructionOperator;
 import org.eclipselabs.mscript.language.ast.ArrayElementAccess;
 import org.eclipselabs.mscript.language.ast.AstFactory;
-import org.eclipselabs.mscript.language.ast.BooleanLiteral;
 import org.eclipselabs.mscript.language.ast.EqualityExpression;
-import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.ast.FeatureCall;
 import org.eclipselabs.mscript.language.ast.FeatureCallPart;
 import org.eclipselabs.mscript.language.ast.IfExpression;
 import org.eclipselabs.mscript.language.ast.ImpliesExpression;
-import org.eclipselabs.mscript.language.ast.IntegerLiteral;
 import org.eclipselabs.mscript.language.ast.IterationCall;
 import org.eclipselabs.mscript.language.ast.LetExpression;
 import org.eclipselabs.mscript.language.ast.LetExpressionVariableDeclaration;
@@ -44,10 +42,8 @@ import org.eclipselabs.mscript.language.ast.MultiplicativeExpressionPart;
 import org.eclipselabs.mscript.language.ast.NameComponent;
 import org.eclipselabs.mscript.language.ast.OperationArgumentList;
 import org.eclipselabs.mscript.language.ast.ParenthesizedExpression;
-import org.eclipselabs.mscript.language.ast.RealLiteral;
 import org.eclipselabs.mscript.language.ast.RelationalExpression;
 import org.eclipselabs.mscript.language.ast.SimpleName;
-import org.eclipselabs.mscript.language.ast.StringLiteral;
 import org.eclipselabs.mscript.language.ast.TypeTestExpression;
 import org.eclipselabs.mscript.language.ast.UnaryExpression;
 import org.eclipselabs.mscript.language.ast.UnitConstructionOperator;
@@ -66,13 +62,16 @@ import org.eclipselabs.mscript.language.il.VariableReference;
 import org.eclipselabs.mscript.language.internal.LanguagePlugin;
 import org.eclipselabs.mscript.language.internal.functionmodel.util.StepExpressionHelper;
 import org.eclipselabs.mscript.language.internal.functionmodel.util.StepExpressionResult;
-import org.eclipselabs.mscript.language.internal.interpreter.InvalidUnitExpressionOperandException;
-import org.eclipselabs.mscript.language.internal.interpreter.UnitExpressionHelper;
 import org.eclipselabs.mscript.language.util.SyntaxStatus;
+import org.eclipselabs.mscript.typesystem.BooleanLiteral;
+import org.eclipselabs.mscript.typesystem.Expression;
+import org.eclipselabs.mscript.typesystem.IntegerLiteral;
 import org.eclipselabs.mscript.typesystem.IntegerType;
+import org.eclipselabs.mscript.typesystem.RealLiteral;
 import org.eclipselabs.mscript.typesystem.RealType;
+import org.eclipselabs.mscript.typesystem.StringLiteral;
 import org.eclipselabs.mscript.typesystem.TypeSystemFactory;
-import org.eclipselabs.mscript.typesystem.util.TypeSystemUtil;
+import org.eclipselabs.mscript.typesystem.util.TypeSystemSwitch;
 
 /**
  * @author Andreas Unger
@@ -514,62 +513,54 @@ public class ExpressionTransformer extends AstSwitch<Expression> implements IExp
 		return transformedExpression;
 	}
 	
-	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseRealLiteral(org.eclipselabs.mscript.language.ast.RealLiteral)
-	 */
-	@Override
-	public Expression caseRealLiteral(RealLiteral realLiteral) {
-		RealType realType = TypeSystemFactory.eINSTANCE.createRealType();
-		try {
-			if (realLiteral.getUnit() != null) {
-				realType.setUnit(new UnitExpressionHelper().evaluate(realLiteral.getUnit()));
-			} else {
-				realType.setUnit(TypeSystemUtil.createUnit());
-			}
-		} catch (InvalidUnitExpressionOperandException e) {
-			status.add(new SyntaxStatus(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, 0, "Invalid unit", realLiteral.getUnit()));
+	private final TypeSystemSwitch<Expression> typeSystemSwitch = new TypeSystemSwitch<Expression>() {
+	
+		/* (non-Javadoc)
+		 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseRealLiteral(org.eclipselabs.mscript.language.ast.RealLiteral)
+		 */
+		@Override
+		public Expression caseRealLiteral(RealLiteral realLiteral) {
+			RealType realType = TypeSystemFactory.eINSTANCE.createRealType();
+			realType.setUnit(EcoreUtil.copy(realLiteral.getUnit()));
+			
+			RealLiteral transformedRealLiteral = EcoreUtil.copy(realLiteral);
+			return transformedRealLiteral;
 		}
 		
-		RealLiteral transformedRealLiteral = EcoreUtil.copy(realLiteral);
-		return transformedRealLiteral;
-	}
+		/* (non-Javadoc)
+		 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseIntegerLiteral(org.eclipselabs.mscript.language.ast.IntegerLiteral)
+		 */
+		@Override
+		public Expression caseIntegerLiteral(IntegerLiteral integerLiteral) {
+			IntegerType integerType = TypeSystemFactory.eINSTANCE.createIntegerType();
+			integerType.setUnit(EcoreUtil.copy(integerLiteral.getUnit()));
 	
-	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseIntegerLiteral(org.eclipselabs.mscript.language.ast.IntegerLiteral)
-	 */
-	@Override
-	public Expression caseIntegerLiteral(IntegerLiteral integerLiteral) {
-		IntegerType integerType = TypeSystemFactory.eINSTANCE.createIntegerType();
-		try {
-			if (integerLiteral.getUnit() != null) {
-				integerType.setUnit(new UnitExpressionHelper().evaluate(integerLiteral.getUnit()));
-			} else {
-				integerType.setUnit(TypeSystemUtil.createUnit());
-			}
-		} catch (InvalidUnitExpressionOperandException e) {
-			status.add(new SyntaxStatus(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, 0, "Invalid unit", integerLiteral.getUnit()));
+			IntegerLiteral transformedIntegerLiteral = EcoreUtil.copy(integerLiteral);
+			return transformedIntegerLiteral;
 		}
-
-		IntegerLiteral transformedIntegerLiteral = EcoreUtil.copy(integerLiteral);
-		return transformedIntegerLiteral;
-	}
+		
+		/* (non-Javadoc)
+		 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseBooleanLiteral(org.eclipselabs.mscript.language.ast.BooleanLiteral)
+		 */
+		@Override
+		public Expression caseBooleanLiteral(BooleanLiteral booleanLiteral) {
+			BooleanLiteral transformedBooleanLiteral = EcoreUtil.copy(booleanLiteral);
+			return transformedBooleanLiteral;
+		}
+		
+		/* (non-Javadoc)
+		 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseStringLiteral(org.eclipselabs.mscript.language.ast.StringLiteral)
+		 */
+		@Override
+		public Expression caseStringLiteral(StringLiteral stringLiteral) {
+			StringLiteral transformedStringLiteral = EcoreUtil.copy(stringLiteral);
+			return transformedStringLiteral;
+		}
 	
-	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseBooleanLiteral(org.eclipselabs.mscript.language.ast.BooleanLiteral)
-	 */
-	@Override
-	public Expression caseBooleanLiteral(BooleanLiteral booleanLiteral) {
-		BooleanLiteral transformedBooleanLiteral = EcoreUtil.copy(booleanLiteral);
-		return transformedBooleanLiteral;
-	}
+	};
 	
-	/* (non-Javadoc)
-	 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseStringLiteral(org.eclipselabs.mscript.language.ast.StringLiteral)
-	 */
-	@Override
-	public Expression caseStringLiteral(StringLiteral stringLiteral) {
-		StringLiteral transformedStringLiteral = EcoreUtil.copy(stringLiteral);
-		return transformedStringLiteral;
+	public Expression defaultCase(EObject object) {
+		return typeSystemSwitch.doSwitch(object);
 	}
 	
 	/* (non-Javadoc)

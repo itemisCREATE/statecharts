@@ -14,16 +14,11 @@ import org.eclipselabs.mscript.language.ast.AdditiveExpressionPart;
 import org.eclipselabs.mscript.language.ast.ArrayConcatenationOperator;
 import org.eclipselabs.mscript.language.ast.ArrayConstructionIterationClause;
 import org.eclipselabs.mscript.language.ast.ArrayConstructionOperator;
-import org.eclipselabs.mscript.language.ast.ArrayDimensionSpecification;
 import org.eclipselabs.mscript.language.ast.ArrayElementAccess;
 import org.eclipselabs.mscript.language.ast.ArraySubscript;
-import org.eclipselabs.mscript.language.ast.ArrayTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.Assertion;
 import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.BeginExpression;
-import org.eclipselabs.mscript.language.ast.BooleanLiteral;
-import org.eclipselabs.mscript.language.ast.BooleanTypeSpecifier;
-import org.eclipselabs.mscript.language.ast.ComplexTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.DataTypeDefinition;
 import org.eclipselabs.mscript.language.ast.DataTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.Definition;
@@ -32,61 +27,43 @@ import org.eclipselabs.mscript.language.ast.EnumerationDefinition;
 import org.eclipselabs.mscript.language.ast.EnumerationLiteralDeclaration;
 import org.eclipselabs.mscript.language.ast.EqualityExpression;
 import org.eclipselabs.mscript.language.ast.Equation;
-import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.ast.ExpressionList;
 import org.eclipselabs.mscript.language.ast.FeatureCall;
 import org.eclipselabs.mscript.language.ast.FeatureCallPart;
 import org.eclipselabs.mscript.language.ast.FunctionDefinition;
 import org.eclipselabs.mscript.language.ast.FunctionObjectDeclaration;
-import org.eclipselabs.mscript.language.ast.GaussianTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.IfExpression;
 import org.eclipselabs.mscript.language.ast.ImpliesExpression;
-import org.eclipselabs.mscript.language.ast.IntegerLiteral;
-import org.eclipselabs.mscript.language.ast.IntegerTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.IterationAccumulator;
 import org.eclipselabs.mscript.language.ast.IterationCall;
 import org.eclipselabs.mscript.language.ast.IterationVariable;
 import org.eclipselabs.mscript.language.ast.LetExpression;
 import org.eclipselabs.mscript.language.ast.LetExpressionVariableDeclaration;
-import org.eclipselabs.mscript.language.ast.Literal;
 import org.eclipselabs.mscript.language.ast.LogicalAndExpression;
 import org.eclipselabs.mscript.language.ast.LogicalOrExpression;
 import org.eclipselabs.mscript.language.ast.Module;
 import org.eclipselabs.mscript.language.ast.MultiplicativeExpression;
 import org.eclipselabs.mscript.language.ast.MultiplicativeExpressionPart;
 import org.eclipselabs.mscript.language.ast.NameComponent;
-import org.eclipselabs.mscript.language.ast.NamedTypeSpecifier;
-import org.eclipselabs.mscript.language.ast.NumericLiteral;
-import org.eclipselabs.mscript.language.ast.NumericTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.OperationArgumentList;
 import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
 import org.eclipselabs.mscript.language.ast.ParenthesizedExpression;
 import org.eclipselabs.mscript.language.ast.PostfixExpression;
 import org.eclipselabs.mscript.language.ast.PowerExpression;
-import org.eclipselabs.mscript.language.ast.PrimitiveTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.QualifiedName;
 import org.eclipselabs.mscript.language.ast.RangeExpression;
-import org.eclipselabs.mscript.language.ast.RealLiteral;
-import org.eclipselabs.mscript.language.ast.RealTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.RecordDefinition;
 import org.eclipselabs.mscript.language.ast.RecordFieldDeclaration;
 import org.eclipselabs.mscript.language.ast.RelationalExpression;
-import org.eclipselabs.mscript.language.ast.ScalarTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.SimpleName;
 import org.eclipselabs.mscript.language.ast.StateVariableDeclaration;
-import org.eclipselabs.mscript.language.ast.StringLiteral;
-import org.eclipselabs.mscript.language.ast.StringTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.SwitchCase;
 import org.eclipselabs.mscript.language.ast.SwitchExpression;
-import org.eclipselabs.mscript.language.ast.TensorTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.TypeAliasDefinition;
 import org.eclipselabs.mscript.language.ast.TypeTestExpression;
 import org.eclipselabs.mscript.language.ast.UnaryExpression;
 import org.eclipselabs.mscript.language.ast.UnitConstructionOperator;
-import org.eclipselabs.mscript.language.ast.UnitExpression;
-import org.eclipselabs.mscript.language.ast.UnitExpressionDenominator;
-import org.eclipselabs.mscript.language.ast.UnitExpressionFactor;
-import org.eclipselabs.mscript.language.ast.UnitExpressionNumerator;
+import org.eclipselabs.mscript.typesystem.Expression;
 
 /**
  * <!-- begin-user-doc -->
@@ -243,123 +220,6 @@ public class AstSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case AstPackage.SCALAR_TYPE_SPECIFIER: {
-				ScalarTypeSpecifier scalarTypeSpecifier = (ScalarTypeSpecifier)theEObject;
-				T result = caseScalarTypeSpecifier(scalarTypeSpecifier);
-				if (result == null) result = caseDataTypeSpecifier(scalarTypeSpecifier);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case AstPackage.PRIMITIVE_TYPE_SPECIFIER: {
-				PrimitiveTypeSpecifier primitiveTypeSpecifier = (PrimitiveTypeSpecifier)theEObject;
-				T result = casePrimitiveTypeSpecifier(primitiveTypeSpecifier);
-				if (result == null) result = caseScalarTypeSpecifier(primitiveTypeSpecifier);
-				if (result == null) result = caseDataTypeSpecifier(primitiveTypeSpecifier);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case AstPackage.NUMERIC_TYPE_SPECIFIER: {
-				NumericTypeSpecifier numericTypeSpecifier = (NumericTypeSpecifier)theEObject;
-				T result = caseNumericTypeSpecifier(numericTypeSpecifier);
-				if (result == null) result = casePrimitiveTypeSpecifier(numericTypeSpecifier);
-				if (result == null) result = caseScalarTypeSpecifier(numericTypeSpecifier);
-				if (result == null) result = caseDataTypeSpecifier(numericTypeSpecifier);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case AstPackage.REAL_TYPE_SPECIFIER: {
-				RealTypeSpecifier realTypeSpecifier = (RealTypeSpecifier)theEObject;
-				T result = caseRealTypeSpecifier(realTypeSpecifier);
-				if (result == null) result = caseNumericTypeSpecifier(realTypeSpecifier);
-				if (result == null) result = casePrimitiveTypeSpecifier(realTypeSpecifier);
-				if (result == null) result = caseScalarTypeSpecifier(realTypeSpecifier);
-				if (result == null) result = caseDataTypeSpecifier(realTypeSpecifier);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case AstPackage.INTEGER_TYPE_SPECIFIER: {
-				IntegerTypeSpecifier integerTypeSpecifier = (IntegerTypeSpecifier)theEObject;
-				T result = caseIntegerTypeSpecifier(integerTypeSpecifier);
-				if (result == null) result = caseNumericTypeSpecifier(integerTypeSpecifier);
-				if (result == null) result = casePrimitiveTypeSpecifier(integerTypeSpecifier);
-				if (result == null) result = caseScalarTypeSpecifier(integerTypeSpecifier);
-				if (result == null) result = caseDataTypeSpecifier(integerTypeSpecifier);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case AstPackage.COMPLEX_TYPE_SPECIFIER: {
-				ComplexTypeSpecifier complexTypeSpecifier = (ComplexTypeSpecifier)theEObject;
-				T result = caseComplexTypeSpecifier(complexTypeSpecifier);
-				if (result == null) result = caseNumericTypeSpecifier(complexTypeSpecifier);
-				if (result == null) result = casePrimitiveTypeSpecifier(complexTypeSpecifier);
-				if (result == null) result = caseScalarTypeSpecifier(complexTypeSpecifier);
-				if (result == null) result = caseDataTypeSpecifier(complexTypeSpecifier);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case AstPackage.GAUSSIAN_TYPE_SPECIFIER: {
-				GaussianTypeSpecifier gaussianTypeSpecifier = (GaussianTypeSpecifier)theEObject;
-				T result = caseGaussianTypeSpecifier(gaussianTypeSpecifier);
-				if (result == null) result = caseNumericTypeSpecifier(gaussianTypeSpecifier);
-				if (result == null) result = casePrimitiveTypeSpecifier(gaussianTypeSpecifier);
-				if (result == null) result = caseScalarTypeSpecifier(gaussianTypeSpecifier);
-				if (result == null) result = caseDataTypeSpecifier(gaussianTypeSpecifier);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case AstPackage.BOOLEAN_TYPE_SPECIFIER: {
-				BooleanTypeSpecifier booleanTypeSpecifier = (BooleanTypeSpecifier)theEObject;
-				T result = caseBooleanTypeSpecifier(booleanTypeSpecifier);
-				if (result == null) result = casePrimitiveTypeSpecifier(booleanTypeSpecifier);
-				if (result == null) result = caseScalarTypeSpecifier(booleanTypeSpecifier);
-				if (result == null) result = caseDataTypeSpecifier(booleanTypeSpecifier);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case AstPackage.STRING_TYPE_SPECIFIER: {
-				StringTypeSpecifier stringTypeSpecifier = (StringTypeSpecifier)theEObject;
-				T result = caseStringTypeSpecifier(stringTypeSpecifier);
-				if (result == null) result = casePrimitiveTypeSpecifier(stringTypeSpecifier);
-				if (result == null) result = caseScalarTypeSpecifier(stringTypeSpecifier);
-				if (result == null) result = caseDataTypeSpecifier(stringTypeSpecifier);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case AstPackage.NAMED_TYPE_SPECIFIER: {
-				NamedTypeSpecifier namedTypeSpecifier = (NamedTypeSpecifier)theEObject;
-				T result = caseNamedTypeSpecifier(namedTypeSpecifier);
-				if (result == null) result = caseScalarTypeSpecifier(namedTypeSpecifier);
-				if (result == null) result = caseDataTypeSpecifier(namedTypeSpecifier);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case AstPackage.ARRAY_TYPE_SPECIFIER: {
-				ArrayTypeSpecifier arrayTypeSpecifier = (ArrayTypeSpecifier)theEObject;
-				T result = caseArrayTypeSpecifier(arrayTypeSpecifier);
-				if (result == null) result = caseDataTypeSpecifier(arrayTypeSpecifier);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case AstPackage.TENSOR_TYPE_SPECIFIER: {
-				TensorTypeSpecifier tensorTypeSpecifier = (TensorTypeSpecifier)theEObject;
-				T result = caseTensorTypeSpecifier(tensorTypeSpecifier);
-				if (result == null) result = caseArrayTypeSpecifier(tensorTypeSpecifier);
-				if (result == null) result = caseDataTypeSpecifier(tensorTypeSpecifier);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case AstPackage.ARRAY_DIMENSION_SPECIFICATION: {
-				ArrayDimensionSpecification arrayDimensionSpecification = (ArrayDimensionSpecification)theEObject;
-				T result = caseArrayDimensionSpecification(arrayDimensionSpecification);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case AstPackage.EXPRESSION: {
-				Expression expression = (Expression)theEObject;
-				T result = caseExpression(expression);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case AstPackage.LET_EXPRESSION: {
 				LetExpression letExpression = (LetExpression)theEObject;
 				T result = caseLetExpression(letExpression);
@@ -402,55 +262,6 @@ public class AstSwitch<T> extends Switch<T> {
 			case AstPackage.MULTIPLICATIVE_EXPRESSION_PART: {
 				MultiplicativeExpressionPart multiplicativeExpressionPart = (MultiplicativeExpressionPart)theEObject;
 				T result = caseMultiplicativeExpressionPart(multiplicativeExpressionPart);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case AstPackage.LITERAL: {
-				Literal literal = (Literal)theEObject;
-				T result = caseLiteral(literal);
-				if (result == null) result = caseExpression(literal);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case AstPackage.NUMERIC_LITERAL: {
-				NumericLiteral numericLiteral = (NumericLiteral)theEObject;
-				T result = caseNumericLiteral(numericLiteral);
-				if (result == null) result = caseLiteral(numericLiteral);
-				if (result == null) result = caseExpression(numericLiteral);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case AstPackage.REAL_LITERAL: {
-				RealLiteral realLiteral = (RealLiteral)theEObject;
-				T result = caseRealLiteral(realLiteral);
-				if (result == null) result = caseNumericLiteral(realLiteral);
-				if (result == null) result = caseLiteral(realLiteral);
-				if (result == null) result = caseExpression(realLiteral);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case AstPackage.INTEGER_LITERAL: {
-				IntegerLiteral integerLiteral = (IntegerLiteral)theEObject;
-				T result = caseIntegerLiteral(integerLiteral);
-				if (result == null) result = caseNumericLiteral(integerLiteral);
-				if (result == null) result = caseLiteral(integerLiteral);
-				if (result == null) result = caseExpression(integerLiteral);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case AstPackage.BOOLEAN_LITERAL: {
-				BooleanLiteral booleanLiteral = (BooleanLiteral)theEObject;
-				T result = caseBooleanLiteral(booleanLiteral);
-				if (result == null) result = caseLiteral(booleanLiteral);
-				if (result == null) result = caseExpression(booleanLiteral);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case AstPackage.STRING_LITERAL: {
-				StringLiteral stringLiteral = (StringLiteral)theEObject;
-				T result = caseStringLiteral(stringLiteral);
-				if (result == null) result = caseLiteral(stringLiteral);
-				if (result == null) result = caseExpression(stringLiteral);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -563,30 +374,6 @@ public class AstSwitch<T> extends Switch<T> {
 			case AstPackage.QUALIFIED_NAME: {
 				QualifiedName qualifiedName = (QualifiedName)theEObject;
 				T result = caseQualifiedName(qualifiedName);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case AstPackage.UNIT_EXPRESSION: {
-				UnitExpression unitExpression = (UnitExpression)theEObject;
-				T result = caseUnitExpression(unitExpression);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case AstPackage.UNIT_EXPRESSION_NUMERATOR: {
-				UnitExpressionNumerator unitExpressionNumerator = (UnitExpressionNumerator)theEObject;
-				T result = caseUnitExpressionNumerator(unitExpressionNumerator);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case AstPackage.UNIT_EXPRESSION_DENOMINATOR: {
-				UnitExpressionDenominator unitExpressionDenominator = (UnitExpressionDenominator)theEObject;
-				T result = caseUnitExpressionDenominator(unitExpressionDenominator);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case AstPackage.UNIT_EXPRESSION_FACTOR: {
-				UnitExpressionFactor unitExpressionFactor = (UnitExpressionFactor)theEObject;
-				T result = caseUnitExpressionFactor(unitExpressionFactor);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -918,201 +705,6 @@ public class AstSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Scalar Type Specifier</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Scalar Type Specifier</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseScalarTypeSpecifier(ScalarTypeSpecifier object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Primitive Type Specifier</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Primitive Type Specifier</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T casePrimitiveTypeSpecifier(PrimitiveTypeSpecifier object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Numeric Type Specifier</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Numeric Type Specifier</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseNumericTypeSpecifier(NumericTypeSpecifier object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Real Type Specifier</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Real Type Specifier</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseRealTypeSpecifier(RealTypeSpecifier object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Integer Type Specifier</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Integer Type Specifier</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseIntegerTypeSpecifier(IntegerTypeSpecifier object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Complex Type Specifier</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Complex Type Specifier</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseComplexTypeSpecifier(ComplexTypeSpecifier object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Gaussian Type Specifier</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Gaussian Type Specifier</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseGaussianTypeSpecifier(GaussianTypeSpecifier object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Boolean Type Specifier</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Boolean Type Specifier</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseBooleanTypeSpecifier(BooleanTypeSpecifier object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>String Type Specifier</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>String Type Specifier</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseStringTypeSpecifier(StringTypeSpecifier object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Named Type Specifier</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Named Type Specifier</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseNamedTypeSpecifier(NamedTypeSpecifier object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Array Type Specifier</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Array Type Specifier</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseArrayTypeSpecifier(ArrayTypeSpecifier object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Tensor Type Specifier</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Tensor Type Specifier</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseTensorTypeSpecifier(TensorTypeSpecifier object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Array Dimension Specification</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Array Dimension Specification</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseArrayDimensionSpecification(ArrayDimensionSpecification object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -1229,96 +821,6 @@ public class AstSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseMultiplicativeExpressionPart(MultiplicativeExpressionPart object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Literal</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Literal</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseLiteral(Literal object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Numeric Literal</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Numeric Literal</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseNumericLiteral(NumericLiteral object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Real Literal</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Real Literal</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseRealLiteral(RealLiteral object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Integer Literal</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Integer Literal</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseIntegerLiteral(IntegerLiteral object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Boolean Literal</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Boolean Literal</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseBooleanLiteral(BooleanLiteral object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>String Literal</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>String Literal</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseStringLiteral(StringLiteral object) {
 		return null;
 	}
 
@@ -1574,66 +1076,6 @@ public class AstSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseQualifiedName(QualifiedName object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Unit Expression</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Unit Expression</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseUnitExpression(UnitExpression object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Unit Expression Numerator</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Unit Expression Numerator</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseUnitExpressionNumerator(UnitExpressionNumerator object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Unit Expression Denominator</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Unit Expression Denominator</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseUnitExpressionDenominator(UnitExpressionDenominator object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Unit Expression Factor</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Unit Expression Factor</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseUnitExpressionFactor(UnitExpressionFactor object) {
 		return null;
 	}
 

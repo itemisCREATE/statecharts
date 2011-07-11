@@ -7,9 +7,9 @@
 package org.eclipselabs.mscript.language.il.impl;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipselabs.mscript.language.ast.impl.ExpressionImpl;
 import org.eclipselabs.mscript.language.il.ILPackage;
 import org.eclipselabs.mscript.language.il.InvalidExpression;
+import org.eclipselabs.mscript.typesystem.impl.ExpressionImpl;
 
 /**
  * <!-- begin-user-doc -->

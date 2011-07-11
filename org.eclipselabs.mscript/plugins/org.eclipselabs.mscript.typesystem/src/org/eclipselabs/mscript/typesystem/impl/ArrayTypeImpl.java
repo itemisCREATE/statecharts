@@ -19,23 +19,21 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipselabs.mscript.typesystem.ArrayDimension;
 import org.eclipselabs.mscript.typesystem.ArrayType;
 import org.eclipselabs.mscript.typesystem.DataType;
-import org.eclipselabs.mscript.typesystem.NumericType;
+import org.eclipselabs.mscript.typesystem.OperatorKind;
 import org.eclipselabs.mscript.typesystem.TypeSystemPackage;
 import org.eclipselabs.mscript.typesystem.internal.operations.ArrayTypeOperations;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Array Type</b></em>'.
+ * An implementation of the model object '<em><b>Array Type Specifier</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipselabs.mscript.typesystem.impl.ArrayTypeImpl#getElementType <em>Element Type</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.typesystem.impl.ArrayTypeImpl#getDefinedElementType <em>Defined Element Type</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.typesystem.impl.ArrayTypeImpl#getDimensions <em>Dimensions</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.typesystem.impl.ArrayTypeImpl#getDimensionality <em>Dimensionality</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.typesystem.impl.ArrayTypeImpl#getSize <em>Size</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.typesystem.impl.ArrayTypeImpl#getRowSize <em>Row Size</em>}</li>
- *   <li>{@link org.eclipselabs.mscript.typesystem.impl.ArrayTypeImpl#getColumnSize <em>Column Size</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.typesystem.impl.ArrayTypeImpl#isDimensional <em>Dimensional</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.typesystem.impl.ArrayTypeImpl#isMultidimensional <em>Multidimensional</em>}</li>
  * </ul>
@@ -53,6 +51,16 @@ public class ArrayTypeImpl extends DataTypeImpl implements ArrayType {
 	 * @ordered
 	 */
 	protected DataType elementType;
+
+	/**
+	 * The cached value of the '{@link #getDefinedElementType() <em>Defined Element Type</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDefinedElementType()
+	 * @generated
+	 * @ordered
+	 */
+	protected DataType definedElementType;
 
 	/**
 	 * The cached value of the '{@link #getDimensions() <em>Dimensions</em>}' containment reference list.
@@ -73,36 +81,6 @@ public class ArrayTypeImpl extends DataTypeImpl implements ArrayType {
 	 * @ordered
 	 */
 	protected static final int DIMENSIONALITY_EDEFAULT = 0;
-
-	/**
-	 * The default value of the '{@link #getSize() <em>Size</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSize()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final int SIZE_EDEFAULT = 0;
-
-	/**
-	 * The default value of the '{@link #getRowSize() <em>Row Size</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getRowSize()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final int ROW_SIZE_EDEFAULT = 0;
-
-	/**
-	 * The default value of the '{@link #getColumnSize() <em>Column Size</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getColumnSize()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final int COLUMN_SIZE_EDEFAULT = 0;
 
 	/**
 	 * The default value of the '{@link #isDimensional() <em>Dimensional</em>}' attribute.
@@ -143,12 +121,20 @@ public class ArrayTypeImpl extends DataTypeImpl implements ArrayType {
 		return TypeSystemPackage.Literals.ARRAY_TYPE;
 	}
 
+	public DataType getElementType() {
+		DataType elementType = getElementTypeGen();
+		if (elementType == null) {
+			elementType = getDefinedElementType();
+		}
+		return elementType;
+	}
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DataType getElementType() {
+	public DataType getElementTypeGen() {
 		if (elementType != null && elementType.eIsProxy()) {
 			InternalEObject oldElementType = (InternalEObject)elementType;
 			elementType = (DataType)eResolveProxy(oldElementType);
@@ -168,12 +154,17 @@ public class ArrayTypeImpl extends DataTypeImpl implements ArrayType {
 	public DataType basicGetElementType() {
 		return elementType;
 	}
-	
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public void setElementType(DataType newElementType) {
-		if (newElementType instanceof NumericType) {
-			throw new IllegalArgumentException("New element type must not be NumericType");
-		}
-		setElementTypeGen(newElementType);
+		DataType oldElementType = elementType;
+		elementType = newElementType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TypeSystemPackage.ARRAY_TYPE__ELEMENT_TYPE, oldElementType, elementType));
 	}
 
 	/**
@@ -181,11 +172,42 @@ public class ArrayTypeImpl extends DataTypeImpl implements ArrayType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setElementTypeGen(DataType newElementType) {
-		DataType oldElementType = elementType;
-		elementType = newElementType;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypeSystemPackage.ARRAY_TYPE__ELEMENT_TYPE, oldElementType, elementType));
+	public DataType getDefinedElementType() {
+		return definedElementType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetDefinedElementType(DataType newDefinedElementType, NotificationChain msgs) {
+		DataType oldDefinedElementType = definedElementType;
+		definedElementType = newDefinedElementType;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TypeSystemPackage.ARRAY_TYPE__DEFINED_ELEMENT_TYPE, oldDefinedElementType, newDefinedElementType);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDefinedElementType(DataType newDefinedElementType) {
+		if (newDefinedElementType != definedElementType) {
+			NotificationChain msgs = null;
+			if (definedElementType != null)
+				msgs = ((InternalEObject)definedElementType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TypeSystemPackage.ARRAY_TYPE__DEFINED_ELEMENT_TYPE, null, msgs);
+			if (newDefinedElementType != null)
+				msgs = ((InternalEObject)newDefinedElementType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TypeSystemPackage.ARRAY_TYPE__DEFINED_ELEMENT_TYPE, null, msgs);
+			msgs = basicSetDefinedElementType(newDefinedElementType, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TypeSystemPackage.ARRAY_TYPE__DEFINED_ELEMENT_TYPE, newDefinedElementType, newDefinedElementType));
 	}
 
 	/**
@@ -199,6 +221,30 @@ public class ArrayTypeImpl extends DataTypeImpl implements ArrayType {
 		}
 		return dimensions;
 	}
+	
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.typesystem.impl.DataTypeImpl#evaluate(org.eclipselabs.mscript.typesystem.OperatorKind, org.eclipselabs.mscript.typesystem.DataType)
+	 */
+	@Override
+	public DataType evaluate(OperatorKind operator, DataType other) {
+		return ArrayTypeOperations.evaluate(this, operator, other);
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.typesystem.impl.DataTypeImpl#evaluate(org.eclipselabs.mscript.typesystem.OperatorKind, int)
+	 */
+	@Override
+	public DataType evaluate(OperatorKind operator, int n) {
+		return ArrayTypeOperations.evaluate(this, operator, n);
+	}
+	
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.typesystem.impl.DataTypeImpl#isAssignableFrom(org.eclipselabs.mscript.typesystem.DataType)
+	 */
+	@Override
+	public boolean isAssignableFrom(DataType other) {
+		return ArrayTypeOperations.isAssignableFrom(this, other);
+	}
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -207,33 +253,6 @@ public class ArrayTypeImpl extends DataTypeImpl implements ArrayType {
 	 */
 	public int getDimensionality() {
 		return getDimensions().size();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public int getSize() {
-		return getDimensions().size() > 0 ? getDimensions().get(0).getSize() : 0;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public int getRowSize() {
-		return getDimensions().size() > 0 ? getDimensions().get(0).getSize() : 0;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public int getColumnSize() {
-		return getDimensions().size() > 1 ? getDimensions().get(1).getSize() : 0;
 	}
 
 	/**
@@ -257,21 +276,13 @@ public class ArrayTypeImpl extends DataTypeImpl implements ArrayType {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	@Override
-	public boolean isAssignableFrom(DataType other) {
-		return ArrayTypeOperations.isAssignableFrom(this, other);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case TypeSystemPackage.ARRAY_TYPE__DEFINED_ELEMENT_TYPE:
+				return basicSetDefinedElementType(null, msgs);
 			case TypeSystemPackage.ARRAY_TYPE__DIMENSIONS:
 				return ((InternalEList<?>)getDimensions()).basicRemove(otherEnd, msgs);
 		}
@@ -289,16 +300,12 @@ public class ArrayTypeImpl extends DataTypeImpl implements ArrayType {
 			case TypeSystemPackage.ARRAY_TYPE__ELEMENT_TYPE:
 				if (resolve) return getElementType();
 				return basicGetElementType();
+			case TypeSystemPackage.ARRAY_TYPE__DEFINED_ELEMENT_TYPE:
+				return getDefinedElementType();
 			case TypeSystemPackage.ARRAY_TYPE__DIMENSIONS:
 				return getDimensions();
 			case TypeSystemPackage.ARRAY_TYPE__DIMENSIONALITY:
 				return getDimensionality();
-			case TypeSystemPackage.ARRAY_TYPE__SIZE:
-				return getSize();
-			case TypeSystemPackage.ARRAY_TYPE__ROW_SIZE:
-				return getRowSize();
-			case TypeSystemPackage.ARRAY_TYPE__COLUMN_SIZE:
-				return getColumnSize();
 			case TypeSystemPackage.ARRAY_TYPE__DIMENSIONAL:
 				return isDimensional();
 			case TypeSystemPackage.ARRAY_TYPE__MULTIDIMENSIONAL:
@@ -319,6 +326,9 @@ public class ArrayTypeImpl extends DataTypeImpl implements ArrayType {
 			case TypeSystemPackage.ARRAY_TYPE__ELEMENT_TYPE:
 				setElementType((DataType)newValue);
 				return;
+			case TypeSystemPackage.ARRAY_TYPE__DEFINED_ELEMENT_TYPE:
+				setDefinedElementType((DataType)newValue);
+				return;
 			case TypeSystemPackage.ARRAY_TYPE__DIMENSIONS:
 				getDimensions().clear();
 				getDimensions().addAll((Collection<? extends ArrayDimension>)newValue);
@@ -338,6 +348,9 @@ public class ArrayTypeImpl extends DataTypeImpl implements ArrayType {
 			case TypeSystemPackage.ARRAY_TYPE__ELEMENT_TYPE:
 				setElementType((DataType)null);
 				return;
+			case TypeSystemPackage.ARRAY_TYPE__DEFINED_ELEMENT_TYPE:
+				setDefinedElementType((DataType)null);
+				return;
 			case TypeSystemPackage.ARRAY_TYPE__DIMENSIONS:
 				getDimensions().clear();
 				return;
@@ -355,16 +368,12 @@ public class ArrayTypeImpl extends DataTypeImpl implements ArrayType {
 		switch (featureID) {
 			case TypeSystemPackage.ARRAY_TYPE__ELEMENT_TYPE:
 				return elementType != null;
+			case TypeSystemPackage.ARRAY_TYPE__DEFINED_ELEMENT_TYPE:
+				return definedElementType != null;
 			case TypeSystemPackage.ARRAY_TYPE__DIMENSIONS:
 				return dimensions != null && !dimensions.isEmpty();
 			case TypeSystemPackage.ARRAY_TYPE__DIMENSIONALITY:
 				return getDimensionality() != DIMENSIONALITY_EDEFAULT;
-			case TypeSystemPackage.ARRAY_TYPE__SIZE:
-				return getSize() != SIZE_EDEFAULT;
-			case TypeSystemPackage.ARRAY_TYPE__ROW_SIZE:
-				return getRowSize() != ROW_SIZE_EDEFAULT;
-			case TypeSystemPackage.ARRAY_TYPE__COLUMN_SIZE:
-				return getColumnSize() != COLUMN_SIZE_EDEFAULT;
 			case TypeSystemPackage.ARRAY_TYPE__DIMENSIONAL:
 				return isDimensional() != DIMENSIONAL_EDEFAULT;
 			case TypeSystemPackage.ARRAY_TYPE__MULTIDIMENSIONAL:
@@ -373,4 +382,4 @@ public class ArrayTypeImpl extends DataTypeImpl implements ArrayType {
 		return super.eIsSet(featureID);
 	}
 
-} //ArrayTypeImpl
+} //ArrayTypeSpecifierImpl

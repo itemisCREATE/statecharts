@@ -20,6 +20,8 @@ import org.eclipselabs.mscript.computation.computationmodel.FloatingPointFormat;
 import org.eclipselabs.mscript.computation.computationmodel.FloatingPointFormatKind;
 import org.eclipselabs.mscript.computation.computationmodel.NumberFormat;
 import org.eclipselabs.mscript.computation.computationmodel.NumberFormatMapping;
+import org.eclipselabs.mscript.typesystem.IntegerType;
+import org.eclipselabs.mscript.typesystem.RealType;
 import org.eclipselabs.mscript.typesystem.TypeSystemFactory;
 
 /**
@@ -40,12 +42,16 @@ public class ComputationModelUtil {
 		computationModel.getNumberFormats().add(fixedPointFormat);
 		
 		NumberFormatMapping mapping = ComputationModelFactory.eINSTANCE.createNumberFormatMapping();
-		mapping.setOwnedDataType(TypeSystemFactory.eINSTANCE.createRealType());
+		RealType realType = TypeSystemFactory.eINSTANCE.createRealType();
+		realType.setUnit(TypeSystemFactory.eINSTANCE.createUnit());
+		mapping.setOwnedDataType(realType);
 		mapping.setNumberFormat(floatingPointFormat);
 		computationModel.getNumberFormatMappings().add(mapping);
 
 		mapping = ComputationModelFactory.eINSTANCE.createNumberFormatMapping();
-		mapping.setOwnedDataType(TypeSystemFactory.eINSTANCE.createIntegerType());
+		IntegerType integerType = TypeSystemFactory.eINSTANCE.createIntegerType();
+		integerType.setUnit(TypeSystemFactory.eINSTANCE.createUnit());
+		mapping.setOwnedDataType(integerType);
 		mapping.setNumberFormat(fixedPointFormat);
 		computationModel.getNumberFormatMappings().add(mapping);
 

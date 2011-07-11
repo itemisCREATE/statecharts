@@ -14,6 +14,7 @@ package org.eclipselabs.mscript.language.interpreter;
 import java.util.ArrayList;
 
 import org.eclipselabs.mscript.computation.core.value.IValue;
+import org.eclipselabs.mscript.computation.core.value.UninitializedValue;
 import org.eclipselabs.mscript.language.il.VariableDeclaration;
 
 /**
@@ -57,7 +58,7 @@ public class Variable implements IVariable {
 	 * @see org.eclipselabs.mscript.execution.IVariable#setValue(org.eclipselabs.mscript.execution.value.IValue)
 	 */
 	public void setValue(int stepIndex, IValue value) {
-		if (declaration != null && declaration.getDataType() != null) {
+		if (!(value instanceof UninitializedValue) && declaration != null && declaration.getDataType() != null) {
 			value = value.convert(declaration.getDataType());
 		}
 		values.set(stepIndex, value);

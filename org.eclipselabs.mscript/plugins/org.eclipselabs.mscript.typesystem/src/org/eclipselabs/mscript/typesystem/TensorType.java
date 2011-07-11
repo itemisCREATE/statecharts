@@ -9,7 +9,7 @@ package org.eclipselabs.mscript.typesystem;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Tensor Type</b></em>'.
+ * A representation of the model object '<em><b>Tensor Type Specifier</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
@@ -25,6 +25,12 @@ package org.eclipselabs.mscript.typesystem;
  * @generated
  */
 public interface TensorType extends ArrayType {
+
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.typesystem.ArrayType#getElementType()
+	 */
+	public NumericType getElementType();
+
 	/**
 	 * Returns the value of the '<em><b>Vector</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -35,7 +41,7 @@ public interface TensorType extends ArrayType {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Vector</em>' attribute.
 	 * @see org.eclipselabs.mscript.typesystem.TypeSystemPackage#getTensorType_Vector()
-	 * @model required="true" transient="true" changeable="false" volatile="true" derived="true" ordered="false"
+	 * @model required="true" transient="true" changeable="false" volatile="true" derived="true"
 	 * @generated
 	 */
 	boolean isVector();
@@ -50,11 +56,9 @@ public interface TensorType extends ArrayType {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Matrix</em>' attribute.
 	 * @see org.eclipselabs.mscript.typesystem.TypeSystemPackage#getTensorType_Matrix()
-	 * @model required="true" transient="true" changeable="false" volatile="true" derived="true" ordered="false"
+	 * @model required="true" transient="true" changeable="false" volatile="true" derived="true"
 	 * @generated
 	 */
 	boolean isMatrix();
-
-	NumericType getElementType();
-
-} // TensorType
+	
+} // TensorTypeSpecifier

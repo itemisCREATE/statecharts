@@ -76,49 +76,118 @@ public class TypeSystemItemProviderAdapterFactory extends TypeSystemAdapterFacto
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipselabs.mscript.typesystem.ArrayType} instances.
+	 * This keeps track of the one adapter used for all {@link org.eclipselabs.mscript.typesystem.InvalidDataType} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ArrayTypeItemProvider arrayTypeItemProvider;
+	protected InvalidDataTypeItemProvider invalidDataTypeItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipselabs.mscript.typesystem.ArrayType}.
+	 * This creates an adapter for a {@link org.eclipselabs.mscript.typesystem.InvalidDataType}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createArrayTypeAdapter() {
-		if (arrayTypeItemProvider == null) {
-			arrayTypeItemProvider = new ArrayTypeItemProvider(this);
+	public Adapter createInvalidDataTypeAdapter() {
+		if (invalidDataTypeItemProvider == null) {
+			invalidDataTypeItemProvider = new InvalidDataTypeItemProvider(this);
 		}
 
-		return arrayTypeItemProvider;
+		return invalidDataTypeItemProvider;
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipselabs.mscript.typesystem.ArrayDimension} instances.
+	 * This keeps track of the one adapter used for all {@link org.eclipselabs.mscript.typesystem.AnyDataType} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ArrayDimensionItemProvider arrayDimensionItemProvider;
+	protected AnyDataTypeItemProvider anyDataTypeItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipselabs.mscript.typesystem.ArrayDimension}.
+	 * This creates an adapter for a {@link org.eclipselabs.mscript.typesystem.AnyDataType}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createArrayDimensionAdapter() {
-		if (arrayDimensionItemProvider == null) {
-			arrayDimensionItemProvider = new ArrayDimensionItemProvider(this);
+	public Adapter createAnyDataTypeAdapter() {
+		if (anyDataTypeItemProvider == null) {
+			anyDataTypeItemProvider = new AnyDataTypeItemProvider(this);
 		}
 
-		return arrayDimensionItemProvider;
+		return anyDataTypeItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipselabs.mscript.typesystem.UnitType} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected UnitTypeItemProvider unitTypeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipselabs.mscript.typesystem.UnitType}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createUnitTypeAdapter() {
+		if (unitTypeItemProvider == null) {
+			unitTypeItemProvider = new UnitTypeItemProvider(this);
+		}
+
+		return unitTypeItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipselabs.mscript.typesystem.PrimitiveType} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected PrimitiveTypeItemProvider primitiveTypeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipselabs.mscript.typesystem.PrimitiveType}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createPrimitiveTypeAdapter() {
+		if (primitiveTypeItemProvider == null) {
+			primitiveTypeItemProvider = new PrimitiveTypeItemProvider(this);
+		}
+
+		return primitiveTypeItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipselabs.mscript.typesystem.NumericType} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected NumericTypeItemProvider numericTypeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipselabs.mscript.typesystem.NumericType}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createNumericTypeAdapter() {
+		if (numericTypeItemProvider == null) {
+			numericTypeItemProvider = new NumericTypeItemProvider(this);
+		}
+
+		return numericTypeItemProvider;
 	}
 
 	/**
@@ -145,52 +214,6 @@ public class TypeSystemItemProviderAdapterFactory extends TypeSystemAdapterFacto
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipselabs.mscript.typesystem.Unit} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected UnitItemProvider unitItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.eclipselabs.mscript.typesystem.Unit}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createUnitAdapter() {
-		if (unitItemProvider == null) {
-			unitItemProvider = new UnitItemProvider(this);
-		}
-
-		return unitItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipselabs.mscript.typesystem.UnitFactor} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected UnitFactorItemProvider unitFactorItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.eclipselabs.mscript.typesystem.UnitFactor}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createUnitFactorAdapter() {
-		if (unitFactorItemProvider == null) {
-			unitFactorItemProvider = new UnitFactorItemProvider(this);
-		}
-
-		return unitFactorItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link org.eclipselabs.mscript.typesystem.IntegerType} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -211,6 +234,52 @@ public class TypeSystemItemProviderAdapterFactory extends TypeSystemAdapterFacto
 		}
 
 		return integerTypeItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipselabs.mscript.typesystem.ComplexType} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ComplexTypeItemProvider complexTypeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipselabs.mscript.typesystem.ComplexType}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createComplexTypeAdapter() {
+		if (complexTypeItemProvider == null) {
+			complexTypeItemProvider = new ComplexTypeItemProvider(this);
+		}
+
+		return complexTypeItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipselabs.mscript.typesystem.GaussianType} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected GaussianTypeItemProvider gaussianTypeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipselabs.mscript.typesystem.GaussianType}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createGaussianTypeAdapter() {
+		if (gaussianTypeItemProvider == null) {
+			gaussianTypeItemProvider = new GaussianTypeItemProvider(this);
+		}
+
+		return gaussianTypeItemProvider;
 	}
 
 	/**
@@ -260,26 +329,26 @@ public class TypeSystemItemProviderAdapterFactory extends TypeSystemAdapterFacto
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipselabs.mscript.typesystem.InvalidDataType} instances.
+	 * This keeps track of the one adapter used for all {@link org.eclipselabs.mscript.typesystem.ArrayType} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected InvalidDataTypeItemProvider invalidDataTypeItemProvider;
+	protected ArrayTypeItemProvider arrayTypeItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipselabs.mscript.typesystem.InvalidDataType}.
+	 * This creates an adapter for a {@link org.eclipselabs.mscript.typesystem.ArrayType}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createInvalidDataTypeAdapter() {
-		if (invalidDataTypeItemProvider == null) {
-			invalidDataTypeItemProvider = new InvalidDataTypeItemProvider(this);
+	public Adapter createArrayTypeAdapter() {
+		if (arrayTypeItemProvider == null) {
+			arrayTypeItemProvider = new ArrayTypeItemProvider(this);
 		}
 
-		return invalidDataTypeItemProvider;
+		return arrayTypeItemProvider;
 	}
 
 	/**
@@ -306,95 +375,279 @@ public class TypeSystemItemProviderAdapterFactory extends TypeSystemAdapterFacto
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipselabs.mscript.typesystem.Record} instances.
+	 * This keeps track of the one adapter used for all {@link org.eclipselabs.mscript.typesystem.ArrayDimension} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected RecordItemProvider recordItemProvider;
+	protected ArrayDimensionItemProvider arrayDimensionItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipselabs.mscript.typesystem.Record}.
+	 * This creates an adapter for a {@link org.eclipselabs.mscript.typesystem.ArrayDimension}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createRecordAdapter() {
-		if (recordItemProvider == null) {
-			recordItemProvider = new RecordItemProvider(this);
+	public Adapter createArrayDimensionAdapter() {
+		if (arrayDimensionItemProvider == null) {
+			arrayDimensionItemProvider = new ArrayDimensionItemProvider(this);
 		}
 
-		return recordItemProvider;
+		return arrayDimensionItemProvider;
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipselabs.mscript.typesystem.RecordField} instances.
+	 * This keeps track of the one adapter used for all {@link org.eclipselabs.mscript.typesystem.Expression} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected RecordFieldItemProvider recordFieldItemProvider;
+	protected ExpressionItemProvider expressionItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipselabs.mscript.typesystem.RecordField}.
+	 * This creates an adapter for a {@link org.eclipselabs.mscript.typesystem.Expression}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createRecordFieldAdapter() {
-		if (recordFieldItemProvider == null) {
-			recordFieldItemProvider = new RecordFieldItemProvider(this);
+	public Adapter createExpressionAdapter() {
+		if (expressionItemProvider == null) {
+			expressionItemProvider = new ExpressionItemProvider(this);
 		}
 
-		return recordFieldItemProvider;
+		return expressionItemProvider;
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipselabs.mscript.typesystem.UnitType} instances.
+	 * This keeps track of the one adapter used for all {@link org.eclipselabs.mscript.typesystem.Unit} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected UnitTypeItemProvider unitTypeItemProvider;
+	protected UnitItemProvider unitItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipselabs.mscript.typesystem.UnitType}.
+	 * This creates an adapter for a {@link org.eclipselabs.mscript.typesystem.Unit}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createUnitTypeAdapter() {
-		if (unitTypeItemProvider == null) {
-			unitTypeItemProvider = new UnitTypeItemProvider(this);
+	public Adapter createUnitAdapter() {
+		if (unitItemProvider == null) {
+			unitItemProvider = new UnitItemProvider(this);
 		}
 
-		return unitTypeItemProvider;
+		return unitItemProvider;
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipselabs.mscript.typesystem.AnyDataType} instances.
+	 * This keeps track of the one adapter used for all {@link org.eclipselabs.mscript.typesystem.UnitNumerator} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected AnyDataTypeItemProvider anyDataTypeItemProvider;
+	protected UnitNumeratorItemProvider unitNumeratorItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipselabs.mscript.typesystem.AnyDataType}.
+	 * This creates an adapter for a {@link org.eclipselabs.mscript.typesystem.UnitNumerator}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createAnyDataTypeAdapter() {
-		if (anyDataTypeItemProvider == null) {
-			anyDataTypeItemProvider = new AnyDataTypeItemProvider(this);
+	public Adapter createUnitNumeratorAdapter() {
+		if (unitNumeratorItemProvider == null) {
+			unitNumeratorItemProvider = new UnitNumeratorItemProvider(this);
 		}
 
-		return anyDataTypeItemProvider;
+		return unitNumeratorItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipselabs.mscript.typesystem.UnitDenominator} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected UnitDenominatorItemProvider unitDenominatorItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipselabs.mscript.typesystem.UnitDenominator}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createUnitDenominatorAdapter() {
+		if (unitDenominatorItemProvider == null) {
+			unitDenominatorItemProvider = new UnitDenominatorItemProvider(this);
+		}
+
+		return unitDenominatorItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipselabs.mscript.typesystem.UnitFactor} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected UnitFactorItemProvider unitFactorItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipselabs.mscript.typesystem.UnitFactor}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createUnitFactorAdapter() {
+		if (unitFactorItemProvider == null) {
+			unitFactorItemProvider = new UnitFactorItemProvider(this);
+		}
+
+		return unitFactorItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipselabs.mscript.typesystem.Literal} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected LiteralItemProvider literalItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipselabs.mscript.typesystem.Literal}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createLiteralAdapter() {
+		if (literalItemProvider == null) {
+			literalItemProvider = new LiteralItemProvider(this);
+		}
+
+		return literalItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipselabs.mscript.typesystem.NumericLiteral} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected NumericLiteralItemProvider numericLiteralItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipselabs.mscript.typesystem.NumericLiteral}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createNumericLiteralAdapter() {
+		if (numericLiteralItemProvider == null) {
+			numericLiteralItemProvider = new NumericLiteralItemProvider(this);
+		}
+
+		return numericLiteralItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipselabs.mscript.typesystem.RealLiteral} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected RealLiteralItemProvider realLiteralItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipselabs.mscript.typesystem.RealLiteral}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createRealLiteralAdapter() {
+		if (realLiteralItemProvider == null) {
+			realLiteralItemProvider = new RealLiteralItemProvider(this);
+		}
+
+		return realLiteralItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipselabs.mscript.typesystem.IntegerLiteral} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected IntegerLiteralItemProvider integerLiteralItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipselabs.mscript.typesystem.IntegerLiteral}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createIntegerLiteralAdapter() {
+		if (integerLiteralItemProvider == null) {
+			integerLiteralItemProvider = new IntegerLiteralItemProvider(this);
+		}
+
+		return integerLiteralItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipselabs.mscript.typesystem.BooleanLiteral} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected BooleanLiteralItemProvider booleanLiteralItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipselabs.mscript.typesystem.BooleanLiteral}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createBooleanLiteralAdapter() {
+		if (booleanLiteralItemProvider == null) {
+			booleanLiteralItemProvider = new BooleanLiteralItemProvider(this);
+		}
+
+		return booleanLiteralItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipselabs.mscript.typesystem.StringLiteral} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected StringLiteralItemProvider stringLiteralItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipselabs.mscript.typesystem.StringLiteral}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createStringLiteralAdapter() {
+		if (stringLiteralItemProvider == null) {
+			stringLiteralItemProvider = new StringLiteralItemProvider(this);
+		}
+
+		return stringLiteralItemProvider;
 	}
 
 	/**
@@ -496,20 +749,31 @@ public class TypeSystemItemProviderAdapterFactory extends TypeSystemAdapterFacto
 	 * @generated
 	 */
 	public void dispose() {
-		if (arrayTypeItemProvider != null) arrayTypeItemProvider.dispose();
-		if (arrayDimensionItemProvider != null) arrayDimensionItemProvider.dispose();
+		if (invalidDataTypeItemProvider != null) invalidDataTypeItemProvider.dispose();
+		if (anyDataTypeItemProvider != null) anyDataTypeItemProvider.dispose();
+		if (unitTypeItemProvider != null) unitTypeItemProvider.dispose();
+		if (primitiveTypeItemProvider != null) primitiveTypeItemProvider.dispose();
+		if (numericTypeItemProvider != null) numericTypeItemProvider.dispose();
 		if (realTypeItemProvider != null) realTypeItemProvider.dispose();
-		if (unitItemProvider != null) unitItemProvider.dispose();
-		if (unitFactorItemProvider != null) unitFactorItemProvider.dispose();
 		if (integerTypeItemProvider != null) integerTypeItemProvider.dispose();
+		if (complexTypeItemProvider != null) complexTypeItemProvider.dispose();
+		if (gaussianTypeItemProvider != null) gaussianTypeItemProvider.dispose();
 		if (booleanTypeItemProvider != null) booleanTypeItemProvider.dispose();
 		if (stringTypeItemProvider != null) stringTypeItemProvider.dispose();
-		if (invalidDataTypeItemProvider != null) invalidDataTypeItemProvider.dispose();
+		if (arrayTypeItemProvider != null) arrayTypeItemProvider.dispose();
 		if (tensorTypeItemProvider != null) tensorTypeItemProvider.dispose();
-		if (recordItemProvider != null) recordItemProvider.dispose();
-		if (recordFieldItemProvider != null) recordFieldItemProvider.dispose();
-		if (unitTypeItemProvider != null) unitTypeItemProvider.dispose();
-		if (anyDataTypeItemProvider != null) anyDataTypeItemProvider.dispose();
+		if (arrayDimensionItemProvider != null) arrayDimensionItemProvider.dispose();
+		if (expressionItemProvider != null) expressionItemProvider.dispose();
+		if (unitItemProvider != null) unitItemProvider.dispose();
+		if (unitNumeratorItemProvider != null) unitNumeratorItemProvider.dispose();
+		if (unitDenominatorItemProvider != null) unitDenominatorItemProvider.dispose();
+		if (unitFactorItemProvider != null) unitFactorItemProvider.dispose();
+		if (literalItemProvider != null) literalItemProvider.dispose();
+		if (numericLiteralItemProvider != null) numericLiteralItemProvider.dispose();
+		if (realLiteralItemProvider != null) realLiteralItemProvider.dispose();
+		if (integerLiteralItemProvider != null) integerLiteralItemProvider.dispose();
+		if (booleanLiteralItemProvider != null) booleanLiteralItemProvider.dispose();
+		if (stringLiteralItemProvider != null) stringLiteralItemProvider.dispose();
 	}
 
 }

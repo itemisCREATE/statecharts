@@ -6,7 +6,7 @@
  */
 package org.eclipselabs.mscript.language.il;
 
-import org.eclipselabs.mscript.language.ast.Expression;
+import org.eclipselabs.mscript.typesystem.Expression;
 
 /**
  * <!-- begin-user-doc -->

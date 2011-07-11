@@ -7,6 +7,7 @@
 package org.eclipselabs.mscript.typesystem.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipselabs.mscript.typesystem.DataType;
 import org.eclipselabs.mscript.typesystem.OperatorKind;
 import org.eclipselabs.mscript.typesystem.TypeSystemPackage;
@@ -21,7 +22,7 @@ import org.eclipselabs.mscript.typesystem.internal.operations.DataTypeOperations
  *
  * @generated
  */
-public abstract class DataTypeImpl extends TypeImpl implements DataType {
+public abstract class DataTypeImpl extends EObjectImpl implements DataType {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -55,8 +56,8 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public DataType evaluatePower(int exponent) {
-		return DataTypeOperations.evaluatePower(this, exponent);
+	public DataType evaluate(OperatorKind operator, int n) {
+		return DataTypeOperations.evaluate(this, operator, n);
 	}
 
 	/**
@@ -66,6 +67,15 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 	 */
 	public boolean isAssignableFrom(DataType other) {
 		return DataTypeOperations.isAssignableFrom(this, other);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public boolean isEquivalentTo(DataType other) {
+		return DataTypeOperations.isEquivalentTo(this, other);
 	}
 
 } //DataTypeImpl

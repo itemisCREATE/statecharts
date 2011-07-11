@@ -20,10 +20,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipselabs.mscript.language.ast.AdditiveExpression;
 import org.eclipselabs.mscript.language.ast.AdditiveExpressionPart;
 import org.eclipselabs.mscript.language.ast.AdditiveOperator;
-import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.ast.FeatureCall;
 import org.eclipselabs.mscript.language.ast.FeatureCallPart;
-import org.eclipselabs.mscript.language.ast.IntegerLiteral;
 import org.eclipselabs.mscript.language.ast.OperationArgumentList;
 import org.eclipselabs.mscript.language.ast.ParenthesizedExpression;
 import org.eclipselabs.mscript.language.ast.SimpleName;
@@ -31,6 +29,10 @@ import org.eclipselabs.mscript.language.ast.UnaryExpression;
 import org.eclipselabs.mscript.language.ast.util.AstSwitch;
 import org.eclipselabs.mscript.language.internal.LanguagePlugin;
 import org.eclipselabs.mscript.language.util.SyntaxStatus;
+import org.eclipselabs.mscript.typesystem.Expression;
+import org.eclipselabs.mscript.typesystem.IntegerLiteral;
+import org.eclipselabs.mscript.typesystem.Unit;
+import org.eclipselabs.mscript.typesystem.util.TypeSystemSwitch;
 
 /**
  * @author Andreas Unger
@@ -153,17 +155,22 @@ public class StepExpressionHelper {
 			return 0;
 		}
 		
-		/* (non-Javadoc)
-		 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseIntegerLiteral(org.eclipselabs.mscript.language.ast.IntegerLiteral)
-		 */
-		@Override
-		public Integer caseIntegerLiteral(IntegerLiteral integerLiteral) {
-			if (integerLiteral.getUnit() != null) {
-				status.add(new SyntaxStatus(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, 0, "Integer literal must not specify unit", integerLiteral.getUnit()));
-				return 0;
+		private TypeSystemSwitch<Integer> typeSystemSwitch = new TypeSystemSwitch<Integer>() {
+		
+			/* (non-Javadoc)
+			 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseIntegerLiteral(org.eclipselabs.mscript.language.ast.IntegerLiteral)
+			 */
+			@Override
+			public Integer caseIntegerLiteral(IntegerLiteral integerLiteral) {
+				Unit unit = integerLiteral.getUnit();
+				if (unit.isWildcard() || !unit.getNumerator().getFactors().isEmpty() || unit.getDenominator() != null) {
+					status.add(new SyntaxStatus(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, 0, "Integer literal must not specify unit", unit));
+					return 0;
+				}
+				return (int) integerLiteral.getValue();
 			}
-			return (int) integerLiteral.getValue();
-		}
+		
+		};
 		
 		/* (non-Javadoc)
 		 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseParenthesizedExpression(org.eclipselabs.mscript.language.ast.ParenthesizedExpression)
@@ -178,6 +185,10 @@ public class StepExpressionHelper {
 		 */
 		@Override
 		public Integer defaultCase(EObject object) {
+			Integer result = typeSystemSwitch.doSwitch(object);
+			if (result != null) {
+				return result;
+			}
 			status.add(new SyntaxStatus(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, 0, "Invalid expression part", object));
 			return 0;
 		}

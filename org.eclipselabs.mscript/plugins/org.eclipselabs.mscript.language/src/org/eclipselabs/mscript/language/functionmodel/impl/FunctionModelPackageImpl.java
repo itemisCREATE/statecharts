@@ -26,6 +26,7 @@ import org.eclipselabs.mscript.language.functionmodel.VariableDescriptor;
 import org.eclipselabs.mscript.language.functionmodel.VariableKind;
 import org.eclipselabs.mscript.language.functionmodel.VariableStep;
 import org.eclipselabs.mscript.language.functionmodel.util.FunctionModelValidator;
+import org.eclipselabs.mscript.typesystem.TypeSystemPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -508,6 +509,7 @@ public class FunctionModelPackageImpl extends EPackageImpl implements FunctionMo
 
 		// Obtain other dependent packages
 		AstPackage theAstPackage = (AstPackage)EPackage.Registry.INSTANCE.getEPackage(AstPackage.eNS_URI);
+		TypeSystemPackage theTypeSystemPackage = (TypeSystemPackage)EPackage.Registry.INSTANCE.getEPackage(TypeSystemPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -587,7 +589,7 @@ public class FunctionModelPackageImpl extends EPackageImpl implements FunctionMo
 
 		initEClass(equationSideEClass, EquationSide.class, "EquationSide", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getEquationSide_Descriptor(), this.getEquationDescriptor(), this.getEquationDescriptor_Sides(), "descriptor", null, 1, 1, EquationSide.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getEquationSide_Expression(), theAstPackage.getExpression(), null, "expression", null, 1, 1, EquationSide.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEquationSide_Expression(), theTypeSystemPackage.getExpression(), null, "expression", null, 1, 1, EquationSide.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEquationSide_Parts(), this.getEquationPart(), this.getEquationPart_Side(), "parts", null, 0, -1, EquationSide.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(equationSideEClass, this.getEquationSide(), "getOtherSide", 1, 1, IS_UNIQUE, IS_ORDERED);

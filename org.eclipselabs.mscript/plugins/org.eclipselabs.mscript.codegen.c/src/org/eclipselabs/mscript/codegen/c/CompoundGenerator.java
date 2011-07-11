@@ -16,7 +16,6 @@ import java.io.PrintWriter;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipselabs.mscript.codegen.c.internal.VariableAccessGenerator;
 import org.eclipselabs.mscript.codegen.c.util.MscriptGeneratorUtil;
-import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.il.Assignment;
 import org.eclipselabs.mscript.language.il.Compound;
 import org.eclipselabs.mscript.language.il.ForeachStatement;
@@ -29,6 +28,8 @@ import org.eclipselabs.mscript.language.il.util.ILUtil;
 import org.eclipselabs.mscript.typesystem.ArrayDimension;
 import org.eclipselabs.mscript.typesystem.ArrayType;
 import org.eclipselabs.mscript.typesystem.DataType;
+import org.eclipselabs.mscript.typesystem.Expression;
+import org.eclipselabs.mscript.typesystem.util.TypeSystemUtil;
 
 /**
  * @author Andreas Unger
@@ -134,7 +135,7 @@ public class CompoundGenerator implements ICompoundGenerator {
 			
 			String itVarName = iterationVariableDeclaration.getName();
 			String itVarDecl = MscriptGeneratorUtil.getCVariableDeclaration(context.getComputationModel(), iterationVariableDeclaration.getDataType(), itVarName, false);
-			int size = collectionArrayType.getSize();
+			int size = TypeSystemUtil.getArraySize(collectionArrayType);
 			
 			writer.println("{");
 			writer.printf("%s %s_i;\n", MscriptGeneratorUtil.getIndexCDataType(context.getComputationModel(), size), itVarName);

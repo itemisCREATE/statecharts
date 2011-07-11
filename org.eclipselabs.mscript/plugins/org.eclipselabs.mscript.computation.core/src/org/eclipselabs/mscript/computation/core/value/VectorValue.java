@@ -14,6 +14,7 @@ package org.eclipselabs.mscript.computation.core.value;
 import org.eclipselabs.mscript.computation.core.IComputationContext;
 import org.eclipselabs.mscript.typesystem.DataType;
 import org.eclipselabs.mscript.typesystem.TensorType;
+import org.eclipselabs.mscript.typesystem.util.TypeSystemUtil;
 
 /**
  * @author Andreas Unger
@@ -32,7 +33,7 @@ public class VectorValue extends AbstractExplicitDataTypeValue implements IArray
 		if (!dataType.isVector()) {
 			throw new IllegalArgumentException("Tensor type must be vector");
 		}
-		if (elements.length != dataType.getSize()) {
+		if (elements.length != TypeSystemUtil.getArraySize(dataType)) {
 			throw new IllegalArgumentException("Number of elements must be equal to vector size");
 		}
 		this.elements = elements;

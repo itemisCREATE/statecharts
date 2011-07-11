@@ -12,6 +12,7 @@
 grammar org.eclipselabs.mscript.language.Mscript
 hidden(WS, ML_COMMENT, SL_COMMENT)
 
+import "platform:/resource/org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore"
 import "platform:/resource/org.eclipselabs.mscript.language/model/Mscript.ecore"
 import 'http://www.eclipse.org/emf/2002/Ecore' as ecore
 
@@ -48,7 +49,7 @@ EnumerationLiteralDeclaration :
  */
  
 TypeAliasDefinition :
-	'type' name=ID '=' type=PrimitiveTypeSpecifier ';';	
+	'type' name=ID '=' type=PrimitiveType ';';	
 
 /*
  * Record
@@ -103,46 +104,40 @@ Equation :
  */
 
 DataTypeSpecifier :
-	ScalarTypeSpecifier | ArrayTypeSpecifier;
-	
-ScalarTypeSpecifier:
-	PrimitiveTypeSpecifier | NamedTypeSpecifier;
-	
-PrimitiveTypeSpecifier :
-	NumericTypeSpecifier | BooleanTypeSpecifier | StringTypeSpecifier;
-	
-NumericTypeSpecifier :
-	RealTypeSpecifier | IntegerTypeSpecifier | ComplexTypeSpecifier | GaussianTypeSpecifier;
-	
-RealTypeSpecifier :
-	{RealTypeSpecifier} 'real' ('(' unit=UnitExpression ')')?;
-	
-IntegerTypeSpecifier :
-	{IntegerTypeSpecifier} 'int' ('(' unit=UnitExpression ')')?;
-	
-ComplexTypeSpecifier :
-	{ComplexTypeSpecifier} 'complex' ('(' unit=UnitExpression ')')?;
+	definedType=(PrimitiveType | ArrayType) | type=[DataType];
 
-GaussianTypeSpecifier :
-	{GaussianTypeSpecifier} 'gauss' ('(' unit=UnitExpression ')')?;
+PrimitiveType :
+	NumericType | BooleanType | StringType;
+	
+NumericType :
+	RealType | IntegerType | ComplexType | GaussianType;
+	
+RealType :
+	{RealType} 'real' ('(' unit=Unit ')')?;
+	
+IntegerType :
+	{IntegerType} 'int' ('(' unit=Unit ')')?;
+	
+ComplexType :
+	{ComplexType} 'complex' ('(' unit=Unit ')')?;
 
-BooleanTypeSpecifier :
-	{BooleanTypeSpecifier} 'bool';
+GaussianType :
+	{GaussianType} 'gauss' ('(' unit=Unit ')')?;
+
+BooleanType :
+	{BooleanType} 'bool';
 	
-StringTypeSpecifier :
-	{StringTypeSpecifier} 'string';
+StringType :
+	{StringType} 'string';
 	
-NamedTypeSpecifier :
-	typeReference=QualifiedName;
+ArrayType :
+	TensorType | =>(definedElementType=PrimitiveType | elementType=[DataType]) '[' dimensions+=ArrayDimension (',' dimensions+=ArrayDimension)* ']';
 	
-ArrayTypeSpecifier :
-	TensorTypeSpecifier | =>elementType=ScalarTypeSpecifier '[' dimensions+=ArrayDimensionSpecification (',' dimensions+=ArrayDimensionSpecification)* ']';
+TensorType :
+	definedElementType=NumericType '[' dimensions+=ArrayDimension (',' dimensions+=ArrayDimension)* ']';
 	
-TensorTypeSpecifier :
-	elementType=NumericTypeSpecifier '[' dimensions+=ArrayDimensionSpecification (',' dimensions+=ArrayDimensionSpecification)* ']';
-	
-ArrayDimensionSpecification :
-	{ArrayDimensionSpecification} (size=Expression)?;
+ArrayDimension :
+	{ArrayDimension} (size=Expression)?;
 
 /*
  * Expressions
@@ -257,10 +252,10 @@ NumericLiteral :
 	RealLiteral | IntegerLiteral;
 	
 RealLiteral :
-	value=REAL (modifier=ID)? ('(' unit=UnitExpression ')')?;
+	value=ValidReal (modifier=ID)? ('(' unit=Unit ')')?;
 	
 IntegerLiteral :
-	value=INTEGER (modifier=ID)? ('(' unit=UnitExpression ')')?;
+	value=ValidInteger (modifier=ID)? ('(' unit=Unit ')')?;
 
 BooleanLiteral :
 	value=BooleanKind;
@@ -314,7 +309,7 @@ ExpressionList :
 	expressions+=Expression (',' expressions+=Expression)*;
 	
 UnitConstructionOperator :
-	'$' '(' unit=UnitExpression ')';
+	'$' '(' unit=Unit ')';
 
 ParenthesizedExpression :
 	'(' expressions+=Expression (',' expressions+=Expression)* ')';
@@ -332,20 +327,26 @@ QualifiedName :
  * Unit expressions
  */
 	
-UnitExpression :
-	{UnitExpression} (numerator=UnitExpressionNumerator ('/' denominator=UnitExpressionDenominator)?)?;
+Unit :
+	{Unit} (numerator=UnitNumerator ('/' denominator=UnitDenominator)?)?;
 
-UnitExpressionNumerator :
-	one=INTEGER /* must be '1' */ | factors+=UnitExpressionFactor ('*' factors+=UnitExpressionFactor)*;
+UnitNumerator :
+	{UnitNumerator} ONE | factors+=UnitFactor ('*' factors+=UnitFactor)*;
 
-UnitExpressionDenominator :
-	factors+=UnitExpressionFactor | '(' factors+=UnitExpressionFactor ('*' factors+=UnitExpressionFactor)* ')';
+UnitDenominator :
+	factors+=UnitFactor | '(' factors+=UnitFactor ('*' factors+=UnitFactor)* ')';
 
-UnitExpressionFactor :
-	operand=ID ('^' exponent=UnitExpressionExponent)?;
+UnitFactor :
+	symbol=ID ('^' exponent=UnitExponent)?;
 
-UnitExpressionExponent returns ecore::EInt :
-	('-')? INTEGER;
+UnitExponent returns ecore::EInt :
+	('-')? ValidInteger;
+
+ValidReal returns ecore::EDouble :
+	REAL;
+
+ValidInteger returns ecore::ELong :
+	ONE | INTEGER;
 
 /*
  * Terminals
@@ -357,10 +358,13 @@ terminal ID :
 terminal STRING : 
 	'"' (!('\\' | '"') | '\\' ("'" | '"' | '?' | '\\' | 'a' | 'b' | 'f' | 'n' | 'r' | 't' | 'v'))* '"';
 
-terminal REAL returns ecore::EDouble :
+terminal ONE :
+	'1';
+
+terminal REAL :
 	('0'..'9')+ '.' ('0'..'9')* (('e' | 'E') ('+'|'-')? ('0'..'9')+)?;
 
-terminal INTEGER returns ecore::ELong :
+terminal INTEGER :
 	('0'..'9')+;
 
 terminal ML_COMMENT :

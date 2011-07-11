@@ -23,62 +23,96 @@ import org.eclipse.emf.common.util.Enumerator;
  */
 public enum OperatorKind implements Enumerator {
 	/**
-	 * The '<em><b>Addition</b></em>' literal object.
+	 * The '<em><b>Add</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #ADDITION_VALUE
+	 * @see #ADD_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	ADDITION(0, "Addition", "Addition"), /**
-	 * The '<em><b>Subtraction</b></em>' literal object.
+	ADD(0, "Add", "Add"),
+
+	/**
+	 * The '<em><b>Subtract</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #SUBTRACTION_VALUE
+	 * @see #SUBTRACT_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	SUBTRACTION(1, "Subtraction", "Subtraction"), /**
-	 * The '<em><b>Multiplication</b></em>' literal object.
+	SUBTRACT(1, "Subtract", "Subtract"),
+
+	/**
+	 * The '<em><b>Multiply</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #MULTIPLICATION_VALUE
+	 * @see #MULTIPLY_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	MULTIPLICATION(2, "Multiplication", "Multiplication"), /**
-	 * The '<em><b>Division</b></em>' literal object.
+	MULTIPLY(2, "Multiply", "Multiply"),
+
+	/**
+	 * The '<em><b>Divide</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #DIVISION_VALUE
+	 * @see #DIVIDE_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	DIVISION(3, "Division", "Division"), /**
-	 * The '<em><b>Element Wise Multiplication</b></em>' literal object.
+	DIVIDE(3, "Divide", "Divide"),
+
+	/**
+	 * The '<em><b>Element Wise Multiply</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #ELEMENT_WISE_MULTIPLICATION_VALUE
+	 * @see #ELEMENT_WISE_MULTIPLY_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	ELEMENT_WISE_MULTIPLICATION(4, "ElementWiseMultiplication", "ElementWiseMultiplication"), /**
-	 * The '<em><b>Element Wise Division</b></em>' literal object.
+	ELEMENT_WISE_MULTIPLY(4, "ElementWiseMultiply", "ElementWiseMultiply"),
+
+	/**
+	 * The '<em><b>Element Wise Divide</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #ELEMENT_WISE_DIVISION_VALUE
+	 * @see #ELEMENT_WISE_DIVIDE_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	ELEMENT_WISE_DIVISION(5, "ElementWiseDivision", "ElementWiseDivision"), /**
-	 * The '<em><b>Unary Minus</b></em>' literal object.
+	ELEMENT_WISE_DIVIDE(5, "ElementWiseDivide", "ElementWiseDivide"),
+
+	/**
+	 * The '<em><b>Negate</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #UNARY_MINUS_VALUE
+	 * @see #NEGATE_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	UNARY_MINUS(6, "UnaryMinus", "UnaryMinus"), /**
+	NEGATE(6, "Negate", "Negate"),
+
+	/**
+	 * The '<em><b>Power</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #POWER_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	POWER(7, "Power", "Power"),
+
+	/**
+	 * The '<em><b>Root</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #ROOT_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	ROOT(8, "Root", "Root"),
+
+	/**
 	 * The '<em><b>Logical And</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -86,7 +120,9 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	LOGICAL_AND(7, "LogicalAnd", "LogicalAnd"), /**
+	LOGICAL_AND(9, "LogicalAnd", "LogicalAnd"),
+
+	/**
 	 * The '<em><b>Logical Or</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -94,7 +130,9 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	LOGICAL_OR(8, "LogicalOr", "LogicalOr"), /**
+	LOGICAL_OR(10, "LogicalOr", "LogicalOr"),
+
+	/**
 	 * The '<em><b>Logical Not</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -102,7 +140,9 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	LOGICAL_NOT(9, "LogicalNot", "LogicalNot"), /**
+	LOGICAL_NOT(11, "LogicalNot", "LogicalNot"),
+
+	/**
 	 * The '<em><b>Implies</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -110,7 +150,9 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	IMPLIES(10, "Implies", "Implies"), /**
+	IMPLIES(12, "Implies", "Implies"),
+
+	/**
 	 * The '<em><b>Less Than</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -118,7 +160,9 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	LESS_THAN(11, "LessThan", "LessThan"), /**
+	LESS_THAN(13, "LessThan", "LessThan"),
+
+	/**
 	 * The '<em><b>Less Than Or Equal To</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -126,7 +170,9 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	LESS_THAN_OR_EQUAL_TO(12, "LessThanOrEqualTo", "LessThanOrEqualTo"), /**
+	LESS_THAN_OR_EQUAL_TO(14, "LessThanOrEqualTo", "LessThanOrEqualTo"),
+
+	/**
 	 * The '<em><b>Greater Than</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -134,7 +180,9 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	GREATER_THAN(13, "GreaterThan", "GreaterThan"), /**
+	GREATER_THAN(15, "GreaterThan", "GreaterThan"),
+
+	/**
 	 * The '<em><b>Greater Than Or Equal To</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -142,7 +190,9 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	GREATER_THAN_OR_EQUAL_TO(14, "GreaterThanOrEqualTo", "GreaterThanOrEqualTo"), /**
+	GREATER_THAN_OR_EQUAL_TO(16, "GreaterThanOrEqualTo", "GreaterThanOrEqualTo"),
+
+	/**
 	 * The '<em><b>Equal To</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -150,7 +200,9 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	EQUAL_TO(15, "EqualTo", "EqualTo"), /**
+	EQUAL_TO(17, "EqualTo", "EqualTo"),
+
+	/**
 	 * The '<em><b>Not Equal To</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -158,114 +210,144 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	NOT_EQUAL_TO(16, "NotEqualTo", "NotEqualTo");
+	NOT_EQUAL_TO(18, "NotEqualTo", "NotEqualTo");
 
 	/**
-	 * The '<em><b>Addition</b></em>' literal value.
+	 * The '<em><b>Add</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>Addition</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>Add</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #ADDITION
-	 * @model name="Addition"
+	 * @see #ADD
+	 * @model name="Add"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int ADDITION_VALUE = 0;
+	public static final int ADD_VALUE = 0;
 
 	/**
-	 * The '<em><b>Subtraction</b></em>' literal value.
+	 * The '<em><b>Subtract</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>Subtraction</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>Subtract</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #SUBTRACTION
-	 * @model name="Subtraction"
+	 * @see #SUBTRACT
+	 * @model name="Subtract"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int SUBTRACTION_VALUE = 1;
+	public static final int SUBTRACT_VALUE = 1;
 
 	/**
-	 * The '<em><b>Multiplication</b></em>' literal value.
+	 * The '<em><b>Multiply</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>Multiplication</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>Multiply</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #MULTIPLICATION
-	 * @model name="Multiplication"
+	 * @see #MULTIPLY
+	 * @model name="Multiply"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int MULTIPLICATION_VALUE = 2;
+	public static final int MULTIPLY_VALUE = 2;
 
 	/**
-	 * The '<em><b>Division</b></em>' literal value.
+	 * The '<em><b>Divide</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>Division</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>Divide</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #DIVISION
-	 * @model name="Division"
+	 * @see #DIVIDE
+	 * @model name="Divide"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int DIVISION_VALUE = 3;
+	public static final int DIVIDE_VALUE = 3;
 
 	/**
-	 * The '<em><b>Element Wise Multiplication</b></em>' literal value.
+	 * The '<em><b>Element Wise Multiply</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>Element Wise Multiplication</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>Element Wise Multiply</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #ELEMENT_WISE_MULTIPLICATION
-	 * @model name="ElementWiseMultiplication"
+	 * @see #ELEMENT_WISE_MULTIPLY
+	 * @model name="ElementWiseMultiply"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int ELEMENT_WISE_MULTIPLICATION_VALUE = 4;
+	public static final int ELEMENT_WISE_MULTIPLY_VALUE = 4;
 
 	/**
-	 * The '<em><b>Element Wise Division</b></em>' literal value.
+	 * The '<em><b>Element Wise Divide</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>Element Wise Division</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>Element Wise Divide</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #ELEMENT_WISE_DIVISION
-	 * @model name="ElementWiseDivision"
+	 * @see #ELEMENT_WISE_DIVIDE
+	 * @model name="ElementWiseDivide"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int ELEMENT_WISE_DIVISION_VALUE = 5;
+	public static final int ELEMENT_WISE_DIVIDE_VALUE = 5;
 
 	/**
-	 * The '<em><b>Unary Minus</b></em>' literal value.
+	 * The '<em><b>Negate</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>Unary Minus</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>Negate</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #UNARY_MINUS
-	 * @model name="UnaryMinus"
+	 * @see #NEGATE
+	 * @model name="Negate"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int UNARY_MINUS_VALUE = 6;
+	public static final int NEGATE_VALUE = 6;
 
-/**
+	/**
+	 * The '<em><b>Power</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Power</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #POWER
+	 * @model name="Power"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int POWER_VALUE = 7;
+
+	/**
+	 * The '<em><b>Root</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Root</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #ROOT
+	 * @model name="Root"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ROOT_VALUE = 8;
+
+	/**
 	 * The '<em><b>Logical And</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -278,9 +360,9 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int LOGICAL_AND_VALUE = 7;
+	public static final int LOGICAL_AND_VALUE = 9;
 
-/**
+	/**
 	 * The '<em><b>Logical Or</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -293,9 +375,9 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int LOGICAL_OR_VALUE = 8;
+	public static final int LOGICAL_OR_VALUE = 10;
 
-/**
+	/**
 	 * The '<em><b>Logical Not</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -308,9 +390,9 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int LOGICAL_NOT_VALUE = 9;
+	public static final int LOGICAL_NOT_VALUE = 11;
 
-/**
+	/**
 	 * The '<em><b>Implies</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -323,9 +405,9 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int IMPLIES_VALUE = 10;
+	public static final int IMPLIES_VALUE = 12;
 
-/**
+	/**
 	 * The '<em><b>Less Than</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -338,9 +420,9 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int LESS_THAN_VALUE = 11;
+	public static final int LESS_THAN_VALUE = 13;
 
-/**
+	/**
 	 * The '<em><b>Less Than Or Equal To</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -353,9 +435,9 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int LESS_THAN_OR_EQUAL_TO_VALUE = 12;
+	public static final int LESS_THAN_OR_EQUAL_TO_VALUE = 14;
 
-/**
+	/**
 	 * The '<em><b>Greater Than</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -368,9 +450,9 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int GREATER_THAN_VALUE = 13;
+	public static final int GREATER_THAN_VALUE = 15;
 
-/**
+	/**
 	 * The '<em><b>Greater Than Or Equal To</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -383,9 +465,9 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int GREATER_THAN_OR_EQUAL_TO_VALUE = 14;
+	public static final int GREATER_THAN_OR_EQUAL_TO_VALUE = 16;
 
-/**
+	/**
 	 * The '<em><b>Equal To</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -398,9 +480,9 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int EQUAL_TO_VALUE = 15;
+	public static final int EQUAL_TO_VALUE = 17;
 
-/**
+	/**
 	 * The '<em><b>Not Equal To</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -413,9 +495,9 @@ public enum OperatorKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int NOT_EQUAL_TO_VALUE = 16;
+	public static final int NOT_EQUAL_TO_VALUE = 18;
 
-/**
+	/**
 	 * An array of all the '<em><b>Operator Kind</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -423,13 +505,15 @@ public enum OperatorKind implements Enumerator {
 	 */
 	private static final OperatorKind[] VALUES_ARRAY =
 		new OperatorKind[] {
-			ADDITION,
-			SUBTRACTION,
-			MULTIPLICATION,
-			DIVISION,
-			ELEMENT_WISE_MULTIPLICATION,
-			ELEMENT_WISE_DIVISION,
-			UNARY_MINUS,
+			ADD,
+			SUBTRACT,
+			MULTIPLY,
+			DIVIDE,
+			ELEMENT_WISE_MULTIPLY,
+			ELEMENT_WISE_DIVIDE,
+			NEGATE,
+			POWER,
+			ROOT,
 			LOGICAL_AND,
 			LOGICAL_OR,
 			LOGICAL_NOT,
@@ -490,13 +574,15 @@ public enum OperatorKind implements Enumerator {
 	 */
 	public static OperatorKind get(int value) {
 		switch (value) {
-			case ADDITION_VALUE: return ADDITION;
-			case SUBTRACTION_VALUE: return SUBTRACTION;
-			case MULTIPLICATION_VALUE: return MULTIPLICATION;
-			case DIVISION_VALUE: return DIVISION;
-			case ELEMENT_WISE_MULTIPLICATION_VALUE: return ELEMENT_WISE_MULTIPLICATION;
-			case ELEMENT_WISE_DIVISION_VALUE: return ELEMENT_WISE_DIVISION;
-			case UNARY_MINUS_VALUE: return UNARY_MINUS;
+			case ADD_VALUE: return ADD;
+			case SUBTRACT_VALUE: return SUBTRACT;
+			case MULTIPLY_VALUE: return MULTIPLY;
+			case DIVIDE_VALUE: return DIVIDE;
+			case ELEMENT_WISE_MULTIPLY_VALUE: return ELEMENT_WISE_MULTIPLY;
+			case ELEMENT_WISE_DIVIDE_VALUE: return ELEMENT_WISE_DIVIDE;
+			case NEGATE_VALUE: return NEGATE;
+			case POWER_VALUE: return POWER;
+			case ROOT_VALUE: return ROOT;
 			case LOGICAL_AND_VALUE: return LOGICAL_AND;
 			case LOGICAL_OR_VALUE: return LOGICAL_OR;
 			case LOGICAL_NOT_VALUE: return LOGICAL_NOT;

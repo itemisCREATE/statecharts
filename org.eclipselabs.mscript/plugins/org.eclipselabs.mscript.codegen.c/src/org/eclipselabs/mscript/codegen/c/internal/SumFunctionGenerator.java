@@ -19,10 +19,11 @@ import org.eclipselabs.mscript.codegen.c.IExpressionGenerator;
 import org.eclipselabs.mscript.codegen.c.IFunctionGenerator;
 import org.eclipselabs.mscript.codegen.c.IMscriptGeneratorContext;
 import org.eclipselabs.mscript.codegen.c.IVariableAccessStrategy;
-import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.il.util.ILUtil;
 import org.eclipselabs.mscript.typesystem.DataType;
+import org.eclipselabs.mscript.typesystem.Expression;
 import org.eclipselabs.mscript.typesystem.TensorType;
+import org.eclipselabs.mscript.typesystem.util.TypeSystemUtil;
 
 /**
  * @author Andreas Unger
@@ -47,7 +48,8 @@ public class SumFunctionGenerator implements IFunctionGenerator {
 		
 		TensorType tensorType = (TensorType) dataType;
 		
-		for (int i = 0; i < tensorType.getSize(); ++i) {
+		int arraySize = TypeSystemUtil.getArraySize(tensorType);
+		for (int i = 0; i < arraySize; ++i) {
 			if (i > 0) {
 				writer.print(" + ");
 			}

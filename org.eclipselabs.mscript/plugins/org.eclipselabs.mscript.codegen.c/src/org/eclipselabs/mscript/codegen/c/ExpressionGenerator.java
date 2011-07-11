@@ -29,20 +29,14 @@ import org.eclipselabs.mscript.computation.computationmodel.NumberFormat;
 import org.eclipselabs.mscript.computation.computationmodel.util.ComputationModelUtil;
 import org.eclipselabs.mscript.language.ast.AdditiveExpression;
 import org.eclipselabs.mscript.language.ast.AdditiveExpressionPart;
-import org.eclipselabs.mscript.language.ast.BooleanKind;
-import org.eclipselabs.mscript.language.ast.BooleanLiteral;
 import org.eclipselabs.mscript.language.ast.EqualityExpression;
-import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.ast.ImpliesExpression;
-import org.eclipselabs.mscript.language.ast.IntegerLiteral;
 import org.eclipselabs.mscript.language.ast.LogicalAndExpression;
 import org.eclipselabs.mscript.language.ast.LogicalOrExpression;
 import org.eclipselabs.mscript.language.ast.MultiplicativeExpression;
 import org.eclipselabs.mscript.language.ast.MultiplicativeExpressionPart;
 import org.eclipselabs.mscript.language.ast.ParenthesizedExpression;
-import org.eclipselabs.mscript.language.ast.RealLiteral;
 import org.eclipselabs.mscript.language.ast.RelationalExpression;
-import org.eclipselabs.mscript.language.ast.StringLiteral;
 import org.eclipselabs.mscript.language.ast.UnaryExpression;
 import org.eclipselabs.mscript.language.ast.util.AstSwitch;
 import org.eclipselabs.mscript.language.il.FunctionCall;
@@ -53,8 +47,15 @@ import org.eclipselabs.mscript.language.il.VariableReference;
 import org.eclipselabs.mscript.language.il.builtin.BuiltinFunctionDescriptor;
 import org.eclipselabs.mscript.language.il.util.ILSwitch;
 import org.eclipselabs.mscript.language.il.util.ILUtil;
+import org.eclipselabs.mscript.typesystem.BooleanKind;
+import org.eclipselabs.mscript.typesystem.BooleanLiteral;
 import org.eclipselabs.mscript.typesystem.DataType;
+import org.eclipselabs.mscript.typesystem.Expression;
+import org.eclipselabs.mscript.typesystem.IntegerLiteral;
 import org.eclipselabs.mscript.typesystem.NumericType;
+import org.eclipselabs.mscript.typesystem.RealLiteral;
+import org.eclipselabs.mscript.typesystem.StringLiteral;
+import org.eclipselabs.mscript.typesystem.util.TypeSystemSwitch;
 import org.eclipselabs.mscript.typesystem.util.TypeSystemUtil;
 
 public class ExpressionGenerator implements IExpressionGenerator {
@@ -375,49 +376,57 @@ public class ExpressionGenerator implements IExpressionGenerator {
 			return true;
 		}
 		
-		/* (non-Javadoc)
-		 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseRealLiteral(org.eclipselabs.mscript.language.ast.RealLiteral)
-		 */
-		@Override
-		public Boolean caseRealLiteral(RealLiteral realLiteral) {
-			DataType dataType = ILUtil.getDataType(realLiteral);
-			writer.print(MscriptGeneratorUtil.getLiteralString(context.getComputationModel(), dataType, realLiteral.getValue()));
-			return true;
-		}
-	
-		/* (non-Javadoc)
-		 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseIntegerLiteral(org.eclipselabs.mscript.language.ast.IntegerLiteral)
-		 */
-		@Override
-		public Boolean caseIntegerLiteral(IntegerLiteral integerLiteral) {
-			DataType dataType = ILUtil.getDataType(integerLiteral);
-			writer.print(MscriptGeneratorUtil.getLiteralString(context.getComputationModel(), dataType, integerLiteral.getValue()));
-			return true;
-		}
+		private TypeSystemSwitch<Boolean> typeSystemSwitch = new TypeSystemSwitch<Boolean>() {
 		
-		/* (non-Javadoc)
-		 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseBooleanLiteral(org.eclipselabs.mscript.language.ast.BooleanLiteral)
-		 */
-		@Override
-		public Boolean caseBooleanLiteral(BooleanLiteral booleanLiteral) {
-			writer.print(booleanLiteral.getValue() == BooleanKind.TRUE ? "1" : "0");
-			return true;
-		}
+			/* (non-Javadoc)
+			 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseRealLiteral(org.eclipselabs.mscript.language.ast.RealLiteral)
+			 */
+			@Override
+			public Boolean caseRealLiteral(RealLiteral realLiteral) {
+				DataType dataType = ILUtil.getDataType(realLiteral);
+				writer.print(MscriptGeneratorUtil.getLiteralString(context.getComputationModel(), dataType, realLiteral.getValue()));
+				return true;
+			}
 		
-		/* (non-Javadoc)
-		 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseStringLiteral(org.eclipselabs.mscript.language.ast.StringLiteral)
-		 */
-		@Override
-		public Boolean caseStringLiteral(StringLiteral stringLiteral) {
-			writer.print("\"" + stringLiteral.getValue() + "\"");
-			return true;
-		}
+			/* (non-Javadoc)
+			 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseIntegerLiteral(org.eclipselabs.mscript.language.ast.IntegerLiteral)
+			 */
+			@Override
+			public Boolean caseIntegerLiteral(IntegerLiteral integerLiteral) {
+				DataType dataType = ILUtil.getDataType(integerLiteral);
+				writer.print(MscriptGeneratorUtil.getLiteralString(context.getComputationModel(), dataType, integerLiteral.getValue()));
+				return true;
+			}
+			
+			/* (non-Javadoc)
+			 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseBooleanLiteral(org.eclipselabs.mscript.language.ast.BooleanLiteral)
+			 */
+			@Override
+			public Boolean caseBooleanLiteral(BooleanLiteral booleanLiteral) {
+				writer.print(booleanLiteral.getValue() == BooleanKind.TRUE ? "1" : "0");
+				return true;
+			}
+			
+			/* (non-Javadoc)
+			 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseStringLiteral(org.eclipselabs.mscript.language.ast.StringLiteral)
+			 */
+			@Override
+			public Boolean caseStringLiteral(StringLiteral stringLiteral) {
+				writer.print("\"" + stringLiteral.getValue() + "\"");
+				return true;
+			}
+		
+		};
 				
 		/* (non-Javadoc)
 		 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseExpression(org.eclipselabs.mscript.language.ast.Expression)
 		 */
 		@Override
 		public Boolean defaultCase(EObject object) {
+			Boolean result = typeSystemSwitch.doSwitch(object);
+			if (result != null) {
+				return result;
+			}
 			if (object instanceof Expression) {
 				return new ILExpressionGenerator().doSwitch(object);
 			}

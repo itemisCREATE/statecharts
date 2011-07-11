@@ -41,31 +41,25 @@ public class AnyDataTypeImpl extends DataTypeImpl implements AnyDataType {
 	protected EClass eStaticClass() {
 		return TypeSystemPackage.Literals.ANY_DATA_TYPE;
 	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
+	
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.typesystem.impl.DataTypeImpl#evaluate(org.eclipselabs.mscript.typesystem.OperatorKind, org.eclipselabs.mscript.typesystem.DataType)
 	 */
 	@Override
 	public DataType evaluate(OperatorKind operator, DataType other) {
 		return AnyDataTypeOperations.evaluate(this, operator, other);
 	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
+	
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.typesystem.impl.DataTypeImpl#evaluate(org.eclipselabs.mscript.typesystem.OperatorKind, int)
 	 */
 	@Override
-	public DataType evaluatePower(int exponent) {
-		return AnyDataTypeOperations.evaluatePower(this, exponent);
+	public DataType evaluate(OperatorKind operator, int n) {
+		return AnyDataTypeOperations.evaluate(this, n);
 	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
+	
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.typesystem.impl.DataTypeImpl#isAssignableFrom(org.eclipselabs.mscript.typesystem.DataType)
 	 */
 	@Override
 	public boolean isAssignableFrom(DataType other) {

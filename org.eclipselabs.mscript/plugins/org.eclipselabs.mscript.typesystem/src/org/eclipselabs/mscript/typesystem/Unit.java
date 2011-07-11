@@ -6,19 +6,20 @@
  */
 package org.eclipselabs.mscript.typesystem;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Unit</b></em>'.
+ * A representation of the model object '<em><b>Unit Expression</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.typesystem.Unit#getFactors <em>Factors</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.typesystem.Unit#getNumerator <em>Numerator</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.typesystem.Unit#getDenominator <em>Denominator</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.typesystem.Unit#getScale <em>Scale</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.typesystem.Unit#isWildcard <em>Wildcard</em>}</li>
  * </ul>
  * </p>
  *
@@ -28,24 +29,59 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface Unit extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Factors</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipselabs.mscript.typesystem.UnitFactor}.
+	 * Returns the value of the '<em><b>Numerator</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Factors</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Numerator</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Factors</em>' containment reference list.
-	 * @see org.eclipselabs.mscript.typesystem.TypeSystemPackage#getUnit_Factors()
-	 * @model containment="true" ordered="false"
+	 * @return the value of the '<em>Numerator</em>' containment reference.
+	 * @see #setNumerator(UnitNumerator)
+	 * @see org.eclipselabs.mscript.typesystem.TypeSystemPackage#getUnit_Numerator()
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList<UnitFactor> getFactors();
+	UnitNumerator getNumerator();
+
+	/**
+	 * Sets the value of the '{@link org.eclipselabs.mscript.typesystem.Unit#getNumerator <em>Numerator</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Numerator</em>' containment reference.
+	 * @see #getNumerator()
+	 * @generated
+	 */
+	void setNumerator(UnitNumerator value);
+
+	/**
+	 * Returns the value of the '<em><b>Denominator</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Denominator</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Denominator</em>' containment reference.
+	 * @see #setDenominator(UnitDenominator)
+	 * @see org.eclipselabs.mscript.typesystem.TypeSystemPackage#getUnit_Denominator()
+	 * @model containment="true"
+	 * @generated
+	 */
+	UnitDenominator getDenominator();
+
+	/**
+	 * Sets the value of the '{@link org.eclipselabs.mscript.typesystem.Unit#getDenominator <em>Denominator</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Denominator</em>' containment reference.
+	 * @see #getDenominator()
+	 * @generated
+	 */
+	void setDenominator(UnitDenominator value);
 
 	/**
 	 * Returns the value of the '<em><b>Scale</b></em>' attribute.
-	 * The default value is <code>"0"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Scale</em>' attribute isn't clear,
@@ -55,7 +91,7 @@ public interface Unit extends EObject {
 	 * @return the value of the '<em>Scale</em>' attribute.
 	 * @see #setScale(int)
 	 * @see org.eclipselabs.mscript.typesystem.TypeSystemPackage#getUnit_Scale()
-	 * @model default="0" required="true" ordered="false"
+	 * @model required="true"
 	 * @generated
 	 */
 	int getScale();
@@ -71,43 +107,50 @@ public interface Unit extends EObject {
 	void setScale(int value);
 
 	/**
+	 * Returns the value of the '<em><b>Wildcard</b></em>' attribute.
 	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Wildcard</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
 	 * <!-- end-user-doc -->
-	 * @model ordered="false" symbolRequired="true" symbolOrdered="false"
+	 * @return the value of the '<em>Wildcard</em>' attribute.
+	 * @see org.eclipselabs.mscript.typesystem.TypeSystemPackage#getUnit_Wildcard()
+	 * @model required="true" transient="true" changeable="false" volatile="true" derived="true"
 	 * @generated
 	 */
-	UnitFactor getFactor(UnitSymbol symbol);
+	boolean isWildcard();
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model required="true" ordered="false" otherRequired="true" otherOrdered="false"
+	 * @model kind="operation" required="true"
 	 * @generated
 	 */
-	Unit multiply(Unit other);
+	Unit getNormalized();
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model required="true" ordered="false" otherRequired="true" otherOrdered="false"
+	 * @model operatorRequired="true"
 	 * @generated
 	 */
-	Unit divide(Unit other);
+	Unit evaluate(OperatorKind operator, Unit other);
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model required="true" ordered="false" exponentRequired="true" exponentOrdered="false"
+	 * @model operatorRequired="true" nRequired="true"
 	 * @generated
 	 */
-	Unit power(int exponent);
+	Unit evaluate(OperatorKind operator, int n);
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model required="true" ordered="false" otherRequired="true" otherOrdered="false" ignoreScaleRequired="true" ignoreScaleOrdered="false"
+	 * @model required="true" otherRequired="true" ignoreScaleRequired="true"
 	 * @generated
 	 */
-	boolean isSameAs(Unit other, boolean ignoreScale);
+	boolean isEquivalentTo(Unit other, boolean ignoreScale);
 
-} // Unit
+} // UnitExpression

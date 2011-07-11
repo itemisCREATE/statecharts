@@ -5,6 +5,7 @@ package org.eclipselabs.mscript.language;
 
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipselabs.mscript.language.conversion.MscriptTerminalConverters;
+import org.eclipselabs.mscript.language.parser.EcoreElementFactory;
 
 /**
  * Use this class to register components to be used within the IDE.
@@ -16,4 +17,8 @@ public class MscriptRuntimeModule extends org.eclipselabs.mscript.language.Abstr
 		return MscriptTerminalConverters.class;
 	}
 	
+	public Class<? extends org.eclipse.xtext.parser.IAstFactory> bindIAstFactory() {
+		return EcoreElementFactory.class;
+	}
+
 }

@@ -7,6 +7,7 @@
 package org.eclipselabs.mscript.language.ast;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipselabs.mscript.typesystem.Expression;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,7 +28,7 @@ import org.eclipse.emf.common.util.EList;
 public interface OperationArgumentList extends FeatureCallPart {
 	/**
 	 * Returns the value of the '<em><b>Arguments</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipselabs.mscript.language.ast.Expression}.
+	 * The list contents are of type {@link org.eclipselabs.mscript.typesystem.Expression}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Arguments</em>' containment reference list isn't clear,

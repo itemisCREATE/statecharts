@@ -14,7 +14,7 @@ import org.eclipselabs.mscript.typesystem.internal.operations.StringTypeOperatio
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>String Type</b></em>'.
+ * An implementation of the model object '<em><b>String Type Specifier</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
@@ -40,15 +40,13 @@ public class StringTypeImpl extends PrimitiveTypeImpl implements StringType {
 	protected EClass eStaticClass() {
 		return TypeSystemPackage.Literals.STRING_TYPE;
 	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
+	
+	/* (non-Javadoc)
+	 * @see org.eclipselabs.mscript.typesystem.impl.DataTypeImpl#isAssignableFrom(org.eclipselabs.mscript.typesystem.DataType)
 	 */
 	@Override
 	public boolean isAssignableFrom(DataType other) {
 		return StringTypeOperations.isAssignableFrom(this, other);
 	}
 
-} //StringTypeImpl
+} //StringTypeSpecifierImpl

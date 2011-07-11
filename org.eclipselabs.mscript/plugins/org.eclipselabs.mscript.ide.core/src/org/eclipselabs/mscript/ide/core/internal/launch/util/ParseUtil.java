@@ -18,12 +18,12 @@ import java.util.List;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipselabs.mscript.computation.core.value.IValue;
 import org.eclipselabs.mscript.ide.core.IDECorePlugin;
-import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.ast.ExpressionList;
 import org.eclipselabs.mscript.language.interpreter.ExpressionValueEvaluator;
 import org.eclipselabs.mscript.language.interpreter.IExpressionValueEvaluator;
 import org.eclipselabs.mscript.language.interpreter.IInterpreterContext;
 import org.eclipselabs.mscript.language.parser.antlr.MscriptParser;
+import org.eclipselabs.mscript.typesystem.Expression;
 import org.eclipselabs.mscript.typesystem.InvalidDataType;
 
 /**

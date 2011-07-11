@@ -12,6 +12,7 @@ public class AbstractMscriptJavaValidator extends AbstractDeclarativeValidator {
 	protected List<EPackage> getEPackages() {
 	    List<EPackage> result = new ArrayList<EPackage>();
 	    result.add(EPackage.Registry.INSTANCE.getEPackage("http://www.eclipselabs.org/mscript/AST/1.0.0"));
+	    result.add(EPackage.Registry.INSTANCE.getEPackage("http://www.eclipselabs.org/mscript/TypeSystem/1.0.0"));
 		return result;
 	}
 

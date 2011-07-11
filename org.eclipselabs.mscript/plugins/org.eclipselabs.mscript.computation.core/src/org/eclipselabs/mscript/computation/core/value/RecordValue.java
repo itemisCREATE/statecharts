@@ -11,12 +11,8 @@
 
 package org.eclipselabs.mscript.computation.core.value;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.eclipselabs.mscript.computation.core.IComputationContext;
 import org.eclipselabs.mscript.typesystem.DataType;
-import org.eclipselabs.mscript.typesystem.Record;
 
 /**
  * @author Andreas Unger
@@ -24,13 +20,13 @@ import org.eclipselabs.mscript.typesystem.Record;
  */
 public class RecordValue extends AbstractExplicitDataTypeValue {
 
-	private List<Slot> slots = new ArrayList<Slot>();
-	
+//	private List<Slot> slots = new ArrayList<Slot>();
+//	
 	/**
 	 * @param dataType
 	 */
-	public RecordValue(IComputationContext context, Record record) {
-		super(context, record);
+	public RecordValue(IComputationContext context/*, Record record*/) {
+		super(context, /*record*/ null);
 	}
 	
 	/* (non-Javadoc)
@@ -40,72 +36,72 @@ public class RecordValue extends AbstractExplicitDataTypeValue {
 	protected IValue doConvert(DataType dataType) {
 		return this;
 	}
-	
-	public void addSlot(Slot slot) {
-		this.slots.add(slot);
-	}
-
-	/**
-	 * @return the slots
-	 */
-	public List<Slot> getSlots() {
-		return slots;
-	}
-	
-	public Slot getSlot(String name) {
-		for (Slot slot : slots) {
-			if (name.equals(slot.name)) {
-				return slot;
-			}
-		}
-		return null;
-	}
-
-	public void setSlotValue(String name, IValue value) {
-		Slot field = getSlot(name);
-		if (field != null) {
-			field.setValue(value);
-		}
-	}
-	
-	public IValue getSlotValue(String name) {
-		Slot slot = getSlot(name);
-		return slot != null ? slot.getValue() : null;
-	}
-	
-	public static class Slot {
-		
-		private String name;
-		private IValue value;
-		
-		/**
-		 * @return the name
-		 */
-		public String getName() {
-			return name;
-		}
-		
-		/**
-		 * @param name the name to set
-		 */
-		public void setName(String name) {
-			this.name = name;
-		}
-
-		/**
-		 * @return the value
-		 */
-		public IValue getValue() {
-			return value;
-		}
-		
-		/**
-		 * @param value the value to set
-		 */
-		public void setValue(IValue value) {
-			this.value = value;
-		}
-		
-	}
+//	
+//	public void addSlot(Slot slot) {
+//		this.slots.add(slot);
+//	}
+//
+//	/**
+//	 * @return the slots
+//	 */
+//	public List<Slot> getSlots() {
+//		return slots;
+//	}
+//	
+//	public Slot getSlot(String name) {
+//		for (Slot slot : slots) {
+//			if (name.equals(slot.name)) {
+//				return slot;
+//			}
+//		}
+//		return null;
+//	}
+//
+//	public void setSlotValue(String name, IValue value) {
+//		Slot field = getSlot(name);
+//		if (field != null) {
+//			field.setValue(value);
+//		}
+//	}
+//	
+//	public IValue getSlotValue(String name) {
+//		Slot slot = getSlot(name);
+//		return slot != null ? slot.getValue() : null;
+//	}
+//	
+//	public static class Slot {
+//		
+//		private String name;
+//		private IValue value;
+//		
+//		/**
+//		 * @return the name
+//		 */
+//		public String getName() {
+//			return name;
+//		}
+//		
+//		/**
+//		 * @param name the name to set
+//		 */
+//		public void setName(String name) {
+//			this.name = name;
+//		}
+//
+//		/**
+//		 * @return the value
+//		 */
+//		public IValue getValue() {
+//			return value;
+//		}
+//		
+//		/**
+//		 * @param value the value to set
+//		 */
+//		public void setValue(IValue value) {
+//			this.value = value;
+//		}
+//		
+//	}
 
 }

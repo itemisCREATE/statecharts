@@ -30,22 +30,16 @@ import org.eclipselabs.mscript.language.ast.AdditiveExpressionPart;
 import org.eclipselabs.mscript.language.ast.AdditiveOperator;
 import org.eclipselabs.mscript.language.ast.ArrayConcatenationOperator;
 import org.eclipselabs.mscript.language.ast.ArrayConstructionOperator;
-import org.eclipselabs.mscript.language.ast.BooleanKind;
-import org.eclipselabs.mscript.language.ast.BooleanLiteral;
 import org.eclipselabs.mscript.language.ast.EqualityExpression;
-import org.eclipselabs.mscript.language.ast.Expression;
 import org.eclipselabs.mscript.language.ast.ExpressionList;
 import org.eclipselabs.mscript.language.ast.ImpliesExpression;
-import org.eclipselabs.mscript.language.ast.IntegerLiteral;
 import org.eclipselabs.mscript.language.ast.LogicalAndExpression;
 import org.eclipselabs.mscript.language.ast.LogicalOrExpression;
 import org.eclipselabs.mscript.language.ast.MultiplicativeExpression;
 import org.eclipselabs.mscript.language.ast.MultiplicativeExpressionPart;
 import org.eclipselabs.mscript.language.ast.MultiplicativeOperator;
 import org.eclipselabs.mscript.language.ast.ParenthesizedExpression;
-import org.eclipselabs.mscript.language.ast.RealLiteral;
 import org.eclipselabs.mscript.language.ast.RelationalExpression;
-import org.eclipselabs.mscript.language.ast.StringLiteral;
 import org.eclipselabs.mscript.language.ast.TypeTestExpression;
 import org.eclipselabs.mscript.language.ast.UnaryExpression;
 import org.eclipselabs.mscript.language.ast.UnitConstructionOperator;
@@ -56,19 +50,24 @@ import org.eclipselabs.mscript.language.il.PropertyReference;
 import org.eclipselabs.mscript.language.il.VariableReference;
 import org.eclipselabs.mscript.language.il.builtin.BuiltinFunctionDescriptor;
 import org.eclipselabs.mscript.language.il.util.ILSwitch;
-import org.eclipselabs.mscript.language.internal.interpreter.InvalidUnitExpressionOperandException;
-import org.eclipselabs.mscript.language.internal.interpreter.UnitExpressionHelper;
 import org.eclipselabs.mscript.language.interpreter.builtin.BuiltinFunctionLookupTable;
 import org.eclipselabs.mscript.language.interpreter.builtin.IBuiltinFunctionLookupTable;
 import org.eclipselabs.mscript.language.interpreter.builtin.IFunction;
 import org.eclipselabs.mscript.typesystem.ArrayType;
+import org.eclipselabs.mscript.typesystem.BooleanKind;
+import org.eclipselabs.mscript.typesystem.BooleanLiteral;
 import org.eclipselabs.mscript.typesystem.DataType;
+import org.eclipselabs.mscript.typesystem.Expression;
+import org.eclipselabs.mscript.typesystem.IntegerLiteral;
 import org.eclipselabs.mscript.typesystem.IntegerType;
 import org.eclipselabs.mscript.typesystem.InvalidDataType;
+import org.eclipselabs.mscript.typesystem.RealLiteral;
 import org.eclipselabs.mscript.typesystem.RealType;
+import org.eclipselabs.mscript.typesystem.StringLiteral;
 import org.eclipselabs.mscript.typesystem.TensorType;
 import org.eclipselabs.mscript.typesystem.TypeSystemFactory;
 import org.eclipselabs.mscript.typesystem.Unit;
+import org.eclipselabs.mscript.typesystem.util.TypeSystemSwitch;
 import org.eclipselabs.mscript.typesystem.util.TypeSystemUtil;
 
 /**
@@ -89,10 +88,6 @@ public class ExpressionValueEvaluator implements IExpressionValueEvaluator {
 		private IInterpreterContext context;
 
 		private ILExpressionValueEvaluatorSwitch ilExpressionValueEvaluatorSwitch = new ILExpressionValueEvaluatorSwitch();
-		
-		private IDataTypeSpecifierEvaluator dataTypeSpecifierEvaluator = new DataTypeSpecifierEvaluator();
-		
-		private UnitExpressionHelper unitExpressionHelper = new UnitExpressionHelper();
 		
 		/**
 		 * 
@@ -270,7 +265,7 @@ public class ExpressionValueEvaluator implements IExpressionValueEvaluator {
 		@Override
 		public IValue caseTypeTestExpression(TypeTestExpression typeTestExpression) {
 			IValue value = doSwitch(typeTestExpression.getExpression());
-			DataType dataType = dataTypeSpecifierEvaluator.evaluate(context, typeTestExpression.getType());
+			DataType dataType = EcoreUtil.copy(typeTestExpression.getType().getType());
 			return Values.valueOf(context.getComputationContext(), dataType.isAssignableFrom(value.getDataType()));
 		}
 	
@@ -353,7 +348,7 @@ public class ExpressionValueEvaluator implements IExpressionValueEvaluator {
 					return null;
 				}
 				
-				if (elementType != null && !EcoreUtil.equals(elementType, dataType)) {
+				if (elementType != null && !elementType.isEquivalentTo(dataType)) {
 					DataType leftHandDataType = TypeSystemUtil.getLeftHandDataType(elementType, dataType);
 					if (leftHandDataType == null) {
 						return null;
@@ -403,68 +398,52 @@ public class ExpressionValueEvaluator implements IExpressionValueEvaluator {
 		 */
 		@Override
 		public IValue caseUnitConstructionOperator(UnitConstructionOperator unitConstructionOperator) {
-			try {
-				Unit unit = null;
-				if (unitConstructionOperator.getUnit().getNumerator() != null) {
-					unit = unitExpressionHelper.evaluate(unitConstructionOperator.getUnit());
-				}
-				return new UnitValue(context.getComputationContext(), unit);
-			} catch (InvalidUnitExpressionOperandException e) {
-				throw new RuntimeException("Invalid unit", e);
+			Unit unit = null;
+			if (unitConstructionOperator.getUnit().getNumerator() != null) {
+				unit = EcoreUtil.copy(unitConstructionOperator.getUnit());
 			}
+			return new UnitValue(context.getComputationContext(), unit);
 		}
 		
-		/* (non-Javadoc)
-		 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseRealLiteral(org.eclipselabs.mscript.language.ast.RealLiteral)
-		 */
-		@Override
-		public IValue caseRealLiteral(RealLiteral realLiteral) {
-			RealType realType = TypeSystemFactory.eINSTANCE.createRealType();
-			try {
-				if (realLiteral.getUnit() != null) {
-					realType.setUnit(unitExpressionHelper.evaluate(realLiteral.getUnit()));
-				} else {
-					realType.setUnit(TypeSystemUtil.createUnit());
-				}
-			} catch (InvalidUnitExpressionOperandException e) {
-				throw new RuntimeException("Invalid unit", e);
+		private TypeSystemSwitch<IValue> typeSystemSwitch = new TypeSystemSwitch<IValue>() {
+			
+			/* (non-Javadoc)
+			 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseRealLiteral(org.eclipselabs.mscript.language.ast.RealLiteral)
+			 */
+			@Override
+			public IValue caseRealLiteral(RealLiteral realLiteral) {
+				RealType realType = TypeSystemFactory.eINSTANCE.createRealType();
+				realType.setUnit(EcoreUtil.copy(realLiteral.getUnit()));
+				return Values.valueOf(context.getComputationContext(), realType, realLiteral.getValue());
 			}
-			return Values.valueOf(context.getComputationContext(), realType, realLiteral.getValue());
-		}
-	
-		/* (non-Javadoc)
-		 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseIntegerLiteral(org.eclipselabs.mscript.language.ast.IntegerLiteral)
-		 */
-		@Override
-		public IValue caseIntegerLiteral(IntegerLiteral integerLiteral) {
-			IntegerType integerType = TypeSystemFactory.eINSTANCE.createIntegerType();
-			try {
-				if (integerLiteral.getUnit() != null) {
-					integerType.setUnit(unitExpressionHelper.evaluate(integerLiteral.getUnit()));
-				} else {
-					integerType.setUnit(TypeSystemUtil.createUnit());
-				}
-			} catch (InvalidUnitExpressionOperandException e) {
-				throw new RuntimeException("Invalid unit", e);
-			}
-			return Values.valueOf(context.getComputationContext(), integerType, integerLiteral.getValue());
-		}
 		
-		/* (non-Javadoc)
-		 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseBooleanLiteral(org.eclipselabs.mscript.language.ast.BooleanLiteral)
-		 */
-		@Override
-		public IValue caseBooleanLiteral(BooleanLiteral booleanLiteral) {
-			return Values.valueOf(context.getComputationContext(), booleanLiteral.getValue() == BooleanKind.TRUE);
-		}
-	
-		/* (non-Javadoc)
-		 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseStringLiteral(org.eclipselabs.mscript.language.ast.StringLiteral)
-		 */
-		@Override
-		public IValue caseStringLiteral(StringLiteral stringLiteral) {
-			return new StringValue(context.getComputationContext(), stringLiteral.getValue());
-		}
+			/* (non-Javadoc)
+			 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseIntegerLiteral(org.eclipselabs.mscript.language.ast.IntegerLiteral)
+			 */
+			@Override
+			public IValue caseIntegerLiteral(IntegerLiteral integerLiteral) {
+				IntegerType integerType = TypeSystemFactory.eINSTANCE.createIntegerType();
+				integerType.setUnit(EcoreUtil.copy(integerLiteral.getUnit()));
+				return Values.valueOf(context.getComputationContext(), integerType, integerLiteral.getValue());
+			}
+			
+			/* (non-Javadoc)
+			 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseBooleanLiteral(org.eclipselabs.mscript.language.ast.BooleanLiteral)
+			 */
+			@Override
+			public IValue caseBooleanLiteral(BooleanLiteral booleanLiteral) {
+				return Values.valueOf(context.getComputationContext(), booleanLiteral.getValue() == BooleanKind.TRUE);
+			}
+		
+			/* (non-Javadoc)
+			 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseStringLiteral(org.eclipselabs.mscript.language.ast.StringLiteral)
+			 */
+			@Override
+			public IValue caseStringLiteral(StringLiteral stringLiteral) {
+				return new StringValue(context.getComputationContext(), stringLiteral.getValue());
+			}
+		
+		};
 		
 		/* (non-Javadoc)
 		 * @see org.eclipselabs.mscript.language.ast.util.AstSwitch#caseParenthesizedExpression(org.eclipselabs.mscript.language.ast.ParenthesizedExpression)
@@ -479,7 +458,11 @@ public class ExpressionValueEvaluator implements IExpressionValueEvaluator {
 		 */
 		@Override
 		public IValue defaultCase(EObject object) {
-			IValue value = ilExpressionValueEvaluatorSwitch.doSwitch(object);
+			IValue value = typeSystemSwitch.doSwitch(object);
+			if (value != null) {
+				return value;
+			}
+			value = ilExpressionValueEvaluatorSwitch.doSwitch(object);
 			if (value != null) {
 				return value;
 			}

@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipselabs.mscript.language.ast.AstPackage;
+import org.eclipselabs.mscript.typesystem.TypeSystemPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -869,7 +869,7 @@ public interface ILPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_CALL__ARGUMENTS = AstPackage.EXPRESSION_FEATURE_COUNT + 0;
+	int OPERATION_CALL__ARGUMENTS = TypeSystemPackage.EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Operation Call</em>' class.
@@ -878,7 +878,7 @@ public interface ILPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_CALL_FEATURE_COUNT = AstPackage.EXPRESSION_FEATURE_COUNT + 1;
+	int OPERATION_CALL_FEATURE_COUNT = TypeSystemPackage.EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.language.il.impl.FunctionCallImpl <em>Function Call</em>}' class.
@@ -934,7 +934,7 @@ public interface ILPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_REFERENCE__NAME = AstPackage.EXPRESSION_FEATURE_COUNT + 0;
+	int PROPERTY_REFERENCE__NAME = TypeSystemPackage.EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Target</b></em>' reference.
@@ -943,7 +943,7 @@ public interface ILPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_REFERENCE__TARGET = AstPackage.EXPRESSION_FEATURE_COUNT + 1;
+	int PROPERTY_REFERENCE__TARGET = TypeSystemPackage.EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Property Reference</em>' class.
@@ -952,7 +952,7 @@ public interface ILPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_REFERENCE_FEATURE_COUNT = AstPackage.EXPRESSION_FEATURE_COUNT + 2;
+	int PROPERTY_REFERENCE_FEATURE_COUNT = TypeSystemPackage.EXPRESSION_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.language.il.impl.InvalidExpressionImpl <em>Invalid Expression</em>}' class.
@@ -971,7 +971,7 @@ public interface ILPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INVALID_EXPRESSION_FEATURE_COUNT = AstPackage.EXPRESSION_FEATURE_COUNT + 0;
+	int INVALID_EXPRESSION_FEATURE_COUNT = TypeSystemPackage.EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipselabs.mscript.language.il.impl.NameImpl <em>Name</em>}' class.
