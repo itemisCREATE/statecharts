@@ -28,21 +28,21 @@
       <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//RelationalOperator/GreaterThanOrEqualTo"/>
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="Mscript.ecore#//AdditiveOperator">
-      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//AdditiveOperator/Addition"/>
-      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//AdditiveOperator/Subtraction"/>
+      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//AdditiveOperator/Add"/>
+      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//AdditiveOperator/Subtract"/>
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="Mscript.ecore#//MultiplicativeOperator">
-      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//MultiplicativeOperator/Multiplication"/>
-      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//MultiplicativeOperator/Division"/>
-      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//MultiplicativeOperator/ElementWiseMultiplication"/>
-      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//MultiplicativeOperator/ElementWiseDivision"/>
+      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//MultiplicativeOperator/Multiply"/>
+      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//MultiplicativeOperator/Divide"/>
+      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//MultiplicativeOperator/ElementWiseMultiply"/>
+      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//MultiplicativeOperator/ElementWiseDivide"/>
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="Mscript.ecore#//PowerOperator">
       <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//PowerOperator/Power"/>
       <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//PowerOperator/ElementWisePower"/>
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="Mscript.ecore#//UnaryOperator">
-      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//UnaryOperator/Minus"/>
+      <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//UnaryOperator/Negate"/>
       <genEnumLiterals ecoreEnumLiteral="Mscript.ecore#//UnaryOperator/LogicalNot"/>
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="Mscript.ecore#//PostfixOperator">
@@ -188,9 +188,6 @@
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//BeginExpression"/>
     <genClasses ecoreClass="Mscript.ecore#//EndExpression"/>
-    <genClasses ecoreClass="Mscript.ecore#//QualifiedName">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//QualifiedName/identifiers"/>
-    </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//RangeExpression">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//RangeExpression/operands"/>
     </genClasses>

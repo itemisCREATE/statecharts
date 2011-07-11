@@ -70,8 +70,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FunctionObjectDeclaration">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="functionName" eType="#//QualifiedName"
-        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="functionName" eType="#//FunctionDefinition"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="templateArguments" upperBound="-1"
         eType="ecore:EClass ../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression"
         containment="true"/>
@@ -139,8 +138,8 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="AdditiveOperator">
-    <eLiterals name="Addition" literal="+"/>
-    <eLiterals name="Subtraction" value="1" literal="-"/>
+    <eLiterals name="Add" literal="+"/>
+    <eLiterals name="Subtract" value="1" literal="-"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MultiplicativeExpressionPart">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//MultiplicativeOperator"/>
@@ -148,17 +147,17 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="MultiplicativeOperator">
-    <eLiterals name="Multiplication" literal="*"/>
-    <eLiterals name="Division" value="1" literal="/"/>
-    <eLiterals name="ElementWiseMultiplication" value="2" literal=".*"/>
-    <eLiterals name="ElementWiseDivision" value="3" literal="./"/>
+    <eLiterals name="Multiply" literal="*"/>
+    <eLiterals name="Divide" value="1" literal="/"/>
+    <eLiterals name="ElementWiseMultiply" value="2" literal=".*"/>
+    <eLiterals name="ElementWiseDivide" value="3" literal="./"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="PowerOperator">
     <eLiterals name="Power" literal="^"/>
     <eLiterals name="ElementWisePower" value="1" literal=".^"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="UnaryOperator">
-    <eLiterals name="Minus" literal="-"/>
+    <eLiterals name="Negate" literal="-"/>
     <eLiterals name="LogicalNot" value="1" literal="!"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="PostfixOperator">
@@ -233,10 +232,6 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BeginExpression" eSuperTypes="../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression"/>
   <eClassifiers xsi:type="ecore:EClass" name="EndExpression" eSuperTypes="../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression"/>
-  <eClassifiers xsi:type="ecore:EClass" name="QualifiedName">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="identifiers" unique="false"
-        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RangeExpression" eSuperTypes="../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="operands" upperBound="-1"
         eType="ecore:EClass ../../org.eclipselabs.mscript.typesystem/model/TypeSystem.ecore#//Expression"

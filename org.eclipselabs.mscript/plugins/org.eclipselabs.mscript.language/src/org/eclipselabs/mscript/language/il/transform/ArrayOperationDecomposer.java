@@ -77,7 +77,7 @@ public class ArrayOperationDecomposer extends ILSwitch<Boolean> implements IArra
 			List<MultiplicativeExpressionPart> rightParts = multiplicativeExpression.getRightParts();
 			
 			// TODO: Implement better support for vector multiplication expressions
-			if (rightParts.size() == 1 && rightParts.get(0).getOperator() == MultiplicativeOperator.MULTIPLICATION) {
+			if (rightParts.size() == 1 && rightParts.get(0).getOperator() == MultiplicativeOperator.MULTIPLY) {
 				Expression leftOperand = multiplicativeExpression.getLeftOperand();
 				Expression rightOperand = rightParts.get(0).getOperand();
 				if (leftOperand instanceof VariableReference && rightOperand instanceof VariableReference) {
@@ -134,7 +134,7 @@ public class ArrayOperationDecomposer extends ILSwitch<Boolean> implements IArra
 
 				multiplicativeExpression.setLeftOperand(leftVariableReference);
 				MultiplicativeExpressionPart rightPart = AstFactory.eINSTANCE.createMultiplicativeExpressionPart();
-				rightPart.setOperator(MultiplicativeOperator.MULTIPLICATION);
+				rightPart.setOperator(MultiplicativeOperator.MULTIPLY);
 				rightPart.setOperand(rightVariableReference);
 				multiplicativeExpression.getRightParts().add(rightPart);
 				
@@ -142,7 +142,7 @@ public class ArrayOperationDecomposer extends ILSwitch<Boolean> implements IArra
 					additiveExpression.setLeftOperand(multiplicativeExpression);
 				} else {
 					AdditiveExpressionPart rightAdditiveExpressionPart = AstFactory.eINSTANCE.createAdditiveExpressionPart();
-					rightAdditiveExpressionPart.setOperator(AdditiveOperator.ADDITION);
+					rightAdditiveExpressionPart.setOperator(AdditiveOperator.ADD);
 					rightAdditiveExpressionPart.setOperand(multiplicativeExpression);
 					additiveExpression.getRightParts().add(rightAdditiveExpressionPart);
 				}

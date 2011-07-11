@@ -18,8 +18,8 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipselabs.mscript.language.ast.AstPackage;
+import org.eclipselabs.mscript.language.ast.FunctionDefinition;
 import org.eclipselabs.mscript.language.ast.FunctionObjectDeclaration;
-import org.eclipselabs.mscript.language.ast.QualifiedName;
 import org.eclipselabs.mscript.typesystem.Expression;
 
 /**
@@ -59,14 +59,14 @@ public class FunctionObjectDeclarationImpl extends MinimalEObjectImpl.Container 
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getFunctionName() <em>Function Name</em>}' containment reference.
+	 * The cached value of the '{@link #getFunctionName() <em>Function Name</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getFunctionName()
 	 * @generated
 	 * @ordered
 	 */
-	protected QualifiedName functionName;
+	protected FunctionDefinition functionName;
 
 	/**
 	 * The cached value of the '{@link #getTemplateArguments() <em>Template Arguments</em>}' containment reference list.
@@ -123,7 +123,15 @@ public class FunctionObjectDeclarationImpl extends MinimalEObjectImpl.Container 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public QualifiedName getFunctionName() {
+	public FunctionDefinition getFunctionName() {
+		if (functionName != null && functionName.eIsProxy()) {
+			InternalEObject oldFunctionName = (InternalEObject)functionName;
+			functionName = (FunctionDefinition)eResolveProxy(oldFunctionName);
+			if (functionName != oldFunctionName) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, AstPackage.FUNCTION_OBJECT_DECLARATION__FUNCTION_NAME, oldFunctionName, functionName));
+			}
+		}
 		return functionName;
 	}
 
@@ -132,14 +140,8 @@ public class FunctionObjectDeclarationImpl extends MinimalEObjectImpl.Container 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetFunctionName(QualifiedName newFunctionName, NotificationChain msgs) {
-		QualifiedName oldFunctionName = functionName;
-		functionName = newFunctionName;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.FUNCTION_OBJECT_DECLARATION__FUNCTION_NAME, oldFunctionName, newFunctionName);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
+	public FunctionDefinition basicGetFunctionName() {
+		return functionName;
 	}
 
 	/**
@@ -147,18 +149,11 @@ public class FunctionObjectDeclarationImpl extends MinimalEObjectImpl.Container 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setFunctionName(QualifiedName newFunctionName) {
-		if (newFunctionName != functionName) {
-			NotificationChain msgs = null;
-			if (functionName != null)
-				msgs = ((InternalEObject)functionName).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.FUNCTION_OBJECT_DECLARATION__FUNCTION_NAME, null, msgs);
-			if (newFunctionName != null)
-				msgs = ((InternalEObject)newFunctionName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.FUNCTION_OBJECT_DECLARATION__FUNCTION_NAME, null, msgs);
-			msgs = basicSetFunctionName(newFunctionName, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.FUNCTION_OBJECT_DECLARATION__FUNCTION_NAME, newFunctionName, newFunctionName));
+	public void setFunctionName(FunctionDefinition newFunctionName) {
+		FunctionDefinition oldFunctionName = functionName;
+		functionName = newFunctionName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.FUNCTION_OBJECT_DECLARATION__FUNCTION_NAME, oldFunctionName, functionName));
 	}
 
 	/**
@@ -181,8 +176,6 @@ public class FunctionObjectDeclarationImpl extends MinimalEObjectImpl.Container 
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case AstPackage.FUNCTION_OBJECT_DECLARATION__FUNCTION_NAME:
-				return basicSetFunctionName(null, msgs);
 			case AstPackage.FUNCTION_OBJECT_DECLARATION__TEMPLATE_ARGUMENTS:
 				return ((InternalEList<?>)getTemplateArguments()).basicRemove(otherEnd, msgs);
 		}
@@ -200,7 +193,8 @@ public class FunctionObjectDeclarationImpl extends MinimalEObjectImpl.Container 
 			case AstPackage.FUNCTION_OBJECT_DECLARATION__NAME:
 				return getName();
 			case AstPackage.FUNCTION_OBJECT_DECLARATION__FUNCTION_NAME:
-				return getFunctionName();
+				if (resolve) return getFunctionName();
+				return basicGetFunctionName();
 			case AstPackage.FUNCTION_OBJECT_DECLARATION__TEMPLATE_ARGUMENTS:
 				return getTemplateArguments();
 		}
@@ -220,7 +214,7 @@ public class FunctionObjectDeclarationImpl extends MinimalEObjectImpl.Container 
 				setName((String)newValue);
 				return;
 			case AstPackage.FUNCTION_OBJECT_DECLARATION__FUNCTION_NAME:
-				setFunctionName((QualifiedName)newValue);
+				setFunctionName((FunctionDefinition)newValue);
 				return;
 			case AstPackage.FUNCTION_OBJECT_DECLARATION__TEMPLATE_ARGUMENTS:
 				getTemplateArguments().clear();
@@ -242,7 +236,7 @@ public class FunctionObjectDeclarationImpl extends MinimalEObjectImpl.Container 
 				setName(NAME_EDEFAULT);
 				return;
 			case AstPackage.FUNCTION_OBJECT_DECLARATION__FUNCTION_NAME:
-				setFunctionName((QualifiedName)null);
+				setFunctionName((FunctionDefinition)null);
 				return;
 			case AstPackage.FUNCTION_OBJECT_DECLARATION__TEMPLATE_ARGUMENTS:
 				getTemplateArguments().clear();

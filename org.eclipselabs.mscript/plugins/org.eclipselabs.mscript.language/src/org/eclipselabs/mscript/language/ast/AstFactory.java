@@ -368,15 +368,6 @@ public interface AstFactory extends EFactory {
 	EndExpression createEndExpression();
 
 	/**
-	 * Returns a new object of class '<em>Qualified Name</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Qualified Name</em>'.
-	 * @generated
-	 */
-	QualifiedName createQualifiedName();
-
-	/**
 	 * Returns a new object of class '<em>Range Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -36,11 +36,11 @@ public class AnyDataTypeOperations extends DataTypeOperations {
 		return TypeSystemFactory.eINSTANCE.createInvalidDataType();
 	}
 
-	public static  DataType evaluate(AnyDataType anyDataType, int n) {
+	public static DataType evaluate(AnyDataType anyDataType, int n) {
 		return TypeSystemFactory.eINSTANCE.createAnyDataType();
 	}
 
-	public static  boolean isAssignableFrom(AnyDataType anyDataType, DataType other) {
+	public static boolean isAssignableFrom(AnyDataType anyDataType, DataType other) {
 		return true;
 	}
 

@@ -228,10 +228,10 @@ public class ExpressionGenerator implements IExpressionGenerator {
 			MultiplicativeExpressionPart part = rightParts.previous();
 			rightParts.next();
 			switch (part.getOperator()) {
-			case MULTIPLICATION:
+			case MULTIPLY:
 				writeFixedPointMultiplicationExpression(leftOperand, rightParts, fixedPointFormat);
 				break;
-			case DIVISION:
+			case DIVIDE:
 				writeFixedPointDivisionExpression(leftOperand, rightParts, fixedPointFormat);
 				break;
 			default:

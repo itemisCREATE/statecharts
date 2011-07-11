@@ -113,9 +113,9 @@ public class ExpressionValueEvaluator implements IExpressionValueEvaluator {
 
 		private IValue addSubtract(IValue operand1, IValue operand2, AdditiveOperator operator) {
 			switch (operator) {
-			case ADDITION:
+			case ADD:
 				return operand1.add(operand2);
-			case SUBTRACTION:
+			case SUBTRACT:
 				return operand1.subtract(operand2);
 			}
 			throw new IllegalArgumentException();
@@ -138,13 +138,13 @@ public class ExpressionValueEvaluator implements IExpressionValueEvaluator {
 		
 		private IValue multiplyDivide(IValue operand1, IValue operand2, MultiplicativeOperator operator) {
 			switch (operator) {
-			case MULTIPLICATION:
+			case MULTIPLY:
 				return operand1.multiply(operand2);
-			case DIVISION:
+			case DIVIDE:
 				return operand1.divide(operand2);
-			case ELEMENT_WISE_MULTIPLICATION:
+			case ELEMENT_WISE_MULTIPLY:
 				return operand1.elementWiseMultiply(operand2);
-			case ELEMENT_WISE_DIVISION:
+			case ELEMENT_WISE_DIVIDE:
 				return operand1.elementWiseDivide(operand2);
 			}
 			throw new IllegalArgumentException();
@@ -277,7 +277,7 @@ public class ExpressionValueEvaluator implements IExpressionValueEvaluator {
 			IValue result;
 			IValue operandValue = doSwitch(unaryExpression.getOperand());
 			switch (unaryExpression.getOperator()) {
-			case MINUS:
+			case NEGATE:
 				result = operandValue.unaryMinus();
 				break;
 			case LOGICAL_NOT:

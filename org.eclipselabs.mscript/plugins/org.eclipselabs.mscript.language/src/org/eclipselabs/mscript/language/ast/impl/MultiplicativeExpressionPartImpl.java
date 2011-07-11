@@ -40,7 +40,7 @@ public class MultiplicativeExpressionPartImpl extends MinimalEObjectImpl.Contain
 	 * @generated
 	 * @ordered
 	 */
-	protected static final MultiplicativeOperator OPERATOR_EDEFAULT = MultiplicativeOperator.MULTIPLICATION;
+	protected static final MultiplicativeOperator OPERATOR_EDEFAULT = MultiplicativeOperator.MULTIPLY;
 
 	/**
 	 * The cached value of the '{@link #getOperator() <em>Operator</em>}' attribute.

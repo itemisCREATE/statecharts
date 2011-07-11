@@ -23,54 +23,52 @@ import org.eclipse.emf.common.util.Enumerator;
  */
 public enum AdditiveOperator implements Enumerator {
 	/**
-	 * The '<em><b>Addition</b></em>' literal object.
+	 * The '<em><b>Add</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #ADDITION_VALUE
+	 * @see #ADD_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	ADDITION(0, "Addition", "+"),
-
-	/**
-	 * The '<em><b>Subtraction</b></em>' literal object.
+	ADD(0, "Add", "+"), /**
+	 * The '<em><b>Subtract</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #SUBTRACTION_VALUE
+	 * @see #SUBTRACT_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	SUBTRACTION(1, "Subtraction", "-");
+	SUBTRACT(1, "Subtract", "-");
 
 	/**
-	 * The '<em><b>Addition</b></em>' literal value.
+	 * The '<em><b>Add</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>Addition</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>Add</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #ADDITION
-	 * @model name="Addition" literal="+"
+	 * @see #ADD
+	 * @model name="Add" literal="+"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int ADDITION_VALUE = 0;
+	public static final int ADD_VALUE = 0;
 
 	/**
-	 * The '<em><b>Subtraction</b></em>' literal value.
+	 * The '<em><b>Subtract</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>Subtraction</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>Subtract</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #SUBTRACTION
-	 * @model name="Subtraction" literal="-"
+	 * @see #SUBTRACT
+	 * @model name="Subtract" literal="-"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int SUBTRACTION_VALUE = 1;
+	public static final int SUBTRACT_VALUE = 1;
 
 	/**
 	 * An array of all the '<em><b>Additive Operator</b></em>' enumerators.
@@ -80,8 +78,8 @@ public enum AdditiveOperator implements Enumerator {
 	 */
 	private static final AdditiveOperator[] VALUES_ARRAY =
 		new AdditiveOperator[] {
-			ADDITION,
-			SUBTRACTION,
+			ADD,
+			SUBTRACT,
 		};
 
 	/**
@@ -132,8 +130,8 @@ public enum AdditiveOperator implements Enumerator {
 	 */
 	public static AdditiveOperator get(int value) {
 		switch (value) {
-			case ADDITION_VALUE: return ADDITION;
-			case SUBTRACTION_VALUE: return SUBTRACTION;
+			case ADD_VALUE: return ADD;
+			case SUBTRACT_VALUE: return SUBTRACT;
 		}
 		return null;
 	}

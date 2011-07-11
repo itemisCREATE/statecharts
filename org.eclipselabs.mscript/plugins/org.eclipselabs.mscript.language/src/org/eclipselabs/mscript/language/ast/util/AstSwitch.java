@@ -50,7 +50,6 @@ import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
 import org.eclipselabs.mscript.language.ast.ParenthesizedExpression;
 import org.eclipselabs.mscript.language.ast.PostfixExpression;
 import org.eclipselabs.mscript.language.ast.PowerExpression;
-import org.eclipselabs.mscript.language.ast.QualifiedName;
 import org.eclipselabs.mscript.language.ast.RangeExpression;
 import org.eclipselabs.mscript.language.ast.RecordDefinition;
 import org.eclipselabs.mscript.language.ast.RecordFieldDeclaration;
@@ -368,12 +367,6 @@ public class AstSwitch<T> extends Switch<T> {
 				EndExpression endExpression = (EndExpression)theEObject;
 				T result = caseEndExpression(endExpression);
 				if (result == null) result = caseExpression(endExpression);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case AstPackage.QUALIFIED_NAME: {
-				QualifiedName qualifiedName = (QualifiedName)theEObject;
-				T result = caseQualifiedName(qualifiedName);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -1061,21 +1054,6 @@ public class AstSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseEndExpression(EndExpression object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Qualified Name</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Qualified Name</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseQualifiedName(QualifiedName object) {
 		return null;
 	}
 

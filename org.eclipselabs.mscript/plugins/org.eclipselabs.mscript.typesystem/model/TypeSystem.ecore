@@ -29,19 +29,21 @@
     <eLiterals name="Divide" value="3"/>
     <eLiterals name="ElementWiseMultiply" value="4"/>
     <eLiterals name="ElementWiseDivide" value="5"/>
-    <eLiterals name="Negate" value="6"/>
-    <eLiterals name="Power" value="7"/>
-    <eLiterals name="Root" value="8"/>
-    <eLiterals name="LogicalAnd" value="9"/>
-    <eLiterals name="LogicalOr" value="10"/>
-    <eLiterals name="LogicalNot" value="11"/>
-    <eLiterals name="Implies" value="12"/>
-    <eLiterals name="LessThan" value="13"/>
-    <eLiterals name="LessThanOrEqualTo" value="14"/>
-    <eLiterals name="GreaterThan" value="15"/>
-    <eLiterals name="GreaterThanOrEqualTo" value="16"/>
-    <eLiterals name="EqualTo" value="17"/>
-    <eLiterals name="NotEqualTo" value="18"/>
+    <eLiterals name="ElementWisePower" value="6"/>
+    <eLiterals name="Negate" value="7"/>
+    <eLiterals name="Power" value="8"/>
+    <eLiterals name="Root" value="9"/>
+    <eLiterals name="Transpose" value="10"/>
+    <eLiterals name="LogicalAnd" value="11"/>
+    <eLiterals name="LogicalOr" value="12"/>
+    <eLiterals name="LogicalNot" value="13"/>
+    <eLiterals name="Implies" value="14"/>
+    <eLiterals name="LessThan" value="15"/>
+    <eLiterals name="LessThanOrEqualTo" value="16"/>
+    <eLiterals name="GreaterThan" value="17"/>
+    <eLiterals name="GreaterThanOrEqualTo" value="18"/>
+    <eLiterals name="EqualTo" value="19"/>
+    <eLiterals name="NotEqualTo" value="20"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PrimitiveType" eSuperTypes="#//DataType"/>
   <eClassifiers xsi:type="ecore:EClass" name="NumericType" eSuperTypes="#//PrimitiveType">

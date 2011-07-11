@@ -51,7 +51,6 @@ import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
 import org.eclipselabs.mscript.language.ast.ParenthesizedExpression;
 import org.eclipselabs.mscript.language.ast.PostfixExpression;
 import org.eclipselabs.mscript.language.ast.PowerExpression;
-import org.eclipselabs.mscript.language.ast.QualifiedName;
 import org.eclipselabs.mscript.language.ast.RangeExpression;
 import org.eclipselabs.mscript.language.ast.RecordDefinition;
 import org.eclipselabs.mscript.language.ast.RecordFieldDeclaration;
@@ -273,10 +272,6 @@ public class AstAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseEndExpression(EndExpression object) {
 				return createEndExpressionAdapter();
-			}
-			@Override
-			public Adapter caseQualifiedName(QualifiedName object) {
-				return createQualifiedNameAdapter();
 			}
 			@Override
 			public Adapter caseRangeExpression(RangeExpression object) {
@@ -901,20 +896,6 @@ public class AstAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createEndExpressionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.QualifiedName <em>Qualified Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.language.ast.QualifiedName
-	 * @generated
-	 */
-	public Adapter createQualifiedNameAdapter() {
 		return null;
 	}
 

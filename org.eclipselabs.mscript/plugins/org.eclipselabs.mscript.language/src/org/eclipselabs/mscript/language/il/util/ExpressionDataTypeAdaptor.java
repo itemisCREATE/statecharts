@@ -190,10 +190,10 @@ public class ExpressionDataTypeAdaptor implements IExpressionDataTypeAdaptor {
 			for (AdditiveExpressionPart rightPart : additiveExpression.getRightParts()) {
 				OperatorKind operatorKind;
 				switch (rightPart.getOperator()) {
-				case ADDITION:
+				case ADD:
 					operatorKind = OperatorKind.ADD;
 					break;
-				case SUBTRACTION:
+				case SUBTRACT:
 					operatorKind = OperatorKind.SUBTRACT;
 					break;
 				default:
@@ -217,16 +217,16 @@ public class ExpressionDataTypeAdaptor implements IExpressionDataTypeAdaptor {
 			for (MultiplicativeExpressionPart rightPart : multiplicativeExpression.getRightParts()) {
 				OperatorKind operatorKind;
 				switch (rightPart.getOperator()) {
-				case MULTIPLICATION:
+				case MULTIPLY:
 					operatorKind = OperatorKind.MULTIPLY;
 					break;
-				case DIVISION:
+				case DIVIDE:
 					operatorKind = OperatorKind.DIVIDE;
 					break;
-				case ELEMENT_WISE_MULTIPLICATION:
+				case ELEMENT_WISE_MULTIPLY:
 					operatorKind = OperatorKind.ELEMENT_WISE_MULTIPLY;
 					break;
-				case ELEMENT_WISE_DIVISION:
+				case ELEMENT_WISE_DIVIDE:
 					operatorKind = OperatorKind.ELEMENT_WISE_DIVIDE;
 					break;
 				default:
@@ -258,7 +258,7 @@ public class ExpressionDataTypeAdaptor implements IExpressionDataTypeAdaptor {
 		public DataType caseUnaryExpression(UnaryExpression unaryExpression) {
 			OperatorKind operatorKind;
 			switch (unaryExpression.getOperator()) {
-			case MINUS:
+			case NEGATE:
 				operatorKind = OperatorKind.NEGATE;
 				break;
 			case LOGICAL_NOT:

@@ -60,7 +60,6 @@ import org.eclipselabs.mscript.language.ast.PostfixExpression;
 import org.eclipselabs.mscript.language.ast.PostfixOperator;
 import org.eclipselabs.mscript.language.ast.PowerExpression;
 import org.eclipselabs.mscript.language.ast.PowerOperator;
-import org.eclipselabs.mscript.language.ast.QualifiedName;
 import org.eclipselabs.mscript.language.ast.RangeExpression;
 import org.eclipselabs.mscript.language.ast.RecordDefinition;
 import org.eclipselabs.mscript.language.ast.RecordFieldDeclaration;
@@ -158,7 +157,6 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory {
 			case AstPackage.PARENTHESIZED_EXPRESSION: return createParenthesizedExpression();
 			case AstPackage.BEGIN_EXPRESSION: return createBeginExpression();
 			case AstPackage.END_EXPRESSION: return createEndExpression();
-			case AstPackage.QUALIFIED_NAME: return createQualifiedName();
 			case AstPackage.RANGE_EXPRESSION: return createRangeExpression();
 			case AstPackage.IMPLIES_EXPRESSION: return createImpliesExpression();
 			case AstPackage.LOGICAL_OR_EXPRESSION: return createLogicalOrExpression();
@@ -614,16 +612,6 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory {
 	public EndExpression createEndExpression() {
 		EndExpressionImpl endExpression = new EndExpressionImpl();
 		return endExpression;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public QualifiedName createQualifiedName() {
-		QualifiedNameImpl qualifiedName = new QualifiedNameImpl();
-		return qualifiedName;
 	}
 
 	/**

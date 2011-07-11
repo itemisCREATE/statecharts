@@ -40,7 +40,7 @@ public class AdditiveExpressionPartImpl extends MinimalEObjectImpl.Container imp
 	 * @generated
 	 * @ordered
 	 */
-	protected static final AdditiveOperator OPERATOR_EDEFAULT = AdditiveOperator.ADDITION;
+	protected static final AdditiveOperator OPERATOR_EDEFAULT = AdditiveOperator.ADD;
 
 	/**
 	 * The cached value of the '{@link #getOperator() <em>Operator</em>}' attribute.

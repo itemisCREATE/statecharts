@@ -103,9 +103,9 @@ public class StepExpressionHelper {
 		
 		protected Integer addSubtract(Integer operand1, Integer operand2, AdditiveOperator operator) {
 			switch (operator) {
-			case ADDITION:
+			case ADD:
 				return operand1 + operand2;
-			case SUBTRACTION:
+			case SUBTRACT:
 				return operand1 - operand2;
 			}
 			throw new IllegalArgumentException();
@@ -119,7 +119,7 @@ public class StepExpressionHelper {
 			Integer result;
 			Integer operandValue = doSwitch(unaryExpression.getOperand());
 			switch (unaryExpression.getOperator()) {
-			case MINUS:
+			case NEGATE:
 				result = -operandValue;
 				break;
 			case LOGICAL_NOT:

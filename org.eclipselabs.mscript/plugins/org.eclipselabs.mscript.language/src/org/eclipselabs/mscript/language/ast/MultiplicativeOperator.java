@@ -23,104 +23,98 @@ import org.eclipse.emf.common.util.Enumerator;
  */
 public enum MultiplicativeOperator implements Enumerator {
 	/**
-	 * The '<em><b>Multiplication</b></em>' literal object.
+	 * The '<em><b>Multiply</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #MULTIPLICATION_VALUE
+	 * @see #MULTIPLY_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	MULTIPLICATION(0, "Multiplication", "*"),
-
-	/**
-	 * The '<em><b>Division</b></em>' literal object.
+	MULTIPLY(0, "Multiply", "*"), /**
+	 * The '<em><b>Divide</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #DIVISION_VALUE
+	 * @see #DIVIDE_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	DIVISION(1, "Division", "/"),
-
-	/**
-	 * The '<em><b>Element Wise Multiplication</b></em>' literal object.
+	DIVIDE(1, "Divide", "/"), /**
+	 * The '<em><b>Element Wise Multiply</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #ELEMENT_WISE_MULTIPLICATION_VALUE
+	 * @see #ELEMENT_WISE_MULTIPLY_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	ELEMENT_WISE_MULTIPLICATION(2, "ElementWiseMultiplication", ".*"),
-
-	/**
-	 * The '<em><b>Element Wise Division</b></em>' literal object.
+	ELEMENT_WISE_MULTIPLY(2, "ElementWiseMultiply", ".*"), /**
+	 * The '<em><b>Element Wise Divide</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #ELEMENT_WISE_DIVISION_VALUE
+	 * @see #ELEMENT_WISE_DIVIDE_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	ELEMENT_WISE_DIVISION(3, "ElementWiseDivision", "./");
+	ELEMENT_WISE_DIVIDE(3, "ElementWiseDivide", "./");
 
 	/**
-	 * The '<em><b>Multiplication</b></em>' literal value.
+	 * The '<em><b>Multiply</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>Multiplication</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>Multiply</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #MULTIPLICATION
-	 * @model name="Multiplication" literal="*"
+	 * @see #MULTIPLY
+	 * @model name="Multiply" literal="*"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int MULTIPLICATION_VALUE = 0;
+	public static final int MULTIPLY_VALUE = 0;
 
 	/**
-	 * The '<em><b>Division</b></em>' literal value.
+	 * The '<em><b>Divide</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>Division</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>Divide</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #DIVISION
-	 * @model name="Division" literal="/"
+	 * @see #DIVIDE
+	 * @model name="Divide" literal="/"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int DIVISION_VALUE = 1;
+	public static final int DIVIDE_VALUE = 1;
 
 	/**
-	 * The '<em><b>Element Wise Multiplication</b></em>' literal value.
+	 * The '<em><b>Element Wise Multiply</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>Element Wise Multiplication</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>Element Wise Multiply</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #ELEMENT_WISE_MULTIPLICATION
-	 * @model name="ElementWiseMultiplication" literal=".*"
+	 * @see #ELEMENT_WISE_MULTIPLY
+	 * @model name="ElementWiseMultiply" literal=".*"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int ELEMENT_WISE_MULTIPLICATION_VALUE = 2;
+	public static final int ELEMENT_WISE_MULTIPLY_VALUE = 2;
 
 	/**
-	 * The '<em><b>Element Wise Division</b></em>' literal value.
+	 * The '<em><b>Element Wise Divide</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>Element Wise Division</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>Element Wise Divide</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #ELEMENT_WISE_DIVISION
-	 * @model name="ElementWiseDivision" literal="./"
+	 * @see #ELEMENT_WISE_DIVIDE
+	 * @model name="ElementWiseDivide" literal="./"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int ELEMENT_WISE_DIVISION_VALUE = 3;
+	public static final int ELEMENT_WISE_DIVIDE_VALUE = 3;
 
 	/**
 	 * An array of all the '<em><b>Multiplicative Operator</b></em>' enumerators.
@@ -130,10 +124,10 @@ public enum MultiplicativeOperator implements Enumerator {
 	 */
 	private static final MultiplicativeOperator[] VALUES_ARRAY =
 		new MultiplicativeOperator[] {
-			MULTIPLICATION,
-			DIVISION,
-			ELEMENT_WISE_MULTIPLICATION,
-			ELEMENT_WISE_DIVISION,
+			MULTIPLY,
+			DIVIDE,
+			ELEMENT_WISE_MULTIPLY,
+			ELEMENT_WISE_DIVIDE,
 		};
 
 	/**
@@ -184,10 +178,10 @@ public enum MultiplicativeOperator implements Enumerator {
 	 */
 	public static MultiplicativeOperator get(int value) {
 		switch (value) {
-			case MULTIPLICATION_VALUE: return MULTIPLICATION;
-			case DIVISION_VALUE: return DIVISION;
-			case ELEMENT_WISE_MULTIPLICATION_VALUE: return ELEMENT_WISE_MULTIPLICATION;
-			case ELEMENT_WISE_DIVISION_VALUE: return ELEMENT_WISE_DIVISION;
+			case MULTIPLY_VALUE: return MULTIPLY;
+			case DIVIDE_VALUE: return DIVIDE;
+			case ELEMENT_WISE_MULTIPLY_VALUE: return ELEMENT_WISE_MULTIPLY;
+			case ELEMENT_WISE_DIVIDE_VALUE: return ELEMENT_WISE_DIVIDE;
 		}
 		return null;
 	}

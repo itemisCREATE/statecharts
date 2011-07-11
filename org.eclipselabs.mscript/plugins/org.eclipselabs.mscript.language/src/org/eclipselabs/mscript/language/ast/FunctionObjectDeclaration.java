@@ -56,30 +56,30 @@ public interface FunctionObjectDeclaration extends EObject {
 	void setName(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Function Name</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Function Name</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Function Name</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Function Name</em>' containment reference.
-	 * @see #setFunctionName(QualifiedName)
+	 * @return the value of the '<em>Function Name</em>' reference.
+	 * @see #setFunctionName(FunctionDefinition)
 	 * @see org.eclipselabs.mscript.language.ast.AstPackage#getFunctionObjectDeclaration_FunctionName()
-	 * @model containment="true"
+	 * @model
 	 * @generated
 	 */
-	QualifiedName getFunctionName();
+	FunctionDefinition getFunctionName();
 
 	/**
-	 * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.FunctionObjectDeclaration#getFunctionName <em>Function Name</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.FunctionObjectDeclaration#getFunctionName <em>Function Name</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Function Name</em>' containment reference.
+	 * @param value the new value of the '<em>Function Name</em>' reference.
 	 * @see #getFunctionName()
 	 * @generated
 	 */
-	void setFunctionName(QualifiedName value);
+	void setFunctionName(FunctionDefinition value);
 
 	/**
 	 * Returns the value of the '<em><b>Template Arguments</b></em>' containment reference list.

@@ -16,10 +16,10 @@ import "platform:/resource/org.eclipselabs.mscript.typesystem/model/TypeSystem.e
 import "platform:/resource/org.eclipselabs.mscript.language/model/Mscript.ecore"
 import 'http://www.eclipse.org/emf/2002/Ecore' as ecore
 
-Module :
+Module:
 	(definitions+=Definition)*;
 	
-Definition :
+Definition:
 	DataTypeDefinition |
 	FunctionDefinition;
 
@@ -27,7 +27,7 @@ Definition :
  * DataTypeDefinition
  */
  
-DataTypeDefinition :
+DataTypeDefinition:
 	EnumerationDefinition |
 	RecordDefinition |
 	TypeAliasDefinition;
@@ -36,39 +36,39 @@ DataTypeDefinition :
  * Enumeration
  */
  	
-EnumerationDefinition :
-	'enum' name=ID '{'
+EnumerationDefinition:
+	'enum' name=ValidID '{'
 		(literalDeclarations+=EnumerationLiteralDeclaration (',' literalDeclarations+=EnumerationLiteralDeclaration)*)?
 	'}';
 	
-EnumerationLiteralDeclaration :
-	name=ID;
+EnumerationLiteralDeclaration:
+	name=ValidID;
 	
 /*
  * TypeAlias
  */
  
-TypeAliasDefinition :
-	'type' name=ID '=' type=PrimitiveType ';';	
+TypeAliasDefinition:
+	'type' name=ValidID '=' type=PrimitiveType ';';	
 
 /*
  * Record
  */
 
-RecordDefinition :
-	'record' name=ID '{'
+RecordDefinition:
+	'record' name=ValidID '{'
 		(fieldDeclarations+=RecordFieldDeclaration)*
 	'}'; 
 
-RecordFieldDeclaration :
-	name=ID ':' type=DataTypeSpecifier ';';
+RecordFieldDeclaration:
+	name=ValidID ':' type=DataTypeSpecifier ';';
 
 /*
  * Function
  */
  
-FunctionDefinition :
-	(stateful?='stateful')? 'func' name=ID
+FunctionDefinition:
+	(stateful?='stateful')? 'func' name=ValidID
 			('<' templateParameterDeclarations+=ParameterDeclaration (',' templateParameterDeclarations+=ParameterDeclaration)* '>')?
 			'(' (inputParameterDeclarations+=ParameterDeclaration (',' inputParameterDeclarations+=ParameterDeclaration)*)? ')'
 			'->' outputParameterDeclarations+=ParameterDeclaration (',' outputParameterDeclarations+=ParameterDeclaration)* '{'
@@ -78,303 +78,306 @@ FunctionDefinition :
 		equations+=Equation)*
 	'}';
 
-ParameterDeclaration :
-	name=ID;
+ParameterDeclaration:
+	name=ValidID;
 
-enum AssertionStatusKind :
+enum AssertionStatusKind:
 	Info='info' |
 	Warning='warning' |
 	Error='error' |
 	Fatal='fatal';
 
-Assertion :
+Assertion:
 	(static?='static')? 'assert' condition=Expression ':' statusKind=AssertionStatusKind message=Expression ';';
 
-StateVariableDeclaration :
-	'var' name=ID ';';
+StateVariableDeclaration:
+	'var' name=ValidID ';';
 	
-FunctionObjectDeclaration :
-	'fob' name=ID ':' functionName=QualifiedName ('<' templateArguments+=Expression (',' templateArguments+=Expression)* '>')? ';';
+FunctionObjectDeclaration:
+	'fob' name=ValidID ':' functionName=[FunctionDefinition|QualifiedName] ('<' templateArguments+=Expression (',' templateArguments+=Expression)* '>')? ';';
 
-Equation :
+Equation:
 	leftHandSide=Expression '=' rightHandSide=Expression ';';
 
 /*
  * Data type specifier
  */
 
-DataTypeSpecifier :
+DataTypeSpecifier:
 	definedType=(PrimitiveType | ArrayType) | type=[DataType];
 
-PrimitiveType :
+PrimitiveType:
 	NumericType | BooleanType | StringType;
 	
-NumericType :
+NumericType:
 	RealType | IntegerType | ComplexType | GaussianType;
 	
-RealType :
+RealType:
 	{RealType} 'real' ('(' unit=Unit ')')?;
 	
-IntegerType :
+IntegerType:
 	{IntegerType} 'int' ('(' unit=Unit ')')?;
 	
-ComplexType :
+ComplexType:
 	{ComplexType} 'complex' ('(' unit=Unit ')')?;
 
-GaussianType :
+GaussianType:
 	{GaussianType} 'gauss' ('(' unit=Unit ')')?;
 
-BooleanType :
+BooleanType:
 	{BooleanType} 'bool';
 	
-StringType :
+StringType:
 	{StringType} 'string';
 	
-ArrayType :
+ArrayType:
 	TensorType | =>(definedElementType=PrimitiveType | elementType=[DataType]) '[' dimensions+=ArrayDimension (',' dimensions+=ArrayDimension)* ']';
 	
-TensorType :
+TensorType:
 	definedElementType=NumericType '[' dimensions+=ArrayDimension (',' dimensions+=ArrayDimension)* ']';
 	
-ArrayDimension :
+ArrayDimension:
 	{ArrayDimension} (size=Expression)?;
 
 /*
  * Expressions
  */
 
-Expression :
+Expression:
 	LetExpression | IfExpression | SwitchExpression | RangeExpression;
 
-LetExpression :
+LetExpression:
 	'let' variableDeclarations+=LetExpressionVariableDeclaration (',' variableDeclarations+=LetExpressionVariableDeclaration)* 'in' targetExpression=Expression;
 	
-LetExpressionVariableDeclaration :
-	(names+=ID | '(' names+=ID (',' names+=ID)+ ')') '=' assignedExpression=Expression;
+LetExpressionVariableDeclaration:
+	(names+=ValidID | '(' names+=ValidID (',' names+=ValidID)+ ')') '=' assignedExpression=Expression;
 	
-IfExpression :
+IfExpression:
 	(static?='static')? 'if' condition=Expression 'then' thenExpression=Expression 'else' elseExpression=Expression;
 
-SwitchExpression :
+SwitchExpression:
 	(static?='static')? 'switch' controlExpression=Expression
 		(cases+=SwitchCase)*
 		'default' ':' defaultExpression=Expression;
 
-SwitchCase :
+SwitchCase:
 	'case' caseExpression=ImpliesExpression ':' resultExpression=Expression;
 
-RangeExpression returns Expression :
+RangeExpression returns Expression:
 	ImpliesExpression ({RangeExpression.operands+=current} ':' operands+=ImpliesExpression (':' operands+=ImpliesExpression)?)?;
 
-ImpliesExpression returns Expression :
+ImpliesExpression returns Expression:
 	LogicalOrExpression ({ImpliesExpression.leftOperand=current} '=>' rightOperand=LogicalOrExpression)?;
 
-LogicalOrExpression returns Expression :
+LogicalOrExpression returns Expression:
 	LogicalAndExpression ({LogicalOrExpression.operands+=current} ('||' operands+=LogicalAndExpression)+)?;
 	
-LogicalAndExpression returns Expression :
+LogicalAndExpression returns Expression:
 	EqualityExpression ({LogicalAndExpression.operands+=current} ('&&' operands+=EqualityExpression)+)?;
 
-EqualityExpression returns Expression :
+EqualityExpression returns Expression:
 	RelationalExpression ({EqualityExpression.leftOperand=current} operator=EqualityOperator rightOperand=RelationalExpression)?;
 
-enum EqualityOperator :
+enum EqualityOperator:
 	EqualTo='==' |
 	NotEqualTo='!=';
 	
-RelationalExpression returns Expression :
+RelationalExpression returns Expression:
 	AdditiveExpression ({RelationalExpression.leftOperand=current} operator=RelationalOperator rightOperand=AdditiveExpression | {TypeTestExpression.expression=current} 'is' type=DataTypeSpecifier)?;
 
-enum RelationalOperator :
+enum RelationalOperator:
 	LessThan='<' |
 	LessThanOrEqualTo='<=' |
 	GreaterThan='>' |
 	GreaterThanOrEqualTo='>=';
 
-AdditiveExpression returns Expression :
+AdditiveExpression returns Expression:
 	MultiplicativeExpression ({AdditiveExpression.leftOperand=current} (rightParts+=AdditiveExpressionPart)+)?;
 
-AdditiveExpressionPart :
+AdditiveExpressionPart:
 	operator=AdditiveOperator operand=MultiplicativeExpression;
 
-enum AdditiveOperator :
-	Addition='+' |
-	Subtraction='-';
+enum AdditiveOperator:
+	Add='+' |
+	Subtract='-';
 
-MultiplicativeExpression returns Expression :
+MultiplicativeExpression returns Expression:
 	PowerExpression ({MultiplicativeExpression.leftOperand=current} (rightParts+=MultiplicativeExpressionPart)+)?;
 
-MultiplicativeExpressionPart :
+MultiplicativeExpressionPart:
 	operator=MultiplicativeOperator operand=PowerExpression;
 	
-enum MultiplicativeOperator :
-	Multiplication='*' |
-	Division='/' |
-	ElementWiseMultiplication='.*' |
-	ElementWiseDivision='./';
+enum MultiplicativeOperator:
+	Multiply='*' |
+	Divide='/' |
+	ElementWiseMultiply='.*' |
+	ElementWiseDivide='./';
 	
-PowerExpression returns Expression :
+PowerExpression returns Expression:
 	UnaryExpression ({PowerExpression.operand=current} operator=PowerOperator exponent=UnaryExpression)?;
 
-enum PowerOperator :
+enum PowerOperator:
 	Power='^' |
 	ElementWisePower='.^';
 	
-UnaryExpression returns Expression :
+UnaryExpression returns Expression:
 	PostfixExpression | {UnaryExpression} operator=UnaryOperator operand=PostfixExpression;
 	
-enum UnaryOperator :
-	Minus='-' |
+enum UnaryOperator:
+	Negate='-' |
 	LogicalNot='!';
 	
-PostfixExpression returns Expression :
+PostfixExpression returns Expression:
 	PrimaryExpression ({PostfixExpression.operand=current} operator=PostfixOperator)?;
 
-enum PostfixOperator :
+enum PostfixOperator:
 	Transpose="'";
 
-PrimaryExpression returns Expression :
+PrimaryExpression returns Expression:
 	Literal |
 	FeatureCall |
 	UnitConstructionOperator |
 	BeginExpression |
 	EndExpression;
 
-CallablePrimaryExpression returns Expression :
+CallablePrimaryExpression returns Expression:
 	ArrayConstructionOperator |
 	ArrayConcatenationOperator |
 	ParenthesizedExpression;
 
-Literal :
+Literal:
 	NumericLiteral | BooleanLiteral | StringLiteral;
 	
-NumericLiteral :
+NumericLiteral:
 	RealLiteral | IntegerLiteral;
 	
-RealLiteral :
-	value=ValidReal (modifier=ID)? ('(' unit=Unit ')')?;
+RealLiteral:
+	value=ValidReal (modifier=ValidID)? ('(' unit=Unit ')')?;
 	
-IntegerLiteral :
-	value=ValidInteger (modifier=ID)? ('(' unit=Unit ')')?;
+IntegerLiteral:
+	value=ValidInteger (modifier=ValidID)? ('(' unit=Unit ')')?;
 
-BooleanLiteral :
+BooleanLiteral:
 	value=BooleanKind;
 
-enum BooleanKind :
+enum BooleanKind:
 	False='false' | True='true';
 	
-StringLiteral :
+StringLiteral:
 	value=STRING;
 		
-SimpleName returns Expression :
-	{SimpleName} identifier=ID;
+SimpleName returns Expression:
+	{SimpleName} identifier=ValidID;
 
-FeatureCall returns Expression :
+FeatureCall returns Expression:
 	CallablePrimaryExpression ({FeatureCall.target=current} (parts+=FeatureCallPart)+)? | {FeatureCall} target=SimpleName (parts+=FeatureCallPart)*;
 
-FeatureCallPart :
+FeatureCallPart:
 	NameComponent | ArrayElementAccess | OperationArgumentList | IterationCall;
 	
-NameComponent :
-	'.' identifier=ID;
+NameComponent:
+	'.' identifier=ValidID;
 	
-ArrayElementAccess :
+ArrayElementAccess:
 	'[' subscripts+=ArraySubscript (',' subscripts+=ArraySubscript)* ']';
 
-ArraySubscript :
+ArraySubscript:
 	slice?=':' | expression=Expression;
 
-OperationArgumentList :
+OperationArgumentList:
 	{OperationArgumentList} '(' (arguments+=Expression (',' arguments+=Expression)*)? ')';
 
-IterationCall :
-	'.' name=ID '(' variables+=IterationVariable (',' variables+=IterationVariable)* (';' accumulator=IterationAccumulator)? (';' breakCondition=Expression)? '|' expression=Expression ')';
+IterationCall:
+	'.' name=ValidID '(' variables+=IterationVariable (',' variables+=IterationVariable)* (';' accumulator=IterationAccumulator)? (';' breakCondition=Expression)? '|' expression=Expression ')';
 
-IterationVariable :
-	name=ID;
+IterationVariable:
+	name=ValidID;
 
-IterationAccumulator :
-	name=ID '=' initializer=Expression;
+IterationAccumulator:
+	name=ValidID '=' initializer=Expression;
 	
-ArrayConstructionOperator :
+ArrayConstructionOperator:
 	'{' expressions+=Expression ((',' expressions+=Expression)* | 'for' iterationClauses+=ArrayConstructionIterationClause (',' iterationClauses+=ArrayConstructionIterationClause)*) '}';
 
-ArrayConstructionIterationClause :
-	variableName=ID 'in' collectionExpression=Expression;
+ArrayConstructionIterationClause:
+	variableName=ValidID 'in' collectionExpression=Expression;
 
-ArrayConcatenationOperator :
+ArrayConcatenationOperator:
 	'[' rows+=ExpressionList (';' rows+=ExpressionList)* ']';
 	
-ExpressionList :
+ExpressionList:
 	expressions+=Expression (',' expressions+=Expression)*;
 	
-UnitConstructionOperator :
+UnitConstructionOperator:
 	'$' '(' unit=Unit ')';
 
-ParenthesizedExpression :
+ParenthesizedExpression:
 	'(' expressions+=Expression (',' expressions+=Expression)* ')';
 
-BeginExpression :
+BeginExpression:
 	{BeginExpression} 'begin';
 
-EndExpression :
+EndExpression:
 	{EndExpression} 'end';
 	
-QualifiedName :
-	identifiers+=ID ('.' identifiers+=ID)*;
-
 /*
  * Unit expressions
  */
 	
-Unit :
+Unit:
 	{Unit} (numerator=UnitNumerator ('/' denominator=UnitDenominator)?)?;
 
-UnitNumerator :
+UnitNumerator:
 	{UnitNumerator} ONE | factors+=UnitFactor ('*' factors+=UnitFactor)*;
 
-UnitDenominator :
+UnitDenominator:
 	factors+=UnitFactor | '(' factors+=UnitFactor ('*' factors+=UnitFactor)* ')';
 
-UnitFactor :
-	symbol=ID ('^' exponent=UnitExponent)?;
+UnitFactor:
+	symbol=ValidID ('^' exponent=UnitExponent)?;
 
-UnitExponent returns ecore::EInt :
+UnitExponent returns ecore::EInt:
 	('-')? ValidInteger;
 
-ValidReal returns ecore::EDouble :
+ValidReal returns ecore::EDouble:
 	REAL;
 
-ValidInteger returns ecore::ELong :
+ValidInteger returns ecore::ELong:
 	ONE | INTEGER;
+
+ValidID:
+	ID;
+
+QualifiedName:
+  ValidID (=>'.' ValidID)*;
 
 /*
  * Terminals
  */
  
-terminal ID :
+terminal ID:
 	('_' | 'a'..'z' | 'A'..'Z') ('0'..'9' | '_' | 'a'..'z' | 'A'..'Z')*;
 
-terminal STRING : 
+terminal STRING: 
 	'"' (!('\\' | '"') | '\\' ("'" | '"' | '?' | '\\' | 'a' | 'b' | 'f' | 'n' | 'r' | 't' | 'v'))* '"';
 
-terminal ONE :
+terminal ONE:
 	'1';
 
-terminal REAL :
+terminal REAL:
 	('0'..'9')+ '.' ('0'..'9')* (('e' | 'E') ('+'|'-')? ('0'..'9')+)?;
 
-terminal INTEGER :
+terminal INTEGER:
 	('0'..'9')+;
 
-terminal ML_COMMENT :
+terminal ML_COMMENT:
 	'/*' -> '*/';
 
-terminal SL_COMMENT :
+terminal SL_COMMENT:
 	'//' !('\n'|'\r')* ('\r'? '\n')?;
 
-terminal WS :
+terminal WS:
 	(' '|'\t'|'\r'|'\n')+;
 
-terminal ANY_OTHER :
+terminal ANY_OTHER:
 	.;

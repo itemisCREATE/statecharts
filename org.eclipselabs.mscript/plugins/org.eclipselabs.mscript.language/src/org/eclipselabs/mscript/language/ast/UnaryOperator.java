@@ -23,16 +23,14 @@ import org.eclipse.emf.common.util.Enumerator;
  */
 public enum UnaryOperator implements Enumerator {
 	/**
-	 * The '<em><b>Minus</b></em>' literal object.
+	 * The '<em><b>Negate</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #MINUS_VALUE
+	 * @see #NEGATE_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	MINUS(0, "Minus", "-"),
-
-	/**
+	NEGATE(0, "Negate", "-"), /**
 	 * The '<em><b>Logical Not</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -43,19 +41,19 @@ public enum UnaryOperator implements Enumerator {
 	LOGICAL_NOT(1, "LogicalNot", "!");
 
 	/**
-	 * The '<em><b>Minus</b></em>' literal value.
+	 * The '<em><b>Negate</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>Minus</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>Negate</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #MINUS
-	 * @model name="Minus" literal="-"
+	 * @see #NEGATE
+	 * @model name="Negate" literal="-"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int MINUS_VALUE = 0;
+	public static final int NEGATE_VALUE = 0;
 
 	/**
 	 * The '<em><b>Logical Not</b></em>' literal value.
@@ -80,7 +78,7 @@ public enum UnaryOperator implements Enumerator {
 	 */
 	private static final UnaryOperator[] VALUES_ARRAY =
 		new UnaryOperator[] {
-			MINUS,
+			NEGATE,
 			LOGICAL_NOT,
 		};
 
@@ -132,7 +130,7 @@ public enum UnaryOperator implements Enumerator {
 	 */
 	public static UnaryOperator get(int value) {
 		switch (value) {
-			case MINUS_VALUE: return MINUS;
+			case NEGATE_VALUE: return NEGATE;
 			case LOGICAL_NOT_VALUE: return LOGICAL_NOT;
 		}
 		return null;

@@ -171,8 +171,6 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getParenthesizedExpressionAccess().getGroup_2(), "rule__ParenthesizedExpression__Group_2__0");
 					put(grammarAccess.getBeginExpressionAccess().getGroup(), "rule__BeginExpression__Group__0");
 					put(grammarAccess.getEndExpressionAccess().getGroup(), "rule__EndExpression__Group__0");
-					put(grammarAccess.getQualifiedNameAccess().getGroup(), "rule__QualifiedName__Group__0");
-					put(grammarAccess.getQualifiedNameAccess().getGroup_1(), "rule__QualifiedName__Group_1__0");
 					put(grammarAccess.getUnitAccess().getGroup(), "rule__Unit__Group__0");
 					put(grammarAccess.getUnitAccess().getGroup_1(), "rule__Unit__Group_1__0");
 					put(grammarAccess.getUnitAccess().getGroup_1_1(), "rule__Unit__Group_1_1__0");
@@ -184,6 +182,8 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getUnitFactorAccess().getGroup(), "rule__UnitFactor__Group__0");
 					put(grammarAccess.getUnitFactorAccess().getGroup_1(), "rule__UnitFactor__Group_1__0");
 					put(grammarAccess.getUnitExponentAccess().getGroup(), "rule__UnitExponent__Group__0");
+					put(grammarAccess.getQualifiedNameAccess().getGroup(), "rule__QualifiedName__Group__0");
+					put(grammarAccess.getQualifiedNameAccess().getGroup_1(), "rule__QualifiedName__Group_1__0");
 					put(grammarAccess.getModuleAccess().getDefinitionsAssignment(), "rule__Module__DefinitionsAssignment");
 					put(grammarAccess.getEnumerationDefinitionAccess().getNameAssignment_1(), "rule__EnumerationDefinition__NameAssignment_1");
 					put(grammarAccess.getEnumerationDefinitionAccess().getLiteralDeclarationsAssignment_3_0(), "rule__EnumerationDefinition__LiteralDeclarationsAssignment_3_0");
@@ -312,8 +312,6 @@ public class MscriptParser extends AbstractContentAssistParser {
 					put(grammarAccess.getUnitConstructionOperatorAccess().getUnitAssignment_2(), "rule__UnitConstructionOperator__UnitAssignment_2");
 					put(grammarAccess.getParenthesizedExpressionAccess().getExpressionsAssignment_1(), "rule__ParenthesizedExpression__ExpressionsAssignment_1");
 					put(grammarAccess.getParenthesizedExpressionAccess().getExpressionsAssignment_2_1(), "rule__ParenthesizedExpression__ExpressionsAssignment_2_1");
-					put(grammarAccess.getQualifiedNameAccess().getIdentifiersAssignment_0(), "rule__QualifiedName__IdentifiersAssignment_0");
-					put(grammarAccess.getQualifiedNameAccess().getIdentifiersAssignment_1_1(), "rule__QualifiedName__IdentifiersAssignment_1_1");
 					put(grammarAccess.getUnitAccess().getNumeratorAssignment_1_0(), "rule__Unit__NumeratorAssignment_1_0");
 					put(grammarAccess.getUnitAccess().getDenominatorAssignment_1_1_1(), "rule__Unit__DenominatorAssignment_1_1_1");
 					put(grammarAccess.getUnitNumeratorAccess().getFactorsAssignment_1_0(), "rule__UnitNumerator__FactorsAssignment_1_0");

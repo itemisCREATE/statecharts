@@ -40,7 +40,7 @@ public class UnaryExpressionImpl extends ExpressionImpl implements UnaryExpressi
 	 * @generated
 	 * @ordered
 	 */
-	protected static final UnaryOperator OPERATOR_EDEFAULT = UnaryOperator.MINUS;
+	protected static final UnaryOperator OPERATOR_EDEFAULT = UnaryOperator.NEGATE;
 
 	/**
 	 * The cached value of the '{@link #getOperator() <em>Operator</em>}' attribute.

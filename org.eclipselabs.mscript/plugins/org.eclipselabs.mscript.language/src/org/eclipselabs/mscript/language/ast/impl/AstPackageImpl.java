@@ -60,7 +60,6 @@ import org.eclipselabs.mscript.language.ast.PostfixExpression;
 import org.eclipselabs.mscript.language.ast.PostfixOperator;
 import org.eclipselabs.mscript.language.ast.PowerExpression;
 import org.eclipselabs.mscript.language.ast.PowerOperator;
-import org.eclipselabs.mscript.language.ast.QualifiedName;
 import org.eclipselabs.mscript.language.ast.RangeExpression;
 import org.eclipselabs.mscript.language.ast.RecordDefinition;
 import org.eclipselabs.mscript.language.ast.RecordFieldDeclaration;
@@ -349,13 +348,6 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 	 * @generated
 	 */
 	private EClass endExpressionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass qualifiedNameEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1534,24 +1526,6 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getQualifiedName() {
-		return qualifiedNameEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getQualifiedName_Identifiers() {
-		return (EAttribute)qualifiedNameEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getRangeExpression() {
 		return rangeExpressionEClass;
 	}
@@ -2160,9 +2134,6 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 
 		endExpressionEClass = createEClass(END_EXPRESSION);
 
-		qualifiedNameEClass = createEClass(QUALIFIED_NAME);
-		createEAttribute(qualifiedNameEClass, QUALIFIED_NAME__IDENTIFIERS);
-
 		rangeExpressionEClass = createEClass(RANGE_EXPRESSION);
 		createEReference(rangeExpressionEClass, RANGE_EXPRESSION__OPERANDS);
 
@@ -2342,7 +2313,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 
 		initEClass(functionObjectDeclarationEClass, FunctionObjectDeclaration.class, "FunctionObjectDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getFunctionObjectDeclaration_Name(), ecorePackage.getEString(), "name", null, 0, 1, FunctionObjectDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getFunctionObjectDeclaration_FunctionName(), this.getQualifiedName(), null, "functionName", null, 0, 1, FunctionObjectDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFunctionObjectDeclaration_FunctionName(), this.getFunctionDefinition(), null, "functionName", null, 0, 1, FunctionObjectDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFunctionObjectDeclaration_TemplateArguments(), theTypeSystemPackage.getExpression(), null, "templateArguments", null, 0, -1, FunctionObjectDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(equationEClass, Equation.class, "Equation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -2438,9 +2409,6 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 
 		initEClass(endExpressionEClass, EndExpression.class, "EndExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(qualifiedNameEClass, QualifiedName.class, "QualifiedName", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getQualifiedName_Identifiers(), ecorePackage.getEString(), "identifiers", null, 0, -1, QualifiedName.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
 		initEClass(rangeExpressionEClass, RangeExpression.class, "RangeExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getRangeExpression_Operands(), theTypeSystemPackage.getExpression(), null, "operands", null, 0, -1, RangeExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -2514,21 +2482,21 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 		addEEnumLiteral(relationalOperatorEEnum, RelationalOperator.GREATER_THAN_OR_EQUAL_TO);
 
 		initEEnum(additiveOperatorEEnum, AdditiveOperator.class, "AdditiveOperator");
-		addEEnumLiteral(additiveOperatorEEnum, AdditiveOperator.ADDITION);
-		addEEnumLiteral(additiveOperatorEEnum, AdditiveOperator.SUBTRACTION);
+		addEEnumLiteral(additiveOperatorEEnum, AdditiveOperator.ADD);
+		addEEnumLiteral(additiveOperatorEEnum, AdditiveOperator.SUBTRACT);
 
 		initEEnum(multiplicativeOperatorEEnum, MultiplicativeOperator.class, "MultiplicativeOperator");
-		addEEnumLiteral(multiplicativeOperatorEEnum, MultiplicativeOperator.MULTIPLICATION);
-		addEEnumLiteral(multiplicativeOperatorEEnum, MultiplicativeOperator.DIVISION);
-		addEEnumLiteral(multiplicativeOperatorEEnum, MultiplicativeOperator.ELEMENT_WISE_MULTIPLICATION);
-		addEEnumLiteral(multiplicativeOperatorEEnum, MultiplicativeOperator.ELEMENT_WISE_DIVISION);
+		addEEnumLiteral(multiplicativeOperatorEEnum, MultiplicativeOperator.MULTIPLY);
+		addEEnumLiteral(multiplicativeOperatorEEnum, MultiplicativeOperator.DIVIDE);
+		addEEnumLiteral(multiplicativeOperatorEEnum, MultiplicativeOperator.ELEMENT_WISE_MULTIPLY);
+		addEEnumLiteral(multiplicativeOperatorEEnum, MultiplicativeOperator.ELEMENT_WISE_DIVIDE);
 
 		initEEnum(powerOperatorEEnum, PowerOperator.class, "PowerOperator");
 		addEEnumLiteral(powerOperatorEEnum, PowerOperator.POWER);
 		addEEnumLiteral(powerOperatorEEnum, PowerOperator.ELEMENT_WISE_POWER);
 
 		initEEnum(unaryOperatorEEnum, UnaryOperator.class, "UnaryOperator");
-		addEEnumLiteral(unaryOperatorEEnum, UnaryOperator.MINUS);
+		addEEnumLiteral(unaryOperatorEEnum, UnaryOperator.NEGATE);
 		addEEnumLiteral(unaryOperatorEEnum, UnaryOperator.LOGICAL_NOT);
 
 		initEEnum(postfixOperatorEEnum, PostfixOperator.class, "PostfixOperator");
