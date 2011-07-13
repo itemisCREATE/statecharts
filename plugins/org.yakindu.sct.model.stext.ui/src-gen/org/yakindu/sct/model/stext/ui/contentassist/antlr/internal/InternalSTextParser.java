@@ -15243,13 +15243,13 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
             // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:5541:1: ( () )
             // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:5542:1: ()
             {
-             before(grammarAccess.getEntryEventAccess().getEnterEventAction_0()); 
+             before(grammarAccess.getEntryEventAccess().getEntryEventAction_0()); 
             // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:5543:1: ()
             // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:5545:1: 
             {
             }
 
-             after(grammarAccess.getEntryEventAccess().getEnterEventAction_0()); 
+             after(grammarAccess.getEntryEventAccess().getEntryEventAction_0()); 
 
             }
 

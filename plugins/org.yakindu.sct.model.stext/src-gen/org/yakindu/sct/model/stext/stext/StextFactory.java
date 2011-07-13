@@ -396,15 +396,6 @@ public interface StextFactory extends EFactory
   ReactionEffect createReactionEffect();
 
   /**
-   * Returns a new object of class '<em>Enter Event</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Enter Event</em>'.
-   * @generated
-   */
-  EnterEvent createEnterEvent();
-
-  /**
    * Returns a new object of class '<em>Logical Or Expression</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

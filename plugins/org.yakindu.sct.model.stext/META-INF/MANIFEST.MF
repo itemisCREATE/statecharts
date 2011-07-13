@@ -34,4 +34,3 @@ Export-Package: org.yakindu.sct.model.stext,
  org.yakindu.sct.model.stext.parser.antlr,
  org.yakindu.sct.model.stext.parser.antlr.internal,
  org.yakindu.sct.model.stext.validation
-

@@ -141,7 +141,7 @@ BuiltinEventSpec:
 	EntryEvent | ExitEvent | OnCycleEvent | AlwaysEvent;
 
 EntryEvent:
-	{EnterEvent} 'entry';
+	{EntryEvent} 'entry';
 
 ExitEvent:
 	{ExitEvent} 'exit';

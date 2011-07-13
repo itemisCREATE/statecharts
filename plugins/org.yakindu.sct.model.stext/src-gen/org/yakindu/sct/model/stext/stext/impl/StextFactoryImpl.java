@@ -110,7 +110,6 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
       case StextPackage.EXITPOINT: return createExitpoint();
       case StextPackage.REACTION_TRIGGER: return createReactionTrigger();
       case StextPackage.REACTION_EFFECT: return createReactionEffect();
-      case StextPackage.ENTER_EVENT: return createEnterEvent();
       case StextPackage.LOGICAL_OR_EXPRESSION: return createLogicalOrExpression();
       case StextPackage.LOGICAL_AND_EXPRESSION: return createLogicalAndExpression();
       case StextPackage.LOGICAL_NOT_EXPRESSION: return createLogicalNotExpression();
@@ -633,17 +632,6 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
   {
     ReactionEffectImpl reactionEffect = new ReactionEffectImpl();
     return reactionEffect;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EnterEvent createEnterEvent()
-  {
-    EnterEventImpl enterEvent = new EnterEventImpl();
-    return enterEvent;
   }
 
   /**
