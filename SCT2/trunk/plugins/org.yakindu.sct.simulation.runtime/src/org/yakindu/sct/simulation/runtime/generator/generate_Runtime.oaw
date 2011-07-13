@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<workflow>
+	<!-- src-gen point to output folder for generated code --> 
+	<property name="src-gen" value="src-gen" />
+	
+	<!-- Generator call with model-file and output-folder -->
+    <cartridge file='com/yakindu/statechart/codegenerator/java/workflow/generate_java_runtime.oaw' src-gen="${src-gen}"/>
+    
+    <component adviceTarget="runtime_generator" id="NamingAdvice" 
+    	class="org.eclipse.xpand2.GeneratorAdvice"> 
+    	<advice value="com::yakindu::statechart::runtime::generator::AbstractStatechartAdvice"/> 
+    	<advice value="com::yakindu::statechart::runtime::generator::RegionAdvice"/> 
+    	<advice value="com::yakindu::statechart::runtime::generator::NodeAdvice"/> 
+    	<advice value="com::yakindu::statechart::runtime::generator::StateAdvice"/> 
+    	<advice value="com::yakindu::statechart::runtime::generator::SimpleStateAdvice"/> 
+    	<advice value="com::yakindu::statechart::runtime::generator::CompoundStateAdvice"/> 
+    	<advice value="com::yakindu::statechart::runtime::generator::TransitionAdvice"/> 
+    	<extensionAdvice value="com::yakindu::statechart::runtime::generator::GeneratorAdvice"/> 
+   </component> 
+    
+</workflow>
