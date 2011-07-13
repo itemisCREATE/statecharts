@@ -24,6 +24,7 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Transition;
@@ -71,6 +72,7 @@ public class TransitionItemProvider
 			super.getPropertyDescriptors(object);
 
 			addTargetPropertyDescriptor(object);
+			addPriorityPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -93,6 +95,28 @@ public class TransitionItemProvider
 				 false,
 				 true,
 				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Priority feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addPriorityPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Transition_priority_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Transition_priority_feature", "_UI_Transition_type"),
+				 SGraphPackage.Literals.TRANSITION__PRIORITY,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -165,6 +189,9 @@ public class TransitionItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Transition.class)) {
+			case SGraphPackage.TRANSITION__PRIORITY:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
 			case SGraphPackage.TRANSITION__TRIGGER:
 			case SGraphPackage.TRANSITION__EFFECT:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));

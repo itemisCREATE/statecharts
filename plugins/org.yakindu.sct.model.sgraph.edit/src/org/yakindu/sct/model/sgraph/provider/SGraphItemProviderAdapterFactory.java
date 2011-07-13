@@ -200,29 +200,6 @@ public class SGraphItemProviderAdapterFactory extends SGraphAdapterFactory imple
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sgraph.Event} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected EventItemProvider eventItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.yakindu.sct.model.sgraph.Event}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createEventAdapter() {
-		if (eventItemProvider == null) {
-			eventItemProvider = new EventItemProvider(this);
-		}
-
-		return eventItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sgraph.Choice} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -464,7 +441,6 @@ public class SGraphItemProviderAdapterFactory extends SGraphAdapterFactory imple
 		if (finalStateItemProvider != null) finalStateItemProvider.dispose();
 		if (stateItemProvider != null) stateItemProvider.dispose();
 		if (junctionItemProvider != null) junctionItemProvider.dispose();
-		if (eventItemProvider != null) eventItemProvider.dispose();
 		if (choiceItemProvider != null) choiceItemProvider.dispose();
 		if (statechartItemProvider != null) statechartItemProvider.dispose();
 		if (entryItemProvider != null) entryItemProvider.dispose();

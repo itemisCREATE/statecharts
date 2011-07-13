@@ -82,15 +82,6 @@ public interface SGraphFactory extends EFactory {
 	Junction createJunction();
 
 	/**
-	 * Returns a new object of class '<em>Event</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Event</em>'.
-	 * @generated
-	 */
-	Event createEvent();
-
-	/**
 	 * Returns a new object of class '<em>Choice</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

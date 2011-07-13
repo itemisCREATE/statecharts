@@ -384,6 +384,15 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getRegion_Priority() {
+        return (EAttribute)getRegion().getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getTransition() {
 		if (transitionEClass == null) {
 			transitionEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(4);
@@ -407,6 +416,15 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 */
 	public EReference getTransition_Source() {
         return (EReference)getTransition().getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTransition_Priority() {
+        return (EAttribute)getTransition().getEStructuralFeatures().get(2);
 	}
 
 	/**

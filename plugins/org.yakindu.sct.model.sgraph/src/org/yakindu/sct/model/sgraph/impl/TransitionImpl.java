@@ -34,6 +34,7 @@ import org.yakindu.sct.model.sgraph.Vertex;
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.TransitionImpl#getEffect <em>Effect</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.TransitionImpl#getTarget <em>Target</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.TransitionImpl#getSource <em>Source</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sgraph.impl.TransitionImpl#getPriority <em>Priority</em>}</li>
  * </ul>
  * </p>
  *
@@ -76,6 +77,26 @@ public class TransitionImpl extends ExpressionElementImpl implements Transition 
 	 * @ordered
 	 */
 	protected Vertex target;
+
+	/**
+	 * The default value of the '{@link #getPriority() <em>Priority</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPriority()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int PRIORITY_EDEFAULT = 0;
+
+	/**
+	 * The cached value of the '{@link #getPriority() <em>Priority</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPriority()
+	 * @generated
+	 * @ordered
+	 */
+	protected int priority = PRIORITY_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -288,6 +309,27 @@ public class TransitionImpl extends ExpressionElementImpl implements Transition 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public int getPriority() {
+		return priority;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setPriority(int newPriority) {
+		int oldPriority = priority;
+		priority = newPriority;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SGraphPackage.TRANSITION__PRIORITY, oldPriority, priority));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -354,6 +396,8 @@ public class TransitionImpl extends ExpressionElementImpl implements Transition 
 				return basicGetTarget();
 			case SGraphPackage.TRANSITION__SOURCE:
 				return getSource();
+			case SGraphPackage.TRANSITION__PRIORITY:
+				return getPriority();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -377,6 +421,9 @@ public class TransitionImpl extends ExpressionElementImpl implements Transition 
 				return;
 			case SGraphPackage.TRANSITION__SOURCE:
 				setSource((Vertex)newValue);
+				return;
+			case SGraphPackage.TRANSITION__PRIORITY:
+				setPriority((Integer)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -402,6 +449,9 @@ public class TransitionImpl extends ExpressionElementImpl implements Transition 
 			case SGraphPackage.TRANSITION__SOURCE:
 				setSource((Vertex)null);
 				return;
+			case SGraphPackage.TRANSITION__PRIORITY:
+				setPriority(PRIORITY_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -422,6 +472,8 @@ public class TransitionImpl extends ExpressionElementImpl implements Transition 
 				return target != null;
 			case SGraphPackage.TRANSITION__SOURCE:
 				return getSource() != null;
+			case SGraphPackage.TRANSITION__PRIORITY:
+				return priority != PRIORITY_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -458,6 +510,22 @@ public class TransitionImpl extends ExpressionElementImpl implements Transition 
 			}
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (priority: ");
+		result.append(priority);
+		result.append(')');
+		return result.toString();
 	}
 
 } //TransitionImpl
