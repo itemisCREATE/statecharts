@@ -18,7 +18,7 @@ package org.yakindu.sct.model.sgraph;
  *
  *
  * @see org.yakindu.sct.model.sgraph.SGraphPackage#getEvent()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface Event extends Declaration {

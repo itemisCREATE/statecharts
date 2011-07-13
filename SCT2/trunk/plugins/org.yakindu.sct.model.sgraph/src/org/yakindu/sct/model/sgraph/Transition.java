@@ -21,6 +21,7 @@ package org.yakindu.sct.model.sgraph;
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sgraph.Transition#getTarget <em>Target</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.Transition#getSource <em>Source</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sgraph.Transition#getPriority <em>Priority</em>}</li>
  * </ul>
  * </p>
  *
@@ -91,5 +92,31 @@ public interface Transition extends ExpressionElement, Reaction {
 	 * @generated
 	 */
 	void setSource(Vertex value);
+
+	/**
+	 * Returns the value of the '<em><b>Priority</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Priority</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Priority</em>' attribute.
+	 * @see #setPriority(int)
+	 * @see org.yakindu.sct.model.sgraph.SGraphPackage#getTransition_Priority()
+	 * @model
+	 * @generated
+	 */
+	int getPriority();
+
+	/**
+	 * Sets the value of the '{@link org.yakindu.sct.model.sgraph.Transition#getPriority <em>Priority</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Priority</em>' attribute.
+	 * @see #getPriority()
+	 * @generated
+	 */
+	void setPriority(int value);
 
 } // Transition

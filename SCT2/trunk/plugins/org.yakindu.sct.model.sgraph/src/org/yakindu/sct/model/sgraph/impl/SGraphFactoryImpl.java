@@ -16,11 +16,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.yakindu.sct.model.sgraph.*;
 import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.EntryKind;
-import org.yakindu.sct.model.sgraph.Event;
 import org.yakindu.sct.model.sgraph.Exit;
 import org.yakindu.sct.model.sgraph.FinalState;
 import org.yakindu.sct.model.sgraph.Junction;
@@ -30,6 +28,7 @@ import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.model.sgraph.Synchronization;
 import org.yakindu.sct.model.sgraph.Transition;
 
 /**
@@ -88,7 +87,6 @@ public class SGraphFactoryImpl extends EFactoryImpl implements SGraphFactory {
 			case SGraphPackage.FINAL_STATE: return createFinalState();
 			case SGraphPackage.STATE: return createState();
 			case SGraphPackage.JUNCTION: return createJunction();
-			case SGraphPackage.EVENT: return createEvent();
 			case SGraphPackage.CHOICE: return createChoice();
 			case SGraphPackage.STATECHART: return createStatechart();
 			case SGraphPackage.ENTRY: return createEntry();
@@ -178,16 +176,6 @@ public class SGraphFactoryImpl extends EFactoryImpl implements SGraphFactory {
 	public Junction createJunction() {
 		JunctionImpl junction = new JunctionImpl();
 		return junction;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Event createEvent() {
-		EventImpl event = new EventImpl();
-		return event;
 	}
 
 	/**

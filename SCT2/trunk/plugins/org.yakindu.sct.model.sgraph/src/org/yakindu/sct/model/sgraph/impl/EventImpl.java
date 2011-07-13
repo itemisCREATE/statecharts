@@ -23,7 +23,7 @@ import org.yakindu.sct.model.sgraph.SGraphPackage;
  *
  * @generated
  */
-public class EventImpl extends DeclarationImpl implements Event {
+public abstract class EventImpl extends DeclarationImpl implements Event {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
