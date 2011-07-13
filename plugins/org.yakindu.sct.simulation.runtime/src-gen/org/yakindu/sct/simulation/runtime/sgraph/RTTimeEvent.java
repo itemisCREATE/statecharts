@@ -1,8 +1,8 @@
 package org.yakindu.sct.simulation.runtime.sgraph;
 
-public abstract class TimeEvent extends Event {
+public abstract class RTTimeEvent extends RTEvent {
 
-	public TimeEvent(String id) {
+	public RTTimeEvent(String id) {
 		super(id);
 	}
 

@@ -5,17 +5,17 @@ import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class DefaultTimingService implements TimingService {
+public class RTDefaultTimingService implements RTTimingService {
 
 	private final AbstractStatechart statechart;
 
-	public DefaultTimingService(AbstractStatechart statechart) {
+	public RTDefaultTimingService(AbstractStatechart statechart) {
 		this.statechart = statechart;
 	}
 
-	private Set<TimeEvent> canceledRequestedEvents = new HashSet<TimeEvent>();
+	private Set<RTTimeEvent> canceledRequestedEvents = new HashSet<RTTimeEvent>();
 
-	public void requestTimeEvent(final TimeEvent timeEvent) {
+	public void requestTimeEvent(final RTTimeEvent timeEvent) {
 
 		canceledRequestedEvents.remove(timeEvent);
 
@@ -36,7 +36,7 @@ public class DefaultTimingService implements TimingService {
 
 	}
 
-	public void cancelTimeEvent(final TimeEvent timeEvent) {
+	public void cancelTimeEvent(final RTTimeEvent timeEvent) {
 
 		canceledRequestedEvents.add(timeEvent);
 

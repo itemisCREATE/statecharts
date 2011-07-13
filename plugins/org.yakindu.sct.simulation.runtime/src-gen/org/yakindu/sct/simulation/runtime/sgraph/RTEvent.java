@@ -1,10 +1,10 @@
 package org.yakindu.sct.simulation.runtime.sgraph;
 
-public abstract class Event {
+public abstract class RTEvent {
 
 	private String id;
 
-	public Event(String id) {
+	public RTEvent(String id) {
 		this.id = id;
 	}
 

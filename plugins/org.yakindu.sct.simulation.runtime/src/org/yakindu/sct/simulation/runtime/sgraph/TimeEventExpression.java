@@ -11,10 +11,10 @@
 package org.yakindu.sct.simulation.runtime.sgraph;
 
 import org.yakindu.sct.simulation.runtime.ExecutionScope;
-import org.yakindu.sct.simulation.runtime.sgraph.TimeEvent;
+import org.yakindu.sct.simulation.runtime.sgraph.RTTimeEvent;
 import org.yakindu.sct.simulation.runtime.stext.Trigger;
 
-public class TimeEventExpression extends org.yakindu.sct.simulation.runtime.sgraph.TimeEvent {
+public class TimeEventExpression extends org.yakindu.sct.simulation.runtime.sgraph.RTTimeEvent {
 
 	protected Trigger.TimeEvent timeEvent;
 	protected ExecutionScope scope;

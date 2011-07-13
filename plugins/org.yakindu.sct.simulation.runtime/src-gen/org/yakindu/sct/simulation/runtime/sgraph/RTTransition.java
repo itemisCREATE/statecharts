@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.yakindu.sct.simulation.runtime.sgraph.Statechart;
+import org.yakindu.sct.simulation.runtime.sgraph.RTStatechart;
 
 /**
  * Representation of a transition. A transition always connects a source node to
@@ -14,26 +14,26 @@ import org.yakindu.sct.simulation.runtime.sgraph.Statechart;
  * and may be additionally guarded. In case a transition is taken, its action
  * will be executed.
  */
-public class Transition {
+public class RTTransition {
 
 	private String id;
 	private int priority;
 
-	private Guard guard;
-	private Set<SignalEvent> signalTriggers = new HashSet<SignalEvent>();
-	private TimeEvent timeTrigger;
-	private Action action;
+	private RTGuard guard;
+	private Set<RTSignalEvent> signalTriggers = new HashSet<RTSignalEvent>();
+	private RTTimeEvent timeTrigger;
+	private RTAction action;
 
-	private Node sourceNode;
-	private Node targetNode;
+	private RTNode sourceNode;
+	private RTNode targetNode;
 
-	private Region commonAncestorRegion;
-	private List<CompoundState> enclosingStatesToEnter;
-	private List<CompoundState> enclosingStatesToLeave;
+	private RTRegion commonAncestorRegion;
+	private List<RTCompoundState> enclosingStatesToEnter;
+	private List<RTCompoundState> enclosingStatesToLeave;
 
-	public Transition(String id, int priority, TimeEvent timeTrigger,
-			Set<SignalEvent> signalTriggers, Guard guard, Action action,
-			Node sourceNode, Node targetNode) {
+	public RTTransition(String id, int priority, RTTimeEvent timeTrigger,
+			Set<RTSignalEvent> signalTriggers, RTGuard guard, RTAction action,
+			RTNode sourceNode, RTNode targetNode) {
 		this.id = id;
 		this.priority = priority;
 
@@ -59,7 +59,7 @@ public class Transition {
 				commonAncestorRegion);
 	}
 
-	protected boolean isTriggeredBy(Set<Event> events) {
+	protected boolean isTriggeredBy(Set<RTEvent> events) {
 
 		return !Collections.disjoint(this.signalTriggers, events)
 				|| (timeTrigger != null && events.contains(timeTrigger));
@@ -82,7 +82,7 @@ public class Transition {
 		}
 	}
 
-	public TimeEvent getTimeTrigger() {
+	public RTTimeEvent getTimeTrigger() {
 		return timeTrigger;
 	}
 
@@ -94,12 +94,12 @@ public class Transition {
 
 		// leave all enclosing states from the souceNode's container up to
 		// the common ancestor region
-		for (CompoundState state : enclosingStatesToLeave) {
+		for (RTCompoundState state : enclosingStatesToLeave) {
 			state.shallowLeave();
 		}
 		sourceNode.leave();
 
-		((Statechart) commonAncestorRegion.getStatechart())
+		((RTStatechart) commonAncestorRegion.getStatechart())
 				.transitionFired(this);
 
 		if (action != null) {
@@ -108,21 +108,21 @@ public class Transition {
 
 		// enter all enclosing states from the common ancestor region to the
 		// targetNode's container
-		for (CompoundState state : enclosingStatesToEnter) {
+		for (RTCompoundState state : enclosingStatesToEnter) {
 			state.shallowEnter();
 		}
 		targetNode.enter();
 
 	}
 
-	private List<CompoundState> getEnclosingStatesToEnter(Node targetNode,
-			Region commonAncestorRegion) {
+	private List<RTCompoundState> getEnclosingStatesToEnter(RTNode targetNode,
+			RTRegion commonAncestorRegion) {
 
 		// compute all enclosing state that have to be entered
-		List<CompoundState> enclosingStatesToEnter = new ArrayList<CompoundState>();
-		Region targetRegion = targetNode.getOwningRegion();
+		List<RTCompoundState> enclosingStatesToEnter = new ArrayList<RTCompoundState>();
+		RTRegion targetRegion = targetNode.getOwningRegion();
 		while (targetRegion != commonAncestorRegion) {
-			CompoundState state = targetRegion.getOwningState();
+			RTCompoundState state = targetRegion.getOwningState();
 			enclosingStatesToEnter.add(state);
 			targetRegion = state.getOwningRegion();
 
@@ -133,14 +133,14 @@ public class Transition {
 
 	}
 
-	private List<CompoundState> getEnclosingStatesToLeave(Node sourceNode,
-			Region commonAncestorRegion) {
+	private List<RTCompoundState> getEnclosingStatesToLeave(RTNode sourceNode,
+			RTRegion commonAncestorRegion) {
 
 		// compute all enclosing compound states up to the ancestor region
-		List<CompoundState> enclosingStatesToLeave = new ArrayList<CompoundState>();
-		Region sourceRegion = sourceNode.getOwningRegion();
+		List<RTCompoundState> enclosingStatesToLeave = new ArrayList<RTCompoundState>();
+		RTRegion sourceRegion = sourceNode.getOwningRegion();
 		while (sourceRegion != commonAncestorRegion) {
-			CompoundState state = sourceRegion.getOwningState();
+			RTCompoundState state = sourceRegion.getOwningState();
 			enclosingStatesToLeave.add(state);
 			sourceRegion = state.getOwningRegion();
 		}
@@ -148,8 +148,8 @@ public class Transition {
 
 	}
 
-	private Region getCommonAncestorRegion(Node sourceNode, Node targetNode) {
-		Region candidate = sourceNode.getOwningRegion();
+	private RTRegion getCommonAncestorRegion(RTNode sourceNode, RTNode targetNode) {
+		RTRegion candidate = sourceNode.getOwningRegion();
 		while (candidate != null
 				&& !isRegionAncestorOfNode(candidate, targetNode)) {
 			candidate = candidate.getOwningState() != null ? candidate
@@ -158,7 +158,7 @@ public class Transition {
 		return candidate;
 	}
 
-	private boolean isRegionAncestorOfNode(Region region, Node node) {
+	private boolean isRegionAncestorOfNode(RTRegion region, RTNode node) {
 		if (node.getOwningRegion() == region) {
 			return true;
 		} else {
@@ -171,23 +171,23 @@ public class Transition {
 		}
 	}
 
-	public Node getSourceNode() {
+	public RTNode getSourceNode() {
 		return sourceNode;
 	}
 
-	public Node getTargetNode() {
+	public RTNode getTargetNode() {
 		return targetNode;
 	}
 
-	public Guard getGuard() {
+	public RTGuard getGuard() {
 		return guard;
 	}
 
-	public Action getAction() {
+	public RTAction getAction() {
 		return action;
 	}
 
-	public Set<SignalEvent> getSignalTriggers() {
+	public Set<RTSignalEvent> getSignalTriggers() {
 		return signalTriggers;
 	}
 
