@@ -166,7 +166,6 @@
         eType="ecore:EClass platform:/resource/org.yakindu.sct.model.stext/src-gen/org/yakindu/sct/model/stext/SText.ecore#//Statement"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EnterEvent" eSuperTypes="platform:/resource/org.yakindu.sct.model.stext/src-gen/org/yakindu/sct/model/stext/SText.ecore#//EntryEvent"/>
   <eClassifiers xsi:type="ecore:EClass" name="LogicalOrExpression" eSuperTypes="platform:/resource/org.yakindu.sct.model.stext/src-gen/org/yakindu/sct/model/stext/SText.ecore#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="ecore:EClass platform:/resource/org.yakindu.sct.model.stext/src-gen/org/yakindu/sct/model/stext/SText.ecore#//Expression"
         containment="true"/>

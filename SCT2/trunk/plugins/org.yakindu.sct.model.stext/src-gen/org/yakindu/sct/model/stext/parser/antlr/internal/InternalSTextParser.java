@@ -5362,7 +5362,7 @@ public class InternalSTextParser extends AbstractInternalAntlrParser {
             {
 
                     current = forceCreateModelElement(
-                        grammarAccess.getEntryEventAccess().getEnterEventAction_0(),
+                        grammarAccess.getEntryEventAccess().getEntryEventAction_0(),
                         current);
                 
 

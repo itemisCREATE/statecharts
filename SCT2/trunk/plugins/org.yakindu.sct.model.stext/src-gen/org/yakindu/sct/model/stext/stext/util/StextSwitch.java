@@ -415,16 +415,6 @@ public class StextSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case StextPackage.ENTER_EVENT:
-      {
-        EnterEvent enterEvent = (EnterEvent)theEObject;
-        T result = caseEnterEvent(enterEvent);
-        if (result == null) result = caseEntryEvent(enterEvent);
-        if (result == null) result = caseBuiltinEventSpec(enterEvent);
-        if (result == null) result = caseEventSpec(enterEvent);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case StextPackage.LOGICAL_OR_EXPRESSION:
       {
         LogicalOrExpression logicalOrExpression = (LogicalOrExpression)theEObject;
@@ -1161,22 +1151,6 @@ public class StextSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseReactionEffect(ReactionEffect object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Enter Event</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Enter Event</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseEnterEvent(EnterEvent object)
   {
     return null;
   }

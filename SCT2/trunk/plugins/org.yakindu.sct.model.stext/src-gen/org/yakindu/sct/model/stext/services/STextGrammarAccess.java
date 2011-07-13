@@ -1165,18 +1165,18 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	public class EntryEventElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EntryEvent");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cEnterEventAction_0 = (Action)cGroup.eContents().get(0);
+		private final Action cEntryEventAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cEntryKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
 		//EntryEvent:
-		//	{EnterEvent} "entry";
+		//	{EntryEvent} "entry";
 		public ParserRule getRule() { return rule; }
 
-		//{EnterEvent} "entry"
+		//{EntryEvent} "entry"
 		public Group getGroup() { return cGroup; }
 
-		//{EnterEvent}
-		public Action getEnterEventAction_0() { return cEnterEventAction_0; }
+		//{EntryEvent}
+		public Action getEntryEventAction_0() { return cEntryEventAction_0; }
 
 		//"entry"
 		public Keyword getEntryKeyword_1() { return cEntryKeyword_1; }
@@ -2599,7 +2599,7 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//EntryEvent:
-	//	{EnterEvent} "entry";
+	//	{EntryEvent} "entry";
 	public EntryEventElements getEntryEventAccess() {
 		return (pEntryEvent != null) ? pEntryEvent : (pEntryEvent = new EntryEventElements());
 	}

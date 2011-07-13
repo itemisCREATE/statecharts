@@ -5539,11 +5539,11 @@ rule__EntryEvent__Group__0__Impl
     }
 :
 (
-{ before(grammarAccess.getEntryEventAccess().getEnterEventAction_0()); }
+{ before(grammarAccess.getEntryEventAccess().getEntryEventAction_0()); }
 (
 
 )
-{ after(grammarAccess.getEntryEventAccess().getEnterEventAction_0()); }
+{ after(grammarAccess.getEntryEventAccess().getEntryEventAction_0()); }
 )
 
 ;
