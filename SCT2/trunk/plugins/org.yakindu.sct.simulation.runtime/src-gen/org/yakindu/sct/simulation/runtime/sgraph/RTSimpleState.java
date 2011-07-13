@@ -7,17 +7,17 @@ import java.util.Set;
  * specify a do action, which is executed when the statechart resides "in" this
  * state.
  */
-public class SimpleState extends State {
+public class RTSimpleState extends RTState {
 
-	private Action doAction;
+	private RTAction doAction;
 
-	public SimpleState(String id, String name, Region owningRegion,
-			Action entryAction, Action doAction, Action exitAction) {
+	public RTSimpleState(String id, String name, RTRegion owningRegion,
+			RTAction entryAction, RTAction doAction, RTAction exitAction) {
 		super(id, name, owningRegion, entryAction, exitAction);
 		this.doAction = doAction;
 	}
 
-	protected void reactLocallyOn(Set<Event> events) {
+	protected void reactLocallyOn(Set<RTEvent> events) {
 
 		if (doAction != null) {
 			doAction.execute();
@@ -25,7 +25,7 @@ public class SimpleState extends State {
 
 	}
 
-	public Action getDoAction() {
+	public RTAction getDoAction() {
 		return doAction;
 	}
 

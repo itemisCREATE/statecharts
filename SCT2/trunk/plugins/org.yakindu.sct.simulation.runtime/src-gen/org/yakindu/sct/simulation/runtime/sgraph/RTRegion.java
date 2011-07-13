@@ -3,25 +3,25 @@ package org.yakindu.sct.simulation.runtime.sgraph;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Region {
+public class RTRegion {
 
 	private String id;
 	private int priority;
 	private AbstractStatechart owningStatechart;
-	private CompoundState owningState;
+	private RTCompoundState owningState;
 
-	private Set<Node> nodes = new HashSet<Node>();
+	private Set<RTNode> nodes = new HashSet<RTNode>();
 
-	protected State currentState;
+	protected RTState currentState;
 
-	public Region(String id, int priority, AbstractStatechart owner) {
+	public RTRegion(String id, int priority, AbstractStatechart owner) {
 		this.id = id;
 		this.priority = priority;
 		this.owningStatechart = owner;
 		this.owningStatechart.getRegions().add(this);
 	}
 
-	public Region(String id, int priority, CompoundState owner) {
+	public RTRegion(String id, int priority, RTCompoundState owner) {
 		this.id = id;
 		this.priority = priority;
 		this.owningState = owner;
@@ -49,7 +49,7 @@ public class Region {
 		}
 	}
 
-	protected CompoundState getOwningState() {
+	protected RTCompoundState getOwningState() {
 		return owningState;
 	}
 
@@ -57,25 +57,25 @@ public class Region {
 		return owningStatechart;
 	}
 
-	public Set<Node> getNodes() {
+	public Set<RTNode> getNodes() {
 		return nodes;
 	}
 
-	private Node getInitialNode() {
-		for (Node node : nodes) {
-			if (node instanceof Pseudostate
-					&& ((Pseudostate) node).getKind() == PseudostateKind.INITIAL) {
+	private RTNode getInitialNode() {
+		for (RTNode node : nodes) {
+			if (node instanceof RTPseudostate
+					&& ((RTPseudostate) node).getKind() == PseudostateKind.INITIAL) {
 				return node;
 			}
 		}
 		throw new IllegalStateException("No initial state present");
 	}
 
-	protected void setCurrentState(State state) {
+	protected void setCurrentState(RTState state) {
 		this.currentState = state;
 	}
 
-	public State getCurrentState() {
+	public RTState getCurrentState() {
 		return currentState;
 	}
 
@@ -91,7 +91,7 @@ public class Region {
 
 	}
 
-	protected void reactOn(Set<Event> events) {
+	protected void reactOn(Set<RTEvent> events) {
 
 		currentState.reactOn(events);
 

@@ -8,13 +8,13 @@ import java.util.Set;
 
 public abstract class AbstractStatechart {
 
-	protected Set<Event> raisedEvents = new HashSet<Event>();
+	protected Set<RTEvent> raisedEvents = new HashSet<RTEvent>();
 
 	// ------------------------------------------------------------------------
 	// (EXTERNAL) EVENT-INTERFACE IMPLEMENTATION
 	// ------------------------------------------------------------------------
 
-	public void setEvent(Event event) {
+	public void setEvent(RTEvent event) {
 
 		synchronized (raisedEvents) {
 			raisedEvents.add(event);
@@ -26,11 +26,11 @@ public abstract class AbstractStatechart {
 	// (INTERNAL) TIMING-SERVICE-INTERFACE IMPLEMENTATION
 	// ------------------------------------------------------------------------
 
-	protected void requestTimeEvent(TimeEvent event) {
+	protected void requestTimeEvent(RTTimeEvent event) {
 		timingService.requestTimeEvent(event);
 	}
 
-	protected void cancelTimeEvent(TimeEvent event) {
+	protected void cancelTimeEvent(RTTimeEvent event) {
 		timingService.cancelTimeEvent(event);
 	}
 
@@ -41,7 +41,7 @@ public abstract class AbstractStatechart {
 	public void enter() {
 
 		// enter all nested regions (in the order of their priority)
-		for (Region region : regions) {
+		for (RTRegion region : regions) {
 			region.enter();
 		}
 
@@ -49,7 +49,7 @@ public abstract class AbstractStatechart {
 
 	public void runCycle() {
 
-		Set<Event> currentEvents = new HashSet<Event>();
+		Set<RTEvent> currentEvents = new HashSet<RTEvent>();
 		synchronized (raisedEvents) {
 			currentEvents.addAll(raisedEvents);
 			raisedEvents.clear();
@@ -61,7 +61,7 @@ public abstract class AbstractStatechart {
 	public void leave() {
 
 		// leave all nested regions (in the reverse order of their priority)
-		for (ListIterator<Region> iterator = regions.listIterator(regions
+		for (ListIterator<RTRegion> iterator = regions.listIterator(regions
 				.size()); iterator.hasPrevious();) {
 			iterator.previous().leave();
 		}
@@ -77,28 +77,28 @@ public abstract class AbstractStatechart {
 
 	// the nested regions of this state, sorted by priority
 
-	private List<Region> regions = new ArrayList<Region>();
+	private List<RTRegion> regions = new ArrayList<RTRegion>();
 
-	private List<Transition> transitions = new ArrayList<Transition>();
+	private List<RTTransition> transitions = new ArrayList<RTTransition>();
 
 	// used to request time events from environment
-	protected TimingService timingService = null;
+	protected RTTimingService timingService = null;
 
 	protected AbstractStatechart(String id) {
 		this.id = id;
-		this.timingService = new DefaultTimingService(this);
+		this.timingService = new RTDefaultTimingService(this);
 	}
 
-	protected AbstractStatechart(String id, TimingService timingService) {
+	protected AbstractStatechart(String id, RTTimingService timingService) {
 		this.id = id;
 		this.timingService = timingService;
 	}
 
-	public List<Region> getRegions() {
+	public List<RTRegion> getRegions() {
 		return regions;
 	}
 
-	protected List<Transition> getTransitions() {
+	protected List<RTTransition> getTransitions() {
 
 		return transitions;
 
@@ -108,13 +108,18 @@ public abstract class AbstractStatechart {
 	// INTERNAL STATECHART BEHAVIOUR
 	// ------------------------------------------------------------------------
 
-	private void reactOn(Set<Event> events) {
+	private void reactOn(Set<RTEvent> events) {
 
 		// pass events to our nested regions (in the order of their priority)
-		for (Region region : regions) {
+		for (RTRegion region : regions) {
 			region.reactOn(events);
 		}
-
 	}
+
+	public String getId() {
+		return id;
+	}
+	
+	
 
 }

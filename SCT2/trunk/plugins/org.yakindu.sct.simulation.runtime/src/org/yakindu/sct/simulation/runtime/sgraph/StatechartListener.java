@@ -10,13 +10,13 @@
  */
 package org.yakindu.sct.simulation.runtime.sgraph;
 
-import org.yakindu.sct.simulation.runtime.sgraph.State;
-import org.yakindu.sct.simulation.runtime.sgraph.Transition;
+import org.yakindu.sct.simulation.runtime.sgraph.RTState;
+import org.yakindu.sct.simulation.runtime.sgraph.RTTransition;
 
 public interface StatechartListener {
 	
-	void stateEntered(State state);
-	void stateLeft(State state);
-	void transitionFired(Transition trans);
+	void stateEntered(RTState state);
+	void stateLeft(RTState state);
+	void transitionFired(RTTransition trans);
 
 }

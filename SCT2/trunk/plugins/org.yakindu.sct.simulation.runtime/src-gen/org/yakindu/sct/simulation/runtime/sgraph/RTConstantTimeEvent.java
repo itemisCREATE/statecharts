@@ -1,9 +1,9 @@
 package org.yakindu.sct.simulation.runtime.sgraph;
 
-public class ConstantTimeEvent extends TimeEvent {
+public class RTConstantTimeEvent extends RTTimeEvent {
 	private long duration = -1;
 
-	public ConstantTimeEvent(String id, long duration) {
+	public RTConstantTimeEvent(String id, long duration) {
 		super(id);
 		this.duration = duration;
 	}

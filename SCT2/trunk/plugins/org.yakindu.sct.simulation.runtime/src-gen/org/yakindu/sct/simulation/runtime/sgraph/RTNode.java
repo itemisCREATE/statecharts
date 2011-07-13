@@ -9,15 +9,15 @@ import java.util.List;
  * statechart may only reside "in" states, pseudostates will normally directly
  * trigger an outgoing transition when being entered.
  */
-public abstract class Node {
+public abstract class RTNode {
 
 	private String id;
-	protected Region owningRegion;
+	protected RTRegion owningRegion;
 
-	protected List<Transition> incomingTransitions = new ArrayList<Transition>();
-	protected List<Transition> outgoingTransitions = new ArrayList<Transition>();
+	protected List<RTTransition> incomingTransitions = new ArrayList<RTTransition>();
+	protected List<RTTransition> outgoingTransitions = new ArrayList<RTTransition>();
 
-	public Node(String id, Region owner) {
+	public RTNode(String id, RTRegion owner) {
 		this.id = id;
 		this.owningRegion = owner;
 		this.owningRegion.getNodes().add(this);
@@ -27,21 +27,21 @@ public abstract class Node {
 		return id;
 	}
 
-	protected Region getOwningRegion() {
+	protected RTRegion getOwningRegion() {
 		return owningRegion;
 	}
 
-	public List<Transition> getIncomingTransitions() {
+	public List<RTTransition> getIncomingTransitions() {
 		return incomingTransitions;
 	}
 
-	public List<Transition> getOutgoingTransitions() {
+	public List<RTTransition> getOutgoingTransitions() {
 		return outgoingTransitions;
 	}
 
-	protected Transition getEnabledOutgoingTransitionOfHighestPriority() {
+	protected RTTransition getEnabledOutgoingTransitionOfHighestPriority() {
 
-		for (Transition transition : outgoingTransitions) {
+		for (RTTransition transition : outgoingTransitions) {
 			if (transition.isEnabled()) {
 				return transition;
 			}

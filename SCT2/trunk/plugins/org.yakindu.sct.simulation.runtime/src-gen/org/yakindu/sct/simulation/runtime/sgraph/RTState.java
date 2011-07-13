@@ -2,7 +2,7 @@ package org.yakindu.sct.simulation.runtime.sgraph;
 
 import java.util.Set;
 
-import org.yakindu.sct.simulation.runtime.sgraph.Statechart;
+import org.yakindu.sct.simulation.runtime.sgraph.RTStatechart;
 
 /**
  * Representation of a state (i.e. abstract base class for CompoundState, SimpleState,
@@ -12,14 +12,14 @@ import org.yakindu.sct.simulation.runtime.sgraph.Statechart;
  * When being entered or left, a state may execute an Action, i.e. its entry or exit action 
  * respectively.
  */
-public abstract class State extends Node {
+public abstract class RTState extends RTNode {
 
-	private Action entryAction;
-	private Action exitAction;
+	private RTAction entryAction;
+	private RTAction exitAction;
 	private String name;
 
-	public State(String id, String name, Region owningRegion,
-			Action entryAction, Action exitAction) {
+	public RTState(String id, String name, RTRegion owningRegion,
+			RTAction entryAction, RTAction exitAction) {
 		super(id, owningRegion);
 		this.name = name;
 		this.entryAction = entryAction;
@@ -39,7 +39,7 @@ public abstract class State extends Node {
 		owningRegion.setCurrentState(this);
 
 		// see if we have transitions that are time-triggered
-		for (Transition transition : outgoingTransitions) {
+		for (RTTransition transition : outgoingTransitions) {
 			if (transition.isTimeTriggered()) {
 				// register timer with timing service
 				getStatechart().requestTimeEvent(transition.getTimeTrigger());
@@ -51,7 +51,7 @@ public abstract class State extends Node {
 			entryAction.execute();
 		}
 
-		((Statechart) getStatechart()).stateEntered(this);
+		((RTStatechart) getStatechart()).stateEntered(this);
 
 	}
 
@@ -61,9 +61,9 @@ public abstract class State extends Node {
 
 	}
 
-	protected void reactOn(Set<Event> events) {
+	protected void reactOn(Set<RTEvent> events) {
 
-		Transition transition = getEnabledOutgoingTransitionOfHighestPriority(events);
+		RTTransition transition = getEnabledOutgoingTransitionOfHighestPriority(events);
 		if (transition != null) {
 			// if there is an enabled transition, take it
 			transition.take();
@@ -75,10 +75,10 @@ public abstract class State extends Node {
 
 	}
 
-	private Transition getEnabledOutgoingTransitionOfHighestPriority(
-			Set<Event> events) {
+	private RTTransition getEnabledOutgoingTransitionOfHighestPriority(
+			Set<RTEvent> events) {
 
-		for (Transition transition : outgoingTransitions /* sorted by priority */) {
+		for (RTTransition transition : outgoingTransitions /* sorted by priority */) {
 			if (transition.isTriggeredBy(events) && transition.isEnabled()) {
 				return transition;
 			}
@@ -87,12 +87,12 @@ public abstract class State extends Node {
 
 	}
 
-	protected abstract void reactLocallyOn(Set<Event> events);
+	protected abstract void reactLocallyOn(Set<RTEvent> events);
 
 	protected void leave() {
 
 		// see if we have transitions that are time-triggered
-		for (Transition transition : outgoingTransitions) {
+		for (RTTransition transition : outgoingTransitions) {
 			if (transition.isTimeTriggered()) {
 				// cancel all time events that could have been requested
 				getStatechart().cancelTimeEvent(transition.getTimeTrigger());
@@ -103,15 +103,15 @@ public abstract class State extends Node {
 			exitAction.execute();
 		}
 
-		((Statechart) getStatechart()).stateLeft(this);
+		((RTStatechart) getStatechart()).stateLeft(this);
 
 	}
 
-	public Action getEntryAction() {
+	public RTAction getEntryAction() {
 		return entryAction;
 	}
 
-	public Action getExitAction() {
+	public RTAction getExitAction() {
 		return exitAction;
 	}
 

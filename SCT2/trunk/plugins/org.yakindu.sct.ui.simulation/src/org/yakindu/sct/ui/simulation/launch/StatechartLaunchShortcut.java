@@ -24,8 +24,8 @@ import org.eclipse.debug.ui.ILaunchShortcut;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IEditorPart;
-import org.yakindu.sct.core.simulation.launch.IStatechartLaunchConfigurationType;
-import org.yakindu.sct.core.simulation.launch.IStatechartLaunchParameters;
+import org.yakindu.sct.simulation.core.launch.IStatechartLaunchConfigurationType;
+import org.yakindu.sct.simulation.core.launch.IStatechartLaunchParameters;
 
 /**
  * 

@@ -3,11 +3,11 @@ package org.yakindu.sct.simulation.runtime.sgraph;
 /**
  * Representation of a Pseudostate.
  */
-public class Pseudostate extends Node {
+public class RTPseudostate extends RTNode {
 
 	PseudostateKind kind;
 
-	public Pseudostate(String id, Region owningRegion, PseudostateKind kind) {
+	public RTPseudostate(String id, RTRegion owningRegion, PseudostateKind kind) {
 		super(id, owningRegion);
 		this.kind = kind;
 	}

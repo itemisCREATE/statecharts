@@ -11,11 +11,11 @@
 package org.yakindu.sct.simulation.runtime.sgraph;
 
 import org.yakindu.sct.simulation.runtime.ExecutionScope;
-import org.yakindu.sct.simulation.runtime.sgraph.Guard;
+import org.yakindu.sct.simulation.runtime.sgraph.RTGuard;
 import org.yakindu.sct.simulation.runtime.stext.Expression;
 
 
-public class GuardExpression extends Guard {
+public class GuardExpression extends RTGuard {
 
 	private Expression expression;
 	private ExecutionScope scope;

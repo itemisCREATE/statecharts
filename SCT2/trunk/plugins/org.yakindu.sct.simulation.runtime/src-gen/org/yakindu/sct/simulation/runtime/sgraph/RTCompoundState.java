@@ -12,17 +12,17 @@ import java.util.Set;
  * based on their priorities). As a composite state always is "in" its
  * sub-states, it may itself not contain a do action.
  */
-public class CompoundState extends State {
+public class RTCompoundState extends RTState {
 
 	// the nested regions of this state, sorted by priority
-	private List<Region> regions = new ArrayList<Region>();
+	private List<RTRegion> regions = new ArrayList<RTRegion>();
 
-	public CompoundState(String id, String name, Region container,
-			Action entryAction, Action exitAction) {
+	public RTCompoundState(String id, String name, RTRegion container,
+			RTAction entryAction, RTAction exitAction) {
 		super(id, name, container, entryAction, exitAction);
 	}
 
-	public List<Region> getRegions() {
+	public List<RTRegion> getRegions() {
 		return regions;
 	}
 
@@ -30,7 +30,7 @@ public class CompoundState extends State {
 
 		shallowEnter();
 		// now enter all nested regions (in the order of their priority)
-		for (Region region : regions) {
+		for (RTRegion region : regions) {
 			region.enter();
 		}
 
@@ -47,7 +47,7 @@ public class CompoundState extends State {
 
 		shallowEnter();
 		// let the nested regions re-enter their former states
-		for (Region region : regions) {
+		for (RTRegion region : regions) {
 			// if we have are in DEEP history mode, notify our nested regions 
 			// to reenter into their former states as well
 			if (history == HistoryMode.DEEP) {
@@ -59,11 +59,11 @@ public class CompoundState extends State {
 
 	}
 
-	protected void reactLocallyOn(Set<Event> events) {
+	protected void reactLocallyOn(Set<RTEvent> events) {
 		// as a compound state does not locally react on events (it may not
 		// specify a do action), forward to the nested regions (in the order of
 		// their priority)
-		for (Region region : regions) {
+		for (RTRegion region : regions) {
 			region.reactOn(events);
 		}
 	}
@@ -71,7 +71,7 @@ public class CompoundState extends State {
 	protected void leave() {
 
 		// leave all nested regions (in the reverse order of their priority)
-		for (ListIterator<Region> iterator = regions.listIterator(regions
+		for (ListIterator<RTRegion> iterator = regions.listIterator(regions
 				.size()); iterator.hasPrevious();) {
 			iterator.previous().leave();
 		}
