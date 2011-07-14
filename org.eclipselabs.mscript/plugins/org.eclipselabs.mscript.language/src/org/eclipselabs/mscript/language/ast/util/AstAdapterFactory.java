@@ -20,6 +20,10 @@ import org.eclipselabs.mscript.language.ast.ArraySubscript;
 import org.eclipselabs.mscript.language.ast.Assertion;
 import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.BeginExpression;
+import org.eclipselabs.mscript.language.ast.BuiltinDefinition;
+import org.eclipselabs.mscript.language.ast.BuiltinFunction;
+import org.eclipselabs.mscript.language.ast.BuiltinVariable;
+import org.eclipselabs.mscript.language.ast.CallableElement;
 import org.eclipselabs.mscript.language.ast.DataTypeDefinition;
 import org.eclipselabs.mscript.language.ast.DataTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.Definition;
@@ -40,6 +44,7 @@ import org.eclipselabs.mscript.language.ast.IterationCall;
 import org.eclipselabs.mscript.language.ast.IterationVariable;
 import org.eclipselabs.mscript.language.ast.LetExpression;
 import org.eclipselabs.mscript.language.ast.LetExpressionVariableDeclaration;
+import org.eclipselabs.mscript.language.ast.LetExpressionVariableDeclarationPart;
 import org.eclipselabs.mscript.language.ast.LogicalAndExpression;
 import org.eclipselabs.mscript.language.ast.LogicalOrExpression;
 import org.eclipselabs.mscript.language.ast.Module;
@@ -55,7 +60,6 @@ import org.eclipselabs.mscript.language.ast.RangeExpression;
 import org.eclipselabs.mscript.language.ast.RecordDefinition;
 import org.eclipselabs.mscript.language.ast.RecordFieldDeclaration;
 import org.eclipselabs.mscript.language.ast.RelationalExpression;
-import org.eclipselabs.mscript.language.ast.SimpleName;
 import org.eclipselabs.mscript.language.ast.StateVariableDeclaration;
 import org.eclipselabs.mscript.language.ast.SwitchCase;
 import org.eclipselabs.mscript.language.ast.SwitchExpression;
@@ -158,6 +162,10 @@ public class AstAdapterFactory extends AdapterFactoryImpl {
 				return createFunctionDefinitionAdapter();
 			}
 			@Override
+			public Adapter caseCallableElement(CallableElement object) {
+				return createCallableElementAdapter();
+			}
+			@Override
 			public Adapter caseParameterDeclaration(ParameterDeclaration object) {
 				return createParameterDeclarationAdapter();
 			}
@@ -188,6 +196,10 @@ public class AstAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseLetExpressionVariableDeclaration(LetExpressionVariableDeclaration object) {
 				return createLetExpressionVariableDeclarationAdapter();
+			}
+			@Override
+			public Adapter caseLetExpressionVariableDeclarationPart(LetExpressionVariableDeclarationPart object) {
+				return createLetExpressionVariableDeclarationPartAdapter();
 			}
 			@Override
 			public Adapter caseIfExpression(IfExpression object) {
@@ -322,12 +334,20 @@ public class AstAdapterFactory extends AdapterFactoryImpl {
 				return createPostfixExpressionAdapter();
 			}
 			@Override
-			public Adapter caseSimpleName(SimpleName object) {
-				return createSimpleNameAdapter();
-			}
-			@Override
 			public Adapter caseFeatureCall(FeatureCall object) {
 				return createFeatureCallAdapter();
+			}
+			@Override
+			public Adapter caseBuiltinDefinition(BuiltinDefinition object) {
+				return createBuiltinDefinitionAdapter();
+			}
+			@Override
+			public Adapter caseBuiltinFunction(BuiltinFunction object) {
+				return createBuiltinFunctionAdapter();
+			}
+			@Override
+			public Adapter caseBuiltinVariable(BuiltinVariable object) {
+				return createBuiltinVariableAdapter();
 			}
 			@Override
 			public Adapter caseExpression(Expression object) {
@@ -480,6 +500,20 @@ public class AstAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.CallableElement <em>Callable Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipselabs.mscript.language.ast.CallableElement
+	 * @generated
+	 */
+	public Adapter createCallableElementAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.ParameterDeclaration <em>Parameter Declaration</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -602,6 +636,20 @@ public class AstAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createLetExpressionVariableDeclarationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.LetExpressionVariableDeclarationPart <em>Let Expression Variable Declaration Part</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipselabs.mscript.language.ast.LetExpressionVariableDeclarationPart
+	 * @generated
+	 */
+	public Adapter createLetExpressionVariableDeclarationPartAdapter() {
 		return null;
 	}
 
@@ -1068,20 +1116,6 @@ public class AstAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.SimpleName <em>Simple Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipselabs.mscript.language.ast.SimpleName
-	 * @generated
-	 */
-	public Adapter createSimpleNameAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.FeatureCall <em>Feature Call</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -1092,6 +1126,48 @@ public class AstAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createFeatureCallAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.BuiltinDefinition <em>Builtin Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipselabs.mscript.language.ast.BuiltinDefinition
+	 * @generated
+	 */
+	public Adapter createBuiltinDefinitionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.BuiltinFunction <em>Builtin Function</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipselabs.mscript.language.ast.BuiltinFunction
+	 * @generated
+	 */
+	public Adapter createBuiltinFunctionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipselabs.mscript.language.ast.BuiltinVariable <em>Builtin Variable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipselabs.mscript.language.ast.BuiltinVariable
+	 * @generated
+	 */
+	public Adapter createBuiltinVariableAdapter() {
 		return null;
 	}
 

@@ -3,15 +3,62 @@
  */
 package org.eclipselabs.mscript.language.scoping;
 
-import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
+import java.util.ArrayList;
+import java.util.List;
 
-/**
- * This class contains custom scoping description.
- * 
- * see : http://www.eclipse.org/Xtext/documentation/latest/xtext.html#scoping
- * on how and when to use it 
- *
- */
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.Scopes;
+import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
+import org.eclipselabs.mscript.language.ast.FeatureCall;
+import org.eclipselabs.mscript.language.ast.FunctionDefinition;
+import org.eclipselabs.mscript.language.ast.IterationCall;
+import org.eclipselabs.mscript.language.ast.LetExpression;
+import org.eclipselabs.mscript.language.ast.LetExpressionVariableDeclaration;
+import org.eclipselabs.mscript.language.ast.LetExpressionVariableDeclarationPart;
+import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
+import org.eclipselabs.mscript.language.ast.StateVariableDeclaration;
+
 public class MscriptScopeProvider extends AbstractDeclarativeScopeProvider {
 
+	public IScope scope_FeatureCall_target(FeatureCall context, EReference reference) {
+		List<EObject> elements = new ArrayList<EObject>();
+		
+		EObject container = context.eContainer();
+		while (container != null) {
+			if (container instanceof LetExpression) {
+				LetExpression letExpression = (LetExpression) container;
+				for (LetExpressionVariableDeclaration variableDeclaration : letExpression.getVariableDeclarations()) {
+					for (LetExpressionVariableDeclarationPart part : variableDeclaration.getParts()) {
+						elements.add(part);
+					}
+				}
+			} else if (container instanceof IterationCall) {
+				IterationCall iterationCall = (IterationCall) container;
+				elements.addAll(iterationCall.getVariables());
+			} else if (container instanceof FunctionDefinition) {
+				FunctionDefinition functionDefinition = (FunctionDefinition) container;
+
+				for (StateVariableDeclaration stateVariableDeclaration : functionDefinition.getStateVariableDeclarations()) {
+					elements.add(stateVariableDeclaration);
+				}
+
+				elements.add(functionDefinition);
+				for (ParameterDeclaration parameterDeclaration : functionDefinition.getTemplateParameterDeclarations()) {
+					elements.add(parameterDeclaration);
+				}
+				for (ParameterDeclaration parameterDeclaration : functionDefinition.getInputParameterDeclarations()) {
+					elements.add(parameterDeclaration);
+				}
+				for (ParameterDeclaration parameterDeclaration : functionDefinition.getOutputParameterDeclarations()) {
+					elements.add(parameterDeclaration);
+				}
+			}
+			container = container.eContainer();
+		}
+		
+		return Scopes.scopeFor(elements, getDelegate().getScope(context, reference));
+	}
+	
 }

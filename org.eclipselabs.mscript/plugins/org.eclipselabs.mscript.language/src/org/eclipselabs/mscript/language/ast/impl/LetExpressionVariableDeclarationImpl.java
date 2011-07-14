@@ -15,9 +15,11 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-import org.eclipse.emf.ecore.util.EDataTypeEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.LetExpressionVariableDeclaration;
+import org.eclipselabs.mscript.language.ast.LetExpressionVariableDeclarationPart;
 import org.eclipselabs.mscript.typesystem.Expression;
 
 /**
@@ -27,7 +29,7 @@ import org.eclipselabs.mscript.typesystem.Expression;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.impl.LetExpressionVariableDeclarationImpl#getNames <em>Names</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.impl.LetExpressionVariableDeclarationImpl#getParts <em>Parts</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.impl.LetExpressionVariableDeclarationImpl#getAssignedExpression <em>Assigned Expression</em>}</li>
  * </ul>
  * </p>
@@ -36,14 +38,14 @@ import org.eclipselabs.mscript.typesystem.Expression;
  */
 public class LetExpressionVariableDeclarationImpl extends MinimalEObjectImpl.Container implements LetExpressionVariableDeclaration {
 	/**
-	 * The cached value of the '{@link #getNames() <em>Names</em>}' attribute list.
+	 * The cached value of the '{@link #getParts() <em>Parts</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getNames()
+	 * @see #getParts()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<String> names;
+	protected EList<LetExpressionVariableDeclarationPart> parts;
 
 	/**
 	 * The cached value of the '{@link #getAssignedExpression() <em>Assigned Expression</em>}' containment reference.
@@ -79,11 +81,11 @@ public class LetExpressionVariableDeclarationImpl extends MinimalEObjectImpl.Con
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<String> getNames() {
-		if (names == null) {
-			names = new EDataTypeEList<String>(String.class, this, AstPackage.LET_EXPRESSION_VARIABLE_DECLARATION__NAMES);
+	public EList<LetExpressionVariableDeclarationPart> getParts() {
+		if (parts == null) {
+			parts = new EObjectContainmentEList<LetExpressionVariableDeclarationPart>(LetExpressionVariableDeclarationPart.class, this, AstPackage.LET_EXPRESSION_VARIABLE_DECLARATION__PARTS);
 		}
-		return names;
+		return parts;
 	}
 
 	/**
@@ -137,6 +139,8 @@ public class LetExpressionVariableDeclarationImpl extends MinimalEObjectImpl.Con
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case AstPackage.LET_EXPRESSION_VARIABLE_DECLARATION__PARTS:
+				return ((InternalEList<?>)getParts()).basicRemove(otherEnd, msgs);
 			case AstPackage.LET_EXPRESSION_VARIABLE_DECLARATION__ASSIGNED_EXPRESSION:
 				return basicSetAssignedExpression(null, msgs);
 		}
@@ -151,8 +155,8 @@ public class LetExpressionVariableDeclarationImpl extends MinimalEObjectImpl.Con
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case AstPackage.LET_EXPRESSION_VARIABLE_DECLARATION__NAMES:
-				return getNames();
+			case AstPackage.LET_EXPRESSION_VARIABLE_DECLARATION__PARTS:
+				return getParts();
 			case AstPackage.LET_EXPRESSION_VARIABLE_DECLARATION__ASSIGNED_EXPRESSION:
 				return getAssignedExpression();
 		}
@@ -168,9 +172,9 @@ public class LetExpressionVariableDeclarationImpl extends MinimalEObjectImpl.Con
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case AstPackage.LET_EXPRESSION_VARIABLE_DECLARATION__NAMES:
-				getNames().clear();
-				getNames().addAll((Collection<? extends String>)newValue);
+			case AstPackage.LET_EXPRESSION_VARIABLE_DECLARATION__PARTS:
+				getParts().clear();
+				getParts().addAll((Collection<? extends LetExpressionVariableDeclarationPart>)newValue);
 				return;
 			case AstPackage.LET_EXPRESSION_VARIABLE_DECLARATION__ASSIGNED_EXPRESSION:
 				setAssignedExpression((Expression)newValue);
@@ -187,8 +191,8 @@ public class LetExpressionVariableDeclarationImpl extends MinimalEObjectImpl.Con
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case AstPackage.LET_EXPRESSION_VARIABLE_DECLARATION__NAMES:
-				getNames().clear();
+			case AstPackage.LET_EXPRESSION_VARIABLE_DECLARATION__PARTS:
+				getParts().clear();
 				return;
 			case AstPackage.LET_EXPRESSION_VARIABLE_DECLARATION__ASSIGNED_EXPRESSION:
 				setAssignedExpression((Expression)null);
@@ -205,28 +209,12 @@ public class LetExpressionVariableDeclarationImpl extends MinimalEObjectImpl.Con
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case AstPackage.LET_EXPRESSION_VARIABLE_DECLARATION__NAMES:
-				return names != null && !names.isEmpty();
+			case AstPackage.LET_EXPRESSION_VARIABLE_DECLARATION__PARTS:
+				return parts != null && !parts.isEmpty();
 			case AstPackage.LET_EXPRESSION_VARIABLE_DECLARATION__ASSIGNED_EXPRESSION:
 				return assignedExpression != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (names: ");
-		result.append(names);
-		result.append(')');
-		return result.toString();
 	}
 
 } //LetExpressionVariableDeclarationImpl

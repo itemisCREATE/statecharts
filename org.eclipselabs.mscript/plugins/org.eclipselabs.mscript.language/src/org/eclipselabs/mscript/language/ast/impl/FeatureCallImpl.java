@@ -17,9 +17,9 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipselabs.mscript.language.ast.AstPackage;
+import org.eclipselabs.mscript.language.ast.CallableElement;
 import org.eclipselabs.mscript.language.ast.FeatureCall;
 import org.eclipselabs.mscript.language.ast.FeatureCallPart;
-import org.eclipselabs.mscript.typesystem.Expression;
 import org.eclipselabs.mscript.typesystem.impl.ExpressionImpl;
 
 /**
@@ -38,14 +38,14 @@ import org.eclipselabs.mscript.typesystem.impl.ExpressionImpl;
  */
 public class FeatureCallImpl extends ExpressionImpl implements FeatureCall {
 	/**
-	 * The cached value of the '{@link #getTarget() <em>Target</em>}' containment reference.
+	 * The cached value of the '{@link #getTarget() <em>Target</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getTarget()
 	 * @generated
 	 * @ordered
 	 */
-	protected Expression target;
+	protected CallableElement target;
 
 	/**
 	 * The cached value of the '{@link #getParts() <em>Parts</em>}' containment reference list.
@@ -81,7 +81,15 @@ public class FeatureCallImpl extends ExpressionImpl implements FeatureCall {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Expression getTarget() {
+	public CallableElement getTarget() {
+		if (target != null && target.eIsProxy()) {
+			InternalEObject oldTarget = (InternalEObject)target;
+			target = (CallableElement)eResolveProxy(oldTarget);
+			if (target != oldTarget) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, AstPackage.FEATURE_CALL__TARGET, oldTarget, target));
+			}
+		}
 		return target;
 	}
 
@@ -90,14 +98,8 @@ public class FeatureCallImpl extends ExpressionImpl implements FeatureCall {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetTarget(Expression newTarget, NotificationChain msgs) {
-		Expression oldTarget = target;
-		target = newTarget;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.FEATURE_CALL__TARGET, oldTarget, newTarget);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
+	public CallableElement basicGetTarget() {
+		return target;
 	}
 
 	/**
@@ -105,18 +107,11 @@ public class FeatureCallImpl extends ExpressionImpl implements FeatureCall {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setTarget(Expression newTarget) {
-		if (newTarget != target) {
-			NotificationChain msgs = null;
-			if (target != null)
-				msgs = ((InternalEObject)target).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - AstPackage.FEATURE_CALL__TARGET, null, msgs);
-			if (newTarget != null)
-				msgs = ((InternalEObject)newTarget).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - AstPackage.FEATURE_CALL__TARGET, null, msgs);
-			msgs = basicSetTarget(newTarget, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.FEATURE_CALL__TARGET, newTarget, newTarget));
+	public void setTarget(CallableElement newTarget) {
+		CallableElement oldTarget = target;
+		target = newTarget;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.FEATURE_CALL__TARGET, oldTarget, target));
 	}
 
 	/**
@@ -139,8 +134,6 @@ public class FeatureCallImpl extends ExpressionImpl implements FeatureCall {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case AstPackage.FEATURE_CALL__TARGET:
-				return basicSetTarget(null, msgs);
 			case AstPackage.FEATURE_CALL__PARTS:
 				return ((InternalEList<?>)getParts()).basicRemove(otherEnd, msgs);
 		}
@@ -156,7 +149,8 @@ public class FeatureCallImpl extends ExpressionImpl implements FeatureCall {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case AstPackage.FEATURE_CALL__TARGET:
-				return getTarget();
+				if (resolve) return getTarget();
+				return basicGetTarget();
 			case AstPackage.FEATURE_CALL__PARTS:
 				return getParts();
 		}
@@ -173,7 +167,7 @@ public class FeatureCallImpl extends ExpressionImpl implements FeatureCall {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case AstPackage.FEATURE_CALL__TARGET:
-				setTarget((Expression)newValue);
+				setTarget((CallableElement)newValue);
 				return;
 			case AstPackage.FEATURE_CALL__PARTS:
 				getParts().clear();
@@ -192,7 +186,7 @@ public class FeatureCallImpl extends ExpressionImpl implements FeatureCall {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case AstPackage.FEATURE_CALL__TARGET:
-				setTarget((Expression)null);
+				setTarget((CallableElement)null);
 				return;
 			case AstPackage.FEATURE_CALL__PARTS:
 				getParts().clear();

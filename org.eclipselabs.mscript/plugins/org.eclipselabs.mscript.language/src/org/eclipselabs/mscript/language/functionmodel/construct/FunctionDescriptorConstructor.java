@@ -23,7 +23,6 @@ import org.eclipselabs.mscript.language.ast.FeatureCallPart;
 import org.eclipselabs.mscript.language.ast.FunctionDefinition;
 import org.eclipselabs.mscript.language.ast.OperationArgumentList;
 import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
-import org.eclipselabs.mscript.language.ast.SimpleName;
 import org.eclipselabs.mscript.language.ast.StateVariableDeclaration;
 import org.eclipselabs.mscript.language.ast.util.AstSwitch;
 import org.eclipselabs.mscript.language.functionmodel.EquationDescriptor;
@@ -104,55 +103,51 @@ public class FunctionDescriptorConstructor implements IFunctionDescriptorConstru
 		 */
 		@Override
 		public Boolean caseFeatureCall(FeatureCall featureCall) {
-			if (featureCall.getTarget() instanceof SimpleName) {
-				SimpleName simpleName = (SimpleName) featureCall.getTarget();
+			String name = featureCall.getTarget().getName();
+			
+			FunctionDescriptor functionDescriptor = equationSide.getDescriptor().getFunctionDescriptor();
+			VariableKind variableKind = getVariableKind(
+					functionDescriptor.getDefinition(),
+					name);
+			
+			checkFeatureCall(featureCall, variableKind);
+			
+			if (variableKind != VariableKind.UNKNOWN) {
+				int stepIndex = 0;
+				boolean initial = false;
 				
-				FunctionDescriptor functionDescriptor = equationSide.getDescriptor().getFunctionDescriptor();
-				VariableKind variableKind = getVariableKind(
-						functionDescriptor.getDefinition(),
-						simpleName.getIdentifier());
-				
-				checkFeatureCall(featureCall, variableKind);
-				
-				if (variableKind != VariableKind.UNKNOWN) {
-					int stepIndex = 0;
-					boolean initial = false;
-					
-					if (variableKind == VariableKind.INPUT_PARAMETER
-							|| variableKind == VariableKind.OUTPUT_PARAMETER
-							|| variableKind == VariableKind.STATE_VARIABLE) {
-						ListIterator<FeatureCallPart> partIterator = featureCall.getParts().listIterator();
-						try {
-							StepExpressionResult stepExpressionResult = new StepExpressionHelper().getStepExpression(partIterator);
-							stepIndex = stepExpressionResult.getIndex();
-							initial = stepExpressionResult.isInitial();
-						} catch (CoreException e) {
-							StatusUtil.merge(status, e.getStatus());
-						}
+				if (variableKind == VariableKind.INPUT_PARAMETER
+						|| variableKind == VariableKind.OUTPUT_PARAMETER
+						|| variableKind == VariableKind.STATE_VARIABLE) {
+					ListIterator<FeatureCallPart> partIterator = featureCall.getParts().listIterator();
+					try {
+						StepExpressionResult stepExpressionResult = new StepExpressionHelper().getStepExpression(partIterator);
+						stepIndex = stepExpressionResult.getIndex();
+						initial = stepExpressionResult.isInitial();
+					} catch (CoreException e) {
+						StatusUtil.merge(status, e.getStatus());
 					}
-
-					EquationPart part = FunctionModelFactory.eINSTANCE.createEquationPart();
-					part.setSide(equationSide);
-					part.setFeatureCall(featureCall);
-					VariableDescriptor variableDescriptor = functionDescriptor.getVariableDescriptor(simpleName.getIdentifier());
-					if (variableDescriptor == null) {
-						variableDescriptor = FunctionModelFactory.eINSTANCE.createVariableDescriptor();
-						variableDescriptor.setFunctionDescriptor(functionDescriptor);
-						variableDescriptor.setName(simpleName.getIdentifier());
-						variableDescriptor.setKind(variableKind);
-					}
-					
-					VariableStep variableStep = variableDescriptor.getStep(stepIndex, initial);
-					if (variableStep == null) {
-						variableStep = FunctionModelFactory.eINSTANCE.createVariableStep();
-						variableStep.setDescriptor(variableDescriptor);
-						variableStep.setIndex(stepIndex);
-						variableStep.setInitial(initial);
-					}
-					part.setVariableStep(variableStep);
 				}
-			} else {
-				doSwitch(featureCall.getTarget());
+
+				EquationPart part = FunctionModelFactory.eINSTANCE.createEquationPart();
+				part.setSide(equationSide);
+				part.setFeatureCall(featureCall);
+				VariableDescriptor variableDescriptor = functionDescriptor.getVariableDescriptor(name);
+				if (variableDescriptor == null) {
+					variableDescriptor = FunctionModelFactory.eINSTANCE.createVariableDescriptor();
+					variableDescriptor.setFunctionDescriptor(functionDescriptor);
+					variableDescriptor.setName(name);
+					variableDescriptor.setKind(variableKind);
+				}
+				
+				VariableStep variableStep = variableDescriptor.getStep(stepIndex, initial);
+				if (variableStep == null) {
+					variableStep = FunctionModelFactory.eINSTANCE.createVariableStep();
+					variableStep.setDescriptor(variableDescriptor);
+					variableStep.setIndex(stepIndex);
+					variableStep.setInitial(initial);
+				}
+				part.setVariableStep(variableStep);
 			}
 			for (FeatureCallPart part : featureCall.getParts()) {
 				doSwitch(part);

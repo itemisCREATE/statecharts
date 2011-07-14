@@ -28,30 +28,30 @@ import org.eclipselabs.mscript.typesystem.Expression;
  */
 public interface FeatureCall extends Expression {
 	/**
-	 * Returns the value of the '<em><b>Target</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Target</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Target</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Target</em>' containment reference.
-	 * @see #setTarget(Expression)
+	 * @return the value of the '<em>Target</em>' reference.
+	 * @see #setTarget(CallableElement)
 	 * @see org.eclipselabs.mscript.language.ast.AstPackage#getFeatureCall_Target()
-	 * @model containment="true"
+	 * @model
 	 * @generated
 	 */
-	Expression getTarget();
+	CallableElement getTarget();
 
 	/**
-	 * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.FeatureCall#getTarget <em>Target</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.FeatureCall#getTarget <em>Target</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Target</em>' containment reference.
+	 * @param value the new value of the '<em>Target</em>' reference.
 	 * @see #getTarget()
 	 * @generated
 	 */
-	void setTarget(Expression value);
+	void setTarget(CallableElement value);
 
 	/**
 	 * Returns the value of the '<em><b>Parts</b></em>' containment reference list.

@@ -19,6 +19,10 @@ import org.eclipselabs.mscript.language.ast.ArraySubscript;
 import org.eclipselabs.mscript.language.ast.Assertion;
 import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.BeginExpression;
+import org.eclipselabs.mscript.language.ast.BuiltinDefinition;
+import org.eclipselabs.mscript.language.ast.BuiltinFunction;
+import org.eclipselabs.mscript.language.ast.BuiltinVariable;
+import org.eclipselabs.mscript.language.ast.CallableElement;
 import org.eclipselabs.mscript.language.ast.DataTypeDefinition;
 import org.eclipselabs.mscript.language.ast.DataTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.Definition;
@@ -39,6 +43,7 @@ import org.eclipselabs.mscript.language.ast.IterationCall;
 import org.eclipselabs.mscript.language.ast.IterationVariable;
 import org.eclipselabs.mscript.language.ast.LetExpression;
 import org.eclipselabs.mscript.language.ast.LetExpressionVariableDeclaration;
+import org.eclipselabs.mscript.language.ast.LetExpressionVariableDeclarationPart;
 import org.eclipselabs.mscript.language.ast.LogicalAndExpression;
 import org.eclipselabs.mscript.language.ast.LogicalOrExpression;
 import org.eclipselabs.mscript.language.ast.Module;
@@ -54,7 +59,6 @@ import org.eclipselabs.mscript.language.ast.RangeExpression;
 import org.eclipselabs.mscript.language.ast.RecordDefinition;
 import org.eclipselabs.mscript.language.ast.RecordFieldDeclaration;
 import org.eclipselabs.mscript.language.ast.RelationalExpression;
-import org.eclipselabs.mscript.language.ast.SimpleName;
 import org.eclipselabs.mscript.language.ast.StateVariableDeclaration;
 import org.eclipselabs.mscript.language.ast.SwitchCase;
 import org.eclipselabs.mscript.language.ast.SwitchExpression;
@@ -180,12 +184,20 @@ public class AstSwitch<T> extends Switch<T> {
 				FunctionDefinition functionDefinition = (FunctionDefinition)theEObject;
 				T result = caseFunctionDefinition(functionDefinition);
 				if (result == null) result = caseDefinition(functionDefinition);
+				if (result == null) result = caseCallableElement(functionDefinition);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AstPackage.CALLABLE_ELEMENT: {
+				CallableElement callableElement = (CallableElement)theEObject;
+				T result = caseCallableElement(callableElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case AstPackage.PARAMETER_DECLARATION: {
 				ParameterDeclaration parameterDeclaration = (ParameterDeclaration)theEObject;
 				T result = caseParameterDeclaration(parameterDeclaration);
+				if (result == null) result = caseCallableElement(parameterDeclaration);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -198,6 +210,7 @@ public class AstSwitch<T> extends Switch<T> {
 			case AstPackage.STATE_VARIABLE_DECLARATION: {
 				StateVariableDeclaration stateVariableDeclaration = (StateVariableDeclaration)theEObject;
 				T result = caseStateVariableDeclaration(stateVariableDeclaration);
+				if (result == null) result = caseCallableElement(stateVariableDeclaration);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -229,6 +242,13 @@ public class AstSwitch<T> extends Switch<T> {
 			case AstPackage.LET_EXPRESSION_VARIABLE_DECLARATION: {
 				LetExpressionVariableDeclaration letExpressionVariableDeclaration = (LetExpressionVariableDeclaration)theEObject;
 				T result = caseLetExpressionVariableDeclaration(letExpressionVariableDeclaration);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AstPackage.LET_EXPRESSION_VARIABLE_DECLARATION_PART: {
+				LetExpressionVariableDeclarationPart letExpressionVariableDeclarationPart = (LetExpressionVariableDeclarationPart)theEObject;
+				T result = caseLetExpressionVariableDeclarationPart(letExpressionVariableDeclarationPart);
+				if (result == null) result = caseCallableElement(letExpressionVariableDeclarationPart);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -307,6 +327,7 @@ public class AstSwitch<T> extends Switch<T> {
 			case AstPackage.ITERATION_VARIABLE: {
 				IterationVariable iterationVariable = (IterationVariable)theEObject;
 				T result = caseIterationVariable(iterationVariable);
+				if (result == null) result = caseCallableElement(iterationVariable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -454,17 +475,36 @@ public class AstSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case AstPackage.SIMPLE_NAME: {
-				SimpleName simpleName = (SimpleName)theEObject;
-				T result = caseSimpleName(simpleName);
-				if (result == null) result = caseExpression(simpleName);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case AstPackage.FEATURE_CALL: {
 				FeatureCall featureCall = (FeatureCall)theEObject;
 				T result = caseFeatureCall(featureCall);
 				if (result == null) result = caseExpression(featureCall);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AstPackage.BUILTIN_DEFINITION: {
+				BuiltinDefinition builtinDefinition = (BuiltinDefinition)theEObject;
+				T result = caseBuiltinDefinition(builtinDefinition);
+				if (result == null) result = caseDefinition(builtinDefinition);
+				if (result == null) result = caseCallableElement(builtinDefinition);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AstPackage.BUILTIN_FUNCTION: {
+				BuiltinFunction builtinFunction = (BuiltinFunction)theEObject;
+				T result = caseBuiltinFunction(builtinFunction);
+				if (result == null) result = caseBuiltinDefinition(builtinFunction);
+				if (result == null) result = caseDefinition(builtinFunction);
+				if (result == null) result = caseCallableElement(builtinFunction);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case AstPackage.BUILTIN_VARIABLE: {
+				BuiltinVariable builtinVariable = (BuiltinVariable)theEObject;
+				T result = caseBuiltinVariable(builtinVariable);
+				if (result == null) result = caseBuiltinDefinition(builtinVariable);
+				if (result == null) result = caseDefinition(builtinVariable);
+				if (result == null) result = caseCallableElement(builtinVariable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -608,6 +648,21 @@ public class AstSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Callable Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Callable Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCallableElement(CallableElement object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Parameter Declaration</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -739,6 +794,21 @@ public class AstSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseLetExpressionVariableDeclaration(LetExpressionVariableDeclaration object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Let Expression Variable Declaration Part</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Let Expression Variable Declaration Part</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseLetExpressionVariableDeclarationPart(LetExpressionVariableDeclarationPart object) {
 		return null;
 	}
 
@@ -1238,21 +1308,6 @@ public class AstSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Simple Name</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Simple Name</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseSimpleName(SimpleName object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Feature Call</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -1264,6 +1319,51 @@ public class AstSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseFeatureCall(FeatureCall object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Builtin Definition</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Builtin Definition</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBuiltinDefinition(BuiltinDefinition object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Builtin Function</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Builtin Function</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBuiltinFunction(BuiltinFunction object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Builtin Variable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Builtin Variable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBuiltinVariable(BuiltinVariable object) {
 		return null;
 	}
 

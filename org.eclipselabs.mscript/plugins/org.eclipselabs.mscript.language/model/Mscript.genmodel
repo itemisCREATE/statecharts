@@ -81,6 +81,10 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//FunctionDefinition/stateVariableDeclarations"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//FunctionDefinition/equations"/>
     </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//CallableElement">
+      <genOperations ecoreOperation="Mscript.ecore#//CallableElement/getName"/>
+      <genOperations ecoreOperation="Mscript.ecore#//CallableElement/getQualifiedName"/>
+    </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//ParameterDeclaration">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//ParameterDeclaration/name"/>
     </genClasses>
@@ -111,8 +115,11 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//LetExpression/targetExpression"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//LetExpressionVariableDeclaration">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//LetExpressionVariableDeclaration/names"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//LetExpressionVariableDeclaration/parts"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//LetExpressionVariableDeclaration/assignedExpression"/>
+    </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//LetExpressionVariableDeclarationPart">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//LetExpressionVariableDeclarationPart/name"/>
     </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//IfExpression">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//IfExpression/static"/>
@@ -236,12 +243,12 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//PostfixExpression/operand"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//PostfixExpression/operator"/>
     </genClasses>
-    <genClasses ecoreClass="Mscript.ecore#//SimpleName">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Mscript.ecore#//SimpleName/identifier"/>
-    </genClasses>
     <genClasses ecoreClass="Mscript.ecore#//FeatureCall">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//FeatureCall/target"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Mscript.ecore#//FeatureCall/parts"/>
     </genClasses>
+    <genClasses ecoreClass="Mscript.ecore#//BuiltinDefinition"/>
+    <genClasses ecoreClass="Mscript.ecore#//BuiltinFunction"/>
+    <genClasses ecoreClass="Mscript.ecore#//BuiltinVariable"/>
   </genPackages>
 </genmodel:GenModel>

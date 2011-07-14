@@ -1227,60 +1227,63 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "LetExpressionVariableDeclaration");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Alternatives cAlternatives_0 = (Alternatives)cGroup.eContents().get(0);
-		private final Assignment cNamesAssignment_0_0 = (Assignment)cAlternatives_0.eContents().get(0);
-		private final RuleCall cNamesValidIDParserRuleCall_0_0_0 = (RuleCall)cNamesAssignment_0_0.eContents().get(0);
+		private final Assignment cPartsAssignment_0_0 = (Assignment)cAlternatives_0.eContents().get(0);
+		private final RuleCall cPartsLetExpressionVariableDeclarationPartParserRuleCall_0_0_0 = (RuleCall)cPartsAssignment_0_0.eContents().get(0);
 		private final Group cGroup_0_1 = (Group)cAlternatives_0.eContents().get(1);
 		private final Keyword cLeftParenthesisKeyword_0_1_0 = (Keyword)cGroup_0_1.eContents().get(0);
-		private final Assignment cNamesAssignment_0_1_1 = (Assignment)cGroup_0_1.eContents().get(1);
-		private final RuleCall cNamesValidIDParserRuleCall_0_1_1_0 = (RuleCall)cNamesAssignment_0_1_1.eContents().get(0);
+		private final Assignment cPartsAssignment_0_1_1 = (Assignment)cGroup_0_1.eContents().get(1);
+		private final RuleCall cPartsLetExpressionVariableDeclarationPartParserRuleCall_0_1_1_0 = (RuleCall)cPartsAssignment_0_1_1.eContents().get(0);
 		private final Group cGroup_0_1_2 = (Group)cGroup_0_1.eContents().get(2);
 		private final Keyword cCommaKeyword_0_1_2_0 = (Keyword)cGroup_0_1_2.eContents().get(0);
-		private final Assignment cNamesAssignment_0_1_2_1 = (Assignment)cGroup_0_1_2.eContents().get(1);
-		private final RuleCall cNamesValidIDParserRuleCall_0_1_2_1_0 = (RuleCall)cNamesAssignment_0_1_2_1.eContents().get(0);
+		private final Assignment cPartsAssignment_0_1_2_1 = (Assignment)cGroup_0_1_2.eContents().get(1);
+		private final RuleCall cPartsLetExpressionVariableDeclarationPartParserRuleCall_0_1_2_1_0 = (RuleCall)cPartsAssignment_0_1_2_1.eContents().get(0);
 		private final Keyword cRightParenthesisKeyword_0_1_3 = (Keyword)cGroup_0_1.eContents().get(3);
 		private final Keyword cEqualsSignKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cAssignedExpressionAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cAssignedExpressionExpressionParserRuleCall_2_0 = (RuleCall)cAssignedExpressionAssignment_2.eContents().get(0);
 		
 		//LetExpressionVariableDeclaration:
-		//	(names+=ValidID | "(" names+=ValidID ("," names+=ValidID)+ ")") "=" assignedExpression=Expression;
+		//	(parts+=LetExpressionVariableDeclarationPart | "(" parts+=LetExpressionVariableDeclarationPart (","
+		//	parts+=LetExpressionVariableDeclarationPart)+ ")") "=" assignedExpression=Expression;
 		public ParserRule getRule() { return rule; }
 
-		//(names+=ValidID | "(" names+=ValidID ("," names+=ValidID)+ ")") "=" assignedExpression=Expression
+		//(parts+=LetExpressionVariableDeclarationPart | "(" parts+=LetExpressionVariableDeclarationPart (","
+		//parts+=LetExpressionVariableDeclarationPart)+ ")") "=" assignedExpression=Expression
 		public Group getGroup() { return cGroup; }
 
-		//names+=ValidID | "(" names+=ValidID ("," names+=ValidID)+ ")"
+		//parts+=LetExpressionVariableDeclarationPart | "(" parts+=LetExpressionVariableDeclarationPart (","
+		//parts+=LetExpressionVariableDeclarationPart)+ ")"
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 
-		//names+=ValidID
-		public Assignment getNamesAssignment_0_0() { return cNamesAssignment_0_0; }
+		//parts+=LetExpressionVariableDeclarationPart
+		public Assignment getPartsAssignment_0_0() { return cPartsAssignment_0_0; }
 
-		//ValidID
-		public RuleCall getNamesValidIDParserRuleCall_0_0_0() { return cNamesValidIDParserRuleCall_0_0_0; }
+		//LetExpressionVariableDeclarationPart
+		public RuleCall getPartsLetExpressionVariableDeclarationPartParserRuleCall_0_0_0() { return cPartsLetExpressionVariableDeclarationPartParserRuleCall_0_0_0; }
 
-		//"(" names+=ValidID ("," names+=ValidID)+ ")"
+		//"(" parts+=LetExpressionVariableDeclarationPart ("," parts+=LetExpressionVariableDeclarationPart)+ ")"
 		public Group getGroup_0_1() { return cGroup_0_1; }
 
 		//"("
 		public Keyword getLeftParenthesisKeyword_0_1_0() { return cLeftParenthesisKeyword_0_1_0; }
 
-		//names+=ValidID
-		public Assignment getNamesAssignment_0_1_1() { return cNamesAssignment_0_1_1; }
+		//parts+=LetExpressionVariableDeclarationPart
+		public Assignment getPartsAssignment_0_1_1() { return cPartsAssignment_0_1_1; }
 
-		//ValidID
-		public RuleCall getNamesValidIDParserRuleCall_0_1_1_0() { return cNamesValidIDParserRuleCall_0_1_1_0; }
+		//LetExpressionVariableDeclarationPart
+		public RuleCall getPartsLetExpressionVariableDeclarationPartParserRuleCall_0_1_1_0() { return cPartsLetExpressionVariableDeclarationPartParserRuleCall_0_1_1_0; }
 
-		//("," names+=ValidID)+
+		//("," parts+=LetExpressionVariableDeclarationPart)+
 		public Group getGroup_0_1_2() { return cGroup_0_1_2; }
 
 		//","
 		public Keyword getCommaKeyword_0_1_2_0() { return cCommaKeyword_0_1_2_0; }
 
-		//names+=ValidID
-		public Assignment getNamesAssignment_0_1_2_1() { return cNamesAssignment_0_1_2_1; }
+		//parts+=LetExpressionVariableDeclarationPart
+		public Assignment getPartsAssignment_0_1_2_1() { return cPartsAssignment_0_1_2_1; }
 
-		//ValidID
-		public RuleCall getNamesValidIDParserRuleCall_0_1_2_1_0() { return cNamesValidIDParserRuleCall_0_1_2_1_0; }
+		//LetExpressionVariableDeclarationPart
+		public RuleCall getPartsLetExpressionVariableDeclarationPartParserRuleCall_0_1_2_1_0() { return cPartsLetExpressionVariableDeclarationPartParserRuleCall_0_1_2_1_0; }
 
 		//")"
 		public Keyword getRightParenthesisKeyword_0_1_3() { return cRightParenthesisKeyword_0_1_3; }
@@ -1293,6 +1296,22 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 
 		//Expression
 		public RuleCall getAssignedExpressionExpressionParserRuleCall_2_0() { return cAssignedExpressionExpressionParserRuleCall_2_0; }
+	}
+
+	public class LetExpressionVariableDeclarationPartElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "LetExpressionVariableDeclarationPart");
+		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cNameValidIDParserRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
+		
+		//LetExpressionVariableDeclarationPart:
+		//	name=ValidID;
+		public ParserRule getRule() { return rule; }
+
+		//name=ValidID
+		public Assignment getNameAssignment() { return cNameAssignment; }
+
+		//ValidID
+		public RuleCall getNameValidIDParserRuleCall_0() { return cNameValidIDParserRuleCall_0; }
 	}
 
 	public class IfExpressionElements extends AbstractParserRuleElementFinder {
@@ -1960,14 +1979,19 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cLiteralParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cFeatureCallParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cUnitConstructionOperatorParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
-		private final RuleCall cBeginExpressionParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
-		private final RuleCall cEndExpressionParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
+		private final RuleCall cArrayConstructionOperatorParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		private final RuleCall cArrayConcatenationOperatorParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
+		private final RuleCall cParenthesizedExpressionParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
+		private final RuleCall cBeginExpressionParserRuleCall_6 = (RuleCall)cAlternatives.eContents().get(6);
+		private final RuleCall cEndExpressionParserRuleCall_7 = (RuleCall)cAlternatives.eContents().get(7);
 		
 		//PrimaryExpression returns Expression:
-		//	Literal | FeatureCall | UnitConstructionOperator | BeginExpression | EndExpression;
+		//	Literal | FeatureCall | UnitConstructionOperator | ArrayConstructionOperator | ArrayConcatenationOperator |
+		//	ParenthesizedExpression | BeginExpression | EndExpression;
 		public ParserRule getRule() { return rule; }
 
-		//Literal | FeatureCall | UnitConstructionOperator | BeginExpression | EndExpression
+		//Literal | FeatureCall | UnitConstructionOperator | ArrayConstructionOperator | ArrayConcatenationOperator |
+		//ParenthesizedExpression | BeginExpression | EndExpression
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//Literal
@@ -1979,35 +2003,20 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		//UnitConstructionOperator
 		public RuleCall getUnitConstructionOperatorParserRuleCall_2() { return cUnitConstructionOperatorParserRuleCall_2; }
 
-		//BeginExpression
-		public RuleCall getBeginExpressionParserRuleCall_3() { return cBeginExpressionParserRuleCall_3; }
-
-		//EndExpression
-		public RuleCall getEndExpressionParserRuleCall_4() { return cEndExpressionParserRuleCall_4; }
-	}
-
-	public class CallablePrimaryExpressionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "CallablePrimaryExpression");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cArrayConstructionOperatorParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cArrayConcatenationOperatorParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		private final RuleCall cParenthesizedExpressionParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
-		
-		//CallablePrimaryExpression returns Expression:
-		//	ArrayConstructionOperator | ArrayConcatenationOperator | ParenthesizedExpression;
-		public ParserRule getRule() { return rule; }
-
-		//ArrayConstructionOperator | ArrayConcatenationOperator | ParenthesizedExpression
-		public Alternatives getAlternatives() { return cAlternatives; }
-
 		//ArrayConstructionOperator
-		public RuleCall getArrayConstructionOperatorParserRuleCall_0() { return cArrayConstructionOperatorParserRuleCall_0; }
+		public RuleCall getArrayConstructionOperatorParserRuleCall_3() { return cArrayConstructionOperatorParserRuleCall_3; }
 
 		//ArrayConcatenationOperator
-		public RuleCall getArrayConcatenationOperatorParserRuleCall_1() { return cArrayConcatenationOperatorParserRuleCall_1; }
+		public RuleCall getArrayConcatenationOperatorParserRuleCall_4() { return cArrayConcatenationOperatorParserRuleCall_4; }
 
 		//ParenthesizedExpression
-		public RuleCall getParenthesizedExpressionParserRuleCall_2() { return cParenthesizedExpressionParserRuleCall_2; }
+		public RuleCall getParenthesizedExpressionParserRuleCall_5() { return cParenthesizedExpressionParserRuleCall_5; }
+
+		//BeginExpression
+		public RuleCall getBeginExpressionParserRuleCall_6() { return cBeginExpressionParserRuleCall_6; }
+
+		//EndExpression
+		public RuleCall getEndExpressionParserRuleCall_7() { return cEndExpressionParserRuleCall_7; }
 	}
 
 	public class LiteralElements extends AbstractParserRuleElementFinder {
@@ -2182,90 +2191,40 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getValueSTRINGTerminalRuleCall_0() { return cValueSTRINGTerminalRuleCall_0; }
 	}
 
-	public class SimpleNameElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SimpleName");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cSimpleNameAction_0 = (Action)cGroup.eContents().get(0);
-		private final Assignment cIdentifierAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cIdentifierValidIDParserRuleCall_1_0 = (RuleCall)cIdentifierAssignment_1.eContents().get(0);
-		
-		//SimpleName returns Expression:
-		//	{SimpleName} identifier=ValidID;
-		public ParserRule getRule() { return rule; }
-
-		//{SimpleName} identifier=ValidID
-		public Group getGroup() { return cGroup; }
-
-		//{SimpleName}
-		public Action getSimpleNameAction_0() { return cSimpleNameAction_0; }
-
-		//identifier=ValidID
-		public Assignment getIdentifierAssignment_1() { return cIdentifierAssignment_1; }
-
-		//ValidID
-		public RuleCall getIdentifierValidIDParserRuleCall_1_0() { return cIdentifierValidIDParserRuleCall_1_0; }
-	}
-
 	public class FeatureCallElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "FeatureCall");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
-		private final RuleCall cCallablePrimaryExpressionParserRuleCall_0_0 = (RuleCall)cGroup_0.eContents().get(0);
-		private final Group cGroup_0_1 = (Group)cGroup_0.eContents().get(1);
-		private final Action cFeatureCallTargetAction_0_1_0 = (Action)cGroup_0_1.eContents().get(0);
-		private final Assignment cPartsAssignment_0_1_1 = (Assignment)cGroup_0_1.eContents().get(1);
-		private final RuleCall cPartsFeatureCallPartParserRuleCall_0_1_1_0 = (RuleCall)cPartsAssignment_0_1_1.eContents().get(0);
-		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
-		private final Action cFeatureCallAction_1_0 = (Action)cGroup_1.eContents().get(0);
-		private final Assignment cTargetAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
-		private final RuleCall cTargetSimpleNameParserRuleCall_1_1_0 = (RuleCall)cTargetAssignment_1_1.eContents().get(0);
-		private final Assignment cPartsAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
-		private final RuleCall cPartsFeatureCallPartParserRuleCall_1_2_0 = (RuleCall)cPartsAssignment_1_2.eContents().get(0);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cFeatureCallAction_0 = (Action)cGroup.eContents().get(0);
+		private final Assignment cTargetAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final CrossReference cTargetCallableElementCrossReference_1_0 = (CrossReference)cTargetAssignment_1.eContents().get(0);
+		private final RuleCall cTargetCallableElementQualifiedNameParserRuleCall_1_0_1 = (RuleCall)cTargetCallableElementCrossReference_1_0.eContents().get(1);
+		private final Assignment cPartsAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cPartsFeatureCallPartParserRuleCall_2_0 = (RuleCall)cPartsAssignment_2.eContents().get(0);
 		
 		//FeatureCall returns Expression:
-		//	CallablePrimaryExpression ({FeatureCall.target=current} parts+=FeatureCallPart+)? | {FeatureCall} target=SimpleName
-		//	parts+=FeatureCallPart*;
+		//	{FeatureCall} target=[CallableElement|QualifiedName] parts+=FeatureCallPart*;
 		public ParserRule getRule() { return rule; }
 
-		//CallablePrimaryExpression ({FeatureCall.target=current} parts+=FeatureCallPart+)? | {FeatureCall} target=SimpleName
-		//parts+=FeatureCallPart*
-		public Alternatives getAlternatives() { return cAlternatives; }
-
-		//CallablePrimaryExpression ({FeatureCall.target=current} parts+=FeatureCallPart+)?
-		public Group getGroup_0() { return cGroup_0; }
-
-		//CallablePrimaryExpression
-		public RuleCall getCallablePrimaryExpressionParserRuleCall_0_0() { return cCallablePrimaryExpressionParserRuleCall_0_0; }
-
-		//({FeatureCall.target=current} parts+=FeatureCallPart+)?
-		public Group getGroup_0_1() { return cGroup_0_1; }
-
-		//{FeatureCall.target=current}
-		public Action getFeatureCallTargetAction_0_1_0() { return cFeatureCallTargetAction_0_1_0; }
-
-		//parts+=FeatureCallPart+
-		public Assignment getPartsAssignment_0_1_1() { return cPartsAssignment_0_1_1; }
-
-		//FeatureCallPart
-		public RuleCall getPartsFeatureCallPartParserRuleCall_0_1_1_0() { return cPartsFeatureCallPartParserRuleCall_0_1_1_0; }
-
-		//{FeatureCall} target=SimpleName parts+=FeatureCallPart*
-		public Group getGroup_1() { return cGroup_1; }
+		//{FeatureCall} target=[CallableElement|QualifiedName] parts+=FeatureCallPart*
+		public Group getGroup() { return cGroup; }
 
 		//{FeatureCall}
-		public Action getFeatureCallAction_1_0() { return cFeatureCallAction_1_0; }
+		public Action getFeatureCallAction_0() { return cFeatureCallAction_0; }
 
-		//target=SimpleName
-		public Assignment getTargetAssignment_1_1() { return cTargetAssignment_1_1; }
+		//target=[CallableElement|QualifiedName]
+		public Assignment getTargetAssignment_1() { return cTargetAssignment_1; }
 
-		//SimpleName
-		public RuleCall getTargetSimpleNameParserRuleCall_1_1_0() { return cTargetSimpleNameParserRuleCall_1_1_0; }
+		//[CallableElement|QualifiedName]
+		public CrossReference getTargetCallableElementCrossReference_1_0() { return cTargetCallableElementCrossReference_1_0; }
+
+		//QualifiedName
+		public RuleCall getTargetCallableElementQualifiedNameParserRuleCall_1_0_1() { return cTargetCallableElementQualifiedNameParserRuleCall_1_0_1; }
 
 		//parts+=FeatureCallPart*
-		public Assignment getPartsAssignment_1_2() { return cPartsAssignment_1_2; }
+		public Assignment getPartsAssignment_2() { return cPartsAssignment_2; }
 
 		//FeatureCallPart
-		public RuleCall getPartsFeatureCallPartParserRuleCall_1_2_0() { return cPartsFeatureCallPartParserRuleCall_1_2_0; }
+		public RuleCall getPartsFeatureCallPartParserRuleCall_2_0() { return cPartsFeatureCallPartParserRuleCall_2_0; }
 	}
 
 	public class FeatureCallPartElements extends AbstractParserRuleElementFinder {
@@ -3506,6 +3465,7 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	private ExpressionElements pExpression;
 	private LetExpressionElements pLetExpression;
 	private LetExpressionVariableDeclarationElements pLetExpressionVariableDeclaration;
+	private LetExpressionVariableDeclarationPartElements pLetExpressionVariableDeclarationPart;
 	private IfExpressionElements pIfExpression;
 	private SwitchExpressionElements pSwitchExpression;
 	private SwitchCaseElements pSwitchCase;
@@ -3530,7 +3490,6 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	private PostfixExpressionElements pPostfixExpression;
 	private PostfixOperatorElements unknownRulePostfixOperator;
 	private PrimaryExpressionElements pPrimaryExpression;
-	private CallablePrimaryExpressionElements pCallablePrimaryExpression;
 	private LiteralElements pLiteral;
 	private NumericLiteralElements pNumericLiteral;
 	private RealLiteralElements pRealLiteral;
@@ -3538,7 +3497,6 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	private BooleanLiteralElements pBooleanLiteral;
 	private BooleanKindElements unknownRuleBooleanKind;
 	private StringLiteralElements pStringLiteral;
-	private SimpleNameElements pSimpleName;
 	private FeatureCallElements pFeatureCall;
 	private FeatureCallPartElements pFeatureCallPart;
 	private NameComponentElements pNameComponent;
@@ -3902,13 +3860,24 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//LetExpressionVariableDeclaration:
-	//	(names+=ValidID | "(" names+=ValidID ("," names+=ValidID)+ ")") "=" assignedExpression=Expression;
+	//	(parts+=LetExpressionVariableDeclarationPart | "(" parts+=LetExpressionVariableDeclarationPart (","
+	//	parts+=LetExpressionVariableDeclarationPart)+ ")") "=" assignedExpression=Expression;
 	public LetExpressionVariableDeclarationElements getLetExpressionVariableDeclarationAccess() {
 		return (pLetExpressionVariableDeclaration != null) ? pLetExpressionVariableDeclaration : (pLetExpressionVariableDeclaration = new LetExpressionVariableDeclarationElements());
 	}
 	
 	public ParserRule getLetExpressionVariableDeclarationRule() {
 		return getLetExpressionVariableDeclarationAccess().getRule();
+	}
+
+	//LetExpressionVariableDeclarationPart:
+	//	name=ValidID;
+	public LetExpressionVariableDeclarationPartElements getLetExpressionVariableDeclarationPartAccess() {
+		return (pLetExpressionVariableDeclarationPart != null) ? pLetExpressionVariableDeclarationPart : (pLetExpressionVariableDeclarationPart = new LetExpressionVariableDeclarationPartElements());
+	}
+	
+	public ParserRule getLetExpressionVariableDeclarationPartRule() {
+		return getLetExpressionVariableDeclarationPartAccess().getRule();
 	}
 
 	//IfExpression:
@@ -4145,23 +4114,14 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//PrimaryExpression returns Expression:
-	//	Literal | FeatureCall | UnitConstructionOperator | BeginExpression | EndExpression;
+	//	Literal | FeatureCall | UnitConstructionOperator | ArrayConstructionOperator | ArrayConcatenationOperator |
+	//	ParenthesizedExpression | BeginExpression | EndExpression;
 	public PrimaryExpressionElements getPrimaryExpressionAccess() {
 		return (pPrimaryExpression != null) ? pPrimaryExpression : (pPrimaryExpression = new PrimaryExpressionElements());
 	}
 	
 	public ParserRule getPrimaryExpressionRule() {
 		return getPrimaryExpressionAccess().getRule();
-	}
-
-	//CallablePrimaryExpression returns Expression:
-	//	ArrayConstructionOperator | ArrayConcatenationOperator | ParenthesizedExpression;
-	public CallablePrimaryExpressionElements getCallablePrimaryExpressionAccess() {
-		return (pCallablePrimaryExpression != null) ? pCallablePrimaryExpression : (pCallablePrimaryExpression = new CallablePrimaryExpressionElements());
-	}
-	
-	public ParserRule getCallablePrimaryExpressionRule() {
-		return getCallablePrimaryExpressionAccess().getRule();
 	}
 
 	//Literal:
@@ -4234,19 +4194,8 @@ public class MscriptGrammarAccess extends AbstractGrammarElementFinder {
 		return getStringLiteralAccess().getRule();
 	}
 
-	//SimpleName returns Expression:
-	//	{SimpleName} identifier=ValidID;
-	public SimpleNameElements getSimpleNameAccess() {
-		return (pSimpleName != null) ? pSimpleName : (pSimpleName = new SimpleNameElements());
-	}
-	
-	public ParserRule getSimpleNameRule() {
-		return getSimpleNameAccess().getRule();
-	}
-
 	//FeatureCall returns Expression:
-	//	CallablePrimaryExpression ({FeatureCall.target=current} parts+=FeatureCallPart+)? | {FeatureCall} target=SimpleName
-	//	parts+=FeatureCallPart*;
+	//	{FeatureCall} target=[CallableElement|QualifiedName] parts+=FeatureCallPart*;
 	public FeatureCallElements getFeatureCallAccess() {
 		return (pFeatureCall != null) ? pFeatureCall : (pFeatureCall = new FeatureCallElements());
 	}

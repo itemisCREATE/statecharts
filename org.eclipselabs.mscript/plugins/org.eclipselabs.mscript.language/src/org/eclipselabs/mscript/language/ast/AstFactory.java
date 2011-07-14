@@ -179,6 +179,15 @@ public interface AstFactory extends EFactory {
 	LetExpressionVariableDeclaration createLetExpressionVariableDeclaration();
 
 	/**
+	 * Returns a new object of class '<em>Let Expression Variable Declaration Part</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Let Expression Variable Declaration Part</em>'.
+	 * @generated
+	 */
+	LetExpressionVariableDeclarationPart createLetExpressionVariableDeclarationPart();
+
+	/**
 	 * Returns a new object of class '<em>If Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -476,15 +485,6 @@ public interface AstFactory extends EFactory {
 	PostfixExpression createPostfixExpression();
 
 	/**
-	 * Returns a new object of class '<em>Simple Name</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Simple Name</em>'.
-	 * @generated
-	 */
-	SimpleName createSimpleName();
-
-	/**
 	 * Returns a new object of class '<em>Feature Call</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -492,6 +492,33 @@ public interface AstFactory extends EFactory {
 	 * @generated
 	 */
 	FeatureCall createFeatureCall();
+
+	/**
+	 * Returns a new object of class '<em>Builtin Definition</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Builtin Definition</em>'.
+	 * @generated
+	 */
+	BuiltinDefinition createBuiltinDefinition();
+
+	/**
+	 * Returns a new object of class '<em>Builtin Function</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Builtin Function</em>'.
+	 * @generated
+	 */
+	BuiltinFunction createBuiltinFunction();
+
+	/**
+	 * Returns a new object of class '<em>Builtin Variable</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Builtin Variable</em>'.
+	 * @generated
+	 */
+	BuiltinVariable createBuiltinVariable();
 
 	/**
 	 * Returns the package supported by this factory.

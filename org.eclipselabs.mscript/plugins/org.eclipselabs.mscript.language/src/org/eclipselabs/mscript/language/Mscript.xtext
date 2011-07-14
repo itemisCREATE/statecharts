@@ -150,7 +150,10 @@ LetExpression:
 	'let' variableDeclarations+=LetExpressionVariableDeclaration (',' variableDeclarations+=LetExpressionVariableDeclaration)* 'in' targetExpression=Expression;
 	
 LetExpressionVariableDeclaration:
-	(names+=ValidID | '(' names+=ValidID (',' names+=ValidID)+ ')') '=' assignedExpression=Expression;
+	(parts+=LetExpressionVariableDeclarationPart | '(' parts+=LetExpressionVariableDeclarationPart (',' parts+=LetExpressionVariableDeclarationPart)+ ')') '=' assignedExpression=Expression;
+
+LetExpressionVariableDeclarationPart:
+	name=ValidID;
 	
 IfExpression:
 	(static?='static')? 'if' condition=Expression 'then' thenExpression=Expression 'else' elseExpression=Expression;
@@ -237,13 +240,11 @@ PrimaryExpression returns Expression:
 	Literal |
 	FeatureCall |
 	UnitConstructionOperator |
-	BeginExpression |
-	EndExpression;
-
-CallablePrimaryExpression returns Expression:
 	ArrayConstructionOperator |
 	ArrayConcatenationOperator |
-	ParenthesizedExpression;
+	ParenthesizedExpression |
+	BeginExpression |
+	EndExpression;
 
 Literal:
 	NumericLiteral | BooleanLiteral | StringLiteral;
@@ -266,11 +267,8 @@ enum BooleanKind:
 StringLiteral:
 	value=STRING;
 		
-SimpleName returns Expression:
-	{SimpleName} identifier=ValidID;
-
 FeatureCall returns Expression:
-	CallablePrimaryExpression ({FeatureCall.target=current} (parts+=FeatureCallPart)+)? | {FeatureCall} target=SimpleName (parts+=FeatureCallPart)*;
+	{FeatureCall} target=[CallableElement|QualifiedName] (parts+=FeatureCallPart)*;
 
 FeatureCallPart:
 	NameComponent | ArrayElementAccess | OperationArgumentList | IterationCall;

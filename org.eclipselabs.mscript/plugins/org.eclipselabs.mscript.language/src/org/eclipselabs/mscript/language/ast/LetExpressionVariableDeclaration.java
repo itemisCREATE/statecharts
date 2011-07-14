@@ -18,7 +18,7 @@ import org.eclipselabs.mscript.typesystem.Expression;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.LetExpressionVariableDeclaration#getNames <em>Names</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.LetExpressionVariableDeclaration#getParts <em>Parts</em>}</li>
  *   <li>{@link org.eclipselabs.mscript.language.ast.LetExpressionVariableDeclaration#getAssignedExpression <em>Assigned Expression</em>}</li>
  * </ul>
  * </p>
@@ -29,20 +29,20 @@ import org.eclipselabs.mscript.typesystem.Expression;
  */
 public interface LetExpressionVariableDeclaration extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Names</b></em>' attribute list.
-	 * The list contents are of type {@link java.lang.String}.
+	 * Returns the value of the '<em><b>Parts</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipselabs.mscript.language.ast.LetExpressionVariableDeclarationPart}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Names</em>' attribute list isn't clear,
+	 * If the meaning of the '<em>Parts</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Names</em>' attribute list.
-	 * @see org.eclipselabs.mscript.language.ast.AstPackage#getLetExpressionVariableDeclaration_Names()
-	 * @model unique="false"
+	 * @return the value of the '<em>Parts</em>' containment reference list.
+	 * @see org.eclipselabs.mscript.language.ast.AstPackage#getLetExpressionVariableDeclaration_Parts()
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList<String> getNames();
+	EList<LetExpressionVariableDeclarationPart> getParts();
 
 	/**
 	 * Returns the value of the '<em><b>Assigned Expression</b></em>' containment reference.

@@ -31,7 +31,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface FunctionDefinition extends Definition {
+public interface FunctionDefinition extends Definition, CallableElement {
 	/**
 	 * Returns the value of the '<em><b>Stateful</b></em>' attribute.
 	 * <!-- begin-user-doc -->

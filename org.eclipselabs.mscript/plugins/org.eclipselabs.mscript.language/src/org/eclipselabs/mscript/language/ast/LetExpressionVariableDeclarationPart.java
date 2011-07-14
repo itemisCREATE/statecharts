@@ -9,21 +9,21 @@ package org.eclipselabs.mscript.language.ast;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>State Variable Declaration</b></em>'.
+ * A representation of the model object '<em><b>Let Expression Variable Declaration Part</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipselabs.mscript.language.ast.StateVariableDeclaration#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipselabs.mscript.language.ast.LetExpressionVariableDeclarationPart#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipselabs.mscript.language.ast.AstPackage#getStateVariableDeclaration()
+ * @see org.eclipselabs.mscript.language.ast.AstPackage#getLetExpressionVariableDeclarationPart()
  * @model
  * @generated
  */
-public interface StateVariableDeclaration extends CallableElement {
+public interface LetExpressionVariableDeclarationPart extends CallableElement {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -34,14 +34,14 @@ public interface StateVariableDeclaration extends CallableElement {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
-	 * @see org.eclipselabs.mscript.language.ast.AstPackage#getStateVariableDeclaration_Name()
+	 * @see org.eclipselabs.mscript.language.ast.AstPackage#getLetExpressionVariableDeclarationPart_Name()
 	 * @model
 	 * @generated
 	 */
 	String getName();
 
 	/**
-	 * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.StateVariableDeclaration#getName <em>Name</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipselabs.mscript.language.ast.LetExpressionVariableDeclarationPart#getName <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Name</em>' attribute.
@@ -50,4 +50,4 @@ public interface StateVariableDeclaration extends CallableElement {
 	 */
 	void setName(String value);
 
-} // StateVariableDeclaration
+} // LetExpressionVariableDeclarationPart

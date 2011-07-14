@@ -9,7 +9,6 @@ package org.eclipselabs.mscript.language.ast.impl;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
 
@@ -26,7 +25,7 @@ import org.eclipselabs.mscript.language.ast.ParameterDeclaration;
  *
  * @generated
  */
-public class ParameterDeclarationImpl extends MinimalEObjectImpl.Container implements ParameterDeclaration {
+public class ParameterDeclarationImpl extends CallableElementImpl implements ParameterDeclaration {
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->

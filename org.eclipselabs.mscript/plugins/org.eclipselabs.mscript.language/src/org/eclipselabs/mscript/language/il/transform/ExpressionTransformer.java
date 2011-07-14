@@ -43,7 +43,6 @@ import org.eclipselabs.mscript.language.ast.NameComponent;
 import org.eclipselabs.mscript.language.ast.OperationArgumentList;
 import org.eclipselabs.mscript.language.ast.ParenthesizedExpression;
 import org.eclipselabs.mscript.language.ast.RelationalExpression;
-import org.eclipselabs.mscript.language.ast.SimpleName;
 import org.eclipselabs.mscript.language.ast.TypeTestExpression;
 import org.eclipselabs.mscript.language.ast.UnaryExpression;
 import org.eclipselabs.mscript.language.ast.UnitConstructionOperator;
@@ -124,7 +123,7 @@ public class ExpressionTransformer extends AstSwitch<Expression> implements IExp
 
 		for (LetExpressionVariableDeclaration letExpressionVariableDeclaration : letExpression.getVariableDeclarations()) {
 			LocalVariableDeclaration letVariableDeclaration = ILFactory.eINSTANCE.createLocalVariableDeclaration();
-			letVariableDeclaration.setName(letExpressionVariableDeclaration.getNames().get(0));
+			letVariableDeclaration.setName(letExpressionVariableDeclaration.getParts().get(0).getName());
 			Expression assignedExpression = doSwitch(letExpressionVariableDeclaration.getAssignedExpression());
 			letVariableDeclaration.setInitializer(assignedExpression);
 			compoundStatement.getStatements().add(letVariableDeclaration);
@@ -191,25 +190,21 @@ public class ExpressionTransformer extends AstSwitch<Expression> implements IExp
 	public Expression caseFeatureCall(FeatureCall featureCall) {
 		Expression targetExpression;
 		ListIterator<FeatureCallPart> featureCallPartIterator = featureCall.getParts().listIterator();
-		
-		if (featureCall.getTarget() instanceof SimpleName) {
-			SimpleName simpleName = (SimpleName) featureCall.getTarget();
-			targetExpression = resolveVariableReference(simpleName.getIdentifier(), featureCallPartIterator);
-			if (targetExpression == null) {
-				targetExpression = resolveOperationCall(simpleName.getIdentifier(), featureCallPartIterator, null);
+
+		String name = featureCall.getTarget().getName();
+		targetExpression = resolveVariableReference(name, featureCallPartIterator);
+		if (targetExpression == null) {
+			targetExpression = resolveOperationCall(name, featureCallPartIterator, null);
+		}
+		if (targetExpression == null) {
+			String message;
+			if (featureCallPartIterator.hasNext() && featureCallPartIterator.next() instanceof OperationArgumentList) {
+				message = "The method " + name + "(...) is undefined";
+			} else {
+				message = name + " cannot be resolved to a variable";
 			}
-			if (targetExpression == null) {
-				String message;
-				if (featureCallPartIterator.hasNext() && featureCallPartIterator.next() instanceof OperationArgumentList) {
-					message = "The method " + simpleName.getIdentifier() + "(...) is undefined";
-				} else {
-					message = simpleName.getIdentifier() + " cannot be resolved to a variable";
-				}
-				status.add(new SyntaxStatus(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, 0, message, simpleName));
-				return createInvalidExpression();
-			}
-		} else {
-			targetExpression = doSwitch(featureCall.getTarget());
+			status.add(new SyntaxStatus(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, 0, message, featureCall));
+			return createInvalidExpression();
 		}
 		
 		FeatureCallPartTransformer featureCallPartTransformer = new FeatureCallPartTransformer(featureCallPartIterator);

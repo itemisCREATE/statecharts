@@ -25,6 +25,9 @@ import org.eclipselabs.mscript.language.ast.AssertionStatusKind;
 import org.eclipselabs.mscript.language.ast.AstFactory;
 import org.eclipselabs.mscript.language.ast.AstPackage;
 import org.eclipselabs.mscript.language.ast.BeginExpression;
+import org.eclipselabs.mscript.language.ast.BuiltinDefinition;
+import org.eclipselabs.mscript.language.ast.BuiltinFunction;
+import org.eclipselabs.mscript.language.ast.BuiltinVariable;
 import org.eclipselabs.mscript.language.ast.DataTypeDefinition;
 import org.eclipselabs.mscript.language.ast.DataTypeSpecifier;
 import org.eclipselabs.mscript.language.ast.Definition;
@@ -46,6 +49,7 @@ import org.eclipselabs.mscript.language.ast.IterationCall;
 import org.eclipselabs.mscript.language.ast.IterationVariable;
 import org.eclipselabs.mscript.language.ast.LetExpression;
 import org.eclipselabs.mscript.language.ast.LetExpressionVariableDeclaration;
+import org.eclipselabs.mscript.language.ast.LetExpressionVariableDeclarationPart;
 import org.eclipselabs.mscript.language.ast.LogicalAndExpression;
 import org.eclipselabs.mscript.language.ast.LogicalOrExpression;
 import org.eclipselabs.mscript.language.ast.Module;
@@ -65,7 +69,6 @@ import org.eclipselabs.mscript.language.ast.RecordDefinition;
 import org.eclipselabs.mscript.language.ast.RecordFieldDeclaration;
 import org.eclipselabs.mscript.language.ast.RelationalExpression;
 import org.eclipselabs.mscript.language.ast.RelationalOperator;
-import org.eclipselabs.mscript.language.ast.SimpleName;
 import org.eclipselabs.mscript.language.ast.StateVariableDeclaration;
 import org.eclipselabs.mscript.language.ast.SwitchCase;
 import org.eclipselabs.mscript.language.ast.SwitchExpression;
@@ -136,6 +139,7 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory {
 			case AstPackage.DATA_TYPE_SPECIFIER: return createDataTypeSpecifier();
 			case AstPackage.LET_EXPRESSION: return createLetExpression();
 			case AstPackage.LET_EXPRESSION_VARIABLE_DECLARATION: return createLetExpressionVariableDeclaration();
+			case AstPackage.LET_EXPRESSION_VARIABLE_DECLARATION_PART: return createLetExpressionVariableDeclarationPart();
 			case AstPackage.IF_EXPRESSION: return createIfExpression();
 			case AstPackage.SWITCH_EXPRESSION: return createSwitchExpression();
 			case AstPackage.SWITCH_CASE: return createSwitchCase();
@@ -169,8 +173,10 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory {
 			case AstPackage.POWER_EXPRESSION: return createPowerExpression();
 			case AstPackage.UNARY_EXPRESSION: return createUnaryExpression();
 			case AstPackage.POSTFIX_EXPRESSION: return createPostfixExpression();
-			case AstPackage.SIMPLE_NAME: return createSimpleName();
 			case AstPackage.FEATURE_CALL: return createFeatureCall();
+			case AstPackage.BUILTIN_DEFINITION: return createBuiltinDefinition();
+			case AstPackage.BUILTIN_FUNCTION: return createBuiltinFunction();
+			case AstPackage.BUILTIN_VARIABLE: return createBuiltinVariable();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -402,6 +408,16 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory {
 	public LetExpressionVariableDeclaration createLetExpressionVariableDeclaration() {
 		LetExpressionVariableDeclarationImpl letExpressionVariableDeclaration = new LetExpressionVariableDeclarationImpl();
 		return letExpressionVariableDeclaration;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public LetExpressionVariableDeclarationPart createLetExpressionVariableDeclarationPart() {
+		LetExpressionVariableDeclarationPartImpl letExpressionVariableDeclarationPart = new LetExpressionVariableDeclarationPartImpl();
+		return letExpressionVariableDeclarationPart;
 	}
 
 	/**
@@ -739,9 +755,9 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SimpleName createSimpleName() {
-		SimpleNameImpl simpleName = new SimpleNameImpl();
-		return simpleName;
+	public FeatureCall createFeatureCall() {
+		FeatureCallImpl featureCall = new FeatureCallImpl();
+		return featureCall;
 	}
 
 	/**
@@ -749,9 +765,29 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public FeatureCall createFeatureCall() {
-		FeatureCallImpl featureCall = new FeatureCallImpl();
-		return featureCall;
+	public BuiltinDefinition createBuiltinDefinition() {
+		BuiltinDefinitionImpl builtinDefinition = new BuiltinDefinitionImpl();
+		return builtinDefinition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BuiltinFunction createBuiltinFunction() {
+		BuiltinFunctionImpl builtinFunction = new BuiltinFunctionImpl();
+		return builtinFunction;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BuiltinVariable createBuiltinVariable() {
+		BuiltinVariableImpl builtinVariable = new BuiltinVariableImpl();
+		return builtinVariable;
 	}
 
 	/**

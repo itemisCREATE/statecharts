@@ -24,7 +24,6 @@ import org.eclipselabs.mscript.language.ast.FeatureCall;
 import org.eclipselabs.mscript.language.ast.FeatureCallPart;
 import org.eclipselabs.mscript.language.ast.OperationArgumentList;
 import org.eclipselabs.mscript.language.ast.ParenthesizedExpression;
-import org.eclipselabs.mscript.language.ast.SimpleName;
 import org.eclipselabs.mscript.language.ast.UnaryExpression;
 import org.eclipselabs.mscript.language.ast.util.AstSwitch;
 import org.eclipselabs.mscript.language.internal.LanguagePlugin;
@@ -137,20 +136,15 @@ public class StepExpressionHelper {
 		 */
 		@Override
 		public Integer caseFeatureCall(FeatureCall featureCall) {
-			if (featureCall.getTarget() instanceof SimpleName) {
-				SimpleName simpleName = (SimpleName) featureCall.getTarget();
-				if (simpleName.getIdentifier().equals("n")) {
-					if (absolute) {
-						absolute = false;
-						return 0;
-					} else {
-						status.add(new SyntaxStatus(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, 0, "Duplicate 'n'", simpleName));
-					}
+			if (featureCall.getTarget().getName().equals("n")) {
+				if (absolute) {
+					absolute = false;
+					return 0;
 				} else {
-					status.add(new SyntaxStatus(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, 0, "Invalid symbol", simpleName));
+					status.add(new SyntaxStatus(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, 0, "Duplicate 'n'", featureCall));
 				}
 			} else {
-				status.add(new SyntaxStatus(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, 0, "Invalid expression", featureCall));
+				status.add(new SyntaxStatus(IStatus.ERROR, LanguagePlugin.PLUGIN_ID, 0, "Invalid symbol", featureCall));
 			}
 			return 0;
 		}
