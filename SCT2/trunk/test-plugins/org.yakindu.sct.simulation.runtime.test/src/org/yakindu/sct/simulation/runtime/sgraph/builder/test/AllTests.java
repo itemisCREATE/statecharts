@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2010 committers of YAKINDU and others.
+ * Copyright (c) 2011 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -10,26 +10,14 @@
  */
 package org.yakindu.sct.simulation.runtime.sgraph.builder.test;
 
-import junit.framework.Test;
 import junit.framework.TestSuite;
 
-/**
-@RunWith(value=Suite.class)
-@SuiteClasses(value={
-		ExpressionsTest.class, 
-		FunctionsTest.class,
-		CoreFunctionsTest.class
-		}) 
-*/
-public class AllTests extends TestSuite{
-	
-	public static Test suite() {
-		TestSuite suite = new AllTests();
-		suite.addTestSuite(StatechartBuilderTest.class);
-			
-		return suite;
-	}
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
 
-	
+@RunWith(value = Suite.class)
+@SuiteClasses(value = { StatechartBuilderTest.class})
+public class AllTests extends TestSuite {
 
 }
