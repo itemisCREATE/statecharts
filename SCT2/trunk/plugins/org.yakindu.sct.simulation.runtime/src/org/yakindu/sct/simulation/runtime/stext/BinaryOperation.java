@@ -13,40 +13,40 @@ package org.yakindu.sct.simulation.runtime.stext;
 import org.yakindu.sct.simulation.runtime.EvaluationException;
 import org.yakindu.sct.simulation.runtime.ExecutionScope;
 
-public class BinaryOperation implements Expression {
+public class BinaryOperation implements RTExpression {
 
 	
-	protected Expression expr1;
-	protected Expression expr2;
+	protected RTExpression expr1;
+	protected RTExpression expr2;
 	protected Operator   operator;
 	
 	public BinaryOperation() {
 	}
 	
-	public BinaryOperation(Operator operator, Expression expr1, Expression expr2) {
+	public BinaryOperation(Operator operator, RTExpression expr1, RTExpression expr2) {
 		super();
 		this.expr1 = expr1;
 		this.expr2 = expr2;
 		this.operator = operator;
 	}
 
-	public BinaryOperation(String operator, Expression expr1, Expression expr2) {
+	public BinaryOperation(String operator, RTExpression expr1, RTExpression expr2) {
 		this(new Operator(operator), expr1, expr2);
 	}
 
-	public Expression getExpr1() {
+	public RTExpression getExpr1() {
 		return expr1;
 	}
 
-	public void setExpr1(Expression expr1) {
+	public void setExpr1(RTExpression expr1) {
 		this.expr1 = expr1;
 	}
 
-	public Expression getExpr2() {
+	public RTExpression getExpr2() {
 		return expr2;
 	}
 
-	public void setExpr2(Expression expr2) {
+	public void setExpr2(RTExpression expr2) {
 		this.expr2 = expr2;
 	}
 

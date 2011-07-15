@@ -12,8 +12,10 @@ package org.yakindu.sct.simulation.runtime.sgraph.builder.test;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertNotSame;
+import static junit.framework.Assert.assertSame;
 import static junit.framework.Assert.assertTrue;
-import static junit.framework.Assert.*;
+import static junit.framework.Assert.fail;
 
 import java.util.List;
 
@@ -28,18 +30,15 @@ import org.yakindu.sct.model.sgraph.Event;
 import org.yakindu.sct.model.sgraph.FinalState;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.SGraphFactory;
-import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Transition;
-import org.yakindu.sct.model.sgraph.Variable;
 import org.yakindu.sct.model.stext.stext.Direction;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.StextFactory;
 import org.yakindu.sct.model.stext.stext.Type;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
-import org.yakindu.sct.simulation.runtime.sgraph.ActionStatement;
 import org.yakindu.sct.simulation.runtime.sgraph.PseudostateKind;
 import org.yakindu.sct.simulation.runtime.sgraph.RTCompoundState;
 import org.yakindu.sct.simulation.runtime.sgraph.RTFinalState;
@@ -50,8 +49,6 @@ import org.yakindu.sct.simulation.runtime.sgraph.RTSimpleState;
 import org.yakindu.sct.simulation.runtime.sgraph.RTStatechart;
 import org.yakindu.sct.simulation.runtime.sgraph.RTTransition;
 import org.yakindu.sct.simulation.runtime.sgraph.builder.SGraphBuilder;
-import org.yakindu.sct.simulation.runtime.stext.Statement;
-import org.yakindu.sct.simulation.runtime.stext.StatementSequence;
 
 /**
  * 

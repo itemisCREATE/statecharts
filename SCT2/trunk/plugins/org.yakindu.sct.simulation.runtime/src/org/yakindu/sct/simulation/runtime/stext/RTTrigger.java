@@ -12,9 +12,9 @@ package org.yakindu.sct.simulation.runtime.stext;
 
 import org.yakindu.sct.simulation.runtime.ExecutionScope;
 
-public class Trigger {
+public class RTTrigger {
 	
-	public static class SignalEvent extends Trigger {
+	public static class SignalEvent extends RTTrigger {
 		protected String signal;
 
 		public SignalEvent(String signal) {
@@ -32,20 +32,20 @@ public class Trigger {
 		
 	}
 	
-	public static class TimeEvent extends Trigger implements Expression {
-		protected Expression durationExp;
+	public static class TimeEvent extends RTTrigger implements RTExpression {
+		protected RTExpression durationExp;
 
 		
-		public TimeEvent(Expression timeValueExp) {
+		public TimeEvent(RTExpression timeValueExp) {
 			super();
 			this.durationExp = timeValueExp;
 		}
 
-		public Expression getDurationExp() {
+		public RTExpression getDurationExp() {
 			return durationExp;
 		}
 
-		public void setDurationExp(Expression timeValueExp) {
+		public void setDurationExp(RTExpression timeValueExp) {
 			this.durationExp = timeValueExp;
 		}
 

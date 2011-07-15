@@ -12,18 +12,18 @@ package org.yakindu.sct.simulation.runtime.stext;
 
 import org.yakindu.sct.simulation.runtime.ExecutionScope;
 
-public class Conditional implements Expression {
+public class Conditional implements RTExpression {
 
-	protected Expression condition;
-	protected Expression trueValue;
-	protected Expression falseValue;
+	protected RTExpression condition;
+	protected RTExpression trueValue;
+	protected RTExpression falseValue;
 	
 	
 	public Conditional() {
 	}
 	
 	
-	public Conditional(Expression condition, Expression trueValue, Expression falseValue) {
+	public Conditional(RTExpression condition, RTExpression trueValue, RTExpression falseValue) {
 		super();
 		this.condition = condition;
 		this.trueValue = trueValue;
@@ -32,32 +32,32 @@ public class Conditional implements Expression {
 
 
 	
-	public Expression getCondition() {
+	public RTExpression getCondition() {
 		return condition;
 	}
 
 
-	public void setCondition(Expression condition) {
+	public void setCondition(RTExpression condition) {
 		this.condition = condition;
 	}
 
 
-	public Expression getTrueValue() {
+	public RTExpression getTrueValue() {
 		return trueValue;
 	}
 
 
-	public void setTrueValue(Expression trueValue) {
+	public void setTrueValue(RTExpression trueValue) {
 		this.trueValue = trueValue;
 	}
 
 
-	public Expression getFalseValue() {
+	public RTExpression getFalseValue() {
 		return falseValue;
 	}
 
 
-	public void setFalseValue(Expression falseValue) {
+	public void setFalseValue(RTExpression falseValue) {
 		this.falseValue = falseValue;
 	}
 

@@ -12,19 +12,19 @@ package org.yakindu.sct.simulation.runtime.sgraph;
 
 import org.yakindu.sct.simulation.runtime.ExecutionScope;
 import org.yakindu.sct.simulation.runtime.sgraph.RTGuard;
-import org.yakindu.sct.simulation.runtime.stext.Expression;
+import org.yakindu.sct.simulation.runtime.stext.RTExpression;
 
 
 public class GuardExpression extends RTGuard {
 
-	private Expression expression;
+	private RTExpression expression;
 	private ExecutionScope scope;
 	
 	public GuardExpression() {
 		super();
 	}
 
-	public GuardExpression(Expression expression, ExecutionScope scope) {
+	public GuardExpression(RTExpression expression, ExecutionScope scope) {
 		super();
 		this.expression = expression;
 		this.scope = scope;
@@ -32,11 +32,11 @@ public class GuardExpression extends RTGuard {
 
 
 	
-	public Expression getExpression() {
+	public RTExpression getExpression() {
 		return expression;
 	}
 
-	public void setExpression(Expression expression) {
+	public void setExpression(RTExpression expression) {
 		this.expression = expression;
 	}
 
