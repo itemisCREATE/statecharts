@@ -12,14 +12,14 @@ package org.yakindu.sct.simulation.runtime.sgraph;
 
 import org.yakindu.sct.simulation.runtime.ExecutionScope;
 import org.yakindu.sct.simulation.runtime.sgraph.RTTimeEvent;
-import org.yakindu.sct.simulation.runtime.stext.Trigger;
+import org.yakindu.sct.simulation.runtime.stext.RTTrigger;
 
 public class TimeEventExpression extends org.yakindu.sct.simulation.runtime.sgraph.RTTimeEvent {
 
-	protected Trigger.TimeEvent timeEvent;
+	protected RTTrigger.TimeEvent timeEvent;
 	protected ExecutionScope scope;
 
-	public TimeEventExpression(String id, Trigger.TimeEvent timeEvent, ExecutionScope scope) {
+	public TimeEventExpression(String id, RTTrigger.TimeEvent timeEvent, ExecutionScope scope) {
 		super(id);
 		this.timeEvent = timeEvent;
 		this.scope = scope;
@@ -27,13 +27,13 @@ public class TimeEventExpression extends org.yakindu.sct.simulation.runtime.sgra
 
 
 		
-	public Trigger.TimeEvent getTimeEvent() {
+	public RTTrigger.TimeEvent getTimeEvent() {
 			return timeEvent;
 		}
 
 
 
-	public void setTimeEvent(Trigger.TimeEvent timeEvent) {
+	public void setTimeEvent(RTTrigger.TimeEvent timeEvent) {
 			this.timeEvent = timeEvent;
 		}
 

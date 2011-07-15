@@ -12,7 +12,7 @@ package org.yakindu.sct.simulation.runtime.stext;
 
 import org.yakindu.sct.simulation.runtime.ExecutionScope;
 
-public class VariableRef implements Expression {
+public class VariableRef implements RTExpression {
 
 	protected String name;
 	

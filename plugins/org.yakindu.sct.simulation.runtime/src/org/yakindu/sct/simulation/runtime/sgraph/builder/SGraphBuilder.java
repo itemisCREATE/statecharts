@@ -12,12 +12,16 @@ package org.yakindu.sct.simulation.runtime.sgraph.builder;
 
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.EcoreUtil2;
 import org.yakindu.sct.model.sgraph.Choice;
+import org.yakindu.sct.model.sgraph.Effect;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.Event;
 import org.yakindu.sct.model.sgraph.FinalState;
@@ -26,11 +30,21 @@ import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Transition;
+import org.yakindu.sct.model.sgraph.Trigger;
+import org.yakindu.sct.model.stext.stext.EventSpec;
+import org.yakindu.sct.model.stext.stext.Expression;
+import org.yakindu.sct.model.stext.stext.ReactionTrigger;
+import org.yakindu.sct.model.stext.stext.RegularEventSpec;
+import org.yakindu.sct.model.stext.stext.TimeEventSpec;
 import org.yakindu.sct.model.stext.stext.Type;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
+import org.yakindu.sct.simulation.runtime.sgraph.ActionStatement;
+import org.yakindu.sct.simulation.runtime.sgraph.GuardExpression;
 import org.yakindu.sct.simulation.runtime.sgraph.PseudostateKind;
+import org.yakindu.sct.simulation.runtime.sgraph.RTAction;
 import org.yakindu.sct.simulation.runtime.sgraph.RTCompoundState;
 import org.yakindu.sct.simulation.runtime.sgraph.RTFinalState;
+import org.yakindu.sct.simulation.runtime.sgraph.RTGuard;
 import org.yakindu.sct.simulation.runtime.sgraph.RTNode;
 import org.yakindu.sct.simulation.runtime.sgraph.RTPseudostate;
 import org.yakindu.sct.simulation.runtime.sgraph.RTRegion;
@@ -38,10 +52,14 @@ import org.yakindu.sct.simulation.runtime.sgraph.RTSignalEvent;
 import org.yakindu.sct.simulation.runtime.sgraph.RTSimpleState;
 import org.yakindu.sct.simulation.runtime.sgraph.RTState;
 import org.yakindu.sct.simulation.runtime.sgraph.RTStatechart;
+import org.yakindu.sct.simulation.runtime.sgraph.RTTimeEvent;
 import org.yakindu.sct.simulation.runtime.sgraph.RTTransition;
+import org.yakindu.sct.simulation.runtime.sgraph.TimeEventExpression;
 import org.yakindu.sct.simulation.runtime.stext.Function;
 import org.yakindu.sct.simulation.runtime.stext.FunctionMethod;
+import org.yakindu.sct.simulation.runtime.stext.RTTrigger.SignalEvent;
 import org.yakindu.sct.simulation.runtime.stext.Variable;
+import org.yakindu.sct.simulation.runtime.stext.builder.STextBuilder;
 
 /**
  * 
@@ -50,6 +68,9 @@ import org.yakindu.sct.simulation.runtime.stext.Variable;
  * 
  */
 public class SGraphBuilder extends Function {
+
+	// TODO: Extract interface
+	private STextBuilder sTextBuilder;
 
 	protected static Comparator<RTRegion> regionComparator = new Comparator<RTRegion>() {
 		public int compare(RTRegion o1, RTRegion o2) {
@@ -185,14 +206,48 @@ public class SGraphBuilder extends Function {
 	}
 
 	@FunctionMethod("")
-	public Object build(RTStatechart tParent, Transition sTrans) {
-		RTNode fromNode = (RTNode) tParent
-				.getElementByAlias(sTrans.getSource());
-		RTNode toNode = (RTNode) tParent.getElementByAlias(sTrans.getTarget());
-		// TODO: Trigger, Actions, etc.
-		RTTransition tTrans = new RTTransition("t@", sTrans.getPriority(),
-				null, null, null, null, fromNode, toNode);
-		tParent.defineAlias(sTrans, tTrans);
+	public Object build(RTStatechart tParent, Transition transition) {
+		RTNode fromNode = (RTNode) tParent.getElementByAlias(transition
+				.getSource());
+		RTNode toNode = (RTNode) tParent.getElementByAlias(transition
+				.getTarget());
+
+		RTTimeEvent timeTrigger = null;
+		Set<RTSignalEvent> signalTriggers = new HashSet<RTSignalEvent>();
+		RTGuard guard = null;
+		RTAction action = null;
+
+		Trigger trigger = transition.getTrigger();
+		// TODO: Das muzss hier raus:
+		if (trigger instanceof ReactionTrigger) {
+			EList<EventSpec> triggers = ((ReactionTrigger) trigger)
+					.getTriggers();
+			for (EventSpec eventSpec : triggers) {
+				if (eventSpec instanceof RegularEventSpec) {
+					String name = ((RegularEventSpec) eventSpec).getEvent()
+							.getName();
+					RTSignalEvent signalEvent = tParent
+							.getSignalEvent(name);
+					if (signalEvent != null) {
+						signalTriggers.add(signalEvent);
+					}
+				}
+				// TODO: TimeEvent
+			}
+
+			Expression guardExpression = ((ReactionTrigger) trigger)
+					.getGuardExpression();
+			guard = new GuardExpression(
+					sTextBuilder.buildGuardExpression(guardExpression), tParent);
+		}
+
+		Effect effect = transition.getEffect();
+		action = new ActionStatement(
+				sTextBuilder.buildActionExpression(effect), tParent);
+
+		RTTransition tTrans = new RTTransition("t@", transition.getPriority(),
+				null, signalTriggers, guard, action, fromNode, toNode);
+		tParent.defineAlias(transition, tTrans);
 		return tTrans;
 	}
 

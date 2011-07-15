@@ -13,26 +13,26 @@ package org.yakindu.sct.simulation.runtime.stext;
 import org.yakindu.sct.simulation.runtime.EvaluationException;
 import org.yakindu.sct.simulation.runtime.ExecutionScope;
 
-public class UnaryOperation implements Expression {
+public class UnaryOperation implements RTExpression {
 
 	
-	protected Expression expression;
+	protected RTExpression expression;
 	protected String operator;
 	
 	public UnaryOperation() {
 	}
 	
-	public UnaryOperation(String operator, Expression expr) {
+	public UnaryOperation(String operator, RTExpression expr) {
 		super();
 		this.expression = expr;
 		this.operator = operator;
 	}
 
-	public Expression getExpression() {
+	public RTExpression getExpression() {
 		return expression;
 	}
 
-	public void setExpression(Expression expr) {
+	public void setExpression(RTExpression expr) {
 		this.expression = expr;
 	}
 

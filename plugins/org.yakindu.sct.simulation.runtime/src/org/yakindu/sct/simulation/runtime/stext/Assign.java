@@ -20,14 +20,14 @@ import org.yakindu.sct.simulation.runtime.ExecutionScope;
 public class Assign implements Statement {
 	
 	protected VariableRef varRef;
-	protected Expression expression;
+	protected RTExpression expression;
 	
 	
 	public Assign() {
 		super();
 	}
 
-	public Assign(VariableRef varRef, Expression expression) {
+	public Assign(VariableRef varRef, RTExpression expression) {
 		this();
 		this.varRef = varRef;
 		this.expression = expression;
@@ -41,11 +41,11 @@ public class Assign implements Statement {
 		this.varRef = varRef;
 	}
 
-	public Expression getExpression() {
+	public RTExpression getExpression() {
 		return expression;
 	}
 
-	public void setExpression(Expression expression) {
+	public void setExpression(RTExpression expression) {
 		this.expression = expression;
 	}
 

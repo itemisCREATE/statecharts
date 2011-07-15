@@ -17,7 +17,7 @@ import org.yakindu.sct.simulation.runtime.ExecutionScope;
  * @author terfloth@itemis.de
  *
  */
-public class Constant implements Expression {
+public class Constant implements RTExpression {
 	
 	protected Object value;
 	
