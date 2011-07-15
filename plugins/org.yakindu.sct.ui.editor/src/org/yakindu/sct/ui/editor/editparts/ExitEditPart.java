@@ -17,7 +17,6 @@ import org.eclipse.gmf.runtime.diagram.ui.handles.ConnectionHandle.HandleDirecti
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.ui.editor.editor.figures.ExitFigure;
 import org.yakindu.sct.ui.editor.editor.figures.utils.MapModeUtils;
-import org.yakindu.sct.ui.editor.policies.RelationshipSemanticEditPolicy;
 
 import de.itemis.gmf.runtime.commons.editparts.EllipseFixedSizeShapeNodeEditPart;
 import de.itemis.gmf.runtime.commons.editpolicies.OneWayConnectionHandlesEditPolicy;
@@ -36,8 +35,6 @@ public class ExitEditPart extends EllipseFixedSizeShapeNodeEditPart {
 	@Override
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
-		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE,
-				new RelationshipSemanticEditPolicy());
 		installEditPolicy(EditPolicyRoles.CONNECTION_HANDLES_ROLE,
 				new OneWayConnectionHandlesEditPolicy(HandleDirection.INCOMING));
 	}
