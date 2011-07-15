@@ -52,6 +52,7 @@
          </metamodelType>
          <metamodelType
                eclass="State"
+               edithelper="org.yakindu.sct.ui.editor.edithelper.VertexEditHelper"
                icon="icons/obj16/state_16x16.png"
                id="org.yakindu.sct.ui.editor.State"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
@@ -75,6 +76,7 @@
          </metamodelType>
          <metamodelType
                eclass="Choice"
+               edithelper="org.yakindu.sct.ui.editor.edithelper.VertexEditHelper"
                icon="icons/obj16/choice_16x16.png"
                id="org.yakindu.sct.ui.editor.Choice"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
@@ -122,6 +124,7 @@
          </metamodelType>
          <metamodelType
                eclass="FinalState"
+               edithelper="org.yakindu.sct.ui.editor.edithelper.VertexEditHelper"
                icon="icons/obj16/final_state_16x16.png"
                id="org.yakindu.sct.ui.editor.FinalState"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
@@ -132,11 +135,12 @@
             </param>
          </metamodelType>
           <metamodelType
-               eclass="Exit"
-               icon="icons/obj16/exit_point_16x16.png"
-               id="org.yakindu.sct.ui.editor.Exit"
-               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               name="Exit">
+                eclass="Exit"
+                edithelper="org.yakindu.sct.ui.editor.edithelper.VertexEditHelper"
+                icon="icons/obj16/exit_point_16x16.png"
+                id="org.yakindu.sct.ui.editor.Exit"
+                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+                name="Exit">
             <param
                   name="semanticHint"
                   value="Exit">
@@ -144,6 +148,7 @@
          </metamodelType>
          <metamodelType
                eclass="Junction"
+               edithelper="org.yakindu.sct.ui.editor.edithelper.VertexEditHelper"
                icon="icons/obj16/junction_16x16.png"
                id="org.yakindu.sct.ui.editor.Junction"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
@@ -154,11 +159,12 @@
             </param>
          </metamodelType>
           <metamodelType
-               eclass="Synchronization"
-               icon = "icons/obj16/synchronization_16x16.png"
-               id="org.yakindu.sct.ui.editor.Synchronization"
-               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               name="Synchronization">
+                eclass="Synchronization"
+                edithelper="org.yakindu.sct.ui.editor.edithelper.VertexEditHelper"
+                icon="icons/obj16/synchronization_16x16.png"
+                id="org.yakindu.sct.ui.editor.Synchronization"
+                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+                name="Synchronization">
             <param
                   name="semanticHint"
                   value="Synchronization">
