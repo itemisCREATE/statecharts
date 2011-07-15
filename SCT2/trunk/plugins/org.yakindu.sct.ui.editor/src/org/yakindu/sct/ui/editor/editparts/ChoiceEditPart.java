@@ -12,11 +12,9 @@ package org.yakindu.sct.ui.editor.editparts;
 
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.geometry.Dimension;
-import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.ui.editor.editor.figures.ChoiceFigure;
 import org.yakindu.sct.ui.editor.editor.figures.utils.MapModeUtils;
-import org.yakindu.sct.ui.editor.policies.RelationshipSemanticEditPolicy;
 
 import de.itemis.gmf.runtime.commons.editparts.FixedSizeShapeNodeEditPart;
 
@@ -31,12 +29,6 @@ public class ChoiceEditPart extends FixedSizeShapeNodeEditPart {
 		super(view);
 	}
 
-	@Override
-	protected void createDefaultEditPolicies() {
-		super.createDefaultEditPolicies();
-		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE,
-				new RelationshipSemanticEditPolicy());
-	}
 
 	@Override
 	public Dimension getDefaultSize() {

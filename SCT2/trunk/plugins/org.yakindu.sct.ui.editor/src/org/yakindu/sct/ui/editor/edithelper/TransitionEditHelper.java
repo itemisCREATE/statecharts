@@ -6,7 +6,11 @@ import org.eclipse.gmf.runtime.emf.type.core.edithelper.AbstractEditHelper;
 import org.eclipse.gmf.runtime.emf.type.core.requests.ReorientRelationshipRequest;
 import org.eclipse.gmf.runtime.emf.type.core.requests.SetRequest;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
-
+/**
+ * 
+ * @author andreas muelder
+ *
+ */
 public class TransitionEditHelper extends AbstractEditHelper {
 	@Override
 	protected ICommand getReorientRelationshipCommand(

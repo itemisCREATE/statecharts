@@ -42,7 +42,6 @@ import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.ui.editor.editor.figures.StateFigure;
 import org.yakindu.sct.ui.editor.editor.figures.utils.GridDataFactory;
 import org.yakindu.sct.ui.editor.editor.figures.utils.MapModeUtils;
-import org.yakindu.sct.ui.editor.policies.RelationshipSemanticEditPolicy;
 import org.yakindu.sct.ui.editor.preferences.StatechartColorConstants;
 
 /**
@@ -89,8 +88,8 @@ public class StateEditPart extends ShapeNodeEditPart implements
 	@Override
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
-		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE,
-				new RelationshipSemanticEditPolicy());
+//		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE,
+//				new RelationshipSemanticEditPolicy());
 		// We don't want to allow creation for parent editpart on a State
 		installEditPolicy(EditPolicyRoles.CREATION_ROLE,
 				new CreationEditPolicy() {
