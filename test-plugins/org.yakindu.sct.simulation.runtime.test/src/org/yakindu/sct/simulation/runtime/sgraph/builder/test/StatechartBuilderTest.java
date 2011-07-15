@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2010 committers of YAKINDU and others.
+ * Copyright (c) 2011 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -10,120 +10,156 @@
  */
 package org.yakindu.sct.simulation.runtime.sgraph.builder.test;
 
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertTrue;
+import static junit.framework.Assert.*;
+
 import java.util.List;
 
-import junit.framework.TestCase;
-
+import org.junit.After;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.yakindu.sct.model.sgraph.Choice;
+import org.yakindu.sct.model.sgraph.Entry;
+import org.yakindu.sct.model.sgraph.EntryKind;
+import org.yakindu.sct.model.sgraph.Event;
+import org.yakindu.sct.model.sgraph.FinalState;
+import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.SGraphFactory;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
-import org.yakindu.sct.simulation.runtime.stext.Assign;
-import org.yakindu.sct.simulation.runtime.stext.ProcedureCall;
-import org.yakindu.sct.simulation.runtime.stext.Raise;
+import org.yakindu.sct.model.sgraph.Scope;
+import org.yakindu.sct.model.sgraph.State;
+import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.model.sgraph.Transition;
+import org.yakindu.sct.model.sgraph.Variable;
+import org.yakindu.sct.model.stext.stext.Direction;
+import org.yakindu.sct.model.stext.stext.EventDefinition;
+import org.yakindu.sct.model.stext.stext.StextFactory;
+import org.yakindu.sct.model.stext.stext.Type;
+import org.yakindu.sct.model.stext.stext.VariableDefinition;
+import org.yakindu.sct.simulation.runtime.sgraph.ActionStatement;
+import org.yakindu.sct.simulation.runtime.sgraph.PseudostateKind;
+import org.yakindu.sct.simulation.runtime.sgraph.RTCompoundState;
+import org.yakindu.sct.simulation.runtime.sgraph.RTFinalState;
+import org.yakindu.sct.simulation.runtime.sgraph.RTNode;
+import org.yakindu.sct.simulation.runtime.sgraph.RTPseudostate;
+import org.yakindu.sct.simulation.runtime.sgraph.RTRegion;
+import org.yakindu.sct.simulation.runtime.sgraph.RTSimpleState;
+import org.yakindu.sct.simulation.runtime.sgraph.RTStatechart;
+import org.yakindu.sct.simulation.runtime.sgraph.RTTransition;
+import org.yakindu.sct.simulation.runtime.sgraph.builder.SGraphBuilder;
 import org.yakindu.sct.simulation.runtime.stext.Statement;
 import org.yakindu.sct.simulation.runtime.stext.StatementSequence;
-import org.yakindu.sct.simulation.runtime.stext.UnaryOperation;
-import org.yakindu.sct.simulation.runtime.stext.VariableRef;
-import org.yakindu.sct.simulation.runtime.sgraph.Action;
-import org.yakindu.sct.simulation.runtime.sgraph.ActionStatement;
-import org.yakindu.sct.simulation.runtime.sgraph.CompoundState;
-import org.yakindu.sct.simulation.runtime.sgraph.FinalState;
-import org.yakindu.sct.simulation.runtime.sgraph.GuardExpression;
-import org.yakindu.sct.simulation.runtime.sgraph.Node;
-import org.yakindu.sct.simulation.runtime.sgraph.Pseudostate;
-import org.yakindu.sct.simulation.runtime.sgraph.PseudostateKind;
-import org.yakindu.sct.simulation.runtime.sgraph.Region;
-import org.yakindu.sct.simulation.runtime.sgraph.SimpleState;
-import org.yakindu.sct.simulation.runtime.sgraph.Statechart;
-import org.yakindu.sct.simulation.runtime.sgraph.Transition;
-import org.yakindu.sct.simulation.runtime.sgraph.builder.StatechartBuilder;
 
-public class StatechartBuilderTest extends TestCase {
-	
+/**
+ * 
+ * @author axel terfloth
+ * @author andreas muelder
+ * 
+ */
+public class StatechartBuilderTest {
 
-	static {
-		// set up EMF - the EPackage.Registry requires a context class loader ...
+	private Statechart sourceSC;
+	private SGraphFactory graphFactory;
+	//TODO: Move to stext
+	private StextFactory textFactory;
+	private SGraphBuilder builder;
+
+	@BeforeClass
+	public static void initContextClassLoader() {
+		// set up EMF - the EPackage.Registry requires a context class loader
 		if (Thread.currentThread().getContextClassLoader() == null) {
-			Thread.currentThread().setContextClassLoader(StatechartBuilderTest.class.getClassLoader());	
+			Thread.currentThread().setContextClassLoader(
+					StatechartBuilderTest.class.getClassLoader());
 		}
-		SGraphPackage.eINSTANCE.eClass();
+		//SGraphPackage.eINSTANCE.eClass();
+		
 	}
-	
-	protected org.yakindu.sct.model.sgraph.Statechart sourceSC;
-	protected SGraphFactory factory;
-	StatechartBuilder builder;
-	
-	
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
-		factory = SGraphFactory.eINSTANCE;
-		sourceSC = factory.createStatechart();
+	@Before
+	public void setUp() throws Exception {
+		graphFactory = SGraphFactory.eINSTANCE;
+		textFactory = StextFactory.eINSTANCE;
+		sourceSC = graphFactory.createStatechart();
 		sourceSC.setName("SC");
-		sourceSC.setUUID("SC1");
-		builder = new StatechartBuilder();
+		// sourceSC.setUUID("SC1");
+		builder = new SGraphBuilder();
 	}
 
-	
+	@After
+	public void tearDown() {
+		sourceSC = null;
+		builder = null;
+	}
 
+	@Test
 	public void testEmptyStatechart() {
-		
-		Statechart tSC = builder.build(sourceSC);
+		RTStatechart tSC = builder.build(sourceSC);
 		assertNotNull(tSC);
-		//assertEquals(sSC.getName(), tSC.)
+	}
+	@Test
+	public void testSignalEvents() {
+		//TODO: Move to sText
+		Scope scope = graphFactory.createScope();
+		sourceSC.getScopes().add(scope);
+		
+		EventDefinition event_a = textFactory.createEventDefinition();
+		event_a.setName("a");
+		event_a.setType(Type.VOID);
+		event_a.setDirection(Direction.IN);
+		scope.getEvents().add(event_a);
+
+		Event event_b = textFactory.createEventDefinition();
+		event_b.setName("b");
+		event_a.setType(Type.VOID);
+		event_a.setDirection(Direction.IN);
+		scope.getEvents().add(event_b);
+		
+		RTStatechart tSC = builder.build(sourceSC);
+		assertEquals(2, tSC.getSignalEvents().size());
+		assertNotNull(tSC.getSignalEvent(event_a.getName()));
+		assertNotNull(tSC.getSignalEvent(event_b.getName()));
 	}
 	
-	
+	@Test
 	public void testVars() {
-		statemachine.Variable var_a = factory.createVariable();
-		var_a.setName("a");
-		var_a.setDataType(statemachine.DataTypes.INT);
-		sourceSC.getDataElement().add(var_a);
-
-		statemachine.Variable var_b = factory.createVariable();
-		var_b.setName("b");
-		var_b.setDataType(statemachine.DataTypes.BOOLEAN);
-		sourceSC.getDataElement().add(var_b);
+		//TODO: Move to sText
+		Scope scope = graphFactory.createScope();
+		sourceSC.getScopes().add(scope);
 		
-		Statechart tSC = builder.build(sourceSC);
+		VariableDefinition var_a = textFactory.createVariableDefinition();
+		var_a.setName("a");
+		var_a.setType(Type.INTEGER);
+		scope.getVariables().add(var_a);
+
+		VariableDefinition var_b = textFactory.createVariableDefinition();
+		var_b.setName("b");
+		var_b.setType(Type.BOOLEAN);
+		scope.getVariables().add(var_b);
+		
+		RTStatechart tSC = builder.build(sourceSC);
 		assertNotNull(tSC.getVariable(var_a.getName()));
 		assertNotNull(tSC.getVariable(var_b.getName()));
 		
 		assertEquals(0, tSC.getVariable("a").getValue());
 		assertEquals(false, tSC.getVariable("b").getValue());
 	}
-
 	
-	
-	public void testSignalEvents() {
-		statemachine.Event event_a = factory.createEvent();
-		event_a.setName("a");
-		sourceSC.getDataElement().add(event_a);
-
-		statemachine.Event event_b = factory.createEvent();
-		event_b.setName("b");
-		sourceSC.getDataElement().add(event_b);
-		
-		Statechart tSC = builder.build(sourceSC);
-		assertEquals(2, tSC.getSignalEvents().size());
-		assertNotNull(tSC.getSignalEvent(event_a.getName()));
-		assertNotNull(tSC.getSignalEvent(event_b.getName()));
-	}
-
-	
-	
+	@Test
 	public void testTopLevelRegions() throws Exception {
-		statemachine.Region reg_a = factory.createRegion();
+		Region reg_a = graphFactory.createRegion();
 		reg_a.setPriority(3);
-		sourceSC.getRegion().add(reg_a);
+		sourceSC.getRegions().add(reg_a);
 
-		statemachine.Region reg_b = factory.createRegion();
+		Region reg_b = graphFactory.createRegion();
 		reg_b.setPriority(1);
-		sourceSC.getRegion().add(reg_b);
+		sourceSC.getRegions().add(reg_b);
 
-		Statechart tSC = builder.build(sourceSC);
-		List<Region> regions = tSC.getRegions();
-		
+		RTStatechart rtSC = builder.build(sourceSC);
+		List<RTRegion> regions = rtSC.getRegions();
+
 		assertEquals(2, regions.size());
 		assertEquals(1, regions.get(0).getPriority());
 		assertEquals("1", regions.get(0).getId());
@@ -132,51 +168,8 @@ public class StatechartBuilderTest extends TestCase {
 	}
 
 	
-
-	
-	public void testChoice() throws Exception {
-		testPseudoState(statemachine.PseudoTypes.CHOICE, PseudostateKind.CHOICE);
-	}
-
-	public void testJunction() throws Exception {
-		testPseudoState(statemachine.PseudoTypes.JUNCTION, PseudostateKind.JUNCTION);
-	}
-
-	public void testInitialState() throws Exception {
-		testPseudoState(statemachine.PseudoTypes.INITIAL, PseudostateKind.INITIAL);
-	}
-
-	public void testDeepHistory() throws Exception {
-		testPseudoState(statemachine.PseudoTypes.DEEP_HISTORY, PseudostateKind.DEEPHISTORY);
-	}
-	
-	public void testShallowHistory() throws Exception {
-		testPseudoState(statemachine.PseudoTypes.SHALLOW_HISTORY, PseudostateKind.SHALLOWHISTORY);
-	}
-
-	
-	public void testPseudoState(statemachine.PseudoTypes sourceType, PseudostateKind targetType) throws Exception {
-		statemachine.Region region = factory.createRegion();
-		region.setPriority(3);
-		sourceSC.getRegion().add(region);
-
-		statemachine.Pseudostate initial = factory.createPseudostate();
-		initial.setPseudoType(sourceType);
-		initial.setId(1);
-		region.getState().add(initial);
-		
-		Statechart tSC = builder.build(sourceSC);
-		List<Region> regions = tSC.getRegions();
-		
-		assertEquals(1, regions.size());
-		assertEquals(1, regions.get(0).getNodes().size());
-		Node node = regions.get(0).getNodes().iterator().next();
-		assertTrue(node instanceof Pseudostate);
-		assertEquals(targetType, ((Pseudostate)node).getKind());
-	}
-	
-	
-	public void testSimpleState() {
+	/**
+	 * public void testSimpleState() {
 		statemachine.Region region = factory.createRegion();
 		region.setPriority(3);
 		sourceSC.getRegion().add(region);
@@ -205,110 +198,183 @@ public class StatechartBuilderTest extends TestCase {
 		assertTrue(firstFromSequence(tState.getDoAction()) instanceof Raise);
 		assertTrue(firstFromSequence(tState.getExitAction()) instanceof ProcedureCall);
 	}
+	 */
 	
-	
-	public void testFinalState() {
-		statemachine.Region region = factory.createRegion();
+	@Test
+	public void testSimpleState() {
+		Region region = graphFactory.createRegion();
 		region.setPriority(3);
-		sourceSC.getRegion().add(region);
+		sourceSC.getRegions().add(region);
 
-		statemachine.FinalState state = factory.createFinalState();
-		state.setId(1);
-		region.getState().add(state);
-		
-		Statechart tSC = builder.build(sourceSC);
-		List<Region> regions = tSC.getRegions();
-		
+		State state = graphFactory.createState();
+		state.setName("stateA");
+		state.setExpression("entry / raise e1; exit / raise e2;");
+		region.getVertices().add(state);
+
+		RTStatechart tSC = builder.build(sourceSC);
+		List<RTRegion> regions = tSC.getRegions();
+
 		assertEquals(1, regions.size());
 		assertEquals(1, regions.get(0).getNodes().size());
-		Node node = regions.get(0).getNodes().iterator().next();
-		assertTrue(node instanceof FinalState);
-	}
-	
-
-	
-	/**
-	 * TODO: CompoundStates do not support do-Actions 
-	 */
-	public void testCompboundState() {
-		statemachine.Region region = factory.createRegion();
-		region.setPriority(3);
-		sourceSC.getRegion().add(region);
-
-		statemachine.State state = factory.createState();
-		state.setName("stateA");
-		state.setId(1);
-		state.setEntry("a=1;");
-		state.setDo("raise(abc);");
-		state.setExit("call();");
-		region.getState().add(state);
-
-		statemachine.Region subRegion = factory.createRegion();
-		region.setPriority(0);
-		state.getRegion().add(subRegion);
-
-		
-		Statechart tSC = builder.build(sourceSC);
-		List<Region> regions = tSC.getRegions();
-		
-
-		Node node = regions.get(0).getNodes().iterator().next();
-		assertTrue(node instanceof CompoundState);
-
-		CompoundState tState = (CompoundState)node;
+		RTNode node = regions.get(0).getNodes().iterator().next();
+		assertTrue(node instanceof RTSimpleState);
+		RTSimpleState tState = (RTSimpleState) node;
 		assertEquals(state.getName(), tState.getName());
 		
-		StatementSequence seq = (StatementSequence) ((ActionStatement)tState.getEntryAction()).getStatement();
-		assertTrue(firstFromSequence(tState.getEntryAction()) instanceof Assign);
-		// assertTrue(firstFromSequence(tState.getDoAction()) instanceof Raise);
-		assertTrue(firstFromSequence(tState.getExitAction()) instanceof ProcedureCall);
-		
-		assertEquals(1, tState.getRegions().size());
+		fail("complete me");
+		//FIXME
+//		StatementSequence seq = (StatementSequence) ((ActionStatement) tState
+//				.getEntryAction()).getStatement();
+//		assertTrue(firstFromSequence(tState.getEntryAction()) instanceof Assign);
+//		assertTrue(firstFromSequence(tState.getDoAction()) instanceof Raise);
+//		assertTrue(firstFromSequence(tState.getExitAction()) instanceof ProcedureCall);
 	}
 	
-	
-	
-	public void testTransition() {
-		statemachine.Event e1 = factory.createEvent();
-		e1.setName("e1");
-		sourceSC.getDataElement().add(e1);
-		
-		statemachine.Event e2 = factory.createEvent();
-		e2.setName("e2");
-		sourceSC.getDataElement().add(e2);
-		
-		statemachine.Region region = factory.createRegion();
-		region.setPriority(3);
-		sourceSC.getRegion().add(region);
 
-		statemachine.State state_a = factory.createState();
-		state_a.setId(1);
+	@Test
+	public void testCompboundState() {
+		Region region = graphFactory.createRegion();
+		region.setPriority(3);
+		sourceSC.getRegions().add(region);
+
+		State state = graphFactory.createState();
+		state.setName("stateA");
+		region.getVertices().add(state);
+
+		Region subRegion = graphFactory.createRegion();
+		region.setPriority(0);
+		state.getSubRegions().add(subRegion);
+
+		RTStatechart tSC = builder.build(sourceSC);
+		List<RTRegion> regions = tSC.getRegions();
+
+		RTNode node = regions.get(0).getNodes().iterator().next();
+		assertTrue(node instanceof RTCompoundState);
+
+		RTCompoundState tState = (RTCompoundState) node;
+		assertEquals(state.getName(), tState.getName());
+		assertEquals(1, tState.getRegions().size());
+	}
+
+	@Test
+	public void testInitialState() throws Exception {
+		testEntryState(EntryKind.INITIAL, PseudostateKind.INITIAL);
+	}
+
+	@Test
+	public void testDeepHistory() throws Exception {
+		testEntryState(EntryKind.DEEP_HISTORY, PseudostateKind.DEEPHISTORY);
+	}
+
+	@Test
+	public void testShallowHistory() throws Exception {
+		testEntryState(EntryKind.SHALLOW_HISTORY,
+				PseudostateKind.SHALLOWHISTORY);
+	}
+
+	@Test
+	public void testChoice() throws Exception {
+		Region region = graphFactory.createRegion();
+		region.setPriority(3);
+		sourceSC.getRegions().add(region);
+
+		Choice entry = graphFactory.createChoice();
+		region.getVertices().add(entry);
+
+		RTStatechart tSC = builder.build(sourceSC);
+		List<RTRegion> regions = tSC.getRegions();
+
+		assertEquals(1, regions.size());
+		assertEquals(1, regions.get(0).getNodes().size());
+		RTNode node = regions.get(0).getNodes().iterator().next();
+		assertTrue(node instanceof RTPseudostate);
+		assertEquals(PseudostateKind.CHOICE, ((RTPseudostate) node).getKind());
+	}
+
+	@Test
+	public void testFinalState() {
+		Region region = graphFactory.createRegion();
+		region.setPriority(3);
+		sourceSC.getRegions().add(region);
+
+		FinalState state = graphFactory.createFinalState();
+		region.getVertices().add(state);
+
+		RTStatechart tSC = builder.build(sourceSC);
+		List<RTRegion> regions = tSC.getRegions();
+
+		assertEquals(1, regions.size());
+		assertEquals(1, regions.get(0).getNodes().size());
+		RTNode node = regions.get(0).getNodes().iterator().next();
+		System.out.println("NODE IS " + node);
+		assertTrue(node instanceof RTFinalState);
+	}
+
+	/**
+	 * Convenience methods...
+	 */
+	private void testEntryState(EntryKind sourceType, PseudostateKind targetType)
+			throws Exception {
+		Region region = graphFactory.createRegion();
+		region.setPriority(3);
+		sourceSC.getRegions().add(region);
+
+		Entry entry = graphFactory.createEntry();
+		entry.setKind(sourceType);
+		region.getVertices().add(entry);
+
+		RTStatechart tSC = builder.build(sourceSC);
+		List<RTRegion> regions = tSC.getRegions();
+
+		assertEquals(1, regions.size());
+		assertEquals(1, regions.get(0).getNodes().size());
+		RTNode node = regions.get(0).getNodes().iterator().next();
+		assertTrue(node instanceof RTPseudostate);
+		assertEquals(targetType, ((RTPseudostate) node).getKind());
+	}
+	@Test
+	public void testTransition() {
+		//TODO: transition test with events -> move to text
+		Scope scope = graphFactory.createScope();
+		sourceSC.getScopes().add(scope);
+		
+		Event e1 = textFactory.createEventDefinition();
+		e1.setName("e1");
+		scope.getEvents().add(e1);
+		
+		Event e2 = textFactory.createEventDefinition();
+		e2.setName("e2");
+		scope.getEvents().add(e2);
+		
+		Region region = graphFactory.createRegion();
+		region.setPriority(3);
+		sourceSC.getRegions().add(region);
+
+		State state_a = graphFactory.createState();
 		state_a.setName("a");
-		region.getState().add(state_a);
+		region.getVertices().add(state_a);
 		
-		statemachine.State state_b = factory.createState();
-		state_b.setId(2);
+		State state_b = graphFactory.createState();
 		state_b.setName("b");
-		region.getState().add(state_b);
+		region.getVertices().add(state_b);
 		
-		statemachine.Transition trans = factory.createTransition();
-		trans.setSourceNode(state_a);
-		trans.setTargetNode(state_b);
-		trans.setId(1);
+		Transition trans = graphFactory.createTransition();
+		trans.setSource(state_a);
+		trans.setTarget(state_b);
 		trans.setPriority(42);
 		trans.setExpression("e1,e2,after(200) [a] / a=false;");
 		
-		sourceSC.getTransition().add(trans);
+		state_a.getOutgoingTransitions().add(trans);
 		
-		Statechart tSC = builder.build(sourceSC);
-		List<Region> regions = tSC.getRegions();
+		RTStatechart tSC = builder.build(sourceSC);
+		List<RTRegion> regions = tSC.getRegions();
 		
 		assertEquals(1, regions.size());
 		assertEquals(2, regions.get(0).getNodes().size());
 		
 		// check if nodes and transition are properly connected...
-		Node node_a = (Node) tSC.getElementByAlias(state_a);
-		Node node_b = (Node) tSC.getElementByAlias(state_b);
+		RTNode node_a = (RTNode) tSC.getElementByAlias(state_a);
+		RTNode node_b = (RTNode) tSC.getElementByAlias(state_b);
 		
 		assertNotSame(node_a, node_b);
 		assertTrue(regions.get(0).getNodes().contains(node_a));
@@ -318,7 +384,7 @@ public class StatechartBuilderTest extends TestCase {
 		assertEquals(1, node_b.getIncomingTransitions().size());
 		
 		assertSame(node_a.getOutgoingTransitions().get(0), node_b.getIncomingTransitions().get(0));
-		Transition tTrans = node_a.getOutgoingTransitions().get(0);
+		RTTransition tTrans = node_a.getOutgoingTransitions().get(0);
 		
 		assertSame(node_a, node_a.getOutgoingTransitions().get(0).getSourceNode());
 		assertSame(node_b, node_b.getIncomingTransitions().get(0).getTargetNode());
@@ -329,12 +395,14 @@ public class StatechartBuilderTest extends TestCase {
 		assertEquals("t@1", tTrans.getId());
 		
 		assertNotNull(tTrans.getGuard());
-		// Unary expression because new grammar always put a VariableRef inside a positive unary expression
-		assertTrue(((GuardExpression)tTrans.getGuard()).getExpression() instanceof UnaryOperation);
-		assertTrue(((UnaryOperation)((GuardExpression)tTrans.getGuard()).getExpression()).getExpression() instanceof VariableRef);
-		
-		assertNotNull(tTrans.getAction());
-		assertTrue(((ActionStatement)tTrans.getAction()).getStatement() instanceof StatementSequence);
+		fail("complete me");
+		//FIXME
+//		// Unary expression because new grammar always put a VariableRef inside a positive unary expression
+//		assertTrue(((GuardExpression)tTrans.getGuard()).getExpression() instanceof UnaryOperation);
+//		assertTrue(((UnaryOperation)((GuardExpression)tTrans.getGuard()).getExpression()).getExpression() instanceof VariableRef);
+//		
+//		assertNotNull(tTrans.getAction());
+//		assertTrue(((ActionStatement)tTrans.getAction()).getStatement() instanceof StatementSequence);
 
 		assertEquals(2, tTrans.getSignalTriggers().size());
 		assertTrue(tTrans.getSignalTriggers().contains(tSC.getSignalEvent("e1")));
@@ -346,10 +414,9 @@ public class StatechartBuilderTest extends TestCase {
 	
 	
 
-	private Statement firstFromSequence(Action action) {
-		return ((StatementSequence) ((ActionStatement)action).getStatement()).get(0);
-	}
-	
-	
+//	private Statement firstFromSequence(Action action) {
+//		return ((StatementSequence) ((ActionStatement)action).getStatement()).get(0);
+//	}
+
 
 }

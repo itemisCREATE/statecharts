@@ -10,28 +10,15 @@
  */
 package org.yakindu.sct.simulation.runtime.stext.test;
 
-import junit.framework.Test;
 import junit.framework.TestSuite;
 
-/**
-@RunWith(value=Suite.class)
-@SuiteClasses(value={
-		ExpressionsTest.class, 
-		FunctionsTest.class,
-		CoreFunctionsTest.class
-		}) 
-*/
-public class AllTests extends TestSuite{
-	
-	public static Test suite() {
-		TestSuite suite = new AllTests();
-		suite.addTestSuite(ExpressionsTest.class);
-		suite.addTestSuite(FunctionsTest.class);
-		suite.addTestSuite(CoreFunctionsTest.class);
-			
-		return suite;
-	}
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
 
-	
+@RunWith(value = Suite.class)
+@SuiteClasses(value = { ExpressionsTest.class, FunctionsTest.class,
+		CoreFunctionsTest.class })
+public class AllTests extends TestSuite {
 
 }
