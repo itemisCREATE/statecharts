@@ -32,7 +32,7 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.ResourceListSelectionDialog;
-import org.yakindu.sct.simulation.core.launch.IStatechartLaunchParameters;
+import org.yakindu.sct.core.simulation.launch.IStatechartLaunchParameters;
 
 /**
  * 
