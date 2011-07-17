@@ -24,7 +24,6 @@ import org.eclipse.debug.core.model.ILaunchConfigurationDelegate;
 public class StatechartLaunchConfigurationDelegate implements
 		ILaunchConfigurationDelegate {
 
-	@Override
 	public void launch(ILaunchConfiguration configuration, String mode,
 			ILaunch launch, IProgressMonitor monitor) throws CoreException {
 		String filename = configuration.getAttribute(
